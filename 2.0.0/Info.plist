@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>Vienna</string>
+	<key>CFBundleIconFile</key>
+	<string>vienna2.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>uk.co.opencommunity.vienna2</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>Vnna</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Vienna Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>Vienna Help</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>RSS Feed URL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>feed</string>
+			</array>
+			<key>LSIsAppleDefaultForScheme</key>
+			<true/>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>2000</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2.0.0</string>
+	<key>NSAppleScriptEnabled</key>
+	<string>YES</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSPrincipalClass</key>
+	<string>ViennaApp</string>
+</dict>
+</plist>

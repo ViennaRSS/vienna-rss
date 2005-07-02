@@ -1,0 +1,13 @@
+Vienna To-Do File
+=================
+
+Update this file with a list of things that users have requested but which aren't yet implemented.
+Thanks!
+
+- Improve ParseXmlDate in XMLParser.m. Make it more efficient.
+- Add support for RSS comments. General idea: have RichXMLParser grab the # of comments and the URI to the comment feed
+  for each messageand store them. Have SingleConnection grab this info and determine if the comment feed need to be grabbed
+  (how?). Then after the connection has completed and the app controller notified, have the handler check to see if the
+  comments feed is needed and create new SingleConnection objects just for the comments. The new object will have to know
+  the ID of the original messages.
+- Add built-in web browser.
