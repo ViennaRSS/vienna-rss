@@ -1,0 +1,29 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                changeCheckForUpdates = id; 
+                changeCheckFrequency = id; 
+                changeCheckOnStartUp = id; 
+                changeFont = id; 
+                changeMugshots = id; 
+                selectDefaultLinksHandler = id; 
+            }; 
+            CLASS = PreferenceController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                checkForUpdates = NSButton; 
+                checkFrequency = NSPopUpButton; 
+                checkOnStartUp = NSButton; 
+                folderFont = NSPopUpButton; 
+                folderFontSize = NSComboBox; 
+                linksHandler = NSPopUpButton; 
+                messageListFont = NSPopUpButton; 
+                messageListFontSize = NSComboBox; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}

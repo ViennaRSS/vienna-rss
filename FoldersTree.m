@@ -1,0 +1,806 @@
+//
+//  FoldersTree.m
+//  Vienna
+//
+//  Created by Steve on Sat Jan 24 2004.
+//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
+#import "FoldersTree.h"
+#import "ImageAndTextCell.h"
+#import "PreferenceNames.h"
+#import "AppController.h"
+#import "StringExtensions.h"
+
+// Private functions
+@interface FoldersTree (Private)
+	-(void)setFolderListFont;
+	-(NSArray *)archiveState;
+	-(void)unarchiveState:(NSArray *)stateArray;
+	-(void)refreshFoldersTree;
+	-(void)reloadDatabase:(NSArray *)stateArray;
+	-(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
+	-(void)handleDoubleClick:(id)sender;
+	-(void)handleFolderAdded:(NSNotification *)nc;
+	-(void)handleFolderUpdate:(NSNotification *)nc;
+	-(void)handleFolderDeleted:(NSNotification *)nc;
+	-(void)handleFolderFontChange:(NSNotification *)note;
+	-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
+	-(void)expandToParent:(TreeNode *)node;
+@end
+
+// Pasteboard types for drag and drop.
+NSString * MA_FolderDrag_PBoardType = @"ViennaFolderType";
+NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
+
+@implementation FoldersTree
+
+/* initWithFrame
+ * Initialise ourself.
+ */
+-(id)initWithFrame:(NSRect)frameRect
+{
+	if ((self = [super initWithFrame:frameRect]) != nil)
+	{
+		// Root node is never displayed since we always display from
+		// the second level down. It simply provides a convenient way
+		// of containing the other nodes.
+		rootNode = [[TreeNode alloc] init:nil folder:nil canHaveChildren:YES];
+		blockSelectionHandler = NO;
+		db = nil;
+	}
+	return self;
+}
+
+/* awakeFromNib
+ * Do things that only make sense once the NIB is loaded.
+ */
+-(void)awakeFromNib
+{
+	NSTableColumn * tableColumn;
+	ImageAndTextCell * imageAndTextCell;
+
+	// Register to be notified when folders are added or removed
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:@"MA_Notify_FolderDeleted" object:nil];
+	[nc addObserver:self selector:@selector(outlineViewMenuInvoked:) name:@"MA_Notify_RightClickOnObject" object:nil];
+	[nc addObserver:self selector:@selector(autoCollapseFolder:) name:@"MA_Notify_AutoCollapseFolder" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
+	
+	// Our folders have images next to them.
+	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
+	imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	[tableColumn setDataCell:imageAndTextCell];
+
+	// Create and set whatever font we're using for the folders
+	[self setFolderListFont];
+
+	// Want tooltips
+	[outlineView setEnableTooltips:YES];
+	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
+	[newSubButton setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
+	[refreshButton setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
+
+	// Allow double-click a node to edit the node
+	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
+	[outlineView setTarget:self];
+
+	// Set the menu for the popup button
+	[popupMenu setMenu:folderMenu];
+	
+	// Register for dragging
+	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
+	[outlineView setVerticalMotionCanBeginDrag:YES];
+}
+
+/* handleFolderFontChange
+ * Called when the user changes the folder font and/or size in the Preferences
+ */
+-(void)handleFolderFontChange:(NSNotification *)note
+{
+	[self setFolderListFont];
+	[outlineView reloadData];
+}
+
+/* setFolderListFont
+ * Creates or updates the fonts used by the message list. The folder
+ * list isn't automatically refreshed afterward - call reloadData for that.
+ */
+-(void)setFolderListFont
+{
+	int height;
+
+	[cellFont release];
+	[boldCellFont release];
+
+	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_FolderFont];
+	cellFont = [NSUnarchiver unarchiveObjectWithData:fontData];
+	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
+	
+	height = [boldCellFont defaultLineHeightForFont];
+	[outlineView setRowHeight:height + 3];
+}
+
+/* initialiseFoldersTree
+ * Do the things to initialize the folder tree from the database
+ */
+-(void)initialiseFoldersTree:(Database *)theDb
+{
+	if (theDb != db)
+	{
+		[db release];
+		db = [theDb retain];
+	}
+	blockSelectionHandler = YES;
+	[self reloadDatabase:[[NSUserDefaults standardUserDefaults] arrayForKey:MAPref_FolderStates]];
+	blockSelectionHandler = NO;
+}
+
+/* refreshFoldersTree
+ * Refresh the folders tree, preserving state
+ */
+-(void)refreshFoldersTree
+{
+	// TODO: find the row at the TOP of the control then make sure it is
+	// still the same row after we're done refreshing.
+	[self reloadDatabase:[self archiveState]];
+}
+
+/* reloadDatabase
+ * Refresh the folders tree and restore the specified archived state
+ */
+-(void)reloadDatabase:(NSArray *)stateArray
+{
+	[rootNode removeChildren];
+	[self loadTree:[db arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+	[outlineView reloadData];
+	[self unarchiveState:stateArray];
+}
+
+/* saveFolderSettings
+ * Preserve the expanded/collapsed and selection state of the folders list
+ * into the user's preferences.
+ */
+-(void)saveFolderSettings
+{
+	[[NSUserDefaults standardUserDefaults] setObject:[self archiveState] forKey:MAPref_FolderStates];
+}
+
+/* archiveState
+ * Creates an NSArray of states for every item in the tree that has a non-normal state.
+ */
+-(NSArray *)archiveState
+{
+	NSMutableArray * archiveArray = [NSMutableArray arrayWithCapacity:16];
+	int count = [outlineView numberOfRows];
+	int index;
+
+	for (index = 0; index < count; ++index)
+	{
+		TreeNode * node = (TreeNode *)[outlineView itemAtRow:index];
+		BOOL isItemExpanded = [outlineView isItemExpanded:node];
+		BOOL isItemSelected = [outlineView isRowSelected:index];
+
+		if (isItemExpanded || isItemSelected)
+		{
+			NSDictionary * newDict = [[NSMutableDictionary alloc] init];
+			[newDict setValue:[NSNumber numberWithInt:[node nodeId]] forKey:@"NodeID"];
+			[newDict setValue:[NSNumber numberWithBool:isItemExpanded] forKey:@"ExpandedState"];
+			[newDict setValue:[NSNumber numberWithBool:isItemSelected] forKey:@"SelectedState"];
+			[archiveArray addObject:newDict];
+			[newDict release];
+		}
+	}
+	return archiveArray;
+}
+
+/* unarchiveState
+ * Unarchives an array of states.
+ * BUGBUG: Restoring multiple selections is not working.
+ */
+-(void)unarchiveState:(NSArray *)stateArray
+{
+	NSEnumerator * enumerator = [stateArray objectEnumerator];
+	NSDictionary * dict;
+	
+	while ((dict = [enumerator nextObject]) != nil)
+	{
+		int folderId = [[dict valueForKey:@"NodeID"] intValue];
+		TreeNode * node = [rootNode nodeFromID:folderId];
+		if (node != nil)
+		{
+			BOOL doExpandItem = [[dict valueForKey:@"ExpandedState"] boolValue];
+			BOOL doSelectItem = [[dict valueForKey:@"SelectedState"] boolValue];
+			if ([outlineView isExpandable:node] && doExpandItem)
+				[outlineView expandItem:node];
+			if (doSelectItem)
+				[outlineView selectRow:[outlineView rowForItem:node] byExtendingSelection:YES];
+		}
+	}
+}
+
+/* loadTree
+ * Recursive routine that populates the folder list
+ */
+-(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
+{
+	NSEnumerator * enumerator = [listOfFolders objectEnumerator];
+	Folder * folder;
+
+	while ((folder = [enumerator nextObject]) != nil)
+	{
+		int itemId = [folder itemId];
+		NSArray * listOfSubFolders = [db arrayOfFolders:itemId];
+		int count = [listOfSubFolders count];
+		TreeNode * subNode;
+
+		subNode = [[TreeNode alloc] init:node folder:folder canHaveChildren:(count > 0)];
+		if (count)
+			[self loadTree:listOfSubFolders rootNode:subNode];
+	}	
+}
+
+/* folders
+ * Returns an array that contains the specified folder and all
+ * sub-folders.
+ */
+-(NSArray *)folders:(int)folderId
+{
+	NSMutableArray * array = [NSMutableArray array];
+	TreeNode * node = [rootNode nodeFromID:folderId];
+
+	if ([node folder] != nil)
+		[array addObject:[node folder]];
+	node = [node firstChild];
+	while (node != nil)
+	{
+		[array addObjectsFromArray:[self folders:[node nodeId]]];
+		node = [node nextChild];
+	}
+	return array;
+}
+
+/* updateFolder
+ * Redraws a folder node and optionally recurses up and redraws all our
+ * parent nodes too.
+ */
+-(void)updateFolder:(int)folderId recurseToParents:(BOOL)recurseToParents
+{
+	TreeNode * node = [rootNode nodeFromID:folderId];
+	if (node != nil)
+	{
+		[outlineView reloadItem:node reloadChildren:YES];
+		if (recurseToParents)
+		{
+			while ([node parentNode] != rootNode)
+			{
+				node = [node parentNode];
+				[outlineView reloadItem:node];
+			}
+		}
+	}
+}
+
+/* selectFolder
+ * Move the selection to the specified folder and make sure
+ * it's visible in the UI.
+ */
+-(BOOL)selectFolder:(int)folderId
+{
+	TreeNode * node = [rootNode nodeFromID:folderId];
+	if (!node)
+		return NO;
+
+	// Walk up to our parent
+	[self expandToParent:node];
+	int rowIndex = [outlineView rowForItem:node];
+	if (rowIndex >= 0)
+	{
+		blockSelectionHandler = YES;
+		[outlineView selectRow:rowIndex byExtendingSelection:NO];
+		[outlineView scrollRowToVisible:rowIndex];
+
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+		blockSelectionHandler = NO;
+		return YES;
+	}
+	return NO;
+}
+
+/* expandToParent
+ * Expands the parent nodes all the way up to the root to ensure
+ * that the node containing 'node' is visible.
+ */
+-(void)expandToParent:(TreeNode *)node
+{
+	if ([node parentNode])
+	{
+		[self expandToParent:[node parentNode]];
+		[outlineView expandItem:[node parentNode]];
+	}
+}
+
+/* nextFolderWithUnread
+ * Finds the ID of the next folder after currentFolderId that has
+ * unread messages.
+ */
+-(int)nextFolderWithUnread:(int)currentFolderId
+{
+	TreeNode * thisNode = [rootNode nodeFromID:currentFolderId];
+	TreeNode * node = thisNode;
+
+	while (node != nil)
+	{
+		TreeNode * nextNode;
+		TreeNode * parentNode = [node parentNode];
+		nextNode = [node firstChild];
+		if (nextNode == nil)
+			nextNode = [node nextChild];
+		while (nextNode == nil && parentNode != nil)
+		{
+			nextNode = [parentNode nextChild];
+			parentNode = [parentNode parentNode];
+		}
+		if (nextNode == nil)
+			nextNode = rootNode;
+
+		// If we've gone full circle and not found
+		// anything, we're out of unread messages
+		if (nextNode == thisNode)
+			return [thisNode nodeId];
+
+		if ([[nextNode folder] unreadCount])
+			return [nextNode nodeId];
+
+		node = nextNode;
+	}
+	return -1;
+}
+
+/* groupParentSelection
+ * If the selected folder is a group folder, it returns the ID of the group folder
+ * otherwise it returns the ID of the parent folder.
+ */
+-(int)groupParentSelection
+{
+	Folder * folder = [db folderFromID:[self actualSelection]];
+	return folder ? ((IsGroupFolder(folder)) ? [folder itemId] : [folder parentId]) : MA_Root_Folder;
+}
+
+/* actualSelection
+ * Return the index of the primary selected row in the folder list.
+ */
+-(int)actualSelection
+{
+	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
+	return [node nodeId];
+}
+
+/* countOfSelectedFolders
+ * Return the total number of folders selected in the tree.
+ */
+-(int)countOfSelectedFolders
+{
+	return [outlineView numberOfSelectedRows];
+}
+
+/* selectedFolders
+ * Returns an exclusive array of all selected folders. Exclusive means that if any folder is
+ * a group folder, we don't automatically return a list of all folders within that group.
+ */
+-(NSArray *)selectedFolders
+{
+	NSIndexSet * rowIndexes = [outlineView selectedRowIndexes];
+	int count = [rowIndexes count];
+	int index;
+	
+	// Make a mutable array
+	NSMutableArray * arrayOfSelectedFolders = [NSMutableArray arrayWithCapacity:count];
+
+	// Get the indexes into a buffer
+	unsigned int * buf = (unsigned int *)malloc(count * sizeof(unsigned int));
+	if (buf != 0)
+	{
+		NSRange range = NSMakeRange([rowIndexes firstIndex], [rowIndexes lastIndex]);
+		[rowIndexes getIndexes:buf maxCount:count inIndexRange:&range];
+
+		for (index = 0; index < count; ++index)
+		{
+			TreeNode * node = [outlineView itemAtRow:buf[index]];
+			[arrayOfSelectedFolders addObject:[node folder]];
+		}
+		free(buf);
+	}
+	return arrayOfSelectedFolders;
+}
+
+/* outlineViewMenuInvoked
+ * Called when the popup menu is opened on the folder list. We move the
+ * selection to whichever node is under the cursor so the context between
+ * the menu items and the node is made clear.
+ */
+-(void)outlineViewMenuInvoked:(NSNotification *)nc
+{
+	// Find the row under the cursor when the user clicked
+	NSEvent * theEvent = [nc object];
+	int row = [outlineView rowAtPoint:[outlineView convertPoint:[theEvent locationInWindow] fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if ([outlineView numberOfSelectedRows] <= 1)
+			[outlineView selectRow:row byExtendingSelection:NO];
+	}
+}
+
+/* handleDoubleClick
+ * If the user double-clicks a node, send an edit notification.
+ */
+-(void)handleDoubleClick:(id)sender
+{
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
+	[nc postNotificationName:@"MA_Notify_EditFolder" object:node];
+}
+
+/* handleFolderDeleted
+ * Called whenever a folder is removed from the database. We need
+ * to delete the associated tree nodes then select the next node, or
+ * the previous one if we were at the bottom of the list.
+ */
+-(void)handleFolderDeleted:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	TreeNode * thisNode = [rootNode nodeFromID:folderId];
+	TreeNode * nextNode;
+
+	// First find the next node we'll select
+	if ([thisNode nextChild] != nil)
+		nextNode = [thisNode nextChild];
+	else
+	{
+		nextNode = [thisNode parentNode];
+		if ([nextNode countOfChildren] > 1)
+			nextNode = [nextNode childByIndex:[nextNode countOfChildren] - 2];
+	}
+
+	// Ask our parent to delete us
+	TreeNode * ourParent = [thisNode parentNode];
+	[ourParent removeChild:thisNode];
+	[self reloadFolderItem:ourParent reloadChildren:YES];
+
+	// Send the selection notification ourselves because if we're deleting at the end of
+	// the folder list, the selection won't actually change and outlineViewSelectionDidChange
+	// won't get tripped.
+	blockSelectionHandler = YES;
+	[self selectFolder:[nextNode nodeId]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
+	blockSelectionHandler = NO;
+}
+
+/* handleFolderUpdate
+ * Called whenever we need to redraw a specific folder, possibly because
+ * the unread count changed.
+ */
+-(void)handleFolderUpdate:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	[self updateFolder:folderId recurseToParents:YES];
+}
+
+/* handleFolderAdded
+ * Called when a new folder is added to the database.
+ */
+-(void)handleFolderAdded:(NSNotification *)nc
+{
+	Folder * newFolder = (Folder *)[nc object];
+	NSAssert(newFolder, @"Somehow got a NULL folder object here");
+
+	int parentId = [newFolder parentId];
+	TreeNode * node = (parentId == MA_Root_Folder) ? rootNode : [rootNode nodeFromID:parentId];
+	if (![node canHaveChildren])
+		[node setCanHaveChildren:YES];
+	[[TreeNode alloc] init:node folder:newFolder canHaveChildren:NO];
+	[self reloadFolderItem:node reloadChildren:YES];
+}
+
+/* reloadFolderItem
+ * Wrapper around reloadItem.
+ */
+-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag
+{
+	if (node == rootNode)
+		[outlineView reloadData];
+	else
+		[outlineView reloadItem:node reloadChildren:YES];
+}
+
+/* isItemExpandable
+ * Tell the outline view if the specified item can be expanded. The answer is
+ * yes if we have children, no otherwise.
+ */
+-(BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+	if (node == nil)
+		node = rootNode;
+	return [node canHaveChildren];
+}
+
+/* numberOfChildrenOfItem
+ * Returns the number of children belonging to the specified item
+ */
+-(int)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+	if (node == nil)
+		node = rootNode;
+	return [node countOfChildren];
+}
+
+/* child
+ * Returns the child at the specified offset of the item
+ */
+-(id)outlineView:(NSOutlineView *)outlineView child:(int)index ofItem:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+	if (node == nil)
+		node = rootNode;
+	return [node childByIndex:index];
+}
+
+/* tooltipForItem [dataSource]
+ * For items that have counts, we show a tooltip that aggregates the counts.
+ */
+-(NSString *)outlineView:(FolderView *)outlineView tooltipForItem:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+	if (node != nil)
+	{
+		if ([[node folder] childUnreadCount])
+			return [NSString stringWithFormat:@"%d unread messages", [[node folder] childUnreadCount]];
+		if (([[node folder] type] == MA_Group_Folder) && [[node folder] unreadCount] > 0)
+			return [NSString stringWithFormat:@"%d unread messages", [[node folder] unreadCount]];
+	}
+	return nil;
+}
+
+/* objectValueForTableColumn
+ * Returns the actual string that is displayed in the cell. Folders that have child folders with unread
+ * messages show the aggregate unread message count.
+ */
+-(id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+	if (node == nil)
+		node = rootNode;
+	if ([[node folder] childUnreadCount])
+		return [NSString stringWithFormat:@"%@ (%d)", [node nodeName], [[node folder] childUnreadCount]];
+	if (!IsSmartFolder([node folder]) && [[node folder] unreadCount])
+		return [NSString stringWithFormat:@"%@ (%d)", [node nodeName], [[node folder] unreadCount]];
+	return [node nodeName];
+}
+
+/* willDisplayCell
+ * Hook before a cell is displayed to set the correct image for that cell. We use this to show the folder
+ * in normal or bold face depending on whether or not the folder (or sub-folders) have unread messages. This
+ * is also the place where we set the folder image.
+ */
+-(void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item 
+{
+	if ([[tableColumn identifier] isEqualToString:@"folderColumns"]) 
+	{
+		TreeNode * node = (TreeNode *)item;
+		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
+
+		if (IsSmartFolder([node folder]))  // Because if the search results contain unread messages we don't want the smart folder name to be bold.
+			[realCell setFont:cellFont];
+		else if ([[node folder] unreadCount] || [[node folder] childUnreadCount])
+			[realCell setFont:boldCellFont];
+		else
+			[realCell setFont:cellFont];
+		[realCell setImage:[[node folder] image]];
+	}
+}
+
+/* outlineViewSelectionDidChange
+ * Called when the selection in the folder list has changed.
+ */
+-(void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+	if (!blockSelectionHandler)
+	{
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
+		[nc postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+	}
+}
+
+/* validateDrop
+ * Called when something is being dragged over us. We respond with an NSDragOperation value indicating the
+ * feedback for the user given where we are.
+ */
+-(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index
+{
+	NSPasteboard * pb = [info draggingPasteboard]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
+	NSDragOperation dragType = (type == MA_FolderDrag_PBoardType) ? NSDragOperationMove : NSDragOperationCopy;
+
+	TreeNode * node = (TreeNode *)item;
+	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
+
+	// Can't drop anything on smart folders.
+	if (isOnDropTypeProposal && node != nil && IsSmartFolder([node folder]))
+		return NSDragOperationNone; 
+	
+	// Can always drop something on a group folder.
+	if (isOnDropTypeProposal && node != nil && IsGroupFolder([node folder]))
+		return dragType;
+	
+	// For any other folder, can't drop anything ON them.
+	if (index == NSOutlineViewDropOnItemIndex)
+		return NSDragOperationNone;
+	return NSDragOperationGeneric; 
+}
+
+/* writeItems
+ * Collect the selected folders ready for dragging.
+ */
+-(BOOL)outlineView:(NSOutlineView *)olv writeItems:(NSArray*)items toPasteboard:(NSPasteboard*)pboard
+{
+	int count = [items count];
+	NSMutableArray * externalDragData = [[NSMutableArray alloc] initWithCapacity:count];
+	NSMutableArray * internalDragData = [[NSMutableArray alloc] initWithCapacity:count];
+	NSMutableString * stringDragData = [[NSMutableString alloc] init];
+	int index;
+
+	// We'll create two types of data on the clipboard.
+	[pboard declareTypes:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, NSStringPboardType, nil] owner:self]; 
+
+	// Create an array of NSNumber objects containing the selected folder IDs.
+	for (index = 0; index < count; ++index)
+	{
+		TreeNode * node = [items objectAtIndex:index];
+		[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
+
+		Folder * folder = [node folder];
+		if (IsRSSFolder(folder))
+		{
+			NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+			[dict setValue:[folder name] forKey:@"sourceName"];
+			[dict setValue:[folder description] forKey:@"sourceDescription"];
+			[dict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
+			[dict setValue:[folder homePage] forKey:@"sourceHomeURL"];
+			[externalDragData addObject:dict];
+			[dict release];
+
+			[stringDragData appendString:[folder feedURL]];
+			[stringDragData appendString:@"\n"];
+		}
+	}
+
+	// Copy the data to the pasteboard 
+	[pboard setPropertyList:externalDragData forType:RSSSourceType];
+	[pboard setString:stringDragData forType:NSStringPboardType];
+	[pboard setPropertyList:internalDragData forType:MA_FolderDrag_PBoardType]; 
+	return YES; 
+}
+
+/* acceptDrop
+ * Accept a drop on or between nodes either from within the folder view or from outside.
+ */
+-(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)childIndex
+{ 
+	NSPasteboard * pb = [info draggingPasteboard]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
+
+	// Get index of folder at drop location. If this is a group folder then
+	// it gets used as the parent
+	TreeNode * node = targetItem ? (TreeNode *)targetItem : rootNode;
+	if (childIndex != NSOutlineViewDropOnItemIndex)
+	{
+		if (childIndex >= [node countOfChildren])
+			childIndex = [node countOfChildren] - 1;
+		NSAssert(childIndex >= 0, @"childIndex not expected to go < 0 at this point");
+		node = [node childByIndex:childIndex];
+	}
+
+	int parentID = (IsGroupFolder([node folder])) ? [[node folder] itemId] : [[node folder] parentId];
+
+	// Check the type 
+	if (type == MA_FolderDrag_PBoardType)
+	{
+		NSArray * arrayOfSources = [pb propertyListForType:type];
+		int count = [arrayOfSources count];
+		int index;
+		
+		// Internal drag and drop so we're just changing the parent IDs around. One thing
+		// we have to watch for is to make sure that we don't re-parent to a subordinate
+		// folder.
+		for (index = 0; index < count; ++index)
+		{
+			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
+			[db setParent:parentID forFolder:folderId];
+		}
+
+		// We pretty much redraw the entire tree for simplicity.
+		[self refreshFoldersTree];
+
+		// Properly set selection back to the original items. This has to be done after the
+		// refresh so that rowForItem returns the new positions.
+		NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
+		for (index = 0; index < count; ++index)
+		{
+			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
+			int rowIndex = [outlineView rowForItem:[rootNode nodeFromID:folderId]];
+			[selIndexSet addIndex:rowIndex];
+		}
+		[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
+		
+		// If parent was a group, expand it now
+		if (parentID != MA_Root_Folder)
+			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+		return YES;
+	}
+	else if (type == RSSSourceType)
+	{
+		NSArray * arrayOfSources = [pb propertyListForType:type];
+		int count = [arrayOfSources count];
+		int index;
+		
+		// This is an RSS drag using the protocol defined by Ranchero for NetNewsWire. See
+		// http://ranchero.com/netnewswire/rssclipboard.php for more details.
+		//
+		for (index = 0; index < count; ++index)
+		{
+			NSDictionary * sourceItem = [arrayOfSources objectAtIndex:index];
+			NSString * feedTitle = [sourceItem valueForKey:@"sourceName"];
+			NSString * feedHomePage = [sourceItem valueForKey:@"sourceHomeURL"];
+			NSString * feedURL = [sourceItem valueForKey:@"sourceRSSURL"];
+			NSString * feedDescription = [sourceItem valueForKey:@"sourceDescription"];
+
+			if ((feedURL != nil) && [db folderFromFeedURL:feedURL] == nil)
+			{
+				int folderId = [db addRSSFolder:feedTitle underParent:parentID subscriptionURL:feedURL];
+				if (feedDescription != nil)
+					[db setFolderDescription:folderId newDescription:feedDescription];
+				if (feedHomePage != nil)
+					[db setFolderHomePage:folderId newHomePage:feedHomePage];
+			}
+		}
+
+		// If parent was a group, expand it now
+		if (parentID != MA_Root_Folder)
+			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+		return YES;
+	}
+	return NO; 
+}
+
+/* dealloc
+ * Clean up and release resources.
+ */
+-(void)dealloc
+{
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc removeObserver:self];
+	[db release];
+	[cellFont release];
+	[boldCellFont release];
+	[rootNode release];
+	[super dealloc];
+}
+@end
