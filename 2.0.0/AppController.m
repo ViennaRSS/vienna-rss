@@ -30,6 +30,7 @@
 #import "ImageAndTextCell.h"
 #import "MessageView.h"
 #import "MessageListView.h"
+#import "ArticleView.h"
 #import "CheckForUpdates.h"
 #import "SearchFolder.h"
 #import "NewSubscription.h"
@@ -56,11 +57,6 @@ static NSString * MA_DefaultStyleName = @"Default";
 static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 
 #define GROWL_NOTIFICATION_DEFAULT @"NotificationDefault"
-
-// How to select a message after reloading a folder
-// (Values must be <= 0 because > 0 is a message number)
-#define MA_Select_None		0
-#define MA_Select_Unread	-1
 
 @implementation AppController
 
@@ -124,6 +120,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Set the delegates and title
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:appName];
+	[textView setDelegate:self];
 	[NSApp setDelegate:self];
 
 	// Set the reading pane orientation
@@ -419,6 +416,10 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
+	// Remember the folder column state
+	Field * folderField = [db fieldByIdentifier:MA_Column_MessageFolderId];
+	previousFolderColumnState = [folderField visible];	
+
 	// Set the target for double-click actions
 	[messageList setDoubleAction:@selector(doubleClickRow:)];
 	[messageList setAction:@selector(singleClickRow:)];
@@ -488,8 +489,17 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 -(void)showColumnsForFolder:(int)folderId
 {
 	Folder * folder = [db folderFromID:folderId];
-	BOOL showFolderColumn = (folder && (IsSmartFolder(folder) || IsGroupFolder(folder)));
 	Field * folderField = [db fieldByIdentifier:MA_Column_MessageFolderId];
+	BOOL showFolderColumn;
+
+	if (folder && (IsSmartFolder(folder) || IsGroupFolder(folder)))
+	{
+		previousFolderColumnState = [folderField visible];
+		showFolderColumn = YES;
+	}
+	else
+		showFolderColumn = previousFolderColumnState;
+	
 	if ([folderField visible] != showFolderColumn)
 	{
 		[folderField setVisible:showFolderColumn];
@@ -1112,8 +1122,13 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
-	[messageList selectRow:rowIndex byExtendingSelection:NO];
-	[self centerSelectedRow];
+	if (rowIndex == currentSelectedRow)
+		[self refreshMessageAtRow:rowIndex];
+	else
+	{
+		[messageList selectRow:rowIndex byExtendingSelection:NO];
+		[self centerSelectedRow];
+	}
 }
 
 /* centerSelectedRow
@@ -1300,6 +1315,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	currentSelectedRow = [messageList selectedRow];
+	[self refreshMessageAtRow:currentSelectedRow];
+}
+
+/* refreshMessageAtRow
+ * Refreshes the message at the specified row.
+ */
+-(void)refreshMessageAtRow:(int)theRow
+{
 	requestedMessage = 0;
 	if (currentSelectedRow < 0)
 		[[textView mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
@@ -1398,7 +1421,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageId])
 	{
 		[aCell setImage:nil];
-		[aCell setOffset:0];
 	}
 	if (![aCell isKindOfClass:[NSImageCell class]])
 	{

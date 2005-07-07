@@ -62,6 +62,12 @@
             SUPERCLASS = NSObject; 
         }, 
         {
+            CLASS = ArticleView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {theDelegate = id; }; 
+            SUPERCLASS = WebView; 
+        }, 
+        {
             CLASS = CheckForUpdates; 
             LANGUAGE = ObjC; 
             OUTLETS = {

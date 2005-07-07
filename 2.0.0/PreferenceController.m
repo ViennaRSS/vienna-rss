@@ -160,7 +160,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 
 			// Fill the list with all registered helpers for the feed URL.
 			ICAppSpecList * specList;
-			size = 256;
+			size = 4096;
 			if ((specList = (ICAppSpecList *)malloc(size)) != nil)
 			{
 				[linksHandler removeAllItems];

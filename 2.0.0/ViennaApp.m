@@ -280,6 +280,15 @@
 	return [db folderFromID:[[self delegate] currentFolderId]];
 }
 
+/* setCurrentFolder
+ * Sets the current folder
+ */
+-(void)setCurrentFolder:(Folder *)newCurrentFolder
+{
+	int folderId = [newCurrentFolder itemId];
+	[[self delegate] selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
+}
+
 /* readingPaneOnRight
  * Returns whether the reading pane is on the right or at the bottom of the article list.
  */

@@ -40,7 +40,10 @@
 -(NSArray *)folders;
 -(BOOL)isRefreshing;
 -(int)unreadCount;
+
+// Change folder selection
 -(Folder *)currentFolder;
+-(void)setCurrentFolder:(Folder *)newCurrentFolder;
 
 // Change position of reading pane
 -(BOOL)readingPaneOnRight;
