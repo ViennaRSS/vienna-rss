@@ -84,7 +84,10 @@
 	// Look on the pasteboard to see if there's an http:// url and, if so, prime the
 	// URL field with it. A handy shortcut.
 	if (initialURL != nil)
+	{
 		[feedURL setStringValue:initialURL];
+		[feedSource selectItemWithTitle:@"URL"];
+	}
 	else
 	{
 		NSData * pboardData = [[NSPasteboard generalPasteboard] dataForType:NSStringPboardType];
@@ -96,6 +99,7 @@
 			{
 				[feedURL setStringValue:pasteString];
 				[feedURL selectText:self];
+				[feedSource selectItemWithTitle:@"URL"];
 			}
 		}
 	}
@@ -168,7 +172,10 @@
 						NSLocalizedString(@"OK", nil), nil, nil);
 		return;
 	}
-	[db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:feedURLString];
+
+	// Create then select the new folder.
+	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:feedURLString];
+	[[NSApp delegate] selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
 
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];

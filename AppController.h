@@ -36,14 +36,20 @@
 @class NewGroupFolder;
 @class MessageView;
 @class MessageListView;
+@class ArticleView;
 @class TexturedHeader;
 @class FeedCredentials;
+
+// How to select a message after reloading a folder
+// (Values must be <= 0 because > 0 is a message number)
+#define MA_Select_None		0
+#define MA_Select_Unread	-1
 
 @interface AppController : NSObject {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet MessageListView * messageList;
-	IBOutlet WebView * textView;
+	IBOutlet ArticleView * textView;
 	IBOutlet FolderHeaderBar * headerBarView;
 	IBOutlet NSWindow * gotoWindow;
 	IBOutlet NSWindow * renameWindow;
@@ -103,6 +109,7 @@
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	BOOL readingPaneOnRight;
+	BOOL previousFolderColumnState;
 }
 
 // Menu action items
@@ -170,6 +177,7 @@
 -(void)getMessagesOnTimer:(NSTimer *)aTimer;
 -(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 -(void)centerSelectedRow;
+-(void)refreshMessageAtRow:(int)theRow;
 -(Database *)database;
 -(int)currentFolderId;
 -(NSArray *)folders;

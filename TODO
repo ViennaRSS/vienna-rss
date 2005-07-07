@@ -11,3 +11,8 @@ Thanks!
   comments feed is needed and create new SingleConnection objects just for the comments. The new object will have to know
   the ID of the original messages.
 - Add built-in web browser.
+- Improve AppleScript support.
+  1. Support 'every folders'.
+  2. Expose more attributes on messages.
+  3. Expose ability to create folders.
+  4. Provide ability to get a list of messages given a criteria.

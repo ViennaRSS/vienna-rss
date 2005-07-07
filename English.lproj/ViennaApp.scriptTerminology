@@ -84,7 +84,7 @@
 				<key>currentFolder</key>
 				<dict>
 					<key>Description</key>
-					<string>Returns the current folder in the message window</string>
+					<string>The current folder in the message window</string>
 					<key>Name</key>
 					<string>current folder</string>
 				</dict>

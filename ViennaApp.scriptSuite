@@ -136,8 +136,6 @@
 				<dict>
 					<key>AppleEventCode</key>
 					<string>cuFL</string>
-					<key>ReadOnly</key>
-					<string>YES</string>
 					<key>Type</key>
 					<string>Folder</string>
 				</dict>

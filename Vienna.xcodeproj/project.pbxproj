@@ -98,6 +98,8 @@
 		AA682CF8069A955F00228193 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = AA682CF6069A955F00228193 /* ViennaApp.m */; };
 		AA6CB7CF06238B08004E1236 /* FolderView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6CB7CD06238B08004E1236 /* FolderView.h */; };
 		AA6CB7D006238B08004E1236 /* FolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB7CE06238B08004E1236 /* FolderView.m */; };
+		AA74A85F087B56810029797C /* ArticleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA74A85D087B56810029797C /* ArticleView.h */; };
+		AA74A860087B56810029797C /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
 		AA840801066BDDCE00C5D918 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA840800066BDDCE00C5D918 /* ApplicationServices.framework */; };
 		AA8C72F50641DE1F00649BA2 /* Criteria.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8C72F30641DE1F00649BA2 /* Criteria.h */; };
 		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
@@ -323,6 +325,8 @@
 		AA682CF6069A955F00228193 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
 		AA6CB7CD06238B08004E1236 /* FolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderView.h; sourceTree = "<group>"; };
 		AA6CB7CE06238B08004E1236 /* FolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderView.m; sourceTree = "<group>"; };
+		AA74A85D087B56810029797C /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArticleView.h; sourceTree = "<group>"; };
+		AA74A85E087B56810029797C /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
 		AA840800066BDDCE00C5D918 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /Developer/SDKs/MacOSX10.2.7.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criteria.h; sourceTree = "<group>"; };
 		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criteria.m; sourceTree = "<group>"; };
@@ -449,6 +453,8 @@
 				AABFDCA00609EA8100100A9B /* ActivityViewer.m */,
 				AACFDEBA0604D4D20072D140 /* AppController.h */,
 				AACFDEBB0604D4D20072D140 /* AppController.m */,
+				AA74A85D087B56810029797C /* ArticleView.h */,
+				AA74A85E087B56810029797C /* ArticleView.m */,
 				AAD264B60611E108005A27E4 /* CheckForUpdates.h */,
 				AAD264B70611E108005A27E4 /* CheckForUpdates.m */,
 				AA218522086270830024DD4A /* Credentials.h */,
@@ -682,6 +688,7 @@
 				AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */,
 				AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */,
 				AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */,
+				AA74A85F087B56810029797C /* ArticleView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,6 +873,7 @@
 				AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */,
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */,
+				AA74A860087B56810029797C /* ArticleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
