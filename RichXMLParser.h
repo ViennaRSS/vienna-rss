@@ -42,8 +42,7 @@
 	NSString * description;
 	NSDate * lastModified;
 	NSMutableArray * items;
-	NSDictionary * encodingDictionary;
-	int encodingScheme;
+	CFStringEncoding encodingScheme;
 }
 
 // General functions

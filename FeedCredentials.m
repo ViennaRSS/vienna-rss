@@ -61,13 +61,13 @@
 
 	// Show the feed URL in the prompt so the user knows which site credentials are being
 	// requested. (We don't use [folder name] here as that is likely to be "Untitled Folder" mostly).
-	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"Credentials Prompt", nil), [folder feedURL]];
+	NSURL * secureURL = [NSURL URLWithString:[folder feedURL]];
+	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"Credentials Prompt", nil), [secureURL host]];
 	[promptString setStringValue:prompt];
 
 	// Fill out any existing values.
 	[userName setStringValue:[folder username]];
-	if (![[folder username] isBlank])
-		[password setStringValue:[Credentials getPasswordFromKeychain:[folder username] url:[folder feedURL]]];
+	[password setStringValue:[folder password]];
 
 	[self enableOKButton];
 	[NSApp beginSheet:credentialsWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
@@ -82,7 +82,7 @@
 	[credentialsWindow orderOut:self];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CancelAuthenticationForFolder" object:folder];
-	[folder release];
+	//[folder release];
 }
 
 /* doOKButton
@@ -94,7 +94,7 @@
 	NSString * passwordString = [password stringValue];
 
 	[db setFolderUsername:[folder itemId] newUsername:usernameString];
-	[Credentials setPasswordInKeychain:passwordString username:usernameString url:[folder feedURL]];
+	[folder setPassword:passwordString];
 	
 	[NSApp endSheet:credentialsWindow];
 	[credentialsWindow orderOut:self];
