@@ -18,6 +18,7 @@
 // 
 
 #import "XMLParser.h"
+#import "StringExtensions.h"
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -401,6 +402,52 @@
 		}
 	}
 	return valueString;
+}
+
+/* processAttributes
+ * Scan the specified string and convert attribute characters to their literals. Also trim leading and trailing
+ * whitespace.
+ */
++(NSString *)processAttributes:(NSString *)stringToProcess
+{
+	if (stringToProcess == nil)
+		return nil;
+
+	NSMutableString * processedString = [[NSMutableString alloc] initWithString:stringToProcess];
+	int entityStart;
+	int entityEnd;
+	
+	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
+	while (entityStart != NSNotFound)
+	{
+		entityEnd = [processedString indexOfCharacterInString:';' afterIndex:entityStart + 1];
+		if (entityEnd != NSNotFound)
+		{
+			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
+			NSString * entityString = [processedString substringWithRange:entityRange];
+			NSString * stringToAppend;
+			
+			if ([entityString characterAtIndex:1] == '#' && entityRange.length > 3)
+				stringToAppend = [NSString stringWithFormat:@"%c", [[entityString substringFromIndex:2] intValue]];
+			else
+			{
+				if ([entityString isEqualTo:@"&lt;"])				stringToAppend = @"<";
+				else if ([entityString isEqualTo: @"&gt;"])			stringToAppend = @">";
+				else if ([entityString isEqualTo: @"&quot;"])		stringToAppend = @"\"";
+				else if ([entityString isEqualTo: @"&amp;"])		stringToAppend = @"&";
+				else if ([entityString isEqualTo: @"&rsquo;"])		stringToAppend = @"'";
+				else if ([entityString isEqualTo: @"&lsquo;"])		stringToAppend = @"'";
+				else if ([entityString isEqualTo: @"&apos;"])		stringToAppend = @"'";				
+				else												stringToAppend = entityString;
+			}
+			[processedString replaceCharactersInRange:entityRange withString:stringToAppend];
+		}
+		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
+	}
+	
+	NSString * returnString = [processedString trim];
+	[processedString release];
+	return returnString;
 }
 
 /* parseXMLDate

@@ -108,7 +108,6 @@
 	NSMutableArray * connectionsArray;
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
-	BOOL readingPaneOnRight;
 	BOOL previousFolderColumnState;
 }
 

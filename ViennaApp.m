@@ -24,8 +24,26 @@
 #import "Export.h"
 #import "PreferenceNames.h"
 #import "FoldersTree.h"
+#import "KeyChain.h"
+
+static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 
 @implementation ViennaApp
+
+/* init
+ */
+-(id)init
+{
+	if ((self = [super init]) != nil)
+	{
+		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+		isBloglinesEnabled = [defaults boolForKey:MAPref_EnableBloglinesSupport];
+		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
+		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
+		bloglinesPassword = [bloglinesEmailAddress ? [KeyChain getPasswordFromKeychain:bloglinesEmailAddress url:MA_Bloglines_URL] : @"" retain];
+	}
+	return self;
+}
 
 /* handleRefreshAllSubscriptions
  * Refreshes all folders.
@@ -245,6 +263,92 @@
 	[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_CheckForUpdatesOnStartup];
 }
 
+/* enableBloglinesSupport
+ * Returns whether or not Bloglines spport is enabled.
+ */
+-(BOOL)enableBloglinesSupport
+{
+	return isBloglinesEnabled;
+}
+
+/* setEnableBloglinesSupport
+ * Changes whether or not Bloglines spport is enabled.
+ */
+-(void)setEnableBloglinesSupport:(BOOL)flag
+{
+	[self internalSetEnableBloglinesSupport:flag];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+	
+/* internalSetEnableBloglinesSupport
+ * Changes whether or not Bloglines support is enabled.
+ */
+-(void)internalSetEnableBloglinesSupport:(BOOL)flag
+{
+	if (flag != isBloglinesEnabled)
+	{
+		isBloglinesEnabled = flag;
+		NSNumber * boolFlag = [NSNumber numberWithBool:flag];
+		[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_EnableBloglinesSupport];
+	}
+}
+
+/* bloglinesEmailAddress
+ * Returns the e-mail address associated with the user's Bloglines account.
+ */
+-(NSString *)bloglinesEmailAddress
+{
+	return bloglinesEmailAddress;
+}
+
+/* setBloglinesEmailAddress
+ * Changes the e-mail address associated with the user's Bloglines account.
+ */
+-(void)setBloglinesEmailAddress:(NSString *)newEmailAddress
+{
+	[self internalSetBloglinesEmailAddress:newEmailAddress];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+
+/* internalSetBloglinesEmailAddress
+ * Changes the e-mail address associated with the user's Bloglines account.
+ */
+-(void)internalSetBloglinesEmailAddress:(NSString *)newEmailAddress
+{
+	[newEmailAddress retain];
+	[bloglinesEmailAddress release];
+	bloglinesEmailAddress = newEmailAddress;
+	[[NSUserDefaults standardUserDefaults] setObject:bloglinesEmailAddress forKey:MAPref_BloglinesEmailAddress];
+}
+
+/* bloglinesPassword
+ * Returns the password associated with the user's Bloglines account.
+ */
+-(NSString *)bloglinesPassword
+{
+	return bloglinesPassword;
+}
+
+/* setBloglinesPassword
+ * Changes the password associated with the user's Bloglines account.
+ */
+-(void)setBloglinesPassword:(NSString *)newPassword
+{
+	[self internalSetBloglinesPassword:newPassword];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+
+/* internalSetBloglinesPassword
+ * Changes the password associated with the user's Bloglines account.
+ */
+-(void)internalSetBloglinesPassword:(NSString *)newPassword
+{
+	[newPassword retain];
+	[bloglinesPassword release];
+	bloglinesPassword = newPassword;
+	[KeyChain setPasswordInKeychain:newPassword username:bloglinesEmailAddress url:MA_Bloglines_URL];
+}
+
 /* refreshOnStartup
  * Returns whether or not Vienna refreshes all subscriptions when it starts.
  */
@@ -294,15 +398,28 @@
  */
 -(BOOL)readingPaneOnRight
 {
-	return [[NSUserDefaults standardUserDefaults] boolForKey:MAPref_ReadingPaneOnRight];
+	return readingPaneOnRight;
 }
 
 /* setReadingPaneOnRight
- * Changes where the reading pane appears relative to the article list.
+ * Changes where the reading pane appears relative to the article list then updates the UI.
  */
 -(void)setReadingPaneOnRight:(BOOL)flag
 {
 	[[self delegate] setReadingPaneOnRight:flag];
+}
+
+/* internalSetReadingPaneOnRight
+ * Changes where the reading pane appears relative to the article list.
+ */
+-(void)internalSetReadingPaneOnRight:(BOOL)flag
+{
+	if (flag != readingPaneOnRight)
+	{
+		readingPaneOnRight = flag;
+		NSNumber * boolFlag = [NSNumber numberWithBool:flag];
+		[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_ReadingPaneOnRight];
+	}
 }
 
 /* refreshFrequency

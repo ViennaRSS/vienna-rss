@@ -77,6 +77,7 @@
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
 -(BOOL)setParent:(int)newParentID forFolder:(int)folderId;
+-(BOOL)setBloglinesId:(int)folderId newBloglinesId:(long)bloglinesId;
 
 // RSS folder functions
 -(NSString *)untitledFeedFolderName;

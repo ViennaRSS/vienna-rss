@@ -40,7 +40,7 @@
 @end
 
 // The current database version number
-const int MA_Current_DB_Version = 10;
+const int MA_Current_DB_Version = 11;
 
 @implementation Database
 
@@ -119,7 +119,7 @@ const int MA_Current_DB_Version = 10;
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags)"];
 		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, title, sender, link, date, text)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
-		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page)"];
+		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
 
 		// Create a criteria to find all marked messages
@@ -391,12 +391,14 @@ const int MA_Current_DB_Version = 10;
 	if (folderId != -1)
 	{
 		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
-		
+
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:
-					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url) values(%d, '', '', '', '', '%@')",
+					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
+					 "values (%d, '', '', '', '', '%@', %d)",
 					folderId,
-					preparedURL];
+					preparedURL,
+					MA_NonBloglines_Folder];
 		if (!results)
 			return -1;
 
@@ -661,6 +663,36 @@ const int MA_Current_DB_Version = 10;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	return YES;
+}
+
+/* setBloglinesId
+ * Changes the Bloglines ID associated with this folder.
+ */
+-(BOOL)setBloglinesId:(int)folderId newBloglinesId:(long)bloglinesId
+{
+	// Exit now if we're read-only
+	if (readOnly)
+		return NO;
+	
+	// Find our folder element.
+	Folder * folder = [self folderFromID:folderId];
+	if (!folder)
+		return NO;
+	
+	// Do nothing if the ID hasn't changed
+	if ([folder bloglinesId] == bloglinesId)
+		return NO;
+	
+	[folder setBloglinesId:bloglinesId];
+	
+	// Update the ID in the database
+	[self verifyThreadSafety];
+	[self executeSQLWithFormat:@"update rss_folders set bloglines_id=%d where folder_id=%d", bloglinesId, folderId];
+	
+	// Send a notification that the folder has changed. It is the responsibility of the
+	// notifiee that they work out that the ID is the part that has changed.
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
@@ -1225,7 +1257,7 @@ const int MA_Current_DB_Version = 10;
 			}
 
 		// Load all RSS folders and add them to the list.
-		results = [sqlDatabase performQuery:@"select folder_id, feed_url, username, description, last_update_string, home_page from rss_folders"];
+		results = [sqlDatabase performQuery:@"select folder_id, feed_url, username, description, last_update_string, home_page, bloglines_id from rss_folders"];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
@@ -1234,6 +1266,7 @@ const int MA_Current_DB_Version = 10;
 			while ((row = [enumerator nextObject]))
 			{
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
+				long bloglinesId = [[row stringForColumn:@"bloglines_id"] intValue];
 				NSString * descriptiontext = [row stringForColumn:@"description"];
 				NSString * url = [row stringForColumn:@"feed_url"];
 				NSString * linktext = [row stringForColumn:@"home_page"];
@@ -1246,6 +1279,7 @@ const int MA_Current_DB_Version = 10;
 				[folder setFeedURL:url];
 				[folder setLastUpdateString:lastUpdateString];
 				[folder setUsername:username];
+				[folder setBloglinesId:bloglinesId];
 			}
 		}
 		[results release];

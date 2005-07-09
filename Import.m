@@ -20,6 +20,8 @@
 
 #import "Import.h"
 #import "XMLParser.h"
+#import "ViennaApp.h"
+#import "AsyncConnection.h"
 
 @implementation AppController (Import)
 
@@ -52,6 +54,22 @@
 	}
 }
 
+/* syncSubscriptionsFromBloglines
+ * Synchronises the user's folder list subscriptions with those from Bloglines.
+ */
+-(IBAction)syncSubscriptionsFromBloglines:(id)sender
+{
+	[self startProgressIndicator];
+	[self setStatusMessage:NSLocalizedString(@"Synchronising subscriptions from Bloglines", nil) persist:YES];
+	
+	AsyncConnection * asyncImport = [[AsyncConnection alloc] init];
+	[asyncImport beginLoadDataFromURL:[NSURL URLWithString:@"http://rpc.bloglines.com/listsubs"]
+							 username:[NSApp bloglinesEmailAddress]
+							 password:[NSApp bloglinesPassword]
+							 delegate:self
+					   didEndSelector:@selector(bloglinesImportHandler:)];
+}
+
 /* importSubscriptionGroup
  * Import one group of an OPML subscription tree.
  */
@@ -65,10 +83,13 @@
 	{
 		XMLParser * outlineItem = [tree treeByIndex:index];
 		NSDictionary * entry = [outlineItem attributesForTree];
-		NSString * feedTitle = [entry objectForKey:@"title"];
-		NSString * feedDescription = [entry objectForKey:@"description"];
-		NSString * feedURL = [entry objectForKey:@"xmlUrl"];
-		NSString * feedHomePage = [entry objectForKey:@"htmlUrl"];
+		NSString * feedTitle = [XMLParser processAttributes:[entry objectForKey:@"title"]];
+		NSString * feedDescription = [XMLParser processAttributes:[entry objectForKey:@"description"]];
+		NSString * feedURL = [XMLParser processAttributes:[entry objectForKey:@"xmlUrl"]];
+		NSString * feedHomePage = [XMLParser processAttributes:[entry objectForKey:@"htmlUrl"]];
+		NSString * bloglinesSubId = [entry objectForKey:@"BloglinesSubId"];
+		int bloglinesId = bloglinesSubId ? [bloglinesSubId intValue] : MA_NonBloglines_Folder;
+
 		if (feedURL == nil)
 		{
 			// This is a new group so try to create it. If there's an error then default to adding
@@ -80,15 +101,21 @@
 		}
 		else
 		{
-			if ([db folderFromFeedURL:feedURL] == nil)
+			Folder * folder;
+			int folderId;
+
+			if ((folder = [db folderFromFeedURL:feedURL]) != nil)
+				folderId = [folder itemId];
+			else
 			{
-				int folderId = [db addRSSFolder:feedTitle underParent:parentId subscriptionURL:feedURL];
-				if (feedDescription != nil)
-					[db setFolderDescription:folderId newDescription:feedDescription];
-				if (feedHomePage != nil)
-					[db setFolderHomePage:folderId newHomePage:feedHomePage];
+				folderId = [db addRSSFolder:feedTitle underParent:parentId subscriptionURL:feedURL];
 				++countImported;
 			}
+			[db setBloglinesId:folderId newBloglinesId:bloglinesId];
+			if (feedDescription != nil)
+				[db setFolderDescription:folderId newDescription:feedDescription];
+			if (feedHomePage != nil)
+				[db setFolderHomePage:folderId newHomePage:feedHomePage];
 		}
 	}
 	return countImported;
@@ -119,5 +146,33 @@
 	// Announce how many we successfully imported
 	NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
 	NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
+}
+
+/* bloglinesImportHandler
+ * Called when the Bloglines subscription data has been retrieved.
+ */
+-(void)bloglinesImportHandler:(AsyncConnection *)connector
+{
+	[self setStatusMessage:nil persist:YES];
+	[self stopProgressIndicator];
+
+	if ([connector didError])
+	{
+	}
+	else
+	{
+		NSData * xmlData = [connector receivedData];
+		if (xmlData != nil)
+		{
+			XMLParser * tree = [[XMLParser alloc] init];
+			if ([tree setData:xmlData])
+			{
+				XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
+				[self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
+			}
+			[tree release];
+		}
+	}
+	[connector release];
 }
 @end

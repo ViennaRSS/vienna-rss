@@ -38,7 +38,7 @@
 #import "SingleConnection.h"
 #import "TexturedHeader.h"
 #import "FeedCredentials.h"
-#import "Credentials.h"
+#import "ViennaApp.h"
 #import "WebKit/WebPreferences.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebPolicyDelegate.h"
@@ -90,6 +90,8 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInt:20] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:boolNo forKey:MAPref_ReadingPaneOnRight];
+	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
+	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
 
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
@@ -124,8 +126,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[NSApp setDelegate:self];
 
 	// Set the reading pane orientation
-	readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
-	[splitView2 setVertical:readingPaneOnRight];
+	[splitView2 setVertical:[NSApp readingPaneOnRight]];
 
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -243,13 +244,9 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
  */
 -(void)setReadingPaneOnRight:(BOOL)flag
 {
-	if (readingPaneOnRight != flag)
-	{
-		readingPaneOnRight = flag;
-		[splitView2 setVertical:readingPaneOnRight];
-		[splitView2 display];
-		[[NSUserDefaults standardUserDefaults] setBool:readingPaneOnRight forKey:MAPref_ReadingPaneOnRight];
-	}
+	[NSApp internalSetReadingPaneOnRight:flag];
+	[splitView2 setVertical:flag];
+	[splitView2 display];
 }
 
 /* decidePolicyForNavigationAction
@@ -1587,7 +1584,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		if (![refreshArray containsObject:folder])
 			[refreshArray addObject:folder];
 	}
-	[self refreshPumper];
+
+	if ([refreshArray count] > 0)
+	{
+		unreadAtBeginning = [db countOfUnread];
+		[self startProgressIndicator];
+		[self setStatusMessage:NSLocalizedString(@"Refreshing subscriptions...", nil) persist:YES];
+		[self refreshPumper];
+	}
 }
 
 /* handleConnectionCompleted
@@ -1606,11 +1610,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[theConnection release];
 	[self refreshPumper];
 	if (totalConnections == 0)
-	{
-		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
-		[self stopProgressIndicator];
 		[self handleEndOfRefresh];
-	}
 }
 
 /* getCredentialsForFolder
@@ -1695,7 +1695,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			[self getCredentialsForFolder];
 			continue;
 		}
-		
+
 		// The activity log name we use depends on whether or not this folder has a real name.
 		NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
@@ -1703,31 +1703,26 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		SingleConnection * handler = [[SingleConnection alloc] initWithDatabase:db folder:folder log:aItem];
 		if (handler != nil)
 		{
-			NSURL * url = [NSURL URLWithString:[folder feedURL]];
+			NSString * urlString = IsBloglinesFolder(folder) ? [NSString stringWithFormat:@"http://rpc.bloglines.com/getitems?s=%d&n=1", [folder bloglinesId]] : [folder feedURL];
+			NSURL * url = [NSURL URLWithString:urlString];
 			NSMutableURLRequest * theRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
-			
-			// If the folder has a valid last modified string, use it to ensure that
-			// we don't re-request needlessly.
-			if (![[folder lastUpdateString] isBlank])
-				[theRequest addValue:[folder lastUpdateString] forHTTPHeaderField:@"If-Modified-Since"];
-			
-			// Accept GZIP
-			[theRequest addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+			if (!IsBloglinesFolder(folder))
+			{
+				// If the folder has a valid last modified string, use it to ensure that
+				// we don't re-request needlessly.
+				if (![[folder lastUpdateString] isBlank])
+					[theRequest addValue:[folder lastUpdateString] forHTTPHeaderField:@"If-Modified-Since"];
+				
+				// Accept GZIP
+				[theRequest addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+			}
 
 			// Seed the activity log for this feed.
 			[aItem clearDetails];
 			[aItem setStatus:NSLocalizedString(@"Retrieving articles", nil)];
 
 			// Additional detail for the log
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), [folder feedURL]]];
-
-			// Start progress spinner running
-			if (totalConnections == 0)
-			{
-				unreadAtBeginning = [db countOfUnread];
-				[self startProgressIndicator];
-				[self setStatusMessage:NSLocalizedString(@"Refreshing subscriptions...", nil) persist:YES];
-			}
+			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
 
 			// Do a pre-flight check
 			if (![NSURLConnection canHandleRequest:theRequest])
@@ -1773,6 +1768,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)handleEndOfRefresh
 {	
+	[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
+	[self stopProgressIndicator];
 	[self showUnreadCountOnApplicationIcon];
 	int newUnread = [db countOfUnread] - unreadAtBeginning;
 	if (growlAvailable && newUnread > 0)
@@ -2555,6 +2552,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		return totalConnections == 0 && ![db readOnly];
 	}
+	else if (theAction == @selector(syncSubscriptionsFromBloglines:))
+	{
+		return [NSApp enableBloglinesSupport];
+	}
 	else if (theAction == @selector(editFolder:))
 	{
 		int folderId = [foldersTree actualSelection];
@@ -2567,12 +2568,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(readingPaneOnRight:))
 	{
-		[menuItem setState:(readingPaneOnRight ? NSOnState : NSOffState)];
+		[menuItem setState:([NSApp readingPaneOnRight] ? NSOnState : NSOffState)];
 		return YES;
 	}
 	else if (theAction == @selector(readingPaneOnBottom:))
 	{
-		[menuItem setState:(readingPaneOnRight ? NSOffState : NSOnState)];
+		[menuItem setState:([NSApp readingPaneOnRight] ? NSOffState : NSOnState)];
 		return YES;
 	}
 	else if (theAction == @selector(markFlagged:))

@@ -44,6 +44,8 @@ NSString * MAPref_ActiveStyleName = @"ActiveStyle";
 NSString * MAPref_FolderStates = @"FolderStates";
 NSString * MAPref_BacktrackQueueSize = @"BacktrackQueueSize";
 NSString * MAPref_ReadingPaneOnRight = @"ReadingPaneOnRight";
+NSString * MAPref_EnableBloglinesSupport = @"EnableBloglinesSupport";
+NSString * MAPref_BloglinesEmailAddress = @"BloglinesEmailAddress";
 
 // List of available font sizes. I picked the ones that matched
 // Mail but you easily could add or remove from the list as needed.
@@ -55,6 +57,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	-(void)selectUserDefaultFont:(NSString *)preferenceName control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 	-(void)setDefaultLinksHandler:(NSString *)newHandler creatorCode:(OSType)creatorCode;
 	-(void)controlTextDidEndEditing:(NSNotification *)notification;
+	-(void)updateBloglinesUIState;
 @end
 
 @implementation PreferenceController
@@ -107,7 +110,13 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	
 	// Set check for new messages when starting
 	[checkOnStartUp setState:[NSApp refreshOnStartup] ? NSOnState : NSOffState];
-	
+
+	// Handle the Bloglines settings
+//	[enableBloglines setState:[NSApp enableBloglinesSupport] ? NSOnState : NSOffState];
+//	[bloglinesEmailAddress setStringValue:[NSApp bloglinesEmailAddress]];
+//	[bloglinesPassword setStringValue:[NSApp bloglinesPassword]];
+//	[self updateBloglinesUIState];
+
 	// Get some info about us
 	NSBundle * appBundle = [NSBundle mainBundle];
 	NSString * appName = [[NSApp delegate] appName];
@@ -292,6 +301,44 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 {
 	int newFrequency = [[checkFrequency selectedItem] tag];
 	[NSApp internalSetRefreshFrequency:newFrequency];
+}
+
+/* changeEnableBloglines
+ * Respond to the user enabling or disabling Bloglines support.
+ */
+-(IBAction)changeEnableBloglines:(id)sender
+{
+	[NSApp setEnableBloglinesSupport:[sender state] == NSOnState];
+	[self updateBloglinesUIState];
+}
+
+/* changeBloglinesEmailAddress
+ * Handle changes in the Bloglines E-mail address field.
+ */
+-(IBAction)changeBloglinesEmailAddress:(id)sender
+{
+	[NSApp internalSetBloglinesEmailAddress:[sender stringValue]];
+}
+
+/* changeBloglinesPassword
+ * Handle changes in the Bloglines password field.
+ */
+-(IBAction)changeBloglinesPassword:(id)sender
+{
+	[NSApp internalSetBloglinesPassword:[sender stringValue]];
+}
+
+/* updateBloglinesUIState
+ * Enable or disable the Bloglines e-mail address and password fields depending on whether or not
+ * Bloglines support is enabled.
+ */
+-(void)updateBloglinesUIState
+{
+	BOOL isBlogLinesEnabled = [NSApp enableBloglinesSupport];
+	[bloglinesEmailAddress setEnabled:isBlogLinesEnabled];
+	[bloglinesPassword setEnabled:isBlogLinesEnabled];
+	[bloglinesEmailAddressLabel setEnabled:isBlogLinesEnabled];
+	[bloglinesPasswordLabel setEnabled:isBlogLinesEnabled];
 }
 
 /* dealloc

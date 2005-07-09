@@ -19,7 +19,6 @@
 //
 
 #import "FeedCredentials.h"
-#import "Credentials.h"
 #import "StringExtensions.h"
 
 // Private functions
