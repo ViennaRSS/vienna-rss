@@ -140,7 +140,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[nc addObserver:self selector:@selector(handleRequireAuthenticationForFolder:) name:@"MA_Notify_RequireAuthenticationForFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 
-	// Hide the spinner when it is stopped
+	// Init the progress counter and status bar.
 	progressCount = 0;
 	persistedStatusText = nil;
 	[self setStatusMessage:nil persist:NO];
@@ -1651,7 +1651,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	Folder * folder = (Folder *)[nc object];
 	[authQueue removeObject:folder];
-	
+
 	// Get the next one in the queue, if any
 	[self getCredentialsForFolder];
 }
@@ -1703,20 +1703,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		SingleConnection * handler = [[SingleConnection alloc] initWithDatabase:db folder:folder log:aItem];
 		if (handler != nil)
 		{
-			// Use HTTP authentication in the URL.
-			NSString * username = [folder username];
-			NSURL * url = nil;
-
-			if ([username isBlank])
-				url = [NSURL URLWithString:[folder feedURL]];
-			else
-			{
-				NSURL * oldUrl = [NSURL URLWithString:[folder feedURL]];
-				NSString * scheme = [oldUrl scheme];
-				NSString * rest = [[folder feedURL] substringFromIndex:[scheme length] + 3];
-				NSString * password = [Credentials getPasswordFromKeychain:username url:[folder feedURL]];
-				url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@:%@@%@", scheme, [folder username], password, rest]];
-			}
+			NSURL * url = [NSURL URLWithString:[folder feedURL]];
 			NSMutableURLRequest * theRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
 			
 			// If the folder has a valid last modified string, use it to ensure that
@@ -1733,8 +1720,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 			// Additional detail for the log
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), [folder feedURL]]];
-			if (![username isBlank])
-				[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Authenticating with user name '%@'", nil), username]];
 
 			// Start progress spinner running
 			if (totalConnections == 0)

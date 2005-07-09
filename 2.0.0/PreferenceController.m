@@ -52,7 +52,6 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 
 // Private functions
 @interface PreferenceController (Private)
-	-(NSString *)stringFromPascalString:(const unsigned char *)pascalString;
 	-(void)selectUserDefaultFont:(NSString *)preferenceName control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 	-(void)setDefaultLinksHandler:(NSString *)newHandler creatorCode:(OSType)creatorCode;
 	-(void)controlTextDidEndEditing:(NSNotification *)notification;
@@ -89,16 +88,6 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 -(void)handleReloadPreferences:(NSNotification *)nc
 {
 	[self initializePreferences];
-}
-
-/* stringFromPascalString
- * Given a pointer to a Pascal string where the format is a 1-byte length followed by
- * the actual characters, this function returns an NSString representing that string.
- */
--(NSString *)stringFromPascalString:(const unsigned char *)pascalString
-{
-	int pStringLength = (int)(unsigned char)*(pascalString);
-	return [NSString stringWithCString:(char *)pascalString + 1 length:pStringLength];
 }
 
 /* initializePreferences
@@ -151,7 +140,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 			// handler for some reason, we register ourselves.
 			ICAppSpec spec;
 			if (ICGetPref(internetConfigHandler, kICHelper "feed", &attr, &spec, &size) == noErr)
-				defaultHandler = [self stringFromPascalString:spec.name];
+				defaultHandler = (NSString *)CFStringCreateWithPascalString(NULL, spec.name, kCFStringEncodingMacRoman);
 			else
 			{
 				defaultHandler = appName;
@@ -170,7 +159,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 					for (c = 0; c < specList->numberOfItems; ++c)
 					{
 						ICAppSpec * spec = &specList->appSpecs[c];
-						NSString * handler = [self stringFromPascalString:spec->name];
+						NSString * handler = (NSString *)CFStringCreateWithPascalString(NULL, spec->name, kCFStringEncodingMacRoman);
 						NSMenuItem * item;
 
 						if ([appName isEqualToString:handler])
@@ -246,9 +235,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	int attr = 0;
 
 	spec.fCreator = creatorCode;
-	// Make a Pascal string.
-	memcpy(&spec.name[1], [newHandler cString], [newHandler length]);
-	spec.name[0] = [newHandler length];
+	CFStringGetPascalString((CFStringRef)newHandler, (StringPtr)&spec.name, sizeof(spec.name), kCFStringEncodingMacRoman);
 	ICSetPref(internetConfigHandler, kICHelper "feed", attr, &spec, sizeof(spec));
 }
 

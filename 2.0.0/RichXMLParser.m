@@ -183,15 +183,6 @@
 		lastModified = nil;
 		link = nil;
 		items = nil;
-
-		// Create the encoding dictionary that maps encoding names that appear
-		// in the ?xml header with NSString encoding values.
-		encodingDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithInt:NSUTF8StringEncoding],				@"UTF-8",
-			[NSNumber numberWithInt:NSWindowsCP1252StringEncoding],		@"WINDOWS-1252",
-			[NSNumber numberWithInt:NSISOLatin1StringEncoding],			@"ISO-8859-1",
-			nil,														nil
-			];
 		encodingScheme = NSUTF8StringEncoding;
 	}
 	return self;
@@ -252,13 +243,14 @@
 	if (xmltree != nil)
 	{
 		NSString * encodingString = [xmltree valueOfAttribute:@"encoding"];
-		NSString * encodingValue;
+		encodingScheme = NSUTF8StringEncoding;
 
-		if (encodingString == nil)
-			encodingString = @"UTF-8";
-		encodingValue = [encodingDictionary valueForKey:[encodingString uppercaseString]];
-		if (encodingValue != nil)
-			encodingScheme = [encodingValue intValue];
+		if (encodingString != nil)
+		{
+			CFStringEncoding cfEncodingScheme = CFStringConvertIANACharSetNameToEncoding((CFStringRef)encodingString);
+			if (cfEncodingScheme != kCFStringEncodingInvalidId)
+				encodingScheme = (NSStringEncoding)CFStringConvertEncodingToNSStringEncoding(cfEncodingScheme); 
+		}
 	}
 }
 

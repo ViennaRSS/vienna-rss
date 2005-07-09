@@ -22,8 +22,6 @@
 		AA2185030861E7600024DD4A /* TexturedHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2185010861E7600024DD4A /* TexturedHeader.m */; };
 		AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2185020861E7600024DD4A /* TexturedHeader.h */; };
 		AA2185060861E7E10024DD4A /* metal_column_header.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2185050861E7E10024DD4A /* metal_column_header.png */; };
-		AA218523086270830024DD4A /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA218521086270830024DD4A /* Credentials.m */; };
-		AA218524086270830024DD4A /* Credentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA218522086270830024DD4A /* Credentials.h */; };
 		AA21855F08628CE80024DD4A /* SingleConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = AA21855D08628CE80024DD4A /* SingleConnection.h */; };
 		AA21856008628CE80024DD4A /* SingleConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AA21855E08628CE80024DD4A /* SingleConnection.m */; };
 		AA21F4520753053500503F58 /* CHANGES in Resources */ = {isa = PBXBuildFile; fileRef = AA21F4510753053500503F58 /* CHANGES */; };
@@ -251,8 +249,6 @@
 		AA2185010861E7600024DD4A /* TexturedHeader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TexturedHeader.m; sourceTree = "<group>"; };
 		AA2185020861E7600024DD4A /* TexturedHeader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TexturedHeader.h; sourceTree = "<group>"; };
 		AA2185050861E7E10024DD4A /* metal_column_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal_column_header.png; sourceTree = "<group>"; };
-		AA218521086270830024DD4A /* Credentials.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Credentials.m; sourceTree = "<group>"; };
-		AA218522086270830024DD4A /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
 		AA21855D08628CE80024DD4A /* SingleConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleConnection.h; sourceTree = "<group>"; };
 		AA21855E08628CE80024DD4A /* SingleConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleConnection.m; sourceTree = "<group>"; };
 		AA21F4510753053500503F58 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = "<group>"; };
@@ -457,8 +453,6 @@
 				AA74A85E087B56810029797C /* ArticleView.m */,
 				AAD264B60611E108005A27E4 /* CheckForUpdates.h */,
 				AAD264B70611E108005A27E4 /* CheckForUpdates.m */,
-				AA218522086270830024DD4A /* Credentials.h */,
-				AA218521086270830024DD4A /* Credentials.m */,
 				AAD34DF4062786520094D6A6 /* DownloadUpdate.h */,
 				AAD34DF5062786520094D6A6 /* DownloadUpdate.m */,
 				AA328A7308483DE100A7AD5A /* Export.h */,
@@ -683,7 +677,6 @@
 				AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */,
 				AA55918A086121C200105AC5 /* SplitViewExtensions.h in Headers */,
 				AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */,
-				AA218524086270830024DD4A /* Credentials.h in Headers */,
 				AA21855F08628CE80024DD4A /* SingleConnection.h in Headers */,
 				AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */,
 				AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */,
@@ -868,7 +861,6 @@
 				AAA1E2FE0852502700277128 /* NewGroupFolder.m in Sources */,
 				AA55918B086121C200105AC5 /* SplitViewExtensions.m in Sources */,
 				AA2185030861E7600024DD4A /* TexturedHeader.m in Sources */,
-				AA218523086270830024DD4A /* Credentials.m in Sources */,
 				AA21856008628CE80024DD4A /* SingleConnection.m in Sources */,
 				AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */,
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,

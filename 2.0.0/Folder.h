@@ -70,6 +70,7 @@
 -(NSDate *)lastUpdate;
 -(NSString *)lastUpdateString;
 -(NSString *)username;
+-(NSString *)password;
 -(NSDictionary *)attributes;
 -(int)parentId;
 -(int)itemId;
@@ -94,6 +95,7 @@
 -(void)setHomePage:(NSString *)newHomePage;
 -(void)setFeedURL:(NSString *)feedURL;
 -(void)setUsername:(NSString *)newUsername;
+-(void)setPassword:(NSString *)newPassword;
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(NSArray *)messages;

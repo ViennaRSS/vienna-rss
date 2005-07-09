@@ -204,6 +204,7 @@ static NSArray * iconArray = nil;
 		[self setLastUpdate:[NSDate distantPast]];
 		[self setLastUpdateString:@""];
 		[self setUsername:@""];
+		[self setPassword:@""];
 	}
 	return self;
 }
@@ -359,6 +360,22 @@ static NSArray * iconArray = nil;
 -(void)setUsername:(NSString *)newUsername
 {
 	[attributes setValue:newUsername forKey:@"Username"];
+}
+
+/* password
+ * Returns the feed password.
+ */
+-(NSString *)password
+{
+	return [attributes valueForKey:@"Password"];
+}
+
+/* setPassword
+ * Sets the password associated with this feed.
+ */
+-(void)setPassword:(NSString *)newPassword
+{
+	[attributes setValue:newPassword forKey:@"Password"];
 }
 
 /* lastUpdate
