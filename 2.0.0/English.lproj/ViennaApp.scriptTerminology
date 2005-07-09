@@ -74,6 +74,20 @@
 					<key>Name</key>
 					<string>application version</string>
 				</dict>
+				<key>bloglinesEmailAddress</key>
+				<dict>
+					<key>Description</key>
+					<string>The Bloglines account e-mail address</string>
+					<key>Name</key>
+					<string>bloglines account name</string>
+				</dict>
+				<key>bloglinesPassword</key>
+				<dict>
+					<key>Description</key>
+					<string>The Bloglines account password</string>
+					<key>Name</key>
+					<string>bloglines password</string>
+				</dict>
 				<key>checkForNewOnStartup</key>
 				<dict>
 					<key>Description</key>
@@ -94,6 +108,13 @@
 					<string>The current display style for messages</string>
 					<key>Name</key>
 					<string>display style</string>
+				</dict>
+				<key>enableBloglinesSupport</key>
+				<dict>
+					<key>Description</key>
+					<string>Enable Bloglines synchronisation</string>
+					<key>Name</key>
+					<string>bloglines support</string>
 				</dict>
 				<key>folderListFont</key>
 				<dict>

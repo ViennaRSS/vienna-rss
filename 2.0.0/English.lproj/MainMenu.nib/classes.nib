@@ -32,6 +32,7 @@
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
                 startConnect = id; 
+                syncSubscriptionsFromBloglines = id; 
                 toggleActivityViewer = id; 
                 viewNextUnread = id; 
                 viewSourceHomePage = id; 

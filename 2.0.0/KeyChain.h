@@ -1,8 +1,8 @@
 //
-//  Import.h
+//  KeyChain.h
 //  Vienna
 //
-//  Created by Steve on 5/27/05.
+//  Created by Steve on 7/9/05.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,11 +19,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "AppController.h"
 
-@interface AppController (Import)
-	-(IBAction)importSubscriptions:(id)sender;
-	-(IBAction)syncSubscriptionsFromBloglines:(id)sender;
-	-(void)importFromFile:(NSString *)importFileName;
+@interface KeyChain : NSObject {
+}
+
+// Class functions
++(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;
++(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url;
 @end

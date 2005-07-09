@@ -30,6 +30,11 @@
 	IBOutlet NSPopUpButton * linksHandler;
 	IBOutlet NSButton * checkForUpdates;
 	IBOutlet NSButton * checkOnStartUp;
+	IBOutlet NSButton * enableBloglines;
+	IBOutlet NSTextField * bloglinesEmailAddressLabel;
+	IBOutlet NSTextField * bloglinesPasswordLabel;
+	IBOutlet NSTextField * bloglinesEmailAddress;
+	IBOutlet NSSecureTextField * bloglinesPassword;
 	ICInstance internetConfigHandler;
 }
 
@@ -39,6 +44,9 @@
 -(IBAction)changeCheckOnStartUp:(id)sender;
 -(IBAction)selectDefaultLinksHandler:(id)sender;
 -(IBAction)changeCheckForUpdates:(id)sender;
+-(IBAction)changeEnableBloglines:(id)sender;
+-(IBAction)changeBloglinesEmailAddress:(id)sender;
+-(IBAction)changeBloglinesPassword:(id)sender;
 
 // General functions
 -(void)initializePreferences;

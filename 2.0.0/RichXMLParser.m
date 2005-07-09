@@ -20,7 +20,6 @@
 #import "RichXMLParser.h"
 #import <CoreFoundation/CoreFoundation.h>
 #import "StringExtensions.h"
-#import "Credentials.h"
 
 @interface FeedItem (Private)
 	-(void)setTitle:(NSString *)newTitle;
@@ -44,7 +43,6 @@
 	-(void)setLastModified:(NSDate *)newDate;
 	-(NSString *)encodedValueOfElement:(XMLParser *)tree;
 	-(void)ensureTitle:(FeedItem *)item;
-	-(NSString *)processTitleAttributes:(NSString *)stringToProcess;
 @end
 
 @implementation FeedItem
@@ -300,7 +298,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[self processTitleAttributes:[subTree valueOfElement]]];
+			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
 			continue;
 		}
 
@@ -373,7 +371,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[self processTitleAttributes:[subItemTree valueOfElement]]];
+					[newItem setTitle:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					continue;
 				}
 				
@@ -454,7 +452,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[self processTitleAttributes:[subTree valueOfElement]]];
+			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
 			continue;
 		}
 		
@@ -496,7 +494,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[self processTitleAttributes:[subItemTree valueOfElement]]];
+					[newItem setTitle:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					continue;
 				}
 
@@ -723,49 +721,6 @@
 			[aString appendString:@"..."];
 		[item setTitle:aString];
 	}
-}
-
-/* processTitleAttributes
- * Scan the specified string and convert attribute characters to their literals. Also trim leading and trailing
- * whitespace.
- */
--(NSString *)processTitleAttributes:(NSString *)stringToProcess
-{
-	NSMutableString * processedString = [[NSMutableString alloc] initWithString:stringToProcess];
-	int entityStart;
-	int entityEnd;
-
-	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
-	while (entityStart != NSNotFound)
-	{
-		entityEnd = [processedString indexOfCharacterInString:';' afterIndex:entityStart + 1];
-		if (entityEnd != NSNotFound)
-		{
-			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
-			NSString * entityString = [processedString substringWithRange:entityRange];
-			NSString * stringToAppend;
-			
-			if ([entityString characterAtIndex:1] == '#' && entityRange.length > 3)
-				stringToAppend = [NSString stringWithFormat:@"%c", [[entityString substringFromIndex:2] intValue]];
-			else
-			{
-				if ([entityString isEqualTo:@"&lt;"])				stringToAppend = @"<";
-				else if ([entityString isEqualTo: @"&gt;"])			stringToAppend = @">";
-				else if ([entityString isEqualTo: @"&quot;"])		stringToAppend = @"\"";
-				else if ([entityString isEqualTo: @"&amp;"])		stringToAppend = @"&";
-				else if ([entityString isEqualTo: @"&rsquo;"])		stringToAppend = @"'";
-				else if ([entityString isEqualTo: @"&lsquo;"])		stringToAppend = @"'";
-				else if ([entityString isEqualTo: @"&apos;"])		stringToAppend = @"'";				
-				else												stringToAppend = entityString;
-			}
-			[processedString replaceCharactersInRange:entityRange withString:stringToAppend];
-		}
-		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
-	}
-
-	NSString * returnString = [processedString trim];
-	[processedString release];
-	return returnString;
 }
 
 /* dealloc

@@ -22,6 +22,10 @@
 #import "Folder.h"
 
 @interface ViennaApp : NSApplication {
+	NSString * bloglinesEmailAddress;
+	NSString * bloglinesPassword;
+	BOOL isBloglinesEnabled;
+	BOOL readingPaneOnRight;
 }
 
 // Refresh commands
@@ -41,6 +45,17 @@
 -(BOOL)isRefreshing;
 -(int)unreadCount;
 
+// Bloglines support
+-(BOOL)enableBloglinesSupport;
+-(NSString *)bloglinesEmailAddress;
+-(NSString *)bloglinesPassword;
+-(void)setEnableBloglinesSupport:(BOOL)flag;
+-(void)setBloglinesEmailAddress:(NSString *)newEmailAddress;
+-(void)setBloglinesPassword:(NSString *)newPassword;
+-(void)internalSetEnableBloglinesSupport:(BOOL)flag;
+-(void)internalSetBloglinesEmailAddress:(NSString *)newEmailAddress;
+-(void)internalSetBloglinesPassword:(NSString *)newPassword;
+
 // Change folder selection
 -(Folder *)currentFolder;
 -(void)setCurrentFolder:(Folder *)newCurrentFolder;
@@ -48,6 +63,7 @@
 // Change position of reading pane
 -(BOOL)readingPaneOnRight;
 -(void)setReadingPaneOnRight:(BOOL)flag;
+-(void)internalSetReadingPaneOnRight:(BOOL)flag;
 
 // Check for new versions of Vienna on startup
 -(BOOL)checkForNewOnStartup;

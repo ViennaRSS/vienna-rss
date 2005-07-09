@@ -3,19 +3,26 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {
+                changeBloglinesEmailAddress = id; 
+                changeBloglinesPassword = id; 
                 changeCheckForUpdates = id; 
                 changeCheckFrequency = id; 
                 changeCheckOnStartUp = id; 
+                changeEnableBloglines = id; 
                 changeFont = id; 
-                changeMugshots = id; 
                 selectDefaultLinksHandler = id; 
             }; 
             CLASS = PreferenceController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                bloglinesEmailAddress = NSTextField; 
+                bloglinesEmailAddressLabel = NSTextField; 
+                bloglinesPassword = NSTextField; 
+                bloglinesPasswordLabel = NSTextField; 
                 checkForUpdates = NSButton; 
                 checkFrequency = NSPopUpButton; 
                 checkOnStartUp = NSButton; 
+                enableBloglines = NSButton; 
                 folderFont = NSPopUpButton; 
                 folderFontSize = NSComboBox; 
                 linksHandler = NSPopUpButton; 

@@ -32,12 +32,16 @@
 #define MA_Group_Folder			3
 #define MA_RSS_Folder			4
 
+// Bloglines flags
+#define MA_NonBloglines_Folder	0x0L
+
 // Macro to simplify getting folder types
 #define FolderType(f)			([(f) type])
 #define IsSmartFolder(f)		(([(f) type]) == MA_Smart_Folder)
 #define IsRSSFolder(f)			(([(f) type]) == MA_RSS_Folder)
 #define IsGroupFolder(f)		(([(f) type]) == MA_Group_Folder)
 #define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
+#define IsBloglinesFolder(f)	([(f) bloglinesId] != MA_NonBloglines_Folder)
 
 // Folder flags
 // (These must be bitmask values!)
@@ -53,6 +57,7 @@
 	int type;
 	int childUnreadCount;
 	unsigned int flags;
+	unsigned int bloglinesId;
 	BOOL isMessages;
 	BOOL needFlush;
 	NSDate * lastUpdate;
@@ -60,7 +65,7 @@
 	NSMutableDictionary * messages;
 }
 
-// Accessor functions
+// Initialisation functions
 -(id)initWithId:(int)itemId parentId:(int)parentId name:(NSString *)name type:(int)type;
 -(NSString *)name;
 -(NSString *)folderName;
@@ -77,6 +82,7 @@
 -(int)messageCount;
 -(int)unreadCount;
 -(int)type;
+-(long)bloglinesId;
 -(unsigned int)flags;
 -(NSImage *)image;
 -(int)childUnreadCount;
@@ -96,6 +102,7 @@
 -(void)setFeedURL:(NSString *)feedURL;
 -(void)setUsername:(NSString *)newUsername;
 -(void)setPassword:(NSString *)newPassword;
+-(void)setBloglinesId:(long)newBloglinesId;
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(NSArray *)messages;

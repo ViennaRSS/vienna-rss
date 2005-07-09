@@ -113,6 +113,8 @@
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAA3AF0906338A00006735EB /* SearchFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA3AF0706338A00006735EB /* SearchFolder.h */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
+		AAA817F7087F986700C30683 /* AsyncConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA817F5087F986700C30683 /* AsyncConnection.h */; };
+		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		AAACC4CC082FA20A00DD3150 /* newSubscription.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAACC4CB082FA20A00DD3150 /* newSubscription.tiff */; };
 		AAACC4E4082FA52C00DD3150 /* newSmartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAACC4E3082FA52C00DD3150 /* newSmartFolder.tiff */; };
 		AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAB90EFC061D059D00CA4741 /* searchFolder.tiff */; };
@@ -142,6 +144,8 @@
 		AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		AAFA8CA9062A0BE200C530A6 /* CalendarExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFA8CA7062A0BE200C530A6 /* CalendarExtensions.h */; };
 		AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
+		AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFAF3FB088056D800DAFF04 /* KeyChain.h */; };
+		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		CD3F61D807466F5700BAE165 /* nextunread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = CD3F61D707466F5700BAE165 /* nextunread.tiff */; };
 		CD3F627D0748A54A00BAE165 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3F627C0748A54A00BAE165 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
@@ -338,6 +342,8 @@
 		AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewExtensions.m; sourceTree = "<group>"; };
 		AAA3AF0706338A00006735EB /* SearchFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFolder.h; sourceTree = "<group>"; };
 		AAA3AF0806338A00006735EB /* SearchFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFolder.m; sourceTree = "<group>"; };
+		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
+		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
 		AAACC4CB082FA20A00DD3150 /* newSubscription.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = newSubscription.tiff; sourceTree = "<group>"; };
 		AAACC4E3082FA52C00DD3150 /* newSmartFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = newSmartFolder.tiff; sourceTree = "<group>"; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = searchFolder.tiff; sourceTree = "<group>"; };
@@ -367,6 +373,8 @@
 		AAF3B14106095E7B0025CC7F /* StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringExtensions.m; sourceTree = "<group>"; };
 		AAFA8CA7062A0BE200C530A6 /* CalendarExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarExtensions.h; sourceTree = "<group>"; };
 		AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarExtensions.m; sourceTree = "<group>"; };
+		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
+		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
 		CD3F61D707466F5700BAE165 /* nextunread.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = nextunread.tiff; sourceTree = SOURCE_ROOT; };
 		CD3F627C0748A54A00BAE165 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -451,6 +459,8 @@
 				AACFDEBB0604D4D20072D140 /* AppController.m */,
 				AA74A85D087B56810029797C /* ArticleView.h */,
 				AA74A85E087B56810029797C /* ArticleView.m */,
+				AAA817F5087F986700C30683 /* AsyncConnection.h */,
+				AAA817F6087F986700C30683 /* AsyncConnection.m */,
 				AAD264B60611E108005A27E4 /* CheckForUpdates.h */,
 				AAD264B70611E108005A27E4 /* CheckForUpdates.m */,
 				AAD34DF4062786520094D6A6 /* DownloadUpdate.h */,
@@ -620,6 +630,8 @@
 				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
 				AA26F4CC0604927300FE7994 /* ImageAndTextCell.h */,
 				AA26F4DB0604927300FE7994 /* ImageAndTextCell.m */,
+				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
+				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
@@ -682,6 +694,8 @@
 				AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */,
 				AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */,
 				AA74A85F087B56810029797C /* ArticleView.h in Headers */,
+				AAA817F7087F986700C30683 /* AsyncConnection.h in Headers */,
+				AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,6 +880,8 @@
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */,
 				AA74A860087B56810029797C /* ArticleView.m in Sources */,
+				AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */,
+				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

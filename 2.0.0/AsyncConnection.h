@@ -1,9 +1,9 @@
 //
-//  Import.h
+//  AsyncConnection.h
 //  Vienna
 //
-//  Created by Steve on 5/27/05.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Created by Steve on 6/16/05.
+//  Copyright (c) 2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,11 +19,18 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "AppController.h"
 
-@interface AppController (Import)
-	-(IBAction)importSubscriptions:(id)sender;
-	-(IBAction)syncSubscriptionsFromBloglines:(id)sender;
-	-(void)importFromFile:(NSString *)importFileName;
+@interface AsyncConnection : NSObject {
+	NSMutableData * receivedData;
+	NSString * username;
+	NSString * password;
+	BOOL didError;
+	id delegate;
+	SEL handler;
+}
+
+// Public functions
+-(BOOL)beginLoadDataFromURL:(NSURL *)url username:(NSString *)theUsername password:(NSString *)thePassword delegate:(id)theDelegate didEndSelector:(SEL)endSelector;
+-(BOOL)didError;
+-(NSData *)receivedData;
 @end
