@@ -13,3 +13,5 @@ Thanks!
   View->Next Unread.
 - Fix import/export to convert characters such as <, > and & to and from their entity equivalents
   in URL fields as per XML specification.
+- Add View->Article Page to display the original web page from which the article came. The short
+  cut for this is 'P'. The command toggles between the web page and the original article.
