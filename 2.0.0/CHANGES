@@ -1,5 +1,15 @@
 Vienna ChangeLog File
 =====================
 
-As you release new builds, update this file with details of the changes in each build.
+As you release new builds, update this file with details of the changes in each build. The
+most recent build should be at the top of this file.
+
 Thanks!
+
+2.0.0.2003
+----------
+- Add an option to mark the current article read after X seconds where X is configurable
+  through the preferences. The default is to mark read only after the user has done
+  View->Next Unread.
+- Fix import/export to convert characters such as <, > and & to and from their entity equivalents
+  in URL fields as per XML specification.

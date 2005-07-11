@@ -96,8 +96,8 @@
 "No more unread body" = "There are no more unread messages in any folder.";
 "Cannot create database folder" = "Sorry, but Vienna was unable to create the database folder";
 "Cannot create database folder text" = "Vienna was trying to create the folder '%@' but an error occurred. Check the permissions on the folders on the path specified.";
-"Unrecognised database format title" = "Sorry, but Vienna does not recognise the format of the database.db file.";
-"Unrecognised database format text" = "The database was probably created with version 0.6 or earlier. You will need to obtain version 0.7 to upgrade the database at %@ to the latest format.\n";
+"Unrecognised database format title" = "The database file format has changed";
+"Unrecognised database format text" = "Your existing ~/Library/Application Support/Vienna/messages.db file is not supported by this version of Vienna. Delete or rename the file and restart Vienna.\n";
 " (%d unread)" = " (%d unread)";
 "is" = "is";
 "is not" = "is not";

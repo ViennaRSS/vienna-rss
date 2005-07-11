@@ -130,14 +130,14 @@
 					<key>AppleEventCode</key>
 					<string>blEM</string>
 					<key>Type</key>
-					<string>String</string>
+					<string>NSString</string>
 				</dict>
 				<key>bloglinesPassword</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>blPW</string>
 					<key>Type</key>
-					<string>String</string>
+					<string>NSString</string>
 				</dict>
 				<key>checkForNewOnStartup</key>
 				<dict>
@@ -189,6 +189,13 @@
 					<string>YES</string>
 					<key>Type</key>
 					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>markReadInterval</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>mrIN</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
 				<key>messageListFont</key>
 				<dict>

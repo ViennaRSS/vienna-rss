@@ -96,8 +96,8 @@
 
 			[itemDict setObject:@"rss" forKey:@"type"];
 			[itemDict setObject:(name ? name : @"") forKey:@"title"];
-			[itemDict setObject:(link ? link : @"") forKey:@"htmlUrl"];
-			[itemDict setObject:(url ? url : @"") forKey:@"xmlUrl"];
+			[itemDict setObject:[XMLParser quoteAttributes:(link ? link : @"")] forKey:@"htmlUrl"];
+			[itemDict setObject:[XMLParser quoteAttributes:(url ? url : @"")] forKey:@"xmlUrl"];
 			[itemDict setObject:(description ? description : @"") forKey:@"description"];
 			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
 			++countExported;
@@ -146,6 +146,7 @@
 	[xmlString replaceString:@"><" withString:@">\n<"];
 
 	NSData * msgData = [NSData dataWithBytes:[xmlString UTF8String] length:[xmlString length]];
+	[xmlString release];
 	[fileHandle writeData:msgData];
 	[fileHandle closeFile];
 

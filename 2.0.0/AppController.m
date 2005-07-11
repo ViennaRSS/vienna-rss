@@ -84,6 +84,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_SortDirection];
 	[defaultValues setObject:MA_Column_MessageId forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
+	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_MarkReadInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:6] forKey:MAPref_RefreshThreads];
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_MessageColumns];
 	[defaultValues setObject:boolYes forKey:MAPref_AutoCollapseFolders];
@@ -183,6 +184,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Create a backtrack array
 	isBacktracking = NO;
 	selectAtEndOfReload = MA_Select_Unread;
+	markReadTimer = nil;
 	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[defaults integerForKey:MAPref_BacktrackQueueSize]];
 
 	// Create an authentication queue used to queue up folders that require
@@ -1327,6 +1329,15 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		NSAssert(currentSelectedRow < (int)[currentArrayOfMessages count], @"Out of range row index received");
 		[self updateMessageText];
+		
+		// If we mark read after an interval, start the timer here.
+		[markReadTimer invalidate];
+		if ([NSApp markReadInterval] > 0)
+			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:[NSApp markReadInterval]
+															  target:self
+															selector:@selector(markCurrentRead:)
+															userInfo:nil
+															 repeats:NO] retain];
 
 		// Add this to the backtrack list
 		if (!isBacktracking)
@@ -1334,6 +1345,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			int messageId = [[currentArrayOfMessages objectAtIndex:currentSelectedRow] number];
 			[backtrackArray addToQueue:currentFolderId messageNumber:messageId];
 		}
+	}
+}
+
+/* markCurrentRead
+ * Mark the current message as read.
+ */
+-(void)markCurrentRead:(NSTimer *)aTimer
+{
+	if ([messageList selectedRow] != -1 && ![db readOnly])
+	{
+		Message * theRecord = [currentArrayOfMessages objectAtIndex:[messageList selectedRow]];
+		if (![theRecord isRead])
+			[self markReadByArray:[NSArray arrayWithObject:theRecord] readFlag:YES];
 	}
 }
 
@@ -1877,11 +1901,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)viewNextUnread:(id)sender
 {
 	// Mark the current message read
-	if ([messageList selectedRow] != -1 && ![db readOnly])
-	{
-		Message * theRecord = [currentArrayOfMessages objectAtIndex:[messageList selectedRow]];
-		[self markReadByArray:[NSArray arrayWithObject:theRecord] readFlag:YES];
-	}
+	[self markCurrentRead:nil];
 	
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
@@ -2629,6 +2649,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[currentArrayOfMessages release];
 	[backtrackArray release];
 	[checkTimer release];
+	[markReadTimer release];
 	[messageListFont release];
 	[authQueue release];
 	[db release];

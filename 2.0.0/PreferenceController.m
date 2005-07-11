@@ -46,6 +46,7 @@ NSString * MAPref_BacktrackQueueSize = @"BacktrackQueueSize";
 NSString * MAPref_ReadingPaneOnRight = @"ReadingPaneOnRight";
 NSString * MAPref_EnableBloglinesSupport = @"EnableBloglinesSupport";
 NSString * MAPref_BloglinesEmailAddress = @"BloglinesEmailAddress";
+NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
 
 // List of available font sizes. I picked the ones that matched
 // Mail but you easily could add or remove from the list as needed.
@@ -110,6 +111,10 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	
 	// Set check for new messages when starting
 	[checkOnStartUp setState:[NSApp refreshOnStartup] ? NSOnState : NSOffState];
+
+	// Set mark read behaviour
+	[markReadAfterNext setState:[NSApp markReadInterval] == 0 ? NSOnState : NSOffState];
+	[markReadAfterDelay setState:[NSApp markReadInterval] != 0 ? NSOnState : NSOffState];
 
 	// Handle the Bloglines settings
 //	[enableBloglines setState:[NSApp enableBloglinesSupport] ? NSOnState : NSOffState];
@@ -291,6 +296,15 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 		[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:fldrFont] forKey:MAPref_FolderFont];
 		[nc postNotificationName:@"MA_Notify_FolderFontChange" object:fldrFont];
 	}
+}
+
+/* changeMarkReadBehaviour
+ * Set the mark read behaviour based on the users selection.
+ */
+-(IBAction)changeMarkReadBehaviour:(id)sender
+{
+	int newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
+	[NSApp internalSetMarkReadInterval:newReadInterval];
 }
 
 /* changeCheckFrequency

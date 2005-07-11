@@ -83,8 +83,8 @@
 	{
 		XMLParser * outlineItem = [tree treeByIndex:index];
 		NSDictionary * entry = [outlineItem attributesForTree];
-		NSString * feedTitle = [XMLParser processAttributes:[entry objectForKey:@"title"]];
-		NSString * feedDescription = [XMLParser processAttributes:[entry objectForKey:@"description"]];
+		NSString * feedTitle = [entry objectForKey:@"title"];
+		NSString * feedDescription = [entry objectForKey:@"description"];
 		NSString * feedURL = [XMLParser processAttributes:[entry objectForKey:@"xmlUrl"]];
 		NSString * feedHomePage = [XMLParser processAttributes:[entry objectForKey:@"htmlUrl"]];
 		NSString * bloglinesSubId = [entry objectForKey:@"BloglinesSubId"];

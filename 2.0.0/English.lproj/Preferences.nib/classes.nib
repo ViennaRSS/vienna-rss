@@ -10,6 +10,7 @@
                 changeCheckOnStartUp = id; 
                 changeEnableBloglines = id; 
                 changeFont = id; 
+                changeMarkReadBehaviour = id; 
                 selectDefaultLinksHandler = id; 
             }; 
             CLASS = PreferenceController; 
@@ -17,7 +18,7 @@
             OUTLETS = {
                 bloglinesEmailAddress = NSTextField; 
                 bloglinesEmailAddressLabel = NSTextField; 
-                bloglinesPassword = NSTextField; 
+                bloglinesPassword = NSSecureTextField; 
                 bloglinesPasswordLabel = NSTextField; 
                 checkForUpdates = NSButton; 
                 checkFrequency = NSPopUpButton; 
@@ -26,6 +27,8 @@
                 folderFont = NSPopUpButton; 
                 folderFontSize = NSComboBox; 
                 linksHandler = NSPopUpButton; 
+                markReadAfterDelay = NSButtonCell; 
+                markReadAfterNext = NSButtonCell; 
                 messageListFont = NSPopUpButton; 
                 messageListFontSize = NSComboBox; 
             }; 
