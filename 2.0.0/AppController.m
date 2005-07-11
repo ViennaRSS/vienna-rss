@@ -43,6 +43,8 @@
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebPolicyDelegate.h"
 #import "WebKit/WebUIDelegate.h"
+#import "WebKit/WebDataSource.h"
+#import "WebKit/WebFrameView.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
 #import "ActivityLog.h"
@@ -121,6 +123,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	stylePathMappings = [[NSMutableDictionary alloc] init];
 	
 	// Set the delegates and title
+	isViewingArticlePage = NO;
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:appName];
 	[textView setDelegate:self];
@@ -200,6 +203,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Make us the policy and UI delegate for the web view
 	[textView setPolicyDelegate:self];
 	[textView setUIDelegate:self];
+	[textView setFrameLoadDelegate:self];
 
 	// Select the default style
 	htmlTemplate = nil;
@@ -275,6 +279,33 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[self setStatusMessage:text persist:NO];
 }
 
+/* didStartProvisionalLoadForFrame
+ * Called when the webview begins loading a frame. In our case we're interested in showing progress
+ * when an article page is first loaded so throw up the progress stuff.
+ */
+-(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
+{
+	if ([frame name] == nil && isViewingArticlePage)
+	{
+		[self startProgressIndicator];
+		[self setStatusMessage:[NSString stringWithFormat:@"Loading %@...", [[[[frame provisionalDataSource] initialRequest] URL] absoluteURL]] persist:YES];
+	}
+}
+
+/* didFinishLoadForFrame
+ * Called when the frame finished loading. We use this as the hint to stop the progress
+ * reporting and put the focus in the frame so the user can navigate it.
+ */
+-(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+	if ([frame name] == nil && isViewingArticlePage)
+	{
+		[self stopProgressIndicator];
+		[self setStatusMessage:@"Completed" persist:YES];
+		[mainWindow makeFirstResponder:[[frame frameView] documentView]];
+	}
+}
+
 /* mouseDidMoveOverElement
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
@@ -337,6 +368,14 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 
 	if (url != nil)
 		[[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+/* closeMainWindow
+ * Hide the main window.
+ */
+-(IBAction)closeMainWindow:(id)sender
+{
+	[NSApp hide:self];
 }
 
 /* growlIsReady
@@ -1317,12 +1356,35 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[self refreshMessageAtRow:currentSelectedRow];
 }
 
+/* viewArticlePage
+ * Toggle between the article's original page in the textview and the article itself.
+ */
+-(IBAction)viewArticlePage:(id)sender
+{
+	if (currentSelectedRow >= 0)
+	{
+		if (isViewingArticlePage)
+			[self refreshMessageAtRow:currentSelectedRow];
+		else
+		{
+			Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+			if (![[theRecord link] isBlank])
+			{
+				NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[theRecord link]]];
+				isViewingArticlePage = YES;
+				[[textView mainFrame] loadRequest:theRequest];
+			}
+		}
+	}
+}
+
 /* refreshMessageAtRow
  * Refreshes the message at the specified row.
  */
 -(void)refreshMessageAtRow:(int)theRow
 {
 	requestedMessage = 0;
+	isViewingArticlePage = NO;
 	if (currentSelectedRow < 0)
 		[[textView mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
 	else
@@ -1414,7 +1476,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		case 'M':
 			[self markFlagged:self];
 			return YES;
-			
+
+		case 'p':
+		case 'P':
+			[self viewArticlePage:self];
+			return YES;
+
 		case 'r':
 		case 'R':
 			[self markRead:self];
@@ -2567,6 +2634,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		int folderId = [foldersTree actualSelection];
 		Folder * folder = [db folderFromID:folderId];
 		return ([folder homePage] && ![[folder homePage] isBlank]);
+	}
+	else if (theAction == @selector(viewArticlePage:))
+	{
+		[menuItem setState:isViewingArticlePage ? NSOnState : NSOffState];
+		return [messageList selectedRow] != -1;
 	}
 	else if (theAction == @selector(compactDatabase:))
 	{

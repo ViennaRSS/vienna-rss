@@ -113,6 +113,7 @@
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	BOOL previousFolderColumnState;
+	BOOL isViewingArticlePage;
 }
 
 // Menu action items
@@ -140,6 +141,8 @@
 -(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)readingPaneOnRight:(id)sender;
 -(IBAction)readingPaneOnBottom:(id)sender;
+-(IBAction)closeMainWindow:(id)sender;
+-(IBAction)viewArticlePage:(id)sender;
 
 // Infobar functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
