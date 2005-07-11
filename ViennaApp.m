@@ -39,6 +39,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 		isBloglinesEnabled = [defaults boolForKey:MAPref_EnableBloglinesSupport];
 		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
+		markReadInterval = [defaults integerForKey:MAPref_MarkReadInterval];
 		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
 		bloglinesPassword = [bloglinesEmailAddress ? [KeyChain getPasswordFromKeychain:bloglinesEmailAddress url:MA_Bloglines_URL] : @"" retain];
 	}
@@ -235,6 +236,38 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 -(void)setDisplayStyle:(NSString *)newStyleName
 {
 	[[self delegate] setActiveStyle:newStyleName refresh:YES];
+}
+
+/* markReadInterval
+ * Return the number of seconds after an unread article is displayed before it is marked as read.
+ * A value of zero means that it remains marked unread until the user does 'Display Next Unread'.
+ */
+-(int)markReadInterval
+{
+	return markReadInterval;
+}
+
+/* setMarkReadInterval
+ * Changes the interval after an article is read before it is marked as read then sends a notification
+ * that the preferences have changed.
+ */
+-(void)setMarkReadInterval:(int)newInterval
+{
+	[self internalSetMarkReadInterval:newInterval];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+
+/* internalSetMarkReadInterval
+ * Changes the interval after an article is read before it is marked as read.
+ */
+-(void)internalSetMarkReadInterval:(int)newInterval
+{	
+	if (markReadInterval != newInterval)
+	{
+		markReadInterval = newInterval;
+		NSNumber * intValue = [NSNumber numberWithInt:newInterval];
+		[[NSUserDefaults standardUserDefaults] setObject:intValue forKey:MAPref_MarkReadInterval];
+	}
 }
 
 /* checkForNewOnStartup

@@ -137,6 +137,13 @@
 					<key>Name</key>
 					<string>refreshing</string>
 				</dict>
+				<key>markReadInterval</key>
+				<dict>
+					<key>Description</key>
+					<string>The interval after an article is displayed before it is marked read</string>
+					<key>Name</key>
+					<string>mark read interval</string>
+				</dict>
 				<key>messageListFont</key>
 				<dict>
 					<key>Description</key>

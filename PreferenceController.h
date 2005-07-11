@@ -31,6 +31,8 @@
 	IBOutlet NSButton * checkForUpdates;
 	IBOutlet NSButton * checkOnStartUp;
 	IBOutlet NSButton * enableBloglines;
+	IBOutlet NSButtonCell * markReadAfterNext;
+	IBOutlet NSButtonCell * markReadAfterDelay;
 	IBOutlet NSTextField * bloglinesEmailAddressLabel;
 	IBOutlet NSTextField * bloglinesPasswordLabel;
 	IBOutlet NSTextField * bloglinesEmailAddress;
@@ -47,6 +49,7 @@
 -(IBAction)changeEnableBloglines:(id)sender;
 -(IBAction)changeBloglinesEmailAddress:(id)sender;
 -(IBAction)changeBloglinesPassword:(id)sender;
+-(IBAction)changeMarkReadBehaviour:(id)sender;
 
 // General functions
 -(void)initializePreferences;

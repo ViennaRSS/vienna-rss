@@ -24,6 +24,7 @@
 @interface ViennaApp : NSApplication {
 	NSString * bloglinesEmailAddress;
 	NSString * bloglinesPassword;
+	int markReadInterval;
 	BOOL isBloglinesEnabled;
 	BOOL readingPaneOnRight;
 }
@@ -44,6 +45,11 @@
 -(NSArray *)folders;
 -(BOOL)isRefreshing;
 -(int)unreadCount;
+
+// Mark read scheme
+-(int)markReadInterval;
+-(void)setMarkReadInterval:(int)newInterval;
+-(void)internalSetMarkReadInterval:(int)newInterval;
 
 // Bloglines support
 -(BOOL)enableBloglinesSupport;

@@ -40,6 +40,9 @@
 @class TexturedHeader;
 @class FeedCredentials;
 
+// Mark read interval (seconds)
+#define MA_Default_Read_Interval	1
+
 // How to select a message after reloading a folder
 // (Values must be <= 0 because > 0 is a message number)
 #define MA_Select_None		0
@@ -94,6 +97,7 @@
 	NSArray * allColumns;
 	ExtDateFormatter * extDateFormatter;
 	NSTimer * checkTimer;
+	NSTimer * markReadTimer;
 	int lastCountOfUnread;
 	int unreadAtBeginning;
 	BOOL growlAvailable;
@@ -176,6 +180,7 @@
 -(void)getMessagesOnTimer:(NSTimer *)aTimer;
 -(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 -(void)centerSelectedRow;
+-(void)markCurrentRead:(NSTimer *)aTimer;
 -(void)refreshMessageAtRow:(int)theRow;
 -(Database *)database;
 -(int)currentFolderId;

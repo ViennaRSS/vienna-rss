@@ -140,6 +140,16 @@ const int MA_Current_DB_Version = 11;
 		// Set the initial version
 		[self setDatabaseVersion:MA_Current_DB_Version];
 	}
+	
+	// Trap unsupported databases
+	if (databaseVersion < MA_Current_DB_Version)
+	{
+		NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
+						NSLocalizedString(@"Unrecognised database format text", nil),
+						NSLocalizedString(@"Close", nil), @"", @"",
+						qualifiedDatabaseFileName);
+		return NO;
+	}
 
 	// Initial check if the database is read-only
 	[self syncLastUpdate];
