@@ -39,6 +39,11 @@ typedef enum {
 	MA_CritOper_NotUnder
 } CriteriaOperator;
 
+typedef enum {
+	MA_CritFlag_And = 0,
+	MA_CritFlag_Or
+} CriteriaFlag;
+
 @interface Criteria : NSObject {
 	NSString * field;
 	NSString * value;
@@ -58,10 +63,12 @@ typedef enum {
 @end
 
 @interface CriteriaTree : NSObject {
+	CriteriaFlag flag;
 	NSMutableArray * criteriaTree;
 }
 -(id)initWithString:(NSString *)string;
 -(NSEnumerator *)criteriaEnumerator;
 -(void)addCriteria:(Criteria *)newCriteria;
 -(NSString *)string;
+-(CriteriaFlag)flag;
 @end

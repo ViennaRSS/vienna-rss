@@ -31,6 +31,7 @@ extern NSString * MA_Column_MessageComments;
 extern NSString * MA_Column_MessageText;
 extern NSString * MA_Column_MessageFolderId;
 extern NSString * MA_Column_MessageParentId;
+extern NSString * MA_Column_MessageSummary;
 
 // Custom values for message IDs
 #define MA_MsgID_New			-1
@@ -42,17 +43,18 @@ extern NSString * MA_Column_MessageParentId;
 #define MA_MsgStatus_Updated	2
 
 // Message field IDs
-#define MA_ID_MessageId			400
-#define MA_ID_MessageTitle		401
-#define MA_ID_MessageFrom		402
-#define MA_ID_MessageDate		403
-#define MA_ID_MessageParentId	404
-#define MA_ID_MessageUnread		405
-#define MA_ID_MessageFlagged	406
-#define MA_ID_MessageText		407
-#define MA_ID_MessageFolderId   408
-#define MA_ID_MessageLink		409
-#define MA_ID_MessageComments	410
+#define MA_ID_MessageId				400
+#define MA_ID_MessageTitle			401
+#define MA_ID_MessageFrom			402
+#define MA_ID_MessageDate			403
+#define MA_ID_MessageParentId		404
+#define MA_ID_MessageUnread			405
+#define MA_ID_MessageFlagged		406
+#define MA_ID_MessageText			407
+#define MA_ID_MessageFolderId		408
+#define MA_ID_MessageLink			409
+#define MA_ID_MessageComments		410
+#define MA_ID_MessageSummary		411
 
 @interface Message : NSObject {
 	NSMutableDictionary * messageData;

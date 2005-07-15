@@ -20,7 +20,7 @@
 
 #import "Folder.h"
 #import "AppController.h"
-#import "PreferenceNames.h"
+#import "Constants.h"
 #import "StringExtensions.h"
 
 // Indexes into folder image array

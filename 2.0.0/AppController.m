@@ -20,14 +20,12 @@
 
 #import "AppController.h"
 #import "PreferenceController.h"
-#import "PreferenceNames.h"
 #import "FoldersTree.h"
 #import "Import.h"
 #import "Export.h"
 #import "StringExtensions.h"
 #import "CalendarExtensions.h"
 #import "SplitViewExtensions.h"
-#import "ImageAndTextCell.h"
 #import "MessageView.h"
 #import "MessageListView.h"
 #import "ArticleView.h"
@@ -48,17 +46,14 @@
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
 #import "ActivityLog.h"
+#import "Constants.h"
 
 // Non-class function used for sorting
 int messageSortHandler(id item1, id item2, void * context);
 
-static NSString * MA_DefaultDatabaseName = @"~/Library/Application Support/Vienna/messages.db";
-static NSString * MA_FolderImagesFolder = @"~/Library/Application Support/Vienna/Images";
-static NSString * MA_StylesFolder = @"~/Library/Application Support/Vienna/Styles";
-static NSString * MA_DefaultStyleName = @"Default";
+// Static constant strings that are typically never tweaked
+static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
-
-#define GROWL_NOTIFICATION_DEFAULT @"NotificationDefault"
 
 @implementation AppController
 
@@ -86,15 +81,17 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_SortDirection];
 	[defaultValues setObject:MA_Column_MessageId forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
-	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_MarkReadInterval];
-	[defaultValues setObject:[NSNumber numberWithInt:6] forKey:MAPref_RefreshThreads];
+	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_MessageColumns];
 	[defaultValues setObject:boolYes forKey:MAPref_AutoCollapseFolders];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
-	[defaultValues setObject:[NSNumber numberWithInt:20] forKey:MAPref_BacktrackQueueSize];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:boolNo forKey:MAPref_ReadingPaneOnRight];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Table_Layout] forKey:MAPref_Layout];
 	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
 	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
+	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
@@ -130,7 +127,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[NSApp setDelegate:self];
 
 	// Set the reading pane orientation
-	[splitView2 setVertical:[NSApp readingPaneOnRight]];
+	[self setOrientation:[NSApp readingPaneOnRight]];
 
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -165,6 +162,10 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 		[NSApp terminate:nil];
 		return;
 	}
+	
+	// Create condensed view attribute dictionaries
+	topLineDict = [[NSMutableDictionary alloc] init];
+	bottomLineDict = [[NSMutableDictionary alloc] init];
 
 	// Make ourselves a date formatter. Useful for many things except stirring soup.
 	extDateFormatter = [[ExtDateFormatter alloc] init];
@@ -198,7 +199,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	
 	// Set header text
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
-	[messageListHeader setStringValue:NSLocalizedString(@"Messages", nil)];
+	[messageListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
 	
 	// Make us the policy and UI delegate for the web view
 	[textView setPolicyDelegate:self];
@@ -251,6 +252,19 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 -(void)setReadingPaneOnRight:(BOOL)flag
 {
 	[NSApp internalSetReadingPaneOnRight:flag];
+	[self setOrientation:flag];
+	[self updateMessageListRowHeight];
+	[self updateVisibleColumns];
+	[messageList reloadData];
+}
+
+/* setOrientation
+ * Adjusts the article view orientation and updates the message list row
+ * height to accommodate the summary view
+ */
+-(void)setOrientation:(BOOL)flag
+{
+	[NSApp internalSetLayoutStyle:flag ? MA_Condensed_Layout : MA_Table_Layout];
 	[splitView2 setVertical:flag];
 	[splitView2 display];
 }
@@ -265,7 +279,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	if (navType == WebNavigationTypeLinkClicked)
 	{
 		[listener ignore];
-		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
+		[self openURLInBrowserWithURL:[request URL]];
 	}
 	[listener use];
 }
@@ -288,7 +302,8 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	if ([frame name] == nil && isViewingArticlePage)
 	{
 		[self startProgressIndicator];
-		[self setStatusMessage:[NSString stringWithFormat:@"Loading %@...", [[[[frame provisionalDataSource] initialRequest] URL] absoluteURL]] persist:YES];
+		[self setStatusMessage:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil),
+							[[[[frame provisionalDataSource] initialRequest] URL] absoluteURL]] persist:YES];
 	}
 }
 
@@ -301,7 +316,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	if ([frame name] == nil && isViewingArticlePage)
 	{
 		[self stopProgressIndicator];
-		[self setStatusMessage:@"Completed" persist:YES];
+		[self setStatusMessage:NSLocalizedString(@"Completed", nil) persist:YES];
 		[mainWindow makeFirstResponder:[[frame frameView] documentView]];
 	}
 }
@@ -367,7 +382,56 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	NSURL * url = [menuItem representedObject];
 
 	if (url != nil)
-		[[NSWorkspace sharedWorkspace] openURL:url];
+		[self openURLInBrowserWithURL:url];
+}
+
+/* openURLInBrowser
+ * Open a URL in either the internal Vienna browser or an external browser depending on
+ * whatever the user has opted for.
+ */
+-(void)openURLInBrowser:(NSString *)urlString
+{
+	[self openURLInBrowserWithURL:[NSURL URLWithString:urlString]];
+}
+
+/* applicationDockMenu
+ * Return a menu with additional commands to be displayd on the application's
+ * popup dock menu.
+ */
+-(NSMenu *)applicationDockMenu:(NSApplication *)sender
+{
+	[appDockMenu release];
+	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
+	
+	// Refresh command
+	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:@"Refresh All Subscriptions" action:@selector(refreshAllSubscriptions:) keyEquivalent:@""];
+	[appDockMenu addItem:menuItem];
+	[menuItem release];
+	
+	// Done
+	return appDockMenu;
+}
+
+/* openURLInBrowserWithURL
+ * Open a URL in either the internal Vienna browser or an external browser depending on
+ * whatever the user has opted for.
+ */
+-(void)openURLInBrowserWithURL:(NSURL *)url
+{
+	if ([NSApp openLinksInVienna])
+	{
+		// TODO: when our internal browser view is implemented, open the URL internally.
+	}
+	[[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+/* showMainWindow
+ * Display the main window.
+ */
+-(IBAction)showMainWindow:(id)sender
+{
+	[mainWindow orderFront:self];
+	[mainWindow makeFirstResponder:messageList];
 }
 
 /* closeMainWindow
@@ -375,7 +439,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
  */
 -(IBAction)closeMainWindow:(id)sender
 {
-	[NSApp hide:self];
+	[mainWindow orderOut:self];
 }
 
 /* growlIsReady
@@ -484,6 +548,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 		// field object itself based on which columns we can sort on.
 		if ([field tag] != MA_ID_MessageFolderId &&
 			[field tag] != MA_ID_MessageParentId &&
+			[field tag] != MA_ID_MessageSummary &&
 			[field tag] != MA_ID_MessageText)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
@@ -510,7 +575,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	{
 		// Filter out columns we don't view in the message list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
-		if ([field tag] != MA_ID_MessageText && [field tag] != MA_ID_MessageParentId)
+		if ([field tag] != MA_ID_MessageText && [field tag] != MA_ID_MessageParentId && [field tag] != MA_ID_MessageSummary)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
@@ -545,6 +610,30 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	}
 }
 
+/* setTableLayout
+ * Switches to table layout. In this layout, each message attribute appears in a separate
+ * column in the table.
+ */
+-(IBAction)setTableLayout:(id)sender
+{
+	[NSApp internalSetLayoutStyle:MA_Table_Layout];
+	[self updateMessageListRowHeight];
+	[self updateVisibleColumns];
+	[messageList reloadData];
+}
+
+/* setCondensedLayout
+ * Switches to condensed layout. In this layout, the textual message attributes are condensed
+ * into a single column split over multiple lines.
+ */
+-(IBAction)setCondensedLayout:(id)sender
+{
+	[NSApp internalSetLayoutStyle:MA_Condensed_Layout];
+	[self updateMessageListRowHeight];
+	[self updateVisibleColumns];
+	[messageList reloadData];
+}
+
 /* updateVisibleColumns
  * Iterates through the array of visible columns and makes them
  * visible or invisible as needed.
@@ -555,16 +644,12 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	int count = [fields count];
 	int index;
 
-	// Get the bounds of the message list because we need to work out
-	// when the columns spill beyond the bounds
-	int widthSoFar = 0;
-	int countOfResizableColumns = 0;
-
 	// Create the new columns
 	for (index = 0; index < count; ++index)
 	{
 		Field * field = [fields objectAtIndex:index];
 		NSString * identifier = [field name];
+		BOOL showField;
 
 		// Remove each column as we go.
 		NSTableColumn * tableColumn = [messageList tableColumnWithIdentifier:identifier];
@@ -574,9 +659,20 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 				[field setWidth:[tableColumn width]];
 			[messageList removeTableColumn:tableColumn];
 		}
+		
+		// Handle condensed layout vs. table layout
+		if ([NSApp layoutStyle] == MA_Table_Layout)
+			showField = [field visible] && [field tag] != MA_ID_MessageSummary;
+		else
+		{
+			showField = [field tag] == MA_ID_MessageSummary ||
+						[field tag] == MA_ID_MessageUnread ||
+						[field tag] == MA_ID_MessageFlagged ||
+						[field tag] == MA_ID_MessageComments;
+		}
 
 		// Add to the end only those columns that are visible
-		if ([field visible])
+		if (showField)
 		{
 			NSTableColumn * newTableColumn = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			NSTableHeaderCell * headerCell = [newTableColumn headerCell];
@@ -596,17 +692,14 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 			[newTableColumn setWidth:[field width]];
 			[messageList addTableColumn:newTableColumn];
 			[newTableColumn release];
-
-			widthSoFar += [field width];
-			if (isResizable)
-				++countOfResizableColumns;
 		}
 	}
 
 	// Set the extended date formatter on the Date column
 	NSTableColumn * tableColumn = [messageList tableColumnWithIdentifier:MA_Column_MessageDate];
-	[[tableColumn dataCell] setFormatter:extDateFormatter];
-	
+	if (tableColumn != nil)
+		[[tableColumn dataCell] setFormatter:extDateFormatter];
+
 	// Set the images for specific header columns
 	[messageList setHeaderImage:MA_Column_MessageUnread imageName:@"unread_header.tiff"];
 	[messageList setHeaderImage:MA_Column_MessageFlagged imageName:@"flagged_header.tiff"];
@@ -614,9 +707,13 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	
 	// Initialise the sort direction
 	[self showSortDirection];	
-	
-	// Extend the last column
-	//[messageList sizeLastColumnToFit];
+
+	// In condensed mode, the summary field takes up the whole space
+	if ([NSApp layoutStyle] == MA_Condensed_Layout)
+	{
+		[messageList sizeLastColumnToFit];
+		[messageList setNeedsDisplay];
+	}
 }
 
 /* saveTableSettings
@@ -654,15 +751,26 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
  */
 -(void)setTableViewFont
 {
-	int height;
-	
-	[messageListFont release];
-	
 	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_MessageListFont];
+	[messageListFont release];
 	messageListFont = [NSUnarchiver unarchiveObjectWithData:fontData];
+
+	[topLineDict setObject:messageListFont forKey:NSFontAttributeName];
+	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 	
-	height = [messageListFont defaultLineHeightForFont];
-	[messageList setRowHeight:height + 3];
+	[bottomLineDict setObject:messageListFont forKey:NSFontAttributeName];
+	[bottomLineDict setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
+	
+	[self updateMessageListRowHeight];
+}
+
+/* updateMessageListRowHeight
+ */
+-(void)updateMessageListRowHeight
+{
+	int height = [messageListFont defaultLineHeightForFont];
+	int numberOfRowsInCell = [NSApp layoutStyle] == MA_Table_Layout ? 1: 2;
+	[messageList setRowHeight:(height + 3) * numberOfRowsInCell];
 }
 
 /* showSortDirection
@@ -686,11 +794,24 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	NSMenu * stylesMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
 
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
-	[self initStylesMenu:stylesMenu fromPath:path];
+	[self initStylesMenuFromPath:path];
 
 	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
-	[self initStylesMenu:stylesMenu fromPath:path];
+	[self initStylesMenuFromPath:path];
 
+	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted
+	// by key name.
+	NSArray * sortedMenuItems = [[stylePathMappings allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+	int count = [sortedMenuItems count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index] action:@selector(doSelectStyle:) keyEquivalent:@""];
+		[stylesMenu addItem:menuItem];
+		[menuItem release];
+	}
+	
 	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:@"View"] submenu];
 	[[viewMenu itemWithTitle:@"Style"] setSubmenu:stylesMenu];
 }
@@ -698,7 +819,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 /* initStylesMenuFromPath
  * Initialises the Styles menu with the contents of the specified path.
  */
--(void)initStylesMenu:(NSMenu *)stylesMenu fromPath:(NSString *)path
+-(void)initStylesMenuFromPath:(NSString *)path
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	NSArray * arrayOfStyles = [fileManager directoryContentsAtPath:path];
@@ -712,12 +833,6 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 			BOOL isDirectory;
 			if ([fileManager fileExistsAtPath:[path stringByAppendingPathComponent:styleName] isDirectory:&isDirectory] && isDirectory)
 			{
-				if ([stylePathMappings valueForKey:styleName] == nil)
-				{
-					NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:styleName action:@selector(doSelectStyle:) keyEquivalent:@""];
-					[stylesMenu addItem:menuItem];
-					[menuItem release];
-				}
 				[stylePathMappings setValue:[path stringByAppendingPathComponent:styleName] forKey:styleName];
 			}
 		}
@@ -828,24 +943,6 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	if (currentFolderId != -1)
 		[db flushFolder:currentFolderId];
 	[db close];
-}
-
-/* windowWillClose
- * Handle closure of the main window. If we get applicationShouldTerminateAfterLastWindowClosed working
- * (see below) then we can remove this function.
- */
--(void)windowWillClose:(NSNotification *)notification
-{
-	[NSApp terminate:nil];
-}
-
-/* applicationShouldTerminateAfterLastWindowClosed
- * This is supposed to get called when the last window owned by the application is closed but
- * this isn't happening here. Not sure why but we need to debug this.
- */
--(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
-{
-	return YES;
 }
 
 /* applicationDidFinishLaunching
@@ -1144,7 +1241,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			NSString * n2 = [[item2 messageData] objectForKey:MA_Column_MessageFrom];
 			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
 		}
-			
+
+		case MA_ID_MessageSummary:
 		case MA_ID_MessageTitle: {
 			NSString * n1 = [[item1 messageData] objectForKey:MA_Column_MessageTitle];
 			NSString * n2 = [[item2 messageData] objectForKey:MA_Column_MessageTitle];
@@ -1161,28 +1259,20 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
 	if (rowIndex == currentSelectedRow)
-		[self refreshMessageAtRow:rowIndex];
+		[self refreshMessageAtRow:rowIndex markRead:NO];
 	else
 	{
 		[messageList selectRow:rowIndex byExtendingSelection:NO];
-		[self centerSelectedRow];
-	}
-}
 
-/* centerSelectedRow
- * Center the selected row in the table view.
- */
--(void)centerSelectedRow
-{
-	int rowIndex = [messageList selectedRow];
-	int pageSize = [messageList rowsInRect:[messageList visibleRect]].length;
-	int lastRow = [messageList numberOfRows] - 1;
-	int visibleRow = rowIndex + (pageSize / 2);
-	
-	if (visibleRow > lastRow)
-		visibleRow = lastRow;
-	[messageList scrollRowToVisible:rowIndex];
-	[messageList scrollRowToVisible:visibleRow];
+		int rowIndex = [messageList selectedRow];
+		int pageSize = [messageList rowsInRect:[messageList visibleRect]].length;
+		int lastRow = [messageList numberOfRows] - 1;
+		int visibleRow = rowIndex + (pageSize / 2);
+		
+		if (visibleRow > lastRow)
+			visibleRow = lastRow;
+		[messageList scrollRowToVisible:rowIndex];
+		[messageList scrollRowToVisible:visibleRow];	}
 }
 
 /* didClickTableColumns
@@ -1341,10 +1431,42 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageComments])
 	{
 		if ([theRecord hasComments])
-			return [NSImage imageNamed:@"flagged.tiff"];
+			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
+	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageSummary])
+	{
+		NSMutableAttributedString * theAttributedString = [[NSMutableAttributedString alloc] init];
+		
+		NSAttributedString * topString = [[NSAttributedString alloc] initWithString:[theRecord title] attributes:topLineDict];
+		[theAttributedString appendAttributedString:topString];
+		[topString release];
+
+		// Create the summary line that appears below the title.
+		Folder * folder = [db folderFromID:[theRecord folderId]];
+		NSCalendarDate * anDate = [[theRecord date] dateWithCalendarFormat:nil timeZone:nil];
+		NSMutableString * summaryString = [NSMutableString stringWithFormat:@"\n%@ - %@", [folder name], [anDate friendlyDescription]];
+		if (![[theRecord author] isBlank])
+			[summaryString appendFormat:@" - %@", [theRecord author]];
+
+		NSAttributedString * bottomString = [[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDict];
+		[theAttributedString appendAttributedString:bottomString];
+		[bottomString release];
+		return [theAttributedString autorelease];
+	}
 	return [[theRecord messageData] objectForKey:[aTableColumn identifier]];
+}
+
+/* willDisplayCell [delegate]
+ * Catch the table view before it displays a cell.
+ */
+-(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+{
+	if (![aCell isKindOfClass:[NSImageCell class]])
+	{
+		[aCell setTextColor:[NSColor blackColor]];
+		[aCell setFont:messageListFont];
+	}
 }
 
 /* tableViewSelectionDidChange [delegate]
@@ -1353,7 +1475,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	currentSelectedRow = [messageList selectedRow];
-	[self refreshMessageAtRow:currentSelectedRow];
+	[self refreshMessageAtRow:currentSelectedRow markRead:YES];
 }
 
 /* viewArticlePage
@@ -1364,7 +1486,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if (currentSelectedRow >= 0)
 	{
 		if (isViewingArticlePage)
-			[self refreshMessageAtRow:currentSelectedRow];
+			[self refreshMessageAtRow:currentSelectedRow markRead:NO];
 		else
 		{
 			Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
@@ -1381,7 +1503,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 /* refreshMessageAtRow
  * Refreshes the message at the specified row.
  */
--(void)refreshMessageAtRow:(int)theRow
+-(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag
 {
 	requestedMessage = 0;
 	isViewingArticlePage = NO;
@@ -1394,8 +1516,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		
 		// If we mark read after an interval, start the timer here.
 		[markReadTimer invalidate];
-		if ([NSApp markReadInterval] > 0)
-			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:[NSApp markReadInterval]
+		if ([NSApp markReadInterval] > 0 && markReadFlag)
+			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)[NSApp markReadInterval]
 															  target:self
 															selector:@selector(markCurrentRead:)
 															userInfo:nil
@@ -1499,22 +1621,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			}
 	}
 	return NO;
-}
-
-/* willDisplayCell [delegate]
- * Catch the table view before it displays a cell.
- */
--(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
-{
-	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageId])
-	{
-		[aCell setImage:nil];
-	}
-	if (![aCell isKindOfClass:[NSImageCell class]])
-	{
-		[aCell setTextColor:[NSColor blackColor]];
-		[aCell setFont:messageListFont];
-	}
 }
 
 /* updateMessageText
@@ -1983,12 +2089,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 				[foldersTree selectFolder:nextFolderWithUnread];
 				[mainWindow makeFirstResponder:messageList];
 			}
-			else
-			{
-				if (![self viewNextUnreadInCurrentFolder:-1])
-					[self runOKAlertSheet:NSLocalizedString(@"No more unread messages", nil) 
-									 text:NSLocalizedString(@"No more unread body", nil)];
-			}
 		}
 	}
 }
@@ -2026,16 +2126,20 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* selectFolderAndMessage
+ * Select a folder and select a specified message within the folder.
  */
 -(BOOL)selectFolderAndMessage:(int)folderId messageNumber:(int)messageNumber
 {
+	// If we're in the right folder, easy enough.
 	if (folderId == currentFolderId)
 		return [self scrollToMessage:messageNumber];
 
-	// OK, it gets a little harder here.
+	// Otherwise we force the folder to be selected and seed selectAtEndOfReload
+	// so that after handleFolderSelection has been invoked, it will select the
+	// requisite message on our behalf.
 	selectAtEndOfReload = messageNumber;
 	[foldersTree selectFolder:folderId];
-	return [self scrollToMessage:messageNumber];
+	return YES;
 }
 
 /* refreshFolder
@@ -2140,11 +2244,20 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	while ((folder = [enumerator nextObject]) != nil)
 	{
 		int folderId = [folder itemId];
-		[db markFolderRead:folderId];
-
-		[foldersTree updateFolder:folderId recurseToParents:YES];
-		if (folderId == currentFolderId)
-			[messageList reloadData];
+		if (!IsSmartFolder(folder))
+		{
+			[db markFolderRead:folderId];
+			[foldersTree updateFolder:folderId recurseToParents:YES];
+			if (folderId == currentFolderId)
+				[messageList reloadData];
+		}
+		else
+		{
+			// For smart folders, we only mark all read the current folder to
+			// simplify things.
+			if (folderId == currentFolderId)
+				[self markReadByArray:currentArrayOfMessages readFlag:YES];
+		}
 	}
 
 	// The app icon has a count of unread messages so we need to
@@ -2199,6 +2312,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	int lastFolderId = -1;
 	int folderId;
 
+	[markReadTimer invalidate];
 	[db beginTransaction];
 	while ((theRecord = [enumerator nextObject]) != nil)
 	{
@@ -2398,7 +2512,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if (currentSelectedRow != -1)
 	{
 		Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[theRecord link]]];
+		[self openURLInBrowser:[theRecord link]];
 	}
 }
 
@@ -2411,7 +2525,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	Folder * folder = [db folderFromID:folderId];
 
 	if (folder && ![[folder homePage] isBlank])
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[folder homePage]]];
+		[self openURLInBrowser:[folder homePage]];
 }
 
 /* showViennaHomePage
@@ -2419,7 +2533,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(IBAction)showViennaHomePage:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.opencommunity.co.uk"]];
+	[self openURLInBrowser:@"http://www.opencommunity.co.uk"];
 }
 
 /* showAcknowledgements
@@ -2430,10 +2544,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
 	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements.rtf" ofType:@""];
 	if (pathToAckFile != nil)
-	{
-		NSURL * acknowledgementURL = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]];
-		[[NSWorkspace sharedWorkspace] openURL:acknowledgementURL];
-	}
+		[self openURLInBrowser:[NSString stringWithFormat:@"file://%@", pathToAckFile]];
 }
 
 /* writeRows
@@ -2553,17 +2664,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	SEL	theAction = [menuItem action];
+	BOOL isMainWindowVisible = [mainWindow isVisible];
+	
 	if (theAction == @selector(printDocument:))
 	{
-		return ([messageList selectedRow] >= 0);
+		return ([messageList selectedRow] >= 0 && isMainWindowVisible);
 	}
 	else if (theAction == @selector(backTrackMessage:))
 	{
-		return ![backtrackArray isAtStartOfQueue];
+		return ![backtrackArray isAtStartOfQueue] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(forwardTrackMessage:))
 	{
-		return ![backtrackArray isAtEndOfQueue];
+		return ![backtrackArray isAtEndOfQueue] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newSubscription:))
 	{
@@ -2585,11 +2698,13 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		Field * field = [menuItem representedObject];
 		[menuItem setState:[field visible] ? NSOnState : NSOffState];
+		return isMainWindowVisible && ([NSApp layoutStyle] == MA_Table_Layout);
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{
 		NSString * styleName = [menuItem title];
 		[menuItem setState:[styleName isEqualToString:selectedStyle] ? NSOnState : NSOffState];
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(doSortColumn:))
 	{
@@ -2598,10 +2713,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			[menuItem setState:NSOnState];
 		else
 			[menuItem setState:NSOffState];
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
-		return [foldersTree actualSelection] != -1 && ![db readOnly];
+		return [foldersTree actualSelection] != -1 && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
@@ -2610,20 +2726,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(renameFolder:))
 	{
-		return ![db readOnly];
+		return ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(markAllRead:))
 	{
-		int folderId = [foldersTree actualSelection];
-		return !IsSmartFolder([db folderFromID:folderId]) && ![db readOnly];
+		return ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(importSubscriptions:))
 	{
-		return ![db readOnly];
+		return ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newGroupFolder:))
 	{
-		return ![db readOnly];
+		return ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(cancelAllRefreshes:))
 	{
@@ -2635,38 +2750,60 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		Folder * folder = [db folderFromID:folderId];
 		return ([folder homePage] && ![[folder homePage] isBlank]);
 	}
+	else if (theAction == @selector(exportSubscriptions:))
+	{
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(runPageLayout:))
+	{
+		return isMainWindowVisible;
+	}
 	else if (theAction == @selector(viewArticlePage:))
 	{
 		[menuItem setState:isViewingArticlePage ? NSOnState : NSOffState];
-		return [messageList selectedRow] != -1;
+		return [messageList selectedRow] != -1 && isMainWindowVisible;
 	}
 	else if (theAction == @selector(compactDatabase:))
 	{
-		return totalConnections == 0 && ![db readOnly];
+		return totalConnections == 0 && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(syncSubscriptionsFromBloglines:))
 	{
-		return [NSApp enableBloglinesSupport];
+		return [NSApp enableBloglinesSupport] && ![db readOnly];
+	}
+	else if (theAction == @selector(setTableLayout:))
+	{
+		[menuItem setState:([NSApp layoutStyle] == MA_Table_Layout) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(setCondensedLayout:))
+	{
+		[menuItem setState:([NSApp layoutStyle] == MA_Condensed_Layout) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(editFolder:))
 	{
 		int folderId = [foldersTree actualSelection];
 		Folder * folder = [db folderFromID:folderId];
-		return (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly];
+		return (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return [messageList selectedRow] != -1 && ![db readOnly];
+		return [messageList selectedRow] != -1 && ![db readOnly] && isMainWindowVisible;
+	}
+	else if (theAction == @selector(closeMainWindow:))
+	{
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(readingPaneOnRight:))
 	{
 		[menuItem setState:([NSApp readingPaneOnRight] ? NSOnState : NSOffState)];
-		return YES;
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(readingPaneOnBottom:))
 	{
 		[menuItem setState:([NSApp readingPaneOnRight] ? NSOffState : NSOnState)];
-		return YES;
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))
 	{
@@ -2679,7 +2816,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (rowIndex != -1 && ![db readOnly]);
+		return (rowIndex != -1 && ![db readOnly] && isMainWindowVisible);
 	}
 	else if (theAction == @selector(markRead:))
 	{
@@ -2692,7 +2829,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (rowIndex != -1 && ![db readOnly]);
+		return (rowIndex != -1 && ![db readOnly] && isMainWindowVisible);
 	}
 	return YES;
 }
@@ -2703,6 +2840,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[topLineDict release];
+	[bottomLineDict release];
 	[persistedStatusText release];
 	[connectionsArray release];
 	[refreshArray release];
@@ -2724,6 +2863,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[markReadTimer release];
 	[messageListFont release];
 	[authQueue release];
+	[appDockMenu release];
 	[db release];
 	[super dealloc];
 }

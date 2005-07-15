@@ -20,8 +20,8 @@
 
 #import "FoldersTree.h"
 #import "ImageAndTextCell.h"
-#import "PreferenceNames.h"
 #import "AppController.h"
+#import "Constants.h"
 #import "StringExtensions.h"
 
 // Private functions

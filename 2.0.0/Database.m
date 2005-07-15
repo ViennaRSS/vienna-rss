@@ -20,7 +20,7 @@
 
 #import "Database.h"
 #import "StringExtensions.h"
-#import "PreferenceNames.h"
+#import "Constants.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
@@ -170,6 +170,7 @@ const int MA_Current_DB_Version = 11;
 	[self addField:MA_Column_MessageFrom title:@"Author" type:MA_FieldType_String tag:MA_ID_MessageFrom sqlField:@"sender" visible:YES width:138];
 	[self addField:MA_Column_MessageLink title:@"Link" type:MA_FieldType_String tag:MA_ID_MessageLink sqlField:@"link" visible:NO width:138];
 	[self addField:MA_Column_MessageText title:@"Text" type:MA_FieldType_String tag:MA_ID_MessageText sqlField:@"text" visible:NO width:152];
+	[self addField:MA_Column_MessageSummary title:@"Headlines" type:MA_FieldType_String tag:MA_ID_MessageSummary sqlField:@"" visible:NO width:100];
 	return YES;
 }
 
@@ -1517,7 +1518,7 @@ const int MA_Current_DB_Version = 11;
 		NSString * valueString = nil;
 		
 		if (count++ > 0)
-			[sqlString appendString:@" and "];
+			[sqlString appendString:[criteriaTree flag] == MA_CritFlag_And ? @" and " : @" or "];
 
 		switch ([criteria operator])
 		{

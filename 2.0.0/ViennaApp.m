@@ -22,7 +22,7 @@
 #import "AppController.h"
 #import "Import.h"
 #import "Export.h"
-#import "PreferenceNames.h"
+#import "Constants.h"
 #import "FoldersTree.h"
 #import "KeyChain.h"
 
@@ -39,7 +39,9 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 		isBloglinesEnabled = [defaults boolForKey:MAPref_EnableBloglinesSupport];
 		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
-		markReadInterval = [defaults integerForKey:MAPref_MarkReadInterval];
+		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
+		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
+		layoutStyle = [defaults integerForKey:MAPref_Layout];
 		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
 		bloglinesPassword = [bloglinesEmailAddress ? [KeyChain getPasswordFromKeychain:bloglinesEmailAddress url:MA_Bloglines_URL] : @"" retain];
 	}
@@ -242,7 +244,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  * Return the number of seconds after an unread article is displayed before it is marked as read.
  * A value of zero means that it remains marked unread until the user does 'Display Next Unread'.
  */
--(int)markReadInterval
+-(float)markReadInterval
 {
 	return markReadInterval;
 }
@@ -251,7 +253,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  * Changes the interval after an article is read before it is marked as read then sends a notification
  * that the preferences have changed.
  */
--(void)setMarkReadInterval:(int)newInterval
+-(void)setMarkReadInterval:(float)newInterval
 {
 	[self internalSetMarkReadInterval:newInterval];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
@@ -260,13 +262,43 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 /* internalSetMarkReadInterval
  * Changes the interval after an article is read before it is marked as read.
  */
--(void)internalSetMarkReadInterval:(int)newInterval
+-(void)internalSetMarkReadInterval:(float)newInterval
 {	
 	if (markReadInterval != newInterval)
 	{
 		markReadInterval = newInterval;
-		NSNumber * intValue = [NSNumber numberWithInt:newInterval];
-		[[NSUserDefaults standardUserDefaults] setObject:intValue forKey:MAPref_MarkReadInterval];
+		NSNumber * floatValue = [NSNumber numberWithFloat:newInterval];
+		[[NSUserDefaults standardUserDefaults] setObject:floatValue forKey:MAPref_MarkReadInterval];
+	}
+}
+
+/* openLinksInVienna
+ * Returns whether or not URL links clicked in Vienna should be opened in Vienna's own browser or
+ * in an the default external Browser (Safari or FireFox, etc).
+ */
+-(BOOL)openLinksInVienna
+{
+	return openLinksInVienna;
+}
+
+/* layoutStyle
+ * Returns the current layout style (table or condensed)
+ */
+-(int)layoutStyle
+{
+	return layoutStyle;
+}
+
+/* internalSetLayoutStyle
+ * Sets the current layout style.
+ */
+-(void)internalSetLayoutStyle:(int)newStyle
+{
+	if (newStyle != layoutStyle)
+	{
+		layoutStyle = newStyle;
+		NSNumber * intValue = [NSNumber numberWithInt:newStyle];
+		[[NSUserDefaults standardUserDefaults] setObject:intValue forKey:MAPref_Layout];
 	}
 }
 

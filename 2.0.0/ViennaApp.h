@@ -24,9 +24,11 @@
 @interface ViennaApp : NSApplication {
 	NSString * bloglinesEmailAddress;
 	NSString * bloglinesPassword;
-	int markReadInterval;
+	float markReadInterval;
+	int layoutStyle;
 	BOOL isBloglinesEnabled;
 	BOOL readingPaneOnRight;
+	BOOL openLinksInVienna;
 }
 
 // Refresh commands
@@ -47,9 +49,16 @@
 -(int)unreadCount;
 
 // Mark read scheme
--(int)markReadInterval;
--(void)setMarkReadInterval:(int)newInterval;
--(void)internalSetMarkReadInterval:(int)newInterval;
+-(float)markReadInterval;
+-(void)setMarkReadInterval:(float)newInterval;
+-(void)internalSetMarkReadInterval:(float)newInterval;
+
+// Opening URL links
+-(BOOL)openLinksInVienna;
+
+// Layout style
+-(int)layoutStyle;
+-(void)internalSetLayoutStyle:(int)newStyle;
 
 // Bloglines support
 -(BOOL)enableBloglinesSupport;

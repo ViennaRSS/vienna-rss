@@ -32,6 +32,7 @@ NSString * MA_Column_MessageFlagged = @"headerFlagged";
 NSString * MA_Column_MessageText = @"headerText";
 NSString * MA_Column_MessageFolderId = @"headerFolder";
 NSString * MA_Column_MessageParentId = @"headerParent";
+NSString * MA_Column_MessageSummary = @"headerSummary";
 
 @implementation Message
 
