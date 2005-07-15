@@ -195,7 +195,7 @@
 					<key>AppleEventCode</key>
 					<string>mrIN</string>
 					<key>Type</key>
-					<string>NSNumber&lt;Int&gt;</string>
+					<string>NSNumber&lt;Float&gt;</string>
 				</dict>
 				<key>messageListFont</key>
 				<dict>

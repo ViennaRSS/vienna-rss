@@ -361,6 +361,7 @@
 		{
 			FeedItem * newItem = [[FeedItem alloc] init];
 			int itemCount = [subTree countOfChildren];
+			BOOL hasDetailedContent = NO;
 			int itemIndex;
 			
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
@@ -371,14 +372,23 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[XMLParser processAttributes:[subItemTree valueOfElement]]];
+					[newItem setTitle:[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]]];
 					continue;
 				}
 				
 				// Parse item description
-				if ([itemNodeName isEqualToString:@"description"])
+				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
 					[newItem setDescription:[self encodedValueOfElement:subItemTree]];
+					continue;
+				}
+				
+				// Parse detailed item description. This overrides the existing
+				// description for this item.
+				if ([itemNodeName isEqualToString:@"content:encoded"])
+				{
+					[newItem setDescription:[subItemTree valueOfElement]];
+					hasDetailedContent = YES;
 					continue;
 				}
 				
@@ -448,7 +458,8 @@
 	{
 		XMLParser * subTree = [feedTree treeByIndex:index];
 		NSString * nodeName = [subTree nodeName];
-		
+		NSString * defaultAuthor = @"";
+
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
@@ -470,6 +481,14 @@
 			continue;
 		}			
 		
+		// Parse author at the feed level. This is the default for any entry
+		// that doesn't have an explicit author.
+		if ([nodeName isEqualToString:@"author"])
+		{
+			defaultAuthor = [subTree valueOfElement];
+			continue;
+		}			
+		
 		// Parse the date when this feed was last updated
 		if ([nodeName isEqualToString:@"modified"])
 		{
@@ -483,6 +502,7 @@
 		if ([nodeName isEqualToString:@"entry"])
 		{
 			FeedItem * newItem = [[FeedItem alloc] init];
+			[newItem setAuthor:defaultAuthor];
 			int itemCount = [subTree countOfChildren];
 			int itemIndex;
 			
@@ -494,7 +514,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[XMLParser processAttributes:[subItemTree valueOfElement]]];
+					[newItem setTitle:[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]]];
 					continue;
 				}
 
@@ -698,7 +718,7 @@
 					}
 				}
 			}
-			if (ch == '\n')
+			if (ch == '\n' || ch == '\r')
 			{
 				lengthToLastWord = indexOfChr;
 				break;

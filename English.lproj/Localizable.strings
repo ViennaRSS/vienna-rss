@@ -3,6 +3,9 @@
 "Mark Unread" = "Mark Unread";
 "Mark Flagged" = "Mark Flagged";
 "Mark Unflagged" = "Mark Unflagged";
+"Articles" = "Articles";
+"Loading %@..." = "Loading %@...";
+"Completed" = "Completed";
 "Refresh RSS feeds" = "Refresh subscriptions";
 "Already subscribed title" = "Error";
 "Already subscribed body" = "You are already subscribed to that feed";
@@ -92,8 +95,6 @@
 "Downloading %@" = "Downloading %@";
 "An error occured during download." = "Vienna was unable to determine the cause of the error. Please contact technical support for assistance.";
 "Download Failed" = "Sorry, but a problem occurred while downloading the update";
-"No more unread messages" = "No more unread messages";
-"No more unread body" = "There are no more unread messages in any folder.";
 "Cannot create database folder" = "Sorry, but Vienna was unable to create the database folder";
 "Cannot create database folder text" = "Vienna was trying to create the folder '%@' but an error occurred. Check the permissions on the folders on the path specified.";
 "Unrecognised database format title" = "The database file format has changed";

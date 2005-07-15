@@ -204,11 +204,13 @@
 	if ((self = [super init]) != nil)
 	{
 		criteriaTree = [[NSMutableArray alloc] init];
+		flag = MA_CritFlag_And;
 		NSData * data = [NSData dataWithBytes:[string cString] length:[string length]];
 		XMLParser * xmlTree = [[XMLParser alloc] init];
 		if ([xmlTree setData:data])
 		{
 			XMLParser * criteriaGroup = [xmlTree treeByName:@"criteriagroup"];
+			flag = [[xmlTree valueOfAttribute:@"flag"] isEqualToString:@"And"] ? MA_CritFlag_And : MA_CritFlag_Or;
 			int index = 0;
 
 			if (criteriaGroup != nil)
@@ -231,6 +233,14 @@
 		[xmlTree release];
 	}
 	return self;
+}
+
+/* flag
+ * Return the criteria flag.
+ */
+-(CriteriaFlag)flag
+{
+	return flag;
 }
 
 /* criteriaEnumerator
@@ -257,9 +267,10 @@
  */
 -(NSString *)string
 {
-	NSString * criteriaString = @"<criteriagroup>";
+	NSString * criteriaString = @"<criteriagroup";
 	unsigned int index;
-	
+
+	criteriaString = [criteriaString stringByAppendingString:(flag == MA_CritFlag_And) ? @" flag='And'>" : @" flag='Or'>"];
 	for (index = 0; index < [criteriaTree count]; ++index)
 	{
 		Criteria * criteria = [criteriaTree objectAtIndex:index];

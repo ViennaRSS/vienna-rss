@@ -19,34 +19,9 @@
 //
 
 #import "PreferenceController.h"
-#import "PreferenceNames.h"
 #import "ViennaApp.h"
 #import "AppController.h"
-
-/* Actual definitions of the preference tags. Keep this in
- * sync with the PreferenceNames.h file.
- */
-NSString * MAPref_MessageListFont = @"MessageListFont";
-NSString * MAPref_FolderFont = @"FolderFont";
-NSString * MAPref_CachedFolderID = @"CachedFolderID";
-NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
-NSString * MAPref_SortDirection = @"SortDirection";
-NSString * MAPref_SortColumn = @"SortColumn";
-NSString * MAPref_CheckFrequency = @"CheckFrequencyInSeconds";
-NSString * MAPref_MessageColumns = @"MessageColumns";
-NSString * MAPref_AutoCollapseFolders = @"AutoCollapseFolders";
-NSString * MAPref_CheckForUpdatesOnStartup = @"CheckForUpdatesOnStartup";
-NSString * MAPref_CheckForNewMessagesOnStartup = @"CheckForNewMessagesOnStartup";
-NSString * MAPref_FolderImagesFolder = @"FolderIconsCache";
-NSString * MAPref_StylesFolder = @"StylesFolder";
-NSString * MAPref_RefreshThreads = @"MaxRefreshThreads";
-NSString * MAPref_ActiveStyleName = @"ActiveStyle";
-NSString * MAPref_FolderStates = @"FolderStates";
-NSString * MAPref_BacktrackQueueSize = @"BacktrackQueueSize";
-NSString * MAPref_ReadingPaneOnRight = @"ReadingPaneOnRight";
-NSString * MAPref_EnableBloglinesSupport = @"EnableBloglinesSupport";
-NSString * MAPref_BloglinesEmailAddress = @"BloglinesEmailAddress";
-NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
+#import "Constants.h"
 
 // List of available font sizes. I picked the ones that matched
 // Mail but you easily could add or remove from the list as needed.
@@ -303,7 +278,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
  */
 -(IBAction)changeMarkReadBehaviour:(id)sender
 {
-	int newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
+	float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
 	[NSApp internalSetMarkReadInterval:newReadInterval];
 }
 

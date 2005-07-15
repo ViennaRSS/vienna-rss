@@ -40,9 +40,6 @@
 @class TexturedHeader;
 @class FeedCredentials;
 
-// Mark read interval (seconds)
-#define MA_Default_Read_Interval	1
-
 // How to select a message after reloading a folder
 // (Values must be <= 0 because > 0 is a message number)
 #define MA_Select_None		0
@@ -91,11 +88,14 @@
 	NSFont * messageListFont;
 	NSImage * originalIcon;
 	NSString * sortColumnIdentifier;
+	NSMenu * appDockMenu;
 	int sortDirection;
 	int sortColumnTag;
 	int progressCount;
 	NSArray * allColumns;
 	ExtDateFormatter * extDateFormatter;
+	NSMutableDictionary * topLineDict;
+	NSMutableDictionary * bottomLineDict;
 	NSTimer * checkTimer;
 	NSTimer * markReadTimer;
 	int lastCountOfUnread;
@@ -143,6 +143,8 @@
 -(IBAction)readingPaneOnBottom:(id)sender;
 -(IBAction)closeMainWindow:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
+-(IBAction)setTableLayout:(id)sender;
+-(IBAction)setCondensedLayout:(id)sender;
 
 // Infobar functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
@@ -166,7 +168,7 @@
 -(void)initStylesMenu;
 -(void)startProgressIndicator;
 -(void)stopProgressIndicator;
--(void)initStylesMenu:(NSMenu *)stylesMenu fromPath:(NSString *)path;
+-(void)initStylesMenuFromPath:(NSString *)path;
 -(void)setActiveStyle:(NSString *)newStyleName refresh:(BOOL)refresh;
 -(void)setMainWindowTitle:(int)folderId;
 -(void)doEditFolder:(Folder *)folder;
@@ -182,9 +184,10 @@
 -(void)markFlaggedByArray:(NSArray *)messageArray flagged:(BOOL)flagged;
 -(void)getMessagesOnTimer:(NSTimer *)aTimer;
 -(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
--(void)centerSelectedRow;
 -(void)markCurrentRead:(NSTimer *)aTimer;
--(void)refreshMessageAtRow:(int)theRow;
+-(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag;
+-(void)updateMessageListRowHeight;
+-(void)setOrientation:(BOOL)flag;
 -(Database *)database;
 -(int)currentFolderId;
 -(NSArray *)folders;
@@ -192,6 +195,8 @@
 -(BOOL)isConnecting;
 -(void)handleEndOfRefresh;
 -(void)getCredentialsForFolder;
+-(void)openURLInBrowser:(NSString *)urlString;
+-(void)openURLInBrowserWithURL:(NSURL *)url;
 
 // Rename sheet functions
 -(IBAction)endRenameFolder:(id)sender;

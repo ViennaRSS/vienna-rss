@@ -29,7 +29,10 @@
                 refreshSelectedSubscriptions = id; 
                 renameFolder = id; 
                 searchUsingToolbarTextField = id; 
+                setCondensedLayout = id; 
+                setTableLayout = id; 
                 showAcknowledgements = id; 
+                showMainWindow = id; 
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
                 startConnect = id; 

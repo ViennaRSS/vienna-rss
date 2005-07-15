@@ -8,10 +8,27 @@ Thanks!
 
 2.0.0.2003
 ----------
-- Add an option to mark the current article read after X seconds where X is configurable
-  through the preferences. The default is to mark read only after the user has done
-  View->Next Unread.
+- Add an option to mark the current article read after 1 second. This is now the new default.
 - Fix import/export to convert characters such as <, > and & to and from their entity equivalents
   in URL fields as per XML specification.
 - Add View->Article Page to display the original web page from which the article came. The short
   cut for this is 'P'. The command toggles between the web page and the original article.
+- Support content:encoding in RSS 2.0 feeds and use that to override description where available.
+  (This fixes the parsing of sites such as http://feeds.feedburner.com/MajorNelson).
+- In Atom feeds, where no explicit author is specified for an article, use the feed author if available.
+- Mark All Read now works in smart folders.
+- Add File->Close Window command to close the main Vienna window and Window->Main Window to reopen
+  it again. While the main window is closed, all UI commands are disabled.
+- Add "Refresh All Subscriptions" to the application dock menu. Other things will follow on the
+  dock menu but this was the most common one that people requested.
+- Trim title fields to the first non-blank line. Some feeds had titles with multiple lines and
+  these cause display problems in the UI.
+- When subscribing to a feed, we now check to see if there's an active connection available and if
+  so, we refresh the new feed immediately. If there's no active connection then the refresh is
+  deferred.
+- New layout style when the article pane is to the right of the article list. In this layout, the
+  articles are automatically displayed in summary style with four fixed columns. (Note that you
+  cannot add or remove columns in this layout). When the article pane is at the bottom, the usual
+  table layout appears. For simplicity I haven't exposed any way to change layout independently
+  of the position of the article pane. It'll be interesting to see if anybody really wants the
+  summary view when the article pane is below the article list.
