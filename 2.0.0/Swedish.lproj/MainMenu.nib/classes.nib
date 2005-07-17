@@ -1,0 +1,125 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                backTrackMessage = id; 
+                cancelAllRefreshes = id; 
+                cancelRenameFolder = id; 
+                checkForUpdates = id; 
+                compactDatabase = id; 
+                deleteFolder = id; 
+                deleteMessage = id; 
+                doubleClickRow = id; 
+                editFolder = id; 
+                endRenameFolder = id; 
+                exportSubscriptions = id; 
+                forwardTrackMessage = id; 
+                importSubscriptions = id; 
+                markAllRead = id; 
+                markFlagged = id; 
+                markRead = id; 
+                newGroupFolder = id; 
+                newSmartFolder = id; 
+                newSubscription = id; 
+                printDocument = id; 
+                readingPaneOnBottom = id; 
+                readingPaneOnRight = id; 
+                refreshAllSubscriptions = id; 
+                refreshSelectedSubscriptions = id; 
+                renameFolder = id; 
+                searchUsingToolbarTextField = id; 
+                showAcknowledgements = id; 
+                showPreferencePanel = id; 
+                showViennaHomePage = id; 
+                startConnect = id; 
+                syncSubscriptionsFromBloglines = id; 
+                toggleActivityViewer = id; 
+                viewNextUnread = id; 
+                viewSourceHomePage = id; 
+            }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                compactDatabaseWindow = NSWindow; 
+                exportAll = NSButtonCell; 
+                exportSaveAccessory = NSView; 
+                exportSelected = NSButtonCell; 
+                folderHeader = TexturedHeader; 
+                folderMenu = NSMenu; 
+                foldersTree = FoldersTree; 
+                mainWindow = NSWindow; 
+                messageList = MessageListView; 
+                messageListHeader = TexturedHeader; 
+                outlineView = FolderView; 
+                renameField = NSTextField; 
+                renameWindow = NSWindow; 
+                searchField = NSSearchField; 
+                spinner = NSProgressIndicator; 
+                splitView1 = NSSplitView; 
+                splitView2 = NSSplitView; 
+                statusText = NSTextField; 
+                textView = WebView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = ArticleView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {theDelegate = id; }; 
+            SUPERCLASS = WebView; 
+        }, 
+        {
+            CLASS = CheckForUpdates; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                cancelButton = NSButton; 
+                progressBar = NSProgressIndicator; 
+                updateWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            ACTIONS = {saveAsDraft = id; sendMessage = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = FolderHeaderBar; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                folderDescription = NSTextField; 
+                folderName = NSTextField; 
+                smallFolderName = NSTextField; 
+                unreadCount = NSTextField; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = FolderView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {
+            CLASS = FoldersTree; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                folderMenu = NSMenu; 
+                newSubButton = NSButton; 
+                outlineView = FolderView; 
+                popupMenu = PopupButton; 
+                refreshButton = NSButton; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = MessageInfoBar; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {infoBarText = id; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = MessageListView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
+        {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
+        {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = TexturedHeader; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+    ); 
+    IBVersion = 1; 
+}
