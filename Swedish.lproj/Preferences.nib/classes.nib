@@ -1,0 +1,39 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                changeBloglinesEmailAddress = id; 
+                changeBloglinesPassword = id; 
+                changeCheckForUpdates = id; 
+                changeCheckFrequency = id; 
+                changeCheckOnStartUp = id; 
+                changeEnableBloglines = id; 
+                changeFont = id; 
+                changeMarkReadBehaviour = id; 
+                selectDefaultLinksHandler = id; 
+            }; 
+            CLASS = PreferenceController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                bloglinesEmailAddress = NSTextField; 
+                bloglinesEmailAddressLabel = NSTextField; 
+                bloglinesPassword = NSSecureTextField; 
+                bloglinesPasswordLabel = NSTextField; 
+                checkForUpdates = NSButton; 
+                checkFrequency = NSPopUpButton; 
+                checkOnStartUp = NSButton; 
+                enableBloglines = NSButton; 
+                folderFont = NSPopUpButton; 
+                folderFontSize = NSComboBox; 
+                linksHandler = NSPopUpButton; 
+                markReadAfterDelay = NSButtonCell; 
+                markReadAfterNext = NSButtonCell; 
+                messageListFont = NSPopUpButton; 
+                messageListFontSize = NSComboBox; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
