@@ -560,7 +560,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
  */
 -(void)initSortMenu
 {
-	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:@"View"] submenu];
+	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
 	NSMenu * sortMenu = [[[NSMenu alloc] initWithTitle:@"Sort By"] autorelease];
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
@@ -581,7 +581,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 			[menuItem release];
 		}
 	}
-	[[viewMenu itemWithTitle:@"Sort By"] setSubmenu:sortMenu];
+	[[viewMenu itemWithTitle:NSLocalizedString(@"Sort By", nil)] setSubmenu:sortMenu];
 }
 
 /* initColumnsMenu
@@ -589,7 +589,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
  */
 -(void)initColumnsMenu
 {
-	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:@"View"] submenu];
+	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
 	NSMenu * columnsMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
@@ -607,7 +607,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 			[menuItem release];
 		}
 	}
-	[[viewMenu itemWithTitle:@"Columns"] setSubmenu:columnsMenu];
+	[[viewMenu itemWithTitle:NSLocalizedString(@"Columns", nil)] setSubmenu:columnsMenu];
 }
 
 /* showColumnsForFolder
@@ -897,8 +897,8 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 		[menuItem release];
 	}
 	
-	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:@"View"] submenu];
-	[[viewMenu itemWithTitle:@"Style"] setSubmenu:stylesMenu];
+	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
+	[[viewMenu itemWithTitle:NSLocalizedString(@"Style", nil)] setSubmenu:stylesMenu];
 }
 
 /* loadMapFromPath
@@ -1060,6 +1060,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 -(BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
 	[self showMainWindow:self];
+	return YES;
 }
 
 /* compactDatabase

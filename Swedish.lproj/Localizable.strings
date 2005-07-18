@@ -99,6 +99,10 @@
 "Starting..." = "Startar...";
 "any" = "any";
 "all" = "all";
+"Columns" = "Kolumner";
+"Sort By" = "Sortera";
+"Style" = "Stil";
+"View" = "Vy";
 "Open Scripts Folder" = "Open Scripts Folder";
 "Downloading %@" = "Laddar ner %@";
 "An error occured during download." = "Vienna kan inte avgöra vad som orsakade felet. Var god kontakta teknisk support för vägledning.";

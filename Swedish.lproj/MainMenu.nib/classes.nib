@@ -6,6 +6,7 @@
                 cancelAllRefreshes = id; 
                 cancelRenameFolder = id; 
                 checkForUpdates = id; 
+                closeMainWindow = id; 
                 compactDatabase = id; 
                 deleteFolder = id; 
                 deleteMessage = id; 
@@ -29,11 +30,13 @@
                 renameFolder = id; 
                 searchUsingToolbarTextField = id; 
                 showAcknowledgements = id; 
+                showMainWindow = id; 
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
                 startConnect = id; 
                 syncSubscriptionsFromBloglines = id; 
                 toggleActivityViewer = id; 
+                viewArticlePage = id; 
                 viewNextUnread = id; 
                 viewSourceHomePage = id; 
             }; 
