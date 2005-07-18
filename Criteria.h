@@ -40,20 +40,22 @@ typedef enum {
 } CriteriaOperator;
 
 typedef enum {
-	MA_CritFlag_And = 0,
-	MA_CritFlag_Or
-} CriteriaFlag;
+	MA_CritCondition_All = 0,
+	MA_CritCondition_Any,
+	MA_CritCondition_Invalid
+} CriteriaCondition;
 
 @interface Criteria : NSObject {
 	NSString * field;
 	NSString * value;
 	CriteriaOperator operator;
 }
+
+// Public functions
 -(id)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue;
 +(NSString *)stringFromOperator:(CriteriaOperator)operator;
 +(CriteriaOperator)operatorFromString:(NSString *)string;
 +(NSArray *)arrayOfOperators;
--(NSString *)string;
 -(void)setField:(NSString *)newField;
 -(void)setOperator:(CriteriaOperator)newOperator;
 -(void)setValue:(NSString *)newValue;
@@ -63,12 +65,17 @@ typedef enum {
 @end
 
 @interface CriteriaTree : NSObject {
-	CriteriaFlag flag;
+	CriteriaCondition condition;
 	NSMutableArray * criteriaTree;
 }
+
+// Public functions
 -(id)initWithString:(NSString *)string;
 -(NSEnumerator *)criteriaEnumerator;
 -(void)addCriteria:(Criteria *)newCriteria;
 -(NSString *)string;
--(CriteriaFlag)flag;
+-(CriteriaCondition)condition;
+-(void)setCondition:(CriteriaCondition)newCondition;
++(CriteriaCondition)conditionFromString:(NSString *)string;
++(NSString *)conditionToString:(CriteriaCondition)condition;
 @end

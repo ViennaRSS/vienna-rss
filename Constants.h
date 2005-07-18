@@ -21,6 +21,7 @@
 extern NSString * MA_DefaultDatabaseName;
 extern NSString * MA_FolderImagesFolder;
 extern NSString * MA_StylesFolder;
+extern NSString * MA_ScriptsFolder;
 extern NSString * MA_DefaultStyleName;
 
 extern NSString * MAPref_MessageListFont;
@@ -38,6 +39,7 @@ extern NSString * MAPref_FolderImagesFolder;
 extern NSString * MAPref_RefreshThreads;
 extern NSString * MAPref_ActiveStyleName;
 extern NSString * MAPref_StylesFolder;
+extern NSString * MAPref_ScriptsFolder;
 extern NSString * MAPref_FolderStates;
 extern NSString * MAPref_BacktrackQueueSize;
 extern NSString * MAPref_ReadingPaneOnRight;
@@ -45,6 +47,7 @@ extern NSString * MAPref_EnableBloglinesSupport;
 extern NSString * MAPref_BloglinesEmailAddress;
 extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_OpenLinksInVienna;
+extern NSString * MAPref_ShowScriptsMenu;
 extern NSString * MAPref_Layout;
 
 extern int MA_Default_BackTrackQueueSize;

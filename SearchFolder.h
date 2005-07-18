@@ -32,6 +32,7 @@
 	IBOutlet NSButton * removeCriteriaButton;
 	IBOutlet NSPopUpButton * fieldNamePopup;
 	IBOutlet NSPopUpButton * operatorPopup;
+	IBOutlet NSPopUpButton * criteriaConditionPopup;
 	IBOutlet NSTextField * valueField;
 	IBOutlet NSTextField * dateValueField;
 	IBOutlet NSTextField * numberValueField;

@@ -4,6 +4,7 @@
 "Mark Flagged" = "Mark Flagged";
 "Mark Unflagged" = "Mark Unflagged";
 "Articles" = "Articles";
+"Folders" = "Folders";
 "Loading %@..." = "Loading %@...";
 "Completed" = "Completed";
 "Refresh RSS feeds" = "Refresh subscriptions";
@@ -23,12 +24,16 @@
 "Retrieving articles" = "Retrieving articles";
 "Read" = "Read";
 "Flagged" = "Flagged";
+"Comments" = "Comments";
+"Parent" = "Parent";
 "Number" = "Number";
 "Subject" = "Subject";
 "Folder" = "Folder";
 "Date" = "Date";
 "Author" = "Author";
 "Text" = "Text";
+"Headlines" = "Headlines";
+"Link" = "Link";
 "No" = "No";
 "Yes" = "Yes";
 "Refresh All" = "Refresh All";
@@ -92,6 +97,9 @@
 "Simple download progress" = "%.1f%@ received";
 "Full download progress" = "%.1f%@ received (%d%% complete)";
 "Starting..." = "Starting...";
+"any" = "any";
+"all" = "all";
+"Open Scripts Folder" = "Open Scripts Folder";
 "Downloading %@" = "Downloading %@";
 "An error occured during download." = "Vienna was unable to determine the cause of the error. Please contact technical support for assistance.";
 "Download Failed" = "Sorry, but a problem occurred while downloading the update";
@@ -99,6 +107,10 @@
 "Cannot create database folder text" = "Vienna was trying to create the folder '%@' but an error occurred. Check the permissions on the folders on the path specified.";
 "Unrecognised database format title" = "The database file format has changed";
 "Unrecognised database format text" = "Your existing ~/Library/Application Support/Vienna/messages.db file is not supported by this version of Vienna. Delete or rename the file and restart Vienna.\n";
+"Marked Articles" = "Marked Articles";
+"Unread Articles" = "Unread Articles";
+"Today's Articles" = "Today's Articles";
+"Select..." = "Select...";
 " (%d unread)" = " (%d unread)";
 "is" = "is";
 "is not" = "is not";

@@ -372,7 +372,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]]];
+					[newItem setTitle:[XMLParser processAttributes:[[self encodedValueOfElement:subItemTree] firstNonBlankLine]]];
 					continue;
 				}
 				
@@ -387,7 +387,7 @@
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[newItem setDescription:[self encodedValueOfElement:subItemTree]];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -395,14 +395,14 @@
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"author"])
 				{
-					[newItem setAuthor:[subItemTree valueOfElement]];
+					[newItem setAuthor:[self encodedValueOfElement:subItemTree]];
 					continue;
 				}
 				
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"dc:creator"])
 				{
-					[newItem setAuthor:[subItemTree valueOfElement]];
+					[newItem setAuthor:[self encodedValueOfElement:subItemTree]];
 					continue;
 				}
 				
@@ -656,7 +656,9 @@
  */
 -(NSString *)encodedValueOfElement:(XMLParser *)subTree
 {
-	return [subTree valueOfElement];
+	NSString * value = [subTree valueOfElement];
+	NSData * valueData = [value dataUsingEncoding:encodingScheme];
+	return [NSString stringWithCString:[valueData bytes] length:[valueData length]];
 }
 
 /* ensureTitle

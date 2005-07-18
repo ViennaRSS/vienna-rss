@@ -19,6 +19,7 @@
 //
 
 #import "PreferenceController.h"
+#import "PopUpButtonExtensions.h"
 #import "ViennaApp.h"
 #import "AppController.h"
 #import "Constants.h"
@@ -31,9 +32,11 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 // Private functions
 @interface PreferenceController (Private)
 	-(void)selectUserDefaultFont:(NSString *)preferenceName control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
-	-(void)setDefaultLinksHandler:(NSString *)newHandler creatorCode:(OSType)creatorCode;
+	-(void)setDefaultLinksHandler:(NSURL *)pathToNewHandler;
 	-(void)controlTextDidEndEditing:(NSNotification *)notification;
 	-(void)updateBloglinesUIState;
+	-(void)refreshLinkHandler;
+	-(IBAction)handleLinkSelector:(id)sender;
 @end
 
 @implementation PreferenceController
@@ -44,6 +47,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 -(id)init
 {
 	internetConfigHandler = nil;
+	appToPathMap = [[NSMutableDictionary alloc] init];
 	return [super initWithWindowNibName:@"Preferences"];
 }
 
@@ -96,93 +100,91 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 //	[bloglinesEmailAddress setStringValue:[NSApp bloglinesEmailAddress]];
 //	[bloglinesPassword setStringValue:[NSApp bloglinesPassword]];
 //	[self updateBloglinesUIState];
-
-	// Get some info about us
-	NSBundle * appBundle = [NSBundle mainBundle];
-	NSString * appName = [[NSApp delegate] appName];
-	NSString * fullAppName = @"";
-	OSType appCode = 0L;
-	if (appBundle != nil)
-	{
-		NSDictionary * fileAttributes = [appBundle infoDictionary];
-		NSString * creatorString = [NSString stringWithFormat:@"'%@'", [fileAttributes objectForKey:@"CFBundleSignature"]];
-		appCode = NSHFSTypeCodeFromFileType(creatorString);
-		fullAppName = [NSString stringWithFormat:@"%@ (%@)", appName, [fileAttributes objectForKey:@"CFBundleShortVersionString"]];
-	}
 	
-	// Populate links handler combo
-	if (!internetConfigHandler)
+	[self refreshLinkHandler];
+}
+
+/* refreshLinkHandler
+ * Populate the drop down list of registered handlers for the feed:// URL
+ * using launch services.
+ */
+-(void)refreshLinkHandler
+{
+	NSBundle * appBundle = [NSBundle mainBundle];
+	NSString * ourAppName = [[[appBundle executablePath] lastPathComponent] stringByDeletingPathExtension];
+	BOOL onTheList = NO;
+	NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
+	NSString * registeredAppURL = nil;
+	CFURLRef appURL = nil;
+
+	// Clear all existing items
+	[linksHandler removeAllItems];
+	
+	// Add the current registered link handler to the start of the list as Safari does. If
+	// there's no current registered handler, default to ourself.
+	if (LSGetApplicationForURL((CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
+		registeredAppURL = [(NSURL *)appURL path];
+	else
 	{
-		if (ICStart(&internetConfigHandler, appCode) != noErr)
-			internetConfigHandler = nil;
+		registeredAppURL = [appBundle executablePath];
+		onTheList = YES;
 	}
-	if (internetConfigHandler)
+
+	NSString * regAppName = [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
+	[linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
+	[linksHandler addSeparator];
+
+	// Maintain a table to map from the short name to the file URL for when
+	// the user changes selection and we later need the file URL to register
+	// the new selection.
+	[appToPathMap setValue:registeredAppURL forKey:regAppName];
+
+	if (appURL != nil)
+		CFRelease(appURL);
+
+	// Next, add the list of all registered link handlers under the /Applications folder
+	// except for the registered application.
+	CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((CFURLRef)testURL, kLSRolesAll);
+	if (cfArrayOfApps != nil)
 	{
-		if (ICBegin(internetConfigHandler, icReadWritePerm) == noErr)
+		CFIndex count = CFArrayGetCount(cfArrayOfApps);
+		int index;
+
+		for (index = 0; index < count; ++index)
 		{
-			NSString * defaultHandler = nil;
-			BOOL onTheList = NO;
-			long size;
-			ICAttr attr;
-
-			// Get the default handler for the feed URL. If there's no existing default
-			// handler for some reason, we register ourselves.
-			ICAppSpec spec;
-			if (ICGetPref(internetConfigHandler, kICHelper "feed", &attr, &spec, &size) == noErr)
-				defaultHandler = (NSString *)CFStringCreateWithPascalString(NULL, spec.name, kCFStringEncodingMacRoman);
-			else
+			NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
+			if ([appURL isFileURL] && [[appURL path] hasPrefix:@"/Applications/"])
 			{
-				defaultHandler = appName;
-				[self setDefaultLinksHandler:appName creatorCode:appCode];
-			}
+				NSString * appName = [[[appURL path] lastPathComponent] stringByDeletingPathExtension];
+				if ([appName isEqualToString:ourAppName])
+					onTheList = YES;
+				if (![appName isEqualToString:regAppName])
+					[linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:[appURL path]]];
 
-			// Fill the list with all registered helpers for the feed URL.
-			ICAppSpecList * specList;
-			size = 4096;
-			if ((specList = (ICAppSpecList *)malloc(size)) != nil)
-			{
-				[linksHandler removeAllItems];
-				if (ICGetPref(internetConfigHandler, kICHelperList "feed", &attr, specList, &size) == noErr)
-				{
-					int c;
-					for (c = 0; c < specList->numberOfItems; ++c)
-					{
-						ICAppSpec * spec = &specList->appSpecs[c];
-						NSString * handler = (NSString *)CFStringCreateWithPascalString(NULL, spec->name, kCFStringEncodingMacRoman);
-						NSMenuItem * item;
-
-						if ([appName isEqualToString:handler])
-						{
-							[linksHandler addItemWithTitle:fullAppName];
-							item = (NSMenuItem *)[linksHandler itemWithTitle:fullAppName];
-							[item setTag:appCode];
-							onTheList = YES;
-						}
-						else
-						{
-							[linksHandler addItemWithTitle:handler];
-							item = (NSMenuItem *)[linksHandler itemWithTitle:handler];
-							[item setTag:spec->fCreator];
-						}
-						if ([defaultHandler isEqualToString:handler])
-							[linksHandler selectItem:item];
-					}
-				}
-				free(specList);
+				[appToPathMap setValue:appURL forKey:appName];
 			}
-			
-			// Were we on the list? If not, add ourselves
-			if (!onTheList)
-			{
-				[linksHandler addItemWithTitle:fullAppName];
-				NSMenuItem * item = [linksHandler itemWithTitle:fullAppName];
-				[item setTag:appCode];
-			}
-
-			// Done
-			ICEnd(internetConfigHandler);
 		}
+		CFRelease(cfArrayOfApps);
 	}
+
+	// Were we on the list? If not, add ourselves
+	// complete with our icon.
+	if (!onTheList)
+	{
+		[linksHandler addItemWithTitle:ourAppName image:[[NSWorkspace sharedWorkspace] iconForFile:[appBundle bundlePath]]];
+
+		NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[appBundle bundlePath]];
+		[appToPathMap setValue:fileURL forKey:ourAppName];
+		[fileURL release];
+	}
+
+	// Add a Select command so the user can manually pick a registered
+	// application.
+	[linksHandler addSeparator];
+	[linksHandler addItemWithTarget:NSLocalizedString(@"Select...", nil) target:@selector(handleLinkSelector:)];
+
+	// Select the registered item
+	[linksHandler selectItemAtIndex:0];
 }
 
 /* changeCheckForUpdates
@@ -209,23 +211,83 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	NSMenuItem * selectedItem = [linksHandler selectedItem];
 	if (selectedItem != nil)
 	{
-		NSString * name = [selectedItem title];
-		OSType creator = [selectedItem tag];
-		[self setDefaultLinksHandler:name creatorCode:creator];
+		if ([selectedItem action] == @selector(handleLinkSelector:))
+		{
+			[self performSelector:[selectedItem action]];
+			return;
+		}
 	}
+	[self setDefaultLinksHandler:[appToPathMap valueForKey:[selectedItem title]]];
+	[self refreshLinkHandler];
+}
+
+/* handleLinkSelector
+ * Handle the 'Select...' command on the popup list of registered applications. Display the
+ * file browser in the Applications folder and use that to add a new application to the
+ * list.
+ */
+-(IBAction)handleLinkSelector:(id)sender
+{
+	NSOpenPanel * panel = [NSOpenPanel openPanel];
+	[panel beginSheetForDirectory:@"/Applications/"
+							 file:nil
+							types:[NSArray arrayWithObjects:NSFileTypeForHFSTypeCode('APPL'), nil]
+				   modalForWindow:[self window]
+					modalDelegate:self
+				   didEndSelector:@selector(linkSelectorDidEnd:returnCode:contextInfo:)
+					  contextInfo:nil];
+}
+
+/* linkSelectorDidEnd
+ * Called when the user completes the open panel
+ */
+-(void)linkSelectorDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	[panel orderOut:self];
+	if (returnCode == NSOKButton)
+	{
+		NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[panel filename]];
+		[self setDefaultLinksHandler:fileURL];
+		[fileURL release];
+	}
+	[self refreshLinkHandler];
+	[[self window] makeKeyAndOrderFront:self];
 }
 
 /* setDefaultLinksHandler
- * Set the default handler for cix links via Internet Config.
+ * Set the default handler for feed links via Internet Config.
  */
--(void)setDefaultLinksHandler:(NSString *)newHandler creatorCode:(OSType)creatorCode
+-(void)setDefaultLinksHandler:(NSURL *)fileURLToNewHandler
 {
-	ICAppSpec spec;
-	int attr = 0;
+	// First time registration of IC.
+	if (!internetConfigHandler)
+	{
+		NSBundle * appBundle = [NSBundle mainBundle];
+		NSDictionary * fileAttributes = [appBundle infoDictionary];
+		NSString * creatorString = [NSString stringWithFormat:@"'%@'", [fileAttributes objectForKey:@"CFBundleSignature"]];
+		int appCode = NSHFSTypeCodeFromFileType(creatorString);
 
-	spec.fCreator = creatorCode;
-	CFStringGetPascalString((CFStringRef)newHandler, (StringPtr)&spec.name, sizeof(spec.name), kCFStringEncodingMacRoman);
-	ICSetPref(internetConfigHandler, kICHelper "feed", attr, &spec, sizeof(spec));
+		if (ICStart(&internetConfigHandler, appCode) != noErr)
+			internetConfigHandler = nil;
+	}
+
+	if (internetConfigHandler)
+	{
+		if (ICBegin(internetConfigHandler, icReadWritePerm) == noErr)
+		{
+			LSItemInfoRecord outItemInfo;
+			ICAppSpec spec;
+			int attr = 0;
+			
+			LSCopyItemInfoForURL((CFURLRef)fileURLToNewHandler, kLSRequestTypeCreator, &outItemInfo);
+			spec.fCreator = outItemInfo.creator;
+
+			CFStringGetPascalString((CFStringRef)[fileURLToNewHandler path], (StringPtr)&spec.name, sizeof(spec.name), kCFStringEncodingMacRoman);
+			ICSetPref(internetConfigHandler, kICHelper "feed", attr, &spec, sizeof(spec));
+
+			ICEnd(internetConfigHandler);
+		}
+	}
 }
 
 /* selectUserDefaultFont
@@ -335,6 +397,7 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
  */
 -(void)dealloc
 {
+	[appToPathMap release];
 	if (internetConfigHandler != nil)
 		ICEnd(internetConfigHandler);
 	[[NSNotificationCenter defaultCenter] removeObserver:self];

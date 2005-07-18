@@ -20,6 +20,7 @@
 
 #import "SearchFolder.h"
 #import "StringExtensions.h"
+#import "PopUpButtonExtensions.h"
 
 // Tags for the three fields that define a criteria. We set these here
 // rather than in IB to be consistent.
@@ -97,6 +98,12 @@
 
 		// Load the criteria into the fields.
 		CriteriaTree * criteriaTree = [db searchStringForSearchFolder:folderId];
+
+		// Set the criteria condition
+		// (selectItemWithTag is Mac OSX 10.4 and later so we use our homebrew one in the extensions instead)
+		int indexOfTag = [[criteriaConditionPopup menu] indexOfItemWithTag:[criteriaTree condition]];
+		[criteriaConditionPopup selectItemAtIndex:indexOfTag];
+
 		NSEnumerator * enumerator = [criteriaTree criteriaEnumerator];
 		Criteria * criteria;
 
@@ -176,10 +183,21 @@
 		[fieldNamePopup removeAllItems];
 		while ((field = [enumerator nextObject]) != nil)
 		{
-			[fieldNamePopup addItemWithTitle:[field displayName]];
-			[nameToFieldMap setValue:field forKey:[field displayName]];
+			if ([field tag] != MA_ID_MessageSummary)
+			{
+				[fieldNamePopup addItemWithTitle:[field displayName]];
+				[nameToFieldMap setValue:field forKey:[field displayName]];
+			}
 		}
-		
+
+		// Initialise the condition popup
+		NSString * anyString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_Any], nil);
+		NSString * allString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_All], nil);
+
+		[criteriaConditionPopup removeAllItems];
+		[criteriaConditionPopup addItemWithTag:anyString tag:MA_CritCondition_Any];
+		[criteriaConditionPopup addItemWithTag:allString tag:MA_CritCondition_All];
+			
 		// Initialise the folder control with a list of all folders
 		// in the database.
 		[folderValueField removeAllItems];
@@ -434,6 +452,9 @@
 		[criteriaTree addCriteria:newCriteria];
 		[newCriteria release];
 	}
+	
+	// Set the criteria condition
+	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
 
 	// Get the folder name then either create a new smart folder entry in the database
 	// or update the one we're editing.

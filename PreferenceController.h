@@ -37,6 +37,7 @@
 	IBOutlet NSTextField * bloglinesPasswordLabel;
 	IBOutlet NSTextField * bloglinesEmailAddress;
 	IBOutlet NSSecureTextField * bloglinesPassword;
+	NSMutableDictionary * appToPathMap;
 	ICInstance internetConfigHandler;
 }
 

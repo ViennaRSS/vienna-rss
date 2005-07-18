@@ -6,6 +6,19 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2004
+----------
+- Add Scripts menu that displays all scripts under ~/Library/Scripts/Applications/Vienna. By
+  default this is enabled under Mac OSX 10.3 and disabled under 10.4 since there is a system
+  wide Scripts menu on the status bar that replicates this functionality.
+- Rewrote the code that registers the default RSS reader. It wasn't picking up all possible
+  candidates. Now it shows all candidate applications and also adds a Select... option so the
+  user can manually search for the application.
+- Smart folders now support 'any' in addition to the implied 'all' condition. So you can now
+  create folders which match one or more combination of criteria.
+- Clicking the dock icon now reopens the main window if it was previously closed.
+- Added Swedish localisation (contributed by Christoffer Larsson).
+
 2.0.0.2003
 ----------
 - Add an option to mark the current article read after 1 second. This is now the new default.
