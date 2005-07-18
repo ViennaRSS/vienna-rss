@@ -37,6 +37,8 @@
 #import "TexturedHeader.h"
 #import "FeedCredentials.h"
 #import "ViennaApp.h"
+#import "ActivityLog.h"
+#import "Constants.h"
 #import "WebKit/WebPreferences.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebPolicyDelegate.h"
@@ -45,8 +47,6 @@
 #import "WebKit/WebFrameView.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
-#import "ActivityLog.h"
-#import "Constants.h"
 
 // Non-class function used for sorting
 int messageSortHandler(id item1, id item2, void * context);
@@ -70,9 +70,14 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	NSNumber * boolNo = [NSNumber numberWithBool:NO];
 	NSNumber * boolYes = [NSNumber numberWithBool:YES];
 
+	// Some default options vary if we're running on 10.3
+	NSDictionary * sysDict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
+	BOOL isPanther = [[sysDict valueForKey:@"ProductVersion"] hasPrefix:@"10.3"];
+
 	[defaultValues setObject:MA_DefaultDatabaseName forKey:MAPref_DefaultDatabase];
 	[defaultValues setObject:MA_FolderImagesFolder forKey:MAPref_FolderImagesFolder];
 	[defaultValues setObject:MA_StylesFolder forKey:MAPref_StylesFolder];
+	[defaultValues setObject:MA_ScriptsFolder forKey:MAPref_ScriptsFolder];
 	[defaultValues setObject:msgListFont forKey:MAPref_MessageListFont];
 	[defaultValues setObject:folderFont forKey:MAPref_FolderFont];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatesOnStartup];
@@ -92,6 +97,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
 	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
+	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
 
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
@@ -118,6 +124,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Create a dictionary that will be used to map styles to the
 	// paths where they're located.
 	stylePathMappings = [[NSMutableDictionary alloc] init];
+	scriptPathMappings = [[NSMutableDictionary alloc] init];
 	
 	// Set the delegates and title
 	isViewingArticlePage = NO;
@@ -196,7 +203,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// a time so the queue is required to supply each folder to the authentication
 	// UI in turn.
 	authQueue = [[NSMutableArray alloc] init];
-	
+
 	// Set header text
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
 	[messageListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
@@ -219,6 +226,10 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	originalIcon = [[NSApp applicationIconImage] copy];
 	lastCountOfUnread = 0;
 	[self showUnreadCountOnApplicationIcon];
+
+	// Add Scripts menu if we have any scripts
+	if ([defaults boolForKey:MAPref_ShowScriptsMenu])
+		[self initScriptsMenu];
 
 	// Use Growl if it is installed
 	growlAvailable = NO;
@@ -440,6 +451,19 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 -(IBAction)closeMainWindow:(id)sender
 {
 	[mainWindow orderOut:self];
+}
+
+/* runAppleScript
+ * Run an AppleScript script given a fully qualified path to the script.
+ */
+-(void)runAppleScript:(NSString *)scriptName
+{
+	NSDictionary * errorDictionary;
+
+	NSURL * scriptURL = [NSURL fileURLWithPath:scriptName];
+	NSAppleScript * appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
+	[appleScript executeAndReturnError:&errorDictionary];
+	[appleScript release];
 }
 
 /* growlIsReady
@@ -784,6 +808,67 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[messageList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:sortColumn];
 }
 
+/* initScriptsMenu
+ * Look in the Scripts folder and if there are any scripts, add a Scripts menu and populate
+ * it with the names of the scripts we've found.
+ *
+ * Note that there are two places we look for scripts: inside the app resource for scripts that
+ * are bundled with the application, and in the standard Mac OSX application script folder which
+ * is where the sysem-wide script menu also looks.
+ */
+-(void)initScriptsMenu
+{
+	NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
+    NSMenuItem * scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
+
+	// Set menu image
+	[scriptsMenuItem setImage:[NSImage imageNamed:@"scriptMenu.tiff"]];
+	
+	// Add scripts within the app resource
+	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Scripts"];
+	[self loadMapFromPath:path intoMap:scriptPathMappings foldersOnly:NO];
+
+	// Add scripts that the user created and stored in the scripts folder
+	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+	[self loadMapFromPath:path intoMap:scriptPathMappings foldersOnly:NO];
+
+	// Add the contents of the scriptsPathMappings dictionary keys to the menu sorted
+	// by key name.
+	NSArray * sortedMenuItems = [[scriptPathMappings allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+	int count = [sortedMenuItems count];
+	int index;
+
+	for (index = 0; index < count; ++index)
+	{
+		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index]
+														   action:@selector(doSelectScript:)
+													keyEquivalent:@""];
+		[scriptsMenu addItem:menuItem];
+		[menuItem release];
+	}
+
+	// Insert the Scripts menu to the left of the Help menu only if
+	// we actually have any scripts. The last item in the menu is a command to
+	// open the Vienna scripts folder.
+	if (count > 0)
+	{
+		[scriptsMenu addItem:[NSMenuItem separatorItem]];
+		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil)
+														   action:@selector(doOpenScriptsFolder:)
+													keyEquivalent:@""];
+		[scriptsMenu addItem:menuItem];
+		[menuItem release];
+
+		// The Help menu is always assumed to be the last menu in the list. This is probably
+		// the easiest, localisable, way to look for it.
+		int helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
+		[scriptsMenuItem setSubmenu:scriptsMenu];
+		[[NSApp mainMenu] insertItem:scriptsMenuItem atIndex:helpMenuIndex];
+	}
+	[scriptsMenu release];
+	[scriptsMenuItem release];
+}
+
 /* initStylesMenu
  * Populate the Styles menu with a list of built-in and external styles. (Note that in the event of
  * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
@@ -794,10 +879,10 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	NSMenu * stylesMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
 
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
-	[self initStylesMenuFromPath:path];
+	[self loadMapFromPath:path intoMap:stylePathMappings foldersOnly:YES];
 
 	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
-	[self initStylesMenuFromPath:path];
+	[self loadMapFromPath:path intoMap:stylePathMappings foldersOnly:YES];
 
 	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted
 	// by key name.
@@ -816,24 +901,29 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[[viewMenu itemWithTitle:@"Style"] setSubmenu:stylesMenu];
 }
 
-/* initStylesMenuFromPath
- * Initialises the Styles menu with the contents of the specified path.
+/* loadMapFromPath
+ * Iterates all files and folders in the specified path and adds them to the given mappings
+ * dictionary. If foldersOnly is YES, only folders are added. If foldersOnly is NO then only
+ * files are added.
  */
--(void)initStylesMenuFromPath:(NSString *)path
+-(void)loadMapFromPath:(NSString *)path intoMap:(NSMutableDictionary *)pathMappings foldersOnly:(BOOL)foldersOnly
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
-	NSArray * arrayOfStyles = [fileManager directoryContentsAtPath:path];
-	if (arrayOfStyles != nil)
+	NSArray * arrayOfFiles = [fileManager directoryContentsAtPath:path];
+	if (arrayOfFiles != nil)
 	{
-		NSEnumerator * enumerator = [arrayOfStyles objectEnumerator];
-		NSString * styleName;
+		NSEnumerator * enumerator = [arrayOfFiles objectEnumerator];
+		NSString * fileName;
 
-		while ((styleName = [enumerator nextObject]) != nil)
+		while ((fileName = [enumerator nextObject]) != nil)
 		{
+			NSString * fullPath = [path stringByAppendingPathComponent:fileName];
 			BOOL isDirectory;
-			if ([fileManager fileExistsAtPath:[path stringByAppendingPathComponent:styleName] isDirectory:&isDirectory] && isDirectory)
+
+			if ([fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory] && (isDirectory == foldersOnly))
 			{
-				[stylePathMappings setValue:[path stringByAppendingPathComponent:styleName] forKey:styleName];
+				if (![fileName isEqualToString:@".DS_Store"])
+					[pathMappings setValue:fullPath forKey:[fileName stringByDeletingPathExtension]];
 			}
 		}
 	}
@@ -961,6 +1051,15 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Kick off an initial refresh
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:MAPref_CheckForNewMessagesOnStartup])
 		[self refreshAllSubscriptions:self];
+}
+
+/* applicationShouldHandleReopen
+ * Handle the notification sent when the application is reopened such as when the dock icon
+ * is clicked. If the main window was previously hidden, we show it again here.
+ */
+-(BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
+{
+	[self showMainWindow:self];
 }
 
 /* compactDatabase
@@ -1324,6 +1423,26 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 	NSAssert1(field, @"Somehow got a nil representedObject for Sort sub-menu item '%@'", [menuItem title]);
 	[self sortByIdentifier:[field name]];
+}
+
+/* doOpenScriptsFolder
+ * Open the standard Vienna scripts folder.
+ */
+-(IBAction)doOpenScriptsFolder:(id)sender
+{
+	NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+	[[NSWorkspace sharedWorkspace] openFile:path];
+}
+
+/* doSelectScript
+ * Run a script selected from the Script menu.
+ */
+-(IBAction)doSelectScript:(id)sender
+{
+	NSMenuItem * menuItem = (NSMenuItem *)sender;
+	NSString * scriptPath = [scriptPathMappings valueForKey:[menuItem title]];
+	if (scriptPath != nil)
+		[self runAppleScript:scriptPath];
 }
 
 /* doSelectStyle
@@ -2680,11 +2799,15 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(newSubscription:))
 	{
-		return ![db readOnly];
+		return ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newSmartFolder:))
 	{
-		return ![db readOnly];
+		return ![db readOnly] && isMainWindowVisible;
+	}
+	else if (theAction == @selector(newGroupFolder:))
+	{
+		return ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(viewNextUnread:))
 	{
@@ -2736,10 +2859,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		return ![db readOnly] && isMainWindowVisible;
 	}
-	else if (theAction == @selector(newGroupFolder:))
-	{
-		return ![db readOnly] && isMainWindowVisible;
-	}
 	else if (theAction == @selector(cancelAllRefreshes:))
 	{
 		return totalConnections > 0;
@@ -2748,7 +2867,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		int folderId = [foldersTree actualSelection];
 		Folder * folder = [db folderFromID:folderId];
-		return ([folder homePage] && ![[folder homePage] isBlank]);
+		return ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 	}
 	else if (theAction == @selector(exportSubscriptions:))
 	{
@@ -2845,6 +2964,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[persistedStatusText release];
 	[connectionsArray release];
 	[refreshArray release];
+	[scriptPathMappings release];
 	[stylePathMappings release];
 	[cssStylesheet release];
 	[htmlTemplate release];

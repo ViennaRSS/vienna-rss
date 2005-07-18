@@ -124,17 +124,17 @@ const int MA_Current_DB_Version = 11;
 
 		// Create a criteria to find all marked messages
 		Criteria * markedCriteria = [[Criteria alloc] initWithField:@"Flagged" withOperator:MA_CritOper_Is withValue:@"Yes"];
-		[self createInitialSmartFolder:@"Marked Articles" withCriteria:markedCriteria];
+		[self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
 		[markedCriteria release];
 
 		// Create a criteria to show all unread messages
 		Criteria * unreadCriteria = [[Criteria alloc] initWithField:@"Read" withOperator:MA_CritOper_Is withValue:@"No"];
-		[self createInitialSmartFolder:@"Unread Articles" withCriteria:unreadCriteria];
+		[self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
 		[unreadCriteria release];
 		
 		// Create a criteria to show all messages received today
 		Criteria * todayCriteria = [[Criteria alloc] initWithField:@"Date" withOperator:MA_CritOper_Is withValue:@"today"];
-		[self createInitialSmartFolder:@"Today's Articles" withCriteria:todayCriteria];
+		[self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
 		[todayCriteria release];
 		
 		// Set the initial version
@@ -1518,7 +1518,7 @@ const int MA_Current_DB_Version = 11;
 		NSString * valueString = nil;
 		
 		if (count++ > 0)
-			[sqlString appendString:[criteriaTree flag] == MA_CritFlag_And ? @" and " : @" or "];
+			[sqlString appendString:[criteriaTree condition] == MA_CritCondition_All ? @" and " : @" or "];
 
 		switch ([criteria operator])
 		{

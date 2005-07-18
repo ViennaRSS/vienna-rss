@@ -114,14 +114,6 @@
 		nil];
 }
 
-/* string
- * Returns a string representing the entire criteria.
- */
--(NSString *)string
-{
-	return [NSString stringWithFormat:@"<criteria field='%@'><operator>%d</operator><value>%@</value></criteria>", field, operator, value];
-}
-
 /* setField
  * Sets the field element of a criteria.
  */
@@ -204,14 +196,19 @@
 	if ((self = [super init]) != nil)
 	{
 		criteriaTree = [[NSMutableArray alloc] init];
-		flag = MA_CritFlag_And;
+		condition = MA_CritCondition_All;
 		NSData * data = [NSData dataWithBytes:[string cString] length:[string length]];
 		XMLParser * xmlTree = [[XMLParser alloc] init];
 		if ([xmlTree setData:data])
 		{
 			XMLParser * criteriaGroup = [xmlTree treeByName:@"criteriagroup"];
-			flag = [[xmlTree valueOfAttribute:@"flag"] isEqualToString:@"And"] ? MA_CritFlag_And : MA_CritFlag_Or;
 			int index = 0;
+
+			// For backward compatibility, the absence of the condition attribute
+			// assumes that we're matching ALL conditions.
+			condition = [CriteriaTree conditionFromString:[criteriaGroup valueOfAttribute:@"condition"]];
+			if (condition == MA_CritCondition_Invalid)
+				condition = MA_CritCondition_All;
 
 			if (criteriaGroup != nil)
 				while (index < [criteriaGroup countOfChildren])
@@ -235,12 +232,50 @@
 	return self;
 }
 
-/* flag
- * Return the criteria flag.
+/* conditionFromString
+ * Converts a condition string to its condition value. Returns -1 if the
+ * string is invalid.
+ * Note: Do NOT localise these strings. They're written to the XML file.
  */
--(CriteriaFlag)flag
++(CriteriaCondition)conditionFromString:(NSString *)string
 {
-	return flag;
+	if (string != nil)
+	{
+		if ([[string lowercaseString] isEqualToString:@"any"])
+			return MA_CritCondition_Any;
+		if ([[string lowercaseString] isEqualToString:@"all"])
+			return MA_CritCondition_All;
+	}
+	return MA_CritCondition_Invalid;
+}
+
+/* conditionToString
+ * Returns the string representation of the specified condition.
+ * Note: Do NOT localise these strings. They're written to the XML file.
+ */
++(NSString *)conditionToString:(CriteriaCondition)condition
+{
+	if (condition == MA_CritCondition_Any)
+		return @"any";
+	if (condition == MA_CritCondition_All)
+		return @"all";
+	return @"";
+}
+
+/* condition
+ * Return the criteria condition.
+ */
+-(CriteriaCondition)condition
+{
+	return condition;
+}
+
+/* setCondition
+ * Sets the criteria condition.
+ */
+-(void)setCondition:(CriteriaCondition)newCondition
+{
+	condition = newCondition;
 }
 
 /* criteriaEnumerator
@@ -267,16 +302,23 @@
  */
 -(NSString *)string
 {
-	NSString * criteriaString = @"<criteriagroup";
+	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
+	NSDictionary * conditionDict = [NSDictionary dictionaryWithObject:[CriteriaTree conditionToString:condition] forKey:@"condition"];
+	XMLParser * groupTree = [newTree addTree:@"criteriagroup" withAttributes:conditionDict];
 	unsigned int index;
-
-	criteriaString = [criteriaString stringByAppendingString:(flag == MA_CritFlag_And) ? @" flag='And'>" : @" flag='Or'>"];
+	
 	for (index = 0; index < [criteriaTree count]; ++index)
 	{
 		Criteria * criteria = [criteriaTree objectAtIndex:index];
-		criteriaString = [criteriaString stringByAppendingString:[criteria string]];
+		NSDictionary * criteriaDict = [NSDictionary dictionaryWithObject:[criteria field] forKey:@"field"];
+		XMLParser * oneCriteriaTree = [groupTree addTree:@"criteria" withAttributes:criteriaDict];
+
+		[oneCriteriaTree addTree:@"operator" withElement:[NSString stringWithFormat:@"%d", [criteria operator]]];
+		[oneCriteriaTree addTree:@"value" withElement:[criteria value]];
 	}
-	criteriaString = [criteriaString stringByAppendingString:@"</criteriagroup>"];
+	
+	NSString * criteriaString = [newTree xmlForTree];
+	[newTree release];
 	return criteriaString;
 }
 

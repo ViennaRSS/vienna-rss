@@ -21,6 +21,7 @@
 NSString * MA_DefaultDatabaseName = @"~/Library/Application Support/Vienna/messages.db";
 NSString * MA_FolderImagesFolder = @"~/Library/Application Support/Vienna/Images";
 NSString * MA_StylesFolder = @"~/Library/Application Support/Vienna/Styles";
+NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
 NSString * MA_DefaultStyleName = @"Default";
 
 NSString * MAPref_MessageListFont = @"MessageListFont";
@@ -36,6 +37,7 @@ NSString * MAPref_CheckForUpdatesOnStartup = @"CheckForUpdatesOnStartup";
 NSString * MAPref_CheckForNewMessagesOnStartup = @"CheckForNewMessagesOnStartup";
 NSString * MAPref_FolderImagesFolder = @"FolderIconsCache";
 NSString * MAPref_StylesFolder = @"StylesFolder";
+NSString * MAPref_ScriptsFolder = @"ScriptsFolder";
 NSString * MAPref_RefreshThreads = @"MaxRefreshThreads";
 NSString * MAPref_ActiveStyleName = @"ActiveStyle";
 NSString * MAPref_FolderStates = @"FolderStates";
@@ -45,6 +47,7 @@ NSString * MAPref_EnableBloglinesSupport = @"EnableBloglinesSupport";
 NSString * MAPref_BloglinesEmailAddress = @"BloglinesEmailAddress";
 NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
 NSString * MAPref_OpenLinksInVienna = @"OpenLinksInVienna";
+NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
 NSString * MAPref_Layout = @"Layout";
 
 const int MA_Default_BackTrackQueueSize = 20;

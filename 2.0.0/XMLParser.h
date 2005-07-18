@@ -19,7 +19,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-
 @interface XMLParser : NSObject {
 	CFXMLTreeRef tree;
 	CFXMLNodeRef node;

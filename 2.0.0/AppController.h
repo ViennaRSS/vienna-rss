@@ -82,6 +82,7 @@
 	int currentSelectedRow;
 	NSArray * currentArrayOfMessages;
 	NSMutableDictionary * stylePathMappings;
+	NSMutableDictionary * scriptPathMappings;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
 	BOOL selectAtEndOfReload;
@@ -145,6 +146,8 @@
 -(IBAction)viewArticlePage:(id)sender;
 -(IBAction)setTableLayout:(id)sender;
 -(IBAction)setCondensedLayout:(id)sender;
+-(IBAction)doSelectScript:(id)sender;
+-(IBAction)doOpenScriptsFolder:(id)sender;
 
 // Infobar functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
@@ -166,9 +169,10 @@
 -(void)initSortMenu;
 -(void)initColumnsMenu;
 -(void)initStylesMenu;
+-(void)initScriptsMenu;
 -(void)startProgressIndicator;
 -(void)stopProgressIndicator;
--(void)initStylesMenuFromPath:(NSString *)path;
+-(void)loadMapFromPath:(NSString *)path intoMap:(NSMutableDictionary *)pathMappings foldersOnly:(BOOL)foldersOnly;
 -(void)setActiveStyle:(NSString *)newStyleName refresh:(BOOL)refresh;
 -(void)setMainWindowTitle:(int)folderId;
 -(void)doEditFolder:(Folder *)folder;
@@ -188,6 +192,7 @@
 -(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag;
 -(void)updateMessageListRowHeight;
 -(void)setOrientation:(BOOL)flag;
+-(void)runAppleScript:(NSString *)scriptName;
 -(Database *)database;
 -(int)currentFolderId;
 -(NSArray *)folders;
