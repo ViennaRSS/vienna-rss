@@ -42,7 +42,6 @@
 		AA26F4E10604927300FE7994 /* Database.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F4C90604927300FE7994 /* Database.h */; };
 		AA26F4E20604927300FE7994 /* Folder.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F4CA0604927300FE7994 /* Folder.h */; };
 		AA26F4E30604927300FE7994 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CB0604927300FE7994 /* Folder.m */; };
-		AA26F4E40604927300FE7994 /* ImageAndTextCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F4CC0604927300FE7994 /* ImageAndTextCell.h */; };
 		AA26F4E50604927300FE7994 /* Message.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F4CD0604927300FE7994 /* Message.h */; };
 		AA26F4E60604927300FE7994 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CE0604927300FE7994 /* Message.m */; };
 		AA26F4E70604927300FE7994 /* MessageListView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F4CF0604927300FE7994 /* MessageListView.h */; };
@@ -52,7 +51,6 @@
 		AA26F4EE0604927300FE7994 /* MessageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D60604927300FE7994 /* MessageListView.m */; };
 		AA26F4EF0604927300FE7994 /* BackTrackArray.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F4D70604927300FE7994 /* BackTrackArray.h */; };
 		AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D80604927300FE7994 /* BackTrackArray.m */; };
-		AA26F4F30604927300FE7994 /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4DB0604927300FE7994 /* ImageAndTextCell.m */; };
 		AA26F4F40604927300FE7994 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */; };
 		AA26F56E0604955F00FE7994 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5650604955F00FE7994 /* Localizable.strings */; };
 		AA26F5B80604964000FE7994 /* URLHandlerCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F5B70604964000FE7994 /* URLHandlerCommand.h */; };
@@ -133,6 +131,8 @@
 		AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
 		AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
+		AAD7999F088B617900E2CE5E /* ImageAndTextCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */; };
+		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AADD8963081C1916007C6E88 /* rssFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8962081C1916007C6E88 /* rssFolder.tiff */; };
 		AADD8A0E081C253F007C6E88 /* rssFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8A0D081C253F007C6E88 /* rssFeed.tiff */; };
 		AAE3AF0706570DB700A1FA1F /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
@@ -275,7 +275,6 @@
 		AA26F4C90604927300FE7994 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
 		AA26F4CA0604927300FE7994 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
 		AA26F4CB0604927300FE7994 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
-		AA26F4CC0604927300FE7994 /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
 		AA26F4CD0604927300FE7994 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		AA26F4CE0604927300FE7994 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		AA26F4CF0604927300FE7994 /* MessageListView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MessageListView.h; sourceTree = "<group>"; };
@@ -285,7 +284,6 @@
 		AA26F4D60604927300FE7994 /* MessageListView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MessageListView.m; sourceTree = "<group>"; };
 		AA26F4D70604927300FE7994 /* BackTrackArray.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BackTrackArray.h; sourceTree = "<group>"; };
 		AA26F4D80604927300FE7994 /* BackTrackArray.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BackTrackArray.m; sourceTree = "<group>"; };
-		AA26F4DB0604927300FE7994 /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = URLHandlerCommand.m; sourceTree = "<group>"; };
 		AA26F5660604955F00FE7994 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA26F5B70604964000FE7994 /* URLHandlerCommand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = URLHandlerCommand.h; sourceTree = "<group>"; };
@@ -345,6 +343,7 @@
 		AAA3AF0806338A00006735EB /* SearchFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFolder.m; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
+		AAAAED92088D62E600B48199 /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = searchFolder.tiff; sourceTree = "<group>"; };
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
@@ -379,6 +378,8 @@
 		AAD79648088AF51000E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Swedish; path = Swedish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AAD7964B088AF83300E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Swedish; path = Swedish.lproj/ViennaApp.scriptTerminology; sourceTree = "<group>"; };
 		AAD7964E088AF84300E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Swedish; path = "Swedish.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
+		AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		AADD8962081C1916007C6E88 /* rssFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFolder.tiff; sourceTree = "<group>"; };
 		AADD8A0D081C253F007C6E88 /* rssFeed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeed.tiff; sourceTree = "<group>"; };
 		AAE3AEF506570DB700A1FA1F /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -648,8 +649,8 @@
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
 				AA94574A061C7E060090FE26 /* ExtDateFormatter.h */,
 				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
-				AA26F4CC0604927300FE7994 /* ImageAndTextCell.h */,
-				AA26F4DB0604927300FE7994 /* ImageAndTextCell.m */,
+				AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */,
+				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
@@ -677,7 +678,6 @@
 				AA26F4DF0604927300FE7994 /* FoldersTree.h in Headers */,
 				AA26F4E10604927300FE7994 /* Database.h in Headers */,
 				AA26F4E20604927300FE7994 /* Folder.h in Headers */,
-				AA26F4E40604927300FE7994 /* ImageAndTextCell.h in Headers */,
 				AA26F4E50604927300FE7994 /* Message.h in Headers */,
 				AA26F4E70604927300FE7994 /* MessageListView.h in Headers */,
 				AA26F4EB0604927300FE7994 /* TreeNode.h in Headers */,
@@ -717,6 +717,7 @@
 				AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */,
 				AA6321170885EA81006382D3 /* Constants.h in Headers */,
 				AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */,
+				AAD7999F088B617900E2CE5E /* ImageAndTextCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -874,7 +875,6 @@
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
 				AA26F4EE0604927300FE7994 /* MessageListView.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
-				AA26F4F30604927300FE7994 /* ImageAndTextCell.m in Sources */,
 				AA26F4F40604927300FE7994 /* URLHandlerCommand.m in Sources */,
 				AA26F5E00604969000FE7994 /* PreferenceController.m in Sources */,
 				AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */,
@@ -910,6 +910,7 @@
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AA63227F08861C99006382D3 /* Constants.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
+				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,6 +957,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA26F5EC060496B100FE7994 /* English */,
+				AAAAED92088D62E600B48199 /* Swedish */,
 			);
 			name = Preferences.nib;
 			sourceTree = "<group>";

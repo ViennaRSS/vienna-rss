@@ -656,9 +656,7 @@
  */
 -(NSString *)encodedValueOfElement:(XMLParser *)subTree
 {
-	NSString * value = [subTree valueOfElement];
-	NSData * valueData = [value dataUsingEncoding:encodingScheme];
-	return [NSString stringWithCString:[valueData bytes] length:[valueData length]];
+	return [subTree valueOfElement];
 }
 
 /* ensureTitle
