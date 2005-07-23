@@ -111,14 +111,14 @@
 		{
 			[self initForField:[criteria field] inRow:searchCriteriaView];
 
-			[fieldNamePopup selectItemWithTitle:[criteria field]];
+			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
 			[operatorPopup selectItemWithTitle:NSLocalizedString([Criteria stringFromOperator:[criteria operator]], nil)];
 
 			Field * field = [nameToFieldMap valueForKey:[criteria field]];
 			switch ([field type])
 			{
 				case MA_FieldType_Flag: {
-					[flagValueField selectItemWithTitle:[criteria value]];
+					[flagValueField selectItemWithTitle:NSLocalizedString([criteria value], nil)];
 					break;
 				}
 					
@@ -183,12 +183,17 @@
 		[fieldNamePopup removeAllItems];
 		while ((field = [enumerator nextObject]) != nil)
 		{
-			if ([field tag] != MA_ID_MessageSummary)
+			if ([field tag] != MA_FieldID_Headlines)
 			{
-				[fieldNamePopup addItemWithTitle:[field displayName]];
-				[nameToFieldMap setValue:field forKey:[field displayName]];
+				[fieldNamePopup addItemWithRepresentedObject:[field displayName] object:field];
+				[nameToFieldMap setValue:field forKey:[field name]];
 			}
 		}
+		
+		// Set Yes/No values on flag fields
+		[flagValueField removeAllItems];
+		[flagValueField addItemWithRepresentedObject:NSLocalizedString(@"Yes", nil) object:@"Yes"];
+		[flagValueField addItemWithRepresentedObject:NSLocalizedString(@"No", nil) object:@"No"];
 
 		// Initialise the condition popup
 		NSString * anyString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_Any], nil);
@@ -197,7 +202,7 @@
 		[criteriaConditionPopup removeAllItems];
 		[criteriaConditionPopup addItemWithTag:anyString tag:MA_CritCondition_Any];
 		[criteriaConditionPopup addItemWithTag:allString tag:MA_CritCondition_All];
-			
+
 		// Initialise the folder control with a list of all folders
 		// in the database.
 		[folderValueField removeAllItems];
@@ -293,9 +298,9 @@
  */
 -(void)addDefaultCriteria:(int)index
 {
-	Field * defaultField = [db fieldByIdentifier:MA_Column_MessageUnread];
+	Field * defaultField = [db fieldByName:MA_Field_Read];
 
-	[self initForField:[defaultField displayName] inRow:searchCriteriaView];
+	[self initForField:[defaultField name] inRow:searchCriteriaView];
 	[fieldNamePopup selectItemWithTitle:[defaultField displayName]];
 	[valueField setStringValue:@""];
 	[self addCriteria:index];
@@ -395,7 +400,7 @@
 	while ((operator = va_arg(arguments, int)) != 0)
 	{
 		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
-		[popUpButton addItemWithTitle:operatorString];
+		[popUpButton addItemWithTag:operatorString tag:operator];
 	}
 }
 
@@ -415,16 +420,15 @@
 		NSView * row = [arrayOfViews objectAtIndex:c];
 		NSPopUpButton * theField = [row viewWithTag:MA_SFEdit_FieldTag];
 		NSPopUpButton * theOperator = [row viewWithTag:MA_SFEdit_OperatorTag];
-		
-		NSString * fieldString = [theField titleOfSelectedItem];
-		NSString * operatorString = [theOperator titleOfSelectedItem];
+
+		Field * field = [theField representedObjectForSelection];
+		CriteriaOperator operator = [theOperator tagForSelection];
 		NSString * valueString;
 
-		Field * field = [nameToFieldMap valueForKey:fieldString];
 		if ([field type] == MA_FieldType_Flag)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FlagValueTag];
-			valueString = [theValue titleOfSelectedItem];
+			valueString = [theValue representedObjectForSelection];
 		}
 		else if ([field type] == MA_FieldType_Date)
 		{
@@ -447,8 +451,7 @@
 			valueString = [theValue stringValue];
 		}
 
-		CriteriaOperator operator = [Criteria operatorFromString:operatorString];
-		Criteria * newCriteria = [[Criteria alloc] initWithField:fieldString withOperator:operator withValue:valueString];
+		Criteria * newCriteria = [[Criteria alloc] initWithField:[field name] withOperator:operator withValue:valueString];
 		[criteriaTree addCriteria:newCriteria];
 		[newCriteria release];
 	}

@@ -19,9 +19,8 @@
 //
 
 #import "NewSubscription.h"
-#import "AppController.h"
+#import "Refresh.h"
 #import "StringExtensions.h"
-#import "SystemConfiguration/SCNetworkReachability.h"
 
 // Private functions
 @interface NewSubscription (Private)
@@ -174,21 +173,8 @@
 		return;
 	}
 
-	// Create then select the new folder.
-	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:feedURLString];
-	[[NSApp delegate] selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
-
-	// Can we reach the URL now? If so, do a refresh now.
-	SCNetworkConnectionFlags flags;
-	NSURL * url = [NSURL URLWithString:feedURLString];
-	
-	if (SCNetworkCheckReachabilityByName([[url host] cString], &flags) &&
-		(flags & kSCNetworkFlagsReachable) &&
-		!(flags & kSCNetworkFlagsConnectionRequired))
-	{
-		Folder * folder = [db folderFromID:folderId];
-		[[NSApp delegate] refreshSubscriptions:[NSArray arrayWithObject:folder]];
-	}
+	// Call the controller to create the new subscription.
+	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId];
 	
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];

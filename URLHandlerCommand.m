@@ -25,10 +25,12 @@
 
 /* performDefaultImplementation
  * This is the entry point for all link handlers associated with Vienna. Currently we parse
- * and manage the following formats:
+ * and manage the following format:
  *
- *   cix:<conference/topic>:<messagenumber>
  *   feed://<rss link>
+ *
+ * Where <rss link> may be preceded by a scheme - either http:// or https://. If no scheme
+ * is specified then http:// is implied.
  */
 -(id)performDefaultImplementation
 {

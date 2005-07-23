@@ -40,9 +40,27 @@
 	return self;
 }
 
+/* initWithCoder
+ * Initalises a decoded object
+ */
+-(id)initWithCoder:(NSCoder *)coder
+{
+	if ((self = [super init]) != nil)
+	{
+		[self setDisplayName:[coder decodeObject]];
+		[self setName:[coder decodeObject]];
+		[self setSqlField:[coder decodeObject]];
+		[coder decodeValueOfObjCType:@encode(bool) at:&visible];
+		[coder decodeValueOfObjCType:@encode(int) at:&width];
+		[coder decodeValueOfObjCType:@encode(int) at:&tag];
+		[coder decodeValueOfObjCType:@encode(int) at:&type];
+	}
+	return self;
+}
+
 /* setName
- * Sets the name of the field. The field name is the unique internal string
- * representation of the field.
+ * Sets the name of the field. The field name is the unlocalised display name useful
+ * for writing to data files where sysName isn't appropriate.
  */
 -(void)setName:(NSString *)newName
 {
@@ -173,8 +191,27 @@
 	return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@', tag=%d, width=%d, visible=%d)", name, displayName, sqlField, tag, width, visible];
 }
 
+/* encodeWithCoder
+ * Encodes a single Field object for archiving.
+ */
+-(void)encodeWithCoder:(NSCoder *)coder
+{
+	[coder encodeObject:displayName];
+	[coder encodeObject:name];
+	[coder encodeObject:sqlField];
+	[coder encodeValueOfObjCType:@encode(bool) at:&visible];
+	[coder encodeValueOfObjCType:@encode(int) at:&width];
+	[coder encodeValueOfObjCType:@encode(int) at:&tag];
+	[coder encodeValueOfObjCType:@encode(int) at:&type];
+}
+
+/* dealloc
+ * Release our resources.
+ */
 -(void)dealloc
 {
+	[sqlField release];
+	[displayName release];
 	[name release];
 	[super dealloc];
 }

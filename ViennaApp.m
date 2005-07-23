@@ -22,6 +22,7 @@
 #import "AppController.h"
 #import "Import.h"
 #import "Export.h"
+#import "Refresh.h"
 #import "Constants.h"
 #import "FoldersTree.h"
 #import "KeyChain.h"
@@ -102,6 +103,21 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 	// If no folder is specified, default to exporting everything.
 	NSArray * array = (folder ? [NSArray arrayWithObject:folder] : [self folders]);
 	[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:array];
+	return nil;
+}
+
+/* handleNewSubscription
+ * Create a new subscription in the specified folder. If the specified folder is not
+ * a group folder, the parent of the specified folder is used.
+ */
+-(id)handleNewSubscription:(NSScriptCommand *)cmd
+{
+	NSDictionary * args = [cmd evaluatedArguments];
+	Folder * folder = [args objectForKey:@"Folder"];
+
+	int parentId = folder ? ((IsGroupFolder(folder)) ? [folder itemId] :[folder parentId]) : MA_Root_Folder;
+
+	[[self delegate] createNewSubscription:[args objectForKey:@"URL"] underFolder:parentId];
 	return nil;
 }
 

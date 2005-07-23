@@ -363,6 +363,9 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		if (nextNode == thisNode)
 			return [thisNode nodeId];
 
+		if ([[nextNode folder] childUnreadCount])
+			return [nextNode nodeId];
+		
 		if ([[nextNode folder] unreadCount])
 			return [nextNode nodeId];
 

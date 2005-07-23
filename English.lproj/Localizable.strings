@@ -36,6 +36,7 @@
 "Link" = "Link";
 "No" = "No";
 "Yes" = "Yes";
+"Version %@.%@" = "Version %@.%@";
 "Refresh All" = "Refresh All";
 "Subscribe" = "Subscribe";
 "Smart Folder" = "Smart Folder";

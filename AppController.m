@@ -20,9 +20,11 @@
 
 #import "AppController.h"
 #import "PreferenceController.h"
+#import "AboutController.h"
 #import "FoldersTree.h"
 #import "Import.h"
 #import "Export.h"
+#import "Refresh.h"
 #import "StringExtensions.h"
 #import "CalendarExtensions.h"
 #import "SplitViewExtensions.h"
@@ -33,7 +35,6 @@
 #import "SearchFolder.h"
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
-#import "SingleConnection.h"
 #import "TexturedHeader.h"
 #import "FeedCredentials.h"
 #import "ViennaApp.h"
@@ -47,12 +48,12 @@
 #import "WebKit/WebFrameView.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
+#import "SystemConfiguration/SCNetworkReachability.h"
 
 // Non-class function used for sorting
-int messageSortHandler(id item1, id item2, void * context);
+static int messageSortHandler(id item1, id item2, void * context);
 
 // Static constant strings that are typically never tweaked
-static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 
 @implementation AppController
@@ -84,7 +85,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewMessagesOnStartup];
 	[defaultValues setObject:cachedFolderID forKey:MAPref_CachedFolderID];
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_SortDirection];
-	[defaultValues setObject:MA_Column_MessageId forKey:MAPref_SortColumn];
+	[defaultValues setObject:MA_Field_Number forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
@@ -144,9 +145,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
-	[nc addObserver:self selector:@selector(handleConnectionCompleted:) name:@"MA_Notify_ConnectionCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
-	[nc addObserver:self selector:@selector(handleRequireAuthenticationForFolder:) name:@"MA_Notify_RequireAuthenticationForFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 
 	// Init the progress counter and status bar.
@@ -160,6 +159,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	totalConnections = 0;
 	unreadAtBeginning = 0;
 	refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
+	folderIconRefreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 	connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
 	
 	// Initialize the database
@@ -515,7 +515,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Initialize sort to default to message number
 	[self setSortColumnIdentifier:[defaults stringForKey:MAPref_SortColumn]];
 	sortDirection = [defaults integerForKey:MAPref_SortDirection];
-	sortColumnTag = [[db fieldByIdentifier:sortColumnIdentifier] tag];
+	sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 
 	// Initialize the message columns from saved data
 	NSArray * dataArray = [defaults arrayForKey:MAPref_MessageColumns];
@@ -524,17 +524,17 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	
 	for (index = 0; index < [dataArray count];)
 	{
-		NSString * identifier;
+		NSString * name;
 		int width = 100;
 		BOOL visible = NO;
 
-		identifier = [dataArray objectAtIndex:index++];
+		name = [dataArray objectAtIndex:index++];
 		if (index < [dataArray count])
 			visible = [[dataArray objectAtIndex:index++] intValue] == YES;
 		if (index < [dataArray count])
 			width = [[dataArray objectAtIndex:index++] intValue];
 
-		field = [db fieldByIdentifier:identifier];
+		field = [db fieldByName:name];
 		[field setVisible:visible];
 		[field setWidth:width];
 	}
@@ -543,7 +543,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[self updateVisibleColumns];
 	
 	// Remember the folder column state
-	Field * folderField = [db fieldByIdentifier:MA_Column_MessageFolderId];
+	Field * folderField = [db fieldByName:MA_Field_Folder];
 	previousFolderColumnState = [folderField visible];	
 
 	// Set the target for double-click actions
@@ -570,10 +570,8 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	{
 		// Filter out columns we don't sort on. Later we should have an attribute in the
 		// field object itself based on which columns we can sort on.
-		if ([field tag] != MA_ID_MessageFolderId &&
-			[field tag] != MA_ID_MessageParentId &&
-			[field tag] != MA_ID_MessageSummary &&
-			[field tag] != MA_ID_MessageText)
+		if ([field tag] != MA_FieldID_Parent &&
+			[field tag] != MA_FieldID_Text)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
@@ -599,7 +597,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	{
 		// Filter out columns we don't view in the message list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
-		if ([field tag] != MA_ID_MessageText && [field tag] != MA_ID_MessageParentId && [field tag] != MA_ID_MessageSummary)
+		if ([field tag] != MA_FieldID_Text && [field tag] != MA_FieldID_Parent && [field tag] != MA_FieldID_Headlines)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
@@ -616,7 +614,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 -(void)showColumnsForFolder:(int)folderId
 {
 	Folder * folder = [db folderFromID:folderId];
-	Field * folderField = [db fieldByIdentifier:MA_Column_MessageFolderId];
+	Field * folderField = [db fieldByName:MA_Field_Folder];
 	BOOL showFolderColumn;
 
 	if (folder && (IsSmartFolder(folder) || IsGroupFolder(folder)))
@@ -686,13 +684,13 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 		
 		// Handle condensed layout vs. table layout
 		if ([NSApp layoutStyle] == MA_Table_Layout)
-			showField = [field visible] && [field tag] != MA_ID_MessageSummary;
+			showField = [field visible] && [field tag] != MA_FieldID_Headlines;
 		else
 		{
-			showField = [field tag] == MA_ID_MessageSummary ||
-						[field tag] == MA_ID_MessageUnread ||
-						[field tag] == MA_ID_MessageFlagged ||
-						[field tag] == MA_ID_MessageComments;
+			showField = [field tag] == MA_FieldID_Headlines ||
+						[field tag] == MA_FieldID_Read ||
+						[field tag] == MA_FieldID_Flagged ||
+						[field tag] == MA_FieldID_Comments;
 		}
 
 		// Add to the end only those columns that are visible
@@ -701,7 +699,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 			NSTableColumn * newTableColumn = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			NSTableHeaderCell * headerCell = [newTableColumn headerCell];
 			int tag = [field tag];
-			BOOL isResizable = (tag != MA_ID_MessageUnread && tag != MA_ID_MessageFlagged && tag != MA_ID_MessageComments);
+			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments);
 
 			// Fix for bug where tableviews with alternating background rows lose their "colour".
 			// Only text cells are affected.
@@ -720,14 +718,14 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	}
 
 	// Set the extended date formatter on the Date column
-	NSTableColumn * tableColumn = [messageList tableColumnWithIdentifier:MA_Column_MessageDate];
+	NSTableColumn * tableColumn = [messageList tableColumnWithIdentifier:MA_Field_Date];
 	if (tableColumn != nil)
 		[[tableColumn dataCell] setFormatter:extDateFormatter];
 
 	// Set the images for specific header columns
-	[messageList setHeaderImage:MA_Column_MessageUnread imageName:@"unread_header.tiff"];
-	[messageList setHeaderImage:MA_Column_MessageFlagged imageName:@"flagged_header.tiff"];
-	[messageList setHeaderImage:MA_Column_MessageComments imageName:@"comments_header.tiff"];
+	[messageList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
+	[messageList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
+	[messageList setHeaderImage:MA_Field_Comments imageName:@"comments_header.tiff"];
 	
 	// Initialise the sort direction
 	[self showSortDirection];	
@@ -981,6 +979,16 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	}
 }
 
+/* handleAbout
+ * Display our About Vienna... window.
+ */
+-(IBAction)handleAbout:(id)sender
+{
+	if (!aboutController)
+		aboutController = [[AboutController alloc] init];
+	[aboutController showWindow:self];
+}
+
 /* showPreferencePanel
  * Display the Preference Panel.
  */
@@ -1162,11 +1170,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	if (folder != nil)
 		[foldersTree selectFolder:[folder itemId]];
 	else
-	{
-		if (!rssFeed)
-			rssFeed = [[NewSubscription alloc] initWithDatabase:db];
-		[rssFeed newSubscription:mainWindow underParent:MA_Root_Folder initialURL:linkPath];
-	}
+		[self createNewSubscription:linkPath underFolder:MA_Root_Folder];
 }
 
 /* handleEditFolder
@@ -1296,7 +1300,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 	switch (app->sortColumnTag)
 	{
-		case MA_ID_MessageId: {
+		case MA_FieldID_Number: {
 			int number1 = [item1 number];
 			int number2 = [item2 number];
 			if (number1 < number2)
@@ -1306,46 +1310,46 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			return NSOrderedSame;
 		}
 
-		case MA_ID_MessageFolderId: {
+		case MA_FieldID_Folder: {
 			Folder * folder1 = [app->db folderFromID:[item1 folderId]];
 			Folder * folder2 = [app->db folderFromID:[item2 folderId]];
 			return [[folder1 name] caseInsensitiveCompare:[folder2 name]] * app->sortDirection;
 		}
 			
-		case MA_ID_MessageUnread: {
+		case MA_FieldID_Read: {
 			BOOL n1 = [item1 isRead];
 			BOOL n2 = [item2 isRead];
 			return (n1 < n2) * app->sortDirection;
 		}
 
-		case MA_ID_MessageFlagged: {
+		case MA_FieldID_Flagged: {
 			BOOL n1 = [item1 isFlagged];
 			BOOL n2 = [item2 isFlagged];
 			return (n1 < n2) * app->sortDirection;
 		}
 
-		case MA_ID_MessageComments: {
+		case MA_FieldID_Comments: {
 			BOOL n1 = [item1 hasComments];
 			BOOL n2 = [item2 hasComments];
 			return (n1 < n2) * app->sortDirection;
 		}
 			
-		case MA_ID_MessageDate: {
-			NSDate * n1 = [[item1 messageData] objectForKey:MA_Column_MessageDate];
-			NSDate * n2 = [[item2 messageData] objectForKey:MA_Column_MessageDate];
+		case MA_FieldID_Date: {
+			NSDate * n1 = [[item1 messageData] objectForKey:MA_Field_Date];
+			NSDate * n2 = [[item2 messageData] objectForKey:MA_Field_Date];
 			return [n1 compare:n2] * app->sortDirection;
 		}
 			
-		case MA_ID_MessageFrom: {
-			NSString * n1 = [[item1 messageData] objectForKey:MA_Column_MessageFrom];
-			NSString * n2 = [[item2 messageData] objectForKey:MA_Column_MessageFrom];
+		case MA_FieldID_Author: {
+			NSString * n1 = [[item1 messageData] objectForKey:MA_Field_Author];
+			NSString * n2 = [[item2 messageData] objectForKey:MA_Field_Author];
 			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
 		}
 
-		case MA_ID_MessageSummary:
-		case MA_ID_MessageTitle: {
-			NSString * n1 = [[item1 messageData] objectForKey:MA_Column_MessageTitle];
-			NSString * n2 = [[item2 messageData] objectForKey:MA_Column_MessageTitle];
+		case MA_FieldID_Headlines:
+		case MA_FieldID_Subject: {
+			NSString * n1 = [[item1 messageData] objectForKey:MA_Field_Subject];
+			NSString * n2 = [[item2 messageData] objectForKey:MA_Field_Subject];
 			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
 		}
 	}
@@ -1391,7 +1395,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)tableViewColumnDidResize:(NSNotification *)notification
 {
 	NSTableColumn * tableColumn = [[notification userInfo] objectForKey:@"NSTableColumn"];
-	Field * field = [db fieldByIdentifier:[tableColumn identifier]];
+	Field * field = [db fieldByName:[tableColumn identifier]];
 	int oldWidth = [[[notification userInfo] objectForKey:@"NSOldWidth"] intValue];
 
 	if (oldWidth != [tableColumn width])
@@ -1504,7 +1508,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[messageList setIndicatorImage:nil inTableColumn:[messageList tableColumnWithIdentifier:sortColumnIdentifier]];
 		[self setSortColumnIdentifier:columnName];
 		sortDirection = 1;
-		sortColumnTag = [[db fieldByIdentifier:sortColumnIdentifier] tag];
+		sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 		[[NSUserDefaults standardUserDefaults] setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
 	}
 	[[NSUserDefaults standardUserDefaults] setInteger:sortDirection forKey:MAPref_SortDirection];
@@ -1531,30 +1535,30 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfMessages count]);
 	theRecord = [currentArrayOfMessages objectAtIndex:rowIndex];
-	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageFolderId])
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Folder])
 	{
 		Folder * folder = [db folderFromID:[theRecord folderId]];
 		return [folder name];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageUnread])
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Read])
 	{
 		if (![theRecord isRead])
 			return [NSImage imageNamed:@"unread.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageFlagged])
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Flagged])
 	{
 		if ([theRecord isFlagged])
 			return [NSImage imageNamed:@"flagged.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageComments])
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Comments])
 	{
 		if ([theRecord hasComments])
 			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Column_MessageSummary])
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Headlines])
 	{
 		NSMutableAttributedString * theAttributedString = [[NSMutableAttributedString alloc] init];
 		
@@ -1814,6 +1818,27 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[self refreshAllSubscriptions:self];
 }
 
+/* createNewSubscription
+ * Create a new subscription for the specified URL under the given parent folder.
+ */
+-(void)createNewSubscription:(NSString *)urlString underFolder:(int)parentId
+{
+	// Create then select the new folder.
+	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
+	[[NSApp delegate] selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
+	
+	SCNetworkConnectionFlags flags;
+	NSURL * url = [NSURL URLWithString:urlString];
+	
+	if (SCNetworkCheckReachabilityByName([[url host] cString], &flags) &&
+		(flags & kSCNetworkFlagsReachable) &&
+		!(flags & kSCNetworkFlagsConnectionRequired))
+	{
+		Folder * folder = [db folderFromID:folderId];
+		[[NSApp delegate] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+	}
+}
+
 /* newSubscription
  * Display the pane for a new RSS subscription.
  */
@@ -1842,272 +1867,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if (!groupFolder)
 		groupFolder = [[NewGroupFolder alloc] initWithDatabase:db];
 	[groupFolder newGroupFolder:mainWindow underParent:[foldersTree groupParentSelection]];
-}
-
-/* refreshAllSubscriptions
- * Get new messages from the service.
- */
--(IBAction)refreshAllSubscriptions:(id)sender
-{
-	if (totalConnections == 0)
-		[self refreshSubscriptions:[db arrayOfRSSFolders]];
-}
-
-/* refreshSelectedSubscriptions
- * Refresh one or more subscriptions selected from the folders list. The selection we obtain
- * may include non-RSS folders so these have to be trimmed out first.
- */
--(IBAction)refreshSelectedSubscriptions:(id)sender
-{
-	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
-
-	// For group folders, add all sub-groups to the array. The array we get back
-	// from selectedFolders may include groups but will not include the folders within
-	// those groups if they weren't selected. So we need to grab those folders here.
-	for (index = 0; index < count; ++index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		if (IsGroupFolder(folder))
-			[selectedFolders addObjectsFromArray:[db arrayOfFolders:[folder itemId]]];
-	}
-
-	// Trim the array to remove non-RSS folders that can't be refreshed.
-	for (index = count - 1; index >= 0; --index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		if (!IsRSSFolder(folder))
-			[selectedFolders removeObjectAtIndex:index];
-	}
-	
-	// Hopefully what is left is refreshable.
-	if ([selectedFolders count] > 0)
-		[self refreshSubscriptions:selectedFolders];
-}
-
-/* refreshSubscriptions
- * Add the folders specified in the foldersArray to the refreshArray, removing any
- * duplicates, then call the refreshPumper to kick off a refresh if needed.
- */
--(void)refreshSubscriptions:(NSArray *)foldersArray
-{
-	int count = [foldersArray count];
-	int index;
-	
-	for (index = 0; index < count; ++index)
-	{
-		Folder * folder = [foldersArray objectAtIndex:index];
-		if (![refreshArray containsObject:folder])
-			[refreshArray addObject:folder];
-	}
-
-	if ([refreshArray count] > 0)
-	{
-		unreadAtBeginning = [db countOfUnread];
-		[self startProgressIndicator];
-		[self setStatusMessage:NSLocalizedString(@"Refreshing subscriptions...", nil) persist:YES];
-		[self refreshPumper];
-	}
-}
-
-/* handleConnectionCompleted
- * Called from the connection object when it has completed. The object itself is
- * passed as a parameter so we can remove it from the connections array.
- */
--(void)handleConnectionCompleted:(NSNotification *)nc
-{
-	NSURLConnection * theConnection = [nc object];
-	int index = [connectionsArray indexOfObject:theConnection];
-	if (index != NSNotFound)
-	{
-		[connectionsArray removeObjectAtIndex:index];
-		--totalConnections;
-	}
-	[theConnection release];
-	[self refreshPumper];
-	if (totalConnections == 0)
-		[self handleEndOfRefresh];
-}
-
-/* getCredentialsForFolder
- * Initiate the UI to request the credentials for the specified folder.
- */
--(void)getCredentialsForFolder
-{
-	if (credentialsController == nil)
-		credentialsController = [[FeedCredentials alloc] initWithDatabase:db];
-	
-	// Pull next folder out of the queue. The UI will post a
-	// notification when it is done and we can move on to the
-	// next one.
-	if ([authQueue count] > 0 && ![[credentialsController window] isVisible])
-	{
-		Folder * folder = [authQueue objectAtIndex:0];
-		[credentialsController credentialsForFolder:mainWindow folder:folder];
-	}
-}
-
-/* handleRequireAuthenticationForFolder [delegate]
- * Called when somewhere requires us to provide authentication for the specified
- * folder.
- */
--(void)handleRequireAuthenticationForFolder:(NSNotification *)nc
-{
-	Folder * folder = (Folder *)[nc object];
-	if (![authQueue containsObject:folder])
-		[authQueue addObject:folder];
-	[self getCredentialsForFolder];
-}
-
-/* handleCancelAuthenticationForFolder
- * Called when somewhere cancelled our request to authenticate the specified
- * folder.
- */
--(void)handleCancelAuthenticationForFolder:(NSNotification *)nc
-{
-	Folder * folder = (Folder *)[nc object];
-	[authQueue removeObject:folder];
-
-	// Get the next one in the queue, if any
-	[self getCredentialsForFolder];
-}
-
-/* handleGotAuthenticationForFolder [delegate]
- * Called when somewhere just provided us the needed authentication for the specified
- * folder. Note that we don't know if the authentication is valid yet - just that a
- * user name and password has been provided.
- */
--(void)handleGotAuthenticationForFolder:(NSNotification *)nc
-{
-	Folder * folder = (Folder *)[nc object];
-	[folder clearFlag:MA_FFlag_NeedCredentials];
-	[authQueue removeObject:folder];
-	[self refreshSubscriptions:[NSArray arrayWithObject:folder]];
-
-	// Get the next one in the queue, if any
-	[self getCredentialsForFolder];
-}
-
-/* refreshPumper
- * This is the heart of the refresh code. We manage the refreshArray by creating a
- * connection for each item in the array up to a maximum number of simultaneous
- * connections as defined in the maximumConnections variable.
- */
--(void)refreshPumper
-{
-	while (totalConnections < maximumConnections)
-	{
-		// Exit now if the refresh queue is empty
-		if ([refreshArray count] == 0)
-			return;
-		
-		// If this folder needs credentials, add the folder to the list requiring authentication
-		// and since we can't progress without it, skip this folder on the connection
-		Folder * folder = [refreshArray objectAtIndex:0];
-		if ([folder flags] & MA_FFlag_NeedCredentials)
-		{
-			[authQueue addObject:folder];
-			[refreshArray removeObjectAtIndex:0];
-			[self getCredentialsForFolder];
-			continue;
-		}
-
-		// The activity log name we use depends on whether or not this folder has a real name.
-		NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
-		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
-
-		SingleConnection * handler = [[SingleConnection alloc] initWithDatabase:db folder:folder log:aItem];
-		if (handler != nil)
-		{
-			NSString * urlString = IsBloglinesFolder(folder) ? [NSString stringWithFormat:@"http://rpc.bloglines.com/getitems?s=%d&n=1", [folder bloglinesId]] : [folder feedURL];
-			NSURL * url = [NSURL URLWithString:urlString];
-			NSMutableURLRequest * theRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
-			if (!IsBloglinesFolder(folder))
-			{
-				// If the folder has a valid last modified string, use it to ensure that
-				// we don't re-request needlessly.
-				if (![[folder lastUpdateString] isBlank])
-					[theRequest addValue:[folder lastUpdateString] forHTTPHeaderField:@"If-Modified-Since"];
-				
-				// Accept GZIP
-				[theRequest addValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-			}
-
-			// Seed the activity log for this feed.
-			[aItem clearDetails];
-			[aItem setStatus:NSLocalizedString(@"Retrieving articles", nil)];
-
-			// Additional detail for the log
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
-
-			// Do a pre-flight check
-			if (![NSURLConnection canHandleRequest:theRequest])
-				[aItem setStatus:NSLocalizedString(@"Error", nil)];
-			else
-			{
-				NSURLConnection * theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:handler];
-				if (theConnection == nil)
-					[aItem setStatus:NSLocalizedString(@"Error", nil)];
-				else
-				{
-					[connectionsArray addObject:theConnection];
-					++totalConnections;
-				}
-			}
-			[handler release];
-		}
-		[refreshArray removeObjectAtIndex:0];
-	}
-}
-
-/* cancelAllRefreshes
- * Used to kill all active refresh connections and empty the queue of folders due to
- * be refreshed.
- */
--(IBAction)cancelAllRefreshes:(id)sender
-{
-	[refreshArray removeAllObjects];
-	while (totalConnections > 0)
-	{
-		NSURLConnection * theConnection = [connectionsArray objectAtIndex:0];
-		[theConnection cancel];
-		[theConnection release];
-		[connectionsArray removeObjectAtIndex:0];
-		--totalConnections;
-	}
-	[self handleEndOfRefresh];
-}
-
-/* handleEndOfRefresh
- * Do the things that come at the end of a refresh, whether or not the refresh
- * was successful.
- */
--(void)handleEndOfRefresh
-{	
-	[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
-	[self stopProgressIndicator];
-	[self showUnreadCountOnApplicationIcon];
-	int newUnread = [db countOfUnread] - unreadAtBeginning;
-	if (growlAvailable && newUnread > 0)
-	{
-		NSNumber * defaultValue = [NSNumber numberWithBool:YES];
-		NSNumber * stickyValue = [NSNumber numberWithBool:NO];
-		NSString * msgText = [NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread];
-		
-		NSDictionary *aNuDict = [NSDictionary dictionaryWithObjectsAndKeys:
-			NSLocalizedString(@"Growl notification name", nil), GROWL_NOTIFICATION_NAME,
-			NSLocalizedString(@"Growl notification title", nil), GROWL_NOTIFICATION_TITLE,
-			msgText, GROWL_NOTIFICATION_DESCRIPTION,
-			appName, GROWL_APP_NAME,
-			defaultValue, GROWL_NOTIFICATION_DEFAULT,
-			stickyValue, GROWL_NOTIFICATION_STICKY,
-			nil];
-		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:GROWL_NOTIFICATION 
-																	   object:nil 
-																	 userInfo:aNuDict
-														   deliverImmediately:YES];
-	}
 }
 
 /* deleteMessage
@@ -2609,12 +2368,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		{
 			Message * theRecord = [currentArrayOfMessages objectAtIndex:row];
 			NSString * columnName = [(NSTableColumn *)[columns objectAtIndex:column] identifier];
-			if ([columnName isEqualToString:MA_Column_MessageUnread])
+			if ([columnName isEqualToString:MA_Field_Read])
 			{
 				[self markReadByArray:[NSArray arrayWithObject:theRecord] readFlag:![theRecord isRead]];
 				return;
 			}
-			if ([columnName isEqualToString:MA_Column_MessageFlagged])
+			if ([columnName isEqualToString:MA_Field_Flagged])
 			{
 				[self markFlaggedByArray:[NSArray arrayWithObject:theRecord] flagged:![theRecord isFlagged]];
 				return;
@@ -2965,6 +2724,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[persistedStatusText release];
 	[connectionsArray release];
 	[refreshArray release];
+	[folderIconRefreshArray release];
 	[scriptPathMappings release];
 	[stylePathMappings release];
 	[cssStylesheet release];
@@ -2982,6 +2742,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[backtrackArray release];
 	[checkTimer release];
 	[markReadTimer release];
+	[pumpTimer release];
 	[messageListFont release];
 	[authQueue release];
 	[appDockMenu release];

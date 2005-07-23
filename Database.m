@@ -156,21 +156,20 @@ const int MA_Current_DB_Version = 11;
 
 	// Create fields
 	fieldsByName = [[NSMutableDictionary dictionary] retain];
-	fieldsByTitle = [[NSMutableDictionary dictionary] retain];
 	fieldsOrdered = [[NSMutableArray alloc] init];
 
-	[self addField:MA_Column_MessageUnread title:@"Read" type:MA_FieldType_Flag tag:MA_ID_MessageUnread sqlField:@"read_flag" visible:YES width:17];
-	[self addField:MA_Column_MessageFlagged title:@"Flagged" type:MA_FieldType_Flag tag:MA_ID_MessageFlagged sqlField:@"marked_flag" visible:YES width:15];
-	[self addField:MA_Column_MessageComments title:@"Comments" type:MA_FieldType_Integer tag:MA_ID_MessageComments sqlField:@"comment_flag" visible:YES width:15];
-	[self addField:MA_Column_MessageId title:@"Number" type:MA_FieldType_Integer tag:MA_ID_MessageId sqlField:@"message_id" visible:NO width:72];
-	[self addField:MA_Column_MessageTitle title:@"Subject" type:MA_FieldType_String tag:MA_ID_MessageTitle sqlField:@"title" visible:YES width:472];
-	[self addField:MA_Column_MessageFolderId title:@"Folder" type:MA_FieldType_Folder tag:MA_ID_MessageFolderId sqlField:@"folder_id" visible:NO width:130];
-	[self addField:MA_Column_MessageDate title:@"Date" type:MA_FieldType_Date tag:MA_ID_MessageDate sqlField:@"date" visible:YES width:152];
-	[self addField:MA_Column_MessageParentId title:@"Parent" type:MA_FieldType_Integer tag:MA_ID_MessageParentId sqlField:@"parent_id" visible:NO width:72];
-	[self addField:MA_Column_MessageFrom title:@"Author" type:MA_FieldType_String tag:MA_ID_MessageFrom sqlField:@"sender" visible:YES width:138];
-	[self addField:MA_Column_MessageLink title:@"Link" type:MA_FieldType_String tag:MA_ID_MessageLink sqlField:@"link" visible:NO width:138];
-	[self addField:MA_Column_MessageText title:@"Text" type:MA_FieldType_String tag:MA_ID_MessageText sqlField:@"text" visible:NO width:152];
-	[self addField:MA_Column_MessageSummary title:@"Headlines" type:MA_FieldType_String tag:MA_ID_MessageSummary sqlField:@"" visible:NO width:100];
+	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
+	[self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:15];
+	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:YES width:15];
+	[self addField:MA_Field_Number type:MA_FieldType_Integer tag:MA_FieldID_Number sqlField:@"message_id" visible:NO width:72];
+	[self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
+	[self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
+	[self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
+	[self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
+	[self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
+	[self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
+	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
+	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
 	return YES;
 }
 
@@ -250,13 +249,13 @@ const int MA_Current_DB_Version = 11;
 /* addField
  * Add the specified field to our fields array.
  */
--(void)addField:(NSString *)name title:(NSString *)title type:(int)type tag:(int)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(int)width
+-(void)addField:(NSString *)name type:(int)type tag:(int)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(int)width
 {
 	Field * field = [[Field alloc] init];
 	if (field != nil)
 	{
 		[field setName:name];
-		[field setDisplayName:NSLocalizedString(title, nil)];
+		[field setDisplayName:NSLocalizedString(name, nil)];
 		[field setType:type];
 		[field setTag:tag];
 		[field setVisible:visible];
@@ -264,7 +263,6 @@ const int MA_Current_DB_Version = 11;
 		[field setSqlField:sqlField];
 		[fieldsOrdered addObject:field];
 		[fieldsByName setValue:field forKey:name];
-		[fieldsByTitle setValue:field forKey:title];
 		[field release];
 	}
 }
@@ -277,22 +275,13 @@ const int MA_Current_DB_Version = 11;
 	return fieldsOrdered;
 }
 
-/* fieldByIdentifier
- * Given an identifier, this function returns the field represented by
- * that identifier.
- */
--(Field *)fieldByIdentifier:(NSString *)identifier
-{
-	return [fieldsByName valueForKey:identifier];
-}
-
 /* fieldByTitle
- * Given an title, this function returns the field represented by
- * that title.
+ * Given a name, this function returns the field represented by
+ * that name.
  */
--(Field *)fieldByTitle:(NSString *)title
+-(Field *)fieldByName:(NSString *)name
 {
-	return [fieldsByTitle valueForKey:title];
+	return [fieldsByName valueForKey:name];
 }
 
 /* databaseVersion
@@ -841,11 +830,11 @@ const int MA_Current_DB_Version = 11;
 		[self initMessageArray:folder];
 
 		// Extract the message data from the dictionary.
-		NSString * messageText = [[message messageData] objectForKey:MA_Column_MessageText];
-		NSString * messageTitle = [[message messageData] objectForKey:MA_Column_MessageTitle]; 
-		NSDate * messageDate = [[message messageData] objectForKey:MA_Column_MessageDate];
-		NSString * messageLink = [[message messageData] objectForKey:MA_Column_MessageLink];
-		NSString * userName = [[message messageData] objectForKey:MA_Column_MessageFrom];
+		NSString * messageText = [[message messageData] objectForKey:MA_Field_Text];
+		NSString * messageTitle = [[message messageData] objectForKey:MA_Field_Subject]; 
+		NSDate * messageDate = [[message messageData] objectForKey:MA_Field_Date];
+		NSString * messageLink = [[message messageData] objectForKey:MA_Field_Link];
+		NSString * userName = [[message messageData] objectForKey:MA_Field_Author];
 		int messageNumber = [message number];
 		int parentId = [message parentId];
 		BOOL marked_flag = [message isFlagged];
@@ -1457,7 +1446,7 @@ const int MA_Current_DB_Version = 11;
  */
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(int)scopeFlags
 {
-	Field * field = [self fieldByIdentifier:MA_Column_MessageFolderId];
+	Field * field = [self fieldByName:MA_Field_Folder];
 	NSString * operatorString = (scopeFlags & MA_Scope_Inclusive) ? @"=" : @"<>";
 	BOOL subScope = (scopeFlags & MA_Scope_SubFolders);
 	int folderId;
@@ -1511,7 +1500,7 @@ const int MA_Current_DB_Version = 11;
 
 	while ((criteria = [enumerator nextObject]) != nil)
 	{
-		Field * field = [self fieldByTitle:[criteria field]];
+		Field * field = [self fieldByName:[criteria field]];
 		NSAssert1(field != nil, @"Criteria field %@ does not have an associated database field", [criteria field]);
 
 		NSString * operatorString = nil;
@@ -1624,7 +1613,7 @@ const int MA_Current_DB_Version = 11;
 	}
 	
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
-	Criteria * clause = [[Criteria alloc] initWithField:@"Folder" withOperator:MA_CritOper_Under withValue:[folder name]];
+	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder withOperator:MA_CritOper_Under withValue:[folder name]];
 	[tree addCriteria:clause];
 	[clause release];
 	return [tree autorelease];
@@ -1858,7 +1847,6 @@ const int MA_Current_DB_Version = 11;
 	[foldersArray removeAllObjects];
 	[smartFoldersArray removeAllObjects];
 	[fieldsOrdered release];
-	[fieldsByTitle release];
 	[fieldsByName release];
 	[sqlDatabase close];
 	initializedFoldersArray = NO;

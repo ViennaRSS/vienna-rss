@@ -21,18 +21,18 @@
 #import "Message.h"
 
 // The names here must correspond to the messageList identifiers
-NSString * MA_Column_MessageId = @"headerNumber";
-NSString * MA_Column_MessageTitle = @"headerTitle";
-NSString * MA_Column_MessageFrom = @"headerFrom";
-NSString * MA_Column_MessageLink = @"headerLink";
-NSString * MA_Column_MessageDate = @"headerDate";
-NSString * MA_Column_MessageComments = @"headerComments";
-NSString * MA_Column_MessageUnread = @"headerUnread";
-NSString * MA_Column_MessageFlagged = @"headerFlagged";
-NSString * MA_Column_MessageText = @"headerText";
-NSString * MA_Column_MessageFolderId = @"headerFolder";
-NSString * MA_Column_MessageParentId = @"headerParent";
-NSString * MA_Column_MessageSummary = @"headerSummary";
+NSString * MA_Field_Number = @"Number";
+NSString * MA_Field_Subject = @"Subject";
+NSString * MA_Field_Author = @"Author";
+NSString * MA_Field_Link = @"Link";
+NSString * MA_Field_Date = @"Date";
+NSString * MA_Field_Comments = @"Comments";
+NSString * MA_Field_Read = @"Read";
+NSString * MA_Field_Flagged = @"Flagged";
+NSString * MA_Field_Text = @"Text";
+NSString * MA_Field_Folder = @"Folder";
+NSString * MA_Field_Parent = @"Parent";
+NSString * MA_Field_Headlines = @"Headlines";
 
 @implementation Message
 
@@ -58,35 +58,35 @@ NSString * MA_Column_MessageSummary = @"headerSummary";
  */
 -(void)setTitle:(NSString *)newMessageTitle
 {
-	[messageData setObject:newMessageTitle forKey:MA_Column_MessageTitle];
+	[messageData setObject:newMessageTitle forKey:MA_Field_Subject];
 }
 
 /* setAuthor
  */
 -(void)setAuthor:(NSString *)newAuthor
 {
-	[messageData setObject:newAuthor forKey:MA_Column_MessageFrom];
+	[messageData setObject:newAuthor forKey:MA_Field_Author];
 }
 
 /* setLink
  */
 -(void)setLink:(NSString *)newLink
 {
-	[messageData setObject:newLink forKey:MA_Column_MessageLink];
+	[messageData setObject:newLink forKey:MA_Field_Link];
 }
 
 /* setDate
  */
 -(void)setDate:(NSDate *)newMessageDate
 {
-	[messageData setObject:newMessageDate forKey:MA_Column_MessageDate];
+	[messageData setObject:newMessageDate forKey:MA_Field_Date];
 }
 
 /* setText
  */
 -(void)setText:(NSString *)newText
 {
-	[messageData setObject:newText forKey:MA_Column_MessageText];
+	[messageData setObject:newText forKey:MA_Field_Text];
 }
 
 /* markRead
@@ -110,34 +110,34 @@ NSString * MA_Column_MessageSummary = @"headerSummary";
 -(BOOL)isFlagged				{ return markedFlag; }
 -(BOOL)hasComments				{ return [commentsArray count] > 0; }
 -(int)status					{ return messageStatus; }
--(int)folderId					{ return [[messageData objectForKey:MA_Column_MessageFolderId] intValue]; }
--(NSString *)author				{ return [messageData objectForKey:MA_Column_MessageFrom]; }
--(NSString *)link				{ return [messageData objectForKey:MA_Column_MessageLink]; }
--(int)number					{ return [[messageData objectForKey:MA_Column_MessageId] intValue]; }
--(int)parentId					{ return [[messageData objectForKey:MA_Column_MessageParentId] intValue]; }
--(NSString *)title				{ return [messageData objectForKey:MA_Column_MessageTitle]; }
--(NSString *)text				{ return [messageData objectForKey:MA_Column_MessageText]; }
--(NSDate *)date					{ return [messageData objectForKey:MA_Column_MessageDate]; }
+-(int)folderId					{ return [[messageData objectForKey:MA_Field_Folder] intValue]; }
+-(NSString *)author				{ return [messageData objectForKey:MA_Field_Author]; }
+-(NSString *)link				{ return [messageData objectForKey:MA_Field_Link]; }
+-(int)number					{ return [[messageData objectForKey:MA_Field_Number] intValue]; }
+-(int)parentId					{ return [[messageData objectForKey:MA_Field_Parent] intValue]; }
+-(NSString *)title				{ return [messageData objectForKey:MA_Field_Subject]; }
+-(NSString *)text				{ return [messageData objectForKey:MA_Field_Text]; }
+-(NSDate *)date					{ return [messageData objectForKey:MA_Field_Date]; }
 
 /* setFolderId
  */
 -(void)setFolderId:(int)newFolderId
 {
-	[messageData setObject:[NSNumber numberWithInt:newFolderId] forKey:MA_Column_MessageFolderId];
+	[messageData setObject:[NSNumber numberWithInt:newFolderId] forKey:MA_Field_Folder];
 }
 
 /* setNumber
  */
 -(void)setNumber:(int)newMessageId
 {
-	[messageData setObject:[NSNumber numberWithInt:newMessageId] forKey:MA_Column_MessageId];
+	[messageData setObject:[NSNumber numberWithInt:newMessageId] forKey:MA_Field_Number];
 }
 
 /* setParentId
  */
 -(void)setParentId:(int)newParentId
 {
-	[messageData setObject:[NSNumber numberWithInt:newParentId] forKey:MA_Column_MessageParentId];
+	[messageData setObject:[NSNumber numberWithInt:newParentId] forKey:MA_Field_Parent];
 }
 
 /* setStatus
