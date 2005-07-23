@@ -67,6 +67,8 @@
 							 username:[NSApp bloglinesEmailAddress]
 							 password:[NSApp bloglinesPassword]
 							 delegate:self
+						  contextData:nil
+								  log:nil
 					   didEndSelector:@selector(bloglinesImportHandler:)];
 }
 
@@ -156,10 +158,7 @@
 	[self setStatusMessage:nil persist:YES];
 	[self stopProgressIndicator];
 
-	if ([connector didError])
-	{
-	}
-	else
+	if ([connector status] == MA_Connect_Succeeded)
 	{
 		NSData * xmlData = [connector receivedData];
 		if (xmlData != nil)

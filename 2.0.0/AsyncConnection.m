@@ -21,6 +21,11 @@
 #import "AsyncConnection.h"
 #import "StringExtensions.h"
 
+// Private functions
+@interface AsyncConnection (Private)
+	-(void)sendConnectionCompleteNotification;
+@end
+
 @implementation AsyncConnection
 
 /* init
@@ -35,7 +40,10 @@
 		password = nil;
 		handler = nil;
 		delegate = nil;
-		didError = NO;
+		aItem = nil;
+		contextData = nil;
+		httpHeaders = nil;
+		status = MA_Connect_Succeeded;
 	}
 	return self;
 }
@@ -48,12 +56,48 @@
 	return receivedData;
 }
 
-/* didError
- * Returns whether or not the last connection succeeded.
+/* responseHeaders
+ * Return the dictionary of the responses from the request. This will be nil if no
+ * request has been initiated or any response was obtained.
  */
--(BOOL)didError
+-(NSDictionary *)responseHeaders
 {
-	return didError;
+	return responseHeaders;
+}
+
+/* aItem
+ * Return the activity log associated with this connection.
+ */
+-(ActivityItem *)aItem
+{
+	return aItem;
+}
+
+/* contextData
+ * Returns the context data object that was originally passed when the connection
+ * was created.
+ */
+-(id)contextData
+{
+	return contextData;
+}
+
+/* status
+ * Return the status of the last connection.
+ */
+-(ConnectStatus)status
+{
+	return status;
+}
+
+/* setHttpHeaders
+ * Set the HTTP header fields to be passed to the connection.
+ */
+-(void)setHttpHeaders:(NSDictionary *)headerFields
+{
+	[headerFields retain];
+	[httpHeaders release];
+	httpHeaders = headerFields;
 }
 
 /* beginLoadDataFromURL
@@ -61,16 +105,58 @@
  * the connection, whether or not the connection succeeded, the callback is invoked. The user will need to query the object
  * passed to determine whether it succeeded and to get at the raw data.
  */
--(BOOL)beginLoadDataFromURL:(NSURL *)theUrl username:(NSString *)theUsername password:(NSString *)thePassword delegate:(id)theDelegate didEndSelector:(SEL)endSelector
+-(BOOL)beginLoadDataFromURL:(NSURL *)theUrl
+				   username:(NSString *)theUsername
+				   password:(NSString *)thePassword
+				   delegate:(id)theDelegate
+				contextData:(id)theData
+						log:(ActivityItem *)theItem
+			 didEndSelector:(SEL)endSelector
 {
 	[username release];
 	[password release];
-	username = theUsername;
-	password = thePassword;
+	[contextData release];
+	[aItem release];
+
+	username = [theUsername retain];
+	password = [thePassword retain];
+	contextData = [theData retain];
+	aItem = [theItem retain];
+
 	delegate = theDelegate;
 	handler = endSelector;
-	NSURLRequest * theRequest = [NSMutableURLRequest requestWithURL:theUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
-	return [NSURLConnection connectionWithRequest:theRequest delegate:self] != nil;
+	
+	NSMutableURLRequest * theRequest = [NSMutableURLRequest requestWithURL:theUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
+	if (theRequest != nil)
+	{
+		if (httpHeaders != nil)
+		{
+			NSEnumerator * enumerator = [[httpHeaders allKeys] objectEnumerator];
+			NSString * httpFieldName;
+			
+			while ((httpFieldName = [enumerator nextObject]) != nil)
+				[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
+		}
+	}
+	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
+	return connector != nil;
+}
+
+/* cancel
+ * Cancel the existing connection.
+ */
+-(void)cancel
+{
+	[connector cancel];
+}
+
+/* sendConnectionCompleteNotification
+ * Sends a connection completion notification to the main code.
+ */
+-(void)sendConnectionCompleteNotification
+{
+	NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+	[runLoop performSelector:handler target:delegate argument:self order:0 modes:[NSArray arrayWithObjects:NSDefaultRunLoopMode, nil]];
 }
 
 /* didReceiveResponse
@@ -81,6 +167,56 @@
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
 	[receivedData setLength:0];
+	if ([response isKindOfClass:[NSHTTPURLResponse class]])
+	{
+		NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
+		[responseHeaders release];
+		responseHeaders = [[httpResponse allHeaderFields] retain];
+		
+		// Report HTTP code to the log
+		if (aItem != nil)
+		{
+			NSEnumerator * enumerator = [responseHeaders keyEnumerator];
+			NSMutableString * headerDetail = [[NSMutableString alloc] init];
+			NSString * headerField;
+
+			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [httpResponse statusCode]];
+			[aItem appendDetail:logText];
+			
+			// Add the HTTP headers details to the log for this connection for
+			// debugging purposes.
+			[headerDetail setString:NSLocalizedString(@"Headers:\n", nil)];
+			while ((headerField = [enumerator nextObject]) != nil)
+				[headerDetail appendFormat:@"\t%@: %@\n", headerField, [[httpResponse allHeaderFields] valueForKey:headerField]];
+			
+			[aItem appendDetail:headerDetail];
+			[headerDetail release];
+		}
+		
+		// Get the HTTP response code and handle appropriately. Code 200 means OK, more
+		// data to come. Code 304 means the feed hasn't changed since the last refresh.
+		if ([httpResponse statusCode] == 200)
+		{
+			// Is this GZIP encoded?
+			// If so, report it to the detail log.
+			NSString * contentEncoding = [responseHeaders valueForKey:@"Content-Encoding"];
+			if ([[contentEncoding lowercaseString] isEqualToString:@"gzip"])
+				[aItem appendDetail:NSLocalizedString(@"Article feed will be compressed", nil)];
+		}
+		else if ([httpResponse statusCode] == 304)
+		{
+			// The feed hasn't changed since our last modification so abort this
+			// connection to save time.
+			[connection cancel];
+			
+			// Report to the activity log
+			[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+
+			// Complete this connection
+			status = MA_Connect_Stopped;
+			[self sendConnectionCompleteNotification];
+		}
+	}
 }
 
 /* didReceiveData
@@ -98,8 +234,38 @@
  */
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	didError = YES;
-	[[NSRunLoop currentRunLoop] performSelector:handler target:delegate argument:self order:0 modes:[NSArray arrayWithObjects:NSDefaultRunLoopMode, nil]];
+	// Report the failure to the log
+	NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"Error: %@", nil), [error localizedDescription]];
+	[aItem setStatus:logText];
+	
+	// More details to go into the log for troubleshooting
+	// purposes.
+	NSMutableString * logDetail = [[NSMutableString alloc] init];
+	[logDetail appendFormat:NSLocalizedString(@"Connection error (%d, %@):\n", nil), [error code], [error domain]];
+	if ([error localizedDescription] != nil)
+		[logDetail appendFormat:NSLocalizedString(@"\tDescription: %@\n", nil), [error localizedDescription]];
+	
+	// localizedRecoverySuggestion requires Mac OSX 10.4 or later
+	if ([error respondsToSelector:@selector(localizedRecoverySuggestion:)])
+	{
+		NSString * suggestionString = [error performSelector:@selector(localizedRecoverySuggestion:)];
+		if (suggestionString != nil)
+			[logDetail appendFormat:NSLocalizedString(@"\tSuggestion: %@\n", nil), suggestionString];
+	}
+	
+	// localizedFailureReason requires Mac OSX 10.4 or later
+	if ([error respondsToSelector:@selector(localizedFailureReason:)])
+	{
+		NSString * reasonString = [error performSelector:@selector(localizedFailureReason:)];
+		if (reasonString != nil)
+			[logDetail appendFormat:NSLocalizedString(@"\tCause: %@\n", nil), reasonString];
+	}
+	[aItem appendDetail:logDetail];
+	[logDetail release];
+	
+	// Complete the connection
+	status = MA_Connect_Failed;
+	[self sendConnectionCompleteNotification];
 }
 
 /* didReceiveAuthenticationChallenge
@@ -110,16 +276,35 @@
  */
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
+	BOOL succeeded = NO;
 	if ([challenge previousFailureCount] == 0)
 	{
 		if (![username isBlank])
 		{
 			NSURLCredential * newCredential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistencePermanent];
 			[[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
-			return;
+			
+			// More details in the log
+			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"Attempting authentication for user '%@'", nil), username];
+			[aItem appendDetail:logText];
+			succeeded = YES;
 		}
 	}
-	[[challenge sender] cancelAuthenticationChallenge:challenge];
+	else
+	{
+		// Report the failure to the log (both as status and detail)
+		NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"Authentication failed for user '%@'", nil), username];
+		[aItem setStatus:logText];
+		[aItem appendDetail:logText];
+	}
+	
+	// If we failed, cancel the authentication challenge which will, in turn, cancel the
+	// entire connection.
+	if (!succeeded)
+	{
+		[[challenge sender] cancelAuthenticationChallenge:challenge];
+		status = MA_Connect_NeedCredentials;
+	}
 }
 
 /* willSendRequest
@@ -127,16 +312,18 @@
  */
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
+	NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), [[request URL] absoluteString]];
+	[aItem appendDetail:text];
 	return request;
 }
 
 /* connectionDidFinishLoading
- * We're done. Now parse the XML data and add it to the database.
+ * Called when all data has been retrieved.
  */
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	didError = NO;
-	[[NSRunLoop currentRunLoop] performSelector:handler target:delegate argument:self order:0 modes:[NSArray arrayWithObjects:NSDefaultRunLoopMode, nil]];
+	status = MA_Connect_Succeeded;
+	[self sendConnectionCompleteNotification];
 }
 
 /* dealloc
@@ -144,9 +331,12 @@
  */
 -(void)dealloc
 {
+	[connector release];
+	[contextData release];
 	[receivedData release];
 	[username release];
 	[password release];
+	[aItem release];
 	[super dealloc];
 }
 @end

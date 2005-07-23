@@ -19,18 +19,45 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ActivityLog.h"
+
+// Possible return values
+typedef enum {
+	MA_Connect_Succeeded = 0,
+	MA_Connect_Failed,
+	MA_Connect_NeedCredentials,
+	MA_Connect_Stopped
+} ConnectStatus;
 
 @interface AsyncConnection : NSObject {
+	NSURLConnection * connector;
+	NSDictionary * httpHeaders;
+	NSDictionary * responseHeaders;
 	NSMutableData * receivedData;
 	NSString * username;
 	NSString * password;
-	BOOL didError;
+	ActivityItem * aItem;
+	id contextData;
+	ConnectStatus status;
 	id delegate;
 	SEL handler;
 }
 
 // Public functions
--(BOOL)beginLoadDataFromURL:(NSURL *)url username:(NSString *)theUsername password:(NSString *)thePassword delegate:(id)theDelegate didEndSelector:(SEL)endSelector;
--(BOOL)didError;
+-(BOOL)beginLoadDataFromURL:(NSURL *)url
+				   username:(NSString *)theUsername
+				   password:(NSString *)thePassword
+				   delegate:(id)theDelegate
+				contextData:(id)theData
+						log:(ActivityItem *)theItem
+			 didEndSelector:(SEL)endSelector;
+-(void)cancel;
+
+-(ConnectStatus)status;
+-(id)contextData;
+-(ActivityItem *)aItem;
+
+-(void)setHttpHeaders:(NSDictionary *)headerFields;
+-(NSDictionary *)responseHeaders;
 -(NSData *)receivedData;
 @end

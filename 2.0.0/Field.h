@@ -29,7 +29,7 @@ typedef enum {
 	MA_FieldType_Folder
 } FieldType;
 
-@interface Field : NSObject {
+@interface Field : NSObject <NSCoding> {
 	NSString * name;
 	NSString * displayName;
 	NSString * sqlField;

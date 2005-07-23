@@ -42,6 +42,9 @@
 -(id)handleImportSubscriptions:(NSScriptCommand *)cmd;
 -(id)handleExportSubscriptions:(NSScriptCommand *)cmd;
 
+// New subscription
+-(id)handleNewSubscription:(NSScriptCommand *)cmd;
+
 // General read-only properties.
 -(NSString *)applicationVersion;
 -(NSArray *)folders;

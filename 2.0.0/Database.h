@@ -53,10 +53,9 @@
 -(void)close;
 
 // Fields functions
--(void)addField:(NSString *)name title:(NSString *)title type:(int)type tag:(int)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(int)width;
+-(void)addField:(NSString *)name type:(int)type tag:(int)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(int)width;
 -(NSArray *)arrayOfFields;
--(Field *)fieldByIdentifier:(NSString *)identifier;
--(Field *)fieldByTitle:(NSString *)title;
+-(Field *)fieldByName:(NSString *)name;
 
 // Folder functions
 -(void)initFolderArray;

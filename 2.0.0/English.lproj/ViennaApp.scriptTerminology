@@ -262,6 +262,30 @@
 			<key>Name</key>
 			<string>mark all read</string>
 		</dict>
+		<key>NewSubscription</key>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>UnderFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Optional folder under which the subscription will be created</string>
+					<key>Name</key>
+					<string>under</string>
+				</dict>
+				<key>URL</key>
+				<dict>
+					<key>Description</key>
+					<string>The URL of the new feed</string>
+					<key>Name</key>
+					<string>for</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Create a new subscription</string>
+			<key>Name</key>
+			<string>create new subscription</string>
+		</dict>
 		<key>RefreshAllSubscriptions</key>
 		<dict>
 			<key>Description</key>

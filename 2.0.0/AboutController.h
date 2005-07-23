@@ -1,8 +1,8 @@
 //
-//  PopUpButtonExtensions.h
+//  AboutController.h
 //  Vienna
 //
-//  Created by Steve on 7/16/05.
+//  Created by Steve on 7/21/05.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,12 +20,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSPopUpButton (PopUpButtonExtensions)
-	-(void)addItemWithTitle:(NSString *)title image:(NSImage *)image;
-	-(void)addItemWithTarget:(NSString *)title target:(SEL)target;
-	-(void)addItemWithTag:(NSString *)title tag:(int)tag;
-	-(void)addItemWithRepresentedObject:(NSString *)title object:(id)object;
-	-(id)representedObjectForSelection;
-	-(int)tagForSelection;
-	-(void)addSeparator;
+@interface AboutController : NSWindowController {
+    IBOutlet NSTextField * appName;
+    IBOutlet NSTextField * copyrightString;
+    IBOutlet NSTextField * versionString;
+}
 @end

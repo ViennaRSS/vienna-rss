@@ -19,7 +19,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "Database.h"
 #import "BacktrackArray.h"
 #import "ActivityViewer.h"
@@ -27,6 +26,7 @@
 #import "WebKit/WebView.h"
 
 @class PreferenceController;
+@class AboutController;
 @class FoldersTree;
 @class FolderHeaderBar;
 @class CheckForUpdates;
@@ -69,6 +69,7 @@
 
 	ActivityViewer * activityViewer;
 	PreferenceController * preferenceController;
+	AboutController * aboutController;
 	CheckForUpdates * checkUpdates;
 	DownloadUpdate * downloadUpdate;
 	SearchFolder * smartFolder;
@@ -99,6 +100,7 @@
 	NSMutableDictionary * bottomLineDict;
 	NSTimer * checkTimer;
 	NSTimer * markReadTimer;
+	NSTimer * pumpTimer;
 	int lastCountOfUnread;
 	int unreadAtBeginning;
 	BOOL growlAvailable;
@@ -111,6 +113,7 @@
 	int maximumConnections;
 	int totalConnections;
 	NSMutableArray * connectionsArray;
+	NSMutableArray * folderIconRefreshArray;
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	BOOL previousFolderColumnState;
@@ -118,10 +121,8 @@
 }
 
 // Menu action items
+-(IBAction)handleAbout:(id)sender;
 -(IBAction)showPreferencePanel:(id)sender;
--(IBAction)refreshSelectedSubscriptions:(id)sender;
--(IBAction)refreshAllSubscriptions:(id)sender;
--(IBAction)cancelAllRefreshes:(id)sender;
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
@@ -178,8 +179,6 @@
 -(void)doEditFolder:(Folder *)folder;
 -(void)setReadingPaneOnRight:(BOOL)onRightFlag;
 -(void)refreshFolder:(BOOL)reloadData;
--(void)refreshSubscriptions:(NSArray *)foldersArray;
--(void)refreshPumper;
 -(void)markAllReadInArray:(NSArray *)folderArray;
 -(BOOL)selectFolderAndMessage:(int)folderId messageNumber:(int)messageNumber;
 -(void)selectFolderWithFilter:(int)newFolderId;
@@ -198,10 +197,9 @@
 -(NSArray *)folders;
 -(NSString *)appName;
 -(BOOL)isConnecting;
--(void)handleEndOfRefresh;
--(void)getCredentialsForFolder;
 -(void)openURLInBrowser:(NSString *)urlString;
 -(void)openURLInBrowserWithURL:(NSURL *)url;
+-(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
 
 // Rename sheet functions
 -(IBAction)endRenameFolder:(id)sender;

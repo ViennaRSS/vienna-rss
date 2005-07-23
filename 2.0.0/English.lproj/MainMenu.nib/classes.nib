@@ -15,10 +15,12 @@
                 endRenameFolder = id; 
                 exportSubscriptions = id; 
                 forwardTrackMessage = id; 
+                handleAbout = id; 
                 importSubscriptions = id; 
                 markAllRead = id; 
                 markFlagged = id; 
                 markRead = id; 
+                myAction = id; 
                 newGroupFolder = id; 
                 newSmartFolder = id; 
                 newSubscription = id; 

@@ -83,6 +83,8 @@
 				<string>handleMarkAllRead:</string>
 				<key>RefreshSubscription</key>
 				<string>handleRefreshSubscription:</string>
+				<key>NewSubscription</key>
+				<string>handleNewSubscription:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
@@ -256,6 +258,8 @@
 				<string>handleRefreshAllSubscriptions:</string>
 				<key>RefreshSubscription</key>
 				<string>handleRefreshSubscription:</string>
+				<key>NewSubscription</key>
+				<string>handleNewSubscription:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
@@ -267,18 +271,6 @@
 					<string>NO</string>
 					<key>ReadOnly</key>
 					<string></string>
-					<key>Type</key>
-					<string>Folder</string>
-				</dict>
-			</dict>
-			<key>ToOneRelationships</key>
-			<dict>
-				<key>folder</key>
-				<dict>
-					<key>AppleEventCode</key>
-					<string>flDR</string>
-					<key>ReadOnly</key>
-					<string>YES</string>
 					<key>Type</key>
 					<string>Folder</string>
 				</dict>
@@ -355,6 +347,34 @@
 				<dict>
 					<key>AppleEventCode</key>
 					<string>flnn</string>
+					<key>Type</key>
+					<string>Folder</string>
+				</dict>
+			</dict>
+			<key>CommandClass</key>
+			<string>NSScriptCommand</string>
+		</dict>
+		<key>NewSubscription</key>
+		<dict>
+			<key>AppleEventClassCode</key>
+			<string>Vnna</string>
+			<key>AppleEventCode</key>
+			<string>nwSB</string>
+			<key>Arguments</key>
+			<dict>
+				<key>URL</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>urlS</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>UnderFolder</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>unFL</string>
+					<key>Optional</key>
+					<string>YES</string>
 					<key>Type</key>
 					<string>Folder</string>
 				</dict>

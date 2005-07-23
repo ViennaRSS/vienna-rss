@@ -57,6 +57,35 @@
 	[newItem release];
 }
 
+/* addItemWithRepresentedObject
+ * Add an item to the popup button menu with the specified represented object.
+ */
+-(void)addItemWithRepresentedObject:(NSString *)title object:(id)object
+{
+	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
+	[newItem setRepresentedObject:object];
+	[[self menu] addItem:newItem];
+	[newItem release];
+}
+
+/* representedObjectForSelection
+ * Returns the represented object associated with the selected item.
+ */
+-(id)representedObjectForSelection
+{
+	NSMenuItem * theItem = [self selectedItem];
+	return [theItem representedObject];
+}
+
+/* tagForSelection
+ * Returns the tag associated with the selected item.
+ */
+-(int)tagForSelection
+{
+	NSMenuItem * theItem = [self selectedItem];
+	return [theItem tag];
+}
+
 /* addSeparator
  * Add a separator item to the popup button menu.
  */

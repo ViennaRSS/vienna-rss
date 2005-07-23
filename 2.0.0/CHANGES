@@ -13,11 +13,18 @@ Thanks!
   wide Scripts menu on the status bar that replicates this functionality.
 - Rewrote the code that registers the default RSS reader. It wasn't picking up all possible
   candidates. Now it shows all candidate applications and also adds a Select... option so the
-  user can manually search for the application.
+  user can manually search for the application. This also fixes the bug where Vienna took over
+  the feed handler from others without permission.
 - Smart folders now support 'any' in addition to the implied 'all' condition. So you can now
   create folders which match one or more combination of criteria.
 - Clicking the dock icon now reopens the main window if it was previously closed.
 - Added Swedish localisation (contributed by Christoffer Larsson).
+- Several internal fixes for issues thrown up by Swedish localisation.
+- View->Next Unread now goes to folders that have subscriptions with unread articles as well
+  as to the subscriptions themselves. This causes Vienna to respect the closed state of group
+  folders.
+- Improved the logic by which folder images are retrieved to make this more reliable.
+- New About Vienna window.
 
 2.0.0.2003
 ----------
