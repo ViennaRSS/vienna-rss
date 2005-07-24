@@ -31,7 +31,7 @@
 -(IBAction)importSubscriptions:(id)sender
 {
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
-	NSArray * fileTypes = [NSArray arrayWithObjects:@"txt", @"text", @"opml", NSFileTypeForHFSTypeCode('TEXT'), nil];
+	NSArray * fileTypes = [NSArray arrayWithObjects:@"txt", @"text", @"opml", @"xml", @"html", NSFileTypeForHFSTypeCode('TEXT'), nil];
 	
 	[panel beginSheetForDirectory:nil
 							 file:nil
