@@ -1,8 +1,8 @@
 //
-//  ImageAndTextCell.h
+//  BezierPathExtensions.h
 //  Vienna
 //
-//  Created by Steve on Sat Jan 31 2004.
+//  Created by Steve on 7/16/05.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,22 +20,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ImageAndTextCell : NSTextFieldCell {
-	@private
-	NSImage	* image;
-	NSColor * countBackgroundColour;
-	int offset;
-	int count;
-	bool hasCount;
-}
-
-// Accessor functions
--(void)setOffset:(int)offset;
--(void)setImage:(NSImage *)anImage;
--(void)setCount:(int)newCount;
--(void)clearCount;
--(void)setCountBackgroundColour:(NSColor *)newColour;
--(NSImage *)image;
--(int)offset;
--(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+@interface NSBezierPath (BezierPathExtensions)
+	+(NSBezierPath *)bezierPathWithRoundRectInRect:(NSRect)aRect radius:(float)radius;
 @end

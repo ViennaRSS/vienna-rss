@@ -438,6 +438,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		
 		// Done with this connection
 		[newFeed release];
+
+		// If this folder also requires an image refresh, add that
+		if ([folder flags] & MA_FFlag_CheckForImage)
+			[folderIconRefreshArray addObject:folder];
 	}
 	[self removeConnection:connector];
 }
@@ -503,7 +507,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 {
 	if ([connectionsArray containsObject:conn])
 		[connectionsArray removeObject:conn];
-	
+
 	[conn release];
 	
 	if (--totalConnections == 0)

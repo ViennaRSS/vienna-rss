@@ -138,7 +138,7 @@
 					[numberValueField setStringValue:[criteria value]];
 					break;
 				}
-					
+
 				case MA_FieldType_Date: {
 					[dateValueField setStringValue:[criteria value]];
 					break;
@@ -566,7 +566,7 @@
 	// Now add the new subview
 	archRow = [NSArchiver archivedDataWithRootObject:searchCriteriaView];
 	NSRect bounds = [searchCriteriaSuperview bounds];
-	NSView *row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
+	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
 	[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (((totalCriteria - 1) - index) * rowHeight))];
 	[searchCriteriaSuperview addSubview:[row retain]];
 	[arrayOfViews insertObject:row atIndex:index];

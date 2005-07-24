@@ -19,6 +19,7 @@
 //
 
 #import "ImageAndTextCell.h"
+#import "BezierPathExtensions.h"
 
 /* All of this stuff taken from public stuff published
  * by Apple.
@@ -26,68 +27,97 @@
 
 @implementation ImageAndTextCell
 
+/* init
+ * Initialise a default instance of our cell.
+ */
+-(id)init
+{
+	if ((self = [super init]) != nil)
+	{
+		image = nil;
+		offset = 0;
+		hasCount = NO;
+		count = 0;
+		[self setCountBackgroundColour:[NSColor shadowColor]];
+	}
+	return self;
+}
+
 -copyWithZone:(NSZone *)zone\
 {
 	ImageAndTextCell *cell = (ImageAndTextCell *)[super copyWithZone:zone];
 	cell->image = [image retain];
 	cell->offset = offset;
+	cell->hasCount = hasCount;
+	cell->count = count;
+	cell->countBackgroundColour = [countBackgroundColour retain];
 	return cell;
 }
 
+/* setOffset
+ * Sets the new offset at which the cell contents will be drawn.
+ */
 -(void)setOffset:(int)newOffset
 {
 	offset = newOffset;
 }
 
+/* offset
+ * Returns the current cell offset in effect.
+ */
 -(int)offset
 {
 	return offset;
 }
 
+/* setImage
+ * Set the new image for the cell.
+ */
 -(void)setImage:(NSImage *)anImage
 {
-	if (anImage != image)
-	{
-		[image release];
-		image = nil;
-		if (anImage)
-			image = [anImage retain];
-	}
+	[anImage retain];
+	[image release];
+	image = anImage;
 }
 
+/* image
+ * Return the current image.
+ */
 -(NSImage *)image
 {
 	return [[image retain] autorelease];
 }
 
--(NSRect)imageFrameForCellFrame:(NSRect)cellFrame
+/* setCount
+ * Sets the value to be displayed in the count button.
+ */
+-(void)setCount:(int)newCount
 {
-	if (image != nil)
-	{
-		NSRect imageFrame;
-		imageFrame.size = [image size];
-		imageFrame.origin = cellFrame.origin;
-		imageFrame.origin.x += 3;
-		imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
-		return imageFrame;
-	}
-	return NSZeroRect;
+	count = newCount;
+	hasCount = YES;
 }
 
--(void)editWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject event:(NSEvent *)theEvent
+/* clearCount
+ * Removes the count button.
+ */
+-(void)clearCount
 {
-	NSRect textFrame, imageFrame;
-	NSDivideRect (aRect, &imageFrame, &textFrame, 3 + [image size].width, NSMinXEdge);
-	[super editWithFrame: textFrame inView: controlView editor:textObj delegate:anObject event: theEvent];
+	hasCount = NO;
 }
 
--(void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+/* setCountBackgroundColour
+ * Sets the colour used for the count button background.
+ */
+-(void)setCountBackgroundColour:(NSColor *)newColour
 {
-	NSRect textFrame, imageFrame;
-	NSDivideRect (aRect, &imageFrame, &textFrame, 3 + [image size].width, NSMinXEdge);
-	[super selectWithFrame: textFrame inView: controlView editor:textObj delegate:anObject start:selStart length:selLength];
+	[newColour retain];
+	[countBackgroundColour release];
+	countBackgroundColour = newColour;
 }
 
+/* drawWithFrame
+ * Draw the cell complete the image and count button if specified.
+ */
 -(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	int drawingOffset = (offset * 10);
@@ -103,10 +133,13 @@
 			drawingOffset = 0;
 	}
 	cellFrame.origin.x += drawingOffset;
+
+	// If the cell has an image, draw the image and then reduce
+	// cellFrame to move the text to the right of the image.
 	if (image != nil)
 	{
-		NSSize	imageSize;
-		NSRect	imageFrame;
+		NSSize imageSize;
+		NSRect imageFrame;
 
 		imageSize = [image size];
 		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMinXEdge);
@@ -125,15 +158,49 @@
 		
 		[image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 	}
-	[super drawWithFrame:cellFrame inView:controlView];
-}
 
--(NSSize)cellSize
-{
-	NSSize cellSize = [super cellSize];
-	cellSize.width += (image ? [image size].width : 0) + 3;
-	cellSize.height = [image size].height + 4;
-	return cellSize;
+	// If the cell has a count button, draw the count
+	// button on the right of the cell.
+	if (hasCount)
+	{
+		NSString * number = [NSString stringWithFormat:@"%i", count];
+
+		// Use the current font point size as a guide for the count font size
+		float pointSize = [[self font] pointSize];
+
+		// Create attributes for drawing the count.
+		NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:pointSize],
+			NSFontAttributeName,
+			[NSColor whiteColor],
+			NSForegroundColorAttributeName,
+			nil];
+		NSSize numSize = [number sizeWithAttributes:attributes];
+
+		// Compute the dimensions of the count rectangle.
+		int cellWidth = MAX(numSize.width + 6, numSize.height + 1);
+
+		NSRect countFrame;
+		NSDivideRect(cellFrame, &countFrame, &cellFrame, cellWidth, NSMaxXEdge);
+		if ([self drawsBackground])
+		{
+			[[self backgroundColor] set];
+			NSRectFill(countFrame);
+		}
+
+		countFrame.origin.y += 1;
+		countFrame.size.height -= 3;
+		NSBezierPath * bp = [NSBezierPath bezierPathWithRoundRectInRect:countFrame radius:numSize.height / 2];
+		[countBackgroundColour set];
+		[bp fill];
+
+		// Draw the count in the rounded rectangle we just created.
+		NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f + 1.0f);
+		[number drawAtPoint:point withAttributes:attributes];
+		[attributes release];
+	}
+
+	// Draw the text
+	[super drawWithFrame:cellFrame inView:controlView];
 }
 
 /* dealloc
@@ -141,6 +208,7 @@
  */
 -(void)dealloc
 {
+	[countBackgroundColour release];
 	[image release];
 	[super dealloc];
 }

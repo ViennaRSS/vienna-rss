@@ -93,6 +93,8 @@
 		AA74A860087B56810029797C /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
 		AA7A0C8808874CEB0027F04F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */; };
 		AA840801066BDDCE00C5D918 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA840800066BDDCE00C5D918 /* ApplicationServices.framework */; };
+		AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */; };
+		AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
 		AA8AEE73088E158C0045B51F /* Refresh.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8AEE71088E158C0045B51F /* Refresh.h */; };
 		AA8AEE74088E158C0045B51F /* Refresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AEE72088E158C0045B51F /* Refresh.m */; };
 		AA8AF21B08908BD40045B51F /* About.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA8AF21908908BD40045B51F /* About.nib */; };
@@ -327,6 +329,8 @@
 		AA74A85E087B56810029797C /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
 		AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Developer/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		AA840800066BDDCE00C5D918 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /Developer/SDKs/MacOSX10.2.7.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
+		AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BezierPathExtensions.h; sourceTree = "<group>"; };
+		AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BezierPathExtensions.m; sourceTree = "<group>"; };
 		AA8AEE71088E158C0045B51F /* Refresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Refresh.h; sourceTree = "<group>"; };
 		AA8AEE72088E158C0045B51F /* Refresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Refresh.m; sourceTree = "<group>"; };
 		AA8AF21A08908BD40045B51F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/About.nib; sourceTree = "<group>"; };
@@ -612,6 +616,8 @@
 		AA4F657B062B873100D4837C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */,
+				AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */,
 				AAFA8CA7062A0BE200C530A6 /* CalendarExtensions.h */,
 				AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */,
 				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
@@ -729,6 +735,7 @@
 				AAD7999F088B617900E2CE5E /* ImageAndTextCell.h in Headers */,
 				AA8AEE73088E158C0045B51F /* Refresh.h in Headers */,
 				AA8AF24B089092B50045B51F /* AboutController.h in Headers */,
+				AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,6 +931,7 @@
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				AA8AEE74088E158C0045B51F /* Refresh.m in Sources */,
 				AA8AF24A089092B50045B51F /* AboutController.m in Sources */,
+				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

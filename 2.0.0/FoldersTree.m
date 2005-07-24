@@ -99,6 +99,10 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
 
+	// Don't resize the column when items are expanded as this messes up
+	// the placement of the unread count button.
+	[outlineView setAutoresizesOutlineColumn:NO];
+
 	// Set the menu for the popup button
 	[popupMenu setMenu:folderMenu];
 	
@@ -231,6 +235,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 				[outlineView selectRow:[outlineView rowForItem:node] byExtendingSelection:YES];
 		}
 	}
+	[outlineView sizeToFit];
 }
 
 /* loadTree
@@ -590,10 +595,6 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	TreeNode * node = (TreeNode *)item;
 	if (node == nil)
 		node = rootNode;
-	if ([[node folder] childUnreadCount])
-		return [NSString stringWithFormat:@"%@ (%d)", [node nodeName], [[node folder] childUnreadCount]];
-	if (!IsSmartFolder([node folder]) && [[node folder] unreadCount])
-		return [NSString stringWithFormat:@"%@ (%d)", [node nodeName], [[node folder] unreadCount]];
 	return [node nodeName];
 }
 
@@ -610,11 +611,27 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
 		if (IsSmartFolder([node folder]))  // Because if the search results contain unread messages we don't want the smart folder name to be bold.
+		{
+			[realCell clearCount];
 			[realCell setFont:cellFont];
-		else if ([[node folder] unreadCount] || [[node folder] childUnreadCount])
+		}
+		else if ([[node folder] unreadCount])
+		{
 			[realCell setFont:boldCellFont];
+			[realCell setCount:[[node folder] unreadCount]];
+			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
+		}
+		else if ([[node folder] childUnreadCount] && ![olv isItemExpanded:item])
+		{
+			[realCell setFont:boldCellFont];
+			[realCell setCount:[[node folder] childUnreadCount]];
+			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
+		}
 		else
+		{
+			[realCell clearCount];
 			[realCell setFont:cellFont];
+		}
 		[realCell setImage:[[node folder] image]];
 	}
 }
