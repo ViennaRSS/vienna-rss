@@ -171,6 +171,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	}
 	
 	// Create condensed view attribute dictionaries
+	selectionDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
 	bottomLineDict = [[NSMutableDictionary alloc] init];
 
@@ -779,9 +780,12 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 
 	[topLineDict setObject:messageListFont forKey:NSFontAttributeName];
 	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-	
+
 	[bottomLineDict setObject:messageListFont forKey:NSFontAttributeName];
 	[bottomLineDict setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
+
+	[selectionDict setObject:messageListFont forKey:NSFontAttributeName];
+	[selectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	
 	[self updateMessageListRowHeight];
 }
@@ -1561,8 +1565,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Headlines])
 	{
 		NSMutableAttributedString * theAttributedString = [[NSMutableAttributedString alloc] init];
+		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex];
+		NSDictionary * topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
+		NSDictionary * bottomLineDictPtr = (isSelectedRow ? selectionDict : bottomLineDict);
 		
-		NSAttributedString * topString = [[NSAttributedString alloc] initWithString:[theRecord title] attributes:topLineDict];
+		NSAttributedString * topString = [[NSAttributedString alloc] initWithString:[theRecord title] attributes:topLineDictPtr];
 		[theAttributedString appendAttributedString:topString];
 		[topString release];
 
@@ -1573,7 +1580,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		if (![[theRecord author] isBlank])
 			[summaryString appendFormat:@" - %@", [theRecord author]];
 
-		NSAttributedString * bottomString = [[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDict];
+		NSAttributedString * bottomString = [[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
 		[theAttributedString appendAttributedString:bottomString];
 		[bottomString release];
 		return [theAttributedString autorelease];
@@ -2719,6 +2726,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[selectionDict release];
 	[topLineDict release];
 	[bottomLineDict release];
 	[persistedStatusText release];

@@ -96,6 +96,7 @@
 	int progressCount;
 	NSArray * allColumns;
 	ExtDateFormatter * extDateFormatter;
+	NSMutableDictionary * selectionDict;
 	NSMutableDictionary * topLineDict;
 	NSMutableDictionary * bottomLineDict;
 	NSTimer * checkTimer;
