@@ -25,6 +25,8 @@ Thanks!
   folders.
 - Improved the logic by which folder images are retrieved to make this more reliable.
 - New About Vienna window.
+- The count of unread articles now show up as button in the folder list to the right of each
+  subscription name.
 
 2.0.0.2003
 ----------

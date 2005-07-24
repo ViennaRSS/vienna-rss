@@ -1555,29 +1555,28 @@ const int MA_Current_DB_Version = 11;
 				}
 				
 			case MA_FieldType_Date: {
-				if ([criteria operator] == MA_CritOper_Is)
+				NSCalendarDate * startDate;
+
+				// "today" is a short hand way of specifying the current date.
+				if ([[[criteria value] lowercaseString] isEqualToString:@"today"])
 				{
-					NSCalendarDate * startDate;
+					NSCalendarDate * now = [NSCalendarDate date];
+					NSString * todayString = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
+					startDate = [NSCalendarDate dateWithString:todayString calendarFormat:@"%d/%m/%Y"];
+				}
+				else
+					startDate = [NSCalendarDate dateWithString:[criteria value] calendarFormat:@"%d/%m/%y"];
+				if ([criteria operator] != MA_CritOper_Is)
+					valueString = [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]];
+				else
+				{
 					NSCalendarDate * endDate;
 
 					// Special case for Date is <date> because the resolution of the date field is in
 					// milliseconds. So we need to translate this to a range for this to make sense.
-					if ([[criteria value] isEqualToString:@"today"])
-					{
-						NSCalendarDate * now = [NSCalendarDate date];
-						NSString * todayString = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
-						startDate = [NSCalendarDate dateWithString:todayString calendarFormat:@"%d/%m/%Y"];
-					}
-					else
-						startDate = [NSCalendarDate dateWithString:[criteria value] calendarFormat:@"%d/%m/%y"];
 					endDate = [startDate dateByAddingYears:0 months:0 days:1 hours:0 minutes:0 seconds:0];
 					operatorString = [NSString stringWithFormat:@">=%f and %@<%f", [startDate timeIntervalSince1970], [field sqlField], [endDate timeIntervalSince1970]];
 					valueString = @"";
-				}
-				else
-				{
-					NSCalendarDate * theDate = [NSCalendarDate dateWithString:[criteria value] calendarFormat:@"%d/%m/%y"];
-					valueString = [NSString stringWithFormat:@"%f", [theDate timeIntervalSince1970]];
 				}
 				break;
 				}
