@@ -296,6 +296,21 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[listener use];
 }
 
+/* decidePolicyForNewWindowAction
+ * Called by the web view to get our policy on handling actions that would open a new window. Since we want links clicked in the
+ * web view to open in an external browser, we trap the link clicked action and launch the URL ourselves.
+ */
+-(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
+{
+	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
+	if (navType == WebNavigationTypeLinkClicked)
+	{
+		[listener ignore];
+		[self openURLInBrowserWithURL:[request URL]];
+	}
+	[listener use];
+}
+
 /* setStatusText
  * Called from the webview when some JavaScript writes status text. Echo this to
  * our status bar.
@@ -1834,8 +1849,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
-	[[NSApp delegate] selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
-	
+	[self selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
+
 	SCNetworkConnectionFlags flags;
 	NSURL * url = [NSURL URLWithString:urlString];
 	
@@ -1844,7 +1859,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		!(flags & kSCNetworkFlagsConnectionRequired))
 	{
 		Folder * folder = [db folderFromID:folderId];
-		[[NSApp delegate] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+		[self refreshSubscriptions:[NSArray arrayWithObject:folder]];
 	}
 }
 
@@ -2132,7 +2147,13 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	while ((folder = [enumerator nextObject]) != nil)
 	{
 		int folderId = [folder itemId];
-		if (!IsSmartFolder(folder))
+		if (IsGroupFolder(folder))
+		{
+			[self markAllReadInArray:[db arrayOfFolders:folderId]];
+			if (folderId == currentFolderId)
+				[messageList reloadData];
+		}
+		else if (!IsSmartFolder(folder))
 		{
 			[db markFolderRead:folderId];
 			[foldersTree updateFolder:folderId recurseToParents:YES];

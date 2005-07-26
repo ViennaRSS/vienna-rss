@@ -85,7 +85,7 @@
 
 // smart folder functions
 -(void)initSmartFoldersArray;
--(BOOL)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree;
+-(int)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(BOOL)updateSearchFolder:(int)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSearchFolder:(int)folderId;
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;

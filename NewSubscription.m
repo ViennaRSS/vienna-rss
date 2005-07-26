@@ -19,7 +19,7 @@
 //
 
 #import "NewSubscription.h"
-#import "Refresh.h"
+#import "AppController.h"
 #import "StringExtensions.h"
 
 // Private functions

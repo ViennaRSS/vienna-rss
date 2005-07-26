@@ -250,7 +250,7 @@
 		[logDetail appendFormat:NSLocalizedString(@"\tDescription: %@\n", nil), [error localizedDescription]];
 	
 	// localizedRecoverySuggestion requires Mac OSX 10.4 or later
-	if ([error respondsToSelector:@selector(localizedRecoverySuggestion:)])
+	if ([NSError respondsToSelector:@selector(localizedRecoverySuggestion:)])
 	{
 		NSString * suggestionString = [error performSelector:@selector(localizedRecoverySuggestion:)];
 		if (suggestionString != nil)
@@ -258,7 +258,7 @@
 	}
 	
 	// localizedFailureReason requires Mac OSX 10.4 or later
-	if ([error respondsToSelector:@selector(localizedFailureReason:)])
+	if ([NSError respondsToSelector:@selector(localizedFailureReason:)])
 	{
 		NSString * reasonString = [error performSelector:@selector(localizedFailureReason:)];
 		if (reasonString != nil)
