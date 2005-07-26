@@ -40,6 +40,7 @@
                 startConnect = id; 
                 syncSubscriptionsFromBloglines = id; 
                 toggleActivityViewer = id; 
+                validateFeed = id; 
                 viewArticlePage = id; 
                 viewNextUnread = id; 
                 viewSourceHomePage = id; 

@@ -135,7 +135,11 @@
 			NSString * httpFieldName;
 			
 			while ((httpFieldName = [enumerator nextObject]) != nil)
-				[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
+			{
+				NSString * fieldValue = [httpHeaders valueForKey:httpFieldName];
+				if (fieldValue != nil && ![fieldValue isBlank])
+					[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
+			}
 		}
 	}
 	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
