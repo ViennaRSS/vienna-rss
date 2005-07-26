@@ -229,7 +229,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
 	NSDictionary * headers = [NSDictionary dictionaryWithObjectsAndKeys:
 								[folder lastUpdateString], @"If-Modified-Since",
-								@"gzip", @"Accepts-Encoding",
+								@"gzip", @"Accept-Encoding",
 								nil, nil];
 	[conn setHttpHeaders:headers];
 
@@ -255,8 +255,8 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	if (([folder flags] & MA_FFlag_CheckForImage) && [folder homePage] != nil)
 	{
 		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
-		[aItem setStatus:NSLocalizedString(@"Retrieving folder image", nil)];
-		
+		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
+
 		AsyncConnection * conn = [[AsyncConnection alloc] init];
 		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[folder homePage] baseURL]];
 		

@@ -1565,7 +1565,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Headlines])
 	{
 		NSMutableAttributedString * theAttributedString = [[NSMutableAttributedString alloc] init];
-		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex];
+		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && ([mainWindow firstResponder] == aTableView);
 		NSDictionary * topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
 		NSDictionary * bottomLineDictPtr = (isSelectedRow ? selectionDict : bottomLineDict);
 		
@@ -1678,6 +1678,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 /* forwardTrackMessage
  * Forward track through the list of messages displayed
+ * BUGBUG: This doesn't work in folders that aggregate messages from multiple folders. Fix it.
  */
 -(IBAction)forwardTrackMessage:(id)sender
 {
@@ -1694,6 +1695,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 /* backTrackMessage
  * Back track through the list of messages displayed
+ * BUGBUG: This doesn't work in folders that aggregate messages from multiple folders. Fix it.
  */
 -(IBAction)backTrackMessage:(id)sender
 {
@@ -1803,7 +1805,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		// stylesheet as the base URL. There's an idiosyncracy in loadHTMLString:baseURL: that it
 		// requires a URL to an actual file as the second parameter or it won't work.
 		//
-		[[textView mainFrame] loadHTMLString:htmlMessage baseURL:(cssStylesheet ? [NSURL URLWithString:cssStylesheet] : nil)];
+		[[textView mainFrame] loadHTMLString:htmlMessage baseURL:[NSURL URLWithString:[folder feedURL]]];
 		[htmlMessage release];
 	}
 }
@@ -2400,6 +2402,18 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
 		[self openURLInBrowser:[theRecord link]];
 	}
+}
+
+/* validateFeed
+ * Call the feed validator on the selected subscription feed.
+ */
+-(IBAction)validateFeed:(id)sender
+{
+	int folderId = [foldersTree actualSelection];
+	Folder * folder = [db folderFromID:folderId];
+
+	NSString * validatorURL = [NSString stringWithFormat:@"http://feedvalidator.org/check?url=%@", [folder feedURL]];
+	[self openURLInBrowser:validatorURL];
 }
 
 /* viewSourceHomePage

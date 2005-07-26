@@ -150,6 +150,7 @@
 -(IBAction)setCondensedLayout:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
+-(IBAction)validateFeed:(id)sender;
 
 // Infobar functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

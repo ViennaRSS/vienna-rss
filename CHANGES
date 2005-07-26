@@ -16,7 +16,7 @@ Thanks!
   user can manually search for the application. This also fixes the bug where Vienna took over
   the feed handler from others without permission.
 - Smart folders now support 'any' in addition to the implied 'all' condition. So you can now
-  create folders which match one or more combination of criteria.
+  create folders which match any one or more combination of criteria.
 - Clicking the dock icon now reopens the main window if it was previously closed.
 - Added Swedish localisation (contributed by Christoffer Larsson).
 - Several internal fixes for issues thrown up by Swedish localisation.
@@ -27,6 +27,10 @@ Thanks!
 - New About Vienna window.
 - The count of unread articles now show up as button in the folder list to the right of each
   subscription name.
+- The Search field now searches immediately rather than wait for you to press Enter.
+- Fixed bug that causes images not to render in feeds where embedded links to images are
+  relative to the URL of the feed rather than absolute URLs.
+- Add 'Validate Feed' command.
 
 2.0.0.2003
 ----------

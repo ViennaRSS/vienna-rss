@@ -83,7 +83,7 @@
 		NSString * name = [folder name];
 		if (IsGroupFolder(folder))
 		{
-			[itemDict setObject:(name ? name : @"") forKey:@"title"];
+			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"title"];
 			XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
 			NSArray * subFolders = [db arrayOfFolders:[folder itemId]];
 			countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders];
@@ -95,10 +95,10 @@
 			NSString * url = [folder feedURL];
 
 			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:(name ? name : @"") forKey:@"title"];
+			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"title"];
 			[itemDict setObject:[XMLParser quoteAttributes:(link ? link : @"")] forKey:@"htmlUrl"];
 			[itemDict setObject:[XMLParser quoteAttributes:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:(description ? description : @"") forKey:@"description"];
+			[itemDict setObject:[XMLParser quoteAttributes:(description ? description : @"")] forKey:@"description"];
 			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
 			++countExported;
 		}
