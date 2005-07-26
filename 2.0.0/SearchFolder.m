@@ -20,6 +20,7 @@
 
 #import "SearchFolder.h"
 #import "StringExtensions.h"
+#import "AppController.h"
 #import "PopUpButtonExtensions.h"
 
 // Tags for the three fields that define a criteria. We set these here
@@ -464,7 +465,10 @@
 	folderName = [folderName trim];
 	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	if (searchFolderId == -1)
-		[db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+	{
+		searchFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+		[[NSApp delegate] selectFolderAndMessage:searchFolderId messageNumber:MA_Select_Unread];
+	}
 	else
 		[db updateSearchFolder:searchFolderId withFolder:folderName withQuery:criteriaTree];
 

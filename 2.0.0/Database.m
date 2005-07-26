@@ -1144,32 +1144,33 @@ const int MA_Current_DB_Version = 11;
  * Create a new smart folder. If the specified folder already exists, then this is synonymous to
  * calling updateSearchFolder.
  */
--(BOOL)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree
+-(int)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromName:folderName];
 	BOOL success = YES;
 
 	if (folder)
+	{
 		[self updateSearchFolder:[folder itemId] withFolder:folderName withQuery:criteriaTree];
+		return [folder itemId];
+	}
+
+	int folderId = [self addFolder:parentId folderName:folderName type:MA_Smart_Folder mustBeUnique:YES];
+	if (folderId == -1)
+		success = NO;
 	else
 	{
-		int folderId = [self addFolder:parentId folderName:folderName type:MA_Smart_Folder mustBeUnique:YES];
-		if (folderId == -1)
-			success = NO;
-		else
-		{
-			// Verify we're on the right thread
-			[self verifyThreadSafety];
-			
-			NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
-			[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
-			[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+		// Verify we're on the right thread
+		[self verifyThreadSafety];
+		
+		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
+		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
+		[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 
-			NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-			[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-		}
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	}
-	return success;
+	return folderId;
 }
 
 /* updateSearchFolder
