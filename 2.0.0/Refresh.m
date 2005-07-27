@@ -24,13 +24,9 @@
 #import "FoldersTree.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
-#import "Growl/GrowlDefines.h"
 
 // Non-class function used for sorting
 static int messageDateSortHandler(Message * item1, Message * item2, void * context);
-
-// Static constant strings that are typically never tweaked
-static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 @implementation AppController (Refresh)
 
@@ -493,10 +489,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		[connectionsArray addObject:conn];
 	
 	if (totalConnections++ == 0)
-	{
-		[self startProgressIndicator];
-		[self setStatusMessage:NSLocalizedString(@"Refreshing subscriptions...", nil) persist:YES];
-	}
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
 /* removeConnection
@@ -505,13 +498,15 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
  */
 -(void)removeConnection:(AsyncConnection *)conn
 {
+	NSAssert(totalConnections > 0, @"Calling removeConnection with zero active connection count");
+
 	if ([connectionsArray containsObject:conn])
 		[connectionsArray removeObject:conn];
 
 	[conn release];
-	
-	if (--totalConnections == 0)
-		[self handleEndOfRefresh];
+
+	if (totalConnections > 0 && --totalConnections == 0)
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
 /* cancelAllRefreshes
@@ -524,43 +519,9 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	[folderIconRefreshArray removeAllObjects];
 	while (totalConnections > 0)
 	{
-		AsyncConnection * theConnection = [connectionsArray objectAtIndex:0];
-		[theConnection cancel];
-		[theConnection release];
-		[connectionsArray removeObjectAtIndex:0];
-		--totalConnections;
-	}
-	[self handleEndOfRefresh];
-}
-
-/* handleEndOfRefresh
- * Do the things that come at the end of a refresh, whether or not the refresh
- * was successful.
- */
--(void)handleEndOfRefresh
-{	
-	[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
-	[self stopProgressIndicator];
-	[self showUnreadCountOnApplicationIcon];
-	int newUnread = [db countOfUnread] - unreadAtBeginning;
-	if (growlAvailable && newUnread > 0)
-	{
-		NSNumber * defaultValue = [NSNumber numberWithBool:YES];
-		NSNumber * stickyValue = [NSNumber numberWithBool:NO];
-		NSString * msgText = [NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread];
-		
-		NSDictionary *aNuDict = [NSDictionary dictionaryWithObjectsAndKeys:
-			NSLocalizedString(@"Growl notification name", nil), GROWL_NOTIFICATION_NAME,
-			NSLocalizedString(@"Growl notification title", nil), GROWL_NOTIFICATION_TITLE,
-			msgText, GROWL_NOTIFICATION_DESCRIPTION,
-			appName, GROWL_APP_NAME,
-			defaultValue, GROWL_NOTIFICATION_DEFAULT,
-			stickyValue, GROWL_NOTIFICATION_STICKY,
-			nil];
-		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:GROWL_NOTIFICATION 
-																	   object:nil 
-																	 userInfo:aNuDict
-														   deliverImmediately:YES];
+		AsyncConnection * conn = [connectionsArray objectAtIndex:0];
+		[conn cancel];
+		[self removeConnection:conn];
 	}
 }
 @end

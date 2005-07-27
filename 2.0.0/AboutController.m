@@ -43,9 +43,8 @@
 
 	fileAttributes = [appBundle infoDictionary];
 	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
-	NSString * build = [fileAttributes objectForKey:@"CFBundleVersion"];
-	[versionString setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Version %@.%@", nil), version, build]];
-	
+	[versionString setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version]];
+
 	[[self window] setBackgroundColor:[NSColor whiteColor]];
 	[[self window] center];
 }

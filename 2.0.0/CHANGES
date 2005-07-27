@@ -6,6 +6,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2005
+----------
+- Updates to Swedish localisation.
+- Added support for automatically installing custom styles.
+- Refresh button now toggles between starting and stopping a refresh.
+- Remove the unread count from the application icon in the dock when closing Vienna.
+
 2.0.0.2004
 ----------
 - Add Scripts menu that displays all scripts under ~/Library/Scripts/Applications/Vienna. By

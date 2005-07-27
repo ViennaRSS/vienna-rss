@@ -23,6 +23,7 @@
 #import "AppController.h"
 #import "Constants.h"
 #import "StringExtensions.h"
+#import "ViennaApp.h"
 
 // Private functions
 @interface FoldersTree (Private)
@@ -80,6 +81,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	[nc addObserver:self selector:@selector(outlineViewMenuInvoked:) name:@"MA_Notify_RightClickOnObject" object:nil];
 	[nc addObserver:self selector:@selector(autoCollapseFolder:) name:@"MA_Notify_AutoCollapseFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
+	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
@@ -451,6 +453,24 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		// Select the row under the cursor if it isn't already selected
 		if ([outlineView numberOfSelectedRows] <= 1)
 			[outlineView selectRow:row byExtendingSelection:NO];
+	}
+}
+
+/* handleRefreshStatusChange
+ * Handle a change of the refresh status. We use this to toggle the behaviour of
+ * the button between starting and stopping a refresh.
+ */
+-(void)handleRefreshStatusChange:(NSNotification *)nc
+{
+	if ([NSApp isRefreshing])
+	{
+		[refreshButton setAction:@selector(cancelAllRefreshes:)];
+		[refreshButton setImage:[NSImage imageNamed:@"stopRefresh.tiff"]];
+	}
+	else
+	{
+		[refreshButton setAction:@selector(refreshAllSubscriptions:)];
+		[refreshButton setImage:[NSImage imageNamed:@"refresh.tiff"]];
 	}
 }
 
