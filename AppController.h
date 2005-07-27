@@ -202,6 +202,8 @@
 -(void)openURLInBrowser:(NSString *)urlString;
 -(void)openURLInBrowserWithURL:(NSURL *)url;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
+-(void)runOKAlertSheet:(NSString *)titleString text:(NSString *)bodyText, ...;
+-(void)runOKAlertPanel:(NSString *)titleString text:(NSString *)bodyText, ...;
 
 // Rename sheet functions
 -(IBAction)endRenameFolder:(id)sender;
@@ -214,7 +216,6 @@
 -(void)sortByIdentifier:(NSString *)columnName;
 -(void)showSortDirection;
 -(void)setSortColumnIdentifier:(NSString *)str;
--(void)runOKAlertSheet:(NSString *)titleString text:(NSString *)bodyText, ...;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)selectMessageAfterReload;

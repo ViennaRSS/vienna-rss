@@ -55,6 +55,7 @@ static int messageSortHandler(id item1, id item2, void * context);
 
 // Static constant strings that are typically never tweaked
 static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
+static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 @implementation AppController
 
@@ -93,7 +94,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[defaultValues setObject:boolYes forKey:MAPref_AutoCollapseFolders];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
-	[defaultValues setObject:boolNo forKey:MAPref_ReadingPaneOnRight];
+	[defaultValues setObject:boolYes forKey:MAPref_ReadingPaneOnRight];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Table_Layout] forKey:MAPref_Layout];
 	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
 	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
@@ -147,6 +148,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
+	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 
 	// Init the progress counter and status bar.
 	progressCount = 0;
@@ -1052,7 +1054,10 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// save its split bar position to the preferences.
 	NSWindow * activityWindow = [activityViewer window];
 	[activityWindow performClose:self];
-	
+
+	// Put back the original app icon
+	[NSApp setApplicationIconImage:originalIcon];
+
 	// Remember the message list column position, sizes, etc.
 	[self saveTableSettings];
 	[foldersTree saveFolderSettings];
@@ -1088,6 +1093,42 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 {
 	[self showMainWindow:self];
 	return YES;
+}
+
+/* openFile [delegate]
+ * Called when the user opens a data file associated with Vienna.
+ */
+-(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
+{
+	if ([[filename pathExtension] isEqualToString:@"viennastyle"])
+	{
+		NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
+		NSString * styleName = [[filename lastPathComponent] stringByDeletingPathExtension];
+		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
+
+		// Make sure we actually have a Styles folder.
+		NSFileManager * fileManager = [NSFileManager defaultManager];
+		BOOL isDir = NO;
+
+		if (![fileManager fileExistsAtPath:path isDirectory:&isDir])
+		{
+			if (![fileManager createDirectoryAtPath:path attributes:NULL])
+			{
+				[self runOKAlertPanel:@"Cannot create style folder title" text:@"Cannot create style folder body", path];
+				return NO;
+			}
+		}
+		if (![fileManager copyPath:filename toPath:fullPath handler:nil])
+			[self setActiveStyle:styleName refresh:YES];
+		else
+		{
+			[self initStylesMenu];
+			[self setActiveStyle:styleName refresh:YES];
+			[self runOKAlertPanel:@"New style title" text:@"New style body", styleName];
+		}
+		return YES;
+	}
+	return NO;
 }
 
 /* compactDatabase
@@ -1543,6 +1584,46 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	return [currentArrayOfMessages count];
 }
+
+/* handleRefreshStatusChange
+ * Handle a change of the refresh status.
+ */
+-(void)handleRefreshStatusChange:(NSNotification *)nc
+{
+	if ([NSApp isRefreshing])
+	{
+		[self startProgressIndicator];
+		[self setStatusMessage:NSLocalizedString(@"Refreshing subscriptions...", nil) persist:YES];
+	}
+	else
+	{
+		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
+		[self stopProgressIndicator];
+
+		[self showUnreadCountOnApplicationIcon];
+
+		int newUnread = [db countOfUnread] - unreadAtBeginning;
+		if (growlAvailable && newUnread > 0)
+		{
+			NSNumber * defaultValue = [NSNumber numberWithBool:YES];
+			NSNumber * stickyValue = [NSNumber numberWithBool:NO];
+			NSString * msgText = [NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread];
+			
+			NSDictionary *aNuDict = [NSDictionary dictionaryWithObjectsAndKeys:
+				NSLocalizedString(@"Growl notification name", nil), GROWL_NOTIFICATION_NAME,
+				NSLocalizedString(@"Growl notification title", nil), GROWL_NOTIFICATION_TITLE,
+				msgText, GROWL_NOTIFICATION_DESCRIPTION,
+				appName, GROWL_APP_NAME,
+				defaultValue, GROWL_NOTIFICATION_DEFAULT,
+				stickyValue, GROWL_NOTIFICATION_STICKY,
+				nil];
+			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:GROWL_NOTIFICATION 
+																		   object:nil 
+																		 userInfo:aNuDict
+															   deliverImmediately:YES];
+		}
+	}
+}	
 
 /* objectValueForTableColumn [datasource]
  * Called by the table view to obtain the object at the specified column and row. This is
@@ -2534,6 +2615,21 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 					  nil,
 					  nil, nil,
 					  fullBodyText);
+	[fullBodyText release];
+	va_end(arguments);
+}
+
+/* runOKAlertPanel
+ * Displays an alert panel with just an OK button.
+ */
+-(void)runOKAlertPanel:(NSString *)titleString text:(NSString *)bodyText, ...
+{
+	NSString * fullBodyText;
+	va_list arguments;
+	
+	va_start(arguments, bodyText);
+	fullBodyText = [[NSString alloc] initWithFormat:NSLocalizedString(bodyText, nil) arguments:arguments];
+	NSRunAlertPanel(NSLocalizedString(titleString, nil), fullBodyText, NSLocalizedString(@"OK", nil), nil, nil);
 	[fullBodyText release];
 	va_end(arguments);
 }

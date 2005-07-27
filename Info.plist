@@ -20,6 +20,23 @@
 	<string>Vienna Help</string>
 	<key>CFBundleHelpBookName</key>
 	<string>Vienna Help</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Vienna Style Package</string>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>viennastyle</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>vienna2style.icns</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<string>YES</string>
+		</dict>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -34,9 +51,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2004</string>
+	<string>2005</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0</string>
+	<string>2.0.0.2005</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSMainNibFile</key>

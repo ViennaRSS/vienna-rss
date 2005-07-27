@@ -27,7 +27,6 @@
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;
--(void)handleEndOfRefresh;
 -(void)getCredentialsForFolder;
 -(void)refreshSubscriptions:(NSArray *)foldersArray;
 -(void)pumpSubscriptionRefresh;
