@@ -12,6 +12,7 @@ Thanks!
 - Added support for automatically installing custom styles.
 - Refresh button now toggles between starting and stopping a refresh.
 - Remove the unread count from the application icon in the dock when closing Vienna.
+- Fixed bug where authenticated feeds did not prompt for first time credentials.
 
 2.0.0.2004
 ----------

@@ -142,6 +142,8 @@
 			}
 		}
 	}
+
+	status = MA_Connect_Stopped;
 	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
 	return connector != nil;
 }
@@ -268,7 +270,8 @@
 	[logDetail release];
 	
 	// Complete the connection
-	status = MA_Connect_Failed;
+	if (status != MA_Connect_NeedCredentials)
+		status = MA_Connect_Failed;
 	[self sendConnectionCompleteNotification];
 }
 
