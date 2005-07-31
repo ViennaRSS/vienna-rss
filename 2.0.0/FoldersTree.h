@@ -49,4 +49,5 @@
 -(NSArray *)selectedFolders;
 -(int)nextFolderWithUnread:(int)currentFolderId;
 -(NSArray *)folders:(int)folderId;
+-(NSView *)mainView;
 @end

@@ -337,16 +337,12 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		while ((newsItem = [itemEnumerator nextObject]) != nil)
 		{
 			NSDate * messageDate = [newsItem date];
-			int msgFlag = MA_MsgID_New;
 			
 			// If no dates anywhere then use MA_MsgID_RSSNew as the message number to
 			// force the database to locate a previous copy of this message if there
 			// is one. Then use the current date/time as the message date.
 			if (messageDate == nil)
-			{
 				messageDate = [NSCalendarDate date];
-				msgFlag = MA_MsgID_RSSNew;
-			}
 			
 			// Now insert the message into the database if it is newer than the
 			// last update for this feed.
@@ -356,9 +352,10 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 				NSString * messageTitle = [newsItem title];
 				NSString * messageLink = [newsItem link];
 				NSString * userName = [newsItem author];
-				
+				NSString * guid = [newsItem guid];
+
 				// Create the message
-				Message * message = [[Message alloc] initWithInfo:msgFlag];
+				Message * message = [[Message alloc] initWithGuid:guid];
 				[message setFolderId:[folder itemId]];
 				[message setAuthor:userName];
 				[message setText:messageBody];
@@ -367,7 +364,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 				[message setDate:messageDate];
 				[messageArray addObject:message];
 				[message release];
-				
+
 				// Track most current update
 				if ([messageDate isGreaterThan:newLastUpdate])
 				{

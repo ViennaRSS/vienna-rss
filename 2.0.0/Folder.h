@@ -106,9 +106,9 @@
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(NSArray *)messages;
--(Message *)messageFromID:(int)messageId;
+-(Message *)messageFromGuid:(NSString *)guid;
 -(void)addMessage:(Message *)newMessage;
--(void)deleteMessage:(int)messageId;
+-(void)deleteMessage:(NSString *)messageId;
 -(void)markFolderEmpty;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;

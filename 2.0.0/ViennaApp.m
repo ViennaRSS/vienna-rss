@@ -471,7 +471,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 -(void)setCurrentFolder:(Folder *)newCurrentFolder
 {
 	int folderId = [newCurrentFolder itemId];
-	[[self delegate] selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
+	[[self delegate] selectFolderAndMessage:folderId guid:nil];
 }
 
 /* readingPaneOnRight

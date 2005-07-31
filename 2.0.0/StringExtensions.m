@@ -35,6 +35,89 @@
 
 @implementation NSString (StringExtensions)
 
+/* stringByRemovingHTML
+ * Returns an autoreleased instance of the specified string with all HTML tags removed.
+ */
++(NSString *)stringByRemovingHTML:(NSString *)theString
+{
+	NSMutableString * aString = [NSMutableString stringWithString:theString];
+	int maxChrs = [theString length];
+	int indexOfChr = 0;
+	int tagLength = 0;
+	int tagStartIndex = 0;
+	int lengthToLastWord = 0;
+	BOOL isInQuote = NO;
+	BOOL isInTag = NO;
+	
+	// Rudimentary HTML tag parsing. This could be done by initWithHTML on an attributed string
+	// and extracting the raw string but initWithHTML cannot be invoked within an NSURLConnection
+	// callback which is where this is probably liable to be used.
+	//
+	// This code basically throws away all HTML tags up to <br> or <br /> or the first raw newline
+	// or until 80 characters have been processed.
+	//
+	while (indexOfChr < maxChrs)
+	{
+		unichar ch = [aString characterAtIndex:indexOfChr];
+		if (ch == '"')
+			isInQuote = !isInQuote;
+		if (isInTag)
+			++tagLength;
+		if (ch == ' ' && !isInTag)
+			lengthToLastWord = indexOfChr;
+		if (ch == '<' && !isInQuote)
+		{
+			isInTag = YES;
+			tagStartIndex = indexOfChr;
+			tagLength = 0;
+		}
+		if (ch == '>' && isInTag)
+		{
+			if (++tagLength > 2)
+			{
+				NSRange tagRange = NSMakeRange(tagStartIndex, tagLength);
+				NSString * tag = [[aString substringWithRange:tagRange] lowercaseString];
+				[aString deleteCharactersInRange:tagRange];
+				
+				// Reset scan to the point where the tag started minus one because
+				// we bump up indexOfChr at the end of the loop.
+				indexOfChr = tagStartIndex - 1;
+				maxChrs = [aString length];
+				isInTag = NO;
+				
+				if (([tag isEqualToString:@"<br>"] || [tag isEqualToString:@"<br />"]) && indexOfChr >= 0)
+				{
+					lengthToLastWord = tagStartIndex;
+					break;
+				}
+			}
+		}
+		if (ch == '\n' || ch == '\r')
+		{
+			lengthToLastWord = indexOfChr;
+			break;
+		}
+		if (indexOfChr >= 80 && !isInTag)
+			break;
+		++indexOfChr;
+	}
+	
+	// If we got a long word with no spaces then just break the string
+	// at the limit.
+	if (lengthToLastWord == 0)
+		lengthToLastWord = MIN(maxChrs, 80);
+	if (indexOfChr != maxChrs)
+	{
+		[aString deleteCharactersInRange:NSMakeRange(lengthToLastWord, maxChrs - lengthToLastWord)];
+
+		// If we truncated at the end of a word, append ellipsises to show that
+		// there was more. Really just a little polish.
+		if (lengthToLastWord < indexOfChr)
+			[aString appendString:@"..."];
+	}
+	return aString;
+}
+
 /* firstNonBlankLine
  * Returns the first line of the string that isn't entirely spaces or tabs. Leading and
  * trailing spaces in the returned string are preserved. If all lines in the string are

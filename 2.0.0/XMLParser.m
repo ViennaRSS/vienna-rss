@@ -370,7 +370,11 @@
 		{
 			CFXMLTreeRef subTree = CFTreeGetChildAtIndex(tree, index);
 			CFDataRef valueData = CFXMLTreeCreateXMLData(NULL, subTree);
-			[valueString appendString:[NSString stringWithCString:(char *)CFDataGetBytePtr(valueData) length:CFDataGetLength(valueData)]];
+
+			NSString * nString = [[NSString alloc] initWithBytes:CFDataGetBytePtr(valueData) length:CFDataGetLength(valueData) encoding:NSUTF8StringEncoding];
+			[valueString appendString:nString];
+			[nString release];
+
 			CFRelease(valueData);
 		}
 	}
@@ -442,7 +446,7 @@
 			NSString * stringToAppend;
 			
 			if ([entityString characterAtIndex:1] == '#' && entityRange.length > 3)
-				stringToAppend = [NSString stringWithFormat:@"%c", [[entityString substringFromIndex:2] intValue]];
+				stringToAppend = [NSString stringWithFormat:@"%C", [[entityString substringFromIndex:2] intValue]];
 			else
 			{
 				if ([entityString isEqualTo:@"&lt;"])				stringToAppend = @"<";

@@ -28,7 +28,6 @@
 @class PreferenceController;
 @class AboutController;
 @class FoldersTree;
-@class FolderHeaderBar;
 @class CheckForUpdates;
 @class DownloadUpdate;
 @class SearchFolder;
@@ -40,21 +39,13 @@
 @class TexturedHeader;
 @class FeedCredentials;
 
-// How to select a message after reloading a folder
-// (Values must be <= 0 because > 0 is a message number)
-#define MA_Select_None		0
-#define MA_Select_Unread	-1
-
 @interface AppController : NSObject {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet MessageListView * messageList;
 	IBOutlet ArticleView * textView;
-	IBOutlet FolderHeaderBar * headerBarView;
-	IBOutlet NSWindow * gotoWindow;
 	IBOutlet NSWindow * renameWindow;
 	IBOutlet NSWindow * compactDatabaseWindow;
-	IBOutlet NSTextField * gotoNumber;
 	IBOutlet NSTextField * renameField;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSSplitView * splitView2;
@@ -86,7 +77,7 @@
 	NSMutableDictionary * scriptPathMappings;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
-	BOOL selectAtEndOfReload;
+	NSString * guidOfMessageToSelect;
 	NSFont * messageListFont;
 	NSImage * originalIcon;
 	NSString * sortColumnIdentifier;
@@ -105,7 +96,6 @@
 	int lastCountOfUnread;
 	int unreadAtBeginning;
 	BOOL growlAvailable;
-	int requestedMessage;
 	NSString * appName;
 	NSString * selectedStyle;
 	NSString * htmlTemplate;
@@ -163,7 +153,7 @@
 -(void)handleRSSLink:(NSString *)linkPath;
 
 // Message selection functions
--(BOOL)scrollToMessage:(int)number;
+-(BOOL)scrollToMessage:(NSString *)guid;
 -(void)selectFirstUnreadInFolder;
 -(void)makeRowSelectedAndVisible:(int)rowIndex;
 -(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
@@ -182,7 +172,7 @@
 -(void)setReadingPaneOnRight:(BOOL)onRightFlag;
 -(void)refreshFolder:(BOOL)reloadData;
 -(void)markAllReadInArray:(NSArray *)folderArray;
--(BOOL)selectFolderAndMessage:(int)folderId messageNumber:(int)messageNumber;
+-(BOOL)selectFolderAndMessage:(int)folderId guid:(NSString *)guid;
 -(void)selectFolderWithFilter:(int)newFolderId;
 -(void)reloadArrayOfMessages;
 -(void)updateMessageText;

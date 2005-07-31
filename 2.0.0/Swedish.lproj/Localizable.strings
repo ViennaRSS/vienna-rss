@@ -49,6 +49,9 @@
 "%@ at %@" = "%@ vid %@";
 "Delete" = "Radera";
 "Quit" = "Avsluta";
+"Additional actions for the selected folder" = "Additional actions for the selected folder";
+"Create a new subscription" = "Create a new subscription";
+"Refresh all your subscriptions" = "Refresh all your subscriptions";
 "Delete selected message" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
 "Delete selected message text" = "Det här valet går ej att ångra.";
 "Infobar Format" = "%d artiklar";

@@ -21,7 +21,7 @@
 #import "Message.h"
 
 // The names here must correspond to the messageList identifiers
-NSString * MA_Field_Number = @"Number";
+NSString * MA_Field_GUID = @"GUID";
 NSString * MA_Field_Subject = @"Subject";
 NSString * MA_Field_Author = @"Author";
 NSString * MA_Field_Link = @"Link";
@@ -38,7 +38,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 
 /* initWithData
  */
--(id)initWithInfo:(int)newMessageId
+-(id)initWithGuid:(NSString *)theGuid
 {
 	if ((self = [super init]) != nil)
 	{
@@ -48,7 +48,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 		markedFlag = NO;
 		messageStatus = MA_MsgStatus_Empty;
 		[self setFolderId:-1];
-		[self setNumber:newMessageId];
+		[self setGuid:theGuid];
 		[self setParentId:0];
 	}
 	return self;
@@ -113,7 +113,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(int)folderId					{ return [[messageData objectForKey:MA_Field_Folder] intValue]; }
 -(NSString *)author				{ return [messageData objectForKey:MA_Field_Author]; }
 -(NSString *)link				{ return [messageData objectForKey:MA_Field_Link]; }
--(int)number					{ return [[messageData objectForKey:MA_Field_Number] intValue]; }
+-(NSString *)guid				{ return [messageData objectForKey:MA_Field_GUID]; }
 -(int)parentId					{ return [[messageData objectForKey:MA_Field_Parent] intValue]; }
 -(NSString *)title				{ return [messageData objectForKey:MA_Field_Subject]; }
 -(NSString *)text				{ return [messageData objectForKey:MA_Field_Text]; }
@@ -126,11 +126,11 @@ NSString * MA_Field_Headlines = @"Headlines";
 	[messageData setObject:[NSNumber numberWithInt:newFolderId] forKey:MA_Field_Folder];
 }
 
-/* setNumber
+/* setGuid
  */
--(void)setNumber:(int)newMessageId
+-(void)setGuid:(NSString *)newGuid
 {
-	[messageData setObject:[NSNumber numberWithInt:newMessageId] forKey:MA_Field_Number];
+	[messageData setObject:newGuid forKey:MA_Field_GUID];
 }
 
 /* setParentId
@@ -151,7 +151,7 @@ NSString * MA_Field_Headlines = @"Headlines";
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Message ID %u (retain=%d)", [self number], [self retainCount]];
+	return [NSString stringWithFormat:@"Message GUID %@ (retain=%d)", [self guid], [self retainCount]];
 }
 
 /* dealloc

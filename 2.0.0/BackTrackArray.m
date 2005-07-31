@@ -20,13 +20,6 @@
 
 #import "BackTrackArray.h"
 
-// This structure defines one item in the backtrack
-// array sufficient to backtrack to any element.
-typedef struct{
-	int folderId;
-	int messageNumber;
-} BackTrackItem;
-
 @implementation BackTrackArray
 
 /* initWithMaximum
@@ -64,17 +57,13 @@ typedef struct{
  * Removes an item from the tail of the queue as long as the queue is not
  * empty and returns the backtrack data.
  */
--(BOOL)previousItemAtQueue:(int *)folderId messageNumber:(int *)messageNumber
+-(BOOL)previousItemAtQueue:(int *)folderId messageNumber:(NSString **)messageNumber
 {
 	if (queueIndex > 0)
 	{
-		BackTrackItem * data;
-		NSData * dataItem;
-
-		dataItem = [array objectAtIndex:--queueIndex];
-		data = (BackTrackItem *)[dataItem bytes];
-		*folderId = data->folderId;
-		*messageNumber = data->messageNumber;
+		NSDictionary * dataItem = [array objectAtIndex:--queueIndex];
+		*folderId = [[dataItem valueForKey:@"Folder"] intValue];
+		*messageNumber = [dataItem valueForKey:@"GUID"];
 		return YES;
 	}
 	return NO;
@@ -84,17 +73,13 @@ typedef struct{
  * Removes an item from the tail of the queue as long as the queue is not
  * empty and returns the backtrack data.
  */
--(BOOL)nextItemAtQueue:(int *)folderId messageNumber:(int *)messageNumber
+-(BOOL)nextItemAtQueue:(int *)folderId messageNumber:(NSString **)messageNumber
 {
 	if (queueIndex < (int)[array count] - 1)
 	{
-		BackTrackItem * data;
-		NSData * dataItem;
-
-		dataItem = [array objectAtIndex:++queueIndex];
-		data = (BackTrackItem *)[dataItem bytes];
-		*folderId = data->folderId;
-		*messageNumber = data->messageNumber;
+		NSDictionary * dataItem = [array objectAtIndex:++queueIndex];
+		*folderId = [[dataItem valueForKey:@"Folder"] intValue];
+		*messageNumber = [dataItem valueForKey:@"GUID"];
 		return YES;
 	}
 	return NO;
@@ -109,11 +94,8 @@ typedef struct{
  * new 'head' position. This produces the expected results when tracking
  * from the new item inserted back to the most recent item.
  */
--(void)addToQueue:(int)folderId messageNumber:(int)messageNumber
+-(void)addToQueue:(int)folderId messageNumber:(NSString *)guid
 {
-	NSData * dataItem;
-	BackTrackItem data;
-
 	while (queueIndex + 1 < (int)[array count])
 		[array removeObjectAtIndex:queueIndex + 1];
 	if ([array count] == maxItems)
@@ -121,11 +103,11 @@ typedef struct{
 		[array removeObjectAtIndex:0];
 		--queueIndex;
 	}
-	data.folderId = folderId;
-	data.messageNumber = messageNumber;
-	dataItem = [[NSData alloc] initWithBytes:&data length:sizeof(data)];
+
+	NSMutableDictionary * dataItem = [NSMutableDictionary dictionary];
+	[dataItem setValue:[NSNumber numberWithInt:folderId] forKey:@"Folder"];
+	[dataItem setValue:guid forKey:@"GUID"];
 	[array addObject:dataItem];
-	[dataItem release];
 	++queueIndex;
 }
 

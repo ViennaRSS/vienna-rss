@@ -92,10 +92,10 @@
 
 // Message functions
 -(BOOL)initMessageArray:(Folder *)folder;
--(int)addMessage:(int)folderID message:(Message *)message;
--(BOOL)deleteMessage:(int)folderId messageNumber:(int)messageNumber;
+-(BOOL)addMessage:(int)folderID message:(Message *)message;
+-(BOOL)deleteMessage:(int)folderId guid:(NSString *)guid;
 -(NSArray *)arrayOfMessages:(int)folderId filterString:(NSString *)filterString;
--(NSString *)messageText:(int)folderId messageId:(int)messageId;
--(void)markMessageRead:(int)folderId messageId:(int)messageId isRead:(BOOL)isRead;
--(void)markMessageFlagged:(int)folderId messageId:(int)messageId isFlagged:(BOOL)isFlagged;
+-(NSString *)messageText:(int)folderId guid:(NSString *)guid;
+-(void)markMessageRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
+-(void)markMessageFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
 @end

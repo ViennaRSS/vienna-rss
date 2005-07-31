@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * MA_Field_Number;
+extern NSString * MA_Field_GUID;
 extern NSString * MA_Field_Subject;
 extern NSString * MA_Field_Author;
 extern NSString * MA_Field_Link;
@@ -33,17 +33,13 @@ extern NSString * MA_Field_Folder;
 extern NSString * MA_Field_Parent;
 extern NSString * MA_Field_Headlines;
 
-// Custom values for message IDs
-#define MA_MsgID_New			-1
-#define MA_MsgID_RSSNew			-2
-
 // Message status values
 #define MA_MsgStatus_Empty		0
 #define MA_MsgStatus_New		1
 #define MA_MsgStatus_Updated	2
 
 // Message field IDs
-#define MA_FieldID_Number		400
+#define MA_FieldID_GUID			400
 #define MA_FieldID_Subject		401
 #define MA_FieldID_Author		402
 #define MA_FieldID_Date			403
@@ -65,9 +61,9 @@ extern NSString * MA_Field_Headlines;
 }
 
 // Accessor functions
--(id)initWithInfo:(int)messageId;
--(int)number;
+-(id)initWithGuid:(NSString *)theGuid;
 -(int)parentId;
+-(NSString *)guid;
 -(NSString *)author;
 -(NSString *)text;
 -(NSString *)title;
@@ -78,7 +74,7 @@ extern NSString * MA_Field_Headlines;
 -(BOOL)isFlagged;
 -(BOOL)hasComments;
 -(int)status;
--(void)setNumber:(int)newMessageId;
+-(void)setGuid:(NSString *)newGuid;
 -(void)setParentId:(int)newParentId;
 -(void)setTitle:(NSString *)newMessageTitle;
 -(void)setLink:(NSString *)newLink;
