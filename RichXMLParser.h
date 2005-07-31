@@ -24,6 +24,7 @@
 	NSString * title;
 	NSString * author;
 	NSString * link;
+	NSString * guid;
 	NSDate * date;
 	NSString * description;
 }
@@ -32,6 +33,7 @@
 -(NSString *)title;
 -(NSString *)description;
 -(NSString *)author;
+-(NSString *)guid;
 -(NSDate *)date;
 -(NSString *)link;
 @end

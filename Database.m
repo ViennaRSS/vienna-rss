@@ -40,7 +40,8 @@
 @end
 
 // The current database version number
-const int MA_Current_DB_Version = 11;
+const int MA_Min_Supported_DB_Version = 11;
+const int MA_Current_DB_Version = 12;
 
 @implementation Database
 
@@ -123,26 +124,55 @@ const int MA_Current_DB_Version = 11;
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
 
 		// Create a criteria to find all marked messages
-		Criteria * markedCriteria = [[Criteria alloc] initWithField:@"Flagged" withOperator:MA_CritOper_Is withValue:@"Yes"];
+		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
 		[markedCriteria release];
 
 		// Create a criteria to show all unread messages
-		Criteria * unreadCriteria = [[Criteria alloc] initWithField:@"Read" withOperator:MA_CritOper_Is withValue:@"No"];
+		Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
 		[unreadCriteria release];
 		
 		// Create a criteria to show all messages received today
-		Criteria * todayCriteria = [[Criteria alloc] initWithField:@"Date" withOperator:MA_CritOper_Is withValue:@"today"];
+		Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
 		[todayCriteria release];
 		
 		// Set the initial version
-		[self setDatabaseVersion:MA_Current_DB_Version];
+		databaseVersion = MA_Current_DB_Version;
+		[self executeSQLWithFormat:@"insert into info (version) values (%d)", databaseVersion];
 	}
 	
+	// Handle 'retyping' the message_id field when going from v11 to v12. This
+	// code should be ripped out after we're sure everybody is now on a v12 db.
+	if (databaseVersion == 11)
+	{
+		[self beginTransaction];
+		SQLResult * results = [sqlDatabase performQuery:@"select message_id, folder_id from messages"];
+		if (results && [results rowCount])
+		{
+			NSEnumerator * enumerator = [results rowEnumerator];
+			SQLRow * row;
+			
+			while ((row = [enumerator nextObject]))
+			{
+				int messageNumber = [[row stringForColumn:@"message_id"] intValue];
+				int folderId = [[row stringForColumn:@"folder_id"] intValue];
+
+				NSString * guid = [NSString stringWithFormat:@"%d", messageNumber];
+				NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
+				[self executeSQLWithFormat:@"update messages set message_id='%@' where message_id=%d and folder_id=%d", preparedGuid, messageNumber, folderId];
+			}
+		}
+		[results release];
+
+		// Set the new version
+		[self setDatabaseVersion:MA_Current_DB_Version];
+		[self commitTransaction];
+	}
+
 	// Trap unsupported databases
-	if (databaseVersion < MA_Current_DB_Version)
+	if (databaseVersion < MA_Min_Supported_DB_Version)
 	{
 		NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
 						NSLocalizedString(@"Unrecognised database format text", nil),
@@ -161,7 +191,7 @@ const int MA_Current_DB_Version = 11;
 	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
 	[self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:15];
 	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:YES width:15];
-	[self addField:MA_Field_Number type:MA_FieldType_Integer tag:MA_FieldID_Number sqlField:@"message_id" visible:NO width:72];
+	[self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
 	[self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
 	[self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
 	[self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
@@ -297,7 +327,7 @@ const int MA_Current_DB_Version = 11;
  */
 -(void)setDatabaseVersion:(int)newVersion
 {
-	[self executeSQLWithFormat:@"insert into info (version) values (%d)", newVersion];
+	[self executeSQLWithFormat:@"update info set version=%d", newVersion];
 	databaseVersion = newVersion;
 }
 
@@ -811,15 +841,15 @@ const int MA_Current_DB_Version = 11;
 }
 
 /* addMessage
- * Adds or updates a message in the specified folder. Returns the number of the
+ * Adds or updates a message in the specified folder. Returns the GUID of the
  * message that was added or updated or -1 if we couldn't add the message for
  * some reason.
  */
--(int)addMessage:(int)folderID message:(Message *)message
+-(BOOL)addMessage:(int)folderID message:(Message *)message
 {
 	// Exit now if we're read-only
 	if (readOnly)
-		return -1;
+		return NO;
 
 	// Make sure the folder ID is valid. We need it to decipher
 	// some info before we add the message.
@@ -835,7 +865,7 @@ const int MA_Current_DB_Version = 11;
 		NSDate * messageDate = [[message messageData] objectForKey:MA_Field_Date];
 		NSString * messageLink = [[message messageData] objectForKey:MA_Field_Link];
 		NSString * userName = [[message messageData] objectForKey:MA_Field_Author];
-		int messageNumber = [message number];
+		NSString * messageGuid = [message guid];
 		int parentId = [message parentId];
 		BOOL marked_flag = [message isFlagged];
 		BOOL read_flag = [message isRead];
@@ -861,53 +891,21 @@ const int MA_Current_DB_Version = 11;
 		NSString * preparedMessageText = [SQLDatabase prepareStringForQuery:messageText];
 		NSString * preparedMessageLink = [SQLDatabase prepareStringForQuery:messageLink];
 		NSString * preparedUserName = [SQLDatabase prepareStringForQuery:userName];
+		NSString * preparedMessageGuid = [SQLDatabase prepareStringForQuery:messageGuid];
 
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 
-		// Special case for RSS messages. These messages replace duplicates which need to be
-		// identified by matching the sender and title, then the message text. We start back
-		// from the most recent message for performance reasons. If we identify a duplicate
-		// then we replace that duplicate otherwise we file as a new message.
-		if (messageNumber == MA_MsgID_RSSNew)
-		{
-			NSArray * msgs = [folder messages];
-			int count = [msgs count];
-
-			messageNumber = MA_MsgID_New;
-			while (--count >= 0)
-			{
-				Message * thisMessage = [msgs objectAtIndex:count];
-				if ([[thisMessage title] isEqualToString:messageTitle] && [[thisMessage author] isEqualToString:userName])
-				{
-					NSString * msgText = [self messageText:folderID messageId:[thisMessage number]];
-					if ([msgText isEqualToString:messageText])
-					{
-						messageNumber = [thisMessage number];
-						read_flag = [thisMessage isRead];
-						break;
-					}
-					else
-					{
-						// The message already exists but the text is different.
-						messageNumber = [thisMessage number];
-						read_flag = NO;
-						break;
-					}
-				}
-			}
-		}
-		
-		// We know we're inserting a new message when the messagenumber
-		// we have now is MA_MsgID_New.
-		if (messageNumber == MA_MsgID_New)
+		// Does this message already exist?
+		Message * theMessage = [folder messageFromGuid:messageGuid];
+		if (theMessage == nil)
 		{
 			SQLResult * results;
 
 			results = [sqlDatabase performQueryWithFormat:
 					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, read_flag, marked_flag, title, text) "
-					"values((select coalesce(max(message_id)+1, 1) from messages where folder_id=%d), %d, %d, '%@', '%@', %f, %d, %d, '%@', '%@')",
-					folderID,
+					"values('%@', %d, %d, '%@', '%@', %f, %d, %d, '%@', '%@')",
+					preparedMessageGuid,
 					parentId,
 					folderID,
 					preparedUserName,
@@ -918,22 +916,10 @@ const int MA_Current_DB_Version = 11;
 					preparedMessageTitle,
 					preparedMessageText];
 			if (!results)
-				return -1;
-			[results release];
-			
-			// Now extract the number of the message we just inserted. This is a tricky step that tries to
-			// be as specific as possible to avoid potential race conditions. I regard the interval value to
-			// be a reasonable choice in making this distinction. Hope I'm not wrong (!)
-			results = [sqlDatabase performQueryWithFormat:@"select max(message_id) from messages where folder_id=%d", folderID, interval];
-			if (results && [results rowCount])
-			{
-				SQLRow * row = [results rowAtIndex:0];
-				messageNumber = [[row stringForColumn:@"max(message_id)"] intValue];
-			}
+				return NO;
 			[results release];
 
 			// Add the message to the folder
-			[message setNumber:messageNumber];
 			[message setStatus:MA_MsgStatus_New];
 			[folder addMessage:message];
 			
@@ -943,67 +929,27 @@ const int MA_Current_DB_Version = 11;
 		}
 		else
 		{
-			Message * newMessage = [folder messageFromID:messageNumber];
-			if (newMessage != nil)
-			{
-				BOOL old_read_flag = [newMessage isRead];
-				SQLResult * results;
-				
-				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, read_flag=%d, "
-														 "marked_flag=%d, title='%@', text='%@' where folder_id=%d and message_id=%d",
-														 parentId,
-														 preparedUserName,
-														 preparedMessageLink,
-														 interval,
-														 read_flag,
-														 marked_flag,
-														 preparedMessageTitle,
-														 preparedMessageText,
-														 folderID,
-														 messageNumber];
-				if (!results)
-					return -1;
+			BOOL read_flag = [theMessage isRead];
+			SQLResult * results;
 
-				// If the update succeeded then we just need to fiddle
-				// the read count on the folders if it changed.
-				if (old_read_flag != read_flag)
-					adjustment = (read_flag ? -1 : 1);
+			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, read_flag=%d, "
+													 "marked_flag=%d, title='%@', text='%@' where folder_id=%d and message_id='%@'",
+													 parentId,
+													 preparedUserName,
+													 preparedMessageLink,
+													 interval,
+													 read_flag,
+													 marked_flag,
+													 preparedMessageTitle,
+													 preparedMessageText,
+													 folderID,
+													 preparedMessageGuid];
+			if (!results)
+				return NO;
 
-				// This was an updated message
-				[message setStatus:MA_MsgStatus_Updated];
-				[results release];
-			}
-			else
-			{
-				// This is where we're inserting a message that has a known
-				// message number and we know it doesn't already appear in the
-				// database.
-				SQLResult * results;
-				results = [sqlDatabase performQueryWithFormat:
-							@"insert into messages (message_id, parent_id, folder_id, sender, link, date, read_flag, marked_flag, title, text) "
-							"values(%d, %d, %d, '%@', '%@', %f, %d, %d, '%@', '%@')",
-							messageNumber,
-							parentId,
-							folderID,
-							preparedUserName,
-							preparedMessageLink,
-							interval,
-							read_flag,
-							marked_flag,
-							preparedMessageTitle,
-							preparedMessageText];
-				if (!results)
-					return -1;
-				
-				// Add the message to the folder
-				[folder addMessage:message];
-				[message setStatus:MA_MsgStatus_New];
-				
-				// Update folder unread count
-				if (!read_flag)
-					adjustment = 1;
-				[results release];
-			}
+			// This was an updated message
+			[message setStatus:MA_MsgStatus_Updated];
+			[results release];
 		}
 
 		// Fix unread count on parent folders
@@ -1017,15 +963,15 @@ const int MA_Current_DB_Version = 11;
 				[folder setChildUnreadCount:[folder childUnreadCount] + adjustment];
 			}
 		}
-		return messageNumber;
+		return YES;
 	}
-	return -1;
+	return NO;
 }
 
 /* deleteMessage
  * Deletes a message from the specified folder
  */
--(BOOL)deleteMessage:(int)folderId messageNumber:(int)messageNumber
+-(BOOL)deleteMessage:(int)folderId guid:(NSString *)guid
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
@@ -1033,13 +979,15 @@ const int MA_Current_DB_Version = 11;
 		// Prime the message cache
 		[self initMessageArray:folder];
 
-		Message * message = [folder messageFromID:messageNumber];
+		Message * message = [folder messageFromGuid:guid];
 		if (message != nil)
 		{
+			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
+
 			// Verify we're on the right thread
 			[self verifyThreadSafety];
 			
-			SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where folder_id=%d and message_id=%d", folderId, messageNumber];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where folder_id=%d and message_id='%@'", folderId, preparedGuid];
 			if (results)
 			{
 				if (![message isRead])
@@ -1056,7 +1004,7 @@ const int MA_Current_DB_Version = 11;
 						[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] - 1];
 					}
 				}
-				[folder deleteMessage:messageNumber];
+				[folder deleteMessage:guid];
 				[results release];
 				return YES;
 			}
@@ -1397,16 +1345,16 @@ const int MA_Current_DB_Version = 11;
 
 			while ((row = [enumerator nextObject]) != nil)
 			{
-				int messageId = [[row stringForColumn:@"message_id"] intValue];
-				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
+				NSString * guid = [row stringForColumn:@"message_id"];
 				NSString * title = [row stringForColumn:@"title"];
 				NSString * author = [row stringForColumn:@"sender"];
+				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 
 				// Keep our own track of unread messages
 				if (!read_flag)
 					++unread_count;
 				
-				Message * message = [[Message alloc] initWithInfo:messageId];
+				Message * message = [[Message alloc] initWithGuid:guid];
 				[message markRead:read_flag];
 				[message setFolderId:folderId];
 				[message setTitle:title];
@@ -1637,7 +1585,7 @@ const int MA_Current_DB_Version = 11;
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
 		if ([filterString isNotEqualTo:@""])
 		{
-			Criteria * clause = [[Criteria alloc] initWithField:@"Text" withOperator:MA_CritOper_Contains withValue:filterString];
+			Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:filterString];
 			[tree addCriteria:clause];
 			[clause release];
 		}
@@ -1650,12 +1598,11 @@ const int MA_Current_DB_Version = 11;
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
-			int lastMessageId = -1;
 			SQLRow * row;
 
 			while ((row = [enumerator nextObject]) != nil)
 			{
-				int messageId = [[row stringForColumn:@"message_id"] intValue];
+				NSString * guid = [row stringForColumn:@"message_id"];
 				int parentId = [[row stringForColumn:@"parent_id"] intValue];
 				int messageFolderId = [[row stringForColumn:@"folder_id"] intValue];
 				NSString * messageTitle = [row stringForColumn:@"title"];
@@ -1669,7 +1616,7 @@ const int MA_Current_DB_Version = 11;
 				if (!read_flag)
 					++unread_count;
 				
-				Message * message = [[Message alloc] initWithInfo:messageId];
+				Message * message = [[Message alloc] initWithGuid:guid];
 				[message setTitle:messageTitle];
 				[message setAuthor:author];
 				[message setLink:link];
@@ -1681,8 +1628,6 @@ const int MA_Current_DB_Version = 11;
 				[newArray addObject:message];
 				[folder addMessage:message];
 				[message release];
-
-				lastMessageId = messageId;
 			}
 
 			// This is a good time to do a quick check to ensure that our
@@ -1761,7 +1706,7 @@ const int MA_Current_DB_Version = 11;
 /* markMessageRead
  * Marks a message as read or unread.
  */
--(void)markMessageRead:(int)folderId messageId:(int)messageId isRead:(BOOL)isRead
+-(void)markMessageRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
@@ -1769,14 +1714,16 @@ const int MA_Current_DB_Version = 11;
 		// Prime the message cache
 		[self initMessageArray:folder];
 
-		Message * message = [folder messageFromID:messageId];
+		Message * message = [folder messageFromGuid:guid];
 		if (message != nil && isRead != [message isRead])
 		{
+			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
+
 			// Verify we're on the right thread
 			[self verifyThreadSafety];
 			
 			// Mark an individual message read
-			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%d where folder_id=%d and message_id=%d", isRead, folderId, messageId];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%d where folder_id=%d and message_id='%@'", isRead, folderId, preparedGuid];
 			if (results)
 			{
 				int adjustment = (isRead ? -1 : 1);
@@ -1809,24 +1756,26 @@ const int MA_Current_DB_Version = 11;
 /* markMessageFlagged
  * Marks a message as flagged or unflagged.
  */
--(void)markMessageFlagged:(int)folderId messageId:(int)messageId isFlagged:(BOOL)isFlagged
+-(void)markMessageFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
 {
+	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 	[self verifyThreadSafety];
-	[self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%d and message_id=%d", isFlagged, folderId, messageId];
+	[self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%d and message_id='%@'", isFlagged, folderId, preparedGuid];
 }
 
 /* messageText
  * Retrieve the text of the specified message.
  */
--(NSString *)messageText:(int)folderId messageId:(int)messageId
+-(NSString *)messageText:(int)folderId guid:(NSString *)guid
 {
+	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 	SQLResult * results;
 	NSString * text;
 
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
 	
-	results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id=%d", folderId, messageId];
+	results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderId, preparedGuid];
 	if (results && [results rowCount] > 0)
 	{
 		int lastRow = [results rowCount] - 1;

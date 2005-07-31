@@ -25,6 +25,7 @@
 @end
 
 @interface NSString (StringExtensions)
+	+(NSString *)stringByRemovingHTML:(NSString *)theString;
 	-(NSString *)firstNonBlankLine;
 	-(int)indexOfCharacterInString:(char)ch afterIndex:(int)startIndex;
 	-(BOOL)hasCharacter:(char)ch;

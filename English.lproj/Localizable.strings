@@ -50,6 +50,10 @@
 "%@ at %@" = "%@ at %@";
 "Delete" = "Delete";
 "Quit" = "Quit";
+"Refresh cancelled" = "Refresh cancelled";
+"Additional actions for the selected folder" = "Additional actions for the selected folder";
+"Create a new subscription" = "Create a new subscription";
+"Refresh all your subscriptions" = "Refresh all your subscriptions";
 "New style title" = "Vienna has installed a new style";
 "New style body" = "The style '%@' has been installed to your Styles folder and added to the Style menu.";
 "Cannot create style folder title" = "Cannot create style folder";

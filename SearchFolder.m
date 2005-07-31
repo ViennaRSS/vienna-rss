@@ -467,7 +467,7 @@
 	if (searchFolderId == -1)
 	{
 		searchFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
-		[[NSApp delegate] selectFolderAndMessage:searchFolderId messageNumber:MA_Select_Unread];
+		[[NSApp delegate] selectFolderAndMessage:searchFolderId guid:nil];
 	}
 	else
 		[db updateSearchFolder:searchFolderId withFolder:folderName withQuery:criteriaTree];

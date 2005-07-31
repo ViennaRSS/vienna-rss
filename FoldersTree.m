@@ -370,7 +370,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		if (nextNode == thisNode)
 			return [thisNode nodeId];
 
-		if ([[nextNode folder] childUnreadCount])
+		if (([[nextNode folder] childUnreadCount]) && ![outlineView isItemExpanded:nextNode])
 			return [nextNode nodeId];
 		
 		if ([[nextNode folder] unreadCount])
@@ -654,6 +654,14 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		}
 		[realCell setImage:[[node folder] image]];
 	}
+}
+
+/* mainView
+ * Return the main view of this class.
+ */
+-(NSView *)mainView
+{
+	return outlineView;
 }
 
 /* outlineViewSelectionDidChange

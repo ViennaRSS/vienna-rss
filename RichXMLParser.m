@@ -26,12 +26,12 @@
 	-(void)setDescription:(NSString *)newDescription;
 	-(void)setAuthor:(NSString *)newAuthor;
 	-(void)setDate:(NSDate *)newDate;
+	-(void)setGuid:(NSString *)newGuid;
 	-(void)setLink:(NSString *)newLink;
 @end
 
 @interface RichXMLParser (Private)
 	-(void)reset;
-	-(void)getEncoding;
 	-(BOOL)initRSSFeed:(XMLParser *)feedTree isRDF:(BOOL)isRDF;
 	-(XMLParser *)channelTree:(XMLParser *)feedTree;
 	-(BOOL)initRSSFeedHeader:(XMLParser *)feedTree;
@@ -41,7 +41,6 @@
 	-(void)setLink:(NSString *)newLink;
 	-(void)setDescription:(NSString *)newDescription;
 	-(void)setLastModified:(NSDate *)newDate;
-	-(NSString *)encodedValueOfElement:(XMLParser *)tree;
 	-(void)ensureTitle:(FeedItem *)item;
 @end
 
@@ -57,6 +56,7 @@
 		[self setTitle:@""];
 		[self setDescription:@""];
 		[self setAuthor:@""];
+		[self setGuid:@""];
 		[self setDate:nil];
 		[self setLink:@""];
 	}
@@ -103,6 +103,16 @@
 	date = newDate;
 }
 
+/* setGuid
+ * Set the item GUID.
+ */
+-(void)setGuid:(NSString *)newGuid
+{
+	[newGuid retain];
+	[guid release];
+	guid = newGuid;
+}
+
 /* setLink
  * Set the item link.
  */
@@ -145,6 +155,14 @@
 	return date;
 }
 
+/* guid
+ * Returns the item GUID.
+ */
+-(NSString *)guid
+{
+	return guid;
+}
+
 /* link
  * Returns the item link.
  */
@@ -158,6 +176,7 @@
  */
 -(void)dealloc
 {
+	[guid release];
 	[title release];
 	[description release];
 	[author release];
@@ -181,7 +200,6 @@
 		lastModified = nil;
 		link = nil;
 		items = nil;
-		encodingScheme = NSUTF8StringEncoding;
 	}
 	return self;
 }
@@ -213,9 +231,6 @@
 	{
 		XMLParser * subtree;
 		
-		// Get encoding
-		[self getEncoding];
-
 		// If this RSS?
 		if ((subtree = [self treeByName:@"rss"]) != nil)
 			success = [self initRSSFeed:subtree isRDF:NO];
@@ -229,27 +244,6 @@
 			success = [self initAtomFeed:subtree];
 	}
 	return success;
-}
-
-/* getEncoding
- * Get the encoding scheme used by strings in this feed. Default to UTF8 if
- * no explicit encoding is specified in the XML header.
- */
--(void)getEncoding
-{
-	XMLParser * xmltree = [self treeByName:@"xml"];
-	if (xmltree != nil)
-	{
-		NSString * encodingString = [xmltree valueOfAttribute:@"encoding"];
-		encodingScheme = NSUTF8StringEncoding;
-
-		if (encodingString != nil)
-		{
-			CFStringEncoding cfEncodingScheme = CFStringConvertIANACharSetNameToEncoding((CFStringRef)encodingString);
-			if (cfEncodingScheme != kCFStringEncodingInvalidId)
-				encodingScheme = (NSStringEncoding)CFStringConvertEncodingToNSStringEncoding(cfEncodingScheme); 
-		}
-	}
 }
 
 /* initRSSFeed
@@ -362,6 +356,7 @@
 			FeedItem * newItem = [[FeedItem alloc] init];
 			int itemCount = [subTree countOfChildren];
 			BOOL hasDetailedContent = NO;
+			BOOL hasGUID = NO;
 			int itemIndex;
 			
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
@@ -372,14 +367,22 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[XMLParser processAttributes:[[self encodedValueOfElement:subItemTree] firstNonBlankLine]]];
+					[newItem setTitle:[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]]];
 					continue;
 				}
 				
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
-					[newItem setDescription:[self encodedValueOfElement:subItemTree]];
+					[newItem setDescription:[subItemTree valueOfElement]];
+					continue;
+				}
+				
+				// Parse GUID
+				if ([itemNodeName isEqualToString:@"guid"])
+				{
+					[newItem setGuid:[subItemTree valueOfElement]];
+					hasGUID = YES;
 					continue;
 				}
 				
@@ -387,7 +390,7 @@
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
-					[newItem setDescription:[self encodedValueOfElement:subItemTree]];
+					[newItem setDescription:[subItemTree valueOfElement]];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -395,14 +398,14 @@
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"author"])
 				{
-					[newItem setAuthor:[self encodedValueOfElement:subItemTree]];
+					[newItem setAuthor:[subItemTree valueOfElement]];
 					continue;
 				}
 				
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"dc:creator"])
 				{
-					[newItem setAuthor:[self encodedValueOfElement:subItemTree]];
+					[newItem setAuthor:[subItemTree valueOfElement]];
 					continue;
 				}
 				
@@ -417,7 +420,8 @@
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"link"])
 				{
-					[newItem setLink:[subItemTree valueOfElement]];
+					NSString * linkName = [subItemTree valueOfElement];
+					[newItem setLink:linkName];
 					continue;
 				}
 				
@@ -429,6 +433,10 @@
 					continue;
 				}
 			}
+			
+			// If no explicit GUID is specified, use the link as the GUID
+			if (!hasGUID)
+				[newItem setGuid:[newItem link]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -505,6 +513,7 @@
 			[newItem setAuthor:defaultAuthor];
 			int itemCount = [subTree countOfChildren];
 			int itemIndex;
+			BOOL hasGUID = NO;
 			
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
@@ -540,10 +549,18 @@
 					continue;
 				}
 				
-				// Parse item author
+				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
 					[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
+					continue;
+				}
+				
+				// Parse item link
+				if ([itemNodeName isEqualToString:@"id"])
+				{
+					[newItem setGuid:[subItemTree valueOfElement]];
+					hasGUID = YES;
 					continue;
 				}
 				
@@ -555,6 +572,10 @@
 					continue;
 				}
 			}
+
+			// If no explicit GUID is specified, use the link as the GUID
+			if (!hasGUID)
+				[newItem setGuid:[newItem link]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -646,101 +667,15 @@
 	return lastModified;
 }
 
-/* encodedValueOfElement
- * Gets the element for a tree node and converts it to UTF8 from whatever is set as the
- * native XML encoding scheme.
- *
- * Note: this doesn't do anything right now. I ran into problems dealing with the NSString
- * that CFXML returns me and trying to encode the individual bytes again just caused
- * exceptions to get thrown. Let's come back to this later.
- */
--(NSString *)encodedValueOfElement:(XMLParser *)subTree
-{
-	return [subTree valueOfElement];
-}
-
 /* ensureTitle
  * Make sure we have a title and synthesize one from the description if we don't.
  */
 -(void)ensureTitle:(FeedItem *)item
 {
 	if (![item title] || [[item title] isBlank])
-	{
-		NSMutableString * aString = [NSMutableString stringWithString:[item description]];
-		int maxChrs = [[item description] length];
-		int indexOfChr = 0;
-		int tagLength = 0;
-		int tagStartIndex = 0;
-		int lengthToLastWord = 0;
-		BOOL isInQuote = NO;
-		BOOL isInTag = NO;
-
-		// Rudimentary HTML tag parsing. This could be done by initWithHTML on an attributed string
-		// and extracting the raw string but initWithHTML cannot be invoked within an NSURLConnection
-		// callback which is where this is probably liable to be used.
-		//
-		// This code basically throws away all HTML tags up to <br> or <br /> or the first raw newline
-		// or until 80 characters have been processed.
-		//
-		while (indexOfChr < maxChrs)
-		{
-			unichar ch = [aString characterAtIndex:indexOfChr];
-			if (ch == '"')
-				isInQuote = !isInQuote;
-			if (isInTag)
-				++tagLength;
-			if (ch == ' ' && !isInTag)
-				lengthToLastWord = indexOfChr;
-			if (ch == '<' && !isInQuote)
-			{
-				isInTag = YES;
-				tagStartIndex = indexOfChr;
-				tagLength = 0;
-			}
-			if (ch == '>' && isInTag)
-			{
-				if (++tagLength > 2)
-				{
-					NSRange tagRange = NSMakeRange(tagStartIndex, tagLength);
-					NSString * tag = [[aString substringWithRange:tagRange] lowercaseString];
-					[aString deleteCharactersInRange:tagRange];
-
-					// Reset scan to the point where the tag started minus one because
-					// we bump up indexOfChr at the end of the loop.
-					indexOfChr = tagStartIndex - 1;
-					maxChrs = [aString length];
-					isInTag = NO;
-
-					if (([tag isEqualToString:@"<br>"] || [tag isEqualToString:@"<br />"]) && indexOfChr >= 0)
-					{
-						lengthToLastWord = tagStartIndex;
-						break;
-					}
-				}
-			}
-			if (ch == '\n' || ch == '\r')
-			{
-				lengthToLastWord = indexOfChr;
-				break;
-			}
-			if (indexOfChr >= 80 && !isInTag)
-				break;
-			++indexOfChr;
-		}
-
-		// If we got a long word with no spaces then just break the string
-		// at the limit.
-		if (lengthToLastWord == 0)
-			lengthToLastWord = MIN(maxChrs, 80);
-
-		[aString deleteCharactersInRange:NSMakeRange(lengthToLastWord, maxChrs - lengthToLastWord)];
-		
-		// If we truncated at the end of a word, append ellipsises to show that
-		// there was more. Really just a little polish.
-		if (lengthToLastWord < indexOfChr)
-			[aString appendString:@"..."];
-		[item setTitle:aString];
-	}
+		[item setTitle:[NSString stringByRemovingHTML:[item description]]];
+	else
+		[item setTitle:[NSString stringByRemovingHTML:[item title]]];
 }
 
 /* dealloc

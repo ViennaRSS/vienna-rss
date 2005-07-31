@@ -513,12 +513,12 @@ static NSArray * iconArray = nil;
 	}
 }
 
-/* messageFromID
+/* messageFromGuid
  */
--(Message *)messageFromID:(int)messageId
+-(Message *)messageFromGuid:(NSString *)guid
 {
-	NSAssert(isMessages, @"Folder's cache of messages should be initialized before messageFromID can be used");
-	return [messages objectForKey:[NSNumber numberWithInt:messageId]];
+	NSAssert(isMessages, @"Folder's cache of messages should be initialized before messageFromGuid can be used");
+	return [messages objectForKey:guid];
 }
 
 /* messages
@@ -579,16 +579,16 @@ static NSArray * iconArray = nil;
  */
 -(void)addMessage:(Message *)newMessage
 {
-	[messages setObject:newMessage forKey:[NSNumber numberWithInt:[newMessage number]]];
+	[messages setObject:newMessage forKey:[newMessage guid]];
 	isMessages = YES;
 }
 
 /* deleteMessage
  */
--(void)deleteMessage:(int)messageId
+-(void)deleteMessage:(NSString *)guid
 {
 	NSAssert(isMessages, @"Folder's cache of messages should be initialized before deleteMessage can be used");
-	[messages removeObjectForKey:[NSNumber numberWithInt:messageId]];
+	[messages removeObjectForKey:guid];
 }
 
 /* markFolderEmpty

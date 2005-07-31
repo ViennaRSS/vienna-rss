@@ -86,7 +86,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewMessagesOnStartup];
 	[defaultValues setObject:cachedFolderID forKey:MAPref_CachedFolderID];
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_SortDirection];
-	[defaultValues setObject:MA_Field_Number forKey:MAPref_SortColumn];
+	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
@@ -197,7 +197,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 	// Create a backtrack array
 	isBacktracking = NO;
-	selectAtEndOfReload = MA_Select_Unread;
+	guidOfMessageToSelect = nil;
 	markReadTimer = nil;
 	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[defaults integerForKey:MAPref_BacktrackQueueSize]];
 
@@ -527,10 +527,9 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	currentFolderId = -1;
 	currentArrayOfMessages = nil;
 	currentSelectedRow = -1;
-	requestedMessage = 0;
 	messageListFont = nil;
 
-	// Initialize sort to default to message number
+	// Pre-set sort to what was saved in the preferences
 	[self setSortColumnIdentifier:[defaults stringForKey:MAPref_SortColumn]];
 	sortDirection = [defaults integerForKey:MAPref_SortDirection];
 	sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
@@ -589,6 +588,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		// Filter out columns we don't sort on. Later we should have an attribute in the
 		// field object itself based on which columns we can sort on.
 		if ([field tag] != MA_FieldID_Parent &&
+			[field tag] != MA_FieldID_GUID &&
 			[field tag] != MA_FieldID_Text)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
@@ -615,7 +615,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	{
 		// Filter out columns we don't view in the message list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
-		if ([field tag] != MA_FieldID_Text && [field tag] != MA_FieldID_Parent && [field tag] != MA_FieldID_Headlines)
+		if ([field tag] != MA_FieldID_Text && 
+			[field tag] != MA_FieldID_GUID &&
+			[field tag] != MA_FieldID_Parent &&
+			[field tag] != MA_FieldID_Headlines)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
@@ -1152,7 +1155,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  * Moves the selection to the specified message. Returns YES if we found the
  * message, NO otherwise.
  */
--(BOOL)scrollToMessage:(int)number
+-(BOOL)scrollToMessage:(NSString *)guid
 {
 	NSEnumerator * enumerator = [currentArrayOfMessages objectEnumerator];
 	Message * thisMessage;
@@ -1161,7 +1164,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 	while ((thisMessage = [enumerator nextObject]) != nil)
 	{
-		if ([thisMessage number] == number)
+		if ([[thisMessage guid] isEqualToString:guid])
 		{
 			[self makeRowSelectedAndVisible:rowIndex];
 			found = YES;
@@ -1169,7 +1172,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		}
 		++rowIndex;
 	}
-	requestedMessage = 0;
 	return found;
 }
 
@@ -1360,16 +1362,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 	switch (app->sortColumnTag)
 	{
-		case MA_FieldID_Number: {
-			int number1 = [item1 number];
-			int number2 = [item2 number];
-			if (number1 < number2)
-				return NSOrderedAscending * app->sortDirection;
-			if (number2 < number1)
-				return NSOrderedDescending * app->sortDirection;
-			return NSOrderedSame;
-		}
-
 		case MA_FieldID_Folder: {
 			Folder * folder1 = [app->db folderFromID:[item1 folderId]];
 			Folder * folder2 = [app->db folderFromID:[item2 folderId]];
@@ -1732,7 +1724,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag
 {
-	requestedMessage = 0;
 	isViewingArticlePage = NO;
 	if (currentSelectedRow < 0)
 		[[textView mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
@@ -1753,8 +1744,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		// Add this to the backtrack list
 		if (!isBacktracking)
 		{
-			int messageId = [[currentArrayOfMessages objectAtIndex:currentSelectedRow] number];
-			[backtrackArray addToQueue:currentFolderId messageNumber:messageId];
+			NSString * guid = [[currentArrayOfMessages objectAtIndex:currentSelectedRow] guid];
+			[backtrackArray addToQueue:currentFolderId messageNumber:guid];
 		}
 	}
 }
@@ -1779,12 +1770,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)forwardTrackMessage:(id)sender
 {
 	int folderId;
-	int messageNumber;
+	NSString * guid;
 
-	if ([backtrackArray nextItemAtQueue:&folderId messageNumber:&messageNumber])
+	if ([backtrackArray nextItemAtQueue:&folderId messageNumber:&guid])
 	{
 		isBacktracking = YES;
-		[self selectFolderAndMessage:folderId messageNumber:messageNumber];
+		[self selectFolderAndMessage:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -1796,12 +1787,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)backTrackMessage:(id)sender
 {
 	int folderId;
-	int messageNumber;
+	NSString * guid;
 	
-	if ([backtrackArray previousItemAtQueue:&folderId messageNumber:&messageNumber])
+	if ([backtrackArray previousItemAtQueue:&folderId messageNumber:&guid])
 	{
 		isBacktracking = YES;
-		[self selectFolderAndMessage:folderId messageNumber:messageNumber];
+		[self selectFolderAndMessage:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -1814,6 +1805,24 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	switch (keyChar)
 	{
+		case NSLeftArrowFunctionKey:
+			if (!(flags & NSCommandKeyMask))
+				if ([mainWindow firstResponder] == messageList)
+				{
+					[mainWindow makeFirstResponder:[foldersTree mainView]];
+					return YES;
+				}
+			return NO;
+
+		case NSRightArrowFunctionKey:
+			if (!(flags & NSCommandKeyMask))
+				if ([mainWindow firstResponder] == [foldersTree mainView])
+				{
+					[mainWindow makeFirstResponder:messageList];
+					return YES;
+				}
+			return NO;
+			
 		case 0x7F:
 			[self backTrackMessage:self];
 			return YES;
@@ -1865,7 +1874,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
-		NSString * messageText = [db messageText:[theRecord folderId] messageId:[theRecord number]];
+		NSString * messageText = [db messageText:[theRecord folderId] guid:[theRecord guid]];
 		NSString * messageDate = [[[theRecord date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
 		NSString * messageLink = [theRecord link] ? [theRecord link] : @"";
 		NSString * messageAuthor = [theRecord author] ? [theRecord author] : @"";
@@ -1930,7 +1939,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
-	[self selectFolderAndMessage:folderId messageNumber:MA_Select_Unread];
+	[self selectFolderAndMessage:folderId guid:nil];
 
 	SCNetworkConnectionFlags flags;
 	NSURL * url = [NSURL URLWithString:urlString];
@@ -2011,7 +2020,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			Message * theRecord = [currentArrayOfMessages objectAtIndex:[rowIndex intValue]];
 			if (![theRecord isRead])
 				needFolderRedraw = YES;
-			if ([db deleteMessage:[theRecord folderId] messageNumber:[theRecord number]])
+			if ([db deleteMessage:[theRecord folderId] guid:[theRecord guid]])
 				[arrayCopy removeObject:theRecord];
 		}
 		[db commitTransaction];
@@ -2069,7 +2078,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		{
 			if (nextFolderWithUnread != currentFolderId)
 			{
-				selectAtEndOfReload = MA_Select_Unread;
+				guidOfMessageToSelect = nil;
 				[foldersTree selectFolder:nextFolderWithUnread];
 				[mainWindow makeFirstResponder:messageList];
 			}
@@ -2112,16 +2121,17 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 /* selectFolderAndMessage
  * Select a folder and select a specified message within the folder.
  */
--(BOOL)selectFolderAndMessage:(int)folderId messageNumber:(int)messageNumber
+-(BOOL)selectFolderAndMessage:(int)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, easy enough.
 	if (folderId == currentFolderId)
-		return [self scrollToMessage:messageNumber];
+		return [self scrollToMessage:guid];
 
-	// Otherwise we force the folder to be selected and seed selectAtEndOfReload
+	// Otherwise we force the folder to be selected and seed guidOfMessageToSelect
 	// so that after handleFolderSelection has been invoked, it will select the
 	// requisite message on our behalf.
-	selectAtEndOfReload = messageNumber;
+	[guidOfMessageToSelect release];
+	guidOfMessageToSelect = [guid retain];
 	[foldersTree selectFolder:folderId];
 	return YES;
 }
@@ -2133,24 +2143,23 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)refreshFolder:(BOOL)reloadData
 {
-	int messageNumber = -1;
+	NSString * guid = nil;
 
 	if (currentSelectedRow >= 0)
-		messageNumber = [[currentArrayOfMessages objectAtIndex:currentSelectedRow] number];
+		guid = [[[currentArrayOfMessages objectAtIndex:currentSelectedRow] guid] retain];
 	if (reloadData)
 		[self reloadArrayOfMessages];
 	[self sortMessages];
 	[self showSortDirection];
 	[messageList reloadData];
-	if (requestedMessage > 0)
-		messageNumber = requestedMessage;
-	if (messageNumber >= 0)
+	if (guid != nil)
 	{
-		if (![self scrollToMessage:messageNumber])
+		if (![self scrollToMessage:guid])
 			currentSelectedRow = -1;
 		else
 			[self updateMessageText];
 	}
+	[guid release];
 }
 
 /* selectFolderWithFilter
@@ -2192,21 +2201,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* selectMessageAfterReload
- * Sets the selection in the message list after the list is reloaded. The value of selectAtEndOfReload
+ * Sets the selection in the message list after the list is reloaded. The value of guidOfMessageToSelect
  * is either MA_Select_None, meaning no selection, MA_Select_Unread meaning select the first unread
  * message from the beginning (after sorting is applied) or it is the ID of a specific message to be
  * selected.
  */
 -(void)selectMessageAfterReload
 {
-	if (selectAtEndOfReload != MA_Select_None)
-	{
-		if (selectAtEndOfReload == MA_Select_Unread)
-			[self selectFirstUnreadInFolder];
-		else
-			[self scrollToMessage:selectAtEndOfReload];
-	}
-	selectAtEndOfReload = MA_Select_Unread;
+	if (guidOfMessageToSelect == nil)
+		[self selectFirstUnreadInFolder];
+	else
+		[self scrollToMessage:guidOfMessageToSelect];
+	[guidOfMessageToSelect release];
+	guidOfMessageToSelect = nil;
 }
 
 /* markAllRead
@@ -2215,6 +2222,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)markAllRead:(id)sender
 {
 	[self markAllReadInArray:[foldersTree selectedFolders]];
+	[self showUnreadCountOnApplicationIcon];
 }
 
 /* markAllReadInArray
@@ -2232,7 +2240,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		{
 			[self markAllReadInArray:[db arrayOfFolders:folderId]];
 			if (folderId == currentFolderId)
+			{
+				[self reloadArrayOfMessages];
+				[self sortMessages];
+				[self showSortDirection];
 				[messageList reloadData];
+			}
 		}
 		else if (!IsSmartFolder(folder))
 		{
@@ -2249,10 +2262,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 				[self markReadByArray:currentArrayOfMessages readFlag:YES];
 		}
 	}
-
-	// The app icon has a count of unread messages so we need to
-	// update that.
-	[self showUnreadCountOnApplicationIcon];
 }
 
 /* markedMessageRange
@@ -2307,7 +2316,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	while ((theRecord = [enumerator nextObject]) != nil)
 	{
 		folderId = [theRecord folderId];
-		[db markMessageRead:folderId messageId:[theRecord number] isRead:readFlag];
+		[db markMessageRead:folderId guid:[theRecord guid] isRead:readFlag];
 		if (folderId != currentFolderId)
 		{
 			[theRecord markRead:readFlag];
@@ -2355,7 +2364,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	while ((theRecord = [enumerator nextObject]) != nil)
 	{
 		[theRecord markFlagged:flagged];
-		[db markMessageFlagged:[theRecord folderId] messageId:[theRecord number] isFlagged:flagged];
+		[db markMessageFlagged:[theRecord folderId] guid:[theRecord guid] isFlagged:flagged];
 	}
 	[db commitTransaction];
 	[messageList reloadData];
@@ -2569,7 +2578,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		int msgIndex = [[rows objectAtIndex:index] intValue];
 		Message * thisMessage = [currentArrayOfMessages objectAtIndex:msgIndex];
 		Folder * folder = [db folderFromID:[thisMessage folderId]];
-		NSString * msgText = [db messageText:[thisMessage folderId] messageId:[thisMessage number]];
+		NSString * msgText = [db messageText:[thisMessage folderId] guid:[thisMessage guid]];
 
 		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
 		[articleDict setValue:[thisMessage title] forKey:@"rssItemTitle"];
@@ -2857,6 +2866,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[guidOfMessageToSelect release];
 	[selectionDict release];
 	[topLineDict release];
 	[bottomLineDict release];

@@ -153,6 +153,7 @@
  */
 -(void)cancel
 {
+	[aItem setStatus:NSLocalizedString(@"Refresh cancelled", nil)];
 	[connector cancel];
 }
 

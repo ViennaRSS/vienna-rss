@@ -15,6 +15,7 @@
                 endRenameFolder = id; 
                 exportSubscriptions = id; 
                 forwardTrackMessage = id; 
+                handleAbout = id; 
                 importSubscriptions = id; 
                 markAllRead = id; 
                 markFlagged = id; 
