@@ -12,6 +12,7 @@
                 deleteMessage = id; 
                 doubleClickRow = id; 
                 editFolder = id; 
+                emptyTrash = id; 
                 endRenameFolder = id; 
                 exportSubscriptions = id; 
                 forwardTrackMessage = id; 

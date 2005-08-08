@@ -28,18 +28,6 @@
 
 @implementation NewGroupFolder
 
-/* initWithDatabase
- * Just init the RSS feed class.
- */
--(id)initWithDatabase:(Database *)newDb
-{
-	if ((self = [super init]) != nil)
-	{
-		db = newDb;
-	}
-	return self;
-}
-
 /* newGroupFolder
  * Display the sheet to create a new group folder.
  */
@@ -66,6 +54,7 @@
 	NSString * folderNameString = [[folderName stringValue] trim];
 	
 	// Create the new folder in the database
+	Database * db = [Database sharedDatabase];
 	[db addFolder:parentId folderName:folderNameString type:MA_Group_Folder mustBeUnique:YES];
 
 	// Close the window
@@ -107,7 +96,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[db release];
 	[super dealloc];
 }
 @end

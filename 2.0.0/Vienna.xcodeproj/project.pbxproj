@@ -56,6 +56,7 @@
 		AA26F5E00604969000FE7994 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F5DE0604969000FE7994 /* PreferenceController.m */; };
 		AA26F5EF060496B100FE7994 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5EB060496B100FE7994 /* Preferences.nib */; };
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
+		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
 		AA2CE68A081C3F3800D8FD8F /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE688081C3F3800D8FD8F /* Acknowledgements.rtf */; };
 		AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2DE139085399F40055C4EE /* sqlite3.h */; };
 		AA3281A5084161EB00A7AD5A /* RichXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3281A3084161EB00A7AD5A /* RichXMLParser.h */; };
@@ -296,6 +297,7 @@
 		AA26F5DE0604969000FE7994 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
 		AA26F5EC060496B100FE7994 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AA26F676060497BB00FE7994 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoldersTree.m; sourceTree = "<group>"; };
+		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
 		AA2CE689081C3F3800D8FD8F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Acknowledgements.rtf; sourceTree = "<group>"; };
 		AA2DE139085399F40055C4EE /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichXMLParser.h; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				AA26F435060490BD00FE7994 /* alphaPixel.tiff */,
 				AADD8962081C1916007C6E88 /* rssFolder.tiff */,
 				AADD8A0D081C253F007C6E88 /* rssFeed.tiff */,
+				AA2A1DFC089F2B940038770C /* trashFolder.tiff */,
 				AA26F43A060490BD00FE7994 /* flagged_header.tiff */,
 				AA26F43B060490BD00FE7994 /* flagged.tiff */,
 				AA26F43D060490BD00FE7994 /* greyRightArrow.tiff */,
@@ -882,6 +885,7 @@
 				AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */,
 				AA67F338089727FB008BBC37 /* Styles in Resources */,
 				AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */,
+				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

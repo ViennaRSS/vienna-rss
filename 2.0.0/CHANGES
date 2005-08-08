@@ -15,6 +15,11 @@ Thanks!
   track articles that have been modified. This change requires a database upgrade since the
   type of the 'message_id' field in the DB has changed from integer to string.
 - Left/Right arrow keys now move between the folder list and the articles list.
+- Added Trash folder. Delete Article now moves selected articles to the Trash folder. New
+  Empty Trash command on the Vienna menu can be used to empty the trash folder. (Note: it
+  is intentional that you can rename the Trash folder).
+- Added Undo/Redo support for the following actions: marking articles read, marking articles
+  flagged, renaming folders and deleting articles.
 
 2.0.0.2004 (Refresh)
 --------------------

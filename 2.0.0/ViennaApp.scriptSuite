@@ -61,7 +61,7 @@
 				<key>folderName</key>
 				<dict>
 					<key>AppleEventCode</key>
-					<string>flNM</string>
+					<string>pnam</string>
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>

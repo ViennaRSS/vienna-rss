@@ -98,8 +98,7 @@
 }
 
 /* objectValueForTableColumn [datasource]
- * Called by the table view to obtain the object at the specified column and row. This is
- * called often so it needs to be fast.
+ * Called by the table view to obtain the object at the specified column and row.
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {

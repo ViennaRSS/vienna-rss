@@ -30,6 +30,7 @@
 -(void)addItemWithTitle:(NSString *)title image:(NSImage *)image
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
+	[image setScalesWhenResized:YES];
 	[image setSize:NSMakeSize(16, 16)];
 	[newItem setImage:image];
 	[[self menu] addItem:newItem];

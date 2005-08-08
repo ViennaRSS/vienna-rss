@@ -29,6 +29,7 @@ NSString * MA_Field_Date = @"Date";
 NSString * MA_Field_Comments = @"Comments";
 NSString * MA_Field_Read = @"Read";
 NSString * MA_Field_Flagged = @"Flagged";
+NSString * MA_Field_Deleted = @"Deleted";
 NSString * MA_Field_Text = @"Text";
 NSString * MA_Field_Folder = @"Folder";
 NSString * MA_Field_Parent = @"Parent";
@@ -46,6 +47,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 		commentsArray = [[NSMutableArray alloc] init];
 		readFlag = NO;
 		markedFlag = NO;
+		deletedFlag = NO;
 		messageStatus = MA_MsgStatus_Empty;
 		[self setFolderId:-1];
 		[self setGuid:theGuid];
@@ -103,11 +105,19 @@ NSString * MA_Field_Headlines = @"Headlines";
 	markedFlag = flag;
 }
 
+/* markDeleted
+ */
+-(void)markDeleted:(BOOL)flag
+{
+	deletedFlag = flag;
+}
+
 /* Accessor functions
  */
 -(NSDictionary *)messageData	{ return messageData; }
 -(BOOL)isRead					{ return readFlag; }
 -(BOOL)isFlagged				{ return markedFlag; }
+-(BOOL)isDeleted				{ return deletedFlag; }
 -(BOOL)hasComments				{ return [commentsArray count] > 0; }
 -(int)status					{ return messageStatus; }
 -(int)folderId					{ return [[messageData objectForKey:MA_Field_Folder] intValue]; }

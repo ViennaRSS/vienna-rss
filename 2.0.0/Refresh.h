@@ -20,20 +20,24 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
-#import "AppController.h"
 #import "AsyncConnection.h"
+#import "FeedCredentials.h"
 
-@interface AppController (Refresh)
--(IBAction)refreshSelectedSubscriptions:(id)sender;
--(IBAction)refreshAllSubscriptions:(id)sender;
--(IBAction)cancelAllRefreshes:(id)sender;
--(void)getCredentialsForFolder;
+@interface RefreshManager : NSObject {
+	int maximumConnections;
+	int totalConnections;
+	int countOfNewArticles;
+	NSMutableArray * connectionsArray;
+	NSMutableArray * folderIconRefreshArray;
+	NSMutableArray * refreshArray;
+	NSMutableArray * authQueue;
+	NSTimer * pumpTimer;
+	FeedCredentials * credentialsController;
+}
+
++(RefreshManager *)sharedManager;
 -(void)refreshSubscriptions:(NSArray *)foldersArray;
--(void)pumpSubscriptionRefresh;
--(void)pumpFolderIconRefresh;
--(void)beginRefreshTimer;
--(void)refreshPumper:(NSTimer *)aTimer;
--(void)addConnection:(AsyncConnection *)conn;
--(void)removeConnection:(AsyncConnection *)conn;
--(void)folderIconRefreshCompleted:(AsyncConnection *)connector;
+-(void)cancelAll;
+-(int)countOfNewArticles;
+-(int)totalConnections;
 @end

@@ -34,6 +34,7 @@
 	int countOfUnread;
 	NSThread * mainThread;
 	BOOL inTransaction;
+	Folder * trashFolder;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
 	NSMutableDictionary * fieldsByTitle;
@@ -42,6 +43,7 @@
 }
 
 // General database functions
++(Database *)sharedDatabase;
 -(BOOL)initDatabase:(NSString *)databaseFileName;
 -(void)syncLastUpdate;
 -(int)databaseVersion;
@@ -59,6 +61,7 @@
 
 // Folder functions
 -(void)initFolderArray;
+-(int)trashFolderId;
 -(NSArray *)arrayOfFolders:(int)parentID;
 -(Folder *)folderFromID:(int)wantedId;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
@@ -72,6 +75,7 @@
 -(BOOL)setFolderUsername:(int)folderId newUsername:(NSString *)name;
 -(void)flushFolder:(int)folderId;
 -(void)releaseMessages:(int)folderId;
+-(void)deleteDeletedMessages;
 -(void)markFolderRead:(int)folderId;
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
@@ -98,4 +102,5 @@
 -(NSString *)messageText:(int)folderId guid:(NSString *)guid;
 -(void)markMessageRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markMessageFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
+-(void)markMessageDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 @end
