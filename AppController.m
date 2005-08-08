@@ -36,7 +36,6 @@
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
 #import "TexturedHeader.h"
-#import "FeedCredentials.h"
 #import "ViennaApp.h"
 #import "ActivityLog.h"
 #import "Constants.h"
@@ -111,6 +110,9 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 {
 	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 
+	// Mark the start of the init phase
+	isAppInitialising = YES;
+	
 	// Find out who we are. The localised info in InfoStrings.plist allow
 	// changing the app name if so desired.
 	NSBundle * appBundle = [NSBundle mainBundle];
@@ -155,23 +157,13 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	persistedStatusText = nil;
 	[self setStatusMessage:nil persist:NO];
 
-	// Create a refresh array (note the initial capacity is dynamically
-	// extended as needed and is not a limit).
-	maximumConnections = [[defaults valueForKey:MAPref_RefreshThreads] intValue];
-	totalConnections = 0;
-	unreadAtBeginning = 0;
-	refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
-	folderIconRefreshArray = [[NSMutableArray alloc] initWithCapacity:10];
-	connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
-	
 	// Initialize the database
-	db = [[Database alloc] init];
-	if (![db initDatabase:[defaults stringForKey:MAPref_DefaultDatabase]])
+	if ((db = [Database sharedDatabase]) == nil)
 	{
 		[NSApp terminate:nil];
 		return;
 	}
-	
+
 	// Create condensed view attribute dictionaries
 	selectionDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
@@ -200,12 +192,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	guidOfMessageToSelect = nil;
 	markReadTimer = nil;
 	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[defaults integerForKey:MAPref_BacktrackQueueSize]];
-
-	// Create an authentication queue used to queue up folders that require
-	// authentication during a refresh. We can only authenticate one folder at
-	// a time so the queue is required to supply each folder to the authentication
-	// UI in turn.
-	authQueue = [[NSMutableArray alloc] init];
 
 	// Set header text
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
@@ -241,6 +227,9 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	// Start the check timer
 	checkTimer = nil;
 	[self handleCheckFrequencyChange:nil];
+	
+	// Done initialising
+	isAppInitialising = NO;
 }
 
 /* readingPaneOnRight
@@ -469,6 +458,19 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 -(IBAction)closeMainWindow:(id)sender
 {
 	[mainWindow orderOut:self];
+}
+
+/* isAccessible
+ * Returns whether the specified URL is immediately accessible.
+ */
+-(BOOL)isAccessible:(NSString *)urlString
+{
+	SCNetworkConnectionFlags flags;
+	NSURL * url = [NSURL URLWithString:urlString];
+
+	return (SCNetworkCheckReachabilityByName([[url host] cString], &flags) &&
+			(flags & kSCNetworkFlagsReachable) &&
+			!(flags & kSCNetworkFlagsConnectionRequired));
 }
 
 /* runAppleScript
@@ -702,7 +704,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 				[field setWidth:[tableColumn width]];
 			[messageList removeTableColumn:tableColumn];
 		}
-		
+
 		// Handle condensed layout vs. table layout
 		if ([NSApp layoutStyle] == MA_Table_Layout)
 			showField = [field visible] && [field tag] != MA_FieldID_Headlines;
@@ -1013,6 +1015,14 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[aboutController showWindow:self];
 }
 
+/* emptyTrash
+ * Delete all messages from the Trash folder.
+ */
+-(IBAction)emptyTrash:(id)sender
+{
+	[db deleteDeletedMessages];
+}
+
 /* showPreferencePanel
  * Display the Preference Panel.
  */
@@ -1029,7 +1039,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	if (totalConnections > 0)
+	if ([self isConnecting])
 	{
 		int returnCode;
 		
@@ -1415,20 +1425,23 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
 	if (rowIndex == currentSelectedRow)
+	{
+		[messageList selectRow:rowIndex byExtendingSelection:NO];
 		[self refreshMessageAtRow:rowIndex markRead:NO];
+	}
 	else
 	{
 		[messageList selectRow:rowIndex byExtendingSelection:NO];
 
-		int rowIndex = [messageList selectedRow];
 		int pageSize = [messageList rowsInRect:[messageList visibleRect]].length;
 		int lastRow = [messageList numberOfRows] - 1;
-		int visibleRow = rowIndex + (pageSize / 2);
+		int visibleRow = currentSelectedRow + (pageSize / 2);
 		
 		if (visibleRow > lastRow)
 			visibleRow = lastRow;
-		[messageList scrollRowToVisible:rowIndex];
-		[messageList scrollRowToVisible:visibleRow];	}
+		[messageList scrollRowToVisible:currentSelectedRow];
+		[messageList scrollRowToVisible:visibleRow];
+	}
 }
 
 /* didClickTableColumns
@@ -1594,7 +1607,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 		[self showUnreadCountOnApplicationIcon];
 
-		int newUnread = [db countOfUnread] - unreadAtBeginning;
+		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 		if (growlAvailable && newUnread > 0)
 		{
 			NSNumber * defaultValue = [NSNumber numberWithBool:YES];
@@ -1623,30 +1636,30 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
-	Message * theRecord;
+	Message * theArticle;
 
 	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfMessages count]);
-	theRecord = [currentArrayOfMessages objectAtIndex:rowIndex];
+	theArticle = [currentArrayOfMessages objectAtIndex:rowIndex];
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Folder])
 	{
-		Folder * folder = [db folderFromID:[theRecord folderId]];
+		Folder * folder = [db folderFromID:[theArticle folderId]];
 		return [folder name];
 	}
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Read])
 	{
-		if (![theRecord isRead])
+		if (![theArticle isRead])
 			return [NSImage imageNamed:@"unread.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Flagged])
 	{
-		if ([theRecord isFlagged])
+		if ([theArticle isFlagged])
 			return [NSImage imageNamed:@"flagged.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Comments])
 	{
-		if ([theRecord hasComments])
+		if ([theArticle hasComments])
 			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
@@ -1657,23 +1670,23 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		NSDictionary * topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
 		NSDictionary * bottomLineDictPtr = (isSelectedRow ? selectionDict : bottomLineDict);
 		
-		NSAttributedString * topString = [[NSAttributedString alloc] initWithString:[theRecord title] attributes:topLineDictPtr];
+		NSAttributedString * topString = [[NSAttributedString alloc] initWithString:[theArticle title] attributes:topLineDictPtr];
 		[theAttributedString appendAttributedString:topString];
 		[topString release];
 
 		// Create the summary line that appears below the title.
-		Folder * folder = [db folderFromID:[theRecord folderId]];
-		NSCalendarDate * anDate = [[theRecord date] dateWithCalendarFormat:nil timeZone:nil];
+		Folder * folder = [db folderFromID:[theArticle folderId]];
+		NSCalendarDate * anDate = [[theArticle date] dateWithCalendarFormat:nil timeZone:nil];
 		NSMutableString * summaryString = [NSMutableString stringWithFormat:@"\n%@ - %@", [folder name], [anDate friendlyDescription]];
-		if (![[theRecord author] isBlank])
-			[summaryString appendFormat:@" - %@", [theRecord author]];
+		if (![[theArticle author] isBlank])
+			[summaryString appendFormat:@" - %@", [theArticle author]];
 
 		NSAttributedString * bottomString = [[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
 		[theAttributedString appendAttributedString:bottomString];
 		[bottomString release];
 		return [theAttributedString autorelease];
 	}
-	return [[theRecord messageData] objectForKey:[aTableColumn identifier]];
+	return [[theArticle messageData] objectForKey:[aTableColumn identifier]];
 }
 
 /* willDisplayCell [delegate]
@@ -1694,7 +1707,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	currentSelectedRow = [messageList selectedRow];
-	[self refreshMessageAtRow:currentSelectedRow markRead:YES];
+	[self refreshMessageAtRow:currentSelectedRow markRead:!isAppInitialising];
 }
 
 /* viewArticlePage
@@ -1708,10 +1721,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			[self refreshMessageAtRow:currentSelectedRow markRead:NO];
 		else
 		{
-			Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
-			if (![[theRecord link] isBlank])
+			Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+			if (![[theArticle link] isBlank])
 			{
-				NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[theRecord link]]];
+				NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[theArticle link]]];
 				isViewingArticlePage = YES;
 				[[textView mainFrame] loadRequest:theRequest];
 			}
@@ -1734,6 +1747,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		
 		// If we mark read after an interval, start the timer here.
 		[markReadTimer invalidate];
+		[markReadTimer release];
+		markReadTimer = nil;
 		if ([NSApp markReadInterval] > 0 && markReadFlag)
 			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)[NSApp markReadInterval]
 															  target:self
@@ -1755,17 +1770,16 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	if ([messageList selectedRow] != -1 && ![db readOnly])
+	if (currentSelectedRow != -1 && ![db readOnly])
 	{
-		Message * theRecord = [currentArrayOfMessages objectAtIndex:[messageList selectedRow]];
-		if (![theRecord isRead])
-			[self markReadByArray:[NSArray arrayWithObject:theRecord] readFlag:YES];
+		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		if (![theArticle isRead])
+			[self markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:YES];
 	}
 }
 
 /* forwardTrackMessage
  * Forward track through the list of messages displayed
- * BUGBUG: This doesn't work in folders that aggregate messages from multiple folders. Fix it.
  */
 -(IBAction)forwardTrackMessage:(id)sender
 {
@@ -1782,7 +1796,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 /* backTrackMessage
  * Back track through the list of messages displayed
- * BUGBUG: This doesn't work in folders that aggregate messages from multiple folders. Fix it.
  */
 -(IBAction)backTrackMessage:(id)sender
 {
@@ -1823,10 +1836,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 				}
 			return NO;
 			
-		case 0x7F:
-			[self backTrackMessage:self];
-			return YES;
-
 		case 'f':
 		case 'F':
 			[mainWindow makeFirstResponder:searchField];
@@ -1869,16 +1878,16 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	if (currentSelectedRow >= 0)
 	{
-		Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
-		Folder * folder = [db folderFromID:[theRecord folderId]];
+		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		Folder * folder = [db folderFromID:[theArticle folderId]];
 
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
-		NSString * messageText = [db messageText:[theRecord folderId] guid:[theRecord guid]];
-		NSString * messageDate = [[[theRecord date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
-		NSString * messageLink = [theRecord link] ? [theRecord link] : @"";
-		NSString * messageAuthor = [theRecord author] ? [theRecord author] : @"";
-		NSString * messageTitle = [theRecord title] ? [theRecord title] : @"";
+		NSString * messageText = [db messageText:[theArticle folderId] guid:[theArticle guid]];
+		NSString * messageDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
+		NSString * messageLink = [theArticle link] ? [theArticle link] : @"";
+		NSString * messageAuthor = [theArticle author] ? [theArticle author] : @"";
+		NSString * messageTitle = [theArticle title] ? [theArticle title] : @"";
 		NSString * folderTitle = [folder name] ? [folder name] : @"";
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
 
@@ -1920,7 +1929,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(BOOL)isConnecting
 {
-	return totalConnections > 0;
+	return [[RefreshManager sharedManager] totalConnections] > 0;
 }
 
 /* getMessagesOnTimer
@@ -1941,15 +1950,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
 	[self selectFolderAndMessage:folderId guid:nil];
 
-	SCNetworkConnectionFlags flags;
-	NSURL * url = [NSURL URLWithString:urlString];
-	
-	if (SCNetworkCheckReachabilityByName([[url host] cString], &flags) &&
-		(flags & kSCNetworkFlagsReachable) &&
-		!(flags & kSCNetworkFlagsConnectionRequired))
+	if ([self isAccessible:urlString])
 	{
 		Folder * folder = [db folderFromID:folderId];
-		[self refreshSubscriptions:[NSArray arrayWithObject:folder]];
+		[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder]];
 	}
 }
 
@@ -1979,22 +1983,35 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)newGroupFolder:(id)sender
 {
 	if (!groupFolder)
-		groupFolder = [[NewGroupFolder alloc] initWithDatabase:db];
+		groupFolder = [[NewGroupFolder alloc] init];
 	[groupFolder newGroupFolder:mainWindow underParent:[foldersTree groupParentSelection]];
 }
 
 /* deleteMessage
- * Delete the current message
+ * Delete the current message. If we're in the Trash folder, this represents a permanent
+ * delete. Otherwise we just move the message to the trash folder.
  */
 -(IBAction)deleteMessage:(id)sender
 {
-	if (currentSelectedRow >= 0)
-		NSBeginCriticalAlertSheet(NSLocalizedString(@"Delete selected message", nil),
-								  NSLocalizedString(@"Delete", nil),
-								  NSLocalizedString(@"Cancel", nil),
-								  nil, [NSApp mainWindow], self,
-								  @selector(doConfirmedDelete:returnCode:contextInfo:), nil, nil,
-								  NSLocalizedString(@"Delete selected message text", nil));
+	if (currentSelectedRow >= 0 && ![db readOnly])
+	{
+		Folder * folder = [db folderFromID:currentFolderId];
+		if (!IsTrashFolder(folder))
+		{
+			NSArray * messageArray = [self markedMessageRange];
+			[self markDeletedByArray:messageArray deleteFlag:YES];
+			[messageArray release];
+		}
+		else
+		{
+			NSBeginCriticalAlertSheet(NSLocalizedString(@"Delete selected message", nil),
+									  NSLocalizedString(@"Delete", nil),
+									  NSLocalizedString(@"Cancel", nil),
+									  nil, [NSApp mainWindow], self,
+									  @selector(doConfirmedDelete:returnCode:contextInfo:), nil, nil,
+									  NSLocalizedString(@"Delete selected message text", nil));
+		}
+	}
 }
 
 /* doConfirmedDelete
@@ -2013,34 +2030,39 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		// the database.
 		NSEnumerator * enumerator = [messageList selectedRowEnumerator];
 		NSNumber * rowIndex;
-		
+
 		[db beginTransaction];
 		while ((rowIndex = [enumerator nextObject]) != nil)
 		{
-			Message * theRecord = [currentArrayOfMessages objectAtIndex:[rowIndex intValue]];
-			if (![theRecord isRead])
+			Message * theArticle = [currentArrayOfMessages objectAtIndex:[rowIndex intValue]];
+			if (![theArticle isRead])
 				needFolderRedraw = YES;
-			if ([db deleteMessage:[theRecord folderId] guid:[theRecord guid]])
-				[arrayCopy removeObject:theRecord];
+			if ([db deleteMessage:[theArticle folderId] guid:[theArticle guid]])
+				[arrayCopy removeObject:theArticle];
 		}
 		[db commitTransaction];
 		[currentArrayOfMessages release];
-		currentArrayOfMessages = [arrayCopy retain];
-		[arrayCopy release];
+		currentArrayOfMessages = arrayCopy;
+
+		// Blow away the undo stack here since undo actions may refer to
+		// articles that have been deleted. This is a bit of a cop-out but
+		// it's the easiest approach for now.
+		[[mainWindow undoManager] removeAllActions];
 
 		// If any of the messages we deleted were unread then the
 		// folder's unread count just changed.
 		if (needFolderRedraw)
 			[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-		
+
 		// Compute the new place to put the selection
 		if (currentSelectedRow >= (int)[currentArrayOfMessages count])
 			currentSelectedRow = [currentArrayOfMessages count] - 1;
 		[self makeRowSelectedAndVisible:currentSelectedRow];
 		[messageList reloadData];
-	
+		
 		// Read and/or unread count may have changed
-		[self showUnreadCountOnApplicationIcon];
+		if (needFolderRedraw)
+			[self showUnreadCountOnApplicationIcon];
 	}
 }
 
@@ -2071,7 +2093,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
-	if (![self viewNextUnreadInCurrentFolder:[messageList selectedRow]])
+	if (![self viewNextUnreadInCurrentFolder:currentSelectedRow])
 	{
 		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
 		if (nextFolderWithUnread != -1)
@@ -2094,11 +2116,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	int totalRows = [currentArrayOfMessages count];
 	if (currentRow < totalRows - 1)
 	{
-		Message * theRecord;
+		Message * theArticle;
 		
 		do {
-			theRecord = [currentArrayOfMessages objectAtIndex:++currentRow];
-			if (![theRecord isRead])
+			theArticle = [currentArrayOfMessages objectAtIndex:++currentRow];
+			if (![theArticle isRead])
 			{
 				[self makeRowSelectedAndVisible:currentRow];
 				return YES;
@@ -2287,18 +2309,114 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	return messageArray;
 }
 
+/* markDeletedUndo
+ * Undo handler to restore a series of deleted messages.
+ */
+-(void)markDeletedUndo:(id)anObject
+{
+	[self markDeletedByArray:(NSArray *)anObject deleteFlag:NO];
+}
+
+/* markUndeletedUndo
+ * Undo handler to delete a series of messages.
+ */
+-(void)markUndeletedUndo:(id)anObject
+{
+	[self markDeletedByArray:(NSArray *)anObject deleteFlag:YES];
+}
+
+/* markDeletedByArray
+ * Helper function. Takes as an input an array of messages and deletes or restores
+ * the messages.
+ */
+-(void)markDeletedByArray:(NSArray *)messageArray deleteFlag:(BOOL)deleteFlag
+{
+	NSEnumerator * enumerator = [messageArray objectEnumerator];
+	Message * theArticle;
+
+	// Set up to undo this action
+	NSUndoManager * undoManager = [mainWindow undoManager];
+	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
+	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:messageArray];
+	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
+
+	// We will make a new copy of the currentArrayOfMessages with the selected messages removed.
+	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfMessages];
+	BOOL needFolderRedraw = NO;
+
+	// Iterate over every selected message in the table and set the deleted
+	// flag on the message while simultaneously removing it from our copy of
+	// currentArrayOfMessages.
+	[db beginTransaction];
+	while ((theArticle = [enumerator nextObject]) != nil)
+	{
+		if (![theArticle isRead])
+			needFolderRedraw = YES;
+		[db markMessageDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
+		if (deleteFlag)
+		{
+			if ([theArticle folderId] == currentFolderId)
+				[arrayCopy removeObject:theArticle];
+		}
+		else
+		{
+			if ([theArticle folderId] == currentFolderId)
+				[arrayCopy addObject:theArticle];
+		}
+	}
+	[db commitTransaction];
+	[currentArrayOfMessages release];
+	currentArrayOfMessages = arrayCopy;
+
+	// If we've added messages back to the array, we need to resort to put
+	// them back in the right place.
+	if (!deleteFlag)
+		[self sortMessages];
+
+	// If any of the messages we deleted were unread then the
+	// folder's unread count just changed.
+	if (needFolderRedraw)
+		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
+	
+	// Compute the new place to put the selection
+	if (currentSelectedRow >= (int)[currentArrayOfMessages count])
+		currentSelectedRow = [currentArrayOfMessages count] - 1;
+	[self makeRowSelectedAndVisible:currentSelectedRow];
+	[messageList reloadData];
+	
+	// Read and/or unread count may have changed
+	if (needFolderRedraw)
+		[self showUnreadCountOnApplicationIcon];
+}
+
 /* markRead
- * Toggle the read/unread state of the selected message
+ * Toggle the read/unread state of the selected messages
  */
 -(IBAction)markRead:(id)sender
 {
-	if ([messageList selectedRow] != -1 && ![db readOnly])
+	if (currentSelectedRow != -1 && ![db readOnly])
 	{
-		Message * theRecord = [currentArrayOfMessages objectAtIndex:[messageList selectedRow]];
+		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
 		NSArray * messageArray = [self markedMessageRange];
-		[self markReadByArray:messageArray readFlag:![theRecord isRead]];
+		[self markReadByArray:messageArray readFlag:![theArticle isRead]];
 		[messageArray release];
 	}
+}
+
+/* markUnreadUndo
+ * Undo handler to mark an array of articles unread.
+ */
+-(void)markUnreadUndo:(id)anObject
+{
+	[self markReadByArray:(NSArray *)anObject readFlag:NO];
+}
+
+/* markReadUndo
+ * Undo handler to mark an array of articles read.
+ */
+-(void)markReadUndo:(id)anObject
+{
+	[self markReadByArray:(NSArray *)anObject readFlag:YES];
 }
 
 /* markReadByArray
@@ -2307,19 +2425,28 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)markReadByArray:(NSArray *)messageArray readFlag:(BOOL)readFlag
 {
 	NSEnumerator * enumerator = [messageArray objectEnumerator];
-	Message * theRecord;
+	Message * theArticle;
 	int lastFolderId = -1;
 	int folderId;
 
+	// Set up to undo this action
+	NSUndoManager * undoManager = [mainWindow undoManager];
+	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
+	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:messageArray];
+	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
+
 	[markReadTimer invalidate];
+	[markReadTimer release];
+	markReadTimer = nil;
+
 	[db beginTransaction];
-	while ((theRecord = [enumerator nextObject]) != nil)
+	while ((theArticle = [enumerator nextObject]) != nil)
 	{
-		folderId = [theRecord folderId];
-		[db markMessageRead:folderId guid:[theRecord guid] isRead:readFlag];
+		folderId = [theArticle folderId];
+		[db markMessageRead:folderId guid:[theArticle guid] isRead:readFlag];
 		if (folderId != currentFolderId)
 		{
-			[theRecord markRead:readFlag];
+			[theArticle markRead:readFlag];
 			[db flushFolder:folderId];
 		}
 		if (folderId != lastFolderId && lastFolderId != -1)
@@ -2338,16 +2465,32 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[self showUnreadCountOnApplicationIcon];
 }
 
+/* markUnflagUndo
+ * Undo handler to un-flag an array of articles.
+ */
+-(void)markUnflagUndo:(id)anObject
+{
+	[self markFlaggedByArray:(NSArray *)anObject flagged:NO];
+}
+
+/* markFlagUndo
+ * Undo handler to flag an array of articles.
+ */
+-(void)markFlagUndo:(id)anObject
+{
+	[self markFlaggedByArray:(NSArray *)anObject flagged:YES];
+}
+
 /* markFlagged
  * Toggle the flagged/unflagged state of the selected message
  */
 -(IBAction)markFlagged:(id)sender
 {
-	if ([messageList selectedRow] != -1 && ![db readOnly])
+	if (currentSelectedRow != -1 && ![db readOnly])
 	{
-		Message * theRecord = [currentArrayOfMessages objectAtIndex:[messageList selectedRow]];
+		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
 		NSArray * messageArray = [self markedMessageRange];
-		[self markFlaggedByArray:messageArray flagged:![theRecord isFlagged]];
+		[self markFlaggedByArray:messageArray flagged:![theArticle isFlagged]];
 		[messageArray release];
 	}
 }
@@ -2358,13 +2501,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)markFlaggedByArray:(NSArray *)messageArray flagged:(BOOL)flagged
 {
 	NSEnumerator * enumerator = [messageArray objectEnumerator];
-	Message * theRecord;
+	Message * theArticle;
 
+	// Set up to undo this action
+	NSUndoManager * undoManager = [mainWindow undoManager];
+	SEL markFlagUndoAction = flagged ? @selector(markUnflagUndo:) : @selector(markFlagUndo:);
+	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:messageArray];
+	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
+	
 	[db beginTransaction];
-	while ((theRecord = [enumerator nextObject]) != nil)
+	while ((theArticle = [enumerator nextObject]) != nil)
 	{
-		[theRecord markFlagged:flagged];
-		[db markMessageFlagged:[theRecord folderId] guid:[theRecord guid] isFlagged:flagged];
+		[theArticle markFlagged:flagged];
+		[db markMessageFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
 	}
 	[db commitTransaction];
 	[messageList reloadData];
@@ -2388,6 +2537,28 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		  contextInfo:nil];
 }
 
+/* renameUndo
+ * Undo a folder rename action. Also create a redo action to reapply the original
+ * change back again.
+ */
+-(void)renameUndo:(id)anObject
+{
+	NSDictionary * undoAttributes = (NSDictionary *)anObject;
+	Folder * folder = [undoAttributes objectForKey:@"Folder"];
+	NSString * oldName = [undoAttributes objectForKey:@"Name"];
+
+	NSMutableDictionary * redoAttributes = [NSMutableDictionary dictionary];
+
+	[redoAttributes setValue:[folder name] forKey:@"Name"];
+	[redoAttributes setValue:folder forKey:@"Folder"];
+
+	NSUndoManager * undoManager = [mainWindow undoManager];
+	[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:redoAttributes];
+	[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
+
+	[db setFolderName:[folder itemId] newName:oldName];
+}
+
 /* endRenameFolder
  * Called when the user OK's the Rename Folder sheet
  */
@@ -2395,6 +2566,17 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	[renameWindow orderOut:sender];
 	[NSApp endSheet:renameWindow returnCode:1];
+
+	Folder * folder = [db folderFromID:currentFolderId];
+	NSMutableDictionary * renameAttributes = [NSMutableDictionary dictionary];
+
+	[renameAttributes setValue:[folder name] forKey:@"Name"];
+	[renameAttributes setValue:folder forKey:@"Folder"];
+
+	NSUndoManager * undoManager = [mainWindow undoManager];
+	[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:renameAttributes];
+	[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
+
 	[db setFolderName:currentFolderId newName:[[renameField stringValue] trim]];
 }
 
@@ -2458,13 +2640,15 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
+		if (!IsTrashFolder(folder))
+		{
+			// Create a status string
+			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), [folder name]];
+			[self setStatusMessage:deleteStatusMsg persist:NO];
 
-		// Create a status string
-		NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), [folder name]];
-		[self setStatusMessage:deleteStatusMsg persist:NO];
-
-		// Now call the database to delete the folder.
-		[db deleteFolder:[folder itemId]];
+			// Now call the database to delete the folder.
+			[db deleteFolder:[folder itemId]];
+		}
 	}
 
 	// Unread count may have changed
@@ -2486,16 +2670,16 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		NSArray * columns = [messageList tableColumns];
 		if (column >= 0 && column < (int)[columns count])
 		{
-			Message * theRecord = [currentArrayOfMessages objectAtIndex:row];
+			Message * theArticle = [currentArrayOfMessages objectAtIndex:row];
 			NSString * columnName = [(NSTableColumn *)[columns objectAtIndex:column] identifier];
 			if ([columnName isEqualToString:MA_Field_Read])
 			{
-				[self markReadByArray:[NSArray arrayWithObject:theRecord] readFlag:![theRecord isRead]];
+				[self markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:![theArticle isRead]];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_Flagged])
 			{
-				[self markFlaggedByArray:[NSArray arrayWithObject:theRecord] flagged:![theRecord isFlagged]];
+				[self markFlaggedByArray:[NSArray arrayWithObject:theArticle] flagged:![theArticle isFlagged]];
 				return;
 			}
 		}
@@ -2510,8 +2694,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	if (currentSelectedRow != -1)
 	{
-		Message * theRecord = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
-		[self openURLInBrowser:[theRecord link]];
+		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		[self openURLInBrowser:[theArticle link]];
 	}
 }
 
@@ -2523,8 +2707,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	int folderId = [foldersTree actualSelection];
 	Folder * folder = [db folderFromID:folderId];
 
-	NSString * validatorURL = [NSString stringWithFormat:@"http://feedvalidator.org/check?url=%@", [folder feedURL]];
-	[self openURLInBrowser:validatorURL];
+	if (IsRSSFolder(folder))
+	{
+		NSString * validatorURL = [NSString stringWithFormat:@"http://feedvalidator.org/check?url=%@", [folder feedURL]];
+		[self openURLInBrowser:validatorURL];
+	}
 }
 
 /* viewSourceHomePage
@@ -2603,6 +2790,57 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
 	[self selectFolderWithFilter:currentFolderId];
+}
+
+/* refreshAllSubscriptions
+ * Get new articles from all subscriptions.
+ */
+-(IBAction)refreshAllSubscriptions:(id)sender
+{
+	if (![self isConnecting])
+		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders]];
+}
+
+/* refreshSelectedSubscriptions
+ * Refresh one or more subscriptions selected from the folders list. The selection we obtain
+ * may include non-RSS folders so these have to be trimmed out first.
+ */
+-(IBAction)refreshSelectedSubscriptions:(id)sender
+{
+	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
+	int count = [selectedFolders count];
+	int index;
+	
+	// For group folders, add all sub-groups to the array. The array we get back
+	// from selectedFolders may include groups but will not include the folders within
+	// those groups if they weren't selected. So we need to grab those folders here.
+	for (index = 0; index < count; ++index)
+	{
+		Folder * folder = [selectedFolders objectAtIndex:index];
+		if (IsGroupFolder(folder))
+			[selectedFolders addObjectsFromArray:[db arrayOfFolders:[folder itemId]]];
+	}
+	
+	// Trim the array to remove non-RSS folders that can't be refreshed.
+	for (index = count - 1; index >= 0; --index)
+	{
+		Folder * folder = [selectedFolders objectAtIndex:index];
+		if (!IsRSSFolder(folder))
+			[selectedFolders removeObjectAtIndex:index];
+	}
+	
+	// Hopefully what is left is refreshable.
+	if ([selectedFolders count] > 0)
+		[[RefreshManager sharedManager] refreshSubscriptions:selectedFolders];
+}
+
+/* cancelAllRefreshes
+ * Used to kill all active refresh connections and empty the queue of folders due to
+ * be refreshed.
+ */
+-(IBAction)cancelAllRefreshes:(id)sender
+{
+	[[RefreshManager sharedManager] cancelAll];
 }
 
 /* runOKAlertSheet
@@ -2694,7 +2932,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	
 	if (theAction == @selector(printDocument:))
 	{
-		return ([messageList selectedRow] >= 0 && isMainWindowVisible);
+		return (currentSelectedRow >= 0 && isMainWindowVisible);
 	}
 	else if (theAction == @selector(backTrackMessage:))
 	{
@@ -2722,7 +2960,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(refreshAllSubscriptions:))
 	{
-		return totalConnections == 0 && ![db readOnly];
+		return ![self isConnecting] && ![db readOnly];
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{
@@ -2747,7 +2985,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
-		return [foldersTree actualSelection] != -1 && ![db readOnly] && isMainWindowVisible;
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
@@ -2760,7 +2999,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(markAllRead:))
 	{
-		return ![db readOnly] && isMainWindowVisible;
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(importSubscriptions:))
 	{
@@ -2768,7 +3008,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(cancelAllRefreshes:))
 	{
-		return totalConnections > 0;
+		return [self isConnecting];
 	}
 	else if (theAction == @selector(viewSourceHomePage:))
 	{
@@ -2787,11 +3027,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	else if (theAction == @selector(viewArticlePage:))
 	{
 		[menuItem setState:isViewingArticlePage ? NSOnState : NSOffState];
-		return [messageList selectedRow] != -1 && isMainWindowVisible;
+		return currentSelectedRow >= 0 && isMainWindowVisible;
 	}
 	else if (theAction == @selector(compactDatabase:))
 	{
-		return totalConnections == 0 && ![db readOnly] && isMainWindowVisible;
+		return ![self isConnecting] && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(syncSubscriptionsFromBloglines:))
 	{
@@ -2813,9 +3053,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		Folder * folder = [db folderFromID:folderId];
 		return (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
+	else if (theAction == @selector(validateFeed:))
+	{
+		int folderId = [foldersTree actualSelection];
+		Folder * folder = [db folderFromID:folderId];
+		return IsRSSFolder(folder) && isMainWindowVisible;
+	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return [messageList selectedRow] != -1 && ![db readOnly] && isMainWindowVisible;
+		return currentSelectedRow >= 0 && ![db readOnly] && isMainWindowVisible;
+	}
+	else if (theAction == @selector(emptyTrash:))
+	{
+		return ![db readOnly];
 	}
 	else if (theAction == @selector(closeMainWindow:))
 	{
@@ -2833,29 +3083,27 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(markFlagged:))
 	{
-		int rowIndex = [messageList selectedRow];
-		if (rowIndex != -1)
+		if (currentSelectedRow >= 0)
 		{
-			Message * thisMessage = [currentArrayOfMessages objectAtIndex:rowIndex];
+			Message * thisMessage = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
 			if ([thisMessage isFlagged])
 				[menuItem setTitle:NSLocalizedString(@"Mark Unflagged", nil)];
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (rowIndex != -1 && ![db readOnly] && isMainWindowVisible);
+		return (currentSelectedRow >= 0 && ![db readOnly] && isMainWindowVisible);
 	}
 	else if (theAction == @selector(markRead:))
 	{
-		int rowIndex = [messageList selectedRow];
-		if (rowIndex != -1)
+		if (currentSelectedRow >= 0)
 		{
-			Message * thisMessage = [currentArrayOfMessages objectAtIndex:rowIndex];
+			Message * thisMessage = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
 			if ([thisMessage isRead])
 				[menuItem setTitle:NSLocalizedString(@"Mark Unread", nil)];
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (rowIndex != -1 && ![db readOnly] && isMainWindowVisible);
+		return (currentSelectedRow >= 0 && ![db readOnly] && isMainWindowVisible);
 	}
 	return YES;
 }
@@ -2871,9 +3119,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[topLineDict release];
 	[bottomLineDict release];
 	[persistedStatusText release];
-	[connectionsArray release];
-	[refreshArray release];
-	[folderIconRefreshArray release];
 	[scriptPathMappings release];
 	[stylePathMappings release];
 	[cssStylesheet release];
@@ -2885,15 +3130,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[groupFolder release];
 	[checkUpdates release];
 	[preferenceController release];
-	[credentialsController release];
 	[activityViewer release];
 	[currentArrayOfMessages release];
 	[backtrackArray release];
 	[checkTimer release];
 	[markReadTimer release];
-	[pumpTimer release];
 	[messageListFont release];
-	[authQueue release];
 	[appDockMenu release];
 	[db release];
 	[super dealloc];

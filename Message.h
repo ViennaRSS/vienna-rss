@@ -28,6 +28,7 @@ extern NSString * MA_Field_Date;
 extern NSString * MA_Field_Read;
 extern NSString * MA_Field_Flagged;
 extern NSString * MA_Field_Comments;
+extern NSString * MA_Field_Deleted;
 extern NSString * MA_Field_Text;
 extern NSString * MA_Field_Folder;
 extern NSString * MA_Field_Parent;
@@ -51,12 +52,14 @@ extern NSString * MA_Field_Headlines;
 #define MA_FieldID_Link			409
 #define MA_FieldID_Comments		410
 #define MA_FieldID_Headlines	411
+#define MA_FieldID_Deleted		412
 
 @interface Message : NSObject {
 	NSMutableDictionary * messageData;
 	NSMutableArray * commentsArray;
 	BOOL readFlag;
 	BOOL markedFlag;
+	BOOL deletedFlag;
 	int messageStatus;
 }
 
@@ -72,6 +75,7 @@ extern NSString * MA_Field_Headlines;
 -(int)folderId;
 -(BOOL)isRead;
 -(BOOL)isFlagged;
+-(BOOL)isDeleted;
 -(BOOL)hasComments;
 -(int)status;
 -(void)setGuid:(NSString *)newGuid;
@@ -85,5 +89,6 @@ extern NSString * MA_Field_Headlines;
 -(void)setStatus:(int)newStatus;
 -(void)markRead:(BOOL)flag;
 -(void)markFlagged:(BOOL)flag;
+-(void)markDeleted:(BOOL)flag;
 -(NSDictionary *)messageData;
 @end

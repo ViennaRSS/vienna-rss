@@ -24,52 +24,54 @@
 #import "FoldersTree.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
+#import "Constants.h"
+
+// Singleton
+static RefreshManager * _refreshManager = nil;
 
 // Non-class function used for sorting
 static int messageDateSortHandler(Message * item1, Message * item2, void * context);
 
-@implementation AppController (Refresh)
+// Private functions
+@interface RefreshManager (Private)
+	-(void)getCredentialsForFolder;
+	-(void)pumpSubscriptionRefresh;
+	-(void)pumpFolderIconRefresh;
+	-(void)beginRefreshTimer;
+	-(void)refreshPumper:(NSTimer *)aTimer;
+	-(void)addConnection:(AsyncConnection *)conn;
+	-(void)removeConnection:(AsyncConnection *)conn;
+	-(void)folderIconRefreshCompleted:(AsyncConnection *)connector;
+@end
 
-/* refreshAllSubscriptions
- * Get new articles from all subscriptions.
+@implementation RefreshManager
+
+/* init
+ * Initialise the class.
  */
--(IBAction)refreshAllSubscriptions:(id)sender
+-(id)init
 {
-	if (totalConnections == 0)
-		[self refreshSubscriptions:[db arrayOfRSSFolders]];
+	if ((self = [super init]) != nil)
+	{
+		maximumConnections = [[[NSUserDefaults standardUserDefaults] valueForKey:MAPref_RefreshThreads] intValue];
+		totalConnections = 0;
+		countOfNewArticles = 0;
+		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
+		folderIconRefreshArray = [[NSMutableArray alloc] initWithCapacity:10];
+		connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
+		authQueue = [[NSMutableArray alloc] init];
+	}
+	return self;
 }
 
-/* refreshSelectedSubscriptions
- * Refresh one or more subscriptions selected from the folders list. The selection we obtain
- * may include non-RSS folders so these have to be trimmed out first.
+/* sharedManager
+ * Returns the single instance of the refresh manager.
  */
--(IBAction)refreshSelectedSubscriptions:(id)sender
++(RefreshManager *)sharedManager
 {
-	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
-	
-	// For group folders, add all sub-groups to the array. The array we get back
-	// from selectedFolders may include groups but will not include the folders within
-	// those groups if they weren't selected. So we need to grab those folders here.
-	for (index = 0; index < count; ++index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		if (IsGroupFolder(folder))
-			[selectedFolders addObjectsFromArray:[db arrayOfFolders:[folder itemId]]];
-	}
-	
-	// Trim the array to remove non-RSS folders that can't be refreshed.
-	for (index = count - 1; index >= 0; --index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		if (!IsRSSFolder(folder))
-			[selectedFolders removeObjectAtIndex:index];
-	}
-	
-	// Hopefully what is left is refreshable.
-	if ([selectedFolders count] > 0)
-		[self refreshSubscriptions:selectedFolders];
+	if (!_refreshManager)
+		_refreshManager = [[RefreshManager alloc] init];
+	return _refreshManager;
 }
 
 /* refreshSubscriptions
@@ -81,7 +83,6 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	int count = [foldersArray count];
 	int index;
 	
-	unreadAtBeginning = [db countOfUnread];
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [foldersArray objectAtIndex:index];
@@ -91,13 +92,43 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	[self beginRefreshTimer];
 }
 
+/* cancellAll
+ * Cancel all active refreshes.
+ */
+-(void)cancelAll
+{
+	[refreshArray removeAllObjects];
+	[folderIconRefreshArray removeAllObjects];
+	while (totalConnections > 0)
+	{
+		AsyncConnection * conn = [connectionsArray objectAtIndex:0];
+		[conn cancel];
+		[self removeConnection:conn];
+	}
+}
+
+/* totalConnections
+ * Returns the current number of concurrent active connections.
+ */
+-(int)totalConnections
+{
+	return totalConnections;
+}
+
+/* countOfNewArticles
+ */
+-(int)countOfNewArticles
+{
+	return countOfNewArticles;
+}
+
 /* getCredentialsForFolder
  * Initiate the UI to request the credentials for the specified folder.
  */
 -(void)getCredentialsForFolder
 {
 	if (credentialsController == nil)
-		credentialsController = [[FeedCredentials alloc] initWithDatabase:db];
+		credentialsController = [[FeedCredentials alloc] init];
 	
 	// Pull next folder out of the queue. The UI will post a
 	// notification when it is done and we can move on to the
@@ -105,7 +136,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	if ([authQueue count] > 0 && ![[credentialsController window] isVisible])
 	{
 		Folder * folder = [authQueue objectAtIndex:0];
-		[credentialsController credentialsForFolder:mainWindow folder:folder];
+		[credentialsController credentialsForFolder:[NSApp mainWindow] folder:folder];
 	}
 }
 
@@ -156,10 +187,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 -(void)beginRefreshTimer
 {
 	if (pumpTimer == nil)
-	{
-		[pumpTimer invalidate];
 		pumpTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshPumper:) userInfo:nil repeats:YES] retain];
-	}
 }
 
 /* refreshPumper
@@ -190,8 +218,9 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
  */
 -(void)pumpSubscriptionRefresh
 {
+	NSAssert([refreshArray count] > 0, @"Called pumpSubscriptionRefresh with an empty queue");
 	Folder * folder = [refreshArray objectAtIndex:0];
-	
+
 	// If this folder needs credentials, add the folder to the list requiring authentication
 	// and since we can't progress without it, skip this folder on the connection
 	if ([folder flags] & MA_FFlag_NeedCredentials)
@@ -205,8 +234,9 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	// If this folder also requires an image refresh, add that
 	if ([folder flags] & MA_FFlag_CheckForImage)
 		[folderIconRefreshArray addObject:folder];
-	
+
 	// The activity log name we use depends on whether or not this folder has a real name.
+	Database * db = [Database sharedDatabase];
 	NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
 	
@@ -284,6 +314,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	else if ([connector status] == MA_Connect_Succeeded)
 	{
 		Folder * folder = (Folder *)[connector contextData];
+		Database * db = [Database sharedDatabase];
 		NSData * receivedData = [connector receivedData];
 		
 		// Remember the last modified date
@@ -310,6 +341,10 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		NSString * feedDescription = [newFeed description];
 		NSString * feedLink = [newFeed link];
 		
+		// Synthesize feed link if it is missing
+		if ([feedLink isBlank])
+			feedLink = [[folder feedURL] baseURL];
+
 		// Get the feed's last update from the header if it is present. This will mark the
 		// date of the most recent message in the feed if the individual messages are
 		// missing a date tag.
@@ -435,6 +470,9 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
 			[folderIconRefreshArray addObject:folder];
+		
+		// Add to count of new articles so far
+		countOfNewArticles += newMessagesFromFeed;
 	}
 	[self removeConnection:connector];
 }
@@ -458,9 +496,10 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		NSImage * iconImage = [[NSImage alloc] initWithData:[connector receivedData]];
 		if (iconImage != nil && [iconImage isValid])
 		{
+			[iconImage setScalesWhenResized:YES];
 			[iconImage setSize:NSMakeSize(16, 16)];
 			[folder setImage:iconImage];
-			
+
 			// Broadcast a notification since the folder image has now changed
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 
@@ -486,7 +525,10 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		[connectionsArray addObject:conn];
 	
 	if (totalConnections++ == 0)
+	{
+		countOfNewArticles = 0;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	}
 }
 
 /* removeConnection
@@ -506,19 +548,16 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
-/* cancelAllRefreshes
- * Used to kill all active refresh connections and empty the queue of folders due to
- * be refreshed.
+/* dealloc
+ * Clean up after ourselves.
  */
--(IBAction)cancelAllRefreshes:(id)sender
+-(void)dealloc
 {
-	[refreshArray removeAllObjects];
-	[folderIconRefreshArray removeAllObjects];
-	while (totalConnections > 0)
-	{
-		AsyncConnection * conn = [connectionsArray objectAtIndex:0];
-		[conn cancel];
-		[self removeConnection:conn];
-	}
+	[pumpTimer release];
+	[authQueue release];
+	[connectionsArray release];
+	[refreshArray release];
+	[folderIconRefreshArray release];
+	[super dealloc];
 }
 @end

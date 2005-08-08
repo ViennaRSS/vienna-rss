@@ -31,6 +31,7 @@
 #define MA_Smart_Folder			2
 #define MA_Group_Folder			3
 #define MA_RSS_Folder			4
+#define MA_Trash_Folder			5
 
 // Bloglines flags
 #define MA_NonBloglines_Folder	0x0L
@@ -40,6 +41,7 @@
 #define IsSmartFolder(f)		(([(f) type]) == MA_Smart_Folder)
 #define IsRSSFolder(f)			(([(f) type]) == MA_RSS_Folder)
 #define IsGroupFolder(f)		(([(f) type]) == MA_Group_Folder)
+#define IsTrashFolder(f)		(([(f) type]) == MA_Trash_Folder)
 #define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
 #define IsBloglinesFolder(f)	([(f) bloglinesId] != MA_NonBloglines_Folder)
 

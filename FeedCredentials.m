@@ -28,15 +28,14 @@
 
 @implementation FeedCredentials
 
-/* initWithDatabase
+/* init
  * Initialise an instance of ourselves with the specified database
  */
--(id)initWithDatabase:(Database *)newDb
+-(id)init
 {
 	if ((self = [super init]) != nil)
 	{
 		folder = nil;
-		db = newDb;
 	}
 	return self;
 }
@@ -81,7 +80,6 @@
 	[credentialsWindow orderOut:self];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CancelAuthenticationForFolder" object:folder];
-	//[folder release];
 }
 
 /* doOKButton
@@ -92,6 +90,7 @@
 	NSString * usernameString = [[userName stringValue] trim];
 	NSString * passwordString = [password stringValue];
 
+	Database * db = [Database sharedDatabase];
 	[db setFolderUsername:[folder itemId] newUsername:usernameString];
 	[folder setPassword:passwordString];
 	
@@ -99,7 +98,6 @@
 	[credentialsWindow orderOut:self];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GotAuthenticationForFolder" object:folder];
-	[folder release];
 }
 
 /* handleTextDidChange [delegate]
@@ -125,6 +123,7 @@
  */
 -(void)dealloc
 {
+	[folder release];
 	[super dealloc];
 }
 @end

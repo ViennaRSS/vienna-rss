@@ -29,6 +29,7 @@ enum {
 	MA_SmartFolderIcon,
 	MA_RSSFolderIcon,
 	MA_RSSFeedIcon,
+	MA_TrashFolderIcon,
 	MA_Max_Icons
 };
 
@@ -158,6 +159,7 @@ static NSArray * iconArray = nil;
 					NSImage * iconImage = [[NSImage alloc] initWithData:imageData];
 					if ([iconImage isValid])
 					{
+						[iconImage setScalesWhenResized:YES];
 						[iconImage setSize:NSMakeSize(16, 16)];
 						NSString * homePageSiteRoot = [[[fullPath lastPathComponent] stringByDeletingPathExtension] convertStringToValidPath];
 						[folderImagesArray setObject:iconImage forKey:homePageSiteRoot];
@@ -221,6 +223,7 @@ static NSArray * iconArray = nil;
 						[NSImage imageNamed:@"searchFolder.tiff"],
 						[NSImage imageNamed:@"rssFolder.tiff"],
 						[NSImage imageNamed:@"rssFeed.tiff"],
+						[NSImage imageNamed:@"trashFolder.tiff"],
 						nil] retain];
 	return iconArray;
 }
@@ -302,6 +305,8 @@ static NSArray * iconArray = nil;
 		return [[Folder _iconArray] objectAtIndex:MA_RSSFolderIcon];
 	if (IsSmartFolder(self))
 		return [[Folder _iconArray] objectAtIndex:MA_SmartFolderIcon];
+	if (IsTrashFolder(self))
+		return [[Folder _iconArray] objectAtIndex:MA_TrashFolderIcon];
 	if (IsRSSFolder(self))
 	{
 		// Try the folder icon cache.

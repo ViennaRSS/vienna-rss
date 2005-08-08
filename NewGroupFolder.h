@@ -27,7 +27,6 @@
 	IBOutlet NSButton * saveButton;
 	IBOutlet NSButton * cancelButton;
 	int parentId;
-	Database * db;
 }
 
 // Action handlers
@@ -35,6 +34,5 @@
 -(IBAction)doCancel:(id)sender;
 
 // General functions
--(id)initWithDatabase:(Database *)newDb;
 -(void)newGroupFolder:(NSWindow *)window underParent:(int)itemId;
 @end

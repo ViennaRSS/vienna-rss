@@ -43,6 +43,10 @@
 const int MA_Min_Supported_DB_Version = 11;
 const int MA_Current_DB_Version = 12;
 
+// There's just one database and we manage access to it through a
+// singleton object.
+static Database * _sharedDatabase = nil;
+
 @implementation Database
 
 /* init
@@ -57,10 +61,28 @@ const int MA_Current_DB_Version = 12;
 		initializedFoldersArray = NO;
 		initializedSmartFoldersArray = NO;
 		countOfUnread = 0;
+		trashFolder = nil;
 		smartFoldersArray = [[NSMutableDictionary dictionary] retain];
 		foldersArray = [[NSMutableDictionary dictionary] retain];
 	}
 	return self;
+}
+
+/* sharedDatabase
+ * Returns the single instance of the refresh manager.
+ */
++(Database *)sharedDatabase
+{
+	if (!_sharedDatabase)
+	{
+		_sharedDatabase = [[Database alloc] init];
+		if (![_sharedDatabase initDatabase:[[NSUserDefaults standardUserDefaults] stringForKey:MAPref_DefaultDatabase]])
+		{
+			[_sharedDatabase release];
+			_sharedDatabase = nil;
+		}
+	}
+	return _sharedDatabase;
 }
 
 /* initDatabase
@@ -118,7 +140,7 @@ const int MA_Current_DB_Version = 12;
 		// Create the tables
 		[self executeSQL:@"create table info (version, last_opened)"];
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags)"];
-		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, title, sender, link, date, text)"];
+		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, date, text)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
@@ -137,23 +159,34 @@ const int MA_Current_DB_Version = 12;
 		Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
 		[todayCriteria release];
+
+		// Create the trash folder
+		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
+			NSLocalizedString(@"Deleted Items", nil),
+			MA_Trash_Folder];
 		
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;
 		[self executeSQLWithFormat:@"insert into info (version) values (%d)", databaseVersion];
 	}
-	
+
 	// Handle 'retyping' the message_id field when going from v11 to v12. This
 	// code should be ripped out after we're sure everybody is now on a v12 db.
 	if (databaseVersion == 11)
 	{
 		[self beginTransaction];
+
+		// Add the deleted_flag column to the messages table
+		[self executeSQL:@"alter table messages add column (deleted_flag)"];
+
+		// Retype the message_id field to change it to a string since it was originally an integer
+		// field in v11 and earlier.
 		SQLResult * results = [sqlDatabase performQuery:@"select message_id, folder_id from messages"];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
 			SQLRow * row;
-			
+
 			while ((row = [enumerator nextObject]))
 			{
 				int messageNumber = [[row stringForColumn:@"message_id"] intValue];
@@ -161,11 +194,19 @@ const int MA_Current_DB_Version = 12;
 
 				NSString * guid = [NSString stringWithFormat:@"%d", messageNumber];
 				NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-				[self executeSQLWithFormat:@"update messages set message_id='%@' where message_id=%d and folder_id=%d", preparedGuid, messageNumber, folderId];
+				[self executeSQLWithFormat:@"update messages set message_id='%@' where message_id=%d and folder_id=%d",
+					preparedGuid,
+					folderId,
+					messageNumber,
+					folderId];
 			}
 		}
 		[results release];
 
+		// Create the trash folder
+		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
+			NSLocalizedString(@"Deleted Items", nil), MA_Trash_Folder];
+		
 		// Set the new version
 		[self setDatabaseVersion:MA_Current_DB_Version];
 		[self commitTransaction];
@@ -190,6 +231,7 @@ const int MA_Current_DB_Version = 12;
 
 	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
 	[self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:15];
+	[self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
 	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:YES width:15];
 	[self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
 	[self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
@@ -229,6 +271,7 @@ const int MA_Current_DB_Version = 12;
  */
 -(void)executeSQL:(NSString *)sqlStatement
 {
+	[self verifyThreadSafety];
 	[[sqlDatabase performQuery:sqlStatement] release];
 }
 
@@ -241,9 +284,8 @@ const int MA_Current_DB_Version = 12;
 	va_list arguments;
 	va_start(arguments, sqlStatement);
 	NSString * query = [[NSString alloc] initWithFormat:sqlStatement arguments:arguments];
-	SQLResult * result = [sqlDatabase performQuery:query];
+	[self executeSQL:query];
 	[query release];
-	[result release];
 }
 
 /* verifyThreadSafety
@@ -344,7 +386,6 @@ const int MA_Current_DB_Version = 12;
  */
 -(void)beginTransaction
 {
-	[self verifyThreadSafety];
 	NSAssert(!inTransaction, @"Whoops! Already in a transaction. You forgot to call commitTransaction somewhere");
 	[self executeSQL:@"begin transaction"];
 	inTransaction = YES;
@@ -355,7 +396,6 @@ const int MA_Current_DB_Version = 12;
  */
 -(void)commitTransaction
 {
-	[self verifyThreadSafety];
 	NSAssert(inTransaction, @"Whoops! Not in a transaction. You forgot to call beginTransaction first");
 	[self executeSQL:@"commit transaction"];
 	inTransaction = NO;
@@ -366,12 +406,8 @@ const int MA_Current_DB_Version = 12;
  */
 -(void)compactDatabase
 {
-	// Exit now if we're read-only
-	if (readOnly)
-		return;
-
-	[self verifyThreadSafety];
-	[self executeSQL:@"vacuum"];
+	if (!readOnly)
+		[self executeSQL:@"vacuum"];
 }
 
 /* setFolderLastUpdate
@@ -404,7 +440,6 @@ const int MA_Current_DB_Version = 12;
 		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
 
 		[folder setFeedURL:url];
-		[self verifyThreadSafety];
 		[self executeSQLWithFormat:@"update rss_folders set feed_url='%@' where folder_id=%d", preparedURL, folderId];
 	}
 	return YES;
@@ -555,9 +590,6 @@ const int MA_Current_DB_Version = 12;
 		[folder setChildUnreadCount:[folder childUnreadCount] + adjustment];
 	}
 
-	// Verify we're on the right thread
-	[self verifyThreadSafety];
-	
 	// Delete all messages in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
 	countOfUnread -= [folder unreadCount];
@@ -623,7 +655,6 @@ const int MA_Current_DB_Version = 12;
 	[folder setName:newName];
 
 	// Rename in the database
-	[self verifyThreadSafety];
 	NSString * preparedNewName = [SQLDatabase prepareStringForQuery:newName];
 	[self executeSQLWithFormat:@"update folders set foldername='%@' where folder_id=%d", preparedNewName, folderId];
 
@@ -655,7 +686,6 @@ const int MA_Current_DB_Version = 12;
 	[folder setDescription:newDescription];
 	
 	// Add a new description or update the one we have
-	[self verifyThreadSafety];
 	NSString * preparedNewDescription = [SQLDatabase prepareStringForQuery:newDescription];
 	[self executeSQLWithFormat:@"update rss_folders set description='%@' where folder_id=%d", preparedNewDescription, folderId];
 
@@ -687,7 +717,6 @@ const int MA_Current_DB_Version = 12;
 	[folder setHomePage:newHomePage];
 
 	// Add a new link or update the one we have
-	[self verifyThreadSafety];
 	NSString * preparedNewLink = [SQLDatabase prepareStringForQuery:newHomePage];
 	[self executeSQLWithFormat:@"update rss_folders set home_page='%@' where folder_id=%d", preparedNewLink, folderId];
 
@@ -718,7 +747,6 @@ const int MA_Current_DB_Version = 12;
 	[folder setBloglinesId:bloglinesId];
 	
 	// Update the ID in the database
-	[self verifyThreadSafety];
 	[self executeSQLWithFormat:@"update rss_folders set bloglines_id=%d where folder_id=%d", bloglinesId, folderId];
 	
 	// Send a notification that the folder has changed. It is the responsibility of the
@@ -749,7 +777,6 @@ const int MA_Current_DB_Version = 12;
 	[folder setUsername:name];
 	
 	// Add a new link or update the one we have
-	[self verifyThreadSafety];
 	NSString * preparedName = [SQLDatabase prepareStringForQuery:name];
 	[self executeSQLWithFormat:@"update rss_folders set username='%@' where folder_id=%d", preparedName, folderId];
 	return YES;
@@ -795,9 +822,16 @@ const int MA_Current_DB_Version = 12;
 	}
 
 	// Update the database now
-	[self verifyThreadSafety];
 	[self executeSQLWithFormat:@"update folders set parent_id='%d' where folder_id=%d", newParentID, folderId];
 	return YES;
+}
+
+/* trashFolderId;
+ * Returns the ID of the trash folder.
+ */
+-(int)trashFolderId
+{
+	return [trashFolder itemId];
 }
 
 /* folderFromID
@@ -869,6 +903,7 @@ const int MA_Current_DB_Version = 12;
 		int parentId = [message parentId];
 		BOOL marked_flag = [message isFlagged];
 		BOOL read_flag = [message isRead];
+		BOOL deleted_flag = [message isDeleted];
 
 		// Set some defaults
 		if (messageDate == nil)
@@ -903,8 +938,8 @@ const int MA_Current_DB_Version = 12;
 			SQLResult * results;
 
 			results = [sqlDatabase performQueryWithFormat:
-					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, read_flag, marked_flag, title, text) "
-					"values('%@', %d, %d, '%@', '%@', %f, %d, %d, '%@', '%@')",
+					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, read_flag, marked_flag, deleted_flag, title, text) "
+					"values('%@', %d, %d, '%@', '%@', %f, %d, %d, %d, '%@', '%@')",
 					preparedMessageGuid,
 					parentId,
 					folderID,
@@ -913,6 +948,7 @@ const int MA_Current_DB_Version = 12;
 					interval,
 					read_flag,
 					marked_flag,
+					deleted_flag,
 					preparedMessageTitle,
 					preparedMessageText];
 			if (!results)
@@ -933,13 +969,14 @@ const int MA_Current_DB_Version = 12;
 			SQLResult * results;
 
 			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, read_flag=%d, "
-													 "marked_flag=%d, title='%@', text='%@' where folder_id=%d and message_id='%@'",
+													 "marked_flag=%d, deleted_flag=%d, title='%@', text='%@' where folder_id=%d and message_id='%@'",
 													 parentId,
 													 preparedUserName,
 													 preparedMessageLink,
 													 interval,
 													 read_flag,
 													 marked_flag,
+													 deleted_flag,
 													 preparedMessageTitle,
 													 preparedMessageText,
 													 folderID,
@@ -968,8 +1005,28 @@ const int MA_Current_DB_Version = 12;
 	return NO;
 }
 
+/* deleteDeletedMessages
+ * Remove from the database all messages which have the deleted_flag field set to YES. This
+ * also requires that we remove the same messages from all folder caches.
+ */
+-(void)deleteDeletedMessages
+{
+	// Verify we're on the right thread
+	[self verifyThreadSafety];
+
+	SQLResult * results = [sqlDatabase performQuery:@"delete from messages where deleted_flag=1"];
+	if (results)
+	{
+		[trashFolder clearMessages];
+
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
+	}
+	[results release];
+}
+
 /* deleteMessage
- * Deletes a message from the specified folder
+ * Permanently deletes a message from the specified folder
  */
 -(BOOL)deleteMessage:(int)folderId guid:(NSString *)guid
 {
@@ -1022,9 +1079,6 @@ const int MA_Current_DB_Version = 12;
 	if ([folder needFlush] && !IsSmartFolder(folder))
 	{
 		NSTimeInterval interval = [[folder lastUpdate] timeIntervalSince1970];
-
-		// Verify we're on the right thread
-		[self verifyThreadSafety];
 		[self executeSQLWithFormat:@"update folders set flags=%d, unread_count=%d, last_update=%f where folder_id=%d",
 									[folder flags],
 									[folder unreadCount],
@@ -1108,9 +1162,6 @@ const int MA_Current_DB_Version = 12;
 		success = NO;
 	else
 	{
-		// Verify we're on the right thread
-		[self verifyThreadSafety];
-		
 		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
 		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
 		[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
@@ -1129,9 +1180,6 @@ const int MA_Current_DB_Version = 12;
 	Folder * folder = [self folderFromID:folderId];
 	if (![[folder name] isEqualToString:folderName])
 		[folder setName:folderName];
-	
-	// Verify we're on the right thread
-	[self verifyThreadSafety];
 	
 	// Update the smart folder string
 	NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
@@ -1186,6 +1234,10 @@ const int MA_Current_DB_Version = 12;
 				if (unreadCount > 0)
 					countOfUnread += unreadCount;
 				[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
+				
+				// Remember the trash folder
+				if (IsTrashFolder(folder))
+					trashFolder = [folder retain];
 			}
 		}
 		[results release];
@@ -1206,7 +1258,7 @@ const int MA_Current_DB_Version = 12;
 			}
 
 		// Load all RSS folders and add them to the list.
-		results = [sqlDatabase performQuery:@"select folder_id, feed_url, username, description, last_update_string, home_page, bloglines_id from rss_folders"];
+		results = [sqlDatabase performQuery:@"select * from rss_folders"];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
@@ -1371,7 +1423,6 @@ const int MA_Current_DB_Version = 12;
 				NSLog(@"Fixing unread count for %@ (%d on folder versus %d in messages)", [folder name], [folder unreadCount], unread_count);
 				int diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
-				[self flushFolder:folderId];
 				countOfUnread += diff;
 			}
 		}
@@ -1385,8 +1436,7 @@ const int MA_Current_DB_Version = 12;
  */
 -(void)releaseMessages:(int)folderId
 {
-	Folder * folder = [self folderFromID:folderId];
-	[folder clearMessages];
+	[[self folderFromID:folderId] clearMessages];
 }
 
 /* sqlScopeForFolder
@@ -1554,6 +1604,15 @@ const int MA_Current_DB_Version = 12;
 	if (folder == nil)
 		return nil;
 
+	if (IsTrashFolder(folder))
+	{
+		CriteriaTree * tree = [[CriteriaTree alloc] init];
+		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted withOperator:MA_CritOper_Is withValue:@"Yes"];
+		[tree addCriteria:clause];
+		[clause release];
+		return [tree autorelease];
+	}
+
 	if (IsSmartFolder(folder))
 	{
 		[self initSmartFoldersArray];
@@ -1589,7 +1648,7 @@ const int MA_Current_DB_Version = 12;
 			[tree addCriteria:clause];
 			[clause release];
 		}
-
+		
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
@@ -1610,12 +1669,13 @@ const int MA_Current_DB_Version = 12;
 				NSString * link = [row stringForColumn:@"link"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 				BOOL marked_flag = [[row stringForColumn:@"marked_flag"] intValue];
+				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
 				NSDate * messageDate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
 
 				// Keep our own track of unread messages
 				if (!read_flag)
 					++unread_count;
-				
+
 				Message * message = [[Message alloc] initWithGuid:guid];
 				[message setTitle:messageTitle];
 				[message setAuthor:author];
@@ -1623,9 +1683,11 @@ const int MA_Current_DB_Version = 12;
 				[message setDate:messageDate];
 				[message markRead:read_flag];
 				[message markFlagged:marked_flag];
+				[message markDeleted:deleted_flag];
 				[message setFolderId:messageFolderId];
 				[message setParentId:parentId];
-				[newArray addObject:message];
+				if (!deleted_flag || IsTrashFolder(folder))
+					[newArray addObject:message];
 				[folder addMessage:message];
 				[message release];
 			}
@@ -1640,7 +1702,6 @@ const int MA_Current_DB_Version = 12;
 					NSLog(@"Fixing unread count for %@ (%d on folder versus %d in messages)", [folder name], [folder unreadCount], unread_count);
 					int diff = (unread_count - [folder unreadCount]);
 					[self setFolderUnreadCount:folder adjustment:diff];
-					[self flushFolder:folderId];
 					countOfUnread += diff;
 				}
 			}
@@ -1687,7 +1748,6 @@ const int MA_Current_DB_Version = 12;
 			}
 			countOfUnread -= [folder unreadCount];
 			[self setFolderUnreadCount:folder adjustment:-count];
-			[self flushFolder:folderId];
 		}
 		[results release];
 	}
@@ -1721,7 +1781,7 @@ const int MA_Current_DB_Version = 12;
 
 			// Verify we're on the right thread
 			[self verifyThreadSafety];
-			
+
 			// Mark an individual message read
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%d where folder_id=%d and message_id='%@'", isRead, folderId, preparedGuid];
 			if (results)
@@ -1738,6 +1798,8 @@ const int MA_Current_DB_Version = 12;
 }
 
 /* setFolderUnreadCount
+ * Adjusts the unread count on the specified folder by the given delta. The same delta is
+ * also applied to the childUnreadCount of all ancestor folders.
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment
 {
@@ -1751,6 +1813,9 @@ const int MA_Current_DB_Version = 12;
 		folder = [self folderFromID:[folder parentId]];
 		[folder setChildUnreadCount:[folder childUnreadCount] + adjustment];
 	}
+
+	// Update the count in the database.
+	[self executeSQLWithFormat:@"update folders set unread_count=%d where folder_id=%d", [folder unreadCount], [folder itemId]];
 }
 
 /* markMessageFlagged
@@ -1759,8 +1824,18 @@ const int MA_Current_DB_Version = 12;
 -(void)markMessageFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
 {
 	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-	[self verifyThreadSafety];
 	[self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%d and message_id='%@'", isFlagged, folderId, preparedGuid];
+}
+
+/* markMessageDeleted
+ * Marks a message as deleted. Deleted messages always get marked read first.
+ */
+-(void)markMessageDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
+{
+	if (isDeleted)
+		[self markMessageRead:folderId guid:guid isRead:YES];
+	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
+	[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%d and message_id='%@'", isDeleted, folderId, preparedGuid];
 }
 
 /* messageText
@@ -1797,6 +1872,7 @@ const int MA_Current_DB_Version = 12;
 	[smartFoldersArray removeAllObjects];
 	[fieldsOrdered release];
 	[fieldsByName release];
+	[trashFolder release];
 	[sqlDatabase close];
 	initializedFoldersArray = NO;
 	initializedSmartFoldersArray = NO;

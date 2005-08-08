@@ -37,7 +37,6 @@
 @class MessageListView;
 @class ArticleView;
 @class TexturedHeader;
-@class FeedCredentials;
 
 @interface AppController : NSObject {
 	IBOutlet NSWindow * mainWindow;
@@ -66,8 +65,8 @@
 	SearchFolder * smartFolder;
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
-	FeedCredentials * credentialsController;
 
+	BOOL isAppInitialising;
 	Database * db;
 	BOOL sortedFlag;
 	int currentFolderId;
@@ -92,21 +91,13 @@
 	NSMutableDictionary * bottomLineDict;
 	NSTimer * checkTimer;
 	NSTimer * markReadTimer;
-	NSTimer * pumpTimer;
 	int lastCountOfUnread;
-	int unreadAtBeginning;
 	BOOL growlAvailable;
 	NSString * appName;
 	NSString * selectedStyle;
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
 	NSString * persistedStatusText;
-	int maximumConnections;
-	int totalConnections;
-	NSMutableArray * connectionsArray;
-	NSMutableArray * folderIconRefreshArray;
-	NSMutableArray * refreshArray;
-	NSMutableArray * authQueue;
 	BOOL previousFolderColumnState;
 	BOOL isViewingArticlePage;
 }
@@ -141,6 +132,10 @@
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)validateFeed:(id)sender;
+-(IBAction)emptyTrash:(id)sender;
+-(IBAction)refreshSelectedSubscriptions:(id)sender;
+-(IBAction)refreshAllSubscriptions:(id)sender;
+-(IBAction)cancelAllRefreshes:(id)sender;
 
 // Infobar functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
@@ -194,6 +189,7 @@
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
 -(void)runOKAlertSheet:(NSString *)titleString text:(NSString *)bodyText, ...;
 -(void)runOKAlertPanel:(NSString *)titleString text:(NSString *)bodyText, ...;
+-(BOOL)isAccessible:(NSString *)urlString;
 
 // Rename sheet functions
 -(IBAction)endRenameFolder:(id)sender;
@@ -209,5 +205,7 @@
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)selectMessageAfterReload;
+-(NSArray *)markedMessageRange;
 -(void)markReadByArray:(NSArray *)messageArray readFlag:(BOOL)readFlag;
+-(void)markDeletedByArray:(NSArray *)messageArray deleteFlag:(BOOL)deleteFlag;
 @end

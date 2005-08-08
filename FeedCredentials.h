@@ -29,12 +29,10 @@
 	IBOutlet NSSecureTextField * password;
 	IBOutlet NSTextField * userName;
 	IBOutlet NSTextField * promptString;
-	Database * db;
 	Folder * folder;
 }
 
 // Public functions
--(id)initWithDatabase:(Database *)newDb;
 -(void)credentialsForFolder:(NSWindow *)window folder:(Folder *)folder;
 -(IBAction)doCancelButton:(id)sender;
 -(IBAction)doOKButton:(id)sender;
