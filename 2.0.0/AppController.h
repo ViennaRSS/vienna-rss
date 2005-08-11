@@ -112,6 +112,7 @@
 -(IBAction)markRead:(id)sender;
 -(IBAction)markFlagged:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
+-(IBAction)copy:(id)sender;
 -(IBAction)printDocument:(id)sender;
 -(IBAction)toggleActivityViewer:(id)sender;
 -(IBAction)backTrackMessage:(id)sender;
@@ -179,7 +180,7 @@
 -(void)updateMessageListRowHeight;
 -(void)setOrientation:(BOOL)flag;
 -(void)runAppleScript:(NSString *)scriptName;
--(Database *)database;
+-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 -(int)currentFolderId;
 -(NSArray *)folders;
 -(NSString *)appName;
@@ -190,6 +191,7 @@
 -(void)runOKAlertSheet:(NSString *)titleString text:(NSString *)bodyText, ...;
 -(void)runOKAlertPanel:(NSString *)titleString text:(NSString *)bodyText, ...;
 -(BOOL)isAccessible:(NSString *)urlString;
+-(void)clearUndoStack;
 
 // Rename sheet functions
 -(IBAction)endRenameFolder:(id)sender;
@@ -197,6 +199,7 @@
 
 // Message list helper functions
 -(void)initTableView;
+-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 -(void)showColumnsForFolder:(int)folderId;
 -(void)setTableViewFont;
 -(void)sortByIdentifier:(NSString *)columnName;

@@ -81,10 +81,10 @@
 				<string>handleExportSubscriptions:</string>
 				<key>MarkAllRead</key>
 				<string>handleMarkAllRead:</string>
-				<key>RefreshSubscription</key>
-				<string>handleRefreshSubscription:</string>
 				<key>NewSubscription</key>
 				<string>handleNewSubscription:</string>
+				<key>RefreshSubscription</key>
+				<string>handleRefreshSubscription:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
@@ -213,6 +213,13 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
+				<key>openLinksInBackground</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>opLB</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
 				<key>readingPaneOnRight</key>
 				<dict>
 					<key>AppleEventCode</key>
@@ -254,12 +261,12 @@
 				<string>handleImportSubscriptions:</string>
 				<key>MarkAllRead</key>
 				<string>handleMarkAllRead:</string>
+				<key>NewSubscription</key>
+				<string>handleNewSubscription:</string>
 				<key>RefreshAllSubscriptions</key>
 				<string>handleRefreshAllSubscriptions:</string>
 				<key>RefreshSubscription</key>
 				<string>handleRefreshSubscription:</string>
-				<key>NewSubscription</key>
-				<string>handleNewSubscription:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>

@@ -963,7 +963,7 @@ static Database * _sharedDatabase = nil;
 			if (!read_flag)
 				adjustment = 1;
 		}
-		else
+		else if (![[self messageText:folderID guid:messageGuid] isEqualToString:messageText])
 		{
 			BOOL read_flag = [theMessage isRead];
 			SQLResult * results;

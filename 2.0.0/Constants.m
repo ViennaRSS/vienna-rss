@@ -47,6 +47,7 @@ NSString * MAPref_EnableBloglinesSupport = @"EnableBloglinesSupport";
 NSString * MAPref_BloglinesEmailAddress = @"BloglinesEmailAddress";
 NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
 NSString * MAPref_OpenLinksInVienna = @"OpenLinksInVienna";
+NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
 NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
 NSString * MAPref_Layout = @"Layout";
 

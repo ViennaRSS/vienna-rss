@@ -135,9 +135,6 @@
 		AAD34DAD06277D480094D6A6 /* DownloadPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAD34DAB06277D480094D6A6 /* DownloadPanel.nib */; };
 		AAD34DF6062786520094D6A6 /* DownloadUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD34DF4062786520094D6A6 /* DownloadUpdate.h */; };
 		AAD34DF7062786520094D6A6 /* DownloadUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD34DF5062786520094D6A6 /* DownloadUpdate.m */; };
-		AAD791BC0888D15900E2CE5E /* PreferencePanels.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAD791BB0888D15900E2CE5E /* PreferencePanels.plist */; };
-		AAD792E70888F62900E2CE5E /* FontsAndColorsPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD792E50888F62900E2CE5E /* FontsAndColorsPreferences.tiff */; };
-		AAD792E80888F62900E2CE5E /* GeneralPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD792E60888F62900E2CE5E /* GeneralPreferences.tiff */; };
 		AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
 		AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
@@ -343,7 +340,6 @@
 		AA8AF21A08908BD40045B51F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/About.nib; sourceTree = "<group>"; };
 		AA8AF248089092B50045B51F /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
 		AA8AF249089092B50045B51F /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
-		AA8AF32708909CA80045B51F /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/About.nib; sourceTree = "<group>"; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criteria.h; sourceTree = "<group>"; };
 		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criteria.m; sourceTree = "<group>"; };
 		AA94574A061C7E060090FE26 /* ExtDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtDateFormatter.h; sourceTree = "<group>"; };
@@ -376,9 +372,6 @@
 		AAD34DAC06277D480094D6A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		AAD34DF4062786520094D6A6 /* DownloadUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadUpdate.h; sourceTree = "<group>"; };
 		AAD34DF5062786520094D6A6 /* DownloadUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadUpdate.m; sourceTree = "<group>"; };
-		AAD791BB0888D15900E2CE5E /* PreferencePanels.plist */ = {isa = PBXFileReference; explicitFileType = text.plist; fileEncoding = 4; path = PreferencePanels.plist; sourceTree = "<group>"; };
-		AAD792E50888F62900E2CE5E /* FontsAndColorsPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = FontsAndColorsPreferences.tiff; sourceTree = "<group>"; };
-		AAD792E60888F62900E2CE5E /* GeneralPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GeneralPreferences.tiff; sourceTree = "<group>"; };
 		AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = scriptMenu.tiff; sourceTree = "<group>"; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PopUpButtonExtensions.h; sourceTree = "<group>"; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PopUpButtonExtensions.m; sourceTree = "<group>"; };
@@ -558,7 +551,6 @@
 				AA2CE688081C3F3800D8FD8F /* Acknowledgements.rtf */,
 				AA26F5650604955F00FE7994 /* Localizable.strings */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
-				AAD791BB0888D15900E2CE5E /* PreferencePanels.plist */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
 				AAE7A842086B696A009A487E /* add.tiff */,
 				AAE7A845086B6994009A487E /* action.tiff */,
@@ -581,8 +573,6 @@
 				AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */,
 				AA26F441060490BD00FE7994 /* unread_header.tiff */,
 				AA20DC9D0882CCC300A226F5 /* unread.tiff */,
-				AAD792E50888F62900E2CE5E /* FontsAndColorsPreferences.tiff */,
-				AAD792E60888F62900E2CE5E /* GeneralPreferences.tiff */,
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A3F065834F60091365D /* ViennaApp.scriptTerminology */,
 				AAD1E2CB0612908200D09905 /* MacPAD.url */,
@@ -877,9 +867,6 @@
 				AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */,
 				AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */,
 				AA6321510885F0BB006382D3 /* comments.tiff in Resources */,
-				AAD791BC0888D15900E2CE5E /* PreferencePanels.plist in Resources */,
-				AAD792E70888F62900E2CE5E /* FontsAndColorsPreferences.tiff in Resources */,
-				AAD792E80888F62900E2CE5E /* GeneralPreferences.tiff in Resources */,
 				AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */,
 				AA8AF21B08908BD40045B51F /* About.nib in Resources */,
 				AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */,
@@ -1026,7 +1013,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA8AF21A08908BD40045B51F /* English */,
-				AA8AF32708909CA80045B51F /* Swedish */,
 			);
 			name = About.nib;
 			sourceTree = "<group>";

@@ -42,6 +42,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
 		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
 		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
+		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		layoutStyle = [defaults integerForKey:MAPref_Layout];
 		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
 		bloglinesPassword = [bloglinesEmailAddress ? [KeyChain getPasswordFromKeychain:bloglinesEmailAddress url:MA_Bloglines_URL] : @"" retain];
@@ -113,7 +114,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 -(id)handleNewSubscription:(NSScriptCommand *)cmd
 {
 	NSDictionary * args = [cmd evaluatedArguments];
-	Folder * folder = [args objectForKey:@"Folder"];
+	Folder * folder = [args objectForKey:@"UnderFolder"];
 
 	int parentId = folder ? ((IsGroupFolder(folder)) ? [folder itemId] :[folder parentId]) : MA_Root_Folder;
 
@@ -236,8 +237,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(int)unreadCount
 {
-	Database * db = [[self delegate] database];
-	return [db countOfUnread];
+	return [[Database sharedDatabase] countOfUnread];
 }
 
 /* displayStyle
@@ -295,6 +295,37 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 -(BOOL)openLinksInVienna
 {
 	return openLinksInVienna;
+}
+
+/* openLinksInBackground
+ * Returns whether or not links clicked in Vienna are opened in the background.
+ */
+-(BOOL)openLinksInBackground
+{
+	return openLinksInBackground;
+}
+
+/* setOpenLinksInBackground
+ * Changes whether or not links clicked in Vienna are opened in the background then sends a notification
+ * that the preferences have changed.
+ */
+-(void)setOpenLinksInBackground:(float)flag
+{
+	[self internalSetOpenLinksInBackground:flag];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+
+/* internalSetOpenLinksInBackground
+ * Changes whether or not links clicked in Vienna are opened in the background.
+ */
+-(void)internalSetOpenLinksInBackground:(BOOL)flag
+{	
+	if (openLinksInBackground != flag)
+	{
+		openLinksInBackground = flag;
+		NSNumber * boolFlag = [NSNumber numberWithBool:flag];
+		[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_OpenLinksInBackground];
+	}
 }
 
 /* layoutStyle
@@ -461,8 +492,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(Folder *)currentFolder
 {
-	Database * db = [[self delegate] database];
-	return [db folderFromID:[[self delegate] currentFolderId]];
+	return [[Database sharedDatabase] folderFromID:[[self delegate] currentFolderId]];
 }
 
 /* setCurrentFolder

@@ -91,6 +91,9 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	// Set check for new messages when starting
 	[checkOnStartUp setState:[NSApp refreshOnStartup] ? NSOnState : NSOffState];
 
+	// Set whether links are opened in the background
+	[openLinksInBackground setState:[NSApp openLinksInBackground] ? NSOnState : NSOffState];
+	
 	// Set mark read behaviour
 	[markReadAfterNext setState:[NSApp markReadInterval] == 0 ? NSOnState : NSOffState];
 	[markReadAfterDelay setState:[NSApp markReadInterval] != 0 ? NSOnState : NSOffState];
@@ -185,6 +188,15 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 
 	// Select the registered item
 	[linksHandler selectItemAtIndex:0];
+}
+
+/* changeOpenLinksInBackground
+ * Sets whether Vienna opens new links in the background in the active web
+ * browser.
+ */
+-(IBAction)changeOpenLinksInBackground:(id)sender
+{
+	[NSApp internalSetOpenLinksInBackground:[sender state] == NSOnState];
 }
 
 /* changeCheckForUpdates

@@ -47,6 +47,7 @@ extern NSString * MAPref_EnableBloglinesSupport;
 extern NSString * MAPref_BloglinesEmailAddress;
 extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_OpenLinksInVienna;
+extern NSString * MAPref_OpenLinksInBackground;
 extern NSString * MAPref_ShowScriptsMenu;
 extern NSString * MAPref_Layout;
 

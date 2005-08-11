@@ -158,6 +158,13 @@
 					<key>Name</key>
 					<string>article list font size</string>
 				</dict>
+				<key>openLinksInBackground</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the default browser is activated when Vienna opens new links</string>
+					<key>Name</key>
+					<string>open links in background</string>
+				</dict>
 				<key>readingPaneOnRight</key>
 				<dict>
 					<key>Description</key>
@@ -266,19 +273,19 @@
 		<dict>
 			<key>Arguments</key>
 			<dict>
-				<key>UnderFolder</key>
-				<dict>
-					<key>Description</key>
-					<string>Optional folder under which the subscription will be created</string>
-					<key>Name</key>
-					<string>under</string>
-				</dict>
 				<key>URL</key>
 				<dict>
 					<key>Description</key>
 					<string>The URL of the new feed</string>
 					<key>Name</key>
 					<string>for</string>
+				</dict>
+				<key>UnderFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Optional folder under which the subscription will be created</string>
+					<key>Name</key>
+					<string>under</string>
 				</dict>
 			</dict>
 			<key>Description</key>
