@@ -29,6 +29,7 @@
 	BOOL isBloglinesEnabled;
 	BOOL readingPaneOnRight;
 	BOOL openLinksInVienna;
+	BOOL openLinksInBackground;
 }
 
 // Refresh commands
@@ -58,6 +59,9 @@
 
 // Opening URL links
 -(BOOL)openLinksInVienna;
+-(BOOL)openLinksInBackground;
+-(void)setOpenLinksInBackground:(float)flag;
+-(void)internalSetOpenLinksInBackground:(BOOL)flag;
 
 // Layout style
 -(int)layoutStyle;

@@ -42,6 +42,7 @@
 	-(void)setDescription:(NSString *)newDescription;
 	-(void)setLastModified:(NSDate *)newDate;
 	-(void)ensureTitle:(FeedItem *)item;
+	-(NSString *)guidFromText:(NSString *)theText;
 @end
 
 @implementation FeedItem
@@ -436,7 +437,7 @@
 			
 			// If no explicit GUID is specified, use the link as the GUID
 			if (!hasGUID)
-				[newItem setGuid:[newItem link]];
+				[newItem setGuid:[self guidFromText:[newItem description]]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -575,7 +576,7 @@
 
 			// If no explicit GUID is specified, use the link as the GUID
 			if (!hasGUID)
-				[newItem setGuid:[newItem link]];
+				[newItem setGuid:[self guidFromText:[newItem description]]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -665,6 +666,14 @@
 -(NSDate *)lastModified
 {
 	return lastModified;
+}
+
+/* guidFromText
+ * Create a 64 character GUID from the specified text.
+ */
+-(NSString *)guidFromText:(NSString *)theText
+{
+	return [NSString stringWithFormat:@"%X", [theText hash]];
 }
 
 /* ensureTitle

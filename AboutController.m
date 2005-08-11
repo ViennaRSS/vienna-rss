@@ -45,7 +45,6 @@
 	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
 	[versionString setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version]];
 
-	[[self window] setBackgroundColor:[NSColor whiteColor]];
 	[[self window] center];
 }
 @end

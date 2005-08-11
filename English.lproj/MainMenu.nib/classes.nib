@@ -17,6 +17,7 @@
                 exportSubscriptions = id; 
                 forwardTrackMessage = id; 
                 handleAbout = id; 
+                handleCopy = id; 
                 importSubscriptions = id; 
                 markAllRead = id; 
                 markFlagged = id; 

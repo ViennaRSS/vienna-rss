@@ -20,6 +20,12 @@ Thanks!
   is intentional that you can rename the Trash folder).
 - Added Undo/Redo support for the following actions: marking articles read, marking articles
   flagged, renaming folders and deleting articles.
+- Spacebar now moves to next unread article.
+- < and > keys now move to previous and next article.
+- Drag from the article list now provides HTML and string versions on the pasteboard.
+- Copy now works on articles in the article list.
+- Added an option to open links clicked in Vienna in the background in the default browser.
+- New temporary application icon that is more 'clickable' than the old one.
 
 2.0.0.2004 (Refresh)
 --------------------

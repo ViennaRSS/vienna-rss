@@ -98,6 +98,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
 	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
+	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
 
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
@@ -186,6 +187,13 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 	// Load the conference list from the database
 	[foldersTree initialiseFoldersTree:db];
+
+	// Put icons in front of some menu commands.
+	[self setImageForMenuCommand:[NSImage imageNamed:@"smallFolder.tiff"] forAction:@selector(newGroupFolder:)];
+	[self setImageForMenuCommand:[NSImage imageNamed:@"rssFeed.tiff"] forAction:@selector(newSubscription:)];
+	[self setImageForMenuCommand:[NSImage imageNamed:@"searchFolder.tiff"] forAction:@selector(newSmartFolder:)];
+	[self setImageForMenuCommand:[NSImage imageNamed:@"flagged.tiff"] forAction:@selector(markFlagged:)];
+	[self setImageForMenuCommand:[NSImage imageNamed:@"unread.tiff"] forAction:@selector(markRead:)];
 
 	// Create a backtrack array
 	isBacktracking = NO;
@@ -440,7 +448,35 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	{
 		// TODO: when our internal browser view is implemented, open the URL internally.
 	}
-	[[NSWorkspace sharedWorkspace] openURL:url];
+
+	// Launch in the foreground or background as needed
+	NSWorkspaceLaunchOptions lOptions = [NSApp openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
+	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
+					withAppBundleIdentifier:NULL
+									options:lOptions
+			 additionalEventParamDescriptor:NULL
+						  launchIdentifiers:NULL];
+}
+
+/* setImageForMenuCommand
+ * Sets the image for a specified menu command.
+ */
+-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel
+{
+	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
+	int count = [arrayOfMenus count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
+		int itemIndex = [subMenu indexOfItemWithTarget:self andAction:sel];
+		if (itemIndex >= 0)
+		{
+			[[subMenu itemAtIndex:itemIndex] setImage:image];
+			return;
+		}
+	}
 }
 
 /* showMainWindow
@@ -1207,14 +1243,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	return [foldersTree folders:MA_Root_Folder];
 }
 
-/* database
- * Return the active application database object.
- */
--(Database *)database
-{
-	return db;
-}
-
 /* appName
  * Returns's the application friendly (localized) name.
  */
@@ -1841,6 +1869,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			[mainWindow makeFirstResponder:searchField];
 			return YES;
 
+		case '>':
+			[self forwardTrackMessage:self];
+			return YES;
+
+		case '<':
+			[self backTrackMessage:self];
+			return YES;
+			
 		case 'm':
 		case 'M':
 			[self markFlagged:self];
@@ -1862,8 +1898,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 		case ' ': //SPACE
 			{
-			// Advance one page in the message.
-			[textView scrollPageDown:self];
+			NSView * theView = [[[textView mainFrame] frameView] documentView];
+			NSRect visibleRect;
+
+			visibleRect = [theView visibleRect];
+			if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
+				[self viewNextUnread:self];
+			else
+				[[[textView mainFrame] webView] scrollPageDown:self];
 			return YES;
 			}
 	}
@@ -1946,6 +1988,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)createNewSubscription:(NSString *)urlString underFolder:(int)parentId
 {
+	// Replace feed:// with http:// if necessary
+	if ([urlString hasPrefix:@"feed://"])
+		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
+
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
 	[self selectFolderAndMessage:folderId guid:nil];
@@ -2047,7 +2093,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		// Blow away the undo stack here since undo actions may refer to
 		// articles that have been deleted. This is a bit of a cop-out but
 		// it's the easiest approach for now.
-		[[mainWindow undoManager] removeAllActions];
+		[self clearUndoStack];
 
 		// If any of the messages we deleted were unread then the
 		// folder's unread count just changed.
@@ -2137,7 +2183,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)selectFirstUnreadInFolder
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
-		[self makeRowSelectedAndVisible:[currentArrayOfMessages count] - 1];
+		[self makeRowSelectedAndVisible:(sortDirection < 0) ? 0 : [currentArrayOfMessages count] - 1];
 }
 
 /* selectFolderAndMessage
@@ -2193,12 +2239,22 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[self setMainWindowTitle:newFolderId];
 	[db flushFolder:currentFolderId];
 	[messageList deselectAll:self];
+	[self clearUndoStack];
 	currentFolderId = newFolderId;
 	[self showColumnsForFolder:currentFolderId];
 	[self reloadArrayOfMessages];
 	[self sortMessages];
 	[messageList reloadData];
 	[self selectMessageAfterReload];
+}
+
+/* clearUndoStack
+ * Clear the undo stack for instances when the last action invalidates
+ * all previous undoable actions.
+ */
+-(void)clearUndoStack
+{
+	[[mainWindow undoManager] removeAllActions];
 }
 
 /* reloadArrayOfMessages
@@ -2636,6 +2692,9 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if (returnCode == NSAlertAlternateReturn)
 		return;
 
+	// Clear undo stack for this action
+	[self clearUndoStack];
+
 	// Prompt for each folder for now
 	for (index = 0; index < count; ++index)
 	{
@@ -2745,20 +2804,47 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[self openURLInBrowser:[NSString stringWithFormat:@"file://%@", pathToAckFile]];
 }
 
+/* copy
+ * Handle the Copy action when the message list has focus.
+ */
+-(IBAction)copy:(id)sender
+{
+	if ([mainWindow firstResponder] == messageList && currentSelectedRow >= 0)
+	{
+		[self copyTableSelection:[[messageList selectedRowEnumerator] allObjects] toPasteboard:[NSPasteboard generalPasteboard]];
+		return;
+	}
+	[[mainWindow firstResponder] copy];
+}
+
 /* writeRows
- * Called to initiate a drag from MessageListView. We build an array of dictionary entries each of
+ * Called to initiate a drag from MessageListView. Use the common copy selection code to copy to
+ * the pasteboard.
+ */
+-(BOOL)tableView:(NSTableView *)tv writeRows:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
+{
+	return [self copyTableSelection:rows toPasteboard:pboard];
+}
+
+/* copyTableSelection
+ * This is the common copy selection code. We build an array of dictionary entries each of
  * which include details of each selected message in the standard RSS item format defined by
  * Ranchero NetNewsWire. See http://ranchero.com/netnewswire/rssclipboard.php for more details.
  */
--(BOOL)tableView:(NSTableView *)tv writeRows:(NSArray*)rows toPasteboard:(NSPasteboard*)pboard
+-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
 {
 	NSMutableArray * arrayOfArticles = [[NSMutableArray alloc] init];
+	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
+	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
 	int count = [rows count];
 	int index;
 
 	// Set up the pasteboard
-	[pboard declareTypes:[NSArray arrayWithObjects:RSSItemType, nil] owner:self];
+	[pboard declareTypes:[NSArray arrayWithObjects:RSSItemType, NSStringPboardType, NSHTMLPboardType, nil] owner:self];
 
+	// Open the HTML string
+	[fullHTMLText appendString:@"<html><body>"];
+	
 	// Get all the messages that are being dragged
 	for (index = 0; index < count; ++index)
 	{
@@ -2766,21 +2852,37 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		Message * thisMessage = [currentArrayOfMessages objectAtIndex:msgIndex];
 		Folder * folder = [db folderFromID:[thisMessage folderId]];
 		NSString * msgText = [db messageText:[thisMessage folderId] guid:[thisMessage guid]];
+		NSString * msgTitle = [thisMessage title];
+		NSString * msgLink = [thisMessage link];
 
 		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
-		[articleDict setValue:[thisMessage title] forKey:@"rssItemTitle"];
-		[articleDict setValue:[thisMessage link] forKey:@"rssItemLink"];
+		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
+		[articleDict setValue:msgLink forKey:@"rssItemLink"];
 		[articleDict setValue:msgText forKey:@"rssItemDescription"];
 		[articleDict setValue:[folder name] forKey:@"sourceName"];
 		[articleDict setValue:[folder homePage] forKey:@"sourceHomeURL"];
 		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
 		[articleDict release];
+
+		// Plain text
+		[fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, msgText];
+
+		// Add HTML version too.
+		[fullHTMLText appendFormat:@"<a href=\"%@\">%@</a><br />%@<br /><br />", msgLink, msgTitle, msgText];
 	}
+
+	// Close the HTML string
+	[fullHTMLText appendString:@"</body></html>"];
 
 	// Put string on the pasteboard for external drops.
 	[pboard setPropertyList:arrayOfArticles forType:RSSItemType];
+	[pboard setString:fullHTMLText forType:NSHTMLPboardType];
+	[pboard setString:fullPlainText forType:NSStringPboardType];
+
 	[arrayOfArticles release];
+	[fullHTMLText release];
+	[fullPlainText release];
 	return YES;
 }
 
@@ -3070,6 +3172,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	else if (theAction == @selector(closeMainWindow:))
 	{
 		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(copy:))
+	{
+		if ([mainWindow firstResponder] == messageList && currentSelectedRow >= 0)
+			return isMainWindowVisible;
 	}
 	else if (theAction == @selector(readingPaneOnRight:))
 	{
