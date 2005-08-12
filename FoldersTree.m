@@ -40,6 +40,7 @@
 	-(void)handleFolderFontChange:(NSNotification *)note;
 	-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 	-(void)expandToParent:(TreeNode *)node;
+	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 @end
 
 // Pasteboard types for drag and drop.
@@ -704,10 +705,20 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	return NSDragOperationGeneric; 
 }
 
-/* writeItems
+/* writeItems [delegate]
  * Collect the selected folders ready for dragging.
  */
 -(BOOL)outlineView:(NSOutlineView *)olv writeItems:(NSArray*)items toPasteboard:(NSPasteboard*)pboard
+{
+	return [self copyTableSelection:items toPasteboard:pboard];
+}
+
+/* copyTableSelection
+ * This is the common copy selection code. We build an array of dictionary entries each of
+ * which include details of each selected folder in the standard RSS item format defined by
+ * Ranchero NetNewsWire. See http://ranchero.com/netnewswire/rssclipboard.php for more details.
+ */
+-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard
 {
 	int count = [items count];
 	NSMutableArray * externalDragData = [[NSMutableArray alloc] initWithCapacity:count];

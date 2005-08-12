@@ -22,6 +22,7 @@
 
 @interface NSObject(MessageListViewDelegate)
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 @end
 
 @implementation MessageListView
@@ -41,6 +42,35 @@
 	[super keyDown:theEvent];
 }
 
+/* copy
+ * Handle the Copy action when the message list has focus.
+ */
+-(IBAction)copy:(id)sender
+{
+	if ([self selectedRow] >= 0)
+	{
+		[[self delegate] copyTableSelection:[[self selectedRowEnumerator] allObjects] toPasteboard:[NSPasteboard generalPasteboard]];
+		return;
+	}
+}
+
+/* validateMenuItem
+ * This is our override where we handle item validation for the
+ * commands that we own.
+ */
+-(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if ([menuItem action] == @selector(copy:))
+	{
+		return ([self selectedRow] >= 0);
+	}
+	if ([menuItem action] == @selector(selectAll:))
+	{
+		return YES;
+	}
+	return NO;
+}
+
 // Might as well allow text drags into other apps...
 -(NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
 {
@@ -48,5 +78,4 @@
 		return NSDragOperationCopy|NSDragOperationGeneric;
 	return NSDragOperationCopy;
 }
-
 @end
