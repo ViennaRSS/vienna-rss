@@ -22,6 +22,7 @@
 
 @interface NSObject (FoldersViewDelegate)
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 @end
 
 @implementation FolderView
@@ -186,5 +187,42 @@
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:@"MA_Notify_RightClickOnObject" object:theEvent];
 	return [self menu];
+}
+
+/* copy
+ * Handle the Copy action when the outline view has focus.
+ */
+-(IBAction)copy:(id)sender
+{
+	if ([self selectedRow] >= 0)
+	{
+		NSMutableArray * array = [NSMutableArray arrayWithCapacity:[self numberOfSelectedRows]];
+		NSEnumerator * enumerator = [self selectedRowEnumerator];
+		NSNumber * item;
+		
+		while ((item = [enumerator nextObject]) != nil)
+		{
+			id node = [self itemAtRow:[item intValue]];
+			[array addObject:node];
+		}
+		[[self delegate] copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
+	}
+}
+
+/* validateMenuItem
+ * This is our override where we handle item validation for the
+ * commands that we own.
+ */
+-(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if ([menuItem action] == @selector(copy:))
+	{
+		return ([self selectedRow] >= 0);
+	}
+	if ([menuItem action] == @selector(selectAll:))
+	{
+		return YES;
+	}
+	return NO;
 }
 @end

@@ -2804,19 +2804,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[self openURLInBrowser:[NSString stringWithFormat:@"file://%@", pathToAckFile]];
 }
 
-/* copy
- * Handle the Copy action when the message list has focus.
- */
--(IBAction)copy:(id)sender
-{
-	if ([mainWindow firstResponder] == messageList && currentSelectedRow >= 0)
-	{
-		[self copyTableSelection:[[messageList selectedRowEnumerator] allObjects] toPasteboard:[NSPasteboard generalPasteboard]];
-		return;
-	}
-	[[mainWindow firstResponder] copy];
-}
-
 /* writeRows
  * Called to initiate a drag from MessageListView. Use the common copy selection code to copy to
  * the pasteboard.
@@ -3172,11 +3159,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	else if (theAction == @selector(closeMainWindow:))
 	{
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(copy:))
-	{
-		if ([mainWindow firstResponder] == messageList && currentSelectedRow >= 0)
-			return isMainWindowVisible;
 	}
 	else if (theAction == @selector(readingPaneOnRight:))
 	{

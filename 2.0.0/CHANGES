@@ -12,8 +12,7 @@ Thanks!
 - Fixed entity decoding bug that caused corrupted characters in the Der Spiegel feed.
 - Fixed character set translation bug that caused some UTF8 characters to appear corrupted.
 - Improvements to handling of article GUID/ID to eliminate duplicate articles and better
-  track articles that have been modified. This change requires a database upgrade since the
-  type of the 'message_id' field in the DB has changed from integer to string.
+  track articles that have been modified. This change requires a database upgrade.
 - Left/Right arrow keys now move between the folder list and the articles list.
 - Added Trash folder. Delete Article now moves selected articles to the Trash folder. New
   Empty Trash command on the Vienna menu can be used to empty the trash folder. (Note: it
@@ -23,9 +22,10 @@ Thanks!
 - Spacebar now moves to next unread article.
 - < and > keys now move to previous and next article.
 - Drag from the article list now provides HTML and string versions on the pasteboard.
-- Copy now works on articles in the article list.
+- Copy now works on articles in the article list and folders in the folder list.
 - Added an option to open links clicked in Vienna in the background in the default browser.
-- New temporary application icon that is more 'clickable' than the old one.
+- New temporary application icon that is more 'clickable' than the old one. A better icon
+  is planned for later.
 
 2.0.0.2004 (Refresh)
 --------------------

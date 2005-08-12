@@ -36,6 +36,7 @@
 "Link" = "Länk";
 "No" = "Nej";
 "Yes" = "Ja";
+"Version %@.%@" = "Version %@.%@";
 "Refresh All" = "Uppdatera alla";
 "Subscribe" = "Prenumerera";
 "Smart Folder" = "Smart mapp";
@@ -49,9 +50,14 @@
 "%@ at %@" = "%@ vid %@";
 "Delete" = "Radera";
 "Quit" = "Avsluta";
+"Refresh cancelled" = "Refresh cancelled";
 "Additional actions for the selected folder" = "Additional actions for the selected folder";
 "Create a new subscription" = "Create a new subscription";
 "Refresh all your subscriptions" = "Refresh all your subscriptions";
+"New style title" = "Vienna has installed a new style";
+"New style body" = "The style '%@' has been installed to your Styles folder and added to the Style menu.";
+"Cannot create style folder title" = "Cannot create style folder";
+"Cannot create style folder body" = "The Style folder cannot be created at '%@'. Vienna will not install the selected style.";
 "Delete selected message" = "Är du säker på att du vill radera de markerade artiklarna permanent?";
 "Delete selected message text" = "Det här valet går ej att ångra.";
 "Infobar Format" = "%d artiklar";
@@ -117,6 +123,7 @@
 "Marked Articles" = "Markerade artiklar";
 "Unread Articles" = "Olästa artiklar";
 "Today's Articles" = "Dagens artiklar";
+"Deleted Items" = "Raderade objekt";
 "Select..." = "Markera...";
 " (%d unread)" = " (%d oläst)";
 "is" = "är";

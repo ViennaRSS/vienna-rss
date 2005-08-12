@@ -112,7 +112,6 @@
 -(IBAction)markRead:(id)sender;
 -(IBAction)markFlagged:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
--(IBAction)copy:(id)sender;
 -(IBAction)printDocument:(id)sender;
 -(IBAction)toggleActivityViewer:(id)sender;
 -(IBAction)backTrackMessage:(id)sender;
