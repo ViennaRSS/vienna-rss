@@ -177,7 +177,7 @@ static Database * _sharedDatabase = nil;
 		[self beginTransaction];
 
 		// Add the deleted_flag column to the messages table
-		[self executeSQL:@"alter table messages add column (deleted_flag)"];
+		[self executeSQL:@"alter table messages add column deleted_flag"];
 
 		// Retype the message_id field to change it to a string since it was originally an integer
 		// field in v11 and earlier.
@@ -194,9 +194,8 @@ static Database * _sharedDatabase = nil;
 
 				NSString * guid = [NSString stringWithFormat:@"%d", messageNumber];
 				NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-				[self executeSQLWithFormat:@"update messages set message_id='%@' where message_id=%d and folder_id=%d",
+				[self executeSQLWithFormat:@"update messages set deleted_flag=0, message_id='%@' where message_id=%d and folder_id=%d",
 					preparedGuid,
-					folderId,
 					messageNumber,
 					folderId];
 			}
