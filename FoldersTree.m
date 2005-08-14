@@ -427,7 +427,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	if (buf != 0)
 	{
 		NSRange range = NSMakeRange([rowIndexes firstIndex], [rowIndexes lastIndex]);
-		[rowIndexes getIndexes:buf maxCount:count inIndexRange:&range];
+		count = [rowIndexes getIndexes:buf maxCount:count inIndexRange:&range];
 
 		for (index = 0; index < count; ++index)
 		{
@@ -798,6 +798,10 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		// We pretty much redraw the entire tree for simplicity.
 		[self refreshFoldersTree];
 
+		// If parent was a group, expand it now
+		if (parentID != MA_Root_Folder)
+			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+
 		// Properly set selection back to the original items. This has to be done after the
 		// refresh so that rowForItem returns the new positions.
 		NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
@@ -808,13 +812,9 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 			[selIndexSet addIndex:rowIndex];
 		}
 		[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
-		
-		// If parent was a group, expand it now
-		if (parentID != MA_Root_Folder)
-			[outlineView expandItem:[rootNode nodeFromID:parentID]];
 		return YES;
 	}
-	else if (type == RSSSourceType)
+	if (type == RSSSourceType)
 	{
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
