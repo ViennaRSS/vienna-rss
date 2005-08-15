@@ -42,6 +42,7 @@
 		delegate = nil;
 		aItem = nil;
 		contextData = nil;
+		connector = nil;
 		httpHeaders = nil;
 		status = MA_Connect_Succeeded;
 	}
@@ -155,6 +156,16 @@
 {
 	[aItem setStatus:NSLocalizedString(@"Refresh cancelled", nil)];
 	[connector cancel];
+}
+
+/* close
+ * Closes the active connection.
+ */
+-(void)close
+{
+	[connector cancel];
+	[connector release];
+	connector = nil;
 }
 
 /* sendConnectionCompleteNotification
@@ -340,6 +351,8 @@
 -(void)dealloc
 {
 	[connector release];
+	[httpHeaders release];
+	[responseHeaders release];
 	[contextData release];
 	[receivedData release];
 	[username release];

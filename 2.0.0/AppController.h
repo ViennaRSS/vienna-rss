@@ -84,6 +84,7 @@
 	int sortDirection;
 	int sortColumnTag;
 	int progressCount;
+	int tableLayout;
 	NSArray * allColumns;
 	ExtDateFormatter * extDateFormatter;
 	NSMutableDictionary * selectionDict;
@@ -99,7 +100,6 @@
 	NSString * cssStylesheet;
 	NSString * persistedStatusText;
 	BOOL previousFolderColumnState;
-	BOOL isViewingArticlePage;
 }
 
 // Menu action items
@@ -127,8 +127,6 @@
 -(IBAction)readingPaneOnBottom:(id)sender;
 -(IBAction)closeMainWindow:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
--(IBAction)setTableLayout:(id)sender;
--(IBAction)setCondensedLayout:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)validateFeed:(id)sender;
@@ -136,6 +134,7 @@
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;
+-(IBAction)moreStyles:(id)sender;
 
 // Infobar functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

@@ -94,7 +94,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:boolYes forKey:MAPref_ReadingPaneOnRight];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Table_Layout] forKey:MAPref_Layout];
 	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
 	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
@@ -132,7 +131,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	scriptPathMappings = [[NSMutableDictionary alloc] init];
 	
 	// Set the delegates and title
-	isViewingArticlePage = NO;
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:appName];
 	[textView setDelegate:self];
@@ -275,7 +273,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(void)setOrientation:(BOOL)flag
 {
-	[NSApp internalSetLayoutStyle:flag ? MA_Condensed_Layout : MA_Table_Layout];
+	tableLayout = flag ? MA_Condensed_Layout : MA_Table_Layout;
 	[splitView2 setVertical:flag];
 	[splitView2 display];
 }
@@ -317,34 +315,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
 	[self setStatusMessage:text persist:NO];
-}
-
-/* didStartProvisionalLoadForFrame
- * Called when the webview begins loading a frame. In our case we're interested in showing progress
- * when an article page is first loaded so throw up the progress stuff.
- */
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
-{
-	if ([frame name] == nil && isViewingArticlePage)
-	{
-		[self startProgressIndicator];
-		[self setStatusMessage:[NSString stringWithFormat:NSLocalizedString(@"Loading %@...", nil),
-							[[[[frame provisionalDataSource] initialRequest] URL] absoluteURL]] persist:YES];
-	}
-}
-
-/* didFinishLoadForFrame
- * Called when the frame finished loading. We use this as the hint to stop the progress
- * reporting and put the focus in the frame so the user can navigate it.
- */
--(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
-{
-	if ([frame name] == nil && isViewingArticlePage)
-	{
-		[self stopProgressIndicator];
-		[self setStatusMessage:NSLocalizedString(@"Completed", nil) persist:YES];
-		[mainWindow makeFirstResponder:[[frame frameView] documentView]];
-	}
 }
 
 /* mouseDidMoveOverElement
@@ -691,30 +661,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	}
 }
 
-/* setTableLayout
- * Switches to table layout. In this layout, each message attribute appears in a separate
- * column in the table.
- */
--(IBAction)setTableLayout:(id)sender
-{
-	[NSApp internalSetLayoutStyle:MA_Table_Layout];
-	[self updateMessageListRowHeight];
-	[self updateVisibleColumns];
-	[messageList reloadData];
-}
-
-/* setCondensedLayout
- * Switches to condensed layout. In this layout, the textual message attributes are condensed
- * into a single column split over multiple lines.
- */
--(IBAction)setCondensedLayout:(id)sender
-{
-	[NSApp internalSetLayoutStyle:MA_Condensed_Layout];
-	[self updateMessageListRowHeight];
-	[self updateVisibleColumns];
-	[messageList reloadData];
-}
-
 /* updateVisibleColumns
  * Iterates through the array of visible columns and makes them
  * visible or invisible as needed.
@@ -742,7 +688,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		}
 
 		// Handle condensed layout vs. table layout
-		if ([NSApp layoutStyle] == MA_Table_Layout)
+		if (tableLayout == MA_Table_Layout)
 			showField = [field visible] && [field tag] != MA_FieldID_Headlines;
 		else
 		{
@@ -790,7 +736,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[self showSortDirection];	
 
 	// In condensed mode, the summary field takes up the whole space
-	if ([NSApp layoutStyle] == MA_Condensed_Layout)
+	if (tableLayout == MA_Condensed_Layout)
 	{
 		[messageList sizeLastColumnToFit];
 		[messageList setNeedsDisplay];
@@ -853,7 +799,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 -(void)updateMessageListRowHeight
 {
 	int height = [messageListFont defaultLineHeightForFont];
-	int numberOfRowsInCell = [NSApp layoutStyle] == MA_Table_Layout ? 1: 2;
+	int numberOfRowsInCell = (tableLayout == MA_Table_Layout) ? 1: 2;
 	[messageList setRowHeight:(height + 3) * numberOfRowsInCell];
 }
 
@@ -956,6 +902,12 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		[stylesMenu addItem:menuItem];
 		[menuItem release];
 	}
+
+	// Append a link to More Styles...
+	[stylesMenu addItem:[NSMenuItem separatorItem]];
+	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
+	[stylesMenu addItem:menuItem];
+	[menuItem release];
 	
 	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
 	[[viewMenu itemWithTitle:NSLocalizedString(@"Style", nil)] setSubmenu:stylesMenu];
@@ -1360,6 +1312,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 	[checkTimer invalidate];
 	[checkTimer release];
+	checkTimer = nil;
 	if (newFrequency > 0)
 	{
 		checkTimer = [[NSTimer scheduledTimerWithTimeInterval:newFrequency
@@ -1738,25 +1691,24 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[self refreshMessageAtRow:currentSelectedRow markRead:!isAppInitialising];
 }
 
+/* moreStyles
+ * Display the web page where the user can download additional styles.
+ */
+-(IBAction)moreStyles:(id)sender
+{
+	[self openURLInBrowser:@"http://www.opencommunity.co.uk/vienna_files.html"];
+}
+
 /* viewArticlePage
- * Toggle between the article's original page in the textview and the article itself.
+ * Display the article in the browser.
  */
 -(IBAction)viewArticlePage:(id)sender
 {
 	if (currentSelectedRow >= 0)
 	{
-		if (isViewingArticlePage)
-			[self refreshMessageAtRow:currentSelectedRow markRead:NO];
-		else
-		{
-			Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
-			if (![[theArticle link] isBlank])
-			{
-				NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[theArticle link]]];
-				isViewingArticlePage = YES;
-				[[textView mainFrame] loadRequest:theRequest];
-			}
-		}
+		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		if (![[theArticle link] isBlank])
+			[self openURLInBrowser:[theArticle link]];
 	}
 }
 
@@ -1765,7 +1717,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag
 {
-	isViewingArticlePage = NO;
 	if (currentSelectedRow < 0)
 		[[textView mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
 	else
@@ -1876,15 +1827,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		case '<':
 			[self backTrackMessage:self];
 			return YES;
-			
+
 		case 'm':
 		case 'M':
 			[self markFlagged:self];
-			return YES;
-
-		case 'p':
-		case 'P':
-			[self viewArticlePage:self];
 			return YES;
 
 		case 'r':
@@ -1893,7 +1839,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			return YES;
 
 		case '\r': //ENTER
-			[self viewNextUnread:self];
+			[self viewArticlePage:self];
 			return YES;
 
 		case ' ': //SPACE
@@ -2144,7 +2090,9 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
 		if (nextFolderWithUnread != -1)
 		{
-			if (nextFolderWithUnread != currentFolderId)
+			if (nextFolderWithUnread == currentFolderId)
+				[self viewNextUnreadInCurrentFolder:-1];
+			else
 			{
 				guidOfMessageToSelect = nil;
 				[foldersTree selectFolder:nextFolderWithUnread];
@@ -3055,7 +3003,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		Field * field = [menuItem representedObject];
 		[menuItem setState:[field visible] ? NSOnState : NSOffState];
-		return isMainWindowVisible && ([NSApp layoutStyle] == MA_Table_Layout);
+		return isMainWindowVisible && (tableLayout == MA_Table_Layout);
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{
@@ -3075,21 +3023,22 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	else if (theAction == @selector(deleteFolder:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return (IsRSSFolder(folder) || IsGroupFolder(folder)) && ![db readOnly];
+		return folder && (IsRSSFolder(folder) || IsGroupFolder(folder)) && ![db readOnly];
 	}
 	else if (theAction == @selector(renameFolder:))
 	{
-		return ![db readOnly] && isMainWindowVisible;
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return folder && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(markAllRead:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(importSubscriptions:))
 	{
@@ -3101,9 +3050,22 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(viewSourceHomePage:))
 	{
-		int folderId = [foldersTree actualSelection];
-		Folder * folder = [db folderFromID:folderId];
-		return ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
+		if (currentSelectedRow >= 0)
+		{
+			Message * thisMessage = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+			Folder * folder = [db folderFromID:[thisMessage folderId]];
+			return folder && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
+		}
+		return NO;
+	}
+	else if (theAction == @selector(viewArticlePage:))
+	{
+		if (currentSelectedRow >= 0)
+		{
+			Message * thisMessage = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+			return ([thisMessage link] && ![[thisMessage link] isBlank] && isMainWindowVisible);
+		}
+		return NO;
 	}
 	else if (theAction == @selector(exportSubscriptions:))
 	{
@@ -3113,34 +3075,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		return isMainWindowVisible;
 	}
-	else if (theAction == @selector(viewArticlePage:))
-	{
-		[menuItem setState:isViewingArticlePage ? NSOnState : NSOffState];
-		return currentSelectedRow >= 0 && isMainWindowVisible;
-	}
 	else if (theAction == @selector(compactDatabase:))
 	{
 		return ![self isConnecting] && ![db readOnly] && isMainWindowVisible;
 	}
-	else if (theAction == @selector(syncSubscriptionsFromBloglines:))
-	{
-		return [NSApp enableBloglinesSupport] && ![db readOnly];
-	}
-	else if (theAction == @selector(setTableLayout:))
-	{
-		[menuItem setState:([NSApp layoutStyle] == MA_Table_Layout) ? NSOnState : NSOffState];
-		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(setCondensedLayout:))
-	{
-		[menuItem setState:([NSApp layoutStyle] == MA_Condensed_Layout) ? NSOnState : NSOffState];
-		return isMainWindowVisible;
-	}
 	else if (theAction == @selector(editFolder:))
 	{
-		int folderId = [foldersTree actualSelection];
-		Folder * folder = [db folderFromID:folderId];
-		return (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly] && isMainWindowVisible;
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return folder && (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(validateFeed:))
 	{

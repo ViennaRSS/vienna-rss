@@ -35,7 +35,10 @@
 		[self setCanHaveChildren:childflag];
 		[self setNodeId:folderId];
 		if (parent != nil)
+		{
 			[parent addChild:self];
+			[self release];
+		}
 		children = [[NSMutableArray array] retain];
 	}
 	return self;
@@ -104,8 +107,8 @@
 		{
 			if (previousChild)
 				[previousChild setNextChild:[node nextChild]];
-			[children removeObject:node];
 			[node removeChildren];
+			[children removeObject:node];
 			break;
 		}
 		previousChild = node;

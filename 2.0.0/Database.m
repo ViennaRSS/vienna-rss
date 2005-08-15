@@ -162,7 +162,7 @@ static Database * _sharedDatabase = nil;
 
 		// Create the trash folder
 		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
-			NSLocalizedString(@"Deleted Items", nil),
+			NSLocalizedString(@"Trash", nil),
 			MA_Trash_Folder];
 		
 		// Set the initial version
@@ -204,7 +204,7 @@ static Database * _sharedDatabase = nil;
 
 		// Create the trash folder
 		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
-			NSLocalizedString(@"Deleted Items", nil), MA_Trash_Folder];
+			NSLocalizedString(@"Trash", nil), MA_Trash_Folder];
 		
 		// Set the new version
 		[self setDatabaseVersion:MA_Current_DB_Version];

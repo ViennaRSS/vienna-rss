@@ -20,12 +20,17 @@ Thanks!
 - Added Undo/Redo support for the following actions: marking articles read, marking articles
   flagged, renaming folders and deleting articles.
 - Spacebar now moves to next unread article.
+- Enter key now opens the current article in the default system browser. ('P' to open the
+  current article in the article pane has been removed.)
 - < and > keys now move to previous and next article.
 - Drag from the article list now provides HTML and string versions on the pasteboard.
 - Copy now works on articles in the article list and folders in the folder list.
 - Added an option to open links clicked in Vienna in the background in the default browser.
 - New temporary application icon that is more 'clickable' than the old one. A better icon
   is planned for later.
+- Added "More Styles..." to end of Styles menu that opens the Vienna downloads web site in the
+  default browser.
+- Improved the UI refresh after drag and drop re-ordering of folders in the folder list.
 
 2.0.0.2004 (Refresh)
 --------------------

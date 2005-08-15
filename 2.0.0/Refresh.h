@@ -28,7 +28,6 @@
 	int totalConnections;
 	int countOfNewArticles;
 	NSMutableArray * connectionsArray;
-	NSMutableArray * folderIconRefreshArray;
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	NSTimer * pumpTimer;

@@ -21,7 +21,6 @@
 #import "Import.h"
 #import "XMLParser.h"
 #import "ViennaApp.h"
-#import "AsyncConnection.h"
 
 @implementation AppController (Import)
 
@@ -50,24 +49,6 @@
 		[panel orderOut:self];
 		[self importFromFile:[panel filename]];
 	}
-}
-
-/* syncSubscriptionsFromBloglines
- * Synchronises the user's folder list subscriptions with those from Bloglines.
- */
--(IBAction)syncSubscriptionsFromBloglines:(id)sender
-{
-	[self startProgressIndicator];
-	[self setStatusMessage:NSLocalizedString(@"Synchronising subscriptions from Bloglines", nil) persist:YES];
-	
-	AsyncConnection * asyncImport = [[AsyncConnection alloc] init];
-	[asyncImport beginLoadDataFromURL:[NSURL URLWithString:@"http://rpc.bloglines.com/listsubs"]
-							 username:[NSApp bloglinesEmailAddress]
-							 password:[NSApp bloglinesPassword]
-							 delegate:self
-						  contextData:nil
-								  log:nil
-					   didEndSelector:@selector(bloglinesImportHandler:)];
 }
 
 /* importSubscriptionGroup
@@ -146,30 +127,5 @@
 	// Announce how many we successfully imported
 	NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
 	NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
-}
-
-/* bloglinesImportHandler
- * Called when the Bloglines subscription data has been retrieved.
- */
--(void)bloglinesImportHandler:(AsyncConnection *)connector
-{
-	[self setStatusMessage:nil persist:YES];
-	[self stopProgressIndicator];
-
-	if ([connector status] == MA_Connect_Succeeded)
-	{
-		NSData * xmlData = [connector receivedData];
-		if (xmlData != nil)
-		{
-			XMLParser * tree = [[XMLParser alloc] init];
-			if ([tree setData:xmlData])
-			{
-				XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
-				[self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
-			}
-			[tree release];
-		}
-	}
-	[connector release];
 }
 @end

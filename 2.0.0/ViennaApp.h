@@ -25,7 +25,6 @@
 	NSString * bloglinesEmailAddress;
 	NSString * bloglinesPassword;
 	float markReadInterval;
-	int layoutStyle;
 	BOOL isBloglinesEnabled;
 	BOOL readingPaneOnRight;
 	BOOL openLinksInVienna;
@@ -57,15 +56,15 @@
 -(void)setMarkReadInterval:(float)newInterval;
 -(void)internalSetMarkReadInterval:(float)newInterval;
 
-// Opening URL links
+// Opening URL links in Vienna
 -(BOOL)openLinksInVienna;
+-(void)setOpenLinksInVienna:(float)flag;
+-(void)internalSetOpenLinksInVienna:(BOOL)flag;
+
+// Opening URL links in background
 -(BOOL)openLinksInBackground;
 -(void)setOpenLinksInBackground:(float)flag;
 -(void)internalSetOpenLinksInBackground:(BOOL)flag;
-
-// Layout style
--(int)layoutStyle;
--(void)internalSetLayoutStyle:(int)newStyle;
 
 // Bloglines support
 -(BOOL)enableBloglinesSupport;

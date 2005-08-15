@@ -326,6 +326,14 @@
 			[self setLastModified:[XMLParser parseXMLDate:dateString]];
 			continue;
 		}
+
+		// Parse item date
+		if ([nodeName isEqualToString:@"pubDate"])
+		{
+			NSString * dateString = [subTree valueOfElement];
+			[self setLastModified:[XMLParser parseXMLDate:dateString]];
+			continue;
+		}
 	}
 	return success;
 }
@@ -359,7 +367,8 @@
 			BOOL hasDetailedContent = NO;
 			BOOL hasGUID = NO;
 			int itemIndex;
-			
+
+			[newItem setDate:[self lastModified]];
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
 				XMLParser * subItemTree = [subTree treeByIndex:itemIndex];
@@ -434,7 +443,7 @@
 					continue;
 				}
 			}
-			
+
 			// If no explicit GUID is specified, use the link as the GUID
 			if (!hasGUID)
 				[newItem setGuid:[self guidFromText:[newItem description]]];
@@ -515,7 +524,8 @@
 			int itemCount = [subTree countOfChildren];
 			int itemIndex;
 			BOOL hasGUID = NO;
-			
+
+			[newItem setDate:[self lastModified]];
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
 				XMLParser * subItemTree = [subTree treeByIndex:itemIndex];
