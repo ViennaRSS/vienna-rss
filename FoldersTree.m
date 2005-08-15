@@ -30,7 +30,6 @@
 	-(void)setFolderListFont;
 	-(NSArray *)archiveState;
 	-(void)unarchiveState:(NSArray *)stateArray;
-	-(void)refreshFoldersTree;
 	-(void)reloadDatabase:(NSArray *)stateArray;
 	-(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
 	-(void)handleDoubleClick:(id)sender;
@@ -155,16 +154,6 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[NSUserDefaults standardUserDefaults] arrayForKey:MAPref_FolderStates]];
 	blockSelectionHandler = NO;
-}
-
-/* refreshFoldersTree
- * Refresh the folders tree, preserving state
- */
--(void)refreshFoldersTree
-{
-	// TODO: find the row at the TOP of the control then make sure it is
-	// still the same row after we're done refreshing.
-	[self reloadDatabase:[self archiveState]];
 }
 
 /* reloadDatabase
@@ -366,16 +355,16 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		if (nextNode == nil)
 			nextNode = rootNode;
 
-		// If we've gone full circle and not found
-		// anything, we're out of unread messages
-		if (nextNode == thisNode)
-			return [thisNode nodeId];
-
 		if (([[nextNode folder] childUnreadCount]) && ![outlineView isItemExpanded:nextNode])
 			return [nextNode nodeId];
 		
 		if ([[nextNode folder] unreadCount])
 			return [nextNode nodeId];
+
+		// If we've gone full circle and not found
+		// anything, we're out of unread messages
+		if (nextNode == thisNode)
+			return [thisNode nodeId];
 
 		node = nextNode;
 	}
@@ -721,9 +710,9 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 -(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard
 {
 	int count = [items count];
-	NSMutableArray * externalDragData = [[NSMutableArray alloc] initWithCapacity:count];
-	NSMutableArray * internalDragData = [[NSMutableArray alloc] initWithCapacity:count];
-	NSMutableString * stringDragData = [[NSMutableString alloc] init];
+	NSMutableArray * externalDragData = [NSMutableArray arrayWithCapacity:count];
+	NSMutableArray * internalDragData = [NSMutableArray arrayWithCapacity:count];
+	NSMutableString * stringDragData = [NSMutableString string];
 	int index;
 
 	// We'll create two types of data on the clipboard.
@@ -792,26 +781,41 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		for (index = 0; index < count; ++index)
 		{
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
+			Folder * folder = [db folderFromID:folderId];
+			TreeNode * node = [rootNode nodeFromID:folderId];
+			TreeNode * oldParent = [rootNode nodeFromID:[folder parentId]];
+			TreeNode * newParent = [rootNode nodeFromID:parentID];
+
 			[db setParent:parentID forFolder:folderId];
+			[oldParent removeChild:node];
+			[newParent addChild:node];
 		}
 
-		// We pretty much redraw the entire tree for simplicity.
-		[self refreshFoldersTree];
+		// Make the outline control reload its data
+		[outlineView reloadData];
 
 		// If parent was a group, expand it now
 		if (parentID != MA_Root_Folder)
-			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+		{
+			TreeNode * parentNode = [rootNode nodeFromID:parentID];
+			if (![outlineView isItemExpanded:parentNode] && [outlineView isExpandable:parentNode])
+				[outlineView expandItem:parentNode];
+		}
 
 		// Properly set selection back to the original items. This has to be done after the
 		// refresh so that rowForItem returns the new positions.
 		NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
+		int selRowIndex = 9999;
 		for (index = 0; index < count; ++index)
 		{
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
 			int rowIndex = [outlineView rowForItem:[rootNode nodeFromID:folderId]];
+			selRowIndex = MIN(selRowIndex, rowIndex);
 			[selIndexSet addIndex:rowIndex];
 		}
+		[outlineView scrollRowToVisible:selRowIndex];
 		[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
+		[selIndexSet release];
 		return YES;
 	}
 	if (type == RSSSourceType)

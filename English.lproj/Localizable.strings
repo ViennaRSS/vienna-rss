@@ -58,6 +58,7 @@
 "New style body" = "The style '%@' has been installed to your Styles folder and added to the Style menu.";
 "Cannot create style folder title" = "Cannot create style folder";
 "Cannot create style folder body" = "The Style folder cannot be created at '%@'. Vienna will not install the selected style.";
+"More Styles..." = "More Styles...";
 "Delete selected message" = "Are you sure you want to permanently delete the selected articles?";
 "Delete selected message text" = "This operation cannot be undone.";
 "Infobar Format" = "%d messages";
@@ -123,7 +124,7 @@
 "Marked Articles" = "Marked Articles";
 "Unread Articles" = "Unread Articles";
 "Today's Articles" = "Today's Articles";
-"Deleted Items" = "Deleted Items";
+"Trash" = "Trash";
 "Select..." = "Select...";
 " (%d unread)" = " (%d unread)";
 "is" = "is";

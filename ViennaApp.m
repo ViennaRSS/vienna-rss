@@ -43,7 +43,6 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
 		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
-		layoutStyle = [defaults integerForKey:MAPref_Layout];
 		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
 		bloglinesPassword = [bloglinesEmailAddress ? [KeyChain getPasswordFromKeychain:bloglinesEmailAddress url:MA_Bloglines_URL] : @"" retain];
 	}
@@ -297,6 +296,29 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 	return openLinksInVienna;
 }
 
+/* setOpenLinksInVienna
+ * Changes whether or not links clicked in Vienna are opened in Vienna or the default system
+ * browser, then sends a notification that the preferences have changed.
+ */
+-(void)setOpenLinksInVienna:(float)flag
+{
+	[self internalSetOpenLinksInVienna:flag];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+
+/* internalSetOpenLinksInVienna
+ * Changes whether or not links clicked in Vienna are opened in the background.
+ */
+-(void)internalSetOpenLinksInVienna:(BOOL)flag
+{	
+	if (openLinksInVienna != flag)
+	{
+		openLinksInVienna = flag;
+		NSNumber * boolFlag = [NSNumber numberWithBool:flag];
+		[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_OpenLinksInVienna];
+	}
+}
+
 /* openLinksInBackground
  * Returns whether or not links clicked in Vienna are opened in the background.
  */
@@ -325,27 +347,6 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		openLinksInBackground = flag;
 		NSNumber * boolFlag = [NSNumber numberWithBool:flag];
 		[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_OpenLinksInBackground];
-	}
-}
-
-/* layoutStyle
- * Returns the current layout style (table or condensed)
- */
--(int)layoutStyle
-{
-	return layoutStyle;
-}
-
-/* internalSetLayoutStyle
- * Sets the current layout style.
- */
--(void)internalSetLayoutStyle:(int)newStyle
-{
-	if (newStyle != layoutStyle)
-	{
-		layoutStyle = newStyle;
-		NSNumber * intValue = [NSNumber numberWithInt:newStyle];
-		[[NSUserDefaults standardUserDefaults] setObject:intValue forKey:MAPref_Layout];
 	}
 }
 

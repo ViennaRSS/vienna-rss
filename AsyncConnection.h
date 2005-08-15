@@ -52,6 +52,7 @@ typedef enum {
 						log:(ActivityItem *)theItem
 			 didEndSelector:(SEL)endSelector;
 -(void)cancel;
+-(void)close;
 
 -(ConnectStatus)status;
 -(id)contextData;

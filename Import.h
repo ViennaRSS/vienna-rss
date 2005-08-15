@@ -24,6 +24,5 @@
 
 @interface AppController (Import)
 	-(IBAction)importSubscriptions:(id)sender;
-	-(IBAction)syncSubscriptionsFromBloglines:(id)sender;
 	-(void)importFromFile:(NSString *)importFileName;
 @end

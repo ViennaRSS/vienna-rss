@@ -220,6 +220,13 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Bool&gt;</string>
 				</dict>
+				<key>openLinksInVienna</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>opLV</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
 				<key>readingPaneOnRight</key>
 				<dict>
 					<key>AppleEventCode</key>

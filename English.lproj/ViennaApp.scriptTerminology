@@ -165,6 +165,13 @@
 					<key>Name</key>
 					<string>open links in background</string>
 				</dict>
+				<key>openLinksInVienna</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether links are opened in the Vienna browser or the default system browser</string>
+					<key>Name</key>
+					<string>open links in Vienna</string>
+				</dict>
 				<key>readingPaneOnRight</key>
 				<dict>
 					<key>Description</key>

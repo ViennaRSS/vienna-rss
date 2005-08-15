@@ -49,7 +49,6 @@ extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_OpenLinksInVienna;
 extern NSString * MAPref_OpenLinksInBackground;
 extern NSString * MAPref_ShowScriptsMenu;
-extern NSString * MAPref_Layout;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
