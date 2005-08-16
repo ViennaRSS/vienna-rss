@@ -19,6 +19,7 @@
 
 #import "XMLParser.h"
 #import "StringExtensions.h"
+#import <curl/curl.h>
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -356,9 +357,12 @@
 -(NSString *)valueOfElement
 {
 	NSMutableString * valueString = [NSMutableString stringWithCapacity:16];
-	BOOL isXMLContent = [[self valueOfAttribute:@"type"] isEqualToString:@"application/xhtml+xml"];
+	NSString * mimeType = [self valueOfAttribute:@"type"];
 
-	if ([[self valueOfAttribute:@"type"] isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"xml"])
+	BOOL isXMLContent = [mimeType isEqualToString:@"application/xhtml+xml"];
+	if ([mimeType isEqualToString:@"xhtml"])
+		isXMLContent = YES;
+	if ([mimeType isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"xml"])
 		isXMLContent = YES;
 
 	if (isXMLContent)
@@ -482,17 +486,19 @@
  */
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
 {
+	time_t theTime = curl_getdate([dateString cString], NULL);
 	NSCalendarDate * date;
-	
-	date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%S%z"];
-	if (date == nil)
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M%z"];
-	if (date == nil)
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%SZ"];
-	if (date == nil)
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%a, %d %b %Y %H:%M:%S %Z"];
-	if (date == nil)
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%d %b %Y %H:%M:%S %Z"];
+
+	if (theTime != -1)
+		date = [NSDate dateWithTimeIntervalSince1970:theTime];
+	else
+	{
+		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%S%z"];
+		if (date == nil)
+			date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M%z"];
+		if (date == nil)
+			date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+	}
 	return date;
 }
 

@@ -377,13 +377,24 @@ typedef enum {
 	
 	// Additional detail for the log
 	[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
-	
+
+	// Sanity fix the folder last update
+	BOOL fixedLastUpdate = NO;
+	if ([[folder lastUpdate] isGreaterThan:[NSDate date]])
+	{
+		[db setFolderLastUpdate:[folder itemId] lastUpdate:[NSDate date]];
+		NSLog(@"Fixed bogus last update in folder '%@'", [folder name]);
+		fixedLastUpdate = YES;
+	}
+
 	// Kick off the connection
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
-	NSDictionary * headers = [NSDictionary dictionaryWithObjectsAndKeys:
-								[folder lastUpdateString], @"If-Modified-Since",
-								@"gzip", @"Accept-Encoding",
-								nil, nil];
+	NSMutableDictionary * headers = [NSMutableDictionary dictionary];
+	
+	[headers setValue:@"gzip" forKey:@"Accept-Encoding"];
+	if (!fixedLastUpdate)
+		[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
+	
 	[conn setHttpHeaders:headers];
 
 	if ([conn beginLoadDataFromURL:url
@@ -498,7 +509,12 @@ typedef enum {
 			newLastUpdate = [[newFeed lastModified] retain];
 		if (newLastUpdate == nil)
 			newLastUpdate = [lastUpdate retain];
-		
+		if ([newLastUpdate isGreaterThan:[NSDate date]])
+		{
+			[newLastUpdate release];
+			newLastUpdate = [[NSDate date] retain];
+		}
+
 		// We'll be collecting messages into this array
 		NSMutableArray * messageArray = [NSMutableArray array];
 		int newMessagesFromFeed = 0;	
@@ -707,7 +723,7 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		[conn close];
 		[conn release];
 
-		if (--totalConnections == 0 && [refreshArray count] == 0)
+		if (--totalConnections == 0)
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 	}
 }

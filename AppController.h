@@ -90,6 +90,7 @@
 	NSMutableDictionary * selectionDict;
 	NSMutableDictionary * topLineDict;
 	NSMutableDictionary * bottomLineDict;
+	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	NSTimer * markReadTimer;
 	int lastCountOfUnread;
