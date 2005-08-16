@@ -163,6 +163,11 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		return;
 	}
 
+	// Preload dictionary of standard URLs
+	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
+	if (pathToPList != nil)
+		standardURLs = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
+
 	// Create condensed view attribute dictionaries
 	selectionDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
@@ -1696,7 +1701,9 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(IBAction)moreStyles:(id)sender
 {
-	[self openURLInBrowser:@"http://www.opencommunity.co.uk/vienna_files.html"];
+	NSString * stylesPage = [standardURLs valueForKey:@"ViennaMoreStylesPage"];
+	if (stylesPage != nil)
+		[self openURLInBrowser:stylesPage];
 }
 
 /* viewArticlePage
@@ -2716,8 +2723,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 	if (IsRSSFolder(folder))
 	{
-		NSString * validatorURL = [NSString stringWithFormat:@"http://feedvalidator.org/check?url=%@", [folder feedURL]];
-		[self openURLInBrowser:validatorURL];
+		NSString * validatorPage = [standardURLs valueForKey:@"FeedValidatorTemplate"];
+		if (validatorPage != nil)
+		{
+			NSString * validatorURL = [NSString stringWithFormat:validatorPage, [folder feedURL]];
+			[self openURLInBrowser:validatorURL];
+		}
 	}
 }
 
@@ -2726,11 +2737,9 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(IBAction)viewSourceHomePage:(id)sender
 {
-	int folderId = [foldersTree actualSelection];
-	Folder * folder = [db folderFromID:folderId];
-
-	if (folder && ![[folder homePage] isBlank])
-		[self openURLInBrowser:[folder homePage]];
+	Message * thisMessage = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+	Folder * folder = [db folderFromID:[thisMessage folderId]];
+	[self openURLInBrowser:[folder homePage]];
 }
 
 /* showViennaHomePage
@@ -2738,7 +2747,9 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(IBAction)showViennaHomePage:(id)sender
 {
-	[self openURLInBrowser:@"http://www.opencommunity.co.uk"];
+	NSString * homePage = [standardURLs valueForKey:@"ViennaHomePage"];
+	if (homePage != nil)
+		[self openURLInBrowser:homePage];
 }
 
 /* showAcknowledgements
@@ -3146,6 +3157,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[guidOfMessageToSelect release];
+	[standardURLs release];
 	[selectionDict release];
 	[topLineDict release];
 	[bottomLineDict release];

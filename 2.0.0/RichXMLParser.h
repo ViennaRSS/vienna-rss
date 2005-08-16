@@ -44,7 +44,6 @@
 	NSString * description;
 	NSDate * lastModified;
 	NSMutableArray * items;
-	CFStringEncoding encodingScheme;
 }
 
 // General functions
