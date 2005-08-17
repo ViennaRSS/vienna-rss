@@ -121,6 +121,11 @@
 "Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
 "Unrecognised database format title" = "Databasens filformat har ändrats";
 "Unrecognised database format text" = "Din nuvarande ~/Library/Application Support/Vienna/messages.db stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.\n";
+"Upgrade Title" = "Database Upgrade";
+"Upgrade Text" = "Your existing database needs to be upgraded to work with this build of Vienna. Alternatively you can elect to start with a new, empty database. In either case, your existing database will be backed up to %@. The new or upgraded database will NOT work with earlier versions of Vienna.\n\nNote: for this build, it is suggested that you start with a new database for simplicity.\n";
+"New Database" = "New Database";
+"Upgrade" = "Upgrade";
+"Exit" = "Exit";
 "Marked Articles" = "Markerade artiklar";
 "Unread Articles" = "Olästa artiklar";
 "Today's Articles" = "Dagens artiklar";
