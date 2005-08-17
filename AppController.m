@@ -84,13 +84,12 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatesOnStartup];
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewMessagesOnStartup];
 	[defaultValues setObject:cachedFolderID forKey:MAPref_CachedFolderID];
-	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_SortDirection];
+	[defaultValues setObject:[NSNumber numberWithInt:-1] forKey:MAPref_SortDirection];
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_MessageColumns];
-	[defaultValues setObject:boolYes forKey:MAPref_AutoCollapseFolders];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:boolYes forKey:MAPref_ReadingPaneOnRight];
@@ -147,8 +146,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
-	[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
-	[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 
 	// Init the progress counter and status bar.

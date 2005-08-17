@@ -42,7 +42,7 @@
 	-(void)setDescription:(NSString *)newDescription;
 	-(void)setLastModified:(NSDate *)newDate;
 	-(void)ensureTitle:(FeedItem *)item;
-	-(NSString *)guidFromText:(NSString *)theText;
+	-(NSString *)guidFromItem:(FeedItem *)item;
 @end
 
 @implementation FeedItem
@@ -446,7 +446,7 @@
 
 			// If no explicit GUID is specified, use the link as the GUID
 			if (!hasGUID)
-				[newItem setGuid:[self guidFromText:[newItem description]]];
+				[newItem setGuid:[self guidFromItem:newItem]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -586,7 +586,7 @@
 
 			// If no explicit GUID is specified, use the link as the GUID
 			if (!hasGUID)
-				[newItem setGuid:[self guidFromText:[newItem description]]];
+				[newItem setGuid:[self guidFromItem:newItem]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -678,12 +678,17 @@
 	return lastModified;
 }
 
-/* guidFromText
- * Create a 64 character GUID from the specified text.
+/* guidFromItem
+ * This routine attempts to synthesize a GUID from an incomplete item that lacks an
+ * ID field. Generally we'll have three things to work from: a link, a title and a
+ * description. The link alone is not sufficiently unique and I've seen feeds where
+ * the description is also not unique. The title field generally does vary but we need
+ * to be careful since separate articles with different descriptions may have the same
+ * title. The solution is to hash the link and title and build a GUID from those.
  */
--(NSString *)guidFromText:(NSString *)theText
+-(NSString *)guidFromItem:(FeedItem *)item
 {
-	return [NSString stringWithFormat:@"%X", [theText hash]];
+	return [NSString stringWithFormat:@"%X-%X", [[item link] hash], [[item title] hash]];
 }
 
 /* ensureTitle

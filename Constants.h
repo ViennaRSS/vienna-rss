@@ -32,7 +32,6 @@ extern NSString * MAPref_SortDirection;
 extern NSString * MAPref_SortColumn;
 extern NSString * MAPref_CheckFrequency;
 extern NSString * MAPref_MessageColumns;
-extern NSString * MAPref_AutoCollapseFolders;
 extern NSString * MAPref_CheckForUpdatesOnStartup;
 extern NSString * MAPref_CheckForNewMessagesOnStartup;
 extern NSString * MAPref_FolderImagesFolder;

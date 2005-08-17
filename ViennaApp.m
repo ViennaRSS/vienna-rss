@@ -37,6 +37,18 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 {
 	if ((self = [super init]) != nil)
 	{
+		hasPrefs = NO;
+	}
+	return self;
+}
+
+/* initialisePreferences
+ * Do delay-loaded initialisation of preferences.
+ */
+-(void)initialisePreferences
+{
+	if (!hasPrefs)
+	{
 		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 		isBloglinesEnabled = [defaults boolForKey:MAPref_EnableBloglinesSupport];
 		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
@@ -45,8 +57,8 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
 		bloglinesPassword = [bloglinesEmailAddress ? [KeyChain getPasswordFromKeychain:bloglinesEmailAddress url:MA_Bloglines_URL] : @"" retain];
+		hasPrefs = YES;
 	}
-	return self;
 }
 
 /* handleRefreshAllSubscriptions
@@ -261,6 +273,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(float)markReadInterval
 {
+	[self initialisePreferences];
 	return markReadInterval;
 }
 
@@ -279,6 +292,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetMarkReadInterval:(float)newInterval
 {	
+	[self initialisePreferences];
 	if (markReadInterval != newInterval)
 	{
 		markReadInterval = newInterval;
@@ -293,6 +307,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(BOOL)openLinksInVienna
 {
+	[self initialisePreferences];
 	return openLinksInVienna;
 }
 
@@ -311,6 +326,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetOpenLinksInVienna:(BOOL)flag
 {	
+	[self initialisePreferences];
 	if (openLinksInVienna != flag)
 	{
 		openLinksInVienna = flag;
@@ -324,6 +340,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(BOOL)openLinksInBackground
 {
+	[self initialisePreferences];
 	return openLinksInBackground;
 }
 
@@ -342,6 +359,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetOpenLinksInBackground:(BOOL)flag
 {	
+	[self initialisePreferences];
 	if (openLinksInBackground != flag)
 	{
 		openLinksInBackground = flag;
@@ -381,6 +399,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(BOOL)enableBloglinesSupport
 {
+	[self initialisePreferences];
 	return isBloglinesEnabled;
 }
 
@@ -398,6 +417,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetEnableBloglinesSupport:(BOOL)flag
 {
+	[self initialisePreferences];
 	if (flag != isBloglinesEnabled)
 	{
 		isBloglinesEnabled = flag;
@@ -411,6 +431,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(NSString *)bloglinesEmailAddress
 {
+	[self initialisePreferences];
 	return bloglinesEmailAddress;
 }
 
@@ -428,6 +449,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetBloglinesEmailAddress:(NSString *)newEmailAddress
 {
+	[self initialisePreferences];
 	[newEmailAddress retain];
 	[bloglinesEmailAddress release];
 	bloglinesEmailAddress = newEmailAddress;
@@ -439,6 +461,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(NSString *)bloglinesPassword
 {
+	[self initialisePreferences];
 	return bloglinesPassword;
 }
 
@@ -456,6 +479,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetBloglinesPassword:(NSString *)newPassword
 {
+	[self initialisePreferences];
 	[newPassword retain];
 	[bloglinesPassword release];
 	bloglinesPassword = newPassword;
@@ -510,6 +534,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(BOOL)readingPaneOnRight
 {
+	[self initialisePreferences];
 	return readingPaneOnRight;
 }
 
@@ -526,6 +551,7 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
  */
 -(void)internalSetReadingPaneOnRight:(BOOL)flag
 {
+	[self initialisePreferences];
 	if (flag != readingPaneOnRight)
 	{
 		readingPaneOnRight = flag;
