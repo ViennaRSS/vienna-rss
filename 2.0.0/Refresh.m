@@ -140,6 +140,10 @@ typedef enum {
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
 		authQueue = [[NSMutableArray alloc] init];
+
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
+		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 	}
 	return self;
 }
@@ -585,6 +589,13 @@ typedef enum {
 		int folderId = [folder itemId];
 		if ([[folder name] isEqualToString:[db untitledFeedFolderName]])
 		{
+			// If there's an existing feed with this title, make ours unique
+			NSString * oldFeedTitle = feedTitle;
+			unsigned int index = 1;
+
+			while (([db folderFromName:feedTitle]) != nil)
+				feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
+			
 			[[connector aItem] setName:feedTitle];
 			if ([db setFolderName:folderId newName:feedTitle])
 				needNotify = NO;

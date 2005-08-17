@@ -32,7 +32,6 @@ NSString * MAPref_SortDirection = @"SortDirection";
 NSString * MAPref_SortColumn = @"SortColumn";
 NSString * MAPref_CheckFrequency = @"CheckFrequencyInSeconds";
 NSString * MAPref_MessageColumns = @"MessageColumns";
-NSString * MAPref_AutoCollapseFolders = @"AutoCollapseFolders";
 NSString * MAPref_CheckForUpdatesOnStartup = @"CheckForUpdatesOnStartup";
 NSString * MAPref_CheckForNewMessagesOnStartup = @"CheckForNewMessagesOnStartup";
 NSString * MAPref_FolderImagesFolder = @"FolderIconsCache";

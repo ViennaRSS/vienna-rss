@@ -29,6 +29,7 @@
 	BOOL readingPaneOnRight;
 	BOOL openLinksInVienna;
 	BOOL openLinksInBackground;
+	BOOL hasPrefs;
 }
 
 // Refresh commands
