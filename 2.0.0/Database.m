@@ -133,6 +133,33 @@ static Database * _sharedDatabase = nil;
 	// Save this thread handle to ensure we trap cases of calling the db on
 	// the wrong thread.
 	mainThread = [NSThread currentThread];
+
+	// Handle upgrade here because we may want to create a new database
+	if (databaseVersion == MA_Min_Supported_DB_Version)
+	{
+		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
+		int option = NSRunAlertPanel(NSLocalizedString(@"Upgrade Title", nil),
+									 NSLocalizedString(@"Upgrade Text", nil),
+									 NSLocalizedString(@"Upgrade", nil),
+									 NSLocalizedString(@"New Database", nil),
+									 NSLocalizedString(@"Exit", nil),
+									 backupDatabaseFileName);
+		if (option == -1)
+			return NO;
+		
+		if (option == 0)
+		{
+			[[NSFileManager defaultManager] movePath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+			sqlDatabase = [[SQLDatabase alloc] initWithFile:qualifiedDatabaseFileName];
+			if (!sqlDatabase || ![sqlDatabase open])
+				return NO;
+			databaseVersion = 0;
+		}
+
+		if (option == 1)
+			[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+	}
+	
 	
 	// Create the tables when the database is empty.
 	if (databaseVersion == 0)
