@@ -140,6 +140,7 @@ typedef enum {
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
 		authQueue = [[NSMutableArray alloc] init];
+		hasStarted = YES;
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
@@ -318,32 +319,28 @@ typedef enum {
  */
 -(void)refreshPumper:(NSTimer *)aTimer
 {
-	while (totalConnections < maximumConnections)
+	while ((totalConnections < maximumConnections) && ([refreshArray count] > 0))
 	{
-		if ([refreshArray count] > 0)
+		RefreshItem * item = [refreshArray objectAtIndex:0];
+		switch ([item type])
 		{
-			RefreshItem * item = [refreshArray objectAtIndex:0];
-			switch ([item type])
-			{
-			case MA_Refresh_NilType:
-				NSAssert(false, @"Uninitialised RefreshItem in refreshArray");
-				break;
+		case MA_Refresh_NilType:
+			NSAssert(false, @"Uninitialised RefreshItem in refreshArray");
+			break;
 
-			case MA_Refresh_BloglinesList:
-				[self pumpBloglinesListRefresh];
-				break;
+		case MA_Refresh_BloglinesList:
+			[self pumpBloglinesListRefresh];
+			break;
 
-			case MA_Refresh_Feed:
-				[self pumpSubscriptionRefresh:[item folder]];
-				break;
-				
-			case MA_Refresh_FavIcon:
-				[self pumpFolderIconRefresh:[item folder]];
-				break;
-			}
-			[refreshArray removeObjectAtIndex:0];
+		case MA_Refresh_Feed:
+			[self pumpSubscriptionRefresh:[item folder]];
+			break;
+			
+		case MA_Refresh_FavIcon:
+			[self pumpFolderIconRefresh:[item folder]];
+			break;
 		}
-		else break;
+		[refreshArray removeObjectAtIndex:0];
 	}
 }
 
@@ -710,10 +707,11 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 	if (![connectionsArray containsObject:conn])
 		[connectionsArray addObject:conn];
 
-	if (totalConnections++ == 0)
+	if (totalConnections++ == 0 && hasStarted)
 	{
 		countOfNewArticles = 0;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+		hasStarted = NO;
 	}
 }
 
@@ -734,8 +732,15 @@ static int messageDateSortHandler(Message * item1, Message * item2, void * conte
 		[conn close];
 		[conn release];
 
-		if (--totalConnections == 0)
+		if (--totalConnections == 0 && [refreshArray count] == 0)
+		{
+			[pumpTimer invalidate];
+			[pumpTimer release];
+			pumpTimer = nil;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+			
+			hasStarted = YES;
+		}
 	}
 }
 
