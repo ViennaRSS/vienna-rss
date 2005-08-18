@@ -126,6 +126,9 @@
 "New Database" = "New Database";
 "Upgrade" = "Upgrade";
 "Exit" = "Exit";
+"Cannot rename folder" = "Cannot rename folder";
+"A folder with that name already exists" = "A folder with that name already exists";
+"Search in %@" = "Search in %@";
 "Marked Articles" = "Marked Articles";
 "Unread Articles" = "Unread Articles";
 "Today's Articles" = "Today's Articles";

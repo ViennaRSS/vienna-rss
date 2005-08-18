@@ -506,6 +506,16 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	}
 }
 
+/* growlNotificationWasClicked
+ * Called when the user clicked a Growl notification balloon.
+ */
+-(void)growlNotificationWasClicked:(id)clickContext
+{
+	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
+	if (unreadArticles != nil)
+		[self selectFolderAndMessage:[unreadArticles itemId] guid:nil];
+}
+
 /* registrationDictionaryForGrowl
  * Called by Growl to request the notification dictionary.
  */
@@ -1604,6 +1614,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 				appName, GROWL_APP_NAME,
 				defaultValue, GROWL_NOTIFICATION_DEFAULT,
 				stickyValue, GROWL_NOTIFICATION_STICKY,
+				[NSNumber numberWithInt:newUnread], GROWL_NOTIFICATION_CLICK_CONTEXT,
 				nil];
 			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:GROWL_NOTIFICATION 
 																		   object:nil 
@@ -2227,6 +2238,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	{
 		Folder * folder = [db folderFromID:folderId];
 		[messageListHeader setStringValue:[folder name]];
+		[[searchField cell] setPlaceholderString:[NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]]];
 	}
 }
 
@@ -2572,20 +2584,26 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(IBAction)endRenameFolder:(id)sender
 {
-	[renameWindow orderOut:sender];
-	[NSApp endSheet:renameWindow returnCode:1];
-
-	Folder * folder = [db folderFromID:currentFolderId];
-	NSMutableDictionary * renameAttributes = [NSMutableDictionary dictionary];
-
-	[renameAttributes setValue:[folder name] forKey:@"Name"];
-	[renameAttributes setValue:folder forKey:@"Folder"];
-
-	NSUndoManager * undoManager = [mainWindow undoManager];
-	[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:renameAttributes];
-	[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
-
-	[db setFolderName:currentFolderId newName:[[renameField stringValue] trim]];
+	NSString * newName = [[renameField stringValue] trim];
+	if ([db folderFromName:newName] != nil)
+		[self runOKAlertPanel:@"Cannot rename folder" text:@"A folder with that name already exists"];
+	else
+	{
+		[renameWindow orderOut:sender];
+		[NSApp endSheet:renameWindow returnCode:1];
+		
+		Folder * folder = [db folderFromID:currentFolderId];
+		NSMutableDictionary * renameAttributes = [NSMutableDictionary dictionary];
+		
+		[renameAttributes setValue:[folder name] forKey:@"Name"];
+		[renameAttributes setValue:folder forKey:@"Folder"];
+		
+		NSUndoManager * undoManager = [mainWindow undoManager];
+		[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:renameAttributes];
+		[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
+		
+		[db setFolderName:currentFolderId newName:newName];
+	}
 }
 
 /* cancelRenameFolder

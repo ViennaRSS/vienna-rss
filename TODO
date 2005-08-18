@@ -4,7 +4,6 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
-- Improve ParseXmlDate in XMLParser.m. Make it more efficient.
 - Add support for RSS comments. General idea: have RichXMLParser grab the # of comments and the URI to the comment feed
   for each message and store them. Have SingleConnection grab this info and determine if the comment feed need to be grabbed
   (how?). Then after the connection has completed and the app controller notified, have the handler check to see if the
@@ -18,3 +17,5 @@ Thanks!
   4. Provide ability to get a list of messages given a criteria.
 - Bloglines support.
 - Mark articles read after leaving group.
+- Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
+- Search field needs to search article titles too.

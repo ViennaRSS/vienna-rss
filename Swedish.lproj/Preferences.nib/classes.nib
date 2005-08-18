@@ -11,6 +11,7 @@
                 changeEnableBloglines = id; 
                 changeFont = id; 
                 changeMarkReadBehaviour = id; 
+                changeOpenLinksInBackground = id; 
                 selectDefaultLinksHandler = id; 
             }; 
             CLASS = PreferenceController; 
@@ -31,6 +32,7 @@
                 markReadAfterNext = NSButtonCell; 
                 messageListFont = NSPopUpButton; 
                 messageListFontSize = NSComboBox; 
+                openLinksInBackground = NSButton; 
             }; 
             SUPERCLASS = NSWindowController; 
         }

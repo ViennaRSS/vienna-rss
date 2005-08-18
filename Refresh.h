@@ -32,6 +32,7 @@
 	NSMutableArray * authQueue;
 	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
+	BOOL hasStarted;
 }
 
 +(RefreshManager *)sharedManager;
