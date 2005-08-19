@@ -40,7 +40,7 @@
 -(TreeNode *)firstChild;
 -(void)addChild:(TreeNode *)child;
 -(void)removeChildren;
--(void)removeChild:(TreeNode *)child;
+-(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
 -(NSString *)nodeName;
 -(TreeNode *)childByName:(NSString *)childName;
 -(TreeNode *)childByIndex:(int)index;
