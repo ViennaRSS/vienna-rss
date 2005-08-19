@@ -497,7 +497,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 
 	// Ask our parent to delete us
 	TreeNode * ourParent = [thisNode parentNode];
-	[ourParent removeChild:thisNode];
+	[ourParent removeChild:thisNode andChildren:YES];
 	[self reloadFolderItem:ourParent reloadChildren:YES];
 
 	// Send the selection notification ourselves because if we're deleting at the end of
@@ -786,8 +786,11 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 			TreeNode * oldParent = [rootNode nodeFromID:[folder parentId]];
 			TreeNode * newParent = [rootNode nodeFromID:parentID];
 
+			if (![newParent canHaveChildren])
+				[newParent setCanHaveChildren:YES];
+
 			[db setParent:parentID forFolder:folderId];
-			[oldParent removeChild:node];
+			[oldParent removeChild:node andChildren:NO];
 			[newParent addChild:node];
 		}
 

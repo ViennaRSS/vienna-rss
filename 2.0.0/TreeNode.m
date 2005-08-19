@@ -95,7 +95,7 @@
  * Remove the specified child from the node list and any children
  * that it may have.
  */
--(void)removeChild:(TreeNode *)child
+-(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag
 {
 	NSEnumerator * enumerator = [children objectEnumerator];
 	TreeNode * previousChild = nil;
@@ -107,7 +107,8 @@
 		{
 			if (previousChild)
 				[previousChild setNextChild:[node nextChild]];
-			[node removeChildren];
+			if (removeChildrenFlag)
+				[node removeChildren];
 			[children removeObject:node];
 			break;
 		}

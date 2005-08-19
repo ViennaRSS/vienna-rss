@@ -1834,10 +1834,11 @@ static Database * _sharedDatabase = nil;
 	
 	// Update childUnreadCount for our parent. Since we're just working
 	// on one message, we do this the faster way.
-	while ([folder parentId] != MA_Root_Folder)
+	Folder * tmpFolder = folder;
+	while ([tmpFolder parentId] != MA_Root_Folder)
 	{
-		folder = [self folderFromID:[folder parentId]];
-		[folder setChildUnreadCount:[folder childUnreadCount] + adjustment];
+		tmpFolder = [self folderFromID:[tmpFolder parentId]];
+		[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
 	}
 
 	// Update the count in the database.
