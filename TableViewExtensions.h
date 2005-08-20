@@ -26,6 +26,7 @@
 }
 
 -(void)setHeaderImage:(NSString *)identifier imageName:(NSString *)name;
+-(void)localiseHeaderStrings;
 @end
 
 @interface NSObject(TaskWindowTableViewDelegate)

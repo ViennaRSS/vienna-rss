@@ -19,10 +19,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TableViewExtensions.h"
 
 @interface ActivityViewer : NSWindowController {
 	IBOutlet NSWindow * activityWindow;
-	IBOutlet NSTableView * activityTable;
+	IBOutlet ExtendedTableView * activityTable;
 	IBOutlet NSSplitView * splitView;
 	IBOutlet NSTextView * activityDetail;
 }

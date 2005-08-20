@@ -149,3 +149,10 @@
 "is greater than or equal to" = "is greater than or equal to";
 "Cannot open export file message" = "Cannot create export output file";
 "Cannot open export file message text" = "The specified export output file could not be created. Check that it is not locked and no other application is using it.";
+"Source" = "Source";
+"Status" = "Status";
+"Enter LiveJournal User name" = "Enter LiveJournal User name";
+"Enter MSN Spaces User name" = "Enter MSN Spaces User name";
+"Enter Blogspot User name" = "Enter Blogspot User name";
+"Enter Xanga User name" = "Enter Xanga User name";
+"Enter URL of RSS feed" = "Enter URL of RSS feed";

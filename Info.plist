@@ -51,9 +51,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2005</string>
+	<string>2006</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0.2005</string>
+	<string>2.0.0.2006</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSMainNibFile</key>

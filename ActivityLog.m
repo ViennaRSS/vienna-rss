@@ -196,6 +196,14 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	return item;
 }
 
+/* sortUsingDescriptors
+ * Sort the log using the specified descriptors.
+ */
+-(void)sortUsingDescriptors:(NSArray *)sortDescriptors
+{
+	[log sortUsingDescriptors:sortDescriptors];
+}
+
 /* setStatus
  * Set a new status entry for the specified source item.
  */

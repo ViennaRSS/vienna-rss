@@ -149,3 +149,10 @@
 "is greater than or equal to" = "채r st철rre eller lika med";
 "Cannot open export file message" = "Kan inte skapa exportfil";
 "Cannot open export file message text" = "Specificerad exportfil kunde inte skapas. Kontrollera att den inte 채r l책st eller att n책got annat program anv채nder den.";
+"Source" = "Source (Swedish)";
+"Status" = "Status (Swedish)";
+"Enter LiveJournal User name" = "Anv둵darnamn LiveJournal";
+"Enter MSN Spaces User name" = "Anv둵darnamn MSN Spaces";
+"Enter Blogspot User name" = "Anv둵darnamn Blogspot";
+"Enter Xanga User name" = "Anv둵darnamn Xanga";
+"Enter URL of RSS feed" = "URL till RSS-str쉖";
