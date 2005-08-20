@@ -260,7 +260,7 @@
 	}
 	if (linkTitleString == nil)
 		linkTitleString = @"Link";
-	[linkTitle setStringValue:[NSString stringWithFormat:@"%@:", linkTitleString]];
+	[linkTitle setStringValue:[NSString stringWithFormat:@"%@:", NSLocalizedString(linkTitleString, nil)]];
 	[siteHomePageButton setHidden:!showButton];
 }
 

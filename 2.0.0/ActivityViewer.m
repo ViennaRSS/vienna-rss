@@ -47,6 +47,9 @@
 	[activityDetail setFont:detailsFont];
 	[detailsFont release];
 	
+	// Set localised column headers
+	[activityTable localiseHeaderStrings];
+
 	// Restore the split position
 	[splitView loadLayoutWithName:@"SplitView3Positions"];	
 
@@ -97,6 +100,16 @@
 	}
 }
 
+/* sortDescriptorsDidChange
+ * Called to sort the status table by the specified descriptor.
+ */
+-(void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
+{
+	NSArray * newDescriptors = [aTableView sortDescriptors];
+	[[ActivityLog defaultLog] sortUsingDescriptors:newDescriptors];
+	[aTableView reloadData];
+}
+
 /* objectValueForTableColumn [datasource]
  * Called by the table view to obtain the object at the specified column and row.
  */
@@ -104,14 +117,6 @@
 {
 	NSArray * log = [[ActivityLog defaultLog] allItems];
 	ActivityItem * item = [log objectAtIndex:rowIndex];
-	if ([[aTableColumn identifier] isEqualToString:@"source"])
-	{
-		return [item name];
-	}
-	if ([[aTableColumn identifier] isEqualToString:@"status"])
-	{
-		return [item status];
-	}
-	return @"";
+	return ([aTableColumn identifier]) ? [item valueForKey:[aTableColumn identifier]] : @"";
 }
 @end

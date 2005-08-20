@@ -376,7 +376,6 @@
 		AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = scriptMenu.tiff; sourceTree = "<group>"; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PopUpButtonExtensions.h; sourceTree = "<group>"; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PopUpButtonExtensions.m; sourceTree = "<group>"; };
-		AAD79616088AF40B00E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AAD79620088AF47800E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		AAD79623088AF48500E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AAD79626088AF49200E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/GroupFolder.nib; sourceTree = "<group>"; };
@@ -384,7 +383,6 @@
 		AAD7962C088AF4A900E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/RSSFeed.nib; sourceTree = "<group>"; };
 		AAD7962F088AF4B300E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AAD79632088AF4BD00E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
-		AAD79635088AF4C800E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Swedish; path = Swedish.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AAD79638088AF4D100E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Swedish; path = Swedish.lproj/Acknowledgements.rtf; sourceTree = "<group>"; };
 		AAD7963B088AF4EB00E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Swedish; path = Swedish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AAD79648088AF51000E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Swedish; path = Swedish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1043,7 +1041,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				AABFDC990609EA5A00100A9B /* English */,
-				AAD79616088AF40B00E2CE5E /* Swedish */,
 			);
 			name = ActivityViewer.nib;
 			sourceTree = "<group>";
@@ -1052,7 +1049,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				AAC504360828E6740089FF70 /* English */,
-				AAD79635088AF4C800E2CE5E /* Swedish */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";

@@ -6,13 +6,15 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 activityDetail = NSTextView; 
-                activityTable = NSTableView; 
+                activityTable = ExtendedTableView; 
                 activityWindow = NSWindow; 
                 splitView = NSSplitView; 
             }; 
             SUPERCLASS = NSWindowController; 
         }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+        {CLASS = ExtendedTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }
     ); 
     IBVersion = 1; 
 }

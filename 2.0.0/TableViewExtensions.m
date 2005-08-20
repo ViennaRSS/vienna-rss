@@ -89,6 +89,23 @@
 	return (columnIndex != -1) ? [[self delegate] tableView:self toolTipForTableColumn:tableColumn row:rowIndex] : @"";
 }
 
+/* localiseHeaderStrings
+ * Localises the table view's column header titles by calling NSLocalisedString to set them. Before
+ * calling this function, the header titles should have first been initialised with the US English
+ * titles.
+ */
+-(void)localiseHeaderStrings
+{
+	NSEnumerator * enumerator = [[self tableColumns] objectEnumerator];
+	NSTableColumn * aColumn;
+
+	while ((aColumn = [enumerator nextObject]) != nil)
+	{
+		id headerCell = [aColumn headerCell];
+		[headerCell setStringValue:NSLocalizedString([headerCell stringValue], nil)];
+	}
+}
+
 /* setHeaderImage
  * Set the image in the header for a column
  */

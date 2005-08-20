@@ -44,4 +44,5 @@
 +(ActivityLog *)defaultLog;
 -(NSArray *)allItems;
 -(ActivityItem *)itemByName:(NSString *)theName;
+-(void)sortUsingDescriptors:(NSArray *)sortDescriptors;
 @end
