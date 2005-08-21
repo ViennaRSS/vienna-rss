@@ -141,14 +141,12 @@
 		return;
 	}
 
-	NSFileHandle * fileHandle = [NSFileHandle fileHandleForWritingAtPath:fqFilename];
+	// Put some newlines in for readability
 	NSMutableString * xmlString = [[NSMutableString alloc] initWithString:[newTree xmlForTree]];
 	[xmlString replaceString:@"><" withString:@">\n<"];
 
-	NSData * msgData = [NSData dataWithBytes:[xmlString UTF8String] length:[xmlString length]];
+	[xmlString writeToFile:fqFilename atomically:YES];
 	[xmlString release];
-	[fileHandle writeData:msgData];
-	[fileHandle closeFile];
 
 	// Announce how many we successfully imported
 	NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
