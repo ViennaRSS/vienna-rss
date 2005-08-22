@@ -114,6 +114,14 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	return detailString;
 }
 
+/* description
+ * Return item description for debugging.
+ */
+-(NSString *)description
+{
+	return [NSString stringWithFormat:@"{'%@', '%@'}", name, status];
+}
+
 /* dealloc
  * Clean up before we expire.
  */
@@ -158,21 +166,15 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	NSEnumerator * enumerator = [log objectEnumerator];
 	ActivityItem * item;
 	int indexOfItem = 0;
-	
+
 	while ((item = [enumerator nextObject]) != nil)
 	{
-		int ordering = [[item name] caseInsensitiveCompare:name];
-		if (ordering == NSOrderedSame)
-		{
-			*indexPointer = indexOfItem;
-			return item;
-		}
-		else if (ordering == NSOrderedDescending)
+		if ([[item name] caseInsensitiveCompare:name] == NSOrderedSame)
 			break;
 		++indexOfItem;
 	}
 	*indexPointer = indexOfItem;
-	return nil;
+	return item;
 }
 
 /* itemByName
@@ -202,26 +204,6 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 -(void)sortUsingDescriptors:(NSArray *)sortDescriptors
 {
 	[log sortUsingDescriptors:sortDescriptors];
-}
-
-/* setStatus
- * Set a new status entry for the specified source item.
- */
--(void)setStatus:(NSString *)aStatusString forItem:(ActivityItem *)item
-{
-	[item setStatus:aStatusString];
-}
-
-/* clearDetails
- * Empties the details log for the specified source.
- */
--(void)clearDetails:(NSString *)theSource
-{
-	ActivityItem * item;
-	int insertionIndex;
-	
-	if ((item = [self getStatus:theSource index:&insertionIndex]) != nil)
-		[item clearDetails];
 }
 
 /* allItems
