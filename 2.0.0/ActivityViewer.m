@@ -20,6 +20,7 @@
 
 #import "ActivityViewer.h"
 #import "ActivityLog.h"
+#import "AppController.h"
 #import "SplitViewExtensions.h"
 
 @implementation ActivityViewer
@@ -46,6 +47,12 @@
 	NSFont * detailsFont = [NSFont fontWithName:@"Monaco" size:11.0];
 	[activityDetail setFont:detailsFont];
 	[detailsFont release];
+
+	// Cache the default log items.
+	allItems = [[[ActivityLog defaultLog] allItems] retain];
+
+	// Handle double-click on an item
+	[activityTable setDoubleAction:@selector(handleDoubleClick:)];
 	
 	// Set localised column headers
 	[activityTable localiseHeaderStrings];
@@ -55,6 +62,7 @@
 
 	// Set up to receive notifications when the activity log changes
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogChange:) name:@"MA_Notify_ActivityLogChange" object:nil];	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDetailChange:) name:@"MA_Notify_ActivityDetailChange" object:nil];	
 }
 
 /* windowShouldClose
@@ -65,7 +73,49 @@
 {
 	[splitView storeLayoutWithName:@"SplitView3Positions"];
 	return YES;
-}	
+}
+
+/* handleDoubleClick
+ * Handle double-click.
+ */
+-(IBAction)handleDoubleClick:(id)sender
+{
+	int selectedRow = [activityTable selectedRow];
+	if (selectedRow >= 0)
+	{
+		ActivityItem * selectedItem = [allItems objectAtIndex:selectedRow];
+
+		// Name might be a URL if the feed has always been invalid.
+		Database * db = [Database sharedDatabase];
+		Folder * folder = [db folderFromName:[selectedItem name]];
+		if (folder == nil)
+			folder = [db folderFromFeedURL:[selectedItem name]];
+
+		if (folder != nil)
+			[[NSApp delegate] selectFolderAndMessage:[folder itemId] guid:nil];
+	}
+}
+
+/* reloadTable
+ * Reloads the table with the existing log sorted and with the selection preserved.
+ */
+-(void)reloadTable
+{
+	ActivityItem * selectedItem = nil;
+
+	int selectedRow = [activityTable selectedRow];
+	if (selectedRow >= 0)
+		selectedItem = [allItems objectAtIndex:selectedRow];
+
+	[[ActivityLog defaultLog] sortUsingDescriptors:[activityTable sortDescriptors]];
+	[activityTable reloadData];
+
+	if (selectedItem != nil)
+	{
+		selectedRow = [allItems indexOfObject:selectedItem];
+		[activityTable selectRow:selectedRow byExtendingSelection:NO];
+	}
+}
 
 /* handleLogChange
  * Handle the notification that is broadcast when the activity log
@@ -73,7 +123,19 @@
  */
 -(void)handleLogChange:(NSNotification *)nc
 {
-	[activityTable reloadData];
+	[self reloadTable];
+}
+
+/* handleDetailChange
+ * Handle the notification that is sent when an item detail is changed.
+ */
+-(void)handleDetailChange:(NSNotification *)nc
+{
+	ActivityItem * item = (ActivityItem *)[nc object];
+	int selectedRow = [activityTable selectedRow];
+
+	if (selectedRow >= 0 && (item == [allItems objectAtIndex:selectedRow]))
+		[activityDetail setString:[item details]];		
 }
 
 /* numberOfRowsInTableView [datasource]
@@ -82,7 +144,7 @@
  */
 -(int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [[[ActivityLog defaultLog] allItems] count];
+	return [allItems count];
 }
 
 /* tableViewSelectionDidChange [delegate]
@@ -92,10 +154,9 @@
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	unsigned int selectedRow = [activityTable selectedRow];
-	NSArray * log = [[ActivityLog defaultLog] allItems];
-	if (selectedRow >= 0 && selectedRow < [log count])
+	if (selectedRow >= 0 && selectedRow < [allItems count])
 	{
-		ActivityItem * item = [log objectAtIndex:selectedRow];
+		ActivityItem * item = [allItems objectAtIndex:selectedRow];
 		[activityDetail setString:[item details]];
 	}
 }
@@ -105,9 +166,7 @@
  */
 -(void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
 {
-	NSArray * newDescriptors = [aTableView sortDescriptors];
-	[[ActivityLog defaultLog] sortUsingDescriptors:newDescriptors];
-	[aTableView reloadData];
+	[self reloadTable];
 }
 
 /* objectValueForTableColumn [datasource]
@@ -115,8 +174,16 @@
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
-	NSArray * log = [[ActivityLog defaultLog] allItems];
-	ActivityItem * item = [log objectAtIndex:rowIndex];
+	ActivityItem * item = [allItems objectAtIndex:rowIndex];
 	return ([aTableColumn identifier]) ? [item valueForKey:[aTableColumn identifier]] : @"";
+}
+
+/* dealloc
+ * Clean up before we're freed.
+ */
+-(void)dealloc
+{
+	[allItems release];
+	[super dealloc];
 }
 @end
