@@ -1607,6 +1607,21 @@ static Database * _sharedDatabase = nil;
 				}
 
 			case MA_FieldType_String:
+				if ([field tag] == MA_FieldID_Text)
+				{
+					// Special case for searching the text field. We always include the title field in the
+					// search so the resulting SQL statement becomes:
+					//
+					//   (text op value or title op value)
+					//
+					// where op is the appropriate operator.
+					//
+					Field * titleField = [self fieldByName:MA_Field_Subject];
+					NSString * value = [NSString stringWithFormat:operatorString, [criteria value]];
+					[sqlString appendFormat:@"(%@%@ or %@%@)", [field sqlField], value, [titleField sqlField], value];
+					break;
+				}
+					
 			case MA_FieldType_Integer:
 				valueString = [NSString stringWithFormat:@"%@", [criteria value]];
 				break;
@@ -1674,7 +1689,7 @@ static Database * _sharedDatabase = nil;
 			[tree addCriteria:clause];
 			[clause release];
 		}
-		
+
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
