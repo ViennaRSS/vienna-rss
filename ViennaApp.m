@@ -53,6 +53,8 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 		isBloglinesEnabled = [defaults boolForKey:MAPref_EnableBloglinesSupport];
 		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
 		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
+		minimumFontSize = [defaults integerForKey:MAPref_MinimumFontSize];
+		enableMinimumFontSize = [defaults boolForKey:MAPref_UseMinimumFontSize];
 		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		bloglinesEmailAddress = [[defaults valueForKey:MAPref_BloglinesEmailAddress] retain];
@@ -584,5 +586,63 @@ static NSString * MA_Bloglines_URL = @"http://rpc.bloglines.com/listsubs";
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:newFrequency forKey:MAPref_CheckFrequency];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CheckFrequencyChange" object:nil];
+}
+
+/* enableMinimumFontSize
+ * Specifies whether or not the minimum font size is in force.
+ */
+-(BOOL)enableMinimumFontSize
+{
+	return enableMinimumFontSize;
+}
+
+/* minimumFontSize
+ * Return the current minimum font size.
+ */
+-(int)minimumFontSize
+{
+	return minimumFontSize;
+}
+
+/* setMinimumFontSize
+ * Change the minimum font size.
+ */
+-(void)setMinimumFontSize:(int)newSize
+{
+	if (newSize != minimumFontSize)
+	{
+		[self internalSetMinimumFontSize:newSize];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+	}
+}
+
+/* internalSetMinimumFontSize
+ * Internally change the minimum font size.
+ */
+-(void)internalSetMinimumFontSize:(int)newSize
+{
+	minimumFontSize = newSize;
+	[[NSUserDefaults standardUserDefaults] setInteger:minimumFontSize forKey:MAPref_MinimumFontSize];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
+}
+
+/* changeMinimumFontSize
+ * Enable whether the minimum font size is used.
+ */
+-(void)changeMinimumFontSize:(BOOL)flag
+{
+	[self internalChangeMinimumFontSize:flag];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferencesUpdated" object:nil];
+}
+
+
+/* internalChangeMinimumFontSize
+ * Internally enable whether the minimum font size is used.
+ */
+-(void)internalChangeMinimumFontSize:(BOOL)flag
+{
+	enableMinimumFontSize = flag;
+	[[NSUserDefaults standardUserDefaults] setBool:flag forKey:MAPref_UseMinimumFontSize];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
 }
 @end

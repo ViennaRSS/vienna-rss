@@ -98,6 +98,8 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
+	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
 
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
@@ -147,6 +149,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
+	[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
 
 	// Init the progress counter and status bar.
 	progressCount = 0;
@@ -209,6 +212,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[textView setPolicyDelegate:self];
 	[textView setUIDelegate:self];
 	[textView setFrameLoadDelegate:self];
+
+	// Handle minimum font size
+	defaultWebPrefs = [[textView preferences] retain];
+	[self loadMinimumFontSize];
 
 	// Select the default style
 	htmlTemplate = nil;
@@ -1273,6 +1280,26 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 			smartFolder = [[SearchFolder alloc] initWithDatabase:db];
 		[smartFolder loadCriteria:mainWindow folderId:[folder itemId]];
 	}
+}
+
+/* handleMinimumFontSizeChange
+ * Called when the minimum font size for articles is enabled or disabled, or changed.
+ */
+-(void)handleMinimumFontSizeChange:(NSNotification *)nc
+{
+	[self loadMinimumFontSize];
+	[self updateMessageText];
+}
+
+/* loadMinimumFontSize
+ * Sets up the web preferences for a minimum font size.
+ */
+-(void)loadMinimumFontSize
+{
+	if (![NSApp enableMinimumFontSize])
+		[defaultWebPrefs setMinimumFontSize:1];
+	else
+		[defaultWebPrefs setMinimumFontSize:[NSApp minimumFontSize]];
 }
 
 /* handleFolderUpdate
@@ -3171,6 +3198,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[defaultWebPrefs release];
 	[guidOfMessageToSelect release];
 	[standardURLs release];
 	[selectionDict release];

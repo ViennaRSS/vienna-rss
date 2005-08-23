@@ -3,28 +3,23 @@
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
             ACTIONS = {
-                changeBloglinesEmailAddress = id; 
-                changeBloglinesPassword = id; 
                 changeCheckForUpdates = id; 
                 changeCheckFrequency = id; 
                 changeCheckOnStartUp = id; 
-                changeEnableBloglines = id; 
                 changeFont = id; 
                 changeMarkReadBehaviour = id; 
+                changeMinimumFontSize = id; 
                 changeOpenLinksInBackground = id; 
                 selectDefaultLinksHandler = id; 
+                selectMinimumFontSize = id; 
             }; 
             CLASS = PreferenceController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                bloglinesEmailAddress = NSTextField; 
-                bloglinesEmailAddressLabel = NSTextField; 
-                bloglinesPassword = NSSecureTextField; 
-                bloglinesPasswordLabel = NSTextField; 
                 checkForUpdates = NSButton; 
                 checkFrequency = NSPopUpButton; 
                 checkOnStartUp = NSButton; 
-                enableBloglines = NSButton; 
+                enableMinimumFontSize = NSButton; 
                 folderFont = NSPopUpButton; 
                 folderFontSize = NSComboBox; 
                 linksHandler = NSPopUpButton; 
@@ -32,6 +27,7 @@
                 markReadAfterNext = NSButtonCell; 
                 messageListFont = NSPopUpButton; 
                 messageListFontSize = NSComboBox; 
+                minimumFontSizes = NSComboBox; 
                 openLinksInBackground = NSButton; 
             }; 
             SUPERCLASS = NSWindowController; 

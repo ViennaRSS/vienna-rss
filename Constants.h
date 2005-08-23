@@ -48,10 +48,13 @@ extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_OpenLinksInVienna;
 extern NSString * MAPref_OpenLinksInBackground;
 extern NSString * MAPref_ShowScriptsMenu;
+extern NSString * MAPref_MinimumFontSize;
+extern NSString * MAPref_UseMinimumFontSize;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
 extern float MA_Default_Read_Interval;
+extern int MA_Default_MinimumFontSize;
 
 // Layout styles
 #define MA_Table_Layout			0
