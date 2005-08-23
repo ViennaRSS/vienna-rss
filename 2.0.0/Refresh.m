@@ -413,9 +413,13 @@ typedef enum {
  */
 -(void)pumpFolderIconRefresh:(Folder *)folder
 {
-	if (([folder flags] & MA_FFlag_CheckForImage) && [folder homePage] != nil)
+	if (([folder flags] & MA_FFlag_CheckForImage) && ![[folder homePage] isBlank])
 	{
-		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
+		// The activity log name we use depends on whether or not this folder has a real name.
+		Database * db = [Database sharedDatabase];
+		NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
+		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
+		
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 
 		AsyncConnection * conn = [[AsyncConnection alloc] init];
