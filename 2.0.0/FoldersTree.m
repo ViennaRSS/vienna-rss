@@ -471,7 +471,15 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 {
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
-	[nc postNotificationName:@"MA_Notify_EditFolder" object:node];
+
+	if (IsRSSFolder([node folder]))
+	{
+		NSString * urlString = [[node folder] homePage];
+		if (urlString && ![urlString isBlank])
+			[[NSApp delegate] openURLInBrowser:urlString];
+	}
+	else
+		[nc postNotificationName:@"MA_Notify_EditFolder" object:node];
 }
 
 /* handleFolderDeleted
