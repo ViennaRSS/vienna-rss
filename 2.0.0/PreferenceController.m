@@ -29,6 +29,11 @@
 int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64 };
 #define countOfAvailableFontSizes  (sizeof(availableFontSizes)/sizeof(availableFontSizes[0]))
 
+// List of minimum font sizes. I picked the ones that matched the same option in
+// Safari but you easily could add or remove from the list as needed.
+int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
+#define countOfAvailableMinimumFontSizes  (sizeof(availableMinimumFontSizes)/sizeof(availableMinimumFontSizes[0]))
+
 // Private functions
 @interface PreferenceController (Private)
 	-(void)selectUserDefaultFont:(NSString *)preferenceName control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
@@ -87,9 +92,18 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 
 	// Set check for updates when starting
 	[checkForUpdates setState:[NSApp checkForNewOnStartup] ? NSOnState : NSOffState];
-	
+
 	// Set check for new messages when starting
 	[checkOnStartUp setState:[NSApp refreshOnStartup] ? NSOnState : NSOffState];
+	
+	// Set minimum font size option
+	[enableMinimumFontSize setState:[NSApp enableMinimumFontSize] ? NSOnState : NSOffState];
+	[minimumFontSizes setEnabled:[NSApp enableMinimumFontSize]];
+
+	unsigned int i;
+	for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
+		[minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];
+	[minimumFontSizes setFloatValue:[NSApp minimumFontSize]];
 
 	// Set whether links are opened in the background
 	[openLinksInBackground setState:[NSApp openLinksInBackground] ? NSOnState : NSOffState];
@@ -98,12 +112,6 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 	[markReadAfterNext setState:[NSApp markReadInterval] == 0 ? NSOnState : NSOffState];
 	[markReadAfterDelay setState:[NSApp markReadInterval] != 0 ? NSOnState : NSOffState];
 
-	// Handle the Bloglines settings
-//	[enableBloglines setState:[NSApp enableBloglinesSupport] ? NSOnState : NSOffState];
-//	[bloglinesEmailAddress setStringValue:[NSApp bloglinesEmailAddress]];
-//	[bloglinesPassword setStringValue:[NSApp bloglinesPassword]];
-//	[self updateBloglinesUIState];
-	
 	[self refreshLinkHandler];
 }
 
@@ -213,6 +221,25 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 -(IBAction)changeCheckOnStartUp:(id)sender
 {
 	[NSApp internalChangeRefreshOnStartup:[sender state] == NSOnState];
+}
+
+/* changeMinimumFontSize
+ * Enable whether a minimum font size is used for article display.
+ */
+-(IBAction)changeMinimumFontSize:(id)sender
+{
+	BOOL useMinimumFontSize = [sender state] == NSOnState;
+	[NSApp internalChangeMinimumFontSize:useMinimumFontSize];
+	[minimumFontSizes setEnabled:useMinimumFontSize];
+}
+
+/* selectMinimumFontSize
+ * Changes the actual minimum font size for article display.
+ */
+-(IBAction)selectMinimumFontSize:(id)sender
+{
+	float newMinimumFontSize = [minimumFontSizes floatValue];
+	[NSApp internalSetMinimumFontSize:newMinimumFontSize];
 }
 
 /* selectDefaultLinksHandler
@@ -364,44 +391,6 @@ int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64
 {
 	int newFrequency = [[checkFrequency selectedItem] tag];
 	[NSApp internalSetRefreshFrequency:newFrequency];
-}
-
-/* changeEnableBloglines
- * Respond to the user enabling or disabling Bloglines support.
- */
--(IBAction)changeEnableBloglines:(id)sender
-{
-	[NSApp setEnableBloglinesSupport:[sender state] == NSOnState];
-	[self updateBloglinesUIState];
-}
-
-/* changeBloglinesEmailAddress
- * Handle changes in the Bloglines E-mail address field.
- */
--(IBAction)changeBloglinesEmailAddress:(id)sender
-{
-	[NSApp internalSetBloglinesEmailAddress:[sender stringValue]];
-}
-
-/* changeBloglinesPassword
- * Handle changes in the Bloglines password field.
- */
--(IBAction)changeBloglinesPassword:(id)sender
-{
-	[NSApp internalSetBloglinesPassword:[sender stringValue]];
-}
-
-/* updateBloglinesUIState
- * Enable or disable the Bloglines e-mail address and password fields depending on whether or not
- * Bloglines support is enabled.
- */
--(void)updateBloglinesUIState
-{
-	BOOL isBlogLinesEnabled = [NSApp enableBloglinesSupport];
-	[bloglinesEmailAddress setEnabled:isBlogLinesEnabled];
-	[bloglinesPassword setEnabled:isBlogLinesEnabled];
-	[bloglinesEmailAddressLabel setEnabled:isBlogLinesEnabled];
-	[bloglinesPasswordLabel setEnabled:isBlogLinesEnabled];
 }
 
 /* dealloc

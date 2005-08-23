@@ -25,6 +25,8 @@
 	NSString * bloglinesEmailAddress;
 	NSString * bloglinesPassword;
 	float markReadInterval;
+	int minimumFontSize;
+	BOOL enableMinimumFontSize;
 	BOOL isBloglinesEnabled;
 	BOOL readingPaneOnRight;
 	BOOL openLinksInVienna;
@@ -45,6 +47,14 @@
 
 // New subscription
 -(id)handleNewSubscription:(NSScriptCommand *)cmd;
+
+// Minimum font size settings
+-(int)minimumFontSize;
+-(BOOL)enableMinimumFontSize;
+-(void)setMinimumFontSize:(int)newSize;
+-(void)changeMinimumFontSize:(BOOL)flag;
+-(void)internalChangeMinimumFontSize:(BOOL)flag;
+-(void)internalSetMinimumFontSize:(int)newSize;
 
 // General read-only properties.
 -(NSString *)applicationVersion;

@@ -30,14 +30,11 @@
 	IBOutlet NSPopUpButton * linksHandler;
 	IBOutlet NSButton * checkForUpdates;
 	IBOutlet NSButton * checkOnStartUp;
-	IBOutlet NSButton * enableBloglines;
 	IBOutlet NSButton * openLinksInBackground;
 	IBOutlet NSButtonCell * markReadAfterNext;
 	IBOutlet NSButtonCell * markReadAfterDelay;
-	IBOutlet NSTextField * bloglinesEmailAddressLabel;
-	IBOutlet NSTextField * bloglinesPasswordLabel;
-	IBOutlet NSTextField * bloglinesEmailAddress;
-	IBOutlet NSSecureTextField * bloglinesPassword;
+	IBOutlet NSComboBox * minimumFontSizes;
+	IBOutlet NSButton * enableMinimumFontSize;
 	NSMutableDictionary * appToPathMap;
 	ICInstance internetConfigHandler;
 }
@@ -48,11 +45,10 @@
 -(IBAction)changeCheckOnStartUp:(id)sender;
 -(IBAction)selectDefaultLinksHandler:(id)sender;
 -(IBAction)changeCheckForUpdates:(id)sender;
--(IBAction)changeEnableBloglines:(id)sender;
--(IBAction)changeBloglinesEmailAddress:(id)sender;
--(IBAction)changeBloglinesPassword:(id)sender;
 -(IBAction)changeMarkReadBehaviour:(id)sender;
 -(IBAction)changeOpenLinksInBackground:(id)sender;
+-(IBAction)changeMinimumFontSize:(id)sender;
+-(IBAction)selectMinimumFontSize:(id)sender;
 
 // General functions
 -(void)initializePreferences;

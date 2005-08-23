@@ -37,6 +37,7 @@
 @class MessageListView;
 @class ArticleView;
 @class TexturedHeader;
+@class WebPreferences;
 
 @interface AppController : NSObject {
 	IBOutlet NSWindow * mainWindow;
@@ -101,6 +102,7 @@
 	NSString * cssStylesheet;
 	NSString * persistedStatusText;
 	BOOL previousFolderColumnState;
+	WebPreferences * defaultWebPrefs;
 }
 
 // Menu action items
@@ -146,6 +148,7 @@
 -(void)handleCheckFrequencyChange:(NSNotification *)note;
 -(void)handleFolderUpdate:(NSNotification *)nc;
 -(void)handleRSSLink:(NSString *)linkPath;
+-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
 
 // Message selection functions
 -(BOOL)scrollToMessage:(NSString *)guid;
@@ -191,6 +194,7 @@
 -(void)runOKAlertPanel:(NSString *)titleString text:(NSString *)bodyText, ...;
 -(BOOL)isAccessible:(NSString *)urlString;
 -(void)clearUndoStack;
+-(void)loadMinimumFontSize;
 
 // Rename sheet functions
 -(IBAction)endRenameFolder:(id)sender;

@@ -48,7 +48,10 @@ NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
 NSString * MAPref_OpenLinksInVienna = @"OpenLinksInVienna";
 NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
 NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
+NSString * MAPref_MinimumFontSize = @"MinimumFontSize";
+NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
+const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
