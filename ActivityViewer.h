@@ -26,5 +26,6 @@
 	IBOutlet ExtendedTableView * activityTable;
 	IBOutlet NSSplitView * splitView;
 	IBOutlet NSTextView * activityDetail;
+	NSArray * allItems;
 }
 @end

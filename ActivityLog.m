@@ -91,6 +91,7 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	if (details == nil)
 		details = [[NSMutableArray alloc] init];
 	[details addObject:aString];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityDetailChange" object:self];
 }
 
 /* details
