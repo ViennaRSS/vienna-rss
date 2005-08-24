@@ -112,6 +112,8 @@
 		AA9F3086081B69EE00D6EA23 /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */; };
 		AA9F3098081B6A7400D6EA23 /* NewSubscription.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9F3096081B6A7400D6EA23 /* NewSubscription.h */; };
 		AA9F3099081B6A7400D6EA23 /* NewSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9F3097081B6A7400D6EA23 /* NewSubscription.m */; };
+		AA9FE2ED08BC133600A9E977 /* Preferences.h in Headers */ = {isa = PBXBuildFile; fileRef = AA9FE2EB08BC133600A9E977 /* Preferences.h */; };
+		AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
 		AAA1E2FD0852502700277128 /* NewGroupFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA1E2FB0852502700277128 /* NewGroupFolder.h */; };
 		AAA1E2FE0852502700277128 /* NewGroupFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA1E2FC0852502700277128 /* NewGroupFolder.m */; };
 		AAA1E32A0852539500277128 /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAA1E3280852539500277128 /* GroupFolder.nib */; };
@@ -348,6 +350,8 @@
 		AA9F3083081B689500D6EA23 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/RSSFeed.nib; sourceTree = "<group>"; };
 		AA9F3096081B6A7400D6EA23 /* NewSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSubscription.h; sourceTree = "<group>"; };
 		AA9F3097081B6A7400D6EA23 /* NewSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSubscription.m; sourceTree = "<group>"; };
+		AA9FE2EB08BC133600A9E977 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		AA9FE2EC08BC133600A9E977 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		AAA1E2FB0852502700277128 /* NewGroupFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGroupFolder.h; sourceTree = "<group>"; };
 		AAA1E2FC0852502700277128 /* NewGroupFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGroupFolder.m; sourceTree = "<group>"; };
 		AAA1E3290852539500277128 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GroupFolder.nib; sourceTree = "<group>"; };
@@ -514,6 +518,8 @@
 				AA26F4D60604927300FE7994 /* MessageListView.m */,
 				AA1678880657BCD80091365D /* MessageView.h */,
 				AA1678890657BCD80091365D /* MessageView.m */,
+				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
+				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
 				AA26F5DD0604969000FE7994 /* PreferenceController.h */,
 				AA26F5DE0604969000FE7994 /* PreferenceController.m */,
 				AAA1E2FB0852502700277128 /* NewGroupFolder.h */,
@@ -736,6 +742,7 @@
 				AA8AEE73088E158C0045B51F /* Refresh.h in Headers */,
 				AA8AF24B089092B50045B51F /* AboutController.h in Headers */,
 				AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */,
+				AA9FE2ED08BC133600A9E977 /* Preferences.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -933,6 +940,7 @@
 				AA8AEE74088E158C0045B51F /* Refresh.m in Sources */,
 				AA8AF24A089092B50045B51F /* AboutController.m in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
+				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
