@@ -97,7 +97,6 @@
 	int lastCountOfUnread;
 	BOOL growlAvailable;
 	NSString * appName;
-	NSString * selectedStyle;
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
 	NSString * persistedStatusText;
@@ -149,6 +148,8 @@
 -(void)handleFolderUpdate:(NSNotification *)nc;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)handleMinimumFontSizeChange:(NSNotification *)nc;
+-(void)handleStyleChange:(NSNotificationCenter *)nc;
+-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 
 // Message selection functions
 -(BOOL)scrollToMessage:(NSString *)guid;
@@ -164,10 +165,8 @@
 -(void)startProgressIndicator;
 -(void)stopProgressIndicator;
 -(void)loadMapFromPath:(NSString *)path intoMap:(NSMutableDictionary *)pathMappings foldersOnly:(BOOL)foldersOnly;
--(void)setActiveStyle:(NSString *)newStyleName refresh:(BOOL)refresh;
 -(void)setMainWindowTitle:(int)folderId;
 -(void)doEditFolder:(Folder *)folder;
--(void)setReadingPaneOnRight:(BOOL)onRightFlag;
 -(void)refreshFolder:(BOOL)reloadData;
 -(void)markAllReadInArray:(NSArray *)folderArray;
 -(BOOL)selectFolderAndMessage:(int)folderId guid:(NSString *)guid;

@@ -39,6 +39,7 @@
 #import "ViennaApp.h"
 #import "ActivityLog.h"
 #import "Constants.h"
+#import "Preferences.h"
 #import "WebKit/WebPreferences.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebPolicyDelegate.h"
@@ -57,52 +58,6 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 @implementation AppController
-
-/* initialize
- * Application initialization.
- */
-+(void)initialize
-{
-	// Set the preference defaults
-	NSMutableDictionary * defaultValues = [NSMutableDictionary dictionary];
-	NSNumber * cachedFolderID = [NSNumber numberWithInt:1];
-	NSData * msgListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
-	NSData * folderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
-	NSNumber * boolNo = [NSNumber numberWithBool:NO];
-	NSNumber * boolYes = [NSNumber numberWithBool:YES];
-
-	// Some default options vary if we're running on 10.3
-	NSDictionary * sysDict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
-	BOOL isPanther = [[sysDict valueForKey:@"ProductVersion"] hasPrefix:@"10.3"];
-
-	[defaultValues setObject:MA_DefaultDatabaseName forKey:MAPref_DefaultDatabase];
-	[defaultValues setObject:MA_FolderImagesFolder forKey:MAPref_FolderImagesFolder];
-	[defaultValues setObject:MA_StylesFolder forKey:MAPref_StylesFolder];
-	[defaultValues setObject:MA_ScriptsFolder forKey:MAPref_ScriptsFolder];
-	[defaultValues setObject:msgListFont forKey:MAPref_MessageListFont];
-	[defaultValues setObject:folderFont forKey:MAPref_FolderFont];
-	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatesOnStartup];
-	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewMessagesOnStartup];
-	[defaultValues setObject:cachedFolderID forKey:MAPref_CachedFolderID];
-	[defaultValues setObject:[NSNumber numberWithInt:-1] forKey:MAPref_SortDirection];
-	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
-	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
-	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
-	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_MessageColumns];
-	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
-	[defaultValues setObject:boolYes forKey:MAPref_ReadingPaneOnRight];
-	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
-	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
-	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
-	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
-	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
-	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
-
-	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
-}
 
 /* awakeFromNib
  * Do all the stuff that only makes sense after our NIB has been loaded and connected.
@@ -138,7 +93,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[NSApp setDelegate:self];
 
 	// Set the reading pane orientation
-	[self setOrientation:[NSApp readingPaneOnRight]];
+	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
 
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -150,6 +105,8 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
+	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
+	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 
 	// Init the progress counter and status bar.
 	progressCount = 0;
@@ -220,8 +177,8 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	// Select the default style
 	htmlTemplate = nil;
 	cssStylesheet = nil;
-	[self setActiveStyle:[defaults stringForKey:MAPref_ActiveStyleName] refresh:NO];
-	
+	[self handleStyleChange:nil];
+
 	// Select the first conference
 	int previousFolderId = [defaults integerForKey:MAPref_CachedFolderID];
 	[foldersTree selectFolder:previousFolderId];
@@ -252,7 +209,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(IBAction)readingPaneOnRight:(id)sender
 {
-	[self setReadingPaneOnRight:YES];
+	[[Preferences standardPreferences] setReadingPaneOnRight:YES];
 }
 
 /* readingPaneOnBottom
@@ -260,17 +217,15 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(IBAction)readingPaneOnBottom:(id)sender
 {
-	[self setReadingPaneOnRight:NO];
+	[[Preferences standardPreferences] setReadingPaneOnRight:NO];
 }
 
-/* setReadingPaneOnRight
- * Sets whether the reading pane appears on the right of the message list or
- * at the bottom of the message list.
+/* handleReadingPaneChange
+ * Respond to the change to the reading pane orientation.
  */
--(void)setReadingPaneOnRight:(BOOL)flag
+-(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
-	[NSApp internalSetReadingPaneOnRight:flag];
-	[self setOrientation:flag];
+	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
 	[self updateMessageListRowHeight];
 	[self updateVisibleColumns];
 	[messageList reloadData];
@@ -423,13 +378,14 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(void)openURLInBrowserWithURL:(NSURL *)url
 {
-	if ([NSApp openLinksInVienna])
+	Preferences * prefs = [Preferences standardPreferences];
+	if ([prefs openLinksInVienna])
 	{
 		// TODO: when our internal browser view is implemented, open the URL internally.
 	}
 
 	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = [NSApp openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
+	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
 	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
 					withAppBundleIdentifier:NULL
 									options:lOptions
@@ -1092,8 +1048,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
+	Preferences * prefs = [Preferences standardPreferences];
+
 	// Check for application updates silently
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:MAPref_CheckForUpdatesOnStartup])
+	if ([prefs checkForNewOnStartup])
 	{
 		if (!checkUpdates)
 			checkUpdates = [[CheckForUpdates alloc] init];
@@ -1101,7 +1059,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	}
 
 	// Kick off an initial refresh
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:MAPref_CheckForNewMessagesOnStartup])
+	if ([prefs refreshOnStartup])
 		[self refreshAllSubscriptions:self];
 }
 
@@ -1139,11 +1097,11 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 			}
 		}
 		if (![fileManager copyPath:filename toPath:fullPath handler:nil])
-			[self setActiveStyle:styleName refresh:YES];
+			[[Preferences standardPreferences] setDisplayStyle:styleName];
 		else
 		{
 			[self initStylesMenu];
-			[self setActiveStyle:styleName refresh:YES];
+			[[Preferences standardPreferences] setDisplayStyle:styleName];
 			[self runOKAlertPanel:@"New style title" text:@"New style body", styleName];
 		}
 		return YES;
@@ -1296,10 +1254,14 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(void)loadMinimumFontSize
 {
-	if (![NSApp enableMinimumFontSize])
+	Preferences * prefs = [Preferences standardPreferences];
+	if (![prefs enableMinimumFontSize])
 		[defaultWebPrefs setMinimumFontSize:1];
 	else
-		[defaultWebPrefs setMinimumFontSize:[NSApp minimumFontSize]];
+	{
+		int size = [prefs minimumFontSize];
+		[defaultWebPrefs setMinimumFontSize:size];
+	}
 }
 
 /* handleFolderUpdate
@@ -1347,7 +1309,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(void)handleCheckFrequencyChange:(NSNotification *)note
 {
-	int newFrequency = [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_CheckFrequency];
+	int newFrequency = [[Preferences standardPreferences] refreshFrequency];
 
 	[checkTimer invalidate];
 	[checkTimer release];
@@ -1541,15 +1503,15 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(IBAction)doSelectStyle:(id)sender
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
-	[self setActiveStyle:[menuItem title] refresh:YES];
+	[[Preferences standardPreferences] setDisplayStyle:[menuItem title]];
 }
 
-/* setActiveStyle
- * Sets the active style used for rendering messages.
+/* handleStyleChange
+ * Updates the article pane when the active display style has been changed.
  */
--(void)setActiveStyle:(NSString *)newStyleName refresh:(BOOL)refresh
+-(void)handleStyleChange:(NSNotificationCenter *)nc
 {
-	NSString * path = [stylePathMappings objectForKey:newStyleName];
+	NSString * path = [stylePathMappings objectForKey:[[Preferences standardPreferences] displayStyle]];
 	if (path != nil)
 	{
 		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
@@ -1566,14 +1528,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
 				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
 
-				// OK, now save the new style name and record it in the prefs.
-				[newStyleName retain];
-				[selectedStyle release];
-				selectedStyle = newStyleName;
-				[[NSUserDefaults standardUserDefaults] setValue:selectedStyle forKey:MAPref_ActiveStyleName];
-
-				// Refresh the UI if asked to do so.
-				if (refresh)
+				if (!isAppInitialising)
 					[self updateMessageText];
 			}
 			[handle closeFile];
@@ -1770,8 +1725,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[markReadTimer invalidate];
 		[markReadTimer release];
 		markReadTimer = nil;
-		if ([NSApp markReadInterval] > 0 && markReadFlag)
-			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)[NSApp markReadInterval]
+		
+		int interval = [[Preferences standardPreferences] markReadInterval];
+		if (interval > 0 && markReadFlag)
+			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
 															  target:self
 															selector:@selector(markCurrentRead:)
 															userInfo:nil
@@ -3061,7 +3018,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	else if (theAction == @selector(doSelectStyle:))
 	{
 		NSString * styleName = [menuItem title];
-		[menuItem setState:[styleName isEqualToString:selectedStyle] ? NSOnState : NSOffState];
+		[menuItem setState:[styleName isEqualToString:[[Preferences standardPreferences] displayStyle]] ? NSOnState : NSOffState];
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(doSortColumn:))
@@ -3157,12 +3114,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 	else if (theAction == @selector(readingPaneOnRight:))
 	{
-		[menuItem setState:([NSApp readingPaneOnRight] ? NSOnState : NSOffState)];
+		[menuItem setState:([[Preferences standardPreferences] readingPaneOnRight] ? NSOnState : NSOffState)];
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(readingPaneOnBottom:))
 	{
-		[menuItem setState:([NSApp readingPaneOnRight] ? NSOffState : NSOnState)];
+		[menuItem setState:([[Preferences standardPreferences] readingPaneOnRight] ? NSOffState : NSOnState)];
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))

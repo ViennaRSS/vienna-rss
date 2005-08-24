@@ -439,13 +439,15 @@ typedef enum {
 /* pumpBloglinesListRefresh
  * Initiate a connection to refresh our folders list with a list of subscriptions
  * in the user's bloglines account.
+ *
+ * TODO stevepa: Implement this.
  */
 -(void)pumpBloglinesListRefresh
 {
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
 	if ([conn beginLoadDataFromURL:[NSURL URLWithString:@"http://rpc.bloglines.com/listsubs"]
-							 username:[NSApp bloglinesEmailAddress]
-							 password:[NSApp bloglinesPassword]
+							 username:nil
+							 password:nil
 							 delegate:self
 						  contextData:nil
 								  log:nil

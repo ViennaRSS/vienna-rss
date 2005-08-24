@@ -20,9 +20,9 @@
 
 #import "PreferenceController.h"
 #import "PopUpButtonExtensions.h"
-#import "ViennaApp.h"
 #import "AppController.h"
 #import "Constants.h"
+#import "Preferences.h"
 
 // List of available font sizes. I picked the ones that matched
 // Mail but you easily could add or remove from the list as needed.
@@ -36,7 +36,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 // Private functions
 @interface PreferenceController (Private)
-	-(void)selectUserDefaultFont:(NSString *)preferenceName control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
+	-(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 	-(void)setDefaultLinksHandler:(NSURL *)pathToNewHandler;
 	-(void)controlTextDidEndEditing:(NSNotification *)notification;
 	-(void)updateBloglinesUIState;
@@ -67,7 +67,11 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 	// Set up to be notified if preferences change outside this window
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferencesUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_FolderFontChange" object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_MessageListFontChange" object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 }
 
 /* handleReloadPreferences
@@ -83,34 +87,36 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(void)initializePreferences
 {
+	Preferences * prefs = [Preferences standardPreferences];
+
 	// Populate the drop downs with the font names and sizes
-	[self selectUserDefaultFont:MAPref_MessageListFont control:messageListFont sizeControl:messageListFontSize];
-	[self selectUserDefaultFont:MAPref_FolderFont control:folderFont sizeControl:folderFontSize];
-	
+	[self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:messageListFont sizeControl:messageListFontSize];
+	[self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFont sizeControl:folderFontSize];
+
 	// Set the check frequency
-	[checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:[NSApp refreshFrequency]]];
+	[checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:[prefs refreshFrequency]]];
 
 	// Set check for updates when starting
-	[checkForUpdates setState:[NSApp checkForNewOnStartup] ? NSOnState : NSOffState];
+	[checkForUpdates setState:[prefs checkForNewOnStartup] ? NSOnState : NSOffState];
 
 	// Set check for new messages when starting
-	[checkOnStartUp setState:[NSApp refreshOnStartup] ? NSOnState : NSOffState];
+	[checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
 	
 	// Set minimum font size option
-	[enableMinimumFontSize setState:[NSApp enableMinimumFontSize] ? NSOnState : NSOffState];
-	[minimumFontSizes setEnabled:[NSApp enableMinimumFontSize]];
+	[enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
+	[minimumFontSizes setEnabled:[prefs enableMinimumFontSize]];
 
 	unsigned int i;
 	for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
 		[minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];
-	[minimumFontSizes setFloatValue:[NSApp minimumFontSize]];
+	[minimumFontSizes setFloatValue:[prefs minimumFontSize]];
 
 	// Set whether links are opened in the background
-	[openLinksInBackground setState:[NSApp openLinksInBackground] ? NSOnState : NSOffState];
+	[openLinksInBackground setState:[prefs openLinksInBackground] ? NSOnState : NSOffState];
 	
 	// Set mark read behaviour
-	[markReadAfterNext setState:[NSApp markReadInterval] == 0 ? NSOnState : NSOffState];
-	[markReadAfterDelay setState:[NSApp markReadInterval] != 0 ? NSOnState : NSOffState];
+	[markReadAfterNext setState:[prefs markReadInterval] == 0 ? NSOnState : NSOffState];
+	[markReadAfterDelay setState:[prefs markReadInterval] != 0 ? NSOnState : NSOffState];
 
 	[self refreshLinkHandler];
 }
@@ -204,7 +210,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)changeOpenLinksInBackground:(id)sender
 {
-	[NSApp internalSetOpenLinksInBackground:[sender state] == NSOnState];
+	[[Preferences standardPreferences] setOpenLinksInBackground:[sender state] == NSOnState];
 }
 
 /* changeCheckForUpdates
@@ -212,7 +218,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)changeCheckForUpdates:(id)sender
 {
-	[NSApp internalChangeCheckOnStartup:[sender state] == NSOnState];
+	[[Preferences standardPreferences] setCheckForNewOnStartup:[sender state] == NSOnState];
 }
 
 /* changeCheckOnStartUp
@@ -220,7 +226,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)changeCheckOnStartUp:(id)sender
 {
-	[NSApp internalChangeRefreshOnStartup:[sender state] == NSOnState];
+	[[Preferences standardPreferences] setRefreshOnStartup:[sender state] == NSOnState];
 }
 
 /* changeMinimumFontSize
@@ -229,7 +235,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeMinimumFontSize:(id)sender
 {
 	BOOL useMinimumFontSize = [sender state] == NSOnState;
-	[NSApp internalChangeMinimumFontSize:useMinimumFontSize];
+	[[Preferences standardPreferences] setEnableMinimumFontSize:useMinimumFontSize];
 	[minimumFontSizes setEnabled:useMinimumFontSize];
 }
 
@@ -239,7 +245,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)selectMinimumFontSize:(id)sender
 {
 	float newMinimumFontSize = [minimumFontSizes floatValue];
-	[NSApp internalSetMinimumFontSize:newMinimumFontSize];
+	[[Preferences standardPreferences] setMinimumFontSize:newMinimumFontSize];
 }
 
 /* selectDefaultLinksHandler
@@ -330,22 +336,21 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 }
 
 /* selectUserDefaultFont
+ * Initialise the specified font name and size drop down.
  */
--(void)selectUserDefaultFont:(NSString *)preferenceName control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl
+-(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl
 {
 	NSFontManager * fontManager = [NSFontManager sharedFontManager];
 	NSArray * availableFonts = [[fontManager availableFonts] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:preferenceName];
-	NSFont * font = [NSUnarchiver unarchiveObjectWithData:fontData];
 
 	[control removeAllItems];
 	[control addItemsWithTitles:availableFonts];
-	[control selectItemWithTitle:[font fontName]];
+	[control selectItemWithTitle:name];
 
 	unsigned int i;
 	for (i = 0; i < countOfAvailableFontSizes; ++i)
 		[sizeControl addItemWithObjectValue:[NSNumber numberWithInt:availableFontSizes[i]]];
-	[sizeControl setFloatValue:[font pointSize]];
+	[sizeControl setFloatValue:size];
 }
 
 /* changeFont
@@ -353,24 +358,22 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)changeFont:(id)sender
 {
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	if (sender == messageListFont || sender == messageListFontSize)
+	Preferences * prefs = [Preferences standardPreferences];
+	if (sender == messageListFont)
 	{
-		NSString * newFontName = [messageListFont titleOfSelectedItem];
-		float newFontSize = [messageListFontSize floatValue];
-
-		NSFont * msgListFont = [NSFont fontWithName:newFontName size:newFontSize];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:msgListFont] forKey:MAPref_MessageListFont];
-		[nc postNotificationName:@"MA_Notify_MessageListFontChange" object:msgListFont];
+		[prefs setArticleListFont:[messageListFont titleOfSelectedItem]];
 	}
-	else if (sender == folderFont || sender == folderFontSize)
+	else if (sender == messageListFontSize)
 	{
-		NSString * newFontName = [folderFont titleOfSelectedItem];
-		float newFontSize = [folderFontSize floatValue];
-		
-		NSFont * fldrFont = [NSFont fontWithName:newFontName size:newFontSize];
-		[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:fldrFont] forKey:MAPref_FolderFont];
-		[nc postNotificationName:@"MA_Notify_FolderFontChange" object:fldrFont];
+		[prefs setArticleListFontSize:[messageListFontSize floatValue]];
+	}
+	else if (sender == folderFont)
+	{
+		[prefs setFolderListFont:[folderFont titleOfSelectedItem]];
+	}
+	else if (sender == folderFontSize)
+	{
+		[prefs setFolderListFontSize:[folderFontSize floatValue]];
 	}
 }
 
@@ -380,7 +383,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeMarkReadBehaviour:(id)sender
 {
 	float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
-	[NSApp internalSetMarkReadInterval:newReadInterval];
+	[[Preferences standardPreferences] setMarkReadInterval:newReadInterval];
 }
 
 /* changeCheckFrequency
@@ -390,7 +393,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeCheckFrequency:(id)sender
 {
 	int newFrequency = [[checkFrequency selectedItem] tag];
-	[NSApp internalSetRefreshFrequency:newFrequency];
+	[[Preferences standardPreferences] setRefreshFrequency:newFrequency];
 }
 
 /* dealloc

@@ -18,4 +18,3 @@ Thanks!
 - Bloglines support.
 - Mark articles read after leaving group.
 - Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
-- Search field needs to search article titles too.

@@ -21,18 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "Folder.h"
 
-@interface ViennaApp : NSApplication {
-	NSString * bloglinesEmailAddress;
-	NSString * bloglinesPassword;
-	float markReadInterval;
-	int minimumFontSize;
-	BOOL enableMinimumFontSize;
-	BOOL isBloglinesEnabled;
-	BOOL readingPaneOnRight;
-	BOOL openLinksInVienna;
-	BOOL openLinksInBackground;
-	BOOL hasPrefs;
-}
+@interface ViennaApp : NSApplication
 
 // Refresh commands
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd;
@@ -48,83 +37,45 @@
 // New subscription
 -(id)handleNewSubscription:(NSScriptCommand *)cmd;
 
-// Minimum font size settings
--(int)minimumFontSize;
--(BOOL)enableMinimumFontSize;
--(void)setMinimumFontSize:(int)newSize;
--(void)changeMinimumFontSize:(BOOL)flag;
--(void)internalChangeMinimumFontSize:(BOOL)flag;
--(void)internalSetMinimumFontSize:(int)newSize;
-
 // General read-only properties.
 -(NSString *)applicationVersion;
 -(NSArray *)folders;
 -(BOOL)isRefreshing;
 -(int)unreadCount;
 
-// Mark read scheme
--(float)markReadInterval;
--(void)setMarkReadInterval:(float)newInterval;
--(void)internalSetMarkReadInterval:(float)newInterval;
-
-// Opening URL links in Vienna
--(BOOL)openLinksInVienna;
--(void)setOpenLinksInVienna:(float)flag;
--(void)internalSetOpenLinksInVienna:(BOOL)flag;
-
-// Opening URL links in background
--(BOOL)openLinksInBackground;
--(void)setOpenLinksInBackground:(float)flag;
--(void)internalSetOpenLinksInBackground:(BOOL)flag;
-
-// Bloglines support
--(BOOL)enableBloglinesSupport;
--(NSString *)bloglinesEmailAddress;
--(NSString *)bloglinesPassword;
--(void)setEnableBloglinesSupport:(BOOL)flag;
--(void)setBloglinesEmailAddress:(NSString *)newEmailAddress;
--(void)setBloglinesPassword:(NSString *)newPassword;
--(void)internalSetEnableBloglinesSupport:(BOOL)flag;
--(void)internalSetBloglinesEmailAddress:(NSString *)newEmailAddress;
--(void)internalSetBloglinesPassword:(NSString *)newPassword;
-
 // Change folder selection
 -(Folder *)currentFolder;
 -(void)setCurrentFolder:(Folder *)newCurrentFolder;
 
-// Change position of reading pane
+// Preference getters
+-(float)markReadInterval;
 -(BOOL)readingPaneOnRight;
--(void)setReadingPaneOnRight:(BOOL)flag;
--(void)internalSetReadingPaneOnRight:(BOOL)flag;
-
-// Check for new versions of Vienna on startup
--(BOOL)checkForNewOnStartup;
--(void)setCheckForNewOnStartup:(BOOL)flag;
--(void)internalChangeCheckOnStartup:(BOOL)flag;
-
-// Refresh all subscriptions on startup
 -(BOOL)refreshOnStartup;
--(void)setRefreshOnStartup:(BOOL)flag;
--(void)internalChangeRefreshOnStartup:(BOOL)flag;
-
-// Current display style
--(NSString *)displayStyle;
--(void)setDisplayStyle:(NSString *)newStyle;
-
-// Modify the refresh frequency
+-(BOOL)checkForNewOnStartup;
+-(BOOL)openLinksInVienna;
+-(BOOL)openLinksInBackground;
+-(int)minimumFontSize;
+-(BOOL)enableMinimumFontSize;
 -(int)refreshFrequency;
--(void)setRefreshFrequency:(int)newFrequency;
--(void)internalSetRefreshFrequency:(int)newFrequency;
-
-// Folder list font
+-(NSString *)displayStyle;
 -(NSString *)folderListFont;
 -(int)folderListFontSize;
--(void)setFolderListFont:(NSString *)newFontName;
--(void)setFolderListFontSize:(int)newFontSize;
-
-// Article list font
 -(NSString *)articleListFont;
 -(int)articleListFontSize;
+
+// Preference setters
+-(void)setMarkReadInterval:(float)newInterval;
+-(void)setReadingPaneOnRight:(BOOL)flag;
+-(void)setRefreshOnStartup:(BOOL)flag;
+-(void)setCheckForNewOnStartup:(BOOL)flag;
+-(void)setOpenLinksInVienna:(float)flag;
+-(void)setOpenLinksInBackground:(float)flag;
+-(void)setMinimumFontSize:(int)newSize;
+-(void)setEnableMinimumFontSize:(BOOL)flag;
+-(void)setRefreshFrequency:(int)newFrequency;
+-(void)setDisplayStyle:(NSString *)newStyle;
+-(void)setFolderListFont:(NSString *)newFontName;
+-(void)setFolderListFontSize:(int)newFontSize;
 -(void)setArticleListFont:(NSString *)newFontName;
 -(void)setArticleListFontSize:(int)newFontSize;
 @end
