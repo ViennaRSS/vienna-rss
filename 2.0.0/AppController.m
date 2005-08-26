@@ -753,9 +753,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(void)setTableViewFont
 {
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_MessageListFont];
 	[messageListFont release];
-	messageListFont = [NSUnarchiver unarchiveObjectWithData:fontData];
+
+	Preferences * prefs = [Preferences standardPreferences];
+	messageListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
 
 	[topLineDict setObject:messageListFont forKey:NSFontAttributeName];
 	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
@@ -1726,7 +1727,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[markReadTimer release];
 		markReadTimer = nil;
 		
-		int interval = [[Preferences standardPreferences] markReadInterval];
+		float interval = [[Preferences standardPreferences] markReadInterval];
 		if (interval > 0 && markReadFlag)
 			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
 															  target:self
