@@ -22,6 +22,7 @@
 #import "ImageAndTextCell.h"
 #import "AppController.h"
 #import "Constants.h"
+#import "Preferences.h"
 #import "StringExtensions.h"
 #import "ViennaApp.h"
 
@@ -133,8 +134,8 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	[cellFont release];
 	[boldCellFont release];
 
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_FolderFont];
-	cellFont = [NSUnarchiver unarchiveObjectWithData:fontData];
+	Preferences * prefs = [Preferences standardPreferences];
+	cellFont = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
 	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
 	
 	height = [boldCellFont defaultLineHeightForFont];
