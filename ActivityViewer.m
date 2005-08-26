@@ -30,7 +30,11 @@
  */
 -(id)init
 {
-	return [super initWithWindowNibName:@"ActivityViewer"];
+	if ((self = [super initWithWindowNibName:@"ActivityViewer"]) != nil)
+	{
+		allItems = [[[ActivityLog defaultLog] allItems] retain];
+	}
+	return self;
 }
 
 /* windowDidLoad
@@ -47,9 +51,6 @@
 	NSFont * detailsFont = [NSFont fontWithName:@"Monaco" size:11.0];
 	[activityDetail setFont:detailsFont];
 	[detailsFont release];
-
-	// Cache the default log items.
-	allItems = [[[ActivityLog defaultLog] allItems] retain];
 
 	// Handle double-click on an item
 	[activityTable setDoubleAction:@selector(handleDoubleClick:)];
