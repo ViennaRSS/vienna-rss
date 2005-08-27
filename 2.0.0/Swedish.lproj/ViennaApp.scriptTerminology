@@ -137,14 +137,14 @@
 					<key>Name</key>
 					<string>refreshing</string>
 				</dict>
-				<key>messageListFont</key>
+				<key>articleListFont</key>
 				<dict>
 					<key>Description</key>
 					<string>The font used in the article list pane</string>
 					<key>Name</key>
 					<string>article list font</string>
 				</dict>
-				<key>messageListFontSize</key>
+				<key>articleListFontSize</key>
 				<dict>
 					<key>Description</key>
 					<string>The size of the font used in the article list pane</string>
