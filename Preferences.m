@@ -56,8 +56,21 @@ static Preferences * _standardPreferences = nil;
 		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		displayStyle = [[defaults stringForKey:MAPref_ActiveStyleName] retain];
+		folderFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_FolderFont]] retain];
+		articleFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_ArticleListFont]] retain]; 
 	}
 	return self;
+}
+
+/* dealloc
+ * Clean up behind ourselves.
+ */
+-(void)dealloc
+{
+	[folderFont release];
+	[articleFont release];
+	[displayStyle release];
+	[super dealloc];
 }
 
 /* initialize
@@ -81,7 +94,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:MA_FolderImagesFolder forKey:MAPref_FolderImagesFolder];
 	[defaultValues setObject:MA_StylesFolder forKey:MAPref_StylesFolder];
 	[defaultValues setObject:MA_ScriptsFolder forKey:MAPref_ScriptsFolder];
-	[defaultValues setObject:msgListFont forKey:MAPref_MessageListFont];
+	[defaultValues setObject:msgListFont forKey:MAPref_ArticleListFont];
 	[defaultValues setObject:folderFont forKey:MAPref_FolderFont];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatesOnStartup];
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewMessagesOnStartup];
@@ -329,9 +342,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(NSString *)folderListFont
 {
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_FolderFont];
-	NSFont * font = [NSUnarchiver unarchiveObjectWithData:fontData];
-	return [font fontName];
+	return [folderFont fontName];
 }
 
 /* folderListFontSize
@@ -339,9 +350,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(int)folderListFontSize
 {
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_FolderFont];
-	NSFont * font = [NSUnarchiver unarchiveObjectWithData:fontData];
-	return [font pointSize];
+	return [folderFont pointSize];
 }
 
 /* setFolderListFont
@@ -349,9 +358,10 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setFolderListFont:(NSString *)newFontName
 {
-	NSFont * fldrFont = [NSFont fontWithName:newFontName size:[self folderListFontSize]];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:fldrFont] forKey:MAPref_FolderFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:fldrFont];
+	[folderFont release];
+	folderFont = [NSFont fontWithName:newFontName size:[self folderListFontSize]];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
 /* setFolderListFontSize
@@ -359,9 +369,10 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setFolderListFontSize:(int)newFontSize
 {
-	NSFont * fldrFont = [NSFont fontWithName:[self folderListFont] size:newFontSize];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:fldrFont] forKey:MAPref_FolderFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:fldrFont];
+	[folderFont release];
+	folderFont = [NSFont fontWithName:[self folderListFont] size:newFontSize];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
 /* articleListFont
@@ -369,9 +380,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(NSString *)articleListFont
 {
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_MessageListFont];
-	NSFont * font = [NSUnarchiver unarchiveObjectWithData:fontData];
-	return [font fontName];
+	return [articleFont fontName];
 }
 
 /* articleListFontSize
@@ -379,9 +388,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(int)articleListFontSize
 {
-	NSData * fontData = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_MessageListFont];
-	NSFont * font = [NSUnarchiver unarchiveObjectWithData:fontData];
-	return [font pointSize];
+	return [articleFont pointSize];
 }
 
 /* setArticleListFont
@@ -389,9 +396,10 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setArticleListFont:(NSString *)newFontName
 {
-	NSFont * fldrFont = [NSFont fontWithName:newFontName size:[self articleListFontSize]];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:fldrFont] forKey:MAPref_MessageListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MessageListFontChange" object:fldrFont];
+	[articleFont release];
+	articleFont = [NSFont fontWithName:newFontName size:[self articleListFontSize]];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
 
 /* setArticleListFontSize
@@ -399,8 +407,9 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setArticleListFontSize:(int)newFontSize
 {
-	NSFont * fldrFont = [NSFont fontWithName:[self articleListFont] size:newFontSize];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:fldrFont] forKey:MAPref_MessageListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MessageListFontChange" object:fldrFont];
+	[articleFont release];
+	articleFont = [NSFont fontWithName:[self articleListFont] size:newFontSize];
+	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
 @end

@@ -24,7 +24,7 @@ NSString * MA_StylesFolder = @"~/Library/Application Support/Vienna/Styles";
 NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
 NSString * MA_DefaultStyleName = @"Default";
 
-NSString * MAPref_MessageListFont = @"MessageListFont";
+NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_FolderFont = @"FolderFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";

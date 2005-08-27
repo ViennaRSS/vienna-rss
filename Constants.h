@@ -24,7 +24,7 @@ extern NSString * MA_StylesFolder;
 extern NSString * MA_ScriptsFolder;
 extern NSString * MA_DefaultStyleName;
 
-extern NSString * MAPref_MessageListFont;
+extern NSString * MAPref_ArticleListFont;
 extern NSString * MAPref_FolderFont;
 extern NSString * MAPref_CachedFolderID;
 extern NSString * MAPref_DefaultDatabase;

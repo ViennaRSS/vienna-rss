@@ -98,7 +98,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleFolderSelection:) name:@"MA_Notify_FolderSelectionChange" object:nil];
-	[nc addObserver:self selector:@selector(handleMessageListFontChange:) name:@"MA_Notify_MessageListFontChange" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
@@ -1296,10 +1296,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	}
 }
 
-/* handleMessageListFontChange
+/* handleArticleListFontChange
  * Called when the user changes the message list font and/or size in the Preferences
  */
--(void)handleMessageListFontChange:(NSNotification *)note
+-(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
 	[messageList reloadData];
@@ -2131,7 +2131,13 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)selectFirstUnreadInFolder
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
-		[self makeRowSelectedAndVisible:(sortDirection < 0) ? 0 : [currentArrayOfMessages count] - 1];
+	{
+		int count = [currentArrayOfMessages count];
+		if (count == 0)
+			[mainWindow makeFirstResponder:[foldersTree mainView]];
+		else
+			[self makeRowSelectedAndVisible:(sortDirection < 0) ? 0 : count - 1];
+	}
 }
 
 /* selectFolderAndMessage
