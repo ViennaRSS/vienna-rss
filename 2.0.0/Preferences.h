@@ -32,6 +32,8 @@
 	BOOL openLinksInBackground;
 	BOOL hasPrefs;
 	NSString * displayStyle;
+	NSFont * folderFont;
+	NSFont * articleFont;
 }
 
 // Accessor functions
