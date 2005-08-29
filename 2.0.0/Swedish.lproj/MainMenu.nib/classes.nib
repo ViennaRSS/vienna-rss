@@ -17,10 +17,12 @@
                 exportSubscriptions = id; 
                 forwardTrackMessage = id; 
                 handleAbout = id; 
+                handleCopy = id; 
                 importSubscriptions = id; 
                 markAllRead = id; 
                 markFlagged = id; 
                 markRead = id; 
+                myAction = id; 
                 newGroupFolder = id; 
                 newSmartFolder = id; 
                 newSubscription = id; 
@@ -31,6 +33,8 @@
                 refreshSelectedSubscriptions = id; 
                 renameFolder = id; 
                 searchUsingToolbarTextField = id; 
+                setCondensedLayout = id; 
+                setTableLayout = id; 
                 showAcknowledgements = id; 
                 showMainWindow = id; 
                 showPreferencePanel = id; 
@@ -38,6 +42,7 @@
                 startConnect = id; 
                 syncSubscriptionsFromBloglines = id; 
                 toggleActivityViewer = id; 
+                validateFeed = id; 
                 viewArticlePage = id; 
                 viewNextUnread = id; 
                 viewSourceHomePage = id; 
@@ -45,27 +50,36 @@
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                browserView = BrowserView; 
                 compactDatabaseWindow = NSWindow; 
                 exportAll = NSButtonCell; 
                 exportSaveAccessory = NSView; 
                 exportSelected = NSButtonCell; 
-                folderHeader = TexturedHeader; 
                 folderMenu = NSMenu; 
                 foldersTree = FoldersTree; 
+                mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 
-                messageList = MessageListView; 
-                messageListHeader = TexturedHeader; 
                 outlineView = FolderView; 
                 renameField = NSTextField; 
                 renameWindow = NSWindow; 
                 searchField = NSSearchField; 
                 spinner = NSProgressIndicator; 
                 splitView1 = NSSplitView; 
-                splitView2 = NSSplitView; 
                 statusText = NSTextField; 
-                textView = WebView; 
             }; 
             SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = ArticleListView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                foldersTree = FoldersTree; 
+                messageList = MessageListView; 
+                messageListHeader = TexturedHeader; 
+                splitView2 = NSSplitView; 
+                textView = ArticleView; 
+            }; 
+            SUPERCLASS = NSView; 
         }, 
         {
             CLASS = ArticleView; 
@@ -73,6 +87,7 @@
             OUTLETS = {theDelegate = id; }; 
             SUPERCLASS = WebView; 
         }, 
+        {CLASS = BrowserView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
             CLASS = CheckForUpdates; 
             LANGUAGE = ObjC; 
@@ -105,6 +120,7 @@
             CLASS = FoldersTree; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                folderHeader = TexturedHeader; 
                 folderMenu = NSMenu; 
                 newSubButton = NSButton; 
                 outlineView = FolderView; 
