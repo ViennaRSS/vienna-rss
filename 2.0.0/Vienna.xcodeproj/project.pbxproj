@@ -14,8 +14,6 @@
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0FB5E00869110300D9CB90 /* ActivityLog.h */; };
 		AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0FB5E10869110300D9CB90 /* ActivityLog.m */; };
-		AA16788A0657BCD80091365D /* MessageView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA1678880657BCD80091365D /* MessageView.h */; };
-		AA16788B0657BCD80091365D /* MessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1678890657BCD80091365D /* MessageView.m */; };
 		AA167A40065834F60091365D /* ViennaApp.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = AA167A3F065834F60091365D /* ViennaApp.scriptTerminology */; };
 		AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
 		AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA20DC9D0882CCC300A226F5 /* unread.tiff */; };
@@ -70,6 +68,8 @@
 		AA328A9B0848404200A7AD5A /* Import.h in Headers */ = {isa = PBXBuildFile; fileRef = AA328A990848404200A7AD5A /* Import.h */; };
 		AA328A9C0848404200A7AD5A /* Import.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328A9A0848404200A7AD5A /* Import.m */; };
 		AA34582D084BE802003D992E /* vienna2.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA34582C084BE802003D992E /* vienna2.icns */; };
+		AA34B5A308C0DD3F003AEE18 /* ArticleListView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */; };
+		AA34B5A408C0DD3F003AEE18 /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		AA36CD7B06100692001E33A4 /* Field.h in Headers */ = {isa = PBXBuildFile; fileRef = AA36CD7906100692001E33A4 /* Field.h */; };
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
 		AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
@@ -82,6 +82,8 @@
 		AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */; };
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
 		AA56328406168A9A00B317EB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA56328306168A9A00B317EB /* Security.framework */; };
+		AA60238008C298FB002CFD06 /* HelperFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA60237E08C298FB002CFD06 /* HelperFunctions.h */; };
+		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		AA62D7FC0859ABEC0040C370 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		AA6321170885EA81006382D3 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6321160885EA81006382D3 /* Constants.h */; };
@@ -150,6 +152,8 @@
 		AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7A8FF086BB5C4009A487E /* PopupButton.h */; };
 		AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7A900086BB5C4009A487E /* PopupButton.m */; };
 		AAE7A960086BBA1F009A487E /* refresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE7A95F086BBA1F009A487E /* refresh.tiff */; };
+		AAF2797F08C00E20000090A1 /* BrowserView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF2797D08C00E20000090A1 /* BrowserView.h */; };
+		AAF2798008C00E20000090A1 /* BrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF2797E08C00E20000090A1 /* BrowserView.m */; };
 		AAF3B14206095E7B0025CC7F /* StringExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAF3B14006095E7B0025CC7F /* StringExtensions.h */; };
 		AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */; };
@@ -255,8 +259,6 @@
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLog.h; sourceTree = "<group>"; };
 		AA0FB5E10869110300D9CB90 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLog.m; sourceTree = "<group>"; };
-		AA1678880657BCD80091365D /* MessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageView.h; sourceTree = "<group>"; };
-		AA1678890657BCD80091365D /* MessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageView.m; sourceTree = "<group>"; };
 		AA167A24065834DC0091365D /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; name = English; path = English.lproj/ViennaApp.scriptTerminology; sourceTree = "<group>"; };
 		AA167A840658361B0091365D /* ViennaApp.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptSuite; sourceTree = "<group>"; };
 		AA20DC9D0882CCC300A226F5 /* unread.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unread.tiff; sourceTree = "<group>"; };
@@ -311,6 +313,8 @@
 		AA328A990848404200A7AD5A /* Import.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Import.h; sourceTree = "<group>"; };
 		AA328A9A0848404200A7AD5A /* Import.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Import.m; sourceTree = "<group>"; };
 		AA34582C084BE802003D992E /* vienna2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2.icns; sourceTree = "<group>"; };
+		AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListView.h; sourceTree = "<group>"; };
+		AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListView.m; sourceTree = "<group>"; };
 		AA36CD7906100692001E33A4 /* Field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Field.h; sourceTree = "<group>"; };
 		AA36CD7A06100692001E33A4 /* Field.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Field.m; sourceTree = "<group>"; };
 		AA3BDC9F063249FE004621CD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SearchFolder.nib; sourceTree = "<group>"; };
@@ -322,6 +326,20 @@
 		AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FeedCredentials.h; sourceTree = "<group>"; };
 		AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FeedCredentials.m; sourceTree = "<group>"; };
 		AA56328306168A9A00B317EB /* Security.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Security.framework; path = /Developer/SDKs/MacOSX10.2.7.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		AA6022A208C244D5002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		AA6022A708C24537002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA6022AC08C2469F002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = French; path = French.lproj/Acknowledgements.rtf; sourceTree = "<group>"; };
+		AA6022AF08C246D4002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
+		AA6022B208C246DE002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AA6022B508C246E8002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AA6022B808C246F0002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/Preferences.nib; sourceTree = "<group>"; };
+		AA6022BB08C246F8002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AA6022BE08C246FF002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AA6022C108C2471C002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
+		AA6022C608C24732002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA6022D408C247CA002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = French; path = French.lproj/ViennaApp.scriptTerminology; sourceTree = "<group>"; };
+		AA60237E08C298FB002CFD06 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunctions.h; sourceTree = "<group>"; };
+		AA60237F08C298FB002CFD06 /* HelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelperFunctions.m; sourceTree = "<group>"; };
 		AA62D7DB0859A9F70040C370 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		AA6321160885EA81006382D3 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		AA6321500885F0BB006382D3 /* comments.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = comments.tiff; sourceTree = "<group>"; };
@@ -402,6 +420,8 @@
 		AAE7A8FF086BB5C4009A487E /* PopupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupButton.h; sourceTree = "<group>"; };
 		AAE7A900086BB5C4009A487E /* PopupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupButton.m; sourceTree = "<group>"; };
 		AAE7A95F086BBA1F009A487E /* refresh.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = refresh.tiff; sourceTree = "<group>"; };
+		AAF2797D08C00E20000090A1 /* BrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserView.h; sourceTree = "<group>"; };
+		AAF2797E08C00E20000090A1 /* BrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserView.m; sourceTree = "<group>"; };
 		AAF3B14006095E7B0025CC7F /* StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringExtensions.h; sourceTree = "<group>"; };
 		AAF3B14106095E7B0025CC7F /* StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringExtensions.m; sourceTree = "<group>"; };
 		AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = StandardURLs.plist; sourceTree = "<group>"; };
@@ -494,10 +514,14 @@
 				AABFDCA00609EA8100100A9B /* ActivityViewer.m */,
 				AACFDEBA0604D4D20072D140 /* AppController.h */,
 				AACFDEBB0604D4D20072D140 /* AppController.m */,
+				AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */,
+				AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */,
 				AA74A85D087B56810029797C /* ArticleView.h */,
 				AA74A85E087B56810029797C /* ArticleView.m */,
 				AAA817F5087F986700C30683 /* AsyncConnection.h */,
 				AAA817F6087F986700C30683 /* AsyncConnection.m */,
+				AAF2797D08C00E20000090A1 /* BrowserView.h */,
+				AAF2797E08C00E20000090A1 /* BrowserView.m */,
 				AAD264B60611E108005A27E4 /* CheckForUpdates.h */,
 				AAD264B70611E108005A27E4 /* CheckForUpdates.m */,
 				AA6321160885EA81006382D3 /* Constants.h */,
@@ -516,8 +540,6 @@
 				AA328A9A0848404200A7AD5A /* Import.m */,
 				AA26F4CF0604927300FE7994 /* MessageListView.h */,
 				AA26F4D60604927300FE7994 /* MessageListView.m */,
-				AA1678880657BCD80091365D /* MessageView.h */,
-				AA1678890657BCD80091365D /* MessageView.m */,
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
 				AA26F5DD0604969000FE7994 /* PreferenceController.h */,
@@ -673,6 +695,8 @@
 				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
 				AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */,
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
+				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
+				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
@@ -717,7 +741,6 @@
 				AAFA8CA9062A0BE200C530A6 /* CalendarExtensions.h in Headers */,
 				AAA3AF0906338A00006735EB /* SearchFolder.h in Headers */,
 				AA8C72F50641DE1F00649BA2 /* Criteria.h in Headers */,
-				AA16788A0657BCD80091365D /* MessageView.h in Headers */,
 				AAA305FE0682A25200E4A6DC /* TableViewExtensions.h in Headers */,
 				AA682CF7069A955F00228193 /* ViennaApp.h in Headers */,
 				AA9F3098081B6A7400D6EA23 /* NewSubscription.h in Headers */,
@@ -743,6 +766,9 @@
 				AA8AF24B089092B50045B51F /* AboutController.h in Headers */,
 				AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */,
 				AA9FE2ED08BC133600A9E977 /* Preferences.h in Headers */,
+				AAF2797F08C00E20000090A1 /* BrowserView.h in Headers */,
+				AA34B5A308C0DD3F003AEE18 /* ArticleListView.h in Headers */,
+				AA60238008C298FB002CFD06 /* HelperFunctions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,7 +942,6 @@
 				AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */,
 				AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
-				AA16788B0657BCD80091365D /* MessageView.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AA682CF8069A955F00228193 /* ViennaApp.m in Sources */,
 				AA9F3099081B6A7400D6EA23 /* NewSubscription.m in Sources */,
@@ -941,6 +966,9 @@
 				AA8AF24A089092B50045B51F /* AboutController.m in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
+				AAF2798008C00E20000090A1 /* BrowserView.m in Sources */,
+				AA34B5A408C0DD3F003AEE18 /* ArticleListView.m in Sources */,
+				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +980,7 @@
 			children = (
 				089C1660FE840EACC02AAC07 /* English */,
 				AAD79648088AF51000E2CE5E /* Swedish */,
+				AA6022C608C24732002CFD06 /* French */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -961,6 +990,7 @@
 			children = (
 				2A37F4B7FDCFA73011CA2CEA /* English */,
 				AAD79629088AF49A00E2CE5E /* Swedish */,
+				AA6022A208C244D5002CFD06 /* French */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -970,6 +1000,7 @@
 			children = (
 				AA167A24065834DC0091365D /* English */,
 				AAD7964B088AF83300E2CE5E /* Swedish */,
+				AA6022D408C247CA002CFD06 /* French */,
 			);
 			name = ViennaApp.scriptTerminology;
 			sourceTree = "<group>";
@@ -979,6 +1010,7 @@
 			children = (
 				AA26F5660604955F00FE7994 /* English */,
 				AAD7963B088AF4EB00E2CE5E /* Swedish */,
+				AA6022A708C24537002CFD06 /* French */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -988,6 +1020,7 @@
 			children = (
 				AA26F5EC060496B100FE7994 /* English */,
 				AAAAED92088D62E600B48199 /* Swedish */,
+				AA6022B808C246F0002CFD06 /* French */,
 			);
 			name = Preferences.nib;
 			sourceTree = "<group>";
@@ -997,6 +1030,7 @@
 			children = (
 				AA2CE689081C3F3800D8FD8F /* English */,
 				AAD79638088AF4D100E2CE5E /* Swedish */,
+				AA6022AC08C2469F002CFD06 /* French */,
 			);
 			name = Acknowledgements.rtf;
 			sourceTree = "<group>";
@@ -1006,6 +1040,7 @@
 			children = (
 				AA3BDC9F063249FE004621CD /* English */,
 				AAD7962F088AF4B300E2CE5E /* Swedish */,
+				AA6022B208C246DE002CFD06 /* French */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -1015,6 +1050,7 @@
 			children = (
 				AA55E4A5086C6C8200D7DBFA /* English */,
 				AAD79623088AF48500E2CE5E /* Swedish */,
+				AA6022BE08C246FF002CFD06 /* French */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -1032,6 +1068,7 @@
 			children = (
 				AA9F3083081B689500D6EA23 /* English */,
 				AAD7962C088AF4A900E2CE5E /* Swedish */,
+				AA6022B508C246E8002CFD06 /* French */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -1041,6 +1078,7 @@
 			children = (
 				AAA1E3290852539500277128 /* English */,
 				AAD79626088AF49200E2CE5E /* Swedish */,
+				AA6022BB08C246F8002CFD06 /* French */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -1066,6 +1104,7 @@
 			children = (
 				AAD264DB0611E22A005A27E4 /* English */,
 				AAD79632088AF4BD00E2CE5E /* Swedish */,
+				AA6022AF08C246D4002CFD06 /* French */,
 			);
 			name = UpdateWindow.nib;
 			sourceTree = "<group>";
@@ -1075,6 +1114,7 @@
 			children = (
 				AAD34DAC06277D480094D6A6 /* English */,
 				AAD79620088AF47800E2CE5E /* Swedish */,
+				AA6022C108C2471C002CFD06 /* French */,
 			);
 			name = DownloadPanel.nib;
 			sourceTree = "<group>";
