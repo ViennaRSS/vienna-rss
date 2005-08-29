@@ -486,20 +486,33 @@
  */
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
 {
-	time_t theTime = curl_getdate([dateString cString], NULL);
 	NSCalendarDate * date;
 
+	// Let CURL have a crack at parsing since it knows all about the
+	// RSS/HTTP formats.
+	time_t theTime = curl_getdate([dateString cString], NULL);
 	if (theTime != -1)
-		date = [NSDate dateWithTimeIntervalSince1970:theTime];
-	else
+		return [NSDate dateWithTimeIntervalSince1970:theTime];
+
+	// Otherwise it is probably the weird Atom format date
+	date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%S%z"];
+	if (date == nil)
+		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M%z"];
+	if (date == nil)
+		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+	if (date != nil)
 	{
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%S%z"];
-		if (date == nil)
-			date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M%z"];
-		if (date == nil)
-			date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%SZ"];
+		// Atom times are relative to GMT so mark them as such.
+		NSCalendarDate * atomDate = [NSCalendarDate dateWithYear:[date yearOfCommonEra]
+														   month:[date monthOfYear]
+															 day:[date dayOfMonth]
+															hour:[date hourOfDay]
+														  minute:[date minuteOfHour]
+														  second:[date secondOfMinute]
+														timeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+		return atomDate;
 	}
-	return date;
+	return nil;
 }
 
 /* dealloc

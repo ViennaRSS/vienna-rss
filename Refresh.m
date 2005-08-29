@@ -379,23 +379,13 @@ typedef enum {
 	// Additional detail for the log
 	[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
 
-	// Sanity fix the folder last update
-	BOOL fixedLastUpdate = NO;
-	if ([[folder lastUpdate] isGreaterThan:[NSDate date]])
-	{
-		[db setFolderLastUpdate:[folder itemId] lastUpdate:[NSDate date]];
-		NSLog(@"Fixed bogus last update in folder '%@'", [folder name]);
-		fixedLastUpdate = YES;
-	}
-
 	// Kick off the connection
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
 	NSMutableDictionary * headers = [NSMutableDictionary dictionary];
 	
 	[headers setValue:@"gzip" forKey:@"Accept-Encoding"];
-	if (!fixedLastUpdate)
-		[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
-	
+	[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
+
 	[conn setHttpHeaders:headers];
 
 	if ([conn beginLoadDataFromURL:url
@@ -504,24 +494,9 @@ typedef enum {
 		// Get the feed's last update from the header if it is present. This will mark the
 		// date of the most recent message in the feed if the individual messages are
 		// missing a date tag.
-		//
-		// Note: some feeds appear to have a lastModified in the header that is out of
-		//   date compared to the items in the feed. So do a sanity check to ensure that
-		//   the date on the items take precedence.
-		//
 		NSDate * lastUpdate = [folder lastUpdate];
-		NSDate * newLastUpdate = nil;
+		NSDate * newLastUpdate = [lastUpdate retain];
 		
-		if ([[newFeed lastModified] isGreaterThan:lastUpdate])
-			newLastUpdate = [[newFeed lastModified] retain];
-		if (newLastUpdate == nil)
-			newLastUpdate = [lastUpdate retain];
-		if ([newLastUpdate isGreaterThan:[NSDate date]])
-		{
-			[newLastUpdate release];
-			newLastUpdate = [[NSDate date] retain];
-		}
-
 		// We'll be collecting messages into this array
 		NSMutableArray * messageArray = [NSMutableArray array];
 		int newMessagesFromFeed = 0;	
@@ -538,34 +513,29 @@ typedef enum {
 			if (messageDate == nil)
 				messageDate = [NSCalendarDate date];
 			
-			// Now insert the message into the database if it is newer than the
-			// last update for this feed.
-			if ([messageDate isGreaterThan:lastUpdate])
+			NSString * messageBody = [newsItem description];
+			NSString * messageTitle = [newsItem title];
+			NSString * messageLink = [newsItem link];
+			NSString * userName = [newsItem author];
+			NSString * guid = [newsItem guid];
+
+			// Create the message
+			Message * message = [[Message alloc] initWithGuid:guid];
+			[message setFolderId:[folder itemId]];
+			[message setAuthor:userName];
+			[message setText:messageBody];
+			[message setTitle:messageTitle];
+			[message setLink:messageLink];
+			[message setDate:messageDate];
+			[messageArray addObject:message];
+			[message release];
+
+			// Track most recent message
+			if ([messageDate isGreaterThan:newLastUpdate])
 			{
-				NSString * messageBody = [newsItem description];
-				NSString * messageTitle = [newsItem title];
-				NSString * messageLink = [newsItem link];
-				NSString * userName = [newsItem author];
-				NSString * guid = [newsItem guid];
-
-				// Create the message
-				Message * message = [[Message alloc] initWithGuid:guid];
-				[message setFolderId:[folder itemId]];
-				[message setAuthor:userName];
-				[message setText:messageBody];
-				[message setTitle:messageTitle];
-				[message setLink:messageLink];
-				[message setDate:messageDate];
-				[messageArray addObject:message];
-				[message release];
-
-				// Track most current update
-				if ([messageDate isGreaterThan:newLastUpdate])
-				{
-					[messageDate retain];
-					[newLastUpdate release];
-					newLastUpdate = messageDate;
-				}
+				[messageDate retain];
+				[newLastUpdate release];
+				newLastUpdate = messageDate;
 			}
 		}
 		
@@ -613,7 +583,8 @@ typedef enum {
 			if ([db setFolderHomePage:folderId newHomePage:feedLink])
 				needNotify = NO;
 		}
-		[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
+		if (newLastUpdate != nil)
+			[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
 		[db flushFolder:folderId];
 		
 		// Let interested callers know that the folder has changed.
