@@ -93,7 +93,7 @@
 			folder = [db folderFromFeedURL:[selectedItem name]];
 
 		if (folder != nil)
-			[[NSApp delegate] selectFolderAndMessage:[folder itemId] guid:nil];
+			[[NSApp delegate] selectFolder:[folder itemId]];
 	}
 }
 

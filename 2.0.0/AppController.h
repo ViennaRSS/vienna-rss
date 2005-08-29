@@ -20,10 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Database.h"
-#import "BacktrackArray.h"
 #import "ActivityViewer.h"
-#import "ExtDateFormatter.h"
-#import "WebKit/WebView.h"
 
 @class PreferenceController;
 @class AboutController;
@@ -33,28 +30,23 @@
 @class SearchFolder;
 @class NewSubscription;
 @class NewGroupFolder;
-@class MessageView;
-@class MessageListView;
-@class ArticleView;
-@class TexturedHeader;
 @class WebPreferences;
+@class BrowserView;
+@class ArticleListView;
 
 @interface AppController : NSObject {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet FoldersTree * foldersTree;
-	IBOutlet MessageListView * messageList;
-	IBOutlet ArticleView * textView;
 	IBOutlet NSWindow * renameWindow;
 	IBOutlet NSWindow * compactDatabaseWindow;
 	IBOutlet NSTextField * renameField;
 	IBOutlet NSSplitView * splitView1;
-	IBOutlet NSSplitView * splitView2;
 	IBOutlet NSView * exportSaveAccessory;
+	IBOutlet ArticleListView * mainArticleView;
+	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
 	IBOutlet NSSearchField * searchField;
-	IBOutlet TexturedHeader * folderHeader;
-	IBOutlet TexturedHeader * messageListHeader;
 	IBOutlet NSTextField * statusText;
 	IBOutlet NSProgressIndicator * spinner;
 
@@ -67,41 +59,18 @@
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
 
-	BOOL isAppInitialising;
 	Database * db;
 	BOOL sortedFlag;
-	int currentFolderId;
-	int currentSelectedRow;
-	NSArray * currentArrayOfMessages;
-	NSMutableDictionary * stylePathMappings;
 	NSMutableDictionary * scriptPathMappings;
-	BackTrackArray * backtrackArray;
-	BOOL isBacktracking;
-	NSString * guidOfMessageToSelect;
-	NSFont * messageListFont;
 	NSImage * originalIcon;
-	NSString * sortColumnIdentifier;
 	NSMenu * appDockMenu;
-	int sortDirection;
-	int sortColumnTag;
 	int progressCount;
-	int tableLayout;
-	NSArray * allColumns;
-	ExtDateFormatter * extDateFormatter;
-	NSMutableDictionary * selectionDict;
-	NSMutableDictionary * topLineDict;
-	NSMutableDictionary * bottomLineDict;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
-	NSTimer * markReadTimer;
 	int lastCountOfUnread;
 	BOOL growlAvailable;
 	NSString * appName;
-	NSString * htmlTemplate;
-	NSString * cssStylesheet;
 	NSString * persistedStatusText;
-	BOOL previousFolderColumnState;
-	WebPreferences * defaultWebPrefs;
 }
 
 // Menu action items
@@ -137,80 +106,23 @@
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;
 -(IBAction)moreStyles:(id)sender;
+-(IBAction)showMainWindow:(id)sender;
 
-// Infobar functions
+// Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(void)showUnreadCountOnApplicationIcon;
-
-// Notification response functions
--(void)handleFolderSelection:(NSNotification *)note;
--(void)handleCheckFrequencyChange:(NSNotification *)note;
--(void)handleFolderUpdate:(NSNotification *)nc;
--(void)handleRSSLink:(NSString *)linkPath;
--(void)handleMinimumFontSizeChange:(NSNotification *)nc;
--(void)handleStyleChange:(NSNotificationCenter *)nc;
--(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
-
-// Message selection functions
--(BOOL)scrollToMessage:(NSString *)guid;
--(void)selectFirstUnreadInFolder;
--(void)makeRowSelectedAndVisible:(int)rowIndex;
--(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
-
-// General functions
--(void)initSortMenu;
--(void)initColumnsMenu;
--(void)initStylesMenu;
--(void)initScriptsMenu;
--(void)startProgressIndicator;
--(void)stopProgressIndicator;
--(void)loadMapFromPath:(NSString *)path intoMap:(NSMutableDictionary *)pathMappings foldersOnly:(BOOL)foldersOnly;
--(void)setMainWindowTitle:(int)folderId;
--(void)doEditFolder:(Folder *)folder;
--(void)refreshFolder:(BOOL)reloadData;
--(void)markAllReadInArray:(NSArray *)folderArray;
--(BOOL)selectFolderAndMessage:(int)folderId guid:(NSString *)guid;
--(void)selectFolderWithFilter:(int)newFolderId;
--(void)reloadArrayOfMessages;
--(void)updateMessageText;
--(void)markFlaggedByArray:(NSArray *)messageArray flagged:(BOOL)flagged;
--(void)getMessagesOnTimer:(NSTimer *)aTimer;
--(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
--(void)markCurrentRead:(NSTimer *)aTimer;
--(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag;
--(void)updateMessageListRowHeight;
--(void)setOrientation:(BOOL)flag;
--(void)runAppleScript:(NSString *)scriptName;
--(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
--(int)currentFolderId;
--(NSArray *)folders;
--(NSString *)appName;
--(BOOL)isConnecting;
 -(void)openURLInBrowser:(NSString *)urlString;
 -(void)openURLInBrowserWithURL:(NSURL *)url;
+-(void)handleRSSLink:(NSString *)linkPath;
+-(BOOL)selectFolder:(int)folderId;
+-(void)markAllReadInArray:(NSArray *)folderArray;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
--(void)runOKAlertSheet:(NSString *)titleString text:(NSString *)bodyText, ...;
--(void)runOKAlertPanel:(NSString *)titleString text:(NSString *)bodyText, ...;
--(BOOL)isAccessible:(NSString *)urlString;
+-(void)setMainWindowTitle:(int)folderId;
+-(void)doSafeInitialisation;
 -(void)clearUndoStack;
--(void)loadMinimumFontSize;
-
-// Rename sheet functions
--(IBAction)endRenameFolder:(id)sender;
--(IBAction)cancelRenameFolder:(id)sender;
-
-// Message list helper functions
--(void)initTableView;
--(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
--(void)showColumnsForFolder:(int)folderId;
--(void)setTableViewFont;
--(void)sortByIdentifier:(NSString *)columnName;
--(void)showSortDirection;
--(void)setSortColumnIdentifier:(NSString *)str;
--(void)updateVisibleColumns;
--(void)saveTableSettings;
--(void)selectMessageAfterReload;
--(NSArray *)markedMessageRange;
--(void)markReadByArray:(NSArray *)messageArray readFlag:(BOOL)readFlag;
--(void)markDeletedByArray:(NSArray *)messageArray deleteFlag:(BOOL)deleteFlag;
+-(NSString *)searchString;
+-(int)currentFolderId;
+-(BOOL)isConnecting;
+-(Database *)database;
+-(NSArray *)folders;
 @end
