@@ -20,6 +20,7 @@
 
 #import "CheckForUpdates.h"
 #import "DownloadUpdate.h"
+#import "HelperFunctions.h"
 
 @implementation CheckForUpdates
 
@@ -193,7 +194,7 @@
 {
 	NSAssert(checkUpdates != nil, @"Notification called with nil checkUpdates");
 	if (![checkUpdates isUpdateAvailable])
-		[self runOKAlertSheet:[checkUpdates updateTitle] text:[checkUpdates updateStatus]];
+		runOKAlertSheet([checkUpdates updateTitle], [checkUpdates updateStatus]);
 	else
 	{
 		NSString * bodyText = [NSString stringWithFormat:NSLocalizedString(@"Update available text", nil), [checkUpdates latestVersion], [checkUpdates updateURL]];

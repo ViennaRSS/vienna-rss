@@ -39,6 +39,9 @@
 // Accessor functions
 +(Preferences *)standardPreferences;
 
+// Read-only internal settings
+-(int)backTrackQueueSize;
+
 // Mark read interval
 -(float)markReadInterval;
 -(void)setMarkReadInterval:(float)newInterval;

@@ -161,7 +161,7 @@ NSString * MA_Field_Headlines = @"Headlines";
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Message GUID %@ (retain=%d)", [self guid], [self retainCount]];
+	return [NSString stringWithFormat:@"{GUID=%@ title=\"%@\"", [self guid], [self title]];
 }
 
 /* dealloc

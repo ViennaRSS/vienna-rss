@@ -119,6 +119,14 @@ static Preferences * _standardPreferences = nil;
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
 
+/* backTrackQueueSize
+ * Returns the length of the back track queue.
+ */
+-(int)backTrackQueueSize
+{
+	return [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_BacktrackQueueSize];
+}
+
 /* enableMinimumFontSize
  * Specifies whether or not the minimum font size is in force.
  */

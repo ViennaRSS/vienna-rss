@@ -24,6 +24,9 @@
 #import "Constants.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
+#import "FolderView.h"
+#import "PopupButton.h"
+#import "TexturedHeader.h"
 #import "ViennaApp.h"
 
 // Private functions
@@ -92,6 +95,9 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
 
+	// Set header
+	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
+
 	// Want tooltips
 	[outlineView setEnableTooltips:YES];
 	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
@@ -112,6 +118,25 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	// Register for dragging
 	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];
+}
+
+/* setController
+ * Sets the controller used by this view.
+ */
+-(void)setController:(AppController *)theController
+{
+	controller = theController;
+	db = [[controller database] retain];
+}
+
+/* initialiseFoldersTree
+ * Do the things to initialize the folder tree from the database
+ */
+-(void)initialiseFoldersTree
+{
+	blockSelectionHandler = YES;
+	[self reloadDatabase:[[NSUserDefaults standardUserDefaults] arrayForKey:MAPref_FolderStates]];
+	blockSelectionHandler = NO;
 }
 
 /* handleFolderFontChange
@@ -140,21 +165,6 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	
 	height = [boldCellFont defaultLineHeightForFont];
 	[outlineView setRowHeight:height + 3];
-}
-
-/* initialiseFoldersTree
- * Do the things to initialize the folder tree from the database
- */
--(void)initialiseFoldersTree:(Database *)theDb
-{
-	if (theDb != db)
-	{
-		[db release];
-		db = [theDb retain];
-	}
-	blockSelectionHandler = YES;
-	[self reloadDatabase:[[NSUserDefaults standardUserDefaults] arrayForKey:MAPref_FolderStates]];
-	blockSelectionHandler = NO;
 }
 
 /* reloadDatabase

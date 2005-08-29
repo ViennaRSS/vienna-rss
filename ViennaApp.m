@@ -149,7 +149,7 @@
 -(void)setCurrentFolder:(Folder *)newCurrentFolder
 {
 	int folderId = [newCurrentFolder itemId];
-	[[self delegate] selectFolderAndMessage:folderId guid:nil];
+	[[self delegate] selectFolder:folderId];
 }
 
 /* Accessor getters

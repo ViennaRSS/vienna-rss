@@ -19,10 +19,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Database.h"
 #import "TreeNode.h"
-#import "FolderView.h"
-#import "PopupButton.h"
+
+@class TexturedHeader;
+@class FolderView;
+@class PopupButton;
+@class AppController;
+@class Database;
 
 @interface FoldersTree : NSView
 {
@@ -31,16 +34,20 @@
 	IBOutlet NSMenu * folderMenu;
 	IBOutlet NSButton * newSubButton;
 	IBOutlet NSButton * refreshButton;
-	TreeNode * rootNode;
+	IBOutlet TexturedHeader * folderHeader;
+
+	AppController * controller;
 	Database * db;
+	TreeNode * rootNode;
 	NSFont * cellFont;
 	NSFont * boldCellFont;
 	BOOL blockSelectionHandler;
 }
 
 // Public functions
+-(void)setController:(AppController *)theController;
+-(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
--(void)initialiseFoldersTree:(Database *)db;
 -(void)updateFolder:(int)folderId recurseToParents:(BOOL)recurseToParents;
 -(BOOL)selectFolder:(int)folderId;
 -(int)actualSelection;
