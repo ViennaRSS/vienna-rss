@@ -127,6 +127,20 @@
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
+				<key>articleListFont</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>mlFt</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>articleListFontSize</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>mlFS</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Int&gt;</string>
+				</dict>
 				<key>checkForNewOnStartup</key>
 				<dict>
 					<key>AppleEventCode</key>
@@ -177,20 +191,6 @@
 					<string>mrIN</string>
 					<key>Type</key>
 					<string>NSNumber&lt;Float&gt;</string>
-				</dict>
-				<key>articleListFont</key>
-				<dict>
-					<key>AppleEventCode</key>
-					<string>mlFt</string>
-					<key>Type</key>
-					<string>NSString</string>
-				</dict>
-				<key>articleListFontSize</key>
-				<dict>
-					<key>AppleEventCode</key>
-					<string>mlFS</string>
-					<key>Type</key>
-					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
 				<key>openLinksInBackground</key>
 				<dict>
@@ -253,6 +253,8 @@
 				<string>handleRefreshAllSubscriptions:</string>
 				<key>RefreshSubscription</key>
 				<string>handleRefreshSubscription:</string>
+				<key>CompactDatabase</key>
+				<string>handleCompactDatabase:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
@@ -272,6 +274,15 @@
 	</dict>
 	<key>Commands</key>
 	<dict>
+		<key>CompactDatabase</key>
+		<dict>
+			<key>AppleEventClassCode</key>
+			<string>Vnna</string>
+			<key>AppleEventCode</key>
+			<string>VnCD</string>
+			<key>CommandClass</key>
+			<string>NSScriptCommand</string>
+		</dict>
 		<key>ExportSubscriptions</key>
 		<dict>
 			<key>AppleEventClassCode</key>
@@ -380,7 +391,7 @@
 			<key>AppleEventClassCode</key>
 			<string>Vnna</string>
 			<key>AppleEventCode</key>
-			<string>vncn</string>
+			<string>VnCN</string>
 			<key>CommandClass</key>
 			<string>NSScriptCommand</string>
 		</dict>

@@ -74,6 +74,20 @@
 					<key>Name</key>
 					<string>application version</string>
 				</dict>
+				<key>articleListFont</key>
+				<dict>
+					<key>Description</key>
+					<string>The font used in the article list pane</string>
+					<key>Name</key>
+					<string>article list font</string>
+				</dict>
+				<key>articleListFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>The size of the font used in the article list pane</string>
+					<key>Name</key>
+					<string>article list font size</string>
+				</dict>
 				<key>bloglinesEmailAddress</key>
 				<dict>
 					<key>Description</key>
@@ -144,20 +158,6 @@
 					<key>Name</key>
 					<string>mark read interval</string>
 				</dict>
-				<key>articleListFont</key>
-				<dict>
-					<key>Description</key>
-					<string>The font used in the article list pane</string>
-					<key>Name</key>
-					<string>article list font</string>
-				</dict>
-				<key>articleListFontSize</key>
-				<dict>
-					<key>Description</key>
-					<string>The size of the font used in the article list pane</string>
-					<key>Name</key>
-					<string>article list font size</string>
-				</dict>
 				<key>openLinksInBackground</key>
 				<dict>
 					<key>Description</key>
@@ -211,6 +211,13 @@
 	</dict>
 	<key>Commands</key>
 	<dict>
+		<key>CompactDatabase</key>
+		<dict>
+			<key>Description</key>
+			<string>Compact the article database</string>
+			<key>Name</key>
+			<string>compact database</string>
+		</dict>
 		<key>ExportSubscriptions</key>
 		<dict>
 			<key>Arguments</key>

@@ -37,6 +37,9 @@
 // New subscription
 -(id)handleNewSubscription:(NSScriptCommand *)cmd;
 
+// Compact database
+-(id)handleCompactDatabase:(NSScriptCommand *)cmd;
+
 // General read-only properties.
 -(NSString *)applicationVersion;
 -(NSArray *)folders;

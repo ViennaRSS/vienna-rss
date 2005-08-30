@@ -13,6 +13,8 @@ Thanks!
 - Search field now searches article titles as well as the text.
 - New application icon. (Thanks to Jasper Hauser - http://www.jasperhauser.nl/icon/).
 - Added French localisation. (Thanks to Cyril Gautrias).
+- Dropped Compact Database command from the File menu. This is now accessible through the
+  scripting interface. Most people don't actually need to compact the database now.
 
 2.0.0.2005
 ----------
