@@ -55,7 +55,6 @@
 		AA26F5EF060496B100FE7994 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5EB060496B100FE7994 /* Preferences.nib */; };
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
-		AA2CE68A081C3F3800D8FD8F /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE688081C3F3800D8FD8F /* Acknowledgements.rtf */; };
 		AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2DE139085399F40055C4EE /* sqlite3.h */; };
 		AA3281A5084161EB00A7AD5A /* RichXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3281A3084161EB00A7AD5A /* RichXMLParser.h */; };
 		AA3281A6084161EB00A7AD5A /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
@@ -82,6 +81,8 @@
 		AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */; };
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
 		AA56328406168A9A00B317EB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA56328306168A9A00B317EB /* Security.framework */; };
+		AA570A8808C41FB900367040 /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */; };
+		AA570A8908C41FD300367040 /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAC504360828E6740089FF70 /* RSSSources.plist */; };
 		AA60238008C298FB002CFD06 /* HelperFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA60237E08C298FB002CFD06 /* HelperFunctions.h */; };
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
@@ -130,7 +131,6 @@
 		AABFDCA10609EA8100100A9B /* ActivityViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFDC9F0609EA8100100A9B /* ActivityViewer.h */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AABFDCC20609EAC500100A9B /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AABFDCC10609EAC500100A9B /* ActivityViewer.nib */; };
-		AAC504810828EB8E0089FF70 /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAC504800828EB8E0089FF70 /* RSSSources.plist */; };
 		AACFDEBC0604D4D20072D140 /* AppController.h in Headers */ = {isa = PBXBuildFile; fileRef = AACFDEBA0604D4D20072D140 /* AppController.h */; };
 		AAD1E2D40612909D00D09905 /* MacPAD.url in Resources */ = {isa = PBXBuildFile; fileRef = AAD1E2CB0612908200D09905 /* MacPAD.url */; };
 		AAD264B80611E108005A27E4 /* CheckForUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD264B60611E108005A27E4 /* CheckForUpdates.h */; };
@@ -300,7 +300,7 @@
 		AA26F5EC060496B100FE7994 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AA26F676060497BB00FE7994 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoldersTree.m; sourceTree = "<group>"; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
-		AA2CE689081C3F3800D8FD8F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = English; path = English.lproj/Acknowledgements.rtf; sourceTree = "<group>"; };
+		AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		AA2DE139085399F40055C4EE /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichXMLParser.h; sourceTree = "<group>"; };
 		AA3281A4084161EB00A7AD5A /* RichXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParser.m; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
-		AAC504360828E6740089FF70 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = English; path = English.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		AAC504360828E6740089FF70 /* RSSSources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSSources.plist; sourceTree = "<group>"; };
 		AACFDEBA0604D4D20072D140 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		AACFDEBB0604D4D20072D140 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		AAD1E2CB0612908200D09905 /* MacPAD.url */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = MacPAD.url; sourceTree = "<group>"; };
@@ -573,8 +573,8 @@
 				AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */,
 				AA3BDC9E063249FE004621CD /* SearchFolder.nib */,
 				AAD264DA0611E22A005A27E4 /* UpdateWindow.nib */,
-				AAC504800828EB8E0089FF70 /* RSSSources.plist */,
-				AA2CE688081C3F3800D8FD8F /* Acknowledgements.rtf */,
+				AAC504360828E6740089FF70 /* RSSSources.plist */,
+				AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */,
 				AA26F5650604955F00FE7994 /* Localizable.strings */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
@@ -887,8 +887,8 @@
 				AA9F3086081B69EE00D6EA23 /* RSSFeed.nib in Resources */,
 				AADD8963081C1916007C6E88 /* rssFolder.tiff in Resources */,
 				AADD8A0E081C253F007C6E88 /* rssFeed.tiff in Resources */,
-				AA2CE68A081C3F3800D8FD8F /* Acknowledgements.rtf in Resources */,
-				AAC504810828EB8E0089FF70 /* RSSSources.plist in Resources */,
+				AA570A8808C41FB900367040 /* Acknowledgements.rtf in Resources */,
+				AA570A8908C41FD300367040 /* RSSSources.plist in Resources */,
 				AA34582D084BE802003D992E /* vienna2.icns in Resources */,
 				AAA1E32A0852539500277128 /* GroupFolder.nib in Resources */,
 				AA2185060861E7E10024DD4A /* metal_column_header.png in Resources */,
@@ -1023,14 +1023,6 @@
 			name = Preferences.nib;
 			sourceTree = "<group>";
 		};
-		AA2CE688081C3F3800D8FD8F /* Acknowledgements.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA2CE689081C3F3800D8FD8F /* English */,
-			);
-			name = Acknowledgements.rtf;
-			sourceTree = "<group>";
-		};
 		AA3BDC9E063249FE004621CD /* SearchFolder.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1085,14 +1077,6 @@
 				AABFDC990609EA5A00100A9B /* English */,
 			);
 			name = ActivityViewer.nib;
-			sourceTree = "<group>";
-		};
-		AAC504800828EB8E0089FF70 /* RSSSources.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AAC504360828E6740089FF70 /* English */,
-			);
-			name = RSSSources.plist;
 			sourceTree = "<group>";
 		};
 		AAD264DA0611E22A005A27E4 /* UpdateWindow.nib */ = {
