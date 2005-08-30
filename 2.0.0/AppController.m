@@ -402,8 +402,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(IBAction)showMainWindow:(id)sender
 {
-	[mainWindow orderFront:self];
-	[mainWindow setInitialFirstResponder:[mainArticleView mainView]];
+	[mainWindow makeKeyAndOrderFront:self];
 }
 
 /* closeMainWindow
