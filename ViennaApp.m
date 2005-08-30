@@ -62,6 +62,15 @@
 	return nil;
 }
 
+/* handleCompactDatabase
+ * Compact the database.
+ */
+-(id)handleCompactDatabase:(NSScriptCommand *)cmd
+{
+	[[self delegate] compactDatabase:nil];
+	return nil;
+}
+
 /* handleImportSubscriptions
  * Import subscriptions from a file.
  */
