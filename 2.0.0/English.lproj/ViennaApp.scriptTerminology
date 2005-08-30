@@ -130,6 +130,13 @@
 					<key>Name</key>
 					<string>bloglines support</string>
 				</dict>
+				<key>enableMinimumFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>Enable minimum font size</string>
+					<key>Name</key>
+					<string>enable minimum font size</string>
+				</dict>
 				<key>folderListFont</key>
 				<dict>
 					<key>Description</key>
@@ -157,6 +164,13 @@
 					<string>The interval after an article is displayed before it is marked read</string>
 					<key>Name</key>
 					<string>mark read interval</string>
+				</dict>
+				<key>minimumFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>The minimum font size used when displaying article text</string>
+					<key>Name</key>
+					<string>minimum font size</string>
 				</dict>
 				<key>openLinksInBackground</key>
 				<dict>

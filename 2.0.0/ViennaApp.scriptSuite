@@ -162,6 +162,13 @@
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
+				<key>enableMinimumFontSize</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>enMF</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
 				<key>folderListFont</key>
 				<dict>
 					<key>AppleEventCode</key>
@@ -191,6 +198,13 @@
 					<string>mrIN</string>
 					<key>Type</key>
 					<string>NSNumber&lt;Float&gt;</string>
+				</dict>
+				<key>minimumFontSize</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>mnFS</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
 				<key>openLinksInBackground</key>
 				<dict>
@@ -241,6 +255,8 @@
 			<string>NSCoreSuite.NSApplication</string>
 			<key>SupportedCommands</key>
 			<dict>
+				<key>CompactDatabase</key>
+				<string>handleCompactDatabase:</string>
 				<key>ExportSubscriptions</key>
 				<string>handleExportSubscriptions:</string>
 				<key>ImportSubscriptions</key>
@@ -253,8 +269,6 @@
 				<string>handleRefreshAllSubscriptions:</string>
 				<key>RefreshSubscription</key>
 				<string>handleRefreshSubscription:</string>
-				<key>CompactDatabase</key>
-				<string>handleCompactDatabase:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
