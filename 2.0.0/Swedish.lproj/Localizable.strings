@@ -51,7 +51,7 @@
 "Delete" = "Radera";
 "Quit" = "Avsluta";
 "Refresh cancelled" = "Uppdatering avbruten";
-"Additional actions for the selected folder" = "Ytterligare funktioner f�r markerad mapp";
+"Additional actions for the selected folder" = "Ytterligare funktioner för markerad mapp";
 "Create a new subscription" = "Skapa en ny prenumeration";
 "Refresh all your subscriptions" = "Uppdatera alla prenumerationer";
 "New style title" = "Vienna har installerat en ny stil";
@@ -122,7 +122,7 @@
 "Unrecognised database format title" = "Databasens filformat har ändrats";
 "Unrecognised database format text" = "Din nuvarande ~/Library/Application Support/Vienna/messages.db stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.\n";
 "Upgrade Title" = "Uppdatera databas";
-"Upgrade Text" = "Din nuvarande databas måste uppgraderas för att fungera med den här versionen av Vienna. Alternativt kan du välja att starta med en ny, tom databas. Vad du än väljer kommer din nuvarande databas att sparas i %@. Den nya och uppgraderade databasen kommer INTE att fungera med tidigare versioner av Vienna.\n\n\Notera: Just för denna version så rekommenderas att du startar med en ny databas för enkelhetens skull"
+"Upgrade Text" = "Din nuvarande databas måste uppgraderas för att fungera med den här versionen av Vienna. Alternativt kan du välja att starta med en ny, tom databas. Vad du än väljer kommer din nuvarande databas att sparas i %@. Den nya och uppgraderade databasen kommer INTE att fungera med tidigare versioner av Vienna.\n\n\Notera: Just för denna version så rekommenderas att du startar med en ny databas för enkelhetens skull";
 "New Database" = "Ny databas";
 "Upgrade" = "Uppgradera";
 "Exit" = "Avsluta";
