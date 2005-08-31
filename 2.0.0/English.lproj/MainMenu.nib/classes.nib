@@ -137,7 +137,8 @@
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {CLASS = TexturedHeader; LANGUAGE = ObjC; SUPERCLASS = NSView; }
+        {CLASS = TexturedHeader; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = ThreeDBoxView; LANGUAGE = ObjC; SUPERCLASS = NSView; }
     ); 
     IBVersion = 1; 
 }
