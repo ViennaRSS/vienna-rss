@@ -315,7 +315,8 @@
  */
 -(IBAction)fieldChanged:(id)sender
 {
-	[self initForField:[sender titleOfSelectedItem] inRow:[sender superview]];
+	Field * field = [sender representedObjectForSelection];
+	[self initForField:[field name] inRow:[sender superview]];
 }
 
 /* initForField
