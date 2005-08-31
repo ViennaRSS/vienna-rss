@@ -20,6 +20,29 @@
 #import "HelperFunctions.h"
 #import "SystemConfiguration/SCNetworkReachability.h"
 
+/* copyOfMenuWithAction
+ * Returns an NSMenuItem that matches the one that implements the corresponding
+ * action in the application main menu. Returns nil if no match is found.
+ */
+NSMenuItem * copyOfMenuWithAction(SEL theSelector)
+{
+	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
+	int count = [arrayOfMenus count];
+	int index;
+
+	for (index = 0; index < count; ++index)
+	{
+		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
+		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		if (itemIndex >= 0)
+		{
+			NSMenuItem * item = [subMenu itemAtIndex:itemIndex];
+			return [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease];
+		}
+	}
+	return nil;
+}
+
 /* loadMapFromPath
  * Iterates all files and folders in the specified path and adds them to the given mappings
  * dictionary. If foldersOnly is YES, only folders are added. If foldersOnly is NO then only

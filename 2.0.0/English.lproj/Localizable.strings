@@ -126,8 +126,6 @@
 "New Database" = "New Database";
 "Upgrade" = "Upgrade";
 "Exit" = "Exit";
-"Cannot rename folder" = "Cannot rename folder";
-"A folder with that name already exists" = "A folder with that name already exists";
 "Search in %@" = "Search in %@";
 "Marked Articles" = "Marked Articles";
 "Unread Articles" = "Unread Articles";
@@ -156,3 +154,8 @@
 "Enter Blogspot User name" = "Enter Blogspot User name";
 "Enter Xanga User name" = "Enter Xanga User name";
 "Enter URL of RSS feed" = "Enter URL of RSS feed";
+"Cannot rename folder" = "Cannot rename folder";
+"A folder with that name already exists" = "A folder with that name already exists";
+"Recent Searches" = "Recent Searches";
+"Recents" = "Recents";
+"Clear" = "Clear Recent Searches";

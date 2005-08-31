@@ -51,11 +51,9 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 browserView = BrowserView; 
-                compactDatabaseWindow = NSWindow; 
                 exportAll = NSButtonCell; 
                 exportSaveAccessory = NSView; 
                 exportSelected = NSButtonCell; 
-                folderMenu = NSMenu; 
                 foldersTree = FoldersTree; 
                 mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 

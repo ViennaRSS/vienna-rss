@@ -143,6 +143,29 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	lastCountOfUnread = 0;
 	[self showUnreadCountOnApplicationIcon];
 
+	// Create a menu for the search field
+	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
+	// item is localised though.
+	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
+
+    NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
+    [item setTag:NSSearchFieldRecentsTitleMenuItemTag];
+	[cellMenu insertItem:item atIndex:0];
+    [item release];
+
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
+    [item setTag:NSSearchFieldRecentsMenuItemTag];
+    [cellMenu insertItem:item atIndex:1];
+    [item release];
+
+    item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
+    [item setTag:NSSearchFieldClearRecentsMenuItemTag];
+    [cellMenu insertItem:item atIndex:2];
+    [item release];
+
+    [[searchField cell] setSearchMenuTemplate:cellMenu];
+	[cellMenu release];
+
 	// Add Scripts menu if we have any scripts
 	if ([defaults boolForKey:MAPref_ShowScriptsMenu])
 		[self initScriptsMenu];

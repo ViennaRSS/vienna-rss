@@ -15,6 +15,7 @@ Thanks!
 - Added French localisation. (Thanks to Cyril Gautrias).
 - Dropped Compact Database command from the File menu. This is now accessible through the
   scripting interface. Most people don't actually need to compact the database now.
+- Added "Validate Feed" command to the File menu.
 
 2.0.0.2005
 ----------

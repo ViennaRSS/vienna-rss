@@ -31,7 +31,6 @@
 {
 	IBOutlet FolderView * outlineView;
 	IBOutlet PopupButton * popupMenu;
-	IBOutlet NSMenu * folderMenu;
 	IBOutlet NSButton * newSubButton;
 	IBOutlet NSButton * refreshButton;
 	IBOutlet TexturedHeader * folderHeader;

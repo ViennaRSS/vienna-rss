@@ -60,7 +60,6 @@
 	NewGroupFolder * groupFolder;
 
 	Database * db;
-	BOOL sortedFlag;
 	NSMutableDictionary * scriptPathMappings;
 	NSImage * originalIcon;
 	NSMenu * appDockMenu;

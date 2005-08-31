@@ -126,8 +126,6 @@
 "New Database" = "Ny databas";
 "Upgrade" = "Uppgradera";
 "Exit" = "Avsluta";
-"Cannot rename folder" = "Cannot rename folder";
-"A folder with that name already exists" = "A folder with that name already exists";
 "Search in %@" = "S√∂k i %@";
 "Marked Articles" = "Markerade artiklar";
 "Unread Articles" = "Ol√§sta artiklar";
@@ -149,10 +147,15 @@
 "is greater than or equal to" = "√§r st√∂rre eller lika med";
 "Cannot open export file message" = "Kan inte skapa exportfil";
 "Cannot open export file message text" = "Specificerad exportfil kunde inte skapas. Kontrollera att den inte √§r l√•st eller att n√•got annat program anv√§nder den.";
-"Source" = "Source (Swedish)";
-"Status" = "Status (Swedish)";
+"Source" = "Källa";
+"Status" = "Status";
 "Enter LiveJournal User name" = "Användarnamn LiveJournal";
 "Enter MSN Spaces User name" = "Användarnamn MSN Spaces";
 "Enter Blogspot User name" = "Användarnamn Blogspot";
 "Enter Xanga User name" = "Användarnamn Xanga";
 "Enter URL of RSS feed" = "URL till RSS-ström";
+"Cannot rename folder" = "Kan ej byta namn på mapp";
+"A folder with that name already exists" = "En mapp med det namnet finns redan";
+"Recent Searches" = "Senaste sökningar";
+"Recents" = "Senaste";
+"Clear" = "Rensa senaste sökningar";
