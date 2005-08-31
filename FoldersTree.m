@@ -23,6 +23,7 @@
 #import "AppController.h"
 #import "Constants.h"
 #import "Preferences.h"
+#import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "FolderView.h"
 #import "PopupButton.h"
@@ -98,6 +99,20 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	// Set header
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
 
+	// Dynamically create the popup menu. This is one less thing to
+	// explicitly localise in the NIB file.
+	NSMenu * folderMenu = [[NSMenu alloc] init];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(validateFeed:))];
+
 	// Want tooltips
 	[outlineView setEnableTooltips:YES];
 	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
@@ -114,7 +129,9 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 
 	// Set the menu for the popup button
 	[popupMenu setMenu:folderMenu];
-	
+	[outlineView setMenu:folderMenu];
+	[folderMenu release];
+
 	// Register for dragging
 	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];

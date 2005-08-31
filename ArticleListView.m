@@ -307,7 +307,19 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Remember the folder column state
 	Field * folderField = [db fieldByName:MA_Field_Folder];
 	previousFolderColumnState = [folderField visible];	
-	
+
+	// Dynamically create the popup menu. This is one less thing to
+	// explicitly localise in the NIB file.
+	NSMenu * articleListMenu = [[NSMenu alloc] init];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(markRead:))];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(markFlagged:))];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(deleteMessage:))];
+	[articleListMenu addItem:[NSMenuItem separatorItem]];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewArticlePage:))];
+	[messageList setMenu:articleListMenu];
+	[articleListMenu release];
+
 	// Set the target for double-click actions
 	[messageList setDoubleAction:@selector(doubleClickRow:)];
 	[messageList setAction:@selector(singleClickRow:)];
