@@ -114,7 +114,6 @@
 -(void)openURLInBrowserWithURL:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(BOOL)selectFolder:(int)folderId;
--(void)markAllReadInArray:(NSArray *)folderArray;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
 -(void)setMainWindowTitle:(int)folderId;
 -(void)doSafeInitialisation;

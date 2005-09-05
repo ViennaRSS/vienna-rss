@@ -19,6 +19,7 @@
 //
 
 #import "BackTrackArray.h"
+#import "ArticleRef.h"
 
 @implementation BackTrackArray
 
@@ -61,9 +62,9 @@
 {
 	if (queueIndex > 0)
 	{
-		NSDictionary * dataItem = [array objectAtIndex:--queueIndex];
-		*folderId = [[dataItem valueForKey:@"Folder"] intValue];
-		*messageNumber = [dataItem valueForKey:@"GUID"];
+		ArticleReference * item = [array objectAtIndex:--queueIndex];
+		*folderId = [item folderId];
+		*messageNumber = [item guid];
 		return YES;
 	}
 	return NO;
@@ -77,9 +78,9 @@
 {
 	if (queueIndex < (int)[array count] - 1)
 	{
-		NSDictionary * dataItem = [array objectAtIndex:++queueIndex];
-		*folderId = [[dataItem valueForKey:@"Folder"] intValue];
-		*messageNumber = [dataItem valueForKey:@"GUID"];
+		ArticleReference * item = [array objectAtIndex:++queueIndex];
+		*folderId = [item folderId];
+		*messageNumber = [item guid];
 		return YES;
 	}
 	return NO;
@@ -103,11 +104,7 @@
 		[array removeObjectAtIndex:0];
 		--queueIndex;
 	}
-
-	NSMutableDictionary * dataItem = [NSMutableDictionary dictionary];
-	[dataItem setValue:[NSNumber numberWithInt:folderId] forKey:@"Folder"];
-	[dataItem setValue:guid forKey:@"GUID"];
-	[array addObject:dataItem];
+	[array addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 	++queueIndex;
 }
 

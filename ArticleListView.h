@@ -96,6 +96,8 @@ enum {
 -(void)displayNextUnread;
 -(void)deleteSelectedMessages;
 -(void)markReadByArray:(NSArray *)messageArray readFlag:(BOOL)readFlag;
+-(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
+-(void)markAllReadByArray:(NSArray *)folderArray;
 -(void)markDeletedByArray:(NSArray *)messageArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)messageArray flagged:(BOOL)flagged;
 @end

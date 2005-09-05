@@ -21,6 +21,7 @@
 #import "Database.h"
 #import "StringExtensions.h"
 #import "Constants.h"
+#import "ArticleRef.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
@@ -1667,6 +1668,54 @@ static Database * _sharedDatabase = nil;
 	return [tree autorelease];
 }
 
+/* arrayOfUnreadMessages
+ * Retrieves an array of ArticleReference objects that represent all unread
+ * articles in the specified folder.
+ */
+-(NSArray *)arrayOfUnreadMessages:(int)folderId
+{
+	Folder * folder = [self folderFromID:folderId];
+	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[folder unreadCount]];
+	if (folder != nil)
+	{
+		if ([folder messageCount] > 0)
+		{
+			// Messages already cached in this folder so use those. Note the use of
+			// reverseObjectEnumerator since the odds are that the unread articles are
+			// likely to be clustered with the most recent articles at the end of the
+			// array so it makes the code slightly faster.
+			int unreadCount = [folder unreadCount];
+			NSEnumerator * enumerator = [[folder articles] reverseObjectEnumerator];
+			Message * theRecord;
+
+			while (unreadCount > 0 && (theRecord = [enumerator nextObject]) != nil)
+				if (![theRecord isRead])
+				{
+					[newArray addObject:[ArticleReference makeReference:theRecord]];
+					--unreadCount;
+				}
+		}
+		else
+		{
+			[self verifyThreadSafety];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from messages where folder_id=%d and read_flag=0", folderId];
+			if (results && [results rowCount])
+			{
+				NSEnumerator * enumerator = [results rowEnumerator];
+				SQLRow * row;
+				
+				while ((row = [enumerator nextObject]) != nil)
+				{
+					NSString * guid = [row stringForColumn:@"message_id"];
+					[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
+				}
+			}
+			[results release];
+		}
+	}
+	return newArray;
+}
+
 /* arrayOfMessages
  * Retrieves an array containing all messages (except for text) for the
  * current folder. This info is always cached.
@@ -1758,50 +1807,58 @@ static Database * _sharedDatabase = nil;
  * Mark all messages in the folder and sub-folders read. This should be called
  * within a transaction since it is SQL intensive.
  */
--(void)wrappedMarkFolderRead:(int)folderId
+-(BOOL)wrappedMarkFolderRead:(int)folderId
 {
 	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
 	NSEnumerator * enumerator = [arrayOfChildFolders objectEnumerator];
+	BOOL result = NO;
 	Folder * folder;
-	
+
 	// Recurse and mark child folders read too
 	while ((folder = [enumerator nextObject]) != nil)
-		[self wrappedMarkFolderRead:[folder itemId]];
+	{
+		if ([self wrappedMarkFolderRead:[folder itemId]])
+			result = YES;
+	}
 
 	folder = [self folderFromID:folderId];
-	if (folder != nil)
+	if (folder != nil && [folder unreadCount] > 0)
 	{
-		// Verify we're on the right thread
 		[self verifyThreadSafety];
-		
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%d", folderId];
 		if (results)
 		{
 			int count = [folder unreadCount];
-			if ([folder messageCount] > 0)
-			{
-				NSArray * messages = [folder messages];
-				NSEnumerator * enumerator = [messages objectEnumerator];
-				Message * message;
-				
-				while ((message = [enumerator nextObject]) != nil)
+			NSEnumerator * enumerator = [[folder articles] objectEnumerator];
+			int remainingUnread = count;
+			Message * message;
+
+			while (remainingUnread > 0 && (message = [enumerator nextObject]) != nil)
+				if (![message isRead])
+				{
 					[message markRead:YES];
-			}
-			countOfUnread -= [folder unreadCount];
+					--remainingUnread;
+				}
+			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
 		}
 		[results release];
+		result = YES;
 	}
+	return result;
 }
 
 /* markFolderRead
  * Mark all messages in the specified folder read
  */
--(void)markFolderRead:(int)folderId
+-(BOOL)markFolderRead:(int)folderId
 {
+	BOOL result;
+
 	[self beginTransaction];
-	[self wrappedMarkFolderRead:folderId];
+	result = [self wrappedMarkFolderRead:folderId];
 	[self commitTransaction];
+	return result;
 }
 
 /* markMessageRead

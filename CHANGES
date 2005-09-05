@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2007
+----------
+- You can now undo/redo Mark All Read, even across multiple folders.
+- Article view split bar position is now properly persisted across sessions.
+
 2.0.0.2006
 ----------
 - Can now sort and double-click activity log items.

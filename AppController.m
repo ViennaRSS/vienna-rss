@@ -1219,42 +1219,8 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
  */
 -(IBAction)markAllRead:(id)sender
 {
-	[self markAllReadInArray:[foldersTree selectedFolders]];
-	[self showUnreadCountOnApplicationIcon];
-}
-
-/* markAllReadInArray
- * Given an array of folders, mark all the messages in those folders as read.
- */
--(void)markAllReadInArray:(NSArray *)folderArray
-{
-	NSEnumerator * enumerator = [folderArray objectEnumerator];
-	Folder * folder;
-
-	while ((folder = [enumerator nextObject]) != nil)
-	{
-		int folderId = [folder itemId];
-		if (IsGroupFolder(folder))
-		{
-			[self markAllReadInArray:[db arrayOfFolders:folderId]];
-			if (folderId == [mainArticleView currentFolderId])
-				[mainArticleView refreshFolder:YES];
-		}
-		else if (!IsSmartFolder(folder))
-		{
-			[db markFolderRead:folderId];
-			[foldersTree updateFolder:folderId recurseToParents:YES];
-			if (folderId == [mainArticleView currentFolderId])
-				[mainArticleView refreshFolder:NO];
-		}
-		else
-		{
-			// For smart folders, we only mark all read the current folder to
-			// simplify things.
-			if (folderId == [mainArticleView currentFolderId])
-				[mainArticleView markReadByArray:[mainArticleView allMessages] readFlag:YES];
-		}
-	}
+	if (![db readOnly])
+		[mainArticleView markAllReadByArray:[foldersTree selectedFolders]];
 }
 
 /* markRead

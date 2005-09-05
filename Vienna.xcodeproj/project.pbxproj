@@ -100,6 +100,8 @@
 		AA74A85F087B56810029797C /* ArticleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA74A85D087B56810029797C /* ArticleView.h */; };
 		AA74A860087B56810029797C /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
 		AA7A0C8808874CEB0027F04F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */; };
+		AA7AB45908CA742A000D34F9 /* ArticleRef.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7AB45708CA742A000D34F9 /* ArticleRef.h */; };
+		AA7AB45A08CA742A000D34F9 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7AB45808CA742A000D34F9 /* ArticleRef.m */; };
 		AA840801066BDDCE00C5D918 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA840800066BDDCE00C5D918 /* ApplicationServices.framework */; };
 		AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */; };
 		AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
@@ -352,6 +354,8 @@
 		AA74A85D087B56810029797C /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArticleView.h; sourceTree = "<group>"; };
 		AA74A85E087B56810029797C /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
 		AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Developer/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
+		AA7AB45708CA742A000D34F9 /* ArticleRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleRef.h; sourceTree = "<group>"; };
+		AA7AB45808CA742A000D34F9 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleRef.m; sourceTree = "<group>"; };
 		AA840800066BDDCE00C5D918 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /Developer/SDKs/MacOSX10.2.7.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BezierPathExtensions.h; sourceTree = "<group>"; };
 		AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BezierPathExtensions.m; sourceTree = "<group>"; };
@@ -661,14 +665,16 @@
 		AA8C76C006420CA800649BA2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				AA26F4CA0604927300FE7994 /* Folder.h */,
-				AA26F4CB0604927300FE7994 /* Folder.m */,
+				AA7AB45708CA742A000D34F9 /* ArticleRef.h */,
+				AA7AB45808CA742A000D34F9 /* ArticleRef.m */,
 				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
 				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
 				AA26F4C90604927300FE7994 /* Database.h */,
 				AA26F4D50604927300FE7994 /* Database.m */,
 				AA36CD7906100692001E33A4 /* Field.h */,
 				AA36CD7A06100692001E33A4 /* Field.m */,
+				AA26F4CA0604927300FE7994 /* Folder.h */,
+				AA26F4CB0604927300FE7994 /* Folder.m */,
 				AA26F4CD0604927300FE7994 /* Message.h */,
 				AA26F4CE0604927300FE7994 /* Message.m */,
 			);
@@ -767,6 +773,7 @@
 				AAF2797F08C00E20000090A1 /* BrowserView.h in Headers */,
 				AA34B5A308C0DD3F003AEE18 /* ArticleListView.h in Headers */,
 				AA60238008C298FB002CFD06 /* HelperFunctions.h in Headers */,
+				AA7AB45908CA742A000D34F9 /* ArticleRef.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +974,7 @@
 				AAF2798008C00E20000090A1 /* BrowserView.m in Sources */,
 				AA34B5A408C0DD3F003AEE18 /* ArticleListView.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
+				AA7AB45A08CA742A000D34F9 /* ArticleRef.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

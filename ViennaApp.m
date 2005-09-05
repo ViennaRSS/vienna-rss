@@ -46,7 +46,7 @@
 	NSDictionary * args = [cmd evaluatedArguments];
 	Folder * folder = [args objectForKey:@"Folder"];
 	if (folder != nil)
-		[[self delegate] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+		[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder]];
 	return nil;
 }
 
@@ -58,7 +58,10 @@
 	NSDictionary * args = [cmd evaluatedArguments];
 	Folder * folder = [args objectForKey:@"Folder"];
 	if (folder != nil)
-		[[self delegate] markAllReadInArray:[NSArray arrayWithObject:folder]];
+	{
+//		AppController * controller = [self delegate];
+//		[[controller mainArticleView] markAllReadWithArray:[NSArray arrayWithObject:folder]];
+	}
 	return nil;
 }
 
