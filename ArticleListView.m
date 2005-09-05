@@ -72,6 +72,9 @@ static int messageSortHandler(id item1, id item2, void * context);
 // Static constant strings that are typically never tweaked
 static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 
+static const int MA_Minimum_ArticleList_Pane_Width = 80;
+static const int MA_Minimum_Article_Pane_Width = 80;
+
 @implementation ArticleListView
 
 /* initWithFrame
@@ -83,6 +86,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	{
 		db = nil;
 		isBacktracking = NO;
+		isChangingOrientation = NO;
 		guidOfMessageToSelect = nil;
 		stylePathMappings = nil;
 		markReadTimer = nil;
@@ -164,6 +168,7 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 
 	// Restore the split bar position
 	[splitView2 loadLayoutWithName:@"SplitView2Positions"];
+	[splitView2 setDelegate:self];
 
 	// Select the first conference
 	int previousFolderId = [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_CachedFolderID];
@@ -171,6 +176,70 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	
 	// Done initialising
 	isAppInitialising = NO;
+}
+
+/* constrainMinCoordinate
+ * Make sure the article pane width isn't shrunk beyond a minimum width. Otherwise it looks
+ * untidy.
+ */
+-(float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+{
+	return (sender == splitView2 && offset == 0) ? MA_Minimum_ArticleList_Pane_Width : proposedMin;
+}
+
+/* constrainMaxCoordinate
+ * Make sure that the article pane isn't shrunk beyond a minimum size otherwise the splitview
+ * or controls within it start resizing odd.
+ */
+-(float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+{
+	if (sender == splitView2 && offset == 0)
+	{
+		NSRect mainFrame = [[splitView2 superview] frame];
+		return (tableLayout == MA_Condensed_Layout) ?
+			mainFrame.size.width - MA_Minimum_Article_Pane_Width :
+			mainFrame.size.height - MA_Minimum_Article_Pane_Width;
+	}
+	return proposedMax;
+}
+
+/* resizeSubviewsWithOldSize
+ * Constrain the article list pane to a fixed width.
+ */
+-(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+	float dividerThickness = [sender dividerThickness];
+	id sv1 = [[sender subviews] objectAtIndex:0];
+	id sv2 = [[sender subviews] objectAtIndex:1];
+	NSRect leftFrame = [sv1 frame];
+	NSRect rightFrame = [sv2 frame];
+	NSRect newFrame = [sender frame];
+	
+	if (sender == splitView2)
+	{
+		if (isChangingOrientation)
+			[splitView2 adjustSubviews];
+		else
+		{
+			leftFrame.origin = NSMakePoint(0, 0);
+			if (tableLayout == MA_Condensed_Layout)
+			{
+				leftFrame.size.height = newFrame.size.height;
+				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
+				rightFrame.size.height = newFrame.size.height;
+				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+			}
+			else
+			{
+				leftFrame.size.width = newFrame.size.width;
+				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
+				rightFrame.size.width = newFrame.size.width;
+				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
+			}
+			[sv1 setFrame:leftFrame];
+			[sv2 setFrame:rightFrame];
+		}
+	}
 }
 
 /* decidePolicyForNavigationAction
@@ -817,9 +886,11 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
  */
 -(void)setOrientation:(BOOL)flag
 {
+	isChangingOrientation = YES;
 	tableLayout = flag ? MA_Condensed_Layout : MA_Table_Layout;
 	[splitView2 setVertical:flag];
 	[splitView2 display];
+	isChangingOrientation = NO;
 }
 
 /* tableLayout

@@ -53,6 +53,7 @@ enum {
 	int tableLayout;
 	int currentFolderId;
 	BOOL isAppInitialising;
+	BOOL isChangingOrientation;
 	AppController * controller;
 	Database * db;
 

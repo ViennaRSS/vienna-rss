@@ -65,7 +65,27 @@
 // Static constant strings that are typically never tweaked
 static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
+static const int MA_Minimum_Folder_Pane_Width = 80;
+static const int MA_Minimum_BrowserView_Pane_Width = 200;
+
 @implementation AppController
+
+/* init
+ * Class instance initialisation.
+ */
+-(id)init
+{
+	if ((self = [super init]) != nil)
+	{
+		scriptPathMappings = [[NSMutableDictionary alloc] init];
+		progressCount = 0;
+		persistedStatusText = nil;
+		lastCountOfUnread = 0;
+		growlAvailable = NO;
+		checkTimer = nil;
+	}
+	return self;
+}
 
 /* awakeFromNib
  * Do all the stuff that only makes sense after our NIB has been loaded and connected.
@@ -87,10 +107,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	if (appName == nil)
 		appName = @"Vienna";
 
-	// Create a dictionary that will be used to map scripts to the
-	// paths where they're located.
-	scriptPathMappings = [[NSMutableDictionary alloc] init];
-
 	// Set the primary view of the browser view
 	[browserView setPrimaryView:mainArticleView];
 
@@ -109,8 +125,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 
 	// Init the progress counter and status bar.
-	progressCount = 0;
-	persistedStatusText = nil;
 	[self setStatusMessage:nil persist:NO];
 
 	// Initialize the database
@@ -132,6 +146,7 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 	// Restore the splitview layout
 	[splitView1 loadLayoutWithName:@"SplitView1Positions"];
+	[splitView1 setDelegate:self];
 
 	// Put icons in front of some menu commands.
 	[self setImageForMenuCommand:[NSImage imageNamed:@"smallFolder.tiff"] forAction:@selector(newGroupFolder:)];
@@ -140,7 +155,6 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 	// Show the current unread count on the app icon
 	originalIcon = [[NSApp applicationIconImage] copy];
-	lastCountOfUnread = 0;
 	[self showUnreadCountOnApplicationIcon];
 
 	// Create a menu for the search field
@@ -171,11 +185,9 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 		[self initScriptsMenu];
 
 	// Use Growl if it is installed
-	growlAvailable = NO;
 	[GrowlApplicationBridge setGrowlDelegate:self];
 
 	// Start the check timer
-	checkTimer = nil;
 	[self handleCheckFrequencyChange:nil];
 
 	// Assign the controller for the child views
@@ -320,6 +332,54 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 -(FoldersTree *)foldersTree
 {
 	return foldersTree;
+}
+
+/* constrainMinCoordinate
+ * Make sure the folder width isn't shrunk beyond a minimum width. Otherwise it looks
+ * untidy.
+ */
+-(float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+{
+	return (sender == splitView1 && offset == 0) ? MA_Minimum_Folder_Pane_Width : proposedMin;
+}
+
+/* constrainMaxCoordinate
+ * Make sure that the browserview isn't shrunk beyond a minimum size otherwise the splitview
+ * or controls within it start resizing odd.
+ */
+-(float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+{
+	if (sender == splitView1 && offset == 0)
+	{
+		NSRect mainFrame = [[splitView1 superview] frame];
+		return mainFrame.size.width - MA_Minimum_BrowserView_Pane_Width;
+	}
+	return proposedMax;
+}
+
+/* resizeSubviewsWithOldSize
+ * Constrain the folder pane to a fixed width.
+ */
+-(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+	float dividerThickness = [sender dividerThickness];
+	id sv1 = [[sender subviews] objectAtIndex:0];
+	id sv2 = [[sender subviews] objectAtIndex:1];
+	NSRect leftFrame = [sv1 frame];
+	NSRect rightFrame = [sv2 frame];
+	NSRect newFrame = [sender frame];
+
+	if (sender == splitView1)
+	{
+		leftFrame.size.height = newFrame.size.height;
+		leftFrame.origin = NSMakePoint(0, 0);
+		rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
+		rightFrame.size.height = newFrame.size.height;
+		rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+		
+		[sv1 setFrame:leftFrame];
+		[sv2 setFrame:rightFrame];
+	}
 }
 
 /* readingPaneOnRight
