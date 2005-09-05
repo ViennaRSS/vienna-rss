@@ -12,10 +12,26 @@
 			<string>VNar</string>
 			<key>Attributes</key>
 			<dict>
-				<key>articleTitle</key>
+				<key>applescriptContainer</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arXP</string>
+					<key>ReadOnly</key>
+					<string>NO</string>
+					<key>Type</key>
+					<string>Article</string>
+				</dict>
+				<key>title</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>arTL</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>author</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arAU</string>
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>

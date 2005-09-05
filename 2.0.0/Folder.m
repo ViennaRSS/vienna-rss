@@ -526,9 +526,9 @@ static NSArray * iconArray = nil;
 	return [messages objectForKey:guid];
 }
 
-/* messages
+/* articles
  */
--(NSArray *)messages
+-(NSArray *)articles
 {
 	return [messages allValues];
 }
@@ -648,6 +648,8 @@ static NSArray * iconArray = nil;
  */
 -(void)dealloc
 {
+	[lastUpdate release];
+	[attributes release];
 	[messages release];
 	[super dealloc];
 }

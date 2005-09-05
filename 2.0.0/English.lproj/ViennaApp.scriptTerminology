@@ -8,12 +8,19 @@
 		<dict>
 			<key>Attributes</key>
 			<dict>
-				<key>articleTitle</key>
+				<key>title</key>
 				<dict>
 					<key>Description</key>
 					<string>The article's title</string>
 					<key>Name</key>
 					<string>title</string>
+				</dict>
+				<key>author</key>
+				<dict>
+					<key>Description</key>
+					<string>The article's author</string>
+					<key>Name</key>
+					<string>author</string>
 				</dict>
 			</dict>
 			<key>Description</key>

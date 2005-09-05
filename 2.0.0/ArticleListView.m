@@ -29,6 +29,7 @@
 #import "CalendarExtensions.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
+#import "ArticleRef.h"
 #import "WebKit/WebPreferences.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebPolicyDelegate.h"
@@ -57,6 +58,7 @@
 	-(void)loadMinimumFontSize;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag;
+	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray;
 	-(void)reloadArrayOfMessages;
 	-(void)updateMessageText;
 	-(void)updateMessageListRowHeight;
@@ -125,9 +127,6 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	// Handle minimum font size
 	defaultWebPrefs = [[textView preferences] retain];
 	[self loadMinimumFontSize];
-
-	// Restore the split bar position
-	[splitView2 loadLayoutWithName:@"SplitView2Positions"];
 	
 	// Do safe initialisation
 	[controller doSafeInitialisation];
@@ -162,7 +161,10 @@ static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
 	Preferences * prefs = [Preferences standardPreferences];
 	if (![self initForStyle:[prefs displayStyle]])
 		[prefs setDisplayStyle:@"Default"];
-	
+
+	// Restore the split bar position
+	[splitView2 loadLayoutWithName:@"SplitView2Positions"];
+
 	// Select the first conference
 	int previousFolderId = [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_CachedFolderID];
 	[self selectFolderAndMessage:previousFolderId guid:nil];
@@ -1631,7 +1633,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[markReadTimer invalidate];
 	[markReadTimer release];
 	markReadTimer = nil;
-	
+
 	[db beginTransaction];
 	while ((theArticle = [enumerator nextObject]) != nil)
 	{
@@ -1653,6 +1655,120 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 	[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
+	// The info bar has a count of unread messages so we need to
+	// update that.
+	[controller showUnreadCountOnApplicationIcon];
+}
+
+/* markAllReadUndo
+ * Undo the most recent Mark All Read.
+ */
+-(void)markAllReadUndo:(id)anObject
+{
+	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:NO];
+}
+
+/* markAllReadRedo
+ * Redo the most recent Mark All Read.
+ */
+-(void)markAllReadRedo:(id)anObject
+{
+	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:YES];
+}
+
+/* markAllReadByArray
+ * Given an array of folders, mark all the messages in those folders as read and
+ * return a reference array listing all the messages that were actually marked.
+ */
+-(void)markAllReadByArray:(NSArray *)folderArray
+{
+	NSArray * refArray = [self wrappedMarkAllReadInArray:[foldersTree selectedFolders]];
+	if (refArray != nil && [refArray count] > 0)
+	{
+		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
+		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
+	}
+	[controller showUnreadCountOnApplicationIcon];
+}
+
+/* wrappedMarkAllReadInArray
+ * Given an array of folders, mark all the messages in those folders as read and
+ * return a reference array listing all the messages that were actually marked.
+ */
+-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray
+{
+	NSMutableArray * refArray = [NSMutableArray array];
+	NSEnumerator * enumerator = [folderArray objectEnumerator];
+	Folder * folder;
+	
+	while ((folder = [enumerator nextObject]) != nil)
+	{
+		int folderId = [folder itemId];
+		if (IsGroupFolder(folder))
+		{
+			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId]]];
+			if (folderId == currentFolderId)
+				[self refreshFolder:YES];
+		}
+		else if (!IsSmartFolder(folder))
+		{
+			[refArray addObjectsFromArray:[db arrayOfUnreadMessages:folderId]];
+			if ([db markFolderRead:folderId])
+			{
+				[foldersTree updateFolder:folderId recurseToParents:YES];
+				if (folderId == currentFolderId)
+					[messageList reloadData];
+			}
+		}
+		else
+		{
+			// For smart folders, we only mark all read the current folder to
+			// simplify things.
+			if (folderId == currentFolderId)
+				[self markReadByArray:currentArrayOfMessages readFlag:YES];
+		}
+	}
+	return refArray;
+}
+
+/* markAllReadByReferencesArray
+ * Given an array of references, mark all those messages read or unread.
+ */
+-(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
+{
+	NSEnumerator * enumerator = [refArray objectEnumerator];
+	ArticleReference * ref;
+	int lastFolderId = -1;
+
+	// Set up to undo or redo this action
+	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+	SEL markAllReadUndoAction = readFlag ? @selector(markAllReadUndo:) : @selector(markAllReadRedo:);
+	[undoManager registerUndoWithTarget:self selector:markAllReadUndoAction object:refArray];
+	[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
+	
+	[db beginTransaction];
+	while ((ref = [enumerator nextObject]) != nil)
+	{
+		int folderId = [ref folderId];
+		[db markMessageRead:folderId guid:[ref guid] isRead:readFlag];
+		if (folderId != lastFolderId && lastFolderId != -1)
+		{
+			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			if (lastFolderId == currentFolderId)
+				[self refreshFolder:YES];
+		}
+		lastFolderId = folderId;
+	}
+	[db commitTransaction];
+	
+	if (lastFolderId != -1)
+	{
+		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+		if (lastFolderId == currentFolderId)
+			[self refreshFolder:YES];
+	}
+
 	// The info bar has a count of unread messages so we need to
 	// update that.
 	[controller showUnreadCountOnApplicationIcon];

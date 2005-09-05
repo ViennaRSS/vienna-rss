@@ -76,7 +76,7 @@
 -(void)flushFolder:(int)folderId;
 -(void)releaseMessages:(int)folderId;
 -(void)deleteDeletedMessages;
--(void)markFolderRead:(int)folderId;
+-(BOOL)markFolderRead:(int)folderId;
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
 -(BOOL)setParent:(int)newParentID forFolder:(int)folderId;
@@ -98,6 +98,7 @@
 -(BOOL)initMessageArray:(Folder *)folder;
 -(BOOL)addMessage:(int)folderID message:(Message *)message;
 -(BOOL)deleteMessage:(int)folderId guid:(NSString *)guid;
+-(NSArray *)arrayOfUnreadMessages:(int)folderId;
 -(NSArray *)arrayOfMessages:(int)folderId filterString:(NSString *)filterString;
 -(NSString *)messageText:(int)folderId guid:(NSString *)guid;
 -(void)markMessageRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;

@@ -107,7 +107,7 @@
 -(void)setBloglinesId:(long)newBloglinesId;
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
--(NSArray *)messages;
+-(NSArray *)articles;
 -(Message *)messageFromGuid:(NSString *)guid;
 -(void)addMessage:(Message *)newMessage;
 -(void)deleteMessage:(NSString *)messageId;
