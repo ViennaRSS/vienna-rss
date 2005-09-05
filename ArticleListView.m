@@ -60,7 +60,7 @@
 	-(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag;
 	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray;
 	-(void)reloadArrayOfMessages;
-	-(void)updateMessageText;
+	-(void)refreshArticlePane;
 	-(void)updateMessageListRowHeight;
 	-(void)setOrientation:(BOOL)flag;
 	-(void)printDocument;
@@ -728,11 +728,24 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			{
 				[htmlTemplate release];
 				[cssStylesheet release];
-				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
+				
+				NSMutableString * newTemplate = [NSMutableString stringWithCString:[fileData bytes] length:[fileData length]];
 				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
 
+				// Strip off redundant header that were present in old versions of the
+				// Vienna styles.
+				[newTemplate replaceString:@"<html>" withString:@""];
+				[newTemplate replaceString:@"<head>" withString:@""];
+				[newTemplate replaceString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"$CSSFilePath$\" />" withString:@""];
+				[newTemplate replaceString:@"<title>$ArticleTitle$</title>" withString:@""];
+				[newTemplate replaceString:@"</head>" withString:@""];
+				[newTemplate replaceString:@"<body>" withString:@""];
+				[newTemplate replaceString:@"</body>" withString:@""];
+				[newTemplate replaceString:@"</html>" withString:@""];
+				htmlTemplate = [newTemplate retain];
+
 				if (!isAppInitialising)
-					[self updateMessageText];
+					[self refreshArticlePane];
 
 				[handle closeFile];
 				return YES;
@@ -749,7 +762,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleMinimumFontSizeChange:(NSNotification *)nc
 {
 	[self loadMinimumFontSize];
-	[self updateMessageText];
+	[self refreshArticlePane];
 }
 
 /* loadMinimumFontSize
@@ -1122,7 +1135,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		if (![self scrollToMessage:guid])
 			currentSelectedRow = -1;
 		else
-			[self updateMessageText];
+			[self refreshArticlePane];
 	}
 	[guid release];
 }
@@ -1198,7 +1211,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	else
 	{
 		NSAssert(currentSelectedRow < (int)[currentArrayOfMessages count], @"Out of range row index received");
-		[self updateMessageText];
+		[self refreshArticlePane];
 		
 		// If we mark read after an interval, start the timer here.
 		[markReadTimer invalidate];
@@ -1222,17 +1235,23 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 }
 
-/* updateMessageText
- * Updates the message text for the current selected message possibly because
- * some of the message attributes have changed.
+/* refreshArticlePane
+ * Updates the article pane for the current selected messages.
  */
--(void)updateMessageText
+-(void)refreshArticlePane
 {
-	if (currentSelectedRow >= 0)
+	NSArray * msgArray = [[self markedMessageRange] autorelease];
+	int index;
+
+	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""];
+	[htmlText appendString:cssStylesheet];
+	[htmlText appendString:@"\"/><title>$ArticleTitle$</title></head><body>"];
+
+	for (index = 0; index < [msgArray count]; ++index)
 	{
-		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		Message * theArticle = [msgArray objectAtIndex:index];
 		Folder * folder = [db folderFromID:[theArticle folderId]];
-		
+
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
 		NSString * messageText = [db messageText:[theArticle folderId] guid:[theArticle guid]];
@@ -1242,23 +1261,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		NSString * messageTitle = [theArticle title] ? [theArticle title] : @"";
 		NSString * folderTitle = [folder name] ? [folder name] : @"";
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
-		
+
 		// Load the selected HTML template for the current view style and plug in the current
-		// message values and style sheet setting. If no template has been set, we use a
-		// predefined one with no styles.
-		//
-		NSMutableString * htmlMessage = nil;
-		NSString * ourTemplate = htmlTemplate;
-		if (ourTemplate == nil)
-			ourTemplate = @"<html><head><title>$ArticleTitle$</title></head>"
-				"<body><strong><a href=\"$ArticleLink$\">$ArticleTitle$</a></strong><br><br>$ArticleBody$<br><br>"
-				"<a href=\"$FeedLink$\">$FeedTitle$</a></span> "
-				"<span>$ArticleDate$</span>"
-				"</body></html>";
-		
-		htmlMessage = [[NSMutableString alloc] initWithString:ourTemplate];
-		if (cssStylesheet != nil)
-			[htmlMessage replaceString:@"$CSSFilePath$" withString:cssStylesheet];
+		// message values and style sheet setting.
+		NSMutableString * htmlMessage = [[NSMutableString alloc] initWithString:htmlTemplate];
 		[htmlMessage replaceString:@"$ArticleLink$" withString:messageLink];
 		[htmlMessage replaceString:@"$ArticleTitle$" withString:messageTitle];
 		[htmlMessage replaceString:@"$ArticleBody$" withString:messageText];
@@ -1266,14 +1272,22 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[htmlMessage replaceString:@"$ArticleDate$" withString:messageDate];
 		[htmlMessage replaceString:@"$FeedTitle$" withString:folderTitle];
 		[htmlMessage replaceString:@"$FeedLink$" withString:folderLink];
-		
-		// Here we ask the webview to do all the hard work. Note that we pass the path to the
-		// stylesheet as the base URL. There's an idiosyncracy in loadHTMLString:baseURL: that it
-		// requires a URL to an actual file as the second parameter or it won't work.
-		//
-		[[textView mainFrame] loadHTMLString:htmlMessage baseURL:[NSURL URLWithString:[folder feedURL]]];
+
+		// Separate each message with a horizontal divider line
+		if (index > 0)
+			[htmlText appendString:@"<hr><br />"];
+		[htmlText appendString:htmlMessage];
 		[htmlMessage release];
 	}
+
+	// Here we ask the webview to do all the hard work. There's an idiosyncracy in loadHTMLString:baseURL: that it
+	// requires a URL to an actual file as the second parameter or it won't work.
+	[htmlText appendString:@"</body></html>"];
+
+	Folder * folder = [db folderFromID:currentFolderId];
+	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
+	[[textView mainFrame] loadHTMLString:htmlText baseURL:[NSURL URLWithString:urlString]];
+	[htmlText release];
 }
 
 /* markCurrentRead

@@ -10,6 +10,8 @@ Thanks!
 ----------
 - You can now undo/redo Mark All Read, even across multiple folders.
 - Article view split bar position is now properly persisted across sessions.
+- Disabled proportional folder and article list split bar resizing when the main window is resized.
+- Selecting multiple articles now shows multiple articles in the article pane.
 
 2.0.0.2006
 ----------
