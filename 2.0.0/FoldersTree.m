@@ -656,6 +656,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		TreeNode * node = (TreeNode *)item;
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
+		[realCell setTextColor:([olv isRowSelected:[olv rowForItem:item]]) ? [NSColor whiteColor] : [NSColor blackColor]];
 		if (IsSmartFolder([node folder]))  // Because if the search results contain unread messages we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
