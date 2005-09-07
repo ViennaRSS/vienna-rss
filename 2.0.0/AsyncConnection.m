@@ -26,6 +26,9 @@
 	-(void)sendConnectionCompleteNotification;
 @end
 
+// Our default user agent. Mimic Safari 2.0.1 (412)
+static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/412 (KHTML, like Gecko) Safari/412";
+
 @implementation AsyncConnection
 
 /* init
@@ -128,22 +131,25 @@
 	handler = endSelector;
 	
 	NSMutableURLRequest * theRequest = [NSMutableURLRequest requestWithURL:theUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
-	if (theRequest != nil)
+	if (theRequest == nil)
+		return NO;
+
+	if (httpHeaders != nil)
 	{
-		if (httpHeaders != nil)
+		NSEnumerator * enumerator = [[httpHeaders allKeys] objectEnumerator];
+		NSString * httpFieldName;
+		
+		while ((httpFieldName = [enumerator nextObject]) != nil)
 		{
-			NSEnumerator * enumerator = [[httpHeaders allKeys] objectEnumerator];
-			NSString * httpFieldName;
-			
-			while ((httpFieldName = [enumerator nextObject]) != nil)
-			{
-				NSString * fieldValue = [httpHeaders valueForKey:httpFieldName];
-				if (fieldValue != nil && ![fieldValue isBlank])
-					[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
-			}
+			NSString * fieldValue = [httpHeaders valueForKey:httpFieldName];
+			if (fieldValue != nil && ![fieldValue isBlank])
+				[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
 		}
 	}
-
+	
+	// Some sites refuse to respond without a User-agent string.
+	[theRequest addValue:MA_Default_User_Agent forHTTPHeaderField:@"User-agent"];
+	
 	status = MA_Connect_Stopped;
 	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
 	return connector != nil;

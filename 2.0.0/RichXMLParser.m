@@ -307,7 +307,7 @@
 		// Parse link
 		if ([nodeName isEqualToString:@"link"])
 		{
-			[self setLink:[subTree valueOfElement]];
+			[self setLink:[[subTree valueOfElement] trim]];
 			continue;
 		}			
 		
@@ -430,7 +430,7 @@
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"link"])
 				{
-					NSString * linkName = [subItemTree valueOfElement];
+					NSString * linkName = [[subItemTree valueOfElement] trim];
 					[newItem setLink:linkName];
 					continue;
 				}
