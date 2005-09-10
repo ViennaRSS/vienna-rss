@@ -23,9 +23,13 @@
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
+	+(NSString *)mapEntityToString:(NSString *)entityString;
 	+(XMLParser *)treeWithCFXMLTreeRef:(CFXMLTreeRef)ref;
 	-(XMLParser *)addTree:(NSString *)name withAttributes:(NSDictionary *)attributesDict closed:(BOOL)flag;
 @end
+
+// Used for mapping entities to their representations
+static NSMutableDictionary * entityMap = nil;
 
 @implementation XMLParser
 
@@ -395,16 +399,7 @@
 			if (valueName != nil)
 			{
 				if (CFXMLNodeGetTypeCode(subNode) == kCFXMLNodeTypeEntityReference)
-				{
-					if ([valueName isEqualTo:@"lt"])	valueName = @"<";
-					else if ([valueName isEqualTo: @"gt"]) valueName = @">";
-					else if ([valueName isEqualTo: @"quot"]) valueName = @"\"";
-					else if ([valueName isEqualTo: @"amp"]) valueName = @"&";
-					else if ([valueName isEqualTo: @"rsquo"]) valueName = @"'";
-					else if ([valueName isEqualTo: @"lsquo"]) valueName = @"'";
-					else if ([valueName isEqualTo: @"apos"]) valueName = @"'";				
-					else valueName = [NSString stringWithFormat: @"&%@;", valueName];
-				}
+					valueName = [XMLParser mapEntityToString:valueName];
 				[valueString appendString:valueName];
 			}
 		}
@@ -446,23 +441,9 @@
 		if (entityEnd != NSNotFound)
 		{
 			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
-			NSString * entityString = [processedString substringWithRange:entityRange];
-			NSString * stringToAppend;
-			
-			if ([entityString characterAtIndex:1] == '#' && entityRange.length > 3)
-				stringToAppend = [NSString stringWithFormat:@"%C", [[entityString substringFromIndex:2] intValue]];
-			else
-			{
-				if ([entityString isEqualTo:@"&lt;"])				stringToAppend = @"<";
-				else if ([entityString isEqualTo: @"&gt;"])			stringToAppend = @">";
-				else if ([entityString isEqualTo: @"&quot;"])		stringToAppend = @"\"";
-				else if ([entityString isEqualTo: @"&amp;"])		stringToAppend = @"&";
-				else if ([entityString isEqualTo: @"&rsquo;"])		stringToAppend = @"'";
-				else if ([entityString isEqualTo: @"&lsquo;"])		stringToAppend = @"'";
-				else if ([entityString isEqualTo: @"&apos;"])		stringToAppend = @"'";				
-				else												stringToAppend = entityString;
-			}
-			[processedString replaceCharactersInRange:entityRange withString:stringToAppend];
+			NSRange innerEntityRange = NSMakeRange(entityRange.location + 1, entityRange.length - 2);
+			NSString * entityString = [processedString substringWithRange:innerEntityRange];
+			[processedString replaceCharactersInRange:entityRange withString:[XMLParser mapEntityToString:entityString]];
 		}
 		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
 	}
@@ -470,6 +451,44 @@
 	NSString * returnString = [processedString trim];
 	[processedString release];
 	return returnString;
+}
+
+/* mapEntityToString
+ * Maps an entity sequence to its character equivalent.
+ */
++(NSString *)mapEntityToString:(NSString *)entityString
+{
+	if (entityMap == nil)
+	{
+		entityMap = [[NSMutableDictionary dictionaryWithObjectsAndKeys:
+									@"<",	@"lt",
+									@">",	@"gt",
+									@"\"",	@"quot",
+									@"&",	@"amp",
+									@"'",	@"rsquo",
+									@"'",	@"lsquo",
+									@"'",	@"apos",
+									nil,	nil] retain];
+
+		// Add entities that map to non-ASCII characters
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xF6] forKey:@"ouml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD6] forKey:@"Ouml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xFC] forKey:@"uuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xDC] forKey:@"Uuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEF] forKey:@"iuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCF] forKey:@"Iuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEB] forKey:@"euml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCB] forKey:@"Euml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE4] forKey:@"auml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC4] forKey:@"Auml"];
+	}
+
+	// Parse off numeric codes of the format #xxx
+	if ([entityString length] > 1 && [entityString characterAtIndex:0] == '#')
+		return [NSString stringWithFormat:@"%C", [[entityString substringFromIndex:1] intValue]];
+	
+	NSString * mappedString = [entityMap objectForKey:entityString];
+	return mappedString ? mappedString : [NSString stringWithFormat:@"&%@;", entityString];
 }
 
 /* parseXMLDate
