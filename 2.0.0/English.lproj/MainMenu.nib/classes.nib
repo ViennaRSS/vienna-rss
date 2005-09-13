@@ -5,6 +5,7 @@
                 cancelAllRefreshes = id; 
                 cancelRenameFolder = id; 
                 checkForUpdates = id; 
+                closeAllTabs = id; 
                 closeMainWindow = id; 
                 closeTab = id; 
                 compactDatabase = id; 
@@ -57,6 +58,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 browserView = BrowserView; 
+                closeAllTabsItem = NSMenuItem; 
                 closeTabItem = NSMenuItem; 
                 closeWindowItem = NSMenuItem; 
                 exportAll = NSButtonCell; 

@@ -49,6 +49,7 @@
 	IBOutlet NSTextField * statusText;
 	IBOutlet NSProgressIndicator * spinner;
 	IBOutlet NSMenuItem * closeTabItem;
+	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
 
 	ActivityViewer * activityViewer;
@@ -109,6 +110,7 @@
 -(IBAction)previousTab:(id)sender;
 -(IBAction)nextTab:(id)sender;
 -(IBAction)closeTab:(id)sender;
+-(IBAction)closeAllTabs:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
 
