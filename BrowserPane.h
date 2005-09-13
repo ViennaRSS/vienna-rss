@@ -1,8 +1,8 @@
 //
-//  ArticleView.h
+//  BrowserPane.h
 //  Vienna
 //
-//  Created by Steve on Tue Jul 05 2005.
+//  Created by Steve on 9/7/05.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,9 +20,29 @@
 
 #import <Cocoa/Cocoa.h>
 #import "WebKit/WebView.h"
+#import "BrowserView.h"
 
-@interface ArticleView : WebView
-{
+@class AppController;
+@class ArticleView;
+
+@interface BrowserPane : NSBox<BaseView> {
+	IBOutlet ArticleView * webPane;
+	AppController * controller;
+	WebPreferences * defaultWebPrefs;
+	BrowserTab * tab;
+	BOOL isLoadingFrame;
 }
--(void)keyDown:(NSEvent *)theEvent;
+
+// Accessor functions
+-(void)setController:(AppController *)theController;
+-(void)loadURL:(NSURL *)url;
+-(void)setTab:(BrowserTab *)newTab;
+-(BOOL)isLoading;
+-(void)handleGoForward;
+-(void)handleGoBack;
+-(BOOL)canGoBack;
+-(BOOL)canGoForward;
+-(void)handleReload:(id)sender;
+-(void)handleStopLoading:(id)sender;
+-(NSView *)mainView;
 @end

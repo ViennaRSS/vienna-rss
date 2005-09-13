@@ -8,6 +8,7 @@
 "Loading %@..." = "Chargement %@...";
 "Completed" = "Termin√©";
 "Refresh RSS feeds" = "Rafra√Æchir les abonnements";
+"Refresh All Subscriptions" = "Rafra√Æchir Tous Les Abonnements";
 "Already subscribed title" = "Erreur";
 "Already subscribed body" = "Vous √™tes d√©√† abonn√© √† ce flux";
 "RSS Subscription Import Title" = "Importation termin√©e";
@@ -159,3 +160,5 @@
 "Recent Searches" = "Recherches récentes";
 "Recents" = "Recents";
 "Clear" = "Effacer les recherches récentes";
+"Search web page" = "Search web page";
+"Loading..." = "Chargement...";

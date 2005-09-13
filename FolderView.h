@@ -21,8 +21,8 @@
 #import <Foundation/Foundation.h>
 
 @interface FolderView : NSOutlineView {
-	NSImage *blueGradient;
-	NSImage *grayGradient;
+	NSImage * blueGradient;
+	NSImage * grayGradient;
 	NSRect iRect;
 	BOOL useTooltips;
 }

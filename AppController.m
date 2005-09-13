@@ -36,12 +36,16 @@
 #import "ViennaApp.h"
 #import "ActivityLog.h"
 #import "Constants.h"
+#import "ArticleView.h"
+#import "BrowserPane.h"
 #import "Preferences.h"
 #import "HelperFunctions.h"
+#import "WebKit/WebFrame.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
 
 @interface AppController (Private)
+	-(void)handleTabChange:(NSNotification *)nc;
 	-(void)handleFolderSelection:(NSNotification *)note;
 	-(void)handleCheckFrequencyChange:(NSNotification *)note;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
@@ -57,9 +61,11 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
+	-(void)updateSearchPlaceholder;
 	-(FoldersTree *)foldersTree;
 	-(IBAction)endRenameFolder:(id)sender;
 	-(IBAction)cancelRenameFolder:(id)sender;
+	-(void)updateCloseCommands;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -108,7 +114,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		appName = @"Vienna";
 
 	// Set the primary view of the browser view
-	[browserView setPrimaryView:mainArticleView];
+	BrowserTab * primaryTab = [browserView setPrimaryTabView:mainArticleView];
+	[browserView setTabTitle:primaryTab title:NSLocalizedString(@"Articles", nil)];
 
 	// Set the delegates and title
 	[mainWindow setDelegate:self];
@@ -123,6 +130,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
+	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
 
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -193,7 +201,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	// Assign the controller for the child views
 	[foldersTree setController:self];
 	[mainArticleView setController:self];
-	
+
+	// Fix up the Close commands
+	[self updateCloseCommands];
+
 	// Do safe initialisation.
 	[self doSafeInitialisation];
 }
@@ -327,6 +338,13 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	return db;
 }
 
+/* browserView
+ */
+-(BrowserView *)browserView
+{
+	return browserView;
+}
+
 /* foldersTree
  */
 -(FoldersTree *)foldersTree
@@ -430,7 +448,9 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
 	
 	// Refresh command
-	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:@"Refresh All Subscriptions" action:@selector(refreshAllSubscriptions:) keyEquivalent:@""];
+	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Refresh All Subscriptions", nil)
+													   action:@selector(refreshAllSubscriptions:)
+												keyEquivalent:@""];
 	[appDockMenu addItem:menuItem];
 	[menuItem release];
 	
@@ -447,16 +467,25 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([prefs openLinksInVienna])
 	{
-		// TODO: when our internal browser view is implemented, open the URL internally.
+		BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
+		BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane];
+		[newBrowserPane setController:self];
+		[browserView setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
+		[newBrowserPane loadURL:url];
+		[newBrowserPane setTab:tab];
+		[mainWindow makeFirstResponder:[newBrowserPane mainView]];
+		[newBrowserPane release];
 	}
-
-	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
-	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
-					withAppBundleIdentifier:NULL
-									options:lOptions
-			 additionalEventParamDescriptor:NULL
-						  launchIdentifiers:NULL];
+	else
+	{
+		// Launch in the foreground or background as needed
+		NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
+		[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
+						withAppBundleIdentifier:NULL
+										options:lOptions
+				 additionalEventParamDescriptor:NULL
+							  launchIdentifiers:NULL];
+	}
 }
 
 /* setImageForMenuCommand
@@ -505,8 +534,23 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
 	NSURL * scriptURL = [NSURL fileURLWithPath:scriptName];
 	NSAppleScript * appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
-	[appleScript executeAndReturnError:&errorDictionary];
-	[appleScript release];
+	if (appleScript == nil)
+	{
+		NSString * baseScriptName = [[scriptName lastPathComponent] stringByDeletingPathExtension];
+		runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"Error loading script '%@'", nil), baseScriptName],
+						[errorDictionary valueForKey:NSAppleScriptErrorMessage]);
+	}
+	else
+	{
+		NSAppleEventDescriptor * resultEvent = [appleScript executeAndReturnError:&errorDictionary];
+		[appleScript release];
+		if (resultEvent == nil)
+		{
+			NSString * baseScriptName = [[scriptName lastPathComponent] stringByDeletingPathExtension];
+			runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"AppleScript Error in '%@' script", nil), baseScriptName],
+							[errorDictionary valueForKey:NSAppleScriptErrorMessage]);
+		}
+	}
 }
 
 /* growlIsReady
@@ -786,20 +830,12 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[preferenceController showWindow:self];
 }
 
-/* compactDatabase
- * Run the database compaction command.
- */
--(IBAction)compactDatabase:(id)sender
-{
-	[db compactDatabase];
-}
-
 /* printDocument
  * Print the current message in the message window.
  */
 -(IBAction)printDocument:(id)sender
 {
-	[[browserView activeView] printDocument];
+	[[browserView activeTabView] printDocument];
 }
 
 /* folders
@@ -833,6 +869,27 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(BOOL)selectFolder:(int)folderId
 {
 	return [mainArticleView selectFolderAndMessage:folderId guid:nil];
+}
+
+/* updateCloseCommands
+ * Update the keystrokes assigned to the Close Tab and Close Window
+ * commands depending on whether any tabs are opened.
+ */
+-(void)updateCloseCommands
+{
+	if ([browserView countOfTabs] < 2)
+	{
+		[closeTabItem setKeyEquivalent:@""];
+		[closeWindowItem setKeyEquivalent:@"w"];
+		[closeWindowItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+	}
+	else
+	{
+		[closeTabItem setKeyEquivalent:@"w"];
+		[closeTabItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+		[closeWindowItem setKeyEquivalent:@"W"];
+		[closeWindowItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+	}
 }
 
 /* handleRSSLink
@@ -894,8 +951,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	int folderId = [(NSNumber *)[nc object] intValue];
 	if (folderId == [mainArticleView currentFolderId])
 	{
-		[self setMainWindowTitle:folderId];
 		[mainArticleView refreshFolder:YES];
+		[self updateSearchPlaceholder];
 	}
 }
 
@@ -910,9 +967,13 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	// We only care if the selection really changed
 	if ([mainArticleView currentFolderId] != newFolderId && newFolderId != 0)
 	{
+		// Make sure article viewer is active
+		[browserView setActiveTabToPrimaryTab];
+
 		// Blank out the search field
 		[searchField setStringValue:@""];
 		[mainArticleView selectFolderWithFilter:newFolderId];
+		[self updateSearchPlaceholder];
 		[[NSUserDefaults standardUserDefaults] setInteger:[mainArticleView currentFolderId] forKey:MAPref_CachedFolderID];
 	}
 }
@@ -991,6 +1052,23 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[[Preferences standardPreferences] setDisplayStyle:[menuItem title]];
 }
 
+/* handleTabChange
+ * Handle a change in the active tab field.
+ */
+-(void)handleTabChange:(NSNotification *)nc
+{
+	NSView<BaseView> * newView = [nc object];
+	if (newView == mainArticleView)
+		[mainWindow makeFirstResponder:[mainArticleView mainView]];
+	else
+	{
+		BrowserPane * webPane = (BrowserPane *)newView;
+		[mainWindow makeFirstResponder:[webPane mainView]];
+	}
+	[self updateCloseCommands];
+	[self updateSearchPlaceholder];
+}
+
 /* handleRefreshStatusChange
  * Handle a change of the refresh status.
  */
@@ -1052,20 +1130,46 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		[self openURLInBrowser:[theArticle link]];
 }
 
-/* forwardTrackMessage
- * Forward track through the list of messages displayed
+/* goForward
+ * In article view, forward track through the list of messages displayed. In 
+ * web view, go to the next web page.
  */
--(IBAction)forwardTrackMessage:(id)sender
+-(IBAction)goForward:(id)sender
 {
-	[mainArticleView trackMessage:MA_Track_Forward];
+	[[browserView activeTabView] handleGoForward];
 }
 
-/* backTrackMessage
- * Back track through the list of messages displayed
+/* goBack
+ * In article view, back track through the list of messages displayed. In 
+ * web view, go to the previous web page.
  */
--(IBAction)backTrackMessage:(id)sender
+-(IBAction)goBack:(id)sender
 {
-	[mainArticleView trackMessage:MA_Track_Back];
+	[[browserView activeTabView] handleGoBack];
+}
+
+/* localPerformFindPanelAction
+ * The default handler for the Find actions is the first responder. Unfortunately the
+ * WebView, although it claims to implement this, doesn't. So we redirect the Find
+ * commands here and trap the case where the webview has first responder status and
+ * handle it especially. For other first responders, we pass this command through.
+ */
+-(IBAction)localPerformFindPanelAction:(id)sender
+{
+	switch ([sender tag])
+	{
+	case NSFindPanelActionShowFindPanel:
+		[mainWindow makeFirstResponder:searchField];
+		break;
+		
+	case NSFindPanelActionPrevious:
+		[[browserView activeTabView] search];
+		break;
+		
+	case NSFindPanelActionNext:
+		[[browserView activeTabView] search];
+		break;
+	}
 }
 
 /* handleKeyDown [delegate]
@@ -1100,11 +1204,11 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			return YES;
 
 		case '>':
-			[self forwardTrackMessage:self];
+			[self goForward:self];
 			return YES;
 
 		case '<':
-			[self backTrackMessage:self];
+			[self goBack:self];
 			return YES;
 
 		case 'm':
@@ -1121,7 +1225,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			[self viewArticlePage:self];
 			return YES;
 	}
-	return [[browserView activeView] handleKeyDown:keyChar withFlags:flags];
+	return [[browserView activeTabView] handleKeyDown:keyChar withFlags:flags];
 }
 
 /* isConnecting
@@ -1250,6 +1354,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)viewNextUnread:(id)sender
 {
+	[browserView setActiveTabToPrimaryTab];
 	[mainArticleView displayNextUnread];
 }
 
@@ -1260,18 +1365,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(void)clearUndoStack
 {
 	[[mainWindow undoManager] removeAllActions];
-}
-
-/* setMainWindowTitle
- * Updates the main window title bar.
- */
--(void)setMainWindowTitle:(int)folderId
-{
-	if (folderId > 0)
-	{
-		Folder * folder = [db folderFromID:folderId];
-		[[searchField cell] setPlaceholderString:[NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]]];
-	}
 }
 
 /* markAllRead
@@ -1510,6 +1603,60 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		[self openURLInBrowser:[NSString stringWithFormat:@"file://%@", pathToAckFile]];
 }
 
+/* previousTab
+ * Display the previous tab, if there is one.
+ */
+-(IBAction)previousTab:(id)sender
+{
+	[browserView showPreviousTab];
+}
+
+/* nextTab
+ * Display the next tab, if there is one.
+ */
+-(IBAction)nextTab:(id)sender
+{
+	[browserView showNextTab];
+}
+
+/* closeTab
+ * Close the active tab unless it's the primary view.
+ */
+-(IBAction)closeTab:(id)sender
+{
+	[browserView closeTab:[browserView activeTab]];
+}
+
+/* reloadPage
+ * Reload the web page.
+ */
+-(IBAction)reloadPage:(id)sender
+{
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+		[theView performSelector:@selector(handleReload:)];
+}
+
+/* stopReloadingPage
+ * Cancel current reloading of a web page.
+ */
+-(IBAction)stopReloadingPage:(id)sender
+{
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+		[theView performSelector:@selector(handleStopLoading:)];
+}
+
+/* updateSearchPlaceholder
+ * Update the search placeholder string in the search field depending on the view in
+ * the active tab.
+ */
+-(void)updateSearchPlaceholder
+{
+	[[searchField cell] setSendsWholeSearchString:[browserView activeTabView] != mainArticleView];
+	[[searchField cell] setPlaceholderString:[[browserView activeTabView] searchPlaceholderString]];
+}
+
 /* searchString
  * Return the contents of the search field.
  */
@@ -1523,7 +1670,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	[[browserView activeView] search];
+	[[browserView activeTabView] search];
 }
 
 /* refreshAllSubscriptions
@@ -1625,18 +1772,19 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	SEL	theAction = [menuItem action];
 	BOOL isMainWindowVisible = [mainWindow isVisible];
-	
+	BOOL isArticleView = [browserView activeTabView] == mainArticleView;
+
 	if (theAction == @selector(printDocument:))
 	{
 		return ([mainArticleView selectedArticle] != nil && isMainWindowVisible);
 	}
-	else if (theAction == @selector(backTrackMessage:))
+	else if (theAction == @selector(goBack:))
 	{
-		return [mainArticleView getTrackIndex] != MA_Track_AtStart && isMainWindowVisible;
+		return [[browserView activeTabView] canGoBack] && isMainWindowVisible;
 	}
-	else if (theAction == @selector(forwardTrackMessage:))
+	else if (theAction == @selector(goForward:))
 	{
-		return [mainArticleView getTrackIndex] != MA_Track_AtEnd && isMainWindowVisible;
+		return [[browserView activeTabView] canGoForward] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newSubscription:))
 	{
@@ -1662,13 +1810,13 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	{
 		Field * field = [menuItem representedObject];
 		[menuItem setState:[field visible] ? NSOnState : NSOffState];
-		return isMainWindowVisible && ([mainArticleView tableLayout] == MA_Table_Layout);
+		return isMainWindowVisible && ([mainArticleView tableLayout] == MA_Table_Layout) && isArticleView;
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{
 		NSString * styleName = [menuItem title];
 		[menuItem setState:[styleName isEqualToString:[[Preferences standardPreferences] displayStyle]] ? NSOnState : NSOffState];
-		return isMainWindowVisible;
+		return isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(doSortColumn:))
 	{
@@ -1677,7 +1825,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			[menuItem setState:NSOnState];
 		else
 			[menuItem setState:NSOffState];
-		return isMainWindowVisible;
+		return isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
@@ -1721,14 +1869,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	{
 		Message * thisMessage = [mainArticleView selectedArticle];
 		if (thisMessage != nil)
-			return ([thisMessage link] && ![[thisMessage link] isBlank] && isMainWindowVisible);
+			return ([thisMessage link] && ![[thisMessage link] isBlank] && isMainWindowVisible && isArticleView);
 		return NO;
 	}
 	else if (theAction == @selector(exportSubscriptions:))
-	{
-		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(runPageLayout:))
 	{
 		return isMainWindowVisible;
 	}
@@ -1749,7 +1893,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return [mainArticleView selectedArticle] != nil && ![db readOnly] && isMainWindowVisible;
+		return [mainArticleView selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(emptyTrash:))
 	{
@@ -1762,12 +1906,34 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	else if (theAction == @selector(readingPaneOnRight:))
 	{
 		[menuItem setState:([[Preferences standardPreferences] readingPaneOnRight] ? NSOnState : NSOffState)];
-		return isMainWindowVisible;
+		return isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(readingPaneOnBottom:))
 	{
 		[menuItem setState:([[Preferences standardPreferences] readingPaneOnRight] ? NSOffState : NSOnState)];
-		return isMainWindowVisible;
+		return isMainWindowVisible && isArticleView;
+	}
+	else if (theAction == @selector(previousTab:))
+	{
+		return isMainWindowVisible && [browserView countOfTabs] > 1;
+	}
+	else if (theAction == @selector(nextTab:))
+	{
+		return isMainWindowVisible && [browserView countOfTabs] > 1;
+	}
+	else if (theAction == @selector(closeTab:))
+	{
+		return isMainWindowVisible && [browserView activeTabView] != mainArticleView;
+	}
+	else if (theAction == @selector(reloadPage:))
+	{
+		NSView<BaseView> * theView = [browserView activeTabView];
+		return ([theView isKindOfClass:[BrowserPane class]]) && ![(BrowserPane *)theView isLoading];
+	}
+	else if (theAction == @selector(stopReloadingPage:))
+	{
+		NSView<BaseView> * theView = [browserView activeTabView];
+		return ([theView isKindOfClass:[BrowserPane class]]) && [(BrowserPane *)theView isLoading];
 	}
 	else if (theAction == @selector(markFlagged:))
 	{
@@ -1779,7 +1945,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (thisMessage != nil && ![db readOnly] && isMainWindowVisible);
+		return (thisMessage != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	else if (theAction == @selector(markRead:))
 	{
@@ -1791,7 +1957,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (thisMessage != nil && ![db readOnly] && isMainWindowVisible);
+		return (thisMessage != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	return YES;
 }

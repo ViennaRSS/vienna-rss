@@ -10,6 +10,7 @@
                 changeMarkReadBehaviour = id; 
                 changeMinimumFontSize = id; 
                 changeOpenLinksInBackground = id; 
+                changeOpenLinksInExternalBrowser = id; 
                 selectDefaultLinksHandler = id; 
                 selectMinimumFontSize = id; 
             }; 
@@ -29,6 +30,7 @@
                 messageListFontSize = NSComboBox; 
                 minimumFontSizes = NSComboBox; 
                 openLinksInBackground = NSButton; 
+                openLinksInExternalBrowser = NSButton; 
             }; 
             SUPERCLASS = NSWindowController; 
         }

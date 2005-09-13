@@ -114,6 +114,9 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	// Set whether links are opened in the background
 	[openLinksInBackground setState:[prefs openLinksInBackground] ? NSOnState : NSOffState];
 	
+	// Set whether links are opened in the external browser
+	[openLinksInExternalBrowser setState:[prefs openLinksInVienna] ? NSOffState : NSOnState];
+	
 	// Set mark read behaviour
 	[markReadAfterNext setState:[prefs markReadInterval] == 0 ? NSOnState : NSOffState];
 	[markReadAfterDelay setState:[prefs markReadInterval] != 0 ? NSOnState : NSOffState];
@@ -211,6 +214,15 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeOpenLinksInBackground:(id)sender
 {
 	[[Preferences standardPreferences] setOpenLinksInBackground:[sender state] == NSOnState];
+}
+
+/* changeOpenLinksInExternalBrowser
+ * Sets whether Vienna opens new links in the browser view or in
+ * the user's current default browser application.
+ */
+-(IBAction)changeOpenLinksInExternalBrowser:(id)sender
+{
+	[[Preferences standardPreferences] setOpenLinksInVienna:[sender state] == NSOffState];
 }
 
 /* changeCheckForUpdates

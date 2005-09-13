@@ -48,7 +48,7 @@
 					<key>Name</key>
 					<string>url</string>
 				</dict>
-				<key>folderName</key>
+				<key>name</key>
 				<dict>
 					<key>Description</key>
 					<string>The name of a folder</string>

@@ -74,7 +74,7 @@
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
-				<key>folderName</key>
+				<key>name</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>pnam</string>
