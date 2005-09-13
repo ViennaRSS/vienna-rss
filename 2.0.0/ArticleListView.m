@@ -108,9 +108,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 
-	// We're the delegate for the article view
-	[textView setDelegate:self];
-
 	// Create condensed view attribute dictionaries
 	selectionDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
@@ -122,7 +119,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Set header text
 	[messageListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
-	
+
 	// Make us the policy and UI delegate for the web view
 	[textView setPolicyDelegate:self];
 	[textView setUIDelegate:self];
@@ -788,42 +785,51 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return messageList;
 }
 
-/* getTrackIndex
+/* canGoForward
+ * Return TRUE if we can go forward in the backtrack queue.
  */
--(int)getTrackIndex
+-(BOOL)canGoForward
 {
-	if ([backtrackArray isAtStartOfQueue])
-		return MA_Track_AtStart;
-	if ([backtrackArray isAtEndOfQueue])
-		return MA_Track_AtEnd;
-	return 0;
+	return ![backtrackArray isAtEndOfQueue];
 }
 
-/* trackMessage
- * Move backward or forward through the backtrack queue.
+/* canGoBack
+ * Return TRUE if we can go backward in the backtrack queue.
  */
--(void)trackMessage:(int)trackFlag
+-(BOOL)canGoBack
+{
+	return ![backtrackArray isAtStartOfQueue];
+}
+
+/* handleGoForward
+ * Move forward through the backtrack queue.
+ */
+-(void)handleGoForward
 {
 	int folderId;
 	NSString * guid;
 
-	if (trackFlag == MA_Track_Forward)
+	if ([backtrackArray nextItemAtQueue:&folderId messageNumber:&guid])
 	{
-		if ([backtrackArray nextItemAtQueue:&folderId messageNumber:&guid])
-		{
-			isBacktracking = YES;
-			[self selectFolderAndMessage:folderId guid:guid];
-			isBacktracking = NO;
-		}
+		isBacktracking = YES;
+		[self selectFolderAndMessage:folderId guid:guid];
+		isBacktracking = NO;
 	}
-	if (trackFlag == MA_Track_Back)
+}
+
+/* handleGoBack
+ * Move backward through the backtrack queue.
+ */
+-(void)handleGoBack
+{
+	int folderId;
+	NSString * guid;
+	
+	if ([backtrackArray previousItemAtQueue:&folderId messageNumber:&guid])
 	{
-		if ([backtrackArray previousItemAtQueue:&folderId messageNumber:&guid])
-		{
-			isBacktracking = YES;
-			[self selectFolderAndMessage:folderId guid:guid];
-			isBacktracking = NO;
-		}
+		isBacktracking = YES;
+		[self selectFolderAndMessage:folderId guid:guid];
+		isBacktracking = NO;
 	}
 }
 
@@ -1105,6 +1111,18 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	return YES;
 }
 
+/* searchPlaceholderString
+ * Return the search field placeholder.
+ */
+-(NSString *)searchPlaceholderString
+{
+	if (currentFolderId == -1)
+		return @"";
+
+	Folder * folder = [db folderFromID:currentFolderId];
+	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]];
+}
+
 /* search
  * Implement the search action.
  */
@@ -1188,7 +1206,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	[controller setMainWindowTitle:newFolderId];
 	[db flushFolder:currentFolderId];
 	[messageList deselectAll:self];
 	[controller clearUndoStack];

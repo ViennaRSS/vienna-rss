@@ -20,29 +20,11 @@
 
 #import "ArticleView.h"
 
-@interface NSObject(ArticleViewDelegate)
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+@interface NSObject (ArticleViewDelegate)
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
 @end
 
 @implementation ArticleView
-
-/* setDelegate
- * Assign the delegate for this view.
- */
--(void)setDelegate:(id)newDelegate
-{
-	[newDelegate retain];
-	[theDelegate release];
-	theDelegate = newDelegate;
-}
-
-/* delegate
- * Returns the delegate for this view.
- */
--(id)delegate
-{
-	return theDelegate;
-}
 
 /* keyDown
  * Here is where we handle special keys when the message list view
@@ -53,7 +35,7 @@
 	if ([[theEvent characters] length] == 1)
 	{
 		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([[self delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+		if ([[NSApp delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
 			return;
 	}
 	[super keyDown:theEvent];

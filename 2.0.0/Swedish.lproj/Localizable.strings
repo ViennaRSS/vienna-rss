@@ -8,6 +8,7 @@
 "Loading %@..." = "Laddar %@...";
 "Completed" = "Klart";
 "Refresh RSS feeds" = "Uppdatera prenumerationerna";
+"Refresh All Subscriptions" = "Uppdatera Prenumerationerna";
 "Already subscribed title" = "Fel";
 "Already subscribed body" = "Du prenumererar redan på den strömmen";
 "RSS Subscription Import Title" = "Import klar";
@@ -159,3 +160,5 @@
 "Recent Searches" = "Senaste sökningar";
 "Recents" = "Senaste";
 "Clear" = "Rensa senaste sökningar";
+"Search web page" = "Search web page";
+"Loading..." = "Laddar...";

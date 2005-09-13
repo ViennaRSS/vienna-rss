@@ -70,7 +70,7 @@
  */
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd
 {
-	[[self delegate] compactDatabase:nil];
+	[[Database sharedDatabase] compactDatabase];
 	return nil;
 }
 

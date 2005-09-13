@@ -22,18 +22,40 @@
 
 @protocol BaseView
 	-(void)search;
+	-(NSString *)searchPlaceholderString;
 	-(void)printDocument;
+	-(void)handleGoForward;
+	-(void)handleGoBack;
+	-(BOOL)canGoForward;
+	-(BOOL)canGoBack;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
 @end
 
+@class BrowserTab;
 @interface BrowserView : NSView
 {
-	NSView<BaseView> * primaryView;
-	NSView<BaseView> * activeView;
+	BrowserTab * activeTab;
+	NSMutableArray * allTabs;
+	NSImage * closeButton;
+	NSSize closeButtonSize;
+	BrowserTab * trackingTab;
+	NSMutableDictionary * titleAttributes;
+	NSColor * borderColor;
+	NSColor * inactiveTabBackgroundColor;
 }
 
 // Accessors
--(void)setPrimaryView:(NSView *)newPrimaryView;
--(NSView<BaseView> *)primaryView;
--(NSView<BaseView> *)activeView;
+-(BrowserTab *)setPrimaryTabView:(NSView *)newPrimaryView;
+-(BrowserTab *)activeTab;
+-(void)setTabTitle:(BrowserTab *)tab title:(NSString *)newTitle;
+-(NSView<BaseView> *)activeTabView;
+-(void)setActiveTabToPrimaryTab;
+-(void)setActiveTab:(BrowserTab *)newActiveTab;
+-(void)closeTab:(BrowserTab *)theTab;
+-(int)countOfTabs;
+-(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView;
+-(void)makeTabActive:(BrowserTab *)theTab;
+-(void)showTab:(BrowserTab *)theTab;
+-(void)showPreviousTab;
+-(void)showNextTab;
 @end

@@ -31,14 +31,6 @@
 @class TexturedHeader;
 @class FoldersTree;
 
-// Track array constants
-enum {
-	MA_Track_AtStart = -2,
-	MA_Track_AtEnd = -1,
-	MA_Track_Forward = 0,
-	MA_Track_Back
-};
-
 @interface ArticleListView : NSView<BaseView>
 {
 	IBOutlet TexturedHeader * messageListHeader;
@@ -86,8 +78,6 @@ enum {
 -(NSString *)sortColumnIdentifier;
 -(int)tableLayout;
 -(NSDictionary *)initStylesMap;
--(void)trackMessage:(int)trackFlag;
--(int)getTrackIndex;
 -(NSArray *)allMessages;
 -(NSArray *)markedMessageRange;
 -(void)selectFolderWithFilter:(int)newFolderId;

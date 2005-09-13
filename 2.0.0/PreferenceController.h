@@ -31,6 +31,7 @@
 	IBOutlet NSButton * checkForUpdates;
 	IBOutlet NSButton * checkOnStartUp;
 	IBOutlet NSButton * openLinksInBackground;
+	IBOutlet NSButton * openLinksInExternalBrowser;
 	IBOutlet NSButtonCell * markReadAfterNext;
 	IBOutlet NSButtonCell * markReadAfterDelay;
 	IBOutlet NSComboBox * minimumFontSizes;
@@ -47,6 +48,7 @@
 -(IBAction)changeCheckForUpdates:(id)sender;
 -(IBAction)changeMarkReadBehaviour:(id)sender;
 -(IBAction)changeOpenLinksInBackground:(id)sender;
+-(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeMinimumFontSize:(id)sender;
 -(IBAction)selectMinimumFontSize:(id)sender;
 

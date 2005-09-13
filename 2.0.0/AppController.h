@@ -38,7 +38,6 @@
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSWindow * renameWindow;
-	IBOutlet NSWindow * compactDatabaseWindow;
 	IBOutlet NSTextField * renameField;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
@@ -49,6 +48,8 @@
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSTextField * statusText;
 	IBOutlet NSProgressIndicator * spinner;
+	IBOutlet NSMenuItem * closeTabItem;
+	IBOutlet NSMenuItem * closeWindowItem;
 
 	ActivityViewer * activityViewer;
 	PreferenceController * preferenceController;
@@ -84,12 +85,11 @@
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
 -(IBAction)toggleActivityViewer:(id)sender;
--(IBAction)backTrackMessage:(id)sender;
--(IBAction)forwardTrackMessage:(id)sender;
+-(IBAction)goBack:(id)sender;
+-(IBAction)goForward:(id)sender;
 -(IBAction)newSmartFolder:(id)sender;
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
--(IBAction)compactDatabase:(id)sender;
 -(IBAction)editFolder:(id)sender;
 -(IBAction)showAcknowledgements:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
@@ -106,6 +106,11 @@
 -(IBAction)cancelAllRefreshes:(id)sender;
 -(IBAction)moreStyles:(id)sender;
 -(IBAction)showMainWindow:(id)sender;
+-(IBAction)previousTab:(id)sender;
+-(IBAction)nextTab:(id)sender;
+-(IBAction)closeTab:(id)sender;
+-(IBAction)reloadPage:(id)sender;
+-(IBAction)stopReloadingPage:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
@@ -115,12 +120,12 @@
 -(void)handleRSSLink:(NSString *)linkPath;
 -(BOOL)selectFolder:(int)folderId;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
--(void)setMainWindowTitle:(int)folderId;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
 -(NSString *)searchString;
 -(int)currentFolderId;
 -(BOOL)isConnecting;
 -(Database *)database;
+-(BrowserView *)browserView;
 -(NSArray *)folders;
 @end

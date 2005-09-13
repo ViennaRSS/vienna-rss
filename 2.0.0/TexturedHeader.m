@@ -83,16 +83,13 @@
 
 	/* Draw white text centered, but offset down-left. */
 	float offset = 0.5;
-//	[attrs setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:0.7] forKey:@"NSColor"];
 
 	NSRect centeredRect = rect;
 	centeredRect.size = [[self stringValue] sizeWithAttributes:attrs];
 	centeredRect.origin.x = ((rect.size.width - centeredRect.size.width) / 2.0) - offset;
 	centeredRect.origin.y = ((rect.size.height - centeredRect.size.height) / 2.0) + offset;
-//	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
 
 	/* Draw black text centered. */
-//	[attrs setValue:[NSColor blackColor] forKey:@"NSColor"];
 	centeredRect.origin.x += offset;
 	centeredRect.origin.y -= offset;
 	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
