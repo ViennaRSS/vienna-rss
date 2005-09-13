@@ -583,6 +583,24 @@ static const int MA_Left_Margin_Width = 10;
 	[self displayRect:[tab rect]];
 }
 
+/* closeAllTabs
+ * Close all tabs.
+ */
+-(void)closeAllTabs
+{
+	int count = [allTabs count];
+	[activeTab retain];
+	while ( count > 1)
+	{
+		BrowserTab * theTab = [allTabs objectAtIndex:--count];
+		[self removeTrackingRect:[theTab trackingRectTag]];
+		[allTabs removeObject:theTab];
+	}
+	[self updateTrackingRectangles];
+	[self makeTabActive:[allTabs objectAtIndex:0]];
+	[activeTab release];
+}
+
 /* closeTab
  * Close the specified tab unless it is the primary tab, in which case
  * we do nothing.

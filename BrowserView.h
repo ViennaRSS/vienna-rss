@@ -52,6 +52,7 @@
 -(void)setActiveTabToPrimaryTab;
 -(void)setActiveTab:(BrowserTab *)newActiveTab;
 -(void)closeTab:(BrowserTab *)theTab;
+-(void)closeAllTabs;
 -(int)countOfTabs;
 -(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView;
 -(void)makeTabActive:(BrowserTab *)theTab;

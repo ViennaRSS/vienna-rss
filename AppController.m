@@ -880,6 +880,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	if ([browserView countOfTabs] < 2)
 	{
 		[closeTabItem setKeyEquivalent:@""];
+		[closeAllTabsItem setKeyEquivalent:@""];
 		[closeWindowItem setKeyEquivalent:@"w"];
 		[closeWindowItem setKeyEquivalentModifierMask:NSCommandKeyMask];
 	}
@@ -887,6 +888,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	{
 		[closeTabItem setKeyEquivalent:@"w"];
 		[closeTabItem setKeyEquivalentModifierMask:NSCommandKeyMask];
+		[closeAllTabsItem setKeyEquivalent:@"w"];
+		[closeAllTabsItem setKeyEquivalentModifierMask:NSCommandKeyMask|NSAlternateKeyMask];
 		[closeWindowItem setKeyEquivalent:@"W"];
 		[closeWindowItem setKeyEquivalentModifierMask:NSCommandKeyMask];
 	}
@@ -1619,6 +1622,14 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[browserView showNextTab];
 }
 
+/* closeAllTabs
+ * Closes all tab windows.
+ */
+-(IBAction)closeAllTabs:(id)sender
+{
+	[browserView closeAllTabs];
+}
+
 /* closeTab
  * Close the active tab unless it's the primary view.
  */
@@ -1924,6 +1935,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	else if (theAction == @selector(closeTab:))
 	{
 		return isMainWindowVisible && [browserView activeTabView] != mainArticleView;
+	}
+	else if (theAction == @selector(closeAllTabs:))
+	{
+		return isMainWindowVisible && [browserView countOfTabs] > 1;
 	}
 	else if (theAction == @selector(reloadPage:))
 	{
