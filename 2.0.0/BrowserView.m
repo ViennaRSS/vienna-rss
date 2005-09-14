@@ -38,6 +38,7 @@ static const int MA_Left_Margin_Width = 10;
 	NSRect textRect;
 	NSRect closeButtonRect;
 	NSTrackingRectTag tag;
+	NSToolTipTag toolTipTag;
 }
 
 // All accessors, set and get
@@ -49,6 +50,7 @@ static const int MA_Left_Margin_Width = 10;
 -(NSRect)closeButtonRect;
 -(BOOL)hasCloseButton;
 -(NSTrackingRectTag)trackingRectTag;
+-(NSToolTipTag)toolTipTag;
 -(void)setAssociatedView:(NSView<BaseView> *)newView;
 -(void)setTitle:(NSString *)newTitle;
 -(void)setDisplayTitle:(NSString *)newDisplayTitle;
@@ -56,6 +58,7 @@ static const int MA_Left_Margin_Width = 10;
 -(void)setTextRect:(NSRect)newTextRect;
 -(void)setCloseButtonRect:(NSRect)newCloseButtonRect;
 -(void)setTrackingRectTag:(NSTrackingRectTag)newTag;
+-(void)setToolTipTag:(NSToolTipTag)newToolTipTag;
 @end;
 
 @implementation BrowserTab
@@ -184,7 +187,9 @@ static const int MA_Left_Margin_Width = 10;
 }
 
 /* hasCloseButton
- * Returns whether this tab has a close button.
+ * Returns whether this tab has a close button. An empty closeButtonRect
+ * means that setCloseButtonRect hasn't been called to set a close button
+ * rectangle so we use that to indicate that the tab has no close button.
  */
 -(BOOL)hasCloseButton
 {
@@ -205,6 +210,22 @@ static const int MA_Left_Margin_Width = 10;
 -(NSTrackingRectTag)trackingRectTag
 {
 	return tag;
+}
+
+/* setToolTipTag
+ * Set's the tab's associated tooltip tag.
+ */
+-(void)setToolTipTag:(NSToolTipTag)newToolTipTag
+{
+	toolTipTag = newToolTipTag;
+}
+
+/* toolTipTag
+ * Returns the tab's associated tooltip tag.
+ */
+-(NSToolTipTag)toolTipTag
+{
+	return toolTipTag;
 }
 
 /* dealloc
@@ -392,7 +413,10 @@ static const int MA_Left_Margin_Width = 10;
 	NSRect viewRect = [self bounds];
 	int count = [allTabs count];
 	if (count == 1)
+	{
 		[self removeTrackingRect:[[allTabs objectAtIndex:0] trackingRectTag]];
+		[self removeAllToolTips];
+	}
 	else
 	{
 		int x0 = viewRect.origin.x + MA_Left_Margin_Width;
@@ -411,6 +435,10 @@ static const int MA_Left_Margin_Width = 10;
 				[self removeTrackingRect:[theTab trackingRectTag]];
 				[theTab setTrackingRectTag:[self addTrackingRect:computedRect owner:self userData:theTab assumeInside:NO]];
 
+				// Tabs can have tooltips. We'll provide the actual tooltip text in stringForToolTip
+				[self removeToolTip:[theTab toolTipTag]];
+				[theTab setToolTipTag:[self addToolTipRect:computedRect owner:self userData:theTab]];
+
 				// Compute the display title and textRect for the display title.
 				[self updateTabTextRect:theTab];
 
@@ -427,6 +455,16 @@ static const int MA_Left_Margin_Width = 10;
 			++index;
 		}
 	}
+}
+
+/* stringForToolTip
+ * Returns the tooltip for the tab specified by the userData object. This is the tab's full title which
+ * may have been truncated for display.
+ */
+-(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
+{
+	BrowserTab * theTab = (BrowserTab *)userData;
+	return [theTab title];
 }
 
 /* mouseEntered
@@ -612,6 +650,7 @@ static const int MA_Left_Margin_Width = 10;
 	{
 		[theTab retain];
 		[self removeTrackingRect:[theTab trackingRectTag]];
+		[self removeToolTip:[theTab toolTipTag]];
 		[allTabs removeObject:theTab];
 		if (trackingTab == theTab)
 			trackingTab = nil;
