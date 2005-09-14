@@ -470,9 +470,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
 		BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane];
 		[newBrowserPane setController:self];
-		[browserView setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
-		[newBrowserPane loadURL:url];
 		[newBrowserPane setTab:tab];
+		[newBrowserPane loadURL:url];
 		[mainWindow makeFirstResponder:[newBrowserPane mainView]];
 		[newBrowserPane release];
 	}
