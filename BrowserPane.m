@@ -128,7 +128,10 @@
 -(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
 	if (frame == [webPane mainFrame])
+	{
+		[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
 		isLoadingFrame = YES;
+	}
 }
 
 /* didFinishLoadForFrame
