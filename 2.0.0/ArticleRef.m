@@ -37,9 +37,9 @@
 /* makeReference
  * Create a new ArticleReference using the information in the specified article.
  */
-+(ArticleReference *)makeReference:(Message *)aMessage
++(ArticleReference *)makeReference:(Article *)anArticle
 {
-	return [[[ArticleReference alloc] initWithReference:[aMessage guid] inFolder:[aMessage folderId]] autorelease];
+	return [[[ArticleReference alloc] initWithReference:[anArticle guid] inFolder:[anArticle folderId]] autorelease];
 }
 
 /* makeReferenceFromGUID

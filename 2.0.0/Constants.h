@@ -33,7 +33,7 @@ extern NSString * MAPref_SortColumn;
 extern NSString * MAPref_CheckFrequency;
 extern NSString * MAPref_MessageColumns;
 extern NSString * MAPref_CheckForUpdatesOnStartup;
-extern NSString * MAPref_CheckForNewMessagesOnStartup;
+extern NSString * MAPref_CheckForNewArticlesOnStartup;
 extern NSString * MAPref_FolderImagesFolder;
 extern NSString * MAPref_RefreshThreads;
 extern NSString * MAPref_ActiveStyleName;

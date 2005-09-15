@@ -39,7 +39,7 @@
 
 // Private functions
 @interface ArticleListView (Private)
-	-(void)setMessageListHeader;
+	-(void)setArticleListHeader;
 	-(void)initTableView;
 	-(BOOL)initForStyle:(NSString *)styleName;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
@@ -47,27 +47,27 @@
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
-	-(void)selectMessageAfterReload;
+	-(void)selectArticleAfterReload;
 	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
 	-(void)handleStyleChange:(NSNotificationCenter *)nc;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
-	-(BOOL)scrollToMessage:(NSString *)guid;
+	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)selectFirstUnreadInFolder;
 	-(void)makeRowSelectedAndVisible:(int)rowIndex;
 	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
 	-(void)loadMinimumFontSize;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
-	-(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag;
+	-(void)refreshArticleAtRow:(int)theRow markRead:(BOOL)markReadFlag;
 	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray;
-	-(void)reloadArrayOfMessages;
+	-(void)reloadArrayOfArticles;
 	-(void)refreshArticlePane;
-	-(void)updateMessageListRowHeight;
+	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(BOOL)flag;
 	-(void)printDocument;
 @end
 
 // Non-class function used for sorting
-static int messageSortHandler(id item1, id item2, void * context);
+static int articleSortHandler(id item1, id item2, void * context);
 
 // Static constant strings that are typically never tweaked
 static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
@@ -87,7 +87,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		db = nil;
 		isBacktracking = NO;
 		isChangingOrientation = NO;
-		guidOfMessageToSelect = nil;
+		guidOfArticleToSelect = nil;
 		stylePathMappings = nil;
 		markReadTimer = nil;
 		htmlTemplate = nil;
@@ -169,7 +169,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Select the first conference
 	int previousFolderId = [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_CachedFolderID];
-	[self selectFolderAndMessage:previousFolderId guid:nil];
+	[self selectFolderAndArticle:previousFolderId guid:nil];
 	
 	// Done initialising
 	isAppInitialising = NO;
@@ -307,7 +307,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* initTableView
- * Do all the initialization for the message list table view control
+ * Do all the initialization for the article list table view control
  */
 -(void)initTableView
 {
@@ -315,16 +315,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Variable initialization here
 	currentFolderId = -1;
-	currentArrayOfMessages = nil;
+	currentArrayOfArticles = nil;
 	currentSelectedRow = -1;
-	messageListFont = nil;
+	articleListFont = nil;
 	
 	// Pre-set sort to what was saved in the preferences
 	[self setSortColumnIdentifier:[defaults stringForKey:MAPref_SortColumn]];
 	sortDirection = [defaults integerForKey:MAPref_SortDirection];
 	sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 	
-	// Initialize the message columns from saved data
+	// Initialize the article columns from saved data
 	NSArray * dataArray = [defaults arrayForKey:MAPref_MessageColumns];
 	Field * field;
 	unsigned int index;
@@ -378,19 +378,19 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 /* singleClickRow
  * Handle a single click action. If the click was in the read or flagged column then
- * treat it as an action to mark the message read/unread or flagged/unflagged. Later
+ * treat it as an action to mark the article read/unread or flagged/unflagged. Later
  * trap the comments column and expand/collapse.
  */
 -(IBAction)singleClickRow:(id)sender
 {
 	int row = [messageList clickedRow];
 	int column = [messageList clickedColumn];
-	if (row >= 0 && row < (int)[currentArrayOfMessages count])
+	if (row >= 0 && row < (int)[currentArrayOfArticles count])
 	{
 		NSArray * columns = [messageList tableColumns];
 		if (column >= 0 && column < (int)[columns count])
 		{
-			Message * theArticle = [currentArrayOfMessages objectAtIndex:row];
+			Article * theArticle = [currentArrayOfArticles objectAtIndex:row];
 			NSString * columnName = [(NSTableColumn *)[columns objectAtIndex:column] identifier];
 			if ([columnName isEqualToString:MA_Field_Read])
 			{
@@ -407,14 +407,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* doubleClickRow
- * Handle double-click on the selected message. Open the original feed item in
+ * Handle double-click on the selected article. Open the original feed item in
  * the default browser.
  */
 -(IBAction)doubleClickRow:(id)sender
 {
 	if (currentSelectedRow != -1)
 	{
-		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
 		[controller openURLInBrowser:[theArticle link]];
 	}
 }
@@ -562,33 +562,33 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* setTableViewFont
- * Gets the font for the message list and adjusts the table view
+ * Gets the font for the article list and adjusts the table view
  * row height to properly display that font.
  */
 -(void)setTableViewFont
 {
-	[messageListFont release];
+	[articleListFont release];
 	
 	Preferences * prefs = [Preferences standardPreferences];
-	messageListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
+	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
 	
-	[topLineDict setObject:messageListFont forKey:NSFontAttributeName];
+	[topLineDict setObject:articleListFont forKey:NSFontAttributeName];
 	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 	
-	[bottomLineDict setObject:messageListFont forKey:NSFontAttributeName];
+	[bottomLineDict setObject:articleListFont forKey:NSFontAttributeName];
 	[bottomLineDict setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
 	
-	[selectionDict setObject:messageListFont forKey:NSFontAttributeName];
+	[selectionDict setObject:articleListFont forKey:NSFontAttributeName];
 	[selectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	
-	[self updateMessageListRowHeight];
+	[self updateArticleListRowHeight];
 }
 
-/* updateMessageListRowHeight
+/* updateArticleListRowHeight
  */
--(void)updateMessageListRowHeight
+-(void)updateArticleListRowHeight
 {
-	int height = [messageListFont defaultLineHeightForFont];
+	int height = [articleListFont defaultLineHeightForFont];
 	int numberOfRowsInCell = (tableLayout == MA_Table_Layout) ? 1: 2;
 	[messageList setRowHeight:(height + 3) * numberOfRowsInCell];
 }
@@ -624,20 +624,20 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[self refreshFolder:NO];
 }
 
-/* scrollToMessage
- * Moves the selection to the specified message. Returns YES if we found the
- * message, NO otherwise.
+/* scrollToArticle
+ * Moves the selection to the specified article. Returns YES if we found the
+ * article, NO otherwise.
  */
--(BOOL)scrollToMessage:(NSString *)guid
+-(BOOL)scrollToArticle:(NSString *)guid
 {
-	NSEnumerator * enumerator = [currentArrayOfMessages objectEnumerator];
-	Message * thisMessage;
+	NSEnumerator * enumerator = [currentArrayOfArticles objectEnumerator];
+	Article * thisArticle;
 	int rowIndex = 0;
 	BOOL found = NO;
 	
-	while ((thisMessage = [enumerator nextObject]) != nil)
+	while ((thisArticle = [enumerator nextObject]) != nil)
 	{
-		if ([[thisMessage guid] isEqualToString:guid])
+		if ([[thisArticle guid] isEqualToString:guid])
 		{
 			[self makeRowSelectedAndVisible:rowIndex];
 			found = YES;
@@ -789,7 +789,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if ([backtrackArray nextItemAtQueue:&folderId messageNumber:&guid])
 	{
 		isBacktracking = YES;
-		[self selectFolderAndMessage:folderId guid:guid];
+		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -805,7 +805,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if ([backtrackArray previousItemAtQueue:&folderId messageNumber:&guid])
 	{
 		isBacktracking = YES;
-		[self selectFolderAndMessage:folderId guid:guid];
+		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -837,9 +837,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* selectedArticle
  * Returns the selected article, or nil if no article is selected.
  */
--(Message *)selectedArticle
+-(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0) ? [currentArrayOfMessages objectAtIndex:currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0) ? [currentArrayOfArticles objectAtIndex:currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -851,7 +851,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* handleArticleListFontChange
- * Called when the user changes the message list font and/or size in the Preferences
+ * Called when the user changes the article list font and/or size in the Preferences
  */
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
@@ -865,13 +865,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
 	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
-	[self updateMessageListRowHeight];
+	[self updateArticleListRowHeight];
 	[self updateVisibleColumns];
 	[messageList reloadData];
 }
 
 /* setOrientation
- * Adjusts the article view orientation and updates the message list row
+ * Adjusts the article view orientation and updates the article list row
  * height to accommodate the summary view
  */
 -(void)setOrientation:(BOOL)flag
@@ -908,21 +908,21 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* sortMessages
- * Re-orders the messages in currentArrayOfMessages by the current sort order
+ * Re-orders the articles in currentArrayOfArticles by the current sort order
  */
 -(void)sortMessages
 {
-	NSArray * sortedArrayOfMessages;
+	NSArray * sortedArrayOfArticles;
 	
-	sortedArrayOfMessages = [currentArrayOfMessages sortedArrayUsingFunction:messageSortHandler context:self];
-	NSAssert([sortedArrayOfMessages count] == [currentArrayOfMessages count], @"Lost messages from currentArrayOfMessages during sort");
-	[currentArrayOfMessages release];
-	currentArrayOfMessages = [[NSArray arrayWithArray:sortedArrayOfMessages] retain];
+	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingFunction:articleSortHandler context:self];
+	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
+	[currentArrayOfArticles release];
+	currentArrayOfArticles = [[NSArray arrayWithArray:sortedArrayOfArticles] retain];
 }
 
-/* messageSortHandler
+/* articleSortHandler
  */
-int messageSortHandler(Message * item1, Message * item2, void * context)
+int articleSortHandler(Article * item1, Article * item2, void * context)
 {
 	ArticleListView * app = (ArticleListView *)context;
 	switch (app->sortColumnTag)
@@ -952,21 +952,21 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		}
 			
 		case MA_FieldID_Date: {
-			NSDate * n1 = [[item1 messageData] objectForKey:MA_Field_Date];
-			NSDate * n2 = [[item2 messageData] objectForKey:MA_Field_Date];
+			NSDate * n1 = [[item1 articleData] objectForKey:MA_Field_Date];
+			NSDate * n2 = [[item2 articleData] objectForKey:MA_Field_Date];
 			return [n1 compare:n2] * app->sortDirection;
 		}
 			
 		case MA_FieldID_Author: {
-			NSString * n1 = [[item1 messageData] objectForKey:MA_Field_Author];
-			NSString * n2 = [[item2 messageData] objectForKey:MA_Field_Author];
+			NSString * n1 = [[item1 articleData] objectForKey:MA_Field_Author];
+			NSString * n2 = [[item2 articleData] objectForKey:MA_Field_Author];
 			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
 		}
 			
 		case MA_FieldID_Headlines:
 		case MA_FieldID_Subject: {
-			NSString * n1 = [[item1 messageData] objectForKey:MA_Field_Subject];
-			NSString * n2 = [[item2 messageData] objectForKey:MA_Field_Subject];
+			NSString * n1 = [[item1 articleData] objectForKey:MA_Field_Subject];
+			NSString * n2 = [[item2 articleData] objectForKey:MA_Field_Subject];
 			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
 		}
 	}
@@ -982,7 +982,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if (rowIndex == currentSelectedRow)
 	{
 		[messageList selectRow:rowIndex byExtendingSelection:NO];
-		[self refreshMessageAtRow:rowIndex markRead:NO];
+		[self refreshArticleAtRow:rowIndex markRead:NO];
 	}
 	else
 	{
@@ -1004,7 +1004,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(void)displayNextUnread
 {
-	// Mark the current message read
+	// Mark the current article read
 	[self markCurrentRead:nil];
 
 	// Scan the current folder from the selection forward. If nothing found, try
@@ -1018,7 +1018,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 				[self viewNextUnreadInCurrentFolder:-1];
 			else
 			{
-				guidOfMessageToSelect = nil;
+				guidOfArticleToSelect = nil;
 				[foldersTree selectFolder:nextFolderWithUnread];
 				[[NSApp mainWindow] makeFirstResponder:messageList];
 			}
@@ -1027,17 +1027,17 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* viewNextUnreadInCurrentFolder
- * Select the next unread message in the current folder after currentRow.
+ * Select the next unread article in the current folder after currentRow.
  */
 -(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow
 {
-	int totalRows = [currentArrayOfMessages count];
+	int totalRows = [currentArrayOfArticles count];
 	if (currentRow < totalRows - 1)
 	{
-		Message * theArticle;
+		Article * theArticle;
 		
 		do {
-			theArticle = [currentArrayOfMessages objectAtIndex:++currentRow];
+			theArticle = [currentArrayOfArticles objectAtIndex:++currentRow];
 			if (![theArticle isRead])
 			{
 				[self makeRowSelectedAndVisible:currentRow];
@@ -1049,14 +1049,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* selectFirstUnreadInFolder
- * Moves the selection to the first unread message in the current message list or the
- * last message if the folder has no unread messages.
+ * Moves the selection to the first unread article in the current article list or the
+ * last article if the folder has no unread articles.
  */
 -(void)selectFirstUnreadInFolder
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
 	{
-		int count = [currentArrayOfMessages count];
+		int count = [currentArrayOfArticles count];
 		if (count == 0)
 			[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 		else
@@ -1064,20 +1064,20 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	}
 }
 
-/* selectFolderAndMessage
- * Select a folder and select a specified message within the folder.
+/* selectFolderAndArticle
+ * Select a folder and select a specified article within the folder.
  */
--(BOOL)selectFolderAndMessage:(int)folderId guid:(NSString *)guid
+-(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, easy enough.
 	if (folderId == currentFolderId)
-		return [self scrollToMessage:guid];
+		return [self scrollToArticle:guid];
 	
-	// Otherwise we force the folder to be selected and seed guidOfMessageToSelect
+	// Otherwise we force the folder to be selected and seed guidOfArticleToSelect
 	// so that after handleFolderSelection has been invoked, it will select the
-	// requisite message on our behalf.
-	[guidOfMessageToSelect release];
-	guidOfMessageToSelect = [guid retain];
+	// requisite article on our behalf.
+	[guidOfArticleToSelect release];
+	guidOfArticleToSelect = [guid retain];
 	[foldersTree selectFolder:folderId];
 	return YES;
 }
@@ -1104,7 +1104,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 /* refreshFolder
  * Refreshes the current folder by applying the current sort or thread
- * logic and redrawing the message list. The selected message is preserved
+ * logic and redrawing the article list. The selected article is preserved
  * and restored on completion of the refresh.
  */
 -(void)refreshFolder:(BOOL)reloadData
@@ -1112,16 +1112,16 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	NSString * guid = nil;
 	
 	if (currentSelectedRow >= 0)
-		guid = [[[currentArrayOfMessages objectAtIndex:currentSelectedRow] guid] retain];
+		guid = [[[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid] retain];
 	if (reloadData)
-		[self reloadArrayOfMessages];
-	[self setMessageListHeader];
+		[self reloadArrayOfArticles];
+	[self setArticleListHeader];
 	[self sortMessages];
 	[self showSortDirection];
 	[messageList reloadData];
 	if (guid != nil)
 	{
-		if (![self scrollToMessage:guid])
+		if (![self scrollToArticle:guid])
 			currentSelectedRow = -1;
 		else
 			[self refreshArticlePane];
@@ -1129,38 +1129,38 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[guid release];
 }
 
-/* setMessageListHeader
- * Set the message list header caption to the name of the current folder.
+/* setArticleListHeader
+ * Set the article list header caption to the name of the current folder.
  */
--(void)setMessageListHeader
+-(void)setArticleListHeader
 {
 	Folder * folder = [db folderFromID:currentFolderId];
 	[messageListHeader setStringValue:[folder name]];
 }
 
-/* reloadArrayOfMessages
- * Reload the currentArrayOfMessages from the current folder.
+/* reloadArrayOfArticles
+ * Reload the currentArrayOfArticles from the current folder.
  */
--(void)reloadArrayOfMessages
+-(void)reloadArrayOfArticles
 {
-	[currentArrayOfMessages release];
-	currentArrayOfMessages = [[db arrayOfMessages:currentFolderId filterString:[controller searchString]] retain];
+	[currentArrayOfArticles release];
+	currentArrayOfArticles = [[db arrayOfArticles:currentFolderId filterString:[controller searchString]] retain];
 }
 
-/* selectMessageAfterReload
- * Sets the selection in the message list after the list is reloaded. The value of guidOfMessageToSelect
+/* selectArticleAfterReload
+ * Sets the selection in the article list after the list is reloaded. The value of guidOfArticleToSelect
  * is either MA_Select_None, meaning no selection, MA_Select_Unread meaning select the first unread
- * message from the beginning (after sorting is applied) or it is the ID of a specific message to be
+ * article from the beginning (after sorting is applied) or it is the ID of a specific article to be
  * selected.
  */
--(void)selectMessageAfterReload
+-(void)selectArticleAfterReload
 {
-	if (guidOfMessageToSelect == nil)
+	if (guidOfArticleToSelect == nil)
 		[self selectFirstUnreadInFolder];
 	else
-		[self scrollToMessage:guidOfMessageToSelect];
-	[guidOfMessageToSelect release];
-	guidOfMessageToSelect = nil;
+		[self scrollToArticle:guidOfArticleToSelect];
+	[guidOfArticleToSelect release];
+	guidOfArticleToSelect = nil;
 }
 
 /* currentFolderId
@@ -1172,7 +1172,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* selectFolderWithFilter
- * Switches to the specified folder and displays messages filtered by whatever is in
+ * Switches to the specified folder and displays articles filtered by whatever is in
  * the search field.
  */
 -(void)selectFolderWithFilter:(int)newFolderId
@@ -1180,24 +1180,24 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[db flushFolder:currentFolderId];
 	[messageList deselectAll:self];
 	currentFolderId = newFolderId;
-	[self setMessageListHeader];
+	[self setArticleListHeader];
 	[self showColumnsForFolder:currentFolderId];
-	[self reloadArrayOfMessages];
+	[self reloadArrayOfArticles];
 	[self sortMessages];
 	[messageList reloadData];
-	[self selectMessageAfterReload];
+	[self selectArticleAfterReload];
 }
 
-/* refreshMessageAtRow
- * Refreshes the message at the specified row.
+/* refreshArticleAtRow
+ * Refreshes the article at the specified row.
  */
--(void)refreshMessageAtRow:(int)theRow markRead:(BOOL)markReadFlag
+-(void)refreshArticleAtRow:(int)theRow markRead:(BOOL)markReadFlag
 {
 	if (currentSelectedRow < 0)
 		[[textView mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
 	else
 	{
-		NSAssert(currentSelectedRow < (int)[currentArrayOfMessages count], @"Out of range row index received");
+		NSAssert(currentSelectedRow < (int)[currentArrayOfArticles count], @"Out of range row index received");
 		[self refreshArticlePane];
 		
 		// If we mark read after an interval, start the timer here.
@@ -1216,18 +1216,18 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		// Add this to the backtrack list
 		if (!isBacktracking)
 		{
-			NSString * guid = [[currentArrayOfMessages objectAtIndex:currentSelectedRow] guid];
+			NSString * guid = [[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid];
 			[backtrackArray addToQueue:currentFolderId messageNumber:guid];
 		}
 	}
 }
 
 /* refreshArticlePane
- * Updates the article pane for the current selected messages.
+ * Updates the article pane for the current selected articles.
  */
 -(void)refreshArticlePane
 {
-	NSArray * msgArray = [[self markedMessageRange] autorelease];
+	NSArray * msgArray = [[self markedArticleRange] autorelease];
 	int index;
 
 	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""];
@@ -1236,12 +1236,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 	for (index = 0; index < [msgArray count]; ++index)
 	{
-		Message * theArticle = [msgArray objectAtIndex:index];
+		Article * theArticle = [msgArray objectAtIndex:index];
 		Folder * folder = [db folderFromID:[theArticle folderId]];
 
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
-		NSString * messageText = [db messageText:[theArticle folderId] guid:[theArticle guid]];
+		NSString * messageText = [db articleText:[theArticle folderId] guid:[theArticle guid]];
 		NSString * messageDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
 		NSString * messageLink = [theArticle link] ? [theArticle link] : @"";
 		NSString * messageAuthor = [theArticle author] ? [theArticle author] : @"";
@@ -1250,7 +1250,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
 
 		// Load the selected HTML template for the current view style and plug in the current
-		// message values and style sheet setting.
+		// article values and style sheet setting.
 		NSMutableString * htmlMessage = [[NSMutableString alloc] initWithString:htmlTemplate];
 		[htmlMessage replaceString:@"$ArticleLink$" withString:messageLink];
 		[htmlMessage replaceString:@"$ArticleTitle$" withString:messageTitle];
@@ -1260,7 +1260,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[htmlMessage replaceString:@"$FeedTitle$" withString:folderTitle];
 		[htmlMessage replaceString:@"$FeedLink$" withString:folderLink];
 
-		// Separate each message with a horizontal divider line
+		// Separate each article with a horizontal divider line
 		if (index > 0)
 			[htmlText appendString:@"<hr><br />"];
 		[htmlText appendString:htmlMessage];
@@ -1278,13 +1278,13 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* markCurrentRead
- * Mark the current message as read.
+ * Mark the current article as read.
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	if (currentSelectedRow != -1 && ![db readOnly])
 	{
-		Message * theArticle = [currentArrayOfMessages objectAtIndex:currentSelectedRow];
+		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
 			[self markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:YES];
 	}
@@ -1292,11 +1292,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 /* numberOfRowsInTableView [datasource]
  * Datasource for the table view. Return the total number of rows we'll display which
- * is equivalent to the number of messages in the current folder.
+ * is equivalent to the number of articles in the current folder.
  */
 -(int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [currentArrayOfMessages count];
+	return [currentArrayOfArticles count];
 }
 
 /* objectValueForTableColumn [datasource]
@@ -1305,10 +1305,10 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
-	Message * theArticle;
+	Article * theArticle;
 	
-	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfMessages count]);
-	theArticle = [currentArrayOfMessages objectAtIndex:rowIndex];
+	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfArticles count]);
+	theArticle = [currentArrayOfArticles objectAtIndex:rowIndex];
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Folder])
 	{
 		Folder * folder = [db folderFromID:[theArticle folderId]];
@@ -1355,7 +1355,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[bottomString release];
 		return [theAttributedString autorelease];
 	}
-	return [[theArticle messageData] objectForKey:[aTableColumn identifier]];
+	return [[theArticle articleData] objectForKey:[aTableColumn identifier]];
 }
 
 /* willDisplayCell [delegate]
@@ -1366,7 +1366,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	if (![aCell isKindOfClass:[NSImageCell class]])
 	{
 		[aCell setTextColor:[NSColor blackColor]];
-		[aCell setFont:messageListFont];
+		[aCell setFont:articleListFont];
 	}
 }
 
@@ -1376,7 +1376,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	currentSelectedRow = [messageList selectedRow];
-	[self refreshMessageAtRow:currentSelectedRow markRead:!isAppInitialising];
+	[self refreshArticleAtRow:currentSelectedRow markRead:!isAppInitialising];
 }
 
 /* didClickTableColumns
@@ -1416,7 +1416,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 
 /* copyTableSelection
  * This is the common copy selection code. We build an array of dictionary entries each of
- * which include details of each selected message in the standard RSS item format defined by
+ * which include details of each selected article in the standard RSS item format defined by
  * Ranchero NetNewsWire. See http://ranchero.com/netnewswire/rssclipboard.php for more details.
  */
 -(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
@@ -1433,15 +1433,15 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];
 	
-	// Get all the messages that are being dragged
+	// Get all the articles that are being dragged
 	for (index = 0; index < count; ++index)
 	{
 		int msgIndex = [[rows objectAtIndex:index] intValue];
-		Message * thisMessage = [currentArrayOfMessages objectAtIndex:msgIndex];
-		Folder * folder = [db folderFromID:[thisMessage folderId]];
-		NSString * msgText = [db messageText:[thisMessage folderId] guid:[thisMessage guid]];
-		NSString * msgTitle = [thisMessage title];
-		NSString * msgLink = [thisMessage link];
+		Article * thisArticle = [currentArrayOfArticles objectAtIndex:msgIndex];
+		Folder * folder = [db folderFromID:[thisArticle folderId]];
+		NSString * msgText = [db articleText:[thisArticle folderId] guid:[thisArticle guid]];
+		NSString * msgTitle = [thisArticle title];
+		NSString * msgLink = [thisArticle link];
 		
 		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
@@ -1474,20 +1474,12 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	return YES;
 }
 
-/* allMessages
- * Return an array of all articles in the list.
- */
--(NSArray *)allMessages
-{
-	return currentArrayOfMessages;
-}
-
-/* markedMessageRange
+/* markedArticleRange
  * Retrieve an array of selected articles.
  */
--(NSArray *)markedMessageRange
+-(NSArray *)markedArticleRange
 {
-	NSArray * messageArray = nil;
+	NSArray * articleArray = nil;
 	if ([messageList numberOfSelectedRows] > 0)
 	{
 		NSEnumerator * enumerator = [messageList selectedRowEnumerator];
@@ -1495,15 +1487,15 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		NSNumber * rowIndex;
 		
 		while ((rowIndex = [enumerator nextObject]) != nil)
-			[newArray addObject:[currentArrayOfMessages objectAtIndex:[rowIndex intValue]]];
-		messageArray = [newArray retain];
+			[newArray addObject:[currentArrayOfArticles objectAtIndex:[rowIndex intValue]]];
+		articleArray = [newArray retain];
 		[newArray release];
 	}
-	return messageArray;
+	return articleArray;
 }
 
 /* markDeletedUndo
- * Undo handler to restore a series of deleted messages.
+ * Undo handler to restore a series of deleted articles.
  */
 -(void)markDeletedUndo:(id)anObject
 {
@@ -1511,7 +1503,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* markUndeletedUndo
- * Undo handler to delete a series of messages.
+ * Undo handler to delete a series of articles.
  */
 -(void)markUndeletedUndo:(id)anObject
 {
@@ -1519,33 +1511,33 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* markDeletedByArray
- * Helper function. Takes as an input an array of messages and deletes or restores
- * the messages.
+ * Helper function. Takes as an input an array of articles and deletes or restores
+ * the articles.
  */
--(void)markDeletedByArray:(NSArray *)messageArray deleteFlag:(BOOL)deleteFlag
+-(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag
 {
-	NSEnumerator * enumerator = [messageArray objectEnumerator];
-	Message * theArticle;
+	NSEnumerator * enumerator = [articleArray objectEnumerator];
+	Article * theArticle;
 	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
-	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:messageArray];
+	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
 	
-	// We will make a new copy of the currentArrayOfMessages with the selected messages removed.
-	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfMessages];
+	// We will make a new copy of the currentArrayOfArticles with the selected articles removed.
+	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
 	BOOL needFolderRedraw = NO;
 	
-	// Iterate over every selected message in the table and set the deleted
-	// flag on the message while simultaneously removing it from our copy of
-	// currentArrayOfMessages.
+	// Iterate over every selected article in the table and set the deleted
+	// flag on the article while simultaneously removing it from our copy of
+	// currentArrayOfArticles.
 	[db beginTransaction];
 	while ((theArticle = [enumerator nextObject]) != nil)
 	{
 		if (![theArticle isRead])
 			needFolderRedraw = YES;
-		[db markMessageDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
+		[db markArticleDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
 		if (deleteFlag)
 		{
 			if ([theArticle folderId] == currentFolderId)
@@ -1558,22 +1550,22 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		}
 	}
 	[db commitTransaction];
-	[currentArrayOfMessages release];
-	currentArrayOfMessages = arrayCopy;
+	[currentArrayOfArticles release];
+	currentArrayOfArticles = arrayCopy;
 	
-	// If we've added messages back to the array, we need to resort to put
+	// If we've added articles back to the array, we need to resort to put
 	// them back in the right place.
 	if (!deleteFlag)
 		[self sortMessages];
 	
-	// If any of the messages we deleted were unread then the
+	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
 	if (needFolderRedraw)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// Compute the new place to put the selection
-	if (currentSelectedRow >= (int)[currentArrayOfMessages count])
-		currentSelectedRow = [currentArrayOfMessages count] - 1;
+	if (currentSelectedRow >= (int)[currentArrayOfArticles count])
+		currentSelectedRow = [currentArrayOfArticles count] - 1;
 	[self makeRowSelectedAndVisible:currentSelectedRow];
 	[messageList reloadData];
 	
@@ -1582,16 +1574,16 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[controller showUnreadCountOnApplicationIcon];
 }
 
-/* deleteMessages
- * Physically delete all selected messages in the article list.
+/* deleteSelectedMessages
+ * Physically delete all selected articles in the article list.
  */
 -(void)deleteSelectedMessages
 {		
-	// Make a new copy of the currentArrayOfMessages with the selected message removed.
-	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfMessages];
+	// Make a new copy of the currentArrayOfArticles with the selected article removed.
+	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
 	BOOL needFolderRedraw = NO;
 	
-	// Iterate over every selected message in the table and remove it from
+	// Iterate over every selected article in the table and remove it from
 	// the database.
 	NSEnumerator * enumerator = [messageList selectedRowEnumerator];
 	NSNumber * rowIndex;
@@ -1599,29 +1591,29 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[db beginTransaction];
 	while ((rowIndex = [enumerator nextObject]) != nil)
 	{
-		Message * theArticle = [currentArrayOfMessages objectAtIndex:[rowIndex intValue]];
+		Article * theArticle = [currentArrayOfArticles objectAtIndex:[rowIndex intValue]];
 		if (![theArticle isRead])
 			needFolderRedraw = YES;
-		if ([db deleteMessage:[theArticle folderId] guid:[theArticle guid]])
+		if ([db deleteArticle:[theArticle folderId] guid:[theArticle guid]])
 			[arrayCopy removeObject:theArticle];
 	}
 	[db commitTransaction];
-	[currentArrayOfMessages release];
-	currentArrayOfMessages = arrayCopy;
+	[currentArrayOfArticles release];
+	currentArrayOfArticles = arrayCopy;
 	
 	// Blow away the undo stack here since undo actions may refer to
 	// articles that have been deleted. This is a bit of a cop-out but
 	// it's the easiest approach for now.
 	[controller clearUndoStack];
 	
-	// If any of the messages we deleted were unread then the
+	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
 	if (needFolderRedraw)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// Compute the new place to put the selection
-	if (currentSelectedRow >= (int)[currentArrayOfMessages count])
-		currentSelectedRow = [currentArrayOfMessages count] - 1;
+	if (currentSelectedRow >= (int)[currentArrayOfArticles count])
+		currentSelectedRow = [currentArrayOfArticles count] - 1;
 	[self makeRowSelectedAndVisible:currentSelectedRow];
 	[messageList reloadData];
 	
@@ -1647,24 +1639,24 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* markFlaggedByArray
- * Mark the specified messages in messageArray as flagged.
+ * Mark the specified articles in articleArray as flagged.
  */
--(void)markFlaggedByArray:(NSArray *)messageArray flagged:(BOOL)flagged
+-(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
-	NSEnumerator * enumerator = [messageArray objectEnumerator];
-	Message * theArticle;
+	NSEnumerator * enumerator = [articleArray objectEnumerator];
+	Article * theArticle;
 	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 	SEL markFlagUndoAction = flagged ? @selector(markUnflagUndo:) : @selector(markFlagUndo:);
-	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:messageArray];
+	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 	
 	[db beginTransaction];
 	while ((theArticle = [enumerator nextObject]) != nil)
 	{
 		[theArticle markFlagged:flagged];
-		[db markMessageFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
+		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
 	}
 	[db commitTransaction];
 	[messageList reloadData];
@@ -1687,19 +1679,19 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* markReadByArray
- * Helper function. Takes as an input an array of messages and marks those messages read or unread.
+ * Helper function. Takes as an input an array of articles and marks those articles read or unread.
  */
--(void)markReadByArray:(NSArray *)messageArray readFlag:(BOOL)readFlag
+-(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSEnumerator * enumerator = [messageArray objectEnumerator];
-	Message * theArticle;
+	NSEnumerator * enumerator = [articleArray objectEnumerator];
+	Article * theArticle;
 	int lastFolderId = -1;
 	int folderId;
 	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
-	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:messageArray];
+	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
 	
 	[markReadTimer invalidate];
@@ -1710,7 +1702,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	while ((theArticle = [enumerator nextObject]) != nil)
 	{
 		folderId = [theArticle folderId];
-		[db markMessageRead:folderId guid:[theArticle guid] isRead:readFlag];
+		[db markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
 		if (folderId != currentFolderId)
 		{
 			[theArticle markRead:readFlag];
@@ -1727,7 +1719,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 	[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
-	// The info bar has a count of unread messages so we need to
+	// The info bar has a count of unread articles so we need to
 	// update that.
 	[controller showUnreadCountOnApplicationIcon];
 }
@@ -1749,8 +1741,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* markAllReadByArray
- * Given an array of folders, mark all the messages in those folders as read and
- * return a reference array listing all the messages that were actually marked.
+ * Given an array of folders, mark all the articles in those folders as read and
+ * return a reference array listing all the articles that were actually marked.
  */
 -(void)markAllReadByArray:(NSArray *)folderArray
 {
@@ -1765,8 +1757,8 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 }
 
 /* wrappedMarkAllReadInArray
- * Given an array of folders, mark all the messages in those folders as read and
- * return a reference array listing all the messages that were actually marked.
+ * Given an array of folders, mark all the articles in those folders as read and
+ * return a reference array listing all the articles that were actually marked.
  */
 -(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray
 {
@@ -1785,7 +1777,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		}
 		else if (!IsSmartFolder(folder))
 		{
-			[refArray addObjectsFromArray:[db arrayOfUnreadMessages:folderId]];
+			[refArray addObjectsFromArray:[db arrayOfUnreadArticles:folderId]];
 			if ([db markFolderRead:folderId])
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
@@ -1798,14 +1790,14 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
 			if (folderId == currentFolderId)
-				[self markReadByArray:currentArrayOfMessages readFlag:YES];
+				[self markReadByArray:currentArrayOfArticles readFlag:YES];
 		}
 	}
 	return refArray;
 }
 
 /* markAllReadByReferencesArray
- * Given an array of references, mark all those messages read or unread.
+ * Given an array of references, mark all those articles read or unread.
  */
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
@@ -1823,7 +1815,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	while ((ref = [enumerator nextObject]) != nil)
 	{
 		int folderId = [ref folderId];
-		[db markMessageRead:folderId guid:[ref guid] isRead:readFlag];
+		[db markArticleRead:folderId guid:[ref guid] isRead:readFlag];
 		if (folderId != lastFolderId && lastFolderId != -1)
 		{
 			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -1841,7 +1833,7 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 			[self refreshFolder:YES];
 	}
 
-	// The info bar has a count of unread messages so we need to
+	// The info bar has a count of unread articles so we need to
 	// update that.
 	[controller showUnreadCountOnApplicationIcon];
 }
@@ -1858,11 +1850,11 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 	[htmlTemplate release];
 	[extDateFormatter release];
 	[markReadTimer release];
-	[currentArrayOfMessages release];
+	[currentArrayOfArticles release];
 	[backtrackArray release];
-	[messageListFont release];
+	[articleListFont release];
 	[defaultWebPrefs release];
-	[guidOfMessageToSelect release];
+	[guidOfArticleToSelect release];
 	[selectionDict release];
 	[topLineDict release];
 	[bottomLineDict release];

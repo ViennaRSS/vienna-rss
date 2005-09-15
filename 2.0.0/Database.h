@@ -94,14 +94,13 @@
 -(CriteriaTree *)searchStringForSearchFolder:(int)folderId;
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
-// Message functions
--(BOOL)initMessageArray:(Folder *)folder;
--(BOOL)addMessage:(int)folderID message:(Message *)message;
--(BOOL)deleteMessage:(int)folderId guid:(NSString *)guid;
--(NSArray *)arrayOfUnreadMessages:(int)folderId;
--(NSArray *)arrayOfMessages:(int)folderId filterString:(NSString *)filterString;
--(NSString *)messageText:(int)folderId guid:(NSString *)guid;
--(void)markMessageRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
--(void)markMessageFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
--(void)markMessageDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
+// Article functions
+-(BOOL)createArticle:(int)folderID message:(Article *)message;
+-(BOOL)deleteArticle:(int)folderId guid:(NSString *)guid;
+-(NSArray *)arrayOfUnreadArticles:(int)folderId;
+-(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString;
+-(NSString *)articleText:(int)folderId guid:(NSString *)guid;
+-(void)markArticleRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
+-(void)markArticleFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
+-(void)markArticleDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 @end

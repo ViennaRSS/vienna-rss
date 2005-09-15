@@ -27,7 +27,7 @@
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd;
 -(id)handleRefreshSubscription:(NSScriptCommand *)cmd;
 
-// Mark all messages read
+// Mark all articles read
 -(id)handleMarkAllRead:(NSScriptCommand *)cmd;
 
 // Importing and exporting subscriptions

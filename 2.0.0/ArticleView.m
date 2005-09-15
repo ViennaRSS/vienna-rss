@@ -28,7 +28,7 @@
 @implementation ArticleView
 
 /* keyDown
- * Here is where we handle special keys when the message list view
+ * Here is where we handle special keys when the article list view
  * has the focus so we can do custom things.
  */
 -(void)keyDown:(NSEvent *)theEvent

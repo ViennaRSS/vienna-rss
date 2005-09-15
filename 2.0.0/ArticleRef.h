@@ -28,7 +28,7 @@
 }
 
 // Public functions
-+(ArticleReference *)makeReference:(Message *)aMessage;
++(ArticleReference *)makeReference:(Article *)anArticle;
 +(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(int)folderId;
 
 // Accessors

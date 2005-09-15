@@ -57,7 +57,7 @@
 	-(void)startProgressIndicator;
 	-(void)stopProgressIndicator;
 	-(void)doEditFolder:(Folder *)folder;
-	-(void)getMessagesOnTimer:(NSTimer *)aTimer;
+	-(void)refreshOnTimer:(NSTimer *)aTimer;
 	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
@@ -252,7 +252,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
 /* applicationShouldTerminate
  * This function is called when the user wants to close Vienna. First we check to see
- * if a connection or import is running and that all messages are saved.
+ * if a connection or import is running and that all articles are saved.
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
@@ -287,7 +287,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	// Put back the original app icon
 	[NSApp setApplicationIconImage:originalIcon];
 	
-	// Remember the message list column position, sizes, etc.
+	// Remember the article list column position, sizes, etc.
 	[mainArticleView saveTableSettings];
 	[foldersTree saveFolderSettings];
 	
@@ -402,7 +402,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* readingPaneOnRight
- * Move the reading pane to the right of the message list.
+ * Move the reading pane to the right of the article list.
  */
 -(IBAction)readingPaneOnRight:(id)sender
 {
@@ -410,7 +410,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* readingPaneOnBottom
- * Move the reading pane to the bottom of the message list.
+ * Move the reading pane to the bottom of the article list.
  */
 -(IBAction)readingPaneOnBottom:(id)sender
 {
@@ -693,7 +693,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
 	if (unreadArticles != nil)
-		[mainArticleView selectFolderAndMessage:[unreadArticles itemId] guid:nil];
+		[mainArticleView selectFolderAndArticle:[unreadArticles itemId] guid:nil];
 }
 
 /* registrationDictionaryForGrowl
@@ -758,7 +758,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	
 	while ((field = [enumerator nextObject]) != nil)
 	{
-		// Filter out columns we don't view in the message list. Later we should have an attribute in the
+		// Filter out columns we don't view in the article list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
 		if ([field tag] != MA_FieldID_Text && 
 			[field tag] != MA_FieldID_GUID &&
@@ -872,7 +872,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* showUnreadCountOnApplicationIcon
- * Update the Vienna application icon to show the number of unread messages.
+ * Update the Vienna application icon to show the number of unread articles.
  */
 -(void)showUnreadCountOnApplicationIcon
 {
@@ -934,7 +934,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* emptyTrash
- * Delete all messages from the Trash folder.
+ * Delete all articles from the Trash folder.
  */
 -(IBAction)emptyTrash:(id)sender
 {
@@ -952,7 +952,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* printDocument
- * Print the current message in the message window.
+ * Print the selected articles in the article window.
  */
 -(IBAction)printDocument:(id)sender
 {
@@ -976,8 +976,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* currentFolderId
- * Return the ID of the currently selected folder whose messages are shown in
- * the message window.
+ * Return the ID of the currently selected folder whose articles are shown in
+ * the article window.
  */
 -(int)currentFolderId
 {
@@ -989,7 +989,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(BOOL)selectFolder:(int)folderId
 {
-	return [mainArticleView selectFolderAndMessage:folderId guid:nil];
+	return [mainArticleView selectFolderAndArticle:folderId guid:nil];
 }
 
 /* updateCloseCommands
@@ -1103,7 +1103,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* handleCheckFrequencyChange
- * Called when the frequency by which we check messages is changed.
+ * Called when the refresh frequency is changed.
  */
 -(void)handleCheckFrequencyChange:(NSNotification *)note
 {
@@ -1116,7 +1116,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	{
 		checkTimer = [[NSTimer scheduledTimerWithTimeInterval:newFrequency
 													   target:self
-													 selector:@selector(getMessagesOnTimer:)
+													 selector:@selector(refreshOnTimer:)
 													 userInfo:nil
 													  repeats:YES] retain];
 	}
@@ -1249,13 +1249,13 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)viewArticlePage:(id)sender
 {
-	Message * theArticle = [mainArticleView selectedArticle];
+	Article * theArticle = [mainArticleView selectedArticle];
 	if (theArticle && ![[theArticle link] isBlank])
 		[self openURLInBrowser:[theArticle link]];
 }
 
 /* goForward
- * In article view, forward track through the list of messages displayed. In 
+ * In article view, forward track through the list of articles displayed. In 
  * web view, go to the next web page.
  */
 -(IBAction)goForward:(id)sender
@@ -1264,7 +1264,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* goBack
- * In article view, back track through the list of messages displayed. In 
+ * In article view, back track through the list of articles displayed. In 
  * web view, go to the previous web page.
  */
 -(IBAction)goBack:(id)sender
@@ -1360,17 +1360,17 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	return [[RefreshManager sharedManager] totalConnections] > 0;
 }
 
-/* getMessagesOnTimer
+/* refreshOnTimer
  * Each time the check timer fires, we see if a connect is not
  * running and then kick one off.
  */
--(void)getMessagesOnTimer:(NSTimer *)aTimer
+-(void)refreshOnTimer:(NSTimer *)aTimer
 {
 	[self refreshAllSubscriptions:self];
 }
 
 /* markSelectedFoldersRead
- * Mark read all messages in the specified array of folders.
+ * Mark read all articles in the specified array of folders.
  */
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
 {
@@ -1389,7 +1389,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
-	[mainArticleView selectFolderAndMessage:folderId guid:nil];
+	[mainArticleView selectFolderAndArticle:folderId guid:nil];
 
 	if (isAccessible(urlString))
 	{
@@ -1429,8 +1429,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* deleteMessage
- * Delete the current message. If we're in the Trash folder, this represents a permanent
- * delete. Otherwise we just move the message to the trash folder.
+ * Delete the current article. If we're in the Trash folder, this represents a permanent
+ * delete. Otherwise we just move the article to the trash folder.
  */
 -(IBAction)deleteMessage:(id)sender
 {
@@ -1439,9 +1439,9 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
 		if (!IsTrashFolder(folder))
 		{
-			NSArray * messageArray = [mainArticleView markedMessageRange];
-			[mainArticleView markDeletedByArray:messageArray deleteFlag:YES];
-			[messageArray release];
+			NSArray * articleArray = [mainArticleView markedArticleRange];
+			[mainArticleView markDeletedByArray:articleArray deleteFlag:YES];
+			[articleArray release];
 		}
 		else
 		{
@@ -1483,7 +1483,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* viewNextUnread
- * Moves the selection to the next unread message.
+ * Moves the selection to the next unread article.
  */
 -(IBAction)viewNextUnread:(id)sender
 {
@@ -1501,7 +1501,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* markAllRead
- * Mark all messages read in the selected folders.
+ * Mark all articles read in the selected folders.
  */
 -(IBAction)markAllRead:(id)sender
 {
@@ -1510,30 +1510,30 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* markRead
- * Toggle the read/unread state of the selected messages
+ * Toggle the read/unread state of the selected articles
  */
 -(IBAction)markRead:(id)sender
 {
-	Message * theArticle = [mainArticleView selectedArticle];
+	Article * theArticle = [mainArticleView selectedArticle];
 	if (theArticle != nil && ![db readOnly])
 	{
-		NSArray * messageArray = [mainArticleView markedMessageRange];
-		[mainArticleView markReadByArray:messageArray readFlag:![theArticle isRead]];
-		[messageArray release];
+		NSArray * articleArray = [mainArticleView markedArticleRange];
+		[mainArticleView markReadByArray:articleArray readFlag:![theArticle isRead]];
+		[articleArray release];
 	}
 }
 
 /* markFlagged
- * Toggle the flagged/unflagged state of the selected message
+ * Toggle the flagged/unflagged state of the selected article
  */
 -(IBAction)markFlagged:(id)sender
 {
-	Message * theArticle = [mainArticleView selectedArticle];
+	Article * theArticle = [mainArticleView selectedArticle];
 	if (theArticle != nil && ![db readOnly])
 	{
-		NSArray * messageArray = [mainArticleView markedMessageRange];
-		[mainArticleView markFlaggedByArray:messageArray flagged:![theArticle isFlagged]];
-		[messageArray release];
+		NSArray * articleArray = [mainArticleView markedArticleRange];
+		[mainArticleView markFlaggedByArray:articleArray flagged:![theArticle isFlagged]];
+		[articleArray release];
 	}
 }
 
@@ -1707,7 +1707,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)viewSourceHomePage:(id)sender
 {
-	Message * thisArticle = [mainArticleView selectedArticle];
+	Article * thisArticle = [mainArticleView selectedArticle];
 	if (thisArticle != nil)
 	{
 		Folder * folder = [db folderFromID:[thisArticle folderId]];
@@ -1829,31 +1829,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)refreshSelectedSubscriptions:(id)sender
 {
-	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
-	
-	// For group folders, add all sub-groups to the array. The array we get back
-	// from selectedFolders may include groups but will not include the folders within
-	// those groups if they weren't selected. So we need to grab those folders here.
-	for (index = 0; index < count; ++index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		if (IsGroupFolder(folder))
-			[selectedFolders addObjectsFromArray:[db arrayOfFolders:[folder itemId]]];
-	}
-	
-	// Trim the array to remove non-RSS folders that can't be refreshed.
-	for (index = count - 1; index >= 0; --index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		if (!IsRSSFolder(folder))
-			[selectedFolders removeObjectAtIndex:index];
-	}
-	
-	// Hopefully what is left is refreshable.
-	if ([selectedFolders count] > 0)
-		[[RefreshManager sharedManager] refreshSubscriptions:selectedFolders];
+	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders]];
 }
 
 /* cancelAllRefreshes
@@ -1998,19 +1974,19 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(viewSourceHomePage:))
 	{
-		Message * thisMessage = [mainArticleView selectedArticle];
-		if (thisMessage != nil)
+		Article * thisArticle = [mainArticleView selectedArticle];
+		if (thisArticle != nil)
 		{
-			Folder * folder = [db folderFromID:[thisMessage folderId]];
+			Folder * folder = [db folderFromID:[thisArticle folderId]];
 			return folder && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 		}
 		return NO;
 	}
 	else if (theAction == @selector(viewArticlePage:))
 	{
-		Message * thisMessage = [mainArticleView selectedArticle];
-		if (thisMessage != nil)
-			return ([thisMessage link] && ![[thisMessage link] isBlank] && isMainWindowVisible && isArticleView);
+		Article * thisArticle = [mainArticleView selectedArticle];
+		if (thisArticle != nil)
+			return ([thisArticle link] && ![[thisArticle link] isBlank] && isMainWindowVisible && isArticleView);
 		return NO;
 	}
 	else if (theAction == @selector(exportSubscriptions:))
@@ -2082,27 +2058,27 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(markFlagged:))
 	{
-		Message * thisMessage = [mainArticleView selectedArticle];
-		if (thisMessage != nil)
+		Article * thisArticle = [mainArticleView selectedArticle];
+		if (thisArticle != nil)
 		{
-			if ([thisMessage isFlagged])
+			if ([thisArticle isFlagged])
 				[menuItem setTitle:NSLocalizedString(@"Mark Unflagged", nil)];
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (thisMessage != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	else if (theAction == @selector(markRead:))
 	{
-		Message * thisMessage = [mainArticleView selectedArticle];
-		if (thisMessage != nil)
+		Article * thisArticle = [mainArticleView selectedArticle];
+		if (thisArticle != nil)
 		{
-			if ([thisMessage isRead])
+			if ([thisArticle isRead])
 				[menuItem setTitle:NSLocalizedString(@"Mark Unread", nil)];
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (thisMessage != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	return YES;
 }

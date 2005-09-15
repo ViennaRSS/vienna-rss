@@ -20,10 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface KeyChain : NSObject {
-}
-
-// Class functions
-+(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;
-+(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url;
+@interface KeyChain : NSObject
+	+(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url;
+	+(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url;
 @end

@@ -19,8 +19,9 @@
 //
 
 #import "Message.h"
+#import "Database.h"
 
-// The names here must correspond to the messageList identifiers
+// The names here are internal field names, not for localisation.
 NSString * MA_Field_GUID = @"GUID";
 NSString * MA_Field_Subject = @"Subject";
 NSString * MA_Field_Author = @"Author";
@@ -35,7 +36,7 @@ NSString * MA_Field_Folder = @"Folder";
 NSString * MA_Field_Parent = @"Parent";
 NSString * MA_Field_Headlines = @"Headlines";
 
-@implementation Message
+@implementation Article
 
 /* initWithData
  */
@@ -43,12 +44,12 @@ NSString * MA_Field_Headlines = @"Headlines";
 {
 	if ((self = [super init]) != nil)
 	{
-		messageData = [[NSMutableDictionary dictionary] retain];
+		articleData = [[NSMutableDictionary dictionary] retain];
 		commentsArray = [[NSMutableArray alloc] init];
 		readFlag = NO;
 		markedFlag = NO;
 		deletedFlag = NO;
-		messageStatus = MA_MsgStatus_Empty;
+		status = MA_MsgStatus_Empty;
 		[self setFolderId:-1];
 		[self setGuid:theGuid];
 		[self setParentId:0];
@@ -58,37 +59,37 @@ NSString * MA_Field_Headlines = @"Headlines";
 
 /* setTitle
  */
--(void)setTitle:(NSString *)newMessageTitle
+-(void)setTitle:(NSString *)newTitle
 {
-	[messageData setObject:newMessageTitle forKey:MA_Field_Subject];
+	[articleData setObject:newTitle forKey:MA_Field_Subject];
 }
 
 /* setAuthor
  */
 -(void)setAuthor:(NSString *)newAuthor
 {
-	[messageData setObject:newAuthor forKey:MA_Field_Author];
+	[articleData setObject:newAuthor forKey:MA_Field_Author];
 }
 
 /* setLink
  */
 -(void)setLink:(NSString *)newLink
 {
-	[messageData setObject:newLink forKey:MA_Field_Link];
+	[articleData setObject:newLink forKey:MA_Field_Link];
 }
 
 /* setDate
  */
--(void)setDate:(NSDate *)newMessageDate
+-(void)setDate:(NSDate *)newDate
 {
-	[messageData setObject:newMessageDate forKey:MA_Field_Date];
+	[articleData setObject:newDate forKey:MA_Field_Date];
 }
 
 /* setText
  */
 -(void)setText:(NSString *)newText
 {
-	[messageData setObject:newText forKey:MA_Field_Text];
+	[articleData setObject:newText forKey:MA_Field_Text];
 }
 
 /* markRead
@@ -114,54 +115,74 @@ NSString * MA_Field_Headlines = @"Headlines";
 
 /* Accessor functions
  */
--(NSDictionary *)messageData	{ return messageData; }
+-(NSDictionary *)articleData	{ return articleData; }
 -(BOOL)isRead					{ return readFlag; }
 -(BOOL)isFlagged				{ return markedFlag; }
 -(BOOL)isDeleted				{ return deletedFlag; }
 -(BOOL)hasComments				{ return [commentsArray count] > 0; }
--(int)status					{ return messageStatus; }
--(int)folderId					{ return [[messageData objectForKey:MA_Field_Folder] intValue]; }
--(NSString *)author				{ return [messageData objectForKey:MA_Field_Author]; }
--(NSString *)link				{ return [messageData objectForKey:MA_Field_Link]; }
--(NSString *)guid				{ return [messageData objectForKey:MA_Field_GUID]; }
--(int)parentId					{ return [[messageData objectForKey:MA_Field_Parent] intValue]; }
--(NSString *)title				{ return [messageData objectForKey:MA_Field_Subject]; }
--(NSString *)text				{ return [messageData objectForKey:MA_Field_Text]; }
--(NSDate *)date					{ return [messageData objectForKey:MA_Field_Date]; }
+-(int)status					{ return status; }
+-(int)folderId					{ return [[articleData objectForKey:MA_Field_Folder] intValue]; }
+-(NSString *)author				{ return [articleData objectForKey:MA_Field_Author]; }
+-(NSString *)link				{ return [articleData objectForKey:MA_Field_Link]; }
+-(NSString *)guid				{ return [articleData objectForKey:MA_Field_GUID]; }
+-(int)parentId					{ return [[articleData objectForKey:MA_Field_Parent] intValue]; }
+-(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
+-(NSString *)text				{ return [articleData objectForKey:MA_Field_Text]; }
+-(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 
 /* setFolderId
  */
 -(void)setFolderId:(int)newFolderId
 {
-	[messageData setObject:[NSNumber numberWithInt:newFolderId] forKey:MA_Field_Folder];
+	[articleData setObject:[NSNumber numberWithInt:newFolderId] forKey:MA_Field_Folder];
 }
 
 /* setGuid
  */
 -(void)setGuid:(NSString *)newGuid
 {
-	[messageData setObject:newGuid forKey:MA_Field_GUID];
+	[articleData setObject:newGuid forKey:MA_Field_GUID];
 }
 
 /* setParentId
  */
 -(void)setParentId:(int)newParentId
 {
-	[messageData setObject:[NSNumber numberWithInt:newParentId] forKey:MA_Field_Parent];
+	[articleData setObject:[NSNumber numberWithInt:newParentId] forKey:MA_Field_Parent];
 }
 
 /* setStatus
  */
 -(void)setStatus:(int)newStatus
 {
-	messageStatus = newStatus;
+	status = newStatus;
 }
 
 /* description
+ * Return a human readable description of this article for debugging.
  */
 -(NSString *)description
 {
 	return [NSString stringWithFormat:@"{GUID=%@ title=\"%@\"", [self guid], [self title]];
+}
+
+/* objectSpecifier
+ * Create an object specifier for this object using the folder container.
+ */
+-(NSScriptObjectSpecifier *)objectSpecifier
+{
+	Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+	NSArray * articles = [folder articles];
+	unsigned index = [articles indexOfObjectIdenticalTo:self];
+	if (index != NSNotFound)
+	{
+		NSScriptObjectSpecifier * containerRef = [folder objectSpecifier];
+		return [[[NSIndexSpecifier allocWithZone:[self zone]] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
+																			 containerSpecifier:containerRef
+																							key:@"articles"
+																						  index:index] autorelease];
+	}
+	return nil;
 }
 
 /* dealloc
@@ -170,7 +191,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(void)dealloc
 {
 	[commentsArray release];
-	[messageData release];
+	[articleData release];
 	[super dealloc];
 }
 @end

@@ -48,7 +48,7 @@ static Preferences * _standardPreferences = nil;
 
 		refreshFrequency = [defaults integerForKey:MAPref_CheckFrequency];
 		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
-		refreshOnStartup = [defaults boolForKey:MAPref_CheckForNewMessagesOnStartup];
+		refreshOnStartup = [defaults boolForKey:MAPref_CheckForNewArticlesOnStartup];
 		checkForNewOnStartup = [defaults boolForKey:MAPref_CheckForUpdatesOnStartup];
 		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
 		minimumFontSize = [defaults integerForKey:MAPref_MinimumFontSize];
@@ -97,7 +97,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:msgListFont forKey:MAPref_ArticleListFont];
 	[defaultValues setObject:folderFont forKey:MAPref_FolderFont];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatesOnStartup];
-	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewMessagesOnStartup];
+	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewArticlesOnStartup];
 	[defaultValues setObject:cachedFolderID forKey:MAPref_CachedFolderID];
 	[defaultValues setObject:[NSNumber numberWithInt:-1] forKey:MAPref_SortDirection];
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
@@ -228,7 +228,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != refreshOnStartup)
 	{
 		refreshOnStartup = flag;
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_CheckForNewMessagesOnStartup];
+		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_CheckForNewArticlesOnStartup];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }

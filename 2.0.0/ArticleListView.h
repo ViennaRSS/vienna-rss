@@ -53,11 +53,11 @@
 	NSString * sortColumnIdentifier;
 	BOOL previousFolderColumnState;
 	NSTimer * markReadTimer;
-	NSArray * currentArrayOfMessages;
+	NSArray * currentArrayOfArticles;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
-	NSString * guidOfMessageToSelect;
-	NSFont * messageListFont;
+	NSString * guidOfArticleToSelect;
+	NSFont * articleListFont;
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
 	WebPreferences * defaultWebPrefs;
@@ -70,7 +70,7 @@
 // Public functions
 -(void)setController:(AppController *)theController;
 -(void)initialiseArticleView;
--(BOOL)selectFolderAndMessage:(int)folderId guid:(NSString *)guid;
+-(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
 -(void)refreshFolder:(BOOL)reloadData;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
@@ -78,17 +78,16 @@
 -(NSString *)sortColumnIdentifier;
 -(int)tableLayout;
 -(NSDictionary *)initStylesMap;
--(NSArray *)allMessages;
--(NSArray *)markedMessageRange;
+-(NSArray *)markedArticleRange;
 -(void)selectFolderWithFilter:(int)newFolderId;
 -(NSView *)mainView;
 -(void)sortByIdentifier:(NSString *)columnName;
--(Message *)selectedArticle;
+-(Article *)selectedArticle;
 -(void)displayNextUnread;
 -(void)deleteSelectedMessages;
--(void)markReadByArray:(NSArray *)messageArray readFlag:(BOOL)readFlag;
+-(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByArray:(NSArray *)folderArray;
--(void)markDeletedByArray:(NSArray *)messageArray deleteFlag:(BOOL)deleteFlag;
--(void)markFlaggedByArray:(NSArray *)messageArray flagged:(BOOL)flagged;
+-(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
+-(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 @end
