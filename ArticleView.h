@@ -22,7 +22,6 @@
 #import "WebKit/WebView.h"
 
 @interface ArticleView : WebView
-{
-}
--(void)keyDown:(NSEvent *)theEvent;
+	-(void)keyDown:(NSEvent *)theEvent;
+	-(void)printDocument:(id)sender;
 @end

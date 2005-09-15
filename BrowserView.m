@@ -414,7 +414,9 @@ static const int MA_Left_Margin_Width = 10;
 	int count = [allTabs count];
 	if (count == 1)
 	{
-		[self removeTrackingRect:[[allTabs objectAtIndex:0] trackingRectTag]];
+		BrowserTab * primaryTab = [allTabs objectAtIndex:0];
+		[self removeTrackingRect:[primaryTab trackingRectTag]];
+		[primaryTab setRect:NSZeroRect];
 		[self removeAllToolTips];
 	}
 	else
@@ -423,6 +425,8 @@ static const int MA_Left_Margin_Width = 10;
 		int y0 = (viewRect.origin.y + viewRect.size.height) - MA_Tab_Height;
 		int tabWidth = MIN(viewRect.size.width / count, MA_Max_TabWidth);
 		int index = 0;
+		
+		NSPoint mousePt = [self convertPoint:[[self window] convertScreenToBase:[NSEvent mouseLocation]] fromView:nil];
 
 		tabWidth = MAX(MA_Min_TabWidth, tabWidth);
 		while (index < count)
@@ -433,7 +437,7 @@ static const int MA_Left_Margin_Width = 10;
 			{
 				[theTab setRect:computedRect];
 				[self removeTrackingRect:[theTab trackingRectTag]];
-				[theTab setTrackingRectTag:[self addTrackingRect:computedRect owner:self userData:theTab assumeInside:NO]];
+				[theTab setTrackingRectTag:[self addTrackingRect:computedRect owner:self userData:theTab assumeInside:NSPointInRect(mousePt, computedRect)]];
 
 				// Tabs can have tooltips. We'll provide the actual tooltip text in stringForToolTip
 				[self removeToolTip:[theTab toolTipTag]];

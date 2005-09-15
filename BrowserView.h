@@ -23,7 +23,7 @@
 @protocol BaseView
 	-(void)search;
 	-(NSString *)searchPlaceholderString;
-	-(void)printDocument;
+	-(void)printDocument:(id)sender;
 	-(void)handleGoForward;
 	-(void)handleGoBack;
 	-(BOOL)canGoForward;

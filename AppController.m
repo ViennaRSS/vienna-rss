@@ -41,6 +41,7 @@
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "WebKit/WebFrame.h"
+#import "WebKit/WebUIDelegate.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
 
@@ -416,28 +417,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[[Preferences standardPreferences] setReadingPaneOnRight:NO];
 }
 
-/* ourOpenLinkHandler
- * Handles the "Open Link in Browser" command in the web view. Previously we will
- * have primed the menu represented object with the NSURL of the link.
- */
--(IBAction)ourOpenLinkHandler:(id)sender
-{
-	NSMenuItem * menuItem = (NSMenuItem *)sender;
-	NSURL * url = [menuItem representedObject];
-
-	if (url != nil)
-		[self openURLInBrowserWithURL:url];
-}
-
-/* openURLInBrowser
- * Open a URL in either the internal Vienna browser or an external browser depending on
- * whatever the user has opted for.
- */
--(void)openURLInBrowser:(NSString *)urlString
-{
-	[self openURLInBrowserWithURL:[NSURL URLWithString:urlString]];
-}
-
 /* applicationDockMenu
  * Return a menu with additional commands to be displayd on the application's
  * popup dock menu.
@@ -458,6 +437,134 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	return appDockMenu;
 }
 
+/* contextMenuItemsForElement
+ * Creates a new context menu for our web pane.
+ */
+-(NSArray *)contextMenuItemsLink:(NSURL *)urlLink defaultMenuItems:(NSArray *)defaultMenuItems
+{
+	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
+	int count = [newDefaultMenu count];
+	int index;
+	
+	for (index = count - 1; index >= 0; --index)
+	{
+		NSMenuItem * menuItem = [newDefaultMenu objectAtIndex:index];
+		switch ([menuItem tag])
+		{
+			case WebMenuItemTagOpenImageInNewWindow:
+				[menuItem setTitle:NSLocalizedString(@"Open Image in New Tab", nil)];
+				break;
+
+			case WebMenuItemTagOpenFrameInNewWindow:
+				[menuItem setTitle:NSLocalizedString(@"Open Frame in New Tab", nil)];
+				break;
+
+			case WebMenuItemTagOpenLinkInNewWindow: {
+				[menuItem setTitle:NSLocalizedString(@"Open Link in New Tab", nil)];
+				[menuItem setTarget:self];
+				[menuItem setAction:@selector(openLinkInNewTab:)];
+				[menuItem setRepresentedObject:urlLink];
+
+				// Note: this is only safe to do if we're going from [count..0] when iterating
+				// over newDefaultMenu. If we switch to the other direction, this will break.
+				NSMenuItem * newMenuItem = [[NSMenuItem alloc] init];
+				NSString * defaultBrowser = getDefaultBrowser();
+				if (newMenuItem != nil && defaultBrowser != nil)
+				{
+					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultBrowser]];
+					[newMenuItem setTarget:self];
+					[newMenuItem setAction:@selector(openLinkInBrowser:)];
+					[newMenuItem setRepresentedObject:urlLink];
+					[newMenuItem setTag:WebMenuItemTagOther];
+					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
+				}
+				[newMenuItem release];
+				break;
+				}
+
+			case WebMenuItemTagCopyLinkToClipboard:
+				[menuItem setTitle:NSLocalizedString(@"Copy Link to Clipboard", nil)];
+				break;
+				
+			case WebMenuItemTagDownloadLinkToDisk:
+			case WebMenuItemTagDownloadImageToDisk:
+				// We don't handle these yet. Eventually we will do but, for now, remove
+				// these from the list.
+				[newDefaultMenu removeObjectAtIndex:index];
+				break;
+		}
+	}
+	return [newDefaultMenu autorelease];
+}
+
+/* openPageInBrowser
+ * Open the current web page in the browser.
+ */
+-(IBAction)openPageInBrowser:(id)sender
+{
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		BrowserPane * webPane = (BrowserPane *)theView;
+		NSURL * url = [webPane url];
+		if (url != nil)
+			[self openURLInDefaultBrowser:url];
+	}
+}
+
+/* copyPageURLToClipboard
+ * Copy the URL of the current web page to the clipboard.
+ */
+-(IBAction)copyPageURLToClipboard:(id)sender
+{
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		BrowserPane * webPane = (BrowserPane *)theView;
+		NSURL * url = [webPane url];
+		if (url != nil)
+		{
+			NSPasteboard * pboard = [NSPasteboard generalPasteboard];
+			[pboard declareTypes:[NSArray arrayWithObjects:NSStringPboardType, NSURLPboardType, nil] owner:self];
+			[url writeToPasteboard:pboard];
+			[pboard setString:[url description] forType:NSStringPboardType];
+		}
+	}
+}
+
+/* openLinkInBrowser
+ * Open the specified link in an external browser.
+ */
+-(IBAction)openLinkInBrowser:(id)sender
+{
+	if ([sender isKindOfClass:[NSMenuItem class]])
+	{
+		NSMenuItem * item = (NSMenuItem *)sender;
+		[self openURLInDefaultBrowser:[item representedObject]];
+	}
+}
+
+/* openLinkInNewTab
+ * Open the specified link in a new tab.
+ */
+-(IBAction)openLinkInNewTab:(id)sender
+{
+	if ([sender isKindOfClass:[NSMenuItem class]])
+	{
+		NSMenuItem * item = (NSMenuItem *)sender;
+		[self openURLInNewTab:[item representedObject]];
+	}
+}
+
+/* openURLInBrowser
+ * Open a URL in either the internal Vienna browser or an external browser depending on
+ * whatever the user has opted for.
+ */
+-(void)openURLInBrowser:(NSString *)urlString
+{
+	[self openURLInBrowserWithURL:[NSURL URLWithString:urlString]];
+}
+
 /* openURLInBrowserWithURL
  * Open a URL in either the internal Vienna browser or an external browser depending on
  * whatever the user has opted for.
@@ -466,25 +573,40 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([prefs openLinksInVienna])
-	{
-		BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
-		BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane];
-		[newBrowserPane setController:self];
-		[newBrowserPane setTab:tab];
-		[newBrowserPane loadURL:url];
-		[mainWindow makeFirstResponder:[newBrowserPane mainView]];
-		[newBrowserPane release];
-	}
+		[self openURLInNewTab:url];
 	else
-	{
-		// Launch in the foreground or background as needed
-		NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
-		[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
-						withAppBundleIdentifier:NULL
-										options:lOptions
-				 additionalEventParamDescriptor:NULL
-							  launchIdentifiers:NULL];
-	}
+		[self openURLInDefaultBrowser:url];
+}
+
+/* openURLInNewTab
+ * Open the specified URL in a new tab.
+ */
+-(void)openURLInNewTab:(NSURL *)url
+{
+	BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
+	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane];
+	[newBrowserPane setController:self];
+	[newBrowserPane setTab:tab];
+	[newBrowserPane loadURL:url];
+	[mainWindow makeFirstResponder:[newBrowserPane mainView]];
+	[newBrowserPane release];
+}
+
+/* openURLInDefaultBrowser
+ * Open the specified URL in whatever the user has registered as their
+ * default system browser.
+ */
+-(void)openURLInDefaultBrowser:(NSURL *)url
+{
+	// Launch in the foreground or background as needed
+	Preferences * prefs = [Preferences standardPreferences];
+	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
+
+	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
+					withAppBundleIdentifier:NULL
+									options:lOptions
+			 additionalEventParamDescriptor:NULL
+						  launchIdentifiers:NULL];
 }
 
 /* setImageForMenuCommand
@@ -834,7 +956,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)printDocument:(id)sender
 {
-	[[browserView activeTabView] printDocument];
+	[[browserView activeTabView] printDocument:sender];
 }
 
 /* folders
@@ -1245,6 +1367,15 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(void)getMessagesOnTimer:(NSTimer *)aTimer
 {
 	[self refreshAllSubscriptions:self];
+}
+
+/* markSelectedFoldersRead
+ * Mark read all messages in the specified array of folders.
+ */
+-(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
+{
+	if (![db readOnly])
+		[mainArticleView markAllReadByArray:arrayOfFolders];
 }
 
 /* createNewSubscription

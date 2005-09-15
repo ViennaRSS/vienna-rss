@@ -22,7 +22,9 @@
 #import "ArticleView.h"
 #import "AppController.h"
 #import "Preferences.h"
+#import "HelperFunctions.h"
 #import "WebKit/WebPolicyDelegate.h"
+#import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
 
 // Private functions
@@ -40,7 +42,7 @@
     if (([super initWithFrame:frame]) != nil)
 	{
 		// Create our webview
-		webPane = [[WebView alloc] initWithFrame:frame];
+		webPane = [[ArticleView alloc] initWithFrame:frame];
 		[webPane setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 		[webPane setUIDelegate:self];
 		[webPane setFrameLoadDelegate:self];
@@ -166,6 +168,61 @@
 	[listener use];
 }
 
+/* createWebViewWithRequest
+ * Called when the browser wants to create a new window. The request is opened in a new tab.
+ */
+-(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
+{
+	[controller openURLInBrowserWithURL:[request URL]];
+	return nil;
+}
+
+/* contextMenuItemsForElement
+ * Creates a new context menu for our web pane.
+ */
+-(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
+{
+	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
+	if (urlLink != nil) 
+		return [controller contextMenuItemsLink:urlLink defaultMenuItems:defaultMenuItems];
+	
+	WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
+	if (frameKey != nil)
+	{
+		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
+		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
+
+		// Add command to open the current page in the external browser
+		NSString * defaultBrowser = getDefaultBrowser();
+		NSMenuItem * newMenuItem = [[NSMenuItem alloc] init];
+		if (defaultBrowser != nil && newMenuItem != nil)
+		{
+			[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Page in %@", nil), defaultBrowser]];
+			[newMenuItem setTarget:controller];
+			[newMenuItem setAction:@selector(openPageInBrowser:)];
+			[newMenuItem setTag:WebMenuItemTagOther];
+			[newDefaultMenu addObject:newMenuItem];
+		}
+		[newMenuItem release];
+
+		// Add command to copy the URL of the current page to the clipboard
+		newMenuItem = [[NSMenuItem alloc] init];
+		if (newMenuItem != nil)
+		{
+			[newMenuItem setTitle:NSLocalizedString(@"Copy Page Link to Clipboard", nil)];
+			[newMenuItem setTarget:controller];
+			[newMenuItem setAction:@selector(copyPageURLToClipboard:)];
+			[newMenuItem setTag:WebMenuItemTagOther];
+			[newDefaultMenu addObject:newMenuItem];
+			[newMenuItem release];
+		}
+		
+		return newDefaultMenu;
+	}
+	
+	return defaultMenuItems;
+}
+
 /* handleMinimumFontSizeChange
  * Called when the minimum font size for articles is enabled or disabled, or changed.
  */
@@ -192,15 +249,9 @@
 /* printDocument
  * Print the web page.
  */
--(void)printDocument
+-(void)printDocument:(id)sender
 {
-	NSPrintInfo * printInfo = [NSPrintInfo sharedPrintInfo];
-	NSPrintOperation * printOp;
-	
-	[printInfo setVerticallyCentered:NO];
-	printOp = [NSPrintOperation printOperationWithView:webPane printInfo:printInfo];
-	[printOp setShowPanels:YES];
-	[printOp runOperation];
+	[webPane printDocument:sender];
 }
 
 /* mainView
@@ -226,6 +277,15 @@
 -(void)search
 {
 	[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+}
+
+/* url
+ * Return the URL of the page being displayed.
+ */
+-(NSURL *)url
+{
+	WebDataSource * dataSource = [[webPane mainFrame] dataSource];
+	return dataSource ? [[dataSource request] URL] : nil;
 }
 
 /* canGoForward

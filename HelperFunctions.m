@@ -20,6 +20,22 @@
 #import "HelperFunctions.h"
 #import "SystemConfiguration/SCNetworkReachability.h"
 
+/* getDefaultBrowser
+ * Return the name of the default system browser.
+ */
+NSString * getDefaultBrowser(void)
+{
+	NSURL * testURL = [NSURL URLWithString:@"http://www.test.com"];
+	NSString * registeredAppURL = nil;
+	CFURLRef appURL = nil;
+
+	if (LSGetApplicationForURL((CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
+		registeredAppURL = [(NSURL *)appURL path];
+	if (appURL != nil)
+		CFRelease(appURL);
+	return [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
+}
+
 /* copyOfMenuWithAction
  * Returns an NSMenuItem that matches the one that implements the corresponding
  * action in the application main menu. Returns nil if no match is found.

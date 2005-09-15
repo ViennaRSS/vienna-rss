@@ -36,6 +36,7 @@
 // Accessor functions
 -(void)setController:(AppController *)theController;
 -(void)loadURL:(NSURL *)url;
+-(NSURL *)url;
 -(void)setTab:(BrowserTab *)newTab;
 -(BOOL)isLoading;
 -(void)handleGoForward;
