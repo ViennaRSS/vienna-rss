@@ -25,7 +25,7 @@
 #import "ArticleListView.h"
 #import "Import.h"
 #import "Export.h"
-#import "Refresh.h"
+#import "RefreshManager.h"
 #import "StringExtensions.h"
 #import "SplitViewExtensions.h"
 #import "BrowserView.h"

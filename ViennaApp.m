@@ -23,7 +23,7 @@
 #import "Preferences.h"
 #import "Import.h"
 #import "Export.h"
-#import "Refresh.h"
+#import "RefreshManager.h"
 #import "Constants.h"
 #import "FoldersTree.h"
 
