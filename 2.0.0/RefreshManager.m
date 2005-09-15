@@ -1,5 +1,5 @@
 //
-//  Refresh.m
+//  RefreshManager.m
 //  Vienna
 //
 //  Created by Steve on 7/19/05.
@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "Refresh.h"
+#import "RefreshManager.h"
 #import "FeedCredentials.h"
 #import "ActivityLog.h"
 #import "FoldersTree.h"

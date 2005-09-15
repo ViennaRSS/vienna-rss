@@ -1,5 +1,5 @@
 //
-//  Refresh.h
+//  RefreshManager.h
 //  Vienna
 //
 //  Created by Steve on 7/19/05.
