@@ -45,6 +45,7 @@
 	-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 	-(void)expandToParent:(TreeNode *)node;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
+	-(void)moveFolders:(NSArray *)array;
 @end
 
 // Pasteboard types for drag and drop.
@@ -626,8 +627,6 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	{
 		if ([[node folder] childUnreadCount])
 			return [NSString stringWithFormat:@"%d unread messages", [[node folder] childUnreadCount]];
-		if (([[node folder] type] == MA_Group_Folder) && [[node folder] unreadCount] > 0)
-			return [NSString stringWithFormat:@"%d unread messages", [[node folder] unreadCount]];
 	}
 	return nil;
 }
@@ -784,6 +783,92 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	return YES; 
 }
 
+/* moveFoldersUndo
+ * Undo handler to move folders back.
+ */
+-(void)moveFoldersUndo:(id)anObject
+{
+	[self moveFolders:(NSArray *)anObject];
+}
+
+/* moveFolders
+ * Reparent folders using the information in the specified array. The array consists of
+ * a collection of NSNumber pairs: the first number if the ID of the folder to move and
+ * the second number is the ID of the parent to which the folder should be moved.
+ */
+-(void)moveFolders:(NSArray *)array
+{
+	NSAssert(([array count] & 1) == 0, @"Incorrect number of items in array passed to moveFolders");
+	int count = [array count];
+	int index = 0;
+
+	// Need to create a running undo array
+	NSMutableArray * undoArray = [[NSMutableArray alloc] initWithCapacity:count];
+
+	// Internal drag and drop so we're just changing the parent IDs around. One thing
+	// we have to watch for is to make sure that we don't re-parent to a subordinate
+	// folder.
+	while (index < count)
+	{
+		int folderId = [[array objectAtIndex:index++] intValue];
+		int newParentId = [[array objectAtIndex:index++] intValue];
+		Folder * folder = [db folderFromID:folderId];
+		int oldParentId = [folder parentId];
+		
+		TreeNode * node = [rootNode nodeFromID:folderId];
+		TreeNode * oldParent = [rootNode nodeFromID:oldParentId];
+		TreeNode * newParent = [rootNode nodeFromID:newParentId];
+
+		if (![newParent canHaveChildren])
+			[newParent setCanHaveChildren:YES];
+		
+		[db setParent:newParentId forFolder:folderId];
+		[node retain];
+		[oldParent removeChild:node andChildren:NO];
+		[newParent addChild:node];
+		[node release];
+		
+		[undoArray addObject:[NSNumber numberWithInt:folderId]];
+		[undoArray addObject:[NSNumber numberWithInt:oldParentId]];
+	}
+
+	// Set up to undo this action
+	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+	[undoManager registerUndoWithTarget:self selector:@selector(moveFoldersUndo:) object:undoArray];
+	[undoManager setActionName:NSLocalizedString(@"Move Folders", nil)];
+	[undoArray release];
+	
+	// Make the outline control reload its data
+	[outlineView reloadData];
+
+	// If any parent was a collapsed group, expand it now
+	for (index = 0; index < count; ++index)
+	{
+		int newParentId = [[array objectAtIndex:++index] intValue];
+		if (newParentId != MA_Root_Folder)
+		{
+			TreeNode * parentNode = [rootNode nodeFromID:newParentId];
+			if (![outlineView isItemExpanded:parentNode] && [outlineView isExpandable:parentNode])
+				[outlineView expandItem:parentNode];
+		}
+	}
+	
+	// Properly set selection back to the original items. This has to be done after the
+	// refresh so that rowForItem returns the new positions.
+	NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
+	int selRowIndex = 9999;
+	for (index = 0; index < count; ++index)
+	{
+		int folderId = [[array objectAtIndex:index++] intValue];
+		int rowIndex = [outlineView rowForItem:[rootNode nodeFromID:folderId]];
+		selRowIndex = MIN(selRowIndex, rowIndex);
+		[selIndexSet addIndex:rowIndex];
+	}
+	[outlineView scrollRowToVisible:selRowIndex];
+	[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
+	[selIndexSet release];
+}
+
 /* acceptDrop
  * Accept a drop on or between nodes either from within the folder view or from outside.
  */
@@ -811,51 +896,20 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
 		int index;
-		
-		// Internal drag and drop so we're just changing the parent IDs around. One thing
-		// we have to watch for is to make sure that we don't re-parent to a subordinate
-		// folder.
+
+		// Create an NSArray of pairs (folderId, newParentId) that will be passed to moveFolders
+		// to do the actual move.
+		NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:count * 2];
 		for (index = 0; index < count; ++index)
 		{
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
-			Folder * folder = [db folderFromID:folderId];
-			TreeNode * node = [rootNode nodeFromID:folderId];
-			TreeNode * oldParent = [rootNode nodeFromID:[folder parentId]];
-			TreeNode * newParent = [rootNode nodeFromID:parentID];
-
-			if (![newParent canHaveChildren])
-				[newParent setCanHaveChildren:YES];
-
-			[db setParent:parentID forFolder:folderId];
-			[oldParent removeChild:node andChildren:NO];
-			[newParent addChild:node];
+			[array addObject:[NSNumber numberWithInt:folderId]];
+			[array addObject:[NSNumber numberWithInt:parentID]];
 		}
 
-		// Make the outline control reload its data
-		[outlineView reloadData];
-
-		// If parent was a group, expand it now
-		if (parentID != MA_Root_Folder)
-		{
-			TreeNode * parentNode = [rootNode nodeFromID:parentID];
-			if (![outlineView isItemExpanded:parentNode] && [outlineView isExpandable:parentNode])
-				[outlineView expandItem:parentNode];
-		}
-
-		// Properly set selection back to the original items. This has to be done after the
-		// refresh so that rowForItem returns the new positions.
-		NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
-		int selRowIndex = 9999;
-		for (index = 0; index < count; ++index)
-		{
-			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
-			int rowIndex = [outlineView rowForItem:[rootNode nodeFromID:folderId]];
-			selRowIndex = MIN(selRowIndex, rowIndex);
-			[selIndexSet addIndex:rowIndex];
-		}
-		[outlineView scrollRowToVisible:selRowIndex];
-		[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
-		[selIndexSet release];
+		// Do the move
+		[self moveFolders:array];
+		[array release];
 		return YES;
 	}
 	if (type == RSSSourceType)

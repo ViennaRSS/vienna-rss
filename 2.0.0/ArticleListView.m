@@ -1179,7 +1179,6 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 {
 	[db flushFolder:currentFolderId];
 	[messageList deselectAll:self];
-	[controller clearUndoStack];
 	currentFolderId = newFolderId;
 	[self setMessageListHeader];
 	[self showColumnsForFolder:currentFolderId];

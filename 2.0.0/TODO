@@ -4,19 +4,20 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
+(Items marked 2.1 are currently scheduled for a post 2.0 release unless I can be convinced otherwise).
+
 Wishlist Items
 ==============
-- Undo moving folders.
-- Bloglines integration.
+- Bloglines integration. (2.1)
 - Auto-discover feeds if subscription URL is to a web page.
 - Mark every unread article in every folder as read.
 - Sort on multiple columns.
-- Per-folder sorting.
-- Semi-transparent main window when not in front.
-- Show the feed icon in the article list pane.
+- Per-folder sorting. (2.1)
+- Semi-transparent main window when not in front. (2.1)
+- Show the feed icon in the article list pane. (2.1)
 - Clean up menus.
-- Download files directly from Vienna.
-- Support retrieving RSS 2.0 comments.
+- Download files directly from Vienna. (2.1)
+- Support retrieving RSS 2.0 comments. (2.1)
 
 Coding To-Do Items
 ==================
