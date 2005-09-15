@@ -24,3 +24,4 @@ BOOL isAccessible(NSString * urlString);
 void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
 void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);
 NSMenuItem * copyOfMenuWithAction(SEL theSelector);
+NSString * getDefaultBrowser(void);

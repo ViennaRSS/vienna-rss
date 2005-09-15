@@ -58,10 +58,8 @@
 	NSDictionary * args = [cmd evaluatedArguments];
 	Folder * folder = [args objectForKey:@"Folder"];
 	if (folder != nil)
-	{
-//		AppController * controller = [self delegate];
-//		[[controller mainArticleView] markAllReadWithArray:[NSArray arrayWithObject:folder]];
-	}
+		[[self delegate] markSelectedFoldersRead:[NSArray arrayWithObject:folder]];
+
 	return nil;
 }
 

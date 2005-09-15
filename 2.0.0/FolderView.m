@@ -234,7 +234,10 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
  * Ensure that the default outline/table view doesn't draw its own
  * selection.
  */
--(id)_highlightColorForCell:(NSCell *)cell { return nil; }
+-(id)_highlightColorForCell:(NSCell *)cell
+{
+	return nil;
+}
 
 /* highlightSelectionInClipRect
  * Draw the hightlight selection using the gradient.

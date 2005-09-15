@@ -116,12 +116,16 @@
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
+-(NSArray *)contextMenuItemsLink:(NSURL *)urlLink defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIcon;
 -(void)openURLInBrowser:(NSString *)urlString;
+-(void)openURLInNewTab:(NSURL *)url;
 -(void)openURLInBrowserWithURL:(NSURL *)url;
+-(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(BOOL)selectFolder:(int)folderId;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
+-(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
 -(NSString *)searchString;

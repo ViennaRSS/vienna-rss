@@ -269,6 +269,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[listener use];
 }
 
+/* createWebViewWithRequest
+ * Called when the browser wants to create a new window. The request is opened in a new tab.
+ */
+-(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
+{
+	[controller openURLInBrowserWithURL:[request URL]];
+	return nil;
+}
+
 /* setStatusText
  * Called from the webview when some JavaScript writes status text. Echo this to
  * our status bar.
@@ -289,44 +298,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* contextMenuItemsForElement
- * Creates a new context menu for our web view. The main change is for the menu that is shown when
- * the user right or Ctrl clicks on links. We replace "Open Link in New Window" with "Open Link in Browser"
- * which is more representative of what exactly happens. Similarly we replace "Copy Link" to make it clear
- * where the copy goes to. All other items are removed.
+ * Creates a new context menu for our web view.
  */
 -(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
-	if (urlLink != nil)
-	{
-		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
-		int count = [newDefaultMenu count];
-		int index;
-		
-		for (index = count - 1; index >= 0; --index)
-		{
-			NSMenuItem * menuItem = [newDefaultMenu objectAtIndex:index];
-			switch ([menuItem tag])
-			{
-				case WebMenuItemTagOpenLinkInNewWindow:
-					[menuItem setTitle:NSLocalizedString(@"Open Link in Browser", nil)];
-					[menuItem setTarget:self];
-					[menuItem setAction:@selector(ourOpenLinkHandler:)];
-					[menuItem setRepresentedObject:urlLink];
-					break;
-					
-				case WebMenuItemTagCopyLinkToClipboard:
-					[menuItem setTitle:NSLocalizedString(@"Copy Link to Clipboard", nil)];
-					break;
-					
-				default:
-					[newDefaultMenu removeObjectAtIndex:index];
-					break;
-			}
-		}
-		return [newDefaultMenu autorelease];
-	}
-	return nil;
+	return (urlLink != nil) ? [controller contextMenuItemsLink:urlLink defaultMenuItems:defaultMenuItems] : nil;
 }
 
 /* initTableView
@@ -868,16 +845,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* printDocument
  * Print the active article.
  */
--(void)printDocument
+-(void)printDocument:(id)sender
 {
-	NSPrintInfo * printInfo = [NSPrintInfo sharedPrintInfo];
-	NSPrintOperation * printOp;
-	
-	[printInfo setVerticallyCentered:NO];
-	printOp = [NSPrintOperation printOperationWithView:textView printInfo:printInfo];
-	[printOp setShowPanels:YES];
-	[printOp runOperation];
-}	
+	[textView printDocument:sender];
+}
 
 /* handleArticleListFontChange
  * Called when the user changes the message list font and/or size in the Preferences
@@ -963,21 +934,21 @@ int messageSortHandler(Message * item1, Message * item2, void * context)
 		}
 			
 		case MA_FieldID_Read: {
-			BOOL n1 = [item1 isRead];
-			BOOL n2 = [item2 isRead];
-			return (n1 < n2) * app->sortDirection;
+			NSNumber * n1 = [NSNumber numberWithBool:[item1 isRead]];
+			NSNumber * n2 = [NSNumber numberWithBool:[item2 isRead]];
+			return [n1 compare:n2] * app->sortDirection;
 		}
 			
 		case MA_FieldID_Flagged: {
-			BOOL n1 = [item1 isFlagged];
-			BOOL n2 = [item2 isFlagged];
-			return (n1 < n2) * app->sortDirection;
+			NSNumber * n1 = [NSNumber numberWithBool:[item1 isFlagged]];
+			NSNumber * n2 = [NSNumber numberWithBool:[item2 isFlagged]];
+			return [n1 compare:n2] * app->sortDirection;
 		}
 			
 		case MA_FieldID_Comments: {
-			BOOL n1 = [item1 hasComments];
-			BOOL n2 = [item2 hasComments];
-			return (n1 < n2) * app->sortDirection;
+			NSNumber * n1 = [NSNumber numberWithBool:[item1 hasComments]];
+			NSNumber * n2 = [NSNumber numberWithBool:[item2 hasComments]];
+			return [n1 compare:n2] * app->sortDirection;
 		}
 			
 		case MA_FieldID_Date: {

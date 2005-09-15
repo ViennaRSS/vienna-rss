@@ -19,6 +19,7 @@
 //
 
 #import "ArticleView.h"
+#import "WebKit/WebFrame.h"
 
 @interface NSObject (ArticleViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
@@ -40,4 +41,22 @@
 	}
 	[super keyDown:theEvent];
 }
+
+/* printDocument
+ * Print the active article.
+ */
+-(void)printDocument:(id)sender
+{
+	NSView * printView = [[[self mainFrame] frameView] documentView];
+	NSPrintInfo * printInfo = [NSPrintInfo sharedPrintInfo];
+	
+	NSMutableDictionary * dict = [printInfo dictionary];
+	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintLeftMargin];
+	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintRightMargin];
+	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintTopMargin];
+	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintBottomMargin];
+	
+	[printInfo setVerticallyCentered:NO];
+	[printView print:self];
+}	
 @end

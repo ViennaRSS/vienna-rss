@@ -162,3 +162,9 @@
 "Clear" = "Rensa senaste sökningar";
 "Search web page" = "Search web page";
 "Loading..." = "Laddar...";
+"Open Image in New Tab" = "Open Image in New Tab";
+"Open Link in New Tab" = "Open Link in New Tab";
+"Open Frame in New Tab" = "Open Frame in New Tab";
+"Open Link in %@" = "Open Link in %@";
+"Open Page in %@" = "Open Page in %@";
+"Copy Page Link to Clipboard" ="Copy Page Link to Clipboard";
