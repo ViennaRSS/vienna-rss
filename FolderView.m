@@ -31,12 +31,21 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 
 @implementation FolderView
 
+/* init
+ * Our initialisation.
+ */
+-(id)init
+{
+	if ((self = [super init]) != nil)
+		useTooltips = NO;
+	return self;
+}
+
 /* awakeFromNib
  * Our init.
  */
 -(void)awakeFromNib
 {
-	useTooltips = NO;
 	blueGradient = [[NSImage alloc] initWithData:[blueImageData propertyList]];
 	grayGradient = [[NSImage alloc] initWithData:[grayImageData propertyList]];
 	iRect = NSMakeRect(0,0,1,[blueGradient size].height-1);					

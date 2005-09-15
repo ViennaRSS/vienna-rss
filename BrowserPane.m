@@ -217,7 +217,7 @@
 			[newMenuItem release];
 		}
 		
-		return newDefaultMenu;
+		return [newDefaultMenu autorelease];
 	}
 	
 	return defaultMenuItems;

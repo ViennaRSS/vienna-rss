@@ -16,10 +16,13 @@ Thanks!
   error unless the User-agent field is specified in the HTTP header.
 - Added built-in browser support. Web pages can now be opened in Vienna in separate tabs as an
   option. Next and Previous Tab commands added to the Window menu. Close Tab added to the File
-  menu.
+  menu. Right-click popup menu allows links or pages to be opened externally.
 - Added option in Preferences to open web pages in Vienna.
 - Close Window command changed to Shift+Command+W when tabs are open for consistency with
   Camino and Safari.
+- Fixed a bug that screwed up sorting by the read column.
+- Improved printing of articles.
+- Can undo moving folders in the folders list pane.
 
 2.0.0.2006
 ----------

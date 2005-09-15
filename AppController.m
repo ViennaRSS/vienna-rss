@@ -1241,7 +1241,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	NSString * stylesPage = [standardURLs valueForKey:@"ViennaMoreStylesPage"];
 	if (stylesPage != nil)
-		[self openURLInBrowser:stylesPage];
+		[self openURLInDefaultBrowser:[NSURL URLWithString:stylesPage]];
 }
 
 /* viewArticlePage
@@ -1722,7 +1722,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	NSString * homePage = [standardURLs valueForKey:@"ViennaHomePage"];
 	if (homePage != nil)
-		[self openURLInBrowser:homePage];
+		[self openURLInDefaultBrowser:[NSURL URLWithString:homePage]];
 }
 
 /* showAcknowledgements
