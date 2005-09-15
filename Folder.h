@@ -24,7 +24,7 @@
 // Folder types
 //   MA_Root_Folder = the abstract root folder
 //   MA_Group_Folder = a folder used to group other folders
-//   MA_Smart_Folder = the messages are dynamically collected by a custom query
+//   MA_Smart_Folder = the articles are dynamically collected by a custom query
 //   MA_RSS_Folder = folder contains RSS articles
 //
 #define MA_Root_Folder			-1
@@ -60,18 +60,18 @@
 	int childUnreadCount;
 	unsigned int flags;
 	unsigned int bloglinesId;
-	BOOL isMessages;
+	BOOL isCached;
 	BOOL needFlush;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
-	NSMutableDictionary * messages;
+	NSMutableDictionary * cachedArticles;
 }
 
 // Initialisation functions
 -(id)initWithId:(int)itemId parentId:(int)parentId name:(NSString *)name type:(int)type;
 -(NSString *)name;
 -(NSString *)folderName;
--(NSString *)description;
+-(NSString *)feedDescription;
 -(NSString *)homePage;
 -(NSString *)feedURL;
 -(NSDate *)lastUpdate;
@@ -79,6 +79,7 @@
 -(NSString *)username;
 -(NSString *)password;
 -(NSDictionary *)attributes;
+-(NSArray *)articles;
 -(int)parentId;
 -(int)itemId;
 -(int)messageCount;
@@ -88,7 +89,7 @@
 -(unsigned int)flags;
 -(NSImage *)image;
 -(int)childUnreadCount;
--(void)clearMessages;
+-(void)clearCache;
 -(BOOL)needFlush;
 -(void)resetFlush;
 -(void)setName:(NSString *)name;
@@ -99,7 +100,7 @@
 -(void)setFlag:(unsigned int)flagToSet;
 -(void)clearFlag:(unsigned int)flagToClear;
 -(void)setChildUnreadCount:(int)count;
--(void)setDescription:(NSString *)newDescription;
+-(void)setFeedDescription:(NSString *)newFeedDescription;
 -(void)setHomePage:(NSString *)newHomePage;
 -(void)setFeedURL:(NSString *)feedURL;
 -(void)setUsername:(NSString *)newUsername;
@@ -108,8 +109,8 @@
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(NSArray *)articles;
--(Message *)messageFromGuid:(NSString *)guid;
--(void)addMessage:(Message *)newMessage;
+-(Article *)articleFromGuid:(NSString *)guid;
+-(void)addMessage:(Article *)newMessage;
 -(void)deleteMessage:(NSString *)messageId;
 -(void)markFolderEmpty;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;

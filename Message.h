@@ -34,12 +34,12 @@ extern NSString * MA_Field_Folder;
 extern NSString * MA_Field_Parent;
 extern NSString * MA_Field_Headlines;
 
-// Message status values
+// Article status values
 #define MA_MsgStatus_Empty		0
 #define MA_MsgStatus_New		1
 #define MA_MsgStatus_Updated	2
 
-// Message field IDs
+// Article field IDs
 #define MA_FieldID_GUID			400
 #define MA_FieldID_Subject		401
 #define MA_FieldID_Author		402
@@ -54,13 +54,13 @@ extern NSString * MA_Field_Headlines;
 #define MA_FieldID_Headlines	411
 #define MA_FieldID_Deleted		412
 
-@interface Message : NSObject {
-	NSMutableDictionary * messageData;
+@interface Article : NSObject {
+	NSMutableDictionary * articleData;
 	NSMutableArray * commentsArray;
 	BOOL readFlag;
 	BOOL markedFlag;
 	BOOL deletedFlag;
-	int messageStatus;
+	int status;
 }
 
 // Accessor functions
@@ -80,15 +80,15 @@ extern NSString * MA_Field_Headlines;
 -(int)status;
 -(void)setGuid:(NSString *)newGuid;
 -(void)setParentId:(int)newParentId;
--(void)setTitle:(NSString *)newMessageTitle;
+-(void)setTitle:(NSString *)newTitle;
 -(void)setLink:(NSString *)newLink;
 -(void)setAuthor:(NSString *)newAuthor;
 -(void)setFolderId:(int)newFolderId;
--(void)setDate:(NSDate *)newMessageDate;
+-(void)setDate:(NSDate *)newDate;
 -(void)setText:(NSString *)newText;
 -(void)setStatus:(int)newStatus;
 -(void)markRead:(BOOL)flag;
 -(void)markFlagged:(BOOL)flag;
 -(void)markDeleted:(BOOL)flag;
--(NSDictionary *)messageData;
+-(NSDictionary *)articleData;
 @end

@@ -167,7 +167,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 }
 
 /* setFolderListFont
- * Creates or updates the fonts used by the message list. The folder
+ * Creates or updates the fonts used by the article list. The folder
  * list isn't automatically refreshed afterward - call reloadData for that.
  */
 -(void)setFolderListFont
@@ -362,7 +362,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 
 /* nextFolderWithUnread
  * Finds the ID of the next folder after currentFolderId that has
- * unread messages.
+ * unread articles.
  */
 -(int)nextFolderWithUnread:(int)currentFolderId
 {
@@ -391,7 +391,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 			return [nextNode nodeId];
 
 		// If we've gone full circle and not found
-		// anything, we're out of unread messages
+		// anything, we're out of unread articles
 		if (nextNode == thisNode)
 			return [thisNode nodeId];
 
@@ -626,14 +626,14 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	if (node != nil)
 	{
 		if ([[node folder] childUnreadCount])
-			return [NSString stringWithFormat:@"%d unread messages", [[node folder] childUnreadCount]];
+			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), [[node folder] childUnreadCount]];
 	}
 	return nil;
 }
 
 /* objectValueForTableColumn
  * Returns the actual string that is displayed in the cell. Folders that have child folders with unread
- * messages show the aggregate unread message count.
+ * articles show the aggregate unread article count.
  */
 -(id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
@@ -645,7 +645,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 
 /* willDisplayCell
  * Hook before a cell is displayed to set the correct image for that cell. We use this to show the folder
- * in normal or bold face depending on whether or not the folder (or sub-folders) have unread messages. This
+ * in normal or bold face depending on whether or not the folder (or sub-folders) have unread articles. This
  * is also the place where we set the folder image.
  */
 -(void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item 
@@ -656,7 +656,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
 		[realCell setTextColor:([olv isRowSelected:[olv rowForItem:item]]) ? [NSColor whiteColor] : [NSColor blackColor]];
-		if (IsSmartFolder([node folder]))  // Because if the search results contain unread messages we don't want the smart folder name to be bold.
+		if (IsSmartFolder([node folder]))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
 			[realCell setFont:cellFont];

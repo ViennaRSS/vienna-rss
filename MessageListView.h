@@ -22,7 +22,5 @@
 #import "TableViewExtensions.h"
 
 @interface MessageListView : ExtendedTableView
-{
-}
--(void)keyDown:(NSEvent *)theEvent;
+	-(void)keyDown:(NSEvent *)theEvent;
 @end

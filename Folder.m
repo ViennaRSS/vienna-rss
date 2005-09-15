@@ -199,8 +199,8 @@ static NSArray * iconArray = nil;
 		type = newType;
 		flags = 0;
 		needFlush = NO;
-		isMessages = NO;
-		messages = [[NSMutableDictionary dictionary] retain];
+		isCached = NO;
+		cachedArticles = [[NSMutableDictionary dictionary] retain];
 		attributes = [[NSMutableDictionary dictionary] retain];
 		[self setName:newName];
 		[self setLastUpdate:[NSDate distantPast]];
@@ -280,12 +280,12 @@ static NSArray * iconArray = nil;
 	return attributes;
 }
 
-/* description
- * Returns the folder description.
+/* feedDescription
+ * Returns the feed's description.
  */
--(NSString *)description
+-(NSString *)feedDescription
 {
-	return [attributes valueForKey:@"Description"];
+	return [attributes valueForKey:@"FeedDescription"];
 }
 
 /* homePage
@@ -336,12 +336,12 @@ static NSArray * iconArray = nil;
 	}
 }
 
-/* setDescription
- * Sets the folder description.
+/* setFeedDescription
+ * Sets the folder feed description.
  */
--(void)setDescription:(NSString *)newDescription
+-(void)setFeedDescription:(NSString *)newFeedDescription
 {
-	[attributes setValue:newDescription forKey:@"Description"];
+	[attributes setValue:newFeedDescription forKey:@"FeedDescription"];
 }
 
 /* setHomePage
@@ -518,19 +518,12 @@ static NSArray * iconArray = nil;
 	}
 }
 
-/* messageFromGuid
+/* articleFromGuid
  */
--(Message *)messageFromGuid:(NSString *)guid
+-(Article *)articleFromGuid:(NSString *)guid
 {
-	NSAssert(isMessages, @"Folder's cache of messages should be initialized before messageFromGuid can be used");
-	return [messages objectForKey:guid];
-}
-
-/* articles
- */
--(NSArray *)articles
-{
-	return [messages allValues];
+	NSAssert(isCached, @"Folder's cache of articles should be initialized before articleFromGuid can be used");
+	return [cachedArticles objectForKey:guid];
 }
 
 /* setUnreadCount
@@ -571,29 +564,29 @@ static NSArray * iconArray = nil;
 	needFlush = NO;
 }
 
-/* clearMessages
- * Empty the folder's array of messages.
+/* clearCache
+ * Empty the folder's cache of article.
  */
--(void)clearMessages
+-(void)clearCache
 {
-	[messages removeAllObjects];
-	isMessages = NO;
+	[cachedArticles removeAllObjects];
+	isCached = NO;
 }
 
 /* addMessage
  */
--(void)addMessage:(Message *)newMessage
+-(void)addMessage:(Article *)newMessage
 {
-	[messages setObject:newMessage forKey:[newMessage guid]];
-	isMessages = YES;
+	[cachedArticles setObject:newMessage forKey:[newMessage guid]];
+	isCached = YES;
 }
 
 /* deleteMessage
  */
 -(void)deleteMessage:(NSString *)guid
 {
-	NSAssert(isMessages, @"Folder's cache of messages should be initialized before deleteMessage can be used");
-	[messages removeObjectForKey:guid];
+	NSAssert(isCached, @"Folder's cache of articles should be initialized before deleteMessage can be used");
+	[cachedArticles removeObjectForKey:guid];
 }
 
 /* markFolderEmpty
@@ -601,14 +594,24 @@ static NSArray * iconArray = nil;
  */
 -(void)markFolderEmpty
 {
-	isMessages = YES;
+	isCached = YES;
 }
 
 /* messageCount
  */
 -(int)messageCount
 {
-	return isMessages ? (int)[messages count] : -1;
+	return isCached ? (int)[cachedArticles count] : -1;
+}
+
+/* articles
+ * Return an array of all articles in the specified folder.
+ */
+-(NSArray *)articles
+{
+	if (isCached)
+		return [cachedArticles allValues];
+	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
 }
 
 /* folderNameCompare
@@ -643,6 +646,14 @@ static NSArray * iconArray = nil;
 	return nil;
 }
 
+/* description
+ * Return a description of the folder.
+ */
+-(NSString *)description
+{
+	return [NSString stringWithFormat:@"Folder id %d", itemId];
+}
+
 /* dealloc
  * Clean up and release resources.
  */
@@ -650,7 +661,7 @@ static NSArray * iconArray = nil;
 {
 	[lastUpdate release];
 	[attributes release];
-	[messages release];
+	[cachedArticles release];
 	[super dealloc];
 }
 @end

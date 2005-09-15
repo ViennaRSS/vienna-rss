@@ -21,14 +21,14 @@
 #import "MessageListView.h"
 
 @interface NSObject(MessageListViewDelegate)
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
--(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 @end
 
 @implementation MessageListView
 
 /* keyDown
- * Here is where we handle special keys when the message list view
+ * Here is where we handle special keys when the article list view
  * has the focus so we can do custom things.
  */
 -(void)keyDown:(NSEvent *)theEvent
@@ -43,7 +43,7 @@
 }
 
 /* copy
- * Handle the Copy action when the message list has focus.
+ * Handle the Copy action when the article list has focus.
  */
 -(IBAction)copy:(id)sender
 {

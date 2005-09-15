@@ -31,7 +31,7 @@
 static RefreshManager * _refreshManager = nil;
 
 // Non-class function used for sorting
-static int messageDateSortHandler(Message * item1, Message * item2, void * context);
+static int articleDateSortHandler(Article * item1, Article * item2, void * context);
 
 // Refresh types
 typedef enum {
@@ -170,13 +170,18 @@ typedef enum {
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [foldersArray objectAtIndex:index];
-		if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed])
+		if (IsGroupFolder(folder))
+			[self refreshSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
+		else if (IsRSSFolder(folder))
 		{
-			RefreshItem * newItem = [[RefreshItem alloc] init];
-			[newItem setFolder:folder];
-			[newItem setType:MA_Refresh_Feed];
-			[refreshArray addObject:newItem];
-			[newItem release];
+			if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed])
+			{
+				RefreshItem * newItem = [[RefreshItem alloc] init];
+				[newItem setFolder:folder];
+				[newItem setType:MA_Refresh_Feed];
+				[refreshArray addObject:newItem];
+				[newItem release];
+			}
 		}
 	}
 	[self beginRefreshTimer];
@@ -492,14 +497,14 @@ typedef enum {
 			feedLink = [[folder feedURL] baseURL];
 
 		// Get the feed's last update from the header if it is present. This will mark the
-		// date of the most recent message in the feed if the individual messages are
+		// date of the most recent article in the feed if the individual articles are
 		// missing a date tag.
 		NSDate * lastUpdate = [folder lastUpdate];
 		NSDate * newLastUpdate = [lastUpdate retain];
 		
-		// We'll be collecting messages into this array
-		NSMutableArray * messageArray = [NSMutableArray array];
-		int newMessagesFromFeed = 0;	
+		// We'll be collecting articles into this array
+		NSMutableArray * articleArray = [NSMutableArray array];
+		int newArticlesFromFeed = 0;	
 		
 		// Parse off items.
 		NSEnumerator * itemEnumerator = [[newFeed items] objectEnumerator];
@@ -507,55 +512,55 @@ typedef enum {
 		
 		while ((newsItem = [itemEnumerator nextObject]) != nil)
 		{
-			NSDate * messageDate = [newsItem date];
+			NSDate * articleDate = [newsItem date];
 
-			// If no dates anywhere then use the current date/time as the message date.
-			if (messageDate == nil)
-				messageDate = [NSCalendarDate date];
+			// If no dates anywhere then use the current date/time as the article date.
+			if (articleDate == nil)
+				articleDate = [NSCalendarDate date];
 			
-			NSString * messageBody = [newsItem description];
-			NSString * messageTitle = [newsItem title];
-			NSString * messageLink = [newsItem link];
+			NSString * articleBody = [newsItem description];
+			NSString * articleTitle = [newsItem title];
+			NSString * articleLink = [newsItem link];
 			NSString * userName = [newsItem author];
 			NSString * guid = [newsItem guid];
 
-			// Create the message
-			Message * message = [[Message alloc] initWithGuid:guid];
-			[message setFolderId:[folder itemId]];
-			[message setAuthor:userName];
-			[message setText:messageBody];
-			[message setTitle:messageTitle];
-			[message setLink:messageLink];
-			[message setDate:messageDate];
-			[messageArray addObject:message];
-			[message release];
+			// Create the article
+			Article * article = [[Article alloc] initWithGuid:guid];
+			[article setFolderId:[folder itemId]];
+			[article setAuthor:userName];
+			[article setText:articleBody];
+			[article setTitle:articleTitle];
+			[article setLink:articleLink];
+			[article setDate:articleDate];
+			[articleArray addObject:article];
+			[article release];
 
-			// Track most recent message
-			if ([messageDate isGreaterThan:newLastUpdate])
+			// Track most recent article
+			if ([articleDate isGreaterThan:newLastUpdate])
 			{
-				[messageDate retain];
+				[articleDate retain];
 				[newLastUpdate release];
-				newLastUpdate = messageDate;
+				newLastUpdate = articleDate;
 			}
 		}
 		
-		// Now sort the message array before we insert into the
+		// Now sort the article array before we insert into the
 		// database so we're always inserting oldest first. The RSS feed is
 		// likely to give us newest first.
-		NSArray * sortedArrayOfMessages = [messageArray sortedArrayUsingFunction:messageDateSortHandler context:self];
-		NSEnumerator * messageEnumerator = [sortedArrayOfMessages objectEnumerator];
-		Message * message;
+		NSArray * sortedArrayOfMessages = [articleArray sortedArrayUsingFunction:articleDateSortHandler context:self];
+		NSEnumerator * articleEnumerator = [sortedArrayOfMessages objectEnumerator];
+		Article * article;
 		
-		// Here's where we add the messages to the database
-		while ((message = [messageEnumerator nextObject]) != nil)
+		// Here's where we add the articles to the database
+		while ((article = [articleEnumerator nextObject]) != nil)
 		{
-			[db addMessage:[message folderId] message:message];
-			if ([message status] == MA_MsgStatus_New)
-				++newMessagesFromFeed;
+			[db createArticle:[article folderId] message:article];
+			if ([article status] == MA_MsgStatus_New)
+				++newArticlesFromFeed;
 		}
 		
-		// A notify is only needed if we added any new messages.
-		BOOL needNotify = (newMessagesFromFeed > 0);
+		// A notify is only needed if we added any new articles.
+		BOOL needNotify = (newArticlesFromFeed > 0);
 		
 		// Set the last update date for this folder to be the date of the most
 		// recent article we retrieved.
@@ -593,11 +598,11 @@ typedef enum {
 			[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 		
 		// Send status to the activity log
-		if (newMessagesFromFeed == 0)
+		if (newArticlesFromFeed == 0)
 			[[connector aItem] setStatus:NSLocalizedString(@"No new articles available", nil)];
 		else
 		{
-			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newMessagesFromFeed];
+			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
 			[[connector aItem] setStatus:logText];
 		}
 		
@@ -609,15 +614,15 @@ typedef enum {
 			[self refreshFavIcon:folder];
 
 		// Add to count of new articles so far
-		countOfNewArticles += newMessagesFromFeed;
+		countOfNewArticles += newArticlesFromFeed;
 	}
 	[self removeConnection:connector];
 }
 
-/* messageDateSortHandler
- * Compares two Messages and returns their chronological order
+/* articleDateSortHandler
+ * Compares two articles and returns their chronological order
  */
-static int messageDateSortHandler(Message * item1, Message * item2, void * context)
+static int articleDateSortHandler(Article * item1, Article * item2, void * context)
 {
 	return [[item1 date] compare:[item2 date]];
 }

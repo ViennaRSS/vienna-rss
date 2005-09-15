@@ -30,6 +30,7 @@
 // Private functions
 @interface Database (Private)
 	-(void)setDatabaseVersion:(int)newVersion;
+	-(BOOL)initArticleArray:(Folder *)folder;
 	-(void)verifyThreadSafety;
 	-(CriteriaTree *)criteriaForFolder:(int)folderId;
 	-(NSArray *)arrayOfSubFolders:(Folder *)folder;
@@ -173,17 +174,17 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
 
-		// Create a criteria to find all marked messages
+		// Create a criteria to find all marked articles
 		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
 		[markedCriteria release];
 
-		// Create a criteria to show all unread messages
+		// Create a criteria to show all unread articles
 		Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
 		[unreadCriteria release];
 		
-		// Create a criteria to show all messages received today
+		// Create a criteria to show all articles received today
 		Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
 		[self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
 		[todayCriteria release];
@@ -204,7 +205,7 @@ static Database * _sharedDatabase = nil;
 	{
 		[self beginTransaction];
 
-		// Add the deleted_flag column to the messages table
+		// Add the deleted_flag column to the articles table
 		[self executeSQL:@"alter table messages add column deleted_flag"];
 
 		// Retype the message_id field to change it to a string since it was originally an integer
@@ -338,7 +339,7 @@ static Database * _sharedDatabase = nil;
 }
 
 /* countOfUnread
- * Return the total number of unread messages in the database.
+ * Return the total number of unread articles in the database.
  */
 -(int)countOfUnread
 {
@@ -617,7 +618,7 @@ static Database * _sharedDatabase = nil;
 		[folder setChildUnreadCount:[folder childUnreadCount] + adjustment];
 	}
 
-	// Delete all messages in this folder then delete ourselves.
+	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
 	countOfUnread -= [folder unreadCount];
 	if (IsSmartFolder(folder))
@@ -644,7 +645,7 @@ static Database * _sharedDatabase = nil;
 
 /* deleteFolder
  * Delete the specified folder. If the folder has any children, delete them too. Also delete
- * all messages associated with the folder. Then send a notification that the folder went bye-bye.
+ * all articles associated with the folder. Then send a notification that the folder went bye-bye.
  */
 -(BOOL)deleteFolder:(int)folderId
 {
@@ -710,7 +711,7 @@ static Database * _sharedDatabase = nil;
 	if ([[folder description] isEqualToString:newDescription])
 		return NO;
 	
-	[folder setDescription:newDescription];
+	[folder setFeedDescription:newDescription];
 	
 	// Add a new description or update the one we have
 	NSString * preparedNewDescription = [SQLDatabase prepareStringForQuery:newDescription];
@@ -901,36 +902,36 @@ static Database * _sharedDatabase = nil;
 	return item;
 }
 
-/* addMessage
- * Adds or updates a message in the specified folder. Returns the GUID of the
- * message that was added or updated or -1 if we couldn't add the message for
+/* createArticle
+ * Adds or updates an article in the specified folder. Returns the GUID of the
+ * article that was added or updated or -1 if we couldn't add the article for
  * some reason.
  */
--(BOOL)addMessage:(int)folderID message:(Message *)message
+-(BOOL)createArticle:(int)folderID message:(Article *)article
 {
 	// Exit now if we're read-only
 	if (readOnly)
 		return NO;
 
 	// Make sure the folder ID is valid. We need it to decipher
-	// some info before we add the message.
+	// some info before we add the article.
 	Folder * folder = [self folderFromID:folderID];
 	if (folder != nil)
 	{
-		// Prime the message cache
-		[self initMessageArray:folder];
+		// Prime the article cache
+		[self initArticleArray:folder];
 
-		// Extract the message data from the dictionary.
-		NSString * messageText = [[message messageData] objectForKey:MA_Field_Text];
-		NSString * messageTitle = [[message messageData] objectForKey:MA_Field_Subject]; 
-		NSDate * messageDate = [[message messageData] objectForKey:MA_Field_Date];
-		NSString * messageLink = [[message messageData] objectForKey:MA_Field_Link];
-		NSString * userName = [[message messageData] objectForKey:MA_Field_Author];
-		NSString * messageGuid = [message guid];
-		int parentId = [message parentId];
-		BOOL marked_flag = [message isFlagged];
-		BOOL read_flag = [message isRead];
-		BOOL deleted_flag = [message isDeleted];
+		// Extract the article data from the dictionary.
+		NSString * messageText = [[article articleData] objectForKey:MA_Field_Text];
+		NSString * messageTitle = [[article articleData] objectForKey:MA_Field_Subject]; 
+		NSDate * messageDate = [[article articleData] objectForKey:MA_Field_Date];
+		NSString * messageLink = [[article articleData] objectForKey:MA_Field_Link];
+		NSString * userName = [[article articleData] objectForKey:MA_Field_Author];
+		NSString * messageGuid = [article guid];
+		int parentId = [article parentId];
+		BOOL marked_flag = [article isFlagged];
+		BOOL read_flag = [article isRead];
+		BOOL deleted_flag = [article isDeleted];
 
 		// Set some defaults
 		if (messageDate == nil)
@@ -948,7 +949,7 @@ static Database * _sharedDatabase = nil;
 		// Unread count adjustment factor
 		int adjustment = 0;
 		
-		// Fix title and message body so they're acceptable to SQL
+		// Fix title and article body so they're acceptable to SQL
 		NSString * preparedMessageTitle = [SQLDatabase prepareStringForQuery:messageTitle];
 		NSString * preparedMessageText = [SQLDatabase prepareStringForQuery:messageText];
 		NSString * preparedMessageLink = [SQLDatabase prepareStringForQuery:messageLink];
@@ -958,8 +959,8 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 
-		// Does this message already exist?
-		Message * theMessage = [folder messageFromGuid:messageGuid];
+		// Does this article already exist?
+		Article * theMessage = [folder articleFromGuid:messageGuid];
 		if (theMessage == nil)
 		{
 			SQLResult * results;
@@ -982,15 +983,15 @@ static Database * _sharedDatabase = nil;
 				return NO;
 			[results release];
 
-			// Add the message to the folder
-			[message setStatus:MA_MsgStatus_New];
-			[folder addMessage:message];
+			// Add the article to the folder
+			[article setStatus:MA_MsgStatus_New];
+			[folder addMessage:article];
 			
 			// Update folder unread count
 			if (!read_flag)
 				adjustment = 1;
 		}
-		else if (![[self messageText:folderID guid:messageGuid] isEqualToString:messageText])
+		else if (![[self articleText:folderID guid:messageGuid] isEqualToString:messageText])
 		{
 			BOOL read_flag = [theMessage isRead];
 			SQLResult * results;
@@ -1011,8 +1012,8 @@ static Database * _sharedDatabase = nil;
 			if (!results)
 				return NO;
 
-			// This was an updated message
-			[message setStatus:MA_MsgStatus_Updated];
+			// This was an updated article
+			[article setStatus:MA_MsgStatus_Updated];
 			[results release];
 		}
 
@@ -1033,8 +1034,8 @@ static Database * _sharedDatabase = nil;
 }
 
 /* deleteDeletedMessages
- * Remove from the database all messages which have the deleted_flag field set to YES. This
- * also requires that we remove the same messages from all folder caches.
+ * Remove from the database all articles which have the deleted_flag field set to YES. This
+ * also requires that we remove the same articles from all folder caches.
  */
 -(void)deleteDeletedMessages
 {
@@ -1044,7 +1045,7 @@ static Database * _sharedDatabase = nil;
 	SQLResult * results = [sqlDatabase performQuery:@"delete from messages where deleted_flag=1"];
 	if (results)
 	{
-		[trashFolder clearMessages];
+		[trashFolder clearCache];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
@@ -1052,19 +1053,19 @@ static Database * _sharedDatabase = nil;
 	[results release];
 }
 
-/* deleteMessage
- * Permanently deletes a message from the specified folder
+/* deleteArticle
+ * Permanently deletes a article from the specified folder
  */
--(BOOL)deleteMessage:(int)folderId guid:(NSString *)guid
+-(BOOL)deleteArticle:(int)folderId guid:(NSString *)guid
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-		// Prime the message cache
-		[self initMessageArray:folder];
+		// Prime the article cache
+		[self initArticleArray:folder];
 
-		Message * message = [folder messageFromGuid:guid];
-		if (message != nil)
+		Article * article = [folder articleFromGuid:guid];
+		if (article != nil)
 		{
 			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 
@@ -1074,13 +1075,13 @@ static Database * _sharedDatabase = nil;
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where folder_id=%d and message_id='%@'", folderId, preparedGuid];
 			if (results)
 			{
-				if (![message isRead])
+				if (![article isRead])
 				{
 					[folder setUnreadCount:[folder unreadCount] - 1];
 					--countOfUnread;
 					
 					// Update childUnreadCount for our parent. Since we're just working
-					// on one message, we do this the faster way.
+					// on one article, we do this the faster way.
 					Folder * parentFolder = folder;
 					while ([parentFolder parentId] != MA_Root_Folder)
 					{
@@ -1228,7 +1229,7 @@ static Database * _sharedDatabase = nil;
 		// Make sure we have a database.
 		NSAssert(sqlDatabase, @"Database not assigned for this item");
 		
-		// Keep running count of total unread messages
+		// Keep running count of total unread articles
 		countOfUnread = 0;
 		
 		SQLResult * results;
@@ -1302,7 +1303,7 @@ static Database * _sharedDatabase = nil;
 				NSString * lastUpdateString = [row stringForColumn:@"last_update_string"];
 				
 				Folder * folder = [self folderFromID:folderId];
-				[folder setDescription:descriptiontext];
+				[folder setFeedDescription:descriptiontext];
 				[folder setHomePage:linktext];
 				[folder setFeedURL:url];
 				[folder setLastUpdateString:lastUpdateString];
@@ -1394,11 +1395,11 @@ static Database * _sharedDatabase = nil;
 	return [newArray sortedArrayUsingSelector:@selector(folderNameCompare:)];
 }
 
-/* initMessageArray
- * Ensures that the specified folder has a minimal cache of message information. This is just
- * the message id and the read flag.
+/* initArticleArray
+ * Ensures that the specified folder has a minimal cache of article information. This is just
+ * the article id and the read flag.
  */
--(BOOL)initMessageArray:(Folder *)folder
+-(BOOL)initArticleArray:(Folder *)folder
 {
 	// Prime the folder cache
 	[self initFolderArray];
@@ -1429,17 +1430,17 @@ static Database * _sharedDatabase = nil;
 				NSString * author = [row stringForColumn:@"sender"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 
-				// Keep our own track of unread messages
+				// Keep our own track of unread articles
 				if (!read_flag)
 					++unread_count;
 				
-				Message * message = [[Message alloc] initWithGuid:guid];
-				[message markRead:read_flag];
-				[message setFolderId:folderId];
-				[message setTitle:title];
-				[message setAuthor:author];
-				[folder addMessage:message];
-				[message release];
+				Article * article = [[Article alloc] initWithGuid:guid];
+				[article markRead:read_flag];
+				[article setFolderId:folderId];
+				[article setTitle:title];
+				[article setAuthor:author];
+				[folder addMessage:article];
+				[article release];
 			}
 
 			// This is a good time to do a quick check to ensure that our
@@ -1447,7 +1448,7 @@ static Database * _sharedDatabase = nil;
 			// them if not.
 			if (unread_count != [folder unreadCount])
 			{
-				NSLog(@"Fixing unread count for %@ (%d on folder versus %d in messages)", [folder name], [folder unreadCount], unread_count);
+				NSLog(@"Fixing unread count for %@ (%d on folder versus %d in articles)", [folder name], [folder unreadCount], unread_count);
 				int diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
 				countOfUnread += diff;
@@ -1459,11 +1460,11 @@ static Database * _sharedDatabase = nil;
 }
 
 /* releaseMessages
- * Free up the memory used to cache copies of the messages in the specified folder.
+ * Free up the memory used to cache copies of the articles in the specified folder.
  */
 -(void)releaseMessages:(int)folderId
 {
-	[[self folderFromID:folderId] clearMessages];
+	[[self folderFromID:folderId] clearCache];
 }
 
 /* sqlScopeForFolder
@@ -1668,11 +1669,11 @@ static Database * _sharedDatabase = nil;
 	return [tree autorelease];
 }
 
-/* arrayOfUnreadMessages
+/* arrayOfUnreadArticles
  * Retrieves an array of ArticleReference objects that represent all unread
  * articles in the specified folder.
  */
--(NSArray *)arrayOfUnreadMessages:(int)folderId
+-(NSArray *)arrayOfUnreadArticles:(int)folderId
 {
 	Folder * folder = [self folderFromID:folderId];
 	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[folder unreadCount]];
@@ -1686,7 +1687,7 @@ static Database * _sharedDatabase = nil;
 			// array so it makes the code slightly faster.
 			int unreadCount = [folder unreadCount];
 			NSEnumerator * enumerator = [[folder articles] reverseObjectEnumerator];
-			Message * theRecord;
+			Article * theRecord;
 
 			while (unreadCount > 0 && (theRecord = [enumerator nextObject]) != nil)
 				if (![theRecord isRead])
@@ -1716,11 +1717,11 @@ static Database * _sharedDatabase = nil;
 	return newArray;
 }
 
-/* arrayOfMessages
- * Retrieves an array containing all messages (except for text) for the
+/* arrayOfArticles
+ * Retrieves an array containing all articles (except for text) for the
  * current folder. This info is always cached.
  */
--(NSArray *)arrayOfMessages:(int)folderId filterString:(NSString *)filterString
+-(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString
 {
 	Folder * folder = [self folderFromID:folderId];
 	NSMutableArray * newArray = [NSMutableArray array];
@@ -1728,7 +1729,7 @@ static Database * _sharedDatabase = nil;
 
 	if (folder != nil)
 	{
-		[folder clearMessages];
+		[folder clearCache];
 
 		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
@@ -1762,24 +1763,24 @@ static Database * _sharedDatabase = nil;
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
 				NSDate * messageDate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
 
-				// Keep our own track of unread messages
+				// Keep our own track of unread articles
 				if (!read_flag)
 					++unread_count;
 
-				Message * message = [[Message alloc] initWithGuid:guid];
-				[message setTitle:messageTitle];
-				[message setAuthor:author];
-				[message setLink:link];
-				[message setDate:messageDate];
-				[message markRead:read_flag];
-				[message markFlagged:marked_flag];
-				[message markDeleted:deleted_flag];
-				[message setFolderId:messageFolderId];
-				[message setParentId:parentId];
+				Article * article = [[Article alloc] initWithGuid:guid];
+				[article setTitle:messageTitle];
+				[article setAuthor:author];
+				[article setLink:link];
+				[article setDate:messageDate];
+				[article markRead:read_flag];
+				[article markFlagged:marked_flag];
+				[article markDeleted:deleted_flag];
+				[article setFolderId:messageFolderId];
+				[article setParentId:parentId];
 				if (!deleted_flag || IsTrashFolder(folder))
-					[newArray addObject:message];
-				[folder addMessage:message];
-				[message release];
+					[newArray addObject:article];
+				[folder addMessage:article];
+				[article release];
 			}
 
 			// This is a good time to do a quick check to ensure that our
@@ -1789,7 +1790,7 @@ static Database * _sharedDatabase = nil;
 			{
 				if (unread_count != [folder unreadCount])
 				{
-					NSLog(@"Fixing unread count for %@ (%d on folder versus %d in messages)", [folder name], [folder unreadCount], unread_count);
+					NSLog(@"Fixing unread count for %@ (%d on folder versus %d in articles)", [folder name], [folder unreadCount], unread_count);
 					int diff = (unread_count - [folder unreadCount]);
 					[self setFolderUnreadCount:folder adjustment:diff];
 					countOfUnread += diff;
@@ -1804,7 +1805,7 @@ static Database * _sharedDatabase = nil;
 }
 
 /* wrappedMarkFolderRead
- * Mark all messages in the folder and sub-folders read. This should be called
+ * Mark all articles in the folder and sub-folders read. This should be called
  * within a transaction since it is SQL intensive.
  */
 -(BOOL)wrappedMarkFolderRead:(int)folderId
@@ -1831,12 +1832,12 @@ static Database * _sharedDatabase = nil;
 			int count = [folder unreadCount];
 			NSEnumerator * enumerator = [[folder articles] objectEnumerator];
 			int remainingUnread = count;
-			Message * message;
+			Article * article;
 
-			while (remainingUnread > 0 && (message = [enumerator nextObject]) != nil)
-				if (![message isRead])
+			while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil)
+				if (![article isRead])
 				{
-					[message markRead:YES];
+					[article markRead:YES];
 					--remainingUnread;
 				}
 			countOfUnread -= count;
@@ -1849,7 +1850,7 @@ static Database * _sharedDatabase = nil;
 }
 
 /* markFolderRead
- * Mark all messages in the specified folder read
+ * Mark all articles in the specified folder read
  */
 -(BOOL)markFolderRead:(int)folderId
 {
@@ -1861,32 +1862,32 @@ static Database * _sharedDatabase = nil;
 	return result;
 }
 
-/* markMessageRead
- * Marks a message as read or unread.
+/* markArticleRead
+ * Marks a article as read or unread.
  */
--(void)markMessageRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead
+-(void)markArticleRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-		// Prime the message cache
-		[self initMessageArray:folder];
+		// Prime the article cache
+		[self initArticleArray:folder];
 
-		Message * message = [folder messageFromGuid:guid];
-		if (message != nil && isRead != [message isRead])
+		Article * article = [folder articleFromGuid:guid];
+		if (article != nil && isRead != [article isRead])
 		{
 			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 
 			// Verify we're on the right thread
 			[self verifyThreadSafety];
 
-			// Mark an individual message read
+			// Mark an individual article read
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%d where folder_id=%d and message_id='%@'", isRead, folderId, preparedGuid];
 			if (results)
 			{
 				int adjustment = (isRead ? -1 : 1);
 
-				[message markRead:isRead];
+				[article markRead:isRead];
 				countOfUnread += adjustment;
 				[self setFolderUnreadCount:folder adjustment:adjustment];
 			}
@@ -1905,7 +1906,7 @@ static Database * _sharedDatabase = nil;
 	[folder setUnreadCount:unreadCount + adjustment];
 	
 	// Update childUnreadCount for our parent. Since we're just working
-	// on one message, we do this the faster way.
+	// on one article, we do this the faster way.
 	Folder * tmpFolder = folder;
 	while ([tmpFolder parentId] != MA_Root_Folder)
 	{
@@ -1917,30 +1918,30 @@ static Database * _sharedDatabase = nil;
 	[self executeSQLWithFormat:@"update folders set unread_count=%d where folder_id=%d", [folder unreadCount], [folder itemId]];
 }
 
-/* markMessageFlagged
- * Marks a message as flagged or unflagged.
+/* markArticleFlagged
+ * Marks a article as flagged or unflagged.
  */
--(void)markMessageFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
+-(void)markArticleFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
 {
 	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 	[self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%d and message_id='%@'", isFlagged, folderId, preparedGuid];
 }
 
-/* markMessageDeleted
- * Marks a message as deleted. Deleted messages always get marked read first.
+/* markArticleDeleted
+ * Marks a article as deleted. Deleted articles always get marked read first.
  */
--(void)markMessageDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
+-(void)markArticleDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
 {
 	if (isDeleted)
-		[self markMessageRead:folderId guid:guid isRead:YES];
+		[self markArticleRead:folderId guid:guid isRead:YES];
 	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 	[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%d and message_id='%@'", isDeleted, folderId, preparedGuid];
 }
 
-/* messageText
- * Retrieve the text of the specified message.
+/* articleText
+ * Retrieve the text of the specified article.
  */
--(NSString *)messageText:(int)folderId guid:(NSString *)guid
+-(NSString *)articleText:(int)folderId guid:(NSString *)guid
 {
 	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 	SQLResult * results;

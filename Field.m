@@ -112,7 +112,7 @@
 }
 
 /* setVisible
- * Sets whether or not this field is intended to be visible in the message list view by default.
+ * Sets whether or not this field is intended to be visible in the article list view by default.
  */
 -(void)setVisible:(BOOL)flag
 {
@@ -120,7 +120,7 @@
 }
 
 /* setWidth
- * Sets the default width of the field in the message list view.
+ * Sets the default width of the field in the article list view.
  */
 -(void)setWidth:(int)newWidth
 {
@@ -168,7 +168,7 @@
 }
 
 /* width
- * Returns the default width of the field in the message list view.
+ * Returns the default width of the field in the article list view.
  */
 -(int)width
 {
@@ -176,7 +176,7 @@
 }
 
 /* visible
- * Returns whether or not this field is visible by default in the message list view.
+ * Returns whether or not this field is visible by default in the article list view.
  */
 -(BOOL)visible
 {

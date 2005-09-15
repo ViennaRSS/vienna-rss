@@ -51,7 +51,7 @@
 }
 
 /* handleMarkAllRead
- * Mark all messages in the specified folder as read
+ * Mark all articles in the specified folder as read
  */
 -(id)handleMarkAllRead:(NSScriptCommand *)cmd
 {
@@ -138,7 +138,7 @@
 }
 
 /* unreadCount
- * Return the number of unread messages.
+ * Return the number of unread articles.
  */
 -(int)unreadCount
 {

@@ -99,7 +99,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	// Set check for updates when starting
 	[checkForUpdates setState:[prefs checkForNewOnStartup] ? NSOnState : NSOffState];
 
-	// Set check for new messages when starting
+	// Set check for new articles when starting
 	[checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
 	
 	// Set minimum font size option
@@ -234,7 +234,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 }
 
 /* changeCheckOnStartUp
- * Set whether Vienna checks for new messages when it starts.
+ * Set whether Vienna checks for new articles when it starts.
  */
 -(IBAction)changeCheckOnStartUp:(id)sender
 {

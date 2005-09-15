@@ -12,15 +12,6 @@
 			<string>VNar</string>
 			<key>Attributes</key>
 			<dict>
-				<key>applescriptContainer</key>
-				<dict>
-					<key>AppleEventCode</key>
-					<string>arXP</string>
-					<key>ReadOnly</key>
-					<string>NO</string>
-					<key>Type</key>
-					<string>Article</string>
-				</dict>
 				<key>title</key>
 				<dict>
 					<key>AppleEventCode</key>
