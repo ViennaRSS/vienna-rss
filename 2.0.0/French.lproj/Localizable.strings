@@ -1,4 +1,3 @@
-"Search Messages" = "Rechercher dans les articles";
 "Mark Read" = "Marquer comme lu";
 "Mark Unread" = "Marquer comme non lu";
 "Mark Flagged" = "Signaler d'un drapeau";
@@ -62,7 +61,6 @@
 "More Styles..." = "Plus de styles...";
 "Delete selected message" = "Souhaitez-vous vraiment supprimer les articles sélectionnés?";
 "Delete selected message text" = "Cette opération est irréversible.";
-"Infobar Format" = "%d articles";
 "Cancel" = "Annuler";
 "OK" = "OK";
 "From" = "De";
@@ -169,3 +167,4 @@
 "Open Page in %@" = "Open Page in %@";
 "Copy Page Link to Clipboard" ="Copy Page Link to Clipboard";
 "%d unread articles" = "%d unread articles";
+"More Scripts..." = "More Scripts...";

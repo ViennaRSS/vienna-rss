@@ -118,15 +118,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
 
 	// Set header text
-	[messageListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
+	[articleListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
 
 	// Make us the policy and UI delegate for the web view
-	[textView setPolicyDelegate:self];
-	[textView setUIDelegate:self];
-	[textView setFrameLoadDelegate:self];
+	[articleText setPolicyDelegate:self];
+	[articleText setUIDelegate:self];
+	[articleText setFrameLoadDelegate:self];
 	
 	// Handle minimum font size
-	defaultWebPrefs = [[textView preferences] retain];
+	defaultWebPrefs = [[articleText preferences] retain];
 	[self loadMinimumFontSize];
 	
 	// Do safe initialisation
@@ -325,7 +325,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 	
 	// Initialize the article columns from saved data
-	NSArray * dataArray = [defaults arrayForKey:MAPref_MessageColumns];
+	NSArray * dataArray = [defaults arrayForKey:MAPref_ArticleListColumns];
 	Field * field;
 	unsigned int index;
 	
@@ -362,15 +362,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewArticlePage:))];
-	[messageList setMenu:articleListMenu];
+	[articleList setMenu:articleListMenu];
 	[articleListMenu release];
 
 	// Set the target for double-click actions
-	[messageList setDoubleAction:@selector(doubleClickRow:)];
-	[messageList setAction:@selector(singleClickRow:)];
-	[messageList setDelegate:self];
-	[messageList setDataSource:self];
-	[messageList setTarget:self];
+	[articleList setDoubleAction:@selector(doubleClickRow:)];
+	[articleList setAction:@selector(singleClickRow:)];
+	[articleList setDelegate:self];
+	[articleList setDataSource:self];
+	[articleList setTarget:self];
 
 	// Set the default fonts
 	[self setTableViewFont];
@@ -383,11 +383,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(IBAction)singleClickRow:(id)sender
 {
-	int row = [messageList clickedRow];
-	int column = [messageList clickedColumn];
+	int row = [articleList clickedRow];
+	int column = [articleList clickedColumn];
 	if (row >= 0 && row < (int)[currentArrayOfArticles count])
 	{
-		NSArray * columns = [messageList tableColumns];
+		NSArray * columns = [articleList tableColumns];
 		if (column >= 0 && column < (int)[columns count])
 		{
 			Article * theArticle = [currentArrayOfArticles objectAtIndex:row];
@@ -461,12 +461,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		BOOL showField;
 		
 		// Remove each column as we go.
-		NSTableColumn * tableColumn = [messageList tableColumnWithIdentifier:identifier];
+		NSTableColumn * tableColumn = [articleList tableColumnWithIdentifier:identifier];
 		if (tableColumn != nil)
 		{
 			if (index + 1 != count)
 				[field setWidth:[tableColumn width]];
-			[messageList removeTableColumn:tableColumn];
+			[articleList removeTableColumn:tableColumn];
 		}
 		
 		// Handle condensed layout vs. table layout
@@ -499,13 +499,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[newTableColumn setMinWidth:10];
 			[newTableColumn setMaxWidth:1000];
 			[newTableColumn setWidth:[field width]];
-			[messageList addTableColumn:newTableColumn];
+			[articleList addTableColumn:newTableColumn];
 			[newTableColumn release];
 		}
 	}
 	
 	// Set the extended date formatter on the Date column
-	NSTableColumn * tableColumn = [messageList tableColumnWithIdentifier:MA_Field_Date];
+	NSTableColumn * tableColumn = [articleList tableColumnWithIdentifier:MA_Field_Date];
 	if (tableColumn != nil)
 	{
 		if (extDateFormatter == nil)
@@ -514,9 +514,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 
 	// Set the images for specific header columns
-	[messageList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
-	[messageList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
-	[messageList setHeaderImage:MA_Field_Comments imageName:@"comments_header.tiff"];
+	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
+	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
+	[articleList setHeaderImage:MA_Field_Comments imageName:@"comments_header.tiff"];
 	
 	// Initialise the sort direction
 	[self showSortDirection];	
@@ -524,8 +524,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// In condensed mode, the summary field takes up the whole space
 	if (tableLayout == MA_Condensed_Layout)
 	{
-		[messageList sizeLastColumnToFit];
-		[messageList setNeedsDisplay];
+		[articleList sizeLastColumnToFit];
+		[articleList setNeedsDisplay];
 	}
 }
 
@@ -551,7 +551,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Save these to the preferences
 	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:dataArray forKey:MAPref_MessageColumns];
+	[defaults setObject:dataArray forKey:MAPref_ArticleListColumns];
 	[defaults synchronize];
 
 	// Save the split bar position
@@ -590,7 +590,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	int height = [articleListFont defaultLineHeightForFont];
 	int numberOfRowsInCell = (tableLayout == MA_Table_Layout) ? 1: 2;
-	[messageList setRowHeight:(height + 3) * numberOfRowsInCell];
+	[articleList setRowHeight:(height + 3) * numberOfRowsInCell];
 }
 
 /* showSortDirection
@@ -598,10 +598,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)showSortDirection
 {
-	NSTableColumn * sortColumn = [messageList tableColumnWithIdentifier:sortColumnIdentifier];
+	NSTableColumn * sortColumn = [articleList tableColumnWithIdentifier:sortColumnIdentifier];
 	NSString * imageName = (sortDirection < 0) ? @"NSDescendingSortIndicator" : @"NSAscendingSortIndicator";
-	[messageList setHighlightedTableColumn:sortColumn];
-	[messageList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:sortColumn];
+	[articleList setHighlightedTableColumn:sortColumn];
+	[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:sortColumn];
 }
 
 /* sortByIdentifier
@@ -613,7 +613,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		sortDirection *= -1;
 	else
 	{
-		[messageList setIndicatorImage:nil inTableColumn:[messageList tableColumnWithIdentifier:sortColumnIdentifier]];
+		[articleList setIndicatorImage:nil inTableColumn:[articleList tableColumnWithIdentifier:sortColumnIdentifier]];
 		[self setSortColumnIdentifier:columnName];
 		sortDirection = 1;
 		sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
@@ -759,7 +759,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(NSView *)mainView
 {
-	return messageList;
+	return articleList;
 }
 
 /* canGoForward
@@ -786,7 +786,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	int folderId;
 	NSString * guid;
 
-	if ([backtrackArray nextItemAtQueue:&folderId messageNumber:&guid])
+	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
 	{
 		isBacktracking = YES;
 		[self selectFolderAndArticle:folderId guid:guid];
@@ -802,7 +802,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	int folderId;
 	NSString * guid;
 	
-	if ([backtrackArray previousItemAtQueue:&folderId messageNumber:&guid])
+	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
 	{
 		isBacktracking = YES;
 		[self selectFolderAndArticle:folderId guid:guid];
@@ -820,14 +820,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		case ' ': //SPACE
 		{
-			NSView * theView = [[[textView mainFrame] frameView] documentView];
+			NSView * theView = [[[articleText mainFrame] frameView] documentView];
 			NSRect visibleRect;
 			
 			visibleRect = [theView visibleRect];
 			if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
 				[controller viewNextUnread:self];
 			else
-				[[[textView mainFrame] webView] scrollPageDown:self];
+				[[[articleText mainFrame] webView] scrollPageDown:self];
 			return YES;
 		}
 	}
@@ -847,7 +847,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)printDocument:(id)sender
 {
-	[textView printDocument:sender];
+	[articleText printDocument:sender];
 }
 
 /* handleArticleListFontChange
@@ -856,7 +856,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
-	[messageList reloadData];
+	[articleList reloadData];
 }
 
 /* handleReadingPaneChange
@@ -867,7 +867,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
 	[self updateArticleListRowHeight];
 	[self updateVisibleColumns];
-	[messageList reloadData];
+	[articleList reloadData];
 }
 
 /* setOrientation
@@ -907,10 +907,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	sortColumnIdentifier = str;
 }
 
-/* sortMessages
+/* sortArticles
  * Re-orders the articles in currentArrayOfArticles by the current sort order
  */
--(void)sortMessages
+-(void)sortArticles
 {
 	NSArray * sortedArrayOfArticles;
 	
@@ -981,21 +981,21 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 {
 	if (rowIndex == currentSelectedRow)
 	{
-		[messageList selectRow:rowIndex byExtendingSelection:NO];
+		[articleList selectRow:rowIndex byExtendingSelection:NO];
 		[self refreshArticleAtRow:rowIndex markRead:NO];
 	}
 	else
 	{
-		[messageList selectRow:rowIndex byExtendingSelection:NO];
+		[articleList selectRow:rowIndex byExtendingSelection:NO];
 		
-		int pageSize = [messageList rowsInRect:[messageList visibleRect]].length;
-		int lastRow = [messageList numberOfRows] - 1;
+		int pageSize = [articleList rowsInRect:[articleList visibleRect]].length;
+		int lastRow = [articleList numberOfRows] - 1;
 		int visibleRow = currentSelectedRow + (pageSize / 2);
 		
 		if (visibleRow > lastRow)
 			visibleRow = lastRow;
-		[messageList scrollRowToVisible:currentSelectedRow];
-		[messageList scrollRowToVisible:visibleRow];
+		[articleList scrollRowToVisible:currentSelectedRow];
+		[articleList scrollRowToVisible:visibleRow];
 	}
 }
 
@@ -1020,7 +1020,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			{
 				guidOfArticleToSelect = nil;
 				[foldersTree selectFolder:nextFolderWithUnread];
-				[[NSApp mainWindow] makeFirstResponder:messageList];
+				[[NSApp mainWindow] makeFirstResponder:articleList];
 			}
 		}
 	}
@@ -1116,9 +1116,9 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	if (reloadData)
 		[self reloadArrayOfArticles];
 	[self setArticleListHeader];
-	[self sortMessages];
+	[self sortArticles];
 	[self showSortDirection];
-	[messageList reloadData];
+	[articleList reloadData];
 	if (guid != nil)
 	{
 		if (![self scrollToArticle:guid])
@@ -1135,7 +1135,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)setArticleListHeader
 {
 	Folder * folder = [db folderFromID:currentFolderId];
-	[messageListHeader setStringValue:[folder name]];
+	[articleListHeader setStringValue:[folder name]];
 }
 
 /* reloadArrayOfArticles
@@ -1144,7 +1144,8 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)reloadArrayOfArticles
 {
 	[currentArrayOfArticles release];
-	currentArrayOfArticles = [[db arrayOfArticles:currentFolderId filterString:[controller searchString]] retain];
+	Folder * folder = [db folderFromID:currentFolderId];
+	currentArrayOfArticles = [[folder articlesWithFilter:[controller searchString]] retain];
 }
 
 /* selectArticleAfterReload
@@ -1178,13 +1179,13 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)selectFolderWithFilter:(int)newFolderId
 {
 	[db flushFolder:currentFolderId];
-	[messageList deselectAll:self];
+	[articleList deselectAll:self];
 	currentFolderId = newFolderId;
 	[self setArticleListHeader];
 	[self showColumnsForFolder:currentFolderId];
 	[self reloadArrayOfArticles];
-	[self sortMessages];
-	[messageList reloadData];
+	[self sortArticles];
+	[articleList reloadData];
 	[self selectArticleAfterReload];
 }
 
@@ -1194,7 +1195,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)refreshArticleAtRow:(int)theRow markRead:(BOOL)markReadFlag
 {
 	if (currentSelectedRow < 0)
-		[[textView mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
+		[[articleText mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
 	else
 	{
 		NSAssert(currentSelectedRow < (int)[currentArrayOfArticles count], @"Out of range row index received");
@@ -1217,7 +1218,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		if (!isBacktracking)
 		{
 			NSString * guid = [[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid];
-			[backtrackArray addToQueue:currentFolderId messageNumber:guid];
+			[backtrackArray addToQueue:currentFolderId guid:guid];
 		}
 	}
 }
@@ -1241,30 +1242,30 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
-		NSString * messageText = [db articleText:[theArticle folderId] guid:[theArticle guid]];
-		NSString * messageDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
-		NSString * messageLink = [theArticle link] ? [theArticle link] : @"";
-		NSString * messageAuthor = [theArticle author] ? [theArticle author] : @"";
-		NSString * messageTitle = [theArticle title] ? [theArticle title] : @"";
+		NSString * articleBody = [theArticle body];
+		NSString * articleDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
+		NSString * articleLink = [theArticle link] ? [theArticle link] : @"";
+		NSString * articleAuthor = [theArticle author] ? [theArticle author] : @"";
+		NSString * articleTitle = [theArticle title] ? [theArticle title] : @"";
 		NSString * folderTitle = [folder name] ? [folder name] : @"";
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
 
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
-		NSMutableString * htmlMessage = [[NSMutableString alloc] initWithString:htmlTemplate];
-		[htmlMessage replaceString:@"$ArticleLink$" withString:messageLink];
-		[htmlMessage replaceString:@"$ArticleTitle$" withString:messageTitle];
-		[htmlMessage replaceString:@"$ArticleBody$" withString:messageText];
-		[htmlMessage replaceString:@"$ArticleAuthor$" withString:messageAuthor];
-		[htmlMessage replaceString:@"$ArticleDate$" withString:messageDate];
-		[htmlMessage replaceString:@"$FeedTitle$" withString:folderTitle];
-		[htmlMessage replaceString:@"$FeedLink$" withString:folderLink];
+		NSMutableString * htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
+		[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
+		[htmlArticle replaceString:@"$ArticleTitle$" withString:articleTitle];
+		[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
+		[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
+		[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
+		[htmlArticle replaceString:@"$FeedTitle$" withString:folderTitle];
+		[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
 
 		// Separate each article with a horizontal divider line
 		if (index > 0)
 			[htmlText appendString:@"<hr><br />"];
-		[htmlText appendString:htmlMessage];
-		[htmlMessage release];
+		[htmlText appendString:htmlArticle];
+		[htmlArticle release];
 	}
 
 	// Here we ask the webview to do all the hard work. There's an idiosyncracy in loadHTMLString:baseURL: that it
@@ -1273,7 +1274,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 	Folder * folder = [db folderFromID:currentFolderId];
 	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
-	[[textView mainFrame] loadHTMLString:htmlText baseURL:[NSURL URLWithString:urlString]];
+	[[articleText mainFrame] loadHTMLString:htmlText baseURL:[NSURL URLWithString:urlString]];
 	[htmlText release];
 }
 
@@ -1375,7 +1376,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	currentSelectedRow = [messageList selectedRow];
+	currentSelectedRow = [articleList selectedRow];
 	[self refreshArticleAtRow:currentSelectedRow markRead:!isAppInitialising];
 }
 
@@ -1439,7 +1440,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		int msgIndex = [[rows objectAtIndex:index] intValue];
 		Article * thisArticle = [currentArrayOfArticles objectAtIndex:msgIndex];
 		Folder * folder = [db folderFromID:[thisArticle folderId]];
-		NSString * msgText = [db articleText:[thisArticle folderId] guid:[thisArticle guid]];
+		NSString * msgText = [thisArticle body];
 		NSString * msgTitle = [thisArticle title];
 		NSString * msgLink = [thisArticle link];
 		
@@ -1480,9 +1481,9 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(NSArray *)markedArticleRange
 {
 	NSArray * articleArray = nil;
-	if ([messageList numberOfSelectedRows] > 0)
+	if ([articleList numberOfSelectedRows] > 0)
 	{
-		NSEnumerator * enumerator = [messageList selectedRowEnumerator];
+		NSEnumerator * enumerator = [articleList selectedRowEnumerator];
 		NSMutableArray * newArray = [[NSMutableArray alloc] init];
 		NSNumber * rowIndex;
 		
@@ -1556,7 +1557,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	// If we've added articles back to the array, we need to resort to put
 	// them back in the right place.
 	if (!deleteFlag)
-		[self sortMessages];
+		[self sortArticles];
 	
 	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
@@ -1567,17 +1568,17 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	if (currentSelectedRow >= (int)[currentArrayOfArticles count])
 		currentSelectedRow = [currentArrayOfArticles count] - 1;
 	[self makeRowSelectedAndVisible:currentSelectedRow];
-	[messageList reloadData];
+	[articleList reloadData];
 	
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
 		[controller showUnreadCountOnApplicationIcon];
 }
 
-/* deleteSelectedMessages
+/* deleteSelectedArticles
  * Physically delete all selected articles in the article list.
  */
--(void)deleteSelectedMessages
+-(void)deleteSelectedArticles
 {		
 	// Make a new copy of the currentArrayOfArticles with the selected article removed.
 	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
@@ -1585,7 +1586,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	
 	// Iterate over every selected article in the table and remove it from
 	// the database.
-	NSEnumerator * enumerator = [messageList selectedRowEnumerator];
+	NSEnumerator * enumerator = [articleList selectedRowEnumerator];
 	NSNumber * rowIndex;
 
 	[db beginTransaction];
@@ -1615,7 +1616,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	if (currentSelectedRow >= (int)[currentArrayOfArticles count])
 		currentSelectedRow = [currentArrayOfArticles count] - 1;
 	[self makeRowSelectedAndVisible:currentSelectedRow];
-	[messageList reloadData];
+	[articleList reloadData];
 	
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
@@ -1659,7 +1660,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
 	}
 	[db commitTransaction];
-	[messageList reloadData];
+	[articleList reloadData];
 }
 
 /* markUnreadUndo
@@ -1713,7 +1714,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		lastFolderId = folderId;
 	}
 	[db commitTransaction];
-	[messageList reloadData];
+	[articleList reloadData];
 	
 	if (lastFolderId != -1)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -1746,7 +1747,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(void)markAllReadByArray:(NSArray *)folderArray
 {
-	NSArray * refArray = [self wrappedMarkAllReadInArray:[foldersTree selectedFolders]];
+	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray];
 	if (refArray != nil && [refArray count] > 0)
 	{
 		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -1782,7 +1783,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
 				if (folderId == currentFolderId)
-					[messageList reloadData];
+					[articleList reloadData];
 			}
 		}
 		else

@@ -343,6 +343,7 @@ static Database * _sharedDatabase = nil;
  */
 -(int)countOfUnread
 {
+	[self initFolderArray];
 	return countOfUnread;
 }
 
@@ -907,7 +908,7 @@ static Database * _sharedDatabase = nil;
  * article that was added or updated or -1 if we couldn't add the article for
  * some reason.
  */
--(BOOL)createArticle:(int)folderID message:(Article *)article
+-(BOOL)createArticle:(int)folderID article:(Article *)article
 {
 	// Exit now if we're read-only
 	if (readOnly)
@@ -922,93 +923,93 @@ static Database * _sharedDatabase = nil;
 		[self initArticleArray:folder];
 
 		// Extract the article data from the dictionary.
-		NSString * messageText = [[article articleData] objectForKey:MA_Field_Text];
-		NSString * messageTitle = [[article articleData] objectForKey:MA_Field_Subject]; 
-		NSDate * messageDate = [[article articleData] objectForKey:MA_Field_Date];
-		NSString * messageLink = [[article articleData] objectForKey:MA_Field_Link];
+		NSString * articleBody = [[article articleData] objectForKey:MA_Field_Text];
+		NSString * articleTitle = [[article articleData] objectForKey:MA_Field_Subject]; 
+		NSDate * articleDate = [[article articleData] objectForKey:MA_Field_Date];
+		NSString * articleLink = [[article articleData] objectForKey:MA_Field_Link];
 		NSString * userName = [[article articleData] objectForKey:MA_Field_Author];
-		NSString * messageGuid = [article guid];
+		NSString * articleGuid = [article guid];
 		int parentId = [article parentId];
 		BOOL marked_flag = [article isFlagged];
 		BOOL read_flag = [article isRead];
 		BOOL deleted_flag = [article isDeleted];
 
 		// Set some defaults
-		if (messageDate == nil)
-			messageDate = [NSDate date];
+		if (articleDate == nil)
+			articleDate = [NSDate date];
 		if (userName == nil)
 			userName = @"";
 
 		// Parse off the title
-		if (messageTitle == nil || [messageTitle isBlank])
-			messageTitle = [messageText firstNonBlankLine];
+		if (articleTitle == nil || [articleTitle isBlank])
+			articleTitle = [articleBody firstNonBlankLine];
 
 		// Save date as time intervals
-		NSTimeInterval interval = [messageDate timeIntervalSince1970];
+		NSTimeInterval interval = [articleDate timeIntervalSince1970];
 
 		// Unread count adjustment factor
 		int adjustment = 0;
 		
 		// Fix title and article body so they're acceptable to SQL
-		NSString * preparedMessageTitle = [SQLDatabase prepareStringForQuery:messageTitle];
-		NSString * preparedMessageText = [SQLDatabase prepareStringForQuery:messageText];
-		NSString * preparedMessageLink = [SQLDatabase prepareStringForQuery:messageLink];
+		NSString * preparedArticleTitle = [SQLDatabase prepareStringForQuery:articleTitle];
+		NSString * preparedArticleText = [SQLDatabase prepareStringForQuery:articleBody];
+		NSString * preparedArticleLink = [SQLDatabase prepareStringForQuery:articleLink];
 		NSString * preparedUserName = [SQLDatabase prepareStringForQuery:userName];
-		NSString * preparedMessageGuid = [SQLDatabase prepareStringForQuery:messageGuid];
+		NSString * preparedArticleGuid = [SQLDatabase prepareStringForQuery:articleGuid];
 
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 
 		// Does this article already exist?
-		Article * theMessage = [folder articleFromGuid:messageGuid];
-		if (theMessage == nil)
+		Article * existingArticle = [folder articleFromGuid:articleGuid];
+		if (existingArticle == nil)
 		{
 			SQLResult * results;
 
 			results = [sqlDatabase performQueryWithFormat:
 					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, read_flag, marked_flag, deleted_flag, title, text) "
 					"values('%@', %d, %d, '%@', '%@', %f, %d, %d, %d, '%@', '%@')",
-					preparedMessageGuid,
+					preparedArticleGuid,
 					parentId,
 					folderID,
 					preparedUserName,
-					preparedMessageLink,
+					preparedArticleLink,
 					interval,
 					read_flag,
 					marked_flag,
 					deleted_flag,
-					preparedMessageTitle,
-					preparedMessageText];
+					preparedArticleTitle,
+					preparedArticleText];
 			if (!results)
 				return NO;
 			[results release];
 
 			// Add the article to the folder
 			[article setStatus:MA_MsgStatus_New];
-			[folder addMessage:article];
+			[folder addArticleToCache:article];
 			
 			// Update folder unread count
 			if (!read_flag)
 				adjustment = 1;
 		}
-		else if (![[self articleText:folderID guid:messageGuid] isEqualToString:messageText])
+		else if (![[self articleText:folderID guid:articleGuid] isEqualToString:articleBody])
 		{
-			BOOL read_flag = [theMessage isRead];
+			BOOL read_flag = [existingArticle isRead];
 			SQLResult * results;
 
 			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, read_flag=%d, "
 													 "marked_flag=%d, deleted_flag=%d, title='%@', text='%@' where folder_id=%d and message_id='%@'",
 													 parentId,
 													 preparedUserName,
-													 preparedMessageLink,
+													 preparedArticleLink,
 													 interval,
 													 read_flag,
 													 marked_flag,
 													 deleted_flag,
-													 preparedMessageTitle,
-													 preparedMessageText,
+													 preparedArticleTitle,
+													 preparedArticleText,
 													 folderID,
-													 preparedMessageGuid];
+													 preparedArticleGuid];
 			if (!results)
 				return NO;
 
@@ -1033,11 +1034,11 @@ static Database * _sharedDatabase = nil;
 	return NO;
 }
 
-/* deleteDeletedMessages
+/* purgeDeletedArticles
  * Remove from the database all articles which have the deleted_flag field set to YES. This
  * also requires that we remove the same articles from all folder caches.
  */
--(void)deleteDeletedMessages
+-(void)purgeDeletedArticles
 {
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
@@ -1089,7 +1090,7 @@ static Database * _sharedDatabase = nil;
 						[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] - 1];
 					}
 				}
-				[folder deleteMessage:guid];
+				[folder removeArticleFromCache:guid];
 				[results release];
 				return YES;
 			}
@@ -1405,7 +1406,7 @@ static Database * _sharedDatabase = nil;
 	[self initFolderArray];
 
 	// Exit now if we're already initialized
-	if ([folder messageCount] == -1)
+	if ([folder countOfCachedArticles] == -1)
 	{
 		int folderId = [folder itemId];
 		SQLResult * results;
@@ -1439,7 +1440,7 @@ static Database * _sharedDatabase = nil;
 				[article setFolderId:folderId];
 				[article setTitle:title];
 				[article setAuthor:author];
-				[folder addMessage:article];
+				[folder addArticleToCache:article];
 				[article release];
 			}
 
@@ -1457,14 +1458,6 @@ static Database * _sharedDatabase = nil;
 		[results release];
 	}
 	return YES;
-}
-
-/* releaseMessages
- * Free up the memory used to cache copies of the articles in the specified folder.
- */
--(void)releaseMessages:(int)folderId
-{
-	[[self folderFromID:folderId] clearCache];
 }
 
 /* sqlScopeForFolder
@@ -1679,7 +1672,7 @@ static Database * _sharedDatabase = nil;
 	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[folder unreadCount]];
 	if (folder != nil)
 	{
-		if ([folder messageCount] > 0)
+		if ([folder countOfCachedArticles] > 0)
 		{
 			// Messages already cached in this folder so use those. Note the use of
 			// reverseObjectEnumerator since the odds are that the unread articles are
@@ -1754,32 +1747,32 @@ static Database * _sharedDatabase = nil;
 			{
 				NSString * guid = [row stringForColumn:@"message_id"];
 				int parentId = [[row stringForColumn:@"parent_id"] intValue];
-				int messageFolderId = [[row stringForColumn:@"folder_id"] intValue];
-				NSString * messageTitle = [row stringForColumn:@"title"];
+				int articleFolderId = [[row stringForColumn:@"folder_id"] intValue];
+				NSString * title = [row stringForColumn:@"title"];
 				NSString * author = [row stringForColumn:@"sender"];
 				NSString * link = [row stringForColumn:@"link"];
-				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
-				BOOL marked_flag = [[row stringForColumn:@"marked_flag"] intValue];
-				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
-				NSDate * messageDate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
+				BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
+				BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
+				BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
+				NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
 
 				// Keep our own track of unread articles
-				if (!read_flag)
+				if (!isRead)
 					++unread_count;
 
 				Article * article = [[Article alloc] initWithGuid:guid];
-				[article setTitle:messageTitle];
+				[article setTitle:title];
 				[article setAuthor:author];
 				[article setLink:link];
-				[article setDate:messageDate];
-				[article markRead:read_flag];
-				[article markFlagged:marked_flag];
-				[article markDeleted:deleted_flag];
-				[article setFolderId:messageFolderId];
+				[article setDate:date];
+				[article markRead:isRead];
+				[article markFlagged:isFlagged];
+				[article markDeleted:isDeleted];
+				[article setFolderId:articleFolderId];
 				[article setParentId:parentId];
-				if (!deleted_flag || IsTrashFolder(folder))
+				if (!isDeleted || IsTrashFolder(folder))
 					[newArray addObject:article];
-				[folder addMessage:article];
+				[folder addArticleToCache:article];
 				[article release];
 			}
 
@@ -1957,7 +1950,7 @@ static Database * _sharedDatabase = nil;
 		text = [[results rowAtIndex:lastRow] stringForColumn:@"text"];
 	}
 	else
-		text = @"** Cannot retrieve text for message **";
+		text = @"** Cannot retrieve text for article **";
 	[results release];
 	return text;
 }

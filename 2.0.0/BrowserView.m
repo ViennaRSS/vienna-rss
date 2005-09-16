@@ -601,16 +601,26 @@ static const int MA_Left_Margin_Width = 10;
 }
 
 /* createNewTabWithView
- * Create a new tab with the specified view.
+ * Create a new tab with the specified view. If makeKey is YES then the new tab is
+ * made active, otherwise the current tab stays active.
  */
--(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView
+-(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
 {
 	if (allTabs == nil)
 		allTabs = [[NSMutableArray alloc] init];
 	BrowserTab * newTab = [[BrowserTab alloc] initWithView:newTabView];
 	[allTabs addObject:newTab];
 	[self updateTrackingRectangles];
-	[self showTab:newTab];
+	if (keyIt)
+		[self showTab:newTab];
+	else
+	{
+		// If this new tab is the first new one after the primary view then we
+		// need to resize the primary view because the tab bar is now visible.
+		NSView<BaseView> * activeView = [activeTab associatedView];
+		[activeView setFrameSize:[self viewSize]];
+		[self display];
+	}
 	[newTab release];
 	return newTab;
 }

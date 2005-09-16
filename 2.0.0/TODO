@@ -10,7 +10,7 @@ Wishlist Items
 ==============
 - Bloglines integration. (2.1)
 - Auto-discover feeds if subscription URL is to a web page.
-- Mark every unread article in every folder as read.
+- Mark every unread article in every folder as read. (Can do this with a script).
 - Sort on multiple columns.
 - Per-folder sorting. (2.1)
 - Semi-transparent main window when not in front. (2.1)

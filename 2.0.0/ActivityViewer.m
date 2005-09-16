@@ -141,7 +141,7 @@
 
 /* numberOfRowsInTableView [datasource]
  * Datasource for the table view. Return the total number of rows we'll display which
- * is equivalent to the number of messages in the current folder.
+ * is equivalent to the number of log items.
  */
 -(int)numberOfRowsInTableView:(NSTableView *)aTableView
 {

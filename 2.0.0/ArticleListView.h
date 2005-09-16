@@ -33,9 +33,9 @@
 
 @interface ArticleListView : NSView<BaseView>
 {
-	IBOutlet TexturedHeader * messageListHeader;
-	IBOutlet MessageListView * messageList;
-	IBOutlet ArticleView * textView;
+	IBOutlet TexturedHeader * articleListHeader;
+	IBOutlet MessageListView * articleList;
+	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;	
 	IBOutlet FoldersTree * foldersTree;
 
@@ -84,7 +84,7 @@
 -(void)sortByIdentifier:(NSString *)columnName;
 -(Article *)selectedArticle;
 -(void)displayNextUnread;
--(void)deleteSelectedMessages;
+-(void)deleteSelectedArticles;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByArray:(NSArray *)folderArray;

@@ -30,7 +30,7 @@
 -(id)initWithMaximum:(unsigned int)theMax;
 -(BOOL)isAtStartOfQueue;
 -(BOOL)isAtEndOfQueue;
--(void)addToQueue:(int)folderId messageNumber:(NSString *)guid;
--(BOOL)nextItemAtQueue:(int *)folderId messageNumber:(NSString **)guidPtr;
--(BOOL)previousItemAtQueue:(int *)folderId messageNumber:(NSString **)guidPtr;
+-(void)addToQueue:(int)folderId guid:(NSString *)guid;
+-(BOOL)nextItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPtr;
+-(BOOL)previousItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPtr;
 @end

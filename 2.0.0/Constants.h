@@ -31,7 +31,7 @@ extern NSString * MAPref_DefaultDatabase;
 extern NSString * MAPref_SortDirection;
 extern NSString * MAPref_SortColumn;
 extern NSString * MAPref_CheckFrequency;
-extern NSString * MAPref_MessageColumns;
+extern NSString * MAPref_ArticleListColumns;
 extern NSString * MAPref_CheckForUpdatesOnStartup;
 extern NSString * MAPref_CheckForNewArticlesOnStartup;
 extern NSString * MAPref_FolderImagesFolder;

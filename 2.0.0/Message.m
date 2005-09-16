@@ -85,9 +85,9 @@ NSString * MA_Field_Headlines = @"Headlines";
 	[articleData setObject:newDate forKey:MA_Field_Date];
 }
 
-/* setText
+/* setBody
  */
--(void)setText:(NSString *)newText
+-(void)setBody:(NSString *)newText
 {
 	[articleData setObject:newText forKey:MA_Field_Text];
 }
@@ -127,8 +127,22 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(NSString *)guid				{ return [articleData objectForKey:MA_Field_GUID]; }
 -(int)parentId					{ return [[articleData objectForKey:MA_Field_Parent] intValue]; }
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
--(NSString *)text				{ return [articleData objectForKey:MA_Field_Text]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
+
+/* body
+ */
+-(NSString *)body
+{
+	NSString * cachedText = [articleData objectForKey:MA_Field_Text];
+	if (cachedText == nil)
+	{
+		cachedText = [[Database sharedDatabase] articleText:[self folderId] guid:[self guid]];
+		[self setBody:cachedText];
+	}
+	if (cachedText == nil)
+		cachedText = @"";
+	return cachedText;
+}
 
 /* setFolderId
  */

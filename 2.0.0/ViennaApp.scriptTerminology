@@ -8,7 +8,70 @@
 		<dict>
 			<key>Attributes</key>
 			<dict>
-				<key>articleTitle</key>
+				<key>author</key>
+				<dict>
+					<key>Description</key>
+					<string>The article's author</string>
+					<key>Name</key>
+					<string>author</string>
+				</dict>
+				<key>body</key>
+				<dict>
+					<key>Description</key>
+					<string>The contents of the article</string>
+					<key>Name</key>
+					<string>body</string>
+				</dict>
+				<key>date</key>
+				<dict>
+					<key>Description</key>
+					<string>The date when the article was posted</string>
+					<key>Name</key>
+					<string>date</string>
+				</dict>
+				<key>folderId</key>
+				<dict>
+					<key>Description</key>
+					<string>The ID of the folder to which this article belongs</string>
+					<key>Name</key>
+					<string>folder ID</string>
+				</dict>
+				<key>guid</key>
+				<dict>
+					<key>Description</key>
+					<string>The unique GUID of the article</string>
+					<key>Name</key>
+					<string>guid</string>
+				</dict>
+				<key>isDeleted</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the article has been deleted</string>
+					<key>Name</key>
+					<string>deleted</string>
+				</dict>
+				<key>isFlagged</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the article has been flagged</string>
+					<key>Name</key>
+					<string>flag</string>
+				</dict>
+				<key>isRead</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the article has been read</string>
+					<key>Name</key>
+					<string>read</string>
+				</dict>
+				<key>link</key>
+				<dict>
+					<key>Description</key>
+					<string>The link to the article source</string>
+					<key>Name</key>
+					<string>link</string>
+				</dict>
+				<key>title</key>
 				<dict>
 					<key>Description</key>
 					<string>The article's title</string>
@@ -41,6 +104,13 @@
 					<key>Name</key>
 					<string>url</string>
 				</dict>
+				<key>homePage</key>
+				<dict>
+					<key>Description</key>
+					<string>The folder's feed home site</string>
+					<key>Name</key>
+					<string>home page</string>
+				</dict>
 				<key>name</key>
 				<dict>
 					<key>Description</key>
@@ -48,12 +118,19 @@
 					<key>Name</key>
 					<string>name</string>
 				</dict>
-				<key>homePage</key>
+				<key>type</key>
 				<dict>
 					<key>Description</key>
-					<string>The folder's feed home site</string>
+					<string>The type of this folder</string>
 					<key>Name</key>
-					<string>home page</string>
+					<string>type</string>
+				</dict>
+				<key>unreadCount</key>
+				<dict>
+					<key>Description</key>
+					<string>The number of unread articles in the folder</string>
+					<key>Name</key>
+					<string>unread count</string>
 				</dict>
 			</dict>
 			<key>Description</key>
@@ -74,19 +151,19 @@
 					<key>Name</key>
 					<string>application version</string>
 				</dict>
-				<key>bloglinesEmailAddress</key>
+				<key>articleListFont</key>
 				<dict>
 					<key>Description</key>
-					<string>The Bloglines account e-mail address</string>
+					<string>The font used in the article list pane</string>
 					<key>Name</key>
-					<string>bloglines account name</string>
+					<string>article list font</string>
 				</dict>
-				<key>bloglinesPassword</key>
+				<key>articleListFontSize</key>
 				<dict>
 					<key>Description</key>
-					<string>The Bloglines account password</string>
+					<string>The size of the font used in the article list pane</string>
 					<key>Name</key>
-					<string>bloglines password</string>
+					<string>article list font size</string>
 				</dict>
 				<key>checkForNewOnStartup</key>
 				<dict>
@@ -98,14 +175,14 @@
 				<key>currentFolder</key>
 				<dict>
 					<key>Description</key>
-					<string>The current folder in the message window</string>
+					<string>The current folder in the article list pane</string>
 					<key>Name</key>
 					<string>current folder</string>
 				</dict>
 				<key>displayStyle</key>
 				<dict>
 					<key>Description</key>
-					<string>The current display style for messages</string>
+					<string>The current display style for articles</string>
 					<key>Name</key>
 					<string>display style</string>
 				</dict>
@@ -115,6 +192,13 @@
 					<string>Enable Bloglines synchronisation</string>
 					<key>Name</key>
 					<string>bloglines support</string>
+				</dict>
+				<key>enableMinimumFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>Enable minimum font size</string>
+					<key>Name</key>
+					<string>enable minimum font size</string>
 				</dict>
 				<key>folderListFont</key>
 				<dict>
@@ -144,19 +228,12 @@
 					<key>Name</key>
 					<string>mark read interval</string>
 				</dict>
-				<key>messageListFont</key>
+				<key>minimumFontSize</key>
 				<dict>
 					<key>Description</key>
-					<string>The font used in the article list pane</string>
+					<string>The minimum font size used when displaying article text</string>
 					<key>Name</key>
-					<string>article list font</string>
-				</dict>
-				<key>messageListFontSize</key>
-				<dict>
-					<key>Description</key>
-					<string>The size of the font used in the article list pane</string>
-					<key>Name</key>
-					<string>article list font size</string>
+					<string>minimum font size</string>
 				</dict>
 				<key>openLinksInBackground</key>
 				<dict>
@@ -193,12 +270,12 @@
 					<key>Name</key>
 					<string>refresh on startup</string>
 				</dict>
-				<key>unreadCount</key>
+				<key>totalUnreadCount</key>
 				<dict>
 					<key>Description</key>
-					<string>Returns the count of unread messages</string>
+					<string>Returns the total count of unread articles</string>
 					<key>Name</key>
-					<string>unread count</string>
+					<string>total unread count</string>
 				</dict>
 			</dict>
 			<key>Description</key>
@@ -211,6 +288,13 @@
 	</dict>
 	<key>Commands</key>
 	<dict>
+		<key>CompactDatabase</key>
+		<dict>
+			<key>Description</key>
+			<string>Compact the article database</string>
+			<key>Name</key>
+			<string>compact database</string>
+		</dict>
 		<key>ExportSubscriptions</key>
 		<dict>
 			<key>Arguments</key>
@@ -266,13 +350,13 @@
 				<key>Folder</key>
 				<dict>
 					<key>Description</key>
-					<string>Specify the name of the folder where all messages will be marked read</string>
+					<string>Specify the name of the folder where all articles will be marked read</string>
 					<key>Name</key>
 					<string>in</string>
 				</dict>
 			</dict>
 			<key>Description</key>
-			<string>Mark read all unread messages in the specified folder</string>
+			<string>Mark read all unread articles in the specified folder</string>
 			<key>Name</key>
 			<string>mark all read</string>
 		</dict>

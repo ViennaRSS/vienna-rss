@@ -25,3 +25,4 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
 void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);
 NSMenuItem * copyOfMenuWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
+BOOL hasOSScriptsMenu(void);
