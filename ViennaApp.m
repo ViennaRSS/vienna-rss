@@ -137,10 +137,10 @@
 	return [[self delegate] isConnecting];
 }
 
-/* unreadCount
- * Return the number of unread articles.
+/* totalUnreadCount
+ * Return the total number of unread articles.
  */
--(int)unreadCount
+-(int)totalUnreadCount
 {
 	return [[Database sharedDatabase] countOfUnread];
 }

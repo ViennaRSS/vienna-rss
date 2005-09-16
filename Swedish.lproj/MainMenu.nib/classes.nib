@@ -80,11 +80,11 @@
             CLASS = ArticleListView; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                articleList = MessageListView; 
+                articleListHeader = TexturedHeader; 
+                articleText = ArticleView; 
                 foldersTree = FoldersTree; 
-                messageList = MessageListView; 
-                messageListHeader = TexturedHeader; 
                 splitView2 = NSSplitView; 
-                textView = ArticleView; 
             }; 
             SUPERCLASS = NSView; 
         }, 

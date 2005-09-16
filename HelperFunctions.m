@@ -20,6 +20,24 @@
 #import "HelperFunctions.h"
 #import "SystemConfiguration/SCNetworkReachability.h"
 
+/* hasOSScriptsMenu
+ * Determines whether the OS script menu is present or not.
+ */
+BOOL hasOSScriptsMenu(void)
+{
+	NSString * pathToUIServerPlist = [@"~/Library/Preferences/com.apple.systemuiserver.plist" stringByExpandingTildeInPath];
+	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
+	NSArray * menuExtras = [properties objectForKey:@"menuExtras"];
+	int index;
+	
+	for (index = 0; index < [menuExtras count]; ++index)
+	{
+		if ([[menuExtras objectAtIndex:index] hasSuffix:@"Script Menu.menu"])
+			return YES;
+	}
+	return NO;
+}
+
 /* getDefaultBrowser
  * Return the name of the default system browser.
  */

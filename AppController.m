@@ -190,7 +190,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[cellMenu release];
 
 	// Add Scripts menu if we have any scripts
-	if ([defaults boolForKey:MAPref_ShowScriptsMenu])
+	if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self initScriptsMenu];
 
 	// Use Growl if it is installed
@@ -583,12 +583,12 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(void)openURLInNewTab:(NSURL *)url
 {
+	Preferences * prefs = [Preferences standardPreferences];
 	BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
-	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane];
+	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:![prefs openLinksInBackground]];
 	[newBrowserPane setController:self];
 	[newBrowserPane setTab:tab];
 	[newBrowserPane loadURL:url];
-	[mainWindow makeFirstResponder:[newBrowserPane mainView]];
 	[newBrowserPane release];
 }
 
@@ -815,17 +815,20 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 
 	// Insert the Scripts menu to the left of the Help menu only if
-	// we actually have any scripts. The last item in the menu is a command to
-	// open the Vienna scripts folder.
+	// we actually have any scripts.
 	if (count > 0)
 	{
 		[scriptsMenu addItem:[NSMenuItem separatorItem]];
-		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil)
-														   action:@selector(doOpenScriptsFolder:)
-													keyEquivalent:@""];
+		NSMenuItem * menuItem;
+		
+		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil) action:@selector(doOpenScriptsFolder:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		[menuItem release];
 
+		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts...", nil) action:@selector(moreScripts:) keyEquivalent:@""];
+		[scriptsMenu addItem:menuItem];
+		[menuItem release];
+		
 		// The Help menu is always assumed to be the last menu in the list. This is probably
 		// the easiest, localisable, way to look for it.
 		int helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
@@ -938,7 +941,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)emptyTrash:(id)sender
 {
-	[db deleteDeletedMessages];
+	[db purgeDeletedArticles];
 }
 
 /* showPreferencePanel
@@ -1244,6 +1247,16 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		[self openURLInDefaultBrowser:[NSURL URLWithString:stylesPage]];
 }
 
+/* moreScripts
+ * Display the web page where the user can download additional scripts.
+ */
+-(IBAction)moreScripts:(id)sender
+{
+	NSString * stylesPage = [standardURLs valueForKey:@"ViennaMoreScriptsPage"];
+	if (stylesPage != nil)
+		[self openURLInDefaultBrowser:[NSURL URLWithString:stylesPage]];
+}
+
 /* viewArticlePage
  * Display the article in the browser.
  */
@@ -1462,7 +1475,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSAlertDefaultReturn)
-		[mainArticleView deleteSelectedMessages];
+		[mainArticleView deleteSelectedArticles];
 }
 
 /* toggleActivityViewer

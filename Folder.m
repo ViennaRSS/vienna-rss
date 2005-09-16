@@ -438,15 +438,6 @@ static NSArray * iconArray = nil;
 	[attributes setValue:newURL forKey:@"FeedURL"];
 }
 
-/* folderName
- * Returns the folder name. This is an alias for 'name' which
- * isn't acceptable to AppleScript.
- */
--(NSString *)folderName
-{
-	return [self name];
-}
-
 /* name
  * Returns the folder name
  */
@@ -539,7 +530,7 @@ static NSArray * iconArray = nil;
 }
 
 /* setChildUnreadCount
- * Update a separate count of the total number of unread messages
+ * Update a separate count of the total number of unread articles
  * in all child folders.
  */
 -(void)setChildUnreadCount:(int)count
@@ -573,19 +564,21 @@ static NSArray * iconArray = nil;
 	isCached = NO;
 }
 
-/* addMessage
+/* addArticleToCache
+ * Add the specified article to our cache, replacing any existing instance.
  */
--(void)addMessage:(Article *)newMessage
+-(void)addArticleToCache:(Article *)newArticle
 {
-	[cachedArticles setObject:newMessage forKey:[newMessage guid]];
+	[cachedArticles setObject:newArticle forKey:[newArticle guid]];
 	isCached = YES;
 }
 
-/* deleteMessage
+/* removeArticleFromCache
+ * Remove the article identified by the specified GUID from the cache.
  */
--(void)deleteMessage:(NSString *)guid
+-(void)removeArticleFromCache:(NSString *)guid
 {
-	NSAssert(isCached, @"Folder's cache of articles should be initialized before deleteMessage can be used");
+	NSAssert(isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
 	[cachedArticles removeObjectForKey:guid];
 }
 
@@ -597,9 +590,13 @@ static NSArray * iconArray = nil;
 	isCached = YES;
 }
 
-/* messageCount
+/* countOfCachedArticles
+ * Return the number of articles in our cache, or -1 if the cache is empty.
+ * (Note: empty is not the same as a folder with zero articles. The semantics are
+ * important here since we could potentially keep trying to recache an folder that
+ * truly has zero articles otherwise).
  */
--(int)messageCount
+-(int)countOfCachedArticles
 {
 	return isCached ? (int)[cachedArticles count] : -1;
 }
@@ -612,6 +609,14 @@ static NSArray * iconArray = nil;
 	if (isCached)
 		return [cachedArticles allValues];
 	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
+}
+
+/* articlesWithFilter
+ * Return an array of filtered articles in the specified folder.
+ */
+-(NSArray *)articlesWithFilter:(NSString *)fstring
+{
+	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:fstring];
 }
 
 /* folderNameCompare
@@ -633,6 +638,7 @@ static NSArray * iconArray = nil;
 }
 
 /* objectSpecifier
+ * Return an NSScriptObjectSpecifier object representing this folder.
  */
 -(NSScriptObjectSpecifier *)objectSpecifier
 {

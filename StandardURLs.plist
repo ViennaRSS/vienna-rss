@@ -6,6 +6,8 @@
 	<string>http://www.opencommunity.co.uk</string>
 	<key>ViennaMoreStylesPage</key>
 	<string>http://www.opencommunity.co.uk/vienna_files.html</string>
+	<key>ViennaMoreScriptsPage</key>
+	<string>http://www.opencommunity.co.uk/vienna_files.html</string>
 	<key>FeedValidatorTemplate</key>
 	<string>http://feedvalidator.org/check?url=%@</string>
 </dict>

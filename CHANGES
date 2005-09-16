@@ -23,6 +23,7 @@ Thanks!
 - Fixed a bug that screwed up sorting by the read column.
 - Improved printing of articles.
 - Can undo moving folders in the folders list pane.
+- Several improvements to AppleScript interface: new attributes and fixed some bugs.
 
 2.0.0.2006
 ----------

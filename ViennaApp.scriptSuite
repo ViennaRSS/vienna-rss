@@ -12,17 +12,93 @@
 			<string>VNar</string>
 			<key>Attributes</key>
 			<dict>
-				<key>title</key>
-				<dict>
-					<key>AppleEventCode</key>
-					<string>arTL</string>
-					<key>Type</key>
-					<string>NSString</string>
-				</dict>
 				<key>author</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>arAU</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>body</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arTX</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>date</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arDA</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSDate</string>
+				</dict>
+				<key>folderId</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arFL</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber</string>
+				</dict>
+				<key>guid</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arGD</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>isDeleted</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arDL</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>isFlagged</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arFG</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>isRead</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arRD</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>link</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arLK</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>title</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arTL</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
@@ -55,6 +131,8 @@
 				<dict>
 					<key>AppleEventCode</key>
 					<string>flDE</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
@@ -62,13 +140,8 @@
 				<dict>
 					<key>AppleEventCode</key>
 					<string>flUR</string>
-					<key>Type</key>
-					<string>NSString</string>
-				</dict>
-				<key>name</key>
-				<dict>
-					<key>AppleEventCode</key>
-					<string>pnam</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
@@ -76,8 +149,37 @@
 				<dict>
 					<key>AppleEventCode</key>
 					<string>flHP</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
 					<key>Type</key>
 					<string>NSString</string>
+				</dict>
+				<key>name</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>pnam</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
+				<key>type</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>flTY</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Int&gt;</string>
+				</dict>
+				<key>unreadCount</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>flUN</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
 			</dict>
 			<key>Superclass</key>
@@ -113,7 +215,7 @@
 					<key>LocationRequiredToCreate</key>
 					<string>NO</string>
 					<key>ReadOnly</key>
-					<string>NO</string>
+					<string>YES</string>
 					<key>Type</key>
 					<string>Article</string>
 				</dict>
@@ -248,7 +350,7 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Bool&gt;</string>
 				</dict>
-				<key>unreadCount</key>
+				<key>totalUnreadCount</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>unCO</string>
@@ -286,7 +388,7 @@
 					<key>LocationRequiredToCreate</key>
 					<string>NO</string>
 					<key>ReadOnly</key>
-					<string></string>
+					<string>YES</string>
 					<key>Type</key>
 					<string>Folder</string>
 				</dict>

@@ -74,8 +74,7 @@
 -(BOOL)setFolderFeedURL:(int)folderId newFeedURL:(NSString *)newFeedURL;
 -(BOOL)setFolderUsername:(int)folderId newUsername:(NSString *)name;
 -(void)flushFolder:(int)folderId;
--(void)releaseMessages:(int)folderId;
--(void)deleteDeletedMessages;
+-(void)purgeDeletedArticles;
 -(BOOL)markFolderRead:(int)folderId;
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
@@ -95,7 +94,7 @@
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
--(BOOL)createArticle:(int)folderID message:(Article *)message;
+-(BOOL)createArticle:(int)folderID article:(Article *)article;
 -(BOOL)deleteArticle:(int)folderId guid:(NSString *)guid;
 -(NSArray *)arrayOfUnreadArticles:(int)folderId;
 -(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString;

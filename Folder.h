@@ -70,7 +70,6 @@
 // Initialisation functions
 -(id)initWithId:(int)itemId parentId:(int)parentId name:(NSString *)name type:(int)type;
 -(NSString *)name;
--(NSString *)folderName;
 -(NSString *)feedDescription;
 -(NSString *)homePage;
 -(NSString *)feedURL;
@@ -80,9 +79,10 @@
 -(NSString *)password;
 -(NSDictionary *)attributes;
 -(NSArray *)articles;
+-(NSArray *)articlesWithFilter:(NSString *)fstring;
 -(int)parentId;
 -(int)itemId;
--(int)messageCount;
+-(int)countOfCachedArticles;
 -(int)unreadCount;
 -(int)type;
 -(long)bloglinesId;
@@ -110,8 +110,8 @@
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(NSArray *)articles;
 -(Article *)articleFromGuid:(NSString *)guid;
--(void)addMessage:(Article *)newMessage;
--(void)deleteMessage:(NSString *)messageId;
+-(void)addArticleToCache:(Article *)newArticle;
+-(void)removeArticleFromCache:(NSString *)guid;
 -(void)markFolderEmpty;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;

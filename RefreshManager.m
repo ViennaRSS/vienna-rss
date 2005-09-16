@@ -528,7 +528,7 @@ typedef enum {
 			Article * article = [[Article alloc] initWithGuid:guid];
 			[article setFolderId:[folder itemId]];
 			[article setAuthor:userName];
-			[article setText:articleBody];
+			[article setBody:articleBody];
 			[article setTitle:articleTitle];
 			[article setLink:articleLink];
 			[article setDate:articleDate];
@@ -547,14 +547,14 @@ typedef enum {
 		// Now sort the article array before we insert into the
 		// database so we're always inserting oldest first. The RSS feed is
 		// likely to give us newest first.
-		NSArray * sortedArrayOfMessages = [articleArray sortedArrayUsingFunction:articleDateSortHandler context:self];
-		NSEnumerator * articleEnumerator = [sortedArrayOfMessages objectEnumerator];
+		NSArray * sortedArrayOfArticles = [articleArray sortedArrayUsingFunction:articleDateSortHandler context:self];
+		NSEnumerator * articleEnumerator = [sortedArrayOfArticles objectEnumerator];
 		Article * article;
 		
 		// Here's where we add the articles to the database
 		while ((article = [articleEnumerator nextObject]) != nil)
 		{
-			[db createArticle:[article folderId] message:article];
+			[db createArticle:[article folderId] article:article];
 			if ([article status] == MA_MsgStatus_New)
 				++newArticlesFromFeed;
 		}

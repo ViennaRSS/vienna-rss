@@ -54,7 +54,7 @@
 -(void)closeTab:(BrowserTab *)theTab;
 -(void)closeAllTabs;
 -(int)countOfTabs;
--(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView;
+-(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt;
 -(void)makeTabActive:(BrowserTab *)theTab;
 -(void)showTab:(BrowserTab *)theTab;
 -(void)showPreviousTab;
