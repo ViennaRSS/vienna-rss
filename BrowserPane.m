@@ -63,6 +63,9 @@
 		// Other initialisation
 		controller = nil;
 		isLoadingFrame = NO;
+		isLocalFile = NO;
+		hasPageTitle = NO;
+		pageFilename = nil;
 
 		// Handle minimum font size
 		defaultWebPrefs = [[webPane preferences] retain];
@@ -102,6 +105,11 @@
  */
 -(void)loadURL:(NSURL *)url
 {
+	hasPageTitle = NO;
+	isLocalFile = [url isFileURL];
+	
+	[pageFilename release];
+	pageFilename = [[[[url path] lastPathComponent] stringByDeletingPathExtension] retain];
 	[[webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
@@ -142,7 +150,11 @@
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
 	if (frame == [webPane mainFrame])
+	{
+		if (!hasPageTitle)
+			[[controller browserView] setTabTitle:tab title:pageFilename];
 		isLoadingFrame = NO;
+	}
 }
 
 /* didReceiveTitle
@@ -151,7 +163,10 @@
 -(void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
 	if (frame == [webPane mainFrame])
+	{
 		[[controller browserView] setTabTitle:tab title:title];
+		hasPageTitle = YES;
+	}
 }
 
 /* decidePolicyForNewWindowAction
@@ -187,7 +202,7 @@
 		return [controller contextMenuItemsLink:urlLink defaultMenuItems:defaultMenuItems];
 	
 	WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
-	if (frameKey != nil)
+	if (frameKey != nil && !isLocalFile)
 	{
 		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
 		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
@@ -361,6 +376,8 @@
 	[webPane stopLoading:self];
 	[webPane release];
 	[defaultWebPrefs release];
+	[pageFilename release];
+	[tab release];
 	[super dealloc];
 }
 @end

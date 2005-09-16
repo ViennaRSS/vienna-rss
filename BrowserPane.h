@@ -29,8 +29,11 @@
 	IBOutlet ArticleView * webPane;
 	AppController * controller;
 	WebPreferences * defaultWebPrefs;
+	NSString * pageFilename;
 	BrowserTab * tab;
+	BOOL isLocalFile;
 	BOOL isLoadingFrame;
+	BOOL hasPageTitle;
 }
 
 // Accessor functions
