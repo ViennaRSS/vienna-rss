@@ -24,6 +24,7 @@ Thanks!
 - Improved printing of articles.
 - Can undo moving folders in the folders list pane.
 - Several improvements to AppleScript interface: new attributes and fixed some bugs.
+- Added Cmd+U for next unread since Spacebar doesn't work from the web view.
 
 2.0.0.2006
 ----------

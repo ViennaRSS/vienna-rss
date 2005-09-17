@@ -129,6 +129,7 @@
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
 -(NSString *)searchString;
+-(Article *)selectedArticle;
 -(int)currentFolderId;
 -(BOOL)isConnecting;
 -(Database *)database;

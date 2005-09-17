@@ -38,15 +38,73 @@
 	return nil;
 }
 
+/* evaluatedArrayOfFolders
+ * Given a script argument object, this code attempts to determine
+ * an array of folders from that argument. If any argument is NOT a folder
+ * type, we return nil and report an error back to the script command.
+ */
+-(NSArray *)evaluatedArrayOfFolders:(id)argObject withCommand:(NSScriptCommand *)cmd
+{
+	NSMutableArray * newArgArray = [NSMutableArray array];
+	BOOL hasError = NO;
+
+	if ([argObject isKindOfClass:[Folder class]])
+		[newArgArray addObject:argObject];
+
+	else if ([argObject isKindOfClass:[NSArray class]])
+	{
+		NSArray * argArray = (NSArray *)argObject;
+		int index;
+
+		for (index = 0; index < [argArray count]; ++index)
+		{
+			id argItem = [argArray objectAtIndex:index];
+			if ([argItem isKindOfClass:[Folder class]])
+			{
+				[newArgArray addObject:argItem];
+				continue;
+			}
+			if ([argItem isKindOfClass:[NSScriptObjectSpecifier class]])
+			{
+				id evaluatedItem = [argItem objectsByEvaluatingSpecifier];
+				if ([evaluatedItem isKindOfClass:[Folder class]])
+				{
+					[newArgArray addObject:evaluatedItem];
+					continue;
+				}
+				if ([evaluatedItem isKindOfClass:[NSArray class]])
+				{
+					NSArray * newArray = [self evaluatedArrayOfFolders:evaluatedItem withCommand:cmd];
+					if (newArray == nil)
+						return nil;
+
+					[newArgArray addObjectsFromArray:newArray];
+					continue;
+				}
+			}
+			hasError = YES;
+			break;
+		}
+	}
+	if (!hasError)
+		return newArgArray;
+
+	// At least one of the arguments didn't evaluate to a Folder object
+	[cmd setScriptErrorNumber:errASIllegalFormalParameter];
+	[cmd setScriptErrorString:@"Argument must evaluate to a valid folder"];
+	return nil;
+}
+
 /* handleRefreshSubscription
  * Refreshes a specific folder.
  */
 -(id)handleRefreshSubscription:(NSScriptCommand *)cmd
 {
 	NSDictionary * args = [cmd evaluatedArguments];
-	Folder * folder = [args objectForKey:@"Folder"];
-	if (folder != nil)
-		[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+	NSArray * argArray = [self evaluatedArrayOfFolders:[args objectForKey:@"Folder"] withCommand:cmd];
+	if (argArray != nil)
+		[[RefreshManager sharedManager] refreshSubscriptions:argArray];
+
 	return nil;
 }
 
@@ -56,9 +114,9 @@
 -(id)handleMarkAllRead:(NSScriptCommand *)cmd
 {
 	NSDictionary * args = [cmd evaluatedArguments];
-	Folder * folder = [args objectForKey:@"Folder"];
-	if (folder != nil)
-		[[self delegate] markSelectedFoldersRead:[NSArray arrayWithObject:folder]];
+	NSArray * argArray = [self evaluatedArrayOfFolders:[args objectForKey:@"Folder"] withCommand:cmd];
+	if (argArray != nil)
+		[[self delegate] markSelectedFoldersRead:argArray];
 
 	return nil;
 }
@@ -88,11 +146,11 @@
 -(id)handleExportSubscriptions:(NSScriptCommand *)cmd
 {
 	NSDictionary * args = [cmd evaluatedArguments];
-	Folder * folder = [args objectForKey:@"Folder"];
-	
-	// If no folder is specified, default to exporting everything.
-	NSArray * array = (folder ? [NSArray arrayWithObject:folder] : [self folders]);
-	[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:array];
+	id argObject = [args objectForKey:@"Folder"];
+	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [self folders];
+
+	if (argArray != nil)
+		[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray];
 	return nil;
 }
 
@@ -143,6 +201,14 @@
 -(int)totalUnreadCount
 {
 	return [[Database sharedDatabase] countOfUnread];
+}
+
+/* currentArticle
+ * Retrieves the current article.
+ */
+-(Article *)currentArticle;
+{
+	return [[self delegate] selectedArticle];
 }
 
 /* currentFolder
