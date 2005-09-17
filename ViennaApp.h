@@ -50,6 +50,9 @@
 -(Folder *)currentFolder;
 -(void)setCurrentFolder:(Folder *)newCurrentFolder;
 
+// Current article
+-(Article *)currentArticle;
+
 // Preference getters
 -(float)markReadInterval;
 -(BOOL)readingPaneOnRight;

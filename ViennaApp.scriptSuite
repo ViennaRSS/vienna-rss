@@ -12,6 +12,15 @@
 			<string>VNar</string>
 			<key>Attributes</key>
 			<dict>
+				<key>applescriptContainer</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>arXP</string>
+					<key>ReadOnly</key>
+					<string>NO</string>
+					<key>Type</key>
+					<string>Article</string>
+				</dict>
 				<key>author</key>
 				<dict>
 					<key>AppleEventCode</key>
@@ -263,6 +272,13 @@
 					<string>cuFL</string>
 					<key>Type</key>
 					<string>Folder</string>
+				</dict>
+				<key>currentArticle</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>cuAR</string>
+					<key>Type</key>
+					<string>Article</string>
 				</dict>
 				<key>displayStyle</key>
 				<dict>

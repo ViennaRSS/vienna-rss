@@ -157,11 +157,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[splitView1 loadLayoutWithName:@"SplitView1Positions"];
 	[splitView1 setDelegate:self];
 
-	// Put icons in front of some menu commands.
-	[self setImageForMenuCommand:[NSImage imageNamed:@"smallFolder.tiff"] forAction:@selector(newGroupFolder:)];
-	[self setImageForMenuCommand:[NSImage imageNamed:@"rssFeed.tiff"] forAction:@selector(newSubscription:)];
-	[self setImageForMenuCommand:[NSImage imageNamed:@"searchFolder.tiff"] forAction:@selector(newSmartFolder:)];
-
 	// Show the current unread count on the app icon
 	originalIcon = [[NSApp applicationIconImage] copy];
 	[self showUnreadCountOnApplicationIcon];
@@ -978,6 +973,14 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	return appName;
 }
 
+/* selectedArticle
+ * Returns the current selected article in the article pane.
+ */
+-(Article *)selectedArticle
+{
+	return [mainArticleView selectedArticle];
+}
+
 /* currentFolderId
  * Return the ID of the currently selected folder whose articles are shown in
  * the article window.
@@ -1262,7 +1265,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)viewArticlePage:(id)sender
 {
-	Article * theArticle = [mainArticleView selectedArticle];
+	Article * theArticle = [self selectedArticle];
 	if (theArticle && ![[theArticle link] isBlank])
 		[self openURLInBrowser:[theArticle link]];
 }
@@ -1297,14 +1300,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	{
 	case NSFindPanelActionShowFindPanel:
 		[mainWindow makeFirstResponder:searchField];
-		break;
-		
-	case NSFindPanelActionPrevious:
-		[[browserView activeTabView] search];
-		break;
-		
-	case NSFindPanelActionNext:
-		[[browserView activeTabView] search];
 		break;
 	}
 }
@@ -1447,7 +1442,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)deleteMessage:(id)sender
 {
-	if ([mainArticleView selectedArticle] != nil && ![db readOnly])
+	if ([self selectedArticle] != nil && ![db readOnly])
 	{
 		Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
 		if (!IsTrashFolder(folder))
@@ -1527,7 +1522,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)markRead:(id)sender
 {
-	Article * theArticle = [mainArticleView selectedArticle];
+	Article * theArticle = [self selectedArticle];
 	if (theArticle != nil && ![db readOnly])
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
@@ -1541,7 +1536,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)markFlagged:(id)sender
 {
-	Article * theArticle = [mainArticleView selectedArticle];
+	Article * theArticle = [self selectedArticle];
 	if (theArticle != nil && ![db readOnly])
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
@@ -1720,7 +1715,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)viewSourceHomePage:(id)sender
 {
-	Article * thisArticle = [mainArticleView selectedArticle];
+	Article * thisArticle = [self selectedArticle];
 	if (thisArticle != nil)
 	{
 		Folder * folder = [db folderFromID:[thisArticle folderId]];
@@ -1906,7 +1901,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
 	if (theAction == @selector(printDocument:))
 	{
-		return ([mainArticleView selectedArticle] != nil && isMainWindowVisible);
+		return ([self selectedArticle] != nil && isMainWindowVisible);
 	}
 	else if (theAction == @selector(goBack:))
 	{
@@ -1987,7 +1982,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(viewSourceHomePage:))
 	{
-		Article * thisArticle = [mainArticleView selectedArticle];
+		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)
 		{
 			Folder * folder = [db folderFromID:[thisArticle folderId]];
@@ -1997,7 +1992,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(viewArticlePage:))
 	{
-		Article * thisArticle = [mainArticleView selectedArticle];
+		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)
 			return ([thisArticle link] && ![[thisArticle link] isBlank] && isMainWindowVisible && isArticleView);
 		return NO;
@@ -2023,7 +2018,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return [mainArticleView selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(emptyTrash:))
 	{
@@ -2071,7 +2066,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(markFlagged:))
 	{
-		Article * thisArticle = [mainArticleView selectedArticle];
+		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)
 		{
 			if ([thisArticle isFlagged])
@@ -2083,7 +2078,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 	else if (theAction == @selector(markRead:))
 	{
-		Article * thisArticle = [mainArticleView selectedArticle];
+		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)
 		{
 			if ([thisArticle isRead])

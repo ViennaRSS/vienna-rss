@@ -179,6 +179,13 @@
 					<key>Name</key>
 					<string>current folder</string>
 				</dict>
+				<key>currentArticle</key>
+				<dict>
+					<key>Description</key>
+					<string>The current selected article being shown in the article list pane</string>
+					<key>Name</key>
+					<string>current article</string>
+				</dict>
 				<key>displayStyle</key>
 				<dict>
 					<key>Description</key>
