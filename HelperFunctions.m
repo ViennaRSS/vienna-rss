@@ -82,12 +82,14 @@ NSMenuItem * copyOfMenuWithAction(SEL theSelector)
  * dictionary. If foldersOnly is YES, only folders are added. If foldersOnly is NO then only
  * files are added.
  */
-void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly)
+void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly, NSArray * validExtensions)
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	NSArray * arrayOfFiles = [fileManager directoryContentsAtPath:path];
 	if (arrayOfFiles != nil)
 	{
+		if (validExtensions)
+			arrayOfFiles = [arrayOfFiles pathsMatchingExtensions:validExtensions];
 		NSEnumerator * enumerator = [arrayOfFiles objectEnumerator];
 		NSString * fileName;
 		
@@ -98,8 +100,10 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 			
 			if ([fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory] && (isDirectory == foldersOnly))
 			{
-				if (![fileName isEqualToString:@".DS_Store"])
-					[pathMappings setValue:fullPath forKey:[fileName stringByDeletingPathExtension]];
+				if ([fileName isEqualToString:@".DS_Store"])
+					continue;
+
+				[pathMappings setValue:fullPath forKey:[fileName stringByDeletingPathExtension]];
 			}
 		}
 	}

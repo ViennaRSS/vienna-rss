@@ -547,7 +547,8 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		[self openURLInNewTab:[item representedObject]];
+		Preferences * prefs = [Preferences standardPreferences];
+		[self openURLInNewTab:[item representedObject] inBackground:[prefs openLinksInBackground]];
 	}
 }
 
@@ -568,7 +569,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([prefs openLinksInVienna])
-		[self openURLInNewTab:url];
+		[self openURLInNewTab:url inBackground:[prefs openLinksInBackground]];
 	else
 		[self openURLInDefaultBrowser:url];
 }
@@ -576,11 +577,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 /* openURLInNewTab
  * Open the specified URL in a new tab.
  */
--(void)openURLInNewTab:(NSURL *)url
+-(void)openURLInNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	Preferences * prefs = [Preferences standardPreferences];
 	BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
-	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:![prefs openLinksInBackground]];
+	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 	[newBrowserPane setController:self];
 	[newBrowserPane setTab:tab];
 	[newBrowserPane loadURL:url];
@@ -785,14 +785,17 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
 	// Set menu image
 	[scriptsMenuItem setImage:[NSImage imageNamed:@"scriptMenu.tiff"]];
-	
+
+	// Valid script file extensions
+	NSArray * exts = [NSArray arrayWithObjects:@"scpt", nil];
+
 	// Add scripts within the app resource
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Scripts"];
-	loadMapFromPath(path, scriptPathMappings, NO);
+	loadMapFromPath(path, scriptPathMappings, NO, exts);
 
 	// Add scripts that the user created and stored in the scripts folder
 	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
-	loadMapFromPath(path, scriptPathMappings, NO);
+	loadMapFromPath(path, scriptPathMappings, NO, exts);
 
 	// Add the contents of the scriptsPathMappings dictionary keys to the menu sorted
 	// by key name.
@@ -1734,14 +1737,14 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 }
 
 /* showAcknowledgements
- * Display the acknowledgements document in a browser.
+ * Display the acknowledgements document in a new tab.
  */
 -(IBAction)showAcknowledgements:(id)sender
 {
 	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
 	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements.rtf" ofType:@""];
 	if (pathToAckFile != nil)
-		[self openURLInBrowser:[NSString stringWithFormat:@"file://%@", pathToAckFile]];
+		[self openURLInNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
 }
 
 /* previousTab

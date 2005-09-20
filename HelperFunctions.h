@@ -19,7 +19,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly);
+void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly, NSArray * validExtensions);
 BOOL isAccessible(NSString * urlString);
 void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
 void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);

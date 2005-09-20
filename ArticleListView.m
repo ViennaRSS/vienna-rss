@@ -657,10 +657,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		stylePathMappings = [[NSMutableDictionary alloc] init];
 
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
-	loadMapFromPath(path, stylePathMappings, YES);
+	loadMapFromPath(path, stylePathMappings, YES, nil);
 	
 	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
-	loadMapFromPath(path, stylePathMappings, YES);
+	loadMapFromPath(path, stylePathMappings, YES, nil);
 	
 	return stylePathMappings;
 }

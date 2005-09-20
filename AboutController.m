@@ -38,12 +38,12 @@
 {
 	NSBundle * appBundle = [NSBundle mainBundle];
 	NSDictionary * fileAttributes = [appBundle localizedInfoDictionary];
-	[appName setStringValue:[fileAttributes objectForKey:@"CFBundleName"]];
 	[copyrightString setStringValue:[fileAttributes objectForKey:@"NSHumanReadableCopyright"]];
 
 	fileAttributes = [appBundle infoDictionary];
 	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
 	[versionString setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version]];
+	[appName setStringValue:[fileAttributes objectForKey:@"CFBundleName"]];
 
 	[[self window] center];
 }

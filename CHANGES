@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2008 (BETA 2)
+-------------------
+- Added final Swedish localisation changes for beta 2.
+- Fix bug with importing OPML files.
+
 2.0.0.2007
 ----------
 - You can now undo/redo Mark All Read, even across multiple folders.
@@ -122,3 +127,7 @@ Thanks!
   table layout appears. For simplicity I haven't exposed any way to change layout independently
   of the position of the article pane. It'll be interesting to see if anybody really wants the
   summary view when the article pane is below the article list.
+
+2.0.0.2002 (BETA 1)
+-------------------
+- Original beta 1 release.

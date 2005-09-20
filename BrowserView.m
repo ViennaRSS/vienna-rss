@@ -669,9 +669,7 @@ static const int MA_Left_Margin_Width = 10;
 		if (trackingTab == theTab)
 			trackingTab = nil;
 		[self updateTrackingRectangles];
-		if (index == [allTabs count])
-			index = 0;
-		[self makeTabActive:[allTabs objectAtIndex:index]];
+		[self makeTabActive:[allTabs objectAtIndex:--index]];
 		[theTab release];
 	}
 }
