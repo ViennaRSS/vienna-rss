@@ -50,10 +50,14 @@
 			<true/>
 		</dict>
 	</array>
+	<key>CFBundleName</key>
+	<string>Vienna</string>
 	<key>CFBundleVersion</key>
-	<string>2007</string>
+	<string>2008</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.0.2007</string>
+	<string>2.0.0.2008</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Vienna version 2.0.0.2008, Copyright 2004-2005 Steve Palmer.</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSMainNibFile</key>

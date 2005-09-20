@@ -119,7 +119,7 @@
 -(NSArray *)contextMenuItemsLink:(NSURL *)urlLink defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIcon;
 -(void)openURLInBrowser:(NSString *)urlString;
--(void)openURLInNewTab:(NSURL *)url;
+-(void)openURLInNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(void)openURLInBrowserWithURL:(NSURL *)url;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;

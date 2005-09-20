@@ -71,16 +71,23 @@
 		NSString * bloglinesSubId = [entry objectForKey:@"BloglinesSubId"];
 		int bloglinesId = bloglinesSubId ? [bloglinesSubId intValue] : MA_NonBloglines_Folder;
 
+		// Some OPML exports use 'text' instead of 'title'.
+		if (feedTitle == nil)
+			feedTitle = [XMLParser processAttributes:[entry objectForKey:@"text"]];
+		
 		if (feedURL == nil)
 		{
 			// This is a new group so try to create it. If there's an error then default to adding
 			// the sub-group items under the parent.
-			int folderId = [db addFolder:parentId folderName:feedTitle type:MA_Group_Folder mustBeUnique:YES];
-			if (folderId == -1)
-				folderId = MA_Root_Folder;
-			countImported += [self importSubscriptionGroup:outlineItem underParent:folderId];
+			if (feedTitle != nil)
+			{
+				int folderId = [db addFolder:parentId folderName:feedTitle type:MA_Group_Folder mustBeUnique:YES];
+				if (folderId == -1)
+					folderId = MA_Root_Folder;
+				countImported += [self importSubscriptionGroup:outlineItem underParent:folderId];
+			}
 		}
-		else
+		else if (feedTitle != nil)
 		{
 			Folder * folder;
 			int folderId;

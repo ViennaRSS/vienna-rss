@@ -9,13 +9,12 @@ Thanks!
 Wishlist Items
 ==============
 - Bloglines integration. (2.1)
+- Purge old articles.
 - Auto-discover feeds if subscription URL is to a web page.
-- Mark every unread article in every folder as read. (Can do this with a script).
 - Sort on multiple columns.
 - Per-folder sorting. (2.1)
 - Semi-transparent main window when not in front. (2.1)
 - Show the feed icon in the article list pane. (2.1)
-- Clean up menus.
 - Download files directly from Vienna. (2.1)
 - Support retrieving RSS 2.0 comments. (2.1)
 
