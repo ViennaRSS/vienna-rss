@@ -181,6 +181,33 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
+				<key>isRSSFolder</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>flIR</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>isSmartFolder</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>flIS</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>isGroupFolder</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>flIG</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
 				<key>unreadCount</key>
 				<dict>
 					<key>AppleEventCode</key>

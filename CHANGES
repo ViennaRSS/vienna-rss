@@ -9,7 +9,10 @@ Thanks!
 2.0.0.2008 (BETA 2)
 -------------------
 - Added final Swedish localisation changes for beta 2.
+- Fixed French localisation import error.
 - Fix bug with importing OPML files.
+- Added 'group folder', 'smart folder' and 'rss folder' attributes to folder class in scripting.
+- Added Restore command to restore an article in the Trash Folder back to where it came from.
 
 2.0.0.2007
 ----------

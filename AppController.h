@@ -113,6 +113,7 @@
 -(IBAction)closeAllTabs:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
+-(IBAction)restoreMessage:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

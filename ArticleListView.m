@@ -359,6 +359,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markRead:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markFlagged:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(deleteMessage:))];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(restoreMessage:))];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewArticlePage:))];
@@ -1546,7 +1547,9 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		}
 		else
 		{
-			if ([theArticle folderId] == currentFolderId)
+			if (currentFolderId == [db trashFolderId])
+				[arrayCopy removeObject:theArticle];
+			else if ([theArticle folderId] == currentFolderId)
 				[arrayCopy addObject:theArticle];
 		}
 	}

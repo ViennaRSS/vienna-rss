@@ -125,6 +125,27 @@
 					<key>Name</key>
 					<string>type</string>
 				</dict>
+				<key>isRSSFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns a true value if the folder is an RSS subscription</string>
+					<key>Name</key>
+					<string>rss folder</string>
+				</dict>
+				<key>isSmartFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns a strue value if the folder is a smart folder</string>
+					<key>Name</key>
+					<string>smart folder</string>
+				</dict>
+				<key>isGroupFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns a true value if the folder is a group folder</string>
+					<key>Name</key>
+					<string>group folder</string>
+				</dict>
 				<key>unreadCount</key>
 				<dict>
 					<key>Description</key>
