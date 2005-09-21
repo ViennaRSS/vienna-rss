@@ -1439,6 +1439,21 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[groupFolder newGroupFolder:mainWindow underParent:[foldersTree groupParentSelection]];
 }
 
+/* restoreMessage
+ * Restore a message in the Trash folder back to where it came from.
+ */
+-(IBAction)restoreMessage:(id)sender
+{
+	Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
+	if (IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly])
+	{
+		NSArray * articleArray = [mainArticleView markedArticleRange];
+		[mainArticleView markDeletedByArray:articleArray deleteFlag:NO];
+		[articleArray release];
+		[self clearUndoStack];
+	}
+}
+
 /* deleteMessage
  * Delete the current article. If we're in the Trash folder, this represents a permanent
  * delete. Otherwise we just move the article to the trash folder.
@@ -2018,6 +2033,11 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		int folderId = [foldersTree actualSelection];
 		Folder * folder = [db folderFromID:folderId];
 		return IsRSSFolder(folder) && isMainWindowVisible;
+	}
+	else if (theAction == @selector(restoreMessage:))
+	{
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{

@@ -37,6 +37,7 @@
                 refreshSelectedSubscriptions = id; 
                 reloadPage = id; 
                 renameFolder = id; 
+                restoreMessage = id; 
                 searchUsingToolbarTextField = id; 
                 setCondensedLayout = id; 
                 setTableLayout = id; 

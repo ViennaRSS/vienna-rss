@@ -92,6 +92,9 @@
 -(void)clearCache;
 -(BOOL)needFlush;
 -(void)resetFlush;
+-(BOOL)isGroupFolder;
+-(BOOL)isSmartFolder;
+-(BOOL)isRSSFolder;
 -(void)setName:(NSString *)name;
 -(void)setUnreadCount:(int)count;
 -(void)setType:(int)newType;

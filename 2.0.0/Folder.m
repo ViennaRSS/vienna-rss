@@ -479,6 +479,30 @@ static NSArray * iconArray = nil;
 	type = newType;
 }
 
+/* isGroupFolder
+ * Used for scripting. Returns YES if this folder is a group folder.
+ */
+-(BOOL)isGroupFolder
+{
+	return IsGroupFolder(self);
+}
+
+/* isSmartFolder
+ * Used for scripting. Returns YES if this folder is a smart folder.
+ */
+-(BOOL)isSmartFolder
+{
+	return IsSmartFolder(self);
+}
+
+/* isRSSFolder
+ * Used for scripting. Returns YES if this folder is an RSS feed folder.
+ */
+-(BOOL)isRSSFolder
+{
+	return IsRSSFolder(self);
+}
+
 /* setFlag
  * Set the specified flag on the folder.
  */
