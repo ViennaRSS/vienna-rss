@@ -129,6 +129,12 @@
  */
 -(void)setOperator:(CriteriaOperator)newOperator
 {
+	// Convert deprecated under/not-under operators
+	// to is/is-not.
+	if (newOperator == MA_CritOper_Under)
+		newOperator = MA_CritOper_Is;
+	if (newOperator == MA_CritOper_NotUnder)
+		newOperator = MA_CritOper_IsNot;
 	operator = newOperator;
 }
 
@@ -217,7 +223,7 @@
 					NSString * fieldName = [subTree valueOfAttribute:@"field"];
 					NSString * operator = [[subTree treeByName:@"operator"] valueOfElement];
 					NSString * value = [[subTree treeByName:@"value"] valueOfElement];
-					
+
 					Criteria * newCriteria = [[Criteria alloc] init];
 					[newCriteria setField:fieldName];
 					[newCriteria setOperator:[operator intValue]];

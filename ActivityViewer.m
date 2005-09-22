@@ -105,13 +105,15 @@
 	ActivityItem * selectedItem = nil;
 
 	int selectedRow = [activityTable selectedRow];
-	if (selectedRow >= 0)
+	if (selectedRow >= 0 && selectedRow < [allItems count])
 		selectedItem = [allItems objectAtIndex:selectedRow];
 
 	[[ActivityLog defaultLog] sortUsingDescriptors:[activityTable sortDescriptors]];
 	[activityTable reloadData];
 
-	if (selectedItem != nil)
+	if (selectedItem == nil)
+		[activityDetail setString:@""];
+	else
 	{
 		selectedRow = [allItems indexOfObject:selectedItem];
 		[activityTable selectRow:selectedRow byExtendingSelection:NO];

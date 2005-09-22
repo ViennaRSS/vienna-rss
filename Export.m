@@ -46,6 +46,7 @@
 	}
 	
 	[panel setAccessoryView:exportSaveAccessory];
+	[panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
 	[panel beginSheetForDirectory:nil
 							 file:@""
 				   modalForWindow:mainWindow
@@ -126,7 +127,7 @@
 	// Create the body section
 	XMLParser * bodyTree = [opmlTree addTree:@"body"];
 	int countExported = [self exportSubscriptionGroup:bodyTree fromArray:foldersArray];
-	
+
 	// Now write the complete XML to the file
 	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])

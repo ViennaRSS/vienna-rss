@@ -122,19 +122,19 @@
 					[flagValueField selectItemWithTitle:NSLocalizedString([criteria value], nil)];
 					break;
 				}
-					
+
 				case MA_FieldType_Folder: {
 					Folder * folder = [db folderFromName:[criteria value]];
 					if (folder != nil)
 						[folderValueField selectItemWithTitle:[folder name]];
 					break;
 				}
-			
+
 				case MA_FieldType_String: {
 					[valueField setStringValue:[criteria value]];
 					break;
 				}
-					
+
 				case MA_FieldType_Integer: {
 					[numberValueField setStringValue:[criteria value]];
 					break;
@@ -145,7 +145,7 @@
 					break;
 				}
 			}
-			
+
 			[self addCriteria:index++];
 		}
 
@@ -337,16 +337,14 @@
 									MA_CritOper_Is,
 									0];
 			break;
-			
+
 		case MA_FieldType_Folder:
 			[self setOperatorsPopup:theOperatorPopup,
 									MA_CritOper_Is,
 									MA_CritOper_IsNot,
-									MA_CritOper_Under,
-									MA_CritOper_NotUnder,
 									0];
 			break;
-			
+
 		case MA_FieldType_String:
 			[self setOperatorsPopup:theOperatorPopup,
 									MA_CritOper_Is,

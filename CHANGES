@@ -13,6 +13,9 @@ Thanks!
 - Fix bug with importing OPML files.
 - Added 'group folder', 'smart folder' and 'rss folder' attributes to folder class in scripting.
 - Added Restore command to restore an article in the Trash Folder back to where it came from.
+- Fixed UI update bug when a folder is deleted during a refresh.
+- Exported files now have ".opml" extension added to them.
+- Smart search folder operators are now limited to "is" and "is not" as "under" is now implied.
 
 2.0.0.2007
 ----------
