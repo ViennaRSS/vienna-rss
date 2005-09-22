@@ -19,6 +19,7 @@
 //
 
 #import "ActivityLog.h"
+#import "Database.h"
 
 static ActivityLog * defaultActivityLog = nil;		// Singleton object
 
@@ -153,8 +154,22 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 -(id)init
 {
 	if ((self = [super init]) != nil)
+	{
 		log = [[NSMutableArray alloc] init];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
+	}
 	return self;
+}
+
+/* handleWillDeleteFolder
+ * Trap the notification that the specified folder is about to be deleted.
+ */
+-(void)handleWillDeleteFolder:(NSNotification *)nc
+{
+	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
+	ActivityItem * item = [self itemByName:[folder name]];
+	[log removeObject:item];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
 }
 
 /* getStatus
@@ -220,6 +235,7 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[log release];
 	[super dealloc];
 }

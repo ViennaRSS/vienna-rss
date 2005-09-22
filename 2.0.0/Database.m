@@ -606,6 +606,9 @@ static Database * _sharedDatabase = nil;
 	NSEnumerator * enumerator = [arrayOfChildFolders objectEnumerator];
 	Folder * folder;
 
+	// Send a notification before the folder is deleted
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_WillDeleteFolder" object:[NSNumber numberWithInt:folderId]];
+	
 	// Recurse and delete child folders
 	while ((folder = [enumerator nextObject]) != nil)
 		[self wrappedDeleteFolder:[folder itemId]];
@@ -1479,6 +1482,10 @@ static Database * _sharedDatabase = nil;
 		subScope = NO;
 		folderId = 0;
 	}
+
+	// Group folders must always have subscope
+	if (folder && IsGroupFolder(folder))
+		subScope = YES;
 
 	// Straightforward folder is <something>
 	if (!subScope)

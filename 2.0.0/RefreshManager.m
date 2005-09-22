@@ -145,6 +145,7 @@ typedef enum {
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
+		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
 	}
 	return self;
 }
@@ -157,6 +158,40 @@ typedef enum {
 	if (!_refreshManager)
 		_refreshManager = [[RefreshManager alloc] init];
 	return _refreshManager;
+}
+
+/* handleWillDeleteFolder
+ * Trap the notification that is broadcast just before a folder is being deleted.
+ * We use this to remove that folder from the refresh queue, if it is present, and
+ * interrupt a connection on that folder. Otherwise our retain on the folder will
+ * prevent it from being fully released until the end of the refresh by which time
+ * the folder list pane will probably have completed its post delete update.
+ */
+-(void)handleWillDeleteFolder:(NSNotification *)nc
+{
+	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
+	if (folder != nil)
+	{
+		int index = [refreshArray count];
+		while (--index >= 0)
+		{
+			RefreshItem * item = [refreshArray objectAtIndex:index];
+			if ([item folder] == folder)
+				[refreshArray removeObjectAtIndex:index];
+		}
+
+		index = [connectionsArray count];
+		while (--index >= 0)
+		{
+			AsyncConnection * conn = [connectionsArray objectAtIndex:index];
+			if ([conn contextData] == folder)
+			{
+				[conn cancel];
+				[self removeConnection:conn];
+				break;
+			}
+		}
+	}
 }
 
 /* refreshSubscriptions
