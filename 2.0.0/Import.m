@@ -74,6 +74,10 @@
 		// Some OPML exports use 'text' instead of 'title'.
 		if (feedTitle == nil)
 			feedTitle = [XMLParser processAttributes:[entry objectForKey:@"text"]];
+
+		// Do double-decoding of the title to get around a bug in some commercial newsreaders
+		// where they double-encode characters
+		feedTitle = [XMLParser processAttributes:feedTitle];
 		
 		if (feedURL == nil)
 		{
