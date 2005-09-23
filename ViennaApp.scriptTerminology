@@ -118,13 +118,6 @@
 					<key>Name</key>
 					<string>name</string>
 				</dict>
-				<key>type</key>
-				<dict>
-					<key>Description</key>
-					<string>The type of this folder</string>
-					<key>Name</key>
-					<string>type</string>
-				</dict>
 				<key>isRSSFolder</key>
 				<dict>
 					<key>Description</key>

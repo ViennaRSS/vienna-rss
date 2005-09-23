@@ -17,7 +17,10 @@ Wishlist Items
 - Show the feed icon in the article list pane. (2.1)
 - Download files directly from Vienna. (2.1)
 - Support retrieving RSS 2.0 comments. (2.1)
+- Spotlight support. (2.1)
+- Export groups vs. flat export.
 
 Coding To-Do Items
 ==================
 - Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
+- Renaming a folder does not update the folder name in smart folders that reference it.
