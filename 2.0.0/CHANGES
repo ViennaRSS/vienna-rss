@@ -16,6 +16,7 @@ Thanks!
 - Fixed UI update bug when a folder is deleted during a refresh.
 - Exported files now have ".opml" extension added to them.
 - Smart search folder operators are now limited to "is" and "is not" as "under" is now implied.
+- Encode extended characters in HTML article text dragged from the article list view.
 
 2.0.0.2007
 ----------

@@ -572,16 +572,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	Preferences * prefs = [Preferences standardPreferences];
 	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
-	
+
 	[topLineDict setObject:articleListFont forKey:NSFontAttributeName];
 	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-	
+
 	[bottomLineDict setObject:articleListFont forKey:NSFontAttributeName];
 	[bottomLineDict setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
-	
+
 	[selectionDict setObject:articleListFont forKey:NSFontAttributeName];
 	[selectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-	
+
 	[self updateArticleListRowHeight];
 }
 
@@ -1464,11 +1464,11 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	
 	// Close the HTML string
 	[fullHTMLText appendString:@"</body></html>"];
-	
+
 	// Put string on the pasteboard for external drops.
 	[pboard setPropertyList:arrayOfArticles forType:RSSItemType];
-	[pboard setString:fullHTMLText forType:NSHTMLPboardType];
 	[pboard setString:fullPlainText forType:NSStringPboardType];
+	[pboard setString:[fullHTMLText stringByEscapingExtendedCharacters] forType:NSHTMLPboardType];
 	
 	[arrayOfArticles release];
 	[fullHTMLText release];

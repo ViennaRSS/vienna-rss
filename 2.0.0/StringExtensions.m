@@ -166,6 +166,32 @@
 	return [self substringWithRange:r];
 }
 
+/* stringByEscapingExtendedCharacters
+ * Returns a string that consisted of the receiver but with all extended characters
+ * escaped in the format &#code; where code is the character code.
+ */
+-(NSString *)stringByEscapingExtendedCharacters
+{
+	NSMutableString * escapedString = [NSMutableString stringWithString:self];
+	int length = [escapedString length];
+	int index = 0;
+
+	while (index < length)
+	{
+		unichar ch = [escapedString characterAtIndex:index];
+		if (ch <= 127)
+			++index;
+		else
+		{
+			NSString * escapedCharacter = [NSString stringWithFormat:@"&#%d;", ch];
+			[escapedString replaceCharactersInRange:NSMakeRange(index, 1) withString:escapedCharacter];
+			index += [escapedCharacter length];
+			length = [escapedString length];
+		}
+	}
+	return escapedString;
+}
+
 /* indexOfCharacterInString
  * Returns the index of the first occurrence of the specified character at or after
  * the starting index. If no occurrence is found, returns NSNotFound.

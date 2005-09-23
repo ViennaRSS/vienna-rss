@@ -28,6 +28,7 @@
 	+(NSString *)stringByRemovingHTML:(NSString *)theString;
 	-(NSString *)firstNonBlankLine;
 	-(int)indexOfCharacterInString:(char)ch afterIndex:(int)startIndex;
+	-(NSString *)stringByEscapingExtendedCharacters;
 	-(BOOL)hasCharacter:(char)ch;
 	-(NSString *)convertStringToValidPath;
 	-(NSString *)baseURL;
