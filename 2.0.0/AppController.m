@@ -1608,25 +1608,29 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)endRenameFolder:(id)sender
 {
+	Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
 	NSString * newName = [[renameField stringValue] trim];
-	if ([db folderFromName:newName] != nil)
-		runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
-	else
+
+	if (![[folder name] isEqualToString:newName])
 	{
-		[renameWindow orderOut:sender];
-		[NSApp endSheet:renameWindow returnCode:1];
-		
-		Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
-		NSMutableDictionary * renameAttributes = [NSMutableDictionary dictionary];
-		
-		[renameAttributes setValue:[folder name] forKey:@"Name"];
-		[renameAttributes setValue:folder forKey:@"Folder"];
-		
-		NSUndoManager * undoManager = [mainWindow undoManager];
-		[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:renameAttributes];
-		[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
-		
-		[db setFolderName:[mainArticleView currentFolderId] newName:newName];
+		if ([db folderFromName:newName] != nil)
+			runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
+		else
+		{
+			[renameWindow orderOut:sender];
+			[NSApp endSheet:renameWindow returnCode:1];
+			
+			NSMutableDictionary * renameAttributes = [NSMutableDictionary dictionary];
+			
+			[renameAttributes setValue:[folder name] forKey:@"Name"];
+			[renameAttributes setValue:folder forKey:@"Folder"];
+			
+			NSUndoManager * undoManager = [mainWindow undoManager];
+			[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:renameAttributes];
+			[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
+			
+			[db setFolderName:[mainArticleView currentFolderId] newName:newName];
+		}
 	}
 }
 

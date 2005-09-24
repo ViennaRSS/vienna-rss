@@ -468,6 +468,7 @@ static NSMutableDictionary * entityMap = nil;
 									@"'",	@"rsquo",
 									@"'",	@"lsquo",
 									@"'",	@"apos",
+									@"...", @"hellip",
 									nil,	nil] retain];
 
 		// Add entities that map to non-ASCII characters

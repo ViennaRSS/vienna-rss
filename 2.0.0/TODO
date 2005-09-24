@@ -9,7 +9,7 @@ Thanks!
 Wishlist Items
 ==============
 - Bloglines integration. (2.1)
-- Purge old articles.
+- Purge/auto-expire old articles.
 - Auto-discover feeds if subscription URL is to a web page.
 - Sort on multiple columns.
 - Per-folder sorting. (2.1)
@@ -19,6 +19,7 @@ Wishlist Items
 - Support retrieving RSS 2.0 comments. (2.1)
 - Spotlight support. (2.1)
 - Export groups vs. flat export.
+- Change dock unread count colour and size. (2.1)
 
 Coding To-Do Items
 ==================

@@ -518,6 +518,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
  */
 -(void)handleFolderDeleted:(NSNotification *)nc
 {
+	int currentFolderId = [self actualSelection];
 	int folderId = [(NSNumber *)[nc object] intValue];
 	TreeNode * thisNode = [rootNode nodeFromID:folderId];
 	TreeNode * nextNode;
@@ -540,10 +541,13 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	// Send the selection notification ourselves because if we're deleting at the end of
 	// the folder list, the selection won't actually change and outlineViewSelectionDidChange
 	// won't get tripped.
-	blockSelectionHandler = YES;
-	[self selectFolder:[nextNode nodeId]];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
-	blockSelectionHandler = NO;
+	if (currentFolderId == folderId)
+	{
+		blockSelectionHandler = YES;
+		[self selectFolder:[nextNode nodeId]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
+		blockSelectionHandler = NO;
+	}
 }
 
 /* handleFolderUpdate
