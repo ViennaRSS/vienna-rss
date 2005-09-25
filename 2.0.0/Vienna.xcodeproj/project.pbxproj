@@ -110,9 +110,6 @@
 		AA840801066BDDCE00C5D918 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA840800066BDDCE00C5D918 /* ApplicationServices.framework */; };
 		AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */; };
 		AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
-		AA8AF21B08908BD40045B51F /* About.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA8AF21908908BD40045B51F /* About.nib */; };
-		AA8AF24A089092B50045B51F /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8AF248089092B50045B51F /* AboutController.m */; };
-		AA8AF24B089092B50045B51F /* AboutController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8AF249089092B50045B51F /* AboutController.h */; };
 		AA8C72F50641DE1F00649BA2 /* Criteria.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8C72F30641DE1F00649BA2 /* Criteria.h */; };
 		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		AA94574C061C7E060090FE26 /* ExtDateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA94574A061C7E060090FE26 /* ExtDateFormatter.h */; };
@@ -366,9 +363,6 @@
 		AA840800066BDDCE00C5D918 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /Developer/SDKs/MacOSX10.2.7.sdk/System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BezierPathExtensions.h; sourceTree = "<group>"; };
 		AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BezierPathExtensions.m; sourceTree = "<group>"; };
-		AA8AF21A08908BD40045B51F /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/About.nib; sourceTree = "<group>"; };
-		AA8AF248089092B50045B51F /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
-		AA8AF249089092B50045B51F /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criteria.h; sourceTree = "<group>"; };
 		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criteria.m; sourceTree = "<group>"; };
 		AA94574A061C7E060090FE26 /* ExtDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtDateFormatter.h; sourceTree = "<group>"; };
@@ -511,8 +505,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AA8AF249089092B50045B51F /* AboutController.h */,
-				AA8AF248089092B50045B51F /* AboutController.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				AA0FB5E10869110300D9CB90 /* ActivityLog.m */,
 				AABFDC9F0609EA8100100A9B /* ActivityViewer.h */,
@@ -572,7 +564,6 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AA8AF21908908BD40045B51F /* About.nib */,
 				AABFDCC10609EAC500100A9B /* ActivityViewer.nib */,
 				AAD34DAB06277D480094D6A6 /* DownloadPanel.nib */,
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
@@ -772,7 +763,6 @@
 				AA6321170885EA81006382D3 /* Constants.h in Headers */,
 				AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */,
 				AAD7999F088B617900E2CE5E /* ImageAndTextCell.h in Headers */,
-				AA8AF24B089092B50045B51F /* AboutController.h in Headers */,
 				AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */,
 				AA9FE2ED08BC133600A9E977 /* Preferences.h in Headers */,
 				AAF2797F08C00E20000090A1 /* BrowserView.h in Headers */,
@@ -914,7 +904,6 @@
 				AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */,
 				AA6321510885F0BB006382D3 /* comments.tiff in Resources */,
 				AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */,
-				AA8AF21B08908BD40045B51F /* About.nib in Resources */,
 				AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */,
 				AA67F338089727FB008BBC37 /* Styles in Resources */,
 				AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */,
@@ -975,7 +964,6 @@
 				AA63227F08861C99006382D3 /* Constants.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
-				AA8AF24A089092B50045B51F /* AboutController.m in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AAF2798008C00E20000090A1 /* BrowserView.m in Sources */,
@@ -1048,14 +1036,6 @@
 				AA6022BE08C246FF002CFD06 /* French */,
 			);
 			name = FeedCredentials.nib;
-			sourceTree = "<group>";
-		};
-		AA8AF21908908BD40045B51F /* About.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA8AF21A08908BD40045B51F /* English */,
-			);
-			name = About.nib;
 			sourceTree = "<group>";
 		};
 		AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */ = {
@@ -1285,7 +1265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2008;
+				BUILD_NUMBER = 2009;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1298,7 +1278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2008;
+				BUILD_NUMBER = 2009;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1311,7 +1291,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2008;
+				BUILD_NUMBER = 2009;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;

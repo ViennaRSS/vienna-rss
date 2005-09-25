@@ -6,7 +6,6 @@
                 cancelRenameFolder = id; 
                 checkForUpdates = id; 
                 closeAllTabs = id; 
-                closeMainWindow = id; 
                 closeTab = id; 
                 compactDatabase = id; 
                 deleteFolder = id; 

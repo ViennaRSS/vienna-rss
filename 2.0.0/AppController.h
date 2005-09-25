@@ -23,7 +23,6 @@
 #import "ActivityViewer.h"
 
 @class PreferenceController;
-@class AboutController;
 @class FoldersTree;
 @class CheckForUpdates;
 @class DownloadUpdate;
@@ -54,7 +53,6 @@
 
 	ActivityViewer * activityViewer;
 	PreferenceController * preferenceController;
-	AboutController * aboutController;
 	CheckForUpdates * checkUpdates;
 	DownloadUpdate * downloadUpdate;
 	SearchFolder * smartFolder;
@@ -96,7 +94,6 @@
 -(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)readingPaneOnRight:(id)sender;
 -(IBAction)readingPaneOnBottom:(id)sender;
--(IBAction)closeMainWindow:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
