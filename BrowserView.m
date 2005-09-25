@@ -23,7 +23,7 @@
 // Dimensions
 static const int MA_Max_TabWidth = 180;
 static const int MA_Min_TabWidth = 40;
-static const int MA_Tab_Height = 24;
+static const int MA_Tab_Height = 20;
 static const int MA_Left_Margin_Width = 10;
 
 /* BrowserTab
@@ -340,8 +340,8 @@ static const int MA_Left_Margin_Width = 10;
 				// Draw the close button for non-primary tabs
 				if ([theTab hasCloseButton])
 				{
-					NSPoint imagePoint = NSMakePoint(x0 + 5, y0 + (MA_Tab_Height - closeButtonSize.height) / 2);
-					[closeButton compositeToPoint:imagePoint operation:NSCompositeSourceOver];
+					NSPoint pt = [theTab closeButtonRect].origin;
+					[closeButton compositeToPoint: NSMakePoint(pt.x, pt.y) operation:NSCompositeSourceOver];
 				}
 
 				// Draw the text
@@ -450,7 +450,7 @@ static const int MA_Left_Margin_Width = 10;
 				if (index > 0)
 				{
 					int x0 = computedRect.origin.x + 5;
-					int y0 = computedRect.origin.y + (MA_Tab_Height - closeButtonSize.height) / 2;
+					int y0 = (computedRect.origin.y + (MA_Tab_Height - closeButtonSize.height) / 2);
 					[theTab setCloseButtonRect:NSMakeRect(x0, y0, closeButtonSize.width, closeButtonSize.height)];
 				}
 			}
@@ -509,9 +509,23 @@ static const int MA_Left_Margin_Width = 10;
 	}
 }
 
+/* otherMouseDown
+ * Third mouse button click in a tab closes that tab.
+ */
+-(void)otherMouseDown:(NSEvent *)theEvent
+{
+	if (trackingTab != nil && [theEvent buttonNumber] == 2)
+	{
+		[self closeTab:trackingTab];
+		trackingTab = nil;
+		return;
+	}
+}
+
 /* mouseUp
  * Handle the event arising from the mouse up in a tab area. Look to
  * see if the cursor is in the close button and, if so, close the tab.
+ * Hold down both Cmd and Alt to close all tabs.
  */
 -(void)mouseUp:(NSEvent *)theEvent
 {
@@ -520,7 +534,10 @@ static const int MA_Left_Margin_Width = 10;
 		NSPoint mousePosition = [self convertPoint:[theEvent locationInWindow] fromView:[[NSApp mainWindow] contentView]];
 		if (NSPointInRect(mousePosition, [trackingTab closeButtonRect]))
 		{
-			[self closeTab:trackingTab];
+			if (([theEvent modifierFlags] & (NSAlternateKeyMask|NSCommandKeyMask)) == (NSAlternateKeyMask|NSCommandKeyMask))
+				[self closeAllTabs];
+			else
+				[self closeTab:trackingTab];
 			trackingTab = nil;
 		}
 	}
@@ -669,7 +686,9 @@ static const int MA_Left_Margin_Width = 10;
 		if (trackingTab == theTab)
 			trackingTab = nil;
 		[self updateTrackingRectangles];
-		[self makeTabActive:[allTabs objectAtIndex:--index]];
+		if (index == [allTabs count])
+			--index;
+		[self makeTabActive:[allTabs objectAtIndex:index]];
 		[theTab release];
 	}
 }

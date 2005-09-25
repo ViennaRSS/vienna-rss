@@ -20,7 +20,6 @@
 
 #import "AppController.h"
 #import "PreferenceController.h"
-#import "AboutController.h"
 #import "FoldersTree.h"
 #import "ArticleListView.h"
 #import "Import.h"
@@ -633,14 +632,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	[mainWindow makeKeyAndOrderFront:self];
 }
 
-/* closeMainWindow
- * Hide the main window.
- */
--(IBAction)closeMainWindow:(id)sender
-{
-	[mainWindow orderOut:self];
-}
-
 /* runAppleScript
  * Run an AppleScript script given a fully qualified path to the script.
  */
@@ -929,9 +920,11 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(IBAction)handleAbout:(id)sender
 {
-	if (!aboutController)
-		aboutController = [[AboutController alloc] init];
-	[aboutController showWindow:self];
+	NSDictionary * fileAttributes = fileAttributes = [[NSBundle mainBundle] infoDictionary];
+	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
+	NSString * versionString = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version];
+	NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:versionString, @"ApplicationVersion", @"", @"Version", nil, nil];
+	[NSApp orderFrontStandardAboutPanelWithOptions:d];
 }
 
 /* emptyTrash
@@ -2050,10 +2043,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	else if (theAction == @selector(emptyTrash:))
 	{
 		return ![db readOnly];
-	}
-	else if (theAction == @selector(closeMainWindow:))
-	{
-		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(readingPaneOnRight:))
 	{

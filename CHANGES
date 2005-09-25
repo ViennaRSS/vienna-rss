@@ -6,6 +6,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2009
+----------
+- Small collection of UI cleanup:
+  - Cmd+W closes Preferences window if it is open, rather than the main window.
+  - The "About Vienna" window can now be closed with Esc or Cmd+W.
+  - Reduced height of tabs slightly.
+  - Holding down Cmd+Alt keys while clicking tab close button closes all tabs.
+  - Fixed close tab behaviour properly this time.
+
 2.0.0.2008 (BETA 2)
 -------------------
 - Added final Swedish localisation changes for beta 2.
