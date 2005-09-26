@@ -30,9 +30,6 @@
 // Singleton
 static RefreshManager * _refreshManager = nil;
 
-// Non-class function used for sorting
-static int articleDateSortHandler(Article * item1, Article * item2, void * context);
-
 // Refresh types
 typedef enum {
 	MA_Refresh_NilType = -1,
@@ -578,15 +575,11 @@ typedef enum {
 				newLastUpdate = articleDate;
 			}
 		}
-		
-		// Now sort the article array before we insert into the
-		// database so we're always inserting oldest first. The RSS feed is
-		// likely to give us newest first.
-		NSArray * sortedArrayOfArticles = [articleArray sortedArrayUsingFunction:articleDateSortHandler context:self];
-		NSEnumerator * articleEnumerator = [sortedArrayOfArticles objectEnumerator];
+
+		// Here's where we add the articles to the database
+		NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
 		Article * article;
 		
-		// Here's where we add the articles to the database
 		while ((article = [articleEnumerator nextObject]) != nil)
 		{
 			[db createArticle:[article folderId] article:article];
@@ -652,14 +645,6 @@ typedef enum {
 		countOfNewArticles += newArticlesFromFeed;
 	}
 	[self removeConnection:connector];
-}
-
-/* articleDateSortHandler
- * Compares two articles and returns their chronological order
- */
-static int articleDateSortHandler(Article * item1, Article * item2, void * context)
-{
-	return [[item1 date] compare:[item2 date]];
 }
 
 /* folderIconRefreshCompleted

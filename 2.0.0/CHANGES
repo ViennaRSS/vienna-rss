@@ -14,6 +14,9 @@ Thanks!
   - Reduced height of tabs slightly.
   - Holding down Cmd+Alt keys while clicking tab close button closes all tabs.
   - Fixed close tab behaviour properly this time.
+- Handle RDF:Sequence parsing for feeds such as http://www.kongisking.net. This ensures that
+  feeds are properly organised by date in the absence of any date in the feed.
+- Smart folder dates fields are now fixed strings representing a time range rather than an actual date.
 
 2.0.0.2008 (BETA 2)
 -------------------

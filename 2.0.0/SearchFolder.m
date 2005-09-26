@@ -141,7 +141,7 @@
 				}
 
 				case MA_FieldType_Date: {
-					[dateValueField setStringValue:[criteria value]];
+					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:[criteria value]]];
 					break;
 				}
 			}
@@ -163,7 +163,7 @@
 	// Clean up from any last run.
 	if (totalCriteria > 0)
 		[self removeAllCriteria];
-	
+
 	// Initialize UI
 	if (!searchWindow)
 	{
@@ -197,6 +197,12 @@
 		[flagValueField removeAllItems];
 		[flagValueField addItemWithRepresentedObject:NSLocalizedString(@"Yes", nil) object:@"Yes"];
 		[flagValueField addItemWithRepresentedObject:NSLocalizedString(@"No", nil) object:@"No"];
+
+		// Set date popup values
+		[dateValueField removeAllItems];
+		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Today", nil) object:@"today"];
+		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Yesterday", nil) object:@"yesterday"];
+		[dateValueField addItemWithRepresentedObject:NSLocalizedString(@"Last Week", nil) object:@"last week"];
 
 		// Initialise the condition popup
 		NSString * anyString = NSLocalizedString([CriteriaTree conditionToString:MA_CritCondition_Any], nil);
@@ -434,8 +440,8 @@
 		}
 		else if ([field type] == MA_FieldType_Date)
 		{
-			NSTextField * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
-			valueString = [theValue stringValue];
+			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
+			valueString = [theValue representedObjectForSelection];
 		}
 		else if ([field type] == MA_FieldType_Folder)
 		{

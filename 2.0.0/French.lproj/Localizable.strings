@@ -46,7 +46,7 @@
 "Noon" = "Midi";
 "Midnight" = "Minuit";
 "Today" = "Aujourd'hui";
-"Yesterday" = "Yier";
+"Yesterday" = "Hier";
 "Tomorrow" = "Demain";
 "%@ at %@" = "%@ à %@";
 "Delete" = "Supprimer";
