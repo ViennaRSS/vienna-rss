@@ -364,7 +364,13 @@
 	{
 		XMLParser * subTree = [seqTree treeByIndex:index];
 		if ([[subTree nodeName] isEqualToString:@"rdf:li"])
-			[orderArray addObject:[subTree valueOfAttribute:@"rdf:resource"]];
+		{
+			NSString * resourceString = [subTree valueOfAttribute:@"rdf:resource"];
+			if (resourceString == nil)
+				resourceString = [subTree valueOfAttribute:@"resource"];
+			if (resourceString != nil)
+				[orderArray addObject:resourceString];
+		}
 	}
 }
 

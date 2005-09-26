@@ -486,7 +486,12 @@ static NSMutableDictionary * entityMap = nil;
 
 	// Parse off numeric codes of the format #xxx
 	if ([entityString length] > 1 && [entityString characterAtIndex:0] == '#')
+	{
+		if ([entityString characterAtIndex:1] == 'x')
+			return [NSString stringWithFormat:@"%C", [[entityString substringFromIndex:2] hexValue]];
+
 		return [NSString stringWithFormat:@"%C", [[entityString substringFromIndex:1] intValue]];
+	}
 	
 	NSString * mappedString = [entityMap objectForKey:entityString];
 	return mappedString ? mappedString : [NSString stringWithFormat:@"&%@;", entityString];

@@ -33,5 +33,6 @@
 	-(NSString *)convertStringToValidPath;
 	-(NSString *)baseURL;
 	-(NSString *)trim;
+	-(int)hexValue;
 	-(BOOL)isBlank;
 @end
