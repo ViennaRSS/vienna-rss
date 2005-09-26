@@ -34,7 +34,7 @@
 	IBOutlet NSPopUpButton * operatorPopup;
 	IBOutlet NSPopUpButton * criteriaConditionPopup;
 	IBOutlet NSTextField * valueField;
-	IBOutlet NSTextField * dateValueField;
+	IBOutlet NSPopUpButton * dateValueField;
 	IBOutlet NSTextField * numberValueField;
 	IBOutlet NSPopUpButton * flagValueField;
 	IBOutlet NSPopUpButton * folderValueField;

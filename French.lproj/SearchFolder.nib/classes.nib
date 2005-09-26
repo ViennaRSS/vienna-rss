@@ -15,7 +15,7 @@
                 addCriteriaButton = NSButton; 
                 cancelButton = NSButton; 
                 criteriaConditionPopup = NSPopUpButton; 
-                dateValueField = NSTextField; 
+                dateValueField = NSPopUpButton; 
                 fieldNamePopup = NSPopUpButton; 
                 flagValueField = NSPopUpButton; 
                 folderValueField = NSPopUpButton; 

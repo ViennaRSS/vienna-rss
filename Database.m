@@ -1583,16 +1583,34 @@ static Database * _sharedDatabase = nil;
 				
 			case MA_FieldType_Date: {
 				NSCalendarDate * startDate;
+				NSString * criteriaValue = [[criteria value] lowercaseString];
+				int spanOfDays = 1;
 
 				// "today" is a short hand way of specifying the current date.
-				if ([[[criteria value] lowercaseString] isEqualToString:@"today"])
+				if ([criteriaValue isEqualToString:@"today"])
 				{
 					NSCalendarDate * now = [NSCalendarDate date];
-					NSString * todayString = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
-					startDate = [NSCalendarDate dateWithString:todayString calendarFormat:@"%d/%m/%Y"];
+					criteriaValue = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
+					spanOfDays = 1;
 				}
-				else
-					startDate = [NSCalendarDate dateWithString:[criteria value] calendarFormat:@"%d/%m/%y"];
+
+				// "yesterday" is a short hand way of specifying the previous day.
+				if ([criteriaValue isEqualToString:@"yesterday"])
+				{
+					NSCalendarDate * now = [[NSCalendarDate date] dateByAddingYears:0 months:0 days:-1 hours:0 minutes:0 seconds:0];
+					criteriaValue = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
+					spanOfDays = 1;
+				}
+
+				// "last week" is a short hand way of specifying a range from 7 days ago to today.
+				if ([criteriaValue isEqualToString:@"last week"])
+				{
+					NSCalendarDate * now = [[NSCalendarDate date] dateByAddingYears:0 months:0 days:-6 hours:0 minutes:0 seconds:0];
+					criteriaValue = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
+					spanOfDays = 7;
+				}
+				
+				startDate = [NSCalendarDate dateWithString:criteriaValue calendarFormat:@"%d/%m/%Y"];
 				if ([criteria operator] != MA_CritOper_Is)
 					valueString = [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]];
 				else
@@ -1601,7 +1619,7 @@ static Database * _sharedDatabase = nil;
 
 					// Special case for Date is <date> because the resolution of the date field is in
 					// milliseconds. So we need to translate this to a range for this to make sense.
-					endDate = [startDate dateByAddingYears:0 months:0 days:1 hours:0 minutes:0 seconds:0];
+					endDate = [startDate dateByAddingYears:0 months:0 days:spanOfDays hours:0 minutes:0 seconds:0];
 					operatorString = [NSString stringWithFormat:@">=%f and %@<%f", [startDate timeIntervalSince1970], [field sqlField], [endDate timeIntervalSince1970]];
 					valueString = @"";
 				}

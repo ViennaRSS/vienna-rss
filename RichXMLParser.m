@@ -20,6 +20,7 @@
 #import "RichXMLParser.h"
 #import <CoreFoundation/CoreFoundation.h>
 #import "StringExtensions.h"
+#import "ArrayExtensions.h"
 
 @interface FeedItem (Private)
 	-(void)setTitle:(NSString *)newTitle;
@@ -37,6 +38,7 @@
 	-(BOOL)initRSSFeedHeader:(XMLParser *)feedTree;
 	-(BOOL)initRSSFeedItems:(XMLParser *)feedTree;
 	-(BOOL)initAtomFeed:(XMLParser *)feedTree;
+	-(void)parseSequence:(XMLParser *)seqTree;
 	-(void)setTitle:(NSString *)newTitle;
 	-(void)setLink:(NSString *)newLink;
 	-(void)setDescription:(NSString *)newDescription;
@@ -201,6 +203,7 @@
 		lastModified = nil;
 		link = nil;
 		items = nil;
+		orderArray = nil;
 	}
 	return self;
 }
@@ -297,6 +300,14 @@
 			continue;
 		}
 
+		// Parse items group which dictates the sequence of the articles.
+		if ([nodeName isEqualToString:@"items"])
+		{
+			XMLParser * seqTree = [subTree treeByName:@"rdf:Seq"];
+			if (seqTree != nil)
+				[self parseSequence:seqTree];
+		}
+
 		// Parse description
 		if ([nodeName isEqualToString:@"description"])
 		{
@@ -338,6 +349,25 @@
 	return success;
 }
 
+/* parseSequence
+ * Parses an RDF sequence and initialises orderArray with the appropriate sequence.
+ * The RSS parser will then use this to order the actual items appropriately.
+ */
+-(void)parseSequence:(XMLParser *)seqTree
+{
+	int count = [seqTree countOfChildren];
+	int index;
+
+	[orderArray release];
+	orderArray = [[NSMutableArray alloc] initWithCapacity:count];
+	for (index = 0; index < count; ++index)
+	{
+		XMLParser * subTree = [seqTree treeByIndex:index];
+		if ([[subTree nodeName] isEqualToString:@"rdf:li"])
+			[orderArray addObject:[subTree valueOfAttribute:@"rdf:resource"]];
+	}
+}
+
 /* initRSSFeedItems
  * Parse the items from an RSS feed
  */
@@ -352,7 +382,7 @@
 	// Iterate through the channel items
 	int count = [feedTree countOfChildren];
 	int index;
-	
+
 	for (index = 0; index < count; ++index)
 	{
 		XMLParser * subTree = [feedTree treeByIndex:index];
@@ -368,7 +398,9 @@
 			BOOL hasGUID = NO;
 			int itemIndex;
 
-			[newItem setDate:[self lastModified]];
+			// Check for rdf:about so we can identify this item in the orderArray.
+			NSString * itemIdentifier = [subTree valueOfAttribute:@"rdf:about"];
+
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
 				XMLParser * subItemTree = [subTree treeByIndex:itemIndex];
@@ -450,9 +482,28 @@
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
-			[items addObject:newItem];
+
+			// Add this item in the proper location in the array
+			int indexOfItem = itemIdentifier ? [orderArray indexOfStringInArray:itemIdentifier] : -1;
+			if (indexOfItem == -1)
+				indexOfItem = [items count];
+			[items insertObject:newItem atIndex:indexOfItem];
 			[newItem release];
 		}
+	}
+
+	// Now scan the array and set the article date if it is missing. We'll use the
+	// last modified date of the feed and set each article to be 1 second older than the
+	// previous one. So the array is effectively newest first.
+	NSDate * itemDate = [self lastModified];
+	if (itemDate == nil)
+		itemDate = [NSDate date];
+	for (index = 0; index < [items count]; ++index)
+	{
+		FeedItem * anItem = [items objectAtIndex:index];
+		if ([anItem date] == nil)
+			[anItem setDate:itemDate];
+		itemDate = [itemDate addTimeInterval:-1.0];
 	}
 	return success;
 }
@@ -707,6 +758,7 @@
  */
 -(void)dealloc
 {
+	[orderArray release];
 	[title release];
 	[description release];
 	[lastModified release];
