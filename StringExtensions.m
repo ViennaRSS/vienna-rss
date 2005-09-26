@@ -35,6 +35,31 @@
 
 @implementation NSString (StringExtensions)
 
+/* hexValue
+ * A counterpart to intValue, but parses a hexadecimal number.
+ */
+-(int)hexValue
+{
+	int count = [self length];
+	int intValue = 0;
+	int index = 0;
+
+	while (index < count)
+	{
+		unichar ch = [self characterAtIndex:index];
+		if (ch >= '0' && ch <= '9')
+			intValue = (intValue * 16) + (ch - '0');
+		else if (ch >= 'A' && ch <= 'F')
+			intValue = (intValue * 16) + (ch - 'A' + 10);
+		else if (ch >= 'a' && ch <= 'f')
+			intValue = (intValue * 16) + (ch - 'a' + 10);
+		else
+			break;
+		++index;
+	}
+	return intValue;
+}
+
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */
