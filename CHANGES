@@ -6,17 +6,22 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-2.0.0.2009
+2.0.0.2010
 ----------
-- Small collection of UI cleanup:
-  - Cmd+W closes Preferences window if it is open, rather than the main window.
-  - The "About Vienna" window can now be closed with Esc or Cmd+W.
-  - Reduced height of tabs slightly.
-  - Holding down Cmd+Alt keys while clicking tab close button closes all tabs.
-  - Fixed close tab behaviour properly this time.
 - Handle RDF:Sequence parsing for feeds such as http://www.kongisking.net. This ensures that
   feeds are properly organised by date in the absence of any date in the feed.
 - Smart folder dates fields are now fixed strings representing a time range rather than an actual date.
+- Added Italian Localisation. (Thanks to Marcello Teodori).
+
+2.0.0.2009
+----------
+- Fixed potential database corruption bug introduced in build 2007 when refreshing a feed that
+  uses entity characters specified with hexadecimal notation.
+- Cmd+W closes Preferences window if it is open, rather than the main window.
+- The "About Vienna" window can now be closed with Esc or Cmd+W.
+- Reduced height of tabs slightly.
+- Holding down Cmd+Alt keys while clicking tab close button closes all tabs.
+- Fixed close tab behaviour properly this time.
 
 2.0.0.2008 (BETA 2)
 -------------------
