@@ -42,7 +42,7 @@
 @end
 
 // The current database version number
-const int MA_Min_Supported_DB_Version = 11;
+const int MA_Min_Supported_DB_Version = 12;
 const int MA_Current_DB_Version = 12;
 
 // There's just one database and we manage access to it through a
@@ -137,7 +137,7 @@ static Database * _sharedDatabase = nil;
 	mainThread = [NSThread currentThread];
 
 	// Handle upgrade here because we may want to create a new database
-	if (databaseVersion == MA_Min_Supported_DB_Version)
+	if (databaseVersion < MA_Current_DB_Version && databaseVersion >= MA_Min_Supported_DB_Version)
 	{
 		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
 		int option = NSRunAlertPanel(NSLocalizedString(@"Upgrade Title", nil),
@@ -161,7 +161,6 @@ static Database * _sharedDatabase = nil;
 		if (option == 1)
 			[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
 	}
-	
 	
 	// Create the tables when the database is empty.
 	if (databaseVersion == 0)
@@ -197,47 +196,6 @@ static Database * _sharedDatabase = nil;
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;
 		[self executeSQLWithFormat:@"insert into info (version) values (%d)", databaseVersion];
-	}
-
-	// Handle 'retyping' the message_id field when going from v11 to v12. This
-	// code should be ripped out after we're sure everybody is now on a v12 db.
-	if (databaseVersion == 11)
-	{
-		[self beginTransaction];
-
-		// Add the deleted_flag column to the articles table
-		[self executeSQL:@"alter table messages add column deleted_flag"];
-
-		// Retype the message_id field to change it to a string since it was originally an integer
-		// field in v11 and earlier.
-		SQLResult * results = [sqlDatabase performQuery:@"select message_id, folder_id from messages"];
-		if (results && [results rowCount])
-		{
-			NSEnumerator * enumerator = [results rowEnumerator];
-			SQLRow * row;
-
-			while ((row = [enumerator nextObject]))
-			{
-				int messageNumber = [[row stringForColumn:@"message_id"] intValue];
-				int folderId = [[row stringForColumn:@"folder_id"] intValue];
-
-				NSString * guid = [NSString stringWithFormat:@"%d", messageNumber];
-				NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-				[self executeSQLWithFormat:@"update messages set deleted_flag=0, message_id='%@' where message_id=%d and folder_id=%d",
-					preparedGuid,
-					messageNumber,
-					folderId];
-			}
-		}
-		[results release];
-
-		// Create the trash folder
-		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
-			NSLocalizedString(@"Trash", nil), MA_Trash_Folder];
-		
-		// Set the new version
-		[self setDatabaseVersion:MA_Current_DB_Version];
-		[self commitTransaction];
 	}
 
 	// Trap unsupported databases
@@ -1751,18 +1709,16 @@ static Database * _sharedDatabase = nil;
 
 		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
+
+		NSString * filterClause = @"";
 		if ([filterString isNotEqualTo:@""])
-		{
-			Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:filterString];
-			[tree addCriteria:clause];
-			[clause release];
-		}
+			filterClause = [NSString stringWithFormat:@" and text like '%%%@%%'", filterString];
 
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
 		// Time to run the query
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select * from messages where %@", [self criteriaToSQL:tree]];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select * from messages where %@%@", [self criteriaToSQL:tree], filterClause];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
