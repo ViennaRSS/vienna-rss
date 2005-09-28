@@ -108,11 +108,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 
-	// Create condensed view attribute dictionaries
-	selectionDict = [[NSMutableDictionary alloc] init];
-	topLineDict = [[NSMutableDictionary alloc] init];
-	bottomLineDict = [[NSMutableDictionary alloc] init];
-	
 	// Create a backtrack array
 	Preferences * prefs = [Preferences standardPreferences];
 	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
@@ -155,13 +150,18 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Set the reading pane orientation
 	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
 
+	// Create condensed view attribute dictionaries
+	selectionDict = [[NSMutableDictionary alloc] init];
+	topLineDict = [[NSMutableDictionary alloc] init];
+	bottomLineDict = [[NSMutableDictionary alloc] init];
+	
 	// Initialise the article list view
 	[self initTableView];
-	
+
 	// Select the default style
 	Preferences * prefs = [Preferences standardPreferences];
 	if (![self initForStyle:[prefs displayStyle]])
-		[prefs setDisplayStyle:@"Default"];
+		[self initForStyle:@"Default"];
 
 	// Restore the split bar position
 	[splitView2 loadLayoutWithName:@"SplitView2Positions"];
@@ -704,20 +704,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[htmlTemplate release];
 				[cssStylesheet release];
 				
-				NSMutableString * newTemplate = [NSMutableString stringWithCString:[fileData bytes] length:[fileData length]];
+				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
 				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
-
-				// Strip off redundant header that were present in old versions of the
-				// Vienna styles.
-				[newTemplate replaceString:@"<html>" withString:@""];
-				[newTemplate replaceString:@"<head>" withString:@""];
-				[newTemplate replaceString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\"$CSSFilePath$\" />" withString:@""];
-				[newTemplate replaceString:@"<title>$ArticleTitle$</title>" withString:@""];
-				[newTemplate replaceString:@"</head>" withString:@""];
-				[newTemplate replaceString:@"<body>" withString:@""];
-				[newTemplate replaceString:@"</body>" withString:@""];
-				[newTemplate replaceString:@"</html>" withString:@""];
-				htmlTemplate = [newTemplate retain];
 
 				if (!isAppInitialising)
 					[self refreshArticlePane];
