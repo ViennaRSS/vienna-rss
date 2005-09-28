@@ -24,11 +24,10 @@
 
 -(id)initWithFrame:(NSRect)frame
 {
-	self = [super initWithFrame:frame];
-	if (self)
+	if ((self = [super initWithFrame:frame]) != nil)
 	{
 		metalBg = [[NSImage imageNamed:@"metal_column_header.png"] retain];
-		attrs = [[[NSMutableDictionary dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]] mutableCopy] retain];
+		attrs = [[NSMutableDictionary dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]] mutableCopy];
 		[attrs setValue:[NSFont systemFontOfSize:10] forKey:@"NSFont"];
 		attributedStringValue = nil;
 	}
@@ -99,6 +98,7 @@
 {
 	[attributedStringValue release];
 	[metalBg release];
+	[attrs release];
 	[super dealloc];
 }
 @end
