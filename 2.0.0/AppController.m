@@ -210,8 +210,13 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(void)doSafeInitialisation
 {
-	[foldersTree initialiseFoldersTree];
-	[mainArticleView initialiseArticleView];
+	static BOOL doneSafeInit = NO;
+	if (!doneSafeInit)
+	{
+		[foldersTree initialiseFoldersTree];
+		[mainArticleView initialiseArticleView];
+		doneSafeInit = YES;
+	}
 }
 
 /* applicationDidFinishLaunching
