@@ -56,6 +56,10 @@ extern int MA_Default_RefreshThreads;
 extern float MA_Default_Read_Interval;
 extern int MA_Default_MinimumFontSize;
 
+extern NSString * MA_PBoardType_RSSItem;
+extern NSString * MA_PBoardType_FolderList;
+extern NSString * MA_PBoardType_RSSSource;
+
 // Layout styles
 #define MA_Table_Layout			0
 #define MA_Condensed_Layout		1

@@ -55,7 +55,7 @@
 	
 	// Create the new folder in the database
 	Database * db = [Database sharedDatabase];
-	[db addFolder:parentId folderName:folderNameString type:MA_Group_Folder mustBeUnique:YES];
+	[db addFolder:parentId folderName:folderNameString type:MA_Group_Folder canAppendIndex:NO];
 
 	// Close the window
 	[NSApp endSheet:newGroupFolderWindow];

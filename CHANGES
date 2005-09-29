@@ -12,6 +12,11 @@ Thanks!
   feeds are properly organised by date in the absence of any date in the feed.
 - Smart folder dates fields are now fixed strings representing a time range rather than an actual date.
 - Added Italian Localisation. (Thanks to Marcello Teodori).
+- Pre-build 2005 format databases no longer upgraded.
+- Removed old format display style conversion code. Styles on the web site have been updated.
+- Fixed bug where smart folder criteria was unintentionally extended when doing a filtered search.
+- Changed a couple of default preferences. We no longer check for new articles on startup and the
+  default layout is now to have the article pane at the bottom.
 
 2.0.0.2009
 ----------

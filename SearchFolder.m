@@ -212,11 +212,6 @@
 		[criteriaConditionPopup addItemWithTag:anyString tag:MA_CritCondition_Any];
 		[criteriaConditionPopup addItemWithTag:allString tag:MA_CritCondition_All];
 
-		// Initialise the folder control with a list of all folders
-		// in the database.
-		[folderValueField removeAllItems];
-		[self initFolderValueField:MA_Root_Folder atIndent:0];
-			
 		// Set the tags on the controls
 		[fieldNamePopup setTag:MA_SFEdit_FieldTag];
 		[operatorPopup setTag:MA_SFEdit_OperatorTag];
@@ -229,6 +224,11 @@
 		[addCriteriaButton setTag:MA_SFEdit_AddTag];
 	}
 
+	// Initialise the folder control with a list of all folders
+	// in the database.
+	[folderValueField removeAllItems];
+	[self initFolderValueField:MA_Root_Folder atIndent:0];
+	
 	// Init the folder name field and disable the Save button if it is blank
 	[searchFolderName setStringValue:folderName];
 	[saveButton setEnabled:![folderName isBlank]];
@@ -418,8 +418,23 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderName = [searchFolderName stringValue];
+	NSString * folderName = [[searchFolderName stringValue] trim];
+	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	unsigned int c;
+
+	// Get the folder name then either create a new smart folder entry in the database
+	// or update the one we're editing.
+	Folder * folder = [db folderFromName:folderName];
+	if (folder != nil && [folder itemId] != searchFolderId)
+	{
+		if (NSRunAlertPanel([NSString stringWithFormat:NSLocalizedString(@"Replace smart folder title", nil), folderName],
+							NSLocalizedString(@"Replace smart folder text", nil),
+							NSLocalizedString(@"Cancel", nil),
+							NSLocalizedString(@"Replace", nil),
+							nil) == 1)
+			return;
+		searchFolderId = [folder itemId];
+	}
 
 	// Build the criteria string
 	CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
@@ -463,14 +478,9 @@
 		[criteriaTree addCriteria:newCriteria];
 		[newCriteria release];
 	}
-	
+
 	// Set the criteria condition
 	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
-
-	// Get the folder name then either create a new smart folder entry in the database
-	// or update the one we're editing.
-	folderName = [folderName trim];
-	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	if (searchFolderId == -1)
 	{
 		searchFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];

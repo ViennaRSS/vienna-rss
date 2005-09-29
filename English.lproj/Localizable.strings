@@ -169,3 +169,6 @@
 "More Scripts..." = "More Scripts...";
 "Install Update" = "Install Update";
 "Do Not Install" = "Do Not Install";
+"Replace smart folder title" = "A smart folder named %@ already exists";
+"Replace smart folder text" = "Do you want to replace the existing smart folder with the criteria you have defined here?";
+"Replace" = "Replace";

@@ -48,10 +48,6 @@
 	-(void)moveFolders:(NSArray *)array;
 @end
 
-// Pasteboard types for drag and drop.
-NSString * MA_FolderDrag_PBoardType = @"ViennaFolderType";
-NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
-
 @implementation FoldersTree
 
 /* initWithFrame
@@ -134,7 +130,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	[folderMenu release];
 
 	// Register for dragging
-	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
+	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];
 }
 
@@ -714,11 +710,15 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 -(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index
 {
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
-	NSDragOperation dragType = (type == MA_FolderDrag_PBoardType) ? NSDragOperationMove : NSDragOperationCopy;
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, nil]]; 
+	NSDragOperation dragType = (type == MA_PBoardType_FolderList) ? NSDragOperationMove : NSDragOperationCopy;
 
 	TreeNode * node = (TreeNode *)item;
 	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
+
+	// Can't drop anything onto the trash folders.
+	if (isOnDropTypeProposal && node != nil && IsTrashFolder([node folder]))
+		return NSDragOperationNone; 
 
 	// Can't drop anything on smart folders.
 	if (isOnDropTypeProposal && node != nil && IsSmartFolder([node folder]))
@@ -756,15 +756,21 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	int index;
 
 	// We'll create two types of data on the clipboard.
-	[pboard declareTypes:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, NSStringPboardType, nil] owner:self]; 
+	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, NSStringPboardType, nil] owner:self]; 
 
 	// Create an array of NSNumber objects containing the selected folder IDs.
+	int countOfItems = 0;
 	for (index = 0; index < count; ++index)
 	{
 		TreeNode * node = [items objectAtIndex:index];
-		[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
-
 		Folder * folder = [node folder];
+
+		if (IsRSSFolder(folder) || IsSmartFolder(folder))
+		{
+			[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
+			++countOfItems;
+		}
+
 		if (IsRSSFolder(folder))
 		{
 			NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
@@ -781,10 +787,10 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	}
 
 	// Copy the data to the pasteboard 
-	[pboard setPropertyList:externalDragData forType:RSSSourceType];
+	[pboard setPropertyList:externalDragData forType:MA_PBoardType_RSSSource];
 	[pboard setString:stringDragData forType:NSStringPboardType];
-	[pboard setPropertyList:internalDragData forType:MA_FolderDrag_PBoardType]; 
-	return YES; 
+	[pboard setPropertyList:internalDragData forType:MA_PBoardType_FolderList]; 
+	return countOfItems > 0; 
 }
 
 /* moveFoldersUndo
@@ -879,7 +885,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 -(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)childIndex
 { 
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_FolderDrag_PBoardType, RSSSourceType, nil]]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, nil]]; 
 
 	// Get index of folder at drop location. If this is a group folder then
 	// it gets used as the parent
@@ -895,7 +901,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 	int parentID = (IsGroupFolder([node folder])) ? [[node folder] itemId] : [[node folder] parentId];
 
 	// Check the type 
-	if (type == MA_FolderDrag_PBoardType)
+	if (type == MA_PBoardType_FolderList)
 	{
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
@@ -916,7 +922,7 @@ NSString * RSSSourceType = @"CorePasteboardFlavorType 0x52535373";
 		[array release];
 		return YES;
 	}
-	if (type == RSSSourceType)
+	if (type == MA_PBoardType_RSSSource)
 	{
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
