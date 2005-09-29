@@ -85,7 +85,7 @@
 			// the sub-group items under the parent.
 			if (feedTitle != nil)
 			{
-				int folderId = [db addFolder:parentId folderName:feedTitle type:MA_Group_Folder mustBeUnique:YES];
+				int folderId = [db addFolder:parentId folderName:feedTitle type:MA_Group_Folder canAppendIndex:NO];
 				if (folderId == -1)
 					folderId = MA_Root_Folder;
 				countImported += [self importSubscriptionGroup:outlineItem underParent:folderId];

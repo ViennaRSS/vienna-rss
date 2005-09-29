@@ -66,7 +66,7 @@
 -(Folder *)folderFromID:(int)wantedId;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromName:(NSString *)wantedName;
--(int)addFolder:(int)conferenceId folderName:(NSString *)name type:(int)type mustBeUnique:(BOOL)mustBeUnique;
+-(int)addFolder:(int)conferenceId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(int)folderId;
 -(BOOL)setFolderName:(int)folderId newName:(NSString *)newName;
 -(BOOL)setFolderDescription:(int)folderId newDescription:(NSString *)newDescription;

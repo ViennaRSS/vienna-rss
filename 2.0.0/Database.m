@@ -433,13 +433,11 @@ static Database * _sharedDatabase = nil;
 }
 
 /* addRSSFolder
- * Add an RSS Feed folder and return the ID of the new folder. One distinction is that
- * RSS folder names need not be unique within the parent
+ * Add an RSS Feed folder and return the ID of the new folder.
  */
 -(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId subscriptionURL:(NSString *)url
 {
-	// Add the feed URL to the RSS feed table
-	int folderId = [self addFolder:parentId folderName:feedName type:MA_RSS_Folder mustBeUnique:NO];
+	int folderId = [self addFolder:parentId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
 	if (folderId != -1)
 	{
 		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
@@ -464,11 +462,10 @@ static Database * _sharedDatabase = nil;
 
 /* addFolder
  * Create a new folder under the specified parent and give it the requested name and type. If
- * mustBeUnique is YES then we check to ensure that the folder name hasn't already been used. If
- * it has then we simply return the ID of the existing folder without changing its type. If we
- * hit an error, the function returns -1.
+ * canAppendIndex is YES then we adjust the name to ensure that the folder name remains unique. If
+ * we hit an error, the function returns -1.
  */
--(int)addFolder:(int)parentId folderName:(NSString *)name type:(int)type mustBeUnique:(BOOL)mustBeUnique
+-(int)addFolder:(int)parentId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex
 {
 	Folder * folder = nil;
 
@@ -479,13 +476,21 @@ static Database * _sharedDatabase = nil;
 	if (readOnly)
 		return -1;
 
-	// If the folder must be unique then check for its
-	// existence by name and if found, return its existing ID.
-	if (mustBeUnique)
+	if (!canAppendIndex)
 	{
 		folder = [self folderFromName:name];
 		if (folder)
 			return [folder itemId];
+	}
+	else
+	{
+		// If a folder of that name already exists then adjust the name by appending
+		// an index number to make it unique.
+		NSString * oldName = name;
+		unsigned int index = 1;
+
+		while (([self folderFromName:name]) != nil)
+			name = [NSString stringWithFormat:@"%@ (%i)", oldName, index++];
 	}
 
 	// Here we create the folder anew.
@@ -1147,7 +1152,7 @@ static Database * _sharedDatabase = nil;
 		return [folder itemId];
 	}
 
-	int folderId = [self addFolder:parentId folderName:folderName type:MA_Smart_Folder mustBeUnique:YES];
+	int folderId = [self addFolder:parentId folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId == -1)
 		success = NO;
 	else
@@ -1637,7 +1642,7 @@ static Database * _sharedDatabase = nil;
 		[self initSmartFoldersArray];
 		return [smartFoldersArray objectForKey:[NSNumber numberWithInt:folderId]];
 	}
-	
+
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
 	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder withOperator:MA_CritOper_Under withValue:[folder name]];
 	[tree addCriteria:clause];

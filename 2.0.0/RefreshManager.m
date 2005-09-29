@@ -590,18 +590,17 @@ typedef enum {
 		// A notify is only needed if we added any new articles.
 		BOOL needNotify = (newArticlesFromFeed > 0);
 		
-		// Set the last update date for this folder to be the date of the most
-		// recent article we retrieved.
 		int folderId = [folder itemId];
 		if ([[folder name] isEqualToString:[db untitledFeedFolderName]])
 		{
 			// If there's an existing feed with this title, make ours unique
+			// BUGBUG: This duplicates logic in database.m so consider moving it there.
 			NSString * oldFeedTitle = feedTitle;
 			unsigned int index = 1;
 
 			while (([db folderFromName:feedTitle]) != nil)
 				feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
-			
+
 			[[connector aItem] setName:feedTitle];
 			if ([db setFolderName:folderId newName:feedTitle])
 				needNotify = NO;
@@ -616,6 +615,9 @@ typedef enum {
 			if ([db setFolderHomePage:folderId newHomePage:feedLink])
 				needNotify = NO;
 		}
+
+		// Set the last update date for this folder to be the date of the most
+		// recent article we retrieved.
 		if (newLastUpdate != nil)
 			[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
 		[db flushFolder:folderId];

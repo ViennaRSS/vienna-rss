@@ -69,9 +69,6 @@
 // Non-class function used for sorting
 static int articleSortHandler(id item1, id item2, void * context);
 
-// Static constant strings that are typically never tweaked
-static NSString * RSSItemType = @"CorePasteboardFlavorType 0x52535369";
-
 static const int MA_Minimum_ArticleList_Pane_Width = 80;
 static const int MA_Minimum_Article_Pane_Width = 80;
 
@@ -413,7 +410,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(IBAction)doubleClickRow:(id)sender
 {
-	if (currentSelectedRow != -1)
+	if (currentSelectedRow != -1 && [articleList clickedRow] != -1)
 	{
 		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
 		[controller openURLInBrowser:[theArticle link]];
@@ -1218,6 +1215,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)refreshArticlePane
 {
 	NSArray * msgArray = [[self markedArticleRange] autorelease];
+	int folderIdToUse = currentFolderId;
 	int index;
 
 	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""];
@@ -1228,6 +1226,10 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	{
 		Article * theArticle = [msgArray objectAtIndex:index];
 		Folder * folder = [db folderFromID:[theArticle folderId]];
+
+		// Use the first article as the base URL
+		if (index == 0)
+			folderIdToUse = [theArticle folderId];
 
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
@@ -1259,9 +1261,11 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 	// Here we ask the webview to do all the hard work. There's an idiosyncracy in loadHTMLString:baseURL: that it
 	// requires a URL to an actual file as the second parameter or it won't work.
+	// BUGBUG: If you select multiple articles that come from different folders and each one has relative links
+	//  to a different feed base, then only the first article's links will be fixed up correctly by Webkit.
 	[htmlText appendString:@"</body></html>"];
 
-	Folder * folder = [db folderFromID:currentFolderId];
+	Folder * folder = [db folderFromID:folderIdToUse];
 	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
 	[[articleText mainFrame] loadHTMLString:htmlText baseURL:[NSURL URLWithString:urlString]];
 	[htmlText release];
@@ -1418,7 +1422,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	int index;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:[NSArray arrayWithObjects:RSSItemType, NSStringPboardType, NSHTMLPboardType, nil] owner:self];
+	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, NSStringPboardType, NSHTMLPboardType, nil] owner:self];
 	
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];
@@ -1432,7 +1436,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		NSString * msgText = [thisArticle body];
 		NSString * msgTitle = [thisArticle title];
 		NSString * msgLink = [thisArticle link];
-		
+
 		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
 		[articleDict setValue:msgLink forKey:@"rssItemLink"];
@@ -1442,7 +1446,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
 		[articleDict release];
-		
+
 		// Plain text
 		[fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, msgText];
 		
@@ -1454,10 +1458,10 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[fullHTMLText appendString:@"</body></html>"];
 
 	// Put string on the pasteboard for external drops.
-	[pboard setPropertyList:arrayOfArticles forType:RSSItemType];
+	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
 	[pboard setString:fullPlainText forType:NSStringPboardType];
 	[pboard setString:[fullHTMLText stringByEscapingExtendedCharacters] forType:NSHTMLPboardType];
-	
+
 	[arrayOfArticles release];
 	[fullHTMLText release];
 	[fullPlainText release];

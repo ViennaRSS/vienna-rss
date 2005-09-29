@@ -55,3 +55,8 @@ const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
 const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
+
+// Custom pasteboard types
+NSString * MA_PBoardType_FolderList = @"ViennaFolderType";
+NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";
+NSString * MA_PBoardType_RSSItem = @"CorePasteboardFlavorType 0x52535369";

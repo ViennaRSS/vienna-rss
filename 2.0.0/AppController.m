@@ -1398,12 +1398,14 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
-	[mainArticleView selectFolderAndArticle:folderId guid:nil];
-
-	if (isAccessible(urlString))
+	if (folderId != -1)
 	{
-		Folder * folder = [db folderFromID:folderId];
-		[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+		[mainArticleView selectFolderAndArticle:folderId guid:nil];
+		if (isAccessible(urlString))
+		{
+			Folder * folder = [db folderFromID:folderId];
+			[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+		}
 	}
 }
 

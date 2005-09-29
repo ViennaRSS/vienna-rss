@@ -324,7 +324,7 @@
 		AA3BDC9F063249FE004621CD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA3F7B4108711F6A00D2B96F /* comments_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = comments_header.tiff; sourceTree = "<group>"; };
 		AA4AB5E008971B28006C843E /* vienna2style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2style.icns; sourceTree = "<group>"; };
-		AA4B152708E8DC51008CA6D0 /* Italian */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA4B152708E8DC51008CA6D0 /* Italian */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA4B152808E8DC5C008CA6D0 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPane.h; sourceTree = "<group>"; };
 		AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
