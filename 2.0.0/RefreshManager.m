@@ -545,34 +545,27 @@ typedef enum {
 		while ((newsItem = [itemEnumerator nextObject]) != nil)
 		{
 			NSDate * articleDate = [newsItem date];
-
-			// If no dates anywhere then use the current date/time as the article date.
-			if (articleDate == nil)
-				articleDate = [NSCalendarDate date];
+			NSAssert(articleDate != nil, @"FeedItem should not have a nil date");
 			
-			NSString * articleBody = [newsItem description];
-			NSString * articleTitle = [newsItem title];
-			NSString * articleLink = [newsItem link];
-			NSString * userName = [newsItem author];
-			NSString * guid = [newsItem guid];
-
-			// Create the article
-			Article * article = [[Article alloc] initWithGuid:guid];
-			[article setFolderId:[folder itemId]];
-			[article setAuthor:userName];
-			[article setBody:articleBody];
-			[article setTitle:articleTitle];
-			[article setLink:articleLink];
-			[article setDate:articleDate];
-			[articleArray addObject:article];
-			[article release];
-
-			// Track most recent article
-			if ([articleDate isGreaterThan:newLastUpdate])
+			if ([articleDate compare:lastUpdate] == NSOrderedDescending)
 			{
-				[articleDate retain];
-				[newLastUpdate release];
-				newLastUpdate = articleDate;
+				Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
+				[article setFolderId:[folder itemId]];
+				[article setAuthor:[newsItem author]];
+				[article setBody:[newsItem description]];
+				[article setTitle:[newsItem title]];
+				[article setLink:[newsItem link]];
+				[article setDate:articleDate];
+				[articleArray addObject:article];
+				[article release];
+
+				// Track most recent article
+				if ([articleDate isGreaterThan:newLastUpdate])
+				{
+					[articleDate retain];
+					[newLastUpdate release];
+					newLastUpdate = articleDate;
+				}
 			}
 		}
 
