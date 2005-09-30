@@ -48,14 +48,14 @@
 					<key>Type</key>
 					<string>NSDate</string>
 				</dict>
-				<key>folderId</key>
+				<key>containingFolder</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>arFL</string>
 					<key>ReadOnly</key>
 					<string>YES</string>
 					<key>Type</key>
-					<string>NSNumber</string>
+					<string>Folder</string>
 				</dict>
 				<key>guid</key>
 				<dict>

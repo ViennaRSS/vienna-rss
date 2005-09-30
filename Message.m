@@ -129,6 +129,13 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 
+/* containingFolder
+ */
+-(Folder *)containingFolder
+{
+	return [[Database sharedDatabase] folderFromID:[self folderId]];
+}
+
 /* body
  */
 -(NSString *)body
