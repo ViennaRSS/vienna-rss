@@ -54,6 +54,7 @@ extern NSString * MA_Field_Headlines;
 #define MA_FieldID_Headlines	411
 #define MA_FieldID_Deleted		412
 
+@class Folder;
 @interface Article : NSObject {
 	NSMutableDictionary * articleData;
 	NSMutableArray * commentsArray;
@@ -72,6 +73,7 @@ extern NSString * MA_Field_Headlines;
 -(NSString *)title;
 -(NSString *)link;
 -(NSDate *)date;
+-(Folder *)containingFolder;
 -(int)folderId;
 -(BOOL)isRead;
 -(BOOL)isFlagged;

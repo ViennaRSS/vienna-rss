@@ -29,12 +29,12 @@
 					<key>Name</key>
 					<string>date</string>
 				</dict>
-				<key>folderId</key>
+				<key>containingFolder</key>
 				<dict>
 					<key>Description</key>
-					<string>The ID of the folder to which this article belongs</string>
+					<string>The folder to which this article belongs</string>
 					<key>Name</key>
-					<string>folder ID</string>
+					<string>containing folder</string>
 				</dict>
 				<key>guid</key>
 				<dict>
