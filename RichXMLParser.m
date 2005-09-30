@@ -402,6 +402,7 @@
 			int itemCount = [subTree countOfChildren];
 			BOOL hasDetailedContent = NO;
 			BOOL hasGUID = NO;
+			BOOL hasLink = NO;
 			int itemIndex;
 
 			// Check for rdf:about so we can identify this item in the orderArray.
@@ -426,9 +427,14 @@
 					continue;
 				}
 				
-				// Parse GUID
+				// Parse GUID. The GUID may optionally have a permaLink attribute
+				// in which case this is also the article link unless overridden by
+				// an explicit link tag.
 				if ([itemNodeName isEqualToString:@"guid"])
 				{
+					NSString * permaLink = [subItemTree valueOfAttribute:@"isPermaLink"];
+					if (permaLink && [permaLink isEqualToString:@"true"] && !hasLink)
+						[newItem setLink:[subItemTree valueOfElement]];
 					[newItem setGuid:[subItemTree valueOfElement]];
 					hasGUID = YES;
 					continue;
@@ -470,6 +476,7 @@
 				{
 					NSString * linkName = [[subItemTree valueOfElement] trim];
 					[newItem setLink:linkName];
+					hasLink = YES;
 					continue;
 				}
 				
@@ -582,7 +589,6 @@
 			int itemIndex;
 			BOOL hasGUID = NO;
 
-			[newItem setDate:[self lastModified]];
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
 				XMLParser * subItemTree = [subTree treeByIndex:itemIndex];
@@ -636,7 +642,17 @@
 				if ([itemNodeName isEqualToString:@"modified"])
 				{
 					NSString * dateString = [subItemTree valueOfElement];
-					[newItem setDate:[XMLParser parseXMLDate:dateString]];
+					if ([newItem date] == nil)
+						[newItem setDate:[XMLParser parseXMLDate:dateString]];
+					continue;
+				}
+
+				// Parse item date
+				if ([itemNodeName isEqualToString:@"updated"])
+				{
+					NSString * dateString = [subItemTree valueOfElement];
+					if ([newItem date] == nil)
+						[newItem setDate:[XMLParser parseXMLDate:dateString]];
 					continue;
 				}
 			}
