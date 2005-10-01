@@ -218,7 +218,7 @@ static Database * _sharedDatabase = nil;
 	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
 	[self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:15];
 	[self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
-	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:YES width:15];
+	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
 	[self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
 	[self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
 	[self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
@@ -998,6 +998,34 @@ static Database * _sharedDatabase = nil;
 		return YES;
 	}
 	return NO;
+}
+
+/* purgeArticlesOlderThanDays
+ * Deletes all non-flagged articles from the messages list that are older than the specified
+ * number of days.
+ */
+-(void)purgeArticlesOlderThanDays:(int)daysToKeep
+{
+	if (daysToKeep > 0)
+	{
+		NSCalendarDate * todaysDate = [NSCalendarDate date];
+		int dayDelta = daysToKeep % 1000;
+		int monthDelta = (daysToKeep / 1000);
+
+		NSTimeInterval timeDiff = [[todaysDate dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
+		[self verifyThreadSafety];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where marked_flag=0 and date < %f", timeDiff];
+		if (results != nil)
+		{
+			// Flush all caches.
+			[[foldersArray allValues] makeObjectsPerformSelector:@selector(clearCache:)];
+
+			// A folder ID of zero means update all folders
+			NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+			[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:0]];
+		}
+		[results release];
+	}
 }
 
 /* purgeDeletedArticles

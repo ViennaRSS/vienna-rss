@@ -50,11 +50,13 @@ extern NSString * MAPref_OpenLinksInBackground;
 extern NSString * MAPref_ShowScriptsMenu;
 extern NSString * MAPref_MinimumFontSize;
 extern NSString * MAPref_UseMinimumFontSize;
+extern NSString * MAPref_AutoExpireDuration;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
 extern float MA_Default_Read_Interval;
 extern int MA_Default_MinimumFontSize;
+extern int MA_Default_AutoExpireFrequency;
 
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;

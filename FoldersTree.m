@@ -553,7 +553,10 @@
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-	[self updateFolder:folderId recurseToParents:YES];
+	if (folderId == 0)
+		[self reloadFolderItem:rootNode reloadChildren:YES];
+	else
+		[self updateFolder:folderId recurseToParents:YES];
 }
 
 /* handleFolderAdded
@@ -765,7 +768,7 @@
 		TreeNode * node = [items objectAtIndex:index];
 		Folder * folder = [node folder];
 
-		if (IsRSSFolder(folder) || IsSmartFolder(folder))
+		if (IsRSSFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder))
 		{
 			[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
 			++countOfItems;

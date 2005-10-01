@@ -99,7 +99,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(void)awakeFromNib
 {
 	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-	[Preferences standardPreferences];
+	Preferences * prefs = [Preferences standardPreferences];
 
 	// Find out who we are. The localised info in InfoStrings.plist allow
 	// changing the app name if so desired.
@@ -142,6 +142,9 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		return;
 	}
 
+	// Run the auto-expire now
+	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
+	
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
 	if (pathToPList != nil)
@@ -724,6 +727,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		// field object itself based on which columns we can sort on.
 		if ([field tag] != MA_FieldID_Parent &&
 			[field tag] != MA_FieldID_GUID &&
+			[field tag] != MA_FieldID_Comments &&
 			[field tag] != MA_FieldID_Deleted &&
 			[field tag] != MA_FieldID_Text)
 		{
@@ -753,6 +757,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		// field object based on which columns are visible in the tableview.
 		if ([field tag] != MA_FieldID_Text && 
 			[field tag] != MA_FieldID_GUID &&
+			[field tag] != MA_FieldID_Comments &&
 			[field tag] != MA_FieldID_Deleted &&
 			[field tag] != MA_FieldID_Parent &&
 			[field tag] != MA_FieldID_Headlines)
@@ -1080,7 +1085,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == [mainArticleView currentFolderId])
+	if (folderId == 0 || folderId == [mainArticleView currentFolderId])
 	{
 		[mainArticleView refreshFolder:YES];
 		[self updateSearchPlaceholder];

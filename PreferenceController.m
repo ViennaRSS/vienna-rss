@@ -102,6 +102,9 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	// Set check for new articles when starting
 	[checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
 	
+	// Set auto-expire duration
+	[expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:[prefs autoExpireDuration]]];
+
 	// Set minimum font size option
 	[enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
 	[minimumFontSizes setEnabled:[prefs enableMinimumFontSize]];
@@ -205,6 +208,16 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 	// Select the registered item
 	[linksHandler selectItemAtIndex:0];
+}
+
+/* changeExpireDuration
+ * Handle the change to the auto-expire duration.
+ */
+-(IBAction)changeExpireDuration:(id)sender
+{
+	NSMenuItem * selectedItem = [expireDuration selectedItem];
+	if (selectedItem != nil)
+		[[Preferences standardPreferences] setAutoExpireDuration:[selectedItem tag]];
 }
 
 /* changeOpenLinksInBackground

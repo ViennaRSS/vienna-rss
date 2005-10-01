@@ -6,6 +6,7 @@
                 changeCheckForUpdates = id; 
                 changeCheckFrequency = id; 
                 changeCheckOnStartUp = id; 
+                changeExpireDuration = id; 
                 changeFont = id; 
                 changeMarkReadBehaviour = id; 
                 changeMinimumFontSize = id; 
@@ -21,6 +22,7 @@
                 checkFrequency = NSPopUpButton; 
                 checkOnStartUp = NSButton; 
                 enableMinimumFontSize = NSButton; 
+                expireDuration = NSPopUpButton; 
                 folderFont = NSPopUpButton; 
                 folderFontSize = NSComboBox; 
                 linksHandler = NSPopUpButton; 

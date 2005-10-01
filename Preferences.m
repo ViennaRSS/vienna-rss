@@ -53,6 +53,7 @@ static Preferences * _standardPreferences = nil;
 		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
 		minimumFontSize = [defaults integerForKey:MAPref_MinimumFontSize];
 		enableMinimumFontSize = [defaults boolForKey:MAPref_UseMinimumFontSize];
+		autoExpireDuration = [defaults integerForKey:MAPref_AutoExpireDuration];
 		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		displayStyle = [[defaults stringForKey:MAPref_ActiveStyleName] retain];
@@ -115,6 +116,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireFrequency] forKey:MAPref_AutoExpireDuration];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
@@ -166,6 +168,29 @@ static Preferences * _standardPreferences = nil;
 		enableMinimumFontSize = flag;
 		[[NSUserDefaults standardUserDefaults] setBool:flag forKey:MAPref_UseMinimumFontSize];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
+	}
+}
+
+/* autoExpireDuration
+ * Returns the number of days worth of non-flagged articles to be preserved. Articles older than
+ * this are automatically deleted. A value of 0 means never expire.
+ */
+-(int)autoExpireDuration
+{
+	return autoExpireDuration;
+}
+
+/* setAutoExpireDuration
+ * Updates the number of days worth of non-flagged articles to be preserved. A zero value
+ * disables auto-expire. Increments of 1000 specify months so 1000 = 1 month, 1001 = 1 month
+ * and 1 day, etc.
+ */
+-(void)setAutoExpireDuration:(int)newDuration
+{
+	if (newDuration != autoExpireDuration)
+	{
+		autoExpireDuration = newDuration;
+		[[NSUserDefaults standardUserDefaults] setInteger:newDuration forKey:MAPref_AutoExpireDuration];
 	}
 }
 

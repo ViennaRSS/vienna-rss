@@ -28,6 +28,7 @@
 	IBOutlet NSComboBox * folderFontSize;
 	IBOutlet NSPopUpButton * checkFrequency;
 	IBOutlet NSPopUpButton * linksHandler;
+	IBOutlet NSPopUpButton * expireDuration;
 	IBOutlet NSButton * checkForUpdates;
 	IBOutlet NSButton * checkOnStartUp;
 	IBOutlet NSButton * openLinksInBackground;
@@ -51,6 +52,7 @@
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeMinimumFontSize:(id)sender;
 -(IBAction)selectMinimumFontSize:(id)sender;
+-(IBAction)changeExpireDuration:(id)sender;
 
 // General functions
 -(void)initializePreferences;
