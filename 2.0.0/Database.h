@@ -75,6 +75,7 @@
 -(BOOL)setFolderUsername:(int)folderId newUsername:(NSString *)name;
 -(void)flushFolder:(int)folderId;
 -(void)purgeDeletedArticles;
+-(void)purgeArticlesOlderThanDays:(int)daysToKeep;
 -(BOOL)markFolderRead:(int)folderId;
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;

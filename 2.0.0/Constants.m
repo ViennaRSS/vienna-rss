@@ -50,11 +50,13 @@ NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
 NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
 NSString * MAPref_MinimumFontSize = @"MinimumFontSize";
 NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
+NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
 const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
+const int MA_Default_AutoExpireFrequency = 0;
 
 // Custom pasteboard types
 NSString * MA_PBoardType_FolderList = @"ViennaFolderType";

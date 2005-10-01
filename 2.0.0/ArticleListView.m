@@ -141,22 +141,23 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)initialiseArticleView
 {
+	Preferences * prefs = [Preferences standardPreferences];
+
 	// Mark the start of the init phase
 	isAppInitialising = YES;
 	
-	// Set the reading pane orientation
-	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
-
 	// Create condensed view attribute dictionaries
 	selectionDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
 	bottomLineDict = [[NSMutableDictionary alloc] init];
 	
+	// Set the reading pane orientation
+	[self setOrientation:[prefs readingPaneOnRight]];
+	
 	// Initialise the article list view
 	[self initTableView];
 
 	// Select the default style
-	Preferences * prefs = [Preferences standardPreferences];
 	if (![self initForStyle:[prefs displayStyle]])
 		[self initForStyle:@"Default"];
 
@@ -474,8 +475,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		{
 			showField = [field tag] == MA_FieldID_Headlines ||
 			[field tag] == MA_FieldID_Read ||
-			[field tag] == MA_FieldID_Flagged ||
-			[field tag] == MA_FieldID_Comments;
+			[field tag] == MA_FieldID_Flagged;
 		}
 		
 		// Add to the end only those columns that are visible
@@ -485,7 +485,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			NSTableHeaderCell * headerCell = [newTableColumn headerCell];
 			int tag = [field tag];
 			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments);
-			
+
 			// Fix for bug where tableviews with alternating background rows lose their "colour".
 			// Only text cells are affected.
 			if ([[newTableColumn dataCell] isKindOfClass:[NSTextFieldCell class]])
@@ -514,7 +514,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Set the images for specific header columns
 	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
 	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
-	[articleList setHeaderImage:MA_Field_Comments imageName:@"comments_header.tiff"];
 	
 	// Initialise the sort direction
 	[self showSortDirection];	

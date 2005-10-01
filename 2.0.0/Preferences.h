@@ -24,6 +24,7 @@
 	float markReadInterval;
 	int minimumFontSize;
 	int refreshFrequency;
+	int autoExpireDuration;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
 	BOOL enableMinimumFontSize;
@@ -41,6 +42,10 @@
 
 // Read-only internal settings
 -(int)backTrackQueueSize;
+
+// Auto-expire values
+-(int)autoExpireDuration;
+-(void)setAutoExpireDuration:(int)newDuration;
 
 // Mark read interval
 -(float)markReadInterval;

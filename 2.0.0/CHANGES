@@ -8,6 +8,7 @@ Thanks!
 
 2.0.0.2010
 ----------
+- Added auto-expire support. Articles older than a given number of days can be automatically deleted.
 - Handle RDF:Sequence parsing for feeds such as http://www.kongisking.net. This ensures that
   feeds are properly organised by date in the absence of any date in the feed.
 - Smart folder dates fields are now fixed strings representing a time range rather than an actual date.
