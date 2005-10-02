@@ -143,7 +143,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	}
 
 	// Run the auto-expire now
-	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
+	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:NO];
 	
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];

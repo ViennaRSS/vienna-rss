@@ -69,6 +69,18 @@
 	[newItem release];
 }
 
+/* insertItemWithTag
+ * Inserts the specified menu item into the popup menu at the given index and assigns it
+ * an initial tag value.
+ */
+-(void)insertItemWithTag:(NSString *)title tag:(int)tag atIndex:(int)index
+{
+	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
+	[newItem setTag:tag];
+	[[self menu] insertItem:newItem atIndex:index];
+	[newItem release];
+}
+
 /* representedObjectForSelection
  * Returns the represented object associated with the selected item.
  */

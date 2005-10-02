@@ -630,6 +630,7 @@ typedef enum {
 		}
 		
 		// Done with this connection
+		[newLastUpdate release];
 		[newFeed release];
 
 		// If this folder also requires an image refresh, add that
