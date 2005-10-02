@@ -220,6 +220,7 @@
 	[items release];
 	title = nil;
 	description = nil;
+	lastModified = nil;
 	link = nil;
 	items = nil;
 }

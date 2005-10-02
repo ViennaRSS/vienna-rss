@@ -102,6 +102,14 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	// Set check for new articles when starting
 	[checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
 	
+	// Set range of auto-expire values
+	[expireDuration removeAllItems];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"Today", nil) tag:1 atIndex:0];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"Yesterday", nil) tag:1 atIndex:1];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"Last Week", nil) tag:7 atIndex:2];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"2 Weeks Ago", nil) tag:14 atIndex:3];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"A month", nil) tag:1000 atIndex:4];
+
 	// Set auto-expire duration
 	[expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:[prefs autoExpireDuration]]];
 

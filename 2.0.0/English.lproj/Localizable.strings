@@ -172,3 +172,7 @@
 "Replace smart folder title" = "A smart folder named %@ already exists";
 "Replace smart folder text" = "Do you want to replace the existing smart folder with the criteria you have defined here?";
 "Replace" = "Replace";
+"Never" = "Never";
+"Last Week" = "Last Week";
+"2 Weeks Ago" = "2 Weeks Ago";
+"A month" = "A month";

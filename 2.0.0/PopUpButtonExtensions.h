@@ -25,6 +25,7 @@
 	-(void)addItemWithTarget:(NSString *)title target:(SEL)target;
 	-(void)addItemWithTag:(NSString *)title tag:(int)tag;
 	-(void)addItemWithRepresentedObject:(NSString *)title object:(id)object;
+	-(void)insertItemWithTag:(NSString *)title tag:(int)tag atIndex:(int)index;
 	-(id)representedObjectForSelection;
 	-(int)tagForSelection;
 	-(void)addSeparator;

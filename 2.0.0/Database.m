@@ -1004,7 +1004,7 @@ static Database * _sharedDatabase = nil;
  * Deletes all non-flagged articles from the messages list that are older than the specified
  * number of days.
  */
--(void)purgeArticlesOlderThanDays:(int)daysToKeep
+-(void)purgeArticlesOlderThanDays:(int)daysToKeep sendNotification:(BOOL)notifyFlag
 {
 	if (daysToKeep > 0)
 	{
@@ -1021,8 +1021,11 @@ static Database * _sharedDatabase = nil;
 			[[foldersArray allValues] makeObjectsPerformSelector:@selector(clearCache:)];
 
 			// A folder ID of zero means update all folders
-			NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-			[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:0]];
+			if (notifyFlag)
+			{
+				NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+				[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:0]];
+			}
 		}
 		[results release];
 	}
