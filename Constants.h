@@ -56,7 +56,7 @@ extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
 extern float MA_Default_Read_Interval;
 extern int MA_Default_MinimumFontSize;
-extern int MA_Default_AutoExpireFrequency;
+extern int MA_Default_AutoExpireDuration;
 
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;

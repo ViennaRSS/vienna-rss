@@ -73,7 +73,6 @@
 		AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
 		AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
-		AA4B1E2C08EEFBBF008CA6D0 /* AutoExpireDurations.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA4B1E2B08EEFBBF008CA6D0 /* AutoExpireDurations.plist */; };
 		AA4F6617062B94D200D4837C /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACFDEBB0604D4D20072D140 /* AppController.m */; };
 		AA51CBF808CFEA0F00DD6535 /* BrowserPane.h in Headers */ = {isa = PBXBuildFile; fileRef = AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */; };
 		AA51CBF908CFEA0F00DD6535 /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */; };
@@ -327,7 +326,6 @@
 		AA4AB5E008971B28006C843E /* vienna2style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2style.icns; sourceTree = "<group>"; };
 		AA4B152708E8DC51008CA6D0 /* Italian */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 10; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA4B152808E8DC5C008CA6D0 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AA4B1E2B08EEFBBF008CA6D0 /* AutoExpireDurations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = AutoExpireDurations.plist; sourceTree = "<group>"; };
 		AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPane.h; sourceTree = "<group>"; };
 		AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
 		AA559188086121C200105AC5 /* SplitViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewExtensions.h; sourceTree = "<group>"; };
@@ -589,7 +587,6 @@
 				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 				AAE7A842086B696A009A487E /* add.tiff */,
 				AAE7A845086B6994009A487E /* action.tiff */,
-				AA4B1E2B08EEFBBF008CA6D0 /* AutoExpireDurations.plist */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
 				AA6321500885F0BB006382D3 /* comments.tiff */,
@@ -923,7 +920,6 @@
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
-				AA4B1E2C08EEFBBF008CA6D0 /* AutoExpireDurations.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
