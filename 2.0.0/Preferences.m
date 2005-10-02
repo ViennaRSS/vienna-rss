@@ -116,7 +116,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireFrequency] forKey:MAPref_AutoExpireDuration];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }

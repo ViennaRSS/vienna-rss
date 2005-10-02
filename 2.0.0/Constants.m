@@ -56,7 +56,7 @@ const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
 const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
-const int MA_Default_AutoExpireFrequency = 0;
+const int MA_Default_AutoExpireDuration = 0;
 
 // Custom pasteboard types
 NSString * MA_PBoardType_FolderList = @"ViennaFolderType";
