@@ -4,26 +4,32 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
-(Items marked 2.1 are currently scheduled for a post 2.0 release unless I can be convinced otherwise).
-
-Wishlist Items
-==============
-- Bloglines integration. (2.1)
+Remaining Planned 2.0 Items
+===========================
+- Filter article list by date/read.
 - Auto-discover feeds if subscription URL is to a web page.
 - Sort on multiple columns.
-- Per-folder sorting. (2.1)
-- Semi-transparent main window when not in front. (2.1)
-- Show the feed icon in the article list pane. (2.1)
-- Download files directly from Vienna. (2.1)
-- Support retrieving RSS 2.0 comments. (2.1)
-- Spotlight support. (2.1)
 - Export groups vs. flat export.
-- Change dock unread count colour and size. (2.1)
+- Auto-refresh when machine awakes from sleep.
+- Search in all folders via search field.
+- Download files directly from Vienna.
+
+Post 2.0 Items
+==============
+- Bloglines integration.
+- Per-folder sorting.
+- Semi-transparent main window when not in front.
+- Show the feed icon in the article list pane.
+- Support retrieving RSS 2.0 comments.
+- Spotlight support.
+- Change dock unread count colour and size.
 - Single article list and viewer interface (as in Bloglines).
-- Bonjour support. (2.1)
-- Synchronisation via .Mac or FTP. (2.1)
+- Bonjour support.
+- Synchronisation via .Mac or FTP.
 
 Coding To-Do Items
 ==================
 - Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
 - Renaming a folder does not update the folder name in smart folders that reference it.
+- Fix web browser to block popups.
+- The isAccessible(NSString * urlString) function returns NO behind a firewall.

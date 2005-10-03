@@ -43,6 +43,7 @@
 	-(void)initTableView;
 	-(BOOL)initForStyle:(NSString *)styleName;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
+	-(BOOL)currentCacheContainsFolder:(int)folderId;
 	-(void)showColumnsForFolder:(int)folderId;
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
@@ -1767,7 +1768,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		if (IsGroupFolder(folder))
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId]]];
-			if (folderId == currentFolderId)
+			if ([self currentCacheContainsFolder:folderId])
 				[self refreshFolder:YES];
 		}
 		else if (!IsSmartFolder(folder))
@@ -1776,8 +1777,8 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			if ([db markFolderRead:folderId])
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
-				if (folderId == currentFolderId)
-					[articleList reloadData];
+				if ([self currentCacheContainsFolder:folderId])
+					[self refreshFolder:YES];
 			}
 		}
 		else
@@ -1789,6 +1790,25 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		}
 	}
 	return refArray;
+}
+
+/* currentCacheContainsFolder
+ * Scans the current article cache to determine if any article is a member of the specified
+ * folder and returns YES if so.
+ */
+-(BOOL)currentCacheContainsFolder:(int)folderId
+{
+	int count = [currentArrayOfArticles count];
+	int index = 0;
+	
+	while (index < count)
+	{
+		Article * anArticle = [currentArrayOfArticles objectAtIndex:index];
+		if ([anArticle folderId] == folderId)
+			return YES;
+		++index;
+	}
+	return NO;
 }
 
 /* markAllReadByReferencesArray
