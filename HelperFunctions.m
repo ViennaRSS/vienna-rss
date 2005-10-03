@@ -117,9 +117,9 @@ BOOL isAccessible(NSString * urlString)
 	SCNetworkConnectionFlags flags;
 	NSURL * url = [NSURL URLWithString:urlString];
 	
-	return (SCNetworkCheckReachabilityByName([[url host] cString], &flags) &&
-			(flags & kSCNetworkFlagsReachable) &&
-			!(flags & kSCNetworkFlagsConnectionRequired));
+	if (!SCNetworkCheckReachabilityByName([[url host] cString], &flags))
+		return NO;
+	return (flags & kSCNetworkFlagsReachable) && !(flags & kSCNetworkFlagsConnectionRequired);
 }
 
 /* runOKAlertPanel
