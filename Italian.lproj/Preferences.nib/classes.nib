@@ -1,0 +1,41 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                changeCheckForUpdates = id; 
+                changeCheckFrequency = id; 
+                changeCheckOnStartUp = id; 
+                changeExpireDuration = id; 
+                changeFont = id; 
+                changeMarkReadBehaviour = id; 
+                changeMinimumFontSize = id; 
+                changeOpenLinksInBackground = id; 
+                changeOpenLinksInExternalBrowser = id; 
+                selectDefaultLinksHandler = id; 
+                selectMinimumFontSize = id; 
+            }; 
+            CLASS = PreferenceController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                checkForUpdates = NSButton; 
+                checkFrequency = NSPopUpButton; 
+                checkOnStartUp = NSButton; 
+                enableMinimumFontSize = NSButton; 
+                expireDuration = NSPopUpButton; 
+                folderFont = NSPopUpButton; 
+                folderFontSize = NSComboBox; 
+                linksHandler = NSPopUpButton; 
+                markReadAfterDelay = NSButtonCell; 
+                markReadAfterNext = NSButtonCell; 
+                messageListFont = NSPopUpButton; 
+                messageListFontSize = NSComboBox; 
+                minimumFontSizes = NSComboBox; 
+                openLinksInBackground = NSButton; 
+                openLinksInExternalBrowser = NSButton; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
