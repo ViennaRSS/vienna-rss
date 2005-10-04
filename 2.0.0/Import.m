@@ -119,24 +119,32 @@
 -(void)importFromFile:(NSString *)importFileName
 {
 	NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
+	BOOL hasError = NO;
 	int countImported = 0;
 
 	if (data != nil)
 	{
 		XMLParser * tree = [[XMLParser alloc] init];
-		if ([tree setData:data])
+		if (![tree setData:data])
+		{
+			NSRunAlertPanel(NSLocalizedString(@"Error importing subscriptions title", nil),
+							NSLocalizedString(@"Error importing subscriptions body", nil),
+							NSLocalizedString(@"OK", nil), nil, nil);
+			hasError = YES;
+		}
+		else
 		{
 			XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
-			
-			// Some OPML feeds organise exported subscriptions by groups. We can't yet handle those
-			// so flatten the groups as we import.
 			countImported = [self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
 		}
 		[tree release];
 	}
 
 	// Announce how many we successfully imported
-	NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
-	NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
+	if (!hasError)
+	{
+		NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
+		NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
+	}
 }
 @end
