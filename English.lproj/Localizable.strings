@@ -177,3 +177,5 @@
 "2 Weeks Ago" = "2 Weeks Ago";
 "A month" = "A month";
 "Activity Window" = "Activity Window";
+"Error importing subscriptions body" = "Cannot import the specified file. The file contents are not valid OPML XML format.";
+"Error importing subscriptions title" = "Import error";

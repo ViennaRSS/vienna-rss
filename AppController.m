@@ -685,12 +685,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(void)growlNotificationWasClicked:(id)clickContext
 {
+	[self showMainWindow:self];
 	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
 	if (unreadArticles != nil)
-	{
-		[self showMainWindow:self];
 		[mainArticleView selectFolderAndArticle:[unreadArticles itemId] guid:nil];
-	}
 }
 
 /* registrationDictionaryForGrowl
@@ -1721,6 +1719,17 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
+		
+		// This little hack is so if we're deleting the folder currently being displayed
+		// and there's more than one folder being deleted, we delete the folder currently
+		// being displayed last so that the MA_Notify_FolderDeleted handlers that only
+		// refresh the display if the current folder is being deleted only trips once.
+		if ([folder itemId] == [mainArticleView currentFolderId] && index < count - 1)
+		{
+			[selectedFolders insertObject:folder atIndex:count];
+			++count;
+			continue;
+		}
 		if (!IsTrashFolder(folder))
 		{
 			// Create a status string
@@ -1968,6 +1977,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	else if (theAction == @selector(newGroupFolder:))
 	{
 		return ![db readOnly] && isMainWindowVisible;
+	}
+	else if (theAction == @selector(skipFolder:))
+	{
+		return ![db readOnly] && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(viewNextUnread:))
 	{

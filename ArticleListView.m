@@ -458,6 +458,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		Field * field = [fields objectAtIndex:index];
 		NSString * identifier = [field name];
+		int tag = [field tag];
 		BOOL showField;
 		
 		// Remove each column as we go.
@@ -471,20 +472,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		
 		// Handle condensed layout vs. table layout
 		if (tableLayout == MA_Table_Layout)
-			showField = [field visible] && [field tag] != MA_FieldID_Headlines;
+			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
-		{
-			showField = [field tag] == MA_FieldID_Headlines ||
-			[field tag] == MA_FieldID_Read ||
-			[field tag] == MA_FieldID_Flagged;
-		}
-		
+			showField = tag == MA_FieldID_Headlines || tag == MA_FieldID_Read || tag == MA_FieldID_Flagged;
+
 		// Add to the end only those columns that are visible
 		if (showField)
 		{
 			NSTableColumn * newTableColumn = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			NSTableHeaderCell * headerCell = [newTableColumn headerCell];
-			int tag = [field tag];
 			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments);
 
 			// Fix for bug where tableviews with alternating background rows lose their "colour".
