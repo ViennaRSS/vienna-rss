@@ -54,6 +54,9 @@
 
 	// Handle double-click on an item
 	[activityTable setDoubleAction:@selector(handleDoubleClick:)];
+
+	// Set window title
+	[activityWindow setTitle:NSLocalizedString(@"Activity Window", nil)];
 	
 	// Set localised column headers
 	[activityTable localiseHeaderStrings];

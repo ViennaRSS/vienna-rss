@@ -1014,7 +1014,7 @@ static Database * _sharedDatabase = nil;
 
 		NSTimeInterval timeDiff = [[todaysDate dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
 		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1, read_flag=0 where deleted_flag=0 and marked_flag=0 and date < %f", timeDiff];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1, read_flag=1 where deleted_flag=0 and marked_flag=0 and date < %f", timeDiff];
 		if (results != nil)
 		{
 			// Flush all caches.

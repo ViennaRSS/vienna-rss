@@ -254,7 +254,6 @@
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		130A612508F200D8005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		130A612908F20249005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		130A612D08F20268005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		130A613108F20277005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/GroupFolder.nib; sourceTree = "<group>"; };
@@ -1090,7 +1089,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				AABFDC990609EA5A00100A9B /* English */,
-				130A612508F200D8005A52F1 /* Italian */,
 			);
 			name = ActivityViewer.nib;
 			sourceTree = "<group>";
