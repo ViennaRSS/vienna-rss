@@ -111,6 +111,7 @@
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
 -(IBAction)restoreMessage:(id)sender;
+-(IBAction)skipFolder:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

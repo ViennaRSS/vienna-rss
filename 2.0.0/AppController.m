@@ -687,7 +687,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 {
 	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
 	if (unreadArticles != nil)
+	{
+		[self showMainWindow:self];
 		[mainArticleView selectFolderAndArticle:[unreadArticles itemId] guid:nil];
+	}
 }
 
 /* registrationDictionaryForGrowl
@@ -1359,6 +1362,11 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			[self markRead:self];
 			return YES;
 
+		case 's':
+		case 'S':
+			[self skipFolder:self];
+			return YES;
+			
 		case '\r': //ENTER
 			[self viewArticlePage:self];
 			return YES;
@@ -1529,6 +1537,17 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(void)clearUndoStack
 {
 	[[mainWindow undoManager] removeAllActions];
+}
+
+/* skipFolder
+ * Mark all articles in the current folder read then skip to the next folder with
+ * unread articles.
+ */
+-(IBAction)skipFolder:(id)sender
+{
+	if (![db readOnly])
+		[mainArticleView markAllReadByArray:[foldersTree selectedFolders]];
+	[self viewNextUnread:self];
 }
 
 /* markAllRead

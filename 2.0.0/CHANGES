@@ -8,7 +8,8 @@ Thanks!
 
 2.0.0.2010
 ----------
-- Added auto-expire support. Articles older than a given number of days can be automatically deleted.
+- Added auto-expire support. Articles older than a given number of days can be automatically moved
+  to the trash folder.
 - Handle RDF:Sequence parsing for feeds such as http://www.kongisking.net. This ensures that
   feeds are properly organised by date in the absence of any date in the feed.
 - Smart folder dates fields are now fixed strings representing a time range rather than an actual date.
@@ -18,6 +19,9 @@ Thanks!
 - Fixed bug where smart folder criteria was unintentionally extended when doing a filtered search.
 - Changed a couple of default preferences. We no longer check for new articles on startup and the
   default layout is now to have the article pane at the bottom.
+- Fixed growl notification handling not bringing the main window to the foreground.
+- Added "Skip Folder" command to mark all articles in the current folder read and skip to the next
+  folder with unread articles. The shortcut key for this is 'S'.
 
 2.0.0.2009
 ----------
