@@ -45,6 +45,7 @@
                 showMainWindow = id; 
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
+                skipFolder = id; 
                 startConnect = id; 
                 stopReloadingPage = id; 
                 syncSubscriptionsFromBloglines = id; 
