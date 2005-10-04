@@ -178,3 +178,5 @@
 "2 Weeks Ago" = "2 veckor tillbaka";
 "A month" = "En månad";
 "Activity Window" = "Aktivitetsvisare";
+"Error importing subscriptions body" = "Cannot import the specified file. The file contents are not valid OPML XML format.";
+"Error importing subscriptions title" = "Import error";
