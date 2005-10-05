@@ -92,7 +92,7 @@
 		else if (IsRSSFolder(folder))
 		{
 			NSString * link = [folder homePage];
-			NSString * description = [folder description];
+			NSString * description = [folder feedDescription];
 			NSString * url = [folder feedURL];
 
 			[itemDict setObject:@"rss" forKey:@"type"];
