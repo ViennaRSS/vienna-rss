@@ -1544,8 +1544,10 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 -(IBAction)skipFolder:(id)sender
 {
 	if (![db readOnly])
+	{
 		[mainArticleView markAllReadByArray:[foldersTree selectedFolders]];
-	[self viewNextUnread:self];
+		[self viewNextUnread:self];
+	}
 }
 
 /* markAllRead
