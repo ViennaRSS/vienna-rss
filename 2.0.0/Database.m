@@ -1043,6 +1043,7 @@ static Database * _sharedDatabase = nil;
 	SQLResult * results = [sqlDatabase performQuery:@"delete from messages where deleted_flag=1"];
 	if (results)
 	{
+		[self compactDatabase];
 		[trashFolder clearCache];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
