@@ -21,7 +21,14 @@
 #import <Cocoa/Cocoa.h>
 #import "WebKit/WebView.h"
 
-@interface ArticleView : WebView
-	-(void)keyDown:(NSEvent *)theEvent;
-	-(void)printDocument:(id)sender;
+@class AppController;
+
+@interface ArticleView : WebView {
+	AppController * controller;
+	WebPreferences * defaultWebPrefs;
+}
+
+-(void)setController:(AppController *)theController;
+-(void)keyDown:(NSEvent *)theEvent;
+-(void)printDocument:(id)sender;
 @end

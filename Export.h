@@ -24,5 +24,5 @@
 
 @interface AppController (Export)
 	-(IBAction)exportSubscriptions:(id)sender;
-	-(void)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray;
+	-(void)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag;
 @end

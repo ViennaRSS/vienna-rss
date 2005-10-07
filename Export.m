@@ -65,14 +65,14 @@
 		[panel orderOut:self];
 
 		NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-		[self exportToFile:[panel filename] from:foldersArray];
+		[self exportToFile:[panel filename] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
 	}
 }
 
 /* exportSubscriptionGroup
  * Export one group of folders.
  */
--(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray
+-(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray withGroups:(BOOL)groupFlag
 {
 	NSEnumerator * enumerator = [feedArray objectEnumerator];
 	int countExported = 0;
@@ -84,10 +84,16 @@
 		NSString * name = [folder name];
 		if (IsGroupFolder(folder))
 		{
-			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"title"];
-			XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
 			NSArray * subFolders = [db arrayOfFolders:[folder itemId]];
-			countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders];
+			
+			if (!groupFlag)
+				countExported += [self exportSubscriptionGroup:xmlTree fromArray:subFolders withGroups:groupFlag];
+			else
+			{
+				[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"title"];
+				XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
+				countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders withGroups:groupFlag];
+			}
 		}
 		else if (IsRSSFolder(folder))
 		{
@@ -111,7 +117,7 @@
  * Export a list of RSS subscriptions to the specified file. If onlySelected is set then only those
  * folders selected in the folders tree are exported. Otherwise all RSS folders are exported.
  */
--(void)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray
+-(void)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
 {
 	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
 	XMLParser * opmlTree = [newTree addTree:@"opml" withAttributes:[NSDictionary dictionaryWithObject:@"1.0" forKey:@"version"]];
@@ -126,7 +132,7 @@
 	
 	// Create the body section
 	XMLParser * bodyTree = [opmlTree addTree:@"body"];
-	int countExported = [self exportSubscriptionGroup:bodyTree fromArray:foldersArray];
+	int countExported = [self exportSubscriptionGroup:bodyTree fromArray:foldersArray withGroups:groupFlag];
 
 	// Now write the complete XML to the file
 	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];

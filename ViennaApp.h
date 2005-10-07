@@ -54,6 +54,7 @@
 -(Article *)currentArticle;
 
 // Preference getters
+-(int)autoExpireDuration;
 -(float)markReadInterval;
 -(BOOL)readingPaneOnRight;
 -(BOOL)refreshOnStartup;
@@ -70,6 +71,7 @@
 -(int)articleListFontSize;
 
 // Preference setters
+-(void)setAutoExpireDuration:(int)newDuration;
 -(void)setMarkReadInterval:(float)newInterval;
 -(void)setReadingPaneOnRight:(BOOL)flag;
 -(void)setRefreshOnStartup:(BOOL)flag;

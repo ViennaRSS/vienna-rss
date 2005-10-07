@@ -62,9 +62,11 @@
                 closeAllTabsItem = NSMenuItem; 
                 closeTabItem = NSMenuItem; 
                 closeWindowItem = NSMenuItem; 
+                columnsMenu = NSMenuItem; 
                 exportAll = NSButtonCell; 
                 exportSaveAccessory = NSView; 
                 exportSelected = NSButtonCell; 
+                exportWithGroups = NSButton; 
                 foldersTree = FoldersTree; 
                 mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 
@@ -72,9 +74,11 @@
                 renameField = NSTextField; 
                 renameWindow = NSWindow; 
                 searchField = NSSearchField; 
+                sortByMenu = NSMenuItem; 
                 spinner = NSProgressIndicator; 
                 splitView1 = NSSplitView; 
                 statusText = NSTextField; 
+                stylesMenu = NSMenuItem; 
             }; 
             SUPERCLASS = NSObject; 
         }, 

@@ -363,6 +363,13 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Bool&gt;</string>
 				</dict>
+				<key>autoExpireDuration</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>opED</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Int&gt;</string>
+				</dict>
 				<key>readingPaneOnRight</key>
 				<dict>
 					<key>AppleEventCode</key>

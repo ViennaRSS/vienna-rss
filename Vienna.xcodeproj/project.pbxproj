@@ -15,6 +15,7 @@
 		AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0FB5E00869110300D9CB90 /* ActivityLog.h */; };
 		AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0FB5E10869110300D9CB90 /* ActivityLog.m */; };
 		AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
+		AA1EE32F08F4064C00A9B20C /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1EE32E08F4064C00A9B20C /* IOKit.framework */; };
 		AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA20DC9D0882CCC300A226F5 /* unread.tiff */; };
 		AA2185030861E7600024DD4A /* TexturedHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2185010861E7600024DD4A /* TexturedHeader.m */; };
 		AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2185020861E7600024DD4A /* TexturedHeader.h */; };
@@ -273,6 +274,17 @@
 		AA0FB5E10869110300D9CB90 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLog.m; sourceTree = "<group>"; };
 		AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptTerminology; sourceTree = "<group>"; };
 		AA167A840658361B0091365D /* ViennaApp.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptSuite; sourceTree = "<group>"; };
+		AA1EE32E08F4064C00A9B20C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /Developer/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
+		AA1EE81408F69B8400A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
+		AA1EE81608F69B9D00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AA1EE81908F69BA500A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AA1EE81A08F69BAE00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		AA1EE81B08F69BB500A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/Preferences.nib; sourceTree = "<group>"; };
+		AA1EE81C08F69BBD00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AA1EE81D08F69BC600A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AA1EE81E08F69BD000A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
+		AA1EE82008F69C3000A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA1EE82108F69C3900A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA20DC9D0882CCC300A226F5 /* unread.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unread.tiff; sourceTree = "<group>"; };
 		AA2185010861E7600024DD4A /* TexturedHeader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TexturedHeader.m; sourceTree = "<group>"; };
 		AA2185020861E7600024DD4A /* TexturedHeader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TexturedHeader.h; sourceTree = "<group>"; };
@@ -458,6 +470,7 @@
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
 				AA7A0C8808874CEB0027F04F /* SystemConfiguration.framework in Frameworks */,
 				AAAAEF0F088DEBBA00B48199 /* libsqlite3.a in Frameworks */,
+				AA1EE32F08F4064C00A9B20C /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +488,7 @@
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA1EE32E08F4064C00A9B20C /* IOKit.framework */,
 				AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */,
 				AA62D7DB0859A9F70040C370 /* Growl.framework */,
 				AA2443DD084008B200BE565F /* WebKit.framework */,
@@ -1004,6 +1018,7 @@
 				AAD79648088AF51000E2CE5E /* Swedish */,
 				AA6022C608C24732002CFD06 /* French */,
 				AA4B152808E8DC5C008CA6D0 /* Italian */,
+				AA1EE82108F69C3900A9B20C /* German */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1015,6 +1030,7 @@
 				AAD79629088AF49A00E2CE5E /* Swedish */,
 				AA6022A208C244D5002CFD06 /* French */,
 				130A613508F20287005A52F1 /* Italian */,
+				AA1EE81A08F69BAE00A9B20C /* German */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -1026,6 +1042,7 @@
 				AAD7963B088AF4EB00E2CE5E /* Swedish */,
 				AA6022A708C24537002CFD06 /* French */,
 				AA4B152708E8DC51008CA6D0 /* Italian */,
+				AA1EE82008F69C3000A9B20C /* German */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1037,6 +1054,7 @@
 				AAAAED92088D62E600B48199 /* Swedish */,
 				AA6022B808C246F0002CFD06 /* French */,
 				130A613908F2029F005A52F1 /* Italian */,
+				AA1EE81B08F69BB500A9B20C /* German */,
 			);
 			name = Preferences.nib;
 			sourceTree = "<group>";
@@ -1048,6 +1066,7 @@
 				AAD7962F088AF4B300E2CE5E /* Swedish */,
 				AA6022B208C246DE002CFD06 /* French */,
 				130A614008F202BA005A52F1 /* Italian */,
+				AA1EE81D08F69BC600A9B20C /* German */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -1059,6 +1078,7 @@
 				AAD79623088AF48500E2CE5E /* Swedish */,
 				AA6022BE08C246FF002CFD06 /* French */,
 				130A612D08F20268005A52F1 /* Italian */,
+				AA1EE81608F69B9D00A9B20C /* German */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -1070,6 +1090,7 @@
 				AAD7962C088AF4A900E2CE5E /* Swedish */,
 				AA6022B508C246E8002CFD06 /* French */,
 				130A613C08F202A6005A52F1 /* Italian */,
+				AA1EE81C08F69BBD00A9B20C /* German */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -1081,6 +1102,7 @@
 				AAD79626088AF49200E2CE5E /* Swedish */,
 				AA6022BB08C246F8002CFD06 /* French */,
 				130A613108F20277005A52F1 /* Italian */,
+				AA1EE81908F69BA500A9B20C /* German */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -1100,6 +1122,7 @@
 				AAD79632088AF4BD00E2CE5E /* Swedish */,
 				AA6022AF08C246D4002CFD06 /* French */,
 				130A614408F202CC005A52F1 /* Italian */,
+				AA1EE81E08F69BD000A9B20C /* German */,
 			);
 			name = UpdateWindow.nib;
 			sourceTree = "<group>";
@@ -1111,6 +1134,7 @@
 				AAD79620088AF47800E2CE5E /* Swedish */,
 				AA6022C108C2471C002CFD06 /* French */,
 				130A612908F20249005A52F1 /* Italian */,
+				AA1EE81408F69B8400A9B20C /* German */,
 			);
 			name = DownloadPanel.nib;
 			sourceTree = "<group>";
@@ -1136,6 +1160,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(SDKROOT)/System/Library/Frameworks",
+					"$(SYSTEM_DEVELOPER_DIR)/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -1294,7 +1319,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2010;
+				BUILD_NUMBER = 2011;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1307,7 +1332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2010;
+				BUILD_NUMBER = 2011;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1320,7 +1345,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2010;
+				BUILD_NUMBER = 2011;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;

@@ -23,14 +23,8 @@
 #import "AppController.h"
 #import "Preferences.h"
 #import "HelperFunctions.h"
-#import "WebKit/WebPolicyDelegate.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
-
-// Private functions
-@interface BrowserPane (Private)
-	-(void)loadMinimumFontSize;
-@end
 
 @implementation BrowserPane
 
@@ -46,7 +40,6 @@
 		[webPane setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 		[webPane setUIDelegate:self];
 		[webPane setFrameLoadDelegate:self];
-		[webPane setPolicyDelegate:self];
 
 		// Set our box attributes
 		[self setTitlePosition:NSNoTitle];
@@ -56,20 +49,12 @@
 		[self setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable|NSViewMinXMargin|NSViewMinYMargin];
 		[self addSubview:webPane];
 
-		// Register to be notified when things happen
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
-
 		// Other initialisation
 		controller = nil;
 		isLoadingFrame = NO;
 		isLocalFile = NO;
 		hasPageTitle = NO;
 		pageFilename = nil;
-
-		// Handle minimum font size
-		defaultWebPrefs = [[webPane preferences] retain];
-		[self loadMinimumFontSize];
     }
     return self;
 }
@@ -88,6 +73,7 @@
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
+	[webPane setController:controller];
 }
 
 /* setTab
@@ -140,6 +126,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
+		hasPageTitle = NO;
 		isLoadingFrame = YES;
 	}
 }
@@ -167,20 +154,6 @@
 		[[controller browserView] setTabTitle:tab title:title];
 		hasPageTitle = YES;
 	}
-}
-
-/* decidePolicyForNewWindowAction
- * Called by the web view to get our policy on handling actions that would open a new window.
- */
--(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if (navType == WebNavigationTypeLinkClicked)
-	{
-		[listener ignore];
-		[controller openURLInBrowserWithURL:[request URL]];
-	}
-	[listener use];
 }
 
 /* createWebViewWithRequest
@@ -236,29 +209,6 @@
 	}
 	
 	return defaultMenuItems;
-}
-
-/* handleMinimumFontSizeChange
- * Called when the minimum font size for articles is enabled or disabled, or changed.
- */
--(void)handleMinimumFontSizeChange:(NSNotification *)nc
-{
-	[self loadMinimumFontSize];
-}
-
-/* loadMinimumFontSize
- * Sets up the web preferences for a minimum font size.
- */
--(void)loadMinimumFontSize
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	if (![prefs enableMinimumFontSize])
-		[defaultWebPrefs setMinimumFontSize:1];
-	else
-	{
-		int size = [prefs minimumFontSize];
-		[defaultWebPrefs setMinimumFontSize:size];
-	}
 }
 
 /* printDocument
@@ -375,7 +325,6 @@
 {
 	[webPane stopLoading:self];
 	[webPane release];
-	[defaultWebPrefs release];
 	[pageFilename release];
 	[tab release];
 	[super dealloc];
