@@ -43,8 +43,14 @@
 #import "WebKit/WebUIDelegate.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
+#include <mach/mach_port.h>
+#include <mach/mach_interface.h>
+#include <mach/mach_init.h>
+#include <IOKit/pwr_mgt/IOPMLib.h>
+#include <IOKit/IOMessage.h>
 
 @interface AppController (Private)
+	-(void)installSleepHandler;
 	-(void)handleTabChange:(NSNotification *)nc;
 	-(void)handleFolderSelection:(NSNotification *)note;
 	-(void)handleCheckFrequencyChange:(NSNotification *)note;
@@ -73,6 +79,10 @@ static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
 
 static const int MA_Minimum_Folder_Pane_Width = 80;
 static const int MA_Minimum_BrowserView_Pane_Width = 200;
+
+// Awake from sleep
+static io_connect_t root_port;
+static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
 @implementation AppController
 
@@ -196,6 +206,9 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	// Start the check timer
 	[self handleCheckFrequencyChange:nil];
 
+	// Register to be informed when the system awakes from sleep
+	[self installSleepHandler];
+
 	// Assign the controller for the child views
 	[foldersTree setController:self];
 	[mainArticleView setController:self];
@@ -220,6 +233,35 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		[mainArticleView initialiseArticleView];
 		doneSafeInit = YES;
 	}
+}
+
+/* MySleepCallBack
+ * Called in response to an I/O event that we established via IORegisterForSystemPower. The
+ * messageType parameter allows us to distinguish between which event occurred.
+ */
+static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument)
+{
+	if (messageType == kIOMessageSystemHasPoweredOn)
+	{
+		AppController * app = (AppController *)[NSApp delegate];
+		Preferences * prefs = [Preferences standardPreferences];
+		if ([prefs refreshFrequency] > 0)
+			[app refreshAllSubscriptions:app];
+	}
+}
+
+/* installSleepHandler
+ * Registers our handler to be notified when the system awakes from sleep. We use this to kick
+ * off a refresh if necessary.
+ */
+-(void)installSleepHandler
+{
+    IONotificationPortRef notify;
+    io_object_t anIterator;
+
+    root_port = IORegisterForSystemPower(self, &notify, MySleepCallBack, &anIterator);
+    if (root_port != 0)
+		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
 }
 
 /* applicationDidFinishLaunching
@@ -716,7 +758,6 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(void)initSortMenu
 {
-	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
 	NSMenu * sortMenu = [[[NSMenu alloc] initWithTitle:@"Sort By"] autorelease];
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
@@ -738,7 +779,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 			[menuItem release];
 		}
 	}
-	[[viewMenu itemWithTitle:NSLocalizedString(@"Sort By", nil)] setSubmenu:sortMenu];
+	[sortByMenu setSubmenu:sortMenu];
 }
 
 /* initColumnsMenu
@@ -746,8 +787,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(void)initColumnsMenu
 {
-	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
-	NSMenu * columnsMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
+	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
 	Field * field;
@@ -765,11 +805,11 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
-			[columnsMenu addItem:menuItem];
+			[columnsSubMenu addItem:menuItem];
 			[menuItem release];
 		}
 	}
-	[[viewMenu itemWithTitle:NSLocalizedString(@"Columns", nil)] setSubmenu:columnsMenu];
+	[columnsMenu setSubmenu:columnsSubMenu];
 }
 
 /* initScriptsMenu
@@ -846,7 +886,7 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
  */
 -(void)initStylesMenu
 {
-	NSMenu * stylesMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
+	NSMenu * stylesSubMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
 
 	// Reinitialise the styles map
 	NSDictionary * stylesMap = [mainArticleView initStylesMap];
@@ -860,18 +900,18 @@ static const int MA_Minimum_BrowserView_Pane_Width = 200;
 	for (index = 0; index < count; ++index)
 	{
 		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index] action:@selector(doSelectStyle:) keyEquivalent:@""];
-		[stylesMenu addItem:menuItem];
+		[stylesSubMenu addItem:menuItem];
 		[menuItem release];
 	}
 
 	// Append a link to More Styles...
-	[stylesMenu addItem:[NSMenuItem separatorItem]];
+	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
-	[stylesMenu addItem:menuItem];
+	[stylesSubMenu addItem:menuItem];
 	[menuItem release];
-	
-	NSMenu * viewMenu = [[[NSApp mainMenu] itemWithTitle:NSLocalizedString(@"View", nil)] submenu];
-	[[viewMenu itemWithTitle:NSLocalizedString(@"Style", nil)] setSubmenu:stylesMenu];
+
+	// Add it to the Style menu
+	[stylesMenu setSubmenu:stylesSubMenu];
 }
 
 /* showUnreadCountOnApplicationIcon

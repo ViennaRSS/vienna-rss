@@ -44,12 +44,16 @@
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
+	IBOutlet NSButton * exportWithGroups;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSTextField * statusText;
 	IBOutlet NSProgressIndicator * spinner;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
+	IBOutlet NSMenuItem * sortByMenu;
+	IBOutlet NSMenuItem * columnsMenu;
+	IBOutlet NSMenuItem * stylesMenu;
 
 	ActivityViewer * activityViewer;
 	PreferenceController * preferenceController;

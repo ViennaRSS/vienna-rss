@@ -107,10 +107,6 @@
 "Starting..." = "Starting...";
 "any" = "any";
 "all" = "all";
-"Columns" = "Columns";
-"Sort By" = "Sort By";
-"Style" = "Style";
-"View" = "View";
 "Open Scripts Folder" = "Open Scripts Folder";
 "Downloading %@" = "Downloading %@";
 "An error occured during download." = "Vienna was unable to determine the cause of the error. Please contact technical support for assistance.";
@@ -179,3 +175,6 @@
 "Activity Window" = "Activity Window";
 "Error importing subscriptions body" = "Cannot import the specified file. The file contents are not valid OPML XML format.";
 "Error importing subscriptions title" = "Import error";
+"Rename" = "Rename";
+"Mark All Read" = "Mark All Read";
+"Move Folders" = "Move Folders";

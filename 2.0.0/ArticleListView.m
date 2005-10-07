@@ -30,9 +30,7 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "ArticleRef.h"
-#import "WebKit/WebPreferences.h"
 #import "WebKit/WebFrame.h"
-#import "WebKit/WebPolicyDelegate.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebDataSource.h"
 #import "WebKit/WebFrameView.h"
@@ -49,7 +47,6 @@
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
 	-(void)selectArticleAfterReload;
-	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
 	-(void)handleStyleChange:(NSNotificationCenter *)nc;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
@@ -102,7 +99,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Register to be notified when folders are added or removed
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-	[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
 	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 
@@ -113,15 +109,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Set header text
 	[articleListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
 
-	// Make us the policy and UI delegate for the web view
-	[articleText setPolicyDelegate:self];
+	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
-	
-	// Handle minimum font size
-	defaultWebPrefs = [[articleText preferences] retain];
-	[self loadMinimumFontSize];
-	
+
 	// Do safe initialisation
 	[controller doSafeInitialisation];
 }
@@ -133,6 +124,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	controller = theController;
 	db = [[controller database] retain];
+	[articleText setController:controller];
 }
 
 /* initialiseArticleView
@@ -236,36 +228,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[sv2 setFrame:rightFrame];
 		}
 	}
-}
-
-/* decidePolicyForNavigationAction
- * Called by the web view to get our policy on handling navigation actions. Since we want links clicked in the
- * web view to open in an external browser, we trap the link clicked action and launch the URL ourselves.
- */
--(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if (navType == WebNavigationTypeLinkClicked)
-	{
-		[listener ignore];
-		[controller openURLInBrowserWithURL:[request URL]];
-	}
-	[listener use];
-}
-
-/* decidePolicyForNewWindowAction
- * Called by the web view to get our policy on handling actions that would open a new window. Since we want links clicked in the
- * web view to open in an external browser, we trap the link clicked action and launch the URL ourselves.
- */
--(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if (navType == WebNavigationTypeLinkClicked)
-	{
-		[listener ignore];
-		[controller openURLInBrowserWithURL:[request URL]];
-	}
-	[listener use];
 }
 
 /* createWebViewWithRequest
@@ -710,30 +672,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		}
 	}
 	return NO;
-}
-
-/* handleMinimumFontSizeChange
- * Called when the minimum font size for articles is enabled or disabled, or changed.
- */
--(void)handleMinimumFontSizeChange:(NSNotification *)nc
-{
-	[self loadMinimumFontSize];
-	[self refreshArticlePane];
-}
-
-/* loadMinimumFontSize
- * Sets up the web preferences for a minimum font size.
- */
--(void)loadMinimumFontSize
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	if (![prefs enableMinimumFontSize])
-		[defaultWebPrefs setMinimumFontSize:1];
-	else
-	{
-		int size = [prefs minimumFontSize];
-		[defaultWebPrefs setMinimumFontSize:size];
-	}
 }
 
 /* mainView
@@ -1864,7 +1802,6 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[currentArrayOfArticles release];
 	[backtrackArray release];
 	[articleListFont release];
-	[defaultWebPrefs release];
 	[guidOfArticleToSelect release];
 	[selectionDict release];
 	[topLineDict release];

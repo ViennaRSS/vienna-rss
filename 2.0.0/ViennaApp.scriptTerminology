@@ -270,6 +270,13 @@
 					<key>Name</key>
 					<string>open links in Vienna</string>
 				</dict>
+				<key>autoExpireDuration</key>
+				<dict>
+					<key>Description</key>
+					<string>The duration of articles before they are expired to the trash</string>
+					<key>Type</key>
+					<string>auto expire duration</string>
+				</dict>
 				<key>readingPaneOnRight</key>
 				<dict>
 					<key>Description</key>

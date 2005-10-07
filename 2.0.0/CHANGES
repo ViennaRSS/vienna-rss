@@ -6,6 +6,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2011
+----------
+- Added option to export subscriptions with groups or as a flat file.
+- Refresh when the system awakes from sleep if the refresh frequency is not set to manual.
+- Added German Localisation. (Thanks to Jan Kampling).
+
 2.0.0.2010
 ----------
 - Added auto-expire support. Articles older than a given number of days can be automatically moved

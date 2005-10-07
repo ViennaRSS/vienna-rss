@@ -150,7 +150,7 @@
 	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [self folders];
 
 	if (argArray != nil)
-		[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray];
+		[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
 	return nil;
 }
 
@@ -231,6 +231,7 @@
 /* Accessor getters
  * These thunk through the standard preferences.
  */
+-(int)autoExpireDuration			{ return [[Preferences standardPreferences] autoExpireDuration]; }
 -(float)markReadInterval			{ return [[Preferences standardPreferences] markReadInterval]; }
 -(BOOL)readingPaneOnRight			{ return [[Preferences standardPreferences] readingPaneOnRight]; }
 -(BOOL)refreshOnStartup				{ return [[Preferences standardPreferences] refreshOnStartup]; }
@@ -249,6 +250,7 @@
 /* Accessor setters
  * These thunk through the standard preferences.
  */
+-(void)setAutoExpireDuration:(int)newDuration		{ [[Preferences standardPreferences] setAutoExpireDuration:newDuration]; }
 -(void)setMarkReadInterval:(float)newInterval		{ [[Preferences standardPreferences] setMarkReadInterval:newInterval]; }
 -(void)setReadingPaneOnRight:(BOOL)flag				{ [[Preferences standardPreferences] setReadingPaneOnRight:flag]; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [[Preferences standardPreferences] setRefreshOnStartup:flag]; }

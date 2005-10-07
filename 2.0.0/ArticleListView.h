@@ -60,7 +60,6 @@
 	NSFont * articleListFont;
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
-	WebPreferences * defaultWebPrefs;
 	NSMutableDictionary * selectionDict;
 	NSMutableDictionary * topLineDict;
 	NSMutableDictionary * bottomLineDict;

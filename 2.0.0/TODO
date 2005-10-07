@@ -9,10 +9,9 @@ Remaining Planned 2.0 Items
 - Filter article list by date/read.
 - Auto-discover feeds if subscription URL is to a web page.
 - Sort on multiple columns.
-- Export groups vs. flat export.
-- Auto-refresh when machine awakes from sleep.
 - Search in all folders via search field.
 - Download files directly from Vienna.
+- Handle middle mouse click on tabs.
 
 Post 2.0 Items
 ==============
@@ -33,3 +32,4 @@ Coding To-Do Items
 - Renaming a folder does not update the folder name in smart folders that reference it.
 - Fix web browser to block popups.
 - The isAccessible(NSString * urlString) function returns NO behind a firewall.
+- There's another Delete key on the Apple keyboard that we don't handle.

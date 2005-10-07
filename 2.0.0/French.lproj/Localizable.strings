@@ -109,10 +109,6 @@
 "Starting..." = "Starting...";
 "any" = "une";
 "all" = "chacune";
-"Columns" = "Colonnes";
-"Sort By" = "Trier par";
-"Style" = "Style";
-"View" = "Affichage";
 "Open Scripts Folder" = "Ouvrir le dossier des scripts";
 "Downloading %@" = "Téléchargement de %@";
 "An error occured during download." = "Vienna ne peut pas déterminer la cause de l'erreur. Contacter l'assistance technique pour le support.";
@@ -181,3 +177,6 @@
 "Activity Window" = "Fenêtre d'activité";
 "Error importing subscriptions body" = "Cannot import the specified file. The file contents are not valid OPML XML format.";
 "Error importing subscriptions title" = "Import error";
+"Rename" = "Rename";
+"Mark All Read" = "Mark All Read";
+"Move Folders" = "Move Folders";
