@@ -469,15 +469,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	[appDockMenu release];
 	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
-	
-	// Refresh command
-	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Refresh All Subscriptions", nil)
-													   action:@selector(refreshAllSubscriptions:)
-												keyEquivalent:@""];
-	[appDockMenu addItem:menuItem];
-	[menuItem release];
-	
-	// Done
+	[appDockMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
 	return appDockMenu;
 }
 

@@ -57,6 +57,7 @@
 		// Handle minimum font size
 		defaultWebPrefs = [[self preferences] retain];
 		[defaultWebPrefs setStandardFontFamily:@"Arial"];
+		[defaultWebPrefs setDefaultFontSize:12];
 		[self loadMinimumFontSize];
 	}
 	return self;

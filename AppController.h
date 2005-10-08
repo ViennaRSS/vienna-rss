@@ -85,6 +85,7 @@
 -(IBAction)markAllRead:(id)sender;
 -(IBAction)markRead:(id)sender;
 -(IBAction)markFlagged:(id)sender;
+-(IBAction)renameFolder:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
 -(IBAction)toggleActivityViewer:(id)sender;
@@ -102,6 +103,7 @@
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)validateFeed:(id)sender;
+-(IBAction)viewSourceHomePage:(id)sender;
 -(IBAction)emptyTrash:(id)sender;
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
