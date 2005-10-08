@@ -205,7 +205,7 @@
 		condition = MA_CritCondition_All;
 		NSData * data = [NSData dataWithBytes:[string cString] length:[string length]];
 		XMLParser * xmlTree = [[XMLParser alloc] init];
-		if ([xmlTree setData:data])
+		if ([data length] > 0 && [xmlTree setData:data])
 		{
 			XMLParser * criteriaGroup = [xmlTree treeByName:@"criteriagroup"];
 			int index = 0;

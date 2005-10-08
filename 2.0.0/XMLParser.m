@@ -39,9 +39,10 @@ static NSMutableDictionary * entityMap = nil;
 -(BOOL)setData:(NSData *)data
 {
 	CFXMLTreeRef newTree;
+	CFDictionaryRef error = nil;
 
 	NS_DURING
-		newTree = CFXMLTreeCreateFromData(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserSkipWhitespace, kCFXMLNodeCurrentVersion);
+		newTree = CFXMLTreeCreateFromDataWithError(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserSkipWhitespace, kCFXMLNodeCurrentVersion, &error);
 	NS_HANDLER
 		newTree = nil;
 	NS_ENDHANDLER
@@ -51,6 +52,8 @@ static NSMutableDictionary * entityMap = nil;
 		CFRelease(newTree);
 		return YES;
 	}
+	else
+		NSLog(@"%@", error);
 	return NO;
 }
 
