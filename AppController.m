@@ -484,6 +484,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[appDockMenu release];
 	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
 	[appDockMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
+	[appDockMenu addItem:copyOfMenuWithAction(@selector(markAllSubscriptionsRead:))];
 	return appDockMenu;
 }
 
@@ -1618,6 +1619,15 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	if (![db readOnly])
 		[mainArticleView markAllReadByArray:[foldersTree selectedFolders]];
+}
+
+/* markAllSubscriptionsRead
+ * Mark all subscriptions as read
+ */
+-(IBAction)markAllSubscriptionsRead:(id)sender
+{
+	if (![db readOnly])
+		[mainArticleView markAllReadByArray:[foldersTree folders:0]];
 }
 
 /* markRead

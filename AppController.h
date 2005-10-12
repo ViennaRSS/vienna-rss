@@ -83,6 +83,7 @@
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
+-(IBAction)markAllSubscriptionsRead:(id)sender;
 -(IBAction)markRead:(id)sender;
 -(IBAction)markFlagged:(id)sender;
 -(IBAction)renameFolder:(id)sender;

@@ -22,6 +22,7 @@
                 importSubscriptions = id; 
                 localPerformFindPanelAction = id; 
                 markAllRead = id; 
+                markAllSubscriptionsRead = id; 
                 markFlagged = id; 
                 markRead = id; 
                 myAction = id; 

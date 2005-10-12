@@ -14,6 +14,8 @@ Thanks!
 - Improved handling of invalid styles.
 - Vienna can now download files. A new Downloads window has been added which tracks the file
   downloads. The downloads folder can now be configured via Preferences.
+- Added "Mark All Subscriptions as Read" command. (Thanks to Yann Bizeul).
+- Incorporated patches from Yann Bizeul and Adam Hammer.
 
 2.0.0.2010
 ----------

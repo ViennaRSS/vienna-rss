@@ -283,8 +283,12 @@
 -(NSArray *)folders:(int)folderId
 {
 	NSMutableArray * array = [NSMutableArray array];
-	TreeNode * node = [rootNode nodeFromID:folderId];
-
+	TreeNode * node;
+	if (!folderId)
+		node = rootNode;
+	else
+		node = [rootNode nodeFromID:folderId];
+	
 	if ([node folder] != nil)
 		[array addObject:[node folder]];
 	node = [node firstChild];
