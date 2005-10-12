@@ -79,7 +79,7 @@
 	// callback which is where this is probably liable to be used.
 	//
 	// This code basically throws away all HTML tags up to <br> or <br /> or the first raw newline
-	// or until 80 characters have been processed.
+	// or until 256 characters have been processed.
 	//
 	while (indexOfChr < maxChrs)
 	{
@@ -122,7 +122,7 @@
 			lengthToLastWord = indexOfChr;
 			break;
 		}
-		if (indexOfChr >= 80 && !isInTag)
+		if (indexOfChr >= 256 && !isInTag)
 			break;
 		++indexOfChr;
 	}
@@ -130,7 +130,7 @@
 	// If we got a long word with no spaces then just break the string
 	// at the limit.
 	if (lengthToLastWord == 0)
-		lengthToLastWord = MIN(maxChrs, 80);
+		lengthToLastWord = MIN(maxChrs, 256);
 	if (indexOfChr != maxChrs)
 	{
 		[aString deleteCharactersInRange:NSMakeRange(lengthToLastWord, maxChrs - lengthToLastWord)];

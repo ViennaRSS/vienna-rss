@@ -21,6 +21,7 @@
                 handleCopy = id; 
                 importSubscriptions = id; 
                 markAllRead = id; 
+                markAllSubscriptionsRead = id; 
                 markFlagged = id; 
                 markRead = id; 
                 myAction = id; 
