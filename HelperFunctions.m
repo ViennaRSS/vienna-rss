@@ -29,7 +29,7 @@ BOOL hasOSScriptsMenu(void)
 	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
 	NSArray * menuExtras = [properties objectForKey:@"menuExtras"];
 	int index;
-	
+
 	for (index = 0; index < [menuExtras count]; ++index)
 	{
 		if ([[menuExtras objectAtIndex:index] hasSuffix:@"Script Menu.menu"])

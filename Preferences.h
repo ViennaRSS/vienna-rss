@@ -32,6 +32,7 @@
 	BOOL openLinksInVienna;
 	BOOL openLinksInBackground;
 	BOOL hasPrefs;
+	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSFont * folderFont;
 	NSFont * articleFont;
@@ -46,6 +47,10 @@
 // Auto-expire values
 -(int)autoExpireDuration;
 -(void)setAutoExpireDuration:(int)newDuration;
+
+// Download folder
+-(NSString *)downloadFolder;
+-(void)setDownloadFolder:(NSString *)newFolder;
 
 // Mark read interval
 -(float)markReadInterval;
@@ -84,6 +89,7 @@
 // Current display style
 -(NSString *)displayStyle;
 -(void)setDisplayStyle:(NSString *)newStyle;
+-(void)setDisplayStyle:(NSString *)newStyle withNotification:(BOOL)flag;
 
 // Folder list font
 -(NSString *)folderListFont;

@@ -150,9 +150,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Initialise the article list view
 	[self initTableView];
 
-	// Select the default style
-	if (![self initForStyle:[prefs displayStyle]])
-		[self initForStyle:@"Default"];
+	// Select the user's current style or revert back to the
+	// default style otherwise.
+	[self initForStyle:[prefs displayStyle]];
 
 	// Restore the split bar position
 	[splitView2 loadLayoutWithName:@"SplitView2Positions"];
@@ -662,16 +662,34 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
 				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
 
-				if (!isAppInitialising)
-					[self refreshArticlePane];
+				// Make sure the template is valid
+				NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
+				if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
+				{
+					if (!isAppInitialising)
+						[self refreshArticlePane];
 
-				[handle closeFile];
-				return YES;
+					[handle closeFile];
+					return YES;
+				}
 			}
 			[handle closeFile];
 		}
 	}
-	return NO;
+
+	// If the template is invalid, revert to the default style
+	// which should ALWAYS be valid.
+	NSAssert(![styleName isEqualToString:@"Default"], @"Default style is corrupted!");
+
+	// Warn the user.
+	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"Invalid style title", nil), styleName];
+	runOKAlertPanel(titleText, @"Invalid style body");
+
+	// We need to reset the preferences without firing off a notification since we want the
+	// style change to happen immediately.
+	Preferences * prefs = [Preferences standardPreferences];
+	[prefs setDisplayStyle:@"Default" withNotification:NO];
+	return [self initForStyle:@"Default"];
 }
 
 /* mainView
@@ -1152,10 +1170,14 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	int folderIdToUse = currentFolderId;
 	int index;
 
-	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\""];
-	[htmlText appendString:cssStylesheet];
-	[htmlText appendString:@"\"/><title>$ArticleTitle$</title></head><body>"];
-
+	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head>"];
+	if (cssStylesheet != nil)
+	{
+		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
+		[htmlText appendString:cssStylesheet];
+		[htmlText appendString:@"\"/>"];
+	}
+	[htmlText appendString:@"<title>$ArticleTitle$</title></head><body>"];
 	for (index = 0; index < [msgArray count]; ++index)
 	{
 		Article * theArticle = [msgArray objectAtIndex:index];
@@ -1177,14 +1199,20 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
-		NSMutableString * htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
-		[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
-		[htmlArticle replaceString:@"$ArticleTitle$" withString:articleTitle];
-		[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
-		[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
-		[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
-		[htmlArticle replaceString:@"$FeedTitle$" withString:folderTitle];
-		[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
+		NSMutableString * htmlArticle;
+		if (htmlTemplate == nil)
+			htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
+		else
+		{
+			htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
+			[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
+			[htmlArticle replaceString:@"$ArticleTitle$" withString:articleTitle];
+			[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
+			[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
+			[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
+			[htmlArticle replaceString:@"$FeedTitle$" withString:folderTitle];
+			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
+		}
 
 		// Separate each article with a horizontal divider line
 		if (index > 0)
@@ -1468,7 +1496,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[db markArticleDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
 		if (deleteFlag)
 		{
-			if ([theArticle folderId] == currentFolderId)
+			if ([self currentCacheContainsFolder:[theArticle folderId]])
 				[arrayCopy removeObject:theArticle];
 		}
 		else

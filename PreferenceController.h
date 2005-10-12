@@ -37,6 +37,7 @@
 	IBOutlet NSButtonCell * markReadAfterDelay;
 	IBOutlet NSComboBox * minimumFontSizes;
 	IBOutlet NSButton * enableMinimumFontSize;
+	IBOutlet NSPopUpButton * downloadFolder;
 	NSMutableDictionary * appToPathMap;
 	ICInstance internetConfigHandler;
 }
@@ -53,6 +54,7 @@
 -(IBAction)changeMinimumFontSize:(id)sender;
 -(IBAction)selectMinimumFontSize:(id)sender;
 -(IBAction)changeExpireDuration:(id)sender;
+-(IBAction)changeDownloadFolder:(id)sender;
 
 // General functions
 -(void)initializePreferences;

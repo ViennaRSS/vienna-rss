@@ -22,12 +22,14 @@ NSString * MA_DefaultDatabaseName = @"~/Library/Application Support/Vienna/messa
 NSString * MA_FolderImagesFolder = @"~/Library/Application Support/Vienna/Images";
 NSString * MA_StylesFolder = @"~/Library/Application Support/Vienna/Styles";
 NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
+NSString * MA_DefaultDownloadsFolder = @"~/Desktop";
 NSString * MA_DefaultStyleName = @"Default";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_FolderFont = @"FolderFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
+NSString * MAPref_DownloadsFolder = @"DownloadsFolder";
 NSString * MAPref_SortDirection = @"SortDirection";
 NSString * MAPref_SortColumn = @"SortColumn";
 NSString * MAPref_CheckFrequency = @"CheckFrequencyInSeconds";
@@ -51,6 +53,7 @@ NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
 NSString * MAPref_MinimumFontSize = @"MinimumFontSize";
 NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
+NSString * MAPref_DownloadsList = @"DownloadsList";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;

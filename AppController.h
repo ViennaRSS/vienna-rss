@@ -25,8 +25,8 @@
 @class PreferenceController;
 @class FoldersTree;
 @class CheckForUpdates;
-@class DownloadUpdate;
 @class SearchFolder;
+@class DownloadWindow;
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
@@ -58,7 +58,7 @@
 	ActivityViewer * activityViewer;
 	PreferenceController * preferenceController;
 	CheckForUpdates * checkUpdates;
-	DownloadUpdate * downloadUpdate;
+	DownloadWindow * downloadWindow;
 	SearchFolder * smartFolder;
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
@@ -118,6 +118,8 @@
 -(IBAction)stopReloadingPage:(id)sender;
 -(IBAction)restoreMessage:(id)sender;
 -(IBAction)skipFolder:(id)sender;
+-(IBAction)showDownloadsWindow:(id)sender;
+-(IBAction)conditionalShowDownloadsWindow:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

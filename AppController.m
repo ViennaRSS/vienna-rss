@@ -38,6 +38,7 @@
 #import "ArticleView.h"
 #import "BrowserPane.h"
 #import "Preferences.h"
+#import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebUIDelegate.h"
@@ -300,12 +301,22 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
+	int returnCode;
+	
 	if ([self isConnecting])
 	{
-		int returnCode;
-		
 		returnCode = NSRunAlertPanel(NSLocalizedString(@"Connect Running", nil),
 									 NSLocalizedString(@"Connect Running text", nil),
+									 NSLocalizedString(@"Quit", nil),
+									 NSLocalizedString(@"Cancel", nil),
+									 nil);
+		if (returnCode == NSAlertAlternateReturn)
+			return NSTerminateCancel;
+	}
+	if ([[DownloadManager sharedInstance] activeDownloads] > 0)
+	{
+		returnCode = NSRunAlertPanel(NSLocalizedString(@"Downloads Running", nil),
+									 NSLocalizedString(@"Downloads Running text", nil),
 									 NSLocalizedString(@"Quit", nil),
 									 NSLocalizedString(@"Cancel", nil),
 									 nil);
@@ -363,13 +374,16 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 				return NO;
 			}
 		}
+		[fileManager removeFileAtPath:fullPath handler:nil];
 		if (![fileManager copyPath:filename toPath:fullPath handler:nil])
 			[[Preferences standardPreferences] setDisplayStyle:styleName];
 		else
 		{
+			Preferences * prefs = [Preferences standardPreferences];
 			[self initStylesMenu];
-			[[Preferences standardPreferences] setDisplayStyle:styleName];
-			runOKAlertPanel(@"New style title", @"New style body", styleName);
+			[prefs setDisplayStyle:styleName];
+			if ([[prefs displayStyle] isEqualToString:styleName])
+				runOKAlertPanel(@"New style title", @"New style body", styleName);
 		}
 		return YES;
 	}
@@ -520,13 +534,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 			case WebMenuItemTagCopyLinkToClipboard:
 				[menuItem setTitle:NSLocalizedString(@"Copy Link to Clipboard", nil)];
-				break;
-				
-			case WebMenuItemTagDownloadLinkToDisk:
-			case WebMenuItemTagDownloadImageToDisk:
-				// We don't handle these yet. Eventually we will do but, for now, remove
-				// these from the list.
-				[newDefaultMenu removeObjectAtIndex:index];
 				break;
 		}
 	}
@@ -719,6 +726,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)growlNotificationWasClicked:(id)clickContext
 {
+	[NSApp activateIgnoringOtherApps:YES];
 	[self showMainWindow:self];
 	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
 	if (unreadArticles != nil)
@@ -1294,9 +1302,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(IBAction)moreScripts:(id)sender
 {
-	NSString * stylesPage = [standardURLs valueForKey:@"ViennaMoreScriptsPage"];
-	if (stylesPage != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString:stylesPage]];
+	NSString * scriptsPage = [standardURLs valueForKey:@"ViennaMoreScriptsPage"];
+	if (scriptsPage != nil)
+		[self openURLInDefaultBrowser:[NSURL URLWithString:scriptsPage]];
 }
 
 /* viewArticlePage
@@ -1532,6 +1540,27 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	if (returnCode == NSAlertDefaultReturn)
 		[mainArticleView deleteSelectedArticles];
+}
+
+/* showDownloadsWindow
+ * Show the Downloads window, bringing it to the front if necessary.
+ */
+-(IBAction)showDownloadsWindow:(id)sender
+{
+	if (downloadWindow == nil)
+		downloadWindow = [[DownloadWindow alloc] init];
+	[[downloadWindow window] makeKeyAndOrderFront:sender];
+}
+
+/* conditionalShowDownloadsWindow
+ * Make the Downloads window visible only if it hasn't been shown.
+ */
+-(IBAction)conditionalShowDownloadsWindow:(id)sender
+{
+	if (downloadWindow == nil)
+		downloadWindow = [[DownloadWindow alloc] init];
+	if (![[downloadWindow window] isVisible])
+		[[downloadWindow window] makeKeyAndOrderFront:sender];
 }
 
 /* toggleActivityViewer
@@ -2192,6 +2221,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[standardURLs release];
+	[downloadWindow release];
 	[persistedStatusText release];
 	[scriptPathMappings release];
 	[originalIcon release];

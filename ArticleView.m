@@ -21,6 +21,7 @@
 #import "ArticleView.h"
 #import "AppController.h"
 #import "Preferences.h"
+#import "DownloadManager.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebPreferences.h"
 #import "WebKit/WebPolicyDelegate.h"
@@ -49,7 +50,8 @@
 		
 		// We'll be the webview policy handler.
 		[self setPolicyDelegate:self];
-		
+		[self setDownloadDelegate:[DownloadManager sharedInstance]];
+
 		// Set up to be notified when minimum font size changes
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
@@ -97,7 +99,12 @@
 		[listener ignore];
 		return;
 	}
-	[listener use];
+	if ([WebView canShowMIMEType:type])
+	{
+		[listener use];
+		return;
+	}
+	[listener download];
 }
 
 /* decidePolicyForNewWindowAction
