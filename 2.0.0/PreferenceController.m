@@ -42,6 +42,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	-(void)updateBloglinesUIState;
 	-(void)refreshLinkHandler;
 	-(IBAction)handleLinkSelector:(id)sender;
+	-(void)updateDownloadsPopUp:(NSString *)downloadFolderPath;
 @end
 
 @implementation PreferenceController
@@ -113,6 +114,9 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 	// Set auto-expire duration
 	[expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:[prefs autoExpireDuration]]];
+
+	// Set download folder
+	[self updateDownloadsPopUp:[prefs downloadFolder]];
 
 	// Set minimum font size option
 	[enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
@@ -245,6 +249,58 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender
 {
 	[[Preferences standardPreferences] setOpenLinksInVienna:[sender state] == NSOffState];
+}
+
+/* changeDownloadFolder
+ * Bring up the folder browser to pick a new download folder.
+ */
+-(IBAction)changeDownloadFolder:(id)sender
+{
+	NSOpenPanel * openPanel = [NSOpenPanel openPanel];
+	[openPanel setCanChooseDirectories:YES];
+	[openPanel setCanCreateDirectories:YES];
+	[openPanel setCanChooseFiles:NO];
+	[openPanel beginSheetForDirectory:nil
+							 file:nil
+							types:nil
+				   modalForWindow:[self window]
+					modalDelegate:self
+				   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
+					  contextInfo:nil];
+}
+
+/* openPanelDidEnd
+ * Called when the user completes the Import open panel
+ */
+-(void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	if (returnCode == NSOKButton)
+	{
+		[panel orderOut:self];
+		[[self window] makeKeyAndOrderFront:self];
+
+		NSString * downloadFolderPath = [panel directory];
+		[[Preferences standardPreferences] setDownloadFolder:downloadFolderPath];
+		[self updateDownloadsPopUp:downloadFolderPath];
+	}
+}
+
+/* updateDownloadsPopUp
+ * Update the Downloads folder popup with the specified download folder path and image.
+ */
+-(void)updateDownloadsPopUp:(NSString *)downloadFolderPath
+{
+	NSMenuItem * downloadPathItem = [downloadFolder itemAtIndex:0];
+	NSImage * pathImage = [[NSWorkspace sharedWorkspace] iconForFile:downloadFolderPath];
+	
+	[pathImage setScalesWhenResized:YES];
+	[pathImage setSize:NSMakeSize(16, 16)];
+	
+	[downloadPathItem setTitle:[downloadFolderPath lastPathComponent]];
+	[downloadPathItem setImage:pathImage];
+	[downloadPathItem setState:NSOffState];
+
+	[downloadFolder selectItemAtIndex:0];
 }
 
 /* changeCheckForUpdates

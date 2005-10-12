@@ -1,8 +1,8 @@
 //
-//  DownloadUpdate.h
+//  DownloadWindow.h
 //  Vienna
 //
-//  Created by Steve on Wed Apr 09 2004.
+//  Created by Steve on 10/9/05.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,20 +18,15 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
-@interface DownloadUpdate : NSWindowController {
-	IBOutlet NSButton * cancelButton;
-	IBOutlet NSProgressIndicator * progressBar;
-	IBOutlet NSTextField * titleString;
-	IBOutlet NSTextField * progressString;
-	IBOutlet NSWindow * updateWindow;
-	NSURLDownload * theDownload;
-	long expectedLength;
-	long bytesReceived;
+@interface DownloadWindow : NSWindowController {
+	IBOutlet NSWindow * window;
+	IBOutlet NSTableView * table;
+	IBOutlet NSButton * clearButton;
+	int lastCount;
 }
 
-// Accessor functions
--(IBAction)cancelButton:(id)sender;
--(void)download:(NSWindow *)window fromURL:(NSString *)fromURL toFilename:(NSString *)toFilename;
+// Public functions
+-(IBAction)clearList:(id)sender;
 @end

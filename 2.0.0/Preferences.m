@@ -58,7 +58,8 @@ static Preferences * _standardPreferences = nil;
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		displayStyle = [[defaults stringForKey:MAPref_ActiveStyleName] retain];
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_FolderFont]] retain];
-		articleFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_ArticleListFont]] retain]; 
+		articleFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_ArticleListFont]] retain];
+		downloadFolder = [[defaults stringForKey:MAPref_DownloadsFolder] retain];
 	}
 	return self;
 }
@@ -68,6 +69,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)dealloc
 {
+	[downloadFolder release];
 	[folderFont release];
 	[articleFont release];
 	[displayStyle release];
@@ -117,6 +119,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
+	[defaultValues setObject:MA_DefaultDownloadsFolder forKey:MAPref_DownloadsFolder];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
 }
@@ -191,6 +194,29 @@ static Preferences * _standardPreferences = nil;
 	{
 		autoExpireDuration = newDuration;
 		[[NSUserDefaults standardUserDefaults] setInteger:newDuration forKey:MAPref_AutoExpireDuration];
+	}
+}
+
+/* downloadFolder
+ * Returns the path of the current download folder.
+ */
+-(NSString *)downloadFolder
+{
+	return downloadFolder;
+}
+
+/* setDownloadFolder
+ * Sets the new download fodler path.
+ */
+-(void)setDownloadFolder:(NSString *)newFolder
+{
+	if (![newFolder isEqualToString:downloadFolder])
+	{
+		[newFolder retain];
+		[downloadFolder release];
+		downloadFolder = newFolder;
+		[[NSUserDefaults standardUserDefaults] setObject:downloadFolder forKey:MAPref_DownloadsFolder];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
 
@@ -360,13 +386,22 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setDisplayStyle:(NSString *)newStyleName
 {
+	[self setDisplayStyle:newStyleName withNotification:YES];
+}
+
+/* setDisplayStyle
+ * Changes the style used for displaying articles and optionally sends a notification.
+ */
+-(void)setDisplayStyle:(NSString *)newStyleName withNotification:(BOOL)flag
+{
 	if (![displayStyle isEqualToString:newStyleName])
 	{
 		[newStyleName retain];
 		[displayStyle release];
 		displayStyle = newStyleName;
 		[[NSUserDefaults standardUserDefaults] setValue:displayStyle forKey:MAPref_ActiveStyleName];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
+		if (flag)
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
 	}
 }
 

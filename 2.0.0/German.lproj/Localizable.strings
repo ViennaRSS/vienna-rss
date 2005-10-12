@@ -102,16 +102,10 @@
 "Please try again later" = "Bitte versuchen Sie es später nochmal.";
 "An update is now available" = "Eine Aktualisierungen ist verfügbar.";
 "Update available text" = "Version %@ von Vienna ist jetzt verfügbar von:\n\n%@\n\nWollen Sie es herunterladen? Wenn Sie es nicht jetzt herunterzuladen wollen, können Sie es später nachholen indem Sie Nach Aktualisierung suchen wählen.";
-"Simple download progress" = "%.1f%@ empfangen";
-"Full download progress" = "%.1f%@ empfangen (%d%% fertig)";
-"Starting..." = "Starte...";
 "any" = "einer";
 "all" = "allen";
 "View" = "Ansicht";
 "Open Scripts Folder" = "Öffne Scriptordner";
-"Downloading %@" = "Herrunterladen %@";
-"An error occured during download." = "Vienna könnte die Ursache für den Fehler nicht ausmachen. Bitte kontaktieren Sie den technischen Support für Unterstütung.";
-"Download Failed" = "Entschuldigung, aber während dem Herunterladen der Aktualisierung ist ein Problem aufgetreten.";
 "Cannot create database folder" = "Entschuldigung, aber Vienna war es nicht möglich den Datenbankordner zu erstellen.";
 "Cannot create database folder text" = "Vienna versuchte den Ordner '%@' zu erstellen aber es trat ein Fehler auf. Bitte überprüfen Sie die Dateizugriffsrechte an dem angegebenem Pfad.";
 "Unrecognised database format title" = "Das Datenbankdateiformat hat sich geändert";
@@ -179,3 +173,8 @@
 "Rename" = "Rename";
 "Mark All Read" = "Mark All Read";
 "Move Folders" = "Move Folders";
+"Downloads" = "Downloads";
+"Invalid style title" = "The style %@ appears to be corrupted";
+"Invalid style body" = "The Default style will be used instead.";
+"Downloads Running" = "One or more downloads are in progress";
+"Downloads Running text" = "Do you want to cancel all downloads and close Vienna now?";

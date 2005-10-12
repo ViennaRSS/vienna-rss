@@ -131,6 +131,11 @@
 		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		AAAAEF0F088DEBBA00B48199 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAAAEF0E088DEBBA00B48199 /* libsqlite3.a */; };
 		AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAB90EFC061D059D00CA4741 /* searchFolder.tiff */; };
+		AAB968DE08F7829E00B7D1C8 /* DownloadManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB968DC08F7829E00B7D1C8 /* DownloadManager.h */; };
+		AAB968DF08F7829E00B7D1C8 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */; };
+		AAB9697D08F9691C00B7D1C8 /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAB9697B08F9691C00B7D1C8 /* Downloads.nib */; };
+		AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */; };
+		AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */; };
 		AABFDCA10609EA8100100A9B /* ActivityViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFDC9F0609EA8100100A9B /* ActivityViewer.h */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AABFDCC20609EAC500100A9B /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AABFDCC10609EAC500100A9B /* ActivityViewer.nib */; };
@@ -139,9 +144,6 @@
 		AAD264B80611E108005A27E4 /* CheckForUpdates.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD264B60611E108005A27E4 /* CheckForUpdates.h */; };
 		AAD264B90611E108005A27E4 /* CheckForUpdates.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD264B70611E108005A27E4 /* CheckForUpdates.m */; };
 		AAD264DC0611E22A005A27E4 /* UpdateWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAD264DA0611E22A005A27E4 /* UpdateWindow.nib */; };
-		AAD34DAD06277D480094D6A6 /* DownloadPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAD34DAB06277D480094D6A6 /* DownloadPanel.nib */; };
-		AAD34DF6062786520094D6A6 /* DownloadUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD34DF4062786520094D6A6 /* DownloadUpdate.h */; };
-		AAD34DF7062786520094D6A6 /* DownloadUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD34DF5062786520094D6A6 /* DownloadUpdate.m */; };
 		AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
 		AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
@@ -255,7 +257,6 @@
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		130A612908F20249005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		130A612D08F20268005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		130A613108F20277005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		130A613508F20287005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -275,7 +276,6 @@
 		AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptTerminology; sourceTree = "<group>"; };
 		AA167A840658361B0091365D /* ViennaApp.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptSuite; sourceTree = "<group>"; };
 		AA1EE32E08F4064C00A9B20C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /Developer/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		AA1EE81408F69B8400A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		AA1EE81608F69B9D00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AA1EE81908F69BA500A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		AA1EE81A08F69BAE00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -362,7 +362,6 @@
 		AA6022B808C246F0002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AA6022BB08C246F8002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		AA6022BE08C246FF002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
-		AA6022C108C2471C002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		AA6022C608C24732002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA60237E08C298FB002CFD06 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunctions.h; sourceTree = "<group>"; };
 		AA60237F08C298FB002CFD06 /* HelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelperFunctions.m; sourceTree = "<group>"; };
@@ -408,6 +407,11 @@
 		AAAAED92088D62E600B48199 /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AAAAEF0E088DEBBA00B48199 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlite3.a; sourceTree = "<group>"; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = searchFolder.tiff; sourceTree = "<group>"; };
+		AAB968DC08F7829E00B7D1C8 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
+		AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
+		AAB9697C08F9691C00B7D1C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Downloads.nib; sourceTree = "<group>"; };
+		AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWindow.h; sourceTree = "<group>"; };
+		AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadWindow.m; sourceTree = "<group>"; };
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
@@ -418,13 +422,9 @@
 		AAD264B60611E108005A27E4 /* CheckForUpdates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckForUpdates.h; sourceTree = "<group>"; };
 		AAD264B70611E108005A27E4 /* CheckForUpdates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckForUpdates.m; sourceTree = "<group>"; };
 		AAD264DB0611E22A005A27E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
-		AAD34DAC06277D480094D6A6 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
-		AAD34DF4062786520094D6A6 /* DownloadUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadUpdate.h; sourceTree = "<group>"; };
-		AAD34DF5062786520094D6A6 /* DownloadUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadUpdate.m; sourceTree = "<group>"; };
 		AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = scriptMenu.tiff; sourceTree = "<group>"; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PopUpButtonExtensions.h; sourceTree = "<group>"; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PopUpButtonExtensions.m; sourceTree = "<group>"; };
-		AAD79620088AF47800E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/DownloadPanel.nib; sourceTree = "<group>"; };
 		AAD79623088AF48500E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AAD79626088AF49200E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		AAD79629088AF49A00E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/MainMenu.nib; sourceTree = "<group>"; };
@@ -553,8 +553,10 @@
 				AAD264B70611E108005A27E4 /* CheckForUpdates.m */,
 				AA6321160885EA81006382D3 /* Constants.h */,
 				AA63227E08861C99006382D3 /* Constants.m */,
-				AAD34DF4062786520094D6A6 /* DownloadUpdate.h */,
-				AAD34DF5062786520094D6A6 /* DownloadUpdate.m */,
+				AAB968DC08F7829E00B7D1C8 /* DownloadManager.h */,
+				AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */,
+				AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */,
+				AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */,
 				AA328A7308483DE100A7AD5A /* Export.h */,
 				AA328A7408483DE100A7AD5A /* Export.m */,
 				AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */,
@@ -593,7 +595,6 @@
 			isa = PBXGroup;
 			children = (
 				AABFDCC10609EAC500100A9B /* ActivityViewer.nib */,
-				AAD34DAB06277D480094D6A6 /* DownloadPanel.nib */,
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
 				AAA1E3280852539500277128 /* GroupFolder.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
@@ -601,6 +602,7 @@
 				AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */,
 				AA3BDC9E063249FE004621CD /* SearchFolder.nib */,
 				AAD264DA0611E22A005A27E4 /* UpdateWindow.nib */,
+				AAB9697B08F9691C00B7D1C8 /* Downloads.nib */,
 				AA26F5650604955F00FE7994 /* Localizable.strings */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
@@ -768,7 +770,6 @@
 				AAD264B80611E108005A27E4 /* CheckForUpdates.h in Headers */,
 				AA94574C061C7E060090FE26 /* ExtDateFormatter.h in Headers */,
 				AA6CB7CF06238B08004E1236 /* FolderView.h in Headers */,
-				AAD34DF6062786520094D6A6 /* DownloadUpdate.h in Headers */,
 				AAFA8CA9062A0BE200C530A6 /* CalendarExtensions.h in Headers */,
 				AAA3AF0906338A00006735EB /* SearchFolder.h in Headers */,
 				AA8C72F50641DE1F00649BA2 /* Criteria.h in Headers */,
@@ -802,6 +803,8 @@
 				AA51CBF808CFEA0F00DD6535 /* BrowserPane.h in Headers */,
 				AA82995008D94BAF00983120 /* RefreshManager.h in Headers */,
 				AAEB1A5208E74EE300917920 /* ArrayExtensions.h in Headers */,
+				AAB968DE08F7829E00B7D1C8 /* DownloadManager.h in Headers */,
+				AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,7 +916,6 @@
 				AAD264DC0611E22A005A27E4 /* UpdateWindow.nib in Resources */,
 				AAD1E2D40612909D00D09905 /* MacPAD.url in Resources */,
 				AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */,
-				AAD34DAD06277D480094D6A6 /* DownloadPanel.nib in Resources */,
 				AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */,
 				AAE3AF0706570DB700A1FA1F /* Vienna Help in Resources */,
 				AA829D4508DA7EF800983120 /* ViennaApp.scriptTerminology in Resources */,
@@ -942,6 +944,7 @@
 				AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */,
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
+				AAB9697D08F9691C00B7D1C8 /* Downloads.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,7 +975,6 @@
 				AAD264B90611E108005A27E4 /* CheckForUpdates.m in Sources */,
 				AA94574D061C7E060090FE26 /* ExtDateFormatter.m in Sources */,
 				AA6CB7D006238B08004E1236 /* FolderView.m in Sources */,
-				AAD34DF7062786520094D6A6 /* DownloadUpdate.m in Sources */,
 				AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */,
 				AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
@@ -1005,6 +1007,8 @@
 				AA51CBF908CFEA0F00DD6535 /* BrowserPane.m in Sources */,
 				AA82995108D94BAF00983120 /* RefreshManager.m in Sources */,
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
+				AAB968DF08F7829E00B7D1C8 /* DownloadManager.m in Sources */,
+				AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,6 +1111,14 @@
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
 		};
+		AAB9697B08F9691C00B7D1C8 /* Downloads.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAB9697C08F9691C00B7D1C8 /* English */,
+			);
+			name = Downloads.nib;
+			sourceTree = "<group>";
+		};
 		AABFDCC10609EAC500100A9B /* ActivityViewer.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1125,18 +1137,6 @@
 				AA1EE81E08F69BD000A9B20C /* German */,
 			);
 			name = UpdateWindow.nib;
-			sourceTree = "<group>";
-		};
-		AAD34DAB06277D480094D6A6 /* DownloadPanel.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AAD34DAC06277D480094D6A6 /* English */,
-				AAD79620088AF47800E2CE5E /* Swedish */,
-				AA6022C108C2471C002CFD06 /* French */,
-				130A612908F20249005A52F1 /* Italian */,
-				AA1EE81408F69B8400A9B20C /* German */,
-			);
-			name = DownloadPanel.nib;
 			sourceTree = "<group>";
 		};
 		AAE3AEF406570DB700A1FA1F /* Vienna Help */ = {

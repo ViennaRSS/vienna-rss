@@ -22,12 +22,14 @@ extern NSString * MA_DefaultDatabaseName;
 extern NSString * MA_FolderImagesFolder;
 extern NSString * MA_StylesFolder;
 extern NSString * MA_ScriptsFolder;
+extern NSString * MA_DefaultDownloadsFolder;
 extern NSString * MA_DefaultStyleName;
 
 extern NSString * MAPref_ArticleListFont;
 extern NSString * MAPref_FolderFont;
 extern NSString * MAPref_CachedFolderID;
 extern NSString * MAPref_DefaultDatabase;
+extern NSString * MAPref_DownloadsFolder;
 extern NSString * MAPref_SortDirection;
 extern NSString * MAPref_SortColumn;
 extern NSString * MAPref_CheckFrequency;
@@ -51,6 +53,7 @@ extern NSString * MAPref_ShowScriptsMenu;
 extern NSString * MAPref_MinimumFontSize;
 extern NSString * MAPref_UseMinimumFontSize;
 extern NSString * MAPref_AutoExpireDuration;
+extern NSString * MAPref_DownloadsList;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;

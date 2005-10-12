@@ -8,10 +8,14 @@ Remaining Planned 2.0 Items
 ===========================
 - Filter article list by date/read.
 - Auto-discover feeds if subscription URL is to a web page.
-- Sort on multiple columns.
 - Search in all folders via search field.
-- Download files directly from Vienna.
 - Handle middle mouse click on tabs.
+- Make Preferences dialog more compact.
+- Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
+- Renaming a folder does not update the folder name in smart folders that reference it.
+- Fix web browser to block popups.
+- The isAccessible(NSString * urlString) function returns NO behind a firewall.
+- There's another Delete key on the Apple keyboard that we don't handle.
 
 Post 2.0 Items
 ==============
@@ -25,11 +29,5 @@ Post 2.0 Items
 - Single article list and viewer interface (as in Bloglines).
 - Bonjour support.
 - Synchronisation via .Mac or FTP.
-
-Coding To-Do Items
-==================
-- Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
-- Renaming a folder does not update the folder name in smart folders that reference it.
-- Fix web browser to block popups.
-- The isAccessible(NSString * urlString) function returns NO behind a firewall.
-- There's another Delete key on the Apple keyboard that we don't handle.
+- Selection count in status area.
+- Sort on multiple columns.

@@ -638,22 +638,34 @@
 					hasGUID = YES;
 					continue;
 				}
-				
+
 				// Parse item date
 				if ([itemNodeName isEqualToString:@"modified"])
 				{
 					NSString * dateString = [subItemTree valueOfElement];
-					if ([newItem date] == nil)
-						[newItem setDate:[XMLParser parseXMLDate:dateString]];
+					NSDate * newDate = [XMLParser parseXMLDate:dateString];
+					if ([newItem date] == nil || [newDate isGreaterThan:[newItem date]])
+						[newItem setDate:newDate];
 					continue;
 				}
 
 				// Parse item date
+				if ([itemNodeName isEqualToString:@"created"])
+				{
+					NSString * dateString = [subItemTree valueOfElement];
+					NSDate * newDate = [XMLParser parseXMLDate:dateString];
+					if ([newItem date] == nil || [newDate isGreaterThan:[newItem date]])
+						[newItem setDate:newDate];
+					continue;
+				}
+				
+				// Parse item date
 				if ([itemNodeName isEqualToString:@"updated"])
 				{
 					NSString * dateString = [subItemTree valueOfElement];
-					if ([newItem date] == nil)
-						[newItem setDate:[XMLParser parseXMLDate:dateString]];
+					NSDate * newDate = [XMLParser parseXMLDate:dateString];
+					if ([newItem date] == nil || [newDate isGreaterThan:[newItem date]])
+						[newItem setDate:newDate];
 					continue;
 				}
 			}

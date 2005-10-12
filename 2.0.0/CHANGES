@@ -11,6 +11,9 @@ Thanks!
 - Added option to export subscriptions with groups or as a flat file.
 - Refresh when the system awakes from sleep if the refresh frequency is not set to manual.
 - Added German Localisation. (Thanks to Jan Kampling).
+- Improved handling of invalid styles.
+- Vienna can now download files. A new Downloads window has been added which tracks the file
+  downloads. The downloads folder can now be configured via Preferences.
 
 2.0.0.2010
 ----------

@@ -19,7 +19,7 @@
 //
 
 #import "CheckForUpdates.h"
-#import "DownloadUpdate.h"
+#import "DownloadManager.h"
 #import "HelperFunctions.h"
 
 @implementation CheckForUpdates
@@ -236,9 +236,7 @@
 	if (returnCode == NSOKButton)
 	{
 		[sheet close];
-		if (!downloadUpdate)
-			downloadUpdate = [[DownloadUpdate alloc] init];
-		[downloadUpdate download:mainWindow fromURL:[checkUpdates updateURL] toFilename:[sheet filename]];
+		[[DownloadManager sharedInstance] downloadFile:[sheet filename] fromURL:[checkUpdates updateURL]];
 	}
 }
 @end

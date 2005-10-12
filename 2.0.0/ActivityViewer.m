@@ -65,8 +65,9 @@
 	[splitView loadLayoutWithName:@"SplitView3Positions"];	
 
 	// Set up to receive notifications when the activity log changes
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogChange:) name:@"MA_Notify_ActivityLogChange" object:nil];	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDetailChange:) name:@"MA_Notify_ActivityDetailChange" object:nil];	
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(handleLogChange:) name:@"MA_Notify_ActivityLogChange" object:nil];	
+	[nc addObserver:self selector:@selector(handleDetailChange:) name:@"MA_Notify_ActivityDetailChange" object:nil];	
 }
 
 /* windowShouldClose

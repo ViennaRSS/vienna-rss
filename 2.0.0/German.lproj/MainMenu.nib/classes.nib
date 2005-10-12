@@ -43,6 +43,7 @@
                 setCondensedLayout = id; 
                 setTableLayout = id; 
                 showAcknowledgements = id; 
+                showDownloadsWindow = id; 
                 showMainWindow = id; 
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
