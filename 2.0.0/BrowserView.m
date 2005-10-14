@@ -26,6 +26,11 @@ static const int MA_Min_TabWidth = 40;
 static const int MA_Tab_Height = 20;
 static const int MA_Left_Margin_Width = 10;
 
+// Close button states
+#define NORMAL_STATE		1
+#define HIGHLIGHTED_STATE	2
+#define PRESSED_STATE		3
+
 /* BrowserTab
  * Defines a single tab with its associated view, title and
  * the position/size of the tab in the browser view.
@@ -37,7 +42,9 @@ static const int MA_Left_Margin_Width = 10;
 	NSRect rect;
 	NSRect textRect;
 	NSRect closeButtonRect;
-	NSTrackingRectTag tag;
+	int closeButtonState;
+	NSTrackingRectTag trackingRectTag;
+	NSTrackingRectTag closeButtonTrackingRectTag;
 	NSToolTipTag toolTipTag;
 }
 
@@ -49,15 +56,19 @@ static const int MA_Left_Margin_Width = 10;
 -(NSRect)textRect;
 -(NSRect)closeButtonRect;
 -(BOOL)hasCloseButton;
+-(int)closeButtonState;
 -(NSTrackingRectTag)trackingRectTag;
+-(NSTrackingRectTag)closeButtonTrackingRectTag;
 -(NSToolTipTag)toolTipTag;
 -(void)setAssociatedView:(NSView<BaseView> *)newView;
 -(void)setTitle:(NSString *)newTitle;
 -(void)setDisplayTitle:(NSString *)newDisplayTitle;
 -(void)setRect:(NSRect)newRect;
 -(void)setTextRect:(NSRect)newTextRect;
+-(void)setCloseButtonState:(int)newState;
 -(void)setCloseButtonRect:(NSRect)newCloseButtonRect;
 -(void)setTrackingRectTag:(NSTrackingRectTag)newTag;
+-(void)setCloseButtonTrackingRectTag:(NSTrackingRectTag)newTag;
 -(void)setToolTipTag:(NSToolTipTag)newToolTipTag;
 @end;
 
@@ -76,6 +87,8 @@ static const int MA_Left_Margin_Width = 10;
 		[self setTextRect:NSZeroRect];
 		[self setCloseButtonRect:NSZeroRect];
 		[self setTrackingRectTag:0];
+		[self setCloseButtonTrackingRectTag:0];
+		[self setCloseButtonState:NORMAL_STATE];
 	}
 	return self;
 }
@@ -135,6 +148,25 @@ static const int MA_Left_Margin_Width = 10;
 -(NSString *)displayTitle
 {
 	return displayTitle;
+}
+
+/* setCloseButtonState
+ * Sets the state of the close button. Valid states are:
+ *  NORMAL_STATE - normal appearance.
+ *  HIGHLIGHTED_STATE - highlighted
+ *  PRESSED_STATE - depressed and highlighted
+ */
+-(void)setCloseButtonState:(int)newState
+{
+	closeButtonState = newState;
+}
+
+/* closeButtonState
+ * Returns the close button state
+ */
+-(int)closeButtonState
+{
+	return closeButtonState;
 }
 
 /* setRect
@@ -201,7 +233,7 @@ static const int MA_Left_Margin_Width = 10;
  */
 -(void)setTrackingRectTag:(NSTrackingRectTag)newTag
 {
-	tag = newTag;
+	trackingRectTag = newTag;
 }
 
 /* trackingRectTag
@@ -209,7 +241,23 @@ static const int MA_Left_Margin_Width = 10;
  */
 -(NSTrackingRectTag)trackingRectTag
 {
-	return tag;
+	return trackingRectTag;
+}
+
+/* setCloseButtonTrackingRectTag
+ * Set the tracking rectange tag ID for this tab.
+ */
+-(void)setCloseButtonTrackingRectTag:(NSTrackingRectTag)newTag
+{
+	closeButtonTrackingRectTag = newTag;
+}
+
+/* closeButtonTrackingRectTag
+ * Return the tracking rectange tag ID.
+ */
+-(NSTrackingRectTag)closeButtonTrackingRectTag
+{
+	return closeButtonTrackingRectTag;
 }
 
 /* setToolTipTag
@@ -261,6 +309,8 @@ static const int MA_Left_Margin_Width = 10;
 		inactiveTabBackgroundColor = [[NSColor grayColor] retain];
 
 		closeButton = [[NSImage imageNamed:@"smallCloseButton.tiff"] retain];
+		highlightedCloseButton = [[NSImage imageNamed:@"highlightedCloseButton.tiff"] retain];
+		pressedCloseButton = [[NSImage imageNamed:@"pressedCloseButton.tiff"] retain];
 		closeButtonSize = [closeButton size];
 
 		// Want to be notified when the view is resized.
@@ -269,6 +319,31 @@ static const int MA_Left_Margin_Width = 10;
 		[nc addObserver:self selector:@selector(viewWasResized:) name:NSViewFrameDidChangeNotification object:[self superview]];
     }
     return self;
+}
+
+/* updateCloseButton
+ * Redraws the close button for a tab depending on its current state.
+ */
+-(void)updateCloseButton:(BrowserTab *)theTab withLock:(BOOL)doLock
+{
+	if ([theTab hasCloseButton])
+	{
+		NSPoint pt = [theTab closeButtonRect].origin;
+		NSImage * buttonImage;
+		
+		switch ([theTab closeButtonState])
+		{
+			case NORMAL_STATE:		buttonImage = closeButton; break;
+			case HIGHLIGHTED_STATE: buttonImage = highlightedCloseButton; break;
+			case PRESSED_STATE:		buttonImage = pressedCloseButton; break;
+			default:				NSAssert(false, @"Unknown close button state!"); return;
+		}
+		if (doLock)
+			[buttonImage lockFocus];
+		[buttonImage compositeToPoint:NSMakePoint(pt.x, pt.y) operation:NSCompositeSourceOver];
+		if (doLock)
+			[buttonImage unlockFocus];
+	}
 }
 
 /* drawRect
@@ -289,7 +364,7 @@ static const int MA_Left_Margin_Width = 10;
 		[bpath setLineWidth:1.0];
 
 		int activeTabIndex = [allTabs indexOfObject:activeTab];
-		
+
 		// Paint left margin.
 		NSRect leftMargin = NSMakeRect(rightEdge, y0, MA_Left_Margin_Width, y1);
 		if (NSIntersectsRect(leftMargin, rect))
@@ -338,11 +413,7 @@ static const int MA_Left_Margin_Width = 10;
 				}
 
 				// Draw the close button for non-primary tabs
-				if ([theTab hasCloseButton])
-				{
-					NSPoint pt = [theTab closeButtonRect].origin;
-					[closeButton compositeToPoint: NSMakePoint(pt.x, pt.y) operation:NSCompositeSourceOver];
-				}
+				[self updateCloseButton:theTab withLock:NO];
 
 				// Draw the text
 				[[theTab displayTitle] drawInRect:[theTab textRect] withAttributes:titleAttributes];
@@ -416,6 +487,7 @@ static const int MA_Left_Margin_Width = 10;
 	{
 		BrowserTab * primaryTab = [allTabs objectAtIndex:0];
 		[self removeTrackingRect:[primaryTab trackingRectTag]];
+		[self removeTrackingRect:[primaryTab closeButtonTrackingRectTag]];
 		[primaryTab setRect:NSZeroRect];
 		[self removeAllToolTips];
 	}
@@ -451,7 +523,11 @@ static const int MA_Left_Margin_Width = 10;
 				{
 					int x0 = computedRect.origin.x + 5;
 					int y0 = (computedRect.origin.y + (MA_Tab_Height - closeButtonSize.height) / 2);
-					[theTab setCloseButtonRect:NSMakeRect(x0, y0, closeButtonSize.width, closeButtonSize.height)];
+					NSRect closeRect = NSMakeRect(x0, y0, closeButtonSize.width, closeButtonSize.height);
+					[theTab setCloseButtonRect:closeRect];
+
+					[self removeTrackingRect:[theTab closeButtonTrackingRectTag]];
+					[theTab setCloseButtonTrackingRectTag:[self addTrackingRect:closeRect owner:self userData:theTab assumeInside:NSPointInRect(mousePt, closeRect)]];
 				}
 			}
 			
@@ -478,6 +554,16 @@ static const int MA_Left_Margin_Width = 10;
 {
 	if (trackingTab != [theEvent userData])
 		trackingTab = [theEvent userData];
+	if ([trackingTab hasCloseButton])
+	{
+		NSPoint mousePosition = [self convertPoint:[theEvent locationInWindow] fromView:[[NSApp mainWindow] contentView]];
+		if (NSPointInRect(mousePosition, [trackingTab closeButtonRect]))
+		{
+			[trackingTab setCloseButtonState:HIGHLIGHTED_STATE];
+			[self setNeedsDisplayInRect:[trackingTab closeButtonRect]];
+			[self displayIfNeeded];
+		}
+	}
 }
 
 /* mouseExited
@@ -485,6 +571,19 @@ static const int MA_Left_Margin_Width = 10;
  */
 -(void)mouseExited:(NSEvent *)theEvent
 {
+	if ([trackingTab hasCloseButton])
+	{
+		NSPoint mousePosition = [self convertPoint:[theEvent locationInWindow] fromView:[[NSApp mainWindow] contentView]];
+		if (!NSPointInRect(mousePosition, [trackingTab closeButtonRect]))
+		{
+			[trackingTab setCloseButtonState:NORMAL_STATE];
+			[self setNeedsDisplayInRect:[trackingTab closeButtonRect]];
+			[self displayIfNeeded];
+			return;
+		}
+		if (NSPointInRect(mousePosition, [trackingTab rect]))
+			return;
+	}
 	if (trackingTab == [theEvent userData])
 		trackingTab = nil;
 }
@@ -503,9 +602,35 @@ static const int MA_Left_Margin_Width = 10;
 		{
 			NSPoint mousePosition = [self convertPoint:[theEvent locationInWindow] fromView:[[NSApp mainWindow] contentView]];
 			if (NSPointInRect(mousePosition, [trackingTab closeButtonRect]))
+			{
+				[trackingTab setCloseButtonState:PRESSED_STATE];
+				[self setNeedsDisplayInRect:[trackingTab closeButtonRect]];
+				[self displayIfNeeded];
 				return;
+			}
 		}
 		[self showTab:trackingTab];
+	}
+}
+
+/* mouseDragged
+ * Handle a drag event which can occur when the user clicks in the close button then moves
+ * the cursor out of the close button, keeping the mouse button depressed.
+ */
+-(void)mouseDragged:(NSEvent *)theEvent
+{
+	if (trackingTab != nil)
+	{
+		if ([trackingTab hasCloseButton])
+		{
+			NSPoint mousePosition = [self convertPoint:[theEvent locationInWindow] fromView:[[NSApp mainWindow] contentView]];
+			if (!NSPointInRect(mousePosition, [trackingTab closeButtonRect]))
+				[trackingTab setCloseButtonState:NORMAL_STATE];
+			else
+				[trackingTab setCloseButtonState:PRESSED_STATE];
+			[self setNeedsDisplayInRect:[trackingTab closeButtonRect]];
+			[self displayIfNeeded];
+		}
 	}
 }
 
@@ -613,7 +738,7 @@ static const int MA_Left_Margin_Width = 10;
  */
 -(void)setActiveTab:(BrowserTab *)newActiveTab
 {
-	NSAssert([allTabs indexOfObject:newActiveTab] != -1, @"Cannot make an active tab without first adding it to the browserview");
+	NSAssert([allTabs indexOfObject:newActiveTab] != NSNotFound, @"Cannot make an active tab without first adding it to the browserview");
 	[self showTab:newActiveTab];
 }
 
@@ -663,6 +788,7 @@ static const int MA_Left_Margin_Width = 10;
 	{
 		BrowserTab * theTab = [allTabs objectAtIndex:--count];
 		[self removeTrackingRect:[theTab trackingRectTag]];
+		[self removeTrackingRect:[theTab closeButtonTrackingRectTag]];
 		[allTabs removeObject:theTab];
 	}
 	[self updateTrackingRectangles];
@@ -677,10 +803,11 @@ static const int MA_Left_Margin_Width = 10;
 -(void)closeTab:(BrowserTab *)theTab
 {
 	int index = [allTabs indexOfObject:theTab];
-	if (index > 0)
+	if (index != NSNotFound && index > 0)
 	{
 		[theTab retain];
 		[self removeTrackingRect:[theTab trackingRectTag]];
+		[self removeTrackingRect:[theTab closeButtonTrackingRectTag]];
 		[self removeToolTip:[theTab toolTipTag]];
 		[allTabs removeObject:theTab];
 		if (trackingTab == theTab)
@@ -735,6 +862,7 @@ static const int MA_Left_Margin_Width = 10;
 {
 	NSAssert([allTabs count] > 0, @"Cannot call showPreviousTab without a primary tab");
 	int index = [allTabs indexOfObject:activeTab];
+	NSAssert(index != NSNotFound, @"Active tab missing from allTabs array");
 	int count = [allTabs count];
 
 	if (index == 0)
@@ -750,6 +878,7 @@ static const int MA_Left_Margin_Width = 10;
 {
 	NSAssert([allTabs count] > 0, @"Cannot call showNextTab without a primary tab");
 	int index = [allTabs indexOfObject:activeTab];
+	NSAssert(index != NSNotFound, @"Active tab missing from allTabs array");
 	int count = [allTabs count];
 
 	if (++index == count)
@@ -764,6 +893,8 @@ static const int MA_Left_Margin_Width = 10;
 {
 	[borderColor release];
 	[inactiveTabBackgroundColor release];
+	[pressedCloseButton release];
+	[highlightedCloseButton release];
 	[closeButton release];
 	[titleAttributes release];
 	[allTabs release];

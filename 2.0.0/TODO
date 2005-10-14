@@ -15,7 +15,6 @@ Remaining Planned 2.0 Items
 - Renaming a folder does not update the folder name in smart folders that reference it.
 - Fix web browser to block popups.
 - The isAccessible(NSString * urlString) function returns NO behind a firewall.
-- There's another Delete key on the Apple keyboard that we don't handle.
 
 Post 2.0 Items
 ==============

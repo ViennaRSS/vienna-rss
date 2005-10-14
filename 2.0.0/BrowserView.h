@@ -37,6 +37,8 @@
 	BrowserTab * activeTab;
 	NSMutableArray * allTabs;
 	NSImage * closeButton;
+	NSImage * highlightedCloseButton;
+	NSImage * pressedCloseButton;
 	NSSize closeButtonSize;
 	BrowserTab * trackingTab;
 	NSMutableDictionary * titleAttributes;

@@ -56,6 +56,7 @@
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
 		AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2DE139085399F40055C4EE /* sqlite3.h */; };
+		AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */; };
 		AA3281A5084161EB00A7AD5A /* RichXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3281A3084161EB00A7AD5A /* RichXMLParser.h */; };
 		AA3281A6084161EB00A7AD5A /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
 		AA3288310846FC0B00A7AD5A /* MacPADSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = AA32882F0846FC0B00A7AD5A /* MacPADSocket.h */; };
@@ -136,6 +137,7 @@
 		AAB9697D08F9691C00B7D1C8 /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAB9697B08F9691C00B7D1C8 /* Downloads.nib */; };
 		AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */; };
 		AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */; };
+		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
 		AABFDCA10609EA8100100A9B /* ActivityViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFDC9F0609EA8100100A9B /* ActivityViewer.h */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AABFDCC20609EAC500100A9B /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AABFDCC10609EAC500100A9B /* ActivityViewer.nib */; };
@@ -326,6 +328,7 @@
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
 		AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		AA2DE139085399F40055C4EE /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlightedCloseButton.tiff; sourceTree = "<group>"; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichXMLParser.h; sourceTree = "<group>"; };
 		AA3281A4084161EB00A7AD5A /* RichXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParser.m; sourceTree = "<group>"; };
 		AA32882F0846FC0B00A7AD5A /* MacPADSocket.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MacPADSocket.h; sourceTree = "<group>"; };
@@ -412,6 +415,7 @@
 		AAB9697C08F9691C00B7D1C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Downloads.nib; sourceTree = "<group>"; };
 		AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWindow.h; sourceTree = "<group>"; };
 		AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadWindow.m; sourceTree = "<group>"; };
+		AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pressedCloseButton.tiff; sourceTree = "<group>"; };
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
@@ -613,6 +617,8 @@
 				AAE7A845086B6994009A487E /* action.tiff */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
+				AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */,
+				AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */,
 				AA6321500885F0BB006382D3 /* comments.tiff */,
 				AAE7A95F086BBA1F009A487E /* refresh.tiff */,
 				AA67F3980897377C008BBC37 /* stopRefresh.tiff */,
@@ -945,6 +951,8 @@
 				AAF6C3A308B06BA00077BAB8 /* StandardURLs.plist in Resources */,
 				AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */,
 				AAB9697D08F9691C00B7D1C8 /* Downloads.nib in Resources */,
+				AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */,
+				AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

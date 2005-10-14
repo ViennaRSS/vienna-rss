@@ -47,6 +47,7 @@
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
 	-(void)selectArticleAfterReload;
+	-(void)handleFolderUpdate:(NSNotification *)nc;
 	-(void)handleStyleChange:(NSNotificationCenter *)nc;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
@@ -101,6 +102,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 
 	// Create a backtrack array
 	Preferences * prefs = [Preferences standardPreferences];
@@ -786,6 +788,22 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)printDocument:(id)sender
 {
 	[articleText printDocument:sender];
+}
+
+/* handleFolderUpdate
+ * Called if a folder content has changed.
+ */
+-(void)handleFolderUpdate:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	if (folderId == 0 || [self currentCacheContainsFolder:folderId])
+		[self refreshFolder:YES];
+	else
+	{
+		Folder * folder = [db folderFromID:currentFolderId];
+		if (IsSmartFolder(folder))
+			[self refreshFolder:YES];
+	}
 }
 
 /* handleArticleListFontChange
