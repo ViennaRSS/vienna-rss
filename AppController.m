@@ -55,7 +55,6 @@
 	-(void)handleTabChange:(NSNotification *)nc;
 	-(void)handleFolderSelection:(NSNotification *)note;
 	-(void)handleCheckFrequencyChange:(NSNotification *)note;
-	-(void)handleFolderUpdate:(NSNotification *)nc;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
@@ -137,7 +136,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleFolderSelection:) name:@"MA_Notify_FolderSelectionChange" object:nil];
 	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
@@ -1121,19 +1119,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	}
 }
 
-/* handleFolderUpdate
- * Called if a folder content has changed.
- */
--(void)handleFolderUpdate:(NSNotification *)nc
-{
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == 0 || folderId == [mainArticleView currentFolderId])
-	{
-		[mainArticleView refreshFolder:YES];
-		[self updateSearchPlaceholder];
-	}
-}
-
 /* handleFolderSelection
  * Called when the selection changes in the folder pane.
  */
@@ -1377,6 +1362,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 					return YES;
 				}
 			return NO;
+
+		case NSDeleteFunctionKey:
+			[self deleteMessage:self];
+			return YES;
 			
 		case 'f':
 		case 'F':
