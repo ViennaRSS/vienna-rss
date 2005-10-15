@@ -1,8 +1,8 @@
 //
-//  DownloadWindow.h
+//  SquareWindow.h
 //  Vienna
 //
-//  Created by Steve on 10/9/05.
+//  Created by Steve on 10/14/05.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,15 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SquareWindow.h"
 
-@interface DownloadWindow : NSWindowController {
-	IBOutlet SquareWindow * window;
-	IBOutlet NSTableView * table;
-	IBOutlet NSButton * clearButton;
-	int lastCount;
+@interface SquareWindow : NSWindow {
 }
-
-// Public functions
--(IBAction)clearList:(id)sender;
 @end

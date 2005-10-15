@@ -138,6 +138,8 @@
 		AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */; };
 		AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */; };
 		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
+		AABCFB1A0900BA4E00984F78 /* SquareWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AABCFB180900BA4E00984F78 /* SquareWindow.h */; };
+		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
 		AABFDCA10609EA8100100A9B /* ActivityViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFDC9F0609EA8100100A9B /* ActivityViewer.h */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AABFDCC20609EAC500100A9B /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AABFDCC10609EAC500100A9B /* ActivityViewer.nib */; };
@@ -416,6 +418,8 @@
 		AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWindow.h; sourceTree = "<group>"; };
 		AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadWindow.m; sourceTree = "<group>"; };
 		AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pressedCloseButton.tiff; sourceTree = "<group>"; };
+		AABCFB180900BA4E00984F78 /* SquareWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareWindow.h; sourceTree = "<group>"; };
+		AABCFB190900BA4E00984F78 /* SquareWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareWindow.m; sourceTree = "<group>"; };
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
@@ -742,6 +746,8 @@
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
 				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
+				AABCFB180900BA4E00984F78 /* SquareWindow.h */,
+				AABCFB190900BA4E00984F78 /* SquareWindow.m */,
 				AA2185020861E7600024DD4A /* TexturedHeader.h */,
 				AA2185010861E7600024DD4A /* TexturedHeader.m */,
 				AA328863084700B700A7AD5A /* XMLParser.h */,
@@ -811,6 +817,7 @@
 				AAEB1A5208E74EE300917920 /* ArrayExtensions.h in Headers */,
 				AAB968DE08F7829E00B7D1C8 /* DownloadManager.h in Headers */,
 				AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */,
+				AABCFB1A0900BA4E00984F78 /* SquareWindow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1024,7 @@
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
 				AAB968DF08F7829E00B7D1C8 /* DownloadManager.m in Sources */,
 				AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */,
+				AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

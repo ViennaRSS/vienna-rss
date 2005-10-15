@@ -22,12 +22,6 @@
 #import "DownloadManager.h"
 #import "ImageAndTextCell.h"
 
-// Use this to get the square bottom windows that Safari uses in its
-// Downloads window.
-@interface NSWindow (Private)
-	-(void)setBottomCornerRounded:(BOOL)rounded;
-@end
-
 @implementation DownloadWindow
 
 /* init
@@ -51,10 +45,6 @@
 	[self setShouldCascadeWindows:NO];
 	[self setWindowFrameAutosaveName:@"downloadWindow"];
 	[window setDelegate:self];
-
-	// Make the bottom of the Downloads window square.
-	if ([window respondsToSelector:@selector(setBottomCornerRounded:)])
-		[window setBottomCornerRounded:NO];	
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];

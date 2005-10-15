@@ -1732,86 +1732,101 @@ static Database * _sharedDatabase = nil;
 
 /* arrayOfArticles
  * Retrieves an array containing all articles (except for text) for the
- * current folder. This info is always cached.
+ * specified folder. If folderId is zero, all folders are searched. The
+ * filterString option constrains the array to all those articles that
+ * contain the specified filter.
  */
 -(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString
 {
-	Folder * folder = [self folderFromID:folderId];
 	NSMutableArray * newArray = [NSMutableArray array];
+	NSString * filterClause = @"";
+	NSString * queryString;
+	Folder * folder = nil;
 	int unread_count = 0;
 
-	if (folder != nil)
+	// If folderId is zero then we're searching the entire
+	// database with or without a filter string.
+	if (folderId == 0)
 	{
+		if ([filterString isNotEqualTo:@""])
+			filterClause = [NSString stringWithFormat:@" where text like '%%%@%%'", filterString];
+		queryString = [NSString stringWithFormat:@"select * from messages%@", filterClause];
+	}
+	else
+	{
+		folder = [self folderFromID:folderId];
+		if (folder == nil)
+			return nil;
 		[folder clearCache];
 
 		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
 
-		NSString * filterClause = @"";
 		if ([filterString isNotEqualTo:@""])
 			filterClause = [NSString stringWithFormat:@" and text like '%%%@%%'", filterString];
+		queryString = [NSString stringWithFormat:@"select * from messages where %@%@", [self criteriaToSQL:tree], filterClause];
+	}
 
-		// Verify we're on the right thread
-		[self verifyThreadSafety];
-		
-		// Time to run the query
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select * from messages where %@%@", [self criteriaToSQL:tree], filterClause];
-		if (results && [results rowCount])
+	// Verify we're on the right thread
+	[self verifyThreadSafety];
+
+	// Time to run the query
+	SQLResult * results = [sqlDatabase performQuery:queryString];
+	if (results && [results rowCount])
+	{
+		NSEnumerator * enumerator = [results rowEnumerator];
+		SQLRow * row;
+
+		while ((row = [enumerator nextObject]) != nil)
 		{
-			NSEnumerator * enumerator = [results rowEnumerator];
-			SQLRow * row;
+			NSString * guid = [row stringForColumn:@"message_id"];
+			int parentId = [[row stringForColumn:@"parent_id"] intValue];
+			int articleFolderId = [[row stringForColumn:@"folder_id"] intValue];
+			NSString * title = [row stringForColumn:@"title"];
+			NSString * author = [row stringForColumn:@"sender"];
+			NSString * link = [row stringForColumn:@"link"];
+			BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
+			BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
+			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
+			NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
 
-			while ((row = [enumerator nextObject]) != nil)
-			{
-				NSString * guid = [row stringForColumn:@"message_id"];
-				int parentId = [[row stringForColumn:@"parent_id"] intValue];
-				int articleFolderId = [[row stringForColumn:@"folder_id"] intValue];
-				NSString * title = [row stringForColumn:@"title"];
-				NSString * author = [row stringForColumn:@"sender"];
-				NSString * link = [row stringForColumn:@"link"];
-				BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
-				BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
-				BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
-				NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
+			// Keep our own track of unread articles
+			if (!isRead)
+				++unread_count;
 
-				// Keep our own track of unread articles
-				if (!isRead)
-					++unread_count;
-
-				Article * article = [[Article alloc] initWithGuid:guid];
-				[article setTitle:title];
-				[article setAuthor:author];
-				[article setLink:link];
-				[article setDate:date];
-				[article markRead:isRead];
-				[article markFlagged:isFlagged];
-				[article markDeleted:isDeleted];
-				[article setFolderId:articleFolderId];
-				[article setParentId:parentId];
-				if (!isDeleted || IsTrashFolder(folder))
-					[newArray addObject:article];
-				[folder addArticleToCache:article];
-				[article release];
-			}
-
-			// This is a good time to do a quick check to ensure that our
-			// own count of unread is in sync with the folders count and fix
-			// them if not.
-			if ([filterString isEqualTo:@""] && IsRSSFolder(folder))
-			{
-				if (unread_count != [folder unreadCount])
-				{
-					NSLog(@"Fixing unread count for %@ (%d on folder versus %d in articles)", [folder name], [folder unreadCount], unread_count);
-					int diff = (unread_count - [folder unreadCount]);
-					[self setFolderUnreadCount:folder adjustment:diff];
-					countOfUnread += diff;
-				}
-			}
+			Article * article = [[Article alloc] initWithGuid:guid];
+			[article setTitle:title];
+			[article setAuthor:author];
+			[article setLink:link];
+			[article setDate:date];
+			[article markRead:isRead];
+			[article markFlagged:isFlagged];
+			[article markDeleted:isDeleted];
+			[article setFolderId:articleFolderId];
+			[article setParentId:parentId];
+			if (folder == nil || !isDeleted || IsTrashFolder(folder))
+				[newArray addObject:article];
+			[folder addArticleToCache:article];
+			[article release];
 		}
 
-		// Deallocate
-		[results release];
+		// This is a good time to do a quick check to ensure that our
+		// own count of unread is in sync with the folders count and fix
+		// them if not.
+		if (folder && [filterString isEqualTo:@""] && IsRSSFolder(folder))
+		{
+			if (unread_count != [folder unreadCount])
+			{
+				NSLog(@"Fixing unread count for %@ (%d on folder versus %d in articles)", [folder name], [folder unreadCount], unread_count);
+				int diff = (unread_count - [folder unreadCount]);
+				[self setFolderUnreadCount:folder adjustment:diff];
+				countOfUnread += diff;
+			}
+		}
 	}
+
+	// Deallocate
+	[results release];
 	return newArray;
 }
 
