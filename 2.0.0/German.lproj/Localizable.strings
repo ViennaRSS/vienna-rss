@@ -173,10 +173,12 @@
 "Rename" = "Rename";
 "Mark All Read" = "Mark All Read";
 "Move Folders" = "Move Folders";
-"Downloads" = "Downloads";
+"Downloads" = "Geladene Dateien";
 "Invalid style title" = "The style %@ appears to be corrupted";
 "Invalid style body" = "The Default style will be used instead.";
 "Downloads Running" = "One or more downloads are in progress";
 "Downloads Running text" = "Do you want to cancel all downloads and close Vienna now?";
 "Mark All Subscriptions as Read" = "Mark All Subscriptions as Read";
 "Preferences" = "Einstellungen";
+"General" = "Allgemein";
+"Appearance" = "Erscheinungsbild";

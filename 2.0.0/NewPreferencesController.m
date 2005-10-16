@@ -101,7 +101,7 @@
 {
 	NSToolbarItem * newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	NSDictionary * prefsItem = [prefsDict objectForKey:itemIdentifier];
-	[newItem setLabel:[prefsItem valueForKey:@"Title"]];
+	[newItem setLabel:NSLocalizedString([prefsItem valueForKey:@"Title"], nil)];
 	[newItem setTarget:self];
 	[newItem setAction:@selector(prefsPaneSelection:)];
 	[newItem setImage:[NSImage imageNamed:[prefsItem valueForKey:@"Image"]]];

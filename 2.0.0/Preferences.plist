@@ -14,7 +14,7 @@
 	<key>2</key>
 	<dict>
 		<key>Title</key>
-		<string>Appearances</string>
+		<string>Appearance</string>
 		<key>Image</key>
 		<string>appearancesPreferences.tiff</string>
 		<key>ClassName</key>

@@ -173,10 +173,12 @@
 "Rename" = "Byt namn";
 "Mark All Read" = "Markera alla som lästa";
 "Move Folders" = "Flytta mappar";
-"Downloads" = "Downloads";
+"Downloads" = "Hämtade filer";
 "Invalid style title" = "The style %@ appears to be corrupted";
 "Invalid style body" = "The Default style will be used instead.";
 "Downloads Running" = "One or more downloads are in progress";
 "Downloads Running text" = "Do you want to cancel all downloads and close Vienna now?";
 "Mark All Subscriptions as Read" = "Mark All Subscriptions as Read";
 "Preferences" = "Inställningar";
+"General" = "Allmänt";
+"Appearance" = "Utseende";
