@@ -22,16 +22,17 @@
 
 @interface AppearancesPreferences : NSWindowController
 {
-	IBOutlet NSPopUpButton * messageListFont;
-	IBOutlet NSComboBox * messageListFontSize;
-	IBOutlet NSPopUpButton * folderFont;
-	IBOutlet NSComboBox * folderFontSize;
+	IBOutlet NSTextField * articleFontSample;
+	IBOutlet NSTextField * folderFontSample;
+	IBOutlet NSButton * articleFontSelectButton;
+	IBOutlet NSButton * folderFontSelectButton;
 	IBOutlet NSComboBox * minimumFontSizes;
 	IBOutlet NSButton * enableMinimumFontSize;
 }
 
 // Action functions
--(IBAction)changeFont:(id)sender;
+-(IBAction)selectArticleFont:(id)sender;
+-(IBAction)selectFolderFont:(id)sender;
 -(IBAction)changeMinimumFontSize:(id)sender;
 -(IBAction)selectMinimumFontSize:(id)sender;
 @end

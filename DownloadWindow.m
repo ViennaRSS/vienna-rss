@@ -123,7 +123,7 @@
 
 		case DOWNLOAD_COMPLETED: {
 			// Filename on top
-			// Progress gauge in middle
+			// Final size of file at bottom.
 			double size = [item size];
 			NSString * suffixString = @"bytes";
 			if (size > 1024 * 1024)
@@ -144,6 +144,7 @@
 		case DOWNLOAD_STARTED: {
 			// Filename on top
 			// Progress gauge in middle
+			// Size gathered so far at bottom
 			double expectedSize = [item expectedSize];
 			double sizeSoFar = [item size];
 			NSString * suffixString = @"bytes";
