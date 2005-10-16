@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1</key>
+	<dict>
+		<key>Title</key>
+		<string>General</string>
+		<key>Image</key>
+		<string>generalPreferences.tiff</string>
+		<key>ClassName</key>
+		<string>GeneralPreferences</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>Title</key>
+		<string>Appearances</string>
+		<key>Image</key>
+		<string>appearancesPreferences.tiff</string>
+		<key>ClassName</key>
+		<string>AppearancesPreferences</string>
+	</dict>
+</dict>
+</plist>

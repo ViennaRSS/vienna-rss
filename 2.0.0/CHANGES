@@ -17,6 +17,7 @@ Thanks!
 - Added "Mark All Subscriptions as Read" command. (Thanks to Yann Bizeul).
 - Incorporated patches from Yann Bizeul and Adam Hammer.
 - Close button on tabs now depress and highlight properly.
+- New Preferences UI.
 
 2.0.0.2010
 ----------

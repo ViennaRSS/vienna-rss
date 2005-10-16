@@ -50,12 +50,21 @@
 		AA26F4F40604927300FE7994 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */; };
 		AA26F56E0604955F00FE7994 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5650604955F00FE7994 /* Localizable.strings */; };
 		AA26F5B80604964000FE7994 /* URLHandlerCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F5B70604964000FE7994 /* URLHandlerCommand.h */; };
-		AA26F5DF0604969000FE7994 /* PreferenceController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F5DD0604969000FE7994 /* PreferenceController.h */; };
-		AA26F5E00604969000FE7994 /* PreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F5DE0604969000FE7994 /* PreferenceController.m */; };
-		AA26F5EF060496B100FE7994 /* Preferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5EB060496B100FE7994 /* Preferences.nib */; };
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
 		AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2DE139085399F40055C4EE /* sqlite3.h */; };
+		AA3111B50901A26B00E80DF1 /* generalPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B40901A26B00E80DF1 /* generalPreferences.tiff */; };
+		AA3111B70901A29B00E80DF1 /* appearancesPreferences.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B60901A29B00E80DF1 /* appearancesPreferences.tiff */; };
+		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
+		AA3111BC0901A2F100E80DF1 /* NewPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */; };
+		AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */; };
+		AA3112410901CDE100E80DF1 /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA31123F0901CDE100E80DF1 /* NewPreferences.nib */; };
+		AA31134A0902005300E80DF1 /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3113480902005300E80DF1 /* GeneralPreferences.nib */; };
+		AA31134D0902009300E80DF1 /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */; };
+		AA3113EA09020E0F00E80DF1 /* GeneralPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3113E809020E0F00E80DF1 /* GeneralPreferences.h */; };
+		AA3113EB09020E0F00E80DF1 /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */; };
+		AA31147E090214AD00E80DF1 /* AppearancesPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */; };
+		AA31147F090214AD00E80DF1 /* AppearancesPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */; };
 		AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */; };
 		AA3281A5084161EB00A7AD5A /* RichXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3281A3084161EB00A7AD5A /* RichXMLParser.h */; };
 		AA3281A6084161EB00A7AD5A /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
@@ -264,7 +273,6 @@
 		130A612D08F20268005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		130A613108F20277005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		130A613508F20287005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		130A613908F2029F005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/Preferences.nib; sourceTree = "<group>"; };
 		130A613C08F202A6005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/RSSFeed.nib; sourceTree = "<group>"; };
 		130A614008F202BA005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		130A614408F202CC005A52F1 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
@@ -283,7 +291,6 @@
 		AA1EE81608F69B9D00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AA1EE81908F69BA500A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		AA1EE81A08F69BAE00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/MainMenu.nib; sourceTree = "<group>"; };
-		AA1EE81B08F69BB500A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AA1EE81C08F69BBD00A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/RSSFeed.nib; sourceTree = "<group>"; };
 		AA1EE81D08F69BC600A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA1EE81E08F69BD000A9B20C /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
@@ -323,13 +330,22 @@
 		AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = URLHandlerCommand.m; sourceTree = "<group>"; };
 		AA26F5660604955F00FE7994 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA26F5B70604964000FE7994 /* URLHandlerCommand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = URLHandlerCommand.h; sourceTree = "<group>"; };
-		AA26F5DD0604969000FE7994 /* PreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PreferenceController.h; sourceTree = "<group>"; };
-		AA26F5DE0604969000FE7994 /* PreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PreferenceController.m; sourceTree = "<group>"; };
-		AA26F5EC060496B100FE7994 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AA26F676060497BB00FE7994 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoldersTree.m; sourceTree = "<group>"; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
 		AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		AA2DE139085399F40055C4EE /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		AA3111B40901A26B00E80DF1 /* generalPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = generalPreferences.tiff; sourceTree = "<group>"; };
+		AA3111B60901A29B00E80DF1 /* appearancesPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = appearancesPreferences.tiff; sourceTree = "<group>"; };
+		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = Preferences.plist; sourceTree = "<group>"; };
+		AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NewPreferencesController.h; sourceTree = "<group>"; };
+		AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NewPreferencesController.m; sourceTree = "<group>"; };
+		AA3112400901CDE100E80DF1 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/NewPreferences.nib; sourceTree = "<group>"; };
+		AA3113490902005300E80DF1 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AA31134C0902009300E80DF1 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AA3113E809020E0F00E80DF1 /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferences.h; sourceTree = "<group>"; };
+		AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferences.m; sourceTree = "<group>"; };
+		AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearancesPreferences.h; sourceTree = "<group>"; };
+		AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearancesPreferences.m; sourceTree = "<group>"; };
 		AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = highlightedCloseButton.tiff; sourceTree = "<group>"; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichXMLParser.h; sourceTree = "<group>"; };
 		AA3281A4084161EB00A7AD5A /* RichXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParser.m; sourceTree = "<group>"; };
@@ -364,7 +380,6 @@
 		AA6022AF08C246D4002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
 		AA6022B208C246DE002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA6022B508C246E8002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/RSSFeed.nib; sourceTree = "<group>"; };
-		AA6022B808C246F0002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AA6022BB08C246F8002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		AA6022BE08C246FF002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AA6022C608C24732002CFD06 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -409,7 +424,6 @@
 		AAA3AF0806338A00006735EB /* SearchFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFolder.m; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
-		AAAAED92088D62E600B48199 /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/Preferences.nib; sourceTree = "<group>"; };
 		AAAAEF0E088DEBBA00B48199 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlite3.a; sourceTree = "<group>"; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = searchFolder.tiff; sourceTree = "<group>"; };
 		AAB968DC08F7829E00B7D1C8 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
@@ -420,6 +434,14 @@
 		AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pressedCloseButton.tiff; sourceTree = "<group>"; };
 		AABCFB180900BA4E00984F78 /* SquareWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareWindow.h; sourceTree = "<group>"; };
 		AABCFB190900BA4E00984F78 /* SquareWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareWindow.m; sourceTree = "<group>"; };
+		AABD6A30090231230092D4AE /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AABD6A310902312B0092D4AE /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AABD6A32090231310092D4AE /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AABD6A33090231370092D4AE /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AABD6A34090231440092D4AE /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AABD6A35090231490092D4AE /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AABD6A36090231510092D4AE /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AABD6A37090231550092D4AE /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
@@ -528,6 +550,7 @@
 				AA4F657B062B873100D4837C /* Extensions */,
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
+				AA3113EC09020E1B00E80DF1 /* Preferences */,
 				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
@@ -577,10 +600,6 @@
 				AA328A9A0848404200A7AD5A /* Import.m */,
 				AA26F4CF0604927300FE7994 /* MessageListView.h */,
 				AA26F4D60604927300FE7994 /* MessageListView.m */,
-				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
-				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
-				AA26F5DD0604969000FE7994 /* PreferenceController.h */,
-				AA26F5DE0604969000FE7994 /* PreferenceController.m */,
 				AAA1E2FB0852502700277128 /* NewGroupFolder.h */,
 				AAA1E2FC0852502700277128 /* NewGroupFolder.m */,
 				AA9F3096081B6A7400D6EA23 /* NewSubscription.h */,
@@ -602,23 +621,28 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AA3113480902005300E80DF1 /* GeneralPreferences.nib */,
+				AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */,
 				AABFDCC10609EAC500100A9B /* ActivityViewer.nib */,
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
 				AAA1E3280852539500277128 /* GroupFolder.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
-				AA26F5EB060496B100FE7994 /* Preferences.nib */,
 				AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */,
 				AA3BDC9E063249FE004621CD /* SearchFolder.nib */,
 				AAD264DA0611E22A005A27E4 /* UpdateWindow.nib */,
 				AAB9697B08F9691C00B7D1C8 /* Downloads.nib */,
+				AA31123F0901CDE100E80DF1 /* NewPreferences.nib */,
 				AA26F5650604955F00FE7994 /* Localizable.strings */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
+				AA3111B80901A2DC00E80DF1 /* Preferences.plist */,
 				AAC504360828E6740089FF70 /* RSSSources.plist */,
 				AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */,
 				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 				AAE7A842086B696A009A487E /* add.tiff */,
 				AAE7A845086B6994009A487E /* action.tiff */,
+				AA3111B60901A29B00E80DF1 /* appearancesPreferences.tiff */,
+				AA3111B40901A26B00E80DF1 /* generalPreferences.tiff */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
 				AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */,
@@ -669,6 +693,21 @@
 				AA26F4830604911B00FE7994 /* SQLRow.m */,
 			);
 			name = SQLite;
+			sourceTree = "<group>";
+		};
+		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */,
+				AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */,
+				AA3113E809020E0F00E80DF1 /* GeneralPreferences.h */,
+				AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */,
+				AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */,
+				AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */,
+				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
+				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 		AA32882E0846FAC400A7AD5A /* MacPAD */ = {
@@ -774,7 +813,6 @@
 				AA26F4EB0604927300FE7994 /* TreeNode.h in Headers */,
 				AA26F4EF0604927300FE7994 /* BackTrackArray.h in Headers */,
 				AA26F5B80604964000FE7994 /* URLHandlerCommand.h in Headers */,
-				AA26F5DF0604969000FE7994 /* PreferenceController.h in Headers */,
 				AACFDEBC0604D4D20072D140 /* AppController.h in Headers */,
 				AAF3B14206095E7B0025CC7F /* StringExtensions.h in Headers */,
 				AABFDCA10609EA8100100A9B /* ActivityViewer.h in Headers */,
@@ -818,6 +856,9 @@
 				AAB968DE08F7829E00B7D1C8 /* DownloadManager.h in Headers */,
 				AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */,
 				AABCFB1A0900BA4E00984F78 /* SquareWindow.h in Headers */,
+				AA3111BC0901A2F100E80DF1 /* NewPreferencesController.h in Headers */,
+				AA3113EA09020E0F00E80DF1 /* GeneralPreferences.h in Headers */,
+				AA31147E090214AD00E80DF1 /* AppearancesPreferences.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,7 +965,6 @@
 				AA26F453060490BE00FE7994 /* smallFolder.tiff in Resources */,
 				AA26F454060490BE00FE7994 /* unread_header.tiff in Resources */,
 				AA26F56E0604955F00FE7994 /* Localizable.strings in Resources */,
-				AA26F5EF060496B100FE7994 /* Preferences.nib in Resources */,
 				AABFDCC20609EAC500100A9B /* ActivityViewer.nib in Resources */,
 				AAD264DC0611E22A005A27E4 /* UpdateWindow.nib in Resources */,
 				AAD1E2D40612909D00D09905 /* MacPAD.url in Resources */,
@@ -960,6 +1000,12 @@
 				AAB9697D08F9691C00B7D1C8 /* Downloads.nib in Resources */,
 				AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */,
 				AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */,
+				AA3111B50901A26B00E80DF1 /* generalPreferences.tiff in Resources */,
+				AA3111B70901A29B00E80DF1 /* appearancesPreferences.tiff in Resources */,
+				AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */,
+				AA3112410901CDE100E80DF1 /* NewPreferences.nib in Resources */,
+				AA31134A0902005300E80DF1 /* GeneralPreferences.nib in Resources */,
+				AA31134D0902009300E80DF1 /* AppearancesPreferences.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,7 +1027,6 @@
 				AA26F4EE0604927300FE7994 /* MessageListView.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
 				AA26F4F40604927300FE7994 /* URLHandlerCommand.m in Sources */,
-				AA26F5E00604969000FE7994 /* PreferenceController.m in Sources */,
 				AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */,
 				AA4F6617062B94D200D4837C /* AppController.m in Sources */,
 				AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */,
@@ -1025,6 +1070,9 @@
 				AAB968DF08F7829E00B7D1C8 /* DownloadManager.m in Sources */,
 				AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */,
 				AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */,
+				AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */,
+				AA3113EB09020E0F00E80DF1 /* GeneralPreferences.m in Sources */,
+				AA31147F090214AD00E80DF1 /* AppearancesPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,16 +1115,36 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		AA26F5EB060496B100FE7994 /* Preferences.nib */ = {
+		AA31123F0901CDE100E80DF1 /* NewPreferences.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA26F5EC060496B100FE7994 /* English */,
-				AAAAED92088D62E600B48199 /* Swedish */,
-				AA6022B808C246F0002CFD06 /* French */,
-				130A613908F2029F005A52F1 /* Italian */,
-				AA1EE81B08F69BB500A9B20C /* German */,
+				AA3112400901CDE100E80DF1 /* English */,
 			);
-			name = Preferences.nib;
+			name = NewPreferences.nib;
+			sourceTree = "<group>";
+		};
+		AA3113480902005300E80DF1 /* GeneralPreferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA3113490902005300E80DF1 /* English */,
+				AABD6A30090231230092D4AE /* Swedish */,
+				AABD6A310902312B0092D4AE /* French */,
+				AABD6A32090231310092D4AE /* Italian */,
+				AABD6A33090231370092D4AE /* German */,
+			);
+			name = GeneralPreferences.nib;
+			sourceTree = "<group>";
+		};
+		AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA31134C0902009300E80DF1 /* English */,
+				AABD6A34090231440092D4AE /* Swedish */,
+				AABD6A35090231490092D4AE /* French */,
+				AABD6A36090231510092D4AE /* Italian */,
+				AABD6A37090231550092D4AE /* German */,
+			);
+			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
 		};
 		AA3BDC9E063249FE004621CD /* SearchFolder.nib */ = {
