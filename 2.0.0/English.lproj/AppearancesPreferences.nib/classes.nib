@@ -1,15 +1,20 @@
 {
     IBClasses = (
         {
-            ACTIONS = {changeFont = id; changeMinimumFontSize = id; selectMinimumFontSize = id; }; 
+            ACTIONS = {
+                changeMinimumFontSize = id; 
+                selectArticleFont = id; 
+                selectFolderFont = id; 
+                selectMinimumFontSize = id; 
+            }; 
             CLASS = AppearancesPreferences; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                articleFontSample = NSTextField; 
+                articleFontSelectButton = NSButton; 
                 enableMinimumFontSize = NSButton; 
-                folderFont = NSPopUpButton; 
-                folderFontSize = NSComboBox; 
-                messageListFont = NSPopUpButton; 
-                messageListFontSize = NSComboBox; 
+                folderFontSample = NSTextField; 
+                folderFontSelectButton = NSButton; 
                 minimumFontSizes = NSComboBox; 
             }; 
             SUPERCLASS = NSWindowController; 

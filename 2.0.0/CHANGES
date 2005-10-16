@@ -18,6 +18,7 @@ Thanks!
 - Incorporated patches from Yann Bizeul and Adam Hammer.
 - Close button on tabs now depress and highlight properly.
 - New Preferences UI.
+- Font selection in Preferences changed to use the standard OS font picker.
 
 2.0.0.2010
 ----------

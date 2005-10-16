@@ -37,7 +37,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 // Private functions
 @interface AppearancesPreferences (Private)
 	-(void)initializePreferences;
-	-(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
+	-(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSTextField *)control;
 @end
 
 @implementation AppearancesPreferences
@@ -83,8 +83,8 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Populate the drop downs with the font names and sizes
-	[self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:messageListFont sizeControl:messageListFontSize];
-	[self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFont sizeControl:folderFontSize];
+	[self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:articleFontSample];
+	[self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
 	
 	// Set minimum font size option
 	[enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
@@ -116,45 +116,67 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 }
 
 /* selectUserDefaultFont
- * Initialise the specified font name and size drop down.
+ * Display sample text in the specified font and size.
  */
--(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl
+-(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSTextField *)control
 {
-	NSFontManager * fontManager = [NSFontManager sharedFontManager];
-	NSArray * availableFonts = [[fontManager availableFonts] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	
-	[control removeAllItems];
-	[control addItemsWithTitles:availableFonts];
-	[control selectItemWithTitle:name];
-	
-	unsigned int i;
-	for (i = 0; i < countOfAvailableFontSizes; ++i)
-		[sizeControl addItemWithObjectValue:[NSNumber numberWithInt:availableFontSizes[i]]];
-	[sizeControl setFloatValue:size];
+	[control setFont:[NSFont fontWithName:name size:size]];
+	[control setStringValue:[NSString stringWithFormat:@"%@ %i", name, size]];
 }
 
-/* changeFont
- * Handle changes to any of the font selection options.
+/* selectArticleFont
+ * Bring up the standard font selector for the article font.
  */
--(IBAction)changeFont:(id)sender
+-(IBAction)selectArticleFont:(id)sender
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	if (sender == messageListFont)
-	{
-		[prefs setArticleListFont:[messageListFont titleOfSelectedItem]];
-	}
-	else if (sender == messageListFontSize)
-	{
-		[prefs setArticleListFontSize:[messageListFontSize floatValue]];
-	}
-	else if (sender == folderFont)
-	{
-		[prefs setFolderListFont:[folderFont titleOfSelectedItem]];
-	}
-	else if (sender == folderFontSize)
-	{
-		[prefs setFolderListFontSize:[folderFontSize floatValue]];
-	}
+	NSFontManager * manager = [NSFontManager sharedFontManager];
+	[manager setSelectedFont:[NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]] isMultiple:NO];
+	[manager setAction:@selector(changeArticleFont:)];
+	[manager setDelegate:self];
+	[manager orderFrontFontPanel:self];
+	[[articleFontSample window] setDelegate:self];
+}
+
+/* selectFolderFont
+ * Bring up the standard font selector for the folder font.
+ */
+-(IBAction)selectFolderFont:(id)sender
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSFontManager * manager = [NSFontManager sharedFontManager];
+	[manager setSelectedFont:[NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]] isMultiple:NO];
+	[manager setAction:@selector(changeFolderFont:)];
+	[[folderFontSample window] makeFirstResponder:self];
+	[manager setDelegate:self];
+	[manager orderFrontFontPanel:self];
+	[[folderFontSample window] setDelegate:self];
+}
+
+/* changeArticleFont
+ * Respond to changes to the article font.
+ */
+-(IBAction)changeArticleFont:(id)sender
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSFont * font = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
+	font = [sender convertFont:font];
+	[prefs setArticleListFont:[font fontName]];
+	[prefs setArticleListFontSize:[font pointSize]];
+	[self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:articleFontSample];
+}
+
+/* changeFolderFont
+ * Respond to changes to the folder font.
+ */
+-(IBAction)changeFolderFont:(id)sender
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSFont * font = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
+	font = [sender convertFont:font];
+	[prefs setFolderListFont:[font fontName]];
+	[prefs setFolderListFontSize:[font pointSize]];
+	[self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
 }
 
 /* dealloc
