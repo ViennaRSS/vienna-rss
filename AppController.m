@@ -19,7 +19,7 @@
 //
 
 #import "AppController.h"
-#import "PreferenceController.h"
+#import "NewPreferencesController.h"
 #import "FoldersTree.h"
 #import "ArticleListView.h"
 #import "Import.h"
@@ -991,7 +991,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(IBAction)showPreferencePanel:(id)sender
 {
 	if (!preferenceController)
-		preferenceController = [[PreferenceController alloc] init];
+		preferenceController = [[NewPreferencesController alloc] init];
 	[preferenceController showWindow:self];
 }
 

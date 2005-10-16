@@ -10,7 +10,6 @@ Remaining Planned 2.0 Items
 - Auto-discover feeds if subscription URL is to a web page.
 - Search in all folders via search field.
 - Handle middle mouse click on tabs.
-- Make Preferences dialog more compact.
 - Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
 - Renaming a folder does not update the folder name in smart folders that reference it.
 - Fix web browser to block popups.

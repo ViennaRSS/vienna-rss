@@ -22,7 +22,7 @@
 #import "Database.h"
 #import "ActivityViewer.h"
 
-@class PreferenceController;
+@class NewPreferenceController;
 @class FoldersTree;
 @class CheckForUpdates;
 @class SearchFolder;
@@ -56,7 +56,7 @@
 	IBOutlet NSMenuItem * stylesMenu;
 
 	ActivityViewer * activityViewer;
-	PreferenceController * preferenceController;
+	NewPreferenceController * preferenceController;
 	CheckForUpdates * checkUpdates;
 	DownloadWindow * downloadWindow;
 	SearchFolder * smartFolder;
