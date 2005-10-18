@@ -114,6 +114,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
+	[articleText setOpenLinksInNewTab:YES];
 
 	// Do safe initialisation
 	[controller doSafeInitialisation];

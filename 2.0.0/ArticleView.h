@@ -26,9 +26,12 @@
 @interface ArticleView : WebView {
 	AppController * controller;
 	WebPreferences * defaultWebPrefs;
+	BOOL openLinksInNewTab;
 }
 
+// Public functions
 -(void)setController:(AppController *)theController;
+-(void)setOpenLinksInNewTab:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
 @end
