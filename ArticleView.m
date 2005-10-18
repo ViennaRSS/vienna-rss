@@ -47,6 +47,7 @@
 	{
 		// Init our vars
 		controller = nil;
+		openLinksInNewTab = NO;
 		
 		// We'll be the webview policy handler.
 		[self setPolicyDelegate:self];
@@ -74,6 +75,14 @@
 	[controller release];
 	controller = theController;
 	[self setPolicyDelegate:self];
+}
+
+/* setOpenLinksInNewTab
+ * Specify whether links are opened in a new tab by default.
+ */
+-(void)setOpenLinksInNewTab:(BOOL)flag
+{
+	openLinksInNewTab = flag;
 }
 
 /* decidePolicyForMIMEType
@@ -129,7 +138,7 @@
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if (navType == WebNavigationTypeLinkClicked)
+	if (navType == WebNavigationTypeLinkClicked && openLinksInNewTab)
 	{
 		[listener ignore];
 		[controller openURLInBrowserWithURL:[request URL]];
