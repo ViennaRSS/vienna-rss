@@ -57,6 +57,7 @@ static Preferences * _standardPreferences = nil;
 		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
 		displayStyle = [[defaults stringForKey:MAPref_ActiveStyleName] retain];
+		showFolderImages = [defaults boolForKey:MAPref_ShowFolderImages];
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_ArticleListFont]] retain];
 		downloadFolder = [[defaults stringForKey:MAPref_DownloadsFolder] retain];
@@ -112,6 +113,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:boolNo forKey:MAPref_ReadingPaneOnRight];
 	[defaultValues setObject:boolNo forKey:MAPref_EnableBloglinesSupport];
+	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:@"" forKey:MAPref_BloglinesEmailAddress];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
@@ -171,6 +173,27 @@ static Preferences * _standardPreferences = nil;
 		enableMinimumFontSize = flag;
 		[[NSUserDefaults standardUserDefaults] setBool:flag forKey:MAPref_UseMinimumFontSize];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
+	}
+}
+
+/* showFolderImages
+ * Returns whether or not the folder list shows the associated feed image.
+ */
+-(BOOL)showFolderImages
+{
+	return showFolderImages;
+}
+
+/* setShowFolderImages
+ * Set whether or not the folder list shows the associated feed image.
+ */
+-(void)setShowFolderImages:(BOOL)flag
+{
+	if (showFolderImages != flag)
+	{
+		showFolderImages = flag;
+		[[NSUserDefaults standardUserDefaults] setBool:flag forKey:MAPref_ShowFolderImages];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ShowFolderImages" object:nil];
 	}
 }
 

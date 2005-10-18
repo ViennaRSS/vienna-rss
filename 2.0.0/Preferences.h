@@ -32,6 +32,7 @@
 	BOOL openLinksInVienna;
 	BOOL openLinksInBackground;
 	BOOL hasPrefs;
+	BOOL showFolderImages;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSFont * folderFont;
@@ -59,6 +60,10 @@
 // Change position of reading pane
 -(BOOL)readingPaneOnRight;
 -(void)setReadingPaneOnRight:(BOOL)flag;
+
+// Whether or not we show folder images
+-(BOOL)showFolderImages;
+-(void)setShowFolderImages:(BOOL)showImages;
 
 // Refresh all subscriptions on startup
 -(BOOL)refreshOnStartup;

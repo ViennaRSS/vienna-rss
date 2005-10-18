@@ -88,6 +88,7 @@
 -(long)bloglinesId;
 -(unsigned int)flags;
 -(NSImage *)image;
+-(NSImage *)standardImage;
 -(int)childUnreadCount;
 -(void)clearCache;
 -(BOOL)needFlush;

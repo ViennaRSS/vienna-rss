@@ -323,6 +323,16 @@ static NSArray * iconArray = nil;
 	return [[Folder _iconArray] objectAtIndex:MA_FolderIcon];
 }
 
+/* standardImage
+ * Returns the standard (not feed customised) image for this folder.
+ */
+-(NSImage *)standardImage
+{
+	if (IsRSSFolder(self))
+		return [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
+	return [self image];
+}
+
 /* setImage
  * Used to set the image for a folder in the array. The image is cached for this session
  * and also written to the image folder if there is a valid one.

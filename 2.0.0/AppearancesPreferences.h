@@ -28,11 +28,13 @@
 	IBOutlet NSButton * folderFontSelectButton;
 	IBOutlet NSComboBox * minimumFontSizes;
 	IBOutlet NSButton * enableMinimumFontSize;
+	IBOutlet NSButton * showFolderImagesButton;
 }
 
 // Action functions
 -(IBAction)selectArticleFont:(id)sender;
 -(IBAction)selectFolderFont:(id)sender;
 -(IBAction)changeMinimumFontSize:(id)sender;
+-(IBAction)changeShowFolderImages:(id)sender;
 -(IBAction)selectMinimumFontSize:(id)sender;
 @end
