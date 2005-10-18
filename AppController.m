@@ -287,7 +287,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
 	FNSubscriptionRef refCode;
 
-	FNSubscribeByPath([path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
+	FNSubscribeByPath((const UInt8 *)[path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
 }
 
 /* applicationDidFinishLaunching
