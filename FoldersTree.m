@@ -79,6 +79,7 @@
 	// Register to be notified when folders are added or removed
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FolderMetaDataChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:@"MA_Notify_FolderDeleted" object:nil];
 	[nc addObserver:self selector:@selector(outlineViewMenuInvoked:) name:@"MA_Notify_RightClickOnObject" object:nil];
@@ -132,7 +133,7 @@
 	[folderMenu release];
 
 	// Register for dragging
-	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, nil]]; 
+	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];
 }
 
@@ -729,7 +730,7 @@
 -(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index
 {
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, nil]]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
 	NSDragOperation dragType = (type == MA_PBoardType_FolderList) ? NSDragOperationMove : NSDragOperationCopy;
 
 	TreeNode * node = (TreeNode *)item;
@@ -904,7 +905,7 @@
 -(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)childIndex
 { 
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, nil]]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
 
 	// Get index of folder at drop location. If this is a group folder then
 	// it gets used as the parent
@@ -920,6 +921,13 @@
 	int parentID = (IsGroupFolder([node folder])) ? [[node folder] itemId] : [[node folder] parentId];
 
 	// Check the type 
+	if (type == NSStringPboardType)
+	{
+		// This is possibly a URL that we'll handle as a potential feed subscription. It's
+		// not our call to make though.
+		[[NSApp delegate] createNewSubscription:[pb stringForType:type] underFolder:parentID];
+		return YES;
+	}
 	if (type == MA_PBoardType_FolderList)
 	{
 		NSArray * arrayOfSources = [pb propertyListForType:type];

@@ -797,7 +797,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == 0 || [self currentCacheContainsFolder:folderId])
+	if (folderId == 0 || folderId == currentFolderId || [self currentCacheContainsFolder:folderId])
 		[self refreshFolder:YES];
 	else
 	{

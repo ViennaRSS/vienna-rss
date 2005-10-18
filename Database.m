@@ -655,7 +655,7 @@ static Database * _sharedDatabase = nil;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the name is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderMetaDataChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -686,7 +686,7 @@ static Database * _sharedDatabase = nil;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the description is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderMetaDataChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -717,7 +717,7 @@ static Database * _sharedDatabase = nil;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderMetaDataChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -746,7 +746,7 @@ static Database * _sharedDatabase = nil;
 	
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the ID is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderMetaDataChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
