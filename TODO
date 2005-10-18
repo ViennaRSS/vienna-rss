@@ -4,15 +4,9 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
-Remaining Planned 2.0 Items
-===========================
-- Filter article list by date/read.
-- Auto-discover feeds if subscription URL is to a web page.
-- Search in all folders via search field.
-- Handle middle mouse click on tabs.
-- Rewrite ParseXmlDate in XMLParser.m to eliminate CUrl dependency.
+Known Issues (May not be fixed)
+===============================
 - Renaming a folder does not update the folder name in smart folders that reference it.
-- Fix web browser to block popups.
 - The isAccessible(NSString * urlString) function returns NO behind a firewall.
 
 Post 2.0 Items
@@ -29,3 +23,8 @@ Post 2.0 Items
 - Synchronisation via .Mac or FTP.
 - Selection count in status area.
 - Sort on multiple columns.
+- Auto-discover feeds if subscription URL is to a web page.
+- Filter article list by date/read.
+- Search in all folders via search field.
+- Fix web browser to block popups.
+- Handle middle mouse click on tabs.

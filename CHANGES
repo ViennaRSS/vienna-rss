@@ -19,6 +19,7 @@ Thanks!
 - Close button on tabs now depress and highlight properly.
 - New Preferences UI.
 - Font selection in Preferences changed to use the standard OS font picker.
+- Add an option to disable feed folder images in the folders list.
 
 2.0.0.2010
 ----------

@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 changeMinimumFontSize = id; 
+                changeShowFolderImages = id; 
                 selectArticleFont = id; 
                 selectFolderFont = id; 
                 selectMinimumFontSize = id; 
@@ -16,6 +17,7 @@
                 folderFontSample = NSTextField; 
                 folderFontSelectButton = NSButton; 
                 minimumFontSizes = NSComboBox; 
+                showFolderImagesButton = NSButton; 
             }; 
             SUPERCLASS = NSWindowController; 
         }, 

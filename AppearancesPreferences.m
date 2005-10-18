@@ -85,6 +85,9 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	// Populate the drop downs with the font names and sizes
 	[self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:articleFontSample];
 	[self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
+
+	// Show folder images option
+	[showFolderImagesButton setState:[prefs showFolderImages] ? NSOnState : NSOffState];
 	
 	// Set minimum font size option
 	[enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
@@ -94,6 +97,15 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
 		[minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];
 	[minimumFontSizes setFloatValue:[prefs minimumFontSize]];
+}
+
+/* changeShowFolderImages
+ * Toggle whether or not the folder list shows folder images.
+ */
+-(IBAction)changeShowFolderImages:(id)sender
+{
+	BOOL showFolderImages = [sender state] == NSOnState;
+	[[Preferences standardPreferences] setShowFolderImages:showFolderImages];
 }
 
 /* changeMinimumFontSize

@@ -41,7 +41,8 @@
 	-(void)handleFolderAdded:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
 	-(void)handleFolderDeleted:(NSNotification *)nc;
-	-(void)handleFolderFontChange:(NSNotification *)note;
+	-(void)handleShowFolderImagesChange:(NSNotification *)nc;
+	-(void)handleFolderFontChange:(NSNotification *)nc;
 	-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 	-(void)expandToParent:(TreeNode *)node;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
@@ -84,6 +85,7 @@
 	[nc addObserver:self selector:@selector(autoCollapseFolder:) name:@"MA_Notify_AutoCollapseFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
+	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
@@ -156,7 +158,7 @@
 /* handleFolderFontChange
  * Called when the user changes the folder font and/or size in the Preferences
  */
--(void)handleFolderFontChange:(NSNotification *)note
+-(void)handleFolderFontChange:(NSNotification *)nc
 {
 	[self setFolderListFont];
 	[outlineView reloadData];
@@ -475,6 +477,14 @@
 	}
 }
 
+/* handleShowFolderImagesChange
+ * Respond to the notification sent when the option to show folder images is changed.
+ */
+-(void)handleShowFolderImagesChange:(NSNotification *)nc
+{
+	[outlineView reloadData];
+}
+
 /* handleRefreshStatusChange
  * Handle a change of the refresh status. We use this to toggle the behaviour of
  * the button between starting and stopping a refresh.
@@ -685,7 +695,9 @@
 			[realCell clearCount];
 			[realCell setFont:cellFont];
 		}
-		[realCell setImage:[[node folder] image]];
+
+		Preferences * prefs = [Preferences standardPreferences];
+		[realCell setImage:([prefs showFolderImages] ? [[node folder] image] : [[node folder] standardImage])];
 	}
 }
 
