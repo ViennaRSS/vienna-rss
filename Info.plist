@@ -36,6 +36,20 @@
 			<key>LSTypeIsPackage</key>
 			<string>YES</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Script File</string>
+			<key>CFBundleTypeExtension</key>
+			<array>
+				<string>scpt</string>
+			</array>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>****</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>

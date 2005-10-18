@@ -52,6 +52,7 @@
 
 @interface AppController (Private)
 	-(void)installSleepHandler;
+	-(void)installScriptsFolderWatcher;
 	-(void)handleTabChange:(NSNotification *)nc;
 	-(void)handleFolderSelection:(NSNotification *)note;
 	-(void)handleCheckFrequencyChange:(NSNotification *)note;
@@ -98,6 +99,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		growlAvailable = NO;
+		scriptsMenuItem = nil;
 		checkTimer = nil;
 	}
 	return self;
@@ -208,6 +210,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Register to be informed when the system awakes from sleep
 	[self installSleepHandler];
 
+	// Register to be notified when the scripts folder changes.
+	if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+		[self installScriptsFolderWatcher];
+
 	// Assign the controller for the child views
 	[foldersTree setController:self];
 	[mainArticleView setController:self];
@@ -261,6 +267,27 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     root_port = IORegisterForSystemPower(self, &notify, MySleepCallBack, &anIterator);
     if (root_port != 0)
 		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
+}
+
+/* MyScriptsFolderWatcherCallBack
+ * This is the callback function which is invoked when the file system detects changes in the Scripts
+ * folder. We use this to trigger a refresh of the scripts menu.
+ */
+static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, void * refcon, FNSubscriptionRef subscription)
+{
+	AppController * app = (AppController *)refcon;
+	[app initScriptsMenu];
+}
+
+/* installScriptsFolderWatcher
+ * Install a handler to notify of changes in the scripts folder.
+ */
+-(void)installScriptsFolderWatcher
+{
+	NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+	FNSubscriptionRef refCode;
+
+	FNSubscribeByPath([path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
 }
 
 /* applicationDidFinishLaunching
@@ -354,9 +381,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 	if ([[filename pathExtension] isEqualToString:@"viennastyle"])
 	{
-		NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
+		NSString * path = [[defaults objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
 		NSString * styleName = [[filename lastPathComponent] stringByDeletingPathExtension];
 		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
 		
@@ -384,6 +412,30 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 				runOKAlertPanel(@"New style title", @"New style body", styleName);
 		}
 		return YES;
+	}
+	if ([[filename pathExtension] isEqualToString:@"scpt"])
+	{
+		NSString * path = [[defaults objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
+
+		// Make sure we actually have a Scripts folder.
+		NSFileManager * fileManager = [NSFileManager defaultManager];
+		BOOL isDir = NO;
+		
+		if (![fileManager fileExistsAtPath:path isDirectory:&isDir])
+		{
+			if (![fileManager createDirectoryAtPath:path attributes:NULL])
+			{
+				runOKAlertPanel(@"Cannot create scripts folder title", @"Cannot create scripts folder body", path);
+				return NO;
+			}
+		}
+		[fileManager removeFileAtPath:fullPath handler:nil];
+		if ([fileManager copyPath:filename toPath:fullPath handler:nil])
+		{
+			if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+				[self initScriptsMenu];
+		}
 	}
 	return NO;
 }
@@ -822,14 +874,13 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)initScriptsMenu
 {
 	NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
-    NSMenuItem * scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
-
-	// Set menu image
-	[scriptsMenuItem setImage:[NSImage imageNamed:@"scriptMenu.tiff"]];
 
 	// Valid script file extensions
 	NSArray * exts = [NSArray arrayWithObjects:@"scpt", nil];
 
+	// Dump the current mappings
+	[scriptPathMappings removeAllObjects];
+	
 	// Add scripts within the app resource
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Scripts"];
 	loadMapFromPath(path, scriptPathMappings, NO, exts);
@@ -868,14 +919,22 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[scriptsMenu addItem:menuItem];
 		[menuItem release];
 		
-		// The Help menu is always assumed to be the last menu in the list. This is probably
-		// the easiest, localisable, way to look for it.
+		// If this is the first call to initScriptsMenu, create the scripts menu. Otherwise we just
+		// update the one we have.
+		if (scriptsMenuItem != nil)
+		{
+			[[NSApp mainMenu] removeItem:scriptsMenuItem];
+			[scriptsMenuItem release];
+		}
+
+		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
+		[scriptsMenuItem setImage:[NSImage imageNamed:@"scriptMenu.tiff"]];
+
 		int helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
-		[scriptsMenuItem setSubmenu:scriptsMenu];
 		[[NSApp mainMenu] insertItem:scriptsMenuItem atIndex:helpMenuIndex];
+		[scriptsMenuItem setSubmenu:scriptsMenu];
 	}
 	[scriptsMenu release];
-	[scriptsMenuItem release];
 }
 
 /* initStylesMenu
@@ -2223,6 +2282,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[scriptsMenuItem release];
 	[standardURLs release];
 	[downloadWindow release];
 	[persistedStatusText release];

@@ -23,6 +23,8 @@ Thanks!
 - Moved unread count on application icon to the top right corner to be consistent with most
   other Mac OSX applications.
 - Support dragging URL strings from other applications into the folders pane.
+- Support dropping script files (.scpt) on the application icon to install them to the Vienna
+  script folder and add them to the Scripts menu.
 
 2.0.0.2010
 ----------
