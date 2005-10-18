@@ -183,3 +183,5 @@
 "Preferences" = "Préférences";
 "General" = "Générales";
 "Appearance" = "Aspect";
+"Cannot create scripts folder title" = "Cannot create scripts folder";
+"Cannot create scripts folder body" = "The Scripts folder cannot be created at '%@'. Vienna will not install the selected script.";

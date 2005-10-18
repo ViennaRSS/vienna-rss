@@ -74,6 +74,7 @@
 	BOOL growlAvailable;
 	NSString * appName;
 	NSString * persistedStatusText;
+	NSMenuItem * scriptsMenuItem;
 }
 
 // Menu action items
