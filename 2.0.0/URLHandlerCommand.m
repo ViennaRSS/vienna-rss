@@ -57,8 +57,7 @@
 			feedScheme = @"http:";
 		linkPath = [NSString stringWithFormat:@"%@//%@", feedScheme, linkPath];
 
-		AppController * app = [NSApp delegate];
-		[app handleRSSLink:linkPath];
+		[[NSApp delegate] handleRSSLink:linkPath];
 	}
 	return nil;
 }

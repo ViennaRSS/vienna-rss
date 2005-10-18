@@ -1074,11 +1074,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)handleRSSLink:(NSString *)linkPath
 {
-	Folder * folder = [db folderFromFeedURL:linkPath];
-	if (folder != nil)
-		[foldersTree selectFolder:[folder itemId]];
-	else
-		[self createNewSubscription:linkPath underFolder:MA_Root_Folder];
+	[self createNewSubscription:linkPath underFolder:[foldersTree groupParentSelection]];
 }
 
 /* handleEditFolder
@@ -1436,6 +1432,14 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
+
+	// If the folder already exists, just select it.
+	Folder * folder = [db folderFromFeedURL:urlString];
+	if (folder != nil)
+	{
+		[foldersTree selectFolder:[folder itemId]];
+		return;
+	}
 
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];

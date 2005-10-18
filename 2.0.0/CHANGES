@@ -20,6 +20,9 @@ Thanks!
 - New Preferences UI.
 - Font selection in Preferences changed to use the standard OS font picker.
 - Add an option to disable feed folder images in the folders list.
+- Moved unread count on application icon to the top right corner to be consistent with most
+  other Mac OSX applications.
+- Support dragging URL strings from other applications into the folders pane.
 
 2.0.0.2010
 ----------
