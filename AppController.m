@@ -944,7 +944,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 							 fraction:1.0f];
 			float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
 			max += 16;
-			NSRect circleRect = NSMakeRect(iconSize.width - max, 0, max, max);
+			NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
 			NSBezierPath * bp = [NSBezierPath bezierPathWithOvalInRect:circleRect];
 			[[NSColor colorWithCalibratedRed:0.8f green:0.0f blue:0.0f alpha:1.0f] set];
 			[bp fill];
