@@ -581,8 +581,6 @@ typedef enum {
 		}
 		
 		// A notify is only needed if we added any new articles.
-		BOOL needNotify = (newArticlesFromFeed > 0);
-		
 		int folderId = [folder itemId];
 		if ([[folder name] isEqualToString:[db untitledFeedFolderName]])
 		{
@@ -595,20 +593,14 @@ typedef enum {
 				feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
 
 			[[connector aItem] setName:feedTitle];
-			if ([db setFolderName:folderId newName:feedTitle])
-				needNotify = NO;
+			[db setFolderName:folderId newName:feedTitle];
 		}
 		if (feedDescription != nil)
-		{
-			if ([db setFolderDescription:folderId newDescription:feedDescription])
-				needNotify = NO;
-		}
-		if (feedLink!= nil)
-		{
-			if ([db setFolderHomePage:folderId newHomePage:feedLink])
-				needNotify = NO;
-		}
+			[db setFolderDescription:folderId newDescription:feedDescription];
 
+		if (feedLink!= nil)
+			[db setFolderHomePage:folderId newHomePage:feedLink];
+		
 		// Set the last update date for this folder to be the date of the most
 		// recent article we retrieved.
 		if (newLastUpdate != nil)
@@ -617,9 +609,8 @@ typedef enum {
 		
 		// Let interested callers know that the folder has changed.
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		if (needNotify)
-			[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-		
+		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
 			[[connector aItem] setStatus:NSLocalizedString(@"No new articles available", nil)];
