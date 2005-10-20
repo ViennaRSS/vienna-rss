@@ -38,6 +38,7 @@
 	AppController * controller;
 	Database * db;
 	TreeNode * rootNode;
+	NSTimer * selectionTimer;
 	NSFont * cellFont;
 	NSFont * boldCellFont;
 	BOOL blockSelectionHandler;

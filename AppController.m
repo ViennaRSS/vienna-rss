@@ -1449,7 +1449,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case 'S':
 			[self skipFolder:self];
 			return YES;
-			
+
+		case 3:
 		case '\r': //ENTER
 			[self viewArticlePage:self];
 			return YES;
