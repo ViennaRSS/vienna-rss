@@ -131,6 +131,32 @@
 	}
 }
 
+/* didFailProvisionalLoadWithError
+ * Invoked when a location request for frame has failed to load.
+ */
+-(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+	if (frame == [webPane mainFrame])
+	{
+		if (!hasPageTitle)
+			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
+		isLoadingFrame = NO;
+	}
+}
+
+/* didFailLoadWithError
+ * Invoked when a location request for frame has failed to load.
+ */
+-(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+	if (frame == [webPane mainFrame])
+	{
+		if (!hasPageTitle)
+			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
+		isLoadingFrame = NO;
+	}
+}
+
 /* didFinishLoadForFrame
  * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
  */
