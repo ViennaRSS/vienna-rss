@@ -22,6 +22,7 @@
 "Copy Link to Clipboard" = "Kopiera länk";
 "Refresh completed" = "Uppdatering klar";
 "Retrieving articles" = "Tar emot artiklar";
+"ClearButton" = "Rensa";
 "Read" = "Läst";
 "Flagged" = "Flaggad";
 "Comments" = "Kommentarer";
@@ -182,5 +183,5 @@
 "Preferences" = "Inställningar";
 "General" = "Allmänt";
 "Appearance" = "Utseende";
-"Cannot create scripts folder title" = "Cannot create scripts folder";
-"Cannot create scripts folder body" = "The Scripts folder cannot be created at '%@'. Vienna will not install the selected script.";
+"Cannot create scripts folder title" = "Kan ej skapa scriptmappens namn";
+"Cannot create scripts folder body" = "Scriptmappen kan ej skapas i '%@'. Vienna kommer inte att installera markerat script.";

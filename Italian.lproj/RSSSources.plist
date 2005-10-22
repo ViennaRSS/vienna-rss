@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Splinder</key>
+	<dict>
+		<key>SiteHomePage</key>
+		<string>http://www.splinder.com</string>
+		<key>LinkName</key>
+		<string>Enter Splinder name</string>
+		<key>LinkTemplate</key>
+		<string>http://syndication.splinder.com/%@/rss2.xml</string>
+	</dict>
+	<key>LiveJournal</key>
+	<dict>
+		<key>SiteHomePage</key>
+		<string>http://www.livejournal.com</string>
+		<key>LinkName</key>
+		<string>Enter LiveJournal User name</string>
+		<key>LinkTemplate</key>
+		<string>http://www.livejournal.com/users/%@/data/rss</string>
+	</dict>
+	<key>MSN Spaces</key>
+	<dict>
+		<key>SiteHomePage</key>
+		<string>http://spaces.msn.com</string>
+		<key>LinkName</key>
+		<string>Enter MSN Spaces User name</string>
+		<key>LinkTemplate</key>
+		<string>http://spaces.msn.com/members/%@/feed.rss</string>
+	</dict>
+	<key>Blogspot</key>
+	<dict>
+		<key>SiteHomePage</key>
+		<string>http://www.blogspot.com</string>
+		<key>LinkName</key>
+		<string>Enter Blogspot User name</string>
+		<key>LinkTemplate</key>
+		<string>http://%@.blogspot.com/atom.xml</string>
+	</dict>
+	<key>Xanga</key>
+	<dict>
+		<key>SiteHomePage</key>
+		<string>http://www.xanga.com</string>
+		<key>LinkName</key>
+		<string>Enter Xanga User name</string>
+		<key>LinkTemplate</key>
+		<string>http://www.xanga.com/rss.aspx?user=%@</string>
+	</dict>
+	<key>URL</key>
+	<dict>
+		<key>LinkName</key>
+		<string>Enter URL of RSS feed</string>
+		<key>LinkTemplate</key>
+		<string>%@</string>
+	</dict>
+</dict>
+</plist>

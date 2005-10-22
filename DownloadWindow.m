@@ -44,7 +44,7 @@
 	// Work around a Cocoa bug where the window positions aren't saved
 	[self setShouldCascadeWindows:NO];
 	[self setWindowFrameAutosaveName:@"downloadWindow"];
-	[window setDelegate:self];
+	[downloadWindow setDelegate:self];
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -61,9 +61,12 @@
 	// We are the delegate and the datasource
 	[table setDelegate:self];
 	[table setDataSource:self];
-	
+
+	// Set Clear button caption
+	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
+
 	// Set the window title
-	[window setTitle:NSLocalizedString(@"Downloads", nil)];
+	[downloadWindow setTitle:NSLocalizedString(@"Downloads", nil)];
 }
 
 /* clearList

@@ -7,6 +7,7 @@
 "Loading %@..." = "Lade %@...";
 "Completed" = "Fertig";
 "Refresh RSS feeds" = "Feeds aktualisieren";
+"Refresh All Subscriptions" = "Ausgew�hltes Abonnement aktualisieren";
 "Already subscribed title" = "Fehler";
 "Already subscribed body" = "Sie haben diesen Feed bereits abonniert";
 "RSS Subscription Import Title" = "Import fertig";
@@ -21,6 +22,7 @@
 "Copy Link to Clipboard" = "Link kopieren";
 "Refresh completed" = "Aktualisierung durchgeführt";
 "Retrieving articles" = "Empfange Artikel";
+"ClearButton" = "Loschen";
 "Read" = "Gelesen";
 "Flagged" = "Markiert";
 "Comments" = "Kommentare";
@@ -104,7 +106,6 @@
 "Update available text" = "Version %@ von Vienna ist jetzt verfügbar von:\n\n%@\n\nWollen Sie es herunterladen? Wenn Sie es nicht jetzt herunterzuladen wollen, können Sie es später nachholen indem Sie Nach Aktualisierung suchen wählen.";
 "any" = "einer";
 "all" = "allen";
-"View" = "Ansicht";
 "Open Scripts Folder" = "Öffne Scriptordner";
 "Cannot create database folder" = "Entschuldigung, aber Vienna war es nicht möglich den Datenbankordner zu erstellen.";
 "Cannot create database folder text" = "Vienna versuchte den Ordner '%@' zu erstellen aber es trat ein Fehler auf. Bitte überprüfen Sie die Dateizugriffsrechte an dem angegebenem Pfad.";
