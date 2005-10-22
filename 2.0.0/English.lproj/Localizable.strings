@@ -7,6 +7,7 @@
 "Loading %@..." = "Loading %@...";
 "Completed" = "Completed";
 "Refresh RSS feeds" = "Refresh subscriptions";
+"Refresh All Subscriptions" = "Refresh All Subscriptions";
 "Already subscribed title" = "Error";
 "Already subscribed body" = "You are already subscribed to that feed";
 "RSS Subscription Import Title" = "Import Completed";
@@ -21,6 +22,7 @@
 "Copy Link to Clipboard" = "Copy Link to Clipboard";
 "Refresh completed" = "Refresh completed";
 "Retrieving articles" = "Retrieving articles";
+"ClearButton" = "Clear";
 "Read" = "Read";
 "Flagged" = "Flagged";
 "Comments" = "Comments";

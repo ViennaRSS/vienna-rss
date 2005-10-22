@@ -22,7 +22,7 @@
 #import "SquareWindow.h"
 
 @interface DownloadWindow : NSWindowController {
-	IBOutlet SquareWindow * window;
+	IBOutlet SquareWindow * downloadWindow;
 	IBOutlet NSTableView * table;
 	IBOutlet NSButton * clearButton;
 	int lastCount;

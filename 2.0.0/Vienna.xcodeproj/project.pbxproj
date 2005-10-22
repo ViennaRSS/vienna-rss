@@ -94,7 +94,6 @@
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
 		AA56328406168A9A00B317EB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA56328306168A9A00B317EB /* Security.framework */; };
 		AA570A8808C41FB900367040 /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */; };
-		AA570A8908C41FD300367040 /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAC504360828E6740089FF70 /* RSSSources.plist */; };
 		AA60238008C298FB002CFD06 /* HelperFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA60237E08C298FB002CFD06 /* HelperFunctions.h */; };
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
@@ -146,6 +145,7 @@
 		AAB9697D08F9691C00B7D1C8 /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAB9697B08F9691C00B7D1C8 /* Downloads.nib */; };
 		AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */; };
 		AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */; };
+		AABC189D090AB00300527D4B /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABC189C090AB00300527D4B /* RSSSources.plist */; };
 		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
 		AABCFB1A0900BA4E00984F78 /* SquareWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AABCFB180900BA4E00984F78 /* SquareWindow.h */; };
 		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
@@ -431,6 +431,7 @@
 		AAB9697C08F9691C00B7D1C8 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Downloads.nib; sourceTree = "<group>"; };
 		AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWindow.h; sourceTree = "<group>"; };
 		AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadWindow.m; sourceTree = "<group>"; };
+		AABC189E090AB01600527D4B /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Italian; path = Italian.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pressedCloseButton.tiff; sourceTree = "<group>"; };
 		AABCFB180900BA4E00984F78 /* SquareWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareWindow.h; sourceTree = "<group>"; };
 		AABCFB190900BA4E00984F78 /* SquareWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareWindow.m; sourceTree = "<group>"; };
@@ -445,7 +446,7 @@
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
-		AAC504360828E6740089FF70 /* RSSSources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSSources.plist; sourceTree = "<group>"; };
+		AAC504360828E6740089FF70 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = English; path = English.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AACFDEBA0604D4D20072D140 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		AACFDEBB0604D4D20072D140 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		AAD1E2CB0612908200D09905 /* MacPAD.url */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = MacPAD.url; sourceTree = "<group>"; };
@@ -634,10 +635,10 @@
 				AA31123F0901CDE100E80DF1 /* NewPreferences.nib */,
 				AA26F5650604955F00FE7994 /* Localizable.strings */,
 				089C165FFE840EACC02AAC07 /* InfoPlist.strings */,
+				AABC189C090AB00300527D4B /* RSSSources.plist */,
+				AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
 				AA3111B80901A2DC00E80DF1 /* Preferences.plist */,
-				AAC504360828E6740089FF70 /* RSSSources.plist */,
-				AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */,
 				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 				AAE7A842086B696A009A487E /* add.tiff */,
 				AAE7A845086B6994009A487E /* action.tiff */,
@@ -980,7 +981,7 @@
 				AADD8963081C1916007C6E88 /* rssFolder.tiff in Resources */,
 				AADD8A0E081C253F007C6E88 /* rssFeed.tiff in Resources */,
 				AA570A8808C41FB900367040 /* Acknowledgements.rtf in Resources */,
-				AA570A8908C41FD300367040 /* RSSSources.plist in Resources */,
+				AABC189D090AB00300527D4B /* RSSSources.plist in Resources */,
 				AA34582D084BE802003D992E /* vienna2.icns in Resources */,
 				AAA1E32A0852539500277128 /* GroupFolder.nib in Resources */,
 				AA2185060861E7E10024DD4A /* metal_column_header.png in Resources */,
@@ -1204,6 +1205,15 @@
 			name = Downloads.nib;
 			sourceTree = "<group>";
 		};
+		AABC189C090AB00300527D4B /* RSSSources.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAC504360828E6740089FF70 /* English */,
+				AABC189E090AB01600527D4B /* Italian */,
+			);
+			name = RSSSources.plist;
+			sourceTree = "<group>";
+		};
 		AABFDCC10609EAC500100A9B /* ActivityViewer.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1404,7 +1414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2011;
+				BUILD_NUMBER = 2012;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1417,7 +1427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2011;
+				BUILD_NUMBER = 2012;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1430,7 +1440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2011;
+				BUILD_NUMBER = 2012;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;

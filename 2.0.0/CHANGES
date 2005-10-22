@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2012
+----------
+- Fix bug which prevented a system from going to sleep if automatic refreshes are enabled.
+
 2.0.0.2011
 ----------
 - Added option to export subscriptions with groups or as a flat file.
