@@ -244,7 +244,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  * Called in response to an I/O event that we established via IORegisterForSystemPower. The
  * messageType parameter allows us to distinguish between which event occurred.
  */
-static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument)
+static void MySleepCallBack(void * refCon, io_service_t service, natural_t messageType, void * messageArgument)
 {
 	if (messageType == kIOMessageSystemHasPoweredOn)
 	{
@@ -252,6 +252,18 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		Preferences * prefs = [Preferences standardPreferences];
 		if ([prefs refreshFrequency] > 0)
 			[app refreshAllSubscriptions:app];
+	}
+	else if (messageType == kIOMessageCanSystemSleep)
+	{
+		// Idle sleep is about to kick in. Allow it otherwise the system
+		// will wait 30 seconds then go to sleep.
+		IOAllowPowerChange(root_port, (long)messageArgument);
+	}
+	else if (messageType == kIOMessageSystemWillSleep)
+	{
+		// The system WILL go to sleep. Allow it otherwise the system will
+		// wait 30 seconds then go to sleep.
+		IOAllowPowerChange(root_port, (long)messageArgument);
 	}
 }
 
