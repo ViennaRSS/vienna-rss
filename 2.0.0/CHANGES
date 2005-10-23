@@ -9,6 +9,8 @@ Thanks!
 2.0.0.2012
 ----------
 - Fix bug which prevented a system from going to sleep if automatic refreshes are enabled.
+- Stepping through article lists does not refresh the article pane until the steps complete.
+- Completed all localisation fixes.
 
 2.0.0.2011
 ----------

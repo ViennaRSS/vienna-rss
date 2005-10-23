@@ -53,6 +53,7 @@
 	NSString * sortColumnIdentifier;
 	BOOL previousFolderColumnState;
 	NSTimer * markReadTimer;
+	NSTimer * selectionTimer;
 	NSArray * currentArrayOfArticles;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;

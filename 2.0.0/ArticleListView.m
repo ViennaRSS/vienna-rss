@@ -86,6 +86,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		guidOfArticleToSelect = nil;
 		stylePathMappings = nil;
 		markReadTimer = nil;
+		selectionTimer = nil;
 		htmlTemplate = nil;
 		cssStylesheet = nil;
     }
@@ -1345,13 +1346,25 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	}
 }
 
+/* startSelectionChange
+ * This is the function that is called on the timer to actually handle the
+ * selection change.
+ */
+-(void)startSelectionChange:(NSTimer *)timer
+{
+	currentSelectedRow = [articleList selectedRow];
+	[self refreshArticleAtRow:currentSelectedRow markRead:!isAppInitialising];
+}
+
 /* tableViewSelectionDidChange [delegate]
  * Handle the selection changing in the table view.
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	currentSelectedRow = [articleList selectedRow];
-	[self refreshArticleAtRow:currentSelectedRow markRead:!isAppInitialising];
+	// Set up to change selection after an elapsed period.
+	[selectionTimer invalidate];
+	[selectionTimer release];
+	selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startSelectionChange:) userInfo:nil repeats:NO] retain];
 }
 
 /* didClickTableColumns
@@ -1845,6 +1858,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[cssStylesheet release];
 	[htmlTemplate release];
 	[extDateFormatter release];
+	[selectionTimer release];
 	[markReadTimer release];
 	[currentArrayOfArticles release];
 	[backtrackArray release];

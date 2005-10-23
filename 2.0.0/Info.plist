@@ -71,7 +71,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.0.0.${BUILD_NUMBER}</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Vienna version 2.0.0.${BUILD_NUMBER} (RC1), Copyright 2004-2006 Steve Palmer.</string>
+	<string>Vienna version 2.0.0.${BUILD_NUMBER}, Copyright 2004-2006 Steve Palmer.</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSMainNibFile</key>
