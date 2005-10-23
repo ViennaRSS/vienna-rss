@@ -7,7 +7,7 @@
 		<key>SiteHomePage</key>
 		<string>http://www.splinder.com</string>
 		<key>LinkName</key>
-		<string>Enter Splinder name</string>
+		<string>Enter Splinder User name</string>
 		<key>LinkTemplate</key>
 		<string>http://syndication.splinder.com/%@/rss2.xml</string>
 	</dict>
