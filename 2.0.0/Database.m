@@ -1009,16 +1009,27 @@ static Database * _sharedDatabase = nil;
 	if (daysToKeep > 0)
 	{
 		NSCalendarDate * todaysDate = [NSCalendarDate date];
-		int dayDelta = daysToKeep % 1000;
+		NSCalendarDate * absoluteDate = [NSCalendarDate dateWithYear:[todaysDate yearOfCommonEra]
+															   month:[todaysDate monthOfYear]
+																 day:[todaysDate dayOfMonth]
+																hour:0
+															  minute:0
+															  second:0
+															timeZone:[todaysDate timeZone]];
+		int dayDelta = (daysToKeep % 1000) - 1;
 		int monthDelta = (daysToKeep / 1000);
+		NSTimeInterval timeDiff = [[absoluteDate dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
 
-		NSTimeInterval timeDiff = [[todaysDate dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
 		if (results != nil)
 		{
 			// Flush all caches.
-			[[foldersArray allValues] makeObjectsPerformSelector:@selector(clearCache:)];
+			NSEnumerator * enumerator = [[foldersArray allValues] objectEnumerator];
+			Folder * folder;
+			
+			while ((folder = [enumerator nextObject]) != nil)
+				[folder clearCache];
 
 			// A folder ID of zero means update all folders
 			if (notifyFlag)

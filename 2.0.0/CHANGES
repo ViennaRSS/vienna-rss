@@ -11,6 +11,7 @@ Thanks!
 - Fix bug which prevented a system from going to sleep if automatic refreshes are enabled.
 - Stepping through article lists does not refresh the article pane until the steps complete.
 - Completed all localisation fixes.
+- Auto-expire now runs post-refresh in addition to at start up.
 
 2.0.0.2011
 ----------

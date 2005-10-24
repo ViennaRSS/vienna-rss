@@ -1314,6 +1314,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
 		[self stopProgressIndicator];
 
+		// Run the auto-expire now
+		Preferences * prefs = [Preferences standardPreferences];
+		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:YES];
+		
 		[self showUnreadCountOnApplicationIcon];
 
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
