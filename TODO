@@ -4,6 +4,10 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
+RTM Fixes Needed
+================
+- Get a version of SQLite 3 that works on networked folders.
+
 Known Issues (May not be fixed)
 ===============================
 - Renaming a folder does not update the folder name in smart folders that reference it.
