@@ -66,6 +66,14 @@
 	return folderId;
 }
 
+/* description
+ * A human readable description of this reference.
+ */
+-(NSString *)description
+{
+	return [NSString stringWithFormat:@"%@ in folder %d", guid, folderId];
+}
+
 /* dealloc
  * Clean up behind ourselves.
  */
