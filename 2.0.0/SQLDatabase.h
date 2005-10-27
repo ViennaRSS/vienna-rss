@@ -15,12 +15,15 @@
 
 @interface SQLDatabase : NSObject 
 {
-	sqlite3*		mDatabase;
-	NSString*	mPath;
+	sqlite3 *	mDatabase;
+	int			lastError;
+	NSString *	mPath;
 }
 
 + (id)databaseWithFile:(NSString*)inPath;
 -(id)initWithFile:(NSString*)inPath;
+
+-(int)lastError;
 
 -(BOOL)open;
 -(void)close;

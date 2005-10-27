@@ -52,8 +52,6 @@ static NSMutableDictionary * entityMap = nil;
 		CFRelease(newTree);
 		return YES;
 	}
-	else
-		NSLog(@"%@", error);
 	return NO;
 }
 

@@ -13,6 +13,8 @@ Known Issues (May not be fixed)
 - Renaming a folder does not update the folder name in smart folders that reference it.
 - The isAccessible(NSString * urlString) function returns NO behind a firewall.
 - Auto-expire needs to run at times other than start up.
+- Vienna now checks that it can create the database and prompts for an alternative
+  location otherwise.
 
 Post 2.0 Items
 ==============

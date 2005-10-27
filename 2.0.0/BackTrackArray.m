@@ -104,6 +104,12 @@
 		[array removeObjectAtIndex:0];
 		--queueIndex;
 	}
+	if ([array count] > 0)
+	{
+		ArticleReference * item = [array objectAtIndex:[array count] - 1];
+		if ([[item guid] isEqualToString:guid] && [item folderId] == folderId)
+			return;
+	}
 	[array addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 	++queueIndex;
 }

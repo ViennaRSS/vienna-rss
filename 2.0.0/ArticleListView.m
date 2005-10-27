@@ -56,7 +56,8 @@
 	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
 	-(void)loadMinimumFontSize;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
-	-(void)refreshArticleAtRow:(int)theRow markRead:(BOOL)markReadFlag;
+	-(void)refreshImmediatelyArticleAtCurrentRow;
+	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
 	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray;
 	-(void)reloadArrayOfArticles;
 	-(void)refreshArticlePane;
@@ -86,6 +87,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		guidOfArticleToSelect = nil;
 		stylePathMappings = nil;
 		markReadTimer = nil;
+		selectionTimer = nil;
 		htmlTemplate = nil;
 		cssStylesheet = nil;
     }
@@ -937,18 +939,15 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
 	if (rowIndex == currentSelectedRow)
-	{
-		[articleList selectRow:rowIndex byExtendingSelection:NO];
-		[self refreshArticleAtRow:rowIndex markRead:NO];
-	}
+		[self refreshArticleAtCurrentRow:NO];
 	else
 	{
 		[articleList selectRow:rowIndex byExtendingSelection:NO];
-		
+
 		int pageSize = [articleList rowsInRect:[articleList visibleRect]].length;
 		int lastRow = [articleList numberOfRows] - 1;
 		int visibleRow = currentSelectedRow + (pageSize / 2);
-		
+
 		if (visibleRow > lastRow)
 			visibleRow = lastRow;
 		[articleList scrollRowToVisible:currentSelectedRow];
@@ -1146,31 +1145,56 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[self selectArticleAfterReload];
 }
 
-/* refreshArticleAtRow
- * Refreshes the article at the specified row.
+/* refreshImmediatelyArticleAtCurrentRow
+ * Refreshes the article at the current selected row.
  */
--(void)refreshArticleAtRow:(int)theRow markRead:(BOOL)markReadFlag
+-(void)refreshImmediatelyArticleAtCurrentRow
+{
+	[self refreshArticlePane];
+	
+	// If we mark read after an interval, start the timer here.
+	[markReadTimer invalidate];
+	[markReadTimer release];
+	markReadTimer = nil;
+	
+	float interval = [[Preferences standardPreferences] markReadInterval];
+	if (interval > 0 && !isAppInitialising)
+		markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
+														  target:self
+														selector:@selector(markCurrentRead:)
+														userInfo:nil
+														 repeats:NO] retain];
+}
+
+/* startSelectionChange
+ * This is the function that is called on the timer to actually handle the
+ * selection change.
+ */
+-(void)startSelectionChange:(NSTimer *)timer
+{
+	currentSelectedRow = [articleList selectedRow];
+	[self refreshImmediatelyArticleAtCurrentRow];
+}
+
+/* refreshArticleAtCurrentRow
+ * Refreshes the article at the current selected row.
+ */
+-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag
 {
 	if (currentSelectedRow < 0)
 		[[articleText mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
 	else
 	{
 		NSAssert(currentSelectedRow < (int)[currentArrayOfArticles count], @"Out of range row index received");
-		[self refreshArticlePane];
-		
-		// If we mark read after an interval, start the timer here.
-		[markReadTimer invalidate];
-		[markReadTimer release];
-		markReadTimer = nil;
-		
-		float interval = [[Preferences standardPreferences] markReadInterval];
-		if (interval > 0 && markReadFlag)
-			markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
-															  target:self
-															selector:@selector(markCurrentRead:)
-															userInfo:nil
-															 repeats:NO] retain];
-		
+		if (!delayFlag)
+			[self refreshImmediatelyArticleAtCurrentRow];
+		else
+		{
+			[selectionTimer invalidate];
+			[selectionTimer release];
+			selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startSelectionChange:) userInfo:nil repeats:NO] retain];
+		}
+
 		// Add this to the backtrack list
 		if (!isBacktracking)
 		{
@@ -1351,7 +1375,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	currentSelectedRow = [articleList selectedRow];
-	[self refreshArticleAtRow:currentSelectedRow markRead:!isAppInitialising];
+	[self refreshArticleAtCurrentRow:YES];
 }
 
 /* didClickTableColumns
@@ -1845,6 +1869,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[cssStylesheet release];
 	[htmlTemplate release];
 	[extDateFormatter release];
+	[selectionTimer release];
 	[markReadTimer release];
 	[currentArrayOfArticles release];
 	[backtrackArray release];

@@ -25,6 +25,7 @@
 	
 	mPath = [inPath copy];
 	mDatabase = NULL;
+	lastError = SQLITE_OK;
 	
 	return self;
 }
@@ -103,19 +104,23 @@
 	return sqlite3_last_insert_rowid( mDatabase );
 }
 
+-(int)lastError
+{
+	return lastError;
+}
+
 -(SQLResult*)performQuery:(NSString*)inQuery
 {
 	SQLResult*	sqlResult = nil;
 	char**		results;
-	int			result;
 	int			columns;
 	int			rows;
 	
 	if( !mDatabase )
 		return nil;
 	
-	result = sqlite3_get_table( mDatabase, [inQuery UTF8String], &results, &rows, &columns, NULL );
-	if( result != SQLITE_OK )
+	lastError = sqlite3_get_table( mDatabase, [inQuery UTF8String], &results, &rows, &columns, NULL );
+	if( lastError != SQLITE_OK )
 	{
 		sqlite3_free_table( results );
 		return nil;

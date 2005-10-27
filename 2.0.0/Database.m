@@ -29,6 +29,7 @@
 
 // Private functions
 @interface Database (Private)
+	-(NSString *)relocateLockedDatabase:(NSString *)path;
 	-(void)setDatabaseVersion:(int)newVersion;
 	-(BOOL)initArticleArray:(Folder *)folder;
 	-(void)verifyThreadSafety;
@@ -37,8 +38,8 @@
 	-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(int)scopeFlags;
 	-(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
 	-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId withType:(int)type;
-	-(void)executeSQL:(NSString *)sqlStatement;
-	-(void)executeSQLWithFormat:(NSString *)sqlStatement, ...;
+	-(int)executeSQL:(NSString *)sqlStatement;
+	-(int)executeSQLWithFormat:(NSString *)sqlStatement, ...;
 @end
 
 // The current database version number
@@ -151,6 +152,9 @@ static Database * _sharedDatabase = nil;
 		
 		if (option == 0)
 		{
+			[sqlDatabase close];
+			[sqlDatabase release];
+
 			[[NSFileManager defaultManager] movePath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
 			sqlDatabase = [[SQLDatabase alloc] initWithFile:qualifiedDatabaseFileName];
 			if (!sqlDatabase || ![sqlDatabase open])
@@ -165,8 +169,22 @@ static Database * _sharedDatabase = nil;
 	// Create the tables when the database is empty.
 	if (databaseVersion == 0)
 	{
-		// Create the tables
-		[self executeSQL:@"create table info (version, last_opened)"];
+		// Create the tables. We use the first table as a test whether we can actually
+		// write to the specified location. If not then we need to prompt the user for
+		// a different location.
+		int resultCode;
+		while ((resultCode = [self executeSQL:@"create table info (version, last_opened)"]) != SQLITE_OK)
+		{
+			if (resultCode != SQLITE_LOCKED)
+				return NO;
+
+			// Database was opened but table was locked.
+			NSString * newPath = [self relocateLockedDatabase:qualifiedDatabaseFileName];
+			if (newPath == nil)
+				return NO;
+			qualifiedDatabaseFileName = newPath;
+		}
+
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags)"];
 		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, date, text)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
@@ -231,6 +249,53 @@ static Database * _sharedDatabase = nil;
 	return YES;
 }
 
+/* relocateLockedDatabase
+ * Tell the user that the database could not be created at the path specified by path
+ * and prompt for an alternative location. Opens and returns the new location if we were successful.
+ */
+-(NSString *)relocateLockedDatabase:(NSString *)path
+{
+	NSString * errorTitle = NSLocalizedString(@"Locate Title", nil);
+	NSString * errorText = NSLocalizedString(@"Locate Text", nil);
+	int option = NSRunAlertPanel(errorTitle, errorText, NSLocalizedString(@"Locate", nil), NSLocalizedString(@"Exit", nil), nil, path);
+	if (option == 0)
+		return nil;
+
+	// Locate button.
+	if (option == 1)
+	{
+		// Delete any existing database.
+		if (sqlDatabase != nil)
+		{
+			[sqlDatabase close];
+			[sqlDatabase release];
+			sqlDatabase = nil;
+			[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
+		}
+		
+		// Bring up modal UI to select the new location
+		NSOpenPanel * openPanel = [NSOpenPanel openPanel];
+		[openPanel setCanChooseFiles:NO];
+		[openPanel setCanChooseDirectories:YES];
+		if ([openPanel runModalForDirectory:nil file:nil] == NSCancelButton)
+			return nil;
+		
+		// Make the new database name.
+		NSString * databaseName = [path lastPathComponent];
+		NSString * newPath = [[[openPanel filenames] objectAtIndex:0] stringByAppendingPathComponent:databaseName];
+		
+		// And try to open it.
+		sqlDatabase = [[SQLDatabase alloc] initWithFile:newPath];
+		if (!sqlDatabase || ![sqlDatabase open])
+			return nil;
+		
+		// Save this to the preferences
+		[[NSUserDefaults standardUserDefaults] setValue:newPath forKey:MAPref_DefaultDatabase];
+		return newPath;
+	}
+	return nil;
+}
+
 /* createInitialSmartFolder
  * Create a smart folder in the database as part of creating a new database. This is intended to be
  * called from the database initialisation code and makes a number of assumptions about the state
@@ -255,23 +320,25 @@ static Database * _sharedDatabase = nil;
  * Executes the specified SQL statement and discards the result. Should be used for
  * SQL statements that do not return results.
  */
--(void)executeSQL:(NSString *)sqlStatement
+-(int)executeSQL:(NSString *)sqlStatement
 {
 	[self verifyThreadSafety];
 	[[sqlDatabase performQuery:sqlStatement] release];
+	return [sqlDatabase lastError];
 }
 
 /* executeSQLWithFormat
  * Formats and executes the specified SQL statement and discards the result. Should be used for
  * SQL statements that do not return results.
  */
--(void)executeSQLWithFormat:(NSString *)sqlStatement, ...
+-(int)executeSQLWithFormat:(NSString *)sqlStatement, ...
 {
 	va_list arguments;
 	va_start(arguments, sqlStatement);
 	NSString * query = [[NSString alloc] initWithFormat:sqlStatement arguments:arguments];
 	[self executeSQL:query];
 	[query release];
+	return [sqlDatabase lastError];
 }
 
 /* verifyThreadSafety
