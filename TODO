@@ -36,3 +36,4 @@ Post 2.0 Items
 - Fix web browser to block popups.
 - Handle middle mouse click on tabs.
 - Hide and show article pane.
+- Timestamp on each row in the activity log window.
