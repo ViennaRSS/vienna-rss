@@ -1077,10 +1077,18 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[articleList reloadData];
 	if (guid != nil)
 	{
-		if (![self scrollToArticle:guid])
-			currentSelectedRow = -1;
-		else
-			[self refreshArticlePane];
+		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
+		// the same and the GUID of the article at the selection is the same. If so, don't refresh anything.
+		BOOL isUnchanged = currentSelectedRow >= 0 &&
+						   currentSelectedRow < [currentArrayOfArticles count] &&
+						   [guid isEqualToString:[[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid]];
+		if (!isUnchanged)
+		{
+			if (![self scrollToArticle:guid])
+				currentSelectedRow = -1;
+			else
+				[self refreshArticlePane];
+		}
 	}
 	[guid release];
 }
