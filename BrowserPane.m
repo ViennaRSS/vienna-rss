@@ -204,8 +204,20 @@
 	if (frameKey != nil && !isLocalFile)
 	{
 		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
-		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
 
+		// Rename some items to replace 'Window' with 'Tab'.
+		int count = [newDefaultMenu count];
+		int index;
+		for (index = count - 1; index >= 0; --index)
+		{
+			NSMenuItem * menuItem = [newDefaultMenu objectAtIndex:index];
+			if ([menuItem tag] == WebMenuItemTagOpenImageInNewWindow)
+				[menuItem setTitle:NSLocalizedString(@"Open Image in New Tab", nil)];
+		}
+
+		// Separate our new commands from the existing ones.
+		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
+		
 		// Add command to open the current page in the external browser
 		NSString * defaultBrowser = getDefaultBrowser();
 		NSMenuItem * newMenuItem = [[NSMenuItem alloc] init];
