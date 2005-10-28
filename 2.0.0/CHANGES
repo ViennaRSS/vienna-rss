@@ -12,6 +12,8 @@ Thanks!
 - Stepping through article lists does not refresh the article pane until the steps complete.
 - Completed all localisation fixes.
 - Auto-expire now runs post-refresh in addition to at start up.
+- Vienna now checks that it can create the database in the users home folder and prompts
+  for an alternative location if not.
 - Don't scroll the current article after a refresh if it hasn't been changed or expired.
 
 2.0.0.2011
