@@ -40,6 +40,7 @@
 		prefsDict = nil;
 		prefPanes = nil;
 		prefsIdentifiers = nil;
+		selectedIdentifier = nil;
 	}
 	return self;
 }
@@ -126,6 +127,10 @@
 	NSDictionary * prefItem = [prefsDict objectForKey:identifier];
 	NSAssert(prefItem != nil, @"Not a valid preference identifier");
 
+	// Skip if we're already the selected pane
+	if ([identifier isEqualToString:selectedIdentifier])
+		return;
+	
 	// Make sure the associated class has been instantiated
 	id prefPane = [prefPanes objectForKey:identifier];
 	if (prefPane == nil)
@@ -173,6 +178,10 @@
 	[prefWindow setFrame:newWindowFrame display:YES animate:[prefWindow isVisible]];
 
 	[prefWindow setContentView:theView];
+
+	// Remember this pane identifier.
+	[selectedIdentifier release];
+	selectedIdentifier = [identifier retain];
 }
 
 /* validateToolbarItem
@@ -212,6 +221,7 @@
  */
 -(void)dealloc
 {
+	[selectedIdentifier release];
 	[blankView release];
 	[prefPanes release];
 	[prefsIdentifiers release];

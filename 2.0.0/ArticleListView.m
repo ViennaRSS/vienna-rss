@@ -47,6 +47,7 @@
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
 	-(void)selectArticleAfterReload;
+	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
 	-(void)handleStyleChange:(NSNotificationCenter *)nc;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
@@ -105,6 +106,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 
 	// Create a backtrack array
 	Preferences * prefs = [Preferences standardPreferences];
@@ -791,6 +793,20 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)printDocument:(id)sender
 {
 	[articleText printDocument:sender];
+}
+
+/* handleFolderNameChange
+ * Some folder metadata changed. Update the article list header and the
+ * current article with a possible name change.
+ */
+-(void)handleFolderNameChange:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	if (folderId == currentFolderId)
+	{
+		[self setArticleListHeader];
+		[self refreshArticlePane];
+	}
 }
 
 /* handleFolderUpdate
