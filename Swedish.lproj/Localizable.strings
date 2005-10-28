@@ -185,5 +185,5 @@
 "Appearance" = "Utseende";
 "Cannot create scripts folder title" = "Kan ej skapa scriptmappens namn";
 "Cannot create scripts folder body" = "Scriptmappen kan ej skapas i '%@'. Vienna kommer inte att installera markerat script.";
-"Locate Title" = "Cannot create the Vienna database";
-"Locate Text" = "A new Vienna database cannot be created at '%@' because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.\n";
+"Locate Title" = "Kan ej skapa Viennas databas";
+"Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.\n";

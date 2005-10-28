@@ -27,5 +27,6 @@
 	NSDictionary * prefsDict;
 	NSArray * prefsIdentifiers;
 	NSMutableDictionary * prefPanes;
+	NSString * selectedIdentifier;
 }
 @end

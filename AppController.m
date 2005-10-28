@@ -54,8 +54,9 @@
 	-(void)installSleepHandler;
 	-(void)installScriptsFolderWatcher;
 	-(void)handleTabChange:(NSNotification *)nc;
-	-(void)handleFolderSelection:(NSNotification *)note;
-	-(void)handleCheckFrequencyChange:(NSNotification *)note;
+	-(void)handleFolderSelection:(NSNotification *)nc;
+	-(void)handleCheckFrequencyChange:(NSNotification *)nc;
+	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
@@ -142,6 +143,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -1189,9 +1191,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* handleFolderSelection
  * Called when the selection changes in the folder pane.
  */
--(void)handleFolderSelection:(NSNotification *)note
+-(void)handleFolderSelection:(NSNotification *)nc
 {
-	TreeNode * node = (TreeNode *)[note object];
+	TreeNode * node = (TreeNode *)[nc object];
 	int newFolderId = [node nodeId];
 
 	// We only care if the selection really changed
@@ -1211,7 +1213,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* handleCheckFrequencyChange
  * Called when the refresh frequency is changed.
  */
--(void)handleCheckFrequencyChange:(NSNotification *)note
+-(void)handleCheckFrequencyChange:(NSNotification *)nc
 {
 	int newFrequency = [[Preferences standardPreferences] refreshFrequency];
 
@@ -1297,6 +1299,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	[self updateCloseCommands];
 	[self updateSearchPlaceholder];
+}
+
+/* handleFolderNameChange
+ * Handle folder name change.
+ */
+-(void)handleFolderNameChange:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	if (folderId == [mainArticleView currentFolderId])
+		[self updateSearchPlaceholder];
 }
 
 /* handleRefreshStatusChange
@@ -1775,7 +1787,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
 	NSString * newName = [[renameField stringValue] trim];
 
-	if (![[folder name] isEqualToString:newName])
+	if ([[folder name] isEqualToString:newName])
+	{
+		[renameWindow orderOut:sender];
+		[NSApp endSheet:renameWindow returnCode:0];
+	}
+	else
 	{
 		if ([db folderFromName:newName] != nil)
 			runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
