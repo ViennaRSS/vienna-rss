@@ -58,7 +58,6 @@
 -(void)addChild:(TreeNode *)child
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
-	TreeNode * previousChild = nil;
 	TreeNode * forwardChild = nil;
 	unsigned int insertIndex = 0;
 
@@ -79,16 +78,10 @@
 			if ([theChildName caseInsensitiveCompare:ourChildName] == NSOrderedDescending)
 				break;
 		}
-		previousChild = theChild;
 		++insertIndex;
 	}
+	[child setParentNode:self];
 	[children insertObject:child atIndex:insertIndex];
-	if (previousChild)
-	{
-		forwardChild = [previousChild nextChild];
-		[previousChild setNextChild:child];
-	}
-	[child setNextChild:forwardChild];
 }
 
 /* removeChild
@@ -97,23 +90,9 @@
  */
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag
 {
-	NSEnumerator * enumerator = [children objectEnumerator];
-	TreeNode * previousChild = nil;
-	TreeNode * node;
-
-	while ((node = [enumerator nextObject]) != nil)
-	{
-		if (node == child)
-		{
-			if (previousChild)
-				[previousChild setNextChild:[node nextChild]];
-			if (removeChildrenFlag)
-				[node removeChildren];
-			[children removeObject:node];
-			break;
-		}
-		previousChild = node;
-	}
+	if (removeChildrenFlag)
+		[child removeChildren];
+	[children removeObject:child];
 }
 
 /* sortChildren
@@ -191,20 +170,20 @@
 	return [children objectAtIndex:index];
 }
 
+/* indexOfChild
+ * Returns the index of the specified TreeNode or NSNotFound if it is not found.
+ */
+-(int)indexOfChild:(TreeNode *)node
+{
+	return [children indexOfObject:node];
+}
+
 /* setParentNode
  * Sets a treenode's parent
  */
 -(void)setParentNode:(TreeNode *)parent
 {
 	parentNode = parent;
-}
-
-/* setNextChild
- * Sets the specified child as the next child.
- */
--(void)setNextChild:(TreeNode *)child
-{
-	nextChild = child;
 }
 
 /* parentNode
@@ -220,7 +199,10 @@
  */
 -(TreeNode *)nextChild
 {
-	return nextChild;
+	int childIndex = [parentNode indexOfChild:self];
+	if (childIndex == NSNotFound || ++childIndex >= [parentNode countOfChildren])
+		return nil;
+	return [parentNode childByIndex:childIndex];
 }
 
 /* firstChild
@@ -309,7 +291,7 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (Parent=%d, Sibling=%d, # of children=%d)", [folder name], parentNode, nextChild, [children count]];
+	return [NSString stringWithFormat:@"%@ (Parent=%d, # of children=%d)", [folder name], parentNode, [children count]];
 }
 
 /* dealloc

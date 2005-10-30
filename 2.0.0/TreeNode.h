@@ -23,7 +23,6 @@
 
 @interface TreeNode : NSObject {
 	TreeNode * parentNode;
-	TreeNode * nextChild;
 	NSMutableArray * children;
 	Folder * folder;
 	int nodeId;
@@ -33,7 +32,6 @@
 // Accessor functions
 -(id)init:(TreeNode *)parentNode folder:(Folder *)folder canHaveChildren:(BOOL)childflag;
 -(void)setParentNode:(TreeNode *)parent;
--(void)setNextChild:(TreeNode *)child;
 -(void)setFolder:(Folder *)newFolder;
 -(TreeNode *)parentNode;
 -(TreeNode *)nextChild;
@@ -45,6 +43,7 @@
 -(NSString *)nodeName;
 -(TreeNode *)childByName:(NSString *)childName;
 -(TreeNode *)childByIndex:(int)index;
+-(int)indexOfChild:(TreeNode *)node;
 -(TreeNode *)nodeFromID:(int)n;
 -(Folder *)folder;
 -(int)nodeId;

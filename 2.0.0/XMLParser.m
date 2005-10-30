@@ -502,6 +502,7 @@ static NSMutableDictionary * entityMap = nil;
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCE] forKey:@"Icirc"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEE] forKey:@"icirc"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xA3] forKey:@"pound"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0x2022] forKey:@"bull"];
 	}
 
 	// Parse off numeric codes of the format #xxx
