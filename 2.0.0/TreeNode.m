@@ -129,7 +129,13 @@
  */
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject
 {
-	return [[[self folder] name] caseInsensitiveCompare:[[otherObject folder] name]];
+	Folder * thisFolder = [self folder];
+	Folder * otherFolder = [otherObject folder];
+	if (FolderType(thisFolder) < FolderType(otherFolder))
+		return NSOrderedAscending;
+	if (FolderType(thisFolder) > FolderType(otherFolder))
+		return NSOrderedDescending;
+	return [[thisFolder name] caseInsensitiveCompare:[otherFolder name]];
 }
 
 /* removeChildren

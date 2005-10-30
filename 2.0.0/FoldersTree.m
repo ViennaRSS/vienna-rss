@@ -581,6 +581,7 @@
 	{
 		blockSelectionHandler = YES;
 		[outlineView selectRow:[outlineView rowForItem:node] byExtendingSelection:NO];
+		[outlineView scrollRowToVisible:[outlineView rowForItem:node]];
 		blockSelectionHandler = NO;
 	}
 }
