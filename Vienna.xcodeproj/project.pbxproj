@@ -1416,7 +1416,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2012;
+				BUILD_NUMBER = 2013;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1429,7 +1429,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2012;
+				BUILD_NUMBER = 2013;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;
@@ -1442,7 +1442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2012;
+				BUILD_NUMBER = 2013;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_LDFLAGS = "-lcurl";
 				SDKROOT = /Developer/SDKs/MacOSX10.3.9.sdk;

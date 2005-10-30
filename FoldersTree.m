@@ -40,6 +40,7 @@
 	-(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
 	-(void)handleDoubleClick:(id)sender;
 	-(void)handleFolderAdded:(NSNotification *)nc;
+	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
 	-(void)handleFolderDeleted:(NSNotification *)nc;
 	-(void)handleShowFolderImagesChange:(NSNotification *)nc;
@@ -81,7 +82,7 @@
 	// Register to be notified when folders are added or removed
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FolderNameChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:@"MA_Notify_FolderDeleted" object:nil];
 	[nc addObserver:self selector:@selector(outlineViewMenuInvoked:) name:@"MA_Notify_RightClickOnObject" object:nil];
@@ -416,7 +417,7 @@
 }
 
 /* actualSelection
- * Return the index of the primary selected row in the folder list.
+ * Return the ID of the selected folder in the folder list.
  */
 -(int)actualSelection
 {
@@ -559,6 +560,27 @@
 		blockSelectionHandler = YES;
 		[self selectFolder:[nextNode nodeId]];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
+		blockSelectionHandler = NO;
+	}
+}
+
+/* handleFolderNameChange
+ * Called whenever we need to redraw a specific folder, possibly because
+ * the unread count changed.
+ */
+-(void)handleFolderNameChange:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	TreeNode * node = [rootNode nodeFromID:folderId];
+	TreeNode * parentNode = [node parentNode];
+
+	BOOL moveSelection = (folderId == [self actualSelection]);
+	[parentNode sortChildren];
+	[self reloadFolderItem:parentNode reloadChildren:YES];
+	if (moveSelection)
+	{
+		blockSelectionHandler = YES;
+		[outlineView selectRow:[outlineView rowForItem:node] byExtendingSelection:NO];
 		blockSelectionHandler = NO;
 	}
 }
