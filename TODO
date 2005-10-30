@@ -8,8 +8,7 @@ Known Issues (May not be fixed)
 ===============================
 - Renaming a folder does not update the folder name in smart folders that reference it.
 - The isAccessible(NSString * urlString) function returns NO behind a firewall.
-- Auto-expire needs to run at times other than start up.
-- Databases cannot be created on remote folders. Vienna will warn and prompt for an alternative location.
+- A SQLite databases cannot be written to on remote folders. Vienna will warn and prompt for an alternative location.
 
 Post 2.0 Items
 ==============
@@ -24,6 +23,7 @@ Post 2.0 Items
 - Bonjour support.
 - Synchronisation via .Mac or FTP.
 - Selection count in status area.
+- Absolute or relative date and time of last refresh in status area.
 - Sort on multiple columns.
 - Auto-discover feeds if subscription URL is to a web page.
 - Filter article list by date/read.
