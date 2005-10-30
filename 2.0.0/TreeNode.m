@@ -116,6 +116,22 @@
 	}
 }
 
+/* sortChildren
+ * Sort the children of this node.
+ */
+-(void)sortChildren
+{
+	[children sortUsingSelector:@selector(folderNameCompare:)];
+}
+
+/* folderNameCompare
+ * Returns the result of comparing two folders by folder name.
+ */
+-(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject
+{
+	return [[[self folder] name] caseInsensitiveCompare:[[otherObject folder] name]];
+}
+
 /* removeChildren
  * Removes all of our child nodes.
  */
