@@ -185,5 +185,5 @@
 "Appearance" = "Erscheinungsbild";
 "Cannot create scripts folder title" = "Der Scriptordner konnte nicht erstellt werden.";
 "Cannot create scripts folder body" = "Der Scriptordner konnte nicht '%@' erstellt werden. Vienna wird das ausgewählte Script nicht installieren.";
-"Locate Title" = "Cannot create the Vienna database";
-"Locate Text" = "A new Vienna database cannot be created at '%@' because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.\n";
+"Locate Title" = "Vienna konnte die Datenbank nicht erstellen";
+"Locate Text" = "Eine neue Vienna Datenbank konnte in '%@' nicht erstellt werden weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit entfernten Datenbanken genutzt werden. Bitte wählen Sie einen anderen Ordner der auf ihrerem lokalem Rechner liegt.\n";
