@@ -556,7 +556,7 @@
 			[self setDescription:[subTree valueOfElement]];
 			continue;
 		}			
-		
+
 		// Parse link
 		if ([nodeName isEqualToString:@"link"])
 		{
@@ -627,7 +627,8 @@
 				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
-					[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
+					if ([[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
+						[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
 					continue;
 				}
 				
