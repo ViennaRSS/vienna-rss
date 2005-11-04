@@ -959,6 +959,11 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	else
 	{
 		[articleList selectRow:rowIndex byExtendingSelection:NO];
+		if (currentSelectedRow == -1)
+		{
+			currentSelectedRow = rowIndex;
+			[self refreshImmediatelyArticleAtCurrentRow];
+		}
 
 		int pageSize = [articleList rowsInRect:[articleList visibleRect]].length;
 		int lastRow = [articleList numberOfRows] - 1;
@@ -1577,6 +1582,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[db commitTransaction];
 	[currentArrayOfArticles release];
 	currentArrayOfArticles = arrayCopy;
+	[articleList reloadData];
 	
 	// If we've added articles back to the array, we need to resort to put
 	// them back in the right place.
@@ -1589,11 +1595,12 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// Compute the new place to put the selection
-	if (currentSelectedRow >= (int)[currentArrayOfArticles count])
-		currentSelectedRow = [currentArrayOfArticles count] - 1;
-	[self makeRowSelectedAndVisible:currentSelectedRow];
-	[articleList reloadData];
-	
+	int nextRow = currentSelectedRow;
+	currentSelectedRow = -1;
+	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
+		nextRow = [currentArrayOfArticles count] - 1;
+	[self makeRowSelectedAndVisible:nextRow];
+
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
 		[controller showUnreadCountOnApplicationIcon];
@@ -1625,7 +1632,8 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[db commitTransaction];
 	[currentArrayOfArticles release];
 	currentArrayOfArticles = arrayCopy;
-	
+	[articleList reloadData];
+
 	// Blow away the undo stack here since undo actions may refer to
 	// articles that have been deleted. This is a bit of a cop-out but
 	// it's the easiest approach for now.
@@ -1637,10 +1645,11 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// Compute the new place to put the selection
-	if (currentSelectedRow >= (int)[currentArrayOfArticles count])
-		currentSelectedRow = [currentArrayOfArticles count] - 1;
-	[self makeRowSelectedAndVisible:currentSelectedRow];
-	[articleList reloadData];
+	int nextRow = currentSelectedRow;
+	currentSelectedRow = -1;
+	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
+		nextRow = [currentArrayOfArticles count] - 1;
+	[self makeRowSelectedAndVisible:nextRow];
 	
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)

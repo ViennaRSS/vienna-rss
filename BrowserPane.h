@@ -30,6 +30,7 @@
 	AppController * controller;
 	NSString * pageFilename;
 	BrowserTab * tab;
+	NSError * lastError;
 	BOOL isLocalFile;
 	BOOL isLoadingFrame;
 	BOOL hasPageTitle;

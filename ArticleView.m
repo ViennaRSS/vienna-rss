@@ -32,6 +32,7 @@
 
 @interface ArticleView (Private)
 	-(void)initClass;
+	-(BOOL)isDownloadFileType:(NSURL *)filename;
 	-(void)loadMinimumFontSize;
 	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
 @end
@@ -48,6 +49,7 @@
 		// Init our vars
 		controller = nil;
 		openLinksInNewTab = NO;
+		isFeedRedirect = NO;
 		
 		// We'll be the webview policy handler.
 		[self setPolicyDelegate:self];
@@ -85,6 +87,40 @@
 	openLinksInNewTab = flag;
 }
 
+/* setIsFeedRedirect
+ * Indicates that the current load has been redirected to a feed URL.
+ */
+-(void)setIsFeedRedirect:(BOOL)flag
+{
+	isFeedRedirect = flag;
+}
+
+/* isFeedRedirect
+ * Specifies whether the current load was a redirect to a feed URL.
+ */
+-(BOOL)isFeedRedirect
+{
+	return isFeedRedirect;
+}
+
+/* isDownloadFileType
+ * Given a URL, returns whether the URL represents a file that should be downloaded or
+ * a link that should be displayed.
+ */
+-(BOOL)isDownloadFileType:(NSURL *)url
+{
+	NSString * newURLExtension = [[url absoluteString] pathExtension];
+	return ([newURLExtension isEqualToString:@"dmg"] ||
+			[newURLExtension isEqualToString:@"sit"] ||
+			[newURLExtension isEqualToString:@"bin"] ||
+			[newURLExtension isEqualToString:@"bz2"] ||
+			[newURLExtension isEqualToString:@"exe"] ||
+			[newURLExtension isEqualToString:@"sitx"] ||
+			[newURLExtension isEqualToString:@"zip"] ||
+			[newURLExtension isEqualToString:@"gz"] ||
+			[newURLExtension isEqualToString:@"tar"]);
+}
+
 /* decidePolicyForMIMEType
  * Handle clicks on RSS/Atom feed links and redirect to the appropriate feed handler instead of filling the
  * webview with XML strings.
@@ -103,16 +139,34 @@
 		
 		NSString * linkPath;
 		[scanner scanUpToString:@"" intoString:&linkPath];
-		
+
+		// Indicate a redirect for a feed
+		[self setIsFeedRedirect:YES];
+
 		[controller openURLInDefaultBrowser:[NSURL URLWithString:[NSString stringWithFormat:@"feed://%@", linkPath]]];
 		[listener ignore];
 		return;
 	}
+
+	// Anything else is not a feed redirect.
+	[self setIsFeedRedirect:NO];
+	
+	// Handle extensions that are masquerading as binary files due to a server
+	// misconfiguration. Do this before we check the MIME type.
+	if ([self isDownloadFileType:[request URL]])
+	{
+		[listener download];
+		return;
+	}
+
+	// If this is a viewable MIME type, display it.
 	if ([WebView canShowMIMEType:type])
 	{
 		[listener use];
 		return;
 	}
+
+	// Anything else, download it.
 	[listener download];
 }
 
@@ -124,6 +178,20 @@
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
 	if (navType == WebNavigationTypeLinkClicked)
 	{
+		NSDictionary * webElementKey = [actionInformation valueForKey:@"WebActionElementKey"];
+		NSURL * newURL = [webElementKey valueForKey:@"WebElementLinkURL"];
+
+		// This is kind of a hack. We look at the extension and try to infer whether we should display
+		// in a new tab or download based on the extension. Part of the time we'll get it wrong but the
+		// worst that will happen is that we'll look at the MIME type later in decidePolicyForMIMEType and
+		// do the right thing there. By then we'll have opened a new tab or a blank browser window though.
+		if ([self isDownloadFileType:newURL])
+		{
+			[listener download];
+			return;
+		}
+
+		// For anything else, we open in a new tab.
 		[listener ignore];
 		[controller openURLInBrowserWithURL:[request URL]];
 		return;
@@ -132,13 +200,16 @@
 }
 
 /* decidePolicyForNavigationAction
- * Called by the web view to get our policy on handling navigation actions. Since we want links clicked in the
- * web view to open in an external browser, we trap the link clicked action and launch the URL ourselves.
+ * Called by the web view to get our policy on handling navigation actions. We want links clicked in the
+ * web view to open in the same view unless the "open links in new tab" option is set or the Command key is held
+ * down. If either of those cases are true, we open the link in a new tab or in the external browser.
  */
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if (navType == WebNavigationTypeLinkClicked && openLinksInNewTab)
+	NSNumber * modifierFlags = [actionInformation valueForKey:@"WebActionModifierFlagsKey"];
+
+	if (navType == WebNavigationTypeLinkClicked && (openLinksInNewTab || ([modifierFlags intValue] & NSCommandKeyMask)))
 	{
 		[listener ignore];
 		[controller openURLInBrowserWithURL:[request URL]];

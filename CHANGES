@@ -8,6 +8,9 @@ Thanks!
 
 2.0.0.2013
 ----------
+- Resort the folder list when a folder is renamed.
+- Cmd-click on a link in the web view opens the link in a new tab.
+- Download SITX files as SITX files even if the server returns a MIME type of text.
 
 2.0.0.2012
 ----------

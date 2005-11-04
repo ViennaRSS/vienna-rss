@@ -470,10 +470,15 @@ static DownloadManager * _sharedDownloadManager = nil;
 	Preferences * prefs = [Preferences standardPreferences];
 	NSString * downloadPath = [prefs downloadFolder];
 	NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:filename];
-	[download setDestination:destPath allowOverwrite:NO];
+
+	// Hack for certain compression types that are converted to .txt extension when
+	// downloaded. SITX is the only one I know about.
+	DownloadItem * theItem = [self itemForDownload:download];
+	if ([[[theItem filename] pathExtension] isEqualToString:@"sitx"] && [[filename pathExtension] isEqualToString:@"txt"])
+		destPath = [destPath stringByDeletingPathExtension];
 
 	// Save the filename
-	DownloadItem * theItem = [self itemForDownload:download];
+	[download setDestination:destPath allowOverwrite:NO];
 	[theItem setFilename:destPath];
 }
 

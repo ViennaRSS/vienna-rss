@@ -27,6 +27,7 @@
 	AppController * controller;
 	WebPreferences * defaultWebPrefs;
 	BOOL openLinksInNewTab;
+	BOOL isFeedRedirect;
 }
 
 // Public functions
@@ -34,4 +35,5 @@
 -(void)setOpenLinksInNewTab:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
+-(BOOL)isFeedRedirect;
 @end
