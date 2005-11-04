@@ -1525,6 +1525,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Folder * folder = [db folderFromFeedURL:urlString];
 	if (folder != nil)
 	{
+		[browserView setActiveTabToPrimaryTab];
 		[foldersTree selectFolder:[folder itemId]];
 		return;
 	}

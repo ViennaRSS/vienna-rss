@@ -25,6 +25,15 @@
 #import "HelperFunctions.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
+#import "WebKit/WebKitErrors.h"
+
+// This is defined somewhere but I can't find where.
+#define WebKitErrorPlugInWillHandleLoad	204
+
+@interface BrowserPane (Private)
+	-(void)endFrameLoad;
+	-(void)setError:(NSError *)newError;
+@end
 
 @implementation BrowserPane
 
@@ -55,6 +64,7 @@
 		isLocalFile = NO;
 		hasPageTitle = NO;
 		pageFilename = nil;
+		lastError = nil;
     }
     return self;
 }
@@ -84,6 +94,16 @@
 	[newTab retain];
 	[tab release];
 	tab = newTab;
+}
+
+/* setError
+ * Save the most recent error instance.
+ */
+-(void)setError:(NSError *)newError
+{
+	[newError retain];
+	[lastError release];
+	lastError = newError;
 }
 
 /* loadURL
@@ -126,6 +146,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
+		[self setError:nil];
 		hasPageTitle = NO;
 		isLoadingFrame = YES;
 	}
@@ -138,10 +159,32 @@
 {
 	if (frame == [webPane mainFrame])
 	{
-		if (!hasPageTitle)
-			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
-		isLoadingFrame = NO;
+		// Was this a feed redirect? If so, this isn't an error:
+		if (![webPane isFeedRedirect])
+			[self setError:error];
+		[self endFrameLoad];
 	}
+}
+
+/* endFrameLoad
+ * Handle the end of a load whether or not it completed and whether or not an error
+ * occurred. The error variable is nil for no error or it contains the most recent
+ * NSError incident.
+ */
+-(void)endFrameLoad
+{
+	if (!hasPageTitle)
+	{
+		if (lastError == nil)
+			[[controller browserView] setTabTitle:tab title:pageFilename];
+		else
+		{
+			// TODO: show an HTML error page in the webview instead or in addition to
+			// the Error title on the tab.
+			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
+		}
+	}
+	isLoadingFrame = NO;
 }
 
 /* didFailLoadWithError
@@ -151,9 +194,11 @@
 {
 	if (frame == [webPane mainFrame])
 	{
-		if (!hasPageTitle)
-			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
-		isLoadingFrame = NO;
+		// Not really an error. A plugin is grabbing the URL and will handle it
+		// by itself.
+		if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
+			[self setError:error];
+		[self endFrameLoad];
 	}
 }
 
@@ -163,11 +208,7 @@
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
 	if (frame == [webPane mainFrame])
-	{
-		if (!hasPageTitle)
-			[[controller browserView] setTabTitle:tab title:pageFilename];
-		isLoadingFrame = NO;
-	}
+		[self endFrameLoad];
 }
 
 /* didReceiveTitle
@@ -363,6 +404,7 @@
 {
 	[webPane stopLoading:self];
 	[webPane release];
+	[lastError release];
 	[pageFilename release];
 	[tab release];
 	[super dealloc];

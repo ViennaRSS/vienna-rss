@@ -32,3 +32,7 @@ Post 2.0 Items
 - Handle middle mouse click on tabs.
 - Hide and show article pane.
 - Timestamp on each row in the activity log window.
+- Run Vienna from the status bar.
+- Applescript: extend article object to allow writing as well as reading properties.
+- Save open tabs when Vienna exits and restore when it restarts.
+- More options in date field in smart folders: last 24 hour, last 24-48 hours.

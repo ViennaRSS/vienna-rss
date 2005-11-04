@@ -88,7 +88,7 @@
 "Retrieving folder image" = "Empfange Ordnerbild";
 "Folder image retrieved from %@" = "Ordnerbild von %@ empfangen";
 "Contacting..." = "Kontaktiere...";
-"Connect Running" = "Eine Verbindung is im Gange";
+"Connect Running" = "Eine Verbindungs ist aktiv";
 "Connect Running text" = "Wollen Sie die Verbindung unterbrechen und Vienna jetzt schließen?";
 "Delete group folder" = "Lösche Ordner";
 "Delete group folder text" = "Sind Sie sicher, dass Sie den Ordner '%@' mit alle Unterordner löschen wollen? Dieser Befehl kann nicht rückgängig gemacht werden.";
