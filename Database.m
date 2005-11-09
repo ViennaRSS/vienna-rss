@@ -1540,6 +1540,7 @@ static Database * _sharedDatabase = nil;
 {
 	Field * field = [self fieldByName:MA_Field_Folder];
 	NSString * operatorString = (scopeFlags & MA_Scope_Inclusive) ? @"=" : @"<>";
+	NSString * conditionString = (scopeFlags & MA_Scope_Inclusive) ? @" or " : @" and ";
 	BOOL subScope = (scopeFlags & MA_Scope_SubFolders);
 	int folderId;
 
@@ -1576,7 +1577,7 @@ static Database * _sharedDatabase = nil;
 	{
 		Folder * folder = [childFolders objectAtIndex:index];
 		if (index > 0)
-			[sqlString appendString:@" or "];
+			[sqlString appendString:conditionString];
 		[sqlString appendFormat:@"%@%@%d", [field sqlField], operatorString, [folder itemId]];
 	}
 	if (count > 1)
