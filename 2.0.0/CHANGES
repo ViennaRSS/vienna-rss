@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2014
+----------
+- Fix "Folder NOT xxx" implementation which wasn't working right for group folders.
+
 2.0.0.2013
 ----------
 - Resort the folder list when a folder is renamed.

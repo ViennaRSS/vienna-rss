@@ -582,7 +582,7 @@ typedef enum {
 		
 		// A notify is only needed if we added any new articles.
 		int folderId = [folder itemId];
-		if ([[folder name] isEqualToString:[db untitledFeedFolderName]])
+		if ([[folder name] hasPrefix:[db untitledFeedFolderName]])
 		{
 			// If there's an existing feed with this title, make ours unique
 			// BUGBUG: This duplicates logic in database.m so consider moving it there.

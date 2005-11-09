@@ -146,7 +146,7 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 				[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
 		}
 	}
-	
+
 	// Some sites refuse to respond without a User-agent string.
 	[theRequest addValue:MA_Default_User_Agent forHTTPHeaderField:@"User-agent"];
 	
