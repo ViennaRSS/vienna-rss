@@ -193,8 +193,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
-	NSArray * articles = [folder articles];
-	unsigned index = [articles indexOfObjectIdenticalTo:self];
+	unsigned index = [folder indexOfArticle:self];
 	if (index != NSNotFound)
 	{
 		NSScriptObjectSpecifier * containerRef = [folder objectSpecifier];

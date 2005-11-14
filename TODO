@@ -36,3 +36,7 @@ Post 2.0 Items
 - Applescript: extend article object to allow writing as well as reading properties.
 - Save open tabs when Vienna exits and restore when it restarts.
 - More options in date field in smart folders: last 24 hour, last 24-48 hours.
+- Support for AmphetaRate (http://amphetarate.newsfairy.com/index.php).
+- Detect duplicate articles in separate folders and show only once.
+- Allow new subscriptions folders to be named when you subscribe.
+- Show "New..." commands on folder popup menu.
