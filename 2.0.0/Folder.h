@@ -113,6 +113,7 @@
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(NSArray *)articles;
+-(unsigned)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
 -(void)addArticleToCache:(Article *)newArticle;
 -(void)removeArticleFromCache:(NSString *)guid;

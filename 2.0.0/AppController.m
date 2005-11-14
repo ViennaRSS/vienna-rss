@@ -57,6 +57,7 @@
 	-(void)handleFolderSelection:(NSNotification *)nc;
 	-(void)handleCheckFrequencyChange:(NSNotification *)nc;
 	-(void)handleFolderNameChange:(NSNotification *)nc;
+	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
@@ -144,6 +145,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -1123,7 +1125,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateCloseCommands
 {
-	if ([browserView countOfTabs] < 2)
+	if ([browserView countOfTabs] < 2 || ![mainWindow isKeyWindow])
 	{
 		[closeTabItem setKeyEquivalent:@""];
 		[closeAllTabsItem setKeyEquivalent:@""];
@@ -1208,6 +1210,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self updateSearchPlaceholder];
 		[[NSUserDefaults standardUserDefaults] setInteger:[mainArticleView currentFolderId] forKey:MAPref_CachedFolderID];
 	}
+}
+
+/* handleDidBecomeKeyWindow
+ * Called when a window becomes the key window.
+ */
+-(void)handleDidBecomeKeyWindow:(NSNotification *)nc
+{
+	[self updateCloseCommands];
 }
 
 /* handleCheckFrequencyChange
@@ -1478,8 +1488,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[self skipFolder:self];
 			return YES;
 
-		case 3:
-		case '\r': //ENTER
+		case NSEnterCharacter:
+		case NSCarriageReturnCharacter:
 			[self viewArticlePage:self];
 			return YES;
 	}

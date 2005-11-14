@@ -1268,6 +1268,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		NSString * articleTitle = [theArticle title] ? [theArticle title] : @"";
 		NSString * folderTitle = [folder name] ? [folder name] : @"";
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
+		NSString * folderDescription = [folder feedDescription] ? [folder feedDescription] : @"";
 
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
@@ -1284,6 +1285,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
 			[htmlArticle replaceString:@"$FeedTitle$" withString:folderTitle];
 			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
+			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
 		}
 
 		// Separate each article with a horizontal divider line

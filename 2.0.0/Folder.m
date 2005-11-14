@@ -543,6 +543,16 @@ static NSArray * iconArray = nil;
 	}
 }
 
+/* indexOfArticle
+ * Returns the index of the article that matches the specified article based on guid.
+ */
+-(unsigned)indexOfArticle:(Article *)article
+{
+	NSArray * cacheArray = [self articles];
+	Article * realArticle = [cachedArticles objectForKey:[article guid]];
+	return [cacheArray indexOfObjectIdenticalTo:realArticle];
+}
+
 /* articleFromGuid
  */
 -(Article *)articleFromGuid:(NSString *)guid
