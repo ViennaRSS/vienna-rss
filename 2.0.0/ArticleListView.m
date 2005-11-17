@@ -1077,6 +1077,8 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 -(void)search
 {
 	[self refreshFolder:YES];
+	if (currentSelectedRow < 0 && [currentArrayOfArticles count] > 0)
+		[self makeRowSelectedAndVisible:0];
 }
 
 /* refreshFolder

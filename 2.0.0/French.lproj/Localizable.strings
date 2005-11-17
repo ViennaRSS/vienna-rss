@@ -110,7 +110,7 @@
 "Cannot create database folder" = "Désolé, mais Vienna ne peut créer la base de données";
 "Cannot create database folder text" = "Vienna a essyé de créer le dossier '%@' mais une erreur est apparue. Vérifier les authorisations des dossiers sur le chemin indiqué.";
 "Unrecognised database format title" = "Le format de la base de données a changé";
-"Unrecognised database format text" = "Votre fichier  ~/Library/Application Support/Vienna/messages.db n'est pas reconnu par cette version de Vienna. Supprimez ou renommez ce fichier et relancez Vienna.\n";
+"Unrecognised database format text" = "Votre fichier %@ n'est pas reconnu par cette version de Vienna. Supprimez ou renommez ce fichier et relancez Vienna.\n";
 "Upgrade Title" = "Mise à jour de la base de données";
 "Upgrade Text" = "Votre base de données doit être mise à jour pour être compatible avec cette version de Vienna, la base actuelle sera conservée sous le nom %@. Comme alternative, vous pouvez choisir de repartir d'un nouvelle base vide.\n\nNote: pour cette version, on vous suggère de construire une nouvelle base de données.\n";
 "New Database" = "Nouvelle base de données";
@@ -187,3 +187,5 @@
 "Cannot create scripts folder body" = "Le dossier de scripts ne peut être créé dans '%@'. Vienna n'installera par le script sélectionné.";
 "Locate Title" = "Création de la base de données Vienna impossible";
 "Locate Text" = "Une nouvelle base de données Vienna ne peut être créée dans '%@' car ce dossier est probablement situé sur un réseau partagé, et cette version de Vienna ne gère pas les bases de données distantes. S'il vous plait, choisissez un dossier présent localement sur votre machine.\n";
+"Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently";
+"Empty Trash message text" = "You cannot undo this action";
