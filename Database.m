@@ -121,7 +121,13 @@ static Database * _sharedDatabase = nil;
 	// Open the database at the well known location
 	sqlDatabase = [[SQLDatabase alloc] initWithFile:qualifiedDatabaseFileName];
 	if (!sqlDatabase || ![sqlDatabase open])
+	{
+		NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
+						NSLocalizedString(@"Cannot open database text", nil),
+						NSLocalizedString(@"Close", nil), @"", @"",
+						qualifiedDatabaseFileName);
 		return NO;
+	}
 
 	// Get the info table. If it doesn't exist then the database is new
 	SQLResult * results = [sqlDatabase performQuery:@"select version from info"];
@@ -158,7 +164,13 @@ static Database * _sharedDatabase = nil;
 			[[NSFileManager defaultManager] movePath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
 			sqlDatabase = [[SQLDatabase alloc] initWithFile:qualifiedDatabaseFileName];
 			if (!sqlDatabase || ![sqlDatabase open])
+			{
+				NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
+								NSLocalizedString(@"Cannot open database text", nil),
+								NSLocalizedString(@"Close", nil), @"", @"",
+								qualifiedDatabaseFileName);
 				return NO;
+			}
 			databaseVersion = 0;
 		}
 
@@ -287,7 +299,13 @@ static Database * _sharedDatabase = nil;
 		// And try to open it.
 		sqlDatabase = [[SQLDatabase alloc] initWithFile:newPath];
 		if (!sqlDatabase || ![sqlDatabase open])
+		{
+			NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
+							NSLocalizedString(@"Cannot open database text", nil),
+							NSLocalizedString(@"Close", nil), @"", @"",
+							newPath);
 			return nil;
+		}
 		
 		// Save this to the preferences
 		[[NSUserDefaults standardUserDefaults] setValue:newPath forKey:MAPref_DefaultDatabase];
@@ -1838,7 +1856,7 @@ static Database * _sharedDatabase = nil;
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
 
 		if ([filterString isNotEqualTo:@""])
-			filterClause = [NSString stringWithFormat:@" and text like '%%%@%%'", filterString];
+			filterClause = [NSString stringWithFormat:@" and (title like '%%%@%%' or text like '%%%@%%')", filterString, filterString];
 		queryString = [NSString stringWithFormat:@"select * from messages where %@%@", [self criteriaToSQL:tree], filterClause];
 	}
 

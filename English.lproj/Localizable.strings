@@ -110,7 +110,7 @@
 "Cannot create database folder" = "Sorry, but Vienna was unable to create the database folder";
 "Cannot create database folder text" = "Vienna was trying to create the folder '%@' but an error occurred. Check the permissions on the folders on the path specified.";
 "Unrecognised database format title" = "The database file format has changed";
-"Unrecognised database format text" = "Your existing ~/Library/Application Support/Vienna/messages.db file is not supported by this version of Vienna. Delete or rename the file and restart Vienna.\n";
+"Unrecognised database format text" = "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.\n";
 "Upgrade Title" = "Database Upgrade";
 "Upgrade Text" = "Your existing database needs to be upgraded to work with this build of Vienna. Alternatively you can elect to start with a new, empty database. In either case, your existing database will be backed up to %@. The new or upgraded database will NOT work with earlier versions of Vienna.\n\nNote: for this build, it is suggested that you start with a new database for simplicity.\n";
 "New Database" = "New Database";
@@ -187,3 +187,7 @@
 "Cannot create scripts folder body" = "The Scripts folder cannot be created at '%@'. Vienna will not install the selected script.";
 "Locate Title" = "Cannot create the Vienna database";
 "Locate Text" = "A new Vienna database cannot be created at '%@' because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.\n";
+"Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently";
+"Empty Trash message text" = "You cannot undo this action";
+"Cannot open database" = "Sorry but Vienna was unable to open the database";
+"Cannot open database text" = "The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.";

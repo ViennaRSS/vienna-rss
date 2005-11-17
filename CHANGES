@@ -10,10 +10,10 @@ Thanks!
 ----------
 - Fix "Folder NOT xxx" implementation which wasn't working right for group folders.
 - Cmd+W closes the Download, Preference or Activity windows even when they are active.
-- $FeedDescription$ added as a tag for styles. This expands to the feed description if it
-  is available.
-- Fixed bug where AppleScript 'current article' on an article in a group returned a null
-  reference.
+- $FeedDescription$ added as a tag for styles. This expands to the feed description if available.
+- Fixed bug where AppleScript 'current article' on an article in a group returns a null reference.
+- Search field now also searches in titles.
+- Confirmation prompt added before emptying the trash folder.
 
 2.0.0.2013
 ----------

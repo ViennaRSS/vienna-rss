@@ -110,7 +110,7 @@
 "Cannot create database folder" = "Ledsen, men Vienna kunde inte skapa databasmappen";
 "Cannot create database folder text" = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
 "Unrecognised database format title" = "Databasens filformat har ändrats";
-"Unrecognised database format text" = "Din nuvarande ~/Library/Application Support/Vienna/messages.db stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.\n";
+"Unrecognised database format text" = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.\n";
 "Upgrade Title" = "Uppdatera databas";
 "Upgrade Text" = "Din nuvarande databas måste uppgraderas för att fungera med den här versionen av Vienna. Alternativt kan du välja att starta med en ny, tom databas. Vad du än väljer kommer din nuvarande databas att sparas i %@. Den nya och uppgraderade databasen kommer INTE att fungera med tidigare versioner av Vienna.\n\n\Notera: Just för denna version så rekommenderas att du startar med en ny databas för enkelhetens skull.";
 "New Database" = "Ny databas";
@@ -187,3 +187,5 @@
 "Cannot create scripts folder body" = "Scriptmappen kan ej skapas i '%@'. Vienna kommer inte att installera markerat script.";
 "Locate Title" = "Kan ej skapa Viennas databas";
 "Locate Text" = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.\n";
+"Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently";
+"Empty Trash message text" = "You cannot undo this action";

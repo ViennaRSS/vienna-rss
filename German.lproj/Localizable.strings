@@ -110,7 +110,7 @@
 "Cannot create database folder" = "Entschuldigung, aber Vienna war es nicht möglich den Datenbankordner zu erstellen.";
 "Cannot create database folder text" = "Vienna versuchte den Ordner '%@' zu erstellen aber es trat ein Fehler auf. Bitte überprüfen Sie die Dateizugriffsrechte an dem angegebenem Pfad.";
 "Unrecognised database format title" = "Das Datenbankdateiformat hat sich geändert";
-"Unrecognised database format text" = "Ihre existierende ~/Library/Application Support/Vienna/messages.db Datei wird nicht unterstützt von dieser Vienna-Version. Löschen oder umbennen Sie diese Datei und starten Sie Vienna neu.\n";
+"Unrecognised database format text" = "Ihre existierende %@ Datei wird nicht unterstützt von dieser Vienna-Version. Löschen oder umbennen Sie diese Datei und starten Sie Vienna neu.\n";
 "Upgrade Title" = "Datenbank-Aktualisierung";
 "Upgrade Text" = "Ihre existierende Datenbank benötigt eine Aktualisierung um mit dieser Vienna-Version zu arbeiten. Alternativ können Sie wählen eine neue leere Datenbank zu erstellen  In beiden Fällen wird ihre existierende Datenbank gesichert unter %@. Die neue oder aktualisierte Datenbank wird NICHT von früheren Vienna-Versionen unterstützt.\n\nHinweis: Für diese Version ist es vorgeschlagen eine neue Datenbank zu erstellen.\n";
 "New Database" = "Neue Datenbank";
@@ -187,3 +187,5 @@
 "Cannot create scripts folder body" = "Der Scriptordner konnte nicht '%@' erstellt werden. Vienna wird das ausgew�hlte Script nicht installieren.";
 "Locate Title" = "Vienna konnte die Datenbank nicht erstellen";
 "Locate Text" = "Eine neue Vienna Datenbank konnte in '%@' nicht erstellt werden weil der Ordner m�glicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit entfernten Datenbanken genutzt werden. Bitte w�hlen Sie einen anderen Ordner der auf ihrerem lokalem Rechner liegt.\n";
+"Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently";
+"Empty Trash message text" = "You cannot undo this action";

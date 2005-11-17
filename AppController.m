@@ -67,6 +67,7 @@
 	-(void)doEditFolder:(Folder *)folder;
 	-(void)refreshOnTimer:(NSTimer *)aTimer;
 	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
@@ -1057,7 +1058,22 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)emptyTrash:(id)sender
 {
-	[db purgeDeletedArticles];
+	NSBeginCriticalAlertSheet(NSLocalizedString(@"Empty Trash message", nil),
+							  NSLocalizedString(@"Empty", nil),
+							  NSLocalizedString(@"Cancel", nil),
+							  nil, [NSApp mainWindow], self,
+							  @selector(doConfirmedEmptyTrash:returnCode:contextInfo:), nil, nil,
+							  NSLocalizedString(@"Empty Trash message text", nil));
+}
+
+/* doConfirmedEmptyTrash
+ * This function is called after the user has dismissed
+ * the confirmation sheet.
+ */
+-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+{
+	if (returnCode == NSAlertDefaultReturn)
+		[db purgeDeletedArticles];
 }
 
 /* showPreferencePanel

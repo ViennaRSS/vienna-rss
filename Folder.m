@@ -135,6 +135,7 @@ static NSArray * iconArray = nil;
 		{
 			if (![fileManager createDirectoryAtPath:imagesCacheFolder attributes:NULL])
 			{
+				NSLog(@"Cannot create image cache at %@. Will not cache folder images in this session.", imagesCacheFolder);
 				[imagesCacheFolder release];
 				imagesCacheFolder = nil;
 			}
