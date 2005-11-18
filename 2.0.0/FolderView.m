@@ -197,8 +197,8 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationName:@"MA_Notify_RightClickOnObject" object:theEvent];
+	if ([self delegate] && [[self delegate] respondsToSelector:@selector(outlineView:menuWillAppear:)])
+		[[self delegate] outlineView:self menuWillAppear:theEvent];
 	return [self menu];
 }
 

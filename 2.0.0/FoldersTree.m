@@ -85,7 +85,6 @@
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:@"MA_Notify_FolderDeleted" object:nil];
-	[nc addObserver:self selector:@selector(outlineViewMenuInvoked:) name:@"MA_Notify_RightClickOnObject" object:nil];
 	[nc addObserver:self selector:@selector(autoCollapseFolder:) name:@"MA_Notify_AutoCollapseFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
@@ -463,24 +462,6 @@
 	return arrayOfSelectedFolders;
 }
 
-/* outlineViewMenuInvoked
- * Called when the popup menu is opened on the folder list. We move the
- * selection to whichever node is under the cursor so the context between
- * the menu items and the node is made clear.
- */
--(void)outlineViewMenuInvoked:(NSNotification *)nc
-{
-	// Find the row under the cursor when the user clicked
-	NSEvent * theEvent = [nc object];
-	int row = [outlineView rowAtPoint:[outlineView convertPoint:[theEvent locationInWindow] fromView:nil]];
-	if (row >= 0)
-	{
-		// Select the row under the cursor if it isn't already selected
-		if ([outlineView numberOfSelectedRows] <= 1)
-			[outlineView selectRow:row byExtendingSelection:NO];
-	}
-}
-
 /* handleShowFolderImagesChange
  * Respond to the notification sent when the option to show folder images is changed.
  */
@@ -624,6 +605,22 @@
 		[outlineView reloadData];
 	else
 		[outlineView reloadItem:node reloadChildren:YES];
+}
+
+/* menuWillAppear
+ * Called when the popup menu is opened on the folder list. We move the
+ * selection to whichever node is under the cursor so the context between
+ * the menu items and the node is made clear.
+ */
+-(void)outlineView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
+{
+	int row = [olv rowAtPoint:[olv convertPoint:[theEvent locationInWindow] fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if ([olv numberOfSelectedRows] <= 1)
+			[olv selectRow:row byExtendingSelection:NO];
+	}
 }
 
 /* isItemExpandable

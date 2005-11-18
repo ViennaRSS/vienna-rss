@@ -14,6 +14,8 @@ Thanks!
 - Fixed bug where AppleScript 'current article' on an article in a group returns a null reference.
 - Search field now also searches in titles.
 - Confirmation prompt added before emptying the trash folder.
+- Download window now allows double-click to open a downloaded file.
+- Added popup menu to download window.
 
 2.0.0.2013
 ----------

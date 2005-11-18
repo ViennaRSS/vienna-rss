@@ -20,6 +20,7 @@
 
 #import "DownloadWindow.h"
 #import "DownloadManager.h"
+#import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
 
 @implementation DownloadWindow
@@ -48,7 +49,7 @@
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleDownloadsChange:) name:@"MA_Notify_DownloadsListChange" object:nil];		
+	[nc addObserver:self selector:@selector(handleDownloadsChange:) name:@"MA_Notify_DownloadsListChange" object:nil];
 
 	// Set the cell for each row
 	ImageAndTextCell * imageAndTextCell;
@@ -61,6 +62,16 @@
 	// We are the delegate and the datasource
 	[table setDelegate:self];
 	[table setDataSource:self];
+	[table setDoubleAction:@selector(handleDoubleClick:)];
+	[table setTarget:self];
+
+	// Create the popup menu
+	NSMenu * downloadMenu = [[NSMenu alloc] init];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", nil) action:@selector(handleDoubleClick:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", nil) action:@selector(showInFinder:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
+	[table setMenu:downloadMenu];
+	[downloadMenu release];
 
 	// Set Clear button caption
 	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
@@ -75,6 +86,73 @@
 -(IBAction)clearList:(id)sender
 {
 	[[DownloadManager sharedInstance] clearList];
+}
+
+/* menuWillAppear
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+	int row = [table rowAtPoint:[table convertPoint:[theEvent locationInWindow] fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if ([table numberOfSelectedRows] <= 1)
+			[table selectRow:row byExtendingSelection:NO];
+	}
+}
+
+/* handleDoubleClick
+ * Handle a double click on a row. Use this to launch the file that was
+ * downloaded if it has completed.
+ */
+-(void)handleDoubleClick:(id)sender
+{
+	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	int index = [table selectedRow];
+	if (index != -1)
+	{
+		DownloadItem * item = [list objectAtIndex:index];
+		if (item && [item state] == DOWNLOAD_COMPLETED)
+		{
+			if ([[NSWorkspace sharedWorkspace] openFile:[item filename]] == NO)
+				runOKAlertSheet(@"Vienna cannot open the file title", @"Vienna cannot open the file body", [[item filename] lastPathComponent]);
+		}
+	}
+}
+
+/* showInFinder
+ * Open the Finder with the path set to where the selected item was downloaded.
+ */
+-(void)showInFinder:(id)sender
+{
+	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	int index = [table selectedRow];
+	if (index != -1)
+	{
+		DownloadItem * item = [list objectAtIndex:index];
+		if (item && [item state] == DOWNLOAD_COMPLETED)
+		{
+			if ([[NSWorkspace sharedWorkspace] selectFile:[item filename] inFileViewerRootedAtPath:@""] == NO)
+				runOKAlertSheet(@"Vienna cannot show the file title", @"Vienna cannot show the file body", [[item filename] lastPathComponent]);
+		}
+	}
+}
+
+/* removeFromList
+ * Remove the selected item from the list.
+ */
+-(void)removeFromList:(id)sender
+{
+	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	int index = [table selectedRow];
+	if (index != -1)
+	{
+		DownloadItem * item = [list objectAtIndex:index];
+		[[DownloadManager sharedInstance] removeItem:item];
+		[table reloadData];
+	}
 }
 
 /* numberOfRowsInTableView [datasource]
@@ -128,19 +206,15 @@
 			// Filename on top
 			// Final size of file at bottom.
 			double size = [item size];
-			NSString * suffixString = @"bytes";
+			NSString * sizeString = @"";
+
 			if (size > 1024 * 1024)
-			{
-				// Work in MBs if we're larger than 1Mb.
-				size /= 1024 * 1024;
-				suffixString = @"MB";
-			}
+				sizeString = [NSString stringWithFormat:NSLocalizedString(@"%.1f MB", nil), size / (1024 * 1024)];
 			else if (size > 1024)
-			{
-				size /= 1024;
-				suffixString = @"KB";
-			}
-			objectString = [NSString stringWithFormat:@"%@\n%.1f %@", filename, size, suffixString];
+				sizeString = [NSString stringWithFormat:NSLocalizedString(@"%.1f KB", nil), size / 1024];
+			else
+				sizeString = [NSString stringWithFormat:NSLocalizedString(@"%.1f bytes", nil), size];
+			objectString = [NSString stringWithFormat:@"%@\n%@", filename, sizeString];
 			break;
 		}
 			
@@ -148,23 +222,30 @@
 			// Filename on top
 			// Progress gauge in middle
 			// Size gathered so far at bottom
+			NSString * progressString = @"";
 			double expectedSize = [item expectedSize];
 			double sizeSoFar = [item size];
-			NSString * suffixString = @"bytes";
-			if (expectedSize > 1024 * 1024)
+
+			if (expectedSize == -1)
 			{
-				// Work in MBs if we're larger than 1Mb.
-				expectedSize /= 1024 * 1024;
-				sizeSoFar /= 1024 * 1024;
-				suffixString = @"MB";
+				// Expected size unknown - indeterminate progress gauge
+				if (sizeSoFar > 1024 * 1024)
+					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f MB", nil), sizeSoFar / (1024 * 1024)];
+				else if (sizeSoFar > 1024)
+					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f KB", nil), sizeSoFar / 1024];
+				else
+					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f bytes", nil), sizeSoFar];
 			}
-			else if (expectedSize > 1024)
+			else
 			{
-				expectedSize /= 1024;
-				sizeSoFar /= 1024;
-				suffixString = @"KB";
+				if (expectedSize > 1024 * 1024)
+					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f of %.1f MB", nil), sizeSoFar / (1024 * 1024), expectedSize / (1024 * 1024)];
+				else if (expectedSize > 1024)
+					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f of %.1f KB", nil), sizeSoFar / 1024, expectedSize / 1024];
+				else
+					progressString = [NSString stringWithFormat:NSLocalizedString(@"%.1f of %.1f bytes", nil), sizeSoFar, expectedSize];
 			}
-			objectString = [NSString stringWithFormat:@"%@\n%.1f of %.1f %@", filename, sizeSoFar, expectedSize, suffixString];
+			objectString = [NSString stringWithFormat:@"%@\n%@", filename, progressString];
 			break;
 		}
 	}

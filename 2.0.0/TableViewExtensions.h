@@ -30,8 +30,9 @@
 @end
 
 @interface NSObject(TaskWindowTableViewDelegate)
--(BOOL)tableViewShouldDisplayCellToolTips:(NSTableView *)tableView;
--(NSString *)tableView:(NSTableView *)tableView toolTipForTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex;
+	-(BOOL)tableViewShouldDisplayCellToolTips:(ExtendedTableView *)tableView;
+	-(NSString *)tableView:(ExtendedTableView *)tableView toolTipForTableColumn:(NSTableColumn *)tableColumn row:(int)rowIndex;
+	-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent;
 @end
 
 

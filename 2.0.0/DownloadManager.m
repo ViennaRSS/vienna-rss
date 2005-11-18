@@ -309,6 +309,15 @@ static DownloadManager * _sharedDownloadManager = nil;
 	}
 }
 
+/* removeItem
+ * Remove the specified item from the list.
+ */
+-(void)removeItem:(DownloadItem *)item
+{
+	[downloadsList removeObject:item];
+	[self archiveDownloadsList];
+}
+
 /* downloadFile
  * Downloads a file from the specified URL.
  */
