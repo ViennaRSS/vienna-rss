@@ -189,3 +189,16 @@
 "Locate Text" = "Une nouvelle base de données Vienna ne peut être créée dans '%@' car ce dossier est probablement situé sur un réseau partagé, et cette version de Vienna ne gère pas les bases de données distantes. S'il vous plait, choisissez un dossier présent localement sur votre machine.\n";
 "Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently";
 "Empty Trash message text" = "You cannot undo this action";
+"Cannot open database" = "Sorry but Vienna was unable to open the database";
+"Cannot open database text" = "The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.";
+"Vienna cannot open the file title" = "Vienna cannot open the file.";
+"Vienna cannot open the file body" = "Vienna cannot open the file \"%@\" because it moved since you downloaded it.";
+"Open" = "Ouvrir";
+"Show in Finder" = "Afficher dans le Finder";
+"Remove From List" = "Supprimer de la liste";
+"%.1f MB" = "%.1f Mo";
+"%.1f KB" = "%.1f Ko";
+"%.1f bytes" = "%.1f octets";
+"%.1f of %.1f MB" = "%.1f sur %.1f Mo";
+"%.1f of %.1f KB" = "%.1f sur %.1f Ko";
+"%.1f of %.1f bytes" = "%.1f sur %.1f octets";

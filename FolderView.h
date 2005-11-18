@@ -34,4 +34,5 @@
 
 @interface NSObject (FolderViewDataSource)
 	-(NSString *)outlineView:(FolderView *)outlineView tooltipForItem:(id)item;
+	-(void)outlineView:(FolderView *)outlineView menuWillAppear:(NSEvent *)theEvent;
 @end
