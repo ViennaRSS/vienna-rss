@@ -187,7 +187,7 @@
 "Cannot create scripts folder body" = "The Scripts folder cannot be created at \"%@\". Vienna will not install the selected script.";
 "Locate Title" = "Cannot create the Vienna database";
 "Locate Text" = "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.\n";
-"Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently";
+"Empty Trash message" = "Are you sure you want to delete the messages in the Trash folder permanently?";
 "Empty Trash message text" = "You cannot undo this action";
 "Cannot open database" = "Sorry but Vienna was unable to open the database";
 "Cannot open database text" = "The database file (%@) could not be opened for some reason. It may be corrupted or inaccessible. Please delete or rename the database file and restart Vienna.";
