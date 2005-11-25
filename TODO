@@ -40,3 +40,6 @@ Post 2.0 Items
 - Detect duplicate articles in separate folders and show only once.
 - Allow new subscriptions folders to be named when you subscribe.
 - Show "New..." commands on folder popup menu.
+- Ad-blocking for HTML view. (http://braden.machacking.net/)
+- Manual sorting of folders or arrange folders by other means.
+- Dedicated button to mark all read.

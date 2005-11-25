@@ -76,6 +76,7 @@
 	-(IBAction)endRenameFolder:(id)sender;
 	-(IBAction)cancelRenameFolder:(id)sender;
 	-(void)updateCloseCommands;
+	-(NSDictionary *)registrationDictionaryForGrowl;
 @end
 
 // Static constant strings that are typically never tweaked
