@@ -68,7 +68,7 @@
 @end
 
 // Non-class function used for sorting
-static int articleSortHandler(id item1, id item2, void * context);
+static int articleSortHandler(Article * item1, Article * item2, void * context);
 
 static const int MA_Minimum_ArticleList_Pane_Width = 80;
 static const int MA_Minimum_Article_Pane_Width = 80;
