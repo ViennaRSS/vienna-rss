@@ -42,7 +42,6 @@
 #import "HelperFunctions.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebUIDelegate.h"
-#import "Growl/GrowlApplicationBridge.h"
 #import "Growl/GrowlDefines.h"
 #include <mach/mach_port.h>
 #include <mach/mach_interface.h>
