@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "Database.h"
 #import "ActivityViewer.h"
+#import "Growl/GrowlApplicationBridge.h"
 
 @class NewPreferenceController;
 @class FoldersTree;
@@ -33,7 +34,7 @@
 @class BrowserView;
 @class ArticleListView;
 
-@interface AppController : NSObject {
+@interface AppController : NSObject <GrowlApplicationBridgeDelegate> {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSWindow * renameWindow;
