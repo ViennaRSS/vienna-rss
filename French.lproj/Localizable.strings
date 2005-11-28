@@ -195,6 +195,7 @@
 "Vienna cannot open the file body" = "Vienna ne peut ouvrir le fichier \"%@\" car il a été déplacé après son téléchargement.";
 "Vienna cannot show the file title" = "Vienna ne peut ouvrir le fichier.";
 "Vienna cannot show the file body" = "Vienna ne peut ouvrir le fichier \"%@\" car il a été déplacé après son téléchargement.";
+"Empty" = "Vider";
 "Open" = "Ouvrir";
 "Show in Finder" = "Afficher dans le Finder";
 "Remove From List" = "Supprimer de la liste";

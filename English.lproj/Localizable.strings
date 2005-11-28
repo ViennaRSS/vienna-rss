@@ -195,6 +195,7 @@
 "Vienna cannot open the file body" = "Vienna cannot open the file \"%@\" because it moved since you downloaded it.";
 "Vienna cannot show the file title" = "Vienna cannot show the file.";
 "Vienna cannot show the file body" = "Vienna cannot show the file \"%@\" because it moved since you downloaded it.";
+"Empty" = "Empty";
 "Open" = "Open";
 "Show in Finder" = "Show in Finder";
 "Remove From List" = "Remove from list";

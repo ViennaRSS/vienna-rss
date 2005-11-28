@@ -195,6 +195,7 @@
 "Vienna cannot open the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
 "Vienna cannot show the file title" = "Vienna kan inte öppna filen.";
 "Vienna cannot show the file body" = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";
+"Empty" = "Töm";
 "Open" = "Öppna";
 "Show in Finder" = "Visa i Finder";
 "Remove From List" = "Ta bort från listan";
