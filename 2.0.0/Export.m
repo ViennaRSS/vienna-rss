@@ -90,7 +90,6 @@
 				countExported += [self exportSubscriptionGroup:xmlTree fromArray:subFolders withGroups:groupFlag];
 			else
 			{
-				[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"title"];
 				[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
 				XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
 				countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders withGroups:groupFlag];
@@ -103,7 +102,6 @@
 			NSString * url = [folder feedURL];
 
 			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"title"];
 			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
 			[itemDict setObject:[XMLParser quoteAttributes:(link ? link : @"")] forKey:@"htmlUrl"];
 			[itemDict setObject:[XMLParser quoteAttributes:(url ? url : @"")] forKey:@"xmlUrl"];
@@ -153,6 +151,7 @@
 	// Put some newlines in for readability
 	NSMutableString * xmlString = [[NSMutableString alloc] initWithString:[newTree xmlForTree]];
 	[xmlString replaceString:@"><" withString:@">\n<"];
+	[xmlString appendString:@"\n"];
 
 	[xmlString writeToFile:fqFilename atomically:YES];
 	[xmlString release];
