@@ -534,7 +534,14 @@ static NSMutableDictionary * entityMap = nil;
  */
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
 {
-	NSCalendarDate * date;
+	NSScanner * scanner = [NSScanner scannerWithString:dateString];
+	unsigned int yearValue = 0;
+	unsigned int monthValue = 1;
+	unsigned int dayValue = 0;
+	unsigned int hourValue = 0;
+	unsigned int minuteValue = 0;
+	unsigned int secondValue = 0;
+	int tzOffset = 0;
 
 	// Let CURL have a crack at parsing since it knows all about the
 	// RSS/HTTP formats.
@@ -542,25 +549,64 @@ static NSMutableDictionary * entityMap = nil;
 	if (theTime != -1)
 		return [NSDate dateWithTimeIntervalSince1970:theTime];
 
-	// Otherwise it is probably the weird Atom format date
-	date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%S%z"];
-	if (date == nil)
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M%z"];
-	if (date == nil)
-		date = [NSCalendarDate dateWithString:dateString calendarFormat:@"%Y-%m-%dT%H:%M:%SZ"];
-	if (date != nil)
+	// Otherwise do it ourselves.
+	if (![scanner scanInt:&yearValue])
+		return nil;
+	if (yearValue < 100)
+		yearValue += 2000;
+	if ([scanner scanString:@"-" intoString:nil])
 	{
-		// Atom times are relative to GMT so mark them as such.
-		NSCalendarDate * atomDate = [NSCalendarDate dateWithYear:[date yearOfCommonEra]
-														   month:[date monthOfYear]
-															 day:[date dayOfMonth]
-															hour:[date hourOfDay]
-														  minute:[date minuteOfHour]
-														  second:[date secondOfMinute]
-														timeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-		return atomDate;
+		if (![scanner scanInt:&monthValue])
+			return nil;
+		if (monthValue < 1 || monthValue > 12)
+			return nil;
+		if ([scanner scanString:@"-" intoString:nil])
+		{
+			if (![scanner scanInt:&dayValue])
+				return nil;
+			if (dayValue < 1 || dayValue > 31)
+				return nil;
+		}
 	}
-	return nil;
+
+	// Parse the time portion.
+	if ([scanner scanString:@"T" intoString:nil])
+	{
+		if (![scanner scanInt:&hourValue])
+			return nil;
+		if (hourValue > 23)
+			return nil;
+		if ([scanner scanString:@":" intoString:nil])
+		{
+			if (![scanner scanInt:&minuteValue])
+				return nil;
+			if (minuteValue > 59)
+				return nil;
+			if ([scanner scanString:@"." intoString:nil] || [scanner scanString:@":" intoString:nil])
+			{
+				if (![scanner scanInt:&secondValue])
+					return nil;
+				if (secondValue > 59)
+					return nil;
+			}
+		}
+	}
+
+	// At this point we're at any potential timezone
+	// tzOffset needs to be the number of seconds since GMT
+	if ([scanner scanString:@"Z" intoString:nil])
+		tzOffset = 0;
+	else if (![scanner isAtEnd])
+	{
+		if (![scanner scanInt:&tzOffset])
+			return nil;
+		if (tzOffset > 12)
+			return nil;
+	}
+
+	// Now combine the whole thing into a date we know about.
+	NSTimeZone * tzValue = [NSTimeZone timeZoneForSecondsFromGMT:tzOffset * 60 * 60];
+	return [NSCalendarDate dateWithYear:yearValue month:monthValue day:dayValue hour:hourValue minute:minuteValue second:secondValue timeZone:tzValue];
 }
 
 /* dealloc

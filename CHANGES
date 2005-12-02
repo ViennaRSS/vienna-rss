@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2015
+----------
+- Improvements to universal date parsing to fix some mis-parsed article dates.
+- Fixed OPML format in exported subscriptions to conform to the standard.
+
 2.0.0.2014
 ----------
 - Fix "Folder NOT xxx" implementation which wasn't working right for group folders.
