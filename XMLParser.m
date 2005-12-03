@@ -535,12 +535,12 @@ static NSMutableDictionary * entityMap = nil;
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
 {
 	NSScanner * scanner = [NSScanner scannerWithString:dateString];
-	unsigned int yearValue = 0;
-	unsigned int monthValue = 1;
-	unsigned int dayValue = 0;
-	unsigned int hourValue = 0;
-	unsigned int minuteValue = 0;
-	unsigned int secondValue = 0;
+	int yearValue = 0;
+	int monthValue = 1;
+	int dayValue = 0;
+	int hourValue = 0;
+	int minuteValue = 0;
+	int secondValue = 0;
 	int tzOffset = 0;
 
 	// Let CURL have a crack at parsing since it knows all about the
@@ -570,23 +570,25 @@ static NSMutableDictionary * entityMap = nil;
 	}
 
 	// Parse the time portion.
+	// (I discovered that GMail sometimes returns a timestamp with 24 as the hour
+	// portion although this is clearly contrary to the RFC spec. So be
+	// prepared for things like this.)
 	if ([scanner scanString:@"T" intoString:nil])
 	{
 		if (![scanner scanInt:&hourValue])
 			return nil;
-		if (hourValue > 23)
-			return nil;
+		hourValue %= 24;
 		if ([scanner scanString:@":" intoString:nil])
 		{
 			if (![scanner scanInt:&minuteValue])
 				return nil;
-			if (minuteValue > 59)
+			if (minuteValue < 0 || minuteValue > 59)
 				return nil;
 			if ([scanner scanString:@"." intoString:nil] || [scanner scanString:@":" intoString:nil])
 			{
 				if (![scanner scanInt:&secondValue])
 					return nil;
-				if (secondValue > 59)
+				if (secondValue < 0 || secondValue > 59)
 					return nil;
 			}
 		}

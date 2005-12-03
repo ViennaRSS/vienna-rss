@@ -66,6 +66,7 @@
 		rootNode = [[TreeNode alloc] init:nil folder:nil canHaveChildren:YES];
 		blockSelectionHandler = NO;
 		selectionTimer = nil;
+		folderErrorImage = nil;
 		db = nil;
 	}
 	return self;
@@ -95,6 +96,9 @@
 	imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
 	[tableColumn setDataCell:imageAndTextCell];
 
+	// Folder image
+	folderErrorImage = [NSImage imageNamed:@"folderError.tiff"];
+	
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
 
@@ -665,6 +669,8 @@
 	TreeNode * node = (TreeNode *)item;
 	if (node != nil)
 	{
+		if ([[node folder] flags] & MA_FFlag_Error)
+			return NSLocalizedString(@"An error occurred when this feed was last refreshed", nil);
 		if ([[node folder] childUnreadCount])
 			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), [[node folder] childUnreadCount]];
 	}
@@ -693,24 +699,25 @@
 	if ([[tableColumn identifier] isEqualToString:@"folderColumns"]) 
 	{
 		TreeNode * node = (TreeNode *)item;
+		Folder * folder = [node folder];
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
 		[realCell setTextColor:([olv isRowSelected:[olv rowForItem:item]]) ? [NSColor whiteColor] : [NSColor blackColor]];
-		if (IsSmartFolder([node folder]))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
+		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
 			[realCell setFont:cellFont];
 		}
-		else if ([[node folder] unreadCount])
+		else if ([folder unreadCount])
 		{
 			[realCell setFont:boldCellFont];
-			[realCell setCount:[[node folder] unreadCount]];
+			[realCell setCount:[folder unreadCount]];
 			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
-		else if ([[node folder] childUnreadCount] && ![olv isItemExpanded:item])
+		else if ([folder childUnreadCount] && ![olv isItemExpanded:item])
 		{
 			[realCell setFont:boldCellFont];
-			[realCell setCount:[[node folder] childUnreadCount]];
+			[realCell setCount:[folder childUnreadCount]];
 			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else
@@ -719,8 +726,12 @@
 			[realCell setFont:cellFont];
 		}
 
+		// Set error image if the folder's last refresh resulted in an error
+		[realCell setErrorImage:([folder flags] & MA_FFlag_Error) ? folderErrorImage : nil];
+
+		// Only show folder images if the user prefers them.
 		Preferences * prefs = [Preferences standardPreferences];
-		[realCell setImage:([prefs showFolderImages] ? [[node folder] image] : [[node folder] standardImage])];
+		[realCell setImage:([prefs showFolderImages] ? [folder image] : [folder standardImage])];
 	}
 }
 
@@ -1030,6 +1041,7 @@
 	[selectionTimer release];
 	[cellFont release];
 	[boldCellFont release];
+	[folderErrorImage release];
 	[rootNode release];
 	[super dealloc];
 }

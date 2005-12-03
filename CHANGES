@@ -10,6 +10,8 @@ Thanks!
 ----------
 - Improvements to universal date parsing to fix some mis-parsed article dates.
 - Fixed OPML format in exported subscriptions to conform to the standard.
+- A warning icon now appears next to the folder name in the folders list if an error
+  occurred when the feed was last refreshed.
 
 2.0.0.2014
 ----------

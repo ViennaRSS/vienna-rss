@@ -43,6 +43,7 @@ typedef enum {
 	-(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
 	-(void)refreshFavIcon:(Folder *)folder;
 	-(void)getCredentialsForFolder;
+	-(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
 	-(void)pumpSubscriptionRefresh:(Folder *)folder;
 	-(void)pumpFolderIconRefresh:(Folder *)folder;
 	-(void)pumpBloglinesListRefresh;
@@ -340,6 +341,20 @@ typedef enum {
 	[self getCredentialsForFolder];
 }
 
+/* setFolderErrorFlag
+ * Sets or clears the folder error flag then broadcasts an update indicating that the folder
+ * has changed.
+ */
+-(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag
+{
+	if (theFlag)
+		[folder setFlag:MA_FFlag_Error];
+	else
+		[folder clearFlag:MA_FFlag_Error];
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc postNotificationName:@"MA_Notify_FolderUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+}
+
 /* beginRefreshTimer
  * Start the connection refresh timer running.
  */
@@ -487,16 +502,26 @@ typedef enum {
  */
 -(void)folderRefreshCompleted:(AsyncConnection *)connector
 {
+	Folder * folder = (Folder *)[connector contextData];
 	if ([connector status] == MA_Connect_NeedCredentials)
 	{
-		Folder * folder = (Folder *)[connector contextData];
 		if (![authQueue containsObject:folder])
 			[authQueue addObject:folder];
 		[self getCredentialsForFolder];
 	}
+	else if ([connector status] == MA_Connect_Stopped)
+	{
+		// Stopping the connection isn't an error, so clear any
+		// existing error flag.
+		[self setFolderErrorFlag:folder flag:NO];
+	}
+	else if ([connector status] == MA_Connect_Failed)
+	{
+		// Mark the feed as failed
+		[self setFolderErrorFlag:folder flag:YES];
+	}
 	else if ([connector status] == MA_Connect_Succeeded)
 	{
-		Folder * folder = (Folder *)[connector contextData];
 		Database * db = [Database sharedDatabase];
 		NSData * receivedData = [connector receivedData];
 		
@@ -510,12 +535,17 @@ typedef enum {
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if (newFeed == nil || [receivedData length] == 0 || ![newFeed parseRichXML:receivedData])
 		{
+			// Mark the feed as failed
+			[self setFolderErrorFlag:folder flag:YES];
 			[[connector aItem] setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
 			[newFeed release];
 			[self removeConnection:connector];
 			return;
 		}
-		
+
+		// Mark the feed as succeeded
+		[self setFolderErrorFlag:folder flag:NO];
+
 		// Log number of bytes we received
 		[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 		
@@ -545,8 +575,8 @@ typedef enum {
 		while ((newsItem = [itemEnumerator nextObject]) != nil)
 		{
 			NSDate * articleDate = [newsItem date];
-			NSAssert(articleDate != nil, @"FeedItem should not have a nil date");
-			
+			if (articleDate == nil)
+				articleDate = [NSDate date];
 			if ([articleDate compare:lastUpdate] == NSOrderedDescending)
 			{
 				Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
