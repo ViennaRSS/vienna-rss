@@ -41,6 +41,7 @@
 	NSTimer * selectionTimer;
 	NSFont * cellFont;
 	NSFont * boldCellFont;
+	NSImage * folderErrorImage;
 	BOOL blockSelectionHandler;
 }
 

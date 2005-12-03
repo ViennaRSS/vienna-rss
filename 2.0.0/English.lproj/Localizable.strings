@@ -205,3 +205,4 @@
 "%.1f of %.1f MB" = "%.1f of %.1f MB";
 "%.1f of %.1f KB" = "%.1f of %.1f KB";
 "%.1f of %.1f bytes" = "%.1f of %.1f bytes";
+"An error occurred when this feed was last refreshed" = "An error occurred when this feed was last refreshed";

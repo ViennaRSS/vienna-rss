@@ -23,6 +23,7 @@
 @interface ImageAndTextCell : NSTextFieldCell {
 	@private
 	NSImage	* image;
+	NSImage * errorImage;
 	NSColor * countBackgroundColour;
 	int offset;
 	int count;
@@ -32,10 +33,12 @@
 // Accessor functions
 -(void)setOffset:(int)offset;
 -(void)setImage:(NSImage *)anImage;
+-(void)setErrorImage:(NSImage *)anErrorImage;
 -(void)setCount:(int)newCount;
 -(void)clearCount;
 -(void)setCountBackgroundColour:(NSColor *)newColour;
 -(NSImage *)image;
+-(NSImage *)errorImage;
 -(int)offset;
 -(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 @end

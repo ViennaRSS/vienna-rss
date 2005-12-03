@@ -72,6 +72,7 @@
 		AA328A7608483DE100A7AD5A /* Export.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328A7408483DE100A7AD5A /* Export.m */; };
 		AA328A9B0848404200A7AD5A /* Import.h in Headers */ = {isa = PBXBuildFile; fileRef = AA328A990848404200A7AD5A /* Import.h */; };
 		AA328A9C0848404200A7AD5A /* Import.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328A9A0848404200A7AD5A /* Import.m */; };
+		AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA32E2A30940A9970034D9CC /* folderError.tiff */; };
 		AA34582D084BE802003D992E /* vienna2.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA34582C084BE802003D992E /* vienna2.icns */; };
 		AA34B5A308C0DD3F003AEE18 /* ArticleListView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */; };
 		AA34B5A408C0DD3F003AEE18 /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
@@ -355,6 +356,7 @@
 		AA328A7408483DE100A7AD5A /* Export.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Export.m; sourceTree = "<group>"; };
 		AA328A990848404200A7AD5A /* Import.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Import.h; sourceTree = "<group>"; };
 		AA328A9A0848404200A7AD5A /* Import.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Import.m; sourceTree = "<group>"; };
+		AA32E2A30940A9970034D9CC /* folderError.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = folderError.tiff; sourceTree = "<group>"; };
 		AA34582C084BE802003D992E /* vienna2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2.icns; sourceTree = "<group>"; };
 		AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListView.h; sourceTree = "<group>"; };
 		AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListView.m; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */,
 				AA6321500885F0BB006382D3 /* comments.tiff */,
 				AAE7A95F086BBA1F009A487E /* refresh.tiff */,
+				AA32E2A30940A9970034D9CC /* folderError.tiff */,
 				AA67F3980897377C008BBC37 /* stopRefresh.tiff */,
 				AA34582C084BE802003D992E /* vienna2.icns */,
 				AA4AB5E008971B28006C843E /* vienna2style.icns */,
@@ -1007,6 +1010,7 @@
 				AA31134D0902009300E80DF1 /* AppearancesPreferences.nib in Resources */,
 				AA35B4B4092B82B80041618C /* GeneralPreferences.nib in Resources */,
 				AA35B4B5092B833B0041618C /* Localizable.strings in Resources */,
+				AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

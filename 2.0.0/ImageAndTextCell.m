@@ -35,6 +35,7 @@
 	if ((self = [super init]) != nil)
 	{
 		image = nil;
+		errorImage = nil;
 		offset = 0;
 		hasCount = NO;
 		count = 0;
@@ -47,6 +48,7 @@
 {
 	ImageAndTextCell *cell = (ImageAndTextCell *)[super copyWithZone:zone];
 	cell->image = [image retain];
+	cell->errorImage = [errorImage retain];
 	cell->offset = offset;
 	cell->hasCount = hasCount;
 	cell->count = count;
@@ -86,6 +88,25 @@
 -(NSImage *)image
 {
 	return [[image retain] autorelease];
+}
+
+/* setErrorImage
+ * Sets the error image to be displayed. Nil removes any existing
+ * error image.
+ */
+-(void)setErrorImage:(NSImage *)newErrorImage
+{
+	[newErrorImage retain];
+	[errorImage release];
+	errorImage = newErrorImage;
+}
+
+/* errorImage
+ * Returns the current error image.
+ */
+-(NSImage *)errorImage
+{
+	return errorImage;
 }
 
 /* setCount
@@ -159,6 +180,29 @@
 		[image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 	}
 
+	// If we have an error image, it appears on the right hand side.
+	if (errorImage)
+	{
+		NSSize imageSize;
+		NSRect imageFrame;
+		
+		imageSize = [errorImage size];
+		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMaxXEdge);
+		if ([self drawsBackground])
+		{
+			[[self backgroundColor] set];
+			NSRectFill(imageFrame);
+		}
+		imageFrame.size = imageSize;
+		
+		if ([controlView isFlipped])
+			imageFrame.origin.y += ceil((cellFrame.size.height + imageFrame.size.height) / 2);
+		else
+			imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
+		
+		[errorImage compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+	}
+	
 	// If the cell has a count button, draw the count
 	// button on the right of the cell.
 	if (hasCount)
@@ -209,6 +253,7 @@
 -(void)dealloc
 {
 	[countBackgroundColour release];
+	[errorImage release];
 	[image release];
 	[super dealloc];
 }

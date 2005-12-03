@@ -51,6 +51,7 @@
 //
 #define MA_FFlag_CheckForImage		1
 #define MA_FFlag_NeedCredentials	2
+#define MA_FFlag_Error				4
 
 @interface Folder : NSObject {
 	int itemId;
