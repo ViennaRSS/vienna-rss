@@ -451,6 +451,17 @@
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
 		AAC504360828E6740089FF70 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = English; path = English.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AACE719C090B4CFB00E11979 /* German */ = {isa = PBXFileReference; lastKnownFileType = folder; name = German; path = "German.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AACF23F409441A3A0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AACF23F509441A4C0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AACF23F809441A600019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AACF23FB09441A8A0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AACF23FE09441A950019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		AACF240109441AA10019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AACF240409441AAB0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AACF240709441AB50019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
+		AACF240E09441ACB0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AACF241109441ADC0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AACF241409441AEB0019F2BA /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = zh_TW; path = zh_TW.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AACFDEBA0604D4D20072D140 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		AACFDEBB0604D4D20072D140 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		AAD1E2CB0612908200D09905 /* MacPAD.url */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = MacPAD.url; sourceTree = "<group>"; };
@@ -948,6 +959,7 @@
 				Swedish,
 				Italian,
 				Russian,
+				zh_TW,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -1092,6 +1104,7 @@
 				AA35B497092B814B0041618C /* German */,
 				AA35B498092B81670041618C /* Swedish */,
 				AA35B499092B816E0041618C /* Italian */,
+				AACF241109441ADC0019F2BA /* zh_TW */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1104,6 +1117,7 @@
 				130A613508F20287005A52F1 /* Italian */,
 				AA1EE81A08F69BAE00A9B20C /* German */,
 				AA41B429092B7F9C00D96C70 /* Swedish */,
+				AACF23FE09441A950019F2BA /* zh_TW */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -1116,6 +1130,7 @@
 				AA6022A708C24537002CFD06 /* French */,
 				AA4B152708E8DC51008CA6D0 /* Italian */,
 				AA1EE82008F69C3000A9B20C /* German */,
+				AACF240E09441ACB0019F2BA /* zh_TW */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1136,6 +1151,7 @@
 				AABD6A310902312B0092D4AE /* French */,
 				AABD6A32090231310092D4AE /* Italian */,
 				AABD6A33090231370092D4AE /* German */,
+				AACF23F409441A3A0019F2BA /* zh_TW */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -1148,6 +1164,7 @@
 				AABD6A35090231490092D4AE /* French */,
 				AABD6A36090231510092D4AE /* Italian */,
 				AABD6A37090231550092D4AE /* German */,
+				AACF23F509441A4C0019F2BA /* zh_TW */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -1160,6 +1177,7 @@
 				AA6022B208C246DE002CFD06 /* French */,
 				130A614008F202BA005A52F1 /* Italian */,
 				AA1EE81D08F69BC600A9B20C /* German */,
+				AACF240409441AAB0019F2BA /* zh_TW */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -1172,6 +1190,7 @@
 				AA6022BE08C246FF002CFD06 /* French */,
 				130A612D08F20268005A52F1 /* Italian */,
 				AA1EE81608F69B9D00A9B20C /* German */,
+				AACF23F809441A600019F2BA /* zh_TW */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -1184,6 +1203,7 @@
 				AA6022B508C246E8002CFD06 /* French */,
 				130A613C08F202A6005A52F1 /* Italian */,
 				AA1EE81C08F69BBD00A9B20C /* German */,
+				AACF240109441AA10019F2BA /* zh_TW */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -1196,6 +1216,7 @@
 				AA6022BB08C246F8002CFD06 /* French */,
 				130A613108F20277005A52F1 /* Italian */,
 				AA1EE81908F69BA500A9B20C /* German */,
+				AACF23FB09441A8A0019F2BA /* zh_TW */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -1213,6 +1234,7 @@
 			children = (
 				AAC504360828E6740089FF70 /* English */,
 				AABC189E090AB01600527D4B /* Italian */,
+				AACF241409441AEB0019F2BA /* zh_TW */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -1233,6 +1255,7 @@
 				AA6022AF08C246D4002CFD06 /* French */,
 				130A614408F202CC005A52F1 /* Italian */,
 				AA1EE81E08F69BD000A9B20C /* German */,
+				AACF240709441AB50019F2BA /* zh_TW */,
 			);
 			name = UpdateWindow.nib;
 			sourceTree = "<group>";
@@ -1422,7 +1445,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2014;
+				BUILD_NUMBER = 2016;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1438,7 +1461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2014;
+				BUILD_NUMBER = 2016;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1454,7 +1477,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2014;
+				BUILD_NUMBER = 2016;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;

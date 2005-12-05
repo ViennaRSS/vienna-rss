@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Blogspot</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 Blogspot 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://%@.blogspot.com/atom.xml</string>
+		<key>SiteHomePage</key>
+		<string>http://www.blogspot.com</string>
+	</dict>
+	<key>LiveJournal</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 LiveJournal 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://www.livejournal.com/users/%@/data/rss</string>
+		<key>SiteHomePage</key>
+		<string>http://www.livejournal.com</string>
+	</dict>
+	<key>MSN Spaces</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 MSN Spaces 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://spaces.msn.com/members/%@/feed.rss</string>
+		<key>SiteHomePage</key>
+		<string>http://spaces.msn.com</string>
+	</dict>
+	<key>URL</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 RSS feed 的網址</string>
+		<key>LinkTemplate</key>
+		<string>%@</string>
+	</dict>
+	<key>Xanga</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 Xanga 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://www.xanga.com/rss.aspx?user=%@</string>
+		<key>SiteHomePage</key>
+		<string>http://www.xanga.com</string>
+	</dict>
+	<key>WordPress.com</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 WordPress.com 使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://%@.wordpress.com/feed/</string>
+		<key>SiteHomePage</key>
+		<string>http://wordpress.com</string>
+	</dict>
+	<key>Yam Blog</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入 Yam Blog 樂多日誌使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://blog.yam.com/%@/atom.xml</string>
+		<key>SiteHomePage</key>
+		<string>http://blog.yam.com</string>
+	</dict>
+	<key>無名小站</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入無名小站使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>feed://www.wretch.cc/blog/%@&amp;rss20=1</string>
+		<key>SiteHomePage</key>
+		<string>http://www.wretch.cc/blog/</string>
+	</dict>
+	<key>部落格鄉村台灣站</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入部落格鄉村台灣站使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://www.blogtw.com/rss.php?user=%@</string>
+		<key>SiteHomePage</key>
+		<string>http://www.blogtw.com/</string>
+	</dict>
+    <key>部落格鄉村香港站</key>
+	<dict>
+		<key>LinkName</key>
+		<string>請輸入部落格鄉村香港站使用者名稱</string>
+		<key>LinkTemplate</key>
+		<string>http://www.bloghk.com/rss.php?user=%@</string>
+		<key>SiteHomePage</key>
+		<string>http://www.bloghk.com/</string>
+	</dict>
+</dict>
+</plist>

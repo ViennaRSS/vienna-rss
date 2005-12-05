@@ -42,7 +42,6 @@
 	-(BOOL)initForStyle:(NSString *)styleName;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)currentCacheContainsFolder:(int)folderId;
-	-(void)showColumnsForFolder:(int)folderId;
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
@@ -317,10 +316,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
-	// Remember the folder column state
-	Field * folderField = [db fieldByName:MA_Field_Folder];
-	previousFolderColumnState = [folderField visible];	
-
 	// Dynamically create the popup menu. This is one less thing to
 	// explicitly localise in the NIB file.
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
@@ -385,30 +380,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
 		[controller openURLInBrowser:[theArticle link]];
-	}
-}
-
-/* showColumnsForFolder
- * Display the columns for the specific folder.
- */
--(void)showColumnsForFolder:(int)folderId
-{
-	Folder * folder = [db folderFromID:folderId];
-	Field * folderField = [db fieldByName:MA_Field_Folder];
-	BOOL showFolderColumn;
-	
-	if (folder && (IsSmartFolder(folder) || IsGroupFolder(folder)))
-	{
-		previousFolderColumnState = [folderField visible];
-		showFolderColumn = YES;
-	}
-	else
-		showFolderColumn = previousFolderColumnState;
-	
-	if ([folderField visible] != showFolderColumn)
-	{
-		[folderField setVisible:showFolderColumn];
-		[self updateVisibleColumns];
 	}
 }
 
@@ -1169,7 +1140,6 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[articleList deselectAll:self];
 	currentFolderId = newFolderId;
 	[self setArticleListHeader];
-	[self showColumnsForFolder:currentFolderId];
 	[self reloadArrayOfArticles];
 	[self sortArticles];
 	[articleList reloadData];
