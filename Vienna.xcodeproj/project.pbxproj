@@ -1276,7 +1276,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2015;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 2.0.0;
 				DEBUGGING_SYMBOLS = YES;
