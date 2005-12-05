@@ -232,6 +232,7 @@
 -(BOOL)parseRichXML:(NSData *)xmlData
 {
 	BOOL success = NO;
+	NS_DURING
 	if ([self setData:xmlData])
 	{
 		XMLParser * subtree;
@@ -248,6 +249,9 @@
 		else if ((subtree = [self treeByName:@"feed"]) != nil)
 			success = [self initAtomFeed:subtree];
 	}
+	NS_HANDLER
+		success = NO;
+	NS_ENDHANDLER
 	return success;
 }
 

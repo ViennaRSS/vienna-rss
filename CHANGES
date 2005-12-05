@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2016
+----------
+- Added Traditional Chinese localisation. (Thanks to Weizhong Yang).
+
 2.0.0.2015
 ----------
 - Improvements to universal date parsing to fix some mis-parsed article dates.
