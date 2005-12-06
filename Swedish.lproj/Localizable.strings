@@ -205,4 +205,4 @@
 "%.1f of %.1f MB" = "%.1f av %.1f MB";
 "%.1f of %.1f KB" = "%.1f av %.1f K";
 "%.1f of %.1f bytes" = "%.1f av %.1f byte";
-"An error occurred when this feed was last refreshed" = "An error occurred when this feed was last refreshed";
+"An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";

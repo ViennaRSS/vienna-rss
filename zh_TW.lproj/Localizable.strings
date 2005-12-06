@@ -204,3 +204,4 @@
 "%.1f of %.1f MB" = "%.1f / %.1f MB";
 "%.1f of %.1f KB" = "%.1f / %.1f KB";
 "%.1f of %.1f bytes" = "%.1f / %.1f bytes";
+"An error occurred when this feed was last refreshed" = "在最再後一次更新這個訂閱頻道的時候發生錯誤";
