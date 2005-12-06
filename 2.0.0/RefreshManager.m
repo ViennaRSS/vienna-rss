@@ -524,123 +524,129 @@ typedef enum {
 	{
 		Database * db = [Database sharedDatabase];
 		NSData * receivedData = [connector receivedData];
+		int newArticlesFromFeed = 0;	
 		
 		// Remember the last modified date
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 		if (lastModifiedString != nil)
 			[folder setLastUpdateString:lastModifiedString];
-		
-		// Create a new rich XML parser instance that will take care of
-		// parsing the XML data we just got.
+
+		// Empty data feed is OK if we got HTTP 200
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
-		if (newFeed == nil || [receivedData length] == 0 || ![newFeed parseRichXML:receivedData])
+		if ([receivedData length] > 0)
 		{
-			// Mark the feed as failed
-			[self setFolderErrorFlag:folder flag:YES];
-			[[connector aItem] setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
-			[newFeed release];
-			[self removeConnection:connector];
-			return;
+			// Create a new rich XML parser instance that will take care of
+			// parsing the XML data we just got.
+			if (newFeed == nil || ![newFeed parseRichXML:receivedData])
+			{
+				// Mark the feed as failed
+				[self setFolderErrorFlag:folder flag:YES];
+				[[connector aItem] setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+				[newFeed release];
+				[self removeConnection:connector];
+				return;
+			}
+
+			// Log number of bytes we received
+			[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
+			
+			// Extract the latest title and description
+			NSString * feedTitle = [newFeed title];
+			NSString * feedDescription = [newFeed description];
+			NSString * feedLink = [newFeed link];
+			
+			// Synthesize feed link if it is missing
+			if ([feedLink isBlank])
+				feedLink = [[folder feedURL] baseURL];
+
+			// Get the feed's last update from the header if it is present. This will mark the
+			// date of the most recent article in the feed if the individual articles are
+			// missing a date tag.
+			NSDate * lastUpdate = [folder lastUpdate];
+			NSDate * newLastUpdate = [lastUpdate retain];
+			
+			// We'll be collecting articles into this array
+			NSMutableArray * articleArray = [NSMutableArray array];
+			
+			// Parse off items.
+			NSEnumerator * itemEnumerator = [[newFeed items] objectEnumerator];
+			FeedItem * newsItem;
+			
+			while ((newsItem = [itemEnumerator nextObject]) != nil)
+			{
+				NSDate * articleDate = [newsItem date];
+				if (articleDate == nil)
+					articleDate = [NSDate date];
+				if ([articleDate compare:lastUpdate] == NSOrderedDescending)
+				{
+					Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
+					[article setFolderId:[folder itemId]];
+					[article setAuthor:[newsItem author]];
+					[article setBody:[newsItem description]];
+					[article setTitle:[newsItem title]];
+					[article setLink:[newsItem link]];
+					[article setDate:articleDate];
+					[articleArray addObject:article];
+					[article release];
+
+					// Track most recent article
+					if ([articleDate isGreaterThan:newLastUpdate])
+					{
+						[articleDate retain];
+						[newLastUpdate release];
+						newLastUpdate = articleDate;
+					}
+				}
+			}
+
+			// Here's where we add the articles to the database
+			NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
+			Article * article;
+			
+			while ((article = [articleEnumerator nextObject]) != nil)
+			{
+				[db createArticle:[article folderId] article:article];
+				if ([article status] == MA_MsgStatus_New)
+					++newArticlesFromFeed;
+			}
+			
+			// A notify is only needed if we added any new articles.
+			int folderId = [folder itemId];
+			if ([[folder name] hasPrefix:[db untitledFeedFolderName]])
+			{
+				// If there's an existing feed with this title, make ours unique
+				// BUGBUG: This duplicates logic in database.m so consider moving it there.
+				NSString * oldFeedTitle = feedTitle;
+				unsigned int index = 1;
+
+				while (([db folderFromName:feedTitle]) != nil)
+					feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
+
+				[[connector aItem] setName:feedTitle];
+				[db setFolderName:folderId newName:feedTitle];
+			}
+			if (feedDescription != nil)
+				[db setFolderDescription:folderId newDescription:feedDescription];
+
+			if (feedLink!= nil)
+				[db setFolderHomePage:folderId newHomePage:feedLink];
+			
+			// Set the last update date for this folder to be the date of the most
+			// recent article we retrieved.
+			if (newLastUpdate != nil)
+				[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
+			[db flushFolder:folderId];
+			
+			// Let interested callers know that the folder has changed.
+			NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+			[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+
+			[newLastUpdate release];
 		}
 
 		// Mark the feed as succeeded
 		[self setFolderErrorFlag:folder flag:NO];
-
-		// Log number of bytes we received
-		[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 		
-		// Extract the latest title and description
-		NSString * feedTitle = [newFeed title];
-		NSString * feedDescription = [newFeed description];
-		NSString * feedLink = [newFeed link];
-		
-		// Synthesize feed link if it is missing
-		if ([feedLink isBlank])
-			feedLink = [[folder feedURL] baseURL];
-
-		// Get the feed's last update from the header if it is present. This will mark the
-		// date of the most recent article in the feed if the individual articles are
-		// missing a date tag.
-		NSDate * lastUpdate = [folder lastUpdate];
-		NSDate * newLastUpdate = [lastUpdate retain];
-		
-		// We'll be collecting articles into this array
-		NSMutableArray * articleArray = [NSMutableArray array];
-		int newArticlesFromFeed = 0;	
-		
-		// Parse off items.
-		NSEnumerator * itemEnumerator = [[newFeed items] objectEnumerator];
-		FeedItem * newsItem;
-		
-		while ((newsItem = [itemEnumerator nextObject]) != nil)
-		{
-			NSDate * articleDate = [newsItem date];
-			if (articleDate == nil)
-				articleDate = [NSDate date];
-			if ([articleDate compare:lastUpdate] == NSOrderedDescending)
-			{
-				Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
-				[article setFolderId:[folder itemId]];
-				[article setAuthor:[newsItem author]];
-				[article setBody:[newsItem description]];
-				[article setTitle:[newsItem title]];
-				[article setLink:[newsItem link]];
-				[article setDate:articleDate];
-				[articleArray addObject:article];
-				[article release];
-
-				// Track most recent article
-				if ([articleDate isGreaterThan:newLastUpdate])
-				{
-					[articleDate retain];
-					[newLastUpdate release];
-					newLastUpdate = articleDate;
-				}
-			}
-		}
-
-		// Here's where we add the articles to the database
-		NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
-		Article * article;
-		
-		while ((article = [articleEnumerator nextObject]) != nil)
-		{
-			[db createArticle:[article folderId] article:article];
-			if ([article status] == MA_MsgStatus_New)
-				++newArticlesFromFeed;
-		}
-		
-		// A notify is only needed if we added any new articles.
-		int folderId = [folder itemId];
-		if ([[folder name] hasPrefix:[db untitledFeedFolderName]])
-		{
-			// If there's an existing feed with this title, make ours unique
-			// BUGBUG: This duplicates logic in database.m so consider moving it there.
-			NSString * oldFeedTitle = feedTitle;
-			unsigned int index = 1;
-
-			while (([db folderFromName:feedTitle]) != nil)
-				feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
-
-			[[connector aItem] setName:feedTitle];
-			[db setFolderName:folderId newName:feedTitle];
-		}
-		if (feedDescription != nil)
-			[db setFolderDescription:folderId newDescription:feedDescription];
-
-		if (feedLink!= nil)
-			[db setFolderHomePage:folderId newHomePage:feedLink];
-		
-		// Set the last update date for this folder to be the date of the most
-		// recent article we retrieved.
-		if (newLastUpdate != nil)
-			[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
-		[db flushFolder:folderId];
-		
-		// Let interested callers know that the folder has changed.
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
 			[[connector aItem] setStatus:NSLocalizedString(@"No new articles available", nil)];
@@ -651,7 +657,6 @@ typedef enum {
 		}
 		
 		// Done with this connection
-		[newLastUpdate release];
 		[newFeed release];
 
 		// If this folder also requires an image refresh, add that

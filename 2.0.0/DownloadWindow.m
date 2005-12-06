@@ -175,8 +175,10 @@
 	{
 		NSArray * list = [[DownloadManager sharedInstance] downloadsList];
 		DownloadItem * item = [list objectAtIndex:rowIndex];
+
 		if ([item image] != nil)
 			[aCell setImage:[item image]];
+		[aCell setTextColor:(rowIndex == [aTableView selectedRow]) ? [NSColor whiteColor] : [NSColor darkGrayColor]];
 	}
 }
 
@@ -217,7 +219,7 @@
 			objectString = [NSString stringWithFormat:@"%@\n%@", filename, sizeString];
 			break;
 		}
-			
+
 		case DOWNLOAD_STARTED: {
 			// Filename on top
 			// Progress gauge in middle
