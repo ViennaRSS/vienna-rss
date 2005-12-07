@@ -177,7 +177,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Show the current unread count on the app icon
 	originalIcon = [[NSApp applicationIconImage] copy];
-	[self showUnreadCountOnApplicationIcon];
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
 
 	// Create a menu for the search field
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
@@ -989,56 +989,61 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[stylesMenu setSubmenu:stylesSubMenu];
 }
 
-/* showUnreadCountOnApplicationIcon
+/* showUnreadCountOnApplicationIconAndWindowTitle
  * Update the Vienna application icon to show the number of unread articles.
  */
--(void)showUnreadCountOnApplicationIcon
+-(void)showUnreadCountOnApplicationIconAndWindowTitle
 {
 	int currentCountOfUnread = [db countOfUnread];
-	if (currentCountOfUnread != lastCountOfUnread)
+	if (currentCountOfUnread == lastCountOfUnread)
+		return;
+
+	// Don't show a count if there are no unread articles
+	lastCountOfUnread = currentCountOfUnread;
+	if (currentCountOfUnread <= 0)
 	{
-		if (currentCountOfUnread > 0)
-		{
-			NSString *countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
-			NSImage * iconImageBuffer = [originalIcon copy];
-			NSSize iconSize = [originalIcon size];
+		[NSApp setApplicationIconImage:originalIcon];
+		[mainWindow setTitle:appName];
+		return;	
+	}	
 
-			// Create attributes for drawing the count. In our case, we're drawing using in
-			// 26pt Helvetica bold white.
-			NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:26],
-																					 NSFontAttributeName,
-																					 [NSColor whiteColor],
-																					 NSForegroundColorAttributeName,
-																					 nil];
-			NSSize numSize = [countdown sizeWithAttributes:attributes];
+	[mainWindow setTitle:[[NSString stringWithFormat:@"%@ -", appName]
+		stringByAppendingString:[NSString stringWithFormat:
+			NSLocalizedString(@" (%d unread)", nil), currentCountOfUnread]]];
+	
+	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
+	NSImage * iconImageBuffer = [originalIcon copy];
+	NSSize iconSize = [originalIcon size];
 
-			// Create a red circle in the icon large enough to hold the count.
-			[iconImageBuffer lockFocus];
-			[originalIcon drawAtPoint:NSMakePoint(0, 0)
-							 fromRect:NSMakeRect(0, 0, iconSize.width, iconSize.height) 
-							operation:NSCompositeSourceOver 
-							 fraction:1.0f];
-			float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
-			max += 16;
-			NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
-			NSBezierPath * bp = [NSBezierPath bezierPathWithOvalInRect:circleRect];
-			[[NSColor colorWithCalibratedRed:0.8f green:0.0f blue:0.0f alpha:1.0f] set];
-			[bp fill];
+	// Create attributes for drawing the count. In our case, we're drawing using in
+	// 26pt Helvetica bold white.
+	NSDictionary * attributes = [[NSDictionary alloc] 
+		initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:26], NSFontAttributeName,
+			[NSColor whiteColor], NSForegroundColorAttributeName, nil];
+	NSSize numSize = [countdown sizeWithAttributes:attributes];
 
-			// Draw the count in the red circle
-			NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
-			[countdown drawAtPoint:point withAttributes:attributes];
+	// Create a red circle in the icon large enough to hold the count.
+	[iconImageBuffer lockFocus];
+	[originalIcon drawAtPoint:NSMakePoint(0, 0)
+					 fromRect:NSMakeRect(0, 0, iconSize.width, iconSize.height) 
+					operation:NSCompositeSourceOver 
+					 fraction:1.0f];
+	float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
+	max += 16;
+	NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
+	NSBezierPath * bp = [NSBezierPath bezierPathWithOvalInRect:circleRect];
+	[[NSColor colorWithCalibratedRed:0.8f green:0.0f blue:0.0f alpha:1.0f] set];
+	[bp fill];
 
-			// Now set the new app icon and clean up.
-			[iconImageBuffer unlockFocus];
-			[NSApp setApplicationIconImage:iconImageBuffer];
-			[iconImageBuffer release];
-			[attributes release];
-		}
-		else
-			[NSApp setApplicationIconImage:originalIcon];
-		lastCountOfUnread = currentCountOfUnread;
-	}
+	// Draw the count in the red circle
+	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
+	[countdown drawAtPoint:point withAttributes:attributes];
+
+	// Now set the new app icon and clean up.
+	[iconImageBuffer unlockFocus];
+	[NSApp setApplicationIconImage:iconImageBuffer];
+	[iconImageBuffer release];
+	[attributes release];
 }
 
 /* handleAbout
@@ -1356,7 +1361,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:YES];
 		
-		[self showUnreadCountOnApplicationIcon];
+		[self showUnreadCountOnApplicationIconAndWindowTitle];
 
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 		if (growlAvailable && newUnread > 0)
@@ -1929,7 +1934,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	// Unread count may have changed
 	[self setStatusMessage:nil persist:NO];
-	[self showUnreadCountOnApplicationIcon];
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* validateFeed

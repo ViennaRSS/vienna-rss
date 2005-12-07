@@ -127,7 +127,7 @@
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsLink:(NSURL *)urlLink defaultMenuItems:(NSArray *)defaultMenuItems;
--(void)showUnreadCountOnApplicationIcon;
+-(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLInBrowser:(NSString *)urlString;
 -(void)openURLInNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(void)openURLInBrowserWithURL:(NSURL *)url;
