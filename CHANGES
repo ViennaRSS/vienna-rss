@@ -10,6 +10,7 @@ Thanks!
 ----------
 - Added Traditional Chinese localisation. (Thanks to Weizhong Yang).
 - Accept HTTP 200 responses with no data as meaning 0 new articles rather than an error.
+- Show count of unread on title bar. (Patch submitted by Jussi Hagman).
 
 2.0.0.2015
 ----------

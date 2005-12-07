@@ -1577,7 +1577,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
-		[controller showUnreadCountOnApplicationIcon];
+		[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* deleteSelectedArticles
@@ -1627,7 +1627,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
-		[controller showUnreadCountOnApplicationIcon];
+		[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* markUnflagUndo
@@ -1729,7 +1729,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	
 	// The info bar has a count of unread articles so we need to
 	// update that.
-	[controller showUnreadCountOnApplicationIcon];
+	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* markAllReadUndo
@@ -1761,7 +1761,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
-	[controller showUnreadCountOnApplicationIcon];
+	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* wrappedMarkAllReadInArray
@@ -1862,7 +1862,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 	// The info bar has a count of unread articles so we need to
 	// update that.
-	[controller showUnreadCountOnApplicationIcon];
+	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* dealloc
