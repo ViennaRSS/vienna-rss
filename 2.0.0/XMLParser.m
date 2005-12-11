@@ -46,6 +46,8 @@ static NSMutableDictionary * entityMap = nil;
 	NS_HANDLER
 		newTree = nil;
 	NS_ENDHANDLER
+	if (error != nil)
+		CFRelease(error);
 	if (newTree != nil)
 	{
 		[self setTreeRef:newTree];

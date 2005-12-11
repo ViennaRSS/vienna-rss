@@ -43,3 +43,5 @@ Post 2.0 Items
 - Ad-blocking for HTML view. (http://braden.machacking.net/)
 - Manual sorting of folders or arrange folders by other means.
 - Dedicated button to mark all read.
+- Cache full XML for original article and return via Applescript.
+- Cmd+Enter to open current page in the opposite of whatever is set in preferences.

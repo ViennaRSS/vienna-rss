@@ -205,4 +205,4 @@
 "%.1f of %.1f MB" = "%.1f sur %.1f Mo";
 "%.1f of %.1f KB" = "%.1f sur %.1f Ko";
 "%.1f of %.1f bytes" = "%.1f sur %.1f octets";
-"An error occurred when this feed was last refreshed" = "An error occurred when this feed was last refreshed";
+"An error occurred when this feed was last refreshed" = "Une erreur est apparue lors du rafraîchissement de ce flux";

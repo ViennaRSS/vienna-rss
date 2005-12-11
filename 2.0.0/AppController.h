@@ -139,6 +139,7 @@
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
 -(NSString *)searchString;
+-(void)setSearchString:(NSString *)newSearchString;
 -(Article *)selectedArticle;
 -(int)currentFolderId;
 -(BOOL)isConnecting;

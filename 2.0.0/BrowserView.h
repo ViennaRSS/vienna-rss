@@ -21,7 +21,7 @@
 #import <Cocoa/Cocoa.h>
 
 @protocol BaseView
-	-(void)search;
+	-(void)performFindPanelAction:(int)tag;
 	-(NSString *)searchPlaceholderString;
 	-(void)printDocument:(id)sender;
 	-(void)handleGoForward;

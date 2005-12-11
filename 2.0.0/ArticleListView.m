@@ -1042,10 +1042,10 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]];
 }
 
-/* search
+/* performFindPanelAction
  * Implement the search action.
  */
--(void)search
+-(void)performFindPanelAction:(int)actionTag
 {
 	[self refreshFolder:YES];
 	if (currentSelectedRow < 0 && [currentArrayOfArticles count] > 0)
@@ -1154,17 +1154,24 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[self refreshArticlePane];
 	
 	// If we mark read after an interval, start the timer here.
-	[markReadTimer invalidate];
-	[markReadTimer release];
-	markReadTimer = nil;
-	
-	float interval = [[Preferences standardPreferences] markReadInterval];
-	if (interval > 0 && !isAppInitialising)
-		markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
-														  target:self
-														selector:@selector(markCurrentRead:)
-														userInfo:nil
-														 repeats:NO] retain];
+	if (currentSelectedRow >= 0)
+	{
+		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
+		if (![theArticle isRead])
+		{
+			[markReadTimer invalidate];
+			[markReadTimer release];
+			markReadTimer = nil;
+			
+			float interval = [[Preferences standardPreferences] markReadInterval];
+			if (interval > 0 && !isAppInitialising)
+				markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
+																  target:self
+																selector:@selector(markCurrentRead:)
+																userInfo:nil
+																 repeats:NO] retain];
+		}
+	}
 }
 
 /* startSelectionChange

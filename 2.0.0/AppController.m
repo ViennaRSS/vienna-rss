@@ -1226,7 +1226,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[browserView setActiveTabToPrimaryTab];
 
 		// Blank out the search field
-		[searchField setStringValue:@""];
+		[self setSearchString:@""];
 		[mainArticleView selectFolderWithFilter:newFolderId];
 		[self updateSearchPlaceholder];
 		[[NSUserDefaults standardUserDefaults] setInteger:[mainArticleView currentFolderId] forKey:MAPref_CachedFolderID];
@@ -1447,6 +1447,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 	case NSFindPanelActionShowFindPanel:
 		[mainWindow makeFirstResponder:searchField];
+		break;
+
+	default:
+		[[browserView activeTabView] performFindPanelAction:[sender tag]];
 		break;
 	}
 }
@@ -2052,6 +2056,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[searchField cell] setPlaceholderString:[[browserView activeTabView] searchPlaceholderString]];
 }
 
+/* setSearchString
+ * Sets the search field's search string.
+ */
+-(void)setSearchString:(NSString *)newSearchString
+{
+	[searchField setStringValue:newSearchString];
+}
+
 /* searchString
  * Return the contents of the search field.
  */
@@ -2065,7 +2077,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	[[browserView activeTabView] search];
+	[[browserView activeTabView] performFindPanelAction:NSFindPanelActionNext];
 }
 
 /* refreshAllSubscriptions

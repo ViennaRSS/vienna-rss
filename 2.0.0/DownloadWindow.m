@@ -161,9 +161,9 @@
  */
 -(int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	lastCount = [[[DownloadManager sharedInstance] downloadsList] count];
-	[clearButton setEnabled:lastCount > 0];
-	return lastCount;
+	int itemCount = [[[DownloadManager sharedInstance] downloadsList] count];
+	[clearButton setEnabled:itemCount > 0];
+	return itemCount;
 }
 
 /* willDisplayCell [delegate]
@@ -262,20 +262,21 @@
  */
 -(void)handleDownloadsChange:(NSNotification *)notification
 {
-	// NOTE: item MAY be nil.
-//	DownloadItem * item = (DownloadItem *)[notification object];
+	DownloadItem * item = (DownloadItem *)[notification object];
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	if ([list count] != lastCount)
-		[table reloadData];
-	else
+	int rowIndex = [list indexOfObject:item];
+	if ([list count] != lastCount || rowIndex == NSNotFound)
 	{
 		[table reloadData];
-//		int rowIndex = [list indexOfObject:item];
-//		if (rowIndex >= 0 && rowIndex < lastCount)
-//		{
-//			NSRect rectRow = [table rectOfRow:rowIndex];
-//			[table drawRect:rectRow];
-//		}
+		[table selectRow:rowIndex byExtendingSelection:NO];
+		[table scrollRowToVisible:rowIndex];
+		lastCount = [list count];
+	}
+	else if (rowIndex >= 0 && rowIndex < lastCount)
+	{
+		NSRect rectRow = [table rectOfRow:rowIndex];
+		[table drawRow:rowIndex clipRect:rectRow];
+		[table display];
 	}
 }
 @end
