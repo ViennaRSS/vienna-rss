@@ -26,6 +26,7 @@
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebKitErrors.h"
+#import "WebKit/WebDocument.h"
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -67,14 +68,6 @@
 		lastError = nil;
     }
     return self;
-}
-
-/* performFindPanelAction
- * WebView doesn't actually implement this. So pass it up to the delegate.
- */
--(void)performFindPanelAction:(id)sender
-{
-	[[NSApp delegate] performFindPanelAction:sender];
 }
 
 /* setController
@@ -314,13 +307,32 @@
 	return NSLocalizedString(@"Search web page", nil);
 }
 
-/* search
+/* performFindPanelAction
  * Implement the search action. Search the web page for the specified
  * text.
  */
--(void)search
+-(void)performFindPanelAction:(int)actionTag
 {
-	[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+	switch (actionTag)
+	{
+		case NSFindPanelActionSetFindString:
+		{
+			NSView * docView = [[[webPane mainFrame] frameView] documentView];
+			
+			if ([docView conformsToProtocol:@protocol(WebDocumentText)])
+				[controller setSearchString:[(id<WebDocumentText>)docView selectedString]];
+			[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			break;
+		}
+			
+		case NSFindPanelActionNext:
+			[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			break;
+			
+		case NSFindPanelActionPrevious:
+			[webPane searchFor:[controller searchString] direction:NO caseSensitive:NO wrap:YES];
+			break;
+	}
 }
 
 /* url
