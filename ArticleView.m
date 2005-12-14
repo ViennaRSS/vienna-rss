@@ -279,6 +279,7 @@
  */
 -(void)dealloc
 {
+	[controller release];
 	[defaultWebPrefs release];
 	[super dealloc];
 }
