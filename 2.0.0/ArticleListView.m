@@ -1136,14 +1136,17 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	[db flushFolder:currentFolderId];
-	[articleList deselectAll:self];
-	currentFolderId = newFolderId;
-	[self setArticleListHeader];
-	[self reloadArrayOfArticles];
-	[self sortArticles];
-	[articleList reloadData];
-	[self selectArticleAfterReload];
+	if (newFolderId != currentFolderId)
+	{
+		[db flushFolder:currentFolderId];
+		[articleList deselectAll:self];
+		currentFolderId = newFolderId;
+		[self setArticleListHeader];
+		[self reloadArrayOfArticles];
+		[self sortArticles];
+		[articleList reloadData];
+		[self selectArticleAfterReload];
+	}
 }
 
 /* refreshImmediatelyArticleAtCurrentRow

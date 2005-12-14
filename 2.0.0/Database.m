@@ -1212,6 +1212,7 @@ static Database * _sharedDatabase = nil;
 
 		// Mark this folder as not needing any further updates
 		[folder resetFlush];
+		[folder clearCache];
 	}
 }
 

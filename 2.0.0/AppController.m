@@ -1464,21 +1464,29 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	switch (keyChar)
 	{
 		case NSLeftArrowFunctionKey:
-			if (!(flags & NSCommandKeyMask))
+			if (flags & NSCommandKeyMask)
+				[self goBack:self];
+			else
+			{
 				if ([mainWindow firstResponder] == [mainArticleView mainView])
 				{
 					[mainWindow makeFirstResponder:[foldersTree mainView]];
 					return YES;
 				}
+			}
 			return NO;
 
 		case NSRightArrowFunctionKey:
-			if (!(flags & NSCommandKeyMask))
+			if (flags & NSCommandKeyMask)
+				[self goForward:self];
+			else
+			{
 				if ([mainWindow firstResponder] == [foldersTree mainView])
 				{
 					[mainWindow makeFirstResponder:[mainArticleView mainView]];
 					return YES;
 				}
+			}
 			return NO;
 
 		case NSDeleteFunctionKey:
