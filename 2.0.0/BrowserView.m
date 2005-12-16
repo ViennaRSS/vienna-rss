@@ -505,11 +505,12 @@ static const int MA_Left_Margin_Width = 10;
 		{
 			BrowserTab * theTab = [allTabs objectAtIndex:index];
 			NSRect computedRect = NSMakeRect(x0, y0, tabWidth, MA_Tab_Height);
+			BOOL mouseInTab = NSPointInRect(mousePt, computedRect);
 			if (!NSEqualRects(computedRect, [theTab rect]))
 			{
 				[theTab setRect:computedRect];
 				[self removeTrackingRect:[theTab trackingRectTag]];
-				[theTab setTrackingRectTag:[self addTrackingRect:computedRect owner:self userData:theTab assumeInside:NSPointInRect(mousePt, computedRect)]];
+				[theTab setTrackingRectTag:[self addTrackingRect:computedRect owner:self userData:theTab assumeInside:mouseInTab]];
 
 				// Tabs can have tooltips. We'll provide the actual tooltip text in stringForToolTip
 				[self removeToolTip:[theTab toolTipTag]];
@@ -530,6 +531,9 @@ static const int MA_Left_Margin_Width = 10;
 					[theTab setCloseButtonTrackingRectTag:[self addTrackingRect:closeRect owner:self userData:theTab assumeInside:NSPointInRect(mousePt, closeRect)]];
 				}
 			}
+			
+			if (mouseInTab)
+				trackingTab = theTab;
 			
 			x0 += tabWidth + 1;
 			++index;
@@ -642,7 +646,6 @@ static const int MA_Left_Margin_Width = 10;
 	if (trackingTab != nil && [theEvent buttonNumber] == 2)
 	{
 		[self closeTab:trackingTab];
-		trackingTab = nil;
 		return;
 	}
 }
@@ -663,7 +666,6 @@ static const int MA_Left_Margin_Width = 10;
 				[self closeAllTabs];
 			else
 				[self closeTab:trackingTab];
-			trackingTab = nil;
 		}
 	}
 }
