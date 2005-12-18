@@ -109,7 +109,7 @@
  */
 -(BOOL)isDownloadFileType:(NSURL *)url
 {
-	NSString * newURLExtension = [[url absoluteString] pathExtension];
+	NSString * newURLExtension = [[url path] pathExtension];
 	return ([newURLExtension isEqualToString:@"dmg"] ||
 			[newURLExtension isEqualToString:@"sit"] ||
 			[newURLExtension isEqualToString:@"bin"] ||

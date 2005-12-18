@@ -6,6 +6,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2017
+----------
+- Fix localisation article scroll bar truncation.
+- Clear download list should not remove items being downloaded.
+- Fix handling of Javascript web pages.
+- Add three more built-in styles: Tyger, Vienna Pride, EasySimple and Felix.
+- Added Demo RSS feeds for new databases.
+
 2.0.0.2016
 ----------
 - Added Traditional Chinese localisation. (Thanks to Weizhong Yang).

@@ -217,12 +217,20 @@
 }
 
 /* createWebViewWithRequest
- * Called when the browser wants to create a new window. The request is opened in a new tab.
+ * Called when the browser wants to create a new webview.
  */
 -(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-	[controller openURLInBrowserWithURL:[request URL]];
-	return nil;
+	if ([request URL] != nil)
+		[[webPane mainFrame] loadRequest:request];
+	return webPane;
+}
+
+/* setFrame
+ * Trap this to stop scripts from resizing the main Vienna window.
+ */
+-(void)webView:(WebView *)sender setFrame:(NSRect)frame
+{
 }
 
 /* contextMenuItemsForElement

@@ -1,0 +1,103 @@
+a:link
+{
+	color: #009;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:visited
+{
+	color: #66F;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:hover
+{
+	color: #F30;
+	text-decoration: underline;
+}
+
+body
+{
+	background: #fff;
+	margin: 0;
+	padding: 0 0 10px;
+	font: medium/150% "Lucida Grande", sans-serif;
+	color: #333;
+}
+
+.articleTitleStyle
+{
+	text-shadow: 0 1px 2px #000;
+	margin: 0 0px 0px;
+	padding: 20px 0 7px 15px;
+	background: #005FD7 url(felix.png) repeat-x,;
+	border-bottom: 1px solid #1C477F;
+	font-size: large;
+	text-shadow: 0 1px 2px #000;
+	background-color: brown;
+}
+.articleTitleStyle a
+{
+	margin-left: 12px;
+	text-decoration: none;
+	color: #fff;
+}
+
+.info
+{
+	border-bottom: 1px solid #ddd;
+	margin: 0 0px 0px;
+	padding: 5px 5px 5px;
+	background-color: beige;
+}
+.info span
+{
+	display: block;
+	margin-bottom: 1px;
+}
+.info span:before
+{
+	font-weight: bold;
+	color: #777;
+}
+span.feedLinkStyle:before
+{
+	margin-left: 20px;
+	content: "From: ";
+	background: beige;
+}
+span.articleDateStyle:before
+{
+	margin-left: 20px;
+	content: "Date: ";
+	background: beige;
+}
+
+.articleBodyStyle
+{
+	background: #fff;
+	margin-right: 30px;
+	margin-left: 30px;
+	margin-top: 30px;
+	margin-bottom: 5px;
+	padding: 0 15px;
+	font: medium/150% "Lucida Grande", sans-serif;
+	color: #333;
+}
+.articleDetails
+{
+	margin-left: 40px;
+	margin-right: 0px;
+	padding-left: 1px;
+	padding-top: 5px;
+	background-color: beige;
+}
+.articleDetails a
+{
+	color: #000;
+}
+span.articleAuthorStyle
+{
+	margin-left: 5px;
+	color: #600;
+}
