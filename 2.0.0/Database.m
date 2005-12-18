@@ -222,6 +222,28 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
 			NSLocalizedString(@"Trash", nil),
 			MA_Trash_Folder];
+
+		// If we have a DemoFeeds.plist in the resources then use it to create some initial demo
+		// RSS feeds.
+		NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+		NSString * pathToPList = [thisBundle pathForResource:@"DemoFeeds.plist" ofType:@""];
+		if (pathToPList != nil)
+		{
+			NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+			if (demoFeedsDict)
+			{
+				NSEnumerator *enumerator = [demoFeedsDict keyEnumerator];
+				NSString * feedName;
+				
+				while ((feedName = [enumerator nextObject]) != nil)
+				{
+					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
+					NSString * feedURL = [itemDict valueForKey:@"URL"];
+					if (feedURL != nil && feedName != nil)
+						[self addRSSFolder:feedName underParent:-1 subscriptionURL:feedURL];
+				}
+			}
+		}
 		
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;

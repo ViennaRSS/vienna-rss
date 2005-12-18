@@ -264,11 +264,17 @@ static DownloadManager * _sharedDownloadManager = nil;
 }
 
 /* clearList
- * Remove all items from the list.
+ * Remove all completed items from the list.
  */
 -(void)clearList
 {
-	[downloadsList removeAllObjects];
+	int index = [downloadsList count] - 1;
+	while (index >= 0)
+	{
+		DownloadItem * item = [downloadsList objectAtIndex:index--];
+		if ([item state] != DOWNLOAD_STARTED)
+			[downloadsList removeObject:item];
+	}
 	[self notifyDownloadItemChange:nil];
 	[self archiveDownloadsList];
 }
