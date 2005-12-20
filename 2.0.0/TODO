@@ -45,3 +45,4 @@ Post 2.0 Items
 - Dedicated button to mark all read.
 - Cache full XML for original article and return via Applescript.
 - Cmd+Enter to open current page in the opposite of whatever is set in preferences.
+- Show warning icon on collapsed group folder if any sub-folders have warnings.

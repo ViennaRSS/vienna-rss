@@ -537,6 +537,9 @@
 	NSAssert(items == nil, @"initAtomFeed called more than once per initialisation");
 	items = [[NSMutableArray alloc] initWithCapacity:10];
 	
+	// Look for feed attributes we need to process
+	NSString * linkBase = [[feedTree valueOfAttribute:@"xml:base"] stringByDeletingLastPathComponent];
+
 	// Iterate through the atom items
 	int count = [feedTree countOfChildren];
 	int index;
@@ -593,6 +596,12 @@
 			int itemCount = [subTree countOfChildren];
 			int itemIndex;
 			BOOL hasGUID = NO;
+			BOOL hasLink = NO;
+
+			// Look for and stack the xml:base attribute
+			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByDeletingLastPathComponent];
+			if (entryBase != nil && linkBase != nil)
+				entryBase = [linkBase stringByAppendingPathComponent:entryBase];
 
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
@@ -632,7 +641,15 @@
 				if ([itemNodeName isEqualToString:@"link"])
 				{
 					if ([[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
+					{
 						[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
+						hasLink = YES;
+					}
+					else if ([subItemTree valueOfAttribute:@"href"] != nil && entryBase != nil)
+					{
+						[newItem setLink:[entryBase stringByAppendingPathComponent:[subItemTree valueOfAttribute:@"href"]]];
+						hasLink = YES;
+					}
 					continue;
 				}
 				
@@ -789,8 +806,6 @@
 {
 	if (![item title] || [[item title] isBlank])
 		[item setTitle:[NSString stringByRemovingHTML:[item description]]];
-	else
-		[item setTitle:[NSString stringByRemovingHTML:[item title]]];
 }
 
 /* dealloc

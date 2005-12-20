@@ -12,5 +12,10 @@
 		<key>URL</key>
 		<string>http://images.apple.com/main/rss/hotnews/hotnews.rss</string>
 	</dict>
+	<key>Vienna Support Forum</key>
+	<dict>
+		<key>URL</key>
+		<string>http://community.novacaster.com/searchcommon.pl?content=article&amp;category=47&amp;s=1&amp;rss=1</string>
+	</dict>
 </dict>
 </plist>
