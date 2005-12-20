@@ -333,7 +333,6 @@
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
 		AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		AA2DE139085399F40055C4EE /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
-		AA2F59EA092B7EE700E917DD /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Info copy.plist"; path = "/Users/steve/Source/Vienna/2.0.0/Info copy.plist"; sourceTree = "<absolute>"; };
 		AA3111B40901A26B00E80DF1 /* generalPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = generalPreferences.tiff; sourceTree = "<group>"; };
 		AA3111B60901A29B00E80DF1 /* appearancesPreferences.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = appearancesPreferences.tiff; sourceTree = "<group>"; };
 		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = Preferences.plist; sourceTree = "<group>"; };
@@ -687,7 +686,6 @@
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */,
 				AAD1E2CB0612908200D09905 /* MacPAD.url */,
-				AA2F59EA092B7EE700E917DD /* Info copy.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

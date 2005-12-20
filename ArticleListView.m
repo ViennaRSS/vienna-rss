@@ -30,6 +30,7 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "ArticleRef.h"
+#import "XMLParser.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebDataSource.h"
@@ -1261,11 +1262,11 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		{
 			htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
 			[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
-			[htmlArticle replaceString:@"$ArticleTitle$" withString:articleTitle];
+			[htmlArticle replaceString:@"$ArticleTitle$" withString:[XMLParser quoteAttributes:articleTitle]];
 			[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
 			[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
 			[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
-			[htmlArticle replaceString:@"$FeedTitle$" withString:folderTitle];
+			[htmlArticle replaceString:@"$FeedTitle$" withString:[XMLParser quoteAttributes:folderTitle]];
 			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
 			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
 		}
