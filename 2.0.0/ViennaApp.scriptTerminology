@@ -305,6 +305,13 @@
 					<key>Name</key>
 					<string>total unread count</string>
 				</dict>
+				<key>currentSelection</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns the text selected in the current article or web page</string>
+					<key>Name</key>
+					<string>current selection</string>
+				</dict>
 			</dict>
 			<key>Description</key>
 			<string>Vienna top level scripting object</string>

@@ -679,6 +679,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return articleList;
 }
 
+/* articleView
+ * Return the article pane view.
+ */
+-(NSView *)articleView
+{
+	return articleText;
+}
+
 /* canGoForward
  * Return TRUE if we can go forward in the backtrack queue.
  */

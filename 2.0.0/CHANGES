@@ -13,6 +13,8 @@ Thanks!
 - Fix handling of Javascript web pages.
 - Add three more built-in styles: Tyger, Vienna Pride, EasySimple and Felix.
 - Added Demo RSS feeds for new databases.
+- Fix parsing of atom xml:base links.
+- Added "current selection" Applescript method to return the current text selection.
 
 2.0.0.2016
 ----------

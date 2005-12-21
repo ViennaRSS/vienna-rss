@@ -20,12 +20,16 @@
 
 #import "ViennaApp.h"
 #import "AppController.h"
+#import "ArticleListView.h"
 #import "Preferences.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
 #import "Constants.h"
 #import "FoldersTree.h"
+#import "BrowserPane.h"
+#import "WebKit/WebFrame.h"
+#import "WebKit/WebDocument.h"
 
 @implementation ViennaApp
 
@@ -201,6 +205,31 @@
 -(int)totalUnreadCount
 {
 	return [[Database sharedDatabase] countOfUnread];
+}
+
+/* currentSelection
+ * Returns the current selected text from the article view or an empty
+ * string if there is no selection.
+ */
+-(NSString *)currentSelection
+{
+	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabView];
+	WebView * webPane = nil;
+
+	if ([theView isKindOfClass:[BrowserPane class]])
+		webPane = (WebView *)[(BrowserPane *)theView mainView];
+
+	if ([theView isKindOfClass:[ArticleListView class]])
+		webPane = (WebView *)[(ArticleListView *)theView articleView];
+	
+	if (webPane != nil)
+	{
+		NSView * docView = [[[webPane mainFrame] frameView] documentView];
+		
+		if ([docView conformsToProtocol:@protocol(WebDocumentText)])
+			return [(id<WebDocumentText>)docView selectedString];
+	}
+	return @"";
 }
 
 /* currentArticle
