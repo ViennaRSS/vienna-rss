@@ -400,6 +400,15 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
+				<key>currentSelection</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>cuSE</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
 			</dict>
 			<key>Superclass</key>
 			<string>NSCoreSuite.NSApplication</string>

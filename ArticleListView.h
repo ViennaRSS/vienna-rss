@@ -80,6 +80,7 @@
 -(NSArray *)markedArticleRange;
 -(void)selectFolderWithFilter:(int)newFolderId;
 -(NSView *)mainView;
+-(NSView *)articleView;
 -(void)sortByIdentifier:(NSString *)columnName;
 -(Article *)selectedArticle;
 -(void)displayNextUnread;

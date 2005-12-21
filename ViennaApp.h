@@ -45,6 +45,7 @@
 -(NSArray *)folders;
 -(BOOL)isRefreshing;
 -(int)totalUnreadCount;
+-(NSString *)currentSelection;
 
 // Change folder selection
 -(Folder *)currentFolder;
