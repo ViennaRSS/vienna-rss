@@ -59,7 +59,7 @@
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)refreshImmediatelyArticleAtCurrentRow;
 	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
-	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray;
+	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
 	-(void)reloadArrayOfArticles;
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
@@ -1588,7 +1588,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// Compute the new place to put the selection
-	int nextRow = currentSelectedRow;
+	int nextRow = [[articleList selectedRowIndexes] firstIndex];
 	currentSelectedRow = -1;
 	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
 		nextRow = [currentArrayOfArticles count] - 1;
@@ -1638,7 +1638,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// Compute the new place to put the selection
-	int nextRow = currentSelectedRow;
+	int nextRow = [[articleList selectedRowIndexes] firstIndex];
 	currentSelectedRow = -1;
 	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
 		nextRow = [currentArrayOfArticles count] - 1;
@@ -1771,9 +1771,9 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(void)markAllReadByArray:(NSArray *)folderArray
+-(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
-	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray];
+	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
 	if (refArray != nil && [refArray count] > 0)
 	{
 		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -1787,7 +1787,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray
+-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	NSEnumerator * enumerator = [folderArray objectEnumerator];
@@ -1798,13 +1798,15 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		int folderId = [folder itemId];
 		if (IsGroupFolder(folder))
 		{
-			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId]]];
+			if (undoFlag)
+				[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag]];
 			if ([self currentCacheContainsFolder:folderId])
 				[self refreshFolder:YES];
 		}
 		else if (!IsSmartFolder(folder))
 		{
-			[refArray addObjectsFromArray:[db arrayOfUnreadArticles:folderId]];
+			if (undoFlag)
+				[refArray addObjectsFromArray:[db arrayOfUnreadArticles:folderId]];
 			if ([db markFolderRead:folderId])
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
