@@ -87,7 +87,7 @@
 -(void)deleteSelectedArticles;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
--(void)markAllReadByArray:(NSArray *)folderArray;
+-(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 @end

@@ -1552,7 +1552,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
 {
 	if (![db readOnly])
-		[mainArticleView markAllReadByArray:arrayOfFolders];
+		[mainArticleView markAllReadByArray:arrayOfFolders withUndo:YES];
 }
 
 /* createNewSubscription
@@ -1732,7 +1732,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (![db readOnly])
 	{
-		[mainArticleView markAllReadByArray:[foldersTree selectedFolders]];
+		[mainArticleView markAllReadByArray:[foldersTree selectedFolders] withUndo:YES];
 		[self viewNextUnread:self];
 	}
 }
@@ -1743,7 +1743,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)markAllRead:(id)sender
 {
 	if (![db readOnly])
-		[mainArticleView markAllReadByArray:[foldersTree selectedFolders]];
+		[mainArticleView markAllReadByArray:[foldersTree selectedFolders] withUndo:YES];
 }
 
 /* markAllSubscriptionsRead
@@ -1752,7 +1752,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)markAllSubscriptionsRead:(id)sender
 {
 	if (![db readOnly])
-		[mainArticleView markAllReadByArray:[foldersTree folders:0]];
+	{
+		[mainArticleView markAllReadByArray:[foldersTree folders:0] withUndo:NO];
+		[self clearUndoStack];
+	}
 }
 
 /* markRead
