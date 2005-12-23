@@ -809,8 +809,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMutableArray *defNotesArray = [NSMutableArray array];
 	NSMutableArray *allNotesArray = [NSMutableArray array];
 	
-	[allNotesArray addObject:@"New Articles"];
-	[defNotesArray addObject:@"New Articles"];
+	[allNotesArray addObject:NSLocalizedString(@"Growl notification name", nil)];
+	[defNotesArray addObject:NSLocalizedString(@"Growl notification name", nil)];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
 		appName, GROWL_APP_NAME, 
