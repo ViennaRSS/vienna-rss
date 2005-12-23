@@ -314,7 +314,7 @@ static NSArray * iconArray = nil;
 		NSImage * imagePtr = nil;
 		if ([self feedURL])
 		{
-			NSString * homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
+			NSString * homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
 			imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 		}
 		return (imagePtr) ? imagePtr : [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
@@ -342,7 +342,7 @@ static NSArray * iconArray = nil;
 {
 	if ([self feedURL] != nil && iconImage != nil)
 	{
-		NSString * homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
+		NSString * homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
 	}
 }
