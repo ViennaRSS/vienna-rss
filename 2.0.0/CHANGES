@@ -6,6 +6,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2018
+----------
+- Fix Growl integration to work in localised builds.
+- Fix handling of folder icons from sites like FeedBurner.
+- Finalised help file for 2.0 release.
+
 2.0.0.2017
 ----------
 - Fix localisation article scroll bar truncation.

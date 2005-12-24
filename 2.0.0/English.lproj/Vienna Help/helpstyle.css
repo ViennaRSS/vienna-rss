@@ -14,6 +14,18 @@ a {
 	font-size: 12pt;
 	color: #000000;
 }
+li {
+	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-weight: 100;
+	font-size: 9pt;
+	color: #000000;
+}
+h2 {
+	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 10pt;
+	color: #000000;
+}
 p {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-weight: 100;
