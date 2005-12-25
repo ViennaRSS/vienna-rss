@@ -8,6 +8,7 @@ Thanks!
 
 2.0.0.2018
 ----------
+- Improved handling of feeds with invalid XML encoding so most of these are now accepted.
 - Fix Growl integration to work in localised builds.
 - Fix handling of folder icons from sites like FeedBurner.
 - Finalised help file for 2.0 release.
