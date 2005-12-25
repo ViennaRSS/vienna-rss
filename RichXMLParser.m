@@ -487,7 +487,7 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					continue;
 				}
 				
@@ -508,7 +508,7 @@
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -677,14 +677,14 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"content"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					continue;
 				}
 				
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"summary"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					continue;
 				}
 				
