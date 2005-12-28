@@ -223,7 +223,7 @@ static NSArray * iconArray = nil;
 						[NSImage imageNamed:@"smallFolder.tiff"],
 						[NSImage imageNamed:@"searchFolder.tiff"],
 						[NSImage imageNamed:@"rssFolder.tiff"],
-						[NSImage imageNamed:@"rssFeed.tiff"],
+						[NSImage imageNamed:@"rssFeedNew.tiff"],
 						[NSImage imageNamed:@"trashFolder.tiff"],
 						nil] retain];
 	return iconArray;
