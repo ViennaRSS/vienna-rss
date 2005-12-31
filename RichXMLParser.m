@@ -268,9 +268,11 @@
 	const char * srcEndPtr = srcPtr + count;
 
 	// We'll create another data stream with the converted characters
-	int destSize = count;
-	NSMutableData * newXmlData = [NSMutableData dataWithLength:destSize];
+	NSMutableData * newXmlData = [NSMutableData dataWithLength:count];
 	char * destPtr = [newXmlData mutableBytes];
+	int destCapacity = count;
+	int destSize = count;
+	int destIndex = 0;
 
 	while (srcPtr < srcEndPtr)
 	{
@@ -279,38 +281,50 @@
 		{
 			// Copy UTF-8 lead bytes unchanged. The parser can cope with
 			// these fine.
-			*destPtr++ = ch;
+			destPtr[destIndex++] = ch;
 			while (srcPtr < srcEndPtr && (*srcPtr & 0x80))
-				*destPtr++ = *srcPtr++;
+				destPtr[destIndex++] = *srcPtr++;
 		}
 		else if (ch > 0x7F)
 		{
 			// Other characters with their high bits set are not valid UTF-8.
 			// But regardless of the encoding scheme, their entity equivalents
 			// are. So convert them into a hex entity character code.
-			[newXmlData setLength:destSize += 5];
-			*destPtr++ = '&';
-			*destPtr++ = '#';
-			*destPtr++ = 'x';
-			*destPtr++ = "0123456789ABCDEF"[(ch / 16)];
-			*destPtr++ = "0123456789ABCDEF"[(ch % 16)];
-			*destPtr++ = ';';
+			if (destSize + 5 > destCapacity)
+			{
+				[newXmlData setLength:destCapacity += 256];
+				destPtr = [newXmlData mutableBytes];
+			}
+			destPtr[destIndex++] = '&';
+			destPtr[destIndex++] = '#';
+			destPtr[destIndex++] = 'x';
+			destPtr[destIndex++] = "0123456789ABCDEF"[(ch / 16)];
+			destPtr[destIndex++] = "0123456789ABCDEF"[(ch % 16)];
+			destPtr[destIndex++] = ';';
+			destSize += 5;
 		}
-		else if (ch == '&' && srcPtr < srcEndPtr && !isalpha(*srcPtr))
+		else if (ch == '&' && srcPtr < srcEndPtr && *srcPtr != '#' && !isalpha(*srcPtr))
 		{
 			// Some feeds use a '&' outside of its intended use as an entity
 			// delimiter. So if '&' is followed by a non-alphanumeric, make it
 			// into its entity equivalent.
-			[newXmlData setLength:destSize += 4];
-			*destPtr++ = '&';
-			*destPtr++ = 'a';
-			*destPtr++ = 'm';
-			*destPtr++ = 'p';
-			*destPtr++ = ';';
+			if (destSize + 4 > destCapacity)
+			{
+				[newXmlData setLength:destCapacity += 256];
+				destPtr = [newXmlData mutableBytes];
+			}
+			destPtr[destIndex++] = '&';
+			destPtr[destIndex++] = 'a';
+			destPtr[destIndex++] = 'm';
+			destPtr[destIndex++] = 'p';
+			destPtr[destIndex++] = ';';
+			destSize += 4;
 		}
 		else
-			*destPtr++ = ch;
+			destPtr[destIndex++] = ch;
 	}
+	NSAssert(destIndex == destSize, @"Did not copy all data bytes to destination buffer");
+	[newXmlData setLength:destIndex];
 	return newXmlData;
 }
 
@@ -535,7 +549,7 @@
 					continue;
 				}
 				
-				// Parse item author
+				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
 					NSString * linkName = [[subItemTree valueOfElement] trim];
@@ -704,9 +718,12 @@
 						[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
 						hasLink = YES;
 					}
-					else if ([subItemTree valueOfAttribute:@"href"] != nil && entryBase != nil)
+					else if ([subItemTree valueOfAttribute:@"href"] != nil)
 					{
-						[newItem setLink:[entryBase stringByAppendingPathComponent:[subItemTree valueOfAttribute:@"href"]]];
+						if (entryBase != nil)
+							[newItem setLink:[entryBase stringByAppendingPathComponent:[subItemTree valueOfAttribute:@"href"]]];
+						else
+							[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
 						hasLink = YES;
 					}
 					continue;

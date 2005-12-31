@@ -436,7 +436,7 @@ static NSMutableDictionary * entityMap = nil;
 	NSMutableString * processedString = [[NSMutableString alloc] initWithString:stringToProcess];
 	int entityStart;
 	int entityEnd;
-	
+
 	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
 	while (entityStart != NSNotFound)
 	{
@@ -537,7 +537,6 @@ static NSMutableDictionary * entityMap = nil;
  */
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
 {
-	NSScanner * scanner = [NSScanner scannerWithString:dateString];
 	int yearValue = 0;
 	int monthValue = 1;
 	int dayValue = 0;
@@ -547,12 +546,18 @@ static NSMutableDictionary * entityMap = nil;
 	int tzOffset = 0;
 
 	// Let CURL have a crack at parsing since it knows all about the
-	// RSS/HTTP formats.
+	// RSS/HTTP formats. Add a hack to substitute UT with GMT as it doesn't
+	// seem to be able to parse the former.
+	dateString = [dateString trim];
+	if ([dateString hasSuffix:@" UT"])
+		dateString = [[dateString substringToIndex:[dateString length] - 3] stringByAppendingString:@" GMT"];
+
 	time_t theTime = curl_getdate([dateString cString], NULL);
 	if (theTime != -1)
 		return [NSDate dateWithTimeIntervalSince1970:theTime];
 
 	// Otherwise do it ourselves.
+	NSScanner * scanner = [NSScanner scannerWithString:dateString];
 	if (![scanner scanInt:&yearValue])
 		return nil;
 	if (yearValue < 100)
