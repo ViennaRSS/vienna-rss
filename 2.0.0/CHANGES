@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2019
+----------
+- New RSS feed icon.
+- Fixed a few more feed parsing issues.
+
 2.0.0.2018
 ----------
 - Improved handling of feeds with invalid XML encoding so most of these are now accepted.
