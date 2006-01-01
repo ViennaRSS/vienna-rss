@@ -619,6 +619,7 @@
 	NSString * linkBase = [[feedTree valueOfAttribute:@"xml:base"] stringByDeletingLastPathComponent];
 
 	// Iterate through the atom items
+	NSString * defaultAuthor = @"";
 	int count = [feedTree countOfChildren];
 	int index;
 	
@@ -626,7 +627,6 @@
 	{
 		XMLParser * subTree = [feedTree treeByIndex:index];
 		NSString * nodeName = [subTree nodeName];
-		NSString * defaultAuthor = @"";
 
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
@@ -653,7 +653,8 @@
 		// that doesn't have an explicit author.
 		if ([nodeName isEqualToString:@"author"])
 		{
-			defaultAuthor = [subTree valueOfElement];
+			XMLParser * emailTree = [subTree treeByName:@"name"];
+			defaultAuthor = [emailTree valueOfElement];
 			continue;
 		}			
 		
