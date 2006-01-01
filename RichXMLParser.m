@@ -234,7 +234,8 @@
 {
 	BOOL success = NO;
 	NS_DURING
-	if ([self setData:[self preFlightValidation:xmlData]])
+	NSData * parsedXmlData = [self preFlightValidation:xmlData];
+	if (parsedXmlData && [self setData:parsedXmlData])
 	{
 		XMLParser * subtree;
 		
@@ -264,8 +265,8 @@
 -(NSData *)preFlightValidation:(NSData *)xmlData
 {
 	int count = [xmlData length];
-	const char * srcPtr = [xmlData bytes];
-	const char * srcEndPtr = srcPtr + count;
+	const unsigned char * srcPtr = [xmlData bytes];
+	const unsigned char * srcEndPtr = srcPtr + count;
 
 	// We'll create another data stream with the converted characters
 	NSMutableData * newXmlData = [NSMutableData dataWithLength:count];
@@ -277,7 +278,7 @@
 	while (srcPtr < srcEndPtr)
 	{
 		unsigned char ch = *srcPtr++;
-		if (ch >= 0xC0 && ch <= 0xFD)
+		if (ch >= 0xC0 && ch <= 0xFD && srcPtr < srcEndPtr && *srcPtr >= 0x80 && *srcPtr <= 0xBF)
 		{
 			// Copy UTF-8 lead bytes unchanged. The parser can cope with
 			// these fine.
@@ -325,7 +326,11 @@
 	}
 	NSAssert(destIndex == destSize, @"Did not copy all data bytes to destination buffer");
 	[newXmlData setLength:destIndex];
-	return newXmlData;
+	
+	// Make sure that the last valid character of the feed is '>' otherwise it was truncated. The
+	// CFXML parser annoyingly crashes if it is given a truncated feed.
+	while (--destIndex > 0 && isspace(destPtr[destIndex]));
+	return (destPtr[destIndex] == '>') ? newXmlData : nil;
 }
 
 /* initRSSFeed
@@ -501,7 +506,7 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
-					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
+					[newItem setDescription:[subItemTree valueOfElement]];
 					continue;
 				}
 				
@@ -517,12 +522,12 @@
 					hasGUID = YES;
 					continue;
 				}
-				
+
 				// Parse detailed item description. This overrides the existing
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
-					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
+					[newItem setDescription:[subItemTree valueOfElement]];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -691,14 +696,14 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"content"])
 				{
-					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
+					[newItem setDescription:[subItemTree valueOfElement]];
 					continue;
 				}
 				
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"summary"])
 				{
-					[newItem setDescription:[XMLParser processAttributes:[subItemTree valueOfElement]]];
+					[newItem setDescription:[subItemTree valueOfElement]];
 					continue;
 				}
 				
