@@ -455,8 +455,15 @@ typedef enum {
  */
 -(void)pumpFolderIconRefresh:(Folder *)folder
 {
-	if (([folder flags] & MA_FFlag_CheckForImage) && [folder homePage] != nil && ![[folder homePage] isBlank])
+	if (([folder flags] & MA_FFlag_CheckForImage))
 	{
+		// Do nothing if there's no homepage associated with the feed.
+		if ([folder homePage] == nil || [[folder homePage] isBlank])
+		{
+			[folder clearFlag:MA_FFlag_CheckForImage];
+			return;
+		}
+		
 		// The activity log name we use depends on whether or not this folder has a real name.
 		Database * db = [Database sharedDatabase];
 		NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
@@ -466,7 +473,7 @@ typedef enum {
 
 		AsyncConnection * conn = [[AsyncConnection alloc] init];
 		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
-		
+
 		if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
 						  username:nil
 						  password:nil

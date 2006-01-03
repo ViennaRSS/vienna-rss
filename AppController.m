@@ -1018,7 +1018,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Create attributes for drawing the count. In our case, we're drawing using in
 	// 26pt Helvetica bold white.
 	NSDictionary * attributes = [[NSDictionary alloc] 
-		initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:26], NSFontAttributeName,
+		initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:25], NSFontAttributeName,
 			[NSColor whiteColor], NSForegroundColorAttributeName, nil];
 	NSSize numSize = [countdown sizeWithAttributes:attributes];
 
@@ -1028,12 +1028,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					 fromRect:NSMakeRect(0, 0, iconSize.width, iconSize.height) 
 					operation:NSCompositeSourceOver 
 					 fraction:1.0f];
+	
 	float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
-	max += 16;
+	max += 19;
 	NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
-	NSBezierPath * bp = [NSBezierPath bezierPathWithOvalInRect:circleRect];
-	[[NSColor colorWithCalibratedRed:0.8f green:0.0f blue:0.0f alpha:1.0f] set];
-	[bp fill];
+
+	// Draw the star image and scale it so the unread count will fit inside.
+	NSImage * starImage = [NSImage imageNamed:@"unreadStar1.tiff"];
+	[starImage setScalesWhenResized:YES];
+	[starImage setSize:NSMakeSize(max, max)];
+	[starImage compositeToPoint:NSMakePoint(iconSize.width - max, iconSize.height - max) operation:NSCompositeSourceOver];
 
 	// Draw the count in the red circle
 	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
@@ -1637,6 +1641,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)deleteMessage:(id)sender
 {
+	if ([mainWindow firstResponder] != [mainArticleView mainView])
+		return;
 	if ([self selectedArticle] != nil && ![db readOnly])
 	{
 		Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
@@ -2167,6 +2173,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	SEL	theAction = [menuItem action];
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isArticleView = [browserView activeTabView] == mainArticleView;
+	BOOL focusIsInArticleList = [mainWindow firstResponder] == [mainArticleView mainView];
 
 	if (theAction == @selector(printDocument:))
 	{
@@ -2292,11 +2299,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(restoreMessage:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		return focusIsInArticleList && IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		return focusIsInArticleList && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(emptyTrash:))
 	{
@@ -2348,7 +2355,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (focusIsInArticleList && thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	else if (theAction == @selector(markRead:))
 	{
@@ -2360,7 +2367,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (focusIsInArticleList && thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	return YES;
 }
