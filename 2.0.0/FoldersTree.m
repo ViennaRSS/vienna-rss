@@ -141,6 +141,9 @@
 	// Register for dragging
 	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];
+	
+	// Make sure selected row is visible
+	[outlineView scrollRowToVisible:[outlineView selectedRow]];
 }
 
 /* setController
@@ -185,7 +188,7 @@
 	Preferences * prefs = [Preferences standardPreferences];
 	cellFont = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
 	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
-	
+
 	height = [boldCellFont defaultLineHeightForFont];
 	[outlineView setRowHeight:height + 3];
 }

@@ -645,7 +645,13 @@
 		// Parse link
 		if ([nodeName isEqualToString:@"link"])
 		{
-			[self setLink:[subTree valueOfAttribute:@"href"]];
+			if ([[subTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
+			{
+				if (linkBase != nil)
+					[self setLink:[linkBase stringByAppendingPathComponent:[subTree valueOfAttribute:@"href"]]];
+				else
+					[self setLink:[subTree valueOfAttribute:@"href"]];
+			}
 			continue;
 		}			
 		

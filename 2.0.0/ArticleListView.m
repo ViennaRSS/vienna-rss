@@ -1252,11 +1252,11 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
-		NSString * articleBody = [theArticle body];
+		NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
+		NSMutableString * articleTitle = [NSMutableString stringWithString:([theArticle title] ? [theArticle title] : @"")];
 		NSString * articleDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
 		NSString * articleLink = [theArticle link] ? [theArticle link] : @"";
 		NSString * articleAuthor = [theArticle author] ? [theArticle author] : @"";
-		NSString * articleTitle = [theArticle title] ? [theArticle title] : @"";
 		NSString * folderTitle = [folder name] ? [folder name] : @"";
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
 		NSString * folderDescription = [folder feedDescription] ? [folder feedDescription] : @"";
@@ -1269,6 +1269,13 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		else
 		{
 			htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
+
+			[articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
+			[articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+
+			[articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
+			[articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+
 			[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
 			[htmlArticle replaceString:@"$ArticleTitle$" withString:[XMLParser quoteAttributes:articleTitle]];
 			[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
@@ -1277,6 +1284,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			[htmlArticle replaceString:@"$FeedTitle$" withString:[XMLParser quoteAttributes:folderTitle]];
 			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
 			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
+			[htmlArticle replaceString:@"$_%$%_" withString:@"$"];
 		}
 
 		// Separate each article with a horizontal divider line
