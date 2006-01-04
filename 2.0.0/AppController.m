@@ -1036,11 +1036,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Draw the star image and scale it so the unread count will fit inside.
 	NSImage * starImage = [NSImage imageNamed:@"unreadStar1.tiff"];
 	[starImage setScalesWhenResized:YES];
-	[starImage setSize:NSMakeSize(max, max)];
-	[starImage compositeToPoint:NSMakePoint(iconSize.width - max, iconSize.height - max) operation:NSCompositeSourceOver];
+	[starImage setSize:circleRect.size];
+	[starImage compositeToPoint:circleRect.origin operation:NSCompositeSourceOver];
 
 	// Draw the count in the red circle
-	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
+	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f + 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
 	[countdown drawAtPoint:point withAttributes:attributes];
 
 	// Now set the new app icon and clean up.

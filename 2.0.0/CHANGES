@@ -6,6 +6,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2020
+----------
+- New 'star' shaped unread count on the application icon.
+- Disable Delete Article unless the article list has focus.
+- Minor fit-and-finish polish to the UI and parsing code.
+
 2.0.0.2019
 ----------
 - New RSS feed icon.
