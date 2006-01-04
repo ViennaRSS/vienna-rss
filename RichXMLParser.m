@@ -379,7 +379,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
+			[self setTitle:[[XMLParser processAttributes:[subTree valueOfElement]] trim]];
 			continue;
 		}
 
@@ -499,7 +499,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]]];
+					[newItem setTitle:[[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim]];
 					continue;
 				}
 				
@@ -631,7 +631,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
+			[self setTitle:[[XMLParser processAttributes:[subTree valueOfElement]] trim]];
 			continue;
 		}
 		
@@ -696,7 +696,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]]];
+					[newItem setTitle:[[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim]];
 					continue;
 				}
 
@@ -893,7 +893,7 @@
 -(void)ensureTitle:(FeedItem *)item
 {
 	if (![item title] || [[item title] isBlank])
-		[item setTitle:[NSString stringByRemovingHTML:[item description]]];
+		[item setTitle:[[NSString stringByRemovingHTML:[item description]] trim]];
 }
 
 /* dealloc
