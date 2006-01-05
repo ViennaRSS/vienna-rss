@@ -34,6 +34,7 @@
 @interface RichXMLParser (Private)
 	-(void)reset;
 	-(NSData *)preFlightValidation:(NSData *)xmlData;
+	-(NSStringEncoding)parseEncodingType:(NSData *)xmlData;
 	-(BOOL)initRSSFeed:(XMLParser *)feedTree isRDF:(BOOL)isRDF;
 	-(XMLParser *)channelTree:(XMLParser *)feedTree;
 	-(BOOL)initRSSFeedHeader:(XMLParser *)feedTree;
@@ -275,6 +276,8 @@
 	int destSize = count;
 	int destIndex = 0;
 
+	// Determine XML encoding
+	NSStringEncoding encodedType = [self parseEncodingType:xmlData];
 	while (srcPtr < srcEndPtr)
 	{
 		unsigned char ch = *srcPtr++;
@@ -286,7 +289,7 @@
 			while (srcPtr < srcEndPtr && (*srcPtr & 0x80))
 				destPtr[destIndex++] = *srcPtr++;
 		}
-		else if (ch > 0x7F)
+		else if (ch > 0x7F && encodedType == NSUTF8StringEncoding)
 		{
 			// Other characters with their high bits set are not valid UTF-8.
 			// But regardless of the encoding scheme, their entity equivalents
@@ -331,6 +334,61 @@
 	// CFXML parser annoyingly crashes if it is given a truncated feed.
 	while (--destIndex > 0 && isspace(destPtr[destIndex]));
 	return (destPtr[destIndex] == '>') ? newXmlData : nil;
+}
+
+/* parseEncodingType
+ * Parse off the encoding field.
+ */
+-(NSStringEncoding)parseEncodingType:(NSData *)xmlData
+{
+	NSStringEncoding encodingType = NSUTF8StringEncoding;
+	const char * textPtr = [xmlData bytes];
+	const char * textEndPtr = textPtr + [xmlData length];
+
+	while (textPtr < textEndPtr && *textPtr != '<')
+		++textPtr;
+
+	// Scan for the encoding attribute name up until the closing tag
+	const char * encodingAttribute = "encoding=";
+	const char * encodingAttributePtr = encodingAttribute;
+	while (textPtr < textEndPtr && *encodingAttributePtr != '\0' && *textPtr != '>')
+	{
+		if (*textPtr == *encodingAttributePtr)
+			++encodingAttributePtr;
+		else
+			encodingAttributePtr = encodingAttribute;
+		++textPtr;
+	}
+
+	// If we found it, parse off the encoding type name
+	if (*encodingAttributePtr == '\0')
+	{
+		if (textPtr < textEndPtr && *textPtr == '"')
+			++textPtr;
+
+		// We need to special case UTF-8 as CFStringConvertIANACharSetNameToEncoding
+		// doesn't recognise it.
+		const char * encodingNamePtr = textPtr;
+		const char * utf8EncodingName = "UTF-8";
+		const char * utf8EncodingNamePtr = utf8EncodingName;
+		while (textPtr < textEndPtr && *textPtr != '"')
+		{
+			if (toupper(*textPtr) == *utf8EncodingNamePtr)
+				++utf8EncodingNamePtr;
+			else
+				utf8EncodingNamePtr = utf8EncodingName;
+			++textPtr;
+		}
+
+		// Now extract the encoding name if it wasn't UTF-8
+		if (*utf8EncodingNamePtr != '\0')
+		{
+			CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, encodingNamePtr, textPtr - encodingNamePtr, kCFStringEncodingISOLatin1, false);
+			encodingType = CFStringConvertIANACharSetNameToEncoding(encodingName);
+			CFRelease(encodingName);
+		}
+	}
+	return encodingType;
 }
 
 /* initRSSFeed
