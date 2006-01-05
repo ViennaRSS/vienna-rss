@@ -1510,6 +1510,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[self goBack:self];
 			return YES;
 
+		case 'k':
+		case 'K':
+			[self markAllRead:self];
+			return YES;
+			
 		case 'm':
 		case 'M':
 			[self markFlagged:self];
