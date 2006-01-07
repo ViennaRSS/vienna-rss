@@ -129,6 +129,10 @@
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
 
+	// Set refresh button behaviour.
+	[refreshButton setAction:@selector(refreshAllSubscriptions:)];
+	[refreshButton setImage:[NSImage imageNamed:@"refresh.tiff"]];
+	
 	// Don't resize the column when items are expanded as this messes up
 	// the placement of the unread count button.
 	[outlineView setAutoresizesOutlineColumn:NO];

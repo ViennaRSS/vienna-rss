@@ -383,7 +383,7 @@
 		// Now extract the encoding name if it wasn't UTF-8
 		if (*utf8EncodingNamePtr != '\0')
 		{
-			CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, encodingNamePtr, textPtr - encodingNamePtr, kCFStringEncodingISOLatin1, false);
+			CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNamePtr, textPtr - encodingNamePtr, kCFStringEncodingISOLatin1, false);
 			encodingType = CFStringConvertIANACharSetNameToEncoding(encodingName);
 			CFRelease(encodingName);
 		}
