@@ -651,9 +651,9 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articles
 {
-	if (isCached)
-		return [cachedArticles allValues];
-	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
+	if (!isCached)
+		[[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
+	return [cachedArticles allValues];
 }
 
 /* articlesWithFilter
