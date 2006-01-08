@@ -85,6 +85,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		db = nil;
 		isBacktracking = NO;
 		isChangingOrientation = NO;
+		blockSelectionHandler = NO;
+		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
 		stylePathMappings = nil;
 		markReadTimer = nil;
@@ -556,7 +558,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	[[NSUserDefaults standardUserDefaults] setInteger:sortDirection forKey:MAPref_SortDirection];
 	[self showSortDirection];
+	blockSelectionHandler = blockMarkRead = YES;
 	[self refreshFolder:NO];
+	blockSelectionHandler = blockMarkRead = NO;
 }
 
 /* scrollToArticle
@@ -939,7 +943,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	else
 	{
 		[articleList selectRow:rowIndex byExtendingSelection:NO];
-		if (currentSelectedRow == -1)
+		if (currentSelectedRow == -1 || blockSelectionHandler)
 		{
 			currentSelectedRow = rowIndex;
 			[self refreshImmediatelyArticleAtCurrentRow];
@@ -1139,6 +1143,26 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	return currentFolderId;
 }
 
+/* menuWillAppear
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+	int row = [articleList rowAtPoint:[articleList convertPoint:[theEvent locationInWindow] fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if ([articleList numberOfSelectedRows] <= 1)
+		{
+			blockSelectionHandler = YES;
+			[articleList selectRow:row byExtendingSelection:NO];
+			[self refreshArticleAtCurrentRow:NO];
+			blockSelectionHandler = NO;
+		}
+	}
+}
+
 /* selectFolderWithFilter
  * Switches to the specified folder and displays articles filtered by whatever is in
  * the search field.
@@ -1169,12 +1193,12 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	if (currentSelectedRow >= 0)
 	{
 		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
-		if (![theArticle isRead])
+		if (![theArticle isRead] && !blockMarkRead)
 		{
 			[markReadTimer invalidate];
 			[markReadTimer release];
 			markReadTimer = nil;
-			
+
 			float interval = [[Preferences standardPreferences] markReadInterval];
 			if (interval > 0 && !isAppInitialising)
 				markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
@@ -1206,14 +1230,19 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	else
 	{
 		NSAssert(currentSelectedRow < (int)[currentArrayOfArticles count], @"Out of range row index received");
-		if (!delayFlag)
+		[selectionTimer invalidate];
+		[selectionTimer release];
+		selectionTimer = nil;
+
+		float interval = [[Preferences standardPreferences] selectionChangeInterval];
+		if (interval == 0 || !delayFlag)
 			[self refreshImmediatelyArticleAtCurrentRow];
 		else
-		{
-			[selectionTimer invalidate];
-			[selectionTimer release];
-			selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(startSelectionChange:) userInfo:nil repeats:NO] retain];
-		}
+			selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:interval
+															   target:self
+															 selector:@selector(startSelectionChange:) 
+															 userInfo:nil 
+															  repeats:NO] retain];
 
 		// Add this to the backtrack list
 		if (!isBacktracking)
@@ -1400,12 +1429,15 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 }
 
 /* tableViewSelectionDidChange [delegate]
- * Handle the selection changing in the table view.
+ * Handle the selection changing in the table view unless blockSelectionHandler is set.
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	currentSelectedRow = [articleList selectedRow];
-	[self refreshArticleAtCurrentRow:YES];
+	if (!blockSelectionHandler)
+	{
+		currentSelectedRow = [articleList selectedRow];
+		[self refreshArticleAtCurrentRow:YES];
+	}
 }
 
 /* didClickTableColumns

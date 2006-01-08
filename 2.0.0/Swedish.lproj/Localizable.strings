@@ -35,6 +35,8 @@
 "Text" = "Text";
 "Headlines" = "Rubriker";
 "Link" = "Länk";
+"Deleted" = "Deleted";
+"GUID" = "GUID";
 "No" = "Nej";
 "Yes" = "Ja";
 "Version %@.%@" = "Version %@.%@";
@@ -99,7 +101,7 @@
 "Delete multiple folders text" = "Är du säker på att du vill radera alla %d markerade mappar? Det här valet går ej att ångra.";
 "Delete multiple folders" = "Radera flera mappar";
 "Delete folder status" = "Raderar mapp '%@'...";
-"An error has occurred." = "Ett fel har uppstått.";
+"An error has occurred" = "Ett fel har uppstått.";
 "Your software is up to date" = "Du har redan senaste versionen av Vienna.";
 "Please try again later" = "Försök igen senare.";
 "An update is now available" = "En nyare version finns nu tillgänglig";
@@ -206,3 +208,4 @@
 "%.1f of %.1f KB" = "%.1f av %.1f K";
 "%.1f of %.1f bytes" = "%.1f av %.1f byte";
 "An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
+"Connecting to %@" = "Connecting to %@";

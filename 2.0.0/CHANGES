@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2021
+----------
+- Fixed a few left-over localisation issues.
+- Parse out a subset of HTML tags from titles.
+
 2.0.0.2020
 ----------
 - New 'star' shaped unread count on the application icon.

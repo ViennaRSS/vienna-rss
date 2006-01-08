@@ -22,6 +22,7 @@
 
 @interface Preferences : NSObject {
 	float markReadInterval;
+	float selectionChangeInterval;
 	int minimumFontSize;
 	int refreshFrequency;
 	int autoExpireDuration;
@@ -52,6 +53,9 @@
 // Download folder
 -(NSString *)downloadFolder;
 -(void)setDownloadFolder:(NSString *)newFolder;
+
+// Selection change interval
+-(float)selectionChangeInterval;
 
 // Mark read interval
 -(float)markReadInterval;

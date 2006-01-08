@@ -47,6 +47,7 @@ NSString * MAPref_ReadingPaneOnRight = @"ReadingPaneOnRight";
 NSString * MAPref_EnableBloglinesSupport = @"EnableBloglinesSupport";
 NSString * MAPref_BloglinesEmailAddress = @"BloglinesEmailAddress";
 NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
+NSString * MAPref_SelectionChangeInterval = @"SelectionChangeInterval";
 NSString * MAPref_OpenLinksInVienna = @"OpenLinksInVienna";
 NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
 NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
@@ -60,6 +61,7 @@ const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
 const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
+const float MA_Default_Selection_Change_Interval = 0.3;
 const int MA_Default_AutoExpireDuration = 0;
 
 // Custom pasteboard types

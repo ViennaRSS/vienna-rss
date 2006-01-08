@@ -25,7 +25,7 @@
 @end
 
 @interface NSString (StringExtensions)
-	+(NSString *)stringByRemovingHTML:(NSString *)theString;
+	+(NSString *)stringByRemovingHTML:(NSString *)theString validTags:(NSArray *)tagArray;
 	-(NSString *)firstNonBlankLine;
 	-(int)indexOfCharacterInString:(char)ch afterIndex:(int)startIndex;
 	-(NSString *)stringByEscapingExtendedCharacters;

@@ -19,6 +19,7 @@
 //
 
 #import "StringExtensions.h"
+#import "ArrayExtensions.h"
 
 @implementation NSMutableString (MutableStringExtensions)
 
@@ -63,7 +64,7 @@
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */
-+(NSString *)stringByRemovingHTML:(NSString *)theString
++(NSString *)stringByRemovingHTML:(NSString *)theString validTags:(NSArray *)tagArray
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
 	int maxChrs = [theString length];
@@ -102,15 +103,30 @@
 			{
 				NSRange tagRange = NSMakeRange(tagStartIndex, tagLength);
 				NSString * tag = [[aString substringWithRange:tagRange] lowercaseString];
-				[aString deleteCharactersInRange:tagRange];
+				int indexOfTagName = 1;
+
+				// Extract the tag name
+				if ([tag characterAtIndex:indexOfTagName] == '/')
+					++indexOfTagName;
 				
-				// Reset scan to the point where the tag started minus one because
-				// we bump up indexOfChr at the end of the loop.
-				indexOfChr = tagStartIndex - 1;
-				maxChrs = [aString length];
+				int chIndex = indexOfTagName;
+				unichar ch = [tag characterAtIndex:chIndex];
+				while (chIndex < tagLength && [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:ch])
+					ch = [tag characterAtIndex:++chIndex];
+	
+				NSString * tagName = [tag substringWithRange:NSMakeRange(indexOfTagName, chIndex - indexOfTagName)];
+				if (tagArray == nil || [tagArray indexOfStringInArray:tagName] != NSNotFound)
+				{
+					[aString deleteCharactersInRange:tagRange];
+
+					// Reset scan to the point where the tag started minus one because
+					// we bump up indexOfChr at the end of the loop.
+					indexOfChr = tagStartIndex - 1;
+					maxChrs = [aString length];
+				}
 				isInTag = NO;
-				
-				if (([tag isEqualToString:@"<br>"] || [tag isEqualToString:@"<br />"]) && indexOfChr >= 0)
+
+				if ([tagName isEqualToString:@"br"] && indexOfChr >= 0)
 				{
 					lengthToLastWord = tagStartIndex;
 					break;

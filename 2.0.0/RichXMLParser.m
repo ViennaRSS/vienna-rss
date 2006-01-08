@@ -206,6 +206,10 @@
 		link = nil;
 		items = nil;
 		orderArray = nil;
+
+		// Typical HTML tags that can appear in titles.
+		titleTags = [[NSArray arrayWithObjects:@"b", @"div", @"i", @"span", @"u", @"img",
+			@"a", @"strong", @"strike", @"p", @"small", @"sub", @"sup", nil] retain];
 	}
 	return self;
 }
@@ -557,7 +561,8 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim]];
+					NSString * newTitle = [[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim];
+					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
 					continue;
 				}
 				
@@ -638,8 +643,8 @@
 			[self ensureTitle:newItem];
 
 			// Add this item in the proper location in the array
-			int indexOfItem = itemIdentifier ? [orderArray indexOfStringInArray:itemIdentifier] : -1;
-			if (indexOfItem == -1)
+			int indexOfItem = itemIdentifier ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
+			if (indexOfItem == NSNotFound)
 				indexOfItem = [items count];
 			[items insertObject:newItem atIndex:indexOfItem];
 			[newItem release];
@@ -754,7 +759,8 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim]];
+					NSString * newTitle = [[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim];
+					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
 					continue;
 				}
 
@@ -951,7 +957,7 @@
 -(void)ensureTitle:(FeedItem *)item
 {
 	if (![item title] || [[item title] isBlank])
-		[item setTitle:[[NSString stringByRemovingHTML:[item description]] trim]];
+		[item setTitle:[[NSString stringByRemovingHTML:[item description] validTags:nil] trim]];
 }
 
 /* dealloc
@@ -959,6 +965,7 @@
  */
 -(void)dealloc
 {
+	[titleTags release];
 	[orderArray release];
 	[title release];
 	[description release];

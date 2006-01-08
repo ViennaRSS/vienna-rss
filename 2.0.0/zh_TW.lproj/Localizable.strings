@@ -35,6 +35,8 @@
 "Text" = "內文";
 "Headlines" = "標題";
 "Link" = "鍊結";
+"Deleted" = "Deleted";
+"GUID" = "GUID";
 "No" = "否";
 "Yes" = "是";
 "Version %@.%@" = "版本 %@.%@";
@@ -99,7 +101,7 @@
 "Delete multiple folders text" = "您確定要刪除您所選擇的 %d 個檔案夾嗎？這項操作無法還原。";
 "Delete multiple folders" = "刪除多個檔案夾";
 "Delete folder status" = "正在刪除 \"%@\" 檔案夾…";
-"An error has occurred." = "發生錯誤。";
+"An error has occurred" = "發生錯誤。";
 "Your software is up to date" = "您的 Vienna 是最新版的。";
 "Please try again later" = "請稍後再試。";
 "An update is now available" = "網路上已經有新版的 Vienna 可供下載";
@@ -205,3 +207,4 @@
 "%.1f of %.1f KB" = "%.1f / %.1f KB";
 "%.1f of %.1f bytes" = "%.1f / %.1f bytes";
 "An error occurred when this feed was last refreshed" = "在最再後一次更新這個訂閱頻道的時候發生錯誤";
+"Connecting to %@" = "Connecting to %@";

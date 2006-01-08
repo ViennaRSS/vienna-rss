@@ -47,6 +47,7 @@ extern NSString * MAPref_ReadingPaneOnRight;
 extern NSString * MAPref_EnableBloglinesSupport;
 extern NSString * MAPref_BloglinesEmailAddress;
 extern NSString * MAPref_MarkReadInterval;
+extern NSString * MAPref_SelectionChangeInterval;
 extern NSString * MAPref_OpenLinksInVienna;
 extern NSString * MAPref_OpenLinksInBackground;
 extern NSString * MAPref_ShowScriptsMenu;
@@ -59,6 +60,7 @@ extern NSString * MAPref_ShowFolderImages;
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
 extern float MA_Default_Read_Interval;
+extern float MA_Default_Selection_Change_Interval;
 extern int MA_Default_MinimumFontSize;
 extern int MA_Default_AutoExpireDuration;
 

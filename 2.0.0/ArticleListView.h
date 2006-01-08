@@ -46,6 +46,8 @@
 	int currentFolderId;
 	BOOL isAppInitialising;
 	BOOL isChangingOrientation;
+	BOOL blockSelectionHandler;
+	BOOL blockMarkRead;
 	AppController * controller;
 	Database * db;
 
