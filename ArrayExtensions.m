@@ -20,7 +20,7 @@
 
 #import "ArrayExtensions.h"
 
-@implementation NSMutableArray (ArrayExtensions)
+@implementation NSArray (ArrayExtensions)
 
 /* indexOfStringInArray
  * Returns the index of the specified string in the receiver. Or returns
@@ -38,6 +38,6 @@
 			return index;
 		++index;
 	}
-	return -1;
+	return NSNotFound;
 }
 @end

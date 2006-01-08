@@ -35,6 +35,8 @@
 "Text" = "Texte";
 "Headlines" = "Titres";
 "Link" = "Lien";
+"Deleted" = "Deleted";
+"GUID" = "GUID";
 "No" = "Non";
 "Yes" = "Oui";
 "Version %@.%@" = "Version %@.%@";
@@ -99,7 +101,7 @@
 "Delete multiple folders text" = "Souhaitez-vous vraiment supprimer les %d groupes sélectionnés ? Cette opération est irréversible.";
 "Delete multiple folders" = "Suppression de plusieurs groupes";
 "Delete folder status" = "Suppresion du dossier '%@'...";
-"An error has occurred." = "Une erreur est apparue.";
+"An error has occurred" = "Une erreur est apparue.";
 "Your software is up to date" = "Votre version de Vienna est à jour.";
 "Please try again later" = "SVP, réessayez plus tard.";
 "An update is now available" = "Une mise à jour est disponible";
@@ -206,3 +208,4 @@
 "%.1f of %.1f KB" = "%.1f sur %.1f Ko";
 "%.1f of %.1f bytes" = "%.1f sur %.1f octets";
 "An error occurred when this feed was last refreshed" = "Une erreur est apparue lors du rafraîchissement de ce flux";
+"Connecting to %@" = "Connecting to %@";

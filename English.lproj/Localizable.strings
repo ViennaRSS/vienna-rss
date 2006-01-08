@@ -35,6 +35,8 @@
 "Text" = "Text";
 "Headlines" = "Headlines";
 "Link" = "Link";
+"Deleted" = "Deleted";
+"GUID" = "GUID";
 "No" = "No";
 "Yes" = "Yes";
 "Version %@.%@" = "Version %@.%@";
@@ -99,7 +101,7 @@
 "Delete multiple folders text" = "Are you sure you want to delete all %d selected folders? This operation cannot be undone.";
 "Delete multiple folders" = "Delete multiple folders";
 "Delete folder status" = "Deleting folder \"%@\"...";
-"An error has occurred." = "An error has occurred.";
+"An error has occurred" = "An error has occurred.";
 "Your software is up to date" = "Your version of Vienna is up to date.";
 "Please try again later" = "Please try again later.";
 "An update is now available" = "An update is now available";
@@ -206,3 +208,4 @@
 "%.1f of %.1f KB" = "%.1f of %.1f KB";
 "%.1f of %.1f bytes" = "%.1f of %.1f bytes";
 "An error occurred when this feed was last refreshed" = "An error occurred when this feed was last refreshed";
+"Connecting to %@" = "Connecting to %@";

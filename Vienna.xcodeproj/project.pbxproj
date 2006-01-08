@@ -1460,7 +1460,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2020;
+				BUILD_NUMBER = 2021;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1485,7 +1485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2020;
+				BUILD_NUMBER = 2021;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1510,7 +1510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2020;
+				BUILD_NUMBER = 2021;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

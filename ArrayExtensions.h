@@ -20,6 +20,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSMutableArray (ArrayExtensions)
+@interface NSArray (ArrayExtensions)
 	-(int)indexOfStringInArray:(NSString *)theString;
 @end

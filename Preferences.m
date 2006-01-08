@@ -51,6 +51,7 @@ static Preferences * _standardPreferences = nil;
 		refreshOnStartup = [defaults boolForKey:MAPref_CheckForNewArticlesOnStartup];
 		checkForNewOnStartup = [defaults boolForKey:MAPref_CheckForUpdatesOnStartup];
 		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
+		selectionChangeInterval = [defaults floatForKey:MAPref_SelectionChangeInterval];
 		minimumFontSize = [defaults integerForKey:MAPref_MinimumFontSize];
 		enableMinimumFontSize = [defaults boolForKey:MAPref_UseMinimumFontSize];
 		autoExpireDuration = [defaults integerForKey:MAPref_AutoExpireDuration];
@@ -107,6 +108,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
+	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Selection_Change_Interval] forKey:MAPref_SelectionChangeInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
@@ -326,6 +328,15 @@ static Preferences * _standardPreferences = nil;
 		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_CheckForUpdatesOnStartup];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
+}
+
+/* selectionChangeInterval
+ * Return the number of seconds after the selection is changed in the article list before the article
+ * pane is actually refreshed. A value of zero means the article pane is refreshed instantly.
+ */
+-(float)selectionChangeInterval
+{
+	return selectionChangeInterval;
 }
 
 /* markReadInterval

@@ -145,7 +145,7 @@
  */
 -(void)macPADErrorOccurred:(NSNotification *)aNotification
 {
-	updateTitle = NSLocalizedString(@"An error has occurred.", nil);
+	updateTitle = @"An error has occurred";
 	updateStatus = [[[aNotification userInfo] objectForKey:MacPADErrorMessage] retain];
 	updateAvailable = NO;
 	[self doneUpdateCheck];
@@ -156,8 +156,8 @@
  */
 -(void)macPADCheckFinished:(NSNotification *)aNotification
 {
-	updateTitle = NSLocalizedString(@"Your software is up to date", nil);
-	updateStatus = NSLocalizedString(@"Please try again later", nil);
+	updateTitle = @"Your software is up to date";
+	updateStatus = @"Please try again later";
 	updateAvailable = [[[aNotification userInfo] objectForKey:MacPADErrorCode] intValue] == kMacPADResultNewVersion;
 	[self doneUpdateCheck];
 }
