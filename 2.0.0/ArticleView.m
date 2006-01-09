@@ -50,7 +50,8 @@
 		controller = nil;
 		openLinksInNewTab = NO;
 		isFeedRedirect = NO;
-		
+		isDownload = NO;
+
 		// We'll be the webview policy handler.
 		[self setPolicyDelegate:self];
 		[self setDownloadDelegate:[DownloadManager sharedInstance]];
@@ -85,6 +86,22 @@
 -(void)setOpenLinksInNewTab:(BOOL)flag
 {
 	openLinksInNewTab = flag;
+}
+
+/* setIsDownload
+ * Specifies whether the current load is a file download.
+ */
+-(void)setIsDownload:(BOOL)flag
+{
+	isDownload = flag;
+}
+
+/* isDownload
+ * Returns whether the current load is a file download.
+ */
+-(BOOL)isDownload
+{
+	return isDownload;
 }
 
 /* setIsFeedRedirect
@@ -155,6 +172,7 @@
 	// misconfiguration. Do this before we check the MIME type.
 	if ([self isDownloadFileType:[request URL]])
 	{
+		[self setIsDownload:YES];
 		[listener download];
 		return;
 	}
@@ -167,6 +185,7 @@
 	}
 
 	// Anything else, download it.
+	[self setIsDownload:YES];
 	[listener download];
 }
 

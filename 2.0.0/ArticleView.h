@@ -28,6 +28,7 @@
 	WebPreferences * defaultWebPrefs;
 	BOOL openLinksInNewTab;
 	BOOL isFeedRedirect;
+	BOOL isDownload;
 }
 
 // Public functions
@@ -36,4 +37,5 @@
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
 -(BOOL)isFeedRedirect;
+-(BOOL)isDownload;
 @end
