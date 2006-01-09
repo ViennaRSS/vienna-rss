@@ -153,7 +153,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		// Was this a feed redirect? If so, this isn't an error:
-		if (![webPane isFeedRedirect])
+		if (![webPane isFeedRedirect] && ![webPane isDownload])
 			[self setError:error];
 		[self endFrameLoad];
 	}
