@@ -233,6 +233,14 @@
 {
 }
 
+/* webViewClose
+ * Handle scripting closing a window by just closing the tab.
+ */
+-(void)webViewClose:(WebView *)sender
+{
+	[[controller browserView] closeTab:tab];
+}
+
 /* contextMenuItemsForElement
  * Creates a new context menu for our web pane.
  */
