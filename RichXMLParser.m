@@ -311,22 +311,30 @@
 			destPtr[destIndex++] = ';';
 			destSize += 5;
 		}
-		else if (ch == '&' && srcPtr < srcEndPtr && *srcPtr != '#' && !isalpha(*srcPtr))
+		else if (ch == '&' && srcPtr < srcEndPtr && *srcPtr != '#')
 		{
 			// Some feeds use a '&' outside of its intended use as an entity
 			// delimiter. So if '&' is followed by a non-alphanumeric, make it
 			// into its entity equivalent.
-			if (destSize + 4 > destCapacity)
+			const unsigned char * srcTmpPtr = srcPtr;
+			while (srcTmpPtr < srcEndPtr && isalpha(*srcTmpPtr))
+				++srcTmpPtr;
+			if (srcTmpPtr < srcEndPtr && *srcTmpPtr == ';')
+				destPtr[destIndex++] = '&';
+			else
 			{
-				[newXmlData setLength:destCapacity += 256];
-				destPtr = [newXmlData mutableBytes];
+				if (destSize + 4 > destCapacity)
+				{
+					[newXmlData setLength:destCapacity += 256];
+					destPtr = [newXmlData mutableBytes];
+				}
+				destPtr[destIndex++] = '&';
+				destPtr[destIndex++] = 'a';
+				destPtr[destIndex++] = 'm';
+				destPtr[destIndex++] = 'p';
+				destPtr[destIndex++] = ';';
+				destSize += 4;
 			}
-			destPtr[destIndex++] = '&';
-			destPtr[destIndex++] = 'a';
-			destPtr[destIndex++] = 'm';
-			destPtr[destIndex++] = 'p';
-			destPtr[destIndex++] = ';';
-			destSize += 4;
 		}
 		else
 			destPtr[destIndex++] = ch;

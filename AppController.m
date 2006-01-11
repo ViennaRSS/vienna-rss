@@ -1030,7 +1030,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					 fraction:1.0f];
 	
 	float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
-	max += 19;
+	max += 21;
 	NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
 
 	// Draw the star image and scale it so the unread count will fit inside.

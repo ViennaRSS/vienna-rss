@@ -105,7 +105,10 @@
 	[newItem setLabel:NSLocalizedString([prefsItem valueForKey:@"Title"], nil)];
 	[newItem setTarget:self];
 	[newItem setAction:@selector(prefsPaneSelection:)];
-	[newItem setImage:[NSImage imageNamed:[prefsItem valueForKey:@"Image"]]];
+	
+	NSString * prefImage = [prefsItem valueForKey:@"Image"];
+	if (prefImage != nil)
+		[newItem setImage:[NSImage imageNamed:prefImage]];
 	return newItem;
 }
 
