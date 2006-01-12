@@ -10,6 +10,8 @@ Thanks!
 ----------
 - Fixed a few left-over localisation issues.
 - Parse out a subset of HTML tags from titles.
+- Add a fix for unescaped & characters in links which some feeds are prone to.
+- Replaced Preference icons as the originals turned out to copyrighted to Nitram+Nunca.
 
 2.0.0.2020
 ----------
