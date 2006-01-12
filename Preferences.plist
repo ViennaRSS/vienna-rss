@@ -8,6 +8,8 @@
 		<string>General</string>
 		<key>ClassName</key>
 		<string>GeneralPreferences</string>
+		<key>Image</key>
+		<string>generalPrefImage.tiff</string>
 	</dict>
 	<key>2</key>
 	<dict>
@@ -15,6 +17,8 @@
 		<string>Appearance</string>
 		<key>ClassName</key>
 		<string>AppearancesPreferences</string>
+		<key>Image</key>
+		<string>appearancePrefImage.tiff</string>
 	</dict>
 </dict>
 </plist>

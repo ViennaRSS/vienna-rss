@@ -166,6 +166,8 @@
 		AADD8963081C1916007C6E88 /* rssFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8962081C1916007C6E88 /* rssFolder.tiff */; };
 		AADD8A0E081C253F007C6E88 /* rssFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8A0D081C253F007C6E88 /* rssFeed.tiff */; };
 		AAE3AF0706570DB700A1FA1F /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
+		AAE3E41C09760B42009E60D6 /* appearancePrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */; };
+		AAE3E42C09760DD2009E60D6 /* generalPrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */; };
 		AAE7A843086B696A009A487E /* add.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE7A842086B696A009A487E /* add.tiff */; };
 		AAE7A846086B6994009A487E /* action.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE7A845086B6994009A487E /* action.tiff */; };
 		AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7A8FF086BB5C4009A487E /* PopupButton.h */; };
@@ -486,6 +488,8 @@
 		AADD8962081C1916007C6E88 /* rssFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFolder.tiff; sourceTree = "<group>"; };
 		AADD8A0D081C253F007C6E88 /* rssFeed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeed.tiff; sourceTree = "<group>"; };
 		AAE3AEF506570DB700A1FA1F /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = appearancePrefImage.tiff; sourceTree = "<group>"; };
+		AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = generalPrefImage.tiff; sourceTree = "<group>"; };
 		AAE7A842086B696A009A487E /* add.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = add.tiff; sourceTree = "<group>"; };
 		AAE7A845086B6994009A487E /* action.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = action.tiff; sourceTree = "<group>"; };
 		AAE7A8FF086BB5C4009A487E /* PopupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupButton.h; sourceTree = "<group>"; };
@@ -660,6 +664,8 @@
 				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 				AAE7A842086B696A009A487E /* add.tiff */,
 				AAE7A845086B6994009A487E /* action.tiff */,
+				AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */,
+				AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
 				AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */,
@@ -1030,6 +1036,8 @@
 				AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */,
 				AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */,
 				AA3D4759096E1BE8000E6F3B /* refresh_new.tiff in Resources */,
+				AAE3E41C09760B42009E60D6 /* appearancePrefImage.tiff in Resources */,
+				AAE3E42C09760DD2009E60D6 /* generalPrefImage.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
