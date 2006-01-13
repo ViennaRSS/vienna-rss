@@ -29,6 +29,8 @@
 	-(NSString *)firstNonBlankLine;
 	-(int)indexOfCharacterInString:(char)ch afterIndex:(int)startIndex;
 	-(NSString *)stringByEscapingExtendedCharacters;
+	-(NSString *)stringByDeletingLastURLComponent;
+	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
 	-(BOOL)hasCharacter:(char)ch;
 	-(NSString *)convertStringToValidPath;
 	-(NSString *)baseURL;

@@ -207,6 +207,40 @@
 	return [self substringWithRange:r];
 }
 
+/* stringByDeletingLastURLComponent
+ * Returns a string with the last URL component removed. It is similar to stringByDeletingLastPathComponent
+ * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
+ */
+-(NSString *)stringByDeletingLastURLComponent
+{
+	int index = [self length] - 1;
+	if (index > 0 && [self characterAtIndex:index] == '/')
+		--index;
+	while (index >= 0 && [self characterAtIndex:index] != '/')
+		--index;
+	if (index <= 0)
+		++index;
+	return [self substringWithRange:NSMakeRange(0, index)];
+}
+
+/* stringByAppendingURLComponent
+ * Appends the specified component to the end of our URL. It is similar to stringByAppendingPathComponent
+ * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
+ */
+-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent
+{
+	NSMutableString * newString = [NSMutableString stringWithString:self];
+	int index = [newString length] - 1;
+	int newIndex = 0;
+
+	if (index >= 0 && [newString characterAtIndex:index] != '/')
+		[newString appendString:@"/"];
+	if ([newComponent length] > 0 && [newComponent characterAtIndex:0] == '/')
+		++newIndex;
+	[newString appendString:[newComponent substringFromIndex:newIndex]];
+	return newString;
+}
+
 /* stringByEscapingExtendedCharacters
  * Returns a string that consisted of the receiver but with all extended characters
  * escaped in the format &#code; where code is the character code.
