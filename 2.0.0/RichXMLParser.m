@@ -209,7 +209,7 @@
 
 		// Typical HTML tags that can appear in titles.
 		titleTags = [[NSArray arrayWithObjects:@"b", @"div", @"i", @"span", @"u", @"img",
-			@"a", @"strong", @"strike", @"p", @"small", @"sub", @"sup", nil] retain];
+			@"a", @"strong", @"strike", @"p", @"small", @"sub", @"sup", @"em", nil] retain];
 	}
 	return self;
 }
@@ -687,7 +687,7 @@
 	items = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	// Look for feed attributes we need to process
-	NSString * linkBase = [[feedTree valueOfAttribute:@"xml:base"] stringByDeletingLastPathComponent];
+	NSString * linkBase = [[feedTree valueOfAttribute:@"xml:base"] stringByDeletingLastURLComponent];
 
 	// Iterate through the atom items
 	NSString * defaultAuthor = @"";
@@ -719,7 +719,7 @@
 			if ([[subTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 			{
 				if (linkBase != nil)
-					[self setLink:[linkBase stringByAppendingPathComponent:[subTree valueOfAttribute:@"href"]]];
+					[self setLink:[linkBase stringByAppendingURLComponent:[subTree valueOfAttribute:@"href"]]];
 				else
 					[self setLink:[subTree valueOfAttribute:@"href"]];
 			}
@@ -731,9 +731,10 @@
 		if ([nodeName isEqualToString:@"author"])
 		{
 			XMLParser * emailTree = [subTree treeByName:@"name"];
-			defaultAuthor = [emailTree valueOfElement];
+			if (emailTree != nil)
+				defaultAuthor = [emailTree valueOfElement];
 			continue;
-		}			
+		}
 		
 		// Parse the date when this feed was last updated
 		if ([nodeName isEqualToString:@"modified"])
@@ -755,9 +756,9 @@
 			BOOL hasLink = NO;
 
 			// Look for and stack the xml:base attribute
-			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByDeletingLastPathComponent];
+			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByDeletingLastURLComponent];
 			if (entryBase != nil && linkBase != nil)
-				entryBase = [linkBase stringByAppendingPathComponent:entryBase];
+				entryBase = [linkBase stringByAppendingURLComponent:entryBase];
 
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
@@ -805,7 +806,7 @@
 					else if ([subItemTree valueOfAttribute:@"href"] != nil)
 					{
 						if (entryBase != nil)
-							[newItem setLink:[entryBase stringByAppendingPathComponent:[subItemTree valueOfAttribute:@"href"]]];
+							[newItem setLink:[entryBase stringByAppendingURLComponent:[subItemTree valueOfAttribute:@"href"]]];
 						else
 							[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
 						hasLink = YES;
