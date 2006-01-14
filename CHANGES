@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2022
+----------
+- More feed parsing issues fixed.
+- Improved General and Appearance icons contributed by Brandon Booth.
+
 2.0.0.2021
 ----------
 - Fixed a few left-over localisation issues.
