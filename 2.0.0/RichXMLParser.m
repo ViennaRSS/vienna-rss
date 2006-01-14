@@ -798,12 +798,7 @@
 				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
-					if ([[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
-					{
-						[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
-						hasLink = YES;
-					}
-					else if ([subItemTree valueOfAttribute:@"href"] != nil)
+					if ([subItemTree valueOfAttribute:@"rel"] == nil || [[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 					{
 						if (entryBase != nil)
 							[newItem setLink:[entryBase stringByAppendingURLComponent:[subItemTree valueOfAttribute:@"href"]]];
