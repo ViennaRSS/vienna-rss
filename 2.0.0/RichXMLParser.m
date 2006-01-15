@@ -200,8 +200,8 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		title = nil;
-		description = nil;
+		[self setTitle:@""];
+		[self setDescription:@""];
 		lastModified = nil;
 		link = nil;
 		items = nil;

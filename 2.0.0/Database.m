@@ -661,7 +661,7 @@ static Database * _sharedDatabase = nil;
 /* untitledFeedFolderName
  * Returns the name given to untitled feed folders.
  */
--(NSString *)untitledFeedFolderName
++(NSString *)untitledFeedFolderName
 {
 	return NSLocalizedString(@"(Untitled Feed)", nil);
 }

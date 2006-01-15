@@ -416,8 +416,7 @@ typedef enum {
 		[self refreshFavIcon:folder];
 
 	// The activity log name we use depends on whether or not this folder has a real name.
-	Database * db = [Database sharedDatabase];
-	NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
+	NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
 	
 	// Compute the URL for this connection
@@ -465,8 +464,7 @@ typedef enum {
 		}
 		
 		// The activity log name we use depends on whether or not this folder has a real name.
-		Database * db = [Database sharedDatabase];
-		NSString * name = [[folder name] isEqualToString:[db untitledFeedFolderName]] ? [folder feedURL] : [folder name];
+		NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
 		
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
@@ -619,7 +617,7 @@ typedef enum {
 			
 			// A notify is only needed if we added any new articles.
 			int folderId = [folder itemId];
-			if ([[folder name] hasPrefix:[db untitledFeedFolderName]])
+			if ([[folder name] hasPrefix:[Database untitledFeedFolderName]] && ![feedTitle isBlank])
 			{
 				// If there's an existing feed with this title, make ours unique
 				// BUGBUG: This duplicates logic in database.m so consider moving it there.
