@@ -66,9 +66,9 @@
 		NSDictionary * entry = [outlineItem attributesForTree];
 		NSString * feedTitle = [XMLParser processAttributes:[entry objectForKey:@"title"]];
 		NSString * feedDescription = [XMLParser processAttributes:[entry objectForKey:@"description"]];
-		NSString * feedURL = [XMLParser processAttributes:[entry objectForKey:@"xmlUrl"]];
-		NSString * feedHomePage = [XMLParser processAttributes:[entry objectForKey:@"htmlUrl"]];
-		NSString * bloglinesSubId = [entry objectForKey:@"BloglinesSubId"];
+		NSString * feedURL = [XMLParser processAttributes:[entry objectForKey:@"xmlurl"]];
+		NSString * feedHomePage = [XMLParser processAttributes:[entry objectForKey:@"htmlurl"]];
+		NSString * bloglinesSubId = [entry objectForKey:@"bloglinessubid"];
 		int bloglinesId = bloglinesSubId ? [bloglinesSubId intValue] : MA_NonBloglines_Folder;
 
 		// Some OPML exports use 'text' instead of 'title'.

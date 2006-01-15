@@ -303,7 +303,16 @@ static NSMutableDictionary * entityMap = nil;
 	if (CFXMLNodeGetTypeCode(node) == kCFXMLNodeTypeElement )
 	{
 		CFXMLElementInfo eInfo = *(CFXMLElementInfo *)CFXMLNodeGetInfoPtr(node);
-		return [[(NSDictionary *)eInfo.attributes retain] autorelease];
+		NSDictionary * dict = (NSDictionary *)eInfo.attributes;
+		NSMutableDictionary * newDict = [NSMutableDictionary dictionary];
+		NSEnumerator *enumerator = [dict keyEnumerator];
+		NSString * keyName;
+
+		// Make a copy of the attributes dictionary but force the keys to
+		// lowercase.
+		while ((keyName = [enumerator nextObject]) != nil)
+			[newDict setObject:[dict objectForKey:keyName] forKey:[keyName lowercaseString]];
+		return newDict;
 	}
 	return nil;
 }
