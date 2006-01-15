@@ -1583,7 +1583,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 
 	// Create then select the new folder.
-	int folderId = [db addRSSFolder:[db untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
+	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
 	if (folderId != -1)
 	{
 		[mainArticleView selectFolderAndArticle:folderId guid:nil];

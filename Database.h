@@ -83,7 +83,7 @@
 -(BOOL)setBloglinesId:(int)folderId newBloglinesId:(long)bloglinesId;
 
 // RSS folder functions
--(NSString *)untitledFeedFolderName;
++(NSString *)untitledFeedFolderName;
 -(NSArray *)arrayOfRSSFolders;
 -(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId subscriptionURL:(NSString *)url;
 
