@@ -280,8 +280,31 @@
 	int destSize = count;
 	int destIndex = 0;
 
-	// Determine XML encoding
+	// Determine XML encoding and BOM
 	NSStringEncoding encodedType = [self parseEncodingType:xmlData];
+	if (count > 2 && srcPtr[0] == 0xFE && srcPtr[1] == 0xFF)
+	{
+		// Copy Unicode UTF-16 big-endian BOM.
+		destPtr[destIndex++] = srcPtr[0];
+		destPtr[destIndex++] = srcPtr[1];
+		srcPtr += 2;
+	}
+	else if (count > 2 && srcPtr[0] == 0xFF && srcPtr[1] == 0xFE)
+	{
+		// Copy Unicode UTF-16 little-endian BOM.
+		destPtr[destIndex++] = srcPtr[0];
+		destPtr[destIndex++] = srcPtr[1];
+		srcPtr += 2;
+	}
+	else if (count > 3 && srcPtr[0] == 0xEF && srcPtr[1] == 0xBB && srcPtr[2] == 0xBF)
+	{
+		// Copy Unicode UTF-8 little-endian BOM.
+		destPtr[destIndex++] = srcPtr[0];
+		destPtr[destIndex++] = srcPtr[1];
+		destPtr[destIndex++] = srcPtr[2];
+		srcPtr += 3;
+	}
+	
 	while (srcPtr < srcEndPtr)
 	{
 		unsigned char ch = *srcPtr++;
@@ -344,7 +367,7 @@
 	
 	// Make sure that the last valid character of the feed is '>' otherwise it was truncated. The
 	// CFXML parser annoyingly crashes if it is given a truncated feed.
-	while (--destIndex > 0 && isspace(destPtr[destIndex]));
+	while (--destIndex > 0 && (destPtr[destIndex] == '\0' || isspace(destPtr[destIndex])));
 	return (destPtr[destIndex] == '>') ? newXmlData : nil;
 }
 
