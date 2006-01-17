@@ -894,7 +894,7 @@ static Database * _sharedDatabase = nil;
 	Folder * parentFolder = [self folderFromID:newParentID];
 	while (parentFolder != nil)
 	{
-		if ([parentFolder parentId] == folderId)
+		if ([parentFolder itemId] == folderId)
 			return NO;
 		parentFolder = [self folderFromID:[parentFolder parentId]];
 	}
