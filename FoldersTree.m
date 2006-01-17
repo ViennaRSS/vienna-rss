@@ -48,7 +48,7 @@
 	-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 	-(void)expandToParent:(TreeNode *)node;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
-	-(void)moveFolders:(NSArray *)array;
+	-(BOOL)moveFolders:(NSArray *)array;
 @end
 
 @implementation FoldersTree
@@ -879,7 +879,7 @@
  * a collection of NSNumber pairs: the first number if the ID of the folder to move and
  * the second number is the ID of the parent to which the folder should be moved.
  */
--(void)moveFolders:(NSArray *)array
+-(BOOL)moveFolders:(NSArray *)array
 {
 	NSAssert(([array count] & 1) == 0, @"Incorrect number of items in array passed to moveFolders");
 	int count = [array count];
@@ -905,7 +905,9 @@
 		if (![newParent canHaveChildren])
 			[newParent setCanHaveChildren:YES];
 		
-		[db setParent:newParentId forFolder:folderId];
+		if (![db setParent:newParentId forFolder:folderId])
+			return NO;
+
 		[node retain];
 		[oldParent removeChild:node andChildren:NO];
 		[newParent addChild:node];
@@ -950,6 +952,7 @@
 	[outlineView scrollRowToVisible:selRowIndex];
 	[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
 	[selIndexSet release];
+	return YES;
 }
 
 /* acceptDrop
@@ -998,9 +1001,9 @@
 		}
 
 		// Do the move
-		[self moveFolders:array];
+		BOOL result = [self moveFolders:array];
 		[array release];
-		return YES;
+		return result;
 	}
 	if (type == MA_PBoardType_RSSSource)
 	{
