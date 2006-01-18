@@ -666,13 +666,17 @@
 				}
 			}
 
-			// If no explicit GUID is specified, use the link as the GUID
-			if (!hasGUID)
-				[newItem setGuid:[self guidFromItem:newItem]];
+			// If no link, set it to the feed link if there is one
+			if (!hasLink)
+				[newItem setLink:[self link]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
 
+			// If no explicit GUID is specified, use a concatenated hash of attributes for the GUID
+			if (!hasGUID)
+				[newItem setGuid:[self guidFromItem:newItem]];
+            
 			// Add this item in the proper location in the array
 			int indexOfItem = itemIdentifier ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
 			if (indexOfItem == NSNotFound)
@@ -971,11 +975,11 @@
  * description. The link alone is not sufficiently unique and I've seen feeds where
  * the description is also not unique. The title field generally does vary but we need
  * to be careful since separate articles with different descriptions may have the same
- * title. The solution is to hash the link and title and build a GUID from those.
+ * title. The solution is to hash the link, title and description and build a GUID from those.
  */
 -(NSString *)guidFromItem:(FeedItem *)item
 {
-	return [NSString stringWithFormat:@"%X-%X", [[item link] hash], [[item title] hash]];
+	return [NSString stringWithFormat:@"%X-%X", [[item link] hash], [[item title] hash], [[item description] hash]];
 }
 
 /* ensureTitle
@@ -984,7 +988,10 @@
 -(void)ensureTitle:(FeedItem *)item
 {
 	if (![item title] || [[item title] isBlank])
-		[item setTitle:[[NSString stringByRemovingHTML:[item description] validTags:nil] trim]];
+	{
+		NSString * newTitle = [[XMLParser processAttributes:[NSString stringByRemovingHTML:[item description] validTags:nil]] trim];
+		[item setTitle:newTitle];
+	}
 }
 
 /* dealloc
