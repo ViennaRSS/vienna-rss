@@ -876,7 +876,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingFunction:articleSortHandler context:self];
 	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
 	[currentArrayOfArticles release];
-	currentArrayOfArticles = [[NSArray arrayWithArray:sortedArrayOfArticles] retain];
+	currentArrayOfArticles = [sortedArrayOfArticles retain];
 }
 
 /* articleSortHandler
