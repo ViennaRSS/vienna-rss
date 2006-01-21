@@ -64,6 +64,7 @@
 		defaultWebPrefs = [[self preferences] retain];
 		[defaultWebPrefs setStandardFontFamily:@"Arial"];
 		[defaultWebPrefs setDefaultFontSize:12];
+		[defaultWebPrefs setPrivateBrowsingEnabled:YES];
 		[self loadMinimumFontSize];
 	}
 	return self;

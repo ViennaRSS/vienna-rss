@@ -1082,7 +1082,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSAlertDefaultReturn)
+	{
+		[self clearUndoStack];
 		[db purgeDeletedArticles];
+	}
 }
 
 /* showPreferencePanel
@@ -1635,7 +1638,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
 		[mainArticleView markDeletedByArray:articleArray deleteFlag:NO];
-		[articleArray release];
 		[self clearUndoStack];
 	}
 }
@@ -1655,7 +1657,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			NSArray * articleArray = [mainArticleView markedArticleRange];
 			[mainArticleView markDeletedByArray:articleArray deleteFlag:YES];
-			[articleArray release];
 		}
 		else
 		{
@@ -1779,7 +1780,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
 		[mainArticleView markReadByArray:articleArray readFlag:![theArticle isRead]];
-		[articleArray release];
 	}
 }
 
@@ -1793,7 +1793,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
 		[mainArticleView markFlaggedByArray:articleArray flagged:![theArticle isFlagged]];
-		[articleArray release];
 	}
 }
 

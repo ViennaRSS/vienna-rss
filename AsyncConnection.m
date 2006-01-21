@@ -252,6 +252,15 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 	[receivedData appendData:data];
 }
 
+/* willCacheResponse
+ * Handle the connection's caching of the response data. We return nil to tell it not to cache anything in order to
+ * try and cut down our memory usage.
+ */
+-(NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+	return nil;
+}
+
 /* didFailWithError
  * The remote connection failed somehow. Don't do anything with the data we got
  * so far but report an error against this connection.
