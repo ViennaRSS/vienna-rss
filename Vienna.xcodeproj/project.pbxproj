@@ -432,6 +432,7 @@
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
 		AAAAEF0E088DEBBA00B48199 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlite3.a; sourceTree = "<group>"; };
+		AAB32F740982FA0D003FC2C7 /* French */ = {isa = PBXFileReference; lastKnownFileType = folder; name = French; path = "French.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = searchFolder.tiff; sourceTree = "<group>"; };
 		AAB968DC08F7829E00B7D1C8 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
 		AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
@@ -1281,6 +1282,7 @@
 			children = (
 				AAE3AEF506570DB700A1FA1F /* English */,
 				AACE719C090B4CFB00E11979 /* German */,
+				AAB32F740982FA0D003FC2C7 /* French */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
