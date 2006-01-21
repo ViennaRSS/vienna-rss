@@ -6,6 +6,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2023
+----------
+- Incorporated a fix from Mark Evenson for the cursor.org RSS feed.
+- Made a few internal optimisations to try and reduce memory usage and database update frequency.
+
 2.0.0.2022
 ----------
 - More feed parsing issues fixed.

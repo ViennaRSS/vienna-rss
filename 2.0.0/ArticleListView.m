@@ -35,6 +35,7 @@
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebDataSource.h"
 #import "WebKit/WebFrameView.h"
+#import "WebKit/WebBackForwardList.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -121,6 +122,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
 	[articleText setOpenLinksInNewTab:YES];
+	
+	// Disable caching
+	[articleText setMaintainsBackForwardList:NO];
+	[[articleText backForwardList] setPageCacheSize:0];
 
 	// Do safe initialisation
 	[controller doSafeInitialisation];
@@ -1258,7 +1263,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(void)refreshArticlePane
 {
-	NSArray * msgArray = [[self markedArticleRange] autorelease];
+	NSArray * msgArray = [self markedArticleRange];
 	int folderIdToUse = currentFolderId;
 	int index;
 
@@ -1540,17 +1545,15 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(NSArray *)markedArticleRange
 {
-	NSArray * articleArray = nil;
+	NSMutableArray * articleArray = nil;
 	if ([articleList numberOfSelectedRows] > 0)
 	{
 		NSEnumerator * enumerator = [articleList selectedRowEnumerator];
-		NSMutableArray * newArray = [[NSMutableArray alloc] init];
 		NSNumber * rowIndex;
-		
+
+		articleArray = [NSMutableArray arrayWithCapacity:16];
 		while ((rowIndex = [enumerator nextObject]) != nil)
-			[newArray addObject:[currentArrayOfArticles objectAtIndex:[rowIndex intValue]]];
-		articleArray = [newArray retain];
-		[newArray release];
+			[articleArray addObject:[currentArrayOfArticles objectAtIndex:[rowIndex intValue]]];
 	}
 	return articleArray;
 }

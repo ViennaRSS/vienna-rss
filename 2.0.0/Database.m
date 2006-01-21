@@ -1217,6 +1217,8 @@ static Database * _sharedDatabase = nil;
 -(void)flushFolder:(int)folderId
 {
 	Folder * folder = [self folderFromID:folderId];
+	if (folder == nil)
+		return;
 	if ([folder needFlush] && !IsSmartFolder(folder))
 	{
 		NSTimeInterval interval = [[folder lastUpdate] timeIntervalSince1970];
@@ -1234,8 +1236,8 @@ static Database * _sharedDatabase = nil;
 
 		// Mark this folder as not needing any further updates
 		[folder resetFlush];
-		[folder clearCache];
 	}
+	[folder clearCache];
 }
 
 /* initSmartFoldersArray
@@ -1376,28 +1378,14 @@ static Database * _sharedDatabase = nil;
 				if (unreadCount > 0)
 					countOfUnread += unreadCount;
 				[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
-				
+				[folder resetFlush];
+
 				// Remember the trash folder
 				if (IsTrashFolder(folder))
 					trashFolder = [folder retain];
 			}
 		}
 		[results release];
-
-		// Fix the childUnreadCount for every parent
-		NSEnumerator * folderEnumerator = [foldersArray objectEnumerator];
-		Folder * folder;
-		
-		while ((folder = [folderEnumerator nextObject]) != nil)
-			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
-			{
-				Folder * parentFolder = [self folderFromID:[folder parentId]];
-				while (parentFolder != nil)
-				{
-					[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
-					parentFolder = [self folderFromID:[parentFolder parentId]];
-				}
-			}
 
 		// Load all RSS folders and add them to the list.
 		results = [sqlDatabase performQuery:@"select * from rss_folders"];
@@ -1423,9 +1411,25 @@ static Database * _sharedDatabase = nil;
 				[folder setLastUpdateString:lastUpdateString];
 				[folder setUsername:username];
 				[folder setBloglinesId:bloglinesId];
+				[folder resetFlush];
 			}
 		}
 		[results release];
+
+		// Fix the childUnreadCount for every parent
+		NSEnumerator * folderEnumerator = [foldersArray objectEnumerator];
+		Folder * folder;
+		
+		while ((folder = [folderEnumerator nextObject]) != nil)
+			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
+			{
+				Folder * parentFolder = [self folderFromID:[folder parentId]];
+				while (parentFolder != nil)
+				{
+					[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
+					parentFolder = [self folderFromID:[parentFolder parentId]];
+				}
+			}
 
 		// Done
 		initializedFoldersArray = YES;

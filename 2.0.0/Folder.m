@@ -199,7 +199,6 @@ static NSArray * iconArray = nil;
 		childUnreadCount = 0;
 		type = newType;
 		flags = 0;
-		needFlush = NO;
 		isCached = NO;
 		cachedArticles = [[NSMutableDictionary dictionary] retain];
 		attributes = [[NSMutableDictionary dictionary] retain];
@@ -209,6 +208,7 @@ static NSArray * iconArray = nil;
 		[self setUsername:@""];
 		[self setPassword:@""];
 		[self setBloglinesId:MA_NonBloglines_Folder];
+		[self resetFlush];
 	}
 	return self;
 }
