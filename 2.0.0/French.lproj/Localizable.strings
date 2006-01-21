@@ -69,7 +69,7 @@
 "From" = "De";
 "To" = "À";
 "(No subject)" = "(pas de sujet)";
-"Refreshing subscriptions..." = "Rafraichissement des abonnements...";
+"Refreshing subscriptions..." = "Rafraîchissement des abonnements...";
 "Authenticating with user name '%@'" = "Authentification par nom d'utilisateur '%@'";
 "No new articles available" = "Aucun nouvel article disponible";
 "%d new articles retrieved" = "%d nouveaux articles récupérés";
