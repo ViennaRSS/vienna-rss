@@ -10,13 +10,13 @@ Known Issues (May not be fixed)
 - The isAccessible(NSString * urlString) function returns NO behind a firewall.
 - A SQLite databases cannot be written to on remote folders. Vienna will warn and prompt for an alternative location.
 
-Post 2.0 Items
-==============
+Wishlist
+========
 - Bloglines integration.
 - Per-folder sorting.
 - Semi-transparent main window when not in front.
 - Show the feed icon in the article list pane.
-- Support retrieving RSS 2.0 comments.
+- Support retrieving and posting Atom/RSS 2.0 comments.
 - Spotlight support.
 - Change dock unread count colour and size.
 - Single article list and viewer interface (as in Bloglines).
@@ -48,3 +48,6 @@ Post 2.0 Items
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Allow smart folder criteria to match the beginning and end of strings as well as 'contains'.
 - More manual control over feed icon updating.
+- Mix conditionals within smart folders.
+- Download images within articles so that they can be viewed offline.
+- Navigation buttons in web view and ability to more easily copy feed URL.
