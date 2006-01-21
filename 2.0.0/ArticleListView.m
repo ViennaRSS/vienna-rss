@@ -931,7 +931,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		case MA_FieldID_Subject: {
 			NSString * n1 = [[item1 articleData] objectForKey:MA_Field_Subject];
 			NSString * n2 = [[item2 articleData] objectForKey:MA_Field_Subject];
-			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
+			return [n1 numericCompare:n2] * app->sortDirection;
 		}
 	}
 	return NSOrderedSame;

@@ -35,11 +35,11 @@
 -(id)performDefaultImplementation
 {
 	NSScanner * scanner = [NSScanner scannerWithString:[self directParameter]];
-	NSString * urlPrefix;
+	NSString * urlPrefix = nil;
 
 	[scanner scanUpToString:@":" intoString:&urlPrefix];
 	[scanner scanString:@":" intoString:nil];
-	if ([urlPrefix isEqualToString:@"feed"])
+	if (urlPrefix && [urlPrefix isEqualToString:@"feed"])
 	{
 		NSString * feedScheme = nil;
 
@@ -50,9 +50,11 @@
 		[scanner scanString:@"//" intoString:nil];
 
 		// The rest is the interesting part
-		NSString * linkPath;
+		NSString * linkPath = nil;
 
 		[scanner scanUpToString:@"" intoString:&linkPath];
+		if (linkPath == nil)
+			return nil;
 		if (feedScheme == nil)
 			feedScheme = @"http:";
 		linkPath = [NSString stringWithFormat:@"%@//%@", feedScheme, linkPath];

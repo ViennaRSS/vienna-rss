@@ -339,4 +339,12 @@
 	NSURL * url = [NSURL URLWithString:self];
 	return (url && [url host]) ? [url host] : self;
 }
+
+/* numericCompare
+ * Compares two strings using both case insensitivity and numeric comparisons.
+ */
+-(NSComparisonResult)numericCompare:(NSString *)aString;
+{
+	return [self compare:aString options:NSCaseInsensitiveSearch|NSNumericSearch];
+}
 @end
