@@ -35,7 +35,7 @@
 "Text" = "Text";
 "Headlines" = "Rubriker";
 "Link" = "Länk";
-"Deleted" = "Deleted";
+"Deleted" = "Raderade";
 "GUID" = "GUID";
 "No" = "Nej";
 "Yes" = "Ja";
@@ -208,4 +208,4 @@
 "%.1f of %.1f KB" = "%.1f av %.1f K";
 "%.1f of %.1f bytes" = "%.1f av %.1f byte";
 "An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
-"Connecting to %@" = "Connecting to %@";
+"Connecting to %@" = "Ansluter till %@";

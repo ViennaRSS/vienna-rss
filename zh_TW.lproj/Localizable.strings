@@ -35,7 +35,7 @@
 "Text" = "內文";
 "Headlines" = "標題";
 "Link" = "鍊結";
-"Deleted" = "Deleted";
+"Deleted" = "已刪除";
 "GUID" = "GUID";
 "No" = "否";
 "Yes" = "是";
@@ -207,4 +207,5 @@
 "%.1f of %.1f KB" = "%.1f / %.1f KB";
 "%.1f of %.1f bytes" = "%.1f / %.1f bytes";
 "An error occurred when this feed was last refreshed" = "在最再後一次更新這個訂閱頻道的時候發生錯誤";
-"Connecting to %@" = "Connecting to %@";
+"Connecting to %@" = "連線到 %@";
+
