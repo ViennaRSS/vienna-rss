@@ -35,7 +35,7 @@
 "Text" = "Texte";
 "Headlines" = "Titres";
 "Link" = "Lien";
-"Deleted" = "Deleted";
+"Deleted" = "Effacé";
 "GUID" = "GUID";
 "No" = "Non";
 "Yes" = "Oui";
@@ -208,4 +208,4 @@
 "%.1f of %.1f KB" = "%.1f sur %.1f Ko";
 "%.1f of %.1f bytes" = "%.1f sur %.1f octets";
 "An error occurred when this feed was last refreshed" = "Une erreur est apparue lors du rafraîchissement de ce flux";
-"Connecting to %@" = "Connecting to %@";
+"Connecting to %@" = "Connexion à %@";
