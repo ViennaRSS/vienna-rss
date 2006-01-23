@@ -411,10 +411,6 @@ typedef enum {
 		return;
 	}
 
-	// If this folder also requires an image refresh, add that
-	if ([folder flags] & MA_FFlag_CheckForImage)
-		[self refreshFavIcon:folder];
-
 	// The activity log name we use depends on whether or not this folder has a real name.
 	NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
