@@ -13,7 +13,7 @@
 		<key>860</key>
 		<string>510 539 419 135 0 0 1440 878 </string>
 		<key>971</key>
-		<string>592 185 720 651 0 0 1440 878 </string>
+		<string>360 217 720 651 0 0 1440 878 </string>
 	</dict>
 	<key>IBFramework Version</key>
 	<string>443.0</string>
@@ -27,6 +27,6 @@
 		<integer>29</integer>
 	</array>
 	<key>IBSystem Version</key>
-	<string>8F46</string>
+	<string>8G32</string>
 </dict>
 </plist>
