@@ -9,6 +9,7 @@ Thanks!
 2.0.0.2023
 ----------
 - Incorporated a fix from Mark Evenson for the cursor.org RSS feed.
+- Refresh keystroke changed to Cmd+R/Shift+Cmd+R.
 - Made a few internal optimisations to try and reduce memory usage and database update frequency.
 - Added French help file and some French localisation fixes.
 - Other minor bug fixes.
