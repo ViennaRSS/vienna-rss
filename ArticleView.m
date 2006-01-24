@@ -235,6 +235,12 @@
 		[controller openURLInBrowserWithURL:[request URL]];
 		return;
 	}
+	if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"])
+	{
+		[listener ignore];
+		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
+		return;
+	}
 	[listener use];
 }
 
