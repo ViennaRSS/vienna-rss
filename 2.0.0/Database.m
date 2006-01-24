@@ -1950,11 +1950,11 @@ static Database * _sharedDatabase = nil;
 	return newArray;
 }
 
-/* wrappedMarkFolderRead
+/* markFolderRead
  * Mark all articles in the folder and sub-folders read. This should be called
  * within a transaction since it is SQL intensive.
  */
--(BOOL)wrappedMarkFolderRead:(int)folderId
+-(BOOL)markFolderRead:(int)folderId
 {
 	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
 	NSEnumerator * enumerator = [arrayOfChildFolders objectEnumerator];
@@ -1964,7 +1964,7 @@ static Database * _sharedDatabase = nil;
 	// Recurse and mark child folders read too
 	while ((folder = [enumerator nextObject]) != nil)
 	{
-		if ([self wrappedMarkFolderRead:[folder itemId]])
+		if ([self markFolderRead:[folder itemId]])
 			result = YES;
 	}
 
@@ -1976,35 +1976,25 @@ static Database * _sharedDatabase = nil;
 		if (results)
 		{
 			int count = [folder unreadCount];
-			NSEnumerator * enumerator = [[folder articles] objectEnumerator];
-			int remainingUnread = count;
-			Article * article;
+			if ([folder countOfCachedArticles] > 0)
+			{
+				NSEnumerator * enumerator = [[folder articles] objectEnumerator];
+				int remainingUnread = count;
+				Article * article;
 
-			while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil)
-				if (![article isRead])
-				{
-					[article markRead:YES];
-					--remainingUnread;
-				}
+				while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil)
+					if (![article isRead])
+					{
+						[article markRead:YES];
+						--remainingUnread;
+					}
+			}
 			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
 		}
 		[results release];
 		result = YES;
 	}
-	return result;
-}
-
-/* markFolderRead
- * Mark all articles in the specified folder read
- */
--(BOOL)markFolderRead:(int)folderId
-{
-	BOOL result;
-
-	[self beginTransaction];
-	result = [self wrappedMarkFolderRead:folderId];
-	[self commitTransaction];
 	return result;
 }
 
