@@ -60,7 +60,7 @@
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)refreshImmediatelyArticleAtCurrentRow;
 	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
-	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
+	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr;
 	-(void)reloadArrayOfArticles;
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
@@ -1816,13 +1816,20 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
-	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
+	NSArray * refArray = nil;
+	BOOL flag = NO;
+
+	[db beginTransaction];
+	refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag needRefresh:&flag];
+	[db commitTransaction];
 	if (refArray != nil && [refArray count] > 0)
 	{
 		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
+	if (flag)
+		[self refreshFolder:YES];
 	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
@@ -1830,21 +1837,22 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
+-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	NSEnumerator * enumerator = [folderArray objectEnumerator];
 	Folder * folder;
-	
+
+	NSAssert(needRefreshPtr != nil, @"needRefresh pointer cannot be nil");
 	while ((folder = [enumerator nextObject]) != nil)
 	{
 		int folderId = [folder itemId];
 		if (IsGroupFolder(folder))
 		{
 			if (undoFlag)
-				[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag]];
+				[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag needRefresh:needRefreshPtr]];
 			if ([self currentCacheContainsFolder:folderId])
-				[self refreshFolder:YES];
+				*needRefreshPtr = YES;
 		}
 		else if (!IsSmartFolder(folder))
 		{
@@ -1854,7 +1862,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
 				if ([self currentCacheContainsFolder:folderId])
-					[self refreshFolder:YES];
+					*needRefreshPtr = YES;
 			}
 		}
 		else
