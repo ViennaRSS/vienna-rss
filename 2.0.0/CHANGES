@@ -8,6 +8,10 @@ Thanks!
 
 2.0.0.2023
 ----------
+- Additional memory usage improvements.
+
+2.0.0.2023
+----------
 - Incorporated a fix from Mark Evenson for the cursor.org RSS feed.
 - Refresh keystrokes changed to Cmd+R/Shift+Cmd+R.
 - Mark Read keystroke changed to Cmd+Shift+U ('u' single key added to complement).

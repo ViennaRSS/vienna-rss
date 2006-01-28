@@ -1497,7 +1497,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, NSStringPboardType, NSHTMLPboardType, nil] owner:self];
 	
 	// Open the HTML string
-	[fullHTMLText appendString:@"<html><body>"];
+	[fullHTMLText appendString:@"<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\"></head><body>"];
 	
 	// Get all the articles that are being dragged
 	for (index = 0; index < count; ++index)
