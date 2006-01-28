@@ -80,12 +80,11 @@
 }
 
 /* setTab
- * Set the tab associated with this browser view.
+ * Set the tab associated with this browser view. This is a shallow
+ * reference.
  */
 -(void)setTab:(BrowserTab *)newTab
 {
-	[newTab retain];
-	[tab release];
 	tab = newTab;
 }
 
@@ -430,11 +429,11 @@
  */
 -(void)dealloc
 {
+	[webPane removeFromSuperview];
 	[webPane stopLoading:self];
 	[webPane release];
 	[lastError release];
 	[pageFilename release];
-	[tab release];
 	[super dealloc];
 }
 @end
