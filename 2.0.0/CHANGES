@@ -6,6 +6,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.0.2025
+----------
+- Added Dutch localisation (Thanks to Martijn van Exel).
+- Fix corrupted display of iframe on some articles due to encoding mismatch.
+- Fix Mark All Read behaviour in smart folders which broke in 2024.
+
 2.0.0.2024
 ----------
 - Additional memory usage improvements.

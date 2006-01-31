@@ -402,6 +402,17 @@
 		AA682CF6069A955F00228193 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
 		AA6CB7CD06238B08004E1236 /* FolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderView.h; sourceTree = "<group>"; };
 		AA6CB7CE06238B08004E1236 /* FolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderView.m; sourceTree = "<group>"; };
+		AA71CCEF098D50E80069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AA71CCF2098D50F10069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AA71CCF7098D50FF0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AA71CCFA098D51080069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AA71CCFD098D510F0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		AA71CD00098D51160069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AA71CD03098D511D0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AA71CD06098D51240069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
+		AA71CD0D098D51340069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA71CD10098D513C0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA71CD18098D514E0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = nl; path = nl.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AA74A85D087B56810029797C /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArticleView.h; sourceTree = "<group>"; };
 		AA74A85E087B56810029797C /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
 		AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Developer/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -972,6 +983,7 @@
 				Italian,
 				Russian,
 				zh_TW,
+				nl,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -1121,6 +1133,7 @@
 				AA35B498092B81670041618C /* Swedish */,
 				AA35B499092B816E0041618C /* Italian */,
 				AACF241109441ADC0019F2BA /* zh_TW */,
+				AA71CD10098D513C0069607D /* nl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1134,6 +1147,7 @@
 				AA1EE81A08F69BAE00A9B20C /* German */,
 				AA41B429092B7F9C00D96C70 /* Swedish */,
 				AACF23FE09441A950019F2BA /* zh_TW */,
+				AA71CCFD098D510F0069607D /* nl */,
 			);
 			name = MainMenu.nib;
 			sourceTree = "<group>";
@@ -1147,6 +1161,7 @@
 				AA4B152708E8DC51008CA6D0 /* Italian */,
 				AA1EE82008F69C3000A9B20C /* German */,
 				AACF240E09441ACB0019F2BA /* zh_TW */,
+				AA71CD0D098D51340069607D /* nl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1168,6 +1183,7 @@
 				AABD6A32090231310092D4AE /* Italian */,
 				AABD6A33090231370092D4AE /* German */,
 				AACF23F409441A3A0019F2BA /* zh_TW */,
+				AA71CCEF098D50E80069607D /* nl */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -1181,6 +1197,7 @@
 				AABD6A36090231510092D4AE /* Italian */,
 				AABD6A37090231550092D4AE /* German */,
 				AACF23F509441A4C0019F2BA /* zh_TW */,
+				AA71CCF2098D50F10069607D /* nl */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -1194,6 +1211,7 @@
 				130A614008F202BA005A52F1 /* Italian */,
 				AA1EE81D08F69BC600A9B20C /* German */,
 				AACF240409441AAB0019F2BA /* zh_TW */,
+				AA71CD03098D511D0069607D /* nl */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -1207,6 +1225,7 @@
 				130A612D08F20268005A52F1 /* Italian */,
 				AA1EE81608F69B9D00A9B20C /* German */,
 				AACF23F809441A600019F2BA /* zh_TW */,
+				AA71CCF7098D50FF0069607D /* nl */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -1220,6 +1239,7 @@
 				130A613C08F202A6005A52F1 /* Italian */,
 				AA1EE81C08F69BBD00A9B20C /* German */,
 				AACF240109441AA10019F2BA /* zh_TW */,
+				AA71CD00098D51160069607D /* nl */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -1233,6 +1253,7 @@
 				130A613108F20277005A52F1 /* Italian */,
 				AA1EE81908F69BA500A9B20C /* German */,
 				AACF23FB09441A8A0019F2BA /* zh_TW */,
+				AA71CCFA098D51080069607D /* nl */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -1252,6 +1273,7 @@
 				AABC189E090AB01600527D4B /* Italian */,
 				AACF241409441AEB0019F2BA /* zh_TW */,
 				AACF25280945FF030019F2BA /* Swedish */,
+				AA71CD18098D514E0069607D /* nl */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -1273,6 +1295,7 @@
 				130A614408F202CC005A52F1 /* Italian */,
 				AA1EE81E08F69BD000A9B20C /* German */,
 				AACF240709441AB50019F2BA /* zh_TW */,
+				AA71CD06098D51240069607D /* nl */,
 			);
 			name = UpdateWindow.nib;
 			sourceTree = "<group>";
@@ -1462,7 +1485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2024;
+				BUILD_NUMBER = 2025;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1487,7 +1510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2024;
+				BUILD_NUMBER = 2025;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1512,7 +1535,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = ppc;
-				BUILD_NUMBER = 2024;
+				BUILD_NUMBER = 2025;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
