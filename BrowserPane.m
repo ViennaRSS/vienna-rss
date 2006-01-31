@@ -429,7 +429,7 @@
  */
 -(void)dealloc
 {
-	[webPane removeFromSuperview];
+	[webPane removeFromSuperviewWithoutNeedingDisplay];
 	[webPane stopLoading:self];
 	[webPane release];
 	[lastError release];

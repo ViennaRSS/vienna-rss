@@ -61,6 +61,7 @@
 	-(void)refreshImmediatelyArticleAtCurrentRow;
 	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
 	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr;
+	-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 	-(void)reloadArrayOfArticles;
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
@@ -1274,6 +1275,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[htmlText appendString:cssStylesheet];
 		[htmlText appendString:@"\"/>"];
 	}
+	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
 	[htmlText appendString:@"<title>$ArticleTitle$</title></head><body>"];
 	for (index = 0; index < [msgArray count]; ++index)
 	{
@@ -1336,7 +1338,10 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 	Folder * folder = [db folderFromID:folderIdToUse];
 	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
-	[[articleText mainFrame] loadHTMLString:htmlText baseURL:[NSURL URLWithString:urlString]];
+	[[articleText mainFrame] loadData:[NSData dataWithBytes:[htmlText UTF8String] length:[htmlText length]]
+							 MIMEType:@"text/html" 
+					 textEncodingName:@"utf-8" 
+							  baseURL:[NSURL URLWithString:urlString]];
 	[htmlText release];
 }
 
@@ -1497,7 +1502,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, NSStringPboardType, NSHTMLPboardType, nil] owner:self];
 	
 	// Open the HTML string
-	[fullHTMLText appendString:@"<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\"></head><body>"];
+	[fullHTMLText appendString:@"<html><body>"];
 	
 	// Get all the articles that are being dragged
 	for (index = 0; index < count; ++index)
@@ -1753,11 +1758,6 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
  */
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
-	Article * theArticle;
-	int lastFolderId = -1;
-	int folderId;
-	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
@@ -1769,29 +1769,37 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	markReadTimer = nil;
 
 	[db beginTransaction];
-	while ((theArticle = [enumerator nextObject]) != nil)
-	{
-		folderId = [theArticle folderId];
-		[db markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
-		if (folderId != currentFolderId)
-		{
-			[theArticle markRead:readFlag];
-			[db flushFolder:folderId];
-		}
-		if (folderId != lastFolderId && lastFolderId != -1)
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		lastFolderId = folderId;
-	}
+	[self innerMarkReadByArray:articleArray readFlag:readFlag];
 	[db commitTransaction];
 	[articleList reloadData];
-	
-	if (lastFolderId != -1)
-		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+
 	[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// The info bar has a count of unread articles so we need to
 	// update that.
 	[controller showUnreadCountOnApplicationIconAndWindowTitle];
+}
+
+/* innerMarkReadByArray
+ * Marks all articles in the specified array read or unread.
+ */
+-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
+{
+	NSEnumerator * enumerator = [articleArray objectEnumerator];
+	int lastFolderId = -1;
+	Article * theArticle;
+
+	while ((theArticle = [enumerator nextObject]) != nil)
+	{
+		int folderId = [theArticle folderId];
+		[db markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
+		[theArticle markRead:readFlag];
+		if (folderId != lastFolderId && lastFolderId != -1)
+			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+		lastFolderId = folderId;
+	}
+	if (lastFolderId != -1)
+		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 }
 
 /* markAllReadUndo
@@ -1870,7 +1878,12 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
 			if (folderId == currentFolderId)
-				[self markReadByArray:currentArrayOfArticles readFlag:YES];
+			{
+				if (undoFlag)
+					[refArray addObjectsFromArray:currentArrayOfArticles];
+				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
+				[articleList reloadData];
+			}
 		}
 	}
 	return refArray;
@@ -1930,6 +1943,12 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 		if (lastFolderId == currentFolderId)
 			[self refreshFolder:YES];
+		else
+		{
+			Folder * currentFolder = [db folderFromID:currentFolderId];
+			if (IsSmartFolder(currentFolder))
+				[articleList reloadData];
+		}
 	}
 
 	// The info bar has a count of unread articles so we need to
