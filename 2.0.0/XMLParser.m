@@ -514,6 +514,8 @@ static NSMutableDictionary * entityMap = nil;
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEE] forKey:@"icirc"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xA3] forKey:@"pound"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xB5] forKey:@"micro"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC3C] forKey:@"sigma"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCA3] forKey:@"Sigma"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0x2022] forKey:@"bull"];
 	}
 

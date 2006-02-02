@@ -429,8 +429,10 @@
  */
 -(void)dealloc
 {
-	[webPane removeFromSuperviewWithoutNeedingDisplay];
+	[webPane setFrameLoadDelegate:nil];
+	[webPane setUIDelegate:nil];
 	[webPane stopLoading:self];
+	[webPane removeFromSuperviewWithoutNeedingDisplay];
 	[webPane release];
 	[lastError release];
 	[pageFilename release];

@@ -11,6 +11,7 @@ Thanks!
 - Added Dutch localisation (Thanks to Martijn van Exel).
 - Fix corrupted display of iframe on some articles due to encoding mismatch.
 - Fix Mark All Read behaviour in smart folders which broke in 2024.
+- Fix crash on closing tabs.
 
 2.0.0.2024
 ----------
