@@ -305,6 +305,9 @@
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[self setPolicyDelegate:nil];
+	[self setDownloadDelegate:nil];
 	[controller release];
 	[defaultWebPrefs release];
 	[super dealloc];
