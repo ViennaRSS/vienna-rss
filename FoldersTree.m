@@ -693,7 +693,16 @@
 	TreeNode * node = (TreeNode *)item;
 	if (node == nil)
 		node = rootNode;
-	return [node nodeName];
+
+    static NSDictionary * info = nil;
+    if (info == nil)
+	{
+        NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByTruncatingMiddle];
+        info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
+        [style release];
+    }
+    return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:info] autorelease];
 }
 
 /* willDisplayCell

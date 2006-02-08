@@ -169,15 +169,6 @@
 	// Anything else is not a feed redirect.
 	[self setIsFeedRedirect:NO];
 	
-	// Handle extensions that are masquerading as binary files due to a server
-	// misconfiguration. Do this before we check the MIME type.
-	if ([self isDownloadFileType:[request URL]])
-	{
-		[self setIsDownload:YES];
-		[listener download];
-		return;
-	}
-
 	// If this is a viewable MIME type, display it.
 	if ([WebView canShowMIMEType:type])
 	{

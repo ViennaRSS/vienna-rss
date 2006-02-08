@@ -46,6 +46,7 @@ typedef enum {
 	-(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
 	-(void)pumpSubscriptionRefresh:(Folder *)folder;
 	-(void)pumpFolderIconRefresh:(Folder *)folder;
+	-(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem;
 	-(void)pumpBloglinesListRefresh;
 	-(void)beginRefreshTimer;
 	-(void)refreshPumper:(NSTimer *)aTimer;
@@ -53,6 +54,7 @@ typedef enum {
 	-(void)removeConnection:(AsyncConnection *)conn;
 	-(void)folderIconRefreshCompleted:(AsyncConnection *)connector;
 	-(void)bloglinesListRefreshCompleted:(AsyncConnection *)connector;
+	-(NSString *)getRedirectURL:(NSData *)data;
 @end
 
 // Single refresh item type
@@ -352,7 +354,7 @@ typedef enum {
 	else
 		[folder clearFlag:MA_FFlag_Error];
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationName:@"MA_Notify_FolderUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+	[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
 /* beginRefreshTimer
@@ -425,23 +427,31 @@ typedef enum {
 	
 	// Additional detail for the log
 	[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
-
+	
 	// Kick off the connection
+	[self refreshFeed:folder fromURL:url withLog:aItem];
+}
+
+/* refreshFeed
+ * Refresh a folder's newsfeed using the specified URL.
+ */
+-(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem
+{
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
 	NSMutableDictionary * headers = [NSMutableDictionary dictionary];
 	
 	[headers setValue:@"gzip" forKey:@"Accept-Encoding"];
 	[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
-
+	
 	[conn setHttpHeaders:headers];
-
+	
 	if ([conn beginLoadDataFromURL:url
-					  username:[folder username]
-					  password:[folder password]
-					  delegate:self
-				   contextData:folder
-						   log:aItem
-				didEndSelector:@selector(folderRefreshCompleted:)])
+						  username:[folder username]
+						  password:[folder password]
+						  delegate:self
+					   contextData:folder
+							   log:aItem
+					didEndSelector:@selector(folderRefreshCompleted:)])
 		[self addConnection:conn];
 }
 
@@ -526,7 +536,17 @@ typedef enum {
 		Database * db = [Database sharedDatabase];
 		NSData * receivedData = [connector receivedData];
 		int newArticlesFromFeed = 0;	
-		
+
+		// Check whether this is an HTML redirect. If so, create a new connection using
+		// the redirect.
+		NSString * redirectURL = [self getRedirectURL:receivedData];
+		if (redirectURL != nil)
+		{
+			[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:[connector aItem]];
+			[self removeConnection:connector];
+			return;
+		}
+
 		// Remember the last modified date
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 		if (lastModifiedString != nil)
@@ -668,6 +688,93 @@ typedef enum {
 		countOfNewArticles += newArticlesFromFeed;
 	}
 	[self removeConnection:connector];
+}
+
+/* getRedirectURL
+ * Scans the XML data and checks whether it is actually an HTML redirect. If so, returns the
+ * redirection URL. (Yes, I'm aware that some of this could be better implemented with calls to
+ * strnstr and its ilk but I have a deep rooted distrust of the standard C runtime stemming from
+ * a childhood trauma with buffer overflows so bear with me.)
+ */
+-(NSString *)getRedirectURL:(NSData *)data
+{
+	const char * scanPtr = [data bytes];
+	const char * scanPtrEnd = scanPtr + [data length];
+	
+	// Make sure this is HTML otherwise this is likely just valid
+	// XML and we can ignore everything else.
+	const char * htmlTagPtr = "<html>";
+	while (scanPtr < scanPtrEnd && *htmlTagPtr != '\0')
+	{
+		if (*scanPtr != ' ')
+		{
+			if (tolower(*scanPtr) != *htmlTagPtr)
+				return nil;
+			++htmlTagPtr;
+		}
+		++scanPtr;
+	}
+	
+	// Look for the meta attribute
+	const char * metaTag = "<meta ";
+	const char * headEndTag = "</head>";
+	const char * metaTagPtr = metaTag;
+	const char * headEndTagPtr = headEndTag;
+	while (scanPtr < scanPtrEnd)
+	{
+		if (tolower(*scanPtr) == *metaTagPtr)
+			++metaTagPtr;
+		else
+		{
+			metaTagPtr = metaTag;
+			if (tolower(*scanPtr) == *headEndTagPtr)
+				++headEndTagPtr;
+			else
+				headEndTagPtr = headEndTag;
+		}
+		if (*headEndTagPtr == '\0')
+			return nil;
+		if (*metaTagPtr == '\0')
+		{
+			// Now see if this meta tag has http-equiv attribute
+			const char * httpEquivAttr = "http-equiv=\"refresh\"";
+			const char * httpEquivAttrPtr = httpEquivAttr;
+			while (scanPtr < scanPtrEnd && *scanPtr != '>')
+			{
+				if (tolower(*scanPtr) == *httpEquivAttrPtr)
+					++httpEquivAttrPtr;
+				else if (*scanPtr != ' ')
+					httpEquivAttrPtr = httpEquivAttr;
+				if (*httpEquivAttrPtr == '\0')
+				{
+					// OK. This is our meta tag. Now look for the URL field
+					while (scanPtr < scanPtrEnd-3 && *scanPtr != '>')
+					{
+						if (tolower(*scanPtr) == 'u' && tolower(*(scanPtr+1)) == 'r' && tolower(*(scanPtr+2)) == 'l' && *(scanPtr+3) == '=')
+						{
+							const char * urlStart = scanPtr + 4;
+							const char * urlEnd = urlStart;
+							
+							// Finally, gather the URL for the redirect and return it as an
+							// auto-released string.
+							while (urlEnd < scanPtrEnd && *urlEnd != ' ' && *urlEnd != '>')
+								++urlEnd;
+							if (urlEnd == scanPtrEnd)
+								return nil;
+							return [NSString stringWithCString:urlStart length:(urlEnd - urlStart)];
+						}
+						++scanPtr;
+					}
+				}
+				++scanPtr;
+			}
+			
+			// Not our meta tag so look for another
+			metaTagPtr = metaTag;
+		}
+		++scanPtr;
+	}
+	return nil;
 }
 
 /* folderIconRefreshCompleted
