@@ -56,6 +56,7 @@ NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
 NSString * MAPref_DownloadsList = @"DownloadsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
+NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;

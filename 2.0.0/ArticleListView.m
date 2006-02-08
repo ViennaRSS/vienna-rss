@@ -175,7 +175,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Select the first conference
 	int previousFolderId = [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_CachedFolderID];
-	[self selectFolderAndArticle:previousFolderId guid:nil];
+	NSString * previousArticleGuid = [[NSUserDefaults standardUserDefaults] stringForKey:MAPref_CachedArticleGUID];
+	if ([previousArticleGuid isBlank])
+		previousArticleGuid = nil;
+	[self selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 	
 	// Done initialising
 	isAppInitialising = NO;
@@ -477,10 +480,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)saveTableSettings
 {
+	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
 	Field * field;
 	
+	// Remember the current folder and article
+	NSString * guid = (currentSelectedRow >= 0) ? [[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid] : @"";
+	[defaults setInteger:currentFolderId forKey:MAPref_CachedFolderID];
+	[defaults setValue:guid forKey:MAPref_CachedArticleGUID];
+
 	// An array we need for the settings
 	NSMutableArray * dataArray = [[NSMutableArray alloc] init];
 	
@@ -493,7 +502,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	
 	// Save these to the preferences
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:dataArray forKey:MAPref_ArticleListColumns];
 	[defaults synchronize];
 

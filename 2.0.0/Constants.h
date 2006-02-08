@@ -56,6 +56,7 @@ extern NSString * MAPref_UseMinimumFontSize;
 extern NSString * MAPref_AutoExpireDuration;
 extern NSString * MAPref_DownloadsList;
 extern NSString * MAPref_ShowFolderImages;
+extern NSString * MAPref_CachedArticleGUID;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;

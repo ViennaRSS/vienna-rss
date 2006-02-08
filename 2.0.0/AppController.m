@@ -345,16 +345,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	int returnCode;
 	
-	if ([self isConnecting])
-	{
-		returnCode = NSRunAlertPanel(NSLocalizedString(@"Connect Running", nil),
-									 NSLocalizedString(@"Connect Running text", nil),
-									 NSLocalizedString(@"Quit", nil),
-									 NSLocalizedString(@"Cancel", nil),
-									 nil);
-		if (returnCode == NSAlertAlternateReturn)
-			return NSTerminateCancel;
-	}
 	if ([[DownloadManager sharedInstance] activeDownloads] > 0)
 	{
 		returnCode = NSRunAlertPanel(NSLocalizedString(@"Downloads Running", nil),
@@ -1236,7 +1226,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self setSearchString:@""];
 		[mainArticleView selectFolderWithFilter:newFolderId];
 		[self updateSearchPlaceholder];
-		[[NSUserDefaults standardUserDefaults] setInteger:[mainArticleView currentFolderId] forKey:MAPref_CachedFolderID];
 	}
 }
 
