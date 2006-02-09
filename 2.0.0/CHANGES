@@ -13,6 +13,8 @@ Thanks!
 - No longer prompt if Vienna is exited while a connection is in progress.
 - Better truncation of feed names in the folder list. (Code contributed by David Kocher).
 - Handle HTML redirects in the feed for sources such as MSN Spaces.
+- Save and restore the currently selected article when you exit and restart Vienna.
+- Added Japanese localisation.
 
 2.0.0.2025 (2.0 Release Build)
 ------------------------------
