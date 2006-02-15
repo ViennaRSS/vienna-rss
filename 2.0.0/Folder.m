@@ -199,6 +199,7 @@ static NSArray * iconArray = nil;
 		childUnreadCount = 0;
 		type = newType;
 		flags = 0;
+		nonPersistedFlags = 0;
 		isCached = NO;
 		cachedArticles = [[NSMutableDictionary dictionary] retain];
 		attributes = [[NSMutableDictionary dictionary] retain];
@@ -264,6 +265,13 @@ static NSArray * iconArray = nil;
 -(unsigned int)flags
 {
 	return flags;
+}
+
+/* nonPersistedFlags
+ */
+-(unsigned int)nonPersistedFlags
+{
+	return nonPersistedFlags;
 }
 
 /* childUnreadCount
@@ -530,6 +538,22 @@ static NSArray * iconArray = nil;
 {
 	flags &= ~flagToClear;
 	needFlush = YES;
+}
+
+/* setNonPersistedFlag
+ * Set the specified flag on the folder.
+ */
+-(void)setNonPersistedFlag:(unsigned int)flagToSet
+{
+	nonPersistedFlags |= flagToSet;
+}
+
+/* clearNonPersistedFlag
+ * Clears the specified flag on the folder.
+ */
+-(void)clearNonPersistedFlag:(unsigned int)flagToClear
+{
+	nonPersistedFlags &= ~flagToClear;
 }
 
 /* setParent

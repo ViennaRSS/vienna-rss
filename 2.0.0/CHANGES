@@ -14,7 +14,8 @@ Thanks!
 - Better truncation of feed names in the folder list. (Code contributed by David Kocher).
 - Handle HTML redirects in the feed for sources such as MSN Spaces.
 - Save and restore the currently selected article when you exit and restart Vienna.
-- Added Japanese localisation.
+- Added Japanese localisation. (Thanks to Daisuke).
+- Added Spanish localisation. (Thanks to Carlos Morales).
 
 2.0.0.2025 (2.0 Release Build)
 ------------------------------

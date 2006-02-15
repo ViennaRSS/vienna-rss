@@ -60,6 +60,7 @@
 	int type;
 	int childUnreadCount;
 	unsigned int flags;
+	unsigned int nonPersistedFlags;
 	unsigned int bloglinesId;
 	BOOL isCached;
 	BOOL needFlush;
@@ -87,6 +88,7 @@
 -(int)unreadCount;
 -(int)type;
 -(long)bloglinesId;
+-(unsigned int)nonPersistedFlags;
 -(unsigned int)flags;
 -(NSImage *)image;
 -(NSImage *)standardImage;
@@ -104,6 +106,8 @@
 -(void)setImage:(NSImage *)newImage;
 -(void)setFlag:(unsigned int)flagToSet;
 -(void)clearFlag:(unsigned int)flagToClear;
+-(void)setNonPersistedFlag:(unsigned int)flagToSet;
+-(void)clearNonPersistedFlag:(unsigned int)flagToClear;
 -(void)setChildUnreadCount:(int)count;
 -(void)setFeedDescription:(NSString *)newFeedDescription;
 -(void)setHomePage:(NSString *)newHomePage;
