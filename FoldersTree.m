@@ -676,7 +676,7 @@
 	TreeNode * node = (TreeNode *)item;
 	if (node != nil)
 	{
-		if ([[node folder] flags] & MA_FFlag_Error)
+		if ([[node folder] nonPersistedFlags] & MA_FFlag_Error)
 			return NSLocalizedString(@"An error occurred when this feed was last refreshed", nil);
 		if ([[node folder] childUnreadCount])
 			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), [[node folder] childUnreadCount]];
@@ -743,7 +743,7 @@
 		}
 
 		// Set error image if the folder's last refresh resulted in an error
-		[realCell setErrorImage:([folder flags] & MA_FFlag_Error) ? folderErrorImage : nil];
+		[realCell setErrorImage:([folder nonPersistedFlags] & MA_FFlag_Error) ? folderErrorImage : nil];
 
 		// Only show folder images if the user prefers them.
 		Preferences * prefs = [Preferences standardPreferences];

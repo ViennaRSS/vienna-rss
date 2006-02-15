@@ -350,9 +350,9 @@ typedef enum {
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag
 {
 	if (theFlag)
-		[folder setFlag:MA_FFlag_Error];
+		[folder setNonPersistedFlag:MA_FFlag_Error];
 	else
-		[folder clearFlag:MA_FFlag_Error];
+		[folder clearNonPersistedFlag:MA_FFlag_Error];
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
