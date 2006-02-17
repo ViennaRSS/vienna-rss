@@ -893,6 +893,7 @@ static const int MA_Left_Margin_Width = 10;
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[borderColor release];
 	[inactiveTabBackgroundColor release];
 	[pressedCloseButton release];
