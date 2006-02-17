@@ -811,10 +811,20 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			NSRect visibleRect;
 			
 			visibleRect = [theView visibleRect];
-			if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
-				[controller viewNextUnread:self];
+			if (flags & NSShiftKeyMask)
+			{
+				if (visibleRect.origin.y < 2)
+					[controller goBack:self];
+				else
+					[[[articleText mainFrame] webView] scrollPageUp:self];
+			}
 			else
-				[[[articleText mainFrame] webView] scrollPageDown:self];
+			{
+				if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
+					[controller viewNextUnread:self];
+				else
+					[[[articleText mainFrame] webView] scrollPageDown:self];
+			}
 			return YES;
 		}
 	}
@@ -1390,7 +1400,8 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 
 	Folder * folder = [db folderFromID:folderIdToUse];
 	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
-	[[articleText mainFrame] loadData:[NSData dataWithBytes:[htmlText UTF8String] length:[htmlText length]]
+	const char * utf8String = [htmlText UTF8String];
+	[[articleText mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
 							 MIMEType:@"text/html" 
 					 textEncodingName:@"utf-8" 
 							  baseURL:[NSURL URLWithString:urlString]];

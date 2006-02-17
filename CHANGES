@@ -17,6 +17,8 @@ Thanks!
 - Support use of the Shift key to open a link in the alternate browser. (Code contributed by Jeffrey Johnson).
 - Added Japanese localisation. (Thanks to Daisuke).
 - Added Spanish localisation. (Thanks to Carlos Morales).
+- Shift+Spacebar scrolls up the article view or goes to the previously viewed message.
+- Added four more built-in styles: Broadsheet Clipping, Perlucida, Prague and Prague-light.
 
 2.0.0.2025 (2.0 Release Build)
 ------------------------------

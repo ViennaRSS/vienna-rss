@@ -20,6 +20,7 @@
 
 #import "RenameFolder.h"
 #import "StringExtensions.h"
+#import "HelperFunctions.h"
 
 // Private functions
 @interface RenameFolder (Private)
