@@ -32,6 +32,7 @@
 #import "SearchFolder.h"
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
+#import "RenameFolder.h"
 #import "ViennaApp.h"
 #import "ActivityLog.h"
 #import "Constants.h"
@@ -57,6 +58,8 @@
 	-(void)handleCheckFrequencyChange:(NSNotification *)nc;
 	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
+	-(void)handleReloadPreferences:(NSNotification *)nc;
+	-(void)localiseMenus:(NSArray *)arrayOfMenus;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
@@ -70,10 +73,9 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
+	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholder;
 	-(FoldersTree *)foldersTree;
-	-(IBAction)endRenameFolder:(id)sender;
-	-(IBAction)cancelRenameFolder:(id)sender;
 	-(void)updateCloseCommands;
 	-(NSDictionary *)registrationDictionaryForGrowl;
 @end
@@ -132,6 +134,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	BrowserTab * primaryTab = [browserView setPrimaryTabView:mainArticleView];
 	[browserView setTabTitle:primaryTab title:NSLocalizedString(@"Articles", nil)];
 
+	// Localise the menus
+	[self localiseMenus:[[NSApp mainMenu] itemArray]];
+
 	// Set the delegates and title
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:appName];
@@ -147,6 +152,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -178,6 +184,22 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Show the current unread count on the app icon
 	originalIcon = [[NSApp applicationIconImage] copy];
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
+	
+	// Set alternate in main menu for opening pages, and check for correct title of menu item
+	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
+	NSMenuItem * alternateItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	if (alternateItem != nil)
+	{
+		[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+		[alternateItem setAlternate:YES];
+	}
+	alternateItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	if (alternateItem != nil)
+	{
+		[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+		[alternateItem setAlternate:YES];
+	}
+	[self updateAlternateMenuTitle];
 
 	// Create a menu for the search field
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
@@ -228,6 +250,36 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Do safe initialisation.
 	[self doSafeInitialisation];
+}
+
+/* localiseMenus
+ * As of 2.0.1, the menu localisation is now done through the Localizable.strings file rather than
+ * the NIB file due to the effort in managing localised NIBs for an increasing number of languages.
+ * Also, note care is taken not to localise those commands that were added by the OS. If there is
+ * no equivalent in the Localizable.strings file, we do nothing.
+ */
+-(void)localiseMenus:(NSArray *)arrayOfMenus
+{
+	int count = [arrayOfMenus count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		NSMenuItem * menuItem = [arrayOfMenus objectAtIndex:index];
+		if (menuItem != nil && ![menuItem isSeparatorItem])
+		{
+			NSString * localisedMenuTitle = NSLocalizedString([menuItem title], nil);
+			if ([menuItem submenu])
+			{
+				NSMenu * subMenu = [menuItem submenu];
+				if (localisedMenuTitle != nil)
+					[subMenu setTitle:localisedMenuTitle];
+				[self localiseMenus:[subMenu itemArray]];
+			}
+			if (localisedMenuTitle != nil)
+				[menuItem setTitle:localisedMenuTitle];
+		}
+	}
 }
 
 /* doSafeInitialisation
@@ -548,53 +600,124 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* contextMenuItemsForElement
  * Creates a new context menu for our web pane.
  */
--(NSArray *)contextMenuItemsLink:(NSURL *)urlLink defaultMenuItems:(NSArray *)defaultMenuItems
+-(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
 	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
+	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
+	NSURL * imageURL;
+	NSString * defaultLocation;
+	NSString * alternateLocation;
+	NSString * defaultBrowser = getDefaultBrowser();
+	if (defaultBrowser == nil)
+		defaultBrowser = NSLocalizedString(@"External Browser", nil);
+	Preferences * prefs = [Preferences standardPreferences];
+	if ([prefs openLinksInVienna])
+	{
+		defaultLocation = NSLocalizedString(@"New Tab", nil);
+		alternateLocation = defaultBrowser;
+	}
+	else
+	{
+		defaultLocation = defaultBrowser;
+		alternateLocation = NSLocalizedString(@"New Tab", nil);
+	}
+	NSMenuItem * newMenuItem;
 	int count = [newDefaultMenu count];
 	int index;
 	
+	// Note: this is only safe to do if we're going from [count..0] when iterating
+	// over newDefaultMenu. If we switch to the other direction, this will break.
 	for (index = count - 1; index >= 0; --index)
 	{
 		NSMenuItem * menuItem = [newDefaultMenu objectAtIndex:index];
 		switch ([menuItem tag])
 		{
 			case WebMenuItemTagOpenImageInNewWindow:
-				[menuItem setTitle:NSLocalizedString(@"Open Image in New Tab", nil)];
+				imageURL = [element valueForKey:WebElementImageURLKey];
+				if (imageURL != nil)
+				{
+					[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultLocation]];
+					[menuItem setTarget:self];
+					[menuItem setAction:@selector(openWebElementInBrowser:)];
+					[menuItem setRepresentedObject:imageURL];
+					[menuItem setTag:WebMenuItemTagOther];
+					newMenuItem = [[NSMenuItem alloc] init];
+					if (newMenuItem != nil)
+					{
+						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), alternateLocation]];
+						[newMenuItem setTarget:self];
+						[newMenuItem setAction:@selector(openWebElementInAlternateBrowser:)];
+						[newMenuItem setRepresentedObject:imageURL];
+						[newMenuItem setTag:WebMenuItemTagOther];
+						[newMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+						[newMenuItem setAlternate:YES];
+						[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
+					}
+					[newMenuItem release];
+				}
 				break;
 
 			case WebMenuItemTagOpenFrameInNewWindow:
-				[menuItem setTitle:NSLocalizedString(@"Open Frame in New Tab", nil)];
+				[menuItem setTitle:NSLocalizedString(@"Open Frame", nil)];
 				break;
 
-			case WebMenuItemTagOpenLinkInNewWindow: {
-				[menuItem setTitle:NSLocalizedString(@"Open Link in New Tab", nil)];
+			case WebMenuItemTagOpenLinkInNewWindow:
+				[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultLocation]];
 				[menuItem setTarget:self];
-				[menuItem setAction:@selector(openLinkInNewTab:)];
+				[menuItem setAction:@selector(openWebElementInBrowser:)];
 				[menuItem setRepresentedObject:urlLink];
-
-				// Note: this is only safe to do if we're going from [count..0] when iterating
-				// over newDefaultMenu. If we switch to the other direction, this will break.
-				NSMenuItem * newMenuItem = [[NSMenuItem alloc] init];
-				NSString * defaultBrowser = getDefaultBrowser();
-				if (newMenuItem != nil && defaultBrowser != nil)
+				[menuItem setTag:WebMenuItemTagOther];
+				newMenuItem = [[NSMenuItem alloc] init];
+				if (newMenuItem != nil)
 				{
-					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultBrowser]];
+					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), alternateLocation]];
 					[newMenuItem setTarget:self];
-					[newMenuItem setAction:@selector(openLinkInBrowser:)];
+					[newMenuItem setAction:@selector(openWebElementInAlternateBrowser:)];
 					[newMenuItem setRepresentedObject:urlLink];
 					[newMenuItem setTag:WebMenuItemTagOther];
+					[newMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+					[newMenuItem setAlternate:YES];
 					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 				}
 				[newMenuItem release];
 				break;
-				}
 
 			case WebMenuItemTagCopyLinkToClipboard:
 				[menuItem setTitle:NSLocalizedString(@"Copy Link to Clipboard", nil)];
 				break;
 		}
 	}
+	
+	if (urlLink == nil)
+	{
+		// Separate our new commands from the existing ones.
+		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
+		
+		// Add command to open the current page in the external browser
+		newMenuItem = [[NSMenuItem alloc] init];
+		if (newMenuItem != nil)
+		{
+			[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Page in %@", nil), defaultBrowser]];
+			[newMenuItem setTarget:self];
+			[newMenuItem setAction:@selector(openPageInBrowser:)];
+			[newMenuItem setTag:WebMenuItemTagOther];
+			[newDefaultMenu addObject:newMenuItem];
+		}
+		[newMenuItem release];
+		
+		// Add command to copy the URL of the current page to the clipboard
+		newMenuItem = [[NSMenuItem alloc] init];
+		if (newMenuItem != nil)
+		{
+			[newMenuItem setTitle:NSLocalizedString(@"Copy Page Link to Clipboard", nil)];
+			[newMenuItem setTarget:self];
+			[newMenuItem setAction:@selector(copyPageURLToClipboard:)];
+			[newMenuItem setTag:WebMenuItemTagOther];
+			[newDefaultMenu addObject:newMenuItem];
+		}
+		[newMenuItem release];
+	}
+	
 	return [newDefaultMenu autorelease];
 }
 
@@ -633,48 +756,50 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* openLinkInBrowser
- * Open the specified link in an external browser.
+/* openWebElementInBrowser
+ * Open the specified element in a new tab or in an external browser
  */
--(IBAction)openLinkInBrowser:(id)sender
+-(IBAction)openWebElementInBrowser:(id)sender
 {
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		[self openURLInDefaultBrowser:[item representedObject]];
+		[self openURL:[item representedObject] inPreferredBrowser:YES];
 	}
 }
 
-/* openLinkInNewTab
- * Open the specified link in a new tab.
+/* openWebElementInAlternateBrowser
+ * Open the specified element in a new tab or in an external browser
  */
--(IBAction)openLinkInNewTab:(id)sender
+-(IBAction)openWebElementInAlternateBrowser:(id)sender
 {
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		Preferences * prefs = [Preferences standardPreferences];
-		[self openURLInNewTab:[item representedObject] inBackground:[prefs openLinksInBackground]];
+		[self openURL:[item representedObject] inPreferredBrowser:NO];
 	}
 }
 
-/* openURLInBrowser
+/* openURLFromString
  * Open a URL in either the internal Vienna browser or an external browser depending on
  * whatever the user has opted for.
  */
--(void)openURLInBrowser:(NSString *)urlString
+-(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
 {
-	[self openURLInBrowserWithURL:[NSURL URLWithString:urlString]];
+	[self openURL:[NSURL URLWithString:urlString] inPreferredBrowser:openInPreferredBrowserFlag];
 }
 
-/* openURLInBrowserWithURL
+/* openURL
  * Open a URL in either the internal Vienna browser or an external browser depending on
  * whatever the user has opted for.
  */
--(void)openURLInBrowserWithURL:(NSURL *)url
+-(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	if ([prefs openLinksInVienna])
+	BOOL openURLInVienna = [prefs openLinksInVienna];
+	if (!openInPreferredBrowserFlag)
+		openURLInVienna = (!openURLInVienna);
+	if (openURLInVienna)
 		[self openURLInNewTab:url inBackground:[prefs openLinksInBackground]];
 	else
 		[self openURLInDefaultBrowser:url];
@@ -1237,6 +1362,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self updateCloseCommands];
 }
 
+/* handleReloadPreferences
+ * Called when MA_Notify_PreferencesUpdated is broadcast.
+ * Update the menus.
+ */
+-(void)handleReloadPreferences:(NSNotification *)nc
+{
+	[self updateAlternateMenuTitle];
+	[foldersTree updateAlternateMenuTitle];
+	[mainArticleView updateAlternateMenuTitle];
+}
+
 /* handleCheckFrequencyChange
  * Called when the refresh frequency is changed.
  */
@@ -1410,7 +1546,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Article * theArticle = [self selectedArticle];
 	if (theArticle && ![[theArticle link] isBlank])
-		[self openURLInBrowser:[theArticle link]];
+		[self openURLFromString:[theArticle link] inPreferredBrowser:YES];
+}
+
+/* viewArticlePageInAlternateBrowser
+ * Display the article in the non-preferred browser.
+ */
+-(IBAction)viewArticlePageInAlternateBrowser:(id)sender
+{
+	Article * theArticle = [self selectedArticle];
+	if (theArticle && ![[theArticle link] isBlank])
+		[self openURLFromString:[theArticle link] inPreferredBrowser:NO];
 }
 
 /* goForward
@@ -1526,7 +1672,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 		case NSEnterCharacter:
 		case NSCarriageReturnCharacter:
-			[self viewArticlePage:self];
+			if (flags & NSShiftKeyMask)
+				[self viewArticlePageInAlternateBrowser:self];
+			else
+				[self viewArticlePage:self];
 			return YES;
 	}
 	return [[browserView activeTabView] handleKeyDown:keyChar withFlags:flags];
@@ -1792,84 +1941,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)renameFolder:(id)sender
 {
-	Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-
-	// Initialise field
-	[renameField setStringValue:[folder name]];
-	[renameWindow makeFirstResponder:renameField];
-
-	[NSApp beginSheet:renameWindow
-	   modalForWindow:mainWindow 
-		modalDelegate:self 
-	   didEndSelector:nil 
-		  contextInfo:nil];
-}
-
-/* renameUndo
- * Undo a folder rename action. Also create a redo action to reapply the original
- * change back again.
- */
--(void)renameUndo:(id)anObject
-{
-	NSDictionary * undoAttributes = (NSDictionary *)anObject;
-	Folder * folder = [undoAttributes objectForKey:@"Folder"];
-	NSString * oldName = [undoAttributes objectForKey:@"Name"];
-
-	NSMutableDictionary * redoAttributes = [NSMutableDictionary dictionary];
-
-	[redoAttributes setValue:[folder name] forKey:@"Name"];
-	[redoAttributes setValue:folder forKey:@"Folder"];
-
-	NSUndoManager * undoManager = [mainWindow undoManager];
-	[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:redoAttributes];
-	[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
-
-	[db setFolderName:[folder itemId] newName:oldName];
-}
-
-/* endRenameFolder
- * Called when the user OK's the Rename Folder sheet
- */
--(IBAction)endRenameFolder:(id)sender
-{
-	Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
-	NSString * newName = [[renameField stringValue] trim];
-
-	if ([[folder name] isEqualToString:newName])
-	{
-		[renameWindow orderOut:sender];
-		[NSApp endSheet:renameWindow returnCode:0];
-	}
-	else
-	{
-		if ([db folderFromName:newName] != nil)
-			runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
-		else
-		{
-			[renameWindow orderOut:sender];
-			[NSApp endSheet:renameWindow returnCode:1];
-			
-			NSMutableDictionary * renameAttributes = [NSMutableDictionary dictionary];
-			
-			[renameAttributes setValue:[folder name] forKey:@"Name"];
-			[renameAttributes setValue:folder forKey:@"Folder"];
-			
-			NSUndoManager * undoManager = [mainWindow undoManager];
-			[undoManager registerUndoWithTarget:self selector:@selector(renameUndo:) object:renameAttributes];
-			[undoManager setActionName:NSLocalizedString(@"Rename", nil)];
-			
-			[db setFolderName:[mainArticleView currentFolderId] newName:newName];
-		}
-	}
-}
-
-/* cancelRenameFolder
- * Called when the user cancels the Rename Folder sheet
- */
--(IBAction)cancelRenameFolder:(id)sender
-{
-	[renameWindow orderOut:sender];
-	[NSApp endSheet:renameWindow returnCode:0];
+	if (!renameFolder)
+		renameFolder = [[RenameFolder alloc] init];
+	[renameFolder renameFolder:mainWindow folderId:[foldersTree actualSelection]];
 }
 
 /* deleteFolder
@@ -1967,7 +2041,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (validatorPage != nil)
 		{
 			NSString * validatorURL = [NSString stringWithFormat:validatorPage, [folder feedURL]];
-			[self openURLInBrowser:validatorURL];
+			[self openURLFromString:validatorURL inPreferredBrowser:YES];
 		}
 	}
 }
@@ -1981,7 +2055,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (thisArticle != nil)
 	{
 		Folder * folder = [db folderFromID:[thisArticle folderId]];
-		[self openURLInBrowser:[folder homePage]];
+		[self openURLFromString:[folder homePage] inPreferredBrowser:YES];
+	}
+}
+
+/* viewSourceHomePageInAlternateBrowser
+ * Display the web site associated with this feed, if there is one, in non-preferred browser.
+ */
+-(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender
+{
+	Article * thisArticle = [self selectedArticle];
+	if (thisArticle != nil)
+	{
+		Folder * folder = [db folderFromID:[thisArticle folderId]];
+		[self openURLFromString:[folder homePage] inPreferredBrowser:NO];
 	}
 }
 
@@ -2056,6 +2143,35 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSView<BaseView> * theView = [browserView activeTabView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 		[theView performSelector:@selector(handleStopLoading:)];
+}
+
+/* updateAlternateMenuTitle
+ * Set the appropriate title for the menu items that override browser preferences
+ * For future implementation, perhaps we can save a lot of code by
+ * creating an ivar for the title string and binding the menu's title to it.
+ */
+-(void)updateAlternateMenuTitle
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSString * alternateLocation;
+	if ([prefs openLinksInVienna])
+	{
+		alternateLocation = getDefaultBrowser();
+		if (alternateLocation == nil)
+			alternateLocation = NSLocalizedString(@"External Browser", nil);
+	}
+	else
+		alternateLocation = [self appName];
+	NSMenuItem * item = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	if (item != nil)
+	{
+		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@", nil), alternateLocation]];
+	}
+	item = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	if (item != nil)
+	{
+		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation]];
+	}
 }
 
 /* updateSearchPlaceholder
@@ -2255,7 +2371,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return [self isConnecting];
 	}
-	else if (theAction == @selector(viewSourceHomePage:))
+	else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:)))
 	{
 		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)
@@ -2265,7 +2381,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		return NO;
 	}
-	else if (theAction == @selector(viewArticlePage:))
+	else if ((theAction == @selector(viewArticlePage:)) || (theAction == @selector(viewArticlePageInAlternateBrowser:)))
 	{
 		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)

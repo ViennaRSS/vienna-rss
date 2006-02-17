@@ -54,8 +54,10 @@
                 toggleActivityViewer = id; 
                 validateFeed = id; 
                 viewArticlePage = id; 
+                viewArticlePageInAlternateBrowser = id; 
                 viewNextUnread = id; 
                 viewSourceHomePage = id; 
+                viewSourceHomePageInAlternateBrowser = id; 
             }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 

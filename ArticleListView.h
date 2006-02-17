@@ -73,6 +73,7 @@
 -(void)initialiseArticleView;
 -(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
 -(void)refreshFolder:(BOOL)reloadData;
+-(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(int)currentFolderId;

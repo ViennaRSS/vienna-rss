@@ -23,6 +23,7 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 BOOL isAccessible(NSString * urlString);
 void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...);
 void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...);
+NSMenuItem * menuWithAction(SEL theSelector);
 NSMenuItem * copyOfMenuWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
 BOOL hasOSScriptsMenu(void);

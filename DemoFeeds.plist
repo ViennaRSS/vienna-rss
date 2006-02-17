@@ -12,5 +12,15 @@
 		<key>URL</key>
 		<string>http://images.apple.com/main/rss/hotnews/hotnews.rss</string>
 	</dict>
+	<key>Slashdot</key>
+	<dict>
+		<key>URL</key>
+		<string>http://rss.slashdot.org/Slashdot/slashdot</string>
+	</dict>
+	<key>The Unofficial Apple Weblog (TUAW)</key>
+	<dict>
+		<key>URL></key>
+		<string>http://www.tuaw.com/rss.xml</string>
+	</dict>
 </dict>
 </plist>

@@ -77,8 +77,8 @@
 -(void)setReadingPaneOnRight:(BOOL)flag;
 -(void)setRefreshOnStartup:(BOOL)flag;
 -(void)setCheckForNewOnStartup:(BOOL)flag;
--(void)setOpenLinksInVienna:(float)flag;
--(void)setOpenLinksInBackground:(float)flag;
+-(void)setOpenLinksInVienna:(BOOL)flag;
+-(void)setOpenLinksInBackground:(BOOL)flag;
 -(void)setMinimumFontSize:(int)newSize;
 -(void)setEnableMinimumFontSize:(BOOL)flag;
 -(void)setRefreshFrequency:(int)newFrequency;
