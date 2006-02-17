@@ -247,53 +247,11 @@
 {
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
 	if (urlLink != nil) 
-		return [controller contextMenuItemsLink:urlLink defaultMenuItems:defaultMenuItems];
+		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	
 	WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
 	if (frameKey != nil && !isLocalFile)
-	{
-		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
-
-		// Rename some items to replace 'Window' with 'Tab'.
-		int count = [newDefaultMenu count];
-		int index;
-		for (index = count - 1; index >= 0; --index)
-		{
-			NSMenuItem * menuItem = [newDefaultMenu objectAtIndex:index];
-			if ([menuItem tag] == WebMenuItemTagOpenImageInNewWindow)
-				[menuItem setTitle:NSLocalizedString(@"Open Image in New Tab", nil)];
-		}
-
-		// Separate our new commands from the existing ones.
-		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
-		
-		// Add command to open the current page in the external browser
-		NSString * defaultBrowser = getDefaultBrowser();
-		NSMenuItem * newMenuItem = [[NSMenuItem alloc] init];
-		if (defaultBrowser != nil && newMenuItem != nil)
-		{
-			[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Page in %@", nil), defaultBrowser]];
-			[newMenuItem setTarget:controller];
-			[newMenuItem setAction:@selector(openPageInBrowser:)];
-			[newMenuItem setTag:WebMenuItemTagOther];
-			[newDefaultMenu addObject:newMenuItem];
-		}
-		[newMenuItem release];
-
-		// Add command to copy the URL of the current page to the clipboard
-		newMenuItem = [[NSMenuItem alloc] init];
-		if (newMenuItem != nil)
-		{
-			[newMenuItem setTitle:NSLocalizedString(@"Copy Page Link to Clipboard", nil)];
-			[newMenuItem setTarget:controller];
-			[newMenuItem setAction:@selector(copyPageURLToClipboard:)];
-			[newMenuItem setTag:WebMenuItemTagOther];
-			[newDefaultMenu addObject:newMenuItem];
-			[newMenuItem release];
-		}
-		
-		return [newDefaultMenu autorelease];
-	}
+		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	
 	return defaultMenuItems;
 }

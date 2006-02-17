@@ -375,7 +375,7 @@ static Preferences * _standardPreferences = nil;
  * Changes whether or not links clicked in Vienna are opened in Vienna or the default system
  * browser, then sends a notification that the preferences have changed.
  */
--(void)setOpenLinksInVienna:(float)flag
+-(void)setOpenLinksInVienna:(BOOL)flag
 {
 	if (openLinksInVienna != flag)
 	{
@@ -397,7 +397,7 @@ static Preferences * _standardPreferences = nil;
  * Changes whether or not links clicked in Vienna are opened in the background then sends a notification
  * that the preferences have changed.
  */
--(void)setOpenLinksInBackground:(float)flag
+-(void)setOpenLinksInBackground:(BOOL)flag
 {
 	if (openLinksInBackground != flag)
 	{

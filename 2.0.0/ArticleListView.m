@@ -122,7 +122,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
-	[articleText setOpenLinksInNewTab:YES];
+	[articleText setOpenLinksInNewBrowser:YES];
 	
 	// Disable caching
 	[articleText setMaintainsBackForwardList:NO];
@@ -253,7 +253,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-	[controller openURLInBrowserWithURL:[request URL]];
+	[controller openURL:[request URL] inPreferredBrowser:YES];
+	// Change this to handle modifier key?
+	// Is this covered by the webView policy?
 	return nil;
 }
 
@@ -282,7 +284,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
-	return (urlLink != nil) ? [controller contextMenuItemsLink:urlLink defaultMenuItems:defaultMenuItems] : nil;
+	return (urlLink != nil) ? [controller contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:defaultMenuItems] : nil;
 }
 
 /* initTableView
@@ -337,7 +339,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(restoreMessage:))];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
+	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+	[alternateItem setAlternate:YES];
+	[articleListMenu addItem:alternateItem];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewArticlePage:))];
+	alternateItem = copyOfMenuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+	[alternateItem setAlternate:YES];
+	[articleListMenu addItem:alternateItem];
 	[articleList setMenu:articleListMenu];
 	[articleListMenu release];
 
@@ -391,7 +401,41 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (currentSelectedRow != -1 && [articleList clickedRow] != -1)
 	{
 		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
-		[controller openURLInBrowser:[theArticle link]];
+		[controller openURLFromString:[theArticle link] inPreferredBrowser:YES];
+	}
+}
+
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ * when user changes preference for opening pages in external browser
+ */
+-(void)updateAlternateMenuTitle
+{
+	NSMenuItem * mainMenuItem;
+	NSMenuItem * contextualMenuItem;
+	int index;
+	NSMenu * articleListMenu = [articleList menu];
+	if (articleListMenu == nil)
+		return;
+	mainMenuItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	if (mainMenuItem != nil)
+	{
+		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+		if (index >= 0)
+		{
+			contextualMenuItem = [articleListMenu itemAtIndex:index];
+			[contextualMenuItem setTitle:[mainMenuItem title]];
+		}
+	}
+	mainMenuItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	if (mainMenuItem != nil)
+	{
+		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePageInAlternateBrowser:)];
+		if (index >= 0)
+		{
+			contextualMenuItem = [articleListMenu itemAtIndex:index];
+			[contextualMenuItem setTitle:[mainMenuItem title]];
+		}
 	}
 }
 

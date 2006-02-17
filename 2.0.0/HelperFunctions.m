@@ -54,11 +54,11 @@ NSString * getDefaultBrowser(void)
 	return [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
 }
 
-/* copyOfMenuWithAction
- * Returns an NSMenuItem that matches the one that implements the corresponding
+/* menuWithAction
+ * Returns the first NSMenuItem that matches the one that implements the corresponding
  * action in the application main menu. Returns nil if no match is found.
  */
-NSMenuItem * copyOfMenuWithAction(SEL theSelector)
+NSMenuItem * menuWithAction(SEL theSelector)
 {
 	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
 	int count = [arrayOfMenus count];
@@ -69,12 +69,19 @@ NSMenuItem * copyOfMenuWithAction(SEL theSelector)
 		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
 		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
 		if (itemIndex >= 0)
-		{
-			NSMenuItem * item = [subMenu itemAtIndex:itemIndex];
-			return [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease];
-		}
+			return [subMenu itemAtIndex:itemIndex];
 	}
 	return nil;
+}
+
+/* copyOfMenuWithAction
+ * Returns an NSMenuItem that matches the one that implements the corresponding
+ * action in the application main menu. Returns nil if no match is found.
+ */
+NSMenuItem * copyOfMenuWithAction(SEL theSelector)
+{
+	NSMenuItem * item = menuWithAction(theSelector);
+	return (item) ? [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease] : nil;
 }
 
 /* loadMapFromPath

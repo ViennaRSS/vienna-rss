@@ -284,8 +284,8 @@
 -(void)setReadingPaneOnRight:(BOOL)flag				{ [[Preferences standardPreferences] setReadingPaneOnRight:flag]; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [[Preferences standardPreferences] setRefreshOnStartup:flag]; }
 -(void)setCheckForNewOnStartup:(BOOL)flag			{ [[Preferences standardPreferences] setCheckForNewOnStartup:flag]; }
--(void)setOpenLinksInVienna:(float)flag				{ [[Preferences standardPreferences] setOpenLinksInVienna:flag]; }
--(void)setOpenLinksInBackground:(float)flag			{ [[Preferences standardPreferences] setOpenLinksInBackground:flag]; }
+-(void)setOpenLinksInVienna:(BOOL)flag				{ [[Preferences standardPreferences] setOpenLinksInVienna:flag]; }
+-(void)setOpenLinksInBackground:(BOOL)flag			{ [[Preferences standardPreferences] setOpenLinksInBackground:flag]; }
 -(void)setMinimumFontSize:(int)newSize				{ [[Preferences standardPreferences] setMinimumFontSize:newSize]; }
 -(void)setEnableMinimumFontSize:(BOOL)flag			{ [[Preferences standardPreferences] setEnableMinimumFontSize:flag]; }
 -(void)setRefreshFrequency:(int)newFrequency		{ [[Preferences standardPreferences] setRefreshFrequency:newFrequency]; }

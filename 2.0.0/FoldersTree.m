@@ -105,26 +105,6 @@
 	// Set header
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
 
-	// Dynamically create the popup menu. This is one less thing to
-	// explicitly localise in the NIB file.
-	NSMenu * folderMenu = [[NSMenu alloc] init];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(validateFeed:))];
-
-	// Want tooltips
-	[outlineView setEnableTooltips:YES];
-	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
-	[newSubButton setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
-	[refreshButton setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
-
 	// Allow double-click a node to edit the node
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
@@ -136,11 +116,6 @@
 	// Don't resize the column when items are expanded as this messes up
 	// the placement of the unread count button.
 	[outlineView setAutoresizesOutlineColumn:NO];
-
-	// Set the menu for the popup button
-	[popupMenu setMenu:folderMenu];
-	[outlineView setMenu:folderMenu];
-	[folderMenu release];
 
 	// Register for dragging
 	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
@@ -164,6 +139,35 @@
  */
 -(void)initialiseFoldersTree
 {
+	// Dynamically create the popup menu. This is one less thing to
+	// explicitly localise in the NIB file.
+	NSMenu * folderMenu = [[NSMenu alloc] init];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
+	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+	[alternateItem setAlternate:YES];
+	[folderMenu addItem:alternateItem];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(validateFeed:))];
+	
+	// Want tooltips
+	[outlineView setEnableTooltips:YES];
+	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
+	[newSubButton setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
+	[refreshButton setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
+	
+	// Set the menu for the popup button
+	[popupMenu setMenu:folderMenu];
+	[outlineView setMenu:folderMenu];
+	[folderMenu release];
+	
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[NSUserDefaults standardUserDefaults] arrayForKey:MAPref_FolderStates]];
 	blockSelectionHandler = NO;
@@ -314,6 +318,41 @@
 		node = [node nextChild];
 	}
 	return array;
+}
+
+/* updateAlternateMenuTitle
+ * Sets the appropriate title for the alternate item in the contextual menu
+ * when user changes preferences for opening pages in external browser
+ */
+-(void)updateAlternateMenuTitle
+{
+	NSMenuItem * mainMenuItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	if (mainMenuItem == nil)
+		return;
+	NSString * menuTitle = [mainMenuItem title];
+	int index;
+	NSMenu * contextualItem;
+	NSMenu * folderMenu = [popupMenu menu];
+	if (folderMenu != nil)
+	{
+		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+		if (index >= 0)
+		{
+			contextualItem = [folderMenu itemAtIndex:index];
+			[contextualItem setTitle:menuTitle];
+		}
+	}
+	
+	folderMenu = [outlineView menu];
+	if (folderMenu != nil)
+	{
+		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
+		if (index >= 0)
+		{
+			contextualItem = [folderMenu itemAtIndex:index];
+			[contextualItem setTitle:menuTitle];
+		}
+	}
 }
 
 /* updateFolder
@@ -511,7 +550,7 @@
 	{
 		NSString * urlString = [[node folder] homePage];
 		if (urlString && ![urlString isBlank])
-			[[NSApp delegate] openURLInBrowser:urlString];
+			[[NSApp delegate] openURLFromString:urlString inPreferredBrowser:YES];
 	}
 	else
 		[nc postNotificationName:@"MA_Notify_EditFolder" object:node];

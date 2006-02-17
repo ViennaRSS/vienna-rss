@@ -79,11 +79,11 @@
 
 // Opening URL links in Vienna
 -(BOOL)openLinksInVienna;
--(void)setOpenLinksInVienna:(float)flag;
+-(void)setOpenLinksInVienna:(BOOL)flag;
 
 // Opening URL links in background
 -(BOOL)openLinksInBackground;
--(void)setOpenLinksInBackground:(float)flag;
+-(void)setOpenLinksInBackground:(BOOL)flag;
 
 // Minimum font size settings
 -(int)minimumFontSize;

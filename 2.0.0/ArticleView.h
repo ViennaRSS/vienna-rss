@@ -26,14 +26,14 @@
 @interface ArticleView : WebView {
 	AppController * controller;
 	WebPreferences * defaultWebPrefs;
-	BOOL openLinksInNewTab;
+	BOOL openLinksInNewBrowser;
 	BOOL isFeedRedirect;
 	BOOL isDownload;
 }
 
 // Public functions
 -(void)setController:(AppController *)theController;
--(void)setOpenLinksInNewTab:(BOOL)flag;
+-(void)setOpenLinksInNewBrowser:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
 -(BOOL)isFeedRedirect;

@@ -44,7 +44,12 @@
 		[exportSelected setState:NSOffState];
 		[exportAll setState:NSOnState];
 	}
-	
+
+	// Localise the strings
+	[exportAll setTitle:NSLocalizedString(@"Export all subscriptions", nil)];
+	[exportSelected setTitle:NSLocalizedString(@"Export selected subscriptions", nil)];
+	[exportWithGroups setTitle:NSLocalizedString(@"Preserve group folders in exported file", nil)];
+
 	[panel setAccessoryView:exportSaveAccessory];
 	[panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
 	[panel beginSheetForDirectory:nil

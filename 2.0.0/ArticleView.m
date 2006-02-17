@@ -48,7 +48,7 @@
 	{
 		// Init our vars
 		controller = nil;
-		openLinksInNewTab = NO;
+		openLinksInNewBrowser = NO;
 		isFeedRedirect = NO;
 		isDownload = NO;
 
@@ -81,12 +81,12 @@
 	[self setPolicyDelegate:self];
 }
 
-/* setOpenLinksInNewTab
- * Specify whether links are opened in a new tab by default.
+/* setOpenLinksInNewBrowser
+ * Specify whether links are opened in a new browser by default.
  */
--(void)setOpenLinksInNewTab:(BOOL)flag
+-(void)setOpenLinksInNewBrowser:(BOOL)flag
 {
-	openLinksInNewTab = flag;
+	openLinksInNewBrowser = flag;
 }
 
 /* setIsDownload
@@ -202,9 +202,11 @@
 			return;
 		}
 
-		// For anything else, we open in a new tab.
+		// For anything else, we open in a new tab or in the external browser.
+		unsigned int modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
+		BOOL useAlternateBrowser = (modifierFlag & NSShiftKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
-		[controller openURLInBrowserWithURL:[request URL]];
+		[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
 		return;
 	}
 	[listener use];
@@ -212,19 +214,33 @@
 
 /* decidePolicyForNavigationAction
  * Called by the web view to get our policy on handling navigation actions. We want links clicked in the
- * web view to open in the same view unless the "open links in new tab" option is set or the Command key is held
+ * web view to open in the same view unless the "open links in new browser" option is set or the Command key is held
  * down. If either of those cases are true, we open the link in a new tab or in the external browser.
  */
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	NSNumber * modifierFlags = [actionInformation valueForKey:@"WebActionModifierFlagsKey"];
-
-	if (navType == WebNavigationTypeLinkClicked && (openLinksInNewTab || ([modifierFlags intValue] & NSCommandKeyMask)))
+	unsigned int modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
+	BOOL useAlternateBrowser = (modifierFlags & NSShiftKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
+	
+	if (navType == WebNavigationTypeLinkClicked)
 	{
-		[listener ignore];
-		[controller openURLInBrowserWithURL:[request URL]];
-		return;
+		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
+		{
+			[listener ignore];
+			[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
+			return;
+		}
+		else
+		{
+			Preferences * prefs = [Preferences standardPreferences];
+			if ([prefs openLinksInVienna] == useAlternateBrowser)
+			{
+				[listener ignore];
+				[controller openURLInDefaultBrowser:[request URL]];
+				return;
+			}
+		}
 	}
 	if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"])
 	{

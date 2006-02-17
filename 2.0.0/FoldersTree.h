@@ -49,6 +49,7 @@
 -(void)setController:(AppController *)theController;
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
+-(void)updateAlternateMenuTitle;
 -(void)updateFolder:(int)folderId recurseToParents:(BOOL)recurseToParents;
 -(BOOL)selectFolder:(int)folderId;
 -(int)actualSelection;

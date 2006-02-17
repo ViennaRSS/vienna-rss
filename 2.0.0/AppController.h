@@ -30,6 +30,7 @@
 @class DownloadWindow;
 @class NewSubscription;
 @class NewGroupFolder;
+@class RenameFolder;
 @class WebPreferences;
 @class BrowserView;
 @class ArticleListView;
@@ -37,8 +38,6 @@
 @interface AppController : NSObject <GrowlApplicationBridgeDelegate> {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet FoldersTree * foldersTree;
-	IBOutlet NSWindow * renameWindow;
-	IBOutlet NSTextField * renameField;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet ArticleListView * mainArticleView;
@@ -63,6 +62,7 @@
 	SearchFolder * smartFolder;
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
+	RenameFolder * renameFolder;
 
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;
@@ -103,10 +103,14 @@
 -(IBAction)readingPaneOnRight:(id)sender;
 -(IBAction)readingPaneOnBottom:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
+-(IBAction)viewArticlePageInAlternateBrowser:(id)sender;
+-(IBAction)openWebElementInBrowser:(id)sender;
+-(IBAction)openWebElementInAlternateBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)validateFeed:(id)sender;
 -(IBAction)viewSourceHomePage:(id)sender;
+-(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender;
 -(IBAction)emptyTrash:(id)sender;
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
@@ -126,11 +130,11 @@
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
--(NSArray *)contextMenuItemsLink:(NSURL *)urlLink defaultMenuItems:(NSArray *)defaultMenuItems;
+-(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
--(void)openURLInBrowser:(NSString *)urlString;
+-(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
+-(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURLInNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
--(void)openURLInBrowserWithURL:(NSURL *)url;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(BOOL)selectFolder:(int)folderId;
