@@ -12,10 +12,10 @@
 		<key>URL</key>
 		<string>http://images.apple.com/main/rss/hotnews/hotnews.rss</string>
 	</dict>
-	<key>Slashdot</key>
+	<key>Nibblous</key>
 	<dict>
 		<key>URL</key>
-		<string>http://rss.slashdot.org/Slashdot/slashdot</string>
+		<string>http://www.nibblous.com/nibblous.rss</string>
 	</dict>
 	<key>The Unofficial Apple Weblog (TUAW)</key>
 	<dict>
