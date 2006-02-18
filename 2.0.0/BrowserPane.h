@@ -34,11 +34,12 @@
 	BOOL isLocalFile;
 	BOOL isLoadingFrame;
 	BOOL hasPageTitle;
+	BOOL openURLInBackground;
 }
 
 // Accessor functions
 -(void)setController:(AppController *)theController;
--(void)loadURL:(NSURL *)url;
+-(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(NSURL *)url;
 -(void)setTab:(BrowserTab *)newTab;
 -(BOOL)isLoading;

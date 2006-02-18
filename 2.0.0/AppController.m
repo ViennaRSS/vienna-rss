@@ -814,7 +814,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 	[newBrowserPane setController:self];
 	[newBrowserPane setTab:tab];
-	[newBrowserPane loadURL:url];
+	[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
 	[newBrowserPane release];
 }
 

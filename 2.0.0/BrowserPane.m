@@ -64,6 +64,7 @@
 		isLoadingFrame = NO;
 		isLocalFile = NO;
 		hasPageTitle = NO;
+		openURLInBackground = NO;
 		pageFilename = nil;
 		lastError = nil;
     }
@@ -101,9 +102,10 @@
 /* loadURL
  * Load the specified URL into the web frame.
  */
--(void)loadURL:(NSURL *)url
+-(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
 	hasPageTitle = NO;
+	openURLInBackground = openInBackgroundFlag;
 	isLocalFile = [url isFileURL];
 	
 	[pageFilename release];
@@ -144,6 +146,17 @@
 	}
 }
 
+/* didCommitLoadForFrame
+ * Invoked when data source of frame has started to receive data.
+ */
+-(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
+{
+	if ((frame == [webPane mainFrame]) && (!openURLInBackground))
+	{
+		[[sender window] makeFirstResponder:sender];
+	}
+}
+
 /* didFailProvisionalLoadWithError
  * Invoked when a location request for frame has failed to load.
  */
@@ -177,6 +190,7 @@
 		}
 	}
 	isLoadingFrame = NO;
+	openURLInBackground = NO;
 }
 
 /* didFailLoadWithError
