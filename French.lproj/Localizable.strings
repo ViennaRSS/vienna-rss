@@ -250,9 +250,9 @@
 "New Subscription…" = "Nouvel abonnement…";
 "Next Tab" = "Onglet suivant";
 "Open Article Page" = "Afficher Page de l'article";
-"Open Article Page in External Browser" = "Open Article Page in External Browser";
+"Open Article Page in External Browser" = "Afficher la page de l'article dans le navigateur externe";
 "Open Subscription Home Page" = "Afficher Page source de l'abonnement";
-"Open Subscription Home Page in External Browser" = "Open Subscription Home Page in External Browser";
+"Open Subscription Home Page in External Browser" = "Afficher la page de l'abonnement dans le navigateur externe";
 "Page Setup…" = "Mise en page…";
 "Paste" = "Coller";
 "Preferences…" = "Préférences…";
@@ -287,9 +287,9 @@
 "Export all subscriptions" = "Exporter tous les abonnements";
 "Export selected subscriptions" = "Exporter les abonnements sélectionnés";
 "Preserve group folders in exported file" = "Conserver le groupement par dossier dans le fichier exporté";
-"Open Frame" = "Open Frame";
-"Open Image in %@" = "Open Image in %@";
-"Open Subscription Home Page in %@" = "Open Subscription Home Page in %@";
-"Open Article Page in %@" = "Open Article Page in %@";
-"New Tab" = "New Tab";
-"External Browser" = "External Browser";
+"Open Frame" = "Afficher le cadre";
+"Open Image in %@" = "Afficher l'image dans %@";
+"Open Subscription Home Page in %@" = "Afficher la page de l'abonnement dans %@";
+"Open Article Page in %@" = "Afficher la page de l'article dans %@";
+"New Tab" = "Nouvel onglet";
+"External Browser" = "Navigateur externe";
