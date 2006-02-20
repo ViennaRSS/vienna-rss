@@ -74,7 +74,8 @@
 	int lengthToLastWord = 0;
 	BOOL isInQuote = NO;
 	BOOL isInTag = NO;
-	
+	BOOL hasWord = NO;
+
 	// Rudimentary HTML tag parsing. This could be done by initWithHTML on an attributed string
 	// and extracting the raw string but initWithHTML cannot be invoked within an NSURLConnection
 	// callback which is where this is probably liable to be used.
@@ -97,6 +98,8 @@
 			tagStartIndex = indexOfChr;
 			tagLength = 0;
 		}
+		if (!isInTag && !isspace(ch))
+			hasWord = YES;
 		if (ch == '>' && isInTag)
 		{
 			if (++tagLength > 2)
@@ -126,14 +129,14 @@
 				}
 				isInTag = NO;
 
-				if ([tagName isEqualToString:@"br"] && indexOfChr >= 0)
+				if ([tagName isEqualToString:@"br"] && indexOfChr >= 0 && hasWord)
 				{
 					lengthToLastWord = tagStartIndex;
 					break;
 				}
 			}
 		}
-		if (ch == '\n' || ch == '\r')
+		if ((ch == '\n' || ch == '\r') && hasWord)
 		{
 			lengthToLastWord = indexOfChr;
 			break;

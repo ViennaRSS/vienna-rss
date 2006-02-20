@@ -989,7 +989,7 @@
 {
 	if (![item title] || [[item title] isBlank])
 	{
-		NSString * newTitle = [[XMLParser processAttributes:[NSString stringByRemovingHTML:[item description] validTags:nil]] trim];
+		NSString * newTitle = [XMLParser processAttributes:[NSString stringByRemovingHTML:[item description] validTags:nil]];
 		[item setTitle:newTitle];
 	}
 }

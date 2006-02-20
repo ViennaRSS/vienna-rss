@@ -499,6 +499,8 @@
 		AAA578F009A5045100602469 /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/RenameFolder.nib; sourceTree = "<group>"; };
 		AAA5791C09A5097900602469 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/RenameFolder.nib; sourceTree = "<group>"; };
 		AAA5792D09A50A6E00602469 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/RenameFolder.nib; sourceTree = "<group>"; };
+		AAA5814309AA526700602469 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Italian; path = "Italian.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AAA5814F09AA52B400602469 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
 		AAB32F740982FA0D003FC2C7 /* French */ = {isa = PBXFileReference; lastKnownFileType = folder; name = French; path = "French.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -1579,6 +1581,8 @@
 				AAE3AEF506570DB700A1FA1F /* English */,
 				AACE719C090B4CFB00E11979 /* German */,
 				AAB32F740982FA0D003FC2C7 /* French */,
+				AAA5814309AA526700602469 /* Italian */,
+				AAA5814F09AA52B400602469 /* zh_TW */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
@@ -1760,7 +1764,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2026;
+				BUILD_NUMBER = 2027;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1816,7 +1820,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2026;
+				BUILD_NUMBER = 2027;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
