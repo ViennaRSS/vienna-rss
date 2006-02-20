@@ -81,8 +81,6 @@
 @end
 
 // Static constant strings that are typically never tweaked
-static NSString * GROWL_NOTIFICATION_DEFAULT = @"NotificationDefault";
-
 static const int MA_Minimum_Folder_Pane_Width = 80;
 static const int MA_Minimum_BrowserView_Pane_Width = 200;
 
@@ -1498,23 +1496,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 		if (growlAvailable && newUnread > 0)
 		{
-			NSNumber * defaultValue = [NSNumber numberWithBool:YES];
-			NSNumber * stickyValue = [NSNumber numberWithBool:NO];
-			NSString * msgText = [NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread];
-			
-			NSDictionary *aNuDict = [NSDictionary dictionaryWithObjectsAndKeys:
-				NSLocalizedString(@"Growl notification name", nil), GROWL_NOTIFICATION_NAME,
-				NSLocalizedString(@"Growl notification title", nil), GROWL_NOTIFICATION_TITLE,
-				msgText, GROWL_NOTIFICATION_DESCRIPTION,
-				appName, GROWL_APP_NAME,
-				defaultValue, GROWL_NOTIFICATION_DEFAULT,
-				stickyValue, GROWL_NOTIFICATION_STICKY,
-				[NSNumber numberWithInt:newUnread], GROWL_NOTIFICATION_CLICK_CONTEXT,
-				nil];
-			[[NSDistributedNotificationCenter defaultCenter] postNotificationName:GROWL_NOTIFICATION 
-																		   object:nil 
-																		 userInfo:aNuDict
-															   deliverImmediately:YES];
+			[GrowlApplicationBridge
+				notifyWithTitle:NSLocalizedString(@"Growl notification title", nil)
+					description:[NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread]
+				notificationName:NSLocalizedString(@"Growl notification name", nil)
+					   iconData:nil
+					   priority:0.0
+					   isSticky:NO
+				   clickContext:[NSNumber numberWithInt:newUnread]];
 		}
 	}
 }	

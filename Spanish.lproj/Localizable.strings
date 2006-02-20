@@ -250,7 +250,9 @@
 "New Subscription…" = "Nueva Suscripción…";
 "Next Tab" = "Pestaña Siguiente";
 "Open Article Page" = "Ir a la Pagina del Articulo";
+"Open Article Page in External Browser" = "Open Article Page in External Browser";
 "Open Subscription Home Page" = "Ir a la Pagina de la suscripción";
+"Open Subscription Home Page in External Browser" = "Open Subscription Home Page in External Browser";
 "Page Setup…" = "Adjustar página…";
 "Paste" = "Pegar";
 "Preferences…" = "Ajustes…";
@@ -291,5 +293,3 @@
 "Open Article Page in %@" = "Open Article Page in %@";
 "New Tab" = "New Tab";
 "External Browser" = "External Browser";
-"Open Article Page in External Browser" = "Open Article Page in External Browser";
-"Open Subscription Home Page in External Browser" = "Open Subscription Home Page in External Browser";
