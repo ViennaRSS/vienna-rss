@@ -66,7 +66,7 @@
 "OK" = "OK";
 "From" = "From";
 "To" = "To";
-"(No subject)" = "(No subject)";
+"(No title)" = "(No title)";
 "Refreshing subscriptions..." = "Refreshing subscriptions...";
 "Authenticating with user name '%@'" = "Authenticating with user name \"%@\"";
 "No new articles available" = "No new articles available";

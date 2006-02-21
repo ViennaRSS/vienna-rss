@@ -68,7 +68,7 @@
 "OK" = "好";
 "From" = "來自";
 "To" = "到";
-"(No subject)" = "(無主旨)";
+"(No title)" = "(無主旨)";
 "Refreshing subscriptions..." = "正在更新訂閱頻道…";
 "Authenticating with user name '%@'" = "使用 \"%@\" 帳號進行認證";
 "No new articles available" = "沒有新文章";
@@ -249,9 +249,9 @@
 "New Subscription…" = "新增訂閱頻道…";
 "Next Tab" = "下一個分頁";
 "Open Article Page" = "前往文章所在網頁";
-"Open Article Page in External Browser" = "Open Article Page in External Browser";
+"Open Article Page in External Browser" = "在外部瀏覽器中打開文章頁面"; 
 "Open Subscription Home Page" = "前往訂閱頻道的首頁";
-"Open Subscription Home Page in External Browser" = "Open Subscription Home Page in External Browser";
+"Open Subscription Home Page in External Browser" = "在外部瀏覽器中打開訂閱頻道首頁";
 "Page Setup…" = "頁面設定…";
 "Paste" = "貼上";
 "Preferences…" = "偏好設定…";
@@ -286,9 +286,9 @@
 "Export all subscriptions" = "匯出全部的訂閱頻道";
 "Export selected subscriptions" = "匯出所選的訂閱頻道";
 "Preserve group folders in exported file" = "在匯出檔案中保持群組檔案夾名稱";
-"Open Frame" = "Open Frame";
-"Open Image in %@" = "Open Image in %@";
-"Open Subscription Home Page in %@" = "Open Subscription Home Page in %@";
-"Open Article Page in %@" = "Open Article Page in %@";
-"New Tab" = "New Tab";
-"External Browser" = "External Browser";
+"Open Frame" = "打開框架頁";
+"Open Image in %@" = "在 %@ 中打開影像";
+"Open Subscription Home Page in %@" = "在 %@ 中打開訂閱頻道首頁"; 
+"Open Article Page in %@" = "在 %@ 中打開文章頁面";
+"New Tab" = "新增標籤頁";
+"External Browser" = "外部瀏覽器";

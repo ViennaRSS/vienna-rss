@@ -990,6 +990,8 @@
 	if (![item title] || [[item title] isBlank])
 	{
 		NSString * newTitle = [XMLParser processAttributes:[NSString stringByRemovingHTML:[item description] validTags:nil]];
+		if ([newTitle isBlank])
+			newTitle = NSLocalizedString(@"(No title)", nil);
 		[item setTitle:newTitle];
 	}
 }

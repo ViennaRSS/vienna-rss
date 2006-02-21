@@ -68,7 +68,7 @@
 "OK" = "OK";
 "From" = "送信者";
 "To" = "宛先";
-"(No subject)" = "(No subject)";
+"(No title)" = "(No subject)";
 "Refreshing subscriptions..." = "購読を更新...";
 "Authenticating with user name '%@'" = "ユーザ名 \"%@\" で認証中";
 "No new articles available" = "新しい記事はありません";
