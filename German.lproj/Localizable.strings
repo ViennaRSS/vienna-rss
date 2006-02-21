@@ -68,7 +68,7 @@
 "OK" = "OK";
 "From" = "Von";
 "To" = "An";
-"(No subject)" = "(Kein Betreff)";
+"(No title)" = "(Kein Betreff)";
 "Refreshing subscriptions..." = "Abonnements aktualisieren...";
 "Authenticating with user name '%@'" = "Authentifizieren mit Benutzername  '%@'";
 "No new articles available" = "Keine neuen Artikel verfügbar";
@@ -250,9 +250,9 @@
 "New Subscription…" = "Neues Abonnement…";
 "Next Tab" = "Nächster Tab";
 "Open Article Page" = "Öffne Webseite des Artikels";
-"Open Article Page in External Browser" = "Open Article Page in External Browser";
+"Open Article Page in External Browser" = "Öffne Artikelseite im externen Browser";
 "Open Subscription Home Page" = "Öffne Webseite des Abonnements";
-"Open Subscription Home Page in External Browser" = "Open Subscription Home Page in External Browser";
+"Open Subscription Home Page in External Browser" = "Öffne Homepage des Abonnements im externem Browser";
 "Page Setup…" = "Papierformat…";
 "Paste" = "Einsetzen";
 "Preferences…" = "Einstellungen…";
@@ -287,9 +287,9 @@
 "Export all subscriptions" = "Exportiere alle Abonnements";
 "Export selected subscriptions" = "Exportiere ausgewählte Abonnements";
 "Preserve group folders in exported file" = "Gruppen in der exportierten Datei beibehalten";
-"Open Frame" = "Open Frame";
-"Open Image in %@" = "Open Image in %@";
-"Open Subscription Home Page in %@" = "Open Subscription Home Page in %@";
-"Open Article Page in %@" = "Open Article Page in %@";
-"New Tab" = "New Tab";
-"External Browser" = "External Browser";
+"Open Frame" = "Öffne Frame";
+"Open Image in %@" = "Öffne Bild in %@";
+"Open Subscription Home Page in %@" = "Öffne Homepage des Abonnements in %@"
+"Open Article Page in %@" = "Öffne Artikelseite in %@";
+"New Tab" = "Neuer Tab";
+"External Browser" = "Externer Browser";

@@ -68,7 +68,7 @@
 "OK" = "OK";
 "From" = "De";
 "To" = "À";
-"(No subject)" = "(pas de sujet)";
+"(No title)" = "(pas de sujet)";
 "Refreshing subscriptions..." = "Rafraîchissement des abonnements...";
 "Authenticating with user name '%@'" = "Authentification par nom d'utilisateur '%@'";
 "No new articles available" = "Aucun nouvel article disponible";

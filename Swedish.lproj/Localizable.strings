@@ -68,7 +68,7 @@
 "OK" = "OK";
 "From" = "Från";
 "To" = "Till";
-"(No subject)" = "(Inget ämne)";
+"(No title)" = "(Inget ämne)";
 "Refreshing subscriptions..." = "Uppdaterar prenumerationer...";
 "Authenticating with user name '%@'" = "Autentiserar med användarnamn '%@'";
 "No new articles available" = "Inga nya artiklar tillgängliga";

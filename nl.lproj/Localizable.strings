@@ -68,7 +68,7 @@
 "OK" = "OK";
 "From" = "Van";
 "To" = "Aan";
-"(No subject)" = "(Geen onderwerp)";
+"(No title)" = "(Geen onderwerp)";
 "Refreshing subscriptions..." = "Abonnementen bijwerken...";
 "Authenticating with user name '%@'" = "Aanmelden met gebruikersnaam \"%@\"";
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
