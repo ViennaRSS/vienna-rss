@@ -6,6 +6,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.1.2027
+----------
+- For feeds that have no title and one cannot be synthesised, we now set the title to (No Title).
+- Made click on the Growl notification work again. It broke when we moved to 0.7.4.
+- Correctly set focus on the web page in a new tab. (Code contributed by Jeffrey Johnson).
+- Fix a build 2025 crashing bug.
+- Several localisation updates.
+
 2.0.1.2026
 ----------
 - Universal binary build.
