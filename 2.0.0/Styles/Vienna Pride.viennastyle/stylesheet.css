@@ -1,0 +1,113 @@
+/* HEADER STYLES */
+
+#headerContainer {
+	width: 100%;
+
+}
+#logo {
+	background-image: url(viennaLogo.png);
+	background-repeat: no-repeat;
+	width: 141px;
+	height: 141px;
+	z-index: 2;
+	position: relative;
+}
+#headerMiddleContainer {
+	width: 90%;
+	z-index: 0;
+	position: relative;
+	left: 50px;
+	top: -130px;
+	margin-bottom: -130px;
+}
+#headerMiddleContainer a {
+	font-family: Futura, Arial;
+	font-size: 24px;
+	color: #FFFDE2;
+	text-decoration:none;
+}
+#headerMiddleContainer p {
+  margin:0;
+	padding:0;
+}
+#headerTop {
+	background-image: url(titleMainTop.jpg);
+	background-repeat: repeat-x;
+	height: 26px;
+}
+#headerMiddle {
+	background-image: url(titleMainMiddle.jpg);
+	padding:0;
+	margin:0;
+}
+#headerBottom {
+	background-image: url(titleMainBottom.jpg);
+	height: 61px;
+	margin-top:-25px;
+}
+#headerTopEnd {
+	background-image: url(titleEndTop.jpg);
+	height: 26px;
+	width: 21px;
+	float: right;
+}
+#headerMiddleEnd {
+	background-image: url(titleEndMiddle.jpg);
+	background-repeat: repeat-y;
+	background-position: top right;
+	margin-left: 100px;
+	margin-top:-5px;
+}
+#headerBottomEnd {
+	background-image: url(titleEndBottom.jpg);
+	height: 61px;
+	background-repeat: repeat-y;
+	background-position: top right;
+}
+#viennaTag {
+	font-family:Eurostile, Geneva, Arial;
+	font-size:12px;
+	color:#FFFDE2;
+	position:relative;
+	top:45px;
+	margin:0;
+	padding:0;
+	left: 100px;
+}
+#articleBodyStyle {
+	background-image: url(leftBorder.png);
+	background-repeat: repeat-y;
+	background-position: left top;
+	padding-left: 25px;
+	margin-left: 40px;
+	padding-top: 45px;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	color: #333333;
+	line-height: 150%;
+	font-size: 12px;
+	width: 85%;
+}
+.articleDetails {
+	margin-bottom:15px;
+}
+.articleDetails h1, .articleDetails a {
+	margin: 0;
+	padding: 0;
+	color: #333333;
+	font-family: Futura, Arial;
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 110%;
+}
+.articleDetails h2{
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	font-size: 12px;
+	display: inline;
+}
+#footer {
+	text-align:center;
+	padding-top:50px;
+	font-size:9px;
+}

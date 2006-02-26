@@ -1,0 +1,16 @@
+{
+    IBClasses = (
+        {
+            CLASS = CheckForUpdates; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                cancelButton = NSButton; 
+                progressBar = NSProgressIndicator; 
+                updateWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
