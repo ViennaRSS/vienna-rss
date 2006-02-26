@@ -1,7 +1,7 @@
-"Mark Read" = "als gelesen markieren";
-"Mark Unread" = "als ungelesen markieren";
-"Mark Flagged" = "als markiert markieren";
-"Mark Unflagged" = "als unmarkiert markieren";
+"Mark Read" = "Als gelesen Markieren";
+"Mark Unread" = "Als ungelesen Markieren";
+"Mark Flagged" = "Als markiert Markieren";
+"Mark Unflagged" = "Als unmarkiert Markieren";
 "Articles" = "Artikel";
 "Folders" = "Ordner";
 "Loading %@..." = "Lade %@...";
@@ -55,7 +55,7 @@
 "Quit" = "Beenden";
 "Refresh cancelled" = "Aktualisierungen abgebrochen";
 "Additional actions for the selected folder" = "Weitere Befehle für den ausgewählten Ordner";
-"Create a new subscription" = "Erzeuge einen neuen Feed";
+"Create a new subscription" = "Ein neues Abonnement erstellen";
 "Refresh all your subscriptions" = "Alle Abonnements aktualisieren";
 "New style title" = "Vienna hat einen neuen Stil installiert";
 "New style body" = "Der Stil '%@' in den Stilordner installiert und zum Stilmenü hinzugefügt.";
@@ -243,7 +243,7 @@
 "Jump to Selection" = "Auswahl anzeigen";
 "Main Window" = "Hauptfenster";
 "Mark All Articles as Read" = "Alle Artikel als gelesen markieren";
-"Mark Flagged" = "Mark Flagged";
+"Mark Flagged" = "Als markiert markieren";
 "Minimize" = "Minimieren";
 "New Group Folder…" = "Neuer Ordner…";
 "New Smart Folder…" = "Neuer intelligenter Ordner…";
