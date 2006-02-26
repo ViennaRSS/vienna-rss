@@ -1,0 +1,314 @@
+Vienna ChangeLog File
+=====================
+
+As you release new builds, update this file with details of the changes in each build. The
+most recent build should be at the top of this file.
+
+Thanks!
+
+2.0.1.2027
+----------
+- For feeds that have no title and one cannot be synthesised, we now set the title to (No Title).
+- Made click on the Growl notification work again. It broke when we moved to 0.7.4.
+- Correctly set focus on the web page in a new tab. (Code contributed by Jeffrey Johnson).
+- Fix a build 2025 crashing bug.
+- Several localisation updates.
+
+2.0.1.2026
+----------
+- Universal binary build.
+- Updated to Growl 0.7.4.
+- No longer prompt if Vienna is exited while a connection is in progress.
+- Better truncation of feed names in the folder list. (Code contributed by David Kocher).
+- Handle HTML redirects in the feed for sources such as MSN Spaces.
+- Save and restore the currently selected article when you exit and restart Vienna.
+- Support use of the Shift key to open a link in the alternate browser. (Code contributed by Jeffrey Johnson).
+- Added Japanese localisation. (Thanks to Daisuke).
+- Added Spanish localisation. (Thanks to Carlos Morales).
+- Shift+Spacebar scrolls up the article view or goes to the previously viewed message.
+- Added four more built-in styles: Broadsheet Clipping, Perlucida, Prague and Prague-light.
+
+2.0.0.2025 (2.0 Release Build)
+------------------------------
+- Added Dutch localisation (Thanks to Martijn van Exel).
+- Fix corrupted display of iframe on some articles due to encoding mismatch.
+- Fix Mark All Read behaviour in smart folders which broke in 2024.
+- Fix crash on closing tabs.
+
+2.0.0.2024
+----------
+- Additional memory usage improvements.
+
+2.0.0.2023
+----------
+- Incorporated a fix from Mark Evenson for the cursor.org RSS feed.
+- Refresh keystrokes changed to Cmd+R/Shift+Cmd+R.
+- Mark Read keystroke changed to Cmd+Shift+U ('u' single key added to complement).
+- New Smart Folder keystroke changed to Cmd+Shift+F.
+- Reload Page keystroke changed to Alt+R.
+- Added Cmd+Alt+K to Mark All Subscriptions as Read.
+- Made a few internal optimisations to try and reduce memory usage and database update frequency.
+- Added French help file and some French localisation fixes.
+- Other minor bug fixes.
+
+2.0.0.2022
+----------
+- More feed parsing issues fixed.
+- Improved General and Appearance icons contributed by Brandon Booth.
+
+2.0.0.2021
+----------
+- Fixed a few left-over localisation issues.
+- Parse out a subset of HTML tags from titles.
+- Add a fix for unescaped & characters in links which some feeds are prone to.
+- Replaced Preference icons as the originals turned out to copyrighted to Nitram+Nunca.
+
+2.0.0.2020
+----------
+- New 'star' shaped unread count on the application icon.
+- Disable Delete Article unless the article list has focus.
+- Minor fit-and-finish polish to the UI and parsing code.
+
+2.0.0.2019
+----------
+- New RSS feed icon.
+- Fixed a few more feed parsing issues.
+
+2.0.0.2018
+----------
+- Improved handling of feeds with invalid XML encoding so most of these are now accepted.
+- Fix Growl integration to work in localised builds.
+- Fix handling of folder icons from sites like FeedBurner.
+- Finalised help file for 2.0 release.
+
+2.0.0.2017
+----------
+- Fix localisation article scroll bar truncation.
+- Clear download list should not remove items being downloaded.
+- Fix handling of Javascript web pages.
+- Add three more built-in styles: Tyger, Vienna Pride, EasySimple and Felix.
+- Added Demo RSS feeds for new databases.
+- Fix parsing of atom xml:base links.
+- Added "current selection" Applescript method to return the current text selection.
+- Don't undo when doing "Mark All Subscriptions as Read".
+
+2.0.0.2016
+----------
+- Added Traditional Chinese localisation. (Thanks to Weizhong Yang).
+- Accept HTTP 200 responses with no data as meaning 0 new articles rather than an error.
+- Show count of unread on title bar. (Patch submitted by Jussi Hagman).
+- Minor bug fixes.
+
+2.0.0.2015
+----------
+- Improvements to universal date parsing to fix some mis-parsed article dates.
+- Fixed OPML format in exported subscriptions to conform to the standard.
+- A warning icon now appears next to the folder name in the folders list if an error
+  occurred when the feed was last refreshed.
+
+2.0.0.2014
+----------
+- Fix "Folder NOT xxx" implementation which wasn't working right for group folders.
+- Cmd+W closes the Download, Preference or Activity windows even when they are active.
+- $FeedDescription$ added as a tag for styles. This expands to the feed description if available.
+- Fixed bug where AppleScript 'current article' on an article in a group returns a null reference.
+- Search field now also searches in titles.
+- Confirmation prompt added before emptying the trash folder.
+- Download window now allows double-click to open a downloaded file.
+- Added popup menu to download window.
+
+2.0.0.2013
+----------
+- Resort the folder list when a folder is renamed.
+- Cmd-click on a link in the web view opens the link in a new tab.
+- Download SITX files as SITX files even if the server returns a MIME type of text.
+
+2.0.0.2012
+----------
+- Fix bug which prevented a system from going to sleep if automatic refreshes are enabled.
+- Stepping through article lists does not refresh the article pane until the steps complete.
+- Completed all localisation fixes.
+- Auto-expire now runs post-refresh in addition to at start up.
+- Vienna now checks that it can create the database in the users home folder and prompts
+  for an alternative location if not.
+- Don't scroll the current article after a refresh if it hasn't been changed or expired.
+
+2.0.0.2011
+----------
+- Added option to export subscriptions with groups or as a flat file.
+- Refresh when the system awakes from sleep if the refresh frequency is not set to manual.
+- Added German Localisation. (Thanks to Jan Kampling).
+- Improved handling of invalid styles.
+- Vienna can now download files. A new Downloads window has been added which tracks the file
+  downloads. The downloads folder can now be configured via Preferences.
+- Added "Mark All Subscriptions as Read" command. (Thanks to Yann Bizeul).
+- Incorporated patches from Yann Bizeul and Adam Hammer.
+- Close button on tabs now depress and highlight properly.
+- New Preferences UI.
+- Font selection in Preferences changed to use the standard OS font picker.
+- Add an option to disable feed folder images in the folders list.
+- Moved unread count on application icon to the top right corner to be consistent with most
+  other Mac OSX applications.
+- Support dragging URL strings from other applications into the folders pane.
+- Support dropping script files (.scpt) on the application icon to install them to the Vienna
+  script folder and add them to the Scripts menu.
+
+2.0.0.2010
+----------
+- Added auto-expire support. Articles older than a given number of days can be automatically moved
+  to the trash folder.
+- Handle RDF:Sequence parsing for feeds such as http://www.kongisking.net. This ensures that
+  feeds are properly organised by date in the absence of any date in the feed.
+- Smart folder dates fields are now fixed strings representing a time range rather than an actual date.
+- Added Italian Localisation. (Thanks to Marcello Teodori).
+- Pre-build 2005 format databases no longer upgraded.
+- Removed old format display style conversion code. Styles on the web site have been updated.
+- Fixed bug where smart folder criteria was unintentionally extended when doing a filtered search.
+- Changed a couple of default preferences. We no longer check for new articles on startup and the
+  default layout is now to have the article pane at the bottom.
+- Fixed growl notification handling not bringing the main window to the foreground.
+- Added "Skip Folder" command to mark all articles in the current folder read and skip to the next
+  folder with unread articles. The shortcut key for this is 'S'.
+
+2.0.0.2009
+----------
+- Fixed potential database corruption bug introduced in build 2007 when refreshing a feed that
+  uses entity characters specified with hexadecimal notation.
+- Cmd+W closes Preferences window if it is open, rather than the main window.
+- The "About Vienna" window can now be closed with Esc or Cmd+W.
+- Reduced height of tabs slightly.
+- Holding down Cmd+Alt keys while clicking tab close button closes all tabs.
+- Fixed close tab behaviour properly this time.
+
+2.0.0.2008 (BETA 2)
+-------------------
+- Added final Swedish localisation changes for beta 2.
+- Fixed French localisation import error.
+- Fix bug with importing OPML files.
+- Added 'group folder', 'smart folder' and 'rss folder' attributes to folder class in scripting.
+- Added Restore command to restore an article in the Trash Folder back to where it came from.
+- Fixed UI update bug when a folder is deleted during a refresh.
+- Exported files now have ".opml" extension added to them.
+- Smart search folder operators are now limited to "is" and "is not" as "under" is now implied.
+- Encode extended characters in HTML article text dragged from the article list view.
+
+2.0.0.2007
+----------
+- You can now undo/redo Mark All Read, even across multiple folders.
+- Article view split bar position is now properly persisted across sessions.
+- Disabled proportional folder and article list split bar resizing when the main window is resized.
+- Selecting multiple articles now shows multiple articles in the article pane.
+- Fixed problem when parsing feeds from http://macintouch.com/rss.xml. Some servers report an
+  error unless the User-agent field is specified in the HTTP header.
+- Added built-in browser support. Web pages can now be opened in Vienna in separate tabs as an
+  option. Next and Previous Tab commands added to the Window menu. Close Tab added to the File
+  menu. Right-click popup menu allows links or pages to be opened externally.
+- Added option in Preferences to open web pages in Vienna.
+- Close Window command changed to Shift+Command+W when tabs are open for consistency with
+  Camino and Safari.
+- Fixed a bug that screwed up sorting by the read column.
+- Improved printing of articles.
+- Can undo moving folders in the folders list pane.
+- Several improvements to AppleScript interface: new attributes and fixed some bugs.
+- Added Cmd+U for next unread since Spacebar doesn't work from the web view.
+
+2.0.0.2006
+----------
+- Can now sort and double-click activity log items.
+- Added option to set the minimum font size in the article display pane.
+- Search field now searches article titles as well as the text.
+- New application icon. (Thanks to Jasper Hauser - http://www.jasperhauser.nl/icon/).
+- Added French localisation. (Thanks to Cyril Gautrias).
+- Dropped Compact Database command from the File menu. This is now accessible through the
+  scripting interface. Most people don't actually need to compact the database now.
+- Added "Validate Feed" command to the File menu.
+
+2.0.0.2005
+----------
+- Updates to Swedish localisation.
+- Fixed entity decoding bug that caused corrupted characters in the Der Spiegel feed.
+- Fixed character set translation bug that caused some UTF8 characters to appear corrupted.
+- Improvements to handling of article GUID/ID to eliminate duplicate articles and better
+  track articles that have been modified. This change requires a database upgrade.
+- Left/Right arrow keys now move between the folder list and the articles list.
+- Added Trash folder. Delete Article now moves selected articles to the Trash folder. New
+  Empty Trash command on the Vienna menu can be used to empty the trash folder. (Note: it
+  is intentional that you can rename the Trash folder).
+- Added Undo/Redo support for the following actions: marking articles read, marking articles
+  flagged, renaming folders and deleting articles.
+- Spacebar now moves to next unread article.
+- Enter key now opens the current article in the default system browser. ('P' to open the
+  current article in the article pane has been removed.)
+- < and > keys now move to previous and next article.
+- Drag from the article list now provides HTML and string versions on the pasteboard.
+- Copy now works on articles in the article list and folders in the folder list.
+- Added an option to open links clicked in Vienna in the background in the default browser.
+- New temporary application icon that is more 'clickable' than the old one. A better icon
+  is planned for later.
+- Added "More Styles..." to end of Styles menu that opens the Vienna downloads web site in the
+  default browser.
+- Improved the UI refresh after drag and drop re-ordering of folders in the folder list.
+
+2.0.0.2004 (Refresh)
+--------------------
+- Added support for automatically installing custom styles.
+- Refresh button now toggles between starting and stopping a refresh.
+- Remove the unread count from the application icon in the dock when closing Vienna.
+- Fixed bug where authenticated feeds did not prompt for first time credentials.
+
+2.0.0.2004
+----------
+- Add Scripts menu that displays all scripts under ~/Library/Scripts/Applications/Vienna. By
+  default this is enabled under Mac OSX 10.3 and disabled under 10.4 since there is a system
+  wide Scripts menu on the status bar that replicates this functionality.
+- Rewrote the code that registers the default RSS reader. It wasn't picking up all possible
+  candidates. Now it shows all candidate applications and also adds a Select... option so the
+  user can manually search for the application. This also fixes the bug where Vienna took over
+  the feed handler from others without permission.
+- Smart folders now support 'any' in addition to the implied 'all' condition. So you can now
+  create folders which match any one or more combination of criteria.
+- Clicking the dock icon now reopens the main window if it was previously closed.
+- Added Swedish localisation (contributed by Christoffer Larsson).
+- Several internal fixes for issues thrown up by Swedish localisation.
+- View->Next Unread now goes to folders that have subscriptions with unread articles as well
+  as to the subscriptions themselves. This causes Vienna to respect the closed state of group
+  folders.
+- Improved the logic by which folder images are retrieved to make this more reliable.
+- New About Vienna window.
+- The count of unread articles now show up as button in the folder list to the right of each
+  subscription name.
+- The Search field now searches immediately rather than wait for you to press Enter.
+- Fixed bug that causes images not to render in feeds where embedded links to images are
+  relative to the URL of the feed rather than absolute URLs.
+- Add 'Validate Feed' command.
+
+2.0.0.2003
+----------
+- Add an option to mark the current article read after 1 second. This is now the new default.
+- Fix import/export to convert characters such as <, > and & to and from their entity equivalents
+  in URL fields as per XML specification.
+- Add View->Article Page to display the original web page from which the article came. The short
+  cut for this is 'P'. The command toggles between the web page and the original article.
+- Support content:encoding in RSS 2.0 feeds and use that to override description where available.
+  (This fixes the parsing of sites such as http://feeds.feedburner.com/MajorNelson).
+- In Atom feeds, where no explicit author is specified for an article, use the feed author if available.
+- Mark All Read now works in smart folders.
+- Add File->Close Window command to close the main Vienna window and Window->Main Window to reopen
+  it again. While the main window is closed, all UI commands are disabled.
+- Add "Refresh All Subscriptions" to the application dock menu. Other things will follow on the
+  dock menu but this was the most common one that people requested.
+- Trim title fields to the first non-blank line. Some feeds had titles with multiple lines and
+  these cause display problems in the UI.
+- When subscribing to a feed, we now check to see if there's an active connection available and if
+  so, we refresh the new feed immediately. If there's no active connection then the refresh is
+  deferred.
+- New layout style when the article pane is to the right of the article list. In this layout, the
+  articles are automatically displayed in summary style with four fixed columns. (Note that you
+  cannot add or remove columns in this layout). When the article pane is at the bottom, the usual
+  table layout appears. For simplicity I haven't exposed any way to change layout independently
+  of the position of the article pane. It'll be interesting to see if anybody really wants the
+  summary view when the article pane is below the article list.
+
+2.0.0.2002 (BETA 1)
+-------------------
+- Original beta 1 release.
