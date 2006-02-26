@@ -3,7 +3,6 @@
         {
             ACTIONS = {
                 cancelAllRefreshes = id; 
-                cancelRenameFolder = id; 
                 checkForUpdates = id; 
                 closeAllTabs = id; 
                 closeTab = id; 
@@ -75,8 +74,6 @@
                 mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 
                 outlineView = FolderView; 
-                renameField = NSTextField; 
-                renameWindow = NSWindow; 
                 searchField = NSSearchField; 
                 sortByMenu = NSMenuItem; 
                 spinner = NSProgressIndicator; 
