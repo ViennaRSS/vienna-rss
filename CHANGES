@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.1.2028 (2.0.1 Release Build)
+--------------------------------
+- Updated localisation.
+
 2.0.1.2027
 ----------
 - For feeds that have no title and one cannot be synthesised, we now set the title to (No Title).
