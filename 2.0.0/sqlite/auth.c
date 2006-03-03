@@ -76,6 +76,7 @@ int sqlite3_set_authorizer(
 ){
   db->xAuth = xAuth;
   db->pAuthArg = pArg;
+  sqlite3ExpirePreparedStatements(db);
   return SQLITE_OK;
 }
 
@@ -113,11 +114,12 @@ void sqlite3AuthRead(
   TriggerStack *pStack; /* The stack of current triggers */
 
   if( db->xAuth==0 ) return;
+  if( pExpr->op==TK_AS ) return;
   assert( pExpr->op==TK_COLUMN );
-  for(iSrc=0; iSrc<pTabList->nSrc; iSrc++){
+  for(iSrc=0; pTabList && iSrc<pTabList->nSrc; iSrc++){
     if( pExpr->iTable==pTabList->a[iSrc].iCursor ) break;
   }
-  if( iSrc>=0 && iSrc<pTabList->nSrc ){
+  if( iSrc>=0 && pTabList && iSrc<pTabList->nSrc ){
     pTab = pTabList->a[iSrc].pTab;
   }else if( (pStack = pParse->trigStack)!=0 ){
     /* This must be an attempt to read the NEW or OLD pseudo-tables

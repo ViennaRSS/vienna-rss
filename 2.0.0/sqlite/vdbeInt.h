@@ -60,19 +60,18 @@ typedef unsigned char Bool;
 */
 struct Cursor {
   BtCursor *pCursor;    /* The cursor structure of the backend */
-  i64 lastRecno;        /* Last recno from a Next or NextIdx operation */
+  i64 lastRowid;        /* Last rowid from a Next or NextIdx operation */
   i64 nextRowid;        /* Next rowid returned by OP_NewRowid */
   Bool zeroed;          /* True if zeroed out and ready for reuse */
-  Bool recnoIsValid;    /* True if lastRecno is valid */
-  Bool keyAsData;       /* The OP_Column command works on key instead of data */
+  Bool rowidIsValid;    /* True if lastRowid is valid */
   Bool atFirst;         /* True if pointing to first entry */
   Bool useRandomRowid;  /* Generate new record numbers semi-randomly */
   Bool nullRow;         /* True if pointing to a row with no data */
   Bool nextRowidValid;  /* True if the nextRowid field is valid */
   Bool pseudoTable;     /* This is a NEW or OLD pseudo-tables of a trigger */
   Bool deferredMoveto;  /* A call to sqlite3BtreeMoveto() is needed */
-  Bool intKey;          /* True if the table requires integer keys */
-  Bool zeroData;        /* True if table contains keys only - no data */
+  Bool isTable;         /* True if a table requiring integer keys */
+  Bool isIndex;         /* True if an index containing keys only - no data */
   u8 bogusIncrKey;      /* Something for pIncrKey to point to if pKeyInfo==0 */
   i64 movetoTarget;     /* Argument to the deferred sqlite3BtreeMoveto() */
   Btree *pBt;           /* Separate file holding temporary table */
@@ -220,7 +219,6 @@ struct sqlite3_context {
   Mem s;            /* The return value is stored here */
   void *pAgg;       /* Aggregate context */
   u8 isError;       /* Set to true for an error */
-  u8 isStep;        /* Current in the step function */
   int cnt;          /* Number of times that the step function has been called */
   CollSeq *pColl;
 };
@@ -262,17 +260,29 @@ struct Set {
 };
 
 /*
-** A Keylist is a bunch of keys into a table.  The keylist can
-** grow without bound.  The keylist stores the ROWIDs of database
-** records that need to be deleted or updated.
+** A FifoPage structure holds a single page of valves.  Pages are arranged
+** in a list.
 */
-typedef struct Keylist Keylist;
-struct Keylist {
-  int nKey;         /* Number of slots in aKey[] */
-  int nUsed;        /* Next unwritten slot in aKey[] */
-  int nRead;        /* Next unread slot in aKey[] */
-  Keylist *pNext;   /* Next block of keys */
-  i64 aKey[1];      /* One or more keys.  Extra space allocated as needed */
+typedef struct FifoPage FifoPage;
+struct FifoPage {
+  int nSlot;         /* Number of entries aSlot[] */
+  int iWrite;        /* Push the next value into this entry in aSlot[] */
+  int iRead;         /* Read the next value from this entry in aSlot[] */
+  FifoPage *pNext;   /* Next page in the fifo */
+  i64 aSlot[1];      /* One or more slots for rowid values */
+};
+
+/*
+** The Fifo structure is typedef-ed in vdbeInt.h.  But the implementation
+** of that structure is private to this file.
+**
+** The Fifo structure describes the entire fifo.  
+*/
+typedef struct Fifo Fifo;
+struct Fifo {
+  int nEntry;         /* Total number of entries */
+  FifoPage *pFirst;   /* First page on the list */
+  FifoPage *pLast;    /* Last page on the list */
 };
 
 /*
@@ -288,7 +298,7 @@ typedef struct Context Context;
 struct Context {
   int lastRowid;    /* Last insert rowid (sqlite3.lastRowid) */
   int nChange;      /* Statement changes (Vdbe.nChanges)     */
-  Keylist *pList;   /* Records that will participate in a DELETE or UPDATE */
+  Fifo sFifo;       /* Records that will participate in a DELETE or UPDATE */
 };
 
 /*
@@ -315,6 +325,7 @@ struct Vdbe {
   int nCursor;        /* Number of slots in apCsr[] */
   Cursor **apCsr;     /* One element of this array for each open cursor */
   Sorter *pSort;      /* A linked list of objects to be sorted */
+  Sorter *pSortTail;  /* Last element on the pSort list */
   int nVar;           /* Number of entries in aVar[] */
   Mem *aVar;          /* Values for the OP_Variable opcode. */
   char **azVar;       /* Name of variables */
@@ -322,9 +333,11 @@ struct Vdbe {
   int magic;              /* Magic number for sanity checking */
   int nMem;               /* Number of memory locations currently allocated */
   Mem *aMem;              /* The memory locations */
-  Agg agg;                /* Aggregate information */
+  int nAgg;               /* Number of elements in apAgg */
+  Agg *apAgg;             /* Array of aggregate contexts */
+  Agg *pAgg;              /* Current aggregate context */
   int nCallback;          /* Number of callbacks invoked so far */
-  Keylist *pList;         /* A list of ROWIDs */
+  Fifo sFifo;             /* A list of ROWIDs */
   int contextStackTop;    /* Index of top element in the context stack */
   int contextStackDepth;  /* The size of the "context" stack */
   Context *contextStack;  /* Stack used by opcodes ContextPush & ContextPop*/
@@ -343,6 +356,7 @@ struct Vdbe {
   u8 explain;             /* True if EXPLAIN present on SQL command */
   u8 changeCntOn;         /* True to update the change-counter */
   u8 aborted;             /* True if ROLLBACK in another VM causes an abort */
+  u8 expired;             /* True if the VM needs to be recompiled */
   int nChange;            /* Number of db changes made since last reset */
 };
 
@@ -360,13 +374,14 @@ struct Vdbe {
 void sqlite3VdbeFreeCursor(Cursor*);
 void sqlite3VdbeSorterReset(Vdbe*);
 int sqlite3VdbeAggReset(sqlite3*, Agg *, KeyInfo *);
-void sqlite3VdbeKeylistFree(Keylist*);
 void sqliteVdbePopStack(Vdbe*,int);
 int sqlite3VdbeCursorMoveto(Cursor*);
-#if !defined(NDEBUG) || defined(VDBE_PROFILE)
+#if defined(SQLITE_DEBUG) || defined(VDBE_PROFILE)
 void sqlite3VdbePrintOp(FILE*, int, Op*);
 #endif
+#ifdef SQLITE_DEBUG
 void sqlite3VdbePrintSql(Vdbe*);
+#endif
 int sqlite3VdbeSerialTypeLen(u32);
 u32 sqlite3VdbeSerialType(Mem*);
 int sqlite3VdbeSerialPut(unsigned char*, Mem*);
@@ -402,7 +417,12 @@ int sqlite3VdbeMemFromBtree(BtCursor*,int,int,int,Mem*);
 void sqlite3VdbeMemRelease(Mem *p);
 #ifndef NDEBUG
 void sqlite3VdbeMemSanity(Mem*, u8);
+int sqlite3VdbeOpcodeNoPush(u8);
 #endif
 int sqlite3VdbeMemTranslate(Mem*, u8);
 void sqlite3VdbeMemPrettyPrint(Mem *pMem, char *zBuf, int nBuf);
 int sqlite3VdbeMemHandleBom(Mem *pMem);
+void sqlite3VdbeFifoInit(Fifo*);
+int sqlite3VdbeFifoPush(Fifo*, i64);
+int sqlite3VdbeFifoPop(Fifo*, i64*);
+void sqlite3VdbeFifoClear(Fifo*);
