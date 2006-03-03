@@ -124,11 +124,7 @@ static int getDigits(const char *zDate, ...){
 ** Read text from z[] and convert into a floating point number.  Return
 ** the number of digits converted.
 */
-static int getValue(const char *z, double *pR){
-  const char *zEnd;
-  *pR = sqlite3AtoF(z, &zEnd);
-  return zEnd - z;
-}
+#define getValue sqlite3AtoF
 
 /*
 ** Parse a timezone extension on the end of a date-time.
@@ -272,7 +268,7 @@ static int parseYyyyMmDd(const char *zDate, DateTime *p){
     return 1;
   }
   zDate += 10;
-  while( isspace(*(u8*)zDate) ){ zDate++; }
+  while( isspace(*(u8*)zDate) || 'T'==*(u8*)zDate ){ zDate++; }
   if( parseHhMmSs(zDate, p)==0 ){
     /* We got the time */
   }else if( *zDate==0 ){
@@ -315,14 +311,12 @@ static int parseDateOrTime(const char *zDate, DateTime *p){
     return 0;
   }else if( sqlite3StrICmp(zDate,"now")==0){
     double r;
-    if( sqlite3OsCurrentTime(&r)==0 ){
-      p->rJD = r;
-      p->validJD = 1;
-      return 0;
-    }
-    return 1;
+    sqlite3OsCurrentTime(&r);
+    p->rJD = r;
+    p->validJD = 1;
+    return 0;
   }else if( sqlite3IsNumber(zDate, 0, SQLITE_UTF8) ){
-    p->rJD = sqlite3AtoF(zDate, 0);
+    getValue(zDate, &p->rJD);
     p->validJD = 1;
     return 0;
   }
@@ -862,8 +856,99 @@ static void strftimeFunc(
   }
 }
 
+/*
+** current_time()
+**
+** This function returns the same value as time('now').
+*/
+static void ctimeFunc(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
+  sqlite3_value *pVal = sqlite3ValueNew();
+  if( pVal ){
+    sqlite3ValueSetStr(pVal, -1, "now", SQLITE_UTF8, SQLITE_STATIC);
+    timeFunc(context, 1, &pVal);
+    sqlite3ValueFree(pVal);
+  }
+}
 
+/*
+** current_date()
+**
+** This function returns the same value as date('now').
+*/
+static void cdateFunc(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
+  sqlite3_value *pVal = sqlite3ValueNew();
+  if( pVal ){
+    sqlite3ValueSetStr(pVal, -1, "now", SQLITE_UTF8, SQLITE_STATIC);
+    dateFunc(context, 1, &pVal);
+    sqlite3ValueFree(pVal);
+  }
+}
+
+/*
+** current_timestamp()
+**
+** This function returns the same value as datetime('now').
+*/
+static void ctimestampFunc(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
+  sqlite3_value *pVal = sqlite3ValueNew();
+  if( pVal ){
+    sqlite3ValueSetStr(pVal, -1, "now", SQLITE_UTF8, SQLITE_STATIC);
+    datetimeFunc(context, 1, &pVal);
+    sqlite3ValueFree(pVal);
+  }
+}
 #endif /* !defined(SQLITE_OMIT_DATETIME_FUNCS) */
+
+#ifdef SQLITE_OMIT_DATETIME_FUNCS
+/*
+** If the library is compiled to omit the full-scale date and time
+** handling (to get a smaller binary), the following minimal version
+** of the functions current_time(), current_date() and current_timestamp()
+** are included instead. This is to support column declarations that
+** include "DEFAULT CURRENT_TIME" etc.
+**
+** This function uses the C-library functions time(), gmtime()
+** and strftime(). The format string to pass to strftime() is supplied
+** as the user-data for the function.
+*/
+static void currentTimeFunc(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
+  time_t t;
+  char *zFormat = (char *)sqlite3_user_data(context);
+  char zBuf[20];
+
+  time(&t);
+#ifdef SQLITE_TEST
+  {
+    extern int sqlite3_current_time;  /* See os_XXX.c */
+    if( sqlite3_current_time ){
+      t = sqlite3_current_time;
+    }
+  }
+#endif
+
+  sqlite3OsEnterMutex();
+  strftime(zBuf, 20, zFormat, gmtime(&t));
+  sqlite3OsLeaveMutex();
+
+  sqlite3_result_text(context, zBuf, -1, SQLITE_TRANSIENT);
+}
+#endif
 
 /*
 ** This function registered all of the above C functions as SQL
@@ -882,12 +967,30 @@ void sqlite3RegisterDateTimeFunctions(sqlite3 *db){
     { "time",      -1, timeFunc        },
     { "datetime",  -1, datetimeFunc    },
     { "strftime",  -1, strftimeFunc    },
+    { "current_time",       0, ctimeFunc      },
+    { "current_timestamp",  0, ctimestampFunc },
+    { "current_date",       0, cdateFunc      },
   };
   int i;
 
   for(i=0; i<sizeof(aFuncs)/sizeof(aFuncs[0]); i++){
     sqlite3_create_function(db, aFuncs[i].zName, aFuncs[i].nArg,
         SQLITE_UTF8, 0, aFuncs[i].xFunc, 0, 0);
+  }
+#else
+  static const struct {
+     char *zName;
+     char *zFormat;
+  } aFuncs[] = {
+    { "current_time", "%H:%M:%S" },
+    { "current_date", "%Y-%m-%d" },
+    { "current_timestamp", "%Y-%m-%d %H:%M:%S" }
+  };
+  int i;
+
+  for(i=0; i<sizeof(aFuncs)/sizeof(aFuncs[0]); i++){
+    sqlite3_create_function(db, aFuncs[i].zName, 0, SQLITE_UTF8, 
+        aFuncs[i].zFormat, currentTimeFunc, 0, 0);
   }
 #endif
 }

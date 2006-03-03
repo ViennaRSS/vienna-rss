@@ -23,32 +23,20 @@
 ** N.B. MacOS means Mac Classic (or Carbon). Treat Darwin (OS X) as Unix.
 **      The MacOS build is designed to use CodeWarrior (tested with v8)
 */
-#if !defined(OS_UNIX) && !defined(OS_TEST)
+#if !defined(OS_UNIX) && !defined(OS_TEST) && !defined(OS_OTHER)
+# define OS_OTHER 0
 # ifndef OS_WIN
-#  ifndef OS_MAC
-#    if defined(__MACOS__)
-#      define OS_MAC 1
-#      define OS_WIN 0
-#      define OS_UNIX 0
-#    elif defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
-#      define OS_MAC 0
-#      define OS_WIN 1
-#      define OS_UNIX 0
-#    else
-#      define OS_MAC 0
-#      define OS_WIN 0
-#      define OS_UNIX 1
-#    endif
-#  else
-#    define OS_WIN 0
-#    define OS_UNIX 0
+#   if defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
+#     define OS_WIN 1
+#     define OS_UNIX 0
+#   else
+#     define OS_WIN 0
+#     define OS_UNIX 1
 #  endif
 # else
-#  define OS_MAC 0
 #  define OS_UNIX 0
 # endif
 #else
-# define OS_MAC 0
 # ifndef OS_WIN
 #  define OS_WIN 0
 # endif
@@ -66,8 +54,20 @@
 #if OS_WIN
 # include "os_win.h"
 #endif
-#if OS_MAC
-# include "os_mac.h"
+
+/* os_other.c and os_other.h are not delivered with SQLite.  These files
+** are place-holders that can be filled in by third-party developers to
+** implement backends to their on proprietary operating systems.
+*/
+#if OS_OTHER
+# include "os_other.h"
+#endif
+
+/* If the SET_FULLSYNC macro is not defined above, then make it
+** a no-op
+*/
+#ifndef SET_FULLSYNC
+# define SET_FULLSYNC(x,y)
 #endif
 
 /*
@@ -162,7 +162,7 @@
 **
 */
 #define PENDING_BYTE      0x40000000  /* First byte past the 1GB boundary */
-/* #define PENDING_BYTE     0x5400   // Page 20 - for testing */
+/* #define PENDING_BYTE     0x5400   // Page 22 - for testing */
 #define RESERVED_BYTE     (PENDING_BYTE+1)
 #define SHARED_FIRST      (PENDING_BYTE+2)
 #define SHARED_SIZE       510
@@ -176,6 +176,7 @@ int sqlite3OsOpenReadOnly(const char*, OsFile*);
 int sqlite3OsOpenDirectory(const char*, OsFile*);
 int sqlite3OsSyncDirectory(const char*);
 int sqlite3OsTempFileName(char*);
+int sqlite3OsIsDirWritable(char*);
 int sqlite3OsClose(OsFile*);
 int sqlite3OsRead(OsFile*, void*, int amt);
 int sqlite3OsWrite(OsFile*, const void*, int amt);
@@ -183,15 +184,19 @@ int sqlite3OsSeek(OsFile*, i64 offset);
 int sqlite3OsSync(OsFile*);
 int sqlite3OsTruncate(OsFile*, i64 size);
 int sqlite3OsFileSize(OsFile*, i64 *pSize);
-int sqlite3OsRandomSeed(char*);
-int sqlite3OsSleep(int ms);
-int sqlite3OsCurrentTime(double*);
-int sqlite3OsFileModTime(OsFile*, double*);
-void sqlite3OsEnterMutex(void);
-void sqlite3OsLeaveMutex(void);
 char *sqlite3OsFullPathname(const char*);
 int sqlite3OsLock(OsFile*, int);
 int sqlite3OsUnlock(OsFile*, int);
 int sqlite3OsCheckReservedLock(OsFile *id);
+
+
+/* The interface for file I/O is above.  Other miscellaneous functions
+** are below */
+
+int sqlite3OsRandomSeed(char*);
+int sqlite3OsSleep(int ms);
+int sqlite3OsCurrentTime(double*);
+void sqlite3OsEnterMutex(void);
+void sqlite3OsLeaveMutex(void);
 
 #endif /* _SQLITE_OS_H_ */

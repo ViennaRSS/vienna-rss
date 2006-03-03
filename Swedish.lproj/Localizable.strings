@@ -250,9 +250,9 @@
 "New Subscription…" = "Ny prenumeration…";
 "Next Tab" = "Nästa flik";
 "Open Article Page" = "Artikelsida";
-"Open Article Page in External Browser" = "Open Article Page in External Browser";
+"Open Article Page in External Browser" = "Öppna artikelsida i extern webbläsare";
 "Open Subscription Home Page" = "Källsida i webbläsare";
-"Open Subscription Home Page in External Browser" = "Open Subscription Home Page in External Browser";
+"Open Subscription Home Page in External Browser" = "Öppna prenumerationhemsida i extern webbläsare";
 "Page Setup…" = "Utskriftsformat…";
 "Paste" = "Klista in";
 "Preferences…" = "Inställningar…";
@@ -287,9 +287,9 @@
 "Export all subscriptions" = "Exportera alla prenumerationer";
 "Export selected subscriptions" = "Exportera markerade prenumerationer";
 "Preserve group folders in exported file" = "Bevara gruppmappar";
-"Open Frame" = "Open Frame";
-"Open Image in %@" = "Open bild i %@";
-"Open Subscription Home Page in %@" = "Open Subscription Home Page in %@";
-"Open Article Page in %@" = "Open Article Page in %@";
-"New Tab" = "New Tab";
-"External Browser" = "External Browser";
+"Open Frame" = "Öppna ram";
+"Open Image in %@" = "Öppna bild i %@";
+"Open Subscription Home Page in %@" = "Öppna prenumerationhemsida i %@";
+"Open Article Page in %@" = "Öppna artikelsida i %@";
+"New Tab" = "Ny flik";
+"External Browser" = "Extern webbläsare";

@@ -50,7 +50,6 @@
 		AA26F5B80604964000FE7994 /* URLHandlerCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F5B70604964000FE7994 /* URLHandlerCommand.h */; };
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
-		AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2DE139085399F40055C4EE /* sqlite3.h */; };
 		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
 		AA3111BC0901A2F100E80DF1 /* NewPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */; };
 		AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */; };
@@ -202,6 +201,14 @@
 		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
 		AABCFB1A0900BA4E00984F78 /* SquareWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AABCFB180900BA4E00984F78 /* SquareWindow.h */; };
 		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
+		AABFC03409B806C80087CBB9 /* alter.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02A09B806C70087CBB9 /* alter.c */; };
+		AABFC03509B806C80087CBB9 /* analyze.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02B09B806C70087CBB9 /* analyze.c */; };
+		AABFC03609B806C80087CBB9 /* callback.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02C09B806C80087CBB9 /* callback.c */; };
+		AABFC03709B806C80087CBB9 /* complete.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02D09B806C80087CBB9 /* complete.c */; };
+		AABFC03809B806C80087CBB9 /* experimental.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02E09B806C80087CBB9 /* experimental.c */; };
+		AABFC03909B806C80087CBB9 /* keywordhash.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFC02F09B806C80087CBB9 /* keywordhash.h */; };
+		AABFC03B09B806C80087CBB9 /* prepare.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC03109B806C80087CBB9 /* prepare.c */; };
+		AABFC03D09B806C80087CBB9 /* vdbefifo.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC03309B806C80087CBB9 /* vdbefifo.c */; };
 		AABFDCA10609EA8100100A9B /* ActivityViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFDC9F0609EA8100100A9B /* ActivityViewer.h */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AABFDCC20609EAC500100A9B /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AABFDCC10609EAC500100A9B /* ActivityViewer.nib */; };
@@ -387,7 +394,6 @@
 		AA26F676060497BB00FE7994 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoldersTree.m; sourceTree = "<group>"; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
 		AA2CE689081C3F3800D8FD8F /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
-		AA2DE139085399F40055C4EE /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = Preferences.plist; sourceTree = "<group>"; };
 		AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NewPreferencesController.h; sourceTree = "<group>"; };
 		AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NewPreferencesController.m; sourceTree = "<group>"; };
@@ -583,6 +589,14 @@
 		AABD6A35090231490092D4AE /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AABD6A36090231510092D4AE /* Italian */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Italian; path = Italian.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AABD6A37090231550092D4AE /* German */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = German; path = German.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AABFC02A09B806C70087CBB9 /* alter.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = alter.c; sourceTree = "<group>"; };
+		AABFC02B09B806C70087CBB9 /* analyze.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = analyze.c; sourceTree = "<group>"; };
+		AABFC02C09B806C80087CBB9 /* callback.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = callback.c; sourceTree = "<group>"; };
+		AABFC02D09B806C80087CBB9 /* complete.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = complete.c; sourceTree = "<group>"; };
+		AABFC02E09B806C80087CBB9 /* experimental.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = experimental.c; sourceTree = "<group>"; };
+		AABFC02F09B806C80087CBB9 /* keywordhash.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = keywordhash.h; sourceTree = "<group>"; };
+		AABFC03109B806C80087CBB9 /* prepare.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = prepare.c; sourceTree = "<group>"; };
+		AABFC03309B806C80087CBB9 /* vdbefifo.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = vdbefifo.c; sourceTree = "<group>"; };
 		AABFDC990609EA5A00100A9B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
@@ -856,7 +870,6 @@
 			isa = PBXGroup;
 			children = (
 				AAB8217C0999C2AC00F3C730 /* sqlite */,
-				AA2DE139085399F40055C4EE /* sqlite3.h */,
 				AA26F47F0604911B00FE7994 /* SQLDatabase.h */,
 				AA26F4800604911B00FE7994 /* SQLDatabase.m */,
 				AA26F4810604911B00FE7994 /* SQLDatabasePrivate.h */,
@@ -933,6 +946,14 @@
 		AAB8217C0999C2AC00F3C730 /* sqlite */ = {
 			isa = PBXGroup;
 			children = (
+				AABFC02A09B806C70087CBB9 /* alter.c */,
+				AABFC02B09B806C70087CBB9 /* analyze.c */,
+				AABFC02C09B806C80087CBB9 /* callback.c */,
+				AABFC02D09B806C80087CBB9 /* complete.c */,
+				AABFC02E09B806C80087CBB9 /* experimental.c */,
+				AABFC02F09B806C80087CBB9 /* keywordhash.h */,
+				AABFC03109B806C80087CBB9 /* prepare.c */,
+				AABFC03309B806C80087CBB9 /* vdbefifo.c */,
 				AAB8217D0999C2AC00F3C730 /* attach.c */,
 				AAB8217E0999C2AC00F3C730 /* auth.c */,
 				AAB8217F0999C2AC00F3C730 /* btree.c */,
@@ -1061,7 +1082,6 @@
 				AA328A7508483DE100A7AD5A /* Export.h in Headers */,
 				AA328A9B0848404200A7AD5A /* Import.h in Headers */,
 				AAA1E2FD0852502700277128 /* NewGroupFolder.h in Headers */,
-				AA2DE13A085399F40055C4EE /* sqlite3.h in Headers */,
 				AA55918A086121C200105AC5 /* SplitViewExtensions.h in Headers */,
 				AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */,
 				AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */,
@@ -1105,6 +1125,7 @@
 				AAB821DD0999C2AD00F3C730 /* vdbe.h in Headers */,
 				AAB821E00999C2AD00F3C730 /* vdbeInt.h in Headers */,
 				AAA5775209A47CF900602469 /* RenameFolder.h in Headers */,
+				AABFC03909B806C80087CBB9 /* keywordhash.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,6 +1384,13 @@
 				AAB821E10999C2AD00F3C730 /* vdbemem.c in Sources */,
 				AAB821E20999C2AD00F3C730 /* where.c in Sources */,
 				AAA5775309A47CF900602469 /* RenameFolder.m in Sources */,
+				AABFC03409B806C80087CBB9 /* alter.c in Sources */,
+				AABFC03509B806C80087CBB9 /* analyze.c in Sources */,
+				AABFC03609B806C80087CBB9 /* callback.c in Sources */,
+				AABFC03709B806C80087CBB9 /* complete.c in Sources */,
+				AABFC03809B806C80087CBB9 /* experimental.c in Sources */,
+				AABFC03B09B806C80087CBB9 /* prepare.c in Sources */,
+				AABFC03D09B806C80087CBB9 /* vdbefifo.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1608,7 +1636,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = __DEBUG__;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					__DEBUG__,
+					SQLITE_OMIT_CURSOR,
+					"HAVE_USLEEP=1",
+					"THREADSAFE=0",
+				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
@@ -1663,6 +1696,12 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_OMIT_CURSOR,
+					"HAVE_USLEEP=1",
+					"THREADSAFE=0",
+					NDEBUG,
+				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
@@ -1764,7 +1803,8 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2028;
+				BUILD_NUMBER = 2029;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1792,7 +1832,8 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2028;
+				BUILD_NUMBER = 2029;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1820,7 +1861,13 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2028;
+				BUILD_NUMBER = 2029;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SQLITE_OMIT_CURSOR,
+					"HAVE_USLEEP=1",
+					"THREADSAFE=0",
+					NDEBUG,
+				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

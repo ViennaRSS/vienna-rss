@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.2.2029
+----------
+- Fix database performance issue introduced in 2026.
+
 2.0.1.2028 (2.0.1 Release Build)
 --------------------------------
 - Updated localisation.
