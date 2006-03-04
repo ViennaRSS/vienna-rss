@@ -12,6 +12,10 @@ Thanks!
 - Changed key combination for "Cancel Refreshing" to control-command-s to make command-"-" available for text size.
 - Added "Send Link" functionality for article view.
 
+2.0.2.2030
+----------
+- Completed Spanish localisation.
+
 2.0.2.2029
 ----------
 - Fix database performance issue introduced in 2026.
