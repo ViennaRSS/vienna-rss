@@ -6,6 +6,20 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.1.0.2100
+----------
+- Added "Increase text size" and "Decrease Text Size" for browser view.
+- Changed key combination for "Cancel Refreshing" to control-command-s to make command-"-" available for text size.
+- Added "Send Link" functionality for article view.
+
+2.0.2.2029
+----------
+- Fix database performance issue introduced in 2026.
+
+2.0.1.2028 (2.0.1 Release Build)
+--------------------------------
+- Updated localisation.
+
 2.0.1.2027
 ----------
 - For feeds that have no title and one cannot be synthesised, we now set the title to (No Title).

@@ -18,6 +18,10 @@
 
 #include <winbase.h>
 
+#ifdef __CYGWIN__
+# include <sys/cygwin.h>
+#endif
+
 /*
 ** Macros used to determine whether or not to use threads.
 */
@@ -29,6 +33,13 @@
 ** Include code that is common to all os_*.c files
 */
 #include "os_common.h"
+
+/*
+** Do not include any of the File I/O interface procedures if the
+** SQLITE_OMIT_DISKIO macro is defined (indicating that there database
+** will be in-memory only)
+*/
+#ifndef SQLITE_OMIT_DISKIO
 
 /*
 ** Delete the named file
@@ -202,7 +213,7 @@ int sqlite3OsOpenDirectory(
 ** name of a directory, then that directory will be used to store
 ** temporary files.
 */
-const char *sqlite3_temp_directory = 0;
+char *sqlite3_temp_directory = 0;
 
 /*
 ** Create a temporary file name in zBuf.  zBuf must be big enough to
@@ -275,12 +286,13 @@ int sqlite3OsRead(OsFile *id, void *pBuf, int amt){
 ** or some other error code on failure.
 */
 int sqlite3OsWrite(OsFile *id, const void *pBuf, int amt){
-  int rc;
+  int rc = 0;
   DWORD wrote;
   assert( id->isOpen );
   SimulateIOError(SQLITE_IOERR);
   SimulateDiskfullError;
   TRACE3("WRITE %d lock=%d\n", id->h, id->locktype);
+  assert( amt>0 );
   while( amt>0 && (rc = WriteFile(id->h, pBuf, amt, &wrote, 0))!=0 && wrote>0 ){
     amt -= wrote;
     pBuf = &((char*)pBuf)[wrote];
@@ -408,6 +420,24 @@ static int unlockReadLock(OsFile *id){
   }
   return res;
 }
+
+#ifndef SQLITE_OMIT_PAGER_PRAGMAS
+/*
+** Check that a given pathname is a directory and is writable 
+**
+*/
+int sqlite3OsIsDirWritable(char *zBuf){
+  int fileAttr;
+  if(! zBuf ) return 0;
+  if(! isNT() && strlen(zBuf) > MAX_PATH ) return 0;
+  fileAttr = GetFileAttributesA(zBuf);
+  if( fileAttr == 0xffffffff ) return 0;
+  if( (fileAttr & FILE_ATTRIBUTE_DIRECTORY) != FILE_ATTRIBUTE_DIRECTORY ){
+    return 0;
+  }
+  return 1;
+}
+#endif /* SQLITE_OMIT_PAGER_PRAGMAS */
 
 /*
 ** Lock the file with the lock specified by parameter locktype - one
@@ -603,6 +633,36 @@ int sqlite3OsUnlock(OsFile *id, int locktype){
 }
 
 /*
+** Turn a relative pathname into a full pathname.  Return a pointer
+** to the full pathname stored in space obtained from sqliteMalloc().
+** The calling function is responsible for freeing this space once it
+** is no longer needed.
+*/
+char *sqlite3OsFullPathname(const char *zRelative){
+  char *zNotUsed;
+  char *zFull;
+  int nByte;
+#ifdef __CYGWIN__
+  nByte = strlen(zRelative) + MAX_PATH + 1001;
+  zFull = sqliteMalloc( nByte );
+  if( zFull==0 ) return 0;
+  if( cygwin_conv_to_full_win32_path(zRelative, zFull) ) return 0;
+#else
+  nByte = GetFullPathNameA(zRelative, 0, 0, &zNotUsed) + 1;
+  zFull = sqliteMalloc( nByte );
+  if( zFull==0 ) return 0;
+  GetFullPathNameA(zRelative, nByte, zFull, &zNotUsed);
+#endif
+  return zFull;
+}
+
+#endif /* SQLITE_OMIT_DISKIO */
+/***************************************************************************
+** Everything above deals with file I/O.  Everything that follows deals
+** with other miscellanous aspects of the operating system interface
+****************************************************************************/
+
+/*
 ** Get information to seed the random number generator.  The seed
 ** is written into the buffer zBuf[256].  The calling function must
 ** supply a sufficiently large buffer.
@@ -675,23 +735,6 @@ void sqlite3OsLeaveMutex(){
 }
 
 /*
-** Turn a relative pathname into a full pathname.  Return a pointer
-** to the full pathname stored in space obtained from sqliteMalloc().
-** The calling function is responsible for freeing this space once it
-** is no longer needed.
-*/
-char *sqlite3OsFullPathname(const char *zRelative){
-  char *zNotUsed;
-  char *zFull;
-  int nByte;
-  nByte = GetFullPathNameA(zRelative, 0, 0, &zNotUsed) + 1;
-  zFull = sqliteMalloc( nByte );
-  if( zFull==0 ) return 0;
-  GetFullPathNameA(zRelative, nByte, zFull, &zNotUsed);
-  return zFull;
-}
-
-/*
 ** The following variable, if set to a non-zero value, becomes the result
 ** returned from sqlite3OsCurrentTime().  This is used for testing.
 */
@@ -719,29 +762,6 @@ int sqlite3OsCurrentTime(double *prNow){
   }
 #endif
   return 0;
-}
-
-/*
-** Find the time that the file was last modified.  Write the
-** modification time and date as a Julian Day number into *prNow and
-** return SQLITE_OK.  Return SQLITE_ERROR if the modification
-** time cannot be found.
-*/
-int sqlite3OsFileModTime(OsFile *id, double *prMTime){
-  int rc;
-  FILETIME ft;
-  /* FILETIME structure is a 64-bit value representing the number of 
-  ** 100-nanosecond intervals since January 1, 1601 (= JD 2305813.5). 
-  */
-  if( GetFileTime(id->h, 0, 0, &ft) ){
-    double t;
-    t = ((double)ft.dwHighDateTime) * 4294967296.0; 
-    *prMTime = (t + ft.dwLowDateTime)/864000000000.0 + 2305813.5;
-    rc = SQLITE_OK;
-  }else{
-    rc = SQLITE_ERROR;
-  }
-  return rc;
 }
 
 #endif /* OS_WIN */

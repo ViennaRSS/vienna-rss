@@ -2019,6 +2019,9 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
+-(void)handleMakeTextSmaller{}
+-(void)handleMakeTextLarger{}
+
 /* dealloc
  * Clean up behind ourself.
  */

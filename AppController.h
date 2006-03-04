@@ -127,6 +127,9 @@
 -(IBAction)skipFolder:(id)sender;
 -(IBAction)showDownloadsWindow:(id)sender;
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
+-(IBAction)mailLinkToArticlePage:(id)sender;
+-(IBAction)decreaseFontSize:(id)sender;
+-(IBAction)increaseFontSize:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

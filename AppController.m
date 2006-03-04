@@ -151,17 +151,17 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-
+	
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
-
+	
 	// Initialize the database
 	if ((db = [Database sharedDatabase]) == nil)
 	{
 		[NSApp terminate:nil];
 		return;
 	}
-
+	
 	// Run the auto-expire now
 	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:NO];
 	
@@ -169,16 +169,16 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
 	if (pathToPList != nil)
 		standardURLs = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
-
+	
 	// Initialize the Styles, Sort By and Columns menu
 	[self initSortMenu];
 	[self initColumnsMenu];
 	[self initStylesMenu];
-
+	
 	// Restore the splitview layout
 	[splitView1 loadLayoutWithName:@"SplitView1Positions"];
 	[splitView1 setDelegate:self];
-
+	
 	// Show the current unread count on the app icon
 	originalIcon = [[NSApp applicationIconImage] copy];
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
@@ -198,54 +198,54 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[alternateItem setAlternate:YES];
 	}
 	[self updateAlternateMenuTitle];
-
+	
 	// Create a menu for the search field
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
 	// item is localised though.
 	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
-
+	
     NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
     [item setTag:NSSearchFieldRecentsTitleMenuItemTag];
 	[cellMenu insertItem:item atIndex:0];
     [item release];
-
+	
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
     [item setTag:NSSearchFieldRecentsMenuItemTag];
     [cellMenu insertItem:item atIndex:1];
     [item release];
-
+	
     item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
     [item setTag:NSSearchFieldClearRecentsMenuItemTag];
     [cellMenu insertItem:item atIndex:2];
     [item release];
-
+	
     [[searchField cell] setSearchMenuTemplate:cellMenu];
 	[cellMenu release];
-
+	
 	// Add Scripts menu if we have any scripts
 	if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self initScriptsMenu];
-
+	
 	// Use Growl if it is installed
 	[GrowlApplicationBridge setGrowlDelegate:self];
-
+	
 	// Start the check timer
 	[self handleCheckFrequencyChange:nil];
-
+	
 	// Register to be informed when the system awakes from sleep
 	[self installSleepHandler];
-
+	
 	// Register to be notified when the scripts folder changes.
 	if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self installScriptsFolderWatcher];
-
+	
 	// Assign the controller for the child views
 	[foldersTree setController:self];
 	[mainArticleView setController:self];
-
+	
 	// Fix up the Close commands
 	[self updateCloseCommands];
-
+	
 	// Do safe initialisation.
 	[self doSafeInitialisation];
 }
@@ -330,7 +330,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 {
     IONotificationPortRef notify;
     io_object_t anIterator;
-
+	
     root_port = IORegisterForSystemPower(self, &notify, MySleepCallBack, &anIterator);
     if (root_port != 0)
 		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
@@ -353,7 +353,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
 	FNSubscriptionRef refCode;
-
+	
 	FNSubscribeByPath((const UInt8 *)[path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
 }
 
@@ -474,7 +474,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSString * path = [[defaults objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
 		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
-
+		
 		// Make sure we actually have a Scripts folder.
 		NSFileManager * fileManager = [NSFileManager defaultManager];
 		BOOL isDir = NO;
@@ -552,7 +552,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSRect leftFrame = [sv1 frame];
 	NSRect rightFrame = [sv2 frame];
 	NSRect newFrame = [sender frame];
-
+	
 	if (sender == splitView1)
 	{
 		leftFrame.size.height = newFrame.size.height;
@@ -653,12 +653,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					}
 					[newMenuItem release];
 				}
-				break;
-
+					break;
+				
 			case WebMenuItemTagOpenFrameInNewWindow:
 				[menuItem setTitle:NSLocalizedString(@"Open Frame", nil)];
 				break;
-
+				
 			case WebMenuItemTagOpenLinkInNewWindow:
 				[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultLocation]];
 				[menuItem setTarget:self];
@@ -677,9 +677,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[newMenuItem setAlternate:YES];
 					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 				}
-				[newMenuItem release];
+					[newMenuItem release];
 				break;
-
+				
 			case WebMenuItemTagCopyLinkToClipboard:
 				[menuItem setTitle:NSLocalizedString(@"Copy Link to Clipboard", nil)];
 				break;
@@ -825,7 +825,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Launch in the foreground or background as needed
 	Preferences * prefs = [Preferences standardPreferences];
 	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
-
+	
 	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
 					withAppBundleIdentifier:NULL
 									options:lOptions
@@ -868,7 +868,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)runAppleScript:(NSString *)scriptName
 {
 	NSDictionary * errorDictionary;
-
+	
 	NSURL * scriptURL = [NSURL fileURLWithPath:scriptName];
 	NSAppleScript * appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
 	if (appleScript == nil)
@@ -943,7 +943,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
 	Field * field;
-
+	
 	while ((field = [enumerator nextObject]) != nil)
 	{
 		// Filter out columns we don't sort on. Later we should have an attribute in the
@@ -1004,27 +1004,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)initScriptsMenu
 {
 	NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
-
+	
 	// Valid script file extensions
 	NSArray * exts = [NSArray arrayWithObjects:@"scpt", nil];
-
+	
 	// Dump the current mappings
 	[scriptPathMappings removeAllObjects];
 	
 	// Add scripts within the app resource
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Scripts"];
 	loadMapFromPath(path, scriptPathMappings, NO, exts);
-
+	
 	// Add scripts that the user created and stored in the scripts folder
 	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
 	loadMapFromPath(path, scriptPathMappings, NO, exts);
-
+	
 	// Add the contents of the scriptsPathMappings dictionary keys to the menu sorted
 	// by key name.
 	NSArray * sortedMenuItems = [[scriptPathMappings allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 	int count = [sortedMenuItems count];
 	int index;
-
+	
 	for (index = 0; index < count; ++index)
 	{
 		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index]
@@ -1033,7 +1033,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[scriptsMenu addItem:menuItem];
 		[menuItem release];
 	}
-
+	
 	// Insert the Scripts menu to the left of the Help menu only if
 	// we actually have any scripts.
 	if (count > 0)
@@ -1044,7 +1044,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil) action:@selector(doOpenScriptsFolder:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		[menuItem release];
-
+		
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts...", nil) action:@selector(moreScripts:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
 		[menuItem release];
@@ -1056,10 +1056,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[[NSApp mainMenu] removeItem:scriptsMenuItem];
 			[scriptsMenuItem release];
 		}
-
+		
 		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
 		[scriptsMenuItem setImage:[NSImage imageNamed:@"scriptMenu.tiff"]];
-
+		
 		int helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
 		[[NSApp mainMenu] insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		[scriptsMenuItem setSubmenu:scriptsMenu];
@@ -1069,13 +1069,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 /* initStylesMenu
  * Populate the Styles menu with a list of built-in and external styles. (Note that in the event of
- * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
- * override the built-in styles if necessary).
+																		 * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
+																		 * override the built-in styles if necessary).
  */
 -(void)initStylesMenu
 {
 	NSMenu * stylesSubMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
-
+	
 	// Reinitialise the styles map
 	NSDictionary * stylesMap = [mainArticleView initStylesMap];
 	
@@ -1091,13 +1091,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[stylesSubMenu addItem:menuItem];
 		[menuItem release];
 	}
-
+	
 	// Append a link to More Styles...
 	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
 	[stylesSubMenu addItem:menuItem];
 	[menuItem release];
-
+	
 	// Add it to the Style menu
 	[stylesMenu setSubmenu:stylesSubMenu];
 }
@@ -1110,7 +1110,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int currentCountOfUnread = [db countOfUnread];
 	if (currentCountOfUnread == lastCountOfUnread)
 		return;
-
+	
 	// Don't show a count if there are no unread articles
 	lastCountOfUnread = currentCountOfUnread;
 	if (currentCountOfUnread <= 0)
@@ -1119,7 +1119,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[mainWindow setTitle:appName];
 		return;	
 	}	
-
+	
 	[mainWindow setTitle:[[NSString stringWithFormat:@"%@ -", appName]
 		stringByAppendingString:[NSString stringWithFormat:
 			NSLocalizedString(@" (%d unread)", nil), currentCountOfUnread]]];
@@ -1127,14 +1127,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
 	NSImage * iconImageBuffer = [originalIcon copy];
 	NSSize iconSize = [originalIcon size];
-
+	
 	// Create attributes for drawing the count. In our case, we're drawing using in
 	// 26pt Helvetica bold white.
 	NSDictionary * attributes = [[NSDictionary alloc] 
 		initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:25], NSFontAttributeName,
-			[NSColor whiteColor], NSForegroundColorAttributeName, nil];
+		[NSColor whiteColor], NSForegroundColorAttributeName, nil];
 	NSSize numSize = [countdown sizeWithAttributes:attributes];
-
+	
 	// Create a red circle in the icon large enough to hold the count.
 	[iconImageBuffer lockFocus];
 	[originalIcon drawAtPoint:NSMakePoint(0, 0)
@@ -1145,17 +1145,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
 	max += 21;
 	NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
-
+	
 	// Draw the star image and scale it so the unread count will fit inside.
 	NSImage * starImage = [NSImage imageNamed:@"unreadStar1.tiff"];
 	[starImage setScalesWhenResized:YES];
 	[starImage setSize:circleRect.size];
 	[starImage compositeToPoint:circleRect.origin operation:NSCompositeSourceOver];
-
+	
 	// Draw the count in the red circle
 	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f + 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
 	[countdown drawAtPoint:point withAttributes:attributes];
-
+	
 	// Now set the new app icon and clean up.
 	[iconImageBuffer unlockFocus];
 	[NSApp setApplicationIconImage:iconImageBuffer];
@@ -1338,13 +1338,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	TreeNode * node = (TreeNode *)[nc object];
 	int newFolderId = [node nodeId];
-
+	
 	// We only care if the selection really changed
 	if ([mainArticleView currentFolderId] != newFolderId && newFolderId != 0)
 	{
 		// Make sure article viewer is active
 		[browserView setActiveTabToPrimaryTab];
-
+		
 		// Blank out the search field
 		[self setSearchString:@""];
 		[mainArticleView selectFolderWithFilter:newFolderId];
@@ -1377,7 +1377,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)handleCheckFrequencyChange:(NSNotification *)nc
 {
 	int newFrequency = [[Preferences standardPreferences] refreshFrequency];
-
+	
 	[checkTimer invalidate];
 	[checkTimer release];
 	checkTimer = nil;
@@ -1398,7 +1398,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	Field * field = [menuItem representedObject];
-
+	
 	[field setVisible:![field visible]];
 	[mainArticleView updateVisibleColumns];
 	[mainArticleView saveTableSettings];
@@ -1411,7 +1411,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	Field * field = [menuItem representedObject];
-
+	
 	NSAssert1(field, @"Somehow got a nil representedObject for Sort sub-menu item '%@'", [menuItem title]);
 	[mainArticleView sortByIdentifier:[field name]];
 }
@@ -1486,20 +1486,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
 		[self stopProgressIndicator];
-
+		
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:YES];
 		
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
-
+		
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 		if (growlAvailable && newUnread > 0)
 		{
 			[GrowlApplicationBridge
 				notifyWithTitle:NSLocalizedString(@"Growl notification title", nil)
 					description:[NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread]
-				notificationName:NSLocalizedString(@"Growl notification name", nil)
+			   notificationName:NSLocalizedString(@"Growl notification name", nil)
 					   iconData:nil
 					   priority:0.0
 					   isSticky:NO
@@ -1574,15 +1574,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)localPerformFindPanelAction:(id)sender
 {
-	switch ([sender tag])
+	switch ([sender tag]) 
 	{
-	case NSFindPanelActionShowFindPanel:
-		[mainWindow makeFirstResponder:searchField];
-		break;
-
-	default:
-		[[browserView activeTabView] performFindPanelAction:[sender tag]];
-		break;
+		case NSFindPanelActionShowFindPanel:
+			[mainWindow makeFirstResponder:searchField];
+			break;
+			
+		default:
+			[[browserView activeTabView] performFindPanelAction:[sender tag]];
+			break;
 	}
 }
 
@@ -1605,8 +1605,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					return YES;
 				}
 			}
-			return NO;
-
+				return NO;
+			
 		case NSRightArrowFunctionKey:
 			if (flags & NSCommandKeyMask)
 				[self goForward:self];
@@ -1618,8 +1618,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					return YES;
 				}
 			}
-			return NO;
-
+				return NO;
+			
 		case NSDeleteFunctionKey:
 			[self deleteMessage:self];
 			return YES;
@@ -1628,15 +1628,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case 'F':
 			[mainWindow makeFirstResponder:searchField];
 			return YES;
-
+			
 		case '>':
 			[self goForward:self];
 			return YES;
-
+			
 		case '<':
 			[self goBack:self];
 			return YES;
-
+			
 		case 'k':
 		case 'K':
 			[self markAllRead:self];
@@ -1646,19 +1646,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case 'M':
 			[self markFlagged:self];
 			return YES;
-
+			
 		case 'u':
 		case 'U':
 		case 'r':
 		case 'R':
 			[self markRead:self];
 			return YES;
-
+			
 		case 's':
 		case 'S':
 			[self skipFolder:self];
 			return YES;
-
+			
 		case NSEnterCharacter:
 		case NSCarriageReturnCharacter:
 			if (flags & NSShiftKeyMask)
@@ -1679,7 +1679,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* refreshOnTimer
- * Each time the check timer fires, we see if a connect is not
+ * Each time the check timer fires, we see if a connect is not nswindow
  * running and then kick one off.
  */
 -(void)refreshOnTimer:(NSTimer *)aTimer
@@ -1704,7 +1704,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
-
+	
 	// If the folder already exists, just select it.
 	Folder * folder = [db folderFromFeedURL:urlString];
 	if (folder != nil)
@@ -1713,7 +1713,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[foldersTree selectFolder:[folder itemId]];
 		return;
 	}
-
+	
 	// Create then select the new folder.
 	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
 	if (folderId != -1)
@@ -1948,7 +1948,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// collection of them.
 	NSString * alertBody = nil;
 	NSString * alertTitle = nil;
-
+	
 	if (count == 1)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:0];
@@ -1975,16 +1975,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete multiple folders text", nil), count];
 		alertTitle = NSLocalizedString(@"Delete multiple folders", nil);
 	}
-
+	
 	// Get confirmation first
 	int returnCode;
 	returnCode = NSRunAlertPanel(alertTitle, alertBody, NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil);
 	if (returnCode == NSAlertAlternateReturn)
 		return;
-
+	
 	// Clear undo stack for this action
 	[self clearUndoStack];
-
+	
 	// Prompt for each folder for now
 	for (index = 0; index < count; ++index)
 	{
@@ -2005,12 +2005,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			// Create a status string
 			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), [folder name]];
 			[self setStatusMessage:deleteStatusMsg persist:NO];
-
+			
 			// Now call the database to delete the folder.
 			[db deleteFolder:[folder itemId]];
 		}
 	}
-
+	
 	// Unread count may have changed
 	[self setStatusMessage:nil persist:NO];
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
@@ -2023,7 +2023,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	int folderId = [foldersTree actualSelection];
 	Folder * folder = [db folderFromID:folderId];
-
+	
 	if (IsRSSFolder(folder))
 	{
 		NSString * validatorPage = [standardURLs valueForKey:@"FeedValidatorTemplate"];
@@ -2134,6 +2134,22 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[theView performSelector:@selector(handleStopLoading:)];
 }
 
+/* decreaseFontSize
+ * Decrases the text size in the current browser tab
+ */
+-(IBAction)decreaseFontSize:(id)sender
+{
+	[[browserView activeTabView] handleMakeTextSmaller];
+}
+
+/* increaseFontSize
+ * decrases the text size in the current browser tab
+ */
+-(IBAction)increaseFontSize:(id)sender;
+{
+	[[browserView activeTabView] handleMakeTextLarger];
+}
+
 /* updateAlternateMenuTitle
  * Set the appropriate title for the menu items that override browser preferences
  * For future implementation, perhaps we can save a lot of code by
@@ -2224,6 +2240,29 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[RefreshManager sharedManager] cancelAll];
 }
 
+/* mailLinkToArticlePage
+ * Prompts the default email application to send a link to the currently selected article(s). 
+ * Builds a string that contains a well-formed link according to the "mailto:"-scheme (RFC2368).
+ */
+-(IBAction)mailLinkToArticlePage:(id)sender
+{
+	NSMutableString * mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
+	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
+	
+	Article * theArticle = [self selectedArticle];
+	if (theArticle != nil) 
+	{
+		NSArray * articleArray = [mainArticleView markedArticleRange];
+		NSEnumerator *e = [articleArray objectEnumerator];
+		id currentArticle;
+		
+		while ( (currentArticle = [e nextObject]) ) {
+			[mailtoLink appendFormat: @"%@%@", [currentArticle link], mailtoLineBreak];
+		}
+		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
+	}
+}	
+
 /* setStatusMessage
  * Sets a new status message for the info bar then updates the view. To remove
  * any existing status message, pass nil as the value.
@@ -2274,7 +2313,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isArticleView = [browserView activeTabView] == mainArticleView;
 	BOOL focusIsInArticleList = [mainWindow firstResponder] == [mainArticleView mainView];
-
+	
 	if (theAction == @selector(printDocument:))
 	{
 		return ([self selectedArticle] != nil && isMainWindowVisible);
@@ -2469,6 +2508,28 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		return (focusIsInArticleList && thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
+	else if (theAction == @selector(mailLinkToArticlePage:))
+	{
+		Article * thisArticle = [self selectedArticle];
+		
+		if ([[mainArticleView markedArticleRange] count] > 1)
+			[menuItem setTitle:NSLocalizedString(@"Send Links", nil)];
+		else
+			[menuItem setTitle:NSLocalizedString(@"Send Link", nil)];
+		
+		return (focusIsInArticleList && thisArticle != nil && isMainWindowVisible && isArticleView);
+	}
+	else if (theAction == @selector(increaseFontSize:))
+	{
+		NSView<BaseView> * theView = [browserView activeTabView];
+		return ([theView isKindOfClass:[BrowserPane class]]) && ![(BrowserPane *)theView isLoading];
+	}
+	else if (theAction == @selector(decreaseFontSize:))
+	{
+		NSView<BaseView> * theView = [browserView activeTabView];
+		return ([theView isKindOfClass:[BrowserPane class]]) && ![(BrowserPane *)theView isLoading];
+	}
+	
 	return YES;
 }
 

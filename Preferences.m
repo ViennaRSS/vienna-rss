@@ -514,4 +514,5 @@ static Preferences * _standardPreferences = nil;
 	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
+
 @end
