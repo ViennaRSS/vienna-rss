@@ -1803,12 +1803,8 @@
 					ppc,
 					i386,
 				);
-<<<<<<< .working
 				BUILD_NUMBER = 2100;
-=======
-				BUILD_NUMBER = 2029;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
->>>>>>> .merge-right.r341
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1836,12 +1832,8 @@
 					ppc,
 					i386,
 				);
-<<<<<<< .working
 				BUILD_NUMBER = 2100;
-=======
-				BUILD_NUMBER = 2029;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
->>>>>>> .merge-right.r341
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1869,17 +1861,13 @@
 					ppc,
 					i386,
 				);
-<<<<<<< .working
 				BUILD_NUMBER = 2100;
-=======
-				BUILD_NUMBER = 2029;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					SQLITE_OMIT_CURSOR,
 					"HAVE_USLEEP=1",
 					"THREADSAFE=0",
 					NDEBUG,
 				);
->>>>>>> .merge-right.r341
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
