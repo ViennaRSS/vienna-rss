@@ -50,7 +50,7 @@
 	BOOL blockMarkRead;
 	AppController * controller;
 	Database * db;
-
+	
 	NSMutableDictionary * stylePathMappings;
 	NSString * sortColumnIdentifier;
 	NSTimer * markReadTimer;

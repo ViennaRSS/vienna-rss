@@ -16,6 +16,19 @@
 #include "sqliteInt.h"
 #include "vdbeInt.h"
 
+/*
+** Return TRUE (non-zero) of the statement supplied as an argument needs
+** to be recompiled.  A statement needs to be recompiled whenever the
+** execution environment changes in a way that would alter the program
+** that sqlite3_prepare() generates.  For example, if new functions or
+** collating sequences are registered or if an authorizer function is
+** added or changed.
+*/
+int sqlite3_expired(sqlite3_stmt *pStmt){
+  Vdbe *p = (Vdbe*)pStmt;
+  return p==0 || p->expired;
+}
+
 /**************************** sqlite3_value_  *******************************
 ** The following routines extract information from a Mem or sqlite3_value
 ** structure.
@@ -46,6 +59,7 @@ sqlite_int64 sqlite3_value_int64(sqlite3_value *pVal){
 const unsigned char *sqlite3_value_text(sqlite3_value *pVal){
   return (const char *)sqlite3ValueText(pVal, SQLITE_UTF8);
 }
+#ifndef SQLITE_OMIT_UTF16
 const void *sqlite3_value_text16(sqlite3_value* pVal){
   return sqlite3ValueText(pVal, SQLITE_UTF16NATIVE);
 }
@@ -55,6 +69,7 @@ const void *sqlite3_value_text16be(sqlite3_value *pVal){
 const void *sqlite3_value_text16le(sqlite3_value *pVal){
   return sqlite3ValueText(pVal, SQLITE_UTF16LE);
 }
+#endif /* SQLITE_OMIT_UTF16 */
 int sqlite3_value_type(sqlite3_value* pVal){
   return pVal->type;
 }
@@ -69,7 +84,7 @@ void sqlite3_result_blob(
   int n, 
   void (*xDel)(void *)
 ){
-  assert( n>0 );
+  assert( n>=0 );
   sqlite3VdbeMemSetStr(&pCtx->s, z, n, 0, xDel);
 }
 void sqlite3_result_double(sqlite3_context *pCtx, double rVal){
@@ -100,6 +115,7 @@ void sqlite3_result_text(
 ){
   sqlite3VdbeMemSetStr(&pCtx->s, z, n, SQLITE_UTF8, xDel);
 }
+#ifndef SQLITE_OMIT_UTF16
 void sqlite3_result_text16(
   sqlite3_context *pCtx, 
   const void *z, 
@@ -124,6 +140,7 @@ void sqlite3_result_text16le(
 ){
   sqlite3VdbeMemSetStr(&pCtx->s, z, n, SQLITE_UTF16LE, xDel);
 }
+#endif /* SQLITE_OMIT_UTF16 */
 void sqlite3_result_value(sqlite3_context *pCtx, sqlite3_value *pValue){
   sqlite3VdbeMemCopy(&pCtx->s, pValue);
 }
@@ -143,6 +160,12 @@ int sqlite3_step(sqlite3_stmt *pStmt){
   }
   if( p->aborted ){
     return SQLITE_ABORT;
+  }
+  if( p->pc<=0 && p->expired ){
+    if( p->rc==SQLITE_OK ){
+      p->rc = SQLITE_SCHEMA;
+    }
+    return SQLITE_ERROR;
   }
   db = p->db;
   if( sqlite3SafetyOn(db) ){
@@ -177,9 +200,12 @@ int sqlite3_step(sqlite3_stmt *pStmt){
     db->activeVdbeCnt++;
     p->pc = 0;
   }
+#ifndef SQLITE_OMIT_EXPLAIN
   if( p->explain ){
     rc = sqlite3VdbeList(p);
-  }else{
+  }else
+#endif /* SQLITE_OMIT_EXPLAIN */
+  {
     rc = sqlite3VdbeExec(p);
   }
 
@@ -187,7 +213,7 @@ int sqlite3_step(sqlite3_stmt *pStmt){
     rc = SQLITE_MISUSE;
   }
 
-  sqlite3Error(p->db, rc, p->zErrMsg);
+  sqlite3Error(p->db, rc, p->zErrMsg ? "%s" : 0, p->zErrMsg);
   return rc;
 }
 
@@ -204,10 +230,6 @@ void *sqlite3_user_data(sqlite3_context *p){
 ** Allocate or return the aggregate context for a user function.  A new
 ** context is allocated on the first call.  Subsequent calls return the
 ** same context that was returned on prior calls.
-**
-** This routine is defined here in vdbe.c because it depends on knowing
-** the internals of the sqlite3_context structure which is only defined in
-** this source file.
 */
 void *sqlite3_aggregate_context(sqlite3_context *p, int nByte){
   assert( p && p->pFunc && p->pFunc->xStep );
@@ -343,9 +365,16 @@ sqlite_int64 sqlite3_column_int64(sqlite3_stmt *pStmt, int i){
 const unsigned char *sqlite3_column_text(sqlite3_stmt *pStmt, int i){
   return sqlite3_value_text( columnMem(pStmt,i) );
 }
+#if 0
+sqlite3_value *sqlite3_column_value(sqlite3_stmt *pStmt, int i){
+  return columnMem(pStmt, i);
+}
+#endif
+#ifndef SQLITE_OMIT_UTF16
 const void *sqlite3_column_text16(sqlite3_stmt *pStmt, int i){
   return sqlite3_value_text16( columnMem(pStmt,i) );
 }
+#endif /* SQLITE_OMIT_UTF16 */
 int sqlite3_column_type(sqlite3_stmt *pStmt, int i){
   return sqlite3_value_type( columnMem(pStmt,i) );
 }
@@ -353,8 +382,18 @@ int sqlite3_column_type(sqlite3_stmt *pStmt, int i){
 /*
 ** Convert the N-th element of pStmt->pColName[] into a string using
 ** xFunc() then return that string.  If N is out of range, return 0.
-** If useType is 1, then use the second set of N elements (the datatype
-** names) instead of the first set.
+**
+** There are up to 5 names for each column.  useType determines which
+** name is returned.  Here are the names:
+**
+**    0      The column name as it should be displayed for output
+**    1      The datatype name for the column
+**    2      The name of the database that the column derives from
+**    3      The name of the table that the column derives from
+**    4      The name of the table column that the result column derives from
+**
+** If the result is not a simple column reference (if it is an expression
+** or a constant) then useTypes 2, 3, and 4 return NULL.
 */
 static const void *columnName(
   sqlite3_stmt *pStmt,
@@ -368,9 +407,7 @@ static const void *columnName(
   if( p==0 || N>=n || N<0 ){
     return 0;
   }
-  if( useType ){
-    N += n;
-  }
+  N += useType*n;
   return xFunc(&p->aColName[N]);
 }
 
@@ -382,30 +419,71 @@ static const void *columnName(
 const char *sqlite3_column_name(sqlite3_stmt *pStmt, int N){
   return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text, 0);
 }
-
-/*
-** Return the name of the 'i'th column of the result set of SQL statement
-** pStmt, encoded as UTF-16.
-*/
+#ifndef SQLITE_OMIT_UTF16
 const void *sqlite3_column_name16(sqlite3_stmt *pStmt, int N){
   return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text16, 0);
 }
+#endif
 
 /*
 ** Return the column declaration type (if applicable) of the 'i'th column
-** of the result set of SQL statement pStmt, encoded as UTF-8.
+** of the result set of SQL statement pStmt.
 */
 const char *sqlite3_column_decltype(sqlite3_stmt *pStmt, int N){
   return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text, 1);
 }
-
-/*
-** Return the column declaration type (if applicable) of the 'i'th column
-** of the result set of SQL statement pStmt, encoded as UTF-16.
-*/
+#ifndef SQLITE_OMIT_UTF16
 const void *sqlite3_column_decltype16(sqlite3_stmt *pStmt, int N){
   return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text16, 1);
 }
+#endif /* SQLITE_OMIT_UTF16 */
+
+#if !defined(SQLITE_OMIT_ORIGIN_NAMES) && 0
+/*
+** Return the name of the database from which a result column derives.
+** NULL is returned if the result column is an expression or constant or
+** anything else which is not an unabiguous reference to a database column.
+*/
+const char *sqlite3_column_database_name(sqlite3_stmt *pStmt, int N){
+  return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text, 2);
+}
+#ifndef SQLITE_OMIT_UTF16
+const void *sqlite3_column_database_name16(sqlite3_stmt *pStmt, int N){
+  return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text16, 2);
+}
+#endif /* SQLITE_OMIT_UTF16 */
+
+/*
+** Return the name of the table from which a result column derives.
+** NULL is returned if the result column is an expression or constant or
+** anything else which is not an unabiguous reference to a database column.
+*/
+const char *sqlite3_column_table_name(sqlite3_stmt *pStmt, int N){
+  return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text, 3);
+}
+#ifndef SQLITE_OMIT_UTF16
+const void *sqlite3_column_table_name16(sqlite3_stmt *pStmt, int N){
+  return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text16, 3);
+}
+#endif /* SQLITE_OMIT_UTF16 */
+
+/*
+** Return the name of the table column from which a result column derives.
+** NULL is returned if the result column is an expression or constant or
+** anything else which is not an unabiguous reference to a database column.
+*/
+const char *sqlite3_column_origin_name(sqlite3_stmt *pStmt, int N){
+  return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text, 4);
+}
+#ifndef SQLITE_OMIT_UTF16
+const void *sqlite3_column_origin_name16(sqlite3_stmt *pStmt, int N){
+  return columnName(pStmt, N, (const void*(*)(Mem*))sqlite3_value_text16, 4);
+}
+#endif /* SQLITE_OMIT_UTF16 */
+#endif /* SQLITE_OMIT_ORIGIN_NAMES */
+
+
+
 
 /******************************* sqlite3_bind_  ***************************
 ** 
@@ -422,7 +500,7 @@ const void *sqlite3_column_decltype16(sqlite3_stmt *pStmt, int N){
 static int vdbeUnbind(Vdbe *p, int i){
   Mem *pVar;
   if( p==0 || p->magic!=VDBE_MAGIC_RUN || p->pc>=0 ){
-    sqlite3Error(p->db, SQLITE_MISUSE, 0);
+    if( p ) sqlite3Error(p->db, SQLITE_MISUSE, 0);
     return SQLITE_MISUSE;
   }
   if( i<1 || i>p->nVar ){
@@ -513,6 +591,7 @@ int sqlite3_bind_text(
 ){
   return bindText(pStmt, i, zData, nData, xDel, SQLITE_UTF8);
 }
+#ifndef SQLITE_OMIT_UTF16
 int sqlite3_bind_text16(
   sqlite3_stmt *pStmt, 
   int i, 
@@ -522,6 +601,7 @@ int sqlite3_bind_text16(
 ){
   return bindText(pStmt, i, zData, nData, xDel, SQLITE_UTF16NATIVE);
 }
+#endif /* SQLITE_OMIT_UTF16 */
 
 /*
 ** Return the number of wildcards that can be potentially bound to.
@@ -578,11 +658,45 @@ int sqlite3_bind_parameter_index(sqlite3_stmt *pStmt, const char *zName){
     return 0;
   }
   createVarMap(p); 
-  for(i=0; i<p->nVar; i++){
-    const char *z = p->azVar[i];
-    if( z && strcmp(z,zName)==0 ){
-      return i+1;
+  if( zName ){
+    for(i=0; i<p->nVar; i++){
+      const char *z = p->azVar[i];
+      if( z && strcmp(z,zName)==0 ){
+        return i+1;
+      }
     }
   }
   return 0;
+}
+
+/*
+** Transfer all bindings from the first statement over to the second.
+** If the two statements contain a different number of bindings, then
+** an SQLITE_ERROR is returned.
+*/
+int sqlite3_transfer_bindings(sqlite3_stmt *pFromStmt, sqlite3_stmt *pToStmt){
+  Vdbe *pFrom = (Vdbe*)pFromStmt;
+  Vdbe *pTo = (Vdbe*)pToStmt;
+  int i, rc = SQLITE_OK;
+  if( (pFrom->magic!=VDBE_MAGIC_RUN && pFrom->magic!=VDBE_MAGIC_HALT)
+    || (pTo->magic!=VDBE_MAGIC_RUN && pTo->magic!=VDBE_MAGIC_HALT) ){
+    return SQLITE_MISUSE;
+  }
+  if( pFrom->nVar!=pTo->nVar ){
+    return SQLITE_ERROR;
+  }
+  for(i=0; rc==SQLITE_OK && i<pFrom->nVar; i++){
+    rc = sqlite3VdbeMemMove(&pTo->aVar[i], &pFrom->aVar[i]);
+  }
+  return rc;
+}
+
+/*
+** Return the sqlite3* database handle to which the prepared statement given
+** in the argument belongs.  This is the same database handle that was
+** the first argument to the sqlite3_prepare() that was used to create
+** the statement in the first place.
+*/
+sqlite3 *sqlite3_db_handle(sqlite3_stmt *pStmt){
+  return pStmt ? ((Vdbe*)pStmt)->db : 0;
 }

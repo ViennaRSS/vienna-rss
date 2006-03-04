@@ -45,9 +45,13 @@
 -(BOOL)isLoading;
 -(void)handleGoForward;
 -(void)handleGoBack;
+-(void)handleMakeTextSmaller;
+-(void)handleMakeTextLarger;
 -(BOOL)canGoBack;
 -(BOOL)canGoForward;
 -(void)handleReload:(id)sender;
 -(void)handleStopLoading:(id)sender;
+
 -(NSView *)mainView;
+
 @end

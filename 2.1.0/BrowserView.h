@@ -26,6 +26,8 @@
 	-(void)printDocument:(id)sender;
 	-(void)handleGoForward;
 	-(void)handleGoBack;
+	-(void)handleMakeTextSmaller;
+	-(void)handleMakeTextLarger;
 	-(BOOL)canGoForward;
 	-(BOOL)canGoBack;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
