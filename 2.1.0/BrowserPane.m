@@ -20,6 +20,7 @@
 
 #import "BrowserPane.h"
 #import "ArticleView.h"
+#import "Constants.h"
 #import "AppController.h"
 #import "Preferences.h"
 #import "HelperFunctions.h"
@@ -50,6 +51,7 @@
 		[webPane setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
 		[webPane setUIDelegate:self];
 		[webPane setFrameLoadDelegate:self];
+		[webPane setCustomUserAgent:MA_DefaultUserAgentString];
 
 		// Set our box attributes
 		[self setTitlePosition:NSNoTitle];
