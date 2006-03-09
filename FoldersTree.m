@@ -111,7 +111,7 @@
 
 	// Set refresh button behaviour.
 	[refreshButton setAction:@selector(refreshAllSubscriptions:)];
-	[refreshButton setImage:[NSImage imageNamed:@"refresh.tiff"]];
+	[refreshButton setImage:[NSImage imageNamed:@"newRefresh.tiff"]];
 	
 	// Don't resize the column when items are expanded as this messes up
 	// the placement of the unread count button.
@@ -534,7 +534,7 @@
 	else
 	{
 		[refreshButton setAction:@selector(refreshAllSubscriptions:)];
-		[refreshButton setImage:[NSImage imageNamed:@"refresh.tiff"]];
+		[refreshButton setImage:[NSImage imageNamed:@"newRefresh.tiff"]];
 	}
 }
 

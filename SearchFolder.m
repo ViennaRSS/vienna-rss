@@ -50,7 +50,7 @@
 
 @implementation SearchFolder
 
-/* init
+/* initWithDatabase
  * Just init the search criteria class.
  */
 -(id)initWithDatabase:(Database *)newDb

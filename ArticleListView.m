@@ -768,7 +768,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* handleGoForward
  * Move forward through the backtrack queue.
  */
--(void)handleGoForward
+-(IBAction)handleGoForward:(id)sender
 {
 	int folderId;
 	NSString * guid;
@@ -784,7 +784,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* handleGoBack
  * Move backward through the backtrack queue.
  */
--(void)handleGoBack
+-(IBAction)handleGoBack:(id)sender
 {
 	int folderId;
 	NSString * guid;

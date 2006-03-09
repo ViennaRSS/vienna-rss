@@ -293,3 +293,13 @@
 "Open Article Page in %@" = "Open Article Page in %@";
 "New Tab" = "New Tab";
 "External Browser" = "External Browser";
+
+/* Added in 2.1.0 */
+"Send Link" = "Send Link";
+"Send Links" = "Send Links";
+"Increase Font Size" = "Increase Font Size";
+"Decrease Font Size" = "Decrease Font Size";
+"Enter the URL here" = "Enter the URL here";
+"Refresh the current page" = "Refresh the current page";
+"Return to the previous page" = "Return to the previous page";
+"Go forward to the next page" = "Go forward to the next page";

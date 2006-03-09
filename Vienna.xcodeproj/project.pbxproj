@@ -80,7 +80,6 @@
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
 		AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
 		AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
-		AA3D4759096E1BE8000E6F3B /* refresh_new.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D4758096E1BE8000E6F3B /* refresh_new.tiff */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
 		AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
 		AA4F6617062B94D200D4837C /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACFDEBB0604D4D20072D140 /* AppController.m */; };
@@ -107,6 +106,16 @@
 		AA682CF8069A955F00228193 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = AA682CF6069A955F00228193 /* ViennaApp.m */; };
 		AA6CB7CF06238B08004E1236 /* FolderView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6CB7CD06238B08004E1236 /* FolderView.h */; };
 		AA6CB7D006238B08004E1236 /* FolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB7CE06238B08004E1236 /* FolderView.m */; };
+		AA71096D09BA74AA00E3EA8A /* leftArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */; };
+		AA71097009BA74BF00E3EA8A /* rightArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */; };
+		AA71097609BA77B800E3EA8A /* newRefresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71097509BA77B700E3EA8A /* newRefresh.tiff */; };
+		AA710F6409BB7C8B00E3EA8A /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA710F6309BB7C8B00E3EA8A /* BrowserPane.nib */; };
+		AA710F8609BB7F3800E3EA8A /* BrowserPaneTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = AA710F8409BB7F3800E3EA8A /* BrowserPaneTemplate.h */; };
+		AA710F8709BB7F3800E3EA8A /* BrowserPaneTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA710F8509BB7F3800E3EA8A /* BrowserPaneTemplate.m */; };
+		AA71168809BEB14A00E3EA8A /* ImageAndTextCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */; };
+		AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA71168E09BEB17300E3EA8A /* AddressBarCell.m */; };
+		AA71173709BEB70E00E3EA8A /* webpage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71173609BEB70D00E3EA8A /* webpage.tiff */; };
+		AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */; };
 		AA74A85F087B56810029797C /* ArticleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA74A85D087B56810029797C /* ArticleView.h */; };
 		AA74A860087B56810029797C /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
 		AA7A0C8808874CEB0027F04F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */; };
@@ -221,7 +230,7 @@
 		AAD7935C0889FA5E00E2CE5E /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
 		AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */; };
 		AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
-		AAD7999F088B617900E2CE5E /* ImageAndTextCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */; };
+		AAD7999F088B617900E2CE5E /* AddressBarCell.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD7999D088B617900E2CE5E /* AddressBarCell.h */; };
 		AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
 		AADD8963081C1916007C6E88 /* rssFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8962081C1916007C6E88 /* rssFolder.tiff */; };
 		AADD8A0E081C253F007C6E88 /* rssFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8A0D081C253F007C6E88 /* rssFeed.tiff */; };
@@ -426,7 +435,6 @@
 		AA36CD7A06100692001E33A4 /* Field.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Field.m; sourceTree = "<group>"; };
 		AA3BDC9F063249FE004621CD /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unreadStar1.tiff; sourceTree = "<group>"; };
-		AA3D4758096E1BE8000E6F3B /* refresh_new.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = refresh_new.tiff; sourceTree = "<group>"; };
 		AA3F7B4108711F6A00D2B96F /* comments_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = comments_header.tiff; sourceTree = "<group>"; };
 		AA41B43C092B80D700D96C70 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA4AB5E008971B28006C843E /* vienna2style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2style.icns; sourceTree = "<group>"; };
@@ -457,6 +465,16 @@
 		AA682CF6069A955F00228193 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
 		AA6CB7CD06238B08004E1236 /* FolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderView.h; sourceTree = "<group>"; };
 		AA6CB7CE06238B08004E1236 /* FolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderView.m; sourceTree = "<group>"; };
+		AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = leftArrow.tiff; sourceTree = "<group>"; };
+		AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rightArrow.tiff; sourceTree = "<group>"; };
+		AA71097509BA77B700E3EA8A /* newRefresh.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = newRefresh.tiff; sourceTree = "<group>"; };
+		AA710F5909BB7C4900E3EA8A /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/BrowserPane.nib; sourceTree = "<group>"; };
+		AA710F8409BB7F3800E3EA8A /* BrowserPaneTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPaneTemplate.h; sourceTree = "<group>"; };
+		AA710F8509BB7F3800E3EA8A /* BrowserPaneTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPaneTemplate.m; sourceTree = "<group>"; };
+		AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
+		AA71168E09BEB17300E3EA8A /* AddressBarCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AddressBarCell.m; sourceTree = "<group>"; };
+		AA71173609BEB70D00E3EA8A /* webpage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = webpage.tiff; sourceTree = "<group>"; };
+		AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = lockedPage.tiff; sourceTree = "<group>"; };
 		AA71CCEF098D50E80069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
 		AA71CCF2098D50F10069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AA71CCF7098D50FF0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
@@ -629,7 +647,7 @@
 		AAD7962F088AF4B300E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AAD79632088AF4BD00E2CE5E /* Swedish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Swedish; path = Swedish.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
 		AAD7963B088AF4EB00E2CE5E /* Swedish */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = Swedish; path = Swedish.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
+		AAD7999D088B617900E2CE5E /* AddressBarCell.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AddressBarCell.h; sourceTree = "<group>"; };
 		AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ImageAndTextCell.m; sourceTree = "<group>"; };
 		AADD8962081C1916007C6E88 /* rssFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFolder.tiff; sourceTree = "<group>"; };
 		AADD8A0D081C253F007C6E88 /* rssFeed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeed.tiff; sourceTree = "<group>"; };
@@ -755,6 +773,8 @@
 				AAA817F6087F986700C30683 /* AsyncConnection.m */,
 				AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */,
 				AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */,
+				AA710F8409BB7F3800E3EA8A /* BrowserPaneTemplate.h */,
+				AA710F8509BB7F3800E3EA8A /* BrowserPaneTemplate.m */,
 				AAF2797D08C00E20000090A1 /* BrowserView.h */,
 				AAF2797E08C00E20000090A1 /* BrowserView.m */,
 				AAD264B60611E108005A27E4 /* CheckForUpdates.h */,
@@ -802,6 +822,7 @@
 			children = (
 				AABFDCC10609EAC500100A9B /* ActivityViewer.nib */,
 				AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */,
+				AA710F6309BB7C8B00E3EA8A /* BrowserPane.nib */,
 				AAB9697B08F9691C00B7D1C8 /* Downloads.nib */,
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
 				AA3113480902005300E80DF1 /* GeneralPreferences.nib */,
@@ -821,6 +842,8 @@
 				AA3111B80901A2DC00E80DF1 /* Preferences.plist */,
 				AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */,
 				AAE7A842086B696A009A487E /* add.tiff */,
+				AA71173609BEB70D00E3EA8A /* webpage.tiff */,
+				AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */,
 				AAE7A845086B6994009A487E /* action.tiff */,
 				AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */,
 				AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */,
@@ -830,7 +853,7 @@
 				AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */,
 				AA6321500885F0BB006382D3 /* comments.tiff */,
 				AAE7A95F086BBA1F009A487E /* refresh.tiff */,
-				AA3D4758096E1BE8000E6F3B /* refresh_new.tiff */,
+				AA71097509BA77B700E3EA8A /* newRefresh.tiff */,
 				AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */,
 				AA32E2A30940A9970034D9CC /* folderError.tiff */,
 				AA67F3980897377C008BBC37 /* stopRefresh.tiff */,
@@ -845,6 +868,8 @@
 				AA2A1DFC089F2B940038770C /* trashFolder.tiff */,
 				AA26F43A060490BD00FE7994 /* flagged_header.tiff */,
 				AA26F43B060490BD00FE7994 /* flagged.tiff */,
+				AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */,
+				AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */,
 				AA26F43D060490BD00FE7994 /* greyRightArrow.tiff */,
 				AA26F440060490BD00FE7994 /* smallFolder.tiff */,
 				AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */,
@@ -1021,13 +1046,15 @@
 		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
+				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
 				AA94574A061C7E060090FE26 /* ExtDateFormatter.h */,
 				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
-				AAD7999D088B617900E2CE5E /* ImageAndTextCell.h */,
+				AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */,
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
@@ -1092,7 +1119,7 @@
 				AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */,
 				AA6321170885EA81006382D3 /* Constants.h in Headers */,
 				AAD794E6088A25D200E2CE5E /* PopUpButtonExtensions.h in Headers */,
-				AAD7999F088B617900E2CE5E /* ImageAndTextCell.h in Headers */,
+				AAD7999F088B617900E2CE5E /* AddressBarCell.h in Headers */,
 				AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */,
 				AA9FE2ED08BC133600A9E977 /* Preferences.h in Headers */,
 				AAF2797F08C00E20000090A1 /* BrowserView.h in Headers */,
@@ -1126,6 +1153,8 @@
 				AAB821E00999C2AD00F3C730 /* vdbeInt.h in Headers */,
 				AAA5775209A47CF900602469 /* RenameFolder.h in Headers */,
 				AABFC03909B806C80087CBB9 /* keywordhash.h in Headers */,
+				AA710F8609BB7F3800E3EA8A /* BrowserPaneTemplate.h in Headers */,
+				AA71168809BEB14A00E3EA8A /* ImageAndTextCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,10 +1306,15 @@
 				AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */,
 				AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */,
 				AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */,
-				AA3D4759096E1BE8000E6F3B /* refresh_new.tiff in Resources */,
 				AAE3E41C09760B42009E60D6 /* appearancePrefImage.tiff in Resources */,
 				AAE3E42C09760DD2009E60D6 /* generalPrefImage.tiff in Resources */,
 				AAA5775B09A47DB700602469 /* RenameFolder.nib in Resources */,
+				AA71096D09BA74AA00E3EA8A /* leftArrow.tiff in Resources */,
+				AA71097009BA74BF00E3EA8A /* rightArrow.tiff in Resources */,
+				AA71097609BA77B800E3EA8A /* newRefresh.tiff in Resources */,
+				AA710F6409BB7C8B00E3EA8A /* BrowserPane.nib in Resources */,
+				AA71173709BEB70E00E3EA8A /* webpage.tiff in Resources */,
+				AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1391,6 +1425,8 @@
 				AABFC03809B806C80087CBB9 /* experimental.c in Sources */,
 				AABFC03B09B806C80087CBB9 /* prepare.c in Sources */,
 				AABFC03D09B806C80087CBB9 /* vdbefifo.c in Sources */,
+				AA710F8709BB7F3800E3EA8A /* BrowserPaneTemplate.m in Sources */,
+				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1507,6 +1543,14 @@
 				AAFDB23309A2C1BB00958E38 /* Spanish */,
 			);
 			name = FeedCredentials.nib;
+			sourceTree = "<group>";
+		};
+		AA710F6309BB7C8B00E3EA8A /* BrowserPane.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA710F5909BB7C4900E3EA8A /* English */,
+			);
+			name = BrowserPane.nib;
 			sourceTree = "<group>";
 		};
 		AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */ = {

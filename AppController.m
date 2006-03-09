@@ -35,6 +35,7 @@
 #import "RenameFolder.h"
 #import "ViennaApp.h"
 #import "ActivityLog.h"
+#import "BrowserPaneTemplate.h"
 #import "Constants.h"
 #import "ArticleView.h"
 #import "BrowserPane.h"
@@ -778,6 +779,26 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* openWebLocation
+ * Puts the focus in the address bar of the web browser tab. If one isn't open,
+ * we create an empty one.
+ */
+-(IBAction)openWebLocation:(id)sender
+{
+	NSView<BaseView> * theView = [browserView activeTabView];
+	[self showMainWindow:self];
+	if (![theView isKindOfClass:[BrowserPane class]])
+	{
+		[self createNewTab:nil inBackground:NO];
+		theView = [browserView activeTabView];
+	}
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		BrowserPane * browserPane = (BrowserPane *)theView;
+		[browserPane activateAddressBar];
+	}
+}
+
 /* openURLFromString
  * Open a URL in either the internal Vienna browser or an external browser depending on
  * whatever the user has opted for.
@@ -798,22 +819,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (!openInPreferredBrowserFlag)
 		openURLInVienna = (!openURLInVienna);
 	if (openURLInVienna)
-		[self openURLInNewTab:url inBackground:[prefs openLinksInBackground]];
+		[self createNewTab:url inBackground:[prefs openLinksInBackground]];
 	else
 		[self openURLInDefaultBrowser:url];
 }
 
-/* openURLInNewTab
+/* createNewTab
  * Open the specified URL in a new tab.
  */
--(void)openURLInNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
+-(void)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	BrowserPane * newBrowserPane = [[BrowserPane alloc] init];
-	BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
-	[newBrowserPane setController:self];
-	[newBrowserPane setTab:tab];
-	[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
-	[newBrowserPane release];
+	BrowserPaneTemplate * newBrowserTemplate = [[BrowserPaneTemplate alloc] init];
+	if (newBrowserTemplate)
+	{
+		BrowserPane * newBrowserPane = [newBrowserTemplate mainView];
+		BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
+		[newBrowserPane setController:self];
+		[newBrowserPane setTab:tab];
+		if (url != nil)
+			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
+		[newBrowserTemplate release];
+	}
 }
 
 /* openURLInDefaultBrowser
@@ -1554,7 +1580,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)goForward:(id)sender
 {
-	[[browserView activeTabView] handleGoForward];
+	[[browserView activeTabView] handleGoForward:sender];
 }
 
 /* goBack
@@ -1563,7 +1589,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)goBack:(id)sender
 {
-	[[browserView activeTabView] handleGoBack];
+	[[browserView activeTabView] handleGoBack:sender];
 }
 
 /* localPerformFindPanelAction
@@ -1623,7 +1649,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case NSDeleteFunctionKey:
 			[self deleteMessage:self];
 			return YES;
-			
+
 		case 'f':
 		case 'F':
 			[mainWindow makeFirstResponder:searchField];
@@ -2079,7 +2105,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
 	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements.rtf" ofType:@""];
 	if (pathToAckFile != nil)
-		[self openURLInNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
+		[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
 }
 
 /* previousTab

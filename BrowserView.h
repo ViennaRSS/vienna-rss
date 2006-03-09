@@ -24,8 +24,8 @@
 	-(void)performFindPanelAction:(int)tag;
 	-(NSString *)searchPlaceholderString;
 	-(void)printDocument:(id)sender;
-	-(void)handleGoForward;
-	-(void)handleGoBack;
+	-(void)handleGoForward:(id)sender;
+	-(void)handleGoBack:(id)sender;
 	-(void)handleMakeTextSmaller;
 	-(void)handleMakeTextLarger;
 	-(BOOL)canGoForward;

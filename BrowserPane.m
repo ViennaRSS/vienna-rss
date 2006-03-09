@@ -24,6 +24,8 @@
 #import "AppController.h"
 #import "Preferences.h"
 #import "HelperFunctions.h"
+#import "StringExtensions.h"
+#import "AddressBarCell.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebKitErrors.h"
@@ -46,22 +48,6 @@
 {
     if (([super initWithFrame:frame]) != nil)
 	{
-		// Create our webview
-		webPane = [[ArticleView alloc] initWithFrame:frame];
-		[webPane setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable];
-		[webPane setUIDelegate:self];
-		[webPane setFrameLoadDelegate:self];
-		[webPane setCustomUserAgent:MA_DefaultUserAgentString];
-
-		// Set our box attributes
-		[self setTitlePosition:NSNoTitle];
-		[self setBoxType:NSBoxOldStyle];
-		[self setBorderType:NSLineBorder];
-		[self setContentViewMargins:NSMakeSize(1, 1)];
-		[self setAutoresizingMask:NSViewWidthSizable|NSViewHeightSizable|NSViewMinXMargin|NSViewMinYMargin];
-		[self addSubview:webPane];
-
-		// Other initialisation
 		controller = nil;
 		isLoadingFrame = NO;
 		isLocalFile = NO;
@@ -71,6 +57,41 @@
 		lastError = nil;
     }
     return self;
+}
+
+/* awakeFromNib
+ * Do things that only make sense once the NIB is loaded.
+ */
+-(void)awakeFromNib
+{
+	// Create our webview
+	[webPane setUIDelegate:self];
+	[webPane setFrameLoadDelegate:self];
+	[webPane setCustomUserAgent:MA_DefaultUserAgentString];
+	
+	// Set our box attributes
+	[boxFrame setContentViewMargins:NSMakeSize(1, 1)];
+
+	// Use an AddressBarCell for the address field which allows space for the
+	// web page image and an optional lock icon for secure pages.
+	AddressBarCell * cell = [[[AddressBarCell alloc] init] autorelease];
+	[cell setEditable:YES];
+	[cell setDrawsBackground:YES];
+	[cell setBordered:YES];
+	[cell setBezeled:YES];
+	[cell setScrollable:YES];
+	[cell setTarget:self];
+	[cell setAction:@selector(handleAddress:)];
+	[addressField setCell:cell];
+
+	// Initialise address field
+	[addressField setStringValue:@""];
+	
+	// Set tooltips
+	[addressField setToolTip:NSLocalizedString(@"Enter the URL here", nil)];
+	[refreshButton setToolTip:NSLocalizedString(@"Refresh the current page", nil)];
+	[backButton setToolTip:NSLocalizedString(@"Return to the previous page", nil)];
+	[forwardButton setToolTip:NSLocalizedString(@"Go forward to the next page", nil)];
 }
 
 /* setController
@@ -101,6 +122,32 @@
 	lastError = newError;
 }
 
+/* handleAddress
+ * Called when the user hits Enter on the address bar.
+ */
+-(IBAction)handleAddress:(id)sender
+{
+	NSString * theURL = [addressField stringValue];
+	
+	// If no '.' appears in the string, wrap it with 'www' and 'com'
+	if (![theURL hasCharacter:'.']) 
+		theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
+
+	// If no schema, prefix http://
+	if ([theURL rangeOfString:@"://"].location == NSNotFound)
+		theURL = [NSString stringWithFormat:@"http://%@", theURL];
+
+	[self loadURL:[NSURL URLWithString:theURL] inBackground:NO];
+}
+
+/* activateAddressBar
+ * Put the focus on the address bar.
+ */
+-(void)activateAddressBar
+{
+	[[NSApp mainWindow] makeFirstResponder:addressField];
+}
+
 /* loadURL
  * Load the specified URL into the web frame.
  */
@@ -109,7 +156,7 @@
 	hasPageTitle = NO;
 	openURLInBackground = openInBackgroundFlag;
 	isLocalFile = [url isFileURL];
-	
+
 	[pageFilename release];
 	pageFilename = [[[[url path] lastPathComponent] stringByDeletingPathExtension] retain];
 	[[webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
@@ -142,6 +189,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
+        [addressField setStringValue:[[[[frame provisionalDataSource] request] URL] absoluteString]];
 		[self setError:nil];
 		hasPageTitle = NO;
 		isLoadingFrame = YES;
@@ -153,9 +201,27 @@
  */
 -(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
 {
-	if ((frame == [webPane mainFrame]) && (!openURLInBackground))
+	if (frame == [webPane mainFrame])
 	{
-		[[sender window] makeFirstResponder:sender];
+		if (!openURLInBackground)
+			[[sender window] makeFirstResponder:sender];
+
+		// Show or hide the lock icon depending on whether this is a secure
+		// web page. Also shade the address bar a nice light yellow colour as
+		// Camino does.
+		NSURLRequest * request = [[frame dataSource] request];
+		if ([[[request URL] scheme] isEqualToString:@"https"])
+		{
+			[[addressField cell] setHasSecureImage:YES];
+			[addressField setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:0.777 alpha:1.0]];
+			[lockIconImage setHidden:NO];
+		}
+		else
+		{
+			[[addressField cell] setHasSecureImage:NO];
+			[addressField setBackgroundColor:[NSColor whiteColor]];
+			[lockIconImage setHidden:YES];
+		}
 	}
 }
 
@@ -228,6 +294,19 @@
 	{
 		[[controller browserView] setTabTitle:tab title:title];
 		hasPageTitle = YES;
+	}
+}
+
+/* didReceiveIcon
+ * Invoked when we get the page icon.
+ */
+-(void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
+{
+	if (frame == [webPane mainFrame])
+	{
+		[image setScalesWhenResized:YES];
+		[image setSize:NSMakeSize(16, 16)];
+		[iconImage setImage:image];
 	}
 }
 
@@ -352,7 +431,7 @@
 /* handleGoForward
  * Go to the next web page.
  */
--(void)handleGoForward
+-(IBAction)handleGoForward:(id)sender
 {
 	[webPane goForward];
 }
@@ -360,7 +439,7 @@
 /* handleGoBack
  * Go to the previous web page.
  */
--(void)handleGoBack
+-(IBAction)handleGoBack:(id)sender
 {
 	[webPane goBack];
 }

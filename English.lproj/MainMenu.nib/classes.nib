@@ -3,32 +3,33 @@
         {
             ACTIONS = {
                 cancelAllRefreshes = id; 
-                checkForUpdates = id; 
                 closeAllTabs = id; 
                 closeTab = id; 
-                compactDatabase = id; 
+                conditionalShowDownloadsWindow = id; 
+                decreaseFontSize = id; 
                 deleteFolder = id; 
                 deleteMessage = id; 
-                doubleClickRow = id; 
+                doOpenScriptsFolder = id; 
+                doSelectScript = id; 
                 editFolder = id; 
                 emptyTrash = id; 
-                endRenameFolder = id; 
-                exportSubscriptions = id; 
                 goBack = id; 
                 goForward = id; 
                 handleAbout = id; 
-                handleCopy = id; 
-                importSubscriptions = id; 
-                localPerformFindPanelAction = id; 
+                increaseFontSize = id; 
+                mailLinkToArticlePage = id; 
                 markAllRead = id; 
                 markAllSubscriptionsRead = id; 
                 markFlagged = id; 
                 markRead = id; 
-                myAction = id; 
+                moreStyles = id; 
                 newGroupFolder = id; 
                 newSmartFolder = id; 
                 newSubscription = id; 
                 nextTab = id; 
+                openWebElementInAlternateBrowser = id; 
+                openWebElementInBrowser = id; 
+                openWebLocation = id; 
                 previousTab = id; 
                 printDocument = id; 
                 readingPaneOnBottom = id; 
@@ -39,17 +40,13 @@
                 renameFolder = id; 
                 restoreMessage = id; 
                 searchUsingToolbarTextField = id; 
-                setCondensedLayout = id; 
-                setTableLayout = id; 
                 showAcknowledgements = id; 
                 showDownloadsWindow = id; 
                 showMainWindow = id; 
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
                 skipFolder = id; 
-                startConnect = id; 
                 stopReloadingPage = id; 
-                syncSubscriptionsFromBloglines = id; 
                 toggleActivityViewer = id; 
                 validateFeed = id; 
                 viewArticlePage = id; 
@@ -73,7 +70,6 @@
                 foldersTree = FoldersTree; 
                 mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 
-                outlineView = FolderView; 
                 searchField = NSSearchField; 
                 sortByMenu = NSMenuItem; 
                 spinner = NSProgressIndicator; 
@@ -101,6 +97,18 @@
             LANGUAGE = Java; 
             OUTLETS = {theDelegate = id; }; 
             SUPERCLASS = WebView; 
+        }, 
+        {
+            ACTIONS = {handleReload = id; handleStopLoading = id; }; 
+            CLASS = BrowserPane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                addressField = NSTextField; 
+                backForwardButtons = NSSegmentedControl; 
+                refreshButton = NSSegmentedControl; 
+                webPane = ArticleView; 
+            }; 
+            SUPERCLASS = NSView; 
         }, 
         {CLASS = BrowserView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
@@ -146,6 +154,7 @@
         {CLASS = MessageListView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = TexturedHeader; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
