@@ -1,0 +1,42 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {printDocument = id; }; 
+            CLASS = ArticleView; 
+            LANGUAGE = Java; 
+            OUTLETS = {theDelegate = id; }; 
+            SUPERCLASS = WebView; 
+        }, 
+        {
+            ACTIONS = {
+                handleAddress = id; 
+                handleGoBack = id; 
+                handleGoForward = id; 
+                handleReload = id; 
+                handleStopLoading = id; 
+            }; 
+            CLASS = BrowserPane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                addressField = NSTextField; 
+                backButton = NSButton; 
+                boxFrame = NSBox; 
+                forwardButton = NSButton; 
+                iconImage = NSImageView; 
+                lockIconImage = NSImageView; 
+                refreshButton = NSButton; 
+                webPane = ArticleView; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = BrowserPaneTemplate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {browserPane = NSView; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }
+    ); 
+    IBVersion = 1; 
+}

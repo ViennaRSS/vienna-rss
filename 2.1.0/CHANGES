@@ -11,6 +11,7 @@ Thanks!
 - Added "Increase text size" and "Decrease Text Size" for browser view.
 - Changed key combination for "Cancel Refreshing" to control-command-s to make command-"-" available for text size.
 - Added "Send Link" functionality for article view.
+- Add address bar and refresh, back and forward buttons at the top of the browser web pages.
 
 2.0.2.2030
 ----------

@@ -130,6 +130,7 @@
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)decreaseFontSize:(id)sender;
 -(IBAction)increaseFontSize:(id)sender;
+-(IBAction)openWebLocation:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
@@ -137,7 +138,7 @@
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
--(void)openURLInNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
+-(void)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(BOOL)selectFolder:(int)folderId;

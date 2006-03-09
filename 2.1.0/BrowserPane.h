@@ -25,8 +25,15 @@
 @class AppController;
 @class ArticleView;
 
-@interface BrowserPane : NSBox<BaseView> {
+@interface BrowserPane : NSView<BaseView> {
+	IBOutlet NSBox * boxFrame;
 	IBOutlet ArticleView * webPane;
+	IBOutlet NSButton * backButton;
+	IBOutlet NSButton * forwardButton;
+	IBOutlet NSButton * refreshButton;
+	IBOutlet NSTextField * addressField;
+	IBOutlet NSImageView * iconImage;
+	IBOutlet NSImageView * lockIconImage;
 	AppController * controller;
 	NSString * pageFilename;
 	BrowserTab * tab;
@@ -37,21 +44,23 @@
 	BOOL openURLInBackground;
 }
 
+// Action functions
+-(IBAction)handleGoForward:(id)sender;
+-(IBAction)handleGoBack:(id)sender;
+-(IBAction)handleReload:(id)sender;
+-(IBAction)handleAddress:(id)sender;
+
 // Accessor functions
 -(void)setController:(AppController *)theController;
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(NSURL *)url;
 -(void)setTab:(BrowserTab *)newTab;
 -(BOOL)isLoading;
--(void)handleGoForward;
--(void)handleGoBack;
 -(void)handleMakeTextSmaller;
 -(void)handleMakeTextLarger;
 -(BOOL)canGoBack;
 -(BOOL)canGoForward;
--(void)handleReload:(id)sender;
 -(void)handleStopLoading:(id)sender;
-
+-(void)activateAddressBar;
 -(NSView *)mainView;
-
 @end
