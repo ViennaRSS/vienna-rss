@@ -99,8 +99,15 @@ static NSArray * iconArray = nil;
 	if (imagesCacheFolder != nil)
 	{
 		NSString * fullFilePath = [[imagesCacheFolder stringByAppendingPathComponent:baseURL] stringByAppendingPathExtension:@"tiff"];
-		NSData * imageData = [image TIFFRepresentationUsingCompression: NSTIFFCompressionLZW factor:1.0];
-		[[NSFileManager defaultManager] createFileAtPath:fullFilePath contents:imageData attributes:nil];
+		NSData *imageData = nil;
+		NS_DURING
+			imageData = [image TIFFRepresentation];
+		NS_HANDLER
+			imageData = nil;
+			NSLog(@"tiff exception with %@", fullFilePath);
+		NS_ENDHANDLER
+		if (imageData != nil)
+			[[NSFileManager defaultManager] createFileAtPath:fullFilePath contents:imageData attributes:nil];
 	}
 }
 
@@ -139,6 +146,15 @@ static NSArray * iconArray = nil;
 				[imagesCacheFolder release];
 				imagesCacheFolder = nil;
 			}
+			initializedFolderImagesArray = YES;
+			return;
+		}
+		
+		if (!isDir)
+		{
+			NSLog(@"The file at %@ is not a directory. Will not cache folder images in this session.", imagesCacheFolder);
+			[imagesCacheFolder release];
+			imagesCacheFolder = nil;
 			initializedFolderImagesArray = YES;
 			return;
 		}

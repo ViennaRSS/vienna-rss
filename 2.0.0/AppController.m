@@ -603,22 +603,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
 	NSURL * imageURL;
-	NSString * defaultLocation;
-	NSString * alternateLocation;
 	NSString * defaultBrowser = getDefaultBrowser();
 	if (defaultBrowser == nil)
 		defaultBrowser = NSLocalizedString(@"External Browser", nil);
-	Preferences * prefs = [Preferences standardPreferences];
-	if ([prefs openLinksInVienna])
-	{
-		defaultLocation = NSLocalizedString(@"New Tab", nil);
-		alternateLocation = defaultBrowser;
-	}
-	else
-	{
-		defaultLocation = defaultBrowser;
-		alternateLocation = NSLocalizedString(@"New Tab", nil);
-	}
 	NSMenuItem * newMenuItem;
 	int count = [newDefaultMenu count];
 	int index;
@@ -634,21 +621,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				imageURL = [element valueForKey:WebElementImageURLKey];
 				if (imageURL != nil)
 				{
-					[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultLocation]];
+					[menuItem setTitle:NSLocalizedString(@"Open Image in New Tab", nil)];
 					[menuItem setTarget:self];
-					[menuItem setAction:@selector(openWebElementInBrowser:)];
+					[menuItem setAction:@selector(openWebElementInNewTab:)];
 					[menuItem setRepresentedObject:imageURL];
 					[menuItem setTag:WebMenuItemTagOther];
 					newMenuItem = [[NSMenuItem alloc] init];
 					if (newMenuItem != nil)
 					{
-						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), alternateLocation]];
+						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultBrowser]];
 						[newMenuItem setTarget:self];
-						[newMenuItem setAction:@selector(openWebElementInAlternateBrowser:)];
+						[newMenuItem setAction:@selector(openWebElementInDefaultBrowser:)];
 						[newMenuItem setRepresentedObject:imageURL];
 						[newMenuItem setTag:WebMenuItemTagOther];
-						[newMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask];
-						[newMenuItem setAlternate:YES];
 						[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 					}
 					[newMenuItem release];
@@ -660,21 +645,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				break;
 
 			case WebMenuItemTagOpenLinkInNewWindow:
-				[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultLocation]];
+				[menuItem setTitle:NSLocalizedString(@"Open Link in New Tab", nil)];
 				[menuItem setTarget:self];
-				[menuItem setAction:@selector(openWebElementInBrowser:)];
+				[menuItem setAction:@selector(openWebElementInNewTab:)];
 				[menuItem setRepresentedObject:urlLink];
 				[menuItem setTag:WebMenuItemTagOther];
 				newMenuItem = [[NSMenuItem alloc] init];
 				if (newMenuItem != nil)
 				{
-					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), alternateLocation]];
+					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultBrowser]];
 					[newMenuItem setTarget:self];
-					[newMenuItem setAction:@selector(openWebElementInAlternateBrowser:)];
+					[newMenuItem setAction:@selector(openWebElementInDefaultBrowser:)];
 					[newMenuItem setRepresentedObject:urlLink];
 					[newMenuItem setTag:WebMenuItemTagOther];
-					[newMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask];
-					[newMenuItem setAlternate:YES];
 					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 				}
 				[newMenuItem release];
@@ -754,27 +737,28 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* openWebElementInBrowser
- * Open the specified element in a new tab or in an external browser
+/* openWebElementInNewTab
+ * Open the specified element in a new tab
  */
--(IBAction)openWebElementInBrowser:(id)sender
+-(IBAction)openWebElementInNewTab:(id)sender
 {
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		[self openURL:[item representedObject] inPreferredBrowser:YES];
+		Preferences * prefs = [Preferences standardPreferences];
+		[self openURLInNewTab:[item representedObject] inBackground:[prefs openLinksInBackground]];
 	}
 }
 
-/* openWebElementInAlternateBrowser
- * Open the specified element in a new tab or in an external browser
+/* openWebElementInDefaultBrowser
+ * Open the specified element in an external browser
  */
--(IBAction)openWebElementInAlternateBrowser:(id)sender
+-(IBAction)openWebElementInDefaultBrowser:(id)sender
 {
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		[self openURL:[item representedObject] inPreferredBrowser:NO];
+		[self openURLInDefaultBrowser:[item representedObject]];
 	}
 }
 
@@ -822,10 +806,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)openURLInDefaultBrowser:(NSURL *)url
 {
-	// Launch in the foreground or background as needed
 	Preferences * prefs = [Preferences standardPreferences];
-	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
 
+	// This line is a workaround for OS X bug rdar://4450641
+	if ([prefs openLinksInBackground])
+		[mainWindow orderFront:self];
+
+	// Launch in the foreground or background as needed
+	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
 	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
 					withAppBundleIdentifier:NULL
 									options:lOptions
