@@ -118,7 +118,7 @@
 	[outlineView setAutoresizesOutlineColumn:NO];
 
 	// Register for dragging
-	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
+	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, NSStringPboardType, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];
 	
 	// Make sure selected row is visible
@@ -1009,7 +1009,7 @@
 -(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)childIndex
 { 
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, NSStringPboardType, nil]];
 
 	// Get index of folder at drop location. If this is a group folder then
 	// it gets used as the parent
