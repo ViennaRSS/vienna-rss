@@ -18,11 +18,6 @@
 //  limitations under the License.
 //
 
-extern NSString * MA_DefaultDatabaseName;
-extern NSString * MA_FolderImagesFolder;
-extern NSString * MA_StylesFolder;
-extern NSString * MA_ScriptsFolder;
-extern NSString * MA_DefaultDownloadsFolder;
 extern NSString * MA_DefaultStyleName;
 extern NSString * MA_DefaultUserAgentString;
 

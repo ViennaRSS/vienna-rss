@@ -18,12 +18,6 @@
 //  limitations under the License.
 //
 
-NSString * MA_DefaultDatabaseName = @"~/Library/Application Support/Vienna/messages.db";
-NSString * MA_FolderImagesFolder = @"~/Library/Application Support/Vienna/Images";
-NSString * MA_StylesFolder = @"~/Library/Application Support/Vienna/Styles";
-NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
-NSString * MA_DefaultDownloadsFolder = @"~/Desktop";
-NSString * MA_DefaultStyleName = @"Default";
 NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/417.3 (KHTML, like Gecko) Safari/417.2";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";

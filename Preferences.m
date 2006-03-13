@@ -22,8 +22,22 @@
 #import "Constants.h"
 #import "Message.h"
 
+// Initial paths
+NSString * MA_ApplicationSupportFolder = @"~/Library/Application Support/Vienna";
+NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
+NSString * MA_DefaultDownloadsFolder = @"~/Desktop";
+NSString * MA_DefaultStyleName = @"Default";
+NSString * MA_Database_Name = @"messages.db";
+NSString * MA_ImagesFolder_Name = @"Images";
+NSString * MA_StylesFolder_Name = @"Styles";
+
 // The default preferences object.
 static Preferences * _standardPreferences = nil;
+
+// Private methods
+@interface Preferences (Private)
+	-(NSDictionary *)initPreferences;
+@end
 
 @implementation Preferences
 
@@ -44,24 +58,98 @@ static Preferences * _standardPreferences = nil;
 {
 	if ((self = [super init]) != nil)
 	{
-		NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+		// Look to see where we're getting our preferences from. This is a command line
+		// argument of the form:
+		//
+		//  -profile <name>
+		//
+		// where <name> is the name of the folder at the same level of the application.
+		// If no profile is specified, is called "default" or is absent then we fall back
+		// on the user profile.
+		//
+		NSArray * appArguments = [[NSProcessInfo processInfo] arguments];
+		NSEnumerator * enumerator = [appArguments objectEnumerator];
+		NSString * profilePath = nil;
+		NSString * argName;
 
-		refreshFrequency = [defaults integerForKey:MAPref_CheckFrequency];
-		readingPaneOnRight = [defaults boolForKey:MAPref_ReadingPaneOnRight];
-		refreshOnStartup = [defaults boolForKey:MAPref_CheckForNewArticlesOnStartup];
-		checkForNewOnStartup = [defaults boolForKey:MAPref_CheckForUpdatesOnStartup];
-		markReadInterval = [defaults floatForKey:MAPref_MarkReadInterval];
-		selectionChangeInterval = [defaults floatForKey:MAPref_SelectionChangeInterval];
-		minimumFontSize = [defaults integerForKey:MAPref_MinimumFontSize];
-		enableMinimumFontSize = [defaults boolForKey:MAPref_UseMinimumFontSize];
-		autoExpireDuration = [defaults integerForKey:MAPref_AutoExpireDuration];
-		openLinksInVienna = [defaults boolForKey:MAPref_OpenLinksInVienna];
-		openLinksInBackground = [defaults boolForKey:MAPref_OpenLinksInBackground];
-		displayStyle = [[defaults stringForKey:MAPref_ActiveStyleName] retain];
-		showFolderImages = [defaults boolForKey:MAPref_ShowFolderImages];
-		folderFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_FolderFont]] retain];
-		articleFont = [[NSUnarchiver unarchiveObjectWithData:[defaults objectForKey:MAPref_ArticleListFont]] retain];
-		downloadFolder = [[defaults stringForKey:MAPref_DownloadsFolder] retain];
+		while ((argName = [enumerator nextObject]) != nil)
+		{
+			if ([[argName lowercaseString] isEqualToString:@"-profile"])
+			{
+				NSString * argValue = [enumerator nextObject];
+				if (argValue == nil || [argValue isEqualToString:@"default"])
+					break;
+				profilePath = argValue;
+				break;
+			}
+		}
+
+		// Merge in the user preferences from the defaults.
+		NSDictionary * defaults = [self initPreferences];
+		if (profilePath == nil)
+		{
+			preferencesPath = nil;
+			userPrefs = [NSUserDefaults standardUserDefaults];
+			[userPrefs registerDefaults:defaults];
+
+			// Application-specific folder locations
+			defaultDatabase = [[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_Database_Name] retain];
+			imagesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
+			stylesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
+			scriptsFolder = [[MA_ScriptsFolder stringByExpandingTildeInPath] retain];
+		}
+		else
+		{
+			// Make sure profilePath exists and create it otherwise. A failure to create the profile
+			// path counts as treating the profile as transient for this session.
+			NSFileManager * fileManager = [NSFileManager defaultManager];
+			BOOL isDir;
+			
+			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
+			{
+				if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
+				{
+					NSLog(@"Cannot create profile folder %@", profilePath);
+					profilePath = nil;
+				}
+			}
+
+			// The preferences file is stored under the profile folder with the bundle identifier
+			// name plus the .plist extension. (This is the same convention used by NSUserDefaults.)
+			if (profilePath != nil)
+			{
+				NSDictionary * fileAttributes = [[NSBundle mainBundle] infoDictionary];
+				preferencesPath = [profilePath stringByAppendingPathComponent:[fileAttributes objectForKey:@"CFBundleIdentifier"]];
+				preferencesPath = [[preferencesPath stringByAppendingString:@".plist"] retain];
+			}
+			userPrefs = [[NSMutableDictionary alloc] initWithDictionary:defaults];
+			if (preferencesPath != nil)
+				[userPrefs addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:preferencesPath]];
+			
+			// Other folders are local to the profilePath
+			defaultDatabase = [[profilePath stringByAppendingPathComponent:MA_Database_Name] retain];
+			imagesFolder = [[[profilePath stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
+			stylesFolder = [[[profilePath stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
+			scriptsFolder = [[[profilePath stringByAppendingPathComponent:@"Scripts"] stringByExpandingTildeInPath] retain];
+		}
+
+		// Load those settings that we cache.
+		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
+		readingPaneOnRight = [self boolForKey:MAPref_ReadingPaneOnRight];
+		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
+		checkForNewOnStartup = [self boolForKey:MAPref_CheckForUpdatesOnStartup];
+		markReadInterval = [[userPrefs valueForKey:MAPref_MarkReadInterval] floatValue];
+		selectionChangeInterval = [[userPrefs valueForKey:MAPref_SelectionChangeInterval] floatValue];
+		minimumFontSize = [self integerForKey:MAPref_MinimumFontSize];
+		enableMinimumFontSize = [self boolForKey:MAPref_UseMinimumFontSize];
+		autoExpireDuration = [self integerForKey:MAPref_AutoExpireDuration];
+		openLinksInVienna = [self boolForKey:MAPref_OpenLinksInVienna];
+		openLinksInBackground = [self boolForKey:MAPref_OpenLinksInBackground];
+		displayStyle = [[userPrefs valueForKey:MAPref_ActiveStyleName] retain];
+		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
+		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
+		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
+		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
 	}
 	return self;
 }
@@ -71,23 +159,25 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)dealloc
 {
+	[defaultDatabase release];
+	[imagesFolder release];
 	[downloadFolder release];
 	[folderFont release];
 	[articleFont release];
 	[displayStyle release];
+	[preferencesPath release];
 	[super dealloc];
 }
 
-/* initialize
+/* initPreferences
  * The standard class initialization object.
  */
-+(void)initialize
+-(NSDictionary *)initPreferences
 {
 	// Set the preference defaults
 	NSMutableDictionary * defaultValues = [NSMutableDictionary dictionary];
-	NSNumber * cachedFolderID = [NSNumber numberWithInt:1];
-	NSData * msgListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
-	NSData * folderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
+	NSData * defaultArticleListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
+	NSData * defaultFolderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
 	NSNumber * boolNo = [NSNumber numberWithBool:NO];
 	NSNumber * boolYes = [NSNumber numberWithBool:YES];
 	
@@ -95,15 +185,11 @@ static Preferences * _standardPreferences = nil;
 	NSDictionary * sysDict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
 	BOOL isPanther = [[sysDict valueForKey:@"ProductVersion"] hasPrefix:@"10.3"];
 
-	[defaultValues setObject:MA_DefaultDatabaseName forKey:MAPref_DefaultDatabase];
-	[defaultValues setObject:MA_FolderImagesFolder forKey:MAPref_FolderImagesFolder];
-	[defaultValues setObject:MA_StylesFolder forKey:MAPref_StylesFolder];
-	[defaultValues setObject:MA_ScriptsFolder forKey:MAPref_ScriptsFolder];
-	[defaultValues setObject:msgListFont forKey:MAPref_ArticleListFont];
-	[defaultValues setObject:folderFont forKey:MAPref_FolderFont];
-	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatesOnStartup];
+	[defaultValues setObject:defaultArticleListFont forKey:MAPref_ArticleListFont];
+	[defaultValues setObject:defaultFolderFont forKey:MAPref_FolderFont];
+	[defaultValues setObject:boolYes forKey:MAPref_CheckForUpdatesOnStartup];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForNewArticlesOnStartup];
-	[defaultValues setObject:cachedFolderID forKey:MAPref_CachedFolderID];
+	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_CachedFolderID];
 	[defaultValues setObject:[NSNumber numberWithInt:-1] forKey:MAPref_SortDirection];
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
@@ -124,8 +210,145 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
 	[defaultValues setObject:MA_DefaultDownloadsFolder forKey:MAPref_DownloadsFolder];
-	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+
+	return defaultValues;
+}
+
+/* savePreferences
+ * Save the user preferences back to where we loaded them from.
+ */
+-(void)savePreferences
+{
+	if (preferencesPath != nil)
+	{
+		if (![userPrefs writeToFile:preferencesPath atomically:NO])
+			NSLog(@"Failed to update preferences to %@", preferencesPath);
+	}
+}
+
+/* setBool
+ * Sets the value of the specified default to the given boolean value.
+ */
+-(void)setBool:(BOOL)value forKey:(NSString *)defaultName
+{
+	[userPrefs setObject:[NSNumber numberWithBool:value] forKey:defaultName];
+}
+
+/* setInteger
+ * Sets the value of the specified default to the given integer value.
+ */
+-(void)setInteger:(int)value forKey:(NSString *)defaultName
+{
+	[userPrefs setObject:[NSNumber numberWithInt:value] forKey:defaultName];
+}
+
+/* setString
+ * Sets the value of the specified default to the given string.
+ */
+-(void)setString:(NSString *)value forKey:(NSString *)defaultName
+{
+	[userPrefs setObject:value forKey:defaultName];
+}
+
+/* setArray
+ * Sets the value of the specified default to the given array.
+ */
+-(void)setArray:(NSArray *)value forKey:(NSString *)defaultName
+{
+	[userPrefs setObject:value forKey:defaultName];
+}
+
+/* setObject
+ * Sets the value of the specified default to the given object.
+ */
+-(void)setObject:(id)value forKey:(NSString *)defaultName
+{
+	[userPrefs setObject:value forKey:defaultName];
+}
+
+/* boolForKey
+ * Returns the boolean value of the given default object.
+ */
+-(BOOL)boolForKey:(NSString *)defaultName
+{
+	return [[userPrefs valueForKey:defaultName] boolValue];
+}
+
+/* integerForKey
+ * Returns the integer value of the given default object.
+ */
+-(int)integerForKey:(NSString *)defaultName
+{
+	return [[userPrefs valueForKey:defaultName] intValue];
+}
+
+/* stringForKey
+ * Returns the string value of the given default object.
+ */
+-(NSString *)stringForKey:(NSString *)defaultName
+{
+	return [userPrefs valueForKey:defaultName];
+}
+
+/* arrayForKey
+ * Returns the string value of the given default array.
+ */
+-(NSArray *)arrayForKey:(NSString *)defaultName
+{
+	return [userPrefs valueForKey:defaultName];
+}
+
+/* objectForKey
+ * Returns the value of the given default object.
+ */
+-(id)objectForKey:(NSString *)defaultName
+{
+	return [userPrefs objectForKey:defaultName];
+}
+
+/* imagesFolder
+ * Return the path to where the folder images are stored.
+ */
+-(NSString *)imagesFolder
+{
+	return imagesFolder;
+}
+
+/* stylesFolder
+ * Return the path to where the user styles are stored.
+ */
+-(NSString *)stylesFolder
+{
+	return stylesFolder;
+}
+
+/* scriptsFolder
+ * Return the path to where the scripts are stored.
+ */
+-(NSString *)scriptsFolder
+{
+	return scriptsFolder;
+}
+
+/* defaultDatabase
+ * Return the path to the default database. (This may not be fully qualified.)
+ */
+-(NSString *)defaultDatabase
+{
+	return defaultDatabase;
+}
+
+/* setDefaultDatabase
+ * Change the path of the default database.
+ */
+-(void)setDefaultDatabase:(NSString *)newDatabase
+{
+	if (defaultDatabase != newDatabase)
+	{
+		[defaultDatabase release];
+		defaultDatabase = [newDatabase retain];
+		[userPrefs setValue:newDatabase forKey:MAPref_DefaultDatabase];
+	}
 }
 
 /* backTrackQueueSize
@@ -133,7 +356,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(int)backTrackQueueSize
 {
-	return [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_BacktrackQueueSize];
+	return [self integerForKey:MAPref_BacktrackQueueSize];
 }
 
 /* enableMinimumFontSize
@@ -160,7 +383,7 @@ static Preferences * _standardPreferences = nil;
 	if (newSize != minimumFontSize)
 	{
 		minimumFontSize = newSize;
-		[[NSUserDefaults standardUserDefaults] setInteger:minimumFontSize forKey:MAPref_MinimumFontSize];
+		[self setInteger:minimumFontSize forKey:MAPref_MinimumFontSize];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
 	}
 }
@@ -173,7 +396,7 @@ static Preferences * _standardPreferences = nil;
 	if (enableMinimumFontSize != flag)
 	{
 		enableMinimumFontSize = flag;
-		[[NSUserDefaults standardUserDefaults] setBool:flag forKey:MAPref_UseMinimumFontSize];
+		[self setBool:flag forKey:MAPref_UseMinimumFontSize];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
 	}
 }
@@ -194,7 +417,7 @@ static Preferences * _standardPreferences = nil;
 	if (showFolderImages != flag)
 	{
 		showFolderImages = flag;
-		[[NSUserDefaults standardUserDefaults] setBool:flag forKey:MAPref_ShowFolderImages];
+		[self setBool:flag forKey:MAPref_ShowFolderImages];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ShowFolderImages" object:nil];
 	}
 }
@@ -218,7 +441,7 @@ static Preferences * _standardPreferences = nil;
 	if (newDuration != autoExpireDuration)
 	{
 		autoExpireDuration = newDuration;
-		[[NSUserDefaults standardUserDefaults] setInteger:newDuration forKey:MAPref_AutoExpireDuration];
+		[self setInteger:newDuration forKey:MAPref_AutoExpireDuration];
 	}
 }
 
@@ -240,7 +463,7 @@ static Preferences * _standardPreferences = nil;
 		[newFolder retain];
 		[downloadFolder release];
 		downloadFolder = newFolder;
-		[[NSUserDefaults standardUserDefaults] setObject:downloadFolder forKey:MAPref_DownloadsFolder];
+		[self setObject:downloadFolder forKey:MAPref_DownloadsFolder];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
@@ -261,8 +484,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != readingPaneOnRight)
 	{
 		readingPaneOnRight = flag;
-		NSNumber * boolFlag = [NSNumber numberWithBool:flag];
-		[[NSUserDefaults standardUserDefaults] setObject:boolFlag forKey:MAPref_ReadingPaneOnRight];
+		[self setBool:flag forKey:MAPref_ReadingPaneOnRight];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ReadingPaneChange" object:nil];
 	}
 }
@@ -283,7 +505,7 @@ static Preferences * _standardPreferences = nil;
 	if (refreshFrequency != newFrequency)
 	{
 		refreshFrequency = newFrequency;
-		[[NSUserDefaults standardUserDefaults] setInteger:newFrequency forKey:MAPref_CheckFrequency];
+		[self setInteger:newFrequency forKey:MAPref_CheckFrequency];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CheckFrequencyChange" object:nil];
 	}
 }
@@ -304,7 +526,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != refreshOnStartup)
 	{
 		refreshOnStartup = flag;
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_CheckForNewArticlesOnStartup];
+		[self setBool:flag forKey:MAPref_CheckForNewArticlesOnStartup];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
@@ -325,7 +547,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != checkForNewOnStartup)
 	{
 		checkForNewOnStartup = flag;
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_CheckForUpdatesOnStartup];
+		[self setBool:flag forKey:MAPref_CheckForUpdatesOnStartup];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
@@ -357,7 +579,7 @@ static Preferences * _standardPreferences = nil;
 	if (newInterval != markReadInterval)
 	{
 		markReadInterval = newInterval;
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:newInterval] forKey:MAPref_MarkReadInterval];
+		[self setObject:[NSNumber numberWithFloat:newInterval] forKey:MAPref_MarkReadInterval];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
@@ -380,7 +602,7 @@ static Preferences * _standardPreferences = nil;
 	if (openLinksInVienna != flag)
 	{
 		openLinksInVienna = flag;
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_OpenLinksInVienna];
+		[self setBool:flag forKey:MAPref_OpenLinksInVienna];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
@@ -402,7 +624,7 @@ static Preferences * _standardPreferences = nil;
 	if (openLinksInBackground != flag)
 	{
 		openLinksInBackground = flag;
-		[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:flag] forKey:MAPref_OpenLinksInBackground];
+		[self setBool:flag forKey:MAPref_OpenLinksInBackground];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
@@ -433,7 +655,7 @@ static Preferences * _standardPreferences = nil;
 		[newStyleName retain];
 		[displayStyle release];
 		displayStyle = newStyleName;
-		[[NSUserDefaults standardUserDefaults] setValue:displayStyle forKey:MAPref_ActiveStyleName];
+		[self setString:displayStyle forKey:MAPref_ActiveStyleName];
 		if (flag)
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
 	}
@@ -462,7 +684,7 @@ static Preferences * _standardPreferences = nil;
 {
 	[folderFont release];
 	folderFont = [NSFont fontWithName:newFontName size:[self folderListFontSize]];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
+	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
@@ -473,7 +695,7 @@ static Preferences * _standardPreferences = nil;
 {
 	[folderFont release];
 	folderFont = [NSFont fontWithName:[self folderListFont] size:newFontSize];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
+	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
 
@@ -500,7 +722,7 @@ static Preferences * _standardPreferences = nil;
 {
 	[articleFont release];
 	articleFont = [NSFont fontWithName:newFontName size:[self articleListFontSize]];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
+	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
 
@@ -511,8 +733,7 @@ static Preferences * _standardPreferences = nil;
 {
 	[articleFont release];
 	articleFont = [NSFont fontWithName:[self articleListFont] size:newFontSize];
-	[[NSUserDefaults standardUserDefaults] setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
+	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
-
 @end

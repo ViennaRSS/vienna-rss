@@ -291,9 +291,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	while ((item = [enumerator nextObject]) != nil)
 		[listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
 
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:listArray forKey:MAPref_DownloadsList];
-
+	[[Preferences standardPreferences] setArray:listArray forKey:MAPref_DownloadsList];
 	[listArray release];
 }
 
@@ -302,9 +300,7 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)unarchiveDownloadsList
 {
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-	NSArray * listArray = [defaults objectForKey:MAPref_DownloadsList];
-
+	NSArray * listArray = [[Preferences standardPreferences] arrayForKey:MAPref_DownloadsList];
 	if (listArray != nil)
 	{
 		NSEnumerator * enumerator = [listArray objectEnumerator];

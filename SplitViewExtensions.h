@@ -21,6 +21,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSSplitView (SplitViewExtensions)
-	-(void)storeLayoutWithName:(NSString *)name;
-	-(void)loadLayoutWithName:(NSString *)name;
+	-(NSArray *)layout;
+	-(void)setLayout:(NSArray *)newLayout;
 @end

@@ -21,6 +21,7 @@
 #import "ActivityViewer.h"
 #import "ActivityLog.h"
 #import "AppController.h"
+#import "Preferences.h"
 #import "SplitViewExtensions.h"
 
 @implementation ActivityViewer
@@ -62,7 +63,7 @@
 	[activityTable localiseHeaderStrings];
 
 	// Restore the split position
-	[splitView loadLayoutWithName:@"SplitView3Positions"];	
+	[splitView setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView3Positions"]];	
 
 	// Set up to receive notifications when the activity log changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -76,7 +77,7 @@
  */
 -(BOOL)windowShouldClose:(NSNotification *)notification
 {
-	[splitView storeLayoutWithName:@"SplitView3Positions"];
+	[[Preferences standardPreferences] setObject:[splitView layout] forKey:@"SplitView3Positions"];
 	return YES;
 }
 

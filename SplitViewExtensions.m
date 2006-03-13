@@ -27,11 +27,10 @@
 
 @implementation NSSplitView (SplitViewExtensions)
 
-/* storeLayoutWithName
- * Saves the layout of the subviews to the user preferences under the specified
- * key name.
+/* layout
+ * Returns an NSArray of the splitview layouts.
  */
--(void)storeLayoutWithName:(NSString *)key
+-(NSArray *)layout
 {
 	NSMutableArray * viewRects = [NSMutableArray array];
 	NSEnumerator * viewEnum = [[self subviews] objectEnumerator];
@@ -46,16 +45,14 @@
 			frame = [view frame];
 		[viewRects addObject:NSStringFromRect(frame)];
 	}
-	[[NSUserDefaults standardUserDefaults] setObject:viewRects forKey:key];
+	return viewRects;
 }
 
-/* loadLayoutWithName
- * Retrieves the layout of subviews for a split view from the user preferences
- * under the specified key name, then applies those layouts to the current view.
+/* setLayout
+ * Sets the splitview layout from the specified array
  */
--(void)loadLayoutWithName:(NSString *)key
+-(void)setLayout:(NSArray *)viewRects
 {
-	NSMutableArray * viewRects = [[NSUserDefaults standardUserDefaults] objectForKey: key];
 	NSArray * views = [self subviews];
 	int i, count;
 	NSRect frame;

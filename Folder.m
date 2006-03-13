@@ -21,6 +21,7 @@
 #import "Folder.h"
 #import "AppController.h"
 #import "Constants.h"
+#import "Preferences.h"
 #import "StringExtensions.h"
 
 // Indexes into folder image array
@@ -129,14 +130,12 @@ static NSArray * iconArray = nil;
 		// Get and cache the path to the folder. This is the best time to make sure it
 		// exists. The penalty for it not existing AND us being unable to create it is that
 		// we don't cache folder icons in this session.
-		imagesCacheFolder = [[NSUserDefaults standardUserDefaults] objectForKey:MAPref_FolderImagesFolder];
-		imagesCacheFolder = [[imagesCacheFolder stringByExpandingTildeInPath] retain];
+		imagesCacheFolder = [[Preferences standardPreferences] imagesFolder];
 		if (![fileManager fileExistsAtPath:imagesCacheFolder isDirectory:&isDir])
 		{
 			if (![fileManager createDirectoryAtPath:imagesCacheFolder attributes:NULL])
 			{
 				NSLog(@"Cannot create image cache at %@. Will not cache folder images in this session.", imagesCacheFolder);
-				[imagesCacheFolder release];
 				imagesCacheFolder = nil;
 			}
 			initializedFolderImagesArray = YES;
@@ -178,7 +177,6 @@ static NSArray * iconArray = nil;
  */
 -(void)dealloc
 {
-	[imagesCacheFolder release];
 	[folderImagesArray release];
 	[super dealloc];
 }

@@ -24,6 +24,7 @@
 #import "FoldersTree.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
+#import "Preferences.h"
 #import "Constants.h"
 #import "ViennaApp.h"
 
@@ -134,7 +135,7 @@ typedef enum {
 {
 	if ((self = [super init]) != nil)
 	{
-		maximumConnections = [[[NSUserDefaults standardUserDefaults] valueForKey:MAPref_RefreshThreads] intValue];
+		maximumConnections = [[Preferences standardPreferences] integerForKey:MAPref_RefreshThreads];
 		totalConnections = 0;
 		countOfNewArticles = 0;
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];

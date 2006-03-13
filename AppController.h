@@ -104,8 +104,8 @@
 -(IBAction)readingPaneOnBottom:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
 -(IBAction)viewArticlePageInAlternateBrowser:(id)sender;
--(IBAction)openWebElementInBrowser:(id)sender;
--(IBAction)openWebElementInAlternateBrowser:(id)sender;
+-(IBAction)openWebElementInNewTab:(id)sender;
+-(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
 -(IBAction)validateFeed:(id)sender;
