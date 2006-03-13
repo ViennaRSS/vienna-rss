@@ -169,7 +169,7 @@
 	[folderMenu release];
 	
 	blockSelectionHandler = YES;
-	[self reloadDatabase:[[NSUserDefaults standardUserDefaults] arrayForKey:MAPref_FolderStates]];
+	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
 	blockSelectionHandler = NO;
 }
 
@@ -218,7 +218,7 @@
  */
 -(void)saveFolderSettings
 {
-	[[NSUserDefaults standardUserDefaults] setObject:[self archiveState] forKey:MAPref_FolderStates];
+	[[Preferences standardPreferences] setArray:[self archiveState] forKey:MAPref_FolderStates];
 }
 
 /* archiveState

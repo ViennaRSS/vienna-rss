@@ -21,6 +21,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface Preferences : NSObject {
+	id userPrefs;
+	NSString * preferencesPath;
 	float markReadInterval;
 	float selectionChangeInterval;
 	int minimumFontSize;
@@ -36,12 +38,42 @@
 	BOOL showFolderImages;
 	NSString * downloadFolder;
 	NSString * displayStyle;
+	NSString * defaultDatabase;
+	NSString * imagesFolder;
+	NSString * scriptsFolder;
+	NSString * stylesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
 }
 
 // Accessor functions
 +(Preferences *)standardPreferences;
+-(void)savePreferences;
+
+// Accessor functions
+-(BOOL)boolForKey:(NSString *)defaultName;
+-(int)integerForKey:(NSString *)defaultName;
+-(NSString *)stringForKey:(NSString *)defaultName;
+-(NSArray *)arrayForKey:(NSString *)defaultName;
+-(id)objectForKey:(NSString *)defaulName;
+-(void)setBool:(BOOL)value forKey:(NSString *)defaultName;
+-(void)setInteger:(int)value forKey:(NSString *)defaultName;
+-(void)setString:(NSString *)value forKey:(NSString *)defaultName;
+-(void)setArray:(NSArray *)value forKey:(NSString *)defaultName;
+-(void)setObject:(id)value forKey:(NSString *)defaultName;
+
+// Path to default database
+-(NSString *)defaultDatabase;
+-(void)setDefaultDatabase:(NSString *)newDatabase;
+
+// Path to scripts folder
+-(NSString *)scriptsFolder;
+
+// Path to images folder
+-(NSString *)imagesFolder;
+
+// Path to styles folder
+-(NSString *)stylesFolder;
 
 // Read-only internal settings
 -(int)backTrackQueueSize;

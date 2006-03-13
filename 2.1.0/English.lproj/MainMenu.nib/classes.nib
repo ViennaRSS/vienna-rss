@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 cancelAllRefreshes = id; 
+                checkForUpdates = id; 
                 closeAllTabs = id; 
                 closeTab = id; 
                 conditionalShowDownloadsWindow = id; 

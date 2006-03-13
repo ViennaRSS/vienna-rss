@@ -295,11 +295,11 @@
 "External Browser" = "Externer Browser";
 
 /* Added in 2.1.0 */
-"Send Link" = "Send Link";
-"Send Links" = "Send Links";
-"Increase Font Size" = "Increase Font Size";
-"Decrease Font Size" = "Decrease Font Size";
-"Enter the URL here" = "Enter the URL here";
-"Refresh the current page" = "Refresh the current page";
-"Return to the previous page" = "Return to the previous page";
-"Go forward to the next page" = "Go forward to the next page";
+"Send Link" = "Link senden";
+"Send Links" = "Links senden";
+"Increase Font Size" = "Schrift größer";
+"Decrease Font Size" = "Schrift kleiner";
+"Enter the URL here" = "URL hier eingeben";
+"Refresh the current page" = "Seite neu laden";
+"Return to the previous page" = "Die vorherige Seite anzeigen";
+"Go forward to the next page" = "Die nächste Seite anzeigen";

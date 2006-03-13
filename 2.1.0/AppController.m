@@ -114,7 +114,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)awakeFromNib
 {
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Find out who we are. The localised info in InfoStrings.plist allow
@@ -177,7 +176,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self initStylesMenu];
 	
 	// Restore the splitview layout
-	[splitView1 loadLayoutWithName:@"SplitView1Positions"];
+	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
 	[splitView1 setDelegate:self];
 	
 	// Show the current unread count on the app icon
@@ -224,7 +223,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[cellMenu release];
 	
 	// Add Scripts menu if we have any scripts
-	if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self initScriptsMenu];
 	
 	// Use Growl if it is installed
@@ -237,7 +236,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self installSleepHandler];
 	
 	// Register to be notified when the scripts folder changes.
-	if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self installScriptsFolderWatcher];
 	
 	// Assign the controller for the child views
@@ -352,7 +351,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)installScriptsFolderWatcher
 {
-	NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+	NSString * path = [[Preferences standardPreferences] scriptsFolder];
 	FNSubscriptionRef refCode;
 	
 	FNSubscribeByPath((const UInt8 *)[path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
@@ -415,8 +414,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	// Save the splitview layout
-	[splitView1 storeLayoutWithName:@"SplitView1Positions"];
-	
+	Preferences * prefs = [Preferences standardPreferences];
+	[prefs setObject:[splitView1 layout] forKey:@"SplitView1Positions"];
+
 	// Close the activity window explicitly to force it to
 	// save its split bar position to the preferences.
 	NSWindow * activityWindow = [activityViewer window];
@@ -432,6 +432,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if ([mainArticleView currentFolderId] != -1)
 		[db flushFolder:[mainArticleView currentFolderId]];
 	[db close];
+	
+	// Finally save preferences
+	[prefs savePreferences];
 }
 
 /* openFile [delegate]
@@ -439,10 +442,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	Preferences * prefs = [Preferences standardPreferences];
 	if ([[filename pathExtension] isEqualToString:@"viennastyle"])
 	{
-		NSString * path = [[defaults objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
+		NSString * path = [prefs stylesFolder];
 		NSString * styleName = [[filename lastPathComponent] stringByDeletingPathExtension];
 		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
 		
@@ -473,7 +476,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	if ([[filename pathExtension] isEqualToString:@"scpt"])
 	{
-		NSString * path = [[defaults objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+		NSString * path = [prefs scriptsFolder];
 		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
 		
 		// Make sure we actually have a Scripts folder.
@@ -491,7 +494,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[fileManager removeFileAtPath:fullPath handler:nil];
 		if ([fileManager copyPath:filename toPath:fullPath handler:nil])
 		{
-			if ([defaults boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+			if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 				[self initScriptsMenu];
 		}
 	}
@@ -604,22 +607,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] initWithArray:defaultMenuItems];
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
 	NSURL * imageURL;
-	NSString * defaultLocation;
-	NSString * alternateLocation;
 	NSString * defaultBrowser = getDefaultBrowser();
 	if (defaultBrowser == nil)
 		defaultBrowser = NSLocalizedString(@"External Browser", nil);
-	Preferences * prefs = [Preferences standardPreferences];
-	if ([prefs openLinksInVienna])
-	{
-		defaultLocation = NSLocalizedString(@"New Tab", nil);
-		alternateLocation = defaultBrowser;
-	}
-	else
-	{
-		defaultLocation = defaultBrowser;
-		alternateLocation = NSLocalizedString(@"New Tab", nil);
-	}
 	NSMenuItem * newMenuItem;
 	int count = [newDefaultMenu count];
 	int index;
@@ -635,21 +625,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				imageURL = [element valueForKey:WebElementImageURLKey];
 				if (imageURL != nil)
 				{
-					[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultLocation]];
+					[menuItem setTitle:NSLocalizedString(@"Open Image in New Tab", nil)];
 					[menuItem setTarget:self];
-					[menuItem setAction:@selector(openWebElementInBrowser:)];
+					[menuItem setAction:@selector(openWebElementInNewTab:)];
 					[menuItem setRepresentedObject:imageURL];
 					[menuItem setTag:WebMenuItemTagOther];
 					newMenuItem = [[NSMenuItem alloc] init];
 					if (newMenuItem != nil)
 					{
-						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), alternateLocation]];
+						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultBrowser]];
 						[newMenuItem setTarget:self];
-						[newMenuItem setAction:@selector(openWebElementInAlternateBrowser:)];
+						[newMenuItem setAction:@selector(openWebElementInDefaultBrowser:)];
 						[newMenuItem setRepresentedObject:imageURL];
 						[newMenuItem setTag:WebMenuItemTagOther];
-						[newMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask];
-						[newMenuItem setAlternate:YES];
 						[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 					}
 					[newMenuItem release];
@@ -661,21 +649,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				break;
 				
 			case WebMenuItemTagOpenLinkInNewWindow:
-				[menuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultLocation]];
+				[menuItem setTitle:NSLocalizedString(@"Open Link in New Tab", nil)];
 				[menuItem setTarget:self];
-				[menuItem setAction:@selector(openWebElementInBrowser:)];
+				[menuItem setAction:@selector(openWebElementInNewTab:)];
 				[menuItem setRepresentedObject:urlLink];
 				[menuItem setTag:WebMenuItemTagOther];
 				newMenuItem = [[NSMenuItem alloc] init];
 				if (newMenuItem != nil)
 				{
-					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), alternateLocation]];
+					[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Link in %@", nil), defaultBrowser]];
 					[newMenuItem setTarget:self];
-					[newMenuItem setAction:@selector(openWebElementInAlternateBrowser:)];
+					[newMenuItem setAction:@selector(openWebElementInDefaultBrowser:)];
 					[newMenuItem setRepresentedObject:urlLink];
 					[newMenuItem setTag:WebMenuItemTagOther];
-					[newMenuItem setKeyEquivalentModifierMask:NSShiftKeyMask];
-					[newMenuItem setAlternate:YES];
 					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 				}
 					[newMenuItem release];
@@ -755,27 +741,28 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* openWebElementInBrowser
- * Open the specified element in a new tab or in an external browser
+/* openWebElementInNewTab
+ * Open the specified element in a new tab
  */
--(IBAction)openWebElementInBrowser:(id)sender
+-(IBAction)openWebElementInNewTab:(id)sender
 {
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		[self openURL:[item representedObject] inPreferredBrowser:YES];
+		Preferences * prefs = [Preferences standardPreferences];
+		[self createNewTab:[item representedObject] inBackground:[prefs openLinksInBackground]];
 	}
 }
 
-/* openWebElementInAlternateBrowser
- * Open the specified element in a new tab or in an external browser
+/* openWebElementInDefaultBrowser
+ * Open the specified element in an external browser
  */
--(IBAction)openWebElementInAlternateBrowser:(id)sender
+-(IBAction)openWebElementInDefaultBrowser:(id)sender
 {
 	if ([sender isKindOfClass:[NSMenuItem class]])
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
-		[self openURL:[item representedObject] inPreferredBrowser:NO];
+		[self openURLInDefaultBrowser:[item representedObject]];
 	}
 }
 
@@ -1042,7 +1029,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	loadMapFromPath(path, scriptPathMappings, NO, exts);
 	
 	// Add scripts that the user created and stored in the scripts folder
-	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
+	path = [[Preferences standardPreferences] scriptsFolder];
 	loadMapFromPath(path, scriptPathMappings, NO, exts);
 	
 	// Add the contents of the scriptsPathMappings dictionary keys to the menu sorted
@@ -1194,7 +1181,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)handleAbout:(id)sender
 {
-	NSDictionary * fileAttributes = fileAttributes = [[NSBundle mainBundle] infoDictionary];
+	NSDictionary * fileAttributes = [[NSBundle mainBundle] infoDictionary];
 	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
 	NSString * versionString = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version];
 	NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:versionString, @"ApplicationVersion", @"", @"Version", nil, nil];
@@ -1447,8 +1434,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)doOpenScriptsFolder:(id)sender
 {
-	NSString * path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_ScriptsFolder] stringByExpandingTildeInPath];
-	[[NSWorkspace sharedWorkspace] openFile:path];
+	[[NSWorkspace sharedWorkspace] openFile:[[Preferences standardPreferences] scriptsFolder]];
 }
 
 /* doSelectScript

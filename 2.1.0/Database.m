@@ -19,6 +19,7 @@
 //
 
 #import "Database.h"
+#import "Preferences.h"
 #import "StringExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
@@ -79,7 +80,7 @@ static Database * _sharedDatabase = nil;
 	if (!_sharedDatabase)
 	{
 		_sharedDatabase = [[Database alloc] init];
-		if (![_sharedDatabase initDatabase:[[NSUserDefaults standardUserDefaults] stringForKey:MAPref_DefaultDatabase]])
+		if (![_sharedDatabase initDatabase:[[Preferences standardPreferences] defaultDatabase]])
 		{
 			[_sharedDatabase release];
 			_sharedDatabase = nil;
@@ -330,7 +331,7 @@ static Database * _sharedDatabase = nil;
 		}
 		
 		// Save this to the preferences
-		[[NSUserDefaults standardUserDefaults] setValue:newPath forKey:MAPref_DefaultDatabase];
+		[[Preferences standardPreferences] setDefaultDatabase:newPath];
 		return newPath;
 	}
 	return nil;

@@ -170,12 +170,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[self initForStyle:[prefs displayStyle]];
 
 	// Restore the split bar position
-	[splitView2 loadLayoutWithName:@"SplitView2Positions"];
+	[splitView2 setLayout:[prefs objectForKey:@"SplitView2Positions"]];
 	[splitView2 setDelegate:self];
 
 	// Select the first conference
-	int previousFolderId = [[NSUserDefaults standardUserDefaults] integerForKey:MAPref_CachedFolderID];
-	NSString * previousArticleGuid = [[NSUserDefaults standardUserDefaults] stringForKey:MAPref_CachedArticleGUID];
+	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
+	NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
 	if ([previousArticleGuid isBlank])
 		previousArticleGuid = nil;
 	[self selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
@@ -292,21 +292,21 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)initTableView
 {
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Variable initialization here
 	currentFolderId = -1;
 	currentArrayOfArticles = nil;
 	currentSelectedRow = -1;
 	articleListFont = nil;
-	
+
 	// Pre-set sort to what was saved in the preferences
-	[self setSortColumnIdentifier:[defaults stringForKey:MAPref_SortColumn]];
-	sortDirection = [defaults integerForKey:MAPref_SortDirection];
+	[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
+	sortDirection = [prefs integerForKey:MAPref_SortDirection];
 	sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 	
 	// Initialize the article columns from saved data
-	NSArray * dataArray = [defaults arrayForKey:MAPref_ArticleListColumns];
+	NSArray * dataArray = [prefs arrayForKey:MAPref_ArticleListColumns];
 	Field * field;
 	unsigned int index;
 	
@@ -524,15 +524,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)saveTableSettings
 {
-	NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+	Preferences * prefs = [Preferences standardPreferences];
 	NSArray * fields = [db arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
 	Field * field;
 	
 	// Remember the current folder and article
 	NSString * guid = (currentSelectedRow >= 0) ? [[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid] : @"";
-	[defaults setInteger:currentFolderId forKey:MAPref_CachedFolderID];
-	[defaults setValue:guid forKey:MAPref_CachedArticleGUID];
+	[prefs setInteger:currentFolderId forKey:MAPref_CachedFolderID];
+	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
 	NSMutableArray * dataArray = [[NSMutableArray alloc] init];
@@ -546,11 +546,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	
 	// Save these to the preferences
-	[defaults setObject:dataArray forKey:MAPref_ArticleListColumns];
-	[defaults synchronize];
+	[prefs setObject:dataArray forKey:MAPref_ArticleListColumns];
 
 	// Save the split bar position
-	[splitView2 storeLayoutWithName:@"SplitView2Positions"];
+	[prefs setObject:[splitView2 layout] forKey:@"SplitView2Positions"];
 
 	// We're done
 	[dataArray release];
@@ -604,6 +603,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)sortByIdentifier:(NSString *)columnName
 {
+	Preferences * prefs = [Preferences standardPreferences];
 	if ([sortColumnIdentifier isEqualToString:columnName])
 		sortDirection *= -1;
 	else
@@ -612,9 +612,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self setSortColumnIdentifier:columnName];
 		sortDirection = 1;
 		sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
-		[[NSUserDefaults standardUserDefaults] setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
+		[prefs setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
 	}
-	[[NSUserDefaults standardUserDefaults] setInteger:sortDirection forKey:MAPref_SortDirection];
+	[prefs setInteger:sortDirection forKey:MAPref_SortDirection];
 	[self showSortDirection];
 	blockSelectionHandler = blockMarkRead = YES;
 	[self refreshFolder:NO];
@@ -656,7 +656,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
 	loadMapFromPath(path, stylePathMappings, YES, nil);
 	
-	path = [[[NSUserDefaults standardUserDefaults] objectForKey:MAPref_StylesFolder] stringByExpandingTildeInPath];
+	path = [[Preferences standardPreferences] stylesFolder];
 	loadMapFromPath(path, stylePathMappings, YES, nil);
 	
 	return stylePathMappings;
