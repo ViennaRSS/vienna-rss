@@ -803,32 +803,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags
 {
-	switch (keyChar)
-	{
-		case ' ': //SPACE
-		{
-			NSView * theView = [[[articleText mainFrame] frameView] documentView];
-			NSRect visibleRect;
-			
-			visibleRect = [theView visibleRect];
-			if (flags & NSShiftKeyMask)
-			{
-				if (visibleRect.origin.y < 2)
-					[controller goBack:self];
-				else
-					[[[articleText mainFrame] webView] scrollPageUp:self];
-			}
-			else
-			{
-				if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
-					[controller viewNextUnread:self];
-				else
-					[[[articleText mainFrame] webView] scrollPageDown:self];
-			}
-			return YES;
-		}
-	}
-	return NO;
+	return [controller handleKeyDown:keyChar withFlags:flags];
 }
 
 /* selectedArticle

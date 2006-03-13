@@ -4,6 +4,14 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
+Accepted for 2.1
+================
+- Single article list and viewer interface (as in Bloglines).
+- Synchronisation via .Mac or FTP.
+- Sort on multiple columns.
+- Fix web browser to block popups.
+- Download images within articles so that they can be viewed offline.
+
 Known Issues (May not be fixed)
 ===============================
 - Renaming a folder does not update the folder name in smart folders that reference it.
@@ -12,23 +20,19 @@ Known Issues (May not be fixed)
 
 Wishlist
 ========
-- Bloglines integration.
 - Per-folder sorting.
+- Bloglines integration.
 - Semi-transparent main window when not in front.
 - Show the feed icon in the article list pane.
 - Support retrieving and posting Atom/RSS 2.0 comments.
 - Spotlight support.
 - Change dock unread count colour and size.
-- Single article list and viewer interface (as in Bloglines).
 - Bonjour support.
-- Synchronisation via .Mac or FTP.
 - Selection count in status area.
 - Absolute or relative date and time of last refresh in status area.
-- Sort on multiple columns.
 - Auto-discover feeds if subscription URL is to a web page.
 - Filter article list by date/read.
 - Search in all folders via search field.
-- Fix web browser to block popups.
 - Handle middle mouse click on tabs.
 - Hide and show article pane.
 - Timestamp on each row in the activity log window.
@@ -49,4 +53,3 @@ Wishlist
 - Allow smart folder criteria to match the beginning and end of strings as well as 'contains'.
 - More manual control over feed icon updating.
 - Mix conditionals within smart folders.
-- Download images within articles so that they can be viewed offline.
