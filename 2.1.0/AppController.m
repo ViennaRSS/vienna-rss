@@ -1678,8 +1678,32 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[self viewArticlePage:self];
 			return YES;
+
+		case ' ': //SPACE
+		{
+			ArticleView * view = (ArticleView *)[mainArticleView articleView];
+			NSView * theView = [[[view mainFrame] frameView] documentView];
+			NSRect visibleRect;
+
+			visibleRect = [theView visibleRect];
+			if (flags & NSShiftKeyMask)
+			{
+				if (visibleRect.origin.y < 2)
+					[self goBack:self];
+				else
+					[[[view mainFrame] webView] scrollPageUp:self];
+			}
+			else
+			{
+				if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
+					[self viewNextUnread:self];
+				else
+					[[[view mainFrame] webView] scrollPageDown:self];
+			}
+			return YES;
+		}
 	}
-	return [[browserView activeTabView] handleKeyDown:keyChar withFlags:flags];
+	return NO;
 }
 
 /* isConnecting
@@ -1789,8 +1813,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)deleteMessage:(id)sender
 {
-	if ([mainWindow firstResponder] != [mainArticleView mainView])
-		return;
 	if ([self selectedArticle] != nil && ![db readOnly])
 	{
 		Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
@@ -2324,7 +2346,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	SEL	theAction = [menuItem action];
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isArticleView = [browserView activeTabView] == mainArticleView;
-	BOOL focusIsInArticleList = [mainWindow firstResponder] == [mainArticleView mainView];
 	
 	if (theAction == @selector(printDocument:))
 	{
@@ -2352,7 +2373,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(skipFolder:))
 	{
-		return ![db readOnly] && isMainWindowVisible && [db countOfUnread] > 0;
+		return ![db readOnly] && isArticleView && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(viewNextUnread:))
 	{
@@ -2401,7 +2422,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(markAllRead:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && !IsTrashFolder(folder) && ![db readOnly] && isArticleView && isMainWindowVisible && [db countOfUnread] > 0;
+	}
+	else if (theAction == @selector(markAllSubscriptionsRead:))
+	{
+		return ![db readOnly] && isMainWindowVisible && isArticleView && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(importSubscriptions:))
 	{
@@ -2450,11 +2475,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(restoreMessage:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return focusIsInArticleList && IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		return IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return focusIsInArticleList && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(emptyTrash:))
 	{
@@ -2506,7 +2531,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (focusIsInArticleList && thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	else if (theAction == @selector(markRead:))
 	{
@@ -2518,7 +2543,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (focusIsInArticleList && thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
 	}
 	else if (theAction == @selector(mailLinkToArticlePage:))
 	{
@@ -2529,7 +2554,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		else
 			[menuItem setTitle:NSLocalizedString(@"Send Link", nil)];
 		
-		return (focusIsInArticleList && thisArticle != nil && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && isMainWindowVisible && isArticleView);
 	}
 	else if (theAction == @selector(increaseFontSize:))
 	{
