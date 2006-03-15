@@ -472,7 +472,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[[XMLParser processAttributes:[subTree valueOfElement]] trim]];
+			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
 			continue;
 		}
 
@@ -494,7 +494,7 @@
 		// Parse link
 		if ([nodeName isEqualToString:@"link"])
 		{
-			[self setLink:[[subTree valueOfElement] trim]];
+			[self setLink:[XMLParser processAttributes:[subTree valueOfElement]]];
 			continue;
 		}			
 		
@@ -592,7 +592,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim];
+					NSString * newTitle = [XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]];
 					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
 					continue;
 				}
@@ -729,7 +729,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[[XMLParser processAttributes:[subTree valueOfElement]] trim]];
+			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
 			continue;
 		}
 		
@@ -795,7 +795,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [[XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]] trim];
+					NSString * newTitle = [XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]];
 					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
 					continue;
 				}
