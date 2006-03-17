@@ -82,6 +82,7 @@
 	[cell setScrollable:YES];
 	[cell setTarget:self];
 	[cell setAction:@selector(handleAddress:)];
+	[cell setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
 	[addressField setCell:cell];
 
 	// Initialise address field
@@ -305,7 +306,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		[image setScalesWhenResized:YES];
-		[image setSize:NSMakeSize(16, 16)];
+		[image setSize:NSMakeSize(14, 14)];
 		[iconImage setImage:image];
 	}
 }
@@ -502,7 +503,6 @@
 	[webPane setUIDelegate:nil];
 	[webPane stopLoading:self];
 	[webPane removeFromSuperviewWithoutNeedingDisplay];
-	[webPane release];
 	[lastError release];
 	[pageFilename release];
 	[super dealloc];
