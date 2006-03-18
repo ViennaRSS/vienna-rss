@@ -47,6 +47,7 @@
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
+	-(unsigned int)indexOfArticleSortDescriptorForIdentifier:(NSString *)identifier;
 	-(void)selectArticleAfterReload;
 	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
@@ -69,8 +70,6 @@
 	-(void)printDocument;
 @end
 
-// Non-class function used for sorting
-static int articleSortHandler(Article * item1, Article * item2, void * context);
 
 static const int MA_Minimum_ArticleList_Pane_Width = 80;
 static const int MA_Minimum_Article_Pane_Width = 80;
@@ -104,6 +103,46 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)awakeFromNib
 {
+	// Set default values to generate article sort descriptors
+	articleSortSpecifiers = [[NSDictionary alloc] initWithObjectsAndKeys:
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			@"containingFolder.name", @"key",
+			@"compare:", @"selector",
+			nil], MA_Field_Folder,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			@"isRead", @"key",
+			@"compare:", @"selector",
+			nil], MA_Field_Read,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			@"isFlagged", @"key",
+			@"compare:", @"selector",
+			nil], MA_Field_Flagged,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			@"hasComments", @"key",
+			@"compare:", @"selector",
+			nil], MA_Field_Comments,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[@"articleData." stringByAppendingString:MA_Field_Date], @"key",
+			@"compare:", @"selector",
+			nil], MA_Field_Date,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[@"articleData." stringByAppendingString:MA_Field_Author], @"key",
+			@"caseInsensitiveCompare:", @"selector",
+			nil], MA_Field_Author,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[@"articleData." stringByAppendingString:MA_Field_Subject], @"key",
+			@"numericCompare:", @"selector",
+			nil], MA_Field_Headlines,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[@"articleData." stringByAppendingString:MA_Field_Subject], @"key",
+			@"numericCompare:", @"selector",
+			nil], MA_Field_Subject,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[@"articleData." stringByAppendingString:MA_Field_Link], @"key",
+			@"caseInsensitiveCompare:", @"selector",
+			nil], MA_Field_Link,
+		nil];
+	
 	// Register to be notified when folders are added or removed
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
@@ -439,6 +478,44 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 }
 
+/* updateArticleSortDescriptorsForField
+ * Adds field to sort descriptors when column becomes visible and removes field from sort descriptors when column becomes invisible.
+ */
+-(void)updateArticleSortDescriptorsForField:(Field *)field
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
+	unsigned int index = [self indexOfArticleSortDescriptorForIdentifier:[field name]];
+	if ([field visible])
+	{
+		if (index != NSNotFound)
+			return;
+		NSDictionary * specifier = [articleSortSpecifiers valueForKey:[field name]];
+		NSSortDescriptor * newDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
+		[descriptors addObject:newDescriptor];
+		[newDescriptor release];
+		[prefs setArticleSortDescriptors:descriptors];
+	}
+	else if (index != NSNotFound)
+	{
+		[descriptors removeObjectAtIndex:index];
+		[prefs setArticleSortDescriptors:descriptors];
+	}
+}
+
+/* indexOfArticleSortDescriptorForIdentifier
+ * Returns the index of the sort descriptor for the column with the identifier.
+ */
+-(unsigned int)indexOfArticleSortDescriptorForIdentifier:(NSString *)identifier
+{
+	NSDictionary * specifier = [articleSortSpecifiers valueForKey:identifier];
+	if (specifier == nil)
+		return NSNotFound;
+	NSString * sortKey = [specifier valueForKey:@"key"];
+	NSArray * descriptorKeys = [[[Preferences standardPreferences] articleSortDescriptors] valueForKey:@"key"];
+	return [descriptorKeys indexOfObject:sortKey];
+}
+
 /* updateVisibleColumns
  * Iterates through the array of visible columns and makes them
  * visible or invisible as needed.
@@ -593,7 +670,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)showSortDirection
 {
 	NSTableColumn * sortColumn = [articleList tableColumnWithIdentifier:sortColumnIdentifier];
-	NSString * imageName = (sortDirection < 0) ? @"NSDescendingSortIndicator" : @"NSAscendingSortIndicator";
+	NSString * imageName = ([[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
 	[articleList setHighlightedTableColumn:sortColumn];
 	[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:sortColumn];
 }
@@ -604,8 +681,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)sortByIdentifier:(NSString *)columnName
 {
 	Preferences * prefs = [Preferences standardPreferences];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
 	if ([sortColumnIdentifier isEqualToString:columnName])
-		sortDirection *= -1;
+	{
+		sortDirection = -1;
+		[descriptors replaceObjectAtIndex:0 withObject:[[descriptors objectAtIndex:0] reversedSortDescriptor]];
+		[prefs setArticleSortDescriptors:descriptors];
+	}
 	else
 	{
 		[articleList setIndicatorImage:nil inTableColumn:[articleList tableColumnWithIdentifier:sortColumnIdentifier]];
@@ -613,6 +695,21 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		sortDirection = 1;
 		sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 		[prefs setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
+		NSSortDescriptor * sortDescriptor;
+		unsigned int index = [self indexOfArticleSortDescriptorForIdentifier:columnName];
+		if (index == NSNotFound)
+		{
+			NSDictionary * specifier = [articleSortSpecifiers valueForKey:sortColumnIdentifier];
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
+		}
+		else
+		{
+			sortDescriptor = [[descriptors objectAtIndex:index] retain];
+			[descriptors removeObjectAtIndex:index];
+		}
+		[descriptors insertObject:sortDescriptor atIndex:0];
+		[sortDescriptor release];
+		[prefs setArticleSortDescriptors:descriptors];
 	}
 	[prefs setInteger:sortDirection forKey:MAPref_SortDirection];
 	[self showSortDirection];
@@ -916,63 +1013,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	NSArray * sortedArrayOfArticles;
 	
-	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingFunction:articleSortHandler context:self];
+	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[[Preferences standardPreferences] articleSortDescriptors]];
 	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
 	[currentArrayOfArticles release];
 	currentArrayOfArticles = [sortedArrayOfArticles retain];
-}
-
-/* articleSortHandler
- */
-int articleSortHandler(Article * item1, Article * item2, void * context)
-{
-	ArticleListView * app = (ArticleListView *)context;
-	switch (app->sortColumnTag)
-	{
-		case MA_FieldID_Folder: {
-			Folder * folder1 = [app->db folderFromID:[item1 folderId]];
-			Folder * folder2 = [app->db folderFromID:[item2 folderId]];
-			return [[folder1 name] caseInsensitiveCompare:[folder2 name]] * app->sortDirection;
-		}
-
-		case MA_FieldID_Read: {
-			NSNumber * n1 = [NSNumber numberWithBool:[item1 isRead]];
-			NSNumber * n2 = [NSNumber numberWithBool:[item2 isRead]];
-			return [n1 compare:n2] * app->sortDirection;
-		}
-
-		case MA_FieldID_Flagged: {
-			NSNumber * n1 = [NSNumber numberWithBool:[item1 isFlagged]];
-			NSNumber * n2 = [NSNumber numberWithBool:[item2 isFlagged]];
-			return [n1 compare:n2] * app->sortDirection;
-		}
-
-		case MA_FieldID_Comments: {
-			NSNumber * n1 = [NSNumber numberWithBool:[item1 hasComments]];
-			NSNumber * n2 = [NSNumber numberWithBool:[item2 hasComments]];
-			return [n1 compare:n2] * app->sortDirection;
-		}
-
-		case MA_FieldID_Date: {
-			NSDate * n1 = [[item1 articleData] objectForKey:MA_Field_Date];
-			NSDate * n2 = [[item2 articleData] objectForKey:MA_Field_Date];
-			return [n1 compare:n2] * app->sortDirection;
-		}
-
-		case MA_FieldID_Author: {
-			NSString * n1 = [[item1 articleData] objectForKey:MA_Field_Author];
-			NSString * n2 = [[item2 articleData] objectForKey:MA_Field_Author];
-			return [n1 caseInsensitiveCompare:n2] * app->sortDirection;
-		}
-
-		case MA_FieldID_Headlines:
-		case MA_FieldID_Subject: {
-			NSString * n1 = [[item1 articleData] objectForKey:MA_Field_Subject];
-			NSString * n2 = [[item2 articleData] objectForKey:MA_Field_Subject];
-			return [n1 numericCompare:n2] * app->sortDirection;
-		}
-	}
-	return NSOrderedSame;
 }
 
 /* makeRowSelectedAndVisible
@@ -2017,6 +2061,7 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 	[selectionDict release];
 	[topLineDict release];
 	[bottomLineDict release];
+	[articleSortSpecifiers release];
 	[super dealloc];
 }
 @end

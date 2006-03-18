@@ -1414,6 +1414,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Field * field = [menuItem representedObject];
 	
 	[field setVisible:![field visible]];
+	[mainArticleView updateArticleSortDescriptorsForField:field];
 	[mainArticleView updateVisibleColumns];
 	[mainArticleView saveTableSettings];
 }

@@ -51,6 +51,7 @@
 	AppController * controller;
 	Database * db;
 	
+	NSDictionary * articleSortSpecifiers;
 	NSMutableDictionary * stylePathMappings;
 	NSString * sortColumnIdentifier;
 	NSTimer * markReadTimer;
@@ -74,6 +75,7 @@
 -(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
 -(void)refreshFolder:(BOOL)reloadData;
 -(void)updateAlternateMenuTitle;
+-(void)updateArticleSortDescriptorsForField:(Field *)field;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(int)currentFolderId;
