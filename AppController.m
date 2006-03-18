@@ -836,10 +836,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)openURLInDefaultBrowser:(NSURL *)url
 {
-	// Launch in the foreground or background as needed
 	Preferences * prefs = [Preferences standardPreferences];
-	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
 	
+	// This line is a workaround for OS X bug rdar://4450641
+	if ([prefs openLinksInBackground])
+		[mainWindow orderFront:self];
+	
+	// Launch in the foreground or background as needed
+	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
 	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
 					withAppBundleIdentifier:NULL
 									options:lOptions
