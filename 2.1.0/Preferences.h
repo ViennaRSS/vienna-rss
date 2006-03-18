@@ -44,6 +44,7 @@
 	NSString * stylesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
+	NSArray * articleSortDescriptors;
 }
 
 // Accessor functions
@@ -143,4 +144,8 @@
 -(int)articleListFontSize;
 -(void)setArticleListFont:(NSString *)newFontName;
 -(void)setArticleListFontSize:(int)newFontSize;
+
+// Article list sort descriptors
+-(NSArray *)articleSortDescriptors;
+-(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors;
 @end

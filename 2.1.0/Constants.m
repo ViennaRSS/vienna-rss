@@ -52,6 +52,7 @@ NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
 NSString * MAPref_DownloadsList = @"DownloadsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
 NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
+NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;

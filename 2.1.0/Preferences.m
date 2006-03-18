@@ -134,6 +134,7 @@ static Preferences * _standardPreferences = nil;
 		}
 
 		// Load those settings that we cache.
+		articleSortDescriptors = [[NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]] retain];
 		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
 		readingPaneOnRight = [self boolForKey:MAPref_ReadingPaneOnRight];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
@@ -166,6 +167,7 @@ static Preferences * _standardPreferences = nil;
 	[articleFont release];
 	[displayStyle release];
 	[preferencesPath release];
+	[articleSortDescriptors release];
 	[super dealloc];
 }
 
@@ -178,6 +180,10 @@ static Preferences * _standardPreferences = nil;
 	NSMutableDictionary * defaultValues = [NSMutableDictionary dictionary];
 	NSData * defaultArticleListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
 	NSData * defaultFolderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
+	
+	NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:NO] autorelease];
+	NSData * defaultArticleSortDescriptors = [NSArchiver archivedDataWithRootObject:[NSArray arrayWithObject:descriptor]];
+	
 	NSNumber * boolNo = [NSNumber numberWithBool:NO];
 	NSNumber * boolYes = [NSNumber numberWithBool:YES];
 	
@@ -210,6 +216,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
 	[defaultValues setObject:MA_DefaultDownloadsFolder forKey:MAPref_DownloadsFolder];
+	[defaultValues setObject:defaultArticleSortDescriptors forKey:MAPref_ArticleSortDescriptors];
 
 	return defaultValues;
 }
@@ -735,5 +742,22 @@ static Preferences * _standardPreferences = nil;
 	articleFont = [NSFont fontWithName:[self articleListFont] size:newFontSize];
 	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
+}
+
+-(NSArray *)articleSortDescriptors
+{
+	return articleSortDescriptors;
+}
+
+-(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors
+{
+	if (![articleSortDescriptors isEqualToArray:newSortDescriptors])
+	{
+		NSArray * descriptors = [[NSArray alloc] initWithArray:newSortDescriptors];
+		[articleSortDescriptors release];
+		articleSortDescriptors = descriptors;
+		[self setObject:[NSArchiver archivedDataWithRootObject:descriptors] forKey:MAPref_ArticleSortDescriptors];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+	}
 }
 @end

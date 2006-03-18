@@ -53,6 +53,7 @@ extern NSString * MAPref_AutoExpireDuration;
 extern NSString * MAPref_DownloadsList;
 extern NSString * MAPref_ShowFolderImages;
 extern NSString * MAPref_CachedArticleGUID;
+extern NSString * MAPref_ArticleSortDescriptors;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
