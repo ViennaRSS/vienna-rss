@@ -76,6 +76,7 @@
 	NSString * appName;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
+	NSString * statusMessageForRefesh;
 }
 
 // Menu action items
@@ -112,6 +113,7 @@
 -(IBAction)viewSourceHomePage:(id)sender;
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender;
 -(IBAction)emptyTrash:(id)sender;
+-(IBAction)refreshAllFolderIcons:(id)sender;
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;

@@ -105,6 +105,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		growlAvailable = NO;
 		scriptsMenuItem = nil;
 		checkTimer = nil;
+		statusMessageForRefesh = nil;
 	}
 	return self;
 }
@@ -1498,7 +1499,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if ([NSApp isRefreshing])
 	{
 		[self startProgressIndicator];
-		[self setStatusMessage:NSLocalizedString(@"Refreshing subscriptions...", nil) persist:YES];
+		[self setStatusMessage:statusMessageForRefesh persist:YES];
 	}
 	else
 	{
@@ -2253,13 +2254,28 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[browserView activeTabView] performFindPanelAction:NSFindPanelActionNext];
 }
 
+/* refreshAllFolderIcons
+ * Get new favicons from all subscriptions.
+ */
+-(IBAction)refreshAllFolderIcons:(id)sender
+{
+	if (![self isConnecting])
+	{
+		statusMessageForRefesh = NSLocalizedString(@"Refreshing folder images...", nil);
+		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[db arrayOfRSSFolders]];
+	}
+}
+
 /* refreshAllSubscriptions
  * Get new articles from all subscriptions.
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
 	if (![self isConnecting])
-		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders]];
+	{
+		statusMessageForRefesh = NSLocalizedString(@"Refreshing subscriptions...", nil);
+		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders]];		
+	}
 }
 
 /* refreshSelectedSubscriptions
@@ -2268,6 +2284,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshSelectedSubscriptions:(id)sender
 {
+	statusMessageForRefesh = NSLocalizedString(@"Refreshing subscriptions...", nil);
 	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders]];
 }
 
@@ -2385,7 +2402,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return [db countOfUnread] > 0;
 	}
-	else if (theAction == @selector(refreshAllSubscriptions:))
+	else if ((theAction == @selector(refreshAllSubscriptions:)) || (theAction == @selector(refreshAllFolderIcons:)))
 	{
 		return ![self isConnecting] && ![db readOnly];
 	}

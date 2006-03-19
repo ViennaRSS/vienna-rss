@@ -35,6 +35,7 @@
                 printDocument = id; 
                 readingPaneOnBottom = id; 
                 readingPaneOnRight = id; 
+                refreshAllFolderIcons = id; 
                 refreshAllSubscriptions = id; 
                 refreshSelectedSubscriptions = id; 
                 reloadPage = id; 

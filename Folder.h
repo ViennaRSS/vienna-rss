@@ -91,6 +91,7 @@
 -(unsigned int)nonPersistedFlags;
 -(unsigned int)flags;
 -(NSImage *)image;
+-(BOOL)hasCachedImage;
 -(NSImage *)standardImage;
 -(int)childUnreadCount;
 -(void)clearCache;

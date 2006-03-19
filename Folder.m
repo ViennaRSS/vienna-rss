@@ -346,6 +346,22 @@ static NSArray * iconArray = nil;
 	return [[Folder _iconArray] objectAtIndex:MA_FolderIcon];
 }
 
+/* hasCachedImage
+ * Returns YES if the folder has an image stored in the cache.
+ */
+-(BOOL)hasCachedImage
+{
+	if (!IsRSSFolder(self))
+		return NO;
+	NSImage * imagePtr = nil;
+	if ([self feedURL])
+	{
+		NSString * homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
+	}
+	return (imagePtr != nil);
+}
+
 /* standardImage
  * Returns the standard (not feed customised) image for this folder.
  */
