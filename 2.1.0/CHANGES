@@ -13,6 +13,8 @@ Thanks!
 - Added "Send Link" functionality for article view.
 - Add address bar and refresh, back and forward buttons at the top of the browser web pages.
 - Add -profile command line option to support custom profiles (needed for Portable Vienna).
+- Added "Refresh Folder Images" command. (Code contributed by Jeffrey Johnson).
+- Sort article list by multiple columns, saving the order in which columns were sorted. (Code contributed by Jeffrey Johnson).
 
 2.0.2.2030
 ----------

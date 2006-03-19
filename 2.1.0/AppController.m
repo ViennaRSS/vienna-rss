@@ -105,7 +105,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		growlAvailable = NO;
 		scriptsMenuItem = nil;
 		checkTimer = nil;
-		statusMessageForRefesh = nil;
 	}
 	return self;
 }
@@ -1499,7 +1498,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if ([NSApp isRefreshing])
 	{
 		[self startProgressIndicator];
-		[self setStatusMessage:statusMessageForRefesh persist:YES];
+		[self setStatusMessage:[[RefreshManager sharedManager] statusMessageDuringRefresh] persist:YES];
 	}
 	else
 	{
@@ -2260,10 +2259,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)refreshAllFolderIcons:(id)sender
 {
 	if (![self isConnecting])
-	{
-		statusMessageForRefesh = NSLocalizedString(@"Refreshing folder images...", nil);
 		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[db arrayOfRSSFolders]];
-	}
 }
 
 /* refreshAllSubscriptions
@@ -2272,10 +2268,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
 	if (![self isConnecting])
-	{
-		statusMessageForRefesh = NSLocalizedString(@"Refreshing subscriptions...", nil);
 		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders]];		
-	}
 }
 
 /* refreshSelectedSubscriptions
@@ -2284,7 +2277,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshSelectedSubscriptions:(id)sender
 {
-	statusMessageForRefesh = NSLocalizedString(@"Refreshing subscriptions...", nil);
 	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders]];
 }
 
