@@ -67,6 +67,7 @@
 "From" = "From";
 "To" = "To";
 "(No title)" = "(No title)";
+"Refreshing folder images..." = "Refreshing folder images...";
 "Refreshing subscriptions..." = "Refreshing subscriptions...";
 "Authenticating with user name '%@'" = "Authenticating with user name \"%@\"";
 "No new articles available" = "No new articles available";

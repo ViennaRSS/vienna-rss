@@ -223,11 +223,40 @@ typedef enum {
 	[self beginRefreshTimer];
 }
 
+/* refreshFolderIconCacheForSubscriptions
+ * Add the folders specified in the foldersArray to the refreshArray.
+ */
+-(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray
+{
+	int count = [foldersArray count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		Folder * folder = [foldersArray objectAtIndex:index];
+		if (IsGroupFolder(folder))
+			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
+		else if (IsRSSFolder(folder))
+		{
+			[self refreshFavIcon:folder];
+		}
+	}
+}
+
 /* refreshFavIcon
  * Adds the specified folder to the refreshArray.
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
+	// Do nothing if there's no homepage associated with the feed
+	// or if the feed already has a favicon.
+	if ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage])
+	{
+		if (([folder flags] & MA_FFlag_CheckForImage))
+			[folder clearFlag:MA_FFlag_CheckForImage];
+		return;
+	}
+	
 	if (![self isRefreshingFolder:folder ofType:MA_Refresh_FavIcon])
 	{
 		RefreshItem * newItem = [[RefreshItem alloc] init];
@@ -461,33 +490,23 @@ typedef enum {
  */
 -(void)pumpFolderIconRefresh:(Folder *)folder
 {
-	if (([folder flags] & MA_FFlag_CheckForImage))
-	{
-		// Do nothing if there's no homepage associated with the feed.
-		if ([folder homePage] == nil || [[folder homePage] isBlank])
-		{
-			[folder clearFlag:MA_FFlag_CheckForImage];
-			return;
-		}
-		
-		// The activity log name we use depends on whether or not this folder has a real name.
-		NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
-		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
-		
-		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
-
-		AsyncConnection * conn = [[AsyncConnection alloc] init];
-		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
-
-		if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
+	// The activity log name we use depends on whether or not this folder has a real name.
+	NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
+	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
+	
+	[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
+	
+	AsyncConnection * conn = [[AsyncConnection alloc] init];
+	NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
+	
+	if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
 						  username:nil
 						  password:nil
 						  delegate:self
 					   contextData:folder
 							   log:aItem
 					didEndSelector:@selector(folderIconRefreshCompleted:)])
-			[self addConnection:conn];
-	}
+		[self addConnection:conn];
 }
 
 /* pumpBloglinesListRefresh
@@ -526,6 +545,10 @@ typedef enum {
 		// Stopping the connection isn't an error, so clear any
 		// existing error flag.
 		[self setFolderErrorFlag:folder flag:NO];
+		
+		// If this folder also requires an image refresh, add that
+		if ([folder flags] & MA_FFlag_CheckForImage)
+			[self refreshFavIcon:folder];
 	}
 	else if ([connector status] == MA_Connect_Failed)
 	{
@@ -802,7 +825,8 @@ typedef enum {
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), favIconPath];
 			[aItem appendDetail:logText];
 		}
-		[folder clearFlag:MA_FFlag_CheckForImage];
+		if (([folder flags] & MA_FFlag_CheckForImage))
+			[folder clearFlag:MA_FFlag_CheckForImage];
 		[iconImage release];
 	}
 	[self removeConnection:connector];
