@@ -33,6 +33,7 @@
 	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
+	NSString * statusMessageDuringRefresh;
 }
 
 +(RefreshManager *)sharedManager;
@@ -41,4 +42,5 @@
 -(void)cancelAll;
 -(int)countOfNewArticles;
 -(int)totalConnections;
+-(NSString *)statusMessageDuringRefresh;
 @end

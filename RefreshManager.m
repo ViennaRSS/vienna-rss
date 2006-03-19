@@ -142,6 +142,7 @@ typedef enum {
 		connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
 		authQueue = [[NSMutableArray alloc] init];
 		hasStarted = YES;
+		statusMessageDuringRefresh = nil;
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
@@ -200,6 +201,8 @@ typedef enum {
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray
 {
+	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
+	
 	int count = [foldersArray count];
 	int index;
 	
@@ -228,6 +231,8 @@ typedef enum {
  */
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray
 {
+	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images...", nil);
+	
 	int count = [foldersArray count];
 	int index;
 	
@@ -283,6 +288,14 @@ typedef enum {
 			return YES;
 	}
 	return NO;
+}
+
+/* statusMessageDuringRefresh
+ * Returns the string to be displayed during a refresh.
+ */
+-(NSString *)statusMessageDuringRefresh
+{
+	return statusMessageDuringRefresh;
 }
 
 /* cancelAll

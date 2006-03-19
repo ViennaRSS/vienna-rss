@@ -76,7 +76,6 @@
 	NSString * appName;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
-	NSString * statusMessageForRefesh;
 }
 
 // Menu action items
