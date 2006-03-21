@@ -49,5 +49,4 @@ Wishlist
 - Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Allow smart folder criteria to match the beginning and end of strings as well as 'contains'.
-- More manual control over feed icon updating.
 - Mix conditionals within smart folders.
