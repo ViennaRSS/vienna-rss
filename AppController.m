@@ -2080,11 +2080,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)viewSourceHomePage:(id)sender
 {
-	Article * thisArticle = [self selectedArticle];
-	if (thisArticle != nil)
+	Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+	if (IsRSSFolder(folder))
 	{
-		Folder * folder = [db folderFromID:[thisArticle folderId]];
-		[self openURLFromString:[folder homePage] inPreferredBrowser:YES];
+		[self openURLFromString:[folder homePage] inPreferredBrowser:YES];		
 	}
 }
 
@@ -2093,11 +2092,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender
 {
-	Article * thisArticle = [self selectedArticle];
-	if (thisArticle != nil)
+	Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+	if (IsRSSFolder(folder))
 	{
-		Folder * folder = [db folderFromID:[thisArticle folderId]];
-		[self openURLFromString:[folder homePage] inPreferredBrowser:NO];
+		[self openURLFromString:[folder homePage] inPreferredBrowser:NO];		
 	}
 }
 
@@ -2453,13 +2451,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:)))
 	{
-		Article * thisArticle = [self selectedArticle];
-		if (thisArticle != nil)
-		{
-			Folder * folder = [db folderFromID:[thisArticle folderId]];
-			return folder && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
-		}
-		return NO;
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return folder && IsRSSFolder(folder) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePage:)) || (theAction == @selector(viewArticlePageInAlternateBrowser:)))
 	{
