@@ -2028,11 +2028,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)viewSourceHomePage:(id)sender
 {
-	Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-	if (IsRSSFolder(folder))
-	{
+	Article * thisArticle = [self selectedArticle];
+	Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
+	if (thisArticle || IsRSSFolder(folder))
 		[self openURLFromString:[folder homePage] inPreferredBrowser:YES];
-	}
 }
 
 /* viewSourceHomePageInAlternateBrowser
@@ -2040,11 +2039,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender
 {
-	Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-	if (IsRSSFolder(folder))
-	{
+	Article * thisArticle = [self selectedArticle];
+	Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
+	if (thisArticle || IsRSSFolder(folder))
 		[self openURLFromString:[folder homePage] inPreferredBrowser:NO];
-	}
 }
 
 /* showViennaHomePage
@@ -2348,8 +2346,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:)))
 	{
-		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && IsRSSFolder(folder) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
+		Article * thisArticle = [self selectedArticle];
+		Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
+		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePage:)) || (theAction == @selector(viewArticlePageInAlternateBrowser:)))
 	{
