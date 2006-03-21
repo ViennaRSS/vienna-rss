@@ -140,7 +140,7 @@ typedef enum {
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
 		authQueue = [[NSMutableArray alloc] init];
-		hasStarted = YES;
+		hasStarted = NO;
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
@@ -395,6 +395,16 @@ typedef enum {
 			break;
 		}
 		[refreshArray removeObjectAtIndex:0];
+	}
+	
+	if (totalConnections == 0 && [refreshArray count] == 0)
+	{
+		[pumpTimer invalidate];
+		[pumpTimer release];
+		pumpTimer = nil;
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+		
+		hasStarted = NO;
 	}
 }
 
@@ -839,11 +849,11 @@ typedef enum {
 	if (![connectionsArray containsObject:conn])
 		[connectionsArray addObject:conn];
 
-	if (totalConnections++ == 0 && hasStarted)
+	if (totalConnections++ == 0 && !hasStarted)
 	{
 		countOfNewArticles = 0;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-		hasStarted = NO;
+		hasStarted = YES;
 	}
 }
 
@@ -864,15 +874,7 @@ typedef enum {
 		[conn close];
 		[conn release];
 
-		if (--totalConnections == 0 && [refreshArray count] == 0)
-		{
-			[pumpTimer invalidate];
-			[pumpTimer release];
-			pumpTimer = nil;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-			
-			hasStarted = YES;
-		}
+		--totalConnections;
 	}
 }
 
