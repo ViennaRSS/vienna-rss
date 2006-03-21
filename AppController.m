@@ -2349,7 +2349,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:)))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
+		return folder && IsRSSFolder(folder) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePage:)) || (theAction == @selector(viewArticlePageInAlternateBrowser:)))
 	{
