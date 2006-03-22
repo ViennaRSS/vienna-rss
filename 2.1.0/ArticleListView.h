@@ -46,6 +46,7 @@
 	int currentFolderId;
 	BOOL isAppInitialising;
 	BOOL isChangingOrientation;
+	BOOL isInTableInit;
 	BOOL blockSelectionHandler;
 	BOOL blockMarkRead;
 	AppController * controller;
@@ -65,6 +66,8 @@
 	NSString * cssStylesheet;
 	NSMutableDictionary * selectionDict;
 	NSMutableDictionary * topLineDict;
+	NSMutableDictionary * linkLineDict;
+	NSMutableDictionary * middleLineDict;
 	NSMutableDictionary * bottomLineDict;
 	ExtDateFormatter * extDateFormatter;
 }

@@ -461,7 +461,7 @@ static Preferences * _standardPreferences = nil;
 }
 
 /* setDownloadFolder
- * Sets the new download fodler path.
+ * Sets the new download folder path.
  */
 -(void)setDownloadFolder:(NSString *)newFolder
 {

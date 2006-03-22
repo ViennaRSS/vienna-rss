@@ -20,6 +20,7 @@
 
 #import "Import.h"
 #import "XMLParser.h"
+#import "StringExtensions.h"
 #import "ViennaApp.h"
 
 @implementation AppController (Import)
@@ -64,20 +65,20 @@
 	{
 		XMLParser * outlineItem = [tree treeByIndex:index];
 		NSDictionary * entry = [outlineItem attributesForTree];
-		NSString * feedTitle = [XMLParser processAttributes:[entry objectForKey:@"title"]];
-		NSString * feedDescription = [XMLParser processAttributes:[entry objectForKey:@"description"]];
-		NSString * feedURL = [XMLParser processAttributes:[entry objectForKey:@"xmlurl"]];
-		NSString * feedHomePage = [XMLParser processAttributes:[entry objectForKey:@"htmlurl"]];
+		NSString * feedTitle = [[entry objectForKey:@"title"] stringByUnescapingExtendedCharacters];
+		NSString * feedDescription = [[entry objectForKey:@"description"] stringByUnescapingExtendedCharacters];
+		NSString * feedURL = [[entry objectForKey:@"xmlurl"] stringByUnescapingExtendedCharacters];
+		NSString * feedHomePage = [[entry objectForKey:@"htmlurl"] stringByUnescapingExtendedCharacters];
 		NSString * bloglinesSubId = [entry objectForKey:@"bloglinessubid"];
 		int bloglinesId = bloglinesSubId ? [bloglinesSubId intValue] : MA_NonBloglines_Folder;
 
 		// Some OPML exports use 'text' instead of 'title'.
 		if (feedTitle == nil)
-			feedTitle = [XMLParser processAttributes:[entry objectForKey:@"text"]];
+			feedTitle = [[entry objectForKey:@"text"] stringByUnescapingExtendedCharacters];
 
 		// Do double-decoding of the title to get around a bug in some commercial newsreaders
 		// where they double-encode characters
-		feedTitle = [XMLParser processAttributes:feedTitle];
+		feedTitle = [feedTitle stringByUnescapingExtendedCharacters];
 		
 		if (feedURL == nil)
 		{

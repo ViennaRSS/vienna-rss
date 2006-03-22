@@ -43,6 +43,5 @@
 -(XMLParser *)treeByPath:(NSString *)path;
 -(XMLParser *)treeByIndex:(int)index;
 +(NSString *)quoteAttributes:(NSString *)stringToProcess;
-+(NSString *)processAttributes:(NSString *)stringToProcess;
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString;
 @end

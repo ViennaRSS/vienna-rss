@@ -280,6 +280,7 @@ static Database * _sharedDatabase = nil;
 	[self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
 	[self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
 	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
+	[self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
 	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
 	return YES;
 }
@@ -1019,7 +1020,7 @@ static Database * _sharedDatabase = nil;
 
 		// Unread count adjustment factor
 		int adjustment = 0;
-		
+
 		// Fix title and article body so they're acceptable to SQL
 		NSString * preparedArticleTitle = [SQLDatabase prepareStringForQuery:articleTitle];
 		NSString * preparedArticleText = [SQLDatabase prepareStringForQuery:articleBody];
@@ -1911,12 +1912,16 @@ static Database * _sharedDatabase = nil;
 			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
 			NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
 
+			// Summary field needs to be synthesized.
+			NSString * summary = [[row stringForColumn:@"text"] summaryTextFromHTML];
+
 			// Keep our own track of unread articles
 			if (!isRead)
 				++unread_count;
 
 			Article * article = [[Article alloc] initWithGuid:guid];
 			[article setTitle:title];
+			[article setSummary:summary];
 			[article setAuthor:author];
 			[article setLink:link];
 			[article setDate:date];

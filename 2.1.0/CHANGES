@@ -15,6 +15,13 @@ Thanks!
 - Add -profile command line option to support custom profiles (needed for Portable Vienna).
 - Added "Refresh Folder Images" command. (Code contributed by Jeffrey Johnson).
 - Sort article list by multiple columns, saving the order in which columns were sorted. (Code contributed by Jeffrey Johnson).
+- Added "Summary" field which shows the first part of the description.
+- In condensed reading mode with the pane on the right, the headline fields can now be configured.
+
+2.0.3.2031
+----------
+- Completed Japanese localisation.
+- Bug fixes.
 
 2.0.2.2030
 ----------

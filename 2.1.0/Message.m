@@ -35,6 +35,7 @@ NSString * MA_Field_Text = @"Text";
 NSString * MA_Field_Folder = @"Folder";
 NSString * MA_Field_Parent = @"Parent";
 NSString * MA_Field_Headlines = @"Headlines";
+NSString * MA_Field_Summary = @"Summary";
 
 @implementation Article
 
@@ -92,6 +93,13 @@ NSString * MA_Field_Headlines = @"Headlines";
 	[articleData setObject:newText forKey:MA_Field_Text];
 }
 
+/* setSummary
+ */
+-(void)setSummary:(NSString *)newSummary
+{
+	[articleData setObject:newSummary forKey:MA_Field_Summary];
+}
+
 /* markRead
  */
 -(void)markRead:(BOOL)flag
@@ -127,6 +135,7 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(NSString *)guid				{ return [articleData objectForKey:MA_Field_GUID]; }
 -(int)parentId					{ return [[articleData objectForKey:MA_Field_Parent] intValue]; }
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
+-(NSString *)summary			{ return [articleData objectForKey:MA_Field_Summary]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 
 /* containingFolder

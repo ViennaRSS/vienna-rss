@@ -23,13 +23,9 @@
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
-	+(NSString *)mapEntityToString:(NSString *)entityString;
 	+(XMLParser *)treeWithCFXMLTreeRef:(CFXMLTreeRef)ref;
 	-(XMLParser *)addTree:(NSString *)name withAttributes:(NSDictionary *)attributesDict closed:(BOOL)flag;
 @end
-
-// Used for mapping entities to their representations
-static NSMutableDictionary * entityMap = nil;
 
 @implementation XMLParser
 
@@ -411,7 +407,7 @@ static NSMutableDictionary * entityMap = nil;
 			if (valueName != nil)
 			{
 				if (CFXMLNodeGetTypeCode(subNode) == kCFXMLNodeTypeEntityReference)
-					valueName = [XMLParser mapEntityToString:valueName];
+					valueName = [NSString mapEntityToString:valueName];
 				[valueString appendString:valueName];
 			}
 		}
@@ -431,107 +427,6 @@ static NSMutableDictionary * entityMap = nil;
 	[newString replaceString:@"\"" withString:@"&quot;"];
 	[newString replaceString:@"'" withString:@"&apos;"];
 	return newString;
-}
-
-/* processAttributes
- * Scan the specified string and convert attribute characters to their literals. Also trim leading and trailing
- * whitespace.
- */
-+(NSString *)processAttributes:(NSString *)stringToProcess
-{
-	if (stringToProcess == nil)
-		return nil;
-
-	NSMutableString * processedString = [[NSMutableString alloc] initWithString:stringToProcess];
-	int entityStart;
-	int entityEnd;
-
-	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
-	while (entityStart != NSNotFound)
-	{
-		entityEnd = [processedString indexOfCharacterInString:';' afterIndex:entityStart + 1];
-		if (entityEnd != NSNotFound)
-		{
-			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
-			NSRange innerEntityRange = NSMakeRange(entityRange.location + 1, entityRange.length - 2);
-			NSString * entityString = [processedString substringWithRange:innerEntityRange];
-			[processedString replaceCharactersInRange:entityRange withString:[XMLParser mapEntityToString:entityString]];
-		}
-		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
-	}
-	
-	NSString * returnString = [processedString trim];
-	[processedString release];
-	return returnString;
-}
-
-/* mapEntityToString
- * Maps an entity sequence to its character equivalent.
- */
-+(NSString *)mapEntityToString:(NSString *)entityString
-{
-	if (entityMap == nil)
-	{
-		entityMap = [[NSMutableDictionary dictionaryWithObjectsAndKeys:
-									@"<",	@"lt",
-									@">",	@"gt",
-									@"\"",	@"quot",
-									@"&",	@"amp",
-									@"'",	@"rsquo",
-									@"'",	@"lsquo",
-									@"'",	@"apos",
-									@"...", @"hellip",
-									nil,	nil] retain];
-
-		// Add entities that map to non-ASCII characters
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xF6] forKey:@"ouml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD6] forKey:@"Ouml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xF4] forKey:@"ocirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD4] forKey:@"Ocirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xFC] forKey:@"uuml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xDC] forKey:@"Uuml"];
-        [entityMap setValue:[NSString stringWithFormat:@"%C", 0xF9] forKey:@"ugrave"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xFB] forKey:@"ucirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD9] forKey:@"Ugrave"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xDB] forKey:@"Ucirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEF] forKey:@"iuml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCF] forKey:@"Iuml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEB] forKey:@"euml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCB] forKey:@"Euml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE9] forKey:@"eacute"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC9] forKey:@"Eacute"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE8] forKey:@"egrave"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC8] forKey:@"Egrave"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEA] forKey:@"ecirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCA] forKey:@"Ecirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE4] forKey:@"auml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC4] forKey:@"Auml"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE0] forKey:@"agrave"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC2] forKey:@"Agrave"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE7] forKey:@"ccedil"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC7] forKey:@"Ccedil"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCE] forKey:@"Icirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEE] forKey:@"icirc"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xA3] forKey:@"pound"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xB5] forKey:@"micro"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC3C] forKey:@"sigma"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCA3] forKey:@"Sigma"];
-		[entityMap setValue:[NSString stringWithFormat:@"%C", 0x2022] forKey:@"bull"];
-	}
-
-	// Parse off numeric codes of the format #xxx
-	if ([entityString length] > 1 && [entityString characterAtIndex:0] == '#')
-	{
-		int intValue;
-		if ([entityString characterAtIndex:1] == 'x')
-			intValue = [[entityString substringFromIndex:2] hexValue];
-		else
-			intValue = [[entityString substringFromIndex:1] intValue];
-		return [NSString stringWithFormat:@"%C", MAX(intValue, ' ')];
-	}
-
-	NSString * mappedString = [entityMap objectForKey:entityString];
-	return mappedString ? mappedString : [NSString stringWithFormat:@"&%@;", entityString];
 }
 
 /* parseXMLDate
