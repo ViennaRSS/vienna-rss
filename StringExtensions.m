@@ -34,6 +34,9 @@
 }
 @end
 
+// Used for mapping entities to their representations
+static NSMutableDictionary * entityMap = nil;
+
 @implementation NSString (StringExtensions)
 
 /* hexValue
@@ -61,6 +64,26 @@
 	return intValue;
 }
 
+/* summaryTextFromHTML
+ * Create a summary text string from raw HTML. We strip out the HTML and convert the entity
+ * characters to their unicode equivalents. Newlines are replaced with spaces then the string
+ * is truncated to the given number of characters.
+ */
+-(NSString *)summaryTextFromHTML
+{
+	return [[NSString stringByRemovingHTML:self validTags:nil] normalised];
+}
+
+/* titleTextFromHTML
+ * Create a title from a description which may be HTML. The HTML is stripped out and entity
+ * characters are converted to their unicode equivalents. Then the first newline is returned up to
+ * the given number of characters.
+ */
+-(NSString *)titleTextFromHTML
+{
+	return [[NSString stringByRemovingHTML:self validTags:nil] firstNonBlankLine];
+}
+
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */
@@ -79,10 +102,6 @@
 	// Rudimentary HTML tag parsing. This could be done by initWithHTML on an attributed string
 	// and extracting the raw string but initWithHTML cannot be invoked within an NSURLConnection
 	// callback which is where this is probably liable to be used.
-	//
-	// This code basically throws away all HTML tags up to <br> or <br /> or the first raw newline
-	// or until 256 characters have been processed.
-	//
 	while (indexOfChr < maxChrs)
 	{
 		unichar ch = [aString characterAtIndex:indexOfChr];
@@ -121,6 +140,10 @@
 				if (tagArray == nil || [tagArray indexOfStringInArray:tagName] != NSNotFound)
 				{
 					[aString deleteCharactersInRange:tagRange];
+					
+					// Replace <br> and </p> with newlines
+					if ([tagName isEqualToString:@"br"] || [tag isEqualToString:@"<p>"] || [tag isEqualToString:@"<div>"])
+						[aString insertString:@"\n" atIndex:tagRange.location];
 
 					// Reset scan to the point where the tag started minus one because
 					// we bump up indexOfChr at the end of the loop.
@@ -128,38 +151,43 @@
 					maxChrs = [aString length];
 				}
 				isInTag = NO;
-
-				if ([tagName isEqualToString:@"br"] && indexOfChr >= 0 && hasWord)
-				{
-					lengthToLastWord = tagStartIndex;
-					break;
-				}
 			}
 		}
-		if ((ch == '\n' || ch == '\r') && hasWord)
-		{
-			lengthToLastWord = indexOfChr;
-			break;
-		}
-		if (indexOfChr >= 256 && !isInTag)
-			break;
 		++indexOfChr;
 	}
-	
-	// If we got a long word with no spaces then just break the string
-	// at the limit.
-	if (lengthToLastWord == 0)
-		lengthToLastWord = MIN(maxChrs, 256);
-	if (indexOfChr != maxChrs)
-	{
-		[aString deleteCharactersInRange:NSMakeRange(lengthToLastWord, maxChrs - lengthToLastWord)];
+	return [aString stringByUnescapingExtendedCharacters];
+}
 
-		// If we truncated at the end of a word, append ellipsises to show that
-		// there was more. Really just a little polish.
-		if (lengthToLastWord < indexOfChr)
-			[aString appendString:@"..."];
+/* normalised
+ * Returns the current string normalised. Newlines are removed and replaced with spaces and multiple
+ * spaces are collapsed to one.
+ */
+-(NSString *)normalised
+{
+	NSMutableString * string = [NSMutableString stringWithString:self];
+	BOOL isInWhitespace = YES;
+	int length = [string length];
+	int index = 0;
+	
+	while (index < length)
+	{
+		unichar ch = [string characterAtIndex:index];
+		if (ch == '\r' || ch == '\n' || ch == '\t')
+		{
+			if (!isInWhitespace)
+				[string replaceCharactersInRange:NSMakeRange(index, 1) withString:@" "];
+			ch = ' ';
+		}
+		if (ch == ' ' && isInWhitespace)
+		{
+			[string deleteCharactersInRange:NSMakeRange(index, 1)];
+			--index;
+			--length;
+		}
+		isInWhitespace = (ch == ' ');
+		++index;
 	}
-	return aString;
+	return string;
 }
 
 /* firstNonBlankLine
@@ -207,7 +235,7 @@
 	}
 	if (r.length < [self length])
 		r.length = indexOfLastWord;
-	return [self substringWithRange:r];
+	return [[self substringWithRange:r] trim];
 }
 
 /* stringByDeletingLastURLComponent
@@ -268,6 +296,105 @@
 		}
 	}
 	return escapedString;
+}
+
+/* stringByUnescapingExtendedCharacters
+ * Scan the specified string and convert attribute characters to their literals. Also trim leading and trailing
+ * whitespace.
+ */
+-(NSString *)stringByUnescapingExtendedCharacters
+{
+	NSMutableString * processedString = [[NSMutableString alloc] initWithString:self];
+	int entityStart;
+	int entityEnd;
+	
+	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
+	while (entityStart != NSNotFound)
+	{
+		entityEnd = [processedString indexOfCharacterInString:';' afterIndex:entityStart + 1];
+		if (entityEnd != NSNotFound)
+		{
+			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
+			NSRange innerEntityRange = NSMakeRange(entityRange.location + 1, entityRange.length - 2);
+			NSString * entityString = [processedString substringWithRange:innerEntityRange];
+			[processedString replaceCharactersInRange:entityRange withString:[NSString mapEntityToString:entityString]];
+		}
+		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
+	}
+	
+	NSString * returnString = [processedString trim];
+	[processedString release];
+	return returnString;
+}
+
+/* mapEntityToString
+ * Maps an entity sequence to its character equivalent.
+ */
++(NSString *)mapEntityToString:(NSString *)entityString
+{
+	if (entityMap == nil)
+	{
+		entityMap = [[NSMutableDictionary dictionaryWithObjectsAndKeys:
+			@"<",	@"lt",
+			@">",	@"gt",
+			@"\"",	@"quot",
+			@"&",	@"amp",
+			@"'",	@"rsquo",
+			@"'",	@"lsquo",
+			@"'",	@"apos",
+			@"...", @"hellip",
+			@" ",   @"nbsp",
+			nil,	nil] retain];
+
+		// Add entities that map to non-ASCII characters
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xF6] forKey:@"ouml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD6] forKey:@"Ouml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xF4] forKey:@"ocirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD4] forKey:@"Ocirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xFC] forKey:@"uuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xDC] forKey:@"Uuml"];
+        [entityMap setValue:[NSString stringWithFormat:@"%C", 0xF9] forKey:@"ugrave"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xFB] forKey:@"ucirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xD9] forKey:@"Ugrave"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xDB] forKey:@"Ucirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEF] forKey:@"iuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCF] forKey:@"Iuml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEB] forKey:@"euml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCB] forKey:@"Euml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE9] forKey:@"eacute"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC9] forKey:@"Eacute"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE8] forKey:@"egrave"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC8] forKey:@"Egrave"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEA] forKey:@"ecirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCA] forKey:@"Ecirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE4] forKey:@"auml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC4] forKey:@"Auml"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE0] forKey:@"agrave"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC2] forKey:@"Agrave"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xE7] forKey:@"ccedil"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC7] forKey:@"Ccedil"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCE] forKey:@"Icirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xEE] forKey:@"icirc"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xA3] forKey:@"pound"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xB5] forKey:@"micro"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xC3C] forKey:@"sigma"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xCA3] forKey:@"Sigma"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0x2022] forKey:@"bull"];
+	}
+	
+	// Parse off numeric codes of the format #xxx
+	if ([entityString length] > 1 && [entityString characterAtIndex:0] == '#')
+	{
+		int intValue;
+		if ([entityString characterAtIndex:1] == 'x')
+			intValue = [[entityString substringFromIndex:2] hexValue];
+		else
+			intValue = [[entityString substringFromIndex:1] intValue];
+		return [NSString stringWithFormat:@"%C", MAX(intValue, ' ')];
+	}
+	
+	NSString * mappedString = [entityMap objectForKey:entityString];
+	return mappedString ? mappedString : [NSString stringWithFormat:@"&%@;", entityString];
 }
 
 /* indexOfCharacterInString

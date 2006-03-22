@@ -26,14 +26,19 @@
 
 @interface NSString (StringExtensions)
 	+(NSString *)stringByRemovingHTML:(NSString *)theString validTags:(NSArray *)tagArray;
+	+(NSString *)mapEntityToString:(NSString *)entityString;
 	-(NSString *)firstNonBlankLine;
+	-(NSString *)summaryTextFromHTML;
+	-(NSString *)titleTextFromHTML;
 	-(int)indexOfCharacterInString:(char)ch afterIndex:(int)startIndex;
 	-(NSString *)stringByEscapingExtendedCharacters;
+	-(NSString *)stringByUnescapingExtendedCharacters;
 	-(NSString *)stringByDeletingLastURLComponent;
 	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
 	-(BOOL)hasCharacter:(char)ch;
 	-(NSString *)convertStringToValidPath;
 	-(NSComparisonResult)numericCompare:(NSString *)aString;
+	-(NSString *)normalised;
 	-(NSString *)baseURL;
 	-(NSString *)trim;
 	-(int)hexValue;

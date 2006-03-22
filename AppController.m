@@ -2398,7 +2398,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Field * field = [menuItem representedObject];
 		[menuItem setState:[field visible] ? NSOnState : NSOffState];
-		return isMainWindowVisible && ([mainArticleView tableLayout] == MA_Table_Layout) && isArticleView;
+		return isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{

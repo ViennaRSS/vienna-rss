@@ -86,6 +86,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		db = nil;
 		isBacktracking = NO;
 		isChangingOrientation = NO;
+		isInTableInit = NO;
 		blockSelectionHandler = NO;
 		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
@@ -141,6 +142,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[@"articleData." stringByAppendingString:MA_Field_Link], @"key",
 			@"caseInsensitiveCompare:", @"selector",
 			nil], MA_Field_Link,
+		[NSDictionary dictionaryWithObjectsAndKeys:
+			[@"articleData." stringByAppendingString:MA_Field_Summary], @"key",
+			@"caseInsensitiveCompare:", @"selector",
+			nil], MA_Field_Summary,
 		nil];
 	
 	// Register to be notified when folders are added or removed
@@ -196,6 +201,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Create condensed view attribute dictionaries
 	selectionDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
+	middleLineDict = [[NSMutableDictionary alloc] init];
+	linkLineDict = [[NSMutableDictionary alloc] init];
 	bottomLineDict = [[NSMutableDictionary alloc] init];
 	
 	// Set the reading pane orientation
@@ -525,6 +532,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSArray * fields = [db arrayOfFields];
 	int count = [fields count];
 	int index;
+
+	// Mark we're doing an update of the tableview
+	isInTableInit = YES;
+	[articleList setAutoresizesAllColumnsToFit:NO];
+	
+	[self updateArticleListRowHeight];
 	
 	// Create the new columns
 	for (index = 0; index < count; ++index)
@@ -537,17 +550,19 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		// Remove each column as we go.
 		NSTableColumn * tableColumn = [articleList tableColumnWithIdentifier:identifier];
 		if (tableColumn != nil)
-		{
-			if (index + 1 != count)
-				[field setWidth:[tableColumn width]];
 			[articleList removeTableColumn:tableColumn];
-		}
 		
 		// Handle condensed layout vs. table layout
 		if (tableLayout == MA_Table_Layout)
 			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
-			showField = tag == MA_FieldID_Headlines || tag == MA_FieldID_Read || tag == MA_FieldID_Flagged;
+		{
+			showField = NO;
+			if (tag == MA_FieldID_Read || tag == MA_FieldID_Flagged)
+				showField = [field visible];
+			if (tag == MA_FieldID_Headlines)
+				showField = YES;
+		}
 
 		// Add to the end only those columns that are visible
 		if (showField)
@@ -559,14 +574,18 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			// Fix for bug where tableviews with alternating background rows lose their "colour".
 			// Only text cells are affected.
 			if ([[newTableColumn dataCell] isKindOfClass:[NSTextFieldCell class]])
+			{
 				[[newTableColumn dataCell] setDrawsBackground:NO];
-			
+				[[newTableColumn dataCell] setWraps:YES];
+			}
+
 			[headerCell setTitle:[field displayName]];
 			[newTableColumn setEditable:NO];
 			[newTableColumn setResizable:isResizable];
 			[newTableColumn setMinWidth:10];
 			[newTableColumn setMaxWidth:1000];
 			[newTableColumn setWidth:[field width]];
+			NSLog(@"Setting field %@ width to %d", [field displayName], [field width]);
 			[articleList addTableColumn:newTableColumn];
 			[newTableColumn release];
 		}
@@ -590,10 +609,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// In condensed mode, the summary field takes up the whole space
 	if (tableLayout == MA_Condensed_Layout)
-	{
-		[articleList sizeLastColumnToFit];
-		[articleList setNeedsDisplay];
-	}
+		[articleList setAutoresizesAllColumnsToFit:YES];
+	
+	// Done
+	isInTableInit = NO;
 }
 
 /* saveTableSettings
@@ -643,25 +662,53 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
 
+	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[style setLineBreakMode:NSLineBreakByTruncatingTail];
+	
 	[topLineDict setObject:articleListFont forKey:NSFontAttributeName];
+	[topLineDict setObject:style forKey:NSParagraphStyleAttributeName];
 	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 
+	[middleLineDict setObject:articleListFont forKey:NSFontAttributeName];
+	[middleLineDict setObject:style forKey:NSParagraphStyleAttributeName];
+	[middleLineDict setObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
+	
+	[linkLineDict setObject:articleListFont forKey:NSFontAttributeName];
+	[linkLineDict setObject:style forKey:NSParagraphStyleAttributeName];
+	[linkLineDict setObject:self forKey:NSLinkAttributeName];
+	[linkLineDict setObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
+
 	[bottomLineDict setObject:articleListFont forKey:NSFontAttributeName];
+	[bottomLineDict setObject:style forKey:NSParagraphStyleAttributeName];
 	[bottomLineDict setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
 
 	[selectionDict setObject:articleListFont forKey:NSFontAttributeName];
+	[selectionDict setObject:style forKey:NSParagraphStyleAttributeName];
 	[selectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 
 	[self updateArticleListRowHeight];
+	[style release];
 }
 
 /* updateArticleListRowHeight
+ * Compute the number of rows that the current view requires. For table layout, there's just
+ * one line. For condensed layout, the number of lines depends on which fields are visible but
+ * there's always a minimum of one line anyway.
  */
 -(void)updateArticleListRowHeight
 {
 	int height = [articleListFont defaultLineHeightForFont];
-	int numberOfRowsInCell = (tableLayout == MA_Table_Layout) ? 1: 2;
-	[articleList setRowHeight:(height + 3) * numberOfRowsInCell];
+	int numberOfRowsInCell = 1;
+	if (tableLayout == MA_Condensed_Layout)
+	{
+		if ([[db fieldByName:MA_Field_Subject] visible])
+			++numberOfRowsInCell;
+		if ([[db fieldByName:MA_Field_Link] visible])
+			++numberOfRowsInCell;
+		if ([[db fieldByName:MA_Field_Summary] visible])
+			++numberOfRowsInCell;
+	}
+	[articleList setRowHeight:(height + 2) * numberOfRowsInCell];
 }
 
 /* showSortDirection
@@ -964,7 +1011,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
 	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
-	[self updateArticleListRowHeight];
 	[self updateVisibleColumns];
 	[articleList reloadData];
 }
@@ -1486,23 +1532,56 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		NSMutableAttributedString * theAttributedString = [[NSMutableAttributedString alloc] init];
 		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && ([[NSApp mainWindow] firstResponder] == aTableView);
-		NSDictionary * topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
-		NSDictionary * bottomLineDictPtr = (isSelectedRow ? selectionDict : bottomLineDict);
-		
-		NSAttributedString * topString = [[NSAttributedString alloc] initWithString:[theArticle title] attributes:topLineDictPtr];
-		[theAttributedString appendAttributedString:topString];
-		[topString release];
 
-		// Create the summary line that appears below the title.
-		Folder * folder = [db folderFromID:[theArticle folderId]];
-		NSCalendarDate * anDate = [[theArticle date] dateWithCalendarFormat:nil timeZone:nil];
-		NSMutableString * summaryString = [NSMutableString stringWithFormat:@"\n%@ - %@", [folder name], [anDate friendlyDescription]];
-		if (![[theArticle author] isBlank])
-			[summaryString appendFormat:@" - %@", [theArticle author]];
+		if ([[db fieldByName:MA_Field_Subject] visible])
+		{
+			NSDictionary * topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
+			NSString * topString = [NSString stringWithFormat:@"%@\n", [theArticle title]];
+			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:topString attributes:topLineDictPtr] autorelease]];
+		}
+
+		// Add the summary line that appears below the title.
+		if ([[db fieldByName:MA_Field_Summary] visible])
+		{
+			NSString * summaryString = [theArticle summary];
+			int maxSummaryLength = MIN([summaryString length], 80);
+			NSString * middleString = [NSString stringWithFormat:@"%@\n", [summaryString substringToIndex:maxSummaryLength]];
+			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
+			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr] autorelease]];
+		}
 		
-		NSAttributedString * bottomString = [[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
-		[theAttributedString appendAttributedString:bottomString];
-		[bottomString release];
+		// Add the link line that appears below the summary and title.
+		if ([[db fieldByName:MA_Field_Link] visible])
+		{
+			NSString * linkString = [NSString stringWithFormat:@"%@\n", [theArticle link]];
+			NSDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
+			[linkLineDict setObject:[NSURL URLWithString:[theArticle link]] forKey:NSLinkAttributeName];
+			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr] autorelease]];
+		}
+		
+		// Create the detail line that appears at the bottom.
+		NSDictionary * bottomLineDictPtr = (isSelectedRow ? selectionDict : bottomLineDict);
+		NSMutableString * summaryString = [NSMutableString stringWithString:@""];
+		NSString * delimiter = @"";
+
+		if ([[db fieldByName:MA_Field_Folder] visible])
+		{
+			Folder * folder = [db folderFromID:[theArticle folderId]];
+			[summaryString appendString:[folder name]];
+			delimiter = @" - ";
+		}
+		if ([[db fieldByName:MA_Field_Date] visible])
+		{
+			NSCalendarDate * anDate = [[theArticle date] dateWithCalendarFormat:nil timeZone:nil];
+			[summaryString appendFormat:@"%@%@", delimiter,[anDate friendlyDescription]];
+			delimiter = @" - ";
+		}
+		if ([[db fieldByName:MA_Field_Author] visible])
+		{
+			if (![[theArticle author] isBlank])
+				[summaryString appendFormat:@"%@%@", delimiter, [theArticle author]];
+		}
+		[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr] autorelease]];
 		return [theAttributedString autorelease];
 	}
 	return [[theArticle articleData] objectForKey:[aTableColumn identifier]];
@@ -1547,14 +1626,17 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)tableViewColumnDidResize:(NSNotification *)notification
 {
-	NSTableColumn * tableColumn = [[notification userInfo] objectForKey:@"NSTableColumn"];
-	Field * field = [db fieldByName:[tableColumn identifier]];
-	int oldWidth = [[[notification userInfo] objectForKey:@"NSOldWidth"] intValue];
-	
-	if (oldWidth != [tableColumn width])
+	if (!isInTableInit && !isAppInitialising && !isChangingOrientation)
 	{
-		[field setWidth:[tableColumn width]];
-		[self saveTableSettings];
+		NSTableColumn * tableColumn = [[notification userInfo] objectForKey:@"NSTableColumn"];
+		Field * field = [db fieldByName:[tableColumn identifier]];
+		int oldWidth = [[[notification userInfo] objectForKey:@"NSOldWidth"] intValue];
+		
+		if (oldWidth != [tableColumn width])
+		{
+			[field setWidth:[tableColumn width]];
+			[self saveTableSettings];
+		}
 	}
 }
 
@@ -2060,6 +2142,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[guidOfArticleToSelect release];
 	[selectionDict release];
 	[topLineDict release];
+	[middleLineDict release];
+	[linkLineDict release];
 	[bottomLineDict release];
 	[articleSortSpecifiers release];
 	[super dealloc];

@@ -29,6 +29,7 @@
 	-(void)setDate:(NSDate *)newDate;
 	-(void)setGuid:(NSString *)newGuid;
 	-(void)setLink:(NSString *)newLink;
+	-(void)setSummary:(NSString *)newSummary;
 @end
 
 @interface RichXMLParser (Private)
@@ -64,6 +65,7 @@
 		[self setGuid:@""];
 		[self setDate:nil];
 		[self setLink:@""];
+		[self setSummary:@""];
 	}
 	return self;
 }
@@ -86,6 +88,16 @@
 	[newDescription retain];
 	[description release];
 	description = newDescription;
+}
+
+/* setSummary
+ * Set the item summary
+ */
+-(void)setSummary:(NSString *)newSummary
+{
+	[newSummary retain];
+	[summary release];
+	summary = newSummary;
 }
 
 /* setAuthor
@@ -144,6 +156,14 @@
 	return description;
 }
 
+/* summary
+ * Returns the item summary
+ */
+-(NSString *)summary
+{
+	return summary;
+}
+
 /* author
  * Returns the item author
  */
@@ -184,6 +204,7 @@
 	[guid release];
 	[title release];
 	[description release];
+	[summary release];
 	[author release];
 	[date release];
 	[link release];
@@ -472,7 +493,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
+			[self setTitle:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
 			continue;
 		}
 
@@ -494,7 +515,7 @@
 		// Parse link
 		if ([nodeName isEqualToString:@"link"])
 		{
-			[self setLink:[XMLParser processAttributes:[subTree valueOfElement]]];
+			[self setLink:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
 			continue;
 		}			
 		
@@ -592,8 +613,8 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]];
-					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
+					NSString * newTitle = [[[subItemTree valueOfElement] firstNonBlankLine] stringByUnescapingExtendedCharacters];
+					[newItem setTitle:[newTitle titleTextFromHTML]];
 					continue;
 				}
 				
@@ -672,6 +693,9 @@
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
+			
+			// Synthesize a summary from the description
+			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
 
 			// If no explicit GUID is specified, use a concatenated hash of attributes for the GUID
 			if (!hasGUID)
@@ -729,7 +753,7 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[XMLParser processAttributes:[subTree valueOfElement]]];
+			[self setTitle:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
 			continue;
 		}
 		
@@ -795,8 +819,8 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]];
-					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
+					NSString * newTitle = [[[subItemTree valueOfElement] firstNonBlankLine] stringByUnescapingExtendedCharacters];
+					[newItem setTitle:[newTitle titleTextFromHTML]];
 					continue;
 				}
 
@@ -875,7 +899,10 @@
 				}
 			}
 
-			// If no explicit GUID is specified, use the link as the GUID
+			// Synthesize a summary from the description
+			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
+
+				// If no explicit GUID is specified, use the link as the GUID
 			if (!hasGUID)
 				[newItem setGuid:[self guidFromItem:newItem]];
 
@@ -989,7 +1016,7 @@
 {
 	if (![item title] || [[item title] isBlank])
 	{
-		NSString * newTitle = [XMLParser processAttributes:[NSString stringByRemovingHTML:[item description] validTags:nil]];
+		NSString * newTitle = [[[item description] titleTextFromHTML] stringByUnescapingExtendedCharacters];
 		if ([newTitle isBlank])
 			newTitle = NSLocalizedString(@"(No title)", nil);
 		[item setTitle:newTitle];
