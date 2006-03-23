@@ -40,8 +40,6 @@
 	IBOutlet FoldersTree * foldersTree;
 
 	int currentSelectedRow;
-	int sortDirection;
-	int sortColumnTag;
 	int tableLayout;
 	int currentFolderId;
 	BOOL isAppInitialising;
@@ -78,7 +76,6 @@
 -(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
 -(void)refreshFolder:(BOOL)reloadData;
 -(void)updateAlternateMenuTitle;
--(void)updateArticleSortDescriptorsForField:(Field *)field;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(int)currentFolderId;

@@ -47,7 +47,6 @@
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
 	-(void)setSortColumnIdentifier:(NSString *)str;
-	-(unsigned int)indexOfArticleSortDescriptorForIdentifier:(NSString *)identifier;
 	-(void)selectArticleAfterReload;
 	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
@@ -347,9 +346,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	articleListFont = nil;
 
 	// Pre-set sort to what was saved in the preferences
+	NSArray * sortDescriptors = [prefs articleSortDescriptors];
+	if ([sortDescriptors count] == 0)
+	{
+		NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:NO] autorelease];
+		[prefs setArticleSortDescriptors:[NSArray arrayWithObject:descriptor]];
+		[prefs setObject:MA_Field_Date forKey:MAPref_SortColumn];
+	}
 	[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
-	sortDirection = [prefs integerForKey:MAPref_SortDirection];
-	sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 	
 	// Initialize the article columns from saved data
 	NSArray * dataArray = [prefs arrayForKey:MAPref_ArticleListColumns];
@@ -483,44 +487,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[contextualMenuItem setTitle:[mainMenuItem title]];
 		}
 	}
-}
-
-/* updateArticleSortDescriptorsForField
- * Adds field to sort descriptors when column becomes visible and removes field from sort descriptors when column becomes invisible.
- */
--(void)updateArticleSortDescriptorsForField:(Field *)field
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
-	unsigned int index = [self indexOfArticleSortDescriptorForIdentifier:[field name]];
-	if ([field visible])
-	{
-		if (index != NSNotFound)
-			return;
-		NSDictionary * specifier = [articleSortSpecifiers valueForKey:[field name]];
-		NSSortDescriptor * newDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
-		[descriptors addObject:newDescriptor];
-		[newDescriptor release];
-		[prefs setArticleSortDescriptors:descriptors];
-	}
-	else if (index != NSNotFound)
-	{
-		[descriptors removeObjectAtIndex:index];
-		[prefs setArticleSortDescriptors:descriptors];
-	}
-}
-
-/* indexOfArticleSortDescriptorForIdentifier
- * Returns the index of the sort descriptor for the column with the identifier.
- */
--(unsigned int)indexOfArticleSortDescriptorForIdentifier:(NSString *)identifier
-{
-	NSDictionary * specifier = [articleSortSpecifiers valueForKey:identifier];
-	if (specifier == nil)
-		return NSNotFound;
-	NSString * sortKey = [specifier valueForKey:@"key"];
-	NSArray * descriptorKeys = [[[Preferences standardPreferences] articleSortDescriptors] valueForKey:@"key"];
-	return [descriptorKeys indexOfObject:sortKey];
 }
 
 /* updateVisibleColumns
@@ -731,22 +697,18 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
 	if ([sortColumnIdentifier isEqualToString:columnName])
 	{
-		sortDirection = -1;
 		[descriptors replaceObjectAtIndex:0 withObject:[[descriptors objectAtIndex:0] reversedSortDescriptor]];
-		[prefs setArticleSortDescriptors:descriptors];
 	}
 	else
 	{
 		[articleList setIndicatorImage:nil inTableColumn:[articleList tableColumnWithIdentifier:sortColumnIdentifier]];
 		[self setSortColumnIdentifier:columnName];
-		sortDirection = 1;
-		sortColumnTag = [[db fieldByName:sortColumnIdentifier] tag];
 		[prefs setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
 		NSSortDescriptor * sortDescriptor;
-		unsigned int index = [self indexOfArticleSortDescriptorForIdentifier:columnName];
+		NSDictionary * specifier = [articleSortSpecifiers valueForKey:sortColumnIdentifier];
+		unsigned int index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
 		if (index == NSNotFound)
 		{
-			NSDictionary * specifier = [articleSortSpecifiers valueForKey:sortColumnIdentifier];
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		}
 		else
@@ -756,9 +718,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		}
 		[descriptors insertObject:sortDescriptor atIndex:0];
 		[sortDescriptor release];
-		[prefs setArticleSortDescriptors:descriptors];
 	}
-	[prefs setInteger:sortDirection forKey:MAPref_SortDirection];
+	[prefs setArticleSortDescriptors:descriptors];
 	[self showSortDirection];
 	blockSelectionHandler = blockMarkRead = YES;
 	[self refreshFolder:NO];
@@ -1154,7 +1115,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (count == 0)
 			[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 		else
-			[self makeRowSelectedAndVisible:(sortDirection < 0) ? 0 : count - 1];
+			[self makeRowSelectedAndVisible:[[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending] ? 0 : count - 1];
 	}
 }
 
