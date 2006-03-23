@@ -25,7 +25,6 @@ NSString * MAPref_FolderFont = @"FolderFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
 NSString * MAPref_DownloadsFolder = @"DownloadsFolder";
-NSString * MAPref_SortDirection = @"SortDirection";
 NSString * MAPref_SortColumn = @"SortColumn";
 NSString * MAPref_CheckFrequency = @"CheckFrequencyInSeconds";
 NSString * MAPref_ArticleListColumns = @"MessageColumns";

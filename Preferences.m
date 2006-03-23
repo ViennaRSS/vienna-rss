@@ -180,9 +180,7 @@ static Preferences * _standardPreferences = nil;
 	NSMutableDictionary * defaultValues = [NSMutableDictionary dictionary];
 	NSData * defaultArticleListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
 	NSData * defaultFolderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"Helvetica" size:12.0]];
-	
-	NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:NO] autorelease];
-	NSData * defaultArticleSortDescriptors = [NSArchiver archivedDataWithRootObject:[NSArray arrayWithObject:descriptor]];
+	NSData * defaultArticleSortDescriptors = [NSArchiver archivedDataWithRootObject:[NSArray array]];
 	
 	NSNumber * boolNo = [NSNumber numberWithBool:NO];
 	NSNumber * boolYes = [NSNumber numberWithBool:YES];
@@ -196,7 +194,6 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForUpdatesOnStartup];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForNewArticlesOnStartup];
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_CachedFolderID];
-	[defaultValues setObject:[NSNumber numberWithInt:-1] forKey:MAPref_SortDirection];
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
@@ -751,6 +748,7 @@ static Preferences * _standardPreferences = nil;
 
 -(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors
 {
+	NSLog(@"setArticleSortDescriptors: %@", newSortDescriptors);
 	if (![articleSortDescriptors isEqualToArray:newSortDescriptors])
 	{
 		NSArray * descriptors = [[NSArray alloc] initWithArray:newSortDescriptors];
