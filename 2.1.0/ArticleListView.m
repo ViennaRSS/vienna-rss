@@ -720,7 +720,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[sortDescriptor release];
 	}
 	[prefs setArticleSortDescriptors:descriptors];
-	[self showSortDirection];
 	blockSelectionHandler = blockMarkRead = YES;
 	[self refreshFolder:NO];
 	blockSelectionHandler = blockMarkRead = NO;

@@ -748,7 +748,6 @@ static Preferences * _standardPreferences = nil;
 
 -(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors
 {
-	NSLog(@"setArticleSortDescriptors: %@", newSortDescriptors);
 	if (![articleSortDescriptors isEqualToArray:newSortDescriptors])
 	{
 		NSArray * descriptors = [[NSArray alloc] initWithArray:newSortDescriptors];
