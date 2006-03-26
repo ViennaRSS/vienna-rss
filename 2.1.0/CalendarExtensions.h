@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSCalendarDate (CalendarExtensions)
+	+(NSCalendarDate *)today;
 	-(NSString *)friendlyDescription;
 @end
 

@@ -42,6 +42,7 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
+#import "ArticleFilter.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebUIDelegate.h"
 #import "Growl/GrowlDefines.h"
@@ -64,6 +65,7 @@
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
+	-(void)initFiltersMenu;
 	-(void)initScriptsMenu;
 	-(void)startProgressIndicator;
 	-(void)stopProgressIndicator;
@@ -174,7 +176,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self initSortMenu];
 	[self initColumnsMenu];
 	[self initStylesMenu];
-	
+	[self initFiltersMenu];
+
 	// Restore the splitview layout
 	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
 	[splitView1 setDelegate:self];
@@ -1087,8 +1090,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 /* initStylesMenu
  * Populate the Styles menu with a list of built-in and external styles. (Note that in the event of
-																		 * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
-																		 * override the built-in styles if necessary).
+ * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
+ * override the built-in styles if necessary).
  */
 -(void)initStylesMenu
 {
@@ -1118,6 +1121,42 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Add it to the Style menu
 	[stylesMenu setSubmenu:stylesSubMenu];
+}
+
+/* initFiltersMenu
+ * Populate both the Filters submenu on the View menu and the Filters popup menu on the Filter
+ * button in the article list. We need separate menus since the latter is eventually configured
+ * to use a smaller font than the former.
+ */
+-(void)initFiltersMenu
+{
+	NSMenu * filterSubMenu = [[[NSMenu alloc] initWithTitle:@"Filter By"] autorelease];
+	NSMenu * filterPopupMenu = [[[NSMenu alloc] initWithTitle:@""] autorelease];
+
+	NSArray * filtersArray = [ArticleFilter arrayOfFilters];
+	int count = [filtersArray count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		ArticleFilter * filter = [filtersArray objectAtIndex:index];
+
+		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
+		[menuItem setTag:[filter tag]];
+		[filterSubMenu addItem:menuItem];
+		[menuItem release];
+
+		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
+		[menuItem setTag:[filter tag]];
+		[filterPopupMenu addItem:menuItem];
+		[menuItem release];
+	}
+	
+	// Add it to the Filters menu
+	[filtersPopupMenu setMenu:filterPopupMenu];
+	[filtersPopupMenu setSmallMenu:YES];
+
+	[filtersMenu setSubmenu:filterSubMenu];
 }
 
 /* showUnreadCountOnApplicationIconAndWindowTitle
@@ -1496,6 +1535,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if ([NSApp isRefreshing])
 	{
+		// Save the date/time of this refresh so we do the right thing when
+		// we apply the filter.
+		[[Preferences standardPreferences] setObject:[NSCalendarDate date] forKey:MAPref_LastRefreshDate];
+		
 		[self startProgressIndicator];
 		[self setStatusMessage:[[RefreshManager sharedManager] statusMessageDuringRefresh] persist:YES];
 	}
@@ -2305,7 +2348,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
 	}
-}	
+}
+
+/* changeFiltering
+ * Refresh the filtering of articles.
+ */
+-(IBAction)changeFiltering:(id)sender
+{
+	NSMenuItem * menuItem = (NSMenuItem *)sender;
+	[[Preferences standardPreferences] setFilterMode:[menuItem tag]];
+}
 
 /* setStatusMessage
  * Sets a new status message for the info bar then updates the view. To remove
@@ -2526,6 +2578,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSView<BaseView> * theView = [browserView activeTabView];
 		return ([theView isKindOfClass:[BrowserPane class]]) && [(BrowserPane *)theView isLoading];
+	}
+	else if (theAction == @selector(changeFiltering:))
+	{
+		[menuItem setState:([menuItem tag] == [[Preferences standardPreferences] filterMode]) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))
 	{

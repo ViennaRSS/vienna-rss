@@ -212,7 +212,6 @@
 "Acknowledgements" = "Tillkännagivanden";
 "Article" = "Artikel";
 "Back" = "Tillbaka";
-"Bottom" = "Under";
 "Bring All to Front" = "Lägg alla överst";
 "Check Spelling" = "Kontrollera stavning";
 "Check Spelling as You Type" = "Kontrollera stavning medan jag skriver";
@@ -259,13 +258,11 @@
 "Previous Tab" = "Föregående flik";
 "Print…" = "Skriv ut…";
 "Quit Vienna" = "Avsluta Vienna";
-"Reading Pane" = "Läsfönster";
 "Redo" = "Gör om";
 "Refresh Selected Subscriptions" = "Uppdatera markerade prenumerationer";
 "Reload Page" = "Ladda om sida";
 "Rename…" = "Döp om…";
 "Restore Article" = "Återskapa artikel";
-"Right" = "Höger";
 "Select All" = "Markera allt";
 "Services" = "Tjänster";
 "Show All" = "Visa alla";
@@ -303,3 +300,12 @@
 "Refresh the current page" = "Refresh the current page";
 "Return to the previous page" = "Return to the previous page";
 "Go forward to the next page" = "Go forward to the next page";
+"Layout" = "Layout";
+"Reading Pane on Right" = "Reading Pane on Right";
+"Reading Pane at Bottom" = "Reading Pane at Bottom";
+"Filter By" = "Filter By";
+"All" = "All";
+"All Articles" = "All Articles";
+"Unread" = "Unread";
+"Unread Articles" = "Unread Articles";
+"Last Refresh" = "Last Refresh";

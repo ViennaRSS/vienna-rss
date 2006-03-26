@@ -36,6 +36,7 @@ NSString * MA_Field_Folder = @"Folder";
 NSString * MA_Field_Parent = @"Parent";
 NSString * MA_Field_Headlines = @"Headlines";
 NSString * MA_Field_Summary = @"Summary";
+NSString * MA_Field_CreatedDate = @"CreatedDate";
 
 @implementation Article
 
@@ -80,10 +81,19 @@ NSString * MA_Field_Summary = @"Summary";
 }
 
 /* setDate
+ * Sets the date when the article was published.
  */
 -(void)setDate:(NSDate *)newDate
 {
 	[articleData setObject:newDate forKey:MA_Field_Date];
+}
+
+/* setCreatedDate
+ * Sets the date when the article was first created in the database.
+ */
+-(void)setCreatedDate:(NSDate *)newCreatedDate
+{
+	[articleData setObject:newCreatedDate forKey:MA_Field_CreatedDate];
 }
 
 /* setBody
@@ -137,6 +147,7 @@ NSString * MA_Field_Summary = @"Summary";
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
 -(NSString *)summary			{ return [articleData objectForKey:MA_Field_Summary]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
+-(NSDate *)createdDate;			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
 
 /* containingFolder
  */

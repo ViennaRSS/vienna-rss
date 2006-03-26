@@ -136,6 +136,7 @@ static Preferences * _standardPreferences = nil;
 		// Load those settings that we cache.
 		articleSortDescriptors = [[NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]] retain];
 		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
+		filterMode = [self integerForKey:MAPref_FilterMode];
 		readingPaneOnRight = [self boolForKey:MAPref_ReadingPaneOnRight];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
 		checkForNewOnStartup = [self boolForKey:MAPref_CheckForUpdatesOnStartup];
@@ -210,10 +211,12 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Filter_All] forKey:MAPref_FilterMode];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
 	[defaultValues setObject:MA_DefaultDownloadsFolder forKey:MAPref_DownloadsFolder];
 	[defaultValues setObject:defaultArticleSortDescriptors forKey:MAPref_ArticleSortDescriptors];
+	[defaultValues setObject:[NSDate distantPast] forKey:MAPref_LastRefreshDate];
 
 	return defaultValues;
 }
@@ -588,6 +591,27 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
+/* filterMode
+ * Returns the current filtering mode.
+ */
+-(int)filterMode
+{
+	return filterMode;
+}
+
+/* setFilterMode
+ * Sets the new filtering mode for articles.
+ */
+-(void)setFilterMode:(int)newMode
+{
+	if (filterMode != newMode)
+	{
+		filterMode = newMode;
+		[self setInteger:filterMode forKey:MAPref_FilterMode];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FilteringChange" object:nil];
+	}
+}
+
 /* openLinksInVienna
  * Returns whether or not URL links clicked in Vienna should be opened in Vienna's own browser or
  * in an the default external Browser (Safari or FireFox, etc).
@@ -741,11 +765,17 @@ static Preferences * _standardPreferences = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
 
+/* articleSortDescriptors
+ * Return article sort descriptor array.
+ */
 -(NSArray *)articleSortDescriptors
 {
 	return articleSortDescriptors;
 }
 
+/* setArticleSortDescriptors
+ * Change the article sort descriptor array.
+ */
 -(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors
 {
 	if (![articleSortDescriptors isEqualToArray:newSortDescriptors])

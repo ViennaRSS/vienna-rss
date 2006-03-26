@@ -211,7 +211,6 @@
 "Acknowledgements" = "Acknowledgements";
 "Article" = "Article";
 "Back" = "Back";
-"Bottom" = "Bottom";
 "Bring All to Front" = "Bring All to Front";
 "Check Spelling" = "Check Spelling";
 "Check Spelling as You Type" = "Check Spelling as You Type";
@@ -259,13 +258,11 @@
 "Previous Tab" = "Previous Tab";
 "Print…" = "Print…";
 "Quit Vienna" = "Quit Vienna";
-"Reading Pane" = "Reading Pane";
 "Redo" = "Redo";
 "Refresh Selected Subscriptions" = "Refresh Selected Subscriptions";
 "Reload Page" = "Reload Page";
 "Rename…" = "Rename…";
 "Restore Article" = "Restore Article";
-"Right" = "Right";
 "Select All" = "Select All";
 "Services" = "Services";
 "Show All" = "Show All";
@@ -303,3 +300,12 @@
 "Refresh the current page" = "Refresh the current page";
 "Return to the previous page" = "Return to the previous page";
 "Go forward to the next page" = "Go forward to the next page";
+"Layout" = "Layout";
+"Reading Pane on Right" = "Reading Pane on Right";
+"Reading Pane at Bottom" = "Reading Pane at Bottom";
+"Filter By" = "Filter By";
+"All" = "All";
+"All Articles" = "All Articles";
+"Unread" = "Unread";
+"Unread Articles" = "Unread Articles";
+"Last Refresh" = "Last Refresh";

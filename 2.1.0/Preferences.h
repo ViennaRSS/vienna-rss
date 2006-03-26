@@ -28,6 +28,7 @@
 	int minimumFontSize;
 	int refreshFrequency;
 	int autoExpireDuration;
+	int filterMode;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
 	BOOL enableMinimumFontSize;
@@ -97,6 +98,10 @@
 // Change position of reading pane
 -(BOOL)readingPaneOnRight;
 -(void)setReadingPaneOnRight:(BOOL)flag;
+
+// Controls how articles are filtered in the view
+-(int)filterMode;
+-(void)setFilterMode:(int)newMode;
 
 // Whether or not we show folder images
 -(BOOL)showFolderImages;

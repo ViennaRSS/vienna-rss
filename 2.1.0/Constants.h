@@ -53,6 +53,8 @@ extern NSString * MAPref_DownloadsList;
 extern NSString * MAPref_ShowFolderImages;
 extern NSString * MAPref_CachedArticleGUID;
 extern NSString * MAPref_ArticleSortDescriptors;
+extern NSString * MAPref_FilterMode;
+extern NSString * MAPref_LastRefreshDate;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
@@ -64,6 +66,17 @@ extern int MA_Default_AutoExpireDuration;
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;
 extern NSString * MA_PBoardType_RSSSource;
+
+// Filtering options
+#define MA_Filter_All			0
+#define MA_Filter_Unread		1
+#define MA_Filter_LastRefresh	2
+#define MA_Filter_Today			3
+
+// Refresh folder options
+#define MA_Refresh_RedrawList			0
+#define MA_Refresh_ReapplyFilter		1
+#define MA_Refresh_ReloadFromDatabase	2
 
 // Layout styles
 #define MA_Table_Layout			0

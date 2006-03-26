@@ -147,6 +147,10 @@
 		AAA5775209A47CF900602469 /* RenameFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA5775009A47CF800602469 /* RenameFolder.h */; };
 		AAA5775309A47CF900602469 /* RenameFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA5775109A47CF800602469 /* RenameFolder.m */; };
 		AAA5775B09A47DB700602469 /* RenameFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAA5775A09A47DB700602469 /* RenameFolder.nib */; };
+		AAA7F4EE09D40CDA007D0760 /* filterIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAA7F4ED09D40CDA007D0760 /* filterIcon.tiff */; };
+		AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAA7F55D09D46170007D0760 /* filterIconPressed.tiff */; };
+		AAA7F5EB09D50102007D0760 /* ArticleFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA7F5E909D50102007D0760 /* ArticleFilter.h */; };
+		AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
 		AAA817F7087F986700C30683 /* AsyncConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA817F5087F986700C30683 /* AsyncConnection.h */; };
 		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		AAB821B00999C2AD00F3C730 /* attach.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8217D0999C2AC00F3C730 /* attach.c */; };
@@ -525,6 +529,10 @@
 		AAA5792D09A50A6E00602469 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Spanish; path = Spanish.lproj/RenameFolder.nib; sourceTree = "<group>"; };
 		AAA5814309AA526700602469 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Italian; path = "Italian.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAA5814F09AA52B400602469 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AAA7F4ED09D40CDA007D0760 /* filterIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = filterIcon.tiff; sourceTree = "<group>"; };
+		AAA7F55D09D46170007D0760 /* filterIconPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = filterIconPressed.tiff; sourceTree = "<group>"; };
+		AAA7F5E909D50102007D0760 /* ArticleFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleFilter.h; sourceTree = "<group>"; };
+		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
 		AAB32F740982FA0D003FC2C7 /* French */ = {isa = PBXFileReference; lastKnownFileType = folder; name = French; path = "French.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -759,6 +767,8 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AAA7F5E909D50102007D0760 /* ArticleFilter.h */,
+				AAA7F5EA09D50102007D0760 /* ArticleFilter.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				AA0FB5E10869110300D9CB90 /* ActivityLog.m */,
 				AABFDC9F0609EA8100100A9B /* ActivityViewer.h */,
@@ -856,6 +866,8 @@
 				AA71097509BA77B700E3EA8A /* newRefresh.tiff */,
 				AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */,
 				AA32E2A30940A9970034D9CC /* folderError.tiff */,
+				AAA7F4ED09D40CDA007D0760 /* filterIcon.tiff */,
+				AAA7F55D09D46170007D0760 /* filterIconPressed.tiff */,
 				AA67F3980897377C008BBC37 /* stopRefresh.tiff */,
 				AA34582C084BE802003D992E /* vienna2.icns */,
 				AA4AB5E008971B28006C843E /* vienna2style.icns */,
@@ -1155,6 +1167,7 @@
 				AABFC03909B806C80087CBB9 /* keywordhash.h in Headers */,
 				AA710F8609BB7F3800E3EA8A /* BrowserPaneTemplate.h in Headers */,
 				AA71168809BEB14A00E3EA8A /* ImageAndTextCell.h in Headers */,
+				AAA7F5EB09D50102007D0760 /* ArticleFilter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1315,6 +1328,8 @@
 				AA710F6409BB7C8B00E3EA8A /* BrowserPane.nib in Resources */,
 				AA71173709BEB70E00E3EA8A /* webpage.tiff in Resources */,
 				AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */,
+				AAA7F4EE09D40CDA007D0760 /* filterIcon.tiff in Resources */,
+				AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1427,6 +1442,7 @@
 				AABFC03D09B806C80087CBB9 /* vdbefifo.c in Sources */,
 				AA710F8709BB7F3800E3EA8A /* BrowserPaneTemplate.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
+				AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,7 @@ Thanks!
 - Sort article list by multiple columns, saving the order in which columns were sorted. (Code contributed by Jeffrey Johnson).
 - Added "Summary" field which shows the first part of the description.
 - In condensed reading mode with the pane on the right, the headline fields can now be configured.
+- Added "Filter By" to allow articles to be filtered in the article list by all, unread or date.
 
 2.0.3.2031
 ----------
