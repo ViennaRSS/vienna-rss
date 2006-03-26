@@ -1917,6 +1917,7 @@ static Database * _sharedDatabase = nil;
 			NSString * title = [row stringForColumn:@"title"];
 			NSString * author = [row stringForColumn:@"sender"];
 			NSString * link = [row stringForColumn:@"link"];
+			NSString * text = [row stringForColumn:@"text"] ;
 			BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
 			BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
 			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
@@ -1924,7 +1925,7 @@ static Database * _sharedDatabase = nil;
 			NSDate * createdDate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"createddate"] doubleValue]];
 
 			// Summary field needs to be synthesized.
-			NSString * summary = [[row stringForColumn:@"text"] summaryTextFromHTML];
+			NSString * summary = [text summaryTextFromHTML];
 
 			// Keep our own track of unread articles
 			if (!isRead)
@@ -1942,6 +1943,7 @@ static Database * _sharedDatabase = nil;
 			[article markDeleted:isDeleted];
 			[article setFolderId:articleFolderId];
 			[article setParentId:parentId];
+			[article setBody:text];
 			if (folder == nil || !isDeleted || IsTrashFolder(folder))
 				[newArray addObject:article];
 			[folder addArticleToCache:article];
