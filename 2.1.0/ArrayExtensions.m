@@ -24,7 +24,7 @@
 
 /* indexOfStringInArray
  * Returns the index of the specified string in the receiver. Or returns
- * -1 if the string is not found. The string must match exactly with regard
+ * NSNotFound if the string is not found. The string must match exactly with regard
  * to case, character set and spaces.
  */
 -(int)indexOfStringInArray:(NSString *)theString
