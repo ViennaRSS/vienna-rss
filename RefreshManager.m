@@ -563,6 +563,15 @@ typedef enum {
 			[authQueue addObject:folder];
 		[self getCredentialsForFolder];
 	}
+	else if ([connector status] == MA_Connect_PermanentRedirect)
+	{
+		// We got a permanent redirect from the feed so change the feed URL
+		// to the new location.
+		Database * db = [Database sharedDatabase];
+		[db setFolderFeedURL:[folder itemId] newFeedURL:[connector URLString]];
+		[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [connector URLString]]];
+		return;
+	}
 	else if ([connector status] == MA_Connect_Stopped)
 	{
 		// Stopping the connection isn't an error, so clear any

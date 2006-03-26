@@ -47,6 +47,7 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 		contextData = nil;
 		connector = nil;
 		httpHeaders = nil;
+		URLString = nil;
 		status = MA_Connect_Succeeded;
 	}
 	return self;
@@ -77,6 +78,14 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 	return aItem;
 }
 
+/* URLString
+ * Returns the URL of this connection.
+ */
+-(NSString *)URLString
+{
+	return URLString;
+}
+
 /* contextData
  * Returns the context data object that was originally passed when the connection
  * was created.
@@ -104,6 +113,16 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 	httpHeaders = headerFields;
 }
 
+/* setURLString
+ * Sets the current URL of this connection.
+ */
+-(void)setURLString:(NSString *)newURLString
+{
+	[newURLString retain];
+	[URLString release];
+	URLString = newURLString;
+}
+
 /* beginLoadDataFromURL
  * Begin an asynchronous connection using the specified URL, username, password and callback information. On completion of
  * the connection, whether or not the connection succeeded, the callback is invoked. The user will need to query the object
@@ -129,7 +148,8 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 
 	delegate = theDelegate;
 	handler = endSelector;
-	
+	[self setURLString:[theUrl absoluteString]];
+
 	NSMutableURLRequest * theRequest = [NSMutableURLRequest requestWithURL:theUrl cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
 	if (theRequest == nil)
 		return NO;
@@ -346,7 +366,18 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
  */
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
-	NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), [[request URL] absoluteString]];
+	NSString * newURLString = [[request URL] absoluteString];
+	NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), newURLString];
+	[self setURLString:newURLString];
+	if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
+	{
+		NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)redirectResponse;
+		if ([httpResponse statusCode] == 301)
+		{
+			status = MA_Connect_PermanentRedirect;
+			[delegate performSelector:handler withObject:self];
+		}
+	}
 	[aItem appendDetail:text];
 	return request;
 }
@@ -369,6 +400,7 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 	[httpHeaders release];
 	[responseHeaders release];
 	[contextData release];
+	[URLString release];
 	[receivedData release];
 	[username release];
 	[password release];

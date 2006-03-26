@@ -26,7 +26,8 @@ typedef enum {
 	MA_Connect_Succeeded = 0,
 	MA_Connect_Failed,
 	MA_Connect_NeedCredentials,
-	MA_Connect_Stopped
+	MA_Connect_Stopped,
+	MA_Connect_PermanentRedirect
 } ConnectStatus;
 
 @interface AsyncConnection : NSObject {
@@ -37,6 +38,7 @@ typedef enum {
 	NSString * username;
 	NSString * password;
 	ActivityItem * aItem;
+	NSString * URLString;
 	id contextData;
 	ConnectStatus status;
 	id delegate;
@@ -57,6 +59,7 @@ typedef enum {
 -(ConnectStatus)status;
 -(id)contextData;
 -(ActivityItem *)aItem;
+-(NSString *)URLString;
 
 -(void)setHttpHeaders:(NSDictionary *)headerFields;
 -(NSDictionary *)responseHeaders;
