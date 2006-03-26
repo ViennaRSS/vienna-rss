@@ -22,6 +22,21 @@
 
 @implementation NSCalendarDate (CalendarExtensions)
 
+/* today
+ * Returns an NSCalendarDate that represents the beginning of today.
+ */
++(NSCalendarDate *)today
+{
+	NSCalendarDate * todaysDate = [NSCalendarDate date];
+	return [NSCalendarDate dateWithYear:[todaysDate yearOfCommonEra]
+								  month:[todaysDate monthOfYear]
+									day:[todaysDate dayOfMonth]
+								   hour:0
+								 minute:0
+								 second:0
+							   timeZone:[todaysDate timeZone]];
+}
+
 /* friendlyDescription
  * Return a calendar date format string in a friendly format as follows:
  *

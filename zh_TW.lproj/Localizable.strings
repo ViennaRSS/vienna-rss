@@ -211,7 +211,6 @@
 "Acknowledgements" = "感謝啟事";
 "Article" = "文章";
 "Back" = "後退";
-"Bottom" = "位於下方";
 "Bring All to Front" = "將此程式所有視窗移至最前";
 "Check Spelling" = "檢查拼字";
 "Check Spelling as You Type" = "在輸入時同步檢查拼字";
@@ -258,13 +257,11 @@
 "Previous Tab" = "前一個分頁";
 "Print…" = "列印…";
 "Quit Vienna" = "結束 Vienna";
-"Reading Pane" = "內文閱讀區";
 "Redo" = "重作";
 "Refresh Selected Subscriptions" = "更新所選的訂閱頻道";
 "Reload Page" = "重新載入頁面";
 "Rename…" = "重新命名…";
 "Restore Article" = "儲存文章";
-"Right" = "位於右方";
 "Select All" = "全選";
 "Services" = "服務";
 "Show All" = "顯示全部";
@@ -302,3 +299,12 @@
 "Refresh the current page" = "Refresh the current page";
 "Return to the previous page" = "Return to the previous page";
 "Go forward to the next page" = "Go forward to the next page";
+"Layout" = "Layout";
+"Reading Pane on Right" = "Reading Pane on Right";
+"Reading Pane at Bottom" = "Reading Pane at Bottom";
+"Filter By" = "Filter By";
+"All" = "All";
+"All Articles" = "All Articles";
+"Unread" = "Unread";
+"Unread Articles" = "Unread Articles";
+"Last Refresh" = "Last Refresh";

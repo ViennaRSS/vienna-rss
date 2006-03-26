@@ -30,6 +30,7 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "ArticleRef.h"
+#import "ArticleFilter.h"
 #import "XMLParser.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebUIDelegate.h"
@@ -63,12 +64,12 @@
 	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr;
 	-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 	-(void)reloadArrayOfArticles;
+	-(NSArray *)applyFilter:(NSArray *)unfilteredArray;
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(BOOL)flag;
 	-(void)printDocument;
 @end
-
 
 static const int MA_Minimum_ArticleList_Pane_Width = 80;
 static const int MA_Minimum_Article_Pane_Width = 80;
@@ -154,6 +155,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 
 	// Create a backtrack array
 	Preferences * prefs = [Preferences standardPreferences];
@@ -342,6 +344,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Variable initialization here
 	currentFolderId = -1;
 	currentArrayOfArticles = nil;
+	folderArrayOfArticles = nil;
 	currentSelectedRow = -1;
 	articleListFont = nil;
 
@@ -551,7 +554,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[newTableColumn setMinWidth:10];
 			[newTableColumn setMaxWidth:1000];
 			[newTableColumn setWidth:[field width]];
-			NSLog(@"Setting field %@ width to %d", [field displayName], [field width]);
 			[articleList addTableColumn:newTableColumn];
 			[newTableColumn release];
 		}
@@ -721,7 +723,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	[prefs setArticleSortDescriptors:descriptors];
 	blockSelectionHandler = blockMarkRead = YES;
-	[self refreshFolder:NO];
+	[self refreshFolder:MA_Refresh_RedrawList];
 	blockSelectionHandler = blockMarkRead = NO;
 }
 
@@ -926,6 +928,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleText printDocument:sender];
 }
 
+/* handleFilterChange
+ * Update the list of articles when the user changes the filter.
+ */
+-(void)handleFilterChange:(NSNotification *)nc
+{
+	[self refreshFolder:MA_Refresh_ReapplyFilter];
+}
+
 /* handleFolderNameChange
  * Some folder metadata changed. Update the article list header and the
  * current article with a possible name change.
@@ -947,12 +957,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
 	if (folderId == 0 || folderId == currentFolderId || [self currentCacheContainsFolder:folderId])
-		[self refreshFolder:YES];
+		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
 	{
 		Folder * folder = [db folderFromID:currentFolderId];
 		if (IsSmartFolder(folder))
-			[self refreshFolder:YES];
+			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 }
 
@@ -1153,7 +1163,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)performFindPanelAction:(int)actionTag
 {
-	[self refreshFolder:YES];
+	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	if (currentSelectedRow < 0 && [currentArrayOfArticles count] > 0)
 		[self makeRowSelectedAndVisible:0];
 }
@@ -1163,14 +1173,19 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  * logic and redrawing the article list. The selected article is preserved
  * and restored on completion of the refresh.
  */
--(void)refreshFolder:(BOOL)reloadData
+-(void)refreshFolder:(int)refreshFlag
 {
 	NSString * guid = nil;
-	
+
 	if (currentSelectedRow >= 0)
 		guid = [[[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid] retain];
-	if (reloadData)
+	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[self reloadArrayOfArticles];
+	if (refreshFlag == MA_Refresh_ReapplyFilter)
+	{
+		[currentArrayOfArticles release];
+		currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
+	}
 	[self setArticleListHeader];
 	[self sortArticles];
 	[self showSortDirection];
@@ -1199,7 +1214,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)setArticleListHeader
 {
 	Folder * folder = [db folderFromID:currentFolderId];
-	[articleListHeader setStringValue:[folder name]];
+	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
+	NSString * captionString = [NSString stringWithFormat:@"%@ (Filtered: %@)", [folder name], NSLocalizedString([filter name], nil)];
+	[articleListHeader setStringValue:captionString];
 }
 
 /* reloadArrayOfArticles
@@ -1207,9 +1224,36 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)reloadArrayOfArticles
 {
-	[currentArrayOfArticles release];
+	[folderArrayOfArticles release];
+	
 	Folder * folder = [db folderFromID:currentFolderId];
-	currentArrayOfArticles = [[folder articlesWithFilter:[controller searchString]] retain];
+	folderArrayOfArticles = [[folder articlesWithFilter:[controller searchString]] retain];
+	
+	[currentArrayOfArticles release];
+	currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
+}
+
+/* applyFilter
+ * Apply the active filter to unfilteredArray and return the filtered array.
+ * This is done here rather than in the folder management code for simplicity.
+ */
+-(NSArray *)applyFilter:(NSArray *)unfilteredArray
+{
+	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
+	if ([filter comparator] == nil)
+		return [unfilteredArray retain];
+
+	NSMutableArray * filteredArray = [[NSMutableArray alloc] initWithArray:unfilteredArray];
+	int count = [filteredArray count];
+	int index;
+	
+	for (index = count - 1; index >= 0; --index)
+	{
+		Article * article = [filteredArray objectAtIndex:index];
+		if (![ArticleFilter performSelector:[filter comparator] withObject:article])
+			[filteredArray removeObjectAtIndex:index];
+	}
+	return filteredArray;
 }
 
 /* selectArticleAfterReload
@@ -1465,11 +1509,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfArticles count]);
 	theArticle = [currentArrayOfArticles objectAtIndex:rowIndex];
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Folder])
-	{
-		Folder * folder = [db folderFromID:[theArticle folderId]];
-		return [folder name];
-	}
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Read])
 	{
 		if (![theArticle isRead])
@@ -1487,6 +1526,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if ([theArticle hasComments])
 			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
+	}
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Date])
+	{
+		return [[theArticle articleData] objectForKey:[aTableColumn identifier]];
 	}
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Headlines])
 	{
@@ -1544,7 +1587,28 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr] autorelease]];
 		return [theAttributedString autorelease];
 	}
-	return [[theArticle articleData] objectForKey:[aTableColumn identifier]];
+
+	// Only string articleData objects should make it from here.
+	NSString * cellString;
+	if (![[aTableColumn identifier] isEqualToString:MA_Field_Folder])
+		cellString = [[theArticle articleData] objectForKey:[aTableColumn identifier]];
+	else
+	{
+		Folder * folder = [db folderFromID:[theArticle folderId]];
+		cellString = [folder name];
+	}
+
+	// Return the cell string with a paragraph style that will truncate over-long strings by placing
+	// ellipsis in the middle to fit within the cell.
+    static NSDictionary * info = nil;
+    if (info == nil)
+	{
+        NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByTruncatingTail];
+        info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
+        [style release];
+    }
+    return [[[NSAttributedString alloc] initWithString:cellString attributes:info] autorelease];
 }
 
 /* willDisplayCell [delegate]
@@ -1961,7 +2025,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
 	if (flag)
-		[self refreshFolder:YES];
+		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
@@ -2056,7 +2120,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		{
 			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 			if (lastFolderId == currentFolderId)
-				[self refreshFolder:YES];
+				[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 		}
 		lastFolderId = folderId;
 	}
@@ -2066,7 +2130,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 		if (lastFolderId == currentFolderId)
-			[self refreshFolder:YES];
+			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 		else
 		{
 			Folder * currentFolder = [db folderFromID:currentFolderId];
@@ -2096,6 +2160,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[extDateFormatter release];
 	[selectionTimer release];
 	[markReadTimer release];
+	[folderArrayOfArticles release];
 	[currentArrayOfArticles release];
 	[backtrackArray release];
 	[articleListFont release];

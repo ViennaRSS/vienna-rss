@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "Database.h"
 #import "ActivityViewer.h"
+#import "PopupButton.h"
 #import "Growl/GrowlApplicationBridge.h"
 
 @class NewPreferenceController;
@@ -54,6 +55,8 @@
 	IBOutlet NSMenuItem * sortByMenu;
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
+	IBOutlet NSMenuItem * filtersMenu;
+	IBOutlet PopupButton * filtersPopupMenu;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
@@ -132,6 +135,7 @@
 -(IBAction)decreaseFontSize:(id)sender;
 -(IBAction)increaseFontSize:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
+-(IBAction)changeFiltering:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

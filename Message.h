@@ -34,6 +34,7 @@ extern NSString * MA_Field_Folder;
 extern NSString * MA_Field_Parent;
 extern NSString * MA_Field_Headlines;
 extern NSString * MA_Field_Summary;
+extern NSString * MA_Field_CreatedDate;
 
 // Article status values
 #define MA_MsgStatus_Empty		0
@@ -55,6 +56,7 @@ extern NSString * MA_Field_Summary;
 #define MA_FieldID_Headlines	411
 #define MA_FieldID_Deleted		412
 #define MA_FieldID_Summary		413
+#define MA_FieldID_CreatedDate	414
 
 @class Folder;
 @interface Article : NSObject {
@@ -76,6 +78,7 @@ extern NSString * MA_Field_Summary;
 -(NSString *)link;
 -(NSString *)summary;
 -(NSDate *)date;
+-(NSDate *)createdDate;
 -(Folder *)containingFolder;
 -(int)folderId;
 -(BOOL)isRead;
@@ -90,6 +93,7 @@ extern NSString * MA_Field_Summary;
 -(void)setAuthor:(NSString *)newAuthor;
 -(void)setFolderId:(int)newFolderId;
 -(void)setDate:(NSDate *)newDate;
+-(void)setCreatedDate:(NSDate *)newCreatedDate;
 -(void)setBody:(NSString *)newText;
 -(void)setSummary:(NSString *)newSummary;
 -(void)setStatus:(int)newStatus;

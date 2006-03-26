@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 cancelAllRefreshes = id; 
+                changeFiltering = id; 
                 checkForUpdates = id; 
                 closeAllTabs = id; 
                 closeTab = id; 
@@ -69,6 +70,8 @@
                 exportSaveAccessory = NSView; 
                 exportSelected = NSButtonCell; 
                 exportWithGroups = NSButton; 
+                filtersMenu = NSMenuItem; 
+                filtersPopupMenu = PopupButton; 
                 foldersTree = FoldersTree; 
                 mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 

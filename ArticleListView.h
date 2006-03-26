@@ -56,6 +56,7 @@
 	NSTimer * markReadTimer;
 	NSTimer * selectionTimer;
 	NSArray * currentArrayOfArticles;
+	NSArray * folderArrayOfArticles;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
 	NSString * guidOfArticleToSelect;
@@ -74,7 +75,7 @@
 -(void)setController:(AppController *)theController;
 -(void)initialiseArticleView;
 -(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
--(void)refreshFolder:(BOOL)reloadData;
+-(void)refreshFolder:(int)refreshFlag;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;

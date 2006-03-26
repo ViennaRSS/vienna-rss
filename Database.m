@@ -21,6 +21,7 @@
 #import "Database.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
+#import "CalendarExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
 
@@ -45,7 +46,7 @@
 
 // The current database version number
 const int MA_Min_Supported_DB_Version = 12;
-const int MA_Current_DB_Version = 12;
+const int MA_Current_DB_Version = 13;
 
 // There's just one database and we manage access to it through a
 // singleton object.
@@ -251,6 +252,17 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"insert into info (version) values (%d)", databaseVersion];
 	}
 
+	// Upgrade to rev 13.
+	// Add createddate field to the messages table and initialise it to a date in the past.
+	if (databaseVersion < 13)
+	{
+		[self executeSQL:@"alter table messages add column createddate"];
+		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
+
+		// Set the new version
+		[self setDatabaseVersion:13];
+	}
+	
 	// Trap unsupported databases
 	if (databaseVersion < MA_Min_Supported_DB_Version)
 	{
@@ -1005,6 +1017,9 @@ static Database * _sharedDatabase = nil;
 		BOOL read_flag = [article isRead];
 		BOOL deleted_flag = [article isDeleted];
 
+		// We always set the created date ourselves
+		[article setCreatedDate:[NSDate date]];
+
 		// Set some defaults
 		if (articleDate == nil)
 			articleDate = [NSDate date];
@@ -1017,6 +1032,7 @@ static Database * _sharedDatabase = nil;
 
 		// Save date as time intervals
 		NSTimeInterval interval = [articleDate timeIntervalSince1970];
+		NSTimeInterval createdInterval = [[article createdDate] timeIntervalSince1970];
 
 		// Unread count adjustment factor
 		int adjustment = 0;
@@ -1038,14 +1054,15 @@ static Database * _sharedDatabase = nil;
 			SQLResult * results;
 
 			results = [sqlDatabase performQueryWithFormat:
-					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, read_flag, marked_flag, deleted_flag, title, text) "
-					"values('%@', %d, %d, '%@', '%@', %f, %d, %d, %d, '%@', '%@')",
+					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text) "
+					"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@')",
 					preparedArticleGuid,
 					parentId,
 					folderID,
 					preparedUserName,
 					preparedArticleLink,
 					interval,
+					createdInterval,
 					read_flag,
 					marked_flag,
 					deleted_flag,
@@ -1068,12 +1085,13 @@ static Database * _sharedDatabase = nil;
 			BOOL read_flag = [existingArticle isRead];
 			SQLResult * results;
 
-			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, read_flag=%d, "
+			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, createddate=%f, read_flag=%d, "
 													 "marked_flag=%d, deleted_flag=%d, title='%@', text='%@' where folder_id=%d and message_id='%@'",
 													 parentId,
 													 preparedUserName,
 													 preparedArticleLink,
 													 interval,
+													 createdInterval,
 													 read_flag,
 													 marked_flag,
 													 deleted_flag,
@@ -1113,17 +1131,9 @@ static Database * _sharedDatabase = nil;
 {
 	if (daysToKeep > 0)
 	{
-		NSCalendarDate * todaysDate = [NSCalendarDate date];
-		NSCalendarDate * absoluteDate = [NSCalendarDate dateWithYear:[todaysDate yearOfCommonEra]
-															   month:[todaysDate monthOfYear]
-																 day:[todaysDate dayOfMonth]
-																hour:0
-															  minute:0
-															  second:0
-															timeZone:[todaysDate timeZone]];
 		int dayDelta = (daysToKeep % 1000) - 1;
 		int monthDelta = (daysToKeep / 1000);
-		NSTimeInterval timeDiff = [[absoluteDate dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
+		NSTimeInterval timeDiff = [[[NSCalendarDate today] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
 
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
@@ -1911,6 +1921,7 @@ static Database * _sharedDatabase = nil;
 			BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
 			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
 			NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
+			NSDate * createdDate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"createddate"] doubleValue]];
 
 			// Summary field needs to be synthesized.
 			NSString * summary = [[row stringForColumn:@"text"] summaryTextFromHTML];
@@ -1925,6 +1936,7 @@ static Database * _sharedDatabase = nil;
 			[article setAuthor:author];
 			[article setLink:link];
 			[article setDate:date];
+			[article setCreatedDate:createdDate];
 			[article markRead:isRead];
 			[article markFlagged:isFlagged];
 			[article markDeleted:isDeleted];

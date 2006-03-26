@@ -212,7 +212,6 @@
 "Acknowledgements" = "Danksagung";
 "Article" = "Artikel";
 "Back" = "Zurück";
-"Bottom" = "Unten";
 "Bring All to Front" = "Alle nach vorne bringen";
 "Check Spelling" = "Rechtschreibprüfung";
 "Check Spelling as You Type" = "Während der Texteingabe prüfen";
@@ -259,13 +258,11 @@
 "Previous Tab" = "Vorheriger Tab";
 "Print…" = "Drucken…";
 "Quit Vienna" = "Vienna beenden";
-"Reading Pane" = "Textfenster";
 "Redo" = "Wiederholen";
 "Refresh Selected Subscriptions" = "Ausgewähltes Abonnement aktualisieren";
 "Reload Page" = "Seite neu laden";
 "Rename…" = "Umbenennen…";
 "Restore Article" = "Artikel wiederherstellen";
-"Right" = "Rechts";
 "Select All" = "Alles auswählen";
 "Services" = "Dienste";
 "Show All" = "Alle einblenden";
@@ -303,3 +300,12 @@
 "Refresh the current page" = "Seite neu laden";
 "Return to the previous page" = "Die vorherige Seite anzeigen";
 "Go forward to the next page" = "Die nächste Seite anzeigen";
+"Layout" = "Layout";
+"Reading Pane on Right" = "Reading Pane on Right";
+"Reading Pane at Bottom" = "Reading Pane at Bottom";
+"Filter By" = "Filter By";
+"All" = "All";
+"All Articles" = "All Articles";
+"Unread" = "Unread";
+"Unread Articles" = "Unread Articles";
+"Last Refresh" = "Last Refresh";

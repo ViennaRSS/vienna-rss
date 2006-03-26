@@ -1,9 +1,9 @@
 //
-//  PopupButton.h
+//  ArticleFilter.h
 //  Vienna
 //
-//  Created by Steve on 6/23/05.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Created by Steve on 3/24/06.
+//  Copyright (c) 2004-2006 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,14 +20,16 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PopupButton : NSButton {
-	NSMenu * theMenu;
-	NSFont * popupFont;
-	BOOL popBelow;
+@interface ArticleFilter : NSObject {
+	NSString * name;
+	int tag;
+	SEL comparator;
 }
 
 // Public functions
--(NSMenu *)menu;
--(void)setSmallMenu:(BOOL)useSmallMenu;
--(void)setMenu:(NSMenu *)menu;
++(NSArray *)arrayOfFilters;
++(ArticleFilter *)filterByTag:(int)theTag;
+-(NSString *)name;
+-(int)tag;
+-(SEL)comparator;
 @end

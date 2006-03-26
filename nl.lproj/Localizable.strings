@@ -212,7 +212,6 @@
 "Acknowledgements" = "Acknowledgements";
 "Article" = "Artikel";
 "Back" = "Vorige";
-"Bottom" = "Beneden";
 "Bring All to Front" = "Alles op voorgrond";
 "Check Spelling" = "Controleer spelling";
 "Check Spelling as You Type" = "Controleer spelling tijdens typen";
@@ -259,13 +258,11 @@
 "Previous Tab" = "Vorige tab";
 "Print…" = "Print…";
 "Quit Vienna" = "Stop Vienna";
-"Reading Pane" = "Leespaneel";
 "Redo" = "Opnieuw";
 "Refresh Selected Subscriptions" = "Werk geselecteerde abonnementen bij";
 "Reload Page" = "Laad pagina opnieuw";
 "Rename…" = "Hernoem…";
 "Restore Article" = "Herstel artikel";
-"Right" = "Rechts";
 "Select All" = "Selecteer alles";
 "Services" = "Services";
 "Show All" = "Toon alles";
@@ -303,3 +300,12 @@
 "Refresh the current page" = "Refresh the current page";
 "Return to the previous page" = "Return to the previous page";
 "Go forward to the next page" = "Go forward to the next page";
+"Layout" = "Layout";
+"Reading Pane on Right" = "Reading Pane on Right";
+"Reading Pane at Bottom" = "Reading Pane at Bottom";
+"Filter By" = "Filter By";
+"All" = "All";
+"All Articles" = "All Articles";
+"Unread" = "Unread";
+"Unread Articles" = "Unread Articles";
+"Last Refresh" = "Last Refresh";

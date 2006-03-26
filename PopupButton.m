@@ -29,8 +29,21 @@
 -(id)init
 {
 	if ((self = [super init]) != nil)
+	{
 		theMenu = nil;
+		popBelow = NO;
+		popupFont = [NSFont menuFontOfSize:0];
+	}
 	return self;
+}
+
+/* setSmallMenu
+ * Specifies that the popup menu should use a small font.
+ */
+-(void)setSmallMenu:(BOOL)useSmallMenu
+{
+	popupFont = [NSFont menuFontOfSize:(useSmallMenu ? 12 : 0)];
+	popBelow = YES;
 }
 
 /* setMenu
@@ -60,9 +73,11 @@
 	if ([self isEnabled] && theMenu != nil)
 	{
 		[self highlight:YES];
-		NSPoint popPoint = NSMakePoint([self frame].origin.x, [self frame].origin.y + [self frame].size.height);
+		NSPoint popPoint = NSMakePoint([self bounds].origin.x, [self bounds].origin.y);
+		if (popBelow)
+			popPoint.y += [self bounds].size.height + 5;
         NSEvent * evt = [NSEvent mouseEventWithType:[theEvent type]
-								 location:popPoint
+								 location:[self convertPoint:popPoint toView:nil]
 							modifierFlags:[theEvent modifierFlags]
 								timestamp:[theEvent timestamp]
 							 windowNumber:[theEvent windowNumber]
@@ -70,7 +85,7 @@
 							  eventNumber:[theEvent eventNumber]
 							   clickCount:[theEvent clickCount]
 								 pressure:[theEvent pressure]];
-		[NSMenu popUpContextMenu:theMenu withEvent:evt forView:self];
+		[NSMenu popUpContextMenu:theMenu withEvent:evt forView:self withFont:popupFont];
 		[self highlight:NO];
 	}
 }

@@ -263,6 +263,7 @@
 -(int)autoExpireDuration			{ return [[Preferences standardPreferences] autoExpireDuration]; }
 -(float)markReadInterval			{ return [[Preferences standardPreferences] markReadInterval]; }
 -(BOOL)readingPaneOnRight			{ return [[Preferences standardPreferences] readingPaneOnRight]; }
+-(int)filterMode					{ return [[Preferences standardPreferences] filterMode]; }
 -(BOOL)refreshOnStartup				{ return [[Preferences standardPreferences] refreshOnStartup]; }
 -(BOOL)checkForNewOnStartup			{ return [[Preferences standardPreferences] checkForNewOnStartup]; }
 -(BOOL)openLinksInVienna			{ return [[Preferences standardPreferences] openLinksInVienna]; }
@@ -283,6 +284,7 @@
 -(void)setMarkReadInterval:(float)newInterval		{ [[Preferences standardPreferences] setMarkReadInterval:newInterval]; }
 -(void)setReadingPaneOnRight:(BOOL)flag				{ [[Preferences standardPreferences] setReadingPaneOnRight:flag]; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [[Preferences standardPreferences] setRefreshOnStartup:flag]; }
+-(void)setFilterMode:(int)newMode					{ [[Preferences standardPreferences] setFilterMode:newMode]; }
 -(void)setCheckForNewOnStartup:(BOOL)flag			{ [[Preferences standardPreferences] setCheckForNewOnStartup:flag]; }
 -(void)setOpenLinksInVienna:(BOOL)flag				{ [[Preferences standardPreferences] setOpenLinksInVienna:flag]; }
 -(void)setOpenLinksInBackground:(BOOL)flag			{ [[Preferences standardPreferences] setOpenLinksInBackground:flag]; }

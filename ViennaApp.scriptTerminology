@@ -284,6 +284,13 @@
 					<key>Name</key>
 					<string>reading pane on right</string>
 				</dict>
+				<key>filterMode</key>
+				<dict>
+					<key>Description</key>
+					<string>Sets how articles are filtered in the display list</string>
+					<key>Name</key>
+					<string>filter by</string>
+				</dict>
 				<key>refreshFrequency</key>
 				<dict>
 					<key>Description</key>
