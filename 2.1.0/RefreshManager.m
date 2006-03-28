@@ -633,7 +633,7 @@ typedef enum {
 			NSString * feedLink = [newFeed link];
 			
 			// Synthesize feed link if it is missing
-			if ([feedLink isBlank])
+			if (feedLink == nil || [feedLink isBlank])
 				feedLink = [[folder feedURL] baseURL];
 
 			// Get the feed's last update from the header if it is present. This will mark the
