@@ -743,7 +743,7 @@
 		// Parse link
 		if ([nodeName isEqualToString:@"link"])
 		{
-			if ([[subTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
+			if ([subTree valueOfAttribute:@"rel"] == nil || [[subTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 			{
 				if (linkBase != nil)
 					[self setLink:[linkBase stringByAppendingURLComponent:[subTree valueOfAttribute:@"href"]]];
@@ -783,7 +783,7 @@
 			BOOL hasLink = NO;
 
 			// Look for and stack the xml:base attribute
-			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByDeletingLastURLComponent];
+			NSString * entryBase = [subTree valueOfAttribute:@"xml:base"];
 			if (entryBase != nil && linkBase != nil)
 				entryBase = [linkBase stringByAppendingURLComponent:entryBase];
 
