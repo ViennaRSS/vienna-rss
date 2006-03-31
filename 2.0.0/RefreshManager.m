@@ -426,10 +426,15 @@ typedef enum {
 	// The activity log name we use depends on whether or not this folder has a real name.
 	NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
-	
+
 	// Compute the URL for this connection
 	NSString * urlString = IsBloglinesFolder(folder) ? [NSString stringWithFormat:@"http://rpc.bloglines.com/getitems?s=%d&n=1", [folder bloglinesId]] : [folder feedURL];
-	NSURL * url = [NSURL URLWithString:urlString];
+	NSURL * url = nil;
+	
+	if ([urlString hasPrefix:@"file:///"])
+		url = [NSURL fileURLWithPath:[[urlString substringFromIndex:8] stringByExpandingTildeInPath]];
+	else
+		url = [NSURL URLWithString:urlString];
 	
 	// Seed the activity log for this feed.
 	[aItem clearDetails];
