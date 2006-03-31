@@ -45,6 +45,7 @@
 	-(void)setLink:(NSString *)newLink;
 	-(void)setDescription:(NSString *)newDescription;
 	-(void)setLastModified:(NSDate *)newDate;
+	-(NSString *)stripHTMLTags:(NSString *)htmlString;
 	-(void)ensureTitle:(FeedItem *)item;
 	-(NSString *)guidFromItem:(FeedItem *)item;
 @end
@@ -593,7 +594,7 @@
 				if ([itemNodeName isEqualToString:@"title"])
 				{
 					NSString * newTitle = [XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]];
-					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
+					[newItem setTitle:[self stripHTMLTags:newTitle]];
 					continue;
 				}
 				
@@ -667,7 +668,7 @@
 			}
 
 			// If no link, set it to the feed link if there is one
-			if (!hasLink)
+			if (!hasLink && [self link])
 				[newItem setLink:[self link]];
 
 			// Derive any missing title
@@ -796,7 +797,11 @@
 				if ([itemNodeName isEqualToString:@"title"])
 				{
 					NSString * newTitle = [XMLParser processAttributes:[[subItemTree valueOfElement] firstNonBlankLine]];
-					[newItem setTitle:[NSString stringByRemovingHTML:newTitle validTags:titleTags]];
+					NSString * titleType = [subItemTree valueOfAttribute:@"type"];
+
+					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
+						[newItem setTitle:[self stripHTMLTags:newTitle]];
+					[newItem setTitle:newTitle];
 					continue;
 				}
 
@@ -969,17 +974,54 @@
 	return lastModified;
 }
 
+/* stripHTMLTags
+ * Strip off HTML tags from title strings. This code takes stricter approach to
+ * HTML removal because some feeds use HTML tags in the title which are actually part
+ * of the title rather than presentation data. So we only remove tags which:
+ * 
+ * 1. Have a corresponding </tag> instruction.
+ * 2. Are followed immediately by a non-space character.
+ */
+-(NSString *)stripHTMLTags:(NSString *)htmlString
+{
+	NSMutableString * rawString = [[NSMutableString alloc] initWithString:htmlString];
+	int openTagIndex = 0;
+
+	while ((openTagIndex = [rawString indexOfCharacterInString:'<' afterIndex:openTagIndex]) != NSNotFound)
+	{
+		int closeTagIndex;
+		if ((closeTagIndex = [rawString indexOfCharacterInString:'>' afterIndex:openTagIndex]) != NSNotFound)
+		{
+			if (closeTagIndex + 1 < [rawString length] && !isspace([rawString characterAtIndex:closeTagIndex+1]))
+			{
+				NSString * tagName = [htmlString substringWithRange:NSMakeRange(openTagIndex + 1, closeTagIndex - openTagIndex - 1)];
+				NSString * closingTag = [NSString stringWithFormat:@"</%@>", tagName];
+				NSRange openingTagRange = NSMakeRange(openTagIndex, closeTagIndex - openTagIndex + 1);
+				NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch range:NSMakeRange(closeTagIndex, [rawString length] - closeTagIndex)];
+				
+				if (closingTagRange.location != NSNotFound)
+				{
+					[rawString deleteCharactersInRange:closingTagRange];
+					[rawString deleteCharactersInRange:openingTagRange];
+				}
+			}			
+		}
+		++openTagIndex;
+	}
+	return rawString;
+}
+
 /* guidFromItem
  * This routine attempts to synthesize a GUID from an incomplete item that lacks an
  * ID field. Generally we'll have three things to work from: a link, a title and a
  * description. The link alone is not sufficiently unique and I've seen feeds where
  * the description is also not unique. The title field generally does vary but we need
  * to be careful since separate articles with different descriptions may have the same
- * title. The solution is to hash the link, title and description and build a GUID from those.
+ * title. The solution is to hash the link and title and build a GUID from those.
  */
 -(NSString *)guidFromItem:(FeedItem *)item
 {
-	return [NSString stringWithFormat:@"%X-%X", [[item link] hash], [[item title] hash], [[item description] hash]];
+	return [NSString stringWithFormat:@"%X-%X", [[item link] hash], [[item title] hash]];
 }
 
 /* ensureTitle
