@@ -64,7 +64,7 @@
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */
-+(NSString *)stringByRemovingHTML:(NSString *)theString validTags:(NSArray *)tagArray
++(NSString *)stringByRemovingHTML:(NSString *)theString
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
 	int maxChrs = [theString length];
@@ -118,15 +118,12 @@
 					ch = [tag characterAtIndex:++chIndex];
 	
 				NSString * tagName = [tag substringWithRange:NSMakeRange(indexOfTagName, chIndex - indexOfTagName)];
-				if (tagArray == nil || [tagArray indexOfStringInArray:tagName] != NSNotFound)
-				{
-					[aString deleteCharactersInRange:tagRange];
+				[aString deleteCharactersInRange:tagRange];
 
-					// Reset scan to the point where the tag started minus one because
-					// we bump up indexOfChr at the end of the loop.
-					indexOfChr = tagStartIndex - 1;
-					maxChrs = [aString length];
-				}
+				// Reset scan to the point where the tag started minus one because
+				// we bump up indexOfChr at the end of the loop.
+				indexOfChr = tagStartIndex - 1;
+				maxChrs = [aString length];
 				isInTag = NO;
 
 				if ([tagName isEqualToString:@"br"] && indexOfChr >= 0 && hasWord)

@@ -31,7 +31,7 @@ extern "C" {
 #ifdef SQLITE_VERSION
 # undef SQLITE_VERSION
 #endif
-#define SQLITE_VERSION         "3.2.5"
+#define SQLITE_VERSION         "3.3.4"
 
 /*
 ** The format of the version string is "X.Y.Z<trailing string>", where
@@ -48,7 +48,7 @@ extern "C" {
 #ifdef SQLITE_VERSION_NUMBER
 # undef SQLITE_VERSION_NUMBER
 #endif
-#define SQLITE_VERSION_NUMBER 3002005
+#define SQLITE_VERSION_NUMBER 3003004
 
 /*
 ** The version string is also compiled into the library so that a program
@@ -86,6 +86,13 @@ typedef struct sqlite3 sqlite3;
   typedef unsigned long long int sqlite_uint64;
 #endif
 
+/*
+** If compiling for a processor that lacks floating point support,
+** substitute integer for floating-point
+*/
+#ifdef SQLITE_OMIT_FLOATING_POINT
+# define double sqlite_int64
+#endif
 
 /*
 ** A function to close the database.
@@ -157,6 +164,7 @@ int sqlite3_exec(
 ** Return values for sqlite3_exec() and sqlite3_step()
 */
 #define SQLITE_OK           0   /* Successful result */
+/* beginning-of-error-codes */
 #define SQLITE_ERROR        1   /* SQL error or missing database */
 #define SQLITE_INTERNAL     2   /* NOT USED. Internal logic error in SQLite */
 #define SQLITE_PERM         3   /* Access permission denied */
@@ -185,6 +193,7 @@ int sqlite3_exec(
 #define SQLITE_NOTADB      26   /* File opened that is not a database file */
 #define SQLITE_ROW         100  /* sqlite3_step() has another row ready */
 #define SQLITE_DONE        101  /* sqlite3_step() has finished executing */
+/* end-of-error-codes */
 
 /*
 ** Each entry in an SQLite table has a unique integer key.  (The key is
@@ -373,8 +382,9 @@ void sqlite3_free_table(char **result);
 **
 ** We can use this text in an SQL statement as follows:
 **
-**      sqlite3_exec_printf(db, "INSERT INTO table VALUES('%q')",
-**          callback1, 0, 0, zText);
+**      char *z = sqlite3_mprintf("INSERT INTO TABLES('%q')", zText);
+**      sqlite3_exec(db, z, callback1, 0, 0);
+**      sqlite3_free(z);
 **
 ** Because the %q format string is used, the '\'' character in zText
 ** is escaped and the SQL generated is as follows:
@@ -464,11 +474,18 @@ int sqlite3_set_authorizer(
 #define SQLITE_IGNORE 2   /* Don't allow access, but don't generate an error */
 
 /*
-** Register a function that is called at every invocation of sqlite3_exec()
-** or sqlite3_prepare().  This function can be used (for example) to generate
-** a log file of all SQL executed against a database.
+** Register a function for tracing SQL command evaluation.  The function
+** registered by sqlite3_trace() is invoked at the first sqlite3_step()
+** for the evaluation of an SQL statement.  The function registered by
+** sqlite3_profile() runs at the end of each SQL statement and includes
+** information on how long that statement ran.
+**
+** The sqlite3_profile() API is currently considered experimental and
+** is subject to change.
 */
 void *sqlite3_trace(sqlite3*, void(*xTrace)(void*,const char*), void*);
+void *sqlite3_profile(sqlite3*,
+   void(*xProfile)(void*,const char*,sqlite_uint64), void*);
 
 /*
 ** This routine configures a callback function - the progress callback - that
@@ -709,6 +726,30 @@ const char *sqlite3_column_name(sqlite3_stmt*,int);
 const void *sqlite3_column_name16(sqlite3_stmt*,int);
 
 /*
+** The first parameter to the following calls is a compiled SQL statement.
+** These functions return information about the Nth column returned by 
+** the statement, where N is the second function argument.
+**
+** If the Nth column returned by the statement is not a column value,
+** then all of the functions return NULL. Otherwise, the return the 
+** name of the attached database, table and column that the expression
+** extracts a value from.
+**
+** As with all other SQLite APIs, those postfixed with "16" return UTF-16
+** encoded strings, the other functions return UTF-8. The memory containing
+** the returned strings is valid until the statement handle is finalized().
+**
+** These APIs are only available if the library was compiled with the 
+** SQLITE_ENABLE_COLUMN_METADATA preprocessor symbol defined.
+*/
+const char *sqlite3_column_database_name(sqlite3_stmt*,int);
+const void *sqlite3_column_database_name16(sqlite3_stmt*,int);
+const char *sqlite3_column_table_name(sqlite3_stmt*,int);
+const void *sqlite3_column_table_name16(sqlite3_stmt*,int);
+const char *sqlite3_column_origin_name(sqlite3_stmt*,int);
+const void *sqlite3_column_origin_name16(sqlite3_stmt*,int);
+
+/*
 ** The first parameter is a compiled SQL statement. If this statement
 ** is a SELECT statement, the Nth column of the returned result set 
 ** of the SELECT is a table column then the declared type of the table
@@ -720,7 +761,7 @@ const void *sqlite3_column_name16(sqlite3_stmt*,int);
 **
 ** And the following statement compiled:
 **
-** SELECT c1 + 1, 0 FROM t1;
+** SELECT c1 + 1, c1 FROM t1;
 **
 ** Then this routine would return the string "VARIANT" for the second
 ** result column (i==1), and a NULL pointer for the first result column
@@ -740,7 +781,7 @@ const char *sqlite3_column_decltype(sqlite3_stmt *, int i);
 **
 ** And the following statement compiled:
 **
-** SELECT c1 + 1, 0 FROM t1;
+** SELECT c1 + 1, c1 FROM t1;
 **
 ** Then this routine would return the string "INTEGER" for the second
 ** result column (i==1), and a NULL pointer for the first result column
@@ -881,6 +922,7 @@ sqlite_int64 sqlite3_column_int64(sqlite3_stmt*, int iCol);
 const unsigned char *sqlite3_column_text(sqlite3_stmt*, int iCol);
 const void *sqlite3_column_text16(sqlite3_stmt*, int iCol);
 int sqlite3_column_type(sqlite3_stmt*, int iCol);
+int sqlite3_column_numeric_type(sqlite3_stmt*, int iCol);
 
 /*
 ** The sqlite3_finalize() function is called to delete a compiled
@@ -964,9 +1006,8 @@ int sqlite3_create_function16(
 );
 
 /*
-** The next routine returns the number of calls to xStep for a particular
-** aggregate function instance.  The current call to xStep counts so this
-** routine always returns at least 1.
+** This function is deprecated.  Do not use it.  It continues to exist
+** so as not to break legacy code.  But new code should avoid using it.
 */
 int sqlite3_aggregate_count(sqlite3_context*);
 
@@ -989,6 +1030,7 @@ const void *sqlite3_value_text16(sqlite3_value*);
 const void *sqlite3_value_text16le(sqlite3_value*);
 const void *sqlite3_value_text16be(sqlite3_value*);
 int sqlite3_value_type(sqlite3_value*);
+int sqlite3_value_numeric_type(sqlite3_value*);
 
 /*
 ** Aggregate functions use the following routine to allocate
@@ -1243,7 +1285,7 @@ extern char *sqlite3_temp_directory;
 ** This functionality can be omitted from a build by defining the 
 ** SQLITE_OMIT_GLOBALRECOVER at compile time.
 */
-int sqlite3_global_recover();
+int sqlite3_global_recover(void);
 
 /*
 ** Test to see whether or not the database connection is in autocommit
@@ -1260,6 +1302,175 @@ int sqlite3_get_autocommit(sqlite3*);
 ** the statement in the first place.
 */
 sqlite3 *sqlite3_db_handle(sqlite3_stmt*);
+
+/*
+** Register a callback function with the database connection identified by the 
+** first argument to be invoked whenever a row is updated, inserted or deleted.
+** Any callback set by a previous call to this function for the same 
+** database connection is overridden.
+**
+** The second argument is a pointer to the function to invoke when a 
+** row is updated, inserted or deleted. The first argument to the callback is
+** a copy of the third argument to sqlite3_update_hook. The second callback 
+** argument is one of SQLITE_INSERT, SQLITE_DELETE or SQLITE_UPDATE, depending
+** on the operation that caused the callback to be invoked. The third and 
+** fourth arguments to the callback contain pointers to the database and 
+** table name containing the affected row. The final callback parameter is 
+** the rowid of the row. In the case of an update, this is the rowid after 
+** the update takes place.
+**
+** The update hook is not invoked when internal system tables are
+** modified (i.e. sqlite_master and sqlite_sequence).
+**
+** If another function was previously registered, its pArg value is returned.
+** Otherwise NULL is returned.
+*/
+void *sqlite3_update_hook(
+  sqlite3*, 
+  void(*)(void *,int ,char const *,char const *,sqlite_int64),
+  void*
+);
+
+/*
+** Register a callback to be invoked whenever a transaction is rolled
+** back. 
+**
+** The new callback function overrides any existing rollback-hook
+** callback. If there was an existing callback, then it's pArg value 
+** (the third argument to sqlite3_rollback_hook() when it was registered) 
+** is returned. Otherwise, NULL is returned.
+**
+** For the purposes of this API, a transaction is said to have been 
+** rolled back if an explicit "ROLLBACK" statement is executed, or
+** an error or constraint causes an implicit rollback to occur. The 
+** callback is not invoked if a transaction is automatically rolled
+** back because the database connection is closed.
+*/
+void *sqlite3_rollback_hook(sqlite3*, void(*)(void *), void*);
+
+/*
+** This function is only available if the library is compiled without
+** the SQLITE_OMIT_SHARED_CACHE macro defined. It is used to enable or
+** disable (if the argument is true or false, respectively) the 
+** "shared pager" feature.
+*/
+int sqlite3_enable_shared_cache(int);
+
+/*
+** Attempt to free N bytes of heap memory by deallocating non-essential
+** memory allocations held by the database library (example: memory 
+** used to cache database pages to improve performance).
+**
+** This function is not a part of standard builds.  It is only created
+** if SQLite is compiled with the SQLITE_ENABLE_MEMORY_MANAGEMENT macro.
+*/
+int sqlite3_release_memory(int);
+
+/*
+** Place a "soft" limit on the amount of heap memory that may be allocated by
+** SQLite within the current thread. If an internal allocation is requested 
+** that would exceed the specified limit, sqlite3_release_memory() is invoked
+** one or more times to free up some space before the allocation is made.
+**
+** The limit is called "soft", because if sqlite3_release_memory() cannot free
+** sufficient memory to prevent the limit from being exceeded, the memory is
+** allocated anyway and the current operation proceeds.
+**
+** This function is only available if the library was compiled with the 
+** SQLITE_ENABLE_MEMORY_MANAGEMENT option set.
+** memory-management has been enabled.
+*/
+void sqlite3_soft_heap_limit(int);
+
+/*
+** This routine makes sure that all thread-local storage has been
+** deallocated for the current thread.
+**
+** This routine is not technically necessary.  All thread-local storage
+** will be automatically deallocated once memory-management and
+** shared-cache are disabled and the soft heap limit has been set
+** to zero.  This routine is provided as a convenience for users who
+** want to make absolutely sure they have not forgotten something
+** prior to killing off a thread.
+*/
+void sqlite3_thread_cleanup(void);
+
+/*
+** Return meta information about a specific column of a specific database
+** table accessible using the connection handle passed as the first function 
+** argument.
+**
+** The column is identified by the second, third and fourth parameters to 
+** this function. The second parameter is either the name of the database
+** (i.e. "main", "temp" or an attached database) containing the specified
+** table or NULL. If it is NULL, then all attached databases are searched
+** for the table using the same algorithm as the database engine uses to 
+** resolve unqualified table references.
+**
+** The third and fourth parameters to this function are the table and column 
+** name of the desired column, respectively. Neither of these parameters 
+** may be NULL.
+**
+** Meta information is returned by writing to the memory locations passed as
+** the 5th and subsequent parameters to this function. Any of these 
+** arguments may be NULL, in which case the corresponding element of meta 
+** information is ommitted.
+**
+** Parameter     Output Type      Description
+** -----------------------------------
+**
+**   5th         const char*      Data type
+**   6th         const char*      Name of the default collation sequence 
+**   7th         int              True if the column has a NOT NULL constraint
+**   8th         int              True if the column is part of the PRIMARY KEY
+**   9th         int              True if the column is AUTOINCREMENT
+**
+**
+** The memory pointed to by the character pointers returned for the 
+** declaration type and collation sequence is valid only until the next 
+** call to any sqlite API function.
+**
+** If the specified table is actually a view, then an error is returned.
+**
+** If the specified column is "rowid", "oid" or "_rowid_" and an 
+** INTEGER PRIMARY KEY column has been explicitly declared, then the output 
+** parameters are set for the explicitly declared column. If there is no
+** explicitly declared IPK column, then the output parameters are set as 
+** follows:
+**
+**     data type: "INTEGER"
+**     collation sequence: "BINARY"
+**     not null: 0
+**     primary key: 1
+**     auto increment: 0
+**
+** This function may load one or more schemas from database files. If an
+** error occurs during this process, or if the requested table or column
+** cannot be found, an SQLITE error code is returned and an error message
+** left in the database handle (to be retrieved using sqlite3_errmsg()).
+**
+** This API is only available if the library was compiled with the
+** SQLITE_ENABLE_COLUMN_METADATA preprocessor symbol defined.
+*/
+int sqlite3_table_column_metadata(
+  sqlite3 *db,                /* Connection handle */
+  const char *zDbName,        /* Database name or NULL */
+  const char *zTableName,     /* Table name */
+  const char *zColumnName,    /* Column name */
+  char const **pzDataType,    /* OUTPUT: Declared data type */
+  char const **pzCollSeq,     /* OUTPUT: Collation sequence name */
+  int *pNotNull,              /* OUTPUT: True if NOT NULL constraint exists */
+  int *pPrimaryKey,           /* OUTPUT: True if column part of PK */
+  int *pAutoinc               /* OUTPUT: True if colums is auto-increment */
+);
+
+/*
+** Undo the hack that converts floating point types to integer for
+** builds on processors without floating point support.
+*/
+#ifdef SQLITE_OMIT_FLOATING_POINT
+# undef double
+#endif
 
 #ifdef __cplusplus
 }  /* End of the 'extern "C"' block */

@@ -66,6 +66,7 @@
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(BOOL)flag;
+	-(void)fixupRelativeImgTags:(NSMutableString *)text baseURL:(NSString *)baseURL;
 	-(void)printDocument;
 @end
 
@@ -1359,6 +1360,9 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
 		NSString * folderDescription = [folder feedDescription] ? [folder feedDescription] : @"";
 
+		// Do relative IMG tag fixup
+		[self fixupRelativeImgTags:articleBody baseURL:[articleLink stringByDeletingLastURLComponent]];
+	
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
 		NSMutableString * htmlArticle;
@@ -1406,6 +1410,51 @@ int articleSortHandler(Article * item1, Article * item2, void * context)
 					 textEncodingName:@"utf-8" 
 							  baseURL:[NSURL URLWithString:urlString]];
 	[htmlText release];
+}
+
+/* fixupRelativeImgTags
+ * Scans the text for <img...> tags that have relative links in the src attribute and fixes
+ * up the relative links to be absolute to the base URL.
+ */
+-(void)fixupRelativeImgTags:(NSMutableString *)text baseURL:(NSString *)baseURL
+{
+	int textLength = [text length];
+	NSRange srchRange;
+	
+	srchRange.location = 0;
+	srchRange.length = textLength;
+	while ((srchRange = [text rangeOfString:@"<img" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+	{
+		srchRange.length = textLength - srchRange.location;
+		NSRange srcRange = [text rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
+		if (srcRange.location != NSNotFound)
+		{
+			// Find the src parameter range.
+			int index = srcRange.location + srcRange.length;
+			srcRange.location += srcRange.length;
+			srcRange.length = 0;
+			while (index < textLength && [text characterAtIndex:index] != '"')
+			{
+				++index;
+				++srcRange.length;
+			}
+			
+			// Now extract the source parameter
+			NSString * srcPath = [text substringWithRange:srcRange];
+			if (srcPath && ![srcPath hasPrefix:@"http://"])
+			{
+				srcPath = [baseURL stringByAppendingURLComponent:srcPath];
+				[text replaceCharactersInRange:srcRange withString:srcPath];
+				textLength = [text length];
+			}
+			
+			// Start searching again from beyond the URL
+			srchRange.location = srcRange.location + [srcPath length];
+		}
+		else
+			++srchRange.location;
+		srchRange.length = textLength - srchRange.location;
+	}
 }
 
 /* markCurrentRead

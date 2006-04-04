@@ -120,10 +120,12 @@ static const et_info fmtinfo[] = {
   {  'u', 10, 0, etRADIX,      0,  0 },
   {  'x', 16, 0, etRADIX,      16, 1 },
   {  'X', 16, 0, etRADIX,      0,  4 },
+#ifndef SQLITE_OMIT_FLOATING_POINT
   {  'f',  0, 1, etFLOAT,      0,  0 },
   {  'e',  0, 1, etEXP,        30, 0 },
   {  'E',  0, 1, etEXP,        14, 0 },
   {  'G',  0, 1, etGENERIC,    14, 0 },
+#endif
   {  'i', 10, 1, etRADIX,      0,  0 },
   {  'n',  0, 0, etSIZE,       0,  0 },
   {  '%',  0, 0, etPERCENT,    0,  0 },
@@ -134,10 +136,10 @@ static const et_info fmtinfo[] = {
 #define etNINFO  (sizeof(fmtinfo)/sizeof(fmtinfo[0]))
 
 /*
-** If NOFLOATINGPOINT is defined, then none of the floating point
+** If SQLITE_OMIT_FLOATING_POINT is defined, then none of the floating point
 ** conversions will work.
 */
-#ifndef etNOFLOATINGPOINT
+#ifndef SQLITE_OMIT_FLOATING_POINT
 /*
 ** "*val" is a double such that 0.1 <= *val < 10.0
 ** Return the ascii code for the leading digit of *val, then
@@ -161,9 +163,17 @@ static int et_getdigit(LONGDOUBLE_TYPE *val, int *cnt){
   *val = (*val - d)*10.0;
   return digit;
 }
-#endif
+#endif /* SQLITE_OMIT_FLOATING_POINT */
 
-#define etBUFSIZE 1000  /* Size of the output buffer */
+/*
+** On machines with a small stack size, you can redefine the
+** SQLITE_PRINT_BUF_SIZE to be less than 350.  But beware - for
+** smaller values some %f conversions may go into an infinite loop.
+*/
+#ifndef SQLITE_PRINT_BUF_SIZE
+# define SQLITE_PRINT_BUF_SIZE 350
+#endif
+#define etBUFSIZE SQLITE_PRINT_BUF_SIZE  /* Size of the output buffer */
 
 /*
 ** The root program.  All variations call this core.
@@ -226,7 +236,7 @@ static int vxprintf(
   static const char spaces[] =
    "                                                                         ";
 #define etSPACESIZE (sizeof(spaces)-1)
-#ifndef etNOFLOATINGPOINT
+#ifndef SQLITE_OMIT_FLOATING_POINT
   int  exp, e2;              /* exponent of real numbers */
   double rounder;            /* Used for rounding floating point values */
   etByte flag_dp;            /* True if decimal point should be shown */
@@ -417,7 +427,7 @@ static int vxprintf(
       case etEXP:
       case etGENERIC:
         realvalue = va_arg(ap,double);
-#ifndef etNOFLOATINGPOINT
+#ifndef SQLITE_OMIT_FLOATING_POINT
         if( precision<0 ) precision = 6;         /* Set default precision */
         if( precision>etBUFSIZE/2-10 ) precision = etBUFSIZE/2-10;
         if( realvalue<0.0 ){
@@ -440,9 +450,9 @@ static int vxprintf(
         /* Normalize realvalue to within 10.0 > realvalue >= 1.0 */
         exp = 0;
         if( realvalue>0.0 ){
-          while( realvalue>1e32 && exp<=350 ){ realvalue *= 1e-32; exp+=32; }
-          while( realvalue>1e8 && exp<=350 ){ realvalue *= 1e-8; exp+=8; }
-          while( realvalue>10.0 && exp<=350 ){ realvalue *= 0.1; exp++; }
+          while( realvalue>=1e32 && exp<=350 ){ realvalue *= 1e-32; exp+=32; }
+          while( realvalue>=1e8 && exp<=350 ){ realvalue *= 1e-8; exp+=8; }
+          while( realvalue>=10.0 && exp<=350 ){ realvalue *= 0.1; exp++; }
           while( realvalue<1e-8 && exp>=-350 ){ realvalue *= 1e8; exp-=8; }
           while( realvalue<1.0 && exp>=-350 ){ realvalue *= 10.0; exp--; }
           if( exp>350 || exp<-350 ){
@@ -586,13 +596,13 @@ static int vxprintf(
         break;
       case etSQLESCAPE:
       case etSQLESCAPE2: {
-        int i, j, n, c, isnull;
+        int i, j, n, ch, isnull;
         int needQuote;
-        char *arg = va_arg(ap,char*);
-        isnull = arg==0;
-        if( isnull ) arg = (xtype==etSQLESCAPE2 ? "NULL" : "(NULL)");
-        for(i=n=0; (c=arg[i])!=0; i++){
-          if( c=='\'' )  n++;
+        char *escarg = va_arg(ap,char*);
+        isnull = escarg==0;
+        if( isnull ) escarg = (xtype==etSQLESCAPE2 ? "NULL" : "(NULL)");
+        for(i=n=0; (ch=escarg[i])!=0; i++){
+          if( ch=='\'' )  n++;
         }
         needQuote = !isnull && xtype==etSQLESCAPE2;
         n += i + 1 + needQuote*2;
@@ -604,9 +614,9 @@ static int vxprintf(
         }
         j = 0;
         if( needQuote ) bufpt[j++] = '\'';
-        for(i=0; (c=arg[i])!=0; i++){
-          bufpt[j++] = c;
-          if( c=='\'' ) bufpt[j++] = c;
+        for(i=0; (ch=escarg[i])!=0; i++){
+          bufpt[j++] = ch;
+          if( ch=='\'' ) bufpt[j++] = ch;
         }
         if( needQuote ) bufpt[j++] = '\'';
         bufpt[j] = 0;
@@ -617,7 +627,7 @@ static int vxprintf(
       case etTOKEN: {
         Token *pToken = va_arg(ap, Token*);
         if( pToken && pToken->z ){
-          (*func)(arg, pToken->z, pToken->n);
+          (*func)(arg, (char*)pToken->z, pToken->n);
         }
         length = width = 0;
         break;
@@ -718,7 +728,11 @@ static void mout(void *arg, const char *zNewText, int nNewChar){
           memcpy(pM->zText, pM->zBase, pM->nChar);
         }
       }else{
-        pM->zText = pM->xRealloc(pM->zText, pM->nAlloc);
+        char *zNew;
+        zNew = pM->xRealloc(pM->zText, pM->nAlloc);
+        if( zNew ){
+          pM->zText = zNew;
+        }
       }
     }
   }
@@ -756,7 +770,10 @@ static char *base_vprintf(
         memcpy(sM.zText, sM.zBase, sM.nChar+1);
       }
     }else if( sM.nAlloc>sM.nChar+10 ){
-      sM.zText = xRealloc(sM.zText, sM.nChar+1);
+      char *zNew = xRealloc(sM.zText, sM.nChar+1);
+      if( zNew ){
+        sM.zText = zNew;
+      }
     }
   }
   return sM.zText;
@@ -774,7 +791,7 @@ static void *printf_realloc(void *old, int size){
 ** %-conversion extensions.
 */
 char *sqlite3VMPrintf(const char *zFormat, va_list ap){
-  char zBase[1000];
+  char zBase[SQLITE_PRINT_BUF_SIZE];
   return base_vprintf(printf_realloc, 1, zBase, sizeof(zBase), zFormat, ap);
 }
 
@@ -785,7 +802,7 @@ char *sqlite3VMPrintf(const char *zFormat, va_list ap){
 char *sqlite3MPrintf(const char *zFormat, ...){
   va_list ap;
   char *z;
-  char zBase[1000];
+  char zBase[SQLITE_PRINT_BUF_SIZE];
   va_start(ap, zFormat);
   z = base_vprintf(printf_realloc, 1, zBase, sizeof(zBase), zFormat, ap);
   va_end(ap);

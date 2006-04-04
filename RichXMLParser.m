@@ -207,10 +207,6 @@
 		link = nil;
 		items = nil;
 		orderArray = nil;
-
-		// Typical HTML tags that can appear in titles.
-		titleTags = [[NSArray arrayWithObjects:@"b", @"div", @"i", @"span", @"u", @"img",
-			@"a", @"strong", @"strike", @"p", @"small", @"sub", @"sup", @"em", @"font", @"cite", nil] retain];
 	}
 	return self;
 }
@@ -1031,7 +1027,7 @@
 {
 	if (![item title] || [[item title] isBlank])
 	{
-		NSString * newTitle = [XMLParser processAttributes:[NSString stringByRemovingHTML:[item description] validTags:nil]];
+		NSString * newTitle = [XMLParser processAttributes:[NSString stringByRemovingHTML:[item description]]];
 		if ([newTitle isBlank])
 			newTitle = NSLocalizedString(@"(No title)", nil);
 		[item setTitle:newTitle];
@@ -1043,7 +1039,6 @@
  */
 -(void)dealloc
 {
-	[titleTags release];
 	[orderArray release];
 	[title release];
 	[description release];
