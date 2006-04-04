@@ -343,6 +343,9 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
+		61A9038B09E1FEB500711F67 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Japanese; path = "Japanese.lproj/Vienna Help"; sourceTree = "<group>"; };
+		61A9083609E1FFD700711F67 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
+		61A90CEE09E200CE00711F67 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spanish; path = "Spanish.lproj/Vienna Help"; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
@@ -719,6 +722,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
+				61A9FF0809E1FBD700711F67 /* Vienna Help */,
 				AA21F45D0753077300503F58 /* TODO */,
 				AA21F4510753053500503F58 /* CHANGES */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
@@ -864,6 +868,22 @@
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61A9FF0809E1FBD700711F67 /* Vienna Help */ = {
+			isa = PBXGroup;
+			children = (
+				61A9FF0B09E1FBD700711F67 /* images */,
+			);
+			name = "Vienna Help";
+			path = "Japanese.lproj/Vienna Help";
+			sourceTree = "<group>";
+		};
+		61A9FF0B09E1FBD700711F67 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		AA26F478060490F400FE7994 /* SQLite */ = {
@@ -1607,9 +1627,12 @@
 			isa = PBXVariantGroup;
 			children = (
 				AAE3AEF506570DB700A1FA1F /* English */,
-				AACE719C090B4CFB00E11979 /* German */,
 				AAB32F740982FA0D003FC2C7 /* French */,
+				AACE719C090B4CFB00E11979 /* German */,
 				AAA5814309AA526700602469 /* Italian */,
+				61A9038B09E1FEB500711F67 /* Japanese */,
+				61A9083609E1FFD700711F67 /* nl */,
+				61A90CEE09E200CE00711F67 /* Spanish */,
 				AAA5814F09AA52B400602469 /* zh_TW */,
 			);
 			name = "Vienna Help";
