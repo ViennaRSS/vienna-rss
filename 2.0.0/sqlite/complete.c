@@ -16,7 +16,7 @@
 ** separating it out, the code will be automatically omitted from
 ** static links that do not use it.
 **
-** $Id: complete.c,v 1.1 2005/08/14 17:53:21 drh Exp $
+** $Id: complete.c,v 1.3 2006/01/18 15:25:17 danielk1977 Exp $
 */
 #include "sqliteInt.h"
 #ifndef SQLITE_OMIT_COMPLETE
@@ -257,7 +257,7 @@ int sqlite3_complete16(const void *zSql){
     rc = sqlite3_complete(zSql8);
   }
   sqlite3ValueFree(pVal);
-  return rc;
+  return sqlite3ApiExit(0, rc);
 }
 #endif /* SQLITE_OMIT_UTF16 */
 #endif /* SQLITE_OMIT_COMPLETE */
