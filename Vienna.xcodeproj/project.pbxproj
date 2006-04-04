@@ -356,6 +356,9 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
+		6172B47A09E207DF001FB418 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Japanese; path = "Japanese.lproj/Vienna Help"; sourceTree = "<group>"; };
+		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
+		6172B49609E20828001FB418 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Spanish; path = "Spanish.lproj/Vienna Help"; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
@@ -1667,9 +1670,12 @@
 			isa = PBXVariantGroup;
 			children = (
 				AAE3AEF506570DB700A1FA1F /* English */,
-				AACE719C090B4CFB00E11979 /* German */,
 				AAB32F740982FA0D003FC2C7 /* French */,
+				AACE719C090B4CFB00E11979 /* German */,
 				AAA5814309AA526700602469 /* Italian */,
+				6172B47A09E207DF001FB418 /* Japanese */,
+				6172B48809E2080B001FB418 /* nl */,
+				6172B49609E20828001FB418 /* Spanish */,
 				AAA5814F09AA52B400602469 /* zh_TW */,
 			);
 			name = "Vienna Help";
