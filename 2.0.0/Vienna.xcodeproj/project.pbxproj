@@ -966,7 +966,6 @@
 		AAB8217C0999C2AC00F3C730 /* sqlite */ = {
 			isa = PBXGroup;
 			children = (
-				AA07A39909E14E780056766B /* os.c */,
 				AABFC02A09B806C70087CBB9 /* alter.c */,
 				AABFC02B09B806C70087CBB9 /* analyze.c */,
 				AABFC02C09B806C80087CBB9 /* callback.c */,
@@ -992,6 +991,7 @@
 				AAB8218C0999C2AD00F3C730 /* opcodes.c */,
 				AAB8218D0999C2AD00F3C730 /* opcodes.h */,
 				AAB8218E0999C2AD00F3C730 /* os.h */,
+				AA07A39909E14E780056766B /* os.c */,
 				AAB8218F0999C2AD00F3C730 /* os_common.h */,
 				AAB821900999C2AD00F3C730 /* os_mac.c */,
 				AAB821910999C2AD00F3C730 /* os_mac.h */,
