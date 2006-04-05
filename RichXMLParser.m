@@ -228,10 +228,6 @@
 		link = nil;
 		items = nil;
 		orderArray = nil;
-
-		// Typical HTML tags that can appear in titles.
-		titleTags = [[NSArray arrayWithObjects:@"b", @"div", @"i", @"span", @"u", @"img",
-			@"a", @"strong", @"strike", @"p", @"small", @"sub", @"sup", @"em", @"font", @"cite", nil] retain];
 	}
 	return self;
 }
@@ -1070,7 +1066,6 @@
  */
 -(void)dealloc
 {
-	[titleTags release];
 	[orderArray release];
 	[title release];
 	[description release];

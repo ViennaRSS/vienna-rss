@@ -71,7 +71,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)summaryTextFromHTML
 {
-	return [[NSString stringByRemovingHTML:self validTags:nil] normalised];
+	return [[NSString stringByRemovingHTML:self] normalised];
 }
 
 /* titleTextFromHTML
@@ -81,13 +81,13 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)titleTextFromHTML
 {
-	return [[NSString stringByRemovingHTML:self validTags:nil] firstNonBlankLine];
+	return [[NSString stringByRemovingHTML:self] firstNonBlankLine];
 }
 
 /* stringByRemovingHTML
  * Returns an autoreleased instance of the specified string with all HTML tags removed.
  */
-+(NSString *)stringByRemovingHTML:(NSString *)theString validTags:(NSArray *)tagArray
++(NSString *)stringByRemovingHTML:(NSString *)theString
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
 	int maxChrs = [theString length];
@@ -137,19 +137,16 @@ static NSMutableDictionary * entityMap = nil;
 					ch = [tag characterAtIndex:++chIndex];
 	
 				NSString * tagName = [tag substringWithRange:NSMakeRange(indexOfTagName, chIndex - indexOfTagName)];
-				if (tagArray == nil || [tagArray indexOfStringInArray:tagName] != NSNotFound)
-				{
-					[aString deleteCharactersInRange:tagRange];
+				[aString deleteCharactersInRange:tagRange];
 					
 					// Replace <br> and </p> with newlines
 					if ([tagName isEqualToString:@"br"] || [tag isEqualToString:@"<p>"] || [tag isEqualToString:@"<div>"])
 						[aString insertString:@"\n" atIndex:tagRange.location];
 
-					// Reset scan to the point where the tag started minus one because
-					// we bump up indexOfChr at the end of the loop.
-					indexOfChr = tagStartIndex - 1;
-					maxChrs = [aString length];
-				}
+				// Reset scan to the point where the tag started minus one because
+				// we bump up indexOfChr at the end of the loop.
+				indexOfChr = tagStartIndex - 1;
+				maxChrs = [aString length];
 				isInTag = NO;
 			}
 		}
