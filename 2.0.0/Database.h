@@ -99,7 +99,6 @@
 -(BOOL)deleteArticle:(int)folderId guid:(NSString *)guid;
 -(NSArray *)arrayOfUnreadArticles:(int)folderId;
 -(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString;
--(NSString *)articleText:(int)folderId guid:(NSString *)guid;
 -(void)markArticleRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markArticleFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
 -(void)markArticleDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
