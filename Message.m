@@ -128,27 +128,13 @@ NSString * MA_Field_Headlines = @"Headlines";
 -(int)parentId					{ return [[articleData objectForKey:MA_Field_Parent] intValue]; }
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
+-(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }
 
 /* containingFolder
  */
 -(Folder *)containingFolder
 {
 	return [[Database sharedDatabase] folderFromID:[self folderId]];
-}
-
-/* body
- */
--(NSString *)body
-{
-	NSString * cachedText = [articleData objectForKey:MA_Field_Text];
-	if (cachedText == nil)
-	{
-		cachedText = [[Database sharedDatabase] articleText:[self folderId] guid:[self guid]];
-		[self setBody:cachedText];
-	}
-	if (cachedText == nil)
-		cachedText = @"";
-	return cachedText;
 }
 
 /* setFolderId

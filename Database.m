@@ -1061,7 +1061,7 @@ static Database * _sharedDatabase = nil;
 			if (!read_flag)
 				adjustment = 1;
 		}
-		else if (![[self articleText:folderID guid:articleGuid] isEqualToString:articleBody])
+		else if (![[existingArticle body] isEqualToString:articleBody])
 		{
 			BOOL read_flag = [existingArticle isRead];
 			SQLResult * results;
@@ -1905,6 +1905,7 @@ static Database * _sharedDatabase = nil;
 			NSString * title = [row stringForColumn:@"title"];
 			NSString * author = [row stringForColumn:@"sender"];
 			NSString * link = [row stringForColumn:@"link"];
+			NSString * text = [row stringForColumn:@"text"];
 			BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
 			BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
 			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
@@ -1919,6 +1920,7 @@ static Database * _sharedDatabase = nil;
 			[article setAuthor:author];
 			[article setLink:link];
 			[article setDate:date];
+			[article setBody:text];
 			[article markRead:isRead];
 			[article markFlagged:isFlagged];
 			[article markDeleted:isDeleted];
@@ -2072,30 +2074,6 @@ static Database * _sharedDatabase = nil;
 		[self markArticleRead:folderId guid:guid isRead:YES];
 	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 	[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%d and message_id='%@'", isDeleted, folderId, preparedGuid];
-}
-
-/* articleText
- * Retrieve the text of the specified article.
- */
--(NSString *)articleText:(int)folderId guid:(NSString *)guid
-{
-	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-	SQLResult * results;
-	NSString * text;
-
-	// Verify we're on the right thread
-	[self verifyThreadSafety];
-	
-	results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderId, preparedGuid];
-	if (results && [results rowCount] > 0)
-	{
-		int lastRow = [results rowCount] - 1;
-		text = [[results rowAtIndex:lastRow] stringForColumn:@"text"];
-	}
-	else
-		text = @"** Cannot retrieve text for article **";
-	[results release];
-	return text;
 }
 
 /* close
