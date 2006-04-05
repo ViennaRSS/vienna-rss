@@ -148,27 +148,13 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 -(NSString *)summary			{ return [articleData objectForKey:MA_Field_Summary]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 -(NSDate *)createdDate;			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
+-(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }
 
 /* containingFolder
  */
 -(Folder *)containingFolder
 {
 	return [[Database sharedDatabase] folderFromID:[self folderId]];
-}
-
-/* body
- */
--(NSString *)body
-{
-	NSString * cachedText = [articleData objectForKey:MA_Field_Text];
-	if (cachedText == nil)
-	{
-		cachedText = [[Database sharedDatabase] articleText:[self folderId] guid:[self guid]];
-		[self setBody:cachedText];
-	}
-	if (cachedText == nil)
-		cachedText = @"";
-	return cachedText;
 }
 
 /* setFolderId

@@ -13,6 +13,7 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		AA04ED6B096226D30060E851 /* rssFeedNew.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA04ED6A096226D30060E851 /* rssFeedNew.tiff */; };
+		AA07A39A09E14E780056766B /* os.c in Sources */ = {isa = PBXBuildFile; fileRef = AA07A39909E14E780056766B /* os.c */; };
 		AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0FB5E00869110300D9CB90 /* ActivityLog.h */; };
 		AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0FB5E10869110300D9CB90 /* ActivityLog.m */; };
 		AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
@@ -218,7 +219,6 @@
 		AABFC03509B806C80087CBB9 /* analyze.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02B09B806C70087CBB9 /* analyze.c */; };
 		AABFC03609B806C80087CBB9 /* callback.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02C09B806C80087CBB9 /* callback.c */; };
 		AABFC03709B806C80087CBB9 /* complete.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02D09B806C80087CBB9 /* complete.c */; };
-		AABFC03809B806C80087CBB9 /* experimental.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC02E09B806C80087CBB9 /* experimental.c */; };
 		AABFC03909B806C80087CBB9 /* keywordhash.h in Headers */ = {isa = PBXBuildFile; fileRef = AABFC02F09B806C80087CBB9 /* keywordhash.h */; };
 		AABFC03B09B806C80087CBB9 /* prepare.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC03109B806C80087CBB9 /* prepare.c */; };
 		AABFC03D09B806C80087CBB9 /* vdbefifo.c in Sources */ = {isa = PBXBuildFile; fileRef = AABFC03309B806C80087CBB9 /* vdbefifo.c */; };
@@ -362,6 +362,7 @@
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
+		AA07A39909E14E780056766B /* os.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = os.c; sourceTree = "<group>"; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLog.h; sourceTree = "<group>"; };
 		AA0FB5E10869110300D9CB90 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLog.m; sourceTree = "<group>"; };
 		AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptTerminology; sourceTree = "<group>"; };
@@ -622,7 +623,6 @@
 		AABFC02B09B806C70087CBB9 /* analyze.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = analyze.c; sourceTree = "<group>"; };
 		AABFC02C09B806C80087CBB9 /* callback.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = callback.c; sourceTree = "<group>"; };
 		AABFC02D09B806C80087CBB9 /* complete.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = complete.c; sourceTree = "<group>"; };
-		AABFC02E09B806C80087CBB9 /* experimental.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = experimental.c; sourceTree = "<group>"; };
 		AABFC02F09B806C80087CBB9 /* keywordhash.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = keywordhash.h; sourceTree = "<group>"; };
 		AABFC03109B806C80087CBB9 /* prepare.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = prepare.c; sourceTree = "<group>"; };
 		AABFC03309B806C80087CBB9 /* vdbefifo.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = vdbefifo.c; sourceTree = "<group>"; };
@@ -990,7 +990,6 @@
 				AABFC02B09B806C70087CBB9 /* analyze.c */,
 				AABFC02C09B806C80087CBB9 /* callback.c */,
 				AABFC02D09B806C80087CBB9 /* complete.c */,
-				AABFC02E09B806C80087CBB9 /* experimental.c */,
 				AABFC02F09B806C80087CBB9 /* keywordhash.h */,
 				AABFC03109B806C80087CBB9 /* prepare.c */,
 				AABFC03309B806C80087CBB9 /* vdbefifo.c */,
@@ -1012,6 +1011,7 @@
 				AAB8218C0999C2AD00F3C730 /* opcodes.c */,
 				AAB8218D0999C2AD00F3C730 /* opcodes.h */,
 				AAB8218E0999C2AD00F3C730 /* os.h */,
+				AA07A39909E14E780056766B /* os.c */,
 				AAB8218F0999C2AD00F3C730 /* os_common.h */,
 				AAB821900999C2AD00F3C730 /* os_mac.c */,
 				AAB821910999C2AD00F3C730 /* os_mac.h */,
@@ -1440,12 +1440,12 @@
 				AABFC03509B806C80087CBB9 /* analyze.c in Sources */,
 				AABFC03609B806C80087CBB9 /* callback.c in Sources */,
 				AABFC03709B806C80087CBB9 /* complete.c in Sources */,
-				AABFC03809B806C80087CBB9 /* experimental.c in Sources */,
 				AABFC03B09B806C80087CBB9 /* prepare.c in Sources */,
 				AABFC03D09B806C80087CBB9 /* vdbefifo.c in Sources */,
 				AA710F8709BB7F3800E3EA8A /* BrowserPaneTemplate.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */,
+				AA07A39A09E14E780056766B /* os.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1707,6 +1707,7 @@
 					SQLITE_OMIT_CURSOR,
 					"HAVE_USLEEP=1",
 					"THREADSAFE=0",
+					OS_UNIX,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1767,6 +1768,7 @@
 					"HAVE_USLEEP=1",
 					"THREADSAFE=0",
 					NDEBUG,
+					OS_UNIX,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
