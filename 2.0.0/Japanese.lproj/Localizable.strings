@@ -50,7 +50,7 @@
 "Today" = "今日";
 "Yesterday" = "昨日";
 "Tomorrow" = "明日";
-"%@ at %@" = "%@ の %@";
+"%@ at %@" = "%@ %@";
 "Delete" = "削除";
 "Quit" = "終了";
 "Refresh cancelled" = "更新をキャンセル";
