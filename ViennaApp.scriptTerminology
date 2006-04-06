@@ -207,13 +207,6 @@
 					<key>Name</key>
 					<string>display style</string>
 				</dict>
-				<key>enableBloglinesSupport</key>
-				<dict>
-					<key>Description</key>
-					<string>Enable Bloglines synchronisation</string>
-					<key>Name</key>
-					<string>bloglines support</string>
-				</dict>
 				<key>enableMinimumFontSize</key>
 				<dict>
 					<key>Description</key>

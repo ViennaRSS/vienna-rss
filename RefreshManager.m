@@ -35,8 +35,7 @@ static RefreshManager * _refreshManager = nil;
 typedef enum {
 	MA_Refresh_NilType = -1,
 	MA_Refresh_Feed,
-	MA_Refresh_FavIcon,
-	MA_Refresh_BloglinesList
+	MA_Refresh_FavIcon
 } RefreshTypes;
 
 // Private functions
@@ -48,13 +47,11 @@ typedef enum {
 	-(void)pumpSubscriptionRefresh:(Folder *)folder;
 	-(void)pumpFolderIconRefresh:(Folder *)folder;
 	-(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem;
-	-(void)pumpBloglinesListRefresh;
 	-(void)beginRefreshTimer;
 	-(void)refreshPumper:(NSTimer *)aTimer;
 	-(void)addConnection:(AsyncConnection *)conn;
 	-(void)removeConnection:(AsyncConnection *)conn;
 	-(void)folderIconRefreshCompleted:(AsyncConnection *)connector;
-	-(void)bloglinesListRefreshCompleted:(AsyncConnection *)connector;
 	-(NSString *)getRedirectURL:(NSData *)data;
 @end
 
@@ -425,10 +422,6 @@ typedef enum {
 			NSAssert(false, @"Uninitialised RefreshItem in refreshArray");
 			break;
 
-		case MA_Refresh_BloglinesList:
-			[self pumpBloglinesListRefresh];
-			break;
-
 		case MA_Refresh_Feed:
 			[self pumpSubscriptionRefresh:[item folder]];
 			break;
@@ -471,7 +464,7 @@ typedef enum {
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
 	
 	// Compute the URL for this connection
-	NSString * urlString = IsBloglinesFolder(folder) ? [NSString stringWithFormat:@"http://rpc.bloglines.com/getitems?s=%d&n=1", [folder bloglinesId]] : [folder feedURL];
+	NSString * urlString = [folder feedURL];
 	NSURL * url = nil;
 	
 	if ([urlString hasPrefix:@"file:///"])
@@ -534,25 +527,6 @@ typedef enum {
 					   contextData:folder
 							   log:aItem
 					didEndSelector:@selector(folderIconRefreshCompleted:)])
-		[self addConnection:conn];
-}
-
-/* pumpBloglinesListRefresh
- * Initiate a connection to refresh our folders list with a list of subscriptions
- * in the user's bloglines account.
- *
- * TODO stevepa: Implement this.
- */
--(void)pumpBloglinesListRefresh
-{
-	AsyncConnection * conn = [[AsyncConnection alloc] init];
-	if ([conn beginLoadDataFromURL:[NSURL URLWithString:@"http://rpc.bloglines.com/listsubs"]
-							 username:nil
-							 password:nil
-							 delegate:self
-						  contextData:nil
-								  log:nil
-					   didEndSelector:@selector(bloglinesListRefreshCompleted:)])
 		[self addConnection:conn];
 }
 
@@ -866,29 +840,6 @@ typedef enum {
 		if (([folder flags] & MA_FFlag_CheckForImage))
 			[folder clearFlag:MA_FFlag_CheckForImage];
 		[iconImage release];
-	}
-	[self removeConnection:connector];
-}
-
-/* bloglinesListRefreshCompleted
- * Called when the Bloglines subscription data has been retrieved.
- */
--(void)bloglinesListRefreshCompleted:(AsyncConnection *)connector
-{
-	if ([connector status] == MA_Connect_Succeeded)
-	{
-		NSData * xmlData = [connector receivedData];
-		if (xmlData != nil)
-		{
-			XMLParser * tree = [[XMLParser alloc] init];
-			if ([tree setData:xmlData])
-			{
-				// TODO: stevepa. Implement this.
-				//XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
-				//[self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
-			}
-			[tree release];
-		}
 	}
 	[self removeConnection:connector];
 }
