@@ -237,8 +237,10 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 			[headerDetail release];
 		}
 		
-		// Get the HTTP response code and handle appropriately. Code 200 means OK, more
-		// data to come. Code 304 means the feed hasn't changed since the last refresh.
+		// Get the HTTP response code and handle appropriately:
+		// Code 200 means OK, more data to come.
+		// Code 304 means the feed hasn't changed since the last refresh.
+		// Code 410 means the feed has been intentionally removed by the server.
 		if ([httpResponse statusCode] == 200)
 		{
 			// Is this GZIP encoded?
@@ -246,6 +248,18 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 			NSString * contentEncoding = [responseHeaders valueForKey:@"Content-Encoding"];
 			if ([[contentEncoding lowercaseString] isEqualToString:@"gzip"])
 				[aItem appendDetail:NSLocalizedString(@"Article feed will be compressed", nil)];
+		}
+		else if ([httpResponse statusCode] == 410)
+		{
+			// The URL has been intentionally removed.
+			[connection cancel];
+
+			// Report to the activity log
+			[aItem setStatus:NSLocalizedString(@"Feed has been removed by the server", nil)];
+
+			// Complete this connection
+			status = MA_Connect_URLIsGone;
+			[self sendConnectionCompleteNotification];
 		}
 		else if ([httpResponse statusCode] == 304)
 		{
