@@ -1147,6 +1147,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return YES;
 }
 
+/* viewLink
+ * There's no view link address for article views. If we eventually implement a local
+ * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.
+ */
+-(NSString *)viewLink
+{
+	return nil;
+}
+
 /* searchPlaceholderString
  * Return the search field placeholder.
  */

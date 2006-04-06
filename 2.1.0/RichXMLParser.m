@@ -1017,7 +1017,7 @@
 		{
 			if (closeTagIndex + 1 < [rawString length] && !isspace([rawString characterAtIndex:closeTagIndex+1]))
 			{
-				NSString * tagName = [htmlString substringWithRange:NSMakeRange(openTagIndex + 1, closeTagIndex - openTagIndex - 1)];
+				NSString * tagName = [rawString substringWithRange:NSMakeRange(openTagIndex + 1, closeTagIndex - openTagIndex - 1)];
 				NSString * closingTag = [NSString stringWithFormat:@"</%@>", tagName];
 				NSRange openingTagRange = NSMakeRange(openTagIndex, closeTagIndex - openTagIndex + 1);
 				NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch range:NSMakeRange(closeTagIndex, [rawString length] - closeTagIndex)];

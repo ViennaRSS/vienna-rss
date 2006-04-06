@@ -86,6 +86,9 @@
 	if( inIndex >= mColumnCount || ![self valid])
 		return nil;
 	
+	if (mRowData[ inIndex ] == nil)
+		return nil;
+
 	return [NSString stringWithUTF8String:mRowData[ inIndex ]];
 }
 
