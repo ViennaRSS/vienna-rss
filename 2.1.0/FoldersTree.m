@@ -757,7 +757,9 @@
 		Folder * folder = [node folder];
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
-		[realCell setTextColor:([olv isRowSelected:[olv rowForItem:item]]) ? [NSColor whiteColor] : [NSColor blackColor]];
+		// Set grey colour if the folder was unsubscribed
+		NSColor * textColor = (IsUnsubscribed(folder) ? [NSColor grayColor] : [NSColor blackColor]);
+		[realCell setTextColor:([olv isRowSelected:[olv rowForItem:item]]) ? [NSColor whiteColor] : textColor];
 		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];

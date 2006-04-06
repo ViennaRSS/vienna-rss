@@ -23,9 +23,10 @@
 
 // Folder types
 //   MA_Root_Folder = the abstract root folder
-//   MA_Group_Folder = a folder used to group other folders
 //   MA_Smart_Folder = the articles are dynamically collected by a custom query
+//   MA_Group_Folder = a folder used to group other folders
 //   MA_RSS_Folder = folder contains RSS articles
+//   MA_Trash_Folder - a folder that contains deleted articles
 //
 #define MA_Root_Folder			-1
 #define MA_Smart_Folder			2
@@ -36,7 +37,7 @@
 // Bloglines flags
 #define MA_NonBloglines_Folder	0x0L
 
-// Macro to simplify getting folder types
+// Macros to simplify getting folder types
 #define FolderType(f)			([(f) type])
 #define IsSmartFolder(f)		(([(f) type]) == MA_Smart_Folder)
 #define IsRSSFolder(f)			(([(f) type]) == MA_RSS_Folder)
@@ -52,6 +53,10 @@
 #define MA_FFlag_CheckForImage		1
 #define MA_FFlag_NeedCredentials	2
 #define MA_FFlag_Error				4
+#define MA_FFlag_Unsubscribed		8
+
+// Macros for testing folder flags
+#define IsUnsubscribed(f)		([(f) flags] & MA_FFlag_Unsubscribed)
 
 @interface Folder : NSObject {
 	int itemId;

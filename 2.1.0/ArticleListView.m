@@ -1440,7 +1440,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 		// Do relative IMG tag fixup
 		[self fixupRelativeImgTags:articleBody baseURL:[articleLink stringByDeletingLastURLComponent]];
-	
+
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
 		NSMutableString * htmlArticle;
@@ -1476,8 +1476,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Here we ask the webview to do all the hard work. There's an idiosyncracy in loadHTMLString:baseURL: that it
 	// requires a URL to an actual file as the second parameter or it won't work.
-	// BUGBUG: If you select multiple articles that come from different folders and each one has relative links
-	//  to a different feed base, then only the first article's links will be fixed up correctly by Webkit.
 	[htmlText appendString:@"</body></html>"];
 
 	Folder * folder = [db folderFromID:folderIdToUse];

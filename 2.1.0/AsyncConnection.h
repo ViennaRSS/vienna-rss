@@ -27,7 +27,8 @@ typedef enum {
 	MA_Connect_Failed,
 	MA_Connect_NeedCredentials,
 	MA_Connect_Stopped,
-	MA_Connect_PermanentRedirect
+	MA_Connect_PermanentRedirect,
+	MA_Connect_URLIsGone
 } ConnectStatus;
 
 @interface AsyncConnection : NSObject {

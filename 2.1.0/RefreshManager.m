@@ -208,7 +208,7 @@ typedef enum {
 		Folder * folder = [foldersArray objectAtIndex:index];
 		if (IsGroupFolder(folder))
 			[self refreshSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
-		else if (IsRSSFolder(folder))
+		else if (IsRSSFolder(folder) && !IsUnsubscribed(folder))
 		{
 			if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed])
 			{
@@ -433,7 +433,7 @@ typedef enum {
 		[refreshArray removeObjectAtIndex:0];
 	}
 	
-	if (totalConnections == 0 && [refreshArray count] == 0)
+	if (totalConnections == 0 && [refreshArray count] == 0 && hasStarted)
 	{
 		[pumpTimer invalidate];
 		[pumpTimer release];
@@ -560,6 +560,14 @@ typedef enum {
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
 			[self refreshFavIcon:folder];
+	}
+	else if ([connector status] == MA_Connect_URLIsGone)
+	{
+		// We got HTTP 410 which means the feed has been intentionally
+		// removed so unsubscribe the feed.
+		[folder setFlag:MA_FFlag_Unsubscribed];
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 	}
 	else if ([connector status] == MA_Connect_Failed)
 	{
