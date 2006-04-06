@@ -54,6 +54,7 @@ NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
 NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
 NSString * MAPref_FilterMode = @"FilterMode";
 NSString * MAPref_LastRefreshDate = @"LastRefreshDate";
+NSString * MAPref_TabList = @"TabList";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;

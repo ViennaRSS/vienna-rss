@@ -19,6 +19,8 @@
 //
 
 #import "BrowserView.h"
+#import "Preferences.h"
+#import "Constants.h"
 
 // Dimensions
 static const int MA_Max_TabWidth = 180;
@@ -886,6 +888,26 @@ static const int MA_Left_Margin_Width = 10;
 	if (++index == count)
 		index = 0;
 	[self showTab:[allTabs objectAtIndex:index]];
+}
+
+/* saveOpenTabs
+ * Persist the URLs of each open tab to the preferences so they can be
+ * restored when we reload.
+ */
+-(void)saveOpenTabs
+{
+	NSMutableArray * tabLinks = [[NSMutableArray alloc] initWithCapacity:[allTabs count]];
+	int count = [allTabs count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		NSView<BaseView> * theView = [[allTabs objectAtIndex:index] associatedView];
+		NSString * tabLink = [theView viewLink];
+		if (tabLink != nil)
+			[tabLinks addObject:tabLink];
+	}
+	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
 }
 
 /* dealloc

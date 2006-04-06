@@ -80,6 +80,7 @@
 	-(void)updateSearchPlaceholder;
 	-(FoldersTree *)foldersTree;
 	-(void)updateCloseCommands;
+	-(void)loadOpenTabs;
 	-(NSDictionary *)registrationDictionaryForGrowl;
 @end
 
@@ -224,6 +225,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	
     [[searchField cell] setSearchMenuTemplate:cellMenu];
 	[cellMenu release];
+
+	// Tooltips
+	[filtersPopupMenu setToolTip:NSLocalizedString(@"Filter articles", nil)];
 	
 	// Add Scripts menu if we have any scripts
 	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
@@ -294,6 +298,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	{
 		[foldersTree initialiseFoldersTree];
 		[mainArticleView initialiseArticleView];
+		[self loadOpenTabs];
 		doneSafeInit = YES;
 	}
 }
@@ -428,6 +433,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Put back the original app icon
 	[NSApp setApplicationIconImage:originalIcon];
 	
+	// Save the open tabs
+	[browserView saveOpenTabs];
+
 	// Remember the article list column position, sizes, etc.
 	[mainArticleView saveTableSettings];
 	[foldersTree saveFolderSettings];
@@ -852,6 +860,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 									options:lOptions
 			 additionalEventParamDescriptor:NULL
 						  launchIdentifiers:NULL];
+}
+
+/* loadOpenTabs
+ * Opens separate tabs for each of the URLs persisted to the TabList preference.
+ */
+-(void)loadOpenTabs
+{
+	NSArray * tabLinks = [[Preferences standardPreferences] arrayForKey:MAPref_TabList];
+	NSEnumerator * enumerator = [tabLinks objectEnumerator];
+	NSString * tabLink;
+	
+	while ((tabLink = [enumerator nextObject]) != nil)
+		[self createNewTab:[NSURL URLWithString:tabLink] inBackground:YES];
 }
 
 /* setImageForMenuCommand

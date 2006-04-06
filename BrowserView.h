@@ -30,6 +30,7 @@
 	-(void)handleMakeTextLarger;
 	-(BOOL)canGoForward;
 	-(BOOL)canGoBack;
+	-(NSString *)viewLink;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
 @end
 
@@ -63,4 +64,5 @@
 -(void)showTab:(BrowserTab *)theTab;
 -(void)showPreviousTab;
 -(void)showNextTab;
+-(void)saveOpenTabs;
 @end

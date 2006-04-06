@@ -18,6 +18,7 @@ Thanks!
 - Added "Summary" field which shows the first part of the description.
 - In condensed reading mode with the pane on the right, the headline fields can now be configured.
 - Added "Filter By" to allow articles to be filtered in the article list by all, unread or date.
+- Persist open tabs when Vienna exits and restore them when it restarts.
 
 2.0.3.2031
 ----------

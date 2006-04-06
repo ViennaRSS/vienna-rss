@@ -55,6 +55,7 @@ extern NSString * MAPref_CachedArticleGUID;
 extern NSString * MAPref_ArticleSortDescriptors;
 extern NSString * MAPref_FilterMode;
 extern NSString * MAPref_LastRefreshDate;
+extern NSString * MAPref_TabList;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;

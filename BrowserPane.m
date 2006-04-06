@@ -104,6 +104,14 @@
 	[webPane setController:controller];
 }
 
+/* viewLink
+ * Return the URL being displayed as a string.
+ */
+-(NSString *)viewLink
+{
+	return [[self url] absoluteString];
+}
+
 /* setTab
  * Set the tab associated with this browser view. This is a shallow
  * reference.
