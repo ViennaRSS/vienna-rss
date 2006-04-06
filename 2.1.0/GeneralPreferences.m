@@ -30,7 +30,6 @@
 	-(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 	-(void)setDefaultLinksHandler:(NSURL *)pathToNewHandler;
 	-(void)controlTextDidEndEditing:(NSNotification *)notification;
-	-(void)updateBloglinesUIState;
 	-(void)refreshLinkHandler;
 	-(IBAction)handleLinkSelector:(id)sender;
 	-(void)updateDownloadsPopUp:(NSString *)downloadFolderPath;

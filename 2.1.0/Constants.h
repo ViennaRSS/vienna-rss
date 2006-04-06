@@ -39,8 +39,6 @@ extern NSString * MAPref_ScriptsFolder;
 extern NSString * MAPref_FolderStates;
 extern NSString * MAPref_BacktrackQueueSize;
 extern NSString * MAPref_ReadingPaneOnRight;
-extern NSString * MAPref_EnableBloglinesSupport;
-extern NSString * MAPref_BloglinesEmailAddress;
 extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_SelectionChangeInterval;
 extern NSString * MAPref_OpenLinksInVienna;
