@@ -554,13 +554,13 @@
 {
 	BOOL success = YES;
 
-	// Allocate an items array
-	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
-	items = [[NSMutableArray alloc] initWithCapacity:10];
-	
 	// Iterate through the channel items
 	int count = [feedTree countOfChildren];
 	int index;
+
+	// Allocate an items array
+	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
+	items = [[NSMutableArray alloc] initWithCapacity:count];
 
 	for (index = 0; index < count; ++index)
 	{
@@ -673,12 +673,13 @@
 			// If no explicit GUID is specified, use a concatenated hash of attributes for the GUID
 			if (!hasGUID)
 				[newItem setGuid:[self guidFromItem:newItem]];
-            
+
 			// Add this item in the proper location in the array
-			int indexOfItem = itemIdentifier ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
-			if (indexOfItem == NSNotFound)
-				indexOfItem = [items count];
-			[items insertObject:newItem atIndex:indexOfItem];
+			int indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
+			if (indexOfItem == NSNotFound || indexOfItem >= [items count])
+				[items addObject:newItem];
+			else
+				[items insertObject:newItem atIndex:indexOfItem];
 			[newItem release];
 		}
 	}
