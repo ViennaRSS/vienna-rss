@@ -722,7 +722,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				61A9FF0809E1FBD700711F67 /* Vienna Help */,
 				AA21F45D0753077300503F58 /* TODO */,
 				AA21F4510753053500503F58 /* CHANGES */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
@@ -868,22 +867,6 @@
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		61A9FF0809E1FBD700711F67 /* Vienna Help */ = {
-			isa = PBXGroup;
-			children = (
-				61A9FF0B09E1FBD700711F67 /* images */,
-			);
-			name = "Vienna Help";
-			path = "Japanese.lproj/Vienna Help";
-			sourceTree = "<group>";
-		};
-		61A9FF0B09E1FBD700711F67 /* images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		AA26F478060490F400FE7994 /* SQLite */ = {
