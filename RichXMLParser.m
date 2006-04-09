@@ -648,8 +648,7 @@
 				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
-					NSString * linkName = [[subItemTree valueOfElement] trim];
-					[newItem setLink:linkName];
+					[newItem setLink:[XMLParser processAttributes:[subItemTree valueOfElement]]];
 					hasLink = YES;
 					continue;
 				}
