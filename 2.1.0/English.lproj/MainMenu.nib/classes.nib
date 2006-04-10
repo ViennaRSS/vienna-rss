@@ -127,7 +127,12 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {
-            ACTIONS = {saveAsDraft = id; sendMessage = id; }; 
+            ACTIONS = {
+                makeTextLarger = id; 
+                makeTextSmaller = id; 
+                saveAsDraft = id; 
+                sendMessage = id; 
+            }; 
             CLASS = FirstResponder; 
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
