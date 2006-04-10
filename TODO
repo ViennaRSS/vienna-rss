@@ -43,7 +43,6 @@ Wishlist
 - Show "New..." commands on folder popup menu.
 - Ad-blocking for HTML view. (http://braden.machacking.net/)
 - Manual sorting of folders or arrange folders by other means.
-- Dedicated button to mark all read.
 - Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Allow smart folder criteria to match the beginning and end of strings as well as 'contains'.

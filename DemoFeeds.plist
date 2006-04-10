@@ -19,8 +19,13 @@
 	</dict>
 	<key>The Unofficial Apple Weblog (TUAW)</key>
 	<dict>
-		<key>URL></key>
+		<key>URL</key>
 		<string>http://www.tuaw.com/rss.xml</string>
 	</dict>
+	<key>Vienna Developer Community</key>
+	<dict>
+		<key>URL</key>
+		<string>http://www.opencommunity.co.uk/blog/atom.xml</string>
+	</dict>	
 </dict>
 </plist>

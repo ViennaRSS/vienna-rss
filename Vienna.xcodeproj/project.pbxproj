@@ -145,6 +145,7 @@
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAA3AF0906338A00006735EB /* SearchFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA3AF0706338A00006735EB /* SearchFolder.h */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
+		AAA5574309E916F900C87343 /* markAllRead.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAA5574209E916F900C87343 /* markAllRead.tiff */; };
 		AAA5775209A47CF900602469 /* RenameFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA5775009A47CF800602469 /* RenameFolder.h */; };
 		AAA5775309A47CF900602469 /* RenameFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA5775109A47CF800602469 /* RenameFolder.m */; };
 		AAA5775B09A47DB700602469 /* RenameFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAA5775A09A47DB700602469 /* RenameFolder.nib */; };
@@ -520,6 +521,7 @@
 		AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewExtensions.m; sourceTree = "<group>"; };
 		AAA3AF0706338A00006735EB /* SearchFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFolder.h; sourceTree = "<group>"; };
 		AAA3AF0806338A00006735EB /* SearchFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFolder.m; sourceTree = "<group>"; };
+		AAA5574209E916F900C87343 /* markAllRead.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = markAllRead.tiff; sourceTree = "<group>"; };
 		AAA5774609A46EC500602469 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/RenameFolder.nib; sourceTree = "<group>"; };
 		AAA5775009A47CF800602469 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RenameFolder.h; sourceTree = "<group>"; };
 		AAA5775109A47CF800602469 /* RenameFolder.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = RenameFolder.m; sourceTree = "<group>"; };
@@ -866,6 +868,7 @@
 				AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */,
 				AA6321500885F0BB006382D3 /* comments.tiff */,
 				AAE7A95F086BBA1F009A487E /* refresh.tiff */,
+				AAA5574209E916F900C87343 /* markAllRead.tiff */,
 				AA71097509BA77B700E3EA8A /* newRefresh.tiff */,
 				AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */,
 				AA32E2A30940A9970034D9CC /* folderError.tiff */,
@@ -1333,6 +1336,7 @@
 				AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */,
 				AAA7F4EE09D40CDA007D0760 /* filterIcon.tiff in Resources */,
 				AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */,
+				AAA5574309E916F900C87343 /* markAllRead.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
