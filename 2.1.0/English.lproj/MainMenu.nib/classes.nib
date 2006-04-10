@@ -149,6 +149,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 folderHeader = TexturedHeader; 
+                markAllReadButton = NSButton; 
                 newSubButton = NSButton; 
                 outlineView = FolderView; 
                 popupMenu = PopupButton; 

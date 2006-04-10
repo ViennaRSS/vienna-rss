@@ -19,6 +19,16 @@ Thanks!
 - In condensed reading mode with the pane on the right, the headline fields can now be configured.
 - Added "Filter By" to allow articles to be filtered in the article list by all, unread or date.
 - Persist open tabs when Vienna exits and restore them when it restarts.
+- Handles HTTP 410 to mark a feed as unsubscribed.
+- Add button to Mark All Read the selected feeds.
+
+2.0.4.2033
+----------
+- Parse entity characters in RSS article links.
+
+2.0.3.2032
+----------
+- Minor article cache tweak and bug fixes.
 
 2.0.3.2031
 ----------

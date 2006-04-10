@@ -33,6 +33,7 @@
 	IBOutlet PopupButton * popupMenu;
 	IBOutlet NSButton * newSubButton;
 	IBOutlet NSButton * refreshButton;
+	IBOutlet NSButton * markAllReadButton;
 	IBOutlet TexturedHeader * folderHeader;
 
 	AppController * controller;
