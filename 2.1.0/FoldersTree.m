@@ -118,7 +118,7 @@
 	[outlineView setAutoresizesOutlineColumn:NO];
 
 	// Register for dragging
-	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, NSStringPboardType, nil]]; 
+	[outlineView registerForDraggedTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]]; 
 	[outlineView setVerticalMotionCanBeginDrag:YES];
 	
 	// Make sure selected row is visible
@@ -833,7 +833,7 @@
 -(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(int)index
 {
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, NSStringPboardType, MA_PBoardType_RSSSource, nil]]; 
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]]; 
 	NSDragOperation dragType = (type == MA_PBoardType_FolderList) ? NSDragOperationMove : NSDragOperationCopy;
 
 	TreeNode * node = (TreeNode *)item;
@@ -1011,7 +1011,7 @@
 -(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)childIndex
 { 
 	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, NSStringPboardType, nil]];
+	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]];
 
 	// Get index of folder at drop location. If this is a group folder then
 	// it gets used as the parent
@@ -1082,6 +1082,31 @@
 			}
 		}
 
+		// If parent was a group, expand it now
+		if (parentID != MA_Root_Folder)
+			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+		return YES;
+	}
+	if (type == @"WebURLsWithTitlesPboardType")
+	{
+		NSArray * webURLsWithTitles = [pb propertyListForType:type];
+		NSArray * arrayOfURLs = [webURLsWithTitles objectAtIndex:0];
+		NSArray * arrayOfTitles = [webURLsWithTitles objectAtIndex:1];
+		int count = [arrayOfURLs count];
+		int index;
+		
+		for (index = 0; index < count; ++index)
+		{
+			NSString * feedTitle = [arrayOfTitles objectAtIndex:index];
+			NSString * feedURL = [arrayOfURLs objectAtIndex:index];
+			NSURL * draggedURL = [NSURL URLWithString:feedURL];
+			if (([draggedURL scheme] != nil) && [[draggedURL scheme] isEqualToString:@"feed"])
+				feedURL = [NSString stringWithFormat:@"http:%@", [draggedURL resourceSpecifier]];
+			
+			if ([db folderFromFeedURL:feedURL] == nil)
+				[db addRSSFolder:feedTitle underParent:parentID subscriptionURL:feedURL];
+		}
+		
 		// If parent was a group, expand it now
 		if (parentID != MA_Root_Folder)
 			[outlineView expandItem:[rootNode nodeFromID:parentID]];
