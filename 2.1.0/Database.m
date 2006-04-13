@@ -1992,7 +1992,7 @@ static Database * _sharedDatabase = nil;
 	if (folder != nil && [folder unreadCount] > 0)
 	{
 		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%d", folderId];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%d and read_flag=0", folderId];
 		if (results)
 		{
 			int count = [folder unreadCount];
