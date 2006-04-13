@@ -1000,8 +1000,10 @@
 					[rawString deleteCharactersInRange:closingTagRange];
 					[rawString deleteCharactersInRange:openingTagRange];
 				}
+				continue;
 			}			
 		}
+		++openTagIndex;
 	}
 	return rawString;
 }
