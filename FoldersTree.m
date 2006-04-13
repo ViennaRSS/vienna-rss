@@ -105,6 +105,9 @@
 	// Set header
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
 
+	// Set background colour
+	[outlineView setBackgroundColor:[NSColor colorWithDeviceRed:(228.0f/255.0f) green:(237.0f/255.0f) blue:(246.0f/255.0f) alpha:1.0f]];
+		
 	// Allow double-click a node to edit the node
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
