@@ -32,6 +32,7 @@
 	-(NSString *)stringByDeletingLastURLComponent;
 	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
 	-(BOOL)hasCharacter:(char)ch;
+	-(NSString *)firstWord;
 	-(NSString *)convertStringToValidPath;
 	-(NSComparisonResult)numericCompare:(NSString *)aString;
 	-(NSString *)baseURL;
