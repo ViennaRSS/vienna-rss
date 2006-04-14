@@ -1020,14 +1020,14 @@
 				NSString * tagName = [rawString substringWithRange:NSMakeRange(openTagIndex + 1, closeTagIndex - openTagIndex - 1)];
 				NSString * closingTag = [NSString stringWithFormat:@"</%@>", [tagName firstWord]];
 				NSRange openingTagRange = NSMakeRange(openTagIndex, closeTagIndex - openTagIndex + 1);
-				NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch range:NSMakeRange(closeTagIndex, [rawString length] - closeTagIndex)];
+				NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(closeTagIndex, [rawString length] - closeTagIndex)];
 				
 				if (closingTagRange.location != NSNotFound)
 				{
 					[rawString deleteCharactersInRange:closingTagRange];
 					[rawString deleteCharactersInRange:openingTagRange];
+					continue;
 				}
-				continue;
 			}			
 		}
 		++openTagIndex;
