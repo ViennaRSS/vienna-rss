@@ -999,8 +999,8 @@
 				{
 					[rawString deleteCharactersInRange:closingTagRange];
 					[rawString deleteCharactersInRange:openingTagRange];
+					continue;
 				}
-				continue;
 			}			
 		}
 		++openTagIndex;
