@@ -8,19 +8,22 @@ Thanks!
 
 2.1.0.2100
 ----------
+(Contributions from Jeffrey Johnson and David Kocher).
 - Added "Increase text size" and "Decrease Text Size" for browser view.
 - Changed key combination for "Cancel Refreshing" to control-command-s to make command-"-" available for text size.
 - Added "Send Link" functionality for article view.
 - Add address bar and refresh, back and forward buttons at the top of the browser web pages.
 - Add -profile command line option to support custom profiles (needed for Portable Vienna).
-- Added "Refresh Folder Images" command. (Code contributed by Jeffrey Johnson).
-- Sort article list by multiple columns, saving the order in which columns were sorted. (Code contributed by Jeffrey Johnson).
+- Added "Refresh Folder Images" command.
+- Sort article list by multiple columns, saving the order in which columns were sorted.
 - Added "Summary" field which shows the first part of the description.
 - In condensed reading mode with the pane on the right, the headline fields can now be configured.
 - Added "Filter By" to allow articles to be filtered in the article list by all, unread or date.
 - Persist open tabs when Vienna exits and restore them when it restarts.
 - Handles HTTP 410 to mark a feed as unsubscribed.
 - Add button to Mark All Read the selected feeds.
+- Unread articles marked as bold.
+- Don't select first article when switching folders.
 
 2.0.4.2033
 ----------

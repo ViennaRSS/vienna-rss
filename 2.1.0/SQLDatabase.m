@@ -55,7 +55,9 @@
 	if (sqlite3_open( [mPath fileSystemRepresentation], &mDatabase) == SQLITE_OK)
 	{
 		[[self performQuery:@"pragma cache_size=2000;"] release];
-		[[self performQuery:@"pragma synchronous=1;"] release];
+		[[self performQuery:@"pragma default_cache_size=30000;"] release];
+		[[self performQuery:@"pragma temp_store=1;"] release];
+		[[self performQuery:@"pragma auto_vacuum=0;"] release];
 		return YES;
 	}
 	return NO;
