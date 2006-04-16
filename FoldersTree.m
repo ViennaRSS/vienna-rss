@@ -1017,18 +1017,9 @@
 	NSPasteboard * pb = [info draggingPasteboard]; 
 	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]];
 
-	// Get index of folder at drop location. If this is a group folder then
-	// it gets used as the parent
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : rootNode;
-	if (childIndex != NSOutlineViewDropOnItemIndex)
-	{
-		if (childIndex >= [node countOfChildren])
-			childIndex = [node countOfChildren] - 1;
-		NSAssert(childIndex >= 0, @"childIndex not expected to go < 0 at this point");
-		node = [node childByIndex:childIndex];
-	}
 
-	int parentID = (IsGroupFolder([node folder])) ? [[node folder] itemId] : [[node folder] parentId];
+	int parentID = [node nodeId];
 
 	// Check the type 
 	if (type == NSStringPboardType)
