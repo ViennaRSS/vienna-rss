@@ -2222,8 +2222,42 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[controller showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
--(void)handleMakeTextSmaller{}
--(void)handleMakeTextLarger{}
+/* makeTextSmaller
+ * Make text size smaller in the article pane.
+ * In the future, we may want this to make text size smaller in the article list instead.
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	[articleText makeTextSmaller:nil];
+}
+
+/* makeTextLarge
+ * Make text size larger in the article pane.
+ * In the future, we may want this to make text size larger in the article list instead.
+*/
+-(IBAction)makeTextLarger:(id)sender
+{
+	[articleText makeTextLarger:nil];
+}
+
+/* validateMenuItem
+ * This is our override where we handle item validation for the
+ * commands that we own.
+ */
+-(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	SEL	theAction = [menuItem action];
+	if (theAction == @selector(makeTextLarger:))
+	{
+		return [articleText canMakeTextLarger];
+	}
+	else if (theAction == @selector(makeTextSmaller:))
+	{
+		return [articleText canMakeTextSmaller];
+	}
+	
+	return YES;
+}
 
 /* dealloc
  * Clean up behind ourself.

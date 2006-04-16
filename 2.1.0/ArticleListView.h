@@ -74,6 +74,10 @@
 	ExtDateFormatter * extDateFormatter;
 }
 
+// Menu action items
+-(IBAction)makeTextLarger:(id)sender;
+-(IBAction)makeTextSmaller:(id)sender;
+
 // Public functions
 -(void)setController:(AppController *)theController;
 -(void)initialiseArticleView;
