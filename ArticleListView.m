@@ -173,9 +173,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Disable caching
 	[articleText setMaintainsBackForwardList:NO];
 	[[articleText backForwardList] setPageCacheSize:0];
-
-	// Do safe initialisation
-	[controller doSafeInitialisation];
 }
 
 /* setController
@@ -202,7 +199,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Create condensed view attribute dictionaries
 	selectionDict = [[NSMutableDictionary alloc] init];
+	unreadTopLineDict = [[NSMutableDictionary alloc] init];
 	topLineDict = [[NSMutableDictionary alloc] init];
+	unreadTopLineSelectionDict = [[NSMutableDictionary alloc] init];
 	middleLineDict = [[NSMutableDictionary alloc] init];
 	linkLineDict = [[NSMutableDictionary alloc] init];
 	bottomLineDict = [[NSMutableDictionary alloc] init];
@@ -348,6 +347,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	folderArrayOfArticles = nil;
 	currentSelectedRow = -1;
 	articleListFont = nil;
+	articleListUnreadFont = nil;
 
 	// Pre-set sort to what was saved in the preferences
 	NSArray * sortDescriptors = [prefs articleSortDescriptors];
@@ -627,9 +627,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)setTableViewFont
 {
 	[articleListFont release];
-	
+	[articleListUnreadFont release];
+
 	Preferences * prefs = [Preferences standardPreferences];
 	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
+	articleListUnreadFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont];
 
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -638,6 +640,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[topLineDict setObject:style forKey:NSParagraphStyleAttributeName];
 	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
 
+	[unreadTopLineDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
+	[unreadTopLineDict setObject:style forKey:NSParagraphStyleAttributeName];
+	[unreadTopLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
+	
 	[middleLineDict setObject:articleListFont forKey:NSFontAttributeName];
 	[middleLineDict setObject:style forKey:NSParagraphStyleAttributeName];
 	[middleLineDict setObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
@@ -655,6 +661,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[selectionDict setObject:style forKey:NSParagraphStyleAttributeName];
 	[selectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 
+	[unreadTopLineSelectionDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
+	[unreadTopLineSelectionDict setObject:style forKey:NSParagraphStyleAttributeName];
+	[unreadTopLineSelectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	
 	[self updateArticleListRowHeight];
 	[style release];
 }
@@ -1325,7 +1335,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self reloadArrayOfArticles];
 		[self sortArticles];
 		[articleList reloadData];
-		[self selectArticleAfterReload];
+		[articleList scrollRowToVisible:0];
 	}
 }
 
@@ -1594,7 +1604,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 		if ([[db fieldByName:MA_Field_Subject] visible])
 		{
-			NSDictionary * topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
+			NSDictionary * topLineDictPtr;
+
+			if ([theArticle isRead])
+				topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
+			else
+				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
 			NSString * topString = [NSString stringWithFormat:@"%@\n", [theArticle title]];
 			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:topString attributes:topLineDictPtr] autorelease]];
 		}
@@ -1672,10 +1687,17 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
-	if (![aCell isKindOfClass:[NSImageCell class]])
+	if (tableLayout == MA_Table_Layout)
 	{
-		[aCell setTextColor:[NSColor blackColor]];
-		[aCell setFont:articleListFont];
+		if (![aCell isKindOfClass:[NSImageCell class]])
+		{
+			[aCell setTextColor:[NSColor blackColor]];
+			Article * theArticle = [currentArrayOfArticles objectAtIndex:rowIndex];
+			if (![theArticle isRead])
+				[aCell setFont:articleListUnreadFont];
+			else
+				[aCell setFont:articleListFont];
+		}
 	}
 }
 
@@ -2220,8 +2242,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[currentArrayOfArticles release];
 	[backtrackArray release];
 	[articleListFont release];
+	[articleListUnreadFont release];
 	[guidOfArticleToSelect release];
+	[unreadTopLineSelectionDict release];
 	[selectionDict release];
+	[unreadTopLineDict release];
 	[topLineDict release];
 	[middleLineDict release];
 	[linkLineDict release];

@@ -61,6 +61,7 @@
 	BOOL isBacktracking;
 	NSString * guidOfArticleToSelect;
 	NSFont * articleListFont;
+	NSFont * articleListUnreadFont;
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
 	NSMutableDictionary * selectionDict;
@@ -68,6 +69,8 @@
 	NSMutableDictionary * linkLineDict;
 	NSMutableDictionary * middleLineDict;
 	NSMutableDictionary * bottomLineDict;
+	NSMutableDictionary * unreadTopLineDict;
+	NSMutableDictionary * unreadTopLineSelectionDict;
 	ExtDateFormatter * extDateFormatter;
 }
 
