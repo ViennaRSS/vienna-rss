@@ -486,22 +486,6 @@
 	return NO;
 }
 
-/* handleMakeTextLarger
- * Increase text size in the browser
- */
--(void)handleMakeTextLarger
-{
-	[webPane makeTextLarger:self];
-}
-
-/* handleMakeTextSmaller
- * Decrease text size in the browser
- */
--(void)handleMakeTextSmaller
-{
-	[webPane makeTextSmaller:self];
-}
-
 /* dealloc
  * Clean up when the view is being deleted.
  */

@@ -131,8 +131,6 @@
 -(IBAction)showDownloadsWindow:(id)sender;
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)mailLinkToArticlePage:(id)sender;
--(IBAction)decreaseFontSize:(id)sender;
--(IBAction)increaseFontSize:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
 -(IBAction)changeFiltering:(id)sender;
 

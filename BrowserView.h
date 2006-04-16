@@ -26,8 +26,6 @@
 	-(void)printDocument:(id)sender;
 	-(void)handleGoForward:(id)sender;
 	-(void)handleGoBack:(id)sender;
-	-(void)handleMakeTextSmaller;
-	-(void)handleMakeTextLarger;
 	-(BOOL)canGoForward;
 	-(BOOL)canGoBack;
 	-(NSString *)viewLink;

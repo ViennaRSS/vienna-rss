@@ -56,8 +56,6 @@
 -(NSURL *)url;
 -(void)setTab:(BrowserTab *)newTab;
 -(BOOL)isLoading;
--(void)handleMakeTextSmaller;
--(void)handleMakeTextLarger;
 -(BOOL)canGoBack;
 -(BOOL)canGoForward;
 -(void)handleStopLoading:(id)sender;

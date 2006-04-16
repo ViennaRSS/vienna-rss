@@ -2221,22 +2221,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[theView performSelector:@selector(handleStopLoading:)];
 }
 
-/* decreaseFontSize
- * Decrases the text size in the current browser tab
- */
--(IBAction)decreaseFontSize:(id)sender
-{
-	[[browserView activeTabView] handleMakeTextSmaller];
-}
-
-/* increaseFontSize
- * decrases the text size in the current browser tab
- */
--(IBAction)increaseFontSize:(id)sender;
-{
-	[[browserView activeTabView] handleMakeTextLarger];
-}
-
 /* updateAlternateMenuTitle
  * Set the appropriate title for the menu items that override browser preferences
  * For future implementation, perhaps we can save a lot of code by
@@ -2635,16 +2619,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[menuItem setTitle:NSLocalizedString(@"Send Link", nil)];
 		
 		return (thisArticle != nil && isMainWindowVisible && isArticleView);
-	}
-	else if (theAction == @selector(increaseFontSize:))
-	{
-		NSView<BaseView> * theView = [browserView activeTabView];
-		return ([theView isKindOfClass:[BrowserPane class]]) && ![(BrowserPane *)theView isLoading];
-	}
-	else if (theAction == @selector(decreaseFontSize:))
-	{
-		NSView<BaseView> * theView = [browserView activeTabView];
-		return ([theView isKindOfClass:[BrowserPane class]]) && ![(BrowserPane *)theView isLoading];
 	}
 	
 	return YES;

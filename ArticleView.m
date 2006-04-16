@@ -307,6 +307,25 @@
 	[printView print:self];
 }
 
+/* validateMenuItem
+ * This is our override where we handle item validation for the
+ * commands that we own.
+ */
+-(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	SEL	theAction = [menuItem action];
+	if (theAction == @selector(makeTextLarger:))
+	{
+		return [self canMakeTextLarger];
+	}
+	else if (theAction == @selector(makeTextSmaller:))
+	{
+		return [self canMakeTextSmaller];
+	}
+	
+	return YES;
+}
+
 /* dealloc
  * Clean up behind ourself.
  */
