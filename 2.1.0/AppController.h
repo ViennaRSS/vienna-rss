@@ -76,7 +76,6 @@
 	NSTimer * checkTimer;
 	int lastCountOfUnread;
 	BOOL growlAvailable;
-	NSString * appName;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 }
@@ -150,7 +149,6 @@
 -(BOOL)selectFolder:(int)folderId;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
--(void)doSafeInitialisation;
 -(void)clearUndoStack;
 -(NSString *)searchString;
 -(void)setSearchString:(NSString *)newSearchString;

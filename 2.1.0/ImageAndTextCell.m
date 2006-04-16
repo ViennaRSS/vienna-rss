@@ -210,7 +210,7 @@
 		NSString * number = [NSString stringWithFormat:@"%i", count];
 
 		// Use the current font point size as a guide for the count font size
-		float pointSize = [[self font] pointSize];
+		float pointSize = [[self font] pointSize] - 2.0;
 
 		// Create attributes for drawing the count.
 		NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:pointSize],

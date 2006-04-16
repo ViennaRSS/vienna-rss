@@ -119,18 +119,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	Preferences * prefs = [Preferences standardPreferences];
 
-	// Find out who we are. The localised info in InfoStrings.plist allow
-	// changing the app name if so desired.
-	NSBundle * appBundle = [NSBundle mainBundle];
-	appName = nil;
-	if (appBundle != nil)
-	{
-		NSDictionary * fileAttributes = [appBundle localizedInfoDictionary];
-		appName = [fileAttributes objectForKey:@"CFBundleName"];
-	}
-	if (appName == nil)
-		appName = @"Vienna";
-
 	// Set the primary view of the browser view
 	BrowserTab * primaryTab = [browserView setPrimaryTabView:mainArticleView];
 	[browserView setTabTitle:primaryTab title:NSLocalizedString(@"Articles", nil)];
@@ -140,7 +128,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Set the delegates and title
 	[mainWindow setDelegate:self];
-	[mainWindow setTitle:appName];
+	[mainWindow setTitle:[self appName]];
 	[NSApp setDelegate:self];
 
 	// Register a bunch of notifications
@@ -252,9 +240,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	
 	// Fix up the Close commands
 	[self updateCloseCommands];
-	
-	// Do safe initialisation.
-	[self doSafeInitialisation];
 }
 
 /* localiseMenus
@@ -287,21 +272,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	}
 }
 
-/* doSafeInitialisation
- * Do the stuff that requires that all NIBs are awoken. I can't find a notification
- * from Cocoa for this so we hack it.
- */
--(void)doSafeInitialisation
-{
-	static BOOL doneSafeInit = NO;
-	if (!doneSafeInit)
-	{
-		[foldersTree initialiseFoldersTree];
-		[mainArticleView initialiseArticleView];
-		[self loadOpenTabs];
-		doneSafeInit = YES;
-	}
-}
+#pragma mark IORegisterForSystemPower
 
 /* MySleepCallBack
  * Called in response to an I/O event that we established via IORegisterForSystemPower. The
@@ -365,13 +336,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	FNSubscribeByPath((const UInt8 *)[path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
 }
 
+#pragma mark Application Delegate
+
 /* applicationDidFinishLaunching
  * Handle post-load activities.
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	
+
+	// Do post all-NIB initalisation
+	[foldersTree initialiseFoldersTree];
+	[mainArticleView initialiseArticleView];
+	[self loadOpenTabs];
+
 	// Check for application updates silently
 	if ([prefs checkForNewOnStartup])
 	{
@@ -596,6 +574,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	[[Preferences standardPreferences] setReadingPaneOnRight:NO];
 }
+
+#pragma mark Dock Menu
 
 /* applicationDockMenu
  * Return a menu with additional commands to be displayd on the application's
@@ -932,6 +912,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+#pragma mark Growl Delegate
+
 /* growlIsReady
  * Called by Growl when it is loaded. We use this as a trigger to acknowledge its existence.
  */
@@ -968,7 +950,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[defNotesArray addObject:NSLocalizedString(@"Growl notification name", nil)];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
-		appName, GROWL_APP_NAME, 
+		[self appName], GROWL_APP_NAME, 
 		allNotesArray, GROWL_NOTIFICATIONS_ALL, 
 		defNotesArray, GROWL_NOTIFICATIONS_DEFAULT,
 		nil];
@@ -1194,11 +1176,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (currentCountOfUnread <= 0)
 	{
 		[NSApp setApplicationIconImage:originalIcon];
-		[mainWindow setTitle:appName];
+		[mainWindow setTitle:[self appName]];
 		return;	
 	}	
 	
-	[mainWindow setTitle:[[NSString stringWithFormat:@"%@ -", appName]
+	[mainWindow setTitle:[[NSString stringWithFormat:@"%@ -", [self appName]]
 		stringByAppendingString:[NSString stringWithFormat:
 			NSLocalizedString(@" (%d unread)", nil), currentCountOfUnread]]];
 	
@@ -1310,7 +1292,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSString *)appName
 {
-	return appName;
+	return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 }
 
 /* selectedArticle
@@ -1667,6 +1649,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+#pragma mark Key Listener
+
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
@@ -1981,6 +1965,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+#pragma mark Marking Articles 
+
 /* markAllRead
  * Mark all articles read in the selected folders.
  */
@@ -2181,6 +2167,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
 }
 
+#pragma mark Tabs
+
 /* previousTab
  * Display the previous tab, if there is one.
  */
@@ -2288,6 +2276,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[searchField cell] setPlaceholderString:[[browserView activeTabView] searchPlaceholderString]];
 }
 
+#pragma mark Searching
+
 /* setSearchString
  * Sets the search field's search string.
  */
@@ -2311,6 +2301,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	[[browserView activeTabView] performFindPanelAction:NSFindPanelActionNext];
 }
+
+#pragma mark Refresh Subscriptions
 
 /* refreshAllFolderIcons
  * Get new favicons from all subscriptions.
@@ -2380,6 +2372,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[Preferences standardPreferences] setFilterMode:[menuItem tag]];
 }
 
+#pragma mark Status Message
+
 /* setStatusMessage
  * Sets a new status message for the info bar then updates the view. To remove
  * any existing status message, pass nil as the value.
@@ -2396,6 +2390,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		newStatusText = persistedStatusText;
 	[statusText setStringValue:(newStatusText ? newStatusText : @"")];
 }
+
+#pragma mark Progress Indicator 
 
 /* startProgressIndicator
  * Gets the progress indicator on the info bar running. Because this can be called
