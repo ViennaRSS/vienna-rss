@@ -237,9 +237,28 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Assign the controller for the child views
 	[foldersTree setController:self];
 	[mainArticleView setController:self];
-	
+
 	// Fix up the Close commands
 	[self updateCloseCommands];
+
+	// Do safe initialisation. 	 
+	[self doSafeInitialisation];
+}
+
+/* doSafeInitialisation
+ * Do the stuff that requires that all NIBs are awoken. I can't find a notification
+ * from Cocoa for this so we hack it.
+ */
+-(void)doSafeInitialisation
+{
+	static BOOL doneSafeInit = NO;
+	if (!doneSafeInit)
+	{
+		[foldersTree initialiseFoldersTree];
+		[mainArticleView initialiseArticleView];
+		[self loadOpenTabs];
+		doneSafeInit = YES;
+	}
 }
 
 /* localiseMenus
@@ -344,11 +363,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
 	Preferences * prefs = [Preferences standardPreferences];
-
-	// Do post all-NIB initalisation
-	[foldersTree initialiseFoldersTree];
-	[mainArticleView initialiseArticleView];
-	[self loadOpenTabs];
 
 	// Check for application updates silently
 	if ([prefs checkForNewOnStartup])
