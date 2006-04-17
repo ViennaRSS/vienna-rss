@@ -173,6 +173,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Disable caching
 	[articleText setMaintainsBackForwardList:NO];
 	[[articleText backForwardList] setPageCacheSize:0];
+
+	// Do safe initialisation
+	[controller doSafeInitialisation];
 }
 
 /* setController
