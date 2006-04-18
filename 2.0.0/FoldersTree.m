@@ -924,7 +924,7 @@
 
 /* moveFolders
  * Reparent folders using the information in the specified array. The array consists of
- * a collection of NSNumber pairs: the first number if the ID of the folder to move and
+ * a collection of NSNumber pairs: the first number is the ID of the folder to move and
  * the second number is the ID of the parent to which the folder should be moved.
  */
 -(BOOL)moveFolders:(NSArray *)array
@@ -954,7 +954,7 @@
 			[newParent setCanHaveChildren:YES];
 		
 		if (![db setParent:newParentId forFolder:folderId])
-			return NO;
+			continue;
 
 		[node retain];
 		[oldParent removeChild:node andChildren:NO];
@@ -964,6 +964,10 @@
 		[undoArray addObject:[NSNumber numberWithInt:folderId]];
 		[undoArray addObject:[NSNumber numberWithInt:oldParentId]];
 	}
+	
+	// If undo array is empty, then nothing has been moved.
+	if ([undoArray count] == 0u)
+		return NO;
 
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -1011,18 +1015,9 @@
 	NSPasteboard * pb = [info draggingPasteboard]; 
 	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]];
 
-	// Get index of folder at drop location. If this is a group folder then
-	// it gets used as the parent
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : rootNode;
-	if (childIndex != NSOutlineViewDropOnItemIndex)
-	{
-		if (childIndex >= [node countOfChildren])
-			childIndex = [node countOfChildren] - 1;
-		NSAssert(childIndex >= 0, @"childIndex not expected to go < 0 at this point");
-		node = [node childByIndex:childIndex];
-	}
 
-	int parentID = (IsGroupFolder([node folder])) ? [[node folder] itemId] : [[node folder] parentId];
+	int parentID = [node nodeId];
 
 	// Check the type 
 	if (type == NSStringPboardType)
