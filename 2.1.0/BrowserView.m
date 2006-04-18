@@ -787,7 +787,7 @@ static const int MA_Left_Margin_Width = 10;
 -(void)closeAllTabs
 {
 	int count = [allTabs count];
-	[activeTab retain];
+	BrowserTab * oldActiveTab = [activeTab retain];
 	while ( count > 1)
 	{
 		BrowserTab * theTab = [allTabs objectAtIndex:--count];
@@ -797,7 +797,7 @@ static const int MA_Left_Margin_Width = 10;
 	}
 	[self updateTrackingRectangles];
 	[self makeTabActive:[allTabs objectAtIndex:0]];
-	[activeTab release];
+	[oldActiveTab release];
 }
 
 /* closeTab
