@@ -41,4 +41,5 @@
 -(NSImage *)errorImage;
 -(int)offset;
 -(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+-(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView;
 @end

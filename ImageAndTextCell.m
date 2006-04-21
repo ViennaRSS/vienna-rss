@@ -24,7 +24,7 @@
 /* All of this stuff taken from public stuff published
  * by Apple.
  */
-
+@class FolderView;
 @implementation ImageAndTextCell
 
 /* init
@@ -136,6 +136,35 @@
 	countBackgroundColour = newColour;
 }
 
+/* drawCellImage
+ * Just draw the cell image.
+ */
+-(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView
+{
+	if (image != nil)
+	{
+		NSSize imageSize;
+		NSRect imageFrame;
+		
+		imageSize = [image size];
+		NSDivideRect(*cellFrame, &imageFrame, cellFrame, 3 + imageSize.width, NSMinXEdge);
+		if ([self drawsBackground])
+		{
+			[[self backgroundColor] set];
+			NSRectFill(imageFrame);
+		}
+		imageFrame.origin.x += 3;
+		imageFrame.size = imageSize;
+		
+		if ([controlView isFlipped])
+			imageFrame.origin.y += ceil((cellFrame->size.height + imageFrame.size.height) / 2);
+		else
+			imageFrame.origin.y += ceil((cellFrame->size.height - imageFrame.size.height) / 2);
+		
+		[image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+	}
+}
+
 /* drawWithFrame
  * Draw the cell complete the image and count button if specified.
  */
@@ -158,27 +187,7 @@
 	// If the cell has an image, draw the image and then reduce
 	// cellFrame to move the text to the right of the image.
 	if (image != nil)
-	{
-		NSSize imageSize;
-		NSRect imageFrame;
-
-		imageSize = [image size];
-		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMinXEdge);
-		if ([self drawsBackground])
-		{
-			[[self backgroundColor] set];
-			NSRectFill(imageFrame);
-		}
-		imageFrame.origin.x += 3;
-		imageFrame.size = imageSize;
-		
-		if ([controlView isFlipped])
-			imageFrame.origin.y += ceil((cellFrame.size.height + imageFrame.size.height) / 2);
-		else
-			imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
-		
-		[image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
-	}
+		[self drawCellImage:&cellFrame inView:controlView];
 
 	// If we have an error image, it appears on the right hand side.
 	if (errorImage)
@@ -245,6 +254,23 @@
 
 	// Draw the text
 	[super drawWithFrame:cellFrame inView:controlView];
+}
+
+/* selectWithFrame
+ * Draws the selection around the cell. We overload this to handle our custom field editor
+ * frame in the FolderView class.
+ */
+-(void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+{
+	if ([controlView isKindOfClass:[FolderView class]])
+	{
+		aRect.size = [self cellSize];
+		if (image != nil)
+			aRect.origin.x += [image size].width + 3;
+		++aRect.origin.y;
+		[controlView performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
+	}
+	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
 /* dealloc

@@ -18,11 +18,12 @@
 //  limitations under the License.
 //
 
-#import"FolderView.h"
+#import "FolderView.h"
+#import "ImageAndTextCell.h"
 
 @interface NSObject (FoldersViewDelegate)
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
--(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 @end
 
 // Gradient data from http://www.cocoadev.com/index.pl?CCDGradientSelectionTableView
@@ -68,7 +69,6 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 -(void)setEnableTooltips:(BOOL)flag
 {
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-
 	if ((useTooltips = flag) == YES)
 	{
 		[nc addObserver:self selector:@selector(outlineViewItemDidExpand:) name:NSOutlineViewItemDidExpandNotification object:(id)self];
@@ -270,8 +270,112 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 				if ([[self window] firstResponder] != self || ![[self window] isKeyWindow])
 					[grayGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 			}
+			if ([self editedRow] != -1)
+				[self performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
 		}
 	}
+}
+
+/* prvtResizeTheFieldEditor
+ * (Code copyright (c) 2005 Ryan Stevens and used with permission. Some additional modifications made.)
+ * Resize the field editor on the edit cell so that we display an iTunes-like border around the text
+ * being edited.
+ */
+-(void)prvtResizeTheFieldEditor
+{
+	id editor = [[self window] fieldEditor:YES forObject:self];
+	NSRect editRect = NSIntersectionRect([self rectOfColumn:[self editedColumn]], [self rectOfRow:[self editedRow]]);
+	NSRect frame = [[editor superview] frame];
+	NSLayoutManager * layoutManager = [editor layoutManager];
+	
+	[layoutManager boundingRectForGlyphRange:NSMakeRange(0, [layoutManager numberOfGlyphs]) inTextContainer:[editor textContainer]];
+	frame.size.width = [layoutManager usedRectForTextContainer:[editor textContainer]].size.width;
+	
+	if (editRect.size.width > frame.size.width)
+		[[editor superview] setFrame:frame];
+	else
+	{
+		frame.size.width = editRect.size.width-4;
+		[[editor superview] setFrame:frame];
+	}
+	
+	[editor setNeedsDisplay:YES];
+	
+	if ([self lockFocusIfCanDraw])
+	{
+		id clipView = [[[self window] fieldEditor:YES forObject:self] superview];
+		NSRect borderRect = [clipView frame];
+
+		// Get rid of the white border, leftover from resizing the fieldEditor..
+		editRect.origin.x -= 6;
+		editRect.size.width += 6;
+		[blueGradient setFlipped:YES];
+		[blueGradient drawInRect:editRect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
+		[blueGradient setFlipped:NO];
+		
+		// Put back any cell image
+		int editColumnIndex = [self editedColumn];
+		if (editColumnIndex != -1)
+		{
+			NSTableColumn * editColumn = [[self tableColumns] objectAtIndex:editColumnIndex];
+			ImageAndTextCell * fieldCell = [editColumn dataCell];
+			if ([fieldCell respondsToSelector:@selector(drawCellImage:inView:)])
+			{
+				// The fieldCell needs to be primed with the image for the cell.
+				[[self delegate] outlineView:self willDisplayCell:fieldCell forTableColumn:editColumn item:[self itemAtRow:[self editedRow]]];
+
+				NSRect cellRect = [self frameOfCellAtColumn:editColumnIndex row:[self editedRow]];
+				[fieldCell drawCellImage:&cellRect inView:clipView];
+			}
+		}
+
+		// Fix up the borderRect..
+		borderRect.origin.y -= 1;
+		borderRect.origin.x -= 1;
+		borderRect.size.height += 2;
+		borderRect.size.width += 2;
+		
+		// Draw the border...
+		[[NSColor blackColor] set];
+		NSFrameRect(borderRect);
+		
+		[self unlockFocus];
+	}
+}
+
+/* textDidChange
+ * When the cell contents are edited, redraw the border so it wraps the text
+ * rather than the cell.
+ */
+-(void)textDidChange:(NSNotification *)aNotification
+{
+	[super textDidChange:aNotification];
+	[self prvtResizeTheFieldEditor];
+}
+
+/* textDidEndEditing
+ * Code from Omni that ensures that when the user hits the Enter key, we finish editing and do NOT move to the next
+ * cell which is the default outlineview control cell editing behaviour.
+ */
+-(void)textDidEndEditing:(NSNotification *)notification;
+{
+	// This is ugly, but just about the only way to do it. NSTableView is determined to select and edit something else, even the
+	// text field that it just finished editing, unless we mislead it about what key was pressed to end editing.
+	if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
+	{
+		NSMutableDictionary *newUserInfo;
+		NSNotification *newNotification;
+		
+		newUserInfo = [NSMutableDictionary dictionaryWithDictionary:[notification userInfo]];
+		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		newNotification = [NSNotification notificationWithName:[notification name] object:[notification object] userInfo:newUserInfo];
+		[super textDidEndEditing:newNotification];
+		
+		// For some reason we lose firstResponder status when when we do the above.
+		[[self window] makeFirstResponder:self];
+	}
+	else
+		[super textDidEndEditing:notification];
 }
 
 /* dealloc

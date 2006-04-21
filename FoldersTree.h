@@ -53,6 +53,7 @@
 -(void)updateAlternateMenuTitle;
 -(void)updateFolder:(int)folderId recurseToParents:(BOOL)recurseToParents;
 -(BOOL)selectFolder:(int)folderId;
+-(void)renameFolder:(int)folderId;
 -(int)actualSelection;
 -(int)groupParentSelection;
 -(int)countOfSelectedFolders;

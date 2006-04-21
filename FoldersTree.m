@@ -94,6 +94,7 @@
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
 	imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	[imageAndTextCell setEditable:YES];
 	[tableColumn setDataCell:imageAndTextCell];
 
 	// Folder image
@@ -202,7 +203,7 @@
 	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
 
 	height = [boldCellFont defaultLineHeightForFont];
-	[outlineView setRowHeight:height + 3];
+	[outlineView setRowHeight:height + 4];
 }
 
 /* reloadDatabase
@@ -761,9 +762,20 @@
 		Folder * folder = [node folder];
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
-		// Set grey colour if the folder was unsubscribed
-		NSColor * textColor = (IsUnsubscribed(folder) ? [NSColor grayColor] : [NSColor blackColor]);
-		[realCell setTextColor:([olv isRowSelected:[olv rowForItem:item]]) ? [NSColor whiteColor] : textColor];
+		// Set the colour of the text in the cell
+		int rowIndex = [olv rowForItem:item];
+		NSColor * textColor;
+
+		if (IsUnsubscribed(folder))
+			textColor = [NSColor grayColor];
+		else if ([olv editedRow] == rowIndex)
+			textColor = [NSColor blackColor];
+		else if ([olv selectedRow] == rowIndex)
+			textColor = [NSColor whiteColor];
+		else
+			textColor = [NSColor blackColor];
+		[realCell setTextColor:textColor];
+
 		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
@@ -828,6 +840,47 @@
 {
 	TreeNode * node = [timer userInfo];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+}
+
+/* renameFolder
+ * Begin in-place editing of the selected folder name.
+ */
+-(void)renameFolder:(int)folderId
+{
+	TreeNode * node = [rootNode nodeFromID:folderId];
+	int rowIndex = [outlineView rowForItem:node];
+	
+	if (rowIndex != -1)
+	{
+		[outlineView selectRow:rowIndex byExtendingSelection:NO];
+		[outlineView editColumn:[outlineView columnWithIdentifier:@"folderColumns"] row:rowIndex withEvent:nil select:YES];
+	}
+}
+
+/* shouldEditTableColumn [delegate]
+ * All folder names are editable.
+ */
+-(BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+	return YES;
+}
+
+/* setObjectValue [datasource]
+ * Update the folder name when the user has finished editing it.
+ */
+-(void)outlineView:(NSOutlineView *)olv setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+	NSString * newName = (NSString *)object;
+	Folder * folder = [node folder];
+	
+	if (![[folder name] isEqualToString:newName])
+	{
+		if ([db folderFromName:newName] != nil)
+			runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
+		else
+			[db setFolderName:[folder itemId] newName:newName];
+	}
 }
 
 /* validateDrop

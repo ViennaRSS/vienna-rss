@@ -29,6 +29,13 @@
 		metalBg = [[NSImage imageNamed:@"metal_column_header.png"] retain];
 		attrs = [[NSMutableDictionary dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]] mutableCopy];
 		[attrs setValue:[NSFont systemFontOfSize:10] forKey:@"NSFont"];
+
+		// We want over-long header titles to be truncated in the middle.
+        NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        [style setLineBreakMode:NSLineBreakByTruncatingMiddle];
+		[attrs setValue:style forKey:NSParagraphStyleAttributeName];
+		[style release];
+
 		attributedStringValue = nil;
 	}
 	return self;
@@ -53,7 +60,7 @@
 
 -(void)drawRect:(NSRect)rect
 {
-	/* Draw metalBg lowest pixel along the bottom of inFrame. */
+	// Draw metalBg lowest pixel along the bottom of inFrame.
 	NSRect tempSrc = NSZeroRect;
 	tempSrc.size = [metalBg size];
 	tempSrc.origin.y = tempSrc.size.height - 1.0;
@@ -62,25 +69,18 @@
 	NSRect tempDst = rect;
 	tempDst.origin.y = rect.size.height - 1.0;
 	tempDst.size.height = 1.0;
+	[metalBg drawInRect:tempDst fromRect:tempSrc operation:NSCompositeSourceOver fraction:1.0];
 
-	[metalBg drawInRect:tempDst 
-			fromRect:tempSrc 
-			operation:NSCompositeSourceOver 
-			fraction:1.0];
-
-	/* Draw rest of metalBg along width of inFrame. */
+	// Draw rest of metalBg along width of inFrame.
 	tempSrc.origin.y = 0.0;
 	tempSrc.size.height = [metalBg size].height - 1.0;
 
 	tempDst.origin.y = 1.0;
 	tempDst.size.height = rect.size.height - 2.0;
+	[metalBg drawInRect:tempDst fromRect:tempSrc operation:NSCompositeSourceOver fraction:1.0];
 
-	[metalBg drawInRect:tempDst 
-			fromRect:tempSrc 
-			operation:NSCompositeSourceOver 
-			fraction:1.0];
-
-	/* Draw white text centered, but offset down-left. */
+	// Draw black text centered. Constrain the draw rectangle to the
+	// header size so the truncation works.
 	float offset = 0.5;
 
 	NSRect centeredRect = rect;
@@ -88,9 +88,12 @@
 	centeredRect.origin.x = ((rect.size.width - centeredRect.size.width) / 2.0) - offset;
 	centeredRect.origin.y = ((rect.size.height - centeredRect.size.height) / 2.0) + offset;
 
-	/* Draw black text centered. */
 	centeredRect.origin.x += offset;
 	centeredRect.origin.y -= offset;
+	if (centeredRect.origin.x < 0)
+		centeredRect.origin.x = 0;
+	if (centeredRect.size.width > rect.size.width)
+		centeredRect.size.width = rect.size.width;
 	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
 }
 
