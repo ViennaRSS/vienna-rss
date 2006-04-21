@@ -378,9 +378,11 @@ static NSMutableDictionary * entityMap = nil;
 	BOOL isXMLContent = [mimeType isEqualToString:@"application/xhtml+xml"];
 	if ([mimeType isEqualToString:@"xhtml"])
 		isXMLContent = YES;
-	if ([mimeType isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"xml"])
+	if ([mimeType isEqualToString:@"text/html"])
 		isXMLContent = YES;
-
+	if ([mimeType isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"escaped"])
+		isXMLContent = NO;
+	
 	if (isXMLContent)
 	{
 		int count = CFTreeGetChildCount(tree);
