@@ -31,7 +31,6 @@
 @class DownloadWindow;
 @class NewSubscription;
 @class NewGroupFolder;
-@class RenameFolder;
 @class WebPreferences;
 @class BrowserView;
 @class ArticleListView;
@@ -65,7 +64,6 @@
 	SearchFolder * smartFolder;
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
-	RenameFolder * renameFolder;
 
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;

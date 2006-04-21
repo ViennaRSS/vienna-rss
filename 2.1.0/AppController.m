@@ -32,7 +32,6 @@
 #import "SearchFolder.h"
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
-#import "RenameFolder.h"
 #import "ViennaApp.h"
 #import "ActivityLog.h"
 #import "BrowserPaneTemplate.h"
@@ -2033,9 +2032,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)renameFolder:(id)sender
 {
-	if (!renameFolder)
-		renameFolder = [[RenameFolder alloc] init];
-	[renameFolder renameFolder:mainWindow folderId:[foldersTree actualSelection]];
+	[foldersTree renameFolder:[foldersTree actualSelection]];
 }
 
 /* deleteFolder
