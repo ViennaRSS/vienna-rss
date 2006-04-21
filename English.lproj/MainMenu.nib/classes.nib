@@ -15,9 +15,11 @@
                 doSelectScript = id; 
                 editFolder = id; 
                 emptyTrash = id; 
+                exportSubscriptions = id; 
                 goBack = id; 
                 goForward = id; 
                 handleAbout = id; 
+                importSubscriptions = id; 
                 increaseFontSize = id; 
                 mailLinkToArticlePage = id; 
                 markAllRead = id; 
