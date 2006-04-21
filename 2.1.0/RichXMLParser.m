@@ -821,7 +821,8 @@
 					
 					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
 						[newItem setTitle:[self stripHTMLTags:newTitle]];
-					[newItem setTitle:newTitle];
+					else
+						[newItem setTitle:newTitle];
 					continue;
 				}
 
@@ -1008,20 +1009,25 @@
 -(NSString *)stripHTMLTags:(NSString *)htmlString
 {
 	NSMutableString * rawString = [[NSMutableString alloc] initWithString:htmlString];
-	int openTagIndex = 0;
+	int openTagStartIndex = 0;
 	
-	while ((openTagIndex = [rawString indexOfCharacterInString:'<' afterIndex:openTagIndex]) != NSNotFound)
+	while ((openTagStartIndex = [rawString indexOfCharacterInString:'<' afterIndex:openTagStartIndex]) != NSNotFound)
 	{
-		int closeTagIndex;
-		if ((closeTagIndex = [rawString indexOfCharacterInString:'>' afterIndex:openTagIndex]) != NSNotFound)
+		int openTagEndIndex;
+		if ((openTagEndIndex = [rawString indexOfCharacterInString:'>' afterIndex:openTagStartIndex]) != NSNotFound)
 		{
-			if (closeTagIndex + 1 < [rawString length] && !isspace([rawString characterAtIndex:closeTagIndex+1]))
+			NSString * tagName = [[rawString substringWithRange:NSMakeRange(openTagStartIndex + 1, openTagEndIndex - openTagStartIndex - 1)] lowercaseString];
+			NSString * closingTag = [NSString stringWithFormat:@"</%@>", [tagName firstWord]];
+			NSRange openingTagRange = NSMakeRange(openTagStartIndex, openTagEndIndex - openTagStartIndex + 1);
+			NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(openTagEndIndex, [rawString length] - openTagEndIndex)];
+			
+			if ([tagName isEqualToString:@"br"] || [tagName isEqualToString:@"br /"])
 			{
-				NSString * tagName = [rawString substringWithRange:NSMakeRange(openTagIndex + 1, closeTagIndex - openTagIndex - 1)];
-				NSString * closingTag = [NSString stringWithFormat:@"</%@>", [tagName firstWord]];
-				NSRange openingTagRange = NSMakeRange(openTagIndex, closeTagIndex - openTagIndex + 1);
-				NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(closeTagIndex, [rawString length] - closeTagIndex)];
-				
+				[rawString deleteCharactersInRange:openingTagRange];
+				continue;
+			}
+			else if (openTagEndIndex + 1 < [rawString length] && !isspace([rawString characterAtIndex:openTagEndIndex+1]))
+			{
 				if (closingTagRange.location != NSNotFound)
 				{
 					[rawString deleteCharactersInRange:closingTagRange];
@@ -1030,7 +1036,7 @@
 				}
 			}			
 		}
-		++openTagIndex;
+		++openTagStartIndex;
 	}
 	return rawString;
 }

@@ -38,7 +38,7 @@
 	CFDictionaryRef error = nil;
 
 	NS_DURING
-		newTree = CFXMLTreeCreateFromDataWithError(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserSkipWhitespace, kCFXMLNodeCurrentVersion, &error);
+		newTree = CFXMLTreeCreateFromDataWithError(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserNoOptions, kCFXMLNodeCurrentVersion, &error);
 	NS_HANDLER
 		newTree = nil;
 	NS_ENDHANDLER
@@ -374,8 +374,10 @@
 	BOOL isXMLContent = [mimeType isEqualToString:@"application/xhtml+xml"];
 	if ([mimeType isEqualToString:@"xhtml"])
 		isXMLContent = YES;
-	if ([mimeType isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"xml"])
+	if ([mimeType isEqualToString:@"text/html"])
 		isXMLContent = YES;
+	if ([mimeType isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"escaped"])
+		isXMLContent = NO;
 
 	if (isXMLContent)
 	{
