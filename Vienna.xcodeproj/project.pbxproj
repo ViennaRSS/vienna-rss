@@ -21,7 +21,6 @@
 		AA2185030861E7600024DD4A /* TexturedHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2185010861E7600024DD4A /* TexturedHeader.m */; };
 		AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2185020861E7600024DD4A /* TexturedHeader.h */; };
 		AA2185060861E7E10024DD4A /* metal_column_header.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2185050861E7E10024DD4A /* metal_column_header.png */; };
-		AA23FAEB09F9D91200980D91 /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA23FAEA09F9D91100980D91 /* InfoWindow.nib */; };
 		AA2443DE084008B200BE565F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2443DD084008B200BE565F /* WebKit.framework */; };
 		AA26F448060490BE00FE7994 /* alphaPixel.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F435060490BD00FE7994 /* alphaPixel.tiff */; };
 		AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F43A060490BD00FE7994 /* flagged_header.tiff */; };
@@ -401,7 +400,6 @@
 		AA2185050861E7E10024DD4A /* metal_column_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal_column_header.png; sourceTree = "<group>"; };
 		AA21F4510753053500503F58 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = "<group>"; };
 		AA21F45D0753077300503F58 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
-		AA23FADE09F9D8EB00980D91 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/InfoWindow.nib; sourceTree = "<group>"; };
 		AA23FB3509FAADE000980D91 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA23FB3609FAAE0500980D91 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA23FB3709FAAE2D00980D91 /* de */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = de; path = de.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
@@ -865,7 +863,6 @@
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
 				AA3113480902005300E80DF1 /* GeneralPreferences.nib */,
 				AAA1E3280852539500277128 /* GroupFolder.nib */,
-				AA23FAEA09F9D91100980D91 /* InfoWindow.nib */,
 				2A37F4B6FDCFA73011CA2CEA /* MainMenu.nib */,
 				AA31123F0901CDE100E80DF1 /* NewPreferences.nib */,
 				AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */,
@@ -1473,7 +1470,6 @@
 				AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */,
 				AAA5574309E916F900C87343 /* markAllRead.tiff in Resources */,
 				AAA569BF09EE777400C87343 /* Info.plist in Resources */,
-				AA23FAEB09F9D91200980D91 /* InfoWindow.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1638,14 +1634,6 @@
 				2A37F4B7FDCFA73011CA2CEA /* English */,
 			);
 			name = MainMenu.nib;
-			sourceTree = "<group>";
-		};
-		AA23FAEA09F9D91100980D91 /* InfoWindow.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA23FADE09F9D8EB00980D91 /* English */,
-			);
-			name = InfoWindow.nib;
 			sourceTree = "<group>";
 		};
 		AA26F5650604955F00FE7994 /* Localizable.strings */ = {
