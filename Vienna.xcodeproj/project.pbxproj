@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		8D15AC290486D014006FF6A4 /* Vienna_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -500,7 +501,6 @@
 		AA68511709FAFB2700329883 /* sv */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = sv; path = sv.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
 		AA68511809FAFB4400329883 /* sv */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = sv; path = sv.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AA68511B09FAFB6000329883 /* sv */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = sv; path = sv.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
-		AA68511E09FAFB7C00329883 /* sv */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sv; path = "sv.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA68522109FB018000329883 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = es; path = es.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AA68522409FB019400329883 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA68522709FB01A100329883 /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1426,6 +1426,7 @@
 				AA35B4B5092B833B0041618C /* Localizable.strings in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				AABC189D090AB00300527D4B /* RSSSources.plist in Resources */,
+				619666CA09FBCAA400D75885 /* Vienna Help in Resources */,
 				AA67F338089727FB008BBC37 /* Styles in Resources */,
 				AA26F448060490BE00FE7994 /* alphaPixel.tiff in Resources */,
 				AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */,
@@ -1825,7 +1826,6 @@
 				6172B48809E2080B001FB418 /* nl */,
 				AAA5814F09AA52B400602469 /* zh_TW */,
 				AA23FB4209FAAF7800980D91 /* de */,
-				AA68511E09FAFB7C00329883 /* sv */,
 				AA68530609FB047200329883 /* es */,
 				AA68531409FB047900329883 /* it */,
 				AA68540809FB081A00329883 /* fr */,
