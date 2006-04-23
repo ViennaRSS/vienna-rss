@@ -528,9 +528,16 @@ static Database * _sharedDatabase = nil;
 	if (readOnly)
 		return;
 
+	// If no change to last update, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil)
+	if (folder != nil && IsRSSFolder(folder))
+	{
+		if ([[folder lastUpdate] isEqualToDate:lastUpdate])
+			return;
+
 		[folder setLastUpdate:lastUpdate];
+		[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%d", [folder lastUpdateString], folderId];
+	}
 }
 
 /* setFolderFeedURL
@@ -796,7 +803,7 @@ static Database * _sharedDatabase = nil;
 	
 	// Do nothing if the description hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder description] isEqualToString:newDescription])
+	if ([[folder feedDescription] isEqualToString:newDescription])
 		return NO;
 	
 	[folder setFeedDescription:newDescription];
@@ -1239,12 +1246,6 @@ static Database * _sharedDatabase = nil;
 									[folder unreadCount],
 									interval,
 									folderId];
-
-		// For RSS folders, update the metadata associated with it.
-		if (IsRSSFolder(folder))
-			[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%d",
-										[folder lastUpdateString],
-										folderId];
 
 		// Mark this folder as not needing any further updates
 		[folder resetFlush];
@@ -2069,9 +2070,6 @@ static Database * _sharedDatabase = nil;
 		tmpFolder = [self folderFromID:[tmpFolder parentId]];
 		[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
 	}
-
-	// Update the count in the database.
-	[self executeSQLWithFormat:@"update folders set unread_count=%d where folder_id=%d", [folder unreadCount], [folder itemId]];
 }
 
 /* markArticleFlagged
