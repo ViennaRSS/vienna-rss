@@ -449,7 +449,6 @@ static NSArray * iconArray = nil;
 	[newLastUpdate retain];
 	[lastUpdate release];
 	lastUpdate = newLastUpdate;
-	needFlush = YES;
 }
 
 /* lastUpdateString
