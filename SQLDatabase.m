@@ -11,7 +11,7 @@
 
 @implementation SQLDatabase
 
-+ (id)databaseWithFile:(NSString*)inPath
++(id)databaseWithFile:(NSString*)inPath
 {
 	return [[[SQLDatabase alloc] initWithFile:inPath] autorelease];
 }
@@ -111,6 +111,33 @@
 	return lastError;
 }
 
+#ifdef LOG_QUERY_TIMES
+// These routines should perhaps be in a different file?
+
+// GetStartTime() returns the current time in seconds as a double.
+// It's named GetStartTime instead of GetCurrentTime() since it is
+// used only for timing.
+static double GetStartTime()
+{
+	UnsignedWide microsecondsValue;
+	Microseconds( &microsecondsValue );
+	double twoPower32 = 4294967296.0;
+	double doubleValue;
+	double upperHalf = (double)microsecondsValue.hi;
+	double lowerHalf = (double)microsecondsValue.lo;
+	doubleValue = (upperHalf * twoPower32) + lowerHalf;
+	return doubleValue * 0.000001;
+}
+
+// LogElapsedTime() dumps the query and elapsed time in seconds
+// to the console.
+static void LogElapsedTime( NSString * query, double startTime )
+{
+	double elapsedTime = GetStartTime() - startTime;
+	NSLog( @"Query (%f secs): %@", elapsedTime, query );
+}
+#endif
+
 -(SQLResult*)performQuery:(NSString*)inQuery
 {
 	SQLResult*	sqlResult = nil;
@@ -120,18 +147,25 @@
 	
 	if( !mDatabase )
 		return nil;
-	
+
+#ifdef LOG_QUERY_TIMES
+	double startTime = GetStartTime();
+#endif
+
 	lastError = sqlite3_get_table( mDatabase, [inQuery UTF8String], &results, &rows, &columns, NULL );
 	if( lastError != SQLITE_OK )
-	{
 		sqlite3_free_table( results );
-		return nil;
+	else
+	{
+		sqlResult = [[SQLResult alloc] initWithTable:results rows:rows columns:columns];
+		if( !sqlResult )
+			sqlite3_free_table( results );
 	}
 	
-	sqlResult = [[SQLResult alloc] initWithTable:results rows:rows columns:columns];
-	if( !sqlResult )
-		sqlite3_free_table( results );
-	
+#ifdef LOG_QUERY_TIMES
+	LogElapsedTime( inQuery, startTime );
+#endif
+
 	return sqlResult;
 }
 

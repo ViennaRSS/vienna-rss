@@ -688,6 +688,7 @@
 		AAD1E2CB0612908200D09905 /* MacPAD.url */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = MacPAD.url; sourceTree = "<group>"; };
 		AAD264B60611E108005A27E4 /* CheckForUpdates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckForUpdates.h; sourceTree = "<group>"; };
 		AAD264B70611E108005A27E4 /* CheckForUpdates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckForUpdates.m; sourceTree = "<group>"; };
+		AAD77F4C09FBCF91003DBD47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sv; path = "sv.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = scriptMenu.tiff; sourceTree = "<group>"; };
 		AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PopUpButtonExtensions.h; sourceTree = "<group>"; };
 		AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PopUpButtonExtensions.m; sourceTree = "<group>"; };
@@ -1830,6 +1831,7 @@
 				AA68531409FB047900329883 /* it */,
 				AA68540809FB081A00329883 /* fr */,
 				AA6854ED09FB0BC900329883 /* ja */,
+				AAD77F4C09FBCF91003DBD47 /* sv */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
@@ -1863,6 +1865,7 @@
 					"HAVE_USLEEP=1",
 					"THREADSAFE=0",
 					OS_UNIX,
+					LOG_QUERY_TIMES,
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
