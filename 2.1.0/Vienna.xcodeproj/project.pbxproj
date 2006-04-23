@@ -377,7 +377,6 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
-		6172B47A09E207DF001FB418 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Japanese; path = "Japanese.lproj/Vienna Help"; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -529,6 +528,16 @@
 		AA68540309FB07EC00329883 /* fr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = fr; path = fr.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AA68540409FB080700329883 /* fr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = fr; path = fr.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AA68540809FB081A00329883 /* fr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fr; path = "fr.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AA6854D109FB0ABD00329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ja; path = ja.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		AA6854D209FB0AE000329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA6854D309FB0AF100329883 /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA6854D809FB0B7600329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AA6854DB09FB0B8100329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AA6854DE09FB0B9100329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AA6854E109FB0BA000329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AA6854E409FB0BAE00329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AA6854E709FB0BBD00329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AA6854ED09FB0BC900329883 /* ja */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ja; path = "ja.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA6CB7CD06238B08004E1236 /* FolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderView.h; sourceTree = "<group>"; };
 		AA6CB7CE06238B08004E1236 /* FolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderView.m; sourceTree = "<group>"; };
 		AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = leftArrow.tiff; sourceTree = "<group>"; };
@@ -641,16 +650,6 @@
 		AAB821AD0999C2AD00F3C730 /* vdbeInt.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = vdbeInt.h; sourceTree = "<group>"; };
 		AAB821AE0999C2AD00F3C730 /* vdbemem.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = vdbemem.c; sourceTree = "<group>"; };
 		AAB821AF0999C2AD00F3C730 /* where.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = where.c; sourceTree = "<group>"; };
-		AAB822E6099AFA5A00F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
-		AAB822E9099AFA6700F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
-		AAB822EC099AFA7400F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
-		AAB822EF099AFA8100F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/GroupFolder.nib; sourceTree = "<group>"; };
-		AAB822F5099AFAA200F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/RSSFeed.nib; sourceTree = "<group>"; };
-		AAB822F8099AFAAF00F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/SearchFolder.nib; sourceTree = "<group>"; };
-		AAB822FB099AFAB900F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Japanese; path = Japanese.lproj/UpdateWindow.nib; sourceTree = "<group>"; };
-		AAB822FE099AFACE00F3C730 /* Japanese */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; fileEncoding = 4; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AAB82301099AFAD900F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AAB82321099AFD1400F3C730 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Japanese; path = Japanese.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AAB90EFC061D059D00CA4741 /* searchFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = searchFolder.tiff; sourceTree = "<group>"; };
 		AAB968DC08F7829E00B7D1C8 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
 		AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
@@ -1400,6 +1399,7 @@
 				es,
 				it,
 				fr,
+				ja,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -1624,12 +1624,12 @@
 				089C1660FE840EACC02AAC07 /* English */,
 				AACF241109441ADC0019F2BA /* zh_TW */,
 				AA71CD10098D513C0069607D /* nl */,
-				AAB82301099AFAD900F3C730 /* Japanese */,
 				AA23FB3509FAADE000980D91 /* de */,
 				AA68510509FAFA7100329883 /* sv */,
 				AA68522409FB019400329883 /* es */,
 				AA6852E509FB036900329883 /* it */,
 				AA6853FA09FB073800329883 /* fr */,
+				AA6854D209FB0AE000329883 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1648,12 +1648,12 @@
 				AA26F5660604955F00FE7994 /* English */,
 				AACF240E09441ACB0019F2BA /* zh_TW */,
 				AA71CD0D098D51340069607D /* nl */,
-				AAB822FE099AFACE00F3C730 /* Japanese */,
 				AA23FB3609FAAE0500980D91 /* de */,
 				AA68510809FAFA8300329883 /* sv */,
 				AA68522709FB01A100329883 /* es */,
 				AA6852E809FB037F00329883 /* it */,
 				AA6853FD09FB074700329883 /* fr */,
+				AA6854D309FB0AF100329883 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1672,12 +1672,12 @@
 				AA3113490902005300E80DF1 /* English */,
 				AACF23F409441A3A0019F2BA /* zh_TW */,
 				AA71CCEF098D50E80069607D /* nl */,
-				AAB822E6099AFA5A00F3C730 /* Japanese */,
 				AA23FB3B09FAAEED00980D91 /* de */,
 				AA68511709FAFB2700329883 /* sv */,
 				AA68523409FB021B00329883 /* es */,
 				AA6852FD09FB043500329883 /* it */,
 				AA68540209FB07D500329883 /* fr */,
+				AA6854E109FB0BA000329883 /* ja */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -1688,12 +1688,12 @@
 				AA31134C0902009300E80DF1 /* English */,
 				AACF23F509441A4C0019F2BA /* zh_TW */,
 				AA71CCF2098D50F10069607D /* nl */,
-				AAB822E9099AFA6700F3C730 /* Japanese */,
 				AA23FB3D09FAAF2C00980D91 /* de */,
 				AA68511B09FAFB6000329883 /* sv */,
 				AA68523809FB024700329883 /* es */,
 				AA68530109FB045D00329883 /* it */,
 				AA68540409FB080700329883 /* fr */,
+				AA6854E709FB0BBD00329883 /* ja */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -1704,12 +1704,12 @@
 				AA3BDC9F063249FE004621CD /* English */,
 				AACF240409441AAB0019F2BA /* zh_TW */,
 				AA71CD03098D511D0069607D /* nl */,
-				AAB822F8099AFAAF00F3C730 /* Japanese */,
 				AA23FB3809FAAE8B00980D91 /* de */,
 				AA68510E09FAFAD700329883 /* sv */,
 				AA68522F09FB01D000329883 /* es */,
 				AA6852F409FB03E900329883 /* it */,
 				AA6853FF09FB079000329883 /* fr */,
+				AA6854D809FB0B7600329883 /* ja */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -1720,12 +1720,12 @@
 				AA55E4A5086C6C8200D7DBFA /* English */,
 				AACF23F809441A600019F2BA /* zh_TW */,
 				AA71CCF7098D50FF0069607D /* nl */,
-				AAB822EC099AFA7400F3C730 /* Japanese */,
 				AA23FB3C09FAAF0A00980D91 /* de */,
 				AA68511809FAFB4400329883 /* sv */,
 				AA68523709FB023700329883 /* es */,
 				AA68530009FB044900329883 /* it */,
 				AA68540309FB07EC00329883 /* fr */,
+				AA6854E409FB0BAE00329883 /* ja */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -1744,12 +1744,12 @@
 				AA9F3083081B689500D6EA23 /* English */,
 				AACF240109441AA10019F2BA /* zh_TW */,
 				AA71CD00098D51160069607D /* nl */,
-				AAB822F5099AFAA200F3C730 /* Japanese */,
 				AA23FB3909FAAEB100980D91 /* de */,
 				AA68511109FAFAF300329883 /* sv */,
 				AA68523209FB01EC00329883 /* es */,
 				AA6852F709FB03FF00329883 /* it */,
 				AA68540009FB07A300329883 /* fr */,
+				AA6854DB09FB0B8100329883 /* ja */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -1760,12 +1760,12 @@
 				AAA1E3290852539500277128 /* English */,
 				AACF23FB09441A8A0019F2BA /* zh_TW */,
 				AA71CCFA098D51080069607D /* nl */,
-				AAB822EF099AFA8100F3C730 /* Japanese */,
 				AA23FB3A09FAAED000980D91 /* de */,
 				AA68511409FAFB1300329883 /* sv */,
 				AA68523309FB020500329883 /* es */,
 				AA6852FA09FB041C00329883 /* it */,
 				AA68540109FB07BD00329883 /* fr */,
+				AA6854DE09FB0B9100329883 /* ja */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -1784,12 +1784,12 @@
 				AAC504360828E6740089FF70 /* English */,
 				AACF241409441AEB0019F2BA /* zh_TW */,
 				AA71CD18098D514E0069607D /* nl */,
-				AAB82321099AFD1400F3C730 /* Japanese */,
 				AA23FB3E09FAAF5100980D91 /* de */,
 				AA68510209FAFA5300329883 /* sv */,
 				AA68522109FB018000329883 /* es */,
 				AA6852E209FB035000329883 /* it */,
 				AA6853F709FB071D00329883 /* fr */,
+				AA6854D109FB0ABD00329883 /* ja */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -1808,7 +1808,6 @@
 				AAD264DB0611E22A005A27E4 /* English */,
 				AACF240709441AB50019F2BA /* zh_TW */,
 				AA71CD06098D51240069607D /* nl */,
-				AAB822FB099AFAB900F3C730 /* Japanese */,
 				AA23FB3709FAAE2D00980D91 /* de */,
 				AA68510B09FAFAC300329883 /* sv */,
 				AA68522C09FB01B800329883 /* es */,
@@ -1822,7 +1821,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				AAE3AEF506570DB700A1FA1F /* English */,
-				6172B47A09E207DF001FB418 /* Japanese */,
 				6172B48809E2080B001FB418 /* nl */,
 				AAA5814F09AA52B400602469 /* zh_TW */,
 				AA23FB4209FAAF7800980D91 /* de */,
@@ -1830,6 +1828,7 @@
 				AA68530609FB047200329883 /* es */,
 				AA68531409FB047900329883 /* it */,
 				AA68540809FB081A00329883 /* fr */,
+				AA6854ED09FB0BC900329883 /* ja */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
