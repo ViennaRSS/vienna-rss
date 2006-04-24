@@ -742,10 +742,11 @@
 		{
 			if ([subTree valueOfAttribute:@"rel"] == nil || [[subTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 			{
-				if (linkBase != nil)
-					[self setLink:[linkBase stringByAppendingURLComponent:[subTree valueOfAttribute:@"href"]]];
+				NSString * theLink = [subTree valueOfAttribute:@"href"];
+				if (linkBase != nil && ![theLink hasPrefix:@"http://"])
+					[self setLink:[linkBase stringByAppendingURLComponent:theLink]];
 				else
-					[self setLink:[subTree valueOfAttribute:@"href"]];
+					[self setLink:theLink];
 			}
 			continue;
 		}			
