@@ -25,6 +25,7 @@ Thanks!
 - Unread articles marked as bold.
 - Don't select first article when switching folders.
 - Renaming folders now done by editing the name in the folder pane.
+- Added "in phrase" to match text in a search criteria that contains a complete word or phrase.
 
 2.0.4.2033
 ----------

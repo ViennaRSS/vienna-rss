@@ -312,3 +312,5 @@
 "Filter articles" = "Filter articles";
 "Feed has been removed by the server" = "Feed has been removed by the server";
 "Mark all articles read" = "Mark all articles read";
+"has phrase" = "has phrase";
+"does not have phrase" = "does not have phrase";

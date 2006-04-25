@@ -50,6 +50,46 @@
 
 #pragma mark -
 
+// This is a VERY rudimentary regexp handler that only recognises \w prefix in the
+// regexp string to match a word. Later we can add more functionality once the
+// phrase parser is capable of supporting that functionality.
+static void sqlite3_regexp(sqlite3_context *DB, int argc, sqlite3_value **argv)
+{
+	int retval = 0;
+	
+	if (argc == 2)
+	{
+		const char * regexp = (const char*)sqlite3_value_text(argv[0]);
+		const char * str = (const char*)sqlite3_value_text(argv[1]);
+		if (regexp && str && *regexp && *str)
+		{
+			BOOL wordmatch = NO;
+			if (*regexp == '\\' && *(regexp+1) == 'w')
+			{
+				regexp += 2;
+				wordmatch = YES;
+			}
+			char * match = strcasestr(str, regexp);
+			if (match)
+			{
+				if (!wordmatch)
+					retval = 1;
+				else
+				{
+					const char * endmatch = match + strlen(regexp);
+					const char * endstr = str + strlen(str);
+					if (match == str || isspace(*(match-1)))
+					{
+						if (endmatch == endstr || isspace(*endmatch))
+							retval = 1;
+					}
+				}
+			}
+		}
+	}
+	sqlite3_result_int(DB, retval);
+}
+
 -(BOOL)open
 {
 	if (sqlite3_open( [mPath fileSystemRepresentation], &mDatabase) == SQLITE_OK)
@@ -58,7 +98,9 @@
 		[[self performQuery:@"pragma default_cache_size=30000;"] release];
 		[[self performQuery:@"pragma temp_store=1;"] release];
 		[[self performQuery:@"pragma auto_vacuum=0;"] release];
-		return YES;
+
+		if (sqlite3_create_function(mDatabase, "regexp", 2, SQLITE_UTF8, NULL, sqlite3_regexp, NULL, NULL) == SQLITE_OK)
+			return YES;
 	}
 	return NO;
 }

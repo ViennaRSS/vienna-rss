@@ -186,6 +186,7 @@
 		{
 			if ([field tag] != MA_FieldID_Headlines &&
 				[field tag] != MA_FieldID_GUID &&
+				[field tag] != MA_FieldID_Summary &&
 				[field tag] != MA_FieldID_Parent)
 			{
 				[fieldNamePopup addItemWithRepresentedObject:[field displayName] object:field];
@@ -357,6 +358,8 @@
 									MA_CritOper_IsNot,
 									MA_CritOper_Contains,
 									MA_CritOper_NotContains,
+									MA_CritOper_HasPhrase,
+									MA_CritOper_NotHasPhrase,
 									0];
 			break;
 
