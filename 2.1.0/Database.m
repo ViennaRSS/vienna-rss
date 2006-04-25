@@ -1674,6 +1674,8 @@ static Database * _sharedDatabase = nil;
 			case MA_CritOper_IsGreaterThanOrEqual:  operatorString = @">=%@"; break;
 			case MA_CritOper_Contains:				operatorString = @" like '%%%@%%'"; break;
 			case MA_CritOper_NotContains:			operatorString = @" not like '%%%@%%'"; break;
+			case MA_CritOper_HasPhrase:				operatorString = @" regexp '\\w%@'"; break;
+			case MA_CritOper_NotHasPhrase:			operatorString = @" not regexp '\\w%@'"; break;
 			case MA_CritOper_IsBefore:				operatorString = @"<%@"; break;
 			case MA_CritOper_IsAfter:				operatorString = @">%@"; break;
 			case MA_CritOper_IsOnOrBefore:			operatorString = @"<=%@"; break;

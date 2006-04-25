@@ -36,7 +36,9 @@ typedef enum {
 	MA_CritOper_IsOnOrBefore,
 	MA_CritOper_IsOnOrAfter,
 	MA_CritOper_Under,
-	MA_CritOper_NotUnder
+	MA_CritOper_NotUnder,
+	MA_CritOper_HasPhrase,
+	MA_CritOper_NotHasPhrase
 } CriteriaOperator;
 
 typedef enum {

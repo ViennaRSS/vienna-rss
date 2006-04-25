@@ -162,9 +162,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
 
-	// Set header text
-	[articleListHeader setStringValue:NSLocalizedString(@"Articles", nil)];
-
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
@@ -508,7 +505,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
-	[articleList setAutoresizesAllColumnsToFit:NO];
 	
 	[self updateArticleListRowHeight];
 	
@@ -540,27 +536,34 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		// Add to the end only those columns that are visible
 		if (showField)
 		{
-			NSTableColumn * newTableColumn = [[NSTableColumn alloc] initWithIdentifier:identifier];
-			NSTableHeaderCell * headerCell = [newTableColumn headerCell];
-			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments);
-
+			NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:identifier];
+			
 			// Fix for bug where tableviews with alternating background rows lose their "colour".
 			// Only text cells are affected.
-			if ([[newTableColumn dataCell] isKindOfClass:[NSTextFieldCell class]])
+			if ([[column dataCell] isKindOfClass:[NSTextFieldCell class]])
 			{
-				[[newTableColumn dataCell] setDrawsBackground:NO];
-				[[newTableColumn dataCell] setWraps:YES];
+				[[column dataCell] setDrawsBackground:NO];
+				[[column dataCell] setWraps:YES];
 			}
 
+			NSTableHeaderCell * headerCell = [column headerCell];
+			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments);
+
 			[headerCell setTitle:[field displayName]];
-			[newTableColumn setEditable:NO];
-			[newTableColumn setResizable:isResizable];
-			[newTableColumn setMinWidth:10];
-			[newTableColumn setMaxWidth:1000];
-			[newTableColumn setWidth:[field width]];
-			[articleList addTableColumn:newTableColumn];
-			[newTableColumn release];
+			[column setEditable:NO];
+			if([column respondsToSelector: @selector(setResizingMask:)]) {
+				[column setResizingMask:isResizable ? NSTableColumnAutoresizingMask : NSTableColumnNoResizing];
+			}
+			else {
+				[column setResizable:isResizable];
+			}
+			[column setMinWidth:10];
+			[column setMaxWidth:1000];
+			[column setWidth:[field width]];
+			[articleList addTableColumn:column];
+			[column release];
 		}
+		[articleList sizeToFit];
 	}
 	
 	// Set the extended date formatter on the Date column
@@ -575,14 +578,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Set the images for specific header columns
 	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
 	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
-	
+
 	// Initialise the sort direction
 	[self showSortDirection];	
-	
+
 	// In condensed mode, the summary field takes up the whole space
-	if (tableLayout == MA_Condensed_Layout)
+	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
+		[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
+	else
 		[articleList setAutoresizesAllColumnsToFit:YES];
-	
+
 	// Done
 	isInTableInit = NO;
 }

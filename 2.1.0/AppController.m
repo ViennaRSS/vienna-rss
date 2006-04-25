@@ -363,6 +363,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Preferences * prefs = [Preferences standardPreferences];
 
+	// Fix up the Tab ordering
+	[[foldersTree mainView] setNextKeyView:[mainArticleView mainView]];
+	
 	// Check for application updates silently
 	if ([prefs checkForNewOnStartup])
 	{
