@@ -9,6 +9,7 @@ Thanks!
 2.0.4.2033
 ----------
 - Bug fixes and performance fixes.
+- Changed modifier key for overriding default browser preference from shift to option.
 
 2.0.3.2032
 ----------
