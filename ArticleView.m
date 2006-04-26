@@ -204,7 +204,7 @@
 
 		// For anything else, we open in a new tab or in the external browser.
 		unsigned int modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
-		BOOL useAlternateBrowser = (modifierFlag & NSShiftKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
+		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
 		[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
 		return;
@@ -221,7 +221,7 @@
 {
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
 	unsigned int modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
-	BOOL useAlternateBrowser = (modifierFlags & NSShiftKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
+	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 	
 	if (navType == WebNavigationTypeLinkClicked)
 	{

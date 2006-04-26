@@ -46,3 +46,4 @@ Wishlist
 - Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Mix conditionals within smart folders.
+- Preference for showing/hiding unread count in dock.
