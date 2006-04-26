@@ -188,13 +188,13 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	NSMenuItem * alternateItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
-		[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 		[alternateItem setAlternate:YES];
 	}
 	alternateItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
-		[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 		[alternateItem setAlternate:YES];
 	}
 	[self updateAlternateMenuTitle];
@@ -1649,7 +1649,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 		case NSEnterCharacter:
 		case NSCarriageReturnCharacter:
-			if (flags & NSShiftKeyMask)
+			if (flags & NSAlternateKeyMask)
 				[self viewArticlePageInAlternateBrowser:self];
 			else
 				[self viewArticlePage:self];
