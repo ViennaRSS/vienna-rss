@@ -156,7 +156,7 @@
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
 	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	[alternateItem setKeyEquivalentModifierMask:NSShiftKeyMask];
+	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[folderMenu addItem:alternateItem];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(validateFeed:))];
