@@ -1648,9 +1648,6 @@ static Database * _sharedDatabase = nil;
 		NSString * operatorString = nil;
 		NSString * valueString = nil;
 		
-		if (count++ > 0)
-			[sqlString appendString:[criteriaTree condition] == MA_CritCondition_All ? @" and " : @" or "];
-
 		switch ([criteria operator])
 		{
 			case MA_CritOper_Is:					operatorString = @"=%@"; break;
@@ -1665,7 +1662,7 @@ static Database * _sharedDatabase = nil;
 			case MA_CritOper_IsAfter:				operatorString = @">%@"; break;
 			case MA_CritOper_IsOnOrBefore:			operatorString = @"<=%@"; break;
 			case MA_CritOper_IsOnOrAfter:			operatorString = @">=%@"; break;
-				
+
 			case MA_CritOper_Under:
 			case MA_CritOper_NotUnder:
 				// Handle the operatorString later. For now just make sure we're working with the
@@ -1674,6 +1671,13 @@ static Database * _sharedDatabase = nil;
 				break;
 		}
 
+		// Unknown operator - skip this clause
+		if (operatorString == nil)
+			continue;
+		
+		if (count++ > 0)
+			[sqlString appendString:[criteriaTree condition] == MA_CritCondition_All ? @" and " : @" or "];
+		
 		switch ([field type])
 		{
 			case MA_FieldType_Flag:
