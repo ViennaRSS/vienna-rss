@@ -6,10 +6,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.0.4.2034
+----------
+- Changed modifier key for overriding default browser preference from shift to option.
+
 2.0.4.2033
 ----------
-- Bug fixes and performance fixes.
-- Changed modifier key for overriding default browser preference from shift to option.
+- Various bug and performance fixes.
 
 2.0.3.2032
 ----------
