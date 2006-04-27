@@ -1258,8 +1258,16 @@
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
 				8D15AC280486D014006FF6A4 /* Headers */,
-				612724270A0145F7000AB96C /* ShellScript */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
+				612724270A0145F7000AB96C /* Index de Help */,
+				61858A3B0A015B2700E8CF73 /* Index en Help */,
+				61858A540A015BFA00E8CF73 /* Index es Help */,
+				61858A640A015C8200E8CF73 /* Index fr Help */,
+				61858A700A015CCC00E8CF73 /* Index it Help */,
+				61858A580A015C1300E8CF73 /* Index ja Help */,
+				61858A4E0A015BCF00E8CF73 /* Index nl Help */,
+				61858A680A015C9000E8CF73 /* Index sv Help */,
+				61858A740A015CFB00E8CF73 /* Index zh_TW Help */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				AA65D27F083CF46F00BC387C /* CopyFiles */,
@@ -1494,18 +1502,176 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		612724270A0145F7000AB96C /* ShellScript */ = {
+		612724270A0145F7000AB96C /* Index de Help */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/de.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/de.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/de.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/de.lproj/Vienna Help/keyboard.html",
 			);
+			name = "Index de Help";
 			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/Vienna Help/Vienna Help idx",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Indexing help files...\"\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer de.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer en.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 1 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer es.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer fr.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer it.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer ja.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 4 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer nl.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer zh_TW.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n\necho \"Finished indexing help files.\"\n";
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/de.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A3B0A015B2700E8CF73 /* Index en Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/en.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/en.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/en.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/en.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index en Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/en.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 1 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A4E0A015BCF00E8CF73 /* Index nl Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/nl.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/nl.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/nl.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/nl.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index nl Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/nl.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/nl.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A540A015BFA00E8CF73 /* Index es Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/es.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/es.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/es.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/es.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index es Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/es.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A580A015C1300E8CF73 /* Index ja Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ja.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/ja.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/ja.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/ja.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index ja Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ja.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 4 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n";
+		};
+		61858A640A015C8200E8CF73 /* Index fr Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/fr.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/fr.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/fr.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/fr.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index fr Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/fr.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A680A015C9000E8CF73 /* Index sv Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/sv.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/sv.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/sv.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/sv.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index sv Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/sv.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A700A015CCC00E8CF73 /* Index it Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/it.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/it.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/it.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/it.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index it Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/it.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/it.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+		};
+		61858A740A015CFB00E8CF73 /* Index zh_TW Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/zh_TW.lproj/Vienna Help/faq.html",
+				"$(SRCROOT)/zh_TW.lproj/Vienna Help/index.html",
+				"$(SRCROOT)/zh_TW.lproj/Vienna Help/intro.html",
+				"$(SRCROOT)/zh_TW.lproj/Vienna Help/keyboard.html",
+			);
+			name = "Index zh_TW Help";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh_TW.lproj/Vienna Help/Vienna Help idx",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_TW.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
