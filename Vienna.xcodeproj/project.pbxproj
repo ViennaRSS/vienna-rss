@@ -1257,6 +1257,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
+				8D15AC300486D014006FF6A4 /* Sources */,
+				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC280486D014006FF6A4 /* Headers */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				612724270A0145F7000AB96C /* Index de Help */,
@@ -1268,8 +1270,6 @@
 				61858A4E0A015BCF00E8CF73 /* Index nl Help */,
 				61858A680A015C9000E8CF73 /* Index sv Help */,
 				61858A740A015CFB00E8CF73 /* Index zh_TW Help */,
-				8D15AC300486D014006FF6A4 /* Sources */,
-				8D15AC330486D014006FF6A4 /* Frameworks */,
 				AA65D27F083CF46F00BC387C /* CopyFiles */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
 			);
@@ -1323,9 +1323,9 @@
 			buildConfigurationList = AAA5687209EE726000C87343 /* Build configuration list for PBXNativeTarget "NewsParser" */;
 			buildPhases = (
 				AAA5686A09EE725B00C87343 /* Headers */,
-				AAA5686B09EE725B00C87343 /* Resources */,
 				AAA5686C09EE725B00C87343 /* Sources */,
 				AAA5686D09EE725B00C87343 /* Frameworks */,
+				AAA5686B09EE725B00C87343 /* Resources */,
 			);
 			buildRules = (
 				AAA56F5109EF533100C87343 /* PBXBuildRule */,
