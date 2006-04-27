@@ -378,7 +378,7 @@
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
 		AA07A39909E14E780056766B /* os.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = os.c; sourceTree = "<group>"; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLog.h; sourceTree = "<group>"; };
@@ -1258,6 +1258,7 @@
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
 				8D15AC280486D014006FF6A4 /* Headers */,
+				612724270A0145F7000AB96C /* ShellScript */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
@@ -1491,6 +1492,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		612724270A0145F7000AB96C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Indexing help files...\"\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer de.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer en.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 1 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer es.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer fr.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer it.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer ja.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 4 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer nl.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n\n/Developer/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer zh_TW.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n\necho \"Finished indexing help files.\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D15AC300486D014006FF6A4 /* Sources */ = {
@@ -1823,15 +1840,15 @@
 		AAE3AEF406570DB700A1FA1F /* Vienna Help */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA38C19109FB19FA00FAE2CD /* en */,
-				6172B48809E2080B001FB418 /* nl */,
-				AAA5814F09AA52B400602469 /* zh_TW */,
 				AA23FB4209FAAF7800980D91 /* de */,
+				AA38C19109FB19FA00FAE2CD /* en */,
 				AA68530609FB047200329883 /* es */,
-				AA68531409FB047900329883 /* it */,
 				AA68540809FB081A00329883 /* fr */,
+				AA68531409FB047900329883 /* it */,
 				AA6854ED09FB0BC900329883 /* ja */,
+				6172B48809E2080B001FB418 /* nl */,
 				AAD77F4C09FBCF91003DBD47 /* sv */,
+				AAA5814F09AA52B400602469 /* zh_TW */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
