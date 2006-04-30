@@ -685,15 +685,22 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	Database * db = [Database sharedDatabase];
 	int height = [articleListFont defaultLineHeightForFont];
-	int numberOfRowsInCell = 1;
+	int numberOfRowsInCell;
 
-	if (tableLayout == MA_Condensed_Layout)
+	if (tableLayout == MA_Table_Layout)
+		numberOfRowsInCell = 1;
+	else
 	{
+		numberOfRowsInCell = 0;
 		if ([[db fieldByName:MA_Field_Subject] visible])
+			++numberOfRowsInCell;
+		if ([[db fieldByName:MA_Field_Folder] visible] || [[db fieldByName:MA_Field_Date] visible] || [[db fieldByName:MA_Field_Author] visible])
 			++numberOfRowsInCell;
 		if ([[db fieldByName:MA_Field_Link] visible])
 			++numberOfRowsInCell;
 		if ([[db fieldByName:MA_Field_Summary] visible])
+			++numberOfRowsInCell;
+		if (numberOfRowsInCell == 0)
 			++numberOfRowsInCell;
 	}
 	[articleList setRowHeight:(height + 2) * numberOfRowsInCell];
