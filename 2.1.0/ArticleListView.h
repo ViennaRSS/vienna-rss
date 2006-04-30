@@ -48,7 +48,6 @@
 	BOOL blockSelectionHandler;
 	BOOL blockMarkRead;
 	AppController * controller;
-	Database * db;
 	
 	NSDictionary * articleSortSpecifiers;
 	NSMutableDictionary * stylePathMappings;

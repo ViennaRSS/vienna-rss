@@ -316,3 +316,6 @@
 "Mark all articles read" = "Mark all articles read";
 "has phrase" = "has phrase";
 "does not have phrase" = "does not have phrase";
+"%@ Info" = "%@ Info";
+"%u articles" = "%u articles";
+"%u unread" = "%u unread";
