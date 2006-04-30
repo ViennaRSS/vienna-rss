@@ -67,7 +67,6 @@
 		blockSelectionHandler = NO;
 		selectionTimer = nil;
 		folderErrorImage = nil;
-		db = nil;
 	}
 	return self;
 }
@@ -135,7 +134,6 @@
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
-	db = [[controller database] retain];
 }
 
 /* initialiseFoldersTree
@@ -159,7 +157,6 @@
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[folderMenu addItem:alternateItem];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(validateFeed:))];
 	
 	// Want tooltips
 	[outlineView setEnableTooltips:YES];
@@ -212,7 +209,7 @@
 -(void)reloadDatabase:(NSArray *)stateArray
 {
 	[rootNode removeChildren];
-	[self loadTree:[db arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+	[self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
 	[outlineView reloadData];
 	[self unarchiveState:stateArray];
 }
@@ -291,7 +288,7 @@
 	while ((folder = [enumerator nextObject]) != nil)
 	{
 		int itemId = [folder itemId];
-		NSArray * listOfSubFolders = [db arrayOfFolders:itemId];
+		NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:itemId];
 		int count = [listOfSubFolders count];
 		TreeNode * subNode;
 
@@ -466,7 +463,7 @@
  */
 -(int)groupParentSelection
 {
-	Folder * folder = [db folderFromID:[self actualSelection]];
+	Folder * folder = [[Database sharedDatabase] folderFromID:[self actualSelection]];
 	return folder ? ((IsGroupFolder(folder)) ? [folder itemId] : [folder parentId]) : MA_Root_Folder;
 }
 
@@ -876,6 +873,7 @@
 	
 	if (![[folder name] isEqualToString:newName])
 	{
+		Database * db = [Database sharedDatabase];
 		if ([db folderFromName:newName] != nil)
 			runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
 		else
@@ -1002,6 +1000,7 @@
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
 		int newParentId = [[array objectAtIndex:index++] intValue];
+		Database * db = [Database sharedDatabase];
 		Folder * folder = [db folderFromID:folderId];
 		int oldParentId = [folder parentId];
 		
@@ -1073,8 +1072,8 @@
 { 
 	NSPasteboard * pb = [info draggingPasteboard]; 
 	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]];
-
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : rootNode;
+	Database * db = [Database sharedDatabase];
 
 	int parentID = [node nodeId];
 
@@ -1174,7 +1173,6 @@
 {
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc removeObserver:self];
-	[db release];
 	[selectionTimer release];
 	[cellFont release];
 	[boldCellFont release];

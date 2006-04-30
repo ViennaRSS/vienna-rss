@@ -39,6 +39,7 @@
 #import "ArticleView.h"
 #import "BrowserPane.h"
 #import "Preferences.h"
+#import "InfoWindow.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
@@ -506,11 +507,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	return NO;
 }
 
-/* database
+/* standardURLs
  */
--(Database *)database
+-(NSDictionary *)standardURLs
 {
-	return db;
+	return standardURLs;
 }
 
 /* browserView
@@ -518,13 +519,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(BrowserView *)browserView
 {
 	return browserView;
-}
-
-/* foldersTree
- */
--(FoldersTree *)foldersTree
-{
-	return foldersTree;
 }
 
 /* constrainMinCoordinate
@@ -2119,23 +2113,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
-/* validateFeed
- * Call the feed validator on the selected subscription feed.
+/* getInfo
+ * Display the Info panel for the selected feeds.
  */
--(IBAction)validateFeed:(id)sender
+-(IBAction)getInfo:(id)sender
 {
 	int folderId = [foldersTree actualSelection];
-	Folder * folder = [db folderFromID:folderId];
-	
-	if (IsRSSFolder(folder))
-	{
-		NSString * validatorPage = [standardURLs valueForKey:@"FeedValidatorTemplate"];
-		if (validatorPage != nil)
-		{
-			NSString * validatorURL = [NSString stringWithFormat:validatorPage, [folder feedURL]];
-			[self openURLFromString:validatorURL inPreferredBrowser:YES];
-		}
-	}
+	if (folderId > 0)
+		[[InfoWindowManager infoWindowManager] showInfoWindowForFolder:folderId];
 }
 
 /* viewSourceHomePage
@@ -2539,10 +2524,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
 		return folder && (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
-	else if (theAction == @selector(validateFeed:))
+	else if (theAction == @selector(getInfo:))
 	{
-		int folderId = [foldersTree actualSelection];
-		Folder * folder = [db folderFromID:folderId];
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
 		return IsRSSFolder(folder) && isMainWindowVisible;
 	}
 	else if (theAction == @selector(restoreMessage:))

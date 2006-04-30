@@ -108,7 +108,6 @@
 -(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
--(IBAction)validateFeed:(id)sender;
 -(IBAction)viewSourceHomePage:(id)sender;
 -(IBAction)viewSourceHomePageInAlternateBrowser:(id)sender;
 -(IBAction)emptyTrash:(id)sender;
@@ -131,6 +130,7 @@
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
 -(IBAction)changeFiltering:(id)sender;
+-(IBAction)getInfo:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
@@ -152,7 +152,7 @@
 -(Article *)selectedArticle;
 -(int)currentFolderId;
 -(BOOL)isConnecting;
--(Database *)database;
+-(NSDictionary *)standardURLs;
 -(BrowserView *)browserView;
 -(NSArray *)folders;
 @end

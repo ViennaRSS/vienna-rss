@@ -84,7 +84,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
     if (([super initWithFrame:frame]) != nil)
 	{
-		db = nil;
 		isBacktracking = NO;
 		isChangingOrientation = NO;
 		isInTableInit = NO;
@@ -181,7 +180,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
-	db = [[controller database] retain];
 	[articleText setController:controller];
 }
 
@@ -361,6 +359,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Initialize the article columns from saved data
 	NSArray * dataArray = [prefs arrayForKey:MAPref_ArticleListColumns];
+	Database * db = [Database sharedDatabase];
 	Field * field;
 	unsigned int index;
 	
@@ -499,7 +498,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)updateVisibleColumns
 {
-	NSArray * fields = [db arrayOfFields];
+	NSArray * fields = [[Database sharedDatabase] arrayOfFields];
 	int count = [fields count];
 	int index;
 
@@ -598,7 +597,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)saveTableSettings
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	NSArray * fields = [db arrayOfFields];
+	NSArray * fields = [[Database sharedDatabase] arrayOfFields];
 	NSEnumerator * enumerator = [fields objectEnumerator];
 	Field * field;
 	
@@ -684,8 +683,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)updateArticleListRowHeight
 {
+	Database * db = [Database sharedDatabase];
 	int height = [articleListFont defaultLineHeightForFont];
 	int numberOfRowsInCell = 1;
+
 	if (tableLayout == MA_Condensed_Layout)
 	{
 		if ([[db fieldByName:MA_Field_Subject] visible])
@@ -979,7 +980,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
 	{
-		Folder * folder = [db folderFromID:currentFolderId];
+		Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
 		if (IsSmartFolder(folder))
 			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
@@ -1182,7 +1183,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (currentFolderId == -1)
 		return @"";
 
-	Folder * folder = [db folderFromID:currentFolderId];
+	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
 	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]];
 }
 
@@ -1241,7 +1242,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)setArticleListHeader
 {
-	Folder * folder = [db folderFromID:currentFolderId];
+	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
 	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
 	NSString * captionString = [NSString stringWithFormat:@"%@ (Filtered: %@)", [folder name], NSLocalizedString([filter name], nil)];
 	[articleListHeader setStringValue:captionString];
@@ -1254,7 +1255,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	[folderArrayOfArticles release];
 	
-	Folder * folder = [db folderFromID:currentFolderId];
+	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
 	folderArrayOfArticles = [[folder articlesWithFilter:[controller searchString]] retain];
 	
 	[currentArrayOfArticles release];
@@ -1336,7 +1337,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	if (newFolderId != currentFolderId)
 	{
-		[db flushFolder:currentFolderId];
+		[[Database sharedDatabase] flushFolder:currentFolderId];
 		[articleList deselectAll:self];
 		currentFolderId = newFolderId;
 		[self setArticleListHeader];
@@ -1439,7 +1440,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	for (index = 0; index < [msgArray count]; ++index)
 	{
 		Article * theArticle = [msgArray objectAtIndex:index];
-		Folder * folder = [db folderFromID:[theArticle folderId]];
+		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
 
 		// Use the first article as the base URL
 		if (index == 0)
@@ -1496,7 +1497,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// requires a URL to an actual file as the second parameter or it won't work.
 	[htmlText appendString:@"</body></html>"];
 
-	Folder * folder = [db folderFromID:folderIdToUse];
+	Folder * folder = [[Database sharedDatabase] folderFromID:folderIdToUse];
 	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
 	const char * utf8String = [htmlText UTF8String];
 	[[articleText mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
@@ -1556,7 +1557,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	if (currentSelectedRow != -1 && ![db readOnly])
+	if (currentSelectedRow != -1 && ![[Database sharedDatabase] readOnly])
 	{
 		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
@@ -1579,6 +1580,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
+	Database * db = [Database sharedDatabase];
 	Article * theArticle;
 	
 	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfArticles count]);
@@ -1739,7 +1741,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (!isInTableInit && !isAppInitialising && !isChangingOrientation)
 	{
 		NSTableColumn * tableColumn = [[notification userInfo] objectForKey:@"NSTableColumn"];
-		Field * field = [db fieldByName:[tableColumn identifier]];
+		Field * field = [[Database sharedDatabase] fieldByName:[tableColumn identifier]];
 		int oldWidth = [[[notification userInfo] objectForKey:@"NSOldWidth"] intValue];
 		
 		if (oldWidth != [tableColumn width])
@@ -1769,6 +1771,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMutableArray * arrayOfArticles = [[NSMutableArray alloc] init];
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
+	Database * db = [Database sharedDatabase];
 	int count = [rows count];
 	int index;
 	
@@ -1875,6 +1878,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copy of
 	// currentArrayOfArticles.
+	Database * db = [Database sharedDatabase];
 	[db beginTransaction];
 	while ((theArticle = [enumerator nextObject]) != nil)
 	{
@@ -1932,6 +1936,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Iterate over every selected article in the table and remove it from
 	// the database.
+	Database * db = [Database sharedDatabase];
 	NSEnumerator * enumerator = [articleList selectedRowEnumerator];
 	NSNumber * rowIndex;
 
@@ -1993,6 +1998,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
 	NSEnumerator * enumerator = [articleArray objectEnumerator];
+	Database * db = [Database sharedDatabase];
 	Article * theArticle;
 	
 	// Set up to undo this action
@@ -2033,7 +2039,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];	
 	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
 	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
@@ -2041,6 +2047,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[markReadTimer invalidate];
 	[markReadTimer release];
 	markReadTimer = nil;
+	
+	Database * db = [Database sharedDatabase];
 
 	[db beginTransaction];
 	[self innerMarkReadByArray:articleArray readFlag:readFlag];
@@ -2060,6 +2068,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	NSEnumerator * enumerator = [articleArray objectEnumerator];
+	Database * db = [Database sharedDatabase];
 	int lastFolderId = -1;
 	Article * theArticle;
 
@@ -2098,6 +2107,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
+	Database * db = [Database sharedDatabase];
 	NSArray * refArray = nil;
 	BOOL flag = NO;
 
@@ -2123,6 +2133,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	NSEnumerator * enumerator = [folderArray objectEnumerator];
+	Database * db = [Database sharedDatabase];
 	Folder * folder;
 
 	NSAssert(needRefreshPtr != nil, @"needRefresh pointer cannot be nil");
@@ -2188,6 +2199,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	NSEnumerator * enumerator = [refArray objectEnumerator];
+	Database * db = [Database sharedDatabase];
 	ArticleReference * ref;
 	int lastFolderId = -1;
 
@@ -2273,7 +2285,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[db release];
 	[stylePathMappings release];
 	[cssStylesheet release];
 	[htmlTemplate release];

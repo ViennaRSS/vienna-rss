@@ -16,6 +16,7 @@
                 editFolder = id; 
                 emptyTrash = id; 
                 exportSubscriptions = id; 
+                getInfo = id; 
                 goBack = id; 
                 goForward = id; 
                 handleAbout = id; 
@@ -53,7 +54,6 @@
                 skipFolder = id; 
                 stopReloadingPage = id; 
                 toggleActivityViewer = id; 
-                validateFeed = id; 
                 viewArticlePage = id; 
                 viewArticlePageInAlternateBrowser = id; 
                 viewNextUnread = id; 
