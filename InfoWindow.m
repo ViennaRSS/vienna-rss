@@ -189,7 +189,8 @@ static InfoWindowManager * _infoWindowManager = nil;
 {
 	[self updateFolder];
 	[self enableValidateButton];
-	
+	[[self window] setInitialFirstResponder:urlField];
+
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:urlField];
 }

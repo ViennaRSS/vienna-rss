@@ -47,10 +47,10 @@
 {
     NSImage *image;
 
-    if ((image = [self imageNamed:@"SNDisclosureArrowRight"]))
+    if ((image = [self imageNamed:@"SNDisclosureArrowDown"]))
         [self setImage:image];
 
-    if ((image = [self imageNamed:@"SNDisclosureArrowDown"]))
+    if ((image = [self imageNamed:@"SNDisclosureArrowRight"]))
         [self setAlternateImage:image];
 
 	[[self cell] setFont:[NSFont controlContentFontOfSize:[NSFont smallSystemFontSize]]];
