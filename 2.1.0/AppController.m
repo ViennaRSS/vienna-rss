@@ -1271,6 +1271,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* keyboardShortcutsHelp
+ * Display the Keyboard Shortcuts help page.
+ */
+-(IBAction)keyboardShortcutsHelp:(id)sender
+{
+	GotoHelpPage((CFStringRef)@"keyboard.html", (CFStringRef)@"");
+}
+
 /* showPreferencePanel
  * Display the Preference Panel.
  */

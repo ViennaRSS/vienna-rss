@@ -19,6 +19,7 @@
 
 #import "HelperFunctions.h"
 #import "SystemConfiguration/SCNetworkReachability.h"
+#import "Carbon/Carbon.h"
 
 /* hasOSScriptsMenu
  * Determines whether the OS script menu is present or not.
@@ -165,4 +166,32 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 					  fullBodyText);
 	[fullBodyText release];
 	va_end(arguments);
+}
+
+/* GotoHelpPage
+ * Displays a specified page of the help file.
+ */
+OSStatus GotoHelpPage (CFStringRef pagePath, CFStringRef anchorName)
+{
+    CFBundleRef myApplicationBundle = NULL;
+    CFStringRef myBookName = NULL;
+    OSStatus err = noErr;
+
+    myApplicationBundle = CFBundleGetMainBundle();
+	if (myApplicationBundle == NULL)
+		err = fnfErr;
+	else
+	{
+		myBookName = CFBundleGetValueForInfoDictionaryKey(myApplicationBundle, CFSTR("CFBundleHelpBookName"));
+		if (myBookName == NULL)
+			err = fnfErr;
+		else
+		{
+			if (CFGetTypeID(myBookName) != CFStringGetTypeID())
+				err = paramErr;
+		}
+	}
+	if (err == noErr)
+		err = AHGotoPage(myBookName, pagePath, anchorName);
+	return err;
 }
