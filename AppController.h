@@ -131,6 +131,7 @@
 -(IBAction)openWebLocation:(id)sender;
 -(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
+-(IBAction)keyboardShortcutsHelp:(id)sender;
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

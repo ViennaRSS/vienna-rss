@@ -22,6 +22,7 @@
                 handleAbout = id; 
                 importSubscriptions = id; 
                 increaseFontSize = id; 
+                keyboardShortcutsHelp = id; 
                 mailLinkToArticlePage = id; 
                 markAllRead = id; 
                 markAllSubscriptionsRead = id; 

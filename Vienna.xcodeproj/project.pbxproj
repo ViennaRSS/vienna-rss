@@ -164,6 +164,7 @@
 		AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
 		AAA817F7087F986700C30683 /* AsyncConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA817F5087F986700C30683 /* AsyncConnection.h */; };
 		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
+		AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB076170A076BBE00A9F76A /* Carbon.framework */; };
 		AAB821B00999C2AD00F3C730 /* attach.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8217D0999C2AC00F3C730 /* attach.c */; };
 		AAB821B10999C2AD00F3C730 /* auth.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8217E0999C2AC00F3C730 /* auth.c */; };
 		AAB821B20999C2AD00F3C730 /* btree.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8217F0999C2AC00F3C730 /* btree.c */; };
@@ -621,6 +622,7 @@
 		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
+		AAB076170A076BBE00A9F76A /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		AAB8217D0999C2AC00F3C730 /* attach.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = attach.c; sourceTree = "<group>"; };
 		AAB8217E0999C2AC00F3C730 /* auth.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = auth.c; sourceTree = "<group>"; };
 		AAB8217F0999C2AC00F3C730 /* btree.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = btree.c; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 				AA1EE32F08F4064C00A9B20C /* IOKit.framework in Frameworks */,
 				AAA569F309EE777400C87343 /* Foundation.framework in Frameworks */,
 				AAA569F409EE777400C87343 /* AppKit.framework in Frameworks */,
+				AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,6 +789,7 @@
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAB076170A076BBE00A9F76A /* Carbon.framework */,
 				AA1EE32E08F4064C00A9B20C /* IOKit.framework */,
 				AA7A0C8708874CEB0027F04F /* SystemConfiguration.framework */,
 				AA62D7DB0859A9F70040C370 /* Growl.framework */,
@@ -2232,6 +2236,7 @@
 					"$(SDKROOT)/System/Library/Frameworks",
 					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/build/Deployment",
+					"$(SYSTEM_DEVELOPER_DIR)/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_ENABLE_TRIGRAPHS = NO;
