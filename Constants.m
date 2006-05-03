@@ -58,7 +58,7 @@ const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
 const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
-const float MA_Default_Selection_Change_Interval = 0.3;
+const float MA_Default_Selection_Change_Interval = 0.2;
 const int MA_Default_AutoExpireDuration = 0;
 
 // Custom pasteboard types
