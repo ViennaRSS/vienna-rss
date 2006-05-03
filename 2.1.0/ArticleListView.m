@@ -1408,7 +1408,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		selectionTimer = nil;
 
 		float interval = [[Preferences standardPreferences] selectionChangeInterval];
-		if (interval == 0 || !delayFlag)
+		if (!testForKey(kShift) || !delayFlag )
 			[self refreshImmediatelyArticleAtCurrentRow];
 		else
 			selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:interval

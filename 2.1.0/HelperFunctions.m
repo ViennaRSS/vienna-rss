@@ -195,3 +195,14 @@ OSStatus GotoHelpPage (CFStringRef pagePath, CFStringRef anchorName)
 		err = AHGotoPage(myBookName, pagePath, anchorName);
 	return err;
 }
+
+/* testForKey
+ * Returns whether the specified key is pressed.
+ */
+BOOL testForKey(int kKeyCode)
+{
+	unsigned char map[16];
+
+	GetKeys((void *)&map);
+	return map[(kKeyCode >> 3)] & (1 << (kKeyCode & 7));
+}
