@@ -204,6 +204,7 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
+		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
 		// Create a criteria to find all marked articles
 		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
@@ -254,10 +255,12 @@ static Database * _sharedDatabase = nil;
 
 	// Upgrade to rev 13.
 	// Add createddate field to the messages table and initialise it to a date in the past.
+	// Create an index on the message_id column.
 	if (databaseVersion < 13)
 	{
 		[self executeSQL:@"alter table messages add column createddate"];
 		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
+		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
 		// Set the new version
 		[self setDatabaseVersion:13];
