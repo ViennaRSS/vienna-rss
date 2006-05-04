@@ -2056,10 +2056,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	markReadTimer = nil;
 	
 	Database * db = [Database sharedDatabase];
+	BOOL singleArticle = [articleArray count] < 2;
 
-	[db beginTransaction];
+	if (!singleArticle)
+		[db beginTransaction];
 	[self innerMarkReadByArray:articleArray readFlag:readFlag];
-	[db commitTransaction];
+	if (!singleArticle)
+		[db commitTransaction];
 	[articleList reloadData];
 
 	[foldersTree updateFolder:currentFolderId recurseToParents:YES];
