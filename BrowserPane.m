@@ -18,6 +18,7 @@
 //  limitations under the License.
 //
 
+#import "ViennaApp.h"
 #import "BrowserPane.h"
 #import "ArticleView.h"
 #import "Constants.h"
@@ -67,7 +68,7 @@
 	// Create our webview
 	[webPane setUIDelegate:self];
 	[webPane setFrameLoadDelegate:self];
-	[webPane setCustomUserAgent:MA_DefaultUserAgentString];
+	[webPane setCustomUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
 	
 	// Set our box attributes
 	[boxFrame setContentViewMargins:NSMakeSize(1, 1)];

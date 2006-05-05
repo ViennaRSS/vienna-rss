@@ -18,6 +18,7 @@
 //  limitations under the License.
 //
 
+#import "ViennaApp.h"
 #import "AsyncConnection.h"
 #import "StringExtensions.h"
 
@@ -25,9 +26,6 @@
 @interface AsyncConnection (Private)
 	-(void)sendConnectionCompleteNotification;
 @end
-
-// Our default user agent. Mimic Safari 2.0.1 (412)
-static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/412 (KHTML, like Gecko) Safari/412";
 
 @implementation AsyncConnection
 
@@ -168,8 +166,8 @@ static NSString * MA_Default_User_Agent = @"Mozilla/5.0 (Macintosh; U; PPC Mac O
 	}
 
 	// Some sites refuse to respond without a User-agent string.
-	[theRequest addValue:MA_Default_User_Agent forHTTPHeaderField:@"User-agent"];
-	
+	[theRequest addValue:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]] forHTTPHeaderField:@"User-agent"];
+
 	status = MA_Connect_Stopped;
 	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
 	return connector != nil;
