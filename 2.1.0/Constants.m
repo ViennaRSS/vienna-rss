@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en) AppleWebKit/417.3 (KHTML, like Gecko) Safari/417.2";
+NSString * MA_DefaultUserAgentString = @"Vienna/%@ (Mac OS X; http://vienna-rss.sourceforge.net/)";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_FolderFont = @"FolderFont";
