@@ -94,6 +94,7 @@
 -(NSView *)mainView;
 -(NSView *)articleView;
 -(void)sortByIdentifier:(NSString *)columnName;
+-(void)makeRowSelectedAndVisible:(int)rowIndex;
 -(Article *)selectedArticle;
 -(void)displayNextUnread;
 -(void)deleteSelectedArticles;

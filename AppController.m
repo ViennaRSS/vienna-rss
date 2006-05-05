@@ -1688,7 +1688,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					return YES;
 				}
 			}
-				return NO;
+			return NO;
 			
 		case NSRightArrowFunctionKey:
 			if (flags & NSCommandKeyMask)
@@ -1698,10 +1698,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				if ([mainWindow firstResponder] == [foldersTree mainView])
 				{
 					[mainWindow makeFirstResponder:[mainArticleView mainView]];
+					if ([self selectedArticle] == nil)
+						[mainArticleView makeRowSelectedAndVisible:0];
 					return YES;
 				}
 			}
-				return NO;
+			return NO;
 			
 		case NSDeleteFunctionKey:
 			[self deleteMessage:self];
