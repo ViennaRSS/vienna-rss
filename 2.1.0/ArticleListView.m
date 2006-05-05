@@ -55,7 +55,6 @@
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)selectFirstUnreadInFolder;
-	-(void)makeRowSelectedAndVisible:(int)rowIndex;
 	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
 	-(void)loadMinimumFontSize;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
