@@ -1067,11 +1067,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
-	if (rowIndex == currentSelectedRow)
+	if ([currentArrayOfArticles count] == 0u)
+		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+	else if (rowIndex == currentSelectedRow)
 		[self refreshArticleAtCurrentRow:NO];
 	else
 	{
-		[articleList selectRow:rowIndex byExtendingSelection:NO];
+		[articleList selectRow:rowIndex byExtendingSelection:NO]; // Warning: this method has been deprecated.  Should be changed to selectRowIndexes:byExtendingSelection:
 		if (currentSelectedRow == -1 || blockSelectionHandler)
 		{
 			currentSelectedRow = rowIndex;
@@ -1111,6 +1113,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				guidOfArticleToSelect = nil;
 				[foldersTree selectFolder:nextFolderWithUnread];
 				[[NSApp mainWindow] makeFirstResponder:articleList];
+				[self selectFirstUnreadInFolder];
 			}
 		}
 	}
@@ -1166,6 +1169,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Otherwise we force the folder to be selected and seed guidOfArticleToSelect
 	// so that after handleFolderSelection has been invoked, it will select the
 	// requisite article on our behalf.
+	currentSelectedRow = -1;
 	[guidOfArticleToSelect release];
 	guidOfArticleToSelect = [guid retain];
 	[foldersTree selectFolder:folderId];
@@ -1328,7 +1332,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if ([articleList numberOfSelectedRows] <= 1)
 		{
 			blockSelectionHandler = YES;
-			[articleList selectRow:row byExtendingSelection:NO];
+			[articleList selectRow:row byExtendingSelection:NO]; // Warning: this method has been deprecated.  Should be changed to selectRowIndexes:byExtendingSelection:
 			[self refreshArticleAtCurrentRow:NO];
 			blockSelectionHandler = NO;
 		}
@@ -1345,6 +1349,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		[[Database sharedDatabase] flushFolder:currentFolderId];
 		[articleList deselectAll:self];
+		currentSelectedRow = -1;
 		currentFolderId = newFolderId;
 		[self setArticleListHeader];
 		[self reloadArrayOfArticles];
