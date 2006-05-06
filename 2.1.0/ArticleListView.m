@@ -550,7 +550,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[headerCell setTitle:[field displayName]];
 			[column setEditable:NO];
 			if([column respondsToSelector: @selector(setResizingMask:)]) {
-				[column setResizingMask:isResizable ? NSTableColumnAutoresizingMask : NSTableColumnNoResizing];
+				[column setResizingMask:isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing];
 			}
 			else {
 				[column setResizable:isResizable];
