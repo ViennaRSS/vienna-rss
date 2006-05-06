@@ -1417,17 +1417,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	TreeNode * node = (TreeNode *)[nc object];
 	int newFolderId = [node nodeId];
 	
-	// We only care if the selection really changed
 	if ([mainArticleView currentFolderId] != newFolderId && newFolderId != 0)
-	{
-		// Make sure article viewer is active
-		[browserView setActiveTabToPrimaryTab];
-		
-		// Blank out the search field
-		[self setSearchString:@""];
 		[mainArticleView selectFolderWithFilter:newFolderId];
-		[self updateSearchPlaceholder];
-	}
+	
+	// Make sure article viewer is active
+	[browserView setActiveTabToPrimaryTab];
+	
+	// Blank out the search field
+	[self setSearchString:@""];
+	[self updateSearchPlaceholder];
 }
 
 /* handleDidBecomeKeyWindow
@@ -1529,7 +1527,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSView<BaseView> * newView = [nc object];
 	if (newView == mainArticleView)
-		[mainWindow makeFirstResponder:[mainArticleView mainView]];
+	{
+		if ([self selectedArticle] == nil)
+			[mainWindow makeFirstResponder:[foldersTree mainView]];
+		else
+			[mainWindow makeFirstResponder:[mainArticleView mainView]];		
+	}
 	else
 	{
 		BrowserPane * webPane = (BrowserPane *)newView;
@@ -1697,9 +1700,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			{
 				if ([mainWindow firstResponder] == [foldersTree mainView])
 				{
-					[mainWindow makeFirstResponder:[mainArticleView mainView]];
+					[browserView setActiveTabToPrimaryTab];
 					if ([self selectedArticle] == nil)
+					{
+						[mainWindow makeFirstResponder:[mainArticleView mainView]];
 						[mainArticleView makeRowSelectedAndVisible:0];
+						if ([mainWindow firstResponder] == [foldersTree mainView])
+							return NO;
+					}
 					return YES;
 				}
 			}
