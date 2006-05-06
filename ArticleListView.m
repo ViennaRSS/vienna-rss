@@ -379,6 +379,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[field setWidth:width];
 	}
 	
+	// In condensed mode, the summary field takes up the whole space
+	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
+		[articleList setColumnAutoresizingStyle:NSTableViewSequentialColumnAutoresizingStyle];
+	else
+		[articleList setAutoresizesAllColumnsToFit:NO];
+	
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
@@ -504,6 +510,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
 	
+	// Remove old columns
+	NSEnumerator * enumerator = [[articleList tableColumns] objectEnumerator];
+	id nextObject;
+	while ((nextObject = [enumerator nextObject]))
+		[articleList removeTableColumn:nextObject];
+	
 	[self updateArticleListRowHeight];
 	
 	// Create the new columns
@@ -513,11 +525,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		NSString * identifier = [field name];
 		int tag = [field tag];
 		BOOL showField;
-		
-		// Remove each column as we go.
-		NSTableColumn * tableColumn = [articleList tableColumnWithIdentifier:identifier];
-		if (tableColumn != nil)
-			[articleList removeTableColumn:tableColumn];
 		
 		// Handle condensed layout vs. table layout
 		if (tableLayout == MA_Table_Layout)
@@ -561,7 +568,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[articleList addTableColumn:column];
 			[column release];
 		}
-		[articleList sizeToFit];
 	}
 	
 	// Set the extended date formatter on the Date column
@@ -579,13 +585,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Initialise the sort direction
 	[self showSortDirection];	
-
-	// In condensed mode, the summary field takes up the whole space
-	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
-		[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
-	else
-		[articleList setAutoresizesAllColumnsToFit:YES];
-
+	
 	// Done
 	isInTableInit = NO;
 }
