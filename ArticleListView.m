@@ -1355,7 +1355,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self reloadArrayOfArticles];
 		[self sortArticles];
 		[articleList reloadData];
-		[articleList scrollRowToVisible:0];
+		if (guidOfArticleToSelect == nil)
+			[articleList scrollRowToVisible:0];
+		else
+			[self selectArticleAfterReload];
 	}
 }
 
