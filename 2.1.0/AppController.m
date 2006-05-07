@@ -1418,13 +1418,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int newFolderId = [node nodeId];
 	
 	if ([mainArticleView currentFolderId] != newFolderId && newFolderId != 0)
-		[mainArticleView selectFolderWithFilter:newFolderId];
+	{
+		// Blank out the search field
+		[self setSearchString:@""];
+		
+		[mainArticleView selectFolderWithFilter:newFolderId];		
+	}
 	
 	// Make sure article viewer is active
 	[browserView setActiveTabToPrimaryTab];
 	
-	// Blank out the search field
-	[self setSearchString:@""];
 	[self updateSearchPlaceholder];
 }
 
