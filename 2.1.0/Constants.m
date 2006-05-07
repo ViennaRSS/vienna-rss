@@ -21,7 +21,7 @@
 NSString * MA_DefaultUserAgentString = @"Vienna/%@ (Mac OS X; http://vienna-rss.sourceforge.net/)";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
-NSString * MAPref_ShowUnreadArticlesInBold = @"MakeUnreadArticlesBold";
+NSString * MAPref_ShowUnreadArticlesInBold = @"ShowUnreadArticlesInBold";
 NSString * MAPref_FolderFont = @"FolderFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
