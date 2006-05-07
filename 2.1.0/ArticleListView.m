@@ -637,7 +637,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	Preferences * prefs = [Preferences standardPreferences];
 	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
-	articleListUnreadFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont];
+	articleListUnreadFont = [prefs boolForKey:MAPref_ShowUnreadArticlesInBold] ? [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont] : articleListFont;
 
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[style setLineBreakMode:NSLineBreakByTruncatingTail];
