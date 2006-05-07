@@ -1701,9 +1701,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				if ([mainWindow firstResponder] == [foldersTree mainView])
 				{
 					[browserView setActiveTabToPrimaryTab];
+					[mainWindow makeFirstResponder:[mainArticleView mainView]];
 					if ([self selectedArticle] == nil)
 					{
-						[mainWindow makeFirstResponder:[mainArticleView mainView]];
 						[mainArticleView makeRowSelectedAndVisible:0];
 						if ([mainWindow firstResponder] == [foldersTree mainView])
 							return NO;
