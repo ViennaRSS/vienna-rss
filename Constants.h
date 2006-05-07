@@ -22,6 +22,7 @@ extern NSString * MA_DefaultStyleName;
 extern NSString * MA_DefaultUserAgentString;
 
 extern NSString * MAPref_ArticleListFont;
+extern NSString * MAPref_ShowUnreadArticlesInBold;
 extern NSString * MAPref_FolderFont;
 extern NSString * MAPref_CachedFolderID;
 extern NSString * MAPref_DefaultDatabase;
