@@ -44,7 +44,7 @@ BOOL hasOSScriptsMenu(void)
  */
 NSString * getDefaultBrowser(void)
 {
-	NSURL * testURL = [NSURL URLWithString:@"http://www.test.com"];
+	NSURL * testURL = [NSURL URLWithString:@"http://example.net"];
 	NSString * registeredAppURL = nil;
 	CFURLRef appURL = nil;
 
