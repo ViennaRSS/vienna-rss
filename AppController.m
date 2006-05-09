@@ -28,7 +28,6 @@
 #import "StringExtensions.h"
 #import "SplitViewExtensions.h"
 #import "BrowserView.h"
-#import "CheckForUpdates.h"
 #import "SearchFolder.h"
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
@@ -135,7 +134,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleFolderSelection:) name:@"MA_Notify_FolderSelectionChange" object:nil];
 	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-	[nc addObserver:self selector:@selector(checkForUpdatesComplete:) name:@"MA_Notify_UpdateCheckCompleted" object:nil];
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
@@ -366,14 +364,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	// Fix up the Tab ordering
 	[[foldersTree mainView] setNextKeyView:[mainArticleView mainView]];
-	
-	// Check for application updates silently
-	if ([prefs checkForNewOnStartup])
-	{
-		if (!checkUpdates)
-			checkUpdates = [[CheckForUpdates alloc] init];
-		[checkUpdates checkForUpdate:mainWindow showUI:NO];
-	}
 	
 	// Kick off an initial refresh
 	if ([prefs refreshOnStartup])
@@ -2658,7 +2648,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[smartFolder release];
 	[rssFeed release];
 	[groupFolder release];
-	[checkUpdates release];
 	[preferenceController release];
 	[activityViewer release];
 	[checkTimer release];

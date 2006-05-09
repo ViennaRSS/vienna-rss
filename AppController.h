@@ -26,7 +26,6 @@
 
 @class NewPreferenceController;
 @class FoldersTree;
-@class CheckForUpdates;
 @class SearchFolder;
 @class DownloadWindow;
 @class NewSubscription;
@@ -59,7 +58,6 @@
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
-	CheckForUpdates * checkUpdates;
 	DownloadWindow * downloadWindow;
 	SearchFolder * smartFolder;
 	NewSubscription * rssFeed;
