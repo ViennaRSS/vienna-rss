@@ -216,7 +216,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[username setStringValue:[folder username]];
 	[password setStringValue:[folder password]];
 	[folderDescription setStringValue:[folder feedDescription]];
-	[folderSize setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), [folder countOfCachedArticles]]];
+	[folderSize setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])]];
 	[folderUnread setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), [folder unreadCount]]];
 	[isSubscribed setState:([folder flags] & MA_FFlag_Unsubscribed) ? NSOffState : NSOnState];
 }

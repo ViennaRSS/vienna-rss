@@ -220,7 +220,7 @@
 		webPane = (WebView *)[(BrowserPane *)theView mainView];
 
 	if ([theView isKindOfClass:[ArticleListView class]])
-		webPane = (WebView *)[(ArticleListView *)theView articleView];
+		webPane = (WebView *)[(ArticleListView *)theView webView];
 	
 	if (webPane != nil)
 	{
@@ -253,8 +253,9 @@
  */
 -(void)setCurrentFolder:(Folder *)newCurrentFolder
 {
+	AppController * controller = (AppController *)[NSApp delegate];
 	int folderId = [newCurrentFolder itemId];
-	[[self delegate] selectFolder:folderId];
+	[controller selectFolder:folderId];
 }
 
 /* Accessor getters
@@ -262,7 +263,7 @@
  */
 -(int)autoExpireDuration			{ return [[Preferences standardPreferences] autoExpireDuration]; }
 -(float)markReadInterval			{ return [[Preferences standardPreferences] markReadInterval]; }
--(BOOL)readingPaneOnRight			{ return [[Preferences standardPreferences] readingPaneOnRight]; }
+-(BOOL)readingPaneOnRight			{ return [[Preferences standardPreferences] layout] == MA_Layout_Condensed; }
 -(int)filterMode					{ return [[Preferences standardPreferences] filterMode]; }
 -(BOOL)refreshOnStartup				{ return [[Preferences standardPreferences] refreshOnStartup]; }
 -(BOOL)checkForNewOnStartup			{ return [[Preferences standardPreferences] checkForNewOnStartup]; }
@@ -282,7 +283,7 @@
  */
 -(void)setAutoExpireDuration:(int)newDuration		{ [[Preferences standardPreferences] setAutoExpireDuration:newDuration]; }
 -(void)setMarkReadInterval:(float)newInterval		{ [[Preferences standardPreferences] setMarkReadInterval:newInterval]; }
--(void)setReadingPaneOnRight:(BOOL)flag				{ [[Preferences standardPreferences] setReadingPaneOnRight:flag]; }
+-(void)setReadingPaneOnRight:(BOOL)flag				{ ; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [[Preferences standardPreferences] setRefreshOnStartup:flag]; }
 -(void)setFilterMode:(int)newMode					{ [[Preferences standardPreferences] setFilterMode:newMode]; }
 -(void)setCheckForNewOnStartup:(BOOL)flag			{ [[Preferences standardPreferences] setCheckForNewOnStartup:flag]; }

@@ -110,7 +110,7 @@
 			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
 			[itemDict setObject:[XMLParser quoteAttributes:(link ? link : @"")] forKey:@"htmlUrl"];
 			[itemDict setObject:[XMLParser quoteAttributes:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:[XMLParser quoteAttributes:(description ? description : @"")] forKey:@"description"];
+			[itemDict setObject:[XMLParser quoteAttributes:description] forKey:@"description"];
 			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
 			++countExported;
 		}

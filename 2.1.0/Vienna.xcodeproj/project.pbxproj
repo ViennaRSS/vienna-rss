@@ -250,6 +250,14 @@
 		AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7A8FF086BB5C4009A487E /* PopupButton.h */; };
 		AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7A900086BB5C4009A487E /* PopupButton.m */; };
 		AAE7A960086BBA1F009A487E /* refresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE7A95F086BBA1F009A487E /* refresh.tiff */; };
+		AAE7E5640A1045DC00685562 /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E5620A1045DC00685562 /* ArticleController.m */; };
+		AAE7E5650A1045DC00685562 /* ArticleController.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7E5630A1045DC00685562 /* ArticleController.h */; };
+		AAE7E56A0A1045EC00685562 /* ArticleBaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7E5690A1045EC00685562 /* ArticleBaseView.h */; };
+		AAE7E5720A10462600685562 /* BaseView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7E5710A10462600685562 /* BaseView.h */; };
+		AAE7E5B10A10481D00685562 /* UnifiedDisplayView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7E5AF0A10481D00685562 /* UnifiedDisplayView.h */; };
+		AAE7E5B20A10481D00685562 /* UnifiedDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E5B00A10481D00685562 /* UnifiedDisplayView.m */; };
+		AAE7E64E0A104DCE00685562 /* TabbedWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E64C0A104DCE00685562 /* TabbedWebView.m */; };
+		AAE7E64F0A104DCE00685562 /* TabbedWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE7E64D0A104DCE00685562 /* TabbedWebView.h */; };
 		AAEB1A5208E74EE300917920 /* ArrayExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEB1A5008E74EE300917920 /* ArrayExtensions.h */; };
 		AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEB1A5108E74EE300917920 /* ArrayExtensions.m */; };
 		AAED7A9E09FDE01000ED56E5 /* InfoWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAED7A9C09FDE01000ED56E5 /* InfoWindow.h */; };
@@ -706,6 +714,14 @@
 		AAE7A8FF086BB5C4009A487E /* PopupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupButton.h; sourceTree = "<group>"; };
 		AAE7A900086BB5C4009A487E /* PopupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupButton.m; sourceTree = "<group>"; };
 		AAE7A95F086BBA1F009A487E /* refresh.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = refresh.tiff; sourceTree = "<group>"; };
+		AAE7E5620A1045DC00685562 /* ArticleController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArticleController.m; sourceTree = "<group>"; };
+		AAE7E5630A1045DC00685562 /* ArticleController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArticleController.h; sourceTree = "<group>"; };
+		AAE7E5690A1045EC00685562 /* ArticleBaseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArticleBaseView.h; sourceTree = "<group>"; };
+		AAE7E5710A10462600685562 /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
+		AAE7E5AF0A10481D00685562 /* UnifiedDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = UnifiedDisplayView.h; sourceTree = "<group>"; };
+		AAE7E5B00A10481D00685562 /* UnifiedDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = UnifiedDisplayView.m; sourceTree = "<group>"; };
+		AAE7E64C0A104DCE00685562 /* TabbedWebView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TabbedWebView.m; sourceTree = "<group>"; };
+		AAE7E64D0A104DCE00685562 /* TabbedWebView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TabbedWebView.h; sourceTree = "<group>"; };
 		AAEB1A5008E74EE300917920 /* ArrayExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayExtensions.h; sourceTree = "<group>"; };
 		AAEB1A5108E74EE300917920 /* ArrayExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayExtensions.m; sourceTree = "<group>"; };
 		AAED7A9C09FDE01000ED56E5 /* InfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = InfoWindow.h; sourceTree = "<group>"; };
@@ -818,12 +834,16 @@
 				AABFDCA00609EA8100100A9B /* ActivityViewer.m */,
 				AACFDEBA0604D4D20072D140 /* AppController.h */,
 				AACFDEBB0604D4D20072D140 /* AppController.m */,
+				AAE7E5690A1045EC00685562 /* ArticleBaseView.h */,
+				AAE7E5630A1045DC00685562 /* ArticleController.h */,
+				AAE7E5620A1045DC00685562 /* ArticleController.m */,
 				AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */,
 				AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */,
 				AA74A85D087B56810029797C /* ArticleView.h */,
 				AA74A85E087B56810029797C /* ArticleView.m */,
 				AAA817F5087F986700C30683 /* AsyncConnection.h */,
 				AAA817F6087F986700C30683 /* AsyncConnection.m */,
+				AAE7E5710A10462600685562 /* BaseView.h */,
 				AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */,
 				AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */,
 				AA710F8409BB7F3800E3EA8A /* BrowserPaneTemplate.h */,
@@ -860,8 +880,12 @@
 				AAA5775109A47CF800602469 /* RenameFolder.m */,
 				AAA3AF0706338A00006735EB /* SearchFolder.h */,
 				AAA3AF0806338A00006735EB /* SearchFolder.m */,
+				AAE7E64D0A104DCE00685562 /* TabbedWebView.h */,
+				AAE7E64C0A104DCE00685562 /* TabbedWebView.m */,
 				AA26F4D30604927300FE7994 /* TreeNode.h */,
 				AA26F4D40604927300FE7994 /* TreeNode.m */,
+				AAE7E5AF0A10481D00685562 /* UnifiedDisplayView.h */,
+				AAE7E5B00A10481D00685562 /* UnifiedDisplayView.m */,
 				AA26F5B70604964000FE7994 /* URLHandlerCommand.h */,
 				AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */,
 				AA682CF5069A955F00228193 /* ViennaApp.h */,
@@ -1259,6 +1283,11 @@
 				AAED82F90A037A2A00ED56E5 /* SNDisclosureButton.h in Headers */,
 				AAED83000A037A6700ED56E5 /* SNDisclosableView.h in Headers */,
 				AAED83030A037A8200ED56E5 /* DisclosableView.h in Headers */,
+				AAE7E5650A1045DC00685562 /* ArticleController.h in Headers */,
+				AAE7E56A0A1045EC00685562 /* ArticleBaseView.h in Headers */,
+				AAE7E5720A10462600685562 /* BaseView.h in Headers */,
+				AAE7E5B10A10481D00685562 /* UnifiedDisplayView.h in Headers */,
+				AAE7E64F0A104DCE00685562 /* TabbedWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1822,6 +1851,9 @@
 				AAED7A9F09FDE01000ED56E5 /* InfoWindow.m in Sources */,
 				AAED82F80A037A2A00ED56E5 /* SNDisclosureButton.m in Sources */,
 				AAED83010A037A6700ED56E5 /* SNDisclosableView.m in Sources */,
+				AAE7E5640A1045DC00685562 /* ArticleController.m in Sources */,
+				AAE7E5B20A10481D00685562 /* UnifiedDisplayView.m in Sources */,
+				AAE7E64E0A104DCE00685562 /* TabbedWebView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

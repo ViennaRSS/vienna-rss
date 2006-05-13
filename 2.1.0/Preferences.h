@@ -29,10 +29,10 @@
 	int refreshFrequency;
 	int autoExpireDuration;
 	int filterMode;
+	int layout;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
 	BOOL enableMinimumFontSize;
-	BOOL readingPaneOnRight;
 	BOOL openLinksInVienna;
 	BOOL openLinksInBackground;
 	BOOL hasPrefs;
@@ -95,9 +95,9 @@
 -(float)markReadInterval;
 -(void)setMarkReadInterval:(float)newInterval;
 
-// Change position of reading pane
--(BOOL)readingPaneOnRight;
--(void)setReadingPaneOnRight:(BOOL)flag;
+// Layout style
+-(int)layout;
+-(void)setLayout:(int)newLayout;
 
 // Controls how articles are filtered in the view
 -(int)filterMode;

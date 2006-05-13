@@ -720,6 +720,11 @@ static const int MA_Left_Margin_Width = 10;
 	return activeTab;
 }
 
+-(BrowserTab *)primaryTab
+{
+	return [allTabs objectAtIndex:0];
+}
+
 /* activeTabView
  * Returns the view associated with the active tab.
  */
@@ -734,6 +739,14 @@ static const int MA_Left_Margin_Width = 10;
 -(void)setActiveTabToPrimaryTab
 {
 	[self showTab:[allTabs objectAtIndex:0]];
+}
+
+/* primaryTabView
+ * Return the primary tab view.
+ */
+-(NSView<BaseView> *)primaryTabView
+{
+	return [[allTabs objectAtIndex:0] associatedView];
 }
 
 /* setActiveTab

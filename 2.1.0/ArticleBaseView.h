@@ -1,8 +1,8 @@
 //
-//  ArticleView.h
+//  ArticleBaseView.h
 //  Vienna
 //
-//  Created by Steve on Tue Jul 05 2005.
+//  Created by Steve on 5/6/06.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,16 +18,13 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "TabbedWebView.h"
+@class ArticleView;
+@class Article;
 
-@interface ArticleView : TabbedWebView {
-	NSString * htmlTemplate;
-	NSString * cssStylesheet;
-}
-
-// Public functions
-+(NSDictionary *)stylesMap;
--(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString;
--(NSString *)articleTextFromArray:(NSArray *)msgArray;
+@protocol ArticleBaseView
+	-(void)selectFolderWithFilter:(int)newFolderId;
+	-(void)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
+	-(void)refreshFolder:(int)refreshFlag;
+	-(Article *)selectedArticle;
+	-(void)displayNextUnread;
 @end

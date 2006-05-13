@@ -28,6 +28,7 @@ Thanks!
 - Added "in phrase" to match text in a search criteria that contains a complete word or phrase.
 - Changed modifier key for overriding default browser preference from shift to option.
 - Add Get Info command option and moved Validate command to the info panel.
+- New Layout menu: report, condensed and unified layouts.
 
 2.0.4.2033
 ----------

@@ -20,49 +20,43 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
-#import "BacktrackArray.h"
 #import "WebKit/WebView.h"
 #import "ExtDateFormatter.h"
+#import "ArticleBaseView.h"
 #import "BrowserView.h"
+#import "PopupButton.h"
 
 @class AppController;
+@class ArticleController;
 @class MessageListView;
 @class ArticleView;
 @class TexturedHeader;
 @class FoldersTree;
 
-@interface ArticleListView : NSView<BaseView>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView>
 {
+	IBOutlet AppController * controller;
+	IBOutlet ArticleController * articleController;
 	IBOutlet TexturedHeader * articleListHeader;
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
-	IBOutlet NSSplitView * splitView2;	
+	IBOutlet NSSplitView * splitView2;
 	IBOutlet FoldersTree * foldersTree;
+	IBOutlet PopupButton * filtersPopupMenu;
 
 	int currentSelectedRow;
 	int tableLayout;
-	int currentFolderId;
 	BOOL isAppInitialising;
 	BOOL isChangingOrientation;
 	BOOL isInTableInit;
 	BOOL blockSelectionHandler;
 	BOOL blockMarkRead;
-	AppController * controller;
-	
-	NSDictionary * articleSortSpecifiers;
-	NSMutableDictionary * stylePathMappings;
-	NSString * sortColumnIdentifier;
+
 	NSTimer * markReadTimer;
 	NSTimer * selectionTimer;
-	NSArray * currentArrayOfArticles;
-	NSArray * folderArrayOfArticles;
-	BackTrackArray * backtrackArray;
-	BOOL isBacktracking;
 	NSString * guidOfArticleToSelect;
 	NSFont * articleListFont;
 	NSFont * articleListUnreadFont;
-	NSString * htmlTemplate;
-	NSString * cssStylesheet;
 	NSMutableDictionary * selectionDict;
 	NSMutableDictionary * topLineDict;
 	NSMutableDictionary * linkLineDict;
@@ -73,34 +67,11 @@
 	ExtDateFormatter * extDateFormatter;
 }
 
-// Menu action items
--(IBAction)makeTextLarger:(id)sender;
--(IBAction)makeTextSmaller:(id)sender;
-
 // Public functions
--(void)setController:(AppController *)theController;
 -(void)initialiseArticleView;
--(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
--(void)refreshFolder:(int)refreshFlag;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
--(int)currentFolderId;
--(NSString *)sortColumnIdentifier;
 -(int)tableLayout;
--(NSDictionary *)initStylesMap;
 -(NSArray *)markedArticleRange;
--(void)selectFolderWithFilter:(int)newFolderId;
--(NSView *)mainView;
--(NSView *)articleView;
--(void)sortByIdentifier:(NSString *)columnName;
--(void)makeRowSelectedAndVisible:(int)rowIndex;
--(Article *)selectedArticle;
--(void)displayNextUnread;
--(void)deleteSelectedArticles;
--(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
--(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag;
--(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
--(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
--(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 @end

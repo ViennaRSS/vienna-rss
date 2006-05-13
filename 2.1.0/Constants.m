@@ -38,7 +38,6 @@ NSString * MAPref_RefreshThreads = @"MaxRefreshThreads";
 NSString * MAPref_ActiveStyleName = @"ActiveStyle";
 NSString * MAPref_FolderStates = @"FolderStates";
 NSString * MAPref_BacktrackQueueSize = @"BacktrackQueueSize";
-NSString * MAPref_ReadingPaneOnRight = @"ReadingPaneOnRight";
 NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
 NSString * MAPref_SelectionChangeInterval = @"SelectionChangeInterval";
 NSString * MAPref_OpenLinksInVienna = @"OpenLinksInVienna";
@@ -54,6 +53,7 @@ NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
 NSString * MAPref_FilterMode = @"FilterMode";
 NSString * MAPref_LastRefreshDate = @"LastRefreshDate";
 NSString * MAPref_TabList = @"TabList";
+NSString * MAPref_Layout = @"Layout";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;

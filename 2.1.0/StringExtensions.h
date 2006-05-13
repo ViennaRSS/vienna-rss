@@ -20,8 +20,11 @@
 
 #import <Foundation/Foundation.h>
 
+#define SafeString(s)   ((s) ? (s) : @"")
+
 @interface NSMutableString (MutableStringExtensions)
 	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
+	-(void)fixupRelativeImgTags:(NSString *)baseURL;
 @end
 
 @interface NSString (StringExtensions)

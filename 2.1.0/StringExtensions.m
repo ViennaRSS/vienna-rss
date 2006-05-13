@@ -32,6 +32,51 @@
 {
 	[self replaceOccurrencesOfString:source withString:dest options:NSLiteralSearch range:NSMakeRange(0, [self length])];
 }
+
+/* fixupRelativeImgTags
+ * Scans the text for <img...> tags that have relative links in the src attribute and fixes
+ * up the relative links to be absolute to the base URL.
+ */
+-(void)fixupRelativeImgTags:(NSString *)baseURL
+{
+	int textLength = [self length];
+	NSRange srchRange;
+	
+	srchRange.location = 0;
+	srchRange.length = textLength;
+	while ((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+	{
+		srchRange.length = textLength - srchRange.location;
+		NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
+		if (srcRange.location != NSNotFound)
+		{
+			// Find the src parameter range.
+			int index = srcRange.location + srcRange.length;
+			srcRange.location += srcRange.length;
+			srcRange.length = 0;
+			while (index < textLength && [self characterAtIndex:index] != '"')
+			{
+				++index;
+				++srcRange.length;
+			}
+			
+			// Now extract the source parameter
+			NSString * srcPath = [self substringWithRange:srcRange];
+			if (srcPath && ![srcPath hasPrefix:@"http://"])
+			{
+				srcPath = [baseURL stringByAppendingURLComponent:srcPath];
+				[self replaceCharactersInRange:srcRange withString:srcPath];
+				textLength = [self length];
+			}
+			
+			// Start searching again from beyond the URL
+			srchRange.location = srcRange.location + [srcPath length];
+		}
+		else
+			++srchRange.location;
+		srchRange.length = textLength - srchRange.location;
+	}
+}
 @end
 
 // Used for mapping entities to their representations

@@ -23,11 +23,11 @@
 #import "BrowserView.h"
 
 @class AppController;
-@class ArticleView;
+@class TabbedWebView;
 
 @interface BrowserPane : NSView<BaseView> {
 	IBOutlet NSBox * boxFrame;
-	IBOutlet ArticleView * webPane;
+	IBOutlet TabbedWebView * webPane;
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
@@ -60,5 +60,4 @@
 -(BOOL)canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
--(NSView *)mainView;
 @end
