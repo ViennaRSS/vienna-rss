@@ -29,6 +29,9 @@
 	IBOutlet NSComboBox * minimumFontSizes;
 	IBOutlet NSButton * enableMinimumFontSize;
 	IBOutlet NSButton * showFolderImagesButton;
+	IBOutlet NSButtonCell * newArticlesNotificationNothingButton;
+	IBOutlet NSButtonCell * newArticlesNotificationBadgeButton;
+	IBOutlet NSButtonCell * newArticlesNotificationBounceButton;
 }
 
 // Action functions
@@ -37,4 +40,5 @@
 -(IBAction)changeMinimumFontSize:(id)sender;
 -(IBAction)changeShowFolderImages:(id)sender;
 -(IBAction)selectMinimumFontSize:(id)sender;
+-(IBAction)changeNewArticlesNotification:(id)sender;
 @end

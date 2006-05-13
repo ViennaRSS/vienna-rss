@@ -30,6 +30,7 @@
 	int autoExpireDuration;
 	int filterMode;
 	int layout;
+	int newArticlesNotification;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
 	BOOL enableMinimumFontSize;
@@ -90,6 +91,10 @@
 
 // Selection change interval
 -(float)selectionChangeInterval;
+
+// New articles notification method
+-(int)newArticlesNotification;
+-(void)setNewArticlesNotification:(int)newMethod;
 
 // Mark read interval
 -(float)markReadInterval;

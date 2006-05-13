@@ -29,6 +29,7 @@ Thanks!
 - Changed modifier key for overriding default browser preference from shift to option.
 - Add Get Info command option and moved Validate command to the info panel.
 - New Layout menu: report, condensed and unified layouts.
+- Provide two new options for new articles notifications: bounce dock icon or no notification at all.
 
 2.0.4.2033
 ----------

@@ -62,6 +62,7 @@
 	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 	-(void)handleReloadPreferences:(NSNotification *)nc;
 	-(void)localiseMenus:(NSArray *)arrayOfMenus;
+	-(void)updateNewArticlesNotification;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
@@ -1202,6 +1203,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[filtersPopupMenu setToolTip:NSLocalizedString(@"Filter articles", nil)];
 }
 
+/* updateNewArticlesNotification
+ * Respond to a change in how we notify when new articles are retrieved.
+ */
+-(void)updateNewArticlesNotification
+{
+	switch ([[Preferences standardPreferences] newArticlesNotification])
+	{
+		case MA_NewArticlesNotification_Badge:
+			lastCountOfUnread = -1;	// Force an update
+			[self showUnreadCountOnApplicationIconAndWindowTitle];
+			break;
+
+		case MA_NewArticlesNotification_None:
+		case MA_NewArticlesNotification_Bounce:
+			// Remove the badge if there was one.
+			if ([NSApp applicationIconImage] != originalIcon)
+				[NSApp setApplicationIconImage:originalIcon];
+			break;
+	}
+}
+
 /* showUnreadCountOnApplicationIconAndWindowTitle
  * Update the Vienna application icon to show the number of unread articles.
  */
@@ -1219,11 +1241,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[mainWindow setTitle:[self appName]];
 		return;	
 	}	
-	
+
 	[mainWindow setTitle:[[NSString stringWithFormat:@"%@ -", [self appName]]
 		stringByAppendingString:[NSString stringWithFormat:
 			NSLocalizedString(@" (%d unread)", nil), currentCountOfUnread]]];
-	
+
+	// Exit now if we're not showing the unread count on the application icon
+	if ([[Preferences standardPreferences] newArticlesNotification] != MA_NewArticlesNotification_Badge)
+		return;
+
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
 	NSImage * iconImageBuffer = [originalIcon copy];
 	NSSize iconSize = [originalIcon size];
@@ -1475,6 +1501,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self updateAlternateMenuTitle];
 	[foldersTree updateAlternateMenuTitle];
 	[mainArticleView updateAlternateMenuTitle];
+	[self updateNewArticlesNotification];
 }
 
 /* handleCheckFrequencyChange
@@ -1608,6 +1635,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
+
+		// Bounce the dock icon for 1 second if the bounce method has been selected.
+		if ([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && newUnread > 0)
+			[NSApp requestUserAttention:NSInformationalRequest];
+
 		if (growlAvailable && newUnread > 0)
 		{
 			[GrowlApplicationBridge

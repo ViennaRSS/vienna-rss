@@ -98,6 +98,34 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
 		[minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];
 	[minimumFontSizes setFloatValue:[prefs minimumFontSize]];
+	
+	// Show new articles notification option
+	[newArticlesNotificationNothingButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_None) ? NSOnState : NSOffState];
+	[newArticlesNotificationBadgeButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Badge) ? NSOnState : NSOffState];
+	[newArticlesNotificationBounceButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce) ? NSOnState : NSOffState];
+}
+
+/* changeNewArticlesNotification
+ * Change the method by which new articles are announced.
+ */
+-(IBAction)changeNewArticlesNotification:(id)sender
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	if ([sender selectedCell] == newArticlesNotificationNothingButton)
+	{
+		[prefs setNewArticlesNotification:MA_NewArticlesNotification_None];
+		return;
+	}
+	if ([sender selectedCell] == newArticlesNotificationBadgeButton)
+	{
+		[prefs setNewArticlesNotification:MA_NewArticlesNotification_Badge];
+		return;
+	}
+	if ([sender selectedCell] == newArticlesNotificationBounceButton)
+	{
+		[prefs setNewArticlesNotification:MA_NewArticlesNotification_Bounce];
+		return;
+	}
 }
 
 /* changeShowFolderImages
