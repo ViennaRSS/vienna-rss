@@ -143,6 +143,7 @@ static Preferences * _standardPreferences = nil;
 		markReadInterval = [[userPrefs valueForKey:MAPref_MarkReadInterval] floatValue];
 		selectionChangeInterval = [[userPrefs valueForKey:MAPref_SelectionChangeInterval] floatValue];
 		minimumFontSize = [self integerForKey:MAPref_MinimumFontSize];
+		newArticlesNotification = [self integerForKey:MAPref_NewArticlesNotification];
 		enableMinimumFontSize = [self boolForKey:MAPref_UseMinimumFontSize];
 		autoExpireDuration = [self integerForKey:MAPref_AutoExpireDuration];
 		openLinksInVienna = [self boolForKey:MAPref_OpenLinksInVienna];
@@ -216,6 +217,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:defaultArticleSortDescriptors forKey:MAPref_ArticleSortDescriptors];
 	[defaultValues setObject:[NSDate distantPast] forKey:MAPref_LastRefreshDate];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Layout_Report] forKey:MAPref_Layout];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_NewArticlesNotification_Badge] forKey:MAPref_NewArticlesNotification];
 
 	return defaultValues;
 }
@@ -783,6 +785,27 @@ static Preferences * _standardPreferences = nil;
 		[articleSortDescriptors release];
 		articleSortDescriptors = descriptors;
 		[self setObject:[NSArchiver archivedDataWithRootObject:descriptors] forKey:MAPref_ArticleSortDescriptors];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+	}
+}
+
+/* newArticlesNotification
+ * Returns the current method by which Vienna indicates new articles are available.
+ */
+-(int)newArticlesNotification
+{
+	return newArticlesNotification;
+}
+
+/* setNewArticlesNotification
+ * Sets the method by which Vienna indicates new articles are available.
+ */
+-(void)setNewArticlesNotification:(int)newMethod
+{
+	if (newMethod != newArticlesNotification)
+	{
+		newArticlesNotification = newMethod;
+		[self setInteger:newArticlesNotification forKey:MAPref_NewArticlesNotification];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }

@@ -55,6 +55,7 @@ extern NSString * MAPref_FilterMode;
 extern NSString * MAPref_LastRefreshDate;
 extern NSString * MAPref_TabList;
 extern NSString * MAPref_Layout;
+extern NSString * MAPref_NewArticlesNotification;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
@@ -66,6 +67,11 @@ extern int MA_Default_AutoExpireDuration;
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;
 extern NSString * MA_PBoardType_RSSSource;
+
+// New articles notification method
+#define MA_NewArticlesNotification_None		0
+#define MA_NewArticlesNotification_Badge	1
+#define MA_NewArticlesNotification_Bounce	2
 
 // Filtering options
 #define MA_Filter_All			0
