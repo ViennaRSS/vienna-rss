@@ -29,6 +29,7 @@
 
 @interface FoldersTree : NSView
 {
+	IBOutlet AppController * controller;
 	IBOutlet FolderView * outlineView;
 	IBOutlet PopupButton * popupMenu;
 	IBOutlet NSButton * newSubButton;
@@ -36,7 +37,6 @@
 	IBOutlet NSButton * markAllReadButton;
 	IBOutlet TexturedHeader * folderHeader;
 
-	AppController * controller;
 	TreeNode * rootNode;
 	NSTimer * selectionTimer;
 	NSFont * cellFont;
@@ -46,7 +46,6 @@
 }
 
 // Public functions
--(void)setController:(AppController *)theController;
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
 -(void)updateAlternateMenuTitle;

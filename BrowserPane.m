@@ -20,7 +20,7 @@
 
 #import "ViennaApp.h"
 #import "BrowserPane.h"
-#import "ArticleView.h"
+#import "TabbedWebView.h"
 #import "Constants.h"
 #import "AppController.h"
 #import "Preferences.h"
@@ -377,12 +377,12 @@
 	return webPane;
 }
 
-/* searchPlaceholderString
- * Return the search field placeholder.
+/* webView
+ * Return the web view of this view.
  */
--(NSString *)searchPlaceholderString
+-(WebView *)webView
 {
-	return NSLocalizedString(@"Search web page", nil);
+	return webPane;
 }
 
 /* performFindPanelAction

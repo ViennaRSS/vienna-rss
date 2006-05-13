@@ -854,10 +854,11 @@
 				{
 					if ([subItemTree valueOfAttribute:@"rel"] == nil || [[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 					{
+						NSString * theLink = [[subItemTree valueOfAttribute:@"href"] stringByUnescapingExtendedCharacters];
 						if (entryBase != nil)
-							[newItem setLink:[entryBase stringByAppendingURLComponent:[subItemTree valueOfAttribute:@"href"]]];
+							[newItem setLink:[entryBase stringByAppendingURLComponent:theLink]];
 						else
-							[newItem setLink:[subItemTree valueOfAttribute:@"href"]];
+							[newItem setLink:theLink];
 						hasLink = YES;
 					}
 					continue;

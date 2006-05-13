@@ -19,18 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
-@protocol BaseView
-	-(void)performFindPanelAction:(int)tag;
-	-(NSString *)searchPlaceholderString;
-	-(void)printDocument:(id)sender;
-	-(void)handleGoForward:(id)sender;
-	-(void)handleGoBack:(id)sender;
-	-(BOOL)canGoForward;
-	-(BOOL)canGoBack;
-	-(NSString *)viewLink;
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
-@end
+#import "BaseView.h"
 
 @class BrowserTab;
 @interface BrowserView : NSView
@@ -49,9 +38,11 @@
 
 // Accessors
 -(BrowserTab *)setPrimaryTabView:(NSView *)newPrimaryView;
+-(BrowserTab *)primaryTab;
 -(BrowserTab *)activeTab;
 -(void)setTabTitle:(BrowserTab *)tab title:(NSString *)newTitle;
 -(NSView<BaseView> *)activeTabView;
+-(NSView<BaseView> *)primaryTabView;
 -(void)setActiveTabToPrimaryTab;
 -(void)setActiveTab:(BrowserTab *)newActiveTab;
 -(void)closeTab:(BrowserTab *)theTab;

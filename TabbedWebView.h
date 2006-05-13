@@ -1,5 +1,5 @@
 //
-//  ArticleView.h
+//  TabbedWebView.h
 //  Vienna
 //
 //  Created by Steve on Tue Jul 05 2005.
@@ -19,15 +19,23 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "TabbedWebView.h"
+#import "WebKit/WebView.h"
 
-@interface ArticleView : TabbedWebView {
-	NSString * htmlTemplate;
-	NSString * cssStylesheet;
+@class AppController;
+
+@interface TabbedWebView : WebView {
+	AppController * controller;
+	WebPreferences * defaultWebPrefs;
+	BOOL openLinksInNewBrowser;
+	BOOL isFeedRedirect;
+	BOOL isDownload;
 }
 
 // Public functions
-+(NSDictionary *)stylesMap;
--(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString;
--(NSString *)articleTextFromArray:(NSArray *)msgArray;
+-(void)setController:(AppController *)theController;
+-(void)setOpenLinksInNewBrowser:(BOOL)flag;
+-(void)keyDown:(NSEvent *)theEvent;
+-(void)printDocument:(id)sender;
+-(BOOL)isFeedRedirect;
+-(BOOL)isDownload;
 @end

@@ -21,21 +21,20 @@
 #import "ArticleView.h"
 #import "AppController.h"
 #import "Preferences.h"
-#import "DownloadManager.h"
+#import "XMLParser.h"
+#import "HelperFunctions.h"
+#import "CalendarExtensions.h"
+#import "StringExtensions.h"
+#import "WebKit/WebView.h"
 #import "WebKit/WebFrame.h"
-#import "WebKit/WebPreferences.h"
-#import "WebKit/WebPolicyDelegate.h"
-
-@interface NSObject (ArticleViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
-@end
 
 @interface ArticleView (Private)
-	-(void)initClass;
-	-(BOOL)isDownloadFileType:(NSURL *)filename;
-	-(void)loadMinimumFontSize;
-	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
+	-(BOOL)initForStyle:(NSString *)styleName;
+	-(void)handleStyleChange:(NSNotificationCenter *)nc;
 @end
+
+// Styles path mappings is global across all instances
+static NSMutableDictionary * stylePathMappings = nil;
 
 @implementation ArticleView
 
@@ -47,283 +46,182 @@
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
 		// Init our vars
-		controller = nil;
-		openLinksInNewBrowser = NO;
-		isFeedRedirect = NO;
-		isDownload = NO;
+		htmlTemplate = nil;
+		cssStylesheet = nil;
 
-		// We'll be the webview policy handler.
-		[self setPolicyDelegate:self];
-		[self setDownloadDelegate:[DownloadManager sharedInstance]];
-
-		// Set up to be notified when minimum font size changes
+		// Set up to be notified when style changes
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
-		
-		// Handle minimum font size
-		defaultWebPrefs = [[self preferences] retain];
-		[defaultWebPrefs setStandardFontFamily:@"Arial"];
-		[defaultWebPrefs setDefaultFontSize:12];
-		[defaultWebPrefs setPrivateBrowsingEnabled:YES];
-		[self loadMinimumFontSize];
+		[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
+
+		// Select the user's current style or revert back to the
+		// default style otherwise.
+		[self initForStyle:[[Preferences standardPreferences] displayStyle]];
 	}
 	return self;
 }
 
-/* setController
- * Set the associated controller for this view
+/* handleStyleChange
+ * Updates the article pane when the active display style has been changed.
  */
--(void)setController:(AppController *)theController
+-(void)handleStyleChange:(NSNotificationCenter *)nc
 {
-	[theController retain];
-	[controller release];
-	controller = theController;
-	[self setPolicyDelegate:self];
+	[self initForStyle:[[Preferences standardPreferences] displayStyle]];
 }
 
-/* setOpenLinksInNewBrowser
- * Specify whether links are opened in a new browser by default.
+/* stylesMap
+ * Returns the article view styles map
  */
--(void)setOpenLinksInNewBrowser:(BOOL)flag
++(NSDictionary *)stylesMap
 {
-	openLinksInNewBrowser = flag;
+	return stylePathMappings;
 }
 
-/* setIsDownload
- * Specifies whether the current load is a file download.
+/* initForStyle
+ * Initialise the template and stylesheet for the specified display style if it can be
+ * found. Otherwise the existing template and stylesheet are not changed.
  */
--(void)setIsDownload:(BOOL)flag
+-(BOOL)initForStyle:(NSString *)styleName
 {
-	isDownload = flag;
-}
-
-/* isDownload
- * Returns whether the current load is a file download.
- */
--(BOOL)isDownload
-{
-	return isDownload;
-}
-
-/* setIsFeedRedirect
- * Indicates that the current load has been redirected to a feed URL.
- */
--(void)setIsFeedRedirect:(BOOL)flag
-{
-	isFeedRedirect = flag;
-}
-
-/* isFeedRedirect
- * Specifies whether the current load was a redirect to a feed URL.
- */
--(BOOL)isFeedRedirect
-{
-	return isFeedRedirect;
-}
-
-/* isDownloadFileType
- * Given a URL, returns whether the URL represents a file that should be downloaded or
- * a link that should be displayed.
- */
--(BOOL)isDownloadFileType:(NSURL *)url
-{
-	NSString * newURLExtension = [[url path] pathExtension];
-	return ([newURLExtension isEqualToString:@"dmg"] ||
-			[newURLExtension isEqualToString:@"sit"] ||
-			[newURLExtension isEqualToString:@"bin"] ||
-			[newURLExtension isEqualToString:@"bz2"] ||
-			[newURLExtension isEqualToString:@"exe"] ||
-			[newURLExtension isEqualToString:@"sitx"] ||
-			[newURLExtension isEqualToString:@"zip"] ||
-			[newURLExtension isEqualToString:@"gz"] ||
-			[newURLExtension isEqualToString:@"tar"]);
-}
-
-/* decidePolicyForMIMEType
- * Handle clicks on RSS/Atom feed links and redirect to the appropriate feed handler instead of filling the
- * webview with XML strings.
- */
--(void)webView:(WebView *)sender decidePolicyForMIMEType:(NSString *)type request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-	if ([type isEqualToString:@"application/rss+xml"] || [type isEqualToString:@"application/atom+xml"])
+	if (stylePathMappings == nil)
 	{
-		// Convert the link to a feed:// link so that the system will redirect it to the
-		// appropriate handler. (We can't assume that we're the registered handler and it is
-		// too much work for us to figure it out when the system can do it easily enough).
-		NSScanner * scanner = [NSScanner scannerWithString:[[request URL] absoluteString]];
-		[scanner scanString:@"http://" intoString:nil];
-		[scanner scanString:@"https://" intoString:nil];
-		[scanner scanString:@"feed://" intoString:nil];
+		if (stylePathMappings == nil)
+			stylePathMappings = [[NSMutableDictionary alloc] init];
 		
-		NSString * linkPath;
-		[scanner scanUpToString:@"" intoString:&linkPath];
-
-		// Indicate a redirect for a feed
-		[self setIsFeedRedirect:YES];
-
-		[controller openURLInDefaultBrowser:[NSURL URLWithString:[NSString stringWithFormat:@"feed://%@", linkPath]]];
-		[listener ignore];
-		return;
+		NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
+		loadMapFromPath(path, stylePathMappings, YES, nil);
+		
+		path = [[Preferences standardPreferences] stylesFolder];
+		loadMapFromPath(path, stylePathMappings, YES, nil);
 	}
-
-	// Anything else is not a feed redirect.
-	[self setIsFeedRedirect:NO];
 	
-	// If this is a viewable MIME type, display it.
-	if ([WebView canShowMIMEType:type])
+	NSString * path = [stylePathMappings objectForKey:styleName];
+	if (path != nil)
 	{
-		[listener use];
-		return;
+		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
+		NSFileHandle * handle = [NSFileHandle fileHandleForReadingAtPath:filePath];
+		if (handle != nil)
+		{
+			// Sanity check the file. Obviously anything bigger than 0 bytes but smaller than a valid template
+			// format is a problem but we'll worry about that later. There's only so much rope we can give.
+			NSData * fileData = [handle readDataToEndOfFile];
+			if ([fileData length] > 0)
+			{
+				[htmlTemplate release];
+				[cssStylesheet release];
+				
+				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
+				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
+				
+				// Make sure the template is valid
+				NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
+				if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
+				{
+					[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+					[handle closeFile];
+					return YES;
+				}
+			}
+			[handle closeFile];
+		}
 	}
+	
+	// If the template is invalid, revert to the default style
+	// which should ALWAYS be valid.
+	NSAssert(![styleName isEqualToString:@"Default"], @"Default style is corrupted!");
+	
+	// Warn the user.
+	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"Invalid style title", nil), styleName];
+	runOKAlertPanel(titleText, @"Invalid style body");
 
-	// Anything else, download it.
-	[self setIsDownload:YES];
-	[listener download];
+	// We need to reset the preferences without firing off a notification since we want the
+	// style change to happen immediately.
+	Preferences * prefs = [Preferences standardPreferences];
+	[prefs setDisplayStyle:@"Default" withNotification:NO];
+	return [self initForStyle:@"Default"];
 }
 
-/* decidePolicyForNewWindowAction
- * Called by the web view to get our policy on handling actions that would open a new window.
+/* articleTextFromArray
+ * Create an HTML string comprising all articles in the specified array formatted using
+ * the currently selected template.
  */
--(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
+-(NSString *)articleTextFromArray:(NSArray *)msgArray
 {
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if (navType == WebNavigationTypeLinkClicked)
-	{
-		NSDictionary * webElementKey = [actionInformation valueForKey:@"WebActionElementKey"];
-		NSURL * newURL = [webElementKey valueForKey:@"WebElementLinkURL"];
-
-		// This is kind of a hack. We look at the extension and try to infer whether we should display
-		// in a new tab or download based on the extension. Part of the time we'll get it wrong but the
-		// worst that will happen is that we'll look at the MIME type later in decidePolicyForMIMEType and
-		// do the right thing there. By then we'll have opened a new tab or a blank browser window though.
-		if ([self isDownloadFileType:newURL])
-		{
-			[listener download];
-			return;
-		}
-
-		// For anything else, we open in a new tab or in the external browser.
-		unsigned int modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
-		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
-		[listener ignore];
-		[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
-		return;
-	}
-	[listener use];
-}
-
-/* decidePolicyForNavigationAction
- * Called by the web view to get our policy on handling navigation actions. We want links clicked in the
- * web view to open in the same view unless the "open links in new browser" option is set or the Command key is held
- * down. If either of those cases are true, we open the link in a new tab or in the external browser.
- */
--(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
-{
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	unsigned int modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
-	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
+	int index;
 	
-	if (navType == WebNavigationTypeLinkClicked)
+	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head>"];
+	if (cssStylesheet != nil)
 	{
-		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
-		{
-			[listener ignore];
-			[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
-			return;
-		}
+		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
+		[htmlText appendString:cssStylesheet];
+		[htmlText appendString:@"\"/>"];
+	}
+	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
+	[htmlText appendString:@"<title>$ArticleTitle$</title></head><body>"];
+	for (index = 0; index < [msgArray count]; ++index)
+	{
+		Article * theArticle = [msgArray objectAtIndex:index];
+		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
+
+		// Cache values for things we're going to be plugging into the template and set
+		// defaults for things that are missing.
+		NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
+		NSMutableString * articleTitle = [NSMutableString stringWithString:([theArticle title] ? [theArticle title] : @"")];
+		NSString * articleDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
+		NSString * articleLink = [theArticle link] ? [theArticle link] : @"";
+		NSString * articleAuthor = [theArticle author] ? [theArticle author] : @"";
+		NSString * folderTitle = [folder name] ? [folder name] : @"";
+		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
+		NSString * folderDescription = [folder feedDescription];
+		
+		// Do relative IMG tag fixup
+		[articleBody fixupRelativeImgTags:[articleLink stringByDeletingLastURLComponent]];
+		
+		// Load the selected HTML template for the current view style and plug in the current
+		// article values and style sheet setting.
+		NSMutableString * htmlArticle;
+		if (htmlTemplate == nil)
+			htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
 		else
 		{
-			Preferences * prefs = [Preferences standardPreferences];
-			if ([prefs openLinksInVienna] == useAlternateBrowser)
-			{
-				[listener ignore];
-				[controller openURLInDefaultBrowser:[request URL]];
-				return;
-			}
+			htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
+			
+			[articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
+			[articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+			
+			[articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
+			[articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+			
+			[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
+			[htmlArticle replaceString:@"$ArticleTitle$" withString:[XMLParser quoteAttributes:articleTitle]];
+			[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
+			[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
+			[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
+			[htmlArticle replaceString:@"$FeedTitle$" withString:[XMLParser quoteAttributes:folderTitle]];
+			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
+			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
+			[htmlArticle replaceString:@"$_%$%_" withString:@"$"];
 		}
+		
+		// Separate each article with a horizontal divider line
+		if (index > 0)
+			[htmlText appendString:@"<hr><br />"];
+		[htmlText appendString:htmlArticle];
+		[htmlArticle release];
 	}
-	if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"])
-	{
-		[listener ignore];
-		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
-		return;
-	}
-	[listener use];
+	[htmlText appendString:@"</body></html>"];
+	return [htmlText autorelease];
 }
 
-/* handleMinimumFontSizeChange
- * Called when the minimum font size for articles is enabled or disabled, or changed.
+/* setHTML
+ * Loads the web view with the specified HTML text.
  */
--(void)handleMinimumFontSizeChange:(NSNotification *)nc
+-(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString
 {
-	[self loadMinimumFontSize];
-}
-
-/* loadMinimumFontSize
- * Sets up the web preferences for a minimum font size.
- */
--(void)loadMinimumFontSize
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	if (![prefs enableMinimumFontSize])
-		[defaultWebPrefs setMinimumFontSize:1];
-	else
-	{
-		int size = [prefs minimumFontSize];
-		[defaultWebPrefs setMinimumFontSize:size];
-	}
-}
-
-/* keyDown
- * Here is where we handle special keys when the article list view
- * has the focus so we can do custom things.
- */
--(void)keyDown:(NSEvent *)theEvent
-{
-	if ([[theEvent characters] length] == 1)
-	{
-		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([[NSApp delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
-			return;
-	}
-	[super keyDown:theEvent];
-}
-
-/* printDocument
- * Print the active article.
- */
--(void)printDocument:(id)sender
-{
-	NSView * printView = [[[self mainFrame] frameView] documentView];
-	NSPrintInfo * printInfo = [NSPrintInfo sharedPrintInfo];
-	
-	NSMutableDictionary * dict = [printInfo dictionary];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintLeftMargin];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintRightMargin];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintTopMargin];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintBottomMargin];
-	
-	[printInfo setVerticallyCentered:NO];
-	[printView print:self];
-}
-
-/* validateMenuItem
- * This is our override where we handle item validation for the
- * commands that we own.
- */
--(BOOL)validateMenuItem:(NSMenuItem *)menuItem
-{
-	SEL	theAction = [menuItem action];
-	if (theAction == @selector(makeTextLarger:))
-	{
-		return [self canMakeTextLarger];
-	}
-	else if (theAction == @selector(makeTextSmaller:))
-	{
-		return [self canMakeTextSmaller];
-	}
-	
-	return YES;
+	const char * utf8String = [htmlText UTF8String];
+	[[self mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
+							 MIMEType:@"text/html" 
+					 textEncodingName:@"utf-8" 
+							  baseURL:[NSURL URLWithString:urlString]];
 }
 
 /* dealloc
@@ -332,10 +230,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[self setPolicyDelegate:nil];
-	[self setDownloadDelegate:nil];
-	[controller release];
-	[defaultWebPrefs release];
+	[cssStylesheet release];
+	[htmlTemplate release];
 	[super dealloc];
 }
 @end

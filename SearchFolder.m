@@ -486,8 +486,9 @@
 	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
 	if (searchFolderId == -1)
 	{
+		AppController * controller = (AppController *)[NSApp delegate];
 		searchFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
-		[[NSApp delegate] selectFolder:searchFolderId];
+		[controller selectFolder:searchFolderId];
 	}
 	else
 		[db updateSearchFolder:searchFolderId withFolder:folderName withQuery:criteriaTree];

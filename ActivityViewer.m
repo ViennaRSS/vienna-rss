@@ -96,9 +96,11 @@
 		Folder * folder = [db folderFromName:[selectedItem name]];
 		if (folder == nil)
 			folder = [db folderFromFeedURL:[selectedItem name]];
-
 		if (folder != nil)
-			[[NSApp delegate] selectFolder:[folder itemId]];
+		{
+			AppController * controller = (AppController *)[NSApp delegate];
+			[controller selectFolder:[folder itemId]];
+		}
 	}
 }
 

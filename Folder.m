@@ -308,7 +308,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)feedDescription
 {
-	return [attributes valueForKey:@"FeedDescription"];
+	return SafeString([attributes valueForKey:@"FeedDescription"]);
 }
 
 /* homePage

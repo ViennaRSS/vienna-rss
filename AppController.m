@@ -22,6 +22,7 @@
 #import "NewPreferencesController.h"
 #import "FoldersTree.h"
 #import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
@@ -64,7 +65,6 @@
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
-	-(void)initFiltersMenu;
 	-(void)initScriptsMenu;
 	-(void)startProgressIndicator;
 	-(void)stopProgressIndicator;
@@ -75,6 +75,7 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
+	-(void)setLayout:(int)newLayout;
 	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholder;
 	-(FoldersTree *)foldersTree;
@@ -118,9 +119,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	Preferences * prefs = [Preferences standardPreferences];
 
-	// Set the primary view of the browser view
-	BrowserTab * primaryTab = [browserView setPrimaryTabView:mainArticleView];
-	[browserView setTabTitle:primaryTab title:NSLocalizedString(@"Articles", nil)];
+	// Restore the most recent layout
+	[self setLayout:[prefs layout]];
 
 	// Localise the menus
 	[self localiseMenus:[[NSApp mainMenu] itemArray]];
@@ -163,7 +163,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self initSortMenu];
 	[self initColumnsMenu];
 	[self initStylesMenu];
-	[self initFiltersMenu];
 
 	// Restore the splitview layout
 	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
@@ -212,9 +211,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     [[searchField cell] setSearchMenuTemplate:cellMenu];
 	[cellMenu release];
 
-	// Tooltips
-	[filtersPopupMenu setToolTip:NSLocalizedString(@"Filter articles", nil)];
-	
 	// Add Scripts menu if we have any scripts
 	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self initScriptsMenu];
@@ -232,10 +228,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self installScriptsFolderWatcher];
 	
-	// Assign the controller for the child views
-	[foldersTree setController:self];
-	[mainArticleView setController:self];
-
 	// Fix up the Close commands
 	[self updateCloseCommands];
 
@@ -254,6 +246,15 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	{
 		[foldersTree initialiseFoldersTree];
 		[mainArticleView initialiseArticleView];
+
+		// Select the folder and article from the last session
+		Preferences * prefs = [Preferences standardPreferences];
+		int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
+		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
+		if ([previousArticleGuid isBlank])
+			previousArticleGuid = nil;
+		[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
+
 		[self loadOpenTabs];
 		doneSafeInit = YES;
 	}
@@ -362,9 +363,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Preferences * prefs = [Preferences standardPreferences];
 
-	// Fix up the Tab ordering
-	[[foldersTree mainView] setNextKeyView:[mainArticleView mainView]];
-	
 	// Kick off an initial refresh
 	if ([prefs refreshOnStartup])
 		[self refreshAllSubscriptions:self];
@@ -425,8 +423,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[mainArticleView saveTableSettings];
 	[foldersTree saveFolderSettings];
 	
-	if ([mainArticleView currentFolderId] != -1)
-		[db flushFolder:[mainArticleView currentFolderId]];
+	if ([articleController currentFolderId] != -1)
+		[db flushFolder:[articleController currentFolderId]];
 	[db close];
 	
 	// Finally save preferences
@@ -559,20 +557,60 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* readingPaneOnRight
- * Move the reading pane to the right of the article list.
+/* reportLayout
+ * Switch to report layout
  */
--(IBAction)readingPaneOnRight:(id)sender
+-(IBAction)reportLayout:(id)sender
 {
-	[[Preferences standardPreferences] setReadingPaneOnRight:YES];
+	[self setLayout:MA_Layout_Report];
 }
 
-/* readingPaneOnBottom
- * Move the reading pane to the bottom of the article list.
+/* condensedLayout
+ * Switch to condensed layout
  */
--(IBAction)readingPaneOnBottom:(id)sender
+-(IBAction)condensedLayout:(id)sender
 {
-	[[Preferences standardPreferences] setReadingPaneOnRight:NO];
+	[self setLayout:MA_Layout_Condensed];
+}
+
+/* unifiedLayout
+ * Switch to unified layout.
+ */
+-(IBAction)unifiedLayout:(id)sender
+{
+	[self setLayout:MA_Layout_Unified];
+}
+
+/* setLayout
+ * Changes the layout of the panes.
+ */
+-(void)setLayout:(int)newLayout
+{
+	switch (newLayout)
+	{
+	case MA_Layout_Report:
+		[browserView setPrimaryTabView:mainArticleView];
+		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+		[articleController setMainArticleView:mainArticleView];
+		break;
+
+	case MA_Layout_Condensed:
+		[browserView setPrimaryTabView:mainArticleView];
+		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+		[articleController setMainArticleView:mainArticleView];
+		break;
+
+	case MA_Layout_Unified:
+		[browserView setPrimaryTabView:unifiedListView];
+		[unifiedListView refreshFolder:MA_Refresh_RedrawList];
+		[articleController setMainArticleView:unifiedListView];
+		break;
+	}
+
+	[browserView setTabTitle:[browserView primaryTab] title:NSLocalizedString(@"Articles", nil)];
+
+	[[Preferences standardPreferences] setLayout:newLayout];
+	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabView] mainView]];
 }
 
 #pragma mark Dock Menu
@@ -935,7 +973,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self showMainWindow:self];
 	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
 	if (unreadArticles != nil)
-		[mainArticleView selectFolderAndArticle:[unreadArticles itemId] guid:nil];
+		[foldersTree selectFolder:[unreadArticles itemId]];
 }
 
 /* registrationDictionaryForGrowl
@@ -1101,7 +1139,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMenu * stylesSubMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
 	
 	// Reinitialise the styles map
-	NSDictionary * stylesMap = [mainArticleView initStylesMap];
+	NSDictionary * stylesMap = [ArticleView stylesMap];
 	
 	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted
 	// by key name.
@@ -1131,7 +1169,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * button in the article list. We need separate menus since the latter is eventually configured
  * to use a smaller font than the former.
  */
--(void)initFiltersMenu
+-(void)initFiltersMenu:(PopupButton *)filtersPopupMenu
 {
 	NSMenu * filterSubMenu = [[[NSMenu alloc] initWithTitle:@"Filter By"] autorelease];
 	NSMenu * filterPopupMenu = [[[NSMenu alloc] initWithTitle:@""] autorelease];
@@ -1158,8 +1196,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Add it to the Filters menu
 	[filtersPopupMenu setMenu:filterPopupMenu];
 	[filtersPopupMenu setSmallMenu:YES];
-
 	[filtersMenu setSubmenu:filterSubMenu];
+
+	// Tooltips
+	[filtersPopupMenu setToolTip:NSLocalizedString(@"Filter articles", nil)];
 }
 
 /* showUnreadCountOnApplicationIconAndWindowTitle
@@ -1308,7 +1348,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(Article *)selectedArticle
 {
-	return [mainArticleView selectedArticle];
+	return [articleController selectedArticle];
 }
 
 /* currentFolderId
@@ -1317,15 +1357,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(int)currentFolderId
 {
-	return [mainArticleView currentFolderId];
+	return [articleController currentFolderId];
 }
 
 /* selectFolder
  * Select the specified folder.
  */
--(BOOL)selectFolder:(int)folderId
+-(void)selectFolder:(int)folderId
 {
-	return [mainArticleView selectFolderAndArticle:folderId guid:nil];
+	[foldersTree selectFolder:folderId];
 }
 
 /* updateCloseCommands
@@ -1406,19 +1446,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	TreeNode * node = (TreeNode *)[nc object];
 	int newFolderId = [node nodeId];
-	
-	if ([mainArticleView currentFolderId] != newFolderId && newFolderId != 0)
-	{
-		// Blank out the search field
-		[self setSearchString:@""];
-		
-		[mainArticleView selectFolderWithFilter:newFolderId];		
-	}
+
+	// We don't filter when we switch folders.
+	[self setSearchString:@""];
+
+	// Call through the controller to display the new folder.
+	[articleController displayFolder:newFolderId];
+	[self updateSearchPlaceholder];
 	
 	// Make sure article viewer is active
 	[browserView setActiveTabToPrimaryTab];
-	
-	[self updateSearchPlaceholder];
 }
 
 /* handleDidBecomeKeyWindow
@@ -1482,7 +1519,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Field * field = [menuItem representedObject];
 	
 	NSAssert1(field, @"Somehow got a nil representedObject for Sort sub-menu item '%@'", [menuItem title]);
-	[mainArticleView sortByIdentifier:[field name]];
+	[articleController sortByIdentifier:[field name]];
 }
 
 /* doOpenScriptsFolder
@@ -1519,12 +1556,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)handleTabChange:(NSNotification *)nc
 {
 	NSView<BaseView> * newView = [nc object];
-	if (newView == mainArticleView)
+	if (newView == [browserView primaryTabView])
 	{
 		if ([self selectedArticle] == nil)
 			[mainWindow makeFirstResponder:[foldersTree mainView]];
 		else
-			[mainWindow makeFirstResponder:[mainArticleView mainView]];		
+			[mainWindow makeFirstResponder:[[browserView primaryTabView] mainView]];		
 	}
 	else
 	{
@@ -1541,7 +1578,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)handleFolderNameChange:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == [mainArticleView currentFolderId])
+	if (folderId == [articleController currentFolderId])
 		[self updateSearchPlaceholder];
 }
 
@@ -1678,7 +1715,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				[self goBack:self];
 			else
 			{
-				if ([mainWindow firstResponder] == [mainArticleView mainView])
+				if ([mainWindow firstResponder] == [[browserView primaryTabView] mainView])
 				{
 					[mainWindow makeFirstResponder:[foldersTree mainView]];
 					return YES;
@@ -1694,10 +1731,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				if ([mainWindow firstResponder] == [foldersTree mainView])
 				{
 					[browserView setActiveTabToPrimaryTab];
-					[mainWindow makeFirstResponder:[mainArticleView mainView]];
+					[mainWindow makeFirstResponder:[[browserView primaryTabView] mainView]];
 					if ([self selectedArticle] == nil)
 					{
-						[mainArticleView makeRowSelectedAndVisible:0];
+						/* TODO move this to ArticleListView
+						[mainArticleView makeRowSelectedAndVisible:0]; */
 						if ([mainWindow firstResponder] == [foldersTree mainView])
 							return NO;
 					}
@@ -1755,24 +1793,29 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 		case ' ': //SPACE
 		{
-			ArticleView * view = (ArticleView *)[mainArticleView articleView];
+			WebView * view = [[browserView activeTabView] webView];
 			NSView * theView = [[[view mainFrame] frameView] documentView];
 			NSRect visibleRect;
 
-			visibleRect = [theView visibleRect];
-			if (flags & NSShiftKeyMask)
-			{
-				if (visibleRect.origin.y < 2)
-					[self goBack:self];
-				else
-					[[[view mainFrame] webView] scrollPageUp:self];
-			}
+			if (theView == nil)
+				[self viewNextUnread:self];
 			else
 			{
-				if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
-					[self viewNextUnread:self];
+				visibleRect = [theView visibleRect];
+				if (flags & NSShiftKeyMask)
+				{
+					if (visibleRect.origin.y < 2)
+						[self goBack:self];
+					else
+						[[[view mainFrame] webView] scrollPageUp:self];
+				}
 				else
-					[[[view mainFrame] webView] scrollPageDown:self];
+				{
+					if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
+						[self viewNextUnread:self];
+					else
+						[[[view mainFrame] webView] scrollPageDown:self];
+				}
 			}
 			return YES;
 		}
@@ -1803,7 +1846,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders
 {
 	if (![db readOnly])
-		[mainArticleView markAllReadByArray:arrayOfFolders withUndo:YES];
+		[articleController markAllReadByArray:arrayOfFolders withUndo:YES withRefresh:YES];
 }
 
 /* createNewSubscription
@@ -1828,7 +1871,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
 	if (folderId != -1)
 	{
-		[mainArticleView selectFolderAndArticle:folderId guid:nil];
+		[foldersTree selectFolder:folderId];
 		if (isAccessible(urlString))
 		{
 			Folder * folder = [db folderFromID:folderId];
@@ -1872,11 +1915,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)restoreMessage:(id)sender
 {
-	Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
+	Folder * folder = [db folderFromID:[articleController currentFolderId]];
 	if (IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly])
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
-		[mainArticleView markDeletedByArray:articleArray deleteFlag:NO];
+		[articleController markDeletedByArray:articleArray deleteFlag:NO];
 		[self clearUndoStack];
 	}
 }
@@ -1889,11 +1932,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if ([self selectedArticle] != nil && ![db readOnly])
 	{
-		Folder * folder = [db folderFromID:[mainArticleView currentFolderId]];
+		Folder * folder = [db folderFromID:[articleController currentFolderId]];
 		if (!IsTrashFolder(folder))
 		{
 			NSArray * articleArray = [mainArticleView markedArticleRange];
-			[mainArticleView markDeletedByArray:articleArray deleteFlag:YES];
+			[articleController markDeletedByArray:articleArray deleteFlag:YES];
 		}
 		else
 		{
@@ -1914,7 +1957,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSAlertDefaultReturn)
-		[mainArticleView deleteSelectedArticles];
+	{
+		NSArray * articleArray = [mainArticleView markedArticleRange];
+		[articleController deleteArticlesByArray:articleArray];
+	}
 }
 
 /* showDownloadsWindow
@@ -1961,7 +2007,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)viewNextUnread:(id)sender
 {
 	[browserView setActiveTabToPrimaryTab];
-	[mainArticleView displayNextUnread];
+	[articleController displayNextUnread];
 }
 
 /* clearUndoStack
@@ -1981,7 +2027,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (![db readOnly])
 	{
-		[mainArticleView markAllReadByArray:[foldersTree selectedFolders] withUndo:YES];
+		[articleController markAllReadByArray:[foldersTree selectedFolders] withUndo:YES withRefresh:YES];
 		[self viewNextUnread:self];
 	}
 }
@@ -1994,7 +2040,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)markAllRead:(id)sender
 {
 	if (![db readOnly])
-		[mainArticleView markAllReadByArray:[foldersTree selectedFolders] withUndo:YES];
+		[articleController markAllReadByArray:[foldersTree selectedFolders] withUndo:YES withRefresh:YES];
 }
 
 /* markAllSubscriptionsRead
@@ -2004,7 +2050,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (![db readOnly])
 	{
-		[mainArticleView markAllReadByArray:[foldersTree folders:0] withUndo:NO];
+		[articleController markAllReadByArray:[foldersTree folders:0] withUndo:NO withRefresh:YES];
 		[self clearUndoStack];
 	}
 }
@@ -2018,7 +2064,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (theArticle != nil && ![db readOnly])
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
-		[mainArticleView markReadByArray:articleArray readFlag:![theArticle isRead]];
+		[articleController markReadByArray:articleArray readFlag:![theArticle isRead]];
 	}
 }
 
@@ -2031,7 +2077,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (theArticle != nil && ![db readOnly])
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
-		[mainArticleView markFlaggedByArray:articleArray flagged:![theArticle isFlagged]];
+		[articleController markFlaggedByArray:articleArray flagged:![theArticle isFlagged]];
 	}
 }
 
@@ -2102,7 +2148,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		// and there's more than one folder being deleted, we delete the folder currently
 		// being displayed last so that the MA_Notify_FolderDeleted handlers that only
 		// refresh the display if the current folder is being deleted only trips once.
-		if ([folder itemId] == [mainArticleView currentFolderId] && index < count - 1)
+		if ([folder itemId] == [articleController currentFolderId] && index < count - 1)
 		{
 			[selectedFolders insertObject:folder atIndex:count];
 			++count;
@@ -2255,9 +2301,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	item = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	if (item != nil)
-	{
 		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation]];
-	}
 }
 
 /* updateSearchPlaceholder
@@ -2266,8 +2310,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateSearchPlaceholder
 {
-	[[searchField cell] setSendsWholeSearchString:[browserView activeTabView] != mainArticleView];
-	[[searchField cell] setPlaceholderString:[[browserView activeTabView] searchPlaceholderString]];
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		[[searchField cell] setSendsWholeSearchString:YES];
+		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search web page", nil)];
+	}
+	else
+	{
+		[[searchField cell] setSendsWholeSearchString:NO];
+		[[searchField cell] setPlaceholderString:[articleController searchPlaceholderString]];
+	}
 }
 
 #pragma mark Searching
@@ -2357,6 +2410,26 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* makeTextSmaller
+ * Make text size smaller in the article pane.
+ * In the future, we may want this to make text size smaller in the article list instead.
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	NSView<BaseView> * activeView = [browserView activeTabView];
+	[[activeView webView] makeTextSmaller:sender];
+}
+
+/* makeTextLarge
+ * Make text size larger in the article pane.
+ * In the future, we may want this to make text size larger in the article list instead.
+ */
+-(IBAction)makeTextLarger:(id)sender
+{
+	NSView<BaseView> * activeView = [browserView activeTabView];
+	[[activeView webView] makeTextLarger:sender];
+}
+
 /* changeFiltering
  * Refresh the filtering of articles.
  */
@@ -2418,6 +2491,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	SEL	theAction = [menuItem action];
 	BOOL isMainWindowVisible = [mainWindow isVisible];
+	BOOL isAnyArticleView = [browserView activeTabView] == [browserView primaryTabView];
 	BOOL isArticleView = [browserView activeTabView] == mainArticleView;
 	
 	if (theAction == @selector(printDocument:))
@@ -2446,7 +2520,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(skipFolder:))
 	{
-		return ![db readOnly] && isArticleView && isMainWindowVisible && [db countOfUnread] > 0;
+		return ![db readOnly] && isAnyArticleView && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(viewNextUnread:))
 	{
@@ -2455,6 +2529,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if ((theAction == @selector(refreshAllSubscriptions:)) || (theAction == @selector(refreshAllFolderIcons:)))
 	{
 		return ![self isConnecting] && ![db readOnly];
+	}
+	else if (theAction == @selector(makeTextLarger:))
+	{
+		return [[[browserView activeTabView] webView] canMakeTextLarger];
+	}
+	else if (theAction == @selector(makeTextSmaller:))
+	{
+		return [[[browserView activeTabView] webView] canMakeTextSmaller];
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{
@@ -2466,16 +2548,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSString * styleName = [menuItem title];
 		[menuItem setState:[styleName isEqualToString:[[Preferences standardPreferences] displayStyle]] ? NSOnState : NSOffState];
-		return isMainWindowVisible && isArticleView;
+		return isMainWindowVisible && isAnyArticleView;
 	}
 	else if (theAction == @selector(doSortColumn:))
 	{
 		Field * field = [menuItem representedObject];
-		if ([[field name] isEqualToString:[mainArticleView sortColumnIdentifier]])
+		if ([[field name] isEqualToString:[articleController sortColumnIdentifier]])
 			[menuItem setState:NSOnState];
 		else
 			[menuItem setState:NSOffState];
-		return isMainWindowVisible && isArticleView;
+		return isMainWindowVisible && isAnyArticleView;
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
@@ -2499,7 +2581,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(markAllSubscriptionsRead:))
 	{
-		return ![db readOnly] && isMainWindowVisible && isArticleView && [db countOfUnread] > 0;
+		return ![db readOnly] && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(importSubscriptions:))
 	{
@@ -2553,16 +2635,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return ![db readOnly];
 	}
-	else if (theAction == @selector(readingPaneOnRight:))
-	{
-		[menuItem setState:([[Preferences standardPreferences] readingPaneOnRight] ? NSOnState : NSOffState)];
-		return isMainWindowVisible && isArticleView;
-	}
-	else if (theAction == @selector(readingPaneOnBottom:))
-	{
-		[menuItem setState:([[Preferences standardPreferences] readingPaneOnRight] ? NSOffState : NSOnState)];
-		return isMainWindowVisible && isArticleView;
-	}
 	else if (theAction == @selector(previousTab:))
 	{
 		return isMainWindowVisible && [browserView countOfTabs] > 1;
@@ -2592,6 +2664,24 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(changeFiltering:))
 	{
 		[menuItem setState:([menuItem tag] == [[Preferences standardPreferences] filterMode]) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(reportLayout:))
+	{
+		Preferences * prefs = [Preferences standardPreferences];
+		[menuItem setState:([prefs layout] == MA_Layout_Report) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(condensedLayout:))
+	{
+		Preferences * prefs = [Preferences standardPreferences];
+		[menuItem setState:([prefs layout] == MA_Layout_Condensed) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(unifiedLayout:))
+	{
+		Preferences * prefs = [Preferences standardPreferences];
+		[menuItem setState:([prefs layout] == MA_Layout_Unified) ? NSOnState : NSOffState];
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(markFlagged:))

@@ -22,6 +22,7 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "AppController.h"
+#import "ArticleController.h"
 #import "SplitViewExtensions.h"
 #import "MessageListView.h"
 #import "ArticleView.h"
@@ -32,27 +33,22 @@
 #import "ArticleRef.h"
 #import "ArticleFilter.h"
 #import "XMLParser.h"
-#import "WebKit/WebFrame.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebDataSource.h"
-#import "WebKit/WebFrameView.h"
 #import "WebKit/WebBackForwardList.h"
 
 // Private functions
 @interface ArticleListView (Private)
 	-(void)setArticleListHeader;
 	-(void)initTableView;
-	-(BOOL)initForStyle:(NSString *)styleName;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)currentCacheContainsFolder:(int)folderId;
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
-	-(void)setSortColumnIdentifier:(NSString *)str;
 	-(void)selectArticleAfterReload;
 	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
-	-(void)handleStyleChange:(NSNotificationCenter *)nc;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+	-(void)handleRefreshArticle:(NSNotification *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)selectFirstUnreadInFolder;
 	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
@@ -60,14 +56,10 @@
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)refreshImmediatelyArticleAtCurrentRow;
 	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
-	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr;
-	-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
-	-(void)reloadArrayOfArticles;
-	-(NSArray *)applyFilter:(NSArray *)unfilteredArray;
+	-(void)makeRowSelectedAndVisible:(int)rowIndex;
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
-	-(void)setOrientation:(BOOL)flag;
-	-(void)fixupRelativeImgTags:(NSMutableString *)text baseURL:(NSString *)baseURL;
+	-(void)setOrientation:(int)newLayout;
 	-(void)printDocument;
 @end
 
@@ -83,17 +75,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
     if (([super initWithFrame:frame]) != nil)
 	{
-		isBacktracking = NO;
 		isChangingOrientation = NO;
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
 		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
-		stylePathMappings = nil;
 		markReadTimer = nil;
 		selectionTimer = nil;
-		htmlTemplate = nil;
-		cssStylesheet = nil;
     }
     return self;
 }
@@ -103,83 +91,27 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)awakeFromNib
 {
-	// Set default values to generate article sort descriptors
-	articleSortSpecifiers = [[NSDictionary alloc] initWithObjectsAndKeys:
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			@"containingFolder.name", @"key",
-			@"compare:", @"selector",
-			nil], MA_Field_Folder,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			@"isRead", @"key",
-			@"compare:", @"selector",
-			nil], MA_Field_Read,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			@"isFlagged", @"key",
-			@"compare:", @"selector",
-			nil], MA_Field_Flagged,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			@"hasComments", @"key",
-			@"compare:", @"selector",
-			nil], MA_Field_Comments,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			[@"articleData." stringByAppendingString:MA_Field_Date], @"key",
-			@"compare:", @"selector",
-			nil], MA_Field_Date,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			[@"articleData." stringByAppendingString:MA_Field_Author], @"key",
-			@"caseInsensitiveCompare:", @"selector",
-			nil], MA_Field_Author,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			[@"articleData." stringByAppendingString:MA_Field_Subject], @"key",
-			@"numericCompare:", @"selector",
-			nil], MA_Field_Headlines,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			[@"articleData." stringByAppendingString:MA_Field_Subject], @"key",
-			@"numericCompare:", @"selector",
-			nil], MA_Field_Subject,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			[@"articleData." stringByAppendingString:MA_Field_Link], @"key",
-			@"caseInsensitiveCompare:", @"selector",
-			nil], MA_Field_Link,
-		[NSDictionary dictionaryWithObjectsAndKeys:
-			[@"articleData." stringByAppendingString:MA_Field_Summary], @"key",
-			@"caseInsensitiveCompare:", @"selector",
-			nil], MA_Field_Summary,
-		nil];
-	
 	// Register to be notified when folders are added or removed
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-	[nc addObserver:self selector:@selector(handleStyleChange:) name:@"MA_Notify_StyleChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-
-	// Create a backtrack array
-	Preferences * prefs = [Preferences standardPreferences];
-	backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
+	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
 	[articleText setOpenLinksInNewBrowser:YES];
-	
+	[articleText setController:controller];
+
+	// Set the filters popup menu
+	[controller initFiltersMenu:filtersPopupMenu];
+
 	// Disable caching
 	[articleText setMaintainsBackForwardList:NO];
 	[[articleText backForwardList] setPageCacheSize:0];
-
-	// Do safe initialisation
-	[controller doSafeInitialisation];
-}
-
-/* setController
- * Sets the controller used by this view.
- */
--(void)setController:(AppController *)theController
-{
-	controller = theController;
-	[articleText setController:controller];
 }
 
 /* initialiseArticleView
@@ -204,26 +136,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	bottomLineDict = [[NSMutableDictionary alloc] init];
 	
 	// Set the reading pane orientation
-	[self setOrientation:[prefs readingPaneOnRight]];
+	[self setOrientation:[prefs layout]];
 	
 	// Initialise the article list view
 	[self initTableView];
-
-	// Select the user's current style or revert back to the
-	// default style otherwise.
-	[self initForStyle:[prefs displayStyle]];
 
 	// Restore the split bar position
 	[splitView2 setLayout:[prefs objectForKey:@"SplitView2Positions"]];
 	[splitView2 setDelegate:self];
 
-	// Select the first conference
-	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
-	NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
-	if ([previousArticleGuid isBlank])
-		previousArticleGuid = nil;
-	[self selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
-	
 	// Done initialising
 	isAppInitialising = NO;
 }
@@ -246,7 +167,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (sender == splitView2 && offset == 0)
 	{
 		NSRect mainFrame = [[splitView2 superview] frame];
-		return (tableLayout == MA_Condensed_Layout) ?
+		return (tableLayout == MA_Layout_Condensed) ?
 			mainFrame.size.width - MA_Minimum_Article_Pane_Width :
 			mainFrame.size.height - MA_Minimum_Article_Pane_Width;
 	}
@@ -272,7 +193,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		else
 		{
 			leftFrame.origin = NSMakePoint(0, 0);
-			if (tableLayout == MA_Condensed_Layout)
+			if (tableLayout == MA_Layout_Condensed)
 			{
 				leftFrame.size.height = newFrame.size.height;
 				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
@@ -339,23 +260,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Variable initialization here
-	currentFolderId = -1;
-	currentArrayOfArticles = nil;
-	folderArrayOfArticles = nil;
 	currentSelectedRow = -1;
 	articleListFont = nil;
 	articleListUnreadFont = nil;
 
-	// Pre-set sort to what was saved in the preferences
-	NSArray * sortDescriptors = [prefs articleSortDescriptors];
-	if ([sortDescriptors count] == 0)
-	{
-		NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:NO] autorelease];
-		[prefs setArticleSortDescriptors:[NSArray arrayWithObject:descriptor]];
-		[prefs setObject:MA_Field_Date forKey:MAPref_SortColumn];
-	}
-	[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
-	
 	// Initialize the article columns from saved data
 	NSArray * dataArray = [prefs arrayForKey:MAPref_ArticleListColumns];
 	Database * db = [Database sharedDatabase];
@@ -429,21 +337,23 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	int row = [articleList clickedRow];
 	int column = [articleList clickedColumn];
-	if (row >= 0 && row < (int)[currentArrayOfArticles count])
+	NSArray * allArticles = [articleController allArticles];
+	
+	if (row >= 0 && row < (int)[allArticles count])
 	{
 		NSArray * columns = [articleList tableColumns];
 		if (column >= 0 && column < (int)[columns count])
 		{
-			Article * theArticle = [currentArrayOfArticles objectAtIndex:row];
+			Article * theArticle = [allArticles objectAtIndex:row];
 			NSString * columnName = [(NSTableColumn *)[columns objectAtIndex:column] identifier];
 			if ([columnName isEqualToString:MA_Field_Read])
 			{
-				[self markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:![theArticle isRead]];
+				[articleController markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:![theArticle isRead]];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_Flagged])
 			{
-				[self markFlaggedByArray:[NSArray arrayWithObject:theArticle] flagged:![theArticle isFlagged]];
+				[articleController markFlaggedByArray:[NSArray arrayWithObject:theArticle] flagged:![theArticle isFlagged]];
 				return;
 			}
 		}
@@ -458,7 +368,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	if (currentSelectedRow != -1 && [articleList clickedRow] != -1)
 	{
-		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
+		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
 		[controller openURLFromString:[theArticle link] inPreferredBrowser:YES];
 	}
 }
@@ -527,7 +437,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		BOOL showField;
 		
 		// Handle condensed layout vs. table layout
-		if (tableLayout == MA_Table_Layout)
+		if (tableLayout == MA_Layout_Report)
 			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
 		{
@@ -601,8 +511,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	Field * field;
 	
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0) ? [[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid] : @"";
-	[prefs setInteger:currentFolderId forKey:MAPref_CachedFolderID];
+	NSString * guid = (currentSelectedRow >= 0) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
+	[prefs setInteger:[articleController currentFolderId] forKey:MAPref_CachedFolderID];
 	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
@@ -686,7 +596,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	int height = [articleListFont defaultLineHeightForFont];
 	int numberOfRowsInCell;
 
-	if (tableLayout == MA_Table_Layout)
+	if (tableLayout == MA_Layout_Report)
 		numberOfRowsInCell = 1;
 	else
 	{
@@ -710,47 +620,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)showSortDirection
 {
-	NSTableColumn * sortColumn = [articleList tableColumnWithIdentifier:sortColumnIdentifier];
+	NSTableColumn * sortColumn = [articleList tableColumnWithIdentifier:[articleController sortColumnIdentifier]];
 	NSString * imageName = ([[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
 	[articleList setHighlightedTableColumn:sortColumn];
 	[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:sortColumn];
-}
-
-/* sortByIdentifier
- * Sort by the column indicated by the specified column name.
- */
--(void)sortByIdentifier:(NSString *)columnName
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
-	if ([sortColumnIdentifier isEqualToString:columnName])
-	{
-		[descriptors replaceObjectAtIndex:0 withObject:[[descriptors objectAtIndex:0] reversedSortDescriptor]];
-	}
-	else
-	{
-		[articleList setIndicatorImage:nil inTableColumn:[articleList tableColumnWithIdentifier:sortColumnIdentifier]];
-		[self setSortColumnIdentifier:columnName];
-		[prefs setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
-		NSSortDescriptor * sortDescriptor;
-		NSDictionary * specifier = [articleSortSpecifiers valueForKey:sortColumnIdentifier];
-		unsigned int index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
-		if (index == NSNotFound)
-		{
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
-		}
-		else
-		{
-			sortDescriptor = [[descriptors objectAtIndex:index] retain];
-			[descriptors removeObjectAtIndex:index];
-		}
-		[descriptors insertObject:sortDescriptor atIndex:0];
-		[sortDescriptor release];
-	}
-	[prefs setArticleSortDescriptors:descriptors];
-	blockSelectionHandler = blockMarkRead = YES;
-	[self refreshFolder:MA_Refresh_RedrawList];
-	blockSelectionHandler = blockMarkRead = NO;
 }
 
 /* scrollToArticle
@@ -759,7 +632,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)scrollToArticle:(NSString *)guid
 {
-	NSEnumerator * enumerator = [currentArrayOfArticles objectEnumerator];
+	NSEnumerator * enumerator = [[articleController allArticles] objectEnumerator];
 	Article * thisArticle;
 	int rowIndex = 0;
 	BOOL found = NO;
@@ -777,94 +650,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return found;
 }
 
-/* initStylesMap
- * Initialise the stylePathMappings.
- */
--(NSDictionary *)initStylesMap
-{
-	if (stylePathMappings == nil)
-		stylePathMappings = [[NSMutableDictionary alloc] init];
-
-	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
-	loadMapFromPath(path, stylePathMappings, YES, nil);
-	
-	path = [[Preferences standardPreferences] stylesFolder];
-	loadMapFromPath(path, stylePathMappings, YES, nil);
-	
-	return stylePathMappings;
-}
-
-/* stylePathMappings
- */
--(NSDictionary *)stylePathMappings
-{
-	if (stylePathMappings == nil)
-		[self initStylesMap];
-	return stylePathMappings;
-}
-
-/* handleStyleChange
- * Updates the article pane when the active display style has been changed.
- */
--(void)handleStyleChange:(NSNotificationCenter *)nc
-{
-	[self initForStyle:[[Preferences standardPreferences] displayStyle]];
-}
-
-/* initForStyle
- * Initialise the template and stylesheet for the specified display style if it can be
- * found. Otherwise the existing template and stylesheet are not changed.
- */
--(BOOL)initForStyle:(NSString *)styleName
-{
-	NSString * path = [[self stylePathMappings] objectForKey:styleName];
-	if (path != nil)
-	{
-		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
-		NSFileHandle * handle = [NSFileHandle fileHandleForReadingAtPath:filePath];
-		if (handle != nil)
-		{
-			// Sanity check the file. Obviously anything bigger than 0 bytes but smaller than a valid template
-			// format is a problem but we'll worry about that later. There's only so much rope we can give.
-			NSData * fileData = [handle readDataToEndOfFile];
-			if ([fileData length] > 0)
-			{
-				[htmlTemplate release];
-				[cssStylesheet release];
-				
-				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
-				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
-
-				// Make sure the template is valid
-				NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
-				if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
-				{
-					if (!isAppInitialising)
-						[self refreshArticlePane];
-
-					[handle closeFile];
-					return YES;
-				}
-			}
-			[handle closeFile];
-		}
-	}
-
-	// If the template is invalid, revert to the default style
-	// which should ALWAYS be valid.
-	NSAssert(![styleName isEqualToString:@"Default"], @"Default style is corrupted!");
-
-	// Warn the user.
-	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"Invalid style title", nil), styleName];
-	runOKAlertPanel(titleText, @"Invalid style body");
-
-	// We need to reset the preferences without firing off a notification since we want the
-	// style change to happen immediately.
-	Preferences * prefs = [Preferences standardPreferences];
-	[prefs setDisplayStyle:@"Default" withNotification:NO];
-	return [self initForStyle:@"Default"];
-}
-
 /* mainView
  * Return the primary view of this view.
  */
@@ -873,10 +658,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return articleList;
 }
 
-/* articleView
- * Return the article pane view.
+/* webView
+ * Returns the webview used to display the articles
  */
--(NSView *)articleView
+-(WebView *)webView
 {
 	return articleText;
 }
@@ -886,7 +671,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)canGoForward
 {
-	return ![backtrackArray isAtEndOfQueue];
+	return [articleController canGoForward];
 }
 
 /* canGoBack
@@ -894,7 +679,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)canGoBack
 {
-	return ![backtrackArray isAtStartOfQueue];
+	return [articleController canGoBack];
 }
 
 /* handleGoForward
@@ -902,15 +687,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(IBAction)handleGoForward:(id)sender
 {
-	int folderId;
-	NSString * guid;
-
-	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
-	{
-		isBacktracking = YES;
-		[self selectFolderAndArticle:folderId guid:guid];
-		isBacktracking = NO;
-	}
+	[articleController goForward];
 }
 
 /* handleGoBack
@@ -918,15 +695,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(IBAction)handleGoBack:(id)sender
 {
-	int folderId;
-	NSString * guid;
-	
-	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
-	{
-		isBacktracking = YES;
-		[self selectFolderAndArticle:folderId guid:guid];
-		isBacktracking = NO;
-	}
+	[articleController goBack];
 }
 
 /* handleKeyDown [delegate]
@@ -943,7 +712,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0) ? [currentArrayOfArticles objectAtIndex:currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0) ? [[articleController allArticles] objectAtIndex:currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -959,7 +728,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)handleFilterChange:(NSNotification *)nc
 {
-	[self refreshFolder:MA_Refresh_ReapplyFilter];
+	[articleController refilterArrayOfArticles];
+	[self refreshFolder:MA_Refresh_RedrawList];
 }
 
 /* handleFolderNameChange
@@ -969,7 +739,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleFolderNameChange:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == currentFolderId)
+	if (folderId == [articleController currentFolderId])
 	{
 		[self setArticleListHeader];
 		[self refreshArticlePane];
@@ -982,11 +752,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == 0 || folderId == currentFolderId || [self currentCacheContainsFolder:folderId])
+	if (folderId == 0 || folderId == [articleController currentFolderId] || [articleController currentCacheContainsFolder:folderId])
 		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
 	{
-		Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
+		Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
 		if (IsSmartFolder(folder))
 			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
@@ -1006,7 +776,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
-	[self setOrientation:[[Preferences standardPreferences] readingPaneOnRight]];
+	[self setOrientation:[[Preferences standardPreferences] layout]];
 	[self updateVisibleColumns];
 	[articleList reloadData];
 }
@@ -1015,11 +785,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  * Adjusts the article view orientation and updates the article list row
  * height to accommodate the summary view
  */
--(void)setOrientation:(BOOL)flag
+-(void)setOrientation:(int)newLayout
 {
 	isChangingOrientation = YES;
-	tableLayout = flag ? MA_Condensed_Layout : MA_Table_Layout;
-	[splitView2 setVertical:flag];
+	tableLayout = newLayout;
+	[splitView2 setVertical:(newLayout == MA_Layout_Condensed)];
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -1032,42 +802,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return tableLayout;
 }
 
-/* sortColumnIdentifier
- */
--(NSString *)sortColumnIdentifier
-{
-	return sortColumnIdentifier;
-}
-
-/* setSortColumnIdentifier
- */
--(void)setSortColumnIdentifier:(NSString *)str
-{
-	[str retain];
-	[sortColumnIdentifier release];
-	sortColumnIdentifier = str;
-}
-
-/* sortArticles
- * Re-orders the articles in currentArrayOfArticles by the current sort order
- */
--(void)sortArticles
-{
-	NSArray * sortedArrayOfArticles;
-	
-	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[[Preferences standardPreferences] articleSortDescriptors]];
-	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
-	[currentArrayOfArticles release];
-	currentArrayOfArticles = [sortedArrayOfArticles retain];
-}
-
 /* makeRowSelectedAndVisible
  * Selects the specified row in the table and makes it visible by
  * scrolling it to the center of the table.
  */
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
-	if ([currentArrayOfArticles count] == 0u)
+	if ([[articleController allArticles] count] == 0u)
 		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 	else if (rowIndex == currentSelectedRow)
 		[self refreshArticleAtCurrentRow:NO];
@@ -1103,10 +844,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// other folders until we come back to ourselves.
 	if (![self viewNextUnreadInCurrentFolder:currentSelectedRow])
 	{
-		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
 		if (nextFolderWithUnread != -1)
 		{
-			if (nextFolderWithUnread == currentFolderId)
+			if (nextFolderWithUnread == [articleController currentFolderId])
 				[self viewNextUnreadInCurrentFolder:-1];
 			else
 			{
@@ -1124,13 +865,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow
 {
-	int totalRows = [currentArrayOfArticles count];
+	NSArray * allArticles = [articleController allArticles];
+	int totalRows = [allArticles count];
 	if (currentRow < totalRows - 1)
 	{
 		Article * theArticle;
 		
 		do {
-			theArticle = [currentArrayOfArticles objectAtIndex:++currentRow];
+			theArticle = [allArticles objectAtIndex:++currentRow];
 			if (![theArticle isRead])
 			{
 				[self makeRowSelectedAndVisible:currentRow];
@@ -1149,7 +891,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
 	{
-		int count = [currentArrayOfArticles count];
+		int count = [[articleController allArticles] count];
 		if (count == 0)
 			[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 		else
@@ -1160,20 +902,21 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* selectFolderAndArticle
  * Select a folder and select a specified article within the folder.
  */
--(BOOL)selectFolderAndArticle:(int)folderId guid:(NSString *)guid
+-(void)selectFolderAndArticle:(int)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, easy enough.
-	if (folderId == currentFolderId)
-		return [self scrollToArticle:guid];
-
-	// Otherwise we force the folder to be selected and seed guidOfArticleToSelect
-	// so that after handleFolderSelection has been invoked, it will select the
-	// requisite article on our behalf.
-	currentSelectedRow = -1;
-	[guidOfArticleToSelect release];
-	guidOfArticleToSelect = [guid retain];
-	[foldersTree selectFolder:folderId];
-	return YES;
+	if (folderId == [articleController currentFolderId])
+		[self scrollToArticle:guid];
+	else
+	{
+		// Otherwise we force the folder to be selected and seed guidOfArticleToSelect
+		// so that after handleFolderSelection has been invoked, it will select the
+		// requisite article on our behalf.
+		currentSelectedRow = -1;
+		[guidOfArticleToSelect release];
+		guidOfArticleToSelect = [guid retain];
+		[foldersTree selectFolder:folderId];
+	}
 }
 
 /* viewLink
@@ -1185,25 +928,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return nil;
 }
 
-/* searchPlaceholderString
- * Return the search field placeholder.
- */
--(NSString *)searchPlaceholderString
-{
-	if (currentFolderId == -1)
-		return @"";
-
-	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]];
-}
-
 /* performFindPanelAction
  * Implement the search action.
  */
 -(void)performFindPanelAction:(int)actionTag
 {
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-	if (currentSelectedRow < 0 && [currentArrayOfArticles count] > 0)
+	if (currentSelectedRow < 0 && [[articleController allArticles] count] > 0)
 		[self makeRowSelectedAndVisible:0];
 }
 
@@ -1214,28 +945,31 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)refreshFolder:(int)refreshFlag
 {
+	NSArray * allArticles = [articleController allArticles];
 	NSString * guid = nil;
 
+	[markReadTimer invalidate];
+	[markReadTimer release];
+	markReadTimer = nil;
+	
+	if (refreshFlag == MA_Refresh_SortAndRedraw)
+		blockSelectionHandler = blockMarkRead = YES;		
 	if (currentSelectedRow >= 0)
-		guid = [[[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid] retain];
+		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
-		[self reloadArrayOfArticles];
-	if (refreshFlag == MA_Refresh_ReapplyFilter)
-	{
-		[currentArrayOfArticles release];
-		currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
-	}
+		[articleController reloadArrayOfArticles];
 	[self setArticleListHeader];
-	[self sortArticles];
+	[articleController sortArticles];
 	[self showSortDirection];
 	[articleList reloadData];
 	if (guid != nil)
 	{
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
 		// the same and the GUID of the article at the selection is the same. If so, don't refresh anything.
+		NSArray * allArticles = [articleController allArticles];
 		BOOL isUnchanged = currentSelectedRow >= 0 &&
-						   currentSelectedRow < [currentArrayOfArticles count] &&
-						   [guid isEqualToString:[[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid]];
+						   currentSelectedRow < [allArticles count] &&
+						   [guid isEqualToString:[[allArticles objectAtIndex:currentSelectedRow] guid]];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
@@ -1244,6 +978,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[self refreshArticlePane];
 		}
 	}
+	if (refreshFlag == MA_Refresh_SortAndRedraw)
+		blockSelectionHandler = blockMarkRead = NO;		
 	[guid release];
 }
 
@@ -1252,47 +988,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)setArticleListHeader
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
+	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
 	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
 	NSString * captionString = [NSString stringWithFormat:@"%@ (Filtered: %@)", [folder name], NSLocalizedString([filter name], nil)];
 	[articleListHeader setStringValue:captionString];
-}
-
-/* reloadArrayOfArticles
- * Reload the currentArrayOfArticles from the current folder.
- */
--(void)reloadArrayOfArticles
-{
-	[folderArrayOfArticles release];
-	
-	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	folderArrayOfArticles = [[folder articlesWithFilter:[controller searchString]] retain];
-	
-	[currentArrayOfArticles release];
-	currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
-}
-
-/* applyFilter
- * Apply the active filter to unfilteredArray and return the filtered array.
- * This is done here rather than in the folder management code for simplicity.
- */
--(NSArray *)applyFilter:(NSArray *)unfilteredArray
-{
-	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	if ([filter comparator] == nil)
-		return [unfilteredArray retain];
-
-	NSMutableArray * filteredArray = [[NSMutableArray alloc] initWithArray:unfilteredArray];
-	int count = [filteredArray count];
-	int index;
-	
-	for (index = count - 1; index >= 0; --index)
-	{
-		Article * article = [filteredArray objectAtIndex:index];
-		if (![ArticleFilter performSelector:[filter comparator] withObject:article])
-			[filteredArray removeObjectAtIndex:index];
-	}
-	return filteredArray;
 }
 
 /* selectArticleAfterReload
@@ -1309,14 +1008,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self scrollToArticle:guidOfArticleToSelect];
 	[guidOfArticleToSelect release];
 	guidOfArticleToSelect = nil;
-}
-
-/* currentFolderId
- * Return the ID of the folder being displayed in the list.
- */
--(int)currentFolderId
-{
-	return currentFolderId;
 }
 
 /* menuWillAppear
@@ -1345,21 +1036,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	if (newFolderId != currentFolderId)
-	{
-		[[Database sharedDatabase] flushFolder:currentFolderId];
-		[articleList deselectAll:self];
-		currentSelectedRow = -1;
-		currentFolderId = newFolderId;
-		[self setArticleListHeader];
-		[self reloadArrayOfArticles];
-		[self sortArticles];
-		[articleList reloadData];
-		if (guidOfArticleToSelect == nil)
-			[articleList scrollRowToVisible:0];
-		else
-			[self selectArticleAfterReload];
-	}
+	[articleList deselectAll:self];
+	currentSelectedRow = -1;
+	[self setArticleListHeader];
+	[articleController reloadArrayOfArticles];
+	[articleController sortArticles];
+	[articleList reloadData];
+	if (guidOfArticleToSelect == nil)
+		[articleList scrollRowToVisible:0];
+	else
+		[self selectArticleAfterReload];
 }
 
 /* refreshImmediatelyArticleAtCurrentRow
@@ -1372,7 +1058,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// If we mark read after an interval, start the timer here.
 	if (currentSelectedRow >= 0)
 	{
-		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
+		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead] && !blockMarkRead)
 		{
 			[markReadTimer invalidate];
@@ -1406,10 +1092,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)refreshArticleAtCurrentRow:(BOOL)delayFlag
 {
 	if (currentSelectedRow < 0)
-		[[articleText mainFrame] loadHTMLString:@"<HTML></HTML>" baseURL:nil];
+		[articleText setHTML:@"<HTML></HTML>" withBase:@""];
 	else
 	{
-		NSAssert(currentSelectedRow < (int)[currentArrayOfArticles count], @"Out of range row index received");
+		NSArray * allArticles = [articleController allArticles];
+		NSAssert(currentSelectedRow < (int)[allArticles count], @"Out of range row index received");
 		[selectionTimer invalidate];
 		[selectionTimer release];
 		selectionTimer = nil;
@@ -1425,12 +1112,18 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 															  repeats:NO] retain];
 
 		// Add this to the backtrack list
-		if (!isBacktracking)
-		{
-			NSString * guid = [[currentArrayOfArticles objectAtIndex:currentSelectedRow] guid];
-			[backtrackArray addToQueue:currentFolderId guid:guid];
-		}
+		NSString * guid = [[allArticles objectAtIndex:currentSelectedRow] guid];
+		[articleController addBacktrack:guid];
 	}
+}
+
+/* handleRefreshArticle
+ * Respond to the notification to refresh the current article pane.
+ */
+-(void)handleRefreshArticle:(NSNotification *)nc
+{
+	if (!isAppInitialising)
+		[self refreshArticlePane];
 }
 
 /* refreshArticlePane
@@ -1439,130 +1132,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)refreshArticlePane
 {
 	NSArray * msgArray = [self markedArticleRange];
-	int folderIdToUse = currentFolderId;
-	int index;
-
-	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head>"];
-	if (cssStylesheet != nil)
+	if ([msgArray count] == 0)
+		[articleText setHTML:@"<HTML></HTML>" withBase:@""];
+	else
 	{
-		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
-		[htmlText appendString:cssStylesheet];
-		[htmlText appendString:@"\"/>"];
-	}
-	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
-	[htmlText appendString:@"<title>$ArticleTitle$</title></head><body>"];
-	for (index = 0; index < [msgArray count]; ++index)
-	{
-		Article * theArticle = [msgArray objectAtIndex:index];
-		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-
-		// Use the first article as the base URL
-		if (index == 0)
-			folderIdToUse = [theArticle folderId];
-
-		// Cache values for things we're going to be plugging into the template and set
-		// defaults for things that are missing.
-		NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
-		NSMutableString * articleTitle = [NSMutableString stringWithString:([theArticle title] ? [theArticle title] : @"")];
-		NSString * articleDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
-		NSString * articleLink = [theArticle link] ? [theArticle link] : @"";
-		NSString * articleAuthor = [theArticle author] ? [theArticle author] : @"";
-		NSString * folderTitle = [folder name] ? [folder name] : @"";
-		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
-		NSString * folderDescription = [folder feedDescription] ? [folder feedDescription] : @"";
-
-		// Do relative IMG tag fixup
-		[self fixupRelativeImgTags:articleBody baseURL:[articleLink stringByDeletingLastURLComponent]];
-
-		// Load the selected HTML template for the current view style and plug in the current
-		// article values and style sheet setting.
-		NSMutableString * htmlArticle;
-		if (htmlTemplate == nil)
-			htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
-		else
-		{
-			htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
-
-			[articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
-			[articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-
-			[articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
-			[articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-
-			[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
-			[htmlArticle replaceString:@"$ArticleTitle$" withString:[XMLParser quoteAttributes:articleTitle]];
-			[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
-			[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
-			[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
-			[htmlArticle replaceString:@"$FeedTitle$" withString:[XMLParser quoteAttributes:folderTitle]];
-			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
-			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
-			[htmlArticle replaceString:@"$_%$%_" withString:@"$"];
-		}
-
-		// Separate each article with a horizontal divider line
-		if (index > 0)
-			[htmlText appendString:@"<hr><br />"];
-		[htmlText appendString:htmlArticle];
-		[htmlArticle release];
-	}
-
-	// Here we ask the webview to do all the hard work. There's an idiosyncracy in loadHTMLString:baseURL: that it
-	// requires a URL to an actual file as the second parameter or it won't work.
-	[htmlText appendString:@"</body></html>"];
-
-	Folder * folder = [[Database sharedDatabase] folderFromID:folderIdToUse];
-	NSString * urlString = [folder feedURL] ? [folder feedURL] : @"";
-	const char * utf8String = [htmlText UTF8String];
-	[[articleText mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
-							 MIMEType:@"text/html" 
-					 textEncodingName:@"utf-8" 
-							  baseURL:[NSURL URLWithString:urlString]];
-	[htmlText release];
-}
-
-/* fixupRelativeImgTags
- * Scans the text for <img...> tags that have relative links in the src attribute and fixes
- * up the relative links to be absolute to the base URL.
- */
--(void)fixupRelativeImgTags:(NSMutableString *)text baseURL:(NSString *)baseURL
-{
-	int textLength = [text length];
-	NSRange srchRange;
-	
-	srchRange.location = 0;
-	srchRange.length = textLength;
-	while ((srchRange = [text rangeOfString:@"<img" options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
-	{
-		srchRange.length = textLength - srchRange.location;
-		NSRange srcRange = [text rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
-		if (srcRange.location != NSNotFound)
-		{
-			// Find the src parameter range.
-			int index = srcRange.location + srcRange.length;
-			srcRange.location += srcRange.length;
-			srcRange.length = 0;
-			while (index < textLength && [text characterAtIndex:index] != '"')
-			{
-				++index;
-				++srcRange.length;
-			}
-			
-			// Now extract the source parameter
-			NSString * srcPath = [text substringWithRange:srcRange];
-			if (srcPath && ![srcPath hasPrefix:@"http://"])
-			{
-				srcPath = [baseURL stringByAppendingURLComponent:srcPath];
-				[text replaceCharactersInRange:srcRange withString:srcPath];
-				textLength = [text length];
-			}
-			
-			// Start searching again from beyond the URL
-			srchRange.location = srcRange.location + [srcPath length];
-		}
-		else
-			++srchRange.location;
-		srchRange.length = textLength - srchRange.location;
+		NSString * htmlText = [articleText articleTextFromArray:msgArray];
+		Article * firstArticle = [msgArray objectAtIndex:0];
+		Folder * folder = [[Database sharedDatabase] folderFromID:[firstArticle folderId]];
+		[articleText setHTML:htmlText withBase:SafeString([folder feedURL])];
 	}
 }
 
@@ -1573,9 +1150,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	if (currentSelectedRow != -1 && ![[Database sharedDatabase] readOnly])
 	{
-		Article * theArticle = [currentArrayOfArticles objectAtIndex:currentSelectedRow];
+		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
-			[self markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:YES];
+			[articleController markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:YES];
 	}
 }
 
@@ -1585,7 +1162,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [currentArrayOfArticles count];
+	return [[articleController allArticles] count];
 }
 
 /* objectValueForTableColumn [datasource]
@@ -1595,10 +1172,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
 	Database * db = [Database sharedDatabase];
+	NSArray * allArticles = [articleController allArticles];
 	Article * theArticle;
 	
-	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[currentArrayOfArticles count]);
-	theArticle = [currentArrayOfArticles objectAtIndex:rowIndex];
+	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[allArticles count]);
+	theArticle = [allArticles objectAtIndex:rowIndex];
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Read])
 	{
 		if (![theArticle isRead])
@@ -1711,12 +1289,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
 {
-	if (tableLayout == MA_Table_Layout)
+	if (tableLayout == MA_Layout_Report)
 	{
 		if (![aCell isKindOfClass:[NSImageCell class]])
 		{
 			[aCell setTextColor:[NSColor blackColor]];
-			Article * theArticle = [currentArrayOfArticles objectAtIndex:rowIndex];
+			Article * theArticle = [[articleController allArticles] objectAtIndex:rowIndex];
 			if (![theArticle isRead])
 				[aCell setFont:articleListUnreadFont];
 			else
@@ -1743,7 +1321,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
 	NSString * columnName = [tableColumn identifier];
-	[self sortByIdentifier:columnName];
+	[articleController sortByIdentifier:columnName];
 }
 
 /* tableViewColumnDidResize
@@ -1799,7 +1377,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	for (index = 0; index < count; ++index)
 	{
 		int msgIndex = [[rows objectAtIndex:index] intValue];
-		Article * thisArticle = [currentArrayOfArticles objectAtIndex:msgIndex];
+		Article * thisArticle = [[articleController allArticles] objectAtIndex:msgIndex];
 		Folder * folder = [db folderFromID:[thisArticle folderId]];
 		NSString * msgText = [thisArticle body];
 		NSString * msgTitle = [thisArticle title];
@@ -1849,451 +1427,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 		articleArray = [NSMutableArray arrayWithCapacity:16];
 		while ((rowIndex = [enumerator nextObject]) != nil)
-			[articleArray addObject:[currentArrayOfArticles objectAtIndex:[rowIndex intValue]]];
+			[articleArray addObject:[[articleController allArticles] objectAtIndex:[rowIndex intValue]]];
 	}
 	return articleArray;
-}
-
-/* markDeletedUndo
- * Undo handler to restore a series of deleted articles.
- */
--(void)markDeletedUndo:(id)anObject
-{
-	[self markDeletedByArray:(NSArray *)anObject deleteFlag:NO];
-}
-
-/* markUndeletedUndo
- * Undo handler to delete a series of articles.
- */
--(void)markUndeletedUndo:(id)anObject
-{
-	[self markDeletedByArray:(NSArray *)anObject deleteFlag:YES];
-}
-
-/* markDeletedByArray
- * Helper function. Takes as an input an array of articles and deletes or restores
- * the articles.
- */
--(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag
-{
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
-	Article * theArticle;
-	
-	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
-	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
-	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
-	
-	// We will make a new copy of the currentArrayOfArticles with the selected articles removed.
-	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
-	BOOL needFolderRedraw = NO;
-	
-	// Iterate over every selected article in the table and set the deleted
-	// flag on the article while simultaneously removing it from our copy of
-	// currentArrayOfArticles.
-	Database * db = [Database sharedDatabase];
-	[db beginTransaction];
-	while ((theArticle = [enumerator nextObject]) != nil)
-	{
-		if (![theArticle isRead])
-			needFolderRedraw = YES;
-		[db markArticleDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
-		if (deleteFlag)
-		{
-			if ([self currentCacheContainsFolder:[theArticle folderId]])
-				[arrayCopy removeObject:theArticle];
-		}
-		else
-		{
-			if (currentFolderId == [db trashFolderId])
-				[arrayCopy removeObject:theArticle];
-			else if ([theArticle folderId] == currentFolderId)
-				[arrayCopy addObject:theArticle];
-		}
-	}
-	[db commitTransaction];
-	[currentArrayOfArticles release];
-	currentArrayOfArticles = arrayCopy;
-	[articleList reloadData];
-	
-	// If we've added articles back to the array, we need to resort to put
-	// them back in the right place.
-	if (!deleteFlag)
-		[self sortArticles];
-	
-	// If any of the articles we deleted were unread then the
-	// folder's unread count just changed.
-	if (needFolderRedraw)
-		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-	
-	// Compute the new place to put the selection
-	int nextRow = [[articleList selectedRowIndexes] firstIndex];
-	currentSelectedRow = -1;
-	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
-		nextRow = [currentArrayOfArticles count] - 1;
-	[self makeRowSelectedAndVisible:nextRow];
-
-	// Read and/or unread count may have changed
-	if (needFolderRedraw)
-		[controller showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
-/* deleteSelectedArticles
- * Physically delete all selected articles in the article list.
- */
--(void)deleteSelectedArticles
-{		
-	// Make a new copy of the currentArrayOfArticles with the selected article removed.
-	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
-	BOOL needFolderRedraw = NO;
-	
-	// Iterate over every selected article in the table and remove it from
-	// the database.
-	Database * db = [Database sharedDatabase];
-	NSEnumerator * enumerator = [articleList selectedRowEnumerator];
-	NSNumber * rowIndex;
-
-	[db beginTransaction];
-	while ((rowIndex = [enumerator nextObject]) != nil)
-	{
-		Article * theArticle = [currentArrayOfArticles objectAtIndex:[rowIndex intValue]];
-		if (![theArticle isRead])
-			needFolderRedraw = YES;
-		if ([db deleteArticle:[theArticle folderId] guid:[theArticle guid]])
-			[arrayCopy removeObject:theArticle];
-	}
-	[db commitTransaction];
-	[currentArrayOfArticles release];
-	currentArrayOfArticles = arrayCopy;
-	[articleList reloadData];
-
-	// Blow away the undo stack here since undo actions may refer to
-	// articles that have been deleted. This is a bit of a cop-out but
-	// it's the easiest approach for now.
-	[controller clearUndoStack];
-	
-	// If any of the articles we deleted were unread then the
-	// folder's unread count just changed.
-	if (needFolderRedraw)
-		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-	
-	// Compute the new place to put the selection
-	int nextRow = [[articleList selectedRowIndexes] firstIndex];
-	currentSelectedRow = -1;
-	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
-		nextRow = [currentArrayOfArticles count] - 1;
-	[self makeRowSelectedAndVisible:nextRow];
-	
-	// Read and/or unread count may have changed
-	if (needFolderRedraw)
-		[controller showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
-/* markUnflagUndo
- * Undo handler to un-flag an array of articles.
- */
--(void)markUnflagUndo:(id)anObject
-{
-	[self markFlaggedByArray:(NSArray *)anObject flagged:NO];
-}
-
-/* markFlagUndo
- * Undo handler to flag an array of articles.
- */
--(void)markFlagUndo:(id)anObject
-{
-	[self markFlaggedByArray:(NSArray *)anObject flagged:YES];
-}
-
-/* markFlaggedByArray
- * Mark the specified articles in articleArray as flagged.
- */
--(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
-{
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
-	Database * db = [Database sharedDatabase];
-	Article * theArticle;
-	
-	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
-	SEL markFlagUndoAction = flagged ? @selector(markUnflagUndo:) : @selector(markFlagUndo:);
-	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
-	
-	[db beginTransaction];
-	while ((theArticle = [enumerator nextObject]) != nil)
-	{
-		[theArticle markFlagged:flagged];
-		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
-	}
-	[db commitTransaction];
-	[articleList reloadData];
-}
-
-/* markUnreadUndo
- * Undo handler to mark an array of articles unread.
- */
--(void)markUnreadUndo:(id)anObject
-{
-	[self markReadByArray:(NSArray *)anObject readFlag:NO];
-}
-
-/* markReadUndo
- * Undo handler to mark an array of articles read.
- */
--(void)markReadUndo:(id)anObject
-{
-	[self markReadByArray:(NSArray *)anObject readFlag:YES];
-}
-
-/* markReadByArray
- * Helper function. Takes as an input an array of articles and marks those articles read or unread.
- */
--(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
-{
-	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];	
-	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
-	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
-	
-	[markReadTimer invalidate];
-	[markReadTimer release];
-	markReadTimer = nil;
-	
-	Database * db = [Database sharedDatabase];
-	BOOL singleArticle = [articleArray count] < 2;
-
-	if (!singleArticle)
-		[db beginTransaction];
-	[self innerMarkReadByArray:articleArray readFlag:readFlag];
-	if (!singleArticle)
-		[db commitTransaction];
-	[articleList reloadData];
-
-	[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-	
-	// The info bar has a count of unread articles so we need to
-	// update that.
-	[controller showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
-/* innerMarkReadByArray
- * Marks all articles in the specified array read or unread.
- */
--(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
-{
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
-	Database * db = [Database sharedDatabase];
-	int lastFolderId = -1;
-	Article * theArticle;
-
-	while ((theArticle = [enumerator nextObject]) != nil)
-	{
-		int folderId = [theArticle folderId];
-		[db markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
-		[theArticle markRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		lastFolderId = folderId;
-	}
-	if (lastFolderId != -1)
-		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-}
-
-/* markAllReadUndo
- * Undo the most recent Mark All Read.
- */
--(void)markAllReadUndo:(id)anObject
-{
-	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:NO];
-}
-
-/* markAllReadRedo
- * Redo the most recent Mark All Read.
- */
--(void)markAllReadRedo:(id)anObject
-{
-	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:YES];
-}
-
-/* markAllReadByArray
- * Given an array of folders, mark all the articles in those folders as read and
- * return a reference array listing all the articles that were actually marked.
- */
--(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
-{
-	Database * db = [Database sharedDatabase];
-	NSArray * refArray = nil;
-	BOOL flag = NO;
-
-	[db beginTransaction];
-	refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag needRefresh:&flag];
-	[db commitTransaction];
-	if (refArray != nil && [refArray count] > 0)
-	{
-		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
-		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
-		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
-	}
-	if (flag)
-		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-	[controller showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
-/* wrappedMarkAllReadInArray
- * Given an array of folders, mark all the articles in those folders as read and
- * return a reference array listing all the articles that were actually marked.
- */
--(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr
-{
-	NSMutableArray * refArray = [NSMutableArray array];
-	NSEnumerator * enumerator = [folderArray objectEnumerator];
-	Database * db = [Database sharedDatabase];
-	Folder * folder;
-
-	NSAssert(needRefreshPtr != nil, @"needRefresh pointer cannot be nil");
-	while ((folder = [enumerator nextObject]) != nil)
-	{
-		int folderId = [folder itemId];
-		if (IsGroupFolder(folder))
-		{
-			if (undoFlag)
-				[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag needRefresh:needRefreshPtr]];
-			if ([self currentCacheContainsFolder:folderId])
-				*needRefreshPtr = YES;
-		}
-		else if (!IsSmartFolder(folder))
-		{
-			if (undoFlag)
-				[refArray addObjectsFromArray:[db arrayOfUnreadArticles:folderId]];
-			if ([db markFolderRead:folderId])
-			{
-				[foldersTree updateFolder:folderId recurseToParents:YES];
-				if ([self currentCacheContainsFolder:folderId])
-					*needRefreshPtr = YES;
-			}
-		}
-		else
-		{
-			// For smart folders, we only mark all read the current folder to
-			// simplify things.
-			if (folderId == currentFolderId)
-			{
-				if (undoFlag)
-					[refArray addObjectsFromArray:currentArrayOfArticles];
-				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
-				[articleList reloadData];
-			}
-		}
-	}
-	return refArray;
-}
-
-/* currentCacheContainsFolder
- * Scans the current article cache to determine if any article is a member of the specified
- * folder and returns YES if so.
- */
--(BOOL)currentCacheContainsFolder:(int)folderId
-{
-	int count = [currentArrayOfArticles count];
-	int index = 0;
-	
-	while (index < count)
-	{
-		Article * anArticle = [currentArrayOfArticles objectAtIndex:index];
-		if ([anArticle folderId] == folderId)
-			return YES;
-		++index;
-	}
-	return NO;
-}
-
-/* markAllReadByReferencesArray
- * Given an array of references, mark all those articles read or unread.
- */
--(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
-{
-	NSEnumerator * enumerator = [refArray objectEnumerator];
-	Database * db = [Database sharedDatabase];
-	ArticleReference * ref;
-	int lastFolderId = -1;
-
-	// Set up to undo or redo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
-	SEL markAllReadUndoAction = readFlag ? @selector(markAllReadUndo:) : @selector(markAllReadRedo:);
-	[undoManager registerUndoWithTarget:self selector:markAllReadUndoAction object:refArray];
-	[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
-	
-	[db beginTransaction];
-	while ((ref = [enumerator nextObject]) != nil)
-	{
-		int folderId = [ref folderId];
-		[db markArticleRead:folderId guid:[ref guid] isRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-		{
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-			if (lastFolderId == currentFolderId)
-				[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-		}
-		lastFolderId = folderId;
-	}
-	[db commitTransaction];
-	
-	if (lastFolderId != -1)
-	{
-		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		if (lastFolderId == currentFolderId)
-			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-		else
-		{
-			Folder * currentFolder = [db folderFromID:currentFolderId];
-			if (IsSmartFolder(currentFolder))
-				[articleList reloadData];
-		}
-	}
-
-	// The info bar has a count of unread articles so we need to
-	// update that.
-	[controller showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
-/* makeTextSmaller
- * Make text size smaller in the article pane.
- * In the future, we may want this to make text size smaller in the article list instead.
- */
--(IBAction)makeTextSmaller:(id)sender
-{
-	[articleText makeTextSmaller:nil];
-}
-
-/* makeTextLarge
- * Make text size larger in the article pane.
- * In the future, we may want this to make text size larger in the article list instead.
-*/
--(IBAction)makeTextLarger:(id)sender
-{
-	[articleText makeTextLarger:nil];
-}
-
-/* validateMenuItem
- * This is our override where we handle item validation for the
- * commands that we own.
- */
--(BOOL)validateMenuItem:(NSMenuItem *)menuItem
-{
-	SEL	theAction = [menuItem action];
-	if (theAction == @selector(makeTextLarger:))
-	{
-		return [articleText canMakeTextLarger];
-	}
-	else if (theAction == @selector(makeTextSmaller:))
-	{
-		return [articleText canMakeTextSmaller];
-	}
-	
-	return YES;
 }
 
 /* dealloc
@@ -2302,15 +1438,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[stylePathMappings release];
-	[cssStylesheet release];
-	[htmlTemplate release];
 	[extDateFormatter release];
 	[selectionTimer release];
 	[markReadTimer release];
-	[folderArrayOfArticles release];
-	[currentArrayOfArticles release];
-	[backtrackArray release];
 	[articleListFont release];
 	[articleListUnreadFont release];
 	[guidOfArticleToSelect release];
@@ -2321,7 +1451,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[middleLineDict release];
 	[linkLineDict release];
 	[bottomLineDict release];
-	[articleSortSpecifiers release];
 	[super dealloc];
 }
 @end

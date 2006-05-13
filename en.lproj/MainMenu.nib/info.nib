@@ -3,13 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>IBDocumentLocation</key>
-	<string>45 85 705 240 0 0 1280 1002 </string>
+	<string>185 133 708 423 0 0 1440 878 </string>
 	<key>IBEditorPositions</key>
 	<dict>
+		<key>1148</key>
+		<string>492 179 719 649 0 0 1440 878 </string>
 		<key>29</key>
-		<string>212 765 382 44 0 0 1280 1002 </string>
+		<string>178 788 382 44 0 0 1440 878 </string>
 		<key>738</key>
-		<string>558 717 120 142 0 0 1280 1002 </string>
+		<string>660 536 120 142 0 0 1440 878 </string>
 		<key>860</key>
 		<string>510 539 419 136 0 0 1440 878 </string>
 		<key>971</key>
@@ -21,6 +23,11 @@
 	<array/>
 	<key>IBOldestOS</key>
 	<integer>3</integer>
+	<key>IBOpenObjects</key>
+	<array>
+		<integer>1148</integer>
+		<integer>29</integer>
+	</array>
 	<key>IBSystem Version</key>
 	<string>8I127</string>
 </dict>

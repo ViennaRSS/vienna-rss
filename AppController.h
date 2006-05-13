@@ -20,8 +20,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Database.h"
+#import "ArticleController.h"
 #import "ActivityViewer.h"
-#import "PopupButton.h"
 #import "Growl/GrowlApplicationBridge.h"
 
 @class NewPreferenceController;
@@ -33,13 +33,16 @@
 @class WebPreferences;
 @class BrowserView;
 @class ArticleListView;
+@class UnifiedDisplayView;
 
 @interface AppController : NSObject <GrowlApplicationBridgeDelegate> {
 	IBOutlet NSWindow * mainWindow;
+	IBOutlet ArticleController * articleController;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet ArticleListView * mainArticleView;
+	IBOutlet UnifiedDisplayView * unifiedListView;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
@@ -54,7 +57,6 @@
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
 	IBOutlet NSMenuItem * filtersMenu;
-	IBOutlet PopupButton * filtersPopupMenu;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
@@ -98,8 +100,6 @@
 -(IBAction)editFolder:(id)sender;
 -(IBAction)showAcknowledgements:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
--(IBAction)readingPaneOnRight:(id)sender;
--(IBAction)readingPaneOnBottom:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
 -(IBAction)viewArticlePageInAlternateBrowser:(id)sender;
 -(IBAction)openWebElementInNewTab:(id)sender;
@@ -130,8 +130,14 @@
 -(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
+-(IBAction)unifiedLayout:(id)sender;
+-(IBAction)reportLayout:(id)sender;
+-(IBAction)condensedLayout:(id)sender;
+-(IBAction)makeTextLarger:(id)sender;
+-(IBAction)makeTextSmaller:(id)sender;
 
 // Public functions
+-(void)initFiltersMenu:(PopupButton *)filtersPopupMenu;
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
@@ -141,7 +147,7 @@
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
--(BOOL)selectFolder:(int)folderId;
+-(void)selectFolder:(int)folderId;
 -(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;

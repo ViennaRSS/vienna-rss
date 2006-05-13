@@ -39,7 +39,6 @@ extern NSString * MAPref_StylesFolder;
 extern NSString * MAPref_ScriptsFolder;
 extern NSString * MAPref_FolderStates;
 extern NSString * MAPref_BacktrackQueueSize;
-extern NSString * MAPref_ReadingPaneOnRight;
 extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_SelectionChangeInterval;
 extern NSString * MAPref_OpenLinksInVienna;
@@ -55,6 +54,7 @@ extern NSString * MAPref_ArticleSortDescriptors;
 extern NSString * MAPref_FilterMode;
 extern NSString * MAPref_LastRefreshDate;
 extern NSString * MAPref_TabList;
+extern NSString * MAPref_Layout;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
@@ -77,7 +77,9 @@ extern NSString * MA_PBoardType_RSSSource;
 #define MA_Refresh_RedrawList			0
 #define MA_Refresh_ReapplyFilter		1
 #define MA_Refresh_ReloadFromDatabase	2
+#define MA_Refresh_SortAndRedraw		3
 
 // Layout styles
-#define MA_Table_Layout			0
-#define MA_Condensed_Layout		1
+#define MA_Layout_Report					1
+#define MA_Layout_Condensed					2
+#define MA_Layout_Unified					3

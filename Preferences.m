@@ -137,7 +137,7 @@ static Preferences * _standardPreferences = nil;
 		articleSortDescriptors = [[NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]] retain];
 		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
 		filterMode = [self integerForKey:MAPref_FilterMode];
-		readingPaneOnRight = [self boolForKey:MAPref_ReadingPaneOnRight];
+		layout = [self integerForKey:MAPref_Layout];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
 		checkForNewOnStartup = [self boolForKey:MAPref_CheckForUpdatesOnStartup];
 		markReadInterval = [[userPrefs valueForKey:MAPref_MarkReadInterval] floatValue];
@@ -204,7 +204,6 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
-	[defaultValues setObject:boolNo forKey:MAPref_ReadingPaneOnRight];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
@@ -216,6 +215,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:MA_DefaultDownloadsFolder forKey:MAPref_DownloadsFolder];
 	[defaultValues setObject:defaultArticleSortDescriptors forKey:MAPref_ArticleSortDescriptors];
 	[defaultValues setObject:[NSDate distantPast] forKey:MAPref_LastRefreshDate];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_Layout_Report] forKey:MAPref_Layout];
 
 	return defaultValues;
 }
@@ -474,23 +474,23 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
-/* readingPaneOnRight
- * Returns whether the reading pane is on the right or at the bottom of the article list.
+/* layout
+ * Returns the current layout.
  */
--(BOOL)readingPaneOnRight
+-(int)layout
 {
-	return readingPaneOnRight;
+	return layout;
 }
 
-/* setReadingPaneOnRight
- * Changes where the reading pane appears relative to the article list then updates the UI.
+/* setLayout
+ * Changes the current layout.
  */
--(void)setReadingPaneOnRight:(BOOL)flag
+-(void)setLayout:(int)newLayout
 {
-	if (flag != readingPaneOnRight)
+	if (layout != newLayout)
 	{
-		readingPaneOnRight = flag;
-		[self setBool:flag forKey:MAPref_ReadingPaneOnRight];
+		layout = newLayout;
+		[self setInteger:newLayout forKey:MAPref_Layout];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ReadingPaneChange" object:nil];
 	}
 }

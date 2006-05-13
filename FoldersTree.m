@@ -128,14 +128,6 @@
 	[outlineView scrollRowToVisible:[outlineView selectedRow]];
 }
 
-/* setController
- * Sets the controller used by this view.
- */
--(void)setController:(AppController *)theController
-{
-	controller = theController;
-}
-
 /* initialiseFoldersTree
  * Do the things to initialize the folder tree from the database
  */
