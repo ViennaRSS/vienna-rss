@@ -42,32 +42,38 @@
 /* initWithFrame
  * The designated instance initialiser.
  */
--(id)initWithFrame:(NSRect)frameRect
+-(id)initWithFrame:(NSRect)frameRect frameName:(NSString *)frameName groupName:(NSString *)groupName
 {
-	if ((self = [super initWithFrame:frameRect]) != nil)
-	{
-		// Init our vars
-		controller = nil;
-		openLinksInNewBrowser = NO;
-		isFeedRedirect = NO;
-		isDownload = NO;
-
-		// We'll be the webview policy handler.
-		[self setPolicyDelegate:self];
-		[self setDownloadDelegate:[DownloadManager sharedInstance]];
-
-		// Set up to be notified when minimum font size changes
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
-
-		// Handle minimum font size
-		defaultWebPrefs = [[self preferences] retain];
-		[defaultWebPrefs setStandardFontFamily:@"Arial"];
-		[defaultWebPrefs setDefaultFontSize:12];
-		[defaultWebPrefs setPrivateBrowsingEnabled:YES];
-		[self loadMinimumFontSize];
-	}
+	if ((self = [super initWithFrame:frameRect frameName:frameName groupName:groupName]) != nil)
+		[self initTabbedWebView];
 	return self;
+}
+
+/* initTabbedWebView
+ * Do the internal web view initialisation.
+ */
+-(void)initTabbedWebView
+{
+	// Init our vars
+	controller = nil;
+	openLinksInNewBrowser = NO;
+	isFeedRedirect = NO;
+	isDownload = NO;
+	
+	// We'll be the webview policy handler.
+	[self setPolicyDelegate:self];
+	[self setDownloadDelegate:[DownloadManager sharedInstance]];
+	
+	// Set up to be notified when minimum font size changes
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
+	
+	// Handle minimum font size
+	defaultWebPrefs = [[self preferences] retain];
+	[defaultWebPrefs setStandardFontFamily:@"Arial"];
+	[defaultWebPrefs setDefaultFontSize:12];
+	[defaultWebPrefs setPrivateBrowsingEnabled:YES];
+	[self loadMinimumFontSize];
 }
 
 /* setController

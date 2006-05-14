@@ -32,6 +32,7 @@
 }
 
 // Public functions
+-(void)initTabbedWebView;
 -(void)setController:(AppController *)theController;
 -(void)setOpenLinksInNewBrowser:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;

@@ -1,13 +1,6 @@
 {
     IBClasses = (
         {
-            ACTIONS = {printDocument = id; }; 
-            CLASS = ArticleView; 
-            LANGUAGE = Java; 
-            OUTLETS = {theDelegate = id; }; 
-            SUPERCLASS = WebView; 
-        }, 
-        {
             ACTIONS = {
                 handleAddress = id; 
                 handleGoBack = id; 
@@ -36,7 +29,13 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            ACTIONS = {printDocument = id; }; 
+            CLASS = TabbedWebView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = WebView; 
+        }
     ); 
     IBVersion = 1; 
 }

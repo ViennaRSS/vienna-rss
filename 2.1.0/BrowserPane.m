@@ -66,6 +66,7 @@
 -(void)awakeFromNib
 {
 	// Create our webview
+	[webPane initTabbedWebView];
 	[webPane setUIDelegate:self];
 	[webPane setFrameLoadDelegate:self];
 	[webPane setCustomUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
