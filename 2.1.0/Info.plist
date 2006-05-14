@@ -83,6 +83,6 @@
 	<key>SmartCrashReports_EmailTicket</key>
 	<string>SCR-15C768BF24</string>
 	<key>SUFeedURL</key>
-	<string>http://vienna.sourceforge.net/changelog.xml</string>
+	<string>http://vienna-rss.sourceforge.net/changelog.xml</string>
 </dict>
 </plist>
