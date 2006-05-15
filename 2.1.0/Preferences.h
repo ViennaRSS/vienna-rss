@@ -31,6 +31,7 @@
 	int filterMode;
 	int layout;
 	int newArticlesNotification;
+	BOOL autoSortFoldersTree;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
 	BOOL enableMinimumFontSize;
@@ -158,4 +159,8 @@
 // Article list sort descriptors
 -(NSArray *)articleSortDescriptors;
 -(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors;
+
+// Automatically sort folders tree
+-(BOOL)autoSortFoldersTree;
+-(void)setAutoSortFoldersTree:(BOOL)flag;
 @end

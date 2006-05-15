@@ -86,7 +86,7 @@
 			// the sub-group items under the parent.
 			if (feedTitle != nil)
 			{
-				int folderId = [db addFolder:parentId folderName:feedTitle type:MA_Group_Folder canAppendIndex:NO];
+				int folderId = [db addFolder:parentId afterChild:-1 folderName:feedTitle type:MA_Group_Folder canAppendIndex:NO];
 				if (folderId == -1)
 					folderId = MA_Root_Folder;
 				countImported += [self importSubscriptionGroup:outlineItem underParent:folderId];
@@ -101,7 +101,7 @@
 				folderId = [folder itemId];
 			else
 			{
-				folderId = [db addRSSFolder:feedTitle underParent:parentId subscriptionURL:feedURL];
+				folderId = [db addRSSFolder:feedTitle underParent:parentId afterChild:-1 subscriptionURL:feedURL];
 				++countImported;
 			}
 			[db setBloglinesId:folderId newBloglinesId:bloglinesId];

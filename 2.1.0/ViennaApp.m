@@ -169,7 +169,7 @@
 
 	int parentId = folder ? ((IsGroupFolder(folder)) ? [folder itemId] :[folder parentId]) : MA_Root_Folder;
 
-	[[self delegate] createNewSubscription:[args objectForKey:@"URL"] underFolder:parentId];
+	[[self delegate] createNewSubscription:[args objectForKey:@"URL"] underFolder:parentId afterChild:-1];
 	return nil;
 }
 

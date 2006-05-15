@@ -9,6 +9,7 @@ Thanks!
 2.1.0.2100
 ----------
 (Contributions from Jeffrey Johnson and David Kocher).
+- Added preference for automatically or manually sorting folders view.
 - Added "Increase text size" and "Decrease Text Size" for browser view.
 - Changed key combination for "Cancel Refreshing" to control-command-s to make command-"-" available for text size.
 - Added "Send Link" functionality for article view.

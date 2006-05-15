@@ -61,6 +61,8 @@
 @interface Folder : NSObject {
 	int itemId;
 	int parentId;
+	int nextSiblingId;
+	int firstChildId;
 	int unreadCount;
 	int type;
 	int childUnreadCount;
@@ -89,6 +91,8 @@
 -(NSArray *)articlesWithFilter:(NSString *)fstring;
 -(int)parentId;
 -(int)itemId;
+-(int)nextSiblingId;
+-(int)firstChildId;
 -(int)countOfCachedArticles;
 -(int)unreadCount;
 -(int)type;
@@ -109,6 +113,8 @@
 -(void)setUnreadCount:(int)count;
 -(void)setType:(int)newType;
 -(void)setParent:(int)newParent;
+-(void)setNextSiblingId:(int)newNextSibling;
+-(void)setFirstChildId:(int)newFirstChild;
 -(void)setImage:(NSImage *)newImage;
 -(void)setFlag:(unsigned int)flagToSet;
 -(void)clearFlag:(unsigned int)flagToClear;

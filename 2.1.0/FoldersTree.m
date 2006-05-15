@@ -38,7 +38,9 @@
 	-(void)unarchiveState:(NSArray *)stateArray;
 	-(void)reloadDatabase:(NSArray *)stateArray;
 	-(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
+	-(void)setManualSortOrderForNode:(TreeNode *)node;
 	-(void)handleDoubleClick:(id)sender;
+	-(void)handleAutoSortFoldersTreeChange:(NSNotification *)nc;
 	-(void)handleFolderAdded:(NSNotification *)nc;
 	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleFolderUpdate:(NSNotification *)nc;
@@ -63,7 +65,7 @@
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
-		rootNode = [[TreeNode alloc] init:nil folder:nil canHaveChildren:YES];
+		rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
 		blockSelectionHandler = NO;
 		selectionTimer = nil;
 		folderErrorImage = nil;
@@ -89,6 +91,7 @@
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
+	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
 	
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
@@ -276,17 +279,38 @@
 {
 	NSEnumerator * enumerator = [listOfFolders objectEnumerator];
 	Folder * folder;
-
-	while ((folder = [enumerator nextObject]) != nil)
+	if ([[Preferences standardPreferences] autoSortFoldersTree])
 	{
-		int itemId = [folder itemId];
-		NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:itemId];
-		int count = [listOfSubFolders count];
-		TreeNode * subNode;
-
-		subNode = [[TreeNode alloc] init:node folder:folder canHaveChildren:(count > 0)];
-		if (count)
-			[self loadTree:listOfSubFolders rootNode:subNode];
+		while ((folder = [enumerator nextObject]) != nil)
+		{
+			int itemId = [folder itemId];
+			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:itemId];
+			int count = [listOfSubFolders count];
+			TreeNode * subNode;
+			
+			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder canHaveChildren:(count > 0)];
+			if (count)
+				[self loadTree:listOfSubFolders rootNode:subNode];
+		}
+	}
+	else
+	{
+		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
+		int index = 0;
+		int nextChildId = (node == rootNode) ? [[Database sharedDatabase] firstFolderId] : [[node folder] firstChildId];
+		while (nextChildId > 0)
+		{
+			folder = [listOfFolders objectAtIndex:[listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]]];
+			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:nextChildId];
+			int count = [listOfSubFolders count];
+			TreeNode * subNode;
+			
+			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder canHaveChildren:(count > 0)];
+			if (count)
+				[self loadTree:listOfSubFolders rootNode:subNode];
+			nextChildId = [folder nextSiblingId];
+			++index;
+		}
 	}	
 }
 
@@ -309,7 +333,7 @@
 	while (node != nil)
 	{
 		[array addObjectsFromArray:[self folders:[node nodeId]]];
-		node = [node nextChild];
+		node = [node nextSibling];
 	}
 	return array;
 }
@@ -424,10 +448,10 @@
 		TreeNode * parentNode = [node parentNode];
 		nextNode = [node firstChild];
 		if (nextNode == nil)
-			nextNode = [node nextChild];
+			nextNode = [node nextSibling];
 		while (nextNode == nil && parentNode != nil)
 		{
-			nextNode = [parentNode nextChild];
+			nextNode = [parentNode nextSibling];
 			parentNode = [parentNode parentNode];
 		}
 		if (nextNode == nil)
@@ -506,6 +530,48 @@
 	return arrayOfSelectedFolders;
 }
 
+/* setManualSortOrderForNode
+ * Writes the order of the current folder hierarchy to the database.
+ */
+-(void)setManualSortOrderForNode:(TreeNode *)node
+{
+	if (node == nil)
+		return;
+	Database * db = [Database sharedDatabase];
+	int folderId = [node nodeId];
+	
+	int count = [node countOfChildren];
+	if (count > 0)
+	{
+		[db setFirstChild:[[node childByIndex:0] nodeId] forFolder:folderId];
+		[self setManualSortOrderForNode:[node childByIndex:0]];
+		int index;
+		for (index = 1; index < count; ++index)
+		{
+			[db setNextSibling:[[node childByIndex:index] nodeId] forFolder:[[node childByIndex:index - 1] nodeId]];
+			[self setManualSortOrderForNode:[node childByIndex:index]];
+		}
+		[db setNextSibling:0 forFolder:[[node childByIndex:index - 1] nodeId]];
+	}
+	else
+		[db setFirstChild:0 forFolder:folderId];
+}
+
+/* handleAutoSortFoldersTreeChange
+ * Respond to the notification when the preference is changed for automatically or manually sorting the folders tree.
+ */
+-(void)handleAutoSortFoldersTreeChange:(NSNotification *)nc
+{
+	if (![[Preferences standardPreferences] autoSortFoldersTree])
+	{
+		[self setManualSortOrderForNode:rootNode];
+	}
+	
+	blockSelectionHandler = YES;
+	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
+	blockSelectionHandler = NO;
+}
+
 /* handleShowFolderImagesChange
  * Respond to the notification sent when the option to show folder images is changed.
  */
@@ -563,8 +629,8 @@
 	TreeNode * nextNode;
 
 	// First find the next node we'll select
-	if ([thisNode nextChild] != nil)
-		nextNode = [thisNode nextChild];
+	if ([thisNode nextSibling] != nil)
+		nextNode = [thisNode nextSibling];
 	else
 	{
 		nextNode = [thisNode parentNode];
@@ -600,7 +666,8 @@
 	TreeNode * parentNode = [node parentNode];
 
 	BOOL moveSelection = (folderId == [self actualSelection]);
-	[parentNode sortChildren];
+	if ([[Preferences standardPreferences] autoSortFoldersTree])
+		[parentNode sortChildren];
 	[self reloadFolderItem:parentNode reloadChildren:YES];
 	if (moveSelection)
 	{
@@ -636,7 +703,20 @@
 	TreeNode * node = (parentId == MA_Root_Folder) ? rootNode : [rootNode nodeFromID:parentId];
 	if (![node canHaveChildren])
 		[node setCanHaveChildren:YES];
-	[[TreeNode alloc] init:node folder:newFolder canHaveChildren:NO];
+	
+	int childIndex = -1;
+	if (![[Preferences standardPreferences] autoSortFoldersTree])
+	{
+		int nextSiblingId = [newFolder nextSiblingId];
+		if (nextSiblingId > 0)
+		{
+			TreeNode * nextSibling = [node nodeFromID:nextSiblingId];
+			if (nextSibling != nil)
+				childIndex = [node indexOfChild:nextSibling];
+		}
+	}
+	
+	[[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
 	[self reloadFolderItem:node reloadChildren:YES];
 }
 
@@ -973,12 +1053,13 @@
 
 /* moveFolders
  * Reparent folders using the information in the specified array. The array consists of
- * a collection of NSNumber pairs: the first number is the ID of the folder to move and
- * the second number is the ID of the parent to which the folder should be moved.
+ * a collection of NSNumber triples: the first number is the ID of the folder to move,
+ * the second number is the ID of the parent to which the folder should be moved,
+ * the third number is the child index to which the folder should be moved.
  */
 -(BOOL)moveFolders:(NSArray *)array
 {
-	NSAssert(([array count] & 1) == 0, @"Incorrect number of items in array passed to moveFolders");
+	NSAssert(([array count] % 3) == 0, @"Incorrect number of items in array passed to moveFolders");
 	int count = [array count];
 	int index = 0;
 
@@ -988,31 +1069,82 @@
 	// Internal drag and drop so we're just changing the parent IDs around. One thing
 	// we have to watch for is to make sure that we don't re-parent to a subordinate
 	// folder.
+	Database * db = [Database sharedDatabase];
+	BOOL autoSort = [[Preferences standardPreferences] autoSortFoldersTree];
 	while (index < count)
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
 		int newParentId = [[array objectAtIndex:index++] intValue];
-		Database * db = [Database sharedDatabase];
+		int newChildIndex = [[array objectAtIndex:index++] intValue];
 		Folder * folder = [db folderFromID:folderId];
 		int oldParentId = [folder parentId];
 		
 		TreeNode * node = [rootNode nodeFromID:folderId];
 		TreeNode * oldParent = [rootNode nodeFromID:oldParentId];
 		TreeNode * newParent = [rootNode nodeFromID:newParentId];
-
-		if (![newParent canHaveChildren])
-			[newParent setCanHaveChildren:YES];
+		int oldChildIndex = [oldParent indexOfChild:node];
 		
-		if (![db setParent:newParentId forFolder:folderId])
-			continue;
-
+		if (newParentId == oldParentId)
+		{
+			// With alphabetic sorting, moving under the same parent is impossible.
+			if (autoSort)
+				continue;
+			// No need to move if destination is the same as origin.
+			if (newChildIndex == oldChildIndex)
+				continue;
+			// Account for removal of child from old location.
+			if (newChildIndex > oldChildIndex)
+				--newChildIndex;
+		}
+		else
+		{
+			if (![newParent canHaveChildren])
+				[newParent setCanHaveChildren:YES];
+			if (![db setParent:newParentId forFolder:folderId])
+				continue;
+		}
+			
+		if (!autoSort)
+		{
+			if (oldChildIndex > 0)
+			{
+				if (![db setNextSibling:[folder nextSiblingId] forFolder:[[oldParent childByIndex:oldChildIndex - 1] nodeId]])
+					continue;
+			}
+			else
+			{
+				if (![db setFirstChild:[folder nextSiblingId] forFolder:oldParentId])
+					continue;
+			}
+		}
+			
 		[node retain];
 		[oldParent removeChild:node andChildren:NO];
-		[newParent addChild:node];
+		if (newChildIndex > [newParent countOfChildren])
+			newChildIndex = [newParent countOfChildren];
+		[newParent addChild:node atIndex:newChildIndex];
 		[node release];
 		
 		[undoArray addObject:[NSNumber numberWithInt:folderId]];
 		[undoArray addObject:[NSNumber numberWithInt:oldParentId]];
+		[undoArray addObject:[NSNumber numberWithInt:oldChildIndex]];
+		
+		if (!autoSort)
+		{
+			if (newChildIndex > 0)
+			{
+				Folder * predecessor = [[newParent childByIndex:newChildIndex - 1] folder];
+				if (![db setNextSibling:[predecessor nextSiblingId] forFolder:folderId])
+					continue;
+				[db setNextSibling:folderId forFolder:[predecessor itemId]];
+			}
+			else
+			{
+				if (![db setNextSibling:[[newParent folder] firstChildId] forFolder:folderId])
+					continue;
+				[db setFirstChild:folderId forFolder:newParentId];
+			}
+		}
 	}
 	
 	// If undo array is empty, then nothing has been moved.
@@ -1029,7 +1161,7 @@
 	[outlineView reloadData];
 
 	// If any parent was a collapsed group, expand it now
-	for (index = 0; index < count; ++index)
+	for (index = 0; index < count; index += 2)
 	{
 		int newParentId = [[array objectAtIndex:++index] intValue];
 		if (newParentId != MA_Root_Folder)
@@ -1044,7 +1176,7 @@
 	// refresh so that rowForItem returns the new positions.
 	NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
 	int selRowIndex = 9999;
-	for (index = 0; index < count; ++index)
+	for (index = 0; index < count; index += 2)
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
 		int rowIndex = [outlineView rowForItem:[rootNode nodeFromID:folderId]];
@@ -1065,16 +1197,18 @@
 	NSPasteboard * pb = [info draggingPasteboard]; 
 	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]];
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : rootNode;
-	Database * db = [Database sharedDatabase];
 
-	int parentID = [node nodeId];
+	int parentId = [node nodeId];
+	if ((childIndex == NSOutlineViewDropOnItemIndex) || (childIndex < 0))
+		childIndex = 0;
 
 	// Check the type 
 	if (type == NSStringPboardType)
 	{
 		// This is possibly a URL that we'll handle as a potential feed subscription. It's
 		// not our call to make though.
-		[[NSApp delegate] createNewSubscription:[pb stringForType:type] underFolder:parentID];
+		int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : childIndex;
+		[[NSApp delegate] createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
 		return YES;
 	}
 	if (type == MA_PBoardType_FolderList)
@@ -1083,14 +1217,15 @@
 		int count = [arrayOfSources count];
 		int index;
 
-		// Create an NSArray of pairs (folderId, newParentId) that will be passed to moveFolders
+		// Create an NSArray of triples (folderId, newParentId, childIndex) that will be passed to moveFolders
 		// to do the actual move.
-		NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:count * 2];
+		NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:count * 3];
 		for (index = 0; index < count; ++index)
 		{
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
 			[array addObject:[NSNumber numberWithInt:folderId]];
-			[array addObject:[NSNumber numberWithInt:parentID]];
+			[array addObject:[NSNumber numberWithInt:parentId]];
+			[array addObject:[NSNumber numberWithInt:childIndex++]];
 		}
 
 		// Do the move
@@ -1100,6 +1235,7 @@
 	}
 	if (type == MA_PBoardType_RSSSource)
 	{
+		Database * db = [Database sharedDatabase];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
 		int index;
@@ -1117,21 +1253,24 @@
 
 			if ((feedURL != nil) && [db folderFromFeedURL:feedURL] == nil)
 			{
-				int folderId = [db addRSSFolder:feedTitle underParent:parentID subscriptionURL:feedURL];
+				int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : 0;
+				int folderId = [db addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
 				if (feedDescription != nil)
 					[db setFolderDescription:folderId newDescription:feedDescription];
 				if (feedHomePage != nil)
 					[db setFolderHomePage:folderId newHomePage:feedHomePage];
+				++childIndex;
 			}
 		}
 
 		// If parent was a group, expand it now
-		if (parentID != MA_Root_Folder)
-			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+		if (parentId != MA_Root_Folder)
+			[outlineView expandItem:[rootNode nodeFromID:parentId]];
 		return YES;
 	}
 	if (type == @"WebURLsWithTitlesPboardType")
 	{
+		Database * db = [Database sharedDatabase];
 		NSArray * webURLsWithTitles = [pb propertyListForType:type];
 		NSArray * arrayOfURLs = [webURLsWithTitles objectAtIndex:0];
 		NSArray * arrayOfTitles = [webURLsWithTitles objectAtIndex:1];
@@ -1147,12 +1286,16 @@
 				feedURL = [NSString stringWithFormat:@"http:%@", [draggedURL resourceSpecifier]];
 			
 			if ([db folderFromFeedURL:feedURL] == nil)
-				[db addRSSFolder:feedTitle underParent:parentID subscriptionURL:feedURL];
+			{
+				int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : 0;
+				[db addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
+				++childIndex;
+			}
 		}
 		
 		// If parent was a group, expand it now
-		if (parentID != MA_Root_Folder)
-			[outlineView expandItem:[rootNode nodeFromID:parentID]];
+		if (parentId != MA_Root_Folder)
+			[outlineView expandItem:[rootNode nodeFromID:parentId]];
 		return YES;
 	}
 	return NO; 

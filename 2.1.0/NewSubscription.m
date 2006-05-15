@@ -174,7 +174,7 @@
 	}
 
 	// Call the controller to create the new subscription.
-	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId];
+	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
 	
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];

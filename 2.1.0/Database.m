@@ -39,14 +39,14 @@
 	-(NSArray *)arrayOfSubFolders:(Folder *)folder;
 	-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(int)scopeFlags;
 	-(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
-	-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId withType:(int)type;
+	-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId afterChild:(int)predecessorId withType:(int)type;
 	-(int)executeSQL:(NSString *)sqlStatement;
 	-(int)executeSQLWithFormat:(NSString *)sqlStatement, ...;
 @end
 
 // The current database version number
 const int MA_Min_Supported_DB_Version = 12;
-const int MA_Current_DB_Version = 13;
+const int MA_Current_DB_Version = 14;
 
 // There's just one database and we manage access to it through a
 // singleton object.
@@ -187,7 +187,7 @@ static Database * _sharedDatabase = nil;
 		// write to the specified location. If not then we need to prompt the user for
 		// a different location.
 		int resultCode;
-		while ((resultCode = [self executeSQL:@"create table info (version, last_opened)"]) != SQLITE_OK)
+		while ((resultCode = [self executeSQL:@"create table info (version, last_opened, first_folder)"]) != SQLITE_OK)
 		{
 			if (resultCode != SQLITE_LOCKED)
 				return NO;
@@ -199,12 +199,16 @@ static Database * _sharedDatabase = nil;
 			qualifiedDatabaseFileName = newPath;
 		}
 
-		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags)"];
+		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
 		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
+
+		// Make sure that the folders are sorted automatically, because there is no saved hierarchy.
+		// The folders view may not be ready yet, so this call avoids sending any notifications.
+		[[Preferences standardPreferences] setBool:YES forKey:MAPref_AutoSortFoldersTree];
 
 		// Create a criteria to find all marked articles
 		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
@@ -222,7 +226,7 @@ static Database * _sharedDatabase = nil;
 		[todayCriteria release];
 
 		// Create the trash folder
-		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags) values (-1, '%@', 0, 0, %d, 0)",
+		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %d, 0, 0, 0)",
 			NSLocalizedString(@"Trash", nil),
 			MA_Trash_Folder];
 
@@ -243,14 +247,14 @@ static Database * _sharedDatabase = nil;
 					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
 					NSString * feedURL = [itemDict valueForKey:@"URL"];
 					if (feedURL != nil && feedName != nil)
-						[self addRSSFolder:feedName underParent:-1 subscriptionURL:feedURL];
+						[self addRSSFolder:feedName underParent:-1 afterChild:-1 subscriptionURL:feedURL];
 				}
 			}
 		}
 		
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;
-		[self executeSQLWithFormat:@"insert into info (version) values (%d)", databaseVersion];
+		[self executeSQLWithFormat:@"insert into info (version, first_folder) values (%d, 0)", databaseVersion];
 	}
 
 	// Upgrade to rev 13.
@@ -264,6 +268,22 @@ static Database * _sharedDatabase = nil;
 
 		// Set the new version
 		[self setDatabaseVersion:13];
+	}
+	
+	// Upgrade to rev 14.
+	if (databaseVersion < 14)
+	{
+		[self executeSQL:@"alter table info add column first_folder"];
+		[self executeSQL:@"update info set first_folder=0"];
+		
+		[self executeSQL:@"alter table folders add column next_sibling"];
+		[self executeSQL:@"update folders set next_sibling=0"];
+		
+		[self executeSQL:@"alter table folders add column first_child"];
+		[self executeSQL:@"update folders set first_child=0"];
+		
+		// Set the new version
+		[self setDatabaseVersion:14];		
 	}
 	
 	// Trap unsupported databases
@@ -361,7 +381,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria
 {
-	if ([self createFolderOnDatabase:folderName underParent:MA_Root_Folder withType:MA_Smart_Folder] >= 0)
+	if ([self createFolderOnDatabase:folderName underParent:MA_Root_Folder afterChild:0 withType:MA_Smart_Folder] >= 0)
 	{
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
 		[criteriaTree addCriteria:criteria];
@@ -566,9 +586,9 @@ static Database * _sharedDatabase = nil;
 /* addRSSFolder
  * Add an RSS Feed folder and return the ID of the new folder.
  */
--(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId subscriptionURL:(NSString *)url
+-(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId afterChild:(int)predecessorId subscriptionURL:(NSString *)url
 {
-	int folderId = [self addFolder:parentId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
+	int folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
 	if (folderId != -1)
 	{
 		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
@@ -596,7 +616,7 @@ static Database * _sharedDatabase = nil;
  * canAppendIndex is YES then we adjust the name to ensure that the folder name remains unique. If
  * we hit an error, the function returns -1.
  */
--(int)addFolder:(int)parentId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex
+-(int)addFolder:(int)parentId afterChild:(int)predecessorId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex
 {
 	Folder * folder = nil;
 
@@ -624,14 +644,56 @@ static Database * _sharedDatabase = nil;
 			name = [NSString stringWithFormat:@"%@ (%i)", oldName, index++];
 	}
 
+	int nextSibling = 0;
+	BOOL autoSort = [[Preferences standardPreferences] autoSortFoldersTree];
+	if (!autoSort)
+	{
+		if (predecessorId > 0)
+		{
+			Folder * predecessor = [self folderFromID:predecessorId];
+			if (predecessor != nil)
+				nextSibling = [predecessor nextSiblingId];
+			else
+				predecessorId = 0;
+		}
+		if (predecessorId < 0)
+		{
+			[self verifyThreadSafety];
+			SQLResult * siblings = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=0", parentId];
+			predecessorId = (siblings && [siblings rowCount]) ? [[[siblings rowAtIndex:0] stringForColumn:@"folder_id"] intValue] : 0;
+			[siblings release];			
+		}
+		if (predecessorId == 0)
+		{
+			if (parentId == MA_Root_Folder)
+				nextSibling = [self firstFolderId];
+			else
+			{
+				Folder * parent = [self folderFromID:parentId];
+				if (parent != nil)
+					nextSibling = [parent firstChildId];
+			}
+		}
+	}
+	
 	// Here we create the folder anew.
-	int newItemId = [self createFolderOnDatabase:name underParent:parentId withType:type];
+	int newItemId = [self createFolderOnDatabase:name underParent:parentId afterChild:predecessorId withType:type];
 	if (newItemId != -1)
 	{
 		// Add this new folder to our internal cache. If this is an RSS
 		// folder, mark it so that somewhere down the line we'll request the
 		// image for the folder.
 		folder = [[[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type] autorelease];
+		if (!autoSort)
+		{
+			[folder setNextSiblingId:nextSibling];
+			if (predecessorId > 0)
+				[self setNextSibling:newItemId forFolder:predecessorId];
+			else
+			{
+				[self setFirstChild:newItemId forFolder:parentId];
+			}
+		}
 		if (type == MA_RSS_Folder)
 			[folder setFlag:MA_FFlag_CheckForImage];
 		[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
@@ -647,11 +709,13 @@ static Database * _sharedDatabase = nil;
  * the folder without any real sanity checks which are assumed to have been done by the caller.
  * Returns the ID of the newly created folder or -1 if we failed.
  */
--(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId withType:(int)type
+-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId afterChild:(int)predecessorId withType:(int)type
 {
 	NSString * preparedName = [SQLDatabase prepareStringForQuery:name];
 	int newItemId = -1;
 	int flags = 0;
+	int nextSibling = 0;
+	int firstChild = 0;
 	
 	// For new folders, last update is set to before now
 	NSDate * lastUpdate = [NSDate distantPast];
@@ -666,12 +730,14 @@ static Database * _sharedDatabase = nil;
 	// the field here even if its just to an empty value.
 	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQueryWithFormat:
-		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags) values('%@', %d, 0, %f, %d, %d)",
+		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %d, 0, %f, %d, %d, %d, %d)",
 		preparedName,
 		parentId,
 		interval,
 		type,
-		flags];
+		flags,
+		nextSibling,
+		firstChild];
 	
 	// Quick way of getting the last autoincrement primary key value (the folder_id).
 	if (results)
@@ -679,6 +745,7 @@ static Database * _sharedDatabase = nil;
 		newItemId = [sqlDatabase lastInsertRowId];
 		[results release];
 	}
+	
 	return newItemId;
 }
 
@@ -725,7 +792,22 @@ static Database * _sharedDatabase = nil;
 	// If this is an RSS feed, delete from the feeds
 	if (IsRSSFolder(folder))
 		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
-
+	
+	// Update the sort order if necessary
+	if (![[Preferences standardPreferences] autoSortFoldersTree])
+	{
+		[self verifyThreadSafety];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=%d", [folder parentId], folderId];
+		if (results && [results rowCount])
+		{
+			int previousSibling = [[[results rowAtIndex:0] stringForColumn:@"folder_id"] intValue];
+			[results release];
+			[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
+		}
+		else
+			[self setFirstChild:[folder nextSiblingId] forFolder:[folder parentId]];
+	}
+	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
 	// normal folder had it's type grobbed to MA_Smart_Folder.
 	[self executeSQLWithFormat:@"delete from messages where folder_id=%d", folderId];
@@ -909,6 +991,10 @@ static Database * _sharedDatabase = nil;
  */
 -(BOOL)setParent:(int)newParentID forFolder:(int)folderId
 {
+	// Exit now if we're read-only
+	if (readOnly)
+		return NO;
+	
 	Folder * folder = [self folderFromID:folderId];
 	if ([folder parentId] == newParentID)
 		return NO;
@@ -946,6 +1032,68 @@ static Database * _sharedDatabase = nil;
 	// Update the database now
 	[self executeSQLWithFormat:@"update folders set parent_id='%d' where folder_id=%d", newParentID, folderId];
 	return YES;
+}
+
+/* setFirstChild
+ * Changes the first child of the specified folder and then updates the database.
+ */
+-(BOOL)setFirstChild:(int)childId forFolder:(int)folderId
+{
+	// Exit now if we're read-only
+	if (readOnly)
+		return NO;
+	
+	if (folderId == MA_Root_Folder)
+	{
+		[self executeSQLWithFormat:@"update info set first_folder=%d", childId];
+	}
+	else
+	{
+		Folder * folder = [self folderFromID:folderId];
+		if (folder == nil)
+			return NO;
+		
+		[folder setFirstChildId:childId];
+		
+		[self executeSQLWithFormat:@"update folders set first_child=%d where folder_id=%d", childId, folderId];
+	}
+	
+	return YES;
+}
+
+/* setNextSibling
+ * Changes the next sibling for the specified folder and then updates the database.
+ */
+-(BOOL)setNextSibling:(int)nextSiblingId forFolder:(int)folderId
+{
+	// Exit now if we're read-only
+	if (readOnly)
+		return NO;
+	
+	Folder * folder = [self folderFromID:folderId];
+	if (folder == nil)
+		return NO;
+	
+	[folder setNextSiblingId:nextSiblingId];
+	
+	[self executeSQLWithFormat:@"update folders set next_sibling=%d where folder_id=%d", nextSiblingId, folderId];
+	return YES;
+}
+
+/* firstFolderId
+ * Returns the ID of the first folder (first child of root).
+ */
+-(int)firstFolderId
+{
+	int folderId = 0;
+	[self verifyThreadSafety];
+	SQLResult * results = [sqlDatabase performQuery:@"select first_folder from info"];
+	if (results && [results rowCount])
+	{
+		folderId = [[[results rowAtIndex:0] stringForColumn:@"first_folder"] intValue];
+	}
+	[results release];
+	return folderId;
 }
 
 /* trashFolderId;
@@ -1317,7 +1465,7 @@ static Database * _sharedDatabase = nil;
 		return [folder itemId];
 	}
 
-	int folderId = [self addFolder:parentId folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
+	int folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId == -1)
 		success = NO;
 	else
@@ -1384,8 +1532,12 @@ static Database * _sharedDatabase = nil;
 				int unreadCount = [[row stringForColumn:@"unread_count"] intValue];
 				int type = [[row stringForColumn:@"type"] intValue];
 				int flags = [[row stringForColumn:@"flags"] intValue];
-
+				int nextSibling = [[row stringForColumn:@"next_sibling"] intValue];
+				int firstChild = [[row stringForColumn:@"first_child"] intValue];
+				
 				Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
+				[folder setNextSiblingId:nextSibling];
+				[folder setFirstChildId:firstChild];
 				if (!IsRSSFolder(folder))
 					unreadCount = 0;
 				[folder setUnreadCount:unreadCount];

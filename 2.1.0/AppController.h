@@ -148,7 +148,7 @@
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(int)folderId;
--(void)createNewSubscription:(NSString *)url underFolder:(int)parentId;
+-(void)createNewSubscription:(NSString *)url underFolder:(int)parentId afterChild:(int)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
