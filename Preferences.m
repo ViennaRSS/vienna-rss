@@ -134,6 +134,7 @@ static Preferences * _standardPreferences = nil;
 		}
 
 		// Load those settings that we cache.
+		autoSortFoldersTree = [self boolForKey:MAPref_AutoSortFoldersTree];
 		articleSortDescriptors = [[NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]] retain];
 		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
 		filterMode = [self integerForKey:MAPref_FilterMode];
@@ -205,6 +206,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
+	[defaultValues setObject:boolYes forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
@@ -789,6 +791,27 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
+/* autoSortFoldersTree
+ * Returns whether or not the folders tree is automatically sorted according to item type and name.
+ */
+-(BOOL)autoSortFoldersTree
+{
+	return autoSortFoldersTree;
+}
+
+/* setAutoSortFoldersTree
+ * Sets whether or not the folders tree is automatically sorted according to item type and name.
+ */
+-(void)setAutoSortFoldersTree:(BOOL)flag
+{
+	if (autoSortFoldersTree != flag)
+	{
+		autoSortFoldersTree = flag;
+		[self setBool:flag forKey:MAPref_AutoSortFoldersTree];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
+	}
+}
+
 /* newArticlesNotification
  * Returns the current method by which Vienna indicates new articles are available.
  */
@@ -809,4 +832,5 @@ static Preferences * _standardPreferences = nil;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
+
 @end

@@ -21,7 +21,6 @@
 #import <Foundation/Foundation.h>
 #import "SQLDatabase.h"
 #import "Folder.h"
-#import "TreeNode.h"
 #import "Field.h"
 #import "Criteria.h"
 
@@ -61,12 +60,13 @@
 
 // Folder functions
 -(void)initFolderArray;
+-(int)firstFolderId;
 -(int)trashFolderId;
--(NSArray *)arrayOfFolders:(int)parentID;
+-(NSArray *)arrayOfFolders:(int)parentId;
 -(Folder *)folderFromID:(int)wantedId;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromName:(NSString *)wantedName;
--(int)addFolder:(int)conferenceId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex;
+-(int)addFolder:(int)parentId afterChild:(int)predecessorId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(int)folderId;
 -(BOOL)setFolderName:(int)folderId newName:(NSString *)newName;
 -(BOOL)setFolderDescription:(int)folderId newDescription:(NSString *)newDescription;
@@ -80,12 +80,14 @@
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
 -(BOOL)setParent:(int)newParentID forFolder:(int)folderId;
+-(BOOL)setFirstChild:(int)childId forFolder:(int)folderId;
+-(BOOL)setNextSibling:(int)nextSiblingId forFolder:(int)folderId;
 -(BOOL)setBloglinesId:(int)folderId newBloglinesId:(long)bloglinesId;
 
 // RSS folder functions
 +(NSString *)untitledFeedFolderName;
 -(NSArray *)arrayOfRSSFolders;
--(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId subscriptionURL:(NSString *)url;
+-(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId afterChild:(int)predecessorId subscriptionURL:(NSString *)url;
 
 // smart folder functions
 -(void)initSmartFoldersArray;

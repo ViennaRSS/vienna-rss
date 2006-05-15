@@ -19,13 +19,14 @@
 //
 
 #import "TreeNode.h"
+#import "Preferences.h"
 
 @implementation TreeNode
 
 /* init
  * Initialises a treenode.
  */
--(id)init:(TreeNode *)parent folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
+-(id)init:(TreeNode *)parent atIndex:(int)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
 {
 	if ((self = [super init]) != nil)
  	{
@@ -36,7 +37,7 @@
 		[self setNodeId:folderId];
 		if (parent != nil)
 		{
-			[parent addChild:self];
+			[parent addChild:self atIndex:insertIndex];
 			[self release];
 		}
 		children = [[NSMutableArray array] retain];
@@ -55,31 +56,39 @@
  * This function does not fail. It is assumed that the child can always be inserted into
  * place one way or the other.
  */
--(void)addChild:(TreeNode *)child
+-(void)addChild:(TreeNode *)child atIndex:(int)insertIndex
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
-	TreeNode * forwardChild = nil;
-	unsigned int insertIndex = 0;
+	unsigned int count = [children count];
 
-	if ([children count] > 0)
-		forwardChild = [children objectAtIndex:0];
-	while (insertIndex < [children count])
+	if ([[Preferences standardPreferences] autoSortFoldersTree])
 	{
-		TreeNode * theChild = [children objectAtIndex:insertIndex];
-		Folder * theChildFolder = [theChild folder];
-		Folder * ourChildFolder = [child folder];
-
-		if (FolderType(ourChildFolder) < FolderType(theChildFolder))
-			break;
-		else if (IsSameFolderType(theChildFolder, ourChildFolder))
+		TreeNode * forwardChild = nil;
+		insertIndex = 0;
+		
+		if (count > 0u)
+			forwardChild = [children objectAtIndex:0u];
+		while (insertIndex < count)
 		{
-			NSString * theChildName = [theChildFolder name];
-			NSString * ourChildName = [ourChildFolder name];
-			if ([theChildName caseInsensitiveCompare:ourChildName] == NSOrderedDescending)
+			TreeNode * theChild = [children objectAtIndex:insertIndex];
+			Folder * theChildFolder = [theChild folder];
+			Folder * ourChildFolder = [child folder];
+			
+			if (FolderType(ourChildFolder) < FolderType(theChildFolder))
 				break;
+			else if (IsSameFolderType(theChildFolder, ourChildFolder))
+			{
+				NSString * theChildName = [theChildFolder name];
+				NSString * ourChildName = [ourChildFolder name];
+				if ([theChildName caseInsensitiveCompare:ourChildName] == NSOrderedDescending)
+					break;
+			}
+			++insertIndex;
 		}
-		++insertIndex;
 	}
+	else if ((insertIndex < 0) || (insertIndex > count))
+		insertIndex = count;
+	
 	[child setParentNode:self];
 	[children insertObject:child atIndex:insertIndex];
 }
@@ -194,10 +203,10 @@
 	return parentNode;
 }
 
-/* nextChild
+/* nextSibling
  * Returns the next child.
  */
--(TreeNode *)nextChild
+-(TreeNode *)nextSibling
 {
 	int childIndex = [parentNode indexOfChild:self];
 	if (childIndex == NSNotFound || ++childIndex >= [parentNode countOfChildren])

@@ -30,13 +30,13 @@
 }
 
 // Accessor functions
--(id)init:(TreeNode *)parentNode folder:(Folder *)folder canHaveChildren:(BOOL)childflag;
+-(id)init:(TreeNode *)parentNode atIndex:(int)insertIndex folder:(Folder *)folder canHaveChildren:(BOOL)childflag;
 -(void)setParentNode:(TreeNode *)parent;
 -(void)setFolder:(Folder *)newFolder;
 -(TreeNode *)parentNode;
--(TreeNode *)nextChild;
+-(TreeNode *)nextSibling;
 -(TreeNode *)firstChild;
--(void)addChild:(TreeNode *)child;
+-(void)addChild:(TreeNode *)child atIndex:(int)insertIndex;
 -(void)removeChildren;
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
 -(void)sortChildren;

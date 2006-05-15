@@ -1424,7 +1424,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)handleRSSLink:(NSString *)linkPath
 {
-	[self createNewSubscription:linkPath underFolder:[foldersTree groupParentSelection]];
+	[self createNewSubscription:linkPath underFolder:[foldersTree groupParentSelection] afterChild:-1];
 }
 
 /* handleEditFolder
@@ -1884,7 +1884,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* createNewSubscription
  * Create a new subscription for the specified URL under the given parent folder.
  */
--(void)createNewSubscription:(NSString *)urlString underFolder:(int)parentId
+-(void)createNewSubscription:(NSString *)urlString underFolder:(int)parentId afterChild:(int)predecessorId
 {
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
@@ -1900,7 +1900,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Create then select the new folder.
-	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId subscriptionURL:urlString];
+	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
 	if (folderId != -1)
 	{
 		[foldersTree selectFolder:folderId];

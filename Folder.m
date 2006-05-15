@@ -209,6 +209,8 @@ static NSArray * iconArray = nil;
 	{
 		itemId = newId;
 		parentId = newIdParent;
+		firstChildId = 0;
+		nextSiblingId = 0;
 		unreadCount = 0;
 		childUnreadCount = 0;
 		type = newType;
@@ -258,6 +260,22 @@ static NSArray * iconArray = nil;
 -(int)parentId
 {
 	return parentId;
+}
+
+/* nextSiblingId
+ * Returns the ID of the folder's next sibling.
+ */
+-(int)nextSiblingId
+{
+	return nextSiblingId;
+}
+
+/* nextSiblingId
+ * Returns the ID of the folder's first child.
+ */
+-(int)firstChildId
+{
+	return firstChildId;
 }
 
 /* unreadCount
@@ -595,6 +613,22 @@ static NSArray * iconArray = nil;
 		parentId = newParent;
 		needFlush = YES;
 	}
+}
+
+/* setNextSiblingId
+ * Set the ID for the folder's next sibling.
+ */
+-(void)setNextSiblingId:(int)newNextSibling
+{
+	nextSiblingId = newNextSibling;
+}
+
+/* setFirstChildId
+ * Set the ID for the folder's first child.
+ */
+-(void)setFirstChildId:(int)newFirstChild;
+{
+	firstChildId = newFirstChild;
 }
 
 /* indexOfArticle
