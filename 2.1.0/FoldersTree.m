@@ -1082,6 +1082,7 @@
 		TreeNode * oldParent = [rootNode nodeFromID:oldParentId];
 		TreeNode * newParent = [rootNode nodeFromID:newParentId];
 		int oldChildIndex = [oldParent indexOfChild:node];
+		BOOL sameParent = NO;
 		
 		if (newParentId == oldParentId)
 		{
@@ -1091,9 +1092,7 @@
 			// No need to move if destination is the same as origin.
 			if (newChildIndex == oldChildIndex)
 				continue;
-			// Account for removal of child from old location.
-			if (newChildIndex > oldChildIndex)
-				--newChildIndex;
+			sameParent = YES;
 		}
 		else
 		{
@@ -1102,7 +1101,7 @@
 			if (![db setParent:newParentId forFolder:folderId])
 				continue;
 		}
-			
+		
 		if (!autoSort)
 		{
 			if (oldChildIndex > 0)
@@ -1116,7 +1115,16 @@
 					continue;
 			}
 		}
-			
+		
+		// Adjust the indices to account for the removal of the child.
+		if (sameParent)
+		{
+			if (newChildIndex > oldChildIndex)
+				--newChildIndex;
+			else
+				++oldChildIndex;
+		}
+		
 		[node retain];
 		[oldParent removeChild:node andChildren:NO];
 		if (newChildIndex > [newParent countOfChildren])
