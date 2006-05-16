@@ -645,7 +645,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	int nextSibling = 0;
-	BOOL autoSort = [[Preferences standardPreferences] autoSortFoldersTree];
+	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName;
 	if (!autoSort)
 	{
 		if (predecessorId > 0)
@@ -794,7 +794,7 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
 	
 	// Update the sort order if necessary
-	if (![[Preferences standardPreferences] autoSortFoldersTree])
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_ByName)
 	{
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=%d", [folder parentId], folderId];

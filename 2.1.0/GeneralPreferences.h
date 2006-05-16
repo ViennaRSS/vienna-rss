@@ -29,8 +29,6 @@
 	IBOutlet NSButton * checkOnStartUp;
 	IBOutlet NSButton * openLinksInBackground;
 	IBOutlet NSButton * openLinksInExternalBrowser;
-	IBOutlet NSButtonCell * markReadAfterNext;
-	IBOutlet NSButtonCell * markReadAfterDelay;
 	IBOutlet NSPopUpButton * downloadFolder;
 	NSMutableDictionary * appToPathMap;
 	ICInstance internetConfigHandler;
@@ -41,7 +39,6 @@
 -(IBAction)changeCheckOnStartUp:(id)sender;
 -(IBAction)selectDefaultLinksHandler:(id)sender;
 -(IBAction)changeCheckForUpdates:(id)sender;
--(IBAction)changeMarkReadBehaviour:(id)sender;
 -(IBAction)changeOpenLinksInBackground:(id)sender;
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeExpireDuration:(id)sender;

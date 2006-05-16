@@ -134,7 +134,7 @@ static Preferences * _standardPreferences = nil;
 		}
 
 		// Load those settings that we cache.
-		autoSortFoldersTree = [self boolForKey:MAPref_AutoSortFoldersTree];
+		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];
 		articleSortDescriptors = [[NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]] retain];
 		refreshFrequency = [self integerForKey:MAPref_CheckFrequency];
 		filterMode = [self integerForKey:MAPref_FilterMode];
@@ -791,23 +791,23 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
-/* autoSortFoldersTree
- * Returns whether or not the folders tree is automatically sorted according to item type and name.
+/* foldersTreeSortMethod
+ * Returns the method by which the folders tree is sorted. See MA_FolderSort_xxx for the possible values.
  */
--(BOOL)autoSortFoldersTree
+-(int)foldersTreeSortMethod
 {
-	return autoSortFoldersTree;
+	return foldersTreeSortMethod;
 }
 
-/* setAutoSortFoldersTree
- * Sets whether or not the folders tree is automatically sorted according to item type and name.
+/* setFoldersTreeSortMethod
+ * Sets the method by which the folders tree is sorted.
  */
--(void)setAutoSortFoldersTree:(BOOL)flag
+-(void)setFoldersTreeSortMethod:(int)newMethod
 {
-	if (autoSortFoldersTree != flag)
+	if (foldersTreeSortMethod != newMethod)
 	{
-		autoSortFoldersTree = flag;
-		[self setBool:flag forKey:MAPref_AutoSortFoldersTree];
+		foldersTreeSortMethod = newMethod;
+		[self setInteger:newMethod forKey:MAPref_AutoSortFoldersTree];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
 	}
 }

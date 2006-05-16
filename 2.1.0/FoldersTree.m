@@ -279,7 +279,7 @@
 {
 	NSEnumerator * enumerator = [listOfFolders objectEnumerator];
 	Folder * folder;
-	if ([[Preferences standardPreferences] autoSortFoldersTree])
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
 	{
 		while ((folder = [enumerator nextObject]) != nil)
 		{
@@ -562,10 +562,8 @@
  */
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)nc
 {
-	if (![[Preferences standardPreferences] autoSortFoldersTree])
-	{
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 		[self setManualSortOrderForNode:rootNode];
-	}
 	
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
@@ -666,8 +664,9 @@
 	TreeNode * parentNode = [node parentNode];
 
 	BOOL moveSelection = (folderId == [self actualSelection]);
-	if ([[Preferences standardPreferences] autoSortFoldersTree])
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
 		[parentNode sortChildren];
+
 	[self reloadFolderItem:parentNode reloadChildren:YES];
 	if (moveSelection)
 	{
@@ -705,7 +704,7 @@
 		[node setCanHaveChildren:YES];
 	
 	int childIndex = -1;
-	if (![[Preferences standardPreferences] autoSortFoldersTree])
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		int nextSiblingId = [newFolder nextSiblingId];
 		if (nextSiblingId > 0)
@@ -1070,7 +1069,7 @@
 	// we have to watch for is to make sure that we don't re-parent to a subordinate
 	// folder.
 	Database * db = [Database sharedDatabase];
-	BOOL autoSort = [[Preferences standardPreferences] autoSortFoldersTree];
+	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName;
 	while (index < count)
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
