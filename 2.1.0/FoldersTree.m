@@ -946,7 +946,7 @@
 	{
 		Database * db = [Database sharedDatabase];
 		if ([db folderFromName:newName] != nil)
-			runOKAlertPanel(@"Cannot rename folder", @"A folder with that name already exists");
+			runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		else
 			[db setFolderName:[folder itemId] newName:newName];
 	}
