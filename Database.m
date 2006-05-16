@@ -1487,7 +1487,7 @@ static Database * _sharedDatabase = nil;
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (![[folder name] isEqualToString:folderName])
-		[folder setName:folderName];
+		[self setFolderName:folderId newName:folderName];
 	
 	// Update the smart folder string
 	NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];

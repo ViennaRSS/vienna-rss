@@ -21,6 +21,7 @@
 #import "SearchFolder.h"
 #import "StringExtensions.h"
 #import "AppController.h"
+#import "HelperFunctions.h"
 #import "PopUpButtonExtensions.h"
 
 // Tags for the three fields that define a criteria. We set these here
@@ -425,18 +426,12 @@
 	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	unsigned int c;
 
-	// Get the folder name then either create a new smart folder entry in the database
-	// or update the one we're editing.
+	// Check whether there is another folder with the same name.
 	Folder * folder = [db folderFromName:folderName];
 	if (folder != nil && [folder itemId] != searchFolderId)
 	{
-		if (NSRunAlertPanel([NSString stringWithFormat:NSLocalizedString(@"Replace smart folder title", nil), folderName],
-							NSLocalizedString(@"Replace smart folder text", nil),
-							NSLocalizedString(@"Cancel", nil),
-							NSLocalizedString(@"Replace", nil),
-							nil) == 1)
-			return;
-		searchFolderId = [folder itemId];
+		runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
+		return;
 	}
 
 	// Build the criteria string
