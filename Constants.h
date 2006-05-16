@@ -75,10 +75,10 @@ extern NSString * MA_PBoardType_RSSSource;
 #define MA_NewArticlesNotification_Bounce	2
 
 // Filtering options
-#define MA_Filter_All			0
-#define MA_Filter_Unread		1
-#define MA_Filter_LastRefresh	2
-#define MA_Filter_Today			3
+#define MA_Filter_All					0
+#define MA_Filter_Unread				1
+#define MA_Filter_LastRefresh			2
+#define MA_Filter_Today					3
 
 // Refresh folder options
 #define MA_Refresh_RedrawList			0
@@ -87,6 +87,10 @@ extern NSString * MA_PBoardType_RSSSource;
 #define MA_Refresh_SortAndRedraw		3
 
 // Layout styles
-#define MA_Layout_Report					1
-#define MA_Layout_Condensed					2
-#define MA_Layout_Unified					3
+#define MA_Layout_Report				1
+#define MA_Layout_Condensed				2
+#define MA_Layout_Unified				3
+
+// Folders tree sort method
+#define MA_FolderSort_Manual			0
+#define MA_FolderSort_ByName			1

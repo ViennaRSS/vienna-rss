@@ -8,7 +8,6 @@
                 changeCheckOnStartUp = id; 
                 changeDownloadFolder = id; 
                 changeExpireDuration = id; 
-                changeMarkReadBehaviour = id; 
                 changeOpenLinksInBackground = id; 
                 changeOpenLinksInExternalBrowser = id; 
                 selectDefaultLinksHandler = id; 
@@ -22,8 +21,6 @@
                 downloadFolder = NSPopUpButton; 
                 expireDuration = NSPopUpButton; 
                 linksHandler = NSPopUpButton; 
-                markReadAfterDelay = NSButtonCell; 
-                markReadAfterNext = NSButtonCell; 
                 openLinksInBackground = NSButton; 
                 openLinksInExternalBrowser = NSButton; 
             }; 

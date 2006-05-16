@@ -110,10 +110,6 @@
 	// Set whether links are opened in the external browser
 	[openLinksInExternalBrowser setState:[prefs openLinksInVienna] ? NSOffState : NSOnState];
 	
-	// Set mark read behaviour
-	[markReadAfterNext setState:[prefs markReadInterval] == 0 ? NSOnState : NSOffState];
-	[markReadAfterDelay setState:[prefs markReadInterval] != 0 ? NSOnState : NSOffState];
-	
 	[self refreshLinkHandler];
 }
 
@@ -388,15 +384,6 @@
 			ICEnd(internetConfigHandler);
 		}
 	}
-}
-
-/* changeMarkReadBehaviour
- * Set the mark read behaviour based on the users selection.
- */
--(IBAction)changeMarkReadBehaviour:(id)sender
-{
-	float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
-	[[Preferences standardPreferences] setMarkReadInterval:newReadInterval];
 }
 
 /* changeCheckFrequency

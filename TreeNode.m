@@ -20,6 +20,7 @@
 
 #import "TreeNode.h"
 #import "Preferences.h"
+#import "Constants.h"
 
 @implementation TreeNode
 
@@ -61,7 +62,7 @@
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
 	unsigned int count = [children count];
 
-	if ([[Preferences standardPreferences] autoSortFoldersTree])
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
 	{
 		TreeNode * forwardChild = nil;
 		insertIndex = 0;

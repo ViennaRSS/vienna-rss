@@ -18,9 +18,6 @@
                 folderFontSample = NSTextField; 
                 folderFontSelectButton = NSButton; 
                 minimumFontSizes = NSComboBox; 
-                newArticlesNotificationBadgeButton = NSButtonCell; 
-                newArticlesNotificationBounceButton = NSButtonCell; 
-                newArticlesNotificationNothingButton = NSButtonCell; 
                 showFolderImagesButton = NSButton; 
             }; 
             SUPERCLASS = NSWindowController; 

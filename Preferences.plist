@@ -20,5 +20,14 @@
 		<key>Image</key>
 		<string>appearancePrefImage.tiff</string>
 	</dict>
+	<key>3</key>
+	<dict>
+		<key>Title</key>
+		<string>Reading</string>
+		<key>ClassName</key>
+		<string>ReadingPreferences</string>
+		<key>Image</key>
+		<string>readingPrefImage.tiff</string>
+	</dict>
 </dict>
 </plist>
