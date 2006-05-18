@@ -479,6 +479,8 @@
 
 	// Set the criteria condition
 	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
+	
+	[db beginTransaction];
 	if (searchFolderId == -1)
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
@@ -487,6 +489,7 @@
 	}
 	else
 		[db updateSearchFolder:searchFolderId withFolder:folderName withQuery:criteriaTree];
+	[db commitTransaction];
 
 	[criteriaTree release];
 	

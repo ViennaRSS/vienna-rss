@@ -136,7 +136,9 @@
 		else
 		{
 			XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
+			[db beginTransaction];
 			countImported = [self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
+			[db commitTransaction];
 		}
 		[tree release];
 	}

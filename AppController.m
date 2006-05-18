@@ -1900,7 +1900,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Create then select the new folder.
+	[db beginTransaction];
 	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
+	[db commitTransaction];
+	
 	if (folderId != -1)
 	{
 		[foldersTree selectFolder:folderId];

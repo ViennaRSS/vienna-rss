@@ -563,7 +563,11 @@
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)nc
 {
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
+	{
+		[[Database sharedDatabase] beginTransaction];
 		[self setManualSortOrderForNode:rootNode];
+		[[Database sharedDatabase] commitTransaction];
+	}
 	
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
@@ -1070,6 +1074,8 @@
 	// folder.
 	Database * db = [Database sharedDatabase];
 	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName;
+	
+	[db beginTransaction];
 	while (index < count)
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
@@ -1153,6 +1159,7 @@
 			}
 		}
 	}
+	[db commitTransaction];
 	
 	// If undo array is empty, then nothing has been moved.
 	if ([undoArray count] == 0u)
@@ -1252,6 +1259,7 @@
 		//
 		for (index = 0; index < count; ++index)
 		{
+			[db beginTransaction];
 			NSDictionary * sourceItem = [arrayOfSources objectAtIndex:index];
 			NSString * feedTitle = [sourceItem valueForKey:@"sourceName"];
 			NSString * feedHomePage = [sourceItem valueForKey:@"sourceHomeURL"];
@@ -1268,6 +1276,7 @@
 					[db setFolderHomePage:folderId newHomePage:feedHomePage];
 				++childIndex;
 			}
+			[db commitTransaction];
 		}
 
 		// If parent was a group, expand it now
@@ -1286,6 +1295,7 @@
 		
 		for (index = 0; index < count; ++index)
 		{
+			[db beginTransaction];
 			NSString * feedTitle = [arrayOfTitles objectAtIndex:index];
 			NSString * feedURL = [arrayOfURLs objectAtIndex:index];
 			NSURL * draggedURL = [NSURL URLWithString:feedURL];
@@ -1298,6 +1308,7 @@
 				[db addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
 				++childIndex;
 			}
+			[db commitTransaction];
 		}
 		
 		// If parent was a group, expand it now

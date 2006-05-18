@@ -198,6 +198,8 @@ static Database * _sharedDatabase = nil;
 				return NO;
 			qualifiedDatabaseFileName = newPath;
 		}
+		
+		[self beginTransaction];
 
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
 		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text)"];
@@ -255,6 +257,8 @@ static Database * _sharedDatabase = nil;
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;
 		[self executeSQLWithFormat:@"insert into info (version, first_folder) values (%d, 0)", databaseVersion];
+		
+		[self commitTransaction];
 	}
 
 	// Upgrade to rev 13.
@@ -262,17 +266,23 @@ static Database * _sharedDatabase = nil;
 	// Create an index on the message_id column.
 	if (databaseVersion < 13)
 	{
+		[self beginTransaction];
+		
 		[self executeSQL:@"alter table messages add column createddate"];
 		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
 		// Set the new version
 		[self setDatabaseVersion:13];
+		
+		[self commitTransaction];
 	}
 	
 	// Upgrade to rev 14.
 	if (databaseVersion < 14)
 	{
+		[self beginTransaction];
+		
 		[self executeSQL:@"alter table info add column first_folder"];
 		[self executeSQL:@"update info set first_folder=0"];
 		
@@ -284,6 +294,8 @@ static Database * _sharedDatabase = nil;
 		
 		// Set the new version
 		[self setDatabaseVersion:14];		
+		
+		[self commitTransaction];
 	}
 	
 	// Trap unsupported databases
@@ -300,6 +312,8 @@ static Database * _sharedDatabase = nil;
 	[self syncLastUpdate];
 
 	// Create fields
+	[self beginTransaction];
+	
 	fieldsByName = [[NSMutableDictionary dictionary] retain];
 	fieldsOrdered = [[NSMutableArray alloc] init];
 
@@ -317,6 +331,9 @@ static Database * _sharedDatabase = nil;
 	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
 	[self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
 	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
+	
+	[self commitTransaction];
+	
 	return YES;
 }
 
