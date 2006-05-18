@@ -668,13 +668,17 @@ typedef enum {
 			NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
 			Article * article;
 			
+			[db beginTransaction]; // Should we wrap the entire loop or just individual article updates?
 			while ((article = [articleEnumerator nextObject]) != nil)
 			{
 				[db createArticle:[article folderId] article:article];
 				if ([article status] == MA_MsgStatus_New)
 					++newArticlesFromFeed;
 			}
+			[db commitTransaction];
 			
+			[db beginTransaction];
+
 			// A notify is only needed if we added any new articles.
 			int folderId = [folder itemId];
 			if ([[folder name] hasPrefix:[Database untitledFeedFolderName]] && ![feedTitle isBlank])
@@ -701,6 +705,8 @@ typedef enum {
 			if (newLastUpdate != nil)
 				[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
 			[db flushFolder:folderId];
+			
+			[db commitTransaction];
 			
 			// Let interested callers know that the folder has changed.
 			NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
