@@ -562,6 +562,8 @@
  */
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)nc
 {
+	int selectedFolderId = [self actualSelection];
+	
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		[[Database sharedDatabase] beginTransaction];
@@ -572,6 +574,9 @@
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
 	blockSelectionHandler = NO;
+	
+	// Make sure selected folder is visible
+	[self selectFolder:selectedFolderId];
 }
 
 /* handleShowFolderImagesChange
