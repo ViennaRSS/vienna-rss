@@ -757,7 +757,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	else
 	{
 		Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
-		if (IsSmartFolder(folder))
+		if (IsSmartFolder(folder) && ![controller isConnecting])
 			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 }
