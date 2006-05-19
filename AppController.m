@@ -76,7 +76,7 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
-	-(void)setLayout:(int)newLayout;
+	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
 	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholder;
 	-(FoldersTree *)foldersTree;
@@ -109,6 +109,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		growlAvailable = NO;
 		scriptsMenuItem = nil;
 		checkTimer = nil;
+		didCompleteInitialisation = NO;
 	}
 	return self;
 }
@@ -121,7 +122,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Restore the most recent layout
-	[self setLayout:[prefs layout]];
+	[self setLayout:[prefs layout] withRefresh:NO];
 
 	// Localise the menus
 	[self localiseMenus:[[NSApp mainMenu] itemArray]];
@@ -259,6 +260,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[self loadOpenTabs];
 		doneSafeInit = YES;
 	}
+	didCompleteInitialisation = YES;
 }
 
 /* localiseMenus
@@ -405,31 +407,34 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)applicationWillTerminate:(NSNotification *)aNotification
 {
-	// Save the splitview layout
-	Preferences * prefs = [Preferences standardPreferences];
-	[prefs setObject:[splitView1 layout] forKey:@"SplitView1Positions"];
+	if (didCompleteInitialisation)
+	{
+		// Save the splitview layout
+		Preferences * prefs = [Preferences standardPreferences];
+		[prefs setObject:[splitView1 layout] forKey:@"SplitView1Positions"];
 
-	// Close the activity window explicitly to force it to
-	// save its split bar position to the preferences.
-	NSWindow * activityWindow = [activityViewer window];
-	[activityWindow performClose:self];
-	
-	// Put back the original app icon
-	[NSApp setApplicationIconImage:originalIcon];
-	
-	// Save the open tabs
-	[browserView saveOpenTabs];
+		// Close the activity window explicitly to force it to
+		// save its split bar position to the preferences.
+		NSWindow * activityWindow = [activityViewer window];
+		[activityWindow performClose:self];
+		
+		// Put back the original app icon
+		[NSApp setApplicationIconImage:originalIcon];
+		
+		// Save the open tabs
+		[browserView saveOpenTabs];
 
-	// Remember the article list column position, sizes, etc.
-	[mainArticleView saveTableSettings];
-	[foldersTree saveFolderSettings];
-	
-	if ([articleController currentFolderId] != -1)
-		[db flushFolder:[articleController currentFolderId]];
+		// Remember the article list column position, sizes, etc.
+		[mainArticleView saveTableSettings];
+		[foldersTree saveFolderSettings];
+		
+		if ([articleController currentFolderId] != -1)
+			[db flushFolder:[articleController currentFolderId]];
+		
+		// Finally save preferences
+		[prefs savePreferences];
+	}
 	[db close];
-	
-	// Finally save preferences
-	[prefs savePreferences];
 }
 
 /* openFile [delegate]
@@ -563,7 +568,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)reportLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Report];
+	[self setLayout:MA_Layout_Report withRefresh:YES];
 }
 
 /* condensedLayout
@@ -571,7 +576,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)condensedLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Condensed];
+	[self setLayout:MA_Layout_Condensed withRefresh:YES];
 }
 
 /* unifiedLayout
@@ -579,31 +584,34 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)unifiedLayout:(id)sender
 {
-	[self setLayout:MA_Layout_Unified];
+	[self setLayout:MA_Layout_Unified withRefresh:YES];
 }
 
 /* setLayout
  * Changes the layout of the panes.
  */
--(void)setLayout:(int)newLayout
+-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag
 {
 	switch (newLayout)
 	{
 	case MA_Layout_Report:
 		[browserView setPrimaryTabView:mainArticleView];
-		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+		if (refreshFlag)
+			[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 		[articleController setMainArticleView:mainArticleView];
 		break;
 
 	case MA_Layout_Condensed:
 		[browserView setPrimaryTabView:mainArticleView];
-		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+		if (refreshFlag)
+			[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 		[articleController setMainArticleView:mainArticleView];
 		break;
 
 	case MA_Layout_Unified:
 		[browserView setPrimaryTabView:unifiedListView];
-		[unifiedListView refreshFolder:MA_Refresh_RedrawList];
+		if (refreshFlag)
+			[unifiedListView refreshFolder:MA_Refresh_RedrawList];
 		[articleController setMainArticleView:unifiedListView];
 		break;
 	}
