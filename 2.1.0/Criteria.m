@@ -69,8 +69,6 @@
 		case MA_CritOper_IsGreaterThan:			operatorString = @"is greater than"; break;
 		case MA_CritOper_IsLessThanOrEqual:		operatorString = @"is less than or equal to"; break;
 		case MA_CritOper_IsGreaterThanOrEqual:	operatorString = @"is greater than or equal to"; break;
-		case MA_CritOper_HasPhrase:				operatorString = @"has phrase"; break;
-		case MA_CritOper_NotHasPhrase:			operatorString = @"does not have phrase"; break;
 	}
 	return operatorString;
 }
@@ -113,8 +111,6 @@
 		[NSNumber numberWithInt:MA_CritOper_IsGreaterThanOrEqual],
 		[NSNumber numberWithInt:MA_CritOper_Under],
 		[NSNumber numberWithInt:MA_CritOper_NotUnder],
-		[NSNumber numberWithInt:MA_CritOper_HasPhrase],
-		[NSNumber numberWithInt:MA_CritOper_NotHasPhrase],
 		nil];
 }
 
