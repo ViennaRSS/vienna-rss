@@ -438,7 +438,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		
 		// Handle condensed layout vs. table layout
 		if (tableLayout == MA_Layout_Report)
-			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
+			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments && tag != MA_FieldID_Summary;
 		else
 		{
 			showField = NO;

@@ -187,6 +187,8 @@
 		{
 			if ([field tag] != MA_FieldID_Headlines &&
 				[field tag] != MA_FieldID_GUID &&
+				[field tag] != MA_FieldID_Link &&
+				[field tag] != MA_FieldID_Comments &&
 				[field tag] != MA_FieldID_Summary &&
 				[field tag] != MA_FieldID_Parent)
 			{

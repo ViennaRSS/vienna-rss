@@ -1015,6 +1015,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[field tag] != MA_FieldID_GUID &&
 			[field tag] != MA_FieldID_Comments &&
 			[field tag] != MA_FieldID_Deleted &&
+			[field tag] != MA_FieldID_Headlines &&
+			[field tag] != MA_FieldID_Summary &&
+			[field tag] != MA_FieldID_Link &&
 			[field tag] != MA_FieldID_Text)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
@@ -2576,8 +2579,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(doViewColumn:))
 	{
 		Field * field = [menuItem representedObject];
-		[menuItem setState:[field visible] ? NSOnState : NSOffState];
-		return isMainWindowVisible && isArticleView;
+		Preferences * prefs = [Preferences standardPreferences];
+		BOOL isEnabled = YES;
+
+		// Disable Summary field in report mode
+		if ([prefs layout] == MA_Layout_Report)
+			isEnabled = [field tag] != MA_FieldID_Summary;
+
+		if (isEnabled)
+			[menuItem setState:[field visible] ? NSOnState : NSOffState];
+		return isMainWindowVisible && isArticleView && isEnabled;
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{
