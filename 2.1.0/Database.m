@@ -145,41 +145,23 @@ static Database * _sharedDatabase = nil;
 	// the wrong thread.
 	mainThread = [NSThread currentThread];
 
-	// Handle upgrade here because we may want to create a new database
+	// Trap unsupported databases
+	if (databaseVersion < MA_Min_Supported_DB_Version)
+	{
+		NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
+						NSLocalizedString(@"Unrecognised database format text", nil),
+						NSLocalizedString(@"Close", nil), @"", @"",
+						qualifiedDatabaseFileName);
+		return NO;
+	}
+	
+	// Backup the database before any upgrade
 	if (databaseVersion < MA_Current_DB_Version && databaseVersion >= MA_Min_Supported_DB_Version)
 	{
 		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-		int option = NSRunAlertPanel(NSLocalizedString(@"Upgrade Title", nil),
-									 NSLocalizedString(@"Upgrade Text", nil),
-									 NSLocalizedString(@"Upgrade", nil),
-									 NSLocalizedString(@"New Database", nil),
-									 NSLocalizedString(@"Exit", nil),
-									 backupDatabaseFileName);
-		if (option == -1)
-			return NO;
-		
-		if (option == 0)
-		{
-			[sqlDatabase close];
-			[sqlDatabase release];
-
-			[[NSFileManager defaultManager] movePath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
-			sqlDatabase = [[SQLDatabase alloc] initWithFile:qualifiedDatabaseFileName];
-			if (!sqlDatabase || ![sqlDatabase open])
-			{
-				NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
-								NSLocalizedString(@"Cannot open database text", nil),
-								NSLocalizedString(@"Close", nil), @"", @"",
-								qualifiedDatabaseFileName);
-				return NO;
-			}
-			databaseVersion = 0;
-		}
-
-		if (option == 1)
-			[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+		[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
 	}
-	
+
 	// Create the tables when the database is empty.
 	if (databaseVersion == 0)
 	{
@@ -298,16 +280,6 @@ static Database * _sharedDatabase = nil;
 		[self commitTransaction];
 	}
 	
-	// Trap unsupported databases
-	if (databaseVersion < MA_Min_Supported_DB_Version)
-	{
-		NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
-						NSLocalizedString(@"Unrecognised database format text", nil),
-						NSLocalizedString(@"Close", nil), @"", @"",
-						qualifiedDatabaseFileName);
-		return NO;
-	}
-
 	// Initial check if the database is read-only
 	[self syncLastUpdate];
 
