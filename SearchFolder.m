@@ -361,8 +361,6 @@
 									MA_CritOper_IsNot,
 									MA_CritOper_Contains,
 									MA_CritOper_NotContains,
-									MA_CritOper_HasPhrase,
-									MA_CritOper_NotHasPhrase,
 									0];
 			break;
 
