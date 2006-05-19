@@ -146,7 +146,7 @@ static Database * _sharedDatabase = nil;
 	mainThread = [NSThread currentThread];
 
 	// Trap unsupported databases
-	if (databaseVersion < MA_Min_Supported_DB_Version)
+	if (databaseVersion > 0 && databaseVersion < MA_Min_Supported_DB_Version)
 	{
 		NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
 						NSLocalizedString(@"Unrecognised database format text", nil),
@@ -284,8 +284,6 @@ static Database * _sharedDatabase = nil;
 	[self syncLastUpdate];
 
 	// Create fields
-	[self beginTransaction];
-	
 	fieldsByName = [[NSMutableDictionary dictionary] retain];
 	fieldsOrdered = [[NSMutableArray alloc] init];
 
@@ -303,8 +301,6 @@ static Database * _sharedDatabase = nil;
 	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
 	[self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
 	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
-	
-	[self commitTransaction];
 	
 	return YES;
 }
