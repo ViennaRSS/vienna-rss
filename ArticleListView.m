@@ -973,7 +973,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
+			{
 				currentSelectedRow = -1;
+				[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+			}
 			else
 				[self refreshArticlePane];
 		}
