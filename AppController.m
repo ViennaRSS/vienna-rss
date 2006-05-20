@@ -1077,8 +1077,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)initScriptsMenu
 {
-	NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
-	
 	// Valid script file extensions
 	NSArray * exts = [NSArray arrayWithObjects:@"scpt", nil];
 	
@@ -1097,21 +1095,23 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// by key name.
 	NSArray * sortedMenuItems = [[scriptPathMappings allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 	int count = [sortedMenuItems count];
-	int index;
-	
-	for (index = 0; index < count; ++index)
-	{
-		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index]
-														   action:@selector(doSelectScript:)
-													keyEquivalent:@""];
-		[scriptsMenu addItem:menuItem];
-		[menuItem release];
-	}
 	
 	// Insert the Scripts menu to the left of the Help menu only if
 	// we actually have any scripts.
 	if (count > 0)
 	{
+		NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
+		
+		int index;
+		for (index = 0; index < count; ++index)
+		{
+			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index]
+															   action:@selector(doSelectScript:)
+														keyEquivalent:@""];
+			[scriptsMenu addItem:menuItem];
+			[menuItem release];
+		}
+		
 		[scriptsMenu addItem:[NSMenuItem separatorItem]];
 		NSMenuItem * menuItem;
 		
@@ -1137,8 +1137,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		int helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
 		[[NSApp mainMenu] insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		[scriptsMenuItem setSubmenu:scriptsMenu];
+		
+		[scriptsMenu release];
 	}
-	[scriptsMenu release];
 }
 
 /* initStylesMenu
