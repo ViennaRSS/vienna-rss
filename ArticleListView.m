@@ -60,6 +60,8 @@
 	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(int)newLayout;
+	-(void)loadSplitSettingsForLayout;
+	-(void)saveSplitSettingsForLayout;
 	-(void)printDocument;
 @end
 
@@ -137,13 +139,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Set the reading pane orientation
 	[self setOrientation:[prefs layout]];
+	[splitView2 setDelegate:self];
 	
 	// Initialise the article list view
 	[self initTableView];
-
-	// Restore the split bar position
-	[splitView2 setLayout:[prefs objectForKey:@"SplitView2Positions"]];
-	[splitView2 setDelegate:self];
 
 	// Done initialising
 	isAppInitialising = NO;
@@ -417,6 +416,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	int count = [fields count];
 	int index;
 
+	// Save current selection
+	NSIndexSet * selArray = [articleList selectedRowIndexes];
+	
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
 	
@@ -496,6 +498,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Initialise the sort direction
 	[self showSortDirection];	
 	
+	// Put the selection back
+	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
+	
 	// Done
 	isInTableInit = NO;
 }
@@ -530,7 +535,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[prefs setObject:dataArray forKey:MAPref_ArticleListColumns];
 
 	// Save the split bar position
-	[prefs setObject:[splitView2 layout] forKey:@"SplitView2Positions"];
+	[self saveSplitSettingsForLayout];
 
 	// We're done
 	[dataArray release];
@@ -776,9 +781,28 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
+	[self saveSplitSettingsForLayout];
 	[self setOrientation:[[Preferences standardPreferences] layout]];
 	[self updateVisibleColumns];
 	[articleList reloadData];
+}
+
+/* loadSplitSettingsForLayout
+ * Set the splitview position for the current layout from the preferences.
+ */
+-(void)loadSplitSettingsForLayout
+{
+	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ? @"SplitView2ReportLayout" : @"SplitView2CondensedLayout";
+	[splitView2 setLayout:[[Preferences standardPreferences] objectForKey:splitPrefsName]];
+}
+
+/* saveSplitSettingsForLayout
+ * Save the splitview position for the current layout to the preferences.
+ */
+-(void)saveSplitSettingsForLayout
+{
+	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ? @"SplitView2ReportLayout" : @"SplitView2CondensedLayout";
+	[[Preferences standardPreferences] setObject:[splitView2 layout] forKey:splitPrefsName];
 }
 
 /* setOrientation
@@ -790,6 +814,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
 	[splitView2 setVertical:(newLayout == MA_Layout_Condensed)];
+	[self loadSplitSettingsForLayout];
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
