@@ -68,7 +68,6 @@
 	int childUnreadCount;
 	unsigned int flags;
 	unsigned int nonPersistedFlags;
-	unsigned int bloglinesId;
 	BOOL isCached;
 	BOOL needFlush;
 	NSDate * lastUpdate;
