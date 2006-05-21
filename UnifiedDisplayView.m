@@ -164,7 +164,7 @@
 {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
 	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	NSString * captionString = [NSString stringWithFormat:@"%@ (Filtered: %@)", [folder name], NSLocalizedString([filter name], nil)];
+	NSString * captionString = [NSString stringWithFormat: NSLocalizedString(@"%@ (Filtered: %@)", nil), [folder name], NSLocalizedString([filter name], nil)];
 	[unifiedListHeader setStringValue:captionString];
 }
 

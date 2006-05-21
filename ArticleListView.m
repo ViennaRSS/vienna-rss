@@ -1018,7 +1018,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
 	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	NSString * captionString = [NSString stringWithFormat:@"%@ (Filtered: %@)", [folder name], NSLocalizedString([filter name], nil)];
+	NSString * captionString = [NSString stringWithFormat: NSLocalizedString(@"%@ (Filtered: %@)", nil), [folder name], NSLocalizedString([filter name], nil)];
 	[articleListHeader setStringValue:captionString];
 }
 
