@@ -406,6 +406,30 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 }
 
+/* ensureSelectedArticle
+ * Ensure that there is a selected article and that it is visible.
+ */
+-(void)ensureSelectedArticle:(BOOL)singleSelection
+{
+	if (singleSelection)
+	{
+		int nextRow = [[articleList selectedRowIndexes] firstIndex];
+		int articlesCount = [[articleController allArticles] count];
+
+		currentSelectedRow = -1;
+		if (nextRow < 0 || nextRow >= articlesCount)
+			nextRow = articlesCount - 1;
+		[self makeRowSelectedAndVisible:nextRow];
+	}
+	else
+	{
+		if ([articleList selectedRow] == -1)
+			[self makeRowSelectedAndVisible:0];
+		else
+			[articleList scrollRowToVisible:[articleList selectedRow]];
+	}
+}
+
 /* updateVisibleColumns
  * Iterates through the array of visible columns and makes them
  * visible or invisible as needed.
@@ -440,7 +464,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		
 		// Handle condensed layout vs. table layout
 		if (tableLayout == MA_Layout_Report)
-			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments && tag != MA_FieldID_Summary;
+			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
 		{
 			showField = NO;
@@ -979,7 +1003,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
-	if (currentSelectedRow >= 0)
+	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
 		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];

@@ -26,5 +26,6 @@
 	-(void)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
 	-(void)refreshFolder:(int)refreshFlag;
 	-(Article *)selectedArticle;
+	-(void)ensureSelectedArticle:(BOOL)singleSelection;
 	-(void)displayNextUnread;
 @end

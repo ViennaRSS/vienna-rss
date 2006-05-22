@@ -265,6 +265,7 @@
 		{
 			// TODO: show an HTML error page in the webview instead or in addition to
 			// the Error title on the tab.
+			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
 			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
 		}
 	}

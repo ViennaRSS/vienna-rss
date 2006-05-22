@@ -60,6 +60,7 @@
 -(void)displayFolder:(int)newFolderId;
 -(void)refilterArrayOfArticles;
 -(NSString *)sortColumnIdentifier;
+-(void)ensureSelectedArticle:(BOOL)singleSelection;
 -(void)sortByIdentifier:(NSString *)columnName;
 -(BOOL)currentCacheContainsFolder:(int)folderId;
 -(void)deleteArticlesByArray:(NSArray *)articleArray;
