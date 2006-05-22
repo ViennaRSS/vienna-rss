@@ -1778,8 +1778,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[mainWindow makeFirstResponder:[[browserView primaryTabView] mainView]];
 					if ([self selectedArticle] == nil)
 					{
-						/* TODO move this to ArticleListView
-						[mainArticleView makeRowSelectedAndVisible:0]; */
+						[articleController ensureSelectedArticle:NO];
 						if ([mainWindow firstResponder] == [foldersTree mainView])
 							return NO;
 					}
@@ -2007,6 +2006,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
 		[articleController deleteArticlesByArray:articleArray];
+
+		// Blow away the undo stack here since undo actions may refer to
+		// articles that have been deleted. This is a bit of a cop-out but
+		// it's the easiest approach for now.
+		[self clearUndoStack];
 	}
 }
 
@@ -2588,16 +2592,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(doViewColumn:))
 	{
 		Field * field = [menuItem representedObject];
-		Preferences * prefs = [Preferences standardPreferences];
-		BOOL isEnabled = YES;
-
-		// Disable Summary field in report mode
-		if ([prefs layout] == MA_Layout_Report)
-			isEnabled = [field tag] != MA_FieldID_Summary;
-
-		if (isEnabled)
-			[menuItem setState:[field visible] ? NSOnState : NSOffState];
-		return isMainWindowVisible && isArticleView && isEnabled;
+		[menuItem setState:[field visible] ? NSOnState : NSOffState];
+		return isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(doSelectStyle:))
 	{

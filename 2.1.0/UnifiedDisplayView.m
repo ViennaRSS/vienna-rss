@@ -63,6 +63,13 @@
 	[[unifiedText backForwardList] setPageCacheSize:0];
 }
 
+/* ensureSelectedArticle
+ * Ensure that there is a selected article and that it is visible.
+ */
+-(void)ensureSelectedArticle:(BOOL)singleSelection
+{
+}
+
 /* selectFolderAndArticle
  * Select a folder. In unified view, we currently disregard the article but
  * we could potentially try and highlight the article in the text in the future.

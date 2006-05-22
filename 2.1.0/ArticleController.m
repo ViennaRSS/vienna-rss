@@ -152,6 +152,15 @@
 	return currentArrayOfArticles;
 }
 
+/* ensureSelectedArticle
+ * Ensures that an article is selected in the list and that any selected
+ * article is scrolled into view.
+ */
+-(void)ensureSelectedArticle:(BOOL)singleSelection
+{
+	[mainArticleView ensureSelectedArticle:singleSelection];
+}
+
 /* searchPlaceholderString
  * Return the search field placeholder.
  */
@@ -368,15 +377,10 @@
 	// folder's unread count just changed.
 	if (needFolderRedraw)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-	
-	/* Move this logic to refreshFolder.
-	// Compute the new place to put the selection
-	int nextRow = [[articleList selectedRowIndexes] firstIndex];
-	currentSelectedRow = -1;
-	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
-		nextRow = [currentArrayOfArticles count] - 1;
-	[mainArticleView makeRowSelectedAndVisible:nextRow];
-	*/
+
+	// Ensure selection
+	[mainArticleView ensureSelectedArticle:YES];
+
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
 		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
@@ -410,25 +414,14 @@
 	currentArrayOfArticles = arrayCopy;
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
-	// Blow away the undo stack here since undo actions may refer to
-	// articles that have been deleted. This is a bit of a cop-out but
-	// it's the easiest approach for now.
-//	[controller clearUndoStack];
-	
 	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
 	if (needFolderRedraw)
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-	
-	/* Move this logic to refreshFolder.
-	// Compute the new place to put the selection
-	int nextRow = [[articleList selectedRowIndexes] firstIndex];
-	currentSelectedRow = -1;
-	if (nextRow < 0 || nextRow >= (int)[currentArrayOfArticles count])
-		nextRow = [currentArrayOfArticles count] - 1;
-	[self makeRowSelectedAndVisible:nextRow];
-	*/
-	
+
+	// Ensure there's a valid selection
+	[mainArticleView ensureSelectedArticle:YES];
+
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
 		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
