@@ -366,6 +366,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Preferences * prefs = [Preferences standardPreferences];
 
+	// Hook up the key sequence properly now that all NIBs are loaded.
+	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabView] mainView]];
+	
 	// Kick off an initial refresh
 	if ([prefs refreshOnStartup])
 		[self refreshAllSubscriptions:self];
