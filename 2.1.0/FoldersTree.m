@@ -1063,7 +1063,7 @@
  * Reparent folders using the information in the specified array. The array consists of
  * a collection of NSNumber triples: the first number is the ID of the folder to move,
  * the second number is the ID of the parent to which the folder should be moved,
- * the third number is the child index to which the folder should be moved.
+ * the third number is the ID of the folder's new predecessor sibling.
  */
 -(BOOL)moveFolders:(NSArray *)array
 {
@@ -1085,15 +1085,19 @@
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
 		int newParentId = [[array objectAtIndex:index++] intValue];
-		int newChildIndex = [[array objectAtIndex:index++] intValue];
+		int newPredecessorId = [[array objectAtIndex:index++] intValue];
 		Folder * folder = [db folderFromID:folderId];
 		int oldParentId = [folder parentId];
 		
 		TreeNode * node = [rootNode nodeFromID:folderId];
 		TreeNode * oldParent = [rootNode nodeFromID:oldParentId];
-		TreeNode * newParent = [rootNode nodeFromID:newParentId];
 		int oldChildIndex = [oldParent indexOfChild:node];
-		BOOL sameParent = NO;
+		int oldPredecessorId = (oldChildIndex > 0) ? [[oldParent childByIndex:(oldChildIndex - 1)] nodeId] : 0;
+		TreeNode * newParent = [rootNode nodeFromID:newParentId];
+		TreeNode * newPredecessor = [newParent nodeFromID:newPredecessorId];
+		if (newPredecessor == nil)
+			newPredecessorId = 0;
+		int newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
 		
 		if (newParentId == oldParentId)
 		{
@@ -1101,9 +1105,11 @@
 			if (autoSort)
 				continue;
 			// No need to move if destination is the same as origin.
-			if (newChildIndex == oldChildIndex)
+			if (newPredecessorId == oldPredecessorId)
 				continue;
-			sameParent = YES;
+			// Adjust the index for the removal of the old child.
+			if (newChildIndex > oldChildIndex)
+				--newChildIndex;
 		}
 		else
 		{
@@ -1115,9 +1121,9 @@
 		
 		if (!autoSort)
 		{
-			if (oldChildIndex > 0)
+			if (oldPredecessorId > 0)
 			{
-				if (![db setNextSibling:[folder nextSiblingId] forFolder:[[oldParent childByIndex:oldChildIndex - 1] nodeId]])
+				if (![db setNextSibling:[folder nextSiblingId] forFolder:oldPredecessorId])
 					continue;
 			}
 			else
@@ -1127,34 +1133,23 @@
 			}
 		}
 		
-		// Adjust the indices to account for the removal of the child.
-		if (sameParent)
-		{
-			if (newChildIndex > oldChildIndex)
-				--newChildIndex;
-			else
-				++oldChildIndex;
-		}
-		
 		[node retain];
 		[oldParent removeChild:node andChildren:NO];
-		if (newChildIndex > [newParent countOfChildren])
-			newChildIndex = [newParent countOfChildren];
 		[newParent addChild:node atIndex:newChildIndex];
 		[node release];
 		
-		[undoArray addObject:[NSNumber numberWithInt:folderId]];
-		[undoArray addObject:[NSNumber numberWithInt:oldParentId]];
-		[undoArray addObject:[NSNumber numberWithInt:oldChildIndex]];
+		// Put at beginning of undoArray in order to undo moves in reverse order.
+		[undoArray insertObject:[NSNumber numberWithInt:folderId] atIndex:0u];
+		[undoArray insertObject:[NSNumber numberWithInt:oldParentId] atIndex:1u];
+		[undoArray insertObject:[NSNumber numberWithInt:oldPredecessorId] atIndex:2u];
 		
 		if (!autoSort)
 		{
-			if (newChildIndex > 0)
+			if (newPredecessorId > 0)
 			{
-				Folder * predecessor = [[newParent childByIndex:newChildIndex - 1] folder];
-				if (![db setNextSibling:[predecessor nextSiblingId] forFolder:folderId])
+				if (![db setNextSibling:[[db folderFromID:newPredecessorId] nextSiblingId] forFolder:folderId])
 					continue;
-				[db setNextSibling:folderId forFolder:[predecessor itemId]];
+				[db setNextSibling:folderId forFolder:newPredecessorId];
 			}
 			else
 			{
@@ -1226,7 +1221,7 @@
 	{
 		// This is possibly a URL that we'll handle as a potential feed subscription. It's
 		// not our call to make though.
-		int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : childIndex;
+		int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : 0;
 		[[NSApp delegate] createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
 		return YES;
 	}
@@ -1235,8 +1230,9 @@
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
 		int index;
+		int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : 0;
 
-		// Create an NSArray of triples (folderId, newParentId, childIndex) that will be passed to moveFolders
+		// Create an NSArray of triples (folderId, newParentId, predecessorId) that will be passed to moveFolders
 		// to do the actual move.
 		NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:count * 3];
 		for (index = 0; index < count; ++index)
@@ -1244,7 +1240,8 @@
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
 			[array addObject:[NSNumber numberWithInt:folderId]];
 			[array addObject:[NSNumber numberWithInt:parentId]];
-			[array addObject:[NSNumber numberWithInt:childIndex++]];
+			[array addObject:[NSNumber numberWithInt:predecessorId]];
+			predecessorId = folderId;
 		}
 
 		// Do the move
