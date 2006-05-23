@@ -168,6 +168,7 @@
 
 	// Some sites refuse to respond without a User-agent string.
 	[theRequest addValue:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]] forHTTPHeaderField:@"User-agent"];
+	[theRequest setHTTPShouldHandleCookies:NO];
 
 	status = MA_Connect_Stopped;
 	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
