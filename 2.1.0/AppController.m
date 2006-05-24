@@ -1759,7 +1759,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		case NSLeftArrowFunctionKey:
 			if (flags & NSCommandKeyMask)
-				[self goBack:self];
+				return NO;
 			else
 			{
 				if ([mainWindow firstResponder] == [[browserView primaryTabView] mainView])
@@ -1772,19 +1772,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			
 		case NSRightArrowFunctionKey:
 			if (flags & NSCommandKeyMask)
-				[self goForward:self];
+				return NO;
 			else
 			{
 				if ([mainWindow firstResponder] == [foldersTree mainView])
 				{
 					[browserView setActiveTabToPrimaryTab];
-					[mainWindow makeFirstResponder:[[browserView primaryTabView] mainView]];
 					if ([self selectedArticle] == nil)
-					{
 						[articleController ensureSelectedArticle:NO];
-						if ([mainWindow firstResponder] == [foldersTree mainView])
-							return NO;
-					}
+					[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabView] mainView] : [foldersTree mainView]];
 					return YES;
 				}
 			}
@@ -1841,26 +1837,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			WebView * view = [[browserView activeTabView] webView];
 			NSView * theView = [[[view mainFrame] frameView] documentView];
-			NSRect visibleRect;
 
 			if (theView == nil)
 				[self viewNextUnread:self];
 			else
 			{
-				visibleRect = [theView visibleRect];
+				NSRect visibleRect = [theView visibleRect];
 				if (flags & NSShiftKeyMask)
 				{
 					if (visibleRect.origin.y < 2)
 						[self goBack:self];
 					else
-						[[[view mainFrame] webView] scrollPageUp:self];
+						[view scrollPageUp:self];
 				}
 				else
 				{
 					if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
 						[self viewNextUnread:self];
 					else
-						[[[view mainFrame] webView] scrollPageDown:self];
+						[view scrollPageDown:self];
 				}
 			}
 			return YES;
@@ -2062,6 +2057,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	[browserView setActiveTabToPrimaryTab];
 	[articleController displayNextUnread];
+	[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabView] mainView] : [foldersTree mainView]];
 }
 
 /* clearUndoStack
