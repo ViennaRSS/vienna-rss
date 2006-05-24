@@ -718,6 +718,8 @@
 		[mainArticleView selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
+	
+	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? mainArticleView : [foldersTree mainView]];
 }
 
 /* goBack
@@ -734,6 +736,8 @@
 		[mainArticleView selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
+	
+	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? mainArticleView : [foldersTree mainView]];
 }
 
 /* canGoForward

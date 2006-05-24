@@ -197,6 +197,7 @@
 {
 	[articleController refilterArrayOfArticles];
 	[self refreshFolder:MA_Refresh_RedrawList];
+	// Check first responder here?
 }
 
 /* displayNextUnread

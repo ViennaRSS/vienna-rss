@@ -30,4 +30,5 @@
 +(NSDictionary *)stylesMap;
 -(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString;
 -(NSString *)articleTextFromArray:(NSArray *)msgArray;
+-(void)keyDown:(NSEvent *)theEvent;
 @end

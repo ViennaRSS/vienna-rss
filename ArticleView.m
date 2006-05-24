@@ -224,6 +224,26 @@ static NSMutableDictionary * stylePathMappings = nil;
 							  baseURL:[NSURL URLWithString:urlString]];
 }
 
+/* keyDown
+ * Here is where we handle special keys when the article view
+ * has the focus so we can do custom things.
+ */
+-(void)keyDown:(NSEvent *)theEvent
+{
+	if ([[theEvent characters] length] == 1)
+	{
+		unichar keyChar = [[theEvent characters] characterAtIndex:0];
+		if ([[NSApp delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+			return;
+		
+		//Don't go back or forward in article view.
+		if (([theEvent modifierFlags] & NSCommandKeyMask) &&
+			((keyChar == NSLeftArrowFunctionKey) || (keyChar == NSRightArrowFunctionKey)))
+			return;
+	}
+	[super keyDown:theEvent];
+}
+
 /* dealloc
  * Clean up behind ourself.
  */

@@ -759,6 +759,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	[articleController refilterArrayOfArticles];
 	[self refreshFolder:MA_Refresh_RedrawList];
+	if (([self selectedArticle] == nil) && ([[NSApp mainWindow] firstResponder] == articleList))
+		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 }
 
 /* handleFolderNameChange
@@ -858,7 +860,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
 	if ([[articleController allArticles] count] == 0u)
-		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+		currentSelectedRow = -1;
 	else if (rowIndex == currentSelectedRow)
 		[self refreshArticleAtCurrentRow:NO];
 	else
@@ -902,7 +904,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			{
 				guidOfArticleToSelect = nil;
 				[foldersTree selectFolder:nextFolderWithUnread];
-				[[NSApp mainWindow] makeFirstResponder:articleList];
 				[self selectFirstUnreadInFolder];
 			}
 		}
@@ -941,9 +942,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (![self viewNextUnreadInCurrentFolder:-1])
 	{
 		int count = [[articleController allArticles] count];
-		if (count == 0)
-			[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
-		else
+		if (count > 0)
 			[self makeRowSelectedAndVisible:[[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending] ? 0 : count - 1];
 	}
 }
@@ -1022,10 +1021,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
-			{
 				currentSelectedRow = -1;
-				[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
-			}
 			else
 				[self refreshArticlePane];
 		}
