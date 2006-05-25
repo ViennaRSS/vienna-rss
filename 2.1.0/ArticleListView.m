@@ -717,6 +717,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(IBAction)handleGoForward:(id)sender
 {
 	[articleController goForward];
+	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? articleList : [foldersTree mainView]];
 }
 
 /* handleGoBack
@@ -725,6 +726,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(IBAction)handleGoBack:(id)sender
 {
 	[articleController goBack];
+	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? articleList : [foldersTree mainView]];
 }
 
 /* handleKeyDown [delegate]
