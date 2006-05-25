@@ -27,6 +27,8 @@
 #import "StringExtensions.h"
 #import "WebKit/WebView.h"
 #import "WebKit/WebFrame.h"
+#import "WebKit/WebPolicyDelegate.h"
+#import "BrowserView.h"
 
 @interface ArticleView (Private)
 	-(BOOL)initForStyle:(NSString *)styleName;
@@ -243,6 +245,32 @@ static NSMutableDictionary * stylePathMappings = nil;
 	}
 	[super keyDown:theEvent];
 }
+
+/* decidePolicyForNewWindowAction
+ * Called by the web view to get our policy on handling actions that would open a new window.
+ * When opening clicked links in the background, we want the first responder to return to the article list.
+ */
+-(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
+{
+	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
+	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground]))
+		[[NSApp mainWindow] makeFirstResponder:[[[[NSApp delegate] browserView] primaryTabView] mainView]];
+	
+	[super webView:sender decidePolicyForNewWindowAction:actionInformation request:request newFrameName:frameName decisionListener:listener];
+}
+		
+/* decidePolicyForNavigationAction
+ * Called by the web view to get our policy on handling navigation actions.
+ * When opening clicked links in the background, we want the first responder to return to the article list.
+ */
+-(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
+{
+	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
+	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground]))
+		[[NSApp mainWindow] makeFirstResponder:[[[[NSApp delegate] browserView] primaryTabView] mainView]];
+	
+	[super webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
+}	
 
 /* dealloc
  * Clean up behind ourself.
