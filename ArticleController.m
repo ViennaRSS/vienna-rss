@@ -718,14 +718,12 @@
 		[mainArticleView selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
-	
-	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? mainArticleView : [foldersTree mainView]];
 }
 
 /* goBack
  * Move backward through the backtrack queue.
  */
--(void)goBack;
+-(void)goBack
 {
 	int folderId;
 	NSString * guid;
@@ -736,8 +734,6 @@
 		[mainArticleView selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
-	
-	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? mainArticleView : [foldersTree mainView]];
 }
 
 /* canGoForward
