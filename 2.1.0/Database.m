@@ -261,6 +261,10 @@ static Database * _sharedDatabase = nil;
 	}
 	
 	// Upgrade to rev 14.
+	// Add next_sibling and next_child columns to folders table and first_folder column to info table to allow for manual sorting.
+	// Initialize all values to 0. The correct values will be set by -[FoldersTree setManualSortOrderForNode:].
+	// Make sure that all parent_id values are integers rather than strings, because previous versions of setParent:forFolder:
+	// set them as strings.
 	if (databaseVersion < 14)
 	{
 		[self beginTransaction];
@@ -273,6 +277,21 @@ static Database * _sharedDatabase = nil;
 		
 		[self executeSQL:@"alter table folders add column first_child"];
 		[self executeSQL:@"update folders set first_child=0"];
+		
+		SQLResult * results = [sqlDatabase performQuery:@"select folder_id, parent_id from folders"];
+		if (results && [results rowCount])
+		{
+			NSEnumerator * enumerator = [results rowEnumerator];
+			SQLRow * row;
+			
+			while ((row = [enumerator nextObject]))
+			{
+				int folderId = [[row stringForColumn:@"folder_id"] intValue];
+				int parentId = [[row stringForColumn:@"parent_id"] intValue];
+				[self executeSQLWithFormat:@"update folders set parent_id=%d where folder_id=%d", parentId, folderId];
+			}
+		}
+		[results release];
 		
 		// Set the new version
 		[self setDatabaseVersion:14];		
@@ -1015,7 +1034,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Update the database now
-	[self executeSQLWithFormat:@"update folders set parent_id='%d' where folder_id=%d", newParentID, folderId];
+	[self executeSQLWithFormat:@"update folders set parent_id=%d where folder_id=%d", newParentID, folderId];
 	return YES;
 }
 
