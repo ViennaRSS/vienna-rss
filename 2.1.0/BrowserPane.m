@@ -31,6 +31,7 @@
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebKitErrors.h"
 #import "WebKit/WebDocument.h"
+#import "WebKit/WebPreferences.h"
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -71,6 +72,10 @@
 	[webPane setFrameLoadDelegate:self];
 	[webPane setCustomUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
 	
+	// Make web preferences 16pt Arial to match Safari
+	[[webPane preferences] setStandardFontFamily:@"Arial"];
+	[[webPane preferences] setDefaultFontSize:16];
+
 	// Set our box attributes
 	[boxFrame setContentViewMargins:NSMakeSize(1, 1)];
 
