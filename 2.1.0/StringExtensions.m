@@ -193,16 +193,17 @@ static NSMutableDictionary * entityMap = nil;
 	
 				NSString * tagName = [tag substringWithRange:NSMakeRange(indexOfTagName, chIndex - indexOfTagName)];
 				[aString deleteCharactersInRange:tagRange];
-					
-					// Replace <br> and </p> with newlines
-					if ([tagName isEqualToString:@"br"] || [tag isEqualToString:@"<p>"] || [tag isEqualToString:@"<div>"])
-						[aString insertString:@"\n" atIndex:tagRange.location];
+
+				// Replace <br> and </p> with newlines
+				if ([tagName isEqualToString:@"br"] || [tag isEqualToString:@"<p>"] || [tag isEqualToString:@"<div>"])
+					[aString insertString:@"\n" atIndex:tagRange.location];
 
 				// Reset scan to the point where the tag started minus one because
 				// we bump up indexOfChr at the end of the loop.
 				indexOfChr = tagStartIndex - 1;
 				maxChrs = [aString length];
 				isInTag = NO;
+				isInQuote = NO;	// Fix problem with Tribe.net feeds that have bogus quotes in HTML tags
 			}
 		}
 		++indexOfChr;
