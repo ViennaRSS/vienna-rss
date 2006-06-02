@@ -410,6 +410,7 @@ static NSMutableDictionary * entityMap = nil;
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xA8] forKey:@"uml"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xA9] forKey:@"copy"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xAA] forKey:@"ordf"];
+		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xAB] forKey:@"laquo"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xAC] forKey:@"not"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xAE] forKey:@"reg"];
 		[entityMap setValue:[NSString stringWithFormat:@"%C", 0xAF] forKey:@"macr"];
