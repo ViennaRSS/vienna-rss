@@ -66,6 +66,9 @@
 	// Fill out any existing values.
 	[userName setStringValue:[folder username]];
 	[password setStringValue:[folder password]];
+	
+	// Set the focus
+	[credentialsWindow makeFirstResponder:([[folder username] isBlank]) ? userName : password];
 
 	[self enableOKButton];
 	[NSApp beginSheet:credentialsWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
