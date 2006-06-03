@@ -44,9 +44,11 @@ Wishlist
 - Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Mix conditionals within smart folders.
-- Preference for showing/hiding unread count in dock.
 - Empty trash automatically.
 - Show article count for folders (including Trash).
 - Empty Trash command in contextual menu for Trash.
 - Empty Trash toolbar item.
 - Per-feed refresh settings.
+- Unread count for smart folders.
+- Hold down option key while pressing + button to create new smart folder.
+- Borderless windows.
