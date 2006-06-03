@@ -1873,38 +1873,26 @@ static Database * _sharedDatabase = nil;
 				}
 				
 			case MA_FieldType_Date: {
-				NSCalendarDate * startDate;
+				NSCalendarDate * startDate = [NSCalendarDate date];
 				NSString * criteriaValue = [[criteria value] lowercaseString];
 				int spanOfDays = 1;
-
-				// "today" is a short hand way of specifying the current date.
-				if ([criteriaValue isEqualToString:@"today"])
-				{
-					NSCalendarDate * now = [NSCalendarDate date];
-					criteriaValue = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
-					spanOfDays = 1;
-				}
-
+				
 				// "yesterday" is a short hand way of specifying the previous day.
 				if ([criteriaValue isEqualToString:@"yesterday"])
 				{
-					NSCalendarDate * now = [[NSCalendarDate date] dateByAddingYears:0 months:0 days:-1 hours:0 minutes:0 seconds:0];
-					criteriaValue = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
-					spanOfDays = 1;
+					startDate = [startDate dateByAddingYears:0 months:0 days:-1 hours:0 minutes:0 seconds:0];
 				}
-
 				// "last week" is a short hand way of specifying a range from 7 days ago to today.
-				if ([criteriaValue isEqualToString:@"last week"])
+				else if ([criteriaValue isEqualToString:@"last week"])
 				{
-					NSCalendarDate * now = [[NSCalendarDate date] dateByAddingYears:0 months:0 days:-6 hours:0 minutes:0 seconds:0];
-					criteriaValue = [NSString stringWithFormat:@"%d/%d/%d", [now dayOfMonth], [now monthOfYear], [now yearOfCommonEra]];
+					startDate = [startDate dateByAddingYears:0 months:0 days:-6 hours:0 minutes:0 seconds:0];
 					spanOfDays = 7;
 				}
 				
-				startDate = [NSCalendarDate dateWithString:criteriaValue calendarFormat:@"%d/%m/%Y"];
-				if ([criteria operator] != MA_CritOper_Is)
-					valueString = [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]];
-				else
+				criteriaValue = [NSString stringWithFormat:@"%d/%d/%d %d:%d:%d", [startDate dayOfMonth], [startDate monthOfYear], [startDate yearOfCommonEra], 0, 0, 0];
+				startDate = [NSCalendarDate dateWithString:criteriaValue calendarFormat:@"%d/%m/%Y %H:%M:%S"];
+				
+				if ([criteria operator] == MA_CritOper_Is)
 				{
 					NSCalendarDate * endDate;
 
@@ -1913,6 +1901,12 @@ static Database * _sharedDatabase = nil;
 					endDate = [startDate dateByAddingYears:0 months:0 days:spanOfDays hours:0 minutes:0 seconds:0];
 					operatorString = [NSString stringWithFormat:@">=%f and %@<%f", [startDate timeIntervalSince1970], [field sqlField], [endDate timeIntervalSince1970]];
 					valueString = @"";
+				}
+				else
+				{
+					if (([criteria operator] == MA_CritOper_IsAfter) || ([criteria operator] == MA_CritOper_IsOnOrBefore))
+						startDate = [startDate dateByAddingYears:0 months:0 days:0 hours:23 minutes:59 seconds:59];
+					valueString = [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]];
 				}
 				break;
 				}
