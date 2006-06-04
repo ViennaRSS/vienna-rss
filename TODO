@@ -7,9 +7,6 @@ Thanks!
 Accepted for 2.1
 ================
 - Single article list and viewer interface (as in Bloglines).
-- Synchronisation via .Mac or FTP.
-- Fix web browser to block popups.
-- Download images within articles so that they can be viewed offline.
 
 Known Issues (May not be fixed)
 ===============================
@@ -52,3 +49,6 @@ Wishlist
 - Unread count for smart folders.
 - Hold down option key while pressing + button to create new smart folder.
 - Borderless windows.
+- Synchronisation via .Mac or FTP.
+- Fix web browser to block popups.
+- Download images within articles so that they can be viewed offline.
