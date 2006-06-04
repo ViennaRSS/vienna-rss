@@ -1649,9 +1649,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
+		// Refresh the current folder
+		[articleController refreshCurrentFolder];
+		
+		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 
-		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		if ([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && newUnread > 0)
 			[NSApp requestUserAttention:NSInformationalRequest];
 
@@ -1711,7 +1714,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 /* goForward
  * In article view, forward track through the list of articles displayed. In 
- * web view, go to the next web page.
+* web view, go to the next web page.
  */
 -(IBAction)goForward:(id)sender
 {

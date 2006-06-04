@@ -785,12 +785,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
+
+	// Don't refresh the current folder until the connection finishes.
+	if ([controller isConnecting])
+		return;
 	if (folderId == 0 || folderId == [articleController currentFolderId] || [articleController currentCacheContainsFolder:folderId])
 		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
 	{
 		Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
-		if (IsSmartFolder(folder) && ![controller isConnecting])
+		if (IsSmartFolder(folder))
 			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 }

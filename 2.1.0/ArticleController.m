@@ -128,6 +128,13 @@
 	mainArticleView = newView;
 }
 
+/* refreshCurrentFolder
+ */
+-(void)refreshCurrentFolder
+{
+	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+}
+
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */

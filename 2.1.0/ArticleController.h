@@ -57,6 +57,7 @@
 -(void)displayNextUnread;
 -(NSString *)searchPlaceholderString;
 -(void)reloadArrayOfArticles;
+-(void)refreshCurrentFolder;
 -(void)displayFolder:(int)newFolderId;
 -(void)refilterArrayOfArticles;
 -(NSString *)sortColumnIdentifier;
