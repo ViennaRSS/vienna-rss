@@ -57,6 +57,8 @@
 	NSString * guidOfArticleToSelect;
 	NSFont * articleListFont;
 	NSFont * articleListUnreadFont;
+	NSMutableDictionary * reportCellDict;
+	NSMutableDictionary * unreadReportCellDict;
 	NSMutableDictionary * selectionDict;
 	NSMutableDictionary * topLineDict;
 	NSMutableDictionary * linkLineDict;
@@ -64,7 +66,6 @@
 	NSMutableDictionary * bottomLineDict;
 	NSMutableDictionary * unreadTopLineDict;
 	NSMutableDictionary * unreadTopLineSelectionDict;
-	ExtDateFormatter * extDateFormatter;
 }
 
 // Public functions
