@@ -1655,7 +1655,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 
-		if ([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && newUnread > 0)
+		// This contains a temporary fix for Mac OS X 10.3.9 compatibility.  We need to make the bounce preference 10.4-only.
+		if (([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && newUnread > 0) &&
+			([NSApp respondsToSelector:@selector(requestUserAttention:)]))
 			[NSApp requestUserAttention:NSInformationalRequest];
 
 		if (growlAvailable && newUnread > 0)

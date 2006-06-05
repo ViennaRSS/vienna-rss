@@ -2118,12 +2118,10 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = Vienna;
-				SDKROOT = "$(SDKROOT)";
 				SECTORDER_FLAGS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = (
@@ -2213,7 +2211,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = "-lcurl";
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(SDKROOT)";
 			};
 			name = Development;
 		};
@@ -2224,7 +2222,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2101;
+				BUILD_NUMBER = 2100;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2238,9 +2236,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_LDFLAGS = "-lcurl";
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				SDKROOT = "$(SDKROOT)";
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
 			name = Deployment;
 		};
@@ -2272,7 +2271,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_LDFLAGS = "-lcurl";
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(SDKROOT)";
 			};
 			name = Default;
 		};
@@ -2321,6 +2320,7 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -2330,7 +2330,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = NewsParser;
-				SDKROOT = "$(SDKROOT)";
 				ZERO_LINK = NO;
 			};
 			name = Deployment;

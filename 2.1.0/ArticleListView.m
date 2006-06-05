@@ -128,14 +128,22 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Mark the start of the init phase
 	isAppInitialising = YES;
 	
-	// Create condensed view attribute dictionaries
-	selectionDict = [[NSMutableDictionary alloc] init];
-	unreadTopLineDict = [[NSMutableDictionary alloc] init];
-	topLineDict = [[NSMutableDictionary alloc] init];
-	unreadTopLineSelectionDict = [[NSMutableDictionary alloc] init];
-	middleLineDict = [[NSMutableDictionary alloc] init];
-	linkLineDict = [[NSMutableDictionary alloc] init];
-	bottomLineDict = [[NSMutableDictionary alloc] init];
+	// Create report and condensed view attribute dictionaries
+	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	[style setLineBreakMode:NSLineBreakByTruncatingTail];
+	
+	reportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
+	unreadReportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
+		
+	selectionDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+	unreadTopLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
+	topLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
+	unreadTopLineSelectionDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
+	middleLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blueColor], NSForegroundColorAttributeName, nil];
+	linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blueColor], NSForegroundColorAttributeName, self, NSLinkAttributeName, nil];
+	bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor grayColor], NSForegroundColorAttributeName, nil];
+	
+	[style release];
 	
 	// Set the reading pane orientation
 	[self setOrientation:[prefs layout]];
@@ -287,10 +295,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	
 	// In condensed mode, the summary field takes up the whole space
+#ifdef NSTableViewSequentialColumnAutoresizingStyle
 	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
 		[articleList setColumnAutoresizingStyle:NSTableViewSequentialColumnAutoresizingStyle];
-	else
+#else
 		[articleList setAutoresizesAllColumnsToFit:NO];
+#endif
 	
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
@@ -492,12 +502,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 			[headerCell setTitle:[field displayName]];
 			[column setEditable:NO];
+#ifdef NSTableColumnAutoresizingMask
 			if([column respondsToSelector: @selector(setResizingMask:)]) {
 				[column setResizingMask:isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing];
 			}
-			else {
+#else
 				[column setResizable:isResizable];
-			}
+#endif
 			[column setMinWidth:10];
 			[column setMaxWidth:1000];
 			[column setWidth:[field width]];
@@ -506,15 +517,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		}
 	}
 	
-	// Set the extended date formatter on the Date column
-	NSTableColumn * tableColumn = [articleList tableColumnWithIdentifier:MA_Field_Date];
-	if (tableColumn != nil)
-	{
-		if (extDateFormatter == nil)
-			extDateFormatter = [[ExtDateFormatter alloc] init];
-		[[tableColumn dataCell] setFormatter:extDateFormatter];
-	}
-
 	// Set the images for specific header columns
 	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
 	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
@@ -577,41 +579,19 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
 	articleListUnreadFont = [prefs boolForKey:MAPref_ShowUnreadArticlesInBold] ? [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont] : articleListFont;
-
-	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	[style setLineBreakMode:NSLineBreakByTruncatingTail];
 	
+	[reportCellDict setObject:articleListFont forKey:NSFontAttributeName];
+	[unreadReportCellDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
+
 	[topLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[topLineDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[topLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-
 	[unreadTopLineDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
-	[unreadTopLineDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[unreadTopLineDict setObject:[NSColor blackColor] forKey:NSForegroundColorAttributeName];
-	
 	[middleLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[middleLineDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[middleLineDict setObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
-	
 	[linkLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[linkLineDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[linkLineDict setObject:self forKey:NSLinkAttributeName];
-	[linkLineDict setObject:[NSColor blueColor] forKey:NSForegroundColorAttributeName];
-
 	[bottomLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[bottomLineDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[bottomLineDict setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
-
 	[selectionDict setObject:articleListFont forKey:NSFontAttributeName];
-	[selectionDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[selectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
-
 	[unreadTopLineSelectionDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
-	[unreadTopLineSelectionDict setObject:style forKey:NSParagraphStyleAttributeName];
-	[unreadTopLineSelectionDict setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
 	
 	[self updateArticleListRowHeight];
-	[style release];
 }
 
 /* updateArticleListRowHeight
@@ -1249,13 +1229,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Date])
-	{
-		return [[theArticle articleData] objectForKey:[aTableColumn identifier]];
-	}
+	
+	NSMutableAttributedString * theAttributedString;
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Headlines])
 	{
-		NSMutableAttributedString * theAttributedString = [[NSMutableAttributedString alloc] init];
+		theAttributedString = [[NSMutableAttributedString alloc] init];
 		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && ([[NSApp mainWindow] firstResponder] == aTableView);
 
 		if ([[db fieldByName:MA_Field_Subject] visible])
@@ -1267,7 +1245,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			else
 				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
 			NSString * topString = [NSString stringWithFormat:@"%@\n", [theArticle title]];
-			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:topString attributes:topLineDictPtr] autorelease]];
+			NSMutableAttributedString * topAttributedString = [[NSMutableAttributedString alloc] initWithString:topString attributes:topLineDictPtr];
+			[topAttributedString fixFontAttributeInRange:NSMakeRange(0u, [topAttributedString length])];
+			[theAttributedString appendAttributedString:[topAttributedString autorelease]];
 		}
 
 		// Add the summary line that appears below the title.
@@ -1277,7 +1257,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			int maxSummaryLength = MIN([summaryString length], 80);
 			NSString * middleString = [NSString stringWithFormat:@"%@\n", [summaryString substringToIndex:maxSummaryLength]];
 			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
-			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr] autorelease]];
+			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
+			[middleAttributedString fixFontAttributeInRange:NSMakeRange(0u, [middleAttributedString length])];
+			[theAttributedString appendAttributedString:[middleAttributedString autorelease]];
 		}
 		
 		// Add the link line that appears below the summary and title.
@@ -1286,7 +1268,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			NSString * linkString = [NSString stringWithFormat:@"%@\n", [theArticle link]];
 			NSDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
 			[linkLineDict setObject:[NSURL URLWithString:[theArticle link]] forKey:NSLinkAttributeName];
-			[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr] autorelease]];
+			NSMutableAttributedString * linkAttributedString = [[NSMutableAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr];
+			[linkAttributedString fixFontAttributeInRange:NSMakeRange(0u, [linkAttributedString length])];
+			[theAttributedString appendAttributedString:[linkAttributedString autorelease]];
 		}
 		
 		// Create the detail line that appears at the bottom.
@@ -1311,50 +1295,33 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			if (![[theArticle author] isBlank])
 				[summaryString appendFormat:@"%@%@", delimiter, [theArticle author]];
 		}
-		[theAttributedString appendAttributedString:[[[NSAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr] autorelease]];
+		NSMutableAttributedString * summaryAttributedString = [[NSMutableAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
+		[summaryAttributedString fixFontAttributeInRange:NSMakeRange(0u, [summaryAttributedString length])];
+		[theAttributedString appendAttributedString:[summaryAttributedString autorelease]];
 		return [theAttributedString autorelease];
 	}
-
-	// Only string articleData objects should make it from here.
+	
 	NSString * cellString;
-	if (![[aTableColumn identifier] isEqualToString:MA_Field_Folder])
-		cellString = [[theArticle articleData] objectForKey:[aTableColumn identifier]];
-	else
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_Date])
+	{
+		NSDate * date = [[theArticle articleData] objectForKey:[aTableColumn identifier]];
+		NSCalendarDate * calDate = [date dateWithCalendarFormat:nil timeZone:nil];
+		cellString = [calDate friendlyDescription];
+	}
+	else if ([[aTableColumn identifier] isEqualToString:MA_Field_Folder])
 	{
 		Folder * folder = [db folderFromID:[theArticle folderId]];
 		cellString = [folder name];
 	}
-
-	// Return the cell string with a paragraph style that will truncate over-long strings by placing
-	// ellipsis in the middle to fit within the cell.
-    static NSDictionary * info = nil;
-    if (info == nil)
+	else
 	{
-        NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        [style setLineBreakMode:NSLineBreakByTruncatingTail];
-        info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
-        [style release];
-    }
-    return [[[NSAttributedString alloc] initWithString:cellString attributes:info] autorelease];
-}
-
-/* willDisplayCell [delegate]
- * Catch the table view before it displays a cell.
- */
--(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
-{
-	if (tableLayout == MA_Layout_Report)
-	{
-		if (![aCell isKindOfClass:[NSImageCell class]])
-		{
-			[aCell setTextColor:[NSColor blackColor]];
-			Article * theArticle = [[articleController allArticles] objectAtIndex:rowIndex];
-			if (![theArticle isRead])
-				[aCell setFont:articleListUnreadFont];
-			else
-				[aCell setFont:articleListFont];
-		}
+		// Only string articleData objects should make it from here.
+		cellString = [[theArticle articleData] objectForKey:[aTableColumn identifier]];
 	}
+	
+	theAttributedString = [[NSMutableAttributedString alloc] initWithString:cellString attributes:([theArticle isRead] ? reportCellDict : unreadReportCellDict)];
+	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, [theAttributedString length])];
+    return [theAttributedString autorelease];
 }
 
 /* tableViewSelectionDidChange [delegate]
@@ -1492,11 +1459,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[extDateFormatter release];
 	[selectionTimer release];
 	[markReadTimer release];
 	[articleListFont release];
 	[articleListUnreadFont release];
+	[reportCellDict release];
+	[unreadReportCellDict release];
 	[guidOfArticleToSelect release];
 	[unreadTopLineSelectionDict release];
 	[selectionDict release];
