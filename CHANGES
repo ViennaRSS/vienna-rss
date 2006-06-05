@@ -6,8 +6,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.1.0.2102
+----------
+
+
 2.1.0.2101
 ----------
+Restored Mac OS 10.3.9 support.
 
 2.1.0.2100
 ----------
@@ -34,6 +39,9 @@ Thanks!
 - New Layout menu: report, condensed and unified layouts.
 - Provide two new options for new articles notifications: bounce dock icon or no notification at all.
 - Searching with 'contains' or 'not contains' now matches complete words only.
+- Add Keyboard Shortcuts item to Help menu.
+- Change user agent string from Mozilla/Safari to Vienna.
+- Use Sparkle framework (http://andymatuschak.org/pages/sparkle) for version updates.
 
 2.0.4.2033
 ----------
