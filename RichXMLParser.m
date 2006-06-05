@@ -1040,7 +1040,7 @@
 		}
 		++openTagStartIndex;
 	}
-	return rawString;
+	return [rawString autorelease];
 }
 
 /* guidFromItem
