@@ -24,7 +24,7 @@ Wishlist
 - Change dock unread count colour and size.
 - Bonjour support.
 - Selection count in status area.
-- Absolute or relative date and time of last refresh in status area.
+- Absolute or relative date and time of last (and/or next?) refresh in status area.
 - Auto-discover feeds if subscription URL is to a web page.
 - Search in all folders via search field.
 - Handle middle mouse click on tabs.
@@ -52,3 +52,8 @@ Wishlist
 - Synchronisation via .Mac or FTP.
 - Fix web browser to block popups.
 - Download images within articles so that they can be viewed offline.
+- Next Unread command moves to next unread article rather than next feed in unified layout.
+- In unified view, different styles for read and unread articles.
+- Preference UI for setting # of simultaneous refreshes.
+- Individual layout, view, sort, and filter settings for folders.
+- Choose location of new subscriptions (in sheet?).
