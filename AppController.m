@@ -2700,7 +2700,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(closeTab:))
 	{
-		return isMainWindowVisible && [browserView activeTabView] != mainArticleView;
+		return isMainWindowVisible && !isArticleView;
 	}
 	else if (theAction == @selector(closeAllTabs:))
 	{

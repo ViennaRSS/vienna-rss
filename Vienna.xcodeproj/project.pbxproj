@@ -2011,7 +2011,7 @@
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2.0.0;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -2057,18 +2057,16 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
 				PRODUCT_NAME = Vienna;
-				SDKROOT = "$(SDKROOT)";
 				SECTORDER_FLAGS = "";
 				VERSIONING_SYSTEM = "";
 				WARNING_CFLAGS = "-Wno-long-double";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
+				ZERO_LINK = YES;
 			};
 			name = Development;
 		};
@@ -2195,8 +2193,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2100;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				BUILD_NUMBER = 2102;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2210,8 +2207,7 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_LDFLAGS = "-lcurl";
-				SDKROOT = "$(SDKROOT)";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Development;
 		};
@@ -2223,7 +2219,6 @@
 					i386,
 				);
 				BUILD_NUMBER = 2102;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2237,7 +2232,7 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
-				SDKROOT = "$(SDKROOT)";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
@@ -2250,13 +2245,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2100;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					SQLITE_OMIT_CURSOR,
-					"HAVE_USLEEP=1",
-					"THREADSAFE=0",
-					NDEBUG,
-				);
+				BUILD_NUMBER = 2102;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2269,9 +2258,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				OTHER_LDFLAGS = "-lcurl";
-				SDKROOT = "$(SDKROOT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
 			name = Default;
 		};
@@ -2301,7 +2291,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = NewsParser;
-				SDKROOT = "$(SDKROOT)";
 				ZERO_LINK = YES;
 			};
 			name = Development;
@@ -2351,10 +2340,10 @@
 					Foundation,
 					"-framework",
 					AppKit,
+					"-lcurl",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = NewsParser;
-				SDKROOT = "$(SDKROOT)";
 				ZERO_LINK = YES;
 			};
 			name = Default;
