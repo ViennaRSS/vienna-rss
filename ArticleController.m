@@ -260,7 +260,7 @@
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
-		[[Database sharedDatabase] flushFolder:currentFolderId];
+		[[[Database sharedDatabase] folderFromID:currentFolderId] clearCache];
 		currentFolderId = newFolderId;
 		[mainArticleView selectFolderWithFilter:newFolderId];		
 	}

@@ -545,9 +545,42 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"vacuum"];
 }
 
+/* clearFolderFlag
+ * Clears the specified flag for the folder.
+ */
+-(void)clearFolderFlag:(int)folderId flagToClear:(unsigned int)flag
+{
+	// Exit now if we're read-only
+	if (readOnly)
+		return;
+	
+	Folder * folder = [self folderFromID:folderId];
+	if (folder != nil)
+	{
+		[folder clearFlag:flag];
+		[self executeSQLWithFormat:@"update folders set flags=%d where folder_id=%d", [folder flags], folderId];
+	}
+}
+
+/* setFolderFlag
+ * Sets the specified flag for the folder.
+ */
+-(void)setFolderFlag:(int)folderId flagToSet:(unsigned int)flag
+{
+	// Exit now if we're read-only
+	if (readOnly)
+		return;
+	
+	Folder * folder = [self folderFromID:folderId];
+	if (folder != nil)
+	{
+		[folder setFlag:flag];
+		[self executeSQLWithFormat:@"update folders set flags=%d where folder_id=%d", [folder flags], folderId];
+	}
+}
+
 /* setFolderLastUpdate
- * Sets the date when the folder was last updated. The flushFolder function must be
- * called for the parent folder to flush this to the database.
+ * Sets the date when the folder was last updated.
  */
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate
 {
@@ -563,6 +596,28 @@ static Database * _sharedDatabase = nil;
 			return;
 
 		[folder setLastUpdate:lastUpdate];
+		NSTimeInterval interval = [lastUpdate timeIntervalSince1970];
+		[self executeSQLWithFormat:@"update folders set last_update=%f where folder_id=%d", interval, folderId];
+	}
+}
+
+/* setFolderLastUpdateString
+ * Sets the last update string for the folder.
+ */
+-(void)setFolderLastUpdateString:(int)folderId lastUpdateString:(NSString *)lastUpdateString
+{
+	// Exit now if we're read-only
+	if (readOnly)
+		return;
+	
+	// If no change to last update string, do nothing
+	Folder * folder = [self folderFromID:folderId];
+	if (folder != nil && IsRSSFolder(folder))
+	{
+		if ([[folder lastUpdateString] isEqualToString:lastUpdateString])
+			return;
+		
+		[folder setLastUpdateString:lastUpdateString];
 		[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%d", [folder lastUpdateString], folderId];
 	}
 }
@@ -1014,11 +1069,19 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Adjust the child unread count for the old parent.
-	parentFolder = [self folderFromID:[folder parentId]];
-	while (parentFolder != nil)
+	int adjustment = 0;
+	if ([folder isRSSFolder])
+		adjustment = [folder unreadCount];
+	else if ([folder isGroupFolder])
+		adjustment = [folder childUnreadCount];
+	if (adjustment > 0)
 	{
-		[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] - [folder unreadCount]];
-		parentFolder = [self folderFromID:[parentFolder parentId]];
+		parentFolder = [self folderFromID:[folder parentId]];
+		while (parentFolder != nil)
+		{
+			[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] - adjustment];
+			parentFolder = [self folderFromID:[parentFolder parentId]];
+		}
 	}
 	
 	// Do the re-parent
@@ -1026,11 +1089,14 @@ static Database * _sharedDatabase = nil;
 	
 	// In addition to reparenting the child, we also need to fix up the unread count for all
 	// precedent parents.
-	parentFolder = [self folderFromID:newParentID];
-	while (parentFolder != nil)
+	if (adjustment > 0)
 	{
-		[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
-		parentFolder = [self folderFromID:[parentFolder parentId]];
+		parentFolder = [self folderFromID:newParentID];
+		while (parentFolder != nil)
+		{
+			[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + adjustment];
+			parentFolder = [self folderFromID:[parentFolder parentId]];
+		}
 	}
 
 	// Update the database now
@@ -1149,8 +1215,8 @@ static Database * _sharedDatabase = nil;
 }
 
 /* createArticle
- * Adds or updates an article in the specified folder. Returns the GUID of the
- * article that was added or updated or -1 if we couldn't add the article for
+ * Adds or updates an article in the specified folder. Returns YES if the
+ * article was added or updated or NO if we couldn't add the article for
  * some reason.
  */
 -(BOOL)createArticle:(int)folderID article:(Article *)article
@@ -1273,12 +1339,7 @@ static Database * _sharedDatabase = nil;
 		if (adjustment != 0)
 		{
 			countOfUnread += adjustment;
-			[folder setUnreadCount:[folder unreadCount] + adjustment];
-			while ([folder parentId] != MA_Root_Folder)
-			{
-				folder = [self folderFromID:[folder parentId]];
-				[folder setChildUnreadCount:[folder childUnreadCount] + adjustment];
-			}
+			[self setFolderUnreadCount:folder adjustment:adjustment];
 		}
 		return YES;
 	}
@@ -1364,17 +1425,8 @@ static Database * _sharedDatabase = nil;
 			{
 				if (![article isRead])
 				{
-					[folder setUnreadCount:[folder unreadCount] - 1];
+					[self setFolderUnreadCount:folder adjustment:-1];
 					--countOfUnread;
-					
-					// Update childUnreadCount for our parent. Since we're just working
-					// on one article, we do this the faster way.
-					Folder * parentFolder = folder;
-					while ([parentFolder parentId] != MA_Root_Folder)
-					{
-						parentFolder = [self folderFromID:[parentFolder parentId]];
-						[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] - 1];
-					}
 				}
 				[folder removeArticleFromCache:guid];
 				[results release];
@@ -1383,29 +1435,6 @@ static Database * _sharedDatabase = nil;
 		}
 	}
 	return NO;
-}
-
-/* flushFolder
- * Updates the unread count for a folder in the database
- */
--(void)flushFolder:(int)folderId
-{
-	Folder * folder = [self folderFromID:folderId];
-	if (folder == nil)
-		return;
-	if ([folder needFlush] && !IsSmartFolder(folder))
-	{
-		NSTimeInterval interval = [[folder lastUpdate] timeIntervalSince1970];
-		[self executeSQLWithFormat:@"update folders set flags=%d, unread_count=%d, last_update=%f where folder_id=%d",
-									[folder flags],
-									[folder unreadCount],
-									interval,
-									folderId];
-
-		// Mark this folder as not needing any further updates
-		[folder resetFlush];
-	}
-	[folder clearCache];
 }
 
 /* initSmartFoldersArray
@@ -1550,7 +1579,6 @@ static Database * _sharedDatabase = nil;
 				if (unreadCount > 0)
 					countOfUnread += unreadCount;
 				[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
-				[folder resetFlush];
 
 				// Remember the trash folder
 				if (IsTrashFolder(folder))
@@ -1583,7 +1611,6 @@ static Database * _sharedDatabase = nil;
 				[folder setLastUpdateString:lastUpdateString];
 				[folder setUsername:username];
 				[folder setBloglinesId:bloglinesId];
-				[folder resetFlush];
 			}
 		}
 		[results release];
@@ -2218,6 +2245,7 @@ static Database * _sharedDatabase = nil;
 {
 	int unreadCount = [folder unreadCount];
 	[folder setUnreadCount:unreadCount + adjustment];
+	[self executeSQLWithFormat:@"update folders set unread_count=%d where folder_id=%d", [folder unreadCount], [folder itemId]];
 	
 	// Update childUnreadCount for our parent. Since we're just working
 	// on one article, we do this the faster way.

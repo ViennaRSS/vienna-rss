@@ -255,7 +255,7 @@ typedef enum {
 	if ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage])
 	{
 		if (([folder flags] & MA_FFlag_CheckForImage))
-			[folder clearFlag:MA_FFlag_CheckForImage];
+			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		return;
 	}
 	
@@ -375,7 +375,7 @@ typedef enum {
 -(void)handleGotAuthenticationForFolder:(NSNotification *)nc
 {
 	Folder * folder = (Folder *)[nc object];
-	[folder clearFlag:MA_FFlag_NeedCredentials];
+	[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_NeedCredentials];
 	[authQueue removeObject:folder];
 	[self refreshSubscriptions:[NSArray arrayWithObject:folder]];
 	
@@ -536,6 +536,9 @@ typedef enum {
 -(void)folderRefreshCompleted:(AsyncConnection *)connector
 {
 	Folder * folder = (Folder *)[connector contextData];
+	int folderId = [folder itemId];
+	Database * db = [Database sharedDatabase];
+	
 	if ([connector status] == MA_Connect_NeedCredentials)
 	{
 		if (![authQueue containsObject:folder])
@@ -546,8 +549,7 @@ typedef enum {
 	{
 		// We got a permanent redirect from the feed so change the feed URL
 		// to the new location.
-		Database * db = [Database sharedDatabase];
-		[db setFolderFeedURL:[folder itemId] newFeedURL:[connector URLString]];
+		[db setFolderFeedURL:folderId newFeedURL:[connector URLString]];
 		[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [connector URLString]]];
 		return;
 	}
@@ -565,9 +567,8 @@ typedef enum {
 	{
 		// We got HTTP 410 which means the feed has been intentionally
 		// removed so unsubscribe the feed.
-		[folder setFlag:MA_FFlag_Unsubscribed];
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+		[db setFolderFlag:folderId flagToSet:MA_FFlag_Unsubscribed];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	}
 	else if ([connector status] == MA_Connect_Failed)
 	{
@@ -576,9 +577,7 @@ typedef enum {
 	}
 	else if ([connector status] == MA_Connect_Succeeded)
 	{
-		Database * db = [Database sharedDatabase];
 		NSData * receivedData = [connector receivedData];
-		int newArticlesFromFeed = 0;	
 
 		// Check whether this is an HTML redirect. If so, create a new connection using
 		// the redirect.
@@ -593,9 +592,10 @@ typedef enum {
 		// Remember the last modified date
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 		if (lastModifiedString != nil)
-			[folder setLastUpdateString:lastModifiedString];
+			[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
 
 		// Empty data feed is OK if we got HTTP 200
+		int newArticlesFromFeed = 0;	
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if ([receivedData length] > 0)
 		{
@@ -644,7 +644,7 @@ typedef enum {
 				if ([articleDate compare:lastUpdate] == NSOrderedDescending)
 				{
 					Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
-					[article setFolderId:[folder itemId]];
+					[article setFolderId:folderId];
 					[article setAuthor:[newsItem author]];
 					[article setBody:[newsItem description]];
 					[article setSummary:[newsItem summary]];
@@ -671,8 +671,7 @@ typedef enum {
 			[db beginTransaction]; // Should we wrap the entire loop or just individual article updates?
 			while ((article = [articleEnumerator nextObject]) != nil)
 			{
-				[db createArticle:[article folderId] article:article];
-				if ([article status] == MA_MsgStatus_New)
+				if ([db createArticle:folderId article:article] && ([article status] == MA_MsgStatus_New))
 					++newArticlesFromFeed;
 			}
 			[db commitTransaction];
@@ -680,7 +679,6 @@ typedef enum {
 			[db beginTransaction];
 
 			// A notify is only needed if we added any new articles.
-			int folderId = [folder itemId];
 			if ([[folder name] hasPrefix:[Database untitledFeedFolderName]] && ![feedTitle isBlank])
 			{
 				// If there's an existing feed with this title, make ours unique
@@ -704,7 +702,6 @@ typedef enum {
 			// recent article we retrieved.
 			if (newLastUpdate != nil)
 				[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
-			[db flushFolder:folderId];
 			
 			[db commitTransaction];
 			
@@ -852,7 +849,7 @@ typedef enum {
 			[aItem appendDetail:logText];
 		}
 		if (([folder flags] & MA_FFlag_CheckForImage))
-			[folder clearFlag:MA_FFlag_CheckForImage];
+			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		[iconImage release];
 	}
 	[self removeConnection:connector];

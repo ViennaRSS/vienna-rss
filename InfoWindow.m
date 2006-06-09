@@ -235,11 +235,10 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(IBAction)subscribedChanged:(id)sender
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:infoFolderId];
 	if ([isSubscribed state] == NSOnState)
-		[folder clearFlag:MA_FFlag_Unsubscribed];
+		[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
 	else
-		[folder setFlag:MA_FFlag_Unsubscribed];
+		[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
 }
 
