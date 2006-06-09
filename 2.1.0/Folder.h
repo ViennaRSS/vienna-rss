@@ -69,7 +69,6 @@
 	unsigned int flags;
 	unsigned int nonPersistedFlags;
 	BOOL isCached;
-	BOOL needFlush;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
 	NSMutableDictionary * cachedArticles;
@@ -103,8 +102,6 @@
 -(NSImage *)standardImage;
 -(int)childUnreadCount;
 -(void)clearCache;
--(BOOL)needFlush;
--(void)resetFlush;
 -(BOOL)isGroupFolder;
 -(BOOL)isSmartFolder;
 -(BOOL)isRSSFolder;

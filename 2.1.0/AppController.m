@@ -431,9 +431,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[mainArticleView saveTableSettings];
 		[foldersTree saveFolderSettings];
 		
-		if ([articleController currentFolderId] != -1)
-			[db flushFolder:[articleController currentFolderId]];
-		
 		// Finally save preferences
 		[prefs savePreferences];
 	}

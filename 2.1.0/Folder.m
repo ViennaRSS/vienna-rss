@@ -225,7 +225,6 @@ static NSArray * iconArray = nil;
 		[self setUsername:@""];
 		[self setPassword:@""];
 		[self setBloglinesId:MA_NonBloglines_Folder];
-		[self resetFlush];
 	}
 	return self;
 }
@@ -485,7 +484,6 @@ static NSArray * iconArray = nil;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString
 {
 	[attributes setValue:newLastUpdateString forKey:@"LastUpdateString"];
-	needFlush = YES;
 }
 
 /* feedURL
@@ -575,7 +573,6 @@ static NSArray * iconArray = nil;
 -(void)setFlag:(unsigned int)flagToSet
 {
 	flags |= flagToSet;
-	needFlush = YES;
 }
 
 /* clearFlag
@@ -584,7 +581,6 @@ static NSArray * iconArray = nil;
 -(void)clearFlag:(unsigned int)flagToClear
 {
 	flags &= ~flagToClear;
-	needFlush = YES;
 }
 
 /* setNonPersistedFlag
@@ -608,11 +604,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setParent:(int)newParent
 {
-	if (parentId != newParent)
-	{
-		parentId = newParent;
-		needFlush = YES;
-	}
+	parentId = newParent;
 }
 
 /* setNextSiblingId
@@ -654,11 +646,7 @@ static NSArray * iconArray = nil;
 -(void)setUnreadCount:(int)count
 {
 	NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
-	if (unreadCount != count)
-	{
-		unreadCount = count;
-		needFlush = YES;
-	}
+	unreadCount = count;
 }
 
 /* setChildUnreadCount
@@ -669,22 +657,6 @@ static NSArray * iconArray = nil;
 {
 	NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
 	childUnreadCount = count;
-}
-
-/* needFlush
- * Return whether this folder needs to be committed.
- */
--(BOOL)needFlush
-{
-	return needFlush;
-}
-
-/* resetFlush
- * Mark changes in this folder as having been committed or thrown away.
- */
--(void)resetFlush
-{
-	needFlush = NO;
 }
 
 /* clearCache

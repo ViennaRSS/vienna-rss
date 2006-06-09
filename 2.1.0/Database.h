@@ -73,12 +73,14 @@
 -(BOOL)setFolderHomePage:(int)folderId newHomePage:(NSString *)newLink;
 -(BOOL)setFolderFeedURL:(int)folderId newFeedURL:(NSString *)newFeedURL;
 -(BOOL)setFolderUsername:(int)folderId newUsername:(NSString *)name;
--(void)flushFolder:(int)folderId;
 -(void)purgeDeletedArticles;
 -(void)purgeArticlesOlderThanDays:(int)daysToKeep sendNotification:(BOOL)notifyFlag;
 -(BOOL)markFolderRead:(int)folderId;
+-(void)clearFolderFlag:(int)folderId flagToClear:(unsigned int)flag;
+-(void)setFolderFlag:(int)folderId flagToSet:(unsigned int)flag;
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
 -(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
+-(void)setFolderLastUpdateString:(int)folderId lastUpdateString:(NSString *)lastUpdateString;
 -(BOOL)setParent:(int)newParentID forFolder:(int)folderId;
 -(BOOL)setFirstChild:(int)childId forFolder:(int)folderId;
 -(BOOL)setNextSibling:(int)nextSiblingId forFolder:(int)folderId;
