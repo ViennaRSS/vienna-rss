@@ -488,21 +488,29 @@ typedef enum {
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem
 {
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
-	NSMutableDictionary * headers = [NSMutableDictionary dictionary];
 	
-	[headers setValue:@"gzip" forKey:@"Accept-Encoding"];
-	[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
-	
-	[conn setHttpHeaders:headers];
-	
-	if ([conn beginLoadDataFromURL:url
-						  username:[folder username]
-						  password:[folder password]
-						  delegate:self
-					   contextData:folder
-							   log:aItem
-					didEndSelector:@selector(folderRefreshCompleted:)])
-		[self addConnection:conn];
+	@try
+	{
+		NSMutableDictionary * headers = [NSMutableDictionary dictionary];
+		
+		[headers setValue:@"gzip" forKey:@"Accept-Encoding"];
+		[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
+		
+		[conn setHttpHeaders:headers];
+		
+		if ([conn beginLoadDataFromURL:url
+							  username:[folder username]
+							  password:[folder password]
+							  delegate:self
+						   contextData:folder
+								   log:aItem
+						didEndSelector:@selector(folderRefreshCompleted:)])
+			[self addConnection:conn];
+	}
+	@finally
+	{
+		[conn release];
+	}
 }
 
 /* pumpFolderIconRefresh
@@ -517,16 +525,24 @@ typedef enum {
 	[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 	
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
-	NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
-	
-	if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
-						  username:nil
-						  password:nil
-						  delegate:self
-					   contextData:folder
-							   log:aItem
-					didEndSelector:@selector(folderIconRefreshCompleted:)])
-		[self addConnection:conn];
+
+	@try
+	{
+		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
+		
+		if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
+							  username:nil
+							  password:nil
+							  delegate:self
+						   contextData:folder
+								   log:aItem
+						didEndSelector:@selector(folderIconRefreshCompleted:)])
+			[self addConnection:conn];
+	}
+	@finally
+	{
+		[conn release];
+	}
 }
 
 /* folderRefreshCompleted
@@ -880,14 +896,12 @@ typedef enum {
 	if (totalConnections > 0)
 	{
 		if ([connectionsArray containsObject:conn])
+		{
+			// Close the connection before we release as otherwise it leaks
+			[conn close];
 			[connectionsArray removeObject:conn];
-
-		// Close the connection before we release as otherwise
-		// we'll leak.
-		[conn close];
-		[conn release];
-
-		--totalConnections;
+			--totalConnections;
+		}
 	}
 }
 
