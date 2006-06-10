@@ -171,7 +171,10 @@
 	[theRequest setHTTPShouldHandleCookies:NO];
 
 	status = MA_Connect_Stopped;
-	connector = [[NSURLConnection connectionWithRequest:theRequest delegate:self] retain];
+	
+	// Changed to not use the [NSURLConnection connectionWithRequest:delegate:  and then retain,
+	// no sense putting it in an autorelease pool if it has no reason to be there
+	connector = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
 	return connector != nil;
 }
 
@@ -421,4 +424,5 @@
 	[aItem release];
 	[super dealloc];
 }
+
 @end
