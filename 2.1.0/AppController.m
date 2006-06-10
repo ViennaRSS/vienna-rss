@@ -1637,17 +1637,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else
 	{
-		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
-		[self stopProgressIndicator];
-		
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:YES];
 		
+		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
+		[self stopProgressIndicator];
+		
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
-		// Refresh the current folder
-		[articleController refreshCurrentFolder];
+		// Refresh the current folder unless preference is set to mark read automatically.
+		if (!([prefs markReadInterval] > 0))
+			[articleController refreshCurrentFolder];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];

@@ -1300,9 +1300,7 @@ static Database * _sharedDatabase = nil;
 				return NO;
 			[results release];
 
-			// Add the article to the folder
 			[article setStatus:MA_MsgStatus_New];
-			[folder addArticleToCache:article];
 			
 			// Update folder unread count
 			if (!read_flag)
@@ -1360,21 +1358,10 @@ static Database * _sharedDatabase = nil;
 
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
-		if (results != nil)
+		if ((results != nil) && (notifyFlag))
 		{
-			// Flush all caches.
-			NSEnumerator * enumerator = [[foldersArray allValues] objectEnumerator];
-			Folder * folder;
-			
-			while ((folder = [enumerator nextObject]) != nil)
-				[folder clearCache];
-
 			// A folder ID of zero means update all folders
-			if (notifyFlag)
-			{
-				NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-				[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:0]];
-			}
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:0]];
 		}
 		[results release];
 	}
@@ -1395,8 +1382,7 @@ static Database * _sharedDatabase = nil;
 		[self compactDatabase];
 		[trashFolder clearCache];
 
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
 	}
 	[results release];
 }
@@ -1506,9 +1492,6 @@ static Database * _sharedDatabase = nil;
 		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
 		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
 		[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
-
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	}
 	return folderId;
 }

@@ -765,18 +765,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
-
-	// Don't refresh the current folder until the connection finishes.
-	if ([controller isConnecting])
+	if (folderId != [articleController currentFolderId])
 		return;
-	if (folderId == 0 || folderId == [articleController currentFolderId] || [articleController currentCacheContainsFolder:folderId])
+	
+	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
+	if (IsSmartFolder(folder) || IsTrashFolder(folder))
 		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-	else
-	{
-		Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
-		if (IsSmartFolder(folder))
-			[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-	}
 }
 
 /* handleArticleListFontChange
@@ -885,7 +879,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (nextFolderWithUnread != -1)
 		{
 			if (nextFolderWithUnread == [articleController currentFolderId])
+			{
+				[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 				[self viewNextUnreadInCurrentFolder:-1];
+			}
 			else
 			{
 				guidOfArticleToSelect = nil;
