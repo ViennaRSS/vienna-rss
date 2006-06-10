@@ -25,7 +25,6 @@
 
 @interface RefreshManager : NSObject {
 	int maximumConnections;
-	int totalConnections;
 	int countOfNewArticles;
 	NSMutableArray * connectionsArray;
 	NSMutableArray * refreshArray;
