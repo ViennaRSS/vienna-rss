@@ -207,7 +207,12 @@
 {
 	int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
 	if (nextFolderWithUnread != -1)
-		[foldersTree selectFolder:nextFolderWithUnread];
+	{
+		if (nextFolderWithUnread == [articleController currentFolderId])
+			[self selectFolderWithFilter:[articleController currentFolderId]];
+		else
+			[foldersTree selectFolder:nextFolderWithUnread];
+	}
 }
 
 /* refreshArticlePane
