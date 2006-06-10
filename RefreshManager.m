@@ -133,7 +133,6 @@ typedef enum {
 	if ((self = [super init]) != nil)
 	{
 		maximumConnections = [[Preferences standardPreferences] integerForKey:MAPref_RefreshThreads];
-		totalConnections = 0;
 		countOfNewArticles = 0;
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		connectionsArray = [[NSMutableArray alloc] initWithCapacity:maximumConnections];
@@ -301,7 +300,7 @@ typedef enum {
 -(void)cancelAll
 {
 	[refreshArray removeAllObjects];
-	while (totalConnections > 0)
+	while ([connectionsArray count] > 0)
 	{
 		AsyncConnection * conn = [connectionsArray objectAtIndex:0];
 		[conn cancel];
@@ -314,7 +313,7 @@ typedef enum {
  */
 -(int)totalConnections
 {
-	return totalConnections;
+	return [connectionsArray count];
 }
 
 /* countOfNewArticles
@@ -412,7 +411,7 @@ typedef enum {
  */
 -(void)refreshPumper:(NSTimer *)aTimer
 {
-	while ((totalConnections < maximumConnections) && ([refreshArray count] > 0))
+	while (([connectionsArray count] < maximumConnections) && ([refreshArray count] > 0))
 	{
 		RefreshItem * item = [refreshArray objectAtIndex:0];
 		switch ([item type])
@@ -432,7 +431,7 @@ typedef enum {
 		[refreshArray removeObjectAtIndex:0];
 	}
 	
-	if (totalConnections == 0 && [refreshArray count] == 0 && hasStarted)
+	if ([connectionsArray count] == 0 && [refreshArray count] == 0 && hasStarted)
 	{
 		[pumpTimer invalidate];
 		[pumpTimer release];
@@ -876,14 +875,16 @@ typedef enum {
 -(void)addConnection:(AsyncConnection *)conn
 {
 	if (![connectionsArray containsObject:conn])
-		[connectionsArray addObject:conn];
-
-	if (totalConnections++ == 0 && !hasStarted)
 	{
-		countOfNewArticles = 0;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-		hasStarted = YES;
+		[connectionsArray addObject:conn];
+		if (!hasStarted)
+		{
+			countOfNewArticles = 0;
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+			hasStarted = YES;
+		}
 	}
+
 }
 
 /* removeConnection
@@ -892,16 +893,12 @@ typedef enum {
  */
 -(void)removeConnection:(AsyncConnection *)conn
 {
-	NSAssert(totalConnections > 0, @"Calling removeConnection with zero active connection count");
-	if (totalConnections > 0)
+	NSAssert([connectionsArray count] > 0, @"Calling removeConnection with zero active connection count");
+	if ([connectionsArray containsObject:conn])
 	{
-		if ([connectionsArray containsObject:conn])
-		{
-			// Close the connection before we release as otherwise it leaks
-			[conn close];
-			[connectionsArray removeObject:conn];
-			--totalConnections;
-		}
+		// Close the connection before we release as otherwise it leaks
+		[conn close];
+		[connectionsArray removeObject:conn];
 	}
 }
 
