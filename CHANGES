@@ -8,7 +8,12 @@ Thanks!
 
 2.1.0.2102
 ----------
-
+- Fixed bug: folder attributes (e.g., unread count) not always written to database.
+- Don't reload current folder after refresh if preference is set to mark articles read automatically.
+- Avoid leaking or crashing with URL connections.
+- Move storage of preference for folder sort method from preferences file to database,
+  so that it (and manual sort order) can survive deletion of preferences file.
+- Enable reloading of web page that never loaded because of error.
 
 2.1.0.2101
 ----------
