@@ -466,7 +466,10 @@
  */
 -(void)handleReload:(id)sender
 {
-	[webPane reload:self];
+	if ([[webPane mainFrame] dataSource] != nil)
+		[webPane reload:self];
+	else
+		[self handleAddress:self];
 }
 
 /* handleStopLoading webview
