@@ -46,7 +46,7 @@
 
 // The current database version number
 const int MA_Min_Supported_DB_Version = 12;
-const int MA_Current_DB_Version = 14;
+const int MA_Current_DB_Version = 15;
 
 // There's just one database and we manage access to it through a
 // singleton object.
@@ -169,7 +169,7 @@ static Database * _sharedDatabase = nil;
 		// write to the specified location. If not then we need to prompt the user for
 		// a different location.
 		int resultCode;
-		while ((resultCode = [self executeSQL:@"create table info (version, last_opened, first_folder)"]) != SQLITE_OK)
+		while ((resultCode = [self executeSQL:@"create table info (version, last_opened, first_folder, folder_sort)"]) != SQLITE_OK)
 		{
 			if (resultCode != SQLITE_LOCKED)
 				return NO;
@@ -189,10 +189,6 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
-
-		// Make sure that the folders are sorted automatically, because there is no saved hierarchy.
-		// The folders view may not be ready yet, so this call avoids sending any notifications.
-		[[Preferences standardPreferences] setBool:YES forKey:MAPref_AutoSortFoldersTree];
 
 		// Create a criteria to find all marked articles
 		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
@@ -237,8 +233,9 @@ static Database * _sharedDatabase = nil;
 		}
 		
 		// Set the initial version
+		// Make sure that the folders are sorted automatically, because there is no saved hierarchy.
 		databaseVersion = MA_Current_DB_Version;
-		[self executeSQLWithFormat:@"insert into info (version, first_folder) values (%d, 0)", databaseVersion];
+		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_ByName];
 		
 		[self commitTransaction];
 	}
@@ -254,9 +251,6 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
-		// Set the new version
-		[self setDatabaseVersion:13];
-		
 		[self commitTransaction];
 	}
 	
@@ -293,11 +287,40 @@ static Database * _sharedDatabase = nil;
 		}
 		[results release];
 		
+		[self commitTransaction];
+	}
+	
+	// Upgrade to rev 15.
+	// Move the folders tree sort method preference to the database, so that it can survive deletion of the preferences file.
+	// Do not disturb the manual sort order, if it exists.
+	if (databaseVersion < 15)
+	{
+		[self beginTransaction];
+		
+		[self executeSQL:@"alter table info add column folder_sort"];
+		
+		int oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
+		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
+		
 		// Set the new version
-		[self setDatabaseVersion:14];		
+		[self setDatabaseVersion:15];		
 		
 		[self commitTransaction];
 	}
+	
+	// Read the folders tree sort method from the database.
+	// The folders view may not be ready yet, so this call avoids sending any notifications.
+	int newFoldersTreeSortMethod = MA_FolderSort_ByName;
+	SQLResult * sortResults = [sqlDatabase performQuery:@"select folder_sort from info"];
+	if (sortResults && [sortResults rowCount])
+	{
+		newFoldersTreeSortMethod = [[[sortResults rowAtIndex:0] stringForColumn:@"folder_sort"] intValue];
+	}
+	[sortResults release];
+	[[Preferences standardPreferences] setInteger:newFoldersTreeSortMethod forKey:MAPref_AutoSortFoldersTree];
+	
+	// Register for notifications of change in folders tree sort method.
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
 	
 	// Initial check if the database is read-only
 	[self syncLastUpdate];
@@ -1212,6 +1235,16 @@ static Database * _sharedDatabase = nil;
 			break;
 	}
 	return item;
+}
+
+/* handleAutoSortFoldersTreeChange
+ * Called when preference changes for sorting folders tree.
+ * Store the new method in the database.
+ */
+-(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification
+{
+	if (!readOnly)
+		[self executeSQLWithFormat:@"update info set folder_sort=%d", [[Preferences standardPreferences] foldersTreeSortMethod]];
 }
 
 /* createArticle
@@ -2266,6 +2299,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)close
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[foldersArray removeAllObjects];
 	[smartFoldersArray removeAllObjects];
 	[fieldsOrdered release];
