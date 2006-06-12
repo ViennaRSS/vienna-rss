@@ -630,7 +630,7 @@
  */
 -(void)handleFolderDeleted:(NSNotification *)nc
 {
-	int currentFolderId = [self actualSelection];
+	int currentFolderId = [controller currentFolderId];
 	int folderId = [(NSNumber *)[nc object] intValue];
 	TreeNode * thisNode = [rootNode nodeFromID:folderId];
 	TreeNode * nextNode;
