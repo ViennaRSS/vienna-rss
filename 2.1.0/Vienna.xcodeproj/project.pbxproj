@@ -2189,10 +2189,6 @@
 		AA4F9AB70855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				BUILD_NUMBER = 2102;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2231,7 +2227,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.3;
+				MACOSX_DEPLOYMENT_TARGET_i386 = "Mac OS X 10.4";
+				MACOSX_DEPLOYMENT_TARGET_ppc = "Mac OS X 10.3";
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
