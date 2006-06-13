@@ -150,8 +150,6 @@
 		AAA3AF0906338A00006735EB /* SearchFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA3AF0706338A00006735EB /* SearchFolder.h */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
 		AAA5574309E916F900C87343 /* markAllRead.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAA5574209E916F900C87343 /* markAllRead.tiff */; };
-		AAA5687709EE730C00C87343 /* NewsParser-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAA5687009EE725B00C87343 /* NewsParser-Info.plist */; };
-		AAA569BF09EE777400C87343 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D15AC360486D014006FF6A4 /* Info.plist */; };
 		AAA569F309EE777400C87343 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */; };
 		AAA569F409EE777400C87343 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */; };
 		AAA56F2909EF4FC300C87343 /* XMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = AA328863084700B700A7AD5A /* XMLParser.h */; };
@@ -1421,7 +1419,6 @@
 				AAA7F4EE09D40CDA007D0760 /* filterIcon.tiff in Resources */,
 				AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */,
 				AAA5574309E916F900C87343 /* markAllRead.tiff in Resources */,
-				AAA569BF09EE777400C87343 /* Info.plist in Resources */,
 				AA38C15D09FB196A00FAE2CD /* NewPreferences.nib in Resources */,
 				AA38C17909FB19BD00FAE2CD /* BrowserPane.nib in Resources */,
 				AA38C18009FB19CE00FAE2CD /* Downloads.nib in Resources */,
@@ -1440,7 +1437,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAA5687709EE730C00C87343 /* NewsParser-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
