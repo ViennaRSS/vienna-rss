@@ -1790,8 +1790,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 			
 		case NSDeleteFunctionKey:
-			[self deleteMessage:self];
-			return YES;
+		case NSDeleteCharacter:
+			if ([mainWindow firstResponder] == [foldersTree mainView])
+			{
+				[self deleteFolder:self];
+				return YES;
+			}
+			else if ([mainWindow firstResponder] == [mainArticleView mainView])
+			{
+				[self deleteMessage:self];
+				return YES;
+			}
+			return NO;
 
 		case 'f':
 		case 'F':
@@ -2612,11 +2622,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[menuItem setState:NSOffState];
 		return isMainWindowVisible && isAnyArticleView;
 	}
-	else if (theAction == @selector(deleteFolder:))
-	{
-		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
-	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
@@ -2679,10 +2684,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
 		return IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
-	}
-	else if (theAction == @selector(deleteMessage:))
-	{
-		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
 	else if (theAction == @selector(emptyTrash:))
 	{

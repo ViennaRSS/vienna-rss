@@ -142,7 +142,9 @@
 	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
+	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", nil) action:@selector(delete:) keyEquivalent:@""];
+	[folderMenu addItem:item];
+	[item release];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
@@ -392,6 +394,23 @@
 			}
 		}
 	}
+}
+
+/* canDeleteFolderAtRow
+ * Returns YES if the folder at the specified row can be deleted, otherwise NO.
+ */
+-(BOOL)canDeleteFolderAtRow:(int)row
+{
+	if (row >= 0)
+	{
+		TreeNode * node = [outlineView itemAtRow:row];
+		if (node != nil)
+		{
+			Folder * folder = [[Database sharedDatabase] folderFromID:[node nodeId]];
+			return folder && !IsTrashFolder(folder) && ![[Database sharedDatabase] readOnly] && [[outlineView window] isVisible];
+		}
+	}
+	return NO;
 }
 
 /* selectFolder

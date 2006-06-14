@@ -75,4 +75,5 @@
 -(void)saveTableSettings;
 -(int)tableLayout;
 -(NSArray *)markedArticleRange;
+-(BOOL)canDeleteMessageAtRow:(int)row;
 @end

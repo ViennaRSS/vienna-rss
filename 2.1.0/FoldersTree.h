@@ -50,6 +50,7 @@
 -(void)saveFolderSettings;
 -(void)updateAlternateMenuTitle;
 -(void)updateFolder:(int)folderId recurseToParents:(BOOL)recurseToParents;
+-(BOOL)canDeleteFolderAtRow:(int)row;
 -(BOOL)selectFolder:(int)folderId;
 -(void)renameFolder:(int)folderId;
 -(int)actualSelection;
