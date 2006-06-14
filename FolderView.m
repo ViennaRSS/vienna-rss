@@ -24,6 +24,8 @@
 @interface NSObject (FoldersViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
+	-(BOOL)canDeleteFolderAtRow:(int)row;
+	-(IBAction)deleteFolder:(id)sender;
 @end
 
 // Gradient data from http://www.cocoadev.com/index.pl?CCDGradientSelectionTableView
@@ -222,6 +224,14 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 	}
 }
 
+/* delete
+ * Handle the Delete action when the outline view has focus.
+ */
+-(IBAction)delete:(id)sender
+{
+	[[NSApp delegate] deleteFolder:self];
+}
+
 /* validateMenuItem
  * This is our override where we handle item validation for the
  * commands that we own.
@@ -231,6 +241,10 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 	if ([menuItem action] == @selector(copy:))
 	{
 		return ([self selectedRow] >= 0);
+	}
+	if ([menuItem action] == @selector(delete:))
+	{
+		return [[self delegate] canDeleteFolderAtRow:[self selectedRow]];
 	}
 	if ([menuItem action] == @selector(selectAll:))
 	{

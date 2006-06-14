@@ -310,7 +310,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markRead:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markFlagged:))];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(deleteMessage:))];
+	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete Article", nil) action:@selector(delete:) keyEquivalent:@""];
+	[articleListMenu addItem:item];
+	[item release];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(restoreMessage:))];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
@@ -673,6 +675,19 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(WebView *)webView
 {
 	return articleText;
+}
+
+/* canDeleteMessageAtRow
+ * Returns YES if the message at the specified row can be deleted, otherwise NO.
+ */
+-(BOOL)canDeleteMessageAtRow:(int)row
+{
+	if ((row >= 0) && (row < [[articleController allArticles] count]))
+	{
+		Article * article = [[articleController allArticles] objectAtIndex:row];
+		return (article != nil) && ![[Database sharedDatabase] readOnly] && [[articleList window] isVisible];
+	}
+	return NO;
 }
 
 /* canGoForward
