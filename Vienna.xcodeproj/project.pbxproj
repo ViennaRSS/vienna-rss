@@ -2012,7 +2012,6 @@
 					"$(SRCROOT)",
 					"$(SDKROOT)/System/Library/Frameworks",
 					"$(BUILT_PRODUCTS_DIR)",
-					"$(SRCROOT)/build/Development",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2061,7 +2060,6 @@
 					"$(SRCROOT)",
 					"$(SDKROOT)/System/Library/Frameworks",
 					"$(BUILT_PRODUCTS_DIR)",
-					"$(SRCROOT)/build/Deployment",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2114,7 +2112,6 @@
 					"$(SRCROOT)",
 					"$(SDKROOT)/System/Library/Frameworks",
 					"$(BUILT_PRODUCTS_DIR)",
-					"$(SRCROOT)/build/Deployment",
 					"$(SYSTEM_DEVELOPER_DIR)/SDKs/MacOSX10.3.9.sdk/System/Library/Frameworks",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
