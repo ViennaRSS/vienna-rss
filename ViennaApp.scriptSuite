@@ -263,6 +263,15 @@
 					<key>Type</key>
 					<string>NSString</string>
 				</dict>
+				<key>documentHTMLSource</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>dSdS</string>
+					<key>ReadOnly</key>
+					<string>YES</string>
+					<key>Type</key>
+					<string>NSString</string>
+				</dict>
 				<key>articleListFont</key>
 				<dict>
 					<key>AppleEventCode</key>

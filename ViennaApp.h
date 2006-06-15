@@ -46,6 +46,7 @@
 -(BOOL)isRefreshing;
 -(int)totalUnreadCount;
 -(NSString *)currentSelection;
+-(NSString *)documentHTMLSource;
 
 // Change folder selection
 -(Folder *)currentFolder;
