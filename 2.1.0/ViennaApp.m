@@ -28,8 +28,7 @@
 #import "Constants.h"
 #import "FoldersTree.h"
 #import "BrowserPane.h"
-#import "WebKit/WebFrame.h"
-#import "WebKit/WebDocument.h"
+#import "WebKit/WebKit.h"
 
 @implementation ViennaApp
 
@@ -228,6 +227,27 @@
 		
 		if ([docView conformsToProtocol:@protocol(WebDocumentText)])
 			return [(id<WebDocumentText>)docView selectedString];
+	}
+	return @"";
+}
+
+-(NSString *)documentHTMLSource
+{
+	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabView];
+	WebView * webPane = nil;
+	
+	if ([theView isKindOfClass:[BrowserPane class]])
+		webPane = (WebView *)[(BrowserPane *)theView mainView];
+	
+	if (webPane != nil)
+	{
+		WebDataSource * dataSource = [[webPane mainFrame] dataSource];
+		if (dataSource != nil)
+		{
+			id representation = [dataSource representation];
+			if ((representation != nil) && ([representation conformsToProtocol:@protocol(WebDocumentRepresentation)]) && ([(id<WebDocumentRepresentation>)representation canProvideDocumentSource]))
+				return [(id<WebDocumentRepresentation>)representation documentSource];
+		}
 	}
 	return @"";
 }

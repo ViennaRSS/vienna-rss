@@ -165,6 +165,13 @@
 					<key>Name</key>
 					<string>application version</string>
 				</dict>
+				<key>documentHTMLSource</key>
+				<dict>
+					<key>Description</key>
+					<string>The source of the currently open tab</string>
+					<key>Name</key>
+					<string>documentHTMLSource</string>
+				</dict>
 				<key>articleListFont</key>
 				<dict>
 					<key>Description</key>
