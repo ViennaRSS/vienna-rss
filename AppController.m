@@ -83,6 +83,7 @@
 	-(void)updateCloseCommands;
 	-(void)loadOpenTabs;
 	-(NSDictionary *)registrationDictionaryForGrowl;
+	-(NSTimer *)checkTimer;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -305,8 +306,31 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	{
 		AppController * app = (AppController *)[NSApp delegate];
 		Preferences * prefs = [Preferences standardPreferences];
-		if ([prefs refreshFrequency] > 0)
-			[app refreshAllSubscriptions:app];
+		int frequency = [prefs refreshFrequency];
+		if (frequency > 0)
+		{
+			NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
+			if ((lastRefresh == nil) || ([app checkTimer] == nil))
+				[app handleCheckFrequencyChange:nil];
+			else
+			{
+				// Wait at least 15 seconds after waking to avoid refresh errors.
+				NSTimeInterval interval = -[lastRefresh timeIntervalSinceNow];
+				if (interval > frequency)
+				{
+					[NSTimer scheduledTimerWithTimeInterval:15.0
+													 target:app
+												   selector:@selector(refreshOnTimer:)
+												   userInfo:nil
+													repeats:NO];
+					[app handleCheckFrequencyChange:nil];
+				}
+				else
+				{
+					[[app checkTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval]];
+				}
+			}
+		}
 	}
 	else if (messageType == kIOMessageCanSystemSleep)
 	{
@@ -1534,6 +1558,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 													 userInfo:nil
 													  repeats:YES] retain];
 	}
+}
+
+-(NSTimer *)checkTimer
+{
+	return checkTimer;
 }
 
 /* doViewColumn
