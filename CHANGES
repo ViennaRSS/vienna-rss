@@ -14,6 +14,13 @@ Thanks!
 - Move storage of preference for folder sort method from preferences file to database,
   so that it (and manual sort order) can survive deletion of preferences file.
 - Enable reloading of web page that never loaded because of error.
+- Fixed bug: When deleting multiple folders, the currently selected folder remained selected.
+- Enable use of backward delete key.
+- Removed multiple delete commands from main menu.
+- Added rudimentary Applescript support for retrieving html source of current browser tab.
+- Adjust refresh check timer after waking from sleep to account for time asleep. Wait at least 15 seconds
+  before refreshing after wake to avoid connection errors.
+- When updating existing articles during refresh, don't change article flags.
 
 2.1.0.2101
 ----------

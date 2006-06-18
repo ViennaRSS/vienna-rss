@@ -1341,19 +1341,14 @@ static Database * _sharedDatabase = nil;
 		}
 		else if (![[existingArticle body] isEqualToString:articleBody])
 		{
-			BOOL read_flag = [existingArticle isRead];
 			SQLResult * results;
 
-			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, createddate=%f, read_flag=%d, "
-													 "marked_flag=%d, deleted_flag=%d, title='%@', text='%@' where folder_id=%d and message_id='%@'",
+			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
+													 "title='%@', text='%@' where folder_id=%d and message_id='%@'",
 													 parentId,
 													 preparedUserName,
 													 preparedArticleLink,
 													 interval,
-													 createdInterval,
-													 read_flag,
-													 marked_flag,
-													 deleted_flag,
 													 preparedArticleTitle,
 													 preparedArticleText,
 													 folderID,
