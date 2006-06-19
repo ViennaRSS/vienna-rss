@@ -21,6 +21,7 @@ Thanks!
 - Adjust refresh check timer after waking from sleep to account for time asleep. Wait at least 15 seconds
   before refreshing after wake to avoid connection errors.
 - When updating existing articles during refresh, don't change article flags.
+- Fix bug: existing articles updated even when body hasn't changed.
 
 2.1.0.2101
 ----------
