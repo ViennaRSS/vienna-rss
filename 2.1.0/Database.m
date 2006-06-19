@@ -1339,26 +1339,43 @@ static Database * _sharedDatabase = nil;
 			if (!read_flag)
 				adjustment = 1;
 		}
-		else if (![[existingArticle body] isEqualToString:articleBody])
+		else
 		{
-			SQLResult * results;
-
-			results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
-													 "title='%@', text='%@' where folder_id=%d and message_id='%@'",
-													 parentId,
-													 preparedUserName,
-													 preparedArticleLink,
-													 interval,
-													 preparedArticleTitle,
-													 preparedArticleText,
-													 folderID,
-													 preparedArticleGuid];
-			if (!results)
-				return NO;
-
-			// This was an updated article
-			[article setStatus:MA_MsgStatus_Updated];
-			[results release];
+			NSString * existingBody = [existingArticle body];
+			// If the folder is not displayed, then the article text has not been loaded yet.
+			if (existingBody == nil)
+			{
+				SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
+				if (results && [results rowCount])
+				{
+					existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
+					[results release];
+				}
+				else
+					existingBody = @"";
+			}
+			
+			if (![existingBody isEqualToString:articleBody])
+			{
+				SQLResult * results;
+				
+				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
+					"title='%@', text='%@' where folder_id=%d and message_id='%@'",
+					parentId,
+					preparedUserName,
+					preparedArticleLink,
+					interval,
+					preparedArticleTitle,
+					preparedArticleText,
+					folderID,
+					preparedArticleGuid];
+				if (!results)
+					return NO;
+				
+				// This was an updated article
+				[article setStatus:MA_MsgStatus_Updated];
+				[results release];
+			}
 		}
 
 		// Fix unread count on parent folders
