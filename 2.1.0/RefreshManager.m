@@ -249,12 +249,13 @@ typedef enum {
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
+	if (([folder flags] & MA_FFlag_CheckForImage))
+		[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
 	if ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage])
 	{
-		if (([folder flags] & MA_FFlag_CheckForImage))
-			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		return;
 	}
 	
@@ -861,8 +862,6 @@ typedef enum {
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), favIconPath];
 			[aItem appendDetail:logText];
 		}
-		if (([folder flags] & MA_FFlag_CheckForImage))
-			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		[iconImage release];
 	}
 	[self removeConnection:connector];
