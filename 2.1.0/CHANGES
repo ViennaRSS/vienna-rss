@@ -22,6 +22,7 @@ Thanks!
   before refreshing after wake to avoid connection errors.
 - When updating existing articles during refresh, don't change article flags.
 - Fix bug: existing articles updated even when body hasn't changed.
+- Handle relative URLs in article pane.
 
 2.1.0.2101
 ----------

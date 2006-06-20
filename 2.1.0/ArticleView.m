@@ -25,9 +25,7 @@
 #import "HelperFunctions.h"
 #import "CalendarExtensions.h"
 #import "StringExtensions.h"
-#import "WebKit/WebView.h"
-#import "WebKit/WebFrame.h"
-#import "WebKit/WebPolicyDelegate.h"
+#import "WebKit/WebKit.h"
 #import "BrowserView.h"
 
 @interface ArticleView (Private)
@@ -261,10 +259,21 @@ static NSMutableDictionary * stylePathMappings = nil;
 		
 /* decidePolicyForNavigationAction
  * Called by the web view to get our policy on handling navigation actions.
+ * Relative URLs should open in the same view.
  * When opening clicked links in the background, we want the first responder to return to the article list.
  */
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
+	if ([[request URL] fragment] != nil)
+	{
+		NSURL * feedURL = [[[[self mainFrame] dataSource] initialRequest] URL];
+		if ((feedURL != nil) && [[feedURL scheme] isEqualToString:[[request URL] scheme]] && [[feedURL host] isEqualToString:[[request URL] host]] && [[feedURL path] isEqualToString:[[request URL] path]])
+		{
+			[listener use];
+			return;
+		}
+	}
+	
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground]))
 		[[NSApp mainWindow] makeFirstResponder:[[[[NSApp delegate] browserView] primaryTabView] mainView]];
