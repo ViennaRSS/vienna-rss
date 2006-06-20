@@ -23,6 +23,7 @@ Thanks!
 - When updating existing articles during refresh, don't change article flags.
 - Fix bug: existing articles updated even when body hasn't changed.
 - Handle relative URLs in article pane.
+- Automatic check for folder image only occurs once.
 
 2.1.0.2101
 ----------
