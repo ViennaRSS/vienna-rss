@@ -20,6 +20,7 @@
 
 #import "NewGroupFolder.h"
 #import "StringExtensions.h"
+#import "AppController.h"
 
 // Private functions
 @interface NewGroupFolder (Private)
@@ -56,12 +57,15 @@
 	// Create the new folder in the database
 	Database * db = [Database sharedDatabase];
 	[db beginTransaction];
-	[db addFolder:parentId afterChild:-1 folderName:folderNameString type:MA_Group_Folder canAppendIndex:NO];
+	int newFolderId = [db addFolder:parentId afterChild:-1 folderName:folderNameString type:MA_Group_Folder canAppendIndex:NO];
 	[db commitTransaction];
 
 	// Close the window
 	[NSApp endSheet:newGroupFolderWindow];
 	[newGroupFolderWindow orderOut:self];
+	
+	if (newFolderId != -1)
+		[(AppController *)[NSApp delegate] selectFolder:newFolderId];
 }
 
 /* doCancel

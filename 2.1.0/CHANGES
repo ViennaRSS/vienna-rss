@@ -24,7 +24,8 @@ Thanks!
 - Fix bug: existing articles updated even when body hasn't changed.
 - Handle relative URLs in article pane.
 - Automatic check for folder image only occurs once.
-- Fix bug: next sibling not set for new folder or for folder moved to first child of root node.
+- Fix bugs: next sibling not set for new folder or for folder moved to first child of root node.
+- Select new group folder after creating.
 
 2.1.0.2101
 ----------
