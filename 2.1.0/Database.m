@@ -39,7 +39,7 @@
 	-(NSArray *)arrayOfSubFolders:(Folder *)folder;
 	-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(int)scopeFlags;
 	-(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
-	-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId afterChild:(int)predecessorId withType:(int)type;
+	-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId withType:(int)type;
 	-(int)executeSQL:(NSString *)sqlStatement;
 	-(int)executeSQLWithFormat:(NSString *)sqlStatement, ...;
 @end
@@ -408,7 +408,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria
 {
-	if ([self createFolderOnDatabase:folderName underParent:MA_Root_Folder afterChild:0 withType:MA_Smart_Folder] >= 0)
+	if ([self createFolderOnDatabase:folderName underParent:MA_Root_Folder withType:MA_Smart_Folder] >= 0)
 	{
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
 		[criteriaTree addCriteria:criteria];
@@ -759,26 +759,26 @@ static Database * _sharedDatabase = nil;
 	}
 	
 	// Here we create the folder anew.
-	int newItemId = [self createFolderOnDatabase:name underParent:parentId afterChild:predecessorId withType:type];
+	int newItemId = [self createFolderOnDatabase:name underParent:parentId withType:type];
 	if (newItemId != -1)
 	{
 		// Add this new folder to our internal cache. If this is an RSS
 		// folder, mark it so that somewhere down the line we'll request the
 		// image for the folder.
 		folder = [[[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type] autorelease];
-		if (!autoSort)
-		{
-			[folder setNextSiblingId:nextSibling];
-			if (predecessorId > 0)
-				[self setNextSibling:newItemId forFolder:predecessorId];
-			else
-			{
-				[self setFirstChild:newItemId forFolder:parentId];
-			}
-		}
 		if (type == MA_RSS_Folder)
 			[folder setFlag:MA_FFlag_CheckForImage];
 		[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
+		
+		if (!autoSort)
+		{
+			if (nextSibling > 0)
+				[self setNextSibling:nextSibling forFolder:newItemId];
+			if (predecessorId > 0)
+				[self setNextSibling:newItemId forFolder:predecessorId];
+			else
+				[self setFirstChild:newItemId forFolder:parentId];
+		}
 
 		// Send a notification when new folders are added
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderAdded" object:folder];
@@ -791,7 +791,7 @@ static Database * _sharedDatabase = nil;
  * the folder without any real sanity checks which are assumed to have been done by the caller.
  * Returns the ID of the newly created folder or -1 if we failed.
  */
--(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId afterChild:(int)predecessorId withType:(int)type
+-(int)createFolderOnDatabase:(NSString *)name underParent:(int)parentId withType:(int)type
 {
 	NSString * preparedName = [SQLDatabase prepareStringForQuery:name];
 	int newItemId = -1;

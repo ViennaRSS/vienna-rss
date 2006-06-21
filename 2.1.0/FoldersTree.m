@@ -1172,7 +1172,8 @@
 			}
 			else
 			{
-				if (![db setNextSibling:[[newParent folder] firstChildId] forFolder:folderId])
+				int oldFirstChildId = (newParent == rootNode) ? [db firstFolderId] : [[newParent folder] firstChildId];
+				if (![db setNextSibling:oldFirstChildId forFolder:folderId])
 					continue;
 				[db setFirstChild:folderId forFolder:newParentId];
 			}
