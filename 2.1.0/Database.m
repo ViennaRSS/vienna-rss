@@ -1333,7 +1333,9 @@ static Database * _sharedDatabase = nil;
 				return NO;
 			[results release];
 
+			// Add the article to the folder
 			[article setStatus:MA_MsgStatus_New];
+			[folder addArticleToCache:article];
 			
 			// Update folder unread count
 			if (!read_flag)
