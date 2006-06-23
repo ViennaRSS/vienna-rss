@@ -163,7 +163,7 @@
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	unsigned int selectedRow = [activityTable selectedRow];
+	int selectedRow = [activityTable selectedRow];
 	if (selectedRow >= 0 && selectedRow < [allItems count])
 	{
 		ActivityItem * item = [allItems objectAtIndex:selectedRow];
