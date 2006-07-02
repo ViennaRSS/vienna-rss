@@ -6,6 +6,9 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.1.0.2103
+----------
+
 2.1.0.2102
 ----------
 - Fixed bug: folder attributes (e.g., unread count) not always written to database.
@@ -29,7 +32,7 @@ Thanks!
 
 2.1.0.2101
 ----------
-Restored Mac OS 10.3.9 support.
+- Restored Mac OS 10.3.9 support.
 
 2.1.0.2100
 ----------

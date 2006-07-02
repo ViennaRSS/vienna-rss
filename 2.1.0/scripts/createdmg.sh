@@ -1,6 +1,6 @@
 #!/bin/bash
 
-volsize=7.0m;              # Initial size of DMG volume
+volsize=13.0m;              # Initial size of DMG volume
 
 # Check command line usage
 if [ "$1" == "" ]; then
