@@ -1236,7 +1236,7 @@
 	if ((childIndex == NSOutlineViewDropOnItemIndex) || (childIndex < 0))
 		childIndex = 0;
 
-	// Check the type 
+	// Check the type
 	if (type == NSStringPboardType)
 	{
 		// This is possibly a URL that we'll handle as a potential feed subscription. It's
@@ -1279,6 +1279,7 @@
 		// This is an RSS drag using the protocol defined by Ranchero for NetNewsWire. See
 		// http://ranchero.com/netnewswire/rssclipboard.php for more details.
 		//
+		int folderToSelect = -1;
 		for (index = 0; index < count; ++index)
 		{
 			[db beginTransaction];
@@ -1296,6 +1297,8 @@
 					[db setFolderDescription:folderId newDescription:feedDescription];
 				if (feedHomePage != nil)
 					[db setFolderHomePage:folderId newHomePage:feedHomePage];
+				if (folderId > 0)
+					folderToSelect = folderId;
 				++childIndex;
 			}
 			[db commitTransaction];
@@ -1304,6 +1307,11 @@
 		// If parent was a group, expand it now
 		if (parentId != MA_Root_Folder)
 			[outlineView expandItem:[rootNode nodeFromID:parentId]];
+		
+		// Select a new folder
+		if (folderToSelect > 0)
+			[self selectFolder:folderToSelect];
+		
 		return YES;
 	}
 	if (type == @"WebURLsWithTitlesPboardType")
@@ -1315,6 +1323,7 @@
 		int count = [arrayOfURLs count];
 		int index;
 		
+		int folderToSelect = -1;
 		for (index = 0; index < count; ++index)
 		{
 			[db beginTransaction];
@@ -1327,7 +1336,9 @@
 			if ([db folderFromFeedURL:feedURL] == nil)
 			{
 				int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : 0;
-				[db addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
+				int newFolderId = [db addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
+				if (newFolderId > 0)
+					folderToSelect = newFolderId;
 				++childIndex;
 			}
 			[db commitTransaction];
@@ -1336,6 +1347,11 @@
 		// If parent was a group, expand it now
 		if (parentId != MA_Root_Folder)
 			[outlineView expandItem:[rootNode nodeFromID:parentId]];
+		
+		// Select a new folder
+		if (folderToSelect > 0)
+			[self selectFolder:folderToSelect];
+		
 		return YES;
 	}
 	return NO; 
