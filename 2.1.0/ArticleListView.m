@@ -884,11 +884,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)displayNextUnread
 {
 	// Mark the current article read
+	// Save the value of currentSelectRow, because sort order may change after marking
+	int currentRow = currentSelectedRow;
 	[self markCurrentRead:nil];
 
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
-	if (![self viewNextUnreadInCurrentFolder:currentSelectedRow])
+	if (![self viewNextUnreadInCurrentFolder:currentRow])
 	{
 		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
 		if (nextFolderWithUnread != -1)
@@ -913,20 +915,21 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow
 {
+	if (currentRow < 0)
+		currentRow = 0;
+	
 	NSArray * allArticles = [articleController allArticles];
 	int totalRows = [allArticles count];
-	if (currentRow < totalRows - 1)
+	Article * theArticle;
+	while (currentRow < totalRows)
 	{
-		Article * theArticle;
-		
-		do {
-			theArticle = [allArticles objectAtIndex:++currentRow];
-			if (![theArticle isRead])
-			{
-				[self makeRowSelectedAndVisible:currentRow];
-				return YES;
-			}
-		} while (currentRow < totalRows - 1);
+		theArticle = [allArticles objectAtIndex:currentRow];
+		if (![theArticle isRead])
+		{
+			[self makeRowSelectedAndVisible:currentRow];
+			return YES;
+		}
+		++currentRow;
 	}
 	return NO;
 }
