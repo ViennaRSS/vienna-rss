@@ -9,6 +9,7 @@ Thanks!
 2.1.0.2103
 ----------
 - Fix next unread behavior in sorted article list.
+- Select a new subscription after dragging from an external source.
 
 2.1.0.2102
 ----------
