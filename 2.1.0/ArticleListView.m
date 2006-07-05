@@ -883,8 +883,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)displayNextUnread
 {
-	// Mark the current article read
-	// Save the value of currentSelectRow, because sort order may change after marking
+	// Mark the current article read.
+	// Save the value of currentSelectedRow, because sort order may change after marking.
 	int currentRow = currentSelectedRow;
 	[self markCurrentRead:nil];
 
