@@ -234,10 +234,7 @@
 -(NSString *)documentHTMLSource
 {
 	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabView];
-	WebView * webPane = nil;
-	
-	if ([theView isKindOfClass:[BrowserPane class]])
-		webPane = (WebView *)[(BrowserPane *)theView mainView];
+	WebView * webPane = [theView webView];
 	
 	if (webPane != nil)
 	{
