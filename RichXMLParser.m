@@ -804,10 +804,15 @@
 			BOOL hasGUID = NO;
 			BOOL hasLink = NO;
 
-			// Look for and stack the xml:base attribute
+			// Look for the xml:base attribute, and use absolute url or stack relative url
 			NSString * entryBase = [subTree valueOfAttribute:@"xml:base"];
-			if (entryBase != nil && linkBase != nil)
-				entryBase = [linkBase stringByAppendingURLComponent:entryBase];
+			if (linkBase != nil)
+			{
+				if (entryBase == nil)
+					entryBase = linkBase;
+				else if ([[NSURL URLWithString:entryBase] scheme] == nil)
+					entryBase = [linkBase stringByAppendingURLComponent:entryBase];
+			}
 
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
 			{
@@ -855,7 +860,7 @@
 					if ([subItemTree valueOfAttribute:@"rel"] == nil || [[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 					{
 						NSString * theLink = [[subItemTree valueOfAttribute:@"href"] stringByUnescapingExtendedCharacters];
-						if (entryBase != nil)
+						if ((entryBase != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
 							[newItem setLink:[entryBase stringByAppendingURLComponent:theLink]];
 						else
 							[newItem setLink:theLink];
