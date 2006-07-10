@@ -10,6 +10,8 @@ Thanks!
 ----------
 - Fix next unread behavior in sorted article list.
 - Select a new subscription after dragging from an external source.
+- Add Applescript support for retrieving html source of article pane.
+- Fix bug: only use xml:base for relative urls.
 
 2.1.0.2102
 ----------
