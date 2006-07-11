@@ -175,6 +175,15 @@
 	[unifiedListHeader setStringValue:captionString];
 }
 
+/* refreshCurrentFolder
+ * Reload the current folder after a refresh.
+ */
+-(void)refreshCurrentFolder
+{
+	if ([[Preferences standardPreferences] refreshFrequency] == 0)
+		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
+}
+
 /* refreshFolder
  * Refreshes the current folder by applying the current sort or thread
  * logic and redrawing the article list. The selected article is preserved

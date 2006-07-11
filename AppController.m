@@ -155,7 +155,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	}
 	
 	// Run the auto-expire now
-	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:NO];
+	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
 	
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
@@ -1668,16 +1668,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
-		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration] sendNotification:YES];
+		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
 		
 		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
 		[self stopProgressIndicator];
 		
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
-		// Refresh the current folder unless preference is set to mark read automatically.
-		if (!([prefs markReadInterval] > 0))
-			[articleController refreshCurrentFolder];
+		// Refresh the current folder.
+		[articleController refreshCurrentFolder];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];

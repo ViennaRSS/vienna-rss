@@ -74,7 +74,7 @@
 -(BOOL)setFolderFeedURL:(int)folderId newFeedURL:(NSString *)newFeedURL;
 -(BOOL)setFolderUsername:(int)folderId newUsername:(NSString *)name;
 -(void)purgeDeletedArticles;
--(void)purgeArticlesOlderThanDays:(int)daysToKeep sendNotification:(BOOL)notifyFlag;
+-(void)purgeArticlesOlderThanDays:(int)daysToKeep;
 -(BOOL)markFolderRead:(int)folderId;
 -(void)clearFolderFlag:(int)folderId flagToClear:(unsigned int)flag;
 -(void)setFolderFlag:(int)folderId flagToSet:(unsigned int)flag;

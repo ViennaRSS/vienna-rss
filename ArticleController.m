@@ -132,7 +132,7 @@
  */
 -(void)refreshCurrentFolder
 {
-	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	[mainArticleView refreshCurrentFolder];
 }
 
 /* currentFolderId
