@@ -28,4 +28,5 @@
 	-(Article *)selectedArticle;
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
 	-(void)displayNextUnread;
+	-(void)refreshCurrentFolder;
 @end

@@ -897,7 +897,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		{
 			if (nextFolderWithUnread == [articleController currentFolderId])
 			{
-				[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 				[self viewNextUnreadInCurrentFolder:-1];
 			}
 			else
@@ -985,6 +984,24 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	if (currentSelectedRow < 0 && [[articleController allArticles] count] > 0)
 		[self makeRowSelectedAndVisible:0];
+}
+
+/* refreshCurrentFolder
+ * Reload the current folder after a refresh.
+ */
+-(void)refreshCurrentFolder
+{
+	// Preserve the article that the user might currently be reading.
+	Preferences * prefs = [Preferences standardPreferences];
+	if (([prefs refreshFrequency] > 0) &&
+		([prefs markReadInterval] > 0) &&
+		(currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]))
+	{
+		Article * currentArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
+		[[Database sharedDatabase] markArticleRead:[currentArticle folderId] guid:[currentArticle guid] isRead:NO];
+	}
+	
+	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
 /* refreshFolder
