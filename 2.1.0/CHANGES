@@ -12,6 +12,10 @@ Thanks!
 - Select a new subscription after dragging from an external source.
 - Add Applescript support for retrieving html source of article pane.
 - Fix bug: only use xml:base for relative urls.
+- Always reload current folder after refresh in report layout, preserving currently selected article if necessary.
+- Mark article unread when the article text has changed.
+- Add "Get Info" to folder contextual menu.
+- Return key in folders list opens home page.
 
 2.1.0.2102
 ----------
