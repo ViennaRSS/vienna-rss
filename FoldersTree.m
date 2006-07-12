@@ -66,6 +66,7 @@
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
 		rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
+		editableItem = nil;
 		blockSelectionHandler = NO;
 		selectionTimer = nil;
 		folderErrorImage = nil;
@@ -112,6 +113,7 @@
 	[outlineView setBackgroundColor:[NSColor colorWithDeviceRed:(228.0f/255.0f) green:(237.0f/255.0f) blue:(246.0f/255.0f) alpha:1.0f]];
 		
 	// Allow double-click a node to edit the node
+	[outlineView setAction:@selector(handleSingleClick:)];
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
 
@@ -625,12 +627,32 @@
 	}
 }
 
+/* handleSingleClick
+ * On the first single click, prepare the node to have its name edited on the next single click.
+ */
+-(void)handleSingleClick:(id)sender
+{
+	int clickedRow = [outlineView clickedRow];
+	if (clickedRow < 0)
+		return;
+	
+	id clickedItem = [outlineView itemAtRow:clickedRow];
+	if (editableItem == clickedItem)
+	{
+		[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:clickedItem repeats:NO];
+	}
+	else
+		editableItem = clickedItem;
+}
+
 /* handleDoubleClick
  * If the user double-clicks a node, send an edit notification.
  */
 -(void)handleDoubleClick:(id)sender
 {
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	// Prevent the first click of the double click from triggering folder name editing.
+	editableItem = nil;
+	
 	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
 
 	if (IsRSSFolder([node folder]))
@@ -639,8 +661,10 @@
 		if (urlString && ![urlString isBlank])
 			[[NSApp delegate] openURLFromString:urlString inPreferredBrowser:YES];
 	}
-	else
-		[nc postNotificationName:@"MA_Notify_EditFolder" object:node];
+	else if (IsSmartFolder([node folder]))
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
+	}
 }
 
 /* handleFolderDeleted
@@ -954,12 +978,25 @@
 	}
 }
 
+/* renameFolderByTimer
+ * If no clicks have occurred during the timer interval, rename the folder.
+ */
+-(void)renameFolderByTimer:(id)sender
+{
+	id node = [sender userInfo];
+	if (node == editableItem)
+	{
+		[self renameFolder:[(TreeNode *)node nodeId]];
+	}
+	editableItem = nil;
+}
+
 /* shouldEditTableColumn [delegate]
- * All folder names are editable.
+ * The editing of folder names will be handled by single clicks.
  */
 -(BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-	return YES;
+	return NO;
 }
 
 /* setObjectValue [datasource]

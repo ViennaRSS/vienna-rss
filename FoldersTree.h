@@ -38,6 +38,7 @@
 	IBOutlet TexturedHeader * folderHeader;
 
 	TreeNode * rootNode;
+	TreeNode * editableItem;
 	NSTimer * selectionTimer;
 	NSFont * cellFont;
 	NSFont * boldCellFont;
