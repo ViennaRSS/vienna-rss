@@ -1316,7 +1316,7 @@ static Database * _sharedDatabase = nil;
 
 			results = [sqlDatabase performQueryWithFormat:
 					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text) "
-					"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@')",
+					@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@')",
 					preparedArticleGuid,
 					parentId,
 					folderID,
@@ -1362,7 +1362,7 @@ static Database * _sharedDatabase = nil;
 				SQLResult * results;
 				
 				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
-					"title='%@', text='%@' where folder_id=%d and message_id='%@'",
+					@"read_flag=0, title='%@', text='%@' where folder_id=%d and message_id='%@'",
 					parentId,
 					preparedUserName,
 					preparedArticleLink,
@@ -1373,10 +1373,18 @@ static Database * _sharedDatabase = nil;
 					preparedArticleGuid];
 				if (!results)
 					return NO;
-				
-				// This was an updated article
-				[article setStatus:MA_MsgStatus_Updated];
 				[results release];
+				[existingArticle setBody:articleBody];
+				
+				// Update folder unread count if necessary
+				if ([existingArticle isRead])
+				{
+					adjustment = 1;
+					[article setStatus:MA_MsgStatus_New];
+					[existingArticle markRead:NO];
+				}
+				else
+					[article setStatus:MA_MsgStatus_Updated];
 			}
 		}
 
