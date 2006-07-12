@@ -1868,11 +1868,23 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			
 		case NSEnterCharacter:
 		case NSCarriageReturnCharacter:
-			if (flags & NSAlternateKeyMask)
-				[self viewArticlePageInAlternateBrowser:self];
-			else
-				[self viewArticlePage:self];
-			return YES;
+			if ([mainWindow firstResponder] == [foldersTree mainView])
+			{
+				if (flags & NSAlternateKeyMask)
+					[self viewSourceHomePageInAlternateBrowser:self];
+				else
+					[self viewSourceHomePage:self];
+				return YES;
+			}
+			else if ([mainWindow firstResponder] == [mainArticleView mainView])
+			{
+				if (flags & NSAlternateKeyMask)
+					[self viewArticlePageInAlternateBrowser:self];
+				else
+					[self viewArticlePage:self];
+				return YES;
+			}
+			return NO;
 
 		case ' ': //SPACE
 		{
