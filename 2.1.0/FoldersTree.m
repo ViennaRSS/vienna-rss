@@ -154,6 +154,7 @@
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[folderMenu addItem:alternateItem];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(getInfo:))];
 	
 	// Want tooltips
 	[outlineView setEnableTooltips:YES];
