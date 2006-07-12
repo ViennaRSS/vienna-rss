@@ -92,11 +92,11 @@
 	// Set range of auto-expire values
 	[expireDuration removeAllItems];
 	[expireDuration insertItemWithTag:NSLocalizedString(@"Never", nil) tag:0 atIndex:0];
-	[expireDuration insertItemWithTag:NSLocalizedString(@"Today", nil) tag:1 atIndex:1];
-	[expireDuration insertItemWithTag:NSLocalizedString(@"Yesterday", nil) tag:2 atIndex:2];
-	[expireDuration insertItemWithTag:NSLocalizedString(@"Last Week", nil) tag:7 atIndex:3];
-	[expireDuration insertItemWithTag:NSLocalizedString(@"2 Weeks Ago", nil) tag:14 atIndex:4];
-	[expireDuration insertItemWithTag:NSLocalizedString(@"A month", nil) tag:1000 atIndex:5];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"After a Day", nil) tag:1 atIndex:1];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Days", nil) tag:2 atIndex:2];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"After a Week", nil) tag:7 atIndex:3];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"After 2 Weeks", nil) tag:14 atIndex:4];
+	[expireDuration insertItemWithTag:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
 	
 	// Set auto-expire duration
 	[expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:[prefs autoExpireDuration]]];
