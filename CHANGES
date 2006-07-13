@@ -18,6 +18,7 @@ Thanks!
 - Return key in folders list opens home page.
 - Changed wording of expired articles preference.
 - Single-click folder to rename.
+- Limit summary text to 150 characters.
 
 2.1.0.2102
 ----------
