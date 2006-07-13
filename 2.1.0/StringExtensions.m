@@ -146,13 +146,12 @@ static NSMutableDictionary * entityMap = nil;
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
 	int maxChrs = [theString length];
+	int cutOff = 150;
 	int indexOfChr = 0;
 	int tagLength = 0;
 	int tagStartIndex = 0;
-	int lengthToLastWord = 0;
 	BOOL isInQuote = NO;
 	BOOL isInTag = NO;
-	BOOL hasWord = NO;
 
 	// Rudimentary HTML tag parsing. This could be done by initWithHTML on an attributed string
 	// and extracting the raw string but initWithHTML cannot be invoked within an NSURLConnection
@@ -160,21 +159,20 @@ static NSMutableDictionary * entityMap = nil;
 	while (indexOfChr < maxChrs)
 	{
 		unichar ch = [aString characterAtIndex:indexOfChr];
-		if (ch == '"')
-			isInQuote = !isInQuote;
 		if (isInTag)
 			++tagLength;
-		if (ch == ' ' && !isInTag)
-			lengthToLastWord = indexOfChr;
-		if (ch == '<' && !isInQuote)
+		else if (indexOfChr >= cutOff)
+			break;
+		
+		if (ch == '"')
+			isInQuote = !isInQuote;
+		else if (ch == '<' && !isInQuote)
 		{
 			isInTag = YES;
 			tagStartIndex = indexOfChr;
 			tagLength = 0;
 		}
-		if (!isInTag && !isspace(ch))
-			hasWord = YES;
-		if (ch == '>' && isInTag)
+		else if (ch == '>' && isInTag)
 		{
 			if (++tagLength > 2)
 			{
@@ -208,6 +206,10 @@ static NSMutableDictionary * entityMap = nil;
 		}
 		++indexOfChr;
 	}
+	
+	if (maxChrs > cutOff)
+		[aString deleteCharactersInRange:NSMakeRange(cutOff, maxChrs - cutOff)];
+	
 	return [aString stringByUnescapingExtendedCharacters];
 }
 
