@@ -144,9 +144,7 @@
 	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
-	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete", nil) action:@selector(delete:) keyEquivalent:@""];
-	[folderMenu addItem:item];
-	[item release];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
