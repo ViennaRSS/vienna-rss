@@ -310,9 +310,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markRead:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markFlagged:))];
-	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Delete Article", nil) action:@selector(delete:) keyEquivalent:@""];
-	[articleListMenu addItem:item];
-	[item release];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(deleteMessage:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(restoreMessage:))];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
@@ -756,8 +754,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	[articleController refilterArrayOfArticles];
 	[self refreshFolder:MA_Refresh_RedrawList];
-	if (([self selectedArticle] == nil) && ([[NSApp mainWindow] firstResponder] == articleList))
-		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 }
 
 /* handleFolderNameChange
@@ -1044,6 +1040,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[self refreshArticlePane];
 		}
 	}
+	else
+		currentSelectedRow = -1;
+	if ((currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
+		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
 	[guid release];
