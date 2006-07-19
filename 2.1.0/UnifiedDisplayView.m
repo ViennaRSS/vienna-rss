@@ -31,11 +31,6 @@
 #import "WebKit/WebDataSource.h"
 #import "WebKit/WebBackForwardList.h"
 
-@interface UnifiedDisplayView (Private)
-	-(void)refreshArticlePane;
-	-(void)setArticleListHeader;
-@end
-
 @implementation UnifiedDisplayView
 
 /* awakeFromNib
@@ -43,12 +38,6 @@
  */
 -(void)awakeFromNib
 {
-	// Register to be notified when folders are added or removed
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
-
 	// Make us the frame load and UI delegate for the web view
 	[unifiedText setUIDelegate:self];
 	[unifiedText setFrameLoadDelegate:self];
@@ -101,20 +90,6 @@
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
 	[self refreshArticlePane];
-}
-
-/* handleFolderNameChange
- * Some folder metadata changed. Update the article list header and the
- * current article with a possible name change.
- */
--(void)handleFolderNameChange:(NSNotification *)nc
-{
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == [articleController currentFolderId])
-	{
-		[self setArticleListHeader];
-		[self refreshArticlePane];
-	}
 }
 
 /* sortByIdentifier
@@ -193,20 +168,12 @@
 {
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
+	else if (refreshFlag == MA_Refresh_ReapplyFilter)
+		[articleController refilterArrayOfArticles];
 	if (refreshFlag != MA_Refresh_RedrawList)
 		[articleController sortArticles];
 	[self setArticleListHeader];
 	[self refreshArticlePane];
-}
-
-/* handleFilterChange
- * Update the list of articles when the user changes the filter.
- */
--(void)handleFilterChange:(NSNotification *)nc
-{
-	[articleController refilterArrayOfArticles];
-	[self refreshFolder:MA_Refresh_RedrawList];
-	// Check first responder here?
 }
 
 /* displayNextUnread
@@ -327,14 +294,5 @@
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags
 {
 	return [controller handleKeyDown:keyChar withFlags:flags];
-}
-
-/* dealloc
- * Clean up behind ourself.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 @end

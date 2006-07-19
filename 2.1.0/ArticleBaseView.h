@@ -29,4 +29,7 @@
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
 	-(void)displayNextUnread;
 	-(void)refreshCurrentFolder;
+	-(void)handleRefreshArticle:(NSNotification *)nc;
+	-(void)setArticleListHeader;
+	-(void)refreshArticlePane;
 @end
