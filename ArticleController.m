@@ -106,6 +106,13 @@
 		
 		// Create a backtrack array
 		backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
+		
+		// Register for notifications
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
+		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
     }
     return self;
 }
@@ -759,11 +766,56 @@
 	return ![backtrackArray isAtStartOfQueue];
 }
 
+/* handleFilterChange
+* Update the list of articles when the user changes the filter.
+*/
+-(void)handleFilterChange:(NSNotification *)nc
+{
+	[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+}
+
+/* handleFolderNameChange
+* Some folder metadata changed. Update the article list header and the
+* current article with a possible name change.
+*/
+-(void)handleFolderNameChange:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	if (folderId == currentFolderId)
+	{
+		[mainArticleView setArticleListHeader];
+		[mainArticleView refreshArticlePane];
+	}
+}
+
+/* handleRefreshArticle
+* Respond to the notification to refresh the current article pane.
+*/
+-(void)handleRefreshArticle:(NSNotification *)nc
+{
+	[mainArticleView handleRefreshArticle:nc];
+}
+
+/* handleFolderUpdate
+* Called if a folder content has changed.
+*/
+-(void)handleFolderUpdate:(NSNotification *)nc
+{
+	int folderId = [(NSNumber *)[nc object] intValue];
+	if (folderId != currentFolderId)
+		return;
+	
+	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
+	if (IsSmartFolder(folder) || IsTrashFolder(folder))
+		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+}
+
 /* dealloc
  * Clean up behind us.
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mainArticleView release];
 	[backtrackArray release];
 	[sortColumnIdentifier release];

@@ -39,16 +39,12 @@
 
 // Private functions
 @interface ArticleListView (Private)
-	-(void)setArticleListHeader;
 	-(void)initTableView;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 	-(void)setTableViewFont;
 	-(void)showSortDirection;
 	-(void)selectArticleAfterReload;
-	-(void)handleFolderNameChange:(NSNotification *)nc;
-	-(void)handleFolderUpdate:(NSNotification *)nc;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
-	-(void)handleRefreshArticle:(NSNotification *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)selectFirstUnreadInFolder;
 	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
@@ -57,7 +53,6 @@
 	-(void)refreshImmediatelyArticleAtCurrentRow;
 	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
 	-(void)makeRowSelectedAndVisible:(int)rowIndex;
-	-(void)refreshArticlePane;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(int)newLayout;
 	-(void)loadSplitSettingsForLayout;
@@ -93,14 +88,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)awakeFromNib
 {
-	// Register to be notified when folders are added or removed
+	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
@@ -747,50 +738,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleText printDocument:sender];
 }
 
-/* handleFilterChange
- * Update the list of articles when the user changes the filter.
- */
--(void)handleFilterChange:(NSNotification *)nc
-{
-	[articleController refilterArrayOfArticles];
-	[self refreshFolder:MA_Refresh_RedrawList];
-}
-
-/* handleFolderNameChange
- * Some folder metadata changed. Update the article list header and the
- * current article with a possible name change.
- */
--(void)handleFolderNameChange:(NSNotification *)nc
-{
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == [articleController currentFolderId])
-	{
-		[self setArticleListHeader];
-		[self refreshArticlePane];
-	}
-}
-
-/* handleFolderUpdate
- * Called if a folder content has changed.
- */
--(void)handleFolderUpdate:(NSNotification *)nc
-{
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId != [articleController currentFolderId])
-		return;
-	
-	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
-	if (IsSmartFolder(folder) || IsTrashFolder(folder))
-		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-}
-
 /* handleArticleListFontChange
  * Called when the user changes the article list font and/or size in the Preferences
  */
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
-	[articleList reloadData];
+	if (self == [articleController mainArticleView])
+	{
+		[articleList reloadData];
+	}
 }
 
 /* handleReadingPaneChange
@@ -798,10 +755,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
-	[self saveSplitSettingsForLayout];
-	[self setOrientation:[[Preferences standardPreferences] layout]];
-	[self updateVisibleColumns];
-	[articleList reloadData];
+	if (self == [articleController mainArticleView])
+	{
+		[self saveSplitSettingsForLayout];
+		[self setOrientation:[[Preferences standardPreferences] layout]];
+		[self updateVisibleColumns];
+		[articleList reloadData];
+	}
 }
 
 /* loadSplitSettingsForLayout
@@ -1020,6 +980,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
+	else if (refreshFlag == MA_Refresh_ReapplyFilter)
+		[articleController refilterArrayOfArticles];
 	[self setArticleListHeader];
 	[articleController sortArticles];
 	[self showSortDirection];

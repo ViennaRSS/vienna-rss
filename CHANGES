@@ -20,6 +20,7 @@ Thanks!
 - Single-click folder to rename.
 - Limit summary text to 150 characters.
 - Add Folder submenu to main menu.
+- Fix bug: multiple layouts receiving notifications.
 
 2.1.0.2102
 ----------
