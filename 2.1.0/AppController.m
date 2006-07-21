@@ -1176,7 +1176,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMenu * stylesSubMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
 	
 	// Reinitialise the styles map
-	NSDictionary * stylesMap = [ArticleView stylesMap];
+	NSDictionary * stylesMap = [ArticleView loadStylesMap];
 	
 	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted
 	// by key name.

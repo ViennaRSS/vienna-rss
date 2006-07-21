@@ -76,6 +76,23 @@ static NSMutableDictionary * stylePathMappings = nil;
 	return stylePathMappings;
 }
 
+/* loadStylesMap
+ * Reinitialise the styles map from the styles folder.
+ */
++(NSDictionary *)loadStylesMap
+{
+	if (stylePathMappings == nil)
+		stylePathMappings = [[NSMutableDictionary alloc] init];
+	
+	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
+	loadMapFromPath(path, stylePathMappings, YES, nil);
+	
+	path = [[Preferences standardPreferences] stylesFolder];
+	loadMapFromPath(path, stylePathMappings, YES, nil);
+
+	return stylePathMappings;
+}
+
 /* initForStyle
  * Initialise the template and stylesheet for the specified display style if it can be
  * found. Otherwise the existing template and stylesheet are not changed.
@@ -83,17 +100,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(BOOL)initForStyle:(NSString *)styleName
 {
 	if (stylePathMappings == nil)
-	{
-		if (stylePathMappings == nil)
-			stylePathMappings = [[NSMutableDictionary alloc] init];
-		
-		NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
-		loadMapFromPath(path, stylePathMappings, YES, nil);
-		
-		path = [[Preferences standardPreferences] stylesFolder];
-		loadMapFromPath(path, stylePathMappings, YES, nil);
-	}
-	
+		[ArticleView loadStylesMap];
+
 	NSString * path = [stylePathMappings objectForKey:styleName];
 	if (path != nil)
 	{
