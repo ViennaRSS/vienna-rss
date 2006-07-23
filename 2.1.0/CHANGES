@@ -21,6 +21,7 @@ Thanks!
 - Limit summary text to 150 characters.
 - Add Folder submenu to main menu.
 - Fix bug: multiple layouts receiving notifications.
+- Fix bug: folders tree sort method wasn't recovered properly from database after plist deletion.
 
 2.1.0.2102
 ----------

@@ -309,7 +309,7 @@ static Database * _sharedDatabase = nil;
 	}
 	
 	// Read the folders tree sort method from the database.
-	// The folders view may not be ready yet, so this call avoids sending any notifications.
+	// Make sure that the folders tree is not yet registered to receive notifications at this point.
 	int newFoldersTreeSortMethod = MA_FolderSort_ByName;
 	SQLResult * sortResults = [sqlDatabase performQuery:@"select folder_sort from info"];
 	if (sortResults && [sortResults rowCount])
@@ -317,7 +317,7 @@ static Database * _sharedDatabase = nil;
 		newFoldersTreeSortMethod = [[[sortResults rowAtIndex:0] stringForColumn:@"folder_sort"] intValue];
 	}
 	[sortResults release];
-	[[Preferences standardPreferences] setInteger:newFoldersTreeSortMethod forKey:MAPref_AutoSortFoldersTree];
+	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
 	
 	// Register for notifications of change in folders tree sort method.
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
