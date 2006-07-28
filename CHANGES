@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.1.0.2104
+----------
+
+
 2.1.0.2103
 ----------
 - Fix next unread behavior in sorted article list.
@@ -22,6 +26,7 @@ Thanks!
 - Add Folder submenu to main menu.
 - Fix bug: multiple layouts receiving notifications.
 - Fix bug: folders tree sort method wasn't recovered properly from database after plist deletion.
+- Extend copyright to all contributors.
 
 2.1.0.2102
 ----------
