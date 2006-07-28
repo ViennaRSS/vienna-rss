@@ -21,6 +21,7 @@
 	
 	NSURL *fileURL;
 	NSString *fileVersion;
+	NSString *versionString;
 }
 
 // Initializes with data from a dictionary provided by the RSS class.
@@ -49,5 +50,8 @@
 
 - (NSString *)fileVersion;
 - (void)setFileVersion:(NSString *)aFileVersion;
+
+- (NSString *)versionString;
+- (void)setVersionString:(NSString *)versionString;
 
 @end

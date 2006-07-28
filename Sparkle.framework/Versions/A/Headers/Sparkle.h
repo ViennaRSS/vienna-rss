@@ -15,6 +15,7 @@
 #import "SUAutomaticUpdateAlert.h"
 #import "SUStatusController.h"
 #import "SUUnarchiver.h"
+#import "SUStatusChecker.h"
 
 #import "NSApplication+AppCopies.h"
 #import "NSFileManager+Authentication.h"
