@@ -38,7 +38,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Vienna</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Vienna version 2.1.0.${BUILD_NUMBER}, Copyright 2004-2006 Steve Palmer.</string>
+	<string>Vienna version 2.1.0.${BUILD_NUMBER}, Copyright 2004-2006 Contributors. See Help/Acknowledgements for list of contributors.</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna Help</string>
 	<key>CFBundleHelpBookName</key>
