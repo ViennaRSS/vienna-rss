@@ -1176,9 +1176,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	if (currentSelectedRow != -1 && ![[Database sharedDatabase] readOnly])
+	NSArray * allArticles = [articleController allArticles];
+	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedDatabase] readOnly])
 	{
-		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
+		Article * theArticle = [allArticles objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
 			[articleController markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:YES];
 	}
