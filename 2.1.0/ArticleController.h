@@ -45,6 +45,7 @@
 	NSString * sortColumnIdentifier;
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
+	Article * articleToPreserve;
 }
 
 // Public functions
@@ -75,4 +76,5 @@
 -(void)goBack;
 -(BOOL)canGoForward;
 -(BOOL)canGoBack;
+-(void)setArticleToPreserve:(Article *)article;
 @end

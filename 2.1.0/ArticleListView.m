@@ -951,10 +951,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	if (([prefs refreshFrequency] > 0) &&
 		([prefs markReadInterval] > 0) &&
-		(currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]))
+		(currentSelectedRow >= 0 && currentSelectedRow < (int)[[articleController allArticles] count]))
 	{
 		Article * currentArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
-		[[Database sharedDatabase] markArticleRead:[currentArticle folderId] guid:[currentArticle guid] isRead:NO];
+		if ([currentArticle isRead] && ![currentArticle isDeleted])
+			[articleController setArticleToPreserve:currentArticle];
 	}
 	
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
@@ -990,9 +991,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
 		// the same and the GUID of the article at the selection is the same. If so, don't refresh anything.
-		NSArray * allArticles = [articleController allArticles];
+		allArticles = [articleController allArticles];
 		BOOL isUnchanged = currentSelectedRow >= 0 &&
-						   currentSelectedRow < [allArticles count] &&
+						   currentSelectedRow < (int)[allArticles count] &&
 						   [guid isEqualToString:[[allArticles objectAtIndex:currentSelectedRow] guid]];
 		if (!isUnchanged)
 		{

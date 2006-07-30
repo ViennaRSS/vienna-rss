@@ -48,6 +48,7 @@
 		currentFolderId = -1;
 		currentArrayOfArticles = nil;
 		folderArrayOfArticles = nil;
+		articleToPreserve = nil;
 
 		// Set default values to generate article sort descriptors
 		articleSortSpecifiers = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -302,20 +303,28 @@
  */
 -(NSArray *)applyFilter:(NSArray *)unfilteredArray
 {
-	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	if ([filter comparator] == nil)
-		return [unfilteredArray retain];
-	
 	NSMutableArray * filteredArray = [[NSMutableArray alloc] initWithArray:unfilteredArray];
+	
+	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? [articleToPreserve guid] : @"";
+	
+	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
+	SEL comparator = [filter comparator];
 	int count = [filteredArray count];
 	int index;
 	
 	for (index = count - 1; index >= 0; --index)
 	{
 		Article * article = [filteredArray objectAtIndex:index];
-		if (![ArticleFilter performSelector:[filter comparator] withObject:article])
+		if ([[article guid] isEqualToString:guidOfArticleToPreserve])
+			guidOfArticleToPreserve = @"";
+		else if ((comparator != nil) && ![ArticleFilter performSelector:comparator withObject:article])
 			[filteredArray removeObjectAtIndex:index];
 	}
+	
+	if (![guidOfArticleToPreserve isEqualToString:@""])
+		[filteredArray addObject:articleToPreserve];
+	[self setArticleToPreserve:nil];
+	
 	return filteredArray;
 }
 
@@ -810,6 +819,16 @@
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
+/* setArticleToPreserve
+ * Sets the article to preserve when reloading the array of articles.
+ */
+-(void)setArticleToPreserve:(Article *)article
+{
+	[article retain];
+	[articleToPreserve release];
+	articleToPreserve = article;
+}
+
 /* dealloc
  * Clean up behind us.
  */
@@ -822,6 +841,7 @@
 	[folderArrayOfArticles release];
 	[currentArrayOfArticles release];
 	[articleSortSpecifiers release];
+	[articleToPreserve release];
 	[super dealloc];
 }
 @end
