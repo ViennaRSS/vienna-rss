@@ -322,7 +322,19 @@
 	}
 	
 	if (![guidOfArticleToPreserve isEqualToString:@""])
-		[filteredArray addObject:articleToPreserve];
+	{
+		Article * articleToAdd = nil;
+		Folder * folder = [[Database sharedDatabase] folderFromID:[articleToPreserve folderId]];
+		if (folder != nil)
+		{
+			[folder clearCache];
+			[folder articles];
+			articleToAdd = [folder articleFromGuid:guidOfArticleToPreserve];
+		}
+		if (articleToAdd == nil)
+			articleToAdd = articleToPreserve;
+		[filteredArray addObject:articleToAdd];
+	}
 	[self setArticleToPreserve:nil];
 	
 	return filteredArray;
