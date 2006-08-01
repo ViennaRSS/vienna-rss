@@ -11,6 +11,7 @@ Thanks!
 - Update to Sparkle 1.1.
 - Fix bug: preserved article is marked unread after folder reloaded.
 - Fix bug: browser buttons were always enabled.
+- Turn on manual sorting by default for new databases.
 
 2.1.0.2103
 ----------

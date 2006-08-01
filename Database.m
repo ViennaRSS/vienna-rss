@@ -209,7 +209,29 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %d, 0, 0, 0)",
 			NSLocalizedString(@"Trash", nil),
 			MA_Trash_Folder];
-
+		
+		// Set the initial version
+		databaseVersion = MA_Current_DB_Version;
+		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_Manual];
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
+		
+		// Set the initial folder order
+		[self initFolderArray];
+		int folderId = 0;
+		int previousSibling = 0;
+		NSArray * allFolders = [foldersArray allKeys];
+		unsigned int count = [allFolders count];
+		unsigned int index;
+		for (index = 0u; index < count; ++index)
+		{
+			previousSibling = folderId;
+			folderId = [[allFolders objectAtIndex:index] intValue];
+			if (index == 0u)
+				[self setFirstChild:folderId forFolder:MA_Root_Folder];
+			else
+				[self setNextSibling:folderId forFolder:previousSibling];
+		}
+		
 		// If we have a DemoFeeds.plist in the resources then use it to create some initial demo
 		// RSS feeds.
 		NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
@@ -227,15 +249,10 @@ static Database * _sharedDatabase = nil;
 					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
 					NSString * feedURL = [itemDict valueForKey:@"URL"];
 					if (feedURL != nil && feedName != nil)
-						[self addRSSFolder:feedName underParent:-1 afterChild:-1 subscriptionURL:feedURL];
+						previousSibling = [self addRSSFolder:feedName underParent:MA_Root_Folder afterChild:previousSibling subscriptionURL:feedURL];
 				}
 			}
 		}
-		
-		// Set the initial version
-		// Make sure that the folders are sorted automatically, because there is no saved hierarchy.
-		databaseVersion = MA_Current_DB_Version;
-		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_ByName];
 		
 		[self commitTransaction];
 	}
