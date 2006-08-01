@@ -1358,7 +1358,7 @@ static Database * _sharedDatabase = nil;
 			if (!read_flag)
 				adjustment = 1;
 		}
-		else
+		else if (![existingArticle isDeleted])
 		{
 			NSString * existingBody = [existingArticle body];
 			// If the folder is not displayed, then the article text has not been loaded yet.

@@ -12,6 +12,8 @@ Thanks!
 - Fix bug: preserved article is marked unread after folder reloaded.
 - Fix bug: browser buttons were always enabled.
 - Turn on manual sorting by default for new databases.
+- When checking for new articles, include articles within 24 hours before last update,
+  because feeds sometimes provide inaccurate dates.
 
 2.1.0.2103
 ----------

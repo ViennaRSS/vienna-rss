@@ -641,8 +641,11 @@ typedef enum {
 			// Get the feed's last update from the header if it is present. This will mark the
 			// date of the most recent article in the feed if the individual articles are
 			// missing a date tag.
+			// Check for new articles within 24 hours before the last update, because feeds
+			// sometimes set the wrong time or date.
 			NSDate * lastUpdate = [folder lastUpdate];
 			NSDate * newLastUpdate = [lastUpdate retain];
+			NSDate * compareDate = [lastUpdate addTimeInterval:-86400];
 			
 			// We'll be collecting articles into this array
 			NSMutableArray * articleArray = [NSMutableArray array];
@@ -656,7 +659,7 @@ typedef enum {
 				NSDate * articleDate = [newsItem date];
 				if (articleDate == nil)
 					articleDate = [NSDate date];
-				if ([articleDate compare:lastUpdate] == NSOrderedDescending)
+				if ([articleDate compare:compareDate] == NSOrderedDescending)
 				{
 					Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
 					[article setFolderId:folderId];
