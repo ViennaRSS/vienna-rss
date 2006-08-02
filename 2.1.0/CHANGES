@@ -14,6 +14,7 @@ Thanks!
 - Turn on manual sorting by default for new databases.
 - When checking for new articles, include articles within 24 hours before last update,
   because feeds sometimes provide inaccurate dates.
+- Assign new id to non-duplicate article with same id as existing article.
 
 2.1.0.2103
 ----------
