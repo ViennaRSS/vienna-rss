@@ -1330,7 +1330,7 @@ static Database * _sharedDatabase = nil;
 		Article * existingArticle = [folder articleFromGuid:articleGuid];
 		if (existingArticle != nil)
 		{
-			if ([existingArticle folderId] != folderID || ![[existingArticle title] isEqualToString:articleTitle])
+			if (![[existingArticle title] isEqualToString:articleTitle])
 			{
 				existingArticle = nil;
 				do
