@@ -643,9 +643,7 @@ typedef enum {
 			// missing a date tag.
 			// Check for new articles within 24 hours before the last update, because feeds
 			// sometimes set the wrong time or date.
-			NSDate * lastUpdate = [folder lastUpdate];
-			NSDate * newLastUpdate = [lastUpdate retain];
-			NSDate * compareDate = [lastUpdate addTimeInterval:-86400];
+			NSDate * compareDate = [[folder lastUpdate] addTimeInterval:-86400];
 			
 			// We'll be collecting articles into this array
 			NSMutableArray * articleArray = [NSMutableArray array];
@@ -671,14 +669,6 @@ typedef enum {
 					[article setDate:articleDate];
 					[articleArray addObject:article];
 					[article release];
-
-					// Track most recent article
-					if ([articleDate isGreaterThan:newLastUpdate])
-					{
-						[articleDate retain];
-						[newLastUpdate release];
-						newLastUpdate = articleDate;
-					}
 				}
 			}
 
@@ -716,17 +706,13 @@ typedef enum {
 			if (feedLink!= nil)
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 			
-			// Set the last update date for this folder to be the date of the most
-			// recent article we retrieved.
-			if (newLastUpdate != nil)
-				[db setFolderLastUpdate:folderId lastUpdate:newLastUpdate];
+			// Set the last update date for this folder.
+			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 			
 			[db commitTransaction];
 			
 			// Let interested callers know that the folder has changed.
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-
-			[newLastUpdate release];
 		}
 
 		// Mark the feed as succeeded

@@ -15,6 +15,7 @@ Thanks!
 - When checking for new articles, include articles within 24 hours before last update,
   because feeds sometimes provide inaccurate dates.
 - Assign new id to non-duplicate article with same id as existing article.
+- Set our own last update date. Don't rely on the feed.
 
 2.1.0.2103
 ----------
