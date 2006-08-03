@@ -306,6 +306,7 @@
 	NSMutableArray * filteredArray = [[NSMutableArray alloc] initWithArray:unfilteredArray];
 	
 	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? [articleToPreserve guid] : @"";
+	int folderIdOfArticleToPreserve = [articleToPreserve folderId];
 	
 	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
 	SEL comparator = [filter comparator];
@@ -315,7 +316,7 @@
 	for (index = count - 1; index >= 0; --index)
 	{
 		Article * article = [filteredArray objectAtIndex:index];
-		if ([[article guid] isEqualToString:guidOfArticleToPreserve])
+		if (([article folderId] == folderIdOfArticleToPreserve) && [[article guid] isEqualToString:guidOfArticleToPreserve])
 			guidOfArticleToPreserve = @"";
 		else if ((comparator != nil) && ![ArticleFilter performSelector:comparator withObject:article])
 			[filteredArray removeObjectAtIndex:index];
@@ -324,7 +325,7 @@
 	if (![guidOfArticleToPreserve isEqualToString:@""])
 	{
 		Article * articleToAdd = nil;
-		Folder * folder = [[Database sharedDatabase] folderFromID:[articleToPreserve folderId]];
+		Folder * folder = [[Database sharedDatabase] folderFromID:folderIdOfArticleToPreserve];
 		if (folder != nil)
 		{
 			[folder clearCache];

@@ -659,7 +659,19 @@ typedef enum {
 					articleDate = [NSDate date];
 				if ([articleDate compare:compareDate] == NSOrderedDescending)
 				{
-					Article * article = [[Article alloc] initWithGuid:[newsItem guid]];
+					NSString * articleGuid = [newsItem guid];
+					
+					// This routine attempts to synthesize a GUID from an incomplete item that lacks an
+					// ID field. Generally we'll have three things to work from: a link, a title and a
+					// description. The link alone is not sufficiently unique and I've seen feeds where
+					// the description is also not unique. The title field generally does vary but we need
+					// to be careful since separate articles with different descriptions may have the same
+					// title. The solution is to hash the link and title and build a GUID from those.
+					// We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
+					if ([articleGuid isEqualToString:@""])
+						articleGuid = [NSString stringWithFormat:@"%d-%X-%X", folderId, [[newsItem link] hash], [[newsItem title] hash]];
+					
+					Article * article = [[Article alloc] initWithGuid:articleGuid];
 					[article setFolderId:folderId];
 					[article setAuthor:[newsItem author]];
 					[article setBody:[newsItem description]];
