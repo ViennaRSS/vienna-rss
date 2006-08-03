@@ -48,7 +48,6 @@
 	-(void)setLastModified:(NSDate *)newDate;
 	-(NSString *)stripHTMLTags:(NSString *)htmlString;
 	-(void)ensureTitle:(FeedItem *)item;
-	-(NSString *)guidFromItem:(FeedItem *)item;
 @end
 
 @implementation FeedItem
@@ -595,7 +594,6 @@
 			FeedItem * newItem = [[FeedItem alloc] init];
 			int itemCount = [subTree countOfChildren];
 			BOOL hasDetailedContent = NO;
-			BOOL hasGUID = NO;
 			BOOL hasLink = NO;
 			int itemIndex;
 
@@ -631,7 +629,6 @@
 					if (permaLink && [permaLink isEqualToString:@"true"] && !hasLink)
 						[newItem setLink:[subItemTree valueOfElement]];
 					[newItem setGuid:[subItemTree valueOfElement]];
-					hasGUID = YES;
 					continue;
 				}
 
@@ -692,10 +689,6 @@
 			
 			// Synthesize a summary from the description
 			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
-
-			// If no explicit GUID is specified, use a concatenated hash of attributes for the GUID
-			if (!hasGUID)
-				[newItem setGuid:[self guidFromItem:newItem]];
 
 			// Add this item in the proper location in the array
 			int indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
@@ -801,7 +794,6 @@
 			[newItem setAuthor:defaultAuthor];
 			int itemCount = [subTree countOfChildren];
 			int itemIndex;
-			BOOL hasGUID = NO;
 			BOOL hasLink = NO;
 
 			// Look for the xml:base attribute, and use absolute url or stack relative url
@@ -873,7 +865,6 @@
 				if ([itemNodeName isEqualToString:@"id"])
 				{
 					[newItem setGuid:[subItemTree valueOfElement]];
-					hasGUID = YES;
 					continue;
 				}
 
@@ -910,10 +901,6 @@
 
 			// Synthesize a summary from the description
 			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
-
-				// If no explicit GUID is specified, use the link as the GUID
-			if (!hasGUID)
-				[newItem setGuid:[self guidFromItem:newItem]];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -1046,19 +1033,6 @@
 		++openTagStartIndex;
 	}
 	return [rawString autorelease];
-}
-
-/* guidFromItem
- * This routine attempts to synthesize a GUID from an incomplete item that lacks an
- * ID field. Generally we'll have three things to work from: a link, a title and a
- * description. The link alone is not sufficiently unique and I've seen feeds where
- * the description is also not unique. The title field generally does vary but we need
- * to be careful since separate articles with different descriptions may have the same
- * title. The solution is to hash the link and title and build a GUID from those.
- */
--(NSString *)guidFromItem:(FeedItem *)item
-{
-	return [NSString stringWithFormat:@"%X-%X", [[item link] hash], [[item title] hash]];
 }
 
 /* ensureTitle

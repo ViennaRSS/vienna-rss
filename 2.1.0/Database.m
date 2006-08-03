@@ -1326,10 +1326,26 @@ static Database * _sharedDatabase = nil;
 		[self verifyThreadSafety];
 		
 		// Does this article already exist?
-		// If an obviously different article with the same guid exists, give the article a new guid.
 		Article * existingArticle = [folder articleFromGuid:articleGuid];
+		if (existingArticle == nil)
+		{
+			NSString * folderString = [NSString stringWithFormat:@"%d-", folderID];
+			unsigned int folderStringLength = [folderString length];
+			if ([articleGuid compare:folderString options:NSLiteralSearch range:NSMakeRange(0, folderStringLength)] == NSOrderedSame)
+			{
+				NSString * oldStyleGuid = [articleGuid substringFromIndex:folderStringLength];
+				existingArticle = [folder articleFromGuid:oldStyleGuid];
+				if (existingArticle != nil)
+				{
+					articleGuid = oldStyleGuid;
+					preparedArticleGuid = [SQLDatabase prepareStringForQuery:oldStyleGuid];
+				}
+			}
+		}
+		
 		if (existingArticle != nil)
 		{
+			// If an obviously different article with the same guid exists, give the article a new guid.
 			if (![[existingArticle title] isEqualToString:articleTitle])
 			{
 				existingArticle = nil;

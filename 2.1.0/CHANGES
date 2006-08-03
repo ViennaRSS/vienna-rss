@@ -16,6 +16,8 @@ Thanks!
   because feeds sometimes provide inaccurate dates.
 - Assign new id to non-duplicate article with same id as existing article.
 - Set our own last update date. Don't rely on the feed.
+- Ensure that the article guid is truly unique between feeds.
+  This fixes a bug where the wrong article was selected.
 
 2.1.0.2103
 ----------
