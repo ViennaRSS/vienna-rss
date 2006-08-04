@@ -285,13 +285,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[field setWidth:width];
 	}
 	
-	// In condensed mode, the summary field takes up the whole space
-#ifdef NSTableViewSequentialColumnAutoresizingStyle
+	// In condensed mode, the summary field takes up the whole space.
+	// The method setColumnAutoresizingStyle does not exist in Mac OS X 10.3.9.
 	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
 		[articleList setColumnAutoresizingStyle:NSTableViewSequentialColumnAutoresizingStyle];
-#else
+	else
 		[articleList setAutoresizesAllColumnsToFit:NO];
-#endif
 	
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
@@ -493,13 +492,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 			[headerCell setTitle:[field displayName]];
 			[column setEditable:NO];
-#ifdef NSTableColumnAutoresizingMask
-			if([column respondsToSelector: @selector(setResizingMask:)]) {
-				[column setResizingMask:isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing];
-			}
-#else
+			// The method setResizingMask does not exist in 10.3.9.
+			if ([column respondsToSelector:@selector(setResizingMask:)])
+				[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
+			else
 				[column setResizable:isResizable];
-#endif
 			[column setMinWidth:10];
 			[column setMaxWidth:1000];
 			[column setWidth:[field width]];

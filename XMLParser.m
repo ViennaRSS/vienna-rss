@@ -19,7 +19,7 @@
 
 #import "XMLParser.h"
 #import "StringExtensions.h"
-#import <curl/curl.h>
+#import "CurlGetDate/CurlGetDate.h"
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -460,9 +460,9 @@
 	if ([dateString hasSuffix:@" UT"])
 		dateString = [[dateString substringToIndex:[dateString length] - 3] stringByAppendingString:@" GMT"];
 
-	time_t theTime = curl_getdate([dateString cString], NULL);
-	if (theTime != -1)
-		return [NSDate dateWithTimeIntervalSince1970:theTime];
+	NSCalendarDate * curlDate = [CurlGetDate getDateFromString:dateString];
+	if (curlDate != nil)
+		return curlDate;
 
 	// Otherwise do it ourselves.
 	NSScanner * scanner = [NSScanner scannerWithString:dateString];

@@ -10,6 +10,9 @@
 		47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 47775BD90A109C6A0091C45E /* Acknowledgements.rtf */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
+		6172CAA70A83D2BF00C0D33A /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B09A2C0A83D130006E1503 /* CurlGetDate.framework */; };
+		6172CAA80A83D2C800C0D33A /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B09A2C0A83D130006E1503 /* CurlGetDate.framework */; };
+		6172CAA90A83D2E500C0D33A /* CurlGetDate.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 61B09A2C0A83D130006E1503 /* CurlGetDate.framework */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		8D15AC290486D014006FF6A4 /* Vienna_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
@@ -304,6 +307,20 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
+		6172CAA50A83D28800C0D33A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CurlGetDate;
+		};
+		61B09A2B0A83D130006E1503 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = CurlGetDate;
+		};
 		AAA56F4409EF516C00C87343 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -320,6 +337,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6172CAA90A83D2E500C0D33A /* CurlGetDate.framework in CopyFiles */,
 				478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */,
 				AA610C1509EF6745005C6903 /* NewsParser.framework in CopyFiles */,
 				AA62D7FC0859ABEC0040C370 /* Growl.framework in CopyFiles */,
@@ -348,8 +366,9 @@
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
+		61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CurlGetDate.xcodeproj; path = GetCurlDate/CurlGetDate.xcodeproj; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
 		AA07A39909E14E780056766B /* os.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = os.c; sourceTree = "<group>"; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLog.h; sourceTree = "<group>"; };
@@ -717,6 +736,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6172CAA80A83D2C800C0D33A /* CurlGetDate.framework in Frameworks */,
 				AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
@@ -736,6 +756,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6172CAA70A83D2BF00C0D33A /* CurlGetDate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -779,6 +800,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
+				61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */,
 				AA21F45D0753077300503F58 /* TODO */,
 				AA21F4510753053500503F58 /* CHANGES */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
@@ -938,6 +960,14 @@
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61B09A280A83D130006E1503 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				61B09A2C0A83D130006E1503 /* CurlGetDate.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		AA26F478060490F400FE7994 /* SQLite */ = {
@@ -1320,6 +1350,7 @@
 				AAA56F5109EF533100C87343 /* PBXBuildRule */,
 			);
 			dependencies = (
+				6172CAA60A83D28800C0D33A /* PBXTargetDependency */,
 			);
 			name = NewsParser;
 			productName = NewsParser;
@@ -1354,12 +1385,28 @@
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 61B09A280A83D130006E1503 /* Products */;
+					ProjectRef = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
+				},
+			);
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				AAA5686E09EE725B00C87343 /* NewsParser */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		61B09A2C0A83D130006E1503 /* CurlGetDate.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CurlGetDate.framework;
+			remoteRef = 61B09A2B0A83D130006E1503 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D15AC2B0486D014006FF6A4 /* Resources */ = {
@@ -1759,6 +1806,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6172CAA60A83D28800C0D33A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CurlGetDate;
+			targetProxy = 6172CAA50A83D28800C0D33A /* PBXContainerItemProxy */;
+		};
 		AAA56F4509EF516C00C87343 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AAA5686E09EE725B00C87343 /* NewsParser */;
@@ -2199,8 +2251,6 @@
 				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
-				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 			};
 			name = Deployment;
 		};
@@ -2254,7 +2304,6 @@
 					Foundation,
 					"-framework",
 					AppKit,
-					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
 			};
@@ -2272,13 +2321,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
 					"-framework",
 					AppKit,
-					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
 			};
@@ -2301,7 +2348,6 @@
 					Foundation,
 					"-framework",
 					AppKit,
-					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
 				ZERO_LINK = YES;
