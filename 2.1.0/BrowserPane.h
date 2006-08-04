@@ -32,7 +32,7 @@
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
 	IBOutlet NSTextField * addressField;
-	IBOutlet NSImageView * iconImage;
+	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
 	AppController * controller;
 	NSString * pageFilename;
