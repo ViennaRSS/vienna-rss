@@ -18,6 +18,7 @@ Thanks!
 - Set our own last update date. Don't rely on the feed.
 - Ensure that the article guid is truly unique between feeds.
   This fixes a bug where the wrong article was selected.
+- Change browser address bar image into button.
 
 2.1.0.2103
 ----------

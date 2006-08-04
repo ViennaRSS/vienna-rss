@@ -15,7 +15,7 @@
                 backButton = NSButton; 
                 boxFrame = NSBox; 
                 forwardButton = NSButton; 
-                iconImage = NSImageView; 
+                iconImage = NSButton; 
                 lockIconImage = NSImageView; 
                 refreshButton = NSButton; 
                 webPane = ArticleView; 
