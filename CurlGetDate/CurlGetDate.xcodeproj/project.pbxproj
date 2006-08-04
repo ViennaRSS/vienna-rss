@@ -247,6 +247,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SYMROOT = "$(PROJECT_DIR)/../build";
 			};
 			name = Development;
 		};
@@ -262,6 +263,7 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
+				SYMROOT = "$(PROJECT_DIR)/../build";
 			};
 			name = Deployment;
 		};
