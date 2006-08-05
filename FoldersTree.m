@@ -29,6 +29,7 @@
 #import "PopupButton.h"
 #import "TexturedHeader.h"
 #import "ViennaApp.h"
+#import "BrowserView.h"
 
 // Private functions
 @interface FoldersTree (Private)
@@ -999,6 +1000,7 @@
 {
 	[editableItem release];
 	editableItem = nil;
+	[[controller browserView] setActiveTabToPrimaryTab];
 }
 
 /* shouldEditTableColumn [delegate]
