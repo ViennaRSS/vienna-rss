@@ -1092,7 +1092,7 @@
 		TreeNode * node = [items objectAtIndex:index];
 		Folder * folder = [node folder];
 
-		if (IsRSSFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder))
+		if (IsRSSFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsTrashFolder(folder))
 		{
 			[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
 			++countOfItems;
@@ -1297,6 +1297,7 @@
 	}
 	if (type == MA_PBoardType_FolderList)
 	{
+		Database * db = [Database sharedDatabase];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
 		int index;
@@ -1308,6 +1309,8 @@
 		for (index = 0; index < count; ++index)
 		{
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
+			if ((folderId == [db trashFolderId]) && (node != rootNode))
+				continue;
 			[array addObject:[NSNumber numberWithInt:folderId]];
 			[array addObject:[NSNumber numberWithInt:parentId]];
 			[array addObject:[NSNumber numberWithInt:predecessorId]];
