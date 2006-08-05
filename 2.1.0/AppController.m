@@ -2222,6 +2222,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete group folder text", nil), [folder name]];
 			alertTitle = NSLocalizedString(@"Delete group folder", nil);
 		}
+		else if (IsTrashFolder(folder))
+			return;
 		else
 			NSAssert1(false, @"Unhandled folder type in deleteFolder: %@", [folder name]);
 	}
