@@ -1312,19 +1312,6 @@ static Database * _sharedDatabase = nil;
 		NSTimeInterval interval = [articleDate timeIntervalSince1970];
 		NSTimeInterval createdInterval = [[article createdDate] timeIntervalSince1970];
 		
-		// Unread count adjustment factor
-		int adjustment = 0;
-		
-		// Fix title and article body so they're acceptable to SQL
-		NSString * preparedArticleTitle = [SQLDatabase prepareStringForQuery:articleTitle];
-		NSString * preparedArticleText = [SQLDatabase prepareStringForQuery:articleBody];
-		NSString * preparedArticleLink = [SQLDatabase prepareStringForQuery:articleLink];
-		NSString * preparedUserName = [SQLDatabase prepareStringForQuery:userName];
-		NSString * preparedArticleGuid = [SQLDatabase prepareStringForQuery:articleGuid];
-		
-		// Verify we're on the right thread
-		[self verifyThreadSafety];
-		
 		// Does this article already exist?
 		Article * existingArticle = [folder articleFromGuid:articleGuid];
 		if (existingArticle == nil)
@@ -1336,74 +1323,30 @@ static Database * _sharedDatabase = nil;
 				NSString * oldStyleGuid = [articleGuid substringFromIndex:folderStringLength];
 				existingArticle = [folder articleFromGuid:oldStyleGuid];
 				if (existingArticle != nil)
-				{
 					articleGuid = oldStyleGuid;
-					preparedArticleGuid = [SQLDatabase prepareStringForQuery:oldStyleGuid];
-				}
 			}
 		}
-		
-		if (existingArticle != nil)
+		// If an obviously different article with the same guid exists, give the article a new guid.
+		while ((existingArticle != nil) && ![[existingArticle title] isEqualToString:articleTitle])
 		{
-			// If an obviously different article with the same guid exists, give the article a new guid.
-			if (![[existingArticle title] isEqualToString:articleTitle])
-			{
-				existingArticle = nil;
-				do
-				{
-					articleGuid = [NSString stringWithFormat:@"NEW%@", articleGuid];
-				}
-				while ([folder articleFromGuid:articleGuid] != nil);
-				preparedArticleGuid = [SQLDatabase prepareStringForQuery:articleGuid];
-				[article setGuid:articleGuid];
-			}
-			else if (![existingArticle isDeleted])
-			{
-				NSString * existingBody = [existingArticle body];
-				// If the folder is not displayed, then the article text has not been loaded yet.
-				if (existingBody == nil)
-				{
-					SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
-					if (results && [results rowCount])
-					{
-						existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
-						[results release];
-					}
-					else
-						existingBody = @"";
-				}
-				
-				if (![existingBody isEqualToString:articleBody])
-				{
-					SQLResult * results;
-					
-					results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
-						@"read_flag=0, title='%@', text='%@' where folder_id=%d and message_id='%@'",
-						parentId,
-						preparedUserName,
-						preparedArticleLink,
-						interval,
-						preparedArticleTitle,
-						preparedArticleText,
-						folderID,
-						preparedArticleGuid];
-					if (!results)
-						return NO;
-					[results release];
-					[existingArticle setBody:articleBody];
-					
-					// Update folder unread count if necessary
-					if ([existingArticle isRead])
-					{
-						adjustment = 1;
-						[article setStatus:MA_MsgStatus_New];
-						[existingArticle markRead:NO];
-					}
-					else
-						[article setStatus:MA_MsgStatus_Updated];
-				}
-			}
+			articleGuid = [NSString stringWithFormat:@"NEW%@", articleGuid];
+			existingArticle = [folder articleFromGuid:articleGuid];
 		}
+		if ([article guid] != articleGuid)
+			[article setGuid:articleGuid];
+		
+		// Fix title and article body so they're acceptable to SQL
+		NSString * preparedArticleTitle = [SQLDatabase prepareStringForQuery:articleTitle];
+		NSString * preparedArticleText = [SQLDatabase prepareStringForQuery:articleBody];
+		NSString * preparedArticleLink = [SQLDatabase prepareStringForQuery:articleLink];
+		NSString * preparedUserName = [SQLDatabase prepareStringForQuery:userName];
+		NSString * preparedArticleGuid = [SQLDatabase prepareStringForQuery:articleGuid];
+		
+		// Unread count adjustment factor
+		int adjustment = 0;
+		
+		// Verify we're on the right thread
+		[self verifyThreadSafety];
 		
 		if (existingArticle == nil)
 		{
@@ -1436,6 +1379,52 @@ static Database * _sharedDatabase = nil;
 			if (!read_flag)
 				adjustment = 1;
 		}		
+		else if (![existingArticle isDeleted])
+		{
+			NSString * existingBody = [existingArticle body];
+			// If the folder is not displayed, then the article text has not been loaded yet.
+			if (existingBody == nil)
+			{
+				SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
+				if (results && [results rowCount])
+				{
+					existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
+					[results release];
+				}
+				else
+					existingBody = @"";
+			}
+			
+			if (![existingBody isEqualToString:articleBody])
+			{
+				SQLResult * results;
+				
+				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
+					@"read_flag=0, title='%@', text='%@' where folder_id=%d and message_id='%@'",
+					parentId,
+					preparedUserName,
+					preparedArticleLink,
+					interval,
+					preparedArticleTitle,
+					preparedArticleText,
+					folderID,
+					preparedArticleGuid];
+				if (!results)
+					return NO;
+				[results release];
+				[existingArticle setBody:articleBody];
+				
+					// Update folder unread count if necessary
+				if ([existingArticle isRead])
+				{
+					adjustment = 1;
+					[article setStatus:MA_MsgStatus_New];
+					[existingArticle markRead:NO];
+				}
+				else
+					[article setStatus:MA_MsgStatus_Updated];
+			}
+		}
 		
 		// Fix unread count on parent folders
 		if (adjustment != 0)
