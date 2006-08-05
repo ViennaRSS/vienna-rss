@@ -20,6 +20,7 @@ Thanks!
   This fixes a bug where the wrong article was selected.
 - Change browser address bar image into button.
 - Re-enable Tiger-only features and eliminate warnings in log.
+- Fix bug: don't rename when clicking on grayed-out folder.
 
 2.1.0.2103
 ----------

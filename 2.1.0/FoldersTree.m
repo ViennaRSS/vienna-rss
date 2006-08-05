@@ -635,12 +635,13 @@
 		return;
 	
 	id clickedItem = [outlineView itemAtRow:clickedRow];
-	if (editableItem == clickedItem)
+	if (clickedItem != editableItem)
 	{
-		[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:clickedItem repeats:NO];
+		[editableItem release];
+		editableItem = [clickedItem retain];
 	}
-	else
-		editableItem = clickedItem;
+	else if ([[outlineView window] firstResponder] == outlineView)
+		[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:clickedItem repeats:NO];
 }
 
 /* handleDoubleClick
@@ -649,6 +650,7 @@
 -(void)handleDoubleClick:(id)sender
 {
 	// Prevent the first click of the double click from triggering folder name editing.
+	[editableItem release];
 	editableItem = nil;
 	
 	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
@@ -986,6 +988,7 @@
 	{
 		[self renameFolder:[(TreeNode *)node nodeId]];
 	}
+	[editableItem release];
 	editableItem = nil;
 }
 
@@ -1405,6 +1408,7 @@
 	[boldCellFont release];
 	[folderErrorImage release];
 	[rootNode release];
+	[editableItem release];
 	[super dealloc];
 }
 @end
