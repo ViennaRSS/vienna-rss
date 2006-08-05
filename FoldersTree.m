@@ -640,7 +640,7 @@
 		[editableItem release];
 		editableItem = [clickedItem retain];
 	}
-	else if ([[outlineView window] firstResponder] == outlineView)
+	else
 		[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:clickedItem repeats:NO];
 }
 
@@ -988,6 +988,15 @@
 	{
 		[self renameFolder:[(TreeNode *)node nodeId]];
 	}
+	[editableItem release];
+	editableItem = nil;
+}
+
+/* outlineViewWillBecomeFirstResponder
+ * When outline view is clicked, prevent immediate folder renaming.
+ */
+-(void)outlineViewWillBecomeFirstResponder
+{
 	[editableItem release];
 	editableItem = nil;
 }
