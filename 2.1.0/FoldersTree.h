@@ -61,4 +61,5 @@
 -(int)nextFolderWithUnread:(int)currentFolderId;
 -(NSArray *)folders:(int)folderId;
 -(NSView *)mainView;
+-(void)outlineViewWillBecomeFirstResponder;
 @end

@@ -26,6 +26,7 @@
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteFolderAtRow:(int)row;
 	-(IBAction)deleteFolder:(id)sender;
+	-(void)outlineViewWillBecomeFirstResponder;
 @end
 
 // Gradient data from http://www.cocoadev.com/index.pl?CCDGradientSelectionTableView
@@ -53,6 +54,15 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 	grayGradient = [[NSImage alloc] initWithData:[grayImageData propertyList]];
 	iRect = NSMakeRect(0,0,1,[blueGradient size].height-1);					
 	[grayGradient setFlipped:YES];
+}
+
+/* becomeFirstResponder
+ * Let the delegate prepare for the outline view to become first responder.
+ */
+-(BOOL)becomeFirstResponder
+{
+	[[self delegate] outlineViewWillBecomeFirstResponder];
+	return [super becomeFirstResponder];
 }
 
 /* draggingSourceOperationMaskForLocal
