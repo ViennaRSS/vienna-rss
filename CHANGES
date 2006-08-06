@@ -23,6 +23,7 @@ Thanks!
 - Fix bug: don't rename when clicking on grayed-out folder.
 - Show article list tab when clicking on folders list.
 - Allow dragging of Trash folder.
+- Don't re-sort article list after changing article's marked or read status.
 
 2.1.0.2103
 ----------
