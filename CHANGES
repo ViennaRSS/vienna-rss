@@ -24,6 +24,7 @@ Thanks!
 - Show article list tab when clicking on folders list.
 - Allow dragging of Trash folder.
 - Don't re-sort article list after changing article's marked or read status.
+- Truncate status bar text in the middle when it doesn't fit.
 
 2.1.0.2103
 ----------
