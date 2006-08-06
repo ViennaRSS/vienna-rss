@@ -981,7 +981,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
 		[articleController refilterArrayOfArticles];
 	[self setArticleListHeader];
-	[articleController sortArticles];
+	if (refreshFlag != MA_Refresh_RedrawList)
+		[articleController sortArticles];
 	[self showSortDirection];
 	[articleList reloadData];
 	if (guid != nil)
