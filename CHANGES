@@ -25,6 +25,8 @@ Thanks!
 - Allow dragging of Trash folder.
 - Don't re-sort article list after changing article's marked or read status.
 - Truncate status bar text in the middle when it doesn't fit.
+- Fix bug: articles with same title but different links were treated as the same.
+- Fix bug: Deleted articles could be marked as updated.
 
 2.1.0.2103
 ----------

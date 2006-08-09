@@ -1327,7 +1327,7 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 		// If an obviously different article with the same guid exists, give the article a new guid.
-		while ((existingArticle != nil) && ![[existingArticle title] isEqualToString:articleTitle])
+		while ((existingArticle != nil) && (![[existingArticle title] isEqualToString:articleTitle] || ![[existingArticle link] isEqualToString:articleLink]))
 		{
 			articleGuid = [NSString stringWithFormat:@"NEW%@", articleGuid];
 			existingArticle = [folder articleFromGuid:articleGuid];
@@ -1784,8 +1784,7 @@ static Database * _sharedDatabase = nil;
 }
 
 /* initArticleArray
- * Ensures that the specified folder has a minimal cache of article information. This is just
- * the article id and the read flag.
+ * Ensures that the specified folder has a minimal cache of article information.
  */
 -(BOOL)initArticleArray:(Folder *)folder
 {
@@ -1804,7 +1803,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, title, sender, read_flag from messages where folder_id=%d", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
@@ -1814,9 +1813,10 @@ static Database * _sharedDatabase = nil;
 			while ((row = [enumerator nextObject]) != nil)
 			{
 				NSString * guid = [row stringForColumn:@"message_id"];
-				NSString * title = [row stringForColumn:@"title"];
-				NSString * author = [row stringForColumn:@"sender"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
+				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
+				NSString * title = [row stringForColumn:@"title"];
+				NSString * link = [row stringForColumn:@"link"];
 
 				// Keep our own track of unread articles
 				if (!read_flag)
@@ -1824,9 +1824,10 @@ static Database * _sharedDatabase = nil;
 				
 				Article * article = [[Article alloc] initWithGuid:guid];
 				[article markRead:read_flag];
+				[article markDeleted:deleted_flag];
 				[article setFolderId:folderId];
 				[article setTitle:title];
-				[article setAuthor:author];
+				[article setLink:link];
 				[folder addArticleToCache:article];
 				[article release];
 			}
