@@ -29,6 +29,7 @@ Thanks!
 - Fix bug: Deleted articles could be marked as updated.
 - Standardize browser user agent string.
   This prevents a crash with the Flash Player plugin.
+- Green icon for articles with updated article text.
 
 2.1.0.2103
 ----------
