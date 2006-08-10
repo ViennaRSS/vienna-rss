@@ -184,7 +184,7 @@ static Database * _sharedDatabase = nil;
 		[self beginTransaction];
 
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
-		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text)"];
+		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
@@ -318,9 +318,19 @@ static Database * _sharedDatabase = nil;
 		
 		int oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
 		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
+		[self commitTransaction];
+	}
+	
+	if (databaseVersion < 16)
+	{
+		[self beginTransaction];
+		
+		[self executeSQL:@"alter table messages add column revised_flag"];
+		[self executeSQL:@"update messages set revised_flag=0"];
 		
 		// Set the new version
-		[self setDatabaseVersion:15];		
+		[self setDatabaseVersion:16];		
+		
 		
 		[self commitTransaction];
 	}
@@ -1293,6 +1303,7 @@ static Database * _sharedDatabase = nil;
 		int parentId = [article parentId];
 		BOOL marked_flag = [article isFlagged];
 		BOOL read_flag = [article isRead];
+		BOOL revised_flag = [article isRevised];
 		BOOL deleted_flag = [article isDeleted];
 		
 		// We always set the created date ourselves
@@ -1353,8 +1364,8 @@ static Database * _sharedDatabase = nil;
 			SQLResult * results;
 			
 			results = [sqlDatabase performQueryWithFormat:
-				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text) "
-				@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@')",
+				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag) "
+				@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d)",
 				preparedArticleGuid,
 				parentId,
 				folderID,
@@ -1366,7 +1377,8 @@ static Database * _sharedDatabase = nil;
 				marked_flag,
 				deleted_flag,
 				preparedArticleTitle,
-				preparedArticleText];
+				preparedArticleText,
+				revised_flag];
 			if (!results)
 				return NO;
 			[results release];
@@ -1400,7 +1412,7 @@ static Database * _sharedDatabase = nil;
 				SQLResult * results;
 				
 				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
-					@"read_flag=0, title='%@', text='%@' where folder_id=%d and message_id='%@'",
+					@"read_flag=0, title='%@', text='%@', revised_flag=1 where folder_id=%d and message_id='%@'",
 					parentId,
 					preparedUserName,
 					preparedArticleLink,
@@ -1412,9 +1424,11 @@ static Database * _sharedDatabase = nil;
 				if (!results)
 					return NO;
 				[results release];
-				[existingArticle setBody:articleBody];
 				
-					// Update folder unread count if necessary
+				[existingArticle setBody:articleBody];
+				[existingArticle markRevised:YES];
+				
+				// Update folder unread count if necessary
 				if ([existingArticle isRead])
 				{
 					adjustment = 1;
@@ -2176,6 +2190,7 @@ static Database * _sharedDatabase = nil;
 			NSString * link = [row stringForColumn:@"link"];
 			NSString * text = [row stringForColumn:@"text"];
 			BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
+			BOOL isRevised = [[row stringForColumn:@"revised_flag"] intValue];
 			BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
 			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
 			NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
@@ -2196,6 +2211,7 @@ static Database * _sharedDatabase = nil;
 			[article setDate:date];
 			[article setCreatedDate:createdDate];
 			[article markRead:isRead];
+			[article markRevised:isRevised];
 			[article markFlagged:isFlagged];
 			[article markDeleted:isDeleted];
 			[article setFolderId:articleFolderId];

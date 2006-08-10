@@ -1208,7 +1208,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Read])
 	{
 		if (![theArticle isRead])
-			return [NSImage imageNamed:@"unread.tiff"];
+			return ([theArticle isRevised]) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	if ([[aTableColumn identifier] isEqualToString:MA_Field_Flagged])

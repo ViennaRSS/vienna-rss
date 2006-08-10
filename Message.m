@@ -40,7 +40,7 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 
 @implementation Article
 
-/* initWithData
+/* initWithGuid
  */
 -(id)initWithGuid:(NSString *)theGuid
 {
@@ -49,6 +49,7 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 		articleData = [[NSMutableDictionary dictionary] retain];
 		commentsArray = [[NSMutableArray alloc] init];
 		readFlag = NO;
+		revisedFlag = NO;
 		markedFlag = NO;
 		deletedFlag = NO;
 		status = MA_MsgStatus_Empty;
@@ -117,6 +118,13 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 	readFlag = flag;
 }
 
+/* markRevised
+ */
+-(void)markRevised:(BOOL)flag
+{
+	revisedFlag = flag;
+}
+
 /* markFlagged
  */
 -(void)markFlagged:(BOOL)flag
@@ -135,6 +143,7 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
  */
 -(NSDictionary *)articleData	{ return articleData; }
 -(BOOL)isRead					{ return readFlag; }
+-(BOOL)isRevised				{ return revisedFlag; }
 -(BOOL)isFlagged				{ return markedFlag; }
 -(BOOL)isDeleted				{ return deletedFlag; }
 -(BOOL)hasComments				{ return [commentsArray count] > 0; }

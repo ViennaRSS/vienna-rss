@@ -14,6 +14,7 @@
 		616867C50A83D6B100FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
 		616867C60A83D6BA00FEAC62 /* CurlGetDate.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
+		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
 		8D15AC290486D014006FF6A4 /* Vienna_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -366,6 +367,7 @@
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
+		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = revised.tiff; sourceTree = "<group>"; };
 		61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CurlGetDate.xcodeproj; path = CurlGetDate/CurlGetDate.xcodeproj; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -947,6 +949,7 @@
 				AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */,
 				AA26F441060490BD00FE7994 /* unread_header.tiff */,
 				AA20DC9D0882CCC300A226F5 /* unread.tiff */,
+				61A2CB600A8AC68C006348E8 /* revised.tiff */,
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */,
 			);
@@ -1477,6 +1480,7 @@
 				47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */,
 				AA2384970A19853400374BD0 /* ReadingPreferences.nib in Resources */,
 				AA23849C0A1985F500374BD0 /* readingPrefImage.tiff in Resources */,
+				61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
