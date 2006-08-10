@@ -1397,28 +1397,37 @@ static Database * _sharedDatabase = nil;
 			// If the folder is not displayed, then the article text has not been loaded yet.
 			if (existingBody == nil)
 			{
-				SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
+				SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text, revised_flag from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
 				if (results && [results rowCount])
 				{
 					existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
+					revised_flag = [[[results rowAtIndex:0] stringForColumn:@"revised_flag"] intValue];
 					[results release];
 				}
 				else
 					existingBody = @"";
 			}
+			else
+				revised_flag = [existingArticle isRevised];
 			
 			if (![existingBody isEqualToString:articleBody])
 			{
-				SQLResult * results;
+				// Only pre-existing articles should be marked as revised.
+				// New articles created during the current refresh should not be marked as revised,
+				// even if there are multiple versions of the new article in the feed.
+				if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty))
+					revised_flag = YES;
 				
+				SQLResult * results;
 				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
-					@"read_flag=0, title='%@', text='%@', revised_flag=1 where folder_id=%d and message_id='%@'",
+					@"read_flag=0, title='%@', text='%@', revised_flag=%d where folder_id=%d and message_id='%@'",
 					parentId,
 					preparedUserName,
 					preparedArticleLink,
 					interval,
 					preparedArticleTitle,
 					preparedArticleText,
+					revised_flag,
 					folderID,
 					preparedArticleGuid];
 				if (!results)
@@ -1426,7 +1435,7 @@ static Database * _sharedDatabase = nil;
 				[results release];
 				
 				[existingArticle setBody:articleBody];
-				[existingArticle markRevised:YES];
+				[existingArticle markRevised:revised_flag];
 				
 				// Update folder unread count if necessary
 				if ([existingArticle isRead])
