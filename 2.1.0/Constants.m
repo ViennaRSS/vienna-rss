@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-NSString * MA_DefaultUserAgentString = @"Vienna/%@ (Mac OS X; http://vienna-rss.sourceforge.net/)";
+NSString * MA_DefaultUserAgentString = @"Vienna/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
