@@ -70,7 +70,7 @@
 	[webPane initTabbedWebView];
 	[webPane setUIDelegate:self];
 	[webPane setFrameLoadDelegate:self];
-	[webPane setCustomUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
+	[webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
 	
 	// Make web preferences 16pt Arial to match Safari
 	[[webPane preferences] setStandardFontFamily:@"Arial"];

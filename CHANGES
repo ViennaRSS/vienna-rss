@@ -27,6 +27,8 @@ Thanks!
 - Truncate status bar text in the middle when it doesn't fit.
 - Fix bug: articles with same title but different links were treated as the same.
 - Fix bug: Deleted articles could be marked as updated.
+- Standardize browser user agent string.
+  This prevents a crash with the Flash Player plugin.
 
 2.1.0.2103
 ----------
