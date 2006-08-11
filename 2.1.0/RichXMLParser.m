@@ -593,6 +593,8 @@
 		{
 			FeedItem * newItem = [[FeedItem alloc] init];
 			int itemCount = [subTree countOfChildren];
+			NSMutableString * articleBody = nil;
+			NSString * articleBase = [[self link] stringByDeletingLastURLComponent];
 			BOOL hasDetailedContent = NO;
 			BOOL hasLink = NO;
 			int itemIndex;
@@ -616,7 +618,8 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[articleBody release];
+					articleBody = [[subItemTree valueOfElement] retain];
 					continue;
 				}
 				
@@ -636,7 +639,8 @@
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[articleBody release];
+					articleBody = [[subItemTree valueOfElement] retain];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -684,12 +688,17 @@
 			if (!hasLink && [self link])
 				[newItem setLink:[self link]];
 
-			// Derive any missing title
-			[self ensureTitle:newItem];
-			
+			// Do relative IMG tag fixup
+			[articleBody fixupRelativeImgTags:articleBase];
+			[newItem setDescription:SafeString(articleBody)];
+			[articleBody release];
+
 			// Synthesize a summary from the description
 			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
 
+			// Derive any missing title
+			[self ensureTitle:newItem];
+			
 			// Add this item in the proper location in the array
 			int indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
 			if (indexOfItem == NSNotFound || indexOfItem >= [items count])
@@ -793,6 +802,8 @@
 			FeedItem * newItem = [[FeedItem alloc] init];
 			[newItem setAuthor:defaultAuthor];
 			int itemCount = [subTree countOfChildren];
+			NSMutableString * articleBody = nil;
+			NSString * articleBase = [[self link] stringByDeletingLastURLComponent];
 			int itemIndex;
 			BOOL hasLink = NO;
 
@@ -804,6 +815,7 @@
 					entryBase = linkBase;
 				else if ([[NSURL URLWithString:entryBase] scheme] == nil)
 					entryBase = [linkBase stringByAppendingURLComponent:entryBase];
+				articleBase = entryBase;
 			}
 
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
@@ -827,14 +839,16 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"content"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[articleBody release];
+					articleBody = [[subItemTree valueOfElement] retain];
 					continue;
 				}
 				
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"summary"])
 				{
-					[newItem setDescription:[subItemTree valueOfElement]];
+					[articleBody release];
+					articleBody = [[subItemTree valueOfElement] retain];
 					continue;
 				}
 				
@@ -899,9 +913,14 @@
 				}
 			}
 
+			// Do relative IMG tag fixup
+			[articleBody fixupRelativeImgTags:articleBase];
+			[newItem setDescription:SafeString(articleBody)];
+			[articleBody release];
+
 			// Synthesize a summary from the description
 			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
-
+			
 			// Derive any missing title
 			[self ensureTitle:newItem];
 			[items addObject:newItem];
