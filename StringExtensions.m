@@ -300,12 +300,16 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)stringByDeletingLastURLComponent
 {
 	int index = [self length] - 1;
-	if (index > 0 && [self characterAtIndex:index] == '/')
+	int beginning = 0;
+
+	if ([self hasPrefix:@"http://"])
+		beginning = 6;
+	if (index > beginning && [self characterAtIndex:index] == '/')
 		--index;
-	while (index >= 0 && [self characterAtIndex:index] != '/')
+	while (index >= beginning && [self characterAtIndex:index] != '/')
 		--index;
-	if (index <= 0)
-		++index;
+	if (index <= beginning)
+		return self;
 	return [self substringWithRange:NSMakeRange(0, index)];
 }
 

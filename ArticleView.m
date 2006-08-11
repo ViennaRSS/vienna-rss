@@ -173,15 +173,18 @@ static NSMutableDictionary * stylePathMappings = nil;
 		// Cache values for things we're going to be plugging into the template and set
 		// defaults for things that are missing.
 		NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
-		NSMutableString * articleTitle = [NSMutableString stringWithString:([theArticle title] ? [theArticle title] : @"")];
+		NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([theArticle title])];
 		NSString * articleDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
-		NSString * articleLink = [theArticle link] ? [theArticle link] : @"";
-		NSString * articleAuthor = [theArticle author] ? [theArticle author] : @"";
-		NSString * folderTitle = [folder name] ? [folder name] : @"";
-		NSString * folderLink = [folder homePage] ? [folder homePage] : @"";
+		NSString * articleLink = SafeString([theArticle link]);
+		NSString * articleAuthor = SafeString([theArticle author]);
+		NSString * folderTitle = SafeString([folder name]);
+		NSString * folderLink = SafeString([folder homePage]);
 		NSString * folderDescription = [folder feedDescription];
 		
 		// Do relative IMG tag fixup
+		// stevewpalmer: This is now done in the RSS parser as of 2.1.0.2104 but the below line is kept
+		// for backward compatibility for at least another major version release. However we should feel
+		// free to yank it if the perf hit is unacceptable.
 		[articleBody fixupRelativeImgTags:[articleLink stringByDeletingLastURLComponent]];
 		
 		// Load the selected HTML template for the current view style and plug in the current
