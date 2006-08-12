@@ -39,6 +39,11 @@
  */
 -(void)fixupRelativeImgTags:(NSString *)baseURL
 {
+	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	if (baseURL == nil)
+		return;
+	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
+	
 	int textLength = [self length];
 	NSRange srchRange;
 	
@@ -61,12 +66,16 @@
 			}
 			
 			// Now extract the source parameter
-			NSString * srcPath = [self substringWithRange:srcRange];
+			NSString * srcPath = [[self substringWithRange:srcRange] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			if (srcPath && ![srcPath hasPrefix:@"http://"])
 			{
-				srcPath = [baseURL stringByAppendingURLComponent:srcPath];
-				[self replaceCharactersInRange:srcRange withString:srcPath];
-				textLength = [self length];
+				NSURL * imgURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
+				if (imgURL != nil)
+				{
+					srcPath = [imgURL absoluteString];
+					[self replaceCharactersInRange:srcRange withString:srcPath];
+					textLength = [self length];
+				}
 			}
 			
 			// Start searching again from beyond the URL

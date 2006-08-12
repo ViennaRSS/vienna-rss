@@ -594,7 +594,6 @@
 			FeedItem * newItem = [[FeedItem alloc] init];
 			int itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
-			NSString * articleBase = [[self link] stringByDeletingLastURLComponent];
 			BOOL hasDetailedContent = NO;
 			BOOL hasLink = NO;
 			int itemIndex;
@@ -689,7 +688,7 @@
 				[newItem setLink:[self link]];
 
 			// Do relative IMG tag fixup
-			[articleBody fixupRelativeImgTags:articleBase];
+			[articleBody fixupRelativeImgTags:[self link]];
 			[newItem setDescription:SafeString(articleBody)];
 			[articleBody release];
 
@@ -737,7 +736,10 @@
 	items = [[NSMutableArray alloc] initWithCapacity:10];
 	
 	// Look for feed attributes we need to process
-	NSString * linkBase = [[feedTree valueOfAttribute:@"xml:base"] stringByDeletingLastURLComponent];
+	NSString * linkBase = [[feedTree valueOfAttribute:@"xml:base"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	if (linkBase == nil)
+		linkBase = [[self link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSURL * linkBaseURL = (linkBase != nil) ? [NSURL URLWithString:linkBase] : nil;
 
 	// Iterate through the atom items
 	NSString * defaultAuthor = @"";
@@ -768,11 +770,17 @@
 		{
 			if ([subTree valueOfAttribute:@"rel"] == nil || [[subTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 			{
-				NSString * theLink = [subTree valueOfAttribute:@"href"];
-				if (linkBase != nil && ![theLink hasPrefix:@"http://"])
-					[self setLink:[linkBase stringByAppendingURLComponent:theLink]];
-				else
-					[self setLink:theLink];
+				NSString * theLink = [[subTree valueOfAttribute:@"href"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				if (theLink != nil)
+				{
+					if ((linkBaseURL != nil) && ![theLink hasPrefix:@"http://"])
+					{
+						NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:linkBaseURL];
+						[self setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+					}
+					else
+						[self setLink:theLink];
+				}
 			}
 			continue;
 		}			
@@ -803,19 +811,19 @@
 			[newItem setAuthor:defaultAuthor];
 			int itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
-			NSString * articleBase = [[self link] stringByDeletingLastURLComponent];
 			int itemIndex;
 			BOOL hasLink = NO;
 
 			// Look for the xml:base attribute, and use absolute url or stack relative url
-			NSString * entryBase = [subTree valueOfAttribute:@"xml:base"];
-			if (linkBase != nil)
+			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			if (entryBase == nil)
+				entryBase = linkBase;
+			NSURL * entryBaseURL = (entryBase != nil) ? [NSURL URLWithString:entryBase] : nil;
+			if ((entryBaseURL != nil) && (linkBaseURL != nil) && ([entryBaseURL scheme] == nil))
 			{
-				if (entryBase == nil)
-					entryBase = linkBase;
-				else if ([[NSURL URLWithString:entryBase] scheme] == nil)
-					entryBase = [linkBase stringByAppendingURLComponent:entryBase];
-				articleBase = entryBase;
+				entryBaseURL = [NSURL URLWithString:entryBase relativeToURL:linkBaseURL];
+				if (entryBaseURL != nil)
+					entryBase = [entryBaseURL absoluteString];
 			}
 
 			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
@@ -866,11 +874,17 @@
 					if ([subItemTree valueOfAttribute:@"rel"] == nil || [[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 					{
 						NSString * theLink = [[subItemTree valueOfAttribute:@"href"] stringByUnescapingExtendedCharacters];
-						if ((entryBase != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
-							[newItem setLink:[entryBase stringByAppendingURLComponent:theLink]];
-						else
-							[newItem setLink:theLink];
-						hasLink = YES;
+						if (theLink != nil)
+						{
+							if ((entryBaseURL != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
+							{
+								NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:entryBaseURL];
+								[newItem setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+							}
+							else
+								[newItem setLink:theLink];
+							hasLink = YES;
+						}
 					}
 					continue;
 				}
@@ -914,7 +928,7 @@
 			}
 
 			// Do relative IMG tag fixup
-			[articleBody fixupRelativeImgTags:articleBase];
+			[articleBody fixupRelativeImgTags:entryBase];
 			[newItem setDescription:SafeString(articleBody)];
 			[articleBody release];
 

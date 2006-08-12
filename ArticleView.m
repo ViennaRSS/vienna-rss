@@ -185,7 +185,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		// stevewpalmer: This is now done in the RSS parser as of 2.1.0.2104 but the below line is kept
 		// for backward compatibility for at least another major version release. However we should feel
 		// free to yank it if the perf hit is unacceptable.
-		[articleBody fixupRelativeImgTags:[articleLink stringByDeletingLastURLComponent]];
+		[articleBody fixupRelativeImgTags:articleLink];
 		
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
