@@ -30,6 +30,8 @@ Thanks!
 - Standardize browser user agent string.
   This prevents a crash with the Flash Player plugin.
 - Green icon for articles with updated article text.
+- Improve handling of images with relative URLs.
+- Patch from Peter Hosey: open article URL by drag and drop from article list to browser.
 
 2.1.0.2103
 ----------

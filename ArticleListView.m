@@ -1383,7 +1383,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	int index;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, NSStringPboardType, NSHTMLPboardType, nil] owner:self];
+	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, NSStringPboardType, NSHTMLPboardType, count == 1 ? NSURLPboardType : nil, nil] owner:self];
 	
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];
@@ -1413,6 +1413,12 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		
 		// Add HTML version too.
 		[fullHTMLText appendFormat:@"<a href=\"%@\">%@</a><br />%@<br /><br />", msgLink, msgTitle, msgText];
+		
+		if (count == 1)
+		{
+			// Write the link to the pastboard.
+			[[NSURL URLWithString:msgLink] writeToPasteboard:pboard];
+		}
 	}
 	
 	// Close the HTML string
