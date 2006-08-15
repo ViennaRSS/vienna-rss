@@ -63,4 +63,5 @@ Wishlist
 - Check for internet connection before checking for new articles.
 - Single-key keyboard shortcut for Next Unread.
 - Filter articles by flagged.
+- Add support for "enclosure" field in RSS.
 
