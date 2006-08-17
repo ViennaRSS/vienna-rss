@@ -304,7 +304,13 @@
 		int nextChildId = (node == rootNode) ? [[Database sharedDatabase] firstFolderId] : [[node folder] firstChildId];
 		while (nextChildId > 0)
 		{
-			folder = [listOfFolders objectAtIndex:[listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]]];
+			unsigned int listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
+			if (listIndex == NSNotFound)
+			{
+				NSLog(@"Cannot find child with id %i for folder %@", nextChildId, [[node folder] name]);
+				return;
+			}
+			folder = [listOfFolders objectAtIndex:listIndex];
 			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:nextChildId];
 			int count = [listOfSubFolders count];
 			TreeNode * subNode;

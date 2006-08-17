@@ -32,6 +32,7 @@ Thanks!
 - Green icon for articles with updated article text.
 - Improve handling of images with relative URLs.
 - Patch from Peter Hosey: open article URL by drag and drop from article list to browser.
+- Prevent crash with broken folder sort order (probably from earlier beta version).
 
 2.1.0.2103
 ----------
