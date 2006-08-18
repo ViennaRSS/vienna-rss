@@ -281,10 +281,10 @@
  */
 -(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
-	NSEnumerator * enumerator = [listOfFolders objectEnumerator];
 	Folder * folder;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
 	{
+		NSEnumerator * enumerator = [listOfFolders objectEnumerator];
 		while ((folder = [enumerator nextObject]) != nil)
 		{
 			int itemId = [folder itemId];
@@ -307,7 +307,7 @@
 			unsigned int listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
 			if (listIndex == NSNotFound)
 			{
-				NSLog(@"Cannot find child with id %i for folder %@", nextChildId, [[node folder] name]);
+				NSLog(@"Cannot find child with id %i for folder with id %i", nextChildId, [node nodeId]);
 				return;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
@@ -1170,7 +1170,7 @@
 		int oldPredecessorId = (oldChildIndex > 0) ? [[oldParent childByIndex:(oldChildIndex - 1)] nodeId] : 0;
 		TreeNode * newParent = [rootNode nodeFromID:newParentId];
 		TreeNode * newPredecessor = [newParent nodeFromID:newPredecessorId];
-		if (newPredecessor == nil)
+		if ((newPredecessor == nil) || (newPredecessor == newParent))
 			newPredecessorId = 0;
 		int newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
 		
@@ -1312,10 +1312,15 @@
 		// Create an NSArray of triples (folderId, newParentId, predecessorId) that will be passed to moveFolders
 		// to do the actual move.
 		NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:count * 3];
+		int trashFolderId = [db trashFolderId];
 		for (index = 0; index < count; ++index)
 		{
 			int folderId = [[arrayOfSources objectAtIndex:index] intValue];
-			if ((folderId == [db trashFolderId]) && (node != rootNode))
+			
+			// Don't allow the trash folder to move under a group folder, because the group folder could get deleted.
+			// Also, don't allow perverse moves.  We should probably do additional checking: not only whether the new parent
+			// is the folder itself but also whether the new parent is a subfolder.
+			if (((folderId == trashFolderId) && (node != rootNode)) || (folderId == parentId) || (folderId == predecessorId))
 				continue;
 			[array addObject:[NSNumber numberWithInt:folderId]];
 			[array addObject:[NSNumber numberWithInt:parentId]];

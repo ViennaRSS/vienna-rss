@@ -34,6 +34,7 @@ Thanks!
 - Patch from Peter Hosey: open article URL by drag and drop from article list to browser.
 - Prevent crash with broken folder sort order (probably from earlier beta version).
 - Remove hover:after element in Perlucida style to prevent WebKit crash in 10.3.9.
+- Fix bug with dragging and dropping folders when group folder was dragged into itself.
 
 2.1.0.2103
 ----------
