@@ -106,7 +106,6 @@
 		AA6321170885EA81006382D3 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6321160885EA81006382D3 /* Constants.h */; };
 		AA6321510885F0BB006382D3 /* comments.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA6321500885F0BB006382D3 /* comments.tiff */; };
 		AA63227F08861C99006382D3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA63227E08861C99006382D3 /* Constants.m */; };
-		AA67F338089727FB008BBC37 /* Styles in Resources */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
 		AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
 		AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA67F3980897377C008BBC37 /* stopRefresh.tiff */; };
 		AA682CF7069A955F00228193 /* ViennaApp.h in Headers */ = {isa = PBXBuildFile; fileRef = AA682CF5069A955F00228193 /* ViennaApp.h */; };
@@ -1426,7 +1425,6 @@
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
 				AABC189D090AB00300527D4B /* RSSSources.plist in Resources */,
 				619666CA09FBCAA400D75885 /* Vienna Help in Resources */,
-				AA67F338089727FB008BBC37 /* Styles in Resources */,
 				AA26F448060490BE00FE7994 /* alphaPixel.tiff in Resources */,
 				AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */,
 				AA26F44E060490BE00FE7994 /* flagged.tiff in Resources */,
