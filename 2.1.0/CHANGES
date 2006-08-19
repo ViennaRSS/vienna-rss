@@ -35,6 +35,7 @@ Thanks!
 - Prevent crash with broken folder sort order (probably from earlier beta version).
 - Remove hover:after element in Perlucida style to prevent WebKit crash in 10.3.9.
 - Fix bug with dragging and dropping folders when group folder was dragged into itself.
+- Prevent crash when deleting folder while editing name.
 
 2.1.0.2103
 ----------

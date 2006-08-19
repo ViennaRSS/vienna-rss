@@ -2239,6 +2239,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (returnCode == NSAlertAlternateReturn)
 		return;
 	
+	// End any editing
+	if (rssFeed != nil)
+		[rssFeed doEditCancel:nil];
+	if (smartFolder != nil)
+		[smartFolder doCancel:nil];
+	if ([(NSControl *)[foldersTree mainView] abortEditing])
+		[mainWindow makeFirstResponder:[foldersTree mainView]];
+	
+
 	// Clear undo stack for this action
 	[self clearUndoStack];
 	
