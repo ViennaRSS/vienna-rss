@@ -172,6 +172,11 @@
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
+	
+	// Make sure that folders are manually sorted.
+	// This will result in a call to handleAutoSortFoldersTreeChange:
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual)
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
 }
 
 /* handleFolderFontChange
