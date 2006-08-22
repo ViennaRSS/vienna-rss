@@ -172,6 +172,17 @@
 	return nil;
 }
 
+/* resetFolderSort
+ * Reset the folder sort order.
+ */
+-(id)resetFolderSort:(NSScriptCommand *)cmd
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	[prefs setFoldersTreeSortMethod:MA_FolderSort_ByName];
+	[prefs setFoldersTreeSortMethod:MA_FolderSort_Manual];
+	return nil;
+}
+
 /* applicationVersion
  * Return the applications version number.
  */
