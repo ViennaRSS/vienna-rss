@@ -289,11 +289,15 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"alter table folders add column first_child"];
 		[self executeSQL:@"update folders set first_child=0"];
 		
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
+		
 		SQLResult * results = [sqlDatabase performQuery:@"select folder_id, parent_id from folders"];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
 			SQLRow * row;
+			
+			NSLog(@"Make sure parent_id values are integers.");
 			
 			while ((row = [enumerator nextObject]))
 			{
@@ -321,6 +325,8 @@ static Database * _sharedDatabase = nil;
 		[self commitTransaction];
 	}
 	
+	// Upgrade to rev 16.
+	// Add revised_flag to messages table, and initialize all values to 0.
 	if (databaseVersion < 16)
 	{
 		[self beginTransaction];
@@ -330,7 +336,6 @@ static Database * _sharedDatabase = nil;
 		
 		// Set the new version
 		[self setDatabaseVersion:16];		
-		
 		
 		[self commitTransaction];
 	}
