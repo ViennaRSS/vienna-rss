@@ -450,6 +450,13 @@
 			<key>Name</key>
 			<string>refresh subscription</string>
 		</dict>
+		<key>ResetFolderSort</key>
+		<dict>
+			<key>Description</key>
+			<string>Reset the folder sort order</string>
+			<key>Name</key>
+			<string>reset folder sort</string>
+		</dict>
 	</dict>
 	<key>Description</key>
 	<string>Classes and commands for Vienna</string>

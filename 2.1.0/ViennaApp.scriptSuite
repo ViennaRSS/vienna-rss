@@ -444,6 +444,8 @@
 				<string>handleRefreshAllSubscriptions:</string>
 				<key>RefreshSubscription</key>
 				<string>handleRefreshSubscription:</string>
+				<key>ResetFolderSort</key>
+				<string>resetFolderSort:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
@@ -600,6 +602,15 @@
 					<string>Folder</string>
 				</dict>
 			</dict>
+			<key>CommandClass</key>
+			<string>NSScriptCommand</string>
+		</dict>
+		<key>ResetFolderSort</key>
+		<dict>
+			<key>AppleEventClassCode</key>
+			<string>Vnna</string>
+			<key>AppleEventCode</key>
+			<string>VnFS</string>
 			<key>CommandClass</key>
 			<string>NSScriptCommand</string>
 		</dict>

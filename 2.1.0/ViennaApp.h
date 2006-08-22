@@ -40,6 +40,9 @@
 // Compact database
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd;
 
+// Reset folder sort order
+-(id)resetFolderSort:(NSScriptCommand *)cmd;
+
 // General read-only properties.
 -(NSString *)applicationVersion;
 -(NSArray *)folders;
