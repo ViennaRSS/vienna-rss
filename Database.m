@@ -297,8 +297,6 @@ static Database * _sharedDatabase = nil;
 			NSEnumerator * enumerator = [results rowEnumerator];
 			SQLRow * row;
 			
-			NSLog(@"Make sure parent_id values are integers.");
-			
 			while ((row = [enumerator nextObject]))
 			{
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
