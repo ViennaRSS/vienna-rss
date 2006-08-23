@@ -62,4 +62,5 @@
 -(NSArray *)folders:(int)folderId;
 -(NSView *)mainView;
 -(void)outlineViewWillBecomeFirstResponder;
+-(void)outlineViewWillResignFirstResponder;
 @end
