@@ -27,6 +27,7 @@
 	-(BOOL)canDeleteFolderAtRow:(int)row;
 	-(IBAction)deleteFolder:(id)sender;
 	-(void)outlineViewWillBecomeFirstResponder;
+	-(void)outlineViewWillResignFirstResponder;
 @end
 
 // Gradient data from http://www.cocoadev.com/index.pl?CCDGradientSelectionTableView
@@ -63,6 +64,15 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 {
 	[[self delegate] outlineViewWillBecomeFirstResponder];
 	return [super becomeFirstResponder];
+}
+
+/* resignFirstResponder
+ * Let the delegate prepare for the outline view to resign first responder.
+ */
+-(BOOL)resignFirstResponder
+{
+	[[self delegate] outlineViewWillResignFirstResponder];
+	return [super resignFirstResponder];
 }
 
 /* draggingSourceOperationMaskForLocal

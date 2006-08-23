@@ -444,7 +444,14 @@
 		blockSelectionHandler = YES;
 		[outlineView selectRow:rowIndex byExtendingSelection:NO];
 		[outlineView scrollRowToVisible:rowIndex];
-
+		
+		// Prepare the node to have its name edited on the next single click.
+		if (node != editableItem)
+		{
+			[editableItem release];
+			editableItem = [node retain];
+		}
+		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
 		blockSelectionHandler = NO;
 		return YES;
@@ -1005,13 +1012,20 @@
 }
 
 /* outlineViewWillBecomeFirstResponder
- * When outline view is clicked, prevent immediate folder renaming.
+ * When outline view is clicked, bring the article view to the front.
  */
 -(void)outlineViewWillBecomeFirstResponder
 {
+	[[controller browserView] setActiveTabToPrimaryTab];
+}
+
+/* outlineViewWillResignResponder
+ * Prevent immediate folder renaming when outlineView is clicked.
+ */
+-(void)outlineViewWillResignFirstResponder
+{
 	[editableItem release];
 	editableItem = nil;
-	[[controller browserView] setActiveTabToPrimaryTab];
 }
 
 /* shouldEditTableColumn [delegate]
