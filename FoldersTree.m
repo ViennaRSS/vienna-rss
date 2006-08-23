@@ -1012,20 +1012,14 @@
 }
 
 /* outlineViewWillBecomeFirstResponder
- * When outline view is clicked, bring the article view to the front.
+ * When outline view becomes first responder, bring the article view to the front,
+ * and prevent immediate folder renaming.
  */
 -(void)outlineViewWillBecomeFirstResponder
 {
-	[[controller browserView] setActiveTabToPrimaryTab];
-}
-
-/* outlineViewWillResignResponder
- * Prevent immediate folder renaming when outlineView is clicked.
- */
--(void)outlineViewWillResignFirstResponder
-{
 	[editableItem release];
 	editableItem = nil;
+	[[controller browserView] setActiveTabToPrimaryTab];
 }
 
 /* shouldEditTableColumn [delegate]
