@@ -38,12 +38,12 @@
 	IBOutlet TexturedHeader * folderHeader;
 
 	TreeNode * rootNode;
-	TreeNode * editableItem;
 	NSTimer * selectionTimer;
 	NSFont * cellFont;
 	NSFont * boldCellFont;
 	NSImage * folderErrorImage;
 	BOOL blockSelectionHandler;
+	BOOL canRenameFolders;
 }
 
 // Public functions
