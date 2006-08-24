@@ -52,6 +52,8 @@
 	-(void)expandToParent:(TreeNode *)node;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)moveFolders:(NSArray *)array;
+	-(void)enableFoldersRenaming:(id)sender;
+	-(void)enableFoldersRenamingAfterDelay;
 @end
 
 @implementation FoldersTree
@@ -67,8 +69,8 @@
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
 		rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
-		editableItem = nil;
 		blockSelectionHandler = NO;
+		canRenameFolders = NO;
 		selectionTimer = nil;
 		folderErrorImage = nil;
 	}
@@ -445,13 +447,6 @@
 		[outlineView selectRow:rowIndex byExtendingSelection:NO];
 		[outlineView scrollRowToVisible:rowIndex];
 		
-		// Prepare the node to have its name edited on the next single click.
-		if (node != editableItem)
-		{
-			[editableItem release];
-			editableItem = [node retain];
-		}
-		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
 		blockSelectionHandler = NO;
 		return YES;
@@ -645,32 +640,25 @@
 }
 
 /* handleSingleClick
- * On the first single click, prepare the node to have its name edited on the next single click.
+ * If the folder is already highlighted, then edit the folder name.
  */
 -(void)handleSingleClick:(id)sender
 {
-	int clickedRow = [outlineView clickedRow];
-	if (clickedRow < 0)
-		return;
-	
-	id clickedItem = [outlineView itemAtRow:clickedRow];
-	if (clickedItem != editableItem)
+	if (canRenameFolders)
 	{
-		[editableItem release];
-		editableItem = [clickedItem retain];
+		int clickedRow = [outlineView clickedRow];
+		if (clickedRow >= 0)
+			[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:[outlineView itemAtRow:clickedRow] repeats:NO];
 	}
-	else
-		[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:clickedItem repeats:NO];
 }
 
 /* handleDoubleClick
- * If the user double-clicks a node, send an edit notification.
+ * Handle the user double-clicking a node.
  */
 -(void)handleDoubleClick:(id)sender
 {
-	// Prevent the first click of the double click from triggering folder name editing.
-	[editableItem release];
-	editableItem = nil;
+	// Prevent the first click of the double click from triggering immediate folder name editing.
+	[self enableFoldersRenamingAfterDelay];
 	
 	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
 
@@ -961,6 +949,8 @@
  */
 -(void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
+	[self enableFoldersRenamingAfterDelay];
+	
 	if (!blockSelectionHandler)
 	{
 		TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
@@ -998,17 +988,31 @@
 }
 
 /* renameFolderByTimer
- * If no clicks have occurred during the timer interval, rename the folder.
+ * If no disabling events have occurred during the timer interval, rename the folder.
  */
 -(void)renameFolderByTimer:(id)sender
 {
-	id node = [sender userInfo];
-	if (node == editableItem)
+	if (canRenameFolders)
 	{
-		[self renameFolder:[(TreeNode *)node nodeId]];
+		[self renameFolder:[(TreeNode *)[sender userInfo] nodeId]];
 	}
-	[editableItem release];
-	editableItem = nil;
+}
+
+/* enableFolderRenaming
+ * Enable the renaming of folders.
+ */
+-(void)enableFoldersRenaming:(id)sender
+{
+	canRenameFolders = YES;
+}
+
+/* enableFolderRenamingAfter
+ * Set a timer to enable renaming of folders.
+ */
+-(void)enableFoldersRenamingAfterDelay
+{
+	canRenameFolders = NO;
+	[NSTimer scheduledTimerWithTimeInterval:0.9 target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
 }
 
 /* outlineViewWillBecomeFirstResponder
@@ -1017,9 +1021,8 @@
  */
 -(void)outlineViewWillBecomeFirstResponder
 {
-	[editableItem release];
-	editableItem = nil;
 	[[controller browserView] setActiveTabToPrimaryTab];
+	[self enableFoldersRenamingAfterDelay];
 }
 
 /* shouldEditTableColumn [delegate]
@@ -1446,7 +1449,6 @@
 	[boldCellFont release];
 	[folderErrorImage release];
 	[rootNode release];
-	[editableItem release];
 	[super dealloc];
 }
 @end
