@@ -8,6 +8,8 @@
                 changeCheckOnStartUp = id; 
                 changeDownloadFolder = id; 
                 changeExpireDuration = id; 
+                changeMarkReadBehaviour = id; 
+                changeNewArticlesNotification = id; 
                 changeOpenLinksInBackground = id; 
                 changeOpenLinksInExternalBrowser = id; 
                 selectDefaultLinksHandler = id; 
@@ -21,6 +23,11 @@
                 downloadFolder = NSPopUpButton; 
                 expireDuration = NSPopUpButton; 
                 linksHandler = NSPopUpButton; 
+                markReadAfterDelay = NSButtonCell; 
+                markReadAfterNext = NSButtonCell; 
+                newArticlesNotificationBadgeButton = NSButtonCell; 
+                newArticlesNotificationBounceButton = NSButtonCell; 
+                newArticlesNotificationNothingButton = NSButtonCell; 
                 openLinksInBackground = NSButton; 
                 openLinksInExternalBrowser = NSButton; 
             }; 
