@@ -86,6 +86,21 @@ extern NSString * MA_PBoardType_RSSSource;
 #define MA_Refresh_ReloadFromDatabase	2
 #define MA_Refresh_SortAndRedraw		3
 
+const AEKeyword EditDataItemAppleEventClass;
+const AEKeyword EditDataItemAppleEventID;
+const AEKeyword DataItemTitle;
+const AEKeyword DataItemDescription;
+const AEKeyword DataItemSummary;
+const AEKeyword DataItemLink;
+const AEKeyword DataItemPermalink;
+const AEKeyword DataItemSubject;
+const AEKeyword DataItemCreator;
+const AEKeyword DataItemCommentsURL;
+const AEKeyword DataItemGUID;
+const AEKeyword DataItemSourceName;
+const AEKeyword DataItemSourceHomeURL;
+const AEKeyword DataItemSourceFeedURL;
+
 // Layout styles
 #define MA_Layout_Report				1
 #define MA_Layout_Condensed				2

@@ -2,6 +2,7 @@
     IBClasses = (
         {
             ACTIONS = {
+                blogWith = id; 
                 cancelAllRefreshes = id; 
                 changeFiltering = id; 
                 closeAllTabs = id; 
@@ -65,6 +66,8 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 articleController = ArticleController; 
+                blogWithMenu = NSMenuItem; 
+                blogWithOneMenu = NSMenuItem; 
                 browserView = BrowserView; 
                 closeAllTabsItem = NSMenuItem; 
                 closeTabItem = NSMenuItem; 

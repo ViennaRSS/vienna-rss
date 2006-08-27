@@ -84,5 +84,18 @@
 	<string>SCR-15C768BF24</string>
 	<key>SUFeedURL</key>
 	<string>http://vienna-rss.sourceforge.net/changelog.xml</string>
+	<key>SupportedEditorsBundleIdentifiers</key>
+	<dict>
+		<key>Blapp</key>
+		<string>edu.ucsd.cs.mmccrack.blapp</string>
+		<key>Cocoalicious</key>
+		<string>com.scifihifi.Cocoalicious</string>
+		<key>MarsEdit</key>
+		<string>com.ranchero.MarsEdit</string>
+		<key>Xjournal</key>
+		<string>org.speirs.xjournal</string>
+		<key>ecto</key>
+		<string>kungfoo.tv.ecto</string>
+	</dict>
 </dict>
 </plist>

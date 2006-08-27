@@ -66,6 +66,7 @@
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
+	-(void)initBlogWithMenu;
 	-(void)initScriptsMenu;
 	-(void)startProgressIndicator;
 	-(void)stopProgressIndicator;
@@ -166,6 +167,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self initSortMenu];
 	[self initColumnsMenu];
 	[self initStylesMenu];
+	[self initBlogWithMenu];
 
 	// Restore the splitview layout
 	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
@@ -1178,8 +1180,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Reinitialise the styles map
 	NSDictionary * stylesMap = [ArticleView loadStylesMap];
 	
-	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted
-	// by key name.
+	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted by key name.
 	NSArray * sortedMenuItems = [[stylesMap allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 	int count = [sortedMenuItems count];
 	int index;
@@ -1257,6 +1258,60 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			if ([NSApp applicationIconImage] != originalIcon)
 				[NSApp setApplicationIconImage:originalIcon];
 			break;
+	}
+}
+
+/* initBlogWithMenu
+ * Implements auto-discovery of supported blogging tools for use with blogWithExternalEditor.
+ * Creates a submenu with all known tools found on the system. The dictionary that describes all supported tools currently lives in info.plist.
+ */
+-(void)initBlogWithMenu
+{
+	NSMenu * blogWithSubMenu = [[[NSMenu alloc] initWithTitle:@"BlogWith"] autorelease];
+	
+	// Get bundle identifiers for supported editors from info.plist
+	NSDictionary * supportedEditors = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SupportedEditorsBundleIdentifiers"];
+
+	// Add the contents of the supportedEditors dictionary keys to the menu, sorted by key name.
+	NSArray * sortedMenuItems = [[supportedEditors allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+	NSEnumerator *e = [sortedMenuItems objectEnumerator];
+	NSString * lastItem = nil;
+	int countOfItems = 0;
+	id currentItem;
+
+	while ((currentItem = [e nextObject]) != nil) 
+	{
+		// Only add the item if the application is present on the system.
+		if ( [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: [supportedEditors valueForKey:currentItem]] ) 
+		{
+			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:currentItem action:@selector(blogWith:) keyEquivalent:@""];
+			[menuItem setRepresentedObject:currentItem];
+			[blogWithSubMenu addItem:menuItem];
+			[menuItem release];
+			lastItem = currentItem;
+			++countOfItems;
+		}
+	}
+	
+	// If no items, remove both the single and submenu blog items.
+	// Otherwise if there's one item, set the title of the single item and remove the submenu.
+	// Otherwise remove the single item.
+	if (countOfItems == 0)
+	{
+		[[blogWithMenu menu] removeItem:blogWithMenu];
+		[[blogWithOneMenu menu] removeItem:blogWithOneMenu];
+	}
+	else if (countOfItems == 1)
+	{
+		NSString * blogMenuItem = [NSString stringWithFormat:NSLocalizedString(@"Blog with %@", nil), lastItem];
+		[blogWithOneMenu setTitle:blogMenuItem];
+		[blogWithOneMenu setRepresentedObject:lastItem];
+		[[blogWithMenu menu] removeItem:blogWithMenu];
+	}
+	else
+	{
+		[[blogWithOneMenu menu] removeItem:blogWithOneMenu];
+		[blogWithMenu setSubmenu:blogWithSubMenu];
 	}
 }
 
@@ -2507,11 +2562,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableString * mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
+	NSArray * articleArray = [mainArticleView markedArticleRange];	
 	
-	Article * theArticle = [self selectedArticle];
-	if (theArticle != nil) 
+	if ([articleArray count] > 0) 
 	{
-		NSArray * articleArray = [mainArticleView markedArticleRange];
 		NSEnumerator *e = [articleArray objectEnumerator];
 		id currentArticle;
 		
@@ -2549,6 +2603,75 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	[[Preferences standardPreferences] setFilterMode:[menuItem tag]];
+}
+
+/* blogWith
+ * Calls the function which creates an Apple Event for external editor integration.
+ */
+-(IBAction)blogWith:(id)sender
+{
+	if ([sender isKindOfClass:[NSMenuItem class]])
+	{
+		NSDictionary * supportedEditors = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SupportedEditorsBundleIdentifiers"];
+		[self blogWithExternalEditor:[supportedEditors objectForKey:[sender representedObject]]];
+	}
+}
+
+/* blogWithExternalEditor
+ * Builds and sends an Apple Event with info from the currently selected articles to the application specified by the bundle identifier that is passed.
+ * Iterates over all currently selected articles and consecutively sends Apple Events to the specified app.
+ */
+-(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
+{
+	// Is our target application running? If not, we'll launch it.
+	if (![[[[NSWorkspace sharedWorkspace] launchedApplications] valueForKey:@"NSApplicationBundleIdentifier"] containsObject: externalEditorBundleIdentifier])
+	{
+		[[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:externalEditorBundleIdentifier
+															 options:NSWorkspaceLaunchWithoutActivation
+									  additionalEventParamDescriptor:NULL
+													launchIdentifier:nil];
+	}
+
+	// Get the currently selected articles from the ArticleView ...
+	NSArray * articleArray = [mainArticleView markedArticleRange];
+	NSEnumerator * e = [articleArray objectEnumerator];
+	NSAppleEventDescriptor * eventRecord;
+	NSAppleEventDescriptor * target;
+	NSAppleEventDescriptor * event;
+	id currentArticle;
+
+	// ... and iterate over them.
+	while ((currentArticle = [e nextObject]) != nil) 
+	{
+		// The record descriptor which will hold the information about the post.
+		eventRecord = [NSAppleEventDescriptor recordDescriptor];
+
+		// Setting the target application.
+		target = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplicationBundleID 
+																 data:[externalEditorBundleIdentifier 
+													dataUsingEncoding:NSUTF8StringEncoding]];
+
+		// The actual Apple Event that will get sent to the target.
+		event = [NSAppleEventDescriptor appleEventWithEventClass:EditDataItemAppleEventClass 
+														 eventID:EditDataItemAppleEventID
+												targetDescriptor:target 
+														returnID:kAutoGenerateReturnID
+												   transactionID:kAnyTransactionID];
+
+		// Inserting the data about the post we want the target to create.
+		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle title]] forKeyword:DataItemTitle];
+		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle link]] forKeyword:DataItemLink];
+		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle author]] forKeyword:DataItemCreator];
+		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle guid]] forKeyword:DataItemGUID];
+
+		// Add the recordDescriptor whe just created to the actual event.
+		[event setDescriptor: eventRecord forKeyword:'----'];
+
+		// Send our Apple Event.
+		OSStatus err = AESendMessage([event aeDesc], NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
+		if (err != noErr) 
+			NSLog(@"Error sending Apple Event: %d", err);
+	}
 }
 
 #pragma mark Status Message
