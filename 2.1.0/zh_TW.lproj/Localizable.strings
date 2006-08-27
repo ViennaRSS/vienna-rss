@@ -316,3 +316,14 @@
 "%u articles" = "%u articles";
 "%u unread" = "%u unread";
 "Keyboard Shortcuts" = "Keyboard Shortcuts";
+"%@ (Filtered: %@)" = "%@ (Filter: %@)";
+"Get Info..." = "Get Info...";
+"Open Web Location..." = "Open Web Location...";
+"Refresh Folder Images" = "Refresh Folder Images";
+"Report" = "Report";
+"Condensed" = "Condensed";
+"Unified" =  "Unified";
+"Summary" = "Summary";
+"Reading" = "Reading";
+"Blog With..." = "Blog With...";
+"Blog with %@" = "Blog with %@";

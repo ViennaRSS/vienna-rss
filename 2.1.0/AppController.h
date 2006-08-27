@@ -57,6 +57,8 @@
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
 	IBOutlet NSMenuItem * filtersMenu;
+	IBOutlet NSMenuItem * blogWithMenu;
+	IBOutlet NSMenuItem * blogWithOneMenu;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
@@ -128,6 +130,7 @@
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
+-(IBAction)blogWith:(id)sender;
 -(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
@@ -161,4 +164,5 @@
 -(NSDictionary *)standardURLs;
 -(BrowserView *)browserView;
 -(NSArray *)folders;
+-(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 @end

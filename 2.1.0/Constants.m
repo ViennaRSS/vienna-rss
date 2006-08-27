@@ -64,6 +64,23 @@ const float MA_Default_Read_Interval = 0.5;
 const float MA_Default_Selection_Change_Interval = 0.2;
 const int MA_Default_AutoExpireDuration = 0;
 
+// Constants for External Weblog Editor Interface according to http://ranchero.com/netnewswire/developers/externalinterface.php
+// We are not using all of them yet, but they might become useful in the future.
+const AEKeyword EditDataItemAppleEventClass = 'EBlg';
+const AEKeyword EditDataItemAppleEventID = 'oitm';
+const AEKeyword DataItemTitle = 'titl';
+const AEKeyword DataItemDescription = 'desc';
+const AEKeyword DataItemSummary = 'summ';
+const AEKeyword DataItemLink = 'link';
+const AEKeyword DataItemPermalink = 'plnk';
+const AEKeyword DataItemSubject = 'subj';
+const AEKeyword DataItemCreator = 'crtr';
+const AEKeyword DataItemCommentsURL = 'curl';
+const AEKeyword DataItemGUID = 'guid';
+const AEKeyword DataItemSourceName = 'snam';
+const AEKeyword DataItemSourceHomeURL = 'hurl';
+const AEKeyword DataItemSourceFeedURL = 'furl';
+
 // Custom pasteboard types
 NSString * MA_PBoardType_FolderList = @"ViennaFolderType";
 NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";

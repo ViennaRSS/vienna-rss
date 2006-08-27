@@ -317,7 +317,6 @@
 "%u articles" = "%u Artikel";
 "%u unread" = "%u ungelesen";
 "Keyboard Shortcuts" = "Tastaturbefehle";
-"Blog With" = "Bloggen mit...";
 "%@ (Filtered: %@)" = "%@ (Filter: %@)";
 "Get Info..." = "Information...";
 "Open Web Location..." = "Web-Adresse öffnen...";
@@ -327,3 +326,5 @@
 "Unified" =  "Kompakt mit Zusammenfassung";
 "Summary" = "Zusammenfassung";
 "Reading" = "Lese-Einstellungen";
+"Blog With..." = "Bloggen mit...";
+"Blog with %@" = "Bloggen mit %@";
