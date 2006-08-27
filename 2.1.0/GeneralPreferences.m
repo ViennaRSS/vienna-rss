@@ -110,6 +110,15 @@
 	// Set whether links are opened in the external browser
 	[openLinksInExternalBrowser setState:[prefs openLinksInVienna] ? NSOffState : NSOnState];
 	
+	// Set mark read behaviour
+	[markReadAfterNext setState:[prefs markReadInterval] == 0 ? NSOnState : NSOffState];
+	[markReadAfterDelay setState:[prefs markReadInterval] != 0 ? NSOnState : NSOffState];
+	
+	// Show new articles notification option
+	[newArticlesNotificationNothingButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_None) ? NSOnState : NSOffState];
+	[newArticlesNotificationBadgeButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Badge) ? NSOnState : NSOffState];
+	[newArticlesNotificationBounceButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce) ? NSOnState : NSOffState];
+	
 	[self refreshLinkHandler];
 }
 
@@ -394,6 +403,38 @@
 {
 	int newFrequency = [[checkFrequency selectedItem] tag];
 	[[Preferences standardPreferences] setRefreshFrequency:newFrequency];
+}
+
+/* changeNewArticlesNotification
+ * Change the method by which new articles are announced.
+ */
+-(IBAction)changeNewArticlesNotification:(id)sender
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	if ([sender selectedCell] == newArticlesNotificationNothingButton)
+	{
+		[prefs setNewArticlesNotification:MA_NewArticlesNotification_None];
+		return;
+	}
+	if ([sender selectedCell] == newArticlesNotificationBadgeButton)
+	{
+		[prefs setNewArticlesNotification:MA_NewArticlesNotification_Badge];
+		return;
+	}
+	if ([sender selectedCell] == newArticlesNotificationBounceButton)
+	{
+		[prefs setNewArticlesNotification:MA_NewArticlesNotification_Bounce];
+		return;
+	}
+}
+
+/* changeMarkReadBehaviour
+ * Set the mark read behaviour based on the users selection.
+ */
+-(IBAction)changeMarkReadBehaviour:(id)sender
+{
+	float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
+	[[Preferences standardPreferences] setMarkReadInterval:newReadInterval];
 }
 
 /* dealloc

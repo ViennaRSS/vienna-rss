@@ -30,6 +30,11 @@
 	IBOutlet NSButton * openLinksInBackground;
 	IBOutlet NSButton * openLinksInExternalBrowser;
 	IBOutlet NSPopUpButton * downloadFolder;
+	IBOutlet NSButtonCell * newArticlesNotificationNothingButton;
+	IBOutlet NSButtonCell * newArticlesNotificationBadgeButton;
+	IBOutlet NSButtonCell * newArticlesNotificationBounceButton;
+	IBOutlet NSButtonCell * markReadAfterNext;
+	IBOutlet NSButtonCell * markReadAfterDelay;
 	NSMutableDictionary * appToPathMap;
 	ICInstance internetConfigHandler;
 }
@@ -43,4 +48,6 @@
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender;
 -(IBAction)changeExpireDuration:(id)sender;
 -(IBAction)changeDownloadFolder:(id)sender;
+-(IBAction)changeNewArticlesNotification:(id)sender;
+-(IBAction)changeMarkReadBehaviour:(id)sender;
 @end
