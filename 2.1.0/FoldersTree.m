@@ -998,7 +998,7 @@
 	}
 }
 
-/* enableFolderRenaming
+/* enableFoldersRenaming
  * Enable the renaming of folders.
  */
 -(void)enableFoldersRenaming:(id)sender
@@ -1006,7 +1006,7 @@
 	canRenameFolders = YES;
 }
 
-/* enableFolderRenamingAfter
+/* enableFoldersRenamingAfterDelay
  * Set a timer to enable renaming of folders.
  */
 -(void)enableFoldersRenamingAfterDelay

@@ -65,3 +65,5 @@ Wishlist
 - Filter articles by flagged.
 - Add support for "enclosure" field in RSS.
 - Hold down option key (or other combo) while pressing mark all read button to mark all subscriptions read.
+- Progress indicator for loading web pages.
+- Use shift key to toggle whether to open tabs in foreground/background in Vienna.
