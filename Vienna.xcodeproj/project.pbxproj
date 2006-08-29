@@ -470,6 +470,7 @@
 		AA517D500AA4E001001E8CA1 /* pt */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt; path = pt.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA517D510AA4E041001E8CA1 /* pt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA517D520AA4E087001E8CA1 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA517DCA0AA4ECF8001E8CA1 /* pt */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pt; path = "pt.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPane.h; sourceTree = "<group>"; };
 		AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
 		AA559188086121C200105AC5 /* SplitViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewExtensions.h; sourceTree = "<group>"; };
@@ -2003,6 +2004,7 @@
 				6172B48809E2080B001FB418 /* nl */,
 				AAD77F4C09FBCF91003DBD47 /* sv */,
 				AAA5814F09AA52B400602469 /* zh_TW */,
+				AA517DCA0AA4ECF8001E8CA1 /* pt */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
