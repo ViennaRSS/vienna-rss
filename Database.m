@@ -2179,7 +2179,7 @@ static Database * _sharedDatabase = nil;
 
 		if ([filterString isNotEqualTo:@""])
 			filterClause = [NSString stringWithFormat:@" and (title like '%%%@%%' or text like '%%%@%%')", filterString, filterString];
-		queryString = [NSString stringWithFormat:@"select * from messages where %@%@", [self criteriaToSQL:tree], filterClause];
+		queryString = [NSString stringWithFormat:@"select * from messages where (%@)%@", [self criteriaToSQL:tree], filterClause];
 	}
 
 	// Verify we're on the right thread
