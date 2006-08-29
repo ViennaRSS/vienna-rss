@@ -11,6 +11,8 @@ Thanks!
 - Add Blog With feature.
 - Fix bug where mouse was tracking wrong browser tab.
 - Fix bug: searching in 'any' smart folders wasn't done correctly.
+- Updated all localisation.
+- Added Brazilian Portuguese localisation (thanks to Helvécio Mafra).
 
 2.1.0.2104
 ----------
