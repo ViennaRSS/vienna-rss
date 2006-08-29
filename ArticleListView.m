@@ -808,7 +808,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)makeRowSelectedAndVisible:(int)rowIndex
 {
 	if ([[articleController allArticles] count] == 0u)
+	{
 		currentSelectedRow = -1;
+		[articleList deselectAll:self];
+	}
 	else if (rowIndex == currentSelectedRow)
 		[self refreshArticleAtCurrentRow:NO];
 	else
@@ -988,7 +991,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (guid != nil)
 	{
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
-		// the same and the GUID of the article at the selection is the same. If so, don't refresh anything.
+		// the same and the GUID of the article at the selection is the same.
 		allArticles = [articleController allArticles];
 		BOOL isUnchanged = currentSelectedRow >= 0 &&
 						   currentSelectedRow < (int)[allArticles count] &&
@@ -996,10 +999,14 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
+			{
 				currentSelectedRow = -1;
-			else
+				[articleList deselectAll:self];
 				[self refreshArticlePane];
+			}
 		}
+		else
+			[self refreshArticlePane];
 	}
 	else
 		currentSelectedRow = -1;
