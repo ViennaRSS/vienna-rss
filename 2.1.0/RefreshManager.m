@@ -468,6 +468,8 @@ typedef enum {
 	
 	if ([urlString hasPrefix:@"file:///"])
 		url = [NSURL fileURLWithPath:[[urlString substringFromIndex:8] stringByExpandingTildeInPath]];
+	else if ([urlString hasPrefix:@"feed://"])
+		url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]]];
 	else
 		url = [NSURL URLWithString:urlString];
 	
