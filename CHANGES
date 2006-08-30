@@ -13,6 +13,7 @@ Thanks!
 - Fix bug: searching in 'any' smart folders wasn't done correctly.
 - Updated all localisation.
 - Added Brazilian Portuguese localisation (thanks to Helvécio Mafra).
+- Change URL with feed:// to http:// during refresh.
 
 2.1.0.2104
 ----------
