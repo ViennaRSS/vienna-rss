@@ -1341,7 +1341,7 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 		// If an obviously different article with the same guid exists, give the article a new guid.
-		while ((existingArticle != nil) && (![[existingArticle title] isEqualToString:articleTitle] || ![[existingArticle link] isEqualToString:articleLink]))
+		while ((existingArticle != nil) && (([[existingArticle title] compare:articleTitle options:NSLiteralSearch | NSCaseInsensitiveSearch] != NSOrderedSame) || ![[existingArticle link] isEqualToString:articleLink]))
 		{
 			articleGuid = [NSString stringWithFormat:@"NEW%@", articleGuid];
 			existingArticle = [folder articleFromGuid:articleGuid];
