@@ -466,8 +466,8 @@ typedef enum {
 	NSString * urlString = [folder feedURL];
 	NSURL * url = nil;
 	
-	if ([urlString hasPrefix:@"file:///"])
-		url = [NSURL fileURLWithPath:[[urlString substringFromIndex:8] stringByExpandingTildeInPath]];
+	if ([urlString hasPrefix:@"file://"])
+		url = [NSURL fileURLWithPath:[[urlString substringFromIndex:7] stringByExpandingTildeInPath]];
 	else if ([urlString hasPrefix:@"feed://"])
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]]];
 	else

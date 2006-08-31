@@ -14,6 +14,7 @@ Thanks!
 - Updated all localisation.
 - Added Brazilian Portuguese localisation (thanks to Helvécio Mafra).
 - Change URL with feed:// to http:// during refresh.
+- Fix bug with expanding file:// path.
 
 2.1.0.2104
 ----------

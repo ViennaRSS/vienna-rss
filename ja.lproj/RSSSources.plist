@@ -7,7 +7,7 @@
 		<key>LinkName</key>
 		<string>Enter the path under your home folder</string>
 		<key>LinkTemplate</key>
-		<string>file:///~/%@</string>
+		<string>file://~/%@</string>
 	</dict>
 	<key>LiveJournal</key>
 	<dict>
