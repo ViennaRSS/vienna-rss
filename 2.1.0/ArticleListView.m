@@ -1005,7 +1005,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[self refreshArticlePane];
 			}
 		}
-		else
+		else if (refreshFlag == MA_Refresh_ReloadFromDatabase) // The article may have been updated, so refresh the article pane.
 			[self refreshArticlePane];
 	}
 	else
