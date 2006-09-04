@@ -232,6 +232,9 @@
 	if ([theView isKindOfClass:[ArticleListView class]])
 		webPane = (WebView *)[(ArticleListView *)theView webView];
 	
+	if ([theView isKindOfClass:[UnifiedDisplayView class]])
+		webPane = (WebView *)[(UnifiedDisplayView *)theView webView];
+	
 	if (webPane != nil)
 	{
 		NSView * docView = [[[webPane mainFrame] frameView] documentView];
