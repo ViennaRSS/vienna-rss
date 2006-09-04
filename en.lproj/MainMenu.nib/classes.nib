@@ -24,6 +24,7 @@
                 importSubscriptions = id; 
                 increaseFontSize = id; 
                 keyboardShortcutsHelp = id; 
+                localPerformFindPanelAction = id; 
                 mailLinkToArticlePage = id; 
                 markAllRead = id; 
                 markAllSubscriptionsRead = id; 

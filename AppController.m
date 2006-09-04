@@ -1821,13 +1821,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	switch ([sender tag]) 
 	{
-		case NSFindPanelActionShowFindPanel:
-			[mainWindow makeFirstResponder:searchField];
-			break;
-			
-		default:
-			[[browserView activeTabView] performFindPanelAction:[sender tag]];
-			break;
+	case NSFindPanelActionSetFindString:
+		[searchField setStringValue:[NSApp currentSelection]];
+		[mainWindow makeFirstResponder:searchField];
+		break;
+
+	case NSFindPanelActionShowFindPanel:
+		[mainWindow makeFirstResponder:searchField];
+		break;
+		
+	default:
+		[[browserView activeTabView] performFindPanelAction:[sender tag]];
+		break;
 	}
 }
 
@@ -2482,6 +2487,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[[searchField cell] setSendsWholeSearchString:YES];
 		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search web page", nil)];
+	}
+	else if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
+	{
+		[[searchField cell] setSendsWholeSearchString:YES];
+		[[searchField cell] setPlaceholderString:[articleController searchPlaceholderString]];
 	}
 	else
 	{
