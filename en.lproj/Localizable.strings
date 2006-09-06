@@ -180,7 +180,7 @@
 "Mark All Read" = "Mark All Read";
 "Move Folders" = "Move Folders";
 "Downloads" = "Downloads";
-"Invalid style title" = "The style %@ appears to be corrupted";
+"Invalid style title" = "The style %@ appears to be missing or corrupted";
 "Invalid style body" = "The Default style will be used instead.";
 "Downloads Running" = "One or more downloads are in progress";
 "Downloads Running text" = "Do you want to cancel all downloads and close Vienna now?";
