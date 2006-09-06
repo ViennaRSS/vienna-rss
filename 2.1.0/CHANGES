@@ -16,6 +16,7 @@ Thanks!
 - Change URL with feed:// to http:// during refresh.
 - Fix bug with expanding file:// path.
 - Compare article titles case insensitively when looking for updates.
+- Fix warning message for missing style.
 
 2.1.0.2104
 ----------
