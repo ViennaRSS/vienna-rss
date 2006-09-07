@@ -23,6 +23,7 @@ extern NSString * MA_DefaultUserAgentString;
 
 extern NSString * MAPref_ArticleListFont;
 extern NSString * MAPref_AutoSortFoldersTree;
+extern NSString * MAPref_CheckForUpdatedArticles;
 extern NSString * MAPref_ShowUnreadArticlesInBold;
 extern NSString * MAPref_FolderFont;
 extern NSString * MAPref_CachedFolderID;
