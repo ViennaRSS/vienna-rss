@@ -1393,7 +1393,11 @@ static Database * _sharedDatabase = nil;
 			// Update folder unread count
 			if (!read_flag)
 				adjustment = 1;
-		}		
+		}
+		else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles])
+		{
+			return NO;
+		}
 		else if (![existingArticle isDeleted])
 		{
 			NSString * existingBody = [existingArticle body];

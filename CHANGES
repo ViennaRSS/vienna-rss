@@ -17,6 +17,7 @@ Thanks!
 - Fix bug with expanding file:// path.
 - Compare article titles case insensitively when looking for updates.
 - Fix warning message for missing style.
+- Add hidden preference to disable checking for updated articles.
 
 2.1.0.2104
 ----------

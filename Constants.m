@@ -22,6 +22,7 @@ NSString * MA_DefaultUserAgentString = @"Vienna/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
+NSString * MAPref_CheckForUpdatedArticles = @"CheckForUpdatedArticles";
 NSString * MAPref_ShowUnreadArticlesInBold = @"ShowUnreadArticlesInBold";
 NSString * MAPref_FolderFont = @"FolderFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
