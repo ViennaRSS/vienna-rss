@@ -6,14 +6,14 @@
 "Folders" = "Ordner";
 "Loading %@..." = "Lade %@...";
 "Completed" = "Fertig";
-"Refresh RSS feeds" = "Feeds aktualisieren";
+"Refresh RSS feeds" = "Abonnements aktualisieren";
 "Refresh All Subscriptions" = "Ausgewähltes Abonnement aktualisieren";
 "Already subscribed title" = "Fehler";
-"Already subscribed body" = "Sie haben diesen Feed bereits abonniert";
+"Already subscribed body" = "Sie haben dieses Abonnement bereits aufgenommen";
 "RSS Subscription Import Title" = "Import fertig";
-"%d subscriptions successfully imported" = "%d Feeds erfolgreich importiert";
+"%d subscriptions successfully imported" = "%d Abonnements erfolgreich importiert";
 "RSS Subscription Export Title" = "Export fertig";
-"%d subscriptions successfully exported" = "%d Feeds erfolgreich exportiert";
+"%d subscriptions successfully exported" = "%d Abonnements erfolgreich exportiert";
 "Growl description" = "%d neue ungelesene Artikel empfangen";
 "Growl notification name" = "Neue Artikel";
 "Growl notification title" = "Neue Artikel";
@@ -74,7 +74,7 @@
 "No new articles available" = "Keine neuen Artikel verfügbar";
 "%d new articles retrieved" = "%d neue Artikel empfangen";
 "HTTP code %d reported from server" = "Der Server lieferte den HTTP-Code %d";
-"Headers:\n" = "Köpfe:\n";
+"Headers:\n" = "Headers:\n";
 "Connection error (%d, %@):\n" = "Verbindungsfehler (%d, %@):\n";
 "\tDescription: %@\n" = "\tBeschreibung: %@\n";
 "\tSuggestion: %@\n" = "\tVorschlag: %@\n";
@@ -328,5 +328,3 @@
 "Reading" = "Lese-Einstellungen";
 "Blog With..." = "Bloggen mit...";
 "Blog with %@" = "Bloggen mit %@";
-"Bigger Text" = "Bigger Text";
-"Smaller Text" = "Smaller Text";
