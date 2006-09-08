@@ -257,12 +257,12 @@ static NSMutableDictionary * stylePathMappings = nil;
 
 /* decidePolicyForNewWindowAction
  * Called by the web view to get our policy on handling actions that would open a new window.
- * When opening clicked links in the background, we want the first responder to return to the article list.
+ * When opening clicked links in the background or an external browser, we want the first responder to return to the article list.
  */
 -(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground]))
+	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
 		[[NSApp mainWindow] makeFirstResponder:[[[[NSApp delegate] browserView] primaryTabView] mainView]];
 	
 	[super webView:sender decidePolicyForNewWindowAction:actionInformation request:request newFrameName:frameName decisionListener:listener];
@@ -271,7 +271,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 /* decidePolicyForNavigationAction
  * Called by the web view to get our policy on handling navigation actions.
  * Relative URLs should open in the same view.
- * When opening clicked links in the background, we want the first responder to return to the article list.
+ * When opening clicked links in the background or an external browser, we want the first responder to return to the article list.
  */
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
@@ -286,7 +286,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	}
 	
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground]))
+	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
 		[[NSApp mainWindow] makeFirstResponder:[[[[NSApp delegate] browserView] primaryTabView] mainView]];
 	
 	[super webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
