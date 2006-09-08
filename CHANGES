@@ -18,6 +18,8 @@ Thanks!
 - Compare article titles case insensitively when looking for updates.
 - Fix warning message for missing style.
 - Add hidden preference to disable checking for updated articles.
+- After clicking link in article pane to open in foreground of external browser,
+  return focus to article list.
 
 2.1.0.2104
 ----------
