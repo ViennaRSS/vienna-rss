@@ -20,6 +20,7 @@ Thanks!
 - Add hidden preference to disable checking for updated articles.
 - After clicking link in article pane to open in foreground of external browser,
   return focus to article list.
+- Fix bug in date parser.
 
 2.1.0.2104
 ----------

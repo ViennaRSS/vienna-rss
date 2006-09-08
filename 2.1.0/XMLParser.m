@@ -457,15 +457,27 @@
 	// RSS/HTTP formats. Add a hack to substitute UT with GMT as it doesn't
 	// seem to be able to parse the former.
 	dateString = [dateString trim];
+	unsigned int dateLength = [dateString length];
 	if ([dateString hasSuffix:@" UT"])
-		dateString = [[dateString substringToIndex:[dateString length] - 3] stringByAppendingString:@" GMT"];
+		dateString = [[dateString substringToIndex:dateLength - 3] stringByAppendingString:@" GMT"];
+	// CURL seems to require seconds in the time, so add seconds if necessary.
+	NSScanner * scanner = [NSScanner scannerWithString:dateString];
+	if ([scanner scanUpToString:@":" intoString:NULL])
+	{
+		unsigned int location = [scanner scanLocation] + 3u;
+		if ((location < dateLength) && [dateString characterAtIndex:location] != ':')
+		{
+			dateString = [NSString stringWithFormat:@"%@:00%@", [dateString substringToIndex:location], [dateString substringFromIndex:location]];
+			scanner = [NSScanner scannerWithString:dateString];
+		}
+	}
 
 	NSCalendarDate * curlDate = [CurlGetDate getDateFromString:dateString];
 	if (curlDate != nil)
 		return curlDate;
 
 	// Otherwise do it ourselves.
-	NSScanner * scanner = [NSScanner scannerWithString:dateString];
+	[scanner setScanLocation:0u];
 	if (![scanner scanInt:&yearValue])
 		return nil;
 	if (yearValue < 100)
