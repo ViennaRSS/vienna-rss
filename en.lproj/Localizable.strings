@@ -183,7 +183,7 @@
 "Invalid style title" = "The style %@ appears to be missing or corrupted";
 "Invalid style body" = "The Default style will be used instead.";
 "Downloads Running" = "One or more downloads are in progress";
-"Downloads Running text" = "Do you want to cancel all downloads and close Vienna now?";
+"Downloads Running text" = "If you quit Vienna now, all downloads will stop.";
 "Mark All Subscriptions as Read" = "Mark All Subscriptions as Read";
 "Preferences" = "Preferences";
 "General" = "General";
