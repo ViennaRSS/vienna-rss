@@ -21,6 +21,8 @@ Thanks!
 - After clicking link in article pane to open in foreground of external browser,
   return focus to article list.
 - Fix bug in date parser.
+- If there are no connection errors during refresh, then set the subscription's
+  last update date even if there is no data.  Could be http 304, for example.
 
 2.1.0.2104
 ----------

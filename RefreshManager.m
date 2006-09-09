@@ -576,6 +576,9 @@ typedef enum {
 		// existing error flag.
 		[self setFolderErrorFlag:folder flag:NO];
 		
+		// Set the last update date for this folder.
+		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
 			[self refreshFavIcon:folder];
@@ -640,9 +643,6 @@ typedef enum {
 			if (feedLink == nil || [feedLink isBlank])
 				feedLink = [[folder feedURL] baseURL];
 
-			// Get the feed's last update from the header if it is present. This will mark the
-			// date of the most recent article in the feed if the individual articles are
-			// missing a date tag.
 			// Check for new articles within 24 hours before the last update, because feeds
 			// sometimes set the wrong time or date.
 			NSDate * compareDate = [[folder lastUpdate] addTimeInterval:-86400];
@@ -720,9 +720,6 @@ typedef enum {
 			if (feedLink!= nil)
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 			
-			// Set the last update date for this folder.
-			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-			
 			[db commitTransaction];
 			
 			// Let interested callers know that the folder has changed.
@@ -731,6 +728,9 @@ typedef enum {
 
 		// Mark the feed as succeeded
 		[self setFolderErrorFlag:folder flag:NO];
+		
+		// Set the last update date for this folder.
+		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
