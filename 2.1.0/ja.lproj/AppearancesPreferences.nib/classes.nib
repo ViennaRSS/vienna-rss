@@ -3,6 +3,7 @@
         {
             ACTIONS = {
                 changeMinimumFontSize = id; 
+                changeNewArticlesNotification = id; 
                 changeShowFolderImages = id; 
                 selectArticleFont = id; 
                 selectFolderFont = id; 
