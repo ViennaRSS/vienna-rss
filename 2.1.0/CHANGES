@@ -23,6 +23,7 @@ Thanks!
 - Fix bug in date parser.
 - If there are no connection errors during refresh, then set the subscription's
   last update date even if there is no data.  Could be http 304, for example.
+- Added Korean localisation (thanks to Lee Seung Koo).
 
 2.1.0.2104
 ----------
