@@ -40,6 +40,9 @@
 // Compact database
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd;
 
+// Empty trash
+-(id)handleEmptyTrash:(NSScriptCommand *)cmd;
+
 // Reset folder sort order
 -(id)resetFolderSort:(NSScriptCommand *)cmd;
 

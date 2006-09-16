@@ -457,6 +457,13 @@
 			<key>Name</key>
 			<string>reset folder sort</string>
 		</dict>
+		<key>EmptyTrash</key>
+		<dict>
+			<key>Description</key>
+			<string>Empty the trash</string>
+			<key>Name</key>
+			<string>empty trash</string>
+		</dict>
 	</dict>
 	<key>Description</key>
 	<string>Classes and commands for Vienna</string>
