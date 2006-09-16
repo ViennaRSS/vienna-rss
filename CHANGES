@@ -24,6 +24,8 @@ Thanks!
 - If there are no connection errors during refresh, then set the subscription's
   last update date even if there is no data.  Could be http 304, for example.
 - Added Korean localisation (thanks to Lee Seung Koo).
+- Add AppleScript command for emptying trash.
+- "Text contains" in smart folders now matches partial words.
 
 2.1.0.2104
 ----------
