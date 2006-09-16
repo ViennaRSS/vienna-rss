@@ -446,6 +446,8 @@
 				<string>handleRefreshSubscription:</string>
 				<key>ResetFolderSort</key>
 				<string>resetFolderSort:</string>
+				<key>EmptyTrash</key>
+				<string>handleEmptyTrash:</string>
 			</dict>
 			<key>ToManyRelationships</key>
 			<dict>
@@ -611,6 +613,15 @@
 			<string>Vnna</string>
 			<key>AppleEventCode</key>
 			<string>VnFS</string>
+			<key>CommandClass</key>
+			<string>NSScriptCommand</string>
+		</dict>
+		<key>EmptyTrash</key>
+		<dict>
+			<key>AppleEventClassCode</key>
+			<string>Vnna</string>
+			<key>AppleEventCode</key>
+			<string>VnET</string>
 			<key>CommandClass</key>
 			<string>NSScriptCommand</string>
 		</dict>

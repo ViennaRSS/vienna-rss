@@ -133,6 +133,16 @@
 	return nil;
 }
 
+/* handleEmptyTrash
+ * Empty the trash.
+ */
+-(id)handleEmptyTrash:(NSScriptCommand *)cmd
+{
+	[[self delegate] clearUndoStack];
+	[[Database sharedDatabase] purgeDeletedArticles];
+	return nil;
+}
+
 /* handleImportSubscriptions
  * Import subscriptions from a file.
  */
