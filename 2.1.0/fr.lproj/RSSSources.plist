@@ -5,7 +5,7 @@
 	<key>Local File</key>
 	<dict>
 		<key>LinkName</key>
-		<string>Enter the path under your home folder</string>
+		<string>Entrer le chemin à partir de votre dossier personnel</string>
 		<key>LinkTemplate</key>
 		<string>file://~/%@</string>
 	</dict>
@@ -14,7 +14,7 @@
 		<key>SiteHomePage</key>
 		<string>http://www.livejournal.com</string>
 		<key>LinkName</key>
-		<string>Enter LiveJournal User name</string>
+		<string>Entrer le nom d'utilisateur LiveJournal</string>
 		<key>LinkTemplate</key>
 		<string>http://www.livejournal.com/users/%@/data/rss</string>
 	</dict>
@@ -23,7 +23,7 @@
 		<key>SiteHomePage</key>
 		<string>http://spaces.msn.com</string>
 		<key>LinkName</key>
-		<string>Enter MSN Spaces User name</string>
+		<string>Entrer le nom d'utilisateur MSN Spaces</string>
 		<key>LinkTemplate</key>
 		<string>http://spaces.msn.com/members/%@/feed.rss</string>
 	</dict>
@@ -32,7 +32,7 @@
 		<key>SiteHomePage</key>
 		<string>http://www.blogspot.com</string>
 		<key>LinkName</key>
-		<string>Enter Blogspot User name</string>
+		<string>Entrer le nom d'utilisateur Blogspot</string>
 		<key>LinkTemplate</key>
 		<string>http://%@.blogspot.com/atom.xml</string>
 	</dict>
@@ -41,14 +41,14 @@
 		<key>SiteHomePage</key>
 		<string>http://www.xanga.com</string>
 		<key>LinkName</key>
-		<string>Enter Xanga User name</string>
+		<string>Entrer le nom d'utilisateur Xanga</string>
 		<key>LinkTemplate</key>
 		<string>http://www.xanga.com/rss.aspx?user=%@</string>
 	</dict>
 	<key>URL</key>
 	<dict>
 		<key>LinkName</key>
-		<string>Enter URL of RSS feed</string>
+		<string>Entrer l'URL d'un flux RSS</string>
 		<key>LinkTemplate</key>
 		<string>%@</string>
 	</dict>
