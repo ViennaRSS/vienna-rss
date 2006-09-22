@@ -294,8 +294,6 @@
 /* Added in 2.1.0 */
 "Send Link" = "Link senden";
 "Send Links" = "Links senden";
-"Bigger Text" = "Schrift größer";
-"Smaller Text" = "Schrift kleiner";
 "Enter the URL here" = "URL hier eingeben";
 "Refresh the current page" = "Seite neu laden";
 "Return to the previous page" = "Die vorherige Seite anzeigen";
@@ -327,3 +325,5 @@
 "Summary" = "Zusammenfassung";
 "Blog With..." = "Bloggen mit...";
 "Blog with %@" = "Bloggen mit %@";
+"Bigger Text" = "Schrift größer";
+"Smaller Text" = "Schrift kleiner";
