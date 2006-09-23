@@ -6,12 +6,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+
+2.1.0.2106
+----------
+
 2.1.0.2105
 ----------
 - Add Blog With feature.
 - Fix bug where mouse was tracking wrong browser tab.
 - Fix bug: searching in 'any' smart folders wasn't done correctly.
-- Updated all localisation.
+- Updated all localisation except Traditional Chinese.
 - Added Brazilian Portuguese localisation (thanks to Helvécio Mafra).
 - Change URL with feed:// to http:// during refresh.
 - Fix bug with expanding file:// path.
