@@ -560,7 +560,7 @@ static const int MA_Left_Margin_Width = 10;
 {
 	if (trackingTab != [theEvent userData])
 		trackingTab = [theEvent userData];
-	if ([trackingTab hasCloseButton])
+	else if ([trackingTab hasCloseButton])
 	{
 		NSPoint mousePosition = [self convertPoint:[theEvent locationInWindow] fromView:[[NSApp mainWindow] contentView]];
 		if (NSPointInRect(mousePosition, [trackingTab closeButtonRect]))
@@ -577,14 +577,14 @@ static const int MA_Left_Margin_Width = 10;
  */
 -(void)mouseExited:(NSEvent *)theEvent
 {
-	if ([trackingTab hasCloseButton] && [trackingTab closeButtonState] != NORMAL_STATE)
+	BrowserTab * theTab = [theEvent userData];
+	if ([theTab hasCloseButton] && [theTab closeButtonState] != NORMAL_STATE)
 	{
-		[trackingTab setCloseButtonState:NORMAL_STATE];
-		[self setNeedsDisplayInRect:[trackingTab closeButtonRect]];
+		[theTab setCloseButtonState:NORMAL_STATE];
+		[self setNeedsDisplayInRect:[theTab closeButtonRect]];
 		[self displayIfNeeded];
-		return;
 	}
-	if (trackingTab == [theEvent userData])
+	else if (trackingTab == theTab)
 		trackingTab = nil;
 }
 
