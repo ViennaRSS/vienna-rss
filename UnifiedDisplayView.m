@@ -118,7 +118,8 @@
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	[controller setStatusMessage:text persist:NO];
+	if ([[controller browserView] activeTabView] == self)
+		[controller setStatusMessage:text persist:NO];
 }
 
 /* mouseDidMoveOverElement

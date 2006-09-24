@@ -1693,6 +1693,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	[self updateCloseCommands];
 	[self updateSearchPlaceholder];
+	[self setStatusMessage:nil persist:NO];
 }
 
 /* handleFolderNameChange

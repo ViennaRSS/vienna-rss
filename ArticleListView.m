@@ -228,7 +228,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	[controller setStatusMessage:text persist:NO];
+	if ([[controller browserView] activeTabView] == self)
+		[controller setStatusMessage:text persist:NO];
 }
 
 /* mouseDidMoveOverElement
