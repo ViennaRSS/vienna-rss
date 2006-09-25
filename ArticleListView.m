@@ -1011,9 +1011,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	else
 		currentSelectedRow = -1;
-	if ((currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
+	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
 		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
-	if (refreshFlag == MA_Refresh_SortAndRedraw)
+	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
 	[guid release];
 }
