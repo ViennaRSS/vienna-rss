@@ -415,7 +415,10 @@
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 
 	// Ensure selection
-	[mainArticleView ensureSelectedArticle:YES];
+	if ([currentArrayOfArticles count] > 0u)
+		[mainArticleView ensureSelectedArticle:YES];
+	else
+		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
@@ -456,8 +459,11 @@
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 
 	// Ensure there's a valid selection
-	[mainArticleView ensureSelectedArticle:YES];
-
+	if ([currentArrayOfArticles count] > 0u)
+		[mainArticleView ensureSelectedArticle:YES];
+	else
+		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+	
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
 		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
