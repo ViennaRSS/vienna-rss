@@ -550,7 +550,7 @@
 		AA6D2EA20ACC6D790044C00C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_CN; path = "zh_CN.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA6D2EAF0ACC6D910044C00C /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA6D2EB30ACC6DC50044C00C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AA6D2EB40ACC6DCF0044C00C /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = zh_CN; path = zh_CN.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		AA6D2EB40ACC6DCF0044C00C /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = zh_CN; path = zh_CN.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = leftArrow.tiff; sourceTree = "<group>"; };
 		AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rightArrow.tiff; sourceTree = "<group>"; };
 		AA71097509BA77B700E3EA8A /* newRefresh.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = newRefresh.tiff; sourceTree = "<group>"; };

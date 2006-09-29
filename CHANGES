@@ -10,6 +10,7 @@ Thanks!
 2.1.0.2106
 ----------
 - Only allow the active web view to set the status bar text.
+- Added Simplified Chinese localisation. (Thanks to Arsen Liang).
 
 2.1.0.2105
 ----------
