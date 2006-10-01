@@ -1341,7 +1341,7 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 		// If an obviously different article with the same guid exists, give the article a new guid.
-		while ((existingArticle != nil) && (([[existingArticle title] compare:articleTitle options:NSLiteralSearch | NSCaseInsensitiveSearch] != NSOrderedSame) || ![[existingArticle link] isEqualToString:articleLink]))
+		while ((existingArticle != nil) && ([[existingArticle title] compare:articleTitle options:NSLiteralSearch | NSCaseInsensitiveSearch] != NSOrderedSame))
 		{
 			articleGuid = [NSString stringWithFormat:@"NEW%@", articleGuid];
 			existingArticle = [folder articleFromGuid:articleGuid];
@@ -1833,7 +1833,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link from messages where folder_id=%d", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
@@ -1846,7 +1846,6 @@ static Database * _sharedDatabase = nil;
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
 				NSString * title = [row stringForColumn:@"title"];
-				NSString * link = [row stringForColumn:@"link"];
 
 				// Keep our own track of unread articles
 				if (!read_flag)
@@ -1857,7 +1856,6 @@ static Database * _sharedDatabase = nil;
 				[article markDeleted:deleted_flag];
 				[article setFolderId:folderId];
 				[article setTitle:title];
-				[article setLink:link];
 				[folder addArticleToCache:article];
 				[article release];
 			}
