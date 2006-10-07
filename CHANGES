@@ -12,6 +12,7 @@ Thanks!
 - Only allow the active web view to set the status bar text.
 - Added Simplified Chinese localisation. (Thanks to Arsen Liang).
 - Don't create a new article if the only difference is the article link.
+- Fix bug: article list rows were too small for text.
 
 2.1.0.2105
 ----------

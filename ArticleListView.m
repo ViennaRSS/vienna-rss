@@ -591,7 +591,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)updateArticleListRowHeight
 {
 	Database * db = [Database sharedDatabase];
-	int height = [articleListFont defaultLineHeightForFont];
+	float height = [articleListFont defaultLineHeightForFont];
 	int numberOfRowsInCell;
 
 	if (tableLayout == MA_Layout_Report)
@@ -610,7 +610,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (numberOfRowsInCell == 0)
 			++numberOfRowsInCell;
 	}
-	[articleList setRowHeight:(height + 2) * numberOfRowsInCell];
+	[articleList setRowHeight:(height + 2.0f) * (float)numberOfRowsInCell];
 }
 
 /* showSortDirection
