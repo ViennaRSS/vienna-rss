@@ -884,6 +884,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (newBrowserTemplate)
 	{
 		BrowserPane * newBrowserPane = [newBrowserTemplate mainView];
+		if (didCompleteInitialisation)
+			[browserView saveOpenTabs];
 		BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
 		[newBrowserPane setTab:tab];

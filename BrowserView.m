@@ -915,6 +915,7 @@ static const int MA_Left_Margin_Width = 10;
 			[tabLinks addObject:tabLink];
 	}
 	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
+	[[Preferences standardPreferences] savePreferences];
 }
 
 /* dealloc

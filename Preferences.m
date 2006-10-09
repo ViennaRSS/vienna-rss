@@ -230,7 +230,9 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)savePreferences
 {
-	if (preferencesPath != nil)
+	if (preferencesPath == nil)
+		[userPrefs synchronize];
+	else
 	{
 		if (![userPrefs writeToFile:preferencesPath atomically:NO])
 			NSLog(@"Failed to update preferences to %@", preferencesPath);
