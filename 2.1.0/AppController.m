@@ -77,6 +77,7 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
+-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url author:(NSString *)author guid:(NSString *)guid;
 	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
 	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholder;
@@ -2637,54 +2638,68 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 {
 	// Is our target application running? If not, we'll launch it.
-	if (![[[[NSWorkspace sharedWorkspace] launchedApplications] valueForKey:@"NSApplicationBundleIdentifier"] containsObject: externalEditorBundleIdentifier])
+	if (![[[[NSWorkspace sharedWorkspace] launchedApplications] valueForKey:@"NSApplicationBundleIdentifier"] containsObject:externalEditorBundleIdentifier])
 	{
 		[[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:externalEditorBundleIdentifier
 															 options:NSWorkspaceLaunchWithoutActivation
 									  additionalEventParamDescriptor:NULL
 													launchIdentifier:nil];
 	}
+	
+	// If the active tab is a web view, blog the URL
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabTitle:[browserView activeTab]] url:[theView viewLink] author:@"" guid:@""];
+	else
+	{
+		// Get the currently selected articles from the ArticleView ...
+		NSArray * articleArray = [mainArticleView markedArticleRange];
+		NSEnumerator * e = [articleArray objectEnumerator];
+		id currentArticle;
+		
+		// ... and iterate over them.
+		while ((currentArticle = [e nextObject]) != nil) 
+			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] author:[currentArticle author] guid:[currentArticle guid]];
+	}
+}
 
-	// Get the currently selected articles from the ArticleView ...
-	NSArray * articleArray = [mainArticleView markedArticleRange];
-	NSEnumerator * e = [articleArray objectEnumerator];
+/* sendBlogEvent
+ * Send an event to the specified blog editor using the given parameters. Unused parameters should be set to an empty string.
+ */
+-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url author:(NSString *)author guid:(NSString *)guid
+{
 	NSAppleEventDescriptor * eventRecord;
 	NSAppleEventDescriptor * target;
 	NSAppleEventDescriptor * event;
-	id currentArticle;
-
-	// ... and iterate over them.
-	while ((currentArticle = [e nextObject]) != nil) 
-	{
-		// The record descriptor which will hold the information about the post.
-		eventRecord = [NSAppleEventDescriptor recordDescriptor];
-
-		// Setting the target application.
-		target = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplicationBundleID 
-																 data:[externalEditorBundleIdentifier 
-													dataUsingEncoding:NSUTF8StringEncoding]];
-
-		// The actual Apple Event that will get sent to the target.
-		event = [NSAppleEventDescriptor appleEventWithEventClass:EditDataItemAppleEventClass 
-														 eventID:EditDataItemAppleEventID
-												targetDescriptor:target 
-														returnID:kAutoGenerateReturnID
-												   transactionID:kAnyTransactionID];
-
-		// Inserting the data about the post we want the target to create.
-		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle title]] forKeyword:DataItemTitle];
-		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle link]] forKeyword:DataItemLink];
-		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle author]] forKeyword:DataItemCreator];
-		[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString: [currentArticle guid]] forKeyword:DataItemGUID];
-
-		// Add the recordDescriptor whe just created to the actual event.
-		[event setDescriptor: eventRecord forKeyword:'----'];
-
-		// Send our Apple Event.
-		OSStatus err = AESendMessage([event aeDesc], NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
-		if (err != noErr) 
-			NSLog(@"Error sending Apple Event: %d", err);
-	}
+	
+	// The record descriptor which will hold the information about the post.
+	eventRecord = [NSAppleEventDescriptor recordDescriptor];
+	
+	// Setting the target application.
+	target = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplicationBundleID 
+															 data:[externalEditorBundleIdentifier 
+														dataUsingEncoding:NSUTF8StringEncoding]];
+	
+	// The actual Apple Event that will get sent to the target.
+	event = [NSAppleEventDescriptor appleEventWithEventClass:EditDataItemAppleEventClass 
+													 eventID:EditDataItemAppleEventID
+											targetDescriptor:target 
+													returnID:kAutoGenerateReturnID
+											   transactionID:kAnyTransactionID];
+	
+	// Inserting the data about the post we want the target to create.
+	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:title] forKeyword:DataItemTitle];
+	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:url] forKeyword:DataItemLink];
+	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:author] forKeyword:DataItemCreator];
+	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:guid] forKeyword:DataItemGUID];
+	
+	// Add the recordDescriptor whe just created to the actual event.
+	[event setDescriptor: eventRecord forKeyword:'----'];
+	
+	// Send our Apple Event.
+	OSStatus err = AESendMessage([event aeDesc], NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
+	if (err != noErr) 
+		NSLog(@"Error sending Apple Event: %d", err);
 }
 
 #pragma mark Status Message

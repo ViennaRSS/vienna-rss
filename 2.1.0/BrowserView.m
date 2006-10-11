@@ -788,6 +788,14 @@ static const int MA_Left_Margin_Width = 10;
 	[self displayRect:[tab rect]];
 }
 
+/* tabTitle
+ * Returns the title of the specified tab. May be an empty string.
+ */
+-(NSString *)tabTitle:(BrowserTab *)tab
+{
+	return [tab title];
+}
+
 /* closeAllTabs
  * Close all tabs.
  */
