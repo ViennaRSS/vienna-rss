@@ -41,6 +41,7 @@
 -(BrowserTab *)primaryTab;
 -(BrowserTab *)activeTab;
 -(void)setTabTitle:(BrowserTab *)tab title:(NSString *)newTitle;
+-(NSString *)tabTitle:(BrowserTab *)tab;
 -(NSView<BaseView> *)activeTabView;
 -(NSView<BaseView> *)primaryTabView;
 -(void)setActiveTabToPrimaryTab;
