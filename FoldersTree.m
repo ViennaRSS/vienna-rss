@@ -478,9 +478,10 @@
 
 	while (node != nil)
 	{
-		TreeNode * nextNode;
+		TreeNode * nextNode = nil;
 		TreeNode * parentNode = [node parentNode];
-		nextNode = [node firstChild];
+        if (([[node folder] childUnreadCount] > 0) && [outlineView isItemExpanded:node])
+            nextNode = [node firstChild];
 		if (nextNode == nil)
 			nextNode = [node nextSibling];
 		while (nextNode == nil && parentNode != nil)
@@ -489,7 +490,7 @@
 			parentNode = [parentNode parentNode];
 		}
 		if (nextNode == nil)
-			nextNode = rootNode;
+			nextNode = [rootNode firstChild];
 
 		if (([[nextNode folder] childUnreadCount]) && ![outlineView isItemExpanded:nextNode])
 			return [nextNode nodeId];
