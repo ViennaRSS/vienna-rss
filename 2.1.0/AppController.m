@@ -2171,7 +2171,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)viewNextUnread:(id)sender
 {
 	[browserView setActiveTabToPrimaryTab];
-	[articleController displayNextUnread];
+	if ([db countOfUnread] > 0)
+        [articleController displayNextUnread];
 	[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabView] mainView] : [foldersTree mainView]];
 }
 
