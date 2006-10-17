@@ -2,10 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Local File</key>
+	<key>本機檔案</key>
 	<dict>
 		<key>LinkName</key>
-		<string>Enter the path under your home folder</string>
+		<string>請輸入您個人專屬檔案夾的路徑</string>
 		<key>LinkTemplate</key>
 		<string>file://~/%@</string>
 	</dict>
@@ -99,3 +99,4 @@
 	</dict>
 </dict>
 </plist>
+
