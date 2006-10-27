@@ -14,7 +14,8 @@ Thanks!
 - Don't create a new article if the only difference is the article link.
 - Fix bug: article list rows were too small for text.
 - Fix bug: next unread command didn't respect folder unexpanded state.
-- Fix bug: articles with date but no time were sometimes missed because of midnight timestamp. 
+- Fix bug: articles with date but no time were sometimes missed because of midnight timestamp.
+- Turn off article updating by default.
 
 2.1.0.2105
 ----------

@@ -192,7 +192,7 @@ static Preferences * _standardPreferences = nil;
 	NSDictionary * sysDict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
 	BOOL isPanther = [[sysDict valueForKey:@"ProductVersion"] hasPrefix:@"10.3"];
 
-	[defaultValues setObject:boolYes forKey:MAPref_CheckForUpdatedArticles];
+	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatedArticles];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowUnreadArticlesInBold];
 	[defaultValues setObject:defaultArticleListFont forKey:MAPref_ArticleListFont];
 	[defaultValues setObject:defaultFolderFont forKey:MAPref_FolderFont];
