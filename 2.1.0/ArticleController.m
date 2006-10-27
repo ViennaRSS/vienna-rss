@@ -25,6 +25,7 @@
 #import "Database.h"
 #import "ArticleFilter.h"
 #import "ArticleRef.h"
+#import "StringExtensions.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -846,6 +847,19 @@
 	[article retain];
 	[articleToPreserve release];
 	articleToPreserve = article;
+}
+
+/* createArticleSummaries
+ * Creates article summaries from the article text.
+ */
+-(void)createArticleSummaries
+{
+    NSEnumerator * enumerator = [folderArrayOfArticles objectEnumerator];
+    Article * theArticle;
+    while ((theArticle = [enumerator nextObject]) != nil)
+    {
+        [theArticle setSummary:[[theArticle body] summaryTextFromHTML]];
+    }
 }
 
 /* dealloc

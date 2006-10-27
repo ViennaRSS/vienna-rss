@@ -1631,7 +1631,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	Field * field = [menuItem representedObject];
 	
-	[field setVisible:![field visible]];
+    [field setVisible:![field visible]];
+	if ([[field name] isEqualToString:MA_Field_Summary] && [field visible])
+        [articleController createArticleSummaries];
 	[mainArticleView updateVisibleColumns];
 	[mainArticleView saveTableSettings];
 }

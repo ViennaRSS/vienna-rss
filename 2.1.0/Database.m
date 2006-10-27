@@ -2193,47 +2193,35 @@ static Database * _sharedDatabase = nil;
 	{
 		NSEnumerator * enumerator = [results rowEnumerator];
 		SQLRow * row;
+        Article * article;
+        NSString * text;
+        BOOL needSummary = [[self fieldByName:MA_Field_Summary] visible];
 
 		while ((row = [enumerator nextObject]) != nil)
 		{
-			NSString * guid = [row stringForColumn:@"message_id"];
-			int parentId = [[row stringForColumn:@"parent_id"] intValue];
-			int articleFolderId = [[row stringForColumn:@"folder_id"] intValue];
-			NSString * title = [row stringForColumn:@"title"];
-			NSString * author = [row stringForColumn:@"sender"];
-			NSString * link = [row stringForColumn:@"link"];
-			NSString * text = [row stringForColumn:@"text"];
-			BOOL isRead = [[row stringForColumn:@"read_flag"] intValue];
-			BOOL isRevised = [[row stringForColumn:@"revised_flag"] intValue];
-			BOOL isFlagged = [[row stringForColumn:@"marked_flag"] intValue];
-			BOOL isDeleted = [[row stringForColumn:@"deleted_flag"] intValue];
-			NSDate * date = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]];
-			NSDate * createdDate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"createddate"] doubleValue]];
-
-			// Summary field needs to be synthesized.
-			NSString * summary = [text summaryTextFromHTML];
-
-			// Keep our own track of unread articles
-			if (!isRead)
-				++unread_count;
-
-			Article * article = [[Article alloc] initWithGuid:guid];
-			[article setTitle:title];
-			[article setSummary:summary];
-			[article setAuthor:author];
-			[article setLink:link];
-			[article setDate:date];
-			[article setCreatedDate:createdDate];
-			[article markRead:isRead];
-			[article markRevised:isRevised];
-			[article markFlagged:isFlagged];
-			[article markDeleted:isDeleted];
-			[article setFolderId:articleFolderId];
-			[article setParentId:parentId];
+			article = [[Article alloc] initWithGuid:[row stringForColumn:@"message_id"]];
+			[article setTitle:[row stringForColumn:@"title"]];
+			[article setAuthor:[row stringForColumn:@"sender"]];
+			[article setLink:[row stringForColumn:@"link"]];
+			[article setDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]]];
+			[article setCreatedDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"createddate"] doubleValue]]];
+			[article markRead:[[row stringForColumn:@"read_flag"] intValue]];
+			[article markRevised:[[row stringForColumn:@"revised_flag"] intValue]];
+			[article markFlagged:[[row stringForColumn:@"marked_flag"] intValue]];
+			[article markDeleted:[[row stringForColumn:@"deleted_flag"] intValue]];
+			[article setFolderId:[[row stringForColumn:@"folder_id"] intValue]];
+			[article setParentId:[[row stringForColumn:@"parent_id"] intValue]];
+            text = [row stringForColumn:@"text"];
 			[article setBody:text];
-			if (folder == nil || !isDeleted || IsTrashFolder(folder))
+			[article setSummary:(needSummary ? [text summaryTextFromHTML] : @"")];
+			if (folder == nil || ![article isDeleted] || IsTrashFolder(folder))
 				[newArray addObject:article];
 			[folder addArticleToCache:article];
+            
+			// Keep our own track of unread articles
+			if (![article isRead])
+				++unread_count;
+            
 			[article release];
 		}
 
