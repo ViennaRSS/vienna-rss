@@ -373,13 +373,14 @@
 	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
 	
-	// We will make a new copy of the currentArrayOfArticles with the selected articles removed.
-	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
+	// We will make a new copy of the folderArrayOfArticles with the selected articles removed.
+	NSMutableArray * arrayCopy = [[NSMutableArray alloc] initWithArray:folderArrayOfArticles];
 	BOOL needFolderRedraw = NO;
+	BOOL needReload = NO;
 	
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copy of
-	// currentArrayOfArticles.
+	// folderArrayOfArticles.
 	Database * db = [Database sharedDatabase];
 	[db beginTransaction];
 	while ((theArticle = [enumerator nextObject]) != nil)
@@ -387,43 +388,30 @@
 		if (![theArticle isRead])
 			needFolderRedraw = YES;
 		[db markArticleDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
-		if (deleteFlag)
-		{
-			if ([self currentCacheContainsFolder:[theArticle folderId]])
-				[arrayCopy removeObject:theArticle];
-		}
+		if (![currentArrayOfArticles containsObject:theArticle])
+			needReload = YES;
+		else if (deleteFlag && (currentFolderId != [db trashFolderId]))
+			[arrayCopy removeObject:theArticle];
+		else if (!deleteFlag && (currentFolderId == [db trashFolderId]))
+			[arrayCopy removeObject:theArticle];
 		else
-		{
-			if (currentFolderId == [db trashFolderId])
-				[arrayCopy removeObject:theArticle];
-			else if ([theArticle folderId] == currentFolderId)
-				[arrayCopy addObject:theArticle];
-		}
+			needReload = YES;
 	}
 	[db commitTransaction];
-	[currentArrayOfArticles release];
-	currentArrayOfArticles = arrayCopy;
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-
-	// If we've added articles back to the array, we need to resort to put
-	// them back in the right place.
-	if (!deleteFlag)
-		[self sortArticles];
+	[folderArrayOfArticles release];
+	folderArrayOfArticles = arrayCopy;
+	if (needReload)
+		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	else
+		[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 
 	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
 	if (needFolderRedraw)
+	{
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-
-	// Ensure selection
-	if ([currentArrayOfArticles count] > 0u)
-		[mainArticleView ensureSelectedArticle:YES];
-	else
-		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
-
-	// Read and/or unread count may have changed
-	if (needFolderRedraw)
 		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+	}
 }
 
 /* deleteArticlesByArray
