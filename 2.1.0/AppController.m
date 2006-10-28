@@ -2861,7 +2861,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Article * thisArticle = [self selectedArticle];
 		Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
-		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
+		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible && isArticleView);
 	}
 	else if ((theAction == @selector(viewArticlePage:)) || (theAction == @selector(viewArticlePageInAlternateBrowser:)))
 	{
