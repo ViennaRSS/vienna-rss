@@ -199,7 +199,7 @@
 	// Add a Select command so the user can manually pick a registered
 	// application.
 	[linksHandler addSeparator];
-	[linksHandler addItemWithTarget:NSLocalizedString(@"Select...", nil) target:@selector(handleLinkSelector:)];
+	[linksHandler addItemWithTag:NSLocalizedString(@"Select...", nil) tag:-1];
 	
 	// Select the registered item
 	[linksHandler selectItemAtIndex:0];
@@ -316,9 +316,9 @@
 	NSMenuItem * selectedItem = [linksHandler selectedItem];
 	if (selectedItem != nil)
 	{
-		if ([selectedItem action] == @selector(handleLinkSelector:))
+		if ([selectedItem tag] == -1)
 		{
-			[self performSelector:[selectedItem action]];
+			[self handleLinkSelector:self];
 			return;
 		}
 	}
@@ -334,10 +334,12 @@
 -(IBAction)handleLinkSelector:(id)sender
 {
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
+	NSWindow * prefPaneWindow = [[[self window] contentView] window];
+
 	[panel beginSheetForDirectory:@"/Applications/"
 							 file:nil
 							types:[NSArray arrayWithObjects:NSFileTypeForHFSTypeCode('APPL'), nil]
-				   modalForWindow:[self window]
+				   modalForWindow:prefPaneWindow
 					modalDelegate:self
 				   didEndSelector:@selector(linkSelectorDidEnd:returnCode:contextInfo:)
 					  contextInfo:nil];
@@ -349,6 +351,9 @@
 -(void)linkSelectorDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	[panel orderOut:self];
+	NSWindow * prefPaneWindow = [[[self window] contentView] window];
+	[prefPaneWindow makeKeyAndOrderFront:self];
+
 	if (returnCode == NSOKButton)
 	{
 		NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[panel filename]];
@@ -356,7 +361,6 @@
 		[fileURL release];
 	}
 	[self refreshLinkHandler];
-	[[self window] makeKeyAndOrderFront:self];
 }
 
 /* setDefaultLinksHandler
