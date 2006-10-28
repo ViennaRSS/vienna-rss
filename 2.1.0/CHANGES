@@ -17,6 +17,7 @@ Thanks!
 - Fix bug: articles with date but no time were sometimes missed because of midnight timestamp.
 - Turn off article updating by default.
 - Speed up folder loading by only parsing visible summaries.
+- Fix folder refreshing for mark read/unread and undo.
 
 2.1.0.2105
 ----------

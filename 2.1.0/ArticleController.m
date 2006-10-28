@@ -31,7 +31,7 @@
 @interface ArticleController (Private)
 	-(NSArray *)applyFilter:(NSArray *)unfilteredArray;
 	-(void)setSortColumnIdentifier:(NSString *)str;
-	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr;
+	-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag;
 	-(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 @end
 
@@ -516,7 +516,7 @@
  */
 -(void)markUnreadUndo:(id)anObject
 {
-	[self markReadByArray:(NSArray *)anObject readFlag:NO];
+	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:NO];
 }
 
 /* markReadUndo
@@ -524,7 +524,7 @@
  */
 -(void)markReadUndo:(id)anObject
 {
-	[self markReadByArray:(NSArray *)anObject readFlag:YES];
+	[self markAllReadByReferencesArray:(NSArray *)anObject readFlag:YES];
 }
 
 /* markReadByArray
@@ -547,7 +547,6 @@
 	if (!singleArticle)
 		[db commitTransaction];
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-	[foldersTree updateFolder:currentFolderId recurseToParents:YES];
 	
 	// The info bar has a count of unread articles so we need to
 	// update that.
@@ -600,23 +599,19 @@
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag
 {
 	Database * db = [Database sharedDatabase];
-	BOOL singleFolder = [folderArray count] < 2;	
 	NSArray * refArray = nil;
-	BOOL flag = NO;
 
-	if (!singleFolder)
-		[db beginTransaction];
-	refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag needRefresh:&flag];
-	if (!singleFolder)
-		[db commitTransaction];
+	[db beginTransaction];
+	refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
+	[db commitTransaction];
 	if (refArray != nil && [refArray count] > 0)
 	{
 		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
-	if (flag && refreshFlag)
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	if (refreshFlag)
+		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
@@ -624,45 +619,44 @@
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag needRefresh:(BOOL *)needRefreshPtr
+-(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	NSEnumerator * enumerator = [folderArray objectEnumerator];
 	Database * db = [Database sharedDatabase];
 	Folder * folder;
 	
-	NSAssert(needRefreshPtr != nil, @"needRefresh pointer cannot be nil");
 	while ((folder = [enumerator nextObject]) != nil)
 	{
 		int folderId = [folder itemId];
-		if (IsGroupFolder(folder))
+		if (IsGroupFolder(folder) && undoFlag)
 		{
-			if (undoFlag)
-				[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag needRefresh:needRefreshPtr]];
-			if ([self currentCacheContainsFolder:folderId])
-				*needRefreshPtr = YES;
+			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag]];
+			NSEnumerator * articleEnumerator = [folderArrayOfArticles objectEnumerator];
+			Article * article;
+			while ((article = [articleEnumerator nextObject]) != nil)
+			{
+				[article markRead:YES];
+			}
+			
 		}
-		else if (!IsSmartFolder(folder))
+		else if (IsRSSFolder(folder))
 		{
 			if (undoFlag)
 				[refArray addObjectsFromArray:[db arrayOfUnreadArticles:folderId]];
 			if ([db markFolderRead:folderId])
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
-				if ([self currentCacheContainsFolder:folderId])
-					*needRefreshPtr = YES;
 			}
 		}
 		else
 		{
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
-			if (folderId == currentFolderId)
+			if (undoFlag && (folderId == currentFolderId))
 			{
-				if (undoFlag)
-					[refArray addObjectsFromArray:currentArrayOfArticles];
+				[refArray addObjectsFromArray:currentArrayOfArticles];
 				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
-				[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 			}
 		}
 	}
@@ -697,6 +691,7 @@
 	Database * db = [Database sharedDatabase];
 	ArticleReference * ref;
 	int lastFolderId = -1;
+	BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -713,7 +708,7 @@
 		{
 			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 			if (lastFolderId == currentFolderId)
-				[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+				needRefilter = YES;
 		}
 		lastFolderId = folderId;
 	}
@@ -723,13 +718,11 @@
 	{
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 		if (lastFolderId == currentFolderId)
-			[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
-		else
-		{
-			Folder * currentFolder = [db folderFromID:currentFolderId];
-			if (IsSmartFolder(currentFolder))
-				[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-		}
+			needRefilter = YES;
+        if (!IsRSSFolder([db folderFromID:currentFolderId]))
+            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+        else if (needRefilter)
+            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 	}
 	
 	// The info bar has a count of unread articles so we need to
