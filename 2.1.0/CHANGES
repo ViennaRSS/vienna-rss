@@ -7,6 +7,11 @@ most recent build should be at the top of this file.
 Thanks!
 
 
+2.1.0.2107
+----------
+- Fix article selection after deleting or restoring.
+- Fix bug: deleted article wasn't removed from trash when using filter.
+
 2.1.0.2106
 ----------
 - Only allow the active web view to set the status bar text.
