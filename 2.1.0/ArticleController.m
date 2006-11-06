@@ -618,6 +618,12 @@
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
+	NSEnumerator * articleEnumerator = [folderArrayOfArticles objectEnumerator];
+	Article * article;
+	while ((article = [articleEnumerator nextObject]) != nil)
+	{
+		[article markRead:YES];
+	}
 	if (refreshFlag)
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
@@ -640,13 +646,6 @@
 		if (IsGroupFolder(folder) && undoFlag)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[db arrayOfFolders:folderId] withUndo:undoFlag]];
-			NSEnumerator * articleEnumerator = [folderArrayOfArticles objectEnumerator];
-			Article * article;
-			while ((article = [articleEnumerator nextObject]) != nil)
-			{
-				[article markRead:YES];
-			}
-			
 		}
 		else if (IsRSSFolder(folder))
 		{

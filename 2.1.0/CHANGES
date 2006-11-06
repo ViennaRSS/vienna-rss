@@ -10,6 +10,7 @@ Thanks!
 2.1.0.2108
 ----------
 - Convert InfoPlist.strings files to UTF-16.
+- Fix bug with marking all subscriptions read from group or smart folder.
 
 2.1.0.2107
 ----------
