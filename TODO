@@ -68,3 +68,4 @@ Wishlist
 - Progress indicator for loading web pages.
 - Use shift key to toggle whether to open tabs in foreground/background in Vienna.
 - Drop-down navigation list for back and forward buttons in browser pane.
+- Drop-down overflow list when too many tabs are open.
