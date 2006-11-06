@@ -7,6 +7,10 @@ most recent build should be at the top of this file.
 Thanks!
 
 
+2.1.0.2108
+----------
+- Convert InfoPlist.strings files to UTF-16.
+
 2.1.0.2107
 ----------
 - Fix article selection after deleting or restoring.
