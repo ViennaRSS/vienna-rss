@@ -366,6 +366,7 @@
 		61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CurlGetDate.xcodeproj; path = CurlGetDate/CurlGetDate.xcodeproj; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA01BA210B05251900CD0695 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/InfoWindow.nib; sourceTree = "<group>"; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
 		AA07A39909E14E780056766B /* os.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = os.c; sourceTree = "<group>"; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLog.h; sourceTree = "<group>"; };
@@ -609,6 +610,14 @@
 		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
 		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
+		AAAEEE9E0B052236008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AAAEEE9F0B052259008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AAAEEEA00B052278008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AAAEEEA10B05228F008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AAAEEEA20B05229F008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AAAEEEA30B0522B1008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AAAEEEA40B0522C0008DAFF6 /* da */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AAAEEEA50B0522CB008DAFF6 /* da */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AAB076170A076BBE00A9F76A /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		AAB8217D0999C2AC00F3C730 /* attach.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = attach.c; sourceTree = "<group>"; };
 		AAB8217E0999C2AC00F3C730 /* auth.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = auth.c; sourceTree = "<group>"; };
@@ -1401,6 +1410,7 @@
 				pt_BR,
 				ko,
 				zh_CN,
+				da,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -1907,6 +1917,7 @@
 				AA517D520AA4E087001E8CA1 /* pt_BR */,
 				AACC2D480AB9DCC300D02B04 /* ko */,
 				AA6D2EB30ACC6DC50044C00C /* zh_CN */,
+				AAAEEEA50B0522CB008DAFF6 /* da */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1926,6 +1937,7 @@
 				AA517D510AA4E041001E8CA1 /* pt_BR */,
 				AACC2D440AB9DC8700D02B04 /* ko */,
 				AA6D2EAF0ACC6D910044C00C /* zh_CN */,
+				AAAEEEA40B0522C0008DAFF6 /* da */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1945,6 +1957,7 @@
 				AA517D4C0AA4DF81001E8CA1 /* pt_BR */,
 				AACC2D410AB9DC6900D02B04 /* ko */,
 				AA6D2E9D0ACC6D3B0044C00C /* zh_CN */,
+				AAAEEEA00B052278008DAFF6 /* da */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -1964,6 +1977,7 @@
 				AA51830F0AA56F9C001E8CA1 /* pt_BR */,
 				AACC2D3F0AB9DC5300D02B04 /* ko */,
 				AA6D2E9B0ACC6D1E0044C00C /* zh_CN */,
+				AAAEEE9E0B052236008DAFF6 /* da */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -2015,6 +2029,7 @@
 				AA517D500AA4E001001E8CA1 /* pt_BR */,
 				AACC2D460AB9DCAA00D02B04 /* ko */,
 				AA6D2EA10ACC6D680044C00C /* zh_CN */,
+				AAAEEEA30B0522B1008DAFF6 /* da */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -2034,6 +2049,7 @@
 				AA517D4B0AA4DF31001E8CA1 /* pt_BR */,
 				AACC2D400AB9DC6200D02B04 /* ko */,
 				AA6D2E9C0ACC6D2B0044C00C /* zh_CN */,
+				AAAEEE9F0B052259008DAFF6 /* da */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -2053,6 +2069,7 @@
 				AA517D4F0AA4DFE3001E8CA1 /* pt_BR */,
 				AACC2D450AB9DCA000D02B04 /* ko */,
 				AA6D2EA00ACC6D600044C00C /* zh_CN */,
+				AAAEEEA20B05229F008DAFF6 /* da */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -2072,6 +2089,7 @@
 				AA517D4D0AA4DFAD001E8CA1 /* pt_BR */,
 				AACC2D420AB9DC7100D02B04 /* ko */,
 				AA6D2E9E0ACC6D460044C00C /* zh_CN */,
+				AAAEEEA10B05228F008DAFF6 /* da */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -2136,6 +2154,7 @@
 				AA517D4E0AA4DFCB001E8CA1 /* pt_BR */,
 				AACC2D430AB9DC7A00D02B04 /* ko */,
 				AA6D2E9F0ACC6D550044C00C /* zh_CN */,
+				AA01BA210B05251900CD0695 /* da */,
 			);
 			name = InfoWindow.nib;
 			sourceTree = "<group>";
@@ -2295,7 +2314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2108;
+				BUILD_NUMBER = 2109;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2323,7 +2342,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2108;
+				BUILD_NUMBER = 2109;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2351,7 +2370,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2108;
+				BUILD_NUMBER = 2109;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
