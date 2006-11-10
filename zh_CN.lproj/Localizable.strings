@@ -123,12 +123,12 @@
 "Trash" = "废纸篓";
 "Select..." = "选择...";
 " (%d unread)" = " (%d 篇未读)";
-"is" = "is";
-"is not" = "is not";
-"is after" = "is after";
-"is before" = "is before";
-"is on or after" = "is on or after";
-"is on or before" = "is on or before";
+"is" = "为";
+"is not" = "非";
+"is after" = "迟于";
+"is before" = "早于";
+"is on or after" = "迟于（含）";
+"is on or before" = "早于（含）";
 "contains" = "包含";
 "does not contain" = "不包含";
 "is less than" = "小于";
@@ -329,5 +329,5 @@
 "Summary" = "总结";
 "Blog With..." = "Blog With...";
 "Blog with %@" = "Blog with %@";
-"Bigger Text" = "发大文章";
-"Smaller Text" = "缩小文章";
+"Bigger Text" = "发大文章字体";
+"Smaller Text" = "缩小文章字体";
