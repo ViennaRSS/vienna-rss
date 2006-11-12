@@ -70,3 +70,4 @@ Wishlist
 - Drop-down navigation list for back and forward buttons in browser pane.
 - Drop-down overflow list when too many tabs are open.
 - When deleting subscription, also delete smart folder rules involving that subscription.
+- Refresh subscriptions in order of manual sorting rather than alphabetically.

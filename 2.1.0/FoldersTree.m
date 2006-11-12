@@ -38,7 +38,7 @@
 	-(NSArray *)archiveState;
 	-(void)unarchiveState:(NSArray *)stateArray;
 	-(void)reloadDatabase:(NSArray *)stateArray;
-	-(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
+	-(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
 	-(void)setManualSortOrderForNode:(TreeNode *)node;
 	-(void)handleDoubleClick:(id)sender;
 	-(void)handleAutoSortFoldersTreeChange:(NSNotification *)nc;
@@ -215,7 +215,11 @@
 -(void)reloadDatabase:(NSArray *)stateArray
 {
 	[rootNode removeChildren];
-	[self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+	if (![self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode])
+	{
+		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
+		[self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+	}
 	[outlineView reloadData];
 	[self unarchiveState:stateArray];
 }
@@ -286,7 +290,7 @@
 /* loadTree
  * Recursive routine that populates the folder list
  */
--(void)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
+-(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
 	Folder * folder;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
@@ -315,7 +319,7 @@
 			if (listIndex == NSNotFound)
 			{
 				NSLog(@"Cannot find child with id %i for folder with id %i", nextChildId, [node nodeId]);
-				return;
+				return NO;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
 			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:nextChildId];
@@ -324,11 +328,20 @@
 			
 			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder canHaveChildren:(count > 0)];
 			if (count)
-				[self loadTree:listOfSubFolders rootNode:subNode];
+			{
+				if (![self loadTree:listOfSubFolders rootNode:subNode])
+					return NO;
+			}
 			nextChildId = [folder nextSiblingId];
 			++index;
 		}
-	}	
+		if (index < (int)[listOfFolders count])
+		{
+			NSLog(@"Missing children for folder with id %i", nextChildId, [node nodeId]);
+			return NO;
+		}
+	}
+	return YES;
 }
 
 /* folders
