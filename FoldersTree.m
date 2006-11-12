@@ -218,6 +218,7 @@
 	if (![self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode])
 	{
 		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
+		[rootNode removeChildren];
 		[self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
 	}
 	[outlineView reloadData];
