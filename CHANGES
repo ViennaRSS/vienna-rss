@@ -10,6 +10,7 @@ Thanks!
 2.1.1.2109
 ----------
 - Added Danish localisation. (Thanks to David Munch).
+- If folder manual sort order is corrupt, automatically reset.
 
 2.1.0.2108
 ----------
