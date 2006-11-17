@@ -889,7 +889,7 @@
 					continue;
 				}
 				
-				// Parse item link
+				// Parse item id
 				if ([itemNodeName isEqualToString:@"id"])
 				{
 					[newItem setGuid:[subItemTree valueOfElement]];
