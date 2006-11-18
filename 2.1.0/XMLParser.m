@@ -512,12 +512,18 @@
 				return nil;
 			if (minuteValue < 0 || minuteValue > 59)
 				return nil;
-			if ([scanner scanString:@"." intoString:nil] || [scanner scanString:@":" intoString:nil])
+			if ([scanner scanString:@":" intoString:nil] || [scanner scanString:@"." intoString:nil])
 			{
 				if (![scanner scanInt:&secondValue])
 					return nil;
 				if (secondValue < 0 || secondValue > 59)
 					return nil;
+				// Drop any fractional seconds
+				if ([scanner scanString:@"." intoString:nil])
+				{
+					if (![scanner scanInt:nil])
+						return nil;
+				}
 			}
 		}
 	}

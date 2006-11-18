@@ -11,6 +11,7 @@ Thanks!
 ----------
 - Added Danish localisation. (Thanks to David Munch).
 - If folder manual sort order is corrupt, automatically reset.
+- Fix date parsing for fractional seconds.
 
 2.1.0.2108
 ----------
