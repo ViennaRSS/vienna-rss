@@ -21,6 +21,7 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "Message.h"
+#import <Sparkle/Sparkle.h>
 
 // Initial paths
 NSString * MA_ApplicationSupportFolder = @"~/Library/Application Support/Vienna";
@@ -37,6 +38,7 @@ static Preferences * _standardPreferences = nil;
 // Private methods
 @interface Preferences (Private)
 	-(NSDictionary *)initPreferences;
+	-(void)handleUpdateRestart:(NSNotification *)nc;
 @end
 
 @implementation Preferences
@@ -69,7 +71,6 @@ static Preferences * _standardPreferences = nil;
 		//
 		NSArray * appArguments = [[NSProcessInfo processInfo] arguments];
 		NSEnumerator * enumerator = [appArguments objectEnumerator];
-		NSString * profilePath = nil;
 		NSString * argName;
 
 		while ((argName = [enumerator nextObject]) != nil)
@@ -83,6 +84,11 @@ static Preferences * _standardPreferences = nil;
 				break;
 			}
 		}
+
+		// Look to see if there's a cached profile path from the updater
+		if (profilePath == nil)
+			profilePath = [[NSUserDefaults standardUserDefaults] stringForKey:MAPref_Profile_Path];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MAPref_Profile_Path];
 
 		// Merge in the user preferences from the defaults.
 		NSDictionary * defaults = [self initPreferences];
@@ -104,7 +110,8 @@ static Preferences * _standardPreferences = nil;
 			// path counts as treating the profile as transient for this session.
 			NSFileManager * fileManager = [NSFileManager defaultManager];
 			BOOL isDir;
-			
+
+			[profilePath retain];
 			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
 			{
 				if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
@@ -132,6 +139,10 @@ static Preferences * _standardPreferences = nil;
 			stylesFolder = [[[profilePath stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
 			scriptsFolder = [[[profilePath stringByAppendingPathComponent:@"Scripts"] stringByExpandingTildeInPath] retain];
 		}
+		
+		// Register to be notified when Sparkle does an update.
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleUpdateRestart:) name:SUUpdaterWillRestartNotification object:nil];		
 
 		// Load those settings that we cache.
 		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];
@@ -171,6 +182,7 @@ static Preferences * _standardPreferences = nil;
 	[displayStyle release];
 	[preferencesPath release];
 	[articleSortDescriptors release];
+	[profilePath release];
 	[super dealloc];
 }
 
@@ -836,4 +848,11 @@ static Preferences * _standardPreferences = nil;
 	}
 }
 
+/* handleUpdateRestart
+ * Called when Sparkle is about to restart Vienna.
+ */
+-(void)handleUpdateRestart:(NSNotification *)nc
+{
+	[[NSUserDefaults standardUserDefaults] setObject:profilePath forKey:MAPref_Profile_Path];
+}
 @end
