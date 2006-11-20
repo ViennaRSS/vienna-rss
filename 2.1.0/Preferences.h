@@ -22,6 +22,7 @@
 
 @interface Preferences : NSObject {
 	id userPrefs;
+	NSString * profilePath;
 	NSString * preferencesPath;
 	float markReadInterval;
 	float selectionChangeInterval;

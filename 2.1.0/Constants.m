@@ -57,6 +57,7 @@ NSString * MAPref_LastRefreshDate = @"LastRefreshDate";
 NSString * MAPref_TabList = @"TabList";
 NSString * MAPref_Layout = @"Layout";
 NSString * MAPref_NewArticlesNotification = @"NewArticlesNotification";
+NSString * MAPref_Profile_Path = @"ProfilePath";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
