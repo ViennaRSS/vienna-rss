@@ -687,16 +687,21 @@ typedef enum {
 			}
 
 			// Here's where we add the articles to the database
-			NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
-			Article * article;
-			
-			[db beginTransaction]; // Should we wrap the entire loop or just individual article updates?
-			while ((article = [articleEnumerator nextObject]) != nil)
+			if ([articleArray count] > 0u)
 			{
-				if ([db createArticle:folderId article:article] && ([article status] == MA_MsgStatus_New))
-					++newArticlesFromFeed;
+				[folder clearCache];
+				
+				NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
+				Article * article;
+				
+				[db beginTransaction]; // Should we wrap the entire loop or just individual article updates?
+				while ((article = [articleEnumerator nextObject]) != nil)
+				{
+					if ([db createArticle:folderId article:article] && ([article status] == MA_MsgStatus_New))
+						++newArticlesFromFeed;
+				}
+				[db commitTransaction];
 			}
-			[db commitTransaction];
 			
 			[db beginTransaction];
 
