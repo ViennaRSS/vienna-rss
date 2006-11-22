@@ -3,8 +3,8 @@
 "Mark Unflagged" = "Desmarcar";
 "Articles" = "Artigos";
 "Folders" = "Folders";
-"Loading %@…" = "Carregando %@…";
-"Completed" = "Complatado";
+"Loading %@..." = "Carregando %@…";
+"Completed" = "Completado";
 "Refresh RSS feeds" = "Atualizar assinaturas";
 "Refresh All Subscriptions" = "Atualizar Todas as Assinaturas";
 "Already subscribed title" = "Erro";
@@ -67,8 +67,8 @@
 "From" = "De";
 "To" = "Para";
 "(No title)" = "(Sem título)";
-"Refreshing folder images…" = "Atualizando imagens de pastas…";
-"Refreshing subscriptions…" = "Atualizando assinaturas…";
+"Refreshing folder images..." = "Atualizando imagens de pastas…";
+"Refreshing subscriptions..." = "Atualizando assinaturas…";
 "Authenticating with user name '%@'" = "Autenticando com o nome de usuário \"%@\"";
 "No new articles available" = "Nenhum artigo novo disponível";
 "%d new articles retrieved" = "%d novos artigos descarregados";
@@ -88,7 +88,7 @@
 "Error parsing XML data in feed" = "Erro ao decodificar dados XML na notícia";
 "Retrieving folder image" = "Recebendo imagem de pasta";
 "Folder image retrieved from %@" = "Imagem de pasta recebida de %@";
-"Contacting…" = "Contactando…";
+"Contacting..." = "Contactando…";
 "Connect Running" = "Uma conexão está ativa";
 "Connect Running text" = "Você deseja parar a conexão e fechar o Vienna agora?";
 "Delete group folder" = "Apagar pasta de grupo";
@@ -122,7 +122,7 @@
 "Unread Articles" = "Artigos Não Lidos";
 "Today's Articles" = "Artigos de Hoje";
 "Trash" = "Lixo";
-"Select…" = "Selecionar…";
+"Select..." = "Selecionar…";
 " (%d unread)" = " (%d não lidos)";
 "is" = "é";
 "is not" = "não é";
@@ -151,7 +151,7 @@
 "Recents" = "Recentes";
 "Clear" = "Limpar Pesquisas Recentes";
 "Search web page" = "Pesquisar página da web";
-"Loading…" = "Carregando…";
+"Loading..." = "Carregando…";
 "Open Image in New Tab" = "Abrir Imagem em Nova Aba";
 "Open Link in New Tab" = "Abrir Link em Nova Aba";
 "Open Link in %@" = "Abrir Link em %@";
@@ -325,7 +325,7 @@
 "%@ (Filtered: %@)" = "%@ (Filtro: %@)";
 "Get Info..." = "Obter Informações…";
 "Open Web Location..." = "Abrir Página da Web…";
-"Refresh Folder Images" = "Atualizar Imagens de Pastas";
+"Refresh Folder Images" = "Atualizar Imagens de Pasta";
 "Report" = "Relatório";
 "Condensed" = "Condensado";
 "Unified" =  "Unificado";
