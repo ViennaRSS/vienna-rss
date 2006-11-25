@@ -328,3 +328,6 @@
 "Blog with %@" = "以 %@ 張貼網誌";
 "Bigger Text" = "放大字級";
 "Smaller Text" = "縮小字級";
+
+/* Added in 2.1.1 */
+"Advanced" = "Advanced";

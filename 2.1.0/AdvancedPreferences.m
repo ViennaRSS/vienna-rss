@@ -19,7 +19,7 @@
 
 #import "AdvancedPreferences.h"
 #import "Preferences.h"
-#import "HelperFunctions.h"ß
+#import "HelperFunctions.h"
 
 // Private functions
 @interface AdvancedPreferences (Private)

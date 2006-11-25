@@ -331,3 +331,6 @@
 "Blog with %@" = "Blog with %@";
 "Bigger Text" = "发大文章字体";
 "Smaller Text" = "缩小文章字体";
+
+/* Added in 2.1.1 */
+"Advanced" = "Advanced";
