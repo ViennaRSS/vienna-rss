@@ -328,3 +328,8 @@
 "Summary" = "要約";
 "Blog With..." = "このソフトでブログする...";
 "Blog with %@" = "このソフトでブログする %@";
+"Bigger Text" = "Bigger Text";
+"Smaller Text" = "Smaller Text";
+
+/* Added in 2.1.1 */
+"Advanced" = "Advanced";

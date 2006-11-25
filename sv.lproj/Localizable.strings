@@ -329,3 +329,6 @@
 "Blog with %@" = "Blog med %@";
 "Bigger Text" = "Större text";
 "Smaller Text" = "Mindre text";
+
+/* Added in 2.1.1 */
+"Advanced" = "Advanced";

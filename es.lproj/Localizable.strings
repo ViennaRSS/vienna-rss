@@ -329,3 +329,6 @@
 "Blog with %@" = "Publicar en un Blog con %@";
 "Bigger Text" = "Aumentar Tamaño de Texto";
 "Smaller Text" = "Reducir Tamaño de Texto";
+
+/* Added in 2.1.1 */
+"Advanced" = "Advanced";

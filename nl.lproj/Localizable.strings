@@ -330,3 +330,5 @@
 "Bigger Text" = "Grotere tekst";
 "Smaller Text" = "Kleinere tekst";
 
+/* Added in 2.1.1 */
+"Advanced" = "Advanced";
