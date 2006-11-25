@@ -35,6 +35,8 @@
 	-(BOOL)isDownloadFileType:(NSURL *)filename;
 	-(void)loadMinimumFontSize;
 	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
+	-(void)loadUseJavaScript;
+	-(void)handleUseJavaScript:(NSNotification *)nc;
 @end
 
 @implementation TabbedWebView
@@ -68,12 +70,14 @@
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
 	
-	// Handle minimum font size
+	// Handle minimum font size & using of JavaScript
 	defaultWebPrefs = [[self preferences] retain];
 	[defaultWebPrefs setStandardFontFamily:@"Arial"];
 	[defaultWebPrefs setDefaultFontSize:12];
 	[defaultWebPrefs setPrivateBrowsingEnabled:YES];
+	[defaultWebPrefs setJavaScriptEnabled:NO];
 	[self loadMinimumFontSize];
+	[self loadUseJavaScript];
 }
 
 /* setController
@@ -265,6 +269,14 @@
 	[self loadMinimumFontSize];
 }
 
+/* handleUseJavaScriptChange
+ * Called when the user changes the 'Use Javascript' setting.
+ */
+-(void)handleUseJavaScriptChange:(NSNotification *)nc
+{
+	[self loadUseJavaScript];
+}
+
 /* loadMinimumFontSize
  * Sets up the web preferences for a minimum font size.
  */
@@ -278,6 +290,15 @@
 		int size = [prefs minimumFontSize];
 		[defaultWebPrefs setMinimumFontSize:size];
 	}
+}
+
+/* loadUseJavaScript
+ * Sets up the web preferences for using JavaScript.
+ */
+-(void)loadUseJavaScript
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	[defaultWebPrefs setJavaScriptEnabled:[prefs useJavaScript]];
 }
 
 /* keyDown

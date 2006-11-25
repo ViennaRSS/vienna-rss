@@ -104,6 +104,9 @@
 		AA63227F08861C99006382D3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA63227E08861C99006382D3 /* Constants.m */; };
 		AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
 		AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA67F3980897377C008BBC37 /* stopRefresh.tiff */; };
+		AA681B210B18E46800CFD5B7 /* AdvancedPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */; };
+		AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */; };
+		AA681B460B18E78100CFD5B7 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */; };
 		AA682CF7069A955F00228193 /* ViennaApp.h in Headers */ = {isa = PBXBuildFile; fileRef = AA682CF5069A955F00228193 /* ViennaApp.h */; };
 		AA682CF8069A955F00228193 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = AA682CF6069A955F00228193 /* ViennaApp.m */; };
 		AA6CB7CF06238B08004E1236 /* FolderView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6CB7CD06238B08004E1236 /* FolderView.h */; };
@@ -486,6 +489,9 @@
 		AA63227E08861C99006382D3 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		AA67F32E089727FB008BBC37 /* Styles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Styles; sourceTree = "<group>"; };
 		AA67F3980897377C008BBC37 /* stopRefresh.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = stopRefresh.tiff; sourceTree = "<group>"; };
+		AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedPreferences.h; sourceTree = "<group>"; };
+		AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedPreferences.m; sourceTree = "<group>"; };
+		AA681B410B18E78100CFD5B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
 		AA682CF5069A955F00228193 /* ViennaApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViennaApp.h; sourceTree = "<group>"; };
 		AA682CF6069A955F00228193 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
 		AA68510209FAFA5300329883 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = sv; path = sv.lproj/RSSSources.plist; sourceTree = "<group>"; };
@@ -914,6 +920,7 @@
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */,
+				AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */,
 				AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */,
 				AA38C17309FB19BD00FAE2CD /* BrowserPane.nib */,
 				AA38C17A09FB19CE00FAE2CD /* Downloads.nib */,
@@ -1011,6 +1018,8 @@
 		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */,
+				AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */,
 				AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */,
 				AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */,
 				AA3113E809020E0F00E80DF1 /* GeneralPreferences.h */,
@@ -1311,6 +1320,7 @@
 				AAE7E5720A10462600685562 /* BaseView.h in Headers */,
 				AAE7E5B10A10481D00685562 /* UnifiedDisplayView.h in Headers */,
 				AAE7E64F0A104DCE00685562 /* TabbedWebView.h in Headers */,
+				AA681B210B18E46800CFD5B7 /* AdvancedPreferences.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1504,6 +1514,7 @@
 				AAED82FD0A037A4E00ED56E5 /* SNDisclosureArrowDown.tiff in Resources */,
 				47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */,
 				61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */,
+				AA681B460B18E78100CFD5B7 /* AdvancedPreferences.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1874,6 +1885,7 @@
 				AAE7E5640A1045DC00685562 /* ArticleController.m in Sources */,
 				AAE7E5B20A10481D00685562 /* UnifiedDisplayView.m in Sources */,
 				AAE7E64E0A104DCE00685562 /* TabbedWebView.m in Sources */,
+				AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2052,6 +2064,14 @@
 				AAAEEE9F0B052259008DAFF6 /* da */,
 			);
 			name = FeedCredentials.nib;
+			sourceTree = "<group>";
+		};
+		AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA681B410B18E78100CFD5B7 /* en */,
+			);
+			name = AdvancedPreferences.nib;
 			sourceTree = "<group>";
 		};
 		AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */ = {

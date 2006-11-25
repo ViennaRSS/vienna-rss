@@ -50,6 +50,7 @@ NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
 NSString * MAPref_DownloadsList = @"DownloadsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
+NSString * MAPref_UseJavaScript = @"UseJavaScript";
 NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
 NSString * MAPref_ArticleSortDescriptors = @"ArticleSortDescriptors";
 NSString * MAPref_FilterMode = @"FilterMode";

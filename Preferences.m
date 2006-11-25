@@ -162,6 +162,7 @@ static Preferences * _standardPreferences = nil;
 		openLinksInBackground = [self boolForKey:MAPref_OpenLinksInBackground];
 		displayStyle = [[userPrefs valueForKey:MAPref_ActiveStyleName] retain];
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
+		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
@@ -221,6 +222,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_Manual] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
+	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
@@ -390,6 +392,27 @@ static Preferences * _standardPreferences = nil;
 -(BOOL)enableMinimumFontSize
 {
 	return enableMinimumFontSize;
+}
+
+/* enableJavaScript
+ * Specifies whether or not using JavaScript
+ */
+-(BOOL)useJavaScript
+{
+	return useJavaScript;
+}
+
+/* setEnableJavaScript
+ * Enable whether JavaScript is used.
+ */
+-(void)setUseJavaScript:(BOOL)flag
+{
+	if (useJavaScript != flag)
+	{
+		useJavaScript = flag;
+		[self setBool:flag forKey:MAPref_UseJavaScript];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_UseJavaScriptChange" object:nil];
+	}
 }
 
 /* minimumFontSize
