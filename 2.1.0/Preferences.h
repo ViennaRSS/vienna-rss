@@ -40,6 +40,7 @@
 	BOOL openLinksInBackground;
 	BOOL hasPrefs;
 	BOOL showFolderImages;
+	BOOL useJavaScript;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
@@ -135,6 +136,10 @@
 -(BOOL)enableMinimumFontSize;
 -(void)setMinimumFontSize:(int)newSize;
 -(void)setEnableMinimumFontSize:(BOOL)flag;
+
+// JavaScript settings
+-(BOOL)useJavaScript;
+-(void)setUseJavaScript:(BOOL)flag;
 
 // Refresh frequency
 -(void)setRefreshFrequency:(int)newFrequency;
