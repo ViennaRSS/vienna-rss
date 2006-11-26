@@ -107,6 +107,7 @@
 		AA681B210B18E46800CFD5B7 /* AdvancedPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */; };
 		AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */; };
 		AA681B460B18E78100CFD5B7 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */; };
+		AA681C8A0B199E1900CFD5B7 /* advancedPrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */; };
 		AA682CF7069A955F00228193 /* ViennaApp.h in Headers */ = {isa = PBXBuildFile; fileRef = AA682CF5069A955F00228193 /* ViennaApp.h */; };
 		AA682CF8069A955F00228193 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = AA682CF6069A955F00228193 /* ViennaApp.m */; };
 		AA6CB7CF06238B08004E1236 /* FolderView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA6CB7CD06238B08004E1236 /* FolderView.h */; };
@@ -504,6 +505,7 @@
 		AA681C110B19076600CFD5B7 /* sv */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = sv; path = sv.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
 		AA681C120B19077F00CFD5B7 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
 		AA681C130B19078E00CFD5B7 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
+		AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = advancedPrefImage.tiff; sourceTree = "<group>"; };
 		AA682CF5069A955F00228193 /* ViennaApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViennaApp.h; sourceTree = "<group>"; };
 		AA682CF6069A955F00228193 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViennaApp.m; sourceTree = "<group>"; };
 		AA68510209FAFA5300329883 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = sv; path = sv.lproj/RSSSources.plist; sourceTree = "<group>"; };
@@ -957,6 +959,7 @@
 				AAE7A845086B6994009A487E /* action.tiff */,
 				AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */,
 				AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */,
+				AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
 				AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */,
@@ -1527,6 +1530,7 @@
 				47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */,
 				61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */,
 				AA681B460B18E78100CFD5B7 /* AdvancedPreferences.nib in Resources */,
+				AA681C8A0B199E1900CFD5B7 /* advancedPrefImage.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
