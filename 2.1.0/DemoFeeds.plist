@@ -12,7 +12,7 @@
 		<key>URL</key>
 		<string>http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml</string>
 	</dict>
-	<key>Nibblous</key>
+	<key>Nibblous - Recipes</key>
 	<dict>
 		<key>URL</key>
 		<string>http://www.nibblous.com/nibblous.rss</string>
@@ -26,6 +26,11 @@
 	<dict>
 		<key>URL</key>
 		<string>http://loop.worldofapple.com/feed/atom/</string>
+	</dict>
+	<key>Mac OSX Hints</key>
+	<dict>
+		<key>URL</key>
+		<string>http://feeds.macosxhints.com/macosxhints/recent</string>
 	</dict>
 	<key>Vienna Developer Blog</key>
 	<dict>
