@@ -708,6 +708,19 @@
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
 		AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = DemoFeeds.plist; sourceTree = "<group>"; };
+		AACC06AC0B1CC65D00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AACC06C70B1CC67A00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AACC06C80B1CC68600971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AACC06C90B1CC69000971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AACC06CA0B1CC69F00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/InfoWindow.nib; sourceTree = "<group>"; };
+		AACC06CB0B1CC6B100971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AACC06CC0B1CC6B900971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AACC06CD0B1CC6C000971CFB /* cs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AACC06CE0B1CC6C700971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AACC06CF0B1CC6CE00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = cs; path = cs.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		AACC06D00B1CC6DD00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = cs; path = "cs.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AACC06DF0B1CC6F200971CFB /* da */ = {isa = PBXFileReference; lastKnownFileType = folder; name = da; path = "da.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AACC070C0B1CC93600971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
 		AACC2D3F0AB9DC5300D02B04 /* ko */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ko; path = ko.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AACC2D400AB9DC6200D02B04 /* ko */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ko; path = ko.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AACC2D410AB9DC6900D02B04 /* ko */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ko; path = ko.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
@@ -1436,6 +1449,7 @@
 				ko,
 				zh_CN,
 				da,
+				cs,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -1946,6 +1960,7 @@
 				AACC2D480AB9DCC300D02B04 /* ko */,
 				AA6D2EB30ACC6DC50044C00C /* zh_CN */,
 				AAAEEEA50B0522CB008DAFF6 /* da */,
+				AACC06CE0B1CC6C700971CFB /* cs */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1966,6 +1981,7 @@
 				AACC2D440AB9DC8700D02B04 /* ko */,
 				AA6D2EAF0ACC6D910044C00C /* zh_CN */,
 				AAAEEEA40B0522C0008DAFF6 /* da */,
+				AACC06CD0B1CC6C000971CFB /* cs */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1986,6 +2002,7 @@
 				AACC2D410AB9DC6900D02B04 /* ko */,
 				AA6D2E9D0ACC6D3B0044C00C /* zh_CN */,
 				AAAEEEA00B052278008DAFF6 /* da */,
+				AACC06C80B1CC68600971CFB /* cs */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -2006,6 +2023,7 @@
 				AACC2D3F0AB9DC5300D02B04 /* ko */,
 				AA6D2E9B0ACC6D1E0044C00C /* zh_CN */,
 				AAAEEE9E0B052236008DAFF6 /* da */,
+				AACC06AC0B1CC65D00971CFB /* cs */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -2058,6 +2076,7 @@
 				AACC2D460AB9DCAA00D02B04 /* ko */,
 				AA6D2EA10ACC6D680044C00C /* zh_CN */,
 				AAAEEEA30B0522B1008DAFF6 /* da */,
+				AACC06CC0B1CC6B900971CFB /* cs */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -2078,6 +2097,7 @@
 				AACC2D400AB9DC6200D02B04 /* ko */,
 				AA6D2E9C0ACC6D2B0044C00C /* zh_CN */,
 				AAAEEE9F0B052259008DAFF6 /* da */,
+				AACC06C70B1CC67A00971CFB /* cs */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -2098,6 +2118,7 @@
 				AA681C110B19076600CFD5B7 /* sv */,
 				AA681C120B19077F00CFD5B7 /* zh_CN */,
 				AA681C130B19078E00CFD5B7 /* zh_TW */,
+				AACC070C0B1CC93600971CFB /* cs */,
 			);
 			name = AdvancedPreferences.nib;
 			sourceTree = "<group>";
@@ -2118,6 +2139,7 @@
 				AACC2D450AB9DCA000D02B04 /* ko */,
 				AA6D2EA00ACC6D600044C00C /* zh_CN */,
 				AAAEEEA20B05229F008DAFF6 /* da */,
+				AACC06CB0B1CC6B100971CFB /* cs */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -2138,6 +2160,7 @@
 				AACC2D420AB9DC7100D02B04 /* ko */,
 				AA6D2E9E0ACC6D460044C00C /* zh_CN */,
 				AAAEEEA10B05228F008DAFF6 /* da */,
+				AACC06C90B1CC69000971CFB /* cs */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -2156,6 +2179,7 @@
 				AA6854D109FB0ABD00329883 /* ja */,
 				AACC2D470AB9DCB200D02B04 /* ko */,
 				AA6D2EB40ACC6DCF0044C00C /* zh_CN */,
+				AACC06CF0B1CC6CE00971CFB /* cs */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -2175,6 +2199,8 @@
 				AA517DCA0AA4ECF8001E8CA1 /* pt_BR */,
 				AACC2D650AB9DDF600D02B04 /* ko */,
 				AA6D2EA20ACC6D790044C00C /* zh_CN */,
+				AACC06D00B1CC6DD00971CFB /* cs */,
+				AACC06DF0B1CC6F200971CFB /* da */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
@@ -2203,6 +2229,7 @@
 				AACC2D430AB9DC7A00D02B04 /* ko */,
 				AA6D2E9F0ACC6D550044C00C /* zh_CN */,
 				AA01BA210B05251900CD0695 /* da */,
+				AACC06CA0B1CC69F00971CFB /* cs */,
 			);
 			name = InfoWindow.nib;
 			sourceTree = "<group>";

@@ -10,6 +10,7 @@ Thanks!
 2.1.1.2109
 ----------
 - Added Danish localisation. (Thanks to David Munch).
+- Added Czech localisation. (Thanks to Jakub Formanek).
 - If folder manual sort order is corrupt, automatically reset.
 - Fix date parsing for fractional seconds.
 - The -profile switch is now propagated to a new instance of Vienna if Vienna is restarted.
