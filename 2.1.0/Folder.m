@@ -23,6 +23,7 @@
 #import "Constants.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
+#import "KeyChain.h"
 
 // Indexes into folder image array
 enum {
@@ -217,13 +218,13 @@ static NSArray * iconArray = nil;
 		flags = 0;
 		nonPersistedFlags = 0;
 		isCached = NO;
+		hasPassword = NO;
 		cachedArticles = [[NSMutableDictionary dictionary] retain];
 		attributes = [[NSMutableDictionary dictionary] retain];
 		[self setName:newName];
 		[self setLastUpdate:[NSDate distantPast]];
 		[self setLastUpdateString:@""];
 		[self setUsername:@""];
-		[self setPassword:@""];
 		[self setBloglinesId:MA_NonBloglines_Folder];
 	}
 	return self;
@@ -439,6 +440,11 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)password
 {
+	if (!hasPassword)
+	{
+		[attributes setValue:[KeyChain getPasswordFromKeychain:[self username] url:[self feedURL]] forKey:@"Password"];
+		hasPassword = YES;
+	}
 	return [attributes valueForKey:@"Password"];
 }
 
@@ -447,7 +453,9 @@ static NSArray * iconArray = nil;
  */
 -(void)setPassword:(NSString *)newPassword
 {
+	[KeyChain setPasswordInKeychain:newPassword username:[self username] url:[self feedURL]];
 	[attributes setValue:newPassword forKey:@"Password"];
+	hasPassword = YES;
 }
 
 /* lastUpdate

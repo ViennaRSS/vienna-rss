@@ -69,6 +69,7 @@
 	unsigned int flags;
 	unsigned int nonPersistedFlags;
 	BOOL isCached;
+	BOOL hasPassword;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
 	NSMutableDictionary * cachedArticles;
