@@ -16,6 +16,7 @@ Thanks!
 - The -profile switch is now propagated to a new instance of Vienna if Vienna is restarted.
 - Added more built-in styles.
 - Add Advanced preferences page and help file page to match.
+- Save open tabs with unloaded URLs.
 
 2.1.0.2108
 ----------

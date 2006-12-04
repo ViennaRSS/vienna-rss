@@ -426,8 +426,19 @@
  */
 -(NSURL *)url
 {
+	NSURL * theURL = nil;
 	WebDataSource * dataSource = [[webPane mainFrame] dataSource];
-	return dataSource ? [[dataSource request] URL] : nil;
+	if (dataSource != nil)
+	{
+		theURL = [[dataSource request] URL];
+	}
+	else
+	{
+		NSString * urlString = [addressField stringValue];
+		if (urlString != nil)
+			theURL = [NSURL URLWithString:urlString];
+	}
+	return theURL;
 }
 
 /* canGoForward
