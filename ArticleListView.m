@@ -1059,6 +1059,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		{
 			blockSelectionHandler = YES;
 			[articleList selectRow:row byExtendingSelection:NO]; // Warning: this method has been deprecated.  Should be changed to selectRowIndexes:byExtendingSelection:
+			currentSelectedRow = row;
 			[self refreshArticleAtCurrentRow:NO];
 			blockSelectionHandler = NO;
 		}
