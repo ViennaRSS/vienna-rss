@@ -88,3 +88,5 @@ const AEKeyword DataItemSourceFeedURL = 'furl';
 NSString * MA_PBoardType_FolderList = @"ViennaFolderType";
 NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";
 NSString * MA_PBoardType_RSSItem = @"CorePasteboardFlavorType 0x52535369";
+NSString * MA_PBoardType_url = @"CorePasteboardFlavorType 0x75726C20";
+NSString * MA_PBoardType_urln = @"CorePasteboardFlavorType 0x75726C6E";

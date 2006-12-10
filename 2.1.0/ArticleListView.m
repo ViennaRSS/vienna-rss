@@ -33,9 +33,7 @@
 #import "ArticleRef.h"
 #import "ArticleFilter.h"
 #import "XMLParser.h"
-#import "WebKit/WebUIDelegate.h"
-#import "WebKit/WebDataSource.h"
-#import "WebKit/WebBackForwardList.h"
+#import "WebKit/WebKit.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -1385,6 +1383,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard
 {
 	NSMutableArray * arrayOfArticles = [[NSMutableArray alloc] init];
+	NSMutableArray * arrayOfURLs = [[NSMutableArray alloc] init];
+	NSMutableArray * arrayOfTitles = [[NSMutableArray alloc] init];
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
 	Database * db = [Database sharedDatabase];
@@ -1392,7 +1392,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	int index;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, NSStringPboardType, NSHTMLPboardType, count == 1 ? NSURLPboardType : nil, nil] owner:self];
+	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSStringPboardType, NSHTMLPboardType, nil] owner:self];
+	if (count == 1)
+		[pboard addTypes:[NSArray arrayWithObjects:MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType, nil] owner:self];
 	
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];
@@ -1406,6 +1408,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		NSString * msgText = [thisArticle body];
 		NSString * msgTitle = [thisArticle title];
 		NSString * msgLink = [thisArticle link];
+		
+		[arrayOfURLs addObject:msgLink];
+		[arrayOfTitles addObject:msgTitle];
 
 		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
@@ -1425,6 +1430,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		
 		if (count == 1)
 		{
+			[pboard setString:msgLink forType:MA_PBoardType_url];
+			[pboard setString:msgTitle forType:MA_PBoardType_urln];
+			
 			// Write the link to the pastboard.
 			[[NSURL URLWithString:msgLink] writeToPasteboard:pboard];
 		}
@@ -1435,10 +1443,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 
 	// Put string on the pasteboard for external drops.
 	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
+	[pboard setPropertyList:[NSArray arrayWithObjects:arrayOfURLs, arrayOfTitles, nil] forType:@"WebURLsWithTitlesPboardType"];
 	[pboard setString:fullPlainText forType:NSStringPboardType];
 	[pboard setString:[fullHTMLText stringByEscapingExtendedCharacters] forType:NSHTMLPboardType];
 
 	[arrayOfArticles release];
+	[arrayOfURLs release];
+	[arrayOfTitles release];
 	[fullHTMLText release];
 	[fullPlainText release];
 	return YES;
