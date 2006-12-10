@@ -18,6 +18,7 @@ Thanks!
 - Add Advanced preferences page and help file page to match.
 - Save open tabs with unloaded URLs.
 - Fix bug: when selecting articles list via right-click, menu items were disabled.
+- When manually refreshing all subscriptions, reset the automatic refresh timer.
 
 2.1.0.2108
 ----------
