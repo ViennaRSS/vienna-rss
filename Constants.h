@@ -71,6 +71,8 @@ extern int MA_Default_AutoExpireDuration;
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;
 extern NSString * MA_PBoardType_RSSSource;
+extern NSString * MA_PBoardType_url;
+extern NSString * MA_PBoardType_urln;
 
 // New articles notification method
 #define MA_NewArticlesNotification_None		0
