@@ -1614,7 +1614,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 													   target:self
 													 selector:@selector(refreshOnTimer:)
 													 userInfo:nil
-													  repeats:YES] retain];
+													  repeats:NO] retain];
 	}
 }
 
@@ -2549,6 +2549,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
+	// Reset the refresh timer
+	[self handleCheckFrequencyChange:nil];
+	
 	if (![self isConnecting])
 		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders]];		
 }
