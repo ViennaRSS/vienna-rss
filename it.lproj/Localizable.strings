@@ -244,7 +244,7 @@
 "Main Window" = "Finestra Principale";
 "Mark All Articles as Read" = "Segnala tutti gli articoli come letti";
 "Mark Flagged" = "Segnala con contrassegno";
-"Minimize" = "Ridimensiona";
+"Minimize" = "Contrai";
 "New Group Folder…" = "Nuovo Gruppo di Cartelle…";
 "New Smart Folder…" = "Nuova Cartella Smart…";
 "New Subscription…" = "Nuova Iscrizione…";
@@ -281,7 +281,7 @@
 "Vienna Web Site" = "Sito Web Vienna";
 "View" = "Vista";
 "Window" = "Finestra";
-"Zoom" = "Contrai";
+"Zoom" = "Ridimensiona";
 "Export all subscriptions" = "Esporta tutte le iscrizioni";
 "Export selected subscriptions" = "Esporta le iscrizioni selezionate";
 "Preserve group folders in exported file" = "Mantieni i gruppi di cartelle nel file esportato";
