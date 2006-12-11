@@ -124,6 +124,16 @@
 	return nil;
 }
 
+/* handleMarkAllSubscriptionsRead
+ * Mark all articles read in all subscriptions
+ */
+-(id)handleMarkAllSubscriptionsRead:(NSScriptCommand *)cmd
+{
+	[[self delegate] markAllSubscriptionsRead:nil];
+	
+	return nil;
+}
+
 /* handleCompactDatabase
  * Compact the database.
  */

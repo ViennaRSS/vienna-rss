@@ -402,6 +402,13 @@
 			<key>Name</key>
 			<string>mark all read</string>
 		</dict>
+		<key>MarkAllSubscriptionsRead</key>
+		<dict>
+			<key>Description</key>
+			<string>Mark read all unread articles in all folders</string>
+			<key>Name</key>
+			<string>mark all subscriptions read</string>
+		</dict>
 		<key>NewSubscription</key>
 		<dict>
 			<key>Arguments</key>

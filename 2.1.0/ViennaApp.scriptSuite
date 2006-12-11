@@ -438,6 +438,8 @@
 				<string>handleImportSubscriptions:</string>
 				<key>MarkAllRead</key>
 				<string>handleMarkAllRead:</string>
+				<key>MarkAllSubscriptionsRead</key>
+				<string>handleMarkAllSubscriptionsRead:</string>
 				<key>NewSubscription</key>
 				<string>handleNewSubscription:</string>
 				<key>RefreshAllSubscriptions</key>
@@ -548,6 +550,15 @@
 					<string>Folder</string>
 				</dict>
 			</dict>
+			<key>CommandClass</key>
+			<string>NSScriptCommand</string>
+		</dict>
+		<key>MarkAllSubscriptionsRead</key>
+		<dict>
+			<key>AppleEventClassCode</key>
+			<string>Vnna</string>
+			<key>AppleEventCode</key>
+			<string>VnMs</string>
 			<key>CommandClass</key>
 			<string>NSScriptCommand</string>
 		</dict>

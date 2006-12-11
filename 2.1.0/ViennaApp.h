@@ -29,6 +29,7 @@
 
 // Mark all articles read
 -(id)handleMarkAllRead:(NSScriptCommand *)cmd;
+-(id)handleMarkAllSubscriptionsRead:(NSScriptCommand *)cmd;
 
 // Importing and exporting subscriptions
 -(id)handleImportSubscriptions:(NSScriptCommand *)cmd;
