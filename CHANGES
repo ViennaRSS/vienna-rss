@@ -20,6 +20,7 @@ Thanks!
 - Fix bug: when selecting articles list via right-click, menu items were disabled.
 - When manually refreshing all subscriptions, reset the automatic refresh timer.
 - Article title appears when article is dragged to iChat (and probably other to apps).
+- If a feed item lacks a guid, identify the item by full title and link rather than by a hash.
 
 2.1.0.2108
 ----------

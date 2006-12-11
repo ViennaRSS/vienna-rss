@@ -668,10 +668,10 @@ typedef enum {
 					// description. The link alone is not sufficiently unique and I've seen feeds where
 					// the description is also not unique. The title field generally does vary but we need
 					// to be careful since separate articles with different descriptions may have the same
-					// title. The solution is to hash the link and title and build a GUID from those.
+					// title. The solution is to use the link and title and build a GUID from those.
 					// We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
 					if ([articleGuid isEqualToString:@""])
-						articleGuid = [NSString stringWithFormat:@"%d-%X-%X", folderId, [[newsItem link] hash], [[newsItem title] hash]];
+						articleGuid = [NSString stringWithFormat:@"%d-%@-%@", folderId, [newsItem link], [newsItem title]];
 					
 					Article * article = [[Article alloc] initWithGuid:articleGuid];
 					[article setFolderId:folderId];

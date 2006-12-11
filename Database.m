@@ -1334,10 +1334,22 @@ static Database * _sharedDatabase = nil;
 			unsigned int folderStringLength = [folderString length];
 			if ([articleGuid compare:folderString options:NSLiteralSearch range:NSMakeRange(0, folderStringLength)] == NSOrderedSame)
 			{
-				NSString * oldStyleGuid = [articleGuid substringFromIndex:folderStringLength];
-				existingArticle = [folder articleFromGuid:oldStyleGuid];
+				NSString * hashGuid = [folderString stringByAppendingFormat:@"%X-%X", [articleLink hash], [articleTitle hash]];
+				existingArticle = [folder articleFromGuid:hashGuid];
 				if (existingArticle != nil)
-					articleGuid = oldStyleGuid;
+				{
+					if ([[existingArticle title] isEqualToString:articleTitle] && [[existingArticle link] isEqualToString:articleLink])
+						articleGuid = hashGuid;
+					else
+						existingArticle = nil;
+				}
+				else
+				{
+					NSString * oldStyleGuid = [articleGuid substringFromIndex:folderStringLength];
+					existingArticle = [folder articleFromGuid:oldStyleGuid];
+					if (existingArticle != nil)
+						articleGuid = oldStyleGuid;
+				}
 			}
 		}
 		// If an obviously different article with the same guid exists, give the article a new guid.
@@ -1833,7 +1845,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title from messages where folder_id=%d", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
@@ -1846,6 +1858,7 @@ static Database * _sharedDatabase = nil;
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
 				NSString * title = [row stringForColumn:@"title"];
+				NSString * link = [row stringForColumn:@"link"];
 
 				// Keep our own track of unread articles
 				if (!read_flag)
@@ -1856,6 +1869,7 @@ static Database * _sharedDatabase = nil;
 				[article markDeleted:deleted_flag];
 				[article setFolderId:folderId];
 				[article setTitle:title];
+				[article setLink:link];
 				[folder addArticleToCache:article];
 				[article release];
 			}
