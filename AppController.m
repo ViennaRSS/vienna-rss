@@ -1918,6 +1918,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[self markFlagged:self];
 			return YES;
 			
+		case 'n':
+		case 'N':
+			[self viewNextUnread:self];
+			return YES;
+			
 		case 'u':
 		case 'U':
 		case 'r':
