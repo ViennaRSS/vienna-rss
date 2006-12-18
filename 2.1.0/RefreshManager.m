@@ -826,7 +826,7 @@ typedef enum {
 							
 							// Finally, gather the URL for the redirect and return it as an
 							// auto-released string.
-							while (urlEnd < scanPtrEnd && *urlEnd != ' ' && *urlEnd != '>')
+							while (urlEnd < scanPtrEnd && *urlEnd != '"' && *urlEnd != ' ' && *urlEnd != '>')
 								++urlEnd;
 							if (urlEnd == scanPtrEnd)
 								return nil;
