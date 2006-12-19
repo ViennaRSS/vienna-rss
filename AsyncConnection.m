@@ -386,7 +386,7 @@
 	NSString * newURLString = [[request URL] absoluteString];
 	NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), newURLString];
 	[self setURLString:newURLString];
-	if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
+	/*if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
 	{
 		NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)redirectResponse;
 		if ([httpResponse statusCode] == 301)
@@ -394,7 +394,7 @@
 			status = MA_Connect_PermanentRedirect;
 			[delegate performSelector:handler withObject:self];
 		}
-	}
+	}*/
 	[aItem appendDetail:text];
 	return request;
 }
