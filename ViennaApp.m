@@ -170,7 +170,7 @@
 {
 	NSDictionary * args = [cmd evaluatedArguments];
 	id argObject = [args objectForKey:@"Folder"];
-	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [self folders];
+	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedDatabase] arrayOfFolders:MA_Root_Folder];
 
 	if (argArray != nil)
 		[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
