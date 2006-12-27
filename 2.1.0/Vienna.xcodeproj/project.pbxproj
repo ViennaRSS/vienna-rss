@@ -187,7 +187,7 @@
 		AAB821BB0999C2AD00F3C730 /* hash.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB821880999C2AD00F3C730 /* hash.h */; };
 		AAB821BC0999C2AD00F3C730 /* insert.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB821890999C2AD00F3C730 /* insert.c */; };
 		AAB821BD0999C2AD00F3C730 /* legacy.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8218A0999C2AD00F3C730 /* legacy.c */; };
-		AAB821BE0999C2AD00F3C730 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8218B0999C2AD00F3C730; };
+		AAB821BE0999C2AD00F3C730 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8218B0999C2AD00F3C730 /* main.c */; };
 		AAB821BF0999C2AD00F3C730 /* opcodes.c in Sources */ = {isa = PBXBuildFile; fileRef = AAB8218C0999C2AD00F3C730 /* opcodes.c */; };
 		AAB821C00999C2AD00F3C730 /* opcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB8218D0999C2AD00F3C730 /* opcodes.h */; };
 		AAB821C10999C2AD00F3C730 /* os.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB8218E0999C2AD00F3C730 /* os.h */; };
@@ -374,6 +374,19 @@
 		61975F020B41F145001F65FF /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = revised.tiff; sourceTree = "<group>"; };
 		61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CurlGetDate.xcodeproj; path = CurlGetDate/CurlGetDate.xcodeproj; sourceTree = "<group>"; };
+		61D9A5260B41FFBC0087C312 /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A5270B41FFCF0087C312 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A5280B41FFE20087C312 /* de */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = de; path = de.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A5290B41FFF20087C312 /* es */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = es; path = es.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A52A0B4200190087C312 /* fr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = fr; path = fr.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A52B0B4200270087C312 /* it */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = it; path = it.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A52C0B42003B0087C312 /* ja */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ja; path = ja.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A52D0B42004E0087C312 /* ko */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = ko; path = ko.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A52E0B42006B0087C312 /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = nl.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A52F0B42007A0087C312 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt_BR; path = pt_BR.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A5300B4200890087C312 /* sv */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = sv; path = sv.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A5310B4200960087C312 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		61D9A5320B4200A30087C312 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01BA210B05251900CD0695 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/InfoWindow.nib; sourceTree = "<group>"; };
@@ -659,7 +672,7 @@
 		AAB821880999C2AD00F3C730 /* hash.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		AAB821890999C2AD00F3C730 /* insert.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = insert.c; sourceTree = "<group>"; };
 		AAB8218A0999C2AD00F3C730 /* legacy.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = legacy.c; sourceTree = "<group>"; };
-		AAB8218B0999C2AD00F3C730 = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		AAB8218B0999C2AD00F3C730 /* main.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		AAB8218C0999C2AD00F3C730 /* opcodes.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = opcodes.c; sourceTree = "<group>"; };
 		AAB8218D0999C2AD00F3C730 /* opcodes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = opcodes.h; sourceTree = "<group>"; };
 		AAB8218E0999C2AD00F3C730 /* os.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = os.h; sourceTree = "<group>"; };
@@ -1178,7 +1191,7 @@
 				AAB821880999C2AD00F3C730 /* hash.h */,
 				AAB821890999C2AD00F3C730 /* insert.c */,
 				AAB8218A0999C2AD00F3C730 /* legacy.c */,
-				AAB8218B0999C2AD00F3C730,
+				AAB8218B0999C2AD00F3C730 /* main.c */,
 				AAB8218C0999C2AD00F3C730 /* opcodes.c */,
 				AAB8218D0999C2AD00F3C730 /* opcodes.h */,
 				AAB8218E0999C2AD00F3C730 /* os.h */,
@@ -1981,6 +1994,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				61975F020B41F145001F65FF /* en */,
+				61D9A5260B41FFBC0087C312 /* cs */,
+				61D9A5270B41FFCF0087C312 /* da */,
+				61D9A5280B41FFE20087C312 /* de */,
+				61D9A5290B41FFF20087C312 /* es */,
+				61D9A52A0B4200190087C312 /* fr */,
+				61D9A52B0B4200270087C312 /* it */,
+				61D9A52C0B42003B0087C312 /* ja */,
+				61D9A52D0B42004E0087C312 /* ko */,
+				61D9A52E0B42006B0087C312 /* nl */,
+				61D9A52F0B42007A0087C312 /* pt_BR */,
+				61D9A5300B4200890087C312 /* sv */,
+				61D9A5310B4200960087C312 /* zh_CN */,
+				61D9A5320B4200A30087C312 /* zh_TW */,
 			);
 			name = EmptyTrashWarning.nib;
 			sourceTree = "<group>";
