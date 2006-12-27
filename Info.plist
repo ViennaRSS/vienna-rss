@@ -86,6 +86,8 @@
 	<string>http://vienna-rss.sourceforge.net/changelog.xml</string>
 	<key>SupportedEditorsBundleIdentifiers</key>
 	<dict>
+		<key>Pukka</key>
+		<string>net.codesorcery.Pukka</string>
 		<key>Blapp</key>
 		<string>edu.ucsd.cs.mmccrack.blapp</string>
 		<key>Cocoalicious</key>

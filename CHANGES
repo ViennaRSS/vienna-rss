@@ -25,6 +25,8 @@ Thanks!
 - Single-key shortcut 'n' for Next Unread command.
 - Empty trash automatically on quitting. (Thanks to Hwang Hi.)
 - Fix bug: subscriptions duplicated when exporting by AppleScript. (Thanks to Darren Kulp.)
+- Support blogging with Pukka.
+- Email page link from browser tab.
 
 2.1.0.2108
 ----------
