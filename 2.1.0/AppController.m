@@ -38,6 +38,7 @@
 #import "Constants.h"
 #import "ArticleView.h"
 #import "BrowserPane.h"
+#import "EmptyTrashWarning.h"
 #import "Preferences.h"
 #import "InfoWindow.h"
 #import "DownloadManager.h"
@@ -429,6 +430,33 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (returnCode == NSAlertAlternateReturn)
 			return NSTerminateCancel;
 	}
+	
+	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
+	{
+		case MA_EmptyTrash_None: break;
+		
+		case MA_EmptyTrash_WithoutWarning:
+			if (![db isTrashEmpty])
+			{
+				[db purgeDeletedArticles];
+			}
+			break;
+		
+		case MA_EmptyTrash_WithWarning:
+			if (![db isTrashEmpty])
+			{
+				EmptyTrashWarning * warning = [[EmptyTrashWarning alloc] init];
+				if ([warning shouldEmptyTrash])
+				{
+					[db purgeDeletedArticles];
+				}
+				[warning release];
+			}
+			break;
+		
+		default: break;
+	}
+	
 	return NSTerminateNow;
 }
 
