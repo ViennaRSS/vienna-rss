@@ -2615,17 +2615,32 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableString * mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
-	NSArray * articleArray = [mainArticleView markedArticleRange];	
 	
-	if ([articleArray count] > 0) 
+	// If the active tab is a web view, mail the URL ...
+	NSView<BaseView> * theView = [browserView activeTabView];
+	if ([theView isKindOfClass:[BrowserPane class]])
 	{
-		NSEnumerator *e = [articleArray objectEnumerator];
-		id currentArticle;
-		
-		while ( (currentArticle = [e nextObject]) ) {
-			[mailtoLink appendFormat: @"%@%@", [currentArticle link], mailtoLineBreak];
+		NSString * viewLink = [theView viewLink];
+		if (viewLink != nil)
+		{
+			[mailtoLink appendString:viewLink];
+			[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
 		}
-		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
+	}
+	else
+	// ... otherwise, iterate over the currently selected articles.
+	{
+		NSArray * articleArray = [mainArticleView markedArticleRange];	
+		if ([articleArray count] > 0) 
+		{
+			NSEnumerator *e = [articleArray objectEnumerator];
+			id currentArticle;
+			
+			while ( (currentArticle = [e nextObject]) ) {
+				[mailtoLink appendFormat: @"%@%@", [currentArticle link], mailtoLineBreak];
+			}
+			[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
+		}
 	}
 }
 
@@ -3012,8 +3027,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(mailLinkToArticlePage:))
 	{
-		Article * thisArticle = [self selectedArticle];
+		NSView<BaseView> * theView = [browserView activeTabView];
+		if ([theView isKindOfClass:[BrowserPane class]])
+			return ([theView viewLink] != nil);
 		
+		Article * thisArticle = [self selectedArticle];
 		if ([[mainArticleView markedArticleRange] count] > 1)
 			[menuItem setTitle:NSLocalizedString(@"Send Links", nil)];
 		else
