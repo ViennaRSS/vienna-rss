@@ -2381,6 +2381,22 @@ static Database * _sharedDatabase = nil;
 	[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%d and message_id='%@'", isDeleted, folderId, preparedGuid];
 }
 
+/* isTrashEmpty
+ * Returns YES if there are no deleted articles, NO if there are deleted articles
+ */
+-(BOOL)isTrashEmpty
+{
+	[self verifyThreadSafety];
+	SQLResult * results = [sqlDatabase performQuery:@"select deleted_flag from messages where deleted_flag=1"];
+	if (results && [results rowCount] > 0)
+	{
+		[results release];
+		return NO;
+	}
+	else
+		return YES;
+}
+
 /* close
  * Close the database. All internal resources are released and a new,
  * possibly different, database can be opened instead.

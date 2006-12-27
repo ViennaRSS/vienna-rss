@@ -60,6 +60,7 @@ extern NSString * MAPref_TabList;
 extern NSString * MAPref_Layout;
 extern NSString * MAPref_NewArticlesNotification;
 extern NSString * MAPref_Profile_Path;
+extern NSString * MAPref_EmptyTrashNotification;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
@@ -114,3 +115,8 @@ const AEKeyword DataItemSourceFeedURL;
 // Folders tree sort method
 #define MA_FolderSort_Manual			0
 #define MA_FolderSort_ByName			1
+
+// Empty trash option on quitting
+#define MA_EmptyTrash_None				0
+#define MA_EmptyTrash_WithoutWarning	1
+#define MA_EmptyTrash_WithWarning		2

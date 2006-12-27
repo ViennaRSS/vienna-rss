@@ -41,7 +41,6 @@ Wishlist
 - Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Mix conditionals within smart folders.
-- Empty trash automatically (on quitting?).
 - Show article count for folders (including Trash).
 - Empty Trash command in contextual menu for Trash.
 - Empty Trash toolbar item.
@@ -70,3 +69,5 @@ Wishlist
 - Drop-down overflow list when too many tabs are open.
 - When deleting subscription, also delete smart folder rules involving that subscription.
 - Refresh subscriptions in order of manual sorting rather than alphabetically.
+- Add CSS variables for localizable strings.
+

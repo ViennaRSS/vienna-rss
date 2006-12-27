@@ -235,6 +235,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSDate distantPast] forKey:MAPref_LastRefreshDate];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Layout_Report] forKey:MAPref_Layout];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_NewArticlesNotification_Badge] forKey:MAPref_NewArticlesNotification];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_EmptyTrash_WithWarning] forKey:MAPref_EmptyTrashNotification];
 
 	return defaultValues;
 }

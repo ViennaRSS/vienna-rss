@@ -59,6 +59,7 @@ NSString * MAPref_TabList = @"TabList";
 NSString * MAPref_Layout = @"Layout";
 NSString * MAPref_NewArticlesNotification = @"NewArticlesNotification";
 NSString * MAPref_Profile_Path = @"ProfilePath";
+NSString * MAPref_EmptyTrashNotification = @"EmptyTrashNotification";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;
