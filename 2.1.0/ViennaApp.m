@@ -32,6 +32,22 @@
 
 @implementation ViennaApp
 
+/* sendEvent
+ * We override sendEvent in order to catch the status of the option key. 
+ * This needs to be done in an NSRespoder subclass, which is why it's here.
+ * 
+ */
+- (void)sendEvent:(NSEvent*)event
+{
+	if(([event type] == NSFlagsChanged) && NSAlternateKeyMask)
+	{
+		AppController * controller = (AppController *)[NSApp delegate];
+		[controller toggleOptionKeyButtonStates]; 
+	}
+	else
+		[super sendEvent:event];
+}
+
 /* handleRefreshAllSubscriptions
  * Refreshes all folders.
  */
