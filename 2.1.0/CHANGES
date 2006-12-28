@@ -27,6 +27,7 @@ Thanks!
 - Fix bug: subscriptions duplicated when exporting by AppleScript. (Thanks to Darren Kulp.)
 - Support blogging with Pukka.
 - Email page link from browser tab.
+- Don't show dialog when exporting subscriptions by AppleScript.  (Thanks to Darren Kulp.)
 
 2.1.0.2108
 ----------
