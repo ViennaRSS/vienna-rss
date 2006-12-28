@@ -172,9 +172,10 @@
 	id argObject = [args objectForKey:@"Folder"];
 	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedDatabase] arrayOfFolders:MA_Root_Folder];
 
+	int countExported = 0;
 	if (argArray != nil)
-		[[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
-	return nil;
+		countExported = [[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
+	return [NSNumber numberWithInt:countExported];
 }
 
 /* handleNewSubscription

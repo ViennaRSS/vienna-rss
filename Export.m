@@ -70,7 +70,23 @@
 		[panel orderOut:self];
 
 		NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-		[self exportToFile:[panel filename] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+		int countExported = [self exportToFile:[panel filename] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+		
+		if (countExported < 0)
+		{
+			NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
+									  NSLocalizedString(@"OK", nil),
+									  nil,
+									  nil, [NSApp mainWindow], self,
+									  nil, nil, nil,
+									  NSLocalizedString(@"Cannot open export file message text", nil));
+		}
+		else
+		{
+			// Announce how many we successfully imported
+			NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
+			NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
+		}
 	}
 }
 
@@ -121,8 +137,9 @@
 /* exportToFile
  * Export a list of RSS subscriptions to the specified file. If onlySelected is set then only those
  * folders selected in the folders tree are exported. Otherwise all RSS folders are exported.
+ * Returns the number of subscriptions exported, or -1 on error.
  */
--(void)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
+-(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
 {
 	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
 	XMLParser * opmlTree = [newTree addTree:@"opml" withAttributes:[NSDictionary dictionaryWithObject:@"1.0" forKey:@"version"]];
@@ -143,14 +160,8 @@
 	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
-		NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
-								  NSLocalizedString(@"OK", nil),
-								  nil,
-								  nil, [NSApp mainWindow], self,
-								  nil, nil, nil,
-								  NSLocalizedString(@"Cannot open export file message text", nil));
 		[newTree release];
-		return;
+		return -1; // Indicate an error condition (impossible number of exports)
 	}
 
 	// Put some newlines in for readability
@@ -160,12 +171,9 @@
 
 	[xmlString writeToFile:fqFilename atomically:YES];
 	[xmlString release];
-
-	// Announce how many we successfully imported
-	NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
-	NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
 	
 	// Clean up at the end
 	[newTree release];
+	return countExported;
 }
 @end
