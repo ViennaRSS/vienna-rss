@@ -47,6 +47,7 @@
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
 	IBOutlet NSButton * exportWithGroups;
+	IBOutlet NSButton * newSubscriptionButton;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSTextField * statusText;
 	IBOutlet NSProgressIndicator * spinner;
@@ -165,4 +166,5 @@
 -(BrowserView *)browserView;
 -(NSArray *)folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
+-(void)toggleOptionKeyButtonStates;
 @end

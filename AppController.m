@@ -2014,6 +2014,26 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	return NO;
 }
 
+/* toggleOptionKeyButtonStates
+ * Toggles the appearance and function of the "Add" button while the option-key is pressed. 
+ * Works and looks exactly as in the iApps. Currently only for toggling "Add Sub/Add Smart Folder", 
+ * but of course it could be used for all other buttons as well.
+ */
+
+-(void)toggleOptionKeyButtonStates
+{
+	if ([newSubscriptionButton action] == @selector(newSubscription:)) 
+	{
+		[newSubscriptionButton setImage:[NSImage imageNamed:@"gear.tiff"]];
+		[newSubscriptionButton setAction:@selector(newSmartFolder:)];
+	}
+	else 
+	{
+		[newSubscriptionButton setImage:[NSImage imageNamed:@"add.tiff"]];
+		[newSubscriptionButton setAction:@selector(newSubscription:)];
+	}
+}
+
 /* isConnecting
  * Returns whether or not 
  */

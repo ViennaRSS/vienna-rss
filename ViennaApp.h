@@ -23,6 +23,9 @@
 
 @interface ViennaApp : NSApplication
 
+// Override sendEvent so we can catch depressed option keys and other special stuff
+- (void) sendEvent:(NSEvent*)event;
+
 // Refresh commands
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd;
 -(id)handleRefreshSubscription:(NSScriptCommand *)cmd;
