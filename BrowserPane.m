@@ -226,6 +226,7 @@
 		// Show or hide the lock icon depending on whether this is a secure
 		// web page. Also shade the address bar a nice light yellow colour as
 		// Camino does.
+	
 		NSURLRequest * request = [[frame dataSource] request];
 		if ([[[request URL] scheme] isEqualToString:@"https"])
 		{

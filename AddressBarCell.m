@@ -30,6 +30,7 @@
 	if ((self = [super initTextCell:inStr]) != nil)
 	{
 		hasSecureImage = NO;
+		hasFeedIcon = NO;
 	}
 	return self;
 }
@@ -43,6 +44,38 @@
 	[(NSControl*)[self controlView] calcSize];
 }
 
+/* hasSecureImage
+ * Returns wether the secure image should currently be visible.
+ */
+-(BOOL)hasSecureImage
+{
+	return hasSecureImage;
+}
+
+/* FEED DETECTION: As soon as feed detection is implemented, the checks which decide wether to show 
+* the feed-icon will have to take place somewhere. There are two identical feed-icons and one lock-icon in 
+* BrowserPane.nib. The right feed-icon overlays the lock-icon We need to implement some logic
+* to decide wether to show only the right feed icon and hide the lock, or to show the lock and the left
+* feed-icon while hiding the right feed-icon. Souds funky, but is actually probably the most straightforward way.
+*/
+
+/* setHasFeedIcon
+ * Sets wether the address field will show a RSS icon.
+ */
+-(void)setHasFeedIcon:(BOOL)flag
+{
+	hasFeedIcon = flag;
+	[(NSControl*)[self controlView] calcSize];
+}
+
+/* hasFeedIcon
+ * Returns wether the feed icon should currently be visible.
+ */
+-(BOOL)hasFeedIcon
+{
+	return hasFeedIcon;
+}
+
 /* drawingRectForBounds
  * Reduce the drawing area for the text by the space needed for the image
  * on the left and, optionally, the secure web page image on the right.
@@ -54,6 +87,8 @@
 	theRect.origin.x += imageSpace;
 	theRect.size.width -= imageSpace;
 	if (hasSecureImage)
+		theRect.size.width -= imageSpace;
+	if (hasFeedIcon)
 		theRect.size.width -= imageSpace;
 	return [super drawingRectForBounds:theRect];
 }

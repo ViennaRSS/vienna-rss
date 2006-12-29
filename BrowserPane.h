@@ -34,6 +34,8 @@
 	IBOutlet NSTextField * addressField;
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
+	IBOutlet NSImageView * feedIconImageLeft;
+	IBOutlet NSImageView * feedIconImageRight;
 	AppController * controller;
 	NSString * pageFilename;
 	BrowserTab * tab;
