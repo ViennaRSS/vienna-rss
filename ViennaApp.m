@@ -35,11 +35,10 @@
 /* sendEvent
  * We override sendEvent in order to catch the status of the option key. 
  * This needs to be done in an NSRespoder subclass, which is why it's here.
- * 
  */
 - (void)sendEvent:(NSEvent*)event
 {
-	if(([event type] == NSFlagsChanged) && NSAlternateKeyMask)
+	if(([event type] == NSFlagsChanged) && ([event keyCode] == 61))
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
 		[controller toggleOptionKeyButtonStates]; 

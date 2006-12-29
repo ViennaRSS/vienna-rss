@@ -78,10 +78,11 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
--(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url author:(NSString *)author guid:(NSString *)guid;
+	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url author:(NSString *)author guid:(NSString *)guid;
 	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
 	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholder;
+	-(void)toggleOptionKeyButtonStates;
 	-(FoldersTree *)foldersTree;
 	-(void)updateCloseCommands;
 	-(void)loadOpenTabs;
@@ -2027,7 +2028,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[newSubscriptionButton setImage:[NSImage imageNamed:@"gear.tiff"]];
 		[newSubscriptionButton setAction:@selector(newSmartFolder:)];
 	}
-	else 
+
+	if ( ! ([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask)) 
 	{
 		[newSubscriptionButton setImage:[NSImage imageNamed:@"add.tiff"]];
 		[newSubscriptionButton setAction:@selector(newSubscription:)];
