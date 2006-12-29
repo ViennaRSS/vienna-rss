@@ -98,6 +98,8 @@
 		<string>org.speirs.xjournal</string>
 		<key>ecto</key>
 		<string>kungfoo.tv.ecto</string>
+		<key>BlogThing</key>
+		<string>com.automagicsoftware.BlogThing</string>
 	</dict>
 </dict>
 </plist>
