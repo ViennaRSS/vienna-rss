@@ -14,11 +14,13 @@
                 addressField = NSTextField; 
                 backButton = NSButton; 
                 boxFrame = NSBox; 
+                feedIconImageLeft = NSImageView; 
+                feedIconImageRight = NSImageView; 
                 forwardButton = NSButton; 
                 iconImage = NSButton; 
                 lockIconImage = NSImageView; 
                 refreshButton = NSButton; 
-                webPane = ArticleView; 
+                webPane = TabbedWebView; 
             }; 
             SUPERCLASS = NSView; 
         }, 
