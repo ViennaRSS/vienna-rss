@@ -38,7 +38,7 @@
  */
 - (void)sendEvent:(NSEvent*)event
 {
-	if(([event type] == NSFlagsChanged) && ([event keyCode] == 61))
+	if(([event type] == NSFlagsChanged) && ( ([event keyCode] == 61) || ([event keyCode] == 58)))
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
 		[controller toggleOptionKeyButtonStates]; 
