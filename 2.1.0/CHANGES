@@ -30,6 +30,7 @@ Thanks!
 - Don't show dialog when exporting subscriptions by AppleScript.  (Thanks to Darren Kulp.)
 - Added iTunes-like behaviour for add-button. Holding down Option will toggle to "New Smart Folder".
 - Added BlogThing to list of supported blog editors.
+- Help localized to German.
 
 2.1.0.2108
 ----------
