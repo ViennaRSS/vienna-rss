@@ -24,6 +24,7 @@
 @interface ArticleView : TabbedWebView {
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
+	NSString * jsScript;
 }
 
 // Public functions
