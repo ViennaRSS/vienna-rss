@@ -124,6 +124,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 				NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
 				if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
 					jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] retain];
+				else
+					jsScript = nil;
 				
 				// Make sure the template is valid
 				NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
