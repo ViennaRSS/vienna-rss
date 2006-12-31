@@ -241,6 +241,10 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString
 {
+	// Replace feed:// with http:// if necessary
+	if ([urlString hasPrefix:@"feed://"])
+		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
+	
 	const char * utf8String = [htmlText UTF8String];
 	[[self mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
 							 MIMEType:@"text/html" 

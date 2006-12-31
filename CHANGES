@@ -32,6 +32,7 @@ Thanks!
 - Added BlogThing to list of supported blog editors.
 - Help localized to German.
 - Enable JavaScript for styles using the file "script.js", if it exists. (Thanks to Les Orchard).
+- Fix bug: article pane failed to display articles for subscriptions with feed: URL.
 
 2.1.0.2108
 ----------
