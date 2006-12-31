@@ -48,6 +48,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		// Init our vars
 		htmlTemplate = nil;
 		cssStylesheet = nil;
+		jsScript = nil;
 
 		// Set up to be notified when style changes
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -116,9 +117,13 @@ static NSMutableDictionary * stylePathMappings = nil;
 			{
 				[htmlTemplate release];
 				[cssStylesheet release];
+				[jsScript release];
 				
 				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
 				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
+				NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
+				if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
+					jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] retain];
 				
 				// Make sure the template is valid
 				NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
@@ -162,6 +167,12 @@ static NSMutableDictionary * stylePathMappings = nil;
 		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
 		[htmlText appendString:cssStylesheet];
 		[htmlText appendString:@"\"/>"];
+	}
+	if (jsScript != nil)
+	{
+		[htmlText appendString:@"<script type=\"text/javascript\" src=\""];
+		[htmlText appendString:jsScript];
+		[htmlText appendString:@"\"/></script>"];
 	}
 	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
 	[htmlText appendString:@"<title>$ArticleTitle$</title></head><body>"];
