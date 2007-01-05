@@ -33,6 +33,7 @@ Thanks!
 - Help localized to German.
 - Enable JavaScript for styles using the file "script.js", if it exists. (Thanks to Les Orchard).
 - Fix bug: article pane failed to display articles for subscriptions with feed: URL.
+- Don't unnecessarily refresh article pane after folder refresh.
 
 2.1.0.2108
 ----------
