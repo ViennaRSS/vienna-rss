@@ -992,9 +992,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
 		// the same and the GUID of the article at the selection is the same.
 		allArticles = [articleController allArticles];
-		BOOL isUnchanged = currentSelectedRow >= 0 &&
-						   currentSelectedRow < (int)[allArticles count] &&
-						   [guid isEqualToString:[[allArticles objectAtIndex:currentSelectedRow] guid]];
+		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (int)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
+		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
@@ -1004,7 +1003,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[self refreshArticlePane];
 			}
 		}
-		else if (refreshFlag == MA_Refresh_ReloadFromDatabase) // The article may have been updated, so refresh the article pane.
+		else if (refreshFlag == MA_Refresh_ReloadFromDatabase && 
+				 [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles] && 
+				 [currentArticle isRevised] && ![currentArticle isRead]) // The article may have been updated, so refresh the article pane.
 			[self refreshArticlePane];
 	}
 	else
