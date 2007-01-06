@@ -99,7 +99,7 @@ static Preferences * _standardPreferences = nil;
 			[userPrefs registerDefaults:defaults];
 
 			// Application-specific folder locations
-			defaultDatabase = [[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_Database_Name] retain];
+			defaultDatabase = [[userPrefs valueForKey:MAPref_DefaultDatabase] retain];
 			imagesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
 			stylesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
 			scriptsFolder = [[MA_ScriptsFolder stringByExpandingTildeInPath] retain];
@@ -205,6 +205,7 @@ static Preferences * _standardPreferences = nil;
 	NSDictionary * sysDict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
 	BOOL isPanther = [[sysDict valueForKey:@"ProductVersion"] hasPrefix:@"10.3"];
 
+	[defaultValues setObject:[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_Database_Name] forKey:MAPref_DefaultDatabase];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatedArticles];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowUnreadArticlesInBold];
 	[defaultValues setObject:defaultArticleListFont forKey:MAPref_ArticleListFont];
