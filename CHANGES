@@ -16,6 +16,7 @@ Thanks!
 - The -profile switch is now propagated to a new instance of Vienna if Vienna is restarted.
 - Added more built-in styles.
 - Add Advanced preferences page and help file page to match.
+- Fixed bug where folder passwords were not being properly saved and loaded.
 - Save open tabs with unloaded URLs.
 - Fix bug: when selecting articles list via right-click, menu items were disabled.
 - When manually refreshing all subscriptions, reset the automatic refresh timer.
