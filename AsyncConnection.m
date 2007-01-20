@@ -348,7 +348,7 @@
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
 	BOOL succeeded = NO;
-	if ([challenge previousFailureCount] == 0)
+	if ([challenge previousFailureCount] < 2)
 	{
 		if (![username isBlank])
 		{
