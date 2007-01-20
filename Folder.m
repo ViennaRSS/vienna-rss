@@ -442,7 +442,8 @@ static NSArray * iconArray = nil;
 {
 	if (!hasPassword)
 	{
-		[attributes setValue:[KeyChain getPasswordFromKeychain:[self username] url:[self feedURL]] forKey:@"Password"];
+		if ([self username] != nil && [self feedURL] != nil)
+			[attributes setValue:[KeyChain getPasswordFromKeychain:[self username] url:[self feedURL]] forKey:@"Password"];
 		hasPassword = YES;
 	}
 	return [attributes valueForKey:@"Password"];
@@ -453,7 +454,8 @@ static NSArray * iconArray = nil;
  */
 -(void)setPassword:(NSString *)newPassword
 {
-	[KeyChain setPasswordInKeychain:newPassword username:[self username] url:[self feedURL]];
+	if ([self username] != nil && [self feedURL] != nil)
+		[KeyChain setPasswordInKeychain:newPassword username:[self username] url:[self feedURL]];
 	[attributes setValue:newPassword forKey:@"Password"];
 	hasPassword = YES;
 }
