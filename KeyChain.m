@@ -32,34 +32,40 @@
 	NSURL * secureUrl = [NSURL URLWithString:url];
 	const char * cServiceName = [[secureUrl host] cString];
 	const char * cUsername = [username cString];
-	const char * cPath = "";
 	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : 80;
-	UInt32 passwordLength;
-	void * passwordPtr;
 	NSString * thePassword;
-	OSStatus status;
 
-	status = SecKeychainFindInternetPassword(NULL,
-											 strlen(cServiceName),
-											 cServiceName,
-											 0,
-											 NULL,
-											 strlen(cUsername),
-											 cUsername,
-											 strlen(cPath),
-											 cPath,
-											 portNumber,
-											 kSecProtocolTypeHTTP,
-											 kSecAuthenticationTypeDefault,
-											 &passwordLength,
-											 &passwordPtr,
-											 NULL);
-	if (status != noErr)
+	if (!cServiceName || !cUsername)
 		thePassword = @"";
 	else
 	{
-		thePassword = [NSString stringWithCString:passwordPtr length:passwordLength];
-		SecKeychainItemFreeContent(NULL, passwordPtr);
+		const char * cPath = "";
+		UInt32 passwordLength;
+		void * passwordPtr;
+		OSStatus status;
+
+		status = SecKeychainFindInternetPassword(NULL,
+												 strlen(cServiceName),
+												 cServiceName,
+												 0,
+												 NULL,
+												 strlen(cUsername),
+												 cUsername,
+												 strlen(cPath),
+												 cPath,
+												 portNumber,
+												 kSecProtocolTypeHTTP,
+												 kSecAuthenticationTypeDefault,
+												 &passwordLength,
+												 &passwordPtr,
+												 NULL);
+		if (status != noErr)
+			thePassword = @"";
+		else
+		{
+			thePassword = [NSString stringWithCString:passwordPtr length:passwordLength];
+			SecKeychainItemFreeContent(NULL, passwordPtr);
+		}
 	}
 	return thePassword;
 }
@@ -78,6 +84,8 @@
 	SecKeychainItemRef itemRef;
 	OSStatus status;
 	
+	if (!cServiceName || !cUsername || !cPassword)
+		return;
 	status = SecKeychainFindInternetPassword(NULL,
 											 strlen(cServiceName),
 											 cServiceName,
