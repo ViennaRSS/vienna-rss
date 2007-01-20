@@ -36,7 +36,7 @@
  * We override sendEvent in order to catch the status of the option key. 
  * This needs to be done in an NSRespoder subclass, which is why it's here.
  */
-- (void)sendEvent:(NSEvent*)event
+/*- (void)sendEvent:(NSEvent*)event
 {
 	if(([event type] == NSFlagsChanged) && ( ([event keyCode] == 61) || ([event keyCode] == 58)))
 	{
@@ -45,7 +45,7 @@
 	}
 	else
 		[super sendEvent:event];
-}
+}*/
 
 /* handleRefreshAllSubscriptions
  * Refreshes all folders.
