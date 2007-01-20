@@ -209,7 +209,10 @@ static InfoWindowManager * _infoWindowManager = nil;
 	// Set the header details
 	[folderName setStringValue:[folder name]];
 	[folderImage setImage:[folder image]]; 
-	[lastRefreshDate setStringValue:[[[folder lastUpdate] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription]];
+	if ([[folder lastUpdate] isEqualToDate:[NSDate distantPast]])
+		[lastRefreshDate setStringValue:NSLocalizedString(@"Never", nil)];
+	else
+		[lastRefreshDate setStringValue:[[[folder lastUpdate] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription]];
 	
 	// Fill out the panels
 	[urlField setStringValue:[folder feedURL]];
