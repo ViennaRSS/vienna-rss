@@ -231,6 +231,7 @@
 		AAB9698F08F99EE700B7D1C8 /* DownloadWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAB9698D08F99EE700B7D1C8 /* DownloadWindow.h */; };
 		AAB9699008F99EE700B7D1C8 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */; };
 		AABC189D090AB00300527D4B /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABC189C090AB00300527D4B /* RSSSources.plist */; };
+		AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA872C680B658B0B00F352C9 /* PSMTabBarControl.framework */; };
 		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
 		AABCFB1A0900BA4E00984F78 /* SquareWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AABCFB180900BA4E00984F78 /* SquareWindow.h */; };
 		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
@@ -342,6 +343,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in CopyFiles */,
 				616867C60A83D6BA00FEAC62 /* CurlGetDate.framework in CopyFiles */,
 				478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */,
 				AA610C1509EF6745005C6903 /* NewsParser.framework in CopyFiles */,
@@ -2443,7 +2445,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2109;
+				BUILD_NUMBER = 2200;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2471,7 +2473,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2109;
+				BUILD_NUMBER = 2200;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2499,7 +2501,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2109;
+				BUILD_NUMBER = 2200;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
