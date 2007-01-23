@@ -1,0 +1,36 @@
+<div>
+<div id="headerContainer">
+		<div id="logo"></div>
+		<div id="headerMiddleContainer">
+			<div id="headerTop">&nbsp;<div id="headerTopEnd">&nbsp;</div></div>
+			<div id="headerMiddle">
+					<div id="headerMiddleEnd">
+						<a href="$FeedLink$">$FeedTitle$</a></div>
+				</div>
+			<div id="headerBottom">
+					<div id="headerBottomEnd">
+					    <div id="viennaTag">Vienna News - the premier open source newsreader</div>
+					</div>
+			</div>
+		</div>
+</div>
+
+<div id="articleBodyStyle">
+		<div class="articleDetails">
+		<h1 class="articleTitle"><a href="$ArticleLink$">$ArticleTitle$</a></h1>
+		<h2 class="articleDate">$ArticleDate$</h2>
+		<script language="JavaScript">
+<!--
+var thestring = "$ArticleAuthor$";
+if (thestring != "") {
+document.writeln("<h2 class='articleAuthor'> by $ArticleAuthor$</h2>");
+}
+//-->
+</script> 
+		</div>
+		<div>
+		 $ArticleBody$
+		</div>
+		<div id="footer">| &quot;Vienna Pride&quot; style by <a href="http://www.lucidgreen.net">lucidgreen.net</a> |</div>
+</div>
+</div>

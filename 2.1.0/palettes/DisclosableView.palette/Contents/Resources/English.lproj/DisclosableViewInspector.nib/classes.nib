@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {setHiddenHeight = id; }; 
+            CLASS = SNDisclosableViewInspector; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {hiddenHeightField = NSTextField; }; 
+            SUPERCLASS = IBInspector; 
+        }
+    ); 
+    IBVersion = 1; 
+}

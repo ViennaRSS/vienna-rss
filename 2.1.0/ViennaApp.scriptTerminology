@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Classes</key>
+	<dict>
+		<key>Article</key>
+		<dict>
+			<key>Attributes</key>
+			<dict>
+				<key>author</key>
+				<dict>
+					<key>Description</key>
+					<string>The article's author</string>
+					<key>Name</key>
+					<string>author</string>
+				</dict>
+				<key>body</key>
+				<dict>
+					<key>Description</key>
+					<string>The contents of the article</string>
+					<key>Name</key>
+					<string>body</string>
+				</dict>
+				<key>date</key>
+				<dict>
+					<key>Description</key>
+					<string>The date when the article was posted</string>
+					<key>Name</key>
+					<string>date</string>
+				</dict>
+				<key>containingFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>The folder to which this article belongs</string>
+					<key>Name</key>
+					<string>containing folder</string>
+				</dict>
+				<key>guid</key>
+				<dict>
+					<key>Description</key>
+					<string>The unique GUID of the article</string>
+					<key>Name</key>
+					<string>guid</string>
+				</dict>
+				<key>isDeleted</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the article has been deleted</string>
+					<key>Name</key>
+					<string>deleted</string>
+				</dict>
+				<key>isFlagged</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the article has been flagged</string>
+					<key>Name</key>
+					<string>flag</string>
+				</dict>
+				<key>isRead</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the article has been read</string>
+					<key>Name</key>
+					<string>read</string>
+				</dict>
+				<key>link</key>
+				<dict>
+					<key>Description</key>
+					<string>The link to the article source</string>
+					<key>Name</key>
+					<string>link</string>
+				</dict>
+				<key>title</key>
+				<dict>
+					<key>Description</key>
+					<string>The article's title</string>
+					<key>Name</key>
+					<string>title</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>A single article</string>
+			<key>Name</key>
+			<string>article</string>
+			<key>PluralName</key>
+			<string>articles</string>
+		</dict>
+		<key>Folder</key>
+		<dict>
+			<key>Attributes</key>
+			<dict>
+				<key>description</key>
+				<dict>
+					<key>Description</key>
+					<string>The folder's description</string>
+					<key>Name</key>
+					<string>description</string>
+				</dict>
+				<key>feedURL</key>
+				<dict>
+					<key>Description</key>
+					<string>The subscription feed URL</string>
+					<key>Name</key>
+					<string>url</string>
+				</dict>
+				<key>homePage</key>
+				<dict>
+					<key>Description</key>
+					<string>The folder's feed home site</string>
+					<key>Name</key>
+					<string>home page</string>
+				</dict>
+				<key>name</key>
+				<dict>
+					<key>Description</key>
+					<string>The name of a folder</string>
+					<key>Name</key>
+					<string>name</string>
+				</dict>
+				<key>isRSSFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns a true value if the folder is an RSS subscription</string>
+					<key>Name</key>
+					<string>rss folder</string>
+				</dict>
+				<key>isSmartFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns a strue value if the folder is a smart folder</string>
+					<key>Name</key>
+					<string>smart folder</string>
+				</dict>
+				<key>isGroupFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns a true value if the folder is a group folder</string>
+					<key>Name</key>
+					<string>group folder</string>
+				</dict>
+				<key>unreadCount</key>
+				<dict>
+					<key>Description</key>
+					<string>The number of unread articles in the folder</string>
+					<key>Name</key>
+					<string>unread count</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>A single folder</string>
+			<key>Name</key>
+			<string>folder</string>
+			<key>PluralName</key>
+			<string>folders</string>
+		</dict>
+		<key>ViennaApp</key>
+		<dict>
+			<key>Attributes</key>
+			<dict>
+				<key>applicationVersion</key>
+				<dict>
+					<key>Description</key>
+					<string>The build number for the Vienna application bundle</string>
+					<key>Name</key>
+					<string>application version</string>
+				</dict>
+				<key>documentHTMLSource</key>
+				<dict>
+					<key>Description</key>
+					<string>The source of the currently open tab</string>
+					<key>Name</key>
+					<string>documentHTMLSource</string>
+				</dict>
+				<key>articleListFont</key>
+				<dict>
+					<key>Description</key>
+					<string>The font used in the article list pane</string>
+					<key>Name</key>
+					<string>article list font</string>
+				</dict>
+				<key>articleListFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>The size of the font used in the article list pane</string>
+					<key>Name</key>
+					<string>article list font size</string>
+				</dict>
+				<key>checkForNewOnStartup</key>
+				<dict>
+					<key>Description</key>
+					<string>Check for new versions of Vienna on startup</string>
+					<key>Name</key>
+					<string>check for new on startup</string>
+				</dict>
+				<key>currentFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>The current folder in the article list pane</string>
+					<key>Name</key>
+					<string>current folder</string>
+				</dict>
+				<key>currentArticle</key>
+				<dict>
+					<key>Description</key>
+					<string>The current selected article being shown in the article list pane</string>
+					<key>Name</key>
+					<string>current article</string>
+				</dict>
+				<key>displayStyle</key>
+				<dict>
+					<key>Description</key>
+					<string>The current display style for articles</string>
+					<key>Name</key>
+					<string>display style</string>
+				</dict>
+				<key>enableMinimumFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>Enable minimum font size</string>
+					<key>Name</key>
+					<string>enable minimum font size</string>
+				</dict>
+				<key>folderListFont</key>
+				<dict>
+					<key>Description</key>
+					<string>The font used in the folder list pane</string>
+					<key>Name</key>
+					<string>folder list font</string>
+				</dict>
+				<key>folderListFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>The size of the font used in the folder list pane</string>
+					<key>Name</key>
+					<string>folder list font size</string>
+				</dict>
+				<key>isRefreshing</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns whether Vienna is currently doing a refresh</string>
+					<key>Name</key>
+					<string>refreshing</string>
+				</dict>
+				<key>markReadInterval</key>
+				<dict>
+					<key>Description</key>
+					<string>The interval after an article is displayed before it is marked read</string>
+					<key>Name</key>
+					<string>mark read interval</string>
+				</dict>
+				<key>minimumFontSize</key>
+				<dict>
+					<key>Description</key>
+					<string>The minimum font size used when displaying article text</string>
+					<key>Name</key>
+					<string>minimum font size</string>
+				</dict>
+				<key>openLinksInBackground</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the default browser is activated when Vienna opens new links</string>
+					<key>Name</key>
+					<string>open links in background</string>
+				</dict>
+				<key>openLinksInVienna</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether links are opened in the Vienna browser or the default system browser</string>
+					<key>Name</key>
+					<string>open links in Vienna</string>
+				</dict>
+				<key>autoExpireDuration</key>
+				<dict>
+					<key>Description</key>
+					<string>The duration of articles before they are expired to the trash</string>
+					<key>Type</key>
+					<string>auto expire duration</string>
+				</dict>
+				<key>readingPaneOnRight</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether the reading pane is to the right of the article list</string>
+					<key>Name</key>
+					<string>reading pane on right</string>
+				</dict>
+				<key>filterMode</key>
+				<dict>
+					<key>Description</key>
+					<string>Sets how articles are filtered in the display list</string>
+					<key>Name</key>
+					<string>filter by</string>
+				</dict>
+				<key>refreshFrequency</key>
+				<dict>
+					<key>Description</key>
+					<string>The frequency (in milliseconds) with which we refresh all subscriptions</string>
+					<key>Name</key>
+					<string>refresh frequency</string>
+				</dict>
+				<key>refreshOnStartup</key>
+				<dict>
+					<key>Description</key>
+					<string>Whether Vienna refreshes all subscriptions when it starts</string>
+					<key>Name</key>
+					<string>refresh on startup</string>
+				</dict>
+				<key>totalUnreadCount</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns the total count of unread articles</string>
+					<key>Name</key>
+					<string>total unread count</string>
+				</dict>
+				<key>currentSelection</key>
+				<dict>
+					<key>Description</key>
+					<string>Returns the text selected in the current article or web page</string>
+					<key>Name</key>
+					<string>current selection</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Vienna top level scripting object</string>
+			<key>Name</key>
+			<string>application</string>
+			<key>PluralName</key>
+			<string>applications</string>
+		</dict>
+	</dict>
+	<key>Commands</key>
+	<dict>
+		<key>CompactDatabase</key>
+		<dict>
+			<key>Description</key>
+			<string>Compact the article database</string>
+			<key>Name</key>
+			<string>compact database</string>
+		</dict>
+		<key>ExportSubscriptions</key>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>FileName</key>
+				<dict>
+					<key>Description</key>
+					<string>Specify the name of the file to which the subscriptions will be exported</string>
+					<key>Name</key>
+					<string>to</string>
+				</dict>
+				<key>Folder</key>
+				<dict>
+					<key>Description</key>
+					<string>Specify the folder to be exported</string>
+					<key>Name</key>
+					<string>from</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Export subscriptions from specified folders to a file</string>
+			<key>Name</key>
+			<string>export subscriptions</string>
+		</dict>
+		<key>GetURL</key>
+		<dict>
+			<key>Description</key>
+			<string>Open a URL</string>
+			<key>Name</key>
+			<string>GetURL</string>
+		</dict>
+		<key>ImportSubscriptions</key>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>FileName</key>
+				<dict>
+					<key>Description</key>
+					<string>Specify the name of the file you wish to import</string>
+					<key>Name</key>
+					<string>from</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Imports subscriptions from a file</string>
+			<key>Name</key>
+			<string>import subscriptions</string>
+		</dict>
+		<key>MarkAllRead</key>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>Folder</key>
+				<dict>
+					<key>Description</key>
+					<string>Specify the name of the folder where all articles will be marked read</string>
+					<key>Name</key>
+					<string>in</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Mark read all unread articles in the specified folder</string>
+			<key>Name</key>
+			<string>mark all read</string>
+		</dict>
+		<key>MarkAllSubscriptionsRead</key>
+		<dict>
+			<key>Description</key>
+			<string>Mark read all unread articles in all folders</string>
+			<key>Name</key>
+			<string>mark all subscriptions read</string>
+		</dict>
+		<key>NewSubscription</key>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>URL</key>
+				<dict>
+					<key>Description</key>
+					<string>The URL of the new feed</string>
+					<key>Name</key>
+					<string>for</string>
+				</dict>
+				<key>UnderFolder</key>
+				<dict>
+					<key>Description</key>
+					<string>Optional folder under which the subscription will be created</string>
+					<key>Name</key>
+					<string>under</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Create a new subscription</string>
+			<key>Name</key>
+			<string>create new subscription</string>
+		</dict>
+		<key>RefreshAllSubscriptions</key>
+		<dict>
+			<key>Description</key>
+			<string>Refresh all subscribed folders</string>
+			<key>Name</key>
+			<string>refresh all subscriptions</string>
+		</dict>
+		<key>RefreshSubscription</key>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>Folder</key>
+				<dict>
+					<key>Description</key>
+					<string>Specify the name of the folder to be refreshed</string>
+					<key>Name</key>
+					<string>for</string>
+				</dict>
+			</dict>
+			<key>Description</key>
+			<string>Refresh selected folders</string>
+			<key>Name</key>
+			<string>refresh subscription</string>
+		</dict>
+		<key>ResetFolderSort</key>
+		<dict>
+			<key>Description</key>
+			<string>Reset the folder sort order</string>
+			<key>Name</key>
+			<string>reset folder sort</string>
+		</dict>
+		<key>EmptyTrash</key>
+		<dict>
+			<key>Description</key>
+			<string>Empty the trash</string>
+			<key>Name</key>
+			<string>empty trash</string>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Classes and commands for Vienna</string>
+	<key>Name</key>
+	<string>ViennaApp</string>
+</dict>
+</plist>
