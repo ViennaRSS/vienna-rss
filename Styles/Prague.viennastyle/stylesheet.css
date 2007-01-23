@@ -1,0 +1,61 @@
+body {
+	color: #333;
+	font-family: "Lucida Grande", sans-serif;
+	font-size: 1.1em;
+	line-height: 1.4em;
+	margin: 0;
+	padding: 0;
+}
+
+#title {
+	background-color: #000;
+	background-image: url('titlebar.png');
+	background-repeat: repeat-x;
+	line-height: 1.6em;
+	margin-top: 1px;
+	padding: .65em 1em .8em 1em;
+}
+
+#title a, #title a:hover, #title a:visited {
+	color: #fff;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: 2px 2px 1px #000;
+}
+
+#article {
+	padding: 1em 1em 1.5em 1em;
+}
+
+#article a, #article a:hover, #article a:visited {
+	color: #093;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#article a:hover {
+	background-color: #ffc;
+}
+
+#attribution {
+	border-top: 1px dotted #ccc;
+	color: #999;
+	font-size: .9em;
+	padding: .5em 1em 1em 1em;
+}
+
+#feed a, #feed a:link, #feed a:visited {
+	color: #999;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#feed a:hover {
+	background-color: #ffc;
+	color: #093;
+}
+
+#date:before, #author:before {
+	content(" &mdash; ");
+}
