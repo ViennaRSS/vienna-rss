@@ -21,37 +21,25 @@
 #import <Cocoa/Cocoa.h>
 #import "BaseView.h"
 
-@class BrowserTab;
 @interface BrowserView : NSView
 {
-	BrowserTab * activeTab;
-	NSMutableArray * allTabs;
-	NSImage * closeButton;
-	NSImage * highlightedCloseButton;
-	NSImage * pressedCloseButton;
-	NSSize closeButtonSize;
-	BrowserTab * trackingTab;
-	NSMutableDictionary * titleAttributes;
-	NSColor * borderColor;
-	NSColor * inactiveTabBackgroundColor;
+	NSView *primaryTabItemView;
+	
+	IBOutlet NSTabView *tabView;
 }
 
 // Accessors
--(BrowserTab *)setPrimaryTabView:(NSView *)newPrimaryView;
--(BrowserTab *)primaryTab;
--(BrowserTab *)activeTab;
--(void)setTabTitle:(BrowserTab *)tab title:(NSString *)newTitle;
--(NSString *)tabTitle:(BrowserTab *)tab;
--(NSView<BaseView> *)activeTabView;
--(NSView<BaseView> *)primaryTabView;
+-(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
+-(void)setTabItemViewTitle:(NSView *)tabView title:(NSString *)newTitle;
+-(NSString *)tabItemViewTitle:(NSView *)tabView;
+-(NSView<BaseView> *)activeTabItemView;
+-(NSView<BaseView> *)primaryTabItemView;
 -(void)setActiveTabToPrimaryTab;
--(void)setActiveTab:(BrowserTab *)newActiveTab;
--(void)closeTab:(BrowserTab *)theTab;
+-(void)closeTabItemView:(NSView *)theTab;
 -(void)closeAllTabs;
 -(int)countOfTabs;
--(BrowserTab *)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt;
--(void)makeTabActive:(BrowserTab *)theTab;
--(void)showTab:(BrowserTab *)theTab;
+-(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt;
+-(void)showTabItemView:(NSView *)theTabView;
 -(void)showPreviousTab;
 -(void)showNextTab;
 -(void)saveOpenTabs;

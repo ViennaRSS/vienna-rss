@@ -22,7 +22,7 @@
 **     COMMIT
 **     ROLLBACK
 **
-** $Id$
+** $Id: build.c 388 2006-04-05 06:35:46Z stevewpalmer $
 */
 #include "sqliteInt.h"
 #include <ctype.h>

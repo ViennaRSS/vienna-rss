@@ -38,7 +38,6 @@
 	IBOutlet NSImageView * feedIconImageRight;
 	AppController * controller;
 	NSString * pageFilename;
-	BrowserTab * tab;
 	NSError * lastError;
 	BOOL isLocalFile;
 	BOOL isLoadingFrame;
@@ -56,7 +55,6 @@
 -(void)setController:(AppController *)theController;
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(NSURL *)url;
--(void)setTab:(BrowserTab *)newTab;
 -(BOOL)isLoading;
 -(BOOL)canGoBack;
 -(BOOL)canGoForward;

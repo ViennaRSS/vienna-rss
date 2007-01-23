@@ -396,7 +396,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Hook up the key sequence properly now that all NIBs are loaded.
-	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabView] mainView]];
+	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
 	// Kick off an initial refresh
 	if ([prefs refreshOnStartup])
@@ -651,31 +651,31 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	switch (newLayout)
 	{
 	case MA_Layout_Report:
-		[browserView setPrimaryTabView:mainArticleView];
+		[browserView setPrimaryTabItemView:mainArticleView];
 		if (refreshFlag)
 			[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 		[articleController setMainArticleView:mainArticleView];
 		break;
 
 	case MA_Layout_Condensed:
-		[browserView setPrimaryTabView:mainArticleView];
+		[browserView setPrimaryTabItemView:mainArticleView];
 		if (refreshFlag)
 			[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 		[articleController setMainArticleView:mainArticleView];
 		break;
 
 	case MA_Layout_Unified:
-		[browserView setPrimaryTabView:unifiedListView];
+		[browserView setPrimaryTabItemView:unifiedListView];
 		if (refreshFlag)
 			[unifiedListView refreshFolder:MA_Refresh_RedrawList];
 		[articleController setMainArticleView:unifiedListView];
 		break;
 	}
 
-	[browserView setTabTitle:[browserView primaryTab] title:NSLocalizedString(@"Articles", nil)];
+	[browserView setTabItemViewTitle:[browserView primaryTabItemView] title:NSLocalizedString(@"Articles", nil)];
 
 	[[Preferences standardPreferences] setLayout:newLayout];
-	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabView] mainView]];
+	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 }
 
 #pragma mark Dock Menu
@@ -805,7 +805,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)openPageInBrowser:(id)sender
 {
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		BrowserPane * webPane = (BrowserPane *)theView;
@@ -820,7 +820,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)copyPageURLToClipboard:(id)sender
 {
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		BrowserPane * webPane = (BrowserPane *)theView;
@@ -866,12 +866,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)openWebLocation:(id)sender
 {
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	[self showMainWindow:self];
 	if (![theView isKindOfClass:[BrowserPane class]])
 	{
 		[self createNewTab:nil inBackground:NO];
-		theView = [browserView activeTabView];
+		theView = [browserView activeTabItemView];
 	}
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
@@ -916,12 +916,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		BrowserPane * newBrowserPane = [newBrowserTemplate mainView];
 		if (didCompleteInitialisation)
 			[browserView saveOpenTabs];
-		BrowserTab * tab = [browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
+
+		[browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
-		[newBrowserPane setTab:tab];
 		if (url != nil)
 			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
-		[newBrowserPane release];
+
 		[newBrowserTemplate release];
 	}
 }
@@ -1473,7 +1473,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)printDocument:(id)sender
 {
-	[[browserView activeTabView] printDocument:sender];
+	[[browserView activeTabItemView] printDocument:sender];
 }
 
 /* folders
@@ -1713,12 +1713,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)handleTabChange:(NSNotification *)nc
 {
 	NSView<BaseView> * newView = [nc object];
-	if (newView == [browserView primaryTabView])
+	if (newView == [browserView primaryTabItemView])
 	{
 		if ([self selectedArticle] == nil)
 			[mainWindow makeFirstResponder:[foldersTree mainView]];
 		else
-			[mainWindow makeFirstResponder:[[browserView primaryTabView] mainView]];		
+			[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
 	}
 	else
 	{
@@ -1834,7 +1834,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)goForward:(id)sender
 {
-	[[browserView activeTabView] handleGoForward:sender];
+	[[browserView activeTabItemView] handleGoForward:sender];
 }
 
 /* goBack
@@ -1843,7 +1843,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)goBack:(id)sender
 {
-	[[browserView activeTabView] handleGoBack:sender];
+	[[browserView activeTabItemView] handleGoBack:sender];
 }
 
 /* localPerformFindPanelAction
@@ -1866,7 +1866,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		break;
 		
 	default:
-		[[browserView activeTabView] performFindPanelAction:[sender tag]];
+		[[browserView activeTabItemView] performFindPanelAction:[sender tag]];
 		break;
 	}
 }
@@ -1886,7 +1886,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				return NO;
 			else
 			{
-				if ([mainWindow firstResponder] == [[browserView primaryTabView] mainView])
+				if ([mainWindow firstResponder] == [[browserView primaryTabItemView] mainView])
 				{
 					[mainWindow makeFirstResponder:[foldersTree mainView]];
 					return YES;
@@ -1904,7 +1904,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[browserView setActiveTabToPrimaryTab];
 					if ([self selectedArticle] == nil)
 						[articleController ensureSelectedArticle:NO];
-					[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabView] mainView] : [foldersTree mainView]];
+					[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabItemView] mainView] : [foldersTree mainView]];
 					return YES;
 				}
 			}
@@ -1986,7 +1986,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 		case ' ': //SPACE
 		{
-			WebView * view = [[browserView activeTabView] webView];
+			WebView * view = [[browserView activeTabItemView] webView];
 			NSView * theView = [[[view mainFrame] frameView] documentView];
 
 			if (theView == nil)
@@ -2230,7 +2230,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[browserView setActiveTabToPrimaryTab];
 	if ([db countOfUnread] > 0)
         [articleController displayNextUnread];
-	[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabView] mainView] : [foldersTree mainView]];
+	[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabItemView] mainView] : [foldersTree mainView]];
 }
 
 /* clearUndoStack
@@ -2488,7 +2488,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)closeTab:(id)sender
 {
-	[browserView closeTab:[browserView activeTab]];
+	[browserView closeTabItemView:[browserView activeTabItemView]];
 }
 
 /* reloadPage
@@ -2496,7 +2496,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)reloadPage:(id)sender
 {
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 		[theView performSelector:@selector(handleReload:)];
 }
@@ -2506,7 +2506,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)stopReloadingPage:(id)sender
 {
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 		[theView performSelector:@selector(handleStopLoading:)];
 }
@@ -2544,7 +2544,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateSearchPlaceholder
 {
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[[searchField cell] setSendsWholeSearchString:YES];
@@ -2585,7 +2585,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	[[browserView activeTabView] performFindPanelAction:NSFindPanelActionNext];
+	[[browserView activeTabItemView] performFindPanelAction:NSFindPanelActionNext];
 }
 
 #pragma mark Refresh Subscriptions
@@ -2639,7 +2639,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
 	
 	// If the active tab is a web view, mail the URL ...
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		NSString * viewLink = [theView viewLink];
@@ -2672,7 +2672,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)makeTextSmaller:(id)sender
 {
-	NSView<BaseView> * activeView = [browserView activeTabView];
+	NSView<BaseView> * activeView = [browserView activeTabItemView];
 	[[activeView webView] makeTextSmaller:sender];
 }
 
@@ -2682,7 +2682,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)makeTextLarger:(id)sender
 {
-	NSView<BaseView> * activeView = [browserView activeTabView];
+	NSView<BaseView> * activeView = [browserView activeTabItemView];
 	[[activeView webView] makeTextLarger:sender];
 }
 
@@ -2723,9 +2723,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// If the active tab is a web view, blog the URL
-	NSView<BaseView> * theView = [browserView activeTabView];
+	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
-		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabTitle:[browserView activeTab]] url:[theView viewLink] author:@"" guid:@""];
+		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabItemViewTitle:[browserView activeTabItemView]] url:[theView viewLink] author:@"" guid:@""];
 	else
 	{
 		// Get the currently selected articles from the ArticleView ...
@@ -2830,8 +2830,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	SEL	theAction = [menuItem action];
 	BOOL isMainWindowVisible = [mainWindow isVisible];
-	BOOL isAnyArticleView = [browserView activeTabView] == [browserView primaryTabView];
-	BOOL isArticleView = [browserView activeTabView] == mainArticleView;
+	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
+	BOOL isArticleView = [browserView activeTabItemView] == mainArticleView;
 	
 	if (theAction == @selector(printDocument:))
 	{
@@ -2839,11 +2839,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(goBack:))
 	{
-		return [[browserView activeTabView] canGoBack] && isMainWindowVisible;
+		return [[browserView activeTabItemView] canGoBack] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(goForward:))
 	{
-		return [[browserView activeTabView] canGoForward] && isMainWindowVisible;
+		return [[browserView activeTabItemView] canGoForward] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(newSubscription:))
 	{
@@ -2871,11 +2871,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-		return [[[browserView activeTabView] webView] canMakeTextLarger];
+		return [[[browserView activeTabItemView] webView] canMakeTextLarger];
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-		return [[[browserView activeTabView] webView] canMakeTextSmaller];
+		return [[[browserView activeTabItemView] webView] canMakeTextSmaller];
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{
@@ -2992,12 +2992,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(reloadPage:))
 	{
-		NSView<BaseView> * theView = [browserView activeTabView];
+		NSView<BaseView> * theView = [browserView activeTabItemView];
 		return ([theView isKindOfClass:[BrowserPane class]]) && ![(BrowserPane *)theView isLoading];
 	}
 	else if (theAction == @selector(stopReloadingPage:))
 	{
-		NSView<BaseView> * theView = [browserView activeTabView];
+		NSView<BaseView> * theView = [browserView activeTabItemView];
 		return ([theView isKindOfClass:[BrowserPane class]]) && [(BrowserPane *)theView isLoading];
 	}
 	else if (theAction == @selector(changeFiltering:))
@@ -3049,7 +3049,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(mailLinkToArticlePage:))
 	{
-		NSView<BaseView> * theView = [browserView activeTabView];
+		NSView<BaseView> * theView = [browserView activeTabItemView];
 		if ([theView isKindOfClass:[BrowserPane class]])
 			return ([theView viewLink] != nil);
 		

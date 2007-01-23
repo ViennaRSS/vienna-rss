@@ -134,6 +134,7 @@
 		AA83A05008D6764D001E8404 /* smallCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */; };
 		AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */; };
 		AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
+		AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA872C680B658B0B00F352C9 /* PSMTabBarControl.framework */; };
 		AA8C72F50641DE1F00649BA2 /* Criteria.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8C72F30641DE1F00649BA2 /* Criteria.h */; };
 		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		AA8F85A10A0A2F6600A0EACE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F856C0A0A2F6600A0EACE /* Security.framework */; };
@@ -619,6 +620,7 @@
 		AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smallCloseButton.tiff; sourceTree = "<group>"; };
 		AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BezierPathExtensions.h; sourceTree = "<group>"; };
 		AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BezierPathExtensions.m; sourceTree = "<group>"; };
+		AA872C680B658B0B00F352C9 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSMTabBarControl.framework; sourceTree = "<group>"; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criteria.h; sourceTree = "<group>"; };
 		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criteria.m; sourceTree = "<group>"; };
 		AA8F856C0A0A2F6600A0EACE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -829,6 +831,7 @@
 				AA8F87550A0A2FEA00A0EACE /* IOKit.framework in Frameworks */,
 				AA8F87770A0A301000A0EACE /* SystemConfiguration.framework in Frameworks */,
 				478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */,
+				AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,6 +863,7 @@
 				AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */,
 				AA8F86840A0A2FC500A0EACE /* WebKit.framework */,
 				AA8F86560A0A2FA200A0EACE /* ApplicationServices.framework */,
+				AA872C680B658B0B00F352C9 /* PSMTabBarControl.framework */,
 				AA8F856C0A0A2F6600A0EACE /* Security.framework */,
 				AAB076170A076BBE00A9F76A /* Carbon.framework */,
 				AA62D7DB0859A9F70040C370 /* Growl.framework */,
@@ -974,6 +978,7 @@
 				AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */,
 				AA38C17309FB19BD00FAE2CD /* BrowserPane.nib */,
 				AA38C17A09FB19CE00FAE2CD /* Downloads.nib */,
+				61975F010B41F145001F65FF /* EmptyTrashWarning.nib */,
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
 				AA3113480902005300E80DF1 /* GeneralPreferences.nib */,
 				AAA1E3280852539500277128 /* GroupFolder.nib */,
@@ -1033,7 +1038,6 @@
 				61A2CB600A8AC68C006348E8 /* revised.tiff */,
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */,
-				61975F010B41F145001F65FF /* EmptyTrashWarning.nib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

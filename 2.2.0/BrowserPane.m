@@ -119,15 +119,6 @@
 	return [[self url] absoluteString];
 }
 
-/* setTab
- * Set the tab associated with this browser view. This is a shallow
- * reference.
- */
--(void)setTab:(BrowserTab *)newTab
-{
-	tab = newTab;
-}
-
 /* setError
  * Save the most recent error instance.
  */
@@ -184,7 +175,7 @@
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	if ([[controller browserView] activeTabView] == self)
+	if ([[controller browserView] activeTabItemView] == self)
 		[controller setStatusMessage:text persist:NO];
 }
 
@@ -205,7 +196,7 @@
 {
 	if (frame == [webPane mainFrame])
 	{
-		[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Loading...", nil)];
+		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
         [addressField setStringValue:[[[[frame provisionalDataSource] request] URL] absoluteString]];
 		[self setError:nil];
 		hasPageTitle = NO;
@@ -267,13 +258,13 @@
 	if (!hasPageTitle)
 	{
 		if (lastError == nil)
-			[[controller browserView] setTabTitle:tab title:pageFilename];
+			[[controller browserView] setTabItemViewTitle:self title:pageFilename];
 		else
 		{
 			// TODO: show an HTML error page in the webview instead or in addition to
 			// the Error title on the tab.
 			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
-			[[controller browserView] setTabTitle:tab title:NSLocalizedString(@"Error", nil)];
+			[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Error", nil)];
 		}
 	}
 	isLoadingFrame = NO;
@@ -311,7 +302,7 @@
 {
 	if (frame == [webPane mainFrame])
 	{
-		[[controller browserView] setTabTitle:tab title:title];
+		[[controller browserView] setTabItemViewTitle:self title:title];
 		hasPageTitle = YES;
 	}
 }
@@ -351,7 +342,7 @@
  */
 -(void)webViewClose:(WebView *)sender
 {
-	[[controller browserView] closeTab:tab];
+	[[controller browserView] closeTabItemView:self];
 }
 
 /* contextMenuItemsForElement

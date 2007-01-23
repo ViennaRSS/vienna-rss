@@ -259,7 +259,7 @@
  */
 -(NSString *)currentSelection
 {
-	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabView];
+	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabItemView];
 	WebView * webPane = nil;
 
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -283,7 +283,7 @@
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabView];
+	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabItemView];
 	WebView * webPane = [theView webView];
 	
 	if (webPane != nil)

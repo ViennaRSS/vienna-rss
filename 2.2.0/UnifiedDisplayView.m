@@ -118,7 +118,7 @@
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	if ([[controller browserView] activeTabView] == self)
+	if ([[controller browserView] activeTabItemView] == self)
 		[controller setStatusMessage:text persist:NO];
 }
 

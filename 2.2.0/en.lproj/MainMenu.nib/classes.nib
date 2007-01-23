@@ -131,7 +131,12 @@
             }; 
             SUPERCLASS = NSView; 
         }, 
-        {CLASS = BrowserView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = BrowserView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {tabBarControl = PSMTabBarControl; tabView = NSTabView; }; 
+            SUPERCLASS = NSView; 
+        }, 
         {
             CLASS = CheckForUpdates; 
             LANGUAGE = ObjC; 

@@ -32,4 +32,12 @@
 {
 	return browserPane;
 }
+
+-(void)dealloc
+{
+	[browserPane release];
+	
+	[super dealloc];
+}
+
 @end
