@@ -1,0 +1,43 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                handleAddress = id; 
+                handleGoBack = id; 
+                handleGoForward = id; 
+                handleReload = id; 
+                handleStopLoading = id; 
+            }; 
+            CLASS = BrowserPane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                addressField = NSTextField; 
+                backButton = NSButton; 
+                boxFrame = NSBox; 
+                feedIconImageLeft = NSImageView; 
+                feedIconImageRight = NSImageView; 
+                forwardButton = NSButton; 
+                iconImage = NSButton; 
+                lockIconImage = NSImageView; 
+                refreshButton = NSButton; 
+                webPane = TabbedWebView; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = BrowserPaneTemplate; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {browserPane = NSView; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            ACTIONS = {printDocument = id; }; 
+            CLASS = TabbedWebView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = WebView; 
+        }
+    ); 
+    IBVersion = 1; 
+}

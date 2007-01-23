@@ -1,0 +1,35 @@
+body {
+	color: #484848;
+	font: 13px/1.6em "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+#feedHeading {
+	font-size: 16px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+#entryDescription {
+	font-size: 13px;
+}
+
+#otherInfo {
+	margin-top: 20px;
+	font-size: 11px;
+}
+
+a {
+	color: #e37800;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #e35000;
+}
+
+a:active {
+	color: #e6e600;
+}
