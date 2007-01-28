@@ -23,11 +23,11 @@
 #import "ArticleController.h"
 #import "ActivityViewer.h"
 #import "Growl/GrowlApplicationBridge.h"
+#import "DownloadWindow.h"
 
 @class NewPreferenceController;
 @class FoldersTree;
 @class SearchFolder;
-@class DownloadWindow;
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
