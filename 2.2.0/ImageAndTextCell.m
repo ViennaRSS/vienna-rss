@@ -20,11 +20,11 @@
 
 #import "ImageAndTextCell.h"
 #import "BezierPathExtensions.h"
+#import "FolderView.h"
 
 /* All of this stuff taken from public stuff published
  * by Apple.
  */
-@class FolderView;
 @implementation ImageAndTextCell
 
 /* init

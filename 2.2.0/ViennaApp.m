@@ -28,6 +28,7 @@
 #import "Constants.h"
 #import "FoldersTree.h"
 #import "BrowserPane.h"
+#import "UnifiedDisplayView.h"
 #import "WebKit/WebKit.h"
 
 @implementation ViennaApp
