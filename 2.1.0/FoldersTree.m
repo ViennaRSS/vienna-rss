@@ -151,7 +151,7 @@
 	[outlineView setEnableTooltips:YES];
 	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
 	[newSubButton setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
-	[markAllReadButton setToolTip:NSLocalizedString(@"Mark all articles read", nil)];
+	[markAllReadButton setToolTip:NSLocalizedString(@"Skip Folder", nil)];
 	[refreshButton setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
 	
 	// Set the menu for the popup button
