@@ -6,6 +6,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.2.0.2200
+----------
+- Added ability to drop OPML files onto Vienna's dock icon.
+- Replaced old toolbar icons with nicer ones by Davide Casali (Folletto).
 
 2.1.1.2109
 ----------
@@ -157,7 +161,7 @@ Thanks!
 
 2.1.0.2100
 ----------
-(Contributions from Jeffrey Johnson and David Kocher).
+(Contributions from Jeffrey Johnson, Michael Ströck and David Kocher).
 - Added preference for automatically or manually sorting folders view.
 - Added "Increase text size" and "Decrease Text Size" for browser view.
 - Changed key combination for "Cancel Refreshing" to control-command-s to make command-"-" available for text size.
