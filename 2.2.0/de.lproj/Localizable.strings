@@ -328,6 +328,7 @@
 "Bigger Text" = "Schrift größer";
 "Smaller Text" = "Schrift kleiner";
 "Send Link by Email" = "Link senden...";
+"Authentication" = "Authentifikation";
 
 /* Added in 2.1.1 */
 "Advanced" = "Erweitert";

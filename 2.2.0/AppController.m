@@ -561,8 +561,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 		[self importFromFile:filename];
 	}
-	
-	
 	return NO;
 }
 
