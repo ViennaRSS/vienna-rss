@@ -115,6 +115,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		scriptsMenuItem = nil;
 		checkTimer = nil;
 		didCompleteInitialisation = NO;
+		emptyTrashWarning = nil;
 	}
 	return self;
 }
@@ -410,6 +411,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
 	[self showMainWindow:self];
+	if (emptyTrashWarning != nil)
+		[emptyTrashWarning showWindow:self];
 	return YES;
 }
 
@@ -446,12 +449,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case MA_EmptyTrash_WithWarning:
 			if (![db isTrashEmpty])
 			{
-				EmptyTrashWarning * warning = [[EmptyTrashWarning alloc] init];
-				if ([warning shouldEmptyTrash])
+				if (emptyTrashWarning == nil)
+					emptyTrashWarning = [[EmptyTrashWarning alloc] init];
+				if ([emptyTrashWarning shouldEmptyTrash])
 				{
 					[db purgeDeletedArticles];
 				}
-				[warning release];
+				[emptyTrashWarning release];
+				emptyTrashWarning = nil;
 			}
 			break;
 		
@@ -494,7 +499,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* openFile [delegate]
- * Called when the user opens a data file associated with Vienna.
+ * Called when the user opens a data file associated with Vienna by clicking in the finder or dragging it onto the dock.
  */
 -(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
