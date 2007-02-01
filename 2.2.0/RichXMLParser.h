@@ -28,6 +28,7 @@
 	NSDate * date;
 	NSString * summary;
 	NSString * description;
+	NSString * enclosure;
 }
 
 // Accessor functions
@@ -38,6 +39,7 @@
 -(NSString *)guid;
 -(NSDate *)date;
 -(NSString *)link;
+-(NSString *)enclosure;
 @end
 
 @interface RichXMLParser : XMLParser {
