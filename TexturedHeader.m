@@ -94,7 +94,15 @@
 		centeredRect.origin.x = 0;
 	if (centeredRect.size.width > rect.size.width)
 		centeredRect.size.width = rect.size.width;
+	
+	// Draw text twice -first slightly off-white, and then black 1 pixel higher- to give the standard "embossed" look.
+	[attrs setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:0.7] forKey:@"NSColor"];
 	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
+	[attrs setValue:[NSColor blackColor] forKey:@"NSColor"];
+	centeredRect.origin.y += 1;
+	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
+
+
 }
 
 -(void)dealloc
