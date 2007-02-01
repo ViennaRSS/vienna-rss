@@ -60,7 +60,7 @@ extern NSString * MA_Field_HasEnclosure;
 #define MA_FieldID_Deleted				412
 #define MA_FieldID_Summary				413
 #define MA_FieldID_CreatedDate			414
-#define MA_FieldID_Enclosure				415
+#define MA_FieldID_Enclosure			415
 #define MA_FieldID_EnclosureDownloaded	416
 #define MA_FieldID_HasEnclosure			417
 

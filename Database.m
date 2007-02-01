@@ -184,7 +184,7 @@ static Database * _sharedDatabase = nil;
 		[self beginTransaction];
 
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
-		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag)"];
+		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
@@ -338,6 +338,26 @@ static Database * _sharedDatabase = nil;
 		[self commitTransaction];
 	}
 	
+	
+	// Upgrade to rev 17.
+	// Add hasenclosure_flag, enclosuredownloaded_flag and enclosure to messages table, and initialize stuff.
+	if (databaseVersion < 17)
+	{
+		[self beginTransaction];
+		
+		[self executeSQL:@"alter table messages add column hasenclosure_flag"];
+		[self executeSQL:@"update messages set hasenclosure_flag=0"];
+		
+		[self executeSQL:@"alter table messages add column enclosure"];
+
+		[self executeSQL:@"alter table messages add column enclosuredownloaded_flag"];
+		[self executeSQL:@"update messages set enclosuredownloaded=0"];
+		
+		// Set the new version
+		[self setDatabaseVersion:17];		
+		[self commitTransaction];
+	}		
+	
 	// Read the folders tree sort method from the database.
 	// Make sure that the folders tree is not yet registered to receive notifications at this point.
 	int newFoldersTreeSortMethod = MA_FolderSort_ByName;
@@ -373,6 +393,10 @@ static Database * _sharedDatabase = nil;
 	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
 	[self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
 	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
+	[self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
+	[self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
+	[self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:NO width:100];
+
 	
 	return YES;
 }
