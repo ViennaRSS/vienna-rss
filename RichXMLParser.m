@@ -30,6 +30,7 @@
 	-(void)setGuid:(NSString *)newGuid;
 	-(void)setLink:(NSString *)newLink;
 	-(void)setSummary:(NSString *)newSummary;
+	-(void)setEnclosure:(NSString *)newEnclosure;
 @end
 
 @interface RichXMLParser (Private)
@@ -66,8 +67,19 @@
 		[self setDate:nil];
 		[self setLink:@""];
 		[self setSummary:@""];
+		[self setEnclosure:@""];
 	}
 	return self;
+}
+
+/* setEnclosure
+ * Set the item title.
+ */
+-(void)setEnclosure:(NSString *)newEnclosure
+{
+	[newEnclosure retain];
+	[enclosure release];
+	enclosure = newEnclosure;
 }
 
 /* setTitle
@@ -196,6 +208,14 @@
 	return link;
 }
 
+/* enclosure
+ * Returns the associated enclosure.
+ */
+-(NSString *)enclosure
+{
+	return enclosure;
+}
+
 /* dealloc
  * Clean up when we're released.
  */
@@ -208,6 +228,7 @@
 	[author release];
 	[date release];
 	[link release];
+	[enclosure release];
 	[super dealloc];
 }
 @end
@@ -530,7 +551,7 @@
 			[self setLastModified:[XMLParser parseXMLDate:dateString]];
 			continue;
 		}
-
+		
 		// Parse item date
 		if ([nodeName isEqualToString:@"pubDate"])
 		{
@@ -633,7 +654,7 @@
 					[newItem setGuid:[subItemTree valueOfElement]];
 					continue;
 				}
-
+				
 				// Parse detailed item description. This overrides the existing
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
@@ -681,8 +702,17 @@
 					[newItem setDate:[XMLParser parseXMLDate:dateString]];
 					continue;
 				}
-			}
+				
+				// Parse associated enclosure
+				if ([itemNodeName isEqualToString:@"enclosure"])
+				{
+					if ([subItemTree valueOfAttribute:@"url"])
+						[newItem setEnclosure:[subItemTree valueOfAttribute:@"url"]];
+					continue;
+				}
 
+			}
+			
 			// If no link, set it to the feed link if there is one
 			if (!hasLink && [self link])
 				[newItem setLink:[self link]];
@@ -871,6 +901,22 @@
 				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
+					if ([[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"enclosure"])
+					{
+						NSString * theLink = [[subItemTree valueOfAttribute:@"href"] stringByUnescapingExtendedCharacters];
+						if (theLink != nil)
+						{
+							if ((entryBaseURL != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
+							{
+								NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:entryBaseURL];
+								[newItem setEnclosure:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+							}
+							else
+								[newItem setEnclosure:theLink];
+					}
+				}
+				else
+				{
 					if ([subItemTree valueOfAttribute:@"rel"] == nil || [[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"alternate"])
 					{
 						NSString * theLink = [[subItemTree valueOfAttribute:@"href"] stringByUnescapingExtendedCharacters];
@@ -887,6 +933,7 @@
 						}
 					}
 					continue;
+				}
 				}
 				
 				// Parse item id

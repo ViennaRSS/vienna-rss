@@ -269,6 +269,7 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
 		[self commitTransaction];
+		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}
 	
 	// Upgrade to rev 14.
@@ -307,6 +308,8 @@ static Database * _sharedDatabase = nil;
 		[results release];
 		
 		[self commitTransaction];
+		NSLog(@"Updated database schema to version %d.", databaseVersion);
+
 	}
 	
 	// Upgrade to rev 15.
@@ -321,6 +324,7 @@ static Database * _sharedDatabase = nil;
 		int oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
 		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
 		[self commitTransaction];
+		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}
 	
 	// Upgrade to rev 16.
@@ -334,8 +338,8 @@ static Database * _sharedDatabase = nil;
 		
 		// Set the new version
 		[self setDatabaseVersion:16];		
-		
 		[self commitTransaction];
+		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}
 	
 	
@@ -347,15 +351,14 @@ static Database * _sharedDatabase = nil;
 		
 		[self executeSQL:@"alter table messages add column hasenclosure_flag"];
 		[self executeSQL:@"update messages set hasenclosure_flag=0"];
-		
 		[self executeSQL:@"alter table messages add column enclosure"];
-
 		[self executeSQL:@"alter table messages add column enclosuredownloaded_flag"];
 		[self executeSQL:@"update messages set enclosuredownloaded=0"];
 		
 		// Set the new version
 		[self setDatabaseVersion:17];		
 		[self commitTransaction];
+		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}		
 	
 	// Read the folders tree sort method from the database.
@@ -1326,12 +1329,14 @@ static Database * _sharedDatabase = nil;
 		NSDate * articleDate = [[article articleData] objectForKey:MA_Field_Date];
 		NSString * articleLink = [[article articleData] objectForKey:MA_Field_Link];
 		NSString * userName = [[article articleData] objectForKey:MA_Field_Author];
+		NSString * articleEnclosure = [[article articleData] objectForKey:MA_Field_Enclosure];
 		NSString * articleGuid = [article guid];
 		int parentId = [article parentId];
 		BOOL marked_flag = [article isFlagged];
 		BOOL read_flag = [article isRead];
 		BOOL revised_flag = [article isRevised];
 		BOOL deleted_flag = [article isDeleted];
+		BOOL hasenclosure_flag = [article hasEnclosure];
 		
 		// We always set the created date ourselves
 		[article setCreatedDate:[NSDate date]];
@@ -1391,6 +1396,7 @@ static Database * _sharedDatabase = nil;
 		NSString * preparedArticleLink = [SQLDatabase prepareStringForQuery:articleLink];
 		NSString * preparedUserName = [SQLDatabase prepareStringForQuery:userName];
 		NSString * preparedArticleGuid = [SQLDatabase prepareStringForQuery:articleGuid];
+		NSString * preparedEnclosure = [SQLDatabase prepareStringForQuery:articleEnclosure];
 		
 		// Unread count adjustment factor
 		int adjustment = 0;
@@ -1403,8 +1409,8 @@ static Database * _sharedDatabase = nil;
 			SQLResult * results;
 			
 			results = [sqlDatabase performQueryWithFormat:
-				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag) "
-				@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d)",
+				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+				@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@',%d)",
 				preparedArticleGuid,
 				parentId,
 				folderID,
@@ -1417,7 +1423,9 @@ static Database * _sharedDatabase = nil;
 				deleted_flag,
 				preparedArticleTitle,
 				preparedArticleText,
-				revised_flag];
+				revised_flag,
+				preparedEnclosure,
+				hasenclosure_flag];
 			if (!results)
 				return NO;
 			[results release];

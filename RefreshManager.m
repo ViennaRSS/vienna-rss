@@ -681,6 +681,11 @@ typedef enum {
 					[article setTitle:[newsItem title]];
 					[article setLink:[newsItem link]];
 					[article setDate:articleDate];
+					[article setEnclosure:[newsItem enclosure]];
+					if ([[article enclosure] isNotEqualTo:@""])
+					{
+						[article setHasEnclosure:YES];
+					}
 					[articleArray addObject:article];
 					[article release];
 				}
