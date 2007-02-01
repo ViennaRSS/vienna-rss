@@ -34,6 +34,7 @@
 @class BrowserView;
 @class ArticleListView;
 @class UnifiedDisplayView;
+@class EmptyTrashWarning;
 
 @interface AppController : NSObject <GrowlApplicationBridgeDelegate> {
 	IBOutlet NSWindow * mainWindow;
@@ -67,7 +68,8 @@
 	SearchFolder * smartFolder;
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
-
+	EmptyTrashWarning * emptyTrashWarning;
+	
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;
 	NSImage * originalIcon;
