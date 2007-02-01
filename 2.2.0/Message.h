@@ -35,6 +35,9 @@ extern NSString * MA_Field_Parent;
 extern NSString * MA_Field_Headlines;
 extern NSString * MA_Field_Summary;
 extern NSString * MA_Field_CreatedDate;
+extern NSString * MA_Field_Enclosure;
+extern NSString * MA_Field_EnclosureDownloaded;
+extern NSString * MA_Field_HasEnclosure;
 
 // Article status values
 #define MA_MsgStatus_Empty		0
@@ -42,21 +45,24 @@ extern NSString * MA_Field_CreatedDate;
 #define MA_MsgStatus_Updated	2
 
 // Article field IDs
-#define MA_FieldID_GUID			400
-#define MA_FieldID_Subject		401
-#define MA_FieldID_Author		402
-#define MA_FieldID_Date			403
-#define MA_FieldID_Parent		404
-#define MA_FieldID_Read			405
-#define MA_FieldID_Flagged		406
-#define MA_FieldID_Text			407
-#define MA_FieldID_Folder		408
-#define MA_FieldID_Link			409
-#define MA_FieldID_Comments		410
-#define MA_FieldID_Headlines	411
-#define MA_FieldID_Deleted		412
-#define MA_FieldID_Summary		413
-#define MA_FieldID_CreatedDate	414
+#define MA_FieldID_GUID					400
+#define MA_FieldID_Subject				401
+#define MA_FieldID_Author				402
+#define MA_FieldID_Date					403
+#define MA_FieldID_Parent				404
+#define MA_FieldID_Read					405
+#define MA_FieldID_Flagged				406
+#define MA_FieldID_Text					407
+#define MA_FieldID_Folder				408
+#define MA_FieldID_Link					409
+#define MA_FieldID_Comments				410
+#define MA_FieldID_Headlines			411
+#define MA_FieldID_Deleted				412
+#define MA_FieldID_Summary				413
+#define MA_FieldID_CreatedDate			414
+#define MA_FieldID_Enclosure				415
+#define MA_FieldID_EnclosureDownloaded	416
+#define MA_FieldID_HasEnclosure			417
 
 @class Folder;
 @interface Article : NSObject {
@@ -66,6 +72,8 @@ extern NSString * MA_Field_CreatedDate;
 	BOOL revisedFlag;
 	BOOL markedFlag;
 	BOOL deletedFlag;
+	BOOL enclosureDownloadedFlag;
+	BOOL hasEnclosureFlag;
 	int status;
 }
 
@@ -78,6 +86,7 @@ extern NSString * MA_Field_CreatedDate;
 -(NSString *)title;
 -(NSString *)link;
 -(NSString *)summary;
+-(NSString *)enclosure;
 -(NSDate *)date;
 -(NSDate *)createdDate;
 -(Folder *)containingFolder;
@@ -87,6 +96,8 @@ extern NSString * MA_Field_CreatedDate;
 -(BOOL)isFlagged;
 -(BOOL)isDeleted;
 -(BOOL)hasComments;
+-(BOOL)hasEnclosure;
+-(BOOL)enclosureDownloaded;
 -(int)status;
 -(void)setGuid:(NSString *)newGuid;
 -(void)setParentId:(int)newParentId;
@@ -98,10 +109,13 @@ extern NSString * MA_Field_CreatedDate;
 -(void)setCreatedDate:(NSDate *)newCreatedDate;
 -(void)setBody:(NSString *)newText;
 -(void)setSummary:(NSString *)newSummary;
+-(void)setEnclosure:(NSString *)newEnclosure;
 -(void)setStatus:(int)newStatus;
+-(void)setHasEnclosure:(BOOL)flag;
 -(void)markRead:(BOOL)flag;
 -(void)markRevised:(BOOL)flag;
 -(void)markFlagged:(BOOL)flag;
 -(void)markDeleted:(BOOL)flag;
+-(void)markEnclosureDownloaded:(BOOL)flag;
 -(NSDictionary *)articleData;
 @end
