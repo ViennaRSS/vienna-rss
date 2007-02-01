@@ -37,6 +37,9 @@ NSString * MA_Field_Parent = @"Parent";
 NSString * MA_Field_Headlines = @"Headlines";
 NSString * MA_Field_Summary = @"Summary";
 NSString * MA_Field_CreatedDate = @"CreatedDate";
+NSString * MA_Field_Enclosure = @"Enclosure";
+NSString * MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
+NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 
 @implementation Article
 
@@ -52,6 +55,8 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 		revisedFlag = NO;
 		markedFlag = NO;
 		deletedFlag = NO;
+		hasEnclosureFlag = NO;
+		enclosureDownloadedFlag = NO;
 		status = MA_MsgStatus_Empty;
 		[self setFolderId:-1];
 		[self setGuid:theGuid];
@@ -111,6 +116,27 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 	[articleData setObject:newSummary forKey:MA_Field_Summary];
 }
 
+/* setEnclosure
+ */
+-(void)setEnclosure:(NSString *)newEnclosure
+{
+	[articleData setObject:newEnclosure forKey:MA_Field_Enclosure];
+}
+
+/* markEnclosureDownloaded
+ */
+-(void)markEnclosureDownloaded:(BOOL)flag
+{
+	enclosureDownloadedFlag = flag;
+}
+
+/* setHasEnclosure
+ */
+-(void)setHasEnclosure:(BOOL)flag
+{
+	hasEnclosureFlag = flag;
+}
+
 /* markRead
  */
 -(void)markRead:(BOOL)flag
@@ -147,6 +173,8 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 -(BOOL)isFlagged				{ return markedFlag; }
 -(BOOL)isDeleted				{ return deletedFlag; }
 -(BOOL)hasComments				{ return [commentsArray count] > 0; }
+-(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
+-(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
 -(int)status					{ return status; }
 -(int)folderId					{ return [[articleData objectForKey:MA_Field_Folder] intValue]; }
 -(NSString *)author				{ return [articleData objectForKey:MA_Field_Author]; }
@@ -156,8 +184,9 @@ NSString * MA_Field_CreatedDate = @"CreatedDate";
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
 -(NSString *)summary			{ return [articleData objectForKey:MA_Field_Summary]; }
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
--(NSDate *)createdDate;			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
+-(NSDate *)createdDate			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
 -(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }
+-(NSString *)enclosure			{ return [articleData objectForKey:MA_Field_Enclosure]; }
 
 /* containingFolder
  */
