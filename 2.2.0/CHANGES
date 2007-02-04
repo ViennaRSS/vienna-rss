@@ -10,6 +10,7 @@ Thanks!
 ----------
 - Added ability to drop OPML files onto Vienna's dock icon.
 - Replaced old toolbar icons with nicer ones by Davide Casali (Folletto).
+- Added support for RSS/Atom enclosures.
 
 2.1.1.2109
 ----------

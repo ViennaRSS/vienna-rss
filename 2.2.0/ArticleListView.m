@@ -329,7 +329,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* singleClickRow
  * Handle a single click action. If the click was in the read or flagged column then
  * treat it as an action to mark the article read/unread or flagged/unflagged. Later
- * trap the comments column and expand/collapse.
+ * trap the comments column and expand/collapse. If the click lands on the enclosure
+ * colum, download the associated enclosure.
  */
 -(IBAction)singleClickRow:(id)sender
 {
@@ -354,6 +355,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[articleController markFlaggedByArray:[NSArray arrayWithObject:theArticle] flagged:![theArticle isFlagged]];
 				return;
 			}
+			if ([columnName isEqualToString:MA_Field_HasEnclosure])
+			{
+				// Do stuff here.
+			}
+			
 		}
 	}
 }
@@ -487,7 +493,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			}
 
 			NSTableHeaderCell * headerCell = [column headerCell];
-			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments);
+			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
 
 			[headerCell setTitle:[field displayName]];
 			[column setEditable:NO];
@@ -507,6 +513,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Set the images for specific header columns
 	[articleList setHeaderImage:MA_Field_Read imageName:@"unread_header.tiff"];
 	[articleList setHeaderImage:MA_Field_Flagged imageName:@"flagged_header.tiff"];
+	[articleList setHeaderImage:MA_Field_HasEnclosure imageName:@"enclosure_header.tiff"];
 
 	// Initialise the sort direction
 	[self showSortDirection];	
@@ -1229,6 +1236,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		if ([theArticle hasComments])
 			return [NSImage imageNamed:@"comments.tiff"];
+		return [NSImage imageNamed:@"alphaPixel.tiff"];
+	}
+	
+	if ([[aTableColumn identifier] isEqualToString:MA_Field_HasEnclosure])
+	{
+		if ([theArticle hasEnclosure])
+			return [NSImage imageNamed:@"enclosure.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	
