@@ -4,7 +4,7 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
-Accepted for 2.1
+Accepted for 2.2
 ================
 - Single article list and viewer interface (as in Bloglines).
 
@@ -61,7 +61,6 @@ Wishlist
 - Preference to expire unread articles as well as read articles.
 - Check for internet connection before checking for new articles.
 - Filter articles by flagged.
-- Add support for "enclosure" field in RSS.
 - Hold down option key (or other combo) while pressing mark all read button to mark all subscriptions read.
 - Progress indicator for loading web pages.
 - Use shift key to toggle whether to open tabs in foreground/background in Vienna.
@@ -70,4 +69,3 @@ Wishlist
 - When deleting subscription, also delete smart folder rules involving that subscription.
 - Refresh subscriptions in order of manual sorting rather than alphabetically.
 - Add CSS variables for localizable strings.
-

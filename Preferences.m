@@ -26,6 +26,7 @@
 // Initial paths
 NSString * MA_ApplicationSupportFolder = @"~/Library/Application Support/Vienna";
 NSString * MA_ScriptsFolder = @"~/Library/Scripts/Applications/Vienna";
+NSString * MA_EnclosureDownloadFolder = @"~/Desktop";
 NSString * MA_DefaultDownloadsFolder = @"~/Desktop";
 NSString * MA_DefaultStyleName = @"Default";
 NSString * MA_Database_Name = @"messages.db";
