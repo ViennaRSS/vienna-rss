@@ -352,8 +352,9 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"alter table messages add column hasenclosure_flag"];
 		[self executeSQL:@"update messages set hasenclosure_flag=0"];
 		[self executeSQL:@"alter table messages add column enclosure"];
+		[self executeSQL:@"update messages set enclosure=''"];
 		[self executeSQL:@"alter table messages add column enclosuredownloaded_flag"];
-		[self executeSQL:@"update messages set enclosuredownloaded=0"];
+		[self executeSQL:@"update messages set enclosuredownloaded_flag=0"];
 		
 		// Set the new version
 		[self setDatabaseVersion:17];		
