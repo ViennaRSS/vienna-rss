@@ -2252,6 +2252,8 @@ static Database * _sharedDatabase = nil;
 			[article setTitle:[row stringForColumn:@"title"]];
 			[article setAuthor:[row stringForColumn:@"sender"]];
 			[article setLink:[row stringForColumn:@"link"]];
+			[article setEnclosure:[row stringForColumn:@"enclosure"]];
+			[article setHasEnclosure:[[row stringForColumn:@"hasenclosure_flag"] intValue]];
 			[article setDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]]];
 			[article setCreatedDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"createddate"] doubleValue]]];
 			[article markRead:[[row stringForColumn:@"read_flag"] intValue]];
