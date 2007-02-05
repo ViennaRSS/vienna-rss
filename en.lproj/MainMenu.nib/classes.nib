@@ -1,5 +1,6 @@
 {
     IBClasses = (
+        {CLASS = AMPolishedButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             ACTIONS = {
                 blogWith = id; 
@@ -188,6 +189,7 @@
         {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = PolishedWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             ACTIONS = {checkForUpdates = id; }; 
