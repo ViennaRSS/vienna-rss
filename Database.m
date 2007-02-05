@@ -1876,7 +1876,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link from messages where folder_id=%d", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, hasenclosure_flag, enclosure from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
 		{
 			NSEnumerator * enumerator = [results rowEnumerator];
@@ -1888,8 +1888,10 @@ static Database * _sharedDatabase = nil;
 				NSString * guid = [row stringForColumn:@"message_id"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
+				BOOL hasenclosure_flag = [[row stringForColumn:@"hasenclosure_flag"] intValue];
 				NSString * title = [row stringForColumn:@"title"];
 				NSString * link = [row stringForColumn:@"link"];
+				NSString * enclosure = [row stringForColumn:@"enclosure"];
 
 				// Keep our own track of unread articles
 				if (!read_flag)
@@ -1901,6 +1903,8 @@ static Database * _sharedDatabase = nil;
 				[article setFolderId:folderId];
 				[article setTitle:title];
 				[article setLink:link];
+				[article setEnclosure:enclosure];
+				[article setHasEnclosure:hasenclosure_flag];
 				[folder addArticleToCache:article];
 				[article release];
 			}
