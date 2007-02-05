@@ -65,6 +65,11 @@ span.articleDateStyle:before
 	content: "Date: ";
 }
 
+span.articleEnclosureStyle:before
+{
+	content: "Enclosure: ";
+}
+
 .articleBodyStyle
 {
 	background: #fff;

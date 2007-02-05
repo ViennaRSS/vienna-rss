@@ -94,7 +94,7 @@
 				@"caseInsensitiveCompare:", @"selector",
 				nil], MA_Field_Summary,
 			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"articleData.hasEnclosure", @"key",
+				[@"articleData." stringByAppendingString:MA_Field_HasEnclosure], @"key",
 				@"compare:", @"selector",
 				nil], MA_Field_HasEnclosure,
 				

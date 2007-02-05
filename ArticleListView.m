@@ -357,7 +357,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			}
 			if ([columnName isEqualToString:MA_Field_HasEnclosure])
 			{
-				// Do stuff here.
 			}
 			
 		}
