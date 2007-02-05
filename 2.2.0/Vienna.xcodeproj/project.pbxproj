@@ -287,6 +287,7 @@
 		AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
 		AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFAF3FB088056D800DAFF04 /* KeyChain.h */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		B2097BD50B77D507005A2466 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2097BD40B77D507005A2466 /* QuartzCore.framework */; };
 		B22731640B779990002E04BC /* PolishedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B22731620B779990002E04BC /* PolishedWindow.m */; };
 		B22731650B779990002E04BC /* PolishedWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = B22731630B779990002E04BC /* PolishedWindow.h */; };
 		B227316D0B7799A3002E04BC /* bottom_left.png in Resources */ = {isa = PBXBuildFile; fileRef = B22731660B7799A3002E04BC /* bottom_left.png */; };
@@ -833,6 +834,7 @@
 		AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarExtensions.m; sourceTree = "<group>"; };
 		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
+		B2097BD40B77D507005A2466 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		B22731620B779990002E04BC /* PolishedWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PolishedWindow.m; sourceTree = "<group>"; };
 		B22731630B779990002E04BC /* PolishedWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PolishedWindow.h; sourceTree = "<group>"; };
 		B22731660B7799A3002E04BC /* bottom_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_left.png; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 				AA8F87770A0A301000A0EACE /* SystemConfiguration.framework in Frameworks */,
 				478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */,
 				AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */,
+				B2097BD50B77D507005A2466 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,6 +912,7 @@
 		1058C7A8FEA54F5311CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2097BD40B77D507005A2466 /* QuartzCore.framework */,
 				AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */,
 				AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */,
 				AA8F86840A0A2FC500A0EACE /* WebKit.framework */,
@@ -948,12 +952,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B22731860B779F54002E04BC /* AMPolishedButton.h */,
-				B22731870B779F54002E04BC /* AMPolishedButton.m */,
-				B22731880B779F54002E04BC /* AMPolishedButtonCell.h */,
-				B22731890B779F54002E04BC /* AMPolishedButtonCell.m */,
-				B22731620B779990002E04BC /* PolishedWindow.m */,
-				B22731630B779990002E04BC /* PolishedWindow.h */,
 				AAA7F5E909D50102007D0760 /* ArticleFilter.h */,
 				AAA7F5EA09D50102007D0760 /* ArticleFilter.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
@@ -1029,17 +1027,8 @@
 			children = (
 				B2408BBE0B77A4D90074BE76 /* add.tiff */,
 				B28DE7F50B754E590062F879 /* enclosure_header.tiff */,
-				B2408BA60B77A2B70074BE76 /* button_pressed_right.png */,
-				B2408BA70B77A2B70074BE76 /* button_pressed_middle.png */,
 				B2408BC80B77A5620074BE76 /* newRefresh.tiff */,
-				B2408BA80B77A2B70074BE76 /* button_normal_middle.png */,
-				B2408BA90B77A2B70074BE76 /* button_normal_right.png */,
-				B2408BAA0B77A2B70074BE76 /* button_normal_left.png */,
-				B2408BAB0B77A2B70074BE76 /* button_pressed_left.png */,
-				B2408BAC0B77A2B70074BE76 /* button_disabled_middle.png */,
 				B2408BC40B77A5450074BE76 /* action.tiff */,
-				B2408BAD0B77A2B70074BE76 /* button_disabled_left.png */,
-				B2408BAE0B77A2B70074BE76 /* button_disabled_right.png */,
 				B28DE7F60B754E590062F879 /* enclosure.tiff */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
@@ -1093,13 +1082,7 @@
 				AADD8A0D081C253F007C6E88 /* rssFeed.tiff */,
 				AA04ED6A096226D30060E851 /* rssFeedNew.tiff */,
 				AA2A1DFC089F2B940038770C /* trashFolder.tiff */,
-				B22731660B7799A3002E04BC /* bottom_left.png */,
 				B22731670B7799A3002E04BC /* resize.tiff */,
-				B22731680B7799A3002E04BC /* top_left.png */,
-				B22731690B7799A3002E04BC /* bottom_middle.png */,
-				B227316A0B7799A3002E04BC /* bottom_right.png */,
-				B227316B0B7799A3002E04BC /* top_middle.png */,
-				B227316C0B7799A3002E04BC /* top_right.png */,
 				AA26F43A060490BD00FE7994 /* flagged_header.tiff */,
 				AA26F43B060490BD00FE7994 /* flagged.tiff */,
 				AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */,
@@ -1226,6 +1209,7 @@
 		AAA568BB09EE773200C87343 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B2097A340B77D23A005A2466 /* Polished Metal */,
 				AAED82F40A0379FE00ED56E5 /* DisclosableView */,
 				AA26F478060490F400FE7994 /* SQLite */,
 				AA4F657B062B873100D4837C /* Extensions */,
@@ -1358,6 +1342,50 @@
 				AAED82F70A037A2A00ED56E5 /* SNDisclosureButton.h */,
 			);
 			name = DisclosableView;
+			sourceTree = "<group>";
+		};
+		B2097A340B77D23A005A2466 /* Polished Metal */ = {
+			isa = PBXGroup;
+			children = (
+				B2097A360B77D260005A2466 /* AMPolishedButton */,
+				B2097A350B77D257005A2466 /* PolishedWindow */,
+			);
+			name = "Polished Metal";
+			sourceTree = "<group>";
+		};
+		B2097A350B77D257005A2466 /* PolishedWindow */ = {
+			isa = PBXGroup;
+			children = (
+				B22731660B7799A3002E04BC /* bottom_left.png */,
+				B22731680B7799A3002E04BC /* top_left.png */,
+				B22731690B7799A3002E04BC /* bottom_middle.png */,
+				B227316A0B7799A3002E04BC /* bottom_right.png */,
+				B227316B0B7799A3002E04BC /* top_middle.png */,
+				B227316C0B7799A3002E04BC /* top_right.png */,
+				B22731620B779990002E04BC /* PolishedWindow.m */,
+				B22731630B779990002E04BC /* PolishedWindow.h */,
+			);
+			name = PolishedWindow;
+			sourceTree = "<group>";
+		};
+		B2097A360B77D260005A2466 /* AMPolishedButton */ = {
+			isa = PBXGroup;
+			children = (
+				B22731860B779F54002E04BC /* AMPolishedButton.h */,
+				B22731870B779F54002E04BC /* AMPolishedButton.m */,
+				B22731880B779F54002E04BC /* AMPolishedButtonCell.h */,
+				B22731890B779F54002E04BC /* AMPolishedButtonCell.m */,
+				B2408BA60B77A2B70074BE76 /* button_pressed_right.png */,
+				B2408BA70B77A2B70074BE76 /* button_pressed_middle.png */,
+				B2408BA80B77A2B70074BE76 /* button_normal_middle.png */,
+				B2408BA90B77A2B70074BE76 /* button_normal_right.png */,
+				B2408BAA0B77A2B70074BE76 /* button_normal_left.png */,
+				B2408BAB0B77A2B70074BE76 /* button_pressed_left.png */,
+				B2408BAC0B77A2B70074BE76 /* button_disabled_middle.png */,
+				B2408BAD0B77A2B70074BE76 /* button_disabled_left.png */,
+				B2408BAE0B77A2B70074BE76 /* button_disabled_right.png */,
+			);
+			name = AMPolishedButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
