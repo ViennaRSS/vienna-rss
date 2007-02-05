@@ -192,7 +192,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 		NSString * articleAuthor = SafeString([theArticle author]);
 		NSString * folderTitle = SafeString([folder name]);
 		NSString * folderLink = SafeString([folder homePage]);
-		NSString * articleEnclosure = SafeString([theArticle enclosure]);
+		NSString * articleEnclosureFilename = SafeString([[theArticle enclosure] lastPathComponent]);
+		NSString * articleEnclosureLink = SafeString([theArticle enclosure]);
 		NSString * folderDescription = [folder feedDescription];
 		
 		// Do relative IMG tag fixup
@@ -224,7 +225,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 			[htmlArticle replaceString:@"$FeedTitle$" withString:[XMLParser quoteAttributes:folderTitle]];
 			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
 			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
-			[htmlArticle replaceString:@"$ArticleEnclosure$" withString:articleEnclosure];
+			[htmlArticle replaceString:@"$ArticleEnclosureLink$" withString:articleEnclosureLink];
+			[htmlArticle replaceString:@"$ArticleEnclosureFilename$" withString:articleEnclosureFilename];
+
 
 			
 			[htmlArticle replaceString:@"$_%$%_" withString:@"$"];
