@@ -190,7 +190,9 @@
 				[field tag] != MA_FieldID_Link &&
 				[field tag] != MA_FieldID_Comments &&
 				[field tag] != MA_FieldID_Summary &&
-				[field tag] != MA_FieldID_Parent)
+				[field tag] != MA_FieldID_Parent &&
+				[field tag] != MA_FieldID_Enclosure &&
+				[field tag] != MA_FieldID_EnclosureDownloaded)
 			{
 				[fieldNamePopup addItemWithRepresentedObject:[field displayName] object:field];
 				[nameToFieldMap setValue:field forKey:[field name]];
