@@ -27,6 +27,7 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
+#import "CTGradientView.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebKitErrors.h"
@@ -75,9 +76,11 @@
 	// Make web preferences 16pt Arial to match Safari
 	[[webPane preferences] setStandardFontFamily:@"Arial"];
 	[[webPane preferences] setDefaultFontSize:16];
+	
+	// Draw the gradient background for the navigation bar.
 
 	// Set our box attributes
-	[boxFrame setContentViewMargins:NSMakeSize(1, 1)];
+	//[boxFrame setContentViewMargins:NSMakeSize(1, 1)];
 
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
