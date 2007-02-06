@@ -185,6 +185,12 @@
             }; 
             SUPERCLASS = NSView; 
         }, 
+        {
+            CLASS = KFSplitView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {kfDelegate = id; }; 
+            SUPERCLASS = NSSplitView; 
+        }, 
         {CLASS = MessageListView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
@@ -198,6 +204,12 @@
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = SourceListSplitView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {leftSubview = id; rightSubview = id; }; 
+            SUPERCLASS = KFSplitView; 
+        }, 
         {
             ACTIONS = {printDocument = id; }; 
             CLASS = TabbedWebView; 

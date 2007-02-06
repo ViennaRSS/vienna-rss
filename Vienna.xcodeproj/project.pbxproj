@@ -287,6 +287,10 @@
 		AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
 		AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFAF3FB088056D800DAFF04 /* KeyChain.h */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		B203AC120B78B21600A4A9EF /* KFSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = B203AC100B78B21600A4A9EF /* KFSplitView.h */; };
+		B203AC130B78B21600A4A9EF /* KFSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B203AC110B78B21600A4A9EF /* KFSplitView.m */; };
+		B203AD540B78B37100A4A9EF /* SourceListSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = B203AD520B78B37100A4A9EF /* SourceListSplitView.h */; };
+		B203AD550B78B37100A4A9EF /* SourceListSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B203AD530B78B37100A4A9EF /* SourceListSplitView.m */; };
 		B2097BD50B77D507005A2466 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2097BD40B77D507005A2466 /* QuartzCore.framework */; };
 		B2097E320B77DDE0005A2466 /* GoBack.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E300B77DDE0005A2466 /* GoBack.tiff */; };
 		B2097E330B77DDE0005A2466 /* GoForward.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E310B77DDE0005A2466 /* GoForward.tiff */; };
@@ -842,6 +846,10 @@
 		AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarExtensions.m; sourceTree = "<group>"; };
 		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
+		B203AC100B78B21600A4A9EF /* KFSplitView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = KFSplitView.h; sourceTree = "<group>"; };
+		B203AC110B78B21600A4A9EF /* KFSplitView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = KFSplitView.m; sourceTree = "<group>"; };
+		B203AD520B78B37100A4A9EF /* SourceListSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceListSplitView.h; sourceTree = "<group>"; };
+		B203AD530B78B37100A4A9EF /* SourceListSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceListSplitView.m; sourceTree = "<group>"; };
 		B2097BD40B77D507005A2466 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		B2097E300B77DDE0005A2466 /* GoBack.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoBack.tiff; sourceTree = "<group>"; };
 		B2097E310B77DDE0005A2466 /* GoForward.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoForward.tiff; sourceTree = "<group>"; };
@@ -1364,9 +1372,21 @@
 			name = DisclosableView;
 			sourceTree = "<group>";
 		};
+		B203AC0F0B78B20100A4A9EF /* SplitViews */ = {
+			isa = PBXGroup;
+			children = (
+				B203AC100B78B21600A4A9EF /* KFSplitView.h */,
+				B203AC110B78B21600A4A9EF /* KFSplitView.m */,
+				B203AD520B78B37100A4A9EF /* SourceListSplitView.h */,
+				B203AD530B78B37100A4A9EF /* SourceListSplitView.m */,
+			);
+			name = SplitViews;
+			sourceTree = "<group>";
+		};
 		B2097A340B77D23A005A2466 /* Polished Metal */ = {
 			isa = PBXGroup;
 			children = (
+				B203AC0F0B78B20100A4A9EF /* SplitViews */,
 				B2097E800B77E478005A2466 /* CTGradientView */,
 				B2097A360B77D260005A2466 /* AMPolishedButton */,
 				B2097A350B77D257005A2466 /* PolishedWindow */,
@@ -1518,6 +1538,8 @@
 				B227318C0B779F54002E04BC /* AMPolishedButtonCell.h in Headers */,
 				B2097E7E0B77E474005A2466 /* CTGradient.h in Headers */,
 				B20982340B77FDED005A2466 /* GradientView.h in Headers */,
+				B203AC120B78B21600A4A9EF /* KFSplitView.h in Headers */,
+				B203AD540B78B37100A4A9EF /* SourceListSplitView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2115,6 +2137,8 @@
 				B227318D0B779F54002E04BC /* AMPolishedButtonCell.m in Sources */,
 				B2097E7C0B77E474005A2466 /* CTGradient.m in Sources */,
 				B20982350B77FDED005A2466 /* GradientView.m in Sources */,
+				B203AC130B78B21600A4A9EF /* KFSplitView.m in Sources */,
+				B203AD550B78B37100A4A9EF /* SourceListSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
