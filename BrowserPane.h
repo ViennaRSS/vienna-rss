@@ -34,6 +34,7 @@
 	IBOutlet NSTextField * addressField;
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
+	IBOutlet NSView * viewwwer;
 	IBOutlet NSImageView * feedIconImageLeft;
 	IBOutlet NSImageView * feedIconImageRight;
 	AppController * controller;

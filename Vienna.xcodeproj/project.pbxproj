@@ -288,6 +288,15 @@
 		AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFAF3FB088056D800DAFF04 /* KeyChain.h */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		B2097BD50B77D507005A2466 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2097BD40B77D507005A2466 /* QuartzCore.framework */; };
+		B2097E320B77DDE0005A2466 /* GoBack.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E300B77DDE0005A2466 /* GoBack.tiff */; };
+		B2097E330B77DDE0005A2466 /* GoForward.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E310B77DDE0005A2466 /* GoForward.tiff */; };
+		B2097E350B77DDED005A2466 /* ReloadPage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E340B77DDED005A2466 /* ReloadPage.tiff */; };
+		B2097E3B0B77DE05005A2466 /* shelfBarGraphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E3A0B77DE05005A2466 /* shelfBarGraphite.tiff */; };
+		B2097E3D0B77DE2A005A2466 /* StopLoading.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */; };
+		B2097E7C0B77E474005A2466 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = B2097E780B77E474005A2466 /* CTGradient.m */; };
+		B2097E7E0B77E474005A2466 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = B2097E7A0B77E474005A2466 /* CTGradient.h */; };
+		B20982340B77FDED005A2466 /* GradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = B20982320B77FDED005A2466 /* GradientView.h */; };
+		B20982350B77FDED005A2466 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = B20982330B77FDED005A2466 /* GradientView.m */; };
 		B22731640B779990002E04BC /* PolishedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B22731620B779990002E04BC /* PolishedWindow.m */; };
 		B22731650B779990002E04BC /* PolishedWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = B22731630B779990002E04BC /* PolishedWindow.h */; };
 		B227316D0B7799A3002E04BC /* bottom_left.png in Resources */ = {isa = PBXBuildFile; fileRef = B22731660B7799A3002E04BC /* bottom_left.png */; };
@@ -835,6 +844,15 @@
 		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
 		B2097BD40B77D507005A2466 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		B2097E300B77DDE0005A2466 /* GoBack.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoBack.tiff; sourceTree = "<group>"; };
+		B2097E310B77DDE0005A2466 /* GoForward.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoForward.tiff; sourceTree = "<group>"; };
+		B2097E340B77DDED005A2466 /* ReloadPage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ReloadPage.tiff; sourceTree = "<group>"; };
+		B2097E3A0B77DE05005A2466 /* shelfBarGraphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = shelfBarGraphite.tiff; sourceTree = "<group>"; };
+		B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = StopLoading.tiff; sourceTree = "<group>"; };
+		B2097E780B77E474005A2466 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		B2097E7A0B77E474005A2466 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		B20982320B77FDED005A2466 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		B20982330B77FDED005A2466 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		B22731620B779990002E04BC /* PolishedWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PolishedWindow.m; sourceTree = "<group>"; };
 		B22731630B779990002E04BC /* PolishedWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PolishedWindow.h; sourceTree = "<group>"; };
 		B22731660B7799A3002E04BC /* bottom_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_left.png; sourceTree = "<group>"; };
@@ -1060,7 +1078,12 @@
 				AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */,
 				AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
+				B2097E3A0B77DE05005A2466 /* shelfBarGraphite.tiff */,
+				B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
+				B2097E340B77DDED005A2466 /* ReloadPage.tiff */,
+				B2097E300B77DDE0005A2466 /* GoBack.tiff */,
+				B2097E310B77DDE0005A2466 /* GoForward.tiff */,
 				AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */,
 				AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */,
 				AAED82FA0A037A4E00ED56E5 /* SNDisclosureArrowRight.tiff */,
@@ -1347,6 +1370,7 @@
 		B2097A340B77D23A005A2466 /* Polished Metal */ = {
 			isa = PBXGroup;
 			children = (
+				B2097E800B77E478005A2466 /* CTGradientView */,
 				B2097A360B77D260005A2466 /* AMPolishedButton */,
 				B2097A350B77D257005A2466 /* PolishedWindow */,
 			);
@@ -1386,6 +1410,17 @@
 				B2408BAE0B77A2B70074BE76 /* button_disabled_right.png */,
 			);
 			name = AMPolishedButton;
+			sourceTree = "<group>";
+		};
+		B2097E800B77E478005A2466 /* CTGradientView */ = {
+			isa = PBXGroup;
+			children = (
+				B20982320B77FDED005A2466 /* GradientView.h */,
+				B20982330B77FDED005A2466 /* GradientView.m */,
+				B2097E7A0B77E474005A2466 /* CTGradient.h */,
+				B2097E780B77E474005A2466 /* CTGradient.m */,
+			);
+			name = CTGradientView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1484,6 +1519,8 @@
 				B22731650B779990002E04BC /* PolishedWindow.h in Headers */,
 				B227318A0B779F54002E04BC /* AMPolishedButton.h in Headers */,
 				B227318C0B779F54002E04BC /* AMPolishedButtonCell.h in Headers */,
+				B2097E7E0B77E474005A2466 /* CTGradient.h in Headers */,
+				B20982340B77FDED005A2466 /* GradientView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1700,6 +1737,11 @@
 				B2408BBF0B77A4D90074BE76 /* add.tiff in Resources */,
 				B2408BC50B77A5450074BE76 /* action.tiff in Resources */,
 				B2408BC90B77A5620074BE76 /* newRefresh.tiff in Resources */,
+				B2097E320B77DDE0005A2466 /* GoBack.tiff in Resources */,
+				B2097E330B77DDE0005A2466 /* GoForward.tiff in Resources */,
+				B2097E350B77DDED005A2466 /* ReloadPage.tiff in Resources */,
+				B2097E3B0B77DE05005A2466 /* shelfBarGraphite.tiff in Resources */,
+				B2097E3D0B77DE2A005A2466 /* StopLoading.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2075,6 +2117,8 @@
 				B22731640B779990002E04BC /* PolishedWindow.m in Sources */,
 				B227318B0B779F54002E04BC /* AMPolishedButton.m in Sources */,
 				B227318D0B779F54002E04BC /* AMPolishedButtonCell.m in Sources */,
+				B2097E7C0B77E474005A2466 /* CTGradient.m in Sources */,
+				B20982350B77FDED005A2466 /* GradientView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

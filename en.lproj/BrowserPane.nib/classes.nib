@@ -17,6 +17,7 @@
                 feedIconImageLeft = NSImageView; 
                 feedIconImageRight = NSImageView; 
                 forwardButton = NSButton; 
+                gradientView = CTGradientView; 
                 iconImage = NSButton; 
                 lockIconImage = NSImageView; 
                 refreshButton = NSButton; 
@@ -30,7 +31,14 @@
             OUTLETS = {browserPane = NSView; }; 
             SUPERCLASS = NSWindowController; 
         }, 
+        {
+            ACTIONS = {changeAngle = id; changeStyle = id; changeType = id; }; 
+            CLASS = CTGradientView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSView; 
+        }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = GradientView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
         {
             ACTIONS = {printDocument = id; }; 
