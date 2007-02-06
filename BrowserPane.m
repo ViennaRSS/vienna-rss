@@ -27,7 +27,6 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
-#import "CTGradientView.h"
 #import "WebKit/WebUIDelegate.h"
 #import "WebKit/WebFrame.h"
 #import "WebKit/WebKitErrors.h"
@@ -77,8 +76,6 @@
 	[[webPane preferences] setStandardFontFamily:@"Arial"];
 	[[webPane preferences] setDefaultFontSize:16];
 	
-	// Draw the gradient background for the navigation bar.
-
 	// Set our box attributes
 	//[boxFrame setContentViewMargins:NSMakeSize(1, 1)];
 
