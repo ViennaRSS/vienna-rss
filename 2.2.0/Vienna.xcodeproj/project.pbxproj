@@ -291,7 +291,6 @@
 		B2097E320B77DDE0005A2466 /* GoBack.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E300B77DDE0005A2466 /* GoBack.tiff */; };
 		B2097E330B77DDE0005A2466 /* GoForward.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E310B77DDE0005A2466 /* GoForward.tiff */; };
 		B2097E350B77DDED005A2466 /* ReloadPage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E340B77DDED005A2466 /* ReloadPage.tiff */; };
-		B2097E3B0B77DE05005A2466 /* shelfBarGraphite.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E3A0B77DE05005A2466 /* shelfBarGraphite.tiff */; };
 		B2097E3D0B77DE2A005A2466 /* StopLoading.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */; };
 		B2097E7C0B77E474005A2466 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = B2097E780B77E474005A2466 /* CTGradient.m */; };
 		B2097E7E0B77E474005A2466 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = B2097E7A0B77E474005A2466 /* CTGradient.h */; };
@@ -847,7 +846,6 @@
 		B2097E300B77DDE0005A2466 /* GoBack.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoBack.tiff; sourceTree = "<group>"; };
 		B2097E310B77DDE0005A2466 /* GoForward.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoForward.tiff; sourceTree = "<group>"; };
 		B2097E340B77DDED005A2466 /* ReloadPage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ReloadPage.tiff; sourceTree = "<group>"; };
-		B2097E3A0B77DE05005A2466 /* shelfBarGraphite.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = shelfBarGraphite.tiff; sourceTree = "<group>"; };
 		B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = StopLoading.tiff; sourceTree = "<group>"; };
 		B2097E780B77E474005A2466 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
 		B2097E7A0B77E474005A2466 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
@@ -1078,7 +1076,6 @@
 				AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */,
 				AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */,
 				AA3F7B4108711F6A00D2B96F /* comments_header.tiff */,
-				B2097E3A0B77DE05005A2466 /* shelfBarGraphite.tiff */,
 				B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */,
 				AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */,
 				B2097E340B77DDED005A2466 /* ReloadPage.tiff */,
@@ -1740,7 +1737,6 @@
 				B2097E320B77DDE0005A2466 /* GoBack.tiff in Resources */,
 				B2097E330B77DDE0005A2466 /* GoForward.tiff in Resources */,
 				B2097E350B77DDED005A2466 /* ReloadPage.tiff in Resources */,
-				B2097E3B0B77DE05005A2466 /* shelfBarGraphite.tiff in Resources */,
 				B2097E3D0B77DE2A005A2466 /* StopLoading.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
