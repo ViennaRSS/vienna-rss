@@ -337,3 +337,9 @@
 
 /* Added in 2.1.1 */
 "Advanced" = "Advanced";
+
+/*Added in 2.2*/
+"Import subscribtions from OPML file?" = "Import subscribtions from OPML file?";
+"Do you really want to import the subscriptions from the specified OPML file?" = "Do you really want to import the subscriptions from the specified OPML file?";
+"Import" = "Import";
+"HasEnclosure" = "Enclosure";

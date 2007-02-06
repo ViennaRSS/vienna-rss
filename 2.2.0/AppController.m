@@ -1096,7 +1096,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[field tag] != MA_FieldID_Headlines &&
 			[field tag] != MA_FieldID_Summary &&
 			[field tag] != MA_FieldID_Link &&
-			[field tag] != MA_FieldID_Text)
+			[field tag] != MA_FieldID_Text &&
+			[field tag] != MA_FieldID_EnclosureDownloaded &&
+			[field tag] != MA_FieldID_Enclosure)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
