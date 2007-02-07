@@ -21,9 +21,7 @@
 #import "ArticleView.h"
 #import "AppController.h"
 #import "Preferences.h"
-#import "XMLParser.h"
 #import "HelperFunctions.h"
-#import "CalendarExtensions.h"
 #import "StringExtensions.h"
 #import "WebKit/WebKit.h"
 #import "BrowserView.h"
@@ -177,60 +175,45 @@ static NSMutableDictionary * stylePathMappings = nil;
 		[htmlText appendString:@"\"/></script>"];
 	}
 	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
-	[htmlText appendString:@"<title>$ArticleTitle$</title></head><body>"];
+	[htmlText appendString:@"</head><body>"];
 	for (index = 0; index < [msgArray count]; ++index)
 	{
 		Article * theArticle = [msgArray objectAtIndex:index];
-		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-
-		// Cache values for things we're going to be plugging into the template and set
-		// defaults for things that are missing.
-		NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
-		NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([theArticle title])];
-		NSString * articleDate = [[[theArticle date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
-		NSString * articleLink = SafeString([theArticle link]);
-		NSString * articleAuthor = SafeString([theArticle author]);
-		NSString * folderTitle = SafeString([folder name]);
-		NSString * folderLink = SafeString([folder homePage]);
-		NSString * articleEnclosureFilename = SafeString([[theArticle enclosure] lastPathComponent]);
-		NSString * articleEnclosureLink = SafeString([theArticle enclosure]);
-		NSString * folderDescription = [folder feedDescription];
-		
-		// Do relative IMG tag fixup
-		// stevewpalmer: This is now done in the RSS parser as of 2.1.0.2104 but the below line is kept
-		// for backward compatibility for at least another major version release. However we should feel
-		// free to yank it if the perf hit is unacceptable.
-		[articleBody fixupRelativeImgTags:articleLink];
 		
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
 		NSMutableString * htmlArticle;
 		if (htmlTemplate == nil)
+		{
+			NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
+			[articleBody fixupRelativeImgTags:SafeString([theArticle link])];
 			htmlArticle = [[NSMutableString alloc] initWithString:articleBody];
+		}
 		else
 		{
-			htmlArticle = [[NSMutableString alloc] initWithString:htmlTemplate];
-			
-			[articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
-			[articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-			
-			[articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
-			[articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-			
-			[htmlArticle replaceString:@"$ArticleLink$" withString:articleLink];
-			[htmlArticle replaceString:@"$ArticleTitle$" withString:[XMLParser quoteAttributes:articleTitle]];
-			[htmlArticle replaceString:@"$ArticleBody$" withString:articleBody];
-			[htmlArticle replaceString:@"$ArticleAuthor$" withString:articleAuthor];
-			[htmlArticle replaceString:@"$ArticleDate$" withString:articleDate];
-			[htmlArticle replaceString:@"$FeedTitle$" withString:[XMLParser quoteAttributes:folderTitle]];
-			[htmlArticle replaceString:@"$FeedLink$" withString:folderLink];
-			[htmlArticle replaceString:@"$FeedDescription$" withString:folderDescription];
-			[htmlArticle replaceString:@"$ArticleEnclosureLink$" withString:articleEnclosureLink];
-			[htmlArticle replaceString:@"$ArticleEnclosureFilename$" withString:articleEnclosureFilename];
+			htmlArticle = [[NSMutableString alloc] initWithString:@""];
+			NSScanner * scanner = [NSScanner scannerWithString:htmlTemplate];
+			NSString * theString = nil;
+			BOOL stripIfEmpty = NO;
 
+			// Handle conditional tag expansion. Sections in <!-- cond:noblank--> and <!--end-->
+			// are stripped out if all the tags inside are blank.
+			while([scanner scanUpToString:@"<!--" intoString:&theString])
+			{
+				NSString * commentTag = nil;
 
-			
-			[htmlArticle replaceString:@"$_%$%_" withString:@"$"];
+				[htmlArticle appendString:[theArticle expandTags:theString withConditional:stripIfEmpty]];
+				[scanner scanString:@"<!--" intoString:nil];
+				if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil)
+				{
+					commentTag = [commentTag trim];
+					if ([commentTag isEqualToString:@"cond:noblank"])
+						stripIfEmpty = YES;
+					if ([commentTag isEqualToString:@"end"])
+						stripIfEmpty = NO;
+					[scanner scanString:@"-->" intoString:nil];
+				}
+			}
 		}
 		
 		// Separate each article with a horizontal divider line

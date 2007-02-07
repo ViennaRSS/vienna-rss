@@ -117,5 +117,6 @@ extern NSString * MA_Field_HasEnclosure;
 -(void)markFlagged:(BOOL)flag;
 -(void)markDeleted:(BOOL)flag;
 -(void)markEnclosureDownloaded:(BOOL)flag;
+-(NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond;
 -(NSDictionary *)articleData;
 @end

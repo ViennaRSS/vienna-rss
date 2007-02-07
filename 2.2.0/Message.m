@@ -20,6 +20,9 @@
 
 #import "Message.h"
 #import "Database.h"
+#import "StringExtensions.h"
+#import "XMLParser.h"
+#import "CalendarExtensions.h"
 
 // The names here are internal field names, not for localisation.
 NSString * MA_Field_GUID = @"GUID";
@@ -247,6 +250,139 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 																						  index:index] autorelease];
 	}
 	return nil;
+}
+
+/* tagArticleLink
+ * Returns the article link as a safe string.
+ */
+-(NSString *)tagArticleLink
+{
+	return SafeString([self link]);
+}
+
+/* tagArticleTitle
+ * Returns the article title.
+ */
+-(NSString *)tagArticleTitle
+{
+	NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([self title])];
+	[articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
+	[articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+	return [XMLParser quoteAttributes:articleTitle];
+}
+
+/* tagArticleBody
+ * Returns the article body.
+ */
+-(NSString *)tagArticleBody
+{
+	NSMutableString * articleBody = [NSMutableString stringWithString:[self body]];
+	[articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
+	[articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
+	[articleBody fixupRelativeImgTags:[self link]];
+	return articleBody;
+}
+
+/* tagArticleAuthor
+ * Returns the article author as a safe string.
+ */
+-(NSString *)tagArticleAuthor
+{
+	return SafeString([self author]);
+}
+
+/* tagArticleDate
+ * Returns the article date.
+ */
+-(NSString *)tagArticleDate
+{
+	return [[[self date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
+}
+
+/* tagArticleEnclosureLink
+ * Returns the article enclosure link.
+ */
+-(NSString *)tagArticleEnclosureLink
+{
+	return SafeString([self enclosure]);
+}
+
+/* tagArticleEnclosureFilename
+ * Returns the article enclosure file name.
+ */
+-(NSString *)tagArticleEnclosureFilename
+{
+	return SafeString([[self enclosure] lastPathComponent]);
+}
+
+/* tagFeedTitle
+ * Returns the article's feed title.
+ */
+-(NSString *)tagFeedTitle
+{
+	Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+	return [XMLParser quoteAttributes:SafeString([folder name])];
+}
+
+/* tagFeedLink
+ * Returns the article's feed URL.
+ */
+-(NSString *)tagFeedLink
+{
+	Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+	return SafeString([folder homePage]);
+}
+
+/* tagFeedDescription
+ * Returns the article's feed description.
+ */
+-(NSString *)tagFeedDescription
+{
+	Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+	return [folder feedDescription];
+}
+
+/* expandTags
+ * Expands recognised tags in theString based on the object values. If cond is YES and all the
+ * tags are empty then return the empty string instead.
+ */
+-(NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond
+{
+	NSMutableString * newString = [NSMutableString stringWithString:theString];
+	BOOL hasOneTag = NO;
+	int tagStartIndex = 0;
+
+	while ((tagStartIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound)
+	{
+		int tagEndIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
+		if (tagEndIndex == NSNotFound)
+			break;
+
+		int tagLength = (tagEndIndex - tagStartIndex) + 1;
+		NSString * tagName = [newString substringWithRange:NSMakeRange(tagStartIndex + 1, tagLength - 2)];
+		NSString * replacementString = nil;
+
+		// Use the tag name as the selector to a member function that returns the expanded
+		// value. If no function exists then we just delete the tag name from the source string.
+		NSString * tagSelName = [@"tag" stringByAppendingString:tagName];
+		const char * cTagSelName = [tagSelName cString];
+		if (sel_getUid(cTagSelName))
+			replacementString = [self performSelector:sel_getUid(cTagSelName)];
+
+		if (replacementString == nil)
+			[newString deleteCharactersInRange:NSMakeRange(tagStartIndex, tagLength)];
+		else
+		{
+			[newString replaceCharactersInRange:NSMakeRange(tagStartIndex, tagLength) withString:replacementString];
+			hasOneTag = YES;
+
+			if (![replacementString isBlank])
+				cond = NO;
+
+			tagStartIndex += [replacementString length];
+		}
+	}
+	return (cond && hasOneTag) ? @"" : newString;
 }
 
 /* dealloc
