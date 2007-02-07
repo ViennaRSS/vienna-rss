@@ -134,6 +134,9 @@
         topMiddle = [NSImage imageNamed:@"top_middle"];
         topMiddlePattern = [NSColor colorWithPatternImage:topMiddle];
         topRight = [NSImage imageNamed:@"top_right"];
+		
+		middleLeft = nil;
+		middleRight = nil;
     }
     
     // Find background color to draw into window

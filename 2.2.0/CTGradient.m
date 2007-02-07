@@ -746,7 +746,7 @@ void resolveHSV(float *color1, float *color2);
   blendingMode = mode;
   
   //Choose what blending function to use
-  void *evaluationFunction;
+  void *evaluationFunction = nil;
   switch(blendingMode)
 	{
 	case CTLinearBlendingMode:
@@ -1179,6 +1179,8 @@ void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 		H = 60*(B-R)/(MAX-MIN)+120;
 	else if(MAX == B)
 		H = 60*(R-G)/(MAX-MIN)+240;
+	else
+		H = NAN;
 	
 	S = MAX == 0 ? 0 : 1 - MIN/MAX;
 	V = MAX;
@@ -1190,7 +1192,7 @@ void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 
 void transformHSV_RGB(float *components) //H,S,B -> R,G,B
 	{
-	float R, G, B;
+	float R = 0.0, G = 0.0, B = 0.0;
 	float H = fmodf(components[0],359),	//map to [0,360)
 		  S = components[1],
 		  V = components[2];
