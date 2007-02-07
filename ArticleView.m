@@ -198,20 +198,23 @@ static NSMutableDictionary * stylePathMappings = nil;
 
 			// Handle conditional tag expansion. Sections in <!-- cond:noblank--> and <!--end-->
 			// are stripped out if all the tags inside are blank.
-			while([scanner scanUpToString:@"<!--" intoString:&theString])
+			while(![scanner isAtEnd])
 			{
-				NSString * commentTag = nil;
-
-				[htmlArticle appendString:[theArticle expandTags:theString withConditional:stripIfEmpty]];
-				[scanner scanString:@"<!--" intoString:nil];
-				if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil)
+				if ([scanner scanUpToString:@"<!--" intoString:&theString])
+					[htmlArticle appendString:[theArticle expandTags:theString withConditional:stripIfEmpty]];
+				if ([scanner scanString:@"<!--" intoString:nil])
 				{
-					commentTag = [commentTag trim];
-					if ([commentTag isEqualToString:@"cond:noblank"])
-						stripIfEmpty = YES;
-					if ([commentTag isEqualToString:@"end"])
-						stripIfEmpty = NO;
-					[scanner scanString:@"-->" intoString:nil];
+					NSString * commentTag = nil;
+
+					if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil)
+					{
+						commentTag = [commentTag trim];
+						if ([commentTag isEqualToString:@"cond:noblank"])
+							stripIfEmpty = YES;
+						if ([commentTag isEqualToString:@"end"])
+							stripIfEmpty = NO;
+						[scanner scanString:@"-->" intoString:nil];
+					}
 				}
 			}
 		}
