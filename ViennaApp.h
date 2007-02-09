@@ -19,12 +19,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Carbon/Carbon.h>
 #import "Folder.h"
 
-@interface ViennaApp : NSApplication
+// This is needed for iTunes-like buttons with different option-key personalities.
+OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData);
 
-// Override sendEvent so we can catch depressed option keys and other special stuff
-//- (void) sendEvent:(NSEvent*)event;
+@interface ViennaApp : NSApplication
 
 // Refresh commands
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd;

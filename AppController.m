@@ -127,6 +127,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	Preferences * prefs = [Preferences standardPreferences];
 
+	[self installCustomEventHandler];
+	
 	// Restore the most recent layout
 	[self setLayout:[prefs layout] withRefresh:NO];
 
@@ -242,6 +244,22 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Do safe initialisation. 	 
 	[self doSafeInitialisation];
+}
+
+/* installCustomEventHandler
+ * This is our custom event handler that tells us when a modifier key is pressed
+ * or released anywhere in the system. Needed for iTunes-like button. The other 
+ * half of the magic happens in ViennaApp.
+ */
+
+-(void)installCustomEventHandler
+{
+	EventTypeSpec eventType;
+    eventType.eventClass = kEventClassKeyboard;
+    eventType.eventKind = kEventRawKeyModifiersChanged;
+
+    EventHandlerUPP handlerFunction = NewEventHandlerUPP(keyPressed);
+    InstallEventHandler(GetEventMonitorTarget(), handlerFunction, 1, &eventType, NULL, NULL);
 }
 
 /* doSafeInitialisation

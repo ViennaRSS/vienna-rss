@@ -31,22 +31,31 @@
 #import "UnifiedDisplayView.h"
 #import "WebKit/WebKit.h"
 
+// This is needed for iTunes-like buttons with different option-key personalities.
+OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData) 
+{
+	return CallNextEventHandler(nextHandler, theEvent);
+}
+
 @implementation ViennaApp
 
 /* sendEvent
  * We override sendEvent in order to catch the status of the option key. 
- * This needs to be done in an NSRespoder subclass, which is why it's here.
  */
-/*- (void)sendEvent:(NSEvent*)event
+-(void)sendEvent:(NSEvent *)anEvent 
 {
-	if(([event type] == NSFlagsChanged) && ( ([event keyCode] == 61) || ([event keyCode] == 58)))
+	bool isHandled = NO;
+
+	if(([anEvent type] == NSFlagsChanged) && ( ([anEvent keyCode] == 61) || ([anEvent keyCode] == 58)))
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
 		[controller toggleOptionKeyButtonStates]; 
+		isHandled = YES;
 	}
-	else
-		[super sendEvent:event];
-}*/
+	// Only handle the events we actually need.
+    if(!isHandled)
+		[super sendEvent:anEvent];
+}
 
 /* handleRefreshAllSubscriptions
  * Refreshes all folders.

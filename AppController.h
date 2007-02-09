@@ -36,7 +36,8 @@
 @class UnifiedDisplayView;
 @class EmptyTrashWarning;
 
-@interface AppController : NSObject <GrowlApplicationBridgeDelegate> {
+@interface AppController : NSObject <GrowlApplicationBridgeDelegate> 
+{
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet ArticleController * articleController;
 	IBOutlet FoldersTree * foldersTree;
@@ -144,6 +145,7 @@
 -(IBAction)makeTextSmaller:(id)sender;
 
 // Public functions
+-(void)installCustomEventHandler;
 -(void)initFiltersMenu:(PopupButton *)filtersPopupMenu;
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
