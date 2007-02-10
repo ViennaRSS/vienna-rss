@@ -11,6 +11,7 @@ Thanks!
 - Fixed bug: empty trash warning did not reappear after unhiding Vienna.
 - Changed button tooltip to match behavior.
 - New and nicer toolbar icons made by Davide Casali (Folletto).
+- Fixed bug: move articles to Trash preference was counting back to beginning of day rather than by 24 hours.
 
 2.1.1.2109
 ----------
