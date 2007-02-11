@@ -22,7 +22,6 @@
 #import "ActivityLog.h"
 #import "AppController.h"
 #import "Preferences.h"
-#import "SplitViewExtensions.h"
 
 @implementation ActivityViewer
 

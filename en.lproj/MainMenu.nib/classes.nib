@@ -149,6 +149,12 @@
             SUPERCLASS = NSWindowController; 
         }, 
         {
+            CLASS = ContentSplitView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {bottomSubview = id; }; 
+            SUPERCLASS = KFSplitView; 
+        }, 
+        {
             ACTIONS = {
                 makeTextLarger = id; 
                 makeTextSmaller = id; 

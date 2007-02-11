@@ -32,12 +32,12 @@
 	NSRectFill (aRect);
 }
 
-- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+- (float)splitView:(KFSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
 {
 	return (proposedMin + MIN_LEFT_VIEW_WIDTH);
 }
 
-- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+- (float)splitView:(KFSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
 {
 	return (proposedMax - MIN_RIGHT_VIEW_WIDTH);
 }
