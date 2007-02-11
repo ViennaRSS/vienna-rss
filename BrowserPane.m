@@ -36,6 +36,39 @@
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
 
+@implementation BrowserPaneButtonCell
+
+-(BOOL)isOpaque
+{
+	return NO;
+}
+
+- (NSColor *)highlightColorInView:(NSView *)controlView
+{
+	return nil;//[NSColor clearColor];
+} 
+
+@end
+
+@implementation BrowserPaneButton
+
+-(BOOL)isOpaque
+{
+	return NO;
+}
+
++ (Class)cellClass
+{
+	return [BrowserPaneButtonCell class];
+}
+
+- (NSColor *)highlightColorInView:(NSView *)controlView
+{
+	return nil;//[NSColor clearColor];
+} 
+
+@end
+
 @interface BrowserPane (Private)
 	-(void)endFrameLoad;
 	-(void)setError:(NSError *)newError;
