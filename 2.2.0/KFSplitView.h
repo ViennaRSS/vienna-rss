@@ -50,6 +50,9 @@
 - (void)setPositionFromPlistObject:(id)string;
 - (id)plistObjectWithSavedPosition;
 
+-(NSArray *)layout;
+-(void)setLayout:(NSArray *)newLayout;
+
 @end
 
 @interface NSObject(KFSplitViewDelegate)

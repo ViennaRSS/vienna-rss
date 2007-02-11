@@ -27,7 +27,6 @@
 #import "Export.h"
 #import "RefreshManager.h"
 #import "StringExtensions.h"
-#import "SplitViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
 #import "NewSubscription.h"
@@ -605,7 +604,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Make sure the folder width isn't shrunk beyond a minimum width. Otherwise it looks
  * untidy.
  */
--(float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+-(float)splitView:(KFSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
 {
 	return (sender == splitView1 && offset == 0) ? MA_Minimum_Folder_Pane_Width : proposedMin;
 }
@@ -614,7 +613,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Make sure that the browserview isn't shrunk beyond a minimum size otherwise the splitview
  * or controls within it start resizing odd.
  */
--(float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+-(float)splitView:(KFSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
 {
 	if (sender == splitView1 && offset == 0)
 	{
@@ -627,7 +626,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* resizeSubviewsWithOldSize
  * Constrain the folder pane to a fixed width.
  */
--(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+-(void)splitView:(KFSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
 	float dividerThickness = [sender dividerThickness];
 	id sv1 = [[sender subviews] objectAtIndex:0];

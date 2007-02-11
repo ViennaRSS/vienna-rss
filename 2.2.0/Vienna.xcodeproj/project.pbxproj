@@ -92,8 +92,6 @@
 		AA4F6617062B94D200D4837C /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACFDEBB0604D4D20072D140 /* AppController.m */; };
 		AA51CBF808CFEA0F00DD6535 /* BrowserPane.h in Headers */ = {isa = PBXBuildFile; fileRef = AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */; };
 		AA51CBF908CFEA0F00DD6535 /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */; };
-		AA55918A086121C200105AC5 /* SplitViewExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA559188086121C200105AC5 /* SplitViewExtensions.h */; };
-		AA55918B086121C200105AC5 /* SplitViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA559189086121C200105AC5 /* SplitViewExtensions.m */; };
 		AA55E4A6086C6C8200D7DBFA /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */; };
 		AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */; };
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
@@ -329,7 +327,11 @@
 		B277922C0B7F867700C6094A /* PolishedPopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B277922A0B7F867700C6094A /* PolishedPopupButton.m */; };
 		B28DE7F70B754E590062F879 /* enclosure_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F50B754E590062F879 /* enclosure_header.tiff */; };
 		B28DE7F80B754E590062F879 /* enclosure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F60B754E590062F879 /* enclosure.tiff */; };
+		B29F2BB50B7F9C6600D1BE59 /* ContentSplitViewBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B29F2BB40B7F9C6600D1BE59 /* ContentSplitViewBar.tiff */; };
 		B2A81B860B4462FB00DFFDD0 /* gear.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2A81B850B4462FB00DFFDD0 /* gear.tiff */; };
+		B2DF80D20B7F94EF00E6BB5F /* ContentSplitView.h in Headers */ = {isa = PBXBuildFile; fileRef = B2DF80D00B7F94EF00E6BB5F /* ContentSplitView.h */; };
+		B2DF80D30B7F94EF00E6BB5F /* ContentSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DF80D10B7F94EF00E6BB5F /* ContentSplitView.m */; };
+		B2DF80DB0B7F959400E6BB5F /* ContentSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2DF80DA0B7F959400E6BB5F /* ContentSplitViewDimple.tiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -540,8 +542,6 @@
 		AA51830F0AA56F9C001E8CA1 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt_BR; path = pt_BR.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPane.h; sourceTree = "<group>"; };
 		AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
-		AA559188086121C200105AC5 /* SplitViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewExtensions.h; sourceTree = "<group>"; };
-		AA559189086121C200105AC5 /* SplitViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewExtensions.m; sourceTree = "<group>"; };
 		AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FeedCredentials.h; sourceTree = "<group>"; };
 		AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FeedCredentials.m; sourceTree = "<group>"; };
 		AA60237E08C298FB002CFD06 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunctions.h; sourceTree = "<group>"; };
@@ -890,7 +890,11 @@
 		B277922A0B7F867700C6094A /* PolishedPopupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolishedPopupButton.m; sourceTree = "<group>"; };
 		B28DE7F50B754E590062F879 /* enclosure_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = enclosure_header.tiff; sourceTree = "<group>"; };
 		B28DE7F60B754E590062F879 /* enclosure.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = enclosure.tiff; sourceTree = "<group>"; };
+		B29F2BB40B7F9C6600D1BE59 /* ContentSplitViewBar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ContentSplitViewBar.tiff; sourceTree = "<group>"; };
 		B2A81B850B4462FB00DFFDD0 /* gear.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = gear.tiff; sourceTree = "<group>"; };
+		B2DF80D00B7F94EF00E6BB5F /* ContentSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentSplitView.h; sourceTree = "<group>"; };
+		B2DF80D10B7F94EF00E6BB5F /* ContentSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentSplitView.m; sourceTree = "<group>"; };
+		B2DF80DA0B7F959400E6BB5F /* ContentSplitViewDimple.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ContentSplitViewDimple.tiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1053,6 +1057,8 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B29F2BB40B7F9C6600D1BE59 /* ContentSplitViewBar.tiff */,
+				B2DF80DA0B7F959400E6BB5F /* ContentSplitViewDimple.tiff */,
 				B2408BBE0B77A4D90074BE76 /* add.tiff */,
 				B28DE7F50B754E590062F879 /* enclosure_header.tiff */,
 				B2408BC80B77A5620074BE76 /* newRefresh.tiff */,
@@ -1189,8 +1195,6 @@
 				AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */,
 				AAD794E4088A25D200E2CE5E /* PopUpButtonExtensions.h */,
 				AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */,
-				AA559188086121C200105AC5 /* SplitViewExtensions.h */,
-				AA559189086121C200105AC5 /* SplitViewExtensions.m */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */,
@@ -1252,6 +1256,8 @@
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
+				B2DF80D00B7F94EF00E6BB5F /* ContentSplitView.h */,
+				B2DF80D10B7F94EF00E6BB5F /* ContentSplitView.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1481,7 +1487,6 @@
 				AA328A7508483DE100A7AD5A /* Export.h in Headers */,
 				AA328A9B0848404200A7AD5A /* Import.h in Headers */,
 				AAA1E2FD0852502700277128 /* NewGroupFolder.h in Headers */,
-				AA55918A086121C200105AC5 /* SplitViewExtensions.h in Headers */,
 				AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */,
 				AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */,
 				AAE7A901086BB5C4009A487E /* PopupButton.h in Headers */,
@@ -1547,6 +1552,7 @@
 				B203AC120B78B21600A4A9EF /* KFSplitView.h in Headers */,
 				B203AD540B78B37100A4A9EF /* SourceListSplitView.h in Headers */,
 				B277922B0B7F867700C6094A /* PolishedPopupButton.h in Headers */,
+				B2DF80D20B7F94EF00E6BB5F /* ContentSplitView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1767,6 +1773,8 @@
 				B2097E330B77DDE0005A2466 /* GoForward.tiff in Resources */,
 				B2097E350B77DDED005A2466 /* ReloadPage.tiff in Resources */,
 				B2097E3D0B77DE2A005A2466 /* StopLoading.tiff in Resources */,
+				B2DF80DB0B7F959400E6BB5F /* ContentSplitViewDimple.tiff in Resources */,
+				B29F2BB50B7F9C6600D1BE59 /* ContentSplitViewBar.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2059,7 +2067,6 @@
 				AA328A7608483DE100A7AD5A /* Export.m in Sources */,
 				AA328A9C0848404200A7AD5A /* Import.m in Sources */,
 				AAA1E2FE0852502700277128 /* NewGroupFolder.m in Sources */,
-				AA55918B086121C200105AC5 /* SplitViewExtensions.m in Sources */,
 				AA2185030861E7600024DD4A /* TexturedHeader.m in Sources */,
 				AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */,
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
@@ -2147,6 +2154,7 @@
 				B203AC130B78B21600A4A9EF /* KFSplitView.m in Sources */,
 				B203AD550B78B37100A4A9EF /* SourceListSplitView.m in Sources */,
 				B277922C0B7F867700C6094A /* PolishedPopupButton.m in Sources */,
+				B2DF80D30B7F94EF00E6BB5F /* ContentSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
