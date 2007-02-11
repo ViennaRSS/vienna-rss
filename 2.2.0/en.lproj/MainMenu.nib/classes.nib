@@ -195,6 +195,7 @@
         {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = PolishedPopupButton; LANGUAGE = ObjC; SUPERCLASS = AMPolishedButton; }, 
         {CLASS = PolishedWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
