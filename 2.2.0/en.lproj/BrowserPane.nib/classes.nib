@@ -21,10 +21,12 @@
                 iconImage = NSButton; 
                 lockIconImage = NSImageView; 
                 refreshButton = NSButton; 
+                viewwwer = NSView; 
                 webPane = TabbedWebView; 
             }; 
             SUPERCLASS = NSView; 
         }, 
+        {CLASS = BrowserPaneButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             CLASS = BrowserPaneTemplate; 
             LANGUAGE = ObjC; 

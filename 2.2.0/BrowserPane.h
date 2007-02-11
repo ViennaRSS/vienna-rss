@@ -25,6 +25,19 @@
 @class AppController;
 @class TabbedWebView;
 
+@interface BrowserPaneButtonCell : NSCell {
+
+}
+
+@end
+
+@interface BrowserPaneButton : NSButton {
+
+}
+
+@end
+
+
 @interface BrowserPane : NSView<BaseView> {
 	IBOutlet NSBox * boxFrame;
 	IBOutlet TabbedWebView * webPane;
