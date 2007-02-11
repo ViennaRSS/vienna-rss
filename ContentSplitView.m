@@ -40,7 +40,7 @@
 
 - (float)dividerThickness
 {
-	return (8);
+	return (6);
 }
 
 

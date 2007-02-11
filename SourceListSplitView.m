@@ -28,7 +28,7 @@
 
 - (void)drawDividerInRect:(NSRect)aRect
 {
-	[[NSColor lightGrayColor] set];
+	[[NSColor blackColor] set];
 	NSRectFill (aRect);
 }
 
