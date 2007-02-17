@@ -28,7 +28,7 @@
 	{
 		metalBg = [[NSImage imageNamed:@"metal_column_header.png"] retain];
 		attrs = [[NSMutableDictionary dictionaryWithDictionary:[[self attributedStringValue] attributesAtIndex:0 effectiveRange:NULL]] mutableCopy];
-		[attrs setValue:[NSFont systemFontOfSize:10] forKey:@"NSFont"];
+		[attrs setValue:[NSFont systemFontOfSize:11] forKey:@"NSFont"];
 
 		// We want over-long header titles to be truncated in the middle.
         NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -96,7 +96,7 @@
 		centeredRect.size.width = rect.size.width;
 	
 	// Draw text twice -first slightly off-white, and then black 1 pixel higher- to give the standard "embossed" look.
-	[attrs setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:0.7] forKey:@"NSColor"];
+	[attrs setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:0.35] forKey:@"NSColor"];
 	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
 	[attrs setValue:[NSColor blackColor] forKey:@"NSColor"];
 	centeredRect.origin.y += 1;
