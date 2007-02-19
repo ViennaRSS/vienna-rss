@@ -18,6 +18,7 @@
 //  limitations under the License.
 //
 
+#import "Constants.h"
 #import "ArticleView.h"
 #import "AppController.h"
 #import "Preferences.h"
@@ -149,8 +150,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 	// We need to reset the preferences without firing off a notification since we want the
 	// style change to happen immediately.
 	Preferences * prefs = [Preferences standardPreferences];
-	[prefs setDisplayStyle:@"Default" withNotification:NO];
-	return [self initForStyle:@"Default"];
+	[prefs setDisplayStyle:MA_DefaultStyleName withNotification:NO];
+	return [self initForStyle:MA_DefaultStyleName];
 }
 
 /* articleTextFromArray
