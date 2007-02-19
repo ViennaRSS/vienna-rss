@@ -343,3 +343,4 @@
 "Do you really want to import the subscriptions from the specified OPML file?" = "Do you really want to import the subscriptions from the specified OPML file?";
 "Import" = "Import";
 "HasEnclosure" = "Enclosure";
+"Enclosure" = "Enclosure URL";

@@ -1145,7 +1145,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[field tag] != MA_FieldID_Comments &&
 			[field tag] != MA_FieldID_Deleted &&
 			[field tag] != MA_FieldID_Parent &&
-			[field tag] != MA_FieldID_Headlines)
+			[field tag] != MA_FieldID_Headlines &&
+			[field tag] != MA_FieldID_EnclosureDownloaded)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];

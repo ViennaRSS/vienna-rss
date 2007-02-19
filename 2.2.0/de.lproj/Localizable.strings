@@ -338,3 +338,4 @@
 "Do you really want to import the subscriptions from the specified OPML file?" = "Wollen Sie wirklich die Abonnements aus der angegebenen Datei importieren?";
 "Import" = "Importieren";
 "HasEnclosure" = "Anhang";
+"Enclosure" = "Anhang URL";
