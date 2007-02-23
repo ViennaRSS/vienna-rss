@@ -144,6 +144,7 @@
 -(IBAction)condensedLayout:(id)sender;
 -(IBAction)makeTextLarger:(id)sender;
 -(IBAction)makeTextSmaller:(id)sender;
+-(IBAction)newTab:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;

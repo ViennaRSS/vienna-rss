@@ -934,6 +934,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self openURLInDefaultBrowser:url];
 }
 
+/* newTab
+ * Create a new empty tab.
+ */
+-(IBAction)newTab:(id)sender
+{
+	// Create a new empty tab in the foreground.
+	[self createNewTab:nil inBackground:NO];
+	[browserView setTabItemViewTitle:[browserView activeTabItemView] title:NSLocalizedString(@"New Tab", nil)];
+
+	// Make the address bare first responder.
+	NSView<BaseView> * theView = [browserView activeTabItemView];
+	BrowserPane * browserPane = (BrowserPane *)theView;
+	[browserPane activateAddressBar];
+}
+
 /* createNewTab
  * Open the specified URL in a new tab.
  */
@@ -949,8 +964,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
 		if (url != nil)
-			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
-
+			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];			
 		[newBrowserTemplate release];
 	}
 }

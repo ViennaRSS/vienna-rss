@@ -12,6 +12,10 @@ Thanks!
 - Replaced old toolbar icons with nicer ones by Davide Casali (Folletto).
 - Added support for RSS/Atom enclosures.
 - Add conditional support in templates.
+- Overhauled UI.
+- Added new standard style.
+- Added more built-in styles.
+- Command + T now opens new tab.
 
 2.1.1.2109
 ----------
