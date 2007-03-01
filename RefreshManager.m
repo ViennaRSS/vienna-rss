@@ -914,6 +914,7 @@ typedef enum {
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pumpTimer release];
 	[authQueue release];
 	[connectionsArray release];
