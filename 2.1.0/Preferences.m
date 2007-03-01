@@ -175,6 +175,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[defaultDatabase release];
 	[imagesFolder release];
 	[downloadFolder release];

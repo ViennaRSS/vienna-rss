@@ -117,6 +117,12 @@ static InfoWindowManager * _infoWindowManager = nil;
 	return self;
 }
 
+-(void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
+}
+
 /* handleFolderDeleted
  * Deals with the case where a folder is deleted while its Info window is
  * open. We close the info window and remove it from the list.
@@ -180,6 +186,12 @@ static InfoWindowManager * _infoWindowManager = nil;
 		infoFolderId = folderId;
 
 	return self;
+}
+
+-(void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
 }
 
 /* awakeFromNib
