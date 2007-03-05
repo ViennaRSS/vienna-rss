@@ -21,6 +21,7 @@
 #import "NewSubscription.h"
 #import "AppController.h"
 #import "StringExtensions.h"
+#import "RichXMLParser.h"
 
 // Private functions
 @interface NewSubscription (Private)
@@ -109,6 +110,7 @@
 	[self setLinkTitle];
 	editFolderId = -1;
 	parentId = itemId;
+	[newRSSFeedWindow makeFirstResponder:feedURL];
 	[NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
@@ -172,6 +174,10 @@
 						NSLocalizedString(@"OK", nil), nil, nil);
 		return;
 	}
+
+	// Validate the subscription, possibly replacing the feedURLString with a real one if
+	// it originally pointed to a web page.
+	feedURLString = [self verifyFeedURL:feedURLString];
 
 	// Call the controller to create the new subscription.
 	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
@@ -300,6 +306,61 @@
 {
 	NSString * feedURLString = [editFeedURL stringValue];
 	[saveButton setEnabled:![feedURLString isBlank]];
+}
+
+/* verifyFeedURL
+ * Verify the specified URL. This is the auto-discovery phase that is described at
+ * http://diveintomark.org/archives/2002/08/15/ultraliberal_rss_locator
+ *
+ * Basically we examine the data at the specified URL and if it is an RSS feed
+ * then OK. Otherwise if it looks like an HTML page, we scan for links in the
+ * page text.
+ */
+-(NSString *)verifyFeedURL:(NSString *)feedURLString
+{
+	NSString * urlString = [[feedURLString trim] lowercaseString];
+
+	// If the URL starts with feed or ends with a feed extension then we're going
+	// assume it's a feed.
+	if ([urlString hasPrefix:@"feed:"])
+		return feedURLString;
+
+	if ([urlString hasSuffix:@".rss"] || [urlString hasSuffix:@".rdf"] || [urlString hasSuffix:@".xml"])
+		 return feedURLString;
+
+	// OK. Now we're at the point where can't be reasonably sure that
+	// the URL points to a feed. Time to look at the content.
+	NSURL * url = [NSURL URLWithString:urlString];
+	if ([url scheme] == nil)
+	{
+		urlString = [@"http://" stringByAppendingString:urlString];
+		url = [NSURL URLWithString:urlString];
+	}
+			
+	NSData * urlContent = [NSData dataWithContentsOfURL:url];
+	if (urlContent == nil)
+		return feedURLString;
+
+	// Get all the feeds on the page. If there's more than one, use the first one. Later we
+	// could put up UI inviting the user to pick one but I don't know if it makes sense to
+	// do this. How would they know which one would be best? We'd have to query each feed, get
+	// the title and then ask them.
+	RichXMLParser * newFeed = [[RichXMLParser alloc] init];
+	NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
+	if ([newFeed extractFeeds:urlContent toArray:linkArray])
+	{
+		NSString * feedPart = [linkArray objectAtIndex:0];
+		if (![feedPart hasPrefix:@"http:"])
+		{
+			if (![urlString hasSuffix:@"/"])
+				urlString = [urlString stringByAppendingString:@"/"];
+			feedURLString = [urlString stringByAppendingString:feedPart];
+		}
+		else
+			feedURLString = feedPart;
+	}
+	[newFeed release];
+	return feedURLString;
 }
 
 /* dealloc

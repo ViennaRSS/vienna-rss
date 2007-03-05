@@ -54,6 +54,7 @@
 
 // General functions
 -(BOOL)parseRichXML:(NSData *)xmlData;
+-(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray;
 -(NSString *)title;
 -(NSString *)description;
 -(NSString *)link;
