@@ -51,5 +51,5 @@
 -(id)initWithDatabase:(Database *)newDb;
 -(void)newSubscription:(NSWindow *)window underParent:(int)itemId initialURL:(NSString *)initialURL;
 -(void)editSubscription:(NSWindow *)window folderId:(int)folderId;
-
+-(NSString *)verifyFeedURL:(NSString *)feedURLString;
 @end

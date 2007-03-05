@@ -89,6 +89,8 @@
 		AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
 		AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
+		AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
+		AA4C8DED0B9B2A8B00E0C9B8 /* XMLTag.h in Headers */ = {isa = PBXBuildFile; fileRef = AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */; };
 		AA4F6617062B94D200D4837C /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACFDEBB0604D4D20072D140 /* AppController.m */; };
 		AA51CBF808CFEA0F00DD6535 /* BrowserPane.h in Headers */ = {isa = PBXBuildFile; fileRef = AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */; };
 		AA51CBF908CFEA0F00DD6535 /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */; };
@@ -530,6 +532,8 @@
 		AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unreadStar1.tiff; sourceTree = "<group>"; };
 		AA3F7B4108711F6A00D2B96F /* comments_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = comments_header.tiff; sourceTree = "<group>"; };
 		AA4AB5E008971B28006C843E /* vienna2style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2style.icns; sourceTree = "<group>"; };
+		AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLTag.m; sourceTree = "<group>"; };
+		AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XMLTag.h; sourceTree = "<group>"; };
 		AA517D4B0AA4DF31001E8CA1 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt_BR; path = pt_BR.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AA517D4C0AA4DF81001E8CA1 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt_BR; path = pt_BR.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
 		AA517D4D0AA4DFAD001E8CA1 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt_BR; path = pt_BR.lproj/GroupFolder.nib; sourceTree = "<group>"; };
@@ -1238,6 +1242,8 @@
 				AA328864084700B700A7AD5A /* XMLParser.m */,
 				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
 				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
+				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
+				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1562,6 +1568,7 @@
 			files = (
 				AAA56F2909EF4FC300C87343 /* XMLParser.h in Headers */,
 				AAA56F2E09EF4FF000C87343 /* RichXMLParser.h in Headers */,
+				AA4C8DED0B9B2A8B00E0C9B8 /* XMLTag.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2164,6 +2171,7 @@
 			files = (
 				AAA56F2D09EF4FE100C87343 /* XMLParser.m in Sources */,
 				AAA56F2C09EF4FD100C87343 /* RichXMLParser.m in Sources */,
+				AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

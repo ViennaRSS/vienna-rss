@@ -16,6 +16,7 @@ Thanks!
 - Added new standard style.
 - Added more built-in styles.
 - Command + T now opens new tab.
+- Accept web pages as subscription URLs and parse to extract the feed.
 
 2.1.1.2109
 ----------
