@@ -844,6 +844,13 @@
 		}
 		
 		// Parse description
+		if ([nodeName isEqualToString:@"subtitle"])
+		{
+			[self setDescription:[subTree valueOfElement]];
+			continue;
+		}			
+		
+		// Parse description
 		if ([nodeName isEqualToString:@"tagline"])
 		{
 			[self setDescription:[subTree valueOfElement]];
@@ -877,6 +884,14 @@
 			XMLParser * emailTree = [subTree treeByName:@"name"];
 			if (emailTree != nil)
 				defaultAuthor = [emailTree valueOfElement];
+			continue;
+		}
+		
+		// Parse the date when this feed was last updated
+		if ([nodeName isEqualToString:@"updated"])
+		{
+			NSString * dateString = [subTree valueOfElement];
+			[self setLastModified:[XMLParser parseXMLDate:dateString]];
 			continue;
 		}
 		
