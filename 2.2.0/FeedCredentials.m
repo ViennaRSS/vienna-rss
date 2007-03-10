@@ -126,6 +126,7 @@
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[folder release];
 	[super dealloc];
 }

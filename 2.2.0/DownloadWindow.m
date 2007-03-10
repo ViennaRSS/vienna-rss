@@ -37,6 +37,14 @@
 	return self;
 }
 
+/* dealloc
+ */
+-(void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[super dealloc];
+}
+
 /* windowDidLoad
  * Do the things that only make sense after the window file is loaded.
  */
