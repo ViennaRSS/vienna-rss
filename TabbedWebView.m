@@ -66,9 +66,10 @@
 	[self setPolicyDelegate:self];
 	[self setDownloadDelegate:[DownloadManager sharedInstance]];
 	
-	// Set up to be notified when minimum font size changes
+	// Set up to be notified of changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleMinimumFontSizeChange:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
+	[nc addObserver:self selector:@selector(handleUseJavaScriptChange:) name:@"MA_Notify_UseJavaScriptChange" object:nil];
 	
 	// Handle minimum font size & using of JavaScript
 	defaultWebPrefs = [[self preferences] retain];
