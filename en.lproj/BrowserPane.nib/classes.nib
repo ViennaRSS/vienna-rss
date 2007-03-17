@@ -5,6 +5,7 @@
                 handleAddress = id; 
                 handleGoBack = id; 
                 handleGoForward = id; 
+                handleRSSPage = id; 
                 handleReload = id; 
                 handleStopLoading = id; 
             }; 
@@ -14,19 +15,18 @@
                 addressField = NSTextField; 
                 backButton = NSButton; 
                 boxFrame = NSBox; 
-                feedIconImageLeft = NSImageView; 
-                feedIconImageRight = NSImageView; 
                 forwardButton = NSButton; 
-                gradientView = CTGradientView; 
                 iconImage = NSButton; 
                 lockIconImage = NSImageView; 
                 refreshButton = NSButton; 
+                rssPageButton = NSButton; 
                 viewwwer = NSView; 
                 webPane = TabbedWebView; 
             }; 
             SUPERCLASS = NSView; 
         }, 
         {CLASS = BrowserPaneButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
+        {CLASS = BrowserPaneButtonCell; LANGUAGE = ObjC; SUPERCLASS = NSCell; }, 
         {
             CLASS = BrowserPaneTemplate; 
             LANGUAGE = ObjC; 
