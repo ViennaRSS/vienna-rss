@@ -578,7 +578,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	if ([[filename pathExtension] isEqualToString:@"opml"])
 	{
-		BOOL returnCode = NSRunAlertPanel(NSLocalizedString(@"Import subscribtions from OPML file?", nil), NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil), NSLocalizedString(@"Import", nil), NSLocalizedString(@"Cancel", nil), nil);
+		BOOL returnCode = NSRunAlertPanel(NSLocalizedString(@"Import subscriptions from OPML file?", nil), NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil), NSLocalizedString(@"Import", nil), NSLocalizedString(@"Cancel", nil), nil);
 		if (returnCode == NSAlertAlternateReturn)
 			return NO;
 		[self importFromFile:filename];

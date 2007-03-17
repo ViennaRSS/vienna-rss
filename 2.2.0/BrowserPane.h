@@ -25,18 +25,11 @@
 @class AppController;
 @class TabbedWebView;
 
-@interface BrowserPaneButtonCell : NSCell {
-
-}
-
+@interface BrowserPaneButtonCell : NSCell {}
 @end
 
-@interface BrowserPaneButton : NSButton {
-
-}
-
+@interface BrowserPaneButton : NSButton {}
 @end
-
 
 @interface BrowserPane : NSView<BaseView> {
 	IBOutlet NSBox * boxFrame;
@@ -44,12 +37,11 @@
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
+	IBOutlet NSButton * rssPageButton;
 	IBOutlet NSTextField * addressField;
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
 	IBOutlet NSView * viewwwer;
-	IBOutlet NSImageView * feedIconImageLeft;
-	IBOutlet NSImageView * feedIconImageRight;
 	AppController * controller;
 	NSString * pageFilename;
 	NSError * lastError;
@@ -57,6 +49,7 @@
 	BOOL isLoadingFrame;
 	BOOL hasPageTitle;
 	BOOL openURLInBackground;
+	NSString * rssPageURL;
 }
 
 // Action functions
@@ -64,6 +57,7 @@
 -(IBAction)handleGoBack:(id)sender;
 -(IBAction)handleReload:(id)sender;
 -(IBAction)handleAddress:(id)sender;
+-(IBAction)handleRSSPage:(id)sender;
 
 // Accessor functions
 -(void)setController:(AppController *)theController;

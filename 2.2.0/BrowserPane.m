@@ -32,6 +32,7 @@
 #import "WebKit/WebKitErrors.h"
 #import "WebKit/WebDocument.h"
 #import "WebKit/WebPreferences.h"
+#import "RichXMLParser.h"
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -43,11 +44,10 @@
 	return NO;
 }
 
-- (NSColor *)highlightColorInView:(NSView *)controlView
+-(NSColor *)highlightColorInView:(NSView *)controlView
 {
-	return nil;//[NSColor clearColor];
+	return nil;
 } 
-
 @end
 
 @implementation BrowserPaneButton
@@ -57,20 +57,20 @@
 	return NO;
 }
 
-+ (Class)cellClass
++(Class)cellClass
 {
 	return [BrowserPaneButtonCell class];
 }
 
-- (NSColor *)highlightColorInView:(NSView *)controlView
+-(NSColor *)highlightColorInView:(NSView *)controlView
 {
-	return nil;//[NSColor clearColor];
+	return nil;
 } 
-
 @end
 
 @interface BrowserPane (Private)
 	-(void)endFrameLoad;
+	-(void)showRssPageButton:(BOOL)showButton;
 	-(void)setError:(NSError *)newError;
 @end
 
@@ -90,6 +90,7 @@
 		openURLInBackground = NO;
 		pageFilename = nil;
 		lastError = nil;
+		rssPageURL = nil;
     }
     return self;
 }
@@ -109,9 +110,6 @@
 	[[webPane preferences] setStandardFontFamily:@"Arial"];
 	[[webPane preferences] setDefaultFontSize:16];
 	
-	// Set our box attributes
-	//[boxFrame setContentViewMargins:NSMakeSize(1, 1)];
-
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
 	AddressBarCell * cell = [[[AddressBarCell alloc] init] autorelease];
@@ -127,12 +125,16 @@
 
 	// Initialise address field
 	[addressField setStringValue:@""];
-	
+
+	// The RSS page button is hidden by default
+	[self showRssPageButton:FALSE];
+
 	// Set tooltips
 	[addressField setToolTip:NSLocalizedString(@"Enter the URL here", nil)];
 	[refreshButton setToolTip:NSLocalizedString(@"Refresh the current page", nil)];
 	[backButton setToolTip:NSLocalizedString(@"Return to the previous page", nil)];
 	[forwardButton setToolTip:NSLocalizedString(@"Go forward to the next page", nil)];
+	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
 }
 
 /* setController
@@ -150,6 +152,42 @@
 -(NSString *)viewLink
 {
 	return [[self url] absoluteString];
+}
+
+/* showRssPageButton
+ * Conditionally show or hide the RSS page button.
+ */
+-(void)showRssPageButton:(BOOL)showButton
+{
+	NSRect addressFieldFrame = [addressField frame];
+	NSRect lockIconImageFrame = [lockIconImage frame];
+	NSRect rssPageButtonFrame = [rssPageButton frame];
+	static int rssPageButtonWidth = 0;
+	
+	if (rssPageButtonWidth == 0)
+		rssPageButtonWidth = (rssPageButtonFrame.origin.x + rssPageButtonFrame.size.width) - (addressFieldFrame.origin.x + addressFieldFrame.size.width);
+
+	if (showButton && [rssPageButton isHidden])
+	{
+		addressFieldFrame.size.width -= rssPageButtonWidth;
+		lockIconImageFrame.origin.x -= rssPageButtonWidth;
+		[addressField setFrame:addressFieldFrame];
+		[lockIconImage setFrame:lockIconImageFrame];
+		[[addressField superview] display];
+		[rssPageButton setHidden:FALSE];
+	}
+	else if (!showButton && ![rssPageButton isHidden])
+	{
+		[rssPageButton setHidden:TRUE];
+
+		// The -3 is because otherwise the address field snaps to the right edge of the frame. I consider
+		// this to be a bug and we should figure out how to get around this.
+		addressFieldFrame.size.width += rssPageButtonWidth - 3;
+		lockIconImageFrame.origin.x += rssPageButtonWidth - 3;
+		[addressField setFrame:addressFieldFrame];
+		[lockIconImage setFrame:lockIconImageFrame];
+		[[addressField superview] display];
+	}
 }
 
 /* setError
@@ -231,6 +269,7 @@
 	{
 		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
         [addressField setStringValue:[[[[frame provisionalDataSource] request] URL] absoluteString]];
+		[self showRssPageButton:FALSE];
 		[self setError:nil];
 		hasPageTitle = NO;
 		isLoadingFrame = YES;
@@ -250,7 +289,6 @@
 		// Show or hide the lock icon depending on whether this is a secure
 		// web page. Also shade the address bar a nice light yellow colour as
 		// Camino does.
-	
 		NSURLRequest * request = [[frame dataSource] request];
 		if ([[[request URL] scheme] isEqualToString:@"https"])
 		{
@@ -300,6 +338,26 @@
 			[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Error", nil)];
 		}
 	}
+
+	// Once the page is loaded, trawl the main frame source for possible links to RSS
+	// pages.
+	NSData * webSrc = [[[webPane mainFrame] dataSource] data];
+	RichXMLParser * xmlParser = [[RichXMLParser alloc] init];
+	NSMutableArray * arrayOfLinks = [NSMutableArray array];
+	BOOL hasRssPage;
+
+	hasRssPage = [xmlParser extractFeeds:webSrc toArray:arrayOfLinks];
+	if (hasRssPage)
+	{
+		[rssPageURL release];
+		rssPageURL = [arrayOfLinks objectAtIndex:0];
+		if (![rssPageURL hasPrefix:@"http:"])
+			rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
+		[rssPageURL retain];
+	}
+	[self showRssPageButton:hasRssPage];
+	[xmlParser release];
+
 	isLoadingFrame = NO;
 	openURLInBackground = NO;
 }
@@ -501,7 +559,7 @@
 /* handleReload
  * Reload the current web page.
  */
--(void)handleReload:(id)sender
+-(IBAction)handleReload:(id)sender
 {
 	if ([[webPane mainFrame] dataSource] != nil)
 		[webPane reload:self];
@@ -515,6 +573,25 @@
 -(void)handleStopLoading:(id)sender
 {
 	[webPane stopLoading:self];
+}
+
+/* handleRSSPage
+ * Open the RSS feed for the current page.
+ */
+-(IBAction)handleRSSPage:(id)sender
+{
+	if (rssPageURL != nil)
+	{
+		Folder * currentFolder = [NSApp currentFolder];
+		int currentFolderId = [currentFolder itemId];
+		int parentFolderId = [currentFolder parentId];
+		if ([currentFolder firstChildId] > 0)
+		{
+			parentFolderId = currentFolderId;
+			currentFolderId = 0;
+		}
+		[[NSApp delegate] createNewSubscription:rssPageURL underFolder:parentFolderId afterChild:currentFolderId];
+	}
 }
 
 /* isLoading
@@ -539,6 +616,7 @@
  */
 -(void)dealloc
 {
+	[rssPageURL release];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane stopLoading:self];
@@ -547,5 +625,4 @@
 	[pageFilename release];
 	[super dealloc];
 }
-
 @end
