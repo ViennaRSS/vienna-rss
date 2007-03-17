@@ -123,11 +123,10 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setEnclosure:(NSString *)newEnclosure
 {
-	[articleData setObject:newEnclosure forKey:MA_Field_Enclosure];
 	if (newEnclosure)
-	[articleData setObject:newEnclosure forKey:MA_Field_Enclosure];
+		[articleData setObject:newEnclosure forKey:MA_Field_Enclosure];
 	else
-	[articleData removeObjectForKey:MA_Field_Enclosure];
+		[articleData removeObjectForKey:MA_Field_Enclosure];
 }
 
 /* markEnclosureDownloaded
