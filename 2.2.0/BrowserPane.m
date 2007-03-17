@@ -167,10 +167,12 @@
 	if (rssPageButtonWidth == 0)
 		rssPageButtonWidth = (rssPageButtonFrame.origin.x + rssPageButtonFrame.size.width) - (addressFieldFrame.origin.x + addressFieldFrame.size.width);
 
+	// The 3 slop is because otherwise the address field snaps to the right edge of the frame. I consider
+	// this to be a bug and we should figure out how to get around this.
 	if (showButton && [rssPageButton isHidden])
 	{
-		addressFieldFrame.size.width -= rssPageButtonWidth;
-		lockIconImageFrame.origin.x -= rssPageButtonWidth;
+		addressFieldFrame.size.width -= rssPageButtonWidth - 3;
+		lockIconImageFrame.origin.x -= rssPageButtonWidth - 3;
 		[addressField setFrame:addressFieldFrame];
 		[lockIconImage setFrame:lockIconImageFrame];
 		[[addressField superview] display];
@@ -179,9 +181,6 @@
 	else if (!showButton && ![rssPageButton isHidden])
 	{
 		[rssPageButton setHidden:TRUE];
-
-		// The -3 is because otherwise the address field snaps to the right edge of the frame. I consider
-		// this to be a bug and we should figure out how to get around this.
 		addressFieldFrame.size.width += rssPageButtonWidth - 3;
 		lockIconImageFrame.origin.x += rssPageButtonWidth - 3;
 		[addressField setFrame:addressFieldFrame];
@@ -302,6 +301,25 @@
 			[addressField setBackgroundColor:[NSColor whiteColor]];
 			[lockIconImage setHidden:YES];
 		}
+
+		// Once the page is loaded, trawl the main frame source for possible links to RSS
+		// pages.
+		NSData * webSrc = [[[webPane mainFrame] dataSource] data];
+		RichXMLParser * xmlParser = [[RichXMLParser alloc] init];
+		NSMutableArray * arrayOfLinks = [NSMutableArray array];
+		BOOL hasRssPage;
+		
+		hasRssPage = [xmlParser extractFeeds:webSrc toArray:arrayOfLinks];
+		if (hasRssPage)
+		{
+			[rssPageURL release];
+			rssPageURL = [arrayOfLinks objectAtIndex:0];
+			if (![rssPageURL hasPrefix:@"http:"])
+				rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
+			[rssPageURL retain];
+		}
+		[self showRssPageButton:hasRssPage];
+		[xmlParser release];
 	}
 }
 
@@ -338,25 +356,6 @@
 			[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Error", nil)];
 		}
 	}
-
-	// Once the page is loaded, trawl the main frame source for possible links to RSS
-	// pages.
-	NSData * webSrc = [[[webPane mainFrame] dataSource] data];
-	RichXMLParser * xmlParser = [[RichXMLParser alloc] init];
-	NSMutableArray * arrayOfLinks = [NSMutableArray array];
-	BOOL hasRssPage;
-
-	hasRssPage = [xmlParser extractFeeds:webSrc toArray:arrayOfLinks];
-	if (hasRssPage)
-	{
-		[rssPageURL release];
-		rssPageURL = [arrayOfLinks objectAtIndex:0];
-		if (![rssPageURL hasPrefix:@"http:"])
-			rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
-		[rssPageURL retain];
-	}
-	[self showRssPageButton:hasRssPage];
-	[xmlParser release];
 
 	isLoadingFrame = NO;
 	openURLInBackground = NO;
