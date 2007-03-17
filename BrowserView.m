@@ -41,6 +41,18 @@
 {
 	//Remove the junk tab view item that we start with, since IB won't let us have no items initially
 	[tabView removeTabViewItem:[tabView tabViewItemAtIndex:0]];
+	
+	//Metal is the default
+	//[tabBarControl setStyleNamed:@"Metal"];
+	
+	[tabBarControl setHideForSingleTab:YES];
+	[tabBarControl setUseOverflowMenu:YES];
+	[tabBarControl setAllowsBackgroundTabClosing:YES];
+	[tabBarControl setAutomaticallyAnimates:YES];
+	
+	[tabBarControl setShowAddTabButton:YES];
+	[[tabBarControl addTabButton] setTarget:[NSApp delegate]];
+	[[tabBarControl addTabButton] setAction:@selector(newTab:)];
 }
 
 /* stringForToolTip
@@ -185,6 +197,11 @@
 - (void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:[inTabViewItem identifier]];	
+}
+
+- (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	return ([tabViewItem identifier] == primaryTabItemView);
 }
 
 /* saveOpenTabs
