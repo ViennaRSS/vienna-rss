@@ -21,11 +21,14 @@
 #import <Cocoa/Cocoa.h>
 #import "BaseView.h"
 
+@class PSMTabBarControl;
+
 @interface BrowserView : NSView
 {
 	NSView *primaryTabItemView;
 	
 	IBOutlet NSTabView *tabView;
+	IBOutlet PSMTabBarControl *tabBarControl;
 }
 
 // Accessors
