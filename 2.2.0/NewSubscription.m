@@ -336,7 +336,7 @@
 		urlString = [@"http://" stringByAppendingString:urlString];
 		url = [NSURL URLWithString:urlString];
 	}
-			
+
 	NSData * urlContent = [NSData dataWithContentsOfURL:url];
 	if (urlContent == nil)
 		return feedURLString;
@@ -345,9 +345,8 @@
 	// could put up UI inviting the user to pick one but I don't know if it makes sense to
 	// do this. How would they know which one would be best? We'd have to query each feed, get
 	// the title and then ask them.
-	RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 	NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
-	if ([newFeed extractFeeds:urlContent toArray:linkArray])
+	if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
 	{
 		NSString * feedPart = [linkArray objectAtIndex:0];
 		if (![feedPart hasPrefix:@"http:"])
@@ -359,7 +358,6 @@
 		else
 			feedURLString = feedPart;
 	}
-	[newFeed release];
 	return feedURLString;
 }
 

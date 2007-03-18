@@ -305,10 +305,9 @@
 		// Once the page is loaded, trawl the main frame source for possible links to RSS
 		// pages.
 		NSData * webSrc = [[[webPane mainFrame] dataSource] data];
-		RichXMLParser * xmlParser = [[RichXMLParser alloc] init];
 		NSMutableArray * arrayOfLinks = [NSMutableArray array];
 
-		if ([xmlParser extractFeeds:webSrc toArray:arrayOfLinks])
+		if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
 		{
 			[rssPageURL release];
 			rssPageURL = [arrayOfLinks objectAtIndex:0];
@@ -317,7 +316,6 @@
 			[rssPageURL retain];
 			[self showRssPageButton:YES];
 		}
-		[xmlParser release];
 	}
 }
 

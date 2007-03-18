@@ -112,7 +112,7 @@
 		{
 			inQuote = !inQuote;
 		}
-		else if (*textPtr == '>' && inTag && !inQuote)
+		else if (*textPtr == '>' && inTag)
 		{
 			NSAssert(tagStartPtr != nil, @"Somehow got into a tag without tagStartPtr!");
 
@@ -182,6 +182,7 @@
 				[tag release];
 			}
 			inTag = NO;
+			inQuote = NO;
 			tagStartPtr = nil;
 		}
 		++textPtr;
