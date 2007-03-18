@@ -320,7 +320,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>AACC2D3C0AB7531600D02B04</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>BrowserPane.m</string>
+								<string>AppController.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -328,11 +328,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>AACC2D3D0AB7531600D02B04</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>BrowserPane.m</string>
+										<string>AppController.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>AAFACFF70BAC9226009F5AFE</string>
+										<string>AAFAD0410BAD385B009F5AFE</string>
 										<key>history</key>
 										<array>
 											<string>AA4C8BFA0B9AF18C00E0C9B8</string>
@@ -418,8 +418,8 @@
 											<string>AA5B41C90BAC3E22007F9B60</string>
 											<string>AA5B41FE0BAC83B1007F9B60</string>
 											<string>AA5B420B0BAC8584007F9B60</string>
+											<string>AAFAD0310BAD36EC009F5AFE</string>
 											<string>AA5B46900BAC8C94007F9B60</string>
-											<string>AA5B46A10BAC8F34007F9B60</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -499,6 +499,7 @@
 											<string>AAFEB3C80BA4CDCD00CC28F4</string>
 											<string>AA5B41820BAC1799007F9B60</string>
 											<string>AA5B42090BAC8582007F9B60</string>
+											<string>AAFAD0320BAD36EC009F5AFE</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -1029,6 +1030,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
@@ -1168,6 +1171,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>AAFAD03C0BAD378C009F5AFE</string>
 		<string>AAFAD0050BAC9226009F5AFE</string>
 		<string>AAFAD0060BAC9226009F5AFE</string>
 		<string>AAFAD0040BAC9226009F5AFE</string>

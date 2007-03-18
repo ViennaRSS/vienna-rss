@@ -2049,7 +2049,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				}
 				else
 				{
-					if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height)
+					if (visibleRect.origin.y + visibleRect.size.height >= [theView frame].size.height - 2)
 						[self viewNextUnread:self];
 					else
 						[view scrollPageDown:self];
