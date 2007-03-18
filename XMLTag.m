@@ -96,7 +96,7 @@
 
 	while (textPtr < endPtr)
 	{
-		if (iscntrl(*textPtr) && *textPtr != '\r' && *textPtr != '\n')
+		if (iscntrl(*textPtr) && *textPtr != '\r' && *textPtr != '\n' && *textPtr != '\t')
 		{
 			// A series of control characters suggest a corrupted feed so bail
 			// out now if this happens.
