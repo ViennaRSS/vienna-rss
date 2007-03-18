@@ -25,10 +25,9 @@
 
 @interface BrowserView : NSView
 {
-	NSView *primaryTabItemView;
-	
-	IBOutlet NSTabView *tabView;
-	IBOutlet PSMTabBarControl *tabBarControl;
+	NSView * primaryTabItemView;
+	IBOutlet NSTabView * tabView;
+	IBOutlet PSMTabBarControl * tabBarControl;
 }
 
 // Accessors

@@ -308,18 +308,16 @@
 		NSData * webSrc = [[[webPane mainFrame] dataSource] data];
 		RichXMLParser * xmlParser = [[RichXMLParser alloc] init];
 		NSMutableArray * arrayOfLinks = [NSMutableArray array];
-		BOOL hasRssPage;
-		
-		hasRssPage = [xmlParser extractFeeds:webSrc toArray:arrayOfLinks];
-		if (hasRssPage)
+
+		if ([xmlParser extractFeeds:webSrc toArray:arrayOfLinks])
 		{
 			[rssPageURL release];
 			rssPageURL = [arrayOfLinks objectAtIndex:0];
 			if (![rssPageURL hasPrefix:@"http:"])
 				rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
 			[rssPageURL retain];
+			[self showRssPageButton:YES];
 		}
-		[self showRssPageButton:hasRssPage];
 		[xmlParser release];
 	}
 }
@@ -357,7 +355,7 @@
 			[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Error", nil)];
 		}
 	}
-
+	
 	isLoadingFrame = NO;
 	openURLInBackground = NO;
 }
