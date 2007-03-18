@@ -306,7 +306,7 @@
  * extract all RSS links in the data. Returns YES if we found any feeds, or NO if
  * this was not HTML.
  */
--(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray
++(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray
 {
 	BOOL success = NO;
 	NS_DURING
