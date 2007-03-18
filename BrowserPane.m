@@ -19,6 +19,7 @@
 //
 
 #import "ViennaApp.h"
+#import "Database.h"
 #import "BrowserPane.h"
 #import "TabbedWebView.h"
 #import "Constants.h"
@@ -589,6 +590,16 @@
 			parentFolderId = currentFolderId;
 			currentFolderId = 0;
 		}
+		
+		Folder * folder = [[Database sharedDatabase] folderFromFeedURL:rssPageURL];
+		if (folder != nil)
+		{
+			NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", nil),
+			NSLocalizedString(@"Already subscribed body", nil),
+			NSLocalizedString(@"OK", nil), nil, nil);
+			return;
+		}
+
 		[[NSApp delegate] createNewSubscription:rssPageURL underFolder:parentFolderId afterChild:currentFolderId];
 	}
 }
