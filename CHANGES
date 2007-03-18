@@ -6,7 +6,7 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-2.1.1.2110
+2.1.2.2110
 ----------
 - Fixed bug: empty trash warning did not reappear after unhiding Vienna.
 - Changed button tooltip to match behavior.
