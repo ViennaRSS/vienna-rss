@@ -24,11 +24,15 @@
 #import <PSMTabBarControl/PSMTabBarControl.h>
 
 @interface NSTabView (BrowserViewAdditions)
-- (NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
+	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;
 @end
 
 @implementation NSTabView (BrowserViewAdditions)
-- (NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier
+
+/* tabViewItemWithIdentifier
+ * Returns the tab view item that matches the specified identifier.
+ */
+-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier
 {
 	int i = [self indexOfTabViewItemWithIdentifier:identifier];
 	return (i != NSNotFound ? [self tabViewItemAtIndex:i] : nil);
@@ -37,7 +41,7 @@
 
 @implementation BrowserView
 
-- (void)awakeFromNib
+-(void)awakeFromNib
 {
 	//Remove the junk tab view item that we start with, since IB won't let us have no items initially
 	[tabView removeTabViewItem:[tabView tabViewItemAtIndex:0]];
@@ -194,12 +198,19 @@
 	[tabView selectNextTabViewItem:self];
 }
 
-- (void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
+/* didSelectTabViewItem
+ * Called when the tab is changed.
+ */
+-(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:[inTabViewItem identifier]];	
 }
 
-- (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
+/* disableTabCloseForTabViewItem
+ * Returns whether the tab close should be disabled for the specified item. We disable the close button
+ * for the primary item.
+ */
+-(BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
 {
 	return ([tabViewItem identifier] == primaryTabItemView);
 }
