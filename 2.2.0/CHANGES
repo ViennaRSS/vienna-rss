@@ -9,7 +9,6 @@ Thanks!
 2.2.0.2200
 ----------
 - Added ability to drop OPML files onto Vienna's dock icon.
-- Replaced old toolbar icons with nicer ones by Davide Casali (Folletto).
 - Added support for RSS/Atom enclosures.
 - Add conditional support in templates.
 - Overhauled UI.
@@ -17,6 +16,16 @@ Thanks!
 - Added more built-in styles.
 - Command + T now opens new tab.
 - Accept web pages as subscription URLs and parse to extract the feed.
+- Show RSS button in browser if the web page links to an RSS feed. Clicking the button subscribes to that feed.
+- New tab bar control. (Thanks to Evan Schoenberg).
+
+2.1.2.2110
+----------
+- Fixed bug: empty trash warning did not reappear after unhiding Vienna.
+- Changed button tooltip to match behavior.
+- New and nicer toolbar icons made by Davide Casali (Folletto).
+- Fixed bug: move articles to Trash preference was counting back to beginning of day rather than by 24 hours.
+- Fixed bug: change in JavaScript preference didn't take effect until relaunching.
 
 2.1.1.2109
 ----------
