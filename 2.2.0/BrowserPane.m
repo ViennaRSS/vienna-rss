@@ -301,21 +301,6 @@
 			[addressField setBackgroundColor:[NSColor whiteColor]];
 			[lockIconImage setHidden:YES];
 		}
-
-		// Once the page is loaded, trawl the main frame source for possible links to RSS
-		// pages.
-		NSData * webSrc = [[[webPane mainFrame] dataSource] data];
-		NSMutableArray * arrayOfLinks = [NSMutableArray array];
-
-		if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
-		{
-			[rssPageURL release];
-			rssPageURL = [arrayOfLinks objectAtIndex:0];
-			if (![rssPageURL hasPrefix:@"http:"])
-				rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
-			[rssPageURL retain];
-			[self showRssPageButton:YES];
-		}
 	}
 }
 
@@ -378,7 +363,23 @@
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
 	if (frame == [webPane mainFrame])
+	{
+		// Once the frame is loaded, trawl the source for possible links to RSS
+		// pages.
+		NSData * webSrc = [[frame dataSource] data];
+		NSMutableArray * arrayOfLinks = [NSMutableArray array];
+		
+		if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
+		{
+			[rssPageURL release];
+			rssPageURL = [arrayOfLinks objectAtIndex:0];
+			if (![rssPageURL hasPrefix:@"http:"])
+				rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
+			[rssPageURL retain];
+			[self showRssPageButton:YES];
+		}
 		[self endFrameLoad];
+	}
 }
 
 /* didReceiveTitle
