@@ -16,7 +16,7 @@
 ** sqliteRegisterBuildinFunctions() found at the bottom of the file.
 ** All other code has file scope.
 **
-** $Id: func.c 388 2006-04-05 06:35:46Z stevewpalmer $
+** $Id: func.c,v 1.136 2007/01/29 17:58:28 drh Exp $
 */
 #include "sqliteInt.h"
 #include <ctype.h>
@@ -121,7 +121,13 @@ static void absFunc(sqlite3_context *context, int argc, sqlite3_value **argv){
   switch( sqlite3_value_type(argv[0]) ){
     case SQLITE_INTEGER: {
       i64 iVal = sqlite3_value_int64(argv[0]);
-      if( iVal<0 ) iVal = iVal * -1;
+      if( iVal<0 ){
+        if( (iVal<<1)==0 ){
+          sqlite3_result_error(context, "integer overflow", -1);
+          return;
+        }
+        iVal = -iVal;
+      } 
       sqlite3_result_int64(context, iVal);
       break;
     }
@@ -131,7 +137,7 @@ static void absFunc(sqlite3_context *context, int argc, sqlite3_value **argv){
     }
     default: {
       double rVal = sqlite3_value_double(argv[0]);
-      if( rVal<0 ) rVal = rVal * -1.0;
+      if( rVal<0 ) rVal = -rVal;
       sqlite3_result_double(context, rVal);
       break;
     }
@@ -195,10 +201,11 @@ static void roundFunc(sqlite3_context *context, int argc, sqlite3_value **argv){
     if( n>30 ) n = 30;
     if( n<0 ) n = 0;
   }
-  if( SQLITE_NULL==sqlite3_value_type(argv[0]) ) return;
+  if( sqlite3_value_type(argv[0])==SQLITE_NULL ) return;
   r = sqlite3_value_double(argv[0]);
   sqlite3_snprintf(sizeof(zBuf),zBuf,"%.*f",n,r);
-  sqlite3_result_text(context, zBuf, -1, SQLITE_TRANSIENT);
+  sqlite3AtoF(zBuf, &r);
+  sqlite3_result_double(context, r);
 }
 
 /*
@@ -258,9 +265,30 @@ static void randomFunc(
   int argc,
   sqlite3_value **argv
 ){
-  int r;
+  sqlite_int64 r;
   sqlite3Randomness(sizeof(r), &r);
-  sqlite3_result_int(context, r);
+  if( (r<<1)==0 ) r = 0;  /* Prevent 0x8000.... as the result so that we */
+                          /* can always do abs() of the result */
+  sqlite3_result_int64(context, r);
+}
+
+/*
+** Implementation of randomblob(N).  Return a random blob
+** that is N bytes long.
+*/
+static void randomBlob(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
+  int n;
+  unsigned char *p;
+  assert( argc==1 );
+  n = sqlite3_value_int(argv[0]);
+  if( n<1 ) n = 1;
+  p = sqlite3_malloc(n);
+  sqlite3Randomness(n, p);
+  sqlite3_result_blob(context, (char*)p, n, sqlite3_free);
 }
 
 /*
@@ -539,6 +567,12 @@ static void versionFunc(
   sqlite3_result_text(context, sqlite3_version, -1, SQLITE_STATIC);
 }
 
+/* Array for converting from half-bytes (nybbles) into ASCII hex
+** digits. */
+static const char hexdigits[] = {
+  '0', '1', '2', '3', '4', '5', '6', '7',
+  '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' 
+};
 
 /*
 ** EXPERIMENTAL - This is not an official function.  The interface may
@@ -564,10 +598,6 @@ static void quoteFunc(sqlite3_context *context, int argc, sqlite3_value **argv){
       break;
     }
     case SQLITE_BLOB: {
-      static const char hexdigits[] = { 
-        '0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' 
-      };
       char *zText = 0;
       int nBlob = sqlite3_value_bytes(argv[0]);
       char const *zBlob = sqlite3_value_blob(argv[0]);
@@ -613,11 +643,41 @@ static void quoteFunc(sqlite3_context *context, int argc, sqlite3_value **argv){
   }
 }
 
+/*
+** The hex() function.  Interpret the argument as a blob.  Return
+** a hexadecimal rendering as text.
+*/
+static void hexFunc(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
+  int i, n;
+  const unsigned char *pBlob;
+  char *zHex, *z;
+  assert( argc==1 );
+  pBlob = sqlite3_value_blob(argv[0]);
+  n = sqlite3_value_bytes(argv[0]);
+  z = zHex = sqlite3_malloc(n*2 + 1);
+  if( zHex==0 ) return;
+  for(i=0; i<n; i++, pBlob++){
+    unsigned char c = *pBlob;
+    *(z++) = hexdigits[(c>>4)&0xf];
+    *(z++) = hexdigits[c&0xf];
+  }
+  *z = 0;
+  sqlite3_result_text(context, zHex, n*2, sqlite3_free);
+}
+
 #ifdef SQLITE_SOUNDEX
 /*
 ** Compute the soundex encoding of a word.
 */
-static void soundexFunc(sqlite3_context *context, int argc, sqlite3_value **argv){
+static void soundexFunc(
+  sqlite3_context *context,
+  int argc,
+  sqlite3_value **argv
+){
   char zResult[8];
   const u8 *zIn;
   int i, j;
@@ -633,13 +693,20 @@ static void soundexFunc(sqlite3_context *context, int argc, sqlite3_value **argv
   };
   assert( argc==1 );
   zIn = (u8*)sqlite3_value_text(argv[0]);
+  if( zIn==0 ) zIn = (u8*)"";
   for(i=0; zIn[i] && !isalpha(zIn[i]); i++){}
   if( zIn[i] ){
+    u8 prevcode = iCode[zIn[i]&0x7f];
     zResult[0] = toupper(zIn[i]);
     for(j=1; j<4 && zIn[i]; i++){
       int code = iCode[zIn[i]&0x7f];
       if( code>0 ){
-        zResult[j++] = code + '0';
+        if( code!=prevcode ){
+          prevcode = code;
+          zResult[j++] = code + '0';
+        }
+      }else{
+        prevcode = 0;
       }
     }
     while( j<4 ){
@@ -649,6 +716,26 @@ static void soundexFunc(sqlite3_context *context, int argc, sqlite3_value **argv
     sqlite3_result_text(context, zResult, 4, SQLITE_TRANSIENT);
   }else{
     sqlite3_result_text(context, "?000", 4, SQLITE_STATIC);
+  }
+}
+#endif
+
+#ifndef SQLITE_OMIT_LOAD_EXTENSION
+/*
+** A function that loads a shared-library extension then returns NULL.
+*/
+static void loadExt(sqlite3_context *context, int argc, sqlite3_value **argv){
+  const char *zFile = (const char *)sqlite3_value_text(argv[0]);
+  const char *zProc = 0;
+  sqlite3 *db = sqlite3_user_data(context);
+  char *zErrMsg = 0;
+
+  if( argc==2 ){
+    zProc = (const char *)sqlite3_value_text(argv[1]);
+  }
+  if( sqlite3_load_extension(db, zFile, zProc, &zErrMsg) ){
+    sqlite3_result_error(context, zErrMsg, -1);
+    sqlite3_free(zErrMsg);
   }
 }
 #endif
@@ -817,9 +904,11 @@ static void test_error(
 */
 typedef struct SumCtx SumCtx;
 struct SumCtx {
-  LONGDOUBLE_TYPE sum;    /* Sum of terms */
-  i64 cnt;                /* Number of elements summed */
-  u8 approx;              /* True if sum is approximate */
+  double rSum;      /* Floating point sum */
+  i64 iSum;         /* Integer sum */   
+  i64 cnt;          /* Number of elements summed */
+  u8 overflow;      /* True if integer overflow seen */
+  u8 approx;        /* True if non-integer value was input to the sum */
 };
 
 /*
@@ -829,16 +918,8 @@ struct SumCtx {
 ** that it returns NULL if it sums over no inputs.  TOTAL returns
 ** 0.0 in that case.  In addition, TOTAL always returns a float where
 ** SUM might return an integer if it never encounters a floating point
-** value.
-**
-** I am told that SUM() should raise an exception if it encounters
-** a integer overflow.  But after pondering this, I decided that 
-** behavior leads to brittle programs.  So instead, I have coded
-** SUM() to revert to using floating point if it encounters an
-** integer overflow.  The answer may not be exact, but it will be
-** close.  If the SUM() function returns an integer, the value is
-** exact.  If SUM() returns a floating point value, it means the
-** value might be approximated.
+** value.  TOTAL never fails, but SUM might through an exception if
+** it overflows an integer.
 */
 static void sumStep(sqlite3_context *context, int argc, sqlite3_value **argv){
   SumCtx *p;
@@ -849,13 +930,18 @@ static void sumStep(sqlite3_context *context, int argc, sqlite3_value **argv){
   if( p && type!=SQLITE_NULL ){
     p->cnt++;
     if( type==SQLITE_INTEGER ){
-      p->sum += sqlite3_value_int64(argv[0]);
-      if( !p->approx ){
-        i64 iVal;
-        p->approx = p->sum!=(LONGDOUBLE_TYPE)(iVal = (i64)p->sum);
+      i64 v = sqlite3_value_int64(argv[0]);
+      p->rSum += v;
+      if( (p->approx|p->overflow)==0 ){
+        i64 iNewSum = p->iSum + v;
+        int s1 = p->iSum >> (sizeof(i64)*8-1);
+        int s2 = v       >> (sizeof(i64)*8-1);
+        int s3 = iNewSum >> (sizeof(i64)*8-1);
+        p->overflow = (s1&s2&~s3) | (~s1&~s2&s3);
+        p->iSum = iNewSum;
       }
     }else{
-      p->sum += sqlite3_value_double(argv[0]);
+      p->rSum += sqlite3_value_double(argv[0]);
       p->approx = 1;
     }
   }
@@ -864,10 +950,12 @@ static void sumFinalize(sqlite3_context *context){
   SumCtx *p;
   p = sqlite3_aggregate_context(context, 0);
   if( p && p->cnt>0 ){
-    if( p->approx ){
-      sqlite3_result_double(context, p->sum);
+    if( p->overflow ){
+      sqlite3_result_error(context,"integer overflow",-1);
+    }else if( p->approx ){
+      sqlite3_result_double(context, p->rSum);
     }else{
-      sqlite3_result_int64(context, (i64)p->sum);
+      sqlite3_result_int64(context, p->iSum);
     }
   }
 }
@@ -875,13 +963,13 @@ static void avgFinalize(sqlite3_context *context){
   SumCtx *p;
   p = sqlite3_aggregate_context(context, 0);
   if( p && p->cnt>0 ){
-    sqlite3_result_double(context, p->sum/(double)p->cnt);
+    sqlite3_result_double(context, p->rSum/(double)p->cnt);
   }
 }
 static void totalFinalize(sqlite3_context *context){
   SumCtx *p;
   p = sqlite3_aggregate_context(context, 0);
-  sqlite3_result_double(context, p ? p->sum : 0.0);
+  sqlite3_result_double(context, p ? p->rSum : 0.0);
 }
 
 /*
@@ -985,8 +1073,10 @@ void sqlite3RegisterBuiltinFunctions(sqlite3 *db){
     { "coalesce",          -1, 0, SQLITE_UTF8,    0, ifnullFunc },
     { "coalesce",           0, 0, SQLITE_UTF8,    0, 0          },
     { "coalesce",           1, 0, SQLITE_UTF8,    0, 0          },
+    { "hex",                1, 0, SQLITE_UTF8,    0, hexFunc    },
     { "ifnull",             2, 0, SQLITE_UTF8,    1, ifnullFunc },
     { "random",            -1, 0, SQLITE_UTF8,    0, randomFunc },
+    { "randomblob",         1, 0, SQLITE_UTF8,    0, randomBlob },
     { "nullif",             2, 0, SQLITE_UTF8,    1, nullifFunc },
     { "sqlite_version",     0, 0, SQLITE_UTF8,    0, versionFunc},
     { "quote",              1, 0, SQLITE_UTF8,    0, quoteFunc  },
@@ -995,6 +1085,10 @@ void sqlite3RegisterBuiltinFunctions(sqlite3 *db){
     { "total_changes",      0, 1, SQLITE_UTF8,    0, total_changes },
 #ifdef SQLITE_SOUNDEX
     { "soundex",            1, 0, SQLITE_UTF8, 0, soundexFunc},
+#endif
+#ifndef SQLITE_OMIT_LOAD_EXTENSION
+    { "load_extension",     1, 1, SQLITE_UTF8,    0, loadExt },
+    { "load_extension",     2, 1, SQLITE_UTF8,    0, loadExt },
 #endif
 #ifdef SQLITE_TEST
     { "randstr",               2, 0, SQLITE_UTF8, 0, randStr    },
@@ -1061,8 +1155,9 @@ void sqlite3RegisterBuiltinFunctions(sqlite3 *db){
     }
   }
   sqlite3RegisterDateTimeFunctions(db);
+  sqlite3_overload_function(db, "MATCH", 2);
 #ifdef SQLITE_SSE
-  sqlite3SseFunctions(db);
+  (void)sqlite3SseFunctions(db);
 #endif
 #ifdef SQLITE_CASE_SENSITIVE_LIKE
   sqlite3RegisterLikeFunctions(db, 1);
