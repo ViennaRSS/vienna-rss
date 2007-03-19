@@ -65,15 +65,14 @@
 #define etDYNSTRING   7 /* Dynamically allocated strings. %z */
 #define etPERCENT     8 /* Percent symbol. %% */
 #define etCHARX       9 /* Characters. %c */
-#define etERROR      10 /* Used to indicate no such conversion type */
 /* The rest are extensions, not normally found in printf() */
-#define etCHARLIT    11 /* Literal characters.  %' */
-#define etSQLESCAPE  12 /* Strings with '\'' doubled.  %q */
-#define etSQLESCAPE2 13 /* Strings with '\'' doubled and enclosed in '',
+#define etCHARLIT    10 /* Literal characters.  %' */
+#define etSQLESCAPE  11 /* Strings with '\'' doubled.  %q */
+#define etSQLESCAPE2 12 /* Strings with '\'' doubled and enclosed in '',
                           NULL pointers replaced by SQL NULL.  %Q */
-#define etTOKEN      14 /* a pointer to a Token structure */
-#define etSRCLIST    15 /* a pointer to a SrcList */
-#define etPOINTER    16 /* The %p conversion */
+#define etTOKEN      13 /* a pointer to a Token structure */
+#define etSRCLIST    14 /* a pointer to a SrcList */
+#define etPOINTER    15 /* The %p conversion */
 
 
 /*
@@ -225,7 +224,7 @@ static int vxprintf(
   etByte flag_long;          /* True if "l" flag is present */
   etByte flag_longlong;      /* True if the "ll" flag is present */
   etByte done;               /* Loop termination flag */
-  UINT64_TYPE longvalue;     /* Value for integer types */
+  sqlite_uint64 longvalue;   /* Value for integer types */
   LONGDOUBLE_TYPE realvalue; /* Value for real types */
   const et_info *infop;      /* Pointer to the appropriate info structure */
   char buf[etBUFSIZE];       /* Conversion buffer */
@@ -329,17 +328,22 @@ static int vxprintf(
     }
     /* Fetch the info entry for the field */
     infop = 0;
-    xtype = etERROR;
     for(idx=0; idx<etNINFO; idx++){
       if( c==fmtinfo[idx].fmttype ){
         infop = &fmtinfo[idx];
         if( useExtended || (infop->flags & FLAG_INTERN)==0 ){
           xtype = infop->type;
+        }else{
+          return -1;
         }
         break;
       }
     }
     zExtra = 0;
+    if( infop==0 ){
+      return -1;
+    }
+
 
     /* Limit the precision to prevent overflowing buf[] during conversion */
     if( precision>etBUFSIZE-40 && (infop->flags & FLAG_STRING)==0 ){
@@ -444,7 +448,7 @@ static int vxprintf(
         for(idx=precision, rounder=0.4999; idx>0; idx--, rounder*=0.1);
 #else
         /* It makes more sense to use 0.5 */
-        for(idx=precision, rounder=0.5; idx>0; idx--, rounder*=0.1);
+        for(idx=precision, rounder=0.5; idx>0; idx--, rounder*=0.1){}
 #endif
         if( xtype==etFLOAT ) realvalue += rounder;
         /* Normalize realvalue to within 10.0 > realvalue >= 1.0 */
@@ -621,7 +625,8 @@ static int vxprintf(
         if( needQuote ) bufpt[j++] = '\'';
         bufpt[j] = 0;
         length = j;
-        if( precision>=0 && precision<length ) length = precision;
+        /* The precision is ignored on %q and %Q */
+        /* if( precision>=0 && precision<length ) length = precision; */
         break;
       }
       case etTOKEN: {
@@ -645,15 +650,6 @@ static int vxprintf(
         length = width = 0;
         break;
       }
-      case etERROR:
-        buf[0] = '%';
-        buf[1] = c;
-        errorflag = 0;
-        idx = 1+(c!=0);
-        (*func)(arg,"%",idx);
-        count += idx;
-        if( c==0 ) fmt--;
-        break;
     }/* End switch over the format type */
     /*
     ** The text of the conversion is pointed to by "bufpt" and is
@@ -810,27 +806,26 @@ char *sqlite3MPrintf(const char *zFormat, ...){
 }
 
 /*
-** Print into memory obtained from malloc().  Do not use the internal
-** %-conversion extensions.  This routine is for use by external users.
+** Print into memory obtained from sqlite3_malloc().  Omit the internal
+** %-conversion extensions.
+*/
+char *sqlite3_vmprintf(const char *zFormat, va_list ap){
+  char zBase[SQLITE_PRINT_BUF_SIZE];
+  return base_vprintf(sqlite3_realloc, 0, zBase, sizeof(zBase), zFormat, ap);
+}
+
+/*
+** Print into memory obtained from sqlite3_malloc()().  Omit the internal
+** %-conversion extensions.
 */
 char *sqlite3_mprintf(const char *zFormat, ...){
   va_list ap;
   char *z;
-  char zBuf[200];
-
-  va_start(ap,zFormat);
-  z = base_vprintf((void*(*)(void*,int))realloc, 0, 
-                   zBuf, sizeof(zBuf), zFormat, ap);
+  char zBase[SQLITE_PRINT_BUF_SIZE];
+  va_start(ap, zFormat);
+  z = base_vprintf(sqlite3_realloc, 0, zBase, sizeof(zBase), zFormat, ap);
   va_end(ap);
   return z;
-}
-
-/* This is the varargs version of sqlite3_mprintf.  
-*/
-char *sqlite3_vmprintf(const char *zFormat, va_list ap){
-  char zBuf[200];
-  return base_vprintf((void*(*)(void*,int))realloc, 0,
-                      zBuf, sizeof(zBuf), zFormat, ap);
 }
 
 /*
@@ -862,7 +857,7 @@ void sqlite3DebugPrintf(const char *zFormat, ...){
   va_start(ap, zFormat);
   base_vprintf(0, 0, zBuf, sizeof(zBuf), zFormat, ap);
   va_end(ap);
-  fprintf(stdout,"%d: %s", getpid(), zBuf);
+  fprintf(stdout,"%s", zBuf);
   fflush(stdout);
 }
 #endif

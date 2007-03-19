@@ -88,6 +88,15 @@
 		AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
 		AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
+		AA473ED00BAF2625000BF2E5 /* vtab.c in Sources */ = {isa = PBXBuildFile; fileRef = AA473ECF0BAF2625000BF2E5 /* vtab.c */; };
+		AA473ED80BAF2633000BF2E5 /* fts1_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = AA473ED10BAF2633000BF2E5 /* fts1_hash.c */; };
+		AA473ED90BAF2633000BF2E5 /* fts1_hash.h in Headers */ = {isa = PBXBuildFile; fileRef = AA473ED20BAF2633000BF2E5 /* fts1_hash.h */; };
+		AA473EDA0BAF2633000BF2E5 /* fts1_porter.c in Sources */ = {isa = PBXBuildFile; fileRef = AA473ED30BAF2633000BF2E5 /* fts1_porter.c */; };
+		AA473EDB0BAF2633000BF2E5 /* fts1_tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = AA473ED40BAF2633000BF2E5 /* fts1_tokenizer.h */; };
+		AA473EDC0BAF2633000BF2E5 /* fts1_tokenizer1.c in Sources */ = {isa = PBXBuildFile; fileRef = AA473ED50BAF2633000BF2E5 /* fts1_tokenizer1.c */; };
+		AA473EDD0BAF2633000BF2E5 /* fts1.c in Sources */ = {isa = PBXBuildFile; fileRef = AA473ED60BAF2633000BF2E5 /* fts1.c */; };
+		AA473EDE0BAF2633000BF2E5 /* fts1.h in Headers */ = {isa = PBXBuildFile; fileRef = AA473ED70BAF2633000BF2E5 /* fts1.h */; };
+		AA473EED0BAF2675000BF2E5 /* loadext.c in Sources */ = {isa = PBXBuildFile; fileRef = AA473EEC0BAF2675000BF2E5 /* loadext.c */; };
 		AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
 		AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
 		AA4C8DED0B9B2A8B00E0C9B8 /* XMLTag.h in Headers */ = {isa = PBXBuildFile; fileRef = AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */; };
@@ -532,6 +541,15 @@
 		AA38C19109FB19FA00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en; path = "en.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unreadStar1.tiff; sourceTree = "<group>"; };
 		AA3F7B4108711F6A00D2B96F /* comments_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = comments_header.tiff; sourceTree = "<group>"; };
+		AA473ECF0BAF2625000BF2E5 /* vtab.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = vtab.c; sourceTree = "<group>"; };
+		AA473ED10BAF2633000BF2E5 /* fts1_hash.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = fts1_hash.c; sourceTree = "<group>"; };
+		AA473ED20BAF2633000BF2E5 /* fts1_hash.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fts1_hash.h; sourceTree = "<group>"; };
+		AA473ED30BAF2633000BF2E5 /* fts1_porter.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = fts1_porter.c; sourceTree = "<group>"; };
+		AA473ED40BAF2633000BF2E5 /* fts1_tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fts1_tokenizer.h; sourceTree = "<group>"; };
+		AA473ED50BAF2633000BF2E5 /* fts1_tokenizer1.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = fts1_tokenizer1.c; sourceTree = "<group>"; };
+		AA473ED60BAF2633000BF2E5 /* fts1.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = fts1.c; sourceTree = "<group>"; };
+		AA473ED70BAF2633000BF2E5 /* fts1.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = fts1.h; sourceTree = "<group>"; };
+		AA473EEC0BAF2675000BF2E5 /* loadext.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = loadext.c; sourceTree = "<group>"; };
 		AA4AB5E008971B28006C843E /* vienna2style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2style.icns; sourceTree = "<group>"; };
 		AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLTag.m; sourceTree = "<group>"; };
 		AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = XMLTag.h; sourceTree = "<group>"; };
@@ -1284,25 +1302,31 @@
 			children = (
 				AABFC02A09B806C70087CBB9 /* alter.c */,
 				AABFC02B09B806C70087CBB9 /* analyze.c */,
-				AABFC02C09B806C80087CBB9 /* callback.c */,
-				AABFC02D09B806C80087CBB9 /* complete.c */,
-				AABFC02F09B806C80087CBB9 /* keywordhash.h */,
-				AABFC03109B806C80087CBB9 /* prepare.c */,
-				AABFC03309B806C80087CBB9 /* vdbefifo.c */,
 				AAB8217D0999C2AC00F3C730 /* attach.c */,
 				AAB8217E0999C2AC00F3C730 /* auth.c */,
 				AAB8217F0999C2AC00F3C730 /* btree.c */,
 				AAB821800999C2AC00F3C730 /* btree.h */,
 				AAB821810999C2AC00F3C730 /* build.c */,
+				AABFC02C09B806C80087CBB9 /* callback.c */,
+				AABFC02D09B806C80087CBB9 /* complete.c */,
 				AAB821820999C2AD00F3C730 /* config.h */,
 				AAB821830999C2AD00F3C730 /* date.c */,
 				AAB821840999C2AD00F3C730 /* delete.c */,
 				AAB821850999C2AD00F3C730 /* expr.c */,
+				AA473ED10BAF2633000BF2E5 /* fts1_hash.c */,
+				AA473ED20BAF2633000BF2E5 /* fts1_hash.h */,
+				AA473ED30BAF2633000BF2E5 /* fts1_porter.c */,
+				AA473ED40BAF2633000BF2E5 /* fts1_tokenizer.h */,
+				AA473ED50BAF2633000BF2E5 /* fts1_tokenizer1.c */,
+				AA473ED60BAF2633000BF2E5 /* fts1.c */,
+				AA473ED70BAF2633000BF2E5 /* fts1.h */,
 				AAB821860999C2AD00F3C730 /* func.c */,
 				AAB821870999C2AD00F3C730 /* hash.c */,
 				AAB821880999C2AD00F3C730 /* hash.h */,
 				AAB821890999C2AD00F3C730 /* insert.c */,
+				AABFC02F09B806C80087CBB9 /* keywordhash.h */,
 				AAB8218A0999C2AD00F3C730 /* legacy.c */,
+				AA473EEC0BAF2675000BF2E5 /* loadext.c */,
 				AAB8218B0999C2AD00F3C730 /* main.c */,
 				AAB8218C0999C2AD00F3C730 /* opcodes.c */,
 				AAB8218D0999C2AD00F3C730 /* opcodes.h */,
@@ -1322,6 +1346,7 @@
 				AAB8219A0999C2AD00F3C730 /* parse.c */,
 				AAB8219B0999C2AD00F3C730 /* parse.h */,
 				AAB8219C0999C2AD00F3C730 /* pragma.c */,
+				AABFC03109B806C80087CBB9 /* prepare.c */,
 				AAB8219D0999C2AD00F3C730 /* printf.c */,
 				AAB8219E0999C2AD00F3C730 /* random.c */,
 				AAB8219F0999C2AD00F3C730 /* select.c */,
@@ -1340,6 +1365,8 @@
 				AAB821AC0999C2AD00F3C730 /* vdbeaux.c */,
 				AAB821AD0999C2AD00F3C730 /* vdbeInt.h */,
 				AAB821AE0999C2AD00F3C730 /* vdbemem.c */,
+				AABFC03309B806C80087CBB9 /* vdbefifo.c */,
+				AA473ECF0BAF2625000BF2E5 /* vtab.c */,
 				AAB821AF0999C2AD00F3C730 /* where.c */,
 			);
 			path = sqlite;
@@ -1562,6 +1589,9 @@
 				B203AD540B78B37100A4A9EF /* SourceListSplitView.h in Headers */,
 				B277922B0B7F867700C6094A /* PolishedPopupButton.h in Headers */,
 				B2DF80D20B7F94EF00E6BB5F /* ContentSplitView.h in Headers */,
+				AA473ED90BAF2633000BF2E5 /* fts1_hash.h in Headers */,
+				AA473EDB0BAF2633000BF2E5 /* fts1_tokenizer.h in Headers */,
+				AA473EDE0BAF2633000BF2E5 /* fts1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2166,6 +2196,12 @@
 				B203AD550B78B37100A4A9EF /* SourceListSplitView.m in Sources */,
 				B277922C0B7F867700C6094A /* PolishedPopupButton.m in Sources */,
 				B2DF80D30B7F94EF00E6BB5F /* ContentSplitView.m in Sources */,
+				AA473ED00BAF2625000BF2E5 /* vtab.c in Sources */,
+				AA473ED80BAF2633000BF2E5 /* fts1_hash.c in Sources */,
+				AA473EDA0BAF2633000BF2E5 /* fts1_porter.c in Sources */,
+				AA473EDC0BAF2633000BF2E5 /* fts1_tokenizer1.c in Sources */,
+				AA473EDD0BAF2633000BF2E5 /* fts1.c in Sources */,
+				AA473EED0BAF2675000BF2E5 /* loadext.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2535,7 +2571,7 @@
 					OS_UNIX,
 					LOG_QUERY_TIMES,
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
@@ -2579,7 +2615,7 @@
 					NDEBUG,
 					OS_UNIX,
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
@@ -2625,7 +2661,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
@@ -2662,7 +2698,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUILD_NUMBER = 2200;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
@@ -2690,7 +2726,7 @@
 					i386,
 				);
 				BUILD_NUMBER = 2200;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
@@ -2718,7 +2754,7 @@
 					i386,
 				);
 				BUILD_NUMBER = 2200;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
