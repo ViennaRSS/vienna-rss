@@ -208,7 +208,9 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[[self window] setInitialFirstResponder:urlField];
 
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:urlField];
+	[nc addObserver:self selector:@selector(handleUrlTextDidChange:) name:NSControlTextDidChangeNotification object:urlField];
+	[nc addObserver:self selector:@selector(handleFolderNameTextDidChange:) name:NSControlTextDidChangeNotification object:folderName];
+	[folderName setEditable:YES];
 }
 
 /* updateFolderName
@@ -261,13 +263,22 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
 }
 
-/* handleTextDidChange [delegate]
+/* handleUrlTextDidChange [delegate]
  * This function is called when the contents of the url field is changed.
  * We disable the Subscribe button if the input fields are empty or enable it otherwise.
  */
--(void)handleTextDidChange:(NSNotification *)aNotification
+-(void)handleUrlTextDidChange:(NSNotification *)aNotification
 {
 	[self enableValidateButton];
+}
+
+/* handleFolderNameTextDidChange [delegate]
+ * This function is called when the contents of the folder name field is changed.
+ * We update the folder's name.
+ */
+-(void)handleFolderNameTextDidChange:(NSNotification *)aNotification
+{
+	[[Database sharedDatabase] setFolderName:infoFolderId newName:[folderName stringValue]];
 }
 
 /* enableValidateButton
