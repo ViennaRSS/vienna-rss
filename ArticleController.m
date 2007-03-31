@@ -837,10 +837,8 @@
 	int folderId = [(NSNumber *)[nc object] intValue];
 	if (folderId != currentFolderId)
 		return;
-	
-	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
-	if (IsSmartFolder(folder) || IsTrashFolder(folder))
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+
+	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
 /* setArticleToPreserve
