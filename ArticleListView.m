@@ -32,7 +32,9 @@
 #import "ArticleRef.h"
 #import "ArticleFilter.h"
 #import "XMLParser.h"
+#import "Field.h"
 #import "WebKit/WebKit.h"
+#import "PopupButton.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -283,6 +285,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[field setWidth:width];
 	}
 	
+	// Set the default fonts
+	[self setTableViewFont];
+	
 	// In condensed mode, the summary field takes up the whole space.
 	// The method setColumnAutoresizingStyle does not exist in Mac OS X 10.3.9.
 	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
@@ -290,6 +295,41 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	else
 		[articleList setAutoresizesAllColumnsToFit:NO];
 	
+	// Set up the corner button for chosing the visible columns.
+	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
+	NSArray * fields = [db arrayOfFields];
+	NSEnumerator * enumerator = [fields objectEnumerator];
+	Field * columnField;
+
+	while ((columnField = [enumerator nextObject]) != nil)
+	{
+		// Filter out columns we don't view in the article list. Later we should have an attribute in the
+		// field object based on which columns are visible in the tableview.
+		if ([columnField tag] != MA_FieldID_Text && 
+			[columnField tag] != MA_FieldID_GUID &&
+			[columnField tag] != MA_FieldID_Comments &&
+			[columnField tag] != MA_FieldID_Deleted &&
+			[columnField tag] != MA_FieldID_Parent &&
+			[columnField tag] != MA_FieldID_Headlines &&
+			[columnField tag] != MA_FieldID_EnclosureDownloaded)
+		{
+			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[columnField displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
+			[menuItem setRepresentedObject:columnField];
+			[columnsSubMenu addItem:menuItem];
+			[menuItem release];
+		}
+	}
+	
+	NSRect buttonFrame = [[articleList cornerView] frame];
+    PopupButton *button = [[PopupButton alloc] initWithFrame:buttonFrame];
+    [button setBezelStyle:NSSmallSquareBezelStyle];
+	[button setImage: [NSImage imageNamed:@"column_cornerview"]];
+	[button setBordered:NO];
+	[articleList setCornerView:button];
+	[button setMenu:columnsSubMenu];
+    [button release];
+
+
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
@@ -320,9 +360,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleList setDelegate:self];
 	[articleList setDataSource:self];
 	[articleList setTarget:self];
-
-	// Set the default fonts
-	[self setTableViewFont];
 }
 
 /* singleClickRow
