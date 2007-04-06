@@ -1286,8 +1286,6 @@
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
-				B2DF80D00B7F94EF00E6BB5F /* ContentSplitView.h */,
-				B2DF80D10B7F94EF00E6BB5F /* ContentSplitView.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1391,6 +1389,8 @@
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
+				B2DF80D00B7F94EF00E6BB5F /* ContentSplitView.h */,
+				B2DF80D10B7F94EF00E6BB5F /* ContentSplitView.m */,
 				AA94574A061C7E060090FE26 /* ExtDateFormatter.h */,
 				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
