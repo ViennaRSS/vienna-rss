@@ -22,12 +22,9 @@
 
 @interface AddressBarCell : NSTextFieldCell {
 	bool hasSecureImage;
-	bool hasFeedIcon;
 }
 
 // Accessor functions
 -(void)setHasSecureImage:(BOOL)flag;
 -(BOOL)hasSecureImage;
--(void)setHasFeedIcon:(BOOL)flag;
--(BOOL)hasFeedIcon;
 @end
