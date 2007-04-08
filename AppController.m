@@ -61,8 +61,10 @@
 	-(void)handleFolderNameChange:(NSNotification *)nc;
 	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 	-(void)handleReloadPreferences:(NSNotification *)nc;
+	-(void)handleShowAppInStatusBar:(NSNotification *)nc;
 	-(void)localiseMenus:(NSArray *)arrayOfMenus;
 	-(void)updateNewArticlesNotification;
+	-(void)showAppInStatusBar;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initStylesMenu;
@@ -111,6 +113,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		growlAvailable = NO;
+		appStatusItem = nil;
 		scriptsMenuItem = nil;
 		checkTimer = nil;
 		didCompleteInitialisation = NO;
@@ -149,7 +152,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-	
+	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
+
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
 	
@@ -224,6 +228,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Add Scripts menu if we have any scripts
 	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self initScriptsMenu];
+	
+	// Add the app to the status bar if needed.
+	[self showAppInStatusBar];
 	
 	// Use Growl if it is installed
 	[GrowlApplicationBridge setGrowlDelegate:self];
@@ -646,6 +653,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[sv1 setFrame:leftFrame];
 		[sv2 setFrame:rightFrame];
 	}
+}
+
+/* exitVienna
+ * Alias for the terminate command.
+ */
+-(IBAction)exitVienna:(id)sender
+{
+	[NSApp terminate:nil];
 }
 
 /* reportLayout
@@ -1587,6 +1602,37 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* showAppInStatusBar
+ * Add or remove the app icon from the system status bar.
+ */
+-(void)showAppInStatusBar
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	if ([prefs showAppInStatusBar] && appStatusItem == nil)
+	{
+		appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:23] retain];
+		[appStatusItem setImage:[NSImage imageNamed:@"statusBarIcon.tiff"]];
+		[appStatusItem setHighlightMode:YES];
+
+		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
+		[statusBarMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
+		[statusBarMenu addItem:copyOfMenuWithAction(@selector(markAllSubscriptionsRead:))];
+		[statusBarMenu addItem:[NSMenuItem separatorItem]];
+		[statusBarMenu addItem:copyOfMenuWithAction(@selector(showPreferencePanel:))];
+		[statusBarMenu addItem:copyOfMenuWithAction(@selector(handleAbout:))];
+		[statusBarMenu addItem:[NSMenuItem separatorItem]];
+		[statusBarMenu addItem:copyOfMenuWithAction(@selector(exitVienna:))];
+		[appStatusItem setMenu:statusBarMenu];
+		[statusBarMenu release];
+	}
+	else if (![prefs showAppInStatusBar] && appStatusItem != nil)
+	{
+		[[NSStatusBar systemStatusBar] removeStatusItem:appStatusItem];
+		[appStatusItem release];
+		appStatusItem = nil;
+	}
+}
+
 /* handleRSSLink
  * Handle feed://<rss> links. If we're already subscribed to the link then make the folder
  * active. Otherwise offer to subscribe to the link.
@@ -1671,6 +1717,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[foldersTree updateAlternateMenuTitle];
 	[mainArticleView updateAlternateMenuTitle];
 	[self updateNewArticlesNotification];
+}
+
+/* handleShowAppInStatusBar
+ * Called when MA_Notify_ShowAppInStatusBarChanged is broadcast. Call the common code to
+ * add or remove the app icon from the status bar.
+ */
+-(void)handleShowAppInStatusBar:(NSNotification *)nc
+{
+	[self showAppInStatusBar];
 }
 
 /* handleCheckFrequencyChange
@@ -3130,6 +3185,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[activityViewer release];
 	[checkTimer release];
 	[appDockMenu release];
+	[appStatusItem release];
 	[db release];
 	[super dealloc];
 }

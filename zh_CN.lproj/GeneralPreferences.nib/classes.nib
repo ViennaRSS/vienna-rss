@@ -12,6 +12,7 @@
                 changeNewArticlesNotification = id; 
                 changeOpenLinksInBackground = id; 
                 changeOpenLinksInExternalBrowser = id; 
+                changeShowAppInMenuBar = id; 
                 selectDefaultLinksHandler = id; 
             }; 
             CLASS = GeneralPreferences; 
@@ -30,6 +31,7 @@
                 newArticlesNotificationNothingButton = NSButtonCell; 
                 openLinksInBackground = NSButton; 
                 openLinksInExternalBrowser = NSButton; 
+                showAppInMenuBar = NSButton; 
             }; 
             SUPERCLASS = NSWindowController; 
         }

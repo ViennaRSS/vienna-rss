@@ -18,6 +18,7 @@ Thanks!
 - Accept web pages as subscription URLs and parse to extract the feed.
 - Show RSS button in browser if the web page links to an RSS feed. Clicking the button subscribes to that feed.
 - New tab bar control. (Thanks to Evan Schoenberg).
+- Add option to add Vienna to the system status bar.
 
 2.1.2.2110
 ----------

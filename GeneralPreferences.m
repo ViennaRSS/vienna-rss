@@ -104,6 +104,9 @@
 	// Set download folder
 	[self updateDownloadsPopUp:[prefs downloadFolder]];
 	
+	// Set whether the application is shown in the menu bar
+	[showAppInMenuBar setState:[prefs showAppInStatusBar] ? NSOnState : NSOffState];
+
 	// Set whether links are opened in the background
 	[openLinksInBackground setState:[prefs openLinksInBackground] ? NSOnState : NSOffState];
 	
@@ -222,6 +225,14 @@
 -(IBAction)changeOpenLinksInBackground:(id)sender
 {
 	[[Preferences standardPreferences] setOpenLinksInBackground:[sender state] == NSOnState];
+}
+
+/* changeShowAppInMenuBar
+ * Sets whether or not the application icon is shown in the menu bar.
+ */
+-(IBAction)changeShowAppInMenuBar:(id)sender
+{
+	[[Preferences standardPreferences] setShowAppInStatusBar:[sender state] == NSOnState];
 }
 
 /* changeOpenLinksInExternalBrowser
