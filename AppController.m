@@ -62,6 +62,7 @@
 	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 	-(void)handleReloadPreferences:(NSNotification *)nc;
 	-(void)handleShowAppInStatusBar:(NSNotification *)nc;
+	-(void)setAppStatusBarIcon;
 	-(void)localiseMenus:(NSArray *)arrayOfMenus;
 	-(void)updateNewArticlesNotification;
 	-(void)showAppInStatusBar;
@@ -1039,6 +1040,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* openVienna
+ * Calls into showMainWindow but activates the app first.
+ */
+-(IBAction)openVienna:(id)sender
+{
+	[NSApp activateIgnoringOtherApps:YES];
+	[self showMainWindow:sender];
+}
+
 /* showMainWindow
  * Display the main window.
  */
@@ -1094,8 +1104,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)growlNotificationWasClicked:(id)clickContext
 {
-	[NSApp activateIgnoringOtherApps:YES];
-	[self showMainWindow:self];
+	[self openVienna:self];
 	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
 	if (unreadArticles != nil)
 		[foldersTree selectFolder:[unreadArticles itemId]];
@@ -1416,9 +1425,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int currentCountOfUnread = [db countOfUnread];
 	if (currentCountOfUnread == lastCountOfUnread)
 		return;
+	lastCountOfUnread = currentCountOfUnread;
+
+	// Always update the app status icon first
+	[self setAppStatusBarIcon];
 	
 	// Don't show a count if there are no unread articles
-	lastCountOfUnread = currentCountOfUnread;
 	if (currentCountOfUnread <= 0)
 	{
 		[NSApp setApplicationIconImage:originalIcon];
@@ -1482,6 +1494,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
 	NSString * versionString = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version];
 	NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:versionString, @"ApplicationVersion", @"", @"Version", nil, nil];
+	[NSApp activateIgnoringOtherApps:YES];
 	[NSApp orderFrontStandardAboutPanelWithOptions:d];
 }
 
@@ -1526,6 +1539,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (!preferenceController)
 		preferenceController = [[NewPreferencesController alloc] init];
+	[NSApp activateIgnoringOtherApps:YES];
 	[preferenceController showWindow:self];
 }
 
@@ -1610,11 +1624,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([prefs showAppInStatusBar] && appStatusItem == nil)
 	{
-		appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:23] retain];
-		[appStatusItem setImage:[NSImage imageNamed:@"statusBarIcon.tiff"]];
+		appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
+		[self setAppStatusBarIcon];
 		[appStatusItem setHighlightMode:YES];
 
 		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
+		[statusBarMenu addItem:menuWithTitleAndAction(@"Open Vienna", @selector(openVienna:))];
+		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
 		[statusBarMenu addItem:copyOfMenuWithAction(@selector(markAllSubscriptionsRead:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
@@ -1630,6 +1646,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[[NSStatusBar systemStatusBar] removeStatusItem:appStatusItem];
 		[appStatusItem release];
 		appStatusItem = nil;
+	}
+}
+
+/* setAppStatusBarIcon
+ * Set the appropriate application status bar icon depending on whether or not we have
+ * any unread messages.
+ */
+-(void)setAppStatusBarIcon
+{
+	if (appStatusItem != nil)
+	{
+		if (lastCountOfUnread == 0)
+		{
+			[appStatusItem setImage:[NSImage imageNamed:@"statusBarIcon.tiff"]];
+			[appStatusItem setTitle:nil];
+		}
+		else
+		{
+			[appStatusItem setImage:[NSImage imageNamed:@"statusBarIconUnread.tiff"]];
+			[appStatusItem setTitle:[NSString stringWithFormat:@"%u", lastCountOfUnread]];
+		}
 	}
 }
 
