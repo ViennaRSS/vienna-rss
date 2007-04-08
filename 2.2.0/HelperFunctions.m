@@ -88,6 +88,14 @@ NSMenuItem * copyOfMenuWithAction(SEL theSelector)
 	return (item) ? [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease] : nil;
 }
 
+/* menuWithTitleAndAction
+ * Returns an NSMenuItem with the specified menu and action.
+ */
+NSMenuItem * menuWithTitleAndAction(NSString * theTitle, SEL theSelector)
+{
+	return [[[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""] autorelease];
+}
+
 /* loadMapFromPath
  * Iterates all files and folders in the specified path and adds them to the given mappings
  * dictionary. If foldersOnly is YES, only folders are added. If foldersOnly is NO then only
