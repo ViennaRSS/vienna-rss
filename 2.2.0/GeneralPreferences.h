@@ -29,6 +29,7 @@
 	IBOutlet NSButton * checkOnStartUp;
 	IBOutlet NSButton * openLinksInBackground;
 	IBOutlet NSButton * openLinksInExternalBrowser;
+	IBOutlet NSButton * showAppInMenuBar;
 	IBOutlet NSPopUpButton * downloadFolder;
 	IBOutlet NSButtonCell * newArticlesNotificationNothingButton;
 	IBOutlet NSButtonCell * newArticlesNotificationBadgeButton;
@@ -50,4 +51,5 @@
 -(IBAction)changeDownloadFolder:(id)sender;
 -(IBAction)changeNewArticlesNotification:(id)sender;
 -(IBAction)changeMarkReadBehaviour:(id)sender;
+-(IBAction)changeShowAppInMenuBar:(id)sender;
 @end

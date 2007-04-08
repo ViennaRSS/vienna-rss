@@ -76,6 +76,7 @@
 	NSMutableDictionary * scriptPathMappings;
 	NSImage * originalIcon;
 	NSMenu * appDockMenu;
+	NSStatusItem * appStatusItem;
 	int progressCount;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
@@ -88,6 +89,7 @@
 
 // Menu action items
 -(IBAction)handleAbout:(id)sender;
+-(IBAction)exitVienna:(id)sender;
 -(IBAction)showPreferencePanel:(id)sender;
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;

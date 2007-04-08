@@ -164,6 +164,7 @@ static Preferences * _standardPreferences = nil;
 		displayStyle = [[userPrefs valueForKey:MAPref_ActiveStyleName] retain];
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
 		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
+		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
@@ -228,6 +229,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
+	[defaultValues setObject:boolNo forKey:MAPref_ShowAppInStatusBar];
 	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Filter_All] forKey:MAPref_FilterMode];
@@ -881,5 +883,26 @@ static Preferences * _standardPreferences = nil;
 -(void)handleUpdateRestart:(NSNotification *)nc
 {
 	[[NSUserDefaults standardUserDefaults] setObject:profilePath forKey:MAPref_Profile_Path];
+}
+
+/* showAppInStatusBar
+ * Returns whether Vienna shows an icon in the status bar.
+ */
+-(BOOL)showAppInStatusBar
+{
+	return showAppInStatusBar;
+}
+
+/* setShowAppInStatusBar
+ * Specifies whether Vienna shows an icon in the status bar.
+ */
+-(void)setShowAppInStatusBar:(BOOL)show
+{
+	if (showAppInStatusBar != show)
+	{
+		showAppInStatusBar = show;
+		[self setBool:showAppInStatusBar forKey:MAPref_ShowAppInStatusBar];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
+	}
 }
 @end

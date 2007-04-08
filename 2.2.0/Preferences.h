@@ -41,6 +41,7 @@
 	BOOL hasPrefs;
 	BOOL showFolderImages;
 	BOOL useJavaScript;
+	BOOL showAppInStatusBar;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
@@ -169,4 +170,8 @@
 // Automatically sort folders tree
 -(int)foldersTreeSortMethod;
 -(void)setFoldersTreeSortMethod:(int)newMethod;
+
+// Do we show an icon in the status bar?
+-(BOOL)showAppInStatusBar;
+-(void)setShowAppInStatusBar:(BOOL)show;
 @end

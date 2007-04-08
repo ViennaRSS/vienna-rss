@@ -16,6 +16,7 @@
                 doSelectScript = id; 
                 editFolder = id; 
                 emptyTrash = id; 
+                exitVienna = id; 
                 getInfo = id; 
                 goBack = id; 
                 goForward = id; 
