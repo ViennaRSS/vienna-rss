@@ -213,11 +213,11 @@ typedef enum {
 			{
 				if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed])
 				{
-				RefreshItem * newItem = [[RefreshItem alloc] init];
-				[newItem setFolder:folder];
-				[newItem setType:MA_Refresh_Feed];
-				[refreshArray addObject:newItem];
-				[newItem release];
+					RefreshItem * newItem = [[RefreshItem alloc] init];
+					[newItem setFolder:folder];
+					[newItem setType:MA_Refresh_Feed];
+					[refreshArray addObject:newItem];
+					[newItem release];
 				}
 			}
 		}

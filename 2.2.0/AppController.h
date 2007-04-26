@@ -147,6 +147,7 @@
 -(IBAction)makeTextLarger:(id)sender;
 -(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)newTab:(id)sender;
+-(IBAction)downloadEnclosure:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;

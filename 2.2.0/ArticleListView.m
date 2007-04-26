@@ -340,6 +340,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(markFlagged:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(deleteMessage:))];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(restoreMessage:))];
+	[articleListMenu addItem:copyOfMenuWithAction(@selector(downloadEnclosure:))];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
 	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
