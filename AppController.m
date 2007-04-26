@@ -2235,7 +2235,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (isAccessible(urlString))
 		{
 			Folder * folder = [db folderFromID:folderId];
-			[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder]];
+			[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
 		}
 	}
 }
@@ -2752,7 +2752,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self handleCheckFrequencyChange:nil];
 	
 	if (![self isConnecting])
-		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders]];		
+		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders] ignoringSubscriptionStatus:NO];		
 }
 
 /* refreshSelectedSubscriptions
@@ -2761,7 +2761,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshSelectedSubscriptions:(id)sender
 {
-	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders]];
+	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders] ignoringSubscriptionStatus:YES];
 }
 
 /* cancelAllRefreshes
