@@ -315,7 +315,21 @@ static DownloadManager * _sharedDownloadManager = nil;
  * Remove the specified item from the list.
  */
 -(void)removeItem:(DownloadItem *)item
-{
+{	
+	[downloadsList removeObject:item];
+	[self archiveDownloadsList];
+}
+
+/* cancelItem
+ * Abort the specified item and remove it from the list
+ */
+-(void)cancelItem:(DownloadItem *)item
+{	
+	[[item download] cancel];
+	[item setState:DOWNLOAD_CANCELLED];
+	NSAssert(activeDownloads > 0, @"cancelItem called with zero activeDownloads count!");
+	--activeDownloads;
+	[self notifyDownloadItemChange:item];
 	[downloadsList removeObject:item];
 	[self archiveDownloadsList];
 }

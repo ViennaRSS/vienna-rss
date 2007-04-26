@@ -78,6 +78,9 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", nil) action:@selector(handleDoubleClick:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", nil) action:@selector(showInFinder:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
+
+
 	[table setMenu:downloadMenu];
 	[downloadMenu release];
 
@@ -162,6 +165,22 @@
 		[table reloadData];
 	}
 }
+
+/* cancelDownload
+ * Abort the selected download and delete the partially downloaded file.
+ */
+-(void)cancelDownload:(id)sender
+{
+	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	int index = [table selectedRow];
+	if (index != -1)
+	{
+		DownloadItem * item = [list objectAtIndex:index];
+		[[DownloadManager sharedInstance] cancelItem:item];
+		[table reloadData];
+	}
+}
+	
 
 /* numberOfRowsInTableView [datasource]
  * Datasource for the table view. Return the total number of rows we'll display which
