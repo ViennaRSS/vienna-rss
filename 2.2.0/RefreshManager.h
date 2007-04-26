@@ -37,7 +37,7 @@
 
 +(RefreshManager *)sharedManager;
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
--(void)refreshSubscriptions:(NSArray *)foldersArray;
+-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)cancelAll;
 -(int)countOfNewArticles;
 -(int)totalConnections;

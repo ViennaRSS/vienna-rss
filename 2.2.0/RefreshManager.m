@@ -195,7 +195,7 @@ typedef enum {
 /* refreshSubscriptions
  * Add the folders specified in the foldersArray to the refreshArray.
  */
--(void)refreshSubscriptions:(NSArray *)foldersArray
+-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {
 	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
 	
@@ -206,16 +206,19 @@ typedef enum {
 	{
 		Folder * folder = [foldersArray objectAtIndex:index];
 		if (IsGroupFolder(folder))
-			[self refreshSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
-		else if (IsRSSFolder(folder) && !IsUnsubscribed(folder))
+			[self refreshSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]] ignoringSubscriptionStatus:NO];
+		else if (IsRSSFolder(folder))
 		{
-			if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed])
+			if (!IsUnsubscribed(folder) || ignoreSubStatus)
 			{
+				if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed])
+				{
 				RefreshItem * newItem = [[RefreshItem alloc] init];
 				[newItem setFolder:folder];
 				[newItem setType:MA_Refresh_Feed];
 				[refreshArray addObject:newItem];
 				[newItem release];
+				}
 			}
 		}
 	}
@@ -377,7 +380,7 @@ typedef enum {
 	Folder * folder = (Folder *)[nc object];
 	[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_NeedCredentials];
 	[authQueue removeObject:folder];
-	[self refreshSubscriptions:[NSArray arrayWithObject:folder]];
+	[self refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
 	
 	// Get the next one in the queue, if any
 	[self getCredentialsForFolder];
