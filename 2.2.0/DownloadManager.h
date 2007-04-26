@@ -25,6 +25,7 @@
 #define DOWNLOAD_STARTED		1
 #define DOWNLOAD_COMPLETED		2
 #define DOWNLOAD_FAILED			3
+#define DOWNLOAD_CANCELLED		4
 
 @interface DownloadItem : NSObject<NSCoding> {
 	long long expectedSize;
