@@ -19,6 +19,7 @@ Thanks!
 - Show RSS button in browser if the web page links to an RSS feed. Clicking the button subscribes to that feed.
 - New tab bar control. (Thanks to Evan Schoenberg).
 - Add option to add Vienna to the system status bar.
+- Added Basque localization. (Thanks to Aitor Zubizarreta).
 
 2.1.2.2110
 ----------
