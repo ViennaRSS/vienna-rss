@@ -971,6 +971,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[browserPane activateAddressBar];
 }
 
+/* downloadEnclosure
+ * Downloads the enclosures of the selected articles
+ */
+-(IBAction)downloadEnclosure:(id)sender
+{
+	// TODO: implement...
+}
+
 /* createNewTab
  * Open the specified URL in a new tab.
  */
@@ -2820,7 +2828,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[activeView webView] makeTextSmaller:sender];
 }
 
-/* makeTextLarge
+/* makeTextLarger
  * Make text size larger in the article pane.
  * In the future, we may want this to make text size larger in the article list instead.
  */
@@ -3205,6 +3213,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		return (thisArticle != nil && isMainWindowVisible && isArticleView);
 	}
+	else if (theAction == @selector(downloadEnclosure:))
+	{
+		if ([[mainArticleView markedArticleRange] count] > 1)
+			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", nil)];
+		else
+			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", nil)];
+		return ([[self selectedArticle] hasEnclosure]);
+	}
+
 	
 	return YES;
 }

@@ -14,6 +14,7 @@
                 deleteMessage = id; 
                 doOpenScriptsFolder = id; 
                 doSelectScript = id; 
+                downloadEnclosure = id; 
                 editFolder = id; 
                 emptyTrash = id; 
                 exitVienna = id; 
