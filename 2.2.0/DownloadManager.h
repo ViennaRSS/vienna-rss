@@ -63,6 +63,7 @@
 -(NSArray *)downloadsList;
 -(int)activeDownloads;
 -(void)clearList;
+-(void)cancelItem:(DownloadItem *)item;
 -(void)removeItem:(DownloadItem *)item;
 -(void)downloadFile:(NSString *)filename fromURL:(NSString *)url;
 @end
