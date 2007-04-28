@@ -254,13 +254,15 @@
 		}
 	}
 	NSString * scheme = [[[request URL] scheme] lowercaseString];
-	if ([scheme isEqualToString:@"mailto"] || [scheme isEqualToString:@"itms"]) // itms: iTunes Music Store
+	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"])
+	{
+		[listener use];
+	}
+	else
 	{
 		[listener ignore];
 		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
-		return;
 	}
-	[listener use];
 }
 
 /* handleMinimumFontSizeChange
