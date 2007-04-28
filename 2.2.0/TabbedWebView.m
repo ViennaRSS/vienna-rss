@@ -253,7 +253,8 @@
 			}
 		}
 	}
-	if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"])
+	NSString * scheme = [[[request URL] scheme] lowercaseString];
+	if ([scheme isEqualToString:@"mailto"] || [scheme isEqualToString:@"itms"]) // itms: iTunes Music Store
 	{
 		[listener ignore];
 		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
