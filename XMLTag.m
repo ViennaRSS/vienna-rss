@@ -134,7 +134,7 @@
 					++tagEndPtr;
 				
 				// Now gather all attributes
-				while (*tagEndPtr != '>')
+				while (*tagEndPtr && *tagEndPtr != '>')
 				{
 					// Tag close?
 					if (*tagEndPtr == '/')
