@@ -131,7 +131,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 	NSDictionary * args = [cmd evaluatedArguments];
 	NSArray * argArray = [self evaluatedArrayOfFolders:[args objectForKey:@"Folder"] withCommand:cmd];
 	if (argArray != nil)
-		[[RefreshManager sharedManager] refreshSubscriptions:argArray ignoringSubscriptionStatus:NO];
+		[[RefreshManager sharedManager] refreshSubscriptions:argArray ignoringSubscriptionStatus:YES];
 
 	return nil;
 }
