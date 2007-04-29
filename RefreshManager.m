@@ -380,7 +380,7 @@ typedef enum {
 	Folder * folder = (Folder *)[nc object];
 	[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_NeedCredentials];
 	[authQueue removeObject:folder];
-	[self refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
+	[self refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:YES];
 	
 	// Get the next one in the queue, if any
 	[self getCredentialsForFolder];
