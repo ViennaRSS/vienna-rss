@@ -972,7 +972,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* downloadEnclosure
- * Downloads the enclosures of the selected articles
+ * Downloads the enclosures of the currently selected articles
  */
 -(IBAction)downloadEnclosure:(id)sender
 {

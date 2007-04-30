@@ -73,7 +73,7 @@
 				NSString * key;
 
 				while ((key = [enumerator nextObject]) != nil)
-					[feedSource addItemWithTitle:key];
+					[feedSource addItemWithTitle:NSLocalizedString(key, nil)];
 				[feedSource setEnabled:YES];
 				[feedSource selectItemWithTitle:@"URL"];
 			}
