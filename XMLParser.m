@@ -278,7 +278,7 @@
 -(NSString *)xmlForTree
 {
 	NSData * data = (NSData *)CFXMLTreeCreateXMLData(kCFAllocatorDefault, tree);
-	NSString * xmlString = [NSString stringWithCString:[data bytes] length:[data length]];
+	NSString * xmlString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	CFRelease(data);
 	return xmlString;
 }
