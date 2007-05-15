@@ -18,10 +18,12 @@
                 editFolder = id; 
                 emptyTrash = id; 
                 exitVienna = id; 
+                exportSubscriptions = id; 
                 getInfo = id; 
                 goBack = id; 
                 goForward = id; 
                 handleAbout = id; 
+                importSubscriptions = id; 
                 keyboardShortcutsHelp = id; 
                 mailLinkToArticlePage = id; 
                 makeTextLarger = id; 
