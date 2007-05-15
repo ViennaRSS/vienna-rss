@@ -169,8 +169,9 @@
 	[xmlString replaceString:@"><" withString:@">\n<"];
 	[xmlString appendString:@"\n"];
 
-	[xmlString writeToFile:fqFilename atomically:YES];
+    NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding]; // [xmlString writeToFile:atomically:] will write xmlString in other encoding than UTF-8
 	[xmlString release];
+    [xmlData writeToFile:fqFilename atomically:YES];
 	
 	// Clean up at the end
 	[newTree release];
