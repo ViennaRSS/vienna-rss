@@ -1935,7 +1935,7 @@ static Database * _sharedDatabase = nil;
 	Field * field = [self fieldByName:MA_Field_Folder];
 	NSString * operatorString = (scopeFlags & MA_Scope_Inclusive) ? @"=" : @"<>";
 	NSString * conditionString = (scopeFlags & MA_Scope_Inclusive) ? @" or " : @" and ";
-	BOOL subScope = (scopeFlags & MA_Scope_SubFolders);
+	BOOL subScope = (scopeFlags & MA_Scope_SubFolders) ? YES : NO; // Avoid problems casting into BOOL.
 	int folderId;
 
 	// If folder is nil, rather than report an error, default to some impossible value
