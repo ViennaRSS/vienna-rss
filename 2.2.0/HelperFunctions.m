@@ -245,5 +245,5 @@ BOOL testForKey(int kKeyCode)
 	unsigned char map[16];
 
 	GetKeys((void *)&map);
-	return map[(kKeyCode >> 3)] & (1 << (kKeyCode & 7));
+	return (map[(kKeyCode >> 3)] & (1 << (kKeyCode & 7))) ? YES : NO; // Avoid problems casting into BOOL
 }
