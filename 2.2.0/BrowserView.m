@@ -158,8 +158,25 @@
 -(void)closeTabItemView:(NSView *)tabItemView
 {
 	if (tabItemView != primaryTabItemView) {
-		[tabView removeTabViewItem:[tabView tabViewItemWithIdentifier:tabItemView]];
+		NSTabViewItem *tabViewItem = [tabView tabViewItemWithIdentifier:tabItemView];
+		int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
+
+		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
+			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
+		}
+		
+		[tabView removeTabViewItem:tabViewItem];
 	}
+}
+
+- (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
+{
+	int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
+	if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
+		[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
+	}
+
+	return YES;
 }
 
 /* countOfTabs
