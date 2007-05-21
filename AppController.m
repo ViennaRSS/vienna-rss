@@ -889,7 +889,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
 		Preferences * prefs = [Preferences standardPreferences];
-		[self createNewTab:[item representedObject] inBackground:[prefs openLinksInBackground]];
+
+		BOOL openInBackground = [prefs openLinksInBackground];
+		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask) {
+			//As Safari does, 'shift' inverts this behavior
+			openInBackground = !openInBackground;
+		}
+
+		[self createNewTab:[item representedObject] inBackground:openInBackground];
 	}
 }
 
@@ -950,9 +957,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL openURLInVienna = [prefs openLinksInVienna];
 	if (!openInPreferredBrowserFlag)
 		openURLInVienna = (!openURLInVienna);
-	if (openURLInVienna)
-		[self createNewTab:url inBackground:[prefs openLinksInBackground]];
-	else
+	if (openURLInVienna) {
+		BOOL openInBackground = [prefs openLinksInBackground];
+		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask) {
+			//As Safari does, 'shift' inverts this behavior
+			openInBackground = !openInBackground;
+		}
+
+		[self createNewTab:url inBackground:openInBackground];
+	} else
 		[self openURLInDefaultBrowser:url];
 }
 
