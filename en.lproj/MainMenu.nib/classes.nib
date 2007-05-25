@@ -1,6 +1,5 @@
 {
     IBClasses = (
-        {CLASS = AMPolishedButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             ACTIONS = {
                 blogWith = id; 
@@ -89,7 +88,7 @@
                 searchField = NSSearchField; 
                 sortByMenu = NSMenuItem; 
                 spinner = NSProgressIndicator; 
-                splitView1 = KFSplitView; 
+                splitView1 = NSSplitView; 
                 statusText = NSTextField; 
                 stylesMenu = NSMenuItem; 
                 unifiedListView = UnifiedDisplayView; 
@@ -110,6 +109,7 @@
                 articleList = MessageListView; 
                 articleListHeader = TexturedHeader; 
                 articleText = ArticleView; 
+                columnsPopupMenu = PopupButton; 
                 controller = AppController; 
                 filtersPopupMenu = PopupButton; 
                 foldersTree = FoldersTree; 
@@ -145,12 +145,6 @@
                 updateWindow = NSWindow; 
             }; 
             SUPERCLASS = NSWindowController; 
-        }, 
-        {
-            CLASS = ContentSplitView; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {bottomSubview = id; }; 
-            SUPERCLASS = KFSplitView; 
         }, 
         {
             ACTIONS = {
@@ -189,24 +183,10 @@
             }; 
             SUPERCLASS = NSView; 
         }, 
-        {
-            CLASS = KFSplitView; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {kfDelegate = id; }; 
-            SUPERCLASS = NSSplitView; 
-        }, 
         {CLASS = MessageListView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
-        {
-            CLASS = PSMTabBarControl; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {delegate = id; partnerView = id; style = id; tabView = NSTabView; }; 
-            SUPERCLASS = NSControl; 
-        }, 
-        {CLASS = PolishedPopupButton; LANGUAGE = ObjC; SUPERCLASS = AMPolishedButton; }, 
-        {CLASS = PolishedWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             ACTIONS = {checkForUpdates = id; }; 
@@ -215,12 +195,6 @@
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
-        {
-            CLASS = SourceListSplitView; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {leftSubview = id; rightSubview = id; }; 
-            SUPERCLASS = KFSplitView; 
-        }, 
         {
             ACTIONS = {printDocument = id; }; 
             CLASS = TabbedWebView; 

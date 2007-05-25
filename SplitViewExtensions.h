@@ -1,9 +1,9 @@
 //
-//  PolishedPopupButton.h
+//  SplitViewExtensions.h
 //  Vienna
 //
-//  Created by Michael Stroeck on 11.02.07.
-//  Copyright (c) 2007 Michael Stroeck. All rights reserved.
+//  Created by Steve on 6/15/05.
+//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,16 +19,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMPolishedButton.h"
 
-@interface PolishedPopupButton: AMPolishedButton {
-	NSMenu * theMenu;
-	NSFont * popupFont;
-	BOOL popBelow;
-}
-
-// Public functions
--(NSMenu *)menu;
--(void)setSmallMenu:(BOOL)useSmallMenu;
--(void)setMenu:(NSMenu *)menu;
+@interface NSSplitView (SplitViewExtensions)
+	-(NSArray *)layout;
+	-(void)setLayout:(NSArray *)newLayout;
 @end

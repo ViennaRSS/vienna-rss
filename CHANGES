@@ -22,6 +22,8 @@ Thanks!
 - Added Basque localization. (Thanks to Aitor Zubizarreta).
 - If Vienna doesn't handle the URL scheme (e.g., itms), open the URL with the default application for its scheme.
 - Allow refreshing of unsubscribed feeds if they are specifically selected. (Thanks to ytrewq1 for submitting a patch.)
+- Updated to SQLite 3.3.17.
+- Change exported file format to UTF8. (Thanks to Kiyu Horiuti).
 
 2.1.2.2110
 ----------

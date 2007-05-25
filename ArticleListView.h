@@ -25,7 +25,6 @@
 #import "ArticleBaseView.h"
 #import "BrowserView.h"
 #import "PopupButton.h"
-#import "KFSplitView.h"
 
 @class AppController;
 @class ArticleController;
@@ -41,9 +40,10 @@
 	IBOutlet TexturedHeader * articleListHeader;
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
-	IBOutlet KFSplitView * splitView2;
+	IBOutlet NSSplitView * splitView2;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet PopupButton * filtersPopupMenu;
+	IBOutlet PopupButton * columnsPopupMenu;
 
 	int currentSelectedRow;
 	int tableLayout;

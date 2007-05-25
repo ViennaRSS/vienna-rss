@@ -20,12 +20,11 @@
 
 #import <Foundation/Foundation.h>
 #import "TableViewExtensions.h"
-#import "KFSplitView.h"
 
 @interface ActivityViewer : NSWindowController {
 	IBOutlet NSWindow * activityWindow;
 	IBOutlet ExtendedTableView * activityTable;
-	IBOutlet KFSplitView * splitView;
+	IBOutlet NSSplitView * splitView;
 	IBOutlet NSTextView * activityDetail;
 	NSArray * allItems;
 }

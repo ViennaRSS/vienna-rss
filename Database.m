@@ -814,7 +814,7 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 	}
-	
+
 	// Here we create the folder anew.
 	int newItemId = [self createFolderOnDatabase:name underParent:parentId withType:type];
 	if (newItemId != -1)
