@@ -23,6 +23,7 @@
 #import "Constants.h"
 #import "AppController.h"
 #import "ArticleController.h"
+#import "SplitViewExtensions.h"
 #import "MessageListView.h"
 #import "ArticleView.h"
 #import "FoldersTree.h"
@@ -150,7 +151,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  * Make sure the article pane width isn't shrunk beyond a minimum width. Otherwise it looks
  * untidy.
  */
--(float)splitView:(KFSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+-(float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
 {
 	return (sender == splitView2 && offset == 0) ? MA_Minimum_ArticleList_Pane_Width : proposedMin;
 }
@@ -159,7 +160,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  * Make sure that the article pane isn't shrunk beyond a minimum size otherwise the splitview
  * or controls within it start resizing odd.
  */
--(float)splitView:(KFSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+-(float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
 {
 	if (sender == splitView2 && offset == 0)
 	{
@@ -174,7 +175,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 /* resizeSubviewsWithOldSize
  * Constrain the article list pane to a fixed width.
  */
--(void)splitView:(KFSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+-(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
 	float dividerThickness = [sender dividerThickness];
 	id sv1 = [[sender subviews] objectAtIndex:0];
@@ -319,16 +320,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[menuItem release];
 		}
 	}
-	
-	NSRect buttonFrame = [[articleList cornerView] frame];
-    PopupButton *button = [[PopupButton alloc] initWithFrame:buttonFrame];
-    [button setBezelStyle:NSSmallSquareBezelStyle];
-	[button setImage: [NSImage imageNamed:@"column_cornerview"]];
-	[button setBordered:NO];
-	[articleList setCornerView:button];
-	[button setMenu:columnsSubMenu];
-    [button release];
 
+	// Set the columns popup on the title bar to show the same menu.
+	[columnsPopupMenu setMenu:columnsSubMenu];
+	[columnsPopupMenu setSmallMenu:YES];
+	[columnsPopupMenu setToolTip:NSLocalizedString(@"Select columns to display", nil)];
 
 	// Get the default list of visible columns
 	[self updateVisibleColumns];

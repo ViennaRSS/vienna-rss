@@ -24,7 +24,6 @@
 #import "ActivityViewer.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "DownloadWindow.h"
-#import "KFSplitView.h"
 
 @class NewPreferenceController;
 @class FoldersTree;
@@ -42,7 +41,7 @@
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet ArticleController * articleController;
 	IBOutlet FoldersTree * foldersTree;
-	IBOutlet KFSplitView * splitView1;
+	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet ArticleListView * mainArticleView;
 	IBOutlet UnifiedDisplayView * unifiedListView;
