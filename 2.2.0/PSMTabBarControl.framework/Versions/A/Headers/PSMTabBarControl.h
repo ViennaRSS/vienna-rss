@@ -69,6 +69,7 @@ enum {
     BOOL                        _sizeCellsToFit;
     BOOL                        _useOverflowMenu;
 	BOOL						_alwaysShowActiveTab;
+	BOOL						_allowsScrubbing;
 	int							_resizeAreaCompensation;
 	PSMTabBarOrientation		_orientation;
 	BOOL						_automaticallyAnimates;
@@ -143,6 +144,8 @@ enum {
 - (void)setAutomaticallyAnimates:(BOOL)value;
 - (BOOL)alwaysShowActiveTab;
 - (void)setAlwaysShowActiveTab:(BOOL)value;
+- (BOOL)allowsScrubbing;
+- (void)setAllowsScrubbing:(BOOL)value;
 
 // accessors
 - (NSTabView *)tabView;
@@ -202,6 +205,7 @@ enum {
 //tab bar hiding methods
 - (void)tabView:(NSTabView *)aTabView tabBarDidHide:(PSMTabBarControl *)tabBarControl;
 - (void)tabView:(NSTabView *)aTabView tabBarDidUnhide:(PSMTabBarControl *)tabBarControl;
+- (float)desiredWidthForVerticalTabBar:(PSMTabBarControl *)tabBarControl;
 
 //closing
 - (BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem;

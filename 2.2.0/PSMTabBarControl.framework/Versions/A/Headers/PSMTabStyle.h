@@ -22,6 +22,7 @@ Protocol to be observed by all style delegate objects.  These objects handle the
 - (float)leftMarginForTabBarControl;
 - (float)rightMarginForTabBarControl;
 - (float)topMarginForTabBarControl;
+- (void)setOrientation:(PSMTabBarOrientation)value;
 
 // add tab button
 - (NSImage *)addTabButtonImage;
@@ -36,6 +37,7 @@ Protocol to be observed by all style delegate objects.  These objects handle the
 - (NSRect)objectCounterRectForTabCell:(PSMTabBarCell *)cell;
 - (float)minimumWidthOfTabCell:(PSMTabBarCell *)cell;
 - (float)desiredWidthOfTabCell:(PSMTabBarCell *)cell;
+- (float)tabCellHeight;
 
 // cell values
 - (NSAttributedString *)attributedObjectCountValueForTabCell:(PSMTabBarCell *)cell;
