@@ -30,6 +30,7 @@
     BOOL                _hasCloseButton;
     BOOL                _isCloseButtonSuppressed;
     BOOL                _hasIcon;
+	BOOL				_hasLargeImage;
     int                 _count;
     BOOL                _isEdited;
 }
@@ -67,6 +68,8 @@
 - (BOOL)isCloseButtonSuppressed;
 - (BOOL)hasIcon;
 - (void)setHasIcon:(BOOL)value;
+- (BOOL)hasLargeImage;
+- (void)setHasLargeImage:(BOOL)value;
 - (int)count;
 - (void)setCount:(int)value;
 - (BOOL)isPlaceholder;
@@ -101,5 +104,11 @@
 @interface PSMTabBarControl (CellAccessors)
 
 - (id<PSMTabStyle>)style;
+
+@end
+
+@interface NSObject (IdentifierAccesors)
+
+- (NSImage *)largeImage;
 
 @end
