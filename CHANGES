@@ -27,6 +27,7 @@ Thanks!
 - Added toolbar and moved buttons to toolbar. (Thanks to David Kocher for the prototyping).
 - Added support for toggle status bar and moved progress indicator to toolbar.
 - Add toolbar button to empty the trash.
+- Added flagged article filter.
 
 2.1.2.2110
 ----------

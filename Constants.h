@@ -87,6 +87,7 @@ extern NSString * MA_PBoardType_urln;
 #define MA_Filter_Unread				1
 #define MA_Filter_LastRefresh			2
 #define MA_Filter_Today					3
+#define MA_Filter_Flagged				4
 
 // Refresh folder options
 #define MA_Refresh_RedrawList			0
