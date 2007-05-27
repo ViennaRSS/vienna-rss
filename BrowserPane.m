@@ -76,6 +76,21 @@
 
 @implementation BrowserPane
 
++ (void)load
+{
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+	if (self == [BrowserPane class]) {
+		//These are synonyms
+		[self exposeBinding:@"isLoading"];
+		[self exposeBinding:@"isProcessing"];
+
+		[self setKeys:[NSArray arrayWithObject:@"isLoading"] triggerChangeNotificationsForDependentKey:@"isProcessing"];
+	}
+	
+	[pool release];
+}
+
 /* initWithFrame
  * Initialise our view.
  */
@@ -84,7 +99,7 @@
     if (([super initWithFrame:frame]) != nil)
 	{
 		controller = nil;
-		isLoadingFrame = NO;
+		isLoading = NO;
 		isLocalFile = NO;
 		hasPageTitle = NO;
 		openURLInBackground = NO;
@@ -271,7 +286,10 @@
 		[self showRssPageButton:FALSE];
 		[self setError:nil];
 		hasPageTitle = NO;
-		isLoadingFrame = YES;
+		
+		[self willChangeValueForKey:@"isLoading"];
+		isLoading = YES;
+		[self didChangeValueForKey:@"isLoading"];
 	}
 }
 
@@ -338,7 +356,10 @@
 		}
 	}
 	
-	isLoadingFrame = NO;
+	[self willChangeValueForKey:@"isLoading"];
+	isLoading = NO;
+	[self didChangeValueForKey:@"isLoading"];
+	
 	openURLInBackground = NO;
 }
 
@@ -595,8 +616,14 @@
  */
 -(BOOL)isLoading
 {
-	return isLoadingFrame;
+	return isLoading;
 }
+
+- (BOOL)isProcessing
+{
+	[self isLoading];
+}
+
 
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise

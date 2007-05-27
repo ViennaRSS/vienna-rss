@@ -46,7 +46,7 @@
 	NSString * pageFilename;
 	NSError * lastError;
 	BOOL isLocalFile;
-	BOOL isLoadingFrame;
+	BOOL isLoading;
 	BOOL hasPageTitle;
 	BOOL openURLInBackground;
 	NSString * rssPageURL;
