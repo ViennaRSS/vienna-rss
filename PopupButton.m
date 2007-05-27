@@ -37,6 +37,14 @@
 	return self;
 }
 
+/* setPopupBelow
+ * Sets whether the menu pops up above or below the button.
+ */
+-(void)setPopupBelow:(BOOL)flag
+{
+	popBelow = flag;
+}
+
 /* setSmallMenu
  * Specifies that the popup menu should use a small font.
  */

@@ -31,10 +31,6 @@
 {
 	IBOutlet AppController * controller;
 	IBOutlet FolderView * outlineView;
-	IBOutlet PopupButton * popupMenu;
-	IBOutlet NSButton * newSubButton;
-	IBOutlet NSButton * refreshButton;
-	IBOutlet NSButton * markAllReadButton;
 	IBOutlet TexturedHeader * folderHeader;
 
 	TreeNode * rootNode;

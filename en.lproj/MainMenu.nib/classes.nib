@@ -52,6 +52,7 @@
                 searchUsingToolbarTextField = id; 
                 showAcknowledgements = id; 
                 showDownloadsWindow = id; 
+                showHideStatusBar = id; 
                 showMainWindow = id; 
                 showPreferencePanel = id; 
                 showViennaHomePage = id; 
@@ -68,9 +69,11 @@
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                actionPopup = PopupButton; 
                 articleController = ArticleController; 
                 blogWithMenu = NSMenuItem; 
                 blogWithOneMenu = NSMenuItem; 
+                bottomDivider = NSBox; 
                 browserView = BrowserView; 
                 closeAllTabsItem = NSMenuItem; 
                 closeTabItem = NSMenuItem; 
@@ -84,8 +87,8 @@
                 foldersTree = FoldersTree; 
                 mainArticleView = ArticleListView; 
                 mainWindow = NSWindow; 
-                newSubscriptionButton = NSButton; 
                 searchField = NSSearchField; 
+                searchView = NSView; 
                 sortByMenu = NSMenuItem; 
                 spinner = NSProgressIndicator; 
                 splitView1 = NSSplitView; 
@@ -175,11 +178,7 @@
             OUTLETS = {
                 controller = AppController; 
                 folderHeader = TexturedHeader; 
-                markAllReadButton = NSButton; 
-                newSubButton = NSButton; 
                 outlineView = FolderView; 
-                popupMenu = PopupButton; 
-                refreshButton = NSButton; 
             }; 
             SUPERCLASS = NSView; 
         }, 

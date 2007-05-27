@@ -24,6 +24,7 @@
 #import "ActivityViewer.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "DownloadWindow.h"
+#import "PopupButton.h"
 
 @class NewPreferenceController;
 @class FoldersTree;
@@ -43,16 +44,17 @@
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
+	IBOutlet NSView * searchView;
 	IBOutlet ArticleListView * mainArticleView;
 	IBOutlet UnifiedDisplayView * unifiedListView;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
 	IBOutlet NSButton * exportWithGroups;
-	IBOutlet NSButton * newSubscriptionButton;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSTextField * statusText;
 	IBOutlet NSProgressIndicator * spinner;
+	IBOutlet NSBox * bottomDivider;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;
 	IBOutlet NSMenuItem * closeWindowItem;
@@ -62,6 +64,7 @@
 	IBOutlet NSMenuItem * filtersMenu;
 	IBOutlet NSMenuItem * blogWithMenu;
 	IBOutlet NSMenuItem * blogWithOneMenu;
+	IBOutlet PopupButton * actionPopup;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
@@ -81,6 +84,7 @@
 	NSTimer * checkTimer;
 	int lastCountOfUnread;
 	BOOL growlAvailable;
+	BOOL isStatusBarVisible;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
@@ -147,6 +151,7 @@
 -(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
+-(IBAction)showHideStatusBar:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;
@@ -175,4 +180,6 @@
 -(NSArray *)folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)toggleOptionKeyButtonStates;
+-(NSMenu *)folderMenu;
+-(void)viewAnimationCompleted:(NSView *)theView;
 @end

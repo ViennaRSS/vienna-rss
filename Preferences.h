@@ -42,6 +42,7 @@
 	BOOL showFolderImages;
 	BOOL useJavaScript;
 	BOOL showAppInStatusBar;
+	BOOL showStatusBar;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
