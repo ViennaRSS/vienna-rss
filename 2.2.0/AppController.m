@@ -3454,6 +3454,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setAction:@selector(refreshAllSubscriptions:)];
 		[item setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
 	}
+	else if ([itemIdentifier isEqualToString:@"EmptyTrash"])
+	{
+		[item setLabel:NSLocalizedString(@"Empty Trash", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setImage:[NSImage imageNamed:@"emptyTrashButton.tiff"]];
+		[item setTarget:self];
+		[item setAction:@selector(emptyTrash:)];
+		[item setToolTip:NSLocalizedString(@"Delete all articles in the trash", nil)];
+	}
 	else if ([itemIdentifier isEqualToString: @"Spinner"])
 	{
 		[item setLabel:nil];
@@ -3513,6 +3522,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		@"Refresh",
 		@"Subscribe",
 		@"SkipFolder",
+		@"EmptyTrash",
 		@"Action",
 		@"SearchItem",
 		@"Spinner",

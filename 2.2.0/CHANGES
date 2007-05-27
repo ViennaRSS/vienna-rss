@@ -24,8 +24,9 @@ Thanks!
 - Allow refreshing of unsubscribed feeds if they are specifically selected. (Thanks to ytrewq1 for submitting a patch.)
 - Updated to SQLite 3.3.17.
 - Change exported file format to UTF8. (Thanks to Kiyu Horiuti).
-- Added toolbar and moved buttons to toolbar.
+- Added toolbar and moved buttons to toolbar. (Thanks to David Kocher for the prototyping).
 - Added support for toggle status bar and moved progress indicator to toolbar.
+- Add toolbar button to empty the trash.
 
 2.1.2.2110
 ----------

@@ -42,6 +42,7 @@
 		AA1A2A2F0C09D83B005968DC /* skipFolderButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */; };
 		AA1A2A330C09D84E005968DC /* subscribeButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */; };
 		AA1A2A5F0C09E074005968DC /* smartFolderButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A5E0C09E074005968DC /* smartFolderButton.tiff */; };
+		AA1A2C300C0A1EC1005968DC /* emptyTrashButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */; };
 		AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA20DC9D0882CCC300A226F5 /* unread.tiff */; };
 		AA2185030861E7600024DD4A /* TexturedHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AA2185010861E7600024DD4A /* TexturedHeader.m */; };
 		AA2185040861E7600024DD4A /* TexturedHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = AA2185020861E7600024DD4A /* TexturedHeader.h */; };
@@ -377,6 +378,7 @@
 		AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = skipFolderButtonPressed.tiff; sourceTree = "<group>"; };
 		AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = subscribeButtonPressed.tiff; sourceTree = "<group>"; };
 		AA1A2A5E0C09E074005968DC /* smartFolderButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smartFolderButton.tiff; sourceTree = "<group>"; };
+		AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = emptyTrashButton.tiff; sourceTree = "<group>"; };
 		AA20DC9D0882CCC300A226F5 /* unread.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unread.tiff; sourceTree = "<group>"; };
 		AA2185010861E7600024DD4A /* TexturedHeader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TexturedHeader.m; sourceTree = "<group>"; };
 		AA2185020861E7600024DD4A /* TexturedHeader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TexturedHeader.h; sourceTree = "<group>"; };
@@ -1012,6 +1014,7 @@
 		AA1A282E0C09BE59005968DC /* Toolbar Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */,
 				AA1A282F0C09BEBD005968DC /* popupMenuButton.tiff */,
 				AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */,
 				AA1A25DE0C096D68005968DC /* refreshButton.tiff */,
@@ -1492,6 +1495,7 @@
 				AA1A2A2F0C09D83B005968DC /* skipFolderButtonPressed.tiff in Resources */,
 				AA1A2A330C09D84E005968DC /* subscribeButtonPressed.tiff in Resources */,
 				AA1A2A5F0C09E074005968DC /* smartFolderButton.tiff in Resources */,
+				AA1A2C300C0A1EC1005968DC /* emptyTrashButton.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
