@@ -41,6 +41,14 @@ static NSMutableArray * _filterList = nil;
 	return ![theArticle isRead];
 }
 
+/* flaggedArticleFilterComparator
+ * Returns TRUE if the specified article is flagged.
+ */
++(BOOL)flaggedArticleFilterComparator:(Article *)theArticle
+{
+	return [theArticle isFlagged];
+}
+
 /* todayFilterComparator
  * Returns TRUE if the specified article was posted today.
  */
@@ -73,6 +81,7 @@ static NSMutableArray * _filterList = nil;
 	[ArticleFilter createFilter:@"Unread Articles" tag:MA_Filter_Unread comparator:@selector(unreadArticleFilterComparator:)];
 	[ArticleFilter createFilter:@"Last Refresh" tag:MA_Filter_LastRefresh comparator:@selector(lastRefreshFilterComparator:)];
 	[ArticleFilter createFilter:@"Today" tag:MA_Filter_Today comparator:@selector(todayFilterComparator:)];
+	[ArticleFilter createFilter:@"Flagged" tag:MA_Filter_Flagged comparator:@selector(flaggedArticleFilterComparator:)];
 }
 
 /* arrayOfFilters
