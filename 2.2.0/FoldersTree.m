@@ -453,8 +453,8 @@
 	{
 		TreeNode * nextNode = nil;
 		TreeNode * parentNode = [node parentNode];
-        if (([[node folder] childUnreadCount] > 0) && [outlineView isItemExpanded:node])
-            nextNode = [node firstChild];
+		if (([[node folder] childUnreadCount] > 0) && [outlineView isItemExpanded:node])
+			nextNode = [node firstChild];
 		if (nextNode == nil)
 			nextNode = [node nextSibling];
 		while (nextNode == nil && parentNode != nil)
@@ -822,15 +822,15 @@
 	if (node == nil)
 		node = rootNode;
 
-    static NSDictionary * info = nil;
-    if (info == nil)
+	static NSDictionary * info = nil;
+	if (info == nil)
 	{
-        NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-        [style setLineBreakMode:NSLineBreakByTruncatingMiddle];
-        info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
-        [style release];
-    }
-    return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:info] autorelease];
+		NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		[style setLineBreakMode:NSLineBreakByTruncatingMiddle];
+		info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
+		[style release];
+	}
+	return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:info] autorelease];
 }
 
 /* willDisplayCell

@@ -619,11 +619,13 @@
 	return isLoading;
 }
 
-- (BOOL)isProcessing
+/* isProcessing
+ * Synonymous function that enables the progress indicator on the active tab.
+ */
+-(BOOL)isProcessing
 {
-	reutrn [self isLoading];
+	return [self isLoading];
 }
-
 
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise
