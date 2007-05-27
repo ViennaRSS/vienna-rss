@@ -172,15 +172,15 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	}
 	
 	// Create the toolbar.
-    NSToolbar * toolbar = [[[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"] autorelease];
+	NSToolbar * toolbar = [[[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"] autorelease];
 
-    // Set the appropriate toolbar options. We are the delegate, customization is allowed,
-	// changes made by the user are automatically saved and we start in icon+text mode.
-    [toolbar setDelegate:self];
-    [toolbar setAllowsUserCustomization:YES];
-    [toolbar setAutosavesConfiguration:YES]; 
-    [toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
-    [mainWindow setToolbar:toolbar];
+	// Set the appropriate toolbar options. We are the delegate, customization is allowed,
+	// changes made by the user are automatically saved and we start in icon mode.
+	[toolbar setDelegate:self];
+	[toolbar setAllowsUserCustomization:YES];
+	[toolbar setAutosavesConfiguration:YES]; 
+	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+	[mainWindow setToolbar:toolbar];
 
 	// Run the auto-expire now
 	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
@@ -225,22 +225,22 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// item is localised though.
 	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
 	
-    NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
-    [item setTag:NSSearchFieldRecentsTitleMenuItemTag];
+	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
+	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
 	[cellMenu insertItem:item atIndex:0];
-    [item release];
+	[item release];
 	
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
-    [item setTag:NSSearchFieldRecentsMenuItemTag];
-    [cellMenu insertItem:item atIndex:1];
-    [item release];
+	[item setTag:NSSearchFieldRecentsMenuItemTag];
+	[cellMenu insertItem:item atIndex:1];
+	[item release];
 	
-    item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
-    [item setTag:NSSearchFieldClearRecentsMenuItemTag];
-    [cellMenu insertItem:item atIndex:2];
-    [item release];
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
+	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
+	[cellMenu insertItem:item atIndex:2];
+	[item release];
 	
-    [[searchField cell] setSearchMenuTemplate:cellMenu];
+	[[searchField cell] setSearchMenuTemplate:cellMenu];
 	[cellMenu release];
 
 	// Add Scripts menu if we have any scripts
@@ -282,11 +282,11 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)installCustomEventHandler
 {
 	EventTypeSpec eventType;
-    eventType.eventClass = kEventClassKeyboard;
-    eventType.eventKind = kEventRawKeyModifiersChanged;
+	eventType.eventClass = kEventClassKeyboard;
+	eventType.eventKind = kEventRawKeyModifiersChanged;
 
-    EventHandlerUPP handlerFunction = NewEventHandlerUPP(keyPressed);
-    InstallEventHandler(GetEventMonitorTarget(), handlerFunction, 1, &eventType, NULL, NULL);
+	EventHandlerUPP handlerFunction = NewEventHandlerUPP(keyPressed);
+	InstallEventHandler(GetEventMonitorTarget(), handlerFunction, 1, &eventType, NULL, NULL);
 }
 
 /* doSafeInitialisation
@@ -406,11 +406,11 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(void)installSleepHandler
 {
-    IONotificationPortRef notify;
-    io_object_t anIterator;
+	IONotificationPortRef notify;
+	io_object_t anIterator;
 	
-    root_port = IORegisterForSystemPower(self, &notify, MySleepCallBack, &anIterator);
-    if (root_port != 0)
+	root_port = IORegisterForSystemPower(self, &notify, MySleepCallBack, &anIterator);
+	if (root_port != 0)
 		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
 }
 
@@ -1872,9 +1872,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	Field * field = [menuItem representedObject];
 	
-    [field setVisible:![field visible]];
+	[field setVisible:![field visible]];
 	if ([[field name] isEqualToString:MA_Field_Summary] && [field visible])
-        [articleController createArticleSummaries];
+		[articleController createArticleSummaries];
 	[mainArticleView updateVisibleColumns];
 	[mainArticleView saveTableSettings];
 }
@@ -2462,7 +2462,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	[browserView setActiveTabToPrimaryTab];
 	if ([db countOfUnread] > 0)
-        [articleController displayNextUnread];
+		[articleController displayNextUnread];
 	[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabItemView] mainView] : [foldersTree mainView]];
 }
 
@@ -3415,8 +3415,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 */
 -(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
-    NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-    if ([itemIdentifier isEqualToString:@"SearchItem"])
+	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+	if ([itemIdentifier isEqualToString:@"SearchItem"])
 	{
 		NSRect fRect = [searchView frame];
 		[item setLabel:NSLocalizedString(@"Search Articles", nil)];
@@ -3426,48 +3426,48 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setMaxSize:fRect.size];
 		[item setTarget:self];
 		[item setAction:@selector(searchUsingToolbarTextField:)];
-    }
+	}
 	else if ([itemIdentifier isEqualToString:@"Subscribe"])
 	{
-        [item setLabel:NSLocalizedString(@"Subscribe", nil)];
-        [item setPaletteLabel:[item label]];
-        [item setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
-        [item setTarget:self];
-        [item setAction:@selector(newSubscription:)];
+		[item setLabel:NSLocalizedString(@"Subscribe", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
+		[item setTarget:self];
+		[item setAction:@selector(newSubscription:)];
 		[item setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
 	}
 	else if ([itemIdentifier isEqualToString:@"SkipFolder"])
 	{
-        [item setLabel:NSLocalizedString(@"Skip Folder", nil)];
-        [item setPaletteLabel:[item label]];
-        [item setImage:[NSImage imageNamed:@"skipFolderButton.tiff"]];
-        [item setTarget:self];
-        [item setAction:@selector(skipFolder:)];
+		[item setLabel:NSLocalizedString(@"Skip Folder", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setImage:[NSImage imageNamed:@"skipFolderButton.tiff"]];
+		[item setTarget:self];
+		[item setAction:@selector(skipFolder:)];
 		[item setToolTip:NSLocalizedString(@"Skip Folder", nil)];
 	}
 	else if ([itemIdentifier isEqualToString:@"Refresh"])
 	{
-        [item setLabel:NSLocalizedString(@"Refresh", nil)];
-        [item setPaletteLabel:[item label]];
-        [item setImage:[NSImage imageNamed:@"refreshButton.tiff"]];
-        [item setTarget:self];
-        [item setAction:@selector(refreshAllSubscriptions:)];
+		[item setLabel:NSLocalizedString(@"Refresh", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setImage:[NSImage imageNamed:@"refreshButton.tiff"]];
+		[item setTarget:self];
+		[item setAction:@selector(refreshAllSubscriptions:)];
 		[item setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
 	}
 	else if ([itemIdentifier isEqualToString: @"Spinner"])
 	{
-        [item setLabel:nil];
-        [item setPaletteLabel:NSLocalizedString(@"Progress", nil)];
-        [item setView:spinner];
+		[item setLabel:nil];
+		[item setPaletteLabel:NSLocalizedString(@"Progress", nil)];
+		[item setView:spinner];
 		[item setMinSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 		[item setMaxSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 	}
 	else if ([itemIdentifier isEqualToString: @"Action"])
 	{
-        [item setLabel:NSLocalizedString(@"Actions", nil)];
-        [item setPaletteLabel:[item label]];
-        [item setImage:[NSImage imageNamed:@"popupMenuButton.tiff"]];
-        [item setView:actionPopup];
+		[item setLabel:NSLocalizedString(@"Actions", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setImage:[NSImage imageNamed:@"popupMenuButton.tiff"]];
+		[item setView:actionPopup];
 		[item setMinSize:NSMakeSize(NSWidth([actionPopup frame]), NSHeight([actionPopup frame]))];
 		[item setMaxSize:NSMakeSize(NSWidth([actionPopup frame]), NSHeight([actionPopup frame]))];
 		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
@@ -3488,7 +3488,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-    return [NSArray arrayWithObjects:
+	return [NSArray arrayWithObjects:
 		@"Subscribe",
 		@"SkipFolder",
 		@"Action",
@@ -3506,7 +3506,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
-    return [NSArray arrayWithObjects:
+	return [NSArray arrayWithObjects:
 		NSToolbarSeparatorItemIdentifier,
 		NSToolbarSpaceItemIdentifier,
 		NSToolbarFlexibleSpaceItemIdentifier,

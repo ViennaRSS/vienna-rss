@@ -527,13 +527,13 @@
 			}
 		}
 	}
-    else
-    {
-        // If no time is specified, set the time to 11:59pm,
-        // so new articles within the last 24 hours are detected.
-        hourValue = 23;
-        minuteValue = 59;
-    }
+	else
+	{
+		// If no time is specified, set the time to 11:59pm,
+		// so new articles within the last 24 hours are detected.
+		hourValue = 23;
+		minuteValue = 59;
+	}
 
 	// At this point we're at any potential timezone
 	// tzOffset needs to be the number of seconds since GMT
