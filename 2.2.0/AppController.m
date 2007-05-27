@@ -28,6 +28,7 @@
 #import "RefreshManager.h"
 #import "StringExtensions.h"
 #import "SplitViewExtensions.h"
+#import "ViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
 #import "NewSubscription.h"
@@ -76,6 +77,7 @@
 	-(void)stopProgressIndicator;
 	-(void)doEditFolder:(Folder *)folder;
 	-(void)refreshOnTimer:(NSTimer *)aTimer;
+	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
@@ -91,11 +93,13 @@
 	-(void)loadOpenTabs;
 	-(NSDictionary *)registrationDictionaryForGrowl;
 	-(NSTimer *)checkTimer;
+	-(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 @end
 
 // Static constant strings that are typically never tweaked
 static const int MA_Minimum_Folder_Pane_Width = 80;
 static const int MA_Minimum_BrowserView_Pane_Width = 200;
+static const int MA_StatusBarHeight = 22;
 
 // Awake from sleep
 static io_connect_t root_port;
@@ -115,6 +119,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		growlAvailable = NO;
+		isStatusBarVisible = YES;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
 		checkTimer = nil;
@@ -166,6 +171,17 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		return;
 	}
 	
+	// Create the toolbar.
+    NSToolbar * toolbar = [[[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"] autorelease];
+
+    // Set the appropriate toolbar options. We are the delegate, customization is allowed,
+	// changes made by the user are automatically saved and we start in icon+text mode.
+    [toolbar setDelegate:self];
+    [toolbar setAllowsUserCustomization:YES];
+    [toolbar setAutosavesConfiguration:YES]; 
+    [toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+    [mainWindow setToolbar:toolbar];
+
 	// Run the auto-expire now
 	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
 	
@@ -230,6 +246,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Add Scripts menu if we have any scripts
 	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
 		[self initScriptsMenu];
+	
+	// Show/hide the status bar based on the last session state
+	[self setStatusBarState:[prefs boolForKey:MAPref_ShowStatusBar] withAnimation:NO];
 	
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
@@ -660,6 +679,30 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* folderMenu
+ * Dynamically create the popup menu. This is one less thing to
+ * explicitly localise in the NIB file.
+ */
+-(NSMenu *)folderMenu
+{
+	NSMenu * folderMenu = [[[NSMenu alloc] init] autorelease];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
+	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
+	[alternateItem setAlternate:YES];
+	[folderMenu addItem:alternateItem];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(getInfo:))];
+	return folderMenu;
+}
+
 /* exitVienna
  * Alias for the terminate command.
  */
@@ -982,7 +1025,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self createNewTab:nil inBackground:NO];
 	[browserView setTabItemViewTitle:[browserView activeTabItemView] title:NSLocalizedString(@"New Tab", nil)];
 
-	// Make the address bare first responder.
+	// Make the address bar first responder.
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	BrowserPane * browserPane = (BrowserPane *)theView;
 	[browserPane activateAddressBar];
@@ -2095,7 +2138,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 		case 'f':
 		case 'F':
-			[mainWindow makeFirstResponder:searchField];
+			if ([self toolbarItemWithIdentifier:@"SearchItem"])
+			{
+				if (![[mainWindow toolbar] isVisible])
+					[[mainWindow toolbar] setVisible:YES];
+				[mainWindow makeFirstResponder:searchField];
+			}
 			return YES;
 			
 		case '>':
@@ -2189,20 +2237,36 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Works and looks exactly as in the iApps. Currently only for toggling "Add Sub/Add Smart Folder", 
  * but of course it could be used for all other buttons as well.
  */
-
 -(void)toggleOptionKeyButtonStates
 {
-	if ([newSubscriptionButton action] == @selector(newSubscription:)) 
+	NSToolbarItem * newButton = [self toolbarItemWithIdentifier:@"Subscribe"];
+	if (!([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask)) 
 	{
-		[newSubscriptionButton setImage:[NSImage imageNamed:@"gear.tiff"]];
-		[newSubscriptionButton setAction:@selector(newSmartFolder:)];
+		[newButton setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
+		[newButton setAction:@selector(newSubscription:)];
 	}
+	else
+	{
+		[newButton setImage:[NSImage imageNamed:@"smartFolderButton.tiff"]];
+		[newButton setAction:@selector(newSmartFolder:)];
+	}
+}
 
-	if ( ! ([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask)) 
+/* toolbarItemWithIdentifier
+ * Returns the toolbar button that corresponds to the specified identifier.
+ */
+-(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
+{
+	NSArray * toolbarButtons = [[mainWindow toolbar] visibleItems];
+	NSEnumerator * theEnumerator = [toolbarButtons objectEnumerator];
+	NSToolbarItem * theItem;
+	
+	while ((theItem = [theEnumerator nextObject]) != nil)
 	{
-		[newSubscriptionButton setImage:[NSImage imageNamed:@"add.tiff"]];
-		[newSubscriptionButton setAction:@selector(newSubscription:)];
+		if ([[theItem itemIdentifier] isEqualToString:theIdentifier])
+			return theItem;
 	}
+	return nil;
 }
 
 /* isConnecting
@@ -2754,6 +2818,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
+	// $TODO stevepa:
+	// Create Search folder if it doesn't already exist.
+	// Refresh search folder with search string contents.
 	[[browserView activeTabItemView] performFindPanelAction:NSFindPanelActionNext];
 }
 
@@ -2991,6 +3058,95 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* showHideStatusBar
+ * Toggle the status bar on/off. When off, expand the article area to fill the space.
+ */
+-(IBAction)showHideStatusBar:(id)sender
+{
+	[self setStatusBarState:!isStatusBarVisible withAnimation:YES];
+	[[Preferences standardPreferences] setBool:isStatusBarVisible forKey:MAPref_ShowStatusBar];
+}
+
+/* setStatusBarState
+ * Show or hide the status bar state. Does not persist the state - use showHideStatusBar for this.
+ */
+-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
+{
+	NSRect viewSize = [splitView1 frame];
+	if (isStatusBarVisible && !isVisible)
+	{
+		viewSize.size.height += MA_StatusBarHeight;
+		viewSize.origin.y -= MA_StatusBarHeight;
+	}
+	else if (!isStatusBarVisible && isVisible)
+	{
+		viewSize.size.height -= MA_StatusBarHeight;
+		viewSize.origin.y += MA_StatusBarHeight;
+	}
+	if (isStatusBarVisible != isVisible)
+	{
+		if (!doAnimate)
+		{
+			[bottomDivider setHidden:!isVisible];
+			[statusText setHidden:!isVisible];
+			[splitView1 setFrame:viewSize];
+		}
+		else
+		{
+			if (!isVisible)
+			{
+				// When hiding the status bar, hide these controls BEFORE
+				// we start hiding the view. Looks cleaner.
+				[bottomDivider setHidden:YES];
+				[statusText setHidden:YES];
+			}
+			[splitView1 resizeViewWithAnimation:viewSize];
+		}
+		[mainWindow display];
+		isStatusBarVisible = isVisible;
+	}
+}
+
+/* viewAnimationCompleted
+ * Called when animation of the specified view completes.
+ */
+-(void)viewAnimationCompleted:(NSView *)theView
+{
+	if (theView == splitView1 && isStatusBarVisible)
+	{
+		// When showing the status bar, show these controls AFTER
+		// we have made the view visible. Again, looks cleaner.
+		[bottomDivider setHidden:NO];
+		[statusText setHidden:NO];
+	}
+}
+
+/* validateCommonToolbarAndMenuItems
+ * Validation code for items that appear on both the toolbar and the menu. Since these are
+ * handled identically, we validate here to avoid duplication of code in two delegates.
+ * The return value is YES if we handled the validation here and no further validation is
+ * needed, NO otherwise.
+ */
+-(BOOL)validateCommonToolbarAndMenuItems:(SEL)theAction validateFlag:(BOOL *)validateFlag
+{
+	if ((theAction == @selector(refreshAllSubscriptions:)) || (theAction == @selector(refreshAllFolderIcons:)))
+	{
+		*validateFlag = ![self isConnecting] && ![db readOnly];
+		return YES;
+	}
+	return NO;
+}
+
+/* validateToolbarItem
+ * Check [theItem identifier] and return YES if the item is enabled, NO otherwise.
+ */
+-(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+{
+	BOOL flag;
+	[self validateCommonToolbarAndMenuItems:[toolbarItem action] validateFlag:&flag];
+	return flag;
+}
+
 /* validateMenuItem
  * This is our override where we handle item validation for the
  * commands that we own.
@@ -3001,7 +3157,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
 	BOOL isArticleView = [browserView activeTabItemView] == mainArticleView;
+	BOOL flag;
 	
+	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag])
+	{
+		return flag;
+	}
 	if (theAction == @selector(printDocument:))
 	{
 		return ([self selectedArticle] != nil && isMainWindowVisible);
@@ -3034,9 +3195,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return [db countOfUnread] > 0;
 	}
-	else if ((theAction == @selector(refreshAllSubscriptions:)) || (theAction == @selector(refreshAllFolderIcons:)))
+	else if (theAction == @selector(showHideStatusBar:))
 	{
-		return ![self isConnecting] && ![db readOnly];
+		if (isStatusBarVisible)
+			[menuItem setTitle:NSLocalizedString(@"Hide Status Bar", nil)];
+		else
+			[menuItem setTitle:NSLocalizedString(@"Show Status Bar", nil)];
+		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
@@ -3241,6 +3406,117 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	
 	return YES;
+}
+
+/* itemForItemIdentifier
+* This method is required of NSToolbar delegates.  It takes an identifier, and returns the matching NSToolbarItem.
+* It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
+* going to be displayed in a customization palette.
+*/
+-(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+{
+    NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+    if ([itemIdentifier isEqualToString:@"SearchItem"])
+	{
+		NSRect fRect = [searchView frame];
+		[item setLabel:NSLocalizedString(@"Search Articles", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setView:searchView];
+		[item setMinSize:fRect.size];
+		[item setMaxSize:fRect.size];
+		[item setTarget:self];
+		[item setAction:@selector(searchUsingToolbarTextField:)];
+    }
+	else if ([itemIdentifier isEqualToString:@"Subscribe"])
+	{
+        [item setLabel:NSLocalizedString(@"Subscribe", nil)];
+        [item setPaletteLabel:[item label]];
+        [item setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
+        [item setTarget:self];
+        [item setAction:@selector(newSubscription:)];
+		[item setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
+	}
+	else if ([itemIdentifier isEqualToString:@"SkipFolder"])
+	{
+        [item setLabel:NSLocalizedString(@"Skip Folder", nil)];
+        [item setPaletteLabel:[item label]];
+        [item setImage:[NSImage imageNamed:@"skipFolderButton.tiff"]];
+        [item setTarget:self];
+        [item setAction:@selector(skipFolder:)];
+		[item setToolTip:NSLocalizedString(@"Skip Folder", nil)];
+	}
+	else if ([itemIdentifier isEqualToString:@"Refresh"])
+	{
+        [item setLabel:NSLocalizedString(@"Refresh", nil)];
+        [item setPaletteLabel:[item label]];
+        [item setImage:[NSImage imageNamed:@"refreshButton.tiff"]];
+        [item setTarget:self];
+        [item setAction:@selector(refreshAllSubscriptions:)];
+		[item setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
+	}
+	else if ([itemIdentifier isEqualToString: @"Spinner"])
+	{
+        [item setLabel:nil];
+        [item setPaletteLabel:NSLocalizedString(@"Progress", nil)];
+        [item setView:spinner];
+		[item setMinSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
+		[item setMaxSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
+	}
+	else if ([itemIdentifier isEqualToString: @"Action"])
+	{
+        [item setLabel:NSLocalizedString(@"Actions", nil)];
+        [item setPaletteLabel:[item label]];
+        [item setImage:[NSImage imageNamed:@"popupMenuButton.tiff"]];
+        [item setView:actionPopup];
+		[item setMinSize:NSMakeSize(NSWidth([actionPopup frame]), NSHeight([actionPopup frame]))];
+		[item setMaxSize:NSMakeSize(NSWidth([actionPopup frame]), NSHeight([actionPopup frame]))];
+		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
+
+		NSMenuItem * menuItem = [[[NSMenuItem alloc] init] autorelease];
+		[actionPopup setMenu:[self folderMenu]];
+		[actionPopup setPopupBelow:YES];
+		[menuItem setSubmenu:[actionPopup menu]];
+		[menuItem setTitle:[item label]];
+		[item setMenuFormRepresentation:menuItem];
+}
+	return [item autorelease];
+}
+
+/* toolbarDefaultItemIdentifiers
+ * This method is required of NSToolbar delegates.  It returns an array holding identifiers for the default
+ * set of toolbar items.  It can also be called by the customization palette to display the default toolbar.
+ */
+-(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:
+		@"Subscribe",
+		@"SkipFolder",
+		@"Action",
+		@"Refresh",
+		NSToolbarFlexibleSpaceItemIdentifier,
+		@"SearchItem",
+		NSToolbarFlexibleSpaceItemIdentifier,
+		@"Spinner",
+		nil];
+}
+
+/* toolbarAllowedItemIdentifiers
+ * This method is required of NSToolbar delegates.  It returns an array holding identifiers for all allowed
+ * toolbar items in this toolbar.  Any not listed here will not be available in the customization palette.
+ */
+-(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
+{
+    return [NSArray arrayWithObjects:
+		NSToolbarSeparatorItemIdentifier,
+		NSToolbarSpaceItemIdentifier,
+		NSToolbarFlexibleSpaceItemIdentifier,
+		@"Refresh",
+		@"Subscribe",
+		@"SkipFolder",
+		@"Action",
+		@"SearchItem",
+		@"Spinner",
+		nil];
 }
 
 /* dealloc

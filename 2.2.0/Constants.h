@@ -62,6 +62,7 @@ extern NSString * MAPref_NewArticlesNotification;
 extern NSString * MAPref_Profile_Path;
 extern NSString * MAPref_EmptyTrashNotification;
 extern NSString * MAPref_ShowAppInStatusBar;
+extern NSString * MAPref_ShowStatusBar;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;

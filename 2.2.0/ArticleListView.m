@@ -98,7 +98,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleText setFrameLoadDelegate:self];
 	[articleText setOpenLinksInNewBrowser:YES];
 	[articleText setController:controller];
-
+	
 	// Set the filters popup menu
 	[controller initFiltersMenu:filtersPopupMenu];
 
@@ -143,6 +143,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Initialise the article list view
 	[self initTableView];
 
+	// Make sure we skip the column filter button in the Tab order
+	[articleList setNextKeyView:articleText];
+	
 	// Done initialising
 	isAppInitialising = NO;
 }

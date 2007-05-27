@@ -108,10 +108,6 @@
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
 
-	// Set refresh button behaviour.
-	[refreshButton setAction:@selector(refreshAllSubscriptions:)];
-	[refreshButton setImage:[NSImage imageNamed:@"newRefresh.tiff"]];
-	
 	// Don't resize the column when items are expanded as this messes up
 	// the placement of the unread count button.
 	[outlineView setAutoresizesOutlineColumn:NO];
@@ -129,35 +125,11 @@
  */
 -(void)initialiseFoldersTree
 {
-	// Dynamically create the popup menu. This is one less thing to
-	// explicitly localise in the NIB file.
-	NSMenu * folderMenu = [[NSMenu alloc] init];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
-	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
-	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
-	[alternateItem setAlternate:YES];
-	[folderMenu addItem:alternateItem];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(getInfo:))];
-	
 	// Want tooltips
 	[outlineView setEnableTooltips:YES];
-	[popupMenu setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
-	[newSubButton setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
-	[markAllReadButton setToolTip:NSLocalizedString(@"Skip Folder", nil)];
-	[refreshButton setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
 	
 	// Set the menu for the popup button
-	[popupMenu setMenu:folderMenu];
-	[outlineView setMenu:folderMenu];
-	[folderMenu release];
+	[outlineView setMenu:[[NSApp delegate] folderMenu]];
 	
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
@@ -171,7 +143,6 @@
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:@"MA_Notify_FolderDeleted" object:nil];
 	[nc addObserver:self selector:@selector(autoCollapseFolder:) name:@"MA_Notify_AutoCollapseFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
 	
@@ -380,25 +351,13 @@
 		return;
 	NSString * menuTitle = [mainMenuItem title];
 	int index;
-	NSMenu * contextualItem;
-	NSMenu * folderMenu = [popupMenu menu];
+	NSMenu * folderMenu = [outlineView menu];
 	if (folderMenu != nil)
 	{
 		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
 		if (index >= 0)
 		{
-			contextualItem = [folderMenu itemAtIndex:index];
-			[contextualItem setTitle:menuTitle];
-		}
-	}
-	
-	folderMenu = [outlineView menu];
-	if (folderMenu != nil)
-	{
-		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			contextualItem = [folderMenu itemAtIndex:index];
+			NSMenu * contextualItem = [folderMenu itemAtIndex:index];
 			[contextualItem setTitle:menuTitle];
 		}
 	}
@@ -634,24 +593,6 @@
 -(void)handleShowFolderImagesChange:(NSNotification *)nc
 {
 	[outlineView reloadData];
-}
-
-/* handleRefreshStatusChange
- * Handle a change of the refresh status. We use this to toggle the behaviour of
- * the button between starting and stopping a refresh.
- */
--(void)handleRefreshStatusChange:(NSNotification *)nc
-{
-	if ([NSApp isRefreshing])
-	{
-		[refreshButton setAction:@selector(cancelAllRefreshes:)];
-		[refreshButton setImage:[NSImage imageNamed:@"stopRefresh.tiff"]];
-	}
-	else
-	{
-		[refreshButton setAction:@selector(refreshAllSubscriptions:)];
-		[refreshButton setImage:[NSImage imageNamed:@"newRefresh.tiff"]];
-	}
 }
 
 /* handleSingleClick
