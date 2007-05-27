@@ -41,10 +41,8 @@ Wishlist
 - Mix conditionals within smart folders.
 - Show article count for folders (including Trash).
 - Empty Trash command in contextual menu for Trash.
-- Empty Trash toolbar item.
 - Per-feed refresh settings.
 - Unread count for smart folders.
-- Borderless windows.
 - Synchronisation via .Mac or FTP.
 - Fix web browser to block popups.
 - Download images within articles so that they can be viewed offline.
@@ -59,7 +57,6 @@ Wishlist
 - Check for internet connection before checking for new articles.
 - Filter articles by flagged.
 - Hold down option key (or other combo) while pressing mark all read button to mark all subscriptions read.
-- Progress indicator for loading web pages.
 - Use shift key to toggle whether to open tabs in foreground/background in Vienna.
 - Drop-down navigation list for back and forward buttons in browser pane.
 - Drop-down overflow list when too many tabs are open.
