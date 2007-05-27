@@ -621,7 +621,7 @@
 
 - (BOOL)isProcessing
 {
-	[self isLoading];
+	reutrn [self isLoading];
 }
 
 
