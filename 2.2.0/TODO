@@ -17,7 +17,6 @@ Known Issues (May not be fixed)
 Wishlist
 ========
 - Bloglines integration.
-- Semi-transparent main window when not in front.
 - Show the feed icon in the article list pane/unified view.
 - Support retrieving and posting Atom/RSS 2.0 comments.
 - Spotlight support.
@@ -31,11 +30,8 @@ Wishlist
 - Timestamp on each row in the activity log window.
 - Applescript: extend article object to allow writing as well as reading properties.
 - More options in date field in smart folders: last 24 hour, last 24-48 hours.
-- Support for AmphetaRate (http://amphetarate.newsfairy.com/index.php).
 - Detect duplicate articles in separate folders and show only once.
-- Allow new subscriptions folders to be named when you subscribe.
 - Show "New..." commands on folder popup menu.
-- Ad-blocking for HTML view. (http://braden.machacking.net/)
 - Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Mix conditionals within smart folders.
@@ -60,5 +56,10 @@ Wishlist
 - Drop-down navigation list for back and forward buttons in browser pane.
 - Drop-down overflow list when too many tabs are open.
 - When deleting subscription, also delete smart folder rules involving that subscription.
-- Refresh subscriptions in order of manual sorting rather than alphabetically.
 - Add CSS variables for localizable strings.
+
+Rejected Requests
+=================
+- Support for AmphetaRate (http://amphetarate.newsfairy.com/index.php). [Server is offline - no replacement known].
+- Ad-blocking for HTML view. (http://braden.machacking.net/). [Server not found].
+

@@ -28,6 +28,7 @@ Thanks!
 - Added support for toggle status bar and moved progress indicator to toolbar.
 - Add toolbar button to empty the trash.
 - Added flagged article filter.
+- Refresh all subscriptions now refreshes in the folder list sorted order.
 
 2.1.2.2110
 ----------

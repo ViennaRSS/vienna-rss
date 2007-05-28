@@ -1630,7 +1630,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSArray *)folders
 {
-	return [foldersTree folders:MA_Root_Folder];
+	return [db arrayOfAllFolders];
 }
 
 /* appName
@@ -2832,7 +2832,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)refreshAllFolderIcons:(id)sender
 {
 	if (![self isConnecting])
-		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[db arrayOfRSSFolders]];
+		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[foldersTree folders:0]];
 }
 
 /* refreshAllSubscriptions
@@ -2844,7 +2844,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self handleCheckFrequencyChange:nil];
 	
 	if (![self isConnecting])
-		[[RefreshManager sharedManager] refreshSubscriptions:[db arrayOfRSSFolders] ignoringSubscriptionStatus:NO];		
+		[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree folders:0] ignoringSubscriptionStatus:NO];		
 }
 
 /* refreshSelectedSubscriptions

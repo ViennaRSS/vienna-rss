@@ -317,19 +317,19 @@
 }
 
 /* folders
- * Returns an array that contains the specified folder and all
- * sub-folders.
+ * Returns an array that contains the all RSS folders in the database
+ * ordered by the order in which they appear in the folders list view.
  */
 -(NSArray *)folders:(int)folderId
 {
 	NSMutableArray * array = [NSMutableArray array];
 	TreeNode * node;
+
 	if (!folderId)
 		node = rootNode;
 	else
 		node = [rootNode nodeFromID:folderId];
-	
-	if ([node folder] != nil)
+	if ([node folder] != nil && IsRSSFolder([node folder]))
 		[array addObject:[node folder]];
 	node = [node firstChild];
 	while (node != nil)
