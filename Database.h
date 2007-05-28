@@ -62,6 +62,7 @@
 -(void)initFolderArray;
 -(int)firstFolderId;
 -(int)trashFolderId;
+-(NSArray *)arrayOfAllFolders;
 -(NSArray *)arrayOfFolders:(int)parentId;
 -(Folder *)folderFromID:(int)wantedId;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
@@ -89,7 +90,6 @@
 
 // RSS folder functions
 +(NSString *)untitledFeedFolderName;
--(NSArray *)arrayOfRSSFolders;
 -(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId afterChild:(int)predecessorId subscriptionURL:(NSString *)url;
 
 // smart folder functions

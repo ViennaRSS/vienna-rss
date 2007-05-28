@@ -771,7 +771,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %d", itemId];
+	return [NSString stringWithFormat:@"Folder id %d (%@)", itemId, [self name]];
 }
 
 /* dealloc

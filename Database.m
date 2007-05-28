@@ -1833,28 +1833,16 @@ static Database * _sharedDatabase = nil;
 	return [newArray sortedArrayUsingSelector:@selector(folderIDCompare:)];
 }
 
-/* arrayOfRSSFolders
- * Return an array of RSS folders.
+/* arrayOfAllFolders
+ * Returns an unsorted array of all regular folders (RSS folders and group folders).
  */
--(NSArray *)arrayOfRSSFolders
+-(NSArray *)arrayOfAllFolders
 {
 	// Prime the cache
 	if (initializedFoldersArray == NO)
 		[self initFolderArray];
 	
-	NSMutableArray * newArray = [NSMutableArray array];
-	if (newArray != nil)
-	{
-		NSEnumerator * enumerator = [foldersArray objectEnumerator];
-		Folder * item;
-		
-		while ((item = [enumerator nextObject]) != nil)
-		{
-			if (IsRSSFolder(item))
-				[newArray addObject:item];
-		}
-	}
-	return [newArray sortedArrayUsingSelector:@selector(folderNameCompare:)];
+	return [foldersArray allValues];
 }
 
 /* initArticleArray
