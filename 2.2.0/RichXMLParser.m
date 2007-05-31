@@ -322,7 +322,10 @@
 			NSString * tagName = [tag name];
 
 			if ([tagName isEqualToString:@"rss"] || [tagName isEqualToString:@"rdf:rdf"] || [tagName isEqualToString:@"feed"])
-				return NO;
+			{
+				success = NO;
+				break;
+			}
 			if ([tagName isEqualToString:@"link"])
 			{
 				NSDictionary * tagAttributes = [tag attributes];
