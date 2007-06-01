@@ -1786,7 +1786,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (IsSmartFolder(folder))
 	{
 		if (!smartFolder)
-			smartFolder = [[SearchFolder alloc] initWithDatabase:db];
+			smartFolder = [[SmartFolder alloc] initWithDatabase:db];
 		[smartFolder loadCriteria:mainWindow folderId:[folder itemId]];
 	}
 }
@@ -2345,7 +2345,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)newSmartFolder:(id)sender
 {
 	if (!smartFolder)
-		smartFolder = [[SearchFolder alloc] initWithDatabase:db];
+		smartFolder = [[SmartFolder alloc] initWithDatabase:db];
 	[smartFolder newCriteria:mainWindow underParent:[foldersTree groupParentSelection]];
 }
 

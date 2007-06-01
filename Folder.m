@@ -32,6 +32,7 @@ enum {
 	MA_RSSFolderIcon,
 	MA_RSSFeedIcon,
 	MA_TrashFolderIcon,
+	MA_SearchFolderIcon,
 	MA_Max_Icons
 };
 
@@ -238,10 +239,11 @@ static NSArray * iconArray = nil;
 	if (iconArray == nil)
 		iconArray = [[NSArray arrayWithObjects:
 						[NSImage imageNamed:@"smallFolder.tiff"],
-						[NSImage imageNamed:@"searchFolder.tiff"],
+						[NSImage imageNamed:@"smartFolder.tiff"],
 						[NSImage imageNamed:@"rssFolder.tiff"],
 						[NSImage imageNamed:@"rssFeedNew.tiff"],
 						[NSImage imageNamed:@"trashFolder.tiff"],
+						[NSImage imageNamed:@"searchFolder.tiff"],
 						nil] retain];
 	return iconArray;
 }
@@ -348,6 +350,8 @@ static NSArray * iconArray = nil;
 		return [[Folder _iconArray] objectAtIndex:MA_SmartFolderIcon];
 	if (IsTrashFolder(self))
 		return [[Folder _iconArray] objectAtIndex:MA_TrashFolderIcon];
+	if (IsSearchFolder(self))
+		return [[Folder _iconArray] objectAtIndex:MA_SearchFolderIcon];
 	if (IsRSSFolder(self))
 	{
 		// Try the folder icon cache.

@@ -246,6 +246,7 @@
 		AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
 		AAFAF3FD088056D800DAFF04 /* KeyChain.h in Headers */ = {isa = PBXBuildFile; fileRef = AAFAF3FB088056D800DAFF04 /* KeyChain.h */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		AAFEB3820BA4C74400CC28F4 /* RssLoad.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFEB3810BA4C74400CC28F4 /* RssLoad.tiff */; };
 		B2097BD50B77D507005A2466 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2097BD40B77D507005A2466 /* QuartzCore.framework */; };
 		B2097E320B77DDE0005A2466 /* GoBack.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E300B77DDE0005A2466 /* GoBack.tiff */; };
@@ -745,6 +746,7 @@
 		AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarExtensions.m; sourceTree = "<group>"; };
 		AAFAF3FB088056D800DAFF04 /* KeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChain.h; sourceTree = "<group>"; };
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
+		AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smartFolder.tiff; sourceTree = "<group>"; };
 		AAFEB3810BA4C74400CC28F4 /* RssLoad.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RssLoad.tiff; sourceTree = "<group>"; };
 		B2097BD40B77D507005A2466 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		B2097E300B77DDE0005A2466 /* GoBack.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = GoBack.tiff; sourceTree = "<group>"; };
@@ -972,6 +974,7 @@
 				AA4AB5E008971B28006C843E /* vienna2style.icns */,
 				AA2185050861E7E10024DD4A /* metal_column_header.png */,
 				AAB90EFC061D059D00CA4741 /* searchFolder.tiff */,
+				AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */,
 				AA26F435060490BD00FE7994 /* alphaPixel.tiff */,
 				AADD8962081C1916007C6E88 /* rssFolder.tiff */,
 				AADD8A0D081C253F007C6E88 /* rssFeed.tiff */,
@@ -1496,6 +1499,7 @@
 				AA1A2A330C09D84E005968DC /* subscribeButtonPressed.tiff in Resources */,
 				AA1A2A5F0C09E074005968DC /* smartFolderButton.tiff in Resources */,
 				AA1A2C300C0A1EC1005968DC /* emptyTrashButton.tiff in Resources */,
+				AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2336,7 +2340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2200;
+				BUILD_NUMBER = 2201;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2364,7 +2368,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2200;
+				BUILD_NUMBER = 2201;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2392,7 +2396,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2200;
+				BUILD_NUMBER = 2201;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

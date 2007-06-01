@@ -27,12 +27,14 @@
 //   MA_Group_Folder = a folder used to group other folders
 //   MA_RSS_Folder = folder contains RSS articles
 //   MA_Trash_Folder - a folder that contains deleted articles
+//   MA_Search_Folder - a folder that contains a search result
 //
 #define MA_Root_Folder			-1
 #define MA_Smart_Folder			2
 #define MA_Group_Folder			3
 #define MA_RSS_Folder			4
 #define MA_Trash_Folder			5
+#define MA_Search_Folder		6
 
 // Bloglines flags
 #define MA_NonBloglines_Folder	0x0L
@@ -43,6 +45,7 @@
 #define IsRSSFolder(f)			(([(f) type]) == MA_RSS_Folder)
 #define IsGroupFolder(f)		(([(f) type]) == MA_Group_Folder)
 #define IsTrashFolder(f)		(([(f) type]) == MA_Trash_Folder)
+#define IsSearchFolder(f)		(([(f) type]) == MA_Search_Folder)
 #define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
 #define IsBloglinesFolder(f)	([(f) bloglinesId] != MA_NonBloglines_Folder)
 

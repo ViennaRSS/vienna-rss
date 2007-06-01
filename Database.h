@@ -34,6 +34,8 @@
 	NSThread * mainThread;
 	BOOL inTransaction;
 	Folder * trashFolder;
+	Folder * searchFolder;
+	NSString * searchString;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
 	NSMutableDictionary * fieldsByTitle;
@@ -62,6 +64,7 @@
 -(void)initFolderArray;
 -(int)firstFolderId;
 -(int)trashFolderId;
+-(int)searchFolderId;
 -(NSArray *)arrayOfAllFolders;
 -(NSArray *)arrayOfFolders:(int)parentId;
 -(Folder *)folderFromID:(int)wantedId;
@@ -92,11 +95,14 @@
 +(NSString *)untitledFeedFolderName;
 -(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId afterChild:(int)predecessorId subscriptionURL:(NSString *)url;
 
-// smart folder functions
+// Search folder functions
+-(void)setSearchString:(NSString *)newSearchString;
+
+// Smart folder functions
 -(void)initSmartFoldersArray;
 -(int)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(BOOL)updateSearchFolder:(int)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
--(CriteriaTree *)searchStringForSearchFolder:(int)folderId;
+-(CriteriaTree *)searchStringForSmartFolder:(int)folderId;
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
@@ -108,5 +114,4 @@
 -(void)markArticleFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
 -(void)markArticleDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 -(BOOL)isTrashEmpty;
-
 @end

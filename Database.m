@@ -67,6 +67,8 @@ static Database * _sharedDatabase = nil;
 		initializedSmartFoldersArray = NO;
 		countOfUnread = 0;
 		trashFolder = nil;
+		searchFolder = nil;
+		searchString = nil;
 		smartFoldersArray = [[NSMutableDictionary dictionary] retain];
 		foldersArray = [[NSMutableDictionary dictionary] retain];
 	}
@@ -209,7 +211,7 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %d, 0, 0, 0)",
 			NSLocalizedString(@"Trash", nil),
 			MA_Trash_Folder];
-		
+
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;
 		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_Manual];
@@ -339,7 +341,6 @@ static Database * _sharedDatabase = nil;
 		// Set the new version
 		[self setDatabaseVersion:16];		
 		[self commitTransaction];
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}
 	
 	
@@ -359,7 +360,6 @@ static Database * _sharedDatabase = nil;
 		// Set the new version
 		[self setDatabaseVersion:17];		
 		[self commitTransaction];
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}		
 	
 	// Read the folders tree sort method from the database.
@@ -586,6 +586,7 @@ static Database * _sharedDatabase = nil;
 {
 	[self executeSQLWithFormat:@"update info set version=%d", newVersion];
 	databaseVersion = newVersion;
+	NSLog(@"Updated database schema to version %d.", databaseVersion);
 }
 
 /* readOnly
@@ -931,7 +932,14 @@ static Database * _sharedDatabase = nil;
 	// If this is an RSS feed, delete from the feeds
 	if (IsRSSFolder(folder))
 		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
-	
+
+	// If we deleted the search folder, null out our cached handle
+	if (IsSearchFolder(folder))
+	{
+		[searchFolder release];
+		searchFolder = nil;
+	}
+
 	// Update the sort order if necessary
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_ByName)
 	{
@@ -1252,6 +1260,20 @@ static Database * _sharedDatabase = nil;
 -(int)trashFolderId
 {
 	return [trashFolder itemId];
+}
+
+/* searchFolderId;
+ * Returns the ID of the search folder. If it doesn't exist then we create
+ * it now.
+ */
+-(int)searchFolderId
+{
+	if (searchFolder == nil)
+	{
+		int folderId = [self addFolder:MA_Root_Folder afterChild:0 folderName: NSLocalizedString(@"Search Results", nil) type:MA_Search_Folder canAppendIndex:YES];
+		searchFolder = [self folderFromID:folderId];
+	}
+	return [searchFolder itemId];
 }
 
 /* folderFromID
@@ -1621,11 +1643,11 @@ static Database * _sharedDatabase = nil;
 	}
 }
 
-/* searchStringForSearchFolder
+/* searchStringForSmartFolder
  * Retrieve the smart folder criteria string for the specified folderId. Returns nil if
  * folderId is not a smart folder.
  */
--(CriteriaTree *)searchStringForSearchFolder:(int)folderId
+-(CriteriaTree *)searchStringForSmartFolder:(int)folderId
 {
 	[self initSmartFoldersArray];
 	return [smartFoldersArray objectForKey:[NSNumber numberWithInt:folderId]];
@@ -1728,6 +1750,10 @@ static Database * _sharedDatabase = nil;
 				// Remember the trash folder
 				if (IsTrashFolder(folder))
 					trashFolder = [folder retain];
+
+				// Remember the search folder
+				if (IsSearchFolder(folder))
+					searchFolder = [folder retain];
 			}
 		}
 		[results release];
@@ -1912,6 +1938,16 @@ static Database * _sharedDatabase = nil;
 		[results release];
 	}
 	return YES;
+}
+
+/* setSearchString
+ * Sets the current search string for the search folder.
+ */
+-(void)setSearchString:(NSString *)newSearchString
+{
+	[newSearchString retain];
+	[searchString release];
+	searchString = newSearchString;
 }
 
 /* sqlScopeForFolder
@@ -2115,6 +2151,19 @@ static Database * _sharedDatabase = nil;
 	if (folder == nil)
 		return nil;
 
+	if (IsSearchFolder(folder))
+	{
+		CriteriaTree * tree = [[CriteriaTree alloc] init];
+		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Subject withOperator:MA_CritOper_Contains withValue:searchString];
+		[tree addCriteria:clause];
+		[clause release];
+		clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:searchString];
+		[tree addCriteria:clause];
+		[clause release];
+		[tree setCondition:MA_CritCondition_Any];
+		return [tree autorelease];
+	}
+	
 	if (IsTrashFolder(folder))
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
@@ -2447,6 +2496,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)dealloc
 {
+	[searchString release];
 	[foldersArray release];
 	[smartFoldersArray release];
 	if (sqlDatabase)

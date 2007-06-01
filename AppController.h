@@ -28,7 +28,7 @@
 
 @class NewPreferenceController;
 @class FoldersTree;
-@class SearchFolder;
+@class SmartFolder;
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
@@ -69,7 +69,7 @@
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
 	DownloadWindow * downloadWindow;
-	SearchFolder * smartFolder;
+	SmartFolder * smartFolder;
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
