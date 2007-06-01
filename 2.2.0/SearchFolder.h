@@ -21,9 +21,9 @@
 #import <Foundation/Foundation.h>
 #import "Database.h"
 
-@interface SearchFolder : NSWindowController {
+@interface SmartFolder : NSWindowController {
 	IBOutlet NSWindow * searchWindow;
-	IBOutlet NSTextField * searchFolderName;
+	IBOutlet NSTextField * smartFolderName;
 	IBOutlet NSButton * saveButton;
 	IBOutlet NSButton * cancelButton;
 	IBOutlet NSView * searchCriteriaSuperview;
@@ -43,7 +43,7 @@
 	NSMutableArray * arrayOfViews;
 	Database * db;
 	NSRect searchWindowFrame;
-	int searchFolderId;
+	int smartFolderId;
 	int totalCriteria;
 	int parentId;
 	BOOL firstRun;

@@ -395,7 +395,7 @@
 		if (node != nil)
 		{
 			Folder * folder = [[Database sharedDatabase] folderFromID:[node nodeId]];
-			return folder && !IsTrashFolder(folder) && ![[Database sharedDatabase] readOnly] && [[outlineView window] isVisible];
+			return folder && !IsSearchFolder(folder) && !IsTrashFolder(folder) && ![[Database sharedDatabase] readOnly] && [[outlineView window] isVisible];
 		}
 	}
 	return NO;
@@ -1021,10 +1021,14 @@
 	TreeNode * node = (TreeNode *)item;
 	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
 
-	// Can't drop anything onto the trash folders.
+	// Can't drop anything onto the trash folder.
 	if (isOnDropTypeProposal && node != nil && IsTrashFolder([node folder]))
 		return NSDragOperationNone; 
 
+	// Can't drop anything onto the search folder.
+	if (isOnDropTypeProposal && node != nil && IsSearchFolder([node folder]))
+		return NSDragOperationNone; 
+	
 	// Can't drop anything on smart folders.
 	if (isOnDropTypeProposal && node != nil && IsSmartFolder([node folder]))
 		return NSDragOperationNone; 
@@ -1070,7 +1074,7 @@
 		TreeNode * node = [items objectAtIndex:index];
 		Folder * folder = [node folder];
 
-		if (IsRSSFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsTrashFolder(folder))
+		if (IsRSSFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
 		{
 			[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
 			++countOfItems;

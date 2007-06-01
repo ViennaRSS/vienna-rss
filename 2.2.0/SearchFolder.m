@@ -36,7 +36,7 @@
 #define MA_SFEdit_RemoveTag			1007
 #define MA_SFEdit_FolderValueTag	1008
 
-@interface SearchFolder (Private)
+@interface SmartFolder (Private)
 	-(void)initFolderValueField:(int)parentId atIndent:(int)indentation;
 	-(void)initSearchSheet:(NSString *)folderName;
 	-(void)displaySearchSheet:(NSWindow *)window;
@@ -49,7 +49,7 @@
 	-(void)resizeSearchWindow;
 @end
 
-@implementation SearchFolder
+@implementation SmartFolder
 
 /* initWithDatabase
  * Just init the search criteria class.
@@ -59,7 +59,7 @@
 	if ((self = [super init]) != nil)
 	{
 		totalCriteria = 0;
-		searchFolderId = -1;
+		smartFolderId = -1;
 		db = newDb;
 		firstRun = YES;
 		parentId = MA_Root_Folder;
@@ -75,9 +75,9 @@
 -(void)newCriteria:(NSWindow *)window underParent:(int)itemId
 {
 	[self initSearchSheet:@""];
-	searchFolderId = -1;
+	smartFolderId = -1;
 	parentId = itemId;
-	[searchFolderName setEnabled:YES];
+	[smartFolderName setEnabled:YES];
 
 	// Add a default criteria.
 	[self addDefaultCriteria:0];
@@ -95,11 +95,11 @@
 		int index = 0;
 
 		[self initSearchSheet:[folder name]];
-		searchFolderId = folderId;
-		[searchFolderName setEnabled:YES];
+		smartFolderId = folderId;
+		[smartFolderName setEnabled:YES];
 
 		// Load the criteria into the fields.
-		CriteriaTree * criteriaTree = [db searchStringForSearchFolder:folderId];
+		CriteriaTree * criteriaTree = [db searchStringForSmartFolder:folderId];
 
 		// Set the criteria condition
 		// (selectItemWithTag is Mac OSX 10.4 and later so we use our homebrew one in the extensions instead)
@@ -171,7 +171,7 @@
 		[NSBundle loadNibNamed:@"SearchFolder" owner:self];
 
 		// Register our notifications
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:searchFolderName];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:smartFolderName];
 
 		// Create a mapping for field to column names
 		nameToFieldMap = [[NSMutableDictionary dictionary] retain];
@@ -236,7 +236,7 @@
 	[self initFolderValueField:MA_Root_Folder atIndent:0];
 	
 	// Init the folder name field and disable the Save button if it is blank
-	[searchFolderName setStringValue:folderName];
+	[smartFolderName setStringValue:folderName];
 	[saveButton setEnabled:![folderName isBlank]];
 }
 
@@ -424,13 +424,13 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderName = [[searchFolderName stringValue] trim];
+	NSString * folderName = [[smartFolderName stringValue] trim];
 	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	unsigned int c;
 
 	// Check whether there is another folder with the same name.
 	Folder * folder = [db folderFromName:folderName];
-	if (folder != nil && [folder itemId] != searchFolderId)
+	if (folder != nil && [folder itemId] != smartFolderId)
 	{
 		runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		return;
@@ -483,14 +483,14 @@
 	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
 	
 	[db beginTransaction];
-	if (searchFolderId == -1)
+	if (smartFolderId == -1)
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
-		searchFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
-		[controller selectFolder:searchFolderId];
+		smartFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+		[controller selectFolder:smartFolderId];
 	}
 	else
-		[db updateSearchFolder:searchFolderId withFolder:folderName withQuery:criteriaTree];
+		[db updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
 	[db commitTransaction];
 
 	[criteriaTree release];
@@ -513,7 +513,7 @@
  */
 -(void)handleTextDidChange:(NSNotification *)aNotification
 {
-	NSString * folderName = [searchFolderName stringValue];
+	NSString * folderName = [smartFolderName stringValue];
 	[saveButton setEnabled:![folderName isBlank]];
 }
 
