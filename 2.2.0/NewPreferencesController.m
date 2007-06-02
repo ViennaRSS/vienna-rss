@@ -79,6 +79,9 @@
 	[toolbar setDelegate:self];
 	[prefWindow setToolbar:toolbar];
 
+	// Hide the toolbar pill button
+	[[prefWindow standardWindowButton:NSWindowToolbarButton] setFrame:NSZeroRect];
+
 	// Create an empty view
 	blankView = [[NSView alloc] initWithFrame:[[prefWindow contentView] frame]];
 	
