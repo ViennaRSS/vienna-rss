@@ -36,6 +36,7 @@
 @class ArticleListView;
 @class UnifiedDisplayView;
 @class EmptyTrashWarning;
+@class ClickableProgressIndicator;
 
 @interface AppController : NSObject <GrowlApplicationBridgeDelegate> 
 {
@@ -53,7 +54,7 @@
 	IBOutlet NSButton * exportWithGroups;
 	IBOutlet NSSearchField * searchField;
 	IBOutlet NSTextField * statusText;
-	IBOutlet NSProgressIndicator * spinner;
+	IBOutlet ClickableProgressIndicator * spinner;
 	IBOutlet NSBox * bottomDivider;
 	IBOutlet NSMenuItem * closeTabItem;
 	IBOutlet NSMenuItem * closeAllTabsItem;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34363AC90C11C297002A1238 /* ClickableProgressIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */; };
+		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 47775BD90A109C6A0091C45E /* Acknowledgements.rtf */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
@@ -335,6 +337,8 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
+		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
+		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -911,6 +915,8 @@
 				AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */,
 				AA682CF5069A955F00228193 /* ViennaApp.h */,
 				AA682CF6069A955F00228193 /* ViennaApp.m */,
+				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
+				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1283,6 +1289,7 @@
 				AA785DBC0BF62AE60089DCF0 /* sqlite3.h in Headers */,
 				AA1A23DA0C07475B005968DC /* SplitViewExtensions.h in Headers */,
 				AA1A27550C09B27E005968DC /* ViewExtensions.h in Headers */,
+				34363AC90C11C297002A1238 /* ClickableProgressIndicator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1832,6 +1839,7 @@
 				AA785DBD0BF62AE60089DCF0 /* sqlite3.c in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
 				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
+				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

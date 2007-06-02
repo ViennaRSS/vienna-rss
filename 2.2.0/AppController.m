@@ -45,9 +45,10 @@
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
-#import "WebKit/WebFrame.h"
-#import "WebKit/WebUIDelegate.h"
-#import "Growl/GrowlDefines.h"
+#import "ClickableProgressIndicator.h"
+#import <WebKit/WebFrame.h>
+#import <WebKit/WebUIDelegate.h>
+#import <Growl/GrowlDefines.h>
 #include <mach/mach_port.h>
 #include <mach/mach_interface.h>
 #include <mach/mach_init.h>
@@ -3472,7 +3473,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			[item setView:spinner];
 			[spinner setDisplayedWhenStopped:NO];
-
+			[spinner setTarget:self];
+			[spinner setAction:@selector(toggleActivityViewer:)];
 		}
 		else
 		{
