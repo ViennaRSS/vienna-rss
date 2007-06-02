@@ -3413,7 +3413,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 * It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
 * going to be displayed in a customization palette.
 */
--(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
+-(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
 {
 	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	if ([itemIdentifier isEqualToString:@"SearchItem"])
@@ -3467,7 +3467,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[item setLabel:nil];
 		[item setPaletteLabel:NSLocalizedString(@"Progress", nil)];
-		[item setView:spinner];
+		//Only have the spinner hide when stopped for the real window, not for the customization pane
+		if (willBeInserted)
+		{
+			[item setView:spinner];
+			[spinner setDisplayedWhenStopped:NO];
+
+		}
+		else
+		{
+			NSProgressIndicator *customizationPaletteSpinner = [[NSProgressIndicator alloc] initWithFrame:[spinner frame]];
+			[customizationPaletteSpinner setControlSize:[spinner controlSize]];
+			[customizationPaletteSpinner setControlTint:[spinner controlTint]];
+			[customizationPaletteSpinner setIndeterminate:[spinner isIndeterminate]];
+			[customizationPaletteSpinner setStyle:[spinner style]];
+	
+			[item setView:customizationPaletteSpinner];
+			[customizationPaletteSpinner release];
+		}
+
 		[item setMinSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 		[item setMaxSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 	}
