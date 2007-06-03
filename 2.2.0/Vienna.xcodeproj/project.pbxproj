@@ -154,6 +154,10 @@
 		AA86B2AA0892DCAA0071FB33 /* BezierPathExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */; };
 		AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
 		AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA872C680B658B0B00F352C9 /* PSMTabBarControl.framework */; };
+		AA8B36C10C12D6480035FBD7 /* GradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8B36BF0C12D6480035FBD7 /* GradientView.h */; };
+		AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8B36C00C12D6480035FBD7 /* GradientView.m */; };
+		AA8B36D90C12D7190035FBD7 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8B36D70C12D7190035FBD7 /* CTGradient.h */; };
+		AA8B36DA0C12D7190035FBD7 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8B36D80C12D7190035FBD7 /* CTGradient.m */; };
 		AA8C72F50641DE1F00649BA2 /* Criteria.h in Headers */ = {isa = PBXBuildFile; fileRef = AA8C72F30641DE1F00649BA2 /* Criteria.h */; };
 		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		AA8F85A10A0A2F6600A0EACE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F856C0A0A2F6600A0EACE /* Security.framework */; };
@@ -621,6 +625,10 @@
 		AA86B2A80892DCAA0071FB33 /* BezierPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = BezierPathExtensions.h; sourceTree = "<group>"; };
 		AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = BezierPathExtensions.m; sourceTree = "<group>"; };
 		AA872C680B658B0B00F352C9 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSMTabBarControl.framework; sourceTree = "<group>"; };
+		AA8B36BF0C12D6480035FBD7 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		AA8B36C00C12D6480035FBD7 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		AA8B36D70C12D7190035FBD7 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		AA8B36D80C12D7190035FBD7 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
 		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criteria.h; sourceTree = "<group>"; };
 		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criteria.m; sourceTree = "<group>"; };
 		AA8F856C0A0A2F6600A0EACE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -915,8 +923,6 @@
 				AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */,
 				AA682CF5069A955F00228193 /* ViennaApp.h */,
 				AA682CF6069A955F00228193 /* ViennaApp.m */,
-				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
-				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1090,6 +1096,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		AA8B36CC0C12D6F30035FBD7 /* CTGradient */ = {
+			isa = PBXGroup;
+			children = (
+				AA8B36D70C12D7190035FBD7 /* CTGradient.h */,
+				AA8B36D80C12D7190035FBD7 /* CTGradient.m */,
+			);
+			name = CTGradient;
+			sourceTree = "<group>";
+		};
 		AA8C76C006420CA800649BA2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -1134,6 +1149,7 @@
 		AAA568BB09EE773200C87343 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				AA8B36CC0C12D6F30035FBD7 /* CTGradient */,
 				AAED82F40A0379FE00ED56E5 /* DisclosableView */,
 				AA26F478060490F400FE7994 /* SQLite */,
 				AA4F657B062B873100D4837C /* Extensions */,
@@ -1181,6 +1197,8 @@
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
+				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
+				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 				AA94574A061C7E060090FE26 /* ExtDateFormatter.h */,
 				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -1195,6 +1213,8 @@
 				AABCFB190900BA4E00984F78 /* SquareWindow.m */,
 				AA2185020861E7600024DD4A /* TexturedHeader.h */,
 				AA2185010861E7600024DD4A /* TexturedHeader.m */,
+				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
+				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
 			);
 			name = "Support Classes";
 			sourceTree = "<group>";
@@ -1290,6 +1310,8 @@
 				AA1A23DA0C07475B005968DC /* SplitViewExtensions.h in Headers */,
 				AA1A27550C09B27E005968DC /* ViewExtensions.h in Headers */,
 				34363AC90C11C297002A1238 /* ClickableProgressIndicator.h in Headers */,
+				AA8B36C10C12D6480035FBD7 /* GradientView.h in Headers */,
+				AA8B36D90C12D7190035FBD7 /* CTGradient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1840,6 +1862,8 @@
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
 				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
+				AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */,
+				AA8B36DA0C12D7190035FBD7 /* CTGradient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
