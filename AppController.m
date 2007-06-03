@@ -182,6 +182,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES]; 
 	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+	if ([toolbar respondsToSelector:@selector(setShowsBaselineSeparator:)])
+		[toolbar setShowsBaselineSeparator:NO];
 	[mainWindow setToolbar:toolbar];
 
 	// Run the auto-expire now
@@ -273,6 +275,13 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Do safe initialisation. 	 
 	[self doSafeInitialisation];
+	
+	/* Retain views which might be removed from the toolbar and therefore released;
+	 * we will need them if they are added back later.
+	 */
+	[spinner retain];
+	[searchView retain];
+	[actionPopup retain];
 }
 
 /* installCustomEventHandler
@@ -3483,6 +3492,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[spinner setDisplayedWhenStopped:NO];
 			[spinner setTarget:self];
 			[spinner setAction:@selector(toggleActivityViewer:)];
+			
+			//Ensure the spinner has the proper state; it may be added while we're refreshing
+			if ([NSApp isRefreshing]) {
+				[spinner startAnimation:self];
 		}
 		else
 		{
@@ -3578,6 +3591,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[appDockMenu release];
 	[appStatusItem release];
 	[db release];
+	
+	[spinner retain];
+	[searchView retain];
+	[actionPopup retain];
+
 	[super dealloc];
 }
 @end
