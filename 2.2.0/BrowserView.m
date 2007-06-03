@@ -223,6 +223,11 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:[inTabViewItem identifier]];	
 }
 
+- (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabCountChanged" object:nil];
+}
+
 /* disableTabCloseForTabViewItem
  * Returns whether the tab close should be disabled for the specified item. We disable the close button
  * for the primary item.

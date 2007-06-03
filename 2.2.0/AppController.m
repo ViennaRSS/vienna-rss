@@ -157,6 +157,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
 	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleTabCountChange:) name:@"MA_Notify_TabCountChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
@@ -1938,9 +1939,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		BrowserPane * webPane = (BrowserPane *)newView;
 		[mainWindow makeFirstResponder:[webPane mainView]];
 	}
-	[self updateCloseCommands];
 	[self updateSearchPlaceholder];
 	[self setStatusMessage:nil persist:NO];
+}
+
+/* handleTabChange
+ * Handle a change in the number of tabs.
+ */
+- (void)handleTabCountChange:(NSNotification *)nc
+{
+	[self updateCloseCommands];	
 }
 
 /* handleFolderNameChange
