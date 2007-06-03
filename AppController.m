@@ -1999,7 +1999,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[articleController refreshCurrentFolder];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
-		// This method does not exist in Mac OS X 10.3.9.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && [NSApp respondsToSelector:@selector(requestUserAttention:)])
 			[NSApp requestUserAttention:NSInformationalRequest];
@@ -3494,7 +3493,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[spinner setAction:@selector(toggleActivityViewer:)];
 			
 			//Ensure the spinner has the proper state; it may be added while we're refreshing
-			if ([NSApp isRefreshing]) {
+			if ([NSApp isRefreshing])
 				[spinner startAnimation:self];
 		}
 		else
@@ -3504,7 +3503,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[customizationPaletteSpinner setControlTint:[spinner controlTint]];
 			[customizationPaletteSpinner setIndeterminate:[spinner isIndeterminate]];
 			[customizationPaletteSpinner setStyle:[spinner style]];
-	
+
 			[item setView:customizationPaletteSpinner];
 			[customizationPaletteSpinner release];
 		}
@@ -3528,7 +3527,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[menuItem setSubmenu:[actionPopup menu]];
 		[menuItem setTitle:[item label]];
 		[item setMenuFormRepresentation:menuItem];
-}
+	}
+	
 	return [item autorelease];
 }
 
