@@ -45,7 +45,7 @@
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
-	IBOutlet NSView * searchView;
+	IBOutlet NSSearchField * searchView;
 	IBOutlet ArticleListView * mainArticleView;
 	IBOutlet UnifiedDisplayView * unifiedListView;
 	IBOutlet BrowserView * browserView;
