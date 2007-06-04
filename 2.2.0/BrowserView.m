@@ -203,7 +203,10 @@
  */
 -(void)showPreviousTab
 {
-	[tabView selectPreviousTabViewItem:self];
+	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 0)
+		[tabView selectLastTabViewItem:self];
+	else
+		[tabView selectPreviousTabViewItem:self];
 }
 
 /* showNextTab
@@ -212,7 +215,10 @@
  */
 -(void)showNextTab
 {
-	[tabView selectNextTabViewItem:self];
+	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == ([tabView numberOfTabViewItems] - 1))
+		[tabView selectFirstTabViewItem:self];
+	else
+		[tabView selectNextTabViewItem:self];
 }
 
 /* didSelectTabViewItem
