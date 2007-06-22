@@ -139,7 +139,7 @@
 "Cannot open export file message" = "Невозможно создать экспортируемый файл.";
 "Cannot open export file message text" = "Указанный экспортируемый файл не может быть создан. Убедитесь, что он не заблокирован и не используется другим приложением.";
 "Source" = "Источник";
-"Status" = "Статус";
+"Status" = "Состояние";
 "Enter LiveJournal User name" = "Введите имя пользователя LiveJournal";
 "Enter MSN Spaces User name" = "Введите имя пользователя MSN Spaces";
 "Enter Blogspot User name" = "Введите имя пользователя Blogspot";
@@ -247,7 +247,7 @@
 "Main Window" = "Главное Окно";
 "MainMenu" = "Главное Меню";
 "Mark All Articles as Read" = "Отметить Все Статьи Как Прочитанные";
-"Mark Flagged" = "Установить Отметку";
+"Mark Flagged" = "Отметить";
 "Minimize" = "Свернуть";
 "New Group Folder…" = "Новая Группа…";
 "New Smart Folder…" = "Новая Смарт-папка…";
@@ -285,7 +285,7 @@
 "Vienna Web Site" = "Сайт Программы Vienna";
 "View" = "Вид";
 "Window" = "Окно";
-"Zoom" = "Зум";
+"Zoom" = "Изменить масштаб";
 "Export all subscriptions" = "Экспортировать все подписки";
 "Export selected subscriptions" = "Экспортировать выбранные подписки";
 "Preserve group folders in exported file" = "Сохранить группы в экспортируемом файле";
@@ -325,10 +325,10 @@
 "%@ (Filtered: %@)" = "%@ (Фильтр: %@)";
 "Get Info..." = "Сведения...";
 "Open Web Location..." = "Открыть Адрес Веб...";
-"Refresh Folder Images" = "Обносить Изображения Папки";
-"Report" = "Сообщить";
-"Condensed" = "Краткий";
-"Unified" =  "Общий";
+"Refresh Folder Images" = "Обновить Изображения Папки";
+"Report" = "Отчет";
+"Condensed" = "Сжатая";
+"Unified" =  "Общая";
 "Summary" = "Выводы";
 "Blog With..." = "Запись в Блог...";
 "Blog with %@" = "Запись в Блог %@";
