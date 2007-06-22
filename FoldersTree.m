@@ -177,7 +177,8 @@
 	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
 
 	height = [boldCellFont defaultLineHeightForFont];
-	[outlineView setRowHeight:height + 4];
+	[outlineView setRowHeight:height + 3];
+	[outlineView setIntercellSpacing:NSMakeSize(10, 4)];
 }
 
 /* reloadDatabase

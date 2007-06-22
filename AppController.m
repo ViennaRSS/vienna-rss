@@ -182,8 +182,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES]; 
 	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
-	if ([toolbar respondsToSelector:@selector(setShowsBaselineSeparator:)])
-		[toolbar setShowsBaselineSeparator:NO];
 	[mainWindow setToolbar:toolbar];
 
 	// Run the auto-expire now
@@ -3252,7 +3250,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(deleteFolder:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && !IsTrashFolder(folder) && !IsSearchFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{

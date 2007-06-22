@@ -29,10 +29,6 @@
 	-(void)outlineViewWillBecomeFirstResponder;
 @end
 
-// Gradient data from http://www.cocoadev.com/index.pl?CCDGradientSelectionTableView
-static NSString * blueImageData = @"<4d4d002a 00000048 800f4f6d a2ca65ca 564b390a 69371941 1ee22622 dc04743b 7c86826e 900fcdb1 d9e5b237 3ab60647 06b0b8d8 d5151a1a 82732348 46616888 4bcd00f9 719f0100 000d0100 00030000 00010001 00000101 00030000 00010012 00000102 00030000 00030000 00ea0103 00030000 00010005 00000106 00030000 00010002 00000111 00040000 00010000 00080115 00030000 00010003 00000116 00040000 00010000 2aaa0117 00040000 00010000 003f011a 00050000 00010000 00f0011b 00050000 00010000 00f8011c 00030000 00010001 00000128 00030000 00010002 00000000 00000008 00080008 000afc80 00002710 000afc80 00002710 >";
-static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de5 7c7c7ce5 7a7a7be5 787778e5 777676e5 747474e5 737373e5 727171e5 706f6fe5 6d6d6ce5 6c6c6be5 6a6a6ae5 696969e5 676767e5 656565e5 636464e5 616161e5 616161e5 606161e5 5f5e5fe5 5e5e5ee5 5d5d5de5 5c5c5ce5 000d0100 00030000 00010001 00000101 00030000 00010019 00000102 00030000 00040000 010e0103 00030000 00010001 00000106 00030000 00010002 00000111 00040000 00010000 00080115 00030000 00010004 00000117 00040000 00010000 0064011a 00050000 00010000 0116011b 00050000 00010000 011e011c 00030000 00010001 00000128 00030000 00010002 00000152 00030000 00010001 00000000 00000008 00080008 0008000a fc800000 2710000a fc800000 2710>";
-
 @implementation FolderView
 
 /* init
@@ -50,8 +46,12 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
  */
 -(void)awakeFromNib
 {
-	blueGradient = [[NSImage alloc] initWithData:[blueImageData propertyList]];
-	grayGradient = [[NSImage alloc] initWithData:[grayImageData propertyList]];
+	NSString * blueGradientURL = [[NSBundle mainBundle] pathForResource:@"selBlue" ofType:@"tiff"];
+	blueGradient = [[NSImage alloc] initWithContentsOfFile: blueGradientURL ];
+	
+	NSString * grayGradientURL = [[NSBundle mainBundle] pathForResource:@"selGray" ofType:@"tiff"];
+	grayGradient = [[NSImage alloc] initWithContentsOfFile: grayGradientURL ];
+
 	iRect = NSMakeRect(0,0,1,[blueGradient size].height-1);					
 	[grayGradient setFlipped:YES];
 }
@@ -360,7 +360,7 @@ static NSString * grayImageData = @"<4d4d002a 0000006c 808080e5 7e7e7ee5 7d7d7de
 		borderRect.size.width += 2;
 		
 		// Draw the border...
-		[[NSColor blackColor] set];
+		[[NSColor whiteColor] set];
 		NSFrameRect(borderRect);
 		
 		[self unlockFocus];
