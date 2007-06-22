@@ -192,12 +192,7 @@
         {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
         {CLASS = NSObject; LANGUAGE = ObjC; }, 
         {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
-        {
-            CLASS = PSMTabBarControl; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {delegate = id; partnerView = id; style = id; tabView = NSTabView; }; 
-            SUPERCLASS = NSControl; 
-        }, 
+        {CLASS = PolishedWindow; LANGUAGE = ObjC; SUPERCLASS = SquareWindow; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             ACTIONS = {checkForUpdates = id; }; 
@@ -206,6 +201,7 @@
             SUPERCLASS = NSObject; 
         }, 
         {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = SquareWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
         {
             ACTIONS = {printDocument = id; }; 
             CLASS = TabbedWebView; 
@@ -213,6 +209,7 @@
             SUPERCLASS = WebView; 
         }, 
         {CLASS = TexturedHeader; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = ThinSplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
         {CLASS = ThreeDBoxView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
             CLASS = UnifiedDisplayView; 
