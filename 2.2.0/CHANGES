@@ -11,6 +11,7 @@ Thanks!
 - UI improvements contributed by Philipp Antoni.
 - Switched to polished metal style.
 - Added Russian localization. (Thanks to Taras "sacrat" Brizitsky).
+- Show refresh indicator in folder list next to feed currently being refreshed.
 
 2.2.0.2200
 ----------

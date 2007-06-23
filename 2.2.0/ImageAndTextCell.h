@@ -23,22 +23,22 @@
 @interface ImageAndTextCell : NSTextFieldCell {
 	@private
 	NSImage	* image;
-	NSImage * errorImage;
+	NSImage * auxiliaryImage;
 	NSColor * countBackgroundColour;
 	int offset;
 	int count;
-	bool hasCount;
+	BOOL hasCount;
 }
 
 // Accessor functions
 -(void)setOffset:(int)offset;
 -(void)setImage:(NSImage *)anImage;
--(void)setErrorImage:(NSImage *)anErrorImage;
+-(void)setAuxiliaryImage:(NSImage *)anAuxiliaryImage;
 -(void)setCount:(int)newCount;
 -(void)clearCount;
 -(void)setCountBackgroundColour:(NSColor *)newColour;
 -(NSImage *)image;
--(NSImage *)errorImage;
+-(NSImage *)auxiliaryImage;
 -(int)offset;
 -(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 -(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView;

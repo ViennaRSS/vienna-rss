@@ -73,6 +73,7 @@
 		canRenameFolders = NO;
 		selectionTimer = nil;
 		folderErrorImage = nil;
+		refreshProgressImage = nil;
 	}
 	return self;
 }
@@ -93,6 +94,7 @@
 
 	// Folder image
 	folderErrorImage = [NSImage imageNamed:@"folderError.tiff"];
+	refreshProgressImage = [NSImage imageNamed:@"refreshProgress.tiff"];
 	
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
@@ -862,6 +864,16 @@
 			textColor = [NSColor blackColor];
 		[realCell setTextColor:textColor];
 
+		// Use the auxiliary position of the feed item to show
+		// the refresh icon if the feed is being refreshed, or an
+		// error icon if the feed failed to refresh last time.
+		if (IsUpdating(folder))
+			[realCell setAuxiliaryImage:refreshProgressImage];
+		else if (IsError(folder))
+			[realCell setAuxiliaryImage:refreshProgressImage];
+		else
+			[realCell setAuxiliaryImage:nil];
+
 		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
@@ -884,9 +896,6 @@
 			[realCell clearCount];
 			[realCell setFont:cellFont];
 		}
-
-		// Set error image if the folder's last refresh resulted in an error
-		[realCell setErrorImage:([folder nonPersistedFlags] & MA_FFlag_Error) ? folderErrorImage : nil];
 
 		// Only show folder images if the user prefers them.
 		Preferences * prefs = [Preferences standardPreferences];
@@ -1426,6 +1435,7 @@
 	[cellFont release];
 	[boldCellFont release];
 	[folderErrorImage release];
+	[refreshProgressImage release];
 	[rootNode release];
 	[super dealloc];
 }
