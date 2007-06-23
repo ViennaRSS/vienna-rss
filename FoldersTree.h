@@ -40,6 +40,7 @@
 	NSFont * cellFont;
 	NSFont * boldCellFont;
 	NSImage * folderErrorImage;
+	NSImage * refreshProgressImage;
 	BOOL blockSelectionHandler;
 	BOOL canRenameFolders;
 }

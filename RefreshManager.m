@@ -44,6 +44,7 @@ typedef enum {
 	-(void)refreshFavIcon:(Folder *)folder;
 	-(void)getCredentialsForFolder;
 	-(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
+	-(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag;
 	-(void)pumpSubscriptionRefresh:(Folder *)folder;
 	-(void)pumpFolderIconRefresh:(Folder *)folder;
 	-(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem;
@@ -258,9 +259,7 @@ typedef enum {
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
 	if ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage])
-	{
 		return;
-	}
 	
 	if (![self isRefreshingFolder:folder ofType:MA_Refresh_FavIcon])
 	{
@@ -399,6 +398,19 @@ typedef enum {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
+/* setFolderUpdatingFlag
+ * Sets or clears the folder updating flag then broadcasts an update indicating that the folder
+ * has changed.
+ */
+-(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag
+{
+	if (theFlag)
+		[folder setNonPersistedFlag:MA_FFlag_Updating];
+	else
+		[folder clearNonPersistedFlag:MA_FFlag_Updating];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+}
+
 /* beginRefreshTimer
  * Start the connection refresh timer running.
  */
@@ -479,6 +491,11 @@ typedef enum {
 	// Seed the activity log for this feed.
 	[aItem clearDetails];
 	[aItem setStatus:NSLocalizedString(@"Retrieving articles", nil)];
+
+	// Mark the folder as being refreshed. The updating status is not
+	// persistent so we set this directly on the folder rather than
+	// through the database.
+	[self setFolderUpdatingFlag:folder flag:YES];
 	
 	// Additional detail for the log
 	[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
@@ -558,7 +575,8 @@ typedef enum {
 	Folder * folder = (Folder *)[connector contextData];
 	int folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
-	
+
+	[self setFolderUpdatingFlag:folder flag:NO];
 	if ([connector status] == MA_Connect_NeedCredentials)
 	{
 		if (![authQueue containsObject:folder])

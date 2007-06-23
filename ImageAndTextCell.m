@@ -35,7 +35,7 @@
 	if ((self = [super init]) != nil)
 	{
 		image = nil;
-		errorImage = nil;
+		auxiliaryImage = nil;
 		offset = 0;
 		hasCount = NO;
 		count = 0;
@@ -48,7 +48,7 @@
 {
 	ImageAndTextCell *cell = (ImageAndTextCell *)[super copyWithZone:zone];
 	cell->image = [image retain];
-	cell->errorImage = [errorImage retain];
+	cell->auxiliaryImage = [auxiliaryImage retain];
 	cell->offset = offset;
 	cell->hasCount = hasCount;
 	cell->count = count;
@@ -90,23 +90,23 @@
 	return [[image retain] autorelease];
 }
 
-/* setErrorImage
- * Sets the error image to be displayed. Nil removes any existing
- * error image.
+/* setAuxiliaryImage
+ * Sets the auxiliary image to be displayed. Nil removes any existing
+ * auxiliary image.
  */
--(void)setErrorImage:(NSImage *)newErrorImage
+-(void)setAuxiliaryImage:(NSImage *)newAuxiliaryImage
 {
-	[newErrorImage retain];
-	[errorImage release];
-	errorImage = newErrorImage;
+	[newAuxiliaryImage retain];
+	[auxiliaryImage release];
+	auxiliaryImage = newAuxiliaryImage;
 }
 
-/* errorImage
- * Returns the current error image.
+/* auxiliaryImage
+ * Returns the current auxiliary image.
  */
--(NSImage *)errorImage
+-(NSImage *)auxiliaryImage
 {
-	return errorImage;
+	return auxiliaryImage;
 }
 
 /* setCount
@@ -190,12 +190,12 @@
 		[self drawCellImage:&cellFrame inView:controlView];
 
 	// If we have an error image, it appears on the right hand side.
-	if (errorImage)
+	if (auxiliaryImage)
 	{
 		NSSize imageSize;
 		NSRect imageFrame;
 		
-		imageSize = [errorImage size];
+		imageSize = [auxiliaryImage size];
 		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMaxXEdge);
 		if ([self drawsBackground])
 		{
@@ -209,7 +209,7 @@
 		else
 			imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
 		
-		[errorImage compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+		[auxiliaryImage compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
 	}
 	
 	// If the cell has a count button, draw the count
@@ -281,7 +281,7 @@
 -(void)dealloc
 {
 	[countBackgroundColour release];
-	[errorImage release];
+	[auxiliaryImage release];
 	[image release];
 	[super dealloc];
 }
