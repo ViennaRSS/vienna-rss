@@ -24,9 +24,15 @@
 	NSImage * metalBg;
 	NSMutableDictionary * attrs;
 	NSAttributedString * attributedStringValue;
+	NSImage * draggerImage;
+	BOOL hasDragger;
+	BOOL isDragging;
+	int dragOffset;
+	NSSplitView * splitView;
 }
 
 -(NSString *)stringValue;
 -(NSAttributedString *)attributedStringValue;
 -(void)setStringValue:(NSString *)newStringValue;
+-(void)setDragger:(BOOL)show withSplitView:(NSSplitView *)view;
 @end

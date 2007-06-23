@@ -37,7 +37,6 @@
 	IBOutlet TexturedHeader * unifiedListHeader;
 	IBOutlet ArticleView * unifiedText;
 	IBOutlet FoldersTree * foldersTree;
-	IBOutlet PopupButton * filtersPopupMenu;
 }
 
 // Public functions

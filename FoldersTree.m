@@ -99,6 +99,7 @@
 
 	// Set header
 	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
+	[folderHeader setDragger:YES withSplitView:folderSplitView];
 
 	// Set background colour
 	[outlineView setBackgroundColor:[NSColor colorWithDeviceRed:(228.0f/255.0f) green:(237.0f/255.0f) blue:(246.0f/255.0f) alpha:1.0f]];

@@ -44,10 +44,7 @@
 	[unifiedText setFrameLoadDelegate:self];
 	[unifiedText setOpenLinksInNewBrowser:YES];
 	[unifiedText setController:controller];
-	
-	// Set the filters popup menu
-	[controller initFiltersMenu:filtersPopupMenu];
-	
+
 	// Disable caching
 	[unifiedText setMaintainsBackForwardList:NO];
 	[[unifiedText backForwardList] setPageCacheSize:0];

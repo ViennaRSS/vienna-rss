@@ -19,6 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ThinSplitView.h"
 #import "TreeNode.h"
 
 @class TexturedHeader;
@@ -32,6 +33,7 @@
 	IBOutlet AppController * controller;
 	IBOutlet FolderView * outlineView;
 	IBOutlet TexturedHeader * folderHeader;
+	IBOutlet ThinSplitView * folderSplitView;
 
 	TreeNode * rootNode;
 	NSTimer * selectionTimer;

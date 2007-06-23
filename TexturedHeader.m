@@ -20,6 +20,11 @@
 
 #import "TexturedHeader.h"
 
+// Private functions
+@interface TexturedHeader (Private)
+	-(NSRect)dragImageRect:(NSRect)bounds;
+@end
+
 @implementation TexturedHeader
 
 -(id)initWithFrame:(NSRect)frame
@@ -36,11 +41,33 @@
 		[attrs setValue:style forKey:NSParagraphStyleAttributeName];
 		[style release];
 
+		// Load this even if we don't use it. Not that expensive.
+		draggerImage = [NSImage imageNamed:@"draggerImage.png"];
+
+		// Other bits
 		attributedStringValue = nil;
+		hasDragger = NO;
+		isDragging = NO;
+		dragOffset = 0;
 	}
 	return self;
 }
 
+/* setDragger
+ * Sets whether or not a dragger is displayed on the header. If a dragger is set then
+ * the setDelegate function must be called so that dragger events can be fed back to
+ * the delegate.
+ */
+-(void)setDragger:(BOOL)show withSplitView:(NSSplitView *)view;
+{
+	hasDragger = show;
+	splitView = view;	// Weak ref.
+	[self display];
+}
+
+/* setStringValue
+ * Sets the text to be displayed on the header. Cannot be NIL.
+ */
 -(void)setStringValue:(NSString *)newStringValue
 {
 	[attributedStringValue release];
@@ -48,16 +75,25 @@
 	[self display];
 }
 
+/* attributedStringValue
+ * Returns the text displayed on the header as an attributed string.
+ */
 -(NSAttributedString *)attributedStringValue
 {
 	return attributedStringValue;
 }
 
+/* stringValue
+ * Returns the text displayed on the header as a string.
+ */
 -(NSString *)stringValue
 {
 	return [attributedStringValue string];
 }
 
+/* drawRect
+ * Paint the header.
+ */
 -(void)drawRect:(NSRect)rect
 {
 	// Draw metalBg lowest pixel along the bottom of inFrame.
@@ -84,9 +120,12 @@
 	float offset = 0.5;
 
 	NSRect centeredRect = rect;
+	NSRect textRect = rect;
+	if (hasDragger)
+		textRect.size.width -= [draggerImage size].width - 2;
 	centeredRect.size = [[self stringValue] sizeWithAttributes:attrs];
-	centeredRect.origin.x = ((rect.size.width - centeredRect.size.width) / 2.0) - offset;
-	centeredRect.origin.y = ((rect.size.height - centeredRect.size.height) / 2.0) + offset;
+	centeredRect.origin.x = ((textRect.size.width - centeredRect.size.width) / 2.0) - offset;
+	centeredRect.origin.y = ((textRect.size.height - centeredRect.size.height) / 2.0) + offset;
 
 	centeredRect.origin.x += offset;
 	centeredRect.origin.y -= offset;
@@ -102,9 +141,98 @@
 	centeredRect.origin.y += 1;
 	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
 
-
+	// Draw the dragger if it is present.
+	if (hasDragger)
+	{
+		NSRect location = [self dragImageRect:rect];
+		[draggerImage compositeToPoint:location.origin operation:NSCompositeSourceOver];
+	}
 }
 
+/* mouseDown
+ * Called when the user clicks in the header. We determine whether we're in the drag area and, if so,
+ * we set isDragging so that subsequent mouse move events initiate a drag.
+ */
+-(void)mouseDown:(NSEvent *)event
+{
+	if (hasDragger)
+	{
+		NSPoint clickLocation = [self convertPoint:[event locationInWindow] fromView:nil];
+		NSRect location = [self dragImageRect:[self bounds]];
+		isDragging = NSPointInRect(clickLocation, location);
+		if (isDragging)
+		{
+			clickLocation = [self convertPoint:[event locationInWindow] fromView:[self superview]];
+			dragOffset = NSWidth([[self superview] frame]) - clickLocation.x;
+		}
+	}
+}
+
+/* mouseDragged
+ * Handles the actual drag event to resize the splitview associated with this header.
+ */
+-(void)mouseDragged:(NSEvent *) event
+{
+	if (isDragging)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification object:splitView];
+
+		NSPoint clickLocation = [self convertPoint:[event locationInWindow] fromView:[self superview]];
+
+		NSView * boundingView = [[self superview] superview];
+		NSRect newFrame = [boundingView frame];
+		newFrame.size.width = clickLocation.x + dragOffset;
+
+		id delegate = [splitView delegate];
+		if (delegate && [delegate respondsToSelector:@selector(splitView:constrainSplitPosition:ofSubviewAt:)])
+		{
+			float new = [delegate splitView:splitView constrainSplitPosition:newFrame.size.width ofSubviewAt:0];
+			newFrame.size.width = new;
+		}
+
+		if (delegate && [delegate respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)])
+		{
+			float min = [delegate splitView:splitView constrainMinCoordinate:0. ofSubviewAt:0];
+			newFrame.size.width = MAX(min, newFrame.size.width);
+		}
+
+		if (delegate && [delegate respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)])
+		{
+			float max = [delegate splitView:splitView constrainMaxCoordinate:0. ofSubviewAt:0];
+			newFrame.size.width = MIN(max, newFrame.size.width);
+		}
+		[boundingView setFrame:newFrame];
+		[splitView adjustSubviews];
+		[[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification object:splitView];
+	}
+}
+
+/* dragImageRect
+ * Given the bounds of a view, returns the position and size of the dragger image in that view. This
+ * works regardless of whether or not hasDragger is set.
+ */
+-(NSRect)dragImageRect:(NSRect)bounds
+{
+	NSRect location;
+	
+	location.size = [draggerImage size];
+	location.origin = NSMakePoint(bounds.size.width - [draggerImage size].width, (bounds.size.height - [draggerImage size].height) / 2);
+	return location;
+}
+
+/* resetCursorRects
+ * Called to update the dragger cursor rect if applicable.
+ */
+-(void)resetCursorRects
+{
+	[super resetCursorRects];
+	if (hasDragger)
+		[self addCursorRect:[self dragImageRect:[self bounds]] cursor:[NSCursor resizeLeftRightCursor]];
+}
+
+/* dealloc
+ * Clean up after ourselves.
+ */
 -(void)dealloc
 {
 	[attributedStringValue release];

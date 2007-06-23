@@ -73,7 +73,6 @@
                 articleController = ArticleController; 
                 blogWithMenu = NSMenuItem; 
                 blogWithOneMenu = NSMenuItem; 
-                bottomDivider = NSBox; 
                 browserView = BrowserView; 
                 closeAllTabsItem = NSMenuItem; 
                 closeTabItem = NSMenuItem; 
@@ -184,6 +183,7 @@
             OUTLETS = {
                 controller = AppController; 
                 folderHeader = TexturedHeader; 
+                folderSplitView = ThinSplitView; 
                 outlineView = FolderView; 
             }; 
             SUPERCLASS = NSView; 
