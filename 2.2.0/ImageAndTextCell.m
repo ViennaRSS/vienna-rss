@@ -219,7 +219,7 @@
 		NSString * number = [NSString stringWithFormat:@"%i", count];
 
 		// Use the current font point size as a guide for the count font size
-		float pointSize = [[self font] pointSize] - 2.0;
+		float pointSize = [[self font] pointSize];
 
 		// Create attributes for drawing the count.
 		NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:pointSize],
@@ -230,7 +230,7 @@
 		NSSize numSize = [number sizeWithAttributes:attributes];
 
 		// Compute the dimensions of the count rectangle.
-		int cellWidth = MAX(numSize.width + 6, numSize.height + 1);
+		int cellWidth = MAX(numSize.width + 6, numSize.height + 1) + 1;
 
 		NSRect countFrame;
 		NSDivideRect(cellFrame, &countFrame, &cellFrame, cellWidth, NSMaxXEdge);
@@ -241,18 +241,20 @@
 		}
 
 		countFrame.origin.y += 1;
-		countFrame.size.height -= 3;
+		countFrame.size.height -= 2;
 		NSBezierPath * bp = [NSBezierPath bezierPathWithRoundRectInRect:countFrame radius:numSize.height / 2];
 		[countBackgroundColour set];
 		[bp fill];
 
 		// Draw the count in the rounded rectangle we just created.
-		NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f + 1.0f);
+		NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f );
 		[number drawAtPoint:point withAttributes:attributes];
 		[attributes release];
 	}
 
 	// Draw the text
+	cellFrame.origin.y += 1;
+	cellFrame.origin.x += 2;
 	[super drawWithFrame:cellFrame inView:controlView];
 }
 
