@@ -42,7 +42,6 @@
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet FoldersTree * foldersTree;
-	IBOutlet PopupButton * filtersPopupMenu;
 	IBOutlet PopupButton * columnsPopupMenu;
 
 	int currentSelectedRow;

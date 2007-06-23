@@ -98,9 +98,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleText setFrameLoadDelegate:self];
 	[articleText setOpenLinksInNewBrowser:YES];
 	[articleText setController:controller];
-	
-	// Set the filters popup menu
-	[controller initFiltersMenu:filtersPopupMenu];
 
 	// Disable caching
 	[articleText setMaintainsBackForwardList:NO];

@@ -29,6 +29,7 @@
 		AA0FB5E20869110300D9CB90 /* ActivityLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AA0FB5E00869110300D9CB90 /* ActivityLog.h */; };
 		AA0FB5E30869110300D9CB90 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0FB5E10869110300D9CB90 /* ActivityLog.m */; };
 		AA167A850658361B0091365D /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
+		AA16C2B10C2D57D5006BBAC1 /* draggerImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AA16C2B00C2D57D5006BBAC1 /* draggerImage.png */; };
 		AA1A23DA0C07475B005968DC /* SplitViewExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA1A23D80C07475B005968DC /* SplitViewExtensions.h */; };
 		AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1A23D90C07475B005968DC /* SplitViewExtensions.m */; };
 		AA1A25170C077F49005968DC /* columnIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25150C077F49005968DC /* columnIcon.tiff */; };
@@ -384,6 +385,7 @@
 		AA0FB5E10869110300D9CB90 /* ActivityLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLog.m; sourceTree = "<group>"; };
 		AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptTerminology; sourceTree = "<group>"; };
 		AA167A840658361B0091365D /* ViennaApp.scriptSuite */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = ViennaApp.scriptSuite; sourceTree = "<group>"; };
+		AA16C2B00C2D57D5006BBAC1 /* draggerImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draggerImage.png; sourceTree = "<group>"; };
 		AA1A23D80C07475B005968DC /* SplitViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SplitViewExtensions.h; sourceTree = "<group>"; };
 		AA1A23D90C07475B005968DC /* SplitViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SplitViewExtensions.m; sourceTree = "<group>"; };
 		AA1A25150C077F49005968DC /* columnIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = columnIcon.tiff; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 				B28DE7F50B754E590062F879 /* enclosure_header.tiff */,
 				B28DE7F60B754E590062F879 /* enclosure.tiff */,
 				AA71173609BEB70D00E3EA8A /* webpage.tiff */,
+				AA16C2B00C2D57D5006BBAC1 /* draggerImage.png */,
 				AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */,
 				AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */,
 				AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */,
@@ -1588,6 +1591,7 @@
 				AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */,
 				AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */,
 				AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */,
+				AA16C2B10C2D57D5006BBAC1 /* draggerImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
