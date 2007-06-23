@@ -68,7 +68,7 @@ static Database * _sharedDatabase = nil;
 		countOfUnread = 0;
 		trashFolder = nil;
 		searchFolder = nil;
-		searchString = nil;
+		searchString = @"";
 		smartFoldersArray = [[NSMutableDictionary dictionary] retain];
 		foldersArray = [[NSMutableDictionary dictionary] retain];
 	}
@@ -2154,13 +2154,9 @@ static Database * _sharedDatabase = nil;
 	if (IsSearchFolder(folder))
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
-		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Subject withOperator:MA_CritOper_Contains withValue:searchString];
+		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:searchString];
 		[tree addCriteria:clause];
 		[clause release];
-		clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:searchString];
-		[tree addCriteria:clause];
-		[clause release];
-		[tree setCondition:MA_CritCondition_Any];
 		return [tree autorelease];
 	}
 	
