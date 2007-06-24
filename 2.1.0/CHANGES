@@ -8,7 +8,7 @@ Thanks!
 
 2.1.3.2111
 ----------
-
+- If Vienna doesn't handle the URL scheme (e.g., itms), open the URL with the default application for its scheme.
 
 2.1.2.2110
 ----------
