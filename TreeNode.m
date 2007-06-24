@@ -304,6 +304,26 @@
 	return [NSString stringWithFormat:@"%@ (Parent=%d, # of children=%d)", [folder name], parentNode, [children count]];
 }
 
+/* setProgressIndicator:
+ * Retrieve a progressIndicator set by other code in association with this TreeNode
+ */
+- (NSProgressIndicator *)progressIndicator
+{
+	return progressIndicator;
+}
+
+/* setProgressIndicator:
+ * Allow code elsewhere to associate an NSProgressIndicator with this TreeNode
+ */
+- (void)setProgressIndicator:(NSProgressIndicator *)inProgressIndicator
+{
+	if (progressIndicator != inProgressIndicator)
+	{
+		[progressIndicator release];
+		progressIndicator = [inProgressIndicator retain];
+	}
+}
+
 /* dealloc
  * Clean up and release resources.
  */

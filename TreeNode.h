@@ -27,6 +27,8 @@
 	Folder * folder;
 	int nodeId;
 	BOOL canHaveChildren;
+	
+	NSProgressIndicator * progressIndicator;
 }
 
 // Accessor functions
