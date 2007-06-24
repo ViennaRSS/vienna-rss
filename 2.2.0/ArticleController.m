@@ -323,7 +323,7 @@
 		Article * article = [filteredArray objectAtIndex:index];
 		if (([article folderId] == folderIdOfArticleToPreserve) && [[article guid] isEqualToString:guidOfArticleToPreserve])
 			guidOfArticleToPreserve = @"";
-		else if ((comparator != nil) && ![ArticleFilter performSelector:comparator withObject:article])
+		else if ((comparator != nil) && !((BOOL)(int)[ArticleFilter performSelector:comparator withObject:article]))
 			[filteredArray removeObjectAtIndex:index];
 	}
 	

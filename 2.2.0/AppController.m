@@ -74,6 +74,7 @@
 	-(void)initStylesMenu;
 	-(void)initBlogWithMenu;
 	-(void)initScriptsMenu;
+	-(void)initFiltersMenu;
 	-(void)startProgressIndicator;
 	-(void)stopProgressIndicator;
 	-(void)doEditFolder:(Folder *)folder;
@@ -197,6 +198,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self initColumnsMenu];
 	[self initStylesMenu];
 	[self initBlogWithMenu];
+	[self initFiltersMenu];
 
 	// Restore the splitview layout
 	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
@@ -1402,7 +1404,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * button in the article list. We need separate menus since the latter is eventually configured
  * to use a smaller font than the former.
  */
--(void)initFiltersMenu:(PopupButton *)filtersPopupMenu
+-(void)initFiltersMenu
 {
 	NSMenu * filterSubMenu = [[[NSMenu alloc] initWithTitle:@"Filter By"] autorelease];
 	NSMenu * filterPopupMenu = [[[NSMenu alloc] initWithTitle:@""] autorelease];
@@ -1427,12 +1429,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Add it to the Filters menu
-	[filtersPopupMenu setMenu:filterPopupMenu];
-	[filtersPopupMenu setSmallMenu:YES];
 	[filtersMenu setSubmenu:filterSubMenu];
-
-	// Tooltips
-	[filtersPopupMenu setToolTip:NSLocalizedString(@"Filter articles", nil)];
 }
 
 /* updateNewArticlesNotification
