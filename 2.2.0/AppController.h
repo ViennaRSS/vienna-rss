@@ -153,6 +153,7 @@
 -(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)showHideStatusBar:(id)sender;
+-(IBAction)unsubscribeFeed:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;

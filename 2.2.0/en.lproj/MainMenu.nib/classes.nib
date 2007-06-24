@@ -60,6 +60,7 @@
                 stopReloadingPage = id; 
                 toggleActivityViewer = id; 
                 unifiedLayout = id; 
+                unsubscribeFeed = id; 
                 viewArticlePage = id; 
                 viewArticlePageInAlternateBrowser = id; 
                 viewNextUnread = id; 
