@@ -67,6 +67,7 @@
 	cell->countBackgroundColour = [countBackgroundColour retain];
 	cell->item = item;	
 	cell->progressIndicators = [[NSMutableArray alloc] init];
+	cell->animationTimer = nil;
 
 	return cell;
 }
