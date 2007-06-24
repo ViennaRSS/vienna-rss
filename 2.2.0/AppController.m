@@ -1013,15 +1013,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL openURLInVienna = [prefs openLinksInVienna];
 	if (!openInPreferredBrowserFlag)
 		openURLInVienna = (!openURLInVienna);
-	if (openURLInVienna) {
+	if (openURLInVienna)
+	{
 		BOOL openInBackground = [prefs openLinksInBackground];
-		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask) {
-			//As Safari does, 'shift' inverts this behavior
+
+		//As Safari does, 'shift' inverts this behavior
+		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask)
 			openInBackground = !openInBackground;
-		}
 
 		[self createNewTab:url inBackground:openInBackground];
-	} else
+	}
+	else
 		[self openURLInDefaultBrowser:url];
 }
 
@@ -1045,7 +1047,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)downloadEnclosure:(id)sender
 {
-	// TODO: implement...
+	Article * selectedMessage = [self selectedArticle];
+	if ([selectedMessage hasEnclosure])
+	{
+		NSString * filename = [[selectedMessage enclosure] lastPathComponent];
+		NSString * downloadPath = [[Preferences standardPreferences] downloadFolder];
+		NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:filename];
+
+		[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[selectedMessage enclosure]];
+	}
 }
 
 /* createNewTab
@@ -3220,11 +3230,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
-		return [[[browserView activeTabItemView] webView] canMakeTextLarger];
+		return [[[browserView activeTabItemView] webView] canMakeTextLarger] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(makeTextSmaller:))
 	{
-		return [[[browserView activeTabItemView] webView] canMakeTextSmaller];
+		return [[[browserView activeTabItemView] webView] canMakeTextSmaller] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(doViewColumn:))
 	{
@@ -3416,10 +3426,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", nil)];
-		return ([[self selectedArticle] hasEnclosure]);
+		return ([[self selectedArticle] hasEnclosure] && isMainWindowVisible);
 	}
-
-	
+	else if (theAction == @selector(newTab:))
+	{
+		return isMainWindowVisible;
+	}	
 	return YES;
 }
 
