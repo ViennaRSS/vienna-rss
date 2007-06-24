@@ -22,6 +22,15 @@
 #import "BezierPathExtensions.h"
 #import "FolderView.h"
 
+@interface NSObject (ProgressIndicatorSupportingItem)
+- (NSProgressIndicator *)progressIndicator;
+- (void)setProgressIndicator:(NSProgressIndicator *)progressIndicator;
+@end
+
+@interface ImageAndTextCell (PRIVATE)
+- (void)configureProgressAnimation;
+@end
+
 /* All of this stuff taken from public stuff published
  * by Apple.
  */
@@ -40,6 +49,8 @@
 		hasCount = NO;
 		count = 0;
 		[self setCountBackgroundColour:[NSColor shadowColor]];
+
+		progressIndicators = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -52,7 +63,11 @@
 	cell->offset = offset;
 	cell->hasCount = hasCount;
 	cell->count = count;
+	cell->inProgress = inProgress;
 	cell->countBackgroundColour = [countBackgroundColour retain];
+	cell->item = item;	
+	cell->progressIndicators = [[NSMutableArray alloc] init];
+
 	return cell;
 }
 
@@ -136,6 +151,47 @@
 	countBackgroundColour = newColour;
 }
 
+/* setInProgress
+ * Set whether an active progress should be shown for the item. This should be used in a willDisplayCell: style method.
+ */
+- (void)setInProgress:(BOOL)newInProgress
+{
+	inProgress = newInProgress;
+}
+
+/* setItem
+ * Set the item which is being displayed. This should be used in a willDisplayCell: style method.
+ */
+- (void)setItem:(id)inItem
+{
+	item = inItem;
+}
+
+- (void)configureProgressAnimation
+{
+	if (!animationTimer && [progressIndicators count])
+	{
+		// See animateProgressIndicators: for what's going on here.
+		// NSProgressIndicator animates 12 times per second by default
+
+		animationTimer = [[NSTimer timerWithTimeInterval:1.0/12.0
+												  target:self
+												selector:@selector(animateProgressIndicators:)
+												userInfo:nil
+												 repeats:YES] retain];
+		// A progress indicator must continue animating even while a menu or modal dialogue is displayed
+		[[NSRunLoop currentRunLoop] addTimer:animationTimer forMode:NSEventTrackingRunLoopMode];
+		[[NSRunLoop currentRunLoop] addTimer:animationTimer forMode:NSDefaultRunLoopMode];
+
+	}
+	else if (animationTimer && ![progressIndicators count])
+	{
+		[animationTimer invalidate];
+		[animationTimer release];
+		animationTimer = nil;
+	}
+}
+
 /* drawCellImage
  * Just draw the cell image.
  */
@@ -165,24 +221,58 @@
 	}
 }
 
-/* drawWithFrame
+/* drawInteriorWithFrame:inView:
  * Draw the cell complete the image and count button if specified.
  */
--(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
+- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
-	int drawingOffset = (offset * 10);
-	int cellContentWidth;
-
-	cellContentWidth = [self cellSizeForBounds:cellFrame].width;
-	if (image != nil)
-		cellContentWidth += [image size].width + 3;
-	if (drawingOffset + cellContentWidth > cellFrame.size.width)
+	// If the cell has a progress indicator, ensure it's framed properly
+	// and then reduce cellFrame to keep from overlapping it
+	if ([item respondsToSelector:@selector(progressIndicator)])
 	{
-		drawingOffset = cellFrame.size.width - cellContentWidth;
-		if (drawingOffset < 0)
-			drawingOffset = 0;
+		NSProgressIndicator *progressIndicator = [item progressIndicator];
+		if (!inProgress && progressIndicator)
+		{
+			[progressIndicator stopAnimation:self];
+			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+			[progressIndicators removeObject:progressIndicator];
+			// The item was keeping track of the progress indicator; it is no longer needed
+			[item setProgressIndicator:nil];
+			[self configureProgressAnimation];
+		}
+		else if (inProgress)
+		{
+#define PROGRESS_INDICATOR_DIMENSION	16
+#define PROGRESS_INDICATOR_LEFT_MARGIN	1
+			if (!progressIndicator)
+			{
+				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0,
+																						  PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION)];
+				[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+				[progressIndicator setDisplayedWhenStopped:YES];
+				[progressIndicators addObject:progressIndicator];
+				
+				// Let the item keep track of this progress indicator for us so we can stop it later
+				[item setProgressIndicator:progressIndicator];
+				[self configureProgressAnimation];
+				[progressIndicator autorelease];
+			}
+
+			NSRect progressIndicatorFrame;
+
+			NSDivideRect(cellFrame, &progressIndicatorFrame, &cellFrame, PROGRESS_INDICATOR_DIMENSION + PROGRESS_INDICATOR_LEFT_MARGIN, NSMaxXEdge);
+
+			progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
+			progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
+
+			if ([progressIndicator superview] != controlView)
+				[controlView addSubview:progressIndicator];
+
+			if (!NSEqualRects([progressIndicator frame], progressIndicatorFrame)) {
+				[progressIndicator setFrame:progressIndicatorFrame];
+			}
+		}
 	}
-	cellFrame.origin.x += drawingOffset;
 
 	// If the cell has an image, draw the image and then reduce
 	// cellFrame to move the text to the right of the image.
@@ -255,7 +345,8 @@
 	// Draw the text
 	cellFrame.origin.y += 1;
 	cellFrame.origin.x += 2;
-	[super drawWithFrame:cellFrame inView:controlView];
+	
+	[super drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
 /* selectWithFrame
@@ -275,6 +366,29 @@
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
+/* animateProgressIndicators:
+ * Animate our progress indicators.
+ *
+ * Why not just use the automatic animation (-[NSProgressIndicator startAnimation:])?
+ *   1) It doesn't clip properly for a cell partly off-screen; it relocates the spinner to keep its bottom edge
+ *   on-screen at all times. This means that a cell which is partially off-screen won't show its spinner in the right vertical location.
+ *   2) It doesn't update properly when scrolling; one frame of a white square is displayed as a progress indicator
+ *   moves on- or off- screen by an additional pixel. This occurs with threaded and non-thread indicator behavior.
+ *
+ * Why use a timer rather than drawing in one of the NSCell drawing methods?
+ *   The timer needs to update 12 times per second to be smooth; the NSCell drawing method is only called if the cell contents change
+ *   or the user interacts with that cell.
+ */
+- (void)animateProgressIndicators:(NSTimer *)timer
+{
+	NSEnumerator *enumerator = [progressIndicators objectEnumerator];
+	NSProgressIndicator *indicator;
+	
+	while ((indicator = [enumerator nextObject])) {
+		[indicator animate:nil];
+	}	
+}
+
 /* dealloc
  * Delete our resources.
  */
@@ -283,6 +397,12 @@
 	[countBackgroundColour release];
 	[auxiliaryImage release];
 	[image release];
+	
+	[progressIndicators release];
+	[animationTimer invalidate];
+	[animationTimer release];
+	
 	[super dealloc];
 }
+
 @end

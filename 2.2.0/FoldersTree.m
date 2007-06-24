@@ -864,15 +864,26 @@
 			textColor = [NSColor blackColor];
 		[realCell setTextColor:textColor];
 
+		[realCell setItem:item];
+
 		// Use the auxiliary position of the feed item to show
 		// the refresh icon if the feed is being refreshed, or an
 		// error icon if the feed failed to refresh last time.
 		if (IsUpdating(folder))
-			[realCell setAuxiliaryImage:refreshProgressImage];
-		else if (IsError(folder))
-			[realCell setAuxiliaryImage:refreshProgressImage];
-		else
+		{
 			[realCell setAuxiliaryImage:nil];
+			[realCell setInProgress:YES];
+		}
+		else if (IsError(folder))
+		{
+			[realCell setAuxiliaryImage:folderErrorImage];
+			[realCell setInProgress:NO];
+		}
+		else
+		{
+			[realCell setAuxiliaryImage:nil];
+			[realCell setInProgress:NO];
+		}
 
 		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{

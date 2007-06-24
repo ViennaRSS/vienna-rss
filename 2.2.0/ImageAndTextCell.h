@@ -28,6 +28,11 @@
 	int offset;
 	int count;
 	BOOL hasCount;
+	BOOL inProgress;
+	
+	id item;
+	NSTimer *animationTimer;
+	NSMutableArray *progressIndicators;
 }
 
 // Accessor functions
@@ -40,6 +45,7 @@
 -(NSImage *)image;
 -(NSImage *)auxiliaryImage;
 -(int)offset;
--(void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 -(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView;
+- (void)setInProgress:(BOOL)newInProgress;
+- (void)setItem:(id)inItem;
 @end
