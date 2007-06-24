@@ -79,6 +79,9 @@
 		AA26F5B80604964000FE7994 /* URLHandlerCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = AA26F5B70604964000FE7994 /* URLHandlerCommand.h */; };
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
+		AA2B6CF30C2E657D00415851 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA785DBA0BF62AE60089DCF0 /* sqlite3.h */; };
+		AA2B6CF40C2E658400415851 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = AA785DBB0BF62AE60089DCF0 /* sqlite3.c */; };
+		AA2B6D250C2E679800415851 /* libSQLiteLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2B6CE40C2E646100415851 /* libSQLiteLib.a */; };
 		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
 		AA3111BC0901A2F100E80DF1 /* NewPreferencesController.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */; };
 		AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */; };
@@ -145,8 +148,6 @@
 		AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */; };
 		AA74A85F087B56810029797C /* ArticleView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA74A85D087B56810029797C /* ArticleView.h */; };
 		AA74A860087B56810029797C /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
-		AA785DBC0BF62AE60089DCF0 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA785DBA0BF62AE60089DCF0 /* sqlite3.h */; };
-		AA785DBD0BF62AE60089DCF0 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = AA785DBB0BF62AE60089DCF0 /* sqlite3.c */; };
 		AA7AB45908CA742A000D34F9 /* ArticleRef.h in Headers */ = {isa = PBXBuildFile; fileRef = AA7AB45708CA742A000D34F9 /* ArticleRef.h */; };
 		AA7AB45A08CA742A000D34F9 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7AB45808CA742A000D34F9 /* ArticleRef.m */; };
 		AA82995008D94BAF00983120 /* RefreshManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AA82994E08D94BAF00983120 /* RefreshManager.h */; };
@@ -312,6 +313,13 @@
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = CurlGetDate;
 		};
+		AA2B6CF70C2E658C00415851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA2B6CE30C2E646100415851 /* SQLiteLib */;
+			remoteInfo = SQLiteLib;
+		};
 		AAA56F4409EF516C00C87343 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -448,6 +456,7 @@
 		AA26F5B70604964000FE7994 /* URLHandlerCommand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = URLHandlerCommand.h; sourceTree = "<group>"; };
 		AA26F676060497BB00FE7994 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoldersTree.m; sourceTree = "<group>"; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
+		AA2B6CE40C2E646100415851 /* libSQLiteLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSQLiteLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; path = Preferences.plist; sourceTree = "<group>"; };
 		AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NewPreferencesController.h; sourceTree = "<group>"; };
 		AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NewPreferencesController.m; sourceTree = "<group>"; };
@@ -631,8 +640,8 @@
 		AA71CD18098D514E0069607D /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = nl; path = nl.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AA74A85D087B56810029797C /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ArticleView.h; sourceTree = "<group>"; };
 		AA74A85E087B56810029797C /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
-		AA785DBA0BF62AE60089DCF0 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
-		AA785DBB0BF62AE60089DCF0 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		AA785DBA0BF62AE60089DCF0 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = sqlite/sqlite3.h; sourceTree = "<group>"; };
+		AA785DBB0BF62AE60089DCF0 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = sqlite/sqlite3.c; sourceTree = "<group>"; };
 		AA7AB45708CA742A000D34F9 /* ArticleRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleRef.h; sourceTree = "<group>"; };
 		AA7AB45808CA742A000D34F9 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleRef.m; sourceTree = "<group>"; };
 		AA82994E08D94BAF00983120 /* RefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RefreshManager.h; sourceTree = "<group>"; };
@@ -815,6 +824,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA2B6D250C2E679800415851 /* libSQLiteLib.a in Frameworks */,
 				616867C50A83D6B100FEAC62 /* CurlGetDate.framework in Frameworks */,
 				AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
@@ -830,6 +840,13 @@
 				478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */,
 				AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */,
 				B2097BD50B77D507005A2466 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA2B6CE20C2E646100415851 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,6 +893,7 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
+				AA2B6CE40C2E646100415851 /* libSQLiteLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -886,6 +904,7 @@
 				AA21F45D0753077300503F58 /* TODO */,
 				AA21F4510753053500503F58 /* CHANGES */,
 				61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */,
+				AA2B6CEF0C2E653C00415851 /* SQLiteLib */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AAA568BB09EE773200C87343 /* Main */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
@@ -1098,7 +1117,6 @@
 		AA26F478060490F400FE7994 /* SQLite */ = {
 			isa = PBXGroup;
 			children = (
-				AAB8217C0999C2AC00F3C730 /* sqlite */,
 				AA26F47F0604911B00FE7994 /* SQLDatabase.h */,
 				AA26F4800604911B00FE7994 /* SQLDatabase.m */,
 				AA26F4810604911B00FE7994 /* SQLDatabasePrivate.h */,
@@ -1106,6 +1124,15 @@
 				AA26F4830604911B00FE7994 /* SQLRow.m */,
 			);
 			name = SQLite;
+			sourceTree = "<group>";
+		};
+		AA2B6CEF0C2E653C00415851 /* SQLiteLib */ = {
+			isa = PBXGroup;
+			children = (
+				AA785DBA0BF62AE60089DCF0 /* sqlite3.h */,
+				AA785DBB0BF62AE60089DCF0 /* sqlite3.c */,
+			);
+			name = SQLiteLib;
 			sourceTree = "<group>";
 		};
 		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
@@ -1222,15 +1249,6 @@
 				AAA5687009EE725B00C87343 /* NewsParser-Info.plist */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		AAB8217C0999C2AC00F3C730 /* sqlite */ = {
-			isa = PBXGroup;
-			children = (
-				AA785DBA0BF62AE60089DCF0 /* sqlite3.h */,
-				AA785DBB0BF62AE60089DCF0 /* sqlite3.c */,
-			);
-			path = sqlite;
 			sourceTree = "<group>";
 		};
 		AAC5063C082A7A530089FF70 /* Other Sources */ = {
@@ -1360,7 +1378,6 @@
 				AAE7E64F0A104DCE00685562 /* TabbedWebView.h in Headers */,
 				AA681B210B18E46800CFD5B7 /* AdvancedPreferences.h in Headers */,
 				61975EB90B41E0A0001F65FF /* EmptyTrashWarning.h in Headers */,
-				AA785DBC0BF62AE60089DCF0 /* sqlite3.h in Headers */,
 				AA1A23DA0C07475B005968DC /* SplitViewExtensions.h in Headers */,
 				AA1A27550C09B27E005968DC /* ViewExtensions.h in Headers */,
 				34363AC90C11C297002A1238 /* ClickableProgressIndicator.h in Headers */,
@@ -1368,6 +1385,14 @@
 				AA8B36D90C12D7190035FBD7 /* CTGradient.h in Headers */,
 				AAD2BEC90C2B2BB800AA0F11 /* PolishedWindow.h in Headers */,
 				AAD2BF0C0C2BB64500AA0F11 /* ThinSplitView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA2B6CE00C2E646100415851 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2B6CF30C2E657D00415851 /* sqlite3.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1413,12 +1438,30 @@
 			);
 			dependencies = (
 				AAA56F4509EF516C00C87343 /* PBXTargetDependency */,
+				AA2B6CF80C2E658C00415851 /* PBXTargetDependency */,
 			);
 			name = Vienna;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vienna;
 			productReference = 8D15AC370486D014006FF6A4 /* Vienna.app */;
 			productType = "com.apple.product-type.application";
+		};
+		AA2B6CE30C2E646100415851 /* SQLiteLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA2B6CE50C2E648000415851 /* Build configuration list for PBXNativeTarget "SQLiteLib" */;
+			buildPhases = (
+				AA2B6CE00C2E646100415851 /* Headers */,
+				AA2B6CE10C2E646100415851 /* Sources */,
+				AA2B6CE20C2E646100415851 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SQLiteLib;
+			productName = SQLiteLib;
+			productReference = AA2B6CE40C2E646100415851 /* libSQLiteLib.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		AAA5686E09EE725B00C87343 /* NewsParser */ = {
 			isa = PBXNativeTarget;
@@ -1484,6 +1527,7 @@
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				AAA5686E09EE725B00C87343 /* NewsParser */,
+				AA2B6CE30C2E646100415851 /* SQLiteLib */,
 			);
 		};
 /* End PBXProject section */
@@ -1925,7 +1969,6 @@
 				AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */,
 				61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */,
 				61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */,
-				AA785DBD0BF62AE60089DCF0 /* sqlite3.c in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
 				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
@@ -1933,6 +1976,14 @@
 				AA8B36DA0C12D7190035FBD7 /* CTGradient.m in Sources */,
 				AAD2BECC0C2B2BCE00AA0F11 /* PolishedWindow.m in Sources */,
 				AAD2BF0D0C2BB64500AA0F11 /* ThinSplitView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA2B6CE10C2E646100415851 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA2B6CF40C2E658400415851 /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1953,6 +2004,11 @@
 			isa = PBXTargetDependency;
 			name = CurlGetDate;
 			targetProxy = 616867C20A83D69F00FEAC62 /* PBXContainerItemProxy */;
+		};
+		AA2B6CF80C2E658C00415851 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA2B6CE30C2E646100415851 /* SQLiteLib */;
+			targetProxy = AA2B6CF70C2E658C00415851 /* PBXContainerItemProxy */;
 		};
 		AAA56F4509EF516C00C87343 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2301,6 +2357,90 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AA2B6CE60C2E648000415851 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PFE_FILE_C_DIALECTS = c;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = SQLiteLib;
+				SDKROOT = "";
+				ZERO_LINK = YES;
+			};
+			name = Development;
+		};
+		AA2B6CE70C2E648000415851 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PFE_FILE_C_DIALECTS = c;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = SQLiteLib;
+				SDKROOT = "";
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		AA2B6CE80C2E648000415851 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PFE_FILE_C_DIALECTS = c;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = SQLiteLib;
+				SDKROOT = "";
+				ZERO_LINK = YES;
+			};
+			name = Default;
+		};
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2327,13 +2467,14 @@
 					OS_UNIX,
 					LOG_QUERY_TIMES,
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
@@ -2371,15 +2512,16 @@
 					NDEBUG,
 					OS_UNIX,
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -2417,14 +2559,15 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_SHADOW = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
@@ -2544,6 +2687,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -2567,6 +2711,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
@@ -2589,6 +2734,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_LDFLAGS = (
@@ -2605,6 +2751,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA2B6CE50C2E648000415851 /* Build configuration list for PBXNativeTarget "SQLiteLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA2B6CE60C2E648000415851 /* Development */,
+				AA2B6CE70C2E648000415851 /* Deployment */,
+				AA2B6CE80C2E648000415851 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
 		AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
