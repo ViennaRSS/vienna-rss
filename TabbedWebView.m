@@ -253,13 +253,16 @@
 			}
 		}
 	}
-	if ([[[[request URL] scheme] lowercaseString] isEqualToString:@"mailto"])
+	NSString * scheme = [[[request URL] scheme] lowercaseString];
+	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"])
+	{
+		[listener use];
+	}
+	else
 	{
 		[listener ignore];
 		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
-		return;
 	}
-	[listener use];
 }
 
 /* handleMinimumFontSizeChange
