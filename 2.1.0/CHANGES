@@ -8,6 +8,7 @@ Thanks!
 
 2.1.3.2111
 ----------
+- When opening a link in Vienna, the shift key overrides "Open new links in the background" preference.
 - Improved drag and drop of feeds to Safari.
 - Fixed character encoding issues with exporting subscriptions.
 - If Vienna doesn't handle the URL scheme (e.g., itms), open the URL with the default application for its scheme.
