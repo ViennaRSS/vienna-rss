@@ -911,7 +911,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (!openInPreferredBrowserFlag)
 		openURLInVienna = (!openURLInVienna);
 	if (openURLInVienna)
-		[self createNewTab:url inBackground:[prefs openLinksInBackground]];
+	{
+		BOOL openInBackground = [prefs openLinksInBackground];
+		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask)
+		{
+			// As Safari does, 'shift' inverts this behavior
+			openInBackground = !openInBackground;
+		}
+		
+		[self createNewTab:url inBackground:openInBackground];
+	}
 	else
 		[self openURLInDefaultBrowser:url];
 }
