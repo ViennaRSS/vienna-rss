@@ -12,6 +12,8 @@ Thanks!
 - Switched to polished metal style.
 - Added Russian localization. (Thanks to Taras "sacrat" Brizitsky).
 - Show refresh indicator in folder list next to feed currently being refreshed.
+- Add unsubscribe/resubscribe command to File menu.
+- Show enclosure pane below article for articles that contain enclosures.
 
 2.2.0.2200
 ----------

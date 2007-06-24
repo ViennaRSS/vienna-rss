@@ -25,6 +25,7 @@
 #import "ArticleBaseView.h"
 #import "BrowserView.h"
 #import "PopupButton.h"
+#import "StdEnclosureView.h"
 
 @class AppController;
 @class ArticleController;
@@ -43,6 +44,7 @@
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet PopupButton * columnsPopupMenu;
+	IBOutlet StdEnclosureView * stdEnclosureView;
 
 	int currentSelectedRow;
 	int tableLayout;

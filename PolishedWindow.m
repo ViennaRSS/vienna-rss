@@ -26,7 +26,7 @@
 	{
         forceDisplay = NO;
 		
-		[self setShowsResizeIndicator:NO];
+		[self setShowsResizeIndicator:YES];
         
         [self setBackgroundColor:[self sizedPolishedBackground]];
         [[NSNotificationCenter defaultCenter] addObserver:self 

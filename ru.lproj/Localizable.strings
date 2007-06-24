@@ -357,5 +357,7 @@
 "Search Articles" = "Искать Статьи";
 "Progress" = "Прогресс";
 "Delete all articles in the trash" = "Удалить все статьи в Корзине";
-"Unsubscribe" = "Unsubscribe From Feed";
-"Resubscribe" = "Subscribe To This Feed";
+"Unsubscribe" = "Unsubscribe from Feed";
+"Resubscribe" = "Resubscribe to Feed";
+"Download" = "Download";
+"This article contains an enclosed file." = "This article contains an enclosed file.";

@@ -117,6 +117,7 @@
                 filtersPopupMenu = PopupButton; 
                 foldersTree = FoldersTree; 
                 splitView2 = NSSplitView; 
+                stdEnclosureView = StdEnclosureView; 
             }; 
             SUPERCLASS = NSView; 
         }, 
@@ -203,6 +204,18 @@
         }, 
         {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {CLASS = SquareWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            ACTIONS = {downloadFile = id; }; 
+            CLASS = StdEnclosureView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                downloadButton = NSButton; 
+                fileImage = NSImageView; 
+                filenameField = NSTextField; 
+                filenameLabel = NSTextField; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
         {
             ACTIONS = {printDocument = id; }; 
             CLASS = TabbedWebView; 

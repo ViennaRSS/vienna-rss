@@ -110,6 +110,8 @@
 		AA38C18E09FB19F000FAE2CD /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */; };
 		AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
 		AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
+		AA3F36E50C2F143100D5766B /* StdEnclosureView.h in Headers */ = {isa = PBXBuildFile; fileRef = AA3F36E30C2F143100D5766B /* StdEnclosureView.h */; };
+		AA3F36E60C2F143100D5766B /* StdEnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3F36E40C2F143100D5766B /* StdEnclosureView.m */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
 		AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
 		AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
@@ -513,6 +515,8 @@
 		AA3CB5F80BE12DD6009119BB /* eus */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = eus; path = eus.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA3CB63A0BE132D2009119BB /* eus */ = {isa = PBXFileReference; lastKnownFileType = folder; name = eus; path = "eus.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unreadStar1.tiff; sourceTree = "<group>"; };
+		AA3F36E30C2F143100D5766B /* StdEnclosureView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = StdEnclosureView.h; sourceTree = "<group>"; };
+		AA3F36E40C2F143100D5766B /* StdEnclosureView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = StdEnclosureView.m; sourceTree = "<group>"; };
 		AA3F7B4108711F6A00D2B96F /* comments_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = comments_header.tiff; sourceTree = "<group>"; };
 		AA4AB5E008971B28006C843E /* vienna2style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2style.icns; sourceTree = "<group>"; };
 		AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = XMLTag.m; sourceTree = "<group>"; };
@@ -972,6 +976,8 @@
 				AAA5775109A47CF800602469 /* RenameFolder.m */,
 				AAA3AF0706338A00006735EB /* SearchFolder.h */,
 				AAA3AF0806338A00006735EB /* SearchFolder.m */,
+				AA3F36E30C2F143100D5766B /* StdEnclosureView.h */,
+				AA3F36E40C2F143100D5766B /* StdEnclosureView.m */,
 				AAE7E64D0A104DCE00685562 /* TabbedWebView.h */,
 				AAE7E64C0A104DCE00685562 /* TabbedWebView.m */,
 				AAD2BF0A0C2BB64500AA0F11 /* ThinSplitView.h */,
@@ -1385,6 +1391,7 @@
 				AA8B36D90C12D7190035FBD7 /* CTGradient.h in Headers */,
 				AAD2BEC90C2B2BB800AA0F11 /* PolishedWindow.h in Headers */,
 				AAD2BF0C0C2BB64500AA0F11 /* ThinSplitView.h in Headers */,
+				AA3F36E50C2F143100D5766B /* StdEnclosureView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1976,6 +1983,7 @@
 				AA8B36DA0C12D7190035FBD7 /* CTGradient.m in Sources */,
 				AAD2BECC0C2B2BCE00AA0F11 /* PolishedWindow.m in Sources */,
 				AAD2BF0D0C2BB64500AA0F11 /* ThinSplitView.m in Sources */,
+				AA3F36E60C2F143100D5766B /* StdEnclosureView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
