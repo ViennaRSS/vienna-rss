@@ -11,6 +11,7 @@ Thanks!
 - Improved drag and drop of feeds to Safari.
 - Fixed character encoding issues with exporting subscriptions.
 - If Vienna doesn't handle the URL scheme (e.g., itms), open the URL with the default application for its scheme.
+- Update SQLite to 3.4.0.
 
 2.1.2.2110
 ----------
