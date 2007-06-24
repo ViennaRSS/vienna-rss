@@ -900,6 +900,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
 {
+	if (url == nil)
+	{
+		NSLog(@"Called openURL:inPreferredBrowser: with nil url.");
+		return;
+	}
+	
 	Preferences * prefs = [Preferences standardPreferences];
 	BOOL openURLInVienna = [prefs openLinksInVienna];
 	if (!openInPreferredBrowserFlag)
