@@ -57,6 +57,8 @@
 	-(void)setOrientation:(int)newLayout;
 	-(void)loadSplitSettingsForLayout;
 	-(void)saveSplitSettingsForLayout;
+	-(void)showEnclosureView;
+	-(void)hideEnclosureView;
 	-(void)printDocument;
 @end
 
@@ -928,6 +930,47 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return NO;
 }
 
+/* showEnclosureView
+ * Display the enclosure view below the article list view.
+ */
+-(void)showEnclosureView
+{
+	if ([stdEnclosureView superview] == nil)
+	{
+		NSRect enclosureRect;
+		NSRect mainRect;
+
+		mainRect = [articleText bounds];
+		enclosureRect = [stdEnclosureView bounds];
+		enclosureRect.size.width = mainRect.size.width;
+		mainRect.size.height -= enclosureRect.size.height;
+		mainRect.origin.y += enclosureRect.size.height;
+
+		[[articleText superview] addSubview:stdEnclosureView];
+		[articleText setFrame:mainRect];
+		[stdEnclosureView setFrame:enclosureRect];
+	}
+}
+
+/* hideEnclosureView
+ * Hide the enclosure view if it is present.
+ */
+-(void)hideEnclosureView
+{
+	if ([stdEnclosureView superview] != nil)
+	{
+		NSRect enclosureRect;
+		NSRect mainRect;
+		
+		mainRect = [articleText bounds];
+		enclosureRect = [stdEnclosureView bounds];
+		mainRect.size.height += enclosureRect.size.height;
+		
+		[stdEnclosureView removeFromSuperview];
+		[articleText setFrame:mainRect];
+	}
+}
+
 /* selectFirstUnreadInFolder
  * Moves the selection to the first unread article in the current article list or the
  * last article if the folder has no unread articles.
@@ -1167,7 +1210,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)refreshArticleAtCurrentRow:(BOOL)delayFlag
 {
 	if (currentSelectedRow < 0)
+	{
 		[articleText setHTML:@"<HTML></HTML>" withBase:@""];
+		[self hideEnclosureView];
+	}
 	else
 	{
 		NSArray * allArticles = [articleController allArticles];
@@ -1215,6 +1261,22 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		Article * firstArticle = [msgArray objectAtIndex:0];
 		Folder * folder = [[Database sharedDatabase] folderFromID:[firstArticle folderId]];
 		[articleText setHTML:htmlText withBase:SafeString([folder feedURL])];
+	}
+	
+	// Show the enclosure view if just one article is selected and it has an
+	// enclosure.
+	if ([msgArray count] != 1)
+		[self hideEnclosureView];
+	else
+	{
+		Article * oneArticle = [msgArray objectAtIndex:0];
+		if (![oneArticle hasEnclosure])
+			[self hideEnclosureView];
+		else
+		{
+			[self showEnclosureView];
+			[stdEnclosureView setEnclosureFile:[oneArticle enclosure]];
+		}
 	}
 }
 
