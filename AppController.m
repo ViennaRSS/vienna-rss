@@ -2559,6 +2559,31 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* unsubscribeFeed
+ * Subscribe or re-subscribe to a feed.
+ */
+-(IBAction)unsubscribeFeed:(id)sender
+{
+	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
+	int count = [selectedFolders count];
+	BOOL doSubscribe = NO;
+	int index;
+
+	if (count > 0)
+		doSubscribe = IsUnsubscribed([selectedFolders objectAtIndex:0]);
+	for (index = 0; index < count; ++index)
+	{
+		Folder * folder = [selectedFolders objectAtIndex:index];
+		int infoFolderId = [folder itemId];
+
+		if (doSubscribe)
+			[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
+		else
+			[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
+	}
+}
+
 /* renameFolder
  * Renames the current folder
  */
@@ -3253,6 +3278,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		else
 			[menuItem setState:NSOffState];
 		return isMainWindowVisible && isAnyArticleView;
+	}
+	else if (theAction == @selector(unsubscribeFeed:))
+	{
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		if (folder)
+		{
+			if (IsUnsubscribed(folder))
+				[menuItem setTitle:NSLocalizedString(@"Resubscribe", nil)];
+			else
+				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];
+		}
+		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
