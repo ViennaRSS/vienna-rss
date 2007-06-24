@@ -1117,10 +1117,12 @@
 	NSMutableArray * externalDragData = [NSMutableArray arrayWithCapacity:count];
 	NSMutableArray * internalDragData = [NSMutableArray arrayWithCapacity:count];
 	NSMutableString * stringDragData = [NSMutableString string];
+	NSMutableArray * arrayOfURLs = [NSMutableArray arrayWithCapacity:count];
+	NSMutableArray * arrayOfTitles = [NSMutableArray arrayWithCapacity:count];
 	int index;
 
-	// We'll create two types of data on the clipboard.
-	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, NSStringPboardType, nil] owner:self]; 
+	// We'll create the types of data on the clipboard.
+	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil] owner:self]; 
 
 	// Create an array of NSNumber objects containing the selected folder IDs.
 	int countOfItems = 0;
@@ -1137,16 +1139,29 @@
 
 		if (IsRSSFolder(folder))
 		{
+			NSString * feedURL = [folder feedURL];
+			
 			NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
 			[dict setValue:[folder name] forKey:@"sourceName"];
 			[dict setValue:[folder description] forKey:@"sourceDescription"];
-			[dict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
+			[dict setValue:feedURL forKey:@"sourceRSSURL"];
 			[dict setValue:[folder homePage] forKey:@"sourceHomeURL"];
 			[externalDragData addObject:dict];
 			[dict release];
 
-			[stringDragData appendString:[folder feedURL]];
+			[stringDragData appendString:feedURL];
 			[stringDragData appendString:@"\n"];
+			
+			NSURL * safariURL = [NSURL URLWithString:feedURL];
+			if (safariURL != nil && ![safariURL isFileURL])
+			{
+				if (![@"feed" isEqualToString:[safariURL scheme]])
+				{
+					feedURL = [NSString stringWithFormat:@"feed:%@", [safariURL resourceSpecifier]];
+				}
+				[arrayOfURLs addObject:feedURL];
+				[arrayOfTitles addObject:[folder name]];
+			}
 		}
 	}
 
@@ -1154,6 +1169,7 @@
 	[pboard setPropertyList:externalDragData forType:MA_PBoardType_RSSSource];
 	[pboard setString:stringDragData forType:NSStringPboardType];
 	[pboard setPropertyList:internalDragData forType:MA_PBoardType_FolderList]; 
+	[pboard setPropertyList:[NSArray arrayWithObjects:arrayOfURLs, arrayOfTitles, nil] forType:@"WebURLsWithTitlesPboardType"];
 	return countOfItems > 0; 
 }
 
