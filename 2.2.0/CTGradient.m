@@ -1,11 +1,11 @@
 //
 //  CTGradient.m
 //
-//  Created by Chad Weider on 12/3/05.
-//  Copyright (c) 2006 Cotingent.
+//  Created by Chad Weider on 2/14/07.
+//  Copyright (c) 2007 Chad Weider.
 //  Some rights reserved: <http://creativecommons.org/licenses/by/2.5/>
 //
-//  Version: 1.5
+//  Version: 1.6
 
 #import "CTGradient.h"
 
@@ -21,12 +21,12 @@
 @end
 
 //C Fuctions for color blending
-void linearEvaluation   (void *info, const float *in, float *out);
-void chromaticEvaluation(void *info, const float *in, float *out);
-void inverseChromaticEvaluation(void *info, const float *in, float *out);
-void transformRGB_HSV(float *components);
-void transformHSV_RGB(float *components);
-void resolveHSV(float *color1, float *color2);
+static void linearEvaluation   (void *info, const float *in, float *out);
+static void chromaticEvaluation(void *info, const float *in, float *out);
+static void inverseChromaticEvaluation(void *info, const float *in, float *out);
+static void transformRGB_HSV(float *components);
+static void transformHSV_RGB(float *components);
+static void resolveHSV(float *color1, float *color2);
 
 
 @implementation CTGradient
@@ -126,8 +126,6 @@ void resolveHSV(float *color1, float *color2);
 	}
 	return self;
 }
-
-
 #pragma mark -
 
 
@@ -327,14 +325,14 @@ void resolveHSV(float *color1, float *color2);
 	id newInstance = [[[self class] alloc] init];
 	
 	CTGradientElement color1;
-	color1.red = color1.green = color1.blue = 0.40;
+	color1.red = color1.green = color1.blue  = 0.68;
 	color1.alpha = 1.00;
-	color1.position = 0.15;
+	color1.position = 0;
 	
 	CTGradientElement color2;
-	color2.red = color2.green = color2.blue  = 0.80;
+	color2.red = color2.green = color2.blue  = 0.83;
 	color2.alpha = 1.00;
-	color2.position = 1.0;
+	color2.position = 1;
 	
 	[newInstance addElement:&color1];
 	[newInstance addElement:&color2];
@@ -601,7 +599,7 @@ void resolveHSV(float *color1, float *color2);
 	switch(blendingMode)
 	{
 		case CTLinearBlendingMode:
-			linearEvaluation(&elementList, &position, components);			break;
+			linearEvaluation(&elementList, &position, components);				break;
 		case CTChromaticBlendingMode:
 			chromaticEvaluation(&elementList, &position, components);			break;
 		case CTInverseChromaticBlendingMode:
@@ -692,13 +690,12 @@ void resolveHSV(float *color1, float *color2);
 #else
 	CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
 #endif
-	
 	CGShadingRef myCGShading = CGShadingCreateAxial(colorspace, startPoint, endPoint, gradientFunction, false, false);
 	
-	CGContextClipToRect(currentContext , *(CGRect *)&rect);	//This is where the action happens
+	CGContextClipToRect (currentContext, *(CGRect *)&rect);	//This is where the action happens
 	CGContextDrawShading(currentContext, myCGShading);
 	
-	CGShadingRelease   (myCGShading);
+	CGShadingRelease(myCGShading);
 	CGColorSpaceRelease(colorspace );
 	CGContextRestoreGState(currentContext);
 }
@@ -707,15 +704,27 @@ void resolveHSV(float *color1, float *color2);
 {
 	CGPoint startPoint , endPoint;
 	float startRadius, endRadius;
+	float scalex, scaley, transx, transy;
 	
 	startPoint = endPoint = CGPointMake(NSMidX(rect), NSMidY(rect));
 	
-	startRadius = 1;
-	
+	startRadius = -1;
 	if(NSHeight(rect)>NSWidth(rect))
+	{
+		scalex = NSWidth(rect)/NSHeight(rect);
+		transx = (NSHeight(rect)-NSWidth(rect))/2;
+		scaley = 1;
+		transy = 1;
 		endRadius = NSHeight(rect)/2;
+	}
 	else
+	{
+		scalex = 1;
+		transx = 1;
+		scaley = NSHeight(rect)/NSWidth(rect);
+		transy = (NSWidth(rect)-NSHeight(rect))/2;
 		endRadius = NSWidth(rect)/2;
+	}
 	
 	//Calls to CoreGraphics
 	CGContextRef currentContext = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
@@ -725,17 +734,43 @@ void resolveHSV(float *color1, float *color2);
 #else
 	CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
 #endif
-	
 	CGShadingRef myCGShading = CGShadingCreateRadial(colorspace, startPoint, startRadius, endPoint, endRadius, gradientFunction, true, true);
 	
-	CGContextClipToRect (currentContext , *(CGRect *)&rect);
-	CGContextDrawShading(currentContext , myCGShading);		//This is where the action happens
+	CGContextClipToRect  (currentContext, *(CGRect *)&rect);
+	CGContextScaleCTM    (currentContext, scalex, scaley);
+	CGContextTranslateCTM(currentContext, transx, transy);
+	CGContextDrawShading (currentContext, myCGShading);		//This is where the action happens
 	
-	CGShadingRelease    (myCGShading);
-	CGColorSpaceRelease (colorspace);
+	CGShadingRelease(myCGShading);
+	CGColorSpaceRelease(colorspace);
 	CGContextRestoreGState(currentContext);
 }
 
+- (void)fillBezierPath:(NSBezierPath *)path angle:(float)angle
+{
+	NSGraphicsContext *currentContext = [NSGraphicsContext currentContext];
+	[currentContext saveGraphicsState];
+	NSAffineTransform *transform = [[NSAffineTransform alloc] init];
+	
+	[transform rotateByDegrees:-angle];
+	[path transformUsingAffineTransform:transform];
+	[transform invert];
+	[transform concat];
+	
+	[path addClip];
+	[self fillRect:[path bounds] angle:0];
+	[path transformUsingAffineTransform:transform];
+	[transform release];
+	[currentContext restoreGraphicsState];
+}
+- (void)radialFillBezierPath:(NSBezierPath *)path
+{
+	NSGraphicsContext *currentContext = [NSGraphicsContext currentContext];
+	[currentContext saveGraphicsState];
+	[path addClip];
+	[self radialFillRect:[path bounds]];
+	[currentContext restoreGraphicsState];
+}
 #pragma mark -
 
 
@@ -1061,10 +1096,6 @@ void chromaticEvaluation(void *info, const float *in, float *out)
   	}
     
 	transformHSV_RGB(out);
-	
-	//if(position > -1 && out[0] == out[1] && out[1] == out[2]  && out[0]==0)
-	//printf("%.4f: %.4f,%.4f,%.4f\n",position,out[0],out[1],out[2]);
-	//printf("%.4f: %.4f,%.4f,%.4f\n",position,color1->red,color1->green,color1->blue);
 }
 
 
@@ -1072,8 +1103,8 @@ void chromaticEvaluation(void *info, const float *in, float *out)
 //Inverse Chromatic Evaluation - 
 //	Inverse Chromatic is about the same story as Chromatic Blend, but here the Hue
 //	is strictly decreasing, that is we need to get from color1 to color2 by decreasing
-//	the 'angle' (i.e. 90� -> 180� would be done by subtracting 270� and getting -180�...
-//	which is equivalent to 180� mod 360�
+//	the 'angle' (i.e. 90¼ -> 180¼ would be done by subtracting 270¼ and getting -180¼...
+//	which is equivalent to 180¼ mod 360¼
 void inverseChromaticEvaluation(void *info, const float *in, float *out)
 {
     float position = *in;
@@ -1151,16 +1182,9 @@ void inverseChromaticEvaluation(void *info, const float *in, float *out)
 
 
 
-
-
-
-
-
-
-
 void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 {
-	float H, S, V;
+	float H = NAN, S, V;
 	float R = components[0],
 		G = components[1],
 		B = components[2];
@@ -1179,8 +1203,6 @@ void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 		H = 60*(B-R)/(MAX-MIN)+120;
 	else if(MAX == B)
 		H = 60*(R-G)/(MAX-MIN)+240;
-	else
-		H = NAN;
 	
 	S = MAX == 0 ? 0 : 1 - MIN/MAX;
 	V = MAX;
@@ -1192,7 +1214,7 @@ void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 
 void transformHSV_RGB(float *components) //H,S,B -> R,G,B
 {
-	float R = 0.0, G = 0.0, B = 0.0;
+	float R = 0, G = 0, B = 0;
 	float H = fmodf(components[0],359),	//map to [0,360)
 		S = components[1],
 		V = components[2];

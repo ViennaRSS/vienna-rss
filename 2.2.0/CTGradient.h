@@ -1,11 +1,11 @@
 //
 //  CTGradient.h
 //
-//  Created by Chad Weider on 12/3/05.
-//  Copyright (c) 2006 Cotingent.
+//  Created by Chad Weider on 2/14/07.
+//  Copyright (c) 2007 Chad Weider.
 //  Some rights reserved: <http://creativecommons.org/licenses/by/2.5/>
 //
-//  Version: 1.5
+//  Version: 1.6
 
 #import <Cocoa/Cocoa.h>
 
@@ -47,6 +47,9 @@ typedef enum  _CTBlendingMode
 + (id)sourceListSelectedGradient;
 + (id)sourceListUnselectedGradient;
 
++ (id)rainbowGradient;
++ (id)hydrogenSpectrumGradient;
+
 - (CTGradient *)gradientWithAlphaComponent:(float)alpha;
 
 - (CTGradient *)addColorStop:(NSColor *)color atPosition:(float)position;	//positions given relative to [0,1]
@@ -63,4 +66,7 @@ typedef enum  _CTBlendingMode
 																	//	angle in degrees
 - (void)radialFillRect:(NSRect)rect;								//fills rect with radial gradient
 																	//  gradient from center outwards
+- (void)fillBezierPath:(NSBezierPath *)path angle:(float)angle;
+- (void)radialFillBezierPath:(NSBezierPath *)path;
+
 @end
