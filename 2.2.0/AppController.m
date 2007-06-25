@@ -2736,9 +2736,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)showAcknowledgements:(id)sender
 {
 	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements.rtf" ofType:@""];
+	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements" ofType:@"rtf"];
 	if (pathToAckFile != nil)
-		[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
+	{
+		//[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
+		[[NSWorkspace sharedWorkspace] openFile:pathToAckFile];
+	}
 }
 
 #pragma mark Tabs
