@@ -9,7 +9,7 @@
                 fieldChanged = id; 
                 removeCurrentCriteria = id; 
             }; 
-            CLASS = SearchFolder; 
+            CLASS = SmartFolder; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 addCriteriaButton = NSButton; 
@@ -25,8 +25,8 @@
                 saveButton = NSButton; 
                 searchCriteriaSuperview = NSView; 
                 searchCriteriaView = NSView; 
-                searchFolderName = NSTextField; 
                 searchWindow = NSWindow; 
+                smartFolderName = NSTextField; 
                 valueField = NSTextField; 
             }; 
             SUPERCLASS = NSWindowController; 
