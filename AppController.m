@@ -949,10 +949,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		Preferences * prefs = [Preferences standardPreferences];
 
 		BOOL openInBackground = [prefs openLinksInBackground];
-		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask) {
-			//As Safari does, 'shift' inverts this behavior
+
+		/* As Safari does, 'shift' inverts this behavior. Use GetCurrentKeyModifiers() because [NSApp currentEvent] was created
+		 * when the current event began, which may be when the contexual menu opened.
+		 */
+		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
 			openInBackground = !openInBackground;
-		}
 
 		[self createNewTab:[item representedObject] inBackground:openInBackground];
 	}
@@ -1019,8 +1021,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		BOOL openInBackground = [prefs openLinksInBackground];
 
-		//As Safari does, 'shift' inverts this behavior
-		if ([[NSApp currentEvent] modifierFlags] & NSShiftKeyMask)
+		/* As Safari does, 'shift' inverts this behavior. Use GetCurrentKeyModifiers() because [NSApp currentEvent] was created
+		 * when the current event began, which may be when the contexual menu opened.
+		 */
+		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
 			openInBackground = !openInBackground;
 
 		[self createNewTab:url inBackground:openInBackground];
