@@ -1040,7 +1040,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	// Create a new empty tab in the foreground.
 	[self createNewTab:nil inBackground:NO];
-	[browserView setTabItemViewTitle:[browserView activeTabItemView] title:NSLocalizedString(@"New Tab", nil)];
 
 	// Make the address bar first responder.
 	NSView<BaseView> * theView = [browserView activeTabItemView];
@@ -1080,6 +1079,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[newBrowserPane setController:self];
 		if (url != nil)
 			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
+		else
+			[browserView setTabItemViewTitle:newBrowserPane title:NSLocalizedString(@"New Tab", nil)];
+
 		[newBrowserTemplate release];
 	}
 }
@@ -1114,8 +1116,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSEnumerator * enumerator = [tabLinks objectEnumerator];
 	NSString * tabLink;
 	
-	while ((tabLink = [enumerator nextObject]) != nil)
-		[self createNewTab:[NSURL URLWithString:tabLink] inBackground:YES];
+	while ((tabLink = [enumerator nextObject]) != nil) {
+		[self createNewTab:([tabLink length] ? [NSURL URLWithString:tabLink] : nil) inBackground:YES];
+	}
 }
 
 /* setImageForMenuCommand
