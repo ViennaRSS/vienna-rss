@@ -10,7 +10,7 @@
 		<string>424 572 592 70 0 0 1440 878 </string>
 	</dict>
 	<key>IBFramework Version</key>
-	<string>446.1</string>
+	<string>481.0</string>
 	<key>IBGroupedObjects</key>
 	<dict>
 		<key>0</key>
@@ -21,7 +21,11 @@
 	</dict>
 	<key>IBLastGroupID</key>
 	<string>1</string>
+	<key>IBOpenObjects</key>
+	<array>
+		<integer>6</integer>
+	</array>
 	<key>IBSystem Version</key>
-	<string>8N1037</string>
+	<string>8R2218</string>
 </dict>
 </plist>
