@@ -27,6 +27,7 @@
 	IBOutlet NSTextField * filenameField;
 	IBOutlet NSButton * downloadButton;
 	NSString * enclosureFilename;
+	BOOL isITunes;
 }
 
 // Public functions

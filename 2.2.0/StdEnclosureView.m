@@ -22,6 +22,11 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 
+// Private functions
+@interface StdEnclosureView (Private)
+	-(IBAction)openFile:(id)sender;
+@end
+
 @implementation StdEnclosureView
 
 /* initWithFrame
@@ -32,8 +37,22 @@
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
 		enclosureFilename = nil;
+		isITunes = NO;
+
+		// Register to be notified when a download completes.
+		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+		[nc addObserver:self selector:@selector(handleDownloadCompleted:) name:@"MA_Notify_DownloadCompleted" object:nil];
 	}
 	return self;
+}
+
+/* handleDownloadCompleted
+ * Called when a download completes. It might be the one showing in the view in which case we may
+ * want to update the buttons.
+ */
+-(void)handleDownloadCompleted:(NSNotification *)notification
+{
+	[self setEnclosureFile:enclosureFilename];
 }
 
 /* setEnclosureFile
@@ -42,23 +61,65 @@
  */
 -(void)setEnclosureFile:(NSString *)newFilename
 {
+	CFURLRef appURL;
+	FSRef appRef;
+
+	// Keep this for the download/open
 	[newFilename retain];
 	[enclosureFilename release];
 	enclosureFilename = newFilename;
 
-	// TODO stevepa: For certain enclosure types, we should use Open to open in an
-	// external application.
-	[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
-	[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
-	
 	NSString * basename = [enclosureFilename lastPathComponent];
-	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:[basename pathExtension]];
+	NSString * ext = [basename pathExtension];
+
+	// Find the file's likely location in Finder and see if it is already there.
+	// We'll set the options in the pane based on whether the file is there or not.
+	Preferences * prefs = [Preferences standardPreferences];
+	NSString * downloadPath = [prefs downloadFolder];
+	NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:basename];
+	
+	if (![DownloadManager isFileDownloaded:destPath])
+	{
+		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
+		[downloadButton setAction:@selector(downloadFile:)];
+		[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
+	}
+	else
+	{
+		isITunes = NO;
+		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
+		{
+			LSItemInfoRecord outItemInfo;
+			
+			LSCopyItemInfoForURL(appURL, kLSRequestTypeCreator, &outItemInfo);
+			isITunes = [NSFileTypeForHFSTypeCode(outItemInfo.creator) isEqualToString:@"'hook'"];
+
+			CFRelease(appURL);
+		}
+
+		// Open/Play is pretty much the same thing but we want to be a bit friendlier to iTunes
+		// and make it clearer what will happen when the file is opened.
+		if (isITunes)
+		{
+			[downloadButton setTitle:NSLocalizedString(@"Play", nil)];
+			[downloadButton setAction:@selector(openFile:)];
+			[filenameLabel setStringValue:NSLocalizedString(@"Click the Play button to play this enclosure in iTunes.", nil)];
+		}
+		else
+		{
+			[downloadButton setTitle:NSLocalizedString(@"Open", nil)];
+			[downloadButton setAction:@selector(openFile:)];
+			[filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
+		}
+	}
+	
+	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:ext];
 	[fileImage setImage:iconImage];
 	[filenameField setStringValue:basename];
 }
 
 /* downloadFile
- * Handle the download file button.
+ * Download the enclosure.
  */
 -(IBAction)downloadFile:(id)sender
 {
@@ -67,6 +128,18 @@
 	NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:theFilename];
 	
 	[[DownloadManager sharedInstance] downloadFile:destPath fromURL:enclosureFilename];
+}
+
+/* openFile
+ * Open the enclosure in the host application.
+ */
+-(IBAction)openFile:(id)sender
+{
+	NSString * theFilename = [enclosureFilename lastPathComponent];
+	NSString * downloadPath = [[Preferences standardPreferences] downloadFolder];
+	NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:theFilename];
+
+	[[NSWorkspace sharedWorkspace] openFile:destPath];
 }
 
 /* drawRect
