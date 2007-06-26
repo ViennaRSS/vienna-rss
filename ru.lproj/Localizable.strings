@@ -367,3 +367,6 @@
 "File %@ downloaded" = "File %@ downloaded";
 "Download failed" = "Download failed";
 "File %@ failed to download" = "File %@ failed to download";
+"Play" = "Play";
+"Click the Play button to play this enclosure in iTunes." = "Click the Play button to play this enclosure in iTunes.";
+"Click the Open button to open this file." = "Click the Open button to open this file.";

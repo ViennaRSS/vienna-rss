@@ -372,6 +372,36 @@ static DownloadManager * _sharedDownloadManager = nil;
 	return nil;
 }
 
+/* isFileDownloaded
+ * Looks up the specified file in the download list to determine if it is being downloaded. If
+ * not, then it looks up the file in the workspace.
+ */
++(BOOL)isFileDownloaded:(NSString *)filename
+{
+	DownloadManager * downloadManager = [DownloadManager sharedInstance];
+	int count = [[downloadManager downloadsList] count];
+	int index;
+
+	NSString * firstFile = [filename stringByStandardizingPath];
+
+	for (index = 0; index < count; ++index)
+	{
+		DownloadItem * item = [[downloadManager downloadsList] objectAtIndex:index];
+		NSString * secondFile = [[item filename] stringByStandardizingPath];
+		
+		if ([firstFile compare:secondFile options:NSCaseInsensitiveSearch] == NSOrderedSame)
+		{
+			if ([item state] != DOWNLOAD_COMPLETED)
+				return NO;
+			
+			// File completed download but possibly moved or deleted after download
+			// so check the file system.
+			return [[NSFileManager defaultManager] fileExistsAtPath:secondFile];
+		}
+	}
+	return NO;
+}
+
 /* notifyDownloadItemChange
  * Send a notification that the specified download item has changed.
  */
@@ -433,6 +463,9 @@ static DownloadManager * _sharedDownloadManager = nil;
 							title:NSLocalizedString(@"Download completed", nil)
 					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", nil), filename]
 				 notificationName:NSLocalizedString(@"Growl download completed", nil)];
+	
+	// Post a notification when the download completes.
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_DownloadCompleted" object:filename];
 }
 
 /* didFailWithError
