@@ -243,6 +243,38 @@
 	return ([tabViewItem identifier] == primaryTabItemView);
 }
 
+/* tabView:shouldDragTabViewItem:fromTabBar:
+ * Should a tab view item be allowed to be dragged?
+ */
+- (BOOL)tabView:(NSTabView *)aTabView shouldDragTabViewItem:(NSTabViewItem *)tabViewItem fromTabBar:(PSMTabBarControl *)tabBarControl
+{
+	return YES;
+}
+
+/* tabView:shouldDropTabViewItem:inTabBar:
+ * Should a tab view item drop be accepted?
+ */
+- (BOOL)tabView:(NSTabView *)aTabView shouldDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
+{
+	return YES;
+}
+
+/* tabView:didDropTabViewItem:inTabBar:
+ * A drag & drop operation of a tab view item was completed.
+ */
+- (void)tabView:(NSTabView*)aTabView didDropTabViewItem:(NSTabViewItem *)tabViewItem inTabBar:(PSMTabBarControl *)tabBarControl
+{
+}
+
+/* tabView:shouldAllowTabViewItem:toLeaveTabBar:
+ * Should a tab view item be allowed to leave the tab bar?
+ */
+- (BOOL)tabView:(NSTabView *)aTabView shouldAllowTabViewItem:(NSTabViewItem *)tabViewItem toLeaveTabBar:(PSMTabBarControl *)tabBarControl;
+{
+	return NO;
+}
+
+#pragma mark -
 /* saveOpenTabs
  * Persist the URLs of each open tab to the preferences so they can be
  * restored when we reload.
