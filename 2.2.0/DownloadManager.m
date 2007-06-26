@@ -420,6 +420,19 @@ static DownloadManager * _sharedDownloadManager = nil;
 	--activeDownloads;
 	[self notifyDownloadItemChange:theItem];
 	[self archiveDownloadsList];
+
+	NSString * filename = [[theItem filename] lastPathComponent];
+	if (filename == nil)
+		filename = [theItem filename];
+
+	NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
+	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
+	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
+	
+	[[NSApp delegate] growlNotify:contextDict
+							title:NSLocalizedString(@"Download completed", nil)
+					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", nil), filename]
+				 notificationName:NSLocalizedString(@"Growl download completed", nil)];
 }
 
 /* didFailWithError
@@ -433,6 +446,19 @@ static DownloadManager * _sharedDownloadManager = nil;
 	--activeDownloads;
 	[self notifyDownloadItemChange:theItem];
 	[self archiveDownloadsList];
+
+	NSString * filename = [[theItem filename] lastPathComponent];
+	if (filename == nil)
+		filename = [theItem filename];
+
+	NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
+	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
+	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
+	
+	[[NSApp delegate] growlNotify:contextDict
+							title:NSLocalizedString(@"Download failed", nil)
+					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", nil), filename]
+				 notificationName:NSLocalizedString(@"Growl download failed", nil)];
 }
 
 /* didReceiveDataOfLength

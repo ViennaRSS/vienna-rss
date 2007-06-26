@@ -1189,6 +1189,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 #pragma mark Growl Delegate
 
+/* growlNotify
+ * Sends out the specified notification event if Growl is installed and ready.
+ */
+-(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName
+{
+	if (growlAvailable)
+		[GrowlApplicationBridge notifyWithTitle:title
+									description:description
+							   notificationName:notificationName
+									   iconData:nil
+									   priority:0.0
+									   isSticky:NO
+								   clickContext:notifyContext];
+}
+
 /* growlIsReady
  * Called by Growl when it is loaded. We use this as a trigger to acknowledge its existence.
  */
@@ -1206,10 +1221,26 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)growlNotificationWasClicked:(id)clickContext
 {
-	[self openVienna:self];
-	Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
-	if (unreadArticles != nil)
-		[foldersTree selectFolder:[unreadArticles itemId]];
+	NSDictionary * contextDict = (NSDictionary *)clickContext;
+	int contextValue = [[contextDict valueForKey:@"ContextType"] intValue];
+
+	if (contextValue == MA_GrowlContext_RefreshCompleted)
+	{
+		[self openVienna:self];
+		Folder * unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
+		if (unreadArticles != nil)
+			[foldersTree selectFolder:[unreadArticles itemId]];
+		return;
+	}
+
+	// Successful download - show file in Finder. If we fail then we don't
+	// care. Definitely don't want to be popping up an error dialog.
+	if (contextValue == MA_GrowlContext_DownloadCompleted)
+	{
+		NSString * pathToFile = [contextDict valueForKey:@"ContextData"];
+		[[NSWorkspace sharedWorkspace] selectFile:pathToFile inFileViewerRootedAtPath:@""];
+		return;
+	}
 }
 
 /* registrationDictionaryForGrowl
@@ -1219,9 +1250,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableArray *defNotesArray = [NSMutableArray array];
 	NSMutableArray *allNotesArray = [NSMutableArray array];
-	
-	[allNotesArray addObject:NSLocalizedString(@"Growl notification name", nil)];
-	[defNotesArray addObject:NSLocalizedString(@"Growl notification name", nil)];
+
+	[allNotesArray addObject:NSLocalizedString(@"Growl refresh completed", nil)];
+	[allNotesArray addObject:NSLocalizedString(@"Growl download completed", nil)];
+	[allNotesArray addObject:NSLocalizedString(@"Growl download failed", nil)];
+
+	[defNotesArray addObject:NSLocalizedString(@"Growl refresh completed", nil)];
+	[defNotesArray addObject:NSLocalizedString(@"Growl download completed", nil)];
+	[defNotesArray addObject:NSLocalizedString(@"Growl download failed", nil)];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
 		[self appName], GROWL_APP_NAME, 
@@ -2015,19 +2051,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && [NSApp respondsToSelector:@selector(requestUserAttention:)])
 			[NSApp requestUserAttention:NSInformationalRequest];
 
-		if (growlAvailable && newUnread > 0)
+		// Growl notification
+		if (newUnread > 0)
 		{
-			[GrowlApplicationBridge
-				notifyWithTitle:NSLocalizedString(@"Growl notification title", nil)
-					description:[NSString stringWithFormat:NSLocalizedString(@"Growl description", nil), newUnread]
-			   notificationName:NSLocalizedString(@"Growl notification name", nil)
-					   iconData:nil
-					   priority:0.0
-					   isSticky:NO
-				   clickContext:[NSNumber numberWithInt:newUnread]];
+			NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
+			[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_RefreshCompleted] forKey:@"ContextType"];
+
+			[self growlNotify:contextDict
+						title:NSLocalizedString(@"New articles retrieved", nil)
+				  description:[NSString stringWithFormat:NSLocalizedString(@"New unread articles retrieved", nil), newUnread]
+			 notificationName:NSLocalizedString(@"Growl refresh completed", nil)];
 		}
 	}
-}	
+}
 
 /* moreStyles
  * Display the web page where the user can download additional styles.

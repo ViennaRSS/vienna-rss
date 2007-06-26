@@ -180,7 +180,6 @@
 		[table reloadData];
 	}
 }
-	
 
 /* numberOfRowsInTableView [datasource]
  * Datasource for the table view. Return the total number of rows we'll display which

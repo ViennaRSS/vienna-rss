@@ -13,9 +13,9 @@
 "%d subscriptions successfully imported" = "Успешно импортировано %d каналов";
 "RSS Subscription Export Title" = "Экспортирование Завершено";
 "%d subscriptions successfully exported" = "Успешно экспортировано %d каналов";
-"Growl description" = "Получено %d новых статей";
-"Growl notification name" = "Новые Статьи";
-"Growl notification title" = "Новые Статьи";
+"New unread articles retrieved" = "Получено %d новых статей";
+"Growl refresh completed" = "Новые Статьи";
+"New articles retrieved" = "Новые Статьи";
 "(Untitled Feed)" = "без имени";
 "Open Link in Browser" = "Открыть Ссылку в Браузере";
 "Copy Link to Clipboard" = "Копировать Ссылку в Буфер Обмена";
@@ -361,3 +361,9 @@
 "Resubscribe" = "Resubscribe to Feed";
 "Download" = "Download";
 "This article contains an enclosed file." = "This article contains an enclosed file.";
+"Growl download completed" = "File download successful";
+"Growl download failed" = "File download failed";
+"Download completed" = "Download completed";
+"File %@ downloaded" = "File %@ downloaded";
+"Download failed" = "Download failed";
+"File %@ failed to download" = "File %@ failed to download";
