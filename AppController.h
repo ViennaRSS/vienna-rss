@@ -183,4 +183,5 @@
 -(void)toggleOptionKeyButtonStates;
 -(NSMenu *)folderMenu;
 -(void)viewAnimationCompleted:(NSView *)theView;
+-(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 @end
