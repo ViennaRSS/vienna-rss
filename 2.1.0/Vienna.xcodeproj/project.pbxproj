@@ -10,6 +10,7 @@
 		47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 47775BD90A109C6A0091C45E /* Acknowledgements.rtf */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
+		5282B3360C3286ED008F8784 /* Acknowledgements.html in Resources */ = {isa = PBXBuildFile; fileRef = 5282B3350C3286ED008F8784 /* Acknowledgements.html */; };
 		616867C40A83D6A700FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
 		616867C50A83D6B100FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
 		616867C60A83D6BA00FEAC62 /* CurlGetDate.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
@@ -312,6 +313,7 @@
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vienna_Prefix.pch; sourceTree = "<group>"; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		5282B3350C3286ED008F8784 /* Acknowledgements.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Acknowledgements.html; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		61975EB70B41E0A0001F65FF /* EmptyTrashWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTrashWarning.h; sourceTree = "<group>"; };
 		61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTrashWarning.m; sourceTree = "<group>"; };
@@ -332,7 +334,7 @@
 		61D9A5310B4200960087C312 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61D9A5320B4200A30087C312 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01BA210B05251900CD0695 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/InfoWindow.nib; sourceTree = "<group>"; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rssFeedNew.tiff; sourceTree = "<group>"; };
 		AA0FB5E00869110300D9CB90 /* ActivityLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLog.h; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5282B3350C3286ED008F8784 /* Acknowledgements.html */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */,
@@ -1386,6 +1389,7 @@
 				AA681C8A0B199E1900CFD5B7 /* advancedPrefImage.tiff in Resources */,
 				61975F030B41F145001F65FF /* EmptyTrashWarning.nib in Resources */,
 				B2A81B860B4462FB00DFFDD0 /* gear.tiff in Resources */,
+				5282B3360C3286ED008F8784 /* Acknowledgements.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
