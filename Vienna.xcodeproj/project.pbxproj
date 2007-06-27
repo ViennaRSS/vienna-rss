@@ -12,6 +12,7 @@
 		47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 47775BD90A109C6A0091C45E /* Acknowledgements.rtf */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
+		52829E960C3284AE008F8784 /* Acknowledgements.html in Resources */ = {isa = PBXBuildFile; fileRef = 52829E950C3284AE008F8784 /* Acknowledgements.html */; };
 		616867C40A83D6A700FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
 		616867C50A83D6B100FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
 		616867C60A83D6BA00FEAC62 /* CurlGetDate.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
@@ -369,6 +370,7 @@
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		52829E950C3284AE008F8784 /* Acknowledgements.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Acknowledgements.html; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		61975EB70B41E0A0001F65FF /* EmptyTrashWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTrashWarning.h; sourceTree = "<group>"; };
 		61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTrashWarning.m; sourceTree = "<group>"; };
@@ -997,6 +999,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				52829E950C3284AE008F8784 /* Acknowledgements.html */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */,
@@ -1647,6 +1650,7 @@
 				AAD2C0550C2C882D00AA0F11 /* selGray.tiff in Resources */,
 				AA16C2B10C2D57D5006BBAC1 /* draggerImage.png in Resources */,
 				AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */,
+				52829E960C3284AE008F8784 /* Acknowledgements.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
