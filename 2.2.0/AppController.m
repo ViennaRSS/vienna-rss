@@ -2775,11 +2775,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)showAcknowledgements:(id)sender
 {
 	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements" ofType:@"rtf"];
+	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements" ofType:@"html"];
 	if (pathToAckFile != nil)
 	{
-		//[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
-		[[NSWorkspace sharedWorkspace] openFile:pathToAckFile];
+		[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
 	}
 }
 
