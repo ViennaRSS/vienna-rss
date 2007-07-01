@@ -22,6 +22,7 @@
                 goBack = id; 
                 goForward = id; 
                 handleAbout = id; 
+                hideFilterBar = id; 
                 importSubscriptions = id; 
                 keyboardShortcutsHelp = id; 
                 mailLinkToArticlePage = id; 
@@ -49,9 +50,12 @@
                 renameFolder = id; 
                 reportLayout = id; 
                 restoreMessage = id; 
+                searchUsingFilterField = id; 
                 searchUsingToolbarTextField = id; 
+                setFocusToSearchField = id; 
                 showAcknowledgements = id; 
                 showDownloadsWindow = id; 
+                showHideFilterBar = id; 
                 showHideStatusBar = id; 
                 showMainWindow = id; 
                 showPreferencePanel = id; 
@@ -72,6 +76,7 @@
             OUTLETS = {
                 actionPopup = PopupButton; 
                 articleController = ArticleController; 
+                articleFrame = NSView; 
                 blogWithMenu = NSMenuItem; 
                 blogWithOneMenu = NSMenuItem; 
                 browserView = BrowserView; 
@@ -83,6 +88,9 @@
                 exportSaveAccessory = NSView; 
                 exportSelected = NSButtonCell; 
                 exportWithGroups = NSButton; 
+                filterSearchField = NSSearchField; 
+                filterView = FilterView; 
+                filterViewPopUp = NSPopUpButton; 
                 filtersMenu = NSMenuItem; 
                 foldersTree = FoldersTree; 
                 mainArticleView = ArticleListView; 
@@ -114,7 +122,6 @@
                 articleText = ArticleView; 
                 columnsPopupMenu = PopupButton; 
                 controller = AppController; 
-                filtersPopupMenu = PopupButton; 
                 foldersTree = FoldersTree; 
                 splitView2 = NSSplitView; 
                 stdEnclosureView = StdEnclosureView; 
@@ -155,6 +162,17 @@
             LANGUAGE = ObjC; 
             OUTLETS = {target = id; }; 
             SUPERCLASS = NSProgressIndicator; 
+        }, 
+        {
+            CLASS = FilterView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                filterByLabel = NSTextField; 
+                filterCloseButton = NSButton; 
+                filterSearchField = NSSearchField; 
+                filterViewPopUp = NSPopUpButton; 
+            }; 
+            SUPERCLASS = NSView; 
         }, 
         {
             ACTIONS = {
@@ -231,7 +249,6 @@
             OUTLETS = {
                 articleController = ArticleController; 
                 controller = AppController; 
-                filtersPopupMenu = PopupButton; 
                 foldersTree = FoldersTree; 
                 unifiedListHeader = TexturedHeader; 
                 unifiedText = ArticleView; 

@@ -80,6 +80,8 @@
 	-(void)doEditFolder:(Folder *)folder;
 	-(void)refreshOnTimer:(NSTimer *)aTimer;
 	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+	-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+	-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
@@ -93,6 +95,7 @@
 	-(FoldersTree *)foldersTree;
 	-(void)updateCloseCommands;
 	-(void)loadOpenTabs;
+	-(BOOL)isFilterBarVisible;
 	-(NSDictionary *)registrationDictionaryForGrowl;
 	-(NSTimer *)checkTimer;
 	-(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
@@ -238,14 +241,18 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[item setTag:NSSearchFieldRecentsMenuItemTag];
 	[cellMenu insertItem:item atIndex:1];
 	[item release];
-	
+
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
 	[cellMenu insertItem:item atIndex:2];
 	[item release];
 	
 	[[searchField cell] setSearchMenuTemplate:cellMenu];
+	[[filterSearchField cell] setSearchMenuTemplate:cellMenu];
 	[cellMenu release];
+
+	// Set the placeholder string for the global search field
+	[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
 
 	// Add Scripts menu if we have any scripts
 	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
@@ -253,7 +260,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	
 	// Show/hide the status bar based on the last session state
 	[self setStatusBarState:[prefs boolForKey:MAPref_ShowStatusBar] withAnimation:NO];
-	
+
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
 	
@@ -276,9 +283,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Do safe initialisation. 	 
 	[self doSafeInitialisation];
 	
-	/* Retain views which might be removed from the toolbar and therefore released;
-	 * we will need them if they are added back later.
-	 */
+	// Retain views which might be removed from the toolbar and therefore released;
+	// we will need them if they are added back later.
 	[spinner retain];
 	[searchView retain];
 	[actionPopup retain];
@@ -289,7 +295,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  * or released anywhere in the system. Needed for iTunes-like button. The other 
  * half of the magic happens in ViennaApp.
  */
-
 -(void)installCustomEventHandler
 {
 	EventTypeSpec eventType;
@@ -320,6 +325,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 			previousArticleGuid = nil;
 		[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
+		// Set the initial filter bar state
+		[self setFilterBarState:[prefs boolForKey:MAPref_ShowFilterBar] withAnimation:NO];
+		
 		// Make article list the first responder
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
 
@@ -751,6 +759,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag
 {
+	// Turn off the filter view when switching layouts. This is simpler than
+	// trying to graft it onto the new layout.
+	if ([self isFilterBarVisible])
+		[self setPersistedFilterBarState:NO withAnimation:NO];
+
 	switch (newLayout)
 	{
 	case MA_Layout_Report:
@@ -1187,6 +1200,111 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+#pragma mark Filter Bar
+
+/* isFilterBarVisible
+ * Simple function that returns whether or not the filter view is visible.
+ */
+-(BOOL)isFilterBarVisible
+{
+	return [filterView superview] != nil;
+}
+
+/* showHideFilterBar
+ * Toggle the filter bar on/off.
+ */
+-(IBAction)showHideFilterBar:(id)sender
+{
+	[self setPersistedFilterBarState:![self isFilterBarVisible] withAnimation:YES];
+}
+
+/* hideFilterBar
+ * Removes the filter view control.
+ */
+-(IBAction)hideFilterBar:(id)sender
+{
+	[self setPersistedFilterBarState:NO withAnimation:YES];
+}
+
+/* setPersistedFilterBarState
+ * Calls setFilterBarState but also persists the new state to the preferences.
+ */
+-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
+{
+	[self setFilterBarState:isVisible withAnimation:doAnimate];
+	[[Preferences standardPreferences] setBool:isVisible forKey:MAPref_ShowFilterBar];
+}
+
+/* setFilterBarState
+ * Show or hide the filter view. The quickFlag specifies whether or not we do the
+ * animated show/hide. It should be set to NO for actions that are not user initiated as
+ * otherwise the background rendering of the control can cause complications.
+ */
+-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
+{
+	if (isVisible && ![self isFilterBarVisible])
+	{
+		NSView * parentView = [[[articleController mainArticleView] subviews] objectAtIndex:0];
+		NSRect filterBarRect;
+		NSRect mainRect;
+	
+		mainRect = [parentView bounds];
+		filterBarRect = [filterView bounds];
+		filterBarRect.size.width = mainRect.size.width;
+		filterBarRect.origin.y = mainRect.size.height - filterBarRect.size.height;
+		mainRect.size.height -= filterBarRect.size.height;
+		
+		[[parentView superview] addSubview:filterView];
+		[filterView setFrame:filterBarRect];
+		if (!doAnimate)
+			[parentView setFrame:mainRect];
+		else
+			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
+		[parentView display];
+
+		// Hook up the Tab ordering so Tab from the search field goes to the
+		// article view.
+		[[foldersTree mainView] setNextKeyView:filterSearchField];
+		[filterSearchField setNextKeyView:[[browserView primaryTabItemView] mainView]];
+
+		// Set focus only if this was user initiated
+		if (doAnimate)
+			[mainWindow makeFirstResponder:filterSearchField];
+	}
+	if (!isVisible && [self isFilterBarVisible])
+	{
+		NSView * parentView = [[[articleController mainArticleView] subviews] objectAtIndex:0];
+		NSRect filterBarRect;
+		NSRect mainRect;
+
+		mainRect = [parentView bounds];
+		filterBarRect = [filterView bounds];
+		mainRect.size.height += filterBarRect.size.height;
+
+		[filterView removeFromSuperview];
+		if (!doAnimate)
+			[parentView setFrame:mainRect];
+		else
+			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
+		[parentView setNeedsDisplay:YES];
+
+		// Fix up the tab ordering
+		[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
+
+		// Clear the filter, otherwise we end up with no way remove it!
+		[self setSearchString:@""];
+		if (doAnimate)
+		{
+			[self searchUsingFilterField:self];
+
+			// If the focus was originally on the filter view then we should
+			// move it to the message list
+			if ([mainWindow firstResponder] == mainWindow)
+				[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];
+		}
+	}
+}
+
 #pragma mark Growl Delegate
 
 /* growlNotify
@@ -1473,6 +1591,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Add it to the Filters menu
 	[filtersMenu setSubmenu:filterSubMenu];
+	[filterViewPopUp setMenu:filterPopupMenu];
 }
 
 /* updateNewArticlesNotification
@@ -2201,14 +2320,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			}
 			return NO;
 
+		case 'h':
+		case 'H':
+			[self setFocusToSearchField:self];
+			return YES;
+			
 		case 'f':
 		case 'F':
-			if ([self toolbarItemWithIdentifier:@"SearchItem"])
-			{
-				if (![[mainWindow toolbar] isVisible])
-					[[mainWindow toolbar] setVisible:YES];
-				[mainWindow makeFirstResponder:searchField];
-			}
+			if (![self isFilterBarVisible])
+				[self setPersistedFilterBarState:YES withAnimation:YES];
+			else
+				[mainWindow makeFirstResponder:filterSearchField];
 			return YES;
 			
 		case '>':
@@ -2869,32 +2991,39 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateSearchPlaceholder
 {
-	NSView<BaseView> * theView = [browserView activeTabItemView];
-	if ([theView isKindOfClass:[BrowserPane class]])
+	if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
 	{
-		[[searchField cell] setSendsWholeSearchString:YES];
-		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search web page", nil)];
-	}
-	else if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
-	{
-		[[searchField cell] setSendsWholeSearchString:YES];
-		[[searchField cell] setPlaceholderString:[articleController searchPlaceholderString]];
+		[[filterSearchField cell] setSendsWholeSearchString:YES];
+		[[filterSearchField cell] setPlaceholderString:[articleController searchPlaceholderString]];
 	}
 	else
 	{
-		[[searchField cell] setSendsWholeSearchString:NO];
-		[[searchField cell] setPlaceholderString:[articleController searchPlaceholderString]];
+		[[filterSearchField cell] setSendsWholeSearchString:NO];
+		[[filterSearchField cell] setPlaceholderString:[articleController searchPlaceholderString]];
 	}
 }
 
 #pragma mark Searching
 
+/* setFocusToSearchField
+ * Put the input focus on the search field.
+ */
+-(IBAction)setFocusToSearchField:(id)sender
+{
+	if ([self toolbarItemWithIdentifier:@"SearchItem"])
+	{
+		if (![[mainWindow toolbar] isVisible])
+			[[mainWindow toolbar] setVisible:YES];
+		[mainWindow makeFirstResponder:searchField];
+	}
+}
+
 /* setSearchString
- * Sets the search field's search string.
+ * Sets the filter bar's search string.
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	[searchField setStringValue:newSearchString];
+	[filterSearchField setStringValue:newSearchString];
 }
 
 /* searchString
@@ -2902,7 +3031,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSString *)searchString
 {
-	return [searchField stringValue];
+	return [filterSearchField stringValue];
+}
+
+/* searchUsingFilterField
+ * Executes a search using the filter control.
+ */
+-(IBAction)searchUsingFilterField:(id)sender
+{
+	[[browserView activeTabItemView] performFindPanelAction:NSFindPanelActionNext];
 }
 
 /* searchUsingToolbarTextField
@@ -2910,10 +3047,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	// $TODO stevepa:
-	// Create Search folder if it doesn't already exist.
-	// Refresh search folder with search string contents.
-	[[browserView activeTabItemView] performFindPanelAction:NSFindPanelActionNext];
+	if ([foldersTree actualSelection] != [db searchFolderId])
+		[foldersTree selectFolder:[db searchFolderId]];
+	[db setSearchString:[searchField stringValue]];
+	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
 #pragma mark Refresh Subscriptions
@@ -3023,6 +3160,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[Preferences standardPreferences] setFilterMode:[menuItem tag]];
 }
 
+#pragma mark Blogging
+
 /* blogWith
  * Calls the function which creates an Apple Event for external editor integration.
  */
@@ -3106,25 +3245,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSLog(@"Error sending Apple Event: %d", err);
 }
 
-#pragma mark Status Message
-
-/* setStatusMessage
- * Sets a new status message for the info bar then updates the view. To remove
- * any existing status message, pass nil as the value.
- */
--(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag
-{
-	if (persistenceFlag)
-	{
-		[newStatusText retain];
-		[persistedStatusText release];
-		persistedStatusText = newStatusText;
-	}
-	if (newStatusText == nil || [newStatusText isBlank])
-		newStatusText = persistedStatusText;
-	[statusText setStringValue:(newStatusText ? newStatusText : @"")];
-}
-
 #pragma mark Progress Indicator 
 
 /* startProgressIndicator
@@ -3149,6 +3269,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		progressCount = 0;
 	}
 }
+
+#pragma mark Status Bar
 
 /* showHideStatusBar
  * Toggle the status bar on/off. When off, expand the article area to fill the space.
@@ -3192,26 +3314,51 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				[bottomDivider setHidden:YES];
 				[statusText setHidden:YES];
 			}
-			[splitView1 resizeViewWithAnimation:viewSize];
+			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
 		}
 		[mainWindow display];
 		isStatusBarVisible = isVisible;
 	}
 }
 
+/* setStatusMessage
+ * Sets a new status message for the status bar then updates the view. To remove
+ * any existing status message, pass nil as the value.
+ */
+-(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag
+{
+	if (persistenceFlag)
+	{
+		[newStatusText retain];
+		[persistedStatusText release];
+		persistedStatusText = newStatusText;
+	}
+	if (newStatusText == nil || [newStatusText isBlank])
+		newStatusText = persistedStatusText;
+	[statusText setStringValue:(newStatusText ? newStatusText : @"")];
+}
+
 /* viewAnimationCompleted
  * Called when animation of the specified view completes.
  */
--(void)viewAnimationCompleted:(NSView *)theView
+-(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag
 {
-	if (theView == splitView1 && isStatusBarVisible)
+	if (viewTag == MA_ViewTag_Statusbar && isStatusBarVisible)
 	{
 		// When showing the status bar, show these controls AFTER
 		// we have made the view visible. Again, looks cleaner.
 		[bottomDivider setHidden:NO];
 		[statusText setHidden:NO];
+		return;
+	}
+	if (viewTag == MA_ViewTag_Filterbar && [self isFilterBarVisible])
+	{
+		[filterView display];
+		return;
 	}
 }
+
+#pragma mark Toolbar And Menu Bar Validation
 
 /* validateCommonToolbarAndMenuItems
  * Validation code for items that appear on both the toolbar and the menu. Since these are
@@ -3294,6 +3441,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		else
 			[menuItem setTitle:NSLocalizedString(@"Show Status Bar", nil)];
 		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(showHideFilterBar:))
+	{
+		if ([self isFilterBarVisible])
+			[menuItem setTitle:NSLocalizedString(@"Hide Filter Bar", nil)];
+		else
+			[menuItem setTitle:NSLocalizedString(@"Show Filter Bar", nil)];
+		return isMainWindowVisible && isAnyArticleView;
 	}
 	else if (theAction == @selector(makeTextLarger:))
 	{
@@ -3515,10 +3670,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* itemForItemIdentifier
-* This method is required of NSToolbar delegates.  It takes an identifier, and returns the matching NSToolbarItem.
-* It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
-* going to be displayed in a customization palette.
-*/
+ * This method is required of NSToolbar delegates.  It takes an identifier, and returns the matching NSToolbarItem.
+ * It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
+ * going to be displayed in a customization palette.
+ */
 -(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
 {
 	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];

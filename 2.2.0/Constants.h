@@ -63,6 +63,7 @@ extern NSString * MAPref_Profile_Path;
 extern NSString * MAPref_EmptyTrashNotification;
 extern NSString * MAPref_ShowAppInStatusBar;
 extern NSString * MAPref_ShowStatusBar;
+extern NSString * MAPref_ShowFilterBar;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
@@ -99,6 +100,10 @@ extern NSString * MA_PBoardType_urln;
 #define MA_GrowlContext_RefreshCompleted	1
 #define MA_GrowlContext_DownloadCompleted	2
 #define MA_GrowlContext_DownloadFailed		3
+
+// View animation tags
+#define MA_ViewTag_Filterbar			1
+#define MA_ViewTag_Statusbar			2
 
 const AEKeyword EditDataItemAppleEventClass;
 const AEKeyword EditDataItemAppleEventID;

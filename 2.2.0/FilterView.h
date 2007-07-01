@@ -1,8 +1,8 @@
 //
-//  ViewExtensions.h
+//  FilterView.h
 //  Vienna
 //
-//  Created by Steve Palmer on 27/05/2007.
+//  Created by Steve on 29/7/07.
 //  Copyright (c) 2004-2007 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,11 +20,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSView (ViewExtensions)
-	-(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag;
+@interface FilterView : NSView
+{
+	IBOutlet NSTextField * filterByLabel;
+	IBOutlet NSSearchField * filterSearchField;
+	IBOutlet NSPopUpButton * filterViewPopUp;
+	IBOutlet NSButton * filterCloseButton;
+	NSImage * backgroundBrush;
+}
 @end
-
-@interface NSObject(ViewExtensionsDelegate)
--(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag;
-@end
-
