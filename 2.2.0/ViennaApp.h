@@ -82,6 +82,8 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 -(int)folderListFontSize;
 -(NSString *)articleListFont;
 -(int)articleListFontSize;
+-(BOOL)statusBarVisible;
+-(BOOL)filterBarVisible;
 
 // Preference setters
 -(void)setAutoExpireDuration:(int)newDuration;
@@ -99,5 +101,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 -(void)setFolderListFontSize:(int)newFontSize;
 -(void)setArticleListFont:(NSString *)newFontName;
 -(void)setArticleListFontSize:(int)newFontSize;
+-(void)setStatusBarVisible:(BOOL)flag;
+-(void)setFilterBarVisible:(BOOL)flag;
 @end
 

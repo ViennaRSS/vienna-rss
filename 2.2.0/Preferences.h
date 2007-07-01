@@ -176,4 +176,12 @@
 // Do we show an icon in the status bar?
 -(BOOL)showAppInStatusBar;
 -(void)setShowAppInStatusBar:(BOOL)show;
+
+// Show or hide the status bar
+-(BOOL)showStatusBar;
+-(void)setShowStatusBar:(BOOL)show;
+
+// Show or hide the filter bar
+-(BOOL)showFilterBar;
+-(void)setShowFilterBar:(BOOL)show;
 @end

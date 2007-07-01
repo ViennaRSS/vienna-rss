@@ -372,6 +372,20 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Bool&gt;</string>
 				</dict>
+				<key>statusBarVisible</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>sbVS</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
+				<key>filterBarVisible</key>
+				<dict>
+					<key>AppleEventCode</key>
+					<string>fbVS</string>
+					<key>Type</key>
+					<string>NSNumber&lt;Bool&gt;</string>
+				</dict>
 				<key>autoExpireDuration</key>
 				<dict>
 					<key>AppleEventCode</key>

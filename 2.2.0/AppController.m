@@ -65,6 +65,8 @@
 	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 	-(void)handleReloadPreferences:(NSNotification *)nc;
 	-(void)handleShowAppInStatusBar:(NSNotification *)nc;
+	-(void)handleShowStatusBar:(NSNotification *)nc;
+	-(void)handleShowFilterBar:(NSNotification *)nc;
 	-(void)setAppStatusBarIcon;
 	-(void)localiseMenus:(NSArray *)arrayOfMenus;
 	-(void)updateNewArticlesNotification;
@@ -96,6 +98,7 @@
 	-(void)updateCloseCommands;
 	-(void)loadOpenTabs;
 	-(BOOL)isFilterBarVisible;
+	-(BOOL)isStatusBarVisible;
 	-(NSDictionary *)registrationDictionaryForGrowl;
 	-(NSTimer *)checkTimer;
 	-(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
@@ -124,9 +127,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
 		growlAvailable = NO;
-		isStatusBarVisible = YES;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
+		isStatusBarVisible = YES;
 		checkTimer = nil;
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
@@ -166,6 +169,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
 
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -259,7 +264,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[self initScriptsMenu];
 	
 	// Show/hide the status bar based on the last session state
-	[self setStatusBarState:[prefs boolForKey:MAPref_ShowStatusBar] withAnimation:NO];
+	[self setStatusBarState:[prefs showStatusBar] withAnimation:NO];
 
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
@@ -326,7 +331,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
 		// Set the initial filter bar state
-		[self setFilterBarState:[prefs boolForKey:MAPref_ShowFilterBar] withAnimation:NO];
+		[self setFilterBarState:[prefs showFilterBar] withAnimation:NO];
 		
 		// Make article list the first responder
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
@@ -759,7 +764,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag
 {
-	// Turn off the filter view when switching layouts. This is simpler than
+	// Turn off the filter bar when switching layouts. This is simpler than
 	// trying to graft it onto the new layout.
 	if ([self isFilterBarVisible])
 		[self setPersistedFilterBarState:NO withAnimation:NO];
@@ -1203,11 +1208,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 #pragma mark Filter Bar
 
 /* isFilterBarVisible
- * Simple function that returns whether or not the filter view is visible.
+ * Simple function that returns whether or not the filter bar is visible.
  */
 -(BOOL)isFilterBarVisible
 {
 	return [filterView superview] != nil;
+}
+
+/* handleShowFilterBar
+ * Respond to the filter bar being shown or hidden programmatically.
+ */
+-(void)handleShowFilterBar:(NSNotification *)nc
+{
+	if ([browserView activeTabItemView] == [browserView primaryTabItemView])
+		[self setFilterBarState:[[Preferences standardPreferences] showFilterBar] withAnimation:YES];
 }
 
 /* showHideFilterBar
@@ -1219,7 +1233,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* hideFilterBar
- * Removes the filter view control.
+ * Removes the filter bar from the current article view.
  */
 -(IBAction)hideFilterBar:(id)sender
 {
@@ -1232,11 +1246,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
 {
 	[self setFilterBarState:isVisible withAnimation:doAnimate];
-	[[Preferences standardPreferences] setBool:isVisible forKey:MAPref_ShowFilterBar];
+	[[Preferences standardPreferences] setShowFilterBar:isVisible];
 }
 
 /* setFilterBarState
- * Show or hide the filter view. The quickFlag specifies whether or not we do the
+ * Show or hide the filter bar. The withAnimation flag specifies whether or not we do the
  * animated show/hide. It should be set to NO for actions that are not user initiated as
  * otherwise the background rendering of the control can cause complications.
  */
@@ -1297,7 +1311,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			[self searchUsingFilterField:self];
 
-			// If the focus was originally on the filter view then we should
+			// If the focus was originally on the filter bar then we should
 			// move it to the message list
 			if ([mainWindow firstResponder] == mainWindow)
 				[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];
@@ -3272,13 +3286,32 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 #pragma mark Status Bar
 
+/* isStatusBarVisible
+ * Simple function that returns whether or not the status bar is visible.
+ */
+-(BOOL)isStatusBarVisible
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	return [prefs showStatusBar];
+}
+
+/* handleShowStatusBar
+ * Respond to the status bar state being changed programmatically.
+ */
+-(void)handleShowStatusBar:(NSNotification *)nc
+{
+	[self setStatusBarState:[[Preferences standardPreferences] showStatusBar] withAnimation:YES];
+}
+
 /* showHideStatusBar
  * Toggle the status bar on/off. When off, expand the article area to fill the space.
  */
 -(IBAction)showHideStatusBar:(id)sender
 {
-	[self setStatusBarState:!isStatusBarVisible withAnimation:YES];
-	[[Preferences standardPreferences] setBool:isStatusBarVisible forKey:MAPref_ShowStatusBar];
+	BOOL newState = ![self isStatusBarVisible];
+
+	[self setStatusBarState:newState withAnimation:YES];
+	[[Preferences standardPreferences] setShowStatusBar:newState];
 }
 
 /* setStatusBarState
@@ -3343,7 +3376,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag
 {
-	if (viewTag == MA_ViewTag_Statusbar && isStatusBarVisible)
+	if (viewTag == MA_ViewTag_Statusbar && [self isStatusBarVisible])
 	{
 		// When showing the status bar, show these controls AFTER
 		// we have made the view visible. Again, looks cleaner.
@@ -3436,7 +3469,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(showHideStatusBar:))
 	{
-		if (isStatusBarVisible)
+		if ([self isStatusBarVisible])
 			[menuItem setTitle:NSLocalizedString(@"Hide Status Bar", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Show Status Bar", nil)];
@@ -3596,6 +3629,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(changeFiltering:))
 	{
 		[menuItem setState:([menuItem tag] == [[Preferences standardPreferences] filterMode]) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(setFocusToSearchField:))
+	{
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(reportLayout:))

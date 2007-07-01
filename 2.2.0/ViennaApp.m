@@ -354,6 +354,8 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 -(int)folderListFontSize			{ return [[Preferences standardPreferences] folderListFontSize]; }
 -(NSString *)articleListFont		{ return [[Preferences standardPreferences] articleListFont]; }
 -(int)articleListFontSize			{ return [[Preferences standardPreferences] articleListFontSize]; }
+-(BOOL)statusBarVisible				{ return [[Preferences standardPreferences] showStatusBar]; }
+-(BOOL)filterBarVisible				{ return [[Preferences standardPreferences] showFilterBar]; }
 
 /* Accessor setters
  * These thunk through the standard preferences.
@@ -374,4 +376,6 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 -(void)setFolderListFontSize:(int)newFontSize		{ [[Preferences standardPreferences] setFolderListFontSize:newFontSize]; }
 -(void)setArticleListFont:(NSString *)newFontName	{ [[Preferences standardPreferences] setArticleListFont:newFontName]; }
 -(void)setArticleListFontSize:(int)newFontSize		{ [[Preferences standardPreferences] setArticleListFontSize:newFontSize]; }
+-(void)setStatusBarVisible:(BOOL)flag				{ [[Preferences standardPreferences] setShowStatusBar:flag]; }
+-(void)setFilterBarVisible:(BOOL)flag				{ [[Preferences standardPreferences] setShowFilterBar:flag]; }
 @end
