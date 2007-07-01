@@ -24,6 +24,7 @@
 #import "ActivityViewer.h"
 #import "Growl/GrowlApplicationBridge.h"
 #import "DownloadWindow.h"
+#import "FilterView.h"
 #import "PopupButton.h"
 
 @class NewPreferenceController;
@@ -46,8 +47,11 @@
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet NSSearchField * searchView;
+	IBOutlet NSSearchField * filterSearchField;
+	IBOutlet NSPopUpButton * filterViewPopUp;
 	IBOutlet ArticleListView * mainArticleView;
 	IBOutlet UnifiedDisplayView * unifiedListView;
+	IBOutlet NSView * articleFrame;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
 	IBOutlet NSButtonCell * exportSelected;
@@ -66,6 +70,7 @@
 	IBOutlet NSMenuItem * blogWithMenu;
 	IBOutlet NSMenuItem * blogWithOneMenu;
 	IBOutlet PopupButton * actionPopup;
+	IBOutlet FilterView * filterView;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;
@@ -98,6 +103,7 @@
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
+-(IBAction)searchUsingFilterField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
 -(IBAction)markAllSubscriptionsRead:(id)sender;
 -(IBAction)markRead:(id)sender;
@@ -153,7 +159,10 @@
 -(IBAction)newTab:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)showHideStatusBar:(id)sender;
+-(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)unsubscribeFeed:(id)sender;
+-(IBAction)hideFilterBar:(id)sender;
+-(IBAction)setFocusToSearchField:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;
@@ -182,6 +191,6 @@
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)toggleOptionKeyButtonStates;
 -(NSMenu *)folderMenu;
--(void)viewAnimationCompleted:(NSView *)theView;
+-(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag;
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 @end

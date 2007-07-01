@@ -43,6 +43,7 @@
 	BOOL useJavaScript;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
+	BOOL showFilterBar;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;

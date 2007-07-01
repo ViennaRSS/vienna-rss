@@ -20,12 +20,40 @@
 
 #import "ViewExtensions.h"
 
+@interface TaggedViewAnimation : NSViewAnimation {
+	int tagValue;
+}
+
+// Public functions
+-(void)setTag:(int)newTag;
+-(int)tag;
+@end
+
+@implementation TaggedViewAnimation
+
+/* setTag
+ * Assigns the specified tag value to the animation object.
+ */
+-(void)setTag:(int)newTag
+{
+	tagValue = newTag;
+}
+
+/* tag
+ * Returns the associated tag.
+ */
+-(int)tag
+{
+	return tagValue;
+}
+@end
+
 @implementation NSView (ViewExtensions)
 
 /* resizeViewWithAnimation
  * On Mac OSX 10.4 or later, resizes the specified view with animation. On earlier versions, just resizes the view.
  */
--(void)resizeViewWithAnimation:(NSRect)newFrame
+-(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag
 {
 	SInt32 MacVersion;
 	
@@ -36,11 +64,12 @@
 			self, NSViewAnimationTargetKey,
 			nil, nil];
 		
-		NSViewAnimation * animation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
+		TaggedViewAnimation * animation = [[TaggedViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
 		[animation setAnimationBlockingMode:NSAnimationNonblocking];
 		[animation setDuration:0.1];
 		[animation setAnimationCurve:NSAnimationEaseInOut];
 		[animation setDelegate:self];
+		[animation setTag:viewTag];
 		[animation startAnimation];
 	}
 	else
@@ -50,11 +79,13 @@
 /* animationDidEnd
  * Delegate function called when animation completes. (Mac OSX 10.4 or later only).
  */
--(void)animationDidEnd:(NSAnimation *)animation
+-(void)animationDidEnd:(TaggedViewAnimation *)animation
 {
 	NSWindow * viewWindow = [self window];
+	int viewTag = [animation tag];
+
 	[animation release];
-	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:)])
-		[[viewWindow delegate] viewAnimationCompleted:self];
+	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
+		[[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
 }
 @end
