@@ -909,4 +909,46 @@ static Preferences * _standardPreferences = nil;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	}
 }
+
+/* showStatusBar
+ * Returns whether the status bar is shown or hidden.
+ */
+-(BOOL)showStatusBar
+{
+	return showStatusBar;
+}
+
+/* setShowStatusBar
+ * Specifies whether the status bar is shown or hidden.
+ */
+-(void)setShowStatusBar:(BOOL)show
+{
+	if (showStatusBar != show)
+	{
+		showStatusBar = show;
+		[self setBool:showStatusBar forKey:MAPref_ShowStatusBar];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StatusBarChanged" object:nil];
+	}
+}
+
+/* showFilterBar
+ * Returns whether the filter bar is shown or hidden.
+ */
+-(BOOL)showFilterBar
+{
+	return showFilterBar;
+}
+
+/* setShowFilterBar
+ * Specifies whether the filter bar is shown or hidden.
+ */
+-(void)setShowFilterBar:(BOOL)show
+{
+	if (showFilterBar != show)
+	{
+		showFilterBar = show;
+		[self setBool:showFilterBar forKey:MAPref_ShowFilterBar];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FilterBarChanged" object:nil];
+	}
+}
 @end

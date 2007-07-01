@@ -11,6 +11,8 @@ Thanks!
 - Fix bug in 2201 which broke saving a new smart folder.
 - Fix CGContext errors in the system console log caused by the Vienna tab control gradient background.
 - Add Growl events for file download success and failure.
+- Add filter bar to more easily filter the article list.
+- Add global search bar.
 
 2.2.0.2201
 ----------

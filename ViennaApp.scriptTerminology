@@ -270,6 +270,20 @@
 					<key>Name</key>
 					<string>open links in Vienna</string>
 				</dict>
+				<key>statusBarVisible</key>
+				<dict>
+					<key>Description</key>
+					<string>shows or hides the main window status bar</string>
+					<key>Name</key>
+					<string>status bar visible</string>
+				</dict>
+				<key>filterBarVisible</key>
+				<dict>
+					<key>Description</key>
+					<string>shows or hides the filter bar</string>
+					<key>Name</key>
+					<string>filter bar visible</string>
+				</dict>
 				<key>autoExpireDuration</key>
 				<dict>
 					<key>Description</key>
