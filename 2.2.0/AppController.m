@@ -293,6 +293,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[spinner retain];
 	[searchView retain];
 	[actionPopup retain];
+	[blogWithPopup retain];
 }
 
 /* installCustomEventHandler
@@ -3752,6 +3753,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setAction:@selector(refreshAllSubscriptions:)];
 		[item setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
 	}
+	else if ([itemIdentifier isEqualToString:@"MailLink"])
+	{
+		[item setLabel:NSLocalizedString(@"Send Link", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setImage:[NSImage imageNamed:@"mailLinkButton.tiff"]];
+		[item setTarget:self];
+		[item setAction:@selector(mailLinkToArticlePage:)];
+		[item setToolTip:NSLocalizedString(@"Email a link to the current article or website", nil)];
+	}
 	else if ([itemIdentifier isEqualToString:@"EmptyTrash"])
 	{
 		[item setLabel:NSLocalizedString(@"Empty Trash", nil)];
@@ -3809,7 +3819,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[menuItem setTitle:[item label]];
 		[item setMenuFormRepresentation:menuItem];
 	}
-	
 	return [item autorelease];
 }
 
@@ -3848,6 +3857,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		@"Action",
 		@"SearchItem",
 		@"Spinner",
+		@"MailLink",
+		@"BlogWith",
 		nil];
 }
 

@@ -70,6 +70,7 @@
 	IBOutlet NSMenuItem * blogWithMenu;
 	IBOutlet NSMenuItem * blogWithOneMenu;
 	IBOutlet PopupButton * actionPopup;
+	IBOutlet PopupButton * blogWithPopup;
 	IBOutlet FilterView * filterView;
 
 	ActivityViewer * activityViewer;
