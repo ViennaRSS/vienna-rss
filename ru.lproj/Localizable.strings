@@ -353,7 +353,7 @@
 "Local File" = "Локальный Файл";
 "Hide Status Bar" = "Спрятать Строку Статуса";
 "Show Status Bar" = "Показать Строку Статуса";
-"Customize Toolbar" = "Настроить Панель Инструментов";
+"Customize Toolbar..." = "Настроить Панель Инструментов";
 "Search Articles" = "Искать Статьи";
 "Progress" = "Прогресс";
 "Delete all articles in the trash" = "Удалить все статьи в Корзине";
@@ -374,3 +374,5 @@
 "Close the filter bar" = "Close the filter bar";
 "Search all articles" = "Search all articles";
 "Search Results" = "Search Results";
+"Hide Filter Bar" = "Hide Filter Bar";
+"Show Filter Bar" = "Show Filter Bar";
