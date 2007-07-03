@@ -188,6 +188,7 @@
 		else
 			[foldersTree selectFolder:nextFolderWithUnread];
 	}
+	[[NSApp mainWindow] makeFirstResponder:unifiedText];
 }
 
 /* refreshArticlePane
@@ -220,26 +221,7 @@
  */
 -(void)performFindPanelAction:(int)actionTag
 {
-	switch (actionTag)
-	{
-		case NSFindPanelActionSetFindString:
-		{
-			NSView * docView = [[[unifiedText mainFrame] frameView] documentView];
-			
-			if ([docView conformsToProtocol:@protocol(WebDocumentText)])
-				[controller setSearchString:[(id<WebDocumentText>)docView selectedString]];
-			[unifiedText searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
-			break;
-		}
-			
-		case NSFindPanelActionNext:
-			[unifiedText searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
-			break;
-			
-		case NSFindPanelActionPrevious:
-			[unifiedText searchFor:[controller searchString] direction:NO caseSensitive:NO wrap:YES];
-			break;
-	}
+	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
 /* printDocument
