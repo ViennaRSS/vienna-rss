@@ -797,6 +797,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[browserView setTabItemViewTitle:[browserView primaryTabItemView] title:NSLocalizedString(@"Articles", nil)];
 
 	[[Preferences standardPreferences] setLayout:newLayout];
+	[self updateSearchPlaceholder];
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 }
 
@@ -2290,6 +2291,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags
 {
+	if (keyChar >= '0' && keyChar <= '9' && (flags & NSControlKeyMask))
+	{
+		int layoutStyle = MA_Layout_Report + (keyChar - '0');
+		[self setLayout:layoutStyle withRefresh:YES];
+		return YES;
+	}
 	switch (keyChar)
 	{
 		case NSLeftArrowFunctionKey:
