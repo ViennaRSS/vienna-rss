@@ -508,7 +508,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		else
 		{
 			showField = NO;
-			if (tag == MA_FieldID_Read || tag == MA_FieldID_Flagged || MA_FieldID_HasEnclosure)
+			if (tag == MA_FieldID_Read || tag == MA_FieldID_Flagged || tag == MA_FieldID_HasEnclosure)
 				showField = [field visible];
 			if (tag == MA_FieldID_Headlines)
 				showField = YES;
