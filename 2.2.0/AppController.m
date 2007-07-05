@@ -45,6 +45,7 @@
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ArticleFilter.h"
+#import "ToolbarItem.h"
 #import "ClickableProgressIndicator.h"
 #import <WebKit/WebFrame.h>
 #import <WebKit/WebUIDelegate.h>
@@ -101,7 +102,7 @@
 	-(BOOL)isStatusBarVisible;
 	-(NSDictionary *)registrationDictionaryForGrowl;
 	-(NSTimer *)checkTimer;
-	-(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
+	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -292,7 +293,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// we will need them if they are added back later.
 	[spinner retain];
 	[searchView retain];
-	[actionPopup retain];
 	[blogWithPopup retain];
 }
 
@@ -2448,15 +2448,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)toggleOptionKeyButtonStates
 {
-	NSToolbarItem * newButton = [self toolbarItemWithIdentifier:@"Subscribe"];
+	ToolbarItem * item = [self toolbarItemWithIdentifier:@"Subscribe"];
+	ToolbarButton * newButton = (ToolbarButton *)[item view];
+
 	if (!([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask)) 
 	{
 		[newButton setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
+		[newButton setAlternateImage:[NSImage imageNamed:@"subscribeButtonPressed.tiff"]];
 		[newButton setAction:@selector(newSubscription:)];
 	}
 	else
 	{
 		[newButton setImage:[NSImage imageNamed:@"smartFolderButton.tiff"]];
+		[newButton setAlternateImage:[NSImage imageNamed:@"smartFolderButtonPressed.tiff"]];
 		[newButton setAction:@selector(newSmartFolder:)];
 	}
 }
@@ -2464,11 +2468,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* toolbarItemWithIdentifier
  * Returns the toolbar button that corresponds to the specified identifier.
  */
--(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
+-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
 {
 	NSArray * toolbarButtons = [[mainWindow toolbar] visibleItems];
 	NSEnumerator * theEnumerator = [toolbarButtons objectEnumerator];
-	NSToolbarItem * theItem;
+	ToolbarItem * theItem;
 	
 	while ((theItem = [theEnumerator nextObject]) != nil)
 	{
@@ -3069,10 +3073,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	if ([foldersTree actualSelection] != [db searchFolderId])
-		[foldersTree selectFolder:[db searchFolderId]];
-	[db setSearchString:[searchField stringValue]];
-	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	if (![[searchField stringValue] isBlank])
+	{
+		[db setSearchString:[searchField stringValue]];
+		if ([foldersTree actualSelection] != [db searchFolderId])
+			[foldersTree selectFolder:[db searchFolderId]];
+		else
+			[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	}
 }
 
 #pragma mark Refresh Subscriptions
@@ -3409,9 +3417,49 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(BOOL)validateCommonToolbarAndMenuItems:(SEL)theAction validateFlag:(BOOL *)validateFlag
 {
+	BOOL isMainWindowVisible = [mainWindow isVisible];
+	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
+
 	if ((theAction == @selector(refreshAllSubscriptions:)) || (theAction == @selector(refreshAllFolderIcons:)))
 	{
 		*validateFlag = ![self isConnecting] && ![db readOnly];
+		return YES;
+	}
+	if (theAction == @selector(newSubscription:))
+	{
+		*validateFlag = ![db readOnly] && isMainWindowVisible;
+		return YES;
+	}
+	if (theAction == @selector(newSmartFolder:))
+	{
+		*validateFlag = ![db readOnly] && isMainWindowVisible;
+		return YES;
+	}
+	if (theAction == @selector(skipFolder:))
+	{
+		*validateFlag = ![db readOnly] && isAnyArticleView && isMainWindowVisible && [db countOfUnread] > 0;
+		return YES;
+	}
+	if (theAction == @selector(mailLinkToArticlePage:))
+	{
+		NSView<BaseView> * theView = [browserView activeTabItemView];
+		BOOL isArticleView = [browserView activeTabItemView] == mainArticleView;
+		Article * thisArticle = [self selectedArticle];
+
+		if ([theView isKindOfClass:[BrowserPane class]])
+			*validateFlag = ([theView viewLink] != nil);
+		else
+			*validateFlag = (thisArticle != nil && isMainWindowVisible && isArticleView);
+		return NO; // Give the menu handler a chance too.
+	}
+	if (theAction == @selector(emptyTrash:))
+	{
+		*validateFlag = ![db readOnly];
+		return YES;
+	}
+	if (theAction == @selector(setLayoutFromToolbar:))
+	{
+		*validateFlag = isMainWindowVisible;
 		return YES;
 	}
 	return NO;
@@ -3420,7 +3468,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* validateToolbarItem
  * Check [theItem identifier] and return YES if the item is enabled, NO otherwise.
  */
--(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
+-(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
 {
 	BOOL flag;
 	[self validateCommonToolbarAndMenuItems:[toolbarItem action] validateFlag:&flag];
@@ -3455,21 +3503,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return [[browserView activeTabItemView] canGoForward] && isMainWindowVisible;
 	}
-	else if (theAction == @selector(newSubscription:))
-	{
-		return ![db readOnly] && isMainWindowVisible;
-	}
-	else if (theAction == @selector(newSmartFolder:))
-	{
-		return ![db readOnly] && isMainWindowVisible;
-	}
 	else if (theAction == @selector(newGroupFolder:))
 	{
 		return ![db readOnly] && isMainWindowVisible;
-	}
-	else if (theAction == @selector(skipFolder:))
-	{
-		return ![db readOnly] && isAnyArticleView && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(viewNextUnread:))
 	{
@@ -3604,10 +3640,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
 	}
-	else if (theAction == @selector(emptyTrash:))
-	{
-		return ![db readOnly];
-	}
 	else if (theAction == @selector(previousTab:))
 	{
 		return isMainWindowVisible && [browserView countOfTabs] > 1;
@@ -3687,17 +3719,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(mailLinkToArticlePage:))
 	{
-		NSView<BaseView> * theView = [browserView activeTabItemView];
-		if ([theView isKindOfClass:[BrowserPane class]])
-			return ([theView viewLink] != nil);
-		
-		Article * thisArticle = [self selectedArticle];
 		if ([[mainArticleView markedArticleRange] count] > 1)
 			[menuItem setTitle:NSLocalizedString(@"Send Links", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Send Link", nil)];
-		
-		return (thisArticle != nil && isMainWindowVisible && isArticleView);
+		return flag;
 	}
 	else if (theAction == @selector(downloadEnclosure:))
 	{
@@ -3715,29 +3741,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* itemForItemIdentifier
- * This method is required of NSToolbar delegates.  It takes an identifier, and returns the matching NSToolbarItem.
+ * This method is required of NSToolbar delegates.  It takes an identifier, and returns the matching ToolbarItem.
  * It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
  * going to be displayed in a customization palette.
  */
--(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
+-(ToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
 {
-	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+	ToolbarItem *item = [[ToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	if ([itemIdentifier isEqualToString:@"SearchItem"])
 	{
-		NSRect fRect = [searchView frame];
+		[item setView:searchView];
 		[item setLabel:NSLocalizedString(@"Search Articles", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setView:searchView];
-		[item setMinSize:fRect.size];
-		[item setMaxSize:fRect.size];
 		[item setTarget:self];
 		[item setAction:@selector(searchUsingToolbarTextField:)];
+		[item setToolTip:NSLocalizedString(@"Search Articles", nil)];
 	}
 	else if ([itemIdentifier isEqualToString:@"Subscribe"])
 	{
 		[item setLabel:NSLocalizedString(@"Subscribe", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
+		[item setButtonImage:@"subscribeButton"];
 		[item setTarget:self];
 		[item setAction:@selector(newSubscription:)];
 		[item setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
@@ -3746,7 +3770,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[item setLabel:NSLocalizedString(@"Skip Folder", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setImage:[NSImage imageNamed:@"skipFolderButton.tiff"]];
+		[item setButtonImage:@"skipFolderButton"];
 		[item setTarget:self];
 		[item setAction:@selector(skipFolder:)];
 		[item setToolTip:NSLocalizedString(@"Skip Folder", nil)];
@@ -3755,7 +3779,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[item setLabel:NSLocalizedString(@"Refresh", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setImage:[NSImage imageNamed:@"refreshButton.tiff"]];
+		[item setButtonImage:@"refreshButton"];
 		[item setTarget:self];
 		[item setAction:@selector(refreshAllSubscriptions:)];
 		[item setToolTip:NSLocalizedString(@"Refresh all your subscriptions", nil)];
@@ -3764,7 +3788,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[item setLabel:NSLocalizedString(@"Send Link", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setImage:[NSImage imageNamed:@"mailLinkButton.tiff"]];
+		[item setButtonImage:@"mailLinkButton"];
 		[item setTarget:self];
 		[item setAction:@selector(mailLinkToArticlePage:)];
 		[item setToolTip:NSLocalizedString(@"Email a link to the current article or website", nil)];
@@ -3773,7 +3797,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[item setLabel:NSLocalizedString(@"Empty Trash", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setImage:[NSImage imageNamed:@"emptyTrashButton.tiff"]];
+		[item setButtonImage:@"emptyTrashButton"];
 		[item setTarget:self];
 		[item setAction:@selector(emptyTrash:)];
 		[item setToolTip:NSLocalizedString(@"Delete all articles in the trash", nil)];
@@ -3811,20 +3835,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if ([itemIdentifier isEqualToString: @"Action"])
 	{
+		[item setPopup:@"popupMenuButton" withMenu:[self folderMenu]];
 		[item setLabel:NSLocalizedString(@"Actions", nil)];
 		[item setPaletteLabel:[item label]];
-		[item setImage:[NSImage imageNamed:@"popupMenuButton.tiff"]];
-		[item setView:actionPopup];
-		[item setMinSize:NSMakeSize(NSWidth([actionPopup frame]), NSHeight([actionPopup frame]))];
-		[item setMaxSize:NSMakeSize(NSWidth([actionPopup frame]), NSHeight([actionPopup frame]))];
 		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
-
-		NSMenuItem * menuItem = [[[NSMenuItem alloc] init] autorelease];
-		[actionPopup setMenu:[self folderMenu]];
-		[actionPopup setPopupBelow:YES];
-		[menuItem setSubmenu:[actionPopup menu]];
-		[menuItem setTitle:[item label]];
-		[item setMenuFormRepresentation:menuItem];
 	}
 	return [item autorelease];
 }
@@ -3890,11 +3904,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[appDockMenu release];
 	[appStatusItem release];
 	[db release];
-	
-	[spinner retain];
-	[searchView retain];
-	[actionPopup retain];
-
+	[spinner release];
+	[searchView release];
 	[super dealloc];
 }
 @end

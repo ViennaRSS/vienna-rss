@@ -1,8 +1,8 @@
 //
-//  PopupButton.h
+//  ToolbarButton.h
 //  Vienna
 //
-//  Created by Steve on 6/23/05.
+//  Created by Steve Palmer on 04/07/2007.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,21 +15,22 @@
 //  distributed under the License is distributed on an "AS IS" BASIS,
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
+//  
 
 #import <Cocoa/Cocoa.h>
-#import "ToolbarButton.h"
 
-@interface PopupButton : ToolbarButton {
-	NSMenu * theMenu;
-	NSFont * popupFont;
-	BOOL popBelow;
+@interface ToolbarButton : NSButton {
+	NSToolbarItem * item;
+	NSImage * image;
+	NSImage * alternateImage;
+	NSImage * smallImage;
+	NSImage * smallAlternateImage;
+	NSSize imageSize;
+	NSSize smallImageSize;
 }
 
 // Public functions
--(NSMenu *)menu;
--(void)setSmallMenu:(BOOL)useSmallMenu;
--(void)setPopupBelow:(BOOL)flag;
--(void)setMenu:(NSMenu *)menu;
+-(id)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)tbItem;
+-(void)setSmallImage:(NSImage *)image;
+-(void)setSmallAlternateImage:(NSImage *)image;
 @end

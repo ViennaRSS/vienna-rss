@@ -52,7 +52,8 @@
  */
 -(void)handleDownloadCompleted:(NSNotification *)notification
 {
-	[self setEnclosureFile:enclosureFilename];
+	if (enclosureFilename != nil)
+		[self setEnclosureFile:enclosureFilename];
 }
 
 /* setEnclosureFile

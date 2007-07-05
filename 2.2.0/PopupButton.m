@@ -26,9 +26,9 @@
  * Initialises a simple subclass of NSButton that pops up a menu
  * if one is associated with it.
  */
--(id)init
+-(id)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)theItem
 {
-	if ((self = [super init]) != nil)
+	if ((self = [super initWithFrame:frameRect withItem:theItem]) != nil)
 	{
 		theMenu = nil;
 		popBelow = NO;
