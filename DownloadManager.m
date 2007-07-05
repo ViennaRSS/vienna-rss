@@ -372,6 +372,23 @@ static DownloadManager * _sharedDownloadManager = nil;
 	return nil;
 }
 
+/* fullDownloadPath
+ * Given a filename, returns the fully qualified path to where the file will be downloaded by
+ * using the user's preferred download folder. If that folder is absent then we default to
+ * downloading to the desktop instead.
+ */
++(NSString *)fullDownloadPath:(NSString *)filename
+{
+	NSString * downloadPath = [[Preferences standardPreferences] downloadFolder];
+	NSFileManager * fileManager = [NSFileManager defaultManager];
+	BOOL isDir = YES;
+
+	if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir)
+		downloadPath = @"~/Desktop";
+	
+	return [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:filename];
+}
+
 /* isFileDownloaded
  * Looks up the specified file in the download list to determine if it is being downloaded. If
  * not, then it looks up the file in the workspace.
@@ -551,9 +568,7 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)download:(NSURLDownload *)download decideDestinationWithSuggestedFilename:(NSString *)filename
 {
-	Preferences * prefs = [Preferences standardPreferences];
-	NSString * downloadPath = [prefs downloadFolder];
-	NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:filename];
+	NSString * destPath = [DownloadManager fullDownloadPath:filename];
 
 	// Hack for certain compression types that are converted to .txt extension when
 	// downloaded. SITX is the only one I know about.

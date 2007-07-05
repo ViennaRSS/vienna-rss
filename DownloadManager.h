@@ -61,6 +61,7 @@
 // Public functions
 +(DownloadManager *)sharedInstance;
 +(BOOL)isFileDownloaded:(NSString *)filename;
++(NSString *)fullDownloadPath:(NSString *)filename;
 -(NSArray *)downloadsList;
 -(int)activeDownloads;
 -(void)clearList;

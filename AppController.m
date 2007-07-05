@@ -1076,8 +1076,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if ([selectedMessage hasEnclosure])
 	{
 		NSString * filename = [[selectedMessage enclosure] lastPathComponent];
-		NSString * downloadPath = [[Preferences standardPreferences] downloadFolder];
-		NSString * destPath = [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:filename];
+		NSString * destPath = [DownloadManager fullDownloadPath:filename];
 
 		[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[selectedMessage enclosure]];
 	}
