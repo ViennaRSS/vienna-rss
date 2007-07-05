@@ -70,6 +70,14 @@ a				{
 				padding: 3px;
 				margin-top:6px;
 				}
+				
+.articleEnclosure	{
+				background-color:black;
+				color:white;
+				font: bold 12px Verdana,Arial,sans-serif;
+				padding: 3px;
+				margin-top:6px;
+				}
 
 .articleBody	{
 				width:55%;

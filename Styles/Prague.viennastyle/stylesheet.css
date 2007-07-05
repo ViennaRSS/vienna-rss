@@ -56,6 +56,6 @@ body {
 	color: #093;
 }
 
-#date:before, #author:before {
+#date:before, #author:before, #enclosure:before {
 	content(" &mdash; ");
 }

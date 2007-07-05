@@ -55,6 +55,12 @@ span.articleAuthorStyle
 {
 	color: #600;
 }
+
+span.articleEnclosureStyle
+{
+	color: #600;
+}
+
 span.feedLinkStyle:after
 {
 	content: "-";

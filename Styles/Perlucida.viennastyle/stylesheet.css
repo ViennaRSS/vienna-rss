@@ -28,6 +28,9 @@ body {
 		ul#viennadetails li.viennaauthor:before {
 		 content: "~ ";
 		}
+		ul#viennadetails li.viennaenclosure:before {
+		 content: "~ ";
+		}
 	h1#viennatitle {
 	 font-size: 24px;
 	 margin: 60px 35px 10px 35px;
