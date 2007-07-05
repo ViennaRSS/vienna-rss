@@ -125,6 +125,15 @@
 		AA55E4A6086C6C8200D7DBFA /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */; };
 		AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */; };
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
+		AA5AA7FF0C3C0D7D00B2E14F /* ToolbarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */; };
+		AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */; };
+		AA5AA8910C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */; };
+		AA5AAAF40C3C5B1300B2E14F /* subscribeButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AAAF20C3C5B1300B2E14F /* subscribeButtonSmall.tiff */; };
+		AA5AAAF50C3C5B1300B2E14F /* subscribeButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AAAF30C3C5B1300B2E14F /* subscribeButtonSmallPressed.tiff */; };
+		AA5AAB8A0C3C679E00B2E14F /* smartFolderButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */; };
+		AA5AB4C70C3D511700B2E14F /* ToolbarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = AA5AB4C50C3D511700B2E14F /* ToolbarItem.h */; };
+		AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */; };
+		AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */; };
 		AA60238008C298FB002CFD06 /* HelperFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA60237E08C298FB002CFD06 /* HelperFunctions.h */; };
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA610C1509EF6745005C6903 /* NewsParser.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AAA5686F09EE725B00C87343 /* NewsParser.framework */; };
@@ -544,6 +553,15 @@
 		AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
 		AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FeedCredentials.h; sourceTree = "<group>"; };
 		AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FeedCredentials.m; sourceTree = "<group>"; };
+		AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarButton.h; sourceTree = "<group>"; };
+		AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarButton.m; sourceTree = "<group>"; };
+		AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = emptyTrashButtonPressed.tiff; sourceTree = "<group>"; };
+		AA5AAAF20C3C5B1300B2E14F /* subscribeButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = subscribeButtonSmall.tiff; sourceTree = "<group>"; };
+		AA5AAAF30C3C5B1300B2E14F /* subscribeButtonSmallPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = subscribeButtonSmallPressed.tiff; sourceTree = "<group>"; };
+		AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smartFolderButtonPressed.tiff; sourceTree = "<group>"; };
+		AA5AB4C50C3D511700B2E14F /* ToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarItem.h; sourceTree = "<group>"; };
+		AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarItem.m; sourceTree = "<group>"; };
+		AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailLinkButtonPressed.tiff; sourceTree = "<group>"; };
 		AA60237E08C298FB002CFD06 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunctions.h; sourceTree = "<group>"; };
 		AA60237F08C298FB002CFD06 /* HelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelperFunctions.m; sourceTree = "<group>"; };
 		AA62D7DB0859A9F70040C370 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -1122,18 +1140,23 @@
 		AA1A282E0C09BE59005968DC /* Toolbar Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */,
-				AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */,
-				B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */,
 				B28C95960C3A951E008A09E5 /* blogWithMenu.tiff */,
+				AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */,
+				AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */,
+				B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */,
+				AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */,
 				B28C95920C3A94F7008A09E5 /* smartFolderButton.tiff */,
-				AA1A25DE0C096D68005968DC /* refreshButton.tiff */,
+				AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */,
 				B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */,
+				AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */,
+				AA1A25DE0C096D68005968DC /* refreshButton.tiff */,
 				AA1A265F0C099EAA005968DC /* refreshButtonPressed.tiff */,
 				AA1A267C0C09A03F005968DC /* skipFolderButton.tiff */,
 				AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */,
 				AA1A26600C099EAA005968DC /* subscribeButton.tiff */,
+				AA5AAAF20C3C5B1300B2E14F /* subscribeButtonSmall.tiff */,
 				AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */,
+				AA5AAAF30C3C5B1300B2E14F /* subscribeButtonSmallPressed.tiff */,
 			);
 			name = "Toolbar Buttons";
 			sourceTree = "<group>";
@@ -1199,6 +1222,17 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		AA5AABB50C3CD68A00B2E14F /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */,
+				AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */,
+				AA5AB4C50C3D511700B2E14F /* ToolbarItem.h */,
+				AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */,
+			);
+			name = Toolbar;
+			sourceTree = "<group>";
+		};
 		AA8B36CC0C12D6F30035FBD7 /* CTGradient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1259,6 +1293,7 @@
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				AA3113EC09020E1B00E80DF1 /* Preferences */,
+				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
 				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
@@ -1411,6 +1446,8 @@
 				AAD2BF0C0C2BB64500AA0F11 /* ThinSplitView.h in Headers */,
 				AA3F36E50C2F143100D5766B /* StdEnclosureView.h in Headers */,
 				AA138EFA0C34A22600C64338 /* FilterView.h in Headers */,
+				AA5AA7FF0C3C0D7D00B2E14F /* ToolbarButton.h in Headers */,
+				AA5AB4C70C3D511700B2E14F /* ToolbarItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1669,7 +1706,12 @@
 				B28C95930C3A94F7008A09E5 /* smartFolderButton.tiff in Resources */,
 				B28C95950C3A950F008A09E5 /* popupMenuButton.tiff in Resources */,
 				B28C95970C3A951E008A09E5 /* blogWithMenu.tiff in Resources */,
+				AA5AA8910C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff in Resources */,
+				AA5AAAF40C3C5B1300B2E14F /* subscribeButtonSmall.tiff in Resources */,
+				AA5AAAF50C3C5B1300B2E14F /* subscribeButtonSmallPressed.tiff in Resources */,
+				AA5AAB8A0C3C679E00B2E14F /* smartFolderButtonPressed.tiff in Resources */,
 				344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */,
+				AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1685,7 +1727,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		47775C3E0A109FF90091C45E /* Create tar.gz for Sparkle */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			comments = "Create tar.gz for the automatic sparkle udpate";
 			files = (
 			);
@@ -1696,7 +1738,7 @@
 			outputPaths = (
 				"$BUILD_DIR/$CONFIGURATION/$PRODUCT_NAME-$BUILD_NUMBER.tar.gz",
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "cd $BUILD_DIR/$CONFIGURATION; tar -czf $PRODUCT_NAME-$BUILD_NUMBER.tar.gz $PRODUCT_NAME.app";
 		};
@@ -2008,6 +2050,8 @@
 				AAD2BF0D0C2BB64500AA0F11 /* ThinSplitView.m in Sources */,
 				AA3F36E60C2F143100D5766B /* StdEnclosureView.m in Sources */,
 				AA138EF90C34A22600C64338 /* FilterView.m in Sources */,
+				AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */,
+				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
