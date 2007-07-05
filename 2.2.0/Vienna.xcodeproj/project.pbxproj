@@ -253,7 +253,6 @@
 		AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEB1A5108E74EE300917920 /* ArrayExtensions.m */; };
 		AAED7A9E09FDE01000ED56E5 /* InfoWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAED7A9C09FDE01000ED56E5 /* InfoWindow.h */; };
 		AAED7A9F09FDE01000ED56E5 /* InfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED7A9D09FDE01000ED56E5 /* InfoWindow.m */; };
-		AAED7AB609FDE14200ED56E5 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAED7AB009FDE14100ED56E5 /* MainMenu.nib */; };
 		AAED7ABA09FDE15D00ED56E5 /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAED7AB909FDE15D00ED56E5 /* InfoWindow.nib */; };
 		AAED82F80A037A2A00ED56E5 /* SNDisclosureButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED82F60A037A2A00ED56E5 /* SNDisclosureButton.m */; };
 		AAED82F90A037A2A00ED56E5 /* SNDisclosureButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AAED82F70A037A2A00ED56E5 /* SNDisclosureButton.h */; };
@@ -801,7 +800,6 @@
 		AAEB1A5108E74EE300917920 /* ArrayExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayExtensions.m; sourceTree = "<group>"; };
 		AAED7A9C09FDE01000ED56E5 /* InfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = InfoWindow.h; sourceTree = "<group>"; };
 		AAED7A9D09FDE01000ED56E5 /* InfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = InfoWindow.m; sourceTree = "<group>"; };
-		AAED7AB109FDE14100ED56E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		AAED7ABD09FDE17500ED56E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/InfoWindow.nib; sourceTree = "<group>"; };
 		AAED82F60A037A2A00ED56E5 /* SNDisclosureButton.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SNDisclosureButton.m; sourceTree = "<group>"; };
 		AAED82F70A037A2A00ED56E5 /* SNDisclosureButton.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SNDisclosureButton.h; sourceTree = "<group>"; };
@@ -1024,7 +1022,6 @@
 				AA3113480902005300E80DF1 /* GeneralPreferences.nib */,
 				AAA1E3280852539500277128 /* GroupFolder.nib */,
 				AAED7AB909FDE15D00ED56E5 /* InfoWindow.nib */,
-				AAED7AB009FDE14100ED56E5 /* MainMenu.nib */,
 				AA38C15709FB196A00FAE2CD /* NewPreferences.nib */,
 				AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */,
 				AA3BDC9E063249FE004621CD /* SearchFolder.nib */,
@@ -1625,7 +1622,6 @@
 				AA38C18009FB19CE00FAE2CD /* Downloads.nib in Resources */,
 				AA38C18E09FB19F000FAE2CD /* ActivityViewer.nib in Resources */,
 				AAED7ABA09FDE15D00ED56E5 /* InfoWindow.nib in Resources */,
-				AAED7AB609FDE14200ED56E5 /* MainMenu.nib in Resources */,
 				AAED82FC0A037A4E00ED56E5 /* SNDisclosureArrowRight.tiff in Resources */,
 				AAED82FD0A037A4E00ED56E5 /* SNDisclosureArrowDown.tiff in Resources */,
 				47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */,
@@ -2353,14 +2349,6 @@
 				AA3CB63A0BE132D2009119BB /* eus */,
 			);
 			name = "Vienna Help";
-			sourceTree = "<group>";
-		};
-		AAED7AB009FDE14100ED56E5 /* MainMenu.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AAED7AB109FDE14100ED56E5 /* en */,
-			);
-			name = MainMenu.nib;
 			sourceTree = "<group>";
 		};
 		AAED7AB909FDE15D00ED56E5 /* InfoWindow.nib */ = {
