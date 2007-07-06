@@ -22,13 +22,16 @@
 #import "BezierPathExtensions.h"
 #import "FolderView.h"
 
+#define PROGRESS_INDICATOR_DIMENSION	16
+#define PROGRESS_INDICATOR_LEFT_MARGIN	1
+
 @interface NSObject (ProgressIndicatorSupportingItem)
-- (NSProgressIndicator *)progressIndicator;
-- (void)setProgressIndicator:(NSProgressIndicator *)progressIndicator;
+	-(NSProgressIndicator *)progressIndicator;
+	-(void)setProgressIndicator:(NSProgressIndicator *)progressIndicator;
 @end
 
-@interface ImageAndTextCell (PRIVATE)
-- (void)configureProgressAnimation;
+@interface ImageAndTextCell (Private)
+	-(void)configureProgressAnimation;
 @end
 
 /* All of this stuff taken from public stuff published
@@ -155,7 +158,7 @@
 /* setInProgress
  * Set whether an active progress should be shown for the item. This should be used in a willDisplayCell: style method.
  */
-- (void)setInProgress:(BOOL)newInProgress
+-(void)setInProgress:(BOOL)newInProgress
 {
 	inProgress = newInProgress;
 }
@@ -163,12 +166,14 @@
 /* setItem
  * Set the item which is being displayed. This should be used in a willDisplayCell: style method.
  */
-- (void)setItem:(id)inItem
+-(void)setItem:(id)inItem
 {
 	item = inItem;
 }
 
-- (void)configureProgressAnimation
+/* configureProgressAnimation
+ */
+-(void)configureProgressAnimation
 {
 	if (!animationTimer && [progressIndicators count])
 	{
@@ -243,8 +248,6 @@
 		}
 		else if (inProgress)
 		{
-#define PROGRESS_INDICATOR_DIMENSION	16
-#define PROGRESS_INDICATOR_LEFT_MARGIN	1
 			if (!progressIndicator)
 			{
 				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0,
@@ -380,7 +383,7 @@
  *   The timer needs to update 12 times per second to be smooth; the NSCell drawing method is only called if the cell contents change
  *   or the user interacts with that cell.
  */
-- (void)animateProgressIndicators:(NSTimer *)timer
+-(void)animateProgressIndicators:(NSTimer *)timer
 {
 	NSEnumerator *enumerator = [progressIndicators objectEnumerator];
 	NSProgressIndicator *indicator;
