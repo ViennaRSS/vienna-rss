@@ -57,6 +57,7 @@
 #include <IOKit/IOMessage.h>
 
 @interface AppController (Private)
+	-(NSMenu *)searchFieldMenu;
 	-(void)installSleepHandler;
 	-(void)installScriptsFolderWatcher;
 	-(void)handleTabChange:(NSNotification *)nc;
@@ -235,27 +236,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	
 	// Create a menu for the search field
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
-	// item is localised though.
-	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
-	
-	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
-	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
-	[cellMenu insertItem:item atIndex:0];
-	[item release];
-	
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
-	[item setTag:NSSearchFieldRecentsMenuItemTag];
-	[cellMenu insertItem:item atIndex:1];
-	[item release];
-
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
-	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
-	[cellMenu insertItem:item atIndex:2];
-	[item release];
-	
-	[[searchField cell] setSearchMenuTemplate:cellMenu];
-	[[filterSearchField cell] setSearchMenuTemplate:cellMenu];
-	[cellMenu release];
+	// item is localised though.	
+	[[searchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
+	[[filterSearchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
 
 	// Set the placeholder string for the global search field
 	[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
@@ -640,6 +623,31 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self importFromFile:filename];
 	}
 	return NO;
+}
+
+/* searchFieldMenu
+ * Allocates a popup menu for one of the search fields we use.
+ */
+-(NSMenu *)searchFieldMenu
+{
+	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
+	
+	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
+	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
+	[cellMenu insertItem:item atIndex:0];
+	[item release];
+	
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
+	[item setTag:NSSearchFieldRecentsMenuItemTag];
+	[cellMenu insertItem:item atIndex:1];
+	[item release];
+	
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
+	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
+	[cellMenu insertItem:item atIndex:2];
+	[item release];
+	
+	return [cellMenu autorelease];
 }
 
 /* standardURLs
@@ -2052,6 +2060,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* checkTimer
+ * Return the refresh timer object.
+ */
 -(NSTimer *)checkTimer
 {
 	return checkTimer;
