@@ -24,6 +24,7 @@
 #import "CalendarExtensions.h"
 #import "Constants.h"
 #import "ArticleRef.h"
+#import "SearchString.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
@@ -2152,13 +2153,7 @@ static Database * _sharedDatabase = nil;
 		return nil;
 
 	if (IsSearchFolder(folder))
-	{
-		CriteriaTree * tree = [[CriteriaTree alloc] init];
-		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:searchString];
-		[tree addCriteria:clause];
-		[clause release];
-		return [tree autorelease];
-	}
+		return [self searchStringToTree];
 	
 	if (IsTrashFolder(folder))
 	{
