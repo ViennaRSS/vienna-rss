@@ -149,4 +149,16 @@
 	[[super image] setSize:s];
 	[[super alternateImage] setSize:s];
 }
+
+/* dealloc
+ * Clean up afterwards.
+ */
+-(void)dealloc
+{
+	[image release];
+	[alternateImage release];
+	[smallImage release];
+	[smallAlternateImage release];
+	[super dealloc];
+}
 @end
