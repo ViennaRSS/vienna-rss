@@ -45,7 +45,6 @@
 	[[self menuFormRepresentation] setEnabled:enabled];
 }
 
-
 /* setView
  * Extends the setView to also set the button min/max size from the view size.
  */
