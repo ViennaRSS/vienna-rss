@@ -306,6 +306,8 @@ typedef enum {
 	while ([connectionsArray count] > 0)
 	{
 		AsyncConnection * conn = [connectionsArray objectAtIndex:0];
+		Folder * folder = (Folder *)[conn contextData];
+		[self setFolderUpdatingFlag:folder flag:NO];
 		[conn cancel];
 		[self removeConnection:conn];
 	}
@@ -552,6 +554,7 @@ typedef enum {
 	{
 		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 		
+		[self setFolderUpdatingFlag:folder flag:YES];
 		if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
 							  username:nil
 							  password:nil
@@ -877,9 +880,10 @@ typedef enum {
  */
 -(void)folderIconRefreshCompleted:(AsyncConnection *)connector
 {
+	Folder * folder = [connector contextData];
+	[self setFolderUpdatingFlag:folder flag:NO];
 	if ([connector status] == MA_Connect_Succeeded)
 	{
-		Folder * folder = [connector contextData];
 		NSImage * iconImage = [[NSImage alloc] initWithData:[connector receivedData]];
 		if (iconImage != nil && [iconImage isValid])
 		{
