@@ -14,7 +14,8 @@
         }, 
         {CLASS = ExtendedTableView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {CLASS = NSObject; LANGUAGE = ObjC; }
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = ThinSplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }
     ); 
     IBVersion = 1; 
 }
