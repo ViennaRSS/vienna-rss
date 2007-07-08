@@ -656,6 +656,18 @@
 		AA6D2EAF0ACC6D910044C00C /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA6D2EB30ACC6DC50044C00C /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA6D2EB40ACC6DCF0044C00C /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = zh_CN; path = zh_CN.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		AA6E60950C402F0300E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
+		AA6E60960C402F0400E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AA6E60970C402F0400E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		AA6E60980C402F0400E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AA6E60B70C402F2600E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AA6E60B80C402F2600E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AA6E60B90C402F2600E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/InfoWindow.nib; sourceTree = "<group>"; };
+		AA6E60BB0C402F3400E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AA6E60BC0C402F3400E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = uk; path = uk.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AA6E60BE0C402F3D00E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA6E60C00C402F4700E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA6E60C20C402F5100E10ECE /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = uk; path = uk.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = leftArrow.tiff; sourceTree = "<group>"; };
 		AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = rightArrow.tiff; sourceTree = "<group>"; };
 		AA710F8409BB7F3800E3EA8A /* BrowserPaneTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserPaneTemplate.h; sourceTree = "<group>"; };
@@ -1585,6 +1597,7 @@
 				cs,
 				eus,
 				ru,
+				uk,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -2121,6 +2134,7 @@
 				AACC06CE0B1CC6C700971CFB /* cs */,
 				AA3CB5F30BE12DB3009119BB /* eus */,
 				AAD2BE590C2B1C9600AA0F11 /* ru */,
+				AA6E60C00C402F4700E10ECE /* uk */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2144,6 +2158,7 @@
 				61D9A5320B4200A30087C312 /* zh_TW */,
 				AA3CB5EF0BE12D94009119BB /* eus */,
 				AAD2BE4A0C2B1C5800AA0F11 /* ru */,
+				AA6E60970C402F0400E10ECE /* uk */,
 			);
 			name = EmptyTrashWarning.nib;
 			sourceTree = "<group>";
@@ -2167,6 +2182,7 @@
 				AACC06CD0B1CC6C000971CFB /* cs */,
 				AA3CB5F50BE12DC1009119BB /* eus */,
 				AAD2BE550C2B1C8400AA0F11 /* ru */,
+				AA6E60BE0C402F3D00E10ECE /* uk */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2190,6 +2206,7 @@
 				AACC06C80B1CC68600971CFB /* cs */,
 				AA3CB5F10BE12DA1009119BB /* eus */,
 				AAD2BE4D0C2B1C6000AA0F11 /* ru */,
+				AA6E60B70C402F2600E10ECE /* uk */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -2213,6 +2230,7 @@
 				AACC06AC0B1CC65D00971CFB /* cs */,
 				AA3CB5EE0BE12D8E009119BB /* eus */,
 				AAD2BE480C2B1C5100AA0F11 /* ru */,
+				AA6E60960C402F0400E10ECE /* uk */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -2268,6 +2286,7 @@
 				AACC06CC0B1CC6B900971CFB /* cs */,
 				AA3CB5F80BE12DD6009119BB /* eus */,
 				AAD2BE530C2B1C7D00AA0F11 /* ru */,
+				AA6E60BC0C402F3400E10ECE /* uk */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -2291,6 +2310,7 @@
 				AACC06C70B1CC67A00971CFB /* cs */,
 				AA3CB5F00BE12D9B009119BB /* eus */,
 				AAD2BE4C0C2B1C6000AA0F11 /* ru */,
+				AA6E60980C402F0400E10ECE /* uk */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -2314,6 +2334,7 @@
 				AACC070C0B1CC93600971CFB /* cs */,
 				AA3CB5CF0BE12D79009119BB /* eus */,
 				AAD2BE290C2B1C4300AA0F11 /* ru */,
+				AA6E60950C402F0300E10ECE /* uk */,
 			);
 			name = AdvancedPreferences.nib;
 			sourceTree = "<group>";
@@ -2337,6 +2358,7 @@
 				AACC06CB0B1CC6B100971CFB /* cs */,
 				AA3CB5F60BE12DC7009119BB /* eus */,
 				AAD2BE510C2B1C7300AA0F11 /* ru */,
+				AA6E60BB0C402F3400E10ECE /* uk */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -2360,6 +2382,7 @@
 				AACC06C90B1CC69000971CFB /* cs */,
 				AA3CB5F20BE12DAB009119BB /* eus */,
 				AAD2BE4F0C2B1C7300AA0F11 /* ru */,
+				AA6E60B80C402F2600E10ECE /* uk */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -2381,6 +2404,7 @@
 				AACC06CF0B1CC6CE00971CFB /* cs */,
 				AA3CB5F70BE12DD0009119BB /* eus */,
 				AAD2BE570C2B1C8B00AA0F11 /* ru */,
+				AA6E60C20C402F5100E10ECE /* uk */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -2426,6 +2450,7 @@
 				AACC06CA0B1CC69F00971CFB /* cs */,
 				AA3CB5F40BE12DB9009119BB /* eus */,
 				AAD2BE500C2B1C7300AA0F11 /* ru */,
+				AA6E60B90C402F2600E10ECE /* uk */,
 			);
 			name = InfoWindow.nib;
 			sourceTree = "<group>";

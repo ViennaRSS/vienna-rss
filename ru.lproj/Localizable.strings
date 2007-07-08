@@ -38,7 +38,7 @@
 "GUID" = "GUID";
 "No" = "Нет";
 "Yes" = "Да";
-"Version %@.%@" = "Версия %@.%@";
+"Version %@" = "Версия %@";
 "Refresh All" = "Обновить Все";
 "Subscribe" = "Подписаться";
 "Smart Folder" = "Смарт-папка";
@@ -377,3 +377,5 @@
 "Hide Filter Bar" = "Hide Filter Bar";
 "Show Filter Bar" = "Show Filter Bar";
 "Email a link to the current article or website" = "Email a link to the current article or website";
+"Refresh" = "Refresh";
+"Action" = "Action";
