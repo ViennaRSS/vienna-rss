@@ -1904,7 +1904,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[appStatusItem setHighlightMode:YES];
 
 		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
-		[statusBarMenu addItem:menuWithTitleAndAction(@"Open Vienna", @selector(openVienna:))];
+		[statusBarMenu addItem:menuWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
 		[statusBarMenu addItem:copyOfMenuWithAction(@selector(markAllSubscriptionsRead:))];
