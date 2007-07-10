@@ -19,17 +19,32 @@
 //
 
 #import "GradientView.h"
-#import "CTGradient.h"
 
 @implementation GradientView
 
-// drawRect
-// Fill the specified rectangle with a white->grey gradient.
+/* awakeFromNib
+ * Our init.
+ */
+-(void)awakeFromNib
+{
+	NSString * backgroundBrushURL = [[NSBundle mainBundle] pathForResource:@"browserBarBackground" ofType:@"tiff"];
+	backgroundBrush = [[NSImage alloc] initWithContentsOfFile: backgroundBrushURL ];
+}
+
+/* drawRect
+ * Fill the specified rectangle with a white->grey gradient.
+ */
 -(void)drawRect:(NSRect)rect 
 {
-	NSColor * topColor = [NSColor whiteColor];
-	NSColor * bottomColor = [NSColor grayColor];
-	CTGradient * gradient = [CTGradient gradientWithBeginningColor:topColor endingColor:bottomColor];
-	[gradient fillRect:[self bounds] angle:270];
+	NSRect iRect = NSMakeRect(0, 0, 1, [backgroundBrush size].height - 1);					
+	[backgroundBrush drawInRect:rect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 }
-@end
+
+/* dealloc
+ * Release resources at the end.
+ */
+-(void)dealloc
+{
+	[backgroundBrush release];
+	[super dealloc];
+}@end
