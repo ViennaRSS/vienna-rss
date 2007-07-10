@@ -20,5 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface GradientView : NSView {}
+@interface GradientView : NSView {
+	NSImage * backgroundBrush;
+}
 @end
