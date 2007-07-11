@@ -193,6 +193,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES]; 
 	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+	[toolbar setShowsBaselineSeparator:NO];
 	[mainWindow setToolbar:toolbar];
 
 	// Run the auto-expire now
@@ -271,6 +272,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Do safe initialisation. 	 
 	[self doSafeInitialisation];
+
+	// Set the metal background texture
+	backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"mainBackground.tiff"]];
+	[mainWindow setBackgroundColor:backgroundColor];
 	
 	// Retain views which might be removed from the toolbar and therefore released;
 	// we will need them if they are added back later.
@@ -3913,6 +3918,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[checkTimer release];
 	[appDockMenu release];
 	[appStatusItem release];
+	[backgroundColor release];
 	[db release];
 	[spinner release];
 	[searchView release];

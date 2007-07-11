@@ -37,14 +37,6 @@
 	return self;
 }
 
-/* dealloc
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
-}
-
 /* windowDidLoad
  * Do the things that only make sense after the window file is loaded.
  */
@@ -79,11 +71,13 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", nil) action:@selector(showInFinder:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
-
-
 	[table setMenu:downloadMenu];
 	[downloadMenu release];
 
+	// Set the metal background texture
+	backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"mainBackground.tiff"]];
+	[downloadWindow setBackgroundColor:backgroundColor];
+	
 	// Set Clear button caption
 	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
 
@@ -304,5 +298,15 @@
 		[table drawRow:rowIndex clipRect:rectRow];
 		[table display];
 	}
+}
+
+/* dealloc
+ * Do away with ourself.
+ */
+-(void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[backgroundColor release];
+	[super dealloc];
 }
 @end

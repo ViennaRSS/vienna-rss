@@ -218,7 +218,6 @@
             OUTLETS = {delegate = id; partnerView = id; style = id; tabView = NSTabView; }; 
             SUPERCLASS = NSControl; 
         }, 
-        {CLASS = PolishedWindow; LANGUAGE = ObjC; SUPERCLASS = SquareWindow; }, 
         {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
         {
             ACTIONS = {checkForUpdates = id; }; 
