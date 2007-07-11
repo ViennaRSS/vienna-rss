@@ -26,6 +26,7 @@
 	IBOutlet SquareWindow * downloadWindow;
 	IBOutlet ExtendedTableView * table;
 	IBOutlet NSButton * clearButton;
+	NSColor * backgroundColor;
 	int lastCount;
 }
 

@@ -11,24 +11,24 @@
 		<key>1227</key>
 		<string>660 515 120 142 0 0 1440 878 </string>
 		<key>1251</key>
-		<string>585 769 430 64 0 0 1600 1178 </string>
+		<string>505 578 430 64 0 0 1440 878 </string>
 		<key>1267</key>
 		<string>690 575 60 70 0 0 1440 878 </string>
 		<key>1288</key>
 		<string>346 634 511 91 0 0 1440 878 </string>
 		<key>1300</key>
-		<string>490 765 619 71 0 0 1600 1178 </string>
+		<string>410 574 619 71 0 0 1440 878 </string>
 		<key>29</key>
-		<string>653 1069 440 44 0 0 1600 1178 </string>
+		<string>563 786 440 44 0 0 1440 878 </string>
 		<key>738</key>
 		<string>660 539 120 142 0 0 1440 878 </string>
 		<key>860</key>
-		<string>590 733 419 136 0 0 1600 1178 </string>
+		<string>510 542 419 136 0 0 1440 878 </string>
 		<key>971</key>
-		<string>440 475 720 651 0 0 1600 1178 </string>
+		<string>360 217 720 651 0 0 1440 878 </string>
 	</dict>
 	<key>IBFramework Version</key>
-	<string>446.1</string>
+	<string>481.0</string>
 	<key>IBLockedObjects</key>
 	<array/>
 	<key>IBOldestOS</key>
@@ -36,11 +36,6 @@
 	<key>IBOpenObjects</key>
 	<array>
 		<integer>21</integer>
-		<integer>1251</integer>
-		<integer>971</integer>
-		<integer>860</integer>
-		<integer>1300</integer>
-		<integer>29</integer>
 	</array>
 	<key>IBSystem Version</key>
 	<string>8R2218</string>

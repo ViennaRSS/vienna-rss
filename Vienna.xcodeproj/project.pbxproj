@@ -37,6 +37,7 @@
 		AA16C2B10C2D57D5006BBAC1 /* draggerImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AA16C2B00C2D57D5006BBAC1 /* draggerImage.png */; };
 		AA16C5450C2DD4EB006BBAC1 /* refreshProgress.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */; };
 		AA18C4960C43F24900E11C0C /* browserBarBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */; };
+		AA18C5F30C4553FB00E11C0C /* mainBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA18C5F20C4553FB00E11C0C /* mainBackground.tiff */; };
 		AA1A23DA0C07475B005968DC /* SplitViewExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = AA1A23D80C07475B005968DC /* SplitViewExtensions.h */; };
 		AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1A23D90C07475B005968DC /* SplitViewExtensions.m */; };
 		AA1A25170C077F49005968DC /* columnIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25150C077F49005968DC /* columnIcon.tiff */; };
@@ -227,8 +228,6 @@
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AACFDEBC0604D4D20072D140 /* AppController.h in Headers */ = {isa = PBXBuildFile; fileRef = AACFDEBA0604D4D20072D140 /* AppController.h */; };
-		AAD2BEC90C2B2BB800AA0F11 /* PolishedWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD2BEC80C2B2BB800AA0F11 /* PolishedWindow.h */; };
-		AAD2BECC0C2B2BCE00AA0F11 /* PolishedWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD2BECB0C2B2BCE00AA0F11 /* PolishedWindow.m */; };
 		AAD2BED00C2B2C0600AA0F11 /* top_right.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECD0C2B2C0600AA0F11 /* top_right.png */; };
 		AAD2BED10C2B2C0600AA0F11 /* top_middle.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */; };
 		AAD2BED20C2B2C0600AA0F11 /* top_left.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECF0C2B2C0600AA0F11 /* top_left.png */; };
@@ -420,6 +419,7 @@
 		AA16C2B00C2D57D5006BBAC1 /* draggerImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = draggerImage.png; sourceTree = "<group>"; };
 		AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = refreshProgress.tiff; sourceTree = "<group>"; };
 		AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserBarBackground.tiff; sourceTree = "<group>"; };
+		AA18C5F20C4553FB00E11C0C /* mainBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mainBackground.tiff; sourceTree = "<group>"; };
 		AA1A23D80C07475B005968DC /* SplitViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SplitViewExtensions.h; sourceTree = "<group>"; };
 		AA1A23D90C07475B005968DC /* SplitViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SplitViewExtensions.m; sourceTree = "<group>"; };
 		AA1A25150C077F49005968DC /* columnIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = columnIcon.tiff; sourceTree = "<group>"; };
@@ -796,8 +796,6 @@
 		AAD2BE550C2B1C8400AA0F11 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AAD2BE570C2B1C8B00AA0F11 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = ru; path = ru.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AAD2BE590C2B1C9600AA0F11 /* ru */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AAD2BEC80C2B2BB800AA0F11 /* PolishedWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PolishedWindow.h; sourceTree = "<group>"; };
-		AAD2BECB0C2B2BCE00AA0F11 /* PolishedWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PolishedWindow.m; sourceTree = "<group>"; };
 		AAD2BECD0C2B2C0600AA0F11 /* top_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_right.png; sourceTree = "<group>"; };
 		AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_middle.png; sourceTree = "<group>"; };
 		AAD2BECF0C2B2C0600AA0F11 /* top_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_left.png; sourceTree = "<group>"; };
@@ -1072,6 +1070,7 @@
 				AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */,
 				AA13A08A0C36D34C00C64338 /* filterViewBackground.tiff */,
 				AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */,
+				AA18C5F20C4553FB00E11C0C /* mainBackground.tiff */,
 				AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */,
 				AAD2C0530C2C882D00AA0F11 /* selGray.tiff */,
 				AAD2BED30C2B2C1200AA0F11 /* bottom_middle.png */,
@@ -1345,8 +1344,6 @@
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
-				AAD2BEC80C2B2BB800AA0F11 /* PolishedWindow.h */,
-				AAD2BECB0C2B2BCE00AA0F11 /* PolishedWindow.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				AABCFB180900BA4E00984F78 /* SquareWindow.h */,
@@ -1448,7 +1445,6 @@
 				AA1A27550C09B27E005968DC /* ViewExtensions.h in Headers */,
 				34363AC90C11C297002A1238 /* ClickableProgressIndicator.h in Headers */,
 				AA8B36C10C12D6480035FBD7 /* GradientView.h in Headers */,
-				AAD2BEC90C2B2BB800AA0F11 /* PolishedWindow.h in Headers */,
 				AAD2BF0C0C2BB64500AA0F11 /* ThinSplitView.h in Headers */,
 				AA3F36E50C2F143100D5766B /* StdEnclosureView.h in Headers */,
 				AA138EFA0C34A22600C64338 /* FilterView.h in Headers */,
@@ -1721,6 +1717,7 @@
 				344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */,
 				AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */,
 				AA18C4960C43F24900E11C0C /* browserBarBackground.tiff in Resources */,
+				AA18C5F30C4553FB00E11C0C /* mainBackground.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2054,7 +2051,6 @@
 				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
 				AA8B36C20C12D6480035FBD7 /* GradientView.m in Sources */,
-				AAD2BECC0C2B2BCE00AA0F11 /* PolishedWindow.m in Sources */,
 				AAD2BF0D0C2BB64500AA0F11 /* ThinSplitView.m in Sources */,
 				AA3F36E60C2F143100D5766B /* StdEnclosureView.m in Sources */,
 				AA138EF90C34A22600C64338 /* FilterView.m in Sources */,
