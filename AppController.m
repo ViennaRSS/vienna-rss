@@ -3455,6 +3455,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = ![db readOnly] && isAnyArticleView && isMainWindowVisible && [db countOfUnread] > 0;
 		return YES;
 	}
+	if (theAction == @selector(getInfo:))
+	{
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		*validateFlag = IsRSSFolder(folder) && isMainWindowVisible;
+		return YES;
+	}
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
 		NSView<BaseView> * theView = [browserView activeTabItemView];
@@ -3641,11 +3647,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
 		return folder && (IsSmartFolder(folder) || IsRSSFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
-	else if (theAction == @selector(getInfo:))
-	{
-		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return IsRSSFolder(folder) && isMainWindowVisible;
-	}
 	else if (theAction == @selector(restoreMessage:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
@@ -3817,6 +3818,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setAction:@selector(emptyTrash:)];
 		[item setToolTip:NSLocalizedString(@"Delete all articles in the trash", nil)];
 	}
+	else if ([itemIdentifier isEqualToString:@"GetInfo"])
+	{
+		[item setLabel:NSLocalizedString(@"Get Info", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setButtonImage:@"getInfoButton"];
+		[item setTarget:self];
+		[item setAction:@selector(getInfo:)];
+		[item setToolTip:NSLocalizedString(@"See information about the selected subscription", nil)];
+	}
 	else if ([itemIdentifier isEqualToString: @"Spinner"])
 	{
 		[item setLabel:nil];
@@ -3895,6 +3905,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		@"Spinner",
 		@"MailLink",
 		@"BlogWith",
+		@"GetInfo",
 		nil];
 }
 
