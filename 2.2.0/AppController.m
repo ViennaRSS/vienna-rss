@@ -75,10 +75,10 @@
 	-(void)showAppInStatusBar;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
-	-(void)initStylesMenu;
 	-(void)initBlogWithMenu;
 	-(void)initScriptsMenu;
 	-(void)initFiltersMenu;
+	-(NSMenu *)getStylesMenu;
 	-(void)startProgressIndicator;
 	-(void)stopProgressIndicator;
 	-(void)doEditFolder:(Folder *)folder;
@@ -204,12 +204,14 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	if (pathToPList != nil)
 		standardURLs = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
 	
-	// Initialize the Styles, Sort By and Columns menu
+	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
 	[self initColumnsMenu];
-	[self initStylesMenu];
 	[self initBlogWithMenu];
 	[self initFiltersMenu];
+
+	// Initialize the Styles menu.
+	[stylesMenu setSubmenu:[self getStylesMenu]];
 
 	// Restore the splitview layout
 	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
@@ -589,7 +591,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		else
 		{
 			Preferences * prefs = [Preferences standardPreferences];
-			[self initStylesMenu];
+			[stylesMenu setSubmenu:[self getStylesMenu]];
 			[prefs setDisplayStyle:styleName];
 			if ([[prefs displayStyle] isEqualToString:styleName])
 				runOKAlertPanel(@"New style title", @"New style body", styleName);
@@ -1554,12 +1556,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* initStylesMenu
- * Populate the Styles menu with a list of built-in and external styles. (Note that in the event of
+/* getStylesMenu
+ * Returns a menu with a list of built-in and external styles. (Note that in the event of
  * duplicates the styles in the external Styles folder wins. This is intended to allow the user to
  * override the built-in styles if necessary).
  */
--(void)initStylesMenu
+-(NSMenu *)getStylesMenu
 {
 	NSMenu * stylesSubMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
 	
@@ -1577,15 +1579,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[stylesSubMenu addItem:menuItem];
 		[menuItem release];
 	}
-	
+
 	// Append a link to More Styles...
 	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
 	[stylesSubMenu addItem:menuItem];
 	[menuItem release];
-	
-	// Add it to the Style menu
-	[stylesMenu setSubmenu:stylesSubMenu];
+	return stylesSubMenu;
 }
 
 /* initFiltersMenu
@@ -3858,6 +3858,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setMinSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 		[item setMaxSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 	}
+	else if ([itemIdentifier isEqualToString: @"Styles"])
+	{
+		[item setPopup:@"stylesMenuButton" withMenu:[self getStylesMenu]];
+		[item setLabel:NSLocalizedString(@"Style", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setToolTip:NSLocalizedString(@"Display the list of available styles", nil)];
+	}
 	else if ([itemIdentifier isEqualToString: @"Action"])
 	{
 		[item setPopup:@"popupMenuButton" withMenu:[self folderMenu]];
@@ -3906,6 +3913,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		@"MailLink",
 		@"BlogWith",
 		@"GetInfo",
+		@"Styles",
 		nil];
 }
 
