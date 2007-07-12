@@ -347,7 +347,10 @@
 	}
 
 	// Draw the text
-	cellFrame.origin.y += 1;
+	NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[self font], NSFontAttributeName, nil];
+	NSSize numSize = [[self stringValue] sizeWithAttributes:attributes];
+	
+	cellFrame.origin.y += (cellFrame.size.height - numSize.height) / 2;
 	cellFrame.origin.x += 2;
 	
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
