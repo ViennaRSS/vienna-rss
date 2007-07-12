@@ -11,6 +11,9 @@ Thanks!
 - Updated all built-in styles to add enclosure field.
 - Improved toolbar styles.
 - Added Ukrainian localisation. (Thanks to Andrew Kachalo).
+- Fixed toolbar UI corruption bug.
+- Updated keyboard shortcuts in help file.
+- Added Get Info and Style toolbar buttons.
 
 2.2.0.2202
 ----------

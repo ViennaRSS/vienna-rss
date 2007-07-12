@@ -63,6 +63,7 @@ NSString * MAPref_EmptyTrashNotification = @"EmptyTrashNotification";
 NSString * MAPref_ShowAppInStatusBar = @"ShowAppInStatusBar";
 NSString * MAPref_ShowStatusBar = @"ShowStatusBar";
 NSString * MAPref_ShowFilterBar = @"ShowFilterBar";
+NSString * MAPref_NewFolderUI = @"NewFolderUI";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 6;

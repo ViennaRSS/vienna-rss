@@ -85,6 +85,9 @@
 {
 	NSTableColumn * tableColumn;
 	ImageAndTextCell * imageAndTextCell;
+
+	// Do we use the new experimental folder UI style?
+	useNewFolderUI = [[Preferences standardPreferences] boolForKey:MAPref_NewFolderUI];
 	
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
@@ -834,7 +837,14 @@
 		info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
 		[style release];
 	}
-	return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:info] autorelease];
+	
+	NSString * folderName = [node nodeName];
+
+	// New folder UI style - all group folder names are uppercased.
+	if (useNewFolderUI && IsGroupFolder([node folder]))
+		folderName = [folderName uppercaseString];
+
+	return [[[NSAttributedString alloc] initWithString:folderName attributes:info] autorelease];
 }
 
 /* willDisplayCell
@@ -908,9 +918,18 @@
 			[realCell setFont:cellFont];
 		}
 
-		// Only show folder images if the user prefers them.
-		Preferences * prefs = [Preferences standardPreferences];
-		[realCell setImage:([prefs showFolderImages] ? [folder image] : [folder standardImage])];
+		// New folder UI style - group folders have no image and are bolded.
+		if (useNewFolderUI && IsGroupFolder(folder))
+		{
+			[realCell setFont:boldCellFont];
+			[realCell setImage:nil];
+		}
+		else
+		{
+			// Only show folder images if the user prefers them.
+			Preferences * prefs = [Preferences standardPreferences];
+			[realCell setImage:([prefs showFolderImages] ? [folder image] : [folder standardImage])];
+		}
 	}
 }
 
@@ -1009,6 +1028,25 @@
 -(BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
 	return NO;
+}
+
+/* heightOfRowByItem
+ * This code is only called on Mac OSX 10.4 or later. If the new folder UI is enabled
+ * then we increase the group folder node height by 9 pixels to make it more distinctive.
+ */
+-(float)outlineView:(NSOutlineView *)olv heightOfRowByItem:(id)item
+{
+	TreeNode * node = (TreeNode *)item;
+
+	if (boldCellFont == nil)
+		[self setFolderListFont];
+	
+	int height = [boldCellFont defaultLineHeightForFont];
+	
+	if (node != nil && useNewFolderUI && IsGroupFolder([node folder]))
+		return height + 9.0;
+	
+	return height + 3.0;
 }
 
 /* setObjectValue [datasource]
