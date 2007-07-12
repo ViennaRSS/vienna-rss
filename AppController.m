@@ -3365,7 +3365,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		if (!doAnimate)
 		{
-			[bottomDivider setHidden:!isVisible];
 			[statusText setHidden:!isVisible];
 			[splitView1 setFrame:viewSize];
 		}
@@ -3375,7 +3374,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			{
 				// When hiding the status bar, hide these controls BEFORE
 				// we start hiding the view. Looks cleaner.
-				[bottomDivider setHidden:YES];
 				[statusText setHidden:YES];
 			}
 			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
@@ -3411,7 +3409,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		// When showing the status bar, show these controls AFTER
 		// we have made the view visible. Again, looks cleaner.
-		[bottomDivider setHidden:NO];
 		[statusText setHidden:NO];
 		return;
 	}
