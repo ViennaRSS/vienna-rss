@@ -74,6 +74,7 @@
 		selectionTimer = nil;
 		folderErrorImage = nil;
 		refreshProgressImage = nil;
+		useNewFolderUI = [[Preferences standardPreferences] boolForKey:MAPref_NewFolderUI];
 	}
 	return self;
 }
@@ -86,9 +87,6 @@
 	NSTableColumn * tableColumn;
 	ImageAndTextCell * imageAndTextCell;
 
-	// Do we use the new experimental folder UI style?
-	useNewFolderUI = [[Preferences standardPreferences] boolForKey:MAPref_NewFolderUI];
-	
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
 	imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
