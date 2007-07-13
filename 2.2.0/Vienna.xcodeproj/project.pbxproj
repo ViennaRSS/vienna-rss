@@ -127,6 +127,8 @@
 		AA55E4A6086C6C8200D7DBFA /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */; };
 		AA55E4A9086C6CF300D7DBFA /* FeedCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */; };
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
+		AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */; };
+		AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */; };
 		AA5AA7FF0C3C0D7D00B2E14F /* ToolbarButton.h in Headers */ = {isa = PBXBuildFile; fileRef = AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */; };
 		AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */; };
 		AA5AA8910C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */; };
@@ -557,6 +559,8 @@
 		AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserPane.m; sourceTree = "<group>"; };
 		AA55E4A7086C6CF300D7DBFA /* FeedCredentials.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FeedCredentials.h; sourceTree = "<group>"; };
 		AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FeedCredentials.m; sourceTree = "<group>"; };
+		AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = cancelRefreshButton.tiff; sourceTree = "<group>"; };
+		AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = cancelRefreshButtonPressed.tiff; sourceTree = "<group>"; };
 		AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarButton.h; sourceTree = "<group>"; };
 		AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolbarButton.m; sourceTree = "<group>"; };
 		AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = emptyTrashButtonPressed.tiff; sourceTree = "<group>"; };
@@ -1157,6 +1161,8 @@
 			isa = PBXGroup;
 			children = (
 				B28C95960C3A951E008A09E5 /* blogWithMenu.tiff */,
+				AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */,
+				AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */,
 				AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */,
 				AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */,
 				AADD6E800C457C3800E11097 /* getInfoButton.tiff */,
@@ -1726,6 +1732,8 @@
 				AADD6E830C457C3800E11097 /* getInfoButtonPressed.tiff in Resources */,
 				AADD6F110C45870900E11097 /* stylesMenuButton.tiff in Resources */,
 				AADD6F120C45870900E11097 /* stylesMenuButtonPressed.tiff in Resources */,
+				AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */,
+				AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2689,7 +2697,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2203;
+				BUILD_NUMBER = 2204;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2746,7 +2754,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2203;
+				BUILD_NUMBER = 2204;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

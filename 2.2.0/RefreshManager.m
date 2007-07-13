@@ -420,6 +420,7 @@ typedef enum {
 {
 	if (pumpTimer == nil)
 		pumpTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshPumper:) userInfo:nil repeats:YES] retain];
+	[self refreshPumper:pumpTimer];
 }
 
 /* refreshPumper
