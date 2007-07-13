@@ -207,8 +207,6 @@
 		AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA5686F09EE725B00C87343 /* NewsParser.framework */; };
 		AAA5775209A47CF900602469 /* RenameFolder.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA5775009A47CF800602469 /* RenameFolder.h */; };
 		AAA5775309A47CF900602469 /* RenameFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA5775109A47CF800602469 /* RenameFolder.m */; };
-		AAA7F4EE09D40CDA007D0760 /* filterIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAA7F4ED09D40CDA007D0760 /* filterIcon.tiff */; };
-		AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAA7F55D09D46170007D0760 /* filterIconPressed.tiff */; };
 		AAA7F5EB09D50102007D0760 /* ArticleFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA7F5E909D50102007D0760 /* ArticleFilter.h */; };
 		AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
 		AAA817F7087F986700C30683 /* AsyncConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = AAA817F5087F986700C30683 /* AsyncConnection.h */; };
@@ -727,8 +725,6 @@
 		AAA5775009A47CF800602469 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = RenameFolder.h; sourceTree = "<group>"; };
 		AAA5775109A47CF800602469 /* RenameFolder.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = RenameFolder.m; sourceTree = "<group>"; };
 		AAA5814F09AA52B400602469 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/Vienna Help"; sourceTree = "<group>"; };
-		AAA7F4ED09D40CDA007D0760 /* filterIcon.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = filterIcon.tiff; sourceTree = "<group>"; };
-		AAA7F55D09D46170007D0760 /* filterIconPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = filterIconPressed.tiff; sourceTree = "<group>"; };
 		AAA7F5E909D50102007D0760 /* ArticleFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleFilter.h; sourceTree = "<group>"; };
 		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
 		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
@@ -1111,8 +1107,6 @@
 				AA6321500885F0BB006382D3 /* comments.tiff */,
 				AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */,
 				AA32E2A30940A9970034D9CC /* folderError.tiff */,
-				AAA7F4ED09D40CDA007D0760 /* filterIcon.tiff */,
-				AAA7F55D09D46170007D0760 /* filterIconPressed.tiff */,
 				AA67F3980897377C008BBC37 /* stopRefresh.tiff */,
 				AA34582C084BE802003D992E /* vienna2.icns */,
 				AA4AB5E008971B28006C843E /* vienna2style.icns */,
@@ -1671,8 +1665,6 @@
 				AA71097009BA74BF00E3EA8A /* rightArrow.tiff in Resources */,
 				AA71173709BEB70E00E3EA8A /* webpage.tiff in Resources */,
 				AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */,
-				AAA7F4EE09D40CDA007D0760 /* filterIcon.tiff in Resources */,
-				AAA7F55E09D46170007D0760 /* filterIconPressed.tiff in Resources */,
 				AA38C15D09FB196A00FAE2CD /* NewPreferences.nib in Resources */,
 				AA38C17909FB19BD00FAE2CD /* BrowserPane.nib in Resources */,
 				AA38C18009FB19CE00FAE2CD /* Downloads.nib in Resources */,
@@ -2725,7 +2717,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2203;
+				BUILD_NUMBER = 2204;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
