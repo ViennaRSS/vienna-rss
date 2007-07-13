@@ -2179,6 +2179,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		// we apply the filter.
 		[[Preferences standardPreferences] setObject:[NSCalendarDate date] forKey:MAPref_LastRefreshDate];
 		
+		// Toggle the refresh button
+		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
+		[item setAction:@selector(cancelAllRefreshes:)];
+		[item setButtonImage:@"cancelRefreshButton"];
+
 		[self startProgressIndicator];
 		[self setStatusMessage:[[RefreshManager sharedManager] statusMessageDuringRefresh] persist:YES];
 	}
@@ -2191,6 +2196,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
 		[self stopProgressIndicator];
 		
+		// Toggle the refresh button
+		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
+		[item setAction:@selector(refreshAllSubscriptions:)];
+		[item setButtonImage:@"refreshButton"];
+
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
 		// Refresh the current folder.
@@ -3116,7 +3126,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	// Reset the refresh timer
 	[self handleCheckFrequencyChange:nil];
-	
+
 	if (![self isConnecting])
 		[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree folders:0] ignoringSubscriptionStatus:NO];		
 }
@@ -3432,9 +3442,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
 
-	if ((theAction == @selector(refreshAllSubscriptions:)) || (theAction == @selector(refreshAllFolderIcons:)))
+	if (/*(theAction == @selector(refreshAllSubscriptions:)) ||*/ (theAction == @selector(refreshAllFolderIcons:)))
 	{
 		*validateFlag = ![self isConnecting] && ![db readOnly];
+		return YES;
+	}
+	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshes:))
+	{
+		*validateFlag = ![db readOnly];
 		return YES;
 	}
 	if (theAction == @selector(newSubscription:))
