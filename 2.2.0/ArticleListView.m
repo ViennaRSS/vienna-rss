@@ -294,7 +294,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// In condensed mode, the summary field takes up the whole space.
 	// The method setColumnAutoresizingStyle does not exist in Mac OS X 10.3.9.
 	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
-		[articleList setColumnAutoresizingStyle:NSTableViewSequentialColumnAutoresizingStyle];
+		[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
 	else
 		[articleList setAutoresizesAllColumnsToFit:NO];
 	
