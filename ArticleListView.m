@@ -296,7 +296,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
 		[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
 	else
-		[articleList setAutoresizesAllColumnsToFit:NO];
+		[articleList setAutoresizesAllColumnsToFit:YES];
 	
 	// Set up the corner button for chosing the visible columns.
 	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
