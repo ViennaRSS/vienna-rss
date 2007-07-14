@@ -3442,11 +3442,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
 
-	if (/*(theAction == @selector(refreshAllSubscriptions:)) ||*/ (theAction == @selector(refreshAllFolderIcons:)))
-	{
-		*validateFlag = ![self isConnecting] && ![db readOnly];
-		return YES;
-	}
 	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshes:))
 	{
 		*validateFlag = ![db readOnly];
@@ -3610,6 +3605,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
 		return folder && (IsRSSFolder(folder) || IsGroupFolder(folder)) && ![db readOnly];
+	}
+	else if (theAction == @selector(refreshAllFolderIcons:))
+	{
+		return ![self isConnecting] && ![db readOnly];
 	}
 	else if (theAction == @selector(renameFolder:))
 	{
