@@ -72,6 +72,7 @@ extern float MA_Default_Read_Interval;
 extern float MA_Default_Selection_Change_Interval;
 extern int MA_Default_MinimumFontSize;
 extern int MA_Default_AutoExpireDuration;
+extern int MA_Default_Check_Frequency;
 
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;
