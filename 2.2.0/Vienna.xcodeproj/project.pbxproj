@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
-		47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 47775BD90A109C6A0091C45E /* Acknowledgements.rtf */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		52829E960C3284AE008F8784 /* Acknowledgements.html in Resources */ = {isa = PBXBuildFile; fileRef = 52829E950C3284AE008F8784 /* Acknowledgements.html */; };
@@ -1508,7 +1507,6 @@
 				AAED7ABA09FDE15D00ED56E5 /* InfoWindow.nib in Resources */,
 				AAED82FC0A037A4E00ED56E5 /* SNDisclosureArrowRight.tiff in Resources */,
 				AAED82FD0A037A4E00ED56E5 /* SNDisclosureArrowDown.tiff in Resources */,
-				47775BDA0A109C6A0091C45E /* Acknowledgements.rtf in Resources */,
 				61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */,
 				AA681B460B18E78100CFD5B7 /* AdvancedPreferences.nib in Resources */,
 				AA681C8A0B199E1900CFD5B7 /* advancedPrefImage.tiff in Resources */,
