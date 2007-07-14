@@ -1313,7 +1313,7 @@
 				61858A740A015CFB00E8CF73 /* Index zh_TW Help */,
 				AA65D27F083CF46F00BC387C /* CopyFiles */,
 				AAEF2001085D685900A0E675 /* Copy Shared Support Files */,
-				47775C3E0A109FF90091C45E /* Create tar.gz for Sparkle */,
+				47775C3E0A109FF90091C45E /* Create files for upload */,
 			);
 			buildRules = (
 				AA72C5140855314000E2121C /* PBXBuildRule */,
@@ -1546,22 +1546,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		47775C3E0A109FF90091C45E /* Create tar.gz for Sparkle */ = {
+		47775C3E0A109FF90091C45E /* Create files for upload */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			comments = "Create tar.gz for the automatic sparkle udpate";
 			files = (
 			);
 			inputPaths = (
-				$BUILD_DIR/$CONFIGURATION/$PRODUCT_NAME.app,
+				"$(BUILD_PRODUCTS_DIR)/$(PRODUCT_NAME).$(WRAPPER_EXTENSION)",
 			);
-			name = "Create tar.gz for Sparkle";
+			name = "Create files for upload";
 			outputPaths = (
-				"$BUILD_DIR/$CONFIGURATION/$PRODUCT_NAME-$BUILD_NUMBER.tar.gz",
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd $BUILD_DIR/$CONFIGURATION; tar -czf $PRODUCT_NAME-$BUILD_NUMBER.tar.gz $PRODUCT_NAME.app";
+			shellScript = "VIENNA_APP=\"$PRODUCT_NAME.$WRAPPER_EXTENSION\"\nVIENNA_FILE_PREFIX=\"$PRODUCT_NAME$VIENNA_VERSION_NUMBER.$BUILD_NUMBER\"\nVIENNA_FILE_PREFIX_ENGLISH=\"$VIENNA_FILE_PREFIX.en-us\"\n\nif [ \"$CONFIGURATION\" = \"Deployment\" ] ; then\n\techo \"Running script to create upload files\"\n\tcd \"$BUILT_PRODUCTS_DIR\"\n\tif [ -e \"$VIENNA_APP\" ] ; then\n\t\tif [ ! -e \"$VIENNA_FILE_PREFIX\" ] ; then\n\t\t\tmkdir \"$VIENNA_FILE_PREFIX\"\n\t\tfi\n\t\tif [ ! -e \"$VIENNA_FILE_PREFIX_ENGLISH\" ] ; then\n\t\t\tmkdir \"$VIENNA_FILE_PREFIX_ENGLISH\"\n\t\tfi\n\t\tif [ -e \"$VIENNA_FILE_PREFIX/$VIENNA_APP\" ] ; then\n\t\t\trm -Rf \"$VIENNA_FILE_PREFIX/$VIENNA_APP\"\n\t\tfi\n\t\tif [ -e \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\" ] ; then\n\t\t\trm -Rf \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\"\n\t\tfi\n\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_FILE_PREFIX/$VIENNA_APP\"\n\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\"\n\telse\n\t\techo \"Error: Vienna.app does not exist\"\n\tfi\nfi\n";
 		};
 		612724270A0145F7000AB96C /* Index de Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2512,6 +2511,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				VIENNA_VERSION_NUMBER = 2.2.0;
 				ZERO_LINK = YES;
 			};
 			name = Development;
@@ -2542,6 +2542,7 @@
 				PREBINDING = NO;
 				SDKROOT_PPC = /Developer/SDKs/MacOSX10.3.9.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				VIENNA_VERSION_NUMBER = 2.2.0;
 			};
 			name = Deployment;
 		};
@@ -2571,6 +2572,7 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
+				VIENNA_VERSION_NUMBER = 2.2.0;
 			};
 			name = Default;
 		};
