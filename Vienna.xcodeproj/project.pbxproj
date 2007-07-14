@@ -1553,14 +1553,14 @@
 			files = (
 			);
 			inputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).$(WRAPPER_EXTENSION)",
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME)$(WRAPPER_SUFFIX)",
 			);
 			name = "Create files for upload";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "VIENNA_APP=\"$PRODUCT_NAME.$WRAPPER_EXTENSION\"\nVIENNA_FILE_PREFIX=\"$PRODUCT_NAME$VIENNA_VERSION_NUMBER.$BUILD_NUMBER\"\nVIENNA_FILE_PREFIX_ENGLISH=\"$VIENNA_FILE_PREFIX.en-us\"\n\nif [ \"$CONFIGURATION\" = \"Deployment\" ] ; then\n\techo \"Running script to create upload files\"\n\tcd \"$BUILT_PRODUCTS_DIR\"\n\tif [ -e \"$VIENNA_APP\" ] ; then\n\t\tif [ ! -e \"$VIENNA_FILE_PREFIX\" ] ; then\n\t\t\tmkdir \"$VIENNA_FILE_PREFIX\"\n\t\tfi\n\t\tif [ ! -e \"$VIENNA_FILE_PREFIX_ENGLISH\" ] ; then\n\t\t\tmkdir \"$VIENNA_FILE_PREFIX_ENGLISH\"\n\t\tfi\n\t\tif [ -e \"$VIENNA_FILE_PREFIX/$VIENNA_APP\" ] ; then\n\t\t\trm -Rf \"$VIENNA_FILE_PREFIX/$VIENNA_APP\"\n\t\tfi\n\t\tif [ -e \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\" ] ; then\n\t\t\trm -Rf \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\"\n\t\tfi\n\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_FILE_PREFIX/$VIENNA_APP\"\n\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\"\n\telse\n\t\techo \"Error: Vienna.app does not exist\"\n\tfi\nfi\n";
+			shellScript = "VIENNA_APP=\"$PRODUCT_NAME$WRAPPER_SUFFIX\"\nVIENNA_FILE_PREFIX=\"$PRODUCT_NAME$VIENNA_VERSION_NUMBER.$BUILD_NUMBER\"\nVIENNA_FILE_PREFIX_ENGLISH=\"$VIENNA_FILE_PREFIX.en-us\"\n\nif [ \"$CONFIGURATION\" = \"Deployment\" ] ; then\n\techo \"Running script to create upload files\"\n\tcd \"$BUILT_PRODUCTS_DIR\"\n\tif [ -e \"$VIENNA_APP\" ] ; then\n\t\tif [ ! -e \"$VIENNA_FILE_PREFIX\" ] ; then\n\t\t\tmkdir \"$VIENNA_FILE_PREFIX\"\n\t\tfi\n\t\tif [ ! -e \"$VIENNA_FILE_PREFIX_ENGLISH\" ] ; then\n\t\t\tmkdir \"$VIENNA_FILE_PREFIX_ENGLISH\"\n\t\tfi\n\t\tif [ -e \"$VIENNA_FILE_PREFIX/$VIENNA_APP\" ] ; then\n\t\t\trm -Rf \"$VIENNA_FILE_PREFIX/$VIENNA_APP\"\n\t\tfi\n\t\tif [ -e \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\" ] ; then\n\t\t\trm -Rf \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\"\n\t\tfi\n\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_FILE_PREFIX/$VIENNA_APP\"\n\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_FILE_PREFIX_ENGLISH/$VIENNA_APP\"\n\t\t\n\t\tcd \"$VIENNA_FILE_PREFIX_ENGLISH\"\n\t\tfind -d . -iname \"*.lproj\" -not -iname \"en.lproj\" -not -iname \"english.lproj\" -exec rm -rf {} \\;\n\telse\n\t\techo \"Error: Vienna.app does not exist\"\n\tfi\nfi\n";
 		};
 		612724270A0145F7000AB96C /* Index de Help */ = {
 			isa = PBXShellScriptBuildPhase;
