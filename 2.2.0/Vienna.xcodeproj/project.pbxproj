@@ -1553,7 +1553,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(BUILD_PRODUCTS_DIR)/$(PRODUCT_NAME).$(WRAPPER_EXTENSION)",
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).$(WRAPPER_EXTENSION)",
 			);
 			name = "Create files for upload";
 			outputPaths = (
