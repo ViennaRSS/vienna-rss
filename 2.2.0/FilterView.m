@@ -40,7 +40,7 @@
 	backgroundBrush = [[NSImage alloc] initWithContentsOfFile: backgroundBrushURL ];
 
 	// Make sure we localise the label
-	[filterByLabel setStringValue:NSLocalizedString(@"Filter By", nil)];
+	[filterByLabel setStringValue:NSLocalizedString(@"Filter by:", nil)];
 
 	// Set some useful tooltips.
 	[filterSearchField setToolTip:NSLocalizedString(@"Filter displayed articles by matching text", nil)];
