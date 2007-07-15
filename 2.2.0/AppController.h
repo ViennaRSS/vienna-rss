@@ -38,6 +38,7 @@
 @class UnifiedDisplayView;
 @class EmptyTrashWarning;
 @class ClickableProgressIndicator;
+@class SearchPanel;
 
 @interface AppController : NSObject <GrowlApplicationBridgeDelegate> 
 {
@@ -78,6 +79,7 @@
 	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
+	SearchPanel * searchPanel;
 	
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;
