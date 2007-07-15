@@ -87,7 +87,7 @@
 		// Small size is about 3/4 the size of the regular image or
 		// generally 24x24.
 		imageSize = [image size];
-		smallImageSize = NSMakeSize(imageSize.width * 0.75, imageSize.height * 0.75);
+		smallImageSize = NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80);
 	}
 }
 

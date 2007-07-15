@@ -97,6 +97,10 @@
 		AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */; };
 		AA582DB90C4A2D85003D0916 /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DB40C4A2D85003D0916 /* Downloads.nib */; };
 		AA582DC20C4A2DE0003D0916 /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DBD0C4A2DE0003D0916 /* NewPreferences.nib */; };
+		AA5833F30C4A6A07003D0916 /* nextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833EF0C4A6A07003D0916 /* nextButton.tiff */; };
+		AA5833F40C4A6A07003D0916 /* nextButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F00C4A6A07003D0916 /* nextButtonPressed.tiff */; };
+		AA5833F50C4A6A07003D0916 /* previousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F10C4A6A07003D0916 /* previousButton.tiff */; };
+		AA5833F60C4A6A07003D0916 /* previousButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F20C4A6A07003D0916 /* previousButtonPressed.tiff */; };
 		AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */; };
 		AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */; };
 		AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */; };
@@ -483,6 +487,10 @@
 		AA582DBD0C4A2DE0003D0916 /* NewPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = NewPreferences.nib; sourceTree = "<group>"; };
 		AA582DEF0C4A3229003D0916 /* ru */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ru; path = "ru.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA582E010C4A32CC003D0916 /* uk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = uk; path = "uk.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AA5833EF0C4A6A07003D0916 /* nextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = nextButton.tiff; sourceTree = "<group>"; };
+		AA5833F00C4A6A07003D0916 /* nextButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = nextButtonPressed.tiff; sourceTree = "<group>"; };
+		AA5833F10C4A6A07003D0916 /* previousButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = previousButton.tiff; sourceTree = "<group>"; };
+		AA5833F20C4A6A07003D0916 /* previousButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = previousButtonPressed.tiff; sourceTree = "<group>"; };
 		AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = cancelRefreshButton.tiff; sourceTree = "<group>"; };
 		AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = cancelRefreshButtonPressed.tiff; sourceTree = "<group>"; };
 		AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarButton.h; sourceTree = "<group>"; };
@@ -1089,8 +1097,12 @@
 				AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */,
 				AADD6E800C457C3800E11097 /* getInfoButton.tiff */,
 				AADD6E810C457C3800E11097 /* getInfoButtonPressed.tiff */,
+				AA5833EF0C4A6A07003D0916 /* nextButton.tiff */,
+				AA5833F00C4A6A07003D0916 /* nextButtonPressed.tiff */,
 				B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */,
 				AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */,
+				AA5833F10C4A6A07003D0916 /* previousButton.tiff */,
+				AA5833F20C4A6A07003D0916 /* previousButtonPressed.tiff */,
 				B28C95920C3A94F7008A09E5 /* smartFolderButton.tiff */,
 				AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */,
 				B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */,
@@ -1544,6 +1556,10 @@
 				AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */,
 				AA582DB90C4A2D85003D0916 /* Downloads.nib in Resources */,
 				AA582DC20C4A2DE0003D0916 /* NewPreferences.nib in Resources */,
+				AA5833F30C4A6A07003D0916 /* nextButton.tiff in Resources */,
+				AA5833F40C4A6A07003D0916 /* nextButtonPressed.tiff in Resources */,
+				AA5833F50C4A6A07003D0916 /* previousButton.tiff in Resources */,
+				AA5833F60C4A6A07003D0916 /* previousButtonPressed.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
