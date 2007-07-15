@@ -25,6 +25,7 @@
                 hideFilterBar = id; 
                 importSubscriptions = id; 
                 keyboardShortcutsHelp = id; 
+                localPerformFindPanelAction = id; 
                 mailLinkToArticlePage = id; 
                 makeTextLarger = id; 
                 makeTextSmaller = id; 

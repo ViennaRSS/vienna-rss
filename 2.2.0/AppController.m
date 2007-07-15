@@ -2296,8 +2296,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	switch ([sender tag]) 
 	{
 	case NSFindPanelActionSetFindString:
-		[searchField setStringValue:[NSApp currentSelection]];
 		[self setFocusToSearchField:self];
+		[searchField setStringValue:[NSApp currentSelection]];
+		[searchPanel setSearchString:[NSApp currentSelection]];
 		break;
 
 	case NSFindPanelActionShowFindPanel:
@@ -3936,7 +3937,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		@"SearchItem",
 		@"Spinner",
 		@"MailLink",
-		@"BlogWith",
 		@"GetInfo",
 		@"Styles",
 		nil];

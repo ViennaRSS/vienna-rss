@@ -44,6 +44,14 @@
 	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
+/* newSearchString
+ * Change the search string displayed in the search field.
+ */
+-(void)setSearchString:(NSString *)newSearchString
+{
+	[searchField setStringValue:newSearchString];
+}
+
 /* searchStringChanged
  * This function is called when the user hits the Enter or Cancel key in the search
  * field. (Cancel blanks the searchField string value so searchArticlesWithString ends

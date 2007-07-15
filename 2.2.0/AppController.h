@@ -165,6 +165,7 @@
 -(IBAction)unsubscribeFeed:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
+-(IBAction)localPerformFindPanelAction:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;
