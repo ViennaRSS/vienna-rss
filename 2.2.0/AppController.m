@@ -3483,6 +3483,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = IsRSSFolder(folder) && isMainWindowVisible;
 		return YES;
 	}
+	if (theAction == @selector(viewNextUnread:))
+	{
+		*validateFlag = [db countOfUnread] > 0;
+		return YES;
+	}
+	if (theAction == @selector(goBack:))
+	{
+		*validateFlag = [[browserView activeTabItemView] canGoBack] && isMainWindowVisible;
+		return YES;
+	}
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
 		NSView<BaseView> * theView = [browserView activeTabItemView];
@@ -3538,10 +3548,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return ([self selectedArticle] != nil && isMainWindowVisible);
 	}
-	else if (theAction == @selector(goBack:))
-	{
-		return [[browserView activeTabItemView] canGoBack] && isMainWindowVisible;
-	}
 	else if (theAction == @selector(goForward:))
 	{
 		return [[browserView activeTabItemView] canGoForward] && isMainWindowVisible;
@@ -3549,10 +3555,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(newGroupFolder:))
 	{
 		return ![db readOnly] && isMainWindowVisible;
-	}
-	else if (theAction == @selector(viewNextUnread:))
-	{
-		return [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(showHideStatusBar:))
 	{
@@ -3808,6 +3810,24 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setAction:@selector(newSubscription:)];
 		[item setToolTip:NSLocalizedString(@"Create a new subscription", nil)];
 	}
+	else if ([itemIdentifier isEqualToString:@"PreviousButton"])
+	{
+		[item setLabel:NSLocalizedString(@"Back", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setButtonImage:@"previousButton"];
+		[item setTarget:self];
+		[item setAction:@selector(goBack:)];
+		[item setToolTip:NSLocalizedString(@"Back", nil)];
+	}
+	else if ([itemIdentifier isEqualToString:@"NextButton"])
+	{
+		[item setLabel:NSLocalizedString(@"Next Unread", nil)];
+		[item setPaletteLabel:[item label]];
+		[item setButtonImage:@"nextButton"];
+		[item setTarget:self];
+		[item setAction:@selector(viewNextUnread:)];
+		[item setToolTip:NSLocalizedString(@"Next Unread", nil)];
+	}
 	else if ([itemIdentifier isEqualToString:@"SkipFolder"])
 	{
 		[item setLabel:NSLocalizedString(@"Skip Folder", nil)];
@@ -3939,6 +3959,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		@"MailLink",
 		@"GetInfo",
 		@"Styles",
+		@"PreviousButton",
+		@"NextButton",
 		nil];
 }
 
