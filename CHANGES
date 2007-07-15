@@ -9,6 +9,8 @@ Thanks!
 2.2.0.2204
 ----------
 ** Use the notes.html file instead of this file for change notes?
+- Make Refresh toolbar button toggle between refresh and cancel.
+- Add Search panel for when the toolbar is turned off or the Search field is removed from the toolbar.
 
 2.2.0.2203
 ----------

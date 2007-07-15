@@ -47,6 +47,7 @@
 #import "ArticleFilter.h"
 #import "ToolbarItem.h"
 #import "ClickableProgressIndicator.h"
+#import "SearchPanel.h"
 #import <WebKit/WebFrame.h>
 #import <WebKit/WebUIDelegate.h>
 #import <Growl/GrowlDefines.h>
@@ -104,6 +105,7 @@
 	-(NSDictionary *)registrationDictionaryForGrowl;
 	-(NSTimer *)checkTimer;
 	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
+	-(void)searchArticlesWithString:(NSString *)searchString;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -2295,11 +2297,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 	case NSFindPanelActionSetFindString:
 		[searchField setStringValue:[NSApp currentSelection]];
-		[mainWindow makeFirstResponder:searchField];
+		[self setFocusToSearchField:self];
 		break;
 
 	case NSFindPanelActionShowFindPanel:
-		[mainWindow makeFirstResponder:searchField];
+		[self setFocusToSearchField:self];
 		break;
 		
 	default:
@@ -3061,11 +3063,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)setFocusToSearchField:(id)sender
 {
-	if ([self toolbarItemWithIdentifier:@"SearchItem"])
-	{
-		if (![[mainWindow toolbar] isVisible])
-			[[mainWindow toolbar] setVisible:YES];
+	if ([[mainWindow toolbar] isVisible] && [self toolbarItemWithIdentifier:@"SearchItem"])
 		[mainWindow makeFirstResponder:searchField];
+	else
+	{
+		if (!searchPanel)
+			searchPanel = [[SearchPanel alloc] init];
+		[searchPanel runSearchPanel:mainWindow];
 	}
 }
 
@@ -3098,9 +3102,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	if (![[searchField stringValue] isBlank])
+	[self searchArticlesWithString:[searchField stringValue]];
+}
+
+/* searchArticlesWithString
+ * Do the actual article search. The database is called to set the search string
+ * and then we make sure the search folder is selected so that the subsequent
+ * reload will be scoped by the search string.
+ */
+-(void)searchArticlesWithString:(NSString *)searchString
+{
+	if (![searchString isBlank])
 	{
-		[db setSearchString:[searchField stringValue]];
+		[db setSearchString:searchString];
 		if ([foldersTree actualSelection] != [db searchFolderId])
 			[foldersTree selectFolder:[db searchFolderId]];
 		else
