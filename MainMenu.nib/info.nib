@@ -35,8 +35,8 @@
 	<integer>3</integer>
 	<key>IBOpenObjects</key>
 	<array>
-		<integer>1300</integer>
 		<integer>21</integer>
+		<integer>1300</integer>
 	</array>
 	<key>IBSystem Version</key>
 	<string>8R2218</string>

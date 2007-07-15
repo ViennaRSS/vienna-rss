@@ -80,10 +80,6 @@
 		AA35B4B4092B82B80041618C /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3113480902005300E80DF1 /* GeneralPreferences.nib */; };
 		AA35B4B5092B833B0041618C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5650604955F00FE7994 /* Localizable.strings */; };
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
-		AA38C15D09FB196A00FAE2CD /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA38C15709FB196A00FAE2CD /* NewPreferences.nib */; };
-		AA38C17909FB19BD00FAE2CD /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA38C17309FB19BD00FAE2CD /* BrowserPane.nib */; };
-		AA38C18009FB19CE00FAE2CD /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA38C17A09FB19CE00FAE2CD /* Downloads.nib */; };
-		AA38C18E09FB19F000FAE2CD /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */; };
 		AA3BDCA0063249FE004621CD /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
 		AA3D463A0969CF1F000E6F3B /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
 		AA3F36E60C2F143100D5766B /* StdEnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3F36E40C2F143100D5766B /* StdEnclosureView.m */; };
@@ -97,6 +93,10 @@
 		AA5814900C4971EC003D0916 /* SearchPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA58148F0C4971EC003D0916 /* SearchPanel.nib */; };
 		AA5814980C4972BB003D0916 /* SearchPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA5814960C4972BB003D0916 /* SearchPanel.h */; };
 		AA5814990C4972BB003D0916 /* SearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5814970C4972BB003D0916 /* SearchPanel.m */; };
+		AA582D8D0C4A2B78003D0916 /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D880C4A2B78003D0916 /* ActivityViewer.nib */; };
+		AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */; };
+		AA582DB90C4A2D85003D0916 /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DB40C4A2D85003D0916 /* Downloads.nib */; };
+		AA582DC20C4A2DE0003D0916 /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DBD0C4A2DE0003D0916 /* NewPreferences.nib */; };
 		AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */; };
 		AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */; };
 		AA5AA8000C3C0D7D00B2E14F /* ToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */; };
@@ -435,14 +435,10 @@
 		AA38C13D09FB18E600FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AA38C13E09FB190B00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SearchFolder.nib; sourceTree = "<group>"; };
 		AA38C14309FB192600FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/RSSFeed.nib; sourceTree = "<group>"; };
-		AA38C15809FB196A00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/NewPreferences.nib; sourceTree = "<group>"; };
 		AA38C16009FB197700FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/GroupFolder.nib; sourceTree = "<group>"; };
 		AA38C16709FB198C00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
 		AA38C16A09FB199C00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
-		AA38C17409FB19BD00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/BrowserPane.nib; sourceTree = "<group>"; };
-		AA38C17B09FB19CE00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/Downloads.nib; sourceTree = "<group>"; };
 		AA38C18309FB19DA00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
-		AA38C18909FB19F000FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/ActivityViewer.nib; sourceTree = "<group>"; };
 		AA38C19109FB19FA00FAE2CD /* en */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en; path = "en.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA3CB5CF0BE12D79009119BB /* eus */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = eus; path = eus.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
 		AA3CB5EE0BE12D8E009119BB /* eus */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = eus; path = eus.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
@@ -481,6 +477,12 @@
 		AA58148F0C4971EC003D0916 /* SearchPanel.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = SearchPanel.nib; sourceTree = "<group>"; };
 		AA5814960C4972BB003D0916 /* SearchPanel.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SearchPanel.h; sourceTree = "<group>"; };
 		AA5814970C4972BB003D0916 /* SearchPanel.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SearchPanel.m; sourceTree = "<group>"; };
+		AA582D880C4A2B78003D0916 /* ActivityViewer.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = ActivityViewer.nib; sourceTree = "<group>"; };
+		AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = BrowserPane.nib; sourceTree = "<group>"; };
+		AA582DB40C4A2D85003D0916 /* Downloads.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = Downloads.nib; sourceTree = "<group>"; };
+		AA582DBD0C4A2DE0003D0916 /* NewPreferences.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = NewPreferences.nib; sourceTree = "<group>"; };
+		AA582DEF0C4A3229003D0916 /* ru */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ru; path = "ru.lproj/Vienna Help"; sourceTree = "<group>"; };
+		AA582E010C4A32CC003D0916 /* uk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = uk; path = "uk.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = cancelRefreshButton.tiff; sourceTree = "<group>"; };
 		AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = cancelRefreshButtonPressed.tiff; sourceTree = "<group>"; };
 		AA5AA7FD0C3C0D7D00B2E14F /* ToolbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolbarButton.h; sourceTree = "<group>"; };
@@ -971,18 +973,18 @@
 				52829E950C3284AE008F8784 /* Acknowledgements.html */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
-				AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */,
+				AA582D880C4A2B78003D0916 /* ActivityViewer.nib */,
 				AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */,
 				AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */,
-				AA38C17309FB19BD00FAE2CD /* BrowserPane.nib */,
-				AA38C17A09FB19CE00FAE2CD /* Downloads.nib */,
+				AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */,
+				AA582DB40C4A2D85003D0916 /* Downloads.nib */,
 				61975F010B41F145001F65FF /* EmptyTrashWarning.nib */,
 				AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */,
 				AA3113480902005300E80DF1 /* GeneralPreferences.nib */,
 				AAA1E3280852539500277128 /* GroupFolder.nib */,
 				AAED7AB909FDE15D00ED56E5 /* InfoWindow.nib */,
 				344D9C020C3D4B2200498CA1 /* MainMenu.nib */,
-				AA38C15709FB196A00FAE2CD /* NewPreferences.nib */,
+				AA582DBD0C4A2DE0003D0916 /* NewPreferences.nib */,
 				AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */,
 				AA3BDC9E063249FE004621CD /* SearchFolder.nib */,
 				AA58148F0C4971EC003D0916 /* SearchPanel.nib */,
@@ -1481,10 +1483,6 @@
 				AA71097009BA74BF00E3EA8A /* rightArrow.tiff in Resources */,
 				AA71173709BEB70E00E3EA8A /* webpage.tiff in Resources */,
 				AA71187C09BFE19E00E3EA8A /* lockedPage.tiff in Resources */,
-				AA38C15D09FB196A00FAE2CD /* NewPreferences.nib in Resources */,
-				AA38C17909FB19BD00FAE2CD /* BrowserPane.nib in Resources */,
-				AA38C18009FB19CE00FAE2CD /* Downloads.nib in Resources */,
-				AA38C18E09FB19F000FAE2CD /* ActivityViewer.nib in Resources */,
 				AAED7ABA09FDE15D00ED56E5 /* InfoWindow.nib in Resources */,
 				AAED82FC0A037A4E00ED56E5 /* SNDisclosureArrowRight.tiff in Resources */,
 				AAED82FD0A037A4E00ED56E5 /* SNDisclosureArrowDown.tiff in Resources */,
@@ -1542,6 +1540,10 @@
 				AA58FB9D0C47B703003D0916 /* cancelRefreshButton.tiff in Resources */,
 				AA58FB9E0C47B703003D0916 /* cancelRefreshButtonPressed.tiff in Resources */,
 				AA5814900C4971EC003D0916 /* SearchPanel.nib in Resources */,
+				AA582D8D0C4A2B78003D0916 /* ActivityViewer.nib in Resources */,
+				AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */,
+				AA582DB90C4A2D85003D0916 /* Downloads.nib in Resources */,
+				AA582DC20C4A2DE0003D0916 /* NewPreferences.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2056,38 +2058,6 @@
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
 		};
-		AA38C15709FB196A00FAE2CD /* NewPreferences.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA38C15809FB196A00FAE2CD /* en */,
-			);
-			name = NewPreferences.nib;
-			sourceTree = "<group>";
-		};
-		AA38C17309FB19BD00FAE2CD /* BrowserPane.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA38C17409FB19BD00FAE2CD /* en */,
-			);
-			name = BrowserPane.nib;
-			sourceTree = "<group>";
-		};
-		AA38C17A09FB19CE00FAE2CD /* Downloads.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA38C17B09FB19CE00FAE2CD /* en */,
-			);
-			name = Downloads.nib;
-			sourceTree = "<group>";
-		};
-		AA38C18809FB19F000FAE2CD /* ActivityViewer.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA38C18909FB19F000FAE2CD /* en */,
-			);
-			name = ActivityViewer.nib;
-			sourceTree = "<group>";
-		};
 		AA3BDC9E063249FE004621CD /* SearchFolder.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2233,21 +2203,23 @@
 		AAE3AEF406570DB700A1FA1F /* Vienna Help */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA23FB4209FAAF7800980D91 /* de */,
 				AA38C19109FB19FA00FAE2CD /* en */,
+				AACC06DF0B1CC6F200971CFB /* da */,
+				AA23FB4209FAAF7800980D91 /* de */,
 				AA68530609FB047200329883 /* es */,
 				AA68540809FB081A00329883 /* fr */,
 				AA68531409FB047900329883 /* it */,
 				AA6854ED09FB0BC900329883 /* ja */,
-				6172B48809E2080B001FB418 /* nl */,
-				AAD77F4C09FBCF91003DBD47 /* sv */,
-				AAA5814F09AA52B400602469 /* zh_TW */,
-				AA517DCA0AA4ECF8001E8CA1 /* pt_BR */,
 				AACC2D650AB9DDF600D02B04 /* ko */,
+				6172B48809E2080B001FB418 /* nl */,
+				AA517DCA0AA4ECF8001E8CA1 /* pt_BR */,
+				AAD77F4C09FBCF91003DBD47 /* sv */,
 				AA6D2EA20ACC6D790044C00C /* zh_CN */,
+				AAA5814F09AA52B400602469 /* zh_TW */,
 				AACC06D00B1CC6DD00971CFB /* cs */,
-				AACC06DF0B1CC6F200971CFB /* da */,
 				AA3CB63A0BE132D2009119BB /* eus */,
+				AA582DEF0C4A3229003D0916 /* ru */,
+				AA582E010C4A32CC003D0916 /* uk */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
