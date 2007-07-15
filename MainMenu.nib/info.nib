@@ -11,7 +11,7 @@
 		<key>1227</key>
 		<string>660 515 120 142 0 0 1440 878 </string>
 		<key>1251</key>
-		<string>505 578 430 64 0 0 1440 878 </string>
+		<string>505 578 259 64 0 0 1440 878 </string>
 		<key>1267</key>
 		<string>690 575 60 70 0 0 1440 878 </string>
 		<key>1288</key>
@@ -36,6 +36,7 @@
 	<key>IBOpenObjects</key>
 	<array>
 		<integer>29</integer>
+		<integer>1251</integer>
 	</array>
 	<key>IBSystem Version</key>
 	<string>8R2218</string>
