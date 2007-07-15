@@ -30,4 +30,5 @@
 // Public functions
 -(IBAction)searchStringChanged:(id)sender;
 -(void)runSearchPanel:(NSWindow *)window;
+-(void)setSearchString:(NSString *)newSearchString;
 @end
