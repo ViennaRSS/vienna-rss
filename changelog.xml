@@ -7,12 +7,12 @@
 		<language>en-us</language>
 		<copyright>Copyright 2007, Steve Palmer</copyright>
 		<item>
-			<title>Vienna $(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER)</title>
+			<title>Vienna $(VIENNA_VERSION_NUMBER).$(BUILD_NUMBER)</title>
 			<pubDate>Thu, 5 Jul 2007 00:00:00 +0100</pubDate>
-			<link>http://kent.dl.sourceforge.net/sourceforge/vienna-rss/Vienna$(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER).zip</link>
-			<enclosure sparkle:version="$(VIENNA_BUILD_NUMBER)" url="http://kent.dl.sourceforge.net/sourceforge/vienna-rss/Vienna$(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER).zip" 
+			<link>http://kent.dl.sourceforge.net/sourceforge/vienna-rss/Vienna$(VIENNA_VERSION_NUMBER).$(BUILD_NUMBER).zip</link>
+			<enclosure sparkle:version="$(BUILD_NUMBER)" url="http://kent.dl.sourceforge.net/sourceforge/vienna-rss/Vienna$(VIENNA_VERSION_NUMBER).$(BUILD_NUMBER).zip" 
 type="application/octet-stream"/>
-			<sparkle:releaseNotesLink>http://vienna-rss.sourceforge.net/noteson$(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER).html</sparkle:releaseNotesLink>
+			<sparkle:releaseNotesLink>http://vienna-rss.sourceforge.net/noteson$(VIENNA_VERSION_NUMBER).$(BUILD_NUMBER).html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
 </rss>
