@@ -5,16 +5,14 @@
 		<link>http://www.opencommunity.co.uk/vienna_chglist.html</link>
 		<description>Vienna Changelog.</description>
 		<language>en-us</language>
-		<copyright>Copyright 2006, Steve Palmer</copyright>
+		<copyright>Copyright 2007, Steve Palmer</copyright>
 		<item>
-			<title>Vienna </title>
-			<pubDate>Wed, 15 Jun 2006 00:00:00 +0100</pubDate>
-			<enclosure sparkle:version="2100" url="http://osdn.dl.sourceforge.net/sourceforge/vienna-rss/vienna-2100.tar.gz" length="3161214" type="application/octet-stream"/>
-			<description><![CDATA[
-<ul>
-	<li></li>
-</ul>
-]]></description>
+			<title>Vienna $(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER)</title>
+			<pubDate>Thu, 5 Jul 2007 00:00:00 +0100</pubDate>
+			<link>http://kent.dl.sourceforge.net/sourceforge/vienna-rss/Vienna$(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER).zip</link>
+			<enclosure sparkle:version="$(VIENNA_BUILD_NUMBER)" url="http://kent.dl.sourceforge.net/sourceforge/vienna-rss/Vienna$(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER).zip" 
+type="application/octet-stream"/>
+			<sparkle:releaseNotesLink>http://vienna-rss.sourceforge.net/noteson$(VIENNA_VERSION_NUMBER).$(VIENNA_BUILD_NUMBER).html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
 </rss>
