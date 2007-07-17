@@ -75,7 +75,6 @@
             CLASS = AppController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
-                actionPopup = PopupButton; 
                 articleController = ArticleController; 
                 articleFrame = NSView; 
                 blogWithMenu = NSMenuItem; 

@@ -285,7 +285,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// we will need them if they are added back later.
 	[spinner retain];
 	[searchView retain];
-	[blogWithPopup retain];
 }
 
 /* installCustomEventHandler
@@ -3064,7 +3063,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)setFocusToSearchField:(id)sender
 {
-	if ([[mainWindow toolbar] isVisible] && [self toolbarItemWithIdentifier:@"SearchItem"])
+	if ([[mainWindow toolbar] isVisible] && [self toolbarItemWithIdentifier:@"SearchItem"] && [[mainWindow toolbar] displayMode] != NSToolbarDisplayModeLabelOnly)
 		[mainWindow makeFirstResponder:searchField];
 	else
 	{
