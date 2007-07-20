@@ -1621,6 +1621,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Add it to the Filters menu
 	[filtersMenu setSubmenu:filterSubMenu];
 	[filterViewPopUp setMenu:filterPopupMenu];
+	
+	// Sync the popup selection with user preferences
+	int indexOfDefaultItem = [filterViewPopUp indexOfItemWithTag:[[Preferences standardPreferences] filterMode]];
+	if (indexOfDefaultItem != -1)
+	{
+		[filterViewPopUp selectItemAtIndex:indexOfDefaultItem];
+	}
 }
 
 /* updateNewArticlesNotification
