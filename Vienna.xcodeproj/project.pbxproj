@@ -91,7 +91,6 @@
 		AA55E4A6086C6C8200D7DBFA /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */; };
 		AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
 		AA5814900C4971EC003D0916 /* SearchPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA58148F0C4971EC003D0916 /* SearchPanel.nib */; };
-		AA5814980C4972BB003D0916 /* SearchPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA5814960C4972BB003D0916 /* SearchPanel.h */; };
 		AA5814990C4972BB003D0916 /* SearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5814970C4972BB003D0916 /* SearchPanel.m */; };
 		AA582D8D0C4A2B78003D0916 /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D880C4A2B78003D0916 /* ActivityViewer.nib */; };
 		AA582DA10C4A2C66003D0916 /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */; };
@@ -283,7 +282,6 @@
 				478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */,
 				AA610C1509EF6745005C6903 /* NewsParser.framework in CopyFiles */,
 				AA62D7FC0859ABEC0040C370 /* Growl.framework in CopyFiles */,
-				AA5814980C4972BB003D0916 /* SearchPanel.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
