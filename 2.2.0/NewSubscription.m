@@ -336,8 +336,11 @@
 		urlString = [@"http://" stringByAppendingString:urlString];
 		url = [NSURL URLWithString:urlString];
 	}
-
-	NSData * urlContent = [NSData dataWithContentsOfURL:url];
+	
+	// Use this rather than [NSData dataWithContentsOfURL:],
+	// because that method will not necessarily unzip gzipped content from server.
+	// Thanks to http://www.omnigroup.com/mailman/archive/macosx-dev/2004-March/051547.html
+	NSData * urlContent = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:NULL error:NULL];
 	if (urlContent == nil)
 		return feedURLString;
 
