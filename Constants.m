@@ -72,6 +72,8 @@ const float MA_Default_Read_Interval = 0.5;
 const float MA_Default_Selection_Change_Interval = 0.0;
 const int MA_Default_AutoExpireDuration = 0;
 const int MA_Default_Check_Frequency = 10800;
+const float MA_Default_Main_Window_Min_Width = 700.0;
+const float MA_Default_Main_Window_Min_Height = 350.0;
 
 // Constants for External Weblog Editor Interface according to http://ranchero.com/netnewswire/developers/externalinterface.php
 // We are not using all of them yet, but they might become useful in the future.

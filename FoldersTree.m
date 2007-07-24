@@ -953,7 +953,7 @@
 		// Set up to change selection after an elapsed period.
 		[selectionTimer invalidate];
 		[selectionTimer release];
-		selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(startSelectionChange:) userInfo:node repeats:NO] retain];
+		selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:MA_Default_Selection_Change_Interval target:self selector:@selector(startSelectionChange:) userInfo:node repeats:NO] retain];
 	}
 }
 
