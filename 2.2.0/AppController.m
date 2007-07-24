@@ -160,6 +160,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:[self appName]];
 	[NSApp setDelegate:self];
+	[mainWindow setMinSize: NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height)];
 
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
