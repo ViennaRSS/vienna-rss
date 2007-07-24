@@ -3891,7 +3891,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[spinner setDisplayedWhenStopped:NO];
 			[spinner setTarget:self];
 			[spinner setAction:@selector(toggleActivityViewer:)];
-			
+			[spinner setHidden:NO];
+
 			//Ensure the spinner has the proper state; it may be added while we're refreshing
 			if ([NSApp isRefreshing])
 				[spinner startAnimation:self];
@@ -3942,7 +3943,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSToolbarFlexibleSpaceItemIdentifier,
 		@"SearchItem",
 		NSToolbarFlexibleSpaceItemIdentifier,
-		@"Spinner",
 		nil];
 }
 
