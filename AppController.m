@@ -1089,13 +1089,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)downloadEnclosure:(id)sender
 {
-	Article * selectedMessage = [self selectedArticle];
-	if ([selectedMessage hasEnclosure])
+	NSArray * articleArray = [mainArticleView markedArticleRange];	
+	if ([articleArray count] > 0) 
 	{
-		NSString * filename = [[selectedMessage enclosure] lastPathComponent];
-		NSString * destPath = [DownloadManager fullDownloadPath:filename];
-
-		[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[selectedMessage enclosure]];
+		NSEnumerator *e = [articleArray objectEnumerator];
+		id currentArticle;
+		
+		while ( (currentArticle = [e nextObject]) ) 
+		{
+			if ([currentArticle hasEnclosure])
+			{
+				NSString * filename = [[currentArticle enclosure] lastPathComponent];
+				NSString * destPath = [DownloadManager fullDownloadPath:filename];
+				[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[currentArticle enclosure]];
+			}
+		}
 	}
 }
 
