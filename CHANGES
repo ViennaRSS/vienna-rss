@@ -4,13 +4,20 @@ Vienna ChangeLog File
 As you release new builds, update this file with details of the changes in each build. The
 most recent build should be at the top of this file.
 
+** Use the notes.html file instead of this file for change notes?
+
 Thanks!
+
+2.2.0.2205
+----------
+
 
 2.2.0.2204
 ----------
-** Use the notes.html file instead of this file for change notes?
+- Fixed bug: on launch, filter popup didn't reflect filter setting.
 - Make Refresh toolbar button toggle between refresh and cancel.
 - Add Search panel for when the toolbar is turned off or the Search field is removed from the toolbar.
+- Fix feed autodiscovery for servers that gzip content.
 
 2.2.0.2203
 ----------
