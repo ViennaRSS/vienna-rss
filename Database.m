@@ -1272,7 +1272,7 @@ static Database * _sharedDatabase = nil;
 	if (searchFolder == nil)
 	{
 		int folderId = [self addFolder:MA_Root_Folder afterChild:0 folderName: NSLocalizedString(@"Search Results", nil) type:MA_Search_Folder canAppendIndex:YES];
-		searchFolder = [self folderFromID:folderId];
+		searchFolder = [[self folderFromID:folderId] retain];
 	}
 	return [searchFolder itemId];
 }
