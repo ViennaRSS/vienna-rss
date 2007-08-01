@@ -2839,6 +2839,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// collection of them.
 	NSString * alertBody = nil;
 	NSString * alertTitle = nil;
+	BOOL needPrompt = YES;
 	
 	if (count == 1)
 	{
@@ -2848,6 +2849,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete smart folder text", nil), [folder name]];
 			alertTitle = NSLocalizedString(@"Delete smart folder", nil);
 		}
+		else if (IsSearchFolder(folder))
+			needPrompt = NO;
 		else if (IsRSSFolder(folder))
 		{
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete RSS feed text", nil), [folder name]];
@@ -2870,10 +2873,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Get confirmation first
-	int returnCode;
-	returnCode = NSRunAlertPanel(alertTitle, alertBody, NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil);
-	if (returnCode == NSAlertAlternateReturn)
-		return;
+	if (needPrompt)
+	{
+		int returnCode;
+		returnCode = NSRunAlertPanel(alertTitle, alertBody, NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil);
+		if (returnCode == NSAlertAlternateReturn)
+			return;
+	}
 	
 	// End any editing
 	if (rssFeed != nil)
@@ -3631,7 +3637,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(deleteFolder:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && !IsTrashFolder(folder) && !IsSearchFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		if (IsSearchFolder(folder))
+			[menuItem setTitle:NSLocalizedString(@"Delete", nil)];
+		else
+			[menuItem setTitle:NSLocalizedString(@"Delete...", nil)];
+		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
