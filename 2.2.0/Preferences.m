@@ -112,7 +112,6 @@ static Preferences * _standardPreferences = nil;
 			NSFileManager * fileManager = [NSFileManager defaultManager];
 			BOOL isDir;
 
-			[profilePath retain];
 			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
 			{
 				if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
@@ -126,6 +125,7 @@ static Preferences * _standardPreferences = nil;
 			// name plus the .plist extension. (This is the same convention used by NSUserDefaults.)
 			if (profilePath != nil)
 			{
+				[profilePath retain];
 				NSDictionary * fileAttributes = [[NSBundle mainBundle] infoDictionary];
 				preferencesPath = [profilePath stringByAppendingPathComponent:[fileAttributes objectForKey:@"CFBundleIdentifier"]];
 				preferencesPath = [[preferencesPath stringByAppendingString:@".plist"] retain];
@@ -170,6 +170,21 @@ static Preferences * _standardPreferences = nil;
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
+		
+		// Here is where we want to put any logic that depends on the last or highest version of Vienna that has been run.
+		NSString * bundleVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+		if (bundleVersionString != nil)
+		{
+			int bundleVersion = [bundleVersionString intValue];
+			if (bundleVersion > 0)
+			{
+				if (bundleVersion > [self integerForKey:MAPref_HighestViennaVersionRun])
+				{
+					[self setInteger:bundleVersion forKey:MAPref_HighestViennaVersionRun];
+				}
+				[self setInteger:bundleVersion forKey:MAPref_LastViennaVersionRun];
+			}
+		}
 	}
 	return self;
 }
@@ -246,6 +261,8 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Layout_Report] forKey:MAPref_Layout];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_NewArticlesNotification_Badge] forKey:MAPref_NewArticlesNotification];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_EmptyTrash_WithWarning] forKey:MAPref_EmptyTrashNotification];
+	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_HighestViennaVersionRun];
+	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_LastViennaVersionRun];
 
 	return defaultValues;
 }
