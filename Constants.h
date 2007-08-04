@@ -65,6 +65,8 @@ extern NSString * MAPref_ShowAppInStatusBar;
 extern NSString * MAPref_ShowStatusBar;
 extern NSString * MAPref_ShowFilterBar;
 extern NSString * MAPref_NewFolderUI;
+extern NSString * MAPref_LastViennaVersionRun;
+extern NSString * MAPref_HighestViennaVersionRun;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
