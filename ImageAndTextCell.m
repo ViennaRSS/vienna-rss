@@ -354,6 +354,7 @@
 	cellFrame.origin.x += 2;
 	
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
+	[attributes release];
 }
 
 /* selectWithFrame
