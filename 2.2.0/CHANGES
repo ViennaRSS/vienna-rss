@@ -11,6 +11,8 @@ Thanks!
 2.2.0.2205
 ----------
 - Allow the Search Results folder to be deleted.
+- Fix memory leak.
+- Minor toolbar button cleanup.
 
 2.2.0.2204
 ----------
