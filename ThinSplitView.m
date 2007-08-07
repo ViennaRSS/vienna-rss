@@ -27,9 +27,7 @@
  */
 -(float)dividerThickness
 {
-	if ([self isVertical])
-		return 1;
-	return 8.0;
+	return [self isVertical] ? 1.0 : 8.0;
 }
 
 /* drawDividerInRect
@@ -40,29 +38,20 @@
 	if ([self isVertical])
 	{
 		[[NSColor colorWithCalibratedWhite:0.4 alpha:1] set];
-		NSRectFill (aRect);
+		NSRectFill(aRect);
 	}
 	else
 	{
-		NSImage * grip = [NSImage imageNamed:@"DBListSplitViewDimple.tiff"];
-		NSImage * bar = [NSImage imageNamed:@"DBListSplitViewBar.tiff"];
-		[bar setFlipped:YES];
-		[grip setFlipped:YES];
+		NSImage * grip = [NSImage imageNamed:@"DBListSplitViewDimple"];
+		NSImage * bar = [NSImage imageNamed:@"DBListSplitViewBar"];
+		NSRect gripRect = NSMakeRect(NSMinX(aRect) + (NSWidth(aRect) - [grip size].width) / 2,
+                                     NSMinY(aRect) + (NSHeight(aRect) - [grip size].height) / 2,
+                                     [grip size].width,
+                                     [grip size].height);
+        
+		[bar drawInRect: aRect fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];
+		[grip drawInRect: gripRect fromRect: NSZeroRect operation: NSCompositeSourceOver fraction: 1.0];
 
-		NSImage * canvas = [[[NSImage alloc] initWithSize:aRect.size]  autorelease];
-		NSRect canvasRect = NSMakeRect(0, 0, [canvas size].width, [canvas size].height);
-		NSRect gripRect = NSMakeRect(0,2, [canvas size].width, [canvas size].height);
-		gripRect.origin.x = (NSMidX(aRect)*1 - ([grip size].width/2));
-
-		[canvas lockFocus];
-		[bar setSize:aRect.size];
-		[bar drawInRect:canvasRect fromRect:canvasRect operation:NSCompositeSourceOver fraction:1.0];
-		[grip drawInRect:gripRect fromRect:canvasRect operation:NSCompositeSourceOver fraction:1.0];
-		[canvas unlockFocus];
-
-		[self lockFocus];
-		[canvas drawInRect:aRect fromRect:canvasRect operation:NSCompositeSourceOver fraction:1.0];
-		[self unlockFocus];
 	}
 }
 @end
