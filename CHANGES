@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.2.0.2206
+----------
+- Updated German localisation.
+- Fixed overpainting bug in Download window.
+
 2.2.0.2205
 ----------
 - Allow the Search Results folder to be deleted.
