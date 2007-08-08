@@ -43,7 +43,6 @@
 	NSImage * refreshProgressImage;
 	BOOL blockSelectionHandler;
 	BOOL canRenameFolders;
-	BOOL useNewFolderUI;
 }
 
 // Public functions
