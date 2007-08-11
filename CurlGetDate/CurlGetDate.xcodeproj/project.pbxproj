@@ -239,6 +239,47 @@
 			};
 			name = Deployment;
 		};
+		525D65660C6DF00000C11635 /* DeploymentWithSymbols */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CurlGetDate_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "@executable_path/../Frameworks";
+				OTHER_LDFLAGS = "-lcurl";
+				PRODUCT_NAME = CurlGetDate;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = DeploymentWithSymbols;
+		};
+		525D65670C6DF00000C11635 /* DeploymentWithSymbols */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DEBUGGING_SYMBOLS = full;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
+				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "$(PROJECT_DIR)/../build";
+			};
+			name = DeploymentWithSymbols;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -247,6 +288,7 @@
 			buildConfigurations = (
 				1DEB91AE08733DA50010E9CD /* Development */,
 				1DEB91AF08733DA50010E9CD /* Deployment */,
+				525D65660C6DF00000C11635 /* DeploymentWithSymbols */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -256,6 +298,7 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Development */,
 				1DEB91B308733DA50010E9CD /* Deployment */,
+				525D65670C6DF00000C11635 /* DeploymentWithSymbols */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
