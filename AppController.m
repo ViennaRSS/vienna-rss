@@ -92,7 +92,7 @@
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
-	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url author:(NSString *)author guid:(NSString *)guid;
+	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
 	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
 	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholder;
@@ -3283,7 +3283,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// If the active tab is a web view, blog the URL
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
-		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabItemViewTitle:[browserView activeTabItemView]] url:[theView viewLink] author:@"" guid:@""];
+		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabItemViewTitle:[browserView activeTabItemView]] url:[theView viewLink] body:[NSApp currentSelection] author:@"" guid:@""];
 	else
 	{
 		// Get the currently selected articles from the ArticleView ...
@@ -3293,14 +3293,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		// ... and iterate over them.
 		while ((currentArticle = [e nextObject]) != nil) 
-			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] author:[currentArticle author] guid:[currentArticle guid]];
+			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] body:[NSApp currentSelection] author:[currentArticle author] guid:[currentArticle guid]];
 	}
 }
 
 /* sendBlogEvent
  * Send an event to the specified blog editor using the given parameters. Unused parameters should be set to an empty string.
  */
--(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url author:(NSString *)author guid:(NSString *)guid
+-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid
 {
 	NSAppleEventDescriptor * eventRecord;
 	NSAppleEventDescriptor * target;
@@ -3324,6 +3324,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Inserting the data about the post we want the target to create.
 	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:title] forKeyword:DataItemTitle];
 	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:url] forKeyword:DataItemLink];
+	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:body] forKeyword:DataItemDescription];
 	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:author] forKeyword:DataItemCreator];
 	[eventRecord setDescriptor:[NSAppleEventDescriptor descriptorWithString:guid] forKeyword:DataItemGUID];
 	
