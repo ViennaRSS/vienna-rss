@@ -329,7 +329,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		// Make article list the first responder
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
 
-		[self loadOpenTabs];
+		// Start opening the old tabs once everything else has finished initializing and setting up
+		[self performSelector:@selector(loadOpenTabs)
+				   withObject:nil
+				   afterDelay:0];
 		doneSafeInit = YES;
 	}
 	didCompleteInitialisation = YES;
