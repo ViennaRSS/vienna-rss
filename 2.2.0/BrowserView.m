@@ -53,7 +53,10 @@
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
 	[tabBarControl setAutomaticallyAnimates:YES];
-	
+	[tabBarControl setSizeCellsToFit:YES];
+	[tabBarControl setCellMinWidth:60];
+	[tabBarControl setCellMaxWidth:350];
+
 	[tabBarControl setShowAddTabButton:YES];
 	[[tabBarControl addTabButton] setTarget:[NSApp delegate]];
 	[[tabBarControl addTabButton] setAction:@selector(newTab:)];
