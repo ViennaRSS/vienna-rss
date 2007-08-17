@@ -100,7 +100,8 @@ enum {
     IBOutlet id                 partnerView;                // gets resized when hide/show
     BOOL                        _awakenedFromNib;
 	int							_tabBarWidth;
-    
+    NSTimer						*_showHideAnimationTimer;
+
     // drag and drop
     NSEvent                     *_lastMouseDownEvent;      // keep this for dragging reference
 	BOOL						_didDrag;
@@ -211,6 +212,7 @@ enum {
 
 //Overflow menu validation
 - (BOOL)tabView:(NSTabView *)aTabView validateOverflowMenuItem:(id <NSMenuItem>)menuItem forTabViewItem:(NSTabViewItem *)tabViewItem;
+- (void)tabView:(NSTabView *)aTabView tabViewItem:(NSTabViewItem *)tabViewItem isInOverflowMenu:(BOOL)inOverflowMenu;
 
 //tab bar hiding methods
 - (void)tabView:(NSTabView *)aTabView tabBarDidHide:(PSMTabBarControl *)tabBarControl;
