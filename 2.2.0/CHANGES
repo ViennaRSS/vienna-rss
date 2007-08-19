@@ -11,6 +11,7 @@ Thanks!
 2.2.0.2207
 ----------
 - Add patch to pass selected text to blogging clients. (Contributed by Pukka author Justin R. Miller).
+- Fix exception caused by misparsing author field in some Atom feed items.
 
 2.2.0.2206
 ----------
