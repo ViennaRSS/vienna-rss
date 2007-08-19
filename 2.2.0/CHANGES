@@ -8,10 +8,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.2.0.2208
+----------
+- 
+
 2.2.0.2207
 ----------
 - Add patch to pass selected text to blogging clients. (Contributed by Pukka author Justin R. Miller).
 - Fix exception caused by misparsing author field in some Atom feed items.
+- Fix "CGContextRestoreGState: invalid context" errors reported to the console log.
 
 2.2.0.2206
 ----------
