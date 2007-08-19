@@ -1625,6 +1625,7 @@
 				"$(SRCROOT)/de.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/de.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/de.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/de.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index de Help";
 			outputPaths = (
@@ -1644,6 +1645,7 @@
 				"$(SRCROOT)/pt_BR.lproj/Vienna Help/faq.html",
 				"$(SRCROOT)/pt_BR.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/pt_BR.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/pt_BR.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index pt_BR Help";
 			outputPaths = (
@@ -1663,6 +1665,7 @@
 				"$(SRCROOT)/ko.lproj/Vienna Help/faq.html",
 				"$(SRCROOT)/ko.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/ko.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/ko.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index ko Help";
 			outputPaths = (
@@ -1682,6 +1685,7 @@
 				"$(SRCROOT)/zh_CN.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/zh_CN.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/zh_CN.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/zh_CN.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index zh_CN Help";
 			outputPaths = (
@@ -1697,6 +1701,7 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/en.lproj/Vienna Help/advanced.html",
 				"$(SRCROOT)/en.lproj/Vienna Help/faq.html",
 				"$(SRCROOT)/en.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/en.lproj/Vienna Help/intro.html",
@@ -1720,6 +1725,7 @@
 				"$(SRCROOT)/nl.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/nl.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/nl.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/nl.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index nl Help";
 			outputPaths = (
@@ -1739,6 +1745,7 @@
 				"$(SRCROOT)/es.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/es.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/es.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/es.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index es Help";
 			outputPaths = (
@@ -1758,6 +1765,7 @@
 				"$(SRCROOT)/ja.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/ja.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/ja.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/ja.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index ja Help";
 			outputPaths = (
@@ -1777,6 +1785,7 @@
 				"$(SRCROOT)/fr.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/fr.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/fr.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/fr.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index fr Help";
 			outputPaths = (
@@ -1796,6 +1805,7 @@
 				"$(SRCROOT)/sv.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/sv.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/sv.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/sv.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index sv Help";
 			outputPaths = (
@@ -1815,6 +1825,7 @@
 				"$(SRCROOT)/it.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/it.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/it.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/it.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index it Help";
 			outputPaths = (
@@ -1834,6 +1845,7 @@
 				"$(SRCROOT)/zh_TW.lproj/Vienna Help/index.html",
 				"$(SRCROOT)/zh_TW.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/zh_TW.lproj/Vienna Help/keyboard.html",
+				"$(SRCROOT)/zh_TW.lproj/Vienna Help/advanced.html",
 			);
 			name = "Index zh_TW Help";
 			outputPaths = (
