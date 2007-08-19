@@ -966,8 +966,11 @@
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"author"])
 				{
-					XMLParser * emailTree = [subItemTree treeByName:@"name"];
-					[newItem setAuthor:[emailTree valueOfElement]];
+					NSString * authorName = [[subItemTree treeByName:@"name"] valueOfElement];
+					if (authorName == nil)
+						authorName = [[subItemTree treeByName:@"email"] valueOfElement];
+					if (authorName != nil)
+						[newItem setAuthor:authorName];
 					continue;
 				}
 				
