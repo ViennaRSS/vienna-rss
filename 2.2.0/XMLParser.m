@@ -164,11 +164,13 @@
  */
 -(void)addElement:(NSString *)value
 {
-	CFXMLNodeRef newNode = CFXMLNodeCreate(kCFAllocatorDefault, kCFXMLNodeTypeText, (CFStringRef)value, NULL, kCFXMLNodeCurrentVersion);   
+	CFStringRef escapedString = CFXMLCreateStringByEscapingEntities(kCFAllocatorDefault, (CFStringRef)value, NULL);
+	CFXMLNodeRef newNode = CFXMLNodeCreate(kCFAllocatorDefault, kCFXMLNodeTypeText, escapedString, NULL, kCFXMLNodeCurrentVersion);   
 	CFXMLTreeRef newTree = CFXMLTreeCreateWithNode(kCFAllocatorDefault, newNode);
 	CFTreeAppendChild(tree, newTree);
 	CFRelease(newTree);
 	CFRelease(newNode);
+	CFRelease(escapedString);
 }
 
 /* addClosedTree:withAttributes
