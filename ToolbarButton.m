@@ -84,10 +84,7 @@
 	[super setImage:image];
 	if (image != nil)
 	{
-		// Small size is about 3/4 the size of the regular image or
-		// generally 24x24.
 		imageSize = [image size];
-		smallImageSize = NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80);
 	}
 }
 
@@ -127,27 +124,41 @@
 		// When switching to regular size, if we have small versions then we
 		// can assume that we're switching from those small versions. So we
 		// need to replace the button image.
-		if (smallImage)
-			[super setImage:image];
-		if (smallAlternateImage)
-			[super setAlternateImage:alternateImage];
+		[super setImage:image];
+		[super setAlternateImage:alternateImage];
 		s = imageSize;
 	}
 	else
 	{
 		// When switching to small size, use the small size images if they were
 		// provided. Otherwise the button will scale the image down for us.
-		if (smallImage)
-			[super setImage:smallImage];
-		if (smallAlternateImage)
-			[super setAlternateImage:smallAlternateImage];
+		if (smallImage == nil)
+		{
+			NSImage * scaledDownImage = [image copy];
+			[scaledDownImage setScalesWhenResized:YES];
+			// Small size is about 3/4 the size of the regular image or
+			// generally 24x24.
+			[scaledDownImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
+			[self setSmallImage:scaledDownImage];
+			[scaledDownImage release];
+		}
+		if (smallAlternateImage == nil)
+		{
+			NSImage * scaledDownAlternateImage = [image copy];
+			[scaledDownAlternateImage setScalesWhenResized:YES];
+			// Small size is about 3/4 the size of the regular image or
+			// generally 24x24.
+			[scaledDownAlternateImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
+			[self setSmallImage:scaledDownAlternateImage];
+			[scaledDownAlternateImage release];
+		}
+		[super setImage:smallImage];
+		[super setAlternateImage:smallAlternateImage];
 		s = smallImageSize;
 	}
 
 	[item setMinSize:s];
 	[item setMaxSize:s];
-	[[super image] setSize:s];
-	[[super alternateImage] setSize:s];
 }
 
 /* dealloc
