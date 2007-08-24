@@ -41,7 +41,13 @@
 		// behave like toolbar buttons.
 		[self setButtonType:NSMomentaryChangeButton];
 		[self setBordered:NO];
+		
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
 		[self setBezelStyle:NSSmallSquareBezelStyle];
+#else
+		[self setBezelStyle:NSShadowlessSquareBezelStyle];
+#endif
+		
 		[self setImagePosition:NSImageOnly];
 	}
 	return self;

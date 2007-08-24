@@ -293,10 +293,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// In condensed mode, the summary field takes up the whole space.
 	// The method setColumnAutoresizingStyle does not exist in Mac OS X 10.3.9.
-	if ([articleList respondsToSelector:@selector(setColumnAutoresizingStyle:)])
-		[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
-	else
-		[articleList setAutoresizesAllColumnsToFit:YES];
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
+	[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
+#else
+	[articleList setAutoresizesAllColumnsToFit:YES];
+#endif
 	
 	// Set up the corner button for chosing the visible columns.
 	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
@@ -533,10 +534,11 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[headerCell setTitle:[field displayName]];
 			[column setEditable:NO];
 			// The method setResizingMask does not exist in 10.3.9.
-			if ([column respondsToSelector:@selector(setResizingMask:)])
-				[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
-			else
-				[column setResizable:isResizable];
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
+			[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
+#else
+			[column setResizable:isResizable];
+#endif
 			[column setMinWidth:10];
 			[column setMaxWidth:1000];
 			[column setWidth:[field width]];

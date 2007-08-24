@@ -196,7 +196,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES]; 
 	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
 	[toolbar setShowsBaselineSeparator:NO];
+#endif
 	[mainWindow setToolbar:toolbar];
 
 	// Run the auto-expire now
