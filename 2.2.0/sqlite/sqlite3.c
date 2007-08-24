@@ -15488,6 +15488,12 @@ static int allocateUnixFile(
 ** Interfaces for opening a shared library, finding entry points
 ** within the shared library, and closing the shared library.
 */
+
+// This is for Mac OS X 10.3 Panther compatibility
+#ifndef DLOPEN_NO_WARN
+#define DLOPEN_NO_WARN
+#endif
+
 #include <dlfcn.h>
 static void *sqlite3UnixDlopen(const char *zFilename){
   return dlopen(zFilename, RTLD_NOW | RTLD_GLOBAL);

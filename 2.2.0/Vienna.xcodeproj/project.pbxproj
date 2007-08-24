@@ -2525,8 +2525,8 @@
 				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
 				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
 				PREBINDING = NO;
-				SDKROOT_PPC = /Developer/SDKs/MacOSX10.3.9.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VIENNA_VERSION_NUMBER = 2.2.0;
 			};
@@ -2743,8 +2743,8 @@
 				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
 				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
 				PREBINDING = NO;
-				SDKROOT_PPC = /Developer/SDKs/MacOSX10.3.9.sdk;
 				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT_ppc = /Developer/SDKs/MacOSX10.3.9.sdk;
 				VIENNA_VERSION_NUMBER = 2.2.0;
 			};
 			name = Deployment;

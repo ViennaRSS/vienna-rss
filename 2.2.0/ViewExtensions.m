@@ -20,6 +20,8 @@
 
 #import "ViewExtensions.h"
 
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
+
 @interface TaggedViewAnimation : NSViewAnimation {
 	int tagValue;
 }
@@ -48,6 +50,8 @@
 }
 @end
 
+#endif
+
 @implementation NSView (ViewExtensions)
 
 /* resizeViewWithAnimation
@@ -55,26 +59,25 @@
  */
 -(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag
 {
-	SInt32 MacVersion;
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
+	NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+		[NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
+		self, NSViewAnimationTargetKey,
+		nil, nil];
 	
-	if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion >= 0x1040)
-	{
-		NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
-			self, NSViewAnimationTargetKey,
-			nil, nil];
-		
-		TaggedViewAnimation * animation = [[TaggedViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
-		[animation setAnimationBlockingMode:NSAnimationNonblocking];
-		[animation setDuration:0.1];
-		[animation setAnimationCurve:NSAnimationEaseInOut];
-		[animation setDelegate:self];
-		[animation setTag:viewTag];
-		[animation startAnimation];
-	}
-	else
-		[self setFrame:newFrame];
+	TaggedViewAnimation * animation = [[TaggedViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
+	[animation setAnimationBlockingMode:NSAnimationNonblocking];
+	[animation setDuration:0.1];
+	[animation setAnimationCurve:NSAnimationEaseInOut];
+	[animation setDelegate:self];
+	[animation setTag:viewTag];
+	[animation startAnimation];
+#else
+	[self setFrame:newFrame];
+#endif
 }
+
+#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
 
 /* animationDidEnd
  * Delegate function called when animation completes. (Mac OSX 10.4 or later only).
@@ -88,4 +91,7 @@
 	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
 		[[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
 }
+
+#endif
+
 @end
