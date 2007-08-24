@@ -20,25 +20,64 @@
 
 #import "ViewExtensions.h"
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
+#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
+typedef enum {
+    NSAnimationEaseInOut,       // default
+    NSAnimationEaseIn,
+    NSAnimationEaseOut,
+    NSAnimationLinear
+} NSAnimationCurve;
 
-@interface TaggedViewAnimation : NSViewAnimation {
-	int tagValue;
-}
+typedef enum {
+    NSAnimationBlocking,
+    NSAnimationNonblocking,
+    NSAnimationNonblockingThreaded
+} NSAnimationBlockingMode;
 
-// Public functions
+#ifndef NSViewAnimationEndFrameKey
+	//#define NSViewAnimationEndFrameKey @"NSViewAnimationEndFrameKey"
+#endif
+#ifndef NSViewAnimationTargetKey
+	//#define NSViewAnimationTargetKey @"NSViewAnimationTargetKey"
+#endif
+
+@interface NSObject (AnimationInterfaceForCompiler)
+- (void)setAnimationBlockingMode:(NSAnimationBlockingMode)animationBlockingMode;
+- (void)setAnimationCurve:(NSAnimationCurve)curve;
+- (void)setDelegate:(id)delegate;
+- (void)setTag:(int)tag;
+- (void)setDuration:(float)duration;
+- (void)startAnimation;
+
+- (id)initWithViewAnimations:(NSArray *)animations;
+@end
+#endif
+
+@interface NSObject (ObjectWithTags)
 -(void)setTag:(int)newTag;
 -(int)tag;
 @end
 
-@implementation TaggedViewAnimation
+@implementation NSObject (ObjectWithTags)
+
+/* tagDict
+ * A dictionary used to simulate instance variables for our category
+ */
+- (NSMutableDictionary *)tagDict
+{
+	static NSMutableDictionary *tagDict = nil;
+	if (!tagDict) tagDict = [[NSMutableDictionary alloc] init];
+
+	return tagDict;
+}
 
 /* setTag
  * Assigns the specified tag value to the animation object.
  */
 -(void)setTag:(int)newTag
 {
-	tagValue = newTag;
+	[[self tagDict] setObject:[NSNumber numberWithInt:newTag]
+					   forKey:[NSValue valueWithPointer:self]];
 }
 
 /* tag
@@ -46,11 +85,9 @@
  */
 -(int)tag
 {
-	return tagValue;
+	return [[[self tagDict] objectForKey:[NSValue valueWithPointer:self]] intValue];
 }
 @end
-
-#endif
 
 @implementation NSView (ViewExtensions)
 
@@ -59,30 +96,34 @@
  */
 -(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag
 {
-#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
-	NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-		[NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
-		self, NSViewAnimationTargetKey,
-		nil, nil];
-	
-	TaggedViewAnimation * animation = [[TaggedViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
-	[animation setAnimationBlockingMode:NSAnimationNonblocking];
-	[animation setDuration:0.1];
-	[animation setAnimationCurve:NSAnimationEaseInOut];
-	[animation setDelegate:self];
-	[animation setTag:viewTag];
-	[animation startAnimation];
-#else
-	[self setFrame:newFrame];
-#endif
-}
+	Class viewAnimationClass = NSClassFromString(@"NSViewAnimation");
+	if (viewAnimationClass) {
+		NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+			[NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
+			self, NSViewAnimationTargetKey,
+			nil, nil];
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
+		id animation = [[viewAnimationClass alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
+		[animation setAnimationBlockingMode:NSAnimationNonblocking];
+		[animation setDuration:0.1];
+		[animation setAnimationCurve:NSAnimationEaseInOut];
+		[animation setDelegate:self];
+		[animation setTag:viewTag];
+		[animation startAnimation];
+
+	} else {
+		[self setFrame:newFrame];
+
+		//Inform the delegate immediately since we're not animating
+		if ([[[self window] delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
+			[[[self window] delegate] viewAnimationCompleted:self withTag:viewTag];
+	}
+}
 
 /* animationDidEnd
  * Delegate function called when animation completes. (Mac OSX 10.4 or later only).
  */
--(void)animationDidEnd:(TaggedViewAnimation *)animation
+-(void)animationDidEnd:(id)animation
 {
 	NSWindow * viewWindow = [self window];
 	int viewTag = [animation tag];
@@ -91,7 +132,5 @@
 	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
 		[[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
 }
-
-#endif
 
 @end
