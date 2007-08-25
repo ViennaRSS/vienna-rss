@@ -20,72 +20,49 @@
 
 #import "ViewExtensions.h"
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_4
-typedef enum {
-    NSAnimationEaseInOut,       // default
-    NSAnimationEaseIn,
-    NSAnimationEaseOut,
-    NSAnimationLinear
-} NSAnimationCurve;
-
-typedef enum {
-    NSAnimationBlocking,
-    NSAnimationNonblocking,
-    NSAnimationNonblockingThreaded
-} NSAnimationBlockingMode;
-
-#ifndef NSViewAnimationEndFrameKey
-	//#define NSViewAnimationEndFrameKey @"NSViewAnimationEndFrameKey"
-#endif
-#ifndef NSViewAnimationTargetKey
-	//#define NSViewAnimationTargetKey @"NSViewAnimationTargetKey"
-#endif
-
-@interface NSObject (AnimationInterfaceForCompiler)
-- (void)setAnimationBlockingMode:(NSAnimationBlockingMode)animationBlockingMode;
-- (void)setAnimationCurve:(NSAnimationCurve)curve;
-- (void)setDelegate:(id)delegate;
-- (void)setTag:(int)tag;
-- (void)setDuration:(float)duration;
-- (void)startAnimation;
-
-- (id)initWithViewAnimations:(NSArray *)animations;
-@end
-#endif
-
 @interface NSObject (ObjectWithTags)
--(void)setTag:(int)newTag;
--(int)tag;
+-(void)MA_setTag:(int)newTag;
+-(int)MA_tag;
 @end
 
 @implementation NSObject (ObjectWithTags)
 
-/* tagDict
+/* MA_tagDict
  * A dictionary used to simulate instance variables for our category
  */
-- (NSMutableDictionary *)tagDict
+- (NSMutableDictionary *)MA_tagDict
 {
 	static NSMutableDictionary *tagDict = nil;
-	if (!tagDict) tagDict = [[NSMutableDictionary alloc] init];
-
-	return tagDict;
+	NSMutableDictionary *returnDict = nil;
+	// The tagDict will only be used once.
+	if (tagDict)
+	{
+		returnDict = [tagDict autorelease];
+		tagDict = nil;
+	}
+	else
+	{
+		tagDict = [[NSMutableDictionary alloc] init];
+		returnDict = tagDict;
+	}
+	return returnDict;
 }
 
-/* setTag
+/* MA_setTag
  * Assigns the specified tag value to the animation object.
  */
--(void)setTag:(int)newTag
+-(void)MA_setTag:(int)newTag
 {
-	[[self tagDict] setObject:[NSNumber numberWithInt:newTag]
+	[[self MA_tagDict] setObject:[NSNumber numberWithInt:newTag]
 					   forKey:[NSValue valueWithPointer:self]];
 }
 
-/* tag
+/* MA_tag
  * Returns the associated tag.
  */
--(int)tag
+-(int)MA_tag
 {
-	return [[[self tagDict] objectForKey:[NSValue valueWithPointer:self]] intValue];
+	return [[[self MA_tagDict] objectForKey:[NSValue valueWithPointer:self]] intValue];
 }
 @end
 
@@ -101,14 +78,14 @@ typedef enum {
 		NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
 			[NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
 			self, NSViewAnimationTargetKey,
-			nil, nil];
+			nil];
 
 		id animation = [[viewAnimationClass alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
 		[animation setAnimationBlockingMode:NSAnimationNonblocking];
 		[animation setDuration:0.1];
 		[animation setAnimationCurve:NSAnimationEaseInOut];
 		[animation setDelegate:self];
-		[animation setTag:viewTag];
+		[animation MA_setTag:viewTag];
 		[animation startAnimation];
 
 	} else {
@@ -126,7 +103,7 @@ typedef enum {
 -(void)animationDidEnd:(id)animation
 {
 	NSWindow * viewWindow = [self window];
-	int viewTag = [animation tag];
+	int viewTag = [animation MA_tag];
 
 	[animation release];
 	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])

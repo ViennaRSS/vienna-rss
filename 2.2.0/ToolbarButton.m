@@ -42,11 +42,12 @@
 		[self setButtonType:NSMomentaryChangeButton];
 		[self setBordered:NO];
 		
-#if (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4)
-		[self setBezelStyle:NSSmallSquareBezelStyle];
-#else
-		[self setBezelStyle:NSShadowlessSquareBezelStyle];
-#endif
+		// NSSmallSquareBezelStyle does not exist in Mac OS X 10.3.9 Panther
+		SInt32 MacVersion;
+		if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion >= 0x1040)
+			[self setBezelStyle:NSSmallSquareBezelStyle];
+		else
+			[self setBezelStyle:NSShadowlessSquareBezelStyle];
 		
 		[self setImagePosition:NSImageOnly];
 	}
