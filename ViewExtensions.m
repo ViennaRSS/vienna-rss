@@ -32,20 +32,12 @@
  */
 - (NSMutableDictionary *)MA_tagDict
 {
-	static NSMutableDictionary *tagDict = nil;
-	NSMutableDictionary *returnDict = nil;
-	// The tagDict will only be used once.
-	if (tagDict)
+	static NSMutableDictionary *MATagDict = nil;
+	if (MATagDict == nil)
 	{
-		returnDict = [tagDict autorelease];
-		tagDict = nil;
+		MATagDict = [[NSMutableDictionary alloc] init];
 	}
-	else
-	{
-		tagDict = [[NSMutableDictionary alloc] init];
-		returnDict = tagDict;
-	}
-	return returnDict;
+	return MATagDict;
 }
 
 /* MA_setTag
@@ -62,7 +54,11 @@
  */
 -(int)MA_tag
 {
-	return [[[self MA_tagDict] objectForKey:[NSValue valueWithPointer:self]] intValue];
+	NSMutableDictionary *tagDict = [self MA_tagDict];
+	NSValue *key = [NSValue valueWithPointer:self];
+	int tag = [[tagDict objectForKey:key] intValue];
+	[tagDict removeObjectForKey:key];
+	return tag;
 }
 @end
 
