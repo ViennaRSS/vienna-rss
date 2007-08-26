@@ -11,6 +11,8 @@ Thanks!
 2.2.0.2208
 ----------
 - Fixed bug: ampersand in folder name broke smart folder criteria.
+- Fix shrinking toolbar button bug.
+- Fix problem where Vienna failed to launch under 10.3.9.
 
 2.2.0.2207
 ----------
