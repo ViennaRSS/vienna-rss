@@ -151,12 +151,12 @@
 		}
 		if (smallAlternateImage == nil)
 		{
-			NSImage * scaledDownAlternateImage = [image copy];
+			NSImage * scaledDownAlternateImage = [alternateImage copy];
 			[scaledDownAlternateImage setScalesWhenResized:YES];
 			// Small size is about 3/4 the size of the regular image or
 			// generally 24x24.
 			[scaledDownAlternateImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
-			[self setSmallImage:scaledDownAlternateImage];
+			[self setSmallAlternateImage:scaledDownAlternateImage];
 			[scaledDownAlternateImage release];
 		}
 		[super setImage:smallImage];
