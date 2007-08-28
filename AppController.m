@@ -2497,19 +2497,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)toggleOptionKeyButtonStates
 {
 	ToolbarItem * item = [self toolbarItemWithIdentifier:@"Subscribe"];
-	ToolbarButton * newButton = (ToolbarButton *)[item view];
 
 	if (!([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask)) 
 	{
-		[newButton setImage:[NSImage imageNamed:@"subscribeButton.tiff"]];
-		[newButton setAlternateImage:[NSImage imageNamed:@"subscribeButtonPressed.tiff"]];
-		[newButton setAction:@selector(newSubscription:)];
+		[item setButtonImage:@"subscribeButton"];
+		[item setAction:@selector(newSubscription:)];
 	}
 	else
 	{
-		[newButton setImage:[NSImage imageNamed:@"smartFolderButton.tiff"]];
-		[newButton setAlternateImage:[NSImage imageNamed:@"smartFolderButtonPressed.tiff"]];
-		[newButton setAction:@selector(newSmartFolder:)];
+		[item setButtonImage:@"smartFolderButton"];
+		[item setAction:@selector(newSmartFolder:)];
 	}
 }
 
