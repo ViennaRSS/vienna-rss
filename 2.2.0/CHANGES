@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.2.0.2209
+----------
+- More minor toolbar bug fixes.
+- Updated toolbar button bitmaps.
+
 2.2.0.2208
 ----------
 - Fixed bug: ampersand in folder name broke smart folder criteria.
