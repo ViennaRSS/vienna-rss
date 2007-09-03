@@ -131,8 +131,10 @@
 		// When switching to regular size, if we have small versions then we
 		// can assume that we're switching from those small versions. So we
 		// need to replace the button image.
-		[super setImage:image];
-		[super setAlternateImage:alternateImage];
+		if (image)
+			[super setImage:image];
+		if (alternateImage)
+			[super setAlternateImage:alternateImage];
 		s = imageSize;
 	}
 	else
