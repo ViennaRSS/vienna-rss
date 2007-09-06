@@ -658,10 +658,24 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)showSortDirection
 {
-	NSTableColumn * sortColumn = [articleList tableColumnWithIdentifier:[articleController sortColumnIdentifier]];
-	NSString * imageName = ([[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
-	[articleList setHighlightedTableColumn:sortColumn];
-	[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:sortColumn];
+	NSString * sortColumnIdentifier = [articleController sortColumnIdentifier];
+	
+	NSEnumerator * enumerator = [[articleList tableColumns] objectEnumerator];
+	NSTableColumn * column;
+	while ((column = [enumerator nextObject]))
+	{
+		if ([[column identifier] isEqualToString:sortColumnIdentifier])
+		{
+			NSString * imageName = ([[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
+			[articleList setHighlightedTableColumn:column];
+			[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:column];
+		}
+		else
+		{
+			// Remove any existing image in the column header.
+			[articleList setIndicatorImage:nil inTableColumn:column];
+		}
+	}
 }
 
 /* scrollToArticle
