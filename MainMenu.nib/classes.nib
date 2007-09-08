@@ -1,0 +1,265 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                blogWith = id; 
+                cancelAllRefreshes = id; 
+                changeFiltering = id; 
+                closeAllTabs = id; 
+                closeTab = id; 
+                condensedLayout = id; 
+                conditionalShowDownloadsWindow = id; 
+                deleteFolder = id; 
+                deleteMessage = id; 
+                doOpenScriptsFolder = id; 
+                doSelectScript = id; 
+                downloadEnclosure = id; 
+                editFolder = id; 
+                emptyTrash = id; 
+                exitVienna = id; 
+                exportSubscriptions = id; 
+                getInfo = id; 
+                goBack = id; 
+                goForward = id; 
+                handleAbout = id; 
+                hideFilterBar = id; 
+                importSubscriptions = id; 
+                keyboardShortcutsHelp = id; 
+                localPerformFindPanelAction = id; 
+                mailLinkToArticlePage = id; 
+                makeTextLarger = id; 
+                makeTextSmaller = id; 
+                markAllRead = id; 
+                markAllSubscriptionsRead = id; 
+                markFlagged = id; 
+                markRead = id; 
+                moreStyles = id; 
+                newGroupFolder = id; 
+                newSmartFolder = id; 
+                newSubscription = id; 
+                newTab = id; 
+                nextTab = id; 
+                openWebElementInDefaultBrowser = id; 
+                openWebElementInNewTab = id; 
+                openWebLocation = id; 
+                previousTab = id; 
+                printDocument = id; 
+                refreshAllFolderIcons = id; 
+                refreshAllSubscriptions = id; 
+                refreshSelectedSubscriptions = id; 
+                reloadPage = id; 
+                renameFolder = id; 
+                reportLayout = id; 
+                restoreMessage = id; 
+                searchUsingFilterField = id; 
+                searchUsingToolbarTextField = id; 
+                setFocusToSearchField = id; 
+                showAcknowledgements = id; 
+                showDownloadsWindow = id; 
+                showHideFilterBar = id; 
+                showHideStatusBar = id; 
+                showMainWindow = id; 
+                showPreferencePanel = id; 
+                showViennaHomePage = id; 
+                skipFolder = id; 
+                stopReloadingPage = id; 
+                toggleActivityViewer = id; 
+                unifiedLayout = id; 
+                unsubscribeFeed = id; 
+                viewArticlePage = id; 
+                viewArticlePageInAlternateBrowser = id; 
+                viewNextUnread = id; 
+                viewSourceHomePage = id; 
+                viewSourceHomePageInAlternateBrowser = id; 
+            }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                articleController = ArticleController; 
+                articleFrame = NSView; 
+                blogWithMenu = NSMenuItem; 
+                blogWithOneMenu = NSMenuItem; 
+                browserView = BrowserView; 
+                closeAllTabsItem = NSMenuItem; 
+                closeTabItem = NSMenuItem; 
+                closeWindowItem = NSMenuItem; 
+                columnsMenu = NSMenuItem; 
+                exportAll = NSButtonCell; 
+                exportSaveAccessory = NSView; 
+                exportSelected = NSButtonCell; 
+                exportWithGroups = NSButton; 
+                filterSearchField = NSSearchField; 
+                filterView = FilterView; 
+                filterViewPopUp = NSPopUpButton; 
+                filtersMenu = NSMenuItem; 
+                foldersTree = FoldersTree; 
+                mainArticleView = ArticleListView; 
+                mainWindow = NSWindow; 
+                searchField = NSSearchField; 
+                searchView = NSView; 
+                sortByMenu = NSMenuItem; 
+                spinner = NSProgressIndicator; 
+                splitView1 = NSSplitView; 
+                statusText = NSTextField; 
+                stylesMenu = NSMenuItem; 
+                unifiedListView = UnifiedDisplayView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = ArticleController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {foldersTree = FoldersTree; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = ArticleListView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                articleController = ArticleController; 
+                articleList = MessageListView; 
+                articleListHeader = TexturedHeader; 
+                articleText = ArticleView; 
+                columnsPopupMenu = PopupButton; 
+                controller = AppController; 
+                foldersTree = FoldersTree; 
+                splitView2 = NSSplitView; 
+                stdEnclosureView = StdEnclosureView; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = ArticleView; LANGUAGE = ObjC; SUPERCLASS = TabbedWebView; }, 
+        {
+            ACTIONS = {handleReload = id; handleStopLoading = id; }; 
+            CLASS = BrowserPane; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                addressField = NSTextField; 
+                backForwardButtons = NSSegmentedControl; 
+                refreshButton = NSSegmentedControl; 
+                webPane = ArticleView; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = BrowserView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {tabBarControl = PSMTabBarControl; tabView = NSTabView; }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            CLASS = CheckForUpdates; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                cancelButton = NSButton; 
+                progressBar = NSProgressIndicator; 
+                updateWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {
+            CLASS = ClickableProgressIndicator; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {target = id; }; 
+            SUPERCLASS = NSProgressIndicator; 
+        }, 
+        {
+            CLASS = FilterView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                filterByLabel = NSTextField; 
+                filterCloseButton = NSButton; 
+                filterSearchField = NSSearchField; 
+                filterViewPopUp = NSPopUpButton; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            ACTIONS = {
+                makeTextLarger = id; 
+                makeTextSmaller = id; 
+                saveAsDraft = id; 
+                sendMessage = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = FolderHeaderBar; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                folderDescription = NSTextField; 
+                folderName = NSTextField; 
+                smallFolderName = NSTextField; 
+                unreadCount = NSTextField; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = FolderView; LANGUAGE = ObjC; SUPERCLASS = NSOutlineView; }, 
+        {
+            CLASS = FoldersTree; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                controller = AppController; 
+                folderHeader = TexturedHeader; 
+                folderSplitView = ThinSplitView; 
+                outlineView = FolderView; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {CLASS = MessageListView; LANGUAGE = ObjC; SUPERCLASS = NSTableView; }, 
+        {CLASS = MessageView; LANGUAGE = ObjC; SUPERCLASS = NSTextView; }, 
+        {CLASS = NSObject; LANGUAGE = ObjC; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            CLASS = PSMTabBarControl; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {delegate = id; partnerView = id; style = id; tabView = NSTabView; }; 
+            SUPERCLASS = NSControl; 
+        }, 
+        {CLASS = PopupButton; LANGUAGE = ObjC; SUPERCLASS = NSButton; }, 
+        {
+            ACTIONS = {checkForUpdates = id; }; 
+            CLASS = SUUpdater; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = SearchView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = SquareWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            ACTIONS = {downloadFile = id; }; 
+            CLASS = StdEnclosureView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                downloadButton = NSButton; 
+                fileImage = NSImageView; 
+                filenameField = NSTextField; 
+                filenameLabel = NSTextField; 
+            }; 
+            SUPERCLASS = NSView; 
+        }, 
+        {
+            ACTIONS = {printDocument = id; }; 
+            CLASS = TabbedWebView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = WebView; 
+        }, 
+        {CLASS = TexturedHeader; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = ThinSplitView; LANGUAGE = ObjC; SUPERCLASS = NSSplitView; }, 
+        {CLASS = ThreeDBoxView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            CLASS = UnifiedDisplayView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                articleController = ArticleController; 
+                controller = AppController; 
+                foldersTree = FoldersTree; 
+                unifiedListHeader = TexturedHeader; 
+                unifiedText = ArticleView; 
+            }; 
+            SUPERCLASS = NSView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
