@@ -9,5 +9,5 @@ xcodebuild -project Vienna.xcodeproj -target Vienna -configuration DeploymentWit
 echo "Built Vienna configuration DeploymentWithSymbols"
 
 echo "Building Vienna configuration Deployment"
-xcodebuild -project Vienna.xcodeproj -target Vienna -configuration Deployment clean build DEPLOYMENT_POSTPROCESSING=YES VIENNA_IS_BETA=NO
+xcodebuild -project Vienna.xcodeproj -target Vienna -configuration Deployment clean build DEPLOYMENT_POSTPROCESSING=YES
 echo "Built Vienna configuration Deployment"
