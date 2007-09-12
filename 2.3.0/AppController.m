@@ -196,9 +196,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES]; 
 	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
-	// The method setShowsBaselineSeparator does not exist in Mac OS X 10.3.9 Panther
-	if ([toolbar respondsToSelector:@selector(setShowsBaselineSeparator:)])
-		[toolbar setShowsBaselineSeparator:NO];
+	[toolbar setShowsBaselineSeparator:NO];
 	[mainWindow setToolbar:toolbar];
 
 	// Run the auto-expire now
@@ -2230,7 +2228,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
-		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce && [NSApp respondsToSelector:@selector(requestUserAttention:)])
+		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce)
 			[NSApp requestUserAttention:NSInformationalRequest];
 
 		// Growl notification
