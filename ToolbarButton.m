@@ -41,14 +41,7 @@
 		// behave like toolbar buttons.
 		[self setButtonType:NSMomentaryChangeButton];
 		[self setBordered:NO];
-		
-		// NSSmallSquareBezelStyle does not exist in Mac OS X 10.3.9 Panther
-		SInt32 MacVersion;
-		if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion >= 0x1040)
-			[self setBezelStyle:NSSmallSquareBezelStyle];
-		else
-			[self setBezelStyle:NSShadowlessSquareBezelStyle];
-		
+		[self setBezelStyle:NSSmallSquareBezelStyle];
 		[self setImagePosition:NSImageOnly];
 	}
 	return self;

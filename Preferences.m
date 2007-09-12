@@ -220,10 +220,6 @@ static Preferences * _standardPreferences = nil;
 	
 	NSNumber * boolNo = [NSNumber numberWithBool:NO];
 	NSNumber * boolYes = [NSNumber numberWithBool:YES];
-	
-	// Some default options vary if we're running on 10.3
-	NSDictionary * sysDict = [NSDictionary dictionaryWithContentsOfFile:@"/System/Library/CoreServices/SystemVersion.plist"];
-	BOOL isPanther = [[sysDict valueForKey:@"ProductVersion"] hasPrefix:@"10.3"];
 
 	[defaultValues setObject:[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_Database_Name] forKey:MAPref_DefaultDatabase];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatedArticles];
@@ -250,7 +246,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShowStatusBar];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFilterBar];
 	[defaultValues setObject:boolNo forKey:MAPref_NewFolderUI];
-	[defaultValues setObject:(isPanther ? boolYes : boolNo) forKey:MAPref_ShowScriptsMenu];
+	[defaultValues setObject:boolNo forKey:MAPref_ShowScriptsMenu];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Filter_All] forKey:MAPref_FilterMode];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];

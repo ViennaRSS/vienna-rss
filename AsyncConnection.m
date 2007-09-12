@@ -315,21 +315,14 @@
 	if ([error localizedDescription] != nil)
 		[logDetail appendFormat:NSLocalizedString(@"\tDescription: %@\n", nil), [error localizedDescription]];
 	
-	// localizedRecoverySuggestion requires Mac OSX 10.4 or later
-	if ([NSError respondsToSelector:@selector(localizedRecoverySuggestion)])
-	{
-		NSString * suggestionString = [error performSelector:@selector(localizedRecoverySuggestion)];
-		if (suggestionString != nil)
-			[logDetail appendFormat:NSLocalizedString(@"\tSuggestion: %@\n", nil), suggestionString];
-	}
+	NSString * suggestionString = [error localizedRecoverySuggestion];
+	if (suggestionString != nil)
+		[logDetail appendFormat:NSLocalizedString(@"\tSuggestion: %@\n", nil), suggestionString];
 	
-	// localizedFailureReason requires Mac OSX 10.4 or later
-	if ([NSError respondsToSelector:@selector(localizedFailureReason)])
-	{
-		NSString * reasonString = [error performSelector:@selector(localizedFailureReason)];
-		if (reasonString != nil)
-			[logDetail appendFormat:NSLocalizedString(@"\tCause: %@\n", nil), reasonString];
-	}
+	NSString * reasonString = [error localizedFailureReason];
+	if (reasonString != nil)
+		[logDetail appendFormat:NSLocalizedString(@"\tCause: %@\n", nil), reasonString];
+	
 	[aItem appendDetail:logDetail];
 	[logDetail release];
 	
