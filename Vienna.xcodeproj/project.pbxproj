@@ -2517,10 +2517,6 @@
 		525D612F0C6DE83C00C11635 /* DeploymentWithSymbols */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				COPY_PHASE_STRIP = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
@@ -2538,7 +2534,6 @@
 				PRODUCT_NAME = SQLiteLib;
 				SDKROOT = "";
 				SEPARATE_STRIP = NO;
-				ZERO_LINK = NO;
 			};
 			name = DeploymentWithSymbols;
 		};
@@ -2619,24 +2614,17 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
-				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
-				VIENNA_VERSION_NUMBER = 2.3.0;
 				VIENNA_CHANGELOG_SUFFIX = "";
+				VIENNA_VERSION_NUMBER = 2.3.0;
 			};
 			name = DeploymentWithSymbols;
 		};
 		AA2B6CE60C2E648000415851 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -2656,17 +2644,12 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = SQLiteLib;
 				SDKROOT = "";
-				ZERO_LINK = YES;
 			};
 			name = Development;
 		};
 		AA2B6CE70C2E648000415851 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2684,7 +2667,6 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = SQLiteLib;
 				SDKROOT = "";
-				ZERO_LINK = NO;
 			};
 			name = Deployment;
 		};
@@ -2812,9 +2794,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				VIENNA_VERSION_NUMBER = 2.3.0;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				ZERO_LINK = YES;
+				VIENNA_VERSION_NUMBER = 2.3.0;
 			};
 			name = Development;
 		};
@@ -2840,13 +2821,10 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				MACOSX_DEPLOYMENT_TARGET_i386 = 10.4;
-				MACOSX_DEPLOYMENT_TARGET_ppc = 10.3;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				SDKROOT_i386 = /Developer/SDKs/MacOSX10.4u.sdk;
-				VIENNA_VERSION_NUMBER = 2.3.0;
 				VIENNA_CHANGELOG_SUFFIX = "";
+				VIENNA_VERSION_NUMBER = 2.3.0;
 			};
 			name = Deployment;
 		};
