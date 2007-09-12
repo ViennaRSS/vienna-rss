@@ -44,7 +44,6 @@ NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
 NSString * MAPref_SelectionChangeInterval = @"SelectionChangeInterval";
 NSString * MAPref_OpenLinksInVienna = @"OpenLinksInVienna";
 NSString * MAPref_OpenLinksInBackground = @"OpenLinksInBackground";
-NSString * MAPref_ShowScriptsMenu = @"ShowScriptsMenu";
 NSString * MAPref_MinimumFontSize = @"MinimumFontSize";
 NSString * MAPref_UseMinimumFontSize = @"UseMinimumFontSize";
 NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";

@@ -246,7 +246,6 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShowStatusBar];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFilterBar];
 	[defaultValues setObject:boolNo forKey:MAPref_NewFolderUI];
-	[defaultValues setObject:boolNo forKey:MAPref_ShowScriptsMenu];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Filter_All] forKey:MAPref_FilterMode];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];

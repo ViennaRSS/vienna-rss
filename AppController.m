@@ -250,7 +250,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
 
 	// Add Scripts menu if we have any scripts
-	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+	if (!hasOSScriptsMenu())
 		[self initScriptsMenu];
 	
 	// Show/hide the status bar based on the last session state
@@ -269,7 +269,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[self installSleepHandler];
 	
 	// Register to be notified when the scripts folder changes.
-	if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+	if (!hasOSScriptsMenu())
 		[self installScriptsFolderWatcher];
 	
 	// Fix up the Close commands
@@ -623,7 +623,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[fileManager removeFileAtPath:fullPath handler:nil];
 		if ([fileManager copyPath:filename toPath:fullPath handler:nil])
 		{
-			if ([prefs boolForKey:MAPref_ShowScriptsMenu] || !hasOSScriptsMenu())
+			if (!hasOSScriptsMenu())
 				[self initScriptsMenu];
 		}
 	}
