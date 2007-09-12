@@ -45,7 +45,6 @@ extern NSString * MAPref_MarkReadInterval;
 extern NSString * MAPref_SelectionChangeInterval;
 extern NSString * MAPref_OpenLinksInVienna;
 extern NSString * MAPref_OpenLinksInBackground;
-extern NSString * MAPref_ShowScriptsMenu;
 extern NSString * MAPref_MinimumFontSize;
 extern NSString * MAPref_UseMinimumFontSize;
 extern NSString * MAPref_AutoExpireDuration;
