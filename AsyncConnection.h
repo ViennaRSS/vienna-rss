@@ -28,7 +28,8 @@ typedef enum {
 	MA_Connect_NeedCredentials,
 	MA_Connect_Stopped,
 	MA_Connect_PermanentRedirect,
-	MA_Connect_URLIsGone
+	MA_Connect_URLIsGone,
+	MA_Connect_Cancelled
 } ConnectStatus;
 
 @interface AsyncConnection : NSObject {
@@ -44,6 +45,7 @@ typedef enum {
 	ConnectStatus status;
 	id delegate;
 	SEL handler;
+	BOOL isConnectionComplete;
 }
 
 // Public functions
