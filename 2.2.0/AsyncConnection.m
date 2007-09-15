@@ -48,6 +48,7 @@
 		httpHeaders = nil;
 		URLString = nil;
 		status = MA_Connect_Succeeded;
+		isConnectionComplete = YES;
 	}
 	return self;
 }
@@ -171,6 +172,7 @@
 	[theRequest setHTTPShouldHandleCookies:NO];
 
 	status = MA_Connect_Stopped;
+	isConnectionComplete = NO;
 	
 	// Changed to not use the [NSURLConnection connectionWithRequest:delegate:  and then retain,
 	// no sense putting it in an autorelease pool if it has no reason to be there
@@ -183,8 +185,21 @@
  */
 -(void)cancel
 {
-	[aItem setStatus:NSLocalizedString(@"Refresh cancelled", nil)];
-	[connector cancel];
+	if (!isConnectionComplete)
+	{
+		isConnectionComplete = YES;
+		[aItem setStatus:NSLocalizedString(@"Refresh cancelled", nil)];
+		status = MA_Connect_Cancelled;
+		[connector cancel];
+		[self sendConnectionCompleteNotification];
+	}
+	else if (status == MA_Connect_NeedCredentials)
+	{
+		[aItem setStatus:NSLocalizedString(@"Refresh cancelled", nil)];
+		status = MA_Connect_Cancelled;
+		[connector cancel];
+		// Complete notification already scheduled.
+	}
 }
 
 /* close
@@ -202,8 +217,8 @@
  */
 -(void)sendConnectionCompleteNotification
 {
-	NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
-	[runLoop performSelector:handler target:delegate argument:self order:0 modes:[NSArray arrayWithObjects:NSDefaultRunLoopMode, nil]];
+	isConnectionComplete = YES;
+	[[NSRunLoop currentRunLoop] performSelector:handler target:delegate argument:self order:0 modes:[NSArray arrayWithObjects:NSDefaultRunLoopMode, nil]];
 }
 
 /* didReceiveResponse
