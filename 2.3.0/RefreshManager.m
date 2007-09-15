@@ -303,13 +303,16 @@ typedef enum {
 -(void)cancelAll
 {
 	[refreshArray removeAllObjects];
-	while ([connectionsArray count] > 0)
+	
+	// We don't know whether to remove the connections from the array, because some might already be complete.
+	// Let the cancel method take care of that.
+	// Don't cancel until we've enumerated the whole array, however,
+	// because it can have the side effect of changing the array.
+	NSEnumerator * enumerator = [connectionsArray objectEnumerator];
+	AsyncConnection * connection;
+	while ((connection = [enumerator nextObject]))
 	{
-		AsyncConnection * conn = [connectionsArray objectAtIndex:0];
-		Folder * folder = (Folder *)[conn contextData];
-		[self setFolderUpdatingFlag:folder flag:NO];
-		[conn cancel];
-		[self removeConnection:conn];
+		[connection performSelector:@selector(cancel) withObject:nil afterDelay:0.0];
 	}
 }
 
