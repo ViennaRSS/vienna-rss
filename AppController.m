@@ -285,7 +285,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	// Retain views which might be removed from the toolbar and therefore released;
 	// we will need them if they are added back later.
 	[spinner retain];
-	[searchView retain];
+	[searchField retain];
 }
 
 /* installCustomEventHandler
@@ -3537,6 +3537,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = isMainWindowVisible;
 		return YES;
 	}
+	if (theAction == @selector(searchUsingToolbarTextField:))
+	{
+		*validateFlag = isMainWindowVisible;
+	}
 	return NO;
 }
 
@@ -3820,7 +3824,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	ToolbarItem *item = [[ToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	if ([itemIdentifier isEqualToString:@"SearchItem"])
 	{
-		[item setView:searchView];
+		[item setView:searchField];
 		[item setLabel:NSLocalizedString(@"Search Articles", nil)];
 		[item setPaletteLabel:[item label]];
 		[item setTarget:self];
@@ -4013,7 +4017,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[backgroundColor release];
 	[db release];
 	[spinner release];
-	[searchView release];
+	[searchField release];
 	[super dealloc];
 }
 @end
