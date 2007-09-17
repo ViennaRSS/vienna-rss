@@ -21,7 +21,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface AddressBarCell : NSTextFieldCell {
-	bool hasSecureImage;
+	BOOL hasSecureImage;
 }
 
 // Accessor functions
