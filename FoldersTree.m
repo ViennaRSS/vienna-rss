@@ -111,6 +111,9 @@
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
 
+	// Initially size the outline view column to be the correct width
+	[outlineView sizeLastColumnToFit];
+
 	// Don't resize the column when items are expanded as this messes up
 	// the placement of the unread count button.
 	[outlineView setAutoresizesOutlineColumn:NO];
