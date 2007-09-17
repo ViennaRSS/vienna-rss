@@ -254,7 +254,7 @@
 {
 	NSMenuItem * feedSourceItem = [feedSource selectedItem];
 	NSString * linkTitleString = nil;
-	bool showButton = NO;
+	BOOL showButton = NO;
 	if (feedSourceItem != nil)
 	{
 		NSDictionary * itemDict = [sourcesDict valueForKey:[feedSourceItem title]];
