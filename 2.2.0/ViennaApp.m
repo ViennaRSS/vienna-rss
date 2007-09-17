@@ -44,7 +44,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(void)sendEvent:(NSEvent *)anEvent 
 {
-	bool isHandled = NO;
+	BOOL isHandled = NO;
 
 	if(([anEvent type] == NSFlagsChanged) && ( ([anEvent keyCode] == 61) || ([anEvent keyCode] == 58)))
 	{
