@@ -599,6 +599,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			Preferences * prefs = [Preferences standardPreferences];
 			[stylesMenu setSubmenu:[self getStylesMenu]];
+			[[self toolbarItemWithIdentifier:@"Styles"] setPopup:@"stylesMenuButton" withMenu:[self getStylesMenu]];
 			[prefs setDisplayStyle:styleName];
 			if ([[prefs displayStyle] isEqualToString:styleName])
 				runOKAlertPanel(@"New style title", @"New style body", styleName);
