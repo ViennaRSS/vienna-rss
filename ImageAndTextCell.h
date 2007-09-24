@@ -31,7 +31,6 @@
 	BOOL inProgress;
 	
 	id item;
-	NSTimer *animationTimer;
 	NSMutableArray *progressIndicators;
 }
 

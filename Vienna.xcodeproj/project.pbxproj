@@ -1477,6 +1477,7 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -1514,6 +1515,7 @@
 					ProjectRef = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
 				},
 			);
+			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				AAA5686E09EE725B00C87343 /* NewsParser */,

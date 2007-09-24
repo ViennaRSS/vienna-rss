@@ -70,7 +70,6 @@
 	cell->countBackgroundColour = [countBackgroundColour retain];
 	cell->item = item;	
 	cell->progressIndicators = [[NSMutableArray alloc] init];
-	cell->animationTimer = nil;
 
 	return cell;
 }
@@ -171,33 +170,6 @@
 	item = inItem;
 }
 
-/* configureProgressAnimation
- */
--(void)configureProgressAnimation
-{
-	if (!animationTimer && [progressIndicators count])
-	{
-		// See animateProgressIndicators: for what's going on here.
-		// NSProgressIndicator animates 12 times per second by default
-
-		animationTimer = [[NSTimer timerWithTimeInterval:1.0/12.0
-												  target:self
-												selector:@selector(animateProgressIndicators:)
-												userInfo:nil
-												 repeats:YES] retain];
-		// A progress indicator must continue animating even while a menu or modal dialogue is displayed
-		[[NSRunLoop currentRunLoop] addTimer:animationTimer forMode:NSEventTrackingRunLoopMode];
-		[[NSRunLoop currentRunLoop] addTimer:animationTimer forMode:NSDefaultRunLoopMode];
-
-	}
-	else if (animationTimer && ![progressIndicators count])
-	{
-		[animationTimer invalidate];
-		[animationTimer release];
-		animationTimer = nil;
-	}
-}
-
 /* drawCellImage
  * Just draw the cell image.
  */
@@ -239,12 +211,14 @@
 		NSProgressIndicator *progressIndicator = [item progressIndicator];
 		if (!inProgress && progressIndicator)
 		{
+			[progressIndicator setDisplayedWhenStopped:NO];
 			[progressIndicator stopAnimation:self];
+			[[progressIndicator superview] setNeedsDisplayInRect:[progressIndicator frame]];
 			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 			[progressIndicators removeObject:progressIndicator];
+
 			// The item was keeping track of the progress indicator; it is no longer needed
 			[item setProgressIndicator:nil];
-			[self configureProgressAnimation];
 		}
 		else if (inProgress)
 		{
@@ -254,11 +228,12 @@
 																						  PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION)];
 				[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
 				[progressIndicator setDisplayedWhenStopped:YES];
+				[progressIndicator setUsesThreadedAnimation:YES];
 				[progressIndicators addObject:progressIndicator];
 				
 				// Let the item keep track of this progress indicator for us so we can stop it later
 				[item setProgressIndicator:progressIndicator];
-				[self configureProgressAnimation];
+				[progressIndicator startAnimation:self];
 				[progressIndicator autorelease];
 			}
 
@@ -371,29 +346,6 @@
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
-/* animateProgressIndicators:
- * Animate our progress indicators.
- *
- * Why not just use the automatic animation (-[NSProgressIndicator startAnimation:])?
- *   1) It doesn't clip properly for a cell partly off-screen; it relocates the spinner to keep its bottom edge
- *   on-screen at all times. This means that a cell which is partially off-screen won't show its spinner in the right vertical location.
- *   2) It doesn't update properly when scrolling; one frame of a white square is displayed as a progress indicator
- *   moves on- or off- screen by an additional pixel. This occurs with threaded and non-thread indicator behavior.
- *
- * Why use a timer rather than drawing in one of the NSCell drawing methods?
- *   The timer needs to update 12 times per second to be smooth; the NSCell drawing method is only called if the cell contents change
- *   or the user interacts with that cell.
- */
--(void)animateProgressIndicators:(NSTimer *)timer
-{
-	NSEnumerator *enumerator = [progressIndicators objectEnumerator];
-	NSProgressIndicator *indicator;
-	
-	while ((indicator = [enumerator nextObject])) {
-		[indicator animate:nil];
-	}	
-}
-
 /* dealloc
  * Delete our resources.
  */
@@ -404,8 +356,6 @@
 	[image release];
 	
 	[progressIndicators release];
-	[animationTimer invalidate];
-	[animationTimer release];
 	
 	[super dealloc];
 }
