@@ -239,8 +239,11 @@
 		NSProgressIndicator *progressIndicator = [item progressIndicator];
 		if (!inProgress && progressIndicator)
 		{
+			[progressIndicator setDisplayedWhenStopped:NO];
 			[progressIndicator stopAnimation:self];
+			[[progressIndicator superview] setNeedsDisplayInRect:[progressIndicator frame]];
 			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+
 			[progressIndicators removeObject:progressIndicator];
 			// The item was keeping track of the progress indicator; it is no longer needed
 			[item setProgressIndicator:nil];
