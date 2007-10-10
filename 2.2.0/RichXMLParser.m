@@ -377,21 +377,22 @@
 	int destIndex = 0;
 
 	// Determine XML encoding and BOM
-	NSStringEncoding encodedType = [self parseEncodingType:xmlData];
-	if (count > 2 && srcPtr[0] == 0xFE && srcPtr[1] == 0xFF)
+	NSStringEncoding encodedType;
+
+	if ( (count > 2 && srcPtr[0] == 0xFE && srcPtr[1] == 0xFF) ||
+		  (count > 2 && srcPtr[0] == 0xFF && srcPtr[1] == 0xFE) )
 	{
-		// Copy Unicode UTF-16 big-endian BOM.
+		// Copy Unicode UTF-16 big/little-endian BOM.
 		destPtr[destIndex++] = srcPtr[0];
 		destPtr[destIndex++] = srcPtr[1];
 		srcPtr += 2;
+
+		char* encodingNameStr = "UTF-16";
+		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
+		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
+		CFRelease(encodingName);
 	}
-	else if (count > 2 && srcPtr[0] == 0xFF && srcPtr[1] == 0xFE)
-	{
-		// Copy Unicode UTF-16 little-endian BOM.
-		destPtr[destIndex++] = srcPtr[0];
-		destPtr[destIndex++] = srcPtr[1];
-		srcPtr += 2;
-	}
+
 	else if (count > 3 && srcPtr[0] == 0xEF && srcPtr[1] == 0xBB && srcPtr[2] == 0xBF)
 	{
 		// Copy Unicode UTF-8 little-endian BOM.
@@ -399,6 +400,17 @@
 		destPtr[destIndex++] = srcPtr[1];
 		destPtr[destIndex++] = srcPtr[2];
 		srcPtr += 3;
+
+		char* encodingNameStr = "UTF-8";
+		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
+		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
+		CFRelease(encodingName);
+	}
+
+	else
+	{
+		// Lets see if we have any better luck parsing the XML
+		encodedType = [self parseEncodingType:xmlData];
 	}
 	
 	while (srcPtr < srcEndPtr)
