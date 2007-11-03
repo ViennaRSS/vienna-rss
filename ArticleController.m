@@ -252,7 +252,7 @@
 
 	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[[Preferences standardPreferences] articleSortDescriptors]];
 	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
-	[currentArrayOfArticles release];
+	[currentArrayOfArticles autorelease];
 	currentArrayOfArticles = [sortedArrayOfArticles retain];
 }
 
@@ -285,7 +285,7 @@
  */
 -(void)reloadArrayOfArticles
 {
-	[folderArrayOfArticles release];
+	[folderArrayOfArticles autorelease];
 	
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
 	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] searchString]] retain];
@@ -298,7 +298,7 @@
  */
 -(void)refilterArrayOfArticles
 {
-	[currentArrayOfArticles release];
+	[currentArrayOfArticles autorelease];
 	currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
 }
 
@@ -408,9 +408,9 @@
 			needReload = YES;
 	}
 	[db commitTransaction];
-	[currentArrayOfArticles release];
+	[currentArrayOfArticles autorelease];
 	currentArrayOfArticles = currentArrayCopy;
-	[folderArrayOfArticles release];
+	[folderArrayOfArticles autorelease];
 	folderArrayOfArticles = folderArrayCopy;
 	if (needReload)
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
@@ -460,9 +460,9 @@
 		}
 	}
 	[db commitTransaction];
-	[currentArrayOfArticles release];
+	[currentArrayOfArticles autorelease];
 	currentArrayOfArticles = currentArrayCopy;
-	[folderArrayOfArticles release];
+	[folderArrayOfArticles autorelease];
 	folderArrayOfArticles = folderArrayCopy;
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
