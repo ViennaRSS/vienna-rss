@@ -294,8 +294,6 @@
 	}
 	else if (rowIndex >= 0 && rowIndex < lastCount)
 	{
-		NSRect rectRow = [table rectOfRow:rowIndex];
-		[table drawRow:rowIndex clipRect:rectRow];
 		[table display];
 	}
 }
