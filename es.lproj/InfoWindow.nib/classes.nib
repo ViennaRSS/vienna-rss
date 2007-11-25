@@ -1,39 +1,31 @@
 {
-    IBClasses =     (
-                {
-            CLASS = FirstResponder;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSObject;
-        },
-                {
-            ACTIONS =             {
-                authenticationChanged = id;
-                subscribedChanged = id;
-                urlFieldChanged = id;
-                validateURL = id;
-            };
-            CLASS = InfoWindow;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                folderDescription = NSTextField;
-                folderImage = NSImageView;
-                folderName = NSTextField;
-                folderSize = NSTextField;
-                folderUnread = NSTextField;
-                isSubscribed = NSButton;
-                lastRefreshDate = NSTextField;
-                password = NSSecureTextField;
-                urlField = NSTextField;
-                username = NSTextField;
-                validateButton = NSButton;
-            };
-            SUPERCLASS = NSWindowController;
-        },
-                {
-            CLASS = InfoWindowManager;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSObject;
-        }
-    );
-    IBVersion = 1;
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                authenticationChanged = id; 
+                subscribedChanged = id; 
+                urlFieldChanged = id; 
+                validateURL = id; 
+            }; 
+            CLASS = InfoWindow; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                folderDescription = NSTextField; 
+                folderImage = NSImageView; 
+                folderName = NSTextField; 
+                folderSize = NSTextField; 
+                folderUnread = NSTextField; 
+                isSubscribed = NSButton; 
+                lastRefreshDate = NSTextField; 
+                password = NSSecureTextField; 
+                urlField = NSTextField; 
+                username = NSTextField; 
+                validateButton = NSButton; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = InfoWindowManager; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
 }
