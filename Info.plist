@@ -94,8 +94,10 @@
 		<string>edu.ucsd.cs.mmccrack.blapp</string>
 		<key>Cocoalicious</key>
 		<string>com.scifihifi.Cocoalicious</string>
-		<key>MarsEdit</key>
+		<key>MarsEdit 1</key>
 		<string>com.ranchero.MarsEdit</string>
+		<key>MarsEdit 2</key>
+		<string>com.red-sweater.marsedit</string>
 		<key>Xjournal</key>
 		<string>org.speirs.xjournal</string>
 		<key>ecto</key>
