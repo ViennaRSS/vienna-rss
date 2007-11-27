@@ -10,7 +10,12 @@ Thanks!
 
 2.3.0.2300
 ----------
-- Added Portuguese localisation. (Thanks to Rui Carlos A. Gonçalves).
+- Fix appearance of search field in toolbar when using small size.
+- Fix the visual glitch in which the unread count and progress indicator were slightly overlapping
+  with the scroll bar if present.
+- Update the styles menu in the toolbar when adding a style.
+- Added Portuguese localisation. (Thanks to Rui Carlos A. Gon√ßalves).
+- Added Turkish localisation. (Thanks to Emrah Omuris).
 
 2.2.0.2209
 ----------
