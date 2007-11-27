@@ -546,6 +546,19 @@
 		AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailLinkButtonPressed.tiff; sourceTree = "<group>"; };
 		AA5AC2640C3ECAA000B2E14F /* SearchString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchString.m; sourceTree = "<group>"; };
 		AA5AC2750C3ECB3F00B2E14F /* SearchString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchString.h; sourceTree = "<group>"; };
+		AA5F29940CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
+		AA5F29950CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
+		AA5F29960CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
+		AA5F29970CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
+		AA5F29980CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
+		AA5F29990CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/GroupFolder.nib; sourceTree = "<group>"; };
+		AA5F299A0CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/InfoWindow.nib; sourceTree = "<group>"; };
+		AA5F299B0CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/RSSFeed.nib; sourceTree = "<group>"; };
+		AA5F299C0CE8510D0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = tr; path = tr.lproj/SearchFolder.nib; sourceTree = "<group>"; };
+		AA5F299D0CE8512C0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA5F299E0CE8512C0063D96E /* tr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA5F299F0CE8512C0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = tr; path = tr.lproj/RSSSources.plist; sourceTree = "<group>"; };
+		AA5F29E20CE8545A0063D96E /* tr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = tr; path = "tr.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AA60237E08C298FB002CFD06 /* HelperFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunctions.h; sourceTree = "<group>"; };
 		AA60237F08C298FB002CFD06 /* HelperFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelperFunctions.m; sourceTree = "<group>"; };
 		AA62D7DB0859A9F70040C370 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -1506,6 +1519,7 @@
 				ru,
 				uk,
 				pt,
+				tr,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -2216,6 +2230,7 @@
 				AAD2BE590C2B1C9600AA0F11 /* ru */,
 				AA6E60C00C402F4700E10ECE /* uk */,
 				AA9760060CA443D4003A1B9B /* pt */,
+				AA5F299D0CE8512C0063D96E /* tr */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2241,6 +2256,7 @@
 				AAD2BE4A0C2B1C5800AA0F11 /* ru */,
 				AA6E60970C402F0400E10ECE /* uk */,
 				AA975FDD0CA441B4003A1B9B /* pt */,
+				AA5F29960CE8510D0063D96E /* tr */,
 			);
 			name = EmptyTrashWarning.nib;
 			sourceTree = "<group>";
@@ -2266,6 +2282,7 @@
 				AAD2BE550C2B1C8400AA0F11 /* ru */,
 				AA6E60BE0C402F3D00E10ECE /* uk */,
 				AA9760050CA443B0003A1B9B /* pt */,
+				AA5F299E0CE8512C0063D96E /* tr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2291,6 +2308,7 @@
 				AAD2BE4D0C2B1C6000AA0F11 /* ru */,
 				AA6E60B70C402F2600E10ECE /* uk */,
 				AA975FDF0CA441B4003A1B9B /* pt */,
+				AA5F29980CE8510D0063D96E /* tr */,
 			);
 			name = GeneralPreferences.nib;
 			sourceTree = "<group>";
@@ -2316,6 +2334,7 @@
 				AAD2BE480C2B1C5100AA0F11 /* ru */,
 				AA6E60960C402F0400E10ECE /* uk */,
 				AA975FDC0CA441B4003A1B9B /* pt */,
+				AA5F29950CE8510D0063D96E /* tr */,
 			);
 			name = AppearancesPreferences.nib;
 			sourceTree = "<group>";
@@ -2341,6 +2360,7 @@
 				AAD2BE530C2B1C7D00AA0F11 /* ru */,
 				AA6E60BC0C402F3400E10ECE /* uk */,
 				AA975FE30CA441B4003A1B9B /* pt */,
+				AA5F299C0CE8510D0063D96E /* tr */,
 			);
 			name = SearchFolder.nib;
 			sourceTree = "<group>";
@@ -2366,6 +2386,7 @@
 				AAD2BE4C0C2B1C6000AA0F11 /* ru */,
 				AA6E60980C402F0400E10ECE /* uk */,
 				AA975FDE0CA441B4003A1B9B /* pt */,
+				AA5F29970CE8510D0063D96E /* tr */,
 			);
 			name = FeedCredentials.nib;
 			sourceTree = "<group>";
@@ -2391,6 +2412,7 @@
 				AAD2BE290C2B1C4300AA0F11 /* ru */,
 				AA6E60950C402F0300E10ECE /* uk */,
 				AA975FD60CA44187003A1B9B /* pt */,
+				AA5F29940CE8510D0063D96E /* tr */,
 			);
 			name = AdvancedPreferences.nib;
 			sourceTree = "<group>";
@@ -2416,6 +2438,7 @@
 				AAD2BE510C2B1C7300AA0F11 /* ru */,
 				AA6E60BB0C402F3400E10ECE /* uk */,
 				AA975FE20CA441B4003A1B9B /* pt */,
+				AA5F299B0CE8510D0063D96E /* tr */,
 			);
 			name = RSSFeed.nib;
 			sourceTree = "<group>";
@@ -2441,6 +2464,7 @@
 				AAD2BE4F0C2B1C7300AA0F11 /* ru */,
 				AA6E60B80C402F2600E10ECE /* uk */,
 				AA975FE00CA441B4003A1B9B /* pt */,
+				AA5F29990CE8510D0063D96E /* tr */,
 			);
 			name = GroupFolder.nib;
 			sourceTree = "<group>";
@@ -2464,6 +2488,7 @@
 				AAD2BE570C2B1C8B00AA0F11 /* ru */,
 				AA6E60C20C402F5100E10ECE /* uk */,
 				AA97600C0CA443E9003A1B9B /* pt */,
+				AA5F299F0CE8512C0063D96E /* tr */,
 			);
 			name = RSSSources.plist;
 			sourceTree = "<group>";
@@ -2489,6 +2514,7 @@
 				AA582DEF0C4A3229003D0916 /* ru */,
 				AA582E010C4A32CC003D0916 /* uk */,
 				AA9760450CA44C5E003A1B9B /* pt */,
+				AA5F29E20CE8545A0063D96E /* tr */,
 			);
 			name = "Vienna Help";
 			sourceTree = "<group>";
@@ -2514,6 +2540,7 @@
 				AAD2BE500C2B1C7300AA0F11 /* ru */,
 				AA6E60B90C402F2600E10ECE /* uk */,
 				AA975FE10CA441B4003A1B9B /* pt */,
+				AA5F299A0CE8510D0063D96E /* tr */,
 			);
 			name = InfoWindow.nib;
 			sourceTree = "<group>";
