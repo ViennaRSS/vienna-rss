@@ -2647,7 +2647,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2210;
+				BUILD_NUMBER = 2211;
 				COPY_PHASE_STRIP = NO;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -2668,7 +2668,7 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.2.1;
+				VIENNA_VERSION_NUMBER = 2.2.2;
 			};
 			name = DeploymentWithSymbols;
 		};
@@ -2811,7 +2811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2210;
+				BUILD_NUMBER = 2211;
 				COPY_PHASE_STRIP = NO;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2831,7 +2831,7 @@
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.2.1;
+				VIENNA_VERSION_NUMBER = 2.2.2;
 			};
 			name = Development;
 		};
@@ -2843,7 +2843,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2210;
+				BUILD_NUMBER = 2211;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -2862,7 +2862,7 @@
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.2.1;
+				VIENNA_VERSION_NUMBER = 2.2.2;
 			};
 			name = Deployment;
 		};
