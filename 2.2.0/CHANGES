@@ -16,6 +16,13 @@ Thanks!
 - Update the styles menu in the toolbar when adding a style.
 - Added Portuguese localisation. (Thanks to Rui Carlos A. Gonçalves).
 - Added Turkish localisation. (Thanks to Emrah Omuris).
+- Updated German, Italian, Traditional Chinese, and Ukranian localisations.
+- Updated Spanish localisation (Thanks to Dani Carril).
+- Fix feed parsing crash on PowerPC machines (Patch from Paul Livesey).
+- Possible fix for crashes in ArticleController.
+- Fix the truncated right pane in Leopard.
+- Fix long-standing issue with many messages in console.log while downloading (Patch from Martin Häcker).
+- Add support for blogging with MarsEdit 2.
 
 2.2.0.2209
 ----------
