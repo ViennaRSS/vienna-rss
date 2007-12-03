@@ -433,9 +433,10 @@
  */
 -(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-	if ([request URL] != nil)
-		[[webPane mainFrame] loadRequest:request];
-	return webPane;
+	[controller openURL:[request URL] inPreferredBrowser:YES];
+	// Change this to handle modifier key?
+	// Is this covered by the webView policy?
+	return nil;
 }
 
 /* setFrame
