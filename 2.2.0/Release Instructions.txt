@@ -9,13 +9,20 @@ svn checkout https://vienna-rss.svn.sourceforge.net/svnroot/vienna-rss/trunk/2.2
 (2) Run the build script.
 
 cd Vienna2.2.1/scripts
+
+For stable releases:
+
 ./release_vienna.sh
+
+For beta releases:
+
+./release_vienna_beta.sh
 
 (3) Upload "Vienna2.2.1.2210.zip" and "Vienna2.2.1.2210.en-us.zip" via anonymous FTP to the "/incoming" directory of <ftp://upload.sourceforge.net>.  All files to upload are in the "/Users/ReleaseBuilds/Vienna2.2.1/build/Deployment/Uploads" directory.
 
-(4) In your web browser, load the SourceForge File Release page for Vienna at <http://sourceforge.net/project/admin/editpackages.php?group_id=142635> and click "Add Release" for the "Released Versions" package.
+(4) In your web browser, load the SourceForge File Release page for Vienna at <http://sourceforge.net/project/admin/editpackages.php?group_id=142635> and click "Add Release" next to the "Released Versions" package for stable releases or next to the "Test Versions" package for beta releases.
 
-(6) Enter the release name.  The release name is always the version number (e.g., 2.2.1). For pre-releases, we'll also include the build number (e.g., 2210).
+(6) Enter the release name.  The release name is always the version number (e.g., 2.2.1). For beta releases, we'll also include the build number (e.g., 2210).
 
 (7) Paste the latest release notes from the "/Users/ReleaseBuilds/Vienna2.2.1/CHANGES" file, select "Preserve my pre-formatted text", and click "Submit/Refresh".
 
@@ -25,15 +32,22 @@ cd Vienna2.2.1/scripts
 
 (10) Verify the downloads.  Load the SourceForge Downloads page for Vienna at <http://sourceforge.net/project/showfiles.php?group_id=142635>, download both new zip files, uncompress them, and the run apps.
 
-(11) Login to the Vienna web site and make a backup of the current "changelog.xml" file.
+(11) Login to the Vienna web site and make a backup of the current changelog file.
 
 ssh <usename>@shell.sf.net
 cd /home/groups/v/vi/vienna-rss/htdocs
+
+For stable releases:
+
 cp changelog.xml changelog.2.2.0.backup.xml
 
-(12) Upload "changelog.xml" and "noteson2.2.1.2210.html" via ssh or sftp to "/home/groups/v/vi/vienna-rss/htdocs".
+For beta releases:
 
-(13) Make sure that the uploaded "changelog.xml" and "noteson2.2.1.2210.html" are group-writable on the server, in case someone else needs to edit them.
+cp changelog_beta.xml changelog_beta.2.2.0.backup.xml
+
+(12) Upload "changelog.xml" or "changelog_beta.xml" and "noteson2.2.1.2210.html" via ssh or sftp to "/home/groups/v/vi/vienna-rss/htdocs".
+
+(13) Make sure that the files uploaded in step (12) are group-writable on the server, in case someone else needs to edit them.
 
 chmod g+w changelog.xml noteson2.2.1.2210.html
 
