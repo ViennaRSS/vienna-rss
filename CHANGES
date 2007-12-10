@@ -10,7 +10,7 @@ Thanks!
 
 2.2.2.2211
 ----------
-- Fix crash when <http://www.netzeitung.de/entertainment/people/830530.html> attempts to open pop-under window.
+- Fix crash when web page attempts to open pop-under window.
 
 2.2.1.2210
 ----------
