@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.2.2.2212
+----------
+- Fix cookie handling on Leopard. (This could cause crashes.)
+- Fix error in Spanish translation. (Thanks to Ramon.)
+
 2.2.2.2211
 ----------
 - Fix crash when web page attempts to open pop-under window.
