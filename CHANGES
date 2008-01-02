@@ -10,12 +10,31 @@ Thanks!
 
 2.3.0.2300
 ----------
+
+2.2.2.2212
+----------
+- Fix cookie handling on Leopard. (This could cause crashes.)
+- Fix error in Spanish translation. (Thanks to Ramon.)
+
+2.2.2.2211
+----------
+- Fix crash when web page attempts to open pop-under window.
+
+2.2.1.2210
+----------
 - Fix appearance of search field in toolbar when using small size.
 - Fix the visual glitch in which the unread count and progress indicator were slightly overlapping
   with the scroll bar if present.
 - Update the styles menu in the toolbar when adding a style.
 - Added Portuguese localisation. (Thanks to Rui Carlos A. Gon√ßalves).
 - Added Turkish localisation. (Thanks to Emrah Omuris).
+- Updated German, Italian, Traditional Chinese, and Ukranian localisations.
+- Updated Spanish localisation (Thanks to Dani Carril).
+- Fix feed parsing crash on PowerPC machines (Patch from Paul Livesey).
+- Possible fix for crashes in ArticleController.
+- Fix the truncated right pane in Leopard.
+- Fix long-standing issue with many messages in console.log while downloading (Patch from Martin H√§cker).
+- Add support for blogging with MarsEdit 2.
 
 2.2.0.2209
 ----------
