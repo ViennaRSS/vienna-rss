@@ -1207,6 +1207,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[mainWindow makeKeyAndOrderFront:self];
 }
 
+/* keepFoldersArranged
+ * Toggle the arrangement of the folders list.
+ */
+-(IBAction)keepFoldersArranged:(id)sender
+{
+	[[Preferences standardPreferences] setFoldersTreeSortMethod:[sender tag]];
+}
+
 /* runAppleScript
  * Run an AppleScript script given a fully qualified path to the script.
  */
@@ -3744,6 +3752,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(changeFiltering:))
 	{
 		[menuItem setState:([menuItem tag] == [[Preferences standardPreferences] filterMode]) ? NSOnState : NSOffState];
+		return isMainWindowVisible;
+	}
+	else if (theAction == @selector(keepFoldersArranged:))
+	{
+		Preferences * prefs = [Preferences standardPreferences];
+		[menuItem setState:([prefs foldersTreeSortMethod] == [menuItem tag]) ? NSOnState : NSOffState];
 		return isMainWindowVisible;
 	}
 	else if (theAction == @selector(setFocusToSearchField:))

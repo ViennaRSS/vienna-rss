@@ -52,7 +52,7 @@
  * is tightly coupled with the folder view and database. Specifically:
  *
  * 1. The folder type value dictates the order of each type relative to each other.
- * 2. Within a specified type, all folders are organised by name in ascending order.
+ * 2. Within a specified type, all folders are organised by the active sort method.
  *
  * This function does not fail. It is assumed that the child can always be inserted into
  * place one way or the other.
@@ -61,28 +61,26 @@
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
 	unsigned int count = [children count];
+	int sortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
 
-	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
+	if (sortMethod != MA_FolderSort_Manual)
 	{
 		TreeNode * forwardChild = nil;
 		insertIndex = 0;
-		
+
 		if (count > 0u)
 			forwardChild = [children objectAtIndex:0u];
 		while (insertIndex < count)
 		{
 			TreeNode * theChild = [children objectAtIndex:insertIndex];
-			Folder * theChildFolder = [theChild folder];
-			Folder * ourChildFolder = [child folder];
-			
-			if (FolderType(ourChildFolder) < FolderType(theChildFolder))
-				break;
-			else if (IsSameFolderType(theChildFolder, ourChildFolder))
+			if (sortMethod == MA_FolderSort_ByName)
 			{
-				NSString * theChildName = [theChildFolder name];
-				NSString * ourChildName = [ourChildFolder name];
-				if ([theChildName caseInsensitiveCompare:ourChildName] == NSOrderedDescending)
+				if ([child folderNameCompare:theChild] == NSOrderedAscending)
 					break;
+			}
+			else
+			{
+				NSAssert1(TRUE, @"Unsupported folder sort method in addChild: %d", sortMethod);
 			}
 			++insertIndex;
 		}
@@ -108,9 +106,22 @@
 /* sortChildren
  * Sort the children of this node.
  */
--(void)sortChildren
+-(void)sortChildren:(int)sortMethod
 {
-	[children sortUsingSelector:@selector(folderNameCompare:)];
+	switch (sortMethod)
+	{
+	case MA_FolderSort_Manual:
+		// Do nothing
+		break;
+
+	case MA_FolderSort_ByName:
+		[children sortUsingSelector:@selector(folderNameCompare:)];
+		break;
+		
+	default:
+		NSAssert1(TRUE, @"Unsupported folder sort method in sortChildren: %d", sortMethod);
+		break;
+	}
 }
 
 /* folderNameCompare
@@ -120,6 +131,7 @@
 {
 	Folder * thisFolder = [self folder];
 	Folder * otherFolder = [otherObject folder];
+
 	if (FolderType(thisFolder) < FolderType(otherFolder))
 		return NSOrderedAscending;
 	if (FolderType(thisFolder) > FolderType(otherFolder))

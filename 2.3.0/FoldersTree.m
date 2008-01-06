@@ -151,11 +151,6 @@
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
-	
-	// Make sure that folders are manually sorted.
-	// This will result in a call to handleAutoSortFoldersTreeChange:
-	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual)
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
 }
 
 /* handleFolderFontChange
@@ -272,7 +267,7 @@
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
 	Folder * folder;
-	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual)
 	{
 		NSEnumerator * enumerator = [listOfFolders objectEnumerator];
 		while ((folder = [enumerator nextObject]) != nil)
@@ -281,7 +276,7 @@
 			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:itemId];
 			int count = [listOfSubFolders count];
 			TreeNode * subNode;
-			
+
 			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder canHaveChildren:(count > 0)];
 			if (count)
 				[self loadTree:listOfSubFolders rootNode:subNode];
@@ -687,8 +682,9 @@
 	TreeNode * parentNode = [node parentNode];
 
 	BOOL moveSelection = (folderId == [self actualSelection]);
+
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName)
-		[parentNode sortChildren];
+		[parentNode sortChildren:MA_FolderSort_ByName];
 
 	[self reloadFolderItem:parentNode reloadChildren:YES];
 	if (moveSelection)
@@ -1170,8 +1166,8 @@
 	// we have to watch for is to make sure that we don't re-parent to a subordinate
 	// folder.
 	Database * db = [Database sharedDatabase];
-	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName;
-	
+	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual;
+
 	[db beginTransaction];
 	while (index < count)
 	{
@@ -1193,7 +1189,7 @@
 		
 		if (newParentId == oldParentId)
 		{
-			// With alphabetic sorting, moving under the same parent is impossible.
+			// With automatic sorting, moving under the same parent is impossible.
 			if (autoSort)
 				continue;
 			// No need to move if destination is the same as origin.
