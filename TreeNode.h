@@ -41,7 +41,7 @@
 -(void)addChild:(TreeNode *)child atIndex:(int)insertIndex;
 -(void)removeChildren;
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
--(void)sortChildren;
+-(void)sortChildren:(int)sortMethod;
 -(NSString *)nodeName;
 -(TreeNode *)childByName:(NSString *)childName;
 -(TreeNode *)childByIndex:(int)index;
@@ -53,4 +53,5 @@
 -(int)countOfChildren;
 -(void)setCanHaveChildren:(BOOL)childflag;
 -(BOOL)canHaveChildren;
+-(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
 @end

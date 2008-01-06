@@ -165,6 +165,7 @@
 -(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
+-(IBAction)keepFoldersArranged:(id)sender;
 
 // Public functions
 -(void)installCustomEventHandler;

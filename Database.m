@@ -786,8 +786,8 @@ static Database * _sharedDatabase = nil;
 	}
 
 	int nextSibling = 0;
-	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_ByName;
-	if (!autoSort)
+	BOOL manualSort = [[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual;
+	if (manualSort)
 	{
 		if (predecessorId > 0)
 		{
@@ -829,7 +829,7 @@ static Database * _sharedDatabase = nil;
 			[folder setFlag:MA_FFlag_CheckForImage];
 		[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
 		
-		if (!autoSort)
+		if (manualSort)
 		{
 			if (nextSibling > 0)
 				[self setNextSibling:nextSibling forFolder:newItemId];
@@ -942,7 +942,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Update the sort order if necessary
-	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_ByName)
+	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=%d", [folder parentId], folderId];

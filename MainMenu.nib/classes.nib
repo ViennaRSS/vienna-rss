@@ -24,6 +24,7 @@
                 handleAbout = id;
                 hideFilterBar = id;
                 importSubscriptions = id;
+                keepFoldersArranged = id;
                 keyboardShortcutsHelp = id;
                 localPerformFindPanelAction = id;
                 mailLinkToArticlePage = id;
@@ -34,6 +35,7 @@
                 markFlagged = id;
                 markRead = id;
                 moreStyles = id;
+                myAction = id;
                 newGroupFolder = id;
                 newSmartFolder = id;
                 newSubscription = id;
