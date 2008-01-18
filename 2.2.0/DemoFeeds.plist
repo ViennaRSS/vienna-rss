@@ -35,7 +35,7 @@
 	<key>Vienna Developer Blog</key>
 	<dict>
 		<key>URL</key>
-		<string>http://www.opencommunity.co.uk/blog/atom.xml</string>
+		<string>http://www.vienna-rss.org/blog/atom.xml</string>
 	</dict>
 	<key>Vienna Support</key>
 	<dict>
