@@ -16,6 +16,7 @@ Thanks!
 2.2.3.2213
 ----------
 - Change standard product URLs to the new www.vienna-rss.org web site.
+- Improvement to Send Link for multiple links and escaped characters. (Patch from Anmol Khirbat).
 
 2.2.2.2212
 ----------

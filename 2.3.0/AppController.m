@@ -3194,14 +3194,31 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[RefreshManager sharedManager] cancelAll];
 }
 
+
+/* percentEscape
+ * Escape invalid and reserved URL characters to make string suitable for embedding in mailto: URLs.
+ */ 
+static CFStringRef percentEscape(NSString *string)
+{
+	return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, 
+
+		// RFC2368 says all URL reserved characters must be encoded
+		// these are all the reserved characters from RFC3986
+		CFSTR("/:?#[]@!$&'()*+,;="),	
+		
+		kCFStringEncodingUTF8);
+}
+
 /* mailLinkToArticlePage
  * Prompts the default email application to send a link to the currently selected article(s). 
  * Builds a string that contains a well-formed link according to the "mailto:"-scheme (RFC2368).
  */
 -(IBAction)mailLinkToArticlePage:(id)sender
 {
-	NSMutableString * mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
+	NSMutableString *mailtoLink = nil;
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
+	CFStringRef title;
+	CFStringRef link;
 	
 	// If the active tab is a web view, mail the URL ...
 	NSView<BaseView> * theView = [browserView activeTabItemView];
@@ -3210,25 +3227,48 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSString * viewLink = [theView viewLink];
 		if (viewLink != nil)
 		{
-			[mailtoLink appendString:viewLink];
-			[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
+			title = percentEscape([browserView tabItemViewTitle:theView]);
+			link = percentEscape(viewLink);
+			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
+			CFRelease(title);
+			CFRelease(link);
 		}
 	}
 	else
-	// ... otherwise, iterate over the currently selected articles.
 	{
+		// ... otherwise, iterate over the currently selected articles.
 		NSArray * articleArray = [mainArticleView markedArticleRange];	
 		if ([articleArray count] > 0) 
 		{
 			NSEnumerator *e = [articleArray objectEnumerator];
 			id currentArticle;
 			
-			while ( (currentArticle = [e nextObject]) ) {
-				[mailtoLink appendFormat: @"%@%@", [currentArticle link], mailtoLineBreak];
+			if ([articleArray count] == 1)
+			{
+				currentArticle = [e nextObject];
+				title = percentEscape([currentArticle title]);
+				link = percentEscape([currentArticle link]);
+				mailtoLink = [NSMutableString stringWithFormat: @"mailto:?subject=%@&body=%@", title, link];
+				CFRelease(title);
+				CFRelease(link);
 			}
-			[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
+			else
+			{
+				mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
+				while ( (currentArticle = [e nextObject]) )
+				{
+					title = percentEscape([currentArticle title]);
+					link = percentEscape([currentArticle link]);
+					[mailtoLink appendFormat: @"%@%@%@%@%@", title, mailtoLineBreak, link, mailtoLineBreak, mailtoLineBreak];
+					CFRelease(title);
+					CFRelease(link);
+				}
+			}
 		}
 	}
+
+	if (mailtoLink != nil)
+		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
 }
 
 /* makeTextSmaller
