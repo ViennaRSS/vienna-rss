@@ -255,51 +255,42 @@ static NSMutableDictionary * entityMap = nil;
 }
 
 /* firstNonBlankLine
- * Returns the first line of the string that isn't entirely spaces or tabs. Leading and
- * trailing spaces in the returned string are preserved. If all lines in the string are
+ * Returns the first line of the string that isn't entirely spaces or tabs. If all lines in the string are
  * empty, we return an empty string.
  */
 -(NSString *)firstNonBlankLine
 {
-	unsigned int indexOfLastWord;
-	unsigned int indexOfChr;
-	BOOL hasNonEmptyChars;
-	BOOL allowEmpty;
-	NSRange r;
+	BOOL hasNonEmptyChars = NO;
+	unsigned int indexOfFirstChr = 0u;
+	unsigned int indexOfLastChr = 0u;
 	
-	r.location = 0;
-	r.length = 0;
-	indexOfChr = 0;
-	indexOfLastWord = 0;
-	hasNonEmptyChars = NO;
-	allowEmpty = NO;
-	while (indexOfChr < [self length])
+	unsigned int indexOfChr = 0u;
+	unsigned int length = [self length];
+	while (indexOfChr < length)
 	{
 		unichar ch = [self characterAtIndex:indexOfChr];
 		if (ch == '\r' || ch == '\n')
 		{
 			if (hasNonEmptyChars)
 			{
-				indexOfLastWord = r.length;
 				break;
 			}
-			r.location += r.length + 1;
-			r.length = -1;
-			hasNonEmptyChars = NO;
 		}
 		else
 		{
-			if (ch == ' ' || ch == '\t')
-				indexOfLastWord = r.length;
-			else
-				hasNonEmptyChars = YES;
+			if (ch != ' ' && ch != '\t')
+			{
+				if (!hasNonEmptyChars)
+				{
+					hasNonEmptyChars = YES;
+					indexOfFirstChr = indexOfChr;
+				}
+				indexOfLastChr = indexOfChr;
+			}
 		}
 		++indexOfChr;
-		++r.length;
 	}
-	if (r.length < [self length])
-		r.length = indexOfLastWord;
-	return [[self substringWithRange:r] trim];
+	return hasNonEmptyChars ? [self substringWithRange:NSMakeRange(indexOfFirstChr, 1u + (indexOfLastChr - indexOfFirstChr))] : @"";
 }
 
 /* stringByDeletingLastURLComponent
