@@ -34,7 +34,7 @@
 #import "ArticleFilter.h"
 #import "XMLParser.h"
 #import "Field.h"
-#import "WebKit/WebKit.h"
+#import <WebKit/WebKit.h>
 #import "PopupButton.h"
 
 // Private functions

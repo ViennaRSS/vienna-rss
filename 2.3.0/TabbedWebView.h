@@ -19,7 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "WebKit/WebKit.h"
+#import <WebKit/WebKit.h>
 
 @class AppController;
 

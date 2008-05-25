@@ -18,8 +18,8 @@
 // 
 
 #import "HelperFunctions.h"
-#import "SystemConfiguration/SCNetworkReachability.h"
-#import "Carbon/Carbon.h"
+#import <SystemConfiguration/SCNetworkReachability.h>
+#import <Carbon/Carbon.h>
 
 // Private functions
 static OSStatus RegisterMyHelpBook(void);
