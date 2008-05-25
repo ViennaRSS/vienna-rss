@@ -700,8 +700,8 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [[[subItemTree valueOfElement] firstNonBlankLine] stringByUnescapingExtendedCharacters];
-					[newItem setTitle:[self stripHTMLTags:newTitle]];
+					NSString * newTitle = [[subItemTree valueOfElement] stringByUnescapingExtendedCharacters];
+					[newItem setTitle:[[self stripHTMLTags:newTitle] firstNonBlankLine]];
 					continue;
 				}
 				
@@ -949,13 +949,13 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [[[subItemTree valueOfElement] firstNonBlankLine] stringByUnescapingExtendedCharacters];
+					NSString * newTitle = [[subItemTree valueOfElement] stringByUnescapingExtendedCharacters];
 					NSString * titleType = [subItemTree valueOfAttribute:@"type"];
 					
 					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
-						[newItem setTitle:[self stripHTMLTags:newTitle]];
-					else
-						[newItem setTitle:newTitle];
+						newTitle = [self stripHTMLTags:newTitle];
+					
+					[newItem setTitle:[newTitle firstNonBlankLine]];
 					continue;
 				}
 
@@ -1166,7 +1166,6 @@
  * of the title rather than presentation data. So we only remove tags which:
  * 
  * 1. Have a corresponding </tag> instruction.
- * 2. Are followed immediately by a non-space character.
  */
 -(NSString *)stripHTMLTags:(NSString *)htmlString
 {
@@ -1188,14 +1187,11 @@
 				[rawString deleteCharactersInRange:openingTagRange];
 				continue;
 			}
-			else if (openTagEndIndex + 1 < [rawString length] && !isspace([rawString characterAtIndex:openTagEndIndex+1]))
+			else if (closingTagRange.location != NSNotFound)
 			{
-				if (closingTagRange.location != NSNotFound)
-				{
-					[rawString deleteCharactersInRange:closingTagRange];
-					[rawString deleteCharactersInRange:openingTagRange];
-					continue;
-				}
+				[rawString deleteCharactersInRange:closingTagRange];
+				[rawString deleteCharactersInRange:openingTagRange];
+				continue;
 			}			
 		}
 		++openTagStartIndex;
