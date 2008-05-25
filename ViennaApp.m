@@ -29,7 +29,7 @@
 #import "FoldersTree.h"
 #import "BrowserPane.h"
 #import "UnifiedDisplayView.h"
-#import "WebKit/WebKit.h"
+#import <WebKit/WebKit.h>
 
 // This is needed for iTunes-like buttons with different option-key personalities.
 OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData) 

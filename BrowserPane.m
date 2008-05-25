@@ -27,7 +27,7 @@
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
 #import "AddressBarCell.h"
-#import "WebKit/WebKit.h"
+#import <WebKit/WebKit.h>
 #import "RichXMLParser.h"
 
 // This is defined somewhere but I can't find where.

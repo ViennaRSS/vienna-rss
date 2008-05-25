@@ -24,7 +24,7 @@
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
-#import "WebKit/WebKit.h"
+#import <WebKit/WebKit.h>
 #import "BrowserView.h"
 
 @interface ArticleView (Private)

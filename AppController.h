@@ -22,7 +22,7 @@
 #import "Database.h"
 #import "ArticleController.h"
 #import "ActivityViewer.h"
-#import "Growl/GrowlApplicationBridge.h"
+#import <Growl/GrowlApplicationBridge.h>
 #import "DownloadWindow.h"
 #import "FilterView.h"
 #import "PopupButton.h"
