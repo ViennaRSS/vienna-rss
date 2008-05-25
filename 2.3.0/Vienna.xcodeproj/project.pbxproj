@@ -11,9 +11,7 @@
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
-		616867C40A83D6A700FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
-		616867C50A83D6B100FEAC62 /* CurlGetDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
-		616867C60A83D6BA00FEAC62 /* CurlGetDate.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */; };
+		52BA328A0DE9B02E0008B3E1 /* CurlGetDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
@@ -263,20 +261,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
-		616867BE0A83D68C00FEAC62 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = CurlGetDate;
-		};
-		616867C20A83D69F00FEAC62 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = CurlGetDate;
-		};
 		AA2B6CF70C2E658C00415851 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -301,7 +285,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in CopyFiles */,
-				616867C60A83D6BA00FEAC62 /* CurlGetDate.framework in CopyFiles */,
 				478FE4540A0F42A300B37021 /* Sparkle.framework in CopyFiles */,
 				AA610C1509EF6745005C6903 /* NewsParser.framework in CopyFiles */,
 				AA62D7FC0859ABEC0040C370 /* Growl.framework in CopyFiles */,
@@ -333,12 +316,13 @@
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
+		52BA32880DE9B02E0008B3E1 /* CurlGetDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurlGetDate.h; sourceTree = "<group>"; };
+		52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurlGetDate.m; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		61975EB70B41E0A0001F65FF /* EmptyTrashWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTrashWarning.h; sourceTree = "<group>"; };
 		61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTrashWarning.m; sourceTree = "<group>"; };
 		61975F020B41F145001F65FF /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = revised.tiff; sourceTree = "<group>"; };
-		61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CurlGetDate.xcodeproj; path = CurlGetDate/CurlGetDate.xcodeproj; sourceTree = "<group>"; };
 		61D9A5260B41FFBC0087C312 /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61D9A5270B41FFCF0087C312 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61D9A5280B41FFE20087C312 /* de */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = de; path = de.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
@@ -877,7 +861,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA2B6D250C2E679800415851 /* libSQLiteLib.a in Frameworks */,
-				616867C50A83D6B100FEAC62 /* CurlGetDate.framework in Frameworks */,
 				AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
@@ -906,7 +889,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				616867C40A83D6A700FEAC62 /* CurlGetDate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,7 +938,6 @@
 				52A8B4300C4996910035ED2A /* notes.html */,
 				AA21F45D0753077300503F58 /* TODO */,
 				AA21F4510753053500503F58 /* CHANGES */,
-				61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */,
 				AA2B6CEF0C2E653C00415851 /* SQLiteLib */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AAA568BB09EE773200C87343 /* Main */,
@@ -1148,14 +1129,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		616867BB0A83D68C00FEAC62 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AA1A282E0C09BE59005968DC /* Toolbar Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1317,6 +1290,8 @@
 		AAA5687809EE733500C87343 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				52BA32880DE9B02E0008B3E1 /* CurlGetDate.h */,
+				52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */,
 				AA328863084700B700A7AD5A /* XMLParser.h */,
 				AA328864084700B700A7AD5A /* XMLParser.m */,
 				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
@@ -1477,7 +1452,6 @@
 				AAA56F5109EF533100C87343 /* PBXBuildRule */,
 			);
 			dependencies = (
-				616867C30A83D69F00FEAC62 /* PBXTargetDependency */,
 			);
 			name = NewsParser;
 			productName = NewsParser;
@@ -1523,12 +1497,6 @@
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 616867BB0A83D68C00FEAC62 /* Products */;
-					ProjectRef = 61B05D840A82DEF800A8C293 /* CurlGetDate.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
@@ -1537,16 +1505,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		616867BF0A83D68C00FEAC62 /* CurlGetDate.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CurlGetDate.framework;
-			remoteRef = 616867BE0A83D68C00FEAC62 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D15AC2B0486D014006FF6A4 /* Resources */ = {
@@ -2185,17 +2143,13 @@
 				AAA56F2D09EF4FE100C87343 /* XMLParser.m in Sources */,
 				AAA56F2C09EF4FD100C87343 /* RichXMLParser.m in Sources */,
 				AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */,
+				52BA328A0DE9B02E0008B3E1 /* CurlGetDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		616867C30A83D69F00FEAC62 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CurlGetDate;
-			targetProxy = 616867C20A83D69F00FEAC62 /* PBXContainerItemProxy */;
-		};
 		AA2B6CF80C2E658C00415851 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AA2B6CE30C2E646100415851 /* SQLiteLib */;
@@ -2565,6 +2519,7 @@
 					Foundation,
 					"-framework",
 					AppKit,
+					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
 			};
@@ -2885,6 +2840,7 @@
 					Foundation,
 					"-framework",
 					AppKit,
+					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
 			};
@@ -2907,6 +2863,7 @@
 					Foundation,
 					"-framework",
 					AppKit,
+					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
 			};
