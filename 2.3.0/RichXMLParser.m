@@ -18,7 +18,6 @@
 //  limitations under the License.
 
 #import "RichXMLParser.h"
-#import <CoreFoundation/CoreFoundation.h>
 #import "StringExtensions.h"
 #import "ArrayExtensions.h"
 #import "XMLTag.h"
