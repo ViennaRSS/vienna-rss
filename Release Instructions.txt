@@ -1,0 +1,62 @@
+Steps to release Vienna:
+(Note: I'm using Vienna 2.3.0 as an example in the following steps.)
+
+(1) Check out a fresh working copy from the repository, to make sure there's no crud that goes into the release version. Also, I would suggest not using your home directory to build, because the full path names will appear in the code (do "strings Vienna" on the executable to see). I use "/Users/ReleaseBuilds", for example.
+
+cd /Users/ReleaseBuilds
+svn checkout https://vienna-rss.svn.sourceforge.net/svnroot/vienna-rss/trunk/2.3.0 Vienna2.3.0
+
+(2) Run the build script.
+
+cd Vienna2.3.0/scripts
+
+For stable releases:
+
+./release_vienna.sh
+
+For beta releases:
+
+./release_vienna_beta.sh
+
+(3) Upload "Vienna2.3.0.2300.zip" and "Vienna2.3.0.2300.en-us.zip" via anonymous FTP to the "/incoming" directory of <ftp://upload.sourceforge.net>.  All files to upload are in the "/Users/ReleaseBuilds/Vienna2.3.0/build/Deployment/Uploads" directory.
+
+(4) In your web browser, load the SourceForge File Release page for Vienna at <http://sourceforge.net/project/admin/editpackages.php?group_id=142635> and click "Add Release" next to the "Released Versions" package for stable releases or next to the "Test Versions" package for beta releases.
+
+(6) Enter the release name.  The release name is always the version number (e.g., 2.3.0). For beta releases, we'll also include the build number (e.g., 2300).
+
+(7) Paste the latest release notes from the "/Users/ReleaseBuilds/Vienna2.3.0/CHANGES" file, select "Preserve my pre-formatted text", and click "Submit/Refresh".
+
+(8) Under "Add Files to This Release", select the uploaded zip files and click "Add Files and/or Refresh View".
+
+(9) Under "Edit Files In This Release", select "Mac Universal" for "Processor" and ".zip" for the "File Type".  Click "Update/Refresh".  You'll need to do this for both files, because the button only seems to apply to the one file.
+
+(10) Verify the downloads.  Load the SourceForge Downloads page for Vienna at <http://sourceforge.net/project/showfiles.php?group_id=142635>, download both new zip files, uncompress them, and the run apps.
+
+(11) Login to the Vienna web site and make a backup of the current changelog file.
+
+ssh <usename>@shell.sf.net
+cd /home/groups/v/vi/vienna-rss/htdocs
+
+For stable releases:
+
+cp changelog.xml changelog.2.3.0.backup.xml
+
+For beta releases:
+
+cp changelog_beta.xml changelog_beta.2.3.0.backup.xml
+
+(12) Upload "changelog.xml" or "changelog_beta.xml" and "noteson2.3.0.2300.html" via ssh or sftp to "/home/groups/v/vi/vienna-rss/htdocs".
+
+(13) Make sure that the files uploaded in step (12) are group-writable on the server, in case someone else needs to edit them.
+
+chmod g+w changelog.xml noteson2.3.0.2300.html
+
+(14) Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version.  Check again after updating to make sure Sparkle is showing that you have the latest version.
+
+(15) Go back to <http://sourceforge.net/project/admin/editpackages.php?group_id=142635>, and edit the release.  Under "Email Release Notice", check "I'm sure" and click "Send Notice".
+
+(16) Post an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18>.
+
+(17) Upload "Vienna2.3.0.2300.dSYM.zip" and "NewsParser.framework2.3.0.2300.dSYM.zip" via ssh or sftp to "/home/groups/v/vi/vienna-rss/htdocs/debugging".
+
+(18) Update the svn trunk for the next release.  This requires modifying the files "CHANGES" and "notes.html", as well as increasing BUILD_NUMBER and VIENNA_VERSION_NUMBER in the project build settings.
