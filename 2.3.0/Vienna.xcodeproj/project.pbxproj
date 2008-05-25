@@ -2564,7 +2564,6 @@
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -2586,7 +2585,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				OPTIMIZATION_CFLAGS = "-O0";
 				PRODUCT_NAME = Vienna;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2595,7 +2593,6 @@
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(SDKROOT)/System/Library/Frameworks",
@@ -2616,7 +2613,6 @@
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
 				PRODUCT_NAME = Vienna;
 				STRIP_INSTALLED_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
@@ -2629,6 +2625,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DEBUGGING_SYMBOLS = full;
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
