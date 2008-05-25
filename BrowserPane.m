@@ -282,14 +282,9 @@
 	if (frame == [webPane mainFrame])
 	{
 		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
-        [addressField setStringValue:[[[[frame provisionalDataSource] request] URL] absoluteString]];
 		[self showRssPageButton:FALSE];
 		[self setError:nil];
 		hasPageTitle = NO;
-		
-		[self willChangeValueForKey:@"isLoading"];
-		isLoading = YES;
-		[self didChangeValueForKey:@"isLoading"];
 	}
 }
 
@@ -300,14 +295,21 @@
 {
 	if (frame == [webPane mainFrame])
 	{
+		if (!isLoading)
+		{
+			[self willChangeValueForKey:@"isLoading"];
+			isLoading = YES;
+			[self didChangeValueForKey:@"isLoading"];
+		}
+		
 		if (!openURLInBackground)
 			[[sender window] makeFirstResponder:sender];
 
 		// Show or hide the lock icon depending on whether this is a secure
 		// web page. Also shade the address bar a nice light yellow colour as
 		// Camino does.
-		NSURLRequest * request = [[frame dataSource] request];
-		if ([[[request URL] scheme] isEqualToString:@"https"])
+		NSURL * theURL = [[[frame dataSource] request] URL];
+		if ([[theURL scheme] isEqualToString:@"https"])
 		{
 			[[addressField cell] setHasSecureImage:YES];
 			[addressField setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:0.777 alpha:1.0]];
@@ -319,6 +321,7 @@
 			[addressField setBackgroundColor:[NSColor whiteColor]];
 			[lockIconImage setHidden:YES];
 		}
+		[addressField setStringValue:[theURL absoluteString]];
 	}
 }
 
