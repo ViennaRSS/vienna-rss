@@ -1665,14 +1665,15 @@
 			);
 			inputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME)$(WRAPPER_SUFFIX)",
-				"$(SYMROOT)/DeploymentWithSymbols/$(PRODUCT_NAME)$(WRAPPER_SUFFIX)",
+				"$(BUILT_PRODUCTS_DIR)/NewsParser.framework.dSYM",
+				"$(BUILD_PRODUCTS_DIR)/$(PRODUCT_NAME)$(WRAPPER_SUFFIX).dSYM",
 			);
 			name = "Localization versions";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "VIENNA_APP=\"$PRODUCT_NAME$WRAPPER_SUFFIX\"\nVIENNA_APP_DEBUG=\"$SYMROOT/DeploymentWithSymbols/$VIENNA_APP\"\nVIENNA_UPLOAD_PREFIX=\"Uploads/$PRODUCT_NAME$VIENNA_VERSION_NUMBER.$BUILD_NUMBER\"\nVIENNA_UPLOAD_PREFIX_ENGLISH=\"$VIENNA_UPLOAD_PREFIX.en-us\"\nVIENNA_UPLOAD_PREFIX_DEBUG=\"$VIENNA_UPLOAD_PREFIX.debugsymbols\"\n\nif [ \"$CONFIGURATION\" = \"Deployment\" ] ; then\n\techo \"Running script to create localized and non-localized versions\"\n\tif [ -e \"$BUILT_PRODUCTS_DIR\" ] ; then\n\t\tcd \"$BUILT_PRODUCTS_DIR\"\n\t\tif [ -e \"$VIENNA_APP\" ] ; then\n\t\t\tif [ ! -e Uploads ] ; then\n\t\t\t\t mkdir Uploads\n\t\t\telse\n\t\t\t\trm -f \"$VIENNA_UPLOAD_PREFIX.zip\"\n\t\t\t\trm -f \"$VIENNA_UPLOAD_PREFIX_ENGLISH.zip\"\n\t\t\t\trm -f \"$VIENNA_UPLOAD_PREFIX_DEBUG.zip\"\n\t\t\tfi\n\n\t\t\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_APP\" \"$VIENNA_UPLOAD_PREFIX.zip\"\n\n\t\t\trm -fR \"en-us\"\n\t\t\tmkdir \"en-us\"\n\t\t\tcp -R \"$VIENNA_APP\" \"en-us/$VIENNA_APP\"\n\t\t\tfind -d \"en-us/$VIENNA_APP\" -iname \"*.lproj\" -not -iname \"en.lproj\" -not -iname \"english.lproj\" -exec rm -rf {} \\;\n\t\t\tditto -ck --keepParent --sequesterRsrc \"en-us/$VIENNA_APP\" \"$VIENNA_UPLOAD_PREFIX_ENGLISH.zip\"\n\n\t\t\tif [ -e \"$VIENNA_APP_DEBUG\" ] ; then\n\t\t\t\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_APP_DEBUG\" \"$VIENNA_UPLOAD_PREFIX_DEBUG.zip\"\n\t\t\telse\n\t\t\t\techo \"Error: $VIENNA_APP_DEBUG does not exist.\"\n\t\t\tfi\n\t\telse\n\t\t\techo \"Error: $BUILT_PRODUCTS_DIR/$VIENNA_APP does not exist.\"\n\t\tfi\n\telse\n\t\techo \"Error: $BUILT_PRODUCTS_DIR does not exist.\"\n\tfi\nfi\n";
+			shellScript = "VIENNA_APP=\"$PRODUCT_NAME$WRAPPER_SUFFIX\"\nVIENNA_ENGLISH=\"en-us\"\nVIENNA_APP_ENGLISH=\"$VIENNA_ENGLISH/$VIENNA_APP\"\nVIENNA_BUILD_SUFFIX=\"$VIENNA_VERSION_NUMBER.$BUILD_NUMBER\"\nVIENNA_BUILD_NAME=\"$PRODUCT_NAME$VIENNA_BUILD_SUFFIX\"\nVIENNA_UPLOADS_DIR=\"Uploads\"\nVIENNA_ZIP_SUFFIX=\".zip\"\nVIENNA_DSYM_SUFFIX=\".dSYM\"\nVIENNA_UPLOAD_PREFIX=\"$VIENNA_UPLOADS_DIR/$VIENNA_BUILD_NAME\"\nVIENNA_UPLOAD=\"$VIENNA_UPLOAD_PREFIX$VIENNA_ZIP_SUFFIX\"\nVIENNA_UPLOAD_ENGLISH=\"$VIENNA_UPLOAD_PREFIX.$VIENNA_ENGLISH$VIENNA_ZIP_SUFFIX\"\nVIENNA_APP_DSYM=\"$VIENNA_APP$VIENNA_DSYM_SUFFIX\"\nVIENNA_NEWSPARSER=\"NewsParser.framework\"\nVIENNA_NEWSPARSER_DSYM=\"$VIENNA_NEWSPARSER$VIENNA_DSYM_SUFFIX\"\nVIENNA_UPLOAD_DSYM=\"$VIENNA_UPLOADS_DIR/$VIENNA_BUILD_NAME$VIENNA_DSYM_SUFFIX$VIENNA_ZIP_SUFFIX\"\nVIENNA_UPLOAD_NEWSPARSER_DSYM=\"$VIENNA_UPLOADS_DIR/$VIENNA_NEWSPARSER$VIENNA_BUILD_SUFFIX$VIENNA_DSYM_SUFFIX$VIENNA_ZIP_SUFFIX\"\n\nif [ \"$CONFIGURATION\" = \"Deployment\" ] ; then\n\techo \"Running script to create localized and non-localized versions\"\n\tif [ -e \"$BUILT_PRODUCTS_DIR\" ] ; then\n\t\tcd \"$BUILT_PRODUCTS_DIR\"\n\t\tif [ -e \"$VIENNA_APP\" ] ; then\n\t\t\tif [ ! -e \"$VIENNA_UPLOADS_DIR\" ] ; then\n\t\t\t\t mkdir \"$VIENNA_UPLOADS_DIR\"\n\t\t\telse\n\t\t\t\trm -f \"$VIENNA_UPLOAD\"\n\t\t\t\trm -f \"$VIENNA_UPLOAD_ENGLISH\"\n\t\t\t\trm -f \"$VIENNA_UPLOAD_DSYM\"\n\t\t\t\trm -f \"$VIENNA_UPLOAD_NEWSPARSER_DSYM\"\n\t\t\tfi\n\n\t\t\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_APP\" \"$VIENNA_UPLOAD\"\n\n\t\t\trm -fR \"$VIENNA_ENGLISH\"\n\t\t\tmkdir \"$VIENNA_ENGLISH\"\n\t\t\tcp -R \"$VIENNA_APP\" \"$VIENNA_APP_ENGLISH\"\n\t\t\tfind -d \"$VIENNA_APP_ENGLISH\" -iname \"*.lproj\" -not -iname \"en.lproj\" -not -iname \"english.lproj\" -exec rm -rf {} \\;\n\t\t\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_APP_ENGLISH\" \"$VIENNA_UPLOAD_ENGLISH\"\n\n\t\t\tif [ -e \"$VIENNA_APP_DSYM\" ] ; then\n\t\t\t\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_APP_DSYM\" \"$VIENNA_UPLOAD_DSYM\"\n\t\t\telse\n\t\t\t\techo \"Error: $VIENNA_APP_DSYM does not exist.\"\n\t\t\tfi\n\n\t\t\tif [ -e \"$VIENNA_NEWSPARSER_DSYM\" ] ; then\n\t\t\t\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_NEWSPARSER_DSYM\" \"$VIENNA_UPLOAD_NEWSPARSER_DSYM\"\n\t\t\telse\n\t\t\t\techo \"Error: $VIENNA_NEWSPARSER_DSYM does not exist.\"\n\t\t\tfi\n\t\telse\n\t\t\techo \"Error: $BUILT_PRODUCTS_DIR/$VIENNA_APP does not exist.\"\n\t\tfi\n\telse\n\t\techo \"Error: $BUILT_PRODUCTS_DIR does not exist.\"\n\tfi\nfi\n";
 		};
 		521FD44A0C78C6A8009E4961 /* Index cs Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2502,136 +2503,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		525D612E0C6DE83C00C11635 /* DeploymentWithSymbols */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "NewsParser-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-lcurl",
-				);
-				PRODUCT_NAME = NewsParser;
-			};
-			name = DeploymentWithSymbols;
-		};
-		525D612F0C6DE83C00C11635 /* DeploymentWithSymbols */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PFE_FILE_C_DIALECTS = c;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_VALUE = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				INSTALL_PATH = /usr/local/lib;
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = SQLiteLib;
-			};
-			name = DeploymentWithSymbols;
-		};
-		525D61300C6DE83C00C11635 /* DeploymentWithSymbols */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CURRENT_PROJECT_VERSION = 3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"$(SDKROOT)/System/Library/Frameworks",
-					"$(BUILT_PRODUCTS_DIR)",
-				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					SQLITE_OMIT_CURSOR,
-					"HAVE_USLEEP=1",
-					"THREADSAFE=0",
-					NDEBUG,
-					OS_UNIX,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = NO;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MISSING_PARENTHESES = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_SHADOW = NO;
-				GCC_WARN_SIGN_COMPARE = NO;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				PRODUCT_NAME = Vienna;
-				VERSIONING_SYSTEM = "apple-generic";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = DeploymentWithSymbols;
-		};
-		525D61310C6DE83C00C11635 /* DeploymentWithSymbols */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				BUILD_NUMBER = 2300;
-				COPY_PHASE_STRIP = NO;
-				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_MISSING_PARENTHESES = YES;
-				GCC_WARN_SHADOW = NO;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				STRIP_INSTALLED_PRODUCT = NO;
-				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.3.0;
-			};
-			name = DeploymentWithSymbols;
-		};
 		AA2B6CE60C2E648000415851 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PFE_FILE_C_DIALECTS = c;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2648,7 +2523,6 @@
 		AA2B6CE70C2E648000415851 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PFE_FILE_C_DIALECTS = c;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2659,6 +2533,7 @@
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = SQLiteLib;
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Deployment;
 		};
@@ -2673,7 +2548,6 @@
 					"$(BUILT_PRODUCTS_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
@@ -2752,6 +2626,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
 				PRODUCT_NAME = Vienna;
+				STRIP_INSTALLED_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = (
 					"-Wmost",
@@ -2768,6 +2643,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				BUILD_NUMBER = 2300;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -2799,7 +2675,9 @@
 					i386,
 				);
 				BUILD_NUMBER = 2300;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DEBUGGING_SYMBOLS = full;
+				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2815,6 +2693,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SEPARATE_STRIP = YES;
 				VIENNA_CHANGELOG_SUFFIX = "";
 				VIENNA_VERSION_NUMBER = 2.3.0;
 			};
@@ -2827,7 +2706,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -2866,6 +2744,7 @@
 					"-lcurl",
 				);
 				PRODUCT_NAME = NewsParser;
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Deployment;
 		};
@@ -2877,7 +2756,6 @@
 			buildConfigurations = (
 				AA2B6CE60C2E648000415851 /* Development */,
 				AA2B6CE70C2E648000415851 /* Deployment */,
-				525D612F0C6DE83C00C11635 /* DeploymentWithSymbols */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -2887,7 +2765,6 @@
 			buildConfigurations = (
 				AA4F9AB30855422400C18279 /* Development */,
 				AA4F9AB40855422400C18279 /* Deployment */,
-				525D61300C6DE83C00C11635 /* DeploymentWithSymbols */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -2897,7 +2774,6 @@
 			buildConfigurations = (
 				AA4F9AB70855422400C18279 /* Development */,
 				AA4F9AB80855422400C18279 /* Deployment */,
-				525D61310C6DE83C00C11635 /* DeploymentWithSymbols */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -2907,7 +2783,6 @@
 			buildConfigurations = (
 				AAA5687309EE726000C87343 /* Development */,
 				AAA5687409EE726000C87343 /* Deployment */,
-				525D612E0C6DE83C00C11635 /* DeploymentWithSymbols */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
