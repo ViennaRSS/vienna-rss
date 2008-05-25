@@ -23,9 +23,6 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 #import "StringExtensions.h"
-#import "WebKit/WebFrame.h"
-#import "WebKit/WebPreferences.h"
-#import "WebKit/WebPolicyDelegate.h"
 
 @interface NSObject (TabbedWebViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
