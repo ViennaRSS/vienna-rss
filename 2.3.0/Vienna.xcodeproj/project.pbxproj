@@ -902,13 +902,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA2B6CE20C2E646100415851 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AAA5686D09EE725B00C87343 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1451,7 +1444,6 @@
 			buildConfigurationList = AA2B6CE50C2E648000415851 /* Build configuration list for PBXNativeTarget "SQLiteLib" */;
 			buildPhases = (
 				AA2B6CE10C2E646100415851 /* Sources */,
-				AA2B6CE20C2E646100415851 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2565,7 +2557,6 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = SQLiteLib;
 			};
 			name = Development;
@@ -2581,7 +2572,6 @@
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INSTALL_PATH = /usr/local/lib;
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = SQLiteLib;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
