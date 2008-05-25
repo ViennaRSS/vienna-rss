@@ -19,7 +19,7 @@
 
 #import "XMLParser.h"
 #import "StringExtensions.h"
-#import "CurlGetDate/CurlGetDate.h"
+#import "CurlGetDate.h"
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
