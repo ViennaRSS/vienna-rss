@@ -19,7 +19,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "WebKit/WebView.h"
 #import "BrowserView.h"
 
 @class AppController;

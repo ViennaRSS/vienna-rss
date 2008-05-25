@@ -48,8 +48,7 @@
 #import "ToolbarItem.h"
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
-#import <WebKit/WebFrame.h>
-#import <WebKit/WebUIDelegate.h>
+#import <WebKit/WebKit.h>
 #import <Growl/GrowlDefines.h>
 #include <mach/mach_port.h>
 #include <mach/mach_interface.h>

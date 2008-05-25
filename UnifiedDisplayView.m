@@ -27,10 +27,7 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "StringExtensions.h"
-#import "WebKit/WebFrame.h"
-#import "WebKit/WebUIDelegate.h"
-#import "WebKit/WebDataSource.h"
-#import "WebKit/WebBackForwardList.h"
+#import "WebKit/WebKit.h"
 
 @implementation UnifiedDisplayView
 
