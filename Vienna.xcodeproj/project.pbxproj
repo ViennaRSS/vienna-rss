@@ -27,6 +27,7 @@
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
+		5250057C0DE9F33100C9E5A2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		52BA328A0DE9B02E0008B3E1 /* CurlGetDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
@@ -906,6 +907,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5250057C0DE9F33100C9E5A2 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,7 +1462,6 @@
 			buildPhases = (
 				AAA5686C09EE725B00C87343 /* Sources */,
 				AAA5686D09EE725B00C87343 /* Frameworks */,
-				AAA5686B09EE725B00C87343 /* Resources */,
 			);
 			buildRules = (
 				AAA56F5109EF533100C87343 /* PBXBuildRule */,
@@ -1659,13 +1660,6 @@
 				AA077AAA0C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff in Resources */,
 				AA077AAB0C84484B00D71D26 /* subscribeButtonSmall.tiff in Resources */,
 				AA077AAC0C84484B00D71D26 /* subscribeButtonSmallPressed.tiff in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAA5686B09EE725B00C87343 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2749,18 +2743,12 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-lcurl",
-				);
+				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = NewsParser;
 			};
 			name = Development;
@@ -2773,17 +2761,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "NewsParser-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-lcurl",
-				);
+				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = NewsParser;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
