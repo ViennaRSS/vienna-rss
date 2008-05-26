@@ -175,11 +175,18 @@
 - (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
 	int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
-	if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
-		[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
+	if (oldIndex > 0)
+	{
+		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
+			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
+		}
+		
+		return YES;
 	}
-
-	return YES;
+	else
+	{
+		return NO;
+	}
 }
 
 /* countOfTabs
