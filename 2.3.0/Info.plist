@@ -104,6 +104,8 @@
 		<string>kungfoo.tv.ecto</string>
 		<key>BlogThing</key>
 		<string>com.automagicsoftware.BlogThing</string>
+		<key>Kaku</key>
+		<string>jp.lolipop.ppmweb.Kaku</string>
 	</dict>
 </dict>
 </plist>
