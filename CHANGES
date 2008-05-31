@@ -11,7 +11,15 @@ Thanks!
 
 2.3.0.2300
 ----------
+- Drop Mac OS X 10.3 Panther support.
 - Add folder ordering option (manually or by name).
+- Improvement to Send Link for multiple links and escaped characters. (Patch from Anmol Khirbat).
+- Change standard product URLs to the new www.vienna-rss.org web site.
+- Bug fix: Truncated Headings in LA Times Feeds
+- Bug fix: Unescaped HTML in titles.
+- Bug fix: Incorrect document URL shown after downloads.
+- Bug fix: Option-clicking the close tab widget closed the main Articles tab.
+- Add Kaku http://ppmweb.lolipop.jp/apps/kaku to the list of supported blog editors.
 
 2.2.3.2213
 ----------
