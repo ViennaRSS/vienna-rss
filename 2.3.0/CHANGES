@@ -9,6 +9,13 @@ most recent build should be at the top of this file.
 Thanks!
 
 
+2.3.0.2301
+----------
+WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
+
+- Drop Mac OS X 10.3 Panther support. Vienna 2.3 needs 10.4 or greater to launch.
+
+
 2.3.0.2300
 ----------
 WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
