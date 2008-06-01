@@ -18,9 +18,9 @@ For beta releases:
 
 ./release_vienna_beta.sh
 
-(3) Upload "Vienna2.3.0.2300.zip" and "Vienna2.3.0.2300.en-us.zip" via anonymous FTP to the "/incoming" directory of <ftp://upload.sourceforge.net>.  All files to upload are in the "/Users/ReleaseBuilds/Vienna2.3.0/build/Deployment/Uploads" directory.
+(3) Upload "Vienna2.3.0.2300.zip" and "Vienna2.3.0.2300.en-us.zip" via <https://frs.sourceforge.net/webupload>.  All files to upload are in the "/Users/ReleaseBuilds/Vienna2.3.0/build/Deployment/Uploads" directory.
 
-(4) In your web browser, load the SourceForge File Release page for Vienna at <http://sourceforge.net/project/admin/editpackages.php?group_id=142635> and click "Add Release" next to the "Released Versions" package for stable releases or next to the "Test Versions" package for beta releases.
+(4) Load the SourceForge File Release page for Vienna at <http://sourceforge.net/project/admin/editpackages.php?group_id=142635> and click "Add Release" next to the "Released Versions" package for stable releases or next to the "Test Versions" package for beta releases.
 
 (6) Enter the release name.  The release name is always the version number (e.g., 2.3.0). For beta releases, we'll also include the build number (e.g., 2300).
 
