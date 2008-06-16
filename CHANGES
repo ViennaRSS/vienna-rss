@@ -12,7 +12,7 @@ Thanks!
 2.3.0.2301
 ----------
 - Drop Mac OS X 10.3 Panther support. Vienna 2.3 needs 10.4 or greater to launch.
-- Now using the Mac OSX native version of sqlite, databases can now be located on a network server.
+
 
 2.3.0.2300
 ----------
