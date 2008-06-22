@@ -2354,7 +2354,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	switch (keyChar)
 	{
 		case NSLeftArrowFunctionKey:
-			if (flags & NSCommandKeyMask)
+			if (flags & (NSCommandKeyMask | NSAlternateKeyMask))
 				return NO;
 			else
 			{
@@ -2367,7 +2367,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 			
 		case NSRightArrowFunctionKey:
-			if (flags & NSCommandKeyMask)
+			if (flags & (NSCommandKeyMask | NSAlternateKeyMask))
 				return NO;
 			else
 			{
