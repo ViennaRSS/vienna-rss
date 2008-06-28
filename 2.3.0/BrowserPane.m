@@ -225,7 +225,18 @@
 	if ([theURL rangeOfString:@"://"].location == NSNotFound)
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
 
-	[self loadURL:[NSURL URLWithString:theURL] inBackground:NO];
+	NSURL * urlToLoad = [NSURL URLWithString:theURL];
+	if (urlToLoad != nil)
+	{
+		[self loadURL:[NSURL URLWithString:theURL] inBackground:NO];
+	}
+	else
+	{
+		// TODO: present error message to user?
+		NSBeep();
+		NSLog(@"Can't create URL from string '%@'.", theURL);
+		[self activateAddressBar];
+	}
 }
 
 /* activateAddressBar
