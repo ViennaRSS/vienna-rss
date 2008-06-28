@@ -13,6 +13,7 @@ Thanks!
 ----------
 - Drop Mac OS X 10.3 Panther support. Vienna 2.3 needs 10.4 or greater to launch.
 - Leopard fix: allow option-left-arrow and option-right-arrow as keyboard shortcuts for closing and opening group folders.
+- Bug fix: when validating a URL, escape any special query characters.
 
 
 2.3.0.2300

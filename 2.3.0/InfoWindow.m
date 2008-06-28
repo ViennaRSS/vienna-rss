@@ -298,6 +298,20 @@ static InfoWindowManager * _infoWindowManager = nil;
 	if (validatorPage != nil)
 	{
 		NSString * url = [[urlField stringValue] trim];
+		
+		// Escape any special query characters in the URL, because the URL itself will be in a query.
+		NSString * query = [[NSURL URLWithString:url] query];
+		if (query != nil)
+		{
+			NSMutableString * escapedQuery = [NSMutableString stringWithString:query];
+			[escapedQuery replaceOccurrencesOfString:@"&" withString:@"%26" options:0u range:NSMakeRange(0u, [escapedQuery length])];
+			[escapedQuery replaceOccurrencesOfString:@"=" withString:@"%3D" options:0u range:NSMakeRange(0u, [escapedQuery length])];
+			if (![query isEqualToString:escapedQuery])
+			{
+				url = [[url substringToIndex:[url rangeOfString:query].location] stringByAppendingString:escapedQuery];
+			}
+		}
+		
 		NSString * validatorURL = [NSString stringWithFormat:validatorPage, url];
 		[[NSApp delegate] openURLFromString:validatorURL inPreferredBrowser:YES];
 	}
