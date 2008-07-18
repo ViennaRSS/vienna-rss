@@ -167,13 +167,15 @@ static InfoWindowManager * _infoWindowManager = nil;
 	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
 	InfoWindow * infoWindow;
 
-	infoWindow = [controllerList objectForKey:folderNumber];
+	infoWindow = [[controllerList objectForKey:folderNumber] retain];
 	if (infoWindow == nil)
 	{
 		infoWindow = [[InfoWindow alloc] initWithFolder:folderId];
 		[controllerList setObject:infoWindow forKey:folderNumber];
 	}
 	[infoWindow showWindow:[NSApp mainWindow]];
+
+	[infoWindow release];
 }
 @end
 

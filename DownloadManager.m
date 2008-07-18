@@ -352,6 +352,8 @@ static DownloadManager * _sharedDownloadManager = nil;
 
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
 		[theDownload setDestination:filename allowOverwrite:YES];
+		
+		[theDownload release];
 	}
 }
 

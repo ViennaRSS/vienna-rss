@@ -959,8 +959,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AAA7F5E909D50102007D0760 /* ArticleFilter.h */,
-				AAA7F5EA09D50102007D0760 /* ArticleFilter.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				AA0FB5E10869110300D9CB90 /* ActivityLog.m */,
 				AABFDC9F0609EA8100100A9B /* ActivityViewer.h */,
@@ -970,6 +968,8 @@
 				AAE7E5690A1045EC00685562 /* ArticleBaseView.h */,
 				AAE7E5630A1045DC00685562 /* ArticleController.h */,
 				AAE7E5620A1045DC00685562 /* ArticleController.m */,
+				AAA7F5E909D50102007D0760 /* ArticleFilter.h */,
+				AAA7F5EA09D50102007D0760 /* ArticleFilter.m */,
 				AA34B5A108C0DD3F003AEE18 /* ArticleListView.h */,
 				AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */,
 				AA74A85D087B56810029797C /* ArticleView.h */,

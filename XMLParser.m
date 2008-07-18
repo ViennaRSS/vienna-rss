@@ -107,6 +107,7 @@
 		CFXMLNodeRef instructionNode = CFXMLNodeCreate(kCFAllocatorDefault, kCFXMLNodeTypeProcessingInstruction, CFSTR("xml"), &instructionInfo, kCFXMLNodeCurrentVersion);
 		CFXMLTreeRef instructionTree = CFXMLTreeCreateWithNode(kCFAllocatorDefault, instructionNode);
 		CFTreeAppendChild(xmlDocument, instructionTree);
+		CFRelease(xmlDocument);
 		
 		// Create the parser object from this
 		[self setTreeRef:instructionTree];
@@ -146,6 +147,7 @@
 	// Create the parser object from this
 	XMLParser * newParser = [XMLParser treeWithCFXMLTreeRef:newTree];
 	CFRelease(newTreeNode);
+	CFRelease(newTree);
 	return newParser;
 }
 

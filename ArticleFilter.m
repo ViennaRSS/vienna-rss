@@ -155,6 +155,7 @@ static NSMutableArray * _filterList = nil;
 	if (_filterList == nil)
 		_filterList = [[NSMutableArray alloc] init];
 	[_filterList addObject:newFilter];
+	[newFilter release];
 }
 
 /* dealloc
