@@ -39,7 +39,6 @@
 		if (parent != nil)
 		{
 			[parent addChild:self atIndex:insertIndex];
-			[self release];
 		}
 		children = [[NSMutableArray array] retain];
 	}
@@ -65,11 +64,8 @@
 
 	if (sortMethod != MA_FolderSort_Manual)
 	{
-		TreeNode * forwardChild = nil;
 		insertIndex = 0;
 
-		if (count > 0u)
-			forwardChild = [children objectAtIndex:0u];
 		while (insertIndex < count)
 		{
 			TreeNode * theChild = [children objectAtIndex:insertIndex];

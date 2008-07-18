@@ -201,6 +201,7 @@ static OSStatus RegisterMyHelpBook(void)
 				err = fnfErr;
 			if (err == noErr)
 				err = AHRegisterHelpBook(&myBundleRef);
+			CFRelease(myBundleURL);
 		}
 	}
 	return err;

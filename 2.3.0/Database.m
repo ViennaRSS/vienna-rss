@@ -1661,7 +1661,6 @@ static Database * _sharedDatabase = nil;
 -(int)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromName:folderName];
-	BOOL success = YES;
 
 	if (folder)
 	{
@@ -1670,9 +1669,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	int folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
-	if (folderId == -1)
-		success = NO;
-	else
+	if (folderId != -1)
 	{
 		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
 		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];

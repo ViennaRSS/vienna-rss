@@ -280,6 +280,8 @@
 			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder canHaveChildren:(count > 0)];
 			if (count)
 				[self loadTree:listOfSubFolders rootNode:subNode];
+
+			[subNode release];
 		}
 	}
 	else
@@ -304,8 +306,12 @@
 			if (count)
 			{
 				if (![self loadTree:listOfSubFolders rootNode:subNode])
+				{
+					[subNode release];
 					return NO;
+				}
 			}
+			[subNode release];
 			nextChildId = [folder nextSiblingId];
 			++index;
 		}
@@ -734,8 +740,9 @@
 		}
 	}
 	
-	[[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
+	TreeNode * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
 	[self reloadFolderItem:node reloadChildren:YES];
+	[newNode release];
 }
 
 /* reloadFolderItem
@@ -1252,7 +1259,10 @@
 	
 	// If undo array is empty, then nothing has been moved.
 	if ([undoArray count] == 0u)
+	{
+		[undoArray release];
 		return NO;
+	}
 	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];

@@ -83,6 +83,8 @@
 	[self setView:button];
 	[self setTarget:currentTarget];
 	[self setAction:currentAction];
+
+	[button release];
 }
 
 /* setPopup
@@ -113,5 +115,7 @@
 	[menuItem setSubmenu:[button menu]];
 	[menuItem setTitle:[self label]];
 	[self setMenuFormRepresentation:menuItem];
+	
+	[button release];
 }
 @end

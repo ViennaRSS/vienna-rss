@@ -926,7 +926,6 @@
 			int itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
 			int itemIndex;
-			BOOL hasLink = NO;
 
 			// Look for the xml:base attribute, and use absolute url or stack relative url
 			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -1016,7 +1015,6 @@
 							}
 							else
 								[newItem setLink:theLink];
-							hasLink = YES;
 						}
 					}
 					continue;

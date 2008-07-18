@@ -78,6 +78,7 @@
 	[toolbar setDisplayMode:NSToolbarDisplayModeIconAndLabel];
 	[toolbar setDelegate:self];
 	[prefWindow setToolbar:toolbar];
+	[toolbar release];
 
 	// Hide the toolbar pill button
 	[[prefWindow standardWindowButton:NSWindowToolbarButton] setFrame:NSZeroRect];
