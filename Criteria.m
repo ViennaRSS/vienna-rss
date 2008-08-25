@@ -203,7 +203,8 @@
 	{
 		criteriaTree = [[NSMutableArray alloc] init];
 		condition = MA_CritCondition_All;
-		NSData * data = [NSData dataWithBytes:[string cString] length:[string length]];
+		const char * utf8String = [string UTF8String];
+		NSData * data = [NSData dataWithBytes:utf8String length:strlen(utf8String)];
 		XMLParser * xmlTree = [[XMLParser alloc] init];
 		if ([data length] > 0 && [xmlTree setData:data])
 		{
