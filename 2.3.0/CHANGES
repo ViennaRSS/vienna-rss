@@ -15,6 +15,7 @@ Thanks!
 - Leopard fix: allow option-left-arrow and option-right-arrow as keyboard shortcuts for closing and opening group folders.
 - Bug fix: when validating a URL, escape any special query characters.
 - Fix assertion failure when the user enters an invalid URL string in the address bar.
+- Fix bug with smart folders and German umlauts.
 
 
 2.3.0.2300
