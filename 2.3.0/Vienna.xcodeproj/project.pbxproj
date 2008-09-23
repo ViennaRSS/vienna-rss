@@ -201,6 +201,8 @@
 		AABCF9A508FF562E00984F78 /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
 		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
+		AAC022090E898A3D00BA9002 /* DatabaseSchema.doc in Resources */ = {isa = PBXBuildFile; fileRef = AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */; };
+		AAC0220B0E898A4E00BA9002 /* Release Instructions.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAC0220A0E898A4E00BA9002 /* Release Instructions.txt */; };
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AAD2BED00C2B2C0600AA0F11 /* top_right.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECD0C2B2C0600AA0F11 /* top_right.png */; };
 		AAD2BED10C2B2C0600AA0F11 /* top_middle.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */; };
@@ -755,6 +757,8 @@
 		AABCFB190900BA4E00984F78 /* SquareWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareWindow.m; sourceTree = "<group>"; };
 		AABFDC9F0609EA8100100A9B /* ActivityViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewer.h; sourceTree = "<group>"; };
 		AABFDCA00609EA8100100A9B /* ActivityViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewer.m; sourceTree = "<group>"; };
+		AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */ = {isa = PBXFileReference; lastKnownFileType = file; name = DatabaseSchema.doc; path = documents/DatabaseSchema.doc; sourceTree = "<group>"; };
+		AAC0220A0E898A4E00BA9002 /* Release Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = "Release Instructions.txt"; sourceTree = "<group>"; };
 		AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = DemoFeeds.plist; sourceTree = "<group>"; };
 		AACC06AC0B1CC65D00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AACC06C70B1CC67A00971CFB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = cs.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
@@ -944,9 +948,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				52A8B4300C4996910035ED2A /* notes.html */,
-				AA21F45D0753077300503F58 /* TODO */,
-				AA21F4510753053500503F58 /* CHANGES */,
+				AAC022070E898A0700BA9002 /* Documents */,
 				AA2B6CEF0C2E653C00415851 /* SQLiteLib */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AAA568BB09EE773200C87343 /* Main */,
@@ -1337,6 +1339,18 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		AAC022070E898A0700BA9002 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				AAC0220A0E898A4E00BA9002 /* Release Instructions.txt */,
+				AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */,
+				52A8B4300C4996910035ED2A /* notes.html */,
+				AA21F45D0753077300503F58 /* TODO */,
+				AA21F4510753053500503F58 /* CHANGES */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
 		AAC5063C082A7A530089FF70 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1650,6 +1664,8 @@
 				AA077AAA0C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff in Resources */,
 				AA077AAB0C84484B00D71D26 /* subscribeButtonSmall.tiff in Resources */,
 				AA077AAC0C84484B00D71D26 /* subscribeButtonSmallPressed.tiff in Resources */,
+				AAC022090E898A3D00BA9002 /* DatabaseSchema.doc in Resources */,
+				AAC0220B0E898A4E00BA9002 /* Release Instructions.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2621,7 +2637,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2301;
+				BUILD_NUMBER = 2302;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -2646,7 +2662,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2301;
+				BUILD_NUMBER = 2302;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_DEBUGGING_SYMBOLS = full;

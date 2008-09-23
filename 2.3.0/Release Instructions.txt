@@ -34,8 +34,10 @@ For beta releases:
 
 (11) Login to the Vienna web site and make a backup of the current changelog file.
 
-ssh <usename>@shell.sf.net
-cd /home/groups/v/vi/vienna-rss/htdocs
+sftp <username>,vienna-rss@web.sourceforge.net
+cd htdocs
+
+where <username> is your SourceForge user name. Note that the format is username followed by a comma followed by the project name. This was a recent change to the SourceForge shell access.
 
 For stable releases:
 
