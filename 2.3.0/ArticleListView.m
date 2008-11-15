@@ -320,7 +320,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 
 	// Set the columns popup on the title bar to show the same menu.
-	[columnsPopupMenu setMenu:columnsSubMenu];
+	[columnsPopupMenu setTheMenu:columnsSubMenu];
 	[columnsPopupMenu setSmallMenu:YES];
 	[columnsPopupMenu setToolTip:NSLocalizedString(@"Select columns to display", nil)];
 

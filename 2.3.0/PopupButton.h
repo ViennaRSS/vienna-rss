@@ -28,8 +28,8 @@
 }
 
 // Public functions
--(NSMenu *)menu;
+-(NSMenu *)theMenu;
 -(void)setSmallMenu:(BOOL)useSmallMenu;
 -(void)setPopupBelow:(BOOL)flag;
--(void)setMenu:(NSMenu *)menu;
+-(void)setTheMenu:(NSMenu *)menu;
 @end
