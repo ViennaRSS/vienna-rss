@@ -3991,14 +3991,14 @@ static CFStringRef percentEscape(NSString *string)
 	}
 	else if ([itemIdentifier isEqualToString: @"Styles"])
 	{
-		[item setPopup:@"stylesMenuButton" withMenu:[self getStylesMenu]];
+		[item setPopup:@"stylesMenuButton" withMenu:(willBeInserted ? [self getStylesMenu] : nil)];
 		[item setLabel:NSLocalizedString(@"Style", nil)];
 		[item setPaletteLabel:[item label]];
 		[item setToolTip:NSLocalizedString(@"Display the list of available styles", nil)];
 	}
 	else if ([itemIdentifier isEqualToString: @"Action"])
 	{
-		[item setPopup:@"popupMenuButton" withMenu:[self folderMenu]];
+		[item setPopup:@"popupMenuButton" withMenu:(willBeInserted ? [self folderMenu] : nil)];
 		[item setLabel:NSLocalizedString(@"Actions", nil)];
 		[item setPaletteLabel:[item label]];
 		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
