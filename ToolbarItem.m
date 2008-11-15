@@ -110,9 +110,9 @@
 	[self setView:button];
 	
 	NSMenuItem * menuItem = [[[NSMenuItem alloc] init] autorelease];
-	[button setMenu:theMenu];
+	[button setTheMenu:theMenu];
 	[button setPopupBelow:YES];
-	[menuItem setSubmenu:[button menu]];
+	[menuItem setSubmenu:[button theMenu]];
 	[menuItem setTitle:[self label]];
 	[self setMenuFormRepresentation:menuItem];
 	

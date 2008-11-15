@@ -54,22 +54,22 @@
 	popBelow = YES;
 }
 
-/* setMenu
+/* setTheMenu
  * Set the menu associated with this button
  */
--(void)setMenu:(NSMenu *)menu
+-(void)setTheMenu:(NSMenu *)menu
 {
 	[menu retain];
 	[theMenu release];
 	theMenu = menu;
 }
 
-/* menu
+/* theMenu
  * Return the current menu associated with the button.
  */
--(NSMenu *)menu
+-(NSMenu *)theMenu
 {
-	return theMenu;
+	return [[theMenu retain] autorelease];
 }
 
 /* mouseDown
