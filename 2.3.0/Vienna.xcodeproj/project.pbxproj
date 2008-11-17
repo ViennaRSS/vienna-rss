@@ -2649,7 +2649,7 @@
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.3.0;
+				VIENNA_VERSION_NUMBER = 2.3.1;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
@@ -2674,7 +2674,7 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SEPARATE_STRIP = YES;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.3.0;
+				VIENNA_VERSION_NUMBER = 2.3.1;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
