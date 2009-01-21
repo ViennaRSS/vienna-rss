@@ -30,9 +30,10 @@
 +(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] cString];
-	const char * cUsername = [username cString];
+	const char * cServiceName = [[secureUrl host] UTF8String];
+	const char * cUsername = [username UTF8String];
 	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : 80;
+	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	NSString * thePassword;
 
 	if (!cServiceName || !cUsername)
@@ -54,7 +55,7 @@
 												 strlen(cPath),
 												 cPath,
 												 portNumber,
-												 kSecProtocolTypeHTTP,
+												 protocolType,
 												 kSecAuthenticationTypeDefault,
 												 &passwordLength,
 												 &passwordPtr,
@@ -63,7 +64,7 @@
 			thePassword = @"";
 		else
 		{
-			thePassword = [NSString stringWithCString:passwordPtr length:passwordLength];
+			thePassword = [[[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
 			SecKeychainItemFreeContent(NULL, passwordPtr);
 		}
 	}
@@ -76,11 +77,12 @@
 +(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] cString];
-	const char * cUsername = [username cString];
+	const char * cServiceName = [[secureUrl host] UTF8String];
+	const char * cUsername = [username UTF8String];
 	const char * cPath = "";
 	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : 80;
-	const char * cPassword = [password cString];
+	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
+	const char * cPassword = [password UTF8String];
 	SecKeychainItemRef itemRef;
 	OSStatus status;
 	
@@ -96,7 +98,7 @@
 											 strlen(cPath),
 											 cPath,
 											 portNumber,
-											 kSecProtocolTypeHTTP,
+											 protocolType,
 											 kSecAuthenticationTypeDefault,
 											 NULL,
 											 NULL,
@@ -113,7 +115,7 @@
 								   strlen(cPath),
 								   cPath,
 								   portNumber,
-								   kSecProtocolTypeHTTP,
+								   protocolType,
 								   kSecAuthenticationTypeDefault,
 								   strlen(cPassword),
 								   cPassword,
