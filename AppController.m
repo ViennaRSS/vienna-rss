@@ -89,7 +89,6 @@
 	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
-	-(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel;
 	-(NSString *)appName;
 	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
 	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
@@ -1165,27 +1164,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	while ((tabLink = [enumerator nextObject]) != nil) {
 		[self createNewTab:([tabLink length] ? [NSURL URLWithString:tabLink] : nil) inBackground:YES];
-	}
-}
-
-/* setImageForMenuCommand
- * Sets the image for a specified menu command.
- */
--(void)setImageForMenuCommand:(NSImage *)image forAction:(SEL)sel
-{
-	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
-	int count = [arrayOfMenus count];
-	int index;
-	
-	for (index = 0; index < count; ++index)
-	{
-		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:self andAction:sel];
-		if (itemIndex >= 0)
-		{
-			[[subMenu itemAtIndex:itemIndex] setImage:image];
-			return;
-		}
 	}
 }
 
