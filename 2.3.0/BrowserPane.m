@@ -258,6 +258,8 @@
 
 	[pageFilename release];
 	pageFilename = [[[[url path] lastPathComponent] stringByDeletingPathExtension] retain];
+	
+	[addressField setStringValue:[url absoluteString]];
 	[[webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
 }
 

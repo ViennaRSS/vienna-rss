@@ -11,6 +11,7 @@ Thanks!
 
 2.3.2.2303
 ----------
+- Fix for bug 2724576: If network is down, URL tab information is lost. (Patch from Benedict Cohen).
 - Fix for bug 2381168: Keychain issues with https.
 
 2.3.1.2302
