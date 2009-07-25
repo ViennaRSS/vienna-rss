@@ -343,6 +343,15 @@
 	[printView print:self];
 }
 
+/* maintainsInactiveSelection
+ * Override WebView method to return YES.
+ * This emulates the Safari behavior of maintaining the selection (e.g., text field) when switching back an forth from a tab.
+ */
+-(BOOL) maintainsInactiveSelection
+{
+	return YES;
+}
+
 /* dealloc
  * Clean up behind ourself.
  */

@@ -13,6 +13,7 @@ Thanks!
 ----------
 - Fix for bug 2724576: If network is down, URL tab information is lost. (Patch from Benedict Cohen).
 - Fix for bug 2381168: Keychain issues with https.
+- When switching back and forth from a tab, maintain the selected user interface item in the tab.
 
 2.3.1.2302
 ----------
