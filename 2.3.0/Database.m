@@ -949,11 +949,11 @@ static Database * _sharedDatabase = nil;
 		if (results && [results rowCount])
 		{
 			int previousSibling = [[[results rowAtIndex:0] stringForColumn:@"folder_id"] intValue];
-			[results release];
 			[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
 		}
 		else
 			[self setFirstChild:[folder nextSiblingId] forFolder:[folder parentId]];
+		[results release];
 	}
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
@@ -1476,10 +1476,10 @@ static Database * _sharedDatabase = nil;
 				{
 					existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
 					revised_flag = [[[results rowAtIndex:0] stringForColumn:@"revised_flag"] intValue];
-					[results release];
 				}
 				else
 					existingBody = @"";
+				[results release];
 			}
 			else
 				revised_flag = [existingArticle isRevised];
@@ -2451,10 +2451,18 @@ static Database * _sharedDatabase = nil;
 {
 	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQuery:@"select deleted_flag from messages where deleted_flag=1"];
-	if (results && [results rowCount] > 0)
+	if (results)
 	{
-		[results release];
-		return NO;
+		if ([results rowCount] > 0)
+		{
+			[results release];
+			return NO;
+		}
+		else
+		{
+			[results release];
+			return YES;
+		}
 	}
 	else
 		return YES;

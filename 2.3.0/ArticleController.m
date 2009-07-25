@@ -299,7 +299,7 @@
 -(void)refilterArrayOfArticles
 {
 	[currentArrayOfArticles autorelease];
-	currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
+	currentArrayOfArticles = [[self applyFilter:folderArrayOfArticles] retain];
 }
 
 /* applyFilter
@@ -308,7 +308,7 @@
  */
 -(NSArray *)applyFilter:(NSArray *)unfilteredArray
 {
-	NSMutableArray * filteredArray = [[NSMutableArray alloc] initWithArray:unfilteredArray];
+	NSMutableArray * filteredArray = [NSMutableArray arrayWithArray:unfilteredArray];
 	
 	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? [articleToPreserve guid] : @"";
 	int folderIdOfArticleToPreserve = [articleToPreserve folderId];
