@@ -104,7 +104,7 @@
  */
 -(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
-	NSToolbarItem * newItem = [[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+	NSToolbarItem * newItem = [[[NSToolbarItem alloc] initWithItemIdentifier:itemIdentifier] autorelease];
 	NSDictionary * prefsItem = [prefsDict objectForKey:itemIdentifier];
 	[newItem setLabel:NSLocalizedString([prefsItem valueForKey:@"Title"], nil)];
 	[newItem setTarget:self];
@@ -172,6 +172,8 @@
 	[prefWindow setContentView:blankView];
 	[prefWindow display];
 
+	// retain here, release after setting contentView
+	// not sure that's necessary, but I don't want to mess with things at this point
 	NSView * theView = [[[prefPane window] contentView] retain];
 
 	// Compute the new frame window height and width
@@ -185,6 +187,7 @@
 	[prefWindow setFrame:newWindowFrame display:YES animate:[prefWindow isVisible]];
 
 	[prefWindow setContentView:theView];
+	[theView release]; // balance the retain above
 
 	// Remember this pane identifier.
 	[selectedIdentifier release];

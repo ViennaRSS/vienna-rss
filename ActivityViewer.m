@@ -51,7 +51,6 @@
 	// Default font for the details view
 	NSFont * detailsFont = [NSFont fontWithName:@"Monaco" size:11.0];
 	[activityDetail setFont:detailsFont];
-	[detailsFont release];
 
 	// Handle double-click on an item
 	[activityTable setDoubleAction:@selector(handleDoubleClick:)];
