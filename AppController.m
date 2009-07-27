@@ -584,7 +584,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			if (![fileManager createDirectoryAtPath:path attributes:NULL])
 			{
-				runOKAlertPanel(@"Cannot create style folder title", @"Cannot create style folder body", path);
+				runOKAlertPanel(NSLocalizedString(@"Cannot create style folder title", nil), NSLocalizedString(@"Cannot create style folder body", nil), path);
 				return NO;
 			}
 		}
@@ -598,7 +598,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[[self toolbarItemWithIdentifier:@"Styles"] setPopup:@"stylesMenuButton" withMenu:[self getStylesMenu]];
 			[prefs setDisplayStyle:styleName];
 			if ([[prefs displayStyle] isEqualToString:styleName])
-				runOKAlertPanel(@"New style title", @"New style body", styleName);
+				runOKAlertPanel(NSLocalizedString(@"New style title", nil), NSLocalizedString(@"New style body", nil), styleName);
 		}
 		return YES;
 	}
@@ -615,7 +615,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			if (![fileManager createDirectoryAtPath:path attributes:NULL])
 			{
-				runOKAlertPanel(@"Cannot create scripts folder title", @"Cannot create scripts folder body", path);
+				runOKAlertPanel(NSLocalizedString(@"Cannot create scripts folder title", nil), NSLocalizedString(@"Cannot create scripts folder body", nil), path);
 				return NO;
 			}
 		}
@@ -2861,8 +2861,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Get confirmation first
 	if (needPrompt)
 	{
-		int returnCode;
-		returnCode = NSRunAlertPanel(alertTitle, alertBody, NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil);
+		// Security: folder name could contain formatting characters, so don't use alertBody as format string.
+		int returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
 		if (returnCode == NSAlertAlternateReturn)
 			return;
 	}

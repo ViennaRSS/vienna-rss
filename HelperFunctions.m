@@ -150,8 +150,9 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...)
 	va_list arguments;
 	
 	va_start(arguments, bodyText);
-	fullBodyText = [[NSString alloc] initWithFormat:NSLocalizedString(bodyText, nil) arguments:arguments];
-	NSRunAlertPanel(NSLocalizedString(titleString, nil), fullBodyText, NSLocalizedString(@"OK", nil), nil, nil);
+	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
+	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
+	NSRunAlertPanel(titleString, @"%@", NSLocalizedString(@"OK", nil), nil, nil, fullBodyText);
 	[fullBodyText release];
 	va_end(arguments);
 }
@@ -165,8 +166,9 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 	va_list arguments;
 	
 	va_start(arguments, bodyText);
-	fullBodyText = [[NSString alloc] initWithFormat:NSLocalizedString(bodyText, nil) arguments:arguments];
-	NSBeginAlertSheet(NSLocalizedString(titleString, nil),
+	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
+	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
+	NSBeginAlertSheet(titleString,
 					  NSLocalizedString(@"OK", nil),
 					  nil,
 					  nil,
@@ -174,6 +176,7 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 					  nil,
 					  nil,
 					  nil, nil,
+					  @"%@",
 					  fullBodyText);
 	[fullBodyText release];
 	va_end(arguments);

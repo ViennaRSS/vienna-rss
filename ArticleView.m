@@ -145,7 +145,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	
 	// Warn the user.
 	NSString * titleText = [NSString stringWithFormat:NSLocalizedString(@"Invalid style title", nil), styleName];
-	runOKAlertPanel(titleText, @"Invalid style body");
+	runOKAlertPanel(titleText, NSLocalizedString(@"Invalid style body", nil));
 
 	// We need to reset the preferences without firing off a notification since we want the
 	// style change to happen immediately.
