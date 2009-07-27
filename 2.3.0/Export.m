@@ -84,8 +84,7 @@
 		else
 		{
 			// Announce how many we successfully imported
-			NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully exported", nil), countExported];
-			NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
+			NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
 		}
 	}
 }

@@ -146,8 +146,7 @@
 	// Announce how many we successfully imported
 	if (!hasError)
 	{
-		NSString * successString = [NSString stringWithFormat:NSLocalizedString(@"%d subscriptions successfully imported", nil), countImported];
-		NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), successString, NSLocalizedString(@"OK", nil), nil, nil);
+		NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), NSLocalizedString(@"%d subscriptions successfully imported", nil), NSLocalizedString(@"OK", nil), nil, nil, countImported);
 	}
 }
 @end
