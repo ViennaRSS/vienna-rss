@@ -168,13 +168,24 @@
 	NSToolbar * toolbar = [prefWindow toolbar];
 	[toolbar setSelectedItemIdentifier:identifier];
 
+	if (selectedIdentifier != nil)
+	{
+		// Restore the pref pane to its original window
+		id oldPrefPane = [prefPanes objectForKey:selectedIdentifier];
+		NSView * oldView = [[prefWindow contentView] retain];
+		[prefWindow setContentView:nil];
+		[[oldPrefPane window] setContentView:oldView];
+		[oldView release];
+	}
+	
 	// Now pull the new pane into view.
 	[prefWindow setContentView:blankView];
 	[prefWindow display];
 
 	// retain here, release after setting contentView
-	// not sure that's necessary, but I don't want to mess with things at this point
-	NSView * theView = [[[prefPane window] contentView] retain];
+	NSWindow * prefPaneWindow = [prefPane window];
+	NSView * theView = [[prefPaneWindow contentView] retain];
+	[prefPaneWindow setContentView:nil];
 
 	// Compute the new frame window height and width
 	NSRect windowFrame = [NSWindow contentRectForFrameRect:[prefWindow frame] styleMask:[prefWindow styleMask]];

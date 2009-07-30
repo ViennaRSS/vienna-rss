@@ -9,6 +9,10 @@ most recent build should be at the top of this file.
 Thanks!
 
 
+2.3.3.2304
+----------
+- Fix Preferences pane crash introduced in Vienna 2.3.2.
+
 2.3.2.2303
 ----------
 - SECURITY: fix potential vulnerability when deleting a maliciously crafted subscription. (Reported by Julien Bachmann)
