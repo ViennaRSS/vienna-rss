@@ -250,7 +250,7 @@
 -(IBAction)changeDownloadFolder:(id)sender
 {
 	NSOpenPanel * openPanel = [NSOpenPanel openPanel];
-	NSWindow * prefPaneWindow = [[[self window] contentView] window];
+	NSWindow * prefPaneWindow = [downloadFolder window];
 
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanCreateDirectories:YES];
@@ -271,7 +271,7 @@
 {
 	// Force the focus back to the main preferences pane
 	[panel orderOut:self];
-	NSWindow * prefPaneWindow = [[[self window] contentView] window];
+	NSWindow * prefPaneWindow = [downloadFolder window];
 	[prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
 
 	if (returnCode == NSOKButton)
@@ -345,7 +345,7 @@
 -(IBAction)handleLinkSelector:(id)sender
 {
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
-	NSWindow * prefPaneWindow = [[[self window] contentView] window];
+	NSWindow * prefPaneWindow = [linksHandler window];
 
 	[panel beginSheetForDirectory:@"/Applications/"
 							 file:nil
@@ -362,7 +362,7 @@
 -(void)linkSelectorDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	[panel orderOut:self];
-	NSWindow * prefPaneWindow = [[[self window] contentView] window];
+	NSWindow * prefPaneWindow = [linksHandler window];
 	[prefPaneWindow makeKeyAndOrderFront:self];
 
 	if (returnCode == NSOKButton)
