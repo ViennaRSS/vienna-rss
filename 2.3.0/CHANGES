@@ -9,6 +9,10 @@ most recent build should be at the top of this file.
 Thanks!
 
 
+2.3.4.2305
+----------
+- Fix General Preferences pane crash when trying to set default RSS reader or Download folder. Sigh.
+
 2.3.3.2304
 ----------
 - Fix Preferences pane crash introduced in Vienna 2.3.2.
