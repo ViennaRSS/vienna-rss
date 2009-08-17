@@ -632,9 +632,17 @@ typedef enum {
 		NSString * redirectURL = [self getRedirectURL:receivedData];
 		if (redirectURL != nil)
 		{
-			[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:[connector aItem]];
-			[self removeConnection:connector];
-			return;
+			if ([redirectURL isEqualToString:[connector URLString]])
+			{
+				// To prevent an infinite loop, don't redirect to the same URL.
+				[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [connector URLString]]];
+			}
+			else
+			{
+				[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:[connector aItem]];
+				[self removeConnection:connector];
+				return;
+			}
 		}
 
 		// Remember the last modified date
