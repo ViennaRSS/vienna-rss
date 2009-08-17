@@ -2637,7 +2637,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2305;
+				BUILD_NUMBER = 2306;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -2649,7 +2649,7 @@
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.3.4;
+				VIENNA_VERSION_NUMBER = 2.3.5;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
@@ -2662,7 +2662,7 @@
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2305;
+				BUILD_NUMBER = 2306;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -2674,7 +2674,7 @@
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SEPARATE_STRIP = YES;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.3.4;
+				VIENNA_VERSION_NUMBER = 2.3.5;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
