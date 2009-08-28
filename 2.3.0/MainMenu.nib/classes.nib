@@ -1,335 +1,542 @@
-{
-    IBClasses =     (
-                {
-            ACTIONS =             {
-                blogWith = id;
-                cancelAllRefreshes = id;
-                changeFiltering = id;
-                closeAllTabs = id;
-                closeTab = id;
-                condensedLayout = id;
-                conditionalShowDownloadsWindow = id;
-                deleteFolder = id;
-                deleteMessage = id;
-                doOpenScriptsFolder = id;
-                doSelectScript = id;
-                downloadEnclosure = id;
-                editFolder = id;
-                emptyTrash = id;
-                exitVienna = id;
-                exportSubscriptions = id;
-                getInfo = id;
-                goBack = id;
-                goForward = id;
-                handleAbout = id;
-                hideFilterBar = id;
-                importSubscriptions = id;
-                keepFoldersArranged = id;
-                keyboardShortcutsHelp = id;
-                localPerformFindPanelAction = id;
-                mailLinkToArticlePage = id;
-                makeTextLarger = id;
-                makeTextSmaller = id;
-                markAllRead = id;
-                markAllSubscriptionsRead = id;
-                markFlagged = id;
-                markRead = id;
-                moreStyles = id;
-                myAction = id;
-                newGroupFolder = id;
-                newSmartFolder = id;
-                newSubscription = id;
-                newTab = id;
-                nextTab = id;
-                openWebElementInDefaultBrowser = id;
-                openWebElementInNewTab = id;
-                openWebLocation = id;
-                previousTab = id;
-                printDocument = id;
-                refreshAllFolderIcons = id;
-                refreshAllSubscriptions = id;
-                refreshSelectedSubscriptions = id;
-                reloadPage = id;
-                renameFolder = id;
-                reportLayout = id;
-                restoreMessage = id;
-                searchUsingFilterField = id;
-                searchUsingToolbarTextField = id;
-                setFocusToSearchField = id;
-                showAcknowledgements = id;
-                showDownloadsWindow = id;
-                showHideFilterBar = id;
-                showHideStatusBar = id;
-                showMainWindow = id;
-                showPreferencePanel = id;
-                showViennaHomePage = id;
-                skipFolder = id;
-                stopReloadingPage = id;
-                toggleActivityViewer = id;
-                unifiedLayout = id;
-                unsubscribeFeed = id;
-                viewArticlePage = id;
-                viewArticlePageInAlternateBrowser = id;
-                viewNextUnread = id;
-                viewSourceHomePage = id;
-                viewSourceHomePageInAlternateBrowser = id;
-            };
-            CLASS = AppController;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                articleController = ArticleController;
-                articleFrame = NSView;
-                blogWithMenu = NSMenuItem;
-                blogWithOneMenu = NSMenuItem;
-                browserView = BrowserView;
-                closeAllTabsItem = NSMenuItem;
-                closeTabItem = NSMenuItem;
-                closeWindowItem = NSMenuItem;
-                columnsMenu = NSMenuItem;
-                exportAll = NSButtonCell;
-                exportSaveAccessory = NSView;
-                exportSelected = NSButtonCell;
-                exportWithGroups = NSButton;
-                filterSearchField = NSSearchField;
-                filterView = FilterView;
-                filterViewPopUp = NSPopUpButton;
-                filtersMenu = NSMenuItem;
-                foldersTree = FoldersTree;
-                mainArticleView = ArticleListView;
-                mainWindow = NSWindow;
-                searchField = NSSearchField;
-                searchView = NSView;
-                sortByMenu = NSMenuItem;
-                spinner = NSProgressIndicator;
-                splitView1 = NSSplitView;
-                statusText = NSTextField;
-                stylesMenu = NSMenuItem;
-                unifiedListView = UnifiedDisplayView;
-            };
-            SUPERCLASS = NSObject;
-        },
-                {
-            CLASS = ArticleController;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                foldersTree = FoldersTree;
-            };
-            SUPERCLASS = NSObject;
-        },
-                {
-            CLASS = ArticleListView;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                articleController = ArticleController;
-                articleList = MessageListView;
-                articleListHeader = TexturedHeader;
-                articleText = ArticleView;
-                columnsPopupMenu = PopupButton;
-                controller = AppController;
-                foldersTree = FoldersTree;
-                splitView2 = NSSplitView;
-                stdEnclosureView = StdEnclosureView;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = ArticleView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = TabbedWebView;
-        },
-                {
-            ACTIONS =             {
-                handleReload = id;
-                handleStopLoading = id;
-            };
-            CLASS = BrowserPane;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                addressField = NSTextField;
-                backForwardButtons = NSSegmentedControl;
-                refreshButton = NSSegmentedControl;
-                webPane = ArticleView;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = BrowserView;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                tabBarControl = PSMTabBarControl;
-                tabView = NSTabView;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = CheckForUpdates;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                cancelButton = NSButton;
-                progressBar = NSProgressIndicator;
-                updateWindow = NSWindow;
-            };
-            SUPERCLASS = NSWindowController;
-        },
-                {
-            CLASS = ClickableProgressIndicator;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                target = id;
-            };
-            SUPERCLASS = NSProgressIndicator;
-        },
-                {
-            CLASS = FilterView;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                filterByLabel = NSTextField;
-                filterCloseButton = NSButton;
-                filterSearchField = NSSearchField;
-                filterViewPopUp = NSPopUpButton;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            ACTIONS =             {
-                makeTextLarger = id;
-                makeTextSmaller = id;
-                saveAsDraft = id;
-                sendMessage = id;
-            };
-            CLASS = FirstResponder;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSObject;
-        },
-                {
-            CLASS = FolderHeaderBar;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                folderDescription = NSTextField;
-                folderName = NSTextField;
-                smallFolderName = NSTextField;
-                unreadCount = NSTextField;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = FolderView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSOutlineView;
-        },
-                {
-            CLASS = FoldersTree;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                controller = AppController;
-                folderHeader = TexturedHeader;
-                folderSplitView = ThinSplitView;
-                outlineView = FolderView;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = MessageListView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSTableView;
-        },
-                {
-            CLASS = MessageView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSTextView;
-        },
-                {
-            CLASS = NSObject;
-            LANGUAGE = ObjC;
-        },
-                {
-            CLASS = NSSegmentedControl;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSControl;
-        },
-                {
-            CLASS = PSMTabBarControl;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                delegate = id;
-                partnerView = id;
-                style = id;
-                tabView = NSTabView;
-            };
-            SUPERCLASS = NSControl;
-        },
-                {
-            CLASS = PopupButton;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSButton;
-        },
-                {
-            ACTIONS =             {
-                checkForUpdates = id;
-            };
-            CLASS = SUUpdater;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSObject;
-        },
-                {
-            CLASS = SearchView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = SquareWindow;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSWindow;
-        },
-                {
-            ACTIONS =             {
-                downloadFile = id;
-            };
-            CLASS = StdEnclosureView;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                downloadButton = NSButton;
-                fileImage = NSImageView;
-                filenameField = NSTextField;
-                filenameLabel = NSTextField;
-            };
-            SUPERCLASS = NSView;
-        },
-                {
-            ACTIONS =             {
-                printDocument = id;
-            };
-            CLASS = TabbedWebView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = WebView;
-        },
-                {
-            CLASS = TexturedHeader;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = ThinSplitView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSSplitView;
-        },
-                {
-            CLASS = ThreeDBoxView;
-            LANGUAGE = ObjC;
-            SUPERCLASS = NSView;
-        },
-                {
-            CLASS = UnifiedDisplayView;
-            LANGUAGE = ObjC;
-            OUTLETS =             {
-                articleController = ArticleController;
-                controller = AppController;
-                foldersTree = FoldersTree;
-                unifiedListHeader = TexturedHeader;
-                unifiedText = ArticleView;
-            };
-            SUPERCLASS = NSView;
-        }
-    );
-    IBVersion = 1;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>FoldersTree</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>controller</key>
+				<string>AppController</string>
+				<key>folderHeader</key>
+				<string>TexturedHeader</string>
+				<key>folderSplitView</key>
+				<string>ThinSplitView</string>
+				<key>outlineView</key>
+				<string>FolderView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>printDocument</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>TabbedWebView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>WebView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSSplitView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSPopUpButton</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSButton</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PopupButton</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>ToolbarButton</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ToolbarButton</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSButton</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>checkForUpdates</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>SUUpdater</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ThinSplitView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSSplitView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>blogWith</key>
+				<string>id</string>
+				<key>cancelAllRefreshes</key>
+				<string>id</string>
+				<key>changeFiltering</key>
+				<string>id</string>
+				<key>closeAllTabs</key>
+				<string>id</string>
+				<key>closeTab</key>
+				<string>id</string>
+				<key>condensedLayout</key>
+				<string>id</string>
+				<key>conditionalShowDownloadsWindow</key>
+				<string>id</string>
+				<key>deleteFolder</key>
+				<string>id</string>
+				<key>deleteMessage</key>
+				<string>id</string>
+				<key>doOpenScriptsFolder</key>
+				<string>id</string>
+				<key>doSelectScript</key>
+				<string>id</string>
+				<key>downloadEnclosure</key>
+				<string>id</string>
+				<key>editFolder</key>
+				<string>id</string>
+				<key>emptyTrash</key>
+				<string>id</string>
+				<key>exitVienna</key>
+				<string>id</string>
+				<key>exportSubscriptions</key>
+				<string>id</string>
+				<key>getInfo</key>
+				<string>id</string>
+				<key>goBack</key>
+				<string>id</string>
+				<key>goForward</key>
+				<string>id</string>
+				<key>handleAbout</key>
+				<string>id</string>
+				<key>hideFilterBar</key>
+				<string>id</string>
+				<key>importSubscriptions</key>
+				<string>id</string>
+				<key>keepFoldersArranged</key>
+				<string>id</string>
+				<key>keyboardShortcutsHelp</key>
+				<string>id</string>
+				<key>localPerformFindPanelAction</key>
+				<string>id</string>
+				<key>mailLinkToArticlePage</key>
+				<string>id</string>
+				<key>makeTextLarger</key>
+				<string>id</string>
+				<key>makeTextSmaller</key>
+				<string>id</string>
+				<key>markAllRead</key>
+				<string>id</string>
+				<key>markAllSubscriptionsRead</key>
+				<string>id</string>
+				<key>markFlagged</key>
+				<string>id</string>
+				<key>markRead</key>
+				<string>id</string>
+				<key>moreStyles</key>
+				<string>id</string>
+				<key>myAction</key>
+				<string>id</string>
+				<key>newGroupFolder</key>
+				<string>id</string>
+				<key>newSmartFolder</key>
+				<string>id</string>
+				<key>newSubscription</key>
+				<string>id</string>
+				<key>newTab</key>
+				<string>id</string>
+				<key>nextTab</key>
+				<string>id</string>
+				<key>openWebElementInDefaultBrowser</key>
+				<string>id</string>
+				<key>openWebElementInNewTab</key>
+				<string>id</string>
+				<key>openWebLocation</key>
+				<string>id</string>
+				<key>previousTab</key>
+				<string>id</string>
+				<key>printDocument</key>
+				<string>id</string>
+				<key>refreshAllFolderIcons</key>
+				<string>id</string>
+				<key>refreshAllSubscriptions</key>
+				<string>id</string>
+				<key>refreshSelectedSubscriptions</key>
+				<string>id</string>
+				<key>reloadPage</key>
+				<string>id</string>
+				<key>renameFolder</key>
+				<string>id</string>
+				<key>reportLayout</key>
+				<string>id</string>
+				<key>restoreMessage</key>
+				<string>id</string>
+				<key>searchUsingFilterField</key>
+				<string>id</string>
+				<key>searchUsingToolbarTextField</key>
+				<string>id</string>
+				<key>setFocusToSearchField</key>
+				<string>id</string>
+				<key>showAcknowledgements</key>
+				<string>id</string>
+				<key>showDownloadsWindow</key>
+				<string>id</string>
+				<key>showHideFilterBar</key>
+				<string>id</string>
+				<key>showHideStatusBar</key>
+				<string>id</string>
+				<key>showMainWindow</key>
+				<string>id</string>
+				<key>showPreferencePanel</key>
+				<string>id</string>
+				<key>showViennaHomePage</key>
+				<string>id</string>
+				<key>skipFolder</key>
+				<string>id</string>
+				<key>stopReloadingPage</key>
+				<string>id</string>
+				<key>toggleActivityViewer</key>
+				<string>id</string>
+				<key>unifiedLayout</key>
+				<string>id</string>
+				<key>unsubscribeFeed</key>
+				<string>id</string>
+				<key>viewArticlePage</key>
+				<string>id</string>
+				<key>viewArticlePageInAlternateBrowser</key>
+				<string>id</string>
+				<key>viewNextUnread</key>
+				<string>id</string>
+				<key>viewSourceHomePage</key>
+				<string>id</string>
+				<key>viewSourceHomePageInAlternateBrowser</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>AppController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>articleController</key>
+				<string>ArticleController</string>
+				<key>articleFrame</key>
+				<string>NSView</string>
+				<key>blogWithMenu</key>
+				<string>NSMenuItem</string>
+				<key>blogWithOneMenu</key>
+				<string>NSMenuItem</string>
+				<key>browserView</key>
+				<string>BrowserView</string>
+				<key>closeAllTabsItem</key>
+				<string>NSMenuItem</string>
+				<key>closeTabItem</key>
+				<string>NSMenuItem</string>
+				<key>closeWindowItem</key>
+				<string>NSMenuItem</string>
+				<key>columnsMenu</key>
+				<string>NSMenuItem</string>
+				<key>exportAll</key>
+				<string>NSButtonCell</string>
+				<key>exportSaveAccessory</key>
+				<string>NSView</string>
+				<key>exportSelected</key>
+				<string>NSButtonCell</string>
+				<key>exportWithGroups</key>
+				<string>NSButton</string>
+				<key>filterSearchField</key>
+				<string>NSSearchField</string>
+				<key>filterView</key>
+				<string>FilterView</string>
+				<key>filterViewPopUp</key>
+				<string>NSPopUpButton</string>
+				<key>filtersMenu</key>
+				<string>NSMenuItem</string>
+				<key>foldersTree</key>
+				<string>FoldersTree</string>
+				<key>mainArticleView</key>
+				<string>ArticleListView</string>
+				<key>mainWindow</key>
+				<string>NSWindow</string>
+				<key>searchField</key>
+				<string>NSSearchField</string>
+				<key>searchView</key>
+				<string>NSView</string>
+				<key>sortByMenu</key>
+				<string>NSMenuItem</string>
+				<key>spinner</key>
+				<string>ClickableProgressIndicator</string>
+				<key>splitView1</key>
+				<string>NSSplitView</string>
+				<key>statusText</key>
+				<string>NSTextField</string>
+				<key>stylesMenu</key>
+				<string>NSMenuItem</string>
+				<key>unifiedListView</key>
+				<string>UnifiedDisplayView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>UnifiedDisplayView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>articleController</key>
+				<string>ArticleController</string>
+				<key>controller</key>
+				<string>AppController</string>
+				<key>foldersTree</key>
+				<string>FoldersTree</string>
+				<key>unifiedListHeader</key>
+				<string>TexturedHeader</string>
+				<key>unifiedText</key>
+				<string>ArticleView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ArticleController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>foldersTree</key>
+				<string>FoldersTree</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ExtendedTableView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSTableView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FilterView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>filterByLabel</key>
+				<string>NSTextField</string>
+				<key>filterCloseButton</key>
+				<string>NSButton</string>
+				<key>filterSearchField</key>
+				<string>NSSearchField</string>
+				<key>filterViewPopUp</key>
+				<string>NSPopUpButton</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PSMTabBarControl</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+				<key>partnerView</key>
+				<string>id</string>
+				<key>style</key>
+				<string>id</string>
+				<key>tabView</key>
+				<string>NSTabView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSControl</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ClickableProgressIndicator</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>target</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSProgressIndicator</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSResponder</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ArticleView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>TabbedWebView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>SquareWindow</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSWindow</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>makeTextLarger</key>
+				<string>id</string>
+				<key>makeTextSmaller</key>
+				<string>id</string>
+				<key>saveAsDraft</key>
+				<string>id</string>
+				<key>sendMessage</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FolderView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSOutlineView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>BrowserView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>tabBarControl</key>
+				<string>PSMTabBarControl</string>
+				<key>tabView</key>
+				<string>NSTabView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ArticleListView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>articleController</key>
+				<string>ArticleController</string>
+				<key>articleList</key>
+				<string>MessageListView</string>
+				<key>articleListHeader</key>
+				<string>TexturedHeader</string>
+				<key>articleText</key>
+				<string>ArticleView</string>
+				<key>columnsPopupMenu</key>
+				<string>PopupButton</string>
+				<key>controller</key>
+				<string>AppController</string>
+				<key>foldersTree</key>
+				<string>FoldersTree</string>
+				<key>splitView2</key>
+				<string>NSSplitView</string>
+				<key>stdEnclosureView</key>
+				<string>StdEnclosureView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>TexturedHeader</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>downloadFile</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>StdEnclosureView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>downloadButton</key>
+				<string>NSButton</string>
+				<key>fileImage</key>
+				<string>NSImageView</string>
+				<key>filenameField</key>
+				<string>NSTextField</string>
+				<key>filenameLabel</key>
+				<string>NSTextField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>MessageListView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>ExtendedTableView</string>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>
