@@ -2,35 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>IBDocumentLocation</key>
-	<string>367 150 774 513 0 0 1440 878 </string>
-	<key>IBEditorPositions</key>
-	<dict>
-		<key>1148</key>
-		<string>360 192 719 649 0 0 1440 878 </string>
-		<key>1227</key>
-		<string>660 515 120 142 0 0 1440 878 </string>
-		<key>1251</key>
-		<string>590 631 259 64 0 0 1440 878 </string>
-		<key>1267</key>
-		<string>690 575 60 70 0 0 1440 878 </string>
-		<key>1288</key>
-		<string>346 634 511 91 0 0 1440 878 </string>
-		<key>1300</key>
-		<string>410 574 619 71 0 0 1440 878 </string>
-		<key>29</key>
-		<string>127 1031 440 44 0 0 1920 1178 </string>
-		<key>738</key>
-		<string>660 539 120 142 0 0 1440 878 </string>
-		<key>860</key>
-		<string>510 542 419 136 0 0 1440 878 </string>
-		<key>971</key>
-		<string>360 217 720 651 0 0 1440 878 </string>
-	</dict>
 	<key>IBFramework Version</key>
-	<string>482.0</string>
-	<key>IBLockedObjects</key>
-	<array/>
+	<string>677</string>
+	<key>IBLastKnownRelativeProjectPath</key>
+	<string>Vienna.xcodeproj</string>
 	<key>IBOldestOS</key>
 	<integer>3</integer>
 	<key>IBOpenObjects</key>
@@ -38,6 +13,8 @@
 		<integer>29</integer>
 	</array>
 	<key>IBSystem Version</key>
-	<string>9B18</string>
+	<string>9L30</string>
+	<key>targetFramework</key>
+	<string>IBCocoaFramework</string>
 </dict>
 </plist>

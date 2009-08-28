@@ -12,6 +12,7 @@ Thanks!
 2.3.5.2306
 ----------
 - Prevent an infinite redirect loop. This was happening with http://feeds.feedburner.com/factcheck/Rdqt
+- Fix the article view scrolling problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20814
 
 2.3.4.2305
 ----------
