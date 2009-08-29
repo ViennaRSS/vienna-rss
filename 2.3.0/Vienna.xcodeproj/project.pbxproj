@@ -1690,7 +1690,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/cs.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/cs.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3";
 		};
 		521FD4510C78C7A0009E4961 /* Index da Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1710,7 +1710,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/da.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/da.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3";
 		};
 		521FD45B0C78C862009E4961 /* Index eu Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1730,7 +1730,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/eus.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/eus.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3";
 		};
 		521FD4650C78C99B009E4961 /* Index ru Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1750,7 +1750,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ru.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ru.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3";
 		};
 		521FD46D0C78CA4C009E4961 /* Index uk Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1770,7 +1770,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3";
 		};
 		52BA63FB0DE9E2E10008B3E1 /* Changes and Notes */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1838,7 +1838,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/de.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/de.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		6157F1280AD41538004FCE55 /* Index pt_BR Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1858,7 +1858,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/pt_BR.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/pt_BR.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3";
 		};
 		6157F12E0AD41690004FCE55 /* Index ko Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1878,7 +1878,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ko.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 3 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ko.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 3 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1";
 		};
 		6157F1360AD41741004FCE55 /* Index zh_CN Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1898,7 +1898,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_CN.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_CN.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1";
 		};
 		61858A3B0A015B2700E8CF73 /* Index en Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1918,7 +1918,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/en.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 1 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/en.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 1 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		61858A4E0A015BCF00E8CF73 /* Index nl Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1938,7 +1938,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/nl.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/nl.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		61858A540A015BFA00E8CF73 /* Index es Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1958,7 +1958,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/es.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/es.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		61858A580A015C1300E8CF73 /* Index ja Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1978,7 +1978,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ja.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 4 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ja.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 4 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1\n";
 		};
 		61858A640A015C8200E8CF73 /* Index fr Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1998,7 +1998,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/fr.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/fr.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		61858A680A015C9000E8CF73 /* Index sv Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2018,7 +2018,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		61858A700A015CCC00E8CF73 /* Index it Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2038,7 +2038,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/it.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 3\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/it.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 2 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3\n";
 		};
 		61858A740A015CFB00E8CF73 /* Index zh_TW Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2058,7 +2058,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_TW.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAchors YES -MinTermLength 1\n";
+			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_TW.lproj/Vienna\\ Help/ -PantherIndexing YES -Tokenizer 5 -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
