@@ -1416,7 +1416,7 @@
 				612724270A0145F7000AB96C /* Index de Help */,
 				61858A3B0A015B2700E8CF73 /* Index en Help */,
 				61858A540A015BFA00E8CF73 /* Index es Help */,
-				521FD45B0C78C862009E4961 /* Index eu Help */,
+				521FD45B0C78C862009E4961 /* Index eus Help */,
 				61858A640A015C8200E8CF73 /* Index fr Help */,
 				61858A700A015CCC00E8CF73 /* Index it Help */,
 				61858A580A015C1300E8CF73 /* Index ja Help */,
@@ -1690,7 +1690,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/cs.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"cs\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		521FD4510C78C7A0009E4961 /* Index da Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1710,9 +1710,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/da.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"da\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
-		521FD45B0C78C862009E4961 /* Index eu Help */ = {
+		521FD45B0C78C862009E4961 /* Index eus Help */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1724,13 +1724,13 @@
 				"$(SRCROOT)/eus.lproj/Vienna Help/intro.html",
 				"$(SRCROOT)/eus.lproj/Vienna Help/keyboard.html",
 			);
-			name = "Index eu Help";
+			name = "Index eus Help";
 			outputPaths = (
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/eus.lproj/Vienna Help/Vienna Help.helpindex",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/eus.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"eus\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		521FD4650C78C99B009E4961 /* Index ru Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1750,7 +1750,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ru.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"ru\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		521FD46D0C78CA4C009E4961 /* Index uk Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1770,7 +1770,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"uk\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		52BA63FB0DE9E2E10008B3E1 /* Changes and Notes */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1838,7 +1838,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/de.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2 -Stopwords de\n";
+			shellScript = "VIENNA_LOCALIZATION=\"de\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -s de -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2 -Stopwords de\nfi\n\n";
 		};
 		6157F1280AD41538004FCE55 /* Index pt_BR Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1858,7 +1858,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/pt_BR.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"pt_BR\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		6157F12E0AD41690004FCE55 /* Index ko Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1878,7 +1878,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ko.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"ko\"\nVIENNA_MIN_TERM_LENGTH=1\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		6157F1360AD41741004FCE55 /* Index zh_CN Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1898,7 +1898,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_CN.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1 -ShowProgress YES -LogStyle 2";
+			shellScript = "VIENNA_LOCALIZATION=\"zh_CN\"\nVIENNA_MIN_TERM_LENGTH=1\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n";
 		};
 		61858A3B0A015B2700E8CF73 /* Index en Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1918,7 +1918,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/en.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2 -Stopwords en\n";
+			shellScript = "VIENNA_LOCALIZATION=\"en\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -s en -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2 -Stopwords en\nfi\n\n";
 		};
 		61858A4E0A015BCF00E8CF73 /* Index nl Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1938,7 +1938,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/nl.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2\n";
+			shellScript = "VIENNA_LOCALIZATION=\"nl\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n\n";
 		};
 		61858A540A015BFA00E8CF73 /* Index es Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1958,7 +1958,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/es.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2 -Stopwords es\n";
+			shellScript = "VIENNA_LOCALIZATION=\"es\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -s es-f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2 -Stopwords es\nfi\n\n";
 		};
 		61858A580A015C1300E8CF73 /* Index ja Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1978,7 +1978,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/ja.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1 -ShowProgress YES -LogStyle 2\n";
+			shellScript = "VIENNA_LOCALIZATION=\"ja\"\nVIENNA_MIN_TERM_LENGTH=1\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n\n";
 		};
 		61858A640A015C8200E8CF73 /* Index fr Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1998,7 +1998,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/fr.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2 -Stopwords fr\n";
+			shellScript = "VIENNA_LOCALIZATION=\"fr\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -s fr -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2 -Stopwords fr\nfi\n\n";
 		};
 		61858A680A015C9000E8CF73 /* Index sv Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2018,7 +2018,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/sv.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2 -Stopwords sv\n";
+			shellScript = "VIENNA_LOCALIZATION=\"sv\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -s sv -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2 -Stopwords sv\nfi\n\n";
 		};
 		61858A700A015CCC00E8CF73 /* Index it Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2038,7 +2038,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/it.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 3 -ShowProgress YES -LogStyle 2 -Stopwords it\n";
+			shellScript = "VIENNA_LOCALIZATION=\"it\"\nVIENNA_MIN_TERM_LENGTH=3\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -s it -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2 -Stopwords it\nfi\n\n";
 		};
 		61858A740A015CFB00E8CF73 /* Index zh_TW Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2058,7 +2058,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help\\ Indexer.app/Contents/MacOS/Help\\ Indexer $TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/zh_TW.lproj/Vienna\\ Help/ -UseRemoteRoot NO -IndexAnchors YES -MinTermLength 1 -ShowProgress YES -LogStyle 2\n";
+			shellScript = "VIENNA_LOCALIZATION=\"zh_TW\"\nVIENNA_MIN_TERM_LENGTH=1\nVIENNA_LOCALIZED_HELP_FOLDER=\"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/$VIENNA_LOCALIZATION.lproj/Vienna Help\"\n\nif [ -x /usr/bin/hiutil ] ; then\n\t/usr/bin/hiutil -C -avv -m $VIENNA_MIN_TERM_LENGTH -f \"$VIENNA_LOCALIZED_HELP_FOLDER/Vienna Help.helpindex\" \"$VIENNA_LOCALIZED_HELP_FOLDER\"\nelse\n\t\"$SYSTEM_DEVELOPER_DIR/Applications/Utilities/Help Indexer.app/Contents/MacOS/Help Indexer\" \"$VIENNA_LOCALIZED_HELP_FOLDER\" -UseRemoteRoot NO -IndexAnchors YES -MinTermLength $VIENNA_MIN_TERM_LENGTH -ShowProgress YES -LogStyle 2\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
