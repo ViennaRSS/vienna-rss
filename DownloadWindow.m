@@ -104,7 +104,7 @@
 	{
 		// Select the row under the cursor if it isn't already selected
 		if ([table numberOfSelectedRows] <= 1)
-			[table selectRow:row byExtendingSelection:NO];
+			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)row] byExtendingSelection:NO];
 	}
 }
 
@@ -284,15 +284,19 @@
 {
 	DownloadItem * item = (DownloadItem *)[notification object];
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int rowIndex = [list indexOfObject:item];
-	if ([list count] != lastCount || rowIndex == NSNotFound)
+	unsigned int rowIndex = [list indexOfObject:item];
+	if ([list count] != lastCount)
 	{
 		[table reloadData];
-		[table selectRow:rowIndex byExtendingSelection:NO];
-		[table scrollRowToVisible:rowIndex];
+		if (rowIndex != NSNotFound)
+		{
+			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowIndex];
+			[table selectRowIndexes:indexes byExtendingSelection:NO];
+			[table scrollRowToVisible:rowIndex];
+		}
 		lastCount = [list count];
 	}
-	else if (rowIndex >= 0 && rowIndex < lastCount)
+	else
 	{
 		[table display];
 	}

@@ -222,13 +222,14 @@
 	if ([self selectedRow] >= 0)
 	{
 		NSMutableArray * array = [NSMutableArray arrayWithCapacity:[self numberOfSelectedRows]];
-		NSEnumerator * enumerator = [self selectedRowEnumerator];
-		NSNumber * item;
+		NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
+		unsigned int item = [selectedRowIndexes firstIndex];
 		
-		while ((item = [enumerator nextObject]) != nil)
+		while (item != NSNotFound)
 		{
-			id node = [self itemAtRow:[item intValue]];
+			id node = [self itemAtRow:item];
 			[array addObject:node];
+			item = [selectedRowIndexes indexGreaterThanIndex:item];
 		}
 		[[self delegate] copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
 	}
@@ -277,12 +278,12 @@
  */
 -(void)highlightSelectionInClipRect:(NSRect)rect
 {
-	NSEnumerator * enumerator = [self selectedRowEnumerator];
-	NSNumber * rowIndex;
+	NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
+	unsigned int rowIndex = [selectedRowIndexes firstIndex];
 
-	while ((rowIndex = [enumerator nextObject]) != nil)
+	while (rowIndex != NSNotFound)
 	{
-		NSRect selectedRect = [self rectOfRow:[rowIndex intValue]];
+		NSRect selectedRect = [self rectOfRow:rowIndex];
 		if (NSIntersectsRect(selectedRect, rect))
 		{
 			[blueGradient setFlipped:YES];
@@ -297,6 +298,7 @@
 			if ([self editedRow] != -1)
 				[self performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
 		}
+		rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 	}
 }
 

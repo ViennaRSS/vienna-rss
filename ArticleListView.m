@@ -863,7 +863,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self refreshArticleAtCurrentRow:NO];
 	else
 	{
-		[articleList selectRow:rowIndex byExtendingSelection:NO]; // Warning: this method has been deprecated.  Should be changed to selectRowIndexes:byExtendingSelection:
+		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
 		if (currentSelectedRow == -1 || blockSelectionHandler)
 		{
 			currentSelectedRow = rowIndex;
@@ -1146,7 +1146,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if ([articleList numberOfSelectedRows] <= 1)
 		{
 			blockSelectionHandler = YES;
-			[articleList selectRow:row byExtendingSelection:NO]; // Warning: this method has been deprecated.  Should be changed to selectRowIndexes:byExtendingSelection:
+			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 			currentSelectedRow = row;
 			[self refreshArticleAtCurrentRow:NO];
 			blockSelectionHandler = NO;
@@ -1579,12 +1579,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMutableArray * articleArray = nil;
 	if ([articleList numberOfSelectedRows] > 0)
 	{
-		NSEnumerator * enumerator = [articleList selectedRowEnumerator];
-		NSNumber * rowIndex;
+		NSIndexSet * rowIndexes = [articleList selectedRowIndexes];
+		unsigned int rowIndex = [rowIndexes firstIndex];
 
-		articleArray = [NSMutableArray arrayWithCapacity:16];
-		while ((rowIndex = [enumerator nextObject]) != nil)
-			[articleArray addObject:[[articleController allArticles] objectAtIndex:[rowIndex intValue]]];
+		articleArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
+		while (rowIndex != NSNotFound)
+		{
+			[articleArray addObject:[[articleController allArticles] objectAtIndex:rowIndex]];
+			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
+		}
 	}
 	return articleArray;
 }

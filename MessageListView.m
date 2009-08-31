@@ -51,8 +51,15 @@
 {
 	if ([self selectedRow] >= 0)
 	{
-		[[self delegate] copyTableSelection:[[self selectedRowEnumerator] allObjects] toPasteboard:[NSPasteboard generalPasteboard]];
-		return;
+		NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
+		NSMutableArray *rows = [NSMutableArray arrayWithCapacity:[selectedRowIndexes count]];
+		unsigned int rowIndex = [selectedRowIndexes firstIndex];
+		while (rowIndex != NSNotFound)
+		{
+			[rows addObject:[NSNumber numberWithUnsignedInt:rowIndex]];
+			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
+		}
+		[[self delegate] copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 

@@ -121,8 +121,16 @@
 		[activityDetail setString:@""];
 	else
 	{
-		selectedRow = [allItems indexOfObject:selectedItem];
-		[activityTable selectRow:selectedRow byExtendingSelection:NO];
+		unsigned int rowToSelect = [allItems indexOfObject:selectedItem];
+		if (rowToSelect != NSNotFound)
+		{
+			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowToSelect];
+			[activityTable selectRowIndexes:indexes byExtendingSelection:NO];
+		}
+		else
+		{
+			[activityTable deselectAll:nil];
+		}
 	}
 }
 
