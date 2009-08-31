@@ -13,6 +13,7 @@ Thanks!
 ----------
 - Prevent an infinite redirect loop. This was happening with http://feeds.feedburner.com/factcheck/Rdqt
 - Fix the article view scrolling problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20814
+- Fix the mark all read bug on Snow Leopard reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20877
 
 2.3.4.2305
 ----------

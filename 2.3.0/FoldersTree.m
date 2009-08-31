@@ -523,26 +523,26 @@
 -(NSArray *)selectedFolders
 {
 	NSIndexSet * rowIndexes = [outlineView selectedRowIndexes];
-	int count = [rowIndexes count];
-	int index;
+	unsigned int count = [rowIndexes count];
 	
 	// Make a mutable array
 	NSMutableArray * arrayOfSelectedFolders = [NSMutableArray arrayWithCapacity:count];
 
-	// Get the indexes into a buffer
-	unsigned int * buf = (unsigned int *)malloc(count * sizeof(unsigned int));
-	if (buf != 0)
+	if (count > 0u)
 	{
-		NSRange range = NSMakeRange([rowIndexes firstIndex], [rowIndexes lastIndex]);
-		count = [rowIndexes getIndexes:buf maxCount:count inIndexRange:&range];
-
-		for (index = 0; index < count; ++index)
+		unsigned int index = [rowIndexes firstIndex];
+		while (index != NSNotFound)
 		{
-			TreeNode * node = [outlineView itemAtRow:buf[index]];
-			[arrayOfSelectedFolders addObject:[node folder]];
+			TreeNode * node = [outlineView itemAtRow:index];
+			Folder * folder = [node folder];
+			if (folder != nil)
+			{
+				[arrayOfSelectedFolders addObject:folder];
+			}
+			index = [rowIndexes indexGreaterThanIndex:index];
 		}
-		free(buf);
 	}
+	
 	return arrayOfSelectedFolders;
 }
 
