@@ -255,7 +255,14 @@
 			if ([outlineView isExpandable:node] && doExpandItem)
 				[outlineView expandItem:node];
 			if (doSelectItem)
-				[outlineView selectRow:[outlineView rowForItem:node] byExtendingSelection:YES];
+			{
+				int row = [outlineView rowForItem:node];
+				if (row >= 0)
+				{
+					NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(unsigned int)row];
+					[outlineView selectRowIndexes:indexes byExtendingSelection:YES];
+				}
+			}
 		}
 	}
 	[outlineView sizeToFit];
@@ -425,7 +432,7 @@
 	if (rowIndex >= 0)
 	{
 		blockSelectionHandler = YES;
-		[outlineView selectRow:rowIndex byExtendingSelection:NO];
+		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)rowIndex] byExtendingSelection:NO];
 		[outlineView scrollRowToVisible:rowIndex];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
@@ -695,10 +702,15 @@
 	[self reloadFolderItem:parentNode reloadChildren:YES];
 	if (moveSelection)
 	{
-		blockSelectionHandler = YES;
-		[outlineView selectRow:[outlineView rowForItem:node] byExtendingSelection:NO];
-		[outlineView scrollRowToVisible:[outlineView rowForItem:node]];
-		blockSelectionHandler = NO;
+		int row = [outlineView rowForItem:node];
+		if (row >= 0)
+		{
+			blockSelectionHandler = YES;
+			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(unsigned int)row];
+			[outlineView selectRowIndexes:indexes byExtendingSelection:NO];
+			[outlineView scrollRowToVisible:row];
+			blockSelectionHandler = NO;
+		}
 	}
 }
 
@@ -768,7 +780,7 @@
 	{
 		// Select the row under the cursor if it isn't already selected
 		if ([olv numberOfSelectedRows] <= 1)
-			[olv selectRow:row byExtendingSelection:NO];
+			[olv selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)row] byExtendingSelection:NO];
 	}
 }
 
@@ -966,7 +978,7 @@
 	
 	if (rowIndex != -1)
 	{
-		[outlineView selectRow:rowIndex byExtendingSelection:NO];
+		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)rowIndex] byExtendingSelection:NO];
 		[outlineView editColumn:[outlineView columnWithIdentifier:@"folderColumns"] row:rowIndex withEvent:nil select:YES];
 	}
 }
