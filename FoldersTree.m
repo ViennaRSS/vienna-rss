@@ -177,7 +177,7 @@
 	cellFont = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
 	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
 
-	height = [boldCellFont defaultLineHeightForFont];
+	height = [[[NSApp delegate] layoutManager] defaultLineHeightForFont:boldCellFont];
 	[outlineView setRowHeight:height + 3];
 	[outlineView setIntercellSpacing:NSMakeSize(10, 4)];
 }
@@ -372,7 +372,7 @@
 		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
 		if (index >= 0)
 		{
-			NSMenu * contextualItem = [folderMenu itemAtIndex:index];
+			NSMenuItem * contextualItem = [folderMenu itemAtIndex:index];
 			[contextualItem setTitle:menuTitle];
 		}
 	}

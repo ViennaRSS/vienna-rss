@@ -623,7 +623,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)updateArticleListRowHeight
 {
 	Database * db = [Database sharedDatabase];
-	float height = [articleListFont defaultLineHeightForFont];
+	float height = [[[NSApp delegate] layoutManager] defaultLineHeightForFont:articleListFont];
 	int numberOfRowsInCell;
 
 	if (tableLayout == MA_Layout_Report)

@@ -75,7 +75,7 @@
 		return nil;
 	
 	for( index = 0; index < mColumnCount; index++ )
-		if( strcmp( mColumns[ index ], [inColumnName cString]) == 0 )
+		if( strcmp( mColumns[ index ], [inColumnName cStringUsingEncoding:NSASCIIStringEncoding]) == 0 )
 			break;
 	
 	return [self stringForColumnAtIndex:index];
