@@ -13,8 +13,17 @@
 
 +(NSCalendarDate *)getDateFromString:(NSString *)dateString
 {
-	time_t theTime = curl_getdate([dateString cString], NULL);
-	return (theTime != -1) ? [NSCalendarDate dateWithTimeIntervalSince1970:theTime] : nil;
+	NSCalendarDate * date = nil;
+	const char * asciiDate = [dateString cStringUsingEncoding:NSASCIIStringEncoding]; // curl only accepts English ASCII
+	if (asciiDate != NULL)
+	{
+		time_t theTime = curl_getdate(asciiDate, NULL);
+		if (theTime != -1 )
+		{
+			date = [NSCalendarDate dateWithTimeIntervalSince1970:theTime];
+		}
+	}
+	return date;
 }
 
 @end

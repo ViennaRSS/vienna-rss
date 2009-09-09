@@ -453,6 +453,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	FNSubscribeByPath((const UInt8 *)[path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
 }
 
+/* layoutManager
+ * Return a cached instance of NSLayoutManager for calculating the font height.
+ */
+-(NSLayoutManager *)layoutManager
+{
+	static NSLayoutManager * theManager = nil;
+	
+	if (theManager == nil)
+		theManager = [[NSLayoutManager alloc] init];
+	return theManager;
+}
+
 #pragma mark Application Delegate
 
 /* applicationDidFinishLaunching

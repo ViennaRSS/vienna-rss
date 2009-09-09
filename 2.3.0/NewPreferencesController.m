@@ -148,7 +148,7 @@
 			NSLog(@"Missing ClassName attribute from preference %@", identifier);
 			return;
 		}
-		Class classObject = objc_getClass([className cString]);
+		Class classObject = objc_getClass([className cStringUsingEncoding:NSASCIIStringEncoding]);
 		if (classObject == nil)
 		{
 			NSLog(@"Cannot find class '%@' in preference %@", className, identifier);

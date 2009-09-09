@@ -194,6 +194,7 @@
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)toggleOptionKeyButtonStates;
 -(NSMenu *)folderMenu;
+-(NSLayoutManager *)layoutManager;
 -(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag;
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 @end

@@ -136,7 +136,7 @@ BOOL isAccessible(NSString * urlString)
 	SCNetworkConnectionFlags flags;
 	NSURL * url = [NSURL URLWithString:urlString];
 	
-	if (!SCNetworkCheckReachabilityByName([[url host] cString], &flags))
+	if (!SCNetworkCheckReachabilityByName([[url host] UTF8String], &flags))
 		return NO;
 	return (flags & kSCNetworkFlagsReachable) && !(flags & kSCNetworkFlagsConnectionRequired);
 }
