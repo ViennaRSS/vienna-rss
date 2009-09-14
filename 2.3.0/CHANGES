@@ -15,6 +15,7 @@ Thanks!
 - Fix the article view scrolling problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20814
 - Fix the mark all read bug on Snow Leopard reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20877
 - Eliminate deprecated method warnings on Snow Leopard.
+- Eliminate drawing artifacts in Folders and Articles headers. (Patch from Dan Crosta)
 
 2.3.4.2305
 ----------
