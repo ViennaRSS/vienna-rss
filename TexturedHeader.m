@@ -96,56 +96,40 @@
  */
 -(void)drawRect:(NSRect)rect
 {
-	// Draw metalBg lowest pixel along the bottom of inFrame.
-	NSRect tempSrc = NSZeroRect;
-	tempSrc.size = [metalBg size];
-	tempSrc.origin.y = tempSrc.size.height - 1.0;
-	tempSrc.size.height = 1.0;
-
-	NSRect tempDst = rect;
-	tempDst.origin.y = rect.size.height - 1.0;
-	tempDst.size.height = 1.0;
-	[metalBg drawInRect:tempDst fromRect:tempSrc operation:NSCompositeSourceOver fraction:1.0];
-
-	// Draw rest of metalBg along width of inFrame.
-	tempSrc.origin.y = 0.0;
-	tempSrc.size.height = [metalBg size].height - 1.0;
-
-	tempDst.origin.y = 1.0;
-	tempDst.size.height = rect.size.height - 2.0;
-	[metalBg drawInRect:tempDst fromRect:tempSrc operation:NSCompositeSourceOver fraction:1.0];
+	NSRect bounds = [self bounds];
+	float width = NSWidth(bounds);
+	
+	[metalBg drawInRect:bounds fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 
 	// Draw black text centered. Constrain the draw rectangle to the
 	// header size so the truncation works.
-	float offset = 0.5;
+	NSString * stringValue = [self stringValue];
 
-	NSRect centeredRect = rect;
-	NSRect textRect = rect;
+	NSRect textRect = bounds;
 	if (hasDragger)
-		textRect.size.width -= [draggerImage size].width - 2;
-	centeredRect.size = [[self stringValue] sizeWithAttributes:attrs];
-	centeredRect.origin.x = ((textRect.size.width - centeredRect.size.width) / 2.0) - offset;
-	centeredRect.origin.y = ((textRect.size.height - centeredRect.size.height) / 2.0) + offset;
-
-	centeredRect.origin.x += offset;
-	centeredRect.origin.y -= offset;
+		textRect.size.width -= [draggerImage size].width + 2;
+	
+	NSRect centeredRect;
+	centeredRect.size = [stringValue sizeWithAttributes:attrs];
+	centeredRect.origin.x = ((textRect.size.width - centeredRect.size.width) / 2.0);
+	centeredRect.origin.y = ((textRect.size.height - centeredRect.size.height) / 2.0);
 	if (centeredRect.origin.x < 0)
 		centeredRect.origin.x = 0;
-	if (centeredRect.size.width > rect.size.width)
-		centeredRect.size.width = rect.size.width;
+	if (centeredRect.size.width > width)
+		centeredRect.size.width = width;
 	
 	// Draw text twice -first slightly off-white, and then black 1 pixel higher- to give the standard "embossed" look.
 	[attrs setValue:[NSColor colorWithCalibratedWhite:1.0 alpha:0.35] forKey:@"NSColor"];
-	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
+	[stringValue drawInRect:centeredRect withAttributes:attrs];
 	[attrs setValue:[NSColor blackColor] forKey:@"NSColor"];
 	centeredRect.origin.y += 1;
-	[[self stringValue] drawInRect:centeredRect withAttributes:attrs];
+	[stringValue drawInRect:centeredRect withAttributes:attrs];
 
 	// Draw the dragger if it is present.
 	if (hasDragger)
 	{
-		NSRect location = [self dragImageRect:rect];
-		[draggerImage compositeToPoint:location.origin operation:NSCompositeSourceOver];
+		NSRect location = [self dragImageRect:bounds];
+		[draggerImage drawInRect:location fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	}
 }
 
