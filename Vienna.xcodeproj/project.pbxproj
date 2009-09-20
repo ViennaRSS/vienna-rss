@@ -201,7 +201,6 @@
 		AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AAC022090E898A3D00BA9002 /* DatabaseSchema.doc in Resources */ = {isa = PBXBuildFile; fileRef = AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */; };
-		AAC0220B0E898A4E00BA9002 /* Release Instructions.txt in Resources */ = {isa = PBXBuildFile; fileRef = AAC0220A0E898A4E00BA9002 /* Release Instructions.txt */; };
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
 		AAD2BED00C2B2C0600AA0F11 /* top_right.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECD0C2B2C0600AA0F11 /* top_right.png */; };
 		AAD2BED10C2B2C0600AA0F11 /* top_middle.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */; };
@@ -1663,7 +1662,6 @@
 				AA077AAB0C84484B00D71D26 /* subscribeButtonSmall.tiff in Resources */,
 				AA077AAC0C84484B00D71D26 /* subscribeButtonSmallPressed.tiff in Resources */,
 				AAC022090E898A3D00BA9002 /* DatabaseSchema.doc in Resources */,
-				AAC0220B0E898A4E00BA9002 /* Release Instructions.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
