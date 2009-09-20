@@ -1,0 +1,36 @@
+{
+    IBClasses =     (
+                {
+            CLASS = FirstResponder;
+            LANGUAGE = ObjC;
+            SUPERCLASS = NSObject;
+        },
+                {
+            ACTIONS =             {
+                doEditCancel = id;
+                doLinkSourceChanged = id;
+                doSave = id;
+                doShowSiteHomePage = id;
+                doSubscribe = id;
+                doSubscribeCancel = id;
+            };
+            CLASS = RSSFeed;
+            LANGUAGE = ObjC;
+            OUTLETS =             {
+                editCancelButton = NSButton;
+                editFeedURL = NSTextField;
+                editRSSFeedWindow = NSWindow;
+                feedSource = NSPopUpButton;
+                feedURL = NSTextField;
+                linkTitle = NSTextField;
+                newRSSFeedWindow = NSWindow;
+                saveButton = NSButton;
+                siteHomePageButton = NSButton;
+                subscribeButton = NSButton;
+                subscribeCancelButton = NSButton;
+            };
+            SUPERCLASS = NSWindowController;
+        }
+    );
+    IBVersion = 1;
+}
