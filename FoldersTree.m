@@ -174,8 +174,8 @@
 	[boldCellFont release];
 
 	Preferences * prefs = [Preferences standardPreferences];
-	cellFont = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
-	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
+	cellFont = [[NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]] retain];
+	boldCellFont = [[[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont] retain];
 
 	height = [[[NSApp delegate] layoutManager] defaultLineHeightForFont:boldCellFont];
 	[outlineView setRowHeight:height + 3];
