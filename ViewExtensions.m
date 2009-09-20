@@ -20,12 +20,12 @@
 
 #import "ViewExtensions.h"
 
-@interface NSObject (ObjectWithTags)
+@interface NSAnimation (ViennaAnimationWithTags)
 -(void)MA_setTag:(int)newTag;
 -(int)MA_tag;
 @end
 
-@implementation NSObject (ObjectWithTags)
+@implementation NSAnimation (ViennaAnimationWithTags)
 
 /* MA_tagDict
  * A dictionary used to simulate instance variables for our category
@@ -65,38 +65,28 @@
 @implementation NSView (ViewExtensions)
 
 /* resizeViewWithAnimation
- * On Mac OSX 10.4 or later, resizes the specified view with animation. On earlier versions, just resizes the view.
+ * Resizes the specified view with animation.
  */
 -(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag
 {
-	Class viewAnimationClass = NSClassFromString(@"NSViewAnimation");
-	if (viewAnimationClass) {
-		NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
-			self, NSViewAnimationTargetKey,
-			nil];
-
-		id animation = [[viewAnimationClass alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
-		[animation setAnimationBlockingMode:NSAnimationNonblocking];
-		[animation setDuration:0.1];
-		[animation setAnimationCurve:NSAnimationEaseInOut];
-		[animation setDelegate:self];
-		[animation MA_setTag:viewTag];
-		[animation startAnimation];
-
-	} else {
-		[self setFrame:newFrame];
-
-		//Inform the delegate immediately since we're not animating
-		if ([[[self window] delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
-			[[[self window] delegate] viewAnimationCompleted:self withTag:viewTag];
-	}
+	NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
+						   [NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
+						   self, NSViewAnimationTargetKey,
+						   nil];
+	
+	NSViewAnimation * animation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
+	[animation setAnimationBlockingMode:NSAnimationNonblocking];
+	[animation setDuration:0.1];
+	[animation setAnimationCurve:NSAnimationEaseInOut];
+	[animation setDelegate:self];
+	[animation MA_setTag:viewTag];
+	[animation startAnimation];
 }
 
 /* animationDidEnd
- * Delegate function called when animation completes. (Mac OSX 10.4 or later only).
+ * Delegate function called when animation completes.
  */
--(void)animationDidEnd:(id)animation
+-(void)animationDidEnd:(NSAnimation *)animation
 {
 	NSWindow * viewWindow = [self window];
 	int viewTag = [animation MA_tag];

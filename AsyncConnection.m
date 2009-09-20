@@ -169,11 +169,6 @@
 
 	// Some sites refuse to respond without a User-agent string.
 	[theRequest addValue:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]] forHTTPHeaderField:@"User-agent"];
-	
-	// According to the svn log, the following line was added to fix handling of MSN Spaces RSS feeds.
-	// However, according to NSURLRequest.h in Tiger, the BOOL value is ignored.
-	// On Leopard, it's not ignored, and we want cookie handling, so I'm commenting out the line.
-	//[theRequest setHTTPShouldHandleCookies:NO];
 
 	status = MA_Connect_Stopped;
 	isConnectionComplete = NO;
