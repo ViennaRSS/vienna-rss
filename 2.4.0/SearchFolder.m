@@ -102,9 +102,7 @@
 		CriteriaTree * criteriaTree = [db searchStringForSmartFolder:folderId];
 
 		// Set the criteria condition
-		// (selectItemWithTag is Mac OSX 10.4 and later so we use our homebrew one in the extensions instead)
-		int indexOfTag = [[criteriaConditionPopup menu] indexOfItemWithTag:[criteriaTree condition]];
-		[criteriaConditionPopup selectItemAtIndex:indexOfTag];
+		[criteriaConditionPopup selectItemWithTag:[criteriaTree condition]];
 
 		NSEnumerator * enumerator = [criteriaTree criteriaEnumerator];
 		Criteria * criteria;
