@@ -68,6 +68,14 @@ static NSMutableDictionary * stylePathMappings = nil;
 	[self initForStyle:[[Preferences standardPreferences] displayStyle]];
 }
 
+/* performDragOperation
+ * Don't accept stuff dragged into the article view. 
+ */
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{ 
+	        return NO;
+}
+
 /* stylesMap
  * Returns the article view styles map
  */
