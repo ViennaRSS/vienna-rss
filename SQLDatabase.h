@@ -7,7 +7,7 @@
 //  Copyright (c) 2002 Blackhole Media, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "sqlite/sqlite3.h"
 
 @class SQLResult;

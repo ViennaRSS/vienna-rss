@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "SQLDatabase.h"
 #import "Folder.h"
 #import "Field.h"

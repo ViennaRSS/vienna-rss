@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 @interface NSCalendarDate (CalendarExtensions)
 	+(NSCalendarDate *)today;

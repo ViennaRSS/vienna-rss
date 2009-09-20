@@ -6,7 +6,7 @@
 //  Copyright (c) 2001 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "SQLDatabase.h"
 
 @interface SQLDatabase (Private)

@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 // Enum of valid field types.
 typedef enum {

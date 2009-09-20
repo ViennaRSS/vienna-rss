@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 #define SafeString(s)   ((s) ? (s) : @"")
 
