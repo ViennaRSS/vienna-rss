@@ -186,7 +186,6 @@
 		AAA1E32A0852539500277128 /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAA1E3280852539500277128 /* GroupFolder.nib */; };
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
-		AAA569F309EE777400C87343 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */; };
 		AAA56F2C09EF4FD100C87343 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
 		AAA56F2D09EF4FE100C87343 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
 		AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA5686F09EE725B00C87343 /* NewsParser.framework */; };
@@ -888,7 +887,6 @@
 				AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
-				AAA569F309EE777400C87343 /* Foundation.framework in Frameworks */,
 				AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */,
 				AA8F85A10A0A2F6600A0EACE /* Security.framework in Frameworks */,
 				AA8F86B40A0A2FC500A0EACE /* WebKit.framework in Frameworks */,
@@ -923,7 +921,6 @@
 				AA8F856C0A0A2F6600A0EACE /* Security.framework */,
 				AAB076170A076BBE00A9F76A /* Carbon.framework */,
 				AA62D7DB0859A9F70040C370 /* Growl.framework */,
-				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -932,6 +929,7 @@
 			isa = PBXGroup;
 			children = (
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
+				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
