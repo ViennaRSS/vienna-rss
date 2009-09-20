@@ -226,6 +226,7 @@
 			{
 				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0,
 																						  PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION)];
+				[progressIndicator setControlSize:NSSmallControlSize];
 				[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
 				[progressIndicator setDisplayedWhenStopped:YES];
 				[progressIndicator setUsesThreadedAnimation:YES];
