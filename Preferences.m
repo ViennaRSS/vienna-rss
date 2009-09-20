@@ -38,7 +38,7 @@ static Preferences * _standardPreferences = nil;
 
 // Private methods
 @interface Preferences (Private)
-	-(NSDictionary *)initPreferences;
+	-(NSDictionary *)factoryDefaults;
 	-(void)handleUpdateRestart:(NSNotification *)nc;
 @end
 
@@ -92,7 +92,7 @@ static Preferences * _standardPreferences = nil;
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MAPref_Profile_Path];
 
 		// Merge in the user preferences from the defaults.
-		NSDictionary * defaults = [self initPreferences];
+		NSDictionary * defaults = [self factoryDefaults];
 		if (profilePath == nil)
 		{
 			preferencesPath = nil;
@@ -207,10 +207,10 @@ static Preferences * _standardPreferences = nil;
 	[super dealloc];
 }
 
-/* initPreferences
+/* factoryDefaults
  * The standard class initialization object.
  */
--(NSDictionary *)initPreferences
+-(NSDictionary *)factoryDefaults
 {
 	// Set the preference defaults
 	NSMutableDictionary * defaultValues = [NSMutableDictionary dictionary];
