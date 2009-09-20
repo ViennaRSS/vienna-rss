@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 extern NSString * MA_Field_GUID;
 extern NSString * MA_Field_Subject;

@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 #import "Database.h"
 #import "ArticleController.h"
 #import "ActivityViewer.h"
