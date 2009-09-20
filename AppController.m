@@ -48,7 +48,6 @@
 #import "ToolbarItem.h"
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
-#import "M3InstallController.h"
 #import <WebKit/WebKit.h>
 #import <Growl/GrowlDefines.h>
 #include <mach/mach_port.h>
@@ -574,9 +573,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		// Finally save preferences
 		[prefs savePreferences];
 		
-		// Check wether we're running from a disk image. If so, give the option to move the app bundle to the Applications folder.
-		M3InstallController *install = [[M3InstallController alloc] init];
-		[install displayInstaller];
 	}
 	[db close];
 }
