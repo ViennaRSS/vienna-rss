@@ -2576,7 +2576,6 @@
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -2585,8 +2584,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					__DEBUG__,
-					SQLITE_OMIT_CURSOR,
 					"HAVE_USLEEP=1",
 					"THREADSAFE=0",
 					OS_UNIX,
@@ -2610,11 +2607,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					SQLITE_OMIT_CURSOR,
 					"HAVE_USLEEP=1",
 					"THREADSAFE=0",
-					NDEBUG,
 					OS_UNIX,
+					NDEBUG,
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
