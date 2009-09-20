@@ -6,6 +6,27 @@
 	<array>
 		<dict>
 			<key>CLASS</key>
+			<string>ArticleController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>foldersTree</key>
+				<string>FoldersTree</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ExtendedTableView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSTableView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
 			<string>FoldersTree</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
@@ -22,6 +43,65 @@
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FilterView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>filterByLabel</key>
+				<string>NSTextField</string>
+				<key>filterCloseButton</key>
+				<string>NSButton</string>
+				<key>filterSearchField</key>
+				<string>NSSearchField</string>
+				<key>filterViewPopUp</key>
+				<string>NSPopUpButton</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>PSMTabBarControl</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>delegate</key>
+				<string>id</string>
+				<key>partnerView</key>
+				<string>id</string>
+				<key>style</key>
+				<string>id</string>
+				<key>tabView</key>
+				<string>NSTabView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSControl</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ClickableProgressIndicator</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>target</key>
+				<string>id</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSProgressIndicator</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSResponder</string>
 		</dict>
 		<dict>
 			<key>ACTIONS</key>
@@ -46,11 +126,46 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
+			<string>ArticleView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>TabbedWebView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>SquareWindow</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSWindow</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
 			<string>NSPopUpButton</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSButton</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>makeTextLarger</key>
+				<string>id</string>
+				<key>makeTextSmaller</key>
+				<string>id</string>
+				<key>saveAsDraft</key>
+				<string>id</string>
+				<key>sendMessage</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>
@@ -68,11 +183,34 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
+			<string>FolderView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSOutlineView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
 			<string>ToolbarButton</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSButton</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>BrowserView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>tabBarControl</key>
+				<string>PSMTabBarControl</string>
+				<key>tabView</key>
+				<string>NSTabView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
 		</dict>
 		<dict>
 			<key>ACTIONS</key>
@@ -86,6 +224,67 @@
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ArticleListView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>articleController</key>
+				<string>ArticleController</string>
+				<key>articleList</key>
+				<string>MessageListView</string>
+				<key>articleListHeader</key>
+				<string>TexturedHeader</string>
+				<key>articleText</key>
+				<string>ArticleView</string>
+				<key>columnsPopupMenu</key>
+				<string>PopupButton</string>
+				<key>controller</key>
+				<string>AppController</string>
+				<key>foldersTree</key>
+				<string>FoldersTree</string>
+				<key>splitView2</key>
+				<string>NSSplitView</string>
+				<key>stdEnclosureView</key>
+				<string>StdEnclosureView</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>TexturedHeader</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
+				<key>downloadFile</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>StdEnclosureView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>downloadButton</key>
+				<string>NSButton</string>
+				<key>fileImage</key>
+				<string>NSImageView</string>
+				<key>filenameField</key>
+				<string>NSTextField</string>
+				<key>filenameLabel</key>
+				<string>NSTextField</string>
+			</dict>
+			<key>SUPERCLASS</key>
+			<string>NSView</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>
@@ -324,205 +523,6 @@
 				<string>TexturedHeader</string>
 				<key>unifiedText</key>
 				<string>ArticleView</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>ArticleController</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>foldersTree</key>
-				<string>FoldersTree</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>ExtendedTableView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSTableView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>FilterView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>filterByLabel</key>
-				<string>NSTextField</string>
-				<key>filterCloseButton</key>
-				<string>NSButton</string>
-				<key>filterSearchField</key>
-				<string>NSSearchField</string>
-				<key>filterViewPopUp</key>
-				<string>NSPopUpButton</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>PSMTabBarControl</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>delegate</key>
-				<string>id</string>
-				<key>partnerView</key>
-				<string>id</string>
-				<key>style</key>
-				<string>id</string>
-				<key>tabView</key>
-				<string>NSTabView</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSControl</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>ClickableProgressIndicator</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>target</key>
-				<string>id</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSProgressIndicator</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>NSView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSResponder</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>ArticleView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>TabbedWebView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>SquareWindow</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSWindow</string>
-		</dict>
-		<dict>
-			<key>ACTIONS</key>
-			<dict>
-				<key>makeTextLarger</key>
-				<string>id</string>
-				<key>makeTextSmaller</key>
-				<string>id</string>
-				<key>saveAsDraft</key>
-				<string>id</string>
-				<key>sendMessage</key>
-				<string>id</string>
-			</dict>
-			<key>CLASS</key>
-			<string>FirstResponder</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSObject</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>FolderView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSOutlineView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>BrowserView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>tabBarControl</key>
-				<string>PSMTabBarControl</string>
-				<key>tabView</key>
-				<string>NSTabView</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>ArticleListView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>articleController</key>
-				<string>ArticleController</string>
-				<key>articleList</key>
-				<string>MessageListView</string>
-				<key>articleListHeader</key>
-				<string>TexturedHeader</string>
-				<key>articleText</key>
-				<string>ArticleView</string>
-				<key>columnsPopupMenu</key>
-				<string>PopupButton</string>
-				<key>controller</key>
-				<string>AppController</string>
-				<key>foldersTree</key>
-				<string>FoldersTree</string>
-				<key>splitView2</key>
-				<string>NSSplitView</string>
-				<key>stdEnclosureView</key>
-				<string>StdEnclosureView</string>
-			</dict>
-			<key>SUPERCLASS</key>
-			<string>NSView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>TexturedHeader</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSView</string>
-		</dict>
-		<dict>
-			<key>ACTIONS</key>
-			<dict>
-				<key>downloadFile</key>
-				<string>id</string>
-			</dict>
-			<key>CLASS</key>
-			<string>StdEnclosureView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>OUTLETS</key>
-			<dict>
-				<key>downloadButton</key>
-				<string>NSButton</string>
-				<key>fileImage</key>
-				<string>NSImageView</string>
-				<key>filenameField</key>
-				<string>NSTextField</string>
-				<key>filenameLabel</key>
-				<string>NSTextField</string>
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSView</string>
