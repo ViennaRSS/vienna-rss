@@ -2539,16 +2539,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_USLEEP=1",
-					"THREADSAFE=0",
-					OS_UNIX,
+					"SQLITE_THREADSAFE=0",
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = SQLiteLib;
-				WARNING_CFLAGS = (
-					"-Wall",
-					"-Wno-unused",
-					"-Wno-uninitialized",
-				);
 			};
 			name = Development;
 		};
@@ -2557,18 +2551,12 @@
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_USLEEP=1",
-					"THREADSAFE=0",
-					OS_UNIX,
+					"SQLITE_THREADSAFE=0",
 					NDEBUG,
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = SQLiteLib;
 				STRIP_INSTALLED_PRODUCT = YES;
-				WARNING_CFLAGS = (
-					"-Wall",
-					"-Wno-unused",
-					"-Wno-uninitialized",
-				);
 			};
 			name = Deployment;
 		};
