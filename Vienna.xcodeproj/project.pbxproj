@@ -2549,7 +2549,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PFE_FILE_C_DIALECTS = c;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = SQLiteLib;
 				WARNING_CFLAGS = (
@@ -2563,7 +2562,6 @@
 		AA2B6CE70C2E648000415851 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PFE_FILE_C_DIALECTS = c;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = SQLiteLib;
 				STRIP_INSTALLED_PRODUCT = YES;
@@ -2584,7 +2582,6 @@
 					"$(BUILT_PRODUCTS_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2610,7 +2607,6 @@
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
 				);
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
