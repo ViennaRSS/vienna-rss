@@ -275,10 +275,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 	// Do safe initialisation. 	 
 	[self doSafeInitialisation];
-
-	// Set the metal background texture
-	backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"mainBackground.tiff"]];
-	[mainWindow setBackgroundColor:backgroundColor];
 	
 	// Retain views which might be removed from the toolbar and therefore released;
 	// we will need them if they are added back later.
@@ -4010,7 +4006,6 @@ static CFStringRef percentEscape(NSString *string)
 		@"Refresh",
 		NSToolbarFlexibleSpaceItemIdentifier,
 		@"SearchItem",
-		NSToolbarFlexibleSpaceItemIdentifier,
 		nil];
 }
 

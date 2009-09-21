@@ -19,14 +19,6 @@
 		</dict>
 		<dict>
 			<key>CLASS</key>
-			<string>ExtendedTableView</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSTableView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
 			<string>FoldersTree</string>
 			<key>LANGUAGE</key>
 			<string>ObjC</string>
@@ -43,6 +35,14 @@
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSView</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>ExtendedTableView</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSTableView</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>
@@ -131,14 +131,6 @@
 			<string>ObjC</string>
 			<key>SUPERCLASS</key>
 			<string>TabbedWebView</string>
-		</dict>
-		<dict>
-			<key>CLASS</key>
-			<string>SquareWindow</string>
-			<key>LANGUAGE</key>
-			<string>ObjC</string>
-			<key>SUPERCLASS</key>
-			<string>NSWindow</string>
 		</dict>
 		<dict>
 			<key>CLASS</key>
