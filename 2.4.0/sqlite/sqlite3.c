@@ -24046,7 +24046,7 @@ static int afpLock(sqlite3_file *id, int locktype){
   ** operating system calls for the specified lock.
   */
   if( locktype==SHARED_LOCK ){
-    int lk, lrc1, lrc2, lrc1Errno;
+    int lk, lrc1, lrc2, lrc1Errno = 0; /* JJ - initialized to 0 to avoid warning 'lrc1Errno' may be used uninitialized in this function */
     
     /* Now get the read-lock SHARED_LOCK */
     /* note that the quality of the randomness doesn't matter that much */
@@ -43991,7 +43991,7 @@ SQLITE_PRIVATE int sqlite3BtreeInsert(
 ){
   int rc;
   int loc = seekResult;          /* -1: before desired location  +1: after */
-  int szNew;
+  int szNew = 0; /* JJ - initialized to 0 to avoid warning 'szNew' may be used uninitialized in this function */
   int idx;
   MemPage *pPage;
   Btree *p = pCur->pBtree;
