@@ -1733,7 +1733,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		return;	
 	}	
 
-	[mainWindow setTitle:[[NSString stringWithFormat:@"%@ -", [self appName]]
+	[mainWindow setTitle:[[NSString stringWithFormat:@"%@", [self appName]]
 		stringByAppendingString:[NSString stringWithFormat:
 			NSLocalizedString(@" (%d unread)", nil), currentCountOfUnread]]];
 
