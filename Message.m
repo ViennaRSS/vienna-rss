@@ -171,9 +171,55 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 	deletedFlag = flag;
 }
 
+/* accessInstanceVariablesDirectly
+ * Override this so that KVC doesn't get the articleData ivar
+ */
++(BOOL)accessInstanceVariablesDirectly
+{
+	return NO;
+}
+
+/* valueForKeyPath:
+ * Override valueForKeyPath: for backward compatibility with article list sort descriptors
+ */
+-(id)valueForKeyPath:(NSString *)keyPath
+{
+	if ([keyPath hasPrefix:@"articleData."])
+	{
+		NSString * key = [keyPath substringFromIndex:[@"articleData." length]];
+		if ([key isEqualToString:MA_Field_Date])
+		{
+			return [self date];
+		}
+		else if ([key isEqualToString:MA_Field_Author])
+		{
+			return [self author];
+		}
+		else if ([key isEqualToString:MA_Field_Subject])
+		{
+			return [self title];
+		}
+		else if ([key isEqualToString:MA_Field_Link])
+		{
+			return [self link];
+		}
+		else if ([key isEqualToString:MA_Field_Summary])
+		{
+			return [self summary];
+		}
+		else
+		{
+			return [super valueForKeyPath:keyPath];
+		}
+	}
+	else
+	{
+		return [super valueForKeyPath:keyPath];
+	}
+}
+
 /* Accessor functions
  */
--(NSDictionary *)articleData	{ return articleData; }
 -(BOOL)isRead					{ return readFlag; }
 -(BOOL)isRevised				{ return revisedFlag; }
 -(BOOL)isFlagged				{ return markedFlag; }
