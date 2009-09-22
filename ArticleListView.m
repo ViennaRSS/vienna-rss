@@ -1452,6 +1452,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	else
 	{
+		cellString = nil;
 		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
 	
