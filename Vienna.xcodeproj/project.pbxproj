@@ -242,6 +242,7 @@
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		B2097E3D0B77DE2A005A2466 /* StopLoading.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */; };
+		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
 		B25E53E51067B54600BBF14C /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
@@ -869,6 +870,7 @@
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChain.m; sourceTree = "<group>"; };
 		AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smartFolder.tiff; sourceTree = "<group>"; };
 		B2097E3C0B77DE2A005A2466 /* StopLoading.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = StopLoading.tiff; sourceTree = "<group>"; };
+		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserNextButton.tiff; sourceTree = "<group>"; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRefreshButton.tiff; sourceTree = "<group>"; };
 		B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserPreviousButton.tiff; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 			children = (
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				B273E8EB106910B2001ADEF8 /* errorpagebg.png */,
+				B2554730106913760065E9C3 /* errorpagelogo.png */,
 				B2CCA07B10690995006DDB1E /* errorpage.html */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA582D880C4A2B78003D0916 /* ActivityViewer.nib */,
@@ -1682,6 +1685,7 @@
 				B27656161067BBF000A43AB2 /* RssLoad.tiff in Resources */,
 				B2CCA07C10690995006DDB1E /* errorpage.html in Resources */,
 				B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */,
+				B2554731106913760065E9C3 /* errorpagelogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
