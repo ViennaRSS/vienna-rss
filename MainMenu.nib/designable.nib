@@ -10,10 +10,7 @@
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">732</string>
 		</object>
-		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="2"/>
-			<integer value="29"/>
-		</array>
+		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs"/>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
@@ -41,7 +38,7 @@
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="711948959">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="244330039">
@@ -389,7 +386,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{942, 625}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{213, 129}</string>
@@ -3873,11 +3869,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">cosmeticLine</string>
+						<string key="label">cosmeticStatusBarHighlightLine</string>
 						<reference key="source" ref="675460743"/>
 						<reference key="destination" ref="350323120"/>
 					</object>
-					<int key="connectionID">1389</int>
+					<int key="connectionID">1390</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -5901,7 +5897,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1389</int>
+			<int key="maxID">1390</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5988,7 +5984,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="closeTabItem">NSMenuItem</string>
 						<string key="closeWindowItem">NSMenuItem</string>
 						<string key="columnsMenu">NSMenuItem</string>
-						<string key="cosmeticLine">NSBox</string>
+						<string key="cosmeticStatusBarHighlightLine">NSBox</string>
 						<string key="exportAll">NSButtonCell</string>
 						<string key="exportSaveAccessory">NSView</string>
 						<string key="exportSelected">NSButtonCell</string>
