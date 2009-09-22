@@ -47,7 +47,7 @@
 
 // The current database version number
 const int MA_Min_Supported_DB_Version = 12;
-const int MA_Current_DB_Version = 15;
+const int MA_Current_DB_Version = 17;
 
 // There's just one database and we manage access to it through a
 // singleton object.
