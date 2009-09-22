@@ -97,6 +97,10 @@
 				@"hasEnclosure", @"key",
 				@"compare:", @"selector",
 				nil], MA_Field_HasEnclosure,
+			[NSDictionary dictionaryWithObjectsAndKeys:
+				@"enclosure", @"key",
+				@"caseInsensitiveCompare:", @"selector",
+				nil], MA_Field_Enclosure,
 			nil];
 
 		// Pre-set sort to what was saved in the preferences
