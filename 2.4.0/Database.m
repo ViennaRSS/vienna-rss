@@ -1347,12 +1347,12 @@ static Database * _sharedDatabase = nil;
 		[self initArticleArray:folder];
 		
 		// Extract the article data from the dictionary.
-		NSString * articleBody = [[article articleData] objectForKey:MA_Field_Text];
-		NSString * articleTitle = [[article articleData] objectForKey:MA_Field_Subject]; 
-		NSDate * articleDate = [[article articleData] objectForKey:MA_Field_Date];
-		NSString * articleLink = [[article articleData] objectForKey:MA_Field_Link];
-		NSString * userName = [[article articleData] objectForKey:MA_Field_Author];
-		NSString * articleEnclosure = [[article articleData] objectForKey:MA_Field_Enclosure];
+		NSString * articleBody = [article body];
+		NSString * articleTitle = [article title]; 
+		NSDate * articleDate = [article date];
+		NSString * articleLink = [article link];
+		NSString * userName = [article author];
+		NSString * articleEnclosure = [article enclosure];
 		NSString * articleGuid = [article guid];
 		int parentId = [article parentId];
 		BOOL marked_flag = [article isFlagged];

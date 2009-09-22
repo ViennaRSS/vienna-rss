@@ -1320,26 +1320,27 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	NSParameterAssert(rowIndex >= 0 && rowIndex < (int)[allArticles count]);
 	theArticle = [allArticles objectAtIndex:rowIndex];
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Read])
+	NSString * identifier = [aTableColumn identifier];
+	if ([identifier isEqualToString:MA_Field_Read])
 	{
 		if (![theArticle isRead])
 			return ([theArticle isRevised]) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Flagged])
+	if ([identifier isEqualToString:MA_Field_Flagged])
 	{
 		if ([theArticle isFlagged])
 			return [NSImage imageNamed:@"flagged.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Comments])
+	if ([identifier isEqualToString:MA_Field_Comments])
 	{
 		if ([theArticle hasComments])
 			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_HasEnclosure])
+	if ([identifier isEqualToString:MA_Field_HasEnclosure])
 	{
 		if ([theArticle hasEnclosure])
 			return [NSImage imageNamed:@"enclosure.tiff"];
@@ -1347,7 +1348,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	
 	NSMutableAttributedString * theAttributedString;
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Headlines])
+	if ([identifier isEqualToString:MA_Field_Headlines])
 	{
 		theAttributedString = [[NSMutableAttributedString alloc] init];
 		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && ([[NSApp mainWindow] firstResponder] == aTableView);
@@ -1418,21 +1419,40 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 	
 	NSString * cellString;
-	if ([[aTableColumn identifier] isEqualToString:MA_Field_Date])
+	if ([identifier isEqualToString:MA_Field_Date])
 	{
-		NSDate * date = [[theArticle articleData] objectForKey:[aTableColumn identifier]];
+		NSDate * date = [theArticle date];
 		NSCalendarDate * calDate = [date dateWithCalendarFormat:nil timeZone:nil];
 		cellString = [calDate friendlyDescription];
 	}
-	else if ([[aTableColumn identifier] isEqualToString:MA_Field_Folder])
+	else if ([identifier isEqualToString:MA_Field_Folder])
 	{
 		Folder * folder = [db folderFromID:[theArticle folderId]];
 		cellString = [folder name];
 	}
+	else if ([identifier isEqualToString:MA_Field_Author])
+	{
+		cellString = [theArticle author];
+	}
+	else if ([identifier isEqualToString:MA_Field_Link])
+	{
+		cellString = [theArticle link];
+	}
+	else if ([identifier isEqualToString:MA_Field_Subject])
+	{
+		cellString = [theArticle title];
+	}
+	else if ([identifier isEqualToString:MA_Field_Summary])
+	{
+		cellString = [theArticle summary];
+	}
+	else if ([identifier isEqualToString:MA_Field_Enclosure])
+	{
+		cellString = [theArticle enclosure];
+	}
 	else
 	{
-		// Only string articleData objects should make it from here.
-		cellString = [[theArticle articleData] objectForKey:[aTableColumn identifier]];
+		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
 	
 	theAttributedString = [[NSMutableAttributedString alloc] initWithString:cellString attributes:([theArticle isRead] ? reportCellDict : unreadReportCellDict)];
