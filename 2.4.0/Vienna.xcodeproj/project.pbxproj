@@ -256,6 +256,7 @@
 		B28C95970C3A951E008A09E5 /* blogWithMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95960C3A951E008A09E5 /* blogWithMenu.tiff */; };
 		B28DE7F70B754E590062F879 /* enclosure_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F50B754E590062F879 /* enclosure_header.tiff */; };
 		B28DE7F80B754E590062F879 /* enclosure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F60B754E590062F879 /* enclosure.tiff */; };
+		B2CCA07C10690995006DDB1E /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2CCA07B10690995006DDB1E /* errorpage.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -881,6 +882,7 @@
 		B28C95960C3A951E008A09E5 /* blogWithMenu.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = blogWithMenu.tiff; sourceTree = "<group>"; };
 		B28DE7F50B754E590062F879 /* enclosure_header.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = enclosure_header.tiff; sourceTree = "<group>"; };
 		B28DE7F60B754E590062F879 /* enclosure.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = enclosure.tiff; sourceTree = "<group>"; };
+		B2CCA07B10690995006DDB1E /* errorpage.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = errorpage.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1044,6 +1046,7 @@
 			isa = PBXGroup;
 			children = (
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
+				B2CCA07B10690995006DDB1E /* errorpage.html */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA582D880C4A2B78003D0916 /* ActivityViewer.nib */,
 				AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */,
@@ -1674,6 +1677,7 @@
 				B27656121067BBC300A43AB2 /* GoForward.tiff in Resources */,
 				B27656141067BBDC00A43AB2 /* ReloadPage.tiff in Resources */,
 				B27656161067BBF000A43AB2 /* RssLoad.tiff in Resources */,
+				B2CCA07C10690995006DDB1E /* errorpage.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
