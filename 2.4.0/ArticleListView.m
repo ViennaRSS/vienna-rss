@@ -483,10 +483,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	isInTableInit = YES;
 	
 	// Remove old columns
-	NSEnumerator * enumerator = [[articleList tableColumns] objectEnumerator];
-	id nextObject;
-	while ((nextObject = [enumerator nextObject]))
-		[articleList removeTableColumn:nextObject];
+	NSTableColumn * lastColumn;
+	while ((lastColumn = [[articleList tableColumns] lastObject]))
+		[articleList removeTableColumn:lastColumn];
 	
 	[self updateArticleListRowHeight];
 	
