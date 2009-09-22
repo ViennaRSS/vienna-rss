@@ -297,6 +297,22 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	InstallEventHandler(GetEventMonitorTarget(), handlerFunction, 1, &eventType, NULL, NULL);
 }
 
+/* applicationDidResignActive
+ * Do the things we need to do when Vienna becomes inactive, like greying out.
+ */
+-(void)applicationDidResignActive:(NSNotification *)aNotification
+{
+	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.91 green:0.91 blue:0.91 alpha:1.00]];
+}
+
+/* applicationDidResignActive
+ * Do the things we need to do when Vienna becomes inactive, like re-coloring view backgrounds.
+ */
+-(void)applicationDidBecomeActive:(NSNotification *)notification
+{
+	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
+}
+
 /* doSafeInitialisation
  * Do the stuff that requires that all NIBs are awoken. I can't find a notification
  * from Cocoa for this so we hack it.

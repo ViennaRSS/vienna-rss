@@ -104,7 +104,7 @@
 	[folderHeader setDragger:YES withSplitView:folderSplitView];
 
 	// Set background colour
-	[outlineView setBackgroundColor:[NSColor colorWithDeviceRed:(228.0f/255.0f) green:(237.0f/255.0f) blue:(246.0f/255.0f) alpha:1.0f]];
+	[outlineView setBackgroundColor:[NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
 		
 	// Allow double-click a node to edit the node
 	[outlineView setAction:@selector(handleSingleClick:)];
@@ -124,6 +124,15 @@
 	
 	// Make sure selected row is visible
 	[outlineView scrollRowToVisible:[outlineView selectedRow]];
+}
+
+/* setOutlineViewBackgroundColor
+ * Sets the color of the background view. 
+ */
+
+-(void)setOutlineViewBackgroundColor: (NSColor *)color;
+{
+	[outlineView setBackgroundColor: color];
 }
 
 /* initialiseFoldersTree
