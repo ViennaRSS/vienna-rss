@@ -70,6 +70,7 @@
 	IBOutlet NSMenuItem * blogWithMenu;
 	IBOutlet NSMenuItem * blogWithOneMenu;
 	IBOutlet FilterView * filterView;
+	IBOutlet NSBox * cosmeticLine;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;

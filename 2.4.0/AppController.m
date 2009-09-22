@@ -109,7 +109,7 @@
 // Static constant strings that are typically never tweaked
 static const int MA_Minimum_Folder_Pane_Width = 80;
 static const int MA_Minimum_BrowserView_Pane_Width = 200;
-static const int MA_StatusBarHeight = 22;
+static const int MA_StatusBarHeight = 23;
 
 // Awake from sleep
 static io_connect_t root_port;
@@ -303,6 +303,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)applicationDidResignActive:(NSNotification *)aNotification
 {
 	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.91 green:0.91 blue:0.91 alpha:1.00]];
+	[statusText setTextColor:[NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00]];
 }
 
 /* applicationDidResignActive
@@ -311,6 +312,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)applicationDidBecomeActive:(NSNotification *)notification
 {
 	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
+	[statusText setTextColor:[NSColor blackColor]];
 }
 
 /* doSafeInitialisation
@@ -3473,6 +3475,7 @@ static CFStringRef percentEscape(NSString *string)
 				// When hiding the status bar, hide these controls BEFORE
 				// we start hiding the view. Looks cleaner.
 				[statusText setHidden:YES];
+				[cosmeticLine setHidden:YES];
 			}
 			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
 		}
@@ -3508,6 +3511,7 @@ static CFStringRef percentEscape(NSString *string)
 		// When showing the status bar, show these controls AFTER
 		// we have made the view visible. Again, looks cleaner.
 		[statusText setHidden:NO];
+		[cosmeticLine setHidden:NO];
 		return;
 	}
 	if (viewTag == MA_ViewTag_Filterbar && [self isFilterBarVisible])
