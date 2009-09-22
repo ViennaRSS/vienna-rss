@@ -138,7 +138,7 @@
 	[addressField setStringValue:@""];
 
 	// The RSS page button is hidden by default
-	[self showRssPageButton:FALSE];
+	[self showRssPageButton:NO];
 
 	// Set tooltips
 	[addressField setToolTip:NSLocalizedString(@"Enter the URL here", nil)];
@@ -170,34 +170,7 @@
  */
 -(void)showRssPageButton:(BOOL)showButton
 {
-	NSRect addressFieldFrame = [addressField frame];
-	NSRect lockIconImageFrame = [lockIconImage frame];
-	NSRect rssPageButtonFrame = [rssPageButton frame];
-	static int rssPageButtonWidth = 0;
-	
-	if (rssPageButtonWidth == 0)
-		rssPageButtonWidth = (rssPageButtonFrame.origin.x + rssPageButtonFrame.size.width) - (addressFieldFrame.origin.x + addressFieldFrame.size.width);
-
-	// The 3 slop is because otherwise the address field snaps to the right edge of the frame. I consider
-	// this to be a bug and we should figure out how to get around this.
-	if (showButton && [rssPageButton isHidden])
-	{
-		addressFieldFrame.size.width -= rssPageButtonWidth - 3;
-		lockIconImageFrame.origin.x -= rssPageButtonWidth - 3;
-		[addressField setFrame:addressFieldFrame];
-		[lockIconImage setFrame:lockIconImageFrame];
-		[[addressField superview] display];
-		[rssPageButton setHidden:FALSE];
-	}
-	else if (!showButton && ![rssPageButton isHidden])
-	{
-		[rssPageButton setHidden:TRUE];
-		addressFieldFrame.size.width += rssPageButtonWidth - 3;
-		lockIconImageFrame.origin.x += rssPageButtonWidth - 3;
-		[addressField setFrame:addressFieldFrame];
-		[lockIconImage setFrame:lockIconImageFrame];
-		[[addressField superview] display];
-	}
+	[rssPageButton setEnabled:showButton];
 }
 
 /* setError
@@ -291,7 +264,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
-		[self showRssPageButton:FALSE];
+		[self showRssPageButton:NO];
 		[self setError:nil];
 		hasPageTitle = NO;
 	}
