@@ -54,6 +54,7 @@
 -(BOOL)selectFolder:(int)folderId;
 -(void)renameFolder:(int)folderId;
 -(int)actualSelection;
+-(void)setOutlineViewBackgroundColor: (NSColor *)color;
 -(int)groupParentSelection;
 -(int)countOfSelectedFolders;
 -(NSArray *)selectedFolders;
