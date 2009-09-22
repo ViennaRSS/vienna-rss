@@ -338,6 +338,10 @@
 			// the Error title on the tab.
 			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
 			[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Error", nil)];
+			NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+			NSString * pathToAckFile = [thisBundle pathForResource:@"errorpage" ofType:@"html"];
+			if (pathToAckFile != nil)
+				[self loadURL:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];	
 		}
 	}
 	
