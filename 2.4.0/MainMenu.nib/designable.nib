@@ -10,7 +10,9 @@
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">732</string>
 		</object>
-		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs"/>
+		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
+			<integer value="1149"/>
+		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</array>
@@ -2165,7 +2167,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="NSExtension">NSView</string>
 			</object>
 			<object class="NSCustomView" id="1056405994">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSBox" id="900007657">
@@ -2187,7 +2189,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<object class="NSCustomView" id="174155804">
 										<reference key="NSNextResponder" ref="90274653"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrameSize">{697, 588}</string>
+										<string key="NSFrameSize">{697, 587}</string>
 										<reference key="NSSuperview" ref="90274653"/>
 										<string key="NSClassName">ArticleView</string>
 										<string key="NSExtension">WebView</string>
@@ -2219,6 +2221,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</array>
 				<string key="NSFrameSize">{699, 607}</string>
+				<reference key="NSSuperview"/>
 				<string key="NSClassName">UnifiedDisplayView</string>
 				<string key="NSExtension">NSView</string>
 			</object>
@@ -5502,6 +5505,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<boolean value="YES" key="1118.ImportedFromIB2"/>
 				<string key="1146.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="1146.ImportedFromIB2"/>
+				<string key="1148.IBEditorWindowLastContentRect">{{0, 362}, {699, 607}}</string>
 				<string key="1148.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="1148.ImportedFromIB2"/>
 				<string key="1149.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -5984,7 +5988,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="closeTabItem">NSMenuItem</string>
 						<string key="closeWindowItem">NSMenuItem</string>
 						<string key="columnsMenu">NSMenuItem</string>
-						<string key="cosmeticStatusBarHighlightLine">NSBox</string>
+						<string key="cosmeticStatusBarHighlightLine">NSView</string>
 						<string key="exportAll">NSButtonCell</string>
 						<string key="exportSaveAccessory">NSView</string>
 						<string key="exportSelected">NSButtonCell</string>
