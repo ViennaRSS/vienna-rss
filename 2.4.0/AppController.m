@@ -326,7 +326,11 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	{
 		[foldersTree initialiseFoldersTree];
 		[mainArticleView initialiseArticleView];
-
+		
+		// If the statusbar is hidden, also hide the highlight line on its top.
+		if (![self isStatusBarVisible])
+			[cosmeticStatusBarHighlightLine setHidden:YES];
+		
 		// Select the folder and article from the last session
 		Preferences * prefs = [Preferences standardPreferences];
 		int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
@@ -346,6 +350,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 				   withObject:nil
 				   afterDelay:0];
 		doneSafeInit = YES;
+		
 	}
 	didCompleteInitialisation = YES;
 }
@@ -3475,7 +3480,7 @@ static CFStringRef percentEscape(NSString *string)
 				// When hiding the status bar, hide these controls BEFORE
 				// we start hiding the view. Looks cleaner.
 				[statusText setHidden:YES];
-				[cosmeticLine setHidden:YES];
+				[cosmeticStatusBarHighlightLine setHidden:YES];
 			}
 			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
 		}
@@ -3511,7 +3516,7 @@ static CFStringRef percentEscape(NSString *string)
 		// When showing the status bar, show these controls AFTER
 		// we have made the view visible. Again, looks cleaner.
 		[statusText setHidden:NO];
-		[cosmeticLine setHidden:NO];
+		[cosmeticStatusBarHighlightLine setHidden:NO];
 		return;
 	}
 	if (viewTag == MA_ViewTag_Filterbar && [self isFilterBarVisible])
