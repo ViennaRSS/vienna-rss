@@ -73,8 +73,12 @@
 		int bloglinesId = bloglinesSubId ? [bloglinesSubId intValue] : MA_NonBloglines_Folder;
 
 		// Some OPML exports use 'text' instead of 'title'.
-		if (feedTitle == nil)
-			feedTitle = [[entry objectForKey:@"text"] stringByUnescapingExtendedCharacters];
+		if (feedTitle == nil || [feedTitle length] == 0u)
+		{
+			NSString * feedText = [[entry objectForKey:@"text"] stringByUnescapingExtendedCharacters];
+			if (feedText != nil)
+				feedTitle = feedText;
+		}
 
 		// Do double-decoding of the title to get around a bug in some commercial newsreaders
 		// where they double-encode characters
