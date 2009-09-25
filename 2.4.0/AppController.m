@@ -2993,7 +2993,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSString * pathToAckFile = [thisBundle pathForResource:@"Acknowledgements" ofType:@"html"];
 	if (pathToAckFile != nil)
 	{
-		[self createNewTab:[NSURL URLWithString:[NSString stringWithFormat:@"file://%@", pathToAckFile]] inBackground:NO];
+		[self createNewTab:[NSURL fileURLWithPath:pathToAckFile isDirectory:NO] inBackground:NO];
 	}
 }
 
