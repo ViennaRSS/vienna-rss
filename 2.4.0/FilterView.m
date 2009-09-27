@@ -39,6 +39,8 @@
 	NSString * backgroundBrushURL = [[NSBundle mainBundle] pathForResource:@"filterViewBackground" ofType:@"tiff"];
 	backgroundBrush = [[NSImage alloc] initWithContentsOfFile: backgroundBrushURL ];
 
+	// Give the label the typical embossed look
+	[[filterByLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	// Make sure we localise the label
 	[filterByLabel setStringValue:NSLocalizedString(@"Filter by:", nil)];
 
