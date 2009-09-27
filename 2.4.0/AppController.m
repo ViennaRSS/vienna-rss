@@ -197,6 +197,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[toolbar setShowsBaselineSeparator:NO];
 	[mainWindow setToolbar:toolbar];
 
+	// Give the status bar an embossed look
+	[[statusText cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	
 	// Run the auto-expire now
 	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
 	
