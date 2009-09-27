@@ -162,6 +162,8 @@
  */
 -(NSString *)viewLink
 {
+	if ([[[webPane mainFrame] dataSource] unreachableURL])
+		return [[[[webPane mainFrame] dataSource] unreachableURL] absoluteString];
 	return [[self url] absoluteString];
 }
 
@@ -189,7 +191,8 @@
 -(IBAction)handleAddress:(id)sender
 {
 	NSString * theURL = [addressField stringValue];
-	
+	NSLog(@"handleAddress:");
+	NSLog(theURL);
 	// If no '.' appears in the string, wrap it with 'www' and 'com'
 	if (![theURL hasCharacter:'.']) 
 		theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
@@ -303,7 +306,6 @@
 			[addressField setBackgroundColor:[NSColor whiteColor]];
 			[lockIconImage setHidden:YES];
 		}
-		[addressField setStringValue:[theURL absoluteString]];
 	}
 }
 
@@ -319,6 +321,20 @@
 			[self setError:error];
 		[self endFrameLoad];
 	}
+	
+	// Use a warning sign as favicon
+	[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
+	
+	// Load the localized verion of the error page
+	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
+	if (pathToErrorPage != nil)
+	{
+		NSString *errorMessage = [NSString stringWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"]];
+		[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame provisionalDataSource] request] URL]];
+		NSString *unreachableURL = [[[frame provisionalDataSource] unreachableURL] absoluteString];
+		if (unreachableURL != nil)
+			[addressField setStringValue: [[[frame provisionalDataSource] unreachableURL] absoluteString]];
+	}	
 }
 
 /* endFrameLoad
@@ -332,16 +348,6 @@
 	{
 		if (lastError == nil)
 			[[controller browserView] setTabItemViewTitle:self title:pageFilename];
-		else
-		{
-			// TODO: show an HTML error page in the webview instead or in addition to
-			// the Error title on the tab.
-			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
-			[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Error", nil)];
- 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
-			if (pathToErrorPage != nil)
-				[self loadURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] inBackground:NO];
-		}
 	}
 	
 	[self willChangeValueForKey:@"isLoading"];
