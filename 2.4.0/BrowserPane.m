@@ -191,8 +191,6 @@
 -(IBAction)handleAddress:(id)sender
 {
 	NSString * theURL = [addressField stringValue];
-	NSLog(@"handleAddress:");
-	NSLog(theURL);
 	// If no '.' appears in the string, wrap it with 'www' and 'com'
 	if (![theURL hasCharacter:'.']) 
 		theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
