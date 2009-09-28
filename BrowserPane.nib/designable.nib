@@ -11,7 +11,7 @@
 			<string key="com.apple.WebKitIBPlugin">732</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="17"/>
+			<integer value="5"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.WebKitIBPlugin</string>
@@ -44,6 +44,35 @@
 										<reference key="NSNextResponder" ref="1033915761"/>
 										<int key="NSvFlags">298</int>
 										<array class="NSMutableArray" key="NSSubviews">
+											<object class="NSImageView" id="39756797">
+												<reference key="NSNextResponder" ref="1014980497"/>
+												<int key="NSvFlags">-2147483383</int>
+												<set class="NSMutableSet" key="NSDragTypes">
+													<string>Apple PDF pasteboard type</string>
+													<string>Apple PICT pasteboard type</string>
+													<string>Apple PNG pasteboard type</string>
+													<string>NSFilenamesPboardType</string>
+													<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+													<string>NeXT TIFF v4.0 pasteboard type</string>
+												</set>
+												<string key="NSFrame">{{771, 7}, {16, 16}}</string>
+												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
+												<bool key="NSEnabled">YES</bool>
+												<object class="NSImageCell" key="NSCell" id="828647612">
+													<int key="NSCellFlags">130560</int>
+													<int key="NSCellFlags2">33554432</int>
+													<object class="NSCustomResource" key="NSContents">
+														<string key="NSClassName">NSImage</string>
+														<string key="NSResourceName">lockedPage</string>
+													</object>
+													<int key="NSAlign">0</int>
+													<int key="NSScale">0</int>
+													<int key="NSStyle">0</int>
+													<bool key="NSAnimates">NO</bool>
+												</object>
+												<bool key="NSEditable">YES</bool>
+											</object>
 											<object class="NSBox" id="1066500654">
 												<reference key="NSNextResponder" ref="1014980497"/>
 												<int key="NSvFlags">10</int>
@@ -191,39 +220,10 @@
 													<int key="NSPeriodicInterval">75</int>
 												</object>
 											</object>
-											<object class="NSImageView" id="39756797">
-												<reference key="NSNextResponder" ref="1014980497"/>
-												<int key="NSvFlags">-2147483383</int>
-												<set class="NSMutableSet" key="NSDragTypes">
-													<string>Apple PDF pasteboard type</string>
-													<string>Apple PICT pasteboard type</string>
-													<string>Apple PNG pasteboard type</string>
-													<string>NSFilenamesPboardType</string>
-													<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
-													<string>NeXT TIFF v4.0 pasteboard type</string>
-												</set>
-												<string key="NSFrame">{{771, 7}, {16, 16}}</string>
-												<reference key="NSSuperview" ref="1014980497"/>
-												<int key="NSViewLayerContentsRedrawPolicy">2</int>
-												<bool key="NSEnabled">YES</bool>
-												<object class="NSImageCell" key="NSCell" id="828647612">
-													<int key="NSCellFlags">130560</int>
-													<int key="NSCellFlags2">33554432</int>
-													<object class="NSCustomResource" key="NSContents">
-														<string key="NSClassName">NSImage</string>
-														<string key="NSResourceName">lockedPage</string>
-													</object>
-													<int key="NSAlign">0</int>
-													<int key="NSScale">0</int>
-													<int key="NSStyle">0</int>
-													<bool key="NSAnimates">NO</bool>
-												</object>
-												<bool key="NSEditable">YES</bool>
-											</object>
 											<object class="NSButton" id="811778539">
 												<reference key="NSNextResponder" ref="1014980497"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{106, 8}, {14, 14}}</string>
+												<string key="NSFrame">{{103, 8}, {14, 14}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
 												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
@@ -328,7 +328,6 @@
 						</array>
 						<string key="NSFrameSize">{833, 575}</string>
 						<reference key="NSSuperview" ref="622153549"/>
-						<bool key="NSViewIsLayerTreeHost">YES</bool>
 						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
@@ -355,7 +354,6 @@
 				</array>
 				<string key="NSFrameSize">{833, 575}</string>
 				<reference key="NSSuperview"/>
-				<bool key="NSViewIsLayerTreeHost">YES</bool>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSClassName">BrowserPane</string>
 				<string key="NSExtension">NSView</string>
@@ -713,7 +711,7 @@
 				<boolean value="YES" key="40.ImportedFromIB2"/>
 				<string key="48.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="48.ImportedFromIB2"/>
-				<string key="5.IBEditorWindowLastContentRect">{{57, 204}, {833, 575}}</string>
+				<string key="5.IBEditorWindowLastContentRect">{{79, 149}, {833, 575}}</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="5.ImportedFromIB2"/>
 				<string key="50.CustomClassName">BrowserPaneButton</string>
