@@ -11,7 +11,7 @@
 			<string key="com.apple.WebKitIBPlugin">732</string>
 		</dictionary>
 		<array class="NSMutableArray" key="IBDocument.EditedObjectIDs">
-			<integer value="48"/>
+			<integer value="17"/>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.WebKitIBPlugin</string>
@@ -84,8 +84,9 @@
 											<object class="NSButton" id="70573875">
 												<reference key="NSNextResponder" ref="1014980497"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{37, 5}, {24, 21}}</string>
+												<string key="NSFrame">{{37, 5}, {27, 21}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="599613156">
 													<int key="NSCellFlags">67239424</int>
@@ -114,8 +115,9 @@
 											<object class="NSButton" id="1049313761">
 												<reference key="NSNextResponder" ref="1014980497"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{61, 5}, {29, 21}}</string>
+												<string key="NSFrame">{{64, 5}, {29, 21}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="551593544">
 													<int key="NSCellFlags">67239424</int>
@@ -140,6 +142,7 @@
 												<int key="NSvFlags">268</int>
 												<string key="NSFrame">{{8, 5}, {29, 21}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="612444044">
 													<int key="NSCellFlags">67239424</int>
@@ -164,6 +167,7 @@
 												<int key="NSvFlags">265</int>
 												<string key="NSFrame">{{794, 5}, {31, 21}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="876620356">
 													<int key="NSCellFlags">67239424</int>
@@ -200,6 +204,7 @@
 												</set>
 												<string key="NSFrame">{{771, 7}, {16, 16}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSImageCell" key="NSCell" id="828647612">
 													<int key="NSCellFlags">130560</int>
@@ -218,8 +223,9 @@
 											<object class="NSButton" id="811778539">
 												<reference key="NSNextResponder" ref="1014980497"/>
 												<int key="NSvFlags">268</int>
-												<string key="NSFrame">{{103, 8}, {14, 14}}</string>
+												<string key="NSFrame">{{106, 8}, {14, 14}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSButtonCell" key="NSCell" id="927527124">
 													<int key="NSCellFlags">67239424</int>
@@ -242,8 +248,9 @@
 											<object class="NSTextField" id="615926767">
 												<reference key="NSNextResponder" ref="1014980497"/>
 												<int key="NSvFlags">266</int>
-												<string key="NSFrame">{{98, 6}, {690, 19}}</string>
+												<string key="NSFrame">{{99, 6}, {689, 19}}</string>
 												<reference key="NSSuperview" ref="1014980497"/>
+												<int key="NSViewLayerContentsRedrawPolicy">2</int>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="626428519">
 													<int key="NSCellFlags">-1804468671</int>
@@ -271,6 +278,8 @@
 										</array>
 										<string key="NSFrame">{{0, 542}, {833, 31}}</string>
 										<reference key="NSSuperview" ref="1033915761"/>
+										<bool key="NSViewIsLayerTreeHost">YES</bool>
+										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 										<string key="NSClassName">GradientView</string>
 										<string key="NSExtension">NSView</string>
 									</object>
@@ -297,6 +306,7 @@
 										<string key="NSFrameSize">{831, 542}</string>
 										<reference key="NSSuperview" ref="1033915761"/>
 										<reference key="NSNextKeyView"/>
+										<int key="NSViewLayerContentsRedrawPolicy">2</int>
 										<string key="FrameName"/>
 										<string key="GroupName"/>
 										<object class="WebPreferences" key="Preferences">
@@ -313,10 +323,13 @@
 								</array>
 								<string key="NSFrame">{{1, 1}, {831, 573}}</string>
 								<reference key="NSSuperview" ref="175206831"/>
+								<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							</object>
 						</array>
 						<string key="NSFrameSize">{833, 575}</string>
 						<reference key="NSSuperview" ref="622153549"/>
+						<bool key="NSViewIsLayerTreeHost">YES</bool>
+						<int key="NSViewLayerContentsRedrawPolicy">2</int>
 						<string key="NSOffsets">{0, 0}</string>
 						<object class="NSTextFieldCell" key="NSTitleCell">
 							<int key="NSCellFlags">67239424</int>
@@ -342,6 +355,8 @@
 				</array>
 				<string key="NSFrameSize">{833, 575}</string>
 				<reference key="NSSuperview"/>
+				<bool key="NSViewIsLayerTreeHost">YES</bool>
+				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 				<string key="NSClassName">BrowserPane</string>
 				<string key="NSExtension">NSView</string>
 			</object>
@@ -698,7 +713,7 @@
 				<boolean value="YES" key="40.ImportedFromIB2"/>
 				<string key="48.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="48.ImportedFromIB2"/>
-				<string key="5.IBEditorWindowLastContentRect">{{0, 243}, {833, 575}}</string>
+				<string key="5.IBEditorWindowLastContentRect">{{57, 204}, {833, 575}}</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="5.ImportedFromIB2"/>
 				<string key="50.CustomClassName">BrowserPaneButton</string>
