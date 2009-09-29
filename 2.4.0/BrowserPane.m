@@ -304,8 +304,11 @@
 			[addressField setBackgroundColor:[NSColor whiteColor]];
 			[lockIconImage setHidden:YES];
 		}
+		
 		if (![[frame dataSource] unreachableURL])
 			[addressField setStringValue:[theURL absoluteString]];
+		else 
+			[addressField setStringValue:[[[frame dataSource] unreachableURL] absoluteString]];
 	}
 }
 
