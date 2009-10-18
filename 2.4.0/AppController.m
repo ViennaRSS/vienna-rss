@@ -3888,7 +3888,7 @@ static CFStringRef percentEscape(NSString *string)
  * It also takes a parameter telling whether this toolbar item is going into an actual toolbar, or whether it's
  * going to be displayed in a customization palette.
  */
--(ToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
+-(NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)willBeInserted
 {
 	ToolbarItem *item = [[ToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 	if ([itemIdentifier isEqualToString:@"SearchItem"])
