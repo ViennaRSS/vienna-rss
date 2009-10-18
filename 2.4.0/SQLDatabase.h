@@ -60,9 +60,6 @@
 
 -(int)columnCount;
 
--(NSString*)nameOfColumnAtIndex:(int)inIndex;
--(NSString*)nameOfColumnAtIndexNoCopy:(int)inIndex;
-
 -(NSString*)stringForColumn:(NSString*)inColumnName;
 -(NSString*)stringForColumnAtIndex:(int)inIndex;
 
