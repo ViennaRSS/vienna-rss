@@ -128,7 +128,8 @@
 					++tagEndPtr;
 				while (isalpha(*tagEndPtr))
 					++tagEndPtr;
-				[tag setName:[[NSString stringWithCString:tagStartPtr length:(tagEndPtr - tagStartPtr)] lowercaseString]];
+				NSString * tagName = [[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] autorelease];
+				[tag setName:[tagName lowercaseString]];
 				
 				while (isspace(*tagEndPtr))
 					++tagEndPtr;
@@ -147,7 +148,7 @@
 					tagStartPtr = tagEndPtr;
 					while (isalpha(*tagEndPtr))
 						++tagEndPtr;
-					NSString * attrName = [[NSString stringWithCString:tagStartPtr length:(tagEndPtr - tagStartPtr)] lowercaseString];
+					NSString * attrName = [[[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] autorelease] lowercaseString];
 
 					// Skip the '=' and any whitespaces between the name and the value
 					while (isspace(*tagEndPtr))
@@ -169,9 +170,12 @@
 							inQuote = !inQuote;
 						++tagEndPtr;
 					}
-					NSString * attrValue = [NSString stringWithCString:tagStartPtr length:(tagEndPtr - tagStartPtr)];
+					NSString * attrValue = [[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] autorelease];
 					attrValue = [attrValue stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]];
-					[tagDict setValue:attrValue forKey:attrName];
+					if (attrValue != nil && attrName != nil )
+					{
+						[tagDict setValue:attrValue forKey:attrName];
+					}
 
 					while (isspace(*tagEndPtr))
 						++tagEndPtr;
