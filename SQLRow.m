@@ -49,24 +49,6 @@
 
 #pragma mark -
 
--(NSString*)nameOfColumnAtIndex:(int)inIndex
-{
-	if( inIndex >= mColumnCount || ![self valid])
-		return nil;
-	
-	return [NSString stringWithCString:mColumns[ inIndex ]];
-}
-
--(NSString*)nameOfColumnAtIndexNoCopy:(int)inIndex
-{
-	if( inIndex >= mColumnCount || ![self valid])
-		return nil;
-	
-	return [[[NSString alloc] initWithCStringNoCopy:mColumns[ inIndex ] length:strlen( mColumns[ inIndex ]) freeWhenDone:NO] autorelease];
-}
-
-#pragma mark -
-
 -(NSString*)stringForColumn:(NSString*)inColumnName
 {
 	int index;
