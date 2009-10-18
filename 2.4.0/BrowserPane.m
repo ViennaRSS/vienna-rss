@@ -332,8 +332,11 @@
 	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
 	if (pathToErrorPage != nil)
 	{
-		NSString *errorMessage = [NSString stringWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"]];
-		[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame provisionalDataSource] request] URL]];
+		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
+		if (errorMessage != nil)
+		{
+			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame provisionalDataSource] request] URL]];
+		}
 		NSString *unreachableURL = [[[frame provisionalDataSource] unreachableURL] absoluteString];
 		if (unreachableURL != nil)
 			[addressField setStringValue: [[[frame provisionalDataSource] unreachableURL] absoluteString]];
