@@ -871,7 +871,7 @@ typedef enum {
 								++urlEnd;
 							if (urlEnd == scanPtrEnd)
 								return nil;
-							return [NSString stringWithCString:urlStart length:(urlEnd - urlStart)];
+							return [[[NSString alloc] initWithBytes:urlStart length:(urlEnd - urlStart) encoding:NSASCIIStringEncoding] autorelease];
 						}
 						++scanPtr;
 					}
