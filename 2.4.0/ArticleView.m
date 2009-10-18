@@ -114,36 +114,30 @@ static NSMutableDictionary * stylePathMappings = nil;
 	if (path != nil)
 	{
 		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
-		NSFileHandle * handle = [NSFileHandle fileHandleForReadingAtPath:filePath];
-		if (handle != nil)
+		NSString * templateString = [NSString stringWithContentsOfFile:filePath usedEncoding:NULL error:NULL];
+		// Sanity check the file. Obviously anything bigger than 0 bytes but smaller than a valid template
+		// format is a problem but we'll worry about that later. There's only so much rope we can give.
+		if (templateString != nil && [templateString length] > 0u)
 		{
-			// Sanity check the file. Obviously anything bigger than 0 bytes but smaller than a valid template
-			// format is a problem but we'll worry about that later. There's only so much rope we can give.
-			NSData * fileData = [handle readDataToEndOfFile];
-			if ([fileData length] > 0)
+			[htmlTemplate release];
+			[cssStylesheet release];
+			[jsScript release];
+			
+			htmlTemplate = [templateString retain];
+			cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
+			NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
+			if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
+				jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] retain];
+			else
+				jsScript = nil;
+			
+			// Make sure the template is valid
+			NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
+			if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
 			{
-				[htmlTemplate release];
-				[cssStylesheet release];
-				[jsScript release];
-				
-				htmlTemplate = [[NSString stringWithCString:[fileData bytes] length:[fileData length]] retain];
-				cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
-				NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
-				if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
-					jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] retain];
-				else
-					jsScript = nil;
-				
-				// Make sure the template is valid
-				NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
-				if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
-				{
-					[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
-					[handle closeFile];
-					return YES;
-				}
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+				return YES;
 			}
-			[handle closeFile];
 		}
 	}
 	
