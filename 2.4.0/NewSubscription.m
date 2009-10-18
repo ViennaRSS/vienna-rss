@@ -95,7 +95,7 @@
 		[feedURL setStringValue:@""];
 		if (pboardData != nil)
 		{
-			NSString * pasteString = [NSString stringWithCString:[pboardData bytes] length:[pboardData length]];
+			NSString * pasteString = [[[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding] autorelease];
 			if (pasteString != nil && ([[pasteString lowercaseString] hasPrefix:@"http://"] || [[pasteString lowercaseString] hasPrefix:@"feed://"]))
 			{
 				[feedURL setStringValue:pasteString];
