@@ -96,7 +96,8 @@
 		if (pboardData != nil)
 		{
 			NSString * pasteString = [[[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding] autorelease];
-			if (pasteString != nil && ([[pasteString lowercaseString] hasPrefix:@"http://"] || [[pasteString lowercaseString] hasPrefix:@"feed://"]))
+			NSString * lowerCasePasteString = [pasteString lowercaseString];
+			if (lowerCasePasteString != nil && ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] || [lowerCasePasteString hasPrefix:@"feed://"]))
 			{
 				[feedURL setStringValue:pasteString];
 				[feedURL selectText:self];
