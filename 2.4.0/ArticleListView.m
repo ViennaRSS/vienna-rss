@@ -130,7 +130,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	topLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
 	unreadTopLineSelectionDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
 	middleLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blueColor], NSForegroundColorAttributeName, nil];
-	linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blueColor], NSForegroundColorAttributeName, self, NSLinkAttributeName, nil];
+	linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blueColor], NSForegroundColorAttributeName, nil];
 	bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor grayColor], NSForegroundColorAttributeName, nil];
 	
 	[style release];
@@ -1382,12 +1382,21 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		// Add the link line that appears below the summary and title.
 		if ([[db fieldByName:MA_Field_Link] visible])
 		{
-			NSString * linkString = [NSString stringWithFormat:@"%@\n", [theArticle link]];
-			NSDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
-			[linkLineDict setObject:[NSURL URLWithString:[theArticle link]] forKey:NSLinkAttributeName];
-			NSMutableAttributedString * linkAttributedString = [[NSMutableAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr];
-			[linkAttributedString fixFontAttributeInRange:NSMakeRange(0u, [linkAttributedString length])];
-			[theAttributedString appendAttributedString:[linkAttributedString autorelease]];
+			NSString * articleLink = [theArticle link];
+			if (articleLink != nil)
+			{
+				NSString * linkString = [NSString stringWithFormat:@"%@\n", articleLink];
+				NSMutableDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
+				NSURL * articleURL = [NSURL URLWithString:articleLink];
+				if (articleURL != nil)
+				{
+					linkLineDictPtr = [[linkLineDictPtr mutableCopy] autorelease];
+					[linkLineDictPtr setObject:articleURL forKey:NSLinkAttributeName];
+				}
+				NSMutableAttributedString * linkAttributedString = [[NSMutableAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr];
+				[linkAttributedString fixFontAttributeInRange:NSMakeRange(0u, [linkAttributedString length])];
+				[theAttributedString appendAttributedString:[linkAttributedString autorelease]];
+			}
 		}
 		
 		// Create the detail line that appears at the bottom.
