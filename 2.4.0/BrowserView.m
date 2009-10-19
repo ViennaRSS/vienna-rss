@@ -78,17 +78,14 @@
  */
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView
 {
-	[newPrimaryTabItemView retain];
-	
 	//Remove the old one if there is one
 	if ([tabView tabViewItemWithIdentifier:primaryTabItemView]) {
 		[tabView removeTabViewItem:[tabView tabViewItemWithIdentifier:primaryTabItemView]];
 	}
-	
 	[primaryTabItemView release];
-	primaryTabItemView = newPrimaryTabItemView;
 
 	[self createNewTabWithView:newPrimaryTabItemView makeKey:YES];
+	primaryTabItemView = [newPrimaryTabItemView retain];
 }
 
 /* activeTabItemView
@@ -123,14 +120,7 @@
 {
 	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
 	[tabViewItem setView:newTabView];
-	if (newTabView == primaryTabItemView)
-	{
-		[tabView insertTabViewItem:tabViewItem atIndex:0u];
-	}
-	else
-	{
-		[tabView addTabViewItem:tabViewItem];
-	}
+	[tabView addTabViewItem:tabViewItem];
 	[tabViewItem release];
 
 	if (keyIt) [self showTabItemView:newTabView];
