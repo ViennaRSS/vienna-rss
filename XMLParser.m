@@ -236,11 +236,9 @@
 -(XMLParser *)treeByPath:(NSString *)path
 {
 	NSArray * pathElements = [path componentsSeparatedByString:@"/"];
-	NSEnumerator * enumerator = [pathElements objectEnumerator];
 	XMLParser * treeFound = self;
-	NSString * treeName;
 	
-	while ((treeName = [enumerator nextObject]) != nil)
+	for (NSString * treeName in [pathElements objectEnumerator])
 	{
 		treeFound = [treeFound treeByName:treeName];
 		if (treeFound == nil)
@@ -305,13 +303,15 @@
 		CFXMLElementInfo eInfo = *(CFXMLElementInfo *)CFXMLNodeGetInfoPtr(node);
 		NSDictionary * dict = (NSDictionary *)eInfo.attributes;
 		NSMutableDictionary * newDict = [NSMutableDictionary dictionary];
-		NSEnumerator *enumerator = [dict keyEnumerator];
-		NSString * keyName;
 
 		// Make a copy of the attributes dictionary but force the keys to
 		// lowercase.
-		while ((keyName = [enumerator nextObject]) != nil)
+		for (NSString * keyName in [dict keyEnumerator])
+		{
+			if (keyName == nil)
+				break;
 			[newDict setObject:[dict objectForKey:keyName] forKey:[keyName lowercaseString]];
+		}
 		return newDict;
 	}
 	return nil;
