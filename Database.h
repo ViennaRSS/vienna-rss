@@ -26,8 +26,8 @@
 
 @interface Database : NSObject {
 	SQLDatabase * sqlDatabase;
-	BOOL initializedFoldersArray;
-	BOOL initializedSmartFoldersArray;
+	BOOL initializedfoldersDict;
+	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
 	int databaseVersion;
 	int countOfUnread;
@@ -39,8 +39,8 @@
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
 	NSMutableDictionary * fieldsByTitle;
-	NSMutableDictionary * foldersArray;
-	NSMutableDictionary * smartFoldersArray;
+	NSMutableDictionary * foldersDict;
+	NSMutableDictionary * smartfoldersDict;
 }
 
 // General database functions
@@ -99,7 +99,7 @@
 -(void)setSearchString:(NSString *)newSearchString;
 
 // Smart folder functions
--(void)initSmartFoldersArray;
+-(void)initSmartfoldersDict;
 -(int)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(BOOL)updateSearchFolder:(int)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(int)folderId;
