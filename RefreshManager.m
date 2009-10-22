@@ -278,10 +278,7 @@ typedef enum {
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
 {
-	NSEnumerator * enumerator = [refreshArray objectEnumerator];
-	RefreshItem * item;
-	
-	while ((item = [enumerator nextObject]) != nil)
+	for (RefreshItem * item in refreshArray)
 	{
 		if ([item folder] == folder && [item type] == type)
 			return YES;
@@ -308,9 +305,7 @@ typedef enum {
 	// Let the cancel method take care of that.
 	// Don't cancel until we've enumerated the whole array, however,
 	// because it can have the side effect of changing the array.
-	NSEnumerator * enumerator = [connectionsArray objectEnumerator];
-	AsyncConnection * connection;
-	while ((connection = [enumerator nextObject]))
+	for (AsyncConnection * connection in connectionsArray)
 	{
 		[connection performSelector:@selector(cancel) withObject:nil afterDelay:0.0];
 	}
@@ -687,10 +682,8 @@ typedef enum {
 			NSMutableArray * articleArray = [NSMutableArray array];
 			
 			// Parse off items.
-			NSEnumerator * itemEnumerator = [[newFeed items] objectEnumerator];
-			FeedItem * newsItem;
 			
-			while ((newsItem = [itemEnumerator nextObject]) != nil)
+			for (FeedItem * newsItem in [newFeed items])
 			{
 				NSDate * articleDate = [newsItem date];
 				if (articleDate == nil)
@@ -731,17 +724,14 @@ typedef enum {
 			if ([articleArray count] > 0u)
 			{
 				[folder clearCache];
-				
-				NSEnumerator * articleEnumerator = [articleArray objectEnumerator];
-				Article * article;
-				
-				[db beginTransaction]; // Should we wrap the entire loop or just individual article updates?
-				while ((article = [articleEnumerator nextObject]) != nil)
+				 // Should we wrap the entire loop or just individual article updates?
+				[db beginTransaction];
+				for (Article * article in articleArray)
 				{
 					if ([db createArticle:folderId article:article] && ([article status] == MA_MsgStatus_New))
 						++newArticlesFromFeed;
 				}
-				[db commitTransaction];
+				[db commitTransaction];				
 			}
 			
 			[db beginTransaction];
