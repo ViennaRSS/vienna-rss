@@ -3612,7 +3612,7 @@ static CFStringRef percentEscape(NSString *string)
 {
 	BOOL flag;
 	[self validateCommonToolbarAndMenuItems:[toolbarItem action] validateFlag:&flag];
-	return flag;
+	return (flag && ([NSApp isActive]));
 }
 
 /* validateMenuItem

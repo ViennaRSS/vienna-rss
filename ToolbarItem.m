@@ -30,6 +30,10 @@
  */
 -(void)validate
 {
+	if (![NSApp isActive])
+		[self setEnabled:NO];
+	else 
+		[self setEnabled:YES];
 	id target = [self target];
 	if ([target respondsToSelector:@selector(validateToolbarItem:)])
 		[self setEnabled:[target validateToolbarItem:self]];
