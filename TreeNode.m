@@ -149,14 +149,13 @@
  */
 -(TreeNode *)nodeFromID:(int)n
 {
-	NSEnumerator * enumerator = [children objectEnumerator];
-	TreeNode * node;
-
 	if ([self nodeId] == n)
 		return self;
-	while ((node = [enumerator nextObject]))
+	
+	TreeNode * theNode;
+	
+	for (TreeNode * node in children)
 	{
-		TreeNode * theNode;
 		if ((theNode = [node nodeFromID:n]) != nil)
 			return theNode;
 	}
@@ -168,10 +167,7 @@
  */
 -(TreeNode *)childByName:(NSString *)childName
 {
-	NSEnumerator * enumerator = [children objectEnumerator];
-	TreeNode * node;
-	
-	while ((node = [enumerator nextObject]))
+	for (TreeNode * node in children)
 	{
 		if ([childName isEqual:[node nodeName]])
 			return node;
