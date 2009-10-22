@@ -376,6 +376,20 @@
 			[self setError:error];
 		[self endFrameLoad];
 	}
+	
+	// Use a warning sign as favicon
+	[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
+	
+	// Load the localized verion of the error page
+	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
+	if (pathToErrorPage != nil)
+	{
+		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
+		if (errorMessage != nil)
+		{
+			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame dataSource] request] URL]];
+		}
+	}		
 }
 
 /* didFinishLoadForFrame
