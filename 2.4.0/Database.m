@@ -244,11 +244,10 @@ static Database * _sharedDatabase = nil;
 			NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
 			if (demoFeedsDict)
 			{
-				NSEnumerator *enumerator = [demoFeedsDict keyEnumerator];
-				NSString * feedName;
-				
-				while ((feedName = [enumerator nextObject]) != nil)
+				for (NSString * feedName in [demoFeedsDict keyEnumerator])
 				{
+					if (feedName == nil)
+						break;
 					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
 					NSString * feedURL = [itemDict valueForKey:@"URL"];
 					if (feedURL != nil && feedName != nil)
@@ -298,10 +297,7 @@ static Database * _sharedDatabase = nil;
 		SQLResult * results = [sqlDatabase performQuery:@"select folder_id, parent_id from folders"];
 		if (results && [results rowCount])
 		{
-			NSEnumerator * enumerator = [results rowEnumerator];
-			SQLRow * row;
-			
-			while ((row = [enumerator nextObject]))
+			for (SQLRow * row in [results rowEnumerator])
 			{
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
 				int parentId = [[row stringForColumn:@"parent_id"] intValue];
@@ -905,14 +901,13 @@ static Database * _sharedDatabase = nil;
 -(BOOL)wrappedDeleteFolder:(int)folderId
 {
 	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
-	NSEnumerator * enumerator = [arrayOfChildFolders objectEnumerator];
 	Folder * folder;
 
 	// Send a notification before the folder is deleted
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_WillDeleteFolder" object:[NSNumber numberWithInt:folderId]];
 	
 	// Recurse and delete child folders
-	while ((folder = [enumerator nextObject]) != nil)
+	for (folder in arrayOfChildFolders)
 		[self wrappedDeleteFolder:[folder itemId]];
 
 	// Adjust unread counts on parents
@@ -1289,16 +1284,16 @@ static Database * _sharedDatabase = nil;
  * Retrieve a Folder given it's name.
  */
 -(Folder *)folderFromName:(NSString *)wantedName
-{
-	NSEnumerator * enumerator = [foldersDict objectEnumerator];
-	Folder * item;
-	
-	while ((item = [enumerator nextObject]) != nil)
+{	
+	Folder * folder;
+	for (folder in [foldersDict objectEnumerator])
 	{
-		if ([[item name] isEqualToString:wantedName])
+		if (folder == nil)
+			continue;
+		if ([[folder name] isEqualToString:wantedName])
 			break;
 	}
-	return item;
+	return folder;
 }
 
 /* folderFromFeedURL
@@ -1306,15 +1301,16 @@ static Database * _sharedDatabase = nil;
  */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 {
-	NSEnumerator * enumerator = [foldersDict objectEnumerator];
-	Folder * item;
+	Folder * folder;
 	
-	while ((item = [enumerator nextObject]) != nil)
+	for (folder in [foldersDict objectEnumerator])
 	{
-		if ([[item feedURL] isEqualToString:wantedFeedURL])
+		if (folder == nil)
+			break;
+		if ([[folder feedURL] isEqualToString:wantedFeedURL])
 			break;
 	}
-	return item;
+	return folder;
 }
 
 /* handleAutoSortFoldersTreeChange
@@ -1626,10 +1622,7 @@ static Database * _sharedDatabase = nil;
 		results = [sqlDatabase performQuery:@"select * from smart_folders"];
 		if (results && [results rowCount])
 		{
-			NSEnumerator * enumerator = [results rowEnumerator];
-			SQLRow * row;
-
-			while ((row = [enumerator nextObject]))
+			for (SQLRow * row in [results rowEnumerator])
 			{
 				NSString * search_string = [row stringForColumn:@"search_string"];
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
@@ -1717,11 +1710,8 @@ static Database * _sharedDatabase = nil;
 		
 		results = [sqlDatabase performQuery:@"select * from folders order by folder_id"];
 		if (results && [results rowCount])
-		{
-			NSEnumerator * enumerator = [results rowEnumerator];
-			SQLRow * row;
-			
-			while ((row = [enumerator nextObject]))
+		{			
+			for (SQLRow * row in [results rowEnumerator])
 			{
 				NSString * name = [row stringForColumn:@"foldername"];
 				NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"last_update"] doubleValue]];
@@ -1760,10 +1750,7 @@ static Database * _sharedDatabase = nil;
 		results = [sqlDatabase performQuery:@"select * from rss_folders"];
 		if (results && [results rowCount])
 		{
-			NSEnumerator * enumerator = [results rowEnumerator];
-			SQLRow * row;
-			
-			while ((row = [enumerator nextObject]))
+			for (SQLRow * row in[results rowEnumerator])
 			{
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
 				long bloglinesId = [[row stringForColumn:@"bloglines_id"] intValue];
@@ -1784,11 +1771,11 @@ static Database * _sharedDatabase = nil;
 		}
 		[results release];
 
-		// Fix the childUnreadCount for every parent
-		NSEnumerator * folderEnumerator = [foldersDict objectEnumerator];
-		Folder * folder;
-		
-		while ((folder = [folderEnumerator nextObject]) != nil)
+		// Fix the childUnreadCount for every parent		
+		for (Folder * folder in [foldersDict objectEnumerator])
+		{
+			if (folder == nil)
+				break;
 			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
 			{
 				Folder * parentFolder = [self folderFromID:[folder parentId]];
@@ -1798,7 +1785,7 @@ static Database * _sharedDatabase = nil;
 					parentFolder = [self folderFromID:[parentFolder parentId]];
 				}
 			}
-
+		}
 		// Done
 		initializedfoldersDict = YES;
 	}
@@ -1818,14 +1805,13 @@ static Database * _sharedDatabase = nil;
 
 	NSMutableArray * newArray = [NSMutableArray array];
 	if (newArray != nil)
-	{
-		NSEnumerator * enumerator = [foldersDict objectEnumerator];
-		Folder * item;
-		
-		while ((item = [enumerator nextObject]) != nil)
+	{		
+		for (Folder * folder in [foldersDict objectEnumerator])
 		{
-			if ([item parentId] == parentId)
-				[newArray addObject:item];
+			if (folder == nil)
+				break;
+			if ([folder parentId] == parentId)
+				[newArray addObject:folder];
 		}
 	}
 	return [newArray sortedArrayUsingSelector:@selector(folderNameCompare:)];
@@ -1839,12 +1825,12 @@ static Database * _sharedDatabase = nil;
 	NSMutableArray * newArray = [NSMutableArray arrayWithObject:folder];
 	if (newArray != nil)
 	{
-		NSEnumerator * enumerator = [foldersDict objectEnumerator];
 		int parentId = [folder itemId];
-		Folder * item;
 		
-		while ((item = [enumerator nextObject]) != nil)
+		for (Folder * item in [foldersDict objectEnumerator])
 		{
+			if (item == nil)
+				break;
 			if ([item parentId] == parentId)
 			{
 				if (IsGroupFolder(item))
@@ -1892,12 +1878,13 @@ static Database * _sharedDatabase = nil;
 		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, hasenclosure_flag, enclosure from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
 		{
-			NSEnumerator * enumerator = [results rowEnumerator];
 			int unread_count = 0;
 			SQLRow * row;
 
-			while ((row = [enumerator nextObject]) != nil)
+			for (row in [results rowEnumerator])
 			{
+				if (row == nil)
+					break;
 				NSString * guid = [row stringForColumn:@"message_id"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
@@ -2007,12 +1994,12 @@ static Database * _sharedDatabase = nil;
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree
 {
 	NSMutableString * sqlString = [[NSMutableString alloc] init];
-	NSEnumerator * enumerator = [criteriaTree criteriaEnumerator];
-	Criteria * criteria;
 	int count = 0;
 
-	while ((criteria = [enumerator nextObject]) != nil)
+	for (Criteria * criteria in [criteriaTree criteriaEnumerator])
 	{
+		if (criteria == nil)
+			break;
 		Field * field = [self fieldByName:[criteria field]];
 		NSAssert1(field != nil, @"Criteria field %@ does not have an associated database field", [criteria field]);
 
@@ -2206,12 +2193,11 @@ static Database * _sharedDatabase = nil;
 			[self verifyThreadSafety];
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from messages where folder_id=%d and read_flag=0", folderId];
 			if (results && [results rowCount])
-			{
-				NSEnumerator * enumerator = [results rowEnumerator];
-				SQLRow * row;
-				
-				while ((row = [enumerator nextObject]) != nil)
+			{				
+				for (SQLRow * row in [results rowEnumerator])
 				{
+					if (row == nil)
+						break;
 					NSString * guid = [row stringForColumn:@"message_id"];
 					[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 				}
@@ -2266,14 +2252,14 @@ static Database * _sharedDatabase = nil;
 	SQLResult * results = [sqlDatabase performQuery:queryString];
 	if (results && [results rowCount])
 	{
-		NSEnumerator * enumerator = [results rowEnumerator];
-		SQLRow * row;
         Article * article;
         NSString * text;
         BOOL needSummary = [[self fieldByName:MA_Field_Summary] visible];
 
-		while ((row = [enumerator nextObject]) != nil)
+		for (SQLRow * row in [results rowEnumerator])
 		{
+			if (row == nil)
+				break;
 			article = [[Article alloc] initWithGuid:[row stringForColumn:@"message_id"]];
 			[article setTitle:[row stringForColumn:@"title"]];
 			[article setAuthor:[row stringForColumn:@"sender"]];
@@ -2328,14 +2314,14 @@ static Database * _sharedDatabase = nil;
  */
 -(BOOL)markFolderRead:(int)folderId
 {
-	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
-	NSEnumerator * enumerator = [arrayOfChildFolders objectEnumerator];
-	BOOL result = NO;
 	Folder * folder;
+	BOOL result = NO;
 
 	// Recurse and mark child folders read too
-	while ((folder = [enumerator nextObject]) != nil)
+	for (folder in [self arrayOfFolders:folderId])
 	{
+		if (folder == nil)
+			break;
 		if ([self markFolderRead:[folder itemId]])
 			result = YES;
 	}
