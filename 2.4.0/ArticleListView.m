@@ -80,7 +80,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
 		markReadTimer = nil;
-		selectionTimer = nil;
     }
     return self;
 }
@@ -1223,19 +1222,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		NSArray * allArticles = [articleController allArticles];
 		NSAssert(currentSelectedRow < (int)[allArticles count], @"Out of range row index received");
-		[selectionTimer invalidate];
-		[selectionTimer release];
-		selectionTimer = nil;
 
-		float interval = [[Preferences standardPreferences] selectionChangeInterval];
-		if (!testForKey(kShift) || !delayFlag )
-			[self refreshImmediatelyArticleAtCurrentRow];
-		else
-			selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:interval
-															   target:self
-															 selector:@selector(startSelectionChange:) 
-															 userInfo:nil 
-															  repeats:NO] retain];
+		[self refreshImmediatelyArticleAtCurrentRow];
 
 		// Add this to the backtrack list
 		NSString * guid = [[allArticles objectAtIndex:currentSelectedRow] guid];
@@ -1627,7 +1615,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[selectionTimer release];
 	[markReadTimer release];
 	[articleListFont release];
 	[articleListUnreadFont release];
