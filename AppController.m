@@ -1759,9 +1759,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		return;	
 	}	
 
-	[mainWindow setTitle:[[NSString stringWithFormat:@"%@", [self appName]]
-		stringByAppendingString:[NSString stringWithFormat:
-			NSLocalizedString(@" (%d unread)", nil), currentCountOfUnread]]];
+	[mainWindow setTitle:[NSString stringWithFormat:@"%@ (%i %@)", [self appName], currentCountOfUnread, NSLocalizedString(@"Unread", nil)]];
 
 	// Exit now if we're not showing the unread count on the application icon
 	if ([[Preferences standardPreferences] newArticlesNotification] != MA_NewArticlesNotification_Badge)
