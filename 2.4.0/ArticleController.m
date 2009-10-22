@@ -371,10 +371,7 @@
  * the articles.
  */
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag
-{
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
-	Article * theArticle;
-	
+{	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
@@ -391,7 +388,7 @@
 	// flag on the article while simultaneously removing it from our copies
 	Database * db = [Database sharedDatabase];
 	[db beginTransaction];
-	while ((theArticle = [enumerator nextObject]) != nil)
+	for (Article * theArticle in articleArray)
 	{
 		if (![theArticle isRead])
 			needFolderRedraw = YES;
@@ -449,11 +446,9 @@
 	// Iterate over every selected article in the table and remove it from
 	// the database.
 	Database * db = [Database sharedDatabase];
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
-	Article * theArticle;
 
 	[db beginTransaction];
-	while ((theArticle = [enumerator nextObject]) != nil)
+	for (Article * theArticle in articleArray)	
 	{
 		if (![theArticle isRead])
 			needFolderRedraw = YES;
@@ -507,9 +502,7 @@
  */
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
 	Database * db = [Database sharedDatabase];
-	Article * theArticle;
 	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -518,7 +511,7 @@
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 	
 	[db beginTransaction];
-	while ((theArticle = [enumerator nextObject]) != nil)
+	for (Article * theArticle in articleArray)
 	{
 		[theArticle markFlagged:flagged];
 		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
@@ -574,12 +567,10 @@
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSEnumerator * enumerator = [articleArray objectEnumerator];
 	Database * db = [Database sharedDatabase];
 	int lastFolderId = -1;
-	Article * theArticle;
 	
-	while ((theArticle = [enumerator nextObject]) != nil)
+	for (Article * theArticle in articleArray)
 	{
 		int folderId = [theArticle folderId];
 		[db markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
@@ -626,11 +617,10 @@
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
-	NSEnumerator * articleEnumerator = [folderArrayOfArticles objectEnumerator];
-	Article * article;
-	while ((article = [articleEnumerator nextObject]) != nil)
+
+	for (Article * theArticle in folderArrayOfArticles)
 	{
-		[article markRead:YES];
+		[theArticle markRead:YES];
 	}
 	if (refreshFlag)
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
@@ -644,11 +634,9 @@
 -(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
 	NSMutableArray * refArray = [NSMutableArray array];
-	NSEnumerator * enumerator = [folderArray objectEnumerator];
 	Database * db = [Database sharedDatabase];
-	Folder * folder;
 	
-	while ((folder = [enumerator nextObject]) != nil)
+	for (Folder * folder in folderArray)
 	{
 		int folderId = [folder itemId];
 		if (IsGroupFolder(folder) && undoFlag)
@@ -702,9 +690,7 @@
  */
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
-	NSEnumerator * enumerator = [refArray objectEnumerator];
 	Database * db = [Database sharedDatabase];
-	ArticleReference * ref;
 	int lastFolderId = -1;
 	BOOL needRefilter = NO;
 	
@@ -715,7 +701,7 @@
 	[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	
 	[db beginTransaction];
-	while ((ref = [enumerator nextObject]) != nil)
+	for (ArticleReference *ref in refArray)
 	{
 		int folderId = [ref folderId];
 		[db markArticleRead:folderId guid:[ref guid] isRead:readFlag];
@@ -862,9 +848,7 @@
  */
 -(void)createArticleSummaries
 {
-    NSEnumerator * enumerator = [folderArrayOfArticles objectEnumerator];
-    Article * theArticle;
-    while ((theArticle = [enumerator nextObject]) != nil)
+	for (Article * theArticle in folderArrayOfArticles)
     {
         [theArticle setSummary:[[theArticle body] summaryTextFromHTML]];
     }
