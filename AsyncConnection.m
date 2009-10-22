@@ -156,10 +156,7 @@
 
 	if (httpHeaders != nil)
 	{
-		NSEnumerator * enumerator = [[httpHeaders allKeys] objectEnumerator];
-		NSString * httpFieldName;
-		
-		while ((httpFieldName = [enumerator nextObject]) != nil)
+		for (NSString * httpFieldName in [httpHeaders allKeys])
 		{
 			NSString * fieldValue = [httpHeaders valueForKey:httpFieldName];
 			if (fieldValue != nil && ![fieldValue isBlank])
@@ -237,9 +234,7 @@
 		// Report HTTP code to the log
 		if (aItem != nil)
 		{
-			NSEnumerator * enumerator = [responseHeaders keyEnumerator];
 			NSMutableString * headerDetail = [[NSMutableString alloc] init];
-			NSString * headerField;
 
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [httpResponse statusCode]];
 			[aItem appendDetail:logText];
@@ -247,8 +242,12 @@
 			// Add the HTTP headers details to the log for this connection for
 			// debugging purposes.
 			[headerDetail setString:NSLocalizedString(@"Headers:\n", nil)];
-			while ((headerField = [enumerator nextObject]) != nil)
+			for (NSString * headerField in [responseHeaders keyEnumerator])
+			{
+				if (headerField == nil)
+					break;
 				[headerDetail appendFormat:@"\t%@: %@\n", headerField, [[httpResponse allHeaderFields] valueForKey:headerField]];
+			}
 			
 			[aItem appendDetail:headerDetail];
 			[headerDetail release];
