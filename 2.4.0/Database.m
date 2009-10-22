@@ -64,14 +64,14 @@ static Database * _sharedDatabase = nil;
 	{
 		inTransaction = NO;
 		sqlDatabase = NULL;
-		initializedFoldersArray = NO;
-		initializedSmartFoldersArray = NO;
+		initializedfoldersDict = NO;
+		initializedSmartfoldersDict = NO;
 		countOfUnread = 0;
 		trashFolder = nil;
 		searchFolder = nil;
 		searchString = @"";
-		smartFoldersArray = [[NSMutableDictionary dictionary] retain];
-		foldersArray = [[NSMutableDictionary dictionary] retain];
+		smartfoldersDict = [[NSMutableDictionary dictionary] retain];
+		foldersDict = [[NSMutableDictionary dictionary] retain];
 	}
 	return self;
 }
@@ -222,7 +222,7 @@ static Database * _sharedDatabase = nil;
 		[self initFolderArray];
 		int folderId = 0;
 		int previousSibling = 0;
-		NSArray * allFolders = [foldersArray allKeys];
+		NSArray * allFolders = [foldersDict allKeys];
 		unsigned int count = [allFolders count];
 		unsigned int index;
 		for (index = 0u; index < count; ++index)
@@ -827,7 +827,7 @@ static Database * _sharedDatabase = nil;
 		folder = [[[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type] autorelease];
 		if (type == MA_RSS_Folder)
 			[folder setFlag:MA_FFlag_CheckForImage];
-		[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
+		[foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
 		
 		if (manualSort)
 		{
@@ -967,7 +967,7 @@ static Database * _sharedDatabase = nil;
 	// Remove from the folders array. Do this after we send the notification
 	// so that the notification handlers don't fail if they try to dereference the
 	// folder.
-	[foldersArray removeObjectForKey:[NSNumber numberWithInt:folderId]];
+	[foldersDict removeObjectForKey:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -1282,7 +1282,7 @@ static Database * _sharedDatabase = nil;
  */
 -(Folder *)folderFromID:(int)wantedId
 {
-	return [foldersArray objectForKey:[NSNumber numberWithInt:wantedId]];
+	return [foldersDict objectForKey:[NSNumber numberWithInt:wantedId]];
 }
 
 /* folderFromName
@@ -1290,7 +1290,7 @@ static Database * _sharedDatabase = nil;
  */
 -(Folder *)folderFromName:(NSString *)wantedName
 {
-	NSEnumerator * enumerator = [foldersArray objectEnumerator];
+	NSEnumerator * enumerator = [foldersDict objectEnumerator];
 	Folder * item;
 	
 	while ((item = [enumerator nextObject]) != nil)
@@ -1306,7 +1306,7 @@ static Database * _sharedDatabase = nil;
  */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 {
-	NSEnumerator * enumerator = [foldersArray objectEnumerator];
+	NSEnumerator * enumerator = [foldersDict objectEnumerator];
 	Folder * item;
 	
 	while ((item = [enumerator nextObject]) != nil)
@@ -1608,12 +1608,12 @@ static Database * _sharedDatabase = nil;
 	return NO;
 }
 
-/* initSmartFoldersArray
- * Preloads all the smart folders into the smartFoldersArray dictionary.
+/* initSmartfoldersDict
+ * Preloads all the smart folders into the smartfoldersDict dictionary.
  */
--(void)initSmartFoldersArray
+-(void)initSmartfoldersDict
 {
-	if (!initializedSmartFoldersArray)
+	if (!initializedSmartfoldersDict)
 	{
 		// Make sure we have a database.
 		NSAssert(sqlDatabase, @"Database not assigned for this item");
@@ -1635,12 +1635,12 @@ static Database * _sharedDatabase = nil;
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
 				
 				CriteriaTree * criteriaTree = [[CriteriaTree alloc] initWithString:search_string];
-				[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+				[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 				[criteriaTree release];
 			}
 		}
 		[results release];
-		initializedSmartFoldersArray = YES;
+		initializedSmartfoldersDict = YES;
 	}
 }
 
@@ -1650,8 +1650,8 @@ static Database * _sharedDatabase = nil;
  */
 -(CriteriaTree *)searchStringForSmartFolder:(int)folderId
 {
-	[self initSmartFoldersArray];
-	return [smartFoldersArray objectForKey:[NSNumber numberWithInt:folderId]];
+	[self initSmartfoldersDict];
+	return [smartfoldersDict objectForKey:[NSNumber numberWithInt:folderId]];
 }
 
 /* addSmartFolder
@@ -1673,7 +1673,7 @@ static Database * _sharedDatabase = nil;
 	{
 		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
 		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
-		[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+		[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 	}
 	return folderId;
 }
@@ -1690,7 +1690,7 @@ static Database * _sharedDatabase = nil;
 	// Update the smart folder string
 	NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
 	[self executeSQLWithFormat:@"update smart_folders set search_string='%@' where folder_id=%d", preparedQueryString, folderId];
-	[smartFoldersArray setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+	[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
@@ -1702,7 +1702,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)initFolderArray
 {
-	if (!initializedFoldersArray)
+	if (!initializedfoldersDict)
 	{
 		// Make sure we have a database.
 		NSAssert(sqlDatabase, @"Database not assigned for this item");
@@ -1743,7 +1743,7 @@ static Database * _sharedDatabase = nil;
 				[folder setFlag:flags];
 				if (unreadCount > 0)
 					countOfUnread += unreadCount;
-				[foldersArray setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
+				[foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
 
 				// Remember the trash folder
 				if (IsTrashFolder(folder))
@@ -1785,7 +1785,7 @@ static Database * _sharedDatabase = nil;
 		[results release];
 
 		// Fix the childUnreadCount for every parent
-		NSEnumerator * folderEnumerator = [foldersArray objectEnumerator];
+		NSEnumerator * folderEnumerator = [foldersDict objectEnumerator];
 		Folder * folder;
 		
 		while ((folder = [folderEnumerator nextObject]) != nil)
@@ -1800,7 +1800,7 @@ static Database * _sharedDatabase = nil;
 			}
 
 		// Done
-		initializedFoldersArray = YES;
+		initializedfoldersDict = YES;
 	}
 }
 
@@ -1813,13 +1813,13 @@ static Database * _sharedDatabase = nil;
 -(NSArray *)arrayOfFolders:(int)parentId
 {
 	// Prime the cache
-	if (initializedFoldersArray == NO)
+	if (initializedfoldersDict == NO)
 		[self initFolderArray];
 
 	NSMutableArray * newArray = [NSMutableArray array];
 	if (newArray != nil)
 	{
-		NSEnumerator * enumerator = [foldersArray objectEnumerator];
+		NSEnumerator * enumerator = [foldersDict objectEnumerator];
 		Folder * item;
 		
 		while ((item = [enumerator nextObject]) != nil)
@@ -1839,7 +1839,7 @@ static Database * _sharedDatabase = nil;
 	NSMutableArray * newArray = [NSMutableArray arrayWithObject:folder];
 	if (newArray != nil)
 	{
-		NSEnumerator * enumerator = [foldersArray objectEnumerator];
+		NSEnumerator * enumerator = [foldersDict objectEnumerator];
 		int parentId = [folder itemId];
 		Folder * item;
 		
@@ -1863,10 +1863,10 @@ static Database * _sharedDatabase = nil;
 -(NSArray *)arrayOfAllFolders
 {
 	// Prime the cache
-	if (initializedFoldersArray == NO)
+	if (initializedfoldersDict == NO)
 		[self initFolderArray];
 	
-	return [foldersArray allValues];
+	return [foldersDict allValues];
 }
 
 /* initArticleArray
@@ -2163,8 +2163,8 @@ static Database * _sharedDatabase = nil;
 
 	if (IsSmartFolder(folder))
 	{
-		[self initSmartFoldersArray];
-		return [smartFoldersArray objectForKey:[NSNumber numberWithInt:folderId]];
+		[self initSmartfoldersDict];
+		return [smartfoldersDict objectForKey:[NSNumber numberWithInt:folderId]];
 	}
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
@@ -2475,14 +2475,14 @@ static Database * _sharedDatabase = nil;
 -(void)close
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[foldersArray removeAllObjects];
-	[smartFoldersArray removeAllObjects];
+	[foldersDict removeAllObjects];
+	[smartfoldersDict removeAllObjects];
 	[fieldsOrdered release];
 	[fieldsByName release];
 	[trashFolder release];
 	[sqlDatabase close];
-	initializedFoldersArray = NO;
-	initializedSmartFoldersArray = NO;
+	initializedfoldersDict = NO;
+	initializedSmartfoldersDict = NO;
 	countOfUnread = 0;
 	sqlDatabase = nil;
 }
@@ -2493,8 +2493,8 @@ static Database * _sharedDatabase = nil;
 -(void)dealloc
 {
 	[searchString release];
-	[foldersArray release];
-	[smartFoldersArray release];
+	[foldersDict release];
+	[smartfoldersDict release];
 	if (sqlDatabase)
 		[self close];
 	[sqlDatabase release];
