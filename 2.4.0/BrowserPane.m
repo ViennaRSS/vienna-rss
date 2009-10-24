@@ -321,26 +321,28 @@
 	{
 		// Was this a feed redirect? If so, this isn't an error:
 		if (![webPane isFeedRedirect] && ![webPane isDownload])
+		{
 			[self setError:error];
+			
+			// Use a warning sign as favicon
+			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
+			
+			// Load the localized verion of the error page
+			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
+			if (pathToErrorPage != nil)
+			{
+				NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
+				if (errorMessage != nil)
+				{
+					[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame provisionalDataSource] request] URL]];
+				}
+				NSString *unreachableURL = [[[frame provisionalDataSource] unreachableURL] absoluteString];
+				if (unreachableURL != nil)
+					[addressField setStringValue: [[[frame provisionalDataSource] unreachableURL] absoluteString]];
+			}	
+		}
 		[self endFrameLoad];
 	}
-	
-	// Use a warning sign as favicon
-	[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
-	
-	// Load the localized verion of the error page
-	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
-	if (pathToErrorPage != nil)
-	{
-		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-		if (errorMessage != nil)
-		{
-			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame provisionalDataSource] request] URL]];
-		}
-		NSString *unreachableURL = [[[frame provisionalDataSource] unreachableURL] absoluteString];
-		if (unreachableURL != nil)
-			[addressField setStringValue: [[[frame provisionalDataSource] unreachableURL] absoluteString]];
-	}	
 }
 
 /* endFrameLoad
@@ -373,23 +375,25 @@
 		// Not really an error. A plugin is grabbing the URL and will handle it
 		// by itself.
 		if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
+		{
 			[self setError:error];
+			
+			// Use a warning sign as favicon
+			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
+			
+			// Load the localized verion of the error page
+			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
+			if (pathToErrorPage != nil)
+			{
+				NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
+				if (errorMessage != nil)
+				{
+					[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame dataSource] request] URL]];
+				}
+			}		
+		}
 		[self endFrameLoad];
 	}
-	
-	// Use a warning sign as favicon
-	[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
-	
-	// Load the localized verion of the error page
-	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
-	if (pathToErrorPage != nil)
-	{
-		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-		if (errorMessage != nil)
-		{
-			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame dataSource] request] URL]];
-		}
-	}		
 }
 
 /* didFinishLoadForFrame
