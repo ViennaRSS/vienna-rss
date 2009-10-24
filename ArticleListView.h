@@ -54,6 +54,7 @@
 	BOOL blockMarkRead;
 
 	NSTimer * markReadTimer;
+	NSTimer * selectionTimer;
 	NSString * guidOfArticleToSelect;
 	NSFont * articleListFont;
 	NSFont * articleListUnreadFont;
