@@ -67,7 +67,7 @@ NSString * MAPref_LastViennaVersionRun = @"LastViennaVersionRun";
 NSString * MAPref_HighestViennaVersionRun = @"HighestViennaVersionRun";
 
 const int MA_Default_BackTrackQueueSize = 20;
-const int MA_Default_RefreshThreads = 10;
+const int MA_Default_RefreshThreads = 20;
 const int MA_Default_MinimumFontSize = 9;
 const float MA_Default_Read_Interval = 0.5;
 const float MA_Default_Selection_Change_Interval = 0.0;
