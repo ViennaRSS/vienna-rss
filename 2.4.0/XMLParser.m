@@ -238,7 +238,7 @@
 	NSArray * pathElements = [path componentsSeparatedByString:@"/"];
 	XMLParser * treeFound = self;
 	
-	for (NSString * treeName in [pathElements objectEnumerator])
+	for (NSString * treeName in pathElements)
 	{
 		treeFound = [treeFound treeByName:treeName];
 		if (treeFound == nil)
@@ -306,10 +306,8 @@
 
 		// Make a copy of the attributes dictionary but force the keys to
 		// lowercase.
-		for (NSString * keyName in [dict keyEnumerator])
+		for (NSString * keyName in dict)
 		{
-			if (keyName == nil)
-				break;
 			[newDict setObject:[dict objectForKey:keyName] forKey:[keyName lowercaseString]];
 		}
 		return newDict;
