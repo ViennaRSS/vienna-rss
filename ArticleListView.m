@@ -51,7 +51,7 @@
 	-(void)loadMinimumFontSize;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)refreshImmediatelyArticleAtCurrentRow;
-	-(void)refreshArticleAtCurrentRow:(BOOL)delayFlag;
+	-(void)refreshArticleAtCurrentRow;
 	-(void)makeRowSelectedAndVisible:(int)rowIndex;
 	-(void)updateArticleListRowHeight;
 	-(void)setOrientation:(int)newLayout;
@@ -80,7 +80,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
 		markReadTimer = nil;
-		selectionTimer = nil;
     }
     return self;
 }
@@ -859,7 +858,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[articleList deselectAll:self];
 	}
 	else if (rowIndex == currentSelectedRow)
-		[self refreshArticleAtCurrentRow:NO];
+		[self refreshArticleAtCurrentRow];
 	else
 	{
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
@@ -1147,7 +1146,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			blockSelectionHandler = YES;
 			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 			currentSelectedRow = row;
-			[self refreshArticleAtCurrentRow:NO];
+			[self refreshArticleAtCurrentRow];
 			blockSelectionHandler = NO;
 		}
 	}
@@ -1199,20 +1198,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 }
 
-/* startSelectionChange
- * This is the function that is called on the timer to actually handle the
- * selection change.
- */
--(void)startSelectionChange:(NSTimer *)timer
-{
-	currentSelectedRow = [articleList selectedRow];
-	[self refreshImmediatelyArticleAtCurrentRow];
-}
-
 /* refreshArticleAtCurrentRow
  * Refreshes the article at the current selected row.
  */
--(void)refreshArticleAtCurrentRow:(BOOL)delayFlag
+-(void)refreshArticleAtCurrentRow
 {
 	if (currentSelectedRow < 0)
 	{
@@ -1223,20 +1212,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		NSArray * allArticles = [articleController allArticles];
 		NSAssert(currentSelectedRow < (int)[allArticles count], @"Out of range row index received");
-		[selectionTimer invalidate];
-		[selectionTimer release];
-		selectionTimer = nil;
-
-		float interval = [[Preferences standardPreferences] selectionChangeInterval];
-		if (!testForKey(kShift) || !delayFlag )
-			[self refreshImmediatelyArticleAtCurrentRow];
-		else
-			selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:interval
-															   target:self
-															 selector:@selector(startSelectionChange:) 
-															 userInfo:nil 
-															  repeats:NO] retain];
-
+		
+		[self refreshImmediatelyArticleAtCurrentRow];
+		
 		// Add this to the backtrack list
 		NSString * guid = [[allArticles objectAtIndex:currentSelectedRow] guid];
 		[articleController addBacktrack:guid];
@@ -1478,7 +1456,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	if (!blockSelectionHandler)
 	{
 		currentSelectedRow = [articleList selectedRow];
-		[self refreshArticleAtCurrentRow:YES];
+		[self refreshArticleAtCurrentRow];
 	}
 }
 
@@ -1627,7 +1605,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[selectionTimer release];
 	[markReadTimer release];
 	[articleListFont release];
 	[articleListUnreadFont release];

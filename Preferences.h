@@ -25,7 +25,6 @@
 	NSString * profilePath;
 	NSString * preferencesPath;
 	float markReadInterval;
-	float selectionChangeInterval;
 	int minimumFontSize;
 	int refreshFrequency;
 	int autoExpireDuration;
@@ -94,9 +93,6 @@
 // Download folder
 -(NSString *)downloadFolder;
 -(void)setDownloadFolder:(NSString *)newFolder;
-
-// Selection change interval
--(float)selectionChangeInterval;
 
 // New articles notification method
 -(int)newArticlesNotification;

@@ -36,7 +36,6 @@
 	IBOutlet ThinSplitView * folderSplitView;
 
 	TreeNode * rootNode;
-	NSTimer * selectionTimer;
 	NSFont * cellFont;
 	NSFont * boldCellFont;
 	NSImage * folderErrorImage;
