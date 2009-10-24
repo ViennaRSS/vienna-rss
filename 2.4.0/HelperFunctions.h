@@ -46,4 +46,3 @@ NSMenuItem * copyOfMenuWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
 BOOL hasOSScriptsMenu(void);
 OSStatus GotoHelpPage(CFStringRef pagePath, CFStringRef anchorName);
-BOOL testForKey(int kKeyCode);

@@ -34,7 +34,6 @@
 // Private functions
 @interface FoldersTree (Private)
 	-(void)setFolderListFont;
-	-(void)startSelectionChange:(NSTimer *)timer;
 	-(NSArray *)archiveState;
 	-(void)unarchiveState:(NSArray *)stateArray;
 	-(void)reloadDatabase:(NSArray *)stateArray;
@@ -71,7 +70,6 @@
 		rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
 		blockSelectionHandler = NO;
 		canRenameFolders = NO;
-		selectionTimer = nil;
 		folderErrorImage = nil;
 		refreshProgressImage = nil;
 	}
@@ -959,22 +957,8 @@
 	if (!blockSelectionHandler)
 	{
 		TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
-
-		// Set up to change selection after an elapsed period.
-		[selectionTimer invalidate];
-		[selectionTimer release];
-		selectionTimer = [[NSTimer scheduledTimerWithTimeInterval:MA_Default_Selection_Change_Interval target:self selector:@selector(startSelectionChange:) userInfo:node repeats:NO] retain];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
 	}
-}
-
-/* startSelectionChange
- * This is the function that is called on the timer to actually handle the
- * selection change.
- */
--(void)startSelectionChange:(NSTimer *)timer
-{
-	TreeNode * node = [timer userInfo];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
 }
 
 /* renameFolder
@@ -1470,9 +1454,7 @@
  */
 -(void)dealloc
 {
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc removeObserver:self];
-	[selectionTimer release];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cellFont release];
 	[boldCellFont release];
 	[folderErrorImage release];
