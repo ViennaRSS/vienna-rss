@@ -156,11 +156,11 @@
 
 	if (httpHeaders != nil)
 	{
-		for (NSString * httpFieldName in [httpHeaders allKeys])
+		for (NSString * httpFieldName in httpHeaders)
 		{
-			NSString * fieldValue = [httpHeaders valueForKey:httpFieldName];
+			NSString * fieldValue = [httpHeaders objectForKey:httpFieldName];
 			if (fieldValue != nil && ![fieldValue isBlank])
-				[theRequest addValue:[httpHeaders valueForKey:httpFieldName] forHTTPHeaderField:httpFieldName];
+				[theRequest addValue:fieldValue forHTTPHeaderField:httpFieldName];
 		}
 	}
 
@@ -242,10 +242,8 @@
 			// Add the HTTP headers details to the log for this connection for
 			// debugging purposes.
 			[headerDetail setString:NSLocalizedString(@"Headers:\n", nil)];
-			for (NSString * headerField in [responseHeaders keyEnumerator])
+			for (NSString * headerField in responseHeaders)
 			{
-				if (headerField == nil)
-					break;
 				[headerDetail appendFormat:@"\t%@: %@\n", headerField, [[httpResponse allHeaderFields] valueForKey:headerField]];
 			}
 			
