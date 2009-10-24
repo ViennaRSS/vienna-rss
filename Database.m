@@ -244,10 +244,8 @@ static Database * _sharedDatabase = nil;
 			NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
 			if (demoFeedsDict)
 			{
-				for (NSString * feedName in [demoFeedsDict keyEnumerator])
+				for (NSString * feedName in demoFeedsDict)
 				{
-					if (feedName == nil)
-						break;
 					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
 					NSString * feedURL = [itemDict valueForKey:@"URL"];
 					if (feedURL != nil && feedName != nil)
@@ -1288,8 +1286,6 @@ static Database * _sharedDatabase = nil;
 	Folder * folder;
 	for (folder in [foldersDict objectEnumerator])
 	{
-		if (folder == nil)
-			continue;
 		if ([[folder name] isEqualToString:wantedName])
 			break;
 	}
@@ -1305,8 +1301,6 @@ static Database * _sharedDatabase = nil;
 	
 	for (folder in [foldersDict objectEnumerator])
 	{
-		if (folder == nil)
-			break;
 		if ([[folder feedURL] isEqualToString:wantedFeedURL])
 			break;
 	}
@@ -1774,8 +1768,6 @@ static Database * _sharedDatabase = nil;
 		// Fix the childUnreadCount for every parent		
 		for (Folder * folder in [foldersDict objectEnumerator])
 		{
-			if (folder == nil)
-				break;
 			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
 			{
 				Folder * parentFolder = [self folderFromID:[folder parentId]];
@@ -1808,8 +1800,6 @@ static Database * _sharedDatabase = nil;
 	{		
 		for (Folder * folder in [foldersDict objectEnumerator])
 		{
-			if (folder == nil)
-				break;
 			if ([folder parentId] == parentId)
 				[newArray addObject:folder];
 		}
@@ -1829,8 +1819,6 @@ static Database * _sharedDatabase = nil;
 		
 		for (Folder * item in [foldersDict objectEnumerator])
 		{
-			if (item == nil)
-				break;
 			if ([item parentId] == parentId)
 			{
 				if (IsGroupFolder(item))
@@ -1883,8 +1871,6 @@ static Database * _sharedDatabase = nil;
 
 			for (row in [results rowEnumerator])
 			{
-				if (row == nil)
-					break;
 				NSString * guid = [row stringForColumn:@"message_id"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
@@ -1998,8 +1984,6 @@ static Database * _sharedDatabase = nil;
 
 	for (Criteria * criteria in [criteriaTree criteriaEnumerator])
 	{
-		if (criteria == nil)
-			break;
 		Field * field = [self fieldByName:[criteria field]];
 		NSAssert1(field != nil, @"Criteria field %@ does not have an associated database field", [criteria field]);
 
@@ -2196,8 +2180,6 @@ static Database * _sharedDatabase = nil;
 			{				
 				for (SQLRow * row in [results rowEnumerator])
 				{
-					if (row == nil)
-						break;
 					NSString * guid = [row stringForColumn:@"message_id"];
 					[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 				}
@@ -2258,8 +2240,6 @@ static Database * _sharedDatabase = nil;
 
 		for (SQLRow * row in [results rowEnumerator])
 		{
-			if (row == nil)
-				break;
 			article = [[Article alloc] initWithGuid:[row stringForColumn:@"message_id"]];
 			[article setTitle:[row stringForColumn:@"title"]];
 			[article setAuthor:[row stringForColumn:@"sender"]];
@@ -2320,8 +2300,6 @@ static Database * _sharedDatabase = nil;
 	// Recurse and mark child folders read too
 	for (folder in [self arrayOfFolders:folderId])
 	{
-		if (folder == nil)
-			break;
 		if ([self markFolderRead:[folder itemId]])
 			result = YES;
 	}
