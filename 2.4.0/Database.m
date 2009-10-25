@@ -924,8 +924,21 @@ static Database * _sharedDatabase = nil;
 		[self executeSQLWithFormat:@"delete from smart_folders where folder_id=%d", folderId];
 
 	// If this is an RSS feed, delete from the feeds
+	// and delete raw feed source
 	if (IsRSSFolder(folder))
+	{
 		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
+		
+		NSString * feedSourceFilePath = [folder feedSourceFilePath];
+		if (feedSourceFilePath != nil)
+		{
+			BOOL isDirectory = YES;
+			if ([[NSFileManager defaultManager] fileExistsAtPath:feedSourceFilePath isDirectory:&isDirectory] && !isDirectory)
+			{
+				[[NSFileManager defaultManager] removeItemAtPath:feedSourceFilePath error:NULL];
+			}
+		}
+	}
 
 	// If we deleted the search folder, null out our cached handle
 	if (IsSearchFolder(folder))
