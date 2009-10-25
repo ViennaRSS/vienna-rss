@@ -312,12 +312,8 @@
 	NSArray * arrayOfTags = [XMLTag parserFromData:xmlData];
 	if (arrayOfTags != nil)
 	{
-		int count = [arrayOfTags count];
-		int index;
-
-		for (index = 0; index < count; ++index)
+		for (XMLTag * tag in arrayOfTags)
 		{
-			XMLTag * tag = [arrayOfTags objectAtIndex:index];
 			NSString * tagName = [tag name];
 
 			if ([tagName isEqualToString:@"rss"] || [tagName isEqualToString:@"rdf:rdf"] || [tagName isEqualToString:@"feed"])
@@ -813,9 +809,8 @@
 	NSDate * itemDate = [self lastModified];
 	if (itemDate == nil)
 		itemDate = [NSDate date];
-	for (index = 0; index < [items count]; ++index)
+	for (FeedItem * anItem in items)
 	{
-		FeedItem * anItem = [items objectAtIndex:index];
 		if ([anItem date] == nil)
 			[anItem setDate:itemDate];
 		itemDate = [itemDate addTimeInterval:-1.0];
