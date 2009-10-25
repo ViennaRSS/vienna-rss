@@ -64,6 +64,7 @@ NSString * MAPref_ShowFilterBar = @"ShowFilterBar";
 NSString * MAPref_NewFolderUI = @"NewFolderUI";
 NSString * MAPref_LastViennaVersionRun = @"LastViennaVersionRun";
 NSString * MAPref_HighestViennaVersionRun = @"HighestViennaVersionRun";
+NSString * MAPref_ShouldSaveFeedSource = @"ShouldSaveFeedSource";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 20;

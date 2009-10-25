@@ -32,6 +32,7 @@ NSString * MA_DefaultStyleName = @"FeedLight Aqua (Default)";
 NSString * MA_Database_Name = @"messages.db";
 NSString * MA_ImagesFolder_Name = @"Images";
 NSString * MA_StylesFolder_Name = @"Styles";
+NSString * MA_FeedSourcesFolder_Name = @"Sources";
 
 // The default preferences object.
 static Preferences * _standardPreferences = nil;
@@ -39,6 +40,7 @@ static Preferences * _standardPreferences = nil;
 // Private methods
 @interface Preferences (Private)
 	-(NSDictionary *)factoryDefaults;
+	-(void)createFeedSourcesFolderIfNecessary;
 	-(void)handleUpdateRestart:(NSNotification *)nc;
 @end
 
@@ -104,6 +106,7 @@ static Preferences * _standardPreferences = nil;
 			imagesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
 			stylesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
 			scriptsFolder = [[MA_ScriptsFolder stringByExpandingTildeInPath] retain];
+			feedSourcesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_FeedSourcesFolder_Name] stringByExpandingTildeInPath] retain];
 		}
 		else
 		{
@@ -139,6 +142,7 @@ static Preferences * _standardPreferences = nil;
 			imagesFolder = [[[profilePath stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
 			stylesFolder = [[[profilePath stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
 			scriptsFolder = [[[profilePath stringByAppendingPathComponent:@"Scripts"] stringByExpandingTildeInPath] retain];
+			feedSourcesFolder = [[[profilePath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name] stringByExpandingTildeInPath] retain];
 		}
 		
 		// Register to be notified when Sparkle does an update.
@@ -169,6 +173,12 @@ static Preferences * _standardPreferences = nil;
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
+		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
+		
+		if (shouldSaveFeedSource)
+		{
+			[self createFeedSourcesFolderIfNecessary];
+		}
 		
 		// Here is where we want to put any logic that depends on the last or highest version of Vienna that has been run.
 		NSString * bundleVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
@@ -203,6 +213,7 @@ static Preferences * _standardPreferences = nil;
 	[preferencesPath release];
 	[articleSortDescriptors release];
 	[profilePath release];
+	[feedSourcesFolder release];
 	[super dealloc];
 }
 
@@ -256,6 +267,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_EmptyTrash_WithWarning] forKey:MAPref_EmptyTrashNotification];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_HighestViennaVersionRun];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_LastViennaVersionRun];
+	[defaultValues setObject:boolYes forKey:MAPref_ShouldSaveFeedSource];
 
 	return defaultValues;
 }
@@ -953,4 +965,56 @@ static Preferences * _standardPreferences = nil;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FilterBarChanged" object:nil];
 	}
 }
+
+/* feedSourcesFolder
+ * Return the path to where the raw feed sources are stored.
+ */
+-(NSString *)feedSourcesFolder
+{
+	return feedSourcesFolder;
+}
+
+/* shouldSaveFeedSource
+ * Returns whether to save  the raw feed source XML.
+ */
+-(BOOL)shouldSaveFeedSource
+{
+	return showFilterBar;
+}
+
+/* setShouldSaveFeedSource
+ * Specifies whether to save  the raw feed source XML.
+ */
+-(void)setShouldSaveFeedSource:(BOOL)shouldSave
+{
+	if (shouldSaveFeedSource != shouldSave)
+	{
+		shouldSaveFeedSource = shouldSave;
+		if (shouldSaveFeedSource)
+		{
+			[self createFeedSourcesFolderIfNecessary];
+		}
+		[self setBool:shouldSaveFeedSource forKey:MAPref_ShouldSaveFeedSource];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+	}
+}
+
+-(void)createFeedSourcesFolderIfNecessary
+{	
+	BOOL isDirectory = NO;
+	if (![[NSFileManager defaultManager] fileExistsAtPath:feedSourcesFolder isDirectory:&isDirectory])
+	{
+		NSError * error = nil;
+		if (![[NSFileManager defaultManager] createDirectoryAtPath:feedSourcesFolder withIntermediateDirectories:YES attributes:nil error:&error])
+		{
+			NSLog(@"Could not create feed sources folder at path '%@'. Error: %@", feedSourcesFolder, [error localizedDescription]);
+		}
+	}
+	else if (!isDirectory)
+	{
+		// Huh, there's a Sources file there, but it's not a directory.
+		NSLog(@"Could not create feed sources folder, because a non-directory file already exists at path '%@'.", feedSourcesFolder);
+	}
+}
+
 @end
