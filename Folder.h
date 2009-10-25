@@ -139,4 +139,5 @@
 -(void)markFolderEmpty;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
+-(NSString *)feedSourceFilePath;
 @end

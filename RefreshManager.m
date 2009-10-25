@@ -657,11 +657,9 @@ typedef enum {
 			// Log number of bytes we received
 			[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 			
-			Preferences *standardPreferences = [Preferences standardPreferences];
-			if ([standardPreferences boolForKey:MAPref_ShouldSaveFeedSource])
+			if ([[Preferences standardPreferences] boolForKey:MAPref_ShouldSaveFeedSource])
 			{
-				NSString * feedSourceFile = [NSString stringWithFormat:@"folder%i.xml", folderId];
-				NSString * feedSourcePath = [[standardPreferences feedSourcesFolder] stringByAppendingPathComponent:feedSourceFile];
+				NSString * feedSourcePath = [folder feedSourceFilePath];
 				[receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
 			}
 			
