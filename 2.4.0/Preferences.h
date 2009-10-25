@@ -43,12 +43,14 @@
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
 	BOOL showFilterBar;
+	BOOL shouldSaveFeedSource;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
 	NSString * imagesFolder;
 	NSString * scriptsFolder;
 	NSString * stylesFolder;
+	NSString * feedSourcesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
 	NSArray * articleSortDescriptors;
@@ -180,4 +182,10 @@
 // Show or hide the filter bar
 -(BOOL)showFilterBar;
 -(void)setShowFilterBar:(BOOL)show;
+
+// Should we save the raw feed source XML?
+-(NSString *)feedSourcesFolder;
+-(BOOL)shouldSaveFeedSource;
+-(void)setShouldSaveFeedSource:(BOOL)shouldSave;
+
 @end
