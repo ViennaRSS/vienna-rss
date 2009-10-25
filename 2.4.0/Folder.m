@@ -755,6 +755,20 @@ static NSArray * iconArray = nil;
 	return NSOrderedSame;
 }
 
+/* feedSourceFilePath
+ * Returns the path of the raw feed source file for the folder
+ */
+-(NSString *)feedSourceFilePath
+{
+	NSString * feedSourceFilePath = nil;
+	if ([self isRSSFolder])
+	{
+		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%i.xml", [self itemId]];
+		feedSourceFilePath = [[[Preferences standardPreferences] feedSourcesFolder] stringByAppendingPathComponent:feedSourceFileName];
+	}
+	return feedSourceFilePath;
+}
+
 /* objectSpecifier
  * Return an NSScriptObjectSpecifier object representing this folder.
  */
