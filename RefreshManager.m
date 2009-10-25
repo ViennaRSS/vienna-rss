@@ -199,13 +199,9 @@ typedef enum {
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {
 	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
-	
-	int count = [foldersArray count];
-	int index;
-	
-	for (index = 0; index < count; ++index)
+		
+	for (Folder * folder in foldersArray)
 	{
-		Folder * folder = [foldersArray objectAtIndex:index];
 		if (IsGroupFolder(folder))
 			[self refreshSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]] ignoringSubscriptionStatus:NO];
 		else if (IsRSSFolder(folder))
@@ -233,12 +229,8 @@ typedef enum {
 {
 	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing folder images...", nil);
 	
-	int count = [foldersArray count];
-	int index;
-	
-	for (index = 0; index < count; ++index)
+	for (Folder * folder in foldersArray)
 	{
-		Folder * folder = [foldersArray objectAtIndex:index];
 		if (IsGroupFolder(folder))
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder))
@@ -417,7 +409,7 @@ typedef enum {
 -(void)beginRefreshTimer
 {
 	if (pumpTimer == nil)
-		pumpTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshPumper:) userInfo:nil repeats:YES] retain];
+		pumpTimer = [[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(refreshPumper:) userInfo:nil repeats:YES] retain];
 	[self refreshPumper:pumpTimer];
 }
 
