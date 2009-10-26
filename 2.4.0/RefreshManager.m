@@ -671,10 +671,6 @@ typedef enum {
 			// Synthesize feed link if it is missing
 			if (feedLink == nil || [feedLink isBlank])
 				feedLink = [[folder feedURL] baseURL];
-
-			// Check for new articles within 24 hours before the last update, because feeds
-			// sometimes set the wrong time or date.
-			NSDate * compareDate = [[folder lastUpdate] addTimeInterval:-86400];
 			
 			// We'll be collecting articles into this array
 			NSMutableArray * articleArray = [NSMutableArray array];
@@ -686,47 +682,47 @@ typedef enum {
 				NSDate * articleDate = [newsItem date];
 				if (articleDate == nil)
 					articleDate = [NSDate date];
-				if ([articleDate compare:compareDate] == NSOrderedDescending)
+				
+				NSString * articleGuid = [newsItem guid];
+				
+				// This routine attempts to synthesize a GUID from an incomplete item that lacks an
+				// ID field. Generally we'll have three things to work from: a link, a title and a
+				// description. The link alone is not sufficiently unique and I've seen feeds where
+				// the description is also not unique. The title field generally does vary but we need
+				// to be careful since separate articles with different descriptions may have the same
+				// title. The solution is to use the link and title and build a GUID from those.
+				// We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
+				if ([articleGuid isEqualToString:@""])
+					articleGuid = [NSString stringWithFormat:@"%d-%@-%@", folderId, [newsItem link], [newsItem title]];
+				
+				Article * article = [[Article alloc] initWithGuid:articleGuid];
+				[article setFolderId:folderId];
+				[article setAuthor:[newsItem author]];
+				[article setBody:[newsItem description]];
+				[article setSummary:[newsItem summary]];
+				[article setTitle:[newsItem title]];
+				[article setLink:[newsItem link]];
+				[article setDate:articleDate];
+				[article setEnclosure:[newsItem enclosure]];
+				if ([[article enclosure] isNotEqualTo:@""])
 				{
-					NSString * articleGuid = [newsItem guid];
-					
-					// This routine attempts to synthesize a GUID from an incomplete item that lacks an
-					// ID field. Generally we'll have three things to work from: a link, a title and a
-					// description. The link alone is not sufficiently unique and I've seen feeds where
-					// the description is also not unique. The title field generally does vary but we need
-					// to be careful since separate articles with different descriptions may have the same
-					// title. The solution is to use the link and title and build a GUID from those.
-					// We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
-					if ([articleGuid isEqualToString:@""])
-						articleGuid = [NSString stringWithFormat:@"%d-%@-%@", folderId, [newsItem link], [newsItem title]];
-					
-					Article * article = [[Article alloc] initWithGuid:articleGuid];
-					[article setFolderId:folderId];
-					[article setAuthor:[newsItem author]];
-					[article setBody:[newsItem description]];
-					[article setSummary:[newsItem summary]];
-					[article setTitle:[newsItem title]];
-					[article setLink:[newsItem link]];
-					[article setDate:articleDate];
-					[article setEnclosure:[newsItem enclosure]];
-					if ([[article enclosure] isNotEqualTo:@""])
-					{
-						[article setHasEnclosure:YES];
-					}
-					[articleArray addObject:article];
-					[article release];
+					[article setHasEnclosure:YES];
 				}
+				[articleArray addObject:article];
+				[article release];
 			}
 
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0u)
 			{
+				NSArray * guidHistory = [db guidHistoryForFolderId:folderId];
+				
 				[folder clearCache];
 				 // Should we wrap the entire loop or just individual article updates?
 				[db beginTransaction];
 				for (Article * article in articleArray)
 				{
-					if ([db createArticle:folderId article:article] && ([article status] == MA_MsgStatus_New))
+					if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
 						++newArticlesFromFeed;
 				}
 				[db commitTransaction];				

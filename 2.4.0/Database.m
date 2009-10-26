@@ -47,7 +47,7 @@
 
 // The current database version number
 const int MA_Min_Supported_DB_Version = 12;
-const int MA_Current_DB_Version = 17;
+const int MA_Current_DB_Version = 18;
 
 // There's just one database and we manage access to it through a
 // singleton object.
@@ -190,8 +190,10 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
 		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
 		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
+		[self executeSQL:@"create table rss_guids (message_id, folder_id)"];
 		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
+		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
 
 		// Create a criteria to find all marked articles
 		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
@@ -356,6 +358,20 @@ static Database * _sharedDatabase = nil;
 		[self setDatabaseVersion:17];		
 		[self commitTransaction];
 	}		
+	
+	// Upgrade to rev 18.
+	// Add table all message guids.
+	if (databaseVersion < 18)
+	{
+		[self beginTransaction];
+		
+		[self executeSQL:@"create table rss_guids as select message_id, folder_id from messages"];
+		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
+		
+		// Set the new version
+		[self setDatabaseVersion:18];		
+		[self commitTransaction];
+	}
 	
 	// Read the folders tree sort method from the database.
 	// Make sure that the folders tree is not yet registered to receive notifications at this point.
@@ -1335,7 +1351,7 @@ static Database * _sharedDatabase = nil;
  * article was added or updated or NO if we couldn't add the article for
  * some reason.
  */
--(BOOL)createArticle:(int)folderID article:(Article *)article
+-(BOOL)createArticle:(int)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory
 {
 	// Exit now if we're read-only
 	if (readOnly)
@@ -1383,38 +1399,7 @@ static Database * _sharedDatabase = nil;
 		
 		// Does this article already exist?
 		Article * existingArticle = [folder articleFromGuid:articleGuid];
-		if (existingArticle == nil)
-		{
-			NSString * folderString = [NSString stringWithFormat:@"%d-", folderID];
-			unsigned int folderStringLength = [folderString length];
-			if ([articleGuid compare:folderString options:NSLiteralSearch range:NSMakeRange(0, folderStringLength)] == NSOrderedSame)
-			{
-				NSString * hashGuid = [folderString stringByAppendingFormat:@"%X-%X", [articleLink hash], [articleTitle hash]];
-				existingArticle = [folder articleFromGuid:hashGuid];
-				if (existingArticle != nil)
-				{
-					if ([[existingArticle title] isEqualToString:articleTitle] && [[existingArticle link] isEqualToString:articleLink])
-						articleGuid = hashGuid;
-					else
-						existingArticle = nil;
-				}
-				else
-				{
-					NSString * oldStyleGuid = [articleGuid substringFromIndex:folderStringLength];
-					existingArticle = [folder articleFromGuid:oldStyleGuid];
-					if (existingArticle != nil)
-						articleGuid = oldStyleGuid;
-				}
-			}
-		}
-		// If an obviously different article with the same guid exists, give the article a new guid.
-		while ((existingArticle != nil) && ([[existingArticle title] compare:articleTitle options:NSLiteralSearch | NSCaseInsensitiveSearch] != NSOrderedSame))
-		{
-			articleGuid = [NSString stringWithFormat:@"NEW%@", articleGuid];
-			existingArticle = [folder articleFromGuid:articleGuid];
-		}
-		if ([article guid] != articleGuid)
-			[article setGuid:articleGuid];
+		// We're going to ignore the problem of feeds re-using guids, which is very naughty! Bad feed!
 		
 		// Fix title and article body so they're acceptable to SQL
 		NSString * preparedArticleTitle = [SQLDatabase prepareStringForQuery:articleTitle];
@@ -1430,7 +1415,11 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		if (existingArticle == nil)
+		if (existingArticle == nil && [guidHistory containsObject:articleGuid])
+		{
+			return NO; // Article has been deleted and removed from database, so ignore
+		}
+		else if (existingArticle == nil)
 		{
 			SQLResult * results;
 			
@@ -1455,6 +1444,7 @@ static Database * _sharedDatabase = nil;
 			if (!results)
 				return NO;
 			[results release];
+			[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %d)", preparedArticleGuid, folderID];
 			
 			// Add the article to the folder
 			[article setStatus:MA_MsgStatus_New];
@@ -1464,34 +1454,46 @@ static Database * _sharedDatabase = nil;
 			if (!read_flag)
 				adjustment = 1;
 		}
+		else if ([existingArticle isDeleted])
+		{
+			return NO;
+		}
 		else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles])
 		{
 			return NO;
 		}
-		else if (![existingArticle isDeleted])
+		else
 		{
-			NSString * existingBody = [existingArticle body];
-			// If the folder is not displayed, then the article text has not been loaded yet.
-			if (existingBody == nil)
-			{
-				SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text, revised_flag from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
-				if (results && [results rowCount])
-				{
-					existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
-					revised_flag = [[[results rowAtIndex:0] stringForColumn:@"revised_flag"] intValue];
-				}
-				else
-					existingBody = @"";
-				[results release];
-			}
-			else
-				revised_flag = [existingArticle isRevised];
+			// The article is revised if either the title or the body has changed.
 			
-			if (![existingBody isEqualToString:articleBody])
+			NSString * existingTitle = [existingArticle title];
+			BOOL isArticleRevised = ![existingTitle isEqualToString:articleTitle];
+			
+			if (!isArticleRevised)
+			{
+				NSString * existingBody = [existingArticle body];
+				// If the folder is not displayed, then the article text has not been loaded yet.
+				if (existingBody == nil)
+				{
+					SQLResult * results = [sqlDatabase performQueryWithFormat:@"select text from messages where folder_id=%d and message_id='%@'", folderID, preparedArticleGuid];
+					if (results && [results rowCount])
+					{
+						existingBody = [[results rowAtIndex:0] stringForColumn:@"text"];
+					}
+					else
+						existingBody = @"";
+					[results release];
+				}
+				
+				isArticleRevised = ![existingBody isEqualToString:articleBody];
+			}
+			
+			if (isArticleRevised)
 			{
 				// Only pre-existing articles should be marked as revised.
 				// New articles created during the current refresh should not be marked as revised,
 				// even if there are multiple versions of the new article in the feed.
+				revised_flag = [existingArticle isRevised];
 				if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty))
 					revised_flag = YES;
 				
@@ -1511,6 +1513,7 @@ static Database * _sharedDatabase = nil;
 					return NO;
 				[results release];
 				
+				[existingArticle setTitle:articleTitle];
 				[existingArticle setBody:articleBody];
 				[existingArticle markRevised:revised_flag];
 				
@@ -1523,6 +1526,10 @@ static Database * _sharedDatabase = nil;
 				}
 				else
 					[article setStatus:MA_MsgStatus_Updated];
+			}
+			else
+			{
+				return NO;
 			}
 		}
 		
@@ -1876,7 +1883,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, hasenclosure_flag, enclosure from messages where folder_id=%d", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
 		{
 			int unread_count = 0;
@@ -1886,6 +1893,7 @@ static Database * _sharedDatabase = nil;
 			{
 				NSString * guid = [row stringForColumn:@"message_id"];
 				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
+				BOOL revised_flag = [[row stringForColumn:@"revised_flag"] intValue];
 				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
 				BOOL hasenclosure_flag = [[row stringForColumn:@"hasenclosure_flag"] intValue];
 				NSString * title = [row stringForColumn:@"title"];
@@ -1898,6 +1906,7 @@ static Database * _sharedDatabase = nil;
 				
 				Article * article = [[Article alloc] initWithGuid:guid];
 				[article markRead:read_flag];
+				[article markRevised:revised_flag];
 				[article markDeleted:deleted_flag];
 				[article setFolderId:folderId];
 				[article setTitle:title];
@@ -2443,6 +2452,35 @@ static Database * _sharedDatabase = nil;
 	}
 	else
 		return YES;
+}
+
+/* guidHistoryForFolderId
+ * Returns an array of all article guids ever downloaded for the specified folder.
+ */
+-(NSArray *)guidHistoryForFolderId:(int)folderId
+{
+	NSMutableArray * articleGuids = [NSMutableArray array];
+	
+	[self verifyThreadSafety];
+	SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from rss_guids where folder_id=%i", folderId];
+	if (results)
+	{
+		if ([results rowCount] > 0)
+		{
+			for (SQLRow * row in [results rowEnumerator])
+			{
+				NSString * guid = [row stringForColumn:@"message_id"];
+				if (guid != nil)
+				{
+					[articleGuids addObject:guid];
+				}
+			}
+		}
+		
+		[results release];
+	}
+	
+	return articleGuids;
 }
 
 /* close
