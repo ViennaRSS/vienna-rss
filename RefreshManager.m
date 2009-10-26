@@ -674,14 +674,13 @@ typedef enum {
 			
 			// We'll be collecting articles into this array
 			NSMutableArray * articleArray = [NSMutableArray array];
+			NSMutableArray * articleGuidArray = [NSMutableArray array];
 			
 			// Parse off items.
 			
 			for (FeedItem * newsItem in [newFeed items])
 			{
 				NSDate * articleDate = [newsItem date];
-				if (articleDate == nil)
-					articleDate = [NSDate date];
 				
 				NSString * articleGuid = [newsItem guid];
 				
@@ -694,6 +693,29 @@ typedef enum {
 				// We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
 				if ([articleGuid isEqualToString:@""])
 					articleGuid = [NSString stringWithFormat:@"%d-%@-%@", folderId, [newsItem link], [newsItem title]];
+				
+				// This is a horrible hack for horrible feeds that contain more than one item with the same guid.
+				// Bad feeds! I'm talking to you, WordPress Trac.
+				NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
+				if (articleIndex != NSNotFound)
+				{
+					if (articleDate == nil)
+						continue; // Skip this duplicate article
+					
+					Article * existingArticle = [articleArray objectAtIndex:articleIndex];
+					if ([articleDate compare:[existingArticle date]] == NSOrderedDescending)
+					{
+						// This article is later, so use it instead
+						[articleArray removeObjectAtIndex:articleIndex];
+						[articleGuidArray removeObjectAtIndex:articleIndex];
+					}
+					else
+						continue; // Skip this duplicate article
+				}
+				[articleGuidArray addObject:articleGuid];
+				
+				if (articleDate == nil)
+					articleDate = [NSDate date];
 				
 				Article * article = [[Article alloc] initWithGuid:articleGuid];
 				[article setFolderId:folderId];
