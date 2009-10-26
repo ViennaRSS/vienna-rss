@@ -642,6 +642,12 @@ typedef enum {
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if ([receivedData length] > 0)
 		{
+			if ([[Preferences standardPreferences] boolForKey:MAPref_ShouldSaveFeedSource])
+			{
+				NSString * feedSourcePath = [folder feedSourceFilePath];
+				[receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
+			}
+			
 			// Create a new rich XML parser instance that will take care of
 			// parsing the XML data we just got.
 			if (newFeed == nil || ![newFeed parseRichXML:receivedData])
@@ -656,12 +662,6 @@ typedef enum {
 
 			// Log number of bytes we received
 			[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
-			
-			if ([[Preferences standardPreferences] boolForKey:MAPref_ShouldSaveFeedSource])
-			{
-				NSString * feedSourcePath = [folder feedSourceFilePath];
-				[receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
-			}
 			
 			// Extract the latest title and description
 			NSString * feedTitle = [newFeed title];
