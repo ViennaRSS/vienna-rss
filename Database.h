@@ -106,7 +106,7 @@
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
--(BOOL)createArticle:(int)folderID article:(Article *)article;
+-(BOOL)createArticle:(int)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(BOOL)deleteArticle:(int)folderId guid:(NSString *)guid;
 -(NSArray *)arrayOfUnreadArticles:(int)folderId;
 -(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString;
@@ -114,4 +114,5 @@
 -(void)markArticleFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
 -(void)markArticleDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 -(BOOL)isTrashEmpty;
+-(NSArray *)guidHistoryForFolderId:(int)folderId;
 @end
