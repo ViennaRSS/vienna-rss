@@ -43,8 +43,7 @@
 
 -(void)awakeFromNib
 {
-	//Remove the junk tab view item that we start with, since IB won't let us have no items initially
-	[tabView removeTabViewItem:[tabView tabViewItemAtIndex:0]];
+	[[tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
 	
 	//Metal is the default
 	//[tabBarControl setStyleNamed:@"Metal"];
@@ -78,22 +77,17 @@
  */
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView
 {
-	// This is the standard case: Replace the view of the old primary NSTabViewItem if it exists...
-	if ([tabView tabViewItemWithIdentifier:primaryTabItemView]) {
-		[[tabView tabViewItemWithIdentifier:primaryTabItemView] setView: newPrimaryTabItemView];
-		[newPrimaryTabItemView display];
-	}
-	// ... or otherwise create a new one. This code should only ever get called at start-up.
-	else 
-	{
-		[primaryTabItemView release];
-		primaryTabItemView = [newPrimaryTabItemView retain];
-		
-		NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:primaryTabItemView];
-		[tabViewItem setView:newPrimaryTabItemView];
-		[tabView addTabViewItem:tabViewItem];
-		[tabViewItem release];	
-	}
+	[newPrimaryTabItemView retain];
+	
+	NSTabViewItem * item = [tabView tabViewItemAtIndex:0];
+	[item setIdentifier:newPrimaryTabItemView];
+	[item setView:newPrimaryTabItemView];
+	
+	[primaryTabItemView release];
+	primaryTabItemView = newPrimaryTabItemView;
+	
+	[primaryTabItemView setNeedsDisplay:YES];
+	[self setActiveTabToPrimaryTab];
 }
 
 /* activeTabItemView
@@ -117,9 +111,6 @@
  */
 -(NSView<BaseView> *)primaryTabItemView
 {
-	if ([[tabView tabViewItemWithIdentifier:primaryTabItemView] view])
-		return [[tabView tabViewItemWithIdentifier:primaryTabItemView] view];
-	
 	return primaryTabItemView;
 }
 
