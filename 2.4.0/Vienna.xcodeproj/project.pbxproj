@@ -202,10 +202,6 @@
 		AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		AAC022090E898A3D00BA9002 /* DatabaseSchema.doc in Resources */ = {isa = PBXBuildFile; fileRef = AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */; };
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
-		AAD2BED00C2B2C0600AA0F11 /* top_right.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECD0C2B2C0600AA0F11 /* top_right.png */; };
-		AAD2BED10C2B2C0600AA0F11 /* top_middle.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */; };
-		AAD2BED20C2B2C0600AA0F11 /* top_left.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BECF0C2B2C0600AA0F11 /* top_left.png */; };
-		AAD2BED40C2B2C1200AA0F11 /* bottom_middle.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BED30C2B2C1200AA0F11 /* bottom_middle.png */; };
 		AAD2BF0D0C2BB64500AA0F11 /* ThinSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD2BF0B0C2BB64500AA0F11 /* ThinSplitView.m */; };
 		AAD2BF620C2C41A200AA0F11 /* DBListSplitViewBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */; };
 		AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */; };
@@ -807,10 +803,6 @@
 		AAD2BE550C2B1C8400AA0F11 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AAD2BE570C2B1C8B00AA0F11 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		AAD2BE590C2B1C9600AA0F11 /* ru */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AAD2BECD0C2B2C0600AA0F11 /* top_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_right.png; sourceTree = "<group>"; };
-		AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_middle.png; sourceTree = "<group>"; };
-		AAD2BECF0C2B2C0600AA0F11 /* top_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_left.png; sourceTree = "<group>"; };
-		AAD2BED30C2B2C1200AA0F11 /* bottom_middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_middle.png; sourceTree = "<group>"; };
 		AAD2BF0A0C2BB64500AA0F11 /* ThinSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThinSplitView.h; sourceTree = "<group>"; };
 		AAD2BF0B0C2BB64500AA0F11 /* ThinSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThinSplitView.m; sourceTree = "<group>"; };
 		AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DBListSplitViewBar.tiff; sourceTree = "<group>"; };
@@ -1098,10 +1090,6 @@
 				B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */,
 				B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */,
 				B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */,
-				AAD2BED30C2B2C1200AA0F11 /* bottom_middle.png */,
-				AAD2BECD0C2B2C0600AA0F11 /* top_right.png */,
-				AAD2BECE0C2B2C0600AA0F11 /* top_middle.png */,
-				AAD2BECF0C2B2C0600AA0F11 /* top_left.png */,
 				B28DE7F50B754E590062F879 /* enclosure_header.tiff */,
 				B28DE7F60B754E590062F879 /* enclosure.tiff */,
 				AA71173609BEB70D00E3EA8A /* webpage.tiff */,
@@ -1620,10 +1608,6 @@
 				AA1A2A330C09D84E005968DC /* subscribeButtonPressed.tiff in Resources */,
 				AA1A2C300C0A1EC1005968DC /* emptyTrashButton.tiff in Resources */,
 				AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */,
-				AAD2BED00C2B2C0600AA0F11 /* top_right.png in Resources */,
-				AAD2BED10C2B2C0600AA0F11 /* top_middle.png in Resources */,
-				AAD2BED20C2B2C0600AA0F11 /* top_left.png in Resources */,
-				AAD2BED40C2B2C1200AA0F11 /* bottom_middle.png in Resources */,
 				AAD2BF620C2C41A200AA0F11 /* DBListSplitViewBar.tiff in Resources */,
 				AAD2BF630C2C41A200AA0F11 /* DBListSplitViewDimple.tiff in Resources */,
 				AAD2C0540C2C882D00AA0F11 /* selBlue.tiff in Resources */,
