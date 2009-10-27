@@ -953,6 +953,12 @@ static Database * _sharedDatabase = nil;
 			{
 				[[NSFileManager defaultManager] removeItemAtPath:feedSourceFilePath error:NULL];
 			}
+			
+			NSString * backupPath = [feedSourceFilePath stringByAppendingPathExtension:@"bak"];
+			if ([[NSFileManager defaultManager] fileExistsAtPath:backupPath isDirectory:&isDirectory] && !isDirectory)
+			{
+				[[NSFileManager defaultManager] removeItemAtPath:backupPath error:NULL];
+			}
 		}
 	}
 

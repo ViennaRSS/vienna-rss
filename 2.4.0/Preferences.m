@@ -268,6 +268,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_HighestViennaVersionRun];
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_LastViennaVersionRun];
 	[defaultValues setObject:boolYes forKey:MAPref_ShouldSaveFeedSource];
+	[defaultValues setObject:boolNo forKey:MAPref_ShouldSaveFeedSourceBackup];
 
 	return defaultValues;
 }
@@ -979,7 +980,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(BOOL)shouldSaveFeedSource
 {
-	return showFilterBar;
+	return shouldSaveFeedSource;
 }
 
 /* setShouldSaveFeedSource

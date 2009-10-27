@@ -66,6 +66,7 @@ extern NSString * MAPref_NewFolderUI;
 extern NSString * MAPref_LastViennaVersionRun;
 extern NSString * MAPref_HighestViennaVersionRun;
 extern NSString * MAPref_ShouldSaveFeedSource;
+extern NSString * MAPref_ShouldSaveFeedSourceBackup;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
