@@ -848,8 +848,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		break;
 	}
 
-	[browserView setTabItemViewTitle:[browserView primaryTabItemView] title:NSLocalizedString(@"Articles", nil)];
-
 	[[Preferences standardPreferences] setLayout:newLayout];
 	[self updateSearchPlaceholder];
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
