@@ -86,7 +86,6 @@
 	[primaryTabItemView release];
 	primaryTabItemView = newPrimaryTabItemView;
 	
-	[primaryTabItemView setNeedsDisplay:YES];
 	[self setActiveTabToPrimaryTab];
 }
 
@@ -104,6 +103,7 @@
 -(void)setActiveTabToPrimaryTab
 {
 	[self showTabItemView:primaryTabItemView];
+	[primaryTabItemView display];
 }
 
 /* primaryTabItemView
