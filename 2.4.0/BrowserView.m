@@ -78,14 +78,22 @@
  */
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView
 {
-	//Remove the old one if there is one
+	// This is the standard case: Replace the view of the old primary NSTabViewItem if it exists...
 	if ([tabView tabViewItemWithIdentifier:primaryTabItemView]) {
-		[tabView removeTabViewItem:[tabView tabViewItemWithIdentifier:primaryTabItemView]];
+		[[tabView tabViewItemWithIdentifier:primaryTabItemView] setView: newPrimaryTabItemView];
+		[newPrimaryTabItemView display];
 	}
-	[primaryTabItemView release];
-
-	[self createNewTabWithView:newPrimaryTabItemView makeKey:YES];
-	primaryTabItemView = [newPrimaryTabItemView retain];
+	// ... or otherwise create a new one. This code should only ever get called at start-up.
+	else 
+	{
+		[primaryTabItemView release];
+		primaryTabItemView = [newPrimaryTabItemView retain];
+		
+		NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:primaryTabItemView];
+		[tabViewItem setView:newPrimaryTabItemView];
+		[tabView addTabViewItem:tabViewItem];
+		[tabViewItem release];	
+	}
 }
 
 /* activeTabItemView
@@ -109,6 +117,9 @@
  */
 -(NSView<BaseView> *)primaryTabItemView
 {
+	if ([[tabView tabViewItemWithIdentifier:primaryTabItemView] view])
+		return [[tabView tabViewItemWithIdentifier:primaryTabItemView] view];
+	
 	return primaryTabItemView;
 }
 
