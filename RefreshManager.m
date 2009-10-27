@@ -642,9 +642,25 @@ typedef enum {
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if ([receivedData length] > 0)
 		{
-			if ([[Preferences standardPreferences] boolForKey:MAPref_ShouldSaveFeedSource])
+			Preferences * standardPreferences = [Preferences standardPreferences];
+			if ([standardPreferences shouldSaveFeedSource])
 			{
 				NSString * feedSourcePath = [folder feedSourceFilePath];
+				
+				if ([standardPreferences boolForKey:MAPref_ShouldSaveFeedSourceBackup])
+				{
+					BOOL isDirectory = YES;
+					NSFileManager * defaultManager = [NSFileManager defaultManager];
+					if ([defaultManager fileExistsAtPath:feedSourcePath isDirectory:&isDirectory] && !isDirectory)
+					{
+						NSString * backupPath = [feedSourcePath stringByAppendingPathExtension:@"bak"];
+						if (![defaultManager fileExistsAtPath:backupPath] || [defaultManager removeItemAtPath:backupPath error:NULL]) // Remove any old backup first
+						{
+							[defaultManager moveItemAtPath:feedSourcePath toPath:backupPath error:NULL];
+						}
+					}
+				}
+				
 				[receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
 			}
 			
