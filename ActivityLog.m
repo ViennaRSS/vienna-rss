@@ -104,10 +104,7 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 	NSMutableString * detailString = [NSMutableString stringWithString:@""];
 	if (details != nil)
 	{
-		NSEnumerator * enumerator = [details objectEnumerator];
-		NSString * aString;
-
-		while ((aString = [enumerator nextObject]) != nil)
+		for (NSString * aString in details)
 		{
 			[detailString appendString:aString];
 			[detailString appendString:@"\n"];
@@ -179,11 +176,10 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(ActivityItem *)getStatus:(NSString *)name index:(int *)indexPointer
 {
-	NSEnumerator * enumerator = [log objectEnumerator];
-	ActivityItem * item;
 	int indexOfItem = 0;
+	ActivityItem * item;
 
-	while ((item = [enumerator nextObject]) != nil)
+	for (item in log)
 	{
 		if ([[item name] caseInsensitiveCompare:name] == NSOrderedSame)
 			break;

@@ -69,10 +69,7 @@
 			[feedSource removeAllItems];
 			if (sourcesDict)
 			{
-				NSEnumerator *enumerator = [sourcesDict keyEnumerator];
-				NSString * key;
-
-				while ((key = [enumerator nextObject]) != nil)
+				for (NSString * key in [sourcesDict keyEnumerator])
 					[feedSource addItemWithTitle:NSLocalizedString(key, nil)];
 				[feedSource setEnabled:YES];
 				[feedSource selectItemWithTitle:@"URL"];

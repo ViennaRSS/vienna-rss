@@ -104,10 +104,7 @@
 		// Set the criteria condition
 		[criteriaConditionPopup selectItemWithTag:[criteriaTree condition]];
 
-		NSEnumerator * enumerator = [criteriaTree criteriaEnumerator];
-		Criteria * criteria;
-
-		while ((criteria = [enumerator nextObject]) != nil)
+		for (Criteria * criteria in [criteriaTree criteriaEnumerator])
 		{
 			[self initForField:[criteria field] inRow:searchCriteriaView];
 
@@ -176,12 +173,9 @@
 
 		// Initialize the search criteria view popups with all the
 		// fields in the database.
-		NSArray * fields = [db arrayOfFields];
-		NSEnumerator * enumerator = [fields objectEnumerator];
-		Field * field;
 
 		[fieldNamePopup removeAllItems];
-		while ((field = [enumerator nextObject]) != nil)
+		for (Field * field in [db arrayOfFields])
 		{
 			if ([field tag] != MA_FieldID_Headlines &&
 				[field tag] != MA_FieldID_GUID &&
@@ -246,11 +240,7 @@
  */
 -(void)initFolderValueField:(int)fromId atIndent:(int)indentation
 {
-	NSArray * folders = [db arrayOfFolders:fromId];
-	NSEnumerator * enumerator = [folders objectEnumerator];
-	Folder * folder;
-	
-	while ((folder = [enumerator nextObject]) != nil)
+	for (Folder * folder in [db arrayOfFolders:fromId])
 	{
 		if (IsRSSFolder(folder) || IsGroupFolder(folder))
 		{

@@ -96,10 +96,7 @@
  */
 -(void)localiseHeaderStrings
 {
-	NSEnumerator * enumerator = [[self tableColumns] objectEnumerator];
-	NSTableColumn * aColumn;
-
-	while ((aColumn = [enumerator nextObject]) != nil)
+	for (NSTableColumn * aColumn in [self tableColumns])
 	{
 		id headerCell = [aColumn headerCell];
 		[headerCell setStringValue:NSLocalizedString([headerCell stringValue], nil)];

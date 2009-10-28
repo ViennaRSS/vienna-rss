@@ -94,11 +94,9 @@
  */
 -(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray withGroups:(BOOL)groupFlag
 {
-	NSEnumerator * enumerator = [feedArray objectEnumerator];
 	int countExported = 0;
-	Folder * folder;
 
-	while ((folder = [enumerator nextObject]) != nil)
+	for (Folder * folder in feedArray)
 	{
 		NSMutableDictionary * itemDict = [NSMutableDictionary dictionary];
 		NSString * name = [folder name];

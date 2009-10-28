@@ -109,10 +109,8 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 	{
 		if (validExtensions)
 			arrayOfFiles = [arrayOfFiles pathsMatchingExtensions:validExtensions];
-		NSEnumerator * enumerator = [arrayOfFiles objectEnumerator];
-		NSString * fileName;
 		
-		while ((fileName = [enumerator nextObject]) != nil)
+		for (NSString * fileName in arrayOfFiles)
 		{
 			NSString * fullPath = [path stringByAppendingPathComponent:fileName];
 			BOOL isDirectory;

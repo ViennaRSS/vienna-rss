@@ -33,11 +33,9 @@
 -(NSArray *)layout
 {
 	NSMutableArray * viewRects = [NSMutableArray array];
-	NSEnumerator * viewEnum = [[self subviews] objectEnumerator];
-	NSView * view;
 	NSRect frame;
-
-	while ((view = [viewEnum nextObject]) != nil)
+	
+	for (NSView * view in [self subviews])
 	{
 		if ([self isSubviewCollapsed:view])
 			frame = NSZeroRect;
