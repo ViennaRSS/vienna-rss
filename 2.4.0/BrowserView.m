@@ -51,7 +51,7 @@
 	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
-	[tabBarControl setAutomaticallyAnimates:YES];
+	[tabBarControl setAutomaticallyAnimates:NO];
 	[tabBarControl setSizeCellsToFit:YES];
 	[tabBarControl setCellMinWidth:60];
 	[tabBarControl setCellMaxWidth:350];
