@@ -295,11 +295,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	// Set up the corner button for chosing the visible columns.
 	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
-	NSArray * fields = [db arrayOfFields];
-	NSEnumerator * enumerator = [fields objectEnumerator];
-	Field * columnField;
 
-	while ((columnField = [enumerator nextObject]) != nil)
+	for (Field * columnField in [db arrayOfFields])
 	{
 		// Filter out columns we don't view in the article list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
@@ -556,9 +553,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)saveTableSettings
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	NSArray * fields = [[Database sharedDatabase] arrayOfFields];
-	NSEnumerator * enumerator = [fields objectEnumerator];
-	Field * field;
 	
 	// Remember the current folder and article
 	NSString * guid = (currentSelectedRow >= 0) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
@@ -569,7 +563,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMutableArray * dataArray = [[NSMutableArray alloc] init];
 	
 	// Create the new columns
-	while ((field = [enumerator nextObject]) != nil)
+	
+	for (Field * field in  [[Database sharedDatabase] arrayOfFields])
 	{
 		[dataArray addObject:[field name]];
 		[dataArray addObject:[NSNumber numberWithBool:[field visible]]];
@@ -650,9 +645,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	NSString * sortColumnIdentifier = [articleController sortColumnIdentifier];
 	
-	NSEnumerator * enumerator = [[articleList tableColumns] objectEnumerator];
-	NSTableColumn * column;
-	while ((column = [enumerator nextObject]))
+	for (NSTableColumn * column in [articleList tableColumns])
 	{
 		if ([[column identifier] isEqualToString:sortColumnIdentifier])
 		{
@@ -674,12 +667,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
  */
 -(BOOL)scrollToArticle:(NSString *)guid
 {
-	NSEnumerator * enumerator = [[articleController allArticles] objectEnumerator];
-	Article * thisArticle;
 	int rowIndex = 0;
 	BOOL found = NO;
 	
-	while ((thisArticle = [enumerator nextObject]) != nil)
+	for (Article * thisArticle in [articleController allArticles])
 	{
 		if ([[thisArticle guid] isEqualToString:guid])
 		{

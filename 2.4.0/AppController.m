@@ -1124,20 +1124,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)downloadEnclosure:(id)sender
 {
-	NSArray * articleArray = [mainArticleView markedArticleRange];	
-	if ([articleArray count] > 0) 
+	for (Article * currentArticle in [[mainArticleView markedArticleRange] objectEnumerator])
 	{
-		NSEnumerator *e = [articleArray objectEnumerator];
-		id currentArticle;
-		
-		while ( (currentArticle = [e nextObject]) ) 
+		if ([currentArticle hasEnclosure])
 		{
-			if ([currentArticle hasEnclosure])
-			{
-				NSString * filename = [[currentArticle enclosure] lastPathComponent];
-				NSString * destPath = [DownloadManager fullDownloadPath:filename];
-				[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[currentArticle enclosure]];
-			}
+			NSString * filename = [[currentArticle enclosure] lastPathComponent];
+			NSString * destPath = [DownloadManager fullDownloadPath:filename];
+			[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[currentArticle enclosure]];
 		}
 	}
 }
@@ -1192,10 +1185,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)loadOpenTabs
 {
 	NSArray * tabLinks = [[Preferences standardPreferences] arrayForKey:MAPref_TabList];
-	NSEnumerator * enumerator = [tabLinks objectEnumerator];
-	NSString * tabLink;
 	
-	while ((tabLink = [enumerator nextObject]) != nil) {
+	for (NSString * tabLink in tabLinks)
+	{
 		[self createNewTab:([tabLink length] ? [NSURL URLWithString:tabLink] : nil) inBackground:YES];
 	}
 }
@@ -1454,11 +1446,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)initSortMenu
 {
 	NSMenu * sortMenu = [[[NSMenu alloc] initWithTitle:@"Sort By"] autorelease];
-	NSArray * fields = [db arrayOfFields];
-	NSEnumerator * enumerator = [fields objectEnumerator];
-	Field * field;
 	
-	while ((field = [enumerator nextObject]) != nil)
+	for (Field * field in [db arrayOfFields])
 	{
 		// Filter out columns we don't sort on. Later we should have an attribute in the
 		// field object itself based on which columns we can sort on.
@@ -1488,11 +1477,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)initColumnsMenu
 {
 	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
-	NSArray * fields = [db arrayOfFields];
-	NSEnumerator * enumerator = [fields objectEnumerator];
-	Field * field;
 	
-	while ((field = [enumerator nextObject]) != nil)
+	for (Field * field in [db arrayOfFields])
 	{
 		// Filter out columns we don't view in the article list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
@@ -1695,12 +1681,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	// Add the contents of the supportedEditors dictionary keys to the menu, sorted by key name.
 	NSArray * sortedMenuItems = [[supportedEditors allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	NSEnumerator *e = [sortedMenuItems objectEnumerator];
 	NSString * lastItem = nil;
 	int countOfItems = 0;
-	id currentItem;
 
-	while ((currentItem = [e nextObject]) != nil) 
+	for (id currentItem in sortedMenuItems)
 	{
 		// Only add the item if the application is present on the system.
 		if ( [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: [supportedEditors valueForKey:currentItem]] ) 
@@ -2530,11 +2514,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
 {
-	NSArray * toolbarButtons = [[mainWindow toolbar] visibleItems];
-	NSEnumerator * theEnumerator = [toolbarButtons objectEnumerator];
-	ToolbarItem * theItem;
-	
-	while ((theItem = [theEnumerator nextObject]) != nil)
+	for (ToolbarItem * theItem in [[mainWindow toolbar] visibleItems])
 	{
 		if ([[theItem itemIdentifier] isEqualToString:theIdentifier])
 			return theItem;
@@ -3227,6 +3207,7 @@ static CFStringRef percentEscape(NSString *string)
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
 	CFStringRef title;
 	CFStringRef link;
+	Article * currentArticle;
 	
 	// If the active tab is a web view, mail the URL ...
 	NSView<BaseView> * theView = [browserView activeTabItemView];
@@ -3248,12 +3229,9 @@ static CFStringRef percentEscape(NSString *string)
 		NSArray * articleArray = [mainArticleView markedArticleRange];	
 		if ([articleArray count] > 0) 
 		{
-			NSEnumerator *e = [articleArray objectEnumerator];
-			id currentArticle;
-			
 			if ([articleArray count] == 1)
 			{
-				currentArticle = [e nextObject];
+				currentArticle = [articleArray objectAtIndex:0];
 				title = percentEscape([currentArticle title]);
 				link = percentEscape([currentArticle link]);
 				mailtoLink = [NSMutableString stringWithFormat: @"mailto:?subject=%@&body=%@", title, link];
@@ -3263,7 +3241,7 @@ static CFStringRef percentEscape(NSString *string)
 			else
 			{
 				mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
-				while ( (currentArticle = [e nextObject]) )
+				for (currentArticle in [mainArticleView markedArticleRange])
 				{
 					title = percentEscape([currentArticle title]);
 					link = percentEscape([currentArticle link]);
@@ -3343,13 +3321,8 @@ static CFStringRef percentEscape(NSString *string)
 		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabItemViewTitle:[browserView activeTabItemView]] url:[theView viewLink] body:[NSApp currentSelection] author:@"" guid:@""];
 	else
 	{
-		// Get the currently selected articles from the ArticleView ...
-		NSArray * articleArray = [mainArticleView markedArticleRange];
-		NSEnumerator * e = [articleArray objectEnumerator];
-		id currentArticle;
-		
-		// ... and iterate over them.
-		while ((currentArticle = [e nextObject]) != nil) 
+		// Get the currently selected articles from the ArticleView and iterate over them.
+		for (Article * currentArticle in [mainArticleView markedArticleRange])
 			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] body:[NSApp currentSelection] author:[currentArticle author] guid:[currentArticle guid]];
 	}
 }

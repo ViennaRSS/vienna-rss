@@ -285,10 +285,8 @@ static DownloadManager * _sharedDownloadManager = nil;
 -(void)archiveDownloadsList
 {
 	NSMutableArray * listArray = [[NSMutableArray alloc] initWithCapacity:[downloadsList count]];
-	NSEnumerator * enumerator = [downloadsList objectEnumerator];
-	DownloadItem * item;
 
-	while ((item = [enumerator nextObject]) != nil)
+	for (DownloadItem * item in downloadsList)
 		[listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
 
 	[[Preferences standardPreferences] setArray:listArray forKey:MAPref_DownloadsList];
@@ -303,10 +301,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	NSArray * listArray = [[Preferences standardPreferences] arrayForKey:MAPref_DownloadsList];
 	if (listArray != nil)
 	{
-		NSEnumerator * enumerator = [listArray objectEnumerator];
-		NSData * dataItem;
-
-		while ((dataItem = [enumerator nextObject]) != nil)
+		for (NSData * dataItem in listArray)
 			[downloadsList addObject:[NSUnarchiver unarchiveObjectWithData:dataItem]];
 	}
 }

@@ -248,10 +248,7 @@
  */
 -(void)unarchiveState:(NSArray *)stateArray
 {
-	NSEnumerator * enumerator = [stateArray objectEnumerator];
-	NSDictionary * dict;
-	
-	while ((dict = [enumerator nextObject]) != nil)
+	for (NSDictionary * dict in stateArray)
 	{
 		int folderId = [[dict valueForKey:@"NodeID"] intValue];
 		TreeNode * node = [rootNode nodeFromID:folderId];
@@ -283,8 +280,7 @@
 	Folder * folder;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual)
 	{
-		NSEnumerator * enumerator = [listOfFolders objectEnumerator];
-		while ((folder = [enumerator nextObject]) != nil)
+		for (folder in listOfFolders)
 		{
 			int itemId = [folder itemId];
 			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:itemId];

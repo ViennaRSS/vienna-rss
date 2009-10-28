@@ -294,10 +294,9 @@
 -(void)saveOpenTabs
 {
 	NSMutableArray *tabLinks = [[NSMutableArray alloc] initWithCapacity:[self countOfTabs]];
-	NSEnumerator *enumerator = [[tabView tabViewItems] objectEnumerator];
-	NSTabViewItem *tabViewItem;
 	
-	while ((tabViewItem = [enumerator nextObject])) {
+	for (NSTabViewItem * tabViewItem in [tabView tabViewItems])
+	{
 		NSView<BaseView> * theView = [tabViewItem identifier];
 		NSString * tabLink = [theView viewLink];
 		if (tabLink != nil)
