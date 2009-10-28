@@ -73,10 +73,6 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
 	[table setMenu:downloadMenu];
 	[downloadMenu release];
-
-	// Set the metal background texture
-	backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"mainBackground.tiff"]];
-	[downloadWindow setBackgroundColor:backgroundColor];
 	
 	// Set Clear button caption
 	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
