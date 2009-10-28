@@ -27,8 +27,6 @@
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		478FE4540A0F42A300B37021 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
-		5250057C0DE9F33100C9E5A2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
-		52BA328A0DE9B02E0008B3E1 /* CurlGetDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
@@ -103,8 +101,6 @@
 		AA26F4F40604927300FE7994 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */; };
 		AA26F677060497BB00FE7994 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
-		AA2B6CF40C2E658400415851 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = AA785DBB0BF62AE60089DCF0 /* sqlite3.c */; };
-		AA2B6D250C2E679800415851 /* libSQLiteLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA2B6CE40C2E646100415851 /* libSQLiteLib.a */; };
 		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
 		AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */; };
 		AA31134D0902009300E80DF1 /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */; };
@@ -123,7 +119,6 @@
 		AA3F36E60C2F143100D5766B /* StdEnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3F36E40C2F143100D5766B /* StdEnclosureView.m */; };
 		AA3F7B4208711F6A00D2B96F /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
 		AA4AB5E108971B28006C843E /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
-		AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
 		AA4F6617062B94D200D4837C /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACFDEBB0604D4D20072D140 /* AppController.m */; };
 		AA51CBF908CFEA0F00DD6535 /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */; };
 		AA55E4A6086C6C8200D7DBFA /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */; };
@@ -147,7 +142,6 @@
 		AA5AB60B0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */; };
 		AA5AC2660C3ECAA000B2E14F /* SearchString.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AC2640C3ECAA000B2E14F /* SearchString.m */; };
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
-		AA610C1509EF6745005C6903 /* NewsParser.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AAA5686F09EE725B00C87343 /* NewsParser.framework */; };
 		AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		AA62D7FC0859ABEC0040C370 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		AA6321510885F0BB006382D3 /* comments.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA6321500885F0BB006382D3 /* comments.tiff */; };
@@ -186,9 +180,6 @@
 		AAA1E32A0852539500277128 /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAA1E3280852539500277128 /* GroupFolder.nib */; };
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
-		AAA56F2C09EF4FD100C87343 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
-		AAA56F2D09EF4FE100C87343 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
-		AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA5686F09EE725B00C87343 /* NewsParser.framework */; };
 		AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
 		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB076170A076BBE00A9F76A /* Carbon.framework */; };
@@ -244,6 +235,10 @@
 		B25E53E51067B54600BBF14C /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
+		B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
+		B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
+		B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
+		B283D5AA10986D1900A5CD72 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = AA785DBB0BF62AE60089DCF0 /* sqlite3.c */; };
 		B28C94780C3A896B008A09E5 /* mailLinkButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */; };
 		B28C95930C3A94F7008A09E5 /* smartFolderButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95920C3A94F7008A09E5 /* smartFolderButton.tiff */; };
 		B28C95950C3A950F008A09E5 /* popupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */; };
@@ -262,14 +257,6 @@
 			outputFiles = (
 			);
 		};
-		AAA56F5109EF533100C87343 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
-			fileType = sourcecode.c;
-			isEditable = 1;
-			outputFiles = (
-			);
-		};
 /* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
@@ -279,20 +266,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
 			remoteInfo = Vienna;
-		};
-		AA2B6CF70C2E658C00415851 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AA2B6CE30C2E646100415851;
-			remoteInfo = SQLiteLib;
-		};
-		AAA56F4409EF516C00C87343 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AAA5686E09EE725B00C87343;
-			remoteInfo = NewsParser;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -305,7 +278,6 @@
 			files = (
 				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in Copy Frameworks */,
 				478FE4540A0F42A300B37021 /* Sparkle.framework in Copy Frameworks */,
-				AA610C1509EF6745005C6903 /* NewsParser.framework in Copy Frameworks */,
 				AA62D7FC0859ABEC0040C370 /* Growl.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -336,8 +308,6 @@
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
-		52BA32880DE9B02E0008B3E1 /* CurlGetDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurlGetDate.h; sourceTree = "<group>"; };
-		52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurlGetDate.m; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		61975EB70B41E0A0001F65FF /* EmptyTrashWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTrashWarning.h; sourceTree = "<group>"; };
 		61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyTrashWarning.m; sourceTree = "<group>"; };
@@ -453,7 +423,6 @@
 		AA26F5B70604964000FE7994 /* URLHandlerCommand.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = URLHandlerCommand.h; sourceTree = "<group>"; };
 		AA26F676060497BB00FE7994 /* FoldersTree.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FoldersTree.m; sourceTree = "<group>"; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = trashFolder.tiff; sourceTree = "<group>"; };
-		AA2B6CE40C2E646100415851 /* libSQLiteLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSQLiteLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = Preferences.plist; sourceTree = "<group>"; };
 		AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NewPreferencesController.h; sourceTree = "<group>"; };
 		AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NewPreferencesController.m; sourceTree = "<group>"; };
@@ -727,8 +696,6 @@
 		AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewExtensions.m; sourceTree = "<group>"; };
 		AAA3AF0706338A00006735EB /* SearchFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFolder.h; sourceTree = "<group>"; };
 		AAA3AF0806338A00006735EB /* SearchFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFolder.m; sourceTree = "<group>"; };
-		AAA5686F09EE725B00C87343 /* NewsParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NewsParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAA5687009EE725B00C87343 /* NewsParser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NewsParser-Info.plist"; sourceTree = "<group>"; };
 		AAA5814F09AA52B400602469 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAA7F5E909D50102007D0760 /* ArticleFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleFilter.h; sourceTree = "<group>"; };
 		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
@@ -896,8 +863,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA2B6D250C2E679800415851 /* libSQLiteLib.a in Frameworks */,
-				AAA5720D09EF5F6100C87343 /* NewsParser.framework in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
 				AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */,
@@ -910,14 +875,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AAA5686D09EE725B00C87343 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5250057C0DE9F33100C9E5A2 /* Cocoa.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -925,7 +882,6 @@
 			isa = PBXGroup;
 			children = (
 				478FE4400A0F429700B37021 /* Sparkle.framework */,
-				AAA5686F09EE725B00C87343 /* NewsParser.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */,
 				AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */,
@@ -951,7 +907,6 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
-				AA2B6CE40C2E646100415851 /* libSQLiteLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -961,7 +916,6 @@
 			children = (
 				AAC022070E898A0700BA9002 /* Documents */,
 				AA2B6CEF0C2E653C00415851 /* SQLiteLib */,
-				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AAA568BB09EE773200C87343 /* Main */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
@@ -1310,14 +1264,12 @@
 		AAA5687809EE733500C87343 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				52BA32880DE9B02E0008B3E1 /* CurlGetDate.h */,
-				52BA32890DE9B02E0008B3E1 /* CurlGetDate.m */,
-				AA328863084700B700A7AD5A /* XMLParser.h */,
 				AA328864084700B700A7AD5A /* XMLParser.m */,
-				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
 				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
-				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
 				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
+				AA328863084700B700A7AD5A /* XMLParser.h */,
+				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
+				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1325,6 +1277,7 @@
 		AAA568BB09EE773200C87343 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AAED82F40A0379FE00ED56E5 /* DisclosableView */,
 				AA26F478060490F400FE7994 /* SQLite */,
 				AA4F657B062B873100D4837C /* Extensions */,
@@ -1343,7 +1296,6 @@
 		AAA56F2409EF4EFC00C87343 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AAA5687009EE725B00C87343 /* NewsParser-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1445,46 +1397,12 @@
 				AA72C5140855314000E2121C /* PBXBuildRule */,
 			);
 			dependencies = (
-				AAA56F4509EF516C00C87343 /* PBXTargetDependency */,
-				AA2B6CF80C2E658C00415851 /* PBXTargetDependency */,
 			);
 			name = Vienna;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Vienna;
 			productReference = 8D15AC370486D014006FF6A4 /* Vienna.app */;
 			productType = "com.apple.product-type.application";
-		};
-		AA2B6CE30C2E646100415851 /* SQLiteLib */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AA2B6CE50C2E648000415851 /* Build configuration list for PBXNativeTarget "SQLiteLib" */;
-			buildPhases = (
-				AA2B6CE10C2E646100415851 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SQLiteLib;
-			productName = SQLiteLib;
-			productReference = AA2B6CE40C2E646100415851 /* libSQLiteLib.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		AAA5686E09EE725B00C87343 /* NewsParser */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AAA5687209EE726000C87343 /* Build configuration list for PBXNativeTarget "NewsParser" */;
-			buildPhases = (
-				AAA5686C09EE725B00C87343 /* Sources */,
-				AAA5686D09EE725B00C87343 /* Frameworks */,
-			);
-			buildRules = (
-				AAA56F5109EF533100C87343 /* PBXBuildRule */,
-			);
-			dependencies = (
-			);
-			name = NewsParser;
-			productName = NewsParser;
-			productReference = AAA5686F09EE725B00C87343 /* NewsParser.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -1528,8 +1446,6 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
-				AAA5686E09EE725B00C87343 /* NewsParser */,
-				AA2B6CE30C2E646100415851 /* SQLiteLib */,
 				52BA63FC0DE9E2E10008B3E1 /* Release */,
 			);
 		};
@@ -2073,6 +1989,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */,
+				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
+				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				AA26F4850604911B00FE7994 /* SQLDatabase.m in Sources */,
 				AA26F4870604911B00FE7994 /* SQLResult.m in Sources */,
@@ -2147,25 +2066,7 @@
 				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 				AA5AC2660C3ECAA000B2E14F /* SearchString.m in Sources */,
 				AA5814990C4972BB003D0916 /* SearchPanel.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AA2B6CE10C2E646100415851 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AA2B6CF40C2E658400415851 /* sqlite3.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAA5686C09EE725B00C87343 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AAA56F2D09EF4FE100C87343 /* XMLParser.m in Sources */,
-				AAA56F2C09EF4FD100C87343 /* RichXMLParser.m in Sources */,
-				AA4C8DDC0B9B2A1F00E0C9B8 /* XMLTag.m in Sources */,
-				52BA328A0DE9B02E0008B3E1 /* CurlGetDate.m in Sources */,
+				B283D5AA10986D1900A5CD72 /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2176,16 +2077,6 @@
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* Vienna */;
 			targetProxy = 52BA64040DE9E3020008B3E1 /* PBXContainerItemProxy */;
-		};
-		AA2B6CF80C2E658C00415851 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AA2B6CE30C2E646100415851 /* SQLiteLib */;
-			targetProxy = AA2B6CF70C2E658C00415851 /* PBXContainerItemProxy */;
-		};
-		AAA56F4509EF516C00C87343 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AAA5686E09EE725B00C87343 /* NewsParser */;
-			targetProxy = AAA56F4409EF516C00C87343 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2569,33 +2460,6 @@
 			};
 			name = Deployment;
 		};
-		AA2B6CE60C2E648000415851 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=0",
-				);
-				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = SQLiteLib;
-			};
-			name = Development;
-		};
-		AA2B6CE70C2E648000415851 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=0",
-					NDEBUG,
-				);
-				INSTALL_PATH = /usr/local/lib;
-				PRODUCT_NAME = SQLiteLib;
-				STRIP_INSTALLED_PRODUCT = YES;
-			};
-			name = Deployment;
-		};
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2647,6 +2511,10 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				OTHER_LDFLAGS = (
+					"-L/usr/lib",
+					"-lcurl",
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				VIENNA_CHANGELOG_SUFFIX = "";
@@ -2672,44 +2540,16 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				OTHER_LDFLAGS = (
+					"-L/usr/lib",
+					"-lcurl",
+				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				SEPARATE_STRIP = YES;
 				VIENNA_CHANGELOG_SUFFIX = "";
 				VIENNA_VERSION_NUMBER = 2.4.0;
 				WARNING_CFLAGS = "-Wall";
-			};
-			name = Deployment;
-		};
-		AAA5687309EE726000C87343 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				INFOPLIST_FILE = "NewsParser-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = "-lcurl";
-				PRODUCT_NAME = NewsParser;
-			};
-			name = Development;
-		};
-		AAA5687409EE726000C87343 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				INFOPLIST_FILE = "NewsParser-Info.plist";
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = "-lcurl";
-				PRODUCT_NAME = NewsParser;
-				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Deployment;
 		};
@@ -2721,15 +2561,6 @@
 			buildConfigurations = (
 				52BA64020DE9E2FF0008B3E1 /* Development */,
 				52BA64030DE9E2FF0008B3E1 /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		AA2B6CE50C2E648000415851 /* Build configuration list for PBXNativeTarget "SQLiteLib" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA2B6CE60C2E648000415851 /* Development */,
-				AA2B6CE70C2E648000415851 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -2748,15 +2579,6 @@
 			buildConfigurations = (
 				AA4F9AB70855422400C18279 /* Development */,
 				AA4F9AB80855422400C18279 /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		AAA5687209EE726000C87343 /* Build configuration list for PBXNativeTarget "NewsParser" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AAA5687309EE726000C87343 /* Development */,
-				AAA5687409EE726000C87343 /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
