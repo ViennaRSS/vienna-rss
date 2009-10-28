@@ -26,6 +26,7 @@
 
 // Functions
 -(BOOL)setData:(NSData *)data;
++(NSCalendarDate *)getDateFromString:(NSString *)dateString;
 -(id)initWithEmptyTree;
 -(BOOL)hasValidTree;
 -(int)countOfChildren;

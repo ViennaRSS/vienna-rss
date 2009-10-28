@@ -19,7 +19,7 @@
 
 #import "XMLParser.h"
 #import "StringExtensions.h"
-#import "CurlGetDate.h"
+#import <curl/curl.h>
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -433,6 +433,21 @@
 	return newString;
 }
 
++(NSCalendarDate *)getDateFromString:(NSString *)dateString
+{
+	NSCalendarDate * date = nil;
+	const char * asciiDate = [dateString cStringUsingEncoding:NSASCIIStringEncoding]; // curl only accepts English ASCII
+	if (asciiDate != NULL)
+	{
+		time_t theTime = curl_getdate(asciiDate, NULL);
+		if (theTime != -1 )
+		{
+			date = [NSCalendarDate dateWithTimeIntervalSince1970:theTime];
+		}
+	}
+	return date;
+}
+
 /* parseXMLDate
  * Parse a date in an XML header into an NSCalendarDate. This is horribly expensive and needs
  * to be replaced with a parser that can handle these formats:
@@ -474,7 +489,7 @@
 		}
 	}
 
-	NSCalendarDate * curlDate = [CurlGetDate getDateFromString:dateString];
+	NSCalendarDate * curlDate = [self getDateFromString:dateString];
 	if (curlDate != nil)
 		return curlDate;
 
