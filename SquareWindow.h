@@ -20,6 +20,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface NSWindow (Private)
+-(void)setBottomCornerRounded:(BOOL)rounded;
+@end
+
 @interface SquareWindow : NSWindow {
 }
 @end
