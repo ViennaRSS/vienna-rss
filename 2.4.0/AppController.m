@@ -28,6 +28,7 @@
 #import "RefreshManager.h"
 #import "StringExtensions.h"
 #import "SplitViewExtensions.h"
+#import "SquareWindow.h"
 #import "ViewExtensions.h"
 #import "BrowserView.h"
 #import "SearchFolder.h"
@@ -332,7 +333,11 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		
 		// If the statusbar is hidden, also hide the highlight line on its top.
 		if (![self isStatusBarVisible])
+		{
+			if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
+				[mainWindow setBottomCornerRounded:NO];
 			[cosmeticStatusBarHighlightLine setHidden:YES];
+		}
 		
 		// Select the folder and article from the last session
 		Preferences * prefs = [Preferences standardPreferences];
@@ -3453,6 +3458,10 @@ static CFStringRef percentEscape(NSString *string)
 				// we start hiding the view. Looks cleaner.
 				[statusText setHidden:YES];
 				[cosmeticStatusBarHighlightLine setHidden:YES];
+				if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
+				{
+					[mainWindow setBottomCornerRounded:NO];
+				}
 			}
 			[splitView1 resizeViewWithAnimation:viewSize withTag:MA_ViewTag_Statusbar];
 		}
@@ -3489,6 +3498,10 @@ static CFStringRef percentEscape(NSString *string)
 		// we have made the view visible. Again, looks cleaner.
 		[statusText setHidden:NO];
 		[cosmeticStatusBarHighlightLine setHidden:NO];
+		if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
+		{
+			[mainWindow setBottomCornerRounded:YES];
+		}
 		return;
 	}
 	if (viewTag == MA_ViewTag_Filterbar && [self isFilterBarVisible])
