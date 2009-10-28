@@ -19,12 +19,6 @@
 //
 #import "SquareWindow.h"
 
-// Use this to get the square bottom windows that Safari uses in its
-// Downloads window.
-@interface NSWindow (Private)
-	-(void)setBottomCornerRounded:(BOOL)rounded;
-@end
-
 @implementation SquareWindow
 
 /* initWithContentRect
