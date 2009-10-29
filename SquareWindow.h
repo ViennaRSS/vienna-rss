@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSWindow (Private)
+@interface NSWindow (ViennaSquareWindow)
 -(void)setBottomCornerRounded:(BOOL)rounded;
 @end
 
