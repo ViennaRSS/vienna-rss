@@ -304,7 +304,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[backgroundColor release];
 	[super dealloc];
 }
 @end
