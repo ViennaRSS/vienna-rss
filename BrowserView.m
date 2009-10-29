@@ -79,7 +79,17 @@
 {
 	[newPrimaryTabItemView retain];
 	
-	NSTabViewItem * item = [tabView tabViewItemAtIndex:0];
+	NSTabViewItem * item;
+	if (primaryTabItemView == nil)
+	{
+		// This should only be called on launch
+		item = [tabView tabViewItemAtIndex:0];
+	}
+	else
+	{
+		item = [tabView tabViewItemWithIdentifier:primaryTabItemView];
+	}
+	
 	[item setIdentifier:newPrimaryTabItemView];
 	[item setView:newPrimaryTabItemView];
 	
@@ -151,8 +161,12 @@
 {
 	int count = [tabView numberOfTabViewItems];
 	int i;
-	for ((i = (count - 1)); i > 0; i--) {
-		[tabView removeTabViewItem:[tabView tabViewItemAtIndex:i]];
+	for ((i = (count - 1)); i >= 0; i--) {
+		NSTabViewItem * item = [tabView tabViewItemAtIndex:i];
+		if ([item identifier] != primaryTabItemView)
+		{
+			[tabView removeTabViewItem:item];
+		}
 	}
 }
 
@@ -176,18 +190,18 @@
 
 - (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
-	if (oldIndex > 0)
+	if ([tabViewItem identifier] == primaryTabItemView)
 	{
+		return NO;
+	}
+	else
+	{
+		int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
 		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
 			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
 		}
 		
 		return YES;
-	}
-	else
-	{
-		return NO;
 	}
 }
 
