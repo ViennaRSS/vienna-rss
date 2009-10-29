@@ -1129,7 +1129,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)downloadEnclosure:(id)sender
 {
-	for (Article * currentArticle in [[mainArticleView markedArticleRange] objectEnumerator])
+	for (Article * currentArticle in [mainArticleView markedArticleRange])
 	{
 		if ([currentArticle hasEnclosure])
 		{
@@ -3246,7 +3246,7 @@ static CFStringRef percentEscape(NSString *string)
 			else
 			{
 				mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
-				for (currentArticle in [mainArticleView markedArticleRange])
+				for (currentArticle in articleArray)
 				{
 					title = percentEscape([currentArticle title]);
 					link = percentEscape([currentArticle link]);
