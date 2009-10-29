@@ -2458,6 +2458,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
+				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = Vienna;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2475,6 +2476,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
+				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = Vienna;
 				STRIP_INSTALLED_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -2495,10 +2497,6 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				OTHER_LDFLAGS = (
-					"-L/usr/lib",
-					"-lcurl",
-				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				VIENNA_CHANGELOG_SUFFIX = "";
@@ -2524,10 +2522,6 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				OTHER_LDFLAGS = (
-					"-L/usr/lib",
-					"-lcurl",
-				);
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				SEPARATE_STRIP = YES;
