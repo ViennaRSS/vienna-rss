@@ -158,13 +158,6 @@ static Database * _sharedDatabase = nil;
 		return NO;
 	}
 	
-	// Backup the database before any upgrade
-	if (databaseVersion < MA_Current_DB_Version && databaseVersion >= MA_Min_Supported_DB_Version)
-	{
-		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-		[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
-	}
-
 	// Create the tables when the database is empty.
 	if (databaseVersion == 0)
 	{
@@ -258,7 +251,25 @@ static Database * _sharedDatabase = nil;
 		
 		[self commitTransaction];
 	}
-
+	else if (databaseVersion < MA_Current_DB_Version)
+	{
+		NSAlert * alert = [[NSAlert alloc] init];
+		[alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
+		[alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
+		[alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
+		[alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
+		NSInteger modalReturn = [alert runModal];
+		[alert release];
+		if (modalReturn == NSAlertSecondButtonReturn)
+		{
+			return NO;
+		}
+		
+		// Backup the database before any upgrade
+		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
+		[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+	}
+		
 	// Upgrade to rev 13.
 	// Add createddate field to the messages table and initialise it to a date in the past.
 	// Create an index on the message_id column.
