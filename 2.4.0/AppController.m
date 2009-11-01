@@ -160,125 +160,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[mainWindow setTitle:[self appName]];
 	[NSApp setDelegate:self];
 	[mainWindow setMinSize: NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height)];
-
-	// Register a bunch of notifications
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleFolderSelection:) name:@"MA_Notify_FolderSelectionChange" object:nil];
-	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
-	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleTabCountChange:) name:@"MA_Notify_TabCountChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
-	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-
-	// Init the progress counter and status bar.
-	[self setStatusMessage:nil persist:NO];
-	
-	// Initialize the database
-	if ((db = [Database sharedDatabase]) == nil)
-	{
-		[NSApp terminate:nil];
-		return;
-	}
-	
-	// Create the toolbar.
-	NSToolbar * toolbar = [[[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"] autorelease];
-
-	// Set the appropriate toolbar options. We are the delegate, customization is allowed,
-	// changes made by the user are automatically saved and we start in icon mode.
-	[toolbar setDelegate:self];
-	[toolbar setAllowsUserCustomization:YES];
-	[toolbar setAutosavesConfiguration:YES]; 
-	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
-	[toolbar setShowsBaselineSeparator:NO];
-	[mainWindow setToolbar:toolbar];
-
-	// Give the status bar an embossed look
-	[[statusText cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	
-	// Run the auto-expire now
-	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
-	
-	// Preload dictionary of standard URLs
-	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
-	if (pathToPList != nil)
-		standardURLs = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
-	
-	// Initialize the Sort By and Columns menu
-	[self initSortMenu];
-	[self initColumnsMenu];
-	[self initBlogWithMenu];
-	[self initFiltersMenu];
-
-	// Initialize the Styles menu.
-	[stylesMenu setSubmenu:[self getStylesMenu]];
-
-	// Restore the splitview layout
-	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
-	[splitView1 setDelegate:self];
-	
-	// Show the current unread count on the app icon
-	originalIcon = [[NSApp applicationIconImage] copy];
-	[self showUnreadCountOnApplicationIconAndWindowTitle];
-	
-	// Set alternate in main menu for opening pages, and check for correct title of menu item
-	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
-	NSMenuItem * alternateItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (alternateItem != nil)
-	{
-		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
-		[alternateItem setAlternate:YES];
-	}
-	alternateItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
-	if (alternateItem != nil)
-	{
-		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
-		[alternateItem setAlternate:YES];
-	}
-	[self updateAlternateMenuTitle];
-	
-	// Create a menu for the search field
-	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
-	// item is localised though.	
-	[[searchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
-	[[filterSearchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
-
-	// Set the placeholder string for the global search field
-	[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
-
-	// Add Scripts menu if we have any scripts
-	if (!hasOSScriptsMenu())
-		[self initScriptsMenu];
-	
-	// Show/hide the status bar based on the last session state
-	[self setStatusBarState:[prefs showStatusBar] withAnimation:NO];
-
-	// Add the app to the status bar if needed.
-	[self showAppInStatusBar];
-	
-	// Use Growl if it is installed
-	[GrowlApplicationBridge setGrowlDelegate:self];
-	
-	// Start the check timer
-	[self handleCheckFrequencyChange:nil];
-	
-	// Register to be informed when the system awakes from sleep
-	[self installSleepHandler];
-	
-	// Register to be notified when the scripts folder changes.
-	if (!hasOSScriptsMenu())
-		[self installScriptsFolderWatcher];
-	
-	// Fix up the Close commands
-	[self updateCloseCommands];
-
-	// Do safe initialisation. 	 
-	[self doSafeInitialisation];
 	
 	// Retain views which might be removed from the toolbar and therefore released;
 	// we will need them if they are added back later.
@@ -500,6 +381,125 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
 	Preferences * prefs = [Preferences standardPreferences];
+	
+	// Register a bunch of notifications
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(handleFolderSelection:) name:@"MA_Notify_FolderSelectionChange" object:nil];
+	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
+	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
+	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
+	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleTabCountChange:) name:@"MA_Notify_TabCountChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
+	
+	// Init the progress counter and status bar.
+	[self setStatusMessage:nil persist:NO];
+	
+	// Initialize the database
+	if ((db = [Database sharedDatabase]) == nil)
+	{
+		[NSApp terminate:nil];
+		return;
+	}
+	
+	// Create the toolbar.
+	NSToolbar * toolbar = [[[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"] autorelease];
+	
+	// Set the appropriate toolbar options. We are the delegate, customization is allowed,
+	// changes made by the user are automatically saved and we start in icon mode.
+	[toolbar setDelegate:self];
+	[toolbar setAllowsUserCustomization:YES];
+	[toolbar setAutosavesConfiguration:YES]; 
+	[toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+	[toolbar setShowsBaselineSeparator:NO];
+	[mainWindow setToolbar:toolbar];
+	
+	// Give the status bar an embossed look
+	[[statusText cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	
+	// Run the auto-expire now
+	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
+	
+	// Preload dictionary of standard URLs
+	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
+	if (pathToPList != nil)
+		standardURLs = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
+	
+	// Initialize the Sort By and Columns menu
+	[self initSortMenu];
+	[self initColumnsMenu];
+	[self initBlogWithMenu];
+	[self initFiltersMenu];
+	
+	// Initialize the Styles menu.
+	[stylesMenu setSubmenu:[self getStylesMenu]];
+	
+	// Restore the splitview layout
+	[splitView1 setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView1Positions"]];	
+	[splitView1 setDelegate:self];
+	
+	// Show the current unread count on the app icon
+	originalIcon = [[NSApp applicationIconImage] copy];
+	[self showUnreadCountOnApplicationIconAndWindowTitle];
+	
+	// Set alternate in main menu for opening pages, and check for correct title of menu item
+	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
+	NSMenuItem * alternateItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	if (alternateItem != nil)
+	{
+		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
+		[alternateItem setAlternate:YES];
+	}
+	alternateItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	if (alternateItem != nil)
+	{
+		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
+		[alternateItem setAlternate:YES];
+	}
+	[self updateAlternateMenuTitle];
+	
+	// Create a menu for the search field
+	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
+	// item is localised though.	
+	[[searchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
+	[[filterSearchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
+	
+	// Set the placeholder string for the global search field
+	[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
+	
+	// Add Scripts menu if we have any scripts
+	if (!hasOSScriptsMenu())
+		[self initScriptsMenu];
+	
+	// Show/hide the status bar based on the last session state
+	[self setStatusBarState:[prefs showStatusBar] withAnimation:NO];
+	
+	// Add the app to the status bar if needed.
+	[self showAppInStatusBar];
+	
+	// Use Growl if it is installed
+	[GrowlApplicationBridge setGrowlDelegate:self];
+	
+	// Start the check timer
+	[self handleCheckFrequencyChange:nil];
+	
+	// Register to be informed when the system awakes from sleep
+	[self installSleepHandler];
+	
+	// Register to be notified when the scripts folder changes.
+	if (!hasOSScriptsMenu())
+		[self installScriptsFolderWatcher];
+	
+	// Fix up the Close commands
+	[self updateCloseCommands];
+	
+	// Do safe initialisation. 	 
+	[self doSafeInitialisation];
 	
 	[self showMainWindow:self];
 
