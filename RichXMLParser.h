@@ -26,14 +26,12 @@
 	NSString * link;
 	NSString * guid;
 	NSDate * date;
-	NSString * summary;
 	NSString * description;
 	NSString * enclosure;
 }
 
 // Accessor functions
 -(NSString *)title;
--(NSString *)summary;
 -(NSString *)description;
 -(NSString *)author;
 -(NSString *)guid;

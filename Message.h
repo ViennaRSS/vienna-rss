@@ -108,7 +108,6 @@ extern NSString * MA_Field_HasEnclosure;
 -(void)setDate:(NSDate *)newDate;
 -(void)setCreatedDate:(NSDate *)newCreatedDate;
 -(void)setBody:(NSString *)newText;
--(void)setSummary:(NSString *)newSummary;
 -(void)setEnclosure:(NSString *)newEnclosure;
 -(void)setStatus:(int)newStatus;
 -(void)setHasEnclosure:(BOOL)flag;

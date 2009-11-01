@@ -2275,7 +2275,6 @@ static Database * _sharedDatabase = nil;
 	{
         Article * article;
         NSString * text;
-        BOOL needSummary = [[self fieldByName:MA_Field_Summary] visible];
 
 		for (SQLRow * row in [results rowEnumerator])
 		{
@@ -2295,7 +2294,6 @@ static Database * _sharedDatabase = nil;
 			[article setParentId:[[row stringForColumn:@"parent_id"] intValue]];
             text = [row stringForColumn:@"text"];
 			[article setBody:text];
-			[article setSummary:(needSummary ? [text summaryTextFromHTML] : @"")];
 			if (folder == nil || ![article isDeleted] || IsTrashFolder(folder))
 				[newArray addObject:article];
 			[folder addArticleToCache:article];

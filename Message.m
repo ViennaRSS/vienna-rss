@@ -110,13 +110,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(void)setBody:(NSString *)newText
 {
 	[articleData setObject:newText forKey:MA_Field_Text];
-}
-
-/* setSummary
- */
--(void)setSummary:(NSString *)newSummary
-{
-	[articleData setObject:newSummary forKey:MA_Field_Summary];
+	[articleData removeObjectForKey:MA_Field_Summary];
 }
 
 /* setEnclosure
@@ -234,7 +228,18 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)guid				{ return [articleData objectForKey:MA_Field_GUID]; }
 -(int)parentId					{ return [[articleData objectForKey:MA_Field_Parent] intValue]; }
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
--(NSString *)summary			{ return [articleData objectForKey:MA_Field_Summary]; }
+-(NSString *)summary
+{
+	NSString * summary = [articleData objectForKey:MA_Field_Summary];
+	if (summary == nil)
+	{
+		summary = [[articleData objectForKey:MA_Field_Text] summaryTextFromHTML];
+		if (summary == nil)
+			summary = @"";
+		[articleData setObject:summary forKey:MA_Field_Summary];
+	}
+	return summary;
+}
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 -(NSDate *)createdDate			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
 -(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }

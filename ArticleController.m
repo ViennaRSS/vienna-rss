@@ -843,17 +843,6 @@
 	articleToPreserve = article;
 }
 
-/* createArticleSummaries
- * Creates article summaries from the article text.
- */
--(void)createArticleSummaries
-{
-	for (Article * theArticle in folderArrayOfArticles)
-    {
-        [theArticle setSummary:[[theArticle body] summaryTextFromHTML]];
-    }
-}
-
 /* dealloc
  * Clean up behind us.
  */

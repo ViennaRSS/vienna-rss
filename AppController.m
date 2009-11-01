@@ -2118,8 +2118,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Field * field = [menuItem representedObject];
 	
 	[field setVisible:![field visible]];
-	if ([[field name] isEqualToString:MA_Field_Summary] && [field visible])
-		[articleController createArticleSummaries];
 	[mainArticleView updateVisibleColumns];
 	[mainArticleView saveTableSettings];
 }
