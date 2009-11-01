@@ -422,9 +422,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Give the status bar an embossed look
 	[[statusText cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
-	// Run the auto-expire now
-	[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
-	
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
 	if (pathToPList != nil)
