@@ -517,6 +517,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag
 {
+	if (!didCompleteInitialisation)
+		return NO;
+	
 	[self showMainWindow:self];
 	if (emptyTrashWarning != nil)
 		[emptyTrashWarning showWindow:self];
