@@ -545,6 +545,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NSTerminateCancel;
 	}
 	
+	if (!didCompleteInitialisation)
+	{
+		return NSTerminateNow;
+	}
+	
 	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
 	{
 		case MA_EmptyTrash_None: break;
