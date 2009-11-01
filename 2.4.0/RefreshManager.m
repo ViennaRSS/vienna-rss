@@ -737,7 +737,6 @@ typedef enum {
 				[article setFolderId:folderId];
 				[article setAuthor:[newsItem author]];
 				[article setBody:[newsItem description]];
-				[article setSummary:[newsItem summary]];
 				[article setTitle:[newsItem title]];
 				[article setLink:[newsItem link]];
 				[article setDate:articleDate];

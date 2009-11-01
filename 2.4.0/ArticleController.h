@@ -77,5 +77,4 @@
 -(BOOL)canGoForward;
 -(BOOL)canGoBack;
 -(void)setArticleToPreserve:(Article *)article;
--(void)createArticleSummaries;
 @end

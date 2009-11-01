@@ -29,7 +29,6 @@
 	-(void)setDate:(NSDate *)newDate;
 	-(void)setGuid:(NSString *)newGuid;
 	-(void)setLink:(NSString *)newLink;
-	-(void)setSummary:(NSString *)newSummary;
 	-(void)setEnclosure:(NSString *)newEnclosure;
 @end
 
@@ -66,7 +65,6 @@
 		[self setGuid:@""];
 		[self setDate:nil];
 		[self setLink:@""];
-		[self setSummary:@""];
 		[self setEnclosure:@""];
 	}
 	return self;
@@ -100,16 +98,6 @@
 	[newDescription retain];
 	[description release];
 	description = newDescription;
-}
-
-/* setSummary
- * Set the item summary
- */
--(void)setSummary:(NSString *)newSummary
-{
-	[newSummary retain];
-	[summary release];
-	summary = newSummary;
 }
 
 /* setAuthor
@@ -168,14 +156,6 @@
 	return description;
 }
 
-/* summary
- * Returns the item summary
- */
--(NSString *)summary
-{
-	return summary;
-}
-
 /* author
  * Returns the item author
  */
@@ -224,7 +204,6 @@
 	[guid release];
 	[title release];
 	[description release];
-	[summary release];
 	[author release];
 	[date release];
 	[link release];
@@ -787,9 +766,6 @@
 			[newItem setDescription:SafeString(articleBody)];
 			[articleBody release];
 
-			// Synthesize a summary from the description
-			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
-
 			// Derive any missing title
 			[self ensureTitle:newItem];
 			
@@ -1058,9 +1034,6 @@
 			[articleBody fixupRelativeImgTags:entryBase];
 			[newItem setDescription:SafeString(articleBody)];
 			[articleBody release];
-
-			// Synthesize a summary from the description
-			[newItem setSummary:[[newItem description] summaryTextFromHTML]];
 			
 			// Derive any missing title
 			[self ensureTitle:newItem];
