@@ -500,6 +500,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
 	Preferences * prefs = [Preferences standardPreferences];
+	
+	[self showMainWindow:self];
 
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
