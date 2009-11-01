@@ -8,10 +8,10 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1227"/>
-			<integer value="1288"/>
-			<integer value="1300"/>
 			<integer value="1155"/>
+			<integer value="1300"/>
+			<integer value="1288"/>
+			<integer value="1227"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -41,7 +41,7 @@
 				<int key="NSWindowStyleMask">4367</int>
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{302, 347}, {942, 625}}</string>
-				<int key="NSWTFlags">1886912512</int>
+				<int key="NSWTFlags">1618477056</int>
 				<string key="NSWindowTitle">Vienna</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<object class="NSMutableString" key="NSViewClass">
@@ -6446,7 +6446,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>{{4, 269}, {942, 625}}</string>
 					<string>{{4, 269}, {942, 625}}</string>
 					<reference ref="5"/>
-					<reference ref="5"/>
+					<boolean value="NO"/>
 					<reference ref="5"/>
 					<string>{213, 107}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -7213,6 +7213,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSWindow</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">SquareWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
