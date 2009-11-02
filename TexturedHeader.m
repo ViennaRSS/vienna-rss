@@ -72,7 +72,7 @@
 {
 	[attributedStringValue release];
 	attributedStringValue = [[NSAttributedString alloc] initWithString:newStringValue];
-	[self display];
+	[self setNeedsDisplay:YES];
 }
 
 /* attributedStringValue
