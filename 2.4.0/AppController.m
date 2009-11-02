@@ -3561,6 +3561,11 @@ static CFStringRef percentEscape(NSString *string)
 		*validateFlag = ![db readOnly] && isAnyArticleView && isMainWindowVisible && [db countOfUnread] > 0;
 		return YES;
 	}
+	if (theAction == @selector(showXMLSource:))
+	{
+		*validateFlag = ![db readOnly] && isAnyArticleView && isMainWindowVisible;
+		return YES;
+	}	
 	if (theAction == @selector(getInfo:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
