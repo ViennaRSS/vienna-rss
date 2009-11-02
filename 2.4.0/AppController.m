@@ -35,6 +35,7 @@
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
 #import "ViennaApp.h"
+#import "XMLSourceWindow.h"
 #import "ActivityLog.h"
 #import "BrowserPaneTemplate.h"
 #import "Constants.h"
@@ -2679,6 +2680,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self clearUndoStack];
 	}
 }
+
+/* showXMLSource
+ * Show the Downloads window, bringing it to the front if necessary.
+ */
+-(IBAction)showXMLSource:(id)sender
+{
+	if (sourceWindow == nil)
+		sourceWindow = [[XMLSourceWindow alloc] init];
+	[[sourceWindow window] makeKeyAndOrderFront:sender];
+}
+
 
 /* showDownloadsWindow
  * Show the Downloads window, bringing it to the front if necessary.

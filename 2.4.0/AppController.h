@@ -24,6 +24,7 @@
 #import "ActivityViewer.h"
 #import <Growl/GrowlApplicationBridge.h>
 #import "DownloadWindow.h"
+#import "XMLSourceWindow.h"
 #import "FilterView.h"
 #import "PopupButton.h"
 
@@ -80,6 +81,7 @@
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
+	XMLSourceWindow * sourceWindow;
 	
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;
@@ -120,6 +122,7 @@
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
 -(IBAction)editFolder:(id)sender;
+-(IBAction)showXMLSource:(id)sender;
 -(IBAction)showAcknowledgements:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
 -(IBAction)viewArticlePage:(id)sender;
