@@ -48,7 +48,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
-				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
+				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="530452939">
 					<reference key="NSNextResponder"/>
@@ -68,7 +68,7 @@
 										<object class="NSTableView" id="327475735">
 											<reference key="NSNextResponder" ref="730188776"/>
 											<int key="NSvFlags">256</int>
-											<string key="NSFrameSize">{315, 384}</string>
+											<string key="NSFrameSize">{315, 386}</string>
 											<reference key="NSSuperview" ref="730188776"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="_NSCornerView" key="NSCornerView">
@@ -121,7 +121,7 @@
 															<string key="NSColorName">controlBackgroundColor</string>
 															<object class="NSColor" key="NSColor">
 																<int key="NSColorSpace">3</int>
-																<bytes key="NSWhite">MC42NjY2NjY2ODY1AA</bytes>
+																<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 															</object>
 														</object>
 														<object class="NSColor" key="NSTextColor">
@@ -162,7 +162,7 @@
 											<int key="NSTableViewDraggingDestinationStyle">0</int>
 										</object>
 									</object>
-									<string key="NSFrame">{{1, 1}, {315, 384}}</string>
+									<string key="NSFrame">{{1, 1}, {315, 386}}</string>
 									<reference key="NSSuperview" ref="982972537"/>
 									<reference key="NSNextKeyView" ref="327475735"/>
 									<reference key="NSDocView" ref="327475735"/>
@@ -189,7 +189,7 @@
 									<double key="NSPercent">0.9496644139289856</double>
 								</object>
 							</object>
-							<string key="NSFrame">{{-1, 24}, {317, 386}}</string>
+							<string key="NSFrame">{{-1, 24.5}, {317, 388}}</string>
 							<reference key="NSSuperview" ref="530452939"/>
 							<reference key="NSNextKeyView" ref="730188776"/>
 							<int key="NSsFlags">530</int>
@@ -293,7 +293,7 @@
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{213, 129}</string>
-				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
+				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
