@@ -70,7 +70,12 @@
 		NSMutableString *syntaxHighlighter = [NSMutableString stringWithContentsOfFile:pathToSyntaxHighlighter encoding:NSUTF8StringEncoding error:NULL];
 		if (syntaxHighlighter != nil)
 		{
-			[syntaxHighlighter replaceString:@"$XMLSourceData" withString:xmlSource];
+			// TODO: Implement real error handling.
+			if (xmlSource != nil)
+				[syntaxHighlighter replaceString:@"$XMLSourceData" withString:xmlSource];
+			else
+				syntaxHighlighter = [NSMutableString stringWithString: @"<html><body><br><br><br><center>No feed source to display.</center><body></html>"];
+				
 			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
 		}
 	}	
