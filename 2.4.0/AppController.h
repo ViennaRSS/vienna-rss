@@ -24,7 +24,6 @@
 #import "ActivityViewer.h"
 #import <Growl/GrowlApplicationBridge.h>
 #import "DownloadWindow.h"
-#import "XMLSourceWindow.h"
 #import "FilterView.h"
 #import "PopupButton.h"
 
@@ -81,7 +80,7 @@
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
-	XMLSourceWindow * sourceWindow;
+	NSMutableArray * sourceWindows;
 	
 	Database * db;
 	NSMutableDictionary * scriptPathMappings;
