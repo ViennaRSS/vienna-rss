@@ -20,39 +20,23 @@
 
 #import "XMLSourceWindow.h"
 
+#import "Folder.h"
+
 @implementation XMLSourceWindow
 
-/* init
+/* initWithFolder:
  * Just init the "View Source" window.
  */
--(id)init
+-(id)initWithFolder:(Folder *)folder
 {
+	NSParameterAssert( folder != nil );
+	
 	if ((self = [super initWithWindowNibName:@"XMLSource"]) != nil)
 	{
-		xmlSource = nil;
+		sourceWindowTitle = [[NSString alloc] initWithFormat:@"%@ %i: %@", NSLocalizedString(@"Source of folder", nil), [folder itemId], [folder name]];
+		feedSourceFilePath = [[folder feedSourceFilePath] copy];
 	}
 	return self;
-}
-
-/* setTitle
- * Sets the window title
- */
--(void)setTitle:(NSString *)theTitle
-{
-	NSString * prefix = NSLocalizedString(@"Source of ", nil);
-	[[self window] setTitle:[prefix stringByAppendingString:theTitle]];
-}
-
-/* setXmlSource
- * Set the windows associated XML source code.
- */
--(void)setXmlSource:(NSString *)theSource
-{
-	[theSource retain];
-	[xmlSource release];
-	xmlSource = theSource;
-	
-	[self displayXmlSource];
 }
 
 /* displayXmlSource
@@ -62,12 +46,13 @@
 -(void)displayXmlSource
 {
 	NSString * pathToSyntaxHighlighter = [[NSBundle bundleForClass:[self class]] pathForResource:@"XMLSyntaxHighlighter" ofType:@"html"];
-	
 	if (pathToSyntaxHighlighter != nil)
 	{
 		NSString *syntaxHighlighter = [NSString stringWithContentsOfFile:pathToSyntaxHighlighter encoding:NSUTF8StringEncoding error:NULL];
 		if (syntaxHighlighter != nil)
 		{
+			NSString * xmlSource = (feedSourceFilePath != nil) ? [NSString stringWithContentsOfFile:feedSourceFilePath encoding:NSUTF8StringEncoding error:NULL] : nil;
+			
 			// TODO: Implement real error handling.
 			if (xmlSource != nil)
 				syntaxHighlighter = [syntaxHighlighter stringByReplacingOccurrencesOfString:@"$XMLSourceData" withString:xmlSource];
@@ -77,21 +62,19 @@
 			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
 		}
 	}	
-	
-}
-
-/* xmlSource
- * Returns the associated XML source code.
- */
--(NSString *)xmlSource
-{
-	return xmlSource;
 }
 
 -(void)dealloc
 {
-	[xmlSource release];
+	[feedSourceFilePath release];
+	[sourceWindowTitle release];
 	[super dealloc];
+}
+
+- (void)windowDidLoad
+{
+	[[self window] setTitle:sourceWindowTitle];
+	[self displayXmlSource];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
