@@ -2702,7 +2702,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		if ([folder isRSSFolder])
 		{
-			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] init];
+			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
 		
 			if (sourceWindow != nil)
 			{
@@ -2713,9 +2713,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			}
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
 			
-			[sourceWindow setTitle:[folder name]];
 			[sourceWindow showWindow:self];
-			[sourceWindow setXmlSource:[NSString stringWithContentsOfFile:[folder feedSourceFilePath] encoding:NSUTF8StringEncoding error:NULL]];
 		}
 	}									
 }

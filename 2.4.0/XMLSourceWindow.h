@@ -21,14 +21,14 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
+@class Folder;
+
 @interface XMLSourceWindow : NSWindowController {
 	IBOutlet WebView * sourceWebView;
-	NSString * xmlSource;
+	NSString * feedSourceFilePath;
+	NSString * sourceWindowTitle;
 }
 
--(void)setTitle:(NSString *)theTitle;
--(void)setXmlSource:(NSString *)theSource;
--(NSString *)xmlSource;
--(void)displayXmlSource;
+-(id)initWithFolder:(Folder *)folder; // Designated initializer
 
 @end
