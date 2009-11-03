@@ -22,7 +22,7 @@
 #import <WebKit/WebKit.h>
 
 @interface XMLSourceWindow : NSWindowController {
-	IBOutlet WebView * SourceWebView;
+	IBOutlet WebView * sourceWebView;
 	NSString * xmlSource;
 }
 
