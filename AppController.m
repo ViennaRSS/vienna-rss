@@ -106,6 +106,7 @@
 	-(NSTimer *)checkTimer;
 	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 	-(void)searchArticlesWithString:(NSString *)searchString;
+	-(void)sourceWindowWillClose:(NSNotification *)notification;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -2681,14 +2682,32 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* sourceWindowWillClose
+ * Called when the XML source window is about to close
+ */
+-(void)sourceWindowWillClose:(NSNotification *)notification
+{
+	XMLSourceWindow * sourceWindow = [notification object];
+	[[sourceWindow retain] autorelease]; // Don't deallocate the object immediately
+	[sourceWindows removeObject:sourceWindow];
+}
+
 /* showXMLSource
  * Show the Downloads window, bringing it to the front if necessary.
  */
 -(IBAction)showXMLSource:(id)sender
 {
-	if (sourceWindow == nil)
-		sourceWindow = [[XMLSourceWindow alloc] init];
-	[[sourceWindow window] makeKeyAndOrderFront:sender];
+	XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] init];
+	if (sourceWindow != nil)
+	{
+		if (sourceWindows == nil)
+			sourceWindows = [[NSMutableArray alloc] init];
+		[sourceWindows addObject:sourceWindow];
+		[sourceWindow release];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
+		[sourceWindow showWindow:self];
+	}
 }
 
 
@@ -4090,6 +4109,7 @@ static CFStringRef percentEscape(NSString *string)
 	[db release];
 	[spinner release];
 	[searchField release];
+	[sourceWindows release];
 	[super dealloc];
 }
 @end
