@@ -26,4 +26,8 @@
 	NSString * xmlSource;
 }
 
+-(void)setXmlSource:(NSString *)theSource;
+-(NSString *)xmlSource;
+-(void)displayXmlSource;
+
 @end

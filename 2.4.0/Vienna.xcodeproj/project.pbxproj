@@ -233,6 +233,15 @@
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
 		B25E53E51067B54600BBF14C /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
+		B262610710A033D700E76A37 /* shBrushXml.js in Sources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
+		B262610810A033D700E76A37 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610210A033D700E76A37 /* shCore.css */; };
+		B262610910A033D700E76A37 /* shCore.js in Sources */ = {isa = PBXBuildFile; fileRef = B262610310A033D700E76A37 /* shCore.js */; };
+		B262610A10A033D700E76A37 /* shLegacy.js in Sources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
+		B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610510A033D700E76A37 /* shThemeDefault.css */; };
+		B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */ = {isa = PBXBuildFile; fileRef = B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */; };
+		B262612A10A034C500E76A37 /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
+		B262612B10A034C500E76A37 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610310A033D700E76A37 /* shCore.js */; };
+		B262612C10A034C500E76A37 /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
 		B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
@@ -830,6 +839,12 @@
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserNextButton.tiff; sourceTree = "<group>"; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRefreshButton.tiff; sourceTree = "<group>"; };
 		B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserPreviousButton.tiff; sourceTree = "<group>"; };
+		B262610110A033D700E76A37 /* shBrushXml.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushXml.js; sourceTree = "<group>"; };
+		B262610210A033D700E76A37 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCore.css; sourceTree = "<group>"; };
+		B262610310A033D700E76A37 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
+		B262610410A033D700E76A37 /* shLegacy.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shLegacy.js; sourceTree = "<group>"; };
+		B262610510A033D700E76A37 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
+		B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = XMLSyntaxHighlighter.html; sourceTree = "<group>"; };
 		B273E8EB106910B2001ADEF8 /* errorpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagebg.png; sourceTree = "<group>"; };
 		B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRSSButton.tiff; sourceTree = "<group>"; };
 		B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailLinkButton.tiff; sourceTree = "<group>"; };
@@ -1008,10 +1023,9 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B262610010A033D700E76A37 /* SyntaxHighlighter */,
+				B262610E10A033F700E76A37 /* ErrorPage */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
-				B273E8EB106910B2001ADEF8 /* errorpagebg.png */,
-				B2554730106913760065E9C3 /* errorpagelogo.png */,
-				B2C9673A106CD02B0056669A /* errorpage.html */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA582D880C4A2B78003D0916 /* ActivityViewer.nib */,
 				AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */,
@@ -1356,6 +1370,29 @@
 			name = DisclosableView;
 			sourceTree = "<group>";
 		};
+		B262610010A033D700E76A37 /* SyntaxHighlighter */ = {
+			isa = PBXGroup;
+			children = (
+				B262610110A033D700E76A37 /* shBrushXml.js */,
+				B262610210A033D700E76A37 /* shCore.css */,
+				B262610310A033D700E76A37 /* shCore.js */,
+				B262610410A033D700E76A37 /* shLegacy.js */,
+				B262610510A033D700E76A37 /* shThemeDefault.css */,
+				B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */,
+			);
+			path = SyntaxHighlighter;
+			sourceTree = "<group>";
+		};
+		B262610E10A033F700E76A37 /* ErrorPage */ = {
+			isa = PBXGroup;
+			children = (
+				B273E8EB106910B2001ADEF8 /* errorpagebg.png */,
+				B2554730106913760065E9C3 /* errorpagelogo.png */,
+				B2C9673A106CD02B0056669A /* errorpage.html */,
+			);
+			name = ErrorPage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1465,6 +1502,12 @@
 				AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */,
 				AA26F44E060490BE00FE7994 /* flagged.tiff in Resources */,
 				AA26F450060490BE00FE7994 /* greyRightArrow.tiff in Resources */,
+				B262612A10A034C500E76A37 /* shBrushXml.js in Resources */,
+				B262610810A033D700E76A37 /* shCore.css in Resources */,
+				B262612B10A034C500E76A37 /* shCore.js in Resources */,
+				B262612C10A034C500E76A37 /* shLegacy.js in Resources */,
+				B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */,
+				B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */,
 				AA26F453060490BE00FE7994 /* smallFolder.tiff in Resources */,
 				AA26F454060490BE00FE7994 /* unread_header.tiff in Resources */,
 				AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */,
@@ -2060,6 +2103,9 @@
 				AA5814990C4972BB003D0916 /* SearchPanel.m in Sources */,
 				B283D5AA10986D1900A5CD72 /* sqlite3.c in Sources */,
 				B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */,
+				B262610710A033D700E76A37 /* shBrushXml.js in Sources */,
+				B262610910A033D700E76A37 /* shCore.js in Sources */,
+				B262610A10A033D700E76A37 /* shLegacy.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

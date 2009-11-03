@@ -2697,17 +2697,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)showXMLSource:(id)sender
 {
-	XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] init];
-	if (sourceWindow != nil)
+	for (Folder * folder in [foldersTree selectedFolders])
 	{
-		if (sourceWindows == nil)
-			sourceWindows = [[NSMutableArray alloc] init];
-		[sourceWindows addObject:sourceWindow];
-		[sourceWindow release];
+		if ([folder isRSSFolder])
+		{
+			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] init];
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
-		[sourceWindow showWindow:self];
-	}
+			if (sourceWindow != nil)
+			{
+				if (sourceWindows == nil)
+					sourceWindows = [[NSMutableArray alloc] init];
+				[sourceWindows addObject:sourceWindow];
+				[sourceWindow release];
+			}
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
+			[sourceWindow showWindow:self];
+			
+			[sourceWindow setXmlSource:[NSString stringWithContentsOfFile:[folder feedSourceFilePath] encoding:NSUTF8StringEncoding error:NULL]];
+		}
+	}									
 }
 
 
