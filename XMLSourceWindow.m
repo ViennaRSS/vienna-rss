@@ -36,6 +36,18 @@
 	return self;
 }
 
+/* setTitle
+ * Sets the window title
+ */
+-(void)setTitle:(NSString *)theTitle
+{
+	NSString * prefix = NSLocalizedString(@"Source of ", nil);
+	[[self window] setTitle:[prefix stringByAppendingString:theTitle]];
+}
+
+/* setXmlSource
+ * Set the windows associated XML source code.
+ */
 -(void)setXmlSource:(NSString *)theSource
 {
 	[theSource retain];
@@ -45,6 +57,10 @@
 	[self displayXmlSource];
 }
 
+/* displayXmlSource
+ * Create the syntax highlighted HTML document from xmlSource. This works 
+ * via the JavaScript in the resource XMLSyntaxHighlighter.html.
+ */
 -(void)displayXmlSource
 {
 	NSString * pathToSyntaxHighlighter = [[NSBundle bundleForClass:[self class]] pathForResource:@"XMLSyntaxHighlighter" ofType:@"html"];
@@ -61,6 +77,9 @@
 	
 }
 
+/* xmlSource
+ * Returns the associated XML source code.
+ */
 -(NSString *)xmlSource
 {
 	return xmlSource;

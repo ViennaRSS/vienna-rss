@@ -26,6 +26,7 @@
 	NSString * xmlSource;
 }
 
+-(void)setTitle:(NSString *)theTitle;
 -(void)setXmlSource:(NSString *)theSource;
 -(NSString *)xmlSource;
 -(void)displayXmlSource;
