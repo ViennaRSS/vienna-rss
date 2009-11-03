@@ -793,6 +793,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[alternateItem setAlternate:YES];
 	[folderMenu addItem:alternateItem];
 	[folderMenu addItem:copyOfMenuWithAction(@selector(getInfo:))];
+	[folderMenu addItem:copyOfMenuWithAction(@selector(showXMLSource:))];
 	return folderMenu;
 }
 
