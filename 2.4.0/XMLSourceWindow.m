@@ -19,8 +19,6 @@
 //
 
 #import "XMLSourceWindow.h"
-#import "AppController.h"
-#import "StringExtensions.h"
 
 @implementation XMLSourceWindow
 
