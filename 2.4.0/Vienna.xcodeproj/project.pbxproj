@@ -233,10 +233,7 @@
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
 		B25E53E51067B54600BBF14C /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
-		B262610710A033D700E76A37 /* shBrushXml.js in Sources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
 		B262610810A033D700E76A37 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610210A033D700E76A37 /* shCore.css */; };
-		B262610910A033D700E76A37 /* shCore.js in Sources */ = {isa = PBXBuildFile; fileRef = B262610310A033D700E76A37 /* shCore.js */; };
-		B262610A10A033D700E76A37 /* shLegacy.js in Sources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
 		B262610B10A033D700E76A37 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610510A033D700E76A37 /* shThemeDefault.css */; };
 		B262610C10A033D700E76A37 /* XMLSyntaxHighlighter.html in Resources */ = {isa = PBXBuildFile; fileRef = B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */; };
 		B262612A10A034C500E76A37 /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
@@ -2103,9 +2100,6 @@
 				AA5814990C4972BB003D0916 /* SearchPanel.m in Sources */,
 				B283D5AA10986D1900A5CD72 /* sqlite3.c in Sources */,
 				B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */,
-				B262610710A033D700E76A37 /* shBrushXml.js in Sources */,
-				B262610910A033D700E76A37 /* shCore.js in Sources */,
-				B262610A10A033D700E76A37 /* shLegacy.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
