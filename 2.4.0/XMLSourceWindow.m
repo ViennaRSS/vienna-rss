@@ -51,7 +51,9 @@
 		NSString *syntaxHighlighter = [NSString stringWithContentsOfFile:pathToSyntaxHighlighter encoding:NSUTF8StringEncoding error:NULL];
 		if (syntaxHighlighter != nil)
 		{
-			NSString * xmlSource = (feedSourceFilePath != nil) ? [NSString stringWithContentsOfFile:feedSourceFilePath encoding:NSUTF8StringEncoding error:NULL] : nil;
+			NSStringEncoding encoding;
+			NSError * error;
+			NSString * xmlSource = (feedSourceFilePath != nil) ? [NSString stringWithContentsOfFile:feedSourceFilePath usedEncoding:&encoding error:&error] : nil;
 			
 			// TODO: Implement real error handling.
 			if (xmlSource != nil)
