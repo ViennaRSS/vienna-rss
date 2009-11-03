@@ -229,7 +229,6 @@
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B2108657109F8127001D4E7C /* XMLSourceWindow.m */; };
 		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
-		B21086CF109F8831001D4E7C /* syntaxhighlighter in Resources */ = {isa = PBXBuildFile; fileRef = B21086C3109F8831001D4E7C /* syntaxhighlighter */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
@@ -827,7 +826,6 @@
 		B2108656109F8127001D4E7C /* XMLSourceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLSourceWindow.h; sourceTree = "<group>"; };
 		B2108657109F8127001D4E7C /* XMLSourceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLSourceWindow.m; sourceTree = "<group>"; };
 		B2108659109F8196001D4E7C /* XMLSource.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = XMLSource.nib; sourceTree = "<group>"; };
-		B21086C3109F8831001D4E7C /* syntaxhighlighter */ = {isa = PBXFileReference; lastKnownFileType = folder; path = syntaxhighlighter; sourceTree = "<group>"; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserNextButton.tiff; sourceTree = "<group>"; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRefreshButton.tiff; sourceTree = "<group>"; };
@@ -1010,7 +1008,6 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B21086C3109F8831001D4E7C /* syntaxhighlighter */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
 				B273E8EB106910B2001ADEF8 /* errorpagebg.png */,
 				B2554730106913760065E9C3 /* errorpagelogo.png */,
@@ -1584,7 +1581,6 @@
 				B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */,
 				B2554731106913760065E9C3 /* errorpagelogo.png in Resources */,
 				B2C9673C106CD02B0056669A /* errorpage.html in Resources */,
-				B21086CF109F8831001D4E7C /* syntaxhighlighter in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
