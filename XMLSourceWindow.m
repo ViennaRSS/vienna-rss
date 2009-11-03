@@ -42,5 +42,10 @@
 	[super dealloc];
 }
 
+- (void)windowWillClose:(NSNotification *)notification
+{
+	// Post this for interested observers (namely, the AppController)
+	[[NSNotificationCenter defaultCenter] postNotificationName:[notification name] object:self];
+}
 
 @end
