@@ -20,7 +20,7 @@
 
 #import "XMLSourceWindow.h"
 #import "AppController.h"
-
+#import "StringExtensions.h"
 
 @implementation XMLSourceWindow
 
@@ -34,6 +34,36 @@
 		xmlSource = nil;
 	}
 	return self;
+}
+
+-(void)setXmlSource:(NSString *)theSource
+{
+	[theSource retain];
+	[xmlSource release];
+	xmlSource = theSource;
+	
+	[self displayXmlSource];
+}
+
+-(void)displayXmlSource
+{
+	NSString * pathToSyntaxHighlighter = [[NSBundle bundleForClass:[self class]] pathForResource:@"XMLSyntaxHighlighter" ofType:@"html"];
+	
+	if (pathToSyntaxHighlighter != nil)
+	{
+		NSMutableString *syntaxHighlighter = [NSMutableString stringWithContentsOfFile:pathToSyntaxHighlighter encoding:NSUTF8StringEncoding error:NULL];
+		if (syntaxHighlighter != nil)
+		{
+			[syntaxHighlighter replaceString:@"$XMLSourceData" withString:xmlSource];
+			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
+		}
+	}	
+	
+}
+
+-(NSString *)xmlSource
+{
+	return xmlSource;
 }
 
 -(void)dealloc
