@@ -769,6 +769,16 @@ static NSArray * iconArray = nil;
 	return feedSourceFilePath;
 }
 
+/* hasFeedSource
+ * Returns whether there is a downloaded feed source for the folder.
+ */
+-(BOOL)hasFeedSource
+{
+	NSString * feedSourceFilePath = [self feedSourceFilePath];
+	BOOL isDirectory = YES;
+	return feedSourceFilePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:feedSourceFilePath isDirectory:&isDirectory] && !isDirectory;
+}
+
 /* objectSpecifier
  * Return an NSScriptObjectSpecifier object representing this folder.
  */
