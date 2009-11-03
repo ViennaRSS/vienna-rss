@@ -20,11 +20,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
-#import "SquareWindow.h"
 
 @interface XMLSourceWindow : NSWindowController {
 	IBOutlet WebView * SourceWebView;
-	IBOutlet SquareWindow * SourceWindow;
 	NSString * xmlSource;
 }
 
