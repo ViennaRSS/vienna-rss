@@ -87,19 +87,31 @@
 									<bool key="EncodedWithXMLCoder">YES</bool>
 									<object class="NSMutableArray" key="dict.sortedKeys">
 										<bool key="EncodedWithXMLCoder">YES</bool>
+										<string>WebKitAllowAnimatedImageLoopingPreferenceKey</string>
+										<string>WebKitAllowAnimatedImagesPreferenceKey</string>
 										<string>WebKitDefaultFixedFontSize</string>
 										<string>WebKitDefaultFontSize</string>
+										<string>WebKitDisplayImagesKey</string>
+										<string>WebKitJavaEnabled</string>
+										<string>WebKitJavaScriptCanOpenWindowsAutomatically</string>
 										<string>WebKitMinimumFontSize</string>
+										<string>WebKitPluginsEnabled</string>
 									</object>
 									<object class="NSMutableArray" key="dict.values">
 										<bool key="EncodedWithXMLCoder">YES</bool>
+										<boolean value="NO" id="6"/>
+										<reference ref="6"/>
 										<integer value="12" id="953453447"/>
 										<reference ref="953453447"/>
+										<reference ref="6"/>
+										<reference ref="6"/>
+										<reference ref="6"/>
 										<integer value="1"/>
+										<reference ref="6"/>
 									</object>
 								</object>
 							</object>
-							<bool key="UseBackForwardList">YES</bool>
+							<bool key="UseBackForwardList">NO</bool>
 							<bool key="AllowsUndo">YES</bool>
 						</object>
 						<object class="NSBox" id="879494213">
