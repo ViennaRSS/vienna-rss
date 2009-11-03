@@ -2711,8 +2711,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				[sourceWindow release];
 			}
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
-			[sourceWindow showWindow:self];
 			
+			[sourceWindow setTitle:[folder name]];
+			[sourceWindow showWindow:self];
 			[sourceWindow setXmlSource:[NSString stringWithContentsOfFile:[folder feedSourceFilePath] encoding:NSUTF8StringEncoding error:NULL]];
 		}
 	}									
