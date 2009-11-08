@@ -955,6 +955,7 @@ static Database * _sharedDatabase = nil;
 	if (IsRSSFolder(folder))
 	{
 		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
+		[self executeSQLWithFormat:@"delete from rss_guids where folder_id=%d", folderId];
 		
 		NSString * feedSourceFilePath = [folder feedSourceFilePath];
 		if (feedSourceFilePath != nil)
