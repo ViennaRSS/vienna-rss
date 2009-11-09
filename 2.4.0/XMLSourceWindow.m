@@ -19,7 +19,6 @@
 //
 
 #import "XMLSourceWindow.h"
-
 #import "Folder.h"
 
 @implementation XMLSourceWindow
@@ -57,7 +56,15 @@
 			
 			// TODO: Implement real error handling.
 			if (xmlSource != nil)
+			{
+				// Get rid of potential body, script, CDATA and other tags within the string that may cause a mess.
+				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"[" withString:@"&#91;"];
+				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"]" withString:@"&#93;"];
+				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+
 				syntaxHighlighter = [syntaxHighlighter stringByReplacingOccurrencesOfString:@"$XMLSourceData" withString:xmlSource];
+			}
 			else
 				syntaxHighlighter = @"<html><body><br><br><br><center>No feed source to display.</center><body></html>";
 				
