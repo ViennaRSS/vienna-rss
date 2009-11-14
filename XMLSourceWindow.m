@@ -58,6 +58,7 @@
 			if (xmlSource != nil)
 			{
 				// Get rid of potential body, script, CDATA and other tags within the string that may cause a mess.
+				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
 				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"[" withString:@"&#91;"];
 				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"]" withString:@"&#93;"];
 				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
