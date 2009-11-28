@@ -383,3 +383,8 @@
 "Get Info" = "Сведения";
 "See information about the selected subscription" = "See information about the selected subscription";
 "Display the list of available styles" = "Display the list of available styles";
+
+/*Added in 2.4*/
+"Show XML Source" = "Show XML Source";
+"Source of folder" = "Source of folder";
+"No feed source to display." = "No feed source to display.";

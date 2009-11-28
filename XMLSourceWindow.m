@@ -67,7 +67,7 @@
 				syntaxHighlighter = [syntaxHighlighter stringByReplacingOccurrencesOfString:@"$XMLSourceData" withString:xmlSource];
 			}
 			else
-				syntaxHighlighter = @"<html><body><br><br><br><center>No feed source to display.</center><body></html>";
+				syntaxHighlighter = [NSString stringWithFormat:@"<html><body><br><br><br><center>%@</center><body></html>", NSLocalizedString(@"No feed source to display.",nil)];
 				
 			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
 		}
