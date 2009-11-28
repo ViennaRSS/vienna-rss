@@ -138,6 +138,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		checkTimer = nil;
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
+		searchString = nil;
 	}
 	return self;
 }
@@ -3112,6 +3113,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateSearchPlaceholder
 {
+	NSView<BaseView> * theView = [browserView activeTabItemView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current webpage", nil)];
+	}
+	else 
+	{
+		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
+	}
 	if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
 	{
 		[[filterSearchField cell] setSendsWholeSearchString:YES];
@@ -3146,6 +3156,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
+	searchString = newSearchString;
 	[filterSearchField setStringValue:newSearchString];
 }
 
@@ -3154,7 +3165,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSString *)searchString
 {
-	return [filterSearchField stringValue];
+	return searchString;
 }
 
 /* searchUsingFilterField
@@ -3170,7 +3181,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	[self searchArticlesWithString:[searchField stringValue]];
+	[self setSearchString:[searchField stringValue]];
+
+	// The browser needs to be handled separately
+	NSView<BaseView> * theView = [browserView activeTabItemView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		[theView performFindPanelAction:NSFindPanelActionSetFindString];
+		[self setFocusToSearchField:self];
+	}
+	else
+		[self searchArticlesWithString:[searchField stringValue]];
 }
 
 /* searchArticlesWithString
@@ -3178,11 +3199,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * and then we make sure the search folder is selected so that the subsequent
  * reload will be scoped by the search string.
  */
--(void)searchArticlesWithString:(NSString *)searchString
+-(void)searchArticlesWithString:(NSString *)theSearchString
 {
-	if (![searchString isBlank])
+	if (![theSearchString isBlank])
 	{
-		[db setSearchString:searchString];
+		[db setSearchString:theSearchString];
 		if ([foldersTree actualSelection] != [db searchFolderId])
 			[foldersTree selectFolder:[db searchFolderId]];
 		else
@@ -4114,11 +4135,11 @@ static CFStringRef percentEscape(NSString *string)
 	[checkTimer release];
 	[appDockMenu release];
 	[appStatusItem release];
-	[backgroundColor release];
 	[db release];
 	[spinner release];
 	[searchField release];
 	[sourceWindows release];
+	[searchString release];
 	[super dealloc];
 }
 @end

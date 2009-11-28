@@ -96,7 +96,7 @@
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
-	NSColor * backgroundColor;
+	NSString * searchString;
 }
 
 // Menu action items
