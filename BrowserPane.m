@@ -189,7 +189,7 @@
  * Called when the user hits Enter on the address bar.
  */
 -(IBAction)handleAddress:(id)sender
-{
+{	
 	NSString * theURL = [addressField stringValue];
 	// If no '.' appears in the string, wrap it with 'www' and 'com'
 	if (![theURL hasCharacter:'.']) 
@@ -198,7 +198,15 @@
 	// If no schema, prefix http://
 	if ([theURL rangeOfString:@"://"].location == NSNotFound)
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
-
+		
+	// These six lines sneakily use WebKit to parse IDN (internationalized domain name) strings.
+	WebView * jsView = [[WebView alloc] init];
+	[[jsView mainFrame] loadHTMLString:@"" baseURL:NULL];
+	id jsObject = [jsView windowScriptObject];
+	[jsObject setValue:theURL forKey:@"url"];
+	theURL = [jsObject evaluateWebScript: @"var a = document.createElement('a'); a.href = url; url=a.href; url"];
+	[jsView release];	
+	
 	NSURL * urlToLoad = [NSURL URLWithString:theURL];
 	if (urlToLoad != nil)
 	{
@@ -210,7 +218,7 @@
 		NSBeep();
 		NSLog(@"Can't create URL from string '%@'.", theURL);
 		[self activateAddressBar];
-	}
+	}	
 }
 
 /* activateAddressBar
