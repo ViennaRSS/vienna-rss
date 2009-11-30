@@ -38,12 +38,25 @@
 	return self;
 }
 
+/* windowDidLoad:
+ * Called when the window has finished loading
+ */
+- (void)windowDidLoad
+{
+	[[self window] setTitle:sourceWindowTitle];
+	jsEnabledPrefs = [[WebPreferences alloc] initWithIdentifier:@"jsEnabledPrefs"];
+	// Enable JavaScript in the WebView that we are going to use.			
+	[jsEnabledPrefs setJavaScriptEnabled:YES];
+	[sourceWebView setPreferences:jsEnabledPrefs];	
+	[self displayXmlSource];
+}
+
 /* displayXmlSource
  * Create the syntax highlighted HTML document from xmlSource. This works 
  * via the JavaScript in the resource XMLSyntaxHighlighter.html.
  */
 -(void)displayXmlSource
-{
+{	
 	NSString * pathToSyntaxHighlighter = [[NSBundle bundleForClass:[self class]] pathForResource:@"XMLSyntaxHighlighter" ofType:@"html"];
 	if (pathToSyntaxHighlighter != nil)
 	{
@@ -69,32 +82,26 @@
 			else
 				syntaxHighlighter = [NSString stringWithFormat:@"<html><body><br><br><br><center>%@</center><body></html>", NSLocalizedString(@"No feed source to display.",nil)];
 			
-			WebPreferences *jsEnabledPrefs = [[WebPreferences alloc] initWithIdentifier:@"jsEnabledPrefs"];
-			[jsEnabledPrefs setJavaScriptEnabled:YES];
-			[sourceWebView setPreferences:jsEnabledPrefs];
+			// Display the source.
 			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
-			[jsEnabledPrefs release];
 		}
 	}	
 }
 
--(void)dealloc
-{
-	[feedSourceFilePath release];
-	[sourceWindowTitle release];
-	[super dealloc];
-}
-
-- (void)windowDidLoad
-{
-	[[self window] setTitle:sourceWindowTitle];
-	[self displayXmlSource];
-}
-
+/* windowWillClose:
+ * Do cleanup that may be needed.
+ */
 - (void)windowWillClose:(NSNotification *)notification
 {
 	// Post this for interested observers (namely, the AppController)
 	[[NSNotificationCenter defaultCenter] postNotificationName:[notification name] object:self];
 }
 
+-(void)dealloc
+{
+	[feedSourceFilePath release];
+	[sourceWindowTitle release];
+	[jsEnabledPrefs release];
+	[super dealloc];
+}
 @end
