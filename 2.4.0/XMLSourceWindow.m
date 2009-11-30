@@ -68,7 +68,10 @@
 			}
 			else
 				syntaxHighlighter = [NSString stringWithFormat:@"<html><body><br><br><br><center>%@</center><body></html>", NSLocalizedString(@"No feed source to display.",nil)];
-				
+			
+			WebPreferences *jsEnabledPrefs = [[[WebPreferences alloc] initWithIdentifier:@"jsEnabledPrefs"] autorelease];
+			[jsEnabledPrefs setJavaScriptEnabled:YES];
+			[sourceWebView setPreferences:jsEnabledPrefs];
 			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
 		}
 	}	
