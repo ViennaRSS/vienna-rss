@@ -3,6 +3,7 @@
 <head>
 <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <title>An error has occured</title>
+
 <style type="text/css" media="screen">
 body {
 	margin:50px 0px; padding:0px; 
@@ -19,9 +20,24 @@ body {
 	border:1px solid gray;
 	background:url("../errorpagelogo.png") top left no-repeat #eee;
 }
+	
+#ErrorDescription {
+	margin-left: 35px;
+	margin-right: 15px;
+	font-family: Courier, monospace, serif;
+}
 </style>
+
+<script type="text/javascript">
+<!--
+function insertErrorDescription(string){
+document.getElementById('ErrorDescription').innerHTML=string;
+}
+-->
+</script>
+
 </head>
-<body>
+<body onload="insertErrorDescription(errorDescription)">
 	<div id="Content">
 		<h1><center><b>The page you requested could not be loaded.</b></center></h1>
 		<br>
@@ -30,6 +46,8 @@ body {
 			<li>If the error persists and you are unable to load other pages as well, check your network connection.
 			<li>If your computer or network is protected by a firewall or proxy, make sure that your account, your machine, and Vienna are allowed to access the resource you specified.
 		</ul>
+		<h3><center>Error Description:</center></h3>
+		<div id="ErrorDescription"><!--The error description gets inserted here via JavaScript--></div>
 	</div>
 </body>
 </html>
