@@ -106,6 +106,8 @@
 		<string>com.automagicsoftware.BlogThing</string>
 		<key>Kaku</key>
 		<string>jp.lolipop.ppmweb.Kaku</string>
+		<key>Blogo</key>
+		<string>com.drinkbrainjuice.Blogo</string>
 	</dict>
 </dict>
 </plist>
