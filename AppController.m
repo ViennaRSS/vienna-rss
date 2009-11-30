@@ -3688,7 +3688,8 @@ static CFStringRef percentEscape(NSString *string)
 	}
 	if (theAction == @selector(printDocument:))
 	{
-		return ([self selectedArticle] != nil && isMainWindowVisible);
+		NSView<BaseView> * theView = [browserView activeTabItemView];
+		return (([self selectedArticle] != nil && isMainWindowVisible) || ([theView isKindOfClass:[BrowserPane class]] && ![(BrowserPane *)theView isLoading]));
 	}
 	else if (theAction == @selector(goForward:))
 	{
