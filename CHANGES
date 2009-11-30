@@ -27,6 +27,7 @@ ________
 - Add workaroundfor feeds that contain more than one item with the same guid.
 - Fix long standing bug where deleted articles would reappear after emptying the trash.
 - General code and build-phase cleanup, as well as minor speed improvements for some operations.
+- Fix "Help -> Keyboard shortcuts", which didn't work.
 
 2.3.5.2306
 ----------
