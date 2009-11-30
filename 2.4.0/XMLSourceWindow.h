@@ -27,8 +27,10 @@
 	IBOutlet WebView * sourceWebView;
 	NSString * feedSourceFilePath;
 	NSString * sourceWindowTitle;
+	WebPreferences * jsEnabledPrefs;
 }
 
 -(id)initWithFolder:(Folder *)folder; // Designated initializer
+-(void)displayXmlSource; // Loads the XML source of the associated folder into the WebView
 
 @end
