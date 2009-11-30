@@ -213,28 +213,11 @@ static OSStatus RegisterMyHelpBook(void)
  */
 OSStatus GotoHelpPage (CFStringRef pagePath, CFStringRef anchorName)
 {
-    CFBundleRef myApplicationBundle = NULL;
-    CFStringRef myBookName = NULL;
-    OSStatus err;
-
-	err = RegisterMyHelpBook();
+	OSStatus err = RegisterMyHelpBook();
 	if (err != noErr)
 		return err;
-    myApplicationBundle = CFBundleGetMainBundle();
-	if (myApplicationBundle == NULL)
-		err = fnfErr;
-	else
-	{
-		myBookName = CFBundleGetValueForInfoDictionaryKey(myApplicationBundle, CFSTR("CFBundleHelpBookName"));
-		if (myBookName == NULL)
-			err = fnfErr;
-		else
-		{
-			if (CFGetTypeID(myBookName) != CFStringGetTypeID())
-				err = paramErr;
-		}
-	}
-	if (err == noErr)
-		err = AHGotoPage(myBookName, pagePath, anchorName);
+    
+	NSString *helpBookName = [[[ NSBundle mainBundle ] infoDictionary ] objectForKey:@"CFBundleHelpBookName" ] ;	
+	err = AHGotoPage( (CFStringRef)helpBookName, (CFStringRef)pagePath, nil );
 	return err;
 }
