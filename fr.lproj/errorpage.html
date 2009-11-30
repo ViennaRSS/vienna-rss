@@ -3,6 +3,7 @@
 <head>
 <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <title>Le site n'a pas pu &ecirc;tre charg&eacute;</title>
+
 <style type="text/css" media="screen">
 body {
 	margin:50px 0px; padding:0px; 
@@ -19,9 +20,24 @@ body {
 	border:1px solid gray;
 	background:url("../errorpagelogo.png") top left no-repeat #eee;
 }
+	
+#ErrorDescription {
+	margin-left: 35px;
+	margin-right: 15px;
+	font-family: Courier, monospace, serif;
+}
 </style>
+
+<script type="text/javascript">
+<!--
+function insertErrorDescription(string){
+document.getElementById('ErrorDescription').innerHTML=string;
+}
+-->
+</script>
+
 </head>
-<body>
+<body onload="insertErrorDescription(errorDescription)">
 	<div id="Content">
 		<h1><center><b>Le site n'a pas pu &ecirc;tre charg&eacute;.</b></center></h1>
 		<br>
@@ -30,6 +46,8 @@ body {
 			<li>Si l'erreur persiste et que vous rencontrez le m&ecirc;me probl&egrave;me sur d'autres sites, v&eacute;rifiez votre connexion internet.
 			<li>Si votre ordinateur ou votre r&eacute;seau est prot&eacute;g&eacute; par un pare-feu (barri&egrave;re de s&eacute;curit&eacute;/firewall) ou serveur proxy, rassurez vous que votre compte, votre machine ou Vienna ont permis l'acc&eacute;s &agrave; la source souhait&eacute;e.		
 		</ul>
+		<h3><center>Description de L'Erreur:</center></h3>
+		<div id="ErrorDescription"><!--The error description gets inserted here via JavaScript--></div>
 	</div>
 </body>
 </html>
