@@ -16,18 +16,20 @@ ________
 - Increase the standard number of simultaneous refresh downloads to 20.
 - Redo browser and filter bar UI. Slimmer look, new buttons.
 - Vienna's UI now correctly dims when the application is the background.
-- Vienna now shows an error page when the browser fails to load a resource.
+- Enable printing of web-pages from the built-in browser.
+- Vienna now shows an error page with useful information when the browser fails to load a resource.
+- Fix bug where changing the layout would hide the tab bar until relaunch.
+- Fix bug that prevented the user from searching for text within a web-page.
 - Fix drawing errors and artifacts in the grey title bars.
 - Check for https:// as well as http:// on the pasteboard when adding a new subscription.
 - Fix background drawing errors in main window and remove custom window background.
-- Fix bug where changing the layout would hide the tab bar until relaunch.
-- Fix bug that prevented the user from searching for text within a web-page.
 - Fix drawing error in Downloads window and remove custom background.
 - Fix bug and exception where clicking on a feed link launched Vienna but failed to subscribe to the feed.
-- Add workaroundfor feeds that contain more than one item with the same guid.
+- Add workaround for feeds that contain more than one item with the same guid.
 - Fix long standing bug where deleted articles would reappear after emptying the trash.
+- Fix "Help -> Keyboard shortcuts", which didn't work at all.
+- Numerous fixes to localization of help pages and other strings in German, French, and other languages.
 - General code and build-phase cleanup, as well as minor speed improvements for some operations.
-- Fix "Help -> Keyboard shortcuts", which didn't work.
 
 2.3.5.2306
 ----------
