@@ -8,9 +8,29 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.4.2400
+________
+- Add ability to "Show XML Source" for feeds, which is now cached locally.
+- Add support for IDN (internationlized domain names) in the browser.
+- Add new supported blog editor (Blogo).
+- Increase the standard number of simultaneous refresh downloads to 20.
+- Redo browser and filter bar UI. Slimmer look, new buttons.
+- Vienna's UI now correctly dims when the application is the background.
+- Vienna now shows an error page when the browser fails to load a resource.
+- Fix drawing errors and artifacts in the grey title bars.
+- Check for https:// as well as http:// on the pasteboard when adding a new subscription.
+- Fix background drawing errors in main window and remove custom window background.
+- Fix bug where changing the layout would hide the tab bar until relaunch.
+- Fix bug that prevented the user from searching for text within a web-page.
+- Fix drawing error in Downloads window and remove custom background.
+- Fix bug and exception where clicking on a feed link launched Vienna but failed to subscribe to the feed.
+- Add workaroundfor feeds that contain more than one item with the same guid.
+- Fix long standing bug where deleted articles would reappear after emptying the trash.
+- General code and build-phase cleanup, as well as minor speed improvements for some operations.
 
 2.3.5.2306
 ----------
+- Drop Mac OS X 10.4 Tiger support. Vienna 2.4 needs 10.5 Leopard or greater to launch.
 - Prevent an infinite redirect loop. This was happening with http://feeds.feedburner.com/factcheck/Rdqt
 - Fix the article view scrolling problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20814
 - Fix the mark all read bug on Snow Leopard reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20877
