@@ -199,9 +199,10 @@
 	if ([theURL rangeOfString:@"://"].location == NSNotFound)
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
 		
-	// These six lines sneakily use WebKit to parse IDN (internationalized domain name) strings.
+	// These six lines sneakily use WebKit with a temporary WebView to parse IDN (internationalized domain name) strings.
+	// This is done to avoid using the private method _web_URLWithUserTypedString:
 	WebView * jsView = [[WebView alloc] init];
-	WebPreferences *jsEnabledPrefs = [[[WebPreferences alloc] initWithIdentifier:@"jsEnabledPrefs"] autorelease];
+	WebPreferences *jsEnabledPrefs = [[WebPreferences alloc] initWithIdentifier:@"jsEnabledPrefs"];
 	[jsEnabledPrefs setJavaScriptEnabled:YES];
 	[jsView setPreferences:jsEnabledPrefs];
 	[[jsView mainFrame] loadHTMLString:@"" baseURL:NULL];
@@ -209,6 +210,7 @@
 	[jsObject setValue:theURL forKey:@"url"];
 	theURL = [jsObject evaluateWebScript: @"var a = document.createElement('a'); a.href = url; url=a.href; url"];
 	[jsView release];	
+	[jsEnabledPrefs release];
 	
 	NSURL * urlToLoad = [NSURL URLWithString:theURL];
 	if (urlToLoad != nil)
