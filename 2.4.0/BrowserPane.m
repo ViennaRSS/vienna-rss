@@ -317,7 +317,6 @@
  */
 -(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	NSLog(@"%@", error);
 	if (frame == [webPane mainFrame])
 	{
 		// Was this a feed redirect? If so, this isn't an error:
@@ -327,10 +326,6 @@
 			
 			// Use a warning sign as favicon
 			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
-			
-			
-			// Set the errorDescription variable so that the JS in the error page can insert it.
-			[[sender windowScriptObject] setValue:error forKey:@"errorDescription"];
 			
 			// Load the localized verion of the error page
 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
@@ -386,9 +381,6 @@
 			// Use a warning sign as favicon
 			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
 			
-			// Set the errorDescription variable so that the JS in the error page can insert it.
-			[[sender windowScriptObject] setValue:error forKey:@"errorDescription"];
-
 			// Load the localized verion of the error page
 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
 			if (pathToErrorPage != nil)
