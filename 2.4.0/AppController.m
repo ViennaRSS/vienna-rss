@@ -4124,7 +4124,6 @@ static CFStringRef percentEscape(NSString *string)
 	[checkTimer release];
 	[appDockMenu release];
 	[appStatusItem release];
-	[backgroundColor release];
 	[db release];
 	[spinner release];
 	[searchField release];
