@@ -83,6 +83,21 @@
 
 - (void)windowDidLoad
 {
+	static WebPreferences * sJavaScriptPreferences;
+	
+	if (sJavaScriptPreferences == nil)
+	{
+		sJavaScriptPreferences = [[WebPreferences alloc] initWithIdentifier:@"ViennaJavaScriptEnabled"];
+		[sJavaScriptPreferences setAutosaves:NO];
+		[sJavaScriptPreferences setJavaEnabled:NO];
+		[sJavaScriptPreferences setJavaScriptCanOpenWindowsAutomatically:NO];
+		[sJavaScriptPreferences setJavaScriptEnabled:YES];
+		[sJavaScriptPreferences setLoadsImagesAutomatically:NO];
+		[sJavaScriptPreferences setPlugInsEnabled:NO];
+		[sJavaScriptPreferences setPrivateBrowsingEnabled:YES];
+		[sJavaScriptPreferences setUsesPageCache:NO];
+	}
+	
 	[[self window] setTitle:sourceWindowTitle];
 	[sourceWebView setPreferencesIdentifier:@"ViennaJavaScriptEnabled"];
 	[self displayXmlSource];
