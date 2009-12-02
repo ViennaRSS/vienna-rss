@@ -1846,7 +1846,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)keyboardShortcutsHelp:(id)sender
 {
-	GotoHelpPage((CFStringRef)@"keyboard.html", (CFStringRef)@"");
+	GotoHelpPage((CFStringRef)@"keyboard.html", NULL);
 }
 
 /* showPreferencePanel
