@@ -3151,11 +3151,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
+/* searchString
+ * Returns the global search string currently in use for the web and article views.
+ * Set by the user via the toolbar or the search panel.
+ */
 -(void)setSearchString:(NSString *)newSearchString
 {
 	searchString = newSearchString;
 }
 
+/* searchString
+ * Returns the global search string currently in use for the web and article views.
+ */
 -(NSString *)searchString
 {
 	return searchString;
@@ -3163,7 +3170,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 
 /* setFilterString
- * Sets the filter bar's search string.
+ * Sets the filter bar's search string when the users enters it in the filter bar's search field.
  */
 -(void)setFilterString:(NSString *)newFilterString
 {
@@ -3171,7 +3178,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* filterString
- * Return the contents of the search field.
+ * Return the contents of the filter bar's search field.
  */
 -(NSString *)filterString
 {
