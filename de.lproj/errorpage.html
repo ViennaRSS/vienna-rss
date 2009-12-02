@@ -19,6 +19,13 @@ body {
 	border:1px solid gray;
 	background:url("../errorpagelogo.png") top left no-repeat #eee;
 }
+
+#ErrorInformation {
+	font-family: Courier, monospace, serif;
+	margin-left: 35px;
+	margin-right: 15px;
+}
+
 </style>
 </head>
 <body>
@@ -28,7 +35,10 @@ body {
 		<ul>
 			<li>&Uuml;berpr&uuml;fen Sie die angegebene Adresse (URL) auf Tippfehler wie ww.test.com statt www.test.com.
 			<li>&Uuml;berpr&uuml;fen Sie Ihre Netzwerkverbindung.
-			<li>Falls Sie sich &uuml;ber einen Proxy oder eine Firewall mit dem Internet verbinden, &uuml;berpr&uuml;fen Sie ihre Zugangsberechtigungen.<ul>
+			<li>Falls Sie sich &uuml;ber einen Proxy oder eine Firewall mit dem Internet verbinden, &uuml;berpr&uuml;fen Sie ihre Zugangsberechtigungen.
+		</ul>
+		<center><h3>Fehler-Informationen:</h3></center>
+		<div id="ErrorInformation">$ErrorInformation</div>
 	</div>
 </body>
 </html>

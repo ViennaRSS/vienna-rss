@@ -19,6 +19,12 @@ body {
 	border:1px solid gray;
 	background:url("../errorpagelogo.png") top left no-repeat #eee;
 }
+
+#ErrorInformation {
+	font-family: Courier, monospace, serif;
+	margin-left: 35px;
+	margin-right: 15px;
+}
 </style>
 </head>
 <body>
@@ -30,6 +36,9 @@ body {
 			<li>Si l'erreur persiste et que vous rencontrez le m&ecirc;me probl&egrave;me sur d'autres sites, v&eacute;rifiez votre connexion internet.
 			<li>Si votre ordinateur ou votre r&eacute;seau est prot&eacute;g&eacute; par un pare-feu (barri&egrave;re de s&eacute;curit&eacute;/firewall) ou serveur proxy, rassurez vous que votre compte, votre machine ou Vienna ont permis l'acc&eacute;s &agrave; la source souhait&eacute;e.		
 		</ul>
+		<center><h3>Informations sur L'Erreur:</h3></center>
+		<div id="ErrorInformation">$ErrorInformation</div>
+
 	</div>
 </body>
 </html>
