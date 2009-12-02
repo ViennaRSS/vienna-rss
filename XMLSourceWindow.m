@@ -84,6 +84,7 @@
 - (void)windowDidLoad
 {
 	[[self window] setTitle:sourceWindowTitle];
+	[sourceWebView setPreferencesIdentifier:@"ViennaJavaScriptEnabled"];
 	[self displayXmlSource];
 }
 
