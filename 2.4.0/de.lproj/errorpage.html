@@ -1,9 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01">
 <html>
 <head>
-<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-<title>Ein Fehler ist aufgetreten</title>
-
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<title>Es ist ein Fehler aufgetreten</title>
 <style type="text/css" media="screen">
 body {
 	margin:50px 0px; padding:0px; 
@@ -20,34 +19,16 @@ body {
 	border:1px solid gray;
 	background:url("../errorpagelogo.png") top left no-repeat #eee;
 }
-	
-#ErrorDescription {
-	margin-left: 35px;
-	margin-right: 15px;
-	font-family: Courier, monospace, serif;
-}
 </style>
-
-<script type="text/javascript">
-<!--
-function insertErrorDescription(string){
-document.getElementById('ErrorDescription').innerHTML=string;
-}
--->
-</script>
-
 </head>
-<body onload="insertErrorDescription(errorDescription)">
+<body>
 	<div id="Content">
 		<h1><center><b>Die angeforderte Ressource konnte nicht geladen werden.</b><center></h1>
 		<br>
 		<ul>
 			<li>&Uuml;berpr&uuml;fen Sie die angegebene Adresse (URL) auf Tippfehler wie ww.test.com statt www.test.com.
 			<li>&Uuml;berpr&uuml;fen Sie Ihre Netzwerkverbindung.
-			<li>Falls Sie sich &uuml;ber einen Proxy oder eine Firewall mit dem Internet verbinden, &uuml;berpr&uuml;fen Sie ihre Zugangsberechtigungen.
-		</ul>
-		<h3><center>Fehlermeldung:</center></h3>
-		<div id="ErrorDescription"><!--The error description gets inserted here via JavaScript--></div>
+			<li>Falls Sie sich &uuml;ber einen Proxy oder eine Firewall mit dem Internet verbinden, &uuml;berpr&uuml;fen Sie ihre Zugangsberechtigungen.<ul>
 	</div>
 </body>
 </html>

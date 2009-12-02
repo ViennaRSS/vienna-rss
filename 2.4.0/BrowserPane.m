@@ -189,7 +189,7 @@
  * Called when the user hits Enter on the address bar.
  */
 -(IBAction)handleAddress:(id)sender
-{	
+{
 	NSString * theURL = [addressField stringValue];
 	// If no '.' appears in the string, wrap it with 'www' and 'com'
 	if (![theURL hasCharacter:'.']) 
@@ -198,20 +198,7 @@
 	// If no schema, prefix http://
 	if ([theURL rangeOfString:@"://"].location == NSNotFound)
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
-		
-	// These six lines sneakily use WebKit with a temporary WebView to parse IDN (internationalized domain name) strings.
-	// This is done to avoid using the private method _web_URLWithUserTypedString:
-	WebView * jsView = [[WebView alloc] init];
-	WebPreferences *jsEnabledPrefs = [[WebPreferences alloc] initWithIdentifier:@"jsEnabledPrefs"];
-	[jsEnabledPrefs setJavaScriptEnabled:YES];
-	[jsView setPreferences:jsEnabledPrefs];
-	[[jsView mainFrame] loadHTMLString:@"" baseURL:NULL];
-	id jsObject = [jsView windowScriptObject];
-	[jsObject setValue:theURL forKey:@"url"];
-	theURL = [jsObject evaluateWebScript: @"var a = document.createElement('a'); a.href = url; url=a.href; url"];
-	[jsView release];	
-	[jsEnabledPrefs release];
-	
+
 	NSURL * urlToLoad = [NSURL URLWithString:theURL];
 	if (urlToLoad != nil)
 	{
@@ -223,7 +210,7 @@
 		NSBeep();
 		NSLog(@"Can't create URL from string '%@'.", theURL);
 		[self activateAddressBar];
-	}	
+	}
 }
 
 /* activateAddressBar
@@ -330,7 +317,6 @@
  */
 -(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	NSLog(@"%@", error);
 	if (frame == [webPane mainFrame])
 	{
 		// Was this a feed redirect? If so, this isn't an error:
@@ -340,10 +326,6 @@
 			
 			// Use a warning sign as favicon
 			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
-			
-			
-			// Set the errorDescription variable so that the JS in the error page can insert it.
-			[[sender windowScriptObject] setValue:error forKey:@"errorDescription"];
 			
 			// Load the localized verion of the error page
 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
@@ -399,9 +381,6 @@
 			// Use a warning sign as favicon
 			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
 			
-			// Set the errorDescription variable so that the JS in the error page can insert it.
-			[[sender windowScriptObject] setValue:error forKey:@"errorDescription"];
-
 			// Load the localized verion of the error page
 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
 			if (pathToErrorPage != nil)
