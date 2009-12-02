@@ -19,7 +19,6 @@
 //
 
 #import "SearchPanel.h"
-#import "BrowserPane.h"
 #import "AppController.h"
 #import "StringExtensions.h"
 
@@ -41,7 +40,7 @@
 		[NSBundle loadNibNamed:@"SearchPanel" owner:self];
 		[[searchField cell] setSearchMenuTemplate:[[NSApp delegate] searchFieldMenu]];
 	}
-	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current webpage", nil)];
+	[searchLabel setStringValue:NSLocalizedString(@"Search all articles", nil)];
 	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
@@ -60,17 +59,7 @@
  */
 -(IBAction)searchStringChanged:(id)sender;
 {
-	[[NSApp delegate] setSearchString:[searchField stringValue]];
-	
-	NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		[theView performFindPanelAction:NSFindPanelActionSetFindString];
-		[[NSApp delegate] setFocusToSearchField:self];
-	}
-	else
-		[[NSApp delegate] searchArticlesWithString:[searchField stringValue]];
-		
+	[[NSApp delegate] searchArticlesWithString:[searchField stringValue]];
 	[NSApp endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
 }
