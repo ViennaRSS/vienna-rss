@@ -292,7 +292,7 @@
 	[folderArrayOfArticles autorelease];
 	
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] searchString]] retain];
+	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] filterString]] retain];
 	
 	[self refilterArrayOfArticles];
 }

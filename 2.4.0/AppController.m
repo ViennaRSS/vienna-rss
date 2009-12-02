@@ -138,6 +138,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		checkTimer = nil;
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
+		searchString = nil;
 	}
 	return self;
 }
@@ -1361,7 +1362,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 
 		// Clear the filter, otherwise we end up with no way remove it!
-		[self setSearchString:@""];
+		[self setFilterString:@""];
 		if (doAnimate)
 		{
 			[self searchUsingFilterField:self];
@@ -2042,7 +2043,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int newFolderId = [node nodeId];
 
 	// We don't filter when we switch folders.
-	[self setSearchString:@""];
+	[self setFilterString:@""];
 
 	// Call through the controller to display the new folder.
 	[articleController displayFolder:newFolderId];
@@ -3112,6 +3113,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateSearchPlaceholder
 {
+	NSView<BaseView> * theView = [browserView activeTabItemView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current webpage", nil)];
+	}
+	else 
+	{
+		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
+	}
 	if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
 	{
 		[[filterSearchField cell] setSendsWholeSearchString:YES];
@@ -3141,18 +3151,29 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* setSearchString
- * Sets the filter bar's search string.
- */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	[filterSearchField setStringValue:newSearchString];
+	searchString = newSearchString;
 }
 
-/* searchString
+-(NSString *)searchString
+{
+	return searchString;
+}
+
+
+/* setFilterString
+ * Sets the filter bar's search string.
+ */
+-(void)setFilterString:(NSString *)newFilterString
+{
+	[filterSearchField setStringValue:newFilterString];
+}
+
+/* filterString
  * Return the contents of the search field.
  */
--(NSString *)searchString
+-(NSString *)filterString
 {
 	return [filterSearchField stringValue];
 }
@@ -3170,7 +3191,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
-	[self searchArticlesWithString:[searchField stringValue]];
+	[self setSearchString:[searchField stringValue]];
+	
+	// The browser needs to be handled separately
+	NSView<BaseView> * theView = [browserView activeTabItemView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		[theView performFindPanelAction:NSFindPanelActionSetFindString];
+		[self setFocusToSearchField:self];
+	}
+	else
+		[self searchArticlesWithString:[searchField stringValue]];
 }
 
 /* searchArticlesWithString
@@ -3178,11 +3209,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * and then we make sure the search folder is selected so that the subsequent
  * reload will be scoped by the search string.
  */
--(void)searchArticlesWithString:(NSString *)searchString
+-(void)searchArticlesWithString:(NSString *)theSearchString
 {
-	if (![searchString isBlank])
+	if (![theSearchString isBlank])
 	{
-		[db setSearchString:searchString];
+		[db setSearchString:theSearchString];
 		if ([foldersTree actualSelection] != [db searchFolderId])
 			[foldersTree selectFolder:[db searchFolderId]];
 		else
@@ -4128,6 +4159,7 @@ static CFStringRef percentEscape(NSString *string)
 	[spinner release];
 	[searchField release];
 	[sourceWindows release];
+	[searchString release];
 	[super dealloc];
 }
 @end
