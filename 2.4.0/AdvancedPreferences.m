@@ -51,7 +51,7 @@
  */
 -(IBAction)showAdvancedHelp:(id)sender
 {
-	GotoHelpPage((CFStringRef)@"advanced.html", (CFStringRef)@"");
+	GotoHelpPage((CFStringRef)@"advanced.html", NULL);
 }
 
 /* initializePreferences
