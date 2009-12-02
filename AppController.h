@@ -96,6 +96,7 @@
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
+	NSString * searchString;
 }
 
 // Menu action items
@@ -185,6 +186,8 @@
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
+-(NSString *)filterString;
+-(void)setFilterString:(NSString *)newFilterString;
 -(NSString *)searchString;
 -(void)setSearchString:(NSString *)newSearchString;
 -(Article *)selectedArticle;

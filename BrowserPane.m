@@ -537,11 +537,7 @@
 	switch (actionTag)
 	{
 		case NSFindPanelActionSetFindString:
-		{
-			NSView * docView = [[[webPane mainFrame] frameView] documentView];
-			
-			if ([docView conformsToProtocol:@protocol(WebDocumentText)])
-				[controller setSearchString:[(id<WebDocumentText>)docView selectedString]];
+		{			
 			[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
 			break;
 		}
