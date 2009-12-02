@@ -199,10 +199,26 @@
 	if ([theURL rangeOfString:@"://"].location == NSNotFound)
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
 
-	NSURL * urlToLoad = [NSURL URLWithString:theURL];
+	// This is a hack to handle Internationalized Domain Names.
+	// WebKit does is automatically, so we tap into that.
+	NSURL *urlToLoad = nil;
+	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+	[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+	@try
+	{
+		if ([pasteboard setString:theURL forType:NSStringPboardType])
+			urlToLoad = [WebView URLFromPasteboard:pasteboard];
+	}
+	@catch (NSException * exception)
+	{
+		urlToLoad = nil;
+	}
+	
+	if (urlToLoad == nil)
+		urlToLoad = [NSURL URLWithString:theURL];
 	if (urlToLoad != nil)
 	{
-		[self loadURL:[NSURL URLWithString:theURL] inBackground:NO];
+		[self loadURL:urlToLoad inBackground:NO];
 	}
 	else
 	{
