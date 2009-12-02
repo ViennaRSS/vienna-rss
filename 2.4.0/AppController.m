@@ -78,7 +78,6 @@
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
 	-(void)initBlogWithMenu;
-	-(void)initJavaScriptPreferences;
 	-(void)initScriptsMenu;
 	-(void)initFiltersMenu;
 	-(NSMenu *)getStylesMenu;
@@ -400,8 +399,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-	
-	[self initJavaScriptPreferences];
 	
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -1516,19 +1513,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 	}
 	[columnsMenu setSubmenu:columnsSubMenu];
-}
-
--(void)initJavaScriptPreferences
-{
-	static WebPreferences * sJavaScriptPreferences;
-	
-	sJavaScriptPreferences = [[WebPreferences alloc] initWithIdentifier:@"ViennaJavaScriptEnabled"];
-	[sJavaScriptPreferences setAutosaves:NO];
-	[sJavaScriptPreferences setJavaScriptCanOpenWindowsAutomatically:NO];
-	[sJavaScriptPreferences setLoadsImagesAutomatically:NO];
-	[sJavaScriptPreferences setPlugInsEnabled:NO];
-	[sJavaScriptPreferences setPrivateBrowsingEnabled:YES];
-	[sJavaScriptPreferences setUsesPageCache:NO];
 }
 
 /* initScriptsMenu
