@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-
 <title>An error has occured</title>
 <style type="text/css" media="screen">
 body {
@@ -20,6 +19,12 @@ body {
 	border:1px solid gray;
 	background:url("../errorpagelogo.png") top left no-repeat #eee;
 }
+
+#ErrorInformation {
+	font-family: Courier, monospace, serif;
+	margin-left: 35px;
+	margin-right: 15px;
+}
 </style>
 </head>
 <body>
@@ -31,6 +36,8 @@ body {
 			<li>If the error persists and you are unable to load other pages as well, check your network connection.
 			<li>If your computer or network is protected by a firewall or proxy, make sure that your account, your machine, and Vienna are allowed to access the resource you specified.
 		</ul>
+		<center><h3>Error Information:</h3></center>
+		<div id="ErrorInformation">$ErrorInformation</div>
 	</div>
 </body>
 </html>
