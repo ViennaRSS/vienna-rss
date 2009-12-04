@@ -3157,7 +3157,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	searchString = newSearchString;
+	[searchString release];
+	searchString = [newSearchString retain];
 }
 
 /* searchString
@@ -4166,6 +4167,7 @@ static CFStringRef percentEscape(NSString *string)
 	[spinner release];
 	[searchField release];
 	[sourceWindows release];
+	[searchString release];
 	[super dealloc];
 }
 @end
