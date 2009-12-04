@@ -4166,7 +4166,6 @@ static CFStringRef percentEscape(NSString *string)
 	[spinner release];
 	[searchField release];
 	[sourceWindows release];
-	[searchString release];
 	[super dealloc];
 }
 @end
