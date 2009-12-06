@@ -3157,8 +3157,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
+	[newSearchString retain];
 	[searchString release];
-	searchString = [newSearchString retain];
+	searchString = newSearchString;
 }
 
 /* searchString
@@ -3166,7 +3167,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSString *)searchString
 {
-	return searchString;
+	return [[searchString retain] autorelease];
 }
 
 
