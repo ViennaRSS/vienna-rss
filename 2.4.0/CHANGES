@@ -10,6 +10,11 @@ Thanks!
 
 2.4.2400
 ________
+- Remove command-shift-g as keyboard shortcut for creating group folder. This is now used for Find Previous.
+- Show an alert when upgrading the database version, because it can take a while.
+- Turn off animation of tab resizing. It was slow, superfluous and apparently sometimes caused drawing errors in the tab bar background.
+- Fix crash when sorting articles by enclosure URL.
+- Update SQLite to version 3.6.18
 - Add ability to "Show XML Source" for feeds, which is now cached locally.
 - Add support for IDN (internationlized domain names) in the browser.
 - Add new supported blog editor (Blogo).
@@ -25,7 +30,7 @@ ________
 - Fix background drawing errors in main window and remove custom window background.
 - Fix drawing error in Downloads window and remove custom background.
 - Fix bug and exception where clicking on a feed link launched Vienna but failed to subscribe to the feed.
-- Add workaround for feeds that contain more than one item with the same guid.
+- Add workaround for feeds that contain more than one item with the same guid. (For example, the WordPress Trac, to name the guilty.)
 - Fix long standing bug where deleted articles would reappear after emptying the trash.
 - Fix "Help -> Keyboard shortcuts", which didn't work at all.
 - Numerous fixes to localization of help pages and other strings in German, French, and other languages.
