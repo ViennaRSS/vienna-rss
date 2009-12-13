@@ -30,9 +30,6 @@ ________
 - Fix "Help -> Keyboard shortcuts", which didn't work at all.
 - Numerous fixes to localization of help pages and other strings in German, French, and other languages.
 - General code and build-phase cleanup, as well as minor speed improvements for some operations.
-
-2.3.5.2306
-----------
 - Drop Mac OS X 10.4 Tiger support. Vienna 2.4 needs 10.5 Leopard or greater to launch.
 - Prevent an infinite redirect loop. This was happening with http://feeds.feedburner.com/factcheck/Rdqt
 - Fix the article view scrolling problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20814
