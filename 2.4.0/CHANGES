@@ -8,8 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-2.4.2400
-________
+2.4.0.2401
+----------
+- 
+
+2.4.0.2400
+----------
 - Remove command-shift-g as keyboard shortcut for creating group folder. This is now used for Find Previous.
 - Show an alert when upgrading the database version, because it can take a while.
 - Turn off animation of tab resizing. It was slow, superfluous and apparently sometimes caused drawing errors in the tab bar background.
