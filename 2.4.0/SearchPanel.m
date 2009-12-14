@@ -41,7 +41,7 @@
 		[NSBundle loadNibNamed:@"SearchPanel" owner:self];
 		[[searchField cell] setSearchMenuTemplate:[[NSApp delegate] searchFieldMenu]];
 	}
-	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current webpage", nil)];
+	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
 	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 

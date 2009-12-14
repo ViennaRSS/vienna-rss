@@ -3116,7 +3116,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
-		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current webpage", nil)];
+		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current web page", nil)];
 	}
 	else 
 	{
