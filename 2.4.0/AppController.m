@@ -3206,8 +3206,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
-		[theView performFindPanelAction:NSFindPanelActionSetFindString];
 		[self setFocusToSearchField:self];
+		[theView performFindPanelAction:NSFindPanelActionSetFindString];
 	}
 	else
 		[self searchArticlesWithString:[searchField stringValue]];
