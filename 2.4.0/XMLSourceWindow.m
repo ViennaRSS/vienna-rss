@@ -50,24 +50,36 @@
 		NSString *syntaxHighlighter = [NSString stringWithContentsOfFile:pathToSyntaxHighlighter encoding:NSUTF8StringEncoding error:NULL];
 		if (syntaxHighlighter != nil)
 		{
-			NSStringEncoding encoding;
-			NSError * error;
-			NSString * xmlSource = (feedSourceFilePath != nil) ? [NSString stringWithContentsOfFile:feedSourceFilePath usedEncoding:&encoding error:&error] : nil;
+			NSString * errorDescription = nil;
 			
-			// TODO: Implement real error handling.
-			if (xmlSource != nil)
+			if (feedSourceFilePath == nil)
 			{
-				// Get rid of potential body, script, CDATA and other tags within the string that may cause a mess.
-				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
-				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"[" withString:@"&#91;"];
-				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"]" withString:@"&#93;"];
-				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
-				xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
-
-				syntaxHighlighter = [syntaxHighlighter stringByReplacingOccurrencesOfString:@"$XMLSourceData" withString:xmlSource];
+				errorDescription = NSLocalizedString(@"No feed source to display.",nil);
 			}
 			else
-				syntaxHighlighter = [NSString stringWithFormat:@"<html><body><br><br><br><center>%@</center><body></html>", NSLocalizedString(@"No feed source to display.",nil)];
+			{
+				NSStringEncoding encoding;
+				NSError * error;
+				NSString * xmlSource = [NSString stringWithContentsOfFile:feedSourceFilePath usedEncoding:&encoding error:&error];
+				if (xmlSource != nil)
+				{
+					// Get rid of potential body, script, CDATA and other tags within the string that may cause a mess.
+					xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
+					xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"[" withString:@"&#91;"];
+					xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"]" withString:@"&#93;"];
+					xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+					xmlSource = [xmlSource stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+					
+					syntaxHighlighter = [syntaxHighlighter stringByReplacingOccurrencesOfString:@"$XMLSourceData" withString:xmlSource];
+				}
+				else
+					errorDescription = [error localizedDescription];
+			}
+			
+			if (errorDescription != nil)
+			{
+				syntaxHighlighter = [NSString stringWithFormat:@"<html><body><br><br><br><center>%@</center><body></html>", errorDescription];
+			}
 				
 			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
 		}
