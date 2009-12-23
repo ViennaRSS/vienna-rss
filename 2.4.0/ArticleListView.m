@@ -1015,7 +1015,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)performFindPanelAction:(int)actionTag
 {
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-	if (currentSelectedRow < 0 && [[articleController allArticles] count] > 0)
+	
+	// This action is send continuously by the filter field, so make sure not the mark read while searching
+	if (currentSelectedRow < 0 && [[articleController allArticles] count] > 0 && [[Preferences standardPreferences] markReadInterval] > 0.0f )
 		[self makeRowSelectedAndVisible:0];
 }
 
