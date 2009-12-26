@@ -19,7 +19,7 @@ Thanks!
 - Show an alert when upgrading the database version, because it can take a while.
 - Turn off animation of tab resizing. It was slow, superfluous and apparently sometimes caused drawing errors in the tab bar background.
 - Fix crash when sorting articles by enclosure URL.
-- Update SQLite to version 3.6.18
+- Update SQLite to version 3.6.18.
 - Add ability to "Show XML Source" for feeds, which is now cached locally.
 - Add support for IDN (internationlized domain names) in the browser.
 - Add new supported blog editor (Blogo).
@@ -47,6 +47,7 @@ Thanks!
 - Eliminate deprecated method warnings on Snow Leopard.
 - Eliminate drawing artifacts in Folders and Articles headers. (Patch from Dan Crosta)
 - Fix a crash reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21303
+- Enable navigating the built-in browser's back/forward-list via three-finger swipes (as in Safari).
 
 2.3.4.2305
 ----------
