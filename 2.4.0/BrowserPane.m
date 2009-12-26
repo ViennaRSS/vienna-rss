@@ -606,6 +606,21 @@
 	[webPane goBack];
 }
 
+/* swipeWithEvent 
+ * Enables navigating the Back/Forward-List via three-finger swipes as in Safari, etc.
+ */
+- (void)swipeWithEvent:(NSEvent *)event 
+{	
+	CGFloat deltaX = [event deltaX];
+	if (deltaX != 0)
+	{
+		if (deltaX > 0)
+			[self handleGoBack:self];
+		else 
+			[self handleGoForward:self];
+	}
+}
+
 /* handleReload
  * Reload the current web page.
  */
