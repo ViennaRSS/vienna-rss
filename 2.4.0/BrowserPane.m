@@ -644,14 +644,14 @@
 
 
 /* swipeWithEvent 
- * Enables navigating the Back/Forward-List via three-finger swipes as in Safari, etc.
+ * Enables "back"/"forward" and "scroll to top"/"scroll to bottom" via three-finger swipes as in Safari and other applications.
  */
 -(void)swipeWithEvent:(NSEvent *)event 
 {	
 	CGFloat deltaX = [event deltaX];
 	CGFloat deltaY = [event deltaY];
 
-	// If the vertial component of the swipe is  larger, the user wants to go back or forward...
+	// If the vertical component of the swipe is  larger, the user wants to go back or forward...
 	if (fabsf(deltaX) > fabsf(deltaY))
 	{
 		if (deltaX != 0)
@@ -662,7 +662,7 @@
 				[self handleGoForward:self];
 		}
 	}
-	// ... otherwise, she wants to go to top or bottom of the page.
+	// Otherwise, she wants to go to the top/bottom of the page.
 	else 
 	{
 		if (deltaY != 0)
