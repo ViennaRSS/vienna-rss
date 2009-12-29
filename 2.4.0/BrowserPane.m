@@ -606,18 +606,72 @@
 	[webPane goBack];
 }
 
+/* scrollToTop
+ * Scrolls to the top of the current web document.
+ */
+-(void)scrollToTop
+{
+    NSPoint newScrollOrigin;
+	NSScrollView * myScrollView;
+	
+	myScrollView = [[[[webPane mainFrame] frameView] documentView] enclosingScrollView];
+	
+    if ([[myScrollView documentView] isFlipped]) 
+        newScrollOrigin = NSMakePoint(0.0,0.0);
+	else 
+		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
+		
+    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
+}
+
+/* scrollToBottom
+ * Scrolls to the bottom of the current web document.
+ */
+-(void)scrollToBottom
+{
+    NSPoint newScrollOrigin;
+	NSScrollView * myScrollView;
+	
+	myScrollView = [[[[webPane mainFrame] frameView] documentView] enclosingScrollView];
+	
+    if ([[myScrollView documentView] isFlipped]) 
+		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
+	else 
+		newScrollOrigin = NSMakePoint(0.0,0.0);
+	
+    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
+}
+
+
 /* swipeWithEvent 
  * Enables navigating the Back/Forward-List via three-finger swipes as in Safari, etc.
  */
-- (void)swipeWithEvent:(NSEvent *)event 
+-(void)swipeWithEvent:(NSEvent *)event 
 {	
 	CGFloat deltaX = [event deltaX];
-	if (deltaX != 0)
+	CGFloat deltaY = [event deltaY];
+
+	// If the vertial component of the swipe is  larger, the user wants to go back or forward...
+	if (fabsf(deltaX) > fabsf(deltaY))
 	{
-		if (deltaX > 0)
-			[self handleGoBack:self];
-		else 
-			[self handleGoForward:self];
+		if (deltaX != 0)
+		{
+			if (deltaX > 0)
+				[self handleGoBack:self];
+			else 
+				[self handleGoForward:self];
+		}
+	}
+	// ... otherwise, she wants to go to top or bottom of the page.
+	else 
+	{
+		if (deltaY != 0)
+		{
+			if (deltaY > 0)
+				[self scrollToTop];
+			else 
+				[self scrollToBottom];
+		}
 	}
 }
 
