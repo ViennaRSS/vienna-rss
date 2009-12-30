@@ -7,11 +7,12 @@ most recent build should be at the top of this file.
 ** Use the notes.html file instead of this file for change notes?
 
 Thanks!
-nsscrollview
+
 2.4.0.2401
 ----------
 - Fix the filter field article selection problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21665
-
+- Enable navigating the built-in browser's back/forward-list via  left/right three-finger swipes.
+- Enable scrolling to the top/bottom of web pages via upwards/downwards three-finger swipes.
 
 2.4.0.2400
 ----------
@@ -47,8 +48,6 @@ nsscrollview
 - Eliminate deprecated method warnings on Snow Leopard.
 - Eliminate drawing artifacts in Folders and Articles headers. (Patch from Dan Crosta)
 - Fix a crash reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21303
-- Enable navigating the built-in browser's back/forward-list via  left/right three-finger swipes.
-- Enable scrolling to the top/bottom of web pages via upwards/downwards three-finger swipes.
 
 2.3.4.2305
 ----------
