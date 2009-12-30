@@ -651,7 +651,7 @@
 	CGFloat deltaX = [event deltaX];
 	CGFloat deltaY = [event deltaY];
 
-	// If the vertical component of the swipe is  larger, the user wants to go back or forward...
+	// If the horizontal component of the swipe is larger, the user wants to go back or forward...
 	if (fabsf(deltaX) > fabsf(deltaY))
 	{
 		if (deltaX != 0)
