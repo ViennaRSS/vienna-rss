@@ -2330,8 +2330,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 	case NSFindPanelActionSetFindString:
 		[self setFocusToSearchField:self];
-		[searchField setStringValue:[NSApp currentSelection]];
-		[searchPanel setSearchString:[NSApp currentSelection]];
+		[searchField setStringValue:[NSApp currentTextSelection]];
+		[searchPanel setSearchString:[NSApp currentTextSelection]];
 		break;
 
 	case NSFindPanelActionShowFindPanel:
@@ -3407,12 +3407,12 @@ static CFStringRef percentEscape(NSString *string)
 	// If the active tab is a web view, blog the URL
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
-		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabItemViewTitle:[browserView activeTabItemView]] url:[theView viewLink] body:[NSApp currentSelection] author:@"" guid:@""];
+		[self sendBlogEvent:externalEditorBundleIdentifier title:[browserView tabItemViewTitle:[browserView activeTabItemView]] url:[theView viewLink] body:[NSApp currentTextSelection] author:@"" guid:@""];
 	else
 	{
 		// Get the currently selected articles from the ArticleView and iterate over them.
 		for (Article * currentArticle in [mainArticleView markedArticleRange])
-			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] body:[NSApp currentSelection] author:[currentArticle author] guid:[currentArticle guid]];
+			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] body:[NSApp currentTextSelection] author:[currentArticle author] guid:[currentArticle guid]];
 	}
 }
 
