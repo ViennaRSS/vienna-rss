@@ -395,3 +395,6 @@
 "No feed source to display." = "No feed source to display.";
 "Search current web page" = "Search current web page";
 "Search all articles or the current web page" = "Search all articles or the current web page";
+"Database Upgrade" = "Database Upgrade";
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
+"Upgrade Database" = "Upgrade Database";
