@@ -267,7 +267,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  * Returns the current selected text from the article view or an empty
  * string if there is no selection.
  */
--(NSString *)currentSelection
+-(NSString *)currentTextSelection
 {
 	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabItemView];
 	WebView * webPane = nil;
