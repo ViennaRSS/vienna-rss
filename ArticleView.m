@@ -268,6 +268,76 @@ static NSMutableDictionary * stylePathMappings = nil;
 	[super keyDown:theEvent];
 }
 
+/* scrollToTop
+ * Scrolls to the top of the ArticleView.
+ */
+-(void)scrollToTop
+{
+    NSPoint newScrollOrigin;
+	NSScrollView * myScrollView;
+	
+	myScrollView = [[[[self mainFrame] frameView] documentView] enclosingScrollView];
+	
+    if ([[myScrollView documentView] isFlipped]) 
+        newScrollOrigin = NSMakePoint(0.0,0.0);
+	else 
+		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
+	
+    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
+}
+
+/* scrollToBottom
+ * Scrolls to the bottom of the ArticleView.
+ */
+-(void)scrollToBottom
+{
+    NSPoint newScrollOrigin;
+	NSScrollView * myScrollView;
+	
+	myScrollView = [[[[self mainFrame] frameView] documentView] enclosingScrollView];
+	
+    if ([[myScrollView documentView] isFlipped]) 
+		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
+	else 
+		newScrollOrigin = NSMakePoint(0.0,0.0);
+	
+    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
+}
+
+
+/* swipeWithEvent 
+ * Enables "scroll to top"/"scroll to bottom" via vertical three-finger swipes as in Safari and other applications.
+ * Also enables calling "viewNextUnread:" and "goBack:" via horizontal three-finger swipes.
+ */
+-(void)swipeWithEvent:(NSEvent *)event 
+{	
+	CGFloat deltaX = [event deltaX];
+	CGFloat deltaY = [event deltaY];
+		
+	/* Check which is more likely to be what the user wanted: horizontal or vertical swipe?
+	 * Thankfully, that's all the checking we need to do as built-in swipe detection is very solid. */
+	if ( fabsf(deltaY) > fabsf(deltaX) )
+	{
+		if (deltaY != 0)
+		{
+			if (deltaY > 0)
+				[self scrollToTop];
+			else
+				[self scrollToBottom];
+		}
+	}
+	else 
+	{
+		if (deltaX != 0)
+		{
+			if (deltaX > 0)
+				[controller goBack:self];
+			else 
+				[controller viewNextUnread:self];
+		}
+	}		
+}
+
 /* decidePolicyForNewWindowAction
  * Called by the web view to get our policy on handling actions that would open a new window.
  * When opening clicked links in the background or an external browser, we want the first responder to return to the article list.
