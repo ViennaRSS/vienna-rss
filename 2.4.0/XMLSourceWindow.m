@@ -19,6 +19,7 @@
 //
 
 #import "XMLSourceWindow.h"
+#import "AppController.h"
 #import "Folder.h"
 
 @implementation XMLSourceWindow
@@ -129,8 +130,8 @@
 		int navigationType = [navigationTypeObject intValue];
 		if (navigationType == WebNavigationTypeLinkClicked)
 		{
-			// Ignore all links
 			[listener ignore];
+			[[NSApp delegate] openURL:[request URL] inPreferredBrowser:YES];
 			return;
 		}
 	}
