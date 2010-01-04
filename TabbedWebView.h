@@ -39,4 +39,6 @@
 -(void)printDocument:(id)sender;
 -(BOOL)isFeedRedirect;
 -(BOOL)isDownload;
+-(void)scrollToTop;
+-(void)scrollToBottom;
 @end

@@ -606,43 +606,6 @@
 	[webPane goBack];
 }
 
-/* scrollToTop
- * Scrolls to the top of the current web document.
- */
--(void)scrollToTop
-{
-    NSPoint newScrollOrigin;
-	NSScrollView * myScrollView;
-	
-	myScrollView = [[[[webPane mainFrame] frameView] documentView] enclosingScrollView];
-	
-    if ([[myScrollView documentView] isFlipped]) 
-        newScrollOrigin = NSMakePoint(0.0,0.0);
-	else 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
-		
-    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
-}
-
-/* scrollToBottom
- * Scrolls to the bottom of the current web document.
- */
--(void)scrollToBottom
-{
-    NSPoint newScrollOrigin;
-	NSScrollView * myScrollView;
-	
-	myScrollView = [[[[webPane mainFrame] frameView] documentView] enclosingScrollView];
-	
-    if ([[myScrollView documentView] isFlipped]) 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
-	else 
-		newScrollOrigin = NSMakePoint(0.0,0.0);
-	
-    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
-}
-
-
 /* swipeWithEvent 
  * Enables "back"/"forward" and "scroll to top"/"scroll to bottom" via three-finger swipes as in Safari and other applications.
  */
@@ -668,9 +631,9 @@
 		if (deltaY != 0)
 		{
 			if (deltaY > 0)
-				[self scrollToTop];
+				[webPane scrollToTop];
 			else 
-				[self scrollToBottom];
+				[webPane scrollToBottom];
 		}
 	}
 }
