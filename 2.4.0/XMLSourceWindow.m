@@ -121,4 +121,21 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:[notification name] object:self];
 }
 
+- (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
+{
+	NSNumber * navigationTypeObject = [actionInformation objectForKey:WebActionNavigationTypeKey];
+	if (navigationTypeObject != nil)
+	{
+		int navigationType = [navigationTypeObject intValue];
+		if (navigationType == WebNavigationTypeLinkClicked)
+		{
+			// Ignore all links
+			[listener ignore];
+			return;
+		}
+	}
+	
+	[listener use];
+}
+
 @end
