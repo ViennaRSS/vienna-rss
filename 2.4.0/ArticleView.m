@@ -268,43 +268,6 @@ static NSMutableDictionary * stylePathMappings = nil;
 	[super keyDown:theEvent];
 }
 
-/* scrollToTop
- * Scrolls to the top of the ArticleView.
- */
--(void)scrollToTop
-{
-    NSPoint newScrollOrigin;
-	NSScrollView * myScrollView;
-	
-	myScrollView = [[[[self mainFrame] frameView] documentView] enclosingScrollView];
-	
-    if ([[myScrollView documentView] isFlipped]) 
-        newScrollOrigin = NSMakePoint(0.0,0.0);
-	else 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
-	
-    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
-}
-
-/* scrollToBottom
- * Scrolls to the bottom of the ArticleView.
- */
--(void)scrollToBottom
-{
-    NSPoint newScrollOrigin;
-	NSScrollView * myScrollView;
-	
-	myScrollView = [[[[self mainFrame] frameView] documentView] enclosingScrollView];
-	
-    if ([[myScrollView documentView] isFlipped]) 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
-	else 
-		newScrollOrigin = NSMakePoint(0.0,0.0);
-	
-    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
-}
-
-
 /* swipeWithEvent 
  * Enables "scroll to top"/"scroll to bottom" via vertical three-finger swipes as in Safari and other applications.
  * Also enables calling "viewNextUnread:" and "goBack:" via horizontal three-finger swipes.
