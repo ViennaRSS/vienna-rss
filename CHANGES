@@ -12,7 +12,8 @@ Thanks!
 ----------
 - Fix the filter field article selection problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21665
 - Enable navigating the built-in browser's back/forward-list via  left/right three-finger swipes.
-- Enable scrolling to the top/bottom of web pages via upwards/downwards three-finger swipes.
+- Enable navigating feeds via left/right three-finger swipes: Left for "Go Back" and right for "View Next Unread".
+- Enable as scrolling to the top/bottom of web pages and the article list via upwards/downwards three-finger swipes.
 
 2.4.0.2400
 ----------
