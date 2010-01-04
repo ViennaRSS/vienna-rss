@@ -294,7 +294,7 @@
 }
 
 /* scrollToTop
- * Scrolls to the top of the ArticleView.
+ * Scrolls to the top of the TabbedWebView.
  */
 -(void)scrollToTop
 {
@@ -312,7 +312,7 @@
 }
 
 /* scrollToBottom
- * Scrolls to the bottom of the ArticleView.
+ * Scrolls to the bottom of the TabbedWebView.
  */
 -(void)scrollToBottom
 {
@@ -328,7 +328,6 @@
 	
     [[myScrollView documentView] scrollPoint: newScrollOrigin];	
 }
-
 
 /* loadUseJavaScript
  * Sets up the web preferences for using JavaScript.
