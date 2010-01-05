@@ -430,7 +430,7 @@
 					<key>Type</key>
 					<string>NSNumber&lt;Int&gt;</string>
 				</dict>
-				<key>currentSelection</key>
+				<key>currentTextSelection</key>
 				<dict>
 					<key>AppleEventCode</key>
 					<string>cuSE</string>
