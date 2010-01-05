@@ -14,6 +14,7 @@ Thanks!
 - Enable navigating the built-in browser's back/forward-list via  left/right three-finger swipes.
 - Enable navigating feeds via left/right three-finger swipes: Left for "Go Back" and right for "View Next Unread".
 - Enable as scrolling to the top/bottom of web pages and the article list via upwards/downwards three-finger swipes.
+- Change "currentSelection" to "currentTextSelection" in Viennas Applescript terminology.
 
 2.4.0.2400
 ----------

@@ -326,7 +326,7 @@
 					<key>Name</key>
 					<string>total unread count</string>
 				</dict>
-				<key>currentSelection</key>
+				<key>currentTextSelection</key>
 				<dict>
 					<key>Description</key>
 					<string>Returns the text selected in the current article or web page</string>
