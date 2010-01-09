@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>Apple Hot News</key>
@@ -35,7 +35,7 @@
 	<key>Vienna Developer Blog</key>
 	<dict>
 		<key>URL</key>
-		<string>http://www.vienna-rss.org/blog/atom.xml</string>
+		<string>http://www.vienna-rss.org/?feed=rss2</string>
 	</dict>
 	<key>Vienna Support</key>
 	<dict>
