@@ -1,0 +1,13 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {doNotEmptyTrash = id; emptyTrash = id; }; 
+            CLASS = EmptyTrashWarning; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {doNotShowWarningAgain = NSButton; }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
