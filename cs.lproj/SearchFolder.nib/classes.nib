@@ -1,0 +1,36 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                addNewCriteria = id; 
+                doCancel = id; 
+                doSave = id; 
+                fieldChanged = id; 
+                removeCurrentCriteria = id; 
+            }; 
+            CLASS = SmartFolder; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                addCriteriaButton = NSButton; 
+                cancelButton = NSButton; 
+                criteriaConditionPopup = NSPopUpButton; 
+                dateValueField = NSPopUpButton; 
+                fieldNamePopup = NSPopUpButton; 
+                flagValueField = NSPopUpButton; 
+                folderValueField = NSPopUpButton; 
+                numberValueField = NSTextField; 
+                operatorPopup = NSPopUpButton; 
+                removeCriteriaButton = NSButton; 
+                saveButton = NSButton; 
+                searchCriteriaSuperview = NSView; 
+                searchCriteriaView = NSView; 
+                searchWindow = NSWindow; 
+                smartFolderName = NSTextField; 
+                valueField = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
