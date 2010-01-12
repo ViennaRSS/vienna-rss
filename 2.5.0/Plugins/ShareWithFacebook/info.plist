@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithFacebook</string>
+	<key>Type</key>
+	<string>Link</string>
+	<key>URL</key>
+	<string>http://www.facebook.com/sharer.php?u=$ArticleLink$&amp;t=$ArticleTitle$</string>
+	<key>Default</key>
+	<false/>
+	<key>FriendlyName</key>
+	<string>Facebook</string>
+	<key>Tooltip</key>
+	<string>Share the current article on Facebook</string>
+	<key>ButtonImage</key>
+	<string>facebookButton</string>
+</dict>
+</plist>

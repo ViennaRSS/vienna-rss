@@ -71,9 +71,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 /* performDragOperation
  * Don't accept stuff dragged into the article view. 
  */
-- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+-(BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 { 
-	        return NO;
+	return NO;
 }
 
 /* stylesMap

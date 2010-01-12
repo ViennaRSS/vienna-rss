@@ -35,6 +35,7 @@ NSString * MAPref_CheckForUpdatesOnStartup = @"SUCheckAtStartup";
 NSString * MAPref_CheckForNewArticlesOnStartup = @"CheckForNewMessagesOnStartup";
 NSString * MAPref_FolderImagesFolder = @"FolderIconsCache";
 NSString * MAPref_StylesFolder = @"StylesFolder";
+NSString * MAPref_PluginsFolder = @"PluginsFolder";
 NSString * MAPref_ScriptsFolder = @"ScriptsFolder";
 NSString * MAPref_RefreshThreads = @"MaxRefreshThreads";
 NSString * MAPref_ActiveStyleName = @"ActiveStyle";

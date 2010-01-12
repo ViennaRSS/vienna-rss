@@ -38,6 +38,7 @@ extern NSString * MAPref_FolderImagesFolder;
 extern NSString * MAPref_RefreshThreads;
 extern NSString * MAPref_ActiveStyleName;
 extern NSString * MAPref_StylesFolder;
+extern NSString * MAPref_PluginsFolder;
 extern NSString * MAPref_ScriptsFolder;
 extern NSString * MAPref_FolderStates;
 extern NSString * MAPref_BacktrackQueueSize;

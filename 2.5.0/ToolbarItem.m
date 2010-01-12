@@ -22,6 +22,8 @@
 #import "ToolbarButton.h"
 #import "PopupButton.h"
 
+#define CenterPoint(x,y) (NSMakePoint(((x).width - (y).width)/2, ((x).height - (y).height)/2))
+
 @implementation ToolbarItem
 
 /* validate
@@ -60,6 +62,54 @@
 	[self setMaxSize:fRect.size];
 }
 
+/* compositeButtonImage
+ * Define the toolbar item as a button and initialises it with the necessary
+ * attributes and states by compositing a blank button with the specified image
+ * from the given folder.
+ */
+-(void)compositeButtonImage:(NSString *)imageName fromPath:(NSString *)path
+{
+	NSString * theImage = [NSString stringWithFormat:@"%@.tiff", imageName];
+	NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+	NSImage * userImage = [[NSImage alloc] initWithContentsOfFile:[path stringByAppendingPathComponent:theImage]];
+	NSSize userImageSize = [userImage size];
+
+	NSImage * buttonImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButton.tiff"]];
+	NSSize buttonSize = [buttonImage size];
+	[buttonImage lockFocus];
+	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[buttonImage unlockFocus];
+
+	NSImage * pressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButtonPressed.tiff"]];
+	buttonSize = [pressedImage size];
+	[pressedImage lockFocus];
+	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[pressedImage unlockFocus];
+	
+	NSImage * smallNormalImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButton.tiff"]];
+	buttonSize = [smallNormalImage size];
+	[smallNormalImage lockFocus];
+	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[smallNormalImage unlockFocus];
+
+	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButtonPressed.tiff"]];
+	buttonSize = [smallPressedImage size];
+	[smallPressedImage lockFocus];
+	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[smallPressedImage unlockFocus];
+	
+	[self setButtonImages:buttonImage
+			 pressedImage:pressedImage
+		 smallNormalImage:smallNormalImage
+		smallPressedImage:smallPressedImage];
+	
+	[buttonImage release];
+	[pressedImage release];
+	[smallNormalImage release];
+	[smallPressedImage release];
+	[userImage release];
+}
+
 /* setButtonImage
  * Define the toolbar item as a button and initialises it with the necessary
  * attributes and states using the specified image name.
@@ -71,14 +121,25 @@
 	NSString * smallNormalImage = [NSString stringWithFormat:@"%@Small.tiff", imageName];
 	NSString * smallPressedImage = [NSString stringWithFormat:@"%@SmallPressed.tiff", imageName];
 
-	NSImage * buttonImage = [NSImage imageNamed:normalImage];
+	[self setButtonImages:[NSImage imageNamed:normalImage]
+			 pressedImage:[NSImage imageNamed:pressedImage]
+		 smallNormalImage:[NSImage imageNamed:smallNormalImage]
+		smallPressedImage:[NSImage imageNamed:smallPressedImage]];
+}
+
+/* setButtonImages
+ * Define the toolbar item as a button and initialises it with the necessary
+ * attributes and states using the specified set of images for each state.
+ */
+-(void)setButtonImages:(NSImage *)buttonImage pressedImage:(NSImage *)pressedImage smallNormalImage:(NSImage *)smallNormalImage smallPressedImage:(NSImage *)smallPressedImage
+{
 	NSSize buttonSize = [buttonImage size];
 	ToolbarButton * button = [[ToolbarButton alloc] initWithFrame:NSMakeRect(0, 0, buttonSize.width, buttonSize.height) withItem:self];
-	
+
 	[button setImage:buttonImage];
-	[button setAlternateImage:[NSImage imageNamed:pressedImage]];
-	[button setSmallImage:[NSImage imageNamed:smallNormalImage]];
-	[button setSmallAlternateImage:[NSImage imageNamed:smallPressedImage]];
+	[button setAlternateImage:pressedImage];
+	[button setSmallImage:smallNormalImage];
+	[button setSmallAlternateImage:smallPressedImage];
 	
 	// Save the current target and action and reapply them afterward because assigning a view
 	// causes them to be deleted.

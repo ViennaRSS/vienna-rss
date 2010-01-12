@@ -26,6 +26,7 @@
 #import "DownloadWindow.h"
 #import "FilterView.h"
 #import "PopupButton.h"
+#import "PluginManager.h"
 
 @class NewPreferenceController;
 @class FoldersTree;
@@ -83,6 +84,7 @@
 	NSMutableArray * sourceWindows;
 	
 	Database * db;
+	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
 	NSImage * originalIcon;
 	NSMenu * appDockMenu;

@@ -163,6 +163,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	[mainWindow setTitle:[self appName]];
 	[NSApp setDelegate:self];
 	[mainWindow setMinSize: NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height)];
+
+	// Initialise the plugin manager now that the UI is ready
+	pluginManager = [[PluginManager alloc] init];
+	[pluginManager resetPlugins];
 	
 	// Retain views which might be removed from the toolbar and therefore released;
 	// we will need them if they are added back later.
@@ -4100,6 +4104,10 @@ static CFStringRef percentEscape(NSString *string)
 		[item setPaletteLabel:[item label]];
 		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
 	}
+	else
+	{
+		[pluginManager toolbarItem:item withIdentifier:itemIdentifier];
+	}
 	return [item autorelease];
 }
 
@@ -4109,14 +4117,14 @@ static CFStringRef percentEscape(NSString *string)
  */
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [NSArray arrayWithObjects:
+	return [[NSArray arrayWithObjects:
 		@"Subscribe",
 		@"SkipFolder",
 		@"Action",
 		@"Refresh",
 		NSToolbarFlexibleSpaceItemIdentifier,
-		@"SearchItem",
-		nil];
+	    @"SearchItem",
+	    nil] arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]];
 }
 
 /* toolbarAllowedItemIdentifiers
@@ -4125,7 +4133,7 @@ static CFStringRef percentEscape(NSString *string)
  */
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [NSArray arrayWithObjects:
+	return [[NSArray arrayWithObjects:
 		NSToolbarSeparatorItemIdentifier,
 		NSToolbarSpaceItemIdentifier,
 		NSToolbarFlexibleSpaceItemIdentifier,
@@ -4141,7 +4149,7 @@ static CFStringRef percentEscape(NSString *string)
 		@"Styles",
 		@"PreviousButton",
 		@"NextButton",
-		nil];
+		nil] arrayByAddingObjectsFromArray:[pluginManager toolbarItems]];
 }
 
 /* dealloc
@@ -4150,6 +4158,7 @@ static CFStringRef percentEscape(NSString *string)
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[pluginManager release];
 	[scriptsMenuItem release];
 	[standardURLs release];
 	[downloadWindow release];

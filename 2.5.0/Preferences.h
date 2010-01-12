@@ -50,6 +50,7 @@
 	NSString * imagesFolder;
 	NSString * scriptsFolder;
 	NSString * stylesFolder;
+	NSString * pluginsFolder;
 	NSString * feedSourcesFolder;
 	NSFont * folderFont;
 	NSFont * articleFont;
@@ -84,6 +85,9 @@
 
 // Path to styles folder
 -(NSString *)stylesFolder;
+
+// Path to the external plugins folder
+-(NSString *)pluginsFolder;
 
 // Read-only internal settings
 -(int)backTrackQueueSize;

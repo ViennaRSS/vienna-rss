@@ -1,9 +1,9 @@
 //
-//  ToolbarButton.h
+//  PluginManager.h
 //  Vienna
 //
-//  Created by Steve Palmer on 04/07/2007.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Created by Steve on 10/1/10.
+//  Copyright (c) 2004-2010 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -15,23 +15,18 @@
 //  distributed under the License is distributed on an "AS IS" BASIS,
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
-//  
+//  limitations under the License.
+//
 
 #import <Cocoa/Cocoa.h>
+#import "ToolbarItem.h"
 
-@interface ToolbarButton : NSButton {
-	NSToolbarItem * item;
-	NSImage * image;
-	NSImage * alternateImage;
-	NSImage * smallImage;
-	NSImage * smallAlternateImage;
-	NSSize imageSize;
-	NSSize smallImageSize;
+@interface PluginManager : NSObject {
+	NSMutableDictionary * allPlugins;
 }
 
-// Public functions
--(NSString *)itemIdentifier;
--(id)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)tbItem;
--(void)setSmallImage:(NSImage *)image;
--(void)setSmallAlternateImage:(NSImage *)image;
+-(void)resetPlugins;
+-(NSArray *)toolbarItems;
+-(NSArray *)defaultToolbarItems;
+-(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier;
 @end

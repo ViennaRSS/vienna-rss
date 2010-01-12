@@ -47,6 +47,14 @@
 	return self;
 }
 
+/* itemIdentifier
+ * Return the button's item identifier.
+ */
+-(NSString *)itemIdentifier
+{
+	return [item itemIdentifier];
+}
+
 /* setSmallImage
  * Set the image displayed when the button is made small.
  */

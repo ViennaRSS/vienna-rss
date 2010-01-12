@@ -32,6 +32,8 @@ NSString * MA_DefaultStyleName = @"FeedLight Aqua (Default)";
 NSString * MA_Database_Name = @"messages.db";
 NSString * MA_ImagesFolder_Name = @"Images";
 NSString * MA_StylesFolder_Name = @"Styles";
+NSString * MA_ScriptsFolder_Name = @"Scripts";
+NSString * MA_PluginsFolder_Name = @"Plugins";
 NSString * MA_FeedSourcesFolder_Name = @"Sources";
 
 // The default preferences object.
@@ -105,6 +107,7 @@ static Preferences * _standardPreferences = nil;
 			defaultDatabase = [[userPrefs valueForKey:MAPref_DefaultDatabase] retain];
 			imagesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
 			stylesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
+			pluginsFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_PluginsFolder_Name] stringByExpandingTildeInPath] retain];
 			scriptsFolder = [[MA_ScriptsFolder stringByExpandingTildeInPath] retain];
 			feedSourcesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_FeedSourcesFolder_Name] stringByExpandingTildeInPath] retain];
 		}
@@ -141,7 +144,8 @@ static Preferences * _standardPreferences = nil;
 			defaultDatabase = [[profilePath stringByAppendingPathComponent:MA_Database_Name] retain];
 			imagesFolder = [[[profilePath stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
 			stylesFolder = [[[profilePath stringByAppendingPathComponent:MA_StylesFolder_Name] stringByExpandingTildeInPath] retain];
-			scriptsFolder = [[[profilePath stringByAppendingPathComponent:@"Scripts"] stringByExpandingTildeInPath] retain];
+			scriptsFolder = [[[profilePath stringByAppendingPathComponent:MA_ScriptsFolder_Name] stringByExpandingTildeInPath] retain];
+			pluginsFolder = [[[profilePath stringByAppendingPathComponent:MA_PluginsFolder_Name] stringByExpandingTildeInPath] retain];
 			feedSourcesFolder = [[[profilePath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name] stringByExpandingTildeInPath] retain];
 		}
 		
@@ -373,6 +377,14 @@ static Preferences * _standardPreferences = nil;
 -(NSString *)imagesFolder
 {
 	return imagesFolder;
+}
+
+/* pluginsFolder
+ * Returns the path to where the user plugins are stored
+ */
+-(NSString *)pluginsFolder
+{
+	return pluginsFolder;
 }
 
 /* stylesFolder
