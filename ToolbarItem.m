@@ -22,7 +22,7 @@
 #import "ToolbarButton.h"
 #import "PopupButton.h"
 
-#define CenterPoint(x,y) (NSMakePoint(((x).width - (y).width)/2, ((x).height - (y).height)/2))
+#define CenterRect(x,y) (NSMakeRect(((x).width - (y).width)/2, (((x).height - (y).height)/2), (y).width, (y).height))		
 
 @implementation ToolbarItem
 
@@ -70,32 +70,51 @@
 -(void)compositeButtonImage:(NSString *)imageName fromPath:(NSString *)path
 {
 	NSString * theImage = [NSString stringWithFormat:@"%@.tiff", imageName];
+	NSString * theSmallImage = [NSString stringWithFormat:@"small%@.tiff", imageName];
 	NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
 	NSImage * userImage = [[NSImage alloc] initWithContentsOfFile:[path stringByAppendingPathComponent:theImage]];
 	NSSize userImageSize = [userImage size];
+	NSRect userImageRect = NSMakeRect(0.0, 0.0, userImageSize.width, userImageSize.height);
+
+	// May not necessarily be a small image in which case we'd need to synthesize one from the large one
+	NSImage * smallUserImage = [[NSImage alloc] initWithContentsOfFile:[path stringByAppendingPathComponent:theSmallImage]];
+	NSSize smallUserImageSize;
+	NSRect smallUserImageRect;
+
+	if (smallUserImage != nil)
+	{
+		smallUserImageSize = [smallUserImage size];
+		smallUserImageRect = NSMakeRect(0.0, 0.0, smallUserImageSize.width, smallUserImageSize.height);
+	}
+	else
+	{
+		smallUserImage = [userImage retain];
+		smallUserImageSize = NSMakeSize(12.0, 12.0);
+		smallUserImageRect = userImageRect;
+	}
 
 	NSImage * buttonImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButton.tiff"]];
 	NSSize buttonSize = [buttonImage size];
 	[buttonImage lockFocus];
-	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[userImage drawInRect:CenterRect(buttonSize, userImageSize) fromRect:userImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[buttonImage unlockFocus];
 
 	NSImage * pressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButtonPressed.tiff"]];
 	buttonSize = [pressedImage size];
 	[pressedImage lockFocus];
-	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[userImage drawInRect:CenterRect(buttonSize, userImageSize) fromRect:userImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[pressedImage unlockFocus];
 	
 	NSImage * smallNormalImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButton.tiff"]];
 	buttonSize = [smallNormalImage size];
 	[smallNormalImage lockFocus];
-	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[smallNormalImage unlockFocus];
 
 	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButtonPressed.tiff"]];
 	buttonSize = [smallPressedImage size];
 	[smallPressedImage lockFocus];
-	[userImage drawAtPoint:CenterPoint(buttonSize, userImageSize) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[smallPressedImage unlockFocus];
 	
 	[self setButtonImages:buttonImage
@@ -107,6 +126,7 @@
 	[pressedImage release];
 	[smallNormalImage release];
 	[smallPressedImage release];
+	[smallUserImage release];
 	[userImage release];
 }
 
