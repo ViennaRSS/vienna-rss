@@ -165,6 +165,18 @@
 			NSURL * url = [NSURL URLWithString:expandedURL];
 			[[NSApp delegate] openURL:url inPreferredBrowser:YES];
 		}
+		else if ([itemType isEqualToString:@"Script"])
+		{
+			// This is a script plugin. There should be a Script field which specifies the
+			// filename of the script file in the same folder.
+			NSString * pluginPath = [pluginItem objectForKey:@"Path"];
+			NSString * scriptFile = [pluginPath stringByAppendingPathComponent:[pluginItem objectForKey:@"Script"]];
+			if (scriptFile == nil)
+				return;
+
+			// Just run the script
+			[[NSApp delegate] runAppleScript:scriptFile];
+		}
 	}
 }
 

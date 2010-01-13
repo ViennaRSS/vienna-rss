@@ -195,6 +195,7 @@
 -(Article *)selectedArticle;
 -(int)currentFolderId;
 -(BOOL)isConnecting;
+-(void)runAppleScript:(NSString *)scriptName;
 -(NSDictionary *)standardURLs;
 -(BrowserView *)browserView;
 -(NSArray *)folders;
