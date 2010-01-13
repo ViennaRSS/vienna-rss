@@ -4,9 +4,10 @@ Vienna To-Do File
 Update this file with a list of things that users have requested but which aren't yet implemented.
 Thanks!
 
-Accepted for 2.2
-================
-- Single article list and viewer interface (as in Bloglines).
+Bugfixes accepted for 2.5
+=========================
+- Prevent auto-updating to a version of Vienna that does not run on the current system version.
+- Prevent the issue reported here: http://forums.cocoaforge.com/viewtopic.php?f=18&t=21751#p123396
 
 Known Issues (May not be fixed)
 ===============================
@@ -16,7 +17,6 @@ Known Issues (May not be fixed)
 
 Wishlist
 ========
-- Bloglines integration.
 - Show the feed icon in the article list pane/unified view.
 - Support retrieving and posting Atom/RSS 2.0 comments.
 - Spotlight support.
@@ -31,15 +31,12 @@ Wishlist
 - More options in date field in smart folders: last 24 hour, last 24-48 hours.
 - Detect duplicate articles in separate folders and show only once.
 - Show "New..." commands on folder popup menu.
-- Cache full XML for original article and return via Applescript.
 - Show warning icon on collapsed group folder if any sub-folders have warnings.
 - Mix conditionals within smart folders.
 - Show article count for folders (including Trash).
 - Empty Trash command in contextual menu for Trash.
 - Per-feed refresh settings.
 - Unread count for smart folders.
-- Synchronisation via .Mac or FTP.
-- Fix web browser to block popups.
 - Download images within articles so that they can be viewed offline.
 - Next Unread command moves to next unread article rather than next feed in unified layout.
 - In unified view, different styles for read and unread articles.
@@ -53,12 +50,5 @@ Wishlist
 - Hold down option key (or other combo) while pressing mark all read button to mark all subscriptions read.
 - Use shift key to toggle whether to open tabs in foreground/background in Vienna.
 - Drop-down navigation list for back and forward buttons in browser pane.
-- Drop-down overflow list when too many tabs are open.
 - When deleting subscription, also delete smart folder rules involving that subscription.
 - Add CSS variables for localizable strings.
-
-Rejected Requests
-=================
-- Support for AmphetaRate (http://amphetarate.newsfairy.com/index.php). [Server is offline - no replacement known].
-- Ad-blocking for HTML view. (http://braden.machacking.net/). [Server not found].
-
