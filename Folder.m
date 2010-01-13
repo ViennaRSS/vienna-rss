@@ -165,10 +165,9 @@ static NSArray * iconArray = nil;
 		listOfFiles = [fileManager directoryContentsAtPath:imagesCacheFolder];
 		if (listOfFiles != nil)
 		{
-			NSEnumerator * enumerator = [listOfFiles objectEnumerator];
 			NSString * fileName;
 			
-			while ((fileName = [enumerator nextObject]) != nil)
+			for (fileName in listOfFiles)
 			{
 				if ([[fileName pathExtension] isEqualToString:@"tiff"])
 				{
