@@ -6,7 +6,6 @@ Thanks!
 
 Bugfixes accepted for 2.5
 =========================
-- Prevent auto-updating to a version of Vienna that does not run on the current system version.
 - Prevent the issue reported here: http://forums.cocoaforge.com/viewtopic.php?f=18&t=21751#p123396
 
 Known Issues (May not be fixed)

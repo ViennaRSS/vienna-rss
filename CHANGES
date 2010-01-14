@@ -13,6 +13,7 @@ Thanks!
 - Add support for plugins.
 - Added Share With Facebook button.
 - Added Share With Evernote button.
+- Update to the current version of Sparkle, which prevents auto-updating to a version of Vienna which will not run on the user's system.
 
 2.4.0.2401
 ----------
