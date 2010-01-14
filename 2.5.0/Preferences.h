@@ -179,6 +179,9 @@
 -(BOOL)showAppInStatusBar;
 -(void)setShowAppInStatusBar:(BOOL)show;
 
+// Handle update via Sparkle
+-(void)handleUpdateRestart;
+
 // Show or hide the status bar
 -(BOOL)showStatusBar;
 -(void)setShowStatusBar:(BOOL)show;

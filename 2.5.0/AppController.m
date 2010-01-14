@@ -50,6 +50,7 @@
 #import "ToolbarItem.h"
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
+#import <Sparkle/Sparkle.h>
 #import <WebKit/WebKit.h>
 #import <Growl/GrowlDefines.h>
 #include <mach/mach_port.h>
@@ -59,54 +60,54 @@
 #include <IOKit/IOMessage.h>
 
 @interface AppController (Private)
-	-(NSMenu *)searchFieldMenu;
-	-(void)installSleepHandler;
-	-(void)installScriptsFolderWatcher;
-	-(void)handleTabChange:(NSNotification *)nc;
-	-(void)handleFolderSelection:(NSNotification *)nc;
-	-(void)handleCheckFrequencyChange:(NSNotification *)nc;
-	-(void)handleFolderNameChange:(NSNotification *)nc;
-	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
-	-(void)handleReloadPreferences:(NSNotification *)nc;
-	-(void)handleShowAppInStatusBar:(NSNotification *)nc;
-	-(void)handleShowStatusBar:(NSNotification *)nc;
-	-(void)handleShowFilterBar:(NSNotification *)nc;
-	-(void)setAppStatusBarIcon;
-	-(void)localiseMenus:(NSArray *)arrayOfMenus;
-	-(void)updateNewArticlesNotification;
-	-(void)showAppInStatusBar;
-	-(void)initSortMenu;
-	-(void)initColumnsMenu;
-	-(void)initBlogWithMenu;
-	-(void)initScriptsMenu;
-	-(void)initFiltersMenu;
-	-(NSMenu *)getStylesMenu;
-	-(void)startProgressIndicator;
-	-(void)stopProgressIndicator;
-	-(void)doEditFolder:(Folder *)folder;
-	-(void)refreshOnTimer:(NSTimer *)aTimer;
-	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-	-(void)runAppleScript:(NSString *)scriptName;
-	-(NSString *)appName;
-	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
-	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
-	-(void)updateAlternateMenuTitle;
-	-(void)updateSearchPlaceholder;
-	-(void)toggleOptionKeyButtonStates;
-	-(FoldersTree *)foldersTree;
-	-(void)updateCloseCommands;
-	-(void)loadOpenTabs;
-	-(BOOL)isFilterBarVisible;
-	-(BOOL)isStatusBarVisible;
-	-(NSDictionary *)registrationDictionaryForGrowl;
-	-(NSTimer *)checkTimer;
-	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
-	-(void)searchArticlesWithString:(NSString *)searchString;
-	-(void)sourceWindowWillClose:(NSNotification *)notification;
+-(NSMenu *)searchFieldMenu;
+-(void)installSleepHandler;
+-(void)installScriptsFolderWatcher;
+-(void)handleTabChange:(NSNotification *)nc;
+-(void)handleFolderSelection:(NSNotification *)nc;
+-(void)handleCheckFrequencyChange:(NSNotification *)nc;
+-(void)handleFolderNameChange:(NSNotification *)nc;
+-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
+-(void)handleReloadPreferences:(NSNotification *)nc;
+-(void)handleShowAppInStatusBar:(NSNotification *)nc;
+-(void)handleShowStatusBar:(NSNotification *)nc;
+-(void)handleShowFilterBar:(NSNotification *)nc;
+-(void)setAppStatusBarIcon;
+-(void)localiseMenus:(NSArray *)arrayOfMenus;
+-(void)updateNewArticlesNotification;
+-(void)showAppInStatusBar;
+-(void)initSortMenu;
+-(void)initColumnsMenu;
+-(void)initBlogWithMenu;
+-(void)initScriptsMenu;
+-(void)initFiltersMenu;
+-(NSMenu *)getStylesMenu;
+-(void)startProgressIndicator;
+-(void)stopProgressIndicator;
+-(void)doEditFolder:(Folder *)folder;
+-(void)refreshOnTimer:(NSTimer *)aTimer;
+-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+-(void)runAppleScript:(NSString *)scriptName;
+-(NSString *)appName;
+-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
+-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
+-(void)updateAlternateMenuTitle;
+-(void)updateSearchPlaceholder;
+-(void)toggleOptionKeyButtonStates;
+-(FoldersTree *)foldersTree;
+-(void)updateCloseCommands;
+-(void)loadOpenTabs;
+-(BOOL)isFilterBarVisible;
+-(BOOL)isStatusBarVisible;
+-(NSDictionary *)registrationDictionaryForGrowl;
+-(NSTimer *)checkTimer;
+-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
+-(void)searchArticlesWithString:(NSString *)searchString;
+-(void)sourceWindowWillClose:(NSNotification *)notification;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -149,21 +150,21 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 -(void)awakeFromNib
 {
 	Preferences * prefs = [Preferences standardPreferences];
-
+	
 	[self installCustomEventHandler];
 	
 	// Restore the most recent layout
 	[self setLayout:[prefs layout] withRefresh:NO];
-
+	
 	// Localise the menus
 	[self localiseMenus:[[NSApp mainMenu] itemArray]];
-
+	
 	// Set the delegates and title
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:[self appName]];
 	[NSApp setDelegate:self];
 	[mainWindow setMinSize: NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height)];
-
+	
 	// Initialise the plugin manager now that the UI is ready
 	pluginManager = [[PluginManager alloc] init];
 	[pluginManager resetPlugins];
@@ -184,7 +185,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	EventTypeSpec eventType;
 	eventType.eventClass = kEventClassKeyboard;
 	eventType.eventKind = kEventRawKeyModifiersChanged;
-
+	
 	EventHandlerUPP handlerFunction = NewEventHandlerUPP(keyPressed);
 	InstallEventHandler(GetEventMonitorTarget(), handlerFunction, 1, &eventType, NULL, NULL);
 }
@@ -234,13 +235,13 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		if ([previousArticleGuid isBlank])
 			previousArticleGuid = nil;
 		[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
-
+		
 		// Set the initial filter bar state
 		[self setFilterBarState:[prefs showFilterBar] withAnimation:NO];
 		
 		// Make article list the first responder
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
-
+		
 		// Start opening the old tabs once everything else has finished initializing and setting up
 		[self performSelector:@selector(loadOpenTabs)
 				   withObject:nil
@@ -506,7 +507,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self doSafeInitialisation];
 	
 	[self showMainWindow:self];
-
+	
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
@@ -528,6 +529,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (emptyTrashWarning != nil)
 		[emptyTrashWarning showWindow:self];
 	return YES;
+}
+
+/* updaterWillRelaunchApplication
+ * This is a delegate for Sparkle.framwork
+ */
+- (void)updaterWillRelaunchApplication:(SUUpdater *)updater 
+{
+	[[Preferences standardPreferences] handleUpdateRestart];
+	
 }
 
 /* applicationShouldTerminate
@@ -557,14 +567,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	switch ([[Preferences standardPreferences] integerForKey:MAPref_EmptyTrashNotification])
 	{
 		case MA_EmptyTrash_None: break;
-		
+			
 		case MA_EmptyTrash_WithoutWarning:
 			if (![db isTrashEmpty])
 			{
 				[db purgeDeletedArticles];
 			}
 			break;
-		
+			
 		case MA_EmptyTrash_WithWarning:
 			if (![db isTrashEmpty])
 			{
@@ -578,7 +588,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				emptyTrashWarning = nil;
 			}
 			break;
-		
+			
 		default: break;
 	}
 	
@@ -595,7 +605,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		// Save the splitview layout
 		Preferences * prefs = [Preferences standardPreferences];
 		[prefs setObject:[splitView1 layout] forKey:@"SplitView1Positions"];
-
+		
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
 		NSWindow * activityWindow = [activityViewer window];
@@ -606,7 +616,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		// Save the open tabs
 		[browserView saveOpenTabs];
-
+		
 		// Remember the article list column position, sizes, etc.
 		[mainArticleView saveTableSettings];
 		[foldersTree saveFolderSettings];
@@ -843,31 +853,31 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// trying to graft it onto the new layout.
 	if ([self isFilterBarVisible])
 		[self setPersistedFilterBarState:NO withAnimation:NO];
-
+	
 	switch (newLayout)
 	{
-	case MA_Layout_Report:
-		[browserView setPrimaryTabItemView:mainArticleView];
-		if (refreshFlag)
-			[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-		[articleController setMainArticleView:mainArticleView];
-		break;
-
-	case MA_Layout_Condensed:
-		[browserView setPrimaryTabItemView:mainArticleView];
-		if (refreshFlag)
-			[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-		[articleController setMainArticleView:mainArticleView];
-		break;
-
-	case MA_Layout_Unified:
-		[browserView setPrimaryTabItemView:unifiedListView];
-		if (refreshFlag)
-			[unifiedListView refreshFolder:MA_Refresh_RedrawList];
-		[articleController setMainArticleView:unifiedListView];
-		break;
+		case MA_Layout_Report:
+			[browserView setPrimaryTabItemView:mainArticleView];
+			if (refreshFlag)
+				[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+			[articleController setMainArticleView:mainArticleView];
+			break;
+			
+		case MA_Layout_Condensed:
+			[browserView setPrimaryTabItemView:mainArticleView];
+			if (refreshFlag)
+				[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+			[articleController setMainArticleView:mainArticleView];
+			break;
+			
+		case MA_Layout_Unified:
+			[browserView setPrimaryTabItemView:unifiedListView];
+			if (refreshFlag)
+				[unifiedListView refreshFolder:MA_Refresh_RedrawList];
+			[articleController setMainArticleView:unifiedListView];
+			break;
 	}
-
+	
 	[[Preferences standardPreferences] setLayout:newLayout];
 	[self updateSearchPlaceholder];
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
@@ -931,7 +941,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					}
 					[newMenuItem release];
 				}
-					break;
+				break;
 				
 			case WebMenuItemTagOpenFrameInNewWindow:
 				[menuItem setTitle:NSLocalizedString(@"Open Frame", nil)];
@@ -953,7 +963,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[newMenuItem setTag:WebMenuItemTagOther];
 					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 				}
-					[newMenuItem release];
+				[newMenuItem release];
 				break;
 				
 			case WebMenuItemTagCopyLinkToClipboard:
@@ -1039,15 +1049,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSMenuItem * item = (NSMenuItem *)sender;
 		Preferences * prefs = [Preferences standardPreferences];
-
+		
 		BOOL openInBackground = [prefs openLinksInBackground];
-
+		
 		/* As Safari does, 'shift' inverts this behavior. Use GetCurrentKeyModifiers() because [NSApp currentEvent] was created
 		 * when the current event began, which may be when the contexual menu opened.
 		 */
 		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
 			openInBackground = !openInBackground;
-
+		
 		[self createNewTab:[item representedObject] inBackground:openInBackground];
 	}
 }
@@ -1112,13 +1122,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (openURLInVienna)
 	{
 		BOOL openInBackground = [prefs openLinksInBackground];
-
+		
 		/* As Safari does, 'shift' inverts this behavior. Use GetCurrentKeyModifiers() because [NSApp currentEvent] was created
 		 * when the current event began, which may be when the contexual menu opened.
 		 */
 		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
 			openInBackground = !openInBackground;
-
+		
 		[self createNewTab:url inBackground:openInBackground];
 	}
 	else
@@ -1132,7 +1142,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	// Create a new empty tab in the foreground.
 	[self createNewTab:nil inBackground:NO];
-
+	
 	// Make the address bar first responder.
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	BrowserPane * browserPane = (BrowserPane *)theView;
@@ -1166,14 +1176,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		BrowserPane * newBrowserPane = [newBrowserTemplate mainView];
 		if (didCompleteInitialisation)
 			[browserView saveOpenTabs];
-
+		
 		[browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
 		if (url != nil)
 			[newBrowserPane loadURL:url inBackground:openInBackgroundFlag];
 		else
 			[browserView setTabItemViewTitle:newBrowserPane title:NSLocalizedString(@"New Tab", nil)];
-
+		
 		[newBrowserTemplate release];
 	}
 }
@@ -1321,7 +1331,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSView * parentView = [[[articleController mainArticleView] subviews] objectAtIndex:0];
 		NSRect filterBarRect;
 		NSRect mainRect;
-	
+		
 		mainRect = [parentView bounds];
 		filterBarRect = [filterView bounds];
 		filterBarRect.size.width = mainRect.size.width;
@@ -1335,12 +1345,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		else
 			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
 		[parentView display];
-
+		
 		// Hook up the Tab ordering so Tab from the search field goes to the
 		// article view.
 		[[foldersTree mainView] setNextKeyView:filterSearchField];
 		[filterSearchField setNextKeyView:[[browserView primaryTabItemView] mainView]];
-
+		
 		// Set focus only if this was user initiated
 		if (doAnimate)
 			[mainWindow makeFirstResponder:filterSearchField];
@@ -1350,27 +1360,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSView * parentView = [[[articleController mainArticleView] subviews] objectAtIndex:0];
 		NSRect filterBarRect;
 		NSRect mainRect;
-
+		
 		mainRect = [parentView bounds];
 		filterBarRect = [filterView bounds];
 		mainRect.size.height += filterBarRect.size.height;
-
+		
 		[filterView removeFromSuperview];
 		if (!doAnimate)
 			[parentView setFrame:mainRect];
 		else
 			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
 		[parentView setNeedsDisplay:YES];
-
+		
 		// Fix up the tab ordering
 		[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
-
+		
 		// Clear the filter, otherwise we end up with no way remove it!
 		[self setFilterString:@""];
 		if (doAnimate)
 		{
 			[self searchUsingFilterField:self];
-
+			
 			// If the focus was originally on the filter bar then we should
 			// move it to the message list
 			if ([mainWindow firstResponder] == mainWindow)
@@ -1415,7 +1425,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSDictionary * contextDict = (NSDictionary *)clickContext;
 	int contextValue = [[contextDict valueForKey:@"ContextType"] intValue];
-
+	
 	if (contextValue == MA_GrowlContext_RefreshCompleted)
 	{
 		[self openVienna:self];
@@ -1424,7 +1434,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[foldersTree selectFolder:[unreadArticles itemId]];
 		return;
 	}
-
+	
 	// Successful download - show file in Finder. If we fail then we don't
 	// care. Definitely don't want to be popping up an error dialog.
 	if (contextValue == MA_GrowlContext_DownloadCompleted)
@@ -1442,20 +1452,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableArray *defNotesArray = [NSMutableArray array];
 	NSMutableArray *allNotesArray = [NSMutableArray array];
-
+	
 	[allNotesArray addObject:NSLocalizedString(@"Growl refresh completed", nil)];
 	[allNotesArray addObject:NSLocalizedString(@"Growl download completed", nil)];
 	[allNotesArray addObject:NSLocalizedString(@"Growl download failed", nil)];
-
+	
 	[defNotesArray addObject:NSLocalizedString(@"Growl refresh completed", nil)];
 	[defNotesArray addObject:NSLocalizedString(@"Growl download completed", nil)];
 	[defNotesArray addObject:NSLocalizedString(@"Growl download failed", nil)];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
-		[self appName], GROWL_APP_NAME, 
-		allNotesArray, GROWL_NOTIFICATIONS_ALL, 
-		defNotesArray, GROWL_NOTIFICATIONS_DEFAULT,
-		nil];
+							 [self appName], GROWL_APP_NAME, 
+							 allNotesArray, GROWL_NOTIFICATIONS_ALL, 
+							 defNotesArray, GROWL_NOTIFICATIONS_DEFAULT,
+							 nil];
 	growlAvailable = YES;
 	return regDict;
 }
@@ -1617,7 +1627,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[stylesSubMenu addItem:menuItem];
 		[menuItem release];
 	}
-
+	
 	// Append a link to More Styles...
 	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
@@ -1635,7 +1645,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMenu * filterSubMenu = [[[NSMenu alloc] initWithTitle:@"Filter By"] autorelease];
 	NSMenu * filterPopupMenu = [[[NSMenu alloc] initWithTitle:@""] autorelease];
-
+	
 	NSArray * filtersArray = [ArticleFilter arrayOfFilters];
 	int count = [filtersArray count];
 	int index;
@@ -1643,12 +1653,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	for (index = 0; index < count; ++index)
 	{
 		ArticleFilter * filter = [filtersArray objectAtIndex:index];
-
+		
 		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
 		[menuItem setTag:[filter tag]];
 		[filterSubMenu addItem:menuItem];
 		[menuItem release];
-
+		
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
 		[menuItem setTag:[filter tag]];
 		[filterPopupMenu addItem:menuItem];
@@ -1678,7 +1688,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			lastCountOfUnread = -1;	// Force an update
 			[self showUnreadCountOnApplicationIconAndWindowTitle];
 			break;
-
+			
 		case MA_NewArticlesNotification_None:
 		case MA_NewArticlesNotification_Bounce:
 			// Remove the badge if there was one.
@@ -1698,12 +1708,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Get bundle identifiers for supported editors from info.plist
 	NSDictionary * supportedEditors = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SupportedEditorsBundleIdentifiers"];
-
+	
 	// Add the contents of the supportedEditors dictionary keys to the menu, sorted by key name.
 	NSArray * sortedMenuItems = [[supportedEditors allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 	NSString * lastItem = nil;
 	int countOfItems = 0;
-
+	
 	for (id currentItem in sortedMenuItems)
 	{
 		// Only add the item if the application is present on the system.
@@ -1749,7 +1759,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (currentCountOfUnread == lastCountOfUnread)
 		return;
 	lastCountOfUnread = currentCountOfUnread;
-
+	
 	// Always update the app status icon first
 	[self setAppStatusBarIcon];
 	
@@ -1760,13 +1770,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[mainWindow setTitle:[self appName]];
 		return;	
 	}	
-
+	
 	[mainWindow setTitle:[NSString stringWithFormat:@"%@ (%i %@)", [self appName], currentCountOfUnread, NSLocalizedString(@"Unread", nil)]];
-
+	
 	// Exit now if we're not showing the unread count on the application icon
 	if ([[Preferences standardPreferences] newArticlesNotification] != MA_NewArticlesNotification_Badge)
 		return;
-
+	
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
 	NSImage * iconImageBuffer = [originalIcon copy];
 	NSSize iconSize = [originalIcon size];
@@ -1774,8 +1784,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Create attributes for drawing the count. In our case, we're drawing using in
 	// 26pt Helvetica bold white.
 	NSDictionary * attributes = [[NSDictionary alloc] 
-		initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:25], NSFontAttributeName,
-		[NSColor whiteColor], NSForegroundColorAttributeName, nil];
+								 initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:25], NSFontAttributeName,
+								 [NSColor whiteColor], NSForegroundColorAttributeName, nil];
 	NSSize numSize = [countdown sizeWithAttributes:attributes];
 	
 	// Create a red circle in the icon large enough to hold the count.
@@ -1948,7 +1958,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
 		[self setAppStatusBarIcon];
 		[appStatusItem setHighlightMode:YES];
-
+		
 		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
 		[statusBarMenu addItem:menuWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
@@ -2045,10 +2055,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	TreeNode * node = (TreeNode *)[nc object];
 	int newFolderId = [node nodeId];
-
+	
 	// We don't filter when we switch folders.
 	[self setFilterString:@""];
-
+	
 	// Call through the controller to display the new folder.
 	[articleController displayFolder:newFolderId];
 	[self updateSearchPlaceholder];
@@ -2222,7 +2232,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
 		[item setAction:@selector(cancelAllRefreshes:)];
 		[item setButtonImage:@"cancelRefreshButton"];
-
+		
 		[self startProgressIndicator];
 		[self setStatusMessage:[[RefreshManager sharedManager] statusMessageDuringRefresh] persist:YES];
 	}
@@ -2239,7 +2249,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
 		[item setAction:@selector(refreshAllSubscriptions:)];
 		[item setButtonImage:@"refreshButton"];
-
+		
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
 		// Refresh the current folder.
@@ -2249,13 +2259,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
 		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce)
 			[NSApp requestUserAttention:NSInformationalRequest];
-
+		
 		// Growl notification
 		if (newUnread > 0)
 		{
 			NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
 			[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_RefreshCompleted] forKey:@"ContextType"];
-
+			
 			[self growlNotify:contextDict
 						title:NSLocalizedString(@"New articles retrieved", nil)
 				  description:[NSString stringWithFormat:NSLocalizedString(@"New unread articles retrieved", nil), newUnread]
@@ -2306,7 +2316,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 /* goForward
  * In article view, forward track through the list of articles displayed. In 
-* web view, go to the next web page.
+ * web view, go to the next web page.
  */
 -(IBAction)goForward:(id)sender
 {
@@ -2332,19 +2342,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	switch ([sender tag]) 
 	{
-	case NSFindPanelActionSetFindString:
-		[self setFocusToSearchField:self];
-		[searchField setStringValue:[NSApp currentTextSelection]];
-		[searchPanel setSearchString:[NSApp currentTextSelection]];
-		break;
-
-	case NSFindPanelActionShowFindPanel:
-		[self setFocusToSearchField:self];
-		break;
-		
-	default:
-		[[browserView activeTabItemView] performFindPanelAction:[sender tag]];
-		break;
+		case NSFindPanelActionSetFindString:
+			[self setFocusToSearchField:self];
+			[searchField setStringValue:[NSApp currentTextSelection]];
+			[searchPanel setSearchString:[NSApp currentTextSelection]];
+			break;
+			
+		case NSFindPanelActionShowFindPanel:
+			[self setFocusToSearchField:self];
+			break;
+			
+		default:
+			[[browserView activeTabItemView] performFindPanelAction:[sender tag]];
+			break;
 	}
 }
 
@@ -2406,7 +2416,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				return YES;
 			}
 			return NO;
-
+			
 		case 'h':
 		case 'H':
 			[self setFocusToSearchField:self];
@@ -2474,12 +2484,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				return YES;
 			}
 			return NO;
-
+			
 		case ' ': //SPACE
 		{
 			WebView * view = [[browserView activeTabItemView] webView];
 			NSView * theView = [[[view mainFrame] frameView] documentView];
-
+			
 			if (theView == nil)
 				[self viewNextUnread:self];
 			else
@@ -2514,7 +2524,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)toggleOptionKeyButtonStates
 {
 	ToolbarItem * item = [self toolbarItemWithIdentifier:@"Subscribe"];
-
+	
 	if (!([[NSApp currentEvent] modifierFlags] & NSAlternateKeyMask)) 
 	{
 		[item setButtonImage:@"subscribeButton"];
@@ -2680,7 +2690,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		NSArray * articleArray = [mainArticleView markedArticleRange];
 		[articleController deleteArticlesByArray:articleArray];
-
+		
 		// Blow away the undo stack here since undo actions may refer to
 		// articles that have been deleted. This is a bit of a cop-out but
 		// it's the easiest approach for now.
@@ -2708,7 +2718,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if ([folder isRSSFolder])
 		{
 			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
-		
+			
 			if (sourceWindow != nil)
 			{
 				if (sourceWindows == nil)
@@ -2853,14 +2863,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int count = [selectedFolders count];
 	BOOL doSubscribe = NO;
 	int index;
-
+	
 	if (count > 0)
 		doSubscribe = IsUnsubscribed([selectedFolders objectAtIndex:0]);
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
 		int infoFolderId = [folder itemId];
-
+		
 		if (doSubscribe)
 			[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
 		else
@@ -2940,7 +2950,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if ([(NSControl *)[foldersTree mainView] abortEditing])
 		[mainWindow makeFirstResponder:[foldersTree mainView]];
 	
-
+	
 	// Clear undo stack for this action
 	[self clearUndoStack];
 	
@@ -3252,7 +3262,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	// Reset the refresh timer
 	[self handleCheckFrequencyChange:nil];
-
+	
 	if (![self isConnecting])
 		[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree folders:0] ignoringSubscriptionStatus:NO];		
 }
@@ -3282,12 +3292,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 static CFStringRef percentEscape(NSString *string)
 {
 	return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, 
-
-		// RFC2368 says all URL reserved characters must be encoded
-		// these are all the reserved characters from RFC3986
-		CFSTR("/:?#[]@!$&'()*+,;="),	
-		
-		kCFStringEncodingUTF8);
+												   
+												   // RFC2368 says all URL reserved characters must be encoded
+												   // these are all the reserved characters from RFC3986
+												   CFSTR("/:?#[]@!$&'()*+,;="),	
+												   
+												   kCFStringEncodingUTF8);
 }
 
 /* mailLinkToArticlePage
@@ -3345,7 +3355,7 @@ static CFStringRef percentEscape(NSString *string)
 			}
 		}
 	}
-
+	
 	if (mailtoLink != nil)
 		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
 }
@@ -3435,7 +3445,7 @@ static CFStringRef percentEscape(NSString *string)
 	// Setting the target application.
 	target = [NSAppleEventDescriptor descriptorWithDescriptorType:typeApplicationBundleID 
 															 data:[externalEditorBundleIdentifier 
-														dataUsingEncoding:NSUTF8StringEncoding]];
+																   dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	// The actual Apple Event that will get sent to the target.
 	event = [NSAppleEventDescriptor appleEventWithEventClass:EditDataItemAppleEventClass 
@@ -3510,7 +3520,7 @@ static CFStringRef percentEscape(NSString *string)
 -(IBAction)showHideStatusBar:(id)sender
 {
 	BOOL newState = ![self isStatusBarVisible];
-
+	
 	[self setStatusBarState:newState withAnimation:YES];
 	[[Preferences standardPreferences] setShowStatusBar:newState];
 }
@@ -3611,7 +3621,7 @@ static CFStringRef percentEscape(NSString *string)
 {
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
-
+	
 	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshes:))
 	{
 		*validateFlag = ![db readOnly];
@@ -3659,7 +3669,7 @@ static CFStringRef percentEscape(NSString *string)
 		NSView<BaseView> * theView = [browserView activeTabItemView];
 		BOOL isArticleView = [browserView activeTabItemView] == mainArticleView;
 		Article * thisArticle = [self selectedArticle];
-
+		
 		if ([theView isKindOfClass:[BrowserPane class]])
 			*validateFlag = ([theView viewLink] != nil);
 		else
@@ -4070,7 +4080,7 @@ static CFStringRef percentEscape(NSString *string)
 			[spinner setTarget:self];
 			[spinner setAction:@selector(toggleActivityViewer:)];
 			[spinner setHidden:NO];
-
+			
 			//Ensure the spinner has the proper state; it may be added while we're refreshing
 			if ([NSApp isRefreshing])
 				[spinner startAnimation:self];
@@ -4082,11 +4092,11 @@ static CFStringRef percentEscape(NSString *string)
 			[customizationPaletteSpinner setControlTint:[spinner controlTint]];
 			[customizationPaletteSpinner setIndeterminate:[spinner isIndeterminate]];
 			[customizationPaletteSpinner setStyle:[spinner style]];
-
+			
 			[item setView:customizationPaletteSpinner];
 			[customizationPaletteSpinner release];
 		}
-
+		
 		[item setMinSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 		[item setMaxSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
 	}
@@ -4118,13 +4128,13 @@ static CFStringRef percentEscape(NSString *string)
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
 	return [[NSArray arrayWithObjects:
-		@"Subscribe",
-		@"SkipFolder",
-		@"Action",
-		@"Refresh",
-		NSToolbarFlexibleSpaceItemIdentifier,
-	    @"SearchItem",
-	    nil] arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]];
+			 @"Subscribe",
+			 @"SkipFolder",
+			 @"Action",
+			 @"Refresh",
+			 NSToolbarFlexibleSpaceItemIdentifier,
+			 @"SearchItem",
+			 nil] arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]];
 }
 
 /* toolbarAllowedItemIdentifiers
@@ -4134,22 +4144,22 @@ static CFStringRef percentEscape(NSString *string)
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
 	return [[NSArray arrayWithObjects:
-		NSToolbarSeparatorItemIdentifier,
-		NSToolbarSpaceItemIdentifier,
-		NSToolbarFlexibleSpaceItemIdentifier,
-		@"Refresh",
-		@"Subscribe",
-		@"SkipFolder",
-		@"EmptyTrash",
-		@"Action",
-		@"SearchItem",
-		@"Spinner",
-		@"MailLink",
-		@"GetInfo",
-		@"Styles",
-		@"PreviousButton",
-		@"NextButton",
-		nil] arrayByAddingObjectsFromArray:[pluginManager toolbarItems]];
+			 NSToolbarSeparatorItemIdentifier,
+			 NSToolbarSpaceItemIdentifier,
+			 NSToolbarFlexibleSpaceItemIdentifier,
+			 @"Refresh",
+			 @"Subscribe",
+			 @"SkipFolder",
+			 @"EmptyTrash",
+			 @"Action",
+			 @"SearchItem",
+			 @"Spinner",
+			 @"MailLink",
+			 @"GetInfo",
+			 @"Styles",
+			 @"PreviousButton",
+			 @"NextButton",
+			 nil] arrayByAddingObjectsFromArray:[pluginManager toolbarItems]];
 }
 
 /* dealloc

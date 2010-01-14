@@ -41,9 +41,9 @@ static Preferences * _standardPreferences = nil;
 
 // Private methods
 @interface Preferences (Private)
-	-(NSDictionary *)factoryDefaults;
-	-(void)createFeedSourcesFolderIfNecessary;
-	-(void)handleUpdateRestart:(NSNotification *)nc;
+-(NSDictionary *)factoryDefaults;
+-(void)createFeedSourcesFolderIfNecessary;
+-(void)handleUpdateRestart:(NSNotification *)nc;
 @end
 
 @implementation Preferences
@@ -77,7 +77,7 @@ static Preferences * _standardPreferences = nil;
 		NSArray * appArguments = [[NSProcessInfo processInfo] arguments];
 		NSEnumerator * enumerator = [appArguments objectEnumerator];
 		NSString * argName;
-
+		
 		while ((argName = [enumerator nextObject]) != nil)
 		{
 			if ([[argName lowercaseString] isEqualToString:@"-profile"])
@@ -89,12 +89,12 @@ static Preferences * _standardPreferences = nil;
 				break;
 			}
 		}
-
+		
 		// Look to see if there's a cached profile path from the updater
 		if (profilePath == nil)
 			profilePath = [[NSUserDefaults standardUserDefaults] stringForKey:MAPref_Profile_Path];
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MAPref_Profile_Path];
-
+		
 		// Merge in the user preferences from the defaults.
 		NSDictionary * defaults = [self factoryDefaults];
 		if (profilePath == nil)
@@ -102,7 +102,7 @@ static Preferences * _standardPreferences = nil;
 			preferencesPath = nil;
 			userPrefs = [NSUserDefaults standardUserDefaults];
 			[userPrefs registerDefaults:defaults];
-
+			
 			// Application-specific folder locations
 			defaultDatabase = [[userPrefs valueForKey:MAPref_DefaultDatabase] retain];
 			imagesFolder = [[[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
@@ -117,7 +117,7 @@ static Preferences * _standardPreferences = nil;
 			// path counts as treating the profile as transient for this session.
 			NSFileManager * fileManager = [NSFileManager defaultManager];
 			BOOL isDir;
-
+			
 			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
 			{
 				if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
@@ -126,7 +126,7 @@ static Preferences * _standardPreferences = nil;
 					profilePath = nil;
 				}
 			}
-
+			
 			// The preferences file is stored under the profile folder with the bundle identifier
 			// name plus the .plist extension. (This is the same convention used by NSUserDefaults.)
 			if (profilePath != nil)
@@ -149,10 +149,6 @@ static Preferences * _standardPreferences = nil;
 			feedSourcesFolder = [[[profilePath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name] stringByExpandingTildeInPath] retain];
 		}
 		
-		// Register to be notified when Sparkle does an update.
-		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleUpdateRestart:) name:SUUpdaterWillRestartNotification object:nil];		
-
 		// Load those settings that we cache.
 		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];
 		articleSortDescriptors = [[NSUnarchiver unarchiveObjectWithData:[userPrefs valueForKey:MAPref_ArticleSortDescriptors]] retain];
@@ -234,7 +230,7 @@ static Preferences * _standardPreferences = nil;
 	
 	NSNumber * boolNo = [NSNumber numberWithBool:NO];
 	NSNumber * boolYes = [NSNumber numberWithBool:YES];
-
+	
 	[defaultValues setObject:[MA_ApplicationSupportFolder stringByAppendingPathComponent:MA_Database_Name] forKey:MAPref_DefaultDatabase];
 	[defaultValues setObject:boolNo forKey:MAPref_CheckForUpdatedArticles];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowUnreadArticlesInBold];
@@ -273,7 +269,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:0] forKey:MAPref_LastViennaVersionRun];
 	[defaultValues setObject:boolYes forKey:MAPref_ShouldSaveFeedSource];
 	[defaultValues setObject:boolNo forKey:MAPref_ShouldSaveFeedSourceBackup];
-
+	
 	return defaultValues;
 }
 
@@ -911,7 +907,7 @@ static Preferences * _standardPreferences = nil;
 /* handleUpdateRestart
  * Called when Sparkle is about to restart Vienna.
  */
--(void)handleUpdateRestart:(NSNotification *)nc
+-(void)handleUpdateRestart
 {
 	[[NSUserDefaults standardUserDefaults] setObject:profilePath forKey:MAPref_Profile_Path];
 }
