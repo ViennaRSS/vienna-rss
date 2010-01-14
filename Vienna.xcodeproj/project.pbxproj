@@ -257,6 +257,9 @@
 		B28C95970C3A951E008A09E5 /* blogWithMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95960C3A951E008A09E5 /* blogWithMenu.tiff */; };
 		B28DE7F70B754E590062F879 /* enclosure_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F50B754E590062F879 /* enclosure_header.tiff */; };
 		B28DE7F80B754E590062F879 /* enclosure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F60B754E590062F879 /* enclosure.tiff */; };
+		B2B72E1510FF6252009201A9 /* generate_keys.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1310FF6252009201A9 /* generate_keys.rb */; };
+		B2B72E1610FF6252009201A9 /* sign_update.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1410FF6252009201A9 /* sign_update.rb */; };
+		B2B72E1810FF626B009201A9 /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1710FF626B009201A9 /* vienna_public_key.pem */; };
 		B2C9673C106CD02B0056669A /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
 /* End PBXBuildFile section */
 
@@ -880,6 +883,9 @@
 		B2ADEE0D106CD53D00B3C0FD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = es; path = es.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2ADEE16106CD57200B3C0FD /* da */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = da; path = da.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2ADEE18106CD57900B3C0FD /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = cs; path = cs.lproj/errorpage.html; sourceTree = "<group>"; };
+		B2B72E1310FF6252009201A9 /* generate_keys.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generate_keys.rb; sourceTree = "<group>"; };
+		B2B72E1410FF6252009201A9 /* sign_update.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
+		B2B72E1710FF626B009201A9 /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
 		B2C9673B106CD02B0056669A /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = de; path = de.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2C96740106CD08A0056669A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2C96742106CD09E0056669A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/errorpage.html; sourceTree = "<group>"; };
@@ -941,7 +947,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				AAC022070E898A0700BA9002 /* Documents */,
+				AAC022070E898A0700BA9002 /* Documents & Tools */,
 				AA2B6CEF0C2E653C00415851 /* SQLiteLib */,
 				AAA568BB09EE773200C87343 /* Main */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
@@ -1039,6 +1045,7 @@
 				B262610010A033D700E76A37 /* SyntaxHighlighter */,
 				B262610E10A033F700E76A37 /* ErrorPage */,
 				47775BD90A109C6A0091C45E /* Acknowledgements.rtf */,
+				B2B72E1710FF626B009201A9 /* vienna_public_key.pem */,
 				AAE3AEF406570DB700A1FA1F /* Vienna Help */,
 				AA582D880C4A2B78003D0916 /* ActivityViewer.nib */,
 				AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */,
@@ -1326,16 +1333,18 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		AAC022070E898A0700BA9002 /* Documents */ = {
+		AAC022070E898A0700BA9002 /* Documents & Tools */ = {
 			isa = PBXGroup;
 			children = (
+				B2B72E1310FF6252009201A9 /* generate_keys.rb */,
+				B2B72E1410FF6252009201A9 /* sign_update.rb */,
 				AAC0220A0E898A4E00BA9002 /* Release Instructions.txt */,
 				AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */,
 				52A8B4300C4996910035ED2A /* notes.html */,
 				AA21F45D0753077300503F58 /* TODO */,
 				AA21F4510753053500503F58 /* CHANGES */,
 			);
-			name = Documents;
+			name = "Documents & Tools";
 			sourceTree = "<group>";
 		};
 		AAC5063C082A7A530089FF70 /* Other Sources */ = {
@@ -1646,6 +1655,9 @@
 				AA7F231810FA287700856924 /* blankButtonPressed.tiff in Resources */,
 				AA7F231B10FA292700856924 /* blankSmallButton.tiff in Resources */,
 				AA7F231C10FA292700856924 /* blankSmallButtonPressed.tiff in Resources */,
+				B2B72E1510FF6252009201A9 /* generate_keys.rb in Resources */,
+				B2B72E1610FF6252009201A9 /* sign_update.rb in Resources */,
+				B2B72E1810FF626B009201A9 /* vienna_public_key.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

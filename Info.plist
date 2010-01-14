@@ -86,6 +86,8 @@
 	<string>SCR-15C768BF24</string>
 	<key>SUFeedURL</key>
 	<string>http://vienna-rss.sourceforge.net/changelog$(VIENNA_CHANGELOG_SUFFIX).xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>vienna_public_key.pem</string>
 	<key>SupportedEditorsBundleIdentifiers</key>
 	<dict>
 		<key>Pukka</key>
