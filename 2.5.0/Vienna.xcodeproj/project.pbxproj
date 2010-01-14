@@ -25,8 +25,6 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
-		478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
-		478FE4540A0F42A300B37021 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 478FE4400A0F429700B37021 /* Sparkle.framework */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
@@ -289,7 +287,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in Copy Frameworks */,
-				478FE4540A0F42A300B37021 /* Sparkle.framework in Copy Frameworks */,
 				AA62D7FC0859ABEC0040C370 /* Growl.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -319,7 +316,6 @@
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = MainMenu.nib; sourceTree = "<group>"; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
-		478FE4400A0F429700B37021 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
 		61975EB70B41E0A0001F65FF /* EmptyTrashWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyTrashWarning.h; sourceTree = "<group>"; };
@@ -897,7 +893,6 @@
 				AA8F86B40A0A2FC500A0EACE /* WebKit.framework in Frameworks */,
 				AA8F87550A0A2FEA00A0EACE /* IOKit.framework in Frameworks */,
 				AA8F87770A0A301000A0EACE /* SystemConfiguration.framework in Frameworks */,
-				478FE4410A0F429700B37021 /* Sparkle.framework in Frameworks */,
 				AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,7 +903,6 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				478FE4400A0F429700B37021 /* Sparkle.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */,
 				AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */,
