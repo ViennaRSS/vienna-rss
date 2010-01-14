@@ -233,6 +233,8 @@
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B2108657109F8127001D4E7C /* XMLSourceWindow.m */; };
 		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
+		B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
+		B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
@@ -286,6 +288,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */,
 				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in Copy Frameworks */,
 				AA62D7FC0859ABEC0040C370 /* Growl.framework in Copy Frameworks */,
 			);
@@ -842,6 +845,7 @@
 		B2108656109F8127001D4E7C /* XMLSourceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLSourceWindow.h; sourceTree = "<group>"; };
 		B2108657109F8127001D4E7C /* XMLSourceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLSourceWindow.m; sourceTree = "<group>"; };
 		B2108659109F8196001D4E7C /* XMLSource.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = XMLSource.nib; sourceTree = "<group>"; };
+		B23A794310FF50B10085C85B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserNextButton.tiff; sourceTree = "<group>"; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRefreshButton.tiff; sourceTree = "<group>"; };
@@ -894,6 +898,7 @@
 				AA8F87550A0A2FEA00A0EACE /* IOKit.framework in Frameworks */,
 				AA8F87770A0A301000A0EACE /* SystemConfiguration.framework in Frameworks */,
 				AA872CBB0B658C7E00F352C9 /* PSMTabBarControl.framework in Frameworks */,
+				B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +908,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B23A794310FF50B10085C85B /* Sparkle.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */,
 				AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */,
