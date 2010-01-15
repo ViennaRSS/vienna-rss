@@ -199,34 +199,12 @@
 	if ([theURL rangeOfString:@"://"].location == NSNotFound)
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
 
-	// This is a hack to handle Internationalized Domain Names.
-	// WebKit does is automatically, so we tap into that.
-	NSURL *urlToLoad = nil;
-	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-	[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
-	@try
-	{
-		if ([pasteboard setString:theURL forType:NSStringPboardType])
-			urlToLoad = [WebView URLFromPasteboard:pasteboard];
-	}
-	@catch (NSException * exception)
-	{
-		urlToLoad = nil;
-	}
-	
-	if (urlToLoad == nil)
-		urlToLoad = [NSURL URLWithString:theURL];
+	// cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
+	NSURL *urlToLoad = cleanUpUrl(theURL);
 	if (urlToLoad != nil)
-	{
 		[self loadURL:urlToLoad inBackground:NO];
-	}
 	else
-	{
-		// TODO: present error message to user?
-		NSBeep();
-		NSLog(@"Can't create URL from string '%@'.", theURL);
 		[self activateAddressBar];
-	}
 }
 
 -(void)setViewTitle:(NSString *) newTitle
