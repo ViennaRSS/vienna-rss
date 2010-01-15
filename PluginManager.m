@@ -24,7 +24,6 @@
 #import "AppController.h"
 #import "Preferences.h"
 #import "Message.h"
-#import "BrowserView.h"
 #import "BrowserPane.h"
 
 @interface PluginManager (Private)
@@ -157,9 +156,10 @@
 			if (urlString == nil)
 				return;
 			
+			// Get the view that the user is currently lookign at...
 			NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
 			
-			// In case the user is currently looking at a website:
+			// ...and do the folliwing in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
 			{	
 				NSLog(@"%@", [theView viewLink]);
@@ -194,17 +194,15 @@
 				
 				if (urlToLoad == nil)
 					urlToLoad = [NSURL URLWithString:urlString];
+				
 				if (urlToLoad != nil)
-				{
 					[[NSApp delegate] openURL:urlToLoad inPreferredBrowser:YES];
-				}
 				else
 				{
 					// TODO: present error message to user?
 					NSBeep();
 					NSLog(@"Can't create URL from string '%@'.", urlString);
 				}
-				
 			}
 		}
 		
