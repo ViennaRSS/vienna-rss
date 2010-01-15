@@ -26,5 +26,5 @@
 }
 
 -(BitlyAPIHelper*) initWithLogin: (NSString*) bitlyLogin andAPIKey: (NSString*) bitlyApiKey;
--(NSString*) shortenURL: (NSString*) f_longURL;
+-(NSString*) shortenURL: (NSString*) longUrl;
 @end
