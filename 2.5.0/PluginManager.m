@@ -24,6 +24,8 @@
 #import "AppController.h"
 #import "Preferences.h"
 #import "Message.h"
+#import "BrowserView.h"
+#import "BrowserPane.h"
 
 @interface PluginManager (Private)
 @end
@@ -145,26 +147,67 @@
 	NSDictionary * pluginItem = [allPlugins objectForKey:itemIdentifier];
 	if (pluginItem != nil)
 	{
+		// This is a link plugin. There should be a URL field which we invoke and possibly
+		// placeholders to be filled from the current article or website.
+
 		NSString * itemType = [pluginItem objectForKey:@"Type"];
 		if ([itemType isEqualToString:@"Link"])
 		{
-			// This is a link plugin. There should be a URL field which we invoke and possibly
-			// placeholders to be filled from the current article.
-			NSString * urlString = [pluginItem objectForKey:@"URL"];
+			NSMutableString * urlString  = [NSMutableString stringWithString:[pluginItem objectForKey:@"URL"]];
 			if (urlString == nil)
 				return;
-
-			// We can only work on one article... so ignore selection range
-			Article * currentMessage = [[NSApp delegate] selectedArticle];
-			NSMutableString * expandedURL = [NSMutableString stringWithString:[currentMessage expandTags:urlString withConditional:NO]];
 			
-			// All spaces in the title have to be replaced with %20 since we're ultimately going to use the
-			// title as a parameter in a URL.
-			[expandedURL replaceString:@" " withString:@"%20"];
+			NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
 			
-			NSURL * url = [NSURL URLWithString:expandedURL];
-			[[NSApp delegate] openURL:url inPreferredBrowser:YES];
+			// In case the user is currently looking at a website:
+			if ([theView isKindOfClass:[BrowserPane class]])
+			{	
+				NSLog(@"%@", [theView viewLink]);
+				[urlString replaceString:@"$ArticleLink$" withString:[theView viewLink]];
+				[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
+			}
+			
+			// In case the user is currently looking at an article:
+			else
+			{
+				// We can only work on one article... so ignore selection range.
+				Article * currentMessage = [[NSApp delegate] selectedArticle];
+				urlString = [NSMutableString stringWithString:[currentMessage expandTags:urlString withConditional:NO]];
+			}
+			
+			if (urlString != nil)
+			{
+				// Let WebKit do the heavy lifting of cleaning up the URL, as there are lots of things
+				// that can go wrong otherwise: International Domain Names, umlauts or diacritics in titles, etc. ...
+				NSURL *urlToLoad = nil;
+				NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+				[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+				@try
+				{
+					if ([pasteboard setString:urlString forType:NSStringPboardType])
+						urlToLoad = [WebView URLFromPasteboard:pasteboard];
+				}
+				@catch (NSException * exception)
+				{
+					urlToLoad = nil;
+				}
+				
+				if (urlToLoad == nil)
+					urlToLoad = [NSURL URLWithString:urlString];
+				if (urlToLoad != nil)
+				{
+					[[NSApp delegate] openURL:urlToLoad inPreferredBrowser:YES];
+				}
+				else
+				{
+					// TODO: present error message to user?
+					NSBeep();
+					NSLog(@"Can't create URL from string '%@'.", urlString);
+				}
+				
+			}
 		}
+		
 		else if ([itemType isEqualToString:@"Script"])
 		{
 			// This is a script plugin. There should be a Script field which specifies the
