@@ -46,9 +46,9 @@
 	NSError * lastError;
 	BOOL isLocalFile;
 	BOOL isLoading;
-	BOOL hasPageTitle;
 	BOOL openURLInBackground;
 	NSString * rssPageURL;
+	NSString * viewTitle;
 }
 
 // Action functions
@@ -62,6 +62,8 @@
 -(void)setController:(AppController *)theController;
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
 -(NSURL *)url;
+-(void)setViewTitle:(NSString *)newTitle;
+-(NSString *)viewTitle;
 -(BOOL)isLoading;
 -(BOOL)canGoBack;
 -(BOOL)canGoForward;

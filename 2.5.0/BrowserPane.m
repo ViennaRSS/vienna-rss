@@ -97,7 +97,7 @@
 		controller = nil;
 		isLoading = NO;
 		isLocalFile = NO;
-		hasPageTitle = NO;
+		viewTitle = nil;
 		openURLInBackground = NO;
 		pageFilename = nil;
 		lastError = nil;
@@ -229,6 +229,13 @@
 	}
 }
 
+-(void)setViewTitle:(NSString *) newTitle
+{
+	[newTitle retain];
+	[viewTitle release];
+	viewTitle = newTitle;
+}
+
 /* activateAddressBar
  * Put the focus on the address bar.
  */
@@ -242,7 +249,7 @@
  */
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	hasPageTitle = NO;
+	[self setViewTitle:@""];
 	openURLInBackground = openInBackgroundFlag;
 	isLocalFile = [url isFileURL];
 
@@ -283,8 +290,9 @@
 		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
 		[self showRssPageButton:NO];
 		[self setError:nil];
-		hasPageTitle = NO;
+		[self setViewTitle:@""];
 	}
+
 }
 
 /* didCommitLoadForFrame
@@ -369,7 +377,7 @@
  */
 -(void)endFrameLoad
 {
-	if (!hasPageTitle)
+	if (viewTitle == @"")
 	{
 		if (lastError == nil)
 			[[controller browserView] setTabItemViewTitle:self title:pageFilename];
@@ -447,7 +455,7 @@
 	if (frame == [webPane mainFrame])
 	{
 		[[controller browserView] setTabItemViewTitle:self title:title];
-		hasPageTitle = YES;
+		[self setViewTitle:title];
 	}
 }
 
@@ -572,6 +580,11 @@
 			theURL = [NSURL URLWithString:urlString];
 	}
 	return theURL;
+}
+
+-(NSString *)viewTitle
+{
+	return viewTitle;
 }
 
 /* canGoForward
@@ -706,6 +719,7 @@
  */
 -(void)dealloc
 {
+	[viewTitle release];
 	[rssPageURL release];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
