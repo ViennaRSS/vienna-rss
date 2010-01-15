@@ -247,6 +247,7 @@
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
 		B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
+		B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
 		B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
 		B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
 		B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
@@ -861,6 +862,8 @@
 		B273E8EB106910B2001ADEF8 /* errorpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagebg.png; sourceTree = "<group>"; };
 		B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRSSButton.tiff; sourceTree = "<group>"; };
 		B27CCFFD1100E728001F3C83 /* Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Plugins; sourceTree = "<group>"; };
+		B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyAPIHelper.h; sourceTree = "<group>"; };
+		B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyAPIHelper.m; sourceTree = "<group>"; };
 		B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailLinkButton.tiff; sourceTree = "<group>"; };
 		B28C95920C3A94F7008A09E5 /* smartFolderButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smartFolderButton.tiff; sourceTree = "<group>"; };
 		B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = popupMenuButton.tiff; sourceTree = "<group>"; };
@@ -1359,6 +1362,8 @@
 		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
+				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
@@ -2138,6 +2143,7 @@
 				B283D5AA10986D1900A5CD72 /* sqlite3.c in Sources */,
 				B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */,
 				AAE8214210F9C74500444C16 /* PluginManager.m in Sources */,
+				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
