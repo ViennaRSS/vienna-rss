@@ -177,32 +177,9 @@
 			
 			if (urlString != nil)
 			{
-				// Let WebKit do the heavy lifting of cleaning up the URL, as there are lots of things
-				// that can go wrong otherwise: International Domain Names, umlauts or diacritics in titles, etc. ...
-				NSURL *urlToLoad = nil;
-				NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-				[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
-				@try
-				{
-					if ([pasteboard setString:urlString forType:NSStringPboardType])
-						urlToLoad = [WebView URLFromPasteboard:pasteboard];
-				}
-				@catch (NSException * exception)
-				{
-					urlToLoad = nil;
-				}
-				
-				if (urlToLoad == nil)
-					urlToLoad = [NSURL URLWithString:urlString];
-				
+				NSURL * urlToLoad = cleanUpUrl(urlString);
 				if (urlToLoad != nil)
 					[[NSApp delegate] openURL:urlToLoad inPreferredBrowser:YES];
-				else
-				{
-					// TODO: present error message to user?
-					NSBeep();
-					NSLog(@"Can't create URL from string '%@'.", urlString);
-				}
 			}
 		}
 		

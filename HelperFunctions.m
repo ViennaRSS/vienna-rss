@@ -20,6 +20,7 @@
 #import "HelperFunctions.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
 #import <Carbon/Carbon.h>
+#import <WebKit/WebKit.h>
 
 // Private functions
 static OSStatus RegisterMyHelpBook(void);
@@ -77,6 +78,33 @@ NSMenuItem * menuWithAction(SEL theSelector)
 	}
 	return nil;
 }
+
+/* cleanUpUrl
+ * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
+ * IDNA related stuff in the domain, or God knows what in filenames and arguments.
+ */
+NSURL * cleanUpUrl(NSString * theUrl)
+{
+	NSURL *urlToLoad = nil;
+	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+	[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+	@try
+	{
+		if ([pasteboard setString:theUrl forType:NSStringPboardType])
+			urlToLoad = [WebView URLFromPasteboard:pasteboard];
+	}
+	@catch (NSException * exception)
+	{
+		urlToLoad = nil;
+		{
+			// TODO: present error message to user?
+			NSBeep();
+			NSLog(@"Can't create URL from string '%@'.", theUrl);
+		}		
+	}
+	
+	return urlToLoad;
+}	
 
 /* copyOfMenuWithAction
  * Returns an NSMenuItem that matches the one that implements the corresponding
