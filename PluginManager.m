@@ -208,7 +208,7 @@
 						
 			if (urlString != nil)
 			{
-				NSURL * urlToLoad = cleanUpUrl(urlString);				
+				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
 				if (urlToLoad != nil)
 					[[NSApp delegate] openURL:urlToLoad inPreferredBrowser:YES];
 			}
