@@ -156,15 +156,17 @@
 			if (urlString == nil)
 				return;
 			
-			// Get the view that the user is currently lookign at...
+			// Get the view that the user is currently looking at...
 			NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
 			
-			// ...and do the folliwing in case the user is currently looking at a website.
+			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
 			{	
-				NSLog(@"%@", [theView viewLink]);
-				[urlString replaceString:@"$ArticleLink$" withString:[theView viewLink]];
-				[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
+				// viewTitle is an @optional part of the protocol, so be defensive about it.
+				if ([theView respondsToSelector: @selector(viewTitle:)])
+					[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
+				
+				[urlString replaceString:@"$ArticleLink$" withString:[theView viewLink]];					
 			}
 			
 			// In case the user is currently looking at an article:
