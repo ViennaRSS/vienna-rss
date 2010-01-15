@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithTwitter</string>
+	<key>Type</key>
+	<string>Link</string>
+	<key>URL</key>
+	<string>http://twitter.com/home?status=$ArticleLink$</string>
+	<key>Default</key>
+	<true/>
+	<key>FriendlyName</key>
+	<string>twitter</string>
+	<key>Tooltip</key>
+	<string>Share the current article on twitter</string>
+	<key>ButtonImage</key>
+	<string>twitterButton</string>
+	<key>ShortenURLs</key>
+	<true/>
+</dict>
+</plist>

@@ -217,7 +217,6 @@
 		AAE7E5B20A10481D00685562 /* UnifiedDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E5B00A10481D00685562 /* UnifiedDisplayView.m */; };
 		AAE7E64E0A104DCE00685562 /* TabbedWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E64C0A104DCE00685562 /* TabbedWebView.m */; };
 		AAE8214210F9C74500444C16 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE8214110F9C74500444C16 /* PluginManager.m */; };
-		AAE822FD10F9F61D00444C16 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AAE822ED10F9F3B500444C16 /* Plugins */; };
 		AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEB1A5108E74EE300917920 /* ArrayExtensions.m */; };
 		AAED7A9F09FDE01000ED56E5 /* InfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED7A9D09FDE01000ED56E5 /* InfoWindow.m */; };
 		AAED7ABA09FDE15D00ED56E5 /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAED7AB909FDE15D00ED56E5 /* InfoWindow.nib */; };
@@ -247,6 +246,7 @@
 		B262612C10A034C500E76A37 /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
 		B273E8EC106910B2001ADEF8 /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
+		B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
 		B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
 		B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
 		B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
@@ -304,7 +304,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 12;
 			files = (
-				AAE822FD10F9F61D00444C16 /* Plugins in Copy Shared Support Files */,
+				B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */,
 				AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */,
 			);
 			name = "Copy Shared Support Files";
@@ -822,7 +822,6 @@
 		AAE7E64D0A104DCE00685562 /* TabbedWebView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TabbedWebView.h; sourceTree = "<group>"; };
 		AAE8214010F9C74500444C16 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManager.h; sourceTree = "<group>"; };
 		AAE8214110F9C74500444C16 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
-		AAE822ED10F9F3B500444C16 /* Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Plugins; sourceTree = "<group>"; };
 		AAEB1A5008E74EE300917920 /* ArrayExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayExtensions.h; sourceTree = "<group>"; };
 		AAEB1A5108E74EE300917920 /* ArrayExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayExtensions.m; sourceTree = "<group>"; };
 		AAED7A9C09FDE01000ED56E5 /* InfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = InfoWindow.h; sourceTree = "<group>"; };
@@ -861,6 +860,7 @@
 		B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = XMLSyntaxHighlighter.html; sourceTree = "<group>"; };
 		B273E8EB106910B2001ADEF8 /* errorpagebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagebg.png; sourceTree = "<group>"; };
 		B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserRSSButton.tiff; sourceTree = "<group>"; };
+		B27CCFFD1100E728001F3C83 /* Plugins */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Plugins; sourceTree = "<group>"; };
 		B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mailLinkButton.tiff; sourceTree = "<group>"; };
 		B28C95920C3A94F7008A09E5 /* smartFolderButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = smartFolderButton.tiff; sourceTree = "<group>"; };
 		B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = popupMenuButton.tiff; sourceTree = "<group>"; };
@@ -1327,7 +1327,7 @@
 				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
-				AAE822ED10F9F3B500444C16 /* Plugins */,
+				B27CCFFD1100E728001F3C83 /* Plugins */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 			);
 			name = Main;
