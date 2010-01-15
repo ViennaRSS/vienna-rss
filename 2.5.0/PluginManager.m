@@ -132,6 +132,20 @@
 	}
 }
 
+/* validateToolbarItem
+ * Check [theItem identifier] and return YES if the item is enabled, NO otherwise.
+ */
+-(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
+{	
+	NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
+	Article * thisArticle = [[NSApp delegate] selectedArticle];
+	
+	if ([theView isKindOfClass:[BrowserPane class]])
+		return (([theView viewLink] != nil) && [NSApp isActive]);
+	else
+		return (thisArticle != nil && [NSApp isActive]);
+}
+
 /* pluginInvocator
  * Called when the user issues a command relating to a plugin.
  */
