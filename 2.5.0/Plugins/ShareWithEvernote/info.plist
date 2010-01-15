@@ -16,5 +16,7 @@
 	<string>Share the current article on Evernote</string>
 	<key>ButtonImage</key>
 	<string>evernoteButton</string>
+	<key>ShortenURLs</key>
+	<false/>
 </dict>
 </plist>

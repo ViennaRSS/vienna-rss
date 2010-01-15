@@ -16,5 +16,7 @@
 	<string>Share the current article on Facebook</string>
 	<key>ButtonImage</key>
 	<string>facebookButton</string>
+	<key>ShortenURLs</key>
+	<false/>
 </dict>
 </plist>
