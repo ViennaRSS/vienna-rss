@@ -20,6 +20,7 @@
 
 @class WebView;
 @protocol BaseView
+@required
 	-(void)performFindPanelAction:(int)tag;
 	-(void)printDocument:(id)sender;
 	-(void)handleGoForward:(id)sender;
@@ -30,4 +31,7 @@
 	-(NSView *)mainView;
 	-(WebView *)webView;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+@optional
+	-(NSString *)viewTitle;
 @end
+
