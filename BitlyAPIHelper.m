@@ -69,6 +69,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 			[responseParser release];
 			return [subtree valueOfElement];
 		}
+		[responseParser release];
 	}
 	// TODO: Present error-message to the user?
 	NSLog(@"URL shortening with bit.ly failed!");
