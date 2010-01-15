@@ -31,7 +31,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
  * Designated initialiser. We always use Vienna's API key and login at the moment, but I'm leaving it
  * like this to be flexible. We may want to provide a way to for users to use their own bit.ly login.
  */
--(BitlyAPIHelper*) initWithLogin: (NSString*) bitlyLogin andAPIKey: (NSString*) bitlyApiKey 
+-(BitlyAPIHelper*)initWithLogin: (NSString*) bitlyLogin andAPIKey: (NSString*) bitlyApiKey 
 {
 	login = [bitlyLogin copy];
 	apiKey = [bitlyApiKey copy];
