@@ -25,6 +25,7 @@
 #import "Preferences.h"
 #import "Message.h"
 #import "BrowserPane.h"
+#import "BitlyAPIHelper.h"
 
 @interface PluginManager (Private)
 @end
@@ -166,7 +167,20 @@
 				if ([theView respondsToSelector: @selector(viewTitle:)])
 					[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
 				
-				[urlString replaceString:@"$ArticleLink$" withString:[theView viewLink]];					
+				// If ShortenURLs is true in the plugin's info.plist, we attempt to shorten it via the bit.ly service
+				if ([pluginItem objectForKey:@"ShortenURLs"])
+				{
+					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
+					NSString * shortURL = [bitlyHelper shortenURL:[theView viewLink]];
+					
+					[urlString replaceString:@"$ArticleLink$" withString:shortURL];
+					[BitlyAPIHelper release];
+				}
+				else 
+				{
+					[urlString replaceString:@"$ArticleLink$" withString:[theView viewLink]];					
+				}
+
 			}
 			
 			// In case the user is currently looking at an article:
@@ -174,14 +188,35 @@
 			{
 				// We can only work on one article... so ignore selection range.
 				Article * currentMessage = [[NSApp delegate] selectedArticle];
-				urlString = [NSMutableString stringWithString:[currentMessage expandTags:urlString withConditional:NO]];
+				[urlString replaceString:@"$ArticleTitle$" withString: [currentMessage title]];
+				
+				// URL shortening again, as above...
+				if ([pluginItem objectForKey:@"ShortenURLs"])
+				{
+					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
+					NSString * shortURL = [bitlyHelper shortenURL:[currentMessage link]];
+					
+					// If URL shortening fails, we fall back to the long URL.
+					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [currentMessage link]) ];
+					[BitlyAPIHelper release];
+				}
+				else 
+				{
+					[urlString replaceString:@"$ArticleLink$" withString: [currentMessage link]];
+				}
 			}
-			
+						
 			if (urlString != nil)
 			{
-				NSURL * urlToLoad = cleanUpUrl(urlString);
+				NSURL * urlToLoad = cleanUpUrl(urlString);				
 				if (urlToLoad != nil)
 					[[NSApp delegate] openURL:urlToLoad inPreferredBrowser:YES];
+			}
+			else
+			{
+				// TODO: Implement real error-handling. Don't know how to go about it, yet.
+				NSBeep();
+				NSLog(@"Creation of the sharing URL failed!");
 			}
 		}
 		
