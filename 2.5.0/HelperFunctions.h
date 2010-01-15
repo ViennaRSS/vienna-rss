@@ -44,6 +44,6 @@ NSMenuItem * menuWithAction(SEL theSelector);
 NSMenuItem * menuWithTitleAndAction(NSString * theTitle, SEL theSelector);
 NSMenuItem * copyOfMenuWithAction(SEL theSelector);
 NSString * getDefaultBrowser(void);
-NSURL * cleanUpUrl(NSString * theUrl);
+NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl);
 BOOL hasOSScriptsMenu(void);
 OSStatus GotoHelpPage(CFStringRef pagePath, CFStringRef anchorName);

@@ -79,11 +79,11 @@ NSMenuItem * menuWithAction(SEL theSelector)
 	return nil;
 }
 
-/* cleanUpUrl
+/* cleanedUpAndEscapedUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or God knows what in filenames and arguments.
  */
-NSURL * cleanUpUrl(NSString * theUrl)
+NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 {
 	NSURL *urlToLoad = nil;
 	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];

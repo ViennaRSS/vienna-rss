@@ -45,7 +45,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 {
 	// The next few lines incrementally build the request...
 	NSString * requestURLString = [NSString stringWithFormat:BitlyApiBaseUrl, @"shorten", login, apiKey];
-	longURL = [cleanUpUrl(longURL) absoluteString];
+	longURL = [cleanedUpAndEscapedUrlFromString(longURL) absoluteString];
 	NSString * parameters = [NSString stringWithFormat:@"longUrl=%@", longURL];
 	requestURLString = [requestURLString stringByAppendingString:parameters];	
 	NSURL *finishedRequestURL = [NSURL URLWithString:requestURLString];
