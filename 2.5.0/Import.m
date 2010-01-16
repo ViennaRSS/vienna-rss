@@ -69,8 +69,6 @@
 		NSString * feedDescription = [[entry objectForKey:@"description"] stringByUnescapingExtendedCharacters];
 		NSString * feedURL = [[entry objectForKey:@"xmlurl"] stringByUnescapingExtendedCharacters];
 		NSString * feedHomePage = [[entry objectForKey:@"htmlurl"] stringByUnescapingExtendedCharacters];
-		NSString * bloglinesSubId = [entry objectForKey:@"bloglinessubid"];
-		int bloglinesId = bloglinesSubId ? [bloglinesSubId intValue] : MA_NonBloglines_Folder;
 
 		// Some OPML exports use 'text' instead of 'title'.
 		if (feedTitle == nil || [feedTitle length] == 0u)
@@ -108,7 +106,6 @@
 				folderId = [db addRSSFolder:feedTitle underParent:parentId afterChild:-1 subscriptionURL:feedURL];
 				++countImported;
 			}
-			[db setBloglinesId:folderId newBloglinesId:bloglinesId];
 			if (feedDescription != nil)
 				[db setFolderDescription:folderId newDescription:feedDescription];
 			if (feedHomePage != nil)

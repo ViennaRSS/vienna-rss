@@ -761,7 +761,7 @@ static Database * _sharedDatabase = nil;
 					 "values (%d, '', '', '', '', '%@', %d)",
 					folderId,
 					preparedURL,
-					MA_NonBloglines_Folder];
+					0];
 		if (!results)
 			return -1;
 
@@ -1119,31 +1119,6 @@ static Database * _sharedDatabase = nil;
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderHomePageChanged" object:[NSNumber numberWithInt:folderId]];
-	return YES;
-}
-
-/* setBloglinesId
- * Changes the Bloglines ID associated with this folder.
- */
--(BOOL)setBloglinesId:(int)folderId newBloglinesId:(long)bloglinesId
-{
-	// Exit now if we're read-only
-	if (readOnly)
-		return NO;
-	
-	// Find our folder element.
-	Folder * folder = [self folderFromID:folderId];
-	if (!folder)
-		return NO;
-	
-	// Do nothing if the ID hasn't changed
-	if ([folder bloglinesId] == bloglinesId)
-		return NO;
-	
-	[folder setBloglinesId:bloglinesId];
-	
-	// Update the ID in the database
-	[self executeSQLWithFormat:@"update rss_folders set bloglines_id=%d where folder_id=%d", bloglinesId, folderId];
 	return YES;
 }
 
@@ -1785,7 +1760,6 @@ static Database * _sharedDatabase = nil;
 			for (SQLRow * row in[results rowEnumerator])
 			{
 				int folderId = [[row stringForColumn:@"folder_id"] intValue];
-				long bloglinesId = [[row stringForColumn:@"bloglines_id"] intValue];
 				NSString * descriptiontext = [row stringForColumn:@"description"];
 				NSString * url = [row stringForColumn:@"feed_url"];
 				NSString * linktext = [row stringForColumn:@"home_page"];
@@ -1798,7 +1772,6 @@ static Database * _sharedDatabase = nil;
 				[folder setFeedURL:url];
 				[folder setLastUpdateString:lastUpdateString];
 				[folder setUsername:username];
-				[folder setBloglinesId:bloglinesId];
 			}
 		}
 		[results release];

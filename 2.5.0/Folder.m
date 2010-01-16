@@ -225,7 +225,6 @@ static NSArray * iconArray = nil;
 		[self setLastUpdate:[NSDate distantPast]];
 		[self setLastUpdateString:@""];
 		[self setUsername:@""];
-		[self setBloglinesId:MA_NonBloglines_Folder];
 	}
 	return self;
 }
@@ -529,23 +528,6 @@ static NSArray * iconArray = nil;
 -(void)setName:(NSString *)newName
 {
 	[attributes setValue:newName forKey:@"Name"];
-}
-
-/* bloglinesId
- * Returns the Bloglines ID associated with this folder.
- */
--(long)bloglinesId
-{
-	return [[attributes valueForKey:@"BloglinesID"] longValue];
-}
-
-/* setBloglinesId
- * Sets the Bloglines ID associated with this folder. The special constant MA_NonBloglines_Folder
- * can be used to de-associate it with Bloglines.
- */
--(void)setBloglinesId:(long)newBloglinesId
-{
-	[attributes setValue:[NSNumber numberWithLong:newBloglinesId] forKey:@"BloglinesID"];
 }
 
 /* setType
