@@ -57,8 +57,6 @@
 "Refresh all your subscriptions" = "Обновить все подписки";
 "New style title" = "Vienna установила новый Стиль";
 "New style body" = "Стиль \"%@\" был установлен в папку стилей и добавлен в меню Стиль.";
-"Cannot create style folder title" = "Невозможно создать папку Стиля";
-"Cannot create style folder body" = "Невозможно создать папку Стиля в \"%@\". Vienna не сможет установить выбранный Стиль.";
 "More Styles..." = "Больше Стилей...";
 "Delete selected message" = "Вы уверены, что хотите безвозвратно удалить выбранные статьи?";
 "Delete selected message text" = "Это действие не может быть отменено.";
@@ -188,8 +186,6 @@
 "Preferences" = "Настройки";
 "General" = "Общие";
 "Appearance" = "Внешний Вид";
-"Cannot create scripts folder title" = "Невозможно создать папку скриптов";
-"Cannot create scripts folder body" = "Невозможно создать папку скриптов в \"%@\". Vienna не установит выбранный скрипт.";
 "Locate Title" = "Невозможно создать базу данных Vienna";
 "Locate Text" = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.\n";
 "Empty Trash message" = "Удалить все сообщения в Корзине?";
@@ -398,3 +394,7 @@
 "Database Upgrade" = "Database Upgrade";
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
 "Upgrade Database" = "Upgrade Database";
+
+/* Added in 2.5.0 */
+"Cannot create folder title" = "Cannot create folder";
+"Cannot create folder body" = "The \"%@\" folder cannot be created.";

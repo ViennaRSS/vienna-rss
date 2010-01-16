@@ -23,6 +23,20 @@
 			<string>YES</string>
 		</dict>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>viennaplugin</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>vienna2plugin.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Vienna Plugin Package</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSTypeIsPackage</key>
+			<string>YES</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtension</key>
 			<array>
 				<string>scpt</string>
