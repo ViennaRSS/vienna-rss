@@ -88,7 +88,7 @@
 	// If the info.plist is missing or corrupted, warn but then just move on and the user
 	// will have to figure it out.
 	if (pluginInfo == nil)
-		NSAssert1(false, @"Missing or corrupt info.plist in %@", pluginPath);
+		NSLog(@"Missing or corrupt info.plist in %@", pluginPath);
 	else
 	{
 		// We need to save the path to the plugin in the plugin object for later access to other
