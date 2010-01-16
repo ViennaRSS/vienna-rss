@@ -70,24 +70,32 @@
 	for (pluginName in pluginPaths)
 	{
 		NSString * pluginPath = [pluginPaths objectForKey:pluginName];
-		NSString * listFile = [pluginPath stringByAppendingPathComponent:@"info.plist"];
-		NSMutableDictionary * pluginInfo = [NSMutableDictionary dictionaryWithContentsOfFile:listFile];
+		[self loadPlugin:pluginPath];
+	}
+	
+	[pluginPaths release];
+}
 
-		// If the info.plist is missing or corrupted, warn but then just move on and the user
-		// will have to figure it out.
-		if (pluginInfo == nil)
-		{
-			NSAssert1(false, @"Missing or corrupt info.plist in %@", pluginPath);
-			continue;
-		}
-
+/* loadPlugin
+ * Load the plugin at the specified path.
+ */
+-(void)loadPlugin:(NSString *)pluginPath
+{
+	NSString * listFile = [pluginPath stringByAppendingPathComponent:@"info.plist"];
+	NSString * pluginName = [pluginPath lastPathComponent];
+	NSMutableDictionary * pluginInfo = [NSMutableDictionary dictionaryWithContentsOfFile:listFile];
+	
+	// If the info.plist is missing or corrupted, warn but then just move on and the user
+	// will have to figure it out.
+	if (pluginInfo == nil)
+		NSAssert1(false, @"Missing or corrupt info.plist in %@", pluginPath);
+	else
+	{
 		// We need to save the path to the plugin in the plugin object for later access to other
 		// resources in the plugin folder.
 		[pluginInfo setObject:pluginPath forKey:@"Path"];
 		[allPlugins setObject:pluginInfo forKey:pluginName];
 	}
-	
-	[pluginPaths release];
 }
 
 /* toolbarItems

@@ -28,5 +28,6 @@
 -(void)resetPlugins;
 -(NSArray *)toolbarItems;
 -(NSArray *)defaultToolbarItems;
+-(void)loadPlugin:(NSString *)pluginPath;
 -(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier;
 @end

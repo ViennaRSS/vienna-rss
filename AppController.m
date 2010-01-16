@@ -60,54 +60,55 @@
 #include <IOKit/IOMessage.h>
 
 @interface AppController (Private)
--(NSMenu *)searchFieldMenu;
--(void)installSleepHandler;
--(void)installScriptsFolderWatcher;
--(void)handleTabChange:(NSNotification *)nc;
--(void)handleFolderSelection:(NSNotification *)nc;
--(void)handleCheckFrequencyChange:(NSNotification *)nc;
--(void)handleFolderNameChange:(NSNotification *)nc;
--(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
--(void)handleReloadPreferences:(NSNotification *)nc;
--(void)handleShowAppInStatusBar:(NSNotification *)nc;
--(void)handleShowStatusBar:(NSNotification *)nc;
--(void)handleShowFilterBar:(NSNotification *)nc;
--(void)setAppStatusBarIcon;
--(void)localiseMenus:(NSArray *)arrayOfMenus;
--(void)updateNewArticlesNotification;
--(void)showAppInStatusBar;
--(void)initSortMenu;
--(void)initColumnsMenu;
--(void)initBlogWithMenu;
--(void)initScriptsMenu;
--(void)initFiltersMenu;
--(NSMenu *)getStylesMenu;
--(void)startProgressIndicator;
--(void)stopProgressIndicator;
--(void)doEditFolder:(Folder *)folder;
--(void)refreshOnTimer:(NSTimer *)aTimer;
--(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
--(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
--(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
--(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
--(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
--(void)runAppleScript:(NSString *)scriptName;
--(NSString *)appName;
--(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
--(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
--(void)updateAlternateMenuTitle;
--(void)updateSearchPlaceholder;
--(void)toggleOptionKeyButtonStates;
--(FoldersTree *)foldersTree;
--(void)updateCloseCommands;
--(void)loadOpenTabs;
--(BOOL)isFilterBarVisible;
--(BOOL)isStatusBarVisible;
--(NSDictionary *)registrationDictionaryForGrowl;
--(NSTimer *)checkTimer;
--(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
--(void)searchArticlesWithString:(NSString *)searchString;
--(void)sourceWindowWillClose:(NSNotification *)notification;
+	-(NSMenu *)searchFieldMenu;
+	-(void)installSleepHandler;
+	-(void)installScriptsFolderWatcher;
+	-(void)handleTabChange:(NSNotification *)nc;
+	-(void)handleFolderSelection:(NSNotification *)nc;
+	-(void)handleCheckFrequencyChange:(NSNotification *)nc;
+	-(void)handleFolderNameChange:(NSNotification *)nc;
+	-(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
+	-(void)handleReloadPreferences:(NSNotification *)nc;
+	-(void)handleShowAppInStatusBar:(NSNotification *)nc;
+	-(void)handleShowStatusBar:(NSNotification *)nc;
+	-(void)handleShowFilterBar:(NSNotification *)nc;
+	-(void)setAppStatusBarIcon;
+	-(void)localiseMenus:(NSArray *)arrayOfMenus;
+	-(void)updateNewArticlesNotification;
+	-(void)showAppInStatusBar;
+	-(void)initSortMenu;
+	-(void)initColumnsMenu;
+	-(void)initBlogWithMenu;
+	-(void)initScriptsMenu;
+	-(void)initFiltersMenu;
+	-(NSMenu *)getStylesMenu;
+	-(void)startProgressIndicator;
+	-(void)stopProgressIndicator;
+	-(void)doEditFolder:(Folder *)folder;
+	-(void)refreshOnTimer:(NSTimer *)aTimer;
+	-(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
+	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+	-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+	-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
+	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+	-(void)runAppleScript:(NSString *)scriptName;
+	-(NSString *)appName;
+	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
+	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
+	-(void)updateAlternateMenuTitle;
+	-(void)updateSearchPlaceholder;
+	-(void)toggleOptionKeyButtonStates;
+	-(FoldersTree *)foldersTree;
+	-(void)updateCloseCommands;
+	-(void)loadOpenTabs;
+	-(BOOL)isFilterBarVisible;
+	-(BOOL)isStatusBarVisible;
+	-(NSDictionary *)registrationDictionaryForGrowl;
+	-(NSTimer *)checkTimer;
+	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
+	-(void)searchArticlesWithString:(NSString *)searchString;
+	-(void)sourceWindowWillClose:(NSNotification *)notification;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -636,24 +637,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([[filename pathExtension] isEqualToString:@"viennastyle"])
 	{
-		NSString * path = [prefs stylesFolder];
 		NSString * styleName = [[filename lastPathComponent] stringByDeletingPathExtension];
-		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
-		
-		// Make sure we actually have a Styles folder.
-		NSFileManager * fileManager = [NSFileManager defaultManager];
-		BOOL isDir = NO;
-		
-		if (![fileManager fileExistsAtPath:path isDirectory:&isDir])
-		{
-			if (![fileManager createDirectoryAtPath:path attributes:NULL])
-			{
-				runOKAlertPanel(NSLocalizedString(@"Cannot create style folder title", nil), NSLocalizedString(@"Cannot create style folder body", nil), path);
-				return NO;
-			}
-		}
-		[fileManager removeFileAtPath:fullPath handler:nil];
-		if (![fileManager copyPath:filename toPath:fullPath handler:nil])
+		if (![self installFilename:filename toPath:[prefs stylesFolder]])
 			[[Preferences standardPreferences] setDisplayStyle:styleName];
 		else
 		{
@@ -666,25 +651,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		return YES;
 	}
+	if ([[filename pathExtension] isEqualToString:@"viennaplugin"])
+	{
+		NSString * path = [prefs pluginsFolder];
+		if ([self installFilename:filename toPath:path])
+		{
+			NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
+			[pluginManager loadPlugin:fullPath];
+		}
+		return YES;
+	}
 	if ([[filename pathExtension] isEqualToString:@"scpt"])
 	{
-		NSString * path = [prefs scriptsFolder];
-		NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
-		
-		// Make sure we actually have a Scripts folder.
-		NSFileManager * fileManager = [NSFileManager defaultManager];
-		BOOL isDir = NO;
-		
-		if (![fileManager fileExistsAtPath:path isDirectory:&isDir])
-		{
-			if (![fileManager createDirectoryAtPath:path attributes:NULL])
-			{
-				runOKAlertPanel(NSLocalizedString(@"Cannot create scripts folder title", nil), NSLocalizedString(@"Cannot create scripts folder body", nil), path);
-				return NO;
-			}
-		}
-		[fileManager removeFileAtPath:fullPath handler:nil];
-		if ([fileManager copyPath:filename toPath:fullPath handler:nil])
+		if ([self installFilename:filename toPath:[prefs scriptsFolder]])
 		{
 			if (!hasOSScriptsMenu())
 				[self initScriptsMenu];
@@ -698,6 +677,31 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self importFromFile:filename];
 	}
 	return NO;
+}
+
+/* installFilename
+ * Copies the folder at srcFile to the specified path. The path is created if it doesn't already exist and
+ * an error is reported if we fail to create the path. The return value is the result of copying the source
+ * folder to the new path.
+ */
+-(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path
+{
+	NSString * fullPath = [path stringByAppendingPathComponent:[srcFile lastPathComponent]];
+	
+	// Make sure we actually have a destination folder.
+	NSFileManager * fileManager = [NSFileManager defaultManager];
+	BOOL isDir = NO;
+	
+	if (![fileManager fileExistsAtPath:path isDirectory:&isDir])
+	{
+		if (![fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:NULL error:NULL])
+		{
+			runOKAlertPanel(NSLocalizedString(@"Cannot create folder title", nil), NSLocalizedString(@"Cannot create folder body", nil), path);
+			return NO;
+		}
+	}
+	[fileManager removeFileAtPath:fullPath handler:nil];
+	return [fileManager copyPath:srcFile toPath:fullPath handler:nil];
 }
 
 /* searchFieldMenu

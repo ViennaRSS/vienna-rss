@@ -395,6 +395,7 @@
 		AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = skipFolderButtonPressed.tiff; sourceTree = "<group>"; };
 		AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = subscribeButtonPressed.tiff; sourceTree = "<group>"; };
 		AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = emptyTrashButton.tiff; sourceTree = "<group>"; };
+		AA1A3DC61100FA6E00F89575 /* vienna2plugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = vienna2plugin.icns; sourceTree = "<group>"; };
 		AA20DC9D0882CCC300A226F5 /* unread.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = unread.tiff; sourceTree = "<group>"; };
 		AA2185010861E7600024DD4A /* TexturedHeader.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TexturedHeader.m; sourceTree = "<group>"; };
 		AA2185020861E7600024DD4A /* TexturedHeader.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TexturedHeader.h; sourceTree = "<group>"; };
@@ -1115,6 +1116,7 @@
 				AA67F3980897377C008BBC37 /* stopRefresh.tiff */,
 				AA34582C084BE802003D992E /* vienna2.icns */,
 				AA4AB5E008971B28006C843E /* vienna2style.icns */,
+				AA1A3DC61100FA6E00F89575 /* vienna2plugin.icns */,
 				AA2185050861E7E10024DD4A /* metal_column_header.png */,
 				AAB90EFC061D059D00CA4741 /* searchFolder.tiff */,
 				AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */,
