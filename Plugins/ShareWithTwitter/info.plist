@@ -13,7 +13,7 @@
 	<key>FriendlyName</key>
 	<string>twitter</string>
 	<key>Tooltip</key>
-	<string>Share the current article on twitter</string>
+	<string>Share the current article on twitter, with automatic URL shortening by bit.ly</string>
 	<key>ButtonImage</key>
 	<string>twitterButton</string>
 	<key>ShortenURLs</key>
