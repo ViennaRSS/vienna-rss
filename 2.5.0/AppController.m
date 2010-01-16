@@ -26,6 +26,7 @@
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
+#import "ArrayExtensions.h"
 #import "StringExtensions.h"
 #import "SplitViewExtensions.h"
 #import "SquareWindow.h"
@@ -4131,14 +4132,15 @@ static CFStringRef percentEscape(NSString *string)
  */
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [[NSArray arrayWithObjects:
+	return [NSArray arrayByExpandingAllArrayObjects:
 			 @"Subscribe",
 			 @"SkipFolder",
 			 @"Action",
 			 @"Refresh",
+			 [pluginManager defaultToolbarItems],
 			 NSToolbarFlexibleSpaceItemIdentifier,
 			 @"SearchItem",
-			 nil] arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]];
+			 nil];
 }
 
 /* toolbarAllowedItemIdentifiers
@@ -4147,7 +4149,7 @@ static CFStringRef percentEscape(NSString *string)
  */
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [[NSArray arrayWithObjects:
+	return [NSArray arrayByExpandingAllArrayObjects:
 			 NSToolbarSeparatorItemIdentifier,
 			 NSToolbarSpaceItemIdentifier,
 			 NSToolbarFlexibleSpaceItemIdentifier,
@@ -4163,7 +4165,8 @@ static CFStringRef percentEscape(NSString *string)
 			 @"Styles",
 			 @"PreviousButton",
 			 @"NextButton",
-			 nil] arrayByAddingObjectsFromArray:[pluginManager toolbarItems]];
+			 [pluginManager toolbarItems],
+			 nil];
 }
 
 /* dealloc
