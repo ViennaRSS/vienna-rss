@@ -88,7 +88,6 @@
 -(BOOL)setParent:(int)newParentID forFolder:(int)folderId;
 -(BOOL)setFirstChild:(int)childId forFolder:(int)folderId;
 -(BOOL)setNextSibling:(int)nextSiblingId forFolder:(int)folderId;
--(BOOL)setBloglinesId:(int)folderId newBloglinesId:(long)bloglinesId;
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification;
 
 // RSS folder functions

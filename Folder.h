@@ -36,9 +36,6 @@
 #define MA_Trash_Folder			5
 #define MA_Search_Folder		6
 
-// Bloglines flags
-#define MA_NonBloglines_Folder	0x0L
-
 // Macros to simplify getting folder types
 #define FolderType(f)			([(f) type])
 #define IsSmartFolder(f)		(([(f) type]) == MA_Smart_Folder)
@@ -47,7 +44,6 @@
 #define IsTrashFolder(f)		(([(f) type]) == MA_Trash_Folder)
 #define IsSearchFolder(f)		(([(f) type]) == MA_Search_Folder)
 #define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
-#define IsBloglinesFolder(f)	([(f) bloglinesId] != MA_NonBloglines_Folder)
 
 // Folder flags
 // (These must be bitmask values!)
@@ -101,7 +97,6 @@
 -(int)countOfCachedArticles;
 -(int)unreadCount;
 -(int)type;
--(long)bloglinesId;
 -(unsigned int)nonPersistedFlags;
 -(unsigned int)flags;
 -(NSImage *)image;
@@ -129,7 +124,6 @@
 -(void)setFeedURL:(NSString *)feedURL;
 -(void)setUsername:(NSString *)newUsername;
 -(void)setPassword:(NSString *)newPassword;
--(void)setBloglinesId:(long)newBloglinesId;
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(unsigned)indexOfArticle:(Article *)article;
