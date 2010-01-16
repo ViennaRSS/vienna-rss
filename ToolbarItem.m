@@ -99,7 +99,7 @@
 	[userImage drawInRect:CenterRect(buttonSize, userImageSize) fromRect:userImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[buttonImage unlockFocus];
 
-	NSImage * pressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButtonPressed.tiff"]];
+	NSImage * pressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButtonPressedBurned.tiff"]];
 	buttonSize = [pressedImage size];
 	[pressedImage lockFocus];
 	[userImage drawInRect:CenterRect(buttonSize, userImageSize) fromRect:userImageRect operation:NSCompositeSourceOver fraction:1.0];
@@ -111,7 +111,7 @@
 	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[smallNormalImage unlockFocus];
 
-	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButtonPressed.tiff"]];
+	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButton.tiff"]];
 	buttonSize = [smallPressedImage size];
 	[smallPressedImage lockFocus];
 	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
