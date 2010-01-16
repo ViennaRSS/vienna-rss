@@ -182,7 +182,7 @@
 					[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
 				
 				// If ShortenURLs is true in the plugin's info.plist, we attempt to shorten it via the bit.ly service.
-				if ([pluginItem objectForKey:@"ShortenURLs"])
+				if ([[pluginItem objectForKey:@"ShortenURLs"] boolValue])
 				{
 					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
 					NSString * shortURL = [bitlyHelper shortenURL:[theView viewLink]];
@@ -205,7 +205,7 @@
 				[urlString replaceString:@"$ArticleTitle$" withString: [currentMessage title]];
 				
 				// URL shortening again, as above...
-				if ([pluginItem objectForKey:@"ShortenURLs"])
+				if ([[pluginItem objectForKey:@"ShortenURLs"] boolValue])
 				{
 					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
 					NSString * shortURL = [bitlyHelper shortenURL:[currentMessage link]];
