@@ -110,6 +110,7 @@
 	-(ToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier;
 	-(void)searchArticlesWithString:(NSString *)searchString;
 	-(void)sourceWindowWillClose:(NSNotification *)notification;
+	-(IBAction)cancelAllRefreshesToolbar:(id)sender;
 @end
 
 // Static constant strings that are typically never tweaked
@@ -2235,7 +2236,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		// Toggle the refresh button
 		ToolbarItem * item = [self toolbarItemWithIdentifier:@"Refresh"];
-		[item setAction:@selector(cancelAllRefreshes:)];
+		[item setAction:@selector(cancelAllRefreshesToolbar:)];
 		[item setButtonImage:@"cancelRefreshButton"];
 		
 		[self startProgressIndicator];
@@ -3281,6 +3282,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders] ignoringSubscriptionStatus:YES];
 }
 
+/* cancelAllRefreshesToolbar
+ * Separate cancel refresh action just for the toolbar.
+ */
+-(IBAction)cancelAllRefreshesToolbar:(id)sender
+{
+	[self cancelAllRefreshes:sender];
+}
+
 /* cancelAllRefreshes
  * Used to kill all active refresh connections and empty the queue of folders due to
  * be refreshed.
@@ -3627,7 +3636,7 @@ static CFStringRef percentEscape(NSString *string)
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
 	
-	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshes:))
+	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshesToolbar:))
 	{
 		*validateFlag = ![db readOnly];
 		return YES;
@@ -3841,7 +3850,7 @@ static CFStringRef percentEscape(NSString *string)
 	}
 	else if (theAction == @selector(cancelAllRefreshes:))
 	{
-		return [self isConnecting];
+		return ![db readOnly] && [self isConnecting];
 	}
 	else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:)))
 	{
