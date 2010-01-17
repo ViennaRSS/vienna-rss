@@ -8,15 +8,13 @@
 	<string>Link</string>
 	<key>URL</key>
 	<string>http://www.facebook.com/sharer.php?u=$ArticleLink$&amp;t=$ArticleTitle$</string>
-	<key>Default</key>
-	<false/>
 	<key>FriendlyName</key>
 	<string>Facebook</string>
 	<key>Tooltip</key>
 	<string>Share the current article on Facebook</string>
 	<key>ButtonImage</key>
 	<string>facebookButton</string>
-	<key>ShortenURLs</key>
-	<false/>
+	<key>MenuPath</key>
+	<string>Share With Facebook</string>
 </dict>
 </plist>

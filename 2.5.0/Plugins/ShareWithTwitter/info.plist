@@ -11,12 +11,14 @@
 	<key>Default</key>
 	<true/>
 	<key>FriendlyName</key>
-	<string>twitter</string>
+	<string>Twitter</string>
 	<key>Tooltip</key>
 	<string>Share the current article on twitter, with automatic URL shortening by bit.ly</string>
 	<key>ButtonImage</key>
 	<string>twitterButton</string>
 	<key>ShortenURLs</key>
 	<true/>
+	<key>MenuPath</key>
+	<string>Share With Twitter</string>
 </dict>
 </plist>
