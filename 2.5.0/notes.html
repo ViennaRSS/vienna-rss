@@ -1,46 +1,13 @@
 <html>
 <head>
-<title>Vienna 2.4.0.2401</title>
+<title>Vienna 2.5.0.2500</title>
 </head>
 <body>
 <ul>
-<li>Fix the filter field article selection problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21665</li>
-<li>Enable navigating the built-in browser's back/forward-list via  left/right three-finger swipes.</li>
-<li>Enable navigating feeds via left/right three-finger swipes: Left for "Go Back" and right for "View Next Unread".</li>
-<li>Enable as scrolling to the top/bottom of web pages and the article list via upwards/downwards three-finger swipes.</li>
-<li>Change "currentSelection" to "currentTextSelection" in Viennas Applescript terminology.</li>
-<li>Remove command-shift-g as keyboard shortcut for creating group folder. This is now used for Find Previous.</li>
-<li>Show an alert when upgrading the database version, because it can take a while.</li>
-<li>Turn off animation of tab resizing. It was slow, superfluous and apparently sometimes caused drawing errors in the tab bar background.</li>
-<li>Fix crash when sorting articles by enclosure URL.</li>
-<li>Update SQLite to version 3.6.18.</li>
-<li>Add ability to "Show XML Source" for feeds, which is now cached locally.</li>
-<li>Add support for IDN (internationlized domain names) in the browser.</li>
-<li>Add new supported blog editor (Blogo).</li>
-<li>Increase the standard number of simultaneous refresh downloads to 20.</li>
-<li>Redo browser and filter bar UI. Slimmer look, new buttons.</li>
-<li>Vienna's UI now correctly dims when the application is the background.</li>
-<li>Enable printing of web-pages from the built-in browser.</li>
-<li>Vienna now shows an error page with useful information when the browser fails to load a resource.</li>
-<li>Fix bug where changing the layout would hide the tab bar until relaunch.</li>
-<li>Fix bug that prevented the user from searching for text within a web-page.</li>
-<li>Fix drawing errors and artifacts in the grey title bars.</li>
-<li>Check for https:// as well as http:// on the pasteboard when adding a new subscription.</li>
-<li>Fix background drawing errors in main window and remove custom window background.</li>
-<li>Fix drawing error in Downloads window and remove custom background.</li>
-<li>Fix bug and exception where clicking on a feed link launched Vienna but failed to subscribe to the feed.</li>
-<li>Add workaround for feeds that contain more than one item with the same guid. (For example, the WordPress Trac, to name the guilty.)</li>
-<li>Fix long standing bug where deleted articles would reappear after emptying the trash.</li>
-<li>Fix "Help -> Keyboard shortcuts", which didn't work at all.</li>
-<li>Numerous fixes to localization of help pages and other strings in German, French, and other languages.</li>
-<li>General code and build-phase cleanup, as well as minor speed improvements for some operations.</li>
-<li>Drop Mac OS X 10.4 Tiger support. Vienna 2.4 needs 10.5 Leopard or greater to launch.</li>
-<li>Prevent an infinite redirect loop. This was happening with http://feeds.feedburner.com/factcheck/Rdqt</li>
-<li>Fix the article view scrolling problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20814</li>
-<li>Fix the mark all read bug on Snow Leopard reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=20877</li>
-<li>Eliminate deprecated method warnings on Snow Leopard.</li>
-<li>Eliminate drawing artifacts in Folders and Articles headers. (Patch from Dan Crosta)</li>
-<li>Fix a crash reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21303</li>
+<li>Add support for plugins.</li>
+<li>Added Share With Facebook button.</li>
+<li>Added Share With Evernote button.</li>
+<li>Update to the current version of Sparkle, which prevents auto-updating to a version of Vienna which will not run on the user's system.</li>
 </ul>
 </body>
 </html>
