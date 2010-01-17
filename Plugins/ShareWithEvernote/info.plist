@@ -11,12 +11,14 @@
 	<key>Default</key>
 	<true/>
 	<key>FriendlyName</key>
-	<string>Share With Evernote</string>
+	<string>Evernote</string>
 	<key>Tooltip</key>
 	<string>Share the current article on Evernote</string>
 	<key>ButtonImage</key>
 	<string>evernoteButton</string>
 	<key>ShortenURLs</key>
 	<false/>
+	<key>MenuPath</key>
+	<string>Share with Evernote</string>
 </dict>
 </plist>

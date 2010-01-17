@@ -28,6 +28,7 @@
 #import "BitlyAPIHelper.h"
 
 @interface PluginManager (Private)
+	-(void)installPlugin:(NSDictionary *)onePlugin;
 @end
 
 @implementation PluginManager
@@ -72,7 +73,7 @@
 		NSString * pluginPath = [pluginPaths objectForKey:pluginName];
 		[self loadPlugin:pluginPath];
 	}
-	
+
 	[pluginPaths release];
 }
 
@@ -95,7 +96,111 @@
 		// resources in the plugin folder.
 		[pluginInfo setObject:pluginPath forKey:@"Path"];
 		[allPlugins setObject:pluginInfo forKey:pluginName];
+		
+		// Pop it on the menu if needed
+		[self installPlugin:pluginInfo];
 	}
+}
+
+/* installPlugin
+ * Installs one plugin to the menus.
+ */
+-(void)installPlugin:(NSDictionary *)onePlugin
+{
+	NSString * pluginName = [onePlugin objectForKey:@"Name"];
+	NSString * menuPath = [onePlugin objectForKey:@"MenuPath"];
+	if (menuPath == nil)
+		return;
+	
+	// The menu path can be specified as Menu/Title, where Menu is the
+	// unlocalized name of the top level menu under which the plugin is
+	// added and Title is the menu name representing the plugin. If the
+	// Menu part is omitted, the plugin goes at the end of the Article menu by
+	// default.
+	NSScanner * scanner = [NSScanner scannerWithString:menuPath];
+	NSString * topLevelMenu = nil;
+	NSString * menuTitle = nil;
+	
+	[scanner scanUpToString:@"/" intoString:&topLevelMenu];
+	if ([scanner isAtEnd] || topLevelMenu == nil)
+	{
+		topLevelMenu = @"Article";
+		menuTitle = menuPath;
+	}
+	else
+	{
+		[scanner scanString:@"/" intoString:nil];
+		[scanner scanUpToString:@"" intoString:&menuTitle];
+	}
+		topLevelMenu = NSLocalizedString(topLevelMenu, nil);
+	
+	NSArray * menuArray = [[NSApp mainMenu] itemArray];
+	BOOL didInstall = NO;
+	int c;
+	
+	for (c = 0; !didInstall && c < [menuArray count]; ++c)
+	{
+		NSMenuItem * topMenu = [menuArray objectAtIndex:c];
+		if ([[topMenu title] isEqualToString:topLevelMenu])
+		{
+			// Parse off the shortcut key, if there is one. The format is a series of
+			// control key specifiers: Cmd, Shift, Alt or Ctrl - specified in any
+			// order and separated by '+', plus a single key character. If more than
+			// one key character is given, the last one is used but generally that is
+			// a bug in the MenuKey.
+			NSString * menuKey = [onePlugin objectForKey:@"MenuKey"];
+			NSUInteger keyMod = 0;
+			NSString * keyChar = @"";
+			
+			if (menuKey != nil)
+			{
+				NSArray * keyArray = [menuKey componentsSeparatedByString:@"+"];
+				NSString * oneKey;
+				
+				for (oneKey in keyArray)
+				{
+					if ([oneKey isEqualToString:@"Cmd"])
+						keyMod |= NSCommandKeyMask;
+					else if ([oneKey isEqualToString:@"Shift"])
+						keyMod |= NSShiftKeyMask;
+					else if ([oneKey isEqualToString:@"Alt"])
+						keyMod |= NSAlternateKeyMask;
+					else if ([oneKey isEqualToString:@"Ctrl"])
+						keyMod |= NSControlKeyMask;
+					else
+					{
+						if (![keyChar isBlank])
+							NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
+						keyChar = oneKey;
+					}
+				}
+			}
+
+			// Keep the menus tidy. If the last menu item is not currently a plugin invocator then
+			// add a separator.
+			NSMenu * parentMenu = [topMenu submenu];
+			int lastItem = [parentMenu numberOfItems] - 1;
+			
+			if (lastItem >= 0 && [[parentMenu itemAtIndex:lastItem] action] != @selector(pluginInvocator:))
+				[parentMenu addItem:[NSMenuItem separatorItem]];
+
+			// Finally add the plugin to the end of the selected menu complete with
+			// key equivalent and save the plugin object in the NSMenuItem so that we
+			// can associate it in pluginInvocator.
+			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(pluginInvocator:) keyEquivalent:keyChar];
+			[menuItem setTarget:self];
+			[menuItem setKeyEquivalentModifierMask:keyMod];
+			[menuItem setRepresentedObject:onePlugin];
+			[parentMenu addItem:menuItem];
+			[menuItem release];
+			
+			didInstall = YES;
+		}
+	}
+
+	// Warn if we failed to install a plugin
+	if (!didInstall)
+		NSLog(@"Warning: error in MenuPath (\"%@\") in info.plist for plugin %@", menuPath, pluginName);
 }
 
 /* toolbarItems
@@ -131,12 +236,20 @@
 	NSDictionary * pluginItem = [allPlugins objectForKey:itemIdentifier];
 	if (pluginItem != nil)
 	{
-		[item setLabel:[pluginItem objectForKey:@"FriendlyName"]];
+		NSString * friendlyName = [pluginItem objectForKey:@"FriendlyName"];
+		NSString * tooltip = [pluginItem objectForKey:@"Tooltip"];
+
+		if (friendlyName == nil)
+			friendlyName = itemIdentifier;
+		if (tooltip == nil)
+			tooltip = friendlyName;
+		
+		[item setLabel:friendlyName];
 		[item setPaletteLabel:[item label]];
 		[item compositeButtonImage:[pluginItem objectForKey:@"ButtonImage"] fromPath:[pluginItem objectForKey:@"Path"]];
 		[item setTarget:self];
 		[item setAction:@selector(pluginInvocator:)];
-		[item setToolTip:[pluginItem objectForKey:@"Tooltip"]];
+		[item setToolTip:tooltip];
 	}
 }
 
@@ -159,14 +272,16 @@
  */
 -(IBAction)pluginInvocator:(id)sender
 {
-	if (![sender isKindOfClass:[ToolbarButton class]])
+	NSDictionary * pluginItem;
+
+	if ([sender isKindOfClass:[ToolbarButton class]])
+		pluginItem = [allPlugins objectForKey:[sender itemIdentifier]];
+	else
 	{
-		NSAssert(false, @"Error: pluginInvocator called from an object other than ToolbarButton. Ignored.");
-		return;
+		NSMenuItem * menuItem = (NSMenuItem *)sender;
+		pluginItem = [menuItem representedObject];
 	}
 	
-	NSString * itemIdentifier = [sender itemIdentifier];
-	NSDictionary * pluginItem = [allPlugins objectForKey:itemIdentifier];
 	if (pluginItem != nil)
 	{
 		// This is a link plugin. There should be a URL field which we invoke and possibly
