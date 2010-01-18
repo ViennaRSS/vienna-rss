@@ -22,6 +22,18 @@
 #import "AppController.h"
 #import "Folder.h"
 
+@implementation SourceWebView
+
+/* performDragOperation
+ * Don't accept stuff dragged into the source view for security reasons, since it has JavaScript turned on.
+ */
+- (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
+{
+	return NO;
+}
+
+@end
+
 @implementation XMLSourceWindow
 
 /* initWithFolder:
@@ -87,13 +99,6 @@
 	}	
 }
 
--(void)dealloc
-{
-	[feedSourceFilePath release];
-	[sourceWindowTitle release];
-	[super dealloc];
-}
-
 - (void)windowDidLoad
 {
 	static WebPreferences * sJavaScriptPreferences;
@@ -122,6 +127,11 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:[notification name] object:self];
 }
 
+/*
+ * webView: decidePolicyForNavigationAction: ....
+ * Do not allow following of links inside this view for security reasons, as JavaScript is enabled here by default.
+ * Links are opened in the way the user specifies in Preferences, respecting his security settings.
+ */
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
 	NSNumber * navigationTypeObject = [actionInformation objectForKey:WebActionNavigationTypeKey];
@@ -137,6 +147,13 @@
 	}
 	
 	[listener use];
+}
+
+-(void)dealloc
+{
+	[feedSourceFilePath release];
+	[sourceWindowTitle release];
+	[super dealloc];
 }
 
 @end

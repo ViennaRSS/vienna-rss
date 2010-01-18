@@ -23,8 +23,11 @@
 
 @class Folder;
 
+@interface SourceWebView : WebView { }
+@end
+
 @interface XMLSourceWindow : NSWindowController {
-	IBOutlet WebView * sourceWebView;
+	IBOutlet SourceWebView * sourceWebView;
 	NSString * feedSourceFilePath;
 	NSString * sourceWindowTitle;
 }
