@@ -1,0 +1,78 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: #fff;
+	font-family:Helvetica, Arial, Sans-serif;
+}
+
+.feedTitle {
+	background-color: #a8a8a8;
+	padding: 8px 3px 2px 3px;
+	text-align: right;
+	letter-spacing: .5em;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.feedTitle a {
+	color: #575757;
+	text-decoration: none;
+}
+
+.articleTitle {
+	background-color: #b5bff5;
+	padding: 10px 3px 13px 3px;
+	text-align: center;
+	letter-spacing: .25em;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.articleTitle a {
+	color: #fff;
+	text-decoration: none;
+}
+.articleTitle a:hover {
+	color: #394aa8;
+}
+
+.spacer {
+	padding: 0px;
+	margin: 0px;
+	background-image: url(shadow.gif);
+	width: 100%;
+	height: 4px;
+}
+
+.articleBodyStyle {
+	padding: 15px;
+}
+
+.articleBodyStyle a {
+	font-weight: bold;
+	color:  #394aa8;
+	outline: none;
+}
+.articleBodyStyle a:visited {
+	color:  #394aa8;
+}
+.articleBodyStyle a:active {
+	color:  #394aa8;
+}
+.articleBodyStyle a:hover {
+	color: #536bf5;
+}
+
+.articleDetails {
+	background-color: #b5bff5;
+	padding: 4px 3px 4px 3px;
+	text-align: center;
+	font-size: 12px;
+	letter-spacing: .2em;
+	font-weight: bold;
+	color: #fff;
+}
+
+.articleDateStyle:after {
+	content: " / ";
+}

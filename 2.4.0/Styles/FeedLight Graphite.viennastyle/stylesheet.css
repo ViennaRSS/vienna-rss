@@ -1,0 +1,183 @@
+/*
+	FeedLight for Vienna
+	Inspired by every other Spotlight-inspired style out there that wasn't quite good enough.
+
+	By Alex Hong <http://graphr.net/>
+	- Feed icon courtesy of Matt Brett <http://feedicons.com/>
+	- Other icons courtesy of Timothy Groves <http://brandspankingnew.net/>
+	- Ad-blocking code courtesy of Oliver Taylor <http://ollieman.net/>
+
+	Released under a Creative Commons Attribution-NonCommercial-ShareAlike license:
+	<http://creativecommons.org/licenses/by-nc-sa/2.5/>
+
+	2007-01-28: Initial release.
+	2007-02-13: Added ad-blocking code.
+	2007-02-14: Added article link hover state, removed content max-width.
+*/
+
+
+body {
+	margin: 0;
+	color: #404040;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body > hr, body > br { display: none; }
+
+body > .header {
+	margin-bottom: -10px;
+	padding-bottom: 10px;
+	background: url("fade.png") bottom repeat-x;
+}
+
+body > .header.fixed {
+	position: fixed;
+	top: 0;
+	z-index: 1;
+	width: 100%;
+}
+
+body > .header.fixed + .header {
+	background-image: none;
+}
+
+body > .header h1 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-family: "Lucida Grande", sans-serif;
+}
+
+body > .header h1 a {
+	display: block;
+	padding: 0.5833em 1.5em 0.3333em;
+	border-bottom: 1px solid;
+	color: #fff;
+	font-size: 12px;
+	line-height: 1.5em;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+body > .header p {	
+	margin: 0;
+	padding: 0.4545em 0.9091em 0.4545em 1.6364em;
+	border-bottom: 1px solid #c0c0c0;
+	color: #606060;
+	text-shadow: #fff 0 1px 0;
+	background: #f0f0f0;
+	font-size: 11px;
+	line-height: 1.6364em;
+	font-family: "Lucida Grande", sans-serif;
+}
+
+body > .header p + p {
+	text-shadow: #f9f9f9 0 1px 0;
+	background: #e9e9e9 url("fade.png") 0 -2px repeat-x;
+}
+
+body > .header span {
+	margin-right: 0.72em;
+	white-space: nowrap;
+}
+
+body > .header span a 			{ color: #606060; font-weight: bold; text-decoration: none; }
+body > .header span a:hover,
+body > .header span a:focus 	{ color: #808080; }
+body > .header span a:active 	{ color: #606060; }
+
+body > .header span,
+body > .header span a {
+	padding-left: 14px;
+	background-position: 0 0.27em;
+	background-repeat: no-repeat;
+}
+
+body > .header .newsItemSource,
+body > .header .newsItemEnclosure				{ padding-left: 0; }
+
+body > .header .newsItemSource a				{ background-image: url("icon-feed.gif"); }
+body > .header .newsItemSource a:hover,
+body > .header .newsItemSource a:focus			{ background-image: url("icon-feed-hover.gif"); }
+body > .header .newsItemSource a:active			{ background-image: url("icon-feed.gif"); }
+body > .header .newsItemDate	 				{ background-image: url("icon-calendar.gif"); }
+body > .header .newsItemCreator 				{ background-image: url("icon-author.gif"); }
+
+body > .header .newsItemEnclosure a				{ background-image: url("icon-enclosure.gif"); }
+body > .header .newsItemEnclosure a:hover,
+body > .header .newsItemEnclosure a:focus		{ background-image: url("icon-enclosure-hover.gif"); }
+body > .header .newsItemEnclosure a:active		{ background-image: url("icon-enclosure.gif"); } }
+
+body > .body 				{ overflow: auto; }
+body > .body > .content		{ font-size: 12px; line-height: 1.5em; margin: 1.5em 1.5em 0; }
+.clearAll					{ clear: both; }
+
+p, ul, ol, dl, 
+blockquote, pre, table, hr	{ margin: 0 0 1.5em; }
+ul, ol, dd 					{ margin-left: 0; padding-left: 1.6667em; }
+ul 							{ list-style-type: square; }
+sub, sup 					{ line-height: 0; }
+
+blockquote {
+	margin-left: 0.5833em;
+	padding: 0 0 0 1em;
+	border-left: 0.0833em solid #c0c0c0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: Georgia, serif;
+	border-bottom: solid #c0c0c0;
+}
+
+h2, h4, h6 {
+	font-weight: normal;
+}
+
+h1, h2 {
+	margin: 1.2222em 0 0.7222em;
+	border-bottom-width: 0.0556em;
+	font-size: 18px;
+}
+
+h3, h4 {
+	margin: 1.5714em 0 0.9286em;
+	border-bottom-width: 0.0714em;
+	font-size: 14px;
+}
+
+h5, h6 {
+	margin: 1.8333em 0 1.0833em;
+	border-bottom-width: 0.0833em;
+	font-size: 12px;
+}
+
+hr {
+	background: #c0c0c0;
+	margin-top: -1px;
+	height: 1px;
+	border: 0;
+}
+
+/* AD BLOCKING */
+.feedflare,
+img[src*="feeds.feedburner.com"],
+img[src*="feedster"],
+img[src*="rss.slashdot.org"],
+a:link[href*="/imageads."] img,
+a:link[href*="googleadservices"],
+a:link[href*="ads_by_google"],
+a img[src*="pheedo"],
+a img[src*="doubleclick"],
+a img[src^="http://feeds."] {
+	display: none !important;
+}
+
+/* GRAPHITE COLORS */
+a:link,
+a:visited 					{ color: #4e6681; }
+a:hover						{ color: #8395a7; }
+a:active 					{ color: #c03030; }
+body > .header h1 a 		{ background: #4e6681 url("graphite.gif") top repeat-x; text-shadow: #456 0 1px 0; border-bottom-color: #465c73; }
+body > .header h1 a:hover,
+body > .header h1 a:focus 	{ background: #597492 url("graphite-hover.gif") top repeat-x; }
+body > .header h1 a:active 	{ background: #4e6681 url("graphite.gif") top repeat-x; }
