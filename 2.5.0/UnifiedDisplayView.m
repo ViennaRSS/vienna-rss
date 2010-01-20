@@ -71,7 +71,6 @@
 -(void)selectFolderWithFilter:(int)newFolderId
 {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
-	[self setArticleListHeader];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
 	[articleController markAllReadByArray:[NSArray arrayWithObject:folder] withUndo:YES withRefresh:NO];
@@ -135,17 +134,6 @@
 	return (urlLink != nil) ? [controller contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:defaultMenuItems] : nil;
 }
 
-/* setArticleListHeader
- * Set the article list header caption to the name of the current folder.
- */
--(void)setArticleListHeader
-{
-	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
-	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	NSString * captionString = [NSString stringWithFormat: NSLocalizedString(@"%@ (Filtered: %@)", nil), [folder name], NSLocalizedString([filter name], nil)];
-	[unifiedListHeader setStringValue:captionString];
-}
-
 /* refreshCurrentFolder
  * Reload the current folder after a refresh.
  */
@@ -168,7 +156,6 @@
 		[articleController refilterArrayOfArticles];
 	if (refreshFlag != MA_Refresh_RedrawList)
 		[articleController sortArticles];
-	[self setArticleListHeader];
 	[self refreshArticlePane];
 }
 

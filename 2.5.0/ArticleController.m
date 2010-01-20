@@ -805,10 +805,7 @@
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
 	if (folderId == currentFolderId)
-	{
-		[mainArticleView setArticleListHeader];
 		[mainArticleView refreshArticlePane];
-	}
 }
 
 /* handleRefreshArticle

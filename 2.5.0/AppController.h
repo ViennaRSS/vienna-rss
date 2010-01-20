@@ -72,6 +72,7 @@
 	IBOutlet NSMenuItem * blogWithOneMenu;
 	IBOutlet FilterView * filterView;
 	IBOutlet NSView * cosmeticStatusBarHighlightLine;
+	IBOutlet NSTextField * currentFilterTextField;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;

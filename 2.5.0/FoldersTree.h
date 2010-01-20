@@ -22,7 +22,6 @@
 #import "ThinSplitView.h"
 #import "TreeNode.h"
 
-@class TexturedHeader;
 @class FolderView;
 @class PopupButton;
 @class AppController;
@@ -32,7 +31,6 @@
 {
 	IBOutlet AppController * controller;
 	IBOutlet FolderView * outlineView;
-	IBOutlet TexturedHeader * folderHeader;
 	IBOutlet ThinSplitView * folderSplitView;
 
 	TreeNode * rootNode;
