@@ -27,14 +27,12 @@
 @class AppController;
 @class ArticleController;
 @class ArticleView;
-@class TexturedHeader;
 @class FoldersTree;
 
 @interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-	IBOutlet TexturedHeader * unifiedListHeader;
 	IBOutlet ArticleView * unifiedText;
 	IBOutlet FoldersTree * foldersTree;
 }

@@ -315,11 +315,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		}
 	}
 
-	// Set the columns popup on the title bar to show the same menu.
-	[columnsPopupMenu setTheMenu:columnsSubMenu];
-	[columnsPopupMenu setSmallMenu:YES];
-	[columnsPopupMenu setToolTip:NSLocalizedString(@"Select columns to display", nil)];
-
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
@@ -1072,7 +1067,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[articleController reloadArrayOfArticles];
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
 		[articleController refilterArrayOfArticles];
-	[self setArticleListHeader];
 	if (refreshFlag != MA_Refresh_RedrawList)
 		[articleController sortArticles];
 	[self showSortDirection];
@@ -1105,17 +1099,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
 	[guid release];
-}
-
-/* setArticleListHeader
- * Set the article list header caption to the name of the current folder.
- */
--(void)setArticleListHeader
-{
-	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
-	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	NSString * captionString = [NSString stringWithFormat: NSLocalizedString(@"%@ (Filtered: %@)", nil), [folder name], NSLocalizedString([filter name], nil)];
-	[articleListHeader setStringValue:captionString];
 }
 
 /* selectArticleAfterReload
@@ -1163,7 +1146,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	[articleList deselectAll:self];
 	currentSelectedRow = -1;
-	[self setArticleListHeader];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
 	[articleList reloadData];

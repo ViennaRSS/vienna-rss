@@ -30,19 +30,16 @@
 @class ArticleController;
 @class MessageListView;
 @class ArticleView;
-@class TexturedHeader;
 @class FoldersTree;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-	IBOutlet TexturedHeader * articleListHeader;
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
 	IBOutlet FoldersTree * foldersTree;
-	IBOutlet PopupButton * columnsPopupMenu;
 	IBOutlet StdEnclosureView * stdEnclosureView;
 
 	int currentSelectedRow;

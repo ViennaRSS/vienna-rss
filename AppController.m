@@ -241,7 +241,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		
 		// Set the initial filter bar state
 		[self setFilterBarState:[prefs showFilterBar] withAnimation:NO];
-		
+				
 		// Make article list the first responder
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
 		
@@ -430,8 +430,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[toolbar setShowsBaselineSeparator:NO];
 	[mainWindow setToolbar:toolbar];
 	
-	// Give the status bar an embossed look
+	// Give the status bar and filter string an embossed look
 	[[statusText cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	[[currentFilterTextField cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	[currentFilterTextField setStringValue:@""];
 	
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
@@ -630,6 +632,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	[db close];
 }
+
+/* splitView:effectiveRect:forDrawnRect:ofDividerAtIndex [delegate]
+ * Makes the dragable area around the SplitView divider larger, so that it is easier to grab.
+ */
+- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex
+{
+	if([splitView isVertical]) {
+		drawnRect.origin.x -= 4;
+		drawnRect.size.width += 6;
+		return drawnRect;
+	}
+	else
+		return drawnRect;
+}
+
 
 /* openFile [delegate]
  * Called when the user opens a data file associated with Vienna by clicking in the finder or dragging it onto the dock.
@@ -1680,6 +1697,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (indexOfDefaultItem != -1)
 	{
 		[filterViewPopUp selectItemAtIndex:indexOfDefaultItem];
+		[currentFilterTextField setStringValue: [[filterViewPopUp itemAtIndex:indexOfDefaultItem] title]];
 	}
 }
 
@@ -3401,6 +3419,7 @@ static CFStringRef percentEscape(NSString *string)
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	[[Preferences standardPreferences] setFilterMode:[menuItem tag]];
+	[currentFilterTextField setStringValue:[menuItem title]];
 }
 
 #pragma mark Blogging

@@ -27,7 +27,6 @@
 #import "StringExtensions.h"
 #import "FolderView.h"
 #import "PopupButton.h"
-#import "TexturedHeader.h"
 #import "ViennaApp.h"
 #import "BrowserView.h"
 
@@ -96,10 +95,6 @@
 	
 	// Create and set whatever font we're using for the folders
 	[self setFolderListFont];
-
-	// Set header
-	[folderHeader setStringValue:NSLocalizedString(@"Folders", nil)];
-	[folderHeader setDragger:YES withSplitView:folderSplitView];
 
 	// Set background colour
 	[outlineView setBackgroundColor:[NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
