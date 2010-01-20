@@ -223,12 +223,14 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[foldersTree initialiseFoldersTree];
 		[mainArticleView initialiseArticleView];
 		
-		// If the statusbar is hidden, also hide the highlight line on its top.
+		// If the statusbar is hidden, also hide the highlight line on its top and the filter button.
 		if (![self isStatusBarVisible])
 		{
 			if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
 				[mainWindow setBottomCornerRounded:NO];
 			[cosmeticStatusBarHighlightLine setHidden:YES];
+			[currentFilterTextField setHidden:YES];
+			[filterIconInStatusBarButton setHidden:YES];
 		}
 		
 		// Select the folder and article from the last session
@@ -3588,6 +3590,8 @@ static CFStringRef percentEscape(NSString *string)
 				// When hiding the status bar, hide these controls BEFORE
 				// we start hiding the view. Looks cleaner.
 				[statusText setHidden:YES];
+				[currentFilterTextField setHidden:YES];
+				[filterIconInStatusBarButton setHidden:YES];
 				[cosmeticStatusBarHighlightLine setHidden:YES];
 				if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
 				{
@@ -3628,6 +3632,8 @@ static CFStringRef percentEscape(NSString *string)
 		// When showing the status bar, show these controls AFTER
 		// we have made the view visible. Again, looks cleaner.
 		[statusText setHidden:NO];
+		[currentFilterTextField setHidden:NO];
+		[filterIconInStatusBarButton setHidden:NO];
 		[cosmeticStatusBarHighlightLine setHidden:NO];
 		if ([mainWindow respondsToSelector:@selector(setBottomCornerRounded:)])
 		{
