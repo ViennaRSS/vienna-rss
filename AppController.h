@@ -73,6 +73,7 @@
 	IBOutlet FilterView * filterView;
 	IBOutlet NSView * cosmeticStatusBarHighlightLine;
 	IBOutlet NSTextField * currentFilterTextField;
+	IBOutlet NSButton * filterIconInStatusBarButton;
 
 	ActivityViewer * activityViewer;
 	NewPreferenceController * preferenceController;

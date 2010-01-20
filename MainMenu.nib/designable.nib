@@ -12,10 +12,10 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1288"/>
 			<integer value="1300"/>
-			<integer value="2"/>
 			<integer value="159"/>
+			<integer value="1288"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -60,8 +60,8 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSTextField" id="244330039">
 							<reference key="NSNextResponder" ref="711948959"/>
-							<int key="NSvFlags">290</int>
-							<string key="NSFrame">{{61, 4}, {706, 14}}</string>
+							<int key="NSvFlags">295</int>
+							<string key="NSFrame">{{108, 4}, {727, 14}}</string>
 							<reference key="NSSuperview" ref="711948959"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="59652583">
@@ -4049,6 +4049,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">1406</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">filterIconInStatusBarButton</string>
+						<reference key="source" ref="675460743"/>
+						<reference key="destination" ref="203729118"/>
+					</object>
+					<int key="connectionID">1407</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -6486,9 +6494,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{366, -60}, {942, 625}}</string>
+					<string>{{205, 131}, {942, 625}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{366, -60}, {942, 625}}</string>
+					<string>{{205, 131}, {942, 625}}</string>
 					<boolean value="YES"/>
 					<boolean value="NO"/>
 					<boolean value="YES"/>
@@ -6664,7 +6672,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1406</int>
+			<int key="maxID">1407</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -6838,6 +6846,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>exportSaveAccessory</string>
 							<string>exportSelected</string>
 							<string>exportWithGroups</string>
+							<string>filterIconInStatusBarButton</string>
 							<string>filterSearchField</string>
 							<string>filterView</string>
 							<string>filterViewPopUp</string>
@@ -6870,6 +6879,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>NSButtonCell</string>
 							<string>NSView</string>
 							<string>NSButtonCell</string>
+							<string>NSButton</string>
 							<string>NSButton</string>
 							<string>NSSearchField</string>
 							<string>FilterView</string>
