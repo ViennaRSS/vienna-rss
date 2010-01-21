@@ -293,28 +293,6 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// In condensed mode, the summary field takes up the whole space.
 	[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
 	
-	// Set up the corner button for chosing the visible columns.
-	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
-
-	for (Field * columnField in [db arrayOfFields])
-	{
-		// Filter out columns we don't view in the article list. Later we should have an attribute in the
-		// field object based on which columns are visible in the tableview.
-		if ([columnField tag] != MA_FieldID_Text && 
-			[columnField tag] != MA_FieldID_GUID &&
-			[columnField tag] != MA_FieldID_Comments &&
-			[columnField tag] != MA_FieldID_Deleted &&
-			[columnField tag] != MA_FieldID_Parent &&
-			[columnField tag] != MA_FieldID_Headlines &&
-			[columnField tag] != MA_FieldID_EnclosureDownloaded)
-		{
-			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[columnField displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
-			[menuItem setRepresentedObject:columnField];
-			[columnsSubMenu addItem:menuItem];
-			[menuItem release];
-		}
-	}
-
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
