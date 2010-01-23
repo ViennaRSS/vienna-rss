@@ -111,7 +111,7 @@
 	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[smallNormalImage unlockFocus];
 
-	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButton.tiff"]];
+	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButtonPressed.tiff"]];
 	buttonSize = [smallPressedImage size];
 	[smallPressedImage lockFocus];
 	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
