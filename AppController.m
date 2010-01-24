@@ -2221,6 +2221,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		BrowserPane * webPane = (BrowserPane *)newView;
 		[mainWindow makeFirstResponder:[webPane mainView]];
 	}
+	[self updateStatusBarFilterButtonVisibility];
 	[self updateSearchPlaceholder];
 	[self setStatusMessage:nil persist:NO];
 }
@@ -3145,6 +3146,24 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	item = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	if (item != nil)
 		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation]];
+}
+
+/* updateStatusBarFilterButtonVisibility
+ * Sets whether the filterin indication on the status bar is visible or not.
+ */
+
+-(void)updateStatusBarFilterButtonVisibility
+{
+	NSView<BaseView> * theView = [browserView activeTabItemView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		[currentFilterTextField setHidden: YES];
+		[filterIconInStatusBarButton setHidden: YES];
+	}
+	else {
+		[currentFilterTextField setHidden: NO];
+		[filterIconInStatusBarButton setHidden: NO];
+	}
 }
 
 /* updateSearchPlaceholder
