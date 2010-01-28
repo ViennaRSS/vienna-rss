@@ -263,6 +263,7 @@
 		B2B72E1610FF6252009201A9 /* sign_update.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1410FF6252009201A9 /* sign_update.rb */; };
 		B2B72E1810FF626B009201A9 /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1710FF626B009201A9 /* vienna_public_key.pem */; };
 		B2C9673C106CD02B0056669A /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
+		B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -893,6 +894,8 @@
 		B2C9673B106CD02B0056669A /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = de; path = de.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2C96740106CD08A0056669A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2C96742106CD09E0056669A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/errorpage.html; sourceTree = "<group>"; };
+		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
+		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -963,6 +966,8 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
+				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				AA0FB5E10869110300D9CB90 /* ActivityLog.m */,
 				AABFDC9F0609EA8100100A9B /* ActivityViewer.h */,
@@ -2147,6 +2152,7 @@
 				B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */,
 				AAE8214210F9C74500444C16 /* PluginManager.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
+				B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

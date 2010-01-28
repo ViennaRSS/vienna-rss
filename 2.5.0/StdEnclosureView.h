@@ -20,11 +20,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DSClickableURLTextField;
+
 @interface StdEnclosureView : NSView
 {
 	IBOutlet NSImageView * fileImage;
 	IBOutlet NSTextField * filenameLabel;
-	IBOutlet NSTextField * filenameField;
+	IBOutlet DSClickableURLTextField * filenameField;
 	IBOutlet NSButton * downloadButton;
 	NSString * enclosureFilename;
 	BOOL isITunes;

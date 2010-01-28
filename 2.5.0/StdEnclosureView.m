@@ -21,6 +21,7 @@
 #import "StdEnclosureView.h"
 #import "Preferences.h"
 #import "DownloadManager.h"
+#import "DSClickableURLTextField.h"
 
 // Private functions
 @interface StdEnclosureView (Private)
@@ -44,6 +45,14 @@
 		[nc addObserver:self selector:@selector(handleDownloadCompleted:) name:@"MA_Notify_DownloadCompleted" object:nil];
 	}
 	return self;
+}
+
+/* awakeFromNib
+ * Configure our subviews upon awakening from nib storage.
+ */
+-(void)awakeFromNib
+{
+	[filenameField setCanCopyURLs:YES];
 }
 
 /* handleDownloadCompleted
@@ -113,7 +122,13 @@
 	
 	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:ext];
 	[fileImage setImage:iconImage];
-	[filenameField setStringValue:basename];
+	NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+															enclosureFilename, NSLinkAttributeName,
+															[NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f], NSForegroundColorAttributeName,
+															[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName,
+															nil];
+	NSAttributedString * link = [[[NSAttributedString alloc] initWithString:basename attributes:linkAttributes] autorelease];
+	[filenameField setAttributedStringValue:link];
 }
 
 /* downloadFile
