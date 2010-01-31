@@ -848,6 +848,7 @@
 		B2108656109F8127001D4E7C /* XMLSourceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLSourceWindow.h; sourceTree = "<group>"; };
 		B2108657109F8127001D4E7C /* XMLSourceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLSourceWindow.m; sourceTree = "<group>"; };
 		B2108659109F8196001D4E7C /* XMLSource.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = XMLSource.nib; sourceTree = "<group>"; };
+		B2321D0F1115CDA30044CF54 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B23A794310FF50B10085C85B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = browserNextButton.tiff; sourceTree = "<group>"; };
@@ -2223,12 +2224,13 @@
 			isa = PBXVariantGroup;
 			children = (
 				AA6855B909FB120D00329883 /* en */,
+				B2321D0F1115CDA30044CF54 /* de */,
+				AA6853FD09FB074700329883 /* fr */,
 				AACF240E09441ACB0019F2BA /* zh_TW */,
 				AA71CD0D098D51340069607D /* nl */,
 				AA68510809FAFA8300329883 /* sv */,
 				AA68522709FB01A100329883 /* es */,
 				AA6852E809FB037F00329883 /* it */,
-				AA6853FD09FB074700329883 /* fr */,
 				AA6854D309FB0AF100329883 /* ja */,
 				AA517D510AA4E041001E8CA1 /* pt_BR */,
 				AACC2D440AB9DC8700D02B04 /* ko */,
