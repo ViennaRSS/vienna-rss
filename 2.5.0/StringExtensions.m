@@ -44,7 +44,7 @@
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
 	
-	int textLength = [self length];
+	unsigned int textLength = [self length];
 	NSRange srchRange;
 	
 	srchRange.location = 0;
@@ -56,7 +56,7 @@
 		if (srcRange.location != NSNotFound)
 		{
 			// Find the src parameter range.
-			int index = srcRange.location + srcRange.length;
+			unsigned int index = srcRange.location + srcRange.length;
 			srcRange.location += srcRange.length;
 			srcRange.length = 0;
 			while (index < textLength && [self characterAtIndex:index] != '"')
@@ -66,15 +66,19 @@
 			}
 			
 			// Now extract the source parameter
-			NSString * srcPath = [[self substringWithRange:srcRange] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-			if (srcPath && ![srcPath hasPrefix:@"http://"])
+			NSString * srcPath = [self substringWithRange:srcRange];
+			if (![srcPath hasPrefix:@"http://"])
 			{
-				NSURL * imgURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
-				if (imgURL != nil)
+				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				if (escapedSrcPath != nil)
 				{
-					srcPath = [imgURL absoluteString];
-					[self replaceCharactersInRange:srcRange withString:srcPath];
-					textLength = [self length];
+					NSURL * imgURL = [NSURL URLWithString:escapedSrcPath relativeToURL:imgBaseURL];
+					if (imgURL != nil)
+					{
+						srcPath = [imgURL absoluteString];
+						[self replaceCharactersInRange:srcRange withString:srcPath];
+						textLength = [self length];
+					}
 				}
 			}
 			
