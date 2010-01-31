@@ -4,6 +4,8 @@
 <dict>
 	<key>Name</key>
 	<string>ShareWithFacebook</string>
+	<key>Default</key>
+	<true/>
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>
