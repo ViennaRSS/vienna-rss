@@ -58,6 +58,9 @@
 	openLinksInNewBrowser = NO;
 	isFeedRedirect = NO;
 	isDownload = NO;
+		
+	// Set a host window so that plugins can keep active while not in the front-most tab.
+	[self setHostWindow:[NSApp mainWindow]];
 	
 	// We'll be the webview policy handler.
 	[self setPolicyDelegate:self];
@@ -393,6 +396,7 @@
  */
 -(void)dealloc
 {
+	[self setHostWindow:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self setPolicyDelegate:nil];
 	[self setDownloadDelegate:nil];
