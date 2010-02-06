@@ -928,9 +928,6 @@ static Database * _sharedDatabase = nil;
 	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
 	Folder * folder;
 
-	// Send a notification before the folder is deleted
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_WillDeleteFolder" object:[NSNumber numberWithInt:folderId]];
-	
 	// Recurse and delete child folders
 	for (folder in arrayOfChildFolders)
 		[self wrappedDeleteFolder:[folder itemId]];
@@ -1001,9 +998,6 @@ static Database * _sharedDatabase = nil;
 	[self executeSQLWithFormat:@"delete from messages where folder_id=%d", folderId];
 	[self executeSQLWithFormat:@"delete from folders where folder_id=%d", folderId];
 
-	// Send a notification when the folder is deleted
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderDeleted" object:[NSNumber numberWithInt:folderId]];
-
 	// Remove from the folders array. Do this after we send the notification
 	// so that the notification handlers don't fail if they try to dereference the
 	// folder.
@@ -1017,15 +1011,43 @@ static Database * _sharedDatabase = nil;
  */
 -(BOOL)deleteFolder:(int)folderId
 {
+	NSMutableArray * arrayOfFolderIds;
+	NSArray * arrayOfChildFolders;
+	NSNumber * numFolder;
+	Folder * folder;
 	BOOL result;
 
 	// Exit now if we're read-only
 	if (readOnly)
 		return NO;
 
+	// Make sure this is a valid folder
+	folder = [self folderFromID:folderId];
+	if (folder == nil)
+		return NO;
+
+	arrayOfChildFolders = [self arrayOfSubFolders:folder];
+	arrayOfFolderIds = [NSMutableArray arrayWithCapacity:[arrayOfChildFolders count]];
+
+	// Send the pre-delete notification before we start the transaction so that the handlers can
+	// safely do any database access.
+	for (folder in arrayOfChildFolders)
+	{
+		numFolder = [NSNumber numberWithInt:[folder itemId]];
+		[arrayOfFolderIds addObject:numFolder];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_WillDeleteFolder" object:numFolder];
+	}
+
+	// Now do the deletion.
 	[self beginTransaction];
 	result = [self wrappedDeleteFolder:folderId];
 	[self commitTransaction];
+
+	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
+	// each numFolder won't exist any more and the handlers need to be aware of this.
+	for (numFolder in arrayOfFolderIds)
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderDeleted" object:numFolder];
+	
 	return result;
 }
 
