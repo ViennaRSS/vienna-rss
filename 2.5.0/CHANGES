@@ -14,6 +14,7 @@ Thanks!
 - Added Share With Facebook button.
 - Added Share With Evernote button.
 - Update to the current version of Sparkle, which prevents auto-updating to a version of Vienna which will not run on the user's system.
+- Fix bug where deleting a feed in Unified view mode would cause Vienna to stop working correctly.
 
 2.4.0.2401
 ----------
