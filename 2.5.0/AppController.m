@@ -677,6 +677,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSString * path = [prefs pluginsFolder];
 		if ([self installFilename:filename toPath:path])
 		{
+			runOKAlertPanel(NSLocalizedString(@"Plugin installed", nil), NSLocalizedString(@"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.", nil));			
 			NSString * fullPath = [path stringByAppendingPathComponent:[filename lastPathComponent]];
 			[pluginManager loadPlugin:fullPath];
 		}

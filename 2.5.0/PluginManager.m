@@ -200,7 +200,10 @@
 
 	// Warn if we failed to install a plugin
 	if (!didInstall)
+	{
+		runOKAlertPanel(NSLocalizedString(@"Plugin could not be installed", nil), NSLocalizedString(@"Vienna failed to install the plugin.", nil), pluginName);
 		NSLog(@"Warning: error in MenuPath (\"%@\") in info.plist for plugin %@", menuPath, pluginName);
+	}
 }
 
 /* toolbarItems
