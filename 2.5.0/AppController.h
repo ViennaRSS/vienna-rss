@@ -68,8 +68,6 @@
 	IBOutlet NSMenuItem * columnsMenu;
 	IBOutlet NSMenuItem * stylesMenu;
 	IBOutlet NSMenuItem * filtersMenu;
-	IBOutlet NSMenuItem * blogWithMenu;
-	IBOutlet NSMenuItem * blogWithOneMenu;
 	IBOutlet FilterView * filterView;
 	IBOutlet NSView * cosmeticStatusBarHighlightLine;
 	IBOutlet NSTextField * currentFilterTextField;
@@ -155,7 +153,6 @@
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
--(IBAction)blogWith:(id)sender;
 -(IBAction)changeFiltering:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
