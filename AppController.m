@@ -79,7 +79,6 @@
 	-(void)showAppInStatusBar;
 	-(void)initSortMenu;
 	-(void)initColumnsMenu;
-	-(void)initBlogWithMenu;
 	-(void)initScriptsMenu;
 	-(void)initFiltersMenu;
 	-(NSMenu *)getStylesMenu;
@@ -445,7 +444,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
 	[self initColumnsMenu];
-	[self initBlogWithMenu];
 	[self initFiltersMenu];
 	
 	// Initialize the Styles menu.
@@ -1722,58 +1720,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			if ([NSApp applicationIconImage] != originalIcon)
 				[NSApp setApplicationIconImage:originalIcon];
 			break;
-	}
-}
-
-/* initBlogWithMenu
- * Implements auto-discovery of supported blogging tools for use with blogWithExternalEditor.
- * Creates a submenu with all known tools found on the system. The dictionary that describes all supported tools currently lives in info.plist.
- */
--(void)initBlogWithMenu
-{
-	NSMenu * blogWithSubMenu = [[[NSMenu alloc] initWithTitle:@"BlogWith"] autorelease];
-	
-	// Get bundle identifiers for supported editors from info.plist
-	NSDictionary * supportedEditors = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SupportedEditorsBundleIdentifiers"];
-	
-	// Add the contents of the supportedEditors dictionary keys to the menu, sorted by key name.
-	NSArray * sortedMenuItems = [[supportedEditors allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	NSString * lastItem = nil;
-	int countOfItems = 0;
-	
-	for (id currentItem in sortedMenuItems)
-	{
-		// Only add the item if the application is present on the system.
-		if ( [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: [supportedEditors valueForKey:currentItem]] ) 
-		{
-			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:currentItem action:@selector(blogWith:) keyEquivalent:@""];
-			[menuItem setRepresentedObject:currentItem];
-			[blogWithSubMenu addItem:menuItem];
-			[menuItem release];
-			lastItem = currentItem;
-			++countOfItems;
-		}
-	}
-	
-	// If no items, remove both the single and submenu blog items.
-	// Otherwise if there's one item, set the title of the single item and remove the submenu.
-	// Otherwise remove the single item.
-	if (countOfItems == 0)
-	{
-		[[blogWithMenu menu] removeItem:blogWithMenu];
-		[[blogWithOneMenu menu] removeItem:blogWithOneMenu];
-	}
-	else if (countOfItems == 1)
-	{
-		NSString * blogMenuItem = [NSString stringWithFormat:NSLocalizedString(@"Blog with %@", nil), lastItem];
-		[blogWithOneMenu setTitle:blogMenuItem];
-		[blogWithOneMenu setRepresentedObject:lastItem];
-		[[blogWithMenu menu] removeItem:blogWithMenu];
-	}
-	else
-	{
-		[[blogWithOneMenu menu] removeItem:blogWithOneMenu];
-		[blogWithMenu setSubmenu:blogWithSubMenu];
 	}
 }
 
@@ -3445,18 +3391,6 @@ static CFStringRef percentEscape(NSString *string)
 }
 
 #pragma mark Blogging
-
-/* blogWith
- * Calls the function which creates an Apple Event for external editor integration.
- */
--(IBAction)blogWith:(id)sender
-{
-	if ([sender isKindOfClass:[NSMenuItem class]])
-	{
-		NSDictionary * supportedEditors = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"SupportedEditorsBundleIdentifiers"];
-		[self blogWithExternalEditor:[supportedEditors objectForKey:[sender representedObject]]];
-	}
-}
 
 /* blogWithExternalEditor
  * Builds and sends an Apple Event with info from the currently selected articles to the application specified by the bundle identifier that is passed.

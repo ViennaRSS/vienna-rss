@@ -102,28 +102,5 @@
 	<string>http://vienna-rss.sourceforge.net/changelog$(VIENNA_CHANGELOG_SUFFIX).xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>vienna_public_key.pem</string>
-	<key>SupportedEditorsBundleIdentifiers</key>
-	<dict>
-		<key>Pukka</key>
-		<string>net.codesorcery.Pukka</string>
-		<key>Blapp</key>
-		<string>edu.ucsd.cs.mmccrack.blapp</string>
-		<key>Cocoalicious</key>
-		<string>com.scifihifi.Cocoalicious</string>
-		<key>MarsEdit 1</key>
-		<string>com.ranchero.MarsEdit</string>
-		<key>MarsEdit 2</key>
-		<string>com.red-sweater.marsedit</string>
-		<key>Xjournal</key>
-		<string>org.speirs.xjournal</string>
-		<key>ecto</key>
-		<string>kungfoo.tv.ecto</string>
-		<key>BlogThing</key>
-		<string>com.automagicsoftware.BlogThing</string>
-		<key>Kaku</key>
-		<string>jp.lolipop.ppmweb.Kaku</string>
-		<key>Blogo</key>
-		<string>com.drinkbrainjuice.Blogo</string>
-	</dict>
 </dict>
 </plist>

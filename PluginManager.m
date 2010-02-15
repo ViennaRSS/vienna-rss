@@ -372,6 +372,12 @@
 			// Just run the script
 			[[NSApp delegate] runAppleScript:scriptFile];
 		}
+
+		else if ([itemType isEqualToString:@"BlogEditor"])
+		{
+			// This is a blog-editor plugin. Simply send the info to the application.
+			[[NSApp delegate] blogWithExternalEditor:[pluginItem objectForKey:@"BundleIdentifier"]];
+		}
 	}
 }
 
