@@ -107,6 +107,16 @@
  */
 -(void)installPlugin:(NSDictionary *)onePlugin
 {
+	// If it's a blog editor plugin, don't show it in the menu 
+	// if the app in question is not present on the system.
+	if ([[onePlugin objectForKey:@"Type"] isEqualToString:@"BlogEditor"])
+	{
+		NSString * bundleIdentifier = [onePlugin objectForKey:@"BundleIdentifier"];
+		
+		if (![[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: bundleIdentifier])
+			return;
+	}
+						
 	NSString * pluginName = [onePlugin objectForKey:@"Name"];
 	NSString * menuPath = [onePlugin objectForKey:@"MenuPath"];
 	if (menuPath == nil)
