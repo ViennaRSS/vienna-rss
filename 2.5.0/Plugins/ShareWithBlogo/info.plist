@@ -9,7 +9,7 @@
 	<key>BundleIdentifier</key>
 	<string>com.drinkbrainjuice.Blogo</string>
 	<key>Default</key>
-	<true/>
+	<false/>
 	<key>FriendlyName</key>
 	<string>Blogo</string>
 	<key>Tooltip</key>

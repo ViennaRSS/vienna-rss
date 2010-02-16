@@ -9,7 +9,7 @@
 	<key>URL</key>
 	<string>http://www.evernote.com/clip.action?url=$ArticleLink$&amp;title=$ArticleTitle$</string>
 	<key>Default</key>
-	<true/>
+	<false/>
 	<key>FriendlyName</key>
 	<string>Evernote</string>
 	<key>Tooltip</key>

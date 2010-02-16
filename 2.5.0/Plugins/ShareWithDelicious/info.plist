@@ -9,7 +9,7 @@
 	<key>URL</key>
 	<string>http://delicious.com/save?jump=close&amp;url=$ArticleLink$&amp;title=$ArticleTitle$&amp;v=5&amp;noui&amp;jump=close&amp;src=vienna</string>
 	<key>Default</key>
-	<true/>
+	<false/>
 	<key>FriendlyName</key>
 	<string>Delicious</string>
 	<key>Tooltip</key>
