@@ -313,9 +313,7 @@
 			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
 			{	
-				// viewTitle is an @optional part of the protocol, so be defensive about it.
-				if ([theView respondsToSelector: @selector(viewTitle:)])
-					[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
+				[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
 				
 				// If ShortenURLs is true in the plugin's info.plist, we attempt to shorten it via the bit.ly service.
 				if ([[pluginItem objectForKey:@"ShortenURLs"] boolValue])
