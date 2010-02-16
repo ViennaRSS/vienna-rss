@@ -199,6 +199,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.91 green:0.91 blue:0.91 alpha:1.00]];
 	[statusText setTextColor:[NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00]];
+	[currentFilterTextField setTextColor:[NSColor colorWithCalibratedRed:0.43 green:0.43 blue:0.43 alpha:1.00]];
+	[filterIconInStatusBarButton setEnabled:NO];
 }
 
 /* applicationDidResignActive
@@ -208,6 +210,8 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 {
 	[foldersTree setOutlineViewBackgroundColor: [NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
 	[statusText setTextColor:[NSColor blackColor]];
+	[currentFilterTextField setTextColor:[NSColor blackColor]];
+	[filterIconInStatusBarButton setEnabled:YES];
 }
 
 /* doSafeInitialisation
