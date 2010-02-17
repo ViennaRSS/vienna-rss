@@ -537,7 +537,6 @@ static Database * _sharedDatabase = nil;
  */
 -(void)verifyThreadSafety
 {
-	NSLog(@"OITA THREAD!");
 	NSAssert([NSThread currentThread] == mainThread, @"Calling database on wrong thread!");
 }
 
