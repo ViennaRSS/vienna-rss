@@ -2560,7 +2560,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=1",
+					"SQLITE_THREADSAFE=0",
 					"LOG_QUERY_TIMES=1",
 				);
 				INFOPLIST_FILE = Info.plist;
@@ -2583,7 +2583,7 @@
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=1",
+					"SQLITE_THREADSAFE=0",
 				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";

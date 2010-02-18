@@ -26,13 +26,6 @@
 #import "ArticleRef.h"
 #import "SearchString.h"
 
-// Macro that checks for thread safety only in DEBUG mode.
-#ifdef DEBUG
-#	define VerifyThreadSafety() 	[self verifyThreadSafety];
-#else
-#	define VerifyThreadSafety()		// Do nothing at the moment.
-#endif
-
 // Private scope flags
 #define MA_Scope_Inclusive		1
 #define MA_Scope_SubFolders		2
@@ -512,7 +505,7 @@ static Database * _sharedDatabase = nil;
  */
 -(int)executeSQL:(NSString *)sqlStatement
 {
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 	[[sqlDatabase performQuery:sqlStatement] release];
 	return [sqlDatabase lastError];
 }
@@ -547,7 +540,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)syncLastUpdate
 {
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 	SQLResult * result = [sqlDatabase performQueryWithFormat:@"update info set last_opened='%@'", [NSDate date]];
 	readOnly = (result == nil);
 	[result release];
@@ -762,7 +755,7 @@ static Database * _sharedDatabase = nil;
 	{
 		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
 
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:
 					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
 					 "values (%d, '', '', '', '', '%@', %d)",
@@ -827,7 +820,7 @@ static Database * _sharedDatabase = nil;
 		}
 		if (predecessorId < 0)
 		{
-			VerifyThreadSafety();
+			[self verifyThreadSafety];
 			SQLResult * siblings = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=0", parentId];
 			predecessorId = (siblings && [siblings rowCount]) ? [[[siblings rowAtIndex:0] stringForColumn:@"folder_id"] intValue] : 0;
 			[siblings release];			
@@ -897,7 +890,7 @@ static Database * _sharedDatabase = nil;
 	// Create the folder in the database. One thing to watch out for here that has
 	// bit me before. When adding new fields to the folders table, remember to init
 	// the field here even if its just to an empty value.
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQueryWithFormat:
 		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %d, 0, %f, %d, %d, %d, %d)",
 		preparedName,
@@ -988,7 +981,7 @@ static Database * _sharedDatabase = nil;
 	// Update the sort order if necessary
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=%d", [folder parentId], folderId];
 		if (results && [results rowCount])
 		{
@@ -1289,7 +1282,7 @@ static Database * _sharedDatabase = nil;
 -(int)firstFolderId
 {
 	int folderId = 0;
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQuery:@"select first_folder from info"];
 	if (results && [results rowCount])
 	{
@@ -1435,7 +1428,7 @@ static Database * _sharedDatabase = nil;
 		int adjustment = 0;
 		
 		// Verify we're on the right thread
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		
 		if (existingArticle == nil && [guidHistory containsObject:articleGuid])
 		{
@@ -1578,7 +1571,7 @@ static Database * _sharedDatabase = nil;
 		int monthDelta = (daysToKeep / 1000);
 		NSTimeInterval timeDiff = [[[NSCalendarDate calendarDate] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
 
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
 		[results release];
 	}
@@ -1591,7 +1584,7 @@ static Database * _sharedDatabase = nil;
 -(void)purgeDeletedArticles
 {
 	// Verify we're on the right thread
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 
 	SQLResult * results = [sqlDatabase performQuery:@"delete from messages where deleted_flag=1"];
 	if (results)
@@ -1621,7 +1614,7 @@ static Database * _sharedDatabase = nil;
 			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 
 			// Verify we're on the right thread
-			VerifyThreadSafety();
+			[self verifyThreadSafety];
 			
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where folder_id=%d and message_id='%@'", folderId, preparedGuid];
 			if (results)
@@ -1653,7 +1646,7 @@ static Database * _sharedDatabase = nil;
 		SQLResult * results;
 
 		// Verify we're on the right thread
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		
 		results = [sqlDatabase performQuery:@"select * from smart_folders"];
 		if (results && [results rowCount])
@@ -1742,7 +1735,7 @@ static Database * _sharedDatabase = nil;
 		SQLResult * results;
 
 		// Verify we're on the right thread
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		
 		results = [sqlDatabase performQuery:@"select * from folders order by folder_id"];
 		if (results && [results rowCount])
@@ -1901,7 +1894,7 @@ static Database * _sharedDatabase = nil;
 		[folder markFolderEmpty];
 		
 		// Verify we're on the right thread
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		
 		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%d", folderId];
 		if (results && [results rowCount])
@@ -2216,7 +2209,7 @@ static Database * _sharedDatabase = nil;
 		}
 		else
 		{
-			VerifyThreadSafety();
+			[self verifyThreadSafety];
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from messages where folder_id=%d and read_flag=0", folderId];
 			if (results && [results rowCount])
 			{				
@@ -2270,7 +2263,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Verify we're on the right thread
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 
 	// Time to run the query
 	SQLResult * results = [sqlDatabase performQuery:queryString];
@@ -2347,7 +2340,7 @@ static Database * _sharedDatabase = nil;
 	folder = [self folderFromID:folderId];
 	if (folder != nil && [folder unreadCount] > 0)
 	{
-		VerifyThreadSafety();
+		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%d and read_flag=0", folderId];
 		if (results)
 		{
@@ -2391,7 +2384,7 @@ static Database * _sharedDatabase = nil;
 			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
 
 			// Verify we're on the right thread
-			VerifyThreadSafety();
+			[self verifyThreadSafety];
 
 			// Mark an individual article read
 			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%d where folder_id=%d and message_id='%@'", isRead, folderId, preparedGuid];
@@ -2453,7 +2446,7 @@ static Database * _sharedDatabase = nil;
  */
 -(BOOL)isTrashEmpty
 {
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQuery:@"select deleted_flag from messages where deleted_flag=1"];
 	if (results)
 	{
@@ -2479,7 +2472,7 @@ static Database * _sharedDatabase = nil;
 {
 	NSMutableArray * articleGuids = [NSMutableArray array];
 	
-	VerifyThreadSafety();
+	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from rss_guids where folder_id=%i", folderId];
 	if (results)
 	{
