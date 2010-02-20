@@ -231,6 +231,7 @@
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		B2108658109F8127001D4E7C /* XMLSourceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B2108657109F8127001D4E7C /* XMLSourceWindow.m */; };
 		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
+		B2224795112F0667008579B0 /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2224772112F041E008579B0 /* SearchMethod.m */; };
 		B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
 		B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
@@ -848,6 +849,8 @@
 		B2108656109F8127001D4E7C /* XMLSourceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLSourceWindow.h; sourceTree = "<group>"; };
 		B2108657109F8127001D4E7C /* XMLSourceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLSourceWindow.m; sourceTree = "<group>"; };
 		B2108659109F8196001D4E7C /* XMLSource.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = XMLSource.nib; sourceTree = "<group>"; };
+		B2224771112F041E008579B0 /* SearchMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMethod.h; sourceTree = "<group>"; };
+		B2224772112F041E008579B0 /* SearchMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMethod.m; sourceTree = "<group>"; };
 		B2321D0F1115CDA30044CF54 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B23A794310FF50B10085C85B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorpagelogo.png; sourceTree = "<group>"; };
@@ -967,6 +970,8 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B2224771112F041E008579B0 /* SearchMethod.h */,
+				B2224772112F041E008579B0 /* SearchMethod.m */,
 				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
 				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
@@ -2077,6 +2082,7 @@
 				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
 				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
+				B2224795112F0667008579B0 /* SearchMethod.m in Sources */,
 				AA26F4850604911B00FE7994 /* SQLDatabase.m in Sources */,
 				AA26F4870604911B00FE7994 /* SQLResult.m in Sources */,
 				AA26F4880604911B00FE7994 /* SQLRow.m in Sources */,
