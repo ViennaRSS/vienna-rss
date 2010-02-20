@@ -67,6 +67,7 @@ NSString * MAPref_LastViennaVersionRun = @"LastViennaVersionRun";
 NSString * MAPref_HighestViennaVersionRun = @"HighestViennaVersionRun";
 NSString * MAPref_ShouldSaveFeedSource = @"ShouldSaveFeedSource";
 NSString * MAPref_ShouldSaveFeedSourceBackup = @"ShouldSaveFeedSourceBackup";
+NSString * MAPref_SearchMethod = @"SearchMethod";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 20;

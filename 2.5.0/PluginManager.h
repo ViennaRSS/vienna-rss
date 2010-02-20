@@ -20,12 +20,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ToolbarItem.h"
+#import "SearchMethod.h"
 
 @interface PluginManager : NSObject {
 	NSMutableDictionary * allPlugins;
 }
 
 -(void)resetPlugins;
+-(NSArray *)searchMethods;
 -(NSArray *)toolbarItems;
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;

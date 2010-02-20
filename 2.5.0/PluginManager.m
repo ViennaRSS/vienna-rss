@@ -26,6 +26,7 @@
 #import "Message.h"
 #import "BrowserPane.h"
 #import "BitlyAPIHelper.h"
+#import "SearchMethod.h"
 
 @interface PluginManager (Private)
 	-(void)installPlugin:(NSDictionary *)onePlugin;
@@ -40,7 +41,7 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		allPlugins = nil;
+		allPlugins = nil; 
 	}
 	return self;
 }
@@ -216,12 +217,40 @@
 	}
 }
 
+/* searchMethods
+ * Returns an NSArray of plugin-info dictionaries which can be added to the search-box menu.
+ */
+-(NSArray *)searchMethods
+{
+	NSMutableArray * searchMethods = [NSMutableArray arrayWithCapacity:[allPlugins count]];
+	for (NSDictionary * plugin in [allPlugins allValues])
+	{
+		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"])
+		{
+			SearchMethod * method = [[SearchMethod alloc] initWithDictionary:plugin];
+			[searchMethods addObject:method];
+			[method release];
+		}
+	}
+	return searchMethods;
+}	
+
 /* toolbarItems
  * Returns an NSArray of names of any plugins which can be added to the toolbar.
  */
 -(NSArray *)toolbarItems
 {
-	return [allPlugins allKeys];
+	NSMutableArray * toolbarKeys = [NSMutableArray arrayWithCapacity:[allPlugins count]];
+	NSString * pluginName;
+	NSString * pluginType;	
+	for (pluginName in allPlugins)
+	{
+		NSDictionary * onePlugin = [allPlugins objectForKey:pluginName];
+		pluginType = [onePlugin objectForKey:@"Type"];
+		if (![pluginType isEqualToString:@"SearchEngine"])
+			[toolbarKeys addObject:pluginName];
+	}
+	return toolbarKeys;
 }
 
 /* defaultToolbarItems

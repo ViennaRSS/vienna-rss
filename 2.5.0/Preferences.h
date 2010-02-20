@@ -20,6 +20,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@ class SearchMethod;
+
 @interface Preferences : NSObject {
 	id userPrefs;
 	NSString * profilePath;
@@ -55,6 +57,7 @@
 	NSFont * folderFont;
 	NSFont * articleFont;
 	NSArray * articleSortDescriptors;
+	SearchMethod * searchMethod;
 }
 
 // Accessor functions
@@ -194,5 +197,9 @@
 -(NSString *)feedSourcesFolder;
 -(BOOL)shouldSaveFeedSource;
 -(void)setShouldSaveFeedSource:(BOOL)shouldSave;
+
+// Current search method
+-(SearchMethod *)searchMethod;
+-(void)setSearchMethod:(SearchMethod *)newMethod;
 
 @end

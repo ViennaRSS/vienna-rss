@@ -51,6 +51,7 @@
 #import "ToolbarItem.h"
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
+#import "SearchMethod.h"
 #import <Sparkle/Sparkle.h>
 #import <WebKit/WebKit.h>
 #import <Growl/GrowlDefines.h>
@@ -484,7 +485,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[filterSearchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
 	
 	// Set the placeholder string for the global search field
-	[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
+	SearchMethod * currentSearchMethod = [[Preferences standardPreferences] searchMethod];
+	[[searchField cell] setPlaceholderString:NSLocalizedString([currentSearchMethod friendlyName], nil)];
 	
 	// Add Scripts menu if we have any scripts
 	if (!hasOSScriptsMenu())
@@ -750,7 +752,57 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[cellMenu insertItem:item atIndex:2];
 	[item release];
 	
+	SearchMethod * searchMethod;
+	NSString * friendlyName;
+
+	[cellMenu addItem: [NSMenuItem separatorItem]];
+
+	// Add the built-in search methods to the menu. Only one right now.
+	searchMethod = [SearchMethod searchAllArticlesMethod];
+	friendlyName = [searchMethod friendlyName];
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(friendlyName, nil) action:@selector(setSearchMethod:) keyEquivalent:@""];
+	[item setRepresentedObject: searchMethod];
+	// Is this the currently set search method? If yes, mark it as such.
+	if ( [friendlyName isEqualToString:[[[Preferences standardPreferences] searchMethod] friendlyName]] )
+		[item setState:NSOnState];
+	[cellMenu addItem:item];
+	[item release];
+	
+	// Add all available plugged-in search methods to the menu.
+	NSMutableArray * searchMethods = [NSMutableArray arrayWithArray:[pluginManager searchMethods]];
+	if ([searchMethods count] > 0)
+	{	
+		[cellMenu addItem: [NSMenuItem separatorItem]];
+		
+		for (searchMethod in searchMethods)
+		{
+			if (![searchMethod friendlyName]) 
+				continue;
+			item = [[NSMenuItem alloc] initWithTitle:[searchMethod friendlyName] action:@selector(setSearchMethod:) keyEquivalent:@""];
+			[item setRepresentedObject: searchMethod];
+			// Is this the currently set search method? If yes, mark it as such.
+			if ( [[searchMethod friendlyName] isEqualToString: [[[Preferences standardPreferences] searchMethod] friendlyName]] )
+				[item setState:NSOnState];
+			[cellMenu addItem:item];
+			[item release];
+		}
+	} 
 	return [cellMenu autorelease];
+}
+
+
+/* setSearchMethod 
+ */
+-(void)setSearchMethod:(NSMenuItem *)sender
+{
+	[[Preferences standardPreferences] setSearchMethod: [sender representedObject]];
+	
+	for (NSMenuItem * item in [[sender menu] itemArray])
+		[item setState:NSOffState];
+	
+	[sender setState:NSOnState];
+	NSLog(@"Zuerst: %@", [[[Preferences standardPreferences] searchMethod] friendlyName]);
+	[[searchField cell] setPlaceholderString:[sender title]];
 }
 
 /* standardURLs
@@ -3124,6 +3176,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)updateSearchPlaceholder
 {
 	NSView<BaseView> * theView = [browserView activeTabItemView];
+	
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current web page", nil)];
@@ -3132,6 +3185,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
 	}
+	
 	if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
 	{
 		[[filterSearchField cell] setSendsWholeSearchString:YES];
@@ -3211,7 +3265,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
 	[self setSearchString:[searchField stringValue]];
-	
+	SearchMethod * currentSearchMethod = [[Preferences standardPreferences] searchMethod];
+	[self performSelector:[currentSearchMethod handler] withObject: currentSearchMethod];
+}
+
+-(void)performAllArticlesSearch
+{
 	// The browser needs to be handled separately
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -3223,6 +3282,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self searchArticlesWithString:[searchField stringValue]];
 }
 
+-(void)performWebSearch:(SearchMethod *)searchMethod
+{
+	[self createNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
+}
+		   		
 /* searchArticlesWithString
  * Do the actual article search. The database is called to set the search string
  * and then we make sure the search folder is selected so that the subsequent
