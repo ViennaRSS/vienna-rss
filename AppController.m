@@ -3354,20 +3354,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 
-/* percentEscape
- * Escape invalid and reserved URL characters to make string suitable for embedding in mailto: URLs.
- */ 
-static CFStringRef percentEscape(NSString *string)
-{
-	return CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, 
-												   
-												   // RFC2368 says all URL reserved characters must be encoded
-												   // these are all the reserved characters from RFC3986
-												   CFSTR("/:?#[]@!$&'()*+,;="),	
-												   
-												   kCFStringEncodingUTF8);
-}
-
 /* mailLinkToArticlePage
  * Prompts the default email application to send a link to the currently selected article(s). 
  * Builds a string that contains a well-formed link according to the "mailto:"-scheme (RFC2368).

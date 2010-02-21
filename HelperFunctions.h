@@ -47,3 +47,4 @@ NSString * getDefaultBrowser(void);
 NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl);
 BOOL hasOSScriptsMenu(void);
 OSStatus GotoHelpPage(CFStringRef pagePath, CFStringRef anchorName);
+CFStringRef percentEscape(NSString *string);
