@@ -389,7 +389,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSMenu * articleListMenu = [articleList menu];
 	if (articleListMenu == nil)
 		return;
-	mainMenuItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (mainMenuItem != nil)
 	{
 		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
@@ -399,7 +399,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[contextualMenuItem setTitle:[mainMenuItem title]];
 		}
 	}
-	mainMenuItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	mainMenuItem = menuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	if (mainMenuItem != nil)
 	{
 		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePageInAlternateBrowser:)];

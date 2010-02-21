@@ -464,13 +464,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Set alternate in main menu for opening pages, and check for correct title of menu item
 	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
-	NSMenuItem * alternateItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	NSMenuItem * alternateItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
 		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 		[alternateItem setAlternate:YES];
 	}
-	alternateItem = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	alternateItem = menuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
 		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
@@ -3137,12 +3137,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else
 		alternateLocation = [self appName];
-	NSMenuItem * item = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	NSMenuItem * item = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (item != nil)
 	{
 		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@", nil), alternateLocation]];
 	}
-	item = menuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	item = menuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	if (item != nil)
 		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation]];
 }

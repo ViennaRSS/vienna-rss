@@ -41,7 +41,7 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		allPlugins = nil; 
+		allPlugins = nil;
 	}
 	return self;
 }
