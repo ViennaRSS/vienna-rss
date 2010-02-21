@@ -25,6 +25,8 @@
 }
 
 +(SearchMethod *)searchAllArticlesMethod;
++(SearchMethod *)searchCurrentWebPageMethod;
++(NSArray *)builtInSearchMethods;
 
 -(id)initWithDictionary:(NSDictionary *)dict; // Designated initializer.
 -(NSURL *)queryURLforSearchString:(NSString *)searchString;

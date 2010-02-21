@@ -218,7 +218,7 @@
 }
 
 /* searchMethods
- * Returns an NSArray of plugin-info dictionaries which can be added to the search-box menu.
+ * Returns an NSArray of SearchMethods which can be added to the search-box menu.
  */
 -(NSArray *)searchMethods
 {
