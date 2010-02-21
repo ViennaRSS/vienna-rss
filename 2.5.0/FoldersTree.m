@@ -359,7 +359,7 @@
  */
 -(void)updateAlternateMenuTitle
 {
-	NSMenuItem * mainMenuItem = menuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	NSMenuItem * mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	if (mainMenuItem == nil)
 		return;
 	NSString * menuTitle = [mainMenuItem title];
