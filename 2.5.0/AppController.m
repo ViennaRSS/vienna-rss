@@ -3172,14 +3172,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)updateSearchPlaceholder
 {
 	NSView<BaseView> * theView = [browserView activeTabItemView];
+	Preferences * prefs = [Preferences standardPreferences];
 	
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
-		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current web page", nil)];
+		if ([[[prefs searchMethod] friendlyName] isEqualToString:[[SearchMethod searchAllArticlesMethod] friendlyName]])
+			[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current web page", nil)];
 	}
 	else 
 	{
-		[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search all articles", nil)];
+		[[searchField cell] setPlaceholderString:NSLocalizedString([[prefs searchMethod] friendlyName], nil)];
 	}
 	
 	if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
