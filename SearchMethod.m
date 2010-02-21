@@ -50,7 +50,9 @@
 	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder; // We need to conform to NSCoder so we can store SearchMethods in the Defaults database.
+# pragma mark NSCoder Conformity
+
+- (void)encodeWithCoder:(NSCoder *)coder; 
 {
     [coder encodeObject:friendlyName forKey:@"friendlyName"];
 	[coder encodeObject:searchQueryString forKey:@"searchQueryString"];
@@ -68,6 +70,46 @@
     return self;
 }
 
+# pragma mark Class Methods
+
+/* searchCurrentWebPageMethod
+ * Returns all built-in SearchMethods. They are defined immediately below.If you add 
+ * a new one, add it to the array. Remember: arrayWithObjects needs a "nil" termination.
+ */
++(NSArray *)builtInSearchMethods
+{
+	return [NSArray arrayWithObjects: [SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod], nil];
+}
+
+/* searchCurrentWebPageMethod
+ * Returns the standard SearchMethod "Search all Articles".
+ */
++(SearchMethod *)searchAllArticlesMethod
+{
+	SearchMethod * method = [[SearchMethod alloc] init];
+	[method setFriendlyName:@"Search all articles"];
+	[method setHandler:@selector(performAllArticlesSearch)];
+	
+	return [method autorelease]; 
+}
+
+/* searchCurrentWebPageMethod
+ * Returns a SearchMethod that only works when the active view is a web pane.
+ */
++(SearchMethod *)searchCurrentWebPageMethod
+{
+	SearchMethod * method = [[SearchMethod alloc] init];
+	[method setFriendlyName:@"Search current web page"];
+	[method setHandler:@selector(performWebpageSearch)];
+	
+	return [method autorelease]; 
+}	
+
+# pragma mark Instance Methods
+
+/* searchCurrentWebPageMethod
+ * Returns the URL that needs to be accessed to send the query.
+ */
 - (NSURL *)queryURLforSearchString:(NSString *)searchString;
 {
 	NSURL * queryURL;
@@ -76,16 +118,7 @@
     return queryURL;
 }
 
-+(SearchMethod *)searchAllArticlesMethod
-{
-	SearchMethod * method = [[SearchMethod alloc] init];
-	[method setFriendlyName:@"Search all articles"];
-	[method setHandler:@selector(performAllArticlesSearch)];
-	
-	return [method autorelease]; 
-}	
-
-// Getters and setters.
+#pragma mark Getters and setters
 
 -(void)setFriendlyName:(NSString *) newName 
 { 
