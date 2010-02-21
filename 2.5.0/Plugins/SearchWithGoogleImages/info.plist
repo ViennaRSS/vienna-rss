@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>SearchWithGoogleImages</string>
+	<key>Type</key>
+	<string>SearchEngine</string>
+	<key>SearchQueryString</key>
+	<string>http://images.google.com/images?q=$SearchTerm$</string>
+	<key>FriendlyName</key>
+	<string>Google Images</string>
+	<key>Tooltip</key>
+	<string>Search with Google Images</string>
+</dict>
+</plist>
