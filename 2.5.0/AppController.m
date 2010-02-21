@@ -787,6 +787,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[item release];
 		}
 	} 
+	[cellMenu setDelegate:self];
 	return [cellMenu autorelease];
 }
 
@@ -795,12 +796,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setSearchMethod:(NSMenuItem *)sender
 {
+	NSLog(@"setSearchMethod: called!");
 	[[Preferences standardPreferences] setSearchMethod: [sender representedObject]];
 	
-	for (NSMenuItem * item in [[sender menu] itemArray])
+	/*for (NSMenuItem * item in [[sender menu] itemArray])
 		[item setState:NSOffState];
 	
-	[sender setState:NSOnState];
+	[sender setState:NSOnState];*/
 	NSLog(@"new method: %@", [[[Preferences standardPreferences] searchMethod] friendlyName]);
 	[[searchField cell] setPlaceholderString:[sender title]];
 }
@@ -4022,7 +4024,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(newTab:))
 	{
 		return isMainWindowVisible;
-	}	
+	}
+	else if (theAction == @selector(setSearchMethod:))
+	{
+		Preferences * prefs = [Preferences standardPreferences];
+		if ([[[prefs searchMethod] friendlyName] isEqualToString:[[menuItem representedObject] friendlyName]])
+			[menuItem setState:NSOnState];
+		else 
+			[menuItem setState:NSOffState];
+		return YES;
+	}
 	return YES;
 }
 
