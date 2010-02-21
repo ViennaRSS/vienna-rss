@@ -801,7 +801,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setState:NSOffState];
 	
 	[sender setState:NSOnState];
-	NSLog(@"Zuerst: %@", [[[Preferences standardPreferences] searchMethod] friendlyName]);
+	NSLog(@"new method: %@", [[[Preferences standardPreferences] searchMethod] friendlyName]);
 	[[searchField cell] setPlaceholderString:[sender title]];
 }
 

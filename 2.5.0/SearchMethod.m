@@ -82,7 +82,7 @@
 	[method setFriendlyName:@"Search all articles"];
 	[method setHandler:@selector(performAllArticlesSearch)];
 	
-	return method;
+	return [method autorelease]; 
 }	
 
 // Getters and setters.
