@@ -27,7 +27,7 @@
 +(SearchMethod *)searchAllArticlesMethod;
 
 -(id)initWithDictionary:(NSDictionary *)dict; // Designated initializer.
-- (NSURL *)queryURLforSearchString:(NSString *)searchString;
+-(NSURL *)queryURLforSearchString:(NSString *)searchString;
 -(NSString *)searchQueryString;
 -(void)setSearchQueryString:(NSString *)newQueryString;
 -(NSString *)friendlyName;
