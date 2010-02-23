@@ -299,19 +299,19 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Dynamically create the popup menu. This is one less thing to
 	// explicitly localise in the NIB file.
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(markRead:))];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(markFlagged:))];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(deleteMessage:))];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(restoreMessage:))];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(downloadEnclosure:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markRead:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markFlagged:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(deleteMessage:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(restoreMessage:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(downloadEnclosure:))];
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
-	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
+	NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];
-	[articleListMenu addItem:copyOfMenuWithAction(@selector(viewArticlePage:))];
-	alternateItem = copyOfMenuWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewArticlePage:))];
+	alternateItem = copyOfMenuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];

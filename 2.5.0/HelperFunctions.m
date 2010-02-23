@@ -141,11 +141,11 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 	return urlToLoad;
 }	
 
-/* copyOfMenuWithAction
+/* copyOfMenuItemWithAction
  * Returns an NSMenuItem that matches the one that implements the corresponding
  * action in the application main menu. Returns nil if no match is found.
  */
-NSMenuItem * copyOfMenuWithAction(SEL theSelector)
+NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
 {
 	NSMenuItem * item = menuItemWithAction(theSelector);
 	return (item) ? [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease] : nil;
@@ -154,7 +154,7 @@ NSMenuItem * copyOfMenuWithAction(SEL theSelector)
 /* menuWithTitleAndAction
  * Returns an NSMenuItem with the specified menu and action.
  */
-NSMenuItem * menuWithTitleAndAction(NSString * theTitle, SEL theSelector)
+NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector)
 {
 	return [[[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""] autorelease];
 }

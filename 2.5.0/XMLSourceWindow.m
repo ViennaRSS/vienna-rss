@@ -99,6 +99,11 @@
 	}	
 }
 
+/* windowDidLoad
+ * When the window has finished loading, we make sure that the WebView's WebPreferences 
+ * allow the execution of JavaScript. We need that for syntax coloring, and the user might
+ * have turned it off in the user preferences.
+ */
 - (void)windowDidLoad
 {
 	static WebPreferences * sJavaScriptPreferences;
