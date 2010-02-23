@@ -653,7 +653,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		return drawnRect;
 }
 
-
 /* openFile [delegate]
  * Called when the user opens a data file associated with Vienna by clicking in the finder or dragging it onto the dock.
  */
@@ -768,6 +767,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[cellMenu addItem:item];
 	[item release];
 	
+	searchMethod = [SearchMethod searchCurrentWebPageMethod];
+	friendlyName = [searchMethod friendlyName];
+	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(friendlyName, nil) action:@selector(setSearchMethod:) keyEquivalent:@""];
+	[item setRepresentedObject: searchMethod];
+	// Is this the currently set search method? If yes, mark it as such.
+	if ( [friendlyName isEqualToString:[[[Preferences standardPreferences] searchMethod] friendlyName]] )
+		[item setState:NSOnState];
+	[cellMenu addItem:item];
+	[item release];
+	
+	
 	// Add all available plugged-in search methods to the menu.
 	NSMutableArray * searchMethods = [NSMutableArray arrayWithArray:[pluginManager searchMethods]];
 	if ([searchMethods count] > 0)
@@ -790,7 +800,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[cellMenu setDelegate:self];
 	return [cellMenu autorelease];
 }
-
 
 /* setSearchMethod 
  */
@@ -3174,14 +3183,41 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	Preferences * prefs = [Preferences standardPreferences];
 	
+	// START of rather verbose implementation of switching between "Search all articles" and "Search current web page".
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
+		// If the current view is a browser view and "Search all articles" is the current SearchMethod, switch to "Search current webpage"
 		if ([[[prefs searchMethod] friendlyName] isEqualToString:[[SearchMethod searchAllArticlesMethod] friendlyName]])
-			[[searchField cell] setPlaceholderString:NSLocalizedString(@"Search current web page", nil)];
+		{
+			for (NSMenuItem * menuItem in [[[searchField cell] searchMenuTemplate] itemArray])
+			{
+				if ([[[menuItem representedObject] friendlyName] isEqualToString:[[SearchMethod searchCurrentWebPageMethod] friendlyName]])
+				{
+					[[searchField cell] setPlaceholderString:NSLocalizedString([[SearchMethod searchCurrentWebPageMethod] friendlyName], nil)];
+					[[Preferences standardPreferences] setSearchMethod: [menuItem representedObject]];
+				}
+			}
+		}
 	}
 	else 
 	{
-		[[searchField cell] setPlaceholderString:NSLocalizedString([[prefs searchMethod] friendlyName], nil)];
+		// If the current view is anything else "Search current webpage" is active, switch to "Search all articles".
+		if ([[[prefs searchMethod] friendlyName] isEqualToString:[[SearchMethod searchCurrentWebPageMethod] friendlyName]])
+		{
+			for (NSMenuItem * menuItem in [[[searchField cell] searchMenuTemplate] itemArray])
+			{
+				if ([[[menuItem representedObject] friendlyName] isEqualToString:[[SearchMethod searchAllArticlesMethod] friendlyName]])
+				{
+					[[searchField cell] setPlaceholderString:NSLocalizedString([[SearchMethod searchAllArticlesMethod] friendlyName], nil)];
+					[[Preferences standardPreferences] setSearchMethod: [menuItem representedObject]];
+				}
+			}
+		}
+		else
+		{
+			[[searchField cell] setPlaceholderString:NSLocalizedString([[prefs searchMethod] friendlyName], nil)];
+		}
+	// END of switching between "Search all articles" and "Search current web page".
 	}
 	
 	if ([[Preferences standardPreferences] layout] == MA_Layout_Unified)
@@ -3267,24 +3303,35 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self performSelector:[currentSearchMethod handler] withObject: currentSearchMethod];
 }
 
+/* performAllArticlesSearch
+ * Searches for the current searchString in all articles.
+ */
 -(void)performAllArticlesSearch
 {
-	// The browser needs to be handled separately
+	[self searchArticlesWithString:[searchField stringValue]];
+}
+
+/* performAllArticlesSearch
+ * Performs a web-search with the defined query URL. This is usually called by plugged-in SearchMethods.
+ */
+-(void)performWebSearch:(SearchMethod *)searchMethod
+{
+	[self createNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
+}
+
+/* performWebPageSearch
+ * Performs a search for searchString within the currently displayed web page in our bult-in browser.
+ */
+-(void)performWebPageSearch
+{
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[self setFocusToSearchField:self];
 		[theView performFindPanelAction:NSFindPanelActionSetFindString];
 	}
-	else
-		[self searchArticlesWithString:[searchField stringValue]];
-}
-
--(void)performWebSearch:(SearchMethod *)searchMethod
-{
-	[self createNewTab:[searchMethod queryURLforSearchString:searchString] inBackground:NO];
-}
-		   		
+}	
+	
 /* searchArticlesWithString
  * Do the actual article search. The database is called to set the search string
  * and then we make sure the search folder is selected so that the subsequent

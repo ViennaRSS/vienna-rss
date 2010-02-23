@@ -107,7 +107,8 @@
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
 	[method setFriendlyName:@"Search current web page"];
-	[method setHandler:@selector(performWebpageSearch)];
+	[method setHandler:@selector(performWebPageSearch
+								 )];
 	
 	return [method autorelease]; 
 }	

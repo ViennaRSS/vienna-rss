@@ -207,4 +207,5 @@
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
+-(void)performWebPageSearch;
 @end
