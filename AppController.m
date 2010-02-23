@@ -98,7 +98,7 @@
 	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
 	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
 	-(void)updateAlternateMenuTitle;
-	-(void)updateSearchPlaceholder;
+	-(void)updateSearchPlaceholderAndSearchMethod;
 	-(void)toggleOptionKeyButtonStates;
 	-(FoldersTree *)foldersTree;
 	-(void)updateCloseCommands;
@@ -870,21 +870,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(NSMenu *)folderMenu
 {
 	NSMenu * folderMenu = [[[NSMenu alloc] init] autorelease];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(refreshSelectedSubscriptions:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(refreshSelectedSubscriptions:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(editFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(deleteFolder:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(renameFolder:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(editFolder:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(deleteFolder:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(renameFolder:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(markAllRead:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(markAllRead:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(viewSourceHomePage:))];
-	NSMenuItem * alternateItem = copyOfMenuWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
+	NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[folderMenu addItem:alternateItem];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(getInfo:))];
-	[folderMenu addItem:copyOfMenuWithAction(@selector(showXMLSource:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(showXMLSource:))];
 	return folderMenu;
 }
 
@@ -955,7 +955,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	[[Preferences standardPreferences] setLayout:newLayout];
-	[self updateSearchPlaceholder];
+	[self updateSearchPlaceholderAndSearchMethod];
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 }
 
@@ -969,8 +969,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	[appDockMenu release];
 	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
-	[appDockMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
-	[appDockMenu addItem:copyOfMenuWithAction(@selector(markAllSubscriptionsRead:))];
+	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
+	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
 	return appDockMenu;
 }
 
@@ -1985,15 +1985,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[appStatusItem setHighlightMode:YES];
 		
 		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
-		[statusBarMenu addItem:menuWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
+		[statusBarMenu addItem:menuItemWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuWithAction(@selector(refreshAllSubscriptions:))];
-		[statusBarMenu addItem:copyOfMenuWithAction(@selector(markAllSubscriptionsRead:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuWithAction(@selector(showPreferencePanel:))];
-		[statusBarMenu addItem:copyOfMenuWithAction(@selector(handleAbout:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(showPreferencePanel:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(handleAbout:))];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuWithAction(@selector(exitVienna:))];
+		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
 		[appStatusItem setMenu:statusBarMenu];
 		[statusBarMenu release];
 	}
@@ -2086,7 +2086,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Call through the controller to display the new folder.
 	[articleController displayFolder:newFolderId];
-	[self updateSearchPlaceholder];
+	[self updateSearchPlaceholderAndSearchMethod];
 	
 	// Make sure article viewer is active
 	[browserView setActiveTabToPrimaryTab];
@@ -2221,7 +2221,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[mainWindow makeFirstResponder:[webPane mainView]];
 	}
 	[self updateStatusBarFilterButtonVisibility];
-	[self updateSearchPlaceholder];
+	[self updateSearchPlaceholderAndSearchMethod];
 	[self setStatusMessage:nil persist:NO];
 }
 
@@ -2240,7 +2240,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
 	if (folderId == [articleController currentFolderId])
-		[self updateSearchPlaceholder];
+		[self updateSearchPlaceholderAndSearchMethod];
 }
 
 /* handleRefreshStatusChange
@@ -3169,7 +3169,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Update the search placeholder string in the search field depending on the view in
  * the active tab.
  */
--(void)updateSearchPlaceholder
+-(void)updateSearchPlaceholderAndSearchMethod
 {
 	NSView<BaseView> * theView = [browserView activeTabItemView];
 	Preferences * prefs = [Preferences standardPreferences];
