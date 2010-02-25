@@ -564,9 +564,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleListUnreadFont release];
 
 	Preferences * prefs = [Preferences standardPreferences];
-	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
+	articleListFont = [[NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]] retain];
 	articleListUnreadFont = [prefs boolForKey:MAPref_ShowUnreadArticlesInBold] ? [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont] : articleListFont;
-	
+	[articleListUnreadFont retain];
+
 	[reportCellDict setObject:articleListFont forKey:NSFontAttributeName];
 	[unreadReportCellDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
 

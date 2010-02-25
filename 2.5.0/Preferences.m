@@ -811,7 +811,7 @@ static Preferences * _standardPreferences = nil;
 -(void)setFolderListFont:(NSString *)newFontName
 {
 	[folderFont release];
-	folderFont = [NSFont fontWithName:newFontName size:[self folderListFontSize]];
+	folderFont = [[NSFont fontWithName:newFontName size:[self folderListFontSize]] retain];
 	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
@@ -822,7 +822,7 @@ static Preferences * _standardPreferences = nil;
 -(void)setFolderListFontSize:(int)newFontSize
 {
 	[folderFont release];
-	folderFont = [NSFont fontWithName:[self folderListFont] size:newFontSize];
+	folderFont = [[NSFont fontWithName:[self folderListFont] size:newFontSize] retain];
 	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
@@ -849,7 +849,7 @@ static Preferences * _standardPreferences = nil;
 -(void)setArticleListFont:(NSString *)newFontName
 {
 	[articleFont release];
-	articleFont = [NSFont fontWithName:newFontName size:[self articleListFontSize]];
+	articleFont = [[NSFont fontWithName:newFontName size:[self articleListFontSize]] retain];
 	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
@@ -860,7 +860,7 @@ static Preferences * _standardPreferences = nil;
 -(void)setArticleListFontSize:(int)newFontSize
 {
 	[articleFont release];
-	articleFont = [NSFont fontWithName:[self articleListFont] size:newFontSize];
+	articleFont = [[NSFont fontWithName:[self articleListFont] size:newFontSize] retain];
 	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
