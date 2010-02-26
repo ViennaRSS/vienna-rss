@@ -77,7 +77,7 @@
 
 # pragma mark Class Methods
 
-/* searchCurrentWebPageMethod
+/* builtInSearchMethods
  * Class method that returns all built-in SearchMethods. They are defined 
  * immediately below.If you add a new one, add it to the array. 
  * Remember: arrayWithObjects needs a "nil" termination.
@@ -87,7 +87,7 @@
 	return [NSArray arrayWithObjects: [SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod], nil];
 }
 
-/* searchCurrentWebPageMethod
+/* searchAllArticlesMethod
  * Class method that returns the standard SearchMethod "Search all Articles".
  */
 +(SearchMethod *)searchAllArticlesMethod
@@ -107,8 +107,7 @@
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
 	[method setFriendlyName:@"Search current web page"];
-	[method setHandler:@selector(performWebPageSearch
-								 )];
+	[method setHandler:@selector(performWebPageSearch)];
 	
 	return [method autorelease]; 
 }	
