@@ -756,27 +756,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	[cellMenu addItem: [NSMenuItem separatorItem]];
 
-	// Add the built-in search methods to the menu. Only one right now.
-	searchMethod = [SearchMethod searchAllArticlesMethod];
-	friendlyName = [searchMethod friendlyName];
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(friendlyName, nil) action:@selector(setSearchMethod:) keyEquivalent:@""];
-	[item setRepresentedObject: searchMethod];
-	// Is this the currently set search method? If yes, mark it as such.
-	if ( [friendlyName isEqualToString:[[[Preferences standardPreferences] searchMethod] friendlyName]] )
-		[item setState:NSOnState];
-	[cellMenu addItem:item];
-	[item release];
-	
-	searchMethod = [SearchMethod searchCurrentWebPageMethod];
-	friendlyName = [searchMethod friendlyName];
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(friendlyName, nil) action:@selector(setSearchMethod:) keyEquivalent:@""];
-	[item setRepresentedObject: searchMethod];
-	// Is this the currently set search method? If yes, mark it as such.
-	if ( [friendlyName isEqualToString:[[[Preferences standardPreferences] searchMethod] friendlyName]] )
-		[item setState:NSOnState];
-	[cellMenu addItem:item];
-	[item release];
-	
+	// Add all built-in search methods to the menu. 
+	for (searchMethod in [SearchMethod builtInSearchMethods])
+	{
+		friendlyName = [searchMethod friendlyName];
+		item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(friendlyName, nil) action:@selector(setSearchMethod:) keyEquivalent:@""];
+		[item setRepresentedObject: searchMethod];
+		
+		// Is this the currently set search method? If yes, mark it as such.
+		if ( [friendlyName isEqualToString:[[[Preferences standardPreferences] searchMethod] friendlyName]] )
+			[item setState:NSOnState];
+		
+		[cellMenu addItem:item];
+		[item release];
+	}
 	
 	// Add all available plugged-in search methods to the menu.
 	NSMutableArray * searchMethods = [NSMutableArray arrayWithArray:[pluginManager searchMethods]];
