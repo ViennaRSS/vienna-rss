@@ -54,7 +54,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Vienna</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Vienna version $(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}, Copyright 2004-2008 Contributors. See Help/Acknowledgements for list of contributors.</string>
+	<string>Vienna version $(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}, Copyright 2004-2010 Contributors. See Help/Acknowledgements for list of contributors.</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna Help</string>
 	<key>CFBundleHelpBookName</key>
