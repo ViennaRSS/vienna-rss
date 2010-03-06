@@ -20,6 +20,7 @@
 
 #import "FolderView.h"
 #import "ImageAndTextCell.h"
+#import "TreeNode.h"
 
 @interface NSObject (FoldersViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
@@ -54,6 +55,11 @@
 
 	iRect = NSMakeRect(0,0,1,[blueGradient size].height-1);					
 	[grayGradient setFlipped:YES];
+	
+	// Add the notifications for collapse and expand.
+	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(outlineViewItemDidExpand:) name:NSOutlineViewItemDidExpandNotification object:(id)self];
+	[nc addObserver:self selector:@selector(outlineViewItemDidCollapse:) name:NSOutlineViewItemDidCollapseNotification object:(id)self];
 }
 
 /* becomeFirstResponder
@@ -80,17 +86,7 @@
  */
 -(void)setEnableTooltips:(BOOL)flag
 {
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	if ((useTooltips = flag) == YES)
-	{
-		[nc addObserver:self selector:@selector(outlineViewItemDidExpand:) name:NSOutlineViewItemDidExpandNotification object:(id)self];
-		[nc addObserver:self selector:@selector(outlineViewItemDidCollapse:) name:NSOutlineViewItemDidCollapseNotification object:(id)self];
-	}
-	else
-	{
-		[nc removeObserver:self name:NSOutlineViewItemDidExpandNotification object:nil];
-		[nc removeObserver:self name:NSOutlineViewItemDidCollapseNotification object:nil];
-	}
+	useTooltips = flag;
 	[self buildTooltips];
 }
 
@@ -192,7 +188,9 @@
  */
 -(void)outlineViewItemDidExpand:(NSNotification *)notification
 {
-	[self buildTooltips];
+	// Rebuild the tooltips if required.
+	if (useTooltips  == YES)
+		[self buildTooltips];
 }
 
 /* outlineViewItemDidCollapse
@@ -201,7 +199,14 @@
  */
 -(void)outlineViewItemDidCollapse:(NSNotification *)notification
 {
-	[self buildTooltips];
+	// Rebuild the tooltips if required.
+	if (useTooltips  == YES)
+		[self buildTooltips];
+	
+	// Have the collapsed item remove any progress indicators.
+	TreeNode * collapsedItem = [[notification userInfo] objectForKey:@"NSObject"];
+	[collapsedItem stopAndReleaseProgressIndicator];
+	
 }
 
 /* menuForEvent

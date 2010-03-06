@@ -41,6 +41,7 @@
 			[parent addChild:self atIndex:insertIndex];
 		}
 		children = [[NSMutableArray array] retain];
+		progressIndicator = nil;
 	}
 	return self;
 }
@@ -307,6 +308,49 @@
 {
 	return [NSString stringWithFormat:@"%@ (Parent=%d, # of children=%d)", [folder name], parentNode, [children count]];
 }
+
+/* allocAndStartProgressIndicator:
+ * Allocate a new progress indicator and start it animating.
+ */
+-(NSProgressIndicator *)allocAndStartProgressIndicator
+{
+	// Allocate and initialize the spinning progress indicator.
+	NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
+	progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
+	[progressIndicator setControlSize:NSSmallControlSize];
+	[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+	[progressIndicator setDisplayedWhenStopped:YES];
+	[progressIndicator setUsesThreadedAnimation:YES];
+	
+	// Start the animation.
+	[progressIndicator startAnimation:self];
+	return progressIndicator;
+}
+
+/* stopAndReleaseProgressIndicator:
+ * Stops the progress indicator and releases it, also calls recursively for child
+ * nodes so that this can be called when a tree node is collapsed to stop the
+ * progress indicators for all children.
+ */
+-(void)stopAndReleaseProgressIndicator
+{
+	if ( progressIndicator)
+	{
+		// Stop the animation and remove from the superview.
+		[progressIndicator setDisplayedWhenStopped:NO];
+		[progressIndicator stopAnimation:self];
+		[[progressIndicator superview] setNeedsDisplayInRect:[progressIndicator frame]];
+		[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
+		
+		// Release the progress indicator.
+		[progressIndicator release];
+		progressIndicator = nil;
+	}
+
+	// Make sure the children do the same in case this is being called on a folder node.
+	for (TreeNode * node in children)
+		[node stopAndReleaseProgressIndicator];
+}	
 
 /* setProgressIndicator:
  * Retrieve a progressIndicator set by other code in association with this TreeNode

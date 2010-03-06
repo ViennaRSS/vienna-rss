@@ -21,6 +21,9 @@
 #import <Cocoa/Cocoa.h>
 #import "Folder.h"
 
+#define PROGRESS_INDICATOR_DIMENSION	16
+
+
 @interface TreeNode : NSObject {
 	TreeNode * parentNode;
 	NSMutableArray * children;
@@ -54,4 +57,10 @@
 -(void)setCanHaveChildren:(BOOL)childflag;
 -(BOOL)canHaveChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
+
+-(NSProgressIndicator *)allocAndStartProgressIndicator;
+-(void)stopAndReleaseProgressIndicator;
+-(NSProgressIndicator *)progressIndicator;
+-(void)setProgressIndicator:(NSProgressIndicator *)inProgressIndicator;
+
 @end

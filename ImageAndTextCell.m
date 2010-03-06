@@ -21,18 +21,10 @@
 #import "ImageAndTextCell.h"
 #import "BezierPathExtensions.h"
 #import "FolderView.h"
+#import "TreeNode.h"
 
-#define PROGRESS_INDICATOR_DIMENSION	16
 #define PROGRESS_INDICATOR_LEFT_MARGIN	1
 
-@interface NSObject (ProgressIndicatorSupportingItem)
-	-(NSProgressIndicator *)progressIndicator;
-	-(void)setProgressIndicator:(NSProgressIndicator *)progressIndicator;
-@end
-
-@interface ImageAndTextCell (Private)
-	-(void)configureProgressAnimation;
-@end
 
 /* All of this stuff taken from public stuff published
  * by Apple.
@@ -52,8 +44,6 @@
 		hasCount = NO;
 		count = 0;
 		[self setCountBackgroundColour:[NSColor shadowColor]];
-
-		progressIndicators = [[NSMutableArray alloc] init];
 	}
 	return self;
 }
@@ -69,7 +59,6 @@
 	cell->inProgress = inProgress;
 	cell->countBackgroundColour = [countBackgroundColour retain];
 	cell->item = item;	
-	cell->progressIndicators = [[NSMutableArray alloc] init];
 
 	return cell;
 }
@@ -165,9 +154,9 @@
 /* setItem
  * Set the item which is being displayed. This should be used in a willDisplayCell: style method.
  */
--(void)setItem:(id)inItem
+-(void)setItem:(TreeNode *)newItem
 {
-	item = inItem;
+	item = newItem;
 }
 
 /* drawCellImage
@@ -206,53 +195,31 @@
 {
 	// If the cell has a progress indicator, ensure it's framed properly
 	// and then reduce cellFrame to keep from overlapping it
-	if ([item respondsToSelector:@selector(progressIndicator)])
+	if (inProgress)
 	{
 		NSProgressIndicator *progressIndicator = [item progressIndicator];
-		if (!inProgress && progressIndicator)
-		{
-			[progressIndicator setDisplayedWhenStopped:NO];
-			[progressIndicator stopAnimation:self];
-			[[progressIndicator superview] setNeedsDisplayInRect:[progressIndicator frame]];
-			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
-			[progressIndicators removeObject:progressIndicator];
+		if (!progressIndicator)
+			progressIndicator = [item allocAndStartProgressIndicator];
 
-			// The item was keeping track of the progress indicator; it is no longer needed
-			[item setProgressIndicator:nil];
-		}
-		else if (inProgress)
-		{
-			if (!progressIndicator)
-			{
-				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(0, 0,
-																						  PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION)];
-				[progressIndicator setControlSize:NSSmallControlSize];
-				[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
-				[progressIndicator setDisplayedWhenStopped:YES];
-				[progressIndicator setUsesThreadedAnimation:YES];
-				[progressIndicators addObject:progressIndicator];
-				
-				// Let the item keep track of this progress indicator for us so we can stop it later
-				[item setProgressIndicator:progressIndicator];
-				[progressIndicator startAnimation:self];
-				[progressIndicator autorelease];
-			}
+		NSRect progressIndicatorFrame;
 
-			NSRect progressIndicatorFrame;
+		NSDivideRect(cellFrame, &progressIndicatorFrame, &cellFrame, PROGRESS_INDICATOR_DIMENSION + PROGRESS_INDICATOR_LEFT_MARGIN, NSMaxXEdge);
 
-			NSDivideRect(cellFrame, &progressIndicatorFrame, &cellFrame, PROGRESS_INDICATOR_DIMENSION + PROGRESS_INDICATOR_LEFT_MARGIN, NSMaxXEdge);
+		progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
+		progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
 
-			progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
-			progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
+		if ([progressIndicator superview] != controlView)
+			[controlView addSubview:progressIndicator];
 
-			if ([progressIndicator superview] != controlView)
-				[controlView addSubview:progressIndicator];
-
-			if (!NSEqualRects([progressIndicator frame], progressIndicatorFrame)) {
-				[progressIndicator setFrame:progressIndicatorFrame];
-			}
+		if (!NSEqualRects([progressIndicator frame], progressIndicatorFrame)) {
+			[progressIndicator setFrame:progressIndicatorFrame];
 		}
 	}
+	else
+	{
+		[item stopAndReleaseProgressIndicator];
+	}
+
 
 	// If the cell has an image, draw the image and then reduce
 	// cellFrame to move the text to the right of the image.
@@ -355,8 +322,6 @@
 	[countBackgroundColour release];
 	[auxiliaryImage release];
 	[image release];
-	
-	[progressIndicators release];
 	
 	[super dealloc];
 }
