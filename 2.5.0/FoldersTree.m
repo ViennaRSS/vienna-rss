@@ -654,6 +654,9 @@
 	int folderId = [(NSNumber *)[nc object] intValue];
 	TreeNode * thisNode = [rootNode nodeFromID:folderId];
 	TreeNode * nextNode;
+	
+	// Stop any in process progress indicators.
+	[thisNode stopAndReleaseProgressIndicator];
 
 	// First find the next node we'll select
 	if ([thisNode nextSibling] != nil)

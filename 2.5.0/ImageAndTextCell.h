@@ -20,6 +20,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class TreeNode;
+
 @interface ImageAndTextCell : NSTextFieldCell {
 	@private
 	NSImage	* image;
@@ -30,8 +32,7 @@
 	BOOL hasCount;
 	BOOL inProgress;
 	
-	id item;
-	NSMutableArray *progressIndicators;
+	TreeNode * item;
 }
 
 // Accessor functions
@@ -46,5 +47,5 @@
 -(int)offset;
 -(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView;
 - (void)setInProgress:(BOOL)newInProgress;
-- (void)setItem:(id)inItem;
+- (void)setItem:(TreeNode *)newItem;
 @end
