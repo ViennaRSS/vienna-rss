@@ -25,6 +25,7 @@
 	NSString * htmlTemplate;
 	NSString * cssStylesheet;
 	NSString * jsScript;
+	NSString * currentHTML;
 }
 
 // Public functions
