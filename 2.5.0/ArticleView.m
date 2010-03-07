@@ -48,6 +48,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		htmlTemplate = nil;
 		cssStylesheet = nil;
 		jsScript = nil;
+		currentHTML = nil;
 
 		// Set up to be notified when style changes
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -237,6 +238,17 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString
 {
+	// If the current HTML is the same as the new HTML then we don't need to
+	// do anything here. This will stop the view from spurious redraws of the same
+	// article after a refresh.
+	if (currentHTML != nil && [currentHTML compare:htmlText] == NSOrderedSame)
+		return;
+	
+	// Remember the current html string.
+	if (currentHTML != nil)
+		[currentHTML release];
+	currentHTML = [[NSString alloc] initWithString: htmlText];
+	
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
@@ -346,6 +358,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cssStylesheet release];
 	[htmlTemplate release];
+	[currentHTML release];
 	[super dealloc];
 }
 @end
