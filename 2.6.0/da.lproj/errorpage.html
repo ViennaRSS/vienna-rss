@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01">
+<html>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<title>An error has occured</title>
+<style type="text/css" media="screen">
+body {
+	margin:50px 0px; padding:0px; 
+	background:url("../errorpagebg.png") repeat-x;
+	text-align:center;
+}
+	
+#Content {
+	 -webkit-border-radius:7px; 
+	width:500px;
+	margin:0px auto; 
+	text-align:left; 
+	padding:30px;
+	border:1px solid gray;
+	background:url("../errorpagelogo.png") top left no-repeat #eee;
+}
+
+#ErrorInformation {
+	font-family: Courier, monospace, serif;
+	margin-left: 35px;
+	margin-right: 15px;
+}
+</style>
+</head>
+<body>
+	<div id="Content">
+		<h1><center><b>The page you requested could not be loaded.</b></center></h1>
+		<br>
+		<ul>
+			<li>Check the URL (or address) you entered for typing errors such as ww.test.com instead of www.test.com.
+			<li>If the error persists and you are unable to load other pages as well, check your network connection.
+			<li>If your computer or network is protected by a firewall or proxy, make sure that your account, your machine, and Vienna are allowed to access the resource you specified.
+		</ul>
+		<center><h3>Error Information:</h3></center>
+		<div id="ErrorInformation">$ErrorInformation</div>
+	</div>
+</body>
+</html>
