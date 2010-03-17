@@ -12,7 +12,7 @@ Thanks!
 ----------
 - User Interface refresh: Removed the grey headers, made the vertical divider easier to grab and made filtering more discoverable.
 - Added support for plugins.
-- Added support for search engine plugins.
+- Added support for search engine plugins and the ability to do web-searches from the toolbar.
 - Added support for blog editor plugins.
 - Added support for sharing plugins that work like bookmarklets for social websites.
 - Added "Share With Facebook" button.
