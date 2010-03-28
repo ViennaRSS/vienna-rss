@@ -233,6 +233,26 @@ static NSMutableDictionary * stylePathMappings = nil;
 	return [htmlText autorelease];
 }
 
+/* clearHTML
+ * Loads the web view with the HTML text for a blank page.
+ */
+-(void)clearHTML
+{
+	// Reset current html string.
+	if (currentHTML != nil)
+		[currentHTML release];
+	currentHTML = [[NSString alloc] initWithString: @"<HTML></HTML>"];
+	
+	// Load a blank HTML page.
+	NSString * htmlText = [[NSString alloc] initWithString: @"<HTML></HTML>"];
+	const char * utf8String = [htmlText UTF8String];
+	[[self mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
+					  MIMEType:@"text/html" 
+			  textEncodingName:@"utf-8" 
+					   baseURL:[NSURL URLWithString:@""]];
+	[htmlText release];
+}
+
 /* setHTML
  * Loads the web view with the specified HTML text.
  */

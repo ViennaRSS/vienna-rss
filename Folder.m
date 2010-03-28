@@ -562,6 +562,14 @@ static NSArray * iconArray = nil;
 	return IsRSSFolder(self);
 }
 
+/* loadsFullHTML
+ * Returns YES if this folder loads the full HTML articles instead of the feed text.
+ */
+-(BOOL)loadsFullHTML
+{
+	return LoadsFullHTML(self);
+}
+
 /* setFlag
  * Set the specified flag on the folder.
  */

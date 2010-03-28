@@ -30,9 +30,6 @@
 #import <WebKit/WebKit.h>
 #import "RichXMLParser.h"
 
-// This is defined somewhere but I can't find where.
-#define WebKitErrorPlugInWillHandleLoad	204
-
 @implementation BrowserPaneButtonCell
 
 -(BOOL)isOpaque

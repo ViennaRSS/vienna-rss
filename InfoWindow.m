@@ -242,6 +242,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[folderSize setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])]];
 	[folderUnread setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), [folder unreadCount]]];
 	[isSubscribed setState:([folder flags] & MA_FFlag_Unsubscribed) ? NSOffState : NSOnState];
+	[loadFullHTML setState:([folder flags] & MA_FFlag_LoadFullHTML) ? NSOnState : NSOffState];
 }
 
 /* urlFieldChanged
@@ -263,6 +264,18 @@ static InfoWindowManager * _infoWindowManager = nil;
 	else
 		[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
+}
+
+/* loadFullHTMLChanged
+ * Called when the loadFullHTML button is changed.
+ */
+-(IBAction)loadFullHTMLChanged:(id)sender
+{
+	if ([loadFullHTML state] == NSOnState)
+		[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_LoadFullHTML];
+	else
+		[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_LoadFullHTML];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:infoFolderId]];
 }
 
 /* handleUrlTextDidChange [delegate]

@@ -182,7 +182,7 @@
 {
 	NSArray * msgArray = [articleController allArticles];
 	if ([msgArray count] == 0)
-		[unifiedText setHTML:@"<HTML></HTML>" withBase:@""];
+		[unifiedText clearHTML];
 	else
 	{
 		NSString * htmlText = [unifiedText articleTextFromArray:msgArray];

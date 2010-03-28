@@ -63,6 +63,9 @@
 	NSMutableDictionary * bottomLineDict;
 	NSMutableDictionary * unreadTopLineDict;
 	NSMutableDictionary * unreadTopLineSelectionDict;
+
+	BOOL isLoadingHTMLArticle;
+	NSError * lastError;
 }
 
 // Public functions
@@ -73,4 +76,5 @@
 -(int)tableLayout;
 -(NSArray *)markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(int)row;
+-(void)loadArticleLink:(NSString *) articleLink;
 @end

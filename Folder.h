@@ -54,9 +54,11 @@
 #define MA_FFlag_Error				4
 #define MA_FFlag_Unsubscribed		8
 #define MA_FFlag_Updating			16
+#define MA_FFlag_LoadFullHTML		32
 
 // Macros for testing folder flags
 #define IsUnsubscribed(f)		([(f) flags] & MA_FFlag_Unsubscribed)
+#define LoadsFullHTML(f)		([(f) flags] & MA_FFlag_LoadFullHTML)
 #define IsUpdating(f)			([(f) nonPersistedFlags] & MA_FFlag_Updating)
 #define IsError(f)				([(f) nonPersistedFlags] & MA_FFlag_Error)
 
@@ -107,6 +109,7 @@
 -(BOOL)isGroupFolder;
 -(BOOL)isSmartFolder;
 -(BOOL)isRSSFolder;
+-(BOOL)loadsFullHTML;
 -(void)setName:(NSString *)name;
 -(void)setUnreadCount:(int)count;
 -(void)setType:(int)newType;
