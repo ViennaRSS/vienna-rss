@@ -21,6 +21,9 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
 
+// This is defined somewhere but I can't find where.
+#define WebKitErrorPlugInWillHandleLoad	204
+
 @class AppController;
 @class TabbedWebView;
 

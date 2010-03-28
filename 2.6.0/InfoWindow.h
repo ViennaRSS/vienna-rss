@@ -39,6 +39,7 @@
 	IBOutlet NSTextField * folderSize;
 	IBOutlet NSTextField * folderUnread;
 	IBOutlet NSButton * isSubscribed;
+	IBOutlet NSButton * loadFullHTML;
 	IBOutlet NSTextField * folderDescription;
 	IBOutlet NSButton * validateButton;
 	int infoFolderId;
@@ -49,4 +50,5 @@
 -(IBAction)urlFieldChanged:(id)sender;
 -(IBAction)authenticationChanged:(id)sender;
 -(IBAction)subscribedChanged:(id)sender;
+-(IBAction)loadFullHTMLChanged:(id)sender;
 @end

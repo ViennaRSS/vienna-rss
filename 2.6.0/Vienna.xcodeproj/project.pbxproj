@@ -265,6 +265,7 @@
 		B2B72E1810FF626B009201A9 /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1710FF626B009201A9 /* vienna_public_key.pem */; };
 		B2C9673C106CD02B0056669A /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
 		B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
+		D98F86E9115FCC7A00688018 /* ProgressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D98F86E8115FCC7A00688018 /* ProgressTextCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -900,6 +901,8 @@
 		B2C96742106CD09E0056669A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
 		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
+		D98F86E7115FCC7A00688018 /* ProgressTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressTextCell.h; sourceTree = "<group>"; };
+		D98F86E8115FCC7A00688018 /* ProgressTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTextCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1028,6 +1031,8 @@
 				AA9F3097081B6A7400D6EA23 /* NewSubscription.m */,
 				AAE8214010F9C74500444C16 /* PluginManager.h */,
 				AAE8214110F9C74500444C16 /* PluginManager.m */,
+				D98F86E7115FCC7A00688018 /* ProgressTextCell.h */,
+				D98F86E8115FCC7A00688018 /* ProgressTextCell.m */,
 				AA82994E08D94BAF00983120 /* RefreshManager.h */,
 				AA82994F08D94BAF00983120 /* RefreshManager.m */,
 				AAA3AF0706338A00006735EB /* SearchFolder.h */,
@@ -2160,6 +2165,7 @@
 				AAE8214210F9C74500444C16 /* PluginManager.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
 				B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */,
+				D98F86E9115FCC7A00688018 /* ProgressTextCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,6 +36,8 @@
 #import "Field.h"
 #import <WebKit/WebKit.h>
 #import "PopupButton.h"
+#import "BrowserPane.h"
+#import "ProgressTextCell.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -60,6 +62,9 @@
 	-(void)showEnclosureView;
 	-(void)hideEnclosureView;
 	-(void)printDocument;
+	-(void)setError:(NSError *)newError;
+	-(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource;
+	-(void)endMainFrameLoad;
 @end
 
 static const int MA_Minimum_ArticleList_Pane_Width = 80;
@@ -80,6 +85,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
 		markReadTimer = nil;
+		lastError = nil;
+		isLoadingHTMLArticle = NO;
     }
     return self;
 }
@@ -93,13 +100,18 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
+	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
 	[articleText setFrameLoadDelegate:self];
 	[articleText setOpenLinksInNewBrowser:YES];
 	[articleText setController:controller];
-
+	
+	// Make web preferences 16pt Arial to match Safari
+	[[articleText preferences] setStandardFontFamily:@"Arial"];
+	[[articleText preferences] setDefaultFontSize:16];
+	
 	// Disable caching
 	[articleText setMaintainsBackForwardList:NO];
 	[[articleText backForwardList] setPageCacheSize:0];
@@ -491,10 +503,30 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 				[[column dataCell] setWraps:YES];
 			}
 
+			// Replace the normal text field cell with a progress text cell so we can
+			// display a progress indicator when loading HTML pages. NOTE: This is handled
+			// in willDisplayCell:forTableColumn:row: where it sets the inProgress flag.
+			// We need to use a different column for condensed layout vs. table layout.
+			BOOL isProgressColumn = NO;
+			if (tableLayout == MA_Layout_Report && [[column identifier] isEqualToString:MA_Field_Subject])
+				isProgressColumn = YES;
+			else if (tableLayout == MA_Layout_Condensed && [[column identifier] isEqualToString:MA_Field_Headlines])
+				isProgressColumn = YES;
+			
+			if (isProgressColumn)
+			{
+				ProgressTextCell * progressCell;
+				
+				progressCell = [[[ProgressTextCell alloc] init] autorelease];
+				[column setDataCell:progressCell];
+			}
+
+			// Set the header attributes.
 			NSTableHeaderCell * headerCell = [column headerCell];
 			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
-
 			[headerCell setTitle:[field displayName]];
+			
+			// Set the other column atributes.
 			[column setEditable:NO];
 			[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
 			[column setMinWidth:10];
@@ -745,6 +777,16 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[articleText printDocument:sender];
 }
 
+/* setError
+ * Save the most recent error instance.
+ */
+-(void)setError:(NSError *)newError
+{
+	[newError retain];
+	[lastError release];
+	lastError = newError;
+}
+
 /* handleArticleListFontChange
  * Called when the user changes the article list font and/or size in the Preferences
  */
@@ -755,6 +797,15 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	{
 		[articleList reloadData];
 	}
+}
+
+/* handleLoadFullHTMLChange
+ * Called when the user changes the folder setting to load the article in full HTML.
+ */
+-(void)handleLoadFullHTMLChange:(NSNotification *)note
+{
+	if (self == [articleController mainArticleView])
+		[self refreshArticlePane];
 }
 
 /* handleReadingPaneChange
@@ -1169,7 +1220,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	if (currentSelectedRow < 0)
 	{
-		[articleText setHTML:@"<HTML></HTML>" withBase:@""];
+		[articleText clearHTML];
 		[self hideEnclosureView];
 	}
 	else
@@ -1194,6 +1245,27 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self refreshArticlePane];
 }
 
+
+/* loadArticleLink
+ * Loads the specified link into the article text view. NOTE: This is done
+ * via this selector method so that this is called via the event queue in
+ * order to give the WebView drawing a chance to clear out the WebView
+ * before this link is loaded.
+ */
+-(void)loadArticleLink:(NSString *) articleLink
+{
+	// Remember we're loading from HTML so the status message is set
+	// appropriately.
+	isLoadingHTMLArticle = YES;
+	
+	// Load the actual link.
+	[articleText setMainFrameURL:articleLink];
+	
+	// We need to redraw the article list so the progress indicator is shown.
+	[articleList setNeedsDisplay];
+}
+
+
 /* refreshArticlePane
  * Updates the article pane for the current selected articles.
  */
@@ -1201,13 +1273,34 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 {
 	NSArray * msgArray = [self markedArticleRange];
 	if ([msgArray count] == 0)
-		[articleText setHTML:@"<HTML></HTML>" withBase:@""];
+		[articleText clearHTML];
 	else
 	{
-		NSString * htmlText = [articleText articleTextFromArray:msgArray];
 		Article * firstArticle = [msgArray objectAtIndex:0];
 		Folder * folder = [[Database sharedDatabase] folderFromID:[firstArticle folderId]];
-		[articleText setHTML:htmlText withBase:SafeString([folder feedURL])];
+		if ([folder loadsFullHTML] && [msgArray count] == 1)
+		{
+			// Clear out the text so the user knows something happened in response to the
+			// click on the article.
+			[articleText clearHTML];
+			
+			// Now set the article to the URL in the RSS feed's article. NOTE: We use
+			// performSelector:withObject:afterDelay: here so that this link load gets
+			// queued up into the event loop, otherwise the WebView class won't draw the
+			// clearing of the HTML before this new link gets loaded.
+			[self performSelector: @selector(loadArticleLink:) withObject:[firstArticle link] afterDelay:0.0];
+		}
+		else
+		{
+			NSString * htmlText = [articleText articleTextFromArray:msgArray];
+
+			// Remember we're NOT loading from HTML so the status message is set
+			// appropriately.
+			isLoadingHTMLArticle = NO;
+			
+			// Set the article to the HTML from the RSS feed.
+			[articleText setHTML:htmlText withBase:SafeString([folder feedURL])];
+		}
 	}
 	
 	// Show the enclosure view if just one article is selected and it has an
@@ -1462,6 +1555,50 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return [self copyTableSelection:rows toPasteboard:pboard];
 }
 
+/* willDisplayCell
+ * Hook before a cell is displayed to set the cell's loading HTML flag for 
+ * the progress indicator.
+ */
+-(void)tableView:(NSTableView *)tv willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex 
+{
+	NSString * columnIdentifer = [tableColumn identifier];	
+	BOOL isProgressColumn = NO;
+
+	// We need to use a different column for condensed layout vs. table layout.
+	if (tableLayout == MA_Layout_Report && [columnIdentifer isEqualToString:MA_Field_Subject])
+		isProgressColumn = YES;
+	else if (tableLayout == MA_Layout_Condensed && [columnIdentifer isEqualToString:MA_Field_Headlines])
+		isProgressColumn = YES;
+	
+	if (isProgressColumn)
+	{
+		ProgressTextCell * realCell = (ProgressTextCell *)cell;
+		
+		// Set the in-progress flag as appropriate so the progress indicator gets
+		// displayed and removed as needed.
+		if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
+			[realCell setInProgress:YES forRow:rowIndex];
+		else
+			[realCell setInProgress:NO forRow:rowIndex];
+	}
+}
+
+/* shouldShowCellExpansionForTableColumn
+ * Hook to determine whether the tooltip-like automatic text expansion for 
+ * NSTableView text columns that are truncated should be expanded for a
+ * given cell. In our case we don't want to show the expansion while the
+ * HTML is loading because the redraw for the progress indicator causes the
+ * cell expansion text to flash if you hover over the cell while it is still
+ * loading and it looks unprofessional.
+ */
+-(BOOL)tableView:(NSTableView *)tv shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
+{
+	if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
+		return NO;
+	else
+		return YES;
+}
+
 /* copyTableSelection
  * This is the common copy selection code. We build an array of dictionary entries each of
  * which include details of each selected article in the standard RSS item format defined by
@@ -1563,6 +1700,94 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	return articleArray;
 }
 
+/* didStartProvisionalLoadForFrame
+ * Invoked when a new client request is made by sender to load a provisional data source for frame.
+ */
+-(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
+{
+	if (frame == [articleText mainFrame])
+	{
+		[self setError:nil];
+		[controller setStatusMessage:NSLocalizedString( isLoadingHTMLArticle ? @"Loading HTML article..." : @"", nil) persist:YES];
+		
+	}
+	
+}
+
+/* didCommitLoadForFrame
+ * Invoked when data source of frame has started to receive data.
+ */
+-(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
+{
+}
+
+/* didFailProvisionalLoadWithError
+ * Invoked when a location request for frame has failed to load.
+ */
+-(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+	if (frame == [articleText mainFrame])
+	{
+		[self handleError:error withDataSource: [frame provisionalDataSource]];
+		[self endMainFrameLoad];
+	}
+}
+
+/* didFailLoadWithError
+ * Invoked when a location request for frame has failed to load.
+ */
+-(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
+{
+	if (frame == [articleText mainFrame])
+	{
+		// Not really an error. A plugin is grabbing the URL and will handle it by itself.
+		if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
+			[self handleError:error withDataSource:[frame dataSource]];
+		[self endMainFrameLoad];
+	}
+}
+
+-(void)handleError:(NSError *)error withDataSource:(WebDataSource *)dataSource
+{
+	// Remember the error.
+	[self setError:error];
+	
+	// Load the localized verion of the error page
+	WebFrame * frame = [articleText mainFrame];
+	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
+	if (pathToErrorPage != nil)
+	{
+		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
+		errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: [error localizedDescription]];
+		if (errorMessage != nil)
+			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[dataSource request] URL]];
+	}		
+}
+
+/* endMainFrameLoad
+ * Handle the end of a load whether or not it completed and whether or not an error
+ * occurred. The error variable is nil for no error or it contains the most recent
+ * NSError incident.
+ */
+-(void)endMainFrameLoad
+{
+	if (isLoadingHTMLArticle)
+	{
+		[controller setStatusMessage:NSLocalizedString(@"Article load completed", nil) persist:YES];
+		isLoadingHTMLArticle = NO;
+		[articleList setNeedsDisplay];
+	}
+}
+
+/* didFinishLoadForFrame
+ * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
+ */
+-(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
+{
+	if (frame == [articleText mainFrame])
+		[self endMainFrameLoad];
+}
+
 /* dealloc
  * Clean up behind ourself.
  */
@@ -1582,6 +1807,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[middleLineDict release];
 	[linkLineDict release];
 	[bottomLineDict release];
+	[lastError release];
 	[super dealloc];
 }
 @end

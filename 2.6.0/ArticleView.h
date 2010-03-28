@@ -31,6 +31,7 @@
 // Public functions
 +(NSDictionary *)stylesMap;
 +(NSDictionary *)loadStylesMap;
+-(void)clearHTML;
 -(void)setHTML:(NSString *)htmlText withBase:(NSString *)urlString;
 -(NSString *)articleTextFromArray:(NSArray *)msgArray;
 -(void)keyDown:(NSEvent *)theEvent;
