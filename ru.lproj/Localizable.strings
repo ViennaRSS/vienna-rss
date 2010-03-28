@@ -398,3 +398,7 @@
 /* Added in 2.5.0 */
 "Cannot create folder title" = "Cannot create folder";
 "Cannot create folder body" = "The \"%@\" folder cannot be created.";
+
+/* Added in 2.6.0 */
+"Article load completed" = "Article load completed";
+"Loading HTML article..." = "Loading HTML article...";
