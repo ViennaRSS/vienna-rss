@@ -1553,8 +1553,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)initSortMenu
 {
-	NSMenu * sortMenu = [[[NSMenu alloc] initWithTitle:@"Sort By"] autorelease];
+	NSMenu * sortSubmenu = [[[NSMenu alloc] initWithTitle:@"Sort By"] autorelease];
 	
+	// Add the fields which are sortable to the menu.
 	for (Field * field in [db arrayOfFields])
 	{
 		// Filter out columns we don't sort on. Later we should have an attribute in the
@@ -1572,11 +1573,26 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
-			[sortMenu addItem:menuItem];
+			[sortSubmenu addItem:menuItem];
 			[menuItem release];
 		}
 	}
-	[sortByMenu setSubmenu:sortMenu];
+	
+	// Add the separator.
+	[sortSubmenu addItem:[NSMenuItem separatorItem]];
+
+	// Now add the ascending and descending menu items.
+	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Ascending", nil) action:@selector(doSortDirection:) keyEquivalent:@""];
+	[menuItem setRepresentedObject:[NSNumber numberWithBool:YES]];
+	[sortSubmenu addItem:menuItem];
+	[menuItem release];
+	menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Descending", nil) action:@selector(doSortDirection:) keyEquivalent:@""];
+	[menuItem setRepresentedObject:[NSNumber numberWithBool:NO]];
+	[sortSubmenu addItem:menuItem];
+	[menuItem release];
+	
+	// Set the submenu
+	[sortByMenu setSubmenu:sortSubmenu];
 }
 
 /* initColumnsMenu
@@ -2165,15 +2181,28 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* doSortColumn
- * Handle the user picking an item from the Sort By submenu
+ * Handle the user picking a sort column item from the Sort By submenu
  */
 -(IBAction)doSortColumn:(id)sender
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	Field * field = [menuItem representedObject];
 	
-	NSAssert1(field, @"Somehow got a nil representedObject for Sort sub-menu item '%@'", [menuItem title]);
+	NSAssert1(field, @"Somehow got a nil representedObject for Sort column sub-menu item '%@'", [menuItem title]);
 	[articleController sortByIdentifier:[field name]];
+}
+
+/* doSortDirection
+ * Handle the user picking ascending or descending from the Sort By submenu
+ */
+-(IBAction)doSortDirection:(id)sender
+{
+	NSMenuItem * menuItem = (NSMenuItem *)sender;
+	NSNumber * ascendingNumber = [menuItem representedObject];
+	
+	NSAssert1(ascendingNumber, @"Somehow got a nil representedObject for Sort direction sub-menu item '%@'", [menuItem title]);
+	BOOL ascending = [ascendingNumber boolValue];
+	[articleController sortAscending:ascending];
 }
 
 /* doOpenScriptsFolder
@@ -2459,10 +2488,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return YES;
 			
 		case '>':
+		case '.':
 			[self goForward:self];
 			return YES;
 			
 		case '<':
+		case ',':
 			[self goBack:self];
 			return YES;
 			
@@ -3866,6 +3897,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Field * field = [menuItem representedObject];
 		if ([[field name] isEqualToString:[articleController sortColumnIdentifier]])
+			[menuItem setState:NSOnState];
+		else
+			[menuItem setState:NSOffState];
+		return isMainWindowVisible && isAnyArticleView;
+	}
+	else if (theAction == @selector(doSortDirection:))
+	{
+		NSNumber * ascendingNumber = [menuItem representedObject];
+		BOOL ascending = [ascendingNumber integerValue];
+		if (ascending == [articleController sortIsAscending])
 			[menuItem setState:NSOnState];
 		else
 			[menuItem setState:NSOffState];

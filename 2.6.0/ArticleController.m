@@ -108,7 +108,7 @@
 		NSArray * sortDescriptors = [prefs articleSortDescriptors];
 		if ([sortDescriptors count] == 0)
 		{
-			NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:NO] autorelease];
+			NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:YES] autorelease];
 			[prefs setArticleSortDescriptors:[NSArray arrayWithObject:descriptor]];
 			[prefs setObject:MA_Field_Date forKey:MAPref_SortColumn];
 		}
@@ -245,6 +245,37 @@
 	}
 	[prefs setArticleSortDescriptors:descriptors];
 	[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
+}
+
+/* sortIsAscending
+ * Returns YES if the sort direction is currently set to ascending.
+ */
+-(BOOL)sortIsAscending
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
+	NSSortDescriptor * sortDescriptor = [descriptors objectAtIndex:0];
+	BOOL ascending = [sortDescriptor ascending];
+	
+	return ascending;
+}
+
+/* sortAscending
+ * Sort by the direction indicated.
+ */
+-(void)sortAscending:(BOOL)newAscending
+{
+	Preferences * prefs = [Preferences standardPreferences];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
+	NSSortDescriptor * sortDescriptor = [descriptors objectAtIndex:0];
+	
+	BOOL existingAscending = [sortDescriptor ascending];
+	if ( newAscending != existingAscending )
+	{
+		[descriptors replaceObjectAtIndex:0 withObject:[sortDescriptor reversedSortDescriptor]];
+		[prefs setArticleSortDescriptors:descriptors];
+		[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
+	}
 }
 
 /* sortArticles
