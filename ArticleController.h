@@ -62,8 +62,10 @@
 -(void)displayFolder:(int)newFolderId;
 -(void)refilterArrayOfArticles;
 -(NSString *)sortColumnIdentifier;
+-(BOOL)sortIsAscending;
 -(void)ensureSelectedArticle:(BOOL)singleSelection;
 -(void)sortByIdentifier:(NSString *)columnName;
+-(void)sortAscending:(BOOL)newAscending;
 -(BOOL)currentCacheContainsFolder:(int)folderId;
 -(void)deleteArticlesByArray:(NSArray *)articleArray;
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
