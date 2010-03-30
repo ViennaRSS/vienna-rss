@@ -64,6 +64,7 @@
 	NSMutableDictionary * unreadTopLineDict;
 	NSMutableDictionary * unreadTopLineSelectionDict;
 
+	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
 	NSError * lastError;
 }

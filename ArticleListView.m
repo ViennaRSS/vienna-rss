@@ -86,6 +86,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		guidOfArticleToSelect = nil;
 		markReadTimer = nil;
 		lastError = nil;
+		isCurrentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
     }
     return self;
@@ -256,12 +257,25 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* contextMenuItemsForElement
- * Creates a new context menu for our web view.
+ * Creates a new context menu for our article's web view.
  */
 -(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
+	// If this is an URL link, do the link-specific items.
 	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
-	return (urlLink != nil) ? [controller contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:defaultMenuItems] : nil;
+	if (urlLink != nil)
+		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+	
+	// If we have a full HTML page then do the additional web-page specific items.
+	if (isCurrentPageFullHTML)
+	{
+		WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
+		if (frameKey != nil)
+			return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+	}
+
+	// Just return the default items.
+	return defaultMenuItems;
 }
 
 /* initTableView
@@ -1272,14 +1286,22 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 -(void)refreshArticlePane
 {
 	NSArray * msgArray = [self markedArticleRange];
+	
 	if ([msgArray count] == 0)
+	{
+		isCurrentPageFullHTML = NO;
 		[articleText clearHTML];
+	}
 	else
 	{
 		Article * firstArticle = [msgArray objectAtIndex:0];
 		Folder * folder = [[Database sharedDatabase] folderFromID:[firstArticle folderId]];
 		if ([folder loadsFullHTML] && [msgArray count] == 1)
 		{
+			// Remember we have a full HTML page so we can setup the context menus
+			// appropriately.
+			isCurrentPageFullHTML = YES;
+			
 			// Clear out the text so the user knows something happened in response to the
 			// click on the article.
 			[articleText clearHTML];
@@ -1294,6 +1316,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		{
 			NSString * htmlText = [articleText articleTextFromArray:msgArray];
 
+			// Remember we do NOT have a full HTML page so we can setup the context menus
+			// appropriately.
+			isCurrentPageFullHTML = NO;
+			
 			// Remember we're NOT loading from HTML so the status message is set
 			// appropriately.
 			isLoadingHTMLArticle = NO;
