@@ -3047,9 +3047,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		int folderID = [folder itemId];
 		
 		if (doSubscribe)
+		{
+			[folder clearFlag:MA_FFlag_Unsubscribed];
 			[[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
+		}
 		else
+		{
+			[folder setFlag:MA_FFlag_Unsubscribed];
 			[[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
+		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
 	}
 }
@@ -3070,9 +3076,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		int folderID = [folder itemId];
 		
 		if (loadFullHTMLPages)
+		{
+			[folder setFlag:MA_FFlag_LoadFullHTML];
 			[[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_LoadFullHTML];
+		}
 		else
+		{
+			[folder clearFlag:MA_FFlag_LoadFullHTML];
 			[[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_LoadFullHTML];
+		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:folderID]];
 	}
 }

@@ -112,7 +112,9 @@ static InfoWindowManager * _infoWindowManager = nil;
 		
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleFolderDeleted:) name:@"MA_Notify_FolderDeleted" object:nil];
-		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_FoldersUpdated" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	}
 	return self;
 }
@@ -143,11 +145,11 @@ static InfoWindowManager * _infoWindowManager = nil;
 	}
 }
 
-/* handleFolderNameChange
- * Deals with the case where a folder's name is changed while its Info
- * window is open. We send the window a name change message.
+/* handleFolderChange
+ * Deals with the case where a folder's information is changed while its Info
+ * window is open. We send the window update folder message.
  */
--(void)handleFolderNameChange:(NSNotification *)nc
+-(void)handleFolderChange:(NSNotification *)nc
 {
 	int folderId = [(NSNumber *)[nc object] intValue];
 	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
@@ -215,7 +217,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[folderName setEditable:YES];
 }
 
-/* updateFolderName
+/* updateFolder
  * Update the folder info in response to changes on the folder itself.
  */
 -(void)updateFolder
