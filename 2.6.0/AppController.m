@@ -2913,31 +2913,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* unsubscribeFeed
- * Subscribe or re-subscribe to a feed.
- */
--(IBAction)unsubscribeFeed:(id)sender
-{
-	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	BOOL doSubscribe = NO;
-	int index;
-	
-	if (count > 0)
-		doSubscribe = IsUnsubscribed([selectedFolders objectAtIndex:0]);
-	for (index = 0; index < count; ++index)
-	{
-		Folder * folder = [selectedFolders objectAtIndex:index];
-		int infoFolderId = [folder itemId];
-		
-		if (doSubscribe)
-			[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
-		else
-			[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
-	}
-}
-
 /* renameFolder
  * Renames the current folder
  */
@@ -3052,6 +3027,70 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int folderId = [foldersTree actualSelection];
 	if (folderId > 0)
 		[[InfoWindowManager infoWindowManager] showInfoWindowForFolder:folderId];
+}
+
+/* unsubscribeFeed
+ * Subscribe or re-subscribe to a feed.
+ */
+-(IBAction)unsubscribeFeed:(id)sender
+{
+	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
+	int count = [selectedFolders count];
+	BOOL doSubscribe = NO;
+	int index;
+	
+	if (count > 0)
+		doSubscribe = IsUnsubscribed([selectedFolders objectAtIndex:0]);
+	for (index = 0; index < count; ++index)
+	{
+		Folder * folder = [selectedFolders objectAtIndex:index];
+		int folderID = [folder itemId];
+		
+		if (doSubscribe)
+			[[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
+		else
+			[[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
+	}
+}
+
+/* setLoadFullHTMLFlag
+ * Sets the value of the load full HTML pages flag for the current folder selection
+ * and informs interested parties.
+ */
+-(IBAction)setLoadFullHTMLFlag:(BOOL)loadFullHTMLPages
+{
+	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
+	int count = [selectedFolders count];
+	int index;
+	
+	for (index = 0; index < count; ++index)
+	{
+		Folder * folder = [selectedFolders objectAtIndex:index];
+		int folderID = [folder itemId];
+		
+		if (loadFullHTMLPages)
+			[[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_LoadFullHTML];
+		else
+			[[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_LoadFullHTML];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:folderID]];
+	}
+}
+
+/* useCurrentStyleForArticles
+ * Use the current style to display articles (default).
+ */
+-(IBAction)useCurrentStyleForArticles:(id)sender
+{
+	[self setLoadFullHTMLFlag:NO];
+}
+
+/* useWebPageForArticles
+ * Use the web page at the article's link location to display articles.
+ */
+-(IBAction)useWebPageForArticles:(id)sender
+{
+	[self setLoadFullHTMLFlag:YES];
 }
 
 /* viewSourceHomePage
@@ -3922,6 +3961,24 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];
 		}
+		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
+	}
+	else if (theAction == @selector(useCurrentStyleForArticles:))
+	{
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		if (folder && IsRSSFolder(folder) && ![folder loadsFullHTML])
+			[menuItem setState:NSOnState];
+		else
+			[menuItem setState:NSOffState];
+		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
+	}
+	else if (theAction == @selector(useWebPageForArticles:))
+	{
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		if (folder && IsRSSFolder(folder) && [folder loadsFullHTML])
+			[menuItem setState:NSOnState];
+		else
+			[menuItem setState:NSOffState];
 		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteFolder:))
