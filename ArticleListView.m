@@ -88,6 +88,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		lastError = nil;
 		isCurrentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
+		currentURL = nil;
     }
     return self;
 }
@@ -1283,6 +1284,18 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		[self refreshArticlePane];
 }
 
+/* clearCurrentURL
+ * Clears the current URL.
+ */
+-(void)clearCurrentURL
+{
+	// If we already have an URL release it.
+	if (currentURL)
+	{
+		[currentURL release];
+		currentURL = nil;
+	}
+}
 
 /* loadArticleLink
  * Loads the specified link into the article text view. NOTE: This is done
@@ -1299,10 +1312,26 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	// Load the actual link.
 	[articleText setMainFrameURL:articleLink];
 	
+	// Clear the current URL.
+	[self clearCurrentURL];
+	
+	// Remember the new URL.
+	currentURL = [[NSURL alloc] initWithString:articleLink];
+
 	// We need to redraw the article list so the progress indicator is shown.
 	[articleList setNeedsDisplay];
 }
 
+/* url
+ * Return the URL of current article.
+ */
+-(NSURL *)url
+{
+	if (isCurrentPageFullHTML)
+		return currentURL;
+	else 
+		return nil;
+}
 
 /* refreshArticlePane
  * Updates the article pane for the current selected articles.
@@ -1313,7 +1342,13 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	
 	if ([msgArray count] == 0)
 	{
+		// Clear the current URL.
+		[self clearCurrentURL];
+
+		// We are not a FULL HTML page.
 		isCurrentPageFullHTML = NO;
+		
+		// Clear out the page.
 		[articleText clearHTML];
 	}
 	else
@@ -1339,6 +1374,9 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		else
 		{
 			NSString * htmlText = [articleText articleTextFromArray:msgArray];
+
+			// Clear the current URL.
+			[self clearCurrentURL];
 
 			// Remember we do NOT have a full HTML page so we can setup the context menus
 			// appropriately.
@@ -1858,6 +1896,7 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[linkLineDict release];
 	[bottomLineDict release];
 	[lastError release];
+	[currentURL release];
 	[super dealloc];
 }
 @end

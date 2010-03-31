@@ -64,6 +64,7 @@
 	NSMutableDictionary * unreadTopLineDict;
 	NSMutableDictionary * unreadTopLineSelectionDict;
 
+	NSURL *	currentURL;
 	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
 	NSError * lastError;
@@ -78,4 +79,5 @@
 -(NSArray *)markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(int)row;
 -(void)loadArticleLink:(NSString *) articleLink;
+-(NSURL *)url;
 @end
