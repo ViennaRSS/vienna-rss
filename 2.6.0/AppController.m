@@ -1089,13 +1089,23 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)openPageInBrowser:(id)sender
 {
 	NSView<BaseView> * theView = [browserView activeTabItemView];
+	NSURL * url = nil;
+	
+	// Get the URL from the appropriate view.
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		BrowserPane * webPane = (BrowserPane *)theView;
-		NSURL * url = [webPane url];
-		if (url != nil)
-			[self openURLInDefaultBrowser:url];
+		url = [webPane url];
 	}
+	else if ([theView isKindOfClass:[ArticleListView class]])
+	{
+		ArticleListView * articleListView = (ArticleListView *)theView;
+		url = [articleListView url];
+	}
+
+	// If we have an URL then open it in the default browser.
+	if (url != nil)
+		[self openURLInDefaultBrowser:url];
 }
 
 /* copyPageURLToClipboard
@@ -1104,17 +1114,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)copyPageURLToClipboard:(id)sender
 {
 	NSView<BaseView> * theView = [browserView activeTabItemView];
+	NSURL * url = nil;
+
+	// Get the URL from the appropriate view.
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		BrowserPane * webPane = (BrowserPane *)theView;
-		NSURL * url = [webPane url];
-		if (url != nil)
-		{
-			NSPasteboard * pboard = [NSPasteboard generalPasteboard];
-			[pboard declareTypes:[NSArray arrayWithObjects:NSStringPboardType, NSURLPboardType, nil] owner:self];
-			[url writeToPasteboard:pboard];
-			[pboard setString:[url description] forType:NSStringPboardType];
-		}
+		url = [webPane url];
+	}
+	else if ([theView isKindOfClass:[ArticleListView class]])
+	{
+		ArticleListView * articleListView = (ArticleListView *)theView;
+		url = [articleListView url];
+	}
+
+	// If we have an URL then copy it to the clipboard.
+	if (url != nil)
+	{
+		NSPasteboard * pboard = [NSPasteboard generalPasteboard];
+		[pboard declareTypes:[NSArray arrayWithObjects:NSStringPboardType, NSURLPboardType, nil] owner:self];
+		[url writeToPasteboard:pboard];
+		[pboard setString:[url description] forType:NSStringPboardType];
 	}
 }
 
