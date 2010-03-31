@@ -273,8 +273,32 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 		if (frameKey != nil)
 			return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 	}
+	
+	// Remove the reload menu item if we don't have a full HTML page.
+	if (!isCurrentPageFullHTML)
+	{
+		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
+		int count = [defaultMenuItems count];
+		int index;
+		
+		// Copy over everything but the reload menu item, which we can't handle if
+		// this is not a full HTML page since we don't have an URL.
+		for (index = 0; index < count; index++)
+		{
+			NSMenuItem * menuItem = [defaultMenuItems objectAtIndex:index];
+			if ([menuItem tag] != WebMenuItemTagReload)
+				[newDefaultMenu addObject:menuItem];
+		}
+		
+		// If we still have some menu items then use that for the new default menu, otherwise
+		// set the default items to nil as we may have removed all the items.
+		if ([newDefaultMenu count] > 0)
+			defaultMenuItems = [newDefaultMenu autorelease];
+		else
+			defaultMenuItems = nil;
+	}
 
-	// Just return the default items.
+	// Return the default menu items.
 	return defaultMenuItems;
 }
 
