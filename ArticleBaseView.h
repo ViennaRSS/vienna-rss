@@ -27,6 +27,7 @@
 	-(void)refreshFolder:(int)refreshFlag;
 	-(Article *)selectedArticle;
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
+	-(void)displayFirstUnread;
 	-(void)displayNextUnread;
 	-(void)refreshCurrentFolder;
 	-(void)handleRefreshArticle:(NSNotification *)nc;

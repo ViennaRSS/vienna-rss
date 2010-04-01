@@ -934,14 +934,40 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	}
 }
 
+/* displayFirstUnread
+ * Locate the first unread article.
+ */
+-(void)displayFirstUnread
+{
+	// Mark the current article read.
+	[self markCurrentRead:nil];
+
+	// If there are any unread articles then select the first one in the
+	// first folder.
+	if ([[Database sharedDatabase] countOfUnread] > 0)
+	{
+		guidOfArticleToSelect = nil;
+		
+		// Get the first folder with unread articles.
+		int firstFolderWithUnread = [foldersTree firstFolderWithUnread];
+		
+		// Select the folder in the tree view.
+		[foldersTree selectFolder:firstFolderWithUnread];
+		
+		// Now select the first unread article.
+		[self selectFirstUnreadInFolder];
+	}
+}
+
 /* displayNextUnread
  * Locate the next unread article from the current article onward.
  */
 -(void)displayNextUnread
 {
-	// Mark the current article read.
-	// Save the value of currentSelectedRow, because sort order may change after marking.
+	// Save the value of currentSelectedRow.
 	int currentRow = currentSelectedRow;
+
+	// Mark the current article read.
 	[self markCurrentRead:nil];
 
 	// Scan the current folder from the selection forward. If nothing found, try
