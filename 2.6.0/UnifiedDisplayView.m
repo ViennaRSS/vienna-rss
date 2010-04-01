@@ -159,6 +159,22 @@
 	[self refreshArticlePane];
 }
 
+/* displayFirstUnread
+ * Find the first folder that has unread articles and switch to that.
+ */
+-(void)displayFirstUnread
+{
+	int firstFolderWithUnread = [foldersTree firstFolderWithUnread];
+	if (firstFolderWithUnread != -1)
+	{
+		if (firstFolderWithUnread == [articleController currentFolderId])
+			[self selectFolderWithFilter:[articleController currentFolderId]];
+		else
+			[foldersTree selectFolder:firstFolderWithUnread];
+	}
+	[[NSApp mainWindow] makeFirstResponder:unifiedText];
+}
+
 /* displayNextUnread
  * Find the next folder that has unread articles and switch to that.
  */

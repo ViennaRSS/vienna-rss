@@ -453,14 +453,13 @@
 	}
 }
 
-/* nextFolderWithUnread
- * Finds the ID of the next folder after currentFolderId that has
+/* nextFolderWithUnreadAfterNode
+ * Finds the ID of the next folder after the specified node that has
  * unread articles.
  */
--(int)nextFolderWithUnread:(int)currentFolderId
+-(int)nextFolderWithUnreadAfterNode:(TreeNode *)startingNode
 {
-	TreeNode * thisNode = [rootNode nodeFromID:currentFolderId];
-	TreeNode * node = thisNode;
+	TreeNode * node = startingNode;
 
 	while (node != nil)
 	{
@@ -486,12 +485,39 @@
 
 		// If we've gone full circle and not found
 		// anything, we're out of unread articles
-		if (nextNode == thisNode)
-			return [thisNode nodeId];
+		if (nextNode == startingNode)
+			return [startingNode nodeId];
 
 		node = nextNode;
 	}
 	return -1;
+}
+
+/* firstFolderWithUnread
+ * Finds the ID of the first folder that has unread articles.
+ */
+-(int)firstFolderWithUnread
+{
+	// Get the first Node from the root node.
+	TreeNode * firstNode = [rootNode firstChild];
+	
+	// Now get the ID of the next unread node after it and return it.
+	int nextNodeID = [self nextFolderWithUnreadAfterNode:firstNode];
+	return nextNodeID;
+}
+
+/* nextFolderWithUnread
+ * Finds the ID of the next folder after currentFolderId that has
+ * unread articles.
+ */
+-(int)nextFolderWithUnread:(int)currentFolderId
+{
+	// Get the current Node from the ID.
+	TreeNode * currentNode = [rootNode nodeFromID:currentFolderId];
+	
+	// Now get the ID of the next unread node after it and return it.
+	int nextNodeID = [self nextFolderWithUnreadAfterNode:currentNode];
+	return nextNodeID;
 }
 
 /* groupParentSelection

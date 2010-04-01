@@ -291,6 +291,15 @@
 	currentArrayOfArticles = [sortedArrayOfArticles retain];
 }
 
+/* displayFirstUnread
+ * Instructs the current article view to display the first unread article
+ * in the database.
+ */
+-(void)displayFirstUnread
+{
+	[mainArticleView displayFirstUnread];
+}
+
 /* displayNextUnread
  * Instructs the current article view to display the next unread article
  * in the database.

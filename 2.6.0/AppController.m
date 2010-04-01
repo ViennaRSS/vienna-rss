@@ -2527,6 +2527,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[self markFlagged:self];
 			return YES;
 			
+		case 'b':
+		case 'B':
+			[self viewFirstUnread:self];
+			return YES;
+
 		case 'n':
 		case 'N':
 			[self viewNextUnread:self];
@@ -2849,6 +2854,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		else
 			[activityWindow performClose:self];
 	}
+}
+
+/* viewFirstUnread
+ * Moves the selection to the first unread article.
+ */
+-(IBAction)viewFirstUnread:(id)sender
+{
+	[browserView setActiveTabToPrimaryTab];
+	if ([db countOfUnread] > 0)
+		[articleController displayFirstUnread];
+	[mainWindow makeFirstResponder:([self selectedArticle] != nil) ? [[browserView primaryTabItemView] mainView] : [foldersTree mainView]];
 }
 
 /* viewNextUnread

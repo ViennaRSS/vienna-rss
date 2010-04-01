@@ -55,6 +55,7 @@
 -(Article *)selectedArticle;
 -(void)sortArticles;
 -(NSArray *)allArticles;
+-(void)displayFirstUnread;
 -(void)displayNextUnread;
 -(NSString *)searchPlaceholderString;
 -(void)reloadArrayOfArticles;

@@ -55,6 +55,7 @@
 -(int)groupParentSelection;
 -(int)countOfSelectedFolders;
 -(NSArray *)selectedFolders;
+-(int)firstFolderWithUnread;
 -(int)nextFolderWithUnread:(int)currentFolderId;
 -(NSArray *)folders:(int)folderId;
 -(NSView *)mainView;
