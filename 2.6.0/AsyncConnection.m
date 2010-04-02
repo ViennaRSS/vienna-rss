@@ -398,8 +398,22 @@
 	if (redirectResponse != nil)
 	{
 		NSString * newURLString = [[request URL] absoluteString];
-		NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), newURLString];
+		NSString * text = nil;
+		
+		// Remember the new URL string.
 		[self setURLString:newURLString];
+
+		// Get the redirect detail text.
+		if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
+		{
+			NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)redirectResponse;
+			text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting (%d) to %@", nil), [httpResponse statusCode], newURLString];
+		}
+		else
+		{
+			text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), newURLString];
+		}
+
 		/*if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
 		{
 			NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)redirectResponse;
@@ -409,6 +423,8 @@
 				[delegate performSelector:handler withObject:self];
 			}
 		}*/
+		
+		// Add the detail text.
 		[aItem appendDetail:text];
 	}
 	
