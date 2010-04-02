@@ -383,23 +383,36 @@
 }
 
 /* willSendRequest
- * Handle connect redirection. Always allow it.
+ * Handle connect redirection. Always allow it. NOTE: This gets called once
+ * per request whether or not there is a redirect request in process or not.
+ *
+ * According to the Apple Docs:
+ *
+ * redirectResponse
+ *     The redirect server response. If nil, there is no redirect in progress.
+ *
+ * So we don't do any logging if redirectResponse is nil.
  */
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
-	NSString * newURLString = [[request URL] absoluteString];
-	NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), newURLString];
-	[self setURLString:newURLString];
-	/*if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
+	if (redirectResponse != nil)
 	{
-		NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)redirectResponse;
-		if ([httpResponse statusCode] == 301)
+		NSString * newURLString = [[request URL] absoluteString];
+		NSString * text = [NSString stringWithFormat:NSLocalizedString(@"Redirecting to %@", nil), newURLString];
+		[self setURLString:newURLString];
+		/*if ([redirectResponse isKindOfClass:[NSHTTPURLResponse class]])
 		{
-			status = MA_Connect_PermanentRedirect;
-			[delegate performSelector:handler withObject:self];
-		}
-	}*/
-	[aItem appendDetail:text];
+			NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)redirectResponse;
+			if ([httpResponse statusCode] == 301)
+			{
+				status = MA_Connect_PermanentRedirect;
+				[delegate performSelector:handler withObject:self];
+			}
+		}*/
+		[aItem appendDetail:text];
+	}
+	
+	// Just return the unaltered request.
 	return request;
 }
 
