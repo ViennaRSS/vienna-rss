@@ -210,6 +210,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[self updateFolder];
 	[self enableValidateButton];
 	[[self window] setInitialFirstResponder:urlField];
+	[[self window] setDelegate:self];
 
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleUrlTextDidChange:) name:NSControlTextDidChangeNotification object:urlField];
@@ -348,4 +349,18 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[db setFolderUsername:[folder itemId] newUsername:usernameString];
 	[folder setPassword:passwordString];
 }
+
+/* windowShouldClose
+ * Commit the window's current first responder before closing.
+ */
+- (BOOL)windowShouldClose:(id)sender
+{
+	// Set the first responder so any open edit fields get committed.
+	[[self window] makeFirstResponder:[self window]];
+
+	// Go ahead and close the window.
+	return TRUE;
+}
+
+
 @end
