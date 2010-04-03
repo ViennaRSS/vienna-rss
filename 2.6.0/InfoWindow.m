@@ -359,7 +359,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[[self window] makeFirstResponder:[self window]];
 
 	// Go ahead and close the window.
-	return TRUE;
+	return YES;
 }
 
 
