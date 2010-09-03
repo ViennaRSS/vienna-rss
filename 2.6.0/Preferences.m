@@ -176,7 +176,6 @@ static Preferences * _standardPreferences = nil;
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [[NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]] retain];
-		NSLog(@"Schau: %@", [searchMethod friendlyName]);
 				
 		if (shouldSaveFeedSource)
 		{

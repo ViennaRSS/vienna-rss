@@ -88,7 +88,6 @@
 		// and then reduce cellFrame to keep from overlapping it.
 		if (inProgress)
 		{
-			NSLog(@"Drawing progress cell");
 			if (!progressIndicator)
 			{
 				// Allocate and initialize the spinning progress indicator. 

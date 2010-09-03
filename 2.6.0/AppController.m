@@ -798,7 +798,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setSearchMethod:(NSMenuItem *)sender
 {
-	NSLog(@"setSearchMethod: called!");
 	[[Preferences standardPreferences] setSearchMethod: [sender representedObject]];
 	[[searchField cell] setPlaceholderString:[sender title]];
 }
