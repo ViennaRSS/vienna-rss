@@ -139,7 +139,6 @@
 		AA5AC2660C3ECAA000B2E14F /* SearchString.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AC2640C3ECAA000B2E14F /* SearchString.m */; };
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
-		AA62D7FC0859ABEC0040C370 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		AA6321510885F0BB006382D3 /* comments.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA6321500885F0BB006382D3 /* comments.tiff */; };
 		AA63227F08861C99006382D3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA63227E08861C99006382D3 /* Constants.m */; };
 		AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
@@ -297,7 +296,6 @@
 			files = (
 				B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */,
 				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in Copy Frameworks */,
-				AA62D7FC0859ABEC0040C370 /* Growl.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1485,8 +1483,12 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = None;
+			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2604,8 +2606,8 @@
 		AA4F9AB70855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUILD_NUMBER = 2500;
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUILD_NUMBER = 2502;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -2615,6 +2617,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				HEADER_SEARCH_PATHS = .;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				VIENNA_CHANGELOG_SUFFIX = "";
@@ -2626,12 +2629,12 @@
 		AA4F9AB80855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = (
 					ppc,
 					i386,
 				);
-				BUILD_NUMBER = 2500;
+				BUILD_NUMBER = 2502;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_DEBUGGING_SYMBOLS = full;
@@ -2640,6 +2643,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				HEADER_SEARCH_PATHS = .;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				SEPARATE_STRIP = YES;
