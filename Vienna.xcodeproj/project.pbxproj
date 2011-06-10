@@ -79,6 +79,7 @@
 		AA1A2C300C0A1EC1005968DC /* emptyTrashButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */; };
 		AA20DC9E0882CCC300A226F5 /* unread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA20DC9D0882CCC300A226F5 /* unread.tiff */; };
 		AA2185060861E7E10024DD4A /* metal_column_header.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2185050861E7E10024DD4A /* metal_column_header.png */; };
+		AA2325FC137A50E300255ADE /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		AA26F448060490BE00FE7994 /* alphaPixel.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F435060490BD00FE7994 /* alphaPixel.tiff */; };
 		AA26F44D060490BE00FE7994 /* flagged_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F43A060490BD00FE7994 /* flagged_header.tiff */; };
 		AA26F44E060490BE00FE7994 /* flagged.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F43B060490BD00FE7994 /* flagged.tiff */; };
@@ -294,6 +295,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				AA2325FC137A50E300255ADE /* Growl.framework in Copy Frameworks */,
 				B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */,
 				AABCD0760B66B0B300A986F5 /* PSMTabBarControl.framework in Copy Frameworks */,
 			);
@@ -2621,7 +2623,7 @@
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.5.0;
+				VIENNA_VERSION_NUMBER = 2.5.1;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
@@ -2648,7 +2650,7 @@
 				SDKROOT = macosx10.5;
 				SEPARATE_STRIP = YES;
 				VIENNA_CHANGELOG_SUFFIX = "";
-				VIENNA_VERSION_NUMBER = 2.5.0;
+				VIENNA_VERSION_NUMBER = 2.5.1;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;

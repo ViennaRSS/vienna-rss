@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+2.5.1.2502
+----------
+- Fix issue where styles fail to render under Mac OSX Lion.
+- Fix Share With Twitter plugin.
+
 2.5.0.2500
 ----------
 - User Interface refresh: Removed the grey headers, made the vertical divider easier to grab and made filtering more discoverable.
