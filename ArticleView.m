@@ -277,7 +277,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	[[self mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
 							 MIMEType:@"text/html" 
 					 textEncodingName:@"utf-8" 
-							  baseURL:[NSURL URLWithString:urlString]];
+							  baseURL:[NSURL URLWithString:@"/"]];
 }
 
 /* keyDown
