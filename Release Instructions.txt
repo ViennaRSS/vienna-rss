@@ -1,10 +1,10 @@
 Steps to release Vienna:
-(Note: I'm using Vienna 2.3.0 as an example in the following steps.)
+(Note: I'm using Vienna 2.5.1 as an example in the following steps.)
 
 (1) Check out a fresh working copy from the repository, to make sure there's no crud that goes into the release version. Also, I would suggest not using your home directory to build, because the full path names will appear in the code (do "strings Vienna" on the executable to see). I use "/Users/ReleaseBuilds", for example.
 
 cd /Users/ReleaseBuilds
-svn checkout https://vienna-rss.svn.sourceforge.net/svnroot/vienna-rss/trunk/2.5.0 Vienna2.5.1
+svn checkout https://vienna-rss.svn.sourceforge.net/svnroot/vienna-rss/trunk/2.5.0 Vienna2.5.0
 
 (2) Run the build script.
 
@@ -18,11 +18,11 @@ For beta releases:
 
 ./release_vienna_beta.sh
 
-(3) Login to SourceForge with your admin account and load <https://sourceforge.net/project/admin/explorer.php?group_id=142635>.
+(3) Login to SourceForge with your admin account and load <https://sourceforge.net/projects/vienna-rss/files>.
 
-(4) Create a new folder "2.5.1.2502" under "Released Versions" for stable releases or "Test Versions" for beta releases.
+(4) Create a new folder "2.5.1" under "Released Versions" for stable releases or "Test Versions" for beta releases.
 
-(5) Upload "Vienna2.5.1.2502.zip" and "Vienna2.5.1.2502.en-us.zip" to the "2.5.1.2502" folder.
+(5) Upload "Vienna2.5.1.2502.zip" and "Vienna2.5.1.2502.en-us.zip" from the build\Deployment\Uploads folder to the "2.5.1" folder.
 
 (6) For stable releases, edit the "Properties" of "Vienna2.5.1.2502.zip" and set it as default download for Mac OS X. Don't do this for beta releases!
 
