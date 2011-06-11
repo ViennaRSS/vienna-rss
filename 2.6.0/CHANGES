@@ -11,6 +11,11 @@ Thanks!
 2.6.0.2600
 ----------
 
+2.5.1.2502
+----------
+- Fix issue where styles fail to render under Mac OSX Lion.
+- Fix Share With Twitter plugin.
+
 2.5.0.2500
 ----------
 - Added support for plugins.
