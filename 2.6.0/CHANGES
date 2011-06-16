@@ -10,6 +10,20 @@ Thanks!
 
 2.6.0.2600
 ----------
+- Added Ascending and Descending items to the View > Sort By menu.
+- Added support for ',' duplicating '<' and '.' duplicating '>' since they appear below them on many country's keyboard layouts and this helps avoid having to hit the shift key since most of the other keyboard shortcuts handle both upper and lower case.
+- Added a feature to load the web page corresponding to a feed article instead of the text from the RSS feed. 
+- Added a checkbox to the InfoWindow for the feeds to turn this feature on and off.
+- Added a new class ProgressTextCell to draw a progress indicator while the web page is loading since this will no longer be instantaneous.
+- Added menu items for Use Current Style for Articles and Use Web Page for Articles to make the new web page article feature more discoverable.
+- Moved the folder-specific Get Info... and Unsubscribe to Feed menu items to the folder menu with the other folder-specific items.
+- Fixed a bug where a folder's InfoWindow was not updating if you changed a flag via the menu item via the Unsubscribe or Use Web Page for Articles menu items.
+- Added support for Open Page in Safari (Preferred Browser) and Copy Page Link to Clipboard context menu items for the new web-page based articles.
+- Added a new single-key keyboard shortcut for the letter 'b' or 'B' that takes you to the beginning of the unread articles.
+- Fixed a bug where the activity window detail text always listed a spurious HTTP Redirect for every single URL.
+- Updated the Activity Window redirect logging to include the HTTP code for the redirect.
+- Fixed bug where changes to the subscription in the InfoWindow were not saved when the window was closed.
+- Fixed bug where edits to the subscription from the Folder menu were not reflected in open InfoWindows.
 
 2.5.1.2502
 ----------
