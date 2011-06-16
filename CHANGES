@@ -24,6 +24,7 @@ Thanks!
 - Updated the Activity Window redirect logging to include the HTTP code for the redirect.
 - Fixed bug where changes to the subscription in the InfoWindow were not saved when the window was closed.
 - Fixed bug where edits to the subscription from the Folder menu were not reflected in open InfoWindows.
+- Open Article Page now handles multiple selections both in the built-in browser and in the external browser. Articles opened are also automatically marked as read. Thanks to Jan for the code contribution.
 
 2.5.1.2502
 ----------
