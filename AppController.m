@@ -122,6 +122,27 @@ static const int MA_StatusBarHeight = 23;
 static io_connect_t root_port;
 static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
+OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground);
+
+
+OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground) 
+{
+	OSStatus err;
+	
+	if (urls == NULL)
+        urls = CFArrayCreate(NULL, NULL, 0, NULL);
+	LSLaunchFlags flags = (kLSLaunchNoParams);
+	
+	if (openLinksInBackground) {
+		flags |= kLSLaunchDontSwitch;
+	}
+	
+	LSApplicationParameters launchParams = {0, flags, NULL, NULL, NULL, NULL, NULL};
+    err = LSOpenURLsWithRole(urls, kLSRolesAll, NULL, &launchParams, NULL, 0);
+	return err;
+}
+
+
 @implementation AppController
 
 /* init
@@ -2380,10 +2401,83 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	if ([articleArray count] > 0) 
 	{
+		Preferences * prefs = [Preferences standardPreferences];
+		
+		// Launch in the foreground or background as needed
+		BOOL openLinksInBackground = [prefs openLinksInBackground];
+		
+		NSMutableArray *urls = [NSMutableArray arrayWithCapacity:[articleArray count]];
+		
 		for (currentArticle in articleArray)
 		{
 			if (currentArticle && ![[currentArticle link] isBlank])
-				[self openURLFromString:[currentArticle link] inPreferredBrowser:usePreferredBrowser];
+				[urls addObject:[NSURL URLWithString:[currentArticle link]]];
+		}
+		
+		// CHANGEME: mark articles that were successfully opened as read
+#define URL_COUNT_TO_OPEN_IN_ONE_GO	4
+        
+		double delayTime = 1.0;
+		BOOL initialDelay = NO;
+
+		NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
+
+		NSUInteger i;
+		for (i = 0; i < [urls count]; i += URL_COUNT_TO_OPEN_IN_ONE_GO)
+        {
+            NSRange theRange;
+
+			theRange.location = i;
+			theRange.length = (([urls count]-i) >= URL_COUNT_TO_OPEN_IN_ONE_GO) ? URL_COUNT_TO_OPEN_IN_ONE_GO : ([urls count]-i);
+			if (theRange.length > 0)
+            {
+                OSStatus err = noErr;
+				BOOL openedSuccessfully = NO;
+                NSUInteger c;
+				
+				for (c = 0; c < 10; c++)
+                {
+					if (initialDelay || (err == errAETimeout))
+                    {
+						// CHANGEME: check if the target app is responsive.
+						if (err == errAETimeout)
+							delayTime *= 2.0;
+
+						//NSLog(@"Delaying next try for %f seconds.", delayTime);
+						[runLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:delayTime]];
+					}
+
+                    NSArray * urlSlice = [urls subarrayWithRange:theRange];
+					err = openURLs((CFArrayRef)urlSlice, openLinksInBackground);
+					
+					if (err == noErr)
+                    {
+						NSLog(@"Successfully opened %lu URL(s).", (unsigned long)theRange.length);
+						openedSuccessfully = YES;
+						break;
+					}
+					else if (err == errAETimeout)
+                    {
+						NSLog(@"Failed to opened %lu URL(s): timeout. Trying again.", (unsigned long)theRange.length);
+						initialDelay = YES;
+					}
+					else
+                    {
+						break;
+					}
+
+				}
+				
+				if (!openedSuccessfully)
+                {
+					NSLog(@"Failed to opened %lu URL(s). Giving up.", (unsigned long)theRange.length);
+				}
+				
+			}
+			else
+            {
+				break;
+			}
 		}
 	}
 }
