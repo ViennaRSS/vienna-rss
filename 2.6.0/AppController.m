@@ -2406,17 +2406,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		// Launch in the foreground or background as needed
 		BOOL openLinksInBackground = [prefs openLinksInBackground];
 		
-		NSMutableArray *urls = [NSMutableArray arrayWithCapacity:[articleArray count]];
+        NSMutableArray * articlesWithLinks = [NSMutableArray arrayWithCapacity:[articleArray count]];
+        NSMutableArray * urls = [NSMutableArray arrayWithCapacity:[articleArray count]];
 		
 		for (currentArticle in articleArray)
 		{
 			if (currentArticle && ![[currentArticle link] isBlank])
+            {
+                [articlesWithLinks addObject:currentArticle];
 				[urls addObject:[NSURL URLWithString:[currentArticle link]]];
+            }
 		}
 		
-		// CHANGEME: mark articles that were successfully opened as read
-#define URL_COUNT_TO_OPEN_IN_ONE_GO	4
-        
+#define URL_COUNT_TO_OPEN_IN_ONE_GO     4
+#define DEBUG_LOG_OPEN_MULTIPLE_PAGES	0
+
 		double delayTime = 1.0;
 		BOOL initialDelay = NO;
 
@@ -2452,13 +2456,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					
 					if (err == noErr)
                     {
+                    #if DEBUG_LOG_OPEN_MULTIPLE_PAGES
 						NSLog(@"Successfully opened %lu URL(s).", (unsigned long)theRange.length);
+                    #endif
 						openedSuccessfully = YES;
 						break;
 					}
 					else if (err == errAETimeout)
                     {
+                    #if DEBUG_LOG_OPEN_MULTIPLE_PAGES
 						NSLog(@"Failed to opened %lu URL(s): timeout. Trying again.", (unsigned long)theRange.length);
+                    #endif
 						initialDelay = YES;
 					}
 					else
@@ -2468,9 +2476,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 				}
 				
-				if (!openedSuccessfully)
+				if (openedSuccessfully)
                 {
+                    if (![db readOnly])
+                        [articleController markReadByArray:articlesWithLinks readFlag:YES];
+                }
+                else
+                {
+                #if DEBUG_LOG_OPEN_MULTIPLE_PAGES
 					NSLog(@"Failed to opened %lu URL(s). Giving up.", (unsigned long)theRange.length);
+                #endif
 				}
 				
 			}
