@@ -470,7 +470,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 		[alternateItem setAlternate:YES];
 	}
-	alternateItem = menuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	alternateItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
 	if (alternateItem != nil)
 	{
 		[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
@@ -2370,25 +2370,40 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[self openURLInDefaultBrowser:[NSURL URLWithString:scriptsPage]];
 }
 
-/* viewArticlePage
- * Display the article in the browser.
+/* viewArticlePages inPreferredBrowser
+ * Display the selected articles in a browser.
  */
--(IBAction)viewArticlePage:(id)sender
+-(void)viewArticlePages:(id)sender inPreferredBrowser:(BOOL)usePreferredBrowser
 {
-	Article * theArticle = [self selectedArticle];
-	if (theArticle && ![[theArticle link] isBlank])
-		[self openURLFromString:[theArticle link] inPreferredBrowser:YES];
+	NSArray * articleArray = [mainArticleView markedArticleRange];	
+	Article * currentArticle;
+	
+	if ([articleArray count] > 0) 
+	{
+		for (currentArticle in articleArray)
+		{
+			if (currentArticle && ![[currentArticle link] isBlank])
+				[self openURLFromString:[currentArticle link] inPreferredBrowser:usePreferredBrowser];
+		}
+	}
 }
 
-/* viewArticlePageInAlternateBrowser
- * Display the article in the non-preferred browser.
+/* viewArticlePages
+ * Display the selected articles in the default browser.
  */
--(IBAction)viewArticlePageInAlternateBrowser:(id)sender
+-(IBAction)viewArticlePages:(id)sender
 {
-	Article * theArticle = [self selectedArticle];
-	if (theArticle && ![[theArticle link] isBlank])
-		[self openURLFromString:[theArticle link] inPreferredBrowser:NO];
+	[self viewArticlePages:sender inPreferredBrowser:YES];
 }
+
+/* viewArticlePagesInAlternateBrowser
+ * Display the selected articles in the alternate browser.
+ */
+-(IBAction)viewArticlePagesInAlternateBrowser:(id)sender
+{
+	[self viewArticlePages:sender inPreferredBrowser:NO];
+}
+
 
 /* goForward
  * In article view, forward track through the list of articles displayed. In 
@@ -2561,9 +2576,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else if ([mainWindow firstResponder] == [mainArticleView mainView])
 			{
 				if (flags & NSAlternateKeyMask)
-					[self viewArticlePageInAlternateBrowser:self];
+					[self viewArticlePagesInAlternateBrowser:self];
 				else
-					[self viewArticlePage:self];
+					[self viewArticlePages:self];
 				return YES;
 			}
 			return NO;
@@ -3261,7 +3276,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@", nil), alternateLocation]];
 	}
-	item = menuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	item = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
 	if (item != nil)
 		[item setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation]];
 }
@@ -4074,7 +4089,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
 		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible && isArticleView);
 	}
-	else if ((theAction == @selector(viewArticlePage:)) || (theAction == @selector(viewArticlePageInAlternateBrowser:)))
+	else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:)))
 	{
 		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)

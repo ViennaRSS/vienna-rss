@@ -127,8 +127,8 @@
 -(IBAction)showXMLSource:(id)sender;
 -(IBAction)showAcknowledgements:(id)sender;
 -(IBAction)showViennaHomePage:(id)sender;
--(IBAction)viewArticlePage:(id)sender;
--(IBAction)viewArticlePageInAlternateBrowser:(id)sender;
+-(IBAction)viewArticlePages:(id)sender;
+-(IBAction)viewArticlePagesInAlternateBrowser:(id)sender;
 -(IBAction)openWebElementInNewTab:(id)sender;
 -(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;

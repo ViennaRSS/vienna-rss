@@ -361,8 +361,8 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];
-	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewArticlePage:))];
-	alternateItem = copyOfMenuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewArticlePages:))];
+	alternateItem = copyOfMenuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
 	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];
@@ -450,10 +450,10 @@ static const int MA_Minimum_Article_Pane_Width = 80;
 			[contextualMenuItem setTitle:[mainMenuItem title]];
 		}
 	}
-	mainMenuItem = menuItemWithAction(@selector(viewArticlePageInAlternateBrowser:));
+	mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
 	if (mainMenuItem != nil)
 	{
-		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePageInAlternateBrowser:)];
+		index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
 		if (index >= 0)
 		{
 			contextualMenuItem = [articleListMenu itemAtIndex:index];
