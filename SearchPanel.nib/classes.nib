@@ -1,0 +1,17 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {searchStringChanged = id; }; 
+            CLASS = SearchPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                searchField = NSSearchField; 
+                searchLabel = NSTextField; 
+                searchPanelWindow = NSWindow; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
