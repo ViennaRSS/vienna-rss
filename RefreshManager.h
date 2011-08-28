@@ -22,8 +22,10 @@
 #import "Database.h"
 #import "AsyncConnection.h"
 #import "FeedCredentials.h"
+#import "GRSRefreshOperation.h"
+#import "Constants.h"
 
-@interface RefreshManager : NSObject {
+@interface RefreshManager : NSObject <GRSRefreshDelegate> {
 	int maximumConnections;
 	int countOfNewArticles;
 	NSMutableArray * connectionsArray;
@@ -33,11 +35,19 @@
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
+    NSOperationQueue *operationQueue;
+    SyncTypes syncType;
 }
 
 +(RefreshManager *)sharedManager;
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
--(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+//-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)cancelAll;
 -(int)countOfNewArticles;
 -(int)totalConnections;

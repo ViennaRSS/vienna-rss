@@ -176,6 +176,10 @@ static Preferences * _standardPreferences = nil;
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [[NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]] retain];
+        
+        // Google reader sync
+        syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
+        googleUsername = [[self objectForKey:MAPref_GoogleUsername] retain];
 				
 		if (shouldSaveFeedSource)
 		{
@@ -217,6 +221,7 @@ static Preferences * _standardPreferences = nil;
 	[profilePath release];
 	[feedSourcesFolder release];
 	[searchMethod release];
+    [googleUsername release];
 	[super dealloc];
 }
 
@@ -273,6 +278,10 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShouldSaveFeedSource];
 	[defaultValues setObject:boolNo forKey:MAPref_ShouldSaveFeedSourceBackup];
 	[defaultValues setObject:[NSKeyedArchiver archivedDataWithRootObject:[SearchMethod searchAllArticlesMethod]] forKey:MAPref_SearchMethod];
+    
+    // Google Reader syncing
+    [defaultValues setObject:boolNo forKey:MAPref_SyncGoogleReader];
+    [defaultValues setObject:@"" forKey:MAPref_GoogleUsername];
 	
 	return defaultValues;
 }
@@ -1049,6 +1058,41 @@ static Preferences * _standardPreferences = nil;
 		// Huh, there's a Sources file there, but it's not a directory.
 		NSLog(@"Could not create feed sources folder, because a non-directory file already exists at path '%@'.", feedSourcesFolder);
 	}
+}
+
+#pragma mark -
+#pragma mark Google Reader syncing
+
+-(BOOL)syncGoogleReader 
+{
+    return syncGoogleReader;
+}
+
+-(void)setSyncGoogleReader:(BOOL)flag 
+{
+    if (syncGoogleReader != flag) 
+    {
+		syncGoogleReader = flag;
+		[self setBool:syncGoogleReader forKey:MAPref_SyncGoogleReader];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+	}
+}
+
+-(NSString *)googleUsername 
+{
+    return googleUsername;
+}
+
+-(void)setGoogleUsername:(NSString *)username 
+{
+    if (![googleUsername isEqualToString:username]) 
+    {
+        [username retain];
+        [googleUsername release];
+        googleUsername = username;
+        [self setObject:googleUsername forKey:MAPref_GoogleUsername];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleUsernameChange" object:googleUsername];
+    }
 }
 
 @end

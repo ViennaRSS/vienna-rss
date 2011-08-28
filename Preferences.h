@@ -46,6 +46,7 @@
 	BOOL showStatusBar;
 	BOOL showFilterBar;
 	BOOL shouldSaveFeedSource;
+    BOOL syncGoogleReader;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
@@ -54,10 +55,12 @@
 	NSString * stylesFolder;
 	NSString * pluginsFolder;
 	NSString * feedSourcesFolder;
+    NSString * googleUsername;
 	NSFont * folderFont;
 	NSFont * articleFont;
 	NSArray * articleSortDescriptors;
 	SearchMethod * searchMethod;
+    NSDate * lastGoogleSyncDate;
 }
 
 // Accessor functions
@@ -201,5 +204,14 @@
 // Current search method
 -(SearchMethod *)searchMethod;
 -(void)setSearchMethod:(SearchMethod *)newMethod;
+
+#pragma mark -
+#pragma mark Google reader syncing
+
+-(BOOL)syncGoogleReader;
+-(void)setSyncGoogleReader:(BOOL)flag;
+
+-(NSString *)googleUsername;
+-(void)setGoogleUsername:(NSString *)username;
 
 @end

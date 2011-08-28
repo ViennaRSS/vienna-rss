@@ -19,6 +19,7 @@
 //
 
 #import "NewPreferencesController.h"
+#include <objc/runtime.h>
 
 @interface NewPreferencesController (Private)
 	-(void)selectPane:(NSString *)identifier;
@@ -55,6 +56,9 @@
 	// We get called for all view NIBs, so don't handle those or we'll stack overflow.
 	if (!isPrimaryNib)
 		return;
+    
+    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 	
 	// Load the NIBs using the plist to locate them and build the prefIdentifiersArray
 	// array of identifiers.
@@ -97,6 +101,19 @@
 	
 	// Select the first pane
 	[self selectPane:[prefsIdentifiers objectAtIndex:0]];
+}
+
+-(void)handleGoogleAuthFailed:(NSNotification *)nc
+{    
+    if ([[self window] isVisible]) 
+    {
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Google Authentication Failed"];
+        [alert setInformativeText:@"Please check your Google username and password in Vienna's preferences."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+    }
 }
 
 /* itemForItemIdentifier

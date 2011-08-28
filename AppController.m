@@ -52,6 +52,7 @@
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
+#import "GRSSubscribeOperation.h"
 #import <Sparkle/Sparkle.h>
 #import <WebKit/WebKit.h>
 #import <Growl/GrowlDefines.h>
@@ -164,6 +165,7 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
 		searchString = nil;
+        operationQueue = [[NSOperationQueue alloc] init];
 	}
 	return self;
 }
@@ -434,6 +436,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
+    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 	
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
@@ -1401,6 +1404,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(BOOL)isFilterBarVisible
 {
 	return [filterView superview] != nil;
+}
+
+-(void)handleGoogleAuthFailed:(NSNotification *)nc
+{
+    if ([mainWindow isKeyWindow]) {
+	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:@"Google Authentication Failed"];
+    [alert setInformativeText:@"Please check your Google username and password in Vienna's preferences."];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+    }
 }
 
 /* handleShowFilterBar
@@ -2812,7 +2827,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (isAccessible(urlString))
 		{
 			Folder * folder = [db folderFromID:folderId];
-			[[RefreshManager sharedManager] refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
+			[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
 		}
 	}
 }
@@ -3080,6 +3095,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[foldersTree renameFolder:[foldersTree actualSelection]];
 }
 
+- (void)addFoldersIn:(Folder *)folder toArray:(NSMutableArray *)array 
+{
+    [array addObject:folder];
+    if (IsGroupFolder(folder))
+        for (Folder * f in [db arrayOfFolders:[folder itemId]])
+            [self addFoldersIn:f toArray:array];
+}
+
 /* deleteFolder
  * Delete the current folder.
  */
@@ -3168,8 +3191,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), [folder name]];
 			[self setStatusMessage:deleteStatusMsg persist:NO];
 			
+            // Fetch folders for unsubscribe
+            NSMutableArray * rssFolders = [NSMutableArray array];
+            [self addFoldersIn:folder toArray:rssFolders];
+            
 			// Now call the database to delete the folder.
 			[db deleteFolder:[folder itemId]];
+            
+            // Unsubscribe at Google
+            GRSSubscribeOperation *op = [[GRSSubscribeOperation alloc] init];
+            [op setFolders:rssFolders];
+            [op setSubscribeFlag:NO];
+            [operationQueue addOperation:op];
+            [op release];
 		}
 	}
 	
@@ -3197,6 +3231,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	int count = [selectedFolders count];
 	BOOL doSubscribe = NO;
 	int index;
+    
+    NSMutableArray * rssFolders = [NSMutableArray array];
 	
 	if (count > 0)
 		doSubscribe = IsUnsubscribed([selectedFolders objectAtIndex:0]);
@@ -3204,19 +3240,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
 		int folderID = [folder itemId];
-		
-		if (doSubscribe)
-		{
-			[folder clearFlag:MA_FFlag_Unsubscribed];
-			[[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
-		}
-		else
-		{
-			[folder setFlag:MA_FFlag_Unsubscribed];
-			[[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
-		}
+        
+        [rssFolders addObject:folder];
+
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
 	}
+    
+    GRSSubscribeOperation *op = [[GRSSubscribeOperation alloc] init];
+    [op setFolders:rssFolders];
+    [op setSubscribeFlag:doSubscribe];
+    [operationQueue addOperation:op];
+    [op release];
 }
 
 /* setLoadFullHTMLFlag
@@ -3603,7 +3637,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self handleCheckFrequencyChange:nil];
 	
 	if (![self isConnecting])
-		[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree folders:0] ignoringSubscriptionStatus:NO];		
+		[[RefreshManager sharedManager] refreshSubscriptionsAfterRefreshAll:[foldersTree folders:0] ignoringSubscriptionStatus:NO];		
 }
 
 /* refreshSelectedSubscriptions
@@ -3612,7 +3646,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshSelectedSubscriptions:(id)sender
 {
-	[[RefreshManager sharedManager] refreshSubscriptions:[foldersTree selectedFolders] ignoringSubscriptionStatus:YES];
+	[[RefreshManager sharedManager] refreshSubscriptionsAfterRefresh:[foldersTree selectedFolders] ignoringSubscriptionStatus:YES];
 }
 
 /* cancelAllRefreshesToolbar
@@ -4553,6 +4587,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[searchField release];
 	[sourceWindows release];
 	[searchString release];
+    [operationQueue release];
 	[super dealloc];
 }
 @end

@@ -46,6 +46,7 @@
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
 	Article * articleToPreserve;
+    NSOperationQueue * operationQueue;
 }
 
 // Public functions

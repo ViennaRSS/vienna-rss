@@ -68,6 +68,9 @@ NSString * MAPref_HighestViennaVersionRun = @"HighestViennaVersionRun";
 NSString * MAPref_ShouldSaveFeedSource = @"ShouldSaveFeedSource";
 NSString * MAPref_ShouldSaveFeedSourceBackup = @"ShouldSaveFeedSourceBackup";
 NSString * MAPref_SearchMethod = @"SearchMethod";
+NSString * MAPref_SyncGoogleReader = @"SyncGoogleReader";
+NSString * MAPref_GoogleUsername = @"GoogleUsername";
+NSString * MAPref_GooglePassword = @"GooglePassword";
 
 const int MA_Default_BackTrackQueueSize = 20;
 const int MA_Default_RefreshThreads = 20;
@@ -101,3 +104,6 @@ NSString * MA_PBoardType_RSSSource = @"CorePasteboardFlavorType 0x52535373";
 NSString * MA_PBoardType_RSSItem = @"CorePasteboardFlavorType 0x52535369";
 NSString * MA_PBoardType_url = @"CorePasteboardFlavorType 0x75726C20";
 NSString * MA_PBoardType_urln = @"CorePasteboardFlavorType 0x75726C6E";
+
+// Sync folder separator
+//NSString * MA_Sync_FolderSeparator = @" Ñ ";

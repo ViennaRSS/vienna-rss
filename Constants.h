@@ -69,6 +69,8 @@ extern NSString * MAPref_HighestViennaVersionRun;
 extern NSString * MAPref_ShouldSaveFeedSource;
 extern NSString * MAPref_ShouldSaveFeedSourceBackup;
 extern NSString * MAPref_SearchMethod;
+extern NSString * MAPref_SyncGoogleReader;
+extern NSString * MAPref_GoogleUsername;
 
 extern int MA_Default_BackTrackQueueSize;
 extern int MA_Default_RefreshThreads;
@@ -140,3 +142,20 @@ const AEKeyword DataItemSourceFeedURL;
 #define MA_EmptyTrash_None				0
 #define MA_EmptyTrash_WithoutWarning	1
 #define MA_EmptyTrash_WithWarning		2
+
+// Sync types
+typedef enum {
+    MA_Sync_Subscribe,
+    MA_Sync_Unsubscribe,
+    MA_Sync_Delete,
+    MA_Sync_Merge,
+    MA_Sync_Refresh,
+    MA_Sync_Refresh_All,
+    MA_Sync_NewFromGoogle,
+    MA_Sync_Mark_Read,
+    MA_Sync_Mark_Unread,
+    MA_Sync_Mark_Flagged,
+    MA_Sync_Mark_Unflagged
+} SyncTypes;
+
+//extern NSString * MA_Sync_FolderSeparator;

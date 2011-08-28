@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>1</key>
@@ -21,7 +21,16 @@
 		<string>appearancePrefImage.tiff</string>
 	</dict>
 	<key>3</key>
-	<dict>
+    <dict>
+		<key>Title</key>
+		<string>Syncing</string>
+		<key>ClassName</key>
+		<string>SyncPreferences</string>
+		<key>Image</key>
+		<string>sync.tiff</string>
+	</dict>
+	<key>4</key>
+    <dict>
 		<key>Title</key>
 		<string>Advanced</string>
 		<key>ClassName</key>

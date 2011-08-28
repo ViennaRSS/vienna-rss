@@ -26,6 +26,8 @@
 #import "ArticleFilter.h"
 #import "ArticleRef.h"
 #import "StringExtensions.h"
+#import "GRSMarkReadOperation.h"
+#import "GRSMarkStarredOperation.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -123,6 +125,9 @@
 		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+        
+        operationQueue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
@@ -549,6 +554,12 @@
 	SEL markFlagUndoAction = flagged ? @selector(markUnflagUndo:) : @selector(markFlagUndo:);
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
+    
+    GRSMarkStarredOperation * op = [[GRSMarkStarredOperation alloc] init];
+    [op setArticles:articleArray];
+    [op setStarredFlag:flagged];
+    [operationQueue addOperation:op];
+    [op release];
 	
 	[db beginTransaction];
 	for (Article * theArticle in articleArray)
@@ -609,6 +620,12 @@
 {
 	Database * db = [Database sharedDatabase];
 	int lastFolderId = -1;
+
+    GRSMarkReadOperation *op = [[GRSMarkReadOperation alloc] init];
+    [op setArticles:articleArray];
+    [op setReadFlag:readFlag];
+    [operationQueue addOperation:op];
+    [op release];
 	
 	for (Article * theArticle in articleArray)
 	{
@@ -662,6 +679,13 @@
 	{
 		[theArticle markRead:YES];
 	}
+    
+    GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
+    [op setArticles:folderArrayOfArticles];
+    [op setReadFlag:YES];
+    [operationQueue addOperation:op];
+    [op release];
+    
 	if (refreshFlag)
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
@@ -856,6 +880,11 @@
 	[mainArticleView handleRefreshArticle:nc];
 }
 
+-(void)handleArticleListStateChange:(NSNotification *)nc
+{
+   [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+}
+
 /* handleFolderUpdate
 * Called if a folder content has changed.
 */
@@ -893,6 +922,7 @@
 	[currentArrayOfArticles release];
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
+    [operationQueue release];
 	[super dealloc];
 }
 @end

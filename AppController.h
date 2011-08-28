@@ -99,6 +99,7 @@
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
+    NSOperationQueue *operationQueue;
 }
 
 // Menu action items

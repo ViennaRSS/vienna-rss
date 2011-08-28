@@ -29,6 +29,8 @@
 #import "PopupButton.h"
 #import "ViennaApp.h"
 #import "BrowserView.h"
+#import "GRSSetFolderOperation.h"
+#import "GRSRenameFolderOperation.h"
 
 // Private functions
 @interface FoldersTree (Private)
@@ -49,7 +51,7 @@
 	-(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 	-(void)expandToParent:(TreeNode *)node;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)moveFolders:(NSArray *)array;
+    -(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
 	-(void)enableFoldersRenaming:(id)sender;
 	-(void)enableFoldersRenamingAfterDelay;
 @end
@@ -71,6 +73,7 @@
 		canRenameFolders = NO;
 		folderErrorImage = nil;
 		refreshProgressImage = nil;
+        operationQueue = [[NSOperationQueue alloc] init];
 	}
 	return self;
 }
@@ -153,6 +156,14 @@
 	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
+    [nc addObserver:self selector:@selector(handleGRSFolderChange:) name:@"MA_Notify_GRSFolderChange" object:nil];
+}
+
+-(void)handleGRSFolderChange:(NSNotification *)nc
+{
+    // No need to sync with Google because this is triggered when Google Reader
+    // folder layout has changed. Making a sync call would be redundant.
+    [self moveFolders:[nc object] withGoogleSync:NO];
 }
 
 /* handleFolderFontChange
@@ -1057,7 +1068,17 @@
 		if ([db folderFromName:newName] != nil)
 			runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		else
+        {
+            NSString * oldName = [folder name];
 			[db setFolderName:[folder itemId] newName:newName];
+            
+            GRSRenameFolderOperation * op = [[GRSRenameFolderOperation alloc] init];
+            [op setFolder:folder];
+            [op setOldName:oldName];
+            [op setNewName:newName];
+            [operationQueue addOperation:op];
+            [op release];
+        }
 	}
 }
 
@@ -1185,7 +1206,7 @@
  * the second number is the ID of the parent to which the folder should be moved,
  * the third number is the ID of the folder's new predecessor sibling.
  */
--(BOOL)moveFolders:(NSArray *)array
+-(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync
 {
 	NSAssert(([array count] % 3) == 0, @"Incorrect number of items in array passed to moveFolders");
 	int count = [array count];
@@ -1218,6 +1239,16 @@
 		if ((newPredecessor == nil) || (newPredecessor == newParent))
 			newPredecessorId = 0;
 		int newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
+        
+        if (sync)
+        {
+            GRSSetFolderOperation * op = [[GRSSetFolderOperation alloc] init];
+            [op setFolder:[node folder]];
+            [op setOldParent:[oldParent folder]];
+            [op setNewParent:[newParent folder]];
+            [operationQueue addOperation:op];
+            [op release];
+        }
 		
 		if (newParentId == oldParentId)
 		{
@@ -1377,7 +1408,7 @@
 		}
 
 		// Do the move
-		BOOL result = [self moveFolders:array];
+		BOOL result = [self moveFolders:array withGoogleSync:YES];
 		[array release];
 		return result;
 	}
@@ -1480,6 +1511,7 @@
 	[folderErrorImage release];
 	[refreshProgressImage release];
 	[rootNode release];
+    [operationQueue release];
 	[super dealloc];
 }
 @end

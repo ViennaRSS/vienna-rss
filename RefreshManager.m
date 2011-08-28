@@ -27,6 +27,12 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "ViennaApp.h"
+#import "AGKeychain.h"
+#import "GoogleReader.h"
+#import "Constants.h"
+#import "AppController.h"
+#import "GRSRefreshAllOperation.h"
+#import "GRSRefreshOperation.h"
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
@@ -40,20 +46,20 @@ typedef enum {
 
 // Private functions
 @interface RefreshManager (Private)
-	-(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
-	-(void)refreshFavIcon:(Folder *)folder;
-	-(void)getCredentialsForFolder;
-	-(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
-	-(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag;
-	-(void)pumpSubscriptionRefresh:(Folder *)folder;
-	-(void)pumpFolderIconRefresh:(Folder *)folder;
-	-(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem;
-	-(void)beginRefreshTimer;
-	-(void)refreshPumper:(NSTimer *)aTimer;
-	-(void)addConnection:(AsyncConnection *)conn;
-	-(void)removeConnection:(AsyncConnection *)conn;
-	-(void)folderIconRefreshCompleted:(AsyncConnection *)connector;
-	-(NSString *)getRedirectURL:(NSData *)data;
+-(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
+-(void)refreshFavIcon:(Folder *)folder;
+-(void)getCredentialsForFolder;
+-(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
+-(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag;
+-(void)pumpSubscriptionRefresh:(Folder *)folder;
+-(void)pumpFolderIconRefresh:(Folder *)folder;
+-(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem;
+-(void)beginRefreshTimer;
+-(void)refreshPumper:(NSTimer *)aTimer;
+-(void)addConnection:(AsyncConnection *)conn;
+-(void)removeConnection:(AsyncConnection *)conn;
+-(void)folderIconRefreshCompleted:(AsyncConnection *)connector;
+-(NSString *)getRedirectURL:(NSData *)data;
 @end
 
 // Single refresh item type
@@ -140,7 +146,8 @@ typedef enum {
 		authQueue = [[NSMutableArray alloc] init];
 		hasStarted = NO;
 		statusMessageDuringRefresh = nil;
-
+        operationQueue = [[NSOperationQueue alloc] init];
+        
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
@@ -178,7 +185,7 @@ typedef enum {
 			if ([item folder] == folder)
 				[refreshArray removeObjectAtIndex:index];
 		}
-
+        
 		index = [connectionsArray count];
 		while (--index >= 0)
 		{
@@ -197,9 +204,9 @@ typedef enum {
  * Add the folders specified in the foldersArray to the refreshArray.
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
-{
+{        
 	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
-		
+    
 	for (Folder * folder in foldersArray)
 	{
 		if (IsGroupFolder(folder))
@@ -220,6 +227,63 @@ typedef enum {
 		}
 	}
 	[self beginRefreshTimer];
+}
+
+-(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
+    syncType = MA_Sync_Unsubscribe;
+    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
+}
+    
+-(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
+    syncType = MA_Sync_Subscribe;
+    [GRSOperation setFetchFlag:YES];
+    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
+}
+
+-(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
+    syncType = MA_Sync_Unsubscribe;
+    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
+}
+
+-(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
+    syncType = MA_Sync_Merge;
+    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
+}
+
+-(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
+    syncType = MA_Sync_Refresh;
+    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
+}
+
+- (void)addRSSFoldersIn:(Folder *)folder toArray:(NSMutableArray *)array 
+{
+    if (IsRSSFolder(folder)) [array addObject:folder];
+    else
+    {
+        Database * db = [Database sharedDatabase];
+        for (Folder * f in [db arrayOfFolders:[folder itemId]])
+            [self addRSSFoldersIn:f toArray:array];
+    }
+}
+
+-(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus 
+{   
+    syncType = MA_Sync_Refresh_All;
+    [GRSOperation setFetchFlag:YES];
+    
+    // TODO Looping through folders twice, but need to avoid recursion in refreshSubscriptions. Revisit later?
+    NSMutableArray *rssFolders = [NSMutableArray array];
+    for (Folder *folder in foldersArray) {
+        [self addRSSFoldersIn:folder toArray:rssFolders];
+    }
+    
+    // Bring new subscriptions from Google to Vienna
+    GRSRefreshAllOperation *op = [[GRSRefreshAllOperation alloc] init];
+    [op setFolders:rssFolders];
+    [operationQueue addOperation:op];
+    [op release];
+    
+    [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
 /* refreshFolderIconCacheForSubscriptions
@@ -356,7 +420,7 @@ typedef enum {
 {
 	Folder * folder = (Folder *)[nc object];
 	[authQueue removeObject:folder];
-
+    
 	// Get the next one in the queue, if any
 	[self getCredentialsForFolder];
 }
@@ -425,17 +489,17 @@ typedef enum {
 		RefreshItem * item = [refreshArray objectAtIndex:0];
 		switch ([item type])
 		{
-		case MA_Refresh_NilType:
-			NSAssert(false, @"Uninitialised RefreshItem in refreshArray");
-			break;
-
-		case MA_Refresh_Feed:
-			[self pumpSubscriptionRefresh:[item folder]];
-			break;
-			
-		case MA_Refresh_FavIcon:
-			[self pumpFolderIconRefresh:[item folder]];
-			break;
+            case MA_Refresh_NilType:
+                NSAssert(false, @"Uninitialised RefreshItem in refreshArray");
+                break;
+                
+            case MA_Refresh_Feed:
+                [self pumpSubscriptionRefresh:[item folder]];
+                break;
+                
+            case MA_Refresh_FavIcon:
+                [self pumpFolderIconRefresh:[item folder]];
+                break;
 		}
 		[refreshArray removeObjectAtIndex:0];
 	}
@@ -465,7 +529,7 @@ typedef enum {
 		[self getCredentialsForFolder];
 		return;
 	}
-
+    
 	// The activity log name we use depends on whether or not this folder has a real name.
 	NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
@@ -484,7 +548,7 @@ typedef enum {
 	// Seed the activity log for this feed.
 	[aItem clearDetails];
 	[aItem setStatus:NSLocalizedString(@"Retrieving articles", nil)];
-
+    
 	// Mark the folder as being refreshed. The updating status is not
 	// persistent so we set this directly on the folder rather than
 	// through the database.
@@ -540,7 +604,7 @@ typedef enum {
 	[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 	
 	AsyncConnection * conn = [[AsyncConnection alloc] init];
-
+    
 	@try
 	{
 		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
@@ -561,6 +625,19 @@ typedef enum {
 	}
 }
 
+- (void)syncFinishedForFolder:(Folder *)folder 
+{
+    AppController *controller = [NSApp delegate];
+    
+    // Unread count may have changed
+    [controller setStatusMessage:nil persist:NO];
+    [controller showUnreadCountOnApplicationIconAndWindowTitle];
+    
+    [self setFolderUpdatingFlag:folder flag:NO];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+}
+
 /* folderRefreshCompleted
  * Called when a folder refresh completed.
  */
@@ -569,8 +646,21 @@ typedef enum {
 	Folder * folder = (Folder *)[connector contextData];
 	int folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
-
-	[self setFolderUpdatingFlag:folder flag:NO];
+    
+    if ([[Preferences standardPreferences] syncGoogleReader])
+    {
+        GRSRefreshOperation *op = [[GRSRefreshOperation alloc] init];
+        [op setDelegate:self];
+        [op setFolder:folder];
+        [op setType:syncType];
+        [operationQueue addOperation:op];
+        [op release];
+    } else 
+    {
+        [self syncFinishedForFolder:folder];
+    }
+    
+	//[self setFolderUpdatingFlag:folder flag:NO];
 	if ([connector status] == MA_Connect_NeedCredentials)
 	{
 		if (![authQueue containsObject:folder])
@@ -613,7 +703,7 @@ typedef enum {
 	else if ([connector status] == MA_Connect_Succeeded)
 	{
 		NSData * receivedData = [connector receivedData];
-
+        
 		// Check whether this is an HTML redirect. If so, create a new connection using
 		// the redirect.
 		NSString * redirectURL = [self getRedirectURL:receivedData];
@@ -631,12 +721,12 @@ typedef enum {
 				return;
 			}
 		}
-
+        
 		// Remember the last modified date
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 		if (lastModifiedString != nil)
 			[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
-
+        
 		// Empty data feed is OK if we got HTTP 200
 		int newArticlesFromFeed = 0;	
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
@@ -675,7 +765,7 @@ typedef enum {
 				[self removeConnection:connector];
 				return;
 			}
-
+            
 			// Log number of bytes we received
 			[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 			
@@ -748,14 +838,14 @@ typedef enum {
 				[articleArray addObject:article];
 				[article release];
 			}
-
+            
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0u)
 			{
 				NSArray * guidHistory = [db guidHistoryForFolderId:folderId];
 				
 				[folder clearCache];
-				 // Should we wrap the entire loop or just individual article updates?
+                // Should we wrap the entire loop or just individual article updates?
 				[db beginTransaction];
 				for (Article * article in articleArray)
 				{
@@ -766,7 +856,7 @@ typedef enum {
 			}
 			
 			[db beginTransaction];
-
+            
 			// A notify is only needed if we added any new articles.
 			if ([[folder name] hasPrefix:[Database untitledFeedFolderName]] && ![feedTitle isBlank])
 			{
@@ -774,16 +864,16 @@ typedef enum {
 				// BUGBUG: This duplicates logic in database.m so consider moving it there.
 				NSString * oldFeedTitle = feedTitle;
 				unsigned int index = 1;
-
+                
 				while (([db folderFromName:feedTitle]) != nil)
 					feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
-
+                
 				[[connector aItem] setName:feedTitle];
 				[db setFolderName:folderId newName:feedTitle];
 			}
 			if (feedDescription != nil)
 				[db setFolderDescription:folderId newDescription:feedDescription];
-
+            
 			if (feedLink!= nil)
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 			
@@ -792,7 +882,7 @@ typedef enum {
 			// Let interested callers know that the folder has changed.
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 		}
-
+        
 		// Mark the feed as succeeded
 		[self setFolderErrorFlag:folder flag:NO];
 		
@@ -810,11 +900,11 @@ typedef enum {
 		
 		// Done with this connection
 		[newFeed release];
-
+        
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
 			[self refreshFavIcon:folder];
-
+        
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 	}
@@ -923,10 +1013,10 @@ typedef enum {
 			[iconImage setScalesWhenResized:YES];
 			[iconImage setSize:NSMakeSize(16, 16)];
 			[folder setImage:iconImage];
-
+            
 			// Broadcast a notification since the folder image has now changed
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
-
+            
 			// Log additional details about this.
 			ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
 			NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[folder homePage] baseURL]];
@@ -954,7 +1044,7 @@ typedef enum {
 			hasStarted = YES;
 		}
 	}
-
+    
 }
 
 /* removeConnection
@@ -982,6 +1072,7 @@ typedef enum {
 	[authQueue release];
 	[connectionsArray release];
 	[refreshArray release];
+    [operationQueue release];
 	[super dealloc];
 }
 @end
