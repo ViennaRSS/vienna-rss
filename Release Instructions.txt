@@ -1,0 +1,60 @@
+Steps to release Vienna:
+(Note: I'm using Vienna 2.5.1 as an example in the following steps.)
+
+(1) Check out a fresh working copy from the repository, to make sure there's no crud that goes into the release version. Also, I would suggest not using your home directory to build, because the full path names will appear in the code (do "strings Vienna" on the executable to see). I use "/Users/ReleaseBuilds", for example.
+
+cd /Users/ReleaseBuilds
+svn checkout https://vienna-rss.svn.sourceforge.net/svnroot/vienna-rss/trunk/2.5.0 Vienna2.5.0
+
+(2) Run the build script.
+
+cd Vienna2.5.0/scripts
+
+For stable releases:
+
+./release_vienna.sh
+
+For beta releases:
+
+./release_vienna_beta.sh
+
+(3) Login to SourceForge with your admin account and load <https://sourceforge.net/projects/vienna-rss/files>.
+
+(4) Create a new folder "2.5.1" under "Released Versions" for stable releases or "Test Versions" for beta releases.
+
+(5) Upload "Vienna2.5.1.2502.zip" and "Vienna2.5.1.2502.en-us.zip" from the build\Deployment\Uploads folder to the "2.5.1" folder.
+
+(6) For stable releases, edit the "Properties" of "Vienna2.5.1.2502.zip" and set it as default download for Mac OS X. Don't do this for beta releases!
+
+(7) Verify the downloads.  Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download both new zip files, uncompress them, and the run apps.
+
+(8) Login to the Vienna web site and make a backup of the current changelog file.
+
+sftp <username>,vienna-rss@web.sourceforge.net
+cd htdocs
+
+where <username> is your SourceForge user name. Note that the format is username followed by a comma followed by the project name. This was a recent change to the SourceForge shell access.
+
+For stable releases:
+
+cp changelog.xml changelog.2.5.1.backup.xml
+
+For beta releases:
+
+cp changelog_beta.xml changelog_beta.2.5.1.backup.xml
+
+(9) Upload "changelog.xml" or "changelog_beta.xml" and "noteson2.5.1.2502.html" via ssh or sftp to "/home/groups/v/vi/vienna-rss/htdocs". 
+
+(10) Make sure that minimumSystemVersion is entered correctly in "changelog.xml".
+
+(11) Make sure that the files uploaded in step (9) are group-writable on the server, in case someone else needs to edit them.
+
+chmod g+w changelog.xml noteson2.5.1.2502.html
+
+(12) Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version.  Check again after updating to make sure Sparkle is showing that you have the latest version.
+
+(13) Post an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18>.
+
+(14) Upload "Vienna2.5.1.2502.dSYM.zip" via ssh or sftp to "/home/groups/v/vi/vienna-rss/htdocs/debugging".
+
+(15) Update the svn trunk for the next release.  This requires modifying the files "CHANGES" and "notes.html", as well as increasing BUILD_NUMBER and VIENNA_VERSION_NUMBER in the project build settings.
