@@ -680,12 +680,6 @@
 		[theArticle markRead:YES];
 	}
     
-    GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
-    [op setArticles:folderArrayOfArticles];
-    [op setReadFlag:YES];
-    [operationQueue addOperation:op];
-    [op release];
-    
 	if (refreshFlag)
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
@@ -714,6 +708,12 @@
 			if ([db markFolderRead:folderId])
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
+                
+                GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
+                [op setArticles:[folder articles]];
+                [op setReadFlag:YES];
+                [operationQueue addOperation:op];
+                [op release];
 			}
 		}
 		else
@@ -880,9 +880,13 @@
 	[mainArticleView handleRefreshArticle:nc];
 }
 
+// TODO this is being called too often by sync operations. We should try to avoid
+// querying the database so often. Need to look into having the sync operations know
+// when everything has been completed and only query the database once.
 -(void)handleArticleListStateChange:(NSNotification *)nc
 {
-   [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    //[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
 /* handleFolderUpdate
