@@ -123,6 +123,8 @@
     [googleData release];
     
     [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
 }
 
 -(void)doRefresh
