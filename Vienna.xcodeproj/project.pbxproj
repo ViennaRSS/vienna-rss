@@ -51,7 +51,6 @@
 		668B5CB313E399C30093B887 /* GRSMarkStarredOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B5CB213E399C30093B887 /* GRSMarkStarredOperation.m */; };
 		66A5CDAB13F8410B00DF7A79 /* GRSMergeOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A5CDAA13F8410B00DF7A79 /* GRSMergeOperation.m */; };
 		66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
-		66A6B6AB13E80FE5001DD79C /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 66A6B6AA13E80FE5001DD79C /* GTMNSString+HTML.m */; };
 		66CD628913E4A33D007AD2B7 /* GRSSubscribeOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CD628813E4A33D007AD2B7 /* GRSSubscribeOperation.m */; };
 		66EA017613EA2DB4007EDEAF /* GRSRenameFolderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA017513EA2DB4007EDEAF /* GRSRenameFolderOperation.m */; };
 		66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
@@ -414,9 +413,6 @@
 		66A5CDA913F8410B00DF7A79 /* GRSMergeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSMergeOperation.h; sourceTree = "<group>"; };
 		66A5CDAA13F8410B00DF7A79 /* GRSMergeOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSMergeOperation.m; sourceTree = "<group>"; };
 		66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncMerge.xib; sourceTree = "<group>"; };
-		66A6B6A913E80FE5001DD79C /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
-		66A6B6AA13E80FE5001DD79C /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
-		66A6B6AC13E8100C001DD79C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		66CD628713E4A33D007AD2B7 /* GRSSubscribeOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSSubscribeOperation.h; sourceTree = "<group>"; };
 		66CD628813E4A33D007AD2B7 /* GRSSubscribeOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSSubscribeOperation.m; sourceTree = "<group>"; };
 		66EA017413EA2DB4007EDEAF /* GRSRenameFolderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSRenameFolderOperation.h; sourceTree = "<group>"; };
@@ -1041,7 +1037,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				66A6B6A713E80F61001DD79C /* Google Toolbox */,
 				66FC94EF13CFE07700F768DC /* AGKeychain */,
 				662468AE13C609F900C85417 /* JSONKit */,
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
@@ -1311,16 +1306,6 @@
 				662468B013C60A2800C85417 /* JSONKit.m */,
 			);
 			name = JSONKit;
-			sourceTree = "<group>";
-		};
-		66A6B6A713E80F61001DD79C /* Google Toolbox */ = {
-			isa = PBXGroup;
-			children = (
-				66A6B6AC13E8100C001DD79C /* GTMDefines.h */,
-				66A6B6A913E80FE5001DD79C /* GTMNSString+HTML.h */,
-				66A6B6AA13E80FE5001DD79C /* GTMNSString+HTML.m */,
-			);
-			name = "Google Toolbox";
 			sourceTree = "<group>";
 		};
 		66FC94EF13CFE07700F768DC /* AGKeychain */ = {
@@ -2362,7 +2347,6 @@
 				66CD628913E4A33D007AD2B7 /* GRSSubscribeOperation.m in Sources */,
 				6615BE3213E4A88A00BCCDEE /* GRSRefreshAllOperation.m in Sources */,
 				6615BE3613E4AE9D00BCCDEE /* GRSRefreshOperation.m in Sources */,
-				66A6B6AB13E80FE5001DD79C /* GTMNSString+HTML.m in Sources */,
 				66EA017613EA2DB4007EDEAF /* GRSRenameFolderOperation.m in Sources */,
 				66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */,
 				66A5CDAB13F8410B00DF7A79 /* GRSMergeOperation.m in Sources */,

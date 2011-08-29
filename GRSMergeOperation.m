@@ -113,6 +113,8 @@
             }
         }
         
+        [googleReader loadSubscriptions];
+        
         // Manually refresh
         GRSRefreshOperation * op = [[GRSRefreshOperation alloc] init];
         [op setFolder:f];

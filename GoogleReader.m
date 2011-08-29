@@ -63,7 +63,7 @@ static NSString * ClientName =@"scroll";
 
 -(void)requestFinished:(ASIHTTPRequest *)request
 {
-    NSLog(@"HTTP response status code: %d", [request responseStatusCode]);
+    NSLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request url] absoluteString]);
 }
 
 -(BOOL)isAuthenticated
@@ -207,7 +207,7 @@ static NSString * ClientName =@"scroll";
     [request setPostValue:token forKey:@"T"];
     [request setDelegate:self];
     [request startSynchronous];
-        NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
+    NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
 }
 
 -(void)renameFeed:(NSString *)feedURL to:(NSString *)newName
