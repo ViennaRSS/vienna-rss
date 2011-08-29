@@ -10,7 +10,6 @@
 #import "GoogleReader.h"
 #import "Preferences.h"
 #import "AGKeychain.h"
-#import "GTMNSString+HTML.h"
 #import "Database.h"
 
 @implementation GRSOperation
