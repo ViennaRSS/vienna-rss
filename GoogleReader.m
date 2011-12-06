@@ -13,7 +13,7 @@
 
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
-static NSString * LoginBaseURL = @"https://www.google.com/accounts/ClientLogin?accountType=GOOGLE&service=reader&Email=%@&Passwd=%@";
+static NSString * LoginBaseURL = @"https://www.google.com/accounts/ClientLogin?service=reader&Email=%@&Passwd=%@";
 static NSString * APIBaseURL = @"http://www.google.com/reader/api/0/";
 static NSString * ClientName =@"scroll";
 

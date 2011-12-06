@@ -404,15 +404,15 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 {
 	NSMutableString * newString = [NSMutableString stringWithString:theString];
 	BOOL hasOneTag = NO;
-	int tagStartIndex = 0;
+	NSUInteger tagStartIndex = 0;
 
 	while ((tagStartIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound)
 	{
-		int tagEndIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
+		NSUInteger tagEndIndex = [newString indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
 		if (tagEndIndex == NSNotFound)
 			break;
 
-		int tagLength = (tagEndIndex - tagStartIndex) + 1;
+		NSUInteger tagLength = (tagEndIndex - tagStartIndex) + 1;
 		NSString * tagName = [newString substringWithRange:NSMakeRange(tagStartIndex + 1, tagLength - 2)];
 		NSString * replacementString = nil;
 

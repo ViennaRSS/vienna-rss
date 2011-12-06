@@ -163,7 +163,7 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(NSString *)articleTextFromArray:(NSArray *)msgArray
 {
-	int index;
+	NSUInteger index;
 	
 	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head>"];
 	if (cssStylesheet != nil)

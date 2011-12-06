@@ -121,7 +121,7 @@
 		[activityDetail setString:@""];
 	else
 	{
-		unsigned int rowToSelect = [allItems indexOfObject:selectedItem];
+		NSUInteger rowToSelect = [allItems indexOfObject:selectedItem];
 		if (rowToSelect != NSNotFound)
 		{
 			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowToSelect];
@@ -159,7 +159,7 @@
  * Datasource for the table view. Return the total number of rows we'll display which
  * is equivalent to the number of log items.
  */
--(int)numberOfRowsInTableView:(NSTableView *)aTableView
+-(NSUInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
 	return [allItems count];
 }
@@ -189,7 +189,7 @@
 /* objectValueForTableColumn [datasource]
  * Called by the table view to obtain the object at the specified column and row.
  */
--(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+-(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSUInteger)rowIndex
 {
 	ActivityItem * item = [allItems objectAtIndex:rowIndex];
 	return ([aTableColumn identifier]) ? [item valueForKey:[aTableColumn identifier]] : @"";

@@ -236,7 +236,7 @@
 		[prefs setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
 		NSSortDescriptor * sortDescriptor;
 		NSDictionary * specifier = [articleSortSpecifiers valueForKey:sortColumnIdentifier];
-		unsigned int index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
+		NSUInteger index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
 
 		if (index == NSNotFound)
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];

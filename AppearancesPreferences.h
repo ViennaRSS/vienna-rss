@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppearancesPreferences : NSWindowController
+@interface AppearancesPreferences : NSWindowController <NSWindowDelegate>
 {
 	IBOutlet NSTextField * articleFontSample;
 	IBOutlet NSTextField * folderFontSample;

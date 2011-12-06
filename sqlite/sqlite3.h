@@ -204,7 +204,7 @@ typedef struct sqlite3 sqlite3;
 ** KEYWORDS: sqlite_int64 sqlite_uint64
 **
 ** Because there is no cross-platform way to specify 64-bit integer types
-** SQLite includes typedefs for 64-bit signed and unsigned integers.
+** SQLite includes typedefs for 64-bit signed and NSUInteger egers.
 **
 ** The sqlite3_int64 and sqlite3_uint64 are the preferred type definitions.
 ** The sqlite_int64 and sqlite_uint64 types are supported for backwards

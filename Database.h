@@ -47,71 +47,71 @@
 +(Database *)sharedDatabase;
 -(BOOL)initDatabase:(NSString *)databaseFileName;
 -(void)syncLastUpdate;
--(int)databaseVersion;
+-(NSInteger)databaseVersion;
 -(void)beginTransaction;
 -(void)commitTransaction;
 -(void)compactDatabase;
--(int)countOfUnread;
+-(NSInteger)countOfUnread;
 -(BOOL)readOnly;
 -(void)close;
 
 // Fields functions
--(void)addField:(NSString *)name type:(int)type tag:(int)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(int)width;
+-(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;
 -(NSArray *)arrayOfFields;
 -(Field *)fieldByName:(NSString *)name;
 
 // Folder functions
 -(void)initFolderArray;
--(int)firstFolderId;
--(int)trashFolderId;
--(int)searchFolderId;
+-(NSInteger)firstFolderId;
+-(NSInteger)trashFolderId;
+-(NSInteger)searchFolderId;
 -(NSArray *)arrayOfAllFolders;
--(NSArray *)arrayOfFolders:(int)parentId;
--(Folder *)folderFromID:(int)wantedId;
+-(NSArray *)arrayOfFolders:(NSInteger)parentId;
+-(Folder *)folderFromID:(NSInteger)wantedId;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromName:(NSString *)wantedName;
--(int)addFolder:(int)parentId afterChild:(int)predecessorId folderName:(NSString *)name type:(int)type canAppendIndex:(BOOL)canAppendIndex;
--(BOOL)deleteFolder:(int)folderId;
--(BOOL)setFolderName:(int)folderId newName:(NSString *)newName;
--(BOOL)setFolderDescription:(int)folderId newDescription:(NSString *)newDescription;
--(BOOL)setFolderHomePage:(int)folderId newHomePage:(NSString *)newLink;
--(BOOL)setFolderFeedURL:(int)folderId newFeedURL:(NSString *)newFeedURL;
--(BOOL)setFolderUsername:(int)folderId newUsername:(NSString *)name;
+-(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
+-(BOOL)deleteFolder:(NSInteger)folderId;
+-(BOOL)setFolderName:(NSInteger)folderId newName:(NSString *)newName;
+-(BOOL)setFolderDescription:(NSInteger)folderId newDescription:(NSString *)newDescription;
+-(BOOL)setFolderHomePage:(NSInteger)folderId newHomePage:(NSString *)newLink;
+-(BOOL)setFolderFeedURL:(NSInteger)folderId newFeedURL:(NSString *)newFeedURL;
+-(BOOL)setFolderUsername:(NSInteger)folderId newUsername:(NSString *)name;
 -(void)purgeDeletedArticles;
--(void)purgeArticlesOlderThanDays:(int)daysToKeep;
--(BOOL)markFolderRead:(int)folderId;
--(void)clearFolderFlag:(int)folderId flagToClear:(unsigned int)flag;
--(void)setFolderFlag:(int)folderId flagToSet:(unsigned int)flag;
--(void)setFolderUnreadCount:(Folder *)folder adjustment:(int)adjustment;
--(void)setFolderLastUpdate:(int)folderId lastUpdate:(NSDate *)lastUpdate;
--(void)setFolderLastUpdateString:(int)folderId lastUpdateString:(NSString *)lastUpdateString;
--(BOOL)setParent:(int)newParentID forFolder:(int)folderId;
--(BOOL)setFirstChild:(int)childId forFolder:(int)folderId;
--(BOOL)setNextSibling:(int)nextSiblingId forFolder:(int)folderId;
+-(void)purgeArticlesOlderThanDays:(NSUInteger)daysToKeep;
+-(BOOL)markFolderRead:(NSInteger)folderId;
+-(void)clearFolderFlag:(NSInteger)folderId flagToClear:(NSUInteger)flag;
+-(void)setFolderFlag:(NSInteger)folderId flagToSet:(NSUInteger)flag;
+-(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment;
+-(void)setFolderLastUpdate:(NSInteger)folderId lastUpdate:(NSDate *)lastUpdate;
+-(void)setFolderLastUpdateString:(NSInteger)folderId lastUpdateString:(NSString *)lastUpdateString;
+-(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId;
+-(BOOL)setFirstChild:(NSInteger)childId forFolder:(NSInteger)folderId;
+-(BOOL)setNextSibling:(NSUInteger)nextSiblingId forFolder:(NSInteger)folderId;
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification;
 
 // RSS folder functions
 +(NSString *)untitledFeedFolderName;
--(int)addRSSFolder:(NSString *)feedName underParent:(int)parentId afterChild:(int)predecessorId subscriptionURL:(NSString *)url;
+-(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url;
 
 // Search folder functions
 -(void)setSearchString:(NSString *)newSearchString;
 
 // Smart folder functions
 -(void)initSmartfoldersDict;
--(int)addSmartFolder:(NSString *)folderName underParent:(int)parentId withQuery:(CriteriaTree *)criteriaTree;
--(BOOL)updateSearchFolder:(int)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
--(CriteriaTree *)searchStringForSmartFolder:(int)folderId;
+-(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
+-(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
+-(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
--(BOOL)createArticle:(int)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory;
--(BOOL)deleteArticle:(int)folderId guid:(NSString *)guid;
--(NSArray *)arrayOfUnreadArticles:(int)folderId;
--(NSArray *)arrayOfArticles:(int)folderId filterString:(NSString *)filterString;
--(void)markArticleRead:(int)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
--(void)markArticleFlagged:(int)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
--(void)markArticleDeleted:(int)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
+-(BOOL)createArticle:(NSInteger)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory;
+-(BOOL)deleteArticle:(NSInteger)folderId guid:(NSString *)guid;
+-(NSArray *)arrayOfUnreadArticles:(NSInteger)folderId;
+-(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
+-(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
+-(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
+-(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 -(BOOL)isTrashEmpty;
--(NSArray *)guidHistoryForFolderId:(int)folderId;
+-(NSArray *)guidHistoryForFolderId:(NSInteger)folderId;
 @end

@@ -269,7 +269,7 @@
 				int row = [outlineView rowForItem:node];
 				if (row >= 0)
 				{
-					NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(unsigned int)row];
+					NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(NSUInteger )row];
 					[outlineView selectRowIndexes:indexes byExtendingSelection:YES];
 				}
 			}
@@ -307,10 +307,10 @@
 		int nextChildId = (node == rootNode) ? [[Database sharedDatabase] firstFolderId] : [[node folder] firstChildId];
 		while (nextChildId > 0)
 		{
-			unsigned int listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
+			NSUInteger  listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
 			if (listIndex == NSNotFound)
 			{
-				NSLog(@"Cannot find child with id %i for folder with id %i", nextChildId, [node nodeId]);
+				NSLog(@"Cannot find child with id %i for folder with id %ld", nextChildId, [node nodeId]);
 				return NO;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
@@ -441,7 +441,7 @@
 	if (rowIndex >= 0)
 	{
 		blockSelectionHandler = YES;
-		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)rowIndex] byExtendingSelection:NO];
+		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger )rowIndex] byExtendingSelection:NO];
 		[outlineView scrollRowToVisible:rowIndex];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
@@ -565,14 +565,14 @@
 -(NSArray *)selectedFolders
 {
 	NSIndexSet * rowIndexes = [outlineView selectedRowIndexes];
-	unsigned int count = [rowIndexes count];
+	NSUInteger count = [rowIndexes count];
 	
 	// Make a mutable array
 	NSMutableArray * arrayOfSelectedFolders = [NSMutableArray arrayWithCapacity:count];
 
-	if (count > 0u)
+	if (count > 0)
 	{
-		unsigned int index = [rowIndexes firstIndex];
+		NSUInteger index = [rowIndexes firstIndex];
 		while (index != NSNotFound)
 		{
 			TreeNode * node = [outlineView itemAtRow:index];
@@ -744,7 +744,7 @@
 		if (row >= 0)
 		{
 			blockSelectionHandler = YES;
-			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(unsigned int)row];
+			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(NSUInteger )row];
 			[outlineView selectRowIndexes:indexes byExtendingSelection:NO];
 			[outlineView scrollRowToVisible:row];
 			blockSelectionHandler = NO;
@@ -818,7 +818,7 @@
 	{
 		// Select the row under the cursor if it isn't already selected
 		if ([olv numberOfSelectedRows] <= 1)
-			[olv selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)row] byExtendingSelection:NO];
+			[olv selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger )row] byExtendingSelection:NO];
 	}
 }
 
@@ -1002,7 +1002,7 @@
 	
 	if (rowIndex != -1)
 	{
-		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(unsigned int)rowIndex] byExtendingSelection:NO];
+		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger )rowIndex] byExtendingSelection:NO];
 		[outlineView editColumn:[outlineView columnWithIdentifier:@"folderColumns"] row:rowIndex withEvent:nil select:YES];
 	}
 }

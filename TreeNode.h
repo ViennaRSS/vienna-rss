@@ -28,32 +28,32 @@
 	TreeNode * parentNode;
 	NSMutableArray * children;
 	Folder * folder;
-	int nodeId;
+	NSInteger nodeId;
 	BOOL canHaveChildren;
 	
 	NSProgressIndicator * progressIndicator;
 }
 
 // Accessor functions
--(id)init:(TreeNode *)parentNode atIndex:(int)insertIndex folder:(Folder *)folder canHaveChildren:(BOOL)childflag;
+-(id)init:(TreeNode *)parentNode atIndex:(NSInteger)insertIndex folder:(Folder *)folder canHaveChildren:(BOOL)childflag;
 -(void)setParentNode:(TreeNode *)parent;
 -(void)setFolder:(Folder *)newFolder;
 -(TreeNode *)parentNode;
 -(TreeNode *)nextSibling;
 -(TreeNode *)firstChild;
--(void)addChild:(TreeNode *)child atIndex:(int)insertIndex;
+-(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex;
 -(void)removeChildren;
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
--(void)sortChildren:(int)sortMethod;
+-(void)sortChildren:(NSInteger)sortMethod;
 -(NSString *)nodeName;
 -(TreeNode *)childByName:(NSString *)childName;
--(TreeNode *)childByIndex:(int)index;
--(int)indexOfChild:(TreeNode *)node;
--(TreeNode *)nodeFromID:(int)n;
+-(TreeNode *)childByIndex:(NSInteger)index;
+-(NSInteger)indexOfChild:(TreeNode *)node;
+-(TreeNode *)nodeFromID:(NSInteger)n;
 -(Folder *)folder;
--(int)nodeId;
--(void)setNodeId:(int)n;
--(int)countOfChildren;
+-(NSInteger)nodeId;
+-(void)setNodeId:(NSInteger)n;
+-(NSUInteger)countOfChildren;
 -(void)setCanHaveChildren:(BOOL)childflag;
 -(BOOL)canHaveChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;

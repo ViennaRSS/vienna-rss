@@ -25,7 +25,7 @@
 #import "StringExtensions.h"
 
 @interface NSObject (TabbedWebViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @end
 
 @interface TabbedWebView (Private)
@@ -214,7 +214,7 @@
 		}
 
 		// For anything else, we open in a new tab or in the external browser.
-		unsigned int modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
+		NSUInteger  modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
 		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
 		[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
@@ -231,7 +231,7 @@
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	unsigned int modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
+	NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
 	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 	
 	if (navType == WebNavigationTypeLinkClicked)

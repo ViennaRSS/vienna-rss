@@ -21,6 +21,6 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSArray (ArrayExtensions)
-	-(int)indexOfStringInArray:(NSString *)theString;
+	-(NSUInteger)indexOfStringInArray:(NSString *)theString;
 	+(NSArray *)arrayByExpandingAllArrayObjects:(id)id1, ...;
 @end

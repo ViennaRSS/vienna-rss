@@ -208,7 +208,7 @@
 #endif
 
 /* Maximum page size.  The upper bound on this value is 32768.  This a limit
-** imposed by the necessity of storing the value in a 2-byte unsigned integer
+** imposed by the necessity of storing the value in a 2-byte unsigned int eger
 ** and the fact that the page size must be a power of 2.
 **
 ** If this limit is changed, then the compiled library is technically
@@ -728,7 +728,7 @@ typedef struct sqlite3 sqlite3;
 ** KEYWORDS: sqlite_int64 sqlite_uint64
 **
 ** Because there is no cross-platform way to specify 64-bit integer types
-** SQLite includes typedefs for 64-bit signed and unsigned integers.
+** SQLite includes typedefs for 64-bit signed and unsigned int egers.
 **
 ** The sqlite3_int64 and sqlite3_uint64 are the preferred type definitions.
 ** The sqlite_int64 and sqlite_uint64 types are supported for backwards
@@ -6232,8 +6232,8 @@ typedef struct HashElem HashElem;
 ** the hash table.
 */
 struct Hash {
-  unsigned int htsize;      /* Number of buckets in the hash table */
-  unsigned int count;       /* Number of entries in this table */
+  unsigned int  htsize;      /* Number of buckets in the hash table */
+  unsigned int  count;       /* Number of entries in this table */
   HashElem *first;          /* The first element of the array */
   struct _ht {              /* the hash table */
     int count;                 /* Number of entries with this hash */
@@ -6552,7 +6552,7 @@ SQLITE_PRIVATE void sqlite3HashClear(Hash*);
 # ifdef HAVE_UINT32_T
 #  define UINT32_TYPE uint32_t
 # else
-#  define UINT32_TYPE unsigned int
+#  define UINT32_TYPE unsigned int 
 # endif
 #endif
 #ifndef UINT16_TYPE
@@ -6587,11 +6587,11 @@ SQLITE_PRIVATE void sqlite3HashClear(Hash*);
 # define LONGDOUBLE_TYPE long double
 #endif
 typedef sqlite_int64 i64;          /* 8-byte signed integer */
-typedef sqlite_uint64 u64;         /* 8-byte unsigned integer */
-typedef UINT32_TYPE u32;           /* 4-byte unsigned integer */
-typedef UINT16_TYPE u16;           /* 2-byte unsigned integer */
+typedef sqlite_uint64 u64;         /* 8-byte unsigned int eger */
+typedef UINT32_TYPE u32;           /* 4-byte unsigned int eger */
+typedef UINT16_TYPE u16;           /* 2-byte unsigned int eger */
 typedef INT16_TYPE i16;            /* 2-byte signed integer */
-typedef UINT8_TYPE u8;             /* 1-byte unsigned integer */
+typedef UINT8_TYPE u8;             /* 1-byte unsigned int eger */
 typedef INT8_TYPE i8;              /* 1-byte signed integer */
 
 /*
@@ -8962,7 +8962,7 @@ struct IndexSample {
 */
 struct Token {
   const char *z;     /* Text of the token.  Not NULL-terminated! */
-  unsigned int n;    /* Number of characters in this token */
+  unsigned int  n;    /* Number of characters in this token */
 };
 
 /*
@@ -10091,7 +10091,7 @@ SQLITE_PRIVATE void sqlite3BitvecDestroy(Bitvec*);
 SQLITE_PRIVATE u32 sqlite3BitvecSize(Bitvec*);
 SQLITE_PRIVATE int sqlite3BitvecBuiltinTest(int,int*);
 
-SQLITE_PRIVATE RowSet *sqlite3RowSetInit(sqlite3*, void*, unsigned int);
+SQLITE_PRIVATE RowSet *sqlite3RowSetInit(sqlite3*, void*, unsigned int );
 SQLITE_PRIVATE void sqlite3RowSetClear(RowSet*);
 SQLITE_PRIVATE void sqlite3RowSetInsert(RowSet*, i64);
 SQLITE_PRIVATE int sqlite3RowSetTest(RowSet*, u8 iBatch, i64);
@@ -12834,7 +12834,7 @@ static int sqlite3MemRoundup(int n){
 ** to clear the content of a freed allocation to unpredictable values.
 */
 static void randomFill(char *pBuf, int nByte){
-  unsigned int x, y, r;
+  unsigned int  x, y, r;
   x = SQLITE_PTR_TO_INT(pBuf);
   y = nByte | 1;
   while( nByte >= 4 ){
@@ -13009,7 +13009,7 @@ SQLITE_PRIVATE void sqlite3MemdebugBacktraceCallback(void (*xBacktrace)(int, int
 ** Set the title string for subsequent allocations.
 */
 SQLITE_PRIVATE void sqlite3MemdebugSettitle(const char *zTitle){
-  unsigned int n = sqlite3Strlen30(zTitle) + 1;
+  unsigned int  n = sqlite3Strlen30(zTitle) + 1;
   sqlite3_mutex_enter(mem.mutex);
   if( n>=sizeof(mem.zTitle) ) n = sizeof(mem.zTitle)-1;
   memcpy(mem.zTitle, zTitle, n);
@@ -14813,7 +14813,7 @@ static sqlite3_mutex *os2MutexAlloc(int iType){
           mutex = 0;
           rc = DosCreateMutexSem( name, &mutex, 0, FALSE);
           if( rc == NO_ERROR ){
-            unsigned int i;
+            unsigned int  i;
             if( !isInit ){
               for( i = 0; i < sizeof(staticMutexes)/sizeof(staticMutexes[0]); i++ ){
                 DosCreateMutexSem( 0, &staticMutexes[i].mutex, 0, FALSE );
@@ -16704,7 +16704,7 @@ SQLITE_PRIVATE void sqlite3VXPrintf(
           }else if( flag_long ){
             longvalue = va_arg(ap,unsigned long int);
           }else{
-            longvalue = va_arg(ap,unsigned int);
+            longvalue = va_arg(ap,unsigned int );
           }
           prefix = 0;
         }
@@ -18033,7 +18033,7 @@ SQLITE_PRIVATE int sqlite3VdbeMemTranslate(Mem *pMem, u8 desiredEnc){
   unsigned char *zIn;                   /* Input iterator */
   unsigned char *zTerm;                 /* End of input */
   unsigned char *z;                     /* Output iterator */
-  unsigned int c;
+  unsigned int  c;
 
   assert( pMem->db==0 || sqlite3_mutex_held(pMem->db->mutex) );
   assert( pMem->flags&MEM_Str );
@@ -18335,11 +18335,11 @@ SQLITE_PRIVATE int sqlite3Utf16ByteLen(const void *zIn, int nChar){
 ** characters in each encoding are inverses of each other.
 */
 SQLITE_PRIVATE void sqlite3UtfSelfTest(void){
-  unsigned int i, t;
+  unsigned int  i, t;
   unsigned char zBuf[20];
   unsigned char *z;
   int n;
-  unsigned int c;
+  unsigned int  c;
 
   for(i=0; i<0x00110000; i++){
     z = zBuf;
@@ -18866,12 +18866,12 @@ SQLITE_PRIVATE int sqlite3Atoi64(const char *zNum, i64 *pNum){
 }
 
 /*
-** The string zNum represents an unsigned integer.  The zNum string
+** The string zNum represents an unsigned int eger.  The zNum string
 ** consists of one or more digit characters and is terminated by
 ** a zero character.  Any stray characters in zNum result in undefined
 ** behavior.
 **
-** If the unsigned integer that zNum represents will fit in a
+** If the unsigned int eger that zNum represents will fit in a
 ** 64-bit signed integer, return TRUE.  Otherwise return FALSE.
 **
 ** If the negFlag parameter is true, that means that zNum really represents
@@ -19532,7 +19532,7 @@ SQLITE_PRIVATE void sqlite3HashClear(Hash *pH){
 /*
 ** The hashing function.
 */
-static unsigned int strHash(const char *z, int nKey){
+static unsigned int  strHash(const char *z, int nKey){
   int h = 0;
   assert( nKey>=0 );
   while( nKey > 0  ){
@@ -19580,7 +19580,7 @@ static void insertElement(
 ** if the new size is the same as the prior size.
 ** Return TRUE if the resize occurs and false if not.
 */
-static int rehash(Hash *pH, unsigned int new_size){
+static int rehash(Hash *pH, unsigned int  new_size){
   struct _ht *new_ht;            /* The new hash table */
   HashElem *elem, *next_elem;    /* For looping over existing elements */
 
@@ -19605,7 +19605,7 @@ static int rehash(Hash *pH, unsigned int new_size){
   pH->htsize = new_size = sqlite3MallocSize(new_ht)/sizeof(struct _ht);
   memset(new_ht, 0, new_size*sizeof(struct _ht));
   for(elem=pH->first, pH->first=0; elem; elem = next_elem){
-    unsigned int h = strHash(elem->pKey, elem->nKey) % new_size;
+    unsigned int  h = strHash(elem->pKey, elem->nKey) % new_size;
     next_elem = elem->next;
     insertElement(pH, &new_ht[h], elem);
   }
@@ -19620,7 +19620,7 @@ static HashElem *findElementGivenHash(
   const Hash *pH,     /* The pH to be searched */
   const char *pKey,   /* The key we are searching for */
   int nKey,           /* Bytes in key (not counting zero terminator) */
-  unsigned int h      /* The hash for this key. */
+  unsigned int  h      /* The hash for this key. */
 ){
   HashElem *elem;                /* Used to loop thru the element list */
   int count;                     /* Number of elements left to test */
@@ -19648,7 +19648,7 @@ static HashElem *findElementGivenHash(
 static void removeElementGivenHash(
   Hash *pH,         /* The pH containing "elem" */
   HashElem* elem,   /* The element to be removed from the pH */
-  unsigned int h    /* Hash value for the element */
+  unsigned int  h    /* Hash value for the element */
 ){
   struct _ht *pEntry;
   if( elem->prev ){
@@ -19682,7 +19682,7 @@ static void removeElementGivenHash(
 */
 SQLITE_PRIVATE void *sqlite3HashFind(const Hash *pH, const char *pKey, int nKey){
   HashElem *elem;    /* The element that matches key */
-  unsigned int h;    /* A hash on key */
+  unsigned int  h;    /* A hash on key */
 
   assert( pH!=0 );
   assert( pKey!=0 );
@@ -19711,7 +19711,7 @@ SQLITE_PRIVATE void *sqlite3HashFind(const Hash *pH, const char *pKey, int nKey)
 ** element corresponding to "key" is removed from the hash table.
 */
 SQLITE_PRIVATE void *sqlite3HashInsert(Hash *pH, const char *pKey, int nKey, void *data){
-  unsigned int h;       /* the hash of the key modulo hash table size */
+  unsigned int  h;       /* the hash of the key modulo hash table size */
   HashElem *elem;       /* Used to loop thru the element list */
   HashElem *new_elem;   /* New element added to the pH */
 
@@ -20065,7 +20065,7 @@ SQLITE_PRIVATE int sqlite3OSTrace = 0;
   #if defined(__GNUC__)
 
   __inline__ sqlite_uint64 sqlite3Hwtime(void){
-     unsigned int lo, hi;
+     unsigned int  lo, hi;
      __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
      return (sqlite_uint64)hi << 32 | lo;
   }
@@ -21590,7 +21590,7 @@ SQLITE_PRIVATE int sqlite3OSTrace = 0;
   #if defined(__GNUC__)
 
   __inline__ sqlite_uint64 sqlite3Hwtime(void){
-     unsigned int lo, hi;
+     unsigned int  lo, hi;
      __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
      return (sqlite_uint64)hi << 32 | lo;
   }
@@ -25195,7 +25195,7 @@ static int getTempname(int nBuf, char *zBuf){
     "abcdefghijklmnopqrstuvwxyz"
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     "0123456789";
-  unsigned int i, j;
+  unsigned int  i, j;
   struct stat buf;
   const char *zDir = ".";
 
@@ -26088,7 +26088,7 @@ static void proxyGetHostIDPath(char *path, size_t len){
 static int proxyGetHostID(char *pHostID, int *pError){
   int fd;
   char path[MAXPATHLEN]; 
-  size_t len;
+  ssize_t len;
   int rc=SQLITE_OK;
 
   proxyGetHostIDPath(path, MAXPATHLEN);
@@ -26860,7 +26860,7 @@ SQLITE_API int sqlite3_os_init(void){
     UNIXVFS("unix-proxy",    proxyIoFinder ),
 #endif
   };
-  unsigned int i;          /* Loop counter */
+  unsigned int  i;          /* Loop counter */
 
   /* Register all VFSes defined in the aVfs[] array */
   for(i=0; i<(sizeof(aVfs)/sizeof(sqlite3_vfs)); i++){
@@ -27039,7 +27039,7 @@ SQLITE_PRIVATE int sqlite3OSTrace = 0;
   #if defined(__GNUC__)
 
   __inline__ sqlite_uint64 sqlite3Hwtime(void){
-     unsigned int lo, hi;
+     unsigned int  lo, hi;
      __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
      return (sqlite_uint64)hi << 32 | lo;
   }
@@ -29234,7 +29234,7 @@ SQLITE_PRIVATE int sqlite3BitvecSet(Bitvec *p, u32 i){
   /* make our hash too "full".  */
 bitvec_set_rehash:
   if( p->nSet>=BITVEC_MXHASH ){
-    unsigned int j;
+    unsigned int  j;
     int rc;
     u32 *aiValues = sqlite3StackAllocRaw(0, sizeof(p->u.aHash));
     if( aiValues==0 ){
@@ -29278,7 +29278,7 @@ SQLITE_PRIVATE void sqlite3BitvecClear(Bitvec *p, u32 i, void *pBuf){
   if( p->iSize<=BITVEC_NBIT ){
     p->u.aBitmap[i/BITVEC_SZELEM] &= ~(1 << (i&(BITVEC_SZELEM-1)));
   }else{
-    unsigned int j;
+    unsigned int  j;
     u32 *aiValues = pBuf;
     memcpy(aiValues, p->u.aHash, sizeof(p->u.aHash));
     memset(p->u.aHash, 0, sizeof(p->u.aHash));
@@ -29303,7 +29303,7 @@ SQLITE_PRIVATE void sqlite3BitvecClear(Bitvec *p, u32 i, void *pBuf){
 SQLITE_PRIVATE void sqlite3BitvecDestroy(Bitvec *p){
   if( p==0 ) return;
   if( p->iDivisor ){
-    unsigned int i;
+    unsigned int  i;
     for(i=0; i<BITVEC_NPTR; i++){
       sqlite3BitvecDestroy(p->u.apSub[i]);
     }
@@ -30050,19 +30050,19 @@ struct PCache1 {
   */
   int szPage;                         /* Size of allocated pages in bytes */
   int bPurgeable;                     /* True if cache is purgeable */
-  unsigned int nMin;                  /* Minimum number of pages reserved */
-  unsigned int nMax;                  /* Configured "cache_size" value */
+  unsigned int  nMin;                  /* Minimum number of pages reserved */
+  unsigned int  nMax;                  /* Configured "cache_size" value */
 
   /* Hash table of all pages. The following variables may only be accessed
   ** when the accessor is holding the global mutex (see pcache1EnterMutex() 
   ** and pcache1LeaveMutex()).
   */
-  unsigned int nRecyclable;           /* Number of pages in the LRU list */
-  unsigned int nPage;                 /* Total number of pages in apHash */
-  unsigned int nHash;                 /* Number of slots in apHash[] */
+  unsigned int  nRecyclable;           /* Number of pages in the LRU list */
+  unsigned int  nPage;                 /* Total number of pages in apHash */
+  unsigned int  nHash;                 /* Number of slots in apHash[] */
   PgHdr1 **apHash;                    /* Hash table for fast lookup by key */
 
-  unsigned int iMaxKey;               /* Largest key seen since xTruncate() */
+  unsigned int  iMaxKey;               /* Largest key seen since xTruncate() */
 };
 
 /*
@@ -30072,7 +30072,7 @@ struct PCache1 {
 ** macro below).
 */
 struct PgHdr1 {
-  unsigned int iKey;             /* Key value (page number) */
+  unsigned int  iKey;             /* Key value (page number) */
   PgHdr1 *pNext;                 /* Next in hash table chain */
   PCache1 *pCache;               /* Cache that currently owns this page */
   PgHdr1 *pLruNext;              /* Next in LRU list of unpinned pages */
@@ -30279,8 +30279,8 @@ SQLITE_PRIVATE void sqlite3PageFree(void *p){
 */
 static int pcache1ResizeHash(PCache1 *p){
   PgHdr1 **apNew;
-  unsigned int nNew;
-  unsigned int i;
+  unsigned int  nNew;
+  unsigned int  i;
 
   assert( sqlite3_mutex_held(pcache1.mutex) );
 
@@ -30300,7 +30300,7 @@ static int pcache1ResizeHash(PCache1 *p){
       PgHdr1 *pPage;
       PgHdr1 *pNext = p->apHash[i];
       while( (pPage = pNext)!=0 ){
-        unsigned int h = pPage->iKey % nNew;
+        unsigned int  h = pPage->iKey % nNew;
         pNext = pPage->pNext;
         pPage->pNext = apNew[h];
         apNew[h] = pPage;
@@ -30350,7 +30350,7 @@ static void pcache1PinPage(PgHdr1 *pPage){
 ** The global mutex must be held when this function is called.
 */
 static void pcache1RemoveFromHash(PgHdr1 *pPage){
-  unsigned int h;
+  unsigned int  h;
   PCache1 *pCache = pPage->pCache;
   PgHdr1 **pp;
 
@@ -30384,10 +30384,10 @@ static void pcache1EnforceMaxPage(void){
 */
 static void pcache1TruncateUnsafe(
   PCache1 *pCache, 
-  unsigned int iLimit 
+  unsigned int  iLimit 
 ){
-  TESTONLY( unsigned int nPage = 0; )      /* Used to assert pCache->nPage is correct */
-  unsigned int h;
+  TESTONLY( unsigned int  nPage = 0; )      /* Used to assert pCache->nPage is correct */
+  unsigned int  h;
   assert( sqlite3_mutex_held(pcache1.mutex) );
   for(h=0; h<pCache->nHash; h++){
     PgHdr1 **pp = &pCache->apHash[h]; 
@@ -30534,8 +30534,8 @@ static int pcache1Pagecount(sqlite3_pcache *p){
 **
 **   5. Otherwise, allocate and return a new page buffer.
 */
-static void *pcache1Fetch(sqlite3_pcache *p, unsigned int iKey, int createFlag){
-  unsigned int nPinned;
+static void *pcache1Fetch(sqlite3_pcache *p, unsigned int  iKey, int createFlag){
+  unsigned int  nPinned;
   PCache1 *pCache = (PCache1 *)p;
   PgHdr1 *pPage = 0;
 
@@ -30545,7 +30545,7 @@ static void *pcache1Fetch(sqlite3_pcache *p, unsigned int iKey, int createFlag){
 
   /* Search the hash table for an existing entry. */
   if( pCache->nHash>0 ){
-    unsigned int h = iKey % pCache->nHash;
+    unsigned int  h = iKey % pCache->nHash;
     for(pPage=pCache->apHash[h]; pPage&&pPage->iKey!=iKey; pPage=pPage->pNext);
   }
 
@@ -30590,7 +30590,7 @@ static void *pcache1Fetch(sqlite3_pcache *p, unsigned int iKey, int createFlag){
   }
 
   if( pPage ){
-    unsigned int h = iKey % pCache->nHash;
+    unsigned int  h = iKey % pCache->nHash;
     pCache->nPage++;
     pPage->iKey = iKey;
     pPage->pNext = pCache->apHash[h];
@@ -30658,13 +30658,13 @@ static void pcache1Unpin(sqlite3_pcache *p, void *pPg, int reuseUnlikely){
 static void pcache1Rekey(
   sqlite3_pcache *p,
   void *pPg,
-  unsigned int iOld,
-  unsigned int iNew
+  unsigned int  iOld,
+  unsigned int  iNew
 ){
   PCache1 *pCache = (PCache1 *)p;
   PgHdr1 *pPage = PAGE_TO_PGHDR1(pCache, pPg);
   PgHdr1 **pp;
-  unsigned int h; 
+  unsigned int  h; 
   assert( pPage->iKey==iOld );
   assert( pPage->pCache==pCache );
 
@@ -30695,7 +30695,7 @@ static void pcache1Rekey(
 ** or greater than parameter iLimit. Any pinned pages with a page number
 ** equal to or greater than iLimit are implicitly unpinned.
 */
-static void pcache1Truncate(sqlite3_pcache *p, unsigned int iLimit){
+static void pcache1Truncate(sqlite3_pcache *p, unsigned int  iLimit){
   PCache1 *pCache = (PCache1 *)p;
   pcache1EnterMutex();
   if( iLimit<=pCache->iMaxKey ){
@@ -30920,7 +30920,7 @@ struct RowSet {
 ** If N is larger than the minimum, use the surplus as an initial
 ** allocation of entries available to be filled.
 */
-SQLITE_PRIVATE RowSet *sqlite3RowSetInit(sqlite3 *db, void *pSpace, unsigned int N){
+SQLITE_PRIVATE RowSet *sqlite3RowSetInit(sqlite3 *db, void *pSpace, unsigned int  N){
   RowSet *p;
   assert( N >= ROUND8(sizeof(*p)) );
   p = pSpace;
@@ -31036,7 +31036,7 @@ static struct RowSetEntry *rowSetMerge(
 ** Sort all elements on the pEntry list of the RowSet into ascending order.
 */ 
 static void rowSetSort(RowSet *p){
-  unsigned int i;
+  unsigned int  i;
   struct RowSetEntry *pEntry;
   struct RowSetEntry *aBucket[40];
 
@@ -32572,7 +32572,7 @@ static int pager_end_transaction(Pager *pPager, int hasMaster){
 ** This is not a real checksum. It is really just the sum of the 
 ** random initial value (pPager->cksumInit) and every 200th byte
 ** of the page data, starting with byte offset (pPager->pageSize%200).
-** Each byte is interpreted as an 8-bit unsigned integer.
+** Each byte is interpreted as an 8-bit unsigned int eger.
 **
 ** Changing the formula used to compute this checksum results in an
 ** incompatible journal file format.
@@ -39122,7 +39122,7 @@ static MemPage *btreePageLookup(BtShared *pBt, Pgno pgno){
 
 /*
 ** Return the size of the database file in pages. If there is any kind of
-** error, return ((unsigned int)-1).
+** error, return ((unsigned int )-1).
 */
 static Pgno pagerPagecount(BtShared *pBt){
   int nPage = -1;
@@ -52108,7 +52108,7 @@ static void registerTrace(FILE *out, int iReg, Mem *p){
   #if defined(__GNUC__)
 
   __inline__ sqlite_uint64 sqlite3Hwtime(void){
-     unsigned int lo, hi;
+     unsigned int  lo, hi;
      __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
      return (sqlite_uint64)hi << 32 | lo;
   }
@@ -65230,7 +65230,7 @@ static int analysisLoader(void *pData, int argc, char **argv, char **NotUsed){
   analysisInfo *pInfo = (analysisInfo*)pData;
   Index *pIndex;
   int i, c;
-  unsigned int v;
+  unsigned int  v;
   const char *z;
 
   assert( argc==2 );
@@ -88725,7 +88725,7 @@ static void bestBtreeIndex(
   int eqTermMask;             /* Current mask of valid equality operators */
   int idxEqTermMask;          /* Index mask of valid equality operators */
   Index sPk;                  /* A fake index object for the primary key */
-  unsigned int aiRowEstPk[2]; /* The aiRowEst[] value for the sPk index */
+  unsigned int  aiRowEstPk[2]; /* The aiRowEst[] value for the sPk index */
   int aiColumnPk = -1;        /* The aColumn[] value for the sPk index */
   int wsFlagMask;             /* Allowed flags in pCost->plan.wsFlag */
 
@@ -88785,7 +88785,7 @@ static void bestBtreeIndex(
   /* Loop over all indices looking for the best one to use
   */
   for(; pProbe; pIdx=pProbe=pProbe->pNext){
-    const unsigned int * const aiRowEst = pProbe->aiRowEst;
+    const unsigned int  * const aiRowEst = pProbe->aiRowEst;
     double cost;                /* Cost of using pProbe */
     double nRow;                /* Estimated number of rows in result set */
     int rev;                    /* True to scan in reverse order */
@@ -97404,7 +97404,7 @@ SQLITE_API int sqlite3_test_control(int op, ...){
     }
 
     /*
-    **  sqlite3_test_control(SQLITE_TESTCTRL_PENDING_BYTE, unsigned int X)
+    **  sqlite3_test_control(SQLITE_TESTCTRL_PENDING_BYTE, unsigned int  X)
     **
     ** Set the PENDING byte to the value in the argument, if X>0.
     ** Make no changes if X==0.  Return the value of the pending byte
@@ -97416,7 +97416,7 @@ SQLITE_API int sqlite3_test_control(int op, ...){
     ** dileterious behavior.
     */
     case SQLITE_TESTCTRL_PENDING_BYTE: {
-      unsigned int newVal = va_arg(ap, unsigned int);
+      unsigned int  newVal = va_arg(ap, unsigned int );
       rc = sqlite3PendingByte;
       if( newVal ) sqlite3PendingByte = newVal;
       break;
@@ -98484,10 +98484,10 @@ SQLITE_PRIVATE Fts3HashElem *sqlite3Fts3HashFindElem(const Fts3Hash *, const voi
 /*
 ** Internal types used by SQLite.
 */
-typedef unsigned char u8;         /* 1-byte (or larger) unsigned integer */
+typedef unsigned char u8;         /* 1-byte (or larger) unsigned int eger */
 typedef short int i16;            /* 2-byte (or larger) signed integer */
-typedef unsigned int u32;         /* 4-byte unsigned integer */
-typedef sqlite3_uint64 u64;       /* 8-byte unsigned integer */
+typedef unsigned int  u32;         /* 4-byte unsigned int eger */
+typedef sqlite3_uint64 u64;       /* 8-byte unsigned int eger */
 /*
 ** Macro used to suppress compiler warnings for unused parameters.
 */
@@ -106144,14 +106144,14 @@ static int snippetOffsetsOfColumn(
   int nColumn;                         /* Number of columns in the index */
   int i, j;                            /* Loop counters */
   int rc;                              /* Return code */
-  unsigned int match, prevMatch;       /* Phrase search bitmasks */
+  unsigned int  match, prevMatch;       /* Phrase search bitmasks */
   const char *zToken;                  /* Next token from the tokenizer */
   int nToken;                          /* Size of zToken */
   int iBegin, iEnd, iPos;              /* Offsets of beginning and end */
 
   /* The following variables keep a circular buffer of the last
   ** few tokens */
-  unsigned int iRotor = 0;             /* Index of current token */
+  unsigned int  iRotor = 0;             /* Index of current token */
   int iRotorBegin[FTS3_ROTOR_SZ];      /* Beginning offset of token */
   int iRotorLen[FTS3_ROTOR_SZ];        /* Length of token */
 
@@ -107147,7 +107147,7 @@ static int fts3ExprLocalMatchinfoCb(
 
 /*
 ** Populate pCsr->aMatchinfo[] with data for the current row. The 'matchinfo'
-** data is an array of 32-bit unsigned integers (C type u32).
+** data is an array of 32-bit unsigned int egers (C type u32).
 */
 static int fts3GetMatchinfo(Fts3Cursor *pCsr){
   MatchInfo g;
@@ -107306,7 +107306,7 @@ SQLITE_PRIVATE void sqlite3Fts3Matchinfo(sqlite3_context *pContext, Fts3Cursor *
 #ifndef SQLITE_AMALGAMATION
 typedef sqlite3_int64 i64;
 typedef unsigned char u8;
-typedef unsigned int u32;
+typedef unsigned int  u32;
 #endif
 
 typedef struct Rtree Rtree;

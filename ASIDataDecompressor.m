@@ -75,7 +75,7 @@
 	int status;
 	
 	zStream.next_in = bytes;
-	zStream.avail_in = (unsigned int)length;
+	zStream.avail_in = (NSUInteger )length;
 	zStream.avail_out = 0;
 	
 	NSInteger bytesProcessedAlready = zStream.total_out;
@@ -86,7 +86,7 @@
 		}
 		
 		zStream.next_out = [outputData mutableBytes] + zStream.total_out-bytesProcessedAlready;
-		zStream.avail_out = (unsigned int)([outputData length] - (zStream.total_out-bytesProcessedAlready));
+		zStream.avail_out = (NSUInteger )([outputData length] - (zStream.total_out-bytesProcessedAlready));
 		
 		status = inflate(&zStream, Z_NO_FLUSH);
 		

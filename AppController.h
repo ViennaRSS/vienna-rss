@@ -27,6 +27,7 @@
 #import "FilterView.h"
 #import "PopupButton.h"
 #import "PluginManager.h"
+#import <AppKit/AppKit.h>
 
 @class NewPreferenceController;
 @class FoldersTree;
@@ -41,7 +42,7 @@
 @class ClickableProgressIndicator;
 @class SearchPanel;
 
-@interface AppController : NSObject <GrowlApplicationBridgeDelegate> 
+@interface AppController : NSObject <GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate> 
 {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet ArticleController * articleController;
@@ -183,7 +184,7 @@
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)createNewTab:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(int)folderId;

@@ -427,7 +427,7 @@ struct JKTokenCacheItem {
 struct JKTokenCache {
   JKTokenCacheItem *items;
   size_t            count;
-  unsigned int      prng_lfsr;
+  NSUInteger       prng_lfsr;
   unsigned char     age[JK_CACHE_SLOTS];
 };
 

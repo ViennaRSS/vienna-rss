@@ -175,6 +175,8 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
  */
 -(void)awakeFromNib
 {
+	[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
+		
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	[self installCustomEventHandler];
@@ -844,7 +846,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Make sure the folder width isn't shrunk beyond a minimum width. Otherwise it looks
  * untidy.
  */
--(float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
+-(CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
 	return (sender == splitView1 && offset == 0) ? MA_Minimum_Folder_Pane_Width : proposedMin;
 }
@@ -853,7 +855,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Make sure that the browserview isn't shrunk beyond a minimum size otherwise the splitview
  * or controls within it start resizing odd.
  */
--(float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
+-(CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
 {
 	if (sender == splitView1 && offset == 0)
 	{
@@ -868,7 +870,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
-	float dividerThickness = [sender dividerThickness];
+	CGFloat dividerThickness = [sender dividerThickness];
 	id sv1 = [[sender subviews] objectAtIndex:0];
 	id sv2 = [[sender subviews] objectAtIndex:1];
 	NSRect leftFrame = [sv1 frame];
@@ -2579,7 +2581,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
  */
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags
+-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
 	if (keyChar >= '0' && keyChar <= '9' && (flags & NSControlKeyMask))
 	{

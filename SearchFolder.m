@@ -42,7 +42,7 @@
 	-(void)displaySearchSheet:(NSWindow *)window;
 	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
 	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
-	-(void)addCriteria:(unsigned int)index;
+	-(void)addCriteria:(NSUInteger )index;
 	-(void)addDefaultCriteria:(int)index;
 	-(void)removeCriteria:(int)index;
 	-(void)removeAllCriteria;
@@ -414,7 +414,7 @@
 {
 	NSString * folderName = [[smartFolderName stringValue] trim];
 	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
-	unsigned int c;
+	NSUInteger  c;
 
 	// Check whether there is another folder with the same name.
 	Folder * folder = [db folderFromName:folderName];
@@ -553,12 +553,12 @@
  * Add a new criteria clause. Before calling this function, initialise the
  * searchView with the settings to be added.
  */
--(void)addCriteria:(unsigned int)index
+-(void)addCriteria:(NSUInteger )index
 {
 	NSData * archRow;
 	NSView * previousRow = nil;
 	int rowHeight = [searchCriteriaView frame].size.height;
-	unsigned int c;
+	NSUInteger  c;
 
 	// Bump up the criteria count
 	++totalCriteria;

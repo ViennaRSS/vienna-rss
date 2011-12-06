@@ -29,7 +29,7 @@
 +(NSCalendarDate *)getDateFromString:(NSString *)dateString;
 -(id)initWithEmptyTree;
 -(BOOL)hasValidTree;
--(int)countOfChildren;
+-(CFIndex)countOfChildren;
 -(NSString *)nodeName;
 -(XMLParser *)addTree:(NSString *)name;
 -(XMLParser *)addTree:(NSString *)name withElement:(NSString *)value;
@@ -42,7 +42,7 @@
 -(NSString *)valueOfAttribute:(NSString *)attributeName;
 -(XMLParser *)treeByName:(NSString *)name;
 -(XMLParser *)treeByPath:(NSString *)path;
--(XMLParser *)treeByIndex:(int)index;
+-(XMLParser *)treeByIndex:(CFIndex)index;
 +(NSString *)quoteAttributes:(NSString *)stringToProcess;
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString;
 @end

@@ -44,7 +44,7 @@
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
 	
-	unsigned int textLength = [self length];
+	NSUInteger textLength = [self length];
 	NSRange srchRange;
 	
 	srchRange.location = 0;
@@ -56,7 +56,7 @@
 		if (srcRange.location != NSNotFound)
 		{
 			// Find the src parameter range.
-			unsigned int index = srcRange.location + srcRange.length;
+			NSUInteger index = srcRange.location + srcRange.length;
 			srcRange.location += srcRange.length;
 			srcRange.length = 0;
 			while (index < textLength && [self characterAtIndex:index] != '"')
@@ -265,11 +265,11 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)firstNonBlankLine
 {
 	BOOL hasNonEmptyChars = NO;
-	unsigned int indexOfFirstChr = 0u;
-	unsigned int indexOfLastChr = 0u;
+	NSUInteger indexOfFirstChr = 0;
+	NSUInteger indexOfLastChr = 0;
 	
-	unsigned int indexOfChr = 0u;
-	unsigned int length = [self length];
+	NSUInteger indexOfChr = 0;
+	NSUInteger length = [self length];
 	while (indexOfChr < length)
 	{
 		unichar ch = [self characterAtIndex:indexOfChr];
@@ -368,8 +368,8 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)stringByUnescapingExtendedCharacters
 {
 	NSMutableString * processedString = [[NSMutableString alloc] initWithString:self];
-	int entityStart;
-	int entityEnd;
+	NSUInteger entityStart;
+	NSUInteger entityEnd;
 	
 	entityStart = [processedString indexOfCharacterInString:'&' afterIndex:0];
 	while (entityStart != NSNotFound)
@@ -527,10 +527,10 @@ static NSMutableDictionary * entityMap = nil;
  * Returns the index of the first occurrence of the specified character at or after
  * the starting index. If no occurrence is found, returns NSNotFound.
  */
--(int)indexOfCharacterInString:(char)ch afterIndex:(int)startIndex
+-(NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex
 {
-	int length = [self length];
-	int index;
+	NSUInteger length = [self length];
+	NSUInteger index;
 
 	if (startIndex < length - 1)
 		for (index = startIndex; index < length; ++index)

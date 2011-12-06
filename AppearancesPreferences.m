@@ -93,7 +93,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 	[enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
 	[minimumFontSizes setEnabled:[prefs enableMinimumFontSize]];
 	
-	unsigned int i;
+	NSUInteger i;
 	[minimumFontSizes removeAllItems];
 	for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
 		[minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];

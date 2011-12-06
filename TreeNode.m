@@ -27,7 +27,7 @@
 /* init
  * Initialises a treenode.
  */
--(id)init:(TreeNode *)parent atIndex:(int)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
+-(id)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
 {
 	if ((self = [super init]) != nil)
  	{
@@ -57,11 +57,11 @@
  * This function does not fail. It is assumed that the child can always be inserted into
  * place one way or the other.
  */
--(void)addChild:(TreeNode *)child atIndex:(int)insertIndex
+-(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
-	unsigned int count = [children count];
-	int sortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
+	NSUInteger count = [children count];
+	NSInteger sortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
 
 	if (sortMethod != MA_FolderSort_Manual)
 	{
@@ -103,7 +103,7 @@
 /* sortChildren
  * Sort the children of this node.
  */
--(void)sortChildren:(int)sortMethod
+-(void)sortChildren:(NSInteger)sortMethod
 {
 	switch (sortMethod)
 	{
@@ -148,7 +148,7 @@
  * Searches down from the current node to find the node that
  * has the given ID.
  */
--(TreeNode *)nodeFromID:(int)n
+-(TreeNode *)nodeFromID:(NSInteger)n
 {
 	if ([self nodeId] == n)
 		return self;
@@ -180,7 +180,7 @@
  * Returns the TreeNode for the child at the specified index offset. (Note that we don't
  * assert index here. The objectAtIndex function will take care of that for us.)
  */
--(TreeNode *)childByIndex:(int)index
+-(TreeNode *)childByIndex:(NSInteger)index
 {
 	return [children objectAtIndex:index];
 }
@@ -188,7 +188,7 @@
 /* indexOfChild
  * Returns the index of the specified TreeNode or NSNotFound if it is not found.
  */
--(int)indexOfChild:(TreeNode *)node
+-(NSInteger)indexOfChild:(TreeNode *)node
 {
 	return [children indexOfObject:node];
 }
@@ -214,7 +214,7 @@
  */
 -(TreeNode *)nextSibling
 {
-	int childIndex = [parentNode indexOfChild:self];
+	NSInteger childIndex = [parentNode indexOfChild:self];
 	if (childIndex == NSNotFound || ++childIndex >= [parentNode countOfChildren])
 		return nil;
 	return [parentNode childByIndex:childIndex];
@@ -233,7 +233,7 @@
 /* setNodeId
  * Sets a node's unique Id.
  */
--(void)setNodeId:(int)n
+-(void)setNodeId:(NSInteger)n
 {
 	nodeId = n;
 }
@@ -241,7 +241,7 @@
 /* nodeId
  * Returns the node's ID
  */
--(int)nodeId
+-(NSInteger)nodeId
 {
 	return nodeId;
 }
@@ -277,7 +277,7 @@
 /* countOfChildren
  * Returns the number of direct child nodes of this node
  */
--(int)countOfChildren
+-(NSUInteger)countOfChildren
 {
 	return [children count];
 }

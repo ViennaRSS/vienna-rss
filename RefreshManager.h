@@ -26,8 +26,8 @@
 #import "Constants.h"
 
 @interface RefreshManager : NSObject <GRSRefreshDelegate> {
-	int maximumConnections;
-	int countOfNewArticles;
+	NSUInteger maximumConnections;
+	NSUInteger countOfNewArticles;
 	NSMutableArray * connectionsArray;
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
@@ -49,7 +49,7 @@
 -(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)cancelAll;
--(int)countOfNewArticles;
--(int)totalConnections;
+-(NSUInteger)countOfNewArticles;
+-(NSUInteger)totalConnections;
 -(NSString *)statusMessageDuringRefresh;
 @end

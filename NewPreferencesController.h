@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NewPreferencesController : NSWindowController
+@interface NewPreferencesController : NSWindowController <NSToolbarDelegate>
 {
 	IBOutlet NSWindow * prefWindow;
 	NSView * blankView;

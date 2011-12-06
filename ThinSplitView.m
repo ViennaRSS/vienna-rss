@@ -25,7 +25,7 @@
 /* dividerThickness
  * Returns the thickness of the divider bar.
  */
--(float)dividerThickness
+-(CGFloat)dividerThickness
 {
 	return [self isVertical] ? 1.0 : 8.0;
 }

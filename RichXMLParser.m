@@ -339,16 +339,16 @@
  */
 -(NSData *)preFlightValidation:(NSData *)xmlData
 {
-	int count = [xmlData length];
+	NSUInteger count = [xmlData length];
 	const unsigned char * srcPtr = [xmlData bytes];
 	const unsigned char * srcEndPtr = srcPtr + count;
 
 	// We'll create another data stream with the converted characters
 	NSMutableData * newXmlData = [NSMutableData dataWithLength:count];
 	char * destPtr = [newXmlData mutableBytes];
-	int destCapacity = count;
-	int destSize = count;
-	int destIndex = 0;
+	NSUInteger destCapacity = count;
+	NSUInteger destSize = count;
+	NSUInteger destIndex = 0;
 
 	// Determine XML encoding and BOM
 	NSStringEncoding encodedType;
@@ -543,8 +543,8 @@
 	BOOL success = YES;
 	
 	// Iterate through the channel items
-	int count = [feedTree countOfChildren];
-	int index;
+	CFIndex count = [feedTree countOfChildren];
+	CFIndex index;
 	
 	for (index = 0; index < count; ++index)
 	{
@@ -613,8 +613,8 @@
  */
 -(void)parseSequence:(XMLParser *)seqTree
 {
-	int count = [seqTree countOfChildren];
-	int index;
+	CFIndex count = [seqTree countOfChildren];
+	CFIndex index;
 
 	[orderArray release];
 	orderArray = [[NSMutableArray alloc] initWithCapacity:count];
@@ -640,8 +640,8 @@
 	BOOL success = YES;
 
 	// Iterate through the channel items
-	int count = [feedTree countOfChildren];
-	int index;
+	CFIndex count = [feedTree countOfChildren];
+	CFIndex index;
 
 	// Allocate an items array
 	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
@@ -657,11 +657,11 @@
 		if ([nodeName isEqualToString:@"item"])
 		{
 			FeedItem * newItem = [[FeedItem alloc] init];
-			int itemCount = [subTree countOfChildren];
+			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
 			BOOL hasDetailedContent = NO;
 			BOOL hasLink = NO;
-			int itemIndex;
+			CFIndex itemIndex;
 
 			// Check for rdf:about so we can identify this item in the orderArray.
 			NSString * itemIdentifier = [subTree valueOfAttribute:@"rdf:about"];
@@ -770,7 +770,7 @@
 			[self ensureTitle:newItem];
 			
 			// Add this item in the proper location in the array
-			int indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
+			NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
 			if (indexOfItem == NSNotFound || indexOfItem >= [items count])
 				[items addObject:newItem];
 			else
@@ -813,8 +813,8 @@
 
 	// Iterate through the atom items
 	NSString * defaultAuthor = @"";
-	int count = [feedTree countOfChildren];
-	int index;
+	CFIndex count = [feedTree countOfChildren];
+	CFIndex index;
 	
 	for (index = 0; index < count; ++index)
 	{
@@ -894,9 +894,9 @@
 		{
 			FeedItem * newItem = [[FeedItem alloc] init];
 			[newItem setAuthor:defaultAuthor];
-			int itemCount = [subTree countOfChildren];
+			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
-			int itemIndex;
+			CFIndex itemIndex;
 
 			// Look for the xml:base attribute, and use absolute url or stack relative url
 			NSString * entryBase = [[subTree valueOfAttribute:@"xml:base"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -1135,11 +1135,11 @@
 -(NSString *)stripHTMLTags:(NSString *)htmlString
 {
 	NSMutableString * rawString = [[NSMutableString alloc] initWithString:htmlString];
-	int openTagStartIndex = 0;
+	NSUInteger openTagStartIndex = 0;
 	
 	while ((openTagStartIndex = [rawString indexOfCharacterInString:'<' afterIndex:openTagStartIndex]) != NSNotFound)
 	{
-		int openTagEndIndex;
+		NSUInteger openTagEndIndex;
 		if ((openTagEndIndex = [rawString indexOfCharacterInString:'>' afterIndex:openTagStartIndex]) != NSNotFound)
 		{
 			NSString * tagName = [[rawString substringWithRange:NSMakeRange(openTagStartIndex + 1, openTagEndIndex - openTagStartIndex - 1)] lowercaseString];

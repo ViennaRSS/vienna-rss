@@ -178,7 +178,7 @@ typedef enum {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
 	if (folder != nil)
 	{
-		int index = [refreshArray count];
+		NSInteger index = [refreshArray count];
 		while (--index >= 0)
 		{
 			RefreshItem * item = [refreshArray objectAtIndex:index];
@@ -370,14 +370,14 @@ typedef enum {
 /* totalConnections
  * Returns the current number of concurrent active connections.
  */
--(int)totalConnections
+-(NSUInteger)totalConnections
 {
 	return [connectionsArray count];
 }
 
 /* countOfNewArticles
  */
--(int)countOfNewArticles
+-(NSUInteger)countOfNewArticles
 {
 	return countOfNewArticles;
 }
@@ -644,7 +644,7 @@ typedef enum {
 -(void)folderRefreshCompleted:(AsyncConnection *)connector
 {
 	Folder * folder = (Folder *)[connector contextData];
-	int folderId = [folder itemId];
+	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
     
     if ([[Preferences standardPreferences] syncGoogleReader])
@@ -728,7 +728,7 @@ typedef enum {
 			[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
         
 		// Empty data feed is OK if we got HTTP 200
-		int newArticlesFromFeed = 0;	
+		NSUInteger newArticlesFromFeed = 0;	
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if ([receivedData length] > 0)
 		{
@@ -863,7 +863,7 @@ typedef enum {
 				// If there's an existing feed with this title, make ours unique
 				// BUGBUG: This duplicates logic in database.m so consider moving it there.
 				NSString * oldFeedTitle = feedTitle;
-				unsigned int index = 1;
+				NSUInteger index = 1;
                 
 				while (([db folderFromName:feedTitle]) != nil)
 					feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];

@@ -231,7 +231,7 @@ static BOOL showSubviewsWhileResizing = NO;
 
 - (void)removeSubviews;
 {
-    unsigned int subviewIndex;
+    NSUInteger  subviewIndex;
 
     NSAssert(hiddenSubviews == nil, @"-[SNDisclosableView removeSubviews]: should have no hidden subviews yet");
 
@@ -243,7 +243,7 @@ static BOOL showSubviewsWhileResizing = NO;
 
 - (void)restoreSubviews;
 {
-    unsigned int subviewIndex;
+    NSUInteger  subviewIndex;
 
     NSAssert(hiddenSubviews != nil, @"-[SNDisclosableView restoreSubviews]: hiddenSubviews array is nil");
 
@@ -276,10 +276,10 @@ static BOOL showSubviewsWhileResizing = NO;
     NSWindow *window;
     NSView *contentView;
     NSArray *windowSubviews;
-    unsigned int windowSubviewCount, windowSubviewIndex;
+    NSUInteger  windowSubviewCount, windowSubviewIndex;
     NSMutableArray *windowSubviewMasks;
     NSArray *ourSubviews;
-    unsigned int ourSubviewCount, ourSubviewIndex;
+    NSUInteger  ourSubviewCount, ourSubviewIndex;
     NSMutableArray *ourSubviewMasks;
     NSRect newWindowFrame;
     NSSize newWindowMinOrMaxSize;
@@ -294,7 +294,7 @@ static BOOL showSubviewsWhileResizing = NO;
     windowSubviewMasks = [NSMutableArray arrayWithCapacity:windowSubviewCount];
     for (windowSubviewIndex = 0; windowSubviewIndex < windowSubviewCount; windowSubviewIndex++) {
         NSView *windowSubview;
-        unsigned int mask;
+        NSUInteger  mask;
         
         windowSubview = [windowSubviews objectAtIndex:windowSubviewIndex];
         mask = [windowSubview autoresizingMask];
@@ -329,7 +329,7 @@ static BOOL showSubviewsWhileResizing = NO;
     ourSubviewMasks = [NSMutableArray arrayWithCapacity:ourSubviewCount];
     for (ourSubviewIndex = 0; ourSubviewIndex < ourSubviewCount; ourSubviewIndex++) {
         NSView *ourSubview;
-        unsigned int mask;
+        NSUInteger  mask;
 
         ourSubview = [ourSubviews objectAtIndex:ourSubviewIndex];
         mask = [ourSubview autoresizingMask];
@@ -371,7 +371,7 @@ static BOOL showSubviewsWhileResizing = NO;
 
 - (void)restoreAutoresizeMasks:(NSArray *)masks toViews:(NSArray *)views;
 {
-    unsigned int count, index;
+    NSUInteger  count, index;
 
     count = [masks count];
     for (index = 0; index < count; index++)

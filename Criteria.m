@@ -80,7 +80,7 @@
 +(CriteriaOperator)operatorFromString:(NSString *)string
 {
 	NSArray * operatorArray = [Criteria arrayOfOperators];
-	unsigned int index;
+	NSUInteger  index;
 	
 	for (index = 0; index < [operatorArray count]; ++index)
 	{
@@ -312,7 +312,7 @@
 	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
 	NSDictionary * conditionDict = [NSDictionary dictionaryWithObject:[CriteriaTree conditionToString:condition] forKey:@"condition"];
 	XMLParser * groupTree = [newTree addTree:@"criteriagroup" withAttributes:conditionDict];
-	unsigned int index;
+	NSUInteger  index;
 	
 	for (index = 0; index < [criteriaTree count]; ++index)
 	{

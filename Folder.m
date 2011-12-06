@@ -204,7 +204,7 @@ static NSArray * iconArray = nil;
 /* initWithId
  * Initialise a new folder object instance.
  */
--(id)initWithId:(int)newId parentId:(int)newIdParent name:(NSString *)newName type:(int)newType
+-(id)initWithId:(NSInteger)newId parentId:(NSInteger)newIdParent name:(NSString *)newName type:(NSInteger)newType
 {
 	if ((self = [super init]) != nil)
 	{
@@ -249,7 +249,7 @@ static NSArray * iconArray = nil;
 /* itemId
  * Returns the folder's ID.
  */
--(int)itemId
+-(NSInteger)itemId
 {
 	return itemId;
 }
@@ -257,7 +257,7 @@ static NSArray * iconArray = nil;
 /* parentId
  * Returns this folder's parent ID.
  */
--(int)parentId
+-(NSInteger)parentId
 {
 	return parentId;
 }
@@ -265,7 +265,7 @@ static NSArray * iconArray = nil;
 /* nextSiblingId
  * Returns the ID of the folder's next sibling.
  */
--(int)nextSiblingId
+-(NSInteger)nextSiblingId
 {
 	return nextSiblingId;
 }
@@ -273,42 +273,42 @@ static NSArray * iconArray = nil;
 /* nextSiblingId
  * Returns the ID of the folder's first child.
  */
--(int)firstChildId
+-(NSInteger)firstChildId
 {
 	return firstChildId;
 }
 
 /* unreadCount
  */
--(int)unreadCount
+-(NSInteger)unreadCount
 {
 	return unreadCount;
 }
 
 /* type
  */
--(int)type
+-(NSInteger)type
 {
 	return type;
 }
 
 /* flags
  */
--(unsigned int)flags
+-(NSUInteger)flags
 {
 	return flags;
 }
 
 /* nonPersistedFlags
  */
--(unsigned int)nonPersistedFlags
+-(NSUInteger)nonPersistedFlags
 {
 	return nonPersistedFlags;
 }
 
 /* childUnreadCount
  */
--(int)childUnreadCount
+-(NSInteger)childUnreadCount
 {
 	return childUnreadCount;
 }
@@ -533,7 +533,7 @@ static NSArray * iconArray = nil;
 /* setType
  * Changes the folder type
  */
--(void)setType:(int)newType
+-(void)setType:(NSInteger)newType
 {
 	type = newType;
 }
@@ -573,7 +573,7 @@ static NSArray * iconArray = nil;
 /* setFlag
  * Set the specified flag on the folder.
  */
--(void)setFlag:(unsigned int)flagToSet
+-(void)setFlag:(NSUInteger)flagToSet
 {
 	flags |= flagToSet;
 }
@@ -581,7 +581,7 @@ static NSArray * iconArray = nil;
 /* clearFlag
  * Clears the specified flag on the folder.
  */
--(void)clearFlag:(unsigned int)flagToClear
+-(void)clearFlag:(NSUInteger)flagToClear
 {
 	flags &= ~flagToClear;
 }
@@ -589,7 +589,7 @@ static NSArray * iconArray = nil;
 /* setNonPersistedFlag
  * Set the specified flag on the folder.
  */
--(void)setNonPersistedFlag:(unsigned int)flagToSet
+-(void)setNonPersistedFlag:(NSUInteger)flagToSet
 {
 	nonPersistedFlags |= flagToSet;
 }
@@ -597,7 +597,7 @@ static NSArray * iconArray = nil;
 /* clearNonPersistedFlag
  * Clears the specified flag on the folder.
  */
--(void)clearNonPersistedFlag:(unsigned int)flagToClear
+-(void)clearNonPersistedFlag:(NSUInteger)flagToClear
 {
 	nonPersistedFlags &= ~flagToClear;
 }
@@ -605,7 +605,7 @@ static NSArray * iconArray = nil;
 /* setParent
  * Re-parent the folder.
  */
--(void)setParent:(int)newParent
+-(void)setParent:(NSInteger)newParent
 {
 	parentId = newParent;
 }
@@ -613,7 +613,7 @@ static NSArray * iconArray = nil;
 /* setNextSiblingId
  * Set the ID for the folder's next sibling.
  */
--(void)setNextSiblingId:(int)newNextSibling
+-(void)setNextSiblingId:(NSInteger)newNextSibling
 {
 	nextSiblingId = newNextSibling;
 }
@@ -621,7 +621,7 @@ static NSArray * iconArray = nil;
 /* setFirstChildId
  * Set the ID for the folder's first child.
  */
--(void)setFirstChildId:(int)newFirstChild;
+-(void)setFirstChildId:(NSInteger)newFirstChild;
 {
 	firstChildId = newFirstChild;
 }
@@ -646,7 +646,7 @@ static NSArray * iconArray = nil;
 
 /* setUnreadCount
  */
--(void)setUnreadCount:(int)count
+-(void)setUnreadCount:(NSInteger)count
 {
 	NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
 	unreadCount = count;
@@ -656,7 +656,7 @@ static NSArray * iconArray = nil;
  * Update a separate count of the total number of unread articles
  * in all child folders.
  */
--(void)setChildUnreadCount:(int)count
+-(void)setChildUnreadCount:(NSInteger)count
 {
 	NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
 	childUnreadCount = count;
@@ -703,9 +703,9 @@ static NSArray * iconArray = nil;
  * important here since we could potentially keep trying to recache an folder that
  * truly has zero articles otherwise).
  */
--(int)countOfCachedArticles
+-(NSInteger)countOfCachedArticles
 {
-	return isCached ? (int)[cachedArticles count] : -1;
+	return isCached ? (NSInteger)[cachedArticles count] : -1;
 }
 
 /* articles

@@ -69,7 +69,7 @@ static unsigned long averageBandwidthUsedPerSecond = 0;
 // These are used for queuing persistent connections on the same connection
 
 // Incremented every time we specify we want a new connection
-static unsigned int nextConnectionNumberToCreate = 0;
+static NSUInteger  nextConnectionNumberToCreate = 0;
 
 // An array of connectionInfo dictionaries.
 // When attempting a persistent connection, we look here to try to find an existing connection to the same server that is currently not in use
@@ -80,7 +80,7 @@ static NSRecursiveLock *connectionsLock = nil;
 
 // Each request gets a new id, we store this rather than a ref to the request itself in the connectionInfo dictionary.
 // We do this so we don't have to keep the request around while we wait for the connection to expire
-static unsigned int nextRequestID = 0;
+static NSUInteger  nextRequestID = 0;
 
 // Records how much bandwidth all requests combined have used in the last second
 static unsigned long bandwidthUsedInLastSecond = 0; 
@@ -124,7 +124,7 @@ static NSDate *throttleWakeUpTime = nil;
 static id <ASICacheDelegate> defaultCache = nil;
 
 // Used for tracking when requests are using the network
-static unsigned int runningRequestCount = 0;
+static NSUInteger  runningRequestCount = 0;
 
 // You can use [ASIHTTPRequest setShouldUpdateNetworkActivityIndicator:NO] if you want to manage it yourself
 // Alternatively, override showNetworkActivityIndicator / hideNetworkActivityIndicator

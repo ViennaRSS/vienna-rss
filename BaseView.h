@@ -30,7 +30,7 @@
 	-(NSString *)viewLink;
 	-(NSView *)mainView;
 	-(WebView *)webView;
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
 @optional
 	-(NSString *)viewTitle;
 @end

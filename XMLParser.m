@@ -215,7 +215,7 @@
 /* treeByIndex
  * Returns an XMLParser object for the child tree at the specified index.
  */
--(XMLParser *)treeByIndex:(int)index
+-(XMLParser *)treeByIndex:(CFIndex)index
 {
 	return [XMLParser treeWithCFXMLTreeRef:CFTreeGetChildAtIndex(tree, index)];
 }
@@ -253,8 +253,8 @@
  */
 -(XMLParser *)treeByName:(NSString *)name
 {
-	int count = CFTreeGetChildCount(tree);
-	int index;
+	CFIndex count = CFTreeGetChildCount(tree);
+	CFIndex index;
 	
 	for (index = count - 1; index >= 0; --index)
 	{
@@ -269,7 +269,7 @@
 /* countOfChildren
  * Count of children of this tree
  */
--(int)countOfChildren
+-(CFIndex)countOfChildren
 {
 	return CFTreeGetChildCount(tree);
 }
@@ -383,8 +383,8 @@
 
 	if (isXMLContent)
 	{
-		int count = CFTreeGetChildCount(tree);
-		int index;
+		CFIndex count = CFTreeGetChildCount(tree);
+		CFIndex index;
 		
 		for (index = 0; index < count; ++index)
 		{
@@ -400,8 +400,8 @@
 	}
 	else
 	{
-		int count = CFTreeGetChildCount(tree);
-		int index;
+		CFIndex count = CFTreeGetChildCount(tree);
+		CFIndex index;
 		
 		for (index = 0; index < count; ++index)
 		{
@@ -474,14 +474,14 @@
 	// RSS/HTTP formats. Add a hack to substitute UT with GMT as it doesn't
 	// seem to be able to parse the former.
 	dateString = [dateString trim];
-	unsigned int dateLength = [dateString length];
+	NSUInteger dateLength = [dateString length];
 	if ([dateString hasSuffix:@" UT"])
 		dateString = [[dateString substringToIndex:dateLength - 3] stringByAppendingString:@" GMT"];
 	// CURL seems to require seconds in the time, so add seconds if necessary.
 	NSScanner * scanner = [NSScanner scannerWithString:dateString];
 	if ([scanner scanUpToString:@":" intoString:NULL])
 	{
-		unsigned int location = [scanner scanLocation] + 3u;
+		NSUInteger location = [scanner scanLocation] + 3;
 		if ((location < dateLength) && [dateString characterAtIndex:location] != ':')
 		{
 			dateString = [NSString stringWithFormat:@"%@:00%@", [dateString substringToIndex:location], [dateString substringFromIndex:location]];

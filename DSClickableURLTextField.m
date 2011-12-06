@@ -143,7 +143,7 @@
 		[URLStorage setAttributedString:[self attributedStringValue]];
 	}
 	
-	unsigned myLength = [URLStorage length];
+	NSUInteger myLength = [URLStorage length];
 	NSRange returnRange = { NSNotFound, 0 }, stringRange = { 0, myLength }, glyphRange = { NSNotFound, 0 };
 	NSCursor *pointingCursor = nil;
 	
@@ -164,7 +164,7 @@
 		
 		if ( aVal != nil ) {
 			NSRectArray aRectArray = NULL;
-			unsigned numRects = 0, j = 0;
+			NSUInteger numRects = 0, j = 0;
 			glyphRange = [URLManager glyphRangeForCharacterRange:returnRange actualCharacterRange:nil];
 			aRectArray = [URLManager rectArrayForGlyphRange:glyphRange withinSelectedGlyphRange:glyphRange inTextContainer:URLContainer rectCount:&numRects];
 			for ( j = 0; j < numRects; j++ ) {
@@ -193,9 +193,9 @@
 		id aVal = nil;
 		NSRange returnRange = { NSNotFound, 0 }, glyphRange = { NSNotFound, 0 };
 		NSRectArray linkRect = NULL;
-		unsigned glyphIndex = [URLManager glyphIndexForPoint:mousePoint inTextContainer:URLContainer];
-		unsigned charIndex = [URLManager characterIndexForGlyphAtIndex:glyphIndex];
-		unsigned numRects = 0, j = 0;
+		NSUInteger glyphIndex = [URLManager glyphIndexForPoint:mousePoint inTextContainer:URLContainer];
+		NSUInteger charIndex = [URLManager characterIndexForGlyphAtIndex:glyphIndex];
+		NSUInteger numRects = 0, j = 0;
 		
 		aVal = [URLStorage attribute:NSLinkAttributeName atIndex:charIndex longestEffectiveRange:&returnRange inRange:NSMakeRange(charIndex, [URLStorage length] - charIndex)];
 		if ( (aVal != nil) ) {

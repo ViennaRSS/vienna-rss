@@ -23,7 +23,7 @@
 #import "TreeNode.h"
 
 @interface NSObject (FoldersViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteFolderAtRow:(int)row;
 	-(IBAction)deleteFolder:(id)sender;
@@ -111,7 +111,7 @@
 -(void)buildTooltips
 {
 	NSRange range;
-	unsigned int index;
+	NSUInteger  index;
 
 	[self removeAllToolTips];
 
@@ -228,7 +228,7 @@
 	{
 		NSMutableArray * array = [NSMutableArray arrayWithCapacity:[self numberOfSelectedRows]];
 		NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
-		unsigned int item = [selectedRowIndexes firstIndex];
+		NSUInteger  item = [selectedRowIndexes firstIndex];
 		
 		while (item != NSNotFound)
 		{
@@ -284,7 +284,7 @@
 -(void)highlightSelectionInClipRect:(NSRect)rect
 {
 	NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
-	unsigned int rowIndex = [selectedRowIndexes firstIndex];
+	NSUInteger rowIndex = [selectedRowIndexes firstIndex];
 
 	while (rowIndex != NSNotFound)
 	{

@@ -22,12 +22,12 @@
 
 @interface BackTrackArray : NSObject {
 	NSMutableArray * array;
-	unsigned int maxItems;
+	NSUInteger  maxItems;
 	int queueIndex;
 }
 
 // Accessor functions
--(id)initWithMaximum:(unsigned int)theMax;
+-(id)initWithMaximum:(NSUInteger )theMax;
 -(BOOL)isAtStartOfQueue;
 -(BOOL)isAtEndOfQueue;
 -(void)addToQueue:(int)folderId guid:(NSString *)guid;

@@ -29,6 +29,7 @@
 
 -(void)fetchArticlesForFolder:(Folder *)folder
 {
+	NSLog(@"Vediamo se prendo gli articoli!");
     articles = [[folder articles] retain];
 }
 

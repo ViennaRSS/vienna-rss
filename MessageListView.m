@@ -21,7 +21,7 @@
 #import "MessageListView.h"
 
 @interface NSObject(MessageListViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(unsigned int)flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteMessageAtRow:(int)row;
 	-(IBAction)deleteMessage:(id)sender;
@@ -53,7 +53,7 @@
 	{
 		NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
 		NSMutableArray *rows = [NSMutableArray arrayWithCapacity:[selectedRowIndexes count]];
-		unsigned int rowIndex = [selectedRowIndexes firstIndex];
+		NSUInteger  rowIndex = [selectedRowIndexes firstIndex];
 		while (rowIndex != NSNotFound)
 		{
 			[rows addObject:[NSNumber numberWithUnsignedInt:rowIndex]];

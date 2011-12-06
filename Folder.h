@@ -63,15 +63,15 @@
 #define IsError(f)				([(f) nonPersistedFlags] & MA_FFlag_Error)
 
 @interface Folder : NSObject {
-	int itemId;
-	int parentId;
-	int nextSiblingId;
-	int firstChildId;
-	int unreadCount;
-	int type;
-	int childUnreadCount;
-	unsigned int flags;
-	unsigned int nonPersistedFlags;
+	NSInteger itemId;
+	NSInteger parentId;
+	NSInteger nextSiblingId;
+	NSInteger firstChildId;
+	NSInteger unreadCount;
+	NSInteger type;
+	NSInteger childUnreadCount;
+	NSUInteger flags;
+	NSUInteger nonPersistedFlags;
 	BOOL isCached;
 	BOOL hasPassword;
 	NSDate * lastUpdate;
@@ -80,7 +80,7 @@
 }
 
 // Initialisation functions
--(id)initWithId:(int)itemId parentId:(int)parentId name:(NSString *)name type:(int)type;
+-(id)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(NSInteger)type;
 -(NSString *)name;
 -(NSString *)feedDescription;
 -(NSString *)homePage;
@@ -92,36 +92,36 @@
 -(NSDictionary *)attributes;
 -(NSArray *)articles;
 -(NSArray *)articlesWithFilter:(NSString *)fstring;
--(int)parentId;
--(int)itemId;
--(int)nextSiblingId;
--(int)firstChildId;
--(int)countOfCachedArticles;
--(int)unreadCount;
--(int)type;
--(unsigned int)nonPersistedFlags;
--(unsigned int)flags;
+-(NSInteger)parentId;
+-(NSInteger)itemId;
+-(NSInteger)nextSiblingId;
+-(NSInteger)firstChildId;
+-(NSInteger)countOfCachedArticles;
+-(NSInteger)unreadCount;
+-(NSInteger)type;
+-(NSUInteger)nonPersistedFlags;
+-(NSUInteger)flags;
 -(NSImage *)image;
 -(BOOL)hasCachedImage;
 -(NSImage *)standardImage;
--(int)childUnreadCount;
+-(NSInteger)childUnreadCount;
 -(void)clearCache;
 -(BOOL)isGroupFolder;
 -(BOOL)isSmartFolder;
 -(BOOL)isRSSFolder;
 -(BOOL)loadsFullHTML;
 -(void)setName:(NSString *)name;
--(void)setUnreadCount:(int)count;
--(void)setType:(int)newType;
--(void)setParent:(int)newParent;
--(void)setNextSiblingId:(int)newNextSibling;
--(void)setFirstChildId:(int)newFirstChild;
+-(void)setUnreadCount:(NSInteger)count;
+-(void)setType:(NSInteger)newType;
+-(void)setParent:(NSInteger)newParent;
+-(void)setNextSiblingId:(NSInteger)newNextSibling;
+-(void)setFirstChildId:(NSInteger)newFirstChild;
 -(void)setImage:(NSImage *)newImage;
--(void)setFlag:(unsigned int)flagToSet;
--(void)clearFlag:(unsigned int)flagToClear;
--(void)setNonPersistedFlag:(unsigned int)flagToSet;
--(void)clearNonPersistedFlag:(unsigned int)flagToClear;
--(void)setChildUnreadCount:(int)count;
+-(void)setFlag:(NSUInteger)flagToSet;
+-(void)clearFlag:(NSUInteger)flagToClear;
+-(void)setNonPersistedFlag:(NSUInteger)flagToSet;
+-(void)clearNonPersistedFlag:(NSUInteger)flagToClear;
+-(void)setChildUnreadCount:(NSInteger)count;
 -(void)setFeedDescription:(NSString *)newFeedDescription;
 -(void)setHomePage:(NSString *)newHomePage;
 -(void)setFeedURL:(NSString *)feedURL;
