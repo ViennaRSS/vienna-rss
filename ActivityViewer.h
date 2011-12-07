@@ -21,7 +21,7 @@
 #import <Cocoa/Cocoa.h>
 #import "TableViewExtensions.h"
 
-@interface ActivityViewer : NSWindowController {
+@interface ActivityViewer : NSWindowController <NSWindowDelegate> {
 	IBOutlet NSWindow * activityWindow;
 	IBOutlet ExtendedTableView * activityTable;
 	IBOutlet NSSplitView * splitView;

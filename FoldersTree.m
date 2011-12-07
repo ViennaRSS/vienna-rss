@@ -310,7 +310,7 @@
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
 			if (listIndex == NSNotFound)
 			{
-				NSLog(@"Cannot find child with id %i for folder with id %ld", nextChildId, [node nodeId]);
+				NSLog(@"Cannot find child with id %i for folder with id %d", nextChildId, [node nodeId]);
 				return NO;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];

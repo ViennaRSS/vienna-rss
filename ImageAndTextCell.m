@@ -301,7 +301,7 @@
  * Draws the selection around the cell. We overload this to handle our custom field editor
  * frame in the FolderView class.
  */
--(void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(int)selStart length:(int)selLength
+-(void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {
 	if ([controlView isKindOfClass:[FolderView class]])
 	{
