@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSMinimumSystemVersion</key>
-	<string>10.5.0</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -88,19 +86,29 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>${BUILD_NUMBER}</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.news</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.6.0</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
-	<key>SmartCrashReports_CompanyName</key>
-	<string>OpenCommunity</string>
-	<key>SmartCrashReports_EmailTicket</key>
-	<string>SCR-15C768BF24</string>
+	<key>NSServices</key>
+	<array/>
 	<key>SUFeedURL</key>
 	<string>http://vienna-rss.sourceforge.net/changelog$(VIENNA_CHANGELOG_SUFFIX).xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>vienna_public_key.pem</string>
+	<key>SmartCrashReports_CompanyName</key>
+	<string>OpenCommunity</string>
+	<key>SmartCrashReports_EmailTicket</key>
+	<string>SCR-15C768BF24</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array/>
+	<key>UTImportedTypeDeclarations</key>
+	<array/>
 </dict>
 </plist>
