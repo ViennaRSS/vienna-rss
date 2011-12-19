@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithBuffer</string>
+	<key>Default</key>
+	<true/>
+	<key>Type</key>
+	<string>Link</string>
+	<key>URL</key>
+	<string>http://bufferapp.com/add?url=$ArticleLink$&amp;text=$ArticleTitle$&amp;source=vienna</string>
+	<key>FriendlyName</key>
+	<string>Buffer</string>
+	<key>Tooltip</key>
+	<string>Add the current article to Buffer</string>
+	<key>ButtonImage</key>
+	<string>bufferButton</string>
+	<key>MenuPath</key>
+	<string>Add to Buffer</string>
+</dict>
+</plist>
