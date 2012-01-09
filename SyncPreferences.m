@@ -74,13 +74,20 @@
 {
     BOOL sync = [sender state] == NSOnState;
 	[[Preferences standardPreferences] setSyncGoogleReader:sync];
+	if (sync) {
+		[[GoogleReader sharedManager] loadSubscriptions:nil];
+		[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:nil];
+	}
 }
 
 -(IBAction)mergeSubscriptions:(id)sender 
 {
+	//TOFIX
+	/*
     modalSession = [[NSApplication sharedApplication] beginModalSessionForWindow:[merge window]];
     [merge setSession:modalSession];
     [merge beginMerge];
+	 */
 }
 
 - (IBAction)createGoogleAccount:(id)sender 

@@ -52,7 +52,6 @@
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
-#import "GRSSubscribeOperation.h"
 #import <Sparkle/Sparkle.h>
 #import <WebKit/WebKit.h>
 #import <Growl/GrowlDefines.h>
@@ -61,6 +60,9 @@
 #include <mach/mach_init.h>
 #include <IOKit/pwr_mgt/IOPMLib.h>
 #include <IOKit/IOMessage.h>
+#import "GoogleReader.h"
+#import "VTPG_Common.h"
+
 
 @interface AppController (Private)
 	-(NSMenu *)searchFieldMenu;
@@ -422,6 +424,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
+	
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Register a bunch of notifications
@@ -438,6 +441,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
+	//Google Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 	
 	// Init the progress counter and status bar.
@@ -548,7 +552,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
-	// Kick off an initial refresh
+	if ([prefs syncGoogleReader]) {
+		[GoogleReader sharedManager];
+	}
+	
 	if ([prefs refreshOnStartup])
 		[self refreshAllSubscriptions:self];
 }
@@ -912,6 +919,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[folderMenu addItem:alternateItem];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(showXMLSource:))];
+	[folderMenu addItem:[NSMenuItem separatorItem]];
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(syncWithGoogleReader:))];
+	
 	return folderMenu;
 }
 
@@ -1414,11 +1424,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert addButtonWithTitle:@"OK"];
     [alert setMessageText:@"Google Authentication Failed"];
-    [alert setInformativeText:@"Please check your Google username and password in Vienna's preferences."];
+    [alert setInformativeText:@"Please check Google username and password you entered in Sign In window."];
     [alert setAlertStyle:NSWarningAlertStyle];
     [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     }
 }
+
+-(void)handleGoogleDownloadSubscriptions:(NSNotification *)nc {
+	[[GoogleReader sharedManager] loadSubscriptions];
+}
+
+
+
+
 
 /* handleShowFilterBar
  * Respond to the filter bar being shown or hidden programmatically.
@@ -2800,10 +2818,48 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[articleController markAllReadByArray:arrayOfFolders withUndo:YES withRefresh:YES];
 }
 
+/* createNewGoogleReaderSubscription
+ * Create a new Google Reader subscription for the specified URL under the given parent folder.
+ */
+
+-(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId
+{
+	NSLog(@"Adding Google Reader Feed: %@ with Title: %@",url,title);
+	// Replace feed:// with http:// if necessary
+	if ([url hasPrefix:@"feed://"])
+		url = [NSString stringWithFormat:@"http://%@", [url substringFromIndex:7]];
+	
+	// If the folder already exists, just select it.
+	Folder * folder = [db folderFromFeedURL:url];
+	if (folder != nil)
+	{
+		//[browserView setActiveTabToPrimaryTab];
+		//[foldersTree selectFolder:[folder itemId]];
+		return;
+	}
+	
+	// Create then select the new folder.
+	[db beginTransaction];
+	NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
+	[db commitTransaction];
+	
+	/*
+	if (folderId != -1)
+	{
+		[foldersTree selectFolder:folderId];
+		if (isAccessible(url))
+		{
+			Folder * folder = [db folderFromID:folderId];
+			[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
+		}
+	}
+	 */
+}
+
 /* createNewSubscription
  * Create a new subscription for the specified URL under the given parent folder.
  */
--(void)createNewSubscription:(NSString *)urlString underFolder:(int)parentId afterChild:(int)predecessorId
+-(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId
 {
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
@@ -2820,7 +2876,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Create then select the new folder.
 	[db beginTransaction];
-	int folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
+	NSInteger folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
 	[db commitTransaction];
 	
 	if (folderId != -1)
@@ -2931,6 +2987,57 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[[sourceWindow retain] autorelease]; // Don't deallocate the object immediately
 	[sourceWindows removeObject:sourceWindow];
 }
+
+/* syncWithGoogleReader
+ * Sync the selected folder with Google Reader
+ */
+-(IBAction)syncWithGoogleReader:(id)sender {
+	
+	NSMenuItem *myMenuItem = (NSMenuItem*)sender;
+	
+	//TOFIX
+	if ([[foldersTree selectedFolders] count]> 1) {
+		NSLog(@"Selezionati + folders!!!!");
+		
+		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		[alert addButtonWithTitle:@"OK"];
+		[alert setMessageText:@"Error"];
+		[alert setInformativeText:@"By now you can select ONLY one feed a time..."];
+		[alert setAlertStyle:NSWarningAlertStyle];
+		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
+		return;
+	}
+	
+	if ([myMenuItem isEnabled]) {
+		NSLog(@"Checked!");
+		[myMenuItem setState:NSOnState];
+	} else {
+		NSLog(@"UnChecked :(");
+		[myMenuItem setState:NSOffState];
+	}
+	
+	/*
+	for (Folder * folder in [foldersTree selectedFolders])
+	{
+		if ([folder isRSSFolder])
+		{
+			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
+			
+			if (sourceWindow != nil)
+			{
+				if (sourceWindows == nil)
+					sourceWindows = [[NSMutableArray alloc] init];
+				[sourceWindows addObject:sourceWindow];
+				[sourceWindow release];
+			}
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
+			
+			[sourceWindow showWindow:self];
+		}
+	}	
+	 */
+}
+
 
 /* showXMLSource
  * Show the Downloads window, bringing it to the front if necessary.
@@ -3201,11 +3308,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[db deleteFolder:[folder itemId]];
             
             // Unsubscribe at Google
+			//TOFIX
+			/*
             GRSSubscribeOperation *op = [[GRSSubscribeOperation alloc] init];
             [op setFolders:rssFolders];
             [op setSubscribeFlag:NO];
             [operationQueue addOperation:op];
             [op release];
+			 */
 		}
 	}
 	
@@ -3248,11 +3358,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
 	}
     
+	//TOFIX
+	/*
     GRSSubscribeOperation *op = [[GRSSubscribeOperation alloc] init];
     [op setFolders:rssFolders];
     [op setSubscribeFlag:doSubscribe];
     [operationQueue addOperation:op];
     [op release];
+	 */
 }
 
 /* setLoadFullHTMLFlag
@@ -3638,8 +3751,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Reset the refresh timer
 	[self handleCheckFrequencyChange:nil];
 	
-	if (![self isConnecting])
+	// Kick off an initial refresh	
+	if (![self isConnecting]) 
 		[[RefreshManager sharedManager] refreshSubscriptionsAfterRefreshAll:[foldersTree folders:0] ignoringSubscriptionStatus:NO];		
+	
+}
+
+-(IBAction)forceRefreshSelectedSubscriptions:(id)sender {
+	NSLog(@"Force Refresh");
 }
 
 /* refreshSelectedSubscriptions
@@ -3989,6 +4108,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = ![db readOnly];
 		return YES;
 	}
+	if (theAction == @selector(syncWithGoogleReader:))
+	{
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		*validateFlag = isMainWindowVisible && folder != nil && [folder hasFeedSource] && ![db readOnly];
+		return YES;
+	}
+
 	if (theAction == @selector(newSubscription:))
 	{
 		*validateFlag = ![db readOnly] && isMainWindowVisible;
@@ -4200,7 +4326,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && (IsRSSFolder(folder) || IsGroupFolder(folder)) && ![db readOnly];
+		return folder && (IsRSSFolder(folder) || IsGroupFolder(folder) || IsGoogleReaderFolder(folder)) && ![db readOnly];
 	}
 	else if (theAction == @selector(refreshAllFolderIcons:))
 	{
@@ -4261,7 +4387,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
-		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView &&!IsGoogleReaderFolder(folder);
 	}
 	else if (theAction == @selector(previousTab:))
 	{

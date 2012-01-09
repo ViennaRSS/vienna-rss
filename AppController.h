@@ -42,7 +42,7 @@
 @class ClickableProgressIndicator;
 @class SearchPanel;
 
-@interface AppController : NSObject <GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate> 
+@interface AppController : NSObject <GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate> 
 {
 	IBOutlet NSWindow * mainWindow;
 	IBOutlet ArticleController * articleController;
@@ -140,6 +140,7 @@
 -(IBAction)emptyTrash:(id)sender;
 -(IBAction)refreshAllFolderIcons:(id)sender;
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
+-(IBAction)forceRefreshSelectedSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;
 -(IBAction)moreStyles:(id)sender;
@@ -188,7 +189,8 @@
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(int)folderId;
--(void)createNewSubscription:(NSString *)url underFolder:(int)parentId afterChild:(int)predecessorId;
+-(void)createNewSubscription:(NSString *)url underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
+-(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;

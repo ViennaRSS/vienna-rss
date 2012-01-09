@@ -7,7 +7,6 @@
 //
 
 #import "SyncMerge.h"
-#import "GRSMergeOperation.h"
 #import "Folder.h"
 #import "AppController.h"
 
@@ -56,6 +55,22 @@
     [[NSApplication sharedApplication] endModalSession:session];
 }
 
+-(void)startSync {
+	NSLog(@"Sono in startSync");
+	running = YES;
+	[messageTextField setStringValue:@"Fetching Google Reader Subscriptions..."];
+    [progressIndicator startAnimation:self];
+	
+	//TOFIX
+	/*
+	GRSSubscriptionOperation * op = [[GRSSubscriptionOperation alloc] init];
+    [op setDelegate:self];
+    [operationQueue addOperation:op];
+    [op release];
+	 */
+}
+
+
 -(void)beginMerge
 {
     running = YES;
@@ -69,12 +84,15 @@
     for ( Folder * f in folders)
         if (IsRSSFolder(f)) [rssFolders addObject:f];
     
+	//TOFIX
+	/*
     [GRSMergeOperation setFetchFlag:YES];
     GRSMergeOperation * op = [[GRSMergeOperation alloc] init];
     [op setDelegate:self];
     [op setFolders:rssFolders];
     [operationQueue addOperation:op];
     [op release];
+	 */
 }
 
 -(void)mergeDidComplete

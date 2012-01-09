@@ -32,7 +32,7 @@
 @class ArticleView;
 @class FoldersTree;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;

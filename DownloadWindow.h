@@ -22,7 +22,7 @@
 #import "SquareWindow.h"
 #import "TableViewExtensions.h"
 
-@interface DownloadWindow : NSWindowController {
+@interface DownloadWindow : NSWindowController <NSWindowDelegate,NSTableViewDelegate,NSTableViewDataSource> {
 	IBOutlet SquareWindow * downloadWindow;
 	IBOutlet ExtendedTableView * table;
 	IBOutlet NSButton * clearButton;

@@ -371,11 +371,8 @@ static BOOL showSubviewsWhileResizing = NO;
 
 - (void)restoreAutoresizeMasks:(NSArray *)masks toViews:(NSArray *)views;
 {
-    NSUInteger  count, index;
-
-    count = [masks count];
-    for (index = 0; index < count; index++)
-        [[views objectAtIndex:index] setAutoresizingMask:[[masks objectAtIndex:index] unsignedIntValue]];    
+    for (NSUInteger index = 0; index < [masks count]; index++)
+        [(NSView*)[views objectAtIndex:index] setAutoresizingMask:[[masks objectAtIndex:index] unsignedIntValue]];    
 }
 
 @end

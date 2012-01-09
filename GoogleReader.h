@@ -8,23 +8,34 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
+#import "GTMOAuth2WindowController.h"
+#import "Folder.h"
+#import "ASINetworkQueue.h"
 
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
-    NSString * username;
-    NSString * password;
     NSString * token;
+	NSString *readerUser;
+	GTMOAuth2Authentication *oAuthObject;
     NSDictionary * subscriptions;
     NSArray * readingList;
-    BOOL authenticated;
+	NSMutableArray *localFeeds;
+	ASINetworkQueue *nq;
 }
 
 @property (nonatomic, copy) NSDictionary * subscriptions;
 @property (nonatomic, copy) NSArray * readingList;
+@property (nonatomic, copy) NSMutableArray * localFeeds;
+@property (nonatomic, copy) ASINetworkQueue *nq;
+@property (nonatomic, retain) NSString *token;
+@property (nonatomic, retain) NSString *readerUser;
 
-+(id)readerWithUsername:(NSString *)username password:(NSString *)password;
 
--(void)loadSubscriptions;
++(GoogleReader *)sharedManager;
+
+-(void)loadSubscriptions:(NSNotification*)nc;
 -(void)loadReadingList;
+-(void)authenticate;
+-(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList;
 
 -(BOOL)subscribingTo:(NSString *)feedURL;
 -(void)subscribeToFeed:(NSString *)feedURL;
@@ -35,7 +46,6 @@
 -(void)disableTag:(NSString *)tagName;
 -(void)renameTagFrom:(NSString *)oldName to:(NSString *)newName;
 -(void)renameFeed:(NSString *)feedURL to:(NSString *)newName;
-
--(BOOL)isAuthenticated;
+-(void)refreshFeed:(Folder*)thisFolder;
 
 @end

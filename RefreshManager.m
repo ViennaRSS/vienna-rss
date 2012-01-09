@@ -31,8 +31,6 @@
 #import "GoogleReader.h"
 #import "Constants.h"
 #import "AppController.h"
-#import "GRSRefreshAllOperation.h"
-#import "GRSRefreshOperation.h"
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
@@ -224,7 +222,12 @@ typedef enum {
 					[newItem release];
 				}
 			}
+		} else if(IsGoogleReaderFolder(folder)) {
+			NSLog(@"Refreshing a GOOGLE READER feed");
+			[self setFolderUpdatingFlag:folder flag:YES];
+			[[GoogleReader sharedManager] refreshFeed:folder];
 		}
+		
 	}
 	[self beginRefreshTimer];
 }
@@ -236,7 +239,7 @@ typedef enum {
     
 -(void)refreshSubscriptionsAfterSubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
     syncType = MA_Sync_Subscribe;
-    [GRSOperation setFetchFlag:YES];
+	//   [GRSOperation setFetchFlag:YES];
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
@@ -257,7 +260,7 @@ typedef enum {
 
 - (void)addRSSFoldersIn:(Folder *)folder toArray:(NSMutableArray *)array 
 {
-    if (IsRSSFolder(folder)) [array addObject:folder];
+    if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) [array addObject:folder];
     else
     {
         Database * db = [Database sharedDatabase];
@@ -269,20 +272,13 @@ typedef enum {
 -(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus 
 {   
     syncType = MA_Sync_Refresh_All;
-    [GRSOperation setFetchFlag:YES];
-    
-    // TODO Looping through folders twice, but need to avoid recursion in refreshSubscriptions. Revisit later?
-    NSMutableArray *rssFolders = [NSMutableArray array];
-    for (Folder *folder in foldersArray) {
-        [self addRSSFoldersIn:folder toArray:rssFolders];
-    }
-    
-    // Bring new subscriptions from Google to Vienna
-    GRSRefreshAllOperation *op = [[GRSRefreshAllOperation alloc] init];
-    [op setFolders:rssFolders];
-    [operationQueue addOperation:op];
-    [op release];
-    
+	
+	if ([[Preferences standardPreferences] syncGoogleReader]) {
+		//TOFIX - Dovrebbe rimanere SOLO updateViennaSubscriptionsWithGoogleSubscriptions...
+		[[GoogleReader sharedManager] loadSubscriptions:nil];
+		[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:foldersArray];
+	}
+	
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
@@ -530,6 +526,7 @@ typedef enum {
 		return;
 	}
     
+	
 	// The activity log name we use depends on whether or not this folder has a real name.
 	NSString * name = [[folder name] isEqualToString:[Database untitledFeedFolderName]] ? [folder feedURL] : [folder name];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:name];
@@ -554,11 +551,12 @@ typedef enum {
 	// through the database.
 	[self setFolderUpdatingFlag:folder flag:YES];
 	
-	// Additional detail for the log
-	[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
+			// Additional detail for the log
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
 	
-	// Kick off the connection
-	[self refreshFeed:folder fromURL:url withLog:aItem];
+		// Kick off the connection
+		[self refreshFeed:folder fromURL:url withLog:aItem];
+	
 }
 
 /* refreshFeed
@@ -647,15 +645,11 @@ typedef enum {
 	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
     
-    if ([[Preferences standardPreferences] syncGoogleReader])
+    
+	/*if ([[Preferences standardPreferences] syncGoogleReader])
     {
-        GRSRefreshOperation *op = [[GRSRefreshOperation alloc] init];
-        [op setDelegate:self];
-        [op setFolder:folder];
-        [op setType:syncType];
-        [operationQueue addOperation:op];
-        [op release];
     } else 
+	 */
     {
         [self syncFinishedForFolder:folder];
     }

@@ -35,6 +35,7 @@
 #define MA_RSS_Folder			4
 #define MA_Trash_Folder			5
 #define MA_Search_Folder		6
+#define MA_GoogleReader_Folder	7
 
 // Macros to simplify getting folder types
 #define FolderType(f)			([(f) type])
@@ -43,6 +44,7 @@
 #define IsGroupFolder(f)		(([(f) type]) == MA_Group_Folder)
 #define IsTrashFolder(f)		(([(f) type]) == MA_Trash_Folder)
 #define IsSearchFolder(f)		(([(f) type]) == MA_Search_Folder)
+#define IsGoogleReaderFolder(f)	(([(f) type]) == MA_GoogleReader_Folder)
 #define IsSameFolderType(f,g)	(([(f) type]) == ([(g) type]))
 
 // Folder flags

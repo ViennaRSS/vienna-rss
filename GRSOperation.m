@@ -14,12 +14,9 @@
 
 @implementation GRSOperation
 
-static GoogleReader *googleReader;
 static BOOL fetchFlag;
 
 static NSDate *lastSync;
-static NSString *googleUsername;
-static NSString *googlePassword;
 
 - (id)init
 {
@@ -31,9 +28,11 @@ static NSString *googlePassword;
     return self;
 }
 
+//TOFIX
 +(GoogleReader *)sharedGoogleReader 
 {
-    return googleReader;
+	NSLog(@"Mi hanno chiamato!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    return [GoogleReader sharedManager];
 }
 
 +(void)setFetchFlag:(BOOL)flag
@@ -88,29 +87,45 @@ static NSString *googlePassword;
 
 -(void)main 
 {
+	
+	return
+	
+	//FIX
+	NSLog(@"GRSOperation.m - method:main");
+	
     // Don't allow sync operations to continue if sync is disabled
     if (![[Preferences standardPreferences] syncGoogleReader]) return;
+	
+
+	
+	/*
     
     // The class maintains a GoogleReader instance for all objects (so we only authenticate when necessary)
     @synchronized([GRSOperation class]) 
     {
-        NSString * username = [[Preferences standardPreferences] googleUsername];
-        NSString * password = [AGKeychain getPasswordFromKeychainItem:@"Vienna: GoogleReaderSync" withItemKind:@"application password" forUsername:username];        
+		
+		NSLog(@"Check if an auth TOKEN is available!");
+		
+        
+		//NSString * username = [[Preferences standardPreferences] googleUsername];
+        //NSString * password = [AGKeychain getPasswordFromKeychainItem:@"Vienna: GoogleReaderSync" withItemKind:@"application password" forUsername:username];        
         
         // Determine when to re-athorize with google
         if (googleReader == nil || 
             ![googleReader isAuthenticated] ||
-            ![googleUsername isEqualToString:username] || // If username changed
-            ![googlePassword isEqualToString:password] || // If password changed
+			//            ![googleUsername isEqualToString:username] || // If username changed
+            //![googlePassword isEqualToString:password] || // If password changed
             (([[NSDate date] timeIntervalSinceDate:lastSync] / 60) > 20)) // If last sync over 20 minutes ago
         { 
             
-            googleReader = [[GoogleReader readerWithUsername:username password:password] retain];
+            //googleReader = [[GoogleReader readerWithUsername:username password:password] retain];
+			// googleReader = [[GoogleReader reader] retain];
             
             lastSync = [[NSDate date] retain];
-            googleUsername = [username retain];
-            googlePassword = [password retain];
+            //googleUsername = [username retain];
+            //googlePassword = [password retain];
         }
+		
         
         // Don't allow sync operations to continue if authentication failed
         if (![googleReader isAuthenticated]) 
@@ -120,23 +135,29 @@ static NSString *googlePassword;
             [self handleError];
             return;
         }
-        
+        */
         // Fetch Google Reader data if asked.
         // Using a static flag so that multiple operations can be spawned, but data is fetched only once.
         if (fetchFlag)
         {
-            [googleReader loadSubscriptions];
-            [googleReader loadReadingList];
+			NSLog(@"Avviso il notification center");
+			[self performSelectorOnMainThread:@selector(downloadSubscriptions) withObject:nil waitUntilDone:YES];
+			//  [googleReader loadReadingList];
+			
             fetchFlag = NO;
         }
-    }
+    //}
     
     [self doMain];
 }
 
+-(void)downloadSubscriptions {
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleDownloadSubscriptions" object:nil];
+}
+
 -(NSDictionary *)readingListDataForArticle:(Article *)article
 {
-    for (NSDictionary * data in [googleReader readingList])
+    for (NSDictionary * data in [[GoogleReader sharedManager] readingList])
     {
         NSArray * alternate = [data objectForKey:@"alternate"];
         for (NSDictionary * dict in alternate)

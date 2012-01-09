@@ -62,7 +62,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(id)handleRefreshAllSubscriptions:(NSScriptCommand *)cmd
 {
-	[[self delegate] refreshAllSubscriptions:nil];
+	[(AppController*)[self delegate] refreshAllSubscriptions:nil];
 	return nil;
 }
 
@@ -144,7 +144,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 	NSDictionary * args = [cmd evaluatedArguments];
 	NSArray * argArray = [self evaluatedArrayOfFolders:[args objectForKey:@"Folder"] withCommand:cmd];
 	if (argArray != nil)
-		[[self delegate] markSelectedFoldersRead:argArray];
+		[(AppController*)[self delegate] markSelectedFoldersRead:argArray];
 
 	return nil;
 }
@@ -154,7 +154,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(id)handleMarkAllSubscriptionsRead:(NSScriptCommand *)cmd
 {
-	[[self delegate] markAllSubscriptionsRead:nil];
+	[(AppController*)[self delegate] markAllSubscriptionsRead:nil];
 	
 	return nil;
 }
@@ -173,7 +173,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(id)handleEmptyTrash:(NSScriptCommand *)cmd
 {
-	[[self delegate] clearUndoStack];
+	[(AppController*)[self delegate] clearUndoStack];
 	[[Database sharedDatabase] purgeDeletedArticles];
 	return nil;
 }
@@ -214,7 +214,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 
 	int parentId = folder ? ((IsGroupFolder(folder)) ? [folder itemId] :[folder parentId]) : MA_Root_Folder;
 
-	[[self delegate] createNewSubscription:[args objectForKey:@"URL"] underFolder:parentId afterChild:-1];
+	[(AppController*)[self delegate] createNewSubscription:[args objectForKey:@"URL"] underFolder:parentId afterChild:-1];
 	return nil;
 }
 
@@ -244,7 +244,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(NSArray *)folders
 {
-	return [[self delegate] folders];
+	return [(AppController*)[self delegate] folders];
 }
 
 /* isRefreshing
@@ -252,7 +252,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(BOOL)isRefreshing
 {
-	return [[self delegate] isConnecting];
+	return [(AppController*)[self delegate] isConnecting];
 }
 
 /* totalUnreadCount
@@ -269,7 +269,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(NSString *)currentTextSelection
 {
-	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabItemView];
+	NSView<BaseView> * theView = [[(AppController*)[self delegate] browserView] activeTabItemView];
 	WebView * webPane = nil;
 
 	if ([theView isKindOfClass:[BrowserPane class]])
@@ -293,7 +293,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = [[[self delegate] browserView] activeTabItemView];
+	NSView<BaseView> * theView = [[(AppController*)[self delegate] browserView] activeTabItemView];
 	WebView * webPane = [theView webView];
 	
 	if (webPane != nil)
@@ -314,7 +314,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(Article *)currentArticle;
 {
-	return [[self delegate] selectedArticle];
+	return [(AppController*)[self delegate] selectedArticle];
 }
 
 /* currentFolder
@@ -322,7 +322,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(Folder *)currentFolder
 {
-	return [[Database sharedDatabase] folderFromID:[[self delegate] currentFolderId]];
+	return [[Database sharedDatabase] folderFromID:[(AppController*)[self delegate] currentFolderId]];
 }
 
 /* setCurrentFolder

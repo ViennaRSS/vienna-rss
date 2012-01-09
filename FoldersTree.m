@@ -353,7 +353,7 @@
 		node = rootNode;
 	else
 		node = [rootNode nodeFromID:folderId];
-	if ([node folder] != nil && IsRSSFolder([node folder]))
+	if ([node folder] != nil && (IsRSSFolder([node folder]) || IsGoogleReaderFolder([node folder])))
 		[array addObject:[node folder]];
 	node = [node firstChild];
 	while (node != nil)

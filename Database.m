@@ -715,7 +715,7 @@ static Database * _sharedDatabase = nil;
 	
 	// If no change to last update string, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && IsRSSFolder(folder))
+	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
 	{
 		if ([[folder lastUpdateString] isEqualToString:lastUpdateString])
 			return;
@@ -744,6 +744,35 @@ static Database * _sharedDatabase = nil;
 	}
 	return YES;
 }
+
+
+-(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url {
+	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_GoogleReader_Folder canAppendIndex:YES];
+	//TODO: optimization using unique add function for addRSSFolder
+	if (folderId != -1)
+	{
+		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
+		NSString *preparedName = [SQLDatabase prepareStringForQuery:feedName];
+		
+		[self verifyThreadSafety];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:
+							   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
+							   "values (%d, '%@', '', '', '', '%@', %d)",
+							   folderId,
+							   preparedName,
+							   preparedURL,
+							   0];
+		if (!results)
+			return -1;
+		
+		// Add this new folder to our internal cache
+		Folder * folder = [self folderFromID:folderId];
+		[folder setFeedURL:url];
+		[results release];
+	}
+	return folderId;
+}
+
 
 /* addRSSFolder
  * Add an RSS Feed folder and return the ID of the new folder.
@@ -1755,7 +1784,7 @@ static Database * _sharedDatabase = nil;
 				Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
 				[folder setNextSiblingId:nextSibling];
 				[folder setFirstChildId:firstChild];
-				if (!IsRSSFolder(folder))
+				if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
 					unreadCount = 0;
 				[folder setUnreadCount:unreadCount];
 				[folder setLastUpdate:lastUpdate];
@@ -1797,7 +1826,7 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 		[results release];
-
+		
 		// Fix the childUnreadCount for every parent		
 		for (Folder * folder in [foldersDict objectEnumerator])
 		{

@@ -29,7 +29,7 @@
 -(void)showInfoWindowForFolder:(int)folderId;
 @end
 
-@interface InfoWindow : NSWindowController {
+@interface InfoWindow : NSWindowController <NSWindowDelegate> {
 	IBOutlet NSTextField * folderName;
 	IBOutlet NSTextField * lastRefreshDate;
 	IBOutlet NSImageView * folderImage;

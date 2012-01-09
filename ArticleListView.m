@@ -1461,7 +1461,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  * Datasource for the table view. Return the total number of rows we'll display which
  * is equivalent to the number of articles in the current folder.
  */
--(int)numberOfRowsInTableView:(NSTableView *)aTableView
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
 	return [[articleController allArticles] count];
 }
@@ -1470,7 +1470,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  * Called by the table view to obtain the object at the specified column and row. This is
  * called often so it needs to be fast.
  */
--(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+-(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	Database * db = [Database sharedDatabase];
 	NSArray * allArticles = [articleController allArticles];

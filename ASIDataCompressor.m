@@ -78,7 +78,7 @@
 	int status;
 	
 	zStream.next_in = bytes;
-	zStream.avail_in = (NSUInteger )length;
+	zStream.avail_in = (unsigned int)length;
 	zStream.avail_out = 0;
 
 	NSInteger bytesProcessedAlready = zStream.total_out;
@@ -88,8 +88,8 @@
 			[outputData increaseLengthBy:halfLength];
 		}
 		
-		zStream.next_out = [outputData mutableBytes] + zStream.total_out-bytesProcessedAlready;
-		zStream.avail_out = (NSUInteger )([outputData length] - (zStream.total_out-bytesProcessedAlready));
+		zStream.next_out = (Bytef*)[outputData mutableBytes] + zStream.total_out-bytesProcessedAlready;
+		zStream.avail_out = (unsigned int)([outputData length] - (zStream.total_out-bytesProcessedAlready));
 		status = deflate(&zStream, shouldFinish ? Z_FINISH : Z_NO_FLUSH);
 		
 		if (status == Z_STREAM_END) {
@@ -184,12 +184,12 @@
 		}
 		
 		// Write the deflated data out to the destination file
-		[outputStream write:[outputData bytes] maxLength:[outputData length]];
+		[outputStream write:(const uint8_t *)[outputData bytes] maxLength:[outputData length]];
 		
 		// Make sure nothing went wrong
 		if ([inputStream streamStatus] == NSStreamEventErrorOccurred) {
 			if (err) {
-				*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Compression of %@ failed because we were unable to write to the destination data file at &@",sourcePath,destinationPath],NSLocalizedDescriptionKey,[outputStream streamError],NSUnderlyingErrorKey,nil]];
+				*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Compression of %@ failed because we were unable to write to the destination data file at %@",sourcePath,destinationPath],NSLocalizedDescriptionKey,[outputStream streamError],NSUnderlyingErrorKey,nil]];
             }
 			[compressor closeStream];
 			return NO;

@@ -26,8 +26,7 @@
 #import "ArticleFilter.h"
 #import "ArticleRef.h"
 #import "StringExtensions.h"
-#import "GRSMarkReadOperation.h"
-#import "GRSMarkStarredOperation.h"
+#import "GoogleReader.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -554,16 +553,14 @@
 	SEL markFlagUndoAction = flagged ? @selector(markUnflagUndo:) : @selector(markFlagUndo:);
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
-    
-    GRSMarkStarredOperation * op = [[GRSMarkStarredOperation alloc] init];
-    [op setArticles:articleArray];
-    [op setStarredFlag:flagged];
-    [operationQueue addOperation:op];
-    [op release];
-	
+
 	[db beginTransaction];
 	for (Article * theArticle in articleArray)
 	{
+		Folder *myFolder = [db folderFromID:[theArticle folderId]];
+		if (IsGoogleReaderFolder(myFolder)) {
+			[[GoogleReader sharedManager] markStarred:[theArticle guid] starredFlag:flagged];
+		}
 		[theArticle markFlagged:flagged];
 		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
 	}
@@ -618,18 +615,19 @@
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
+	NSLog(@"innerMarkReadByArray");
 	Database * db = [Database sharedDatabase];
-	int lastFolderId = -1;
-
-    GRSMarkReadOperation *op = [[GRSMarkReadOperation alloc] init];
-    [op setArticles:articleArray];
-    [op setReadFlag:readFlag];
-    [operationQueue addOperation:op];
-    [op release];
+	NSInteger lastFolderId = -1;
 	
 	for (Article * theArticle in articleArray)
 	{
-		int folderId = [theArticle folderId];
+		NSLog(@"innerMarkReadByArray - Processo l'articolo %@ con FLAG: %@",[theArticle guid],[theArticle isRead] ? @"YES" : @"NO");
+		NSInteger folderId = [theArticle folderId];
+		if (IsGoogleReaderFolder([db folderFromID:folderId]) && ([theArticle isRead] != readFlag)) {
+			NSLog(@"Si tratta di un articolo GOOGLE READER!!!");
+			[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:readFlag];
+		}
+		//FIX: article status should be "settato" from httprequest success block
 		[db markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
 		[theArticle markRead:readFlag];
 		if (folderId != lastFolderId && lastFolderId != -1)
@@ -677,7 +675,13 @@
 
 	for (Article * theArticle in folderArrayOfArticles)
 	{
+		NSLog(@"Processo articolo %@ con FLAG %@",[theArticle guid],[theArticle isRead] ? @"YES" : @"NO");
+		if (IsGoogleReaderFolder([db folderFromID:[theArticle folderId]]) && ![theArticle isRead]) {
+			NSLog(@"Richiamo il WS");
+			[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+		}
 		[theArticle markRead:YES];
+
 	}
     
 	if (refreshFlag)
@@ -709,11 +713,14 @@
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
                 
-                GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
+				//TOFIX
+				/*
+				GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
                 [op setArticles:[folder articles]];
                 [op setReadFlag:YES];
                 [operationQueue addOperation:op];
                 [op release];
+				 */
 			}
 		}
 		else

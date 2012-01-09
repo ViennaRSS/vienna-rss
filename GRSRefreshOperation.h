@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "GRSRefreshAllOperation.h"
+//#import "GRSRefreshAllOperation.h"
 #import "Constants.h"
 
 @class Folder;
@@ -14,7 +14,7 @@
 
 @protocol GRSRefreshDelegate;
 
-@interface GRSRefreshOperation : GRSRefreshAllOperation
+@interface GRSRefreshOperation : NSObject
 {
     GoogleReader * googleReader;
     Folder * folder;

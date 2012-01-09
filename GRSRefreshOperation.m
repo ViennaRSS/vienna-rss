@@ -287,7 +287,7 @@
 
 -(void)doMain
 {
-    [self setGoogleReader:[GRSOperation sharedGoogleReader]];
+    [self setGoogleReader:[GoogleReader sharedManager]];
     
     switch (type) 
     {

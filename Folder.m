@@ -33,6 +33,7 @@ enum {
 	MA_RSSFeedIcon,
 	MA_TrashFolderIcon,
 	MA_SearchFolderIcon,
+	MA_GoogleReaderFolderIcon,
 	MA_Max_Icons
 };
 
@@ -142,7 +143,7 @@ static NSArray * iconArray = nil;
 		imagesCacheFolder = [[Preferences standardPreferences] imagesFolder];
 		if (![fileManager fileExistsAtPath:imagesCacheFolder isDirectory:&isDir])
 		{
-			if (![fileManager createDirectoryAtPath:imagesCacheFolder attributes:NULL])
+			if (![fileManager createDirectoryAtPath:imagesCacheFolder withIntermediateDirectories:YES attributes:nil error:nil])
 			{
 				NSLog(@"Cannot create image cache at %@. Will not cache folder images in this session.", imagesCacheFolder);
 				imagesCacheFolder = nil;
@@ -162,7 +163,7 @@ static NSArray * iconArray = nil;
 		
 		// Remember - not every file we find may be a valid image file. We use the filename as
 		// the key but check the extension too.
-		listOfFiles = [fileManager directoryContentsAtPath:imagesCacheFolder];
+		listOfFiles = [fileManager contentsOfDirectoryAtPath:imagesCacheFolder error:nil];
 		if (listOfFiles != nil)
 		{
 			NSString * fileName;
@@ -242,6 +243,7 @@ static NSArray * iconArray = nil;
 						[NSImage imageNamed:@"rssFeedNew.tiff"],
 						[NSImage imageNamed:@"trashFolder.tiff"],
 						[NSImage imageNamed:@"searchFolder.tiff"],
+						[NSImage imageNamed:@"googleFeed.tiff"],
 						nil] retain];
 	return iconArray;
 }
@@ -350,6 +352,8 @@ static NSArray * iconArray = nil;
 		return [[Folder _iconArray] objectAtIndex:MA_TrashFolderIcon];
 	if (IsSearchFolder(self))
 		return [[Folder _iconArray] objectAtIndex:MA_SearchFolderIcon];
+	if (IsGoogleReaderFolder(self))
+		return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
 	if (IsRSSFolder(self))
 	{
 		// Try the folder icon cache.

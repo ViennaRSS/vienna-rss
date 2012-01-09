@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "GRSMergeOperation.h"
 
-@interface SyncMerge : NSWindowController <GRSMergeDelegate>
+@interface SyncMerge : NSWindowController
 {
     IBOutlet NSTextField * messageTextField;
     IBOutlet NSProgressIndicator * progressIndicator;
@@ -23,6 +22,7 @@
 -(IBAction)cancel:(id)sender;
 
 -(void)beginMerge;
+-(void)startSync;
 
 @property (assign) NSTextField * messageTextField;
 @property (assign) NSProgressIndicator * progressIndicator;

@@ -94,6 +94,9 @@
 +(NSString *)untitledFeedFolderName;
 -(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url;
 
+// Google Reader folder functions
+-(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url;
+
 // Search folder functions
 -(void)setSearchString:(NSString *)newSearchString;
 
