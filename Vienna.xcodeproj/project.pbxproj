@@ -30,19 +30,14 @@
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
 		61975F030B41F145001F65FF /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61975F010B41F145001F65FF /* EmptyTrashWarning.nib */; };
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
-		6615BE3613E4AE9D00BCCDEE /* GRSRefreshOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6615BE3513E4AE9D00BCCDEE /* GRSRefreshOperation.m */; };
 		6624683713C5D09400C85417 /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
 		6624683913C5D0B500C85417 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6624683813C5D0A200C85417 /* SyncPreferences.xib */; };
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		662468B113C60A2800C85417 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
 		667A4C9B13D8352A0023F2A7 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 667A4C9A13D8352A0023F2A7 /* libz.1.2.5.dylib */; };
-		668B5CA313E249E80093B887 /* GRSSetFolderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B5CA213E249E80093B887 /* GRSSetFolderOperation.m */; };
-		668B5CA713E253630093B887 /* GRSOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B5CA613E253630093B887 /* GRSOperation.m */; };
 		66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
-		66EA017613EA2DB4007EDEAF /* GRSRenameFolderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA017513EA2DB4007EDEAF /* GRSRenameFolderOperation.m */; };
 		66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
-		66FBBAF213C8763200ED51E5 /* AGKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FBBAF113C8763200ED51E5 /* AGKeychain.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -375,8 +370,6 @@
 		61D9A5300B4200890087C312 /* sv */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = sv; path = sv.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61D9A5310B4200960087C312 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_CN; path = zh_CN.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
 		61D9A5320B4200A30087C312 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = zh_TW.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
-		6615BE3413E4AE9D00BCCDEE /* GRSRefreshOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSRefreshOperation.h; sourceTree = "<group>"; };
-		6615BE3513E4AE9D00BCCDEE /* GRSRefreshOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSRefreshOperation.m; sourceTree = "<group>"; };
 		6624683513C5D09200C85417 /* SyncPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncPreferences.h; sourceTree = "<group>"; };
 		6624683613C5D09300C85417 /* SyncPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncPreferences.m; sourceTree = "<group>"; };
 		6624683813C5D0A200C85417 /* SyncPreferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncPreferences.xib; sourceTree = "<group>"; };
@@ -386,17 +379,9 @@
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleReader.h; sourceTree = "<group>"; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleReader.m; sourceTree = "<group>"; };
 		667A4C9A13D8352A0023F2A7 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		668B5CA113E249E80093B887 /* GRSSetFolderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSSetFolderOperation.h; sourceTree = "<group>"; };
-		668B5CA213E249E80093B887 /* GRSSetFolderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSSetFolderOperation.m; sourceTree = "<group>"; };
-		668B5CA513E253630093B887 /* GRSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSOperation.h; sourceTree = "<group>"; };
-		668B5CA613E253630093B887 /* GRSOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSOperation.m; sourceTree = "<group>"; };
 		66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncMerge.xib; sourceTree = "<group>"; };
-		66EA017413EA2DB4007EDEAF /* GRSRenameFolderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSRenameFolderOperation.h; sourceTree = "<group>"; };
-		66EA017513EA2DB4007EDEAF /* GRSRenameFolderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSRenameFolderOperation.m; sourceTree = "<group>"; };
 		66EA343613F77D7E00F68393 /* SyncMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncMerge.h; sourceTree = "<group>"; };
 		66EA343713F77D7E00F68393 /* SyncMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncMerge.m; sourceTree = "<group>"; };
-		66FBBAF013C8763200ED51E5 /* AGKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGKeychain.h; sourceTree = "<group>"; };
-		66FBBAF113C8763200ED51E5 /* AGKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGKeychain.m; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01BA210B05251900CD0695 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/InfoWindow.nib; sourceTree = "<group>"; };
@@ -1050,7 +1035,6 @@
 			isa = PBXGroup;
 			children = (
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
-				66FC94EF13CFE07700F768DC /* AGKeychain */,
 				662468AE13C609F900C85417 /* JSONKit */,
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
 				AAC022070E898A0700BA9002 /* Documents & Tools */,
@@ -1265,14 +1249,6 @@
 			isa = PBXGroup;
 			children = (
 				EACB097314A0EF9F00F48809 /* OAUTH2 */,
-				668B5CA513E253630093B887 /* GRSOperation.h */,
-				668B5CA613E253630093B887 /* GRSOperation.m */,
-				668B5CA113E249E80093B887 /* GRSSetFolderOperation.h */,
-				668B5CA213E249E80093B887 /* GRSSetFolderOperation.m */,
-				6615BE3413E4AE9D00BCCDEE /* GRSRefreshOperation.h */,
-				6615BE3513E4AE9D00BCCDEE /* GRSRefreshOperation.m */,
-				66EA017413EA2DB4007EDEAF /* GRSRenameFolderOperation.h */,
-				66EA017513EA2DB4007EDEAF /* GRSRenameFolderOperation.m */,
 				664F87C513C62DFE00E266DE /* GoogleReader.h */,
 				664F87C613C62DFE00E266DE /* GoogleReader.m */,
 			);
@@ -1311,15 +1287,6 @@
 				662468B013C60A2800C85417 /* JSONKit.m */,
 			);
 			name = JSONKit;
-			sourceTree = "<group>";
-		};
-		66FC94EF13CFE07700F768DC /* AGKeychain */ = {
-			isa = PBXGroup;
-			children = (
-				66FBBAF013C8763200ED51E5 /* AGKeychain.h */,
-				66FBBAF113C8763200ED51E5 /* AGKeychain.m */,
-			);
-			name = AGKeychain;
 			sourceTree = "<group>";
 		};
 		AA1A282E0C09BE59005968DC /* Toolbar Buttons */ = {
@@ -2368,11 +2335,6 @@
 				6624683713C5D09400C85417 /* SyncPreferences.m in Sources */,
 				662468B113C60A2800C85417 /* JSONKit.m in Sources */,
 				664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */,
-				66FBBAF213C8763200ED51E5 /* AGKeychain.m in Sources */,
-				668B5CA313E249E80093B887 /* GRSSetFolderOperation.m in Sources */,
-				668B5CA713E253630093B887 /* GRSOperation.m in Sources */,
-				6615BE3613E4AE9D00BCCDEE /* GRSRefreshOperation.m in Sources */,
-				66EA017613EA2DB4007EDEAF /* GRSRenameFolderOperation.m in Sources */,
 				66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */,
 				EACB097914A0EFDA00F48809 /* GTMOAuth2Authentication.m in Sources */,
 				EACB097A14A0EFDA00F48809 /* GTMOAuth2SignIn.m in Sources */,
@@ -2770,6 +2732,7 @@
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_NUMBER = 2602;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
@@ -2778,6 +2741,7 @@
 		52BA64030DE9E2FF0008B3E1 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_NUMBER = 2602;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
@@ -2786,6 +2750,7 @@
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_NUMBER = 2600;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -2814,6 +2779,7 @@
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_NUMBER = 2600;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",

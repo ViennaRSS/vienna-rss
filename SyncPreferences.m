@@ -9,14 +9,11 @@
 #import "SyncPreferences.h"
 #import "GoogleReader.h"
 #import "Preferences.h"
-#import "AGKeyChain.h"
 #import "SyncMerge.h"
 
 @implementation SyncPreferences
 
 @synthesize syncButton, mergeButton, createButton;
-@synthesize username;
-@synthesize password;
 
 -(id)init 
 {
@@ -35,40 +32,14 @@
     return self;
 }
 
--(void)savePassword:(NSString *)pass forUser:(NSString *)user 
-{
-    if (![AGKeychain checkForExistanceOfKeychainItem:@"Vienna: GoogleReaderSync" withItemKind:@"application password" forUsername:user]) 
-        [AGKeychain addKeychainItem:@"Vienna: GoogleReaderSync" withItemKind:@"application password" forUsername:user withPassword:pass];
-    else 
-        [AGKeychain modifyKeychainItem:@"Vienna: GoogleReaderSync" withItemKind:@"application password" forUsername:user withNewPassword:pass];
-}
 
 -(void)windowWillClose:(NSNotification *)notification 
 {
     Preferences *prefs = [Preferences standardPreferences];
     [prefs setSyncGoogleReader:([syncButton state] == NSOnState)];
-    [prefs setGoogleUsername:[username stringValue]];
-    [prefs savePreferences];
-    
-    [self savePassword:password.stringValue forUser:username.stringValue];
+    [prefs savePreferences];    
 }
 
--(BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor 
-{
-    Preferences *prefs = [Preferences standardPreferences];
-    NSString *val = [fieldEditor string];
-    
-    if (control.tag == 0) // Username
-    { 
-        [prefs setGoogleUsername:val];
-        if ([[password stringValue] length] > 0)
-            [self savePassword:[password stringValue] forUser:val];
-    } 
-    else if (control.tag == 1 && [[username stringValue] length] > 0) // Password
-        [self savePassword:val forUser:[username stringValue]];
-    
-    return YES;
-}
 
 -(IBAction)changeSyncGoogleReader:(id)sender 
 {
@@ -106,11 +77,6 @@
     
     Preferences * prefs = [Preferences standardPreferences];
 	[syncButton setState:[prefs syncGoogleReader] ? NSOnState : NSOffState];
-    [username setStringValue:[prefs googleUsername]];
-    
-    NSString *pass = [AGKeychain getPasswordFromKeychainItem:@"Vienna: GoogleReaderSync" withItemKind:@"application password" forUsername:[prefs googleUsername]];
-    if ([pass length] > 0)
-        [password setStringValue:pass];
 }
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
@@ -134,8 +100,6 @@
     [syncButton release];
     [mergeButton release];
     [createButton release];
-    [username release];
-    [password release];
     [merge release];
 
 }

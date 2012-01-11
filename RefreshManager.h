@@ -20,23 +20,21 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
-#import "AsyncConnection.h"
 #import "FeedCredentials.h"
-#import "GRSRefreshOperation.h"
 #import "Constants.h"
+#import "ASINetworkQueue.h"
 
-@interface RefreshManager : NSObject <GRSRefreshDelegate> {
+@interface RefreshManager : NSObject {
 	NSUInteger maximumConnections;
 	NSUInteger countOfNewArticles;
-	NSMutableArray * connectionsArray;
 	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
 	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
-    NSOperationQueue *operationQueue;
     SyncTypes syncType;
+	ASINetworkQueue *networkQueue;
 }
 
 +(RefreshManager *)sharedManager;
@@ -48,8 +46,9 @@
 -(void)refreshSubscriptionsAfterUnsubscribe:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
+-(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray;
 -(void)cancelAll;
+-(BOOL)isConnecting;
 -(NSUInteger)countOfNewArticles;
--(NSUInteger)totalConnections;
 -(NSString *)statusMessageDuringRefresh;
 @end

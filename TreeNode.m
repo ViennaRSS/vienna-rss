@@ -271,7 +271,15 @@
  */
 -(NSString *)nodeName
 {
-	return folder ? [folder name] : @"";
+	//	return folder ? [folder name] : @"";
+	if (folder != nil) {
+		if (IsGoogleReaderFolder(folder)) {
+			return [NSString stringWithFormat:@"[G] %@",[folder name]];
+		} else {
+			return [folder name];
+		}
+	} 
+	return @"";
 }
 
 /* countOfChildren

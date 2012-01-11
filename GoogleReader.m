@@ -87,13 +87,17 @@ static GoogleReader * _googleReader = nil;
     return output;
 }
 
--(void)refreshFeed:(Folder*)thisFolder {
-				
+-(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder shouldIgnoreArticleLimit:(BOOL)ignoreLimit
+{				
 	//This is a workaround throw a BAD folderupdate value on DB
-	NSString *folderLastUpdate = [thisFolder lastUpdateString];
+	NSString *folderLastUpdate = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
 	if ([folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
 	
-	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=100&ot=%@&T=%@&access_token=%@",[self URLEncodedString_ch:[thisFolder feedURL]],folderLastUpdate, token, oAuthObject.accessToken]]];
+	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
+		
+	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [self URLEncodedString_ch:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, oAuthObject.accessToken]]];
+	
+	LOG_EXPR([request url]);
 	
 	[request setUserInfo:[NSDictionary dictionaryWithObject:thisFolder forKey:@"folder"]];
 	[request setCompletionBlock:^{
@@ -243,8 +247,8 @@ static GoogleReader * _googleReader = nil;
 	[request setFailedBlock:^{
 		LOG_EXPR([request error]);
 	}];
-	[nq addOperation:request];
-	[nq go];
+	
+	return request;
 }
 
 
@@ -268,6 +272,7 @@ static GoogleReader * _googleReader = nil;
 	// Get Google subscriptions
 	for (NSDictionary * feed in subscriptions) 
 	{
+		LOG_EXPR(feed);
 		NSString * feedID = [feed objectForKey:@"id"];
 		NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@""];
 		

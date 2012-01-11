@@ -141,6 +141,7 @@
 -(IBAction)refreshAllFolderIcons:(id)sender;
 -(IBAction)refreshSelectedSubscriptions:(id)sender;
 -(IBAction)forceRefreshSelectedSubscriptions:(id)sender;
+-(IBAction)updateRemoteSubscriptions:(id)sender;
 -(IBAction)refreshAllSubscriptions:(id)sender;
 -(IBAction)cancelAllRefreshes:(id)sender;
 -(IBAction)moreStyles:(id)sender;

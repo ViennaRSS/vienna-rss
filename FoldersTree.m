@@ -29,8 +29,6 @@
 #import "PopupButton.h"
 #import "ViennaApp.h"
 #import "BrowserView.h"
-#import "GRSSetFolderOperation.h"
-#import "GRSRenameFolderOperation.h"
 
 // Private functions
 @interface FoldersTree (Private)
@@ -1072,12 +1070,14 @@
             NSString * oldName = [folder name];
 			[db setFolderName:[folder itemId] newName:newName];
             
+			/*
             GRSRenameFolderOperation * op = [[GRSRenameFolderOperation alloc] init];
             [op setFolder:folder];
             [op setOldName:oldName];
             [op setNewName:newName];
             [operationQueue addOperation:op];
             [op release];
+			 */
         }
 	}
 }
@@ -1242,12 +1242,14 @@
         
         if (sync)
         {
+			/*
             GRSSetFolderOperation * op = [[GRSSetFolderOperation alloc] init];
             [op setFolder:[node folder]];
             [op setOldParent:[oldParent folder]];
             [op setNewParent:[newParent folder]];
             [operationQueue addOperation:op];
             [op release];
+			 */
         }
 		
 		if (newParentId == oldParentId)

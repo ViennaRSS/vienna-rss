@@ -46,6 +46,6 @@
 -(void)disableTag:(NSString *)tagName;
 -(void)renameTagFrom:(NSString *)oldName to:(NSString *)newName;
 -(void)renameFeed:(NSString *)feedURL to:(NSString *)newName;
--(void)refreshFeed:(Folder*)thisFolder;
+-(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
 
 @end

@@ -921,7 +921,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(showXMLSource:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(syncWithGoogleReader:))];
-	
+	[folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];	
 	return folderMenu;
 }
 
@@ -2797,7 +2797,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(BOOL)isConnecting
 {
-	return [[RefreshManager sharedManager] totalConnections] > 0;
+	return [[RefreshManager sharedManager] isConnecting];
 }
 
 /* refreshOnTimer
@@ -2842,6 +2842,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[db beginTransaction];
 	NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
 	[db commitTransaction];
+	
 	
 	/*
 	if (folderId != -1)
@@ -3739,6 +3740,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllFolderIcons:(id)sender
 {
+	LOG_EXPR([foldersTree folders:0]);
 	if (![self isConnecting])
 		[[RefreshManager sharedManager] refreshFolderIconCacheForSubscriptions:[foldersTree folders:0]];
 }
@@ -3759,7 +3761,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 -(IBAction)forceRefreshSelectedSubscriptions:(id)sender {
 	NSLog(@"Force Refresh");
+	[[RefreshManager sharedManager] forceRefreshSubscriptionForFolders:[foldersTree selectedFolders]];		
 }
+
+-(IBAction)updateRemoteSubscriptions:(id)sender {
+	NSLog(@"updateRemoteSubscriptions");
+	[[GoogleReader sharedManager] loadSubscriptions:nil];
+	[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:[foldersTree folders:0]];
+
+}
+
 
 /* refreshSelectedSubscriptions
  * Refresh one or more subscriptions selected from the folders list. The selection we obtain
@@ -4140,6 +4151,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
 		*validateFlag = IsRSSFolder(folder) && isMainWindowVisible;
+		return YES;
+	}
+	if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
+		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
+		*validateFlag = IsGoogleReaderFolder(folder);
 		return YES;
 	}
 	if (theAction == @selector(viewNextUnread:))

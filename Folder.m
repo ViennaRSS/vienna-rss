@@ -352,18 +352,29 @@ static NSArray * iconArray = nil;
 		return [[Folder _iconArray] objectAtIndex:MA_TrashFolderIcon];
 	if (IsSearchFolder(self))
 		return [[Folder _iconArray] objectAtIndex:MA_SearchFolderIcon];
-	if (IsGoogleReaderFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
-	if (IsRSSFolder(self))
+	//	if (IsGoogleReaderFolder(self))
+	//	return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
+	if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
 	{
 		// Try the folder icon cache.
 		NSImage * imagePtr = nil;
 		if ([self feedURL])
-		{
-			NSString * homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+		{	
+			NSString * homePageSiteRoot;
+			if (IsRSSFolder(self)) {
+				homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+			} else {
+				homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
+			}
 			imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 		}
-		return (imagePtr) ? imagePtr : [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
+		NSImage *altIcon;
+		if (IsRSSFolder(self)) {
+			altIcon = [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
+		} else {
+			altIcon = [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
+		}
+		return (imagePtr) ? imagePtr : altIcon;
 	}
 	
 	// Use the generic folder icon for anything else
@@ -375,7 +386,7 @@ static NSArray * iconArray = nil;
  */
 -(BOOL)hasCachedImage
 {
-	if (!IsRSSFolder(self))
+	if (!IsRSSFolder(self) && !IsGoogleReaderFolder(self))
 		return NO;
 	NSImage * imagePtr = nil;
 	if ([self feedURL])
@@ -393,6 +404,8 @@ static NSArray * iconArray = nil;
 {
 	if (IsRSSFolder(self))
 		return [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
+	if (IsGoogleReaderFolder(self))
+		return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
 	return [self image];
 }
 
@@ -404,7 +417,12 @@ static NSArray * iconArray = nil;
 {
 	if ([self feedURL] != nil && iconImage != nil)
 	{
-		NSString * homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+		NSString * homePageSiteRoot;
+		if (IsRSSFolder(self)) {
+			homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+		} else if (IsGoogleReaderFolder(self)) {
+			homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
+		}
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
 	}
 }
