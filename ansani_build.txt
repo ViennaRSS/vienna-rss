@@ -5,6 +5,7 @@ New on this build
 * Changed Async Connections to ASIHTTP*
 * Added Lion FullScreenSupport
 * Added a visual queue indicator
+* Full 64bit support!
 
 Tnx for your time!
 Salvatore Ansani <salvatore@ansani.it>
