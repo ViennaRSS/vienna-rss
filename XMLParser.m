@@ -442,8 +442,7 @@
 	NSCalendarDate *date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
 	[dateFormat release];
 	if (date == nil) {
-		NSLog(@"Conversion error!");
-		NSLog(dateString);
+		NSLog(@"Conversion error: %@",dateString);
 	}
 	return date;
 }
