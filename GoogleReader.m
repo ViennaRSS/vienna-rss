@@ -59,11 +59,11 @@ static GoogleReader * _googleReader = nil;
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	NSLog(@"Nuova richiesta accodata. CODA: %i",[nq requestsCount]);
+	NSLog(@"New request added. Queue: %i",[nq requestsCount]);
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	NSLog(@"Richiesta terminata. CODA: %i",[nq requestsCount]);	
+	NSLog(@"Request done. Queue: %i",[nq requestsCount]);	
 }
 
 
@@ -103,19 +103,18 @@ static GoogleReader * _googleReader = nil;
 	[request setCompletionBlock:^{
 		NSData *data = [request responseData];
 		Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
-		NSLog(@"Finito il refresh per %@",[refreshedFolder feedURL]);
+		NSLog(@"Refresh Done: %@",[refreshedFolder feedURL]);
 		
 		if (data) {
 			Database *db = [Database sharedDatabase];
 
 			NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[[JSONDecoder decoder] objectWithData:data]];		
 			if ([dict objectForKey:@"updated"] == nil) {
-				NSLog(@"-----------------------> ABBIAMO QUALCHE ERRORE!!!!");
 				LOG_EXPR([request url]);
 				NSLog(@"Feed name: %@",[dict objectForKey:@"title"]);
-				NSLog(@"Check precedente: %@",folderLastUpdate);
+				NSLog(@"Last Check: %@",folderLastUpdate);
 				NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
-				NSLog(@"Presenti %i articoli",[[dict objectForKey:@"items"] count]);
+				NSLog(@"Found %i items",[[dict objectForKey:@"items"] count]);
 				LOG_EXPR(dict);
 				//NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 				//LOG_EXPR(tmp);
@@ -190,7 +189,6 @@ static GoogleReader * _googleReader = nil;
 						if ([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)) {
 						} else {
 							[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
-							//NSLog(@"Articolo: %@ - Marcato Read: %@",[article title],[article isRead] ? @"YES" : @"NO");
 						}
 						
 					}
@@ -263,11 +261,8 @@ static GoogleReader * _googleReader = nil;
 
 -(void)completeUpdateViennaSubscriptionsWithGoogleSubscriptions:(NSNotification*)nc {
 	
-	NSLog(@"completeUpdateViennaSubscriptionsWithGoogleSubscriptions - START");
 	
-	NSLog(@"rimuovo il centro notifiche");
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"GRSync_RemoteSubscriptionsRefreshed" object:nil];
-	NSLog(@"continuo dopo aver rimosso il centro notifiche");
 		
 	// Get Google subscriptions
 	for (NSDictionary * feed in subscriptions) 
@@ -306,13 +301,11 @@ static GoogleReader * _googleReader = nil;
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_RemoteFoldersAdded" object:nil];
 	
-	NSLog(@"completeUpdateViennaSubscriptionsWithGoogleSubscriptions - END");
 
 }
 
 -(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList {
 
-	NSLog(@"updateViennaSubscriptionsWithGoogleSubscriptions - START");
 	
 	[localFeeds removeAllObjects];
 	
@@ -324,14 +317,12 @@ static GoogleReader * _googleReader = nil;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeUpdateViennaSubscriptionsWithGoogleSubscriptions:) name:@"GRSync_RemoteSubscriptionsRefreshed" object:nil];
 		
-	NSLog(@"updateViennaSubscriptionsWithGoogleSubscriptions - END");
 }
 
 
 -(void)handleGoogleLoginRequest
 {
 	
-	NSLog(@"Non autenticato, richiedo la pagina GOOGLE");
 	
 	GTMOAuth2WindowController *windowController = [GTMOAuth2WindowController controllerWithScope:@"https://www.google.com/reader/api"
 																						clientID:@"49097391685.apps.googleusercontent.com"
@@ -347,12 +338,10 @@ static GoogleReader * _googleReader = nil;
 		
 		if (error != nil) {
 			// Authentication failed
-			NSLog(@"Errore di autenticazione!!!!");
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_AuthFailed" object:nil];
 		} else {
 			// Authentication succeeded
-			NSLog(@"Autenticato!!");
 			oAuthObject = [auth retain];
 			//[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 
@@ -360,7 +349,6 @@ static GoogleReader * _googleReader = nil;
 			NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com/reader/api/0/token?client=scroll"]];
 			
 			[auth authorizeRequest:request completionHandler:^(NSError *error) {
-				NSLog(@"Finito il load del token"); 
 				if (error) {
 					LOG_EXPR([error description]);
 				} else {
@@ -373,7 +361,6 @@ static GoogleReader * _googleReader = nil;
 														 returningResponse:&response
 																	 error:&error];
 					if (data) {
-						NSLog(@"Processo l'acquisizione del token");
 						token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
 						LOG_EXPR(token);
 						[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
@@ -397,7 +384,6 @@ static GoogleReader * _googleReader = nil;
 -(void)authenticate 
 {    	
 	
-	NSLog(@"Google Reader - authenticate");
 	
 	
 	oAuthObject = [[GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
@@ -405,14 +391,12 @@ static GoogleReader * _googleReader = nil;
 																				   clientSecret:@"0wzzJCfkcNPeqKgjo-pfPZSA"] retain];	
 	
 	if (oAuthObject != nil && [oAuthObject canAuthorize]) {
-		NSLog(@"Autenticato da keychain!!");
 		//[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 
 		
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com/reader/api/0/token?client=scroll"]];
 		
 		[oAuthObject authorizeRequest:request completionHandler:^(NSError *error) {
-			NSLog(@"Finito il load del token"); 
 			if (error) {
 				LOG_EXPR([error description]);
 			} else {
@@ -425,7 +409,6 @@ static GoogleReader * _googleReader = nil;
 													 returningResponse:&response
 																 error:&error];
 				if (data) {
-					NSLog(@"Processo l'acquisizione del token");
 					token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
 					LOG_EXPR(token);
 					[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
@@ -485,7 +468,6 @@ static GoogleReader * _googleReader = nil;
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com/reader/api/0/subscription/list?client=scroll&output=json"]];
 
 	[oAuthObject authorizeRequest:request completionHandler:^(NSError *error) {
-		NSLog(@"Finito il load della lista"); 
 		if (error) {
 			LOG_EXPR([error description]);
 		} else {
@@ -498,7 +480,6 @@ static GoogleReader * _googleReader = nil;
 												 returningResponse:&response
 															 error:&error];
 			if (data) {
-				NSLog(@"Processo la lista di sottoscrizioni remote");
 				NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 				LOG_EXPR(tmp);
 				// API fetch succeeded
@@ -527,22 +508,17 @@ static GoogleReader * _googleReader = nil;
 	NSLog(@"Loading Google Reader Subscriptions");
 	
 	if (nc != nil) {
-		NSLog(@"Chiamata tramite NC");
 		
 		//Prima di tutto deregistriamoci dal NC
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:@"GRSync_Autheticated" object:nil];
 		
-		NSLog(@"Richiamiamo il processo di update Subscriptions");
 		[self performSelectorOnMainThread:@selector(completeLoadSubscriptions) withObject:nil waitUntilDone:YES];
 
 	} else {
-		NSLog(@"Chiamata NON da NC");
 
 		if ([oAuthObject canAuthorize]) {
-			NSLog(@"Autorizzazione OK - procediamo all'update delle subscriptions");
 			[self performSelectorOnMainThread:@selector(completeLoadSubscriptions) withObject:nil waitUntilDone:YES];
 		} else {
-			NSLog(@"Autorizzazione non ancora disponibile - registriamo la notifica");
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSubscriptions:) name:@"GRSync_Autheticated" object:nil];
 		}
 

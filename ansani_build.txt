@@ -1,0 +1,10 @@
+New on this build
+------------------------
+
+* Added Google Reader Sync support
+* Changed Async Connections to ASIHTTP*
+* Added Lion FullScreenSupport
+* Added a visual queue indicator
+
+Tnx for your time!
+Salvatore Ansani <salvatore@ansani.it>

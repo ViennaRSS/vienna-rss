@@ -177,6 +177,7 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
  */
 -(void)awakeFromNib
 {
+	//Enable FullScreen Support if we are on Lion 10.7.x
 	[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
 		
 	Preferences * prefs = [Preferences standardPreferences];
@@ -1940,6 +1941,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)handleAbout:(id)sender
 {
 	NSDictionary * fileAttributes = [[NSBundle mainBundle] infoDictionary];
+	LOG_EXPR(fileAttributes);
 	NSString * version = [fileAttributes objectForKey:@"CFBundleShortVersionString"];
 	NSString * versionString = [NSString stringWithFormat:NSLocalizedString(@"Version %@", nil), version];
 	NSDictionary * d = [NSDictionary dictionaryWithObjectsAndKeys:versionString, @"ApplicationVersion", @"", @"Version", nil, nil];
@@ -2997,9 +2999,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMenuItem *myMenuItem = (NSMenuItem*)sender;
 	
 	//TOFIX
-	if ([[foldersTree selectedFolders] count]> 1) {
-		NSLog(@"Selezionati + folders!!!!");
-		
+	if ([[foldersTree selectedFolders] count]> 1) {		
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 		[alert addButtonWithTitle:@"OK"];
 		[alert setMessageText:@"Error"];
@@ -3765,7 +3765,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 -(IBAction)updateRemoteSubscriptions:(id)sender {
-	NSLog(@"updateRemoteSubscriptions");
 	[[GoogleReader sharedManager] loadSubscriptions:nil];
 	[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:[foldersTree folders:0]];
 

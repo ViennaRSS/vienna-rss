@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CAZZU_IU</key>
-	<string>${CAZZO}</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -52,7 +50,7 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>Vienna</string>
+	<string>ViennaBeta</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Vienna version $(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}, Copyright 2004-2012 Contributors. See Help/Acknowledgements for list of contributors.</string>
 	<key>CFBundleHelpBookFolder</key>
@@ -70,7 +68,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(VIENNA_VERSION_NUMBER).$(BUILD_NUMBER)</string>
+	<string>$(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}</string>
 	<key>CFBundleSignature</key>
 	<string>Vnna</string>
 	<key>CFBundleURLTypes</key>
@@ -87,9 +85,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>${BUILD_NUMBER}</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.utilities</string>
+	<string>$(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.5.0</string>
 	<key>NSAppleScriptEnabled</key>

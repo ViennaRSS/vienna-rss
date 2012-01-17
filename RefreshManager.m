@@ -161,13 +161,11 @@ typedef enum {
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	NSLog(@"Nuova richiesta accodata. CODA: %i",[networkQueue requestsCount]);
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"Queue: (%i) - %@",[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	NSLog(@"Richiesta terminata. CODA: %i",[networkQueue requestsCount]);	
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"Queue: (%i) - %@",[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
@@ -353,7 +351,6 @@ typedef enum {
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			NSLog(@"Ricarico l'icona per il folder %@",[folder name]);
 			[self refreshFavIcon:folder];
 		}
 	}

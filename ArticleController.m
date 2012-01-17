@@ -615,16 +615,13 @@
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSLog(@"innerMarkReadByArray");
 	Database * db = [Database sharedDatabase];
 	NSInteger lastFolderId = -1;
 	
 	for (Article * theArticle in articleArray)
 	{
-		NSLog(@"innerMarkReadByArray - Processo l'articolo %@ con FLAG: %@",[theArticle guid],[theArticle isRead] ? @"YES" : @"NO");
 		NSInteger folderId = [theArticle folderId];
 		if (IsGoogleReaderFolder([db folderFromID:folderId]) && ([theArticle isRead] != readFlag)) {
-			NSLog(@"Si tratta di un articolo GOOGLE READER!!!");
 			[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:readFlag];
 		}
 		//FIX: article status should be "settato" from httprequest success block
@@ -675,9 +672,7 @@
 
 	for (Article * theArticle in folderArrayOfArticles)
 	{
-		NSLog(@"Processo articolo %@ con FLAG %@",[theArticle guid],[theArticle isRead] ? @"YES" : @"NO");
 		if (IsGoogleReaderFolder([db folderFromID:[theArticle folderId]]) && ![theArticle isRead]) {
-			NSLog(@"Richiamo il WS");
 			[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
 		}
 		[theArticle markRead:YES];

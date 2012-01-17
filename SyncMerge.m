@@ -56,7 +56,6 @@
 }
 
 -(void)startSync {
-	NSLog(@"Sono in startSync");
 	running = YES;
 	[messageTextField setStringValue:@"Fetching Google Reader Subscriptions..."];
     [progressIndicator startAnimation:self];
