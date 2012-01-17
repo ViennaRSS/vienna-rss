@@ -3801,7 +3801,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = Vienna;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -3826,7 +3825,6 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = Vienna;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
@@ -3891,7 +3889,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2;
+				BUILD_NUMBER = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3911,10 +3909,9 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
-				VIENNA_VERSION_NUMBER = 2699;
+				VIENNA_VERSION_NUMBER = 2800;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -3922,7 +3919,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2;
+				BUILD_NUMBER = 1;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3939,11 +3936,10 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				OTHER_LDFLAGS = "-lcurl";
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
-				VIENNA_VERSION_NUMBER = 2699;
+				VIENNA_VERSION_NUMBER = 2800;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;

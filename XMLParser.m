@@ -19,7 +19,6 @@
 
 #import "XMLParser.h"
 #import "StringExtensions.h"
-#import <curl/curl.h>
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -435,15 +434,16 @@
 
 +(NSCalendarDate *)getDateFromString:(NSString *)dateString
 {
-	NSCalendarDate * date = nil;
-	const char * asciiDate = [dateString cStringUsingEncoding:NSASCIIStringEncoding]; // curl only accepts English ASCII
-	if (asciiDate != NULL)
-	{
-		time_t theTime = curl_getdate(asciiDate, NULL);
-		if (theTime != -1 )
-		{
-			date = [NSCalendarDate dateWithTimeIntervalSince1970:theTime];
-		}
+	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+	NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	[dateFormat setLocale:enUS];
+	[enUS release];
+	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
+	NSCalendarDate *date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	[dateFormat release];
+	if (date == nil) {
+		NSLog(@"Conversion error!");
+		NSLog(dateString);
 	}
 	return date;
 }
