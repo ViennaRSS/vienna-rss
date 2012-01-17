@@ -467,9 +467,7 @@
  * These are the formats that I've discovered so far.
  */
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
-{
-	NSLog(@"Date value: %@",dateString);
-	
+{	
 	int yearValue = 0;
 	int monthValue = 1;
 	int dayValue = 0;

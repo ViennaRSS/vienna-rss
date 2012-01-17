@@ -1,7 +1,8 @@
 New on this build
 ------------------------
 
-* Removed support for libCURL (now run safely on 10.6.x)
+* Added a new data parser on XMLParser.m (better 10.6.x compatibility)
+* Fixed a BIG issue on 10.6.x with JSON parser. Google Reader Sync back to work!
 
 Tnx for your time!
 Salvatore Ansani <salvatore@ansani.it>

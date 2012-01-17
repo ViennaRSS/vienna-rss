@@ -79,7 +79,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Folder.m"
-         timestampString = "347974387.361705"
+         timestampString = "348529173.90498"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "552"
@@ -233,11 +233,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Message.m"
-         timestampString = "344269344.092896"
+         timestampString = "348529421.11478"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "409"
-         endingLineNumber = "409"
+         startingLineNumber = "415"
+         endingLineNumber = "415"
          landmarkName = "-expandTags:withConditional:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -280,48 +280,6 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "879"
          endingLineNumber = "879"
-         landmarkName = "-splitView:resizeSubviewsWithOldSize:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "ArticleListView.m"
-         timestampString = "344856312.608209"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "170"
-         endingLineNumber = "170"
-         landmarkName = "-splitView:constrainMinCoordinate:ofSubviewAt:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "ArticleListView.m"
-         timestampString = "344856314.773503"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "179"
-         endingLineNumber = "179"
-         landmarkName = "-splitView:constrainMaxCoordinate:ofSubviewAt:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "ArticleListView.m"
-         timestampString = "344856320.213929"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "194"
-         endingLineNumber = "194"
          landmarkName = "-splitView:resizeSubviewsWithOldSize:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -420,8 +378,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2812"
          endingLineNumber = "2812"
-         landmarkName = "@implementation AppController"
-         landmarkType = "3">
+         landmarkName = "-refreshOnTimer:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -934,7 +892,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Folder.m"
-         timestampString = "347974387.361705"
+         timestampString = "348529173.90498"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "544"
@@ -1122,6 +1080,62 @@
          startingLineNumber = "423"
          endingLineNumber = "423"
          landmarkName = "-setImage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "AppController.m"
+         timestampString = "348515962.900274"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1331"
+         endingLineNumber = "1331"
+         landmarkName = "-openURLInDefaultBrowser:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Folder.m"
+         timestampString = "348528325.143312"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
+         landmarkName = "-homePage"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Message.m"
+         timestampString = "348529415.217849"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "229"
+         endingLineNumber = "229"
+         landmarkName = "-parentId"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "AppController.m"
+         timestampString = "348529547.942209"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2542"
+         endingLineNumber = "2542"
+         landmarkName = "-viewArticlePages:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
