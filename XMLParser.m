@@ -440,10 +440,17 @@
 	[enUS release];
 	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
 	NSCalendarDate *date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	[dateFormat release];
-	if (date == nil) {
-		NSLog(@"Conversion error: %@",dateString);
+	if (date != nil) {
+		[dateFormat release];
+		return date;
 	}
+	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
+	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	if (date != nil) {
+		[dateFormat release];
+		return date;
+	}
+	NSLog(@"Conversion error: %@",dateString);
 	return date;
 }
 
@@ -461,6 +468,8 @@
  */
 +(NSCalendarDate *)parseXMLDate:(NSString *)dateString
 {
+	NSLog(@"Date value: %@",dateString);
+	
 	int yearValue = 0;
 	int monthValue = 1;
 	int dayValue = 0;
