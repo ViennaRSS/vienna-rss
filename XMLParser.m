@@ -450,6 +450,13 @@
 		[dateFormat release];
 		return date;
 	}
+	//Support for this kind of date: 2011-12-06T07:00:00Z
+	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	if (date != nil) {
+		[dateFormat release];
+		return date;
+	}
 	NSLog(@"Conversion error: %@",dateString);
 	return date;
 }
