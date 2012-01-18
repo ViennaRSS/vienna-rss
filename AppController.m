@@ -178,7 +178,7 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 -(void)awakeFromNib
 {
 	//Enable FullScreen Support if we are on Lion 10.7.x
-	[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
+	//[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
 		
 	Preferences * prefs = [Preferences standardPreferences];
 	
