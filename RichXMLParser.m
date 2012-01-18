@@ -824,11 +824,11 @@
 		// Parse title
 		if ([nodeName isEqualToString:@"title"])
 		{
-			[self setTitle:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
+			[self setTitle:[[[subTree valueOfElement] stringByUnescapingExtendedCharacters] summaryTextFromHTML]];
 			continue;
 		}
 		
-		// Parse description
+		// Parse description]
 		if ([nodeName isEqualToString:@"subtitle"])
 		{
 			[self setDescription:[subTree valueOfElement]];
