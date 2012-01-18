@@ -3997,7 +3997,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2;
+				BUILD_NUMBER = 3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -4027,7 +4027,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2;
+				BUILD_NUMBER = 3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
