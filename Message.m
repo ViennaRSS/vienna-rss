@@ -294,7 +294,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
-	unsigned index = [folder indexOfArticle:self];
+	NSUInteger index = [folder indexOfArticle:self];
 	if (index != NSNotFound)
 	{
 		NSScriptObjectSpecifier * containerRef = [folder objectSpecifier];

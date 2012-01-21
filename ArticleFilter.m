@@ -96,9 +96,9 @@ static NSMutableArray * _filterList = nil;
  * Returns the filter identified by the specified tag or nil if there's no filter
  * with the given tag.
  */
-+(ArticleFilter *)filterByTag:(int)theTag
++(ArticleFilter *)filterByTag:(NSInteger)theTag
 {
-	int index;
+	NSInteger index;
 	for (index = 0; index < [_filterList count]; ++index)
 	{
 		ArticleFilter * filter = [_filterList objectAtIndex:index];
@@ -111,7 +111,7 @@ static NSMutableArray * _filterList = nil;
 /* initWithName
  * This is the designated initialiser for a new ArticleFilter object.
  */
--(id)initWithName:(NSString *)theName tag:(int)theTag comparator:(SEL)theComparator
+-(id)initWithName:(NSString *)theName tag:(NSInteger)theTag comparator:(SEL)theComparator
 {
 	if ((self = [super init]) != nil)
 	{
@@ -141,7 +141,7 @@ static NSMutableArray * _filterList = nil;
 /* tag
  * Return the filter's unique ID (tag)
  */
--(int)tag
+-(NSInteger)tag
 {
 	return tag;
 }
@@ -149,7 +149,7 @@ static NSMutableArray * _filterList = nil;
 /* createFilter
  * Create a new article filter with the specified name and comparator.
  */
-+(void)createFilter:(NSString *)name tag:(int)tag comparator:(SEL)comparator
++(void)createFilter:(NSString *)name tag:(NSInteger)tag comparator:(SEL)comparator
 {
 	ArticleFilter * newFilter = [[ArticleFilter alloc] initWithName:name tag:tag comparator:comparator];
 	if (_filterList == nil)

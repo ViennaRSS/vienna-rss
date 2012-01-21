@@ -78,7 +78,7 @@
 	[animation setAnimationBlockingMode:NSAnimationNonblocking];
 	[animation setDuration:0.1];
 	[animation setAnimationCurve:NSAnimationEaseInOut];
-	[animation setDelegate:self];
+	[animation setDelegate:(id<NSAnimationDelegate>)self];
 	[animation MA_setTag:viewTag];
 	[animation startAnimation];
 }
@@ -93,7 +93,7 @@
 
 	[animation release];
 	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
-		[[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
+		[(id)[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
 }
 
 @end

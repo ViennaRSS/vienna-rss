@@ -67,7 +67,7 @@
  */
 -(BOOL)becomeFirstResponder
 {
-	[[self delegate] outlineViewWillBecomeFirstResponder];
+	[(id)[self delegate] outlineViewWillBecomeFirstResponder];
 	return [super becomeFirstResponder];
 }
 
@@ -215,7 +215,7 @@
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(outlineView:menuWillAppear:)])
-		[[self delegate] outlineView:self menuWillAppear:theEvent];
+		[(id)[self delegate] outlineView:self menuWillAppear:theEvent];
 	return [self menu];
 }
 
@@ -236,7 +236,7 @@
 			[array addObject:node];
 			item = [selectedRowIndexes indexGreaterThanIndex:item];
 		}
-		[[self delegate] copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
+		[(id)[self delegate] copyTableSelection:array toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 
@@ -260,7 +260,7 @@
 	}
 	if ([menuItem action] == @selector(delete:))
 	{
-		return [[self delegate] canDeleteFolderAtRow:[self selectedRow]];
+		return [(id)[self delegate] canDeleteFolderAtRow:[self selectedRow]];
 	}
 	if ([menuItem action] == @selector(selectAll:))
 	{

@@ -34,7 +34,7 @@ typedef enum {
 	NSString * displayName;
 	NSString * sqlField;
 	FieldType type;
-	int tag;
+	NSInteger tag;
 	int width;
 	BOOL visible;
 }
@@ -44,13 +44,13 @@ typedef enum {
 -(void)setDisplayName:(NSString *)newDisplayName;
 -(void)setSqlField:(NSString *)newSqlField;
 -(void)setType:(FieldType)newType;
--(void)setTag:(int)newTag;
+-(void)setTag:(NSInteger)newTag;
 -(void)setVisible:(BOOL)flag;
 -(void)setWidth:(int)newWidth;
 -(NSString *)name;
 -(NSString *)displayName;
 -(NSString *)sqlField;
--(int)tag;
+-(NSInteger)tag;
 -(FieldType)type;
 -(int)width;
 -(BOOL)visible;

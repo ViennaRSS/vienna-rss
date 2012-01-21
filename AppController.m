@@ -759,8 +759,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 		}
 	}
-	[fileManager removeFileAtPath:fullPath handler:nil];
-	return [fileManager copyPath:srcFile toPath:fullPath handler:nil];
+	[fileManager removeItemAtPath:fullPath error:nil];
+	return [fileManager copyItemAtPath:srcFile toPath:fullPath error:nil];
 }
 
 /* searchFieldMenu
