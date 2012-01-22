@@ -2842,7 +2842,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Create then select the new folder.
 	[db beginTransaction];
-	NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
+	// NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
 	[db commitTransaction];
 	
 	
