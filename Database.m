@@ -1966,7 +1966,7 @@ static Database * _sharedDatabase = nil;
 			// them if not.
 			if (unread_count != [folder unreadCount])
 			{
-				NSLog(@"Fixing unread count for %@ (%d on folder versus %ld in articles)", [folder name], [folder unreadCount], unread_count);
+				NSLog(@"Fixing unread count for %@ (%@ on folder versus %@ in articles)", [folder name], [folder unreadCount], unread_count);
 				NSInteger diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
 				countOfUnread += diff;
@@ -2339,7 +2339,7 @@ static Database * _sharedDatabase = nil;
 		{
 			if (unread_count != [folder unreadCount])
 			{
-				NSLog(@"Fixing unread count for %@ (%ld on folder versus %d in articles)", [folder name], [folder unreadCount], unread_count);
+				NSLog(@"Fixing unread count for %@ (%@ on folder versus %@ in articles)", [folder name], [folder unreadCount], unread_count);
 				NSInteger diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
 				countOfUnread += diff;

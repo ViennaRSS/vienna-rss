@@ -3954,7 +3954,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Send our Apple Event.
 	OSStatus err = AESendMessage([event aeDesc], NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
 	if (err != noErr) 
-		NSLog(@"Error sending Apple Event: %d", err);
+		NSLog(@"Error sending Apple Event: %i", (int)err );
 }
 
 #pragma mark Progress Indicator 

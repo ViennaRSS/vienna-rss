@@ -308,7 +308,7 @@
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
 			if (listIndex == NSNotFound)
 			{
-				NSLog(@"Cannot find child with id %i for folder with id %d", nextChildId, [node nodeId]);
+				NSLog(@"Cannot find child with id %i for folder with id %@", nextChildId, [node nodeId]);
 				return NO;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
@@ -331,7 +331,7 @@
 		}
 		if (index < (int)[listOfFolders count])
 		{
-			NSLog(@"Missing children for folder with id %i", nextChildId, [node nodeId]);
+			NSLog(@"Missing children for folder with id %i, %@", nextChildId, [node nodeId]);
 			return NO;
 		}
 	}
