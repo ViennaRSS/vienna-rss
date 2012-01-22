@@ -167,7 +167,7 @@ NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector)
 void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly, NSArray * validExtensions)
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
-	NSArray * arrayOfFiles = [fileManager directoryContentsAtPath:path];
+	NSArray * arrayOfFiles = [fileManager contentsOfDirectoryAtPath:path error:nil];
 	if (arrayOfFiles != nil)
 	{
 		if (validExtensions)
@@ -194,12 +194,19 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
  */
 BOOL isAccessible(NSString * urlString)
 {
-	SCNetworkConnectionFlags flags;
-	NSURL * url = [NSURL URLWithString:urlString];
+	SCNetworkReachabilityRef   target;
+	SCNetworkReachabilityFlags flags = 0;
+	Boolean                   ok;
 	
-	if (!SCNetworkCheckReachabilityByName([[url host] UTF8String], &flags))
+	NSURL * url = [NSURL URLWithString:urlString];
+
+	target = SCNetworkReachabilityCreateWithName(NULL, [[url host] UTF8String]);
+	ok = SCNetworkReachabilityGetFlags(target, &flags);
+	CFRelease(target);
+	
+	if (!ok)
 		return NO;
-	return (flags & kSCNetworkFlagsReachable) && !(flags & kSCNetworkFlagsConnectionRequired);
+	return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
 }
 
 /* runOKAlertPanel

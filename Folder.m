@@ -796,7 +796,7 @@ static NSArray * iconArray = nil;
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
 	NSArray * folders = [[NSApp delegate] folders];
-	unsigned index = [folders indexOfObjectIdenticalTo:self];
+	NSUInteger index = [folders indexOfObjectIdenticalTo:self];
 	if (index != NSNotFound)
 	{
 		NSScriptObjectSpecifier *containerRef = [[NSApp delegate] objectSpecifier];

@@ -113,12 +113,14 @@ static Database * _sharedDatabase = nil;
 
 	if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
 	{
-		if (![fileManager createDirectoryAtPath:databaseFolder attributes:NULL])
+		NSError *error;
+		if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
 		{
 			NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
-							NSLocalizedString(@"Cannot create database folder text", nil),
+							[NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
 							NSLocalizedString(@"Close", nil), @"", @"",
 							databaseFolder);
+			[error release];
 			return NO;
 		}
 	}
@@ -267,7 +269,7 @@ static Database * _sharedDatabase = nil;
 		
 		// Backup the database before any upgrade
 		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-		[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+		[[NSFileManager defaultManager] copyItemAtPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName error:nil];
 	}
 		
 	// Upgrade to rev 13.
@@ -447,7 +449,7 @@ static Database * _sharedDatabase = nil;
 			[sqlDatabase close];
 			[sqlDatabase release];
 			sqlDatabase = nil;
-			[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
+			[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 		}
 		
 		// Bring up modal UI to select the new location

@@ -22,14 +22,14 @@
 
 @interface ArticleFilter : NSObject {
 	NSString * name;
-	int tag;
+	NSInteger tag;
 	SEL comparator;
 }
 
 // Public functions
 +(NSArray *)arrayOfFilters;
-+(ArticleFilter *)filterByTag:(int)theTag;
++(ArticleFilter *)filterByTag:(NSInteger)theTag;
 -(NSString *)name;
--(int)tag;
+-(NSInteger)tag;
 -(SEL)comparator;
 @end

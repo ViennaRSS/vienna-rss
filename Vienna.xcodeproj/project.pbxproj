@@ -37,6 +37,8 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3ABA673514C7536D00251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
+		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
@@ -47,7 +49,6 @@
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		662468B113C60A2800C85417 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
-		667A4C9B13D8352A0023F2A7 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 667A4C9A13D8352A0023F2A7 /* libz.1.2.5.dylib */; };
 		66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
 		66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
@@ -429,7 +430,6 @@
 		EAE98EC514BEFBD700D6A3DC /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67E14B3161D008FCBE5 /* ASIHTTPRequest.m */; };
 		EAE98EC614BEFBD700D6A3DC /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68214B3161D008FCBE5 /* ASIInputStream.m */; };
 		EAE98EC714BEFBD700D6A3DC /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
-		EAE98EC914BEFBD700D6A3DC /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 667A4C9A13D8352A0023F2A7 /* libz.1.2.5.dylib */; };
 		EAE98ECA14BEFBD700D6A3DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		EAE98ECB14BEFBD700D6A3DC /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		EAE98ECC14BEFBD700D6A3DC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB076170A076BBE00A9F76A /* Carbon.framework */; };
@@ -697,6 +697,7 @@
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = MainMenu.nib; sourceTree = "<group>"; };
+		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -1357,7 +1358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				667A4C9B13D8352A0023F2A7 /* libz.1.2.5.dylib in Frameworks */,
+				3ABA673514C7536D00251925 /* libz.dylib in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
 				AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */,
@@ -1374,7 +1375,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAE98EC914BEFBD700D6A3DC /* libz.1.2.5.dylib in Frameworks */,
+				3ABA673614C7545900251925 /* libz.dylib in Frameworks */,
 				EAE98ECA14BEFBD700D6A3DC /* Cocoa.framework in Frameworks */,
 				EAE98ECB14BEFBD700D6A3DC /* Growl.framework in Frameworks */,
 				EAE98ECC14BEFBD700D6A3DC /* Carbon.framework in Frameworks */,
@@ -1429,6 +1430,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
+				3ABA673414C7536D00251925 /* libz.dylib */,
 				EAAF336014BDEC78002A8837 /* ansani_build.txt */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				662468AE13C609F900C85417 /* JSONKit */,

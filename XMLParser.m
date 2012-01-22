@@ -457,6 +457,33 @@
 		[dateFormat release];
 		return date;
 	}
+	//Support for this kind of date: 2011-12-06T07:00:00+03:00
+	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss+HH:mm"];
+	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	if (date != nil) {
+		[dateFormat release];
+		return date;
+	}
+	//Support for this kind of date: 2011-12-06T07:00:00.741+03:00
+	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm"];
+	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	if (date != nil) {
+		[dateFormat release];
+		return date;
+	}
+	//Support for this kind of date: 2011-12-06T07:00:00.000Z
+	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	if (date != nil) {
+		[dateFormat release];
+		return date;
+	}
+	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
+	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
+	if (date != nil) {
+		[dateFormat release];
+		return date;
+	}
 	NSLog(@"Conversion error: %@",dateString);
 	return date;
 }
@@ -483,14 +510,13 @@
 	int secondValue = 0;
 	int tzOffset = 0;
 
-	// Let CURL have a crack at parsing since it knows all about the
-	// RSS/HTTP formats. Add a hack to substitute UT with GMT as it doesn't
+	// Historic : add a hack to substitute UT with GMT as CURL doesn't
 	// seem to be able to parse the former.
 	dateString = [dateString trim];
 	NSUInteger dateLength = [dateString length];
 	if ([dateString hasSuffix:@" UT"])
 		dateString = [[dateString substringToIndex:dateLength - 3] stringByAppendingString:@" GMT"];
-	// CURL seems to require seconds in the time, so add seconds if necessary.
+	// Historic : CURL seems to require seconds in the time, so add seconds if necessary.
 	NSScanner * scanner = [NSScanner scannerWithString:dateString];
 	if ([scanner scanUpToString:@":" intoString:NULL])
 	{

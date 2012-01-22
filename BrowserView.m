@@ -34,7 +34,7 @@
  */
 -(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier
 {
-	int i = [self indexOfTabViewItemWithIdentifier:identifier];
+	NSInteger i = [self indexOfTabViewItemWithIdentifier:identifier];
 	return (i != NSNotFound ? [self tabViewItemAtIndex:i] : nil);
 }
 @end

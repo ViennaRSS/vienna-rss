@@ -265,7 +265,7 @@
 	NSURL* urlAtMouse = [self urlAtMouse:mouseEvent];
 	if ( (urlAtMouse != nil)  &&  [urlAtMouse isEqualTo:clickedURL] ) {
 		// check if delegate wants to open the URL itself, if not, let the workspace open the URL
-		if ( ([self delegate] == nil)  || ![[self delegate] respondsToSelector:@selector(textField:openURL:)] || ![[self delegate] textField:self openURL:urlAtMouse] )
+		if ( ([self delegate] == nil)  || ![[self delegate] respondsToSelector:@selector(textField:openURL:)] || ![(id)[self delegate] textField:self openURL:urlAtMouse] )
 			[[NSWorkspace sharedWorkspace] openURL:urlAtMouse];
 	}
 	[clickedURL release];

@@ -178,7 +178,7 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 -(void)awakeFromNib
 {
 	//Enable FullScreen Support if we are on Lion 10.7.x
-	[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
+	//[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
 		
 	Preferences * prefs = [Preferences standardPreferences];
 	
@@ -759,8 +759,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 		}
 	}
-	[fileManager removeFileAtPath:fullPath handler:nil];
-	return [fileManager copyPath:srcFile toPath:fullPath handler:nil];
+	[fileManager removeItemAtPath:fullPath error:nil];
+	return [fileManager copyItemAtPath:srcFile toPath:fullPath error:nil];
 }
 
 /* searchFieldMenu

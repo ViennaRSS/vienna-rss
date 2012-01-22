@@ -184,7 +184,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 -(id)handleImportSubscriptions:(NSScriptCommand *)cmd
 {
 	NSDictionary * args = [cmd evaluatedArguments];
-	[[self delegate] importFromFile:[args objectForKey:@"FileName"]];
+	[(AppController*)[self delegate] importFromFile:[args objectForKey:@"FileName"]];
 	return nil;
 }
 
@@ -199,7 +199,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 
 	int countExported = 0;
 	if (argArray != nil)
-		countExported = [[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
+		countExported = [(AppController*)[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
 	return [NSNumber numberWithInt:countExported];
 }
 
