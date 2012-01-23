@@ -825,7 +825,6 @@ static GoogleReader * _googleReader = nil;
 			Folder * folder = [db folderFromName:folderName];
 			underFolder = [folder itemId];
 		}
-		[rssTitle release];
 		rssTitle = [params objectAtIndex:1];
     }
     
