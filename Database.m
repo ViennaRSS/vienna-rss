@@ -111,9 +111,12 @@ static Database * _sharedDatabase = nil;
 	NSString * databaseFolder = [qualifiedDatabaseFileName stringByDeletingLastPathComponent];
 	BOOL isDir;
 
+	
 	if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
 	{
-		if (![fileManager createDirectoryAtPath:databaseFolder attributes:NULL])
+		if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:nil error:nil])
+			//	PRE 10.5 FIX
+			//	if (![fileManager createDirectoryAtPath:databaseFolder attributes:NULL])
 		{
 			NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
 							NSLocalizedString(@"Cannot create database folder text", nil),
@@ -267,7 +270,9 @@ static Database * _sharedDatabase = nil;
 		
 		// Backup the database before any upgrade
 		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-		[[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+		// FIX WARNING
+		// [[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
+		[[NSFileManager defaultManager] copyItemAtPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName error:nil];
 	}
 		
 	// Upgrade to rev 13.
@@ -447,7 +452,9 @@ static Database * _sharedDatabase = nil;
 			[sqlDatabase close];
 			[sqlDatabase release];
 			sqlDatabase = nil;
-			[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
+			//[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
+			//FIX WARNING
+			[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 		}
 		
 		// Bring up modal UI to select the new location
@@ -2337,7 +2344,7 @@ static Database * _sharedDatabase = nil;
 		{
 			if (unread_count != [folder unreadCount])
 			{
-				NSLog(@"Fixing unread count for %@ (%ld on folder versus %d in articles)", [folder name], [folder unreadCount], unread_count);
+				NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], [folder unreadCount], unread_count);
 				NSInteger diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
 				countOfUnread += diff;

@@ -511,7 +511,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 /* didReceiveDataOfLength
  * The download received additional data of the specified size.
  */
--(void)download:(NSURLDownload *)download didReceiveDataOfLength:(unsigned)length
+-(void)download:(NSURLDownload *)download didReceiveDataOfLength:(NSUInteger)length
 {
 	DownloadItem * theItem = [self itemForDownload:download];
 	[theItem setSize:[theItem size] + length];

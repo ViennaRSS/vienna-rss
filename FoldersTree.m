@@ -301,8 +301,8 @@
 	else
 	{
 		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
-		int index = 0;
-		int nextChildId = (node == rootNode) ? [[Database sharedDatabase] firstFolderId] : [[node folder] firstChildId];
+		NSUInteger index = 0;
+		NSInteger nextChildId = (node == rootNode) ? [[Database sharedDatabase] firstFolderId] : [[node folder] firstChildId];
 		while (nextChildId > 0)
 		{
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
@@ -313,7 +313,7 @@
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
 			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:nextChildId];
-			int count = [listOfSubFolders count];
+			NSUInteger count = [listOfSubFolders count];
 			TreeNode * subNode;
 			
 			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder canHaveChildren:(count > 0)];
@@ -329,7 +329,7 @@
 			nextChildId = [folder nextSiblingId];
 			++index;
 		}
-		if (index < (int)[listOfFolders count])
+		if (index < [listOfFolders count])
 		{
 			NSLog(@"Missing children for folder with id %i", nextChildId, [node nodeId]);
 			return NO;

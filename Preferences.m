@@ -121,7 +121,9 @@ static Preferences * _standardPreferences = nil;
 			
 			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
 			{
-				if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
+				if (![fileManager createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:nil error:nil])
+					// FIX WARNING
+					// if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
 				{
 					NSLog(@"Cannot create profile folder %@", profilePath);
 					profilePath = nil;

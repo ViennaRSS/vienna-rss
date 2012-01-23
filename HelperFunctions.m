@@ -167,7 +167,9 @@ NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector)
 void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL foldersOnly, NSArray * validExtensions)
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
-	NSArray * arrayOfFiles = [fileManager directoryContentsAtPath:path];
+	//FIX WARNING
+	//NSArray * arrayOfFiles = [fileManager directoryContentsAtPath:path];
+	NSArray *arrayOfFiles = [fileManager contentsOfDirectoryAtPath:path error:nil];
 	if (arrayOfFiles != nil)
 	{
 		if (validExtensions)

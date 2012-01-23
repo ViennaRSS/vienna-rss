@@ -759,8 +759,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 		}
 	}
-	[fileManager removeFileAtPath:fullPath handler:nil];
-	return [fileManager copyPath:srcFile toPath:fullPath handler:nil];
+	
+	[fileManager removeItemAtPath:fullPath error:nil];
+	return [fileManager copyItemAtPath:srcFile toPath:fullPath error:nil];
+	
+	//FIXED PRE 10.5
+	//[fileManager removeFileAtPath:fullPath handler:nil];
+	//return [fileManager copyPath:srcFile toPath:fullPath handler:nil];
 }
 
 /* searchFieldMenu
@@ -1432,7 +1437,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 -(void)handleGoogleDownloadSubscriptions:(NSNotification *)nc {
-	[[GoogleReader sharedManager] loadSubscriptions];
+	[[GoogleReader sharedManager] loadSubscriptions:nil];
 }
 
 

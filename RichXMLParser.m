@@ -683,7 +683,9 @@
 				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
 					[articleBody release];
-					articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
+					// FIX WARNING
+					// articleBody = [[subItemTree valueOfElement] retain];
 					continue;
 				}
 				
@@ -704,7 +706,9 @@
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
 					[articleBody release];
-					articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
+					// FIX WARNING
+					//articleBody = [[subItemTree valueOfElement] retain];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -932,7 +936,9 @@
 				if ([itemNodeName isEqualToString:@"content"])
 				{
 					[articleBody release];
-					articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
+					// FIX WARNING
+					// articleBody = [[subItemTree valueOfElement] retain];
 					continue;
 				}
 				
@@ -940,7 +946,9 @@
 				if ([itemNodeName isEqualToString:@"summary"])
 				{
 					[articleBody release];
-					articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
+					// FIX WARNING
+					// articleBody = [[subItemTree valueOfElement] retain];
 					continue;
 				}
 				

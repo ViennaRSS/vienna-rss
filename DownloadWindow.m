@@ -175,7 +175,7 @@
  * Datasource for the table view. Return the total number of rows we'll display which
  * is equivalent to the number of log items.
  */
--(int)numberOfRowsInTableView:(NSTableView *)aTableView
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
 	int itemCount = [[[DownloadManager sharedInstance] downloadsList] count];
 	[clearButton setEnabled:itemCount > 0];
@@ -185,7 +185,7 @@
 /* willDisplayCell [delegate]
  * Catch the table view before it displays a cell.
  */
--(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+-(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	if ([aCell isKindOfClass:[ImageAndTextCell class]])
 	{
@@ -201,7 +201,7 @@
 /* objectValueForTableColumn [datasource]
  * Called by the table view to obtain the object at the specified column and row.
  */
--(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex
+-(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
 	NSAssert(rowIndex >= 0 && rowIndex < [list count], @"objectValueForTableColumn sent an out-of-range rowIndex");
