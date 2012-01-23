@@ -299,12 +299,23 @@ static GoogleReader * _googleReader = nil;
 		}
 	}
 	
+	AppController *controller = [NSApp delegate];
+    
+    // Unread count may have changed
+    [controller setStatusMessage:nil persist:NO];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_RemoteFoldersAdded" object:nil];
 	
 
 }
 
--(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList {
+-(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList 
+{
+
+	AppController *controller = [NSApp delegate];
+    
+    // Unread count may have changed
+    [controller setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 
 	
 	[localFeeds removeAllObjects];
