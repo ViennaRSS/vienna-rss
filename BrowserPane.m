@@ -77,12 +77,22 @@
 		//These are synonyms
 		[self exposeBinding:@"isLoading"];
 		[self exposeBinding:@"isProcessing"];
-
-		[self setKeys:[NSArray arrayWithObject:@"isLoading"] triggerChangeNotificationsForDependentKey:@"isProcessing"];
 	}
 	
 	[pool release];
 }
+
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
+	{
+	    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	    
+	    if ([key isEqualToString:@"isProcessing"]) {
+	        NSSet *affectingKeys = [NSSet setWithObjects:@"isLoading", nil];
+	        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKeys];
+	    }
+	    
+	    return keyPaths;
+	}
 
 /* initWithFrame
  * Initialise our view.

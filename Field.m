@@ -106,7 +106,7 @@
  * in the same way that the field name is used. I suspect that at some point one of
  * these two will be deprecated for simplicity.
  */
--(void)setTag:(int)newTag
+-(void)setTag:(NSInteger)newTag
 {
 	tag = newTag;
 }
@@ -154,7 +154,7 @@
 /* tag
  * Returns the field's tag number.
  */
--(int)tag
+-(NSInteger)tag
 {
 	return tag;
 }

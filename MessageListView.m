@@ -38,7 +38,7 @@
 	if ([[theEvent characters] length] == 1)
 	{
 		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([[NSApp delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+		if ([(id)[NSApp delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
 			return;
 	}
 	[super keyDown:theEvent];
@@ -59,7 +59,7 @@
 			[rows addObject:[NSNumber numberWithUnsignedInt:rowIndex]];
 			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 		}
-		[[self delegate] copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
+		[(id)[self delegate] copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
 	}
 }
 
@@ -83,7 +83,7 @@
 	}
 	if ([menuItem action] == @selector(delete:))
 	{
-		return [[self delegate] canDeleteMessageAtRow:[self selectedRow]];
+		return [(id)[self delegate] canDeleteMessageAtRow:[self selectedRow]];
 	}
 	if ([menuItem action] == @selector(selectAll:))
 	{

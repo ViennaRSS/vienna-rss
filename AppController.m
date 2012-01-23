@@ -178,7 +178,7 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 -(void)awakeFromNib
 {
 	//Enable FullScreen Support if we are on Lion 10.7.x
-	[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
+	//[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
 		
 	Preferences * prefs = [Preferences standardPreferences];
 	
@@ -759,13 +759,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 		}
 	}
-	
+
 	[fileManager removeItemAtPath:fullPath error:nil];
 	return [fileManager copyItemAtPath:srcFile toPath:fullPath error:nil];
-	
-	//FIXED PRE 10.5
-	//[fileManager removeFileAtPath:fullPath handler:nil];
-	//return [fileManager copyPath:srcFile toPath:fullPath handler:nil];
 }
 
 /* searchFieldMenu
@@ -2847,7 +2843,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Create then select the new folder.
 	[db beginTransaction];
-	NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
+	// NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
 	[db commitTransaction];
 	
 	
@@ -3959,7 +3955,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Send our Apple Event.
 	OSStatus err = AESendMessage([event aeDesc], NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
 	if (err != noErr) 
-		NSLog(@"Error sending Apple Event: %d", err);
+		NSLog(@"Error sending Apple Event: %i", (int)err );
 }
 
 #pragma mark Progress Indicator 

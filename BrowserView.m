@@ -34,7 +34,7 @@
  */
 -(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier
 {
-	int i = [self indexOfTabViewItemWithIdentifier:identifier];
+	NSInteger i = [self indexOfTabViewItemWithIdentifier:identifier];
 	return (i != NSNotFound ? [self tabViewItemAtIndex:i] : nil);
 }
 @end
@@ -75,7 +75,7 @@
  * Sets the primary tab view. This is the view that is always displayed and
  * occupies the first tab position.
  */
--(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView
+-(void)setPrimaryTabItemView:(NSView<BaseView> *)newPrimaryTabItemView
 {
 	[newPrimaryTabItemView retain];
 	

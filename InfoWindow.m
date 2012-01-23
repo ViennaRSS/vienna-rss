@@ -78,11 +78,11 @@ static InfoWindowManager * _infoWindowManager = nil;
 }
 
 /* retainCount
- * Return UINT_MAX to denote an object that cannot be released.
+ * Return NSUIntegerMax to denote an object that cannot be released.
  */
 -(NSUInteger)retainCount
 {
-    return UINT_MAX;
+    return NSUIntegerMax;
 }
 
 /* release

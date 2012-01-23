@@ -177,7 +177,7 @@
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	int itemCount = [[[DownloadManager sharedInstance] downloadsList] count];
+	NSInteger itemCount = [[[DownloadManager sharedInstance] downloadsList] count];
 	[clearButton setEnabled:itemCount > 0];
 	return itemCount;
 }

@@ -114,14 +114,14 @@ static Database * _sharedDatabase = nil;
 	
 	if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
 	{
-		if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:nil error:nil])
-			//	PRE 10.5 FIX
-			//	if (![fileManager createDirectoryAtPath:databaseFolder attributes:NULL])
+		NSError *error;
+		if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
 		{
 			NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
-							NSLocalizedString(@"Cannot create database folder text", nil),
+							[NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
 							NSLocalizedString(@"Close", nil), @"", @"",
 							databaseFolder);
+			[error release];
 			return NO;
 		}
 	}
@@ -270,8 +270,6 @@ static Database * _sharedDatabase = nil;
 		
 		// Backup the database before any upgrade
 		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-		// FIX WARNING
-		// [[NSFileManager defaultManager] copyPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName handler:nil];
 		[[NSFileManager defaultManager] copyItemAtPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName error:nil];
 	}
 		
@@ -452,8 +450,6 @@ static Database * _sharedDatabase = nil;
 			[sqlDatabase close];
 			[sqlDatabase release];
 			sqlDatabase = nil;
-			//[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
-			//FIX WARNING
 			[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 		}
 		
@@ -1971,7 +1967,7 @@ static Database * _sharedDatabase = nil;
 			// them if not.
 			if (unread_count != [folder unreadCount])
 			{
-				NSLog(@"Fixing unread count for %@ (%d on folder versus %ld in articles)", [folder name], [folder unreadCount], unread_count);
+				NSLog(@"Fixing unread count for %@ (%@ on folder versus %@ in articles)", [folder name], [folder unreadCount], unread_count);
 				NSInteger diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
 				countOfUnread += diff;
@@ -2344,7 +2340,7 @@ static Database * _sharedDatabase = nil;
 		{
 			if (unread_count != [folder unreadCount])
 			{
-				NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], [folder unreadCount], unread_count);
+				NSLog(@"Fixing unread count for %@ (%@ on folder versus %@ in articles)", [folder name], [folder unreadCount], unread_count);
 				NSInteger diff = (unread_count - [folder unreadCount]);
 				[self setFolderUnreadCount:folder adjustment:diff];
 				countOfUnread += diff;

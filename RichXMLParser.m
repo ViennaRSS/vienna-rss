@@ -793,7 +793,7 @@
 	{
 		if ([anItem date] == nil)
 			[anItem setDate:itemDate];
-		itemDate = [itemDate addTimeInterval:-1.0];
+		itemDate = [itemDate dateByAddingTimeInterval:-1.0];
 	}
 	return success;
 }

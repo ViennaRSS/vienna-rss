@@ -121,11 +121,11 @@ static Preferences * _standardPreferences = nil;
 			
 			if (![fileManager fileExistsAtPath:profilePath isDirectory:&isDir])
 			{
-				if (![fileManager createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:nil error:nil])
-					// FIX WARNING
-					// if (![fileManager createDirectoryAtPath:profilePath attributes:NULL])
+				NSError * error;
+				if (![fileManager createDirectoryAtPath:profilePath withIntermediateDirectories:YES attributes:NULL error:&error])
 				{
-					NSLog(@"Cannot create profile folder %@", profilePath);
+					NSLog(@"Cannot create profile folder %@: %@", profilePath, error);
+					[error release];
 					profilePath = nil;
 				}
 			}
