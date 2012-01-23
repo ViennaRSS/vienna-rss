@@ -114,7 +114,7 @@ static GoogleReader * _googleReader = nil;
 				NSLog(@"Feed name: %@",[dict objectForKey:@"title"]);
 				NSLog(@"Last Check: %@",folderLastUpdate);
 				NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
-				NSLog(@"Found %i items",[[dict objectForKey:@"items"] count]);
+				NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 				LOG_EXPR(dict);
 				//NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 				//LOG_EXPR(tmp);
