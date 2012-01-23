@@ -3896,7 +3896,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/../PSMTabBarControl/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3923,7 +3922,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/../PSMTabBarControl/build/Release\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
@@ -4003,7 +4001,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/../PSMTabBarControl/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4033,7 +4030,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/../PSMTabBarControl/build/Release\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
