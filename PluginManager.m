@@ -351,7 +351,7 @@
 					NSString * shortURL = [bitlyHelper shortenURL:[theView viewLink]];
 					
 					[urlString replaceString:@"$ArticleLink$" withString:shortURL];
-					[BitlyAPIHelper release];
+					[bitlyHelper release];
 				}
 				else 
 				{
@@ -375,7 +375,7 @@
 					
 					// If URL shortening fails, we fall back to the long URL.
 					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [currentMessage link])];
-					[BitlyAPIHelper release];
+					[bitlyHelper release];
 				}
 				else 
 				{

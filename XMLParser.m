@@ -485,6 +485,7 @@
 		return date;
 	}
 	NSLog(@"Conversion error: %@",dateString);
+    [dateFormat release];
 	return date;
 }
 

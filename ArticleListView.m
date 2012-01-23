@@ -297,11 +297,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		if ([newDefaultMenu count] > 0)
 			defaultMenuItems = [newDefaultMenu autorelease];
 		else
+        {
 			defaultMenuItems = nil;
-	}
+            [newDefaultMenu release];
+        }
+    }
 
 	// Return the default menu items.
-	return defaultMenuItems;
+    return defaultMenuItems;
 }
 
 /* initTableView

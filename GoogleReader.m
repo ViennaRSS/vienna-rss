@@ -237,7 +237,8 @@ static GoogleReader * _googleReader = nil;
 			// Add to count of new articles so far
 			countOfNewArticles += newArticlesFromFeed;
 				*/
-			}
+            [dict release];
+        }
 			 
 		
 	}];
