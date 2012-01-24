@@ -282,6 +282,8 @@
 		B2B72E1510FF6252009201A9 /* generate_keys.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1310FF6252009201A9 /* generate_keys.rb */; };
 		B2B72E1610FF6252009201A9 /* sign_update.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1410FF6252009201A9 /* sign_update.rb */; };
 		B2B72E1810FF626B009201A9 /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1710FF626B009201A9 /* vienna_public_key.pem */; };
+		B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BECB1614CEF22B00706F8F /* SSTextField.m */; };
+		B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BECB1614CEF22B00706F8F /* SSTextField.m */; };
 		B2C9673C106CD02B0056669A /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
 		B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 		D98F86E9115FCC7A00688018 /* ProgressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D98F86E8115FCC7A00688018 /* ProgressTextCell.m */; };
@@ -1278,6 +1280,8 @@
 		B2B72E1310FF6252009201A9 /* generate_keys.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = generate_keys.rb; sourceTree = "<group>"; };
 		B2B72E1410FF6252009201A9 /* sign_update.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = sign_update.rb; sourceTree = "<group>"; };
 		B2B72E1710FF626B009201A9 /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
+		B2BECB1514CEF22B00706F8F /* SSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSTextField.h; sourceTree = "<group>"; };
+		B2BECB1614CEF22B00706F8F /* SSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSTextField.m; sourceTree = "<group>"; };
 		B2C9673B106CD02B0056669A /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = de; path = de.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2C96740106CD08A0056669A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = en; path = en.lproj/errorpage.html; sourceTree = "<group>"; };
 		B2C96742106CD09E0056669A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/errorpage.html; sourceTree = "<group>"; };
@@ -1447,6 +1451,8 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
+				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
 				B2224771112F041E008579B0 /* SearchMethod.h */,
 				B2224772112F041E008579B0 /* SearchMethod.m */,
 				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
@@ -3368,6 +3374,7 @@
 				EA783A5014C62BB1008E7A87 /* SBJsonTokeniser.m in Sources */,
 				EA783A5214C62BB1008E7A87 /* SBJsonUTF8Stream.m in Sources */,
 				EA783A5414C62BB1008E7A87 /* SBJsonWriter.m in Sources */,
+				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3488,6 +3495,7 @@
 				EA783A5114C62BB1008E7A87 /* SBJsonTokeniser.m in Sources */,
 				EA783A5314C62BB1008E7A87 /* SBJsonUTF8Stream.m in Sources */,
 				EA783A5514C62BB1008E7A87 /* SBJsonWriter.m in Sources */,
+				B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

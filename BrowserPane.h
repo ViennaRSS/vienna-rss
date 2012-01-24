@@ -20,6 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
+#import "SSTextField.h"
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -40,7 +41,7 @@
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
 	IBOutlet NSButton * rssPageButton;
-	IBOutlet NSTextField * addressField;
+	IBOutlet SSTextField * addressField;
 	IBOutlet NSButton * iconImage;
 	IBOutlet NSImageView * lockIconImage;
 	IBOutlet NSView * viewwwer;
