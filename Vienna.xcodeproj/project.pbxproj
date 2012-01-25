@@ -37,7 +37,7 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
-		3ABA673514C7536D00251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
+		3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
@@ -604,7 +604,7 @@
 /* Begin PBXBuildRule section */
 		AA72C5140855314000E2121C /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
+			compilerSpec = com.apple.compilers.gcc.4_2;
 			fileType = sourcecode.c;
 			isEditable = 1;
 			outputFiles = (
@@ -612,7 +612,7 @@
 		};
 		EAE98F8614BEFBD700D6A3DC /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
+			compilerSpec = com.apple.compilers.gcc.4_2;
 			fileType = sourcecode.c;
 			isEditable = 1;
 			outputFiles = (
@@ -728,7 +728,6 @@
 		662468B013C60A2800C85417 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleReader.h; sourceTree = "<group>"; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleReader.m; sourceTree = "<group>"; };
-		667A4C9A13D8352A0023F2A7 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncMerge.xib; sourceTree = "<group>"; };
 		66EA343613F77D7E00F68393 /* SyncMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncMerge.h; sourceTree = "<group>"; };
 		66EA343713F77D7E00F68393 /* SyncMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncMerge.m; sourceTree = "<group>"; };
@@ -1362,7 +1361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ABA673514C7536D00251925 /* libz.dylib in Frameworks */,
+				3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
 				AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */,
@@ -1398,9 +1397,9 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3ABA673414C7536D00251925 /* libz.dylib */,
 				EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */,
 				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
-				667A4C9A13D8352A0023F2A7 /* libz.1.2.5.dylib */,
 				B23A794310FF50B10085C85B /* Sparkle.framework */,
 				1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */,
 				AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */,
@@ -1434,7 +1433,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				3ABA673414C7536D00251925 /* libz.dylib */,
 				EAAF336014BDEC78002A8837 /* ansani_build.txt */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				662468AE13C609F900C85417 /* JSONKit */,
@@ -3884,7 +3882,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = 2602;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				PRODUCT_NAME = Release;
 			};
 			name = Development;
@@ -3893,7 +3891,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = 2602;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				PRODUCT_NAME = Release;
 			};
 			name = Deployment;
@@ -3952,9 +3950,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					x86_64,
+					i386,
+					ppc,
+				);
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3969,9 +3972,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = (
+					x86_64,
+					i386,
+					ppc,
+				);
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -3985,7 +3993,7 @@
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				PRODUCT_NAME = ViennaBeta;
 				VIENNA_CHANGELOG_SUFFIX = _ansani;
 				WARNING_CFLAGS = ViennaBeta;
@@ -3995,7 +4003,7 @@
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				PRODUCT_NAME = ViennaBeta;
 				VIENNA_CHANGELOG_SUFFIX = _ansani;
 				WARNING_CFLAGS = ViennaBeta;
