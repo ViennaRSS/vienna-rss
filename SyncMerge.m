@@ -57,7 +57,7 @@
 
 -(void)startSync {
 	running = YES;
-	[messageTextField setStringValue:@"Fetching Google Reader Subscriptions..."];
+	[messageTextField setStringValue:NSLocalizedString(@"Fetching Google Reader Subscriptions...", nil)];
     [progressIndicator startAnimation:self];
 	
 	//TOFIX
@@ -74,7 +74,7 @@
 {
     running = YES;
     
-    [messageTextField setStringValue:@"Fetching Google Reader data..."];
+    [messageTextField setStringValue: NSLocalizedString(@"Fetching Google Reader data...", nil)];
     [progressIndicator startAnimation:self];
     
     NSArray * folders = [[NSApp delegate] folders];
