@@ -445,6 +445,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	//Google Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 	
+	
+	if ([prefs syncGoogleReader]) {
+		NSLog(@"Let us authenticate with Google Reader");
+		[[GoogleReader sharedManager] authenticate];
+	}
+
+	
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
 	
@@ -553,11 +560,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
-	if ([prefs syncGoogleReader]) {
-		[GoogleReader sharedManager];
-	}
-	
-	if ([prefs refreshOnStartup])
+	if ([prefs refreshOnStartup]) 
 		[self refreshAllSubscriptions:self];
 }
 
@@ -3751,6 +3754,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
+	
+	//TOFIX: we should start local refresh feed, then sync refresh feed
+	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isAuthenticated]) {
+		NSLog(@"Waiting until Google Auth is done...");
+		if (![sender isKindOfClass:[NSTimer class]]) {
+			NSLog(@"Create a timer...");
+			[self setStatusMessage:NSLocalizedString(@"Acquiring Google OAuth 2.0 token...", nil) persist:NO];
+			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
+		}
+		return;
+	} else {
+		NSLog(@"Token available... let's go!");
+		[self setStatusMessage:nil persist:NO];
+		if ([sender isKindOfClass:[NSTimer class]]) {
+			[(NSTimer*)sender invalidate];
+			sender = nil;
+		}
+	}
+	
 	// Reset the refresh timer
 	[self handleCheckFrequencyChange:nil];
 	

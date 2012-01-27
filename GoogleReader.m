@@ -30,6 +30,13 @@ static NSString * ClientName = @"ViennaRSS";
 // Singleton
 static GoogleReader * _googleReader = nil;
 
+enum GoogleReaderStatus {
+	notAuthenticated = 0,
+	isAutenthicating,
+	isAuthenticated
+} googleReaderStatus;
+
+
 @implementation GoogleReader
 
 @synthesize subscriptions;
@@ -39,6 +46,11 @@ static GoogleReader * _googleReader = nil;
 @synthesize readerUser;
 
 
+-(BOOL)isAuthenticated
+{
+	return googleReaderStatus == isAuthenticated;
+}
+
 
 - (id)init
 {
@@ -46,8 +58,9 @@ static GoogleReader * _googleReader = nil;
     if (self) {
         // Initialization code here.
 		localFeeds = [[[NSMutableArray alloc] init] retain]; 
+		isAuthenticated = notAuthenticated;
 		[self authenticate];
-    }
+	}
     
     return self;
 }
@@ -75,6 +88,7 @@ static GoogleReader * _googleReader = nil;
 
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder shouldIgnoreArticleLimit:(BOOL)ignoreLimit
 {				
+	
 	//This is a workaround throw a BAD folderupdate value on DB
 	NSString *folderLastUpdate = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
 	if ([folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
@@ -321,7 +335,7 @@ static GoogleReader * _googleReader = nil;
 -(void)handleGoogleLoginRequest
 {
 	
-	
+	isAuthenticated = NO;
 	GTMOAuth2WindowController *windowController = [GTMOAuth2WindowController controllerWithScope:@"https://www.google.com/reader/api"
 																						clientID:@"49097391685.apps.googleusercontent.com"
 																					clientSecret:@"0wzzJCfkcNPeqKgjo-pfPZSA"
@@ -361,6 +375,7 @@ static GoogleReader * _googleReader = nil;
 					if (data) {
 						token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
 						LOG_EXPR(token);
+						isAuthenticated = YES;
 						[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 						
 					} else {
@@ -381,8 +396,14 @@ static GoogleReader * _googleReader = nil;
 
 -(void)authenticate 
 {    	
-	
-	
+	NSLog(@"GoogleReader authenticate");
+	if (googleReaderStatus == isAutenthicating) {
+		NSLog(@"Another instance is authenticating...");
+		return;
+	} else {
+		NSLog(@"Starting first authentication...");
+		googleReaderStatus = isAutenthicating;
+	}
 	
 	oAuthObject = [[GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
 																					   clientID:@"49097391685.apps.googleusercontent.com"
@@ -390,13 +411,16 @@ static GoogleReader * _googleReader = nil;
 	
 	if (oAuthObject != nil && [oAuthObject canAuthorize]) {
 		//[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
-
+		
+		NSLog(@"Google OAuth 2.0 - OAuth token acquired from keychain");
 		
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com/reader/api/0/token?client=scroll"]];
 		
 		[oAuthObject authorizeRequest:request completionHandler:^(NSError *error) {
 			if (error) {
+				NSLog(@"Google OAuth 2.0 - FAILED");
 				LOG_EXPR([error description]);
+				googleReaderStatus = notAuthenticated;
 			} else {
 				// Synchronous fetches like this are a really bad idea in Cocoa applications
 				//
@@ -408,12 +432,16 @@ static GoogleReader * _googleReader = nil;
 																 error:&error];
 				if (data) {
 					token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
+					NSLog(@"Google OAuth 2.0 - TOKEN FETCHED");
 					LOG_EXPR(token);
+					googleReaderStatus = isAuthenticated;
 					[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 
 				} else {
 					// Fetch failed
+					NSLog(@"Google OAuth 2.0 - FAILED");
 					LOG_EXPR([error description]);
+					googleReaderStatus = notAuthenticated;
 				}
 			}
 			

@@ -14,11 +14,12 @@
 
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
     NSString * token;
-	NSString *readerUser;
 	GTMOAuth2Authentication *oAuthObject;
     NSDictionary * subscriptions;
     NSArray * readingList;
 	NSMutableArray *localFeeds;
+	BOOL isAuthenticated;
+	NSString * readerUser;
 }
 
 @property (nonatomic, copy) NSDictionary * subscriptions;
@@ -29,6 +30,8 @@
 
 
 +(GoogleReader *)sharedManager;
+
+-(BOOL)isAuthenticated;
 
 -(void)loadSubscriptions:(NSNotification*)nc;
 -(void)loadReadingList;
