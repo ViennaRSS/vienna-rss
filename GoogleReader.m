@@ -35,7 +35,6 @@ static GoogleReader * _googleReader = nil;
 @synthesize subscriptions;
 @synthesize readingList;
 @synthesize localFeeds;
-@synthesize nq;
 @synthesize token;
 @synthesize readerUser;
 
@@ -47,23 +46,10 @@ static GoogleReader * _googleReader = nil;
     if (self) {
         // Initialization code here.
 		localFeeds = [[[NSMutableArray alloc] init] retain]; 
-		nq = [[[ASINetworkQueue alloc] init] retain];
-		nq.delegate = self;
-		[nq setShouldCancelAllRequestsOnFailure:NO];
-		[nq setRequestDidFinishSelector:@selector(nqRequestFinished:)];
-		[nq setRequestDidStartSelector:@selector(nqRequestStarted:)];
 		[self authenticate];
     }
     
     return self;
-}
-
-- (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	NSLog(@"New request added. Queue: %i",[nq requestsCount]);
-}
-
-- (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	NSLog(@"Request done. Queue: %i",[nq requestsCount]);	
 }
 
 
@@ -789,7 +775,6 @@ static GoogleReader * _googleReader = nil;
     [subscriptions release];
 	[oAuthObject release];
 	[localFeeds release];
-	[nq release];
 }
 
 /* sharedManager

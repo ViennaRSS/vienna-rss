@@ -19,13 +19,11 @@
     NSDictionary * subscriptions;
     NSArray * readingList;
 	NSMutableArray *localFeeds;
-	ASINetworkQueue *nq;
 }
 
 @property (nonatomic, copy) NSDictionary * subscriptions;
 @property (nonatomic, copy) NSArray * readingList;
 @property (nonatomic, copy) NSMutableArray * localFeeds;
-@property (nonatomic, copy) ASINetworkQueue *nq;
 @property (nonatomic, retain) NSString *token;
 @property (nonatomic, retain) NSString *readerUser;
 
