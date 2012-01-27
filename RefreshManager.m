@@ -151,22 +151,24 @@ typedef enum {
 		networkQueue.delegate = self;
 		[networkQueue setRequestDidFinishSelector:@selector(nqRequestFinished:)];
 		[networkQueue setRequestDidStartSelector:@selector(nqRequestStarted:)];
+		[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
+		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
 	}
 	return self;
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"Queue: (%i) - %@",[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"Queue: (%i) - %@",[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
@@ -179,6 +181,12 @@ typedef enum {
 	if (!_refreshManager)
 		_refreshManager = [[RefreshManager alloc] init];
 	return _refreshManager;
+}
+
+-(void)handleChangeConcurrentDownloads:(NSNotification *)nc
+{
+	NSLog(@"Handling new downloads count");
+	[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
 }
 
 /* handleWillDeleteFolder

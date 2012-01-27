@@ -63,6 +63,7 @@
 
 	// Show use JavaScript option
 	[useJavaScriptButton setState:[prefs useJavaScript] ? NSOnState : NSOffState];
+	[concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%d",[prefs concurrentDownloads]]];
 }
 
 /* changeUseJavaScript
@@ -73,4 +74,10 @@
 	BOOL useJavaScript = [sender state] == NSOnState;
 	[[Preferences standardPreferences] setUseJavaScript:useJavaScript];
 }
+
+
+-(IBAction)changeConcurrentDownloads:(id)sender {
+	[[Preferences standardPreferences] setConcurrentDownloads:[[concurrentDownloads titleOfSelectedItem] integerValue]];
+}
+
 @end
