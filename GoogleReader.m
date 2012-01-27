@@ -65,27 +65,6 @@ enum GoogleReaderStatus {
     return self;
 }
 
-
-- (NSString *) URLEncodedString_ch:(NSString*)sourceString {
-    NSMutableString * output = [NSMutableString string];
-    const char * source = (const char *)[sourceString UTF8String];
-    size_t sourceLen = strlen((const char *)source);
-    for (size_t i = 0; i < sourceLen; ++i) {
-        const unsigned char thisChar = source[i];
-        if (thisChar == ' '){
-            [output appendString:@"+"];
-        } else if (thisChar == '.' || thisChar == '-' || thisChar == '_' || thisChar == '~' || 
-                   (thisChar >= 'a' && thisChar <= 'z') ||
-                   (thisChar >= 'A' && thisChar <= 'Z') ||
-                   (thisChar >= '0' && thisChar <= '9')) {
-            [output appendFormat:@"%c", thisChar];
-        } else {
-            [output appendFormat:@"%%%02X", thisChar];
-        }
-    }
-    return output;
-}
-
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder shouldIgnoreArticleLimit:(BOOL)ignoreLimit
 {				
 	
@@ -95,8 +74,8 @@ enum GoogleReaderStatus {
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
 		
-	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [self URLEncodedString_ch:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, oAuthObject.accessToken]]];
-	
+	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, oAuthObject.accessToken]]];
+
 	LOG_EXPR([request url]);
 	
 	[request setUserInfo:[NSDictionary dictionaryWithObject:thisFolder forKey:@"folder"]];
@@ -116,8 +95,8 @@ enum GoogleReaderStatus {
 				NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
 				NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 				LOG_EXPR(dict);
-				//NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-				//LOG_EXPR(tmp);
+				NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+				LOG_EXPR(tmp);
 			}
 			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
 			
