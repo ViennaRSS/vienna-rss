@@ -70,16 +70,17 @@ extern NSString * MAPref_ShouldSaveFeedSource;
 extern NSString * MAPref_ShouldSaveFeedSourceBackup;
 extern NSString * MAPref_SearchMethod;
 extern NSString * MAPref_SyncGoogleReader;
-extern NSString * MAPref_GoogleUsername;
+extern NSString * MAPref_ConcurrentDownloads;
 
-extern int MA_Default_BackTrackQueueSize;
-extern int MA_Default_RefreshThreads;
+extern NSInteger MA_Default_BackTrackQueueSize;
+extern NSInteger MA_Default_RefreshThreads;
 extern float MA_Default_Read_Interval;
-extern int MA_Default_MinimumFontSize;
-extern int MA_Default_AutoExpireDuration;
-extern int MA_Default_Check_Frequency;
+extern NSInteger MA_Default_MinimumFontSize;
+extern NSInteger MA_Default_AutoExpireDuration;
+extern NSInteger MA_Default_Check_Frequency;
 extern float MA_Default_Main_Window_Min_Width;
 extern float MA_Default_Main_Window_Min_Height;
+extern NSInteger MA_Default_ConcurrentDownloads;
 
 extern NSString * MA_PBoardType_RSSItem;
 extern NSString * MA_PBoardType_FolderList;
