@@ -2850,17 +2850,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[db commitTransaction];
 	
 	
-	/*
 	if (folderId != -1)
 	{
-		[foldersTree selectFolder:folderId];
-		if (isAccessible(url))
-		{
+		//		[foldersTree selectFolder:folderId];
+		//		if (isAccessible(url))
+		//{
 			Folder * folder = [db folderFromID:folderId];
 			[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
-		}
+		//}
 	}
-	 */
 }
 
 /* createNewSubscription
