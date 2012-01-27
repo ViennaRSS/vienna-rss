@@ -308,7 +308,7 @@
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
 			if (listIndex == NSNotFound)
 			{
-				NSLog(@"Cannot find child with id %i for folder with id %@", nextChildId, [node nodeId]);
+				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)[node nodeId]);
 				return NO;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
@@ -331,7 +331,7 @@
 		}
 		if (index < [listOfFolders count])
 		{
-			NSLog(@"Missing children for folder with id %i, %@", nextChildId, [node nodeId]);
+			NSLog(@"Missing children for folder with id %ld, %ld", (long)nextChildId, (long)[node nodeId]);
 			return NO;
 		}
 	}
@@ -1197,7 +1197,7 @@
  */
 -(void)moveFoldersUndo:(id)anObject
 {
-	[self moveFolders:(NSArray *)anObject];
+	[self moveFolders:(NSArray *)anObject withGoogleSync:YES];
 }
 
 /* moveFolders

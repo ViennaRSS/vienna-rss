@@ -61,6 +61,7 @@ typedef enum {
 -(void)removeConnection:(ASIHTTPRequest *)conn;
 -(void)folderIconRefreshCompleted:(ASIHTTPRequest *)connector;
 -(NSString *)getRedirectURL:(NSData *)data;
+- (void)syncFinishedForFolder:(Folder *)folder; 
 @end
 
 // Single refresh item type
