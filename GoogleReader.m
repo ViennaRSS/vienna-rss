@@ -291,12 +291,8 @@ enum GoogleReaderStatus {
 
 -(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList 
 {
-
-	AppController *controller = [NSApp delegate];
     
-    // Unread count may have changed
-    [controller setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
-
+    [[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 	
 	[localFeeds removeAllObjects];
 	
@@ -313,8 +309,8 @@ enum GoogleReaderStatus {
 
 -(void)handleGoogleLoginRequest
 {
+	googleReaderStatus = isAutenthicating;
 	
-	isAuthenticated = NO;
 	GTMOAuth2WindowController *windowController = [GTMOAuth2WindowController controllerWithScope:@"https://www.google.com/reader/api"
 																						clientID:@"49097391685.apps.googleusercontent.com"
 																					clientSecret:@"0wzzJCfkcNPeqKgjo-pfPZSA"
@@ -329,6 +325,7 @@ enum GoogleReaderStatus {
 		
 		if (error != nil) {
 			// Authentication failed
+			googleReaderStatus = notAuthenticated;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_AuthFailed" object:nil];
 		} else {
@@ -342,6 +339,7 @@ enum GoogleReaderStatus {
 			[auth authorizeRequest:request completionHandler:^(NSError *error) {
 				if (error) {
 					LOG_EXPR([error description]);
+					googleReaderStatus = notAuthenticated;
 				} else {
 					// Synchronous fetches like this are a really bad idea in Cocoa applications
 					//
@@ -354,12 +352,13 @@ enum GoogleReaderStatus {
 					if (data) {
 						token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
 						LOG_EXPR(token);
-						isAuthenticated = YES;
+						googleReaderStatus = isAuthenticated;
 						[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 						
 					} else {
 						// Fetch failed
 						LOG_EXPR([error description]);
+						googleReaderStatus = notAuthenticated;
 					}
 				}
 				
@@ -549,15 +548,42 @@ enum GoogleReaderStatus {
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"unsubscribe" forKey:@"ac"];
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
-    [request setPostValue:token forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Unsubscribe response status code: %d", [request responseStatusCode]);
+	NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=scroll&access_token=%@",oAuthObject.accessToken]];
+	__block ASIHTTPRequest *tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
+	[tokenRequest setFailedBlock:^{
+		LOG_EXPR([tokenRequest error]);
+		LOG_EXPR([tokenRequest responseHeaders]);
+	}];
+	[tokenRequest setCompletionBlock:^{
+		token = [[NSString alloc] initWithData:[tokenRequest responseData] encoding:NSUTF8StringEncoding];
+		LOG_EXPR(token);
+		readerUser = [[tokenRequest responseHeaders] objectForKey:@"X-Reader-User"];
+		LOG_EXPR(readerUser);
+		NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/edit?access_token=%@",oAuthObject.accessToken]];
+		__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
+		[myRequest setFailedBlock:^{
+			LOG_EXPR([myRequest error]);
+			LOG_EXPR([myRequest responseHeaders]);
+		}];
+		[myRequest setPostValue:token forKey:@"T"];
+		[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
+		[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+
+			
+		[myRequest setCompletionBlock:^{
+				NSString *tmp = [[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding];
+				LOG_EXPR(tmp);
+				NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
+				//LOG_EXPR(requestResponse);
+				if (![requestResponse isEqualToString:@"OK"]) {
+					LOG_EXPR([myRequest responseHeaders]);
+					LOG_EXPR([myRequest requestHeaders]);
+					LOG_EXPR([myRequest error]);
+				}
+			}];
+		[myRequest startAsynchronous];		
+	}];
+	[tokenRequest startAsynchronous];
 }
 
 -(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag

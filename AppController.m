@@ -3223,8 +3223,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)deleteFolder:(id)sender
 {
 	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
+	NSUInteger count = [selectedFolders count];
+	NSUInteger index;
 	
 	// Show a different prompt depending on whether we're deleting one folder or a
 	// collection of them.
@@ -3247,6 +3247,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete RSS feed text", nil), [folder name]];
 			alertTitle = NSLocalizedString(@"Delete RSS feed", nil);
 		}
+		else if (IsGoogleReaderFolder(folder))
+		{
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Google Reader RSS feed text", nil), [folder name]];
+			alertTitle = NSLocalizedString(@"Delete Google Reader RSS feed", nil);
+		}
 		else if (IsGroupFolder(folder))
 		{
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete group folder text", nil), [folder name]];
@@ -3267,7 +3272,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (needPrompt)
 	{
 		// Security: folder name could contain formatting characters, so don't use alertBody as format string.
-		int returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
+		NSInteger returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
 		if (returnCode == NSAlertAlternateReturn)
 			return;
 	}
@@ -3312,6 +3317,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			// Now call the database to delete the folder.
 			[db deleteFolder:[folder itemId]];
             
+			if (IsGoogleReaderFolder(folder)) {
+				NSLog(@"Unsubscribe Google Reader folder");
+				[[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
+			}
             // Unsubscribe at Google
 			//TOFIX
 			/*
