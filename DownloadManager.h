@@ -53,7 +53,7 @@
 -(NSDate *)startTime;
 @end
 
-@interface DownloadManager : NSObject<NSURLDownloadDelegate> {
+@interface DownloadManager : NSObject {
 	NSMutableArray * downloadsList;
 	int activeDownloads;
 }

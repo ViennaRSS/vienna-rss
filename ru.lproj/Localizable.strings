@@ -154,7 +154,7 @@
 "Open Link in New Tab" = "Открыть Ссылку в Новой Вкладке";
 "Open Link in %@" = "Открыть Ссылку в %@";
 "Open Page in %@" = "Открыть Страницу в %@";
-"Copy Page Link to Clipboard" ="Копировать Ссылку в Буфер Обмена";
+"Copy Page Link to Clipboard" = "Копировать Ссылку в Буфер Обмена";
 "%d unread articles" = "%d непрочитанных статей";
 "More Scripts..." = "Больше Скриптов...";
 "Install Update" = "Установить Обновление";
@@ -325,7 +325,7 @@
 "Refresh Folder Images" = "Обновить Изображения Папки";
 "Report" = "Отчет";
 "Condensed" = "Сжатая";
-"Unified" =  "Общая";
+"Unified" = "Общая";
 "Summary" = "Выводы";
 "Blog With..." = "Запись в Блог...";
 "Blog with %@" = "Запись в Блог %@";
@@ -402,3 +402,7 @@
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
 "Loading HTML article..." = "Loading HTML article...";
+"Ascending" = "Ascending";
+"Descending" = "Descending";
+"Use Current Style for Articles" = "Use Current Style for Articles";
+"Use Web Page for Articles" = "Use Web Page for Articles";
