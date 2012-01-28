@@ -13,9 +13,9 @@
 "%d subscriptions successfully imported" = "Успішно імпортовано %d підписок";
 "RSS Subscription Export Title" = "Експорт завершено";
 "%d subscriptions successfully exported" = "Успішно експортовано %d підписок";
-"Growl description" = "Отримано %d нових непрочитаних статей";
-"Growl notification name" = "Нові статті";
-"Growl notification title" = "Нові статті";
+"New unread articles retrieved" = "%d new unread articles retrieved";
+"Growl refresh completed" = "New articles retrieved";
+"New articles retrieved" = "New articles retrieved";
 "(Untitled Feed)" = "(Безіменна стрічка)";
 "Open Link in Browser" = "Відкрити посилання у браузері";
 "Copy Link to Clipboard" = "Копіювати посилання у буфер";
@@ -325,7 +325,7 @@
 "Refresh Folder Images" = "Оновити зображення папок";
 "Report" = "Звіт";
 "Condensed" = "Стиснутий";
-"Unified" =  "Уніфікований";
+"Unified" = "Уніфікований";
 "Summary" = "Підсумок";
 "Blog With..." = "Blog з...";
 "Blog with %@" = "Blog з %@";
@@ -350,7 +350,7 @@
 "Local File" = "Локальний файл";
 "Hide Status Bar" = "Заховати стрічку статусу";
 "Show Status Bar" = "Показати стрічку статусу";
-"Customize Toolbar" = "Налаштувати Toolbar";
+"Customize Toolbar..." = "Customize Toolbar…";
 "Search Articles" = "Шукати статті";
 "Progress" = "Прогрес";
 "Delete all articles in the trash" = "Видалити всі статті у смітнику";
@@ -402,3 +402,7 @@
 /* Added in 2.6.0 */
 "Article load completed" = "Article load completed";
 "Loading HTML article..." = "Loading HTML article...";
+"Ascending" = "Ascending";
+"Descending" = "Descending";
+"Use Current Style for Articles" = "Use Current Style for Articles";
+"Use Web Page for Articles" = "Use Web Page for Articles";
