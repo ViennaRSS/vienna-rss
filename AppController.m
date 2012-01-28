@@ -445,6 +445,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	//Google Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 	
+	
+	if ([prefs syncGoogleReader]) {
+		NSLog(@"Let us authenticate with Google Reader");
+		[[GoogleReader sharedManager] authenticate];
+	}
+
+	
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
 	
@@ -553,11 +560,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
-	if ([prefs syncGoogleReader]) {
-		[GoogleReader sharedManager];
-	}
-	
-	if ([prefs refreshOnStartup])
+	if ([prefs refreshOnStartup]) 
 		[self refreshAllSubscriptions:self];
 }
 
@@ -2843,21 +2846,19 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Create then select the new folder.
 	[db beginTransaction];
-	// NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
+	NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
 	[db commitTransaction];
 	
 	
-	/*
 	if (folderId != -1)
 	{
-		[foldersTree selectFolder:folderId];
-		if (isAccessible(url))
-		{
+		//		[foldersTree selectFolder:folderId];
+		//		if (isAccessible(url))
+		//{
 			Folder * folder = [db folderFromID:folderId];
 			[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
-		}
+		//}
 	}
-	 */
 }
 
 /* createNewSubscription
@@ -3220,8 +3221,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)deleteFolder:(id)sender
 {
 	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
+	NSUInteger count = [selectedFolders count];
+	NSUInteger index;
 	
 	// Show a different prompt depending on whether we're deleting one folder or a
 	// collection of them.
@@ -3244,6 +3245,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete RSS feed text", nil), [folder name]];
 			alertTitle = NSLocalizedString(@"Delete RSS feed", nil);
 		}
+		else if (IsGoogleReaderFolder(folder))
+		{
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Google Reader RSS feed text", nil), [folder name]];
+			alertTitle = NSLocalizedString(@"Delete Google Reader RSS feed", nil);
+		}
 		else if (IsGroupFolder(folder))
 		{
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete group folder text", nil), [folder name]];
@@ -3264,7 +3270,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (needPrompt)
 	{
 		// Security: folder name could contain formatting characters, so don't use alertBody as format string.
-		int returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
+		NSInteger returnCode = NSRunAlertPanel(alertTitle, @"%@", NSLocalizedString(@"Delete", nil), NSLocalizedString(@"Cancel", nil), nil, alertBody);
 		if (returnCode == NSAlertAlternateReturn)
 			return;
 	}
@@ -3309,6 +3315,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			// Now call the database to delete the folder.
 			[db deleteFolder:[folder itemId]];
             
+			if (IsGoogleReaderFolder(folder)) {
+				NSLog(@"Unsubscribe Google Reader folder");
+				[[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
+			}
             // Unsubscribe at Google
 			//TOFIX
 			/*
@@ -3751,6 +3761,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
+	
+	//TOFIX: we should start local refresh feed, then sync refresh feed
+	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isAuthenticated]) {
+		NSLog(@"Waiting until Google Auth is done...");
+		if (![sender isKindOfClass:[NSTimer class]]) {
+			NSLog(@"Create a timer...");
+			[self setStatusMessage:NSLocalizedString(@"Acquiring Google OAuth 2.0 token...", nil) persist:NO];
+			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
+		}
+		return;
+	} else {
+		NSLog(@"Token available... let's go!");
+		[self setStatusMessage:nil persist:NO];
+		if ([sender isKindOfClass:[NSTimer class]]) {
+			[(NSTimer*)sender invalidate];
+			sender = nil;
+		}
+	}
+	
 	// Reset the refresh timer
 	[self handleCheckFrequencyChange:nil];
 	

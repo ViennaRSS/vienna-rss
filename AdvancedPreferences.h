@@ -23,9 +23,11 @@
 @interface AdvancedPreferences : NSWindowController
 {
 	IBOutlet NSButton * useJavaScriptButton;
+	IBOutlet NSPopUpButton * concurrentDownloads;
 }
 
 // Action functions
 -(IBAction)changeUseJavaScript:(id)sender;
+-(IBAction)changeConcurrentDownloads:(id)sender;
 -(IBAction)showAdvancedHelp:(id)sender;
 @end

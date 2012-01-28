@@ -63,6 +63,8 @@
 	<string>uk.co.opencommunity.vienna2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<string>en</string>
 	<key>CFBundleName</key>
 	<string>Vienna</string>
 	<key>CFBundlePackageType</key>
@@ -86,6 +88,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.5.0</string>
 	<key>NSAppleScriptEnabled</key>

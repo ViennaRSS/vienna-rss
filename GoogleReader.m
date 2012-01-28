@@ -30,15 +30,26 @@ static NSString * ClientName = @"ViennaRSS";
 // Singleton
 static GoogleReader * _googleReader = nil;
 
+enum GoogleReaderStatus {
+	notAuthenticated = 0,
+	isAutenthicating,
+	isAuthenticated
+} googleReaderStatus;
+
+
 @implementation GoogleReader
 
 @synthesize subscriptions;
 @synthesize readingList;
 @synthesize localFeeds;
-@synthesize nq;
 @synthesize token;
 @synthesize readerUser;
 
+
+-(BOOL)isAuthenticated
+{
+	return googleReaderStatus == isAuthenticated;
+}
 
 
 - (id)init
@@ -47,56 +58,24 @@ static GoogleReader * _googleReader = nil;
     if (self) {
         // Initialization code here.
 		localFeeds = [[[NSMutableArray alloc] init] retain]; 
-		nq = [[[ASINetworkQueue alloc] init] retain];
-		nq.delegate = self;
-		[nq setShouldCancelAllRequestsOnFailure:NO];
-		[nq setRequestDidFinishSelector:@selector(nqRequestFinished:)];
-		[nq setRequestDidStartSelector:@selector(nqRequestStarted:)];
+		isAuthenticated = notAuthenticated;
 		[self authenticate];
-    }
+	}
     
     return self;
 }
 
-- (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	NSLog(@"New request added. Queue: %i",[nq requestsCount]);
-}
-
-- (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	NSLog(@"Request done. Queue: %i",[nq requestsCount]);	
-}
-
-
-- (NSString *) URLEncodedString_ch:(NSString*)sourceString {
-    NSMutableString * output = [NSMutableString string];
-    const char * source = (const char *)[sourceString UTF8String];
-    size_t sourceLen = strlen((const char *)source);
-    for (size_t i = 0; i < sourceLen; ++i) {
-        const unsigned char thisChar = source[i];
-        if (thisChar == ' '){
-            [output appendString:@"+"];
-        } else if (thisChar == '.' || thisChar == '-' || thisChar == '_' || thisChar == '~' || 
-                   (thisChar >= 'a' && thisChar <= 'z') ||
-                   (thisChar >= 'A' && thisChar <= 'Z') ||
-                   (thisChar >= '0' && thisChar <= '9')) {
-            [output appendFormat:@"%c", thisChar];
-        } else {
-            [output appendFormat:@"%%%02X", thisChar];
-        }
-    }
-    return output;
-}
-
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder shouldIgnoreArticleLimit:(BOOL)ignoreLimit
 {				
+	
 	//This is a workaround throw a BAD folderupdate value on DB
 	NSString *folderLastUpdate = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
 	if ([folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
 		
-	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [self URLEncodedString_ch:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, oAuthObject.accessToken]]];
-	
+	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, oAuthObject.accessToken]]];
+
 	LOG_EXPR([request url]);
 	
 	[request setUserInfo:[NSDictionary dictionaryWithObject:thisFolder forKey:@"folder"]];
@@ -116,8 +95,8 @@ static GoogleReader * _googleReader = nil;
 				NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
 				NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 				LOG_EXPR(dict);
-				//NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-				//LOG_EXPR(tmp);
+				NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+				LOG_EXPR(tmp);
 			}
 			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
 			
@@ -312,12 +291,8 @@ static GoogleReader * _googleReader = nil;
 
 -(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList 
 {
-
-	AppController *controller = [NSApp delegate];
     
-    // Unread count may have changed
-    [controller setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
-
+    [[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 	
 	[localFeeds removeAllObjects];
 	
@@ -334,7 +309,7 @@ static GoogleReader * _googleReader = nil;
 
 -(void)handleGoogleLoginRequest
 {
-	
+	googleReaderStatus = isAutenthicating;
 	
 	GTMOAuth2WindowController *windowController = [GTMOAuth2WindowController controllerWithScope:@"https://www.google.com/reader/api"
 																						clientID:@"49097391685.apps.googleusercontent.com"
@@ -350,6 +325,7 @@ static GoogleReader * _googleReader = nil;
 		
 		if (error != nil) {
 			// Authentication failed
+			googleReaderStatus = notAuthenticated;
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_AuthFailed" object:nil];
 		} else {
@@ -363,6 +339,7 @@ static GoogleReader * _googleReader = nil;
 			[auth authorizeRequest:request completionHandler:^(NSError *error) {
 				if (error) {
 					LOG_EXPR([error description]);
+					googleReaderStatus = notAuthenticated;
 				} else {
 					// Synchronous fetches like this are a really bad idea in Cocoa applications
 					//
@@ -375,11 +352,13 @@ static GoogleReader * _googleReader = nil;
 					if (data) {
 						token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
 						LOG_EXPR(token);
+						googleReaderStatus = isAuthenticated;
 						[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 						
 					} else {
 						// Fetch failed
 						LOG_EXPR([error description]);
+						googleReaderStatus = notAuthenticated;
 					}
 				}
 				
@@ -395,8 +374,14 @@ static GoogleReader * _googleReader = nil;
 
 -(void)authenticate 
 {    	
-	
-	
+	NSLog(@"GoogleReader authenticate");
+	if (googleReaderStatus == isAutenthicating) {
+		NSLog(@"Another instance is authenticating...");
+		return;
+	} else {
+		NSLog(@"Starting first authentication...");
+		googleReaderStatus = isAutenthicating;
+	}
 	
 	oAuthObject = [[GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
 																					   clientID:@"49097391685.apps.googleusercontent.com"
@@ -404,13 +389,16 @@ static GoogleReader * _googleReader = nil;
 	
 	if (oAuthObject != nil && [oAuthObject canAuthorize]) {
 		//[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
-
+		
+		NSLog(@"Google OAuth 2.0 - OAuth token acquired from keychain");
 		
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com/reader/api/0/token?client=scroll"]];
 		
 		[oAuthObject authorizeRequest:request completionHandler:^(NSError *error) {
 			if (error) {
+				NSLog(@"Google OAuth 2.0 - FAILED");
 				LOG_EXPR([error description]);
+				googleReaderStatus = notAuthenticated;
 			} else {
 				// Synchronous fetches like this are a really bad idea in Cocoa applications
 				//
@@ -422,12 +410,16 @@ static GoogleReader * _googleReader = nil;
 																 error:&error];
 				if (data) {
 					token = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] retain];
+					NSLog(@"Google OAuth 2.0 - TOKEN FETCHED");
 					LOG_EXPR(token);
+					googleReaderStatus = isAuthenticated;
 					[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 
 				} else {
 					// Fetch failed
+					NSLog(@"Google OAuth 2.0 - FAILED");
 					LOG_EXPR([error description]);
+					googleReaderStatus = notAuthenticated;
 				}
 			}
 			
@@ -556,15 +548,42 @@ static GoogleReader * _googleReader = nil;
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"unsubscribe" forKey:@"ac"];
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
-    [request setPostValue:token forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Unsubscribe response status code: %d", [request responseStatusCode]);
+	NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=scroll&access_token=%@",oAuthObject.accessToken]];
+	__block ASIHTTPRequest *tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
+	[tokenRequest setFailedBlock:^{
+		LOG_EXPR([tokenRequest error]);
+		LOG_EXPR([tokenRequest responseHeaders]);
+	}];
+	[tokenRequest setCompletionBlock:^{
+		token = [[NSString alloc] initWithData:[tokenRequest responseData] encoding:NSUTF8StringEncoding];
+		LOG_EXPR(token);
+		readerUser = [[tokenRequest responseHeaders] objectForKey:@"X-Reader-User"];
+		LOG_EXPR(readerUser);
+		NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/edit?access_token=%@",oAuthObject.accessToken]];
+		__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
+		[myRequest setFailedBlock:^{
+			LOG_EXPR([myRequest error]);
+			LOG_EXPR([myRequest responseHeaders]);
+		}];
+		[myRequest setPostValue:token forKey:@"T"];
+		[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
+		[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+
+			
+		[myRequest setCompletionBlock:^{
+				NSString *tmp = [[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding];
+				LOG_EXPR(tmp);
+				NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
+				//LOG_EXPR(requestResponse);
+				if (![requestResponse isEqualToString:@"OK"]) {
+					LOG_EXPR([myRequest responseHeaders]);
+					LOG_EXPR([myRequest requestHeaders]);
+					LOG_EXPR([myRequest error]);
+				}
+			}];
+		[myRequest startAsynchronous];		
+	}];
+	[tokenRequest startAsynchronous];
 }
 
 -(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag
@@ -790,7 +809,6 @@ static GoogleReader * _googleReader = nil;
     [subscriptions release];
 	[oAuthObject release];
 	[localFeeds release];
-	[nq release];
 }
 
 /* sharedManager

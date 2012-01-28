@@ -152,22 +152,24 @@ typedef enum {
 		networkQueue.delegate = self;
 		[networkQueue setRequestDidFinishSelector:@selector(nqRequestFinished:)];
 		[networkQueue setRequestDidStartSelector:@selector(nqRequestStarted:)];
+		[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
+		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
 	}
 	return self;
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"Queue: (%i) - %@",[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"Queue: (%i) - %@",[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 }
 
@@ -180,6 +182,12 @@ typedef enum {
 	if (!_refreshManager)
 		_refreshManager = [[RefreshManager alloc] init];
 	return _refreshManager;
+}
+
+-(void)handleChangeConcurrentDownloads:(NSNotification *)nc
+{
+	NSLog(@"Handling new downloads count");
+	[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
 }
 
 /* handleWillDeleteFolder
@@ -629,9 +637,7 @@ typedef enum {
  * Refresh a folder's newsfeed using the specified URL.
  */
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force
-{
-	//AsyncConnection * conn = [[AsyncConnection alloc] init];
-	
+{	
 	ASIHTTPRequest *myRequest;
 	
 	if (IsRSSFolder(folder)) {
@@ -651,31 +657,6 @@ typedef enum {
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder shouldIgnoreArticleLimit:force];
 	}
 	[self addConnection:myRequest];
-
-	/*
-	@try
-	{
-		NSMutableDictionary * headers = [NSMutableDictionary dictionary];
-		
-		[headers setValue:@"gzip" forKey:@"Accept-Encoding"];
-		[headers setValue:[folder lastUpdateString] forKey:@"If-Modified-Since"];
-		
-		[conn setHttpHeaders:headers];
-		
-		if ([conn beginLoadDataFromURL:url
-							  username:[folder username]
-							  password:[folder password]
-							  delegate:self
-						   contextData:folder
-								   log:aItem
-						didEndSelector:@selector(folderRefreshCompleted:)])
-			[self addConnection:conn];
-	}
-	@finally
-	{
-		[conn release];
-	}
-	 */
 }
 
 /* pumpFolderIconRefresh
@@ -747,20 +728,12 @@ typedef enum {
  */
 -(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
 {
-	//Folder * folder = (Folder *)[connector contextData];
 	Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
 	ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
     
-    
-	/*if ([[Preferences standardPreferences] syncGoogleReader])
-    {
-    } else 
-	 
-    { */
-        [self syncFinishedForFolder:folder];
-    //}
+    [self syncFinishedForFolder:folder];
     
 	//[self setFolderUpdatingFlag:folder flag:NO];
 	// I Think this should be handled directly!
@@ -771,14 +744,23 @@ typedef enum {
 			[authQueue addObject:folder];
 		[self getCredentialsForFolder];
 	}
-	//	else if ([connector status] == MA_Connect_PermanentRedirect)
-	else */ 
+	*/
+	// MA_Connect_PermanentRedirect)
 	if ([connector responseStatusCode] == 301)
 	{
 		// We got a permanent redirect from the feed so change the feed URL
 		// to the new location.
 		[db setFolderFeedURL:folderId newFeedURL:[[connector url] absoluteString]];
 		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [[connector url] absoluteString]]];
+		return;
+	}
+	// No modification from latest check
+	else if ([connector responseStatusCode] == 304)
+	{	
+		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		[self setFolderErrorFlag:folder flag:NO];
+		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
+		[connectorItem setStatus:NSLocalizedString(@"No modification from last check", nil)];
 		return;
 	}
 	//else if ([connector status] == MA_Connect_Stopped)
@@ -813,7 +795,6 @@ typedef enum {
 	//else if ([connector status] == MA_Connect_Succeeded)
 	else if ([connector responseStatusCode] == 200)
 	{
-		//		NSData * receivedData = [connector receivedData];
 		NSData * receivedData = [connector responseData];
         
 		// Check whether this is an HTML redirect. If so, create a new connection using
