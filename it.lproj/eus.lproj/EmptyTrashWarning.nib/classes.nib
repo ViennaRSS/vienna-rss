@@ -1,10 +1,10 @@
 {
     IBClasses = (
         {
-            ACTIONS = {changeUseJavaScript = id; showAdvancedHelp = id; }; 
-            CLASS = AdvancedPreferences; 
+            ACTIONS = {doNotEmptyTrash = id; emptyTrash = id; }; 
+            CLASS = EmptyTrashWarning; 
             LANGUAGE = ObjC; 
-            OUTLETS = {useJavaScriptButton = NSButton; }; 
+            OUTLETS = {doNotShowWarningAgain = NSButton; }; 
             SUPERCLASS = NSWindowController; 
         }, 
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }

@@ -1,6 +1,5 @@
 "Mark Read" = "Als gelesen markieren";
 "Mark Unread" = "Als ungelesen markieren";
-"Mark Flagged" = "Als markiert markieren";
 "Mark Unflagged" = "Als unmarkiert markieren";
 "Articles" = "Artikel";
 "Folders" = "Ordner";
@@ -51,7 +50,6 @@
 "Yesterday" = "Gestern";
 "Tomorrow" = "Morgen";
 "%@ at %@" = "%@ um %@";
-"Delete" = "Löschen";
 "Quit" = "Beenden";
 "Refresh cancelled" = "Aktualisierungen abgebrochen";
 "Additional actions for the selected folder" = "Weitere Befehle für den ausgewählten Ordner";
@@ -67,6 +65,7 @@
 "From" = "Von";
 "To" = "An";
 "(No title)" = "(Kein Betreff)";
+"Refreshing folder images..." = "Refreshing folder images...";
 "Refreshing subscriptions..." = "Abonnements aktualisieren...";
 "Authenticating with user name '%@'" = "Authentifizieren mit Benutzername  '%@'";
 "No new articles available" = "Keine neuen Artikel verfügbar";
@@ -155,7 +154,7 @@
 "Open Link in New Tab" = "Link im neuem Tab öffnen";
 "Open Link in %@" = "Öffne Link in %@";
 "Open Page in %@" = "Öffne Seite in %@";
-"Copy Page Link to Clipboard" ="Seitenlink in die Zwischenablage kopieren";
+"Copy Page Link to Clipboard" = "Seitenlink in die Zwischenablage kopieren";
 "%d unread articles" = "%d ungelesene Artikel";
 "More Scripts..." = "Mehr Scripte...";
 "Install Update" = "Installiere Aktualisierung";
@@ -164,6 +163,11 @@
 "Replace smart folder text" = "Wollen Sie den existierenden intelligenten Ordner durch einen mit den neu definierten Kriterien ersetzen?";
 "Replace" = "Ersetzen";
 "Never" = "Nie";
+"After a Day" = "Nach einem Tag";
+"After 2 Days" = "Nach zwei Tagen";
+"After a Week" = "Nach einer Woche";
+"After 2 Weeks" = "Nach zwei Wochen";
+"After a Month" = "Nach einem Monat";
 "Last Week" = "letzte Woche";
 "2 Weeks Ago" = "vor zwei Wochen";
 "A month" = "einem Monat";
@@ -237,6 +241,7 @@
 "Import Subscriptions…" = "Abonnements importieren…";
 "Jump to Selection" = "Auswahl anzeigen";
 "Main Window" = "Hauptfenster";
+"MainMenu" = "MainMenu";
 "Mark All Articles as Read" = "Alle Artikel als gelesen markieren";
 "Mark Flagged" = "Als markiert markieren";
 "Minimize" = "Minimieren";
@@ -284,12 +289,14 @@
 "Open Image in %@" = "Öffne Bild in %@";
 "Open Subscription Home Page in %@" = "Öffne Homepage des Abonnements in %@";
 "Open Article Page in %@" = "Öffne Artikelseite in %@";
-"New Tab" = "Neuer Tab";
+"New Tab" = "Ohne Titel";
 "External Browser" = "Externer Browser";
 
 /* Added in 2.1.0 */
 "Send Link" = "Link senden";
 "Send Links" = "Links senden";
+"Increase Font Size" = "Increase Font Size";
+"Decrease Font Size" = "Decrease Font Size";
 "Enter the URL here" = "URL hier eingeben";
 "Refresh the current page" = "Seite neu laden";
 "Return to the previous page" = "Die vorherige Seite anzeigen";
@@ -318,14 +325,12 @@
 "Refresh Folder Images" = "Ordner-Icons aktualisieren";
 "Report" = "Überschriften & Text separat";
 "Condensed" = "Kompakt";
-"Unified" =  "Kompakt mit Zusammenfassung";
+"Unified" = "Kompakt mit Zusammenfassung";
 "Summary" = "Zusammenfassung";
 "Blog With..." = "Bloggen mit...";
 "Blog with %@" = "Bloggen mit %@";
 "Bigger Text" = "Schrift größer";
 "Smaller Text" = "Schrift kleiner";
-"Send Link by Email" = "Link senden...";
-"Authentication" = "Authentifikation";
 
 /* Added in 2.1.1 */
 "Advanced" = "Erweitert";
@@ -366,26 +371,19 @@
 "Close the filter bar" = "Filter-Leiste ausblenden";
 "Search all articles" = "In allen Artikeln suchen";
 "Search Results" = "Suchergebnisse";
-"Show Filter Bar" = "Filter-Leiste anzeigen";
 "Hide Filter Bar" = "Filter-Leiste ausblenden";
+"Show Filter Bar" = "Filter-Leiste anzeigen";
 "Email a link to the current article or website" = "Einen Link zum momentanen Artikel oder der momentanen Website versenden ...";
 "Refresh" = "Aktualisieren";
 "Action" = "Aktion";
 "Get Info" = "Information";
 "See information about the selected subscription" = "Informationen über das momentan ausgewählte Abonnement anzeigen";
 "Display the list of available styles" = "Liste der vorhandenen Stile anzeigen";
-"Delete..." = "Löschen...";
-"Order By" = "Sortiermodus...";
 
-/*Added in 2.3*/
-"Name" = "Name (alphabetisch)";
+/* Added in 2.3.0 */
+"Order By" = "Sortiermodus...";
 "Manual" = "Händisch";
-"Hide Toolbar" = "Toolbar verstecken";
-"After a Day" = "Nach einem Tag";
-"After 2 Days" = "Nach zwei Tagen";
-"After a Week" = "Nach einer Woche";
-"After 2 Weeks" = "Nach zwei Wochen";
-"After a Month" = "Nach einem Monat";
+"Name" = "Name (alphabetisch)";
 
 /*Added in 2.4*/
 "Show XML Source" = "XML Quelltext anzeigen";
@@ -404,5 +402,7 @@
 /* Added in 2.6.0 */
 "Article load completed" = "Der Artikel wurde geladen";
 "Loading HTML article..." = "Artikel laden...";
+"Ascending" = "Ascending";
+"Descending" = "Descending";
 "Use Current Style for Articles" = "Aktuellen Style zur Artikel-Anzeige verwenden";
 "Use Web Page for Articles" = "Sofort die Artikel-Webseite laden";
