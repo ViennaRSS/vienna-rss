@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C73</string>
+		<int key="IBDocument.SystemTarget">1060</int>
+		<string key="IBDocument.SystemVersion">10K549</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">1938</string>
@@ -50,7 +50,6 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
-				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{213, 113}</string>
 				<object class="NSView" key="NSWindowView" id="1058839781">
 					<reference key="NSNextResponder"/>
@@ -81,10 +80,11 @@
 														<reference key="NSSuperview" ref="724556307"/>
 														<reference key="NSTableView" ref="828087070"/>
 													</object>
-													<object class="_NSCornerView" key="NSCornerView">
-														<nil key="NSNextResponder"/>
+													<object class="_NSCornerView" key="NSCornerView" id="213519129">
+														<reference key="NSNextResponder" ref="253599338"/>
 														<int key="NSvFlags">-2147483392</int>
 														<string key="NSFrame">{{-26, 0}, {16, 17}}</string>
+														<reference key="NSSuperview" ref="253599338"/>
 													</object>
 													<array class="NSMutableArray" key="NSTableColumns">
 														<object class="NSTableColumn" id="320265670">
@@ -228,7 +228,6 @@
 													<int key="NSDraggingSourceMaskForNonLocal">0</int>
 													<bool key="NSAllowsTypeSelect">YES</bool>
 													<int key="NSTableViewDraggingDestinationStyle">0</int>
-													<int key="NSTableViewGroupRowStyle">1</int>
 												</object>
 											</array>
 											<string key="NSFrame">{{1, 17}, {644, 346}}</string>
@@ -270,15 +269,17 @@
 											<reference key="NSBGColor" ref="863249347"/>
 											<int key="NScvFlags">4</int>
 										</object>
+										<reference ref="213519129"/>
 									</array>
 									<string key="NSFrameSize">{646, 364}</string>
 									<reference key="NSSuperview" ref="429496415"/>
 									<reference key="NSNextKeyView" ref="896648438"/>
-									<int key="NSsFlags">133682</int>
+									<int key="NSsFlags">562</int>
 									<reference key="NSVScroller" ref="576131518"/>
 									<reference key="NSHScroller" ref="1016628612"/>
 									<reference key="NSContentView" ref="896648438"/>
 									<reference key="NSHeaderClipView" ref="724556307"/>
+									<reference key="NSCornerView" ref="213519129"/>
 									<bytes key="NSScrollAmts">QSAAAEEgAABBgAAAQYAAAA</bytes>
 								</object>
 								<object class="NSScrollView" id="3462915">
@@ -292,7 +293,7 @@
 												<object class="NSTextView" id="893094298">
 													<reference key="NSNextResponder" ref="172937669"/>
 													<int key="NSvFlags">2322</int>
-													<string key="NSFrameSize">{644, 14}</string>
+													<string key="NSFrameSize">{629, 14}</string>
 													<reference key="NSSuperview" ref="172937669"/>
 													<object class="NSTextContainer" key="NSTextContainer" id="318673374">
 														<object class="NSLayoutManager" key="NSLayoutManager">
@@ -309,7 +310,7 @@
 															<nil key="NSDelegate"/>
 														</object>
 														<reference key="NSTextView" ref="893094298"/>
-														<double key="NSWidth">644</double>
+														<double key="NSWidth">629</double>
 														<int key="NSTCFlags">1</int>
 													</object>
 													<object class="NSTextViewSharedData" key="NSSharedData">
@@ -340,16 +341,14 @@
 															<integer value="1" key="NSUnderline"/>
 														</dictionary>
 														<nil key="NSDefaultParagraphStyle"/>
-														<nil key="NSTextFinder"/>
-														<int key="NSPreferredTextFinderStyle">1</int>
 													</object>
 													<int key="NSTVFlags">6</int>
-													<string key="NSMaxSize">{644, 10000000}</string>
+													<string key="NSMaxSize">{644, 1e+07}</string>
 													<string key="NSMinize">{114, 0}</string>
 													<nil key="NSDelegate"/>
 												</object>
 											</array>
-											<string key="NSFrame">{{1, 1}, {644, 190}}</string>
+											<string key="NSFrame">{{1, 1}, {629, 190}}</string>
 											<reference key="NSSuperview" ref="3462915"/>
 											<reference key="NSNextKeyView" ref="893094298"/>
 											<reference key="NSDocView" ref="893094298"/>
@@ -404,7 +403,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 									<string key="NSFrame">{{0, 373}, {646, 192}}</string>
 									<reference key="NSSuperview" ref="429496415"/>
 									<reference key="NSNextKeyView" ref="172937669"/>
-									<int key="NSsFlags">133138</int>
+									<int key="NSsFlags">18</int>
 									<reference key="NSVScroller" ref="511708574"/>
 									<reference key="NSHScroller" ref="183456695"/>
 									<reference key="NSContentView" ref="172937669"/>
@@ -417,11 +416,10 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 					<string key="NSFrameSize">{646, 563}</string>
 					<reference key="NSSuperview"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
-				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 				<string key="NSFrameAutosaveName">activityViewer</string>
-				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
