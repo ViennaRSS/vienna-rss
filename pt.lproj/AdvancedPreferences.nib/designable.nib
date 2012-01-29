@@ -43,7 +43,7 @@
 			<object class="NSWindowTemplate" id="266822096">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{119, 373}, {426, 127}}</string>
+				<string key="NSWindowRect">{{119, 373}, {452, 243}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Janela</string>
 				<object class="NSMutableString" key="NSWindowClass">
@@ -54,14 +54,15 @@
 				</object>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="400573569">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="1025251728">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, 74}, {392, 33}}</string>
+							<string key="NSFrame">{{17, 190}, {392, 33}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="296842424"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="715382766">
@@ -99,8 +100,9 @@ b3DDp8Ojby4KA</string>
 						<object class="NSButton" id="296842424">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">264</int>
-							<string key="NSFrame">{{18, 50}, {376, 18}}</string>
+							<string key="NSFrame">{{18, 166}, {376, 18}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="503230605"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="715935395">
@@ -131,8 +133,9 @@ b3DDp8Ojby4KA</string>
 						<object class="NSButton" id="814759250">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{385, 17}, {21, 23}}</string>
+							<string key="NSFrame">{{385, 133}, {21, 23}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="636929700">
 								<int key="NSCellFlags">67239424</int>
@@ -154,8 +157,9 @@ b3DDp8Ojby4KA</string>
 						<object class="NSTextField" id="1029275215">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, -55}, {392, 33}}</string>
+							<string key="NSFrame">{{17, 61}, {392, 33}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1049420423"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="670079742">
@@ -171,8 +175,9 @@ b3DDp8Ojby4KA</string>
 						<object class="NSTextField" id="1049420423">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, -96}, {392, 33}}</string>
+							<string key="NSFrame">{{17, 20}, {392, 33}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="814759250"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="761674489">
@@ -188,8 +193,9 @@ b3DDp8Ojby4KA</string>
 						<object class="NSTextField" id="503230605">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, -2}, {151, 17}}</string>
+							<string key="NSFrame">{{17, 114}, {151, 17}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="472436739"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="326988277">
@@ -205,8 +211,9 @@ b3DDp8Ojby4KA</string>
 						<object class="NSPopUpButton" id="472436739">
 							<reference key="NSNextResponder" ref="400573569"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{170, -8}, {62, 26}}</string>
+							<string key="NSFrame">{{170, 108}, {62, 26}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
+							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1029275215"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPopUpButtonCell" key="NSCell" id="290667957">
@@ -320,10 +327,12 @@ b3DDp8Ojby4KA</string>
 							</object>
 						</object>
 					</array>
-					<string key="NSFrame">{{1, 9}, {426, 127}}</string>
+					<string key="NSFrameSize">{452, 243}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="1025251728"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{1e+13, 1e+13}</string>
 			</object>
@@ -609,7 +618,72 @@ b3DDp8Ojby4KA</string>
 			<nil key="sourceID"/>
 			<int key="maxID">56</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AdvancedPreferences</string>
+					<string key="superclassName">NSWindowController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeConcurrentDownloads:">id</string>
+						<string key="changeUseJavaScript:">id</string>
+						<string key="showAdvancedHelp:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeConcurrentDownloads:">
+							<string key="name">changeConcurrentDownloads:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="changeUseJavaScript:">
+							<string key="name">changeUseJavaScript:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showAdvancedHelp:">
+							<string key="name">showAdvancedHelp:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="concurrentDownloads">NSPopUpButton</string>
+						<string key="useJavaScriptButton">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="concurrentDownloads">
+							<string key="name">concurrentDownloads</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="useJavaScriptButton">
+							<string key="name">useJavaScriptButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AdvancedPreferences.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="deleteFolder:">id</string>
+						<string key="deleteMessage:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="deleteFolder:">
+							<string key="name">deleteFolder:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="deleteMessage:">
+							<string key="name">deleteMessage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSObject.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
