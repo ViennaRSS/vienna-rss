@@ -3912,7 +3912,7 @@
 					"SQLITE_THREADSAFE=0",
 					"LOG_QUERY_TIMES=1",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
@@ -3935,7 +3935,7 @@
 					"HAVE_USLEEP=1",
 					"SQLITE_THREADSAFE=0",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
@@ -3993,7 +3993,6 @@
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				PRODUCT_NAME = ViennaBeta;
 				VIENNA_CHANGELOG_SUFFIX = _ansani;
 				WARNING_CFLAGS = ViennaBeta;
@@ -4003,7 +4002,6 @@
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				PRODUCT_NAME = ViennaBeta;
 				VIENNA_CHANGELOG_SUFFIX = _ansani;
 				WARNING_CFLAGS = ViennaBeta;
@@ -4013,7 +4011,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 3;
+				BUILD_NUMBER = 4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -4027,11 +4025,12 @@
 					"SQLITE_THREADSAFE=0",
 					"LOG_QUERY_TIMES=1",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "com.apple.compilers.llvm.clang.1_0";
 				INFOPLIST_FILE = "ViennaBeta-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				VIENNA_VERSION_NUMBER = 2800;
@@ -4042,7 +4041,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 3;
+				BUILD_NUMBER = 4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -4053,11 +4052,12 @@
 					"HAVE_USLEEP=1",
 					"SQLITE_THREADSAFE=0",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = "com.apple.compilers.llvm.clang.1_0";
 				INFOPLIST_FILE = "ViennaBeta-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
