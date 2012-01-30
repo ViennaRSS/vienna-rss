@@ -177,13 +177,16 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 -(void)awakeFromNib
 {
 
-#ifdef MAC_OS_X_VERSION_10_7
-	//Enable FullScreen Support if we are on Lion 10.7.x
-	NSWindowCollectionBehavior behavior = [mainWindow collectionBehavior];
-	behavior = behavior | NSWindowCollectionBehaviorFullScreenPrimary;
-	[mainWindow setCollectionBehavior:behavior];
+#if ( MAC_OS_X_VERSION_MAX_ALLOWED < 1070 && !defined(NSWindowCollectionBehaviorFullScreenPrimary) )
+    enum {
+        NSWindowCollectionBehaviorFullScreenPrimary = (1 << 7)
+    };
 #endif
 	
+    //Enable FullScreen Support if we are on Lion 10.7.x
+    [mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
+  	
+
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	[self installCustomEventHandler];
