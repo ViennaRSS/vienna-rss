@@ -888,6 +888,7 @@
 		info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
 		[style release];
 	}
+	
 	return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:info] autorelease];
 }
 
@@ -994,10 +995,10 @@
  * Begin in-place editing of the selected folder name.
  */
 -(void)renameFolder:(int)folderId
-{
+{	
 	TreeNode * node = [rootNode nodeFromID:folderId];
-	int rowIndex = [outlineView rowForItem:node];
-	
+	NSInteger rowIndex = [outlineView rowForItem:node];
+		
 	if (rowIndex != -1)
 	{
 		[outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger )rowIndex] byExtendingSelection:NO];
@@ -1059,6 +1060,12 @@
 	TreeNode * node = (TreeNode *)item;
 	NSString * newName = (NSString *)object;
 	Folder * folder = [node folder];
+	
+	// Remove the "[G] " character on Google Reader feeds
+	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"[G] "]) {
+		NSString *tmpName = [newName substringFromIndex:4];
+		newName = tmpName;
+	}
 	
 	if (![[folder name] isEqualToString:newName])
 	{
