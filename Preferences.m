@@ -178,10 +178,10 @@ static Preferences * _standardPreferences = nil;
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [[NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]] retain];
+		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
         
         // Google reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
-        googleUsername = [[self objectForKey:MAPref_GoogleUsername] retain];
 				
 		if (shouldSaveFeedSource)
 		{
@@ -223,7 +223,6 @@ static Preferences * _standardPreferences = nil;
 	[profilePath release];
 	[feedSourcesFolder release];
 	[searchMethod release];
-    [googleUsername release];
 	[super dealloc];
 }
 
@@ -250,12 +249,12 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewArticlesOnStartup];
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_CachedFolderID];
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_Check_Frequency] forKey:MAPref_CheckFrequency];
+	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_Check_Frequency] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
+	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_Manual] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
@@ -267,8 +266,8 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolNo forKey:MAPref_NewFolderUI];
 	[defaultValues setObject:boolNo forKey:MAPref_UseMinimumFontSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Filter_All] forKey:MAPref_FilterMode];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
+	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_MinimumFontSize] forKey:MAPref_MinimumFontSize];
+	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_AutoExpireDuration] forKey:MAPref_AutoExpireDuration];
 	[defaultValues setObject:MA_DefaultDownloadsFolder forKey:MAPref_DownloadsFolder];
 	[defaultValues setObject:defaultArticleSortDescriptors forKey:MAPref_ArticleSortDescriptors];
 	[defaultValues setObject:[NSDate distantPast] forKey:MAPref_LastRefreshDate];
@@ -280,10 +279,8 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShouldSaveFeedSource];
 	[defaultValues setObject:boolNo forKey:MAPref_ShouldSaveFeedSourceBackup];
 	[defaultValues setObject:[NSKeyedArchiver archivedDataWithRootObject:[SearchMethod searchAllArticlesMethod]] forKey:MAPref_SearchMethod];
-    
-    // Google Reader syncing
+    [defaultValues setObject:[NSNumber numberWithInteger:MA_Default_ConcurrentDownloads] forKey:MAPref_ConcurrentDownloads];
     [defaultValues setObject:boolNo forKey:MAPref_SyncGoogleReader];
-    [defaultValues setObject:@"" forKey:MAPref_GoogleUsername];
 	
 	return defaultValues;
 }
@@ -313,9 +310,9 @@ static Preferences * _standardPreferences = nil;
 /* setInteger
  * Sets the value of the specified default to the given integer value.
  */
--(void)setInteger:(int)value forKey:(NSString *)defaultName
+-(void)setInteger:(NSInteger)value forKey:(NSString *)defaultName
 {
-	[userPrefs setObject:[NSNumber numberWithInt:value] forKey:defaultName];
+	[userPrefs setObject:[NSNumber numberWithInteger:value] forKey:defaultName];
 }
 
 /* setString
@@ -353,9 +350,9 @@ static Preferences * _standardPreferences = nil;
 /* integerForKey
  * Returns the integer value of the given default object.
  */
--(int)integerForKey:(NSString *)defaultName
+-(NSInteger)integerForKey:(NSString *)defaultName
 {
-	return [[userPrefs valueForKey:defaultName] intValue];
+	return [[userPrefs valueForKey:defaultName] integerValue];
 }
 
 /* stringForKey
@@ -471,6 +468,21 @@ static Preferences * _standardPreferences = nil;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_UseJavaScriptChange" object:nil];
 	}
 }
+
+
+-(NSUInteger)concurrentDownloads {
+	return concurrentDownloads;
+}
+
+-(void)setConcurrentDownloads:(NSUInteger)downloads {
+	if (downloads != concurrentDownloads) {
+		concurrentDownloads = downloads;
+		[self setInteger:downloads forKey:MAPref_ConcurrentDownloads];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
+
+	}
+}
+
 
 /* minimumFontSize
  * Return the current minimum font size.
@@ -1078,23 +1090,6 @@ static Preferences * _standardPreferences = nil;
 		[self setBool:syncGoogleReader forKey:MAPref_SyncGoogleReader];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
-}
-
--(NSString *)googleUsername 
-{
-    return googleUsername;
-}
-
--(void)setGoogleUsername:(NSString *)username 
-{
-    if (![googleUsername isEqualToString:username]) 
-    {
-        [username retain];
-        [googleUsername release];
-        googleUsername = username;
-        [self setObject:googleUsername forKey:MAPref_GoogleUsername];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleUsernameChange" object:googleUsername];
-    }
 }
 
 @end

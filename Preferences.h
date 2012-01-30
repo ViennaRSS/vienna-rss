@@ -55,12 +55,12 @@
 	NSString * stylesFolder;
 	NSString * pluginsFolder;
 	NSString * feedSourcesFolder;
-    NSString * googleUsername;
 	NSFont * folderFont;
 	NSFont * articleFont;
 	NSArray * articleSortDescriptors;
 	SearchMethod * searchMethod;
     NSDate * lastGoogleSyncDate;
+	NSUInteger concurrentDownloads;
 }
 
 // Accessor functions
@@ -69,12 +69,12 @@
 
 // Accessor functions
 -(BOOL)boolForKey:(NSString *)defaultName;
--(int)integerForKey:(NSString *)defaultName;
+-(NSInteger)integerForKey:(NSString *)defaultName;
 -(NSString *)stringForKey:(NSString *)defaultName;
 -(NSArray *)arrayForKey:(NSString *)defaultName;
 -(id)objectForKey:(NSString *)defaulName;
 -(void)setBool:(BOOL)value forKey:(NSString *)defaultName;
--(void)setInteger:(int)value forKey:(NSString *)defaultName;
+-(void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
 -(void)setString:(NSString *)value forKey:(NSString *)defaultName;
 -(void)setArray:(NSArray *)value forKey:(NSString *)defaultName;
 -(void)setObject:(id)value forKey:(NSString *)defaultName;
@@ -205,13 +205,15 @@
 -(SearchMethod *)searchMethod;
 -(void)setSearchMethod:(SearchMethod *)newMethod;
 
+// Concurrent download settings
+-(NSUInteger)concurrentDownloads;
+-(void)setConcurrentDownloads:(NSUInteger)downloads;
+
 #pragma mark -
 #pragma mark Google reader syncing
 
 -(BOOL)syncGoogleReader;
 -(void)setSyncGoogleReader:(BOOL)flag;
 
--(NSString *)googleUsername;
--(void)setGoogleUsername:(NSString *)username;
 
 @end
