@@ -167,7 +167,6 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 		didCompleteInitialisation = NO;
 		emptyTrashWarning = nil;
 		searchString = nil;
-        operationQueue = [[NSOperationQueue alloc] init];
 	}
 	return self;
 }
@@ -177,9 +176,14 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
  */
 -(void)awakeFromNib
 {
+
+#ifdef MAC_OS_X_VERSION_10_7
 	//Enable FullScreen Support if we are on Lion 10.7.x
-	//[mainWindow setCollectionBehavior:NSWindowCollectionBehaviorFullScreenPrimary];
-		
+	NSWindowCollectionBehavior behavior = [mainWindow collectionBehavior];
+	behavior = behavior | NSWindowCollectionBehaviorFullScreenPrimary;
+	[mainWindow setCollectionBehavior:behavior];
+#endif
+	
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	[self installCustomEventHandler];
@@ -4761,7 +4765,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[searchField release];
 	[sourceWindows release];
 	[searchString release];
-    [operationQueue release];
 	[super dealloc];
 }
 @end
