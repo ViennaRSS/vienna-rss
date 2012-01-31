@@ -475,11 +475,14 @@
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
 		smartFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+        [db commitTransaction];
 		[controller selectFolder:smartFolderId];
 	}
 	else
+    {
 		[db updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
-	[db commitTransaction];
+        [db commitTransaction];
+    }
 
 	[criteriaTree release];
 	
