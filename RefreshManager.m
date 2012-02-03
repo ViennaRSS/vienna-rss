@@ -145,13 +145,14 @@ typedef enum {
 		countOfNewArticles = 0;
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		authQueue = [[NSMutableArray alloc] init];
-		hasStarted = NO;
+		//hasStarted = NO;
 		statusMessageDuringRefresh = nil;
 		networkQueue = [[ASINetworkQueue alloc] init];
 		[networkQueue setShouldCancelAllRequestsOnFailure:NO];
 		networkQueue.delegate = self;
 		[networkQueue setRequestDidFinishSelector:@selector(nqRequestFinished:)];
 		[networkQueue setRequestDidStartSelector:@selector(nqRequestStarted:)];
+		[networkQueue setQueueDidFinishSelector:@selector(nqQueueDidFinishSelector:)];
 		[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -163,14 +164,24 @@ typedef enum {
 	return self;
 }
 
+
+- (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
+	LLog(@"Queue empty!!!");
+}
+
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	LLog(@"Removed queue: %d", [networkQueue requestsCount]);
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	LLog(@"Added queue: %d", [networkQueue requestsCount]);
+
 }
 
 
@@ -244,17 +255,9 @@ typedef enum {
 		else if (IsGoogleReaderFolder(folder))
 		{
 			if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] && ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
-			{
-				RefreshItem * newItem = [[RefreshItem alloc] init];
-				[newItem setFolder:folder];
-				[newItem setType:MA_ForceRefresh_Google_Feed];
-				[refreshArray addObject:newItem];
-				[newItem release];
-			}
+				[self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
 		} 
 	}
-	[self beginRefreshTimer];
-
 }
 
 /* refreshSubscriptions
@@ -274,27 +277,11 @@ typedef enum {
 			{
 				if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] && ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed])
 				{
-					RefreshItem * newItem = [[RefreshItem alloc] init];
-					[newItem setFolder:folder];
-					if (IsRSSFolder(folder)) {
-						[newItem setType:MA_Refresh_Feed];
-					} else if (IsGoogleReaderFolder(folder)) {
-						[newItem setType:MA_Refresh_GoogleFeed];
-					} else {
-						NSAssert(false, @"Refreshed folder should be RSS or GoogleReader");
-					}
-					[refreshArray addObject:newItem];
-					[newItem release];
+					[self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
 				}
 			}
-		} /* else if(IsGoogleReaderFolder(folder)) {
-			NSLog(@"Refreshing a GOOGLE READER feed");
-			[self setFolderUpdatingFlag:folder flag:YES];
-			[[GoogleReader sharedManager] refreshFeed:folder];
-		} */
-		
+		}	
 	}
-	[self beginRefreshTimer];
 }
 
 -(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
@@ -338,11 +325,7 @@ typedef enum {
 {   
     syncType = MA_Sync_Refresh_All;
 	
-	if ([[Preferences standardPreferences] syncGoogleReader]) {
-		//TOFIX - Dovrebbe rimanere SOLO updateViennaSubscriptionsWithGoogleSubscriptions...
-		[[GoogleReader sharedManager] loadSubscriptions:nil];
-		[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:foldersArray];
-	}
+	if ([[Preferences standardPreferences] syncGoogleReader]) [[GoogleReader sharedManager] loadSubscriptions:nil];
 	
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
@@ -360,7 +343,7 @@ typedef enum {
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			[self refreshFavIcon:folder];
+			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
 		}
 	}
 }
@@ -370,8 +353,10 @@ typedef enum {
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
-	if (([folder flags] & MA_FFlag_CheckForImage))
-		[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+	if (([folder flags] & MA_FFlag_CheckForImage)) 
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+	});
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
@@ -379,14 +364,7 @@ typedef enum {
 		return;
 	
 	if (![self isRefreshingFolder:folder ofType:MA_Refresh_FavIcon])
-	{
-		RefreshItem * newItem = [[RefreshItem alloc] init];
-		[newItem setFolder:folder];
-		[newItem setType:MA_Refresh_FavIcon];
-		[refreshArray addObject:newItem];
-		[newItem release];
-		[self beginRefreshTimer];
-	}
+		[self pumpFolderIconRefresh:folder];
 }
 
 /* isRefreshingFolder
@@ -395,6 +373,7 @@ typedef enum {
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
 {
+	//FIX We need to handle check without refreshArray
 	for (RefreshItem * item in refreshArray)
 	{
 		if ([item folder] == folder && [item type] == type)
@@ -416,7 +395,7 @@ typedef enum {
  */
 -(void)cancelAll
 {
-	[refreshArray removeAllObjects];
+	//[refreshArray removeAllObjects];
 	
 	// We don't know whether to remove the connections from the array, because some might already be complete.
 	// Let the cancel method take care of that.
@@ -524,61 +503,6 @@ typedef enum {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
-/* beginRefreshTimer
- * Start the connection refresh timer running.
- */
--(void)beginRefreshTimer
-{
-	if (pumpTimer == nil)
-		pumpTimer = [[NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(refreshPumper:) userInfo:nil repeats:YES] retain];
-	[self refreshPumper:pumpTimer];
-}
-
-/* refreshPumper
- * This is the heart of the refresh code. We manage the refreshArray by creating a
- * connection for each item in the array up to a maximum number of simultaneous
- * connections as defined in the maximumConnections variable.
- */
--(void)refreshPumper:(NSTimer *)aTimer
-{
-	//	while (([connectionsArray count] < maximumConnections) && ([refreshArray count] > 0))
-	while ([refreshArray count] > 0)	
-	{
-		RefreshItem * item = [refreshArray objectAtIndex:0];
-		switch ([item type])
-		{
-            case MA_Refresh_NilType:
-                NSAssert(false, @"Uninitialised RefreshItem in refreshArray");
-                break;
-                
-            case MA_Refresh_Feed:
-			case MA_Refresh_GoogleFeed:
-                [self pumpSubscriptionRefresh:[item folder] shouldForceRefresh:NO];
-                break;
-				
-			case MA_ForceRefresh_Google_Feed:
-				[self pumpSubscriptionRefresh:[item folder] shouldForceRefresh:YES];
-                break;
-				
-            case MA_Refresh_FavIcon:
-                [self pumpFolderIconRefresh:[item folder]];
-                break;
-		}
-		[refreshArray removeObjectAtIndex:0];
-	}
-	
-	//	if ([connectionsArray count] == 0 && [refreshArray count] == 0 && hasStarted)
-	if ([networkQueue requestsCount] == 0 && hasStarted)
-	{
-		[pumpTimer invalidate];
-		[pumpTimer release];
-		pumpTimer = nil;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-		
-		hasStarted = NO;
-	}
-}
-
 /* pumpSubscriptionRefresh
  * Pick the folder at the head of the refresh array and spawn a connection to
  * refresh that folder.
@@ -638,10 +562,10 @@ typedef enum {
  */
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force
 {	
-	ASIHTTPRequest *myRequest;
+	__block ASIHTTPRequest *myRequest;
 	
 	if (IsRSSFolder(folder)) {
-		myRequest = [[ASIHTTPRequest alloc] initWithURL:url];
+		myRequest = [ASIHTTPRequest requestWithURL:url];
 		[myRequest addRequestHeader:@"If-Modified-Since" value:[folder lastUpdateString]];
 		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
 		[myRequest setDelegate:self];
@@ -651,10 +575,11 @@ typedef enum {
 			Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];
 			[self setFolderErrorFlag:folder flag:YES];
 			[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[myRequest error] localizedDescription ]]];
+			[aItem setStatus:NSLocalizedString(@"Error",nil)];
 			[self syncFinishedForFolder:folder];
 		}];
 	} else if (IsGoogleReaderFolder(folder)) {
-		myRequest = [[GoogleReader sharedManager] refreshFeed:folder shouldIgnoreArticleLimit:force];
+		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
 	[self addConnection:myRequest];
 }
@@ -676,38 +601,49 @@ typedef enum {
 	} else if (IsGoogleReaderFolder(folder)) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Google Reader Feed", nil)];
 		favIconPath = [NSString stringWithFormat:@"http://s2.googleusercontent.com/s2/favicons?domain=%@&alt=feed", [[[folder feedURL] trim] baseURL]];		
-	} else {
-		NSAssert(false,@"Retrieving Favicon is only supported on RSS or GR feeds!");
-	}
+	} 
 
-	ASIHTTPRequest *myRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:favIconPath]];
+	__block ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
 	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
-	[myRequest setDelegate:self];
-	[myRequest setDidFinishSelector:@selector(folderIconRefreshCompleted:)];
+	[myRequest setCompletionBlock:^{
+		Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];	
+		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
+		[self setFolderUpdatingFlag:folder flag:NO];
+		if ([myRequest responseStatusCode] == 404) {
+			[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+		} else if ([myRequest responseStatusCode] == 200) {
+			
+			NSImage * iconImage = [[NSImage alloc] initWithData:[myRequest responseData]];
+			if (iconImage != nil && [iconImage isValid])
+			{
+				[iconImage setScalesWhenResized:YES];
+				[iconImage setSize:NSMakeSize(16, 16)];
+				[folder setImage:iconImage];
+				
+				// Broadcast a notification since the folder image has now changed
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+				
+				// Log additional details about this.
+				[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [myRequest url]]];
+				[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[myRequest responseData] length]]];
+
+			} else {
+				NSString *tmp = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
+				LOG_EXPR(tmp);
+				ALog(@"Image Error!");
+			}
+			[iconImage release];
+		} else {
+			ALog(@"Unhandled error code: %d",[myRequest responseStatusCode]);
+		}
+	}];
+	[myRequest setFailedBlock:^{
+		Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];
+		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),[[myRequest error] localizedDescription ]]];
+	}];
 	[self addConnection:myRequest];
 
-	/*
-	AsyncConnection * conn = [[AsyncConnection alloc] init];
-    
-	@try
-	{
-		NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
-		
-		[self setFolderUpdatingFlag:folder flag:YES];
-		if ([conn beginLoadDataFromURL:[NSURL URLWithString:favIconPath]
-							  username:nil
-							  password:nil
-							  delegate:self
-						   contextData:folder
-								   log:aItem
-						didEndSelector:@selector(folderIconRefreshCompleted:)])
-			[self addConnection:conn];
-	}
-	@finally
-	{
-		[conn release];
-	}
-	 */
 }
 
 - (void)syncFinishedForFolder:(Folder *)folder 
@@ -728,12 +664,79 @@ typedef enum {
  */
 -(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
 {
+		
 	Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
+	ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
+	int responseStatusCode = [connector responseStatusCode];
+	NSURL *url = [connector url];
+	BOOL isCancelled = [connector isCancelled];
+	NSInteger folderId = [folder itemId];
+	Database * db = [Database sharedDatabase];	
+	
+    [self syncFinishedForFolder:folder];
+	
+	if (responseStatusCode == 301)
+	{
+		//FIX Controllare se funziona
+		// We got a permanent redirect from the feed so change the feed URL to the new location.
+		[db setFolderFeedURL:folderId newFeedURL:[url absoluteString]];
+		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [url absoluteString]]];
+		return;
+	}
+	else if (responseStatusCode == 304)
+	{		
+		// No modification from last check
+		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		[self setFolderErrorFlag:folder flag:NO];
+		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
+		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+		return;
+	}
+	else if (isCancelled) 
+	{
+		// Stopping the connection isn't an error, so clear any existing error flag.
+		[self setFolderErrorFlag:folder flag:NO];
+		
+		// FIX: if we don't check this folder we shouldn't update the lastupdate field
+		// Set the last update date for this folder.
+		// [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		
+		// If this folder also requires an image refresh, add that
+		if ([folder flags] & MA_FFlag_CheckForImage) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+	}
+	else if (responseStatusCode == 410)
+	{
+		// We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
+		[db setFolderFlag:folderId flagToSet:MA_FFlag_Unsubscribed];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	}
+	else if (responseStatusCode == 200)
+	{
+				
+		NSData * receivedData = [connector responseData];
+		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
+				
+		[self performSelectorInBackground:@selector(finalizeFolderRefresh:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+																					folder, @"folder", 
+																					connectorItem, @"log", 
+																					url, @"url",
+																					receivedData, @"data",
+																					lastModifiedString, @"lastModifiedString",
+																					nil]];
+	}
+};
+
+-(void)finalizeFolderRefresh:(NSDictionary*)parameters;
+{	
+	
+	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
-	ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
-    
-    [self syncFinishedForFolder:folder];
+	ActivityItem *connectorItem = [parameters objectForKey:@"log"];
+	NSURL *url = [parameters objectForKey:@"url"];
+	NSData * receivedData = [parameters objectForKey:@"data"];
+	NSString * lastModifiedString = [parameters objectForKey:@"lastModifiedString"];
+
     
 	//[self setFolderUpdatingFlag:folder flag:NO];
 	// I Think this should be handled directly!
@@ -746,45 +749,7 @@ typedef enum {
 	}
 	*/
 	// MA_Connect_PermanentRedirect)
-	if ([connector responseStatusCode] == 301)
-	{
-		// We got a permanent redirect from the feed so change the feed URL
-		// to the new location.
-		[db setFolderFeedURL:folderId newFeedURL:[[connector url] absoluteString]];
-		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [[connector url] absoluteString]]];
-		return;
-	}
-	// No modification from latest check
-	else if ([connector responseStatusCode] == 304)
-	{	
-		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-		[self setFolderErrorFlag:folder flag:NO];
-		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
-		[connectorItem setStatus:NSLocalizedString(@"No modification from last check", nil)];
-		return;
-	}
-	//else if ([connector status] == MA_Connect_Stopped)
-	else if ([connector isCancelled]) 
-	{
-		// Stopping the connection isn't an error, so clear any
-		// existing error flag.
-		[self setFolderErrorFlag:folder flag:NO];
-		
-		// Set the last update date for this folder.
-		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-		
-		// If this folder also requires an image refresh, add that
-		if ([folder flags] & MA_FFlag_CheckForImage)
-			[self refreshFavIcon:folder];
-	}
-	//else if ([connector status] == MA_Connect_URLIsGone)
-	else if ([connector responseStatusCode] == 410)
-	{
-		// We got HTTP 410 which means the feed has been intentionally
-		// removed so unsubscribe the feed.
-		[db setFolderFlag:folderId flagToSet:MA_FFlag_Unsubscribed];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-	}
+	
 	/*
 	else if ([connector status] == MA_Connect_Failed)
 	{
@@ -793,36 +758,33 @@ typedef enum {
 	}
 	 */
 	//else if ([connector status] == MA_Connect_Succeeded)
-	else if ([connector responseStatusCode] == 200)
-	{
-		NSData * receivedData = [connector responseData];
         
 		// Check whether this is an HTML redirect. If so, create a new connection using
 		// the redirect.
-		NSString * redirectURL = [self getRedirectURL:receivedData];
+	
+	NSString * redirectURL = [self getRedirectURL:receivedData];
+	
+
 		if (redirectURL != nil)
 		{
-			if ([redirectURL isEqualToString:[[connector url] absoluteString]])
+			if ([redirectURL isEqualToString:[url absoluteString]])
 			{
 				// To prevent an infinite loop, don't redirect to the same URL.
 				//[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [connector URLString]]];
-				[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [[connector url] absoluteString]]];
+				[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [url absoluteString]]];
 			}
 			else
 			{
 				[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
-				[self removeConnection:connector];
+				//FIX WE Really Need this ????
+				//[self removeConnection:connector];
 				return;
 			}
 		}
         
-		// Remember the last modified date
-		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
-		if (lastModifiedString != nil)
-			[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
-        
+		        
 		// Empty data feed is OK if we got HTTP 200
-		NSUInteger newArticlesFromFeed = 0;	
+		__block NSUInteger newArticlesFromFeed = 0;	
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if ([receivedData length] > 0)
 		{
@@ -856,7 +818,8 @@ typedef enum {
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
 				[newFeed release];
-				[self removeConnection:connector];
+				//FIX WE Really Need this ????
+				//[self removeConnection:connector];
 				return;
 			}
             
@@ -864,7 +827,7 @@ typedef enum {
 			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 			
 			// Extract the latest title and description
-			NSString * feedTitle = [newFeed title];
+			__block NSString * feedTitle = [newFeed title];
 			NSString * feedDescription = [newFeed description];
 			NSString * feedLink = [newFeed link];
 			
@@ -932,7 +895,14 @@ typedef enum {
 				[articleArray addObject:article];
 				[article release];
 			}
-            
+			
+			dispatch_sync(dispatch_get_main_queue(), ^{
+				// Remember the last modified date
+				if (lastModifiedString != nil)
+					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
+		
+		
+			
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0u)
 			{
@@ -972,6 +942,9 @@ typedef enum {
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 			
 			[db commitTransaction];
+				
+			});
+
 			
 			// Let interested callers know that the folder has changed.
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
@@ -979,10 +952,13 @@ typedef enum {
         
 		// Mark the feed as succeeded
 		[self setFolderErrorFlag:folder flag:NO];
-		
+	
+	dispatch_sync(dispatch_get_main_queue(), ^{
+
 		// Set the last update date for this folder.
 		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-		
+	});
+				  
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
 			[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
@@ -997,11 +973,11 @@ typedef enum {
         
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
-			[self refreshFavIcon:folder];
-        
+			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
-	}
+	
 	//[self removeConnection:connector];
 }
 
@@ -1092,73 +1068,26 @@ typedef enum {
 	return nil;
 }
 
-/* folderIconRefreshCompleted
- * Called when a folder icon refresh completed.
- */
--(void)folderIconRefreshCompleted:(ASIHTTPRequest *)connector
-{
-	//	Folder * folder = [connector contextData];
-	Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
-
-	[self setFolderUpdatingFlag:folder flag:NO];
-	//if ([connector status] == MA_Connect_Succeeded)
-	if ([connector responseStatusCode] == 200)
-	{
-		//NSImage * iconImage = [[NSImage alloc] initWithData:[connector receivedData]];
-		NSImage * iconImage = [[NSImage alloc] initWithData:[connector responseData]];
-		if (iconImage != nil && [iconImage isValid])
-		{
-			[iconImage setScalesWhenResized:YES];
-			[iconImage setSize:NSMakeSize(16, 16)];
-			[folder setImage:iconImage];
-            
-			// Broadcast a notification since the folder image has now changed
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
-            
-			// Log additional details about this.
-			ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
-			NSString * favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[folder homePage] baseURL]];
-			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), favIconPath];
-			[aItem appendDetail:logText];
-		}
-		[iconImage release];
-	}
-	[self removeConnection:connector];
-}
-
 /* addConnection
- * Add the specified connection to the array of connections
+ * Add the specified connection to the connections queue
  * that we manage.
  */
 -(void)addConnection:(ASIHTTPRequest *)conn
 {
 	if (![[networkQueue operations] containsObject:conn]) {
 		[networkQueue addOperation:conn];
-		if (!hasStarted)
+		if ([networkQueue requestsCount] == 1) // networkQueue is NOT YET started
 		{
 			countOfNewArticles = 0;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-			hasStarted = YES;
+			//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+			//hasStarted = YES;
 			[networkQueue go];
 		}
-
 	}
-/*
-	if (![connectionsArray containsObject:conn])
-	{
-		[connectionsArray addObject:conn];
-		if (!hasStarted)
-		{
-			countOfNewArticles = 0;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-			hasStarted = YES;
-		}
-	}
-  */  
 }
 
 /* removeConnection
- * Removes the specified connection from the array of connections
+ * Removes the specified connection from the connections queue
  * that we manage.
  */
 -(void)removeConnection:(ASIHTTPRequest *)conn
@@ -1183,6 +1112,8 @@ typedef enum {
 
 -(BOOL)isConnecting
 {
+	BOOL connessione = [networkQueue requestsCount] > 0;
+	LOG_EXPR(connessione);
 	return [networkQueue requestsCount] > 0;
 }
 

@@ -298,10 +298,7 @@ const char *kKeychainAccountName = "OAuth";
          didEndSelector:@selector(sheetDidEnd:returnCode:contextInfo:)
             contextInfo:nil];
     } else {
-      // modeless
-		NSLog(@"NibName: %@",[self windowNibName]);
-		NSLog(@"NibPath: %@",[self windowNibPath]);
-		
+      // modeless		
       [self showWindow:self];
     }
     isWindowShown_ = YES;
