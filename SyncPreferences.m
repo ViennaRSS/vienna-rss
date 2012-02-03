@@ -47,7 +47,6 @@
 	[[Preferences standardPreferences] setSyncGoogleReader:sync];
 	if (sync) {
 		[[GoogleReader sharedManager] loadSubscriptions:nil];
-		[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:nil];
 	}
 }
 

@@ -19,6 +19,7 @@
 
 #import "XMLParser.h"
 #import "StringExtensions.h"
+#import "Debug.h"
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -119,6 +120,7 @@
 /* init
  * Designated initialiser.
  */
+
 -(id)init
 {
 	if ((self = [super init]) != nil)
@@ -432,60 +434,13 @@
 	return newString;
 }
 
-+(NSCalendarDate *)getDateFromString:(NSString *)dateString
+
++(NSDate *)getDateFromString:(NSString *)dateString
 {
-	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-	NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-	[dateFormat setLocale:enUS];
-	[enUS release];
-	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
-	NSCalendarDate *date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	//Support for this kind of date: 2011-12-06T07:00:00Z
-	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	//Support for this kind of date: 2011-12-06T07:00:00+03:00
-	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss+HH:mm"];
-	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	//Support for this kind of date: 2011-12-06T07:00:00.741+03:00
-	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm"];
-	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	//Support for this kind of date: 2011-12-06T07:00:00.000Z
-	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
-	date  = (NSCalendarDate*)[dateFormat dateFromString:dateString]; 
-	if (date != nil) {
-		[dateFormat release];
-		return date;
-	}
-	NSLog(@"Conversion error: %@",dateString);
-    [dateFormat release];
+	NSDate *date = [NSDate dateWithNaturalLanguageString:dateString locale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+	if (date != nil) return date;
+	
+	ALog(@"Conversion error: %@",dateString);
 	return date;
 }
 
@@ -501,7 +456,7 @@
  *
  * These are the formats that I've discovered so far.
  */
-+(NSCalendarDate *)parseXMLDate:(NSString *)dateString
++(NSDate *)parseXMLDate:(NSString *)dateString
 {	
 	int yearValue = 0;
 	int monthValue = 1;
@@ -510,29 +465,17 @@
 	int minuteValue = 0;
 	int secondValue = 0;
 	int tzOffset = 0;
-
-	// Historic : add a hack to substitute UT with GMT as CURL doesn't
-	// seem to be able to parse the former.
-	dateString = [dateString trim];
-	NSUInteger dateLength = [dateString length];
-	if ([dateString hasSuffix:@" UT"])
-		dateString = [[dateString substringToIndex:dateLength - 3] stringByAppendingString:@" GMT"];
-	// Historic : CURL seems to require seconds in the time, so add seconds if necessary.
-	NSScanner * scanner = [NSScanner scannerWithString:dateString];
-	if ([scanner scanUpToString:@":" intoString:NULL])
-	{
-		NSUInteger location = [scanner scanLocation] + 3;
-		if ((location < dateLength) && [dateString characterAtIndex:location] != ':')
-		{
-			dateString = [NSString stringWithFormat:@"%@:00%@", [dateString substringToIndex:location], [dateString substringFromIndex:location]];
-			scanner = [NSScanner scannerWithString:dateString];
-		}
-	}
-
-	NSCalendarDate * curlDate = [self getDateFromString:dateString];
+	
+	//We handle garbage there! (At least 1/1/00, so four digit)
+	if ([[dateString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] < 4) return nil;
+	
+	NSDate *curlDate = [self getDateFromString:dateString];
+	
 	if (curlDate != nil)
 		return curlDate;
 
+	NSScanner * scanner = [NSScanner scannerWithString:dateString];
+	
 	// Otherwise do it ourselves.
 	[scanner setScanLocation:0u];
 	if (![scanner scanInt:&yearValue])

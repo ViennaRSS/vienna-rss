@@ -451,14 +451,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
 	//Google Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
-	
-	
-	if ([prefs syncGoogleReader]) {
-		NSLog(@"Let us authenticate with Google Reader");
-		[[GoogleReader sharedManager] authenticate];
-	}
-
-	
+		
 	// Init the progress counter and status bar.
 	[self setStatusMessage:nil persist:NO];
 	
@@ -3768,9 +3761,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-	
 	//TOFIX: we should start local refresh feed, then sync refresh feed
-	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isAuthenticated]) {
+	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isReady]) {
 		NSLog(@"Waiting until Google Auth is done...");
 		if (![sender isKindOfClass:[NSTimer class]]) {
 			NSLog(@"Create a timer...");
@@ -3779,7 +3771,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		return;
 	} else {
-		NSLog(@"Token available... let's go!");
 		[self setStatusMessage:nil persist:NO];
 		if ([sender isKindOfClass:[NSTimer class]]) {
 			[(NSTimer*)sender invalidate];
@@ -3803,8 +3794,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 -(IBAction)updateRemoteSubscriptions:(id)sender {
 	[[GoogleReader sharedManager] loadSubscriptions:nil];
-	[[GoogleReader sharedManager] updateViennaSubscriptionsWithGoogleSubscriptions:[foldersTree folders:0]];
-
 }
 
 
@@ -4392,7 +4381,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(markAllRead:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && !IsTrashFolder(folder) && ![db readOnly] && isArticleView && isMainWindowVisible && [db countOfUnread] > 0;
+		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(markAllSubscriptionsRead:))
 	{
