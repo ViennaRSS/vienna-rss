@@ -4381,7 +4381,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(markAllRead:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return folder && !IsTrashFolder(folder) && ![db readOnly] && isArticleView && isMainWindowVisible && [db countOfUnread] > 0;
+		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible && [db countOfUnread] > 0;
 	}
 	else if (theAction == @selector(markAllSubscriptionsRead:))
 	{
