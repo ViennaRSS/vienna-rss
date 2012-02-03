@@ -11,32 +11,38 @@
 #import "GTMOAuth2WindowController.h"
 #import "Folder.h"
 #import "ASINetworkQueue.h"
+#import "ActivityLog.h"
+#import "Debug.h"
 
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
     NSString * token;
+	NSString * actionToken;
 	GTMOAuth2Authentication *oAuthObject;
-    NSDictionary * subscriptions;
     NSArray * readingList;
 	NSMutableArray *localFeeds;
 	BOOL isAuthenticated;
 	NSString * readerUser;
+	NSTimer * tokenTimer;
+	NSTimer * actionTokenTimer;
 }
 
-@property (nonatomic, copy) NSDictionary * subscriptions;
 @property (nonatomic, copy) NSArray * readingList;
 @property (nonatomic, copy) NSMutableArray * localFeeds;
 @property (nonatomic, retain) NSString *token;
+@property (nonatomic, retain) NSString *actionToken;
 @property (nonatomic, retain) NSString *readerUser;
+@property (nonatomic, retain) NSTimer * tokenTimer;
+@property (nonatomic, retain) NSTimer * actionTokenTimer;
 
 
 +(GoogleReader *)sharedManager;
 
--(BOOL)isAuthenticated;
+// Check if an accessToken is available
+-(BOOL)isReady;
 
 -(void)loadSubscriptions:(NSNotification*)nc;
 -(void)loadReadingList;
 -(void)authenticate;
--(void)updateViennaSubscriptionsWithGoogleSubscriptions:(NSArray*)folderList;
 
 -(BOOL)subscribingTo:(NSString *)feedURL;
 -(void)subscribeToFeed:(NSString *)feedURL;
@@ -47,6 +53,8 @@
 -(void)disableTag:(NSString *)tagName;
 -(void)renameTagFrom:(NSString *)oldName to:(NSString *)newName;
 -(void)renameFeed:(NSString *)feedURL to:(NSString *)newName;
--(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
+-(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
+-(NSString *)getGoogleOAuthToken;
+-(NSString *)getGoogleActionToken;
 
 @end

@@ -73,7 +73,6 @@
 	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
-	[articleController markAllReadByArray:[NSArray arrayWithObject:folder] withUndo:YES withRefresh:NO];
 	[articleController addBacktrack:nil];
 	[self refreshArticlePane];
 }
