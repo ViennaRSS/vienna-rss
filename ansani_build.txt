@@ -1,8 +1,11 @@
 New on this build
 ------------------------
 
-* Fixed GitHub issue #3 (Support for XHTML titles on Atom Feeds)
-* Added native support (Cocoa) for Zulu dates
+* Complete rewrite of GoogleReader Sync Engine (now support the infamous P3P cookie)
+* General App Speedup
+* Lot of changes on Refresh Timers
+* Lot, really lot, of changes on queue management (now more tasks are executed in background)
+* Lot of BugFixes
 
 Tnx for your time!
 Salvatore Ansani <salvatore@ansani.it>

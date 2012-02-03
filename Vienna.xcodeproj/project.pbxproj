@@ -297,6 +297,8 @@
 		EA4BF68B14B3161D008FCBE5 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67E14B3161D008FCBE5 /* ASIHTTPRequest.m */; };
 		EA4BF68C14B3161D008FCBE5 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68214B3161D008FCBE5 /* ASIInputStream.m */; };
 		EA4BF68D14B3161D008FCBE5 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
+		EA6D3E5E14D82E71004DCB80 /* Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D3E5D14D82E71004DCB80 /* Debug.m */; };
+		EA6D3E5F14D82E71004DCB80 /* Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D3E5D14D82E71004DCB80 /* Debug.m */; };
 		EA783A3E14C62BB1008E7A87 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = EA783A2614C62BB1008E7A87 /* NSObject+SBJson.m */; };
 		EA783A3F14C62BB1008E7A87 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = EA783A2614C62BB1008E7A87 /* NSObject+SBJson.m */; };
 		EA783A4014C62BB1008E7A87 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EA783A2914C62BB1008E7A87 /* SBJsonParser.m */; };
@@ -1311,6 +1313,8 @@
 		EA4BF68314B3161D008FCBE5 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
 		EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
+		EA6D3E5D14D82E71004DCB80 /* Debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Debug.m; sourceTree = "<group>"; };
 		EA783A2414C62BB1008E7A87 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		EA783A2514C62BB1008E7A87 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		EA783A2614C62BB1008E7A87 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
@@ -1981,6 +1985,8 @@
 			children = (
 				EA43C70714A370DB00F2D843 /* VTPG_Common.h */,
 				EA43C70814A370DB00F2D843 /* VTPG_Common.m */,
+				EA6D3E5914D8048C004DCB80 /* Debug.h */,
+				EA6D3E5D14D82E71004DCB80 /* Debug.m */,
 			);
 			name = DebugHelper;
 			sourceTree = "<group>";
@@ -3373,6 +3379,7 @@
 				EA783A5214C62BB1008E7A87 /* SBJsonUTF8Stream.m in Sources */,
 				EA783A5414C62BB1008E7A87 /* SBJsonWriter.m in Sources */,
 				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
+				EA6D3E5E14D82E71004DCB80 /* Debug.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3494,6 +3501,7 @@
 				EA783A5314C62BB1008E7A87 /* SBJsonUTF8Stream.m in Sources */,
 				EA783A5514C62BB1008E7A87 /* SBJsonWriter.m in Sources */,
 				B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */,
+				EA6D3E5F14D82E71004DCB80 /* Debug.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4011,7 +4019,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 4;
+				BUILD_NUMBER = 5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -4025,7 +4033,7 @@
 					"SQLITE_THREADSAFE=0",
 					"LOG_QUERY_TIMES=1",
 				);
-				GCC_VERSION = "com.apple.compilers.llvm.clang.1_0";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ViennaBeta-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
@@ -4041,7 +4049,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 4;
+				BUILD_NUMBER = 5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -4052,7 +4060,7 @@
 					"HAVE_USLEEP=1",
 					"SQLITE_THREADSAFE=0",
 				);
-				GCC_VERSION = "com.apple.compilers.llvm.clang.1_0";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ViennaBeta-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
