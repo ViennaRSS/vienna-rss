@@ -729,6 +729,7 @@ typedef enum {
 -(void)finalizeFolderRefresh:(NSDictionary*)parameters;
 {	
 	
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
@@ -979,6 +980,7 @@ typedef enum {
 		countOfNewArticles += newArticlesFromFeed;
 	
 	//[self removeConnection:connector];
+	[pool drain];
 }
 
 /* getRedirectURL
