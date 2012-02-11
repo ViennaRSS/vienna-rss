@@ -491,7 +491,7 @@ enum GoogleReaderStatus {
 		{
 			LOG_EXPR(feed);
 			NSString * feedID = [feed objectForKey:@"id"];
-			NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:NULL range:NSMakeRange(0, 5)];
+			NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
 			
 			NSString * folderName = nil;
 			
