@@ -157,13 +157,18 @@ enum GoogleReaderStatus {
 				}
 			
 				[article setDate:articleDate];
-				[article setEnclosure:@""];
-				/*	
+
+				if ([newsItem objectForKey:@"enclosure"] != nil) {
+					[article setEnclosure:[[[newsItem objectForKey:@"enclosure"] objectAtIndex:0] objectForKey:@"href"]];
+				} else {
+					[article setEnclosure:@""];
+				}
+			
 				if ([[article enclosure] isNotEqualTo:@""])
 					{
 						[article setHasEnclosure:YES];
 					}
-				 */
+
 				[articleArray addObject:article];
 				[article release];
 			}
