@@ -978,6 +978,9 @@ typedef enum {
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 	
+    	// Unread count may have changed
+    	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+
 	//[self removeConnection:connector];
 	[pool drain];
 }
