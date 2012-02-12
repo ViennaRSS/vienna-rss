@@ -157,13 +157,18 @@ enum GoogleReaderStatus {
 				}
 			
 				[article setDate:articleDate];
-				[article setEnclosure:@""];
-				/*	
+
+				if ([newsItem objectForKey:@"enclosure"] != nil) {
+					[article setEnclosure:[[[newsItem objectForKey:@"enclosure"] objectAtIndex:0] objectForKey:@"href"]];
+				} else {
+					[article setEnclosure:@""];
+				}
+			
 				if ([[article enclosure] isNotEqualTo:@""])
 					{
 						[article setHasEnclosure:YES];
 					}
-				 */
+
 				[articleArray addObject:article];
 				[article release];
 			}
@@ -293,6 +298,7 @@ enum GoogleReaderStatus {
 			LLog(@"Error getting the action token");
 			LOG_EXPR([tokenRequest error]);
 			LOG_EXPR([tokenRequest responseHeaders]);
+			googleReaderStatus = isAuthenticated;
 			return nil;
 		} else {
 			LLog(@"Action Token Acquired");
@@ -486,7 +492,7 @@ enum GoogleReaderStatus {
 		{
 			LOG_EXPR(feed);
 			NSString * feedID = [feed objectForKey:@"id"];
-			NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:NULL range:NSMakeRange(0, 5)];
+			NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
 			
 			NSString * folderName = nil;
 			
