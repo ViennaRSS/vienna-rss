@@ -166,7 +166,6 @@ typedef enum {
 
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
 	LLog(@"Queue empty!!!");
 }
@@ -979,6 +978,9 @@ typedef enum {
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 	
+    	// Unread count may have changed
+    	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+
 	//[self removeConnection:connector];
 	[pool drain];
 }
