@@ -298,7 +298,7 @@ enum GoogleReaderStatus {
 			LLog(@"Error getting the action token");
 			LOG_EXPR([tokenRequest error]);
 			LOG_EXPR([tokenRequest responseHeaders]);
-			googleReaderStatus = isTokenAcquired;
+			googleReaderStatus = isAuthenticated;
 			return nil;
 		} else {
 			LLog(@"Action Token Acquired");
