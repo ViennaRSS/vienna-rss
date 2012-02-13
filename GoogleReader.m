@@ -366,7 +366,7 @@ enum GoogleReaderStatus {
 			token = [[dict objectForKey:@"access_token"] retain];
 			//LOG_EXPR(token);
 
-			tokenTimer = [NSTimer scheduledTimerWithTimeInterval:(NSInteger)[dict objectForKey:@"expires_in"] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
+			tokenTimer = [NSTimer scheduledTimerWithTimeInterval:[[dict objectForKey:@"expires_in"] intValue] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
 			//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
 			
 			return token;
