@@ -278,14 +278,14 @@ enum GoogleReaderStatus {
 -(NSString *)getGoogleActionToken
 {
 		
+	// If we have a not expired access token, simply return it :)
+	
 	if (actionTokenTimer != nil && googleReaderStatus == isActionTokenAcquired) {
 		LLog(@"An action token is available: %@",actionToken);
 		return actionToken;
 	}
 	
 	if (googleReaderStatus == isTokenAcquired) {
-		
-		// If we have a not expired access token, simply return it :)
 		
 		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=scroll&access_token=%@",token]];
 		ASIHTTPRequest * tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
@@ -325,14 +325,14 @@ enum GoogleReaderStatus {
 	
 	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
 	
+	// If we have a not expired access token, simply return it :)
+	
 	if (token != nil && googleReaderStatus == isTokenAcquired) {
 		LLog(@"A token is available: %@",token);
 		return token;
 	}
 	
 	if (googleReaderStatus == isAuthenticated) {
-		
-		// If we have a not expired access token, simply return it :)
 		
 		NSURL *tokenURL = [NSURL URLWithString:@"https://accounts.google.com/o/oauth2/token"];
 		ASIFormDataRequest * tokenRequest = [ASIFormDataRequest requestWithURL:tokenURL];
