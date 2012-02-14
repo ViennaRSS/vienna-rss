@@ -478,6 +478,7 @@ enum GoogleReaderStatus {
 		
 	[subscriptionRequest setCompletionBlock:^{
 		LLog(@"Finish subscriptionRequest");
+		self.readerUser = [[subscriptionRequest responseHeaders] objectForKey:@"X-Reader-User"];
 
 		
 		JSONDecoder * jsonDecoder = [JSONDecoder decoder];
@@ -625,9 +626,6 @@ enum GoogleReaderStatus {
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
-	//TOFIX
-	readerUser = @"-";
-	//readerUser = [[tokenRequest responseHeaders] objectForKey:@"X-Reader-User"];
 	LLog(token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
@@ -694,8 +692,6 @@ enum GoogleReaderStatus {
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
-  	//TOFIX
-	readerUser = @"-";
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	[myRequest setFailedBlock:^{
