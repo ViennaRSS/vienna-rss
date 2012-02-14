@@ -278,14 +278,14 @@ enum GoogleReaderStatus {
 -(NSString *)getGoogleActionToken
 {
 		
+	// If we have a not expired access token, simply return it :)
+	
 	if (actionTokenTimer != nil && googleReaderStatus == isActionTokenAcquired) {
 		LLog(@"An action token is available: %@",actionToken);
 		return actionToken;
 	}
 	
 	if (googleReaderStatus == isTokenAcquired) {
-		
-		// If we have a not expired access token, simply return it :)
 		
 		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=scroll&access_token=%@",token]];
 		ASIHTTPRequest * tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
@@ -308,9 +308,10 @@ enum GoogleReaderStatus {
 			LOG_EXPR(actionToken);
 			
 			//let expire in 25 mins instead of 30
-			actionTokenTimer = [NSTimer scheduledTimerWithTimeInterval:1500 target:self selector:@selector(refreshGoogleActionToken:) userInfo:nil repeats:YES];
-			//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
-			
+			if (actionTokenTimer == nil || ![actionTokenTimer isValid]) {
+				actionTokenTimer = [NSTimer scheduledTimerWithTimeInterval:1500 target:self selector:@selector(refreshGoogleActionToken:) userInfo:nil repeats:YES];
+				//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
+			}
 			return actionToken;
 		}
 	} else {
@@ -324,14 +325,14 @@ enum GoogleReaderStatus {
 	
 	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
 	
+	// If we have a not expired access token, simply return it :)
+	
 	if (token != nil && googleReaderStatus == isTokenAcquired) {
 		LLog(@"A token is available: %@",token);
 		return token;
 	}
 	
 	if (googleReaderStatus == isAuthenticated) {
-		
-		// If we have a not expired access token, simply return it :)
 		
 		NSURL *tokenURL = [NSURL URLWithString:@"https://accounts.google.com/o/oauth2/token"];
 		ASIFormDataRequest * tokenRequest = [ASIFormDataRequest requestWithURL:tokenURL];
@@ -366,8 +367,10 @@ enum GoogleReaderStatus {
 			token = [[dict objectForKey:@"access_token"] retain];
 			//LOG_EXPR(token);
 
-			tokenTimer = [NSTimer scheduledTimerWithTimeInterval:(NSInteger)[dict objectForKey:@"expires_in"] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
-			//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
+			if (tokenTimer == nil || ![tokenTimer isValid]) {
+				tokenTimer = [NSTimer scheduledTimerWithTimeInterval:[[dict objectForKey:@"expires_in"] intValue] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
+				//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
+			}
 			
 			return token;
 		}
@@ -475,6 +478,7 @@ enum GoogleReaderStatus {
 		
 	[subscriptionRequest setCompletionBlock:^{
 		LLog(@"Finish subscriptionRequest");
+		self.readerUser = [[subscriptionRequest responseHeaders] objectForKey:@"X-Reader-User"];
 
 		
 		JSONDecoder * jsonDecoder = [JSONDecoder decoder];
@@ -622,9 +626,6 @@ enum GoogleReaderStatus {
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
-	//TOFIX
-	readerUser = @"-";
-	//readerUser = [[tokenRequest responseHeaders] objectForKey:@"X-Reader-User"];
 	LLog(token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
@@ -691,8 +692,6 @@ enum GoogleReaderStatus {
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
-  	//TOFIX
-	readerUser = @"-";
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	[myRequest setFailedBlock:^{
