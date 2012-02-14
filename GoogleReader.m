@@ -774,6 +774,7 @@ enum GoogleReaderStatus {
 {
 	[oAuthObject release];
 	[localFeeds release];
+	[super dealloc];
 }
 
 /* sharedManager
