@@ -352,6 +352,7 @@ typedef enum {
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	if (([folder flags] & MA_FFlag_CheckForImage)) 
 		dispatch_sync(dispatch_get_main_queue(), ^{
 			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
@@ -360,10 +361,15 @@ typedef enum {
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
 	if (IsRSSFolder(folder) && ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage]))
+	{
+		[pool drain];
 		return;
+	}
 	
 	if (![self isRefreshingFolder:folder ofType:MA_Refresh_FavIcon])
 		[self pumpFolderIconRefresh:folder];
+
+	[pool drain];
 }
 
 /* isRefreshingFolder
@@ -778,6 +784,7 @@ typedef enum {
 				[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
 				//FIX WE Really Need this ????
 				//[self removeConnection:connector];
+				[pool drain];
 				return;
 			}
 		}
@@ -820,6 +827,7 @@ typedef enum {
 				[newFeed release];
 				//FIX WE Really Need this ????
 				//[self removeConnection:connector];
+				[pool drain];
 				return;
 			}
             
