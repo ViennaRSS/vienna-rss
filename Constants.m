@@ -69,6 +69,7 @@ NSString * MAPref_ShouldSaveFeedSource = @"ShouldSaveFeedSource";
 NSString * MAPref_ShouldSaveFeedSourceBackup = @"ShouldSaveFeedSourceBackup";
 NSString * MAPref_SearchMethod = @"SearchMethod";
 NSString * MAPref_SyncGoogleReader = @"SyncGoogleReader";
+NSString * MAPref_GoogleNewSubscription = @"GoogleNewSubscription";
 NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads"; 
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;

@@ -33,11 +33,14 @@
 	IBOutlet NSWindow * newRSSFeedWindow;
 	IBOutlet NSWindow * editRSSFeedWindow;
 	IBOutlet NSButton * siteHomePageButton;
+	BOOL googleOptionButton;
 	NSDictionary * sourcesDict;
 	Database * db;
 	int parentId;
 	int editFolderId;
 }
+
+@property BOOL googleOptionButton;
 
 // Action handlers
 -(IBAction)doSubscribe:(id)sender;
@@ -46,6 +49,7 @@
 -(IBAction)doEditCancel:(id)sender;
 -(IBAction)doLinkSourceChanged:(id)sender;
 -(IBAction)doShowSiteHomePage:(id)sender;
+-(IBAction)doGoogleOption:(id)sender;
 
 // General functions
 -(id)initWithDatabase:(Database *)newDb;

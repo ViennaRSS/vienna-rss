@@ -182,6 +182,7 @@ static Preferences * _standardPreferences = nil;
         
         // Google reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
+        prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
 				
 		if (shouldSaveFeedSource)
 		{
@@ -281,6 +282,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSKeyedArchiver archivedDataWithRootObject:[SearchMethod searchAllArticlesMethod]] forKey:MAPref_SearchMethod];
     [defaultValues setObject:[NSNumber numberWithInteger:MA_Default_ConcurrentDownloads] forKey:MAPref_ConcurrentDownloads];
     [defaultValues setObject:boolNo forKey:MAPref_SyncGoogleReader];
+    [defaultValues setObject:boolNo forKey:MAPref_GoogleNewSubscription];
 	
 	return defaultValues;
 }
@@ -1089,6 +1091,24 @@ static Preferences * _standardPreferences = nil;
 		syncGoogleReader = flag;
 		[self setBool:syncGoogleReader forKey:MAPref_SyncGoogleReader];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+	}
+}
+
+/* Getter/setters for prefersGoogleNewSubscription
+ * Specifies whether Vienna defaults to Google Reader when entering a new subscription
+ */
+-(BOOL)prefersGoogleNewSubscription
+{
+    return prefersGoogleNewSubscription;
+}
+
+-(void)setPrefersGoogleNewSubscription:(BOOL)flag
+{
+	if (prefersGoogleNewSubscription != flag)
+	{
+		prefersGoogleNewSubscription = flag;
+		[self setBool:prefersGoogleNewSubscription forKey:MAPref_GoogleNewSubscription];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleReaderNewSubscriptionChange" object:nil];
 	}
 }
 
