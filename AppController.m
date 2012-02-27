@@ -925,7 +925,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(getInfo:))];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(showXMLSource:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItem:copyOfMenuItemWithAction(@selector(syncWithGoogleReader:))];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(forceRefreshSelectedSubscriptions:))];	
 	return folderMenu;
 }
@@ -2993,53 +2992,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[sourceWindows removeObject:sourceWindow];
 }
 
-/* syncWithGoogleReader
- * Sync the selected folder with Google Reader
- */
--(IBAction)syncWithGoogleReader:(id)sender {
-	
-	NSMenuItem *myMenuItem = (NSMenuItem*)sender;
-	
-	//TOFIX
-	if ([[foldersTree selectedFolders] count]> 1) {		
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:@"OK"];
-		[alert setMessageText:@"Error"];
-		[alert setInformativeText:@"By now you can select ONLY one feed a time..."];
-		[alert setAlertStyle:NSWarningAlertStyle];
-		[alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
-		return;
-	}
-	
-	if ([myMenuItem isEnabled]) {
-		NSLog(@"Checked!");
-		[myMenuItem setState:NSOnState];
-	} else {
-		NSLog(@"UnChecked :(");
-		[myMenuItem setState:NSOffState];
-	}
-	
-	/*
-	for (Folder * folder in [foldersTree selectedFolders])
-	{
-		if ([folder isRSSFolder])
-		{
-			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
-			
-			if (sourceWindow != nil)
-			{
-				if (sourceWindows == nil)
-					sourceWindows = [[NSMutableArray alloc] init];
-				[sourceWindows addObject:sourceWindow];
-				[sourceWindow release];
-			}
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
-			
-			[sourceWindow showWindow:self];
-		}
-	}	
-	 */
-}
 
 
 /* showXMLSource
@@ -4144,12 +4096,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = ![db readOnly];
 		return YES;
 	}
-	if (theAction == @selector(syncWithGoogleReader:))
-	{
-		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		*validateFlag = isMainWindowVisible && folder != nil && [folder hasFeedSource] && ![db readOnly];
-		return YES;
-	}
 
 	if (theAction == @selector(newSubscription:))
 	{
@@ -4399,7 +4345,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Article * thisArticle = [self selectedArticle];
 		Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
-		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible && isArticleView);
+		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:)))
 	{

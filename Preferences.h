@@ -47,6 +47,7 @@
 	BOOL showFilterBar;
 	BOOL shouldSaveFeedSource;
     BOOL syncGoogleReader;
+    BOOL prefersGoogleNewSubscription;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
@@ -215,5 +216,7 @@
 -(BOOL)syncGoogleReader;
 -(void)setSyncGoogleReader:(BOOL)flag;
 
+-(BOOL)prefersGoogleNewSubscription;
+-(void)setPrefersGoogleNewSubscription:(BOOL)flag;
 
 @end

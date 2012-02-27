@@ -309,7 +309,6 @@
 "All" = "Все";
 "All Articles" = "Все Статьи";
 "Unread" = "Непрочитанное";
-"Unread Articles" = "Непрочитанные Статьи";
 "Last Refresh" = "С Последнего Обновления";
 "Feed URL updated to %@" = "URL канала обновился до %@";
 "Filter articles" = "Фильтровать статьи";
@@ -342,7 +341,6 @@
 "HasEnclosure" = "Вложения";
 "Enclosure" = "URL Вложения";
 "Open New Tab" = "Открыть Новую Вкладку";
-"New Tab" = "Новая Вкладка";
 "Subscribe to the feed for this page" = "Подписаться к каналу на данной странице";
 "Open Vienna" = "Открыть Vienna";
 "Download Enclosure" = "Загрузить Вложение";
