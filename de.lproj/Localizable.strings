@@ -309,7 +309,6 @@
 "All" = "Alle";
 "All Articles" = "Alle Artikel";
 "Unread" = "Ungelesen";
-"Unread Articles" = "Ungelesene Artikel";
 "Last Refresh" = "Letzte Aktualisierung";
 "Feed URL updated to %@" = "Die Feed URL wurd auf %@ aktualisiert";
 "Filter articles" = "Artikel filtern";
@@ -342,7 +341,6 @@
 "HasEnclosure" = "Anhang";
 "Enclosure" = "Anhang URL";
 "Open New Tab" = "Neuer Tab";
-"New Tab" = "Ohne Titel";
 "Subscribe to the feed for this page" = "Den Feed für diese Seite abonnieren";
 "Open Vienna" = "Open Vienna";
 "Download Enclosure" = "Anhang herunterladen";
