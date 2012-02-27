@@ -22,6 +22,8 @@
 #import "AppController.h"
 #import "StringExtensions.h"
 #import "RichXMLParser.h"
+#import "Preferences.h"
+#import "GoogleReader.h"
 
 // Private functions
 @interface NewSubscription (Private)
@@ -109,6 +111,7 @@
 	editFolderId = -1;
 	parentId = itemId;
 	[newRSSFeedWindow makeFirstResponder:feedURL];
+	self.googleOptionButton=[[Preferences standardPreferences] prefersGoogleNewSubscription];  //restore from preferences
 	[NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
@@ -199,7 +202,20 @@
 	feedURLString = [self verifyFeedURL:feedURLString];
 
 	// Call the controller to create the new subscription.
-	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
+	if ([[Preferences standardPreferences] syncGoogleReader] && [[Preferences standardPreferences] prefersGoogleNewSubscription])
+	{	//creates in Google
+		GoogleReader * myGoogle = [GoogleReader sharedManager];
+		[myGoogle subscribeToFeed:feedURLString];
+		NSString * folderName = [[db folderFromID:parentId] name];
+		if (folderName != nil)
+			[myGoogle setFolder:folderName forFeed:feedURLString folderFlag:TRUE];
+		[myGoogle loadSubscriptions:nil];
+
+	}
+	else
+	{	//creates locally
+		[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
+	}
 	
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];
@@ -245,6 +261,18 @@
 -(IBAction)doLinkSourceChanged:(id)sender
 {
 	[self setLinkTitle];
+}
+
+@synthesize googleOptionButton;
+
+
+/* doGoogleOption
+ * Action called by the Google Reader checkbox
+ * Memorizes the setting in preferences
+*/
+-(IBAction)doGoogleOption:(id)sender
+{
+ 	[[Preferences standardPreferences] setPrefersGoogleNewSubscription:([sender state] == NSOnState)];
 }
 
 /* handleTextDidChange [delegate]

@@ -309,7 +309,6 @@
 "All" = "Всі";
 "All Articles" = "Всі статті";
 "Unread" = "Непрочитані";
-"Unread Articles" = "Непрочитані статті";
 "Last Refresh" = "Останнє оновлення";
 "Feed URL updated to %@" = "URL стрічки змінено на %@";
 "Filter articles" = "Фільтрувати статті";
@@ -342,7 +341,6 @@
 "HasEnclosure" = "Додаток";
 "Enclosure" = "URL додатку";
 "Open New Tab" = "Відкрити нову вкладку";
-"New Tab" = "Нова вкладка";
 "Subscribe to the feed for this page" = "Підписатися на стрічку новин цієї сторінки";
 "Open Vienna" = "Відкрити Vienna";
 "Download Enclosure" = "Завантажити додаток";

@@ -564,7 +564,7 @@ enum GoogleReaderStatus {
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
-    [request setPostValue:token forKey:@"T"];
+    [request setPostValue:[self getGoogleActionToken]  forKey:@"T"];
     [request setDelegate:self];
     
     // Needs to be synchronous so UI doesn't refresh too soon.
@@ -604,7 +604,7 @@ enum GoogleReaderStatus {
     [request setPostValue:@"edit" forKey:@"ac"];
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
-    [request setPostValue:token forKey:@"T"];
+    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
     [request setDelegate:self];
     [request startSynchronous];
     NSLog(@"Set folder response status code: %d", [request responseStatusCode]);

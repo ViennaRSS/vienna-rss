@@ -70,6 +70,7 @@ extern NSString * MAPref_ShouldSaveFeedSource;
 extern NSString * MAPref_ShouldSaveFeedSourceBackup;
 extern NSString * MAPref_SearchMethod;
 extern NSString * MAPref_SyncGoogleReader;
+extern NSString * MAPref_GoogleNewSubscription;
 extern NSString * MAPref_ConcurrentDownloads;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
