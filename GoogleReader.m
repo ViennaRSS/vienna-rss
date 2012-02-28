@@ -618,7 +618,7 @@ enum GoogleReaderStatus {
     [request setPostValue:@"edit" forKey:@"ac"];
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:newName forKey:@"t"];
-    [request setPostValue:token forKey:@"T"];
+    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
     [request setDelegate:self];
     [request startSynchronous];
     NSLog(@"Rename feed response status code: %d", [request responseStatusCode]);
@@ -738,7 +738,7 @@ enum GoogleReaderStatus {
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", tagName] forKey:@"s"];
-    [request setPostValue:token forKey:@"T"];
+    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
     [request setDelegate:self];
     [request startSynchronous];
     NSLog(@"Disable tag response status code: %d", [request responseStatusCode]);
@@ -751,7 +751,7 @@ enum GoogleReaderStatus {
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", oldName] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", newName] forKey:@"dest"];
-    [request setPostValue:token forKey:@"T"];
+    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
     [request setDelegate:self];
     [request startSynchronous];
     NSLog(@"Rename tag response status code: %d", [request responseStatusCode]);
