@@ -115,6 +115,7 @@
     [messageTextField release];
     [progressIndicator release];
     [operationQueue release];
+    [super dealloc];
 }
 
 @end

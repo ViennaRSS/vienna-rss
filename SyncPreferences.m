@@ -100,6 +100,7 @@
     [mergeButton release];
     [createButton release];
     [merge release];
+    [super dealloc];
 
 }
 
