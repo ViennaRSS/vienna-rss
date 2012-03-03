@@ -20,6 +20,7 @@
 #import "XMLParser.h"
 #import "StringExtensions.h"
 #import "Debug.h"
+#import "AppController.h"
 
 @interface XMLParser (Private)
 	-(void)setTreeRef:(CFXMLTreeRef)treeRef;
@@ -435,14 +436,6 @@
 }
 
 
-+(NSDate *)getDateFromString:(NSString *)dateString
-{
-	NSDate *date = [NSDate dateWithNaturalLanguageString:dateString locale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-	if (date != nil) return date;
-	
-	ALog(@"Conversion error: %@",dateString);
-	return date;
-}
 
 /* parseXMLDate
  * Parse a date in an XML header into an NSCalendarDate. This is horribly expensive and needs
@@ -469,7 +462,7 @@
 	//We handle garbage there! (At least 1/1/00, so four digit)
 	if ([[dateString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] < 4) return nil;
 	
-	NSDate *curlDate = [self getDateFromString:dateString];
+	NSDate *curlDate = [AppController getDateFromString:dateString];
 	
 	if (curlDate != nil)
 		return curlDate;
