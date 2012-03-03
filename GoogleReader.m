@@ -10,6 +10,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
+//#import "SBJson.h"
 #import "GTMHTTPFetcher.h"
 #import "GTMHTTPFetcherLogging.h"
 #import "Folder.h"
@@ -48,6 +49,8 @@ enum GoogleReaderStatus {
 @synthesize actionToken;
 @synthesize actionTokenTimer;
 
+JSONDecoder * jsonDecoder;
+//SBJsonParser * jsonDecoder;
 
 -(BOOL)isReady
 {
@@ -61,6 +64,8 @@ enum GoogleReaderStatus {
     if (self) {
         // Initialization code here.
 		localFeeds = [[[NSMutableArray alloc] init] retain]; 
+		jsonDecoder = [[JSONDecoder decoder] retain];
+		//jsonDecoder =  [[[SBJsonParser alloc] init] retain];
 		googleReaderStatus = notAuthenticated;
 		[self authenticate];
 	}
@@ -95,7 +100,7 @@ enum GoogleReaderStatus {
 			[refreshedFolder setFlag:MA_FFlag_Error];
 		} else if ([request responseStatusCode] == 200) {
 			NSData *data = [request responseData];		
-			NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[[JSONDecoder decoder] objectWithData:data]];		
+			NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
 			
 			if ([dict objectForKey:@"updated"] == nil) {
 				LOG_EXPR([request url]);
@@ -361,7 +366,6 @@ enum GoogleReaderStatus {
 #endif
 			
 			NSData * jsonData = [tokenRequest responseData];
-			JSONDecoder * jsonDecoder = [JSONDecoder decoder];
 			NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
 			[token release];
 			token = [[dict objectForKey:@"access_token"] retain];
@@ -455,7 +459,6 @@ enum GoogleReaderStatus {
     NSLog(@"Load reading list response code: %d", [request responseStatusCode]);
     
     NSData * jsonData = [request responseData];
-    JSONDecoder * jsonDecoder = [JSONDecoder decoder];
     NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
     [self setReadingList:[dict objectForKey:@"items"]];
 }                
@@ -481,7 +484,6 @@ enum GoogleReaderStatus {
 		self.readerUser = [[subscriptionRequest responseHeaders] objectForKey:@"X-Reader-User"];
 
 		
-		JSONDecoder * jsonDecoder = [JSONDecoder decoder];
 		NSDictionary * dict = [jsonDecoder objectWithData:[subscriptionRequest responseData]];
 				
 		[localFeeds removeAllObjects];
@@ -774,6 +776,7 @@ enum GoogleReaderStatus {
 {
 	[oAuthObject release];
 	[localFeeds release];
+	[jsonDecoder release];
 	[super dealloc];
 }
 
