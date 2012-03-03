@@ -192,7 +192,6 @@
 		AA8F86B40A0A2FC500A0EACE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F86840A0A2FC500A0EACE /* WebKit.framework */; };
 		AA8F87550A0A2FEA00A0EACE /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */; };
 		AA8F87770A0A301000A0EACE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */; };
-		AA94574D061C7E060090FE26 /* ExtDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA94574B061C7E060090FE26 /* ExtDateFormatter.m */; };
 		AA9F3086081B69EE00D6EA23 /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */; };
 		AA9F3099081B6A7400D6EA23 /* NewSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9F3097081B6A7400D6EA23 /* NewSubscription.m */; };
 		AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
@@ -353,7 +352,6 @@
 		EAE98E7414BEFBD700D6A3DC /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		EAE98E7514BEFBD700D6A3DC /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
 		EAE98E7614BEFBD700D6A3DC /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
-		EAE98E7714BEFBD700D6A3DC /* ExtDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA94574B061C7E060090FE26 /* ExtDateFormatter.m */; };
 		EAE98E7814BEFBD700D6A3DC /* FolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB7CE06238B08004E1236 /* FolderView.m */; };
 		EAE98E7914BEFBD700D6A3DC /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
 		EAE98E7A14BEFBD700D6A3DC /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
@@ -1077,8 +1075,6 @@
 		AA8F86840A0A2FC500A0EACE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
-		AA94574A061C7E060090FE26 /* ExtDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtDateFormatter.h; sourceTree = "<group>"; };
-		AA94574B061C7E060090FE26 /* ExtDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtDateFormatter.m; sourceTree = "<group>"; };
 		AA975FD60CA44187003A1B9B /* pt */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt; path = pt.lproj/AdvancedPreferences.nib; sourceTree = "<group>"; };
 		AA975FDC0CA441B4003A1B9B /* pt */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt; path = pt.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AA975FDD0CA441B4003A1B9B /* pt */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = pt; path = pt.lproj/EmptyTrashWarning.nib; sourceTree = "<group>"; };
@@ -1927,8 +1923,6 @@
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
-				AA94574A061C7E060090FE26 /* ExtDateFormatter.h */,
-				AA94574B061C7E060090FE26 /* ExtDateFormatter.m */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
 				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -3285,7 +3279,6 @@
 				AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */,
 				AABFDCA20609EA8100100A9B /* ActivityViewer.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
-				AA94574D061C7E060090FE26 /* ExtDateFormatter.m in Sources */,
 				AA6CB7D006238B08004E1236 /* FolderView.m in Sources */,
 				AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */,
 				AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */,
@@ -3407,7 +3400,6 @@
 				EAE98E7414BEFBD700D6A3DC /* StringExtensions.m in Sources */,
 				EAE98E7514BEFBD700D6A3DC /* ActivityViewer.m in Sources */,
 				EAE98E7614BEFBD700D6A3DC /* Field.m in Sources */,
-				EAE98E7714BEFBD700D6A3DC /* ExtDateFormatter.m in Sources */,
 				EAE98E7814BEFBD700D6A3DC /* FolderView.m in Sources */,
 				EAE98E7914BEFBD700D6A3DC /* CalendarExtensions.m in Sources */,
 				EAE98E7A14BEFBD700D6A3DC /* SearchFolder.m in Sources */,
