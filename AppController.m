@@ -995,10 +995,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag
 {
+	BOOL visibleFilterBar = NO;
 	// Turn off the filter bar when switching layouts. This is simpler than
 	// trying to graft it onto the new layout.
 	if ([self isFilterBarVisible])
+		{ visibleFilterBar = YES;
 		[self setPersistedFilterBarState:NO withAnimation:NO];
+		}
 	
 	switch (newLayout)
 	{
@@ -1025,6 +1028,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	[[Preferences standardPreferences] setLayout:newLayout];
+	//restore filter bar state if necessary
+	if (visibleFilterBar)
+		[self setPersistedFilterBarState:YES withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 }
