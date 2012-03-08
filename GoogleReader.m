@@ -109,7 +109,7 @@ JSONDecoder * jsonDecoder;
 				NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
 				NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 				LOG_EXPR(dict);
-				NSString *tmp = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+				NSString *tmp = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 				LOG_EXPR(tmp);
 				ALog(@"Errore!!!!");
 			}
@@ -642,7 +642,7 @@ JSONDecoder * jsonDecoder;
 			[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 
 			[myRequest setCompletionBlock:^{
-				NSString *tmp = [[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding];
+				NSString *tmp = [[[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding] autorelease];
 				LOG_EXPR(tmp);
 				NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
 				if (![requestResponse isEqualToString:@"OK"]) {
@@ -659,7 +659,7 @@ JSONDecoder * jsonDecoder;
 			[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 			
 			[myRequest setCompletionBlock:^{
-				NSString *tmp = [[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding];
+				NSString *tmp = [[[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding] autorelease];
 				LOG_EXPR(tmp);
 				NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
 				LOG_EXPR(requestResponse);
