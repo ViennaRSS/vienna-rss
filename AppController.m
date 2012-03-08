@@ -160,29 +160,32 @@ static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 {
 	if ((self = [super init]) != nil)
 	{
-		// Initializes the date formatters
-        NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-
-		for (int i=0; i<kNumberOfDateFormatters; i++)
+		if (dateFormatterArray[0] == NULL)
 		{
-			dateFormatterArray[i] = [[NSDateFormatter alloc] init];
-			[dateFormatterArray[i] setLocale:enUS];
+			// Initializes the date formatters
+			NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	
+			for (int i=0; i<kNumberOfDateFormatters; i++)
+			{
+				dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
+				[dateFormatterArray[i] setLocale:enUS];
+			}
+	
+			//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
+			// Fri, 12 Dec 2008 18:45:15 -0800
+			[dateFormatterArray[0] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
+			// Sat, 13 Dec 2008 18:45:15 EAT
+			[dateFormatterArray[1] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
+			// 2010-09-28T15:31:25Z
+			[dateFormatterArray[2] setDateFormat:@"yyy-MM-dd'T'HH:mm:ss'Z'"];
+			[dateFormatterArray[3] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss+HH:mm"];
+			[dateFormatterArray[4] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm"];
+			[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+			[dateFormatterArray[6] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
+	
+			[enUS release];
+			// end of initialization of date formatters
 		}
-
-		//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
-		// Fri, 12 Dec 2008 18:45:15 -0800
-        [dateFormatterArray[0] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
-        // Sat, 13 Dec 2008 18:45:15 EAT
-        [dateFormatterArray[1] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-        // 2010-09-28T15:31:25Z
-        [dateFormatterArray[2] setDateFormat:@"yyy-MM-dd'T'HH:mm:ss'Z'"];
-        [dateFormatterArray[3] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss+HH:mm"];
-        [dateFormatterArray[4] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm"];
-        [dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-        [dateFormatterArray[6] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
-
-        [enUS release];
-        // end of initialization of date formatters
 
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
 		progressCount = 0;
@@ -1042,11 +1045,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
-		date = [dateFormatterArray[i] dateFromString:dateString];
-		if (date != nil) return date;
+        @try
+        {
+			date = [dateFormatterArray[i] dateFromString:dateString];
+			if (date != nil) return date;
+		}
+		@catch (NSException * e)
+        {
+			NSLog(@"Exception: %@", e);
+			NSLog(@"while trying to convert datestring %@",dateString);
+			NSLog(@"with formatter %@",[dateFormatterArray[i] dateFormat]);
+
+		}
 	}
 
-	ALog(@"Conversion error: %@",dateString);
+	NSLog(@"Conversion error: %@",dateString);
 	return date;
 }
 
