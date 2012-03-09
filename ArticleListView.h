@@ -20,7 +20,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
-#import "ExtDateFormatter.h"
 #import "ArticleBaseView.h"
 #import "BrowserView.h"
 #import "PopupButton.h"

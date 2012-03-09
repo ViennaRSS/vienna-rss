@@ -6,9 +6,9 @@
 //  Copyright 2006 Positive Spin Media. All rights reserved.
 //
 
-/* 
-Protocol to be observed by all style delegate objects.  These objects handle the drawing responsibilities for PSMTabBarCell; once the control has been assigned a style, the background and cells draw consistent with that style.  Design pattern and implementation by David Smith, Seth Willits, and Chris Forsythe, all touch up and errors by John P. :-)
-*/
+/*
+   Protocol to be observed by all style delegate objects.  These objects handle the drawing responsibilities for PSMTabBarCell; once the control has been assigned a style, the background and cells draw consistent with that style.  Design pattern and implementation by David Smith, Seth Willits, and Chris Forsythe, all touch up and errors by John P. :-)
+ */
 
 #import "PSMTabBarCell.h"
 #import "PSMTabBarControl.h"
@@ -19,9 +19,9 @@ Protocol to be observed by all style delegate objects.  These objects handle the
 - (NSString *)name;
 
 // control specific parameters
-- (float)leftMarginForTabBarControl;
-- (float)rightMarginForTabBarControl;
-- (float)topMarginForTabBarControl;
+- (CGFloat)leftMarginForTabBarControl;
+- (CGFloat)rightMarginForTabBarControl;
+- (CGFloat)topMarginForTabBarControl;
 - (void)setOrientation:(PSMTabBarOrientation)value;
 
 // add tab button
@@ -35,9 +35,9 @@ Protocol to be observed by all style delegate objects.  These objects handle the
 - (NSRect)iconRectForTabCell:(PSMTabBarCell *)cell;
 - (NSRect)indicatorRectForTabCell:(PSMTabBarCell *)cell;
 - (NSRect)objectCounterRectForTabCell:(PSMTabBarCell *)cell;
-- (float)minimumWidthOfTabCell:(PSMTabBarCell *)cell;
-- (float)desiredWidthOfTabCell:(PSMTabBarCell *)cell;
-- (float)tabCellHeight;
+- (CGFloat)minimumWidthOfTabCell:(PSMTabBarCell *)cell;
+- (CGFloat)desiredWidthOfTabCell:(PSMTabBarCell *)cell;
+- (CGFloat)tabCellHeight;
 
 // cell values
 - (NSAttributedString *)attributedObjectCountValueForTabCell:(PSMTabBarCell *)cell;

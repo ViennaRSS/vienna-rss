@@ -735,6 +735,7 @@ typedef enum {
 {	
 	
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	ZAssert(parameters!=NULL, @"Null");
 	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];
@@ -918,13 +919,15 @@ typedef enum {
 				
 				[folder clearCache];
                 // Should we wrap the entire loop or just individual article updates?
-				[db beginTransaction];
-				for (Article * article in articleArray)
-				{
-					if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
-						++newArticlesFromFeed;
+                @synchronized(self) {
+					[db beginTransaction];
+					for (Article * article in articleArray)
+					{
+						if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
+							++newArticlesFromFeed;
+					}
+					[db commitTransaction];
 				}
-				[db commitTransaction];				
 			}
 			
 			[db beginTransaction];

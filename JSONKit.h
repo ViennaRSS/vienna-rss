@@ -84,7 +84,7 @@ typedef unsigned long  NSUInteger;
 #define NSUIntegerMax  ULONG_MAX
 #else  // defined(__LP64__) || defined(NS_BUILD_32_LIKE_64)
 typedef int            NSInteger;
-typedef NSUInteger    NSUInteger;
+typedef unsigned int   NSUInteger;
 #define NSIntegerMin   INT_MIN
 #define NSIntegerMax   INT_MAX
 #define NSUIntegerMax  UINT_MAX
