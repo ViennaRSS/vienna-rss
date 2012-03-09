@@ -8,36 +8,36 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PSMTabBarControl.h"
+#import "PSMProgressIndicator.h"
 
-@class PSMTabBarControl;
-@class PSMProgressIndicator;
 
 @interface PSMTabBarCell : NSActionCell {
-    // sizing
-    NSRect              _frame;
-    NSSize              _stringSize;
-    int                 _currentStep;
-    BOOL                _isPlaceholder;
-    
-    // state
-    int                 _tabState;
-    NSTrackingRectTag   _closeButtonTrackingTag;    // left side tracking, if dragging
-    NSTrackingRectTag   _cellTrackingTag;           // right side tracking, if dragging
-    BOOL                _closeButtonOver;
-    BOOL                _closeButtonPressed;
-    PSMProgressIndicator *_indicator;
-    BOOL                _isInOverflowMenu;
-    BOOL                _hasCloseButton;
-    BOOL                _isCloseButtonSuppressed;
-    BOOL                _hasIcon;
-	BOOL				_hasLargeImage;
-    int                 _count;
-    BOOL                _isEdited;
+	// sizing
+	NSRect									_frame;
+	NSSize									_stringSize;
+	NSInteger								_currentStep;
+	BOOL									_isPlaceholder;
+
+	// state
+	NSInteger								_tabState;
+	NSTrackingRectTag						_closeButtonTrackingTag;				// left side tracking, if dragging
+	NSTrackingRectTag						_cellTrackingTag;							// right side tracking, if dragging
+	BOOL									_closeButtonOver;
+	BOOL									_closeButtonPressed;
+	PSMProgressIndicator					*_indicator;
+	BOOL									_isInOverflowMenu;
+	BOOL									_hasCloseButton;
+	BOOL									_isCloseButtonSuppressed;
+	BOOL									_hasIcon;
+	BOOL									_hasLargeImage;
+	NSInteger								_count;
+	NSColor								*_countColor;
+	BOOL									_isEdited;
 }
 
 // creation/destruction
 - (id)initWithControlView:(PSMTabBarControl *)controlView;
-- (id)initPlaceholderWithFrame:(NSRect)frame expanded:(BOOL)value inControlView:(PSMTabBarControl *)controlView;
+- (id)initPlaceholderWithFrame:(NSRect) frame expanded:(BOOL) value inControlView:(PSMTabBarControl *)controlView;
 - (void)dealloc;
 
 // accessors
@@ -47,14 +47,14 @@
 - (void)setCloseButtonTrackingTag:(NSTrackingRectTag)tag;
 - (NSTrackingRectTag)cellTrackingTag;
 - (void)setCellTrackingTag:(NSTrackingRectTag)tag;
-- (float)width;
+- (CGFloat)width;
 - (NSRect)frame;
 - (void)setFrame:(NSRect)rect;
 - (void)setStringValue:(NSString *)aString;
 - (NSSize)stringSize;
 - (NSAttributedString *)attributedStringValue;
-- (int)tabState;
-- (void)setTabState:(int)state;
+- (NSInteger)tabState;
+- (void)setTabState:(NSInteger)state;
 - (NSProgressIndicator *)indicator;
 - (BOOL)isInOverflowMenu;
 - (void)setIsInOverflowMenu:(BOOL)value;
@@ -70,23 +70,25 @@
 - (void)setHasIcon:(BOOL)value;
 - (BOOL)hasLargeImage;
 - (void)setHasLargeImage:(BOOL)value;
-- (int)count;
-- (void)setCount:(int)value;
+- (NSInteger)count;
+- (void)setCount:(NSInteger)value;
+- (NSColor *)countColor;
+- (void)setCountColor:(NSColor *)value;
 - (BOOL)isPlaceholder;
 - (void)setIsPlaceholder:(BOOL)value;
-- (int)currentStep;
-- (void)setCurrentStep:(int)value;
+- (NSInteger)currentStep;
+- (void)setCurrentStep:(NSInteger)value;
 - (BOOL)isEdited;
 - (void)setIsEdited:(BOOL)value;
 
 // component attributes
 - (NSRect)indicatorRectForFrame:(NSRect)cellFrame;
 - (NSRect)closeButtonRectForFrame:(NSRect)cellFrame;
-- (float)minimumWidthOfCell;
-- (float)desiredWidthOfCell;
+- (CGFloat)minimumWidthOfCell;
+- (CGFloat)desiredWidthOfCell;
 
 // drawing
-- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+- (void)drawWithFrame:(NSRect) cellFrame inView:(NSView *)controlView;
 
 // tracking the mouse
 - (void)mouseEntered:(NSEvent *)theEvent;

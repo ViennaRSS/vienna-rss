@@ -10,12 +10,12 @@
 
 
 @interface PSMOverflowPopUpButton : NSPopUpButton {
-    NSImage         *_PSMTabBarOverflowPopUpImage;
-    NSImage         *_PSMTabBarOverflowDownPopUpImage;
-    BOOL            _down;
-	BOOL			_animatingAlternateImage;
-	NSTimer			*_animationTimer;
-	float			_animationValue;
+	NSImage									*_PSMTabBarOverflowPopUpImage;
+	NSImage									*_PSMTabBarOverflowDownPopUpImage;
+	BOOL										_down;
+	BOOL										_animatingAlternateImage;
+	NSTimer									*_animationTimer;
+	CGFloat									_animationValue;
 }
 
 //alternate image display
