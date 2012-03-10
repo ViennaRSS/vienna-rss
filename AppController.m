@@ -160,7 +160,7 @@ static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 {
 	if ((self = [super init]) != nil)
 	{
-		if (dateFormatterArray[0] == NULL)
+		if (dateFormatterArray[0] == nil)
 		{
 			// Initializes the date formatters
 			NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
@@ -1047,7 +1047,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
         @try
         {
+        	[dateFormatterArray[i] retain];
 			date = [dateFormatterArray[i] dateFromString:dateString];
+			[dateFormatterArray[i] release];
 			if (date != nil) return date;
 		}
 		@catch (NSException * e)
