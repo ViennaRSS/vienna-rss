@@ -153,6 +153,8 @@ OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground)
 #define kNumberOfDateFormatters 7
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
+static NSLock * dateFormatters_lock;
+
 /* init
  * Class instance initialisation.
  */
@@ -1043,23 +1045,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	NSDate *date ;
 
+	[dateFormatters_lock lock];
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
-        @try
-        {
-        	[dateFormatterArray[i] retain];
-			date = [dateFormatterArray[i] dateFromString:dateString];
-			[dateFormatterArray[i] release];
-			if (date != nil) return date;
-		}
-		@catch (NSException * e)
-        {
-			NSLog(@"Exception: %@", e);
-			NSLog(@"while trying to convert datestring %@",dateString);
-			NSLog(@"with formatter %@",[dateFormatterArray[i] dateFormat]);
-
+		date = [dateFormatterArray[i] dateFromString:dateString];
+		if (date != nil)
+		{
+			[dateFormatters_lock unlock];
+			return date;
 		}
 	}
+	[dateFormatters_lock unlock];
 
 	NSLog(@"Conversion error: %@",dateString);
 	return date;
