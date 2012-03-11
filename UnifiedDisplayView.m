@@ -70,7 +70,6 @@
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:[articleController currentFolderId]];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
 	[articleController addBacktrack:nil];
