@@ -919,7 +919,7 @@ typedef enum {
 				
 				[folder clearCache];
                 // Should we wrap the entire loop or just individual article updates?
-                @synchronized(self) {
+                @synchronized(db) {
 					[db beginTransaction];
 					for (Article * article in articleArray)
 					{
