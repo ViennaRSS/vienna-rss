@@ -1074,7 +1074,6 @@
 			runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		else
         {
-            NSString * oldName = [folder name];
 			[db setFolderName:[folder itemId] newName:newName];
             
 			/*
