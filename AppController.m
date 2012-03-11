@@ -3366,13 +3366,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
 	int count = [selectedFolders count];
-	BOOL doSubscribe = NO;
 	int index;
     
     NSMutableArray * rssFolders = [NSMutableArray array];
 	
-	if (count > 0)
-		doSubscribe = IsUnsubscribed([selectedFolders objectAtIndex:0]);
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
