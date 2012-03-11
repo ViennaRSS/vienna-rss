@@ -29,7 +29,7 @@
 #import "PluginManager.h"
 #import <AppKit/AppKit.h>
 
-@class NewPreferenceController;
+@class NewPreferencesController;
 @class FoldersTree;
 @class SmartFolder;
 @class NewSubscription;
@@ -75,7 +75,7 @@
 	IBOutlet NSButton * filterIconInStatusBarButton;
 
 	ActivityViewer * activityViewer;
-	NewPreferenceController * preferenceController;
+	NewPreferencesController * preferenceController;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewSubscription * rssFeed;
