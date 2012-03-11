@@ -3882,7 +3882,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = 2602;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
 			name = Development;
@@ -3891,7 +3891,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = 2602;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
 			name = Deployment;
