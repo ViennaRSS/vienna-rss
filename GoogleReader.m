@@ -189,20 +189,18 @@ JSONDecoder * jsonDecoder;
 					
 				[refreshedFolder clearCache];
 				// Should we wrap the entire loop or just individual article updates?
-                @synchronized(db) {
-					[db beginTransaction];
-					//BOOL hasCache = [db initArticleArray:refreshedFolder];
-						
-					for (Article * article in articleArray)
-					{
-						if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
-							[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
-						else
-							newArticlesFromFeed++;
-					}
-					
-					[db commitTransaction];
+				[db beginTransaction];
+				//BOOL hasCache = [db initArticleArray:refreshedFolder];
+
+				for (Article * article in articleArray)
+				{
+					if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
+						[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
+					else
+						newArticlesFromFeed++;
 				}
+
+				[db commitTransaction];
 			}
 								
 				// Let interested callers know that the folder has changed.

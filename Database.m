@@ -750,28 +750,31 @@ static Database * _sharedDatabase = nil;
 
 
 -(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url {
-	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_GoogleReader_Folder canAppendIndex:YES];
-	//TODO: optimization using unique add function for addRSSFolder
-	if (folderId != -1)
-	{
-		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
-		NSString *preparedName = [SQLDatabase prepareStringForQuery:feedName];
-		
-		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:
-							   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-							   "values (%d, '%@', '', '', '', '%@', %d)",
-							   folderId,
-							   preparedName,
-							   preparedURL,
-							   0];
-		if (!results)
-			return -1;
-		
-		// Add this new folder to our internal cache
-		Folder * folder = [self folderFromID:folderId];
-		[folder setFeedURL:url];
-		[results release];
+	NSInteger folderId;
+	@synchronized(self)	{
+		folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_GoogleReader_Folder canAppendIndex:YES];
+		//TODO: optimization using unique add function for addRSSFolder
+		if (folderId != -1)
+		{
+			NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
+			NSString *preparedName = [SQLDatabase prepareStringForQuery:feedName];
+			
+			[self verifyThreadSafety];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:
+								   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
+								   "values (%d, '%@', '', '', '', '%@', %d)",
+								   folderId,
+								   preparedName,
+								   preparedURL,
+								   0];
+			if (!results)
+				return -1;
+			
+			// Add this new folder to our internal cache
+			Folder * folder = [self folderFromID:folderId];
+			[folder setFeedURL:url];
+			[results release];
+		}
 	}
 	return folderId;
 }
@@ -782,25 +785,28 @@ static Database * _sharedDatabase = nil;
  */
 -(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url
 {
-	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
-	if (folderId != -1)
-	{
-		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
-
-		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:
-					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-					 "values (%d, '', '', '', '', '%@', %d)",
-					folderId,
-					preparedURL,
-					0];
-		if (!results)
-			return -1;
-
-		// Add this new folder to our internal cache
-		Folder * folder = [self folderFromID:folderId];
-		[folder setFeedURL:url];
-		[results release];
+    NSInteger folderId;
+	@synchronized(self) {
+		folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
+		if (folderId != -1)
+		{
+			NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
+	
+			[self verifyThreadSafety];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:
+						@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
+						 "values (%d, '', '', '', '', '%@', %d)",
+						folderId,
+						preparedURL,
+						0];
+			if (!results)
+				return -1;
+	
+			// Add this new folder to our internal cache
+			Folder * folder = [self folderFromID:folderId];
+			[folder setFeedURL:url];
+			[results release];
+		}
 	}
 	return folderId;
 }
@@ -923,21 +929,24 @@ static Database * _sharedDatabase = nil;
 	// bit me before. When adding new fields to the folders table, remember to init
 	// the field here even if its just to an empty value.
 	[self verifyThreadSafety];
-	SQLResult * results = [sqlDatabase performQueryWithFormat:
-		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %d, 0, %f, %d, %d, %d, %d)",
-		preparedName,
-		parentId,
-		interval,
-		type,
-		flags,
-		nextSibling,
-		firstChild];
-	
-	// Quick way of getting the last autoincrement primary key value (the folder_id).
-	if (results)
-	{
-		newItemId = [sqlDatabase lastInsertRowId];
-		[results release];
+	@synchronized(self) {
+		SQLResult * results = [sqlDatabase performQueryWithFormat:
+			@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %d, 0, %f, %d, %d, %d, %d)",
+			preparedName,
+			parentId,
+			interval,
+			type,
+			flags,
+			nextSibling,
+			firstChild];
+		
+		
+		// Quick way of getting the last autoincrement primary key value (the folder_id).
+		if (results)
+		{
+			newItemId = [sqlDatabase lastInsertRowId];
+			[results release];
+		}
 	}
 	
 	return newItemId;
@@ -1468,38 +1477,41 @@ static Database * _sharedDatabase = nil;
 		}
 		else if (existingArticle == nil)
 		{
-			SQLResult * results;
-			
-			results = [sqlDatabase performQueryWithFormat:
-				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
-				@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@',%d)",
-				preparedArticleGuid,
-				parentId,
-				folderID,
-				preparedUserName,
-				preparedArticleLink,
-				interval,
-				createdInterval,
-				read_flag,
-				marked_flag,
-				deleted_flag,
-				preparedArticleTitle,
-				preparedArticleText,
-				revised_flag,
-				preparedEnclosure,
-				hasenclosure_flag];
-			if (!results)
-				return NO;
-			[results release];
-			[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %d)", preparedArticleGuid, folderID];
-			
-			// Add the article to the folder
-			[article setStatus:MA_MsgStatus_New];
-			[folder addArticleToCache:article];
-			
-			// Update folder unread count
-			if (!read_flag)
-				adjustment = 1;
+			@synchronized(self)
+			{
+				SQLResult * results;
+				
+				results = [sqlDatabase performQueryWithFormat:
+					@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+					@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@',%d)",
+					preparedArticleGuid,
+					parentId,
+					folderID,
+					preparedUserName,
+					preparedArticleLink,
+					interval,
+					createdInterval,
+					read_flag,
+					marked_flag,
+					deleted_flag,
+					preparedArticleTitle,
+					preparedArticleText,
+					revised_flag,
+					preparedEnclosure,
+					hasenclosure_flag];
+				if (!results)
+					return NO;
+				[results release];
+				[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %d)", preparedArticleGuid, folderID];
+				
+				// Add the article to the folder
+				[article setStatus:MA_MsgStatus_New];
+				[folder addArticleToCache:article];
+				
+				// Update folder unread count
+				if (!read_flag)
+					adjustment = 1;
+			}
 		}
 		else if ([existingArticle isDeleted])
 		{
@@ -1725,9 +1737,12 @@ static Database * _sharedDatabase = nil;
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId != -1)
 	{
-		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
-		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
-		[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+		@synchronized(self)
+		{
+			NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
+			[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
+			[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+		}
 	}
 	return folderId;
 }
