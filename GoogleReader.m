@@ -515,6 +515,7 @@ JSONDecoder * jsonDecoder;
 					
 					NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInt:MA_Root_Folder], nil];                
 					[self performSelectorOnMainThread:@selector(createFolders:) withObject:params waitUntilDone:YES];
+					break; //In case of multiple labels, we retain only the first one
 				} 
 			}
 			
