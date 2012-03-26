@@ -125,27 +125,6 @@ static const int MA_StatusBarHeight = 23;
 static io_connect_t root_port;
 static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
-OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground);
-
-
-OSStatus openURLs(CFArrayRef urls, BOOL openLinksInBackground) 
-{
-	OSStatus err;
-	
-	if (urls == NULL)
-        urls = CFArrayCreate(NULL, NULL, 0, NULL);
-	LSLaunchFlags flags = (kLSLaunchNoParams);
-	
-	if (openLinksInBackground) {
-		flags |= kLSLaunchDontSwitch;
-	}
-	
-	LSApplicationParameters launchParams = {0, flags, NULL, NULL, NULL, NULL, NULL};
-    err = LSOpenURLsWithRole(urls, kLSRolesAll, NULL, &launchParams, NULL, 0);
-	return err;
-}
-
-
 @implementation AppController
 
 // C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
@@ -2525,9 +2504,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Preferences * prefs = [Preferences standardPreferences];
 		
-		// Launch in the foreground or background as needed
-		BOOL openLinksInBackground = [prefs openLinksInBackground];
-		
         NSMutableArray * articlesWithLinks = [NSMutableArray arrayWithCapacity:[articleArray count]];
         NSMutableArray * urls = [NSMutableArray arrayWithCapacity:[articleArray count]];
 		
@@ -2539,83 +2515,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				[urls addObject:[NSURL URLWithString:[currentArticle link]]];
             }
 		}
+		[self openURLs:urls inPreferredBrowser:usePreferredBrowser];
 		
-#define URL_COUNT_TO_OPEN_IN_ONE_GO     4
-#define DEBUG_LOG_OPEN_MULTIPLE_PAGES	0
-
-		double delayTime = 1.0;
-		BOOL initialDelay = NO;
-
-		NSRunLoop * runLoop = [NSRunLoop currentRunLoop];
-
-		NSUInteger i;
-		for (i = 0; i < [urls count]; i += URL_COUNT_TO_OPEN_IN_ONE_GO)
-        {
-            NSRange theRange;
-
-			theRange.location = i;
-			theRange.length = (([urls count]-i) >= URL_COUNT_TO_OPEN_IN_ONE_GO) ? URL_COUNT_TO_OPEN_IN_ONE_GO : ([urls count]-i);
-			if (theRange.length > 0)
-            {
-                OSStatus err = noErr;
-				BOOL openedSuccessfully = NO;
-                NSUInteger c;
-				
-				for (c = 0; c < 10; c++)
-                {
-					if (initialDelay || (err == errAETimeout))
-                    {
-						// CHANGEME: check if the target app is responsive.
-						if (err == errAETimeout)
-							delayTime *= 2.0;
-
-						//NSLog(@"Delaying next try for %f seconds.", delayTime);
-						[runLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:delayTime]];
-					}
-
-                    NSArray * urlSlice = [urls subarrayWithRange:theRange];
-					err = openURLs((CFArrayRef)urlSlice, openLinksInBackground);
-					
-					if (err == noErr)
-                    {
-                    #if DEBUG_LOG_OPEN_MULTIPLE_PAGES
-						NSLog(@"Successfully opened %lu URL(s).", (unsigned long)theRange.length);
-                    #endif
-						openedSuccessfully = YES;
-						break;
-					}
-					else if (err == errAETimeout)
-                    {
-                    #if DEBUG_LOG_OPEN_MULTIPLE_PAGES
-						NSLog(@"Failed to opened %lu URL(s): timeout. Trying again.", (unsigned long)theRange.length);
-                    #endif
-						initialDelay = YES;
-					}
-					else
-                    {
-						break;
-					}
-
-				}
-				
-				if (openedSuccessfully)
-                {
-                    if (![db readOnly])
-                        [articleController markReadByArray:articlesWithLinks readFlag:YES];
-                }
-                else
-                {
-                #if DEBUG_LOG_OPEN_MULTIPLE_PAGES
-					NSLog(@"Failed to opened %lu URL(s). Giving up.", (unsigned long)theRange.length);
-                #endif
-				}
-				
-			}
-			else
-            {
-				break;
-			}
-		}
+		if (![db readOnly])
+            [articleController markReadByArray:articlesWithLinks readFlag:YES];
 	}
 }
 
