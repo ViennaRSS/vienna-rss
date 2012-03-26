@@ -29,6 +29,7 @@
 #import "PopupButton.h"
 #import "ViennaApp.h"
 #import "BrowserView.h"
+#import "GoogleReader.h"
 
 // Private functions
 @interface FoldersTree (Private)
@@ -1156,13 +1157,13 @@
 		TreeNode * node = [items objectAtIndex:index];
 		Folder * folder = [node folder];
 
-		if (IsRSSFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
+		if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder) || IsSmartFolder(folder) || IsGroupFolder(folder) || IsSearchFolder(folder) || IsTrashFolder(folder))
 		{
 			[internalDragData addObject:[NSNumber numberWithInt:[node nodeId]]];
 			++countOfItems;
 		}
 
-		if (IsRSSFolder(folder))
+		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder))
 		{
 			NSString * feedURL = [folder feedURL];
 			
@@ -1274,7 +1275,16 @@
 		{
 			if (![newParent canHaveChildren])
 				[newParent setCanHaveChildren:YES];
-			if (![db setParent:newParentId forFolder:folderId])
+			if ([db setParent:newParentId forFolder:folderId])
+			{
+				if (IsGoogleReaderFolder(folder))
+				{
+					GoogleReader * myGoogle = [GoogleReader sharedManager];
+					NSString * folderName = [[db folderFromID:newParentId] name];
+					[myGoogle setFolder:folderName forFeed:[folder feedURL] folderFlag:TRUE];
+				}
+			}
+			else
 				continue;
 		}
 		
