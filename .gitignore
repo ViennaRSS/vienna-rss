@@ -1,4 +1,5 @@
 .DS_Store
+.idea
 Vienna.xcodeproj/project.xcworkspace/xcuserdata/*
 Vienna.xcodeproj/xcuserdata/*
 Vienna.xcodeproj/.LSOverride
