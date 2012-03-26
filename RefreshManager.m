@@ -575,17 +575,17 @@ typedef enum {
 		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
-		[myRequest setFailedBlock:^{
-			LOG_EXPR([myRequest error]);
-			Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];
-			[self setFolderErrorFlag:folder flag:YES];
-			[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[myRequest error] localizedDescription ]]];
-			[aItem setStatus:NSLocalizedString(@"Error",nil)];
-			[self syncFinishedForFolder:folder];
-		}];
 	} else if (IsGoogleReaderFolder(folder)) {
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
+	[myRequest setFailedBlock:^{
+		LOG_EXPR([myRequest error]);
+		Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];
+		[self setFolderErrorFlag:folder flag:YES];
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[myRequest error] localizedDescription ]]];
+		[aItem setStatus:NSLocalizedString(@"Error",nil)];
+		[self syncFinishedForFolder:folder];
+	}];
 	[self addConnection:myRequest];
 }
 
