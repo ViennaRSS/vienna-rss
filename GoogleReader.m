@@ -243,7 +243,7 @@ JSONDecoder * jsonDecoder;
 			
 			[dict release];
 		} else {
-			ALog(@"Error code non gestito! %d",[request responseStatusCode]);
+			ALog(@"Unhandled error code: %d",[request responseStatusCode]);
 		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 
