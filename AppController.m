@@ -1315,7 +1315,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		NSLog(@"Called openURL:inPreferredBrowser: with nil url.");
 		return;
 	}
-	
+	[self openURLs:[NSArray arrayWithObject:url] inPreferredBrowser:openInPreferredBrowserFlag];
+}
+
+/** openURLs
+ * Open an array of URLs in either the internal Vienna browser or an external browser depending on
+ * whatever the user has opted for.
+ */
+-(void)openURLs:(NSArray *)urls inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
+{
 	Preferences * prefs = [Preferences standardPreferences];
 	BOOL openURLInVienna = [prefs openLinksInVienna];
 	if (!openInPreferredBrowserFlag)
@@ -1330,10 +1338,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (((GetCurrentKeyModifiers() & (shiftKey | rightShiftKey)) != 0))
 			openInBackground = !openInBackground;
 		
-		[self createNewTab:url inBackground:openInBackground];
+		for (NSURL * url in urls)
+			[self createNewTab:url inBackground:openInBackground];
 	}
 	else
-		[self openURLInDefaultBrowser:url];
+		[self openURLsInDefaultBrowser:urls];
 }
 
 /* newTab
@@ -1395,6 +1404,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)openURLInDefaultBrowser:(NSURL *)url
 {
+	[self openURLsInDefaultBrowser:[NSArray arrayWithObject:url]];
+
+}
+
+/** openURLsInDefaultBrowser
+ * Open an array of URLs in whatever the user has registered as their
+ * default system browser.
+ */
+- (void)openURLsInDefaultBrowser:(NSArray *)urlArray {
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// This line is a workaround for OS X bug rdar://4450641
@@ -1403,7 +1421,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Launch in the foreground or background as needed
 	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
-	[[NSWorkspace sharedWorkspace] openURLs:[NSArray arrayWithObject:url]
+	[[NSWorkspace sharedWorkspace] openURLs:urlArray
 					withAppBundleIdentifier:NULL
 									options:lOptions
 			 additionalEventParamDescriptor:NULL
