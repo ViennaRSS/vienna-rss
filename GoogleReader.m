@@ -211,17 +211,17 @@ JSONDecoder * jsonDecoder;
 		}
 			
 		Database *db = [Database sharedDatabase];
-		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
-
 		NSInteger newArticlesFromFeed = 0;
-		// Here's where we add the articles to the database
-		if ([articleArray count] > 0)
-		{
-			NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
-				
-			[refreshedFolder clearCache];
-			// Should we wrap the entire loop or just individual article updates?
-			@synchronized(db) {
+		@synchronized(db){
+			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
+
+			// Here's where we add the articles to the database
+			if ([articleArray count] > 0)
+			{
+				NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
+
+				[refreshedFolder clearCache];
+				// Should we wrap the entire loop or just individual article updates?
 				[db beginTransaction];
 				//BOOL hasCache = [db initArticleArray:refreshedFolder];
 					
@@ -235,17 +235,17 @@ JSONDecoder * jsonDecoder;
 				
 				[db commitTransaction];
 			}
-		}
 							
 			// Let interested callers know that the folder has changed.
 			//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 			//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
 		
-		// Mark the feed as succeeded
-		//[self setFolderErrorFlag:folder flag:NO];
-		
-		// Set the last update date for this folder.
-		[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+			// Mark the feed as succeeded
+			//[self setFolderErrorFlag:folder flag:NO];
+
+			// Set the last update date for this folder.
+			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+		} //@synchronized
 		
 		AppController *controller = [NSApp delegate];
 		

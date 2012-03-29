@@ -354,9 +354,12 @@ typedef enum {
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	if (([folder flags] & MA_FFlag_CheckForImage)) 
-		dispatch_sync(dispatch_get_main_queue(), ^{
-			[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
-	});
+	{
+		Database *db = [Database sharedDatabase];
+		@synchronized(db) {
+			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+		};
+	}
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
@@ -807,7 +810,7 @@ typedef enum {
         
 		        
 		// Empty data feed is OK if we got HTTP 200
-		__block NSUInteger newArticlesFromFeed = 0;	
+		NSUInteger newArticlesFromFeed = 0;
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
 		if ([receivedData length] > 0)
 		{
@@ -851,7 +854,7 @@ typedef enum {
 			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 			
 			// Extract the latest title and description
-			__block NSString * feedTitle = [newFeed title];
+			NSString * feedTitle = [newFeed title];
 			NSString * feedDescription = [newFeed description];
 			NSString * feedLink = [newFeed link];
 			
@@ -920,7 +923,7 @@ typedef enum {
 				[article release];
 			}
 			
-			dispatch_sync(dispatch_get_main_queue(), ^{
+			@synchronized(db){
 				// Remember the last modified date
 				if (lastModifiedString != nil)
 					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
@@ -969,7 +972,7 @@ typedef enum {
 			
 			[db commitTransaction];
 				
-			});
+			};
 
 			
 			// Let interested callers know that the folder has changed.
@@ -979,11 +982,11 @@ typedef enum {
 		// Mark the feed as succeeded
 		[self setFolderErrorFlag:folder flag:NO];
 	
-	dispatch_sync(dispatch_get_main_queue(), ^{
+		@synchronized(db){
 
-		// Set the last update date for this folder.
-		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-	});
+			// Set the last update date for this folder.
+			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		};
 				  
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
