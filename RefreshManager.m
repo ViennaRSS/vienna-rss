@@ -567,7 +567,7 @@ typedef enum {
  */
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force
 {	
-	__block ASIHTTPRequest *myRequest;
+	ASIHTTPRequest *myRequest;
 	
 	if (IsRSSFolder(folder)) {
 		myRequest = [ASIHTTPRequest requestWithURL:url];
@@ -575,19 +575,25 @@ typedef enum {
 		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
+		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
 	} else if (IsGoogleReaderFolder(folder)) {
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
 	[myRequest setTimeOutSeconds:20];
-	[myRequest setFailedBlock:^{
-		LOG_EXPR([myRequest error]);
-		Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];
-		[self setFolderErrorFlag:folder flag:YES];
-		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[myRequest error] localizedDescription ]]];
-		[aItem setStatus:NSLocalizedString(@"Error",nil)];
-		[self syncFinishedForFolder:folder];
-	}];
 	[self addConnection:myRequest];
+}
+
+
+// failure callback
+- (void)folderRefreshFailed:(ASIHTTPRequest *)request
+
+{	LOG_EXPR([request error]);
+	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
+    ActivityItem * aItem = (ActivityItem *)[[request userInfo] objectForKey:@"log"];
+	[self setFolderErrorFlag:folder flag:YES];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[request error] localizedDescription ]]];
+	[aItem setStatus:NSLocalizedString(@"Error",nil)];
+	[self syncFinishedForFolder:folder];
 }
 
 /* pumpFolderIconRefresh
@@ -609,47 +615,55 @@ typedef enum {
 		favIconPath = [NSString stringWithFormat:@"http://s2.googleusercontent.com/s2/favicons?domain=%@&alt=feed", [[[folder feedURL] trim] baseURL]];		
 	} 
 
-	__block ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
+	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
+	[myRequest setDelegate:self];
+	[myRequest setDidFinishSelector:@selector(iconRequestDone:)];
 	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
-	[myRequest setCompletionBlock:^{
-		Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];	
-		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
-		[self setFolderUpdatingFlag:folder flag:NO];
-		if ([myRequest responseStatusCode] == 404) {
-			[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-		} else if ([myRequest responseStatusCode] == 200) {
-			
-			NSImage * iconImage = [[NSImage alloc] initWithData:[myRequest responseData]];
-			if (iconImage != nil && [iconImage isValid])
-			{
-				[iconImage setScalesWhenResized:YES];
-				[iconImage setSize:NSMakeSize(16, 16)];
-				[folder setImage:iconImage];
-				
-				// Broadcast a notification since the folder image has now changed
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
-				
-				// Log additional details about this.
-				[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [myRequest url]]];
-				[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[myRequest responseData] length]]];
-
-			} else {
-				NSString *tmp = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
-				LOG_EXPR(tmp);
-				ALog(@"Image Error!");
-			}
-			[iconImage release];
-		} else {
-			ALog(@"Unhandled error code: %d",[myRequest responseStatusCode]);
-		}
-	}];
-	[myRequest setFailedBlock:^{
-		Folder * folder = (Folder *)[[myRequest userInfo] objectForKey:@"folder"];
-		ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
-		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),[[myRequest error] localizedDescription ]]];
-	}];
 	[self addConnection:myRequest];
 
+}
+
+// success callback
+- (void)iconRequestDone:(ASIHTTPRequest *)request
+{
+	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];	
+	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
+	[self setFolderUpdatingFlag:folder flag:NO];
+	if ([request responseStatusCode] == 404) {
+		[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+	} else if ([request responseStatusCode] == 200) {
+		
+		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
+		if (iconImage != nil && [iconImage isValid])
+		{
+			[iconImage setScalesWhenResized:YES];
+			[iconImage setSize:NSMakeSize(16, 16)];
+			[folder setImage:iconImage];
+			
+			// Broadcast a notification since the folder image has now changed
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+			
+			// Log additional details about this.
+			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
+			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
+
+		} else {
+			NSString *tmp = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
+			LOG_EXPR(tmp);
+			ALog(@"Image Error!");
+		}
+		[iconImage release];
+	} else {
+		ALog(@"Unhandled error code: %d",[request responseStatusCode]);
+	}
+}
+
+// failure callback
+- (void)iconRequestFailed:(ASIHTTPRequest *)request
+{
+	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
+	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),[[request error] localizedDescription ]]];
 }
 
 - (void)syncFinishedForFolder:(Folder *)folder 
