@@ -31,6 +31,7 @@
 #import "Constants.h"
 #import "AppController.h"
 #import "ASIHTTPRequest.h"
+#import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
 
 // Singleton
@@ -166,19 +167,19 @@ typedef enum {
 
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
 	LLog(@"Queue empty!!!");
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 	LLog(@"Removed queue: %d", [networkQueue requestsCount]);
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 	LLog(@"Added queue: %d", [networkQueue requestsCount]);
 
 }
@@ -495,7 +496,7 @@ typedef enum {
 		[folder setNonPersistedFlag:MA_FFlag_Error];
 	else
 		[folder clearNonPersistedFlag:MA_FFlag_Error];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
 /* setFolderUpdatingFlag
@@ -508,7 +509,7 @@ typedef enum {
 		[folder setNonPersistedFlag:MA_FFlag_Updating];
 	else
 		[folder clearNonPersistedFlag:MA_FFlag_Updating];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
 /* pumpSubscriptionRefresh
@@ -644,7 +645,7 @@ typedef enum {
 			[folder setImage:iconImage];
 			
 			// Broadcast a notification since the folder image has now changed
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 			
 			// Log additional details about this.
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
@@ -679,7 +680,7 @@ typedef enum {
     
     [self setFolderUpdatingFlag:folder flag:NO];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
 /* folderRefreshCompleted
@@ -731,7 +732,7 @@ typedef enum {
 	{
 		// We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
 		[db setFolderFlag:folderId flagToSet:MA_FFlag_Unsubscribed];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	}
 	else if (responseStatusCode == 200)
 	{
@@ -976,7 +977,7 @@ typedef enum {
 
 			
 			// Let interested callers know that the folder has changed.
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 		}
         
 		// Mark the feed as succeeded

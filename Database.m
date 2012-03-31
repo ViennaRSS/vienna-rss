@@ -25,6 +25,7 @@
 #import "Constants.h"
 #import "ArticleRef.h"
 #import "SearchString.h"
+#import "NSNotificationAdditions.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
@@ -893,7 +894,7 @@ static Database * _sharedDatabase = nil;
 		}
 
 		// Send a notification when new folders are added
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderAdded" object:folder];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderAdded" object:folder];
 	}
 	return newItemId;
 }
@@ -1067,7 +1068,7 @@ static Database * _sharedDatabase = nil;
 	{
 		numFolder = [NSNumber numberWithInt:[folder itemId]];
 		[arrayOfFolderIds addObject:numFolder];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_WillDeleteFolder" object:numFolder];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_WillDeleteFolder" object:numFolder];
 	}
 
 	// Now do the deletion.
@@ -1078,7 +1079,7 @@ static Database * _sharedDatabase = nil;
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
 	for (numFolder in arrayOfFolderIds)
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderDeleted" object:numFolder];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDeleted" object:numFolder];
 	
 	return result;
 }
@@ -1110,7 +1111,7 @@ static Database * _sharedDatabase = nil;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the name is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderNameChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -1141,7 +1142,7 @@ static Database * _sharedDatabase = nil;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the description is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderDescriptionChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -1172,7 +1173,7 @@ static Database * _sharedDatabase = nil;
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderHomePageChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
@@ -1624,7 +1625,7 @@ static Database * _sharedDatabase = nil;
 		[self compactDatabase];
 		[trashFolder clearCache];
 
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
 	}
 	[results release];
 }
@@ -1747,7 +1748,7 @@ static Database * _sharedDatabase = nil;
 	[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	return YES;
 }
 
