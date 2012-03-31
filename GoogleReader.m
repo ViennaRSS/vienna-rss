@@ -128,8 +128,7 @@ JSONDecoder * jsonDecoder;
 	if ([request responseStatusCode] == 404) {
 		[aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
-		//TOFIX: Where is the error flag ?!?!?!?
-		[refreshedFolder setFlag:MA_FFlag_Error];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];		
 		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
@@ -275,7 +274,10 @@ JSONDecoder * jsonDecoder;
 		
 		[dict release];
 	} else {
-		ALog(@"Unhandled error code: %d",[request responseStatusCode]);
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 
