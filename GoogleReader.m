@@ -3,14 +3,25 @@
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011-2012 Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "GoogleReader.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
-//#import "SBJson.h"
 #import "GTMHTTPFetcher.h"
 #import "GTMHTTPFetcherLogging.h"
 #import "Folder.h"
@@ -50,7 +61,6 @@ enum GoogleReaderStatus {
 @synthesize actionTokenTimer;
 
 JSONDecoder * jsonDecoder;
-//SBJsonParser * jsonDecoder;
 
 -(BOOL)isReady
 {
@@ -65,12 +75,44 @@ JSONDecoder * jsonDecoder;
         // Initialization code here.
 		localFeeds = [[[NSMutableArray alloc] init] retain]; 
 		jsonDecoder = [[JSONDecoder decoder] retain];
-		//jsonDecoder =  [[[SBJsonParser alloc] init] retain];
 		googleReaderStatus = notAuthenticated;
 		[self authenticate];
+		countOfNewArticles = 0;
 	}
     
     return self;
+}
+
+/* countOfNewArticles
+ */
+-(NSUInteger)countOfNewArticles
+{
+	NSUInteger count = countOfNewArticles;
+	countOfNewArticles = 0;
+	return count;
+}
+
+// default handler for didFailSelector
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+	LLog(@"Failed on request");
+	LOG_EXPR([request originalURL]);
+	LOG_EXPR([request error]);
+	LOG_EXPR([request responseHeaders]);
+}
+
+// default handler for didFinishSelector
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+	LLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request originalURL] absoluteString]);
+	NSString *requestResponse = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
+	LOG_EXPR(requestResponse);
+	if (![requestResponse isEqualToString:@"OK"]) {
+		LLog(@"Error on request");
+		LOG_EXPR([request error]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([request requestHeaders]);
+	}
 }
 
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit
@@ -84,186 +126,175 @@ JSONDecoder * jsonDecoder;
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, token]];
 		
-	__block ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];
-	
-	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",nil]];
-	[request setCompletionBlock:^{
-		
-		ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
-		Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
-		LLog(@"Refresh Done: %@",[refreshedFolder feedURL]);
-
-		if ([request responseStatusCode] == 404) {
-			[aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
-			[aItem setStatus:NSLocalizedString(@"Error", nil)];
-			//TOFIX: Where is the error flag ?!?!?!?
-			[refreshedFolder setFlag:MA_FFlag_Error];
-		} else if ([request responseStatusCode] == 200) {
-			NSData *data = [request responseData];		
-			NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
-			
-			if ([dict objectForKey:@"updated"] == nil) {
-				LOG_EXPR([request url]);
-				NSLog(@"Feed name: %@",[dict objectForKey:@"title"]);
-				NSLog(@"Last Check: %@",folderLastUpdate);
-				NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
-				NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
-				LOG_EXPR(dict);
-				NSString *tmp = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-				LOG_EXPR(tmp);
-				ALog(@"Errore!!!!");
-			}
-		
-			// Log number of bytes we received
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
-						
-			NSMutableArray * articleArray = [NSMutableArray array];
-			NSMutableArray * articleGuidArray = [NSMutableArray array];
-			
-			for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
-				
-				NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
-				NSString * articleGuid = [newsItem objectForKey:@"id"];
-				[articleGuidArray addObject:articleGuid];
-				Article *article = [[Article alloc] initWithGuid:articleGuid];
-				[article setFolderId:[refreshedFolder itemId]];
-			
-				if ([newsItem objectForKey:@"author"] != nil) {
-					[article setAuthor:[newsItem objectForKey:@"author"]];
-				} else {
-					[article setAuthor:@""];
-				}
-			
-				if ([newsItem objectForKey:@"content"] != nil ) {
-					[article setBody:[[newsItem objectForKey:@"content"] objectForKey:@"content"]];
-				} else if ([newsItem objectForKey:@"summary"] != nil ) {
-					[article setBody:[[newsItem objectForKey:@"summary"] objectForKey:@"content"]];
-				} else {
-					[article setBody:@"Not available..."];
-				}
-				
-				for (NSString * category in (NSArray*)[newsItem objectForKey:@"categories"])
-				{
-					if ([category hasSuffix:@"/read"]) [article markRead:YES];
-					if ([category hasSuffix:@"starred"]) [article markFlagged:YES];
-					if ([category hasSuffix:@"/kept-unread"]) [article markRead:NO];
-				}
-					
-				if ([newsItem objectForKey:@"title"]!=nil) {	
-					[article setTitle:[newsItem objectForKey:@"title"]];
-				} else {
-					[article setTitle:@""];
-				}
-				
-				if ([newsItem objectForKey:@"alternate"] != nil) {
-					[article setLink:[[[newsItem objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
-				} else {
-					[article setLink:[refreshedFolder feedURL]];
-				}
-			
-				[article setDate:articleDate];
-
-				if ([newsItem objectForKey:@"enclosure"] != nil) {
-					[article setEnclosure:[[[newsItem objectForKey:@"enclosure"] objectAtIndex:0] objectForKey:@"href"]];
-				} else {
-					[article setEnclosure:@""];
-				}
-			
-				if ([[article enclosure] isNotEqualTo:@""])
-					{
-						[article setHasEnclosure:YES];
-					}
-
-				[articleArray addObject:article];
-				[article release];
-			}
-				
-			Database *db = [Database sharedDatabase];
-			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
-
-			NSInteger newArticlesFromFeed = 0;
-			// Here's where we add the articles to the database
-			if ([articleArray count] > 0)
-			{
-				NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
-					
-				[refreshedFolder clearCache];
-				// Should we wrap the entire loop or just individual article updates?
-                @synchronized(db) {
-					[db beginTransaction];
-					//BOOL hasCache = [db initArticleArray:refreshedFolder];
-						
-					for (Article * article in articleArray)
-					{
-						if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
-							[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
-						else
-							newArticlesFromFeed++;
-					}
-					
-					[db commitTransaction];
-				}
-			}
-								
-				// Let interested callers know that the folder has changed.
-				//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
-				//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
-			
-			// Mark the feed as succeeded
-			//[self setFolderErrorFlag:folder flag:NO];
-			
-			// Set the last update date for this folder.
-			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-			
-			AppController *controller = [NSApp delegate];
-			
-			// Unread count may have changed
-			[controller setStatusMessage:nil persist:NO];
-			[controller showUnreadCountOnApplicationIconAndWindowTitle];
-			[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-
-			
-			//[self setFolderUpdatingFlag:refreshedFolder flag:NO];
-			
-			
-		
-			// Send status to the activity log
-			if (newArticlesFromFeed == 0)
-				[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-			else
-				[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
-			
-			
-		// FIX: check when reload icons
-		//if ([folder flags] & MA_FFlag_CheckForImage)
-		//	[self refreshFavIcon:folder];
-			
-		// Add to count of new articles so far
-		//countOfNewArticles += newArticlesFromFeed;
-			
-			[dict release];
-		} else {
-			ALog(@"Unhandled error code: %d",[request responseStatusCode]);
-		}
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
-
-	}];
-	
-	[request setFailedBlock:^{
-		LOG_EXPR([request error]);
-	}];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
+	[request setDelegate:self];
+	[request setDidFinishSelector:@selector(feedRequestDone:)];
+	[request setDidFailSelector:@selector(feedRequestFailed:)];
+	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate",nil]];
 	
 	return request;
 }
 
-
--(void)requestFinished:(ASIHTTPRequest *)request
+// callback : handler for timed out feeds, etc...
+- (void)feedRequestFailed:(ASIHTTPRequest *)request
 {
-    NSLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request url] absoluteString]);
-	NSString *tmp = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
-	LOG_EXPR(tmp);
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
+	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+
+	[aItem appendDetail:NSLocalizedString(@"Error: %@", [request error])];
+	[aItem setStatus:NSLocalizedString(@"Error", nil)];
+	[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 }
 
+// callback
+- (void)feedRequestDone:(ASIHTTPRequest *)request
+{
+		
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
+	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+    NSString *folderLastUpdate = [[request userInfo] objectForKey:@"lastupdate"];
+	LLog(@"Refresh Done: %@",[refreshedFolder feedURL]);
+
+	if ([request responseStatusCode] == 404) {
+		[aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	} else if ([request responseStatusCode] == 200) {
+		NSData *data = [request responseData];		
+		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
+		
+		if ([dict objectForKey:@"updated"] == nil) {
+			LOG_EXPR([request url]);
+			NSLog(@"Feed name: %@",[dict objectForKey:@"title"]);
+			NSLog(@"Last Check: %@",folderLastUpdate);
+			NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
+			NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
+			LOG_EXPR(dict);
+			NSString *tmp = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+			LOG_EXPR(tmp);
+			ALog(@"Error !!! Incoherent data !");
+		}
+	
+		// Log number of bytes we received
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
+					
+		NSMutableArray * articleArray = [NSMutableArray array];
+		NSMutableArray * articleGuidArray = [NSMutableArray array];
+		
+		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
+			
+			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
+			NSString * articleGuid = [newsItem objectForKey:@"id"];
+			[articleGuidArray addObject:articleGuid];
+			Article *article = [[Article alloc] initWithGuid:articleGuid];
+			[article setFolderId:[refreshedFolder itemId]];
+		
+			if ([newsItem objectForKey:@"author"] != nil) {
+				[article setAuthor:[newsItem objectForKey:@"author"]];
+			} else {
+				[article setAuthor:@""];
+			}
+		
+			if ([newsItem objectForKey:@"content"] != nil ) {
+				[article setBody:[[newsItem objectForKey:@"content"] objectForKey:@"content"]];
+			} else if ([newsItem objectForKey:@"summary"] != nil ) {
+				[article setBody:[[newsItem objectForKey:@"summary"] objectForKey:@"content"]];
+			} else {
+				[article setBody:@"Not available..."];
+			}
+			
+			for (NSString * category in (NSArray*)[newsItem objectForKey:@"categories"])
+			{
+				if ([category hasSuffix:@"/read"]) [article markRead:YES];
+				if ([category hasSuffix:@"starred"]) [article markFlagged:YES];
+				if ([category hasSuffix:@"/kept-unread"]) [article markRead:NO];
+			}
+				
+			if ([newsItem objectForKey:@"title"]!=nil) {	
+				[article setTitle:[newsItem objectForKey:@"title"]];
+			} else {
+				[article setTitle:@""];
+			}
+			
+			if ([newsItem objectForKey:@"alternate"] != nil) {
+				[article setLink:[[[newsItem objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
+			} else {
+				[article setLink:[refreshedFolder feedURL]];
+			}
+		
+			[article setDate:articleDate];
+
+			if ([newsItem objectForKey:@"enclosure"] != nil) {
+				[article setEnclosure:[[[newsItem objectForKey:@"enclosure"] objectAtIndex:0] objectForKey:@"href"]];
+			} else {
+				[article setEnclosure:@""];
+			}
+		
+			if ([[article enclosure] isNotEqualTo:@""])
+				{
+					[article setHasEnclosure:YES];
+				}
+
+			[articleArray addObject:article];
+			[article release];
+		}
+			
+		Database *db = [Database sharedDatabase];
+		NSInteger newArticlesFromFeed = 0;
+		@synchronized(db){
+			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
+
+			// Here's where we add the articles to the database
+			if ([articleArray count] > 0)
+			{
+				NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
+
+				[refreshedFolder clearCache];
+				// Should we wrap the entire loop or just individual article updates?
+				[db beginTransaction];
+				//BOOL hasCache = [db initArticleArray:refreshedFolder];
+					
+				for (Article * article in articleArray)
+				{
+					if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
+						[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
+					else
+						newArticlesFromFeed++;
+				}
+				
+				[db commitTransaction];
+			}
+							
+			// Set the last update date for this folder.
+			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+		} //@synchronized
+		
+		// Add to count of new articles so far
+		countOfNewArticles += newArticlesFromFeed;
+
+		AppController *controller = [NSApp delegate];
+		
+		// Unread count may have changed
+		[controller setStatusMessage:nil persist:NO];
+		[controller showUnreadCountOnApplicationIconAndWindowTitle];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+
+		// Send status to the activity log
+		if (newArticlesFromFeed == 0)
+			[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+		else
+			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
+		
+		[dict release];
+	} else {
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	}
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
+
+}
 
 -(void)refreshGoogleAccessToken:(NSTimer*)timer
 {
@@ -271,7 +302,6 @@ JSONDecoder * jsonDecoder;
 	googleReaderStatus = isAuthenticated;
 	LLog([self getGoogleOAuthToken]);
 }
-
 
 
 -(void)refreshGoogleActionToken:(NSTimer*)timer
@@ -316,7 +346,6 @@ JSONDecoder * jsonDecoder;
 			//let expire in 25 mins instead of 30
 			if (actionTokenTimer == nil || ![actionTokenTimer isValid]) {
 				actionTokenTimer = [NSTimer scheduledTimerWithTimeInterval:1500 target:self selector:@selector(refreshGoogleActionToken:) userInfo:nil repeats:YES];
-				//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
 			}
 			return actionToken;
 		}
@@ -370,11 +399,9 @@ JSONDecoder * jsonDecoder;
 			NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
 			[token release];
 			token = [[dict objectForKey:@"access_token"] retain];
-			//LOG_EXPR(token);
 
 			if (tokenTimer == nil || ![tokenTimer isValid]) {
 				tokenTimer = [NSTimer scheduledTimerWithTimeInterval:[[dict objectForKey:@"expires_in"] intValue] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
-				//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
 			}
 			
 			return token;
@@ -465,82 +492,77 @@ JSONDecoder * jsonDecoder;
 }                
 
 
-
--(void)completeLoadSubscriptions {
+-(void)submitLoadSubscriptions {
 	
-	LLog(@"START");	
 	[[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 
 
-	__block ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=scroll&output=json&access_token=%@",token]]];
-		
-	[subscriptionRequest setFailedBlock:^{
-		LLog(@"Error on subscriptionRequest");
-		LOG_EXPR([subscriptionRequest error]);
-		LOG_EXPR([subscriptionRequest responseHeaders]);
-	}];
-		
-	[subscriptionRequest setCompletionBlock:^{
-		LLog(@"Finish subscriptionRequest");
-		self.readerUser = [[subscriptionRequest responseHeaders] objectForKey:@"X-Reader-User"];
-
-		
-		NSDictionary * dict = [jsonDecoder objectWithData:[subscriptionRequest responseData]];
-				
-		[localFeeds removeAllObjects];
-		
-		for (Folder * f in [[NSApp delegate] folders]) {
-			if ([f feedURL]) {
-				[localFeeds addObject:[f feedURL]];
-			}
-		}
-				
-		for (NSDictionary * feed in [dict objectForKey:@"subscriptions"]) 
-		{
-			LOG_EXPR(feed);
-			NSString * feedID = [feed objectForKey:@"id"];
-			NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-			
-			NSString * folderName = nil;
-			
-			NSArray * categories = [feed objectForKey:@"categories"];
-			for (NSDictionary * category in categories)
-			{
-				if ([category objectForKey:@"label"])
-				{
-					NSString * label = [category objectForKey:@"label"];
-					NSArray * folderNames = [label componentsSeparatedByString:@" — "];  
-					folderName = [folderNames lastObject];
-					// NNW nested folder char: — 
-					
-					NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInt:MA_Root_Folder], nil];                
-					[self performSelectorOnMainThread:@selector(createFolders:) withObject:params waitUntilDone:YES];
-					break; //In case of multiple labels, we retain only the first one
-				} 
-			}
-			
-			if (![localFeeds containsObject:feedURL])
-			{
-				NSString *rssTitle = nil;
-				if ([feed objectForKey:@"title"]) {
-					rssTitle = [feed objectForKey:@"title"];
-				}
-				NSArray * params = [NSArray arrayWithObjects:feedURL, rssTitle, folderName, nil];
-				[self performSelectorOnMainThread:@selector(createNewSubscription:) withObject:params waitUntilDone:YES];
-			}
-		}
-		
-		AppController *controller = [NSApp delegate];
-		
-		// Unread count may have changed
-		[controller setStatusMessage:nil persist:NO];
-		
-		
-	}];
+	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=scroll&output=json&access_token=%@",token]]];
+	[subscriptionRequest setDelegate:self];
+	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
 	LLog(@"Starting subscriptionRequest");
 	LOG_EXPR(subscriptionRequest);
 	[subscriptionRequest startAsynchronous];		
-	LLog(@"END");	
+	LLog(@"subscriptionRequest submitted");	
+}
+
+-(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
+{
+	LLog(@"Ending subscriptionRequest");
+	self.readerUser = [[request responseHeaders] objectForKey:@"X-Reader-User"];
+
+	
+	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];
+			
+	[localFeeds removeAllObjects];
+	
+	for (Folder * f in [[NSApp delegate] folders]) {
+		if ([f feedURL]) {
+			[localFeeds addObject:[f feedURL]];
+		}
+	}
+			
+	for (NSDictionary * feed in [dict objectForKey:@"subscriptions"]) 
+	{
+		LOG_EXPR(feed);
+		NSString * feedID = [feed objectForKey:@"id"];
+		NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
+		
+		NSString * folderName = nil;
+		
+		NSArray * categories = [feed objectForKey:@"categories"];
+		for (NSDictionary * category in categories)
+		{
+			if ([category objectForKey:@"label"])
+			{
+				NSString * label = [category objectForKey:@"label"];
+				NSArray * folderNames = [label componentsSeparatedByString:@" — "];  
+				folderName = [folderNames lastObject];
+				// NNW nested folder char: — 
+				
+				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInt:MA_Root_Folder], nil];                
+				[self performSelectorOnMainThread:@selector(createFolders:) withObject:params waitUntilDone:YES];
+				break; //In case of multiple labels, we retain only the first one
+			} 
+		}
+		
+		if (![localFeeds containsObject:feedURL])
+		{
+			NSString *rssTitle = nil;
+			if ([feed objectForKey:@"title"]) {
+				rssTitle = [feed objectForKey:@"title"];
+			}
+			NSArray * params = [NSArray arrayWithObjects:feedURL, rssTitle, folderName, nil];
+			[self performSelectorOnMainThread:@selector(createNewSubscription:) withObject:params waitUntilDone:YES];
+		}
+	}
+	
+	AppController *controller = [NSApp delegate];
+	
+	// Unread count may have changed
+	[controller setStatusMessage:nil persist:NO];
+	
+	
 }
 
 -(void)loadSubscriptions:(NSNotification *)nc
@@ -548,13 +570,13 @@ JSONDecoder * jsonDecoder;
 	if (nc != nil) {
 		LLog(@"Firing after notification");
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:@"GRSync_Autheticated" object:nil];		
-		[self performSelectorOnMainThread:@selector(completeLoadSubscriptions) withObject:nil waitUntilDone:YES];
+		[self performSelectorOnMainThread:@selector(submitLoadSubscriptions) withObject:nil waitUntilDone:YES];
 	} else {
 		LLog(@"Firing directly");
 
 		if ([self isReady]) {
 			LLog(@"Token available, finish subscription");
-			[self performSelectorOnMainThread:@selector(completeLoadSubscriptions) withObject:nil waitUntilDone:YES];
+			[self performSelectorOnMainThread:@selector(submitLoadSubscriptions) withObject:nil waitUntilDone:YES];
 		} else {
 			LLog(@"Token not available, registering for notification");
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSubscriptions:) name:@"GRSync_Autheticated" object:nil];
@@ -579,24 +601,11 @@ JSONDecoder * jsonDecoder;
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
 {
 	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/edit?access_token=%@",token]];
-	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
-	[myRequest setFailedBlock:^{
-		LOG_EXPR([myRequest error]);
-		LOG_EXPR([myRequest responseHeaders]);
-	}];
+	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
 	[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
 	[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
 
-	[myRequest setCompletionBlock:^{
-		NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
-		LOG_EXPR(requestResponse);
-		if (![requestResponse isEqualToString:@"OK"]) {
-			LOG_EXPR([myRequest responseHeaders]);
-			LOG_EXPR([myRequest requestHeaders]);
-			LOG_EXPR([myRequest error]);
-		}
-	}];
 	[myRequest startAsynchronous];		
 }
 
@@ -632,106 +641,64 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
-	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
-		[myRequest setFailedBlock:^{
-			LOG_EXPR([myRequest error]);
-			LOG_EXPR([myRequest responseHeaders]);
-		}];
-		if (flag) {
-			[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"a"];	
-			[myRequest setPostValue:@"true" forKey:@"async"];
-			[myRequest setPostValue:itemGuid forKey:@"i"];
-			[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
+	if (flag) {
+		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"a"];	
 
-			[myRequest setCompletionBlock:^{
-				NSString *tmp = [[[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding] autorelease];
-				LOG_EXPR(tmp);
-				NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
-				if (![requestResponse isEqualToString:@"OK"]) {
-					LOG_EXPR([myRequest responseHeaders]);
-					LOG_EXPR([myRequest requestHeaders]);
-					LOG_EXPR([myRequest error]);
-				}
-			}];
-		} else {
-			[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/kept-unread",readerUser] forKey:@"a"];			
-			[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"r"];			
-			[myRequest setPostValue:@"true" forKey:@"async"];
-			[myRequest setPostValue:itemGuid forKey:@"i"];
-			[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
-			
-			[myRequest setCompletionBlock:^{
-				NSString *tmp = [[[NSString alloc] initWithData:[myRequest postBody] encoding:NSUTF8StringEncoding] autorelease];
-				LOG_EXPR(tmp);
-				NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
-				LOG_EXPR(requestResponse);
-				if (![requestResponse isEqualToString:@"OK"]) {
-					LOG_EXPR([myRequest responseHeaders]);
-					LOG_EXPR([myRequest requestHeaders]);
-					LOG_EXPR([myRequest error]);
-				}
-				__block ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
-				[request1 setPostValue:@"true" forKey:@"async"];
-				[request1 setPostValue:itemGuid forKey:@"i"];
-				[request1 setPostValue:[self getGoogleActionToken] forKey:@"T"];
-				[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
-				[request1 setCompletionBlock:^{
-					NSString *requestResponse = [[[NSString alloc] initWithData:[request1 responseData] encoding:NSUTF8StringEncoding] autorelease];
-					LOG_EXPR(requestResponse);
-					if (![requestResponse isEqualToString:@"OK"]) {
-						LOG_EXPR([request1 responseHeaders]);
-						LOG_EXPR([request1 requestHeaders]);
-						LOG_EXPR([request1 error]);
-					}
-				}];
-				[request1 setFailedBlock:^{
-					LOG_EXPR([request1 error]);
-					LOG_EXPR([request1 responseHeaders]);
-				}];
-				[request1 startAsynchronous];
-			}];
-		}
-		[myRequest startAsynchronous];
+	} else {
+		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/kept-unread",readerUser] forKey:@"a"];			
+		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"r"];
+		[myRequest setDelegate:self];
+		[myRequest setDidFinishSelector:@selector(keptUnreadDone:)];
+        [myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:itemGuid, @"guid", nil]];
+	}
+	[myRequest setPostValue:@"true" forKey:@"async"];
+	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+	[myRequest startAsynchronous];
 }
+
+// callback
+- (void)keptUnreadDone:(ASIFormDataRequest *)request
+{
+	NSString *requestResponse = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
+	LOG_EXPR(requestResponse);
+	if (![requestResponse isEqualToString:@"OK"]) {
+		LLog(@"Error on request");
+		LOG_EXPR([request error]);
+		LOG_EXPR([request originalURL]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([request requestHeaders]);
+	}
+
+	LLog(token);
+	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
+    NSString *itemGuid = [[request userInfo] objectForKey:@"guid"];
+	ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
+	[request1 setPostValue:@"true" forKey:@"async"];
+	[request1 setPostValue:itemGuid forKey:@"i"];
+	[request1 setPostValue:[self getGoogleActionToken] forKey:@"T"];
+	[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
+	[request1 startAsynchronous];
+}
+
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
-	__block ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
-	[myRequest setFailedBlock:^{
-		LOG_EXPR([myRequest error]);
-		LOG_EXPR([myRequest responseHeaders]);
-	}];
+	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	if (flag) {
 		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/starred",readerUser] forKey:@"a"];	
 		[myRequest setPostValue:@"true" forKey:@"async"];
 		[myRequest setPostValue:itemGuid forKey:@"i"];
 		[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 			
-		[myRequest setCompletionBlock:^{
-			NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
-			LOG_EXPR(requestResponse);
-			if (![requestResponse isEqualToString:@"OK"]) {
-				LOG_EXPR([myRequest responseHeaders]);
-				LOG_EXPR([myRequest requestHeaders]);
-				LOG_EXPR([myRequest error]);
-			}
-		}];
 	} else {
 		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/starred",readerUser] forKey:@"r"];			
 		[myRequest setPostValue:@"true" forKey:@"async"];
 		[myRequest setPostValue:itemGuid forKey:@"i"];
 		[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 			
-		[myRequest setCompletionBlock:^{
-			NSString *requestResponse = [[[NSString alloc] initWithData:[myRequest responseData] encoding:NSUTF8StringEncoding] autorelease];
-			LOG_EXPR(requestResponse);
-			if (![requestResponse isEqualToString:@"OK"]) {
-				LOG_EXPR([myRequest responseHeaders]);
-				LOG_EXPR([myRequest requestHeaders]);
-				LOG_EXPR([myRequest error]);
-			}
-		}];
 	}
 	[myRequest startAsynchronous];
 }
@@ -761,18 +728,6 @@ JSONDecoder * jsonDecoder;
     NSLog(@"Rename tag response status code: %d", [request responseStatusCode]);
 }
 
-/*
--(BOOL)subscribingTo:(NSString *)feedURL 
-{
-    NSString * targetID = [NSString stringWithFormat:@"feed/%@", feedURL];
-    for (NSDictionary * feed in [self subscriptions]) 
-    {
-        NSString * feedID = [feed objectForKey:@"id"];
-        if ([feedID rangeOfString:targetID].location != NSNotFound) return YES;
-    }
-    return NO;
-}
-*/
 
 -(void)dealloc 
 {

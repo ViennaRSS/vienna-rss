@@ -37,6 +37,7 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F13415276935008AF863 /* NSNotificationAdditions.m */; };
 		3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
@@ -699,6 +700,8 @@
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClickableProgressIndicator.m; sourceTree = "<group>"; };
 		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = MainMenu.nib; sourceTree = "<group>"; };
+		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
+		3A23F13415276935008AF863 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
@@ -1449,6 +1452,8 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
+				3A23F13415276935008AF863 /* NSNotificationAdditions.m */,
 				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
 				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
 				B2224771112F041E008579B0 /* SearchMethod.h */,
@@ -3494,6 +3499,7 @@
 				EA783A5514C62BB1008E7A87 /* SBJsonWriter.m in Sources */,
 				B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */,
 				EA6D3E5F14D82E71004DCB80 /* Debug.m in Sources */,
+				3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4033,7 +4039,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
-				VIENNA_VERSION_NUMBER = 2803;
+				VIENNA_VERSION_NUMBER = 2804;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -4061,7 +4067,7 @@
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
-				VIENNA_VERSION_NUMBER = 2803;
+				VIENNA_VERSION_NUMBER = 2804;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
