@@ -77,11 +77,20 @@ JSONDecoder * jsonDecoder;
 		jsonDecoder = [[JSONDecoder decoder] retain];
 		googleReaderStatus = notAuthenticated;
 		[self authenticate];
+		countOfNewArticles = 0;
 	}
     
     return self;
 }
 
+/* countOfNewArticles
+ */
+-(NSUInteger)countOfNewArticles
+{
+	NSUInteger count = countOfNewArticles;
+	countOfNewArticles = 0;
+	return count;
+}
 
 // default handler for didFailSelector
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -260,6 +269,9 @@ JSONDecoder * jsonDecoder;
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
 		} //@synchronized
 		
+		// Add to count of new articles so far
+		countOfNewArticles += newArticlesFromFeed;
+
 		AppController *controller = [NSApp delegate];
 		
 		// Unread count may have changed

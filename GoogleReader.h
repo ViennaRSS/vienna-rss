@@ -24,6 +24,7 @@
 	NSString * readerUser;
 	NSTimer * tokenTimer;
 	NSTimer * actionTokenTimer;
+	NSUInteger countOfNewArticles;
 }
 
 @property (nonatomic, copy) NSArray * readingList;
@@ -55,5 +56,6 @@
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
 -(NSString *)getGoogleOAuthToken;
 -(NSString *)getGoogleActionToken;
+-(NSUInteger)countOfNewArticles;
 
 @end

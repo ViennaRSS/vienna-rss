@@ -2454,7 +2454,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[articleController refreshCurrentFolder];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
-		int newUnread = [[RefreshManager sharedManager] countOfNewArticles];
+		int newUnread = [[RefreshManager sharedManager] countOfNewArticles] + [[GoogleReader sharedManager] countOfNewArticles];
 		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce)
 			[NSApp requestUserAttention:NSInformationalRequest];
 		
