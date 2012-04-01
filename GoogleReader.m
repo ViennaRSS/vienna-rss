@@ -3,14 +3,25 @@
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011-2012 Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "GoogleReader.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
-//#import "SBJson.h"
 #import "GTMHTTPFetcher.h"
 #import "GTMHTTPFetcherLogging.h"
 #import "Folder.h"
@@ -50,7 +61,6 @@ enum GoogleReaderStatus {
 @synthesize actionTokenTimer;
 
 JSONDecoder * jsonDecoder;
-//SBJsonParser * jsonDecoder;
 
 -(BOOL)isReady
 {
@@ -65,7 +75,6 @@ JSONDecoder * jsonDecoder;
         // Initialization code here.
 		localFeeds = [[[NSMutableArray alloc] init] retain]; 
 		jsonDecoder = [[JSONDecoder decoder] retain];
-		//jsonDecoder =  [[[SBJsonParser alloc] init] retain];
 		googleReaderStatus = notAuthenticated;
 		[self authenticate];
 	}
@@ -247,13 +256,6 @@ JSONDecoder * jsonDecoder;
 				[db commitTransaction];
 			}
 							
-			// Let interested callers know that the folder has changed.
-			//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
-			//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
-		
-			// Mark the feed as succeeded
-			//[self setFolderErrorFlag:folder flag:NO];
-
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
 		} //@synchronized
@@ -265,24 +267,11 @@ JSONDecoder * jsonDecoder;
 		[controller showUnreadCountOnApplicationIconAndWindowTitle];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 
-		
-		//[self setFolderUpdatingFlag:refreshedFolder flag:NO];
-		
-		
-	
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
 			[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
 		else
 			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
-		
-		
-	// FIX: check when reload icons
-	//if ([folder flags] & MA_FFlag_CheckForImage)
-	//	[self refreshFavIcon:folder];
-		
-	// Add to count of new articles so far
-	//countOfNewArticles += newArticlesFromFeed;
 		
 		[dict release];
 	} else {
@@ -301,7 +290,6 @@ JSONDecoder * jsonDecoder;
 	googleReaderStatus = isAuthenticated;
 	LLog([self getGoogleOAuthToken]);
 }
-
 
 
 -(void)refreshGoogleActionToken:(NSTimer*)timer
@@ -346,7 +334,6 @@ JSONDecoder * jsonDecoder;
 			//let expire in 25 mins instead of 30
 			if (actionTokenTimer == nil || ![actionTokenTimer isValid]) {
 				actionTokenTimer = [NSTimer scheduledTimerWithTimeInterval:1500 target:self selector:@selector(refreshGoogleActionToken:) userInfo:nil repeats:YES];
-				//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
 			}
 			return actionToken;
 		}
@@ -400,11 +387,9 @@ JSONDecoder * jsonDecoder;
 			NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
 			[token release];
 			token = [[dict objectForKey:@"access_token"] retain];
-			//LOG_EXPR(token);
 
 			if (tokenTimer == nil || ![tokenTimer isValid]) {
 				tokenTimer = [NSTimer scheduledTimerWithTimeInterval:[[dict objectForKey:@"expires_in"] intValue] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
-				//tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
 			}
 			
 			return token;
@@ -731,18 +716,6 @@ JSONDecoder * jsonDecoder;
     NSLog(@"Rename tag response status code: %d", [request responseStatusCode]);
 }
 
-/*
--(BOOL)subscribingTo:(NSString *)feedURL 
-{
-    NSString * targetID = [NSString stringWithFormat:@"feed/%@", feedURL];
-    for (NSDictionary * feed in [self subscriptions]) 
-    {
-        NSString * feedID = [feed objectForKey:@"id"];
-        if ([feedID rangeOfString:targetID].location != NSNotFound) return YES;
-    }
-    return NO;
-}
-*/
 
 -(void)dealloc 
 {

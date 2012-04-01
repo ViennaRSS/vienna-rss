@@ -44,7 +44,6 @@
 -(void)loadReadingList;
 -(void)authenticate;
 
--(BOOL)subscribingTo:(NSString *)feedURL;
 -(void)subscribeToFeed:(NSString *)feedURL;
 -(void)unsubscribeFromFeed:(NSString *)feedURL;
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag;

@@ -146,7 +146,6 @@ typedef enum {
 		countOfNewArticles = 0;
 		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		authQueue = [[NSMutableArray alloc] init];
-		//hasStarted = NO;
 		statusMessageDuringRefresh = nil;
 		networkQueue = [[ASINetworkQueue alloc] init];
 		[networkQueue setShouldCancelAllRequestsOnFailure:NO];
@@ -222,24 +221,10 @@ typedef enum {
 		}
         for (ASIHTTPRequest *theRequest in [networkQueue operations]) {
 			if ([[theRequest userInfo] objectForKey:@"folder"] == folder) {
-				//				[theRequest clearDelegatesAndCancel];
 				[self removeConnection:theRequest];
 				break;
 			}
 		}
-/*
-		index = [connectionsArray count];
-		while (--index >= 0)
-		{
-			AsyncConnection * conn = [connectionsArray objectAtIndex:index];
-			if ([conn contextData] == folder)
-			{
-				[conn cancel];
-				[self removeConnection:conn];
-				break;
-			}
-		}
- */
 	}
 }
 
@@ -404,18 +389,6 @@ typedef enum {
  */
 -(void)cancelAll
 {
-	//[refreshArray removeAllObjects];
-	
-	// We don't know whether to remove the connections from the array, because some might already be complete.
-	// Let the cancel method take care of that.
-	// Don't cancel until we've enumerated the whole array, however,
-	// because it can have the side effect of changing the array.
-	/*
-	for (AsyncConnection * connection in connectionsArray)
-	{
-		[connection performSelector:@selector(cancel) withObject:nil afterDelay:0.0];
-	}
-	 */
 	[networkQueue cancelAllOperations];
 }
 
@@ -552,11 +525,10 @@ typedef enum {
 	// through the database.
 	[self setFolderUpdatingFlag:folder flag:YES];
 	
+	// Additional detail for the log
 	if (IsGoogleReaderFolder(folder)) {
-		// Additional detail for the log
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Google Reader to retrieve %@", nil), urlString]];
 	} else {
-		// Additional detail for the log
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
 	}
 	
@@ -762,31 +734,9 @@ typedef enum {
 	NSURL *url = [parameters objectForKey:@"url"];
 	NSData * receivedData = [parameters objectForKey:@"data"];
 	NSString * lastModifiedString = [parameters objectForKey:@"lastModifiedString"];
-
     
-	//[self setFolderUpdatingFlag:folder flag:NO];
-	// I Think this should be handled directly!
-	/*
-	if ([connector status] == MA_Connect_NeedCredentials)
-	{
-		if (![authQueue containsObject:folder])
-			[authQueue addObject:folder];
-		[self getCredentialsForFolder];
-	}
-	*/
-	// MA_Connect_PermanentRedirect)
-	
-	/*
-	else if ([connector status] == MA_Connect_Failed)
-	{
-		// Mark the feed as failed
-		[self setFolderErrorFlag:folder flag:YES];
-	}
-	 */
-	//else if ([connector status] == MA_Connect_Succeeded)
-        
-		// Check whether this is an HTML redirect. If so, create a new connection using
-		// the redirect.
+	// Check whether this is an HTML redirect. If so, create a new connection using
+	// the redirect.
 	
 	NSString * redirectURL = [self getRedirectURL:receivedData];
 	
@@ -796,14 +746,11 @@ typedef enum {
 			if ([redirectURL isEqualToString:[url absoluteString]])
 			{
 				// To prevent an infinite loop, don't redirect to the same URL.
-				//[[connector aItem] appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [connector URLString]]];
 				[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [url absoluteString]]];
 			}
 			else
 			{
 				[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
-				//FIX WE Really Need this ????
-				//[self removeConnection:connector];
 				[pool drain];
 				return;
 			}
@@ -845,8 +792,6 @@ typedef enum {
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
 				[newFeed release];
-				//FIX WE Really Need this ????
-				//[self removeConnection:connector];
 				[pool drain];
 				return;
 			}
@@ -1011,7 +956,6 @@ typedef enum {
     	// Unread count may have changed
     	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
 
-	//[self removeConnection:connector];
 	[pool drain];
 }
 
@@ -1113,8 +1057,6 @@ typedef enum {
 		if ([networkQueue requestsCount] == 1) // networkQueue is NOT YET started
 		{
 			countOfNewArticles = 0;
-			//[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-			//hasStarted = YES;
 			[networkQueue go];
 		}
 	}
@@ -1133,15 +1075,6 @@ typedef enum {
 		[conn clearDelegatesAndCancel];
 	}
 	
-	/*
-	NSAssert([connectionsArray count] > 0, @"Calling removeConnection with zero active connection count");
-	if ([connectionsArray containsObject:conn])
-	{
-		// Close the connection before we release as otherwise it leaks
-		[conn close];
-		[connectionsArray removeObject:conn];
-	}
-	 */
 }
 
 -(BOOL)isConnecting
