@@ -111,9 +111,21 @@ JSONDecoder * jsonDecoder;
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(feedRequestDone:)];
+	[request setDidFailSelector:@selector(feedRequestFailed:)];
 	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate",nil]];
 	
 	return request;
+}
+
+// callback : handler for timed out feeds, etc...
+- (void)feedRequestFailed:(ASIHTTPRequest *)request
+{
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
+	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+
+	[aItem appendDetail:NSLocalizedString(@"Error: %@", [request error])];
+	[aItem setStatus:NSLocalizedString(@"Error", nil)];
+	[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 }
 
 // callback
