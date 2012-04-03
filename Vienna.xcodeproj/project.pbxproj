@@ -40,6 +40,8 @@
 		3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F13415276935008AF863 /* NSNotificationAdditions.m */; };
 		3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
+		3AFC9FF0152B7AF2004B0537 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3AFC9FF1152B7B03004B0537 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
@@ -704,6 +706,7 @@
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationAdditions.h; sourceTree = "<group>"; };
 		3A23F13415276935008AF863 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -1365,6 +1368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AFC9FF0152B7AF2004B0537 /* libSystem.B.dylib in Frameworks */,
 				3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */,
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				AA62D7DC0859A9F70040C370 /* Growl.framework in Frameworks */,
@@ -1382,6 +1386,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AFC9FF1152B7B03004B0537 /* libSystem.B.dylib in Frameworks */,
 				3ABA673614C7545900251925 /* libz.dylib in Frameworks */,
 				EAE98ECA14BEFBD700D6A3DC /* Cocoa.framework in Frameworks */,
 				EAE98ECB14BEFBD700D6A3DC /* Growl.framework in Frameworks */,
@@ -1401,6 +1406,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */,
 				3ABA673414C7536D00251925 /* libz.dylib */,
 				EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */,
 				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
