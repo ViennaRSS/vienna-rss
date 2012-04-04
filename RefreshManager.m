@@ -920,15 +920,11 @@ typedef enum {
 				
 			};
 
-			
+			// Mark the feed as succeeded
+			[self setFolderErrorFlag:folder flag:NO];
+
 			// Let interested callers know that the folder has changed.
 			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-		}
-        
-		// Mark the feed as succeeded
-		[self setFolderErrorFlag:folder flag:NO];
-	
-		@synchronized(db){
 
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
