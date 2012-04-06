@@ -358,11 +358,11 @@ static RefreshManager * _refreshManager = nil;
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
 {
-	//FIX We need to handle check without refreshArray
-	for (RefreshItem * item in refreshArray)
-	{
-		if ([item folder] == folder && [item type] == type)
-			return YES;
+    for (ASIHTTPRequest *theRequest in [networkQueue operations])
+    {
+		if (([[theRequest userInfo] objectForKey:@"folder"] == folder) && ([[[theRequest userInfo] valueForKey:@"type"] intValue] == [[NSNumber numberWithInt:type] intValue]))
+            return YES;
+
 	}
 	return NO;
 }
