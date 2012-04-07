@@ -56,74 +56,6 @@ static RefreshManager * _refreshManager = nil;
 - (void)syncFinishedForFolder:(Folder *)folder; 
 @end
 
-// Single refresh item type
-@interface RefreshItem : NSObject {
-	Folder * folder;
-	RefreshTypes type;
-}
-
-// Accessor functions
--(void)setFolder:(Folder *)newFolder;
--(void)setType:(RefreshTypes)newType;
--(Folder *)folder;
--(RefreshTypes)type;
-@end
-
-@implementation RefreshItem
-
-/* init
- * Initialises an empty RefreshItem with default values.
- */
--(id)init
-{
-	if ((self = [super init]) != nil)
-	{
-		[self setFolder:nil];
-		[self setType:MA_Refresh_NilType];
-	}
-	return self;
-}
-
-/* setFolder
- */
--(void)setFolder:(Folder *)newFolder
-{
-	[newFolder retain];
-	[folder release];
-	folder = newFolder;
-}
-
-/* folder
- */
--(Folder *)folder
-{
-	return folder;
-}
-
-/* setType
- */
--(void)setType:(RefreshTypes)newType
-{
-	type = newType;
-}
-
-/* type
- */
--(RefreshTypes)type
-{
-	return type;
-}
-
-/* dealloc
- * Clean up behind ourselves.
- */
--(void)dealloc
-{
-	[folder release];
-	[super dealloc];
-}
-@end
-
 @implementation RefreshManager
 
 /* init
@@ -135,7 +67,6 @@ static RefreshManager * _refreshManager = nil;
 	{
 		maximumConnections = [[Preferences standardPreferences] integerForKey:MAPref_RefreshThreads];
 		countOfNewArticles = 0;
-		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		authQueue = [[NSMutableArray alloc] init];
 		statusMessageDuringRefresh = nil;
 		networkQueue = [[ASINetworkQueue alloc] init];
@@ -203,13 +134,6 @@ static RefreshManager * _refreshManager = nil;
 	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
 	if (folder != nil)
 	{
-		NSInteger index = [refreshArray count];
-		while (--index >= 0)
-		{
-			RefreshItem * item = [refreshArray objectAtIndex:index];
-			if ([item folder] == folder)
-				[refreshArray removeObjectAtIndex:index];
-		}
         for (ASIHTTPRequest *theRequest in [networkQueue operations]) {
 			if ([[theRequest userInfo] objectForKey:@"folder"] == folder) {
 				[self removeConnection:theRequest];
@@ -237,7 +161,7 @@ static RefreshManager * _refreshManager = nil;
 }
 
 /* refreshSubscriptions
- * Add the folders specified in the foldersArray to the refreshArray.
+ * Add the folders specified in the foldersArray to the refresh queue.
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {        
@@ -307,7 +231,7 @@ static RefreshManager * _refreshManager = nil;
 }
 
 /* refreshFolderIconCacheForSubscriptions
- * Add the folders specified in the foldersArray to the refreshArray.
+ * Add the folders specified in the foldersArray to the refresh queue.
  */
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray
 {
@@ -325,7 +249,7 @@ static RefreshManager * _refreshManager = nil;
 }
 
 /* refreshFavIcon
- * Adds the specified folder to the refreshArray.
+ * Adds the specified folder to the refresh queue.
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
@@ -353,7 +277,7 @@ static RefreshManager * _refreshManager = nil;
 }
 
 /* isRefreshingFolder
- * Returns whether refreshArray has an queue refresh for the specified folder
+ * Returns whether refresh queue has a queue item for the specified folder
  * and refresh type.
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
@@ -477,7 +401,7 @@ static RefreshManager * _refreshManager = nil;
 }
 
 /* pumpSubscriptionRefresh
- * Pick the folder at the head of the refresh array and spawn a connection to
+ * Pick the folder at the head of the refresh queue and spawn a connection to
  * refresh that folder.
  */
 -(void)pumpSubscriptionRefresh:(Folder *)folder shouldForceRefresh:(BOOL)force
@@ -1080,7 +1004,6 @@ static RefreshManager * _refreshManager = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pumpTimer release];
 	[authQueue release];
-	[refreshArray release];
 	[networkQueue release];
 	[super dealloc];
 }
