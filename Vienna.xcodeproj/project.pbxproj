@@ -287,6 +287,7 @@
 		B2C9673C106CD02B0056669A /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
 		B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 		D98F86E9115FCC7A00688018 /* ProgressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D98F86E8115FCC7A00688018 /* ProgressTextCell.m */; };
+		E22CF03C1531B8FC0049B0EA /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F13415276935008AF863 /* NSNotificationAdditions.m */; };
 		EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EA1A761F148FA32B004A6B8F /* googleFeed.tiff */; };
 		EA432AAD14A4766D00CB6414 /* GTMHTTPFetcherLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = EA432AAC14A4766D00CB6414 /* GTMHTTPFetcherLogging.m */; };
 		EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
@@ -3264,6 +3265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22CF03C1531B8FC0049B0EA /* NSNotificationAdditions.m in Sources */,
 				B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */,
 				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
 				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
