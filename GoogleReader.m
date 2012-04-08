@@ -242,7 +242,7 @@ JSONDecoder * jsonDecoder;
 			
 		Database *db = [Database sharedDatabase];
 		NSInteger newArticlesFromFeed = 0;
-		@synchronized(db){
+		[[RefreshManager articlesUpdateSemaphore] lock];
 			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
 
 			// Here's where we add the articles to the database
@@ -268,7 +268,7 @@ JSONDecoder * jsonDecoder;
 							
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-		} //@synchronized
+		[[RefreshManager articlesUpdateSemaphore] unlock];
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;

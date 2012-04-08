@@ -36,6 +36,7 @@
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
+static NSLock * articlesUpdate_lock;
 
 // Private functions
 @interface RefreshManager (Private)
@@ -57,6 +58,17 @@ static RefreshManager * _refreshManager = nil;
 @end
 
 @implementation RefreshManager
+
++ (void)initialize
+{
+    // Initializes our multi-thread lock
+    articlesUpdate_lock = [[NSLock alloc] init];
+}
+
++ (NSLock *)articlesUpdateSemaphore
+{
+    return articlesUpdate_lock;
+}
 
 /* init
  * Initialise the class.
@@ -784,7 +796,7 @@ static RefreshManager * _refreshManager = nil;
 				[article release];
 			}
 			
-			@synchronized(db){
+			[articlesUpdate_lock lock];
 				// Remember the last modified date
 				if (lastModifiedString != nil)
 					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
@@ -798,15 +810,13 @@ static RefreshManager * _refreshManager = nil;
 				
 				[folder clearCache];
                 // Should we wrap the entire loop or just individual article updates?
-                @synchronized(db) {
-					[db beginTransaction];
-					for (Article * article in articleArray)
-					{
-						if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
-							++newArticlesFromFeed;
-					}
-					[db commitTransaction];
+				[db beginTransaction];
+				for (Article * article in articleArray)
+				{
+					if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
+						++newArticlesFromFeed;
 				}
+				[db commitTransaction];
 			}
 			
 			[db beginTransaction];
@@ -832,8 +842,6 @@ static RefreshManager * _refreshManager = nil;
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 			
 			[db commitTransaction];
-				
-			};
 
 			// Mark the feed as succeeded
 			[self setFolderErrorFlag:folder flag:NO];
@@ -843,6 +851,8 @@ static RefreshManager * _refreshManager = nil;
 
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+				
+			[articlesUpdate_lock unlock];
 		};
 				  
 		// Send status to the activity log

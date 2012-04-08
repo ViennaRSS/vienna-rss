@@ -38,6 +38,7 @@
 }
 
 +(RefreshManager *)sharedManager;
++ (NSLock *)articlesUpdateSemaphore;
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
 //-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
