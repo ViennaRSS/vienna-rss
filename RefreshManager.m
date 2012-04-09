@@ -37,15 +37,6 @@
 // Singleton
 static RefreshManager * _refreshManager = nil;
 
-// Refresh types
-typedef enum {
-	MA_Refresh_NilType = -1,
-	MA_Refresh_Feed,
-	MA_Refresh_FavIcon,
-	MA_Refresh_GoogleFeed,
-	MA_ForceRefresh_Google_Feed
-} RefreshTypes;
-
 // Private functions
 @interface RefreshManager (Private)
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
@@ -548,7 +539,7 @@ typedef enum {
 	if (IsRSSFolder(folder)) {
 		myRequest = [ASIHTTPRequest requestWithURL:url];
 		[myRequest addRequestHeader:@"If-Modified-Since" value:[folder lastUpdateString]];
-		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
+		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_Feed], @"type", nil]];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
@@ -594,7 +585,7 @@ typedef enum {
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
 	[myRequest setDelegate:self];
 	[myRequest setDidFinishSelector:@selector(iconRequestDone:)];
-	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
+	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_FavIcon], @"type", nil]];
 	[self addConnection:myRequest];
 
 }

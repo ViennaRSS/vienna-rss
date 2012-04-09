@@ -29,6 +29,7 @@
 #import <Foundation/Foundation.h>
 #import "Message.h"
 #import "AppController.h"
+#import "RefreshManager.h"
 
 //Vienna keychain Google Reader name
 static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
@@ -130,7 +131,7 @@ JSONDecoder * jsonDecoder;
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(feedRequestDone:)];
 	[request setDidFailSelector:@selector(feedRequestFailed:)];
-	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate",nil]];
+	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate", [NSNumber numberWithInt:MA_Refresh_GoogleFeed], @"type", nil]];
 	
 	return request;
 }
