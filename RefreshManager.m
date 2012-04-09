@@ -36,15 +36,7 @@
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
-
-// Refresh types
-typedef enum {
-	MA_Refresh_NilType = -1,
-	MA_Refresh_Feed,
-	MA_Refresh_FavIcon,
-	MA_Refresh_GoogleFeed,
-	MA_ForceRefresh_Google_Feed
-} RefreshTypes;
+static NSLock * articlesUpdate_lock;
 
 // Private functions
 @interface RefreshManager (Private)
@@ -65,75 +57,18 @@ typedef enum {
 - (void)syncFinishedForFolder:(Folder *)folder; 
 @end
 
-// Single refresh item type
-@interface RefreshItem : NSObject {
-	Folder * folder;
-	RefreshTypes type;
-}
-
-// Accessor functions
--(void)setFolder:(Folder *)newFolder;
--(void)setType:(RefreshTypes)newType;
--(Folder *)folder;
--(RefreshTypes)type;
-@end
-
-@implementation RefreshItem
-
-/* init
- * Initialises an empty RefreshItem with default values.
- */
--(id)init
-{
-	if ((self = [super init]) != nil)
-	{
-		[self setFolder:nil];
-		[self setType:MA_Refresh_NilType];
-	}
-	return self;
-}
-
-/* setFolder
- */
--(void)setFolder:(Folder *)newFolder
-{
-	[newFolder retain];
-	[folder release];
-	folder = newFolder;
-}
-
-/* folder
- */
--(Folder *)folder
-{
-	return folder;
-}
-
-/* setType
- */
--(void)setType:(RefreshTypes)newType
-{
-	type = newType;
-}
-
-/* type
- */
--(RefreshTypes)type
-{
-	return type;
-}
-
-/* dealloc
- * Clean up behind ourselves.
- */
--(void)dealloc
-{
-	[folder release];
-	[super dealloc];
-}
-@end
-
 @implementation RefreshManager
+
++ (void)initialize
+{
+    // Initializes our multi-thread lock
+    articlesUpdate_lock = [[NSLock alloc] init];
+}
+
++ (NSLock *)articlesUpdateSemaphore
+{
+    return articlesUpdate_lock;
+}
 
 /* init
  * Initialise the class.
@@ -144,7 +79,6 @@ typedef enum {
 	{
 		maximumConnections = [[Preferences standardPreferences] integerForKey:MAPref_RefreshThreads];
 		countOfNewArticles = 0;
-		refreshArray = [[NSMutableArray alloc] initWithCapacity:10];
 		authQueue = [[NSMutableArray alloc] init];
 		statusMessageDuringRefresh = nil;
 		networkQueue = [[ASINetworkQueue alloc] init];
@@ -212,13 +146,6 @@ typedef enum {
 	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
 	if (folder != nil)
 	{
-		NSInteger index = [refreshArray count];
-		while (--index >= 0)
-		{
-			RefreshItem * item = [refreshArray objectAtIndex:index];
-			if ([item folder] == folder)
-				[refreshArray removeObjectAtIndex:index];
-		}
         for (ASIHTTPRequest *theRequest in [networkQueue operations]) {
 			if ([[theRequest userInfo] objectForKey:@"folder"] == folder) {
 				[self removeConnection:theRequest];
@@ -246,7 +173,7 @@ typedef enum {
 }
 
 /* refreshSubscriptions
- * Add the folders specified in the foldersArray to the refreshArray.
+ * Add the folders specified in the foldersArray to the refresh queue.
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {        
@@ -316,7 +243,7 @@ typedef enum {
 }
 
 /* refreshFolderIconCacheForSubscriptions
- * Add the folders specified in the foldersArray to the refreshArray.
+ * Add the folders specified in the foldersArray to the refresh queue.
  */
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray
 {
@@ -334,7 +261,7 @@ typedef enum {
 }
 
 /* refreshFavIcon
- * Adds the specified folder to the refreshArray.
+ * Adds the specified folder to the refresh queue.
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
@@ -362,16 +289,16 @@ typedef enum {
 }
 
 /* isRefreshingFolder
- * Returns whether refreshArray has an queue refresh for the specified folder
+ * Returns whether refresh queue has a queue item for the specified folder
  * and refresh type.
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
 {
-	//FIX We need to handle check without refreshArray
-	for (RefreshItem * item in refreshArray)
-	{
-		if ([item folder] == folder && [item type] == type)
-			return YES;
+    for (ASIHTTPRequest *theRequest in [networkQueue operations])
+    {
+		if (([[theRequest userInfo] objectForKey:@"folder"] == folder) && ([[[theRequest userInfo] valueForKey:@"type"] intValue] == [[NSNumber numberWithInt:type] intValue]))
+            return YES;
+
 	}
 	return NO;
 }
@@ -486,7 +413,7 @@ typedef enum {
 }
 
 /* pumpSubscriptionRefresh
- * Pick the folder at the head of the refresh array and spawn a connection to
+ * Pick the folder at the head of the refresh queue and spawn a connection to
  * refresh that folder.
  */
 -(void)pumpSubscriptionRefresh:(Folder *)folder shouldForceRefresh:(BOOL)force
@@ -548,7 +475,7 @@ typedef enum {
 	if (IsRSSFolder(folder)) {
 		myRequest = [ASIHTTPRequest requestWithURL:url];
 		[myRequest addRequestHeader:@"If-Modified-Since" value:[folder lastUpdateString]];
-		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
+		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_Feed], @"type", nil]];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
@@ -594,7 +521,7 @@ typedef enum {
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
 	[myRequest setDelegate:self];
 	[myRequest setDidFinishSelector:@selector(iconRequestDone:)];
-	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", nil]];
+	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_FavIcon], @"type", nil]];
 	[self addConnection:myRequest];
 
 }
@@ -869,7 +796,7 @@ typedef enum {
 				[article release];
 			}
 			
-			@synchronized(db){
+			[articlesUpdate_lock lock];
 				// Remember the last modified date
 				if (lastModifiedString != nil)
 					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
@@ -883,15 +810,13 @@ typedef enum {
 				
 				[folder clearCache];
                 // Should we wrap the entire loop or just individual article updates?
-                @synchronized(db) {
-					[db beginTransaction];
-					for (Article * article in articleArray)
-					{
-						if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
-							++newArticlesFromFeed;
-					}
-					[db commitTransaction];
+				[db beginTransaction];
+				for (Article * article in articleArray)
+				{
+					if ([db createArticle:folderId article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
+						++newArticlesFromFeed;
 				}
+				[db commitTransaction];
 			}
 			
 			[db beginTransaction];
@@ -917,21 +842,17 @@ typedef enum {
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 			
 			[db commitTransaction];
-				
-			};
 
-			
+			// Mark the feed as succeeded
+			[self setFolderErrorFlag:folder flag:NO];
+
 			// Let interested callers know that the folder has changed.
 			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-		}
-        
-		// Mark the feed as succeeded
-		[self setFolderErrorFlag:folder flag:NO];
-	
-		@synchronized(db){
 
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+				
+			[articlesUpdate_lock unlock];
 		};
 				  
 		// Send status to the activity log
@@ -1093,7 +1014,6 @@ typedef enum {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pumpTimer release];
 	[authQueue release];
-	[refreshArray release];
 	[networkQueue release];
 	[super dealloc];
 }

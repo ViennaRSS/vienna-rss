@@ -29,6 +29,7 @@
 #import <Foundation/Foundation.h>
 #import "Message.h"
 #import "AppController.h"
+#import "RefreshManager.h"
 
 //Vienna keychain Google Reader name
 static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
@@ -130,7 +131,7 @@ JSONDecoder * jsonDecoder;
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(feedRequestDone:)];
 	[request setDidFailSelector:@selector(feedRequestFailed:)];
-	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate",nil]];
+	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate", [NSNumber numberWithInt:MA_Refresh_GoogleFeed], @"type", nil]];
 	
 	return request;
 }
@@ -241,7 +242,7 @@ JSONDecoder * jsonDecoder;
 			
 		Database *db = [Database sharedDatabase];
 		NSInteger newArticlesFromFeed = 0;
-		@synchronized(db){
+		[[RefreshManager articlesUpdateSemaphore] lock];
 			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
 
 			// Here's where we add the articles to the database
@@ -267,7 +268,7 @@ JSONDecoder * jsonDecoder;
 							
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-		} //@synchronized
+		[[RefreshManager articlesUpdateSemaphore] unlock];
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
