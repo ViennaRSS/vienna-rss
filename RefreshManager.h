@@ -38,6 +38,7 @@
 }
 
 +(RefreshManager *)sharedManager;
++ (NSLock *)articlesUpdateSemaphore;
 -(void)refreshFolderIconCacheForSubscriptions:(NSArray *)foldersArray;
 //-(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)refreshSubscriptionsAfterRefresh:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
@@ -52,3 +53,12 @@
 -(NSUInteger)countOfNewArticles;
 -(NSString *)statusMessageDuringRefresh;
 @end
+
+// Refresh types
+typedef enum {
+	MA_Refresh_NilType = -1,
+	MA_Refresh_Feed,
+	MA_Refresh_FavIcon,
+	MA_Refresh_GoogleFeed,
+	MA_ForceRefresh_Google_Feed
+} RefreshTypes;
