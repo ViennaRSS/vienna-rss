@@ -27,6 +27,7 @@
 #import "ArticleRef.h"
 #import "StringExtensions.h"
 #import "GoogleReader.h"
+#import "RefreshManager.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -335,7 +336,10 @@
 {
 	[folderArrayOfArticles autorelease];
 	
+	[[RefreshManager articlesUpdateSemaphore] lock];
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
+	[[RefreshManager articlesUpdateSemaphore] unlock];
+
 	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] filterString]] retain];
 	
 	[self refilterArrayOfArticles];
