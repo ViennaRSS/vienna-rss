@@ -279,6 +279,7 @@ JSONDecoder * jsonDecoder;
 		[controller setStatusMessage:nil persist:NO];
 		[controller showUnreadCountOnApplicationIconAndWindowTitle];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
 
 		// Send status to the activity log
 		if (newArticlesFromFeed == 0)
