@@ -46,6 +46,7 @@
     BOOL sync = [sender state] == NSOnState;
 	[[Preferences standardPreferences] setSyncGoogleReader:sync];
 	if (sync) {
+		[[GoogleReader sharedManager] authenticate];
 		[[GoogleReader sharedManager] loadSubscriptions:nil];
 	}
 }

@@ -2502,7 +2502,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	if ([articleArray count] > 0) 
 	{
-		Preferences * prefs = [Preferences standardPreferences];
 		
         NSMutableArray * articlesWithLinks = [NSMutableArray arrayWithCapacity:[articleArray count]];
         NSMutableArray * urls = [NSMutableArray arrayWithCapacity:[articleArray count]];
