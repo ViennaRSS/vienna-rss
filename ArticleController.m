@@ -338,9 +338,8 @@
 	
 	[[RefreshManager articlesUpdateSemaphore] lock];
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	[[RefreshManager articlesUpdateSemaphore] unlock];
-
 	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] filterString]] retain];
+	[[RefreshManager articlesUpdateSemaphore] unlock];
 	
 	[self refilterArrayOfArticles];
 }
