@@ -30,6 +30,7 @@
 #import "Message.h"
 #import "AppController.h"
 #import "RefreshManager.h"
+#import "Preferences.h"
 
 //Vienna keychain Google Reader name
 static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
@@ -452,6 +453,8 @@ JSONDecoder * jsonDecoder;
 
 -(void)authenticate 
 {    	
+	if (![[Preferences standardPreferences] syncGoogleReader])
+		return;
 	if (googleReaderStatus != notAuthenticated) {
 		LLog(@"Another instance is authenticating...");
 		return;
