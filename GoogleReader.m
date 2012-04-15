@@ -30,6 +30,7 @@
 #import "Message.h"
 #import "AppController.h"
 #import "RefreshManager.h"
+#import "Preferences.h"
 
 //Vienna keychain Google Reader name
 static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
@@ -268,6 +269,8 @@ JSONDecoder * jsonDecoder;
 							
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+			// Set the HTML homepage for this folder.
+			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
 		[[RefreshManager articlesUpdateSemaphore] unlock];
 		
 		// Add to count of new articles so far
@@ -452,6 +455,8 @@ JSONDecoder * jsonDecoder;
 
 -(void)authenticate 
 {    	
+	if (![[Preferences standardPreferences] syncGoogleReader])
+		return;
 	if (googleReaderStatus != notAuthenticated) {
 		LLog(@"Another instance is authenticating...");
 		return;

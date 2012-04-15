@@ -338,9 +338,8 @@
 	
 	[[RefreshManager articlesUpdateSemaphore] lock];
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	[[RefreshManager articlesUpdateSemaphore] unlock];
-
 	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] filterString]] retain];
+	[[RefreshManager articlesUpdateSemaphore] unlock];
 	
 	[self refilterArrayOfArticles];
 }
@@ -724,9 +723,10 @@
 		}
 		else
 		{
+			// Google Reader feeds and smart folders
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
-			if (undoFlag && (folderId == currentFolderId))
+			if (undoFlag && (IsGoogleReaderFolder(folder) || folderId == currentFolderId))
 			{
 				[refArray addObjectsFromArray:currentArrayOfArticles];
 				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
