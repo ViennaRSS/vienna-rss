@@ -269,6 +269,8 @@ JSONDecoder * jsonDecoder;
 							
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+			// Set the HTML homepage for this folder.
+			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
 		[[RefreshManager articlesUpdateSemaphore] unlock];
 		
 		// Add to count of new articles so far

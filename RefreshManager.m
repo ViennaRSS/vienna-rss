@@ -36,7 +36,7 @@
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
-static NSLock * articlesUpdate_lock;
+static NSRecursiveLock * articlesUpdate_lock;
 
 // Private functions
 @interface RefreshManager (Private)
@@ -62,10 +62,10 @@ static NSLock * articlesUpdate_lock;
 + (void)initialize
 {
     // Initializes our multi-thread lock
-    articlesUpdate_lock = [[NSLock alloc] init];
+    articlesUpdate_lock = [[NSRecursiveLock alloc] init];
 }
 
-+ (NSLock *)articlesUpdateSemaphore
++ (NSRecursiveLock *)articlesUpdateSemaphore
 {
     return articlesUpdate_lock;
 }
