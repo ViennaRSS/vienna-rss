@@ -869,7 +869,7 @@ static NSRecursiveLock * articlesUpdate_lock;
         
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
-			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+			[self performSelector:@selector(refreshFavIcon:) withObject:folder afterDelay:0];
 																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
