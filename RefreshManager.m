@@ -878,7 +878,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		countOfNewArticles += newArticlesFromFeed;
 	
     	// Unread count may have changed
-    	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+    	[[NSApp delegate] performSelectorOnMainThread:@selector(showUnreadCountOnApplicationIconAndWindowTitle) withObject:nil waitUntilDone:NO];
 
 	[pool drain];
 }
