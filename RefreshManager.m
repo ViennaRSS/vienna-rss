@@ -609,7 +609,10 @@ static NSRecursiveLock * articlesUpdate_lock;
 	else if (responseStatusCode == 304)
 	{		
 		// No modification from last check
+		[[RefreshManager articlesUpdateSemaphore] lock];
 		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		[[RefreshManager articlesUpdateSemaphore] unlock];
+
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
@@ -869,13 +872,13 @@ static NSRecursiveLock * articlesUpdate_lock;
         
 		// If this folder also requires an image refresh, add that
 		if ([folder flags] & MA_FFlag_CheckForImage)
-			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+			[self performSelector:@selector(refreshFavIcon:) withObject:folder afterDelay:0];
 																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 	
     	// Unread count may have changed
-    	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+    	[[NSApp delegate] performSelectorOnMainThread:@selector(showUnreadCountOnApplicationIconAndWindowTitle) withObject:nil waitUntilDone:NO];
 
 	[pool drain];
 }
