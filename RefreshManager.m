@@ -609,7 +609,10 @@ static NSRecursiveLock * articlesUpdate_lock;
 	else if (responseStatusCode == 304)
 	{		
 		// No modification from last check
+		[[RefreshManager articlesUpdateSemaphore] lock];
 		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		[[RefreshManager articlesUpdateSemaphore] unlock];
+
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
