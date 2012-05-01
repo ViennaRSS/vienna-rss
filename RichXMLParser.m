@@ -675,7 +675,7 @@
 				if ([itemNodeName isEqualToString:@"title"])
 				{
 					NSString * newTitle = [[subItemTree valueOfElement] stringByUnescapingExtendedCharacters];
-					[newItem setTitle:[[self stripHTMLTags:newTitle] firstNonBlankLine]];
+					[newItem setTitle:[self stripHTMLTags:newTitle]];
 					continue;
 				}
 				
@@ -928,7 +928,7 @@
 					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
 						newTitle = [self stripHTMLTags:newTitle];
 					
-					[newItem setTitle:[newTitle firstNonBlankLine]];
+					[newItem setTitle:newTitle];
 					continue;
 				}
 
