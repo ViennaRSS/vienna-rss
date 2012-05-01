@@ -26,6 +26,7 @@
 #import "ArticleRef.h"
 #import "SearchString.h"
 #import "NSNotificationAdditions.h"
+#import "RefreshManager.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
@@ -2295,6 +2296,7 @@ static Database * _sharedDatabase = nil;
 		queryString = [NSString stringWithFormat:@"select * from messages where (%@)%@", [self criteriaToSQL:tree], filterClause];
 	}
 
+	[[RefreshManager articlesUpdateSemaphore] lock];
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
 
@@ -2351,6 +2353,7 @@ static Database * _sharedDatabase = nil;
 
 	// Deallocate
 	[results release];
+	[[RefreshManager articlesUpdateSemaphore] unlock];
 	return newArray;
 }
 
