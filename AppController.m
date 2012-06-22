@@ -1169,6 +1169,36 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	return [newDefaultMenu autorelease];
 }
 
+/** openURLsInDefaultBrowser
+ * Open an array of URLs in whatever the user has registered as their
+ * default system browser.
+ */
+- (void)openURLsInDefaultBrowser:(NSArray *)urlArray {
+	Preferences * prefs = [Preferences standardPreferences];
+	
+	// This line is a workaround for OS X bug rdar://4450641
+	if ([prefs openLinksInBackground])
+		[mainWindow orderFront:self];
+	
+	// Launch in the foreground or background as needed
+	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
+	[[NSWorkspace sharedWorkspace] openURLs:urlArray
+					withAppBundleIdentifier:NULL
+									options:lOptions
+			 additionalEventParamDescriptor:NULL
+						  launchIdentifiers:NULL];
+}
+
+/* openURLInDefaultBrowser
+ * Open the specified URL in whatever the user has registered as their
+ * default system browser.
+ */
+-(void)openURLInDefaultBrowser:(NSURL *)url
+{
+	[self openURLsInDefaultBrowser:[NSArray arrayWithObject:url]];
+    
+}
+
 /* openPageInBrowser
  * Open the current web page in the browser.
  */
@@ -1287,20 +1317,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self openURL:[NSURL URLWithString:urlString] inPreferredBrowser:openInPreferredBrowserFlag];
 }
 
-/* openURL
- * Open a URL in either the internal Vienna browser or an external browser depending on
- * whatever the user has opted for.
- */
--(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
-{
-	if (url == nil)
-	{
-		NSLog(@"Called openURL:inPreferredBrowser: with nil url.");
-		return;
-	}
-	[self openURLs:[NSArray arrayWithObject:url] inPreferredBrowser:openInPreferredBrowserFlag];
-}
-
 /** openURLs
  * Open an array of URLs in either the internal Vienna browser or an external browser depending on
  * whatever the user has opted for.
@@ -1326,6 +1342,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else
 		[self openURLsInDefaultBrowser:urls];
+}
+
+/* openURL
+ * Open a URL in either the internal Vienna browser or an external browser depending on
+ * whatever the user has opted for.
+ */
+-(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
+{
+	if (url == nil)
+	{
+		NSLog(@"Called openURL:inPreferredBrowser: with nil url.");
+		return;
+	}
+	[self openURLs:[NSArray arrayWithObject:url] inPreferredBrowser:openInPreferredBrowserFlag];
 }
 
 /* newTab
@@ -1379,36 +1409,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		[newBrowserTemplate release];
 	}
-}
-
-/* openURLInDefaultBrowser
- * Open the specified URL in whatever the user has registered as their
- * default system browser.
- */
--(void)openURLInDefaultBrowser:(NSURL *)url
-{
-	[self openURLsInDefaultBrowser:[NSArray arrayWithObject:url]];
-
-}
-
-/** openURLsInDefaultBrowser
- * Open an array of URLs in whatever the user has registered as their
- * default system browser.
- */
-- (void)openURLsInDefaultBrowser:(NSArray *)urlArray {
-	Preferences * prefs = [Preferences standardPreferences];
-	
-	// This line is a workaround for OS X bug rdar://4450641
-	if ([prefs openLinksInBackground])
-		[mainWindow orderFront:self];
-	
-	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
-	[[NSWorkspace sharedWorkspace] openURLs:urlArray
-					withAppBundleIdentifier:NULL
-									options:lOptions
-			 additionalEventParamDescriptor:NULL
-						  launchIdentifiers:NULL];
 }
 
 /* loadOpenTabs
