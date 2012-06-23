@@ -22,8 +22,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
-#import "GTMHTTPFetcher.h"
-#import "GTMHTTPFetcherLogging.h"
+#import "GTMOAuth2WindowController.h"
 #import "Folder.h"
 #import "Database.h"
 #import <Foundation/Foundation.h>
@@ -430,28 +429,35 @@ JSONDecoder * jsonDecoder;
 	NSString *html = @"<html><body><div align=center>Loading sign-in page...</div></body></html>";
 	windowController.initialHTMLString = html;
 	
-	[windowController signInSheetModalForWindow:nil completionHandler:^(GTMOAuth2Authentication *auth, NSError *error) {
-		
-		if (error != nil) {
-			// Authentication failed
-			googleReaderStatus = notAuthenticated;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_AuthFailed" object:nil];
-		} else {
-			// Authentication succeeded
-			oAuthObject = [auth retain];
-			googleReaderStatus = isAuthenticated;
-			if ([self getGoogleOAuthToken] != nil) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
-			} else {
-				//TOFIX
-				//Handle token request
-			}
-		}
-		
-	}];
+	[windowController 	signInSheetModalForWindow:nil
+						delegate:self
+						finishedSelector:@selector(windowControllerCallback:finishedWithAuth:error:)];
 }
 
+- (void)windowControllerCallback:(GTMOAuth2WindowController *)windowController  finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error
+{
+	if (error != nil)
+	{
+		// Authentication failed
+		googleReaderStatus = notAuthenticated;
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_AuthFailed" object:nil];
+	}
+	else
+	{
+		// Authentication succeeded
+		oAuthObject = [auth retain];
+		googleReaderStatus = isAuthenticated;
+		if ([self getGoogleOAuthToken] != nil) {
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
+		}
+		else
+		{
+			//TOFIX
+			//Handle token request
+		}
+	}
+}
 
 -(void)authenticate 
 {    	
