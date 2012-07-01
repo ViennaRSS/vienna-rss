@@ -44,6 +44,7 @@
 -(void)loadSubscriptions:(NSNotification*)nc;
 -(void)loadReadingList;
 -(void)authenticate;
+-(void)resetAuthentication;
 
 -(void)subscribeToFeed:(NSString *)feedURL;
 -(void)unsubscribeFromFeed:(NSString *)feedURL;

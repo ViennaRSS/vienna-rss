@@ -341,7 +341,7 @@ JSONDecoder * jsonDecoder;
 			LLog(@"Error getting the action token");
 			LOG_EXPR([tokenRequest error]);
 			LOG_EXPR([tokenRequest responseHeaders]);
-			googleReaderStatus = isAuthenticated;
+			[self resetAuthentication];
 			return nil;
 		} else {
 			LLog(@"Action Token Acquired");
@@ -392,6 +392,7 @@ JSONDecoder * jsonDecoder;
 			LLog(@"Error getting the OAuth 2.0 token");
 			LOG_EXPR([tokenRequest error]);
 			LOG_EXPR([tokenRequest responseHeaders]);
+			[self resetAuthentication];
 			return nil;
 		} else {
 			LLog(@"OAuth 2.0 Token Acquired");
@@ -490,6 +491,12 @@ JSONDecoder * jsonDecoder;
 	} else {
 		[self performSelectorOnMainThread:@selector(handleGoogleLoginRequest) withObject:nil waitUntilDone:YES];
 	}
+}
+
+-(void)resetAuthentication
+{
+	googleReaderStatus = notAuthenticated;
+	[self authenticate];
 }
 
 -(void)loadReadingList
