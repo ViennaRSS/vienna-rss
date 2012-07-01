@@ -207,7 +207,7 @@ JSONDecoder * jsonDecoder;
 			for (NSString * category in (NSArray*)[newsItem objectForKey:@"categories"])
 			{
 				if ([category hasSuffix:@"/read"]) [article markRead:YES];
-				if ([category hasSuffix:@"starred"]) [article markFlagged:YES];
+				if ([category hasSuffix:@"/starred"]) [article markFlagged:YES];
 				if ([category hasSuffix:@"/kept-unread"]) [article markRead:NO];
 			}
 				
@@ -258,7 +258,10 @@ JSONDecoder * jsonDecoder;
 				for (Article * article in articleArray)
 				{
 					if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
+					{
 						[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
+						[db markArticleFlagged:[refreshedFolder itemId] guid:[article guid] isFlagged:[article isFlagged]];
+					}
 					else
 						newArticlesFromFeed++;
 				}
