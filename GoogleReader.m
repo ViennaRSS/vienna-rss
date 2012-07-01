@@ -125,7 +125,7 @@ JSONDecoder * jsonDecoder;
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
 		
-	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, token]];
+	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%i&ck=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],ClientName,articleLimit,TIMESTAMP, token, token]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -327,7 +327,7 @@ JSONDecoder * jsonDecoder;
 	
 	if (googleReaderStatus == isTokenAcquired) {
 		
-		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=scroll&access_token=%@",token]];
+		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=%@&access_token=%@",ClientName,token]];
 		ASIHTTPRequest * tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
 		
 		LLog(@"Start Action Token Request!");
@@ -510,7 +510,7 @@ JSONDecoder * jsonDecoder;
 	[[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 
 
-	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=scroll&output=json&access_token=%@",token]]];
+	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=%@&output=json&access_token=%@",ClientName,token]]];
 	[subscriptionRequest setDelegate:self];
 	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
 	LLog(@"Starting subscriptionRequest");
