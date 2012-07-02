@@ -4057,7 +4057,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
-				VIENNA_VERSION_NUMBER = 2811;
+				VIENNA_VERSION_NUMBER = 2812;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -4085,7 +4085,7 @@
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
-				VIENNA_VERSION_NUMBER = 2811;
+				VIENNA_VERSION_NUMBER = 2812;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
