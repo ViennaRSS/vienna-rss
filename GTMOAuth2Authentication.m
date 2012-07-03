@@ -1,4 +1,6 @@
 /* Copyright (c) 2011 Google Inc.
+ * Modified by Barijaona Ramaholimihaso (https://github.com/barijaona)
+ * in order to use JSONKit instead of SBJson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +19,8 @@
 
 #define GTMOAUTH2AUTHENTICATION_DEFINE_GLOBALS 1
 #import "GTMOAuth2Authentication.h"
+// Barijaona addition
+#import "JSONKit.h"
 
 // standard OAuth keys
 static NSString *const kOAuth2AccessTokenKey       = @"access_token";
@@ -305,30 +309,18 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 #endif
     return obj;
   } else {
-    // try SBJsonParser or SBJSON
-    Class jsonParseClass = NSClassFromString(@"SBJsonParser");
-    if (!jsonParseClass) {
-      jsonParseClass = NSClassFromString(@"SBJSON");
-    }
-    if (jsonParseClass) {
-      GTMOAuth2ParserClass *parser = [[[jsonParseClass alloc] init] autorelease];
-      NSString *jsonStr = [[[NSString alloc] initWithData:data
-                                                 encoding:NSUTF8StringEncoding] autorelease];
-      if (jsonStr) {
-        obj = [parser objectWithString:jsonStr error:&error];
+    // beginning of Barijaona substitution
+    // try JSONKit
+    obj = [data objectFromJSONDataWithParseOptions:JKParseOptionNone error:&error];
+
 #if DEBUG
-        if (error) {
-          NSLog(@"%@ error %@ parsing %@", NSStringFromClass(jsonParseClass),
-                error, jsonStr);
-        }
+	if (error) {
+	  NSLog(@"JSONKit error %@ parsing %@",
+			error, [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+	}
 #endif
-        return obj;
-      }
-    } else {
-#if DEBUG
-      NSAssert(0, @"GTMOAuth2Authentication: No parser available");
-#endif
-    }
+    return obj;
+    // end of Barijaona substitution
   }
   return nil;
 }
