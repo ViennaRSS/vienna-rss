@@ -457,8 +457,8 @@ JSONDecoder * jsonDecoder;
 		}
 		else
 		{
-			//TOFIX
-			//Handle token request
+			//TODO
+			//Better handling of failure to get an OAuth token (wait message to user ?)
 		}
 	}
 }
@@ -485,8 +485,8 @@ JSONDecoder * jsonDecoder;
 		if ([self getGoogleOAuthToken] != nil) {
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 		} else {
-			//TOFIX
-			//Handle token request
+			//TODO
+			//Better handling of failure to get an OAuth token (wait message to user ?)
 		}
 	} else {
 		[self performSelectorOnMainThread:@selector(handleGoogleLoginRequest) withObject:nil waitUntilDone:YES];
@@ -497,6 +497,7 @@ JSONDecoder * jsonDecoder;
 {
 	googleReaderStatus = notAuthenticated;
 	[self authenticate];
+	[self getGoogleActionToken];
 }
 
 -(void)loadReadingList
