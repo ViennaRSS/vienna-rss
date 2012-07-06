@@ -680,6 +680,22 @@
 		3A42BF8315A0EDFA0018B532 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3A42BF8415A0EDFF0018B532 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		3AC07B5115A77E41008D239E /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC07B5215A77E5B008D239E /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC07B5315A77E70008D239E /* da */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = da; path = da.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7ED15A77FB90016BA20 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7EE15A77FDB0016BA20 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7EF15A77FEF0016BA20 /* eus */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = eus; path = eus.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F015A780020016BA20 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F115A780910016BA20 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F215A780A00016BA20 /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt_BR; path = pt_BR.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F315A780AE0016BA20 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F415A780BE0016BA20 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F515A780D90016BA20 /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F615A780F40016BA20 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F715A781280016BA20 /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_CN; path = zh_CN.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F815A7813A0016BA20 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3AC1C7F915A7814E0016BA20 /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
@@ -3437,6 +3453,22 @@
 			children = (
 				3A42BF8315A0EDFA0018B532 /* en */,
 				3A42BF8415A0EDFF0018B532 /* fr */,
+				3AC07B5115A77E41008D239E /* ja */,
+				3AC07B5215A77E5B008D239E /* de */,
+				3AC07B5315A77E70008D239E /* da */,
+				3AC1C7ED15A77FB90016BA20 /* cs */,
+				3AC1C7EE15A77FDB0016BA20 /* es */,
+				3AC1C7EF15A77FEF0016BA20 /* eus */,
+				3AC1C7F015A780020016BA20 /* it */,
+				3AC1C7F115A780910016BA20 /* nl */,
+				3AC1C7F215A780A00016BA20 /* pt_BR */,
+				3AC1C7F315A780AE0016BA20 /* pt */,
+				3AC1C7F415A780BE0016BA20 /* ru */,
+				3AC1C7F515A780D90016BA20 /* tr */,
+				3AC1C7F615A780F40016BA20 /* uk */,
+				3AC1C7F715A781280016BA20 /* zh_CN */,
+				3AC1C7F815A7813A0016BA20 /* zh_TW */,
+				3AC1C7F915A7814E0016BA20 /* sv */,
 			);
 			name = SyncPreferences.xib;
 			sourceTree = "<group>";
