@@ -125,7 +125,7 @@ JSONDecoder * jsonDecoder;
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
 		
-	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=scroll&comments=false&likes=false&r=n&n=%i&ot=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],articleLimit,folderLastUpdate, token, token]];
+	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%i&ot=%@&ck=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],ClientName,articleLimit,folderLastUpdate,TIMESTAMP, token, token]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -171,8 +171,7 @@ JSONDecoder * jsonDecoder;
 			NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
 			NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 			LOG_EXPR(dict);
-			NSString *tmp = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-			LOG_EXPR(tmp);
+			LOG_EXPR([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 			ALog(@"Error !!! Incoherent data !");
 		}
 	
@@ -207,7 +206,7 @@ JSONDecoder * jsonDecoder;
 			for (NSString * category in (NSArray*)[newsItem objectForKey:@"categories"])
 			{
 				if ([category hasSuffix:@"/read"]) [article markRead:YES];
-				if ([category hasSuffix:@"starred"]) [article markFlagged:YES];
+				if ([category hasSuffix:@"/starred"]) [article markFlagged:YES];
 				if ([category hasSuffix:@"/kept-unread"]) [article markRead:NO];
 			}
 				
@@ -258,7 +257,10 @@ JSONDecoder * jsonDecoder;
 				for (Article * article in articleArray)
 				{
 					if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
+					{
 						[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
+						[db markArticleFlagged:[refreshedFolder itemId] guid:[article guid] isFlagged:[article isFlagged]];
+					}
 					else
 						newArticlesFromFeed++;
 				}
@@ -327,7 +329,7 @@ JSONDecoder * jsonDecoder;
 	
 	if (googleReaderStatus == isTokenAcquired) {
 		
-		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=scroll&access_token=%@",token]];
+		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=%@&access_token=%@",ClientName,token]];
 		ASIHTTPRequest * tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
 		
 		LLog(@"Start Action Token Request!");
@@ -338,7 +340,7 @@ JSONDecoder * jsonDecoder;
 			LLog(@"Error getting the action token");
 			LOG_EXPR([tokenRequest error]);
 			LOG_EXPR([tokenRequest responseHeaders]);
-			googleReaderStatus = isAuthenticated;
+			[self resetAuthentication];
 			return nil;
 		} else {
 			LLog(@"Action Token Acquired");
@@ -389,6 +391,7 @@ JSONDecoder * jsonDecoder;
 			LLog(@"Error getting the OAuth 2.0 token");
 			LOG_EXPR([tokenRequest error]);
 			LOG_EXPR([tokenRequest responseHeaders]);
+			[self resetAuthentication];
 			return nil;
 		} else {
 			LLog(@"OAuth 2.0 Token Acquired");
@@ -453,8 +456,8 @@ JSONDecoder * jsonDecoder;
 		}
 		else
 		{
-			//TOFIX
-			//Handle token request
+			//TODO
+			//Better handling of failure to get an OAuth token (wait message to user ?)
 		}
 	}
 }
@@ -481,12 +484,19 @@ JSONDecoder * jsonDecoder;
 		if ([self getGoogleOAuthToken] != nil) {
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
 		} else {
-			//TOFIX
-			//Handle token request
+			//TODO
+			//Better handling of failure to get an OAuth token (wait message to user ?)
 		}
 	} else {
 		[self performSelectorOnMainThread:@selector(handleGoogleLoginRequest) withObject:nil waitUntilDone:YES];
 	}
+}
+
+-(void)resetAuthentication
+{
+	googleReaderStatus = notAuthenticated;
+	[self authenticate];
+	[self getGoogleActionToken];
 }
 
 -(void)loadReadingList
@@ -510,7 +520,7 @@ JSONDecoder * jsonDecoder;
 	[[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 
 
-	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=scroll&output=json&access_token=%@",token]]];
+	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=%@&output=json&access_token=%@",ClientName,token]]];
 	[subscriptionRequest setDelegate:self];
 	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
 	LLog(@"Starting subscriptionRequest");
@@ -795,7 +805,7 @@ JSONDecoder * jsonDecoder;
 
 - (void)createFolders:(NSMutableArray *)params
 {
-	NSLog(@"createFolder - START");
+	LLog(@"createFolder - START");
 	
     NSMutableArray * folderNames = [params objectAtIndex:0];
     NSNumber * parentNumber = [params objectAtIndex:1];
@@ -825,7 +835,7 @@ JSONDecoder * jsonDecoder;
         [self createFolders:params];
     }
 	
-	NSLog(@"createFolder - END");
+	LLog(@"createFolder - END");
 
 }
 

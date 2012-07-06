@@ -3373,7 +3373,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Article * thisArticle = [self selectedArticle];
 	Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
-	if (thisArticle || IsRSSFolder(folder))
+	if (thisArticle || IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		[self openURLFromString:[folder homePage] inPreferredBrowser:YES];
 }
 
@@ -3384,7 +3384,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Article * thisArticle = [self selectedArticle];
 	Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
-	if (thisArticle || IsRSSFolder(folder))
+	if (thisArticle || IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		[self openURLFromString:[folder homePage] inPreferredBrowser:NO];
 }
 
@@ -3702,13 +3702,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
+	static int waitNumber = 60;
 	//TOFIX: we should start local refresh feed, then sync refresh feed
 	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isReady]) {
 		NSLog(@"Waiting until Google Auth is done...");
+		waitNumber-- ;
 		if (![sender isKindOfClass:[NSTimer class]]) {
 			NSLog(@"Create a timer...");
 			[self setStatusMessage:NSLocalizedString(@"Acquiring Google OAuth 2.0 token...", nil) persist:NO];
 			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
+		}
+		// if we have tried for 3 minutes, we are probably logged out...
+		if (waitNumber<=0) {
+			[[GoogleReader sharedManager] resetAuthentication];
+			waitNumber = 60;
 		}
 		return;
 	} else {
@@ -3716,6 +3723,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if ([sender isKindOfClass:[NSTimer class]]) {
 			[(NSTimer*)sender invalidate];
 			sender = nil;
+			waitNumber = 60;
 		}
 	}
 	
@@ -4275,20 +4283,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(useCurrentStyleForArticles:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		if (folder && IsRSSFolder(folder) && ![folder loadsFullHTML])
+		if (folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && ![folder loadsFullHTML])
 			[menuItem setState:NSOnState];
 		else
 			[menuItem setState:NSOffState];
-		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(useWebPageForArticles:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		if (folder && IsRSSFolder(folder) && [folder loadsFullHTML])
+		if (folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && [folder loadsFullHTML])
 			[menuItem setState:NSOnState];
 		else
 			[menuItem setState:NSOffState];
-		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteFolder:))
 	{
@@ -4334,7 +4342,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Article * thisArticle = [self selectedArticle];
 		Folder * folder = (thisArticle) ? [db folderFromID:[thisArticle folderId]] : [db folderFromID:[foldersTree actualSelection]];
-		return folder && (thisArticle || IsRSSFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
+		return folder && (thisArticle || IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && ([folder homePage] && ![[folder homePage] isBlank] && isMainWindowVisible);
 	}
 	else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:)))
 	{

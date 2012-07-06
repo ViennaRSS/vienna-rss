@@ -551,8 +551,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
 
 		} else {
-			NSString *tmp = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
-			LOG_EXPR(tmp);
+			LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
 			ALog(@"Image Error!");
 		}
 		[iconImage release];
@@ -1011,8 +1010,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 
 -(BOOL)isConnecting
 {
-	BOOL connessione = [networkQueue requestsCount] > 0;
-	LOG_EXPR(connessione);
+	LOG_NS(@"Connected : %@", [networkQueue requestsCount] > 0 ? @"yes" : @"no" );
 	return [networkQueue requestsCount] > 0;
 }
 
