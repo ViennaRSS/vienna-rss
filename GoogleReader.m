@@ -171,8 +171,7 @@ JSONDecoder * jsonDecoder;
 			NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
 			NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 			LOG_EXPR(dict);
-			NSString *tmp = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-			LOG_EXPR(tmp);
+			LOG_EXPR([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 			ALog(@"Error !!! Incoherent data !");
 		}
 	
@@ -806,7 +805,7 @@ JSONDecoder * jsonDecoder;
 
 - (void)createFolders:(NSMutableArray *)params
 {
-	NSLog(@"createFolder - START");
+	LLog(@"createFolder - START");
 	
     NSMutableArray * folderNames = [params objectAtIndex:0];
     NSNumber * parentNumber = [params objectAtIndex:1];
@@ -836,7 +835,7 @@ JSONDecoder * jsonDecoder;
         [self createFolders:params];
     }
 	
-	NSLog(@"createFolder - END");
+	LLog(@"createFolder - END");
 
 }
 

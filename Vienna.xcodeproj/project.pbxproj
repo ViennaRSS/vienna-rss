@@ -300,8 +300,6 @@
 		EA4BF68B14B3161D008FCBE5 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67E14B3161D008FCBE5 /* ASIHTTPRequest.m */; };
 		EA4BF68C14B3161D008FCBE5 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68214B3161D008FCBE5 /* ASIInputStream.m */; };
 		EA4BF68D14B3161D008FCBE5 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
-		EA6D3E5E14D82E71004DCB80 /* Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D3E5D14D82E71004DCB80 /* Debug.m */; };
-		EA6D3E5F14D82E71004DCB80 /* Debug.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D3E5D14D82E71004DCB80 /* Debug.m */; };
 		EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
 		EAAF336114BDEC78002A8837 /* ansani_build.txt in Resources */ = {isa = PBXBuildFile; fileRef = EAAF336014BDEC78002A8837 /* ansani_build.txt */; };
 		EACB097914A0EFDA00F48809 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
@@ -1290,7 +1288,6 @@
 		EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
-		EA6D3E5D14D82E71004DCB80 /* Debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Debug.m; sourceTree = "<group>"; };
 		EAAF335214BDD462002A8837 /* ansani_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ansani_key.pem; sourceTree = "<group>"; };
 		EAAF336014BDEC78002A8837 /* ansani_build.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ansani_build.txt; sourceTree = "<group>"; };
 		EACB097514A0EFDA00F48809 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
@@ -1938,7 +1935,6 @@
 				EA43C70714A370DB00F2D843 /* VTPG_Common.h */,
 				EA43C70814A370DB00F2D843 /* VTPG_Common.m */,
 				EA6D3E5914D8048C004DCB80 /* Debug.h */,
-				EA6D3E5D14D82E71004DCB80 /* Debug.m */,
 			);
 			name = DebugHelper;
 			sourceTree = "<group>";
@@ -3283,7 +3279,6 @@
 				EA4BF68C14B3161D008FCBE5 /* ASIInputStream.m in Sources */,
 				EA4BF68D14B3161D008FCBE5 /* ASINetworkQueue.m in Sources */,
 				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
-				EA6D3E5E14D82E71004DCB80 /* Debug.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3391,7 +3386,6 @@
 				EAE98EC614BEFBD700D6A3DC /* ASIInputStream.m in Sources */,
 				EAE98EC714BEFBD700D6A3DC /* ASINetworkQueue.m in Sources */,
 				B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */,
-				EA6D3E5F14D82E71004DCB80 /* Debug.m in Sources */,
 				3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3842,6 +3836,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_USLEEP=1",
 					"SQLITE_THREADSAFE=0",
+					"NO_LOG_MACROS=1",
 				);
 				GCC_VERSION = "";
 				INFOPLIST_FILE = Info.plist;
@@ -3959,6 +3954,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_USLEEP=1",
 					"SQLITE_THREADSAFE=0",
+					"NO_LOG_MACROS=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ViennaBeta-Info.plist";
