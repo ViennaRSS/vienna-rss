@@ -404,3 +404,8 @@
 "Descending" = "Descending";
 "Use Current Style for Articles" = "Aktuellen Style zur Artikel-Anzeige verwenden";
 "Use Web Page for Articles" = "Sofort die Artikel-Webseite laden";
+
+/* Added for Google Reader support */
+"Force Refresh Selected Subscriptions From Google Reader" = "Force Refresh Selected Subscriptions From Google Reader";
+"Update Subscriptions From Google Reader" = "Update Subscriptions From Google Reader";
+"Hide Toolbar" = "Hide Toolbar";
