@@ -117,7 +117,7 @@
 		[sJavaScriptPreferences setJavaScriptEnabled:YES];
 		[sJavaScriptPreferences setLoadsImagesAutomatically:NO];
 		[sJavaScriptPreferences setPlugInsEnabled:NO];
-		[sJavaScriptPreferences setPrivateBrowsingEnabled:YES];
+		[sJavaScriptPreferences setPrivateBrowsingEnabled:NO];
 		[sJavaScriptPreferences setUsesPageCache:NO];
 	}
 	

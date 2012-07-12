@@ -165,7 +165,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	NSUInteger index;
 	
-	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<html><head>"];
+	NSMutableString * htmlText = [[NSMutableString alloc] initWithString:@"<!DOCTYPE html><html><head><meta charset=\"UTF-8\" />"];
 	if (cssStylesheet != nil)
 	{
 		[htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
@@ -245,10 +245,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	
 	// Load a blank HTML page.
 	NSString * htmlText = [[NSString alloc] initWithString: @"<HTML></HTML>"];
-	const char * utf8String = [htmlText UTF8String];
-	[[self mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
-					  MIMEType:@"text/html" 
-			  textEncodingName:@"utf-8" 
+	[[self mainFrame] loadHTMLString:htmlText
 					   baseURL:[NSURL URLWithString:@""]];
 	[htmlText release];
 }
@@ -273,10 +270,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
 	
-	const char * utf8String = [htmlText UTF8String];
-	[[self mainFrame] loadData:[NSData dataWithBytes:utf8String length:strlen(utf8String)]
-							 MIMEType:@"text/html" 
-					 textEncodingName:@"utf-8" 
+	[[self mainFrame] loadHTMLString:htmlText
 							  baseURL:[NSURL URLWithString:@"/"]];
 }
 

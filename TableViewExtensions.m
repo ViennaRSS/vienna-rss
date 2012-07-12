@@ -62,18 +62,20 @@
 	if (delegateImplementsShouldDisplayToolTips && [(id)[self delegate] tableViewShouldDisplayCellToolTips:self])
 	{
 		NSRect visibleRect = [self visibleRect];
-		NSRange colRange = [self columnsInRect:visibleRect];
+		NSIndexSet *columnIndexes = [self columnIndexesInRect:visibleRect];
 		NSRange rowRange = [self rowsInRect:visibleRect];
 		NSRect frameOfCell;
-		unsigned col, row;
+		NSInteger col, row;
 		
-		for (col = colRange.location; col < colRange.location + colRange.length; col++)
+		col = [columnIndexes firstIndex];
+		while (col != NSNotFound)
 		{
 			for (row = rowRange.location; row < rowRange.location + rowRange.length; row++)
 			{
 				frameOfCell = [self frameOfCellAtColumn:col row:row];
 				[self addToolTipRect:frameOfCell owner:self userData:NULL];
 			}
+			col = [columnIndexes indexGreaterThanIndex:col];
 		}
 	}
 }

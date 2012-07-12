@@ -1181,7 +1181,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[mainWindow orderFront:self];
 	
 	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? NSWorkspaceLaunchWithoutActivation : NSWorkspaceLaunchDefault;
+	NSWorkspaceLaunchOptions lOptions = [prefs openLinksInBackground] ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : (NSWorkspaceLaunchDefault | NSWorkspaceLaunchDefault);
 	[[NSWorkspace sharedWorkspace] openURLs:urlArray
 					withAppBundleIdentifier:NULL
 									options:lOptions
