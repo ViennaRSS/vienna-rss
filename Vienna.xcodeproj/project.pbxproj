@@ -1320,7 +1320,7 @@
 		EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSMTabBarControl.framework; sourceTree = "<group>"; };
 		EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSMTabBarControl.framework; sourceTree = "<group>"; };
 		EAE98F8B14BEFBD700D6A3DC /* ViennaBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViennaBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EAE98F8D14BEFBD800D6A3DC /* ViennaBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ViennaBeta-Info.plist"; path = "/Users/dok/Dropbox/vienna-rss/ViennaBeta-Info.plist"; sourceTree = "<absolute>"; };
+		EAE98F8D14BEFBD800D6A3DC /* ViennaBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ViennaBeta-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3946,7 +3946,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = "";
+				BUILD_NUMBER = 2814;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3968,7 +3968,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
-				VIENNA_VERSION_NUMBER = 2813;
+				VIENNA_VERSION_NUMBER = "3.0ß";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -3976,7 +3976,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = "";
+				BUILD_NUMBER = 2814;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3997,7 +3997,7 @@
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
-				VIENNA_VERSION_NUMBER = 2813;
+				VIENNA_VERSION_NUMBER = "3.0ß";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
