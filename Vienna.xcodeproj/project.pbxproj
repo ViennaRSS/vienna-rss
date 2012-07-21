@@ -20,16 +20,16 @@
 			name = Release;
 			productName = Release;
 		};
-		EAAF335414BDE402002A8837 /* BetaAnsani */ = {
+		EAAF335414BDE402002A8837 /* Github Beta */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "BetaAnsani" */;
+			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Github Beta" */;
 			buildPhases = (
 				EAAF336614BEF4DF002A8837 /* ShellScript */,
 			);
 			dependencies = (
 				EAE98F9414BEFD6500D6A3DC /* PBXTargetDependency */,
 			);
-			name = BetaAnsani;
+			name = "Github Beta";
 			productName = Release;
 		};
 /* End PBXAggregateTarget section */
@@ -2101,7 +2101,7 @@
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				52BA63FC0DE9E2E10008B3E1 /* Release */,
-				EAAF335414BDE402002A8837 /* BetaAnsani */,
+				EAAF335414BDE402002A8837 /* Github Beta */,
 				EAE98E6114BEFBD700D6A3DC /* ViennaBeta */,
 			);
 		};
@@ -2829,7 +2829,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -o errexit\n\necho \"Pubblico su ansani.it/vienna\"\n\nPRIVATE_KEY_PATH=\"/Users/dok/Dropbox/Sviluppo Vienna/dsa_priv.pem\"\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://www.ansani.it/vienna\"\nRELEASENOTES_URL=\"http://www.ansani.it/vienna/release-notes-$VERSION.txt\"\n\nARCHIVE_FILENAME=\"$PRODUCT_NAME$VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PRODUCT_NAME\"*.zip\nditto -ck --keepParent \"$PRODUCT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\nopenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n| openssl dgst -dss1 -sign < \"$PRIVATE_KEY_PATH\" \\\n| openssl enc -base64\n)\n\nSIGNATURE=$(\n/usr/bin/ruby \"$PROJECT_DIR/sign_update.rb\" \"$ARCHIVE_FILENAME\" \"$PRIVATE_KEY_PATH\"\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat > \"$BUILT_PRODUCTS_DIR/changelog$VIENNA_CHANGELOG_SUFFIX.xml\" <<EOF\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rss version=\"2.0\" xmlns:sparkle=\"http://www.andymatuschak.org/xml-namespaces/sparkle\">\n<channel>\n<title>Vienna Changelog</title>\n<link>http://vienna-rss.sourceforge.net</link>\n<description>Vienna Changelog</description>\n<language>en-us</language>\n<copyright>Copyright 2010, Steve Palmer</copyright>\n<item>\n<title>BETA Version ($VERSION)</title>\n<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n<pubDate>$PUBDATE</pubDate>\n<enclosure\nurl=\"$DOWNLOAD_URL\"\nsparkle:version=\"$VERSION\"\ntype=\"application/octet-stream\"\nlength=\"$SIZE\"\nsparkle:dsaSignature=\"$SIGNATURE\"\n/>\n</item>\n</channel>\n</rss>\nEOF\n\necho scp \"$BUILT_PRODUCTS_DIR/$ARCHIVE_FILENAME\" root@ansani.it:/home/www/ansani.it/vienna/\nscp \"$BUILT_PRODUCTS_DIR/$ARCHIVE_FILENAME\" root@ansani.it:/home/www/ansani.it/vienna/\necho scp \"$BUILT_PRODUCTS_DIR/changelog$VIENNA_CHANGELOG_SUFFIX.xml\" root@ansani.it:/home/www/ansani.it/vienna/changelog$VIENNA_CHANGELOG_SUFFIX.xml\nscp \"$BUILT_PRODUCTS_DIR/changelog$VIENNA_CHANGELOG_SUFFIX.xml\" root@ansani.it:/home/www/ansani.it/vienna/changelog$VIENNA_CHANGELOG_SUFFIX.xml\necho scp \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Resources/ansani_build.txt\" root@ansani.it:/home/www/ansani.it/vienna/release-notes-$VERSION.txt\nscp \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Resources/ansani_build.txt\" root@ansani.it:/home/www/ansani.it/vienna/release-notes-$VERSION.txt";
+			shellScript = "set -o errexit\n\necho \"Prepare publication to Github\"\n\nDOWNLOAD_BASE_URL=\"https://github.com/downloads/ViennaRSS/vienna-rss\"\n# VERSION is similar to 2.6.0.2601 , BUILD_NUMBER is similar to 2601\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nBUILD_NUMBER=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleVersion)\n\nVIENNA_BUILD_NAME=\"$PRODUCT_NAME$VERSION\"\nVIENNA_UPLOADS_DIR=\"$BUILT_PRODUCTS_DIR/Uploads\"\nARCHIVE_FILENAME=\"$VIENNA_BUILD_NAME.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\n\nWD=$PWD\n\nif [ ! -e \"$VIENNA_UPLOADS_DIR\" ] ; then\n\tmkdir \"$VIENNA_UPLOADS_DIR\"\nfi\n\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$VIENNA_UPLOADS_DIR/$PRODUCT_NAME\"*.zip\n\n# Application\nditto -ck --keepParent \"$PRODUCT_NAME.app\" \"$VIENNA_UPLOADS_DIR/$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$VIENNA_UPLOADS_DIR/$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\n\n# dSYM\nVIENNA_APP_DSYM=\"$PRODUCT_NAME.app.dSYM\"\nif [ -e \"$VIENNA_APP_DSYM\" ] ; then\n\tditto -ck --keepParent --sequesterRsrc \"$VIENNA_APP_DSYM\" \"$VIENNA_UPLOADS_DIR/$VIENNA_BUILD_NAME.dSYM.zip\"\nfi\n\n# Notes related to this build\nVIENNA_NOTES=\"$SRCROOT/notes.html\"\nRELEASENOTES_URL=\"$DOWNLOAD_BASE_URL/noteson$VERSION.html\"\n\nif [ -e \"$VIENNA_NOTES\" ] ; then\n\tcp -f \"$VIENNA_NOTES\" \"$VIENNA_UPLOADS_DIR/noteson$VERSION.html\"\nfi\n\n# Changelog for Sparkle\ncat > \"$VIENNA_UPLOADS_DIR/changelog$VIENNA_CHANGELOG_SUFFIX.xml\" <<EOF\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<rss version=\"2.0\" xmlns:sparkle=\"http://www.andymatuschak.org/xml-namespaces/sparkle\">\n<channel>\n<title>Vienna Changelog</title>\n<link>http://vienna-rss.sourceforge.net</link>\n<description>Vienna Changelog</description>\n<language>en-us</language>\n<copyright>Copyright 2010-2012, Steve Palmer and contributors</copyright>\n<item>\n<title>BETA Version ($VERSION)</title>\n<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n<pubDate>$PUBDATE</pubDate>\n<enclosure\nurl=\"$DOWNLOAD_URL\"\nsparkle:version=\"$BUILD_NUMBER\"\ntype=\"application/octet-stream\"\nlength=\"$SIZE\"\n/>\n<sparkle:minimumSystemVersion>10.5.0</sparkle:minimumSystemVersion>\n</item>\n</channel>\n</rss>\nEOF\n\n";
 		};
 		EAE98F6D14BEFBD700D6A3DC /* Index cs Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3938,8 +3938,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = ViennaBeta;
-				VIENNA_CHANGELOG_SUFFIX = _ansani;
-				WARNING_CFLAGS = ViennaBeta;
+				VIENNA_CHANGELOG_SUFFIX = _beta;
 			};
 			name = Deployment;
 		};
@@ -4032,7 +4031,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "BetaAnsani" */ = {
+		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Github Beta" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,
