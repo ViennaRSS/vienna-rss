@@ -3945,7 +3945,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2814;
+				BUILD_NUMBER = 2816;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3967,7 +3967,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
-				VIENNA_VERSION_NUMBER = "3.0ß";
+				VIENNA_VERSION_NUMBER = 3.0b;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -3975,7 +3975,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2814;
+				BUILD_NUMBER = 2816;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3996,7 +3996,7 @@
 				PRODUCT_NAME = ViennaBeta;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
-				VIENNA_VERSION_NUMBER = "3.0ß";
+				VIENNA_VERSION_NUMBER = 3.0b;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
