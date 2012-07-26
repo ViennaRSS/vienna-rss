@@ -163,6 +163,7 @@ JSONDecoder * jsonDecoder;
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];		
 		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
+		NSDate * updateDate = nil;
 		
 		if ([dict objectForKey:@"updated"] == nil) {
 			LOG_EXPR([request url]);
@@ -174,6 +175,8 @@ JSONDecoder * jsonDecoder;
 			LOG_EXPR([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 			ALog(@"Error !!! Incoherent data !");
 		}
+		else
+			updateDate = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"updated"] doubleValue]];;
 	
 		// Log number of bytes we received
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
@@ -242,7 +245,6 @@ JSONDecoder * jsonDecoder;
 		Database *db = [Database sharedDatabase];
 		NSInteger newArticlesFromFeed = 0;
 		[[RefreshManager articlesUpdateSemaphore] lock];
-			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:[NSString stringWithFormat:@"%@",[dict objectForKey:@"updated"]]];
 
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0)
@@ -269,7 +271,8 @@ JSONDecoder * jsonDecoder;
 			}
 							
 			// Set the last update date for this folder.
-			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+			if (updateDate != nil)
+				[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:updateDate];
 			// Set the HTML homepage for this folder.
 			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
 		[[RefreshManager articlesUpdateSemaphore] unlock];

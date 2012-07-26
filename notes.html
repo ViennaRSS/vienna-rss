@@ -1,21 +1,55 @@
-<html>
-<head>
-<title>Vienna 2.6.0.2600</title>
-</head>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+	"http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<!-- Processed by MultiMarkdown -->
+		<meta name="Format" content="complete" />
+		<title>Vienna Beta 3.0b.2816</title>
+	</head>
 <body>
+
+<h1>Version notes</h1>
+
+<h2 id="b.2816">3.0b.2816</h2>
+
 <ul>
-<li>Fix issue where styles fail to render under Mac OSX Lion.</li>
-<li>Fix Share With Twitter plugin.</li>
-<li>Added Ascending and Descending items to the View &gt; Sort By menu.</li>
-<li>Added support for ',' duplicating '&lt;' and '.' duplicating '&gt;' since they appear below them on many country's keyboard layouts and this helps avoid having to hit the shift key since most of the other keyboard shortcuts handle both upper and lower case.</li>
+<li>Google Reader support ! Each feed can either be local (especially authenticated feeds, which are not handled by Google Reader), or hosted on Google Reader</li>
+<li>64 bit support</li>
+<li>Full Screen support on Mac OSX Lion and Mountain Lion</li>
+<li>Fixes running on Leopard and on PowerPC</li>
+<li>Fixes feeds whose titles are XHTML or contain linefeeds/carriage returns</li>
+<li>Fixes Atom feeds with relative links</li>
+<li>Stay on Discrete Graphics mode on Macs having dual graphics cards</li>
+<li>Improved web browser experience (persistent cookies)</li>
+<li>Some functions which were only available on Report or Condensed layout are now available on Unified layout</li>
+<li>Increased timeout for feeds refresh</li>
+<li>Larger use of multi-threading</li>
+<li>Compiled with LLVM</li>
+<li>Binaries are now signed to avoid blockade by Mountain Lion&#8217;s gatekeeper default settings (for first run, you&#8217;ll have to right click and select &#8216;Open&#8217;)</li>
+<li>Many other bugfixes</li>
+</ul>
+
+<h2>2.6.0.2601</h2>
+
+<ul>
+<li>Added Buffer plugin</li>
+</ul>
+
+<h2>2.6.0.2600</h2>
+
+<ul>
+<li>Added Ascending and Descending items to the View > Sort By menu.</li>
+<li>Added support for &#8216;,&#8217; duplicating &#8216;&lt;&#8217; and &#8216;.&#8217; duplicating &#8216;>&#8217; since they appear below them on many country&#8217;s keyboard layouts and this helps avoid having to hit the shift key since most of the other keyboard shortcuts handle both upper and lower case.</li>
 <li>Added a feature to load the web page corresponding to a feed article instead of the text from the RSS feed. </li>
 <li>Added a checkbox to the InfoWindow for the feeds to turn this feature on and off.</li>
 <li>Added a new class ProgressTextCell to draw a progress indicator while the web page is loading since this will no longer be instantaneous.</li>
 <li>Added menu items for Use Current Style for Articles and Use Web Page for Articles to make the new web page article feature more discoverable.</li>
-<li>Moved the folder-specific Get Info... and Unsubscribe to Feed menu items to the folder menu with the other folder-specific items.</li>
-<li>Fixed a bug where a folder's InfoWindow was not updating if you changed a flag via the menu item via the Unsubscribe or Use Web Page for Articles menu items.</li>
+<li>Moved the folder-specific Get Info&#8230; and Unsubscribe to Feed menu items to the folder menu with the other folder-specific items.</li>
+<li>Fixed a bug where a folder&#8217;s InfoWindow was not updating if you changed a flag via the menu item via the Unsubscribe or Use Web Page for Articles menu items.</li>
 <li>Added support for Open Page in Safari (Preferred Browser) and Copy Page Link to Clipboard context menu items for the new web-page based articles.</li>
-<li>Added a new single-key keyboard shortcut for the letter 'b' or 'B' that takes you to the beginning of the unread articles.</li>
+<li>Added a new single-key keyboard shortcut for the letter &#8216;b&#8217; or &#8216;B&#8217; that takes you to the beginning of the unread articles.</li>
 <li>Fixed a bug where the activity window detail text always listed a spurious HTTP Redirect for every single URL.</li>
 <li>Updated the Activity Window redirect logging to include the HTTP code for the redirect.</li>
 <li>Fixed bug where changes to the subscription in the InfoWindow were not saved when the window was closed.</li>

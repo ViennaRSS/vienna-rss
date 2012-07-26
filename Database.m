@@ -698,7 +698,7 @@ static Database * _sharedDatabase = nil;
 
 	// If no change to last update, do nothing
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && IsRSSFolder(folder))
+	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
 	{
 		if ([[folder lastUpdate] isEqualToDate:lastUpdate])
 			return;
@@ -983,7 +983,7 @@ static Database * _sharedDatabase = nil;
 
 	// If this is an RSS feed, delete from the feeds
 	// and delete raw feed source
-	if (IsRSSFolder(folder))
+	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 	{
 		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
 		[self executeSQLWithFormat:@"delete from rss_guids where folder_id=%d", folderId];

@@ -238,6 +238,29 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	return nil;
 }
 
+/* runJavaScriptAlertPanelWithMessage
+ * Called when the browser wants to display a JavaScript alert panel containing the specified message.
+ */
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
+	NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
+		message,	// message
+		NSLocalizedString(@"OK", @""),	// default button
+		nil,	// alt button
+		nil);	// other button
+}
+
+/* runJavaScriptConfirmPanelWithMessage
+ * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
+ */
+- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
+	NSInteger result = NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
+		message,	// message
+		NSLocalizedString(@"OK", @""),	// default button
+		NSLocalizedString(@"Cancel", @""),	// alt button
+		nil);
+	return NSAlertDefaultReturn == result;
+}
+
 /* setStatusText
  * Called from the webview when some JavaScript writes status text. Echo this to
  * our status bar.

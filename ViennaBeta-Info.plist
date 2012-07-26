@@ -87,7 +87,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>$(VIENNA_VERSION_NUMBER).${BUILD_NUMBER}</string>
+	<string>${BUILD_NUMBER}</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -99,9 +99,7 @@
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
 	<key>SUFeedURL</key>
-	<string>http://ansani.it/vienna/changelog_ansani.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>ansani_key.pem</string>
+	<string>https://github.com/downloads/ViennaRSS/vienna-rss/changelog_beta.xml</string>
 	<key>SmartCrashReports_CompanyName</key>
 	<string>OpenCommunity</string>
 	<key>SmartCrashReports_EmailTicket</key>
