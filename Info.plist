@@ -97,9 +97,7 @@
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
 	<key>SUFeedURL</key>
-	<string>http://ansani.it/vienna/changelog_ansani.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>ansani_key.pem</string>
+	<string>https://github.com/downloads/ViennaRSS/vienna-rss/changelog.xml</string>
 	<key>SmartCrashReports_CompanyName</key>
 	<string>OpenCommunity</string>
 	<key>SmartCrashReports_EmailTicket</key>

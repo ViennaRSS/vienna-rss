@@ -8,6 +8,28 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+
+3.0b.2816
+---------
+- Google Reader support ! Each feed can either be local (especially authenticated feeds, which are not handled by Google Reader), or hosted on Google Reader
+- 64 bit support
+- Full Screen support on Mac OSX Lion and Mountain Lion
+- Fixes running on Leopard and on PowerPC
+- Fixes feeds whose titles are XHTML or contain linefeeds/carriage returns
+- Fixes Atom feeds with relative links
+- Stay on Discrete Graphics mode on Macs having dual graphics cards
+- Improved web browser experience (persistent cookies)
+- Some functions which were only available on Report or Condensed layout are now available on Unified layout
+- Increased timeout for feeds refresh
+- Larger use of multi-threading
+- Compiled with LLVM
+- Binaries are now signed to avoid blockade by Mountain Lion's gatekeeper default settings (for first run, you'll have to right click and select 'Open')
+- Many other bugfixes
+
+2.6.0.2601
+----------
+- Added Buffer plugin
+
 2.6.0.2600
 ----------
 - Added Ascending and Descending items to the View > Sort By menu.
