@@ -48,7 +48,7 @@
 	[filterSearchField setToolTip:NSLocalizedString(@"Filter displayed articles by matching text", nil)];
 	[filterViewPopUp setToolTip:NSLocalizedString(@"Filter articles", nil)];
 	[filterCloseButton setToolTip:NSLocalizedString(@"Close the filter bar", nil)];
-    [[filterCloseButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Close the filter bar", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[[filterCloseButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Close the filter bar", nil) forAttribute:NSAccessibilityTitleAttribute];
 }
 
 /* drawRect
