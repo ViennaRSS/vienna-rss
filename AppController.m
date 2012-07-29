@@ -4304,7 +4304,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (IsSearchFolder(folder))
 			[menuItem setTitle:NSLocalizedString(@"Delete", nil)];
 		else
-			[menuItem setTitle:NSLocalizedString(@"Delete...", nil)];
+			[menuItem setTitle:NSLocalizedString(@"Delete…", nil)];
 		return folder && !IsTrashFolder(folder) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(refreshSelectedSubscriptions:))
