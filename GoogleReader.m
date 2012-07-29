@@ -495,9 +495,14 @@ JSONDecoder * jsonDecoder;
 	}
 }
 
--(void)resetAuthentication
+-(void)clearAuthentication
 {
 	googleReaderStatus = notAuthenticated;
+}
+
+-(void)resetAuthentication
+{
+	[self clearAuthentication];
 	[self authenticate];
 	[self getGoogleActionToken];
 }

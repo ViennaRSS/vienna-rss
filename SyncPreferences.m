@@ -49,6 +49,9 @@
 		[[GoogleReader sharedManager] authenticate];
 		[[GoogleReader sharedManager] loadSubscriptions:nil];
 	}
+	else {
+    	[[GoogleReader sharedManager] clearAuthentication];
+    };
 }
 
 -(IBAction)mergeSubscriptions:(id)sender 
