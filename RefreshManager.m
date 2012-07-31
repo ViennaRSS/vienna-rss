@@ -515,13 +515,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} else if (IsGoogleReaderFolder(folder)) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Google Reader Feed", nil)];
-		NSString *host = [[[folder homePage] trim] baseURL];
-		// try to separate host into hostname and domain
-		NSString *domainString = [host substringFromIndex:NSMaxRange([host rangeOfString:@"."])];
-		// if calculated domain name doesn't contain a dot, use host
-		if(NSMaxRange([domainString rangeOfString:@"."])==NSNotFound)
-			{domainString=[host copy];};
-		favIconPath = [NSString stringWithFormat:@"http://s2.googleusercontent.com/s2/favicons?domain=%@&alt=feed", domainString];
+		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} 
 
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
