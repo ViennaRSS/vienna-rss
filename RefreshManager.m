@@ -553,8 +553,11 @@ static NSRecursiveLock * articlesUpdate_lock;
 				}
 
 		} else {
-			LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
-			ALog(@"Image Error!");
+			// many servers send null data instead of a favicon
+			Database *db = [Database sharedDatabase];
+			@synchronized(db) {
+				[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+			};
 		}
 		[iconImage release];
 	} else {
