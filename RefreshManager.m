@@ -627,7 +627,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		// [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-		if ([folder flags] & MA_FFlag_CheckForImage) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
 	}
 	else if (responseStatusCode == 410)
 	{
@@ -878,8 +878,8 @@ static NSRecursiveLock * articlesUpdate_lock;
 		[newFeed release];
         
 		// If this folder also requires an image refresh, add that
-		if ([folder flags] & MA_FFlag_CheckForImage)
-			[self performSelector:@selector(refreshFavIcon:) withObject:folder afterDelay:0];
+		if (([folder flags] & MA_FFlag_CheckForImage))
+			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
 																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
