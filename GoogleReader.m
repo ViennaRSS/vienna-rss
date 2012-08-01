@@ -142,7 +142,7 @@ JSONDecoder * jsonDecoder;
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
 
-	[aItem appendDetail:NSLocalizedString(@"Error: %@", [request error])];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),[[request error] localizedDescription ]]];
 	[aItem setStatus:NSLocalizedString(@"Error", nil)];
 	[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 }
