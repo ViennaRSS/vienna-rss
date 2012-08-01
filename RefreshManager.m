@@ -266,13 +266,6 @@ static NSRecursiveLock * articlesUpdate_lock;
 -(void)refreshFavIcon:(Folder *)folder
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	if (([folder flags] & MA_FFlag_CheckForImage)) 
-	{
-		Database *db = [Database sharedDatabase];
-		@synchronized(db) {
-			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
-		};
-	}
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
@@ -534,6 +527,10 @@ static NSRecursiveLock * articlesUpdate_lock;
 	[self setFolderUpdatingFlag:folder flag:NO];
 	if ([request responseStatusCode] == 404) {
 		[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+		Database *db = [Database sharedDatabase];
+		@synchronized(db) {
+			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+			}
 	} else if ([request responseStatusCode] == 200) {
 		
 		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
@@ -549,6 +546,11 @@ static NSRecursiveLock * articlesUpdate_lock;
 			// Log additional details about this.
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
+
+			Database *db = [Database sharedDatabase];
+			@synchronized(db) {
+				[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+				}
 
 		} else {
 			LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
