@@ -295,6 +295,11 @@ JSONDecoder * jsonDecoder;
 			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
 		
 		[dict release];
+
+		// If this folder also requires an image refresh, add that
+		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
+			[[RefreshManager sharedManager] performSelectorInBackground:@selector(refreshFavIcon:) withObject:refreshedFolder];
+
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];

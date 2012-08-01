@@ -876,11 +876,11 @@ static Database * _sharedDatabase = nil;
 	NSInteger newItemId = [self createFolderOnDatabase:name underParent:parentId withType:type];
 	if (newItemId != -1)
 	{
-		// Add this new folder to our internal cache. If this is an RSS
+		// Add this new folder to our internal cache. If this is an RSS or Google Reader
 		// folder, mark it so that somewhere down the line we'll request the
 		// image for the folder.
 		folder = [[[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type] autorelease];
-		if (type == MA_RSS_Folder)
+		if ((type == MA_RSS_Folder)||(type == MA_GoogleReader_Folder))
 			[folder setFlag:MA_FFlag_CheckForImage];
 		[foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
 		
@@ -917,8 +917,8 @@ static Database * _sharedDatabase = nil;
 	NSDate * lastUpdate = [NSDate distantPast];
 	NSTimeInterval interval = [lastUpdate timeIntervalSince1970];
 
-	// Require an image check if we're an RSS folder
-	if (type == MA_RSS_Folder)
+	// Require an image check if we're a subscription folder
+	if ((type == MA_RSS_Folder) || (type == MA_GoogleReader_Folder))
 		flags = MA_FFlag_CheckForImage;
 
 	// Create the folder in the database. One thing to watch out for here that has
