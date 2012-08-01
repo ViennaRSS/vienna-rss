@@ -271,6 +271,10 @@ static NSRecursiveLock * articlesUpdate_lock;
 	// or if the feed already has a favicon.
 	if (IsRSSFolder(folder) && ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage]))
 	{
+		Database *db = [Database sharedDatabase];
+		@synchronized(db) {
+			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+		};
 		[pool drain];
 		return;
 	}
