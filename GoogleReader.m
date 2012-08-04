@@ -142,7 +142,7 @@ JSONDecoder * jsonDecoder;
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
 
-	[aItem appendDetail:NSLocalizedString(@"Error: %@", [request error])];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),[[request error] localizedDescription ]]];
 	[aItem setStatus:NSLocalizedString(@"Error", nil)];
 	[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 }
@@ -295,6 +295,11 @@ JSONDecoder * jsonDecoder;
 			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
 		
 		[dict release];
+
+		// If this folder also requires an image refresh, add that
+		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
+			[[RefreshManager sharedManager] performSelectorInBackground:@selector(refreshFavIcon:) withObject:refreshedFolder];
+
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];

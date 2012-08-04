@@ -266,18 +266,15 @@ static NSRecursiveLock * articlesUpdate_lock;
 -(void)refreshFavIcon:(Folder *)folder
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	if (([folder flags] & MA_FFlag_CheckForImage)) 
-	{
-		Database *db = [Database sharedDatabase];
-		@synchronized(db) {
-			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
-		};
-	}
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
 	if (IsRSSFolder(folder) && ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage]))
 	{
+		Database *db = [Database sharedDatabase];
+		@synchronized(db) {
+			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+		};
 		[pool drain];
 		return;
 	}
@@ -515,7 +512,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} else if (IsGoogleReaderFolder(folder)) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Google Reader Feed", nil)];
-		favIconPath = [NSString stringWithFormat:@"http://s2.googleusercontent.com/s2/favicons?domain=%@&alt=feed", [[[folder feedURL] trim] baseURL]];		
+		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} 
 
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
@@ -534,6 +531,10 @@ static NSRecursiveLock * articlesUpdate_lock;
 	[self setFolderUpdatingFlag:folder flag:NO];
 	if ([request responseStatusCode] == 404) {
 		[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
+		Database *db = [Database sharedDatabase];
+		@synchronized(db) {
+			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+			}
 	} else if ([request responseStatusCode] == 200) {
 		
 		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
@@ -550,9 +551,17 @@ static NSRecursiveLock * articlesUpdate_lock;
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
 
+			Database *db = [Database sharedDatabase];
+			@synchronized(db) {
+				[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+				}
+
 		} else {
-			LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
-			ALog(@"Image Error!");
+			// many servers send null data instead of a favicon
+			Database *db = [Database sharedDatabase];
+			@synchronized(db) {
+				[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+			};
 		}
 		[iconImage release];
 	} else {
@@ -627,7 +636,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		// [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-		if ([folder flags] & MA_FFlag_CheckForImage) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
 	}
 	else if (responseStatusCode == 410)
 	{
@@ -878,8 +887,8 @@ static NSRecursiveLock * articlesUpdate_lock;
 		[newFeed release];
         
 		// If this folder also requires an image refresh, add that
-		if ([folder flags] & MA_FFlag_CheckForImage)
-			[self performSelector:@selector(refreshFavIcon:) withObject:folder afterDelay:0];
+		if (([folder flags] & MA_FFlag_CheckForImage))
+			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
 																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
