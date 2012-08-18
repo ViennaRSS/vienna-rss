@@ -335,7 +335,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 -(void)downloadFile:(NSString *)filename fromURL:(NSString *)url
 {
 	NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:self];	
+	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
 	if (theDownload)
 	{
 		DownloadItem * newItem = [[DownloadItem alloc] init];

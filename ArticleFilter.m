@@ -25,7 +25,7 @@
 #import "Message.h"
 
 @interface ArticleFilter (Private)
-+(void)createFilter:(NSString *)name tag:(int)tag comparator:(SEL)comparator;
++(void)createFilter:(NSString *)name tag:(NSInteger)tag comparator:(SEL)comparator;
 @end
 
 // There's just one global filter list.
