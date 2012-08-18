@@ -3929,8 +3929,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = ViennaBeta;
-				VIENNA_CHANGELOG_SUFFIX = _ansani;
-				WARNING_CFLAGS = ViennaBeta;
+				VIENNA_CHANGELOG_SUFFIX = _beta;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
 		};
