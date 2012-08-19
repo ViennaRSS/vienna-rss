@@ -260,7 +260,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
-	[defaultValues setObject:boolNo forKey:MAPref_OpenLinksInBackground];
+	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:boolNo forKey:MAPref_ShowAppInStatusBar];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowStatusBar];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFilterBar];
