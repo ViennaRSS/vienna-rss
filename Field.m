@@ -188,7 +188,7 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@', tag=%d, width=%d, visible=%d)", name, displayName, sqlField, tag, width, visible];
+	return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@', tag=%ld, width=%d, visible=%d)", name, displayName, sqlField, tag, width, visible];
 }
 
 /* encodeWithCoder

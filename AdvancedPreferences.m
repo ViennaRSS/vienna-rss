@@ -63,7 +63,7 @@
 
 	// Show use JavaScript option
 	[useJavaScriptButton setState:[prefs useJavaScript] ? NSOnState : NSOffState];
-	[concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%d",[prefs concurrentDownloads]]];
+	[concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%ld",[prefs concurrentDownloads]]];
 }
 
 /* changeUseJavaScript

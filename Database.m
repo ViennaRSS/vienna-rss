@@ -837,7 +837,7 @@ static Database * _sharedDatabase = nil;
 		NSUInteger index = 1;
 
 		while (([self folderFromName:name]) != nil)
-			name = [NSString stringWithFormat:@"%@ (%i)", oldName, index++];
+			name = [NSString stringWithFormat:@"%@ (%li)", oldName, index++];
 	}
 
 	NSInteger nextSibling = 0;
@@ -2017,7 +2017,7 @@ static Database * _sharedDatabase = nil;
 
 	// Straightforward folder is <something>
 	if (!subScope)
-		return [NSString stringWithFormat:@"%@%@%d", [field sqlField], operatorString, folderId];
+		return [NSString stringWithFormat:@"%@%@%ld", [field sqlField], operatorString, folderId];
 
 	// For under/not-under operators, we're creating a SQL statement of the format
 	// (folder_id = <value1> || folder_id = <value2>...). It is possible to try and simplify
@@ -2036,7 +2036,7 @@ static Database * _sharedDatabase = nil;
 		Folder * folder = [childFolders objectAtIndex:index];
 		if (index > 0)
 			[sqlString appendString:conditionString];
-		[sqlString appendFormat:@"%@%@%d", [field sqlField], operatorString, [folder itemId]];
+		[sqlString appendFormat:@"%@%@%ld", [field sqlField], operatorString, [folder itemId]];
 	}
 	if (count > 1)
 		[sqlString appendString:@")"];
@@ -2128,7 +2128,7 @@ static Database * _sharedDatabase = nil;
 					spanOfDays = 7;
 				}
 				
-				criteriaValue = [NSString stringWithFormat:@"%d/%d/%d %d:%d:%d", [startDate dayOfMonth], [startDate monthOfYear], [startDate yearOfCommonEra], 0, 0, 0];
+				criteriaValue = [NSString stringWithFormat:@"%ld/%ld/%ld %d:%d:%d", [startDate dayOfMonth], [startDate monthOfYear], [startDate yearOfCommonEra], 0, 0, 0];
 				startDate = [NSCalendarDate dateWithString:criteriaValue calendarFormat:@"%d/%m/%Y %H:%M:%S"];
 				
 				if ([criteria operator] == MA_CritOper_Is)

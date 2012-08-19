@@ -77,7 +77,7 @@
 			}
 			else
 			{
-				NSAssert1(TRUE, @"Unsupported folder sort method in addChild: %d", sortMethod);
+				NSAssert1(TRUE, @"Unsupported folder sort method in addChild: %ld", sortMethod);
 			}
 			++insertIndex;
 		}
@@ -116,7 +116,7 @@
 		break;
 		
 	default:
-		NSAssert1(TRUE, @"Unsupported folder sort method in sortChildren: %d", sortMethod);
+		NSAssert1(TRUE, @"Unsupported folder sort method in sortChildren: %ld", sortMethod);
 		break;
 	}
 }
@@ -314,7 +314,7 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (Parent=%d, # of children=%d)", [folder name], parentNode, [children count]];
+	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)", [folder name], parentNode, [children count]];
 }
 
 /* allocAndStartProgressIndicator:

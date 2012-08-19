@@ -769,7 +769,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 				// title. The solution is to use the link and title and build a GUID from those.
 				// We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
 				if ([articleGuid isEqualToString:@""])
-					articleGuid = [NSString stringWithFormat:@"%d-%@-%@", folderId, [newsItem link], [newsItem title]];
+					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", folderId, [newsItem link], [newsItem title]];
 				
 				// This is a horrible hack for horrible feeds that contain more than one item with the same guid.
 				// Bad feeds! I'm talking to you, WordPress Trac.
@@ -849,7 +849,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 				NSUInteger index = 1;
                 
 				while (([db folderFromName:feedTitle]) != nil)
-					feedTitle = [NSString stringWithFormat:@"%@ (%i)", oldFeedTitle, index++];
+					feedTitle = [NSString stringWithFormat:@"%@ (%li)", oldFeedTitle, index++];
                 
 				[connectorItem setName:feedTitle];
 				[db setFolderName:folderId newName:feedTitle];

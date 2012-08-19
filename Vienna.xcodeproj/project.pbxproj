@@ -3816,6 +3816,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = 2602;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
@@ -3825,6 +3826,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_NUMBER = 2602;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
@@ -3833,6 +3835,7 @@
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3850,6 +3853,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = Vienna;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -3859,6 +3863,7 @@
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(BUILT_PRODUCTS_DIR)",
@@ -3874,6 +3879,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = Vienna;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
@@ -3928,15 +3934,17 @@
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = ViennaBeta;
-				VIENNA_CHANGELOG_SUFFIX = _ansani;
-				WARNING_CFLAGS = ViennaBeta;
+				VIENNA_CHANGELOG_SUFFIX = _beta;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = ViennaBeta;
 				VIENNA_CHANGELOG_SUFFIX = _beta;
 			};
