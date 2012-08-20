@@ -54,7 +54,6 @@
 #import "SearchMethod.h"
 #import <Sparkle/Sparkle.h>
 #import <WebKit/WebKit.h>
-#import <Growl/GrowlDefines.h>
 #include <mach/mach_port.h>
 #include <mach/mach_interface.h>
 #include <mach/mach_init.h>
@@ -145,7 +144,6 @@ static NSLock * dateFormatters_lock;
 		progressCount = 0;
 		persistedStatusText = nil;
 		lastCountOfUnread = 0;
-		growlAvailable = NO;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
 		isStatusBarVisible = YES;
@@ -522,8 +520,26 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
 	
-	// Use Growl if it is installed
-	[GrowlApplicationBridge setGrowlDelegate:self];
+	// Growl initialization
+	NSBundle *mainBundle = [NSBundle mainBundle];
+	NSString *path = [[mainBundle privateFrameworksPath] stringByAppendingPathComponent:@"Growl"];
+	if(NSAppKitVersionNumber < 1038)
+		path = [path stringByAppendingPathComponent:@"Legacy"];
+
+	path = [path stringByAppendingPathComponent:@"Growl.framework"];
+	LOG_NS(@"path: %@", path);
+	NSBundle *growlFramework = [NSBundle bundleWithPath:path];
+	if([growlFramework load])
+	{
+		NSDictionary *infoDictionary = [growlFramework infoDictionary];
+		LOG_NS(@"Using Growl.framework %@ (%@)",
+			  [infoDictionary objectForKey:@"CFBundleShortVersionString"],
+			  [infoDictionary objectForKey:(NSString *)kCFBundleVersionKey]);
+
+		Class GAB = NSClassFromString(@"GrowlApplicationBridge");
+		if([GAB respondsToSelector:@selector(setGrowlDelegate:)])
+			[GAB performSelector:@selector(setGrowlDelegate:) withObject:self];
+	}
 	
 	// Start the check timer
 	[self handleCheckFrequencyChange:nil];
@@ -1619,26 +1635,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName
 {
-	if (growlAvailable)
-		[GrowlApplicationBridge notifyWithTitle:title
+	Class GAB = NSClassFromString(@"GrowlApplicationBridge");
+	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)])
+					[GAB		notifyWithTitle:title
 									description:description
 							   notificationName:notificationName
 									   iconData:nil
 									   priority:0.0
 									   isSticky:NO
 								   clickContext:notifyContext];
-}
-
-/* growlIsReady
- * Called by Growl when it is loaded. We use this as a trigger to acknowledge its existence.
- */
--(void)growlIsReady
-{
-	if (!growlAvailable)
-	{
-		[GrowlApplicationBridge setGrowlDelegate:self];
-		growlAvailable = YES;
-	}
 }
 
 /* growlNotificationWasClicked
@@ -1673,23 +1678,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(NSDictionary *)registrationDictionaryForGrowl
 {
-	NSMutableArray *defNotesArray = [NSMutableArray array];
-	NSMutableArray *allNotesArray = [NSMutableArray array];
 	
-	[allNotesArray addObject:NSLocalizedString(@"Growl refresh completed", nil)];
-	[allNotesArray addObject:NSLocalizedString(@"Growl download completed", nil)];
-	[allNotesArray addObject:NSLocalizedString(@"Growl download failed", nil)];
-	
-	[defNotesArray addObject:NSLocalizedString(@"Growl refresh completed", nil)];
-	[defNotesArray addObject:NSLocalizedString(@"Growl download completed", nil)];
-	[defNotesArray addObject:NSLocalizedString(@"Growl download failed", nil)];
+	NSDictionary *notificationsWithDescriptions = [NSDictionary dictionaryWithObjectsAndKeys:
+		@"Growl refresh completed", NSLocalizedString(@"Growl refresh completed", ""),
+		@"Growl download completed", NSLocalizedString(@"Growl download completed", ""),
+		@"Growl download failed", NSLocalizedString(@"Growl download failed", ""),
+		nil];
+
+	NSArray *allNotesArray = [notificationsWithDescriptions allKeys];
+	NSMutableArray *defNotesArray = [allNotesArray mutableCopy];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
 							 [self appName], GROWL_APP_NAME, 
 							 allNotesArray, GROWL_NOTIFICATIONS_ALL, 
 							 defNotesArray, GROWL_NOTIFICATIONS_DEFAULT,
+							 notificationsWithDescriptions,	GROWL_NOTIFICATIONS_HUMAN_READABLE_NAMES,
 							 nil];
-	growlAvailable = YES;
+
+	[defNotesArray release];
+
 	return regDict;
 }
 

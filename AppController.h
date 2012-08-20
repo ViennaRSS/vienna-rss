@@ -22,7 +22,7 @@
 #import "Database.h"
 #import "ArticleController.h"
 #import "ActivityViewer.h"
-#import <Growl/GrowlApplicationBridge.h>
+#import <Growl/Growl.h>
 #import "DownloadWindow.h"
 #import "FilterView.h"
 #import "PopupButton.h"
@@ -94,7 +94,6 @@
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
 	int lastCountOfUnread;
-	BOOL growlAvailable;
 	BOOL isStatusBarVisible;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
