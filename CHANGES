@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0b.2817
+---------
+- Fix fetching of icons associated to feeds.
+  *Note* : users of previous versions are invited to use the "Refresh Folder Images" menu item
+- Better accessibility for people with visual impairment through VoiceOver
+- Completely logout from Google Reader when the "Sync with Google Reader" preference is unchecked
+- Builds are now signed with Developer IDs delivered by Apple, to meet Mountain Lion's Gatekeeper default requirements.
 
 3.0b.2816
 ---------
