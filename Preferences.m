@@ -159,7 +159,6 @@ static Preferences * _standardPreferences = nil;
 		filterMode = [self integerForKey:MAPref_FilterMode];
 		layout = [self integerForKey:MAPref_Layout];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
-		checkForNewOnStartup = [self boolForKey:MAPref_CheckForUpdatesOnStartup];
 		markReadInterval = [[userPrefs valueForKey:MAPref_MarkReadInterval] floatValue];
 		minimumFontSize = [self integerForKey:MAPref_MinimumFontSize];
 		newArticlesNotification = [self integerForKey:MAPref_NewArticlesNotification];
@@ -184,6 +183,9 @@ static Preferences * _standardPreferences = nil;
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
 				
+		//Sparkle autoupdate
+		checkForNewOnStartup = [[SUUpdater sharedUpdater] automaticallyChecksForUpdates];
+
 		if (shouldSaveFeedSource)
 		{
 			[self createFeedSourcesFolderIfNecessary];
@@ -246,7 +248,6 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShowUnreadArticlesInBold];
 	[defaultValues setObject:defaultArticleListFont forKey:MAPref_ArticleListFont];
 	[defaultValues setObject:defaultFolderFont forKey:MAPref_FolderFont];
-	[defaultValues setObject:boolYes forKey:MAPref_CheckForUpdatesOnStartup];
 	[defaultValues setObject:boolYes forKey:MAPref_CheckForNewArticlesOnStartup];
 	[defaultValues setObject:[NSNumber numberWithInt:1] forKey:MAPref_CachedFolderID];
 	[defaultValues setObject:MA_Field_Date forKey:MAPref_SortColumn];
@@ -687,7 +688,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != checkForNewOnStartup)
 	{
 		checkForNewOnStartup = flag;
-		[self setBool:flag forKey:MAPref_CheckForUpdatesOnStartup];
+		[[SUUpdater sharedUpdater] setAutomaticallyChecksForUpdates:flag];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
