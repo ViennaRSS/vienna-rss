@@ -144,6 +144,7 @@ JSONDecoder * jsonDecoder;
 
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),[[request error] localizedDescription ]]];
 	[aItem setStatus:NSLocalizedString(@"Error", nil)];
+	[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 	[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 }
 
@@ -159,6 +160,7 @@ JSONDecoder * jsonDecoder;
 	if ([request responseStatusCode] == 404) {
 		[aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];		
