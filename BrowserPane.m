@@ -68,6 +68,7 @@
 @end
 
 @implementation BrowserPane
+@synthesize webPane;
 
 + (void)load
 {
@@ -102,7 +103,9 @@
     if (([super initWithFrame:frame]) != nil)
 	{
 		controller = nil;
+		[self willChangeValueForKey:@"isLoading"];
 		isLoading = NO;
+		[self didChangeValueForKey:@"isLoading"];
 		isLocalFile = NO;
 		viewTitle = nil;
 		openURLInBackground = NO;
@@ -119,14 +122,15 @@
 -(void)awakeFromNib
 {
 	// Create our webview
-	[webPane initTabbedWebView];
-	[webPane setUIDelegate:self];
-	[webPane setFrameLoadDelegate:self];
-	[webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
+	[self.webPane initTabbedWebView];
+	[self.webPane retain];
+	[self.webPane setUIDelegate:self];
+	[self.webPane setFrameLoadDelegate:self];
+	[self.webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
 	
 	// Make web preferences 16pt Arial to match Safari
-	[[webPane preferences] setStandardFontFamily:@"Arial"];
-	[[webPane preferences] setDefaultFontSize:16];
+	[[self.webPane preferences] setStandardFontFamily:@"Arial"];
+	[[self.webPane preferences] setDefaultFontSize:16];
 	
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
@@ -166,7 +170,7 @@
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
-	[webPane setController:controller];
+	[self.webPane setController:controller];
 }
 
 /* viewLink
@@ -174,8 +178,8 @@
  */
 -(NSString *)viewLink
 {
-	if ([[[webPane mainFrame] dataSource] unreachableURL])
-		return [[[[webPane mainFrame] dataSource] unreachableURL] absoluteString];
+	if ([[[self.webPane mainFrame] dataSource] unreachableURL])
+		return [[[[self.webPane mainFrame] dataSource] unreachableURL] absoluteString];
 	return [[self url] absoluteString];
 }
 
@@ -247,7 +251,15 @@
 	pageFilename = [[[[url path] lastPathComponent] stringByDeletingPathExtension] retain];
 	
 	[addressField setStringValue:[url absoluteString]];
-	[[webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
+	[self retain];
+	if ([self.webPane isLoading])
+	{
+		[self willChangeValueForKey:@"isLoading"];
+		[self.webPane stopLoading:self];
+		[self didChangeValueForKey:@"isLoading"];
+	}
+	[[self.webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
+	[self release];
 }
 
 /* setStatusText
@@ -275,7 +287,7 @@
  */
 -(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
 		[self showRssPageButton:NO];
@@ -290,7 +302,7 @@
  */
 -(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		if (!isLoading)
 		{
@@ -323,6 +335,8 @@
 			[addressField setStringValue:[theURL absoluteString]];
 		else 
 			[addressField setStringValue:[[[frame dataSource] unreachableURL] absoluteString]];
+
+		[self retain];
 	}
 }
 
@@ -331,10 +345,10 @@
  */
 -(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		// Was this a feed redirect? If so, this isn't an error:
-		if (![webPane isFeedRedirect] && ![webPane isDownload])
+		if (![self.webPane isFeedRedirect] && ![self.webPane isDownload])
 		{
 			[self setError:error];
 			
@@ -378,6 +392,7 @@
 	[self didChangeValueForKey:@"isLoading"];
 	
 	openURLInBackground = NO;
+	[self release];
 }
 
 /* didFailLoadWithError
@@ -385,7 +400,7 @@
  */
 -(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		// Not really an error. A plugin is grabbing the URL and will handle it
 		// by itself.
@@ -417,7 +432,7 @@
  */
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		// Once the frame is loaded, trawl the source for possible links to RSS
 		// pages.
@@ -442,7 +457,7 @@
  */
 -(void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		[[controller browserView] setTabItemViewTitle:self title:title];
 		[self setViewTitle:title];
@@ -454,7 +469,7 @@
  */
 -(void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
 {
-	if (frame == [webPane mainFrame])
+	if (frame == [self.webPane mainFrame])
 	{
 		[image setScalesWhenResized:YES];
 		[image setSize:NSMakeSize(14, 14)];
@@ -532,7 +547,7 @@
  */
 -(void)printDocument:(id)sender
 {
-	[webPane printDocument:sender];
+	[self.webPane printDocument:sender];
 }
 
 /* mainView
@@ -540,7 +555,7 @@
  */
 -(NSView *)mainView
 {
-	return webPane;
+	return self.webPane;
 }
 
 /* webView
@@ -548,7 +563,7 @@
  */
 -(WebView *)webView
 {
-	return webPane;
+	return self.webPane;
 }
 
 /* performFindPanelAction
@@ -561,16 +576,16 @@
 	{
 		case NSFindPanelActionSetFindString:
 		{			
-			[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
 			break;
 		}
 			
 		case NSFindPanelActionNext:
-			[webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
 			break;
 			
 		case NSFindPanelActionPrevious:
-			[webPane searchFor:[controller searchString] direction:NO caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:[controller searchString] direction:NO caseSensitive:NO wrap:YES];
 			break;
 	}
 }
@@ -581,7 +596,7 @@
 -(NSURL *)url
 {
 	NSURL * theURL = nil;
-	WebDataSource * dataSource = [[webPane mainFrame] dataSource];
+	WebDataSource * dataSource = [[self.webPane mainFrame] dataSource];
 	if (dataSource != nil)
 	{
 		theURL = [[dataSource request] URL];
@@ -605,7 +620,7 @@
  */
 -(BOOL)canGoForward
 {
-	return [webPane canGoForward];
+	return [self.webPane canGoForward];
 }
 
 /* canGoBack
@@ -613,7 +628,7 @@
  */
 -(BOOL)canGoBack
 {
-	return [webPane canGoBack];
+	return [self.webPane canGoBack];
 }
 
 /* handleGoForward
@@ -621,7 +636,7 @@
  */
 -(IBAction)handleGoForward:(id)sender
 {
-	[webPane goForward];
+	[self.webPane goForward];
 }
 
 /* handleGoBack
@@ -629,7 +644,7 @@
  */
 -(IBAction)handleGoBack:(id)sender
 {
-	[webPane goBack];
+	[self.webPane goBack];
 }
 
 /* swipeWithEvent 
@@ -657,9 +672,9 @@
 		if (deltaY != 0)
 		{
 			if (deltaY > 0)
-				[webPane scrollToTop];
+				[self.webPane scrollToTop];
 			else 
-				[webPane scrollToBottom];
+				[self.webPane scrollToBottom];
 		}
 	}
 }
@@ -669,8 +684,8 @@
  */
 -(IBAction)handleReload:(id)sender
 {
-	if ([[webPane mainFrame] dataSource] != nil)
-		[webPane reload:self];
+	if ([[self.webPane mainFrame] dataSource] != nil)
+		[self.webPane reload:self];
 	else
 		[self handleAddress:self];
 }
@@ -680,7 +695,9 @@
  */
 -(void)handleStopLoading:(id)sender
 {
-	[webPane stopLoading:self];
+	[self willChangeValueForKey:@"isLoading"];
+	[self.webPane stopLoading:self];
+	[self didChangeValueForKey:@"isLoading"];
 }
 
 /* handleRSSPage
@@ -734,12 +751,15 @@
 {
 	[viewTitle release];
 	[rssPageURL release];
-	[webPane setFrameLoadDelegate:nil];
-	[webPane setUIDelegate:nil];
-	[webPane stopLoading:self];
-	[webPane removeFromSuperviewWithoutNeedingDisplay];
+	[self.webPane setFrameLoadDelegate:nil];
+	[self.webPane setUIDelegate:nil];
+	[self willChangeValueForKey:@"isLoading"];
+	[self.webPane stopLoading:self];
+	[self didChangeValueForKey:@"isLoading"];
+	[self.webPane removeFromSuperviewWithoutNeedingDisplay];
 	[lastError release];
 	[pageFilename release];
+	self.webPane = nil;
 	[super dealloc];
 }
 @end
