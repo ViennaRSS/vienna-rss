@@ -36,7 +36,7 @@
 
 @interface BrowserPane : NSView<BaseView> {
 	IBOutlet NSBox * boxFrame;
-	IBOutlet TabbedWebView * webPane;
+	TabbedWebView * webPane;
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
@@ -54,6 +54,8 @@
 	NSString * rssPageURL;
 	NSString * viewTitle;
 }
+
+@property (nonatomic, retain) IBOutlet TabbedWebView * webPane;
 
 // Action functions
 -(IBAction)handleGoForward:(id)sender;
