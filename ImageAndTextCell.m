@@ -179,12 +179,25 @@
 		imageFrame.origin.x += 3;
 		imageFrame.size = imageSize;
 		
-		if ([controlView isFlipped])
-			imageFrame.origin.y += ceil((cellFrame->size.height + imageFrame.size.height) / 2);
-		else
-			imageFrame.origin.y += ceil((cellFrame->size.height - imageFrame.size.height) / 2);
+		// The following stuff is equivalent to Snow Leopard's instance method
+		// drawInRect: fromRect: operation: fraction: respectFlipped:YES hints:NULL
+		// but it is Leopard compatible. Adapted from Chromium's image_utils.mm
+		NSAffineTransform *transform = nil;
+		if ([[NSGraphicsContext currentContext] isFlipped]) {
+			transform = [NSAffineTransform transform];
+			[transform scaleXBy:1.0 yBy:-1.0];
+			[transform concat];
+
+			// The lower edge of the image is as far from the origin as the
+			// upper edge was, plus it's on the other side of the origin.
+			imageFrame.origin.y -= NSMaxY(imageFrame) + NSMinY(imageFrame);
+  		}
 		
-		[image compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+		[image drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+
+		// Flip drawing back, if needed.
+		[transform concat];
+
 	}
 }
 
@@ -241,12 +254,25 @@
 		}
 		imageFrame.size = imageSize;
 		
-		if ([controlView isFlipped])
-			imageFrame.origin.y += ceil((cellFrame.size.height + imageFrame.size.height) / 2);
-		else
-			imageFrame.origin.y += ceil((cellFrame.size.height - imageFrame.size.height) / 2);
+		// The following stuff is equivalent to Snow Leopard's instance method
+		// drawInRect: fromRect: operation: fraction: respectFlipped:YES hints:NULL
+		// but it is Leopard compatible. Adapted from Chromium's image_utils.mm
+		NSAffineTransform *transform = nil;
+		if ([[NSGraphicsContext currentContext] isFlipped]) {
+			transform = [NSAffineTransform transform];
+			[transform scaleXBy:1.0 yBy:-1.0];
+			[transform concat];
+
+			// The lower edge of the image is as far from the origin as the
+			// upper edge was, plus it's on the other side of the origin.
+			imageFrame.origin.y -= NSMaxY(imageFrame) + NSMinY(imageFrame);
+  		}
 		
-		[auxiliaryImage compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+		[auxiliaryImage drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
+
+		// Flip drawing back, if needed.
+		[transform concat];
+
 	}
 	
 	// If the cell has a count button, draw the count

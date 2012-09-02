@@ -296,24 +296,6 @@
 	}
 }
 
-/* scrollToTop
- * Scrolls to the top of the TabbedWebView.
- */
--(void)scrollToTop
-{
-    NSPoint newScrollOrigin;
-	NSScrollView * myScrollView;
-	
-	myScrollView = [[[[self mainFrame] frameView] documentView] enclosingScrollView];
-	
-    if ([[myScrollView documentView] isFlipped]) 
-        newScrollOrigin = NSMakePoint(0.0,0.0);
-	else 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
-	
-    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
-}
-
 /* scrollToBottom
  * Scrolls to the bottom of the TabbedWebView.
  */
@@ -330,6 +312,18 @@
 		newScrollOrigin = NSMakePoint(0.0,0.0);
 	
     [[myScrollView documentView] scrollPoint: newScrollOrigin];	
+
+    if ([[myScrollView verticalScroller] knobProportion] < 0.05)
+    	[[myScrollView verticalScroller] setKnobProportion:0.05];
+}
+
+/* scrollToTop
+ * Scrolls to the top of the TabbedWebView.
+ */
+-(void)scrollToTop
+{
+	// nothing different from scrollToBottom
+	[self scrollToBottom];
 }
 
 /* loadUseJavaScript

@@ -32,7 +32,6 @@ extern NSString * MAPref_DownloadsFolder;
 extern NSString * MAPref_SortColumn;
 extern NSString * MAPref_CheckFrequency;
 extern NSString * MAPref_ArticleListColumns;
-extern NSString * MAPref_CheckForUpdatesOnStartup;
 extern NSString * MAPref_CheckForNewArticlesOnStartup;
 extern NSString * MAPref_FolderImagesFolder;
 extern NSString * MAPref_RefreshThreads;
