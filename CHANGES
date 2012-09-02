@@ -4,9 +4,16 @@ Vienna ChangeLog File
 As you release new builds, update this file with details of the changes in each build. The
 most recent build should be at the top of this file.
 
-** Use the notes.html file instead of this file for change notes?
+** The notes.html file should reflect the same infos, but only for recent updates : it is displayed when a new version is detected.
 
 Thanks!
+
+3.0b.2818
+---------
+- Fix some nasty crashes on Mountain Lion which occurred when closing tabs
+- Fix the "Check for newer versions of Vienna at startup" preference
+- Make the knob of the vertical scrollbar more visible when reading long lists on Lion/Mountain Lion
+- Other minor bugfixes and code cleaning
 
 3.0b.2817
 ---------
