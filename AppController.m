@@ -1990,7 +1990,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSImage * starImage = [NSImage imageNamed:@"unreadStar1.tiff"];
 	[starImage setScalesWhenResized:YES];
 	[starImage setSize:circleRect.size];
-	[starImage compositeToPoint:circleRect.origin operation:NSCompositeSourceOver];
+	[starImage drawAtPoint:circleRect.origin fromRect:NSMakeRect(0, 0, max, max) operation:NSCompositeSourceOver fraction:1.0f];
 	
 	// Draw the count in the red circle
 	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f + 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
