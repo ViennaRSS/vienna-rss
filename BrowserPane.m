@@ -293,6 +293,7 @@
 		[self showRssPageButton:NO];
 		[self setError:nil];
 		[self setViewTitle:@""];
+		[self retain];
 	}
 
 }
@@ -336,7 +337,6 @@
 		else 
 			[addressField setStringValue:[[[frame dataSource] unreachableURL] absoluteString]];
 
-		[self retain];
 	}
 }
 
