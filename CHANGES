@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0b.2819
+---------
+- Fix other nasty crashes on Mountain Lion
+
 3.0b.2818
 ---------
 - Fix some nasty crashes on Mountain Lion which occurred when closing tabs
