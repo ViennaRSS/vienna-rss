@@ -4118,7 +4118,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (theAction == @selector(getInfo:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		*validateFlag = IsRSSFolder(folder) && isMainWindowVisible;
+		*validateFlag = (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && isMainWindowVisible;
 		return YES;
 	}
 	if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
@@ -4278,7 +4278,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];
 		}
-		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(useCurrentStyleForArticles:))
 	{

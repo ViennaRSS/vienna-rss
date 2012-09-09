@@ -23,6 +23,7 @@
 #import "CalendarExtensions.h"
 #import "StringExtensions.h"
 #import "AppController.h"
+#import "Folder.h"
 
 // Singleton controller for all info windows
 static InfoWindowManager * _infoWindowManager = nil;
@@ -241,6 +242,16 @@ static InfoWindowManager * _infoWindowManager = nil;
 	[urlField setStringValue:[folder feedURL]];
 	[username setStringValue:[folder username]];
 	[password setStringValue:[folder password]];
+	// for Google feeds, URL may not be changed and no authentication is supported
+	if (IsGoogleReaderFolder(folder)) {
+		//[urlField setSelectable:NO];
+		[urlField setEditable:NO];
+		[urlField setTextColor:[NSColor disabledControlTextColor]];
+		[username setEditable:NO];
+		[username setTextColor:[NSColor disabledControlTextColor]];
+		[password setEditable:NO];
+		[password setTextColor:[NSColor disabledControlTextColor]];
+	}
 	[folderDescription setStringValue:[folder feedDescription]];
 	[folderSize setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])]];
 	[folderUnread setStringValue:[NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), [folder unreadCount]]];
