@@ -2438,7 +2438,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setButtonImage:@"cancelRefreshButton"];
 		
 		[self startProgressIndicator];
-		[self setStatusMessage:[[RefreshManager sharedManager] statusMessageDuringRefresh] persist:YES];
 	}
 	else
 	{
