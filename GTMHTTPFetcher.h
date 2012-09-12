@@ -287,7 +287,32 @@ enum {
   kGTMHTTPFetcherCookieStorageMethodNone = 3
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void GTMAssertSelectorNilOrImplementedWithArgs(id obj, SEL sel, ...);
+
+// Utility functions for applications self-identifying to servers via a
+// user-agent header
+
+// Make a proper app name without whitespace from the given string, removing
+// whitespace and other characters that may be special parsed marks of
+// the full user-agent string.
+NSString *GTMCleanedUserAgentString(NSString *str);
+
+// Make an identifier like "MacOSX/10.7.1" or "iPod_Touch/4.1"
+NSString *GTMSystemVersionString(void);
+
+// Make a generic name and version for the current application, like
+// com.example.MyApp/1.2.3 relying on the bundle identifier and the
+// CFBundleShortVersionString or CFBundleVersion.  If no bundle ID
+// is available, the process name preceded by "proc_" is used.
+NSString *GTMApplicationIdentifier(NSBundle *bundle);
+
+#ifdef __cplusplus
+}  // extern "C"
+#endif
 
 @class GTMHTTPFetcher;
 
@@ -395,7 +420,7 @@ void GTMAssertSelectorNilOrImplementedWithArgs(id obj, SEL sel, ...);
   id <GTMHTTPFetchHistoryProtocol> fetchHistory_; // if supplied by the caller, used for Last-Modified-Since checks and cookies
   NSInteger cookieStorageMethod_;   // constant from above
   id <GTMCookieStorageProtocol> cookieStorage_;
-  
+
   id <GTMFetcherAuthorizationProtocol> authorizer_;
 
   // the service object that created and monitors this fetcher, if any
@@ -509,7 +534,8 @@ void GTMAssertSelectorNilOrImplementedWithArgs(id obj, SEL sel, ...);
 //  - (void)myFetcher:(GTMHTTPFetcher *)fetcher
 //       receivedData:(NSData *)dataReceivedSoFar;
 //
-// The dataReceived argument will be nil when downloading to a file handle.
+// The dataReceived argument will be nil when downloading to a path or to a
+// file handle.
 //
 // Applications should not use this method to accumulate the received data;
 // the callback method or block supplied to the beginFetch call will have
@@ -522,7 +548,8 @@ void GTMAssertSelectorNilOrImplementedWithArgs(id obj, SEL sel, ...);
 // editor
 @property (copy) void (^sentDataBlock)(NSInteger bytesSent, NSInteger totalBytesSent, NSInteger bytesExpectedToSend);
 
-// The dataReceived argument will be nil when downloading to a file handle
+// The dataReceived argument will be nil when downloading to a path or to
+// a file handle
 @property (copy) void (^receivedDataBlock)(NSData *dataReceivedSoFar);
 #endif
 
@@ -577,6 +604,8 @@ void GTMAssertSelectorNilOrImplementedWithArgs(id obj, SEL sel, ...);
 // finishedSEL has a signature like:
 //   - (void)fetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)data error:(NSError *)error;
 //
+// If the application has specified a downloadPath or downloadFileHandle
+// for the fetcher, the data parameter passed to the callback will be nil.
 
 - (BOOL)beginFetchWithDelegate:(id)delegate
              didFinishSelector:(SEL)finishedSEL;
