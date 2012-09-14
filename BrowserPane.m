@@ -757,6 +757,7 @@
 	[self.webPane stopLoading:self];
 	[self didChangeValueForKey:@"isLoading"];
 	[self.webPane removeFromSuperviewWithoutNeedingDisplay];
+	[self.webPane close];
 	[lastError release];
 	[pageFilename release];
 	self.webPane = nil;
