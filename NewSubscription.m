@@ -202,20 +202,7 @@
 	feedURLString = [self verifyFeedURL:feedURLString];
 
 	// Call the controller to create the new subscription.
-	if ([[Preferences standardPreferences] syncGoogleReader] && [[Preferences standardPreferences] prefersGoogleNewSubscription])
-	{	//creates in Google
-		GoogleReader * myGoogle = [GoogleReader sharedManager];
-		[myGoogle subscribeToFeed:feedURLString];
-		NSString * folderName = [[db folderFromID:parentId] name];
-		if (folderName != nil)
-			[myGoogle setFolder:folderName forFeed:feedURLString folderFlag:TRUE];
-		[myGoogle loadSubscriptions:nil];
-
-	}
-	else
-	{	//creates locally
-		[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
-	}
+	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
 	
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];
