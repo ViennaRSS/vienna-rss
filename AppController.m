@@ -129,7 +129,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 // C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
 //  those we need early in the program launch and keep them in memory.
-#define kNumberOfDateFormatters 7
+#define kNumberOfDateFormatters 8
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
@@ -1019,8 +1019,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[dateFormatterArray[2] setDateFormat:@"yyy-MM-dd'T'HH:mm:ss'Z'"];
 	[dateFormatterArray[3] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss+HH:mm"];
 	[dateFormatterArray[4] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm"];
-	[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-	[dateFormatterArray[6] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
+	[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"];
+	[dateFormatterArray[6] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+	[dateFormatterArray[7] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
 
 	[enUS release];
 	// end of initialization of date formatters
