@@ -163,6 +163,9 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
+	  NSString * theUser = [[request responseHeaders] objectForKey:@"X-Reader-User"];
+	  if (theUser != nil) { //if Google matches us with a user...
+		[self setReaderUser:theUser];
 		NSData *data = [request responseData];		
 		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
 		NSDate * updateDate = nil;
@@ -302,7 +305,12 @@ JSONDecoder * jsonDecoder;
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
 			[[RefreshManager sharedManager] performSelectorInBackground:@selector(refreshFavIcon:) withObject:refreshedFolder];
 
-	} else {
+	} else { // apparently Google does not recognize the user anymore...
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	  }
+	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
@@ -547,7 +555,7 @@ JSONDecoder * jsonDecoder;
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
-	self.readerUser = [[request responseHeaders] objectForKey:@"X-Reader-User"];
+	[self setReaderUser:[[request responseHeaders] objectForKey:@"X-Reader-User"]];
 
 	
 	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];

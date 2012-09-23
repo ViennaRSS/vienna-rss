@@ -103,6 +103,16 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   NSString *str = @"https://accounts.google.com/o/oauth2/token";
   return [NSURL URLWithString:str];
 }
+
++ (NSURL *)googleRevocationURL {
+  NSString *urlStr = @"https://accounts.google.com/o/oauth2/revoke";
+  return [NSURL URLWithString:urlStr];
+}
+
++ (NSURL *)googleUserInfoURL {
+  NSString *urlStr = @"https://www.googleapis.com/oauth2/v1/userinfo";
+  return [NSURL URLWithString:urlStr];
+}
 #endif
 
 + (NSString *)nativeClientRedirectURI {
@@ -152,7 +162,7 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
     // for Google authentication, we want to automatically fetch user info
 #if !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
     NSString *host = [authorizationURL host];
-    if ([host isEqual:@"accounts.google.com"]) {
+    if ([host hasSuffix:@".google.com"]) {
       shouldFetchGoogleUserEmail_ = YES;
     }
 #endif
@@ -529,22 +539,14 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
 }
 
 #if !GTM_OAUTH2_SKIP_GOOGLE_SUPPORT
-- (void)fetchGoogleUserInfo {
-  // fetch the user's email address
-  NSString *infoURLStr = @"https://www.googleapis.com/oauth2/v1/userinfo";
-  NSURL *infoURL = [NSURL URLWithString:infoURLStr];
++ (GTMHTTPFetcher *)userInfoFetcherWithAuth:(GTMOAuth2Authentication *)auth {
+  // create a fetcher for obtaining the user's email or profile
+  NSURL *infoURL = [[self class] googleUserInfoURL];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:infoURL];
-
-  GTMOAuth2Authentication *auth = self.authentication;
 
   NSString *userAgent = [auth userAgent];
   [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-
   [request setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
-
-  // we can do a synchronous authorization since this method is called
-  // only immediately after a fresh access token has been obtained
-  [auth authorizeRequest:request];
 
   GTMHTTPFetcher *fetcher;
   id <GTMHTTPFetcherServiceProtocol> fetcherService = auth.fetcherService;
@@ -553,10 +555,17 @@ finishedWithFetcher:(GTMHTTPFetcher *)fetcher
   } else {
     fetcher = [GTMHTTPFetcher fetcherWithRequest:request];
   }
+  fetcher.authorizer = auth;
   fetcher.retryEnabled = YES;
   fetcher.maxRetryInterval = 15.0;
   fetcher.comment = @"user info";
+  return fetcher;
+}
 
+- (void)fetchGoogleUserInfo {
+  // fetch the user's email address or profile
+  GTMOAuth2Authentication *auth = self.authentication;
+  GTMHTTPFetcher *fetcher = [[self class] userInfoFetcherWithAuth:auth];
   [fetcher beginFetchWithDelegate:self
                 didFinishSelector:@selector(infoFetcher:finishedWithData:error:)];
 
@@ -751,10 +760,8 @@ static void ReachabilityCallBack(SCNetworkReachabilityRef target,
   if (auth.canAuthorize
       && [auth.serviceProvider isEqual:kGTMOAuth2ServiceProviderGoogle]) {
 
-    NSString *urlStr = @"https://accounts.google.com/o/oauth2/revoke";
-
     // create a signed revocation request for this authentication object
-    NSURL *url = [NSURL URLWithString:urlStr];
+    NSURL *url = [self googleRevocationURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 
@@ -780,7 +787,8 @@ static void ReachabilityCallBack(SCNetworkReachabilityRef target,
 
     // Use a completion handler fetch for better debugging, but only if we're
     // guaranteed that blocks are available in the runtime
-#if (MAC_OS_X_VERSION_MIN_REQUIRED >= 1060) || (__IPHONE_OS_VERSION_MIN_REQUIRED >= 40000)
+#if (!TARGET_OS_IPHONE && (MAC_OS_X_VERSION_MIN_REQUIRED >= 1060)) || \
+    (TARGET_OS_IPHONE && (__IPHONE_OS_VERSION_MIN_REQUIRED >= 40000))
     // Blocks are available
     [fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
   #if DEBUG
