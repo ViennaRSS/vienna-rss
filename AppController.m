@@ -2439,7 +2439,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[item setButtonImage:@"cancelRefreshButton"];
 		
 		[self startProgressIndicator];
-		[self setStatusMessage:[[RefreshManager sharedManager] statusMessageDuringRefresh] persist:YES];
 	}
 	else
 	{
@@ -2872,17 +2871,30 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Create then select the new folder.
-	[db beginTransaction];
-	NSInteger folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
-	[db commitTransaction];
-	
-	if (folderId != -1)
-	{
-		[foldersTree selectFolder:folderId];
-		if (isAccessible(urlString))
+	if ([[Preferences standardPreferences] syncGoogleReader] && [[Preferences standardPreferences] prefersGoogleNewSubscription])
+	{	//creates in Google
+		GoogleReader * myGoogle = [GoogleReader sharedManager];
+		[myGoogle subscribeToFeed:urlString];
+		NSString * folderName = [[db folderFromID:parentId] name];
+		if (folderName != nil)
+			[myGoogle setFolder:folderName forFeed:urlString folderFlag:TRUE];
+		[myGoogle loadSubscriptions:nil];
+
+	}
+	else
+	{ //creates locally
+		[db beginTransaction];
+		NSInteger folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
+		[db commitTransaction];
+
+		if (folderId != -1)
 		{
-			Folder * folder = [db folderFromID:folderId];
-			[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
+			[foldersTree selectFolder:folderId];
+			if (isAccessible(urlString))
+			{
+				Folder * folder = [db folderFromID:folderId];
+				[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
+			}
 		}
 	}
 }
@@ -4119,7 +4131,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (theAction == @selector(getInfo:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		*validateFlag = IsRSSFolder(folder) && isMainWindowVisible;
+		*validateFlag = (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && isMainWindowVisible;
 		return YES;
 	}
 	if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
@@ -4279,7 +4291,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Unsubscribe", nil)];
 		}
-		return folder && IsRSSFolder(folder) && ![db readOnly] && isMainWindowVisible;
+		return folder && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(useCurrentStyleForArticles:))
 	{

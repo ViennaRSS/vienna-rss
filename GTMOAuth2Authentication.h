@@ -75,6 +75,7 @@ _EXTERN NSString* const kGTMOAuth2FetcherKey          _INITIALIZE_AS(@"fetcher")
 _EXTERN NSString* const kGTMOAuth2FetchTypeKey        _INITIALIZE_AS(@"FetchType");
 _EXTERN NSString* const kGTMOAuth2FetchTypeToken      _INITIALIZE_AS(@"token");
 _EXTERN NSString* const kGTMOAuth2FetchTypeRefresh    _INITIALIZE_AS(@"refresh");
+_EXTERN NSString* const kGTMOAuth2FetchTypeAssertion  _INITIALIZE_AS(@"assertion");
 _EXTERN NSString* const kGTMOAuth2FetchTypeUserInfo   _INITIALIZE_AS(@"userInfo");
 
 // Token-issuance errors
@@ -92,7 +93,8 @@ _EXTERN NSString* const kGTMOAuth2ErrorInvalidScope         _INITIALIZE_AS(@"inv
 _EXTERN NSString* const kGTMOAuth2UserSignedIn              _INITIALIZE_AS(@"kGTMOAuth2UserSignedIn");
 
 // Notification for token changes
-_EXTERN NSString* const kGTMOAuth2RefreshTokenChanged _INITIALIZE_AS(@"kGTMOAuth2RefreshTokenChanged");
+_EXTERN NSString* const kGTMOAuth2AccessTokenRefreshed _INITIALIZE_AS(@"kGTMOAuth2AccessTokenRefreshed");
+_EXTERN NSString* const kGTMOAuth2RefreshTokenChanged  _INITIALIZE_AS(@"kGTMOAuth2RefreshTokenChanged");
 
 // Notification for WebView loading
 _EXTERN NSString* const kGTMOAuth2WebViewStartedLoading _INITIALIZE_AS(@"kGTMOAuth2WebViewStartedLoading");
@@ -144,8 +146,9 @@ _EXTERN NSString* const kGTMOAuth2NetworkFound        _INITIALIZE_AS(@"kGTMOAuth
 @property (copy) NSString *clientID;
 @property (copy) NSString *clientSecret;
 @property (copy) NSString *redirectURI;
-@property (copy) NSString *scope;
-@property (copy) NSString *tokenType;
+@property (retain) NSString *scope;
+@property (retain) NSString *tokenType;
+@property (retain) NSString *assertion;
 
 // Apps may optionally add parameters here to be provided to the token
 // endpoint on token requests and refreshes
@@ -249,8 +252,8 @@ _EXTERN NSString* const kGTMOAuth2NetworkFound        _INITIALIZE_AS(@"kGTMOAuth
 // access token
 - (BOOL)authorizeRequest:(NSMutableURLRequest *)request;
 
-// If the authentication is waiting for a refreh to complete, spin the run loop,
-// discarding events, until the fetch has completed
+// If the authentication is waiting for a refresh to complete, spin the run
+// loop, discarding events, until the fetch has completed
 //
 // This is only for use in testing or in tools without a user interface.
 - (void)waitForCompletionWithTimeout:(NSTimeInterval)timeoutInSeconds;

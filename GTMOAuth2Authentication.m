@@ -34,6 +34,7 @@ static NSString *const kOAuth2ErrorKey             = @"error";
 static NSString *const kOAuth2TokenTypeKey         = @"token_type";
 static NSString *const kOAuth2ExpiresInKey         = @"expires_in";
 static NSString *const kOAuth2CodeKey              = @"code";
+static NSString *const kOAuth2AssertionKey         = @"assertion";
 
 // additional persistent keys
 static NSString *const kServiceProviderKey        = @"serviceProvider";
@@ -47,9 +48,12 @@ static NSString *const kTokenFetchSelectorKey = @"sel";
 static NSString *const kRefreshFetchArgsKey = @"requestArgs";
 
 // If GTMNSJSONSerialization is available, it is used for formatting JSON
+#if (TARGET_OS_MAC && !TARGET_OS_IPHONE && (MAC_OS_X_VERSION_MAX_ALLOWED < 1070)) || \
+  (TARGET_OS_IPHONE && (__IPHONE_OS_VERSION_MAX_ALLOWED < 50000))
 @interface GTMNSJSONSerialization : NSObject
 + (id)JSONObjectWithData:(NSData *)data options:(NSUInteger)opt error:(NSError **)error;
 @end
+#endif
 
 @interface GTMOAuth2ParserClass : NSObject
 // just enough of SBJSON to be able to parse
@@ -177,6 +181,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 @dynamic accessToken,
          refreshToken,
          code,
+         assertion,
          errorString,
          tokenType,
          scope,
@@ -212,7 +217,8 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
 - (NSString *)description {
   NSArray *props = [NSArray arrayWithObjects:@"accessToken", @"refreshToken",
-                    @"code", @"expirationDate", @"errorString", nil];
+                    @"code", @"assertion", @"expirationDate", @"errorString",
+                    nil];
   NSMutableString *valuesStr = [NSMutableString string];
   NSString *separator = @"";
   for (NSString *prop in props) {
@@ -413,12 +419,19 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
     self.refreshFetcher = nil;
 
-    // swap in a new auth queue in case the callbacks try to immediately auth
+    // Swap in a new auth queue in case the callbacks try to immediately auth
     // another request
     NSArray *pendingAuthQueue = [NSArray arrayWithArray:authorizationQueue_];
     [authorizationQueue_ removeAllObjects];
 
     BOOL hasAccessToken = ([self.accessToken length] > 0);
+
+    if (hasAccessToken && error == nil) {
+      NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+      [nc postNotificationName:kGTMOAuth2AccessTokenRefreshed
+                        object:self
+                      userInfo:nil];
+    }
 
     for (GTMOAuth2AuthorizationArgs *args in pendingAuthQueue) {
       if (!hasAccessToken && args.error == nil) {
@@ -572,12 +585,14 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
   BOOL shouldRefresh = NO;
   NSString *accessToken = self.accessToken;
   NSString *refreshToken = self.refreshToken;
+  NSString *assertion = self.assertion;
 
   BOOL hasRefreshToken = ([refreshToken length] > 0);
   BOOL hasAccessToken = ([accessToken length] > 0);
+  BOOL hasAssertion = ([assertion length] > 0);
 
   // Determine if we need to refresh the access token
-  if (hasRefreshToken) {
+  if (hasRefreshToken || hasAssertion) {
     if (!hasAccessToken) {
       shouldRefresh = YES;
     } else {
@@ -628,43 +643,52 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
                               didFinishSelector:(SEL)finishedSel {
 
   NSMutableDictionary *paramsDict = [NSMutableDictionary dictionary];
-  NSString *refreshToken = self.refreshToken;
-  NSString *code = self.code;
 
   NSString *commentTemplate;
   NSString *fetchType;
 
+  NSString *refreshToken = self.refreshToken;
+  NSString *code = self.code;
+  NSString *assertion = self.assertion;
+  
   if (refreshToken) {
     // We have a refresh token
     [paramsDict setObject:@"refresh_token" forKey:@"grant_type"];
     [paramsDict setObject:refreshToken forKey:@"refresh_token"];
-
+    
     fetchType = kGTMOAuth2FetchTypeRefresh;
     commentTemplate = @"refresh token for %@";
   } else if (code) {
     // We have a code string
     [paramsDict setObject:@"authorization_code" forKey:@"grant_type"];
     [paramsDict setObject:code forKey:@"code"];
-
+    
     NSString *redirectURI = self.redirectURI;
     if ([redirectURI length] > 0) {
       [paramsDict setObject:redirectURI forKey:@"redirect_uri"];
     }
-
+    
     NSString *scope = self.scope;
     if ([scope length] > 0) {
       [paramsDict setObject:scope forKey:@"scope"];
     }
-
+    
     fetchType = kGTMOAuth2FetchTypeToken;
     commentTemplate = @"fetch tokens for %@";
+  } else if (assertion) {
+    // We have an assertion string
+    [paramsDict setObject:assertion forKey:@"assertion"];
+    [paramsDict setObject:@"http://oauth.net/grant_type/jwt/1.0/bearer"
+                   forKey:@"grant_type"];
+    commentTemplate = @"fetch tokens for %@";
+    fetchType = kGTMOAuth2FetchTypeAssertion;
   } else {
 #if DEBUG
     NSAssert(0, @"unexpected lack of code or refresh token for fetching");
 #endif
     return nil;
   }
-
+  
   NSString *clientID = self.clientID;
   if ([clientID length] > 0) {
     [paramsDict setObject:clientID forKey:@"client_id"];
@@ -854,6 +878,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
   [dict setValue:self.serviceProvider forKey:kServiceProviderKey];
   [dict setValue:self.userEmail forKey:kUserEmailKey];
   [dict setValue:self.userEmailIsVerified forKey:kUserEmailIsVerifiedKey];
+  [dict setValue:self.scope forKey:kOAuth2ScopeKey];
 
   NSString *result = [[self class] encodedQueryParametersForDictionary:dict];
   return result;
@@ -876,6 +901,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
   self.code = nil;
   self.accessToken = nil;
   self.refreshToken = nil;
+  self.assertion = nil;
   self.expiresIn = nil;
   self.errorString = nil;
   self.expirationDate = nil;
@@ -907,6 +933,14 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 
 - (void)setCode:(NSString *)str {
   [self.parameters setValue:str forKey:kOAuth2CodeKey];
+}
+
+- (NSString *)assertion {
+  return [self.parameters objectForKey:kOAuth2AssertionKey];
+}
+
+- (void)setAssertion:(NSString *)str {
+  [self.parameters setValue:str forKey:kOAuth2AssertionKey];
 }
 
 - (NSString *)errorString {
