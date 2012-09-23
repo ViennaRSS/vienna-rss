@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0b.2820
+---------
+- When closing a tab, close its content
+- Fix the "last refreshed" filter
+- Fix parsing some date strings
+- Enable commands "Get Info", "Unsubscribe", "Resubscribe" with Google Reader feeds
+- If a feed is submitted through a button or a link, guess if it should be subscribed locally or on Google Reader
+
 3.0b.2819
 ---------
 - Fix other nasty crashes on Mountain Lion
