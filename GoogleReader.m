@@ -324,7 +324,7 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(@"Access Token expired!!! Refreshing it!");
 	googleReaderStatus = isAuthenticated;
-	LLog([self getGoogleOAuthToken]);
+	[self getGoogleOAuthToken];
 }
 
 
@@ -332,7 +332,7 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(@"Action Token expired!!! Refreshing it!");
 	googleReaderStatus = isTokenAcquired;
-	LLog([self getGoogleActionToken]);
+	[self getGoogleActionToken];
 }
 
 -(NSString *)getGoogleActionToken
