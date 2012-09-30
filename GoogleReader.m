@@ -687,22 +687,23 @@ JSONDecoder * jsonDecoder;
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
+	NSString * theActionToken = [self getGoogleActionToken];
 	LLog(token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"a"];	
+		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
 
 	} else {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/kept-unread",readerUser] forKey:@"a"];			
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"r"];
+		[myRequest setPostValue:@"user/-/state/com.google/kept-unread" forKey:@"a"];
+		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"r"];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(keptUnreadDone:)];
         [myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:itemGuid, @"guid", nil]];
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
-	[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+	[myRequest setPostValue:theActionToken forKey:@"T"];
 	[myRequest startAsynchronous];
 }
 
@@ -733,21 +734,19 @@ JSONDecoder * jsonDecoder;
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
+	NSString * theActionToken = [self getGoogleActionToken];
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	if (flag) {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/starred",readerUser] forKey:@"a"];	
-		[myRequest setPostValue:@"true" forKey:@"async"];
-		[myRequest setPostValue:itemGuid forKey:@"i"];
-		[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+		[myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"a"];
 			
 	} else {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/starred",readerUser] forKey:@"r"];			
-		[myRequest setPostValue:@"true" forKey:@"async"];
-		[myRequest setPostValue:itemGuid forKey:@"i"];
-		[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+		[myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"r"];
 			
 	}
+	[myRequest setPostValue:@"true" forKey:@"async"];
+	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:theActionToken forKey:@"T"];
 	[myRequest startAsynchronous];
 }
 
