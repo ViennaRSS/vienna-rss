@@ -472,7 +472,11 @@ static NSRecursiveLock * articlesUpdate_lock;
 	
 	if (IsRSSFolder(folder)) {
 		myRequest = [ASIHTTPRequest requestWithURL:url];
-		[myRequest addRequestHeader:@"If-Modified-Since" value:[folder lastUpdateString]];
+		NSString * theLastUpdateString = [folder lastUpdateString];
+        if (![theLastUpdateString isEqualToString:@""])
+        {
+            [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
+        }
 		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_Feed], @"type", nil]];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];

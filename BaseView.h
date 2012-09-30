@@ -23,8 +23,8 @@
 @required
 	-(void)performFindPanelAction:(int)tag;
 	-(void)printDocument:(id)sender;
-	-(void)handleGoForward:(id)sender;
-	-(void)handleGoBack:(id)sender;
+	-(IBAction)handleGoForward:(id)sender;
+	-(IBAction)handleGoBack:(id)sender;
 	-(BOOL)canGoForward;
 	-(BOOL)canGoBack;
 	-(NSString *)viewLink;
