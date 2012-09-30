@@ -215,5 +215,5 @@
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
-+(NSCalendarDate *)getDateFromString:(NSString *)dateString;
++(NSDate *)getDateFromString:(NSString *)dateString;
 @end

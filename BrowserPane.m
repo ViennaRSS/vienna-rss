@@ -381,7 +381,7 @@
  */
 -(void)endFrameLoad
 {
-	if (viewTitle == @"")
+	if ([viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
 			[[controller browserView] setTabItemViewTitle:self title:pageFilename];
