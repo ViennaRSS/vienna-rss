@@ -15,6 +15,7 @@
 #import "Debug.h"
 
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
+@private
     NSString * token;
 	NSString * actionToken;
 	GTMOAuth2Authentication *oAuthObject;
@@ -49,8 +50,6 @@
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag;
 -(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag;
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
--(NSString *)getGoogleOAuthToken;
--(NSString *)getGoogleActionToken;
 -(NSUInteger)countOfNewArticles;
 
 @end

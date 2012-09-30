@@ -50,6 +50,11 @@ enum GoogleReaderStatus {
 	isActionTokenAcquired
 } googleReaderStatus;
 
+// Private functions
+@interface GoogleReader (Private)
+	-(NSString *)getGoogleOAuthToken;
+	-(NSString *)getGoogleActionToken;
+@end
 
 @implementation GoogleReader
 
