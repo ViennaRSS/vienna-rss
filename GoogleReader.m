@@ -53,7 +53,6 @@ enum GoogleReaderStatus {
 
 @implementation GoogleReader
 
-@synthesize readingList;
 @synthesize localFeeds;
 @synthesize token;
 @synthesize readerUser;
@@ -524,22 +523,6 @@ JSONDecoder * jsonDecoder;
 	[self getGoogleActionToken];
 }
 
--(void)loadReadingList
-{
-    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&output=json&n=10000&includeAllDirectSreamIds=true", TIMESTAMP, ClientName];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/contents/user/-/state/com.google/reading-list", args]];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request startSynchronous];
-
-    NSLog(@"Load reading list response code: %d", [request responseStatusCode]);
-    
-    NSData * jsonData = [request responseData];
-    NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
-    [self setReadingList:[dict objectForKey:@"items"]];
-}                
-
-
 -(void)submitLoadSubscriptions {
 	
 	[[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
@@ -673,20 +656,6 @@ JSONDecoder * jsonDecoder;
     NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
 }
 
--(void)renameFeed:(NSString *)feedURL to:(NSString *)newName
-{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"edit" forKey:@"ac"];
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
-    [request setPostValue:newName forKey:@"t"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Rename feed response status code: %d", [request responseStatusCode]);
-}
-
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
 	NSString * theActionToken = [self getGoogleActionToken];
@@ -752,31 +721,6 @@ JSONDecoder * jsonDecoder;
 	[myRequest startAsynchronous];
 }
 
--(void)disableTag:(NSString *)tagName
-{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@disable-tag?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", tagName] forKey:@"s"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Disable tag response status code: %d", [request responseStatusCode]);
-}
-
--(void)renameTagFrom:(NSString *)oldName to:(NSString *)newName
-{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@rename-tag?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", oldName] forKey:@"s"];
-    [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", newName] forKey:@"dest"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Rename tag response status code: %d", [request responseStatusCode]);
-}
-
 
 -(void)dealloc 
 {
@@ -795,13 +739,6 @@ JSONDecoder * jsonDecoder;
 		_googleReader = [[GoogleReader alloc] init];
 	return _googleReader;
 }
-
--(void)setOauth:(GTMOAuth2Authentication*)oauth {
-	NSLog(@"Google Reader Setting OAUTH object");
-	oAuthObject = [oauth retain];
-	LOG_EXPR(oAuthObject);
-}
-
 
 -(void)createNewSubscription:(NSArray *)params
 {
