@@ -338,6 +338,8 @@ JSONDecoder * jsonDecoder;
 -(NSString *)getGoogleActionToken
 {
 		
+	[self getGoogleOAuthToken];
+
 	// If we have a not expired access token, simply return it :)
 	
 	if (actionTokenTimer != nil && googleReaderStatus == isActionTokenAcquired) {
@@ -382,8 +384,6 @@ JSONDecoder * jsonDecoder;
 -(NSString *)getGoogleOAuthToken
 {
 	
-	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
-	
 	// If we have a not expired access token, simply return it :)
 	
 	if (token != nil && googleReaderStatus == isTokenAcquired) {
@@ -391,6 +391,8 @@ JSONDecoder * jsonDecoder;
 		return token;
 	}
 	
+	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
+
 	if (googleReaderStatus == isAuthenticated) {
 		
 		NSURL *tokenURL = [NSURL URLWithString:@"https://accounts.google.com/o/oauth2/token"];
