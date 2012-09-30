@@ -1097,7 +1097,7 @@
 {
 	NSPasteboard * pb = [info draggingPasteboard]; 
 	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]]; 
-	NSDragOperation dragType = (type == MA_PBoardType_FolderList) ? NSDragOperationMove : NSDragOperationCopy;
+	NSDragOperation dragType = ([type isEqualToString:MA_PBoardType_FolderList]) ? NSDragOperationMove : NSDragOperationCopy;
 
 	TreeNode * node = (TreeNode *)item;
 	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
@@ -1390,7 +1390,7 @@
 		childIndex = 0;
 
 	// Check the type
-	if (type == NSStringPboardType)
+	if ([type isEqualToString:NSStringPboardType])
 	{
 		// This is possibly a URL that we'll handle as a potential feed subscription. It's
 		// not our call to make though.
@@ -1398,7 +1398,7 @@
 		[[NSApp delegate] createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
 		return YES;
 	}
-	if (type == MA_PBoardType_FolderList)
+	if ([type isEqualToString:MA_PBoardType_FolderList])
 	{
 		Database * db = [Database sharedDatabase];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
@@ -1430,7 +1430,7 @@
 		[array release];
 		return result;
 	}
-	if (type == MA_PBoardType_RSSSource)
+	if ([type isEqualToString:MA_PBoardType_RSSSource])
 	{
 		Database * db = [Database sharedDatabase];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
@@ -1475,7 +1475,7 @@
 		
 		return YES;
 	}
-	if (type == @"WebURLsWithTitlesPboardType")
+	if ([type isEqualToString:@"WebURLsWithTitlesPboardType"])
 	{
 		Database * db = [Database sharedDatabase];
 		NSArray * webURLsWithTitles = [pb propertyListForType:type];
