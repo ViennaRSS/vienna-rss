@@ -50,10 +50,14 @@ enum GoogleReaderStatus {
 	isActionTokenAcquired
 } googleReaderStatus;
 
+// Private functions
+@interface GoogleReader (Private)
+	-(NSString *)getGoogleOAuthToken;
+	-(NSString *)getGoogleActionToken;
+@end
 
 @implementation GoogleReader
 
-@synthesize readingList;
 @synthesize localFeeds;
 @synthesize token;
 @synthesize readerUser;
@@ -324,7 +328,7 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(@"Access Token expired!!! Refreshing it!");
 	googleReaderStatus = isAuthenticated;
-	LLog([self getGoogleOAuthToken]);
+	[self getGoogleOAuthToken];
 }
 
 
@@ -332,12 +336,14 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(@"Action Token expired!!! Refreshing it!");
 	googleReaderStatus = isTokenAcquired;
-	LLog([self getGoogleActionToken]);
+	[self getGoogleActionToken];
 }
 
 -(NSString *)getGoogleActionToken
 {
 		
+	[self getGoogleOAuthToken];
+
 	// If we have a not expired access token, simply return it :)
 	
 	if (actionTokenTimer != nil && googleReaderStatus == isActionTokenAcquired) {
@@ -382,8 +388,6 @@ JSONDecoder * jsonDecoder;
 -(NSString *)getGoogleOAuthToken
 {
 	
-	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
-	
 	// If we have a not expired access token, simply return it :)
 	
 	if (token != nil && googleReaderStatus == isTokenAcquired) {
@@ -391,6 +395,8 @@ JSONDecoder * jsonDecoder;
 		return token;
 	}
 	
+	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
+
 	if (googleReaderStatus == isAuthenticated) {
 		
 		NSURL *tokenURL = [NSURL URLWithString:@"https://accounts.google.com/o/oauth2/token"];
@@ -521,22 +527,6 @@ JSONDecoder * jsonDecoder;
 	[self authenticate];
 	[self getGoogleActionToken];
 }
-
--(void)loadReadingList
-{
-    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&output=json&n=10000&includeAllDirectSreamIds=true", TIMESTAMP, ClientName];
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/contents/user/-/state/com.google/reading-list", args]];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request startSynchronous];
-
-    NSLog(@"Load reading list response code: %d", [request responseStatusCode]);
-    
-    NSData * jsonData = [request responseData];
-    NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
-    [self setReadingList:[dict objectForKey:@"items"]];
-}                
-
 
 -(void)submitLoadSubscriptions {
 	
@@ -671,38 +661,25 @@ JSONDecoder * jsonDecoder;
     NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
 }
 
--(void)renameFeed:(NSString *)feedURL to:(NSString *)newName
-{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:@"edit" forKey:@"ac"];
-    [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
-    [request setPostValue:newName forKey:@"t"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Rename feed response status code: %d", [request responseStatusCode]);
-}
-
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
+	NSString * theActionToken = [self getGoogleActionToken];
 	LLog(token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"a"];	
+		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
 
 	} else {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/kept-unread",readerUser] forKey:@"a"];			
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/read",readerUser] forKey:@"r"];
+		[myRequest setPostValue:@"user/-/state/com.google/kept-unread" forKey:@"a"];
+		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"r"];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(keptUnreadDone:)];
         [myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:itemGuid, @"guid", nil]];
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
-	[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+	[myRequest setPostValue:theActionToken forKey:@"T"];
 	[myRequest startAsynchronous];
 }
 
@@ -733,47 +710,20 @@ JSONDecoder * jsonDecoder;
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
+	NSString * theActionToken = [self getGoogleActionToken];
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	if (flag) {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/starred",readerUser] forKey:@"a"];	
-		[myRequest setPostValue:@"true" forKey:@"async"];
-		[myRequest setPostValue:itemGuid forKey:@"i"];
-		[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+		[myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"a"];
 			
 	} else {
-		[myRequest setPostValue:[NSString stringWithFormat:@"user/%@/state/com.google/starred",readerUser] forKey:@"r"];			
-		[myRequest setPostValue:@"true" forKey:@"async"];
-		[myRequest setPostValue:itemGuid forKey:@"i"];
-		[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
+		[myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"r"];
 			
 	}
+	[myRequest setPostValue:@"true" forKey:@"async"];
+	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:theActionToken forKey:@"T"];
 	[myRequest startAsynchronous];
-}
-
--(void)disableTag:(NSString *)tagName
-{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@disable-tag?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", tagName] forKey:@"s"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Disable tag response status code: %d", [request responseStatusCode]);
-}
-
--(void)renameTagFrom:(NSString *)oldName to:(NSString *)newName
-{
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@rename-tag?client=%@", APIBaseURL, ClientName]];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", oldName] forKey:@"s"];
-    [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", newName] forKey:@"dest"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
-    [request setDelegate:self];
-    [request startSynchronous];
-    NSLog(@"Rename tag response status code: %d", [request responseStatusCode]);
 }
 
 
@@ -794,13 +744,6 @@ JSONDecoder * jsonDecoder;
 		_googleReader = [[GoogleReader alloc] init];
 	return _googleReader;
 }
-
--(void)setOauth:(GTMOAuth2Authentication*)oauth {
-	NSLog(@"Google Reader Setting OAUTH object");
-	oAuthObject = [oauth retain];
-	LOG_EXPR(oAuthObject);
-}
-
 
 -(void)createNewSubscription:(NSArray *)params
 {
