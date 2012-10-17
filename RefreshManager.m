@@ -481,6 +481,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
+		[myRequest setWillRedirectSelector:@selector(folderRefreshRedirect:)];
 	} else if (IsGoogleReaderFolder(folder)) {
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
@@ -595,6 +596,30 @@ static NSRecursiveLock * articlesUpdate_lock;
     [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
+/* folderRefreshRedirect
+ * Called when a folder refresh is being redirected.
+ */
+-(void)folderRefreshRedirect:(ASIHTTPRequest *)connector
+{
+
+	NSURL *newURL = [NSURL URLWithString:[[connector responseHeaders] valueForKey:@"Location"] relativeToURL:[connector url]];
+	int responseStatusCode = [connector responseStatusCode];
+
+	if (responseStatusCode == 301)
+	{
+		// We got a permanent redirect from the feed so change the feed URL to the new location.
+		Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
+		ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
+		NSInteger folderId = [folder itemId];
+		Database * db = [Database sharedDatabase];
+
+		[db setFolderFeedURL:folderId newFeedURL:[newURL absoluteString]];
+		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
+	}
+
+	[connector redirectToURL:newURL];
+}
+
 /* folderRefreshCompleted
  * Called when a folder refresh completed.
  */
@@ -611,15 +636,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 	
     [self syncFinishedForFolder:folder];
 	
-	if (responseStatusCode == 301)
-	{
-		//FIX Controllare se funziona
-		// We got a permanent redirect from the feed so change the feed URL to the new location.
-		[db setFolderFeedURL:folderId newFeedURL:[url absoluteString]];
-		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [url absoluteString]]];
-		return;
-	}
-	else if (responseStatusCode == 304)
+	if (responseStatusCode == 304)
 	{		
 		// No modification from last check
 		[[RefreshManager articlesUpdateSemaphore] lock];

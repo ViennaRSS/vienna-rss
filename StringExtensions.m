@@ -90,6 +90,64 @@
 		srchRange.length = textLength - srchRange.location;
 	}
 }
+
+/* fixupRelativeAnchorTags
+ * Scans the text for <a...> tags that have relative links in the src attribute and fixes
+ * up the relative links to be absolute to the base URL.
+ */
+-(void)fixupRelativeAnchorTags:(NSString *)baseURL
+{
+	baseURL = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	if (baseURL == nil)
+		return;
+	NSURL * anchorBaseURL = [NSURL URLWithString:baseURL];
+
+	NSUInteger textLength = [self length];
+	NSRange srchRange;
+
+	srchRange.location = 0;
+	srchRange.length = textLength;
+	while ((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange]), srchRange.location != NSNotFound)
+	{
+		srchRange.length = textLength - srchRange.location;
+		NSRange srcRange = [self rangeOfString:@"href=\"" options:NSLiteralSearch range:srchRange];
+		if (srcRange.location != NSNotFound)
+		{
+			// Find the src parameter range.
+			NSUInteger index = srcRange.location + srcRange.length;
+			srcRange.location += srcRange.length;
+			srcRange.length = 0;
+			while (index < textLength && [self characterAtIndex:index] != '"')
+			{
+				++index;
+				++srcRange.length;
+			}
+
+			// Now extract the source parameter
+			NSString * srcPath = [self substringWithRange:srcRange];
+			if (![srcPath hasPrefix:@"http://"])
+			{
+				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				if (escapedSrcPath != nil)
+				{
+					NSURL * anchorURL = [NSURL URLWithString:escapedSrcPath relativeToURL:anchorBaseURL];
+					if (anchorURL != nil)
+					{
+						srcPath = [anchorURL absoluteString];
+						[self replaceCharactersInRange:srcRange withString:srcPath];
+						textLength = [self length];
+					}
+				}
+			}
+
+			// Start searching again from beyond the URL
+			srchRange.location = srcRange.location + [srcPath length];
+		}
+		else
+			++srchRange.location;
+		srchRange.length = textLength - srchRange.location;
+	}
+}
 @end
 
 // Used for mapping entities to their representations
