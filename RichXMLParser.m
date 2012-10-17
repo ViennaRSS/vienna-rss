@@ -765,8 +765,9 @@
 			if (!hasLink && [self link])
 				[newItem setLink:[self link]];
 
-			// Do relative IMG tag fixup
+			// Do relative IMG and A tags fixup
 			[articleBody fixupRelativeImgTags:[self link]];
+			[articleBody fixupRelativeAnchorTags:[self link]];
 			[newItem setDescription:SafeString(articleBody)];
 			[articleBody release];
 
@@ -863,6 +864,10 @@
 						[self setLink:theLink];
 				}
 			}
+
+			if (linkBase == nil)
+				linkBase = [[self link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
 			continue;
 		}			
 		
@@ -1038,8 +1043,9 @@
 				}
 			}
 
-			// Do relative IMG tag fixup
+			// Do relative IMG and A tags fixup
 			[articleBody fixupRelativeImgTags:entryBase];
+			[articleBody fixupRelativeAnchorTags:entryBase];
 			[newItem setDescription:SafeString(articleBody)];
 			[articleBody release];
 			

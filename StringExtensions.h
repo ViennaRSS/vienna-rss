@@ -25,6 +25,7 @@
 @interface NSMutableString (MutableStringExtensions)
 	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
 	-(void)fixupRelativeImgTags:(NSString *)baseURL;
+	-(void)fixupRelativeAnchorTags:(NSString *)baseURL;
 @end
 
 @interface NSString (StringExtensions)
