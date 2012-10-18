@@ -680,6 +680,12 @@ static NSRecursiveLock * articlesUpdate_lock;
 																					lastModifiedString, @"lastModifiedString",
 																					nil]];
 	}
+	else	//other HTTP response codes like 404, 403...
+	{
+		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), responseStatusCode]];
+		[connectorItem setStatus:NSLocalizedString(@"Error", nil)];
+		[self setFolderErrorFlag:folder flag:YES];
+	}
 };
 
 -(void)finalizeFolderRefresh:(NSDictionary*)parameters;
