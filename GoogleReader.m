@@ -117,6 +117,7 @@ JSONDecoder * jsonDecoder;
 		LOG_EXPR([request error]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR([request requestHeaders]);
+		[self resetAuthentication];
 	}
 }
 
@@ -669,7 +670,7 @@ JSONDecoder * jsonDecoder;
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
-
+		[myRequest setDelegate:self];
 	} else {
 		[myRequest setPostValue:@"user/-/state/com.google/kept-unread" forKey:@"a"];
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"r"];
@@ -694,6 +695,7 @@ JSONDecoder * jsonDecoder;
 		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR([request requestHeaders]);
+		[self resetAuthentication];
 	}
 
 	LLog(token);
@@ -723,6 +725,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
 	[myRequest setPostValue:theActionToken forKey:@"T"];
+	[myRequest setDelegate:self];
 	[myRequest startAsynchronous];
 }
 
