@@ -126,7 +126,12 @@
 	[self.webPane retain];
 	[self.webPane setUIDelegate:self];
 	[self.webPane setFrameLoadDelegate:self];
-	[self.webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion]]];
+	NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
+	if (safariVersion)
+		safariVersion = [safariVersion substringFromIndex:1];
+	else
+		safariVersion = @"532.22";
+	[self.webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion], safariVersion]];
 	
 	// Make web preferences 16pt Arial to match Safari
 	[[self.webPane preferences] setStandardFontFamily:@"Arial"];
