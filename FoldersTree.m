@@ -667,7 +667,7 @@
 	
 	TreeNode * node = [outlineView itemAtRow:[outlineView selectedRow]];
 
-	if (IsRSSFolder([node folder]))
+	if (IsRSSFolder([node folder])||IsGoogleReaderFolder([node folder]))
 	{
 		NSString * urlString = [[node folder] homePage];
 		if (urlString && ![urlString isBlank])
