@@ -202,7 +202,6 @@
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
 		AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
-		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB076170A076BBE00A9F76A /* Carbon.framework */; };
 		AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAB90EFC061D059D00CA4741 /* searchFolder.tiff */; };
 		AAB968DF08F7829E00B7D1C8 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */; };
@@ -342,7 +341,6 @@
 		EAE98E8314BEFBD700D6A3DC /* PopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7A900086BB5C4009A487E /* PopupButton.m */; };
 		EAE98E8414BEFBD700D6A3DC /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
 		EAE98E8514BEFBD700D6A3DC /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
-		EAE98E8614BEFBD700D6A3DC /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		EAE98E8714BEFBD700D6A3DC /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		EAE98E8814BEFBD700D6A3DC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA63227E08861C99006382D3 /* Constants.m */; };
 		EAE98E8914BEFBD700D6A3DC /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
@@ -1090,8 +1088,6 @@
 		AAA5814F09AA52B400602469 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAA7F5E909D50102007D0760 /* ArticleFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleFilter.h; sourceTree = "<group>"; };
 		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
-		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
-		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
 		AAAEEE9E0B052236008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AAAEEE9F0B052259008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AAAEEEA00B052278008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
@@ -1427,8 +1423,6 @@
 				AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */,
 				AA74A85D087B56810029797C /* ArticleView.h */,
 				AA74A85E087B56810029797C /* ArticleView.m */,
-				AAA817F5087F986700C30683 /* AsyncConnection.h */,
-				AAA817F6087F986700C30683 /* AsyncConnection.m */,
 				AAE7E5710A10462600685562 /* BaseView.h */,
 				AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */,
 				AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */,
@@ -3209,7 +3203,6 @@
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */,
 				AA74A860087B56810029797C /* ArticleView.m in Sources */,
-				AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AA63227F08861C99006382D3 /* Constants.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
@@ -3315,7 +3308,6 @@
 				EAE98E8314BEFBD700D6A3DC /* PopupButton.m in Sources */,
 				EAE98E8414BEFBD700D6A3DC /* FeedCredentials.m in Sources */,
 				EAE98E8514BEFBD700D6A3DC /* ArticleView.m in Sources */,
-				EAE98E8614BEFBD700D6A3DC /* AsyncConnection.m in Sources */,
 				EAE98E8714BEFBD700D6A3DC /* KeyChain.m in Sources */,
 				EAE98E8814BEFBD700D6A3DC /* Constants.m in Sources */,
 				EAE98E8914BEFBD700D6A3DC /* PopUpButtonExtensions.m in Sources */,
