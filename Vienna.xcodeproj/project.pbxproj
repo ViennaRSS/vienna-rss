@@ -1412,14 +1412,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
-				3A23F13415276935008AF863 /* NSNotificationAdditions.m */,
-				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
-				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
-				B2224771112F041E008579B0 /* SearchMethod.h */,
-				B2224772112F041E008579B0 /* SearchMethod.m */,
-				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
-				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				AA0FB5E10869110300D9CB90 /* ActivityLog.m */,
 				AABFDC9F0609EA8100100A9B /* ActivityViewer.h */,
@@ -1480,6 +1472,8 @@
 				AA82994F08D94BAF00983120 /* RefreshManager.m */,
 				AAA3AF0706338A00006735EB /* SearchFolder.h */,
 				AAA3AF0806338A00006735EB /* SearchFolder.m */,
+				B2224771112F041E008579B0 /* SearchMethod.h */,
+				B2224772112F041E008579B0 /* SearchMethod.m */,
 				AA5814960C4972BB003D0916 /* SearchPanel.h */,
 				AA5814970C4972BB003D0916 /* SearchPanel.m */,
 				AA3F36E30C2F143100D5766B /* StdEnclosureView.h */,
@@ -1810,22 +1804,14 @@
 		AAA5687609EE72BE00C87343 /* NewsParser */ = {
 			isa = PBXGroup;
 			children = (
-				AAA5687809EE733500C87343 /* Classes */,
+				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
+				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
+				AA328863084700B700A7AD5A /* XMLParser.h */,
+				AA328864084700B700A7AD5A /* XMLParser.m */,
+				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
+				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
 			);
 			name = NewsParser;
-			sourceTree = "<group>";
-		};
-		AAA5687809EE733500C87343 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				AA328864084700B700A7AD5A /* XMLParser.m */,
-				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
-				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
-				AA328863084700B700A7AD5A /* XMLParser.h */,
-				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
-				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 		AAA568BB09EE773200C87343 /* Main */ = {
@@ -1838,9 +1824,9 @@
 				AA4F657B062B873100D4837C /* Extensions */,
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
+				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AA3113EC09020E1B00E80DF1 /* Preferences */,
 				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
-				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
 				B27CCFFD1100E728001F3C83 /* Plugins */,
@@ -1876,14 +1862,16 @@
 		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
-				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
+				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
+				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
+				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
+				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
 				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -1892,10 +1880,14 @@
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
+				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
+				3A23F13415276935008AF863 /* NSNotificationAdditions.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				AABCFB180900BA4E00984F78 /* SquareWindow.h */,
 				AABCFB190900BA4E00984F78 /* SquareWindow.m */,
+				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
+				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
 			);
 			name = "Support Classes";
 			sourceTree = "<group>";
