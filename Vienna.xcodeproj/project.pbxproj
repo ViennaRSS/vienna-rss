@@ -53,8 +53,6 @@
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		662468B113C60A2800C85417 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
-		66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
-		66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -395,7 +393,6 @@
 		EAE98EB614BEFBD700D6A3DC /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
 		EAE98EB714BEFBD700D6A3DC /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		EAE98EB814BEFBD700D6A3DC /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
-		EAE98EB914BEFBD700D6A3DC /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
 		EAE98EBA14BEFBD700D6A3DC /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
 		EAE98EBB14BEFBD700D6A3DC /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */; };
 		EAE98EBC14BEFBD700D6A3DC /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */; };
@@ -565,7 +562,6 @@
 		EAE98F6414BEFBD700D6A3DC /* blankButtonPressedBurned.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2B2216211013FC400885331 /* blankButtonPressedBurned.tiff */; };
 		EAE98F6514BEFBD700D6A3DC /* filter-icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2B37ACD110A65DA0070EDA6 /* filter-icon.tiff */; };
 		EAE98F6714BEFBD700D6A3DC /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
-		EAE98F6814BEFBD700D6A3DC /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
 		EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EA1A761F148FA32B004A6B8F /* googleFeed.tiff */; };
 		EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
 		EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
@@ -724,9 +720,6 @@
 		662468B013C60A2800C85417 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleReader.h; sourceTree = "<group>"; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleReader.m; sourceTree = "<group>"; };
-		66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncMerge.xib; sourceTree = "<group>"; };
-		66EA343613F77D7E00F68393 /* SyncMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncMerge.h; sourceTree = "<group>"; };
-		66EA343713F77D7E00F68393 /* SyncMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncMerge.m; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01BA210B05251900CD0695 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/InfoWindow.nib; sourceTree = "<group>"; };
@@ -1605,7 +1598,6 @@
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */,
 				3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */,
-				66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */,
 				EAE98F8D14BEFBD800D6A3DC /* ViennaBeta-Info.plist */,
 			);
 			name = Resources;
@@ -1756,8 +1748,6 @@
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
 				6624683513C5D09200C85417 /* SyncPreferences.h */,
 				6624683613C5D09300C85417 /* SyncPreferences.m */,
-				66EA343613F77D7E00F68393 /* SyncMerge.h */,
-				66EA343713F77D7E00F68393 /* SyncMerge.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -2064,6 +2054,7 @@
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2259,7 +2250,6 @@
 				B2B37ACE110A65DA0070EDA6 /* filter-icon.tiff in Resources */,
 				3A42BF8115A0EDE40018B532 /* SyncPreferences.xib in Resources */,
 				6624683B13C5F83000C85417 /* sync.tiff in Resources */,
-				66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */,
 				EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */,
 				EACB098414A0F01500F48809 /* GTMOAuth2Window.xib in Resources */,
 				EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */,
@@ -2419,7 +2409,6 @@
 				EAE98F6514BEFBD700D6A3DC /* filter-icon.tiff in Resources */,
 				3A42BF8215A0EDE40018B532 /* SyncPreferences.xib in Resources */,
 				EAE98F6714BEFBD700D6A3DC /* sync.tiff in Resources */,
-				EAE98F6814BEFBD700D6A3DC /* SyncMerge.xib in Resources */,
 				EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */,
 				EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */,
 				EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */,
@@ -3279,7 +3268,6 @@
 				6624683713C5D09400C85417 /* SyncPreferences.m in Sources */,
 				662468B113C60A2800C85417 /* JSONKit.m in Sources */,
 				664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */,
-				66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */,
 				EACB097914A0EFDA00F48809 /* GTMOAuth2Authentication.m in Sources */,
 				EACB097A14A0EFDA00F48809 /* GTMOAuth2SignIn.m in Sources */,
 				EACB097D14A0EFEE00F48809 /* GTMHTTPFetcher.m in Sources */,
@@ -3386,7 +3374,6 @@
 				EAE98EB614BEFBD700D6A3DC /* SyncPreferences.m in Sources */,
 				EAE98EB714BEFBD700D6A3DC /* JSONKit.m in Sources */,
 				EAE98EB814BEFBD700D6A3DC /* GoogleReader.m in Sources */,
-				EAE98EB914BEFBD700D6A3DC /* SyncMerge.m in Sources */,
 				EAE98EBA14BEFBD700D6A3DC /* GTMOAuth2Authentication.m in Sources */,
 				EAE98EBB14BEFBD700D6A3DC /* GTMOAuth2SignIn.m in Sources */,
 				EAE98EBC14BEFBD700D6A3DC /* GTMHTTPFetcher.m in Sources */,

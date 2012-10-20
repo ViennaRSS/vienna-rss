@@ -9,11 +9,10 @@
 #import "SyncPreferences.h"
 #import "GoogleReader.h"
 #import "Preferences.h"
-#import "SyncMerge.h"
 
 @implementation SyncPreferences
 
-@synthesize syncButton, mergeButton, createButton;
+@synthesize syncButton, createButton;
 
 -(id)init 
 {
@@ -25,8 +24,6 @@
     self = [super initWithWindow:window];
     if (self) {
         // Initialization code here.
-        merge = [[SyncMerge alloc] init];
-        [merge retain];
     }
     
     return self;
@@ -54,16 +51,6 @@
     };
 }
 
--(IBAction)mergeSubscriptions:(id)sender 
-{
-	//TOFIX
-	/*
-    modalSession = [[NSApplication sharedApplication] beginModalSessionForWindow:[merge window]];
-    [merge setSession:modalSession];
-    [merge beginMerge];
-	 */
-}
-
 - (IBAction)createGoogleAccount:(id)sender 
 {
     NSURL * url = [NSURL URLWithString:@"https://www.google.com/accounts/NewAccount"];
@@ -84,26 +71,12 @@
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {    
-    if ([merge running]) 
-    {
-        [merge close];
-        [[NSApplication sharedApplication] endModalSession:modalSession];
-
-        /*NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-        [alert addButtonWithTitle:@"OK"];
-        [alert setMessageText:@"Google Authentication Failed"];
-        [alert setInformativeText:@"Please check your Google username and password in Vienna's preferences."];
-        [alert setAlertStyle:NSWarningAlertStyle];
-        [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];*/
-    }
 }
 
 -(void)dealloc
 {
     [syncButton release];
-    [mergeButton release];
     [createButton release];
-    [merge release];
     [super dealloc];
 
 }
