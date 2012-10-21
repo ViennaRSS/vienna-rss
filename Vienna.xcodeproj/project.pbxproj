@@ -40,6 +40,8 @@
 		3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F13415276935008AF863 /* NSNotificationAdditions.m */; };
 		3A42BF8115A0EDE40018B532 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */; };
 		3A42BF8215A0EDE40018B532 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */; };
+		3A611A5B16346CA5008491A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A611A5A16346CA5008491A1 /* README.md */; };
+		3A611A5C16346CA5008491A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A611A5A16346CA5008491A1 /* README.md */; };
 		3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3AFC9FF0152B7AF2004B0537 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -298,7 +300,6 @@
 		EA4BF68C14B3161D008FCBE5 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68214B3161D008FCBE5 /* ASIInputStream.m */; };
 		EA4BF68D14B3161D008FCBE5 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
 		EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
-		EAAF336114BDEC78002A8837 /* ansani_build.txt in Resources */ = {isa = PBXBuildFile; fileRef = EAAF336014BDEC78002A8837 /* ansani_build.txt */; };
 		EACB097914A0EFDA00F48809 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
 		EACB097A14A0EFDA00F48809 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */; };
 		EACB097D14A0EFEE00F48809 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */; };
@@ -563,7 +564,6 @@
 		EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EA1A761F148FA32B004A6B8F /* googleFeed.tiff */; };
 		EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
 		EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
-		EAE98F6C14BEFBD700D6A3DC /* ansani_build.txt in Resources */ = {isa = PBXBuildFile; fileRef = EAAF336014BDEC78002A8837 /* ansani_build.txt */; };
 		EAE98F8014BEFBD700D6A3DC /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */; };
 		EAE98F8114BEFBD700D6A3DC /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		EAE98F8214BEFBD700D6A3DC /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
@@ -673,6 +673,7 @@
 		3A23F13415276935008AF863 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
 		3A42BF8315A0EDFA0018B532 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3A42BF8415A0EDFF0018B532 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3A611A5A16346CA5008491A1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AC07B5115A77E41008D239E /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3AC07B5215A77E5B008D239E /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
@@ -1294,7 +1295,6 @@
 		EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		EAAF335214BDD462002A8837 /* ansani_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ansani_key.pem; sourceTree = "<group>"; };
-		EAAF336014BDEC78002A8837 /* ansani_build.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ansani_build.txt; sourceTree = "<group>"; };
 		EACB097514A0EFDA00F48809 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
 		EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
 		EACB097714A0EFDA00F48809 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
@@ -1392,7 +1392,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				EAAF336014BDEC78002A8837 /* ansani_build.txt */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				662468AE13C609F900C85417 /* JSONKit */,
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
@@ -1840,6 +1839,7 @@
 				AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */,
 				52A8B4300C4996910035ED2A /* notes.html */,
 				AA21F4510753053500503F58 /* CHANGES */,
+				3A611A5A16346CA5008491A1 /* README.md */,
 			);
 			name = "Documents & Tools";
 			sourceTree = "<group>";
@@ -2239,7 +2239,7 @@
 				EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */,
 				EACB098414A0F01500F48809 /* GTMOAuth2Window.xib in Resources */,
 				EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */,
-				EAAF336114BDEC78002A8837 /* ansani_build.txt in Resources */,
+				3A611A5B16346CA5008491A1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2398,7 +2398,7 @@
 				EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */,
 				EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */,
 				EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */,
-				EAE98F6C14BEFBD700D6A3DC /* ansani_build.txt in Resources */,
+				3A611A5C16346CA5008491A1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
