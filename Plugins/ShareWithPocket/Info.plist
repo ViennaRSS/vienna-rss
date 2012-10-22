@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithPocket</string>
+	<key>Default</key>
+	<false/>
+	<key>Type</key>
+	<string>Link</string>
+	<key>FriendlyName</key>
+	<string>Pocket</string>
+	<key>Tooltip</key>
+	<string>Add the current article to Pocket</string>
+	<key>ButtonImage</key>
+	<string>getPocket</string>
+	<key>MenuPath</key>
+	<string>Share With Pocket</string>
+	<key>URL</key>
+	<string>https://getpocket.com/edit?url=$ArticleLink$&amp;title=$ArticleTitle$</string>
+</dict>
+</plist>

@@ -790,7 +790,7 @@
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 		if (lastFolderId == currentFolderId)
 			needRefilter = YES;
-        if (!IsRSSFolder([db folderFromID:currentFolderId]))
+        if (!IsRSSFolder([db folderFromID:currentFolderId])&&!IsGoogleReaderFolder([db folderFromID:currentFolderId]))
             [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
         else if (needRefilter)
             [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];

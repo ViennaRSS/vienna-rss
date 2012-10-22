@@ -40,6 +40,8 @@
 		3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F13415276935008AF863 /* NSNotificationAdditions.m */; };
 		3A42BF8115A0EDE40018B532 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */; };
 		3A42BF8215A0EDE40018B532 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */; };
+		3A611A5B16346CA5008491A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A611A5A16346CA5008491A1 /* README.md */; };
+		3A611A5C16346CA5008491A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A611A5A16346CA5008491A1 /* README.md */; };
 		3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3AFC9FF0152B7AF2004B0537 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -53,8 +55,6 @@
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		662468B113C60A2800C85417 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
-		66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
-		66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
 		8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
@@ -204,7 +204,6 @@
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AAA3AF0A06338A00006735EB /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
 		AAA7F5EC09D50102007D0760 /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
-		AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		AAB0762C0A076BBE00A9F76A /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB076170A076BBE00A9F76A /* Carbon.framework */; };
 		AAB90EFD061D059D00CA4741 /* searchFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAB90EFC061D059D00CA4741 /* searchFolder.tiff */; };
 		AAB968DF08F7829E00B7D1C8 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */; };
@@ -301,7 +300,6 @@
 		EA4BF68C14B3161D008FCBE5 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68214B3161D008FCBE5 /* ASIInputStream.m */; };
 		EA4BF68D14B3161D008FCBE5 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
 		EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
-		EAAF336114BDEC78002A8837 /* ansani_build.txt in Resources */ = {isa = PBXBuildFile; fileRef = EAAF336014BDEC78002A8837 /* ansani_build.txt */; };
 		EACB097914A0EFDA00F48809 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
 		EACB097A14A0EFDA00F48809 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */; };
 		EACB097D14A0EFEE00F48809 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */; };
@@ -344,7 +342,6 @@
 		EAE98E8314BEFBD700D6A3DC /* PopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7A900086BB5C4009A487E /* PopupButton.m */; };
 		EAE98E8414BEFBD700D6A3DC /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
 		EAE98E8514BEFBD700D6A3DC /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
-		EAE98E8614BEFBD700D6A3DC /* AsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA817F6087F986700C30683 /* AsyncConnection.m */; };
 		EAE98E8714BEFBD700D6A3DC /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		EAE98E8814BEFBD700D6A3DC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA63227E08861C99006382D3 /* Constants.m */; };
 		EAE98E8914BEFBD700D6A3DC /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
@@ -395,7 +392,6 @@
 		EAE98EB614BEFBD700D6A3DC /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
 		EAE98EB714BEFBD700D6A3DC /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		EAE98EB814BEFBD700D6A3DC /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
-		EAE98EB914BEFBD700D6A3DC /* SyncMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EA343713F77D7E00F68393 /* SyncMerge.m */; };
 		EAE98EBA14BEFBD700D6A3DC /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
 		EAE98EBB14BEFBD700D6A3DC /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */; };
 		EAE98EBC14BEFBD700D6A3DC /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */; };
@@ -565,11 +561,9 @@
 		EAE98F6414BEFBD700D6A3DC /* blankButtonPressedBurned.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2B2216211013FC400885331 /* blankButtonPressedBurned.tiff */; };
 		EAE98F6514BEFBD700D6A3DC /* filter-icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2B37ACD110A65DA0070EDA6 /* filter-icon.tiff */; };
 		EAE98F6714BEFBD700D6A3DC /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
-		EAE98F6814BEFBD700D6A3DC /* SyncMerge.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */; };
 		EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EA1A761F148FA32B004A6B8F /* googleFeed.tiff */; };
 		EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
 		EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
-		EAE98F6C14BEFBD700D6A3DC /* ansani_build.txt in Resources */ = {isa = PBXBuildFile; fileRef = EAAF336014BDEC78002A8837 /* ansani_build.txt */; };
 		EAE98F8014BEFBD700D6A3DC /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */; };
 		EAE98F8114BEFBD700D6A3DC /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = AA62D7DB0859A9F70040C370 /* Growl.framework */; };
 		EAE98F8214BEFBD700D6A3DC /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
@@ -679,6 +673,7 @@
 		3A23F13415276935008AF863 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
 		3A42BF8315A0EDFA0018B532 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3A42BF8415A0EDFF0018B532 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
+		3A611A5A16346CA5008491A1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AC07B5115A77E41008D239E /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3AC07B5215A77E5B008D239E /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
@@ -724,9 +719,6 @@
 		662468B013C60A2800C85417 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleReader.h; sourceTree = "<group>"; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleReader.m; sourceTree = "<group>"; };
-		66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncMerge.xib; sourceTree = "<group>"; };
-		66EA343613F77D7E00F68393 /* SyncMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncMerge.h; sourceTree = "<group>"; };
-		66EA343713F77D7E00F68393 /* SyncMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncMerge.m; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01BA210B05251900CD0695 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/InfoWindow.nib; sourceTree = "<group>"; };
@@ -1097,8 +1089,6 @@
 		AAA5814F09AA52B400602469 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zh_TW; path = "zh_TW.lproj/Vienna Help"; sourceTree = "<group>"; };
 		AAA7F5E909D50102007D0760 /* ArticleFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleFilter.h; sourceTree = "<group>"; };
 		AAA7F5EA09D50102007D0760 /* ArticleFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleFilter.m; sourceTree = "<group>"; };
-		AAA817F5087F986700C30683 /* AsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AsyncConnection.h; sourceTree = "<group>"; };
-		AAA817F6087F986700C30683 /* AsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AsyncConnection.m; sourceTree = "<group>"; };
 		AAAEEE9E0B052236008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/AppearancesPreferences.nib; sourceTree = "<group>"; };
 		AAAEEE9F0B052259008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/FeedCredentials.nib; sourceTree = "<group>"; };
 		AAAEEEA00B052278008DAFF6 /* da */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = da; path = da.lproj/GeneralPreferences.nib; sourceTree = "<group>"; };
@@ -1305,7 +1295,6 @@
 		EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		EAAF335214BDD462002A8837 /* ansani_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ansani_key.pem; sourceTree = "<group>"; };
-		EAAF336014BDEC78002A8837 /* ansani_build.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ansani_build.txt; sourceTree = "<group>"; };
 		EACB097514A0EFDA00F48809 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2Authentication.h; sourceTree = "<group>"; };
 		EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2Authentication.m; sourceTree = "<group>"; };
 		EACB097714A0EFDA00F48809 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
@@ -1403,7 +1392,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				EAAF336014BDEC78002A8837 /* ansani_build.txt */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				662468AE13C609F900C85417 /* JSONKit */,
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
@@ -1419,14 +1407,6 @@
 		2A37F4ABFDCFA73011CA2CEA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
-				3A23F13415276935008AF863 /* NSNotificationAdditions.m */,
-				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
-				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
-				B2224771112F041E008579B0 /* SearchMethod.h */,
-				B2224772112F041E008579B0 /* SearchMethod.m */,
-				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
-				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 				AA0FB5E00869110300D9CB90 /* ActivityLog.h */,
 				AA0FB5E10869110300D9CB90 /* ActivityLog.m */,
 				AABFDC9F0609EA8100100A9B /* ActivityViewer.h */,
@@ -1442,8 +1422,6 @@
 				AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */,
 				AA74A85D087B56810029797C /* ArticleView.h */,
 				AA74A85E087B56810029797C /* ArticleView.m */,
-				AAA817F5087F986700C30683 /* AsyncConnection.h */,
-				AAA817F6087F986700C30683 /* AsyncConnection.m */,
 				AAE7E5710A10462600685562 /* BaseView.h */,
 				AA51CBF608CFEA0F00DD6535 /* BrowserPane.h */,
 				AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */,
@@ -1487,6 +1465,8 @@
 				AA82994F08D94BAF00983120 /* RefreshManager.m */,
 				AAA3AF0706338A00006735EB /* SearchFolder.h */,
 				AAA3AF0806338A00006735EB /* SearchFolder.m */,
+				B2224771112F041E008579B0 /* SearchMethod.h */,
+				B2224772112F041E008579B0 /* SearchMethod.m */,
 				AA5814960C4972BB003D0916 /* SearchPanel.h */,
 				AA5814970C4972BB003D0916 /* SearchPanel.m */,
 				AA3F36E30C2F143100D5766B /* StdEnclosureView.h */,
@@ -1605,7 +1585,6 @@
 				AA167A840658361B0091365D /* ViennaApp.scriptSuite */,
 				AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */,
 				3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */,
-				66A5CDAF13F8471300DF7A79 /* SyncMerge.xib */,
 				EAE98F8D14BEFBD800D6A3DC /* ViennaBeta-Info.plist */,
 			);
 			name = Resources;
@@ -1756,8 +1735,6 @@
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
 				6624683513C5D09200C85417 /* SyncPreferences.h */,
 				6624683613C5D09300C85417 /* SyncPreferences.m */,
-				66EA343613F77D7E00F68393 /* SyncMerge.h */,
-				66EA343713F77D7E00F68393 /* SyncMerge.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -1820,22 +1797,14 @@
 		AAA5687609EE72BE00C87343 /* NewsParser */ = {
 			isa = PBXGroup;
 			children = (
-				AAA5687809EE733500C87343 /* Classes */,
+				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
+				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
+				AA328863084700B700A7AD5A /* XMLParser.h */,
+				AA328864084700B700A7AD5A /* XMLParser.m */,
+				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
+				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
 			);
 			name = NewsParser;
-			sourceTree = "<group>";
-		};
-		AAA5687809EE733500C87343 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				AA328864084700B700A7AD5A /* XMLParser.m */,
-				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
-				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
-				AA328863084700B700A7AD5A /* XMLParser.h */,
-				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
-				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 		AAA568BB09EE773200C87343 /* Main */ = {
@@ -1848,9 +1817,9 @@
 				AA4F657B062B873100D4837C /* Extensions */,
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
+				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AA3113EC09020E1B00E80DF1 /* Preferences */,
 				AA5AABB50C3CD68A00B2E14F /* Toolbar */,
-				AAC5063D082A7AE00089FF70 /* Support Classes */,
 				AAC5063C082A7A530089FF70 /* Other Sources */,
 				AA67F32E089727FB008BBC37 /* Styles */,
 				B27CCFFD1100E728001F3C83 /* Plugins */,
@@ -1870,6 +1839,7 @@
 				AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */,
 				52A8B4300C4996910035ED2A /* notes.html */,
 				AA21F4510753053500503F58 /* CHANGES */,
+				3A611A5A16346CA5008491A1 /* README.md */,
 			);
 			name = "Documents & Tools";
 			sourceTree = "<group>";
@@ -1886,14 +1856,16 @@
 		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
-				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
+				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
+				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
+				B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */,
+				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
 				AA8B36C00C12D6480035FBD7 /* GradientView.m */,
 				AA60237E08C298FB002CFD06 /* HelperFunctions.h */,
@@ -1902,10 +1874,14 @@
 				AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */,
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
+				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
+				3A23F13415276935008AF863 /* NSNotificationAdditions.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				AABCFB180900BA4E00984F78 /* SquareWindow.h */,
 				AABCFB190900BA4E00984F78 /* SquareWindow.m */,
+				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
+				B2BECB1614CEF22B00706F8F /* SSTextField.m */,
 			);
 			name = "Support Classes";
 			sourceTree = "<group>";
@@ -2064,6 +2040,7 @@
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -2259,11 +2236,10 @@
 				B2B37ACE110A65DA0070EDA6 /* filter-icon.tiff in Resources */,
 				3A42BF8115A0EDE40018B532 /* SyncPreferences.xib in Resources */,
 				6624683B13C5F83000C85417 /* sync.tiff in Resources */,
-				66A5CDB013F8471300DF7A79 /* SyncMerge.xib in Resources */,
 				EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */,
 				EACB098414A0F01500F48809 /* GTMOAuth2Window.xib in Resources */,
 				EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */,
-				EAAF336114BDEC78002A8837 /* ansani_build.txt in Resources */,
+				3A611A5B16346CA5008491A1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2419,11 +2395,10 @@
 				EAE98F6514BEFBD700D6A3DC /* filter-icon.tiff in Resources */,
 				3A42BF8215A0EDE40018B532 /* SyncPreferences.xib in Resources */,
 				EAE98F6714BEFBD700D6A3DC /* sync.tiff in Resources */,
-				EAE98F6814BEFBD700D6A3DC /* SyncMerge.xib in Resources */,
 				EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */,
 				EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */,
 				EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */,
-				EAE98F6C14BEFBD700D6A3DC /* ansani_build.txt in Resources */,
+				3A611A5C16346CA5008491A1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3228,7 +3203,6 @@
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AA55E4AA086C6CF300D7DBFA /* FeedCredentials.m in Sources */,
 				AA74A860087B56810029797C /* ArticleView.m in Sources */,
-				AAA817F8087F986700C30683 /* AsyncConnection.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AA63227F08861C99006382D3 /* Constants.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
@@ -3279,7 +3253,6 @@
 				6624683713C5D09400C85417 /* SyncPreferences.m in Sources */,
 				662468B113C60A2800C85417 /* JSONKit.m in Sources */,
 				664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */,
-				66EA343813F77D7E00F68393 /* SyncMerge.m in Sources */,
 				EACB097914A0EFDA00F48809 /* GTMOAuth2Authentication.m in Sources */,
 				EACB097A14A0EFDA00F48809 /* GTMOAuth2SignIn.m in Sources */,
 				EACB097D14A0EFEE00F48809 /* GTMHTTPFetcher.m in Sources */,
@@ -3335,7 +3308,6 @@
 				EAE98E8314BEFBD700D6A3DC /* PopupButton.m in Sources */,
 				EAE98E8414BEFBD700D6A3DC /* FeedCredentials.m in Sources */,
 				EAE98E8514BEFBD700D6A3DC /* ArticleView.m in Sources */,
-				EAE98E8614BEFBD700D6A3DC /* AsyncConnection.m in Sources */,
 				EAE98E8714BEFBD700D6A3DC /* KeyChain.m in Sources */,
 				EAE98E8814BEFBD700D6A3DC /* Constants.m in Sources */,
 				EAE98E8914BEFBD700D6A3DC /* PopUpButtonExtensions.m in Sources */,
@@ -3386,7 +3358,6 @@
 				EAE98EB614BEFBD700D6A3DC /* SyncPreferences.m in Sources */,
 				EAE98EB714BEFBD700D6A3DC /* JSONKit.m in Sources */,
 				EAE98EB814BEFBD700D6A3DC /* GoogleReader.m in Sources */,
-				EAE98EB914BEFBD700D6A3DC /* SyncMerge.m in Sources */,
 				EAE98EBA14BEFBD700D6A3DC /* GTMOAuth2Authentication.m in Sources */,
 				EAE98EBB14BEFBD700D6A3DC /* GTMOAuth2SignIn.m in Sources */,
 				EAE98EBC14BEFBD700D6A3DC /* GTMHTTPFetcher.m in Sources */,
