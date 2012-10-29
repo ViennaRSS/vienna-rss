@@ -223,8 +223,9 @@ JSONDecoder * jsonDecoder;
 				if ([category hasSuffix:@"/kept-unread"]) [article markRead:NO];
 			}
 				
-			if ([newsItem objectForKey:@"title"]!=nil) {	
-				[article setTitle:[newsItem objectForKey:@"title"]];
+			if ([newsItem objectForKey:@"title"]!=nil) {
+                NSString *unescapedTitle = (NSString *) CFXMLCreateStringByUnescapingEntities(NULL, (CFStringRef)[newsItem objectForKey:@"title"], NULL);
+				[article setTitle:unescapedTitle];
 			} else {
 				[article setTitle:@""];
 			}
