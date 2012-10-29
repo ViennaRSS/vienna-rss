@@ -226,6 +226,8 @@ JSONDecoder * jsonDecoder;
 			if ([newsItem objectForKey:@"title"]!=nil) {
                 NSString *unescapedTitle = (NSString *) CFXMLCreateStringByUnescapingEntities(NULL, (CFStringRef)[newsItem objectForKey:@"title"], NULL);
 				[article setTitle:unescapedTitle];
+                CFRelease(unescapedTitle);
+                
 			} else {
 				[article setTitle:@""];
 			}
