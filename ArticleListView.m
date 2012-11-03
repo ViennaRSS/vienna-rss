@@ -351,7 +351,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	for (index = 0; index < [dataArray count];)
 	{
 		NSString * name;
-		int width = 100;
 		BOOL visible = NO;
 		
 		name = [dataArray objectAtIndex:index++];
