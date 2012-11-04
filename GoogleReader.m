@@ -582,7 +582,7 @@ JSONDecoder * jsonDecoder;
 				folderName = [folderNames lastObject];
 				// NNW nested folder char: — 
 				
-				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInt:MA_Root_Folder], nil];                
+				NSMutableArray * params = [NSMutableArray arrayWithObjects:[[folderNames mutableCopy] autorelease], [NSNumber numberWithInt:MA_Root_Folder], nil];
 				[self performSelectorOnMainThread:@selector(createFolders:) withObject:params waitUntilDone:YES];
 				break; //In case of multiple labels, we retain only the first one
 			} 
