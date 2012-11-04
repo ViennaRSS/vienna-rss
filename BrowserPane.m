@@ -80,7 +80,7 @@
 		[self exposeBinding:@"isProcessing"];
 	}
 	
-	[pool release];
+	[pool drain];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
