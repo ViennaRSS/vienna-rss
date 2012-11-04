@@ -100,7 +100,8 @@
  */
 -(id)initWithFrame:(NSRect)frame
 {
-    if (([super initWithFrame:frame]) != nil)
+    self = [super initWithFrame:frame];
+    if (self)
 	{
 		controller = nil;
 		[self willChangeValueForKey:@"isLoading"];
@@ -765,6 +766,7 @@
 	[self.webPane close];
 	[lastError release];
 	[pageFilename release];
+	[self.webPane release];
 	self.webPane = nil;
 	[super dealloc];
 }

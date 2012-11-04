@@ -682,10 +682,7 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
 				{
-					[articleBody release];
-					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
-					// FIX WARNING
-					// articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
 					continue;
 				}
 				
@@ -705,10 +702,7 @@
 				// description for this item.
 				if ([itemNodeName isEqualToString:@"content:encoded"])
 				{
-					[articleBody release];
-					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
-					// FIX WARNING
-					//articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
 					hasDetailedContent = YES;
 					continue;
 				}
@@ -769,7 +763,6 @@
 			[articleBody fixupRelativeImgTags:[self link]];
 			[articleBody fixupRelativeAnchorTags:[self link]];
 			[newItem setDescription:SafeString(articleBody)];
-			[articleBody release];
 
 			// Derive any missing title
 			[self ensureTitle:newItem];
@@ -940,20 +933,14 @@
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"content"])
 				{
-					[articleBody release];
-					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
-					// FIX WARNING
-					// articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
 					continue;
 				}
 				
 				// Parse item description
 				if ([itemNodeName isEqualToString:@"summary"])
 				{
-					[articleBody release];
-					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] retain];
-					// FIX WARNING
-					// articleBody = [[subItemTree valueOfElement] retain];
+					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
 					continue;
 				}
 				
@@ -1047,7 +1034,6 @@
 			[articleBody fixupRelativeImgTags:entryBase];
 			[articleBody fixupRelativeAnchorTags:entryBase];
 			[newItem setDescription:SafeString(articleBody)];
-			[articleBody release];
 			
 			// Derive any missing title
 			[self ensureTitle:newItem];

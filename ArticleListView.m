@@ -77,7 +77,8 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(id)initWithFrame:(NSRect)frame
 {
-    if (([super initWithFrame:frame]) != nil)
+    self= [super initWithFrame:frame];
+    if (self)
 	{
 		isChangingOrientation = NO;
 		isInTableInit = NO;
