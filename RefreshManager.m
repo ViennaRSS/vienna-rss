@@ -178,6 +178,7 @@ static NSRecursiveLock * articlesUpdate_lock;
  */
 -(void)refreshSubscriptions:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus
 {        
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	statusMessageDuringRefresh = NSLocalizedString(@"Refreshing subscriptions...", nil);
     
 	for (Folder * folder in foldersArray)
@@ -195,6 +196,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 			}
 		}	
 	}
+	[pool drain];
 }
 
 -(void)refreshSubscriptionsAfterDelete:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus {
