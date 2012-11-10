@@ -22,7 +22,7 @@
 #import "ImageAndTextCell.h"
 #import "TreeNode.h"
 
-@interface NSObject (FoldersViewDelegate)
+@interface NSObject (FolderViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteFolderAtRow:(int)row;
