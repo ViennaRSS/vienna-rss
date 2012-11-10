@@ -178,7 +178,6 @@
 -(IBAction)keepFoldersArranged:(id)sender;
 
 // Public functions
--(void)installCustomEventHandler;
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
