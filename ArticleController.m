@@ -127,7 +127,6 @@
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
-        operationQueue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
@@ -711,14 +710,6 @@
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
                 
-				//TOFIX
-				/*
-				GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
-                [op setArticles:[folder articles]];
-                [op setReadFlag:YES];
-                [operationQueue addOperation:op];
-                [op release];
-				 */
 			}
 		}
 		else
@@ -932,7 +923,6 @@
 	[currentArrayOfArticles release];
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
-    [operationQueue release];
 	[super dealloc];
 }
 @end
