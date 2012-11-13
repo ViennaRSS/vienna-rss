@@ -35,7 +35,7 @@
  */
 @interface ArticleController : NSObject
 {
-	IBOutlet FoldersTree * foldersTree;
+	FoldersTree * foldersTree;
 
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
@@ -47,6 +47,13 @@
 	BOOL isBacktracking;
 	Article * articleToPreserve;
 }
+
+@property (nonatomic, retain) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic, retain) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic, retain) NSArray * currentArrayOfArticles;
+@property (nonatomic, retain) NSArray * folderArrayOfArticles;
+@property (nonatomic, retain) NSDictionary * articleSortSpecifiers;
+@property (nonatomic, retain) BackTrackArray * backtrackArray;
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
