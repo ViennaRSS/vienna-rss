@@ -78,7 +78,7 @@ JSONDecoder * jsonDecoder;
     self = [super init];
     if (self) {
         // Initialization code here.
-		localFeeds = [[[NSMutableArray alloc] init] retain]; 
+		localFeeds = [[NSMutableArray alloc] init];
 		jsonDecoder = [[JSONDecoder decoder] retain];
 		googleReaderStatus = notAuthenticated;
 		[self authenticate];
