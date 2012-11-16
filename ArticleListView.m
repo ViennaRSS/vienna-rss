@@ -351,18 +351,15 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	for (index = 0; index < [dataArray count];)
 	{
 		NSString * name;
-		int width = 100;
 		BOOL visible = NO;
 		
 		name = [dataArray objectAtIndex:index++];
 		if (index < [dataArray count])
 			visible = [[dataArray objectAtIndex:index++] intValue] == YES;
-		if (index < [dataArray count])
-			width = [[dataArray objectAtIndex:index++] intValue];
+		index++;
 		
 		field = [db fieldByName:name];
 		[field setVisible:visible];
-		[field setWidth:width];
 	}
 	
 	// Set the default fonts
@@ -528,6 +525,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
+	[articleList setAutosaveTableColumns:NO];
 	
 	// Remove old columns
 	NSTableColumn * lastColumn;
@@ -614,6 +612,12 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
+	if (tableLayout == MA_Layout_Report)
+		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+	else
+		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
+	[articleList setAutosaveTableColumns:YES];
+
 	// Done
 	isInTableInit = NO;
 }
@@ -639,7 +643,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	{
 		[dataArray addObject:[field name]];
 		[dataArray addObject:[NSNumber numberWithBool:[field visible]]];
-		[dataArray addObject:[NSNumber numberWithInt:[field width]]];
+		[dataArray addObject:[NSNumber numberWithInt:0]];
 	}
 	
 	// Save these to the preferences
