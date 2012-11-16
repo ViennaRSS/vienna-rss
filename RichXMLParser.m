@@ -1148,7 +1148,7 @@
  */
 -(NSString *)stripHTMLTags:(NSString *)htmlString
 {
-	NSMutableString * rawString = [[NSMutableString alloc] initWithString:htmlString];
+	NSMutableString * rawString = [[NSMutableString alloc] initWithString:[[htmlString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "]];
 	NSUInteger openTagStartIndex = 0;
 	
 	while ((openTagStartIndex = [rawString indexOfCharacterInString:'<' afterIndex:openTagStartIndex]) != NSNotFound)
