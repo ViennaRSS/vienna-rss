@@ -46,7 +46,6 @@
 	-(void)setLink:(NSString *)newLink;
 	-(void)setDescription:(NSString *)newDescription;
 	-(void)setLastModified:(NSDate *)newDate;
-	-(NSString *)stripHTMLTags:(NSString *)htmlString;
 	-(void)ensureTitle:(FeedItem *)item;
 @end
 
@@ -674,8 +673,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [[subItemTree valueOfElement] stringByUnescapingExtendedCharacters];
-					[newItem setTitle:[self stripHTMLTags:newTitle]];
+					[newItem setTitle:[NSString stringByRemovingHTML:[subItemTree valueOfElement]]];
 					continue;
 				}
 				
@@ -931,7 +929,7 @@
 					NSString * titleType = [subItemTree valueOfAttribute:@"type"];
 					
 					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
-						newTitle = [self stripHTMLTags:newTitle];
+						newTitle = [NSString stringByRemovingHTML:newTitle];
 					
 					[newItem setTitle:newTitle];
 					continue;
@@ -1137,45 +1135,6 @@
 -(NSDate *)lastModified
 {
 	return lastModified;
-}
-
-/* stripHTMLTags
- * Strip off HTML tags from title strings. This code takes stricter approach to
- * HTML removal because some feeds use HTML tags in the title which are actually part
- * of the title rather than presentation data. So we only remove tags which:
- * 
- * 1. Have a corresponding </tag> instruction.
- */
--(NSString *)stripHTMLTags:(NSString *)htmlString
-{
-	NSMutableString * rawString = [[NSMutableString alloc] initWithString:[[htmlString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "]];
-	NSUInteger openTagStartIndex = 0;
-	
-	while ((openTagStartIndex = [rawString indexOfCharacterInString:'<' afterIndex:openTagStartIndex]) != NSNotFound)
-	{
-		NSUInteger openTagEndIndex;
-		if ((openTagEndIndex = [rawString indexOfCharacterInString:'>' afterIndex:openTagStartIndex]) != NSNotFound)
-		{
-			NSString * tagName = [[rawString substringWithRange:NSMakeRange(openTagStartIndex + 1, openTagEndIndex - openTagStartIndex - 1)] lowercaseString];
-			NSString * closingTag = [NSString stringWithFormat:@"</%@>", [tagName firstWord]];
-			NSRange openingTagRange = NSMakeRange(openTagStartIndex, openTagEndIndex - openTagStartIndex + 1);
-			NSRange closingTagRange = [rawString rangeOfString:closingTag options:NSLiteralSearch|NSCaseInsensitiveSearch range:NSMakeRange(openTagEndIndex, [rawString length] - openTagEndIndex)];
-			
-			if ([tagName isEqualToString:@"br"] || [tagName isEqualToString:@"br /"])
-			{
-				[rawString deleteCharactersInRange:openingTagRange];
-				continue;
-			}
-			else if (closingTagRange.location != NSNotFound)
-			{
-				[rawString deleteCharactersInRange:closingTagRange];
-				[rawString deleteCharactersInRange:openingTagRange];
-				continue;
-			}			
-		}
-		++openTagStartIndex;
-	}
-	return [rawString autorelease];
 }
 
 /* ensureTitle
