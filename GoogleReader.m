@@ -30,6 +30,7 @@
 #import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
+#import "StringExtensions.h"
 
 //Vienna keychain Google Reader name
 static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
@@ -224,9 +225,7 @@ JSONDecoder * jsonDecoder;
 			}
 				
 			if ([newsItem objectForKey:@"title"]!=nil) {
-                NSString *unescapedTitle = (NSString *) CFXMLCreateStringByUnescapingEntities(NULL, (CFStringRef)[newsItem objectForKey:@"title"], NULL);
-				[article setTitle:unescapedTitle];
-                CFRelease(unescapedTitle);
+				[article setTitle:[NSString stringByRemovingHTML:[newsItem objectForKey:@"title"]]];
                 
 			} else {
 				[article setTitle:@""];
