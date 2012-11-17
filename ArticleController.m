@@ -901,7 +901,7 @@
 	[folderArrayOfArticles release];
 	self.folderArrayOfArticles=nil;
 	[currentArrayOfArticles release];
-	self.currentArrayOfArticles;
+	self.currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
 	[super dealloc];
