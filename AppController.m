@@ -1637,6 +1637,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	Class GAB = NSClassFromString(@"GrowlApplicationBridge");
 	if([GAB respondsToSelector:@selector(notifyWithTitle:description:notificationName:iconData:priority:isSticky:clickContext:identifier:)])
+					[GAB setShouldUseBuiltInNotifications:NO];
 					[GAB		notifyWithTitle:title
 									description:description
 							   notificationName:notificationName
