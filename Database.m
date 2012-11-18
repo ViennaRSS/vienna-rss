@@ -72,8 +72,8 @@ static Database * _sharedDatabase = nil;
 		trashFolder = nil;
 		searchFolder = nil;
 		searchString = @"";
-		smartfoldersDict = [[NSMutableDictionary dictionary] retain];
-		foldersDict = [[NSMutableDictionary dictionary] retain];
+		smartfoldersDict = [[[NSMutableDictionary alloc] init] retain];
+		foldersDict = [[[NSMutableDictionary alloc] init] retain];
 	}
 	return self;
 }
@@ -407,7 +407,7 @@ static Database * _sharedDatabase = nil;
 	[self syncLastUpdate];
 
 	// Create fields
-	fieldsByName = [[NSMutableDictionary dictionary] retain];
+	fieldsByName = [[[NSMutableDictionary alloc] init] retain];
 	fieldsOrdered = [[NSMutableArray alloc] init];
 
 	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];

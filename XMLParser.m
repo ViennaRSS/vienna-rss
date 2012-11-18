@@ -304,7 +304,7 @@
 	{
 		CFXMLElementInfo eInfo = *(CFXMLElementInfo *)CFXMLNodeGetInfoPtr(node);
 		NSDictionary * dict = (NSDictionary *)eInfo.attributes;
-		NSMutableDictionary * newDict = [NSMutableDictionary dictionary];
+		NSMutableDictionary * newDict = [[NSMutableDictionary alloc] init];
 
 		// Make a copy of the attributes dictionary but force the keys to
 		// lowercase.
