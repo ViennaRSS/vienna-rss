@@ -217,7 +217,7 @@ static NSMutableDictionary * entityMap = nil;
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
 	int maxChrs = [theString length];
-	int cutOff = 150;
+	int cutOff = 600;
 	int indexOfChr = 0;
 	int tagLength = 0;
 	int tagStartIndex = 0;
