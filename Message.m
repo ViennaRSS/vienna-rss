@@ -52,7 +52,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 {
 	if ((self = [super init]) != nil)
 	{
-		articleData = [[NSMutableDictionary dictionary] retain];
+		articleData = [[NSMutableDictionary alloc] init];
 		commentsArray = [[NSMutableArray alloc] init];
 		readFlag = NO;
 		revisedFlag = NO;
@@ -444,7 +444,9 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)dealloc
 {
+	[commentsArray removeAllObjects];
 	[commentsArray release];
+	[articleData removeAllObjects];
 	[articleData release];
 	[super dealloc];
 }

@@ -38,6 +38,7 @@
 @end
 
 @implementation ArticleController
+@synthesize foldersTree, mainArticleView, currentArrayOfArticles, folderArrayOfArticles, backtrackArray;
 
 /* init
  * Initialise.
@@ -47,10 +48,7 @@
     if ((self = [super init]) != nil)
 	{
 		isBacktracking = NO;
-		mainArticleView = nil;
 		currentFolderId = -1;
-		currentArrayOfArticles = nil;
-		folderArrayOfArticles = nil;
 		articleToPreserve = nil;
 
 		// Set default values to generate article sort descriptors
@@ -117,7 +115,7 @@
 		[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
 		
 		// Create a backtrack array
-		backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
+		[self setBacktrackArray:[[[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]] autorelease]];
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -127,27 +125,8 @@
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
-        operationQueue = [[NSOperationQueue alloc] init];
     }
     return self;
-}
-
-/* mainArticleView
- * Returns the current view being used to display the articles.
- */
--(NSView<ArticleBaseView, BaseView> *)mainArticleView
-{
-	return mainArticleView;
-}
-
-/* setMainArticleView
- * Sets the view to use for displaying the articles.
- */
--(void)setMainArticleView:(NSView<ArticleBaseView, BaseView> *)newView
-{
-	[newView retain];
-	[mainArticleView release];
-	mainArticleView = newView;
 }
 
 /* refreshCurrentFolder
@@ -292,8 +271,7 @@
 
 	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[[Preferences standardPreferences] articleSortDescriptors]];
 	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
-	[currentArrayOfArticles autorelease];
-	currentArrayOfArticles = [sortedArrayOfArticles retain];
+	[self setCurrentArrayOfArticles:sortedArrayOfArticles];
 }
 
 /* displayFirstUnread
@@ -334,11 +312,10 @@
  */
 -(void)reloadArrayOfArticles
 {
-	[folderArrayOfArticles autorelease];
 	
 	[[RefreshManager articlesUpdateSemaphore] lock];
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	folderArrayOfArticles = [[folder articlesWithFilter:[[NSApp delegate] filterString]] retain];
+	[self setFolderArrayOfArticles:[folder articlesWithFilter:[[NSApp delegate] filterString]]];
 	[[RefreshManager articlesUpdateSemaphore] unlock];
 	
 	[self refilterArrayOfArticles];
@@ -349,8 +326,7 @@
  */
 -(void)refilterArrayOfArticles
 {
-	[currentArrayOfArticles autorelease];
-	currentArrayOfArticles = [[self applyFilter:folderArrayOfArticles] retain];
+	[self setCurrentArrayOfArticles:[self applyFilter:folderArrayOfArticles]];
 }
 
 /* applyFilter
@@ -456,10 +432,10 @@
 			needReload = YES;
 	}
 	[db commitTransaction];
-	[currentArrayOfArticles autorelease];
-	currentArrayOfArticles = currentArrayCopy;
-	[folderArrayOfArticles autorelease];
-	folderArrayOfArticles = folderArrayCopy;
+	[self setCurrentArrayOfArticles:currentArrayCopy];
+	[currentArrayCopy release];
+	[self setFolderArrayOfArticles:folderArrayCopy];
+	[folderArrayCopy release];
 	if (needReload)
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
@@ -506,10 +482,10 @@
 		}
 	}
 	[db commitTransaction];
-	[currentArrayOfArticles autorelease];
-	currentArrayOfArticles = currentArrayCopy;
-	[folderArrayOfArticles autorelease];
-	folderArrayOfArticles = folderArrayCopy;
+	[self setCurrentArrayOfArticles:currentArrayCopy];
+	[currentArrayCopy release];
+	[self setFolderArrayOfArticles:folderArrayCopy];
+	[folderArrayCopy release];
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
 	// If any of the articles we deleted were unread then the
@@ -711,14 +687,6 @@
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
                 
-				//TOFIX
-				/*
-				GRSMarkReadOperation * op = [[GRSMarkReadOperation alloc] init];
-                [op setArticles:[folder articles]];
-                [op setReadFlag:YES];
-                [operationQueue addOperation:op];
-                [op release];
-				 */
 			}
 		}
 		else
@@ -926,13 +894,16 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mainArticleView release];
+	self.mainArticleView=nil;
 	[backtrackArray release];
+	self.backtrackArray=nil;
 	[sortColumnIdentifier release];
 	[folderArrayOfArticles release];
+	self.folderArrayOfArticles=nil;
 	[currentArrayOfArticles release];
+	self.currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
-    [operationQueue release];
 	[super dealloc];
 }
 @end

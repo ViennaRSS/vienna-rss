@@ -121,7 +121,7 @@
 			if (*tagStartPtr != '!')
 			{
 				XMLTag * tag = [[XMLTag alloc] init];
-				NSMutableDictionary * tagDict = [NSMutableDictionary dictionary];
+				NSMutableDictionary * tagDict = [[NSMutableDictionary alloc] init];
 				const char * tagEndPtr = tagStartPtr;
 
 				if (*tagEndPtr == '/')

@@ -235,7 +235,7 @@ static Preferences * _standardPreferences = nil;
 -(NSDictionary *)factoryDefaults
 {
 	// Set the preference defaults
-	NSMutableDictionary * defaultValues = [NSMutableDictionary dictionary];
+	NSMutableDictionary * defaultValues = [[NSMutableDictionary alloc] init];
 	NSData * defaultArticleListFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"LucidaGrande" size:11.0]];
 	NSData * defaultFolderFont = [NSArchiver archivedDataWithRootObject:[NSFont fontWithName:@"LucidaGrande" size:11.0]];
 	NSData * defaultArticleSortDescriptors = [NSArchiver archivedDataWithRootObject:[NSArray array]];

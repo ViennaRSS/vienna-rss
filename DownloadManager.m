@@ -469,7 +469,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	if (filename == nil)
 		filename = [theItem filename];
 
-	NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
+	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
 	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
@@ -498,7 +498,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	if (filename == nil)
 		filename = [theItem filename];
 
-	NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
+	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
 	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
