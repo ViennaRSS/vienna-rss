@@ -562,6 +562,8 @@ JSONDecoder * jsonDecoder;
 		}
 	}
 			
+	NSMutableArray * googleFeeds=[[NSMutableArray alloc] init];
+
 	for (NSDictionary * feed in [dict objectForKey:@"subscriptions"]) 
 	{
 		LOG_EXPR(feed);
@@ -597,13 +599,26 @@ JSONDecoder * jsonDecoder;
 			NSArray * params = [NSArray arrayWithObjects:feedURL, rssTitle, folderName, nil];
 			[self performSelectorOnMainThread:@selector(createNewSubscription:) withObject:params waitUntilDone:YES];
 		}
+
+        [googleFeeds addObject:feedURL];
 	}
 	
+	//check if we have a folder which is not registered as a Google Reader feed
+	for (Folder * f in [[NSApp delegate] folders]) {
+		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
+		{
+			[[RefreshManager articlesUpdateSemaphore] lock];
+			[[Database sharedDatabase] deleteFolder:[f itemId]];
+			[[RefreshManager articlesUpdateSemaphore] unlock];
+		}
+	}
+
 	AppController *controller = [NSApp delegate];
 	
 	// Unread count may have changed
 	[controller setStatusMessage:nil persist:NO];
 	
+	[googleFeeds release];
 	
 }
 
