@@ -6,65 +6,29 @@
 	<head>
 		<!-- Processed by MultiMarkdown -->
 		<meta name="Format" content="complete" />
-		<title>Vienna Beta 3.0b.2816</title>
 	</head>
 <body>
 
 <h1>Version notes</h1>
 
-<h2 id="b.2820">3.0b.2820</h2>
+<h2 id="b.2821">3.0b.2821</h2>
 
 <ul>
-<li>When closing a tab, close its content</li>
-<li>Fix the &#8220;last refreshed&#8221; filter</li>
-<li>Fix parsing some date strings</li>
-<li>Enable commands &#8220;Get Info&#8221;, &#8220;Unsubscribe&#8221;, &#8220;Resubscribe&#8221; with Google Reader feeds</li>
-<li>If a feed is submitted through a button or a link, guess if it should be subscribed locally or on Google Reader</li>
+<li>Refreshes do not interfere anymore with user&#8217;s reading experience </li>
+<li>Remember columns positions between relaunches</li>
+<li>New default style</li>
+<li>Add Instapaper and Pocket (ReadItLater) plugins</li>
+<li>Supports Apple&#8217;s notification center (in addition to Growl for OS&#8217;s prior to 10.8)</li>
+<li>Fix a problem with Google subscription list synchronization</li>
+<li>Ensures we get a Google token before performing some actions</li>
+<li>Correctly handle permanent redirects (HTTP response codes 301)</li>
+<li>404 HTTP response status weren&#8217;t correctly reported to the user</li>
+<li>Better handling of feeds containing HTML tags and/or entities and newlines</li>
+<li>Fix relative links in articles</li>
+<li>Greatly improved memory handling</li>
+<li>OPML export now includes Google Reader feeds</li>
+<li>When clicking a RSS link or the RSS button, take into account user&#8217;s preference for subscribing (locally or on Google Reader)</li>
+<li>Other miscellaneous fixes</li>
 </ul>
-
-<h2 id="b.2819">3.0b.2819</h2>
-
-<ul>
-<li>Fix other nasty crashes on Mountain Lion</li>
-</ul>
-
-<h2 id="b.2818">3.0b.2818</h2>
-
-<ul>
-<li>Fix some nasty crashes on Mountain Lion which occurred when closing tabs</li>
-<li>Fix the &#8220;Check for newer versions of Vienna at startup&#8221; preference</li>
-<li>Make the knob of the vertical scrollbar more visible when reading long lists on Lion/Mountain Lion</li>
-<li>Other minor bugfixes and code cleaning</li>
-</ul>
-
-<h2 id="b.2817">3.0b.2817</h2>
-
-<ul>
-<li>Fix fetching of icons associated to feeds.
-<em>Note</em> : users of previous versions are invited to use the &#8220;Refresh Folder Images&#8221; menu item</li>
-<li>Better accessibility for people with visual impairment through VoiceOver</li>
-<li>Completely logout from Google Reader when the &#8220;Sync with Google Reader&#8221; preference is unchecked</li>
-<li>Builds are now signed with Developer IDs delivered by Apple, to meet Mountain Lion&#8217;s Gatekeeper default requirements.</li>
-</ul>
-
-<h2 id="b.2816">3.0b.2816</h2>
-
-<ul>
-<li>Google Reader support ! Each feed can either be local (especially authenticated feeds, which are not handled by Google Reader), or hosted on Google Reader</li>
-<li>64 bit support</li>
-<li>Full Screen support on Mac OSX Lion and Mountain Lion</li>
-<li>Fixes running on Leopard and on PowerPC</li>
-<li>Fixes feeds whose titles are XHTML or contain linefeeds/carriage returns</li>
-<li>Fixes Atom feeds with relative links</li>
-<li>Stay on Discrete Graphics mode on Macs having dual graphics cards</li>
-<li>Improved web browser experience (persistent cookies)</li>
-<li>Some functions which were only available on Report or Condensed layout are now available on Unified layout</li>
-<li>Increased timeout for feeds refresh</li>
-<li>Larger use of multi-threading</li>
-<li>Compiled with LLVM</li>
-<li>Binaries are now signed to avoid blockade by Mountain Lion&#8217;s gatekeeper default settings (for first run, you&#8217;ll have to right click and select &#8216;Open&#8217;)</li>
-<li>Many other bugfixes</li>
-</ul>
-
 </body>
 </html>

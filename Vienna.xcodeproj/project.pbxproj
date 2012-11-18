@@ -632,7 +632,7 @@
 		};
 		3A031D0B15E145630092767F /* Copy Growl current */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = Contents/Frameworks/Growl;
 			dstSubfolderSpec = 1;
 			files = (
@@ -643,7 +643,7 @@
 		};
 		3A031D0D15E145880092767F /* Copy Growl legacy */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = Contents/Frameworks/Growl/Legacy;
 			dstSubfolderSpec = 1;
 			files = (
@@ -2056,6 +2056,8 @@
 			buildConfigurationList = EAE98F8714BEFBD700D6A3DC /* Build configuration list for PBXNativeTarget "ViennaBeta" */;
 			buildPhases = (
 				EAE98E6214BEFBD700D6A3DC /* Sources */,
+				3A031D0B15E145630092767F /* Copy Growl current */,
+				3A031D0D15E145880092767F /* Copy Growl legacy */,
 				EAE98EC814BEFBD700D6A3DC /* Frameworks */,
 				EAE98ED314BEFBD700D6A3DC /* Resources */,
 				EAE98F6D14BEFBD700D6A3DC /* Index cs Help */,
@@ -2078,8 +2080,6 @@
 				EAE98F7E14BEFBD700D6A3DC /* Acknowledgements */,
 				EAE98F7F14BEFBD700D6A3DC /* Copy Frameworks */,
 				EAE98F8314BEFBD700D6A3DC /* Copy Shared Support Files */,
-				3A031D0B15E145630092767F /* Copy Growl current */,
-				3A031D0D15E145880092767F /* Copy Growl legacy */,
 			);
 			buildRules = (
 				EAE98F8614BEFBD700D6A3DC /* PBXBuildRule */,
@@ -3954,6 +3954,7 @@
 					i386,
 					ppc,
 				);
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3989,7 +3990,7 @@
 		EAE98F8814BEFBD700D6A3DC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2820;
+				BUILD_NUMBER = 2821;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
@@ -4022,7 +4023,7 @@
 		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2820;
+				BUILD_NUMBER = 2821;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",

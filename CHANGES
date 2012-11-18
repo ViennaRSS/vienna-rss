@@ -8,6 +8,24 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0b.2821
+--------
+- Refreshes do not interfere anymore with user's reading experience
+- Remember columns positions between relaunches
+- New default style
+- Add Instapaper and Pocket (ReadItLater) plugins
+- Supports Apple's notification center (in addition to Growl for OS's prior to 10.8)
+- Fix a problem with Google subscription list synchronization
+- Ensures we get a Google token before performing some actions
+- Correctly handle permanent redirects (HTTP response codes 301)
+- 404 HTTP response status weren't correctly reported to the user
+- Better handling of feeds containing HTML tags and/or entities and newlines
+- Fix relative links in articles
+- Greatly improved memory handling
+- OPML export now includes Google Reader feeds
+- When clicking a RSS link or the RSS button, take into account user's preference for subscribing (locally or on Google Reader)
+- Other miscellaneous fixes
+
 3.0b.2820
 ---------
 - When closing a tab, close its content
