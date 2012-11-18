@@ -1163,7 +1163,7 @@ static Database * _sharedDatabase = nil;
 
 	// Do nothing if the link hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder homePage] isEqualToString:newHomePage])
+	if ([[folder homePage] isEqualToString:newHomePage]||newHomePage==nil)
 		return NO;
 
 	[folder setHomePage:newHomePage];

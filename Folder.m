@@ -336,7 +336,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)homePage
 {
-	return [attributes valueForKey:@"HomePage"];
+	return SafeString([attributes valueForKey:@"HomePage"]);
 }
 
 /* image
