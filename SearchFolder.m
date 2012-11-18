@@ -169,7 +169,7 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:smartFolderName];
 
 		// Create a mapping for field to column names
-		nameToFieldMap = [[NSMutableDictionary dictionary] retain];
+		nameToFieldMap = [[NSMutableDictionary alloc] init];
 
 		// Initialize the search criteria view popups with all the
 		// fields in the database.

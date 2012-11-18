@@ -98,7 +98,7 @@
 
 	for (Folder * folder in feedArray)
 	{
-		NSMutableDictionary * itemDict = [NSMutableDictionary dictionary];
+		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
 		NSString * name = [folder name];
 		if (IsGroupFolder(folder))
 		{

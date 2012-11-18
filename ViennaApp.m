@@ -44,16 +44,13 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
  */
 -(void)sendEvent:(NSEvent *)anEvent 
 {
-	BOOL isHandled = NO;
-
 	if(([anEvent type] == NSFlagsChanged) && ( ([anEvent keyCode] == 61) || ([anEvent keyCode] == 58)))
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
 		[controller toggleOptionKeyButtonStates]; 
-		isHandled = YES;
 	}
+	else
 	// Only handle the events we actually need.
-    if(!isHandled)
 		[super sendEvent:anEvent];
 }
 

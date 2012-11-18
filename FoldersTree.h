@@ -41,7 +41,6 @@
 	BOOL blockSelectionHandler;
 	BOOL canRenameFolders;
     
-    NSOperationQueue *operationQueue;
 }
 
 // Public functions

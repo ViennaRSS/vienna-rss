@@ -175,8 +175,6 @@ static NSLock * dateFormatters_lock;
 
 	Preferences * prefs = [Preferences standardPreferences];
 	
-	[self installCustomEventHandler];
-	
 	// Restore the most recent layout
 	[self setLayout:[prefs layout] withRefresh:NO];
 	
@@ -197,21 +195,6 @@ static NSLock * dateFormatters_lock;
 	// we will need them if they are added back later.
 	[spinner retain];
 	[searchField retain];
-}
-
-/* installCustomEventHandler
- * This is our custom event handler that tells us when a modifier key is pressed
- * or released anywhere in the system. Needed for iTunes-like button. The other 
- * half of the magic happens in ViennaApp.
- */
--(void)installCustomEventHandler
-{
-	EventTypeSpec eventType;
-	eventType.eventClass = kEventClassKeyboard;
-	eventType.eventKind = kEventRawKeyModifiersChanged;
-	
-	EventHandlerUPP handlerFunction = NewEventHandlerUPP(keyPressed);
-	InstallEventHandler(GetEventMonitorTarget(), handlerFunction, 1, &eventType, NULL, NULL);
 }
 
 /* applicationDidResignActive

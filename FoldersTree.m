@@ -72,7 +72,6 @@
 		canRenameFolders = NO;
 		folderErrorImage = nil;
 		refreshProgressImage = nil;
-        operationQueue = [[NSOperationQueue alloc] init];
 	}
 	return self;
 }
@@ -1075,15 +1074,6 @@
 		else
         {
 			[db setFolderName:[folder itemId] newName:newName];
-            
-			/*
-            GRSRenameFolderOperation * op = [[GRSRenameFolderOperation alloc] init];
-            [op setFolder:folder];
-            [op setOldName:oldName];
-            [op setNewName:newName];
-            [operationQueue addOperation:op];
-            [op release];
-			 */
         }
 	}
 }
@@ -1246,18 +1236,6 @@
 			newPredecessorId = 0;
 		int newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
         
-        if (sync)
-        {
-			/*
-            GRSSetFolderOperation * op = [[GRSSetFolderOperation alloc] init];
-            [op setFolder:[node folder]];
-            [op setOldParent:[oldParent folder]];
-            [op setNewParent:[newParent folder]];
-            [operationQueue addOperation:op];
-            [op release];
-			 */
-        }
-		
 		if (newParentId == oldParentId)
 		{
 			// With automatic sorting, moving under the same parent is impossible.
@@ -1528,7 +1506,6 @@
 	[folderErrorImage release];
 	[refreshProgressImage release];
 	[rootNode release];
-    [operationQueue release];
 	[super dealloc];
 }
 @end
