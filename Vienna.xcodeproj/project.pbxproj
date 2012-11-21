@@ -27,7 +27,7 @@
 				EAAF336614BEF4DF002A8837 /* Release to Github */,
 			);
 			dependencies = (
-				EAE98F9414BEFD6500D6A3DC /* PBXTargetDependency */,
+				43501CFF165D82ED0018EDB7 /* PBXTargetDependency */,
 			);
 			name = "Github Beta";
 			productName = Release;
@@ -39,17 +39,10 @@
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A031D0815E144D20092767F /* Growl.framework in Copy Growl current */ = {isa = PBXBuildFile; fileRef = 3A031D0315E141980092767F /* Growl.framework */; };
 		3A031D0A15E1452E0092767F /* Growl.framework in Copy Growl legacy */ = {isa = PBXBuildFile; fileRef = 3A031D0515E141980092767F /* Growl.framework */; };
-		3A031D0C15E145820092767F /* Growl.framework in Copy Growl current */ = {isa = PBXBuildFile; fileRef = 3A031D0315E141980092767F /* Growl.framework */; };
-		3A031D0E15E145A60092767F /* Growl.framework in Copy Growl legacy */ = {isa = PBXBuildFile; fileRef = 3A031D0515E141980092767F /* Growl.framework */; };
-		3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F13415276935008AF863 /* NSNotificationAdditions.m */; };
 		3A42BF8115A0EDE40018B532 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */; };
-		3A42BF8215A0EDE40018B532 /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A42BF8015A0EDE40018B532 /* SyncPreferences.xib */; };
 		3A611A5B16346CA5008491A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A611A5A16346CA5008491A1 /* README.md */; };
-		3A611A5C16346CA5008491A1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A611A5A16346CA5008491A1 /* README.md */; };
 		3A9A469C14CCE8F900EA4A31 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
-		3ABA673614C7545900251925 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		3AFC9FF0152B7AF2004B0537 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
-		3AFC9FF1152B7B03004B0537 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		619666CA09FBCAA400D75885 /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
 		61975EA90B41DF5E001F65FF /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
 		61975EBA0B41E0A0001F65FF /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
@@ -287,7 +280,6 @@
 		B2B72E1610FF6252009201A9 /* sign_update.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1410FF6252009201A9 /* sign_update.rb */; };
 		B2B72E1810FF626B009201A9 /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1710FF626B009201A9 /* vienna_public_key.pem */; };
 		B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BECB1614CEF22B00706F8F /* SSTextField.m */; };
-		B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BECB1614CEF22B00706F8F /* SSTextField.m */; };
 		B2C9673C106CD02B0056669A /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
 		B2E09F2D111192B7003B530A /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 		D98F86E9115FCC7A00688018 /* ProgressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D98F86E8115FCC7A00688018 /* ProgressTextCell.m */; };
@@ -310,292 +302,22 @@
 		EACB098514A0F01500F48809 /* GTMOAuth2WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB098314A0F01500F48809 /* GTMOAuth2WindowController.m */; };
 		EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
 		EACE4C93147FA2F300A17997 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */; };
-		EAE98E6314BEFBD700D6A3DC /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
-		EAE98E6414BEFBD700D6A3DC /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
-		EAE98E6514BEFBD700D6A3DC /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
-		EAE98E6614BEFBD700D6A3DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
-		EAE98E6714BEFBD700D6A3DC /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2224772112F041E008579B0 /* SearchMethod.m */; };
-		EAE98E6814BEFBD700D6A3DC /* SQLDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4800604911B00FE7994 /* SQLDatabase.m */; };
-		EAE98E6914BEFBD700D6A3DC /* SQLResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4820604911B00FE7994 /* SQLResult.m */; };
-		EAE98E6A14BEFBD700D6A3DC /* SQLRow.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4830604911B00FE7994 /* SQLRow.m */; };
-		EAE98E6B14BEFBD700D6A3DC /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CB0604927300FE7994 /* Folder.m */; };
-		EAE98E6C14BEFBD700D6A3DC /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CE0604927300FE7994 /* Message.m */; };
-		EAE98E6D14BEFBD700D6A3DC /* TreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D40604927300FE7994 /* TreeNode.m */; };
-		EAE98E6E14BEFBD700D6A3DC /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
-		EAE98E6F14BEFBD700D6A3DC /* MessageListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D60604927300FE7994 /* MessageListView.m */; };
-		EAE98E7014BEFBD700D6A3DC /* BackTrackArray.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D80604927300FE7994 /* BackTrackArray.m */; };
-		EAE98E7114BEFBD700D6A3DC /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4DC0604927300FE7994 /* URLHandlerCommand.m */; };
-		EAE98E7214BEFBD700D6A3DC /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F676060497BB00FE7994 /* FoldersTree.m */; };
-		EAE98E7314BEFBD700D6A3DC /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACFDEBB0604D4D20072D140 /* AppController.m */; };
-		EAE98E7414BEFBD700D6A3DC /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
-		EAE98E7514BEFBD700D6A3DC /* ActivityViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AABFDCA00609EA8100100A9B /* ActivityViewer.m */; };
-		EAE98E7614BEFBD700D6A3DC /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
-		EAE98E7814BEFBD700D6A3DC /* FolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CB7CE06238B08004E1236 /* FolderView.m */; };
-		EAE98E7914BEFBD700D6A3DC /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
-		EAE98E7A14BEFBD700D6A3DC /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA3AF0806338A00006735EB /* SearchFolder.m */; };
-		EAE98E7B14BEFBD700D6A3DC /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
-		EAE98E7C14BEFBD700D6A3DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
-		EAE98E7D14BEFBD700D6A3DC /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = AA682CF6069A955F00228193 /* ViennaApp.m */; };
-		EAE98E7E14BEFBD700D6A3DC /* NewSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9F3097081B6A7400D6EA23 /* NewSubscription.m */; };
-		EAE98E7F14BEFBD700D6A3DC /* Export.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328A7408483DE100A7AD5A /* Export.m */; };
-		EAE98E8014BEFBD700D6A3DC /* Import.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328A9A0848404200A7AD5A /* Import.m */; };
-		EAE98E8114BEFBD700D6A3DC /* NewGroupFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA1E2FC0852502700277128 /* NewGroupFolder.m */; };
-		EAE98E8214BEFBD700D6A3DC /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0FB5E10869110300D9CB90 /* ActivityLog.m */; };
-		EAE98E8314BEFBD700D6A3DC /* PopupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7A900086BB5C4009A487E /* PopupButton.m */; };
-		EAE98E8414BEFBD700D6A3DC /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AA55E4A8086C6CF300D7DBFA /* FeedCredentials.m */; };
-		EAE98E8514BEFBD700D6A3DC /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA74A85E087B56810029797C /* ArticleView.m */; };
-		EAE98E8714BEFBD700D6A3DC /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
-		EAE98E8814BEFBD700D6A3DC /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA63227E08861C99006382D3 /* Constants.m */; };
-		EAE98E8914BEFBD700D6A3DC /* PopUpButtonExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD794E5088A25D200E2CE5E /* PopUpButtonExtensions.m */; };
-		EAE98E8A14BEFBD700D6A3DC /* ImageAndTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD7999E088B617900E2CE5E /* ImageAndTextCell.m */; };
-		EAE98E8B14BEFBD700D6A3DC /* BezierPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86B2A90892DCAA0071FB33 /* BezierPathExtensions.m */; };
-		EAE98E8C14BEFBD700D6A3DC /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
-		EAE98E8D14BEFBD700D6A3DC /* BrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF2797E08C00E20000090A1 /* BrowserView.m */; };
-		EAE98E8E14BEFBD700D6A3DC /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
-		EAE98E8F14BEFBD700D6A3DC /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7AB45808CA742A000D34F9 /* ArticleRef.m */; };
-		EAE98E9014BEFBD700D6A3DC /* BrowserPane.m in Sources */ = {isa = PBXBuildFile; fileRef = AA51CBF708CFEA0F00DD6535 /* BrowserPane.m */; };
-		EAE98E9114BEFBD700D6A3DC /* RefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AA82994F08D94BAF00983120 /* RefreshManager.m */; };
-		EAE98E9214BEFBD700D6A3DC /* ArrayExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEB1A5108E74EE300917920 /* ArrayExtensions.m */; };
-		EAE98E9314BEFBD700D6A3DC /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB968DD08F7829E00B7D1C8 /* DownloadManager.m */; };
-		EAE98E9414BEFBD700D6A3DC /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB9698E08F99EE700B7D1C8 /* DownloadWindow.m */; };
-		EAE98E9514BEFBD700D6A3DC /* SquareWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AABCFB190900BA4E00984F78 /* SquareWindow.m */; };
-		EAE98E9614BEFBD700D6A3DC /* NewPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */; };
-		EAE98E9714BEFBD700D6A3DC /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */; };
-		EAE98E9814BEFBD700D6A3DC /* AppearancesPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */; };
-		EAE98E9914BEFBD700D6A3DC /* BrowserPaneTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA710F8509BB7F3800E3EA8A /* BrowserPaneTemplate.m */; };
-		EAE98E9A14BEFBD700D6A3DC /* AddressBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA71168E09BEB17300E3EA8A /* AddressBarCell.m */; };
-		EAE98E9B14BEFBD700D6A3DC /* ArticleFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA7F5EA09D50102007D0760 /* ArticleFilter.m */; };
-		EAE98E9C14BEFBD700D6A3DC /* InfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED7A9D09FDE01000ED56E5 /* InfoWindow.m */; };
-		EAE98E9D14BEFBD700D6A3DC /* SNDisclosureButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED82F60A037A2A00ED56E5 /* SNDisclosureButton.m */; };
-		EAE98E9E14BEFBD700D6A3DC /* SNDisclosableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED82FF0A037A6700ED56E5 /* SNDisclosableView.m */; };
-		EAE98E9F14BEFBD700D6A3DC /* ArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E5620A1045DC00685562 /* ArticleController.m */; };
-		EAE98EA014BEFBD700D6A3DC /* UnifiedDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E5B00A10481D00685562 /* UnifiedDisplayView.m */; };
-		EAE98EA114BEFBD700D6A3DC /* TabbedWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE7E64C0A104DCE00685562 /* TabbedWebView.m */; };
-		EAE98EA214BEFBD700D6A3DC /* AdvancedPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */; };
-		EAE98EA314BEFBD700D6A3DC /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA34B5A208C0DD3F003AEE18 /* ArticleListView.m */; };
-		EAE98EA414BEFBD700D6A3DC /* EmptyTrashWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 61975EB80B41E0A0001F65FF /* EmptyTrashWarning.m */; };
-		EAE98EA514BEFBD700D6A3DC /* SplitViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1A23D90C07475B005968DC /* SplitViewExtensions.m */; };
-		EAE98EA614BEFBD700D6A3DC /* ViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1A27540C09B27E005968DC /* ViewExtensions.m */; };
-		EAE98EA714BEFBD700D6A3DC /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
-		EAE98EA814BEFBD700D6A3DC /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8B36C00C12D6480035FBD7 /* GradientView.m */; };
-		EAE98EA914BEFBD700D6A3DC /* ThinSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD2BF0B0C2BB64500AA0F11 /* ThinSplitView.m */; };
-		EAE98EAA14BEFBD700D6A3DC /* StdEnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3F36E40C2F143100D5766B /* StdEnclosureView.m */; };
-		EAE98EAB14BEFBD700D6A3DC /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA138EF70C34A22600C64338 /* FilterView.m */; };
-		EAE98EAC14BEFBD700D6A3DC /* ToolbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AA7FE0C3C0D7D00B2E14F /* ToolbarButton.m */; };
-		EAE98EAD14BEFBD700D6A3DC /* ToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AB4C60C3D511700B2E14F /* ToolbarItem.m */; };
-		EAE98EAE14BEFBD700D6A3DC /* SearchString.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5AC2640C3ECAA000B2E14F /* SearchString.m */; };
-		EAE98EAF14BEFBD700D6A3DC /* SearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA5814970C4972BB003D0916 /* SearchPanel.m */; };
-		EAE98EB014BEFBD700D6A3DC /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = AA785DBB0BF62AE60089DCF0 /* sqlite3.c */; };
-		EAE98EB114BEFBD700D6A3DC /* XMLSourceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B2108657109F8127001D4E7C /* XMLSourceWindow.m */; };
-		EAE98EB214BEFBD700D6A3DC /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE8214110F9C74500444C16 /* PluginManager.m */; };
-		EAE98EB314BEFBD700D6A3DC /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
-		EAE98EB414BEFBD700D6A3DC /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
-		EAE98EB514BEFBD700D6A3DC /* ProgressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D98F86E8115FCC7A00688018 /* ProgressTextCell.m */; };
-		EAE98EB614BEFBD700D6A3DC /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
-		EAE98EB714BEFBD700D6A3DC /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
-		EAE98EB814BEFBD700D6A3DC /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
-		EAE98EBA14BEFBD700D6A3DC /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
-		EAE98EBB14BEFBD700D6A3DC /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */; };
-		EAE98EBC14BEFBD700D6A3DC /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */; };
-		EAE98EBD14BEFBD700D6A3DC /* GTMHTTPFetchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097F14A0F00000F48809 /* GTMHTTPFetchHistory.m */; };
-		EAE98EBE14BEFBD700D6A3DC /* GTMOAuth2WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB098314A0F01500F48809 /* GTMOAuth2WindowController.m */; };
-		EAE98EBF14BEFBD700D6A3DC /* VTPG_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43C70814A370DB00F2D843 /* VTPG_Common.m */; };
-		EAE98EC114BEFBD700D6A3DC /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67614B3161D008FCBE5 /* ASIDataCompressor.m */; };
-		EAE98EC214BEFBD700D6A3DC /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67814B3161D008FCBE5 /* ASIDataDecompressor.m */; };
-		EAE98EC314BEFBD700D6A3DC /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67A14B3161D008FCBE5 /* ASIDownloadCache.m */; };
-		EAE98EC414BEFBD700D6A3DC /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67C14B3161D008FCBE5 /* ASIFormDataRequest.m */; };
-		EAE98EC514BEFBD700D6A3DC /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF67E14B3161D008FCBE5 /* ASIHTTPRequest.m */; };
-		EAE98EC614BEFBD700D6A3DC /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68214B3161D008FCBE5 /* ASIInputStream.m */; };
-		EAE98EC714BEFBD700D6A3DC /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
-		EAE98ECA14BEFBD700D6A3DC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
-		EAE98ECC14BEFBD700D6A3DC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB076170A076BBE00A9F76A /* Carbon.framework */; };
-		EAE98ECD14BEFBD700D6A3DC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F856C0A0A2F6600A0EACE /* Security.framework */; };
-		EAE98ECE14BEFBD700D6A3DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F86840A0A2FC500A0EACE /* WebKit.framework */; };
-		EAE98ECF14BEFBD700D6A3DC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F86B50A0A2FEA00A0EACE /* IOKit.framework */; };
-		EAE98ED014BEFBD700D6A3DC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8F87650A0A301000A0EACE /* SystemConfiguration.framework */; };
-		EAE98ED114BEFBD700D6A3DC /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
-		EAE98ED214BEFBD700D6A3DC /* PSMTabBarControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
-		EAE98ED414BEFBD700D6A3DC /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
-		EAE98ED514BEFBD700D6A3DC /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA31134B0902009300E80DF1 /* AppearancesPreferences.nib */; };
-		EAE98ED614BEFBD700D6A3DC /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA55E4A4086C6C8200D7DBFA /* FeedCredentials.nib */; };
-		EAE98ED714BEFBD700D6A3DC /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3113480902005300E80DF1 /* GeneralPreferences.nib */; };
-		EAE98ED814BEFBD700D6A3DC /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAA1E3280852539500277128 /* GroupFolder.nib */; };
-		EAE98ED914BEFBD700D6A3DC /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA9F3085081B69EE00D6EA23 /* RSSFeed.nib */; };
-		EAE98EDA14BEFBD700D6A3DC /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA3BDC9E063249FE004621CD /* SearchFolder.nib */; };
-		EAE98EDB14BEFBD700D6A3DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA26F5650604955F00FE7994 /* Localizable.strings */; };
-		EAE98EDC14BEFBD700D6A3DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165FFE840EACC02AAC07 /* InfoPlist.strings */; };
-		EAE98EDD14BEFBD700D6A3DC /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABC189C090AB00300527D4B /* RSSSources.plist */; };
-		EAE98EDE14BEFBD700D6A3DC /* Vienna Help in Resources */ = {isa = PBXBuildFile; fileRef = AAE3AEF406570DB700A1FA1F /* Vienna Help */; };
-		EAE98EDF14BEFBD700D6A3DC /* alphaPixel.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F435060490BD00FE7994 /* alphaPixel.tiff */; };
-		EAE98EE014BEFBD700D6A3DC /* flagged_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F43A060490BD00FE7994 /* flagged_header.tiff */; };
-		EAE98EE114BEFBD700D6A3DC /* flagged.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F43B060490BD00FE7994 /* flagged.tiff */; };
-		EAE98EE214BEFBD700D6A3DC /* greyRightArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F43D060490BD00FE7994 /* greyRightArrow.tiff */; };
-		EAE98EE314BEFBD700D6A3DC /* shBrushXml.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610110A033D700E76A37 /* shBrushXml.js */; };
-		EAE98EE414BEFBD700D6A3DC /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610210A033D700E76A37 /* shCore.css */; };
-		EAE98EE514BEFBD700D6A3DC /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610310A033D700E76A37 /* shCore.js */; };
-		EAE98EE614BEFBD700D6A3DC /* shLegacy.js in Resources */ = {isa = PBXBuildFile; fileRef = B262610410A033D700E76A37 /* shLegacy.js */; };
-		EAE98EE714BEFBD700D6A3DC /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = B262610510A033D700E76A37 /* shThemeDefault.css */; };
-		EAE98EE814BEFBD700D6A3DC /* XMLSyntaxHighlighter.html in Resources */ = {isa = PBXBuildFile; fileRef = B262610610A033D700E76A37 /* XMLSyntaxHighlighter.html */; };
-		EAE98EE914BEFBD700D6A3DC /* smallFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F440060490BD00FE7994 /* smallFolder.tiff */; };
-		EAE98EEA14BEFBD700D6A3DC /* unread_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F441060490BD00FE7994 /* unread_header.tiff */; };
-		EAE98EEB14BEFBD700D6A3DC /* searchFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAB90EFC061D059D00CA4741 /* searchFolder.tiff */; };
-		EAE98EEC14BEFBD700D6A3DC /* ViennaApp.scriptTerminology in Resources */ = {isa = PBXBuildFile; fileRef = AA167A24065834DC0091365D /* ViennaApp.scriptTerminology */; };
-		EAE98EED14BEFBD700D6A3DC /* ViennaApp.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = AA167A840658361B0091365D /* ViennaApp.scriptSuite */; };
-		EAE98EEE14BEFBD700D6A3DC /* rssFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8962081C1916007C6E88 /* rssFolder.tiff */; };
-		EAE98EEF14BEFBD700D6A3DC /* rssFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD8A0D081C253F007C6E88 /* rssFeed.tiff */; };
-		EAE98EF014BEFBD700D6A3DC /* vienna2.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA34582C084BE802003D992E /* vienna2.icns */; };
-		EAE98EF114BEFBD700D6A3DC /* metal_column_header.png in Resources */ = {isa = PBXBuildFile; fileRef = AA2185050861E7E10024DD4A /* metal_column_header.png */; };
-		EAE98EF214BEFBD700D6A3DC /* comments_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3F7B4108711F6A00D2B96F /* comments_header.tiff */; };
-		EAE98EF314BEFBD700D6A3DC /* unread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA20DC9D0882CCC300A226F5 /* unread.tiff */; };
-		EAE98EF414BEFBD700D6A3DC /* comments.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA6321500885F0BB006382D3 /* comments.tiff */; };
-		EAE98EF514BEFBD700D6A3DC /* scriptMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD7935B0889FA5E00E2CE5E /* scriptMenu.tiff */; };
-		EAE98EF614BEFBD700D6A3DC /* vienna2style.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA4AB5E008971B28006C843E /* vienna2style.icns */; };
-		EAE98EF714BEFBD700D6A3DC /* stopRefresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA67F3980897377C008BBC37 /* stopRefresh.tiff */; };
-		EAE98EF814BEFBD700D6A3DC /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
-		EAE98EF914BEFBD700D6A3DC /* StandardURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAF6C3A208B06BA00077BAB8 /* StandardURLs.plist */; };
-		EAE98EFA14BEFBD700D6A3DC /* smallCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA83A04F08D6764D001E8404 /* smallCloseButton.tiff */; };
-		EAE98EFB14BEFBD700D6A3DC /* highlightedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */; };
-		EAE98EFC14BEFBD700D6A3DC /* pressedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AABCF9A408FF562E00984F78 /* pressedCloseButton.tiff */; };
-		EAE98EFD14BEFBD700D6A3DC /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
-		EAE98EFE14BEFBD700D6A3DC /* folderError.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA32E2A30940A9970034D9CC /* folderError.tiff */; };
-		EAE98EFF14BEFBD700D6A3DC /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
-		EAE98F0014BEFBD700D6A3DC /* rssFeedNew.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA04ED6A096226D30060E851 /* rssFeedNew.tiff */; };
-		EAE98F0114BEFBD700D6A3DC /* unreadStar1.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA3D46390969CF1E000E6F3B /* unreadStar1.tiff */; };
-		EAE98F0214BEFBD700D6A3DC /* appearancePrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE3E41B09760B42009E60D6 /* appearancePrefImage.tiff */; };
-		EAE98F0314BEFBD700D6A3DC /* generalPrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE3E42B09760DD2009E60D6 /* generalPrefImage.tiff */; };
-		EAE98F0414BEFBD700D6A3DC /* leftArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */; };
-		EAE98F0514BEFBD700D6A3DC /* rightArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */; };
-		EAE98F0614BEFBD700D6A3DC /* webpage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71173609BEB70D00E3EA8A /* webpage.tiff */; };
-		EAE98F0714BEFBD700D6A3DC /* lockedPage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */; };
-		EAE98F0814BEFBD700D6A3DC /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = AAED7AB909FDE15D00ED56E5 /* InfoWindow.nib */; };
-		EAE98F0914BEFBD700D6A3DC /* SNDisclosureArrowRight.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAED82FA0A037A4E00ED56E5 /* SNDisclosureArrowRight.tiff */; };
-		EAE98F0A14BEFBD700D6A3DC /* SNDisclosureArrowDown.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAED82FB0A037A4E00ED56E5 /* SNDisclosureArrowDown.tiff */; };
-		EAE98F0B14BEFBD700D6A3DC /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
-		EAE98F0C14BEFBD700D6A3DC /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA681B400B18E78100CFD5B7 /* AdvancedPreferences.nib */; };
-		EAE98F0D14BEFBD700D6A3DC /* advancedPrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */; };
-		EAE98F0E14BEFBD700D6A3DC /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 61975F010B41F145001F65FF /* EmptyTrashWarning.nib */; };
-		EAE98F0F14BEFBD700D6A3DC /* enclosure_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F50B754E590062F879 /* enclosure_header.tiff */; };
-		EAE98F1014BEFBD700D6A3DC /* enclosure.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28DE7F60B754E590062F879 /* enclosure.tiff */; };
-		EAE98F1114BEFBD700D6A3DC /* statusBarIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE2B2710BC8594800BC40F8 /* statusBarIcon.tiff */; };
-		EAE98F1214BEFBD700D6A3DC /* statusBarIconUnread.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAE2B90D0BC8DF7800BC40F8 /* statusBarIconUnread.tiff */; };
-		EAE98F1314BEFBD700D6A3DC /* columnIcon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25150C077F49005968DC /* columnIcon.tiff */; };
-		EAE98F1414BEFBD700D6A3DC /* columnIconPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25160C077F49005968DC /* columnIconPressed.tiff */; };
-		EAE98F1514BEFBD700D6A3DC /* refreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A25DE0C096D68005968DC /* refreshButton.tiff */; };
-		EAE98F1614BEFBD700D6A3DC /* refreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A265F0C099EAA005968DC /* refreshButtonPressed.tiff */; };
-		EAE98F1714BEFBD700D6A3DC /* subscribeButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A26600C099EAA005968DC /* subscribeButton.tiff */; };
-		EAE98F1814BEFBD700D6A3DC /* skipFolderButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A267C0C09A03F005968DC /* skipFolderButton.tiff */; };
-		EAE98F1914BEFBD700D6A3DC /* popupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A2A0C09D6B6005968DC /* popupMenuButtonPressed.tiff */; };
-		EAE98F1A14BEFBD700D6A3DC /* skipFolderButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A2E0C09D83B005968DC /* skipFolderButtonPressed.tiff */; };
-		EAE98F1B14BEFBD700D6A3DC /* subscribeButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2A320C09D84E005968DC /* subscribeButtonPressed.tiff */; };
-		EAE98F1C14BEFBD700D6A3DC /* emptyTrashButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA1A2C2F0C0A1EC1005968DC /* emptyTrashButton.tiff */; };
-		EAE98F1D14BEFBD700D6A3DC /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
-		EAE98F1E14BEFBD700D6A3DC /* DBListSplitViewBar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */; };
-		EAE98F1F14BEFBD700D6A3DC /* DBListSplitViewDimple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2BF610C2C41A200AA0F11 /* DBListSplitViewDimple.tiff */; };
-		EAE98F2014BEFBD700D6A3DC /* selBlue.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0520C2C882D00AA0F11 /* selBlue.tiff */; };
-		EAE98F2114BEFBD700D6A3DC /* selGray.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAD2C0530C2C882D00AA0F11 /* selGray.tiff */; };
-		EAE98F2214BEFBD700D6A3DC /* draggerImage.png in Resources */ = {isa = PBXBuildFile; fileRef = AA16C2B00C2D57D5006BBAC1 /* draggerImage.png */; };
-		EAE98F2314BEFBD700D6A3DC /* refreshProgress.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA16C5440C2DD4EB006BBAC1 /* refreshProgress.tiff */; };
-		EAE98F2414BEFBD700D6A3DC /* filterViewBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA13A08A0C36D34C00C64338 /* filterViewBackground.tiff */; };
-		EAE98F2514BEFBD700D6A3DC /* mailLinkButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */; };
-		EAE98F2614BEFBD700D6A3DC /* smartFolderButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95920C3A94F7008A09E5 /* smartFolderButton.tiff */; };
-		EAE98F2714BEFBD700D6A3DC /* popupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95940C3A950F008A09E5 /* popupMenuButton.tiff */; };
-		EAE98F2814BEFBD700D6A3DC /* blogWithMenu.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C95960C3A951E008A09E5 /* blogWithMenu.tiff */; };
-		EAE98F2914BEFBD700D6A3DC /* emptyTrashButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AA8900C3C1D2700B2E14F /* emptyTrashButtonPressed.tiff */; };
-		EAE98F2A14BEFBD700D6A3DC /* smartFolderButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AAB890C3C679E00B2E14F /* smartFolderButtonPressed.tiff */; };
-		EAE98F2B14BEFBD700D6A3DC /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
-		EAE98F2C14BEFBD700D6A3DC /* mailLinkButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5AB60A0C3D6D0100B2E14F /* mailLinkButtonPressed.tiff */; };
-		EAE98F2D14BEFBD700D6A3DC /* browserBarBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA18C4950C43F24900E11C0C /* browserBarBackground.tiff */; };
-		EAE98F2E14BEFBD700D6A3DC /* getInfoButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6E800C457C3800E11097 /* getInfoButton.tiff */; };
-		EAE98F2F14BEFBD700D6A3DC /* getInfoButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6E810C457C3800E11097 /* getInfoButtonPressed.tiff */; };
-		EAE98F3014BEFBD700D6A3DC /* stylesMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6F0F0C45870900E11097 /* stylesMenuButton.tiff */; };
-		EAE98F3114BEFBD700D6A3DC /* stylesMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AADD6F100C45870900E11097 /* stylesMenuButtonPressed.tiff */; };
-		EAE98F3214BEFBD700D6A3DC /* cancelRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9B0C47B703003D0916 /* cancelRefreshButton.tiff */; };
-		EAE98F3314BEFBD700D6A3DC /* cancelRefreshButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA58FB9C0C47B703003D0916 /* cancelRefreshButtonPressed.tiff */; };
-		EAE98F3414BEFBD700D6A3DC /* SearchPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA58148F0C4971EC003D0916 /* SearchPanel.nib */; };
-		EAE98F3514BEFBD700D6A3DC /* ActivityViewer.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D880C4A2B78003D0916 /* ActivityViewer.nib */; };
-		EAE98F3614BEFBD700D6A3DC /* BrowserPane.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582D9C0C4A2C66003D0916 /* BrowserPane.nib */; };
-		EAE98F3714BEFBD700D6A3DC /* Downloads.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DB40C4A2D85003D0916 /* Downloads.nib */; };
-		EAE98F3814BEFBD700D6A3DC /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = AA582DBD0C4A2DE0003D0916 /* NewPreferences.nib */; };
-		EAE98F3914BEFBD700D6A3DC /* nextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833EF0C4A6A07003D0916 /* nextButton.tiff */; };
-		EAE98F3A14BEFBD700D6A3DC /* nextButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F00C4A6A07003D0916 /* nextButtonPressed.tiff */; };
-		EAE98F3B14BEFBD700D6A3DC /* previousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F10C4A6A07003D0916 /* previousButton.tiff */; };
-		EAE98F3C14BEFBD700D6A3DC /* previousButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA5833F20C4A6A07003D0916 /* previousButtonPressed.tiff */; };
-		EAE98F3D14BEFBD700D6A3DC /* cancelRefreshButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A7D0C84484B00D71D26 /* cancelRefreshButtonSmall.tiff */; };
-		EAE98F3E14BEFBD700D6A3DC /* cancelRefreshButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A7E0C84484B00D71D26 /* cancelRefreshButtonSmallPressed.tiff */; };
-		EAE98F3F14BEFBD700D6A3DC /* emptyTrashButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A7F0C84484B00D71D26 /* emptyTrashButtonSmall.tiff */; };
-		EAE98F4014BEFBD700D6A3DC /* emptyTrashButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A800C84484B00D71D26 /* emptyTrashButtonSmallPressed.tiff */; };
-		EAE98F4114BEFBD700D6A3DC /* getInfoButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A810C84484B00D71D26 /* getInfoButtonSmall.tiff */; };
-		EAE98F4214BEFBD700D6A3DC /* getInfoButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A820C84484B00D71D26 /* getInfoButtonSmallPressed.tiff */; };
-		EAE98F4314BEFBD700D6A3DC /* mailLinkButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A830C84484B00D71D26 /* mailLinkButtonSmall.tiff */; };
-		EAE98F4414BEFBD700D6A3DC /* mailLinkButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A840C84484B00D71D26 /* mailLinkButtonSmallPressed.tiff */; };
-		EAE98F4514BEFBD700D6A3DC /* nextButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A850C84484B00D71D26 /* nextButtonSmall.tiff */; };
-		EAE98F4614BEFBD700D6A3DC /* nextButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A860C84484B00D71D26 /* nextButtonSmallPressed.tiff */; };
-		EAE98F4714BEFBD700D6A3DC /* popupMenuButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A870C84484B00D71D26 /* popupMenuButtonSmall.tiff */; };
-		EAE98F4814BEFBD700D6A3DC /* popupMenuButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A880C84484B00D71D26 /* popupMenuButtonSmallPressed.tiff */; };
-		EAE98F4914BEFBD700D6A3DC /* previousButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A890C84484B00D71D26 /* previousButtonSmall.tiff */; };
-		EAE98F4A14BEFBD700D6A3DC /* previousButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A8A0C84484B00D71D26 /* previousButtonSmallPressed.tiff */; };
-		EAE98F4B14BEFBD700D6A3DC /* refreshButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A8B0C84484B00D71D26 /* refreshButtonSmall.tiff */; };
-		EAE98F4C14BEFBD700D6A3DC /* refreshButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A8C0C84484B00D71D26 /* refreshButtonSmallPressed.tiff */; };
-		EAE98F4D14BEFBD700D6A3DC /* skipFolderButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A8D0C84484B00D71D26 /* skipFolderButtonSmall.tiff */; };
-		EAE98F4E14BEFBD700D6A3DC /* skipFolderButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A8E0C84484B00D71D26 /* skipFolderButtonSmallPressed.tiff */; };
-		EAE98F4F14BEFBD700D6A3DC /* smartFolderButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A8F0C84484B00D71D26 /* smartFolderButtonSmall.tiff */; };
-		EAE98F5014BEFBD700D6A3DC /* smartFolderButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A900C84484B00D71D26 /* smartFolderButtonSmallPressed.tiff */; };
-		EAE98F5114BEFBD700D6A3DC /* stylesMenuButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A910C84484B00D71D26 /* stylesMenuButtonSmall.tiff */; };
-		EAE98F5214BEFBD700D6A3DC /* stylesMenuButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A920C84484B00D71D26 /* stylesMenuButtonSmallPressed.tiff */; };
-		EAE98F5314BEFBD700D6A3DC /* subscribeButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A930C84484B00D71D26 /* subscribeButtonSmall.tiff */; };
-		EAE98F5414BEFBD700D6A3DC /* subscribeButtonSmallPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA077A940C84484B00D71D26 /* subscribeButtonSmallPressed.tiff */; };
-		EAE98F5514BEFBD700D6A3DC /* DatabaseSchema.doc in Resources */ = {isa = PBXBuildFile; fileRef = AAC022080E898A3C00BA9002 /* DatabaseSchema.doc */; };
-		EAE98F5614BEFBD700D6A3DC /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
-		EAE98F5714BEFBD700D6A3DC /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
-		EAE98F5814BEFBD700D6A3DC /* browserPreviousButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DF1067B54600BBF14C /* browserPreviousButton.tiff */; };
-		EAE98F5914BEFBD700D6A3DC /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
-		EAE98F5A14BEFBD700D6A3DC /* errorpagebg.png in Resources */ = {isa = PBXBuildFile; fileRef = B273E8EB106910B2001ADEF8 /* errorpagebg.png */; };
-		EAE98F5B14BEFBD700D6A3DC /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
-		EAE98F5C14BEFBD700D6A3DC /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = B2C9673A106CD02B0056669A /* errorpage.html */; };
-		EAE98F5D14BEFBD700D6A3DC /* blankButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA7F231510FA287700856924 /* blankButton.tiff */; };
-		EAE98F5E14BEFBD700D6A3DC /* blankButtonPressedEmbossed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA7F231610FA287700856924 /* blankButtonPressedEmbossed.tiff */; };
-		EAE98F5F14BEFBD700D6A3DC /* blankSmallButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA7F231910FA292700856924 /* blankSmallButton.tiff */; };
-		EAE98F6014BEFBD700D6A3DC /* blankSmallButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA7F231A10FA292700856924 /* blankSmallButtonPressed.tiff */; };
-		EAE98F6114BEFBD700D6A3DC /* generate_keys.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1310FF6252009201A9 /* generate_keys.rb */; };
-		EAE98F6214BEFBD700D6A3DC /* sign_update.rb in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1410FF6252009201A9 /* sign_update.rb */; };
-		EAE98F6314BEFBD700D6A3DC /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = B2B72E1710FF626B009201A9 /* vienna_public_key.pem */; };
-		EAE98F6414BEFBD700D6A3DC /* blankButtonPressedBurned.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2B2216211013FC400885331 /* blankButtonPressedBurned.tiff */; };
-		EAE98F6514BEFBD700D6A3DC /* filter-icon.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B2B37ACD110A65DA0070EDA6 /* filter-icon.tiff */; };
-		EAE98F6714BEFBD700D6A3DC /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
-		EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EA1A761F148FA32B004A6B8F /* googleFeed.tiff */; };
-		EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
-		EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = EAAF335214BDD462002A8837 /* ansani_key.pem */; };
-		EAE98F8014BEFBD700D6A3DC /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */; };
-		EAE98F8214BEFBD700D6A3DC /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
-		EAE98F8414BEFBD700D6A3DC /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
-		EAE98F8514BEFBD700D6A3DC /* Styles in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		EAE98F8614BEFBD700D6A3DC /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.llvm.clang.1_0;
-			fileType = sourcecode.c;
-			isEditable = 1;
-			outputFiles = (
-			);
-		};
-/* End PBXBuildRule section */
-
 /* Begin PBXContainerItemProxy section */
+		43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4 /* Vienna */;
+			remoteInfo = Vienna;
+		};
 		52BA64040DE9E3020008B3E1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
 			remoteInfo = Vienna;
-		};
-		EAE98F9314BEFD6500D6A3DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EAE98E6114BEFBD700D6A3DC;
-			remoteInfo = ViennaBeta;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -622,28 +344,6 @@
 			name = "Copy Growl legacy";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A031D0B15E145630092767F /* Copy Growl current */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = Contents/Frameworks/Growl;
-			dstSubfolderSpec = 1;
-			files = (
-				3A031D0C15E145820092767F /* Growl.framework in Copy Growl current */,
-			);
-			name = "Copy Growl current";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3A031D0D15E145880092767F /* Copy Growl legacy */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = Contents/Frameworks/Growl/Legacy;
-			dstSubfolderSpec = 1;
-			files = (
-				3A031D0E15E145A60092767F /* Growl.framework in Copy Growl legacy */,
-			);
-			name = "Copy Growl legacy";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AA65D27F083CF46F00BC387C /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,30 +364,6 @@
 			files = (
 				B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */,
 				AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */,
-			);
-			name = "Copy Shared Support Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EAE98F7F14BEFBD700D6A3DC /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				EAE98F8014BEFBD700D6A3DC /* PSMTabBarControl.framework in Copy Frameworks */,
-				EAE98F8214BEFBD700D6A3DC /* Sparkle.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EAE98F8314BEFBD700D6A3DC /* Copy Shared Support Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 12;
-			files = (
-				EAE98F8414BEFBD700D6A3DC /* Plugins in Copy Shared Support Files */,
-				EAE98F8514BEFBD700D6A3DC /* Styles in Copy Shared Support Files */,
 			);
 			name = "Copy Shared Support Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1347,7 +1023,6 @@
 		EACB098314A0F01500F48809 /* GTMOAuth2WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMOAuth2WindowController.m; sourceTree = "<group>"; };
 		EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSMTabBarControl.framework; sourceTree = "<group>"; };
 		EACE4C92147FA2F300A17997 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PSMTabBarControl.framework; sourceTree = "<group>"; };
-		EAE98F8B14BEFBD700D6A3DC /* ViennaBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViennaBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE98F8D14BEFBD800D6A3DC /* ViennaBeta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ViennaBeta-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1366,23 +1041,6 @@
 				AA8F87770A0A301000A0EACE /* SystemConfiguration.framework in Frameworks */,
 				B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */,
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EAE98EC814BEFBD700D6A3DC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3AFC9FF1152B7B03004B0537 /* libSystem.B.dylib in Frameworks */,
-				3ABA673614C7545900251925 /* libz.dylib in Frameworks */,
-				EAE98ECA14BEFBD700D6A3DC /* Cocoa.framework in Frameworks */,
-				EAE98ECC14BEFBD700D6A3DC /* Carbon.framework in Frameworks */,
-				EAE98ECD14BEFBD700D6A3DC /* Security.framework in Frameworks */,
-				EAE98ECE14BEFBD700D6A3DC /* WebKit.framework in Frameworks */,
-				EAE98ECF14BEFBD700D6A3DC /* IOKit.framework in Frameworks */,
-				EAE98ED014BEFBD700D6A3DC /* SystemConfiguration.framework in Frameworks */,
-				EAE98ED114BEFBD700D6A3DC /* Sparkle.framework in Frameworks */,
-				EAE98ED214BEFBD700D6A3DC /* PSMTabBarControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,7 +1078,6 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
-				EAE98F8B14BEFBD700D6A3DC /* ViennaBeta.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2058,47 +1715,6 @@
 			productReference = 8D15AC370486D014006FF6A4 /* Vienna.app */;
 			productType = "com.apple.product-type.application";
 		};
-		EAE98E6114BEFBD700D6A3DC /* ViennaBeta */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EAE98F8714BEFBD700D6A3DC /* Build configuration list for PBXNativeTarget "ViennaBeta" */;
-			buildPhases = (
-				EAE98E6214BEFBD700D6A3DC /* Sources */,
-				3A031D0B15E145630092767F /* Copy Growl current */,
-				3A031D0D15E145880092767F /* Copy Growl legacy */,
-				EAE98EC814BEFBD700D6A3DC /* Frameworks */,
-				EAE98ED314BEFBD700D6A3DC /* Resources */,
-				EAE98F6D14BEFBD700D6A3DC /* Index cs Help */,
-				EAE98F6E14BEFBD700D6A3DC /* Index da Help */,
-				EAE98F6F14BEFBD700D6A3DC /* Index de Help */,
-				EAE98F7014BEFBD700D6A3DC /* Index en Help */,
-				EAE98F7114BEFBD700D6A3DC /* Index es Help */,
-				EAE98F7214BEFBD700D6A3DC /* Index eus Help */,
-				EAE98F7314BEFBD700D6A3DC /* Index fr Help */,
-				EAE98F7414BEFBD700D6A3DC /* Index it Help */,
-				EAE98F7514BEFBD700D6A3DC /* Index ja Help */,
-				EAE98F7614BEFBD700D6A3DC /* Index ko Help */,
-				EAE98F7714BEFBD700D6A3DC /* Index nl Help */,
-				EAE98F7814BEFBD700D6A3DC /* Index pt_BR Help */,
-				EAE98F7914BEFBD700D6A3DC /* Index ru Help */,
-				EAE98F7A14BEFBD700D6A3DC /* Index sv Help */,
-				EAE98F7B14BEFBD700D6A3DC /* Index uk Help */,
-				EAE98F7C14BEFBD700D6A3DC /* Index zh_CN Help */,
-				EAE98F7D14BEFBD700D6A3DC /* Index zh_TW Help */,
-				EAE98F7E14BEFBD700D6A3DC /* Acknowledgements */,
-				EAE98F7F14BEFBD700D6A3DC /* Copy Frameworks */,
-				EAE98F8314BEFBD700D6A3DC /* Copy Shared Support Files */,
-			);
-			buildRules = (
-				EAE98F8614BEFBD700D6A3DC /* PBXBuildRule */,
-			);
-			dependencies = (
-			);
-			name = ViennaBeta;
-			productInstallPath = "$(HOME)/Applications";
-			productName = Vienna;
-			productReference = EAE98F8B14BEFBD700D6A3DC /* ViennaBeta.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2149,7 +1765,6 @@
 				8D15AC270486D014006FF6A4 /* Vienna */,
 				52BA63FC0DE9E2E10008B3E1 /* Release */,
 				EAAF335414BDE402002A8837 /* Github Beta */,
-				EAE98E6114BEFBD700D6A3DC /* ViennaBeta */,
 			);
 		};
 /* End PBXProject section */
@@ -2311,165 +1926,6 @@
 				EACB098414A0F01500F48809 /* GTMOAuth2Window.xib in Resources */,
 				EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */,
 				3A611A5B16346CA5008491A1 /* README.md in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EAE98ED314BEFBD700D6A3DC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EAE98ED414BEFBD700D6A3DC /* XMLSource.nib in Resources */,
-				EAE98ED514BEFBD700D6A3DC /* AppearancesPreferences.nib in Resources */,
-				EAE98ED614BEFBD700D6A3DC /* FeedCredentials.nib in Resources */,
-				EAE98ED714BEFBD700D6A3DC /* GeneralPreferences.nib in Resources */,
-				EAE98ED814BEFBD700D6A3DC /* GroupFolder.nib in Resources */,
-				EAE98ED914BEFBD700D6A3DC /* RSSFeed.nib in Resources */,
-				EAE98EDA14BEFBD700D6A3DC /* SearchFolder.nib in Resources */,
-				EAE98EDB14BEFBD700D6A3DC /* Localizable.strings in Resources */,
-				EAE98EDC14BEFBD700D6A3DC /* InfoPlist.strings in Resources */,
-				EAE98EDD14BEFBD700D6A3DC /* RSSSources.plist in Resources */,
-				EAE98EDE14BEFBD700D6A3DC /* Vienna Help in Resources */,
-				EAE98EDF14BEFBD700D6A3DC /* alphaPixel.tiff in Resources */,
-				EAE98EE014BEFBD700D6A3DC /* flagged_header.tiff in Resources */,
-				EAE98EE114BEFBD700D6A3DC /* flagged.tiff in Resources */,
-				EAE98EE214BEFBD700D6A3DC /* greyRightArrow.tiff in Resources */,
-				EAE98EE314BEFBD700D6A3DC /* shBrushXml.js in Resources */,
-				EAE98EE414BEFBD700D6A3DC /* shCore.css in Resources */,
-				EAE98EE514BEFBD700D6A3DC /* shCore.js in Resources */,
-				EAE98EE614BEFBD700D6A3DC /* shLegacy.js in Resources */,
-				EAE98EE714BEFBD700D6A3DC /* shThemeDefault.css in Resources */,
-				EAE98EE814BEFBD700D6A3DC /* XMLSyntaxHighlighter.html in Resources */,
-				EAE98EE914BEFBD700D6A3DC /* smallFolder.tiff in Resources */,
-				EAE98EEA14BEFBD700D6A3DC /* unread_header.tiff in Resources */,
-				EAE98EEB14BEFBD700D6A3DC /* searchFolder.tiff in Resources */,
-				EAE98EEC14BEFBD700D6A3DC /* ViennaApp.scriptTerminology in Resources */,
-				EAE98EED14BEFBD700D6A3DC /* ViennaApp.scriptSuite in Resources */,
-				EAE98EEE14BEFBD700D6A3DC /* rssFolder.tiff in Resources */,
-				EAE98EEF14BEFBD700D6A3DC /* rssFeed.tiff in Resources */,
-				EAE98EF014BEFBD700D6A3DC /* vienna2.icns in Resources */,
-				EAE98EF114BEFBD700D6A3DC /* metal_column_header.png in Resources */,
-				EAE98EF214BEFBD700D6A3DC /* comments_header.tiff in Resources */,
-				EAE98EF314BEFBD700D6A3DC /* unread.tiff in Resources */,
-				EAE98EF414BEFBD700D6A3DC /* comments.tiff in Resources */,
-				EAE98EF514BEFBD700D6A3DC /* scriptMenu.tiff in Resources */,
-				EAE98EF614BEFBD700D6A3DC /* vienna2style.icns in Resources */,
-				EAE98EF714BEFBD700D6A3DC /* stopRefresh.tiff in Resources */,
-				EAE98EF814BEFBD700D6A3DC /* trashFolder.tiff in Resources */,
-				EAE98EF914BEFBD700D6A3DC /* StandardURLs.plist in Resources */,
-				EAE98EFA14BEFBD700D6A3DC /* smallCloseButton.tiff in Resources */,
-				EAE98EFB14BEFBD700D6A3DC /* highlightedCloseButton.tiff in Resources */,
-				EAE98EFC14BEFBD700D6A3DC /* pressedCloseButton.tiff in Resources */,
-				EAE98EFD14BEFBD700D6A3DC /* Preferences.plist in Resources */,
-				EAE98EFE14BEFBD700D6A3DC /* folderError.tiff in Resources */,
-				EAE98EFF14BEFBD700D6A3DC /* DemoFeeds.plist in Resources */,
-				EAE98F0014BEFBD700D6A3DC /* rssFeedNew.tiff in Resources */,
-				EAE98F0114BEFBD700D6A3DC /* unreadStar1.tiff in Resources */,
-				EAE98F0214BEFBD700D6A3DC /* appearancePrefImage.tiff in Resources */,
-				EAE98F0314BEFBD700D6A3DC /* generalPrefImage.tiff in Resources */,
-				EAE98F0414BEFBD700D6A3DC /* leftArrow.tiff in Resources */,
-				EAE98F0514BEFBD700D6A3DC /* rightArrow.tiff in Resources */,
-				EAE98F0614BEFBD700D6A3DC /* webpage.tiff in Resources */,
-				EAE98F0714BEFBD700D6A3DC /* lockedPage.tiff in Resources */,
-				EAE98F0814BEFBD700D6A3DC /* InfoWindow.nib in Resources */,
-				EAE98F0914BEFBD700D6A3DC /* SNDisclosureArrowRight.tiff in Resources */,
-				EAE98F0A14BEFBD700D6A3DC /* SNDisclosureArrowDown.tiff in Resources */,
-				EAE98F0B14BEFBD700D6A3DC /* revised.tiff in Resources */,
-				EAE98F0C14BEFBD700D6A3DC /* AdvancedPreferences.nib in Resources */,
-				EAE98F0D14BEFBD700D6A3DC /* advancedPrefImage.tiff in Resources */,
-				EAE98F0E14BEFBD700D6A3DC /* EmptyTrashWarning.nib in Resources */,
-				EAE98F0F14BEFBD700D6A3DC /* enclosure_header.tiff in Resources */,
-				EAE98F1014BEFBD700D6A3DC /* enclosure.tiff in Resources */,
-				EAE98F1114BEFBD700D6A3DC /* statusBarIcon.tiff in Resources */,
-				EAE98F1214BEFBD700D6A3DC /* statusBarIconUnread.tiff in Resources */,
-				EAE98F1314BEFBD700D6A3DC /* columnIcon.tiff in Resources */,
-				EAE98F1414BEFBD700D6A3DC /* columnIconPressed.tiff in Resources */,
-				EAE98F1514BEFBD700D6A3DC /* refreshButton.tiff in Resources */,
-				EAE98F1614BEFBD700D6A3DC /* refreshButtonPressed.tiff in Resources */,
-				EAE98F1714BEFBD700D6A3DC /* subscribeButton.tiff in Resources */,
-				EAE98F1814BEFBD700D6A3DC /* skipFolderButton.tiff in Resources */,
-				EAE98F1914BEFBD700D6A3DC /* popupMenuButtonPressed.tiff in Resources */,
-				EAE98F1A14BEFBD700D6A3DC /* skipFolderButtonPressed.tiff in Resources */,
-				EAE98F1B14BEFBD700D6A3DC /* subscribeButtonPressed.tiff in Resources */,
-				EAE98F1C14BEFBD700D6A3DC /* emptyTrashButton.tiff in Resources */,
-				EAE98F1D14BEFBD700D6A3DC /* smartFolder.tiff in Resources */,
-				EAE98F1E14BEFBD700D6A3DC /* DBListSplitViewBar.tiff in Resources */,
-				EAE98F1F14BEFBD700D6A3DC /* DBListSplitViewDimple.tiff in Resources */,
-				EAE98F2014BEFBD700D6A3DC /* selBlue.tiff in Resources */,
-				EAE98F2114BEFBD700D6A3DC /* selGray.tiff in Resources */,
-				EAE98F2214BEFBD700D6A3DC /* draggerImage.png in Resources */,
-				EAE98F2314BEFBD700D6A3DC /* refreshProgress.tiff in Resources */,
-				EAE98F2414BEFBD700D6A3DC /* filterViewBackground.tiff in Resources */,
-				EAE98F2514BEFBD700D6A3DC /* mailLinkButton.tiff in Resources */,
-				EAE98F2614BEFBD700D6A3DC /* smartFolderButton.tiff in Resources */,
-				EAE98F2714BEFBD700D6A3DC /* popupMenuButton.tiff in Resources */,
-				EAE98F2814BEFBD700D6A3DC /* blogWithMenu.tiff in Resources */,
-				EAE98F2914BEFBD700D6A3DC /* emptyTrashButtonPressed.tiff in Resources */,
-				EAE98F2A14BEFBD700D6A3DC /* smartFolderButtonPressed.tiff in Resources */,
-				EAE98F2B14BEFBD700D6A3DC /* MainMenu.nib in Resources */,
-				EAE98F2C14BEFBD700D6A3DC /* mailLinkButtonPressed.tiff in Resources */,
-				EAE98F2D14BEFBD700D6A3DC /* browserBarBackground.tiff in Resources */,
-				EAE98F2E14BEFBD700D6A3DC /* getInfoButton.tiff in Resources */,
-				EAE98F2F14BEFBD700D6A3DC /* getInfoButtonPressed.tiff in Resources */,
-				EAE98F3014BEFBD700D6A3DC /* stylesMenuButton.tiff in Resources */,
-				EAE98F3114BEFBD700D6A3DC /* stylesMenuButtonPressed.tiff in Resources */,
-				EAE98F3214BEFBD700D6A3DC /* cancelRefreshButton.tiff in Resources */,
-				EAE98F3314BEFBD700D6A3DC /* cancelRefreshButtonPressed.tiff in Resources */,
-				EAE98F3414BEFBD700D6A3DC /* SearchPanel.nib in Resources */,
-				EAE98F3514BEFBD700D6A3DC /* ActivityViewer.nib in Resources */,
-				EAE98F3614BEFBD700D6A3DC /* BrowserPane.nib in Resources */,
-				EAE98F3714BEFBD700D6A3DC /* Downloads.nib in Resources */,
-				EAE98F3814BEFBD700D6A3DC /* NewPreferences.nib in Resources */,
-				EAE98F3914BEFBD700D6A3DC /* nextButton.tiff in Resources */,
-				EAE98F3A14BEFBD700D6A3DC /* nextButtonPressed.tiff in Resources */,
-				EAE98F3B14BEFBD700D6A3DC /* previousButton.tiff in Resources */,
-				EAE98F3C14BEFBD700D6A3DC /* previousButtonPressed.tiff in Resources */,
-				EAE98F3D14BEFBD700D6A3DC /* cancelRefreshButtonSmall.tiff in Resources */,
-				EAE98F3E14BEFBD700D6A3DC /* cancelRefreshButtonSmallPressed.tiff in Resources */,
-				EAE98F3F14BEFBD700D6A3DC /* emptyTrashButtonSmall.tiff in Resources */,
-				EAE98F4014BEFBD700D6A3DC /* emptyTrashButtonSmallPressed.tiff in Resources */,
-				EAE98F4114BEFBD700D6A3DC /* getInfoButtonSmall.tiff in Resources */,
-				EAE98F4214BEFBD700D6A3DC /* getInfoButtonSmallPressed.tiff in Resources */,
-				EAE98F4314BEFBD700D6A3DC /* mailLinkButtonSmall.tiff in Resources */,
-				EAE98F4414BEFBD700D6A3DC /* mailLinkButtonSmallPressed.tiff in Resources */,
-				EAE98F4514BEFBD700D6A3DC /* nextButtonSmall.tiff in Resources */,
-				EAE98F4614BEFBD700D6A3DC /* nextButtonSmallPressed.tiff in Resources */,
-				EAE98F4714BEFBD700D6A3DC /* popupMenuButtonSmall.tiff in Resources */,
-				EAE98F4814BEFBD700D6A3DC /* popupMenuButtonSmallPressed.tiff in Resources */,
-				EAE98F4914BEFBD700D6A3DC /* previousButtonSmall.tiff in Resources */,
-				EAE98F4A14BEFBD700D6A3DC /* previousButtonSmallPressed.tiff in Resources */,
-				EAE98F4B14BEFBD700D6A3DC /* refreshButtonSmall.tiff in Resources */,
-				EAE98F4C14BEFBD700D6A3DC /* refreshButtonSmallPressed.tiff in Resources */,
-				EAE98F4D14BEFBD700D6A3DC /* skipFolderButtonSmall.tiff in Resources */,
-				EAE98F4E14BEFBD700D6A3DC /* skipFolderButtonSmallPressed.tiff in Resources */,
-				EAE98F4F14BEFBD700D6A3DC /* smartFolderButtonSmall.tiff in Resources */,
-				EAE98F5014BEFBD700D6A3DC /* smartFolderButtonSmallPressed.tiff in Resources */,
-				EAE98F5114BEFBD700D6A3DC /* stylesMenuButtonSmall.tiff in Resources */,
-				EAE98F5214BEFBD700D6A3DC /* stylesMenuButtonSmallPressed.tiff in Resources */,
-				EAE98F5314BEFBD700D6A3DC /* subscribeButtonSmall.tiff in Resources */,
-				EAE98F5414BEFBD700D6A3DC /* subscribeButtonSmallPressed.tiff in Resources */,
-				EAE98F5514BEFBD700D6A3DC /* DatabaseSchema.doc in Resources */,
-				EAE98F5614BEFBD700D6A3DC /* browserNextButton.tiff in Resources */,
-				EAE98F5714BEFBD700D6A3DC /* browserRefreshButton.tiff in Resources */,
-				EAE98F5814BEFBD700D6A3DC /* browserPreviousButton.tiff in Resources */,
-				EAE98F5914BEFBD700D6A3DC /* browserRSSButton.tiff in Resources */,
-				EAE98F5A14BEFBD700D6A3DC /* errorpagebg.png in Resources */,
-				EAE98F5B14BEFBD700D6A3DC /* errorpagelogo.png in Resources */,
-				EAE98F5C14BEFBD700D6A3DC /* errorpage.html in Resources */,
-				EAE98F5D14BEFBD700D6A3DC /* blankButton.tiff in Resources */,
-				EAE98F5E14BEFBD700D6A3DC /* blankButtonPressedEmbossed.tiff in Resources */,
-				EAE98F5F14BEFBD700D6A3DC /* blankSmallButton.tiff in Resources */,
-				EAE98F6014BEFBD700D6A3DC /* blankSmallButtonPressed.tiff in Resources */,
-				EAE98F6114BEFBD700D6A3DC /* generate_keys.rb in Resources */,
-				EAE98F6214BEFBD700D6A3DC /* sign_update.rb in Resources */,
-				EAE98F6314BEFBD700D6A3DC /* vienna_public_key.pem in Resources */,
-				EAE98F6414BEFBD700D6A3DC /* blankButtonPressedBurned.tiff in Resources */,
-				EAE98F6514BEFBD700D6A3DC /* filter-icon.tiff in Resources */,
-				3A42BF8215A0EDE40018B532 /* SyncPreferences.xib in Resources */,
-				EAE98F6714BEFBD700D6A3DC /* sync.tiff in Resources */,
-				EAE98F6914BEFBD700D6A3DC /* googleFeed.tiff in Resources */,
-				EAE98F6A14BEFBD700D6A3DC /* GTMOAuth2Window.xib in Resources */,
-				EAE98F6B14BEFBD700D6A3DC /* ansani_key.pem in Resources */,
-				3A611A5C16346CA5008491A1 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2877,362 +2333,6 @@
 			shellPath = /bin/bash;
 			shellScript = ". configs/scripts/Release-to-Github.sh";
 		};
-		EAE98F6D14BEFBD700D6A3DC /* Index cs Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/cs.lproj/Vienna Help/advanced.html",
-				"$(SRCROOT)/cs.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/cs.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/cs.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/cs.lproj/Vienna Help/keyboard.html",
-			);
-			name = "Index cs Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/cs.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/cs.sh";
-		};
-		EAE98F6E14BEFBD700D6A3DC /* Index da Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/da.lproj/Vienna Help/advanced.html",
-				"$(SRCROOT)/da.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/da.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/da.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/da.lproj/Vienna Help/keyboard.html",
-			);
-			name = "Index da Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/da.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/da.sh";
-		};
-		EAE98F6F14BEFBD700D6A3DC /* Index de Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/de.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/de.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/de.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/de.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/de.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index de Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/de.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/de.sh";
-		};
-		EAE98F7014BEFBD700D6A3DC /* Index en Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/en.lproj/Vienna Help/advanced.html",
-				"$(SRCROOT)/en.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/en.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/en.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/en.lproj/Vienna Help/keyboard.html",
-			);
-			name = "Index en Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/en.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/en.sh";
-		};
-		EAE98F7114BEFBD700D6A3DC /* Index es Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/es.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/es.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/es.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/es.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/es.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index es Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/es.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/es.sh";
-		};
-		EAE98F7214BEFBD700D6A3DC /* Index eus Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/eus.lproj/Vienna Help/advanced.html",
-				"$(SRCROOT)/eus.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/eus.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/eus.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/eus.lproj/Vienna Help/keyboard.html",
-			);
-			name = "Index eus Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/eus.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/eus.sh";
-		};
-		EAE98F7314BEFBD700D6A3DC /* Index fr Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/fr.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/fr.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/fr.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/fr.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/fr.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index fr Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/fr.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/fr.sh";
-		};
-		EAE98F7414BEFBD700D6A3DC /* Index it Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/it.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/it.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/it.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/it.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/it.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index it Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/it.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/it.sh";
-		};
-		EAE98F7514BEFBD700D6A3DC /* Index ja Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/ja.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/ja.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/ja.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/ja.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/ja.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index ja Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ja.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/ja.sh";
-		};
-		EAE98F7614BEFBD700D6A3DC /* Index ko Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/ko.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/ko.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/ko.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/ko.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/ko.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index ko Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ko.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/ko.sh";
-		};
-		EAE98F7714BEFBD700D6A3DC /* Index nl Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/nl.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/nl.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/nl.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/nl.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/nl.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index nl Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/nl.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/nl.sh";
-		};
-		EAE98F7814BEFBD700D6A3DC /* Index pt_BR Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/pt_BR.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/pt_BR.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/pt_BR.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/pt_BR.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/pt_BR.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index pt_BR Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/pt_BR.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/pt_BR.sh";
-		};
-		EAE98F7914BEFBD700D6A3DC /* Index ru Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/ru.lproj/Vienna Help/advanced.html",
-				"$(SRCROOT)/ru.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/ru.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/ru.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/ru.lproj/Vienna Help/keyboard.html",
-			);
-			name = "Index ru Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/ru.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/ru.sh";
-		};
-		EAE98F7A14BEFBD700D6A3DC /* Index sv Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/sv.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/sv.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/sv.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/sv.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/sv.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index sv Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/sv.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/sv.sh";
-		};
-		EAE98F7B14BEFBD700D6A3DC /* Index uk Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/uk.lproj/Vienna Help/advanced.html",
-				"$(SRCROOT)/uk.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/uk.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/uk.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/uk.lproj/Vienna Help/keyboard.html",
-			);
-			name = "Index uk Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/uk.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/uk.sh";
-		};
-		EAE98F7C14BEFBD700D6A3DC /* Index zh_CN Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/zh_CN.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/zh_CN.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/zh_CN.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/zh_CN.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/zh_CN.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index zh_CN Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh_CN.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/zh_CN.sh";
-		};
-		EAE98F7D14BEFBD700D6A3DC /* Index zh_TW Help */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/zh_TW.lproj/Vienna Help/faq.html",
-				"$(SRCROOT)/zh_TW.lproj/Vienna Help/index.html",
-				"$(SRCROOT)/zh_TW.lproj/Vienna Help/intro.html",
-				"$(SRCROOT)/zh_TW.lproj/Vienna Help/keyboard.html",
-				"$(SRCROOT)/zh_TW.lproj/Vienna Help/advanced.html",
-			);
-			name = "Index zh_TW Help";
-			outputPaths = (
-				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/zh_TW.lproj/Vienna Help/Vienna Help.helpindex",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/help/zh_TW.sh";
-		};
-		EAE98F7E14BEFBD700D6A3DC /* Acknowledgements */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Acknowledgements.rtf",
-			);
-			name = Acknowledgements;
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Acknowledgements.html",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/Acknowledgements.sh";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3342,124 +2442,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EAE98E6214BEFBD700D6A3DC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EAE98E6314BEFBD700D6A3DC /* XMLParser.m in Sources */,
-				EAE98E6414BEFBD700D6A3DC /* RichXMLParser.m in Sources */,
-				EAE98E6514BEFBD700D6A3DC /* XMLTag.m in Sources */,
-				EAE98E6614BEFBD700D6A3DC /* main.m in Sources */,
-				EAE98E6714BEFBD700D6A3DC /* SearchMethod.m in Sources */,
-				EAE98E6814BEFBD700D6A3DC /* SQLDatabase.m in Sources */,
-				EAE98E6914BEFBD700D6A3DC /* SQLResult.m in Sources */,
-				EAE98E6A14BEFBD700D6A3DC /* SQLRow.m in Sources */,
-				EAE98E6B14BEFBD700D6A3DC /* Folder.m in Sources */,
-				EAE98E6C14BEFBD700D6A3DC /* Message.m in Sources */,
-				EAE98E6D14BEFBD700D6A3DC /* TreeNode.m in Sources */,
-				EAE98E6E14BEFBD700D6A3DC /* Database.m in Sources */,
-				EAE98E6F14BEFBD700D6A3DC /* MessageListView.m in Sources */,
-				EAE98E7014BEFBD700D6A3DC /* BackTrackArray.m in Sources */,
-				EAE98E7114BEFBD700D6A3DC /* URLHandlerCommand.m in Sources */,
-				EAE98E7214BEFBD700D6A3DC /* FoldersTree.m in Sources */,
-				EAE98E7314BEFBD700D6A3DC /* AppController.m in Sources */,
-				EAE98E7414BEFBD700D6A3DC /* StringExtensions.m in Sources */,
-				EAE98E7514BEFBD700D6A3DC /* ActivityViewer.m in Sources */,
-				EAE98E7614BEFBD700D6A3DC /* Field.m in Sources */,
-				EAE98E7814BEFBD700D6A3DC /* FolderView.m in Sources */,
-				EAE98E7914BEFBD700D6A3DC /* CalendarExtensions.m in Sources */,
-				EAE98E7A14BEFBD700D6A3DC /* SearchFolder.m in Sources */,
-				EAE98E7B14BEFBD700D6A3DC /* Criteria.m in Sources */,
-				EAE98E7C14BEFBD700D6A3DC /* TableViewExtensions.m in Sources */,
-				EAE98E7D14BEFBD700D6A3DC /* ViennaApp.m in Sources */,
-				EAE98E7E14BEFBD700D6A3DC /* NewSubscription.m in Sources */,
-				EAE98E7F14BEFBD700D6A3DC /* Export.m in Sources */,
-				EAE98E8014BEFBD700D6A3DC /* Import.m in Sources */,
-				EAE98E8114BEFBD700D6A3DC /* NewGroupFolder.m in Sources */,
-				EAE98E8214BEFBD700D6A3DC /* ActivityLog.m in Sources */,
-				EAE98E8314BEFBD700D6A3DC /* PopupButton.m in Sources */,
-				EAE98E8414BEFBD700D6A3DC /* FeedCredentials.m in Sources */,
-				EAE98E8514BEFBD700D6A3DC /* ArticleView.m in Sources */,
-				EAE98E8714BEFBD700D6A3DC /* KeyChain.m in Sources */,
-				EAE98E8814BEFBD700D6A3DC /* Constants.m in Sources */,
-				EAE98E8914BEFBD700D6A3DC /* PopUpButtonExtensions.m in Sources */,
-				EAE98E8A14BEFBD700D6A3DC /* ImageAndTextCell.m in Sources */,
-				EAE98E8B14BEFBD700D6A3DC /* BezierPathExtensions.m in Sources */,
-				EAE98E8C14BEFBD700D6A3DC /* Preferences.m in Sources */,
-				EAE98E8D14BEFBD700D6A3DC /* BrowserView.m in Sources */,
-				EAE98E8E14BEFBD700D6A3DC /* HelperFunctions.m in Sources */,
-				EAE98E8F14BEFBD700D6A3DC /* ArticleRef.m in Sources */,
-				EAE98E9014BEFBD700D6A3DC /* BrowserPane.m in Sources */,
-				EAE98E9114BEFBD700D6A3DC /* RefreshManager.m in Sources */,
-				EAE98E9214BEFBD700D6A3DC /* ArrayExtensions.m in Sources */,
-				EAE98E9314BEFBD700D6A3DC /* DownloadManager.m in Sources */,
-				EAE98E9414BEFBD700D6A3DC /* DownloadWindow.m in Sources */,
-				EAE98E9514BEFBD700D6A3DC /* SquareWindow.m in Sources */,
-				EAE98E9614BEFBD700D6A3DC /* NewPreferencesController.m in Sources */,
-				EAE98E9714BEFBD700D6A3DC /* GeneralPreferences.m in Sources */,
-				EAE98E9814BEFBD700D6A3DC /* AppearancesPreferences.m in Sources */,
-				EAE98E9914BEFBD700D6A3DC /* BrowserPaneTemplate.m in Sources */,
-				EAE98E9A14BEFBD700D6A3DC /* AddressBarCell.m in Sources */,
-				EAE98E9B14BEFBD700D6A3DC /* ArticleFilter.m in Sources */,
-				EAE98E9C14BEFBD700D6A3DC /* InfoWindow.m in Sources */,
-				EAE98E9D14BEFBD700D6A3DC /* SNDisclosureButton.m in Sources */,
-				EAE98E9E14BEFBD700D6A3DC /* SNDisclosableView.m in Sources */,
-				EAE98E9F14BEFBD700D6A3DC /* ArticleController.m in Sources */,
-				EAE98EA014BEFBD700D6A3DC /* UnifiedDisplayView.m in Sources */,
-				EAE98EA114BEFBD700D6A3DC /* TabbedWebView.m in Sources */,
-				EAE98EA214BEFBD700D6A3DC /* AdvancedPreferences.m in Sources */,
-				EAE98EA314BEFBD700D6A3DC /* ArticleListView.m in Sources */,
-				EAE98EA414BEFBD700D6A3DC /* EmptyTrashWarning.m in Sources */,
-				EAE98EA514BEFBD700D6A3DC /* SplitViewExtensions.m in Sources */,
-				EAE98EA614BEFBD700D6A3DC /* ViewExtensions.m in Sources */,
-				EAE98EA714BEFBD700D6A3DC /* ClickableProgressIndicator.m in Sources */,
-				EAE98EA814BEFBD700D6A3DC /* GradientView.m in Sources */,
-				EAE98EA914BEFBD700D6A3DC /* ThinSplitView.m in Sources */,
-				EAE98EAA14BEFBD700D6A3DC /* StdEnclosureView.m in Sources */,
-				EAE98EAB14BEFBD700D6A3DC /* FilterView.m in Sources */,
-				EAE98EAC14BEFBD700D6A3DC /* ToolbarButton.m in Sources */,
-				EAE98EAD14BEFBD700D6A3DC /* ToolbarItem.m in Sources */,
-				EAE98EAE14BEFBD700D6A3DC /* SearchString.m in Sources */,
-				EAE98EAF14BEFBD700D6A3DC /* SearchPanel.m in Sources */,
-				EAE98EB014BEFBD700D6A3DC /* sqlite3.c in Sources */,
-				EAE98EB114BEFBD700D6A3DC /* XMLSourceWindow.m in Sources */,
-				EAE98EB214BEFBD700D6A3DC /* PluginManager.m in Sources */,
-				EAE98EB314BEFBD700D6A3DC /* BitlyAPIHelper.m in Sources */,
-				EAE98EB414BEFBD700D6A3DC /* DSClickableURLTextField.m in Sources */,
-				EAE98EB514BEFBD700D6A3DC /* ProgressTextCell.m in Sources */,
-				EAE98EB614BEFBD700D6A3DC /* SyncPreferences.m in Sources */,
-				EAE98EB714BEFBD700D6A3DC /* JSONKit.m in Sources */,
-				EAE98EB814BEFBD700D6A3DC /* GoogleReader.m in Sources */,
-				EAE98EBA14BEFBD700D6A3DC /* GTMOAuth2Authentication.m in Sources */,
-				EAE98EBB14BEFBD700D6A3DC /* GTMOAuth2SignIn.m in Sources */,
-				EAE98EBC14BEFBD700D6A3DC /* GTMHTTPFetcher.m in Sources */,
-				EAE98EBD14BEFBD700D6A3DC /* GTMHTTPFetchHistory.m in Sources */,
-				EAE98EBE14BEFBD700D6A3DC /* GTMOAuth2WindowController.m in Sources */,
-				EAE98EBF14BEFBD700D6A3DC /* VTPG_Common.m in Sources */,
-				EAE98EC114BEFBD700D6A3DC /* ASIDataCompressor.m in Sources */,
-				EAE98EC214BEFBD700D6A3DC /* ASIDataDecompressor.m in Sources */,
-				EAE98EC314BEFBD700D6A3DC /* ASIDownloadCache.m in Sources */,
-				EAE98EC414BEFBD700D6A3DC /* ASIFormDataRequest.m in Sources */,
-				EAE98EC514BEFBD700D6A3DC /* ASIHTTPRequest.m in Sources */,
-				EAE98EC614BEFBD700D6A3DC /* ASIInputStream.m in Sources */,
-				EAE98EC714BEFBD700D6A3DC /* ASINetworkQueue.m in Sources */,
-				B2BECB1814CEF22B00706F8F /* SSTextField.m in Sources */,
-				3A23F13515276935008AF863 /* NSNotificationAdditions.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		43501CFF165D82ED0018EDB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D15AC270486D014006FF6A4 /* Vienna */;
+			targetProxy = 43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */;
+		};
 		52BA64050DE9E3020008B3E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* Vienna */;
 			targetProxy = 52BA64040DE9E3020008B3E1 /* PBXContainerItemProxy */;
-		};
-		EAE98F9414BEFD6500D6A3DC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EAE98E6114BEFBD700D6A3DC /* ViennaBeta */;
-			targetProxy = EAE98F9314BEFD6500D6A3DC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3857,9 +2851,6 @@
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2602;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
 			name = Development;
@@ -3902,82 +2893,14 @@
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				PRODUCT_NAME = ViennaBeta;
-				VIENNA_CHANGELOG_SUFFIX = _beta;
-				WARNING_CFLAGS = "-Wall";
+				PRODUCT_NAME = "Github Beta";
 			};
 			name = Development;
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = ViennaBeta;
-			};
-			name = Deployment;
-		};
-		EAE98F8814BEFBD700D6A3DC /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUILD_NUMBER = 2821;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Growl\"",
-					"\"$(SRCROOT)/Growl/Legacy\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=0",
-					"LOG_QUERY_TIMES=1",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "ViennaBeta-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = ViennaBeta;
-				SDKROOT = "";
-				VIENNA_VERSION_NUMBER = 3.0b;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Development;
-		};
-		EAE98F8914BEFBD700D6A3DC /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUILD_NUMBER = 2821;
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Growl\"",
-					"\"$(SRCROOT)/Growl/Legacy\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=0",
-					"NO_LOG_MACROS=1",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				INFOPLIST_FILE = "ViennaBeta-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = ViennaBeta;
-				SDKROOT = "";
-				STRIP_INSTALLED_PRODUCT = YES;
-				VIENNA_VERSION_NUMBER = 3.0b;
-				WRAPPER_EXTENSION = app;
+				PRODUCT_NAME = "Github Beta";
 			};
 			name = Deployment;
 		};
@@ -4016,15 +2939,6 @@
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,
 				EAAF335B14BDE402002A8837 /* Deployment */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		EAE98F8714BEFBD700D6A3DC /* Build configuration list for PBXNativeTarget "ViennaBeta" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EAE98F8814BEFBD700D6A3DC /* Development */,
-				EAE98F8914BEFBD700D6A3DC /* Deployment */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
