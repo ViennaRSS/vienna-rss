@@ -572,14 +572,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
-		AA72C5140855314000E2121C /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.llvm.clang.1_0;
-			fileType = sourcecode.c;
-			isEditable = 1;
-			outputFiles = (
-			);
-		};
 		EAE98F8614BEFBD700D6A3DC /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.llvm.clang.1_0;
@@ -736,6 +728,10 @@
 		3AC1C7F815A7813A0016BA20 /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = zh_TW.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3AC1C7F915A7814E0016BA20 /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/SyncPreferences.xib; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
+		432E5192165D65AF00A8640E /* project-all.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "project-all.xcconfig"; path = "configs/project-all.xcconfig"; sourceTree = "<group>"; };
+		43501CF9165D73C70018EDB7 /* Vienna-all.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-all.xcconfig"; path = "configs/Vienna-all.xcconfig"; sourceTree = "<group>"; };
+		43501CFA165D73C70018EDB7 /* Vienna-dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-dep.xcconfig"; path = "configs/Vienna-dep.xcconfig"; sourceTree = "<group>"; };
+		43501CFB165D73C70018EDB7 /* Vienna-dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-dev.xcconfig"; path = "configs/Vienna-dev.xcconfig"; sourceTree = "<group>"; };
 		47775BD90A109C6A0091C45E /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = "<group>"; };
 		52A8B4300C4996910035ED2A /* notes.html */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = notes.html; sourceTree = "<group>"; };
 		6172B48809E2080B001FB418 /* nl */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nl; path = "nl.lproj/Vienna Help"; sourceTree = "<group>"; };
@@ -1432,6 +1428,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
+				432E5191165D655C00A8640E /* Configs */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				662468AE13C609F900C85417 /* JSONKit */,
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
@@ -1655,6 +1652,17 @@
 				3A031D0515E141980092767F /* Growl.framework */,
 			);
 			path = Legacy;
+			sourceTree = "<group>";
+		};
+		432E5191165D655C00A8640E /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				43501CF9165D73C70018EDB7 /* Vienna-all.xcconfig */,
+				43501CFA165D73C70018EDB7 /* Vienna-dep.xcconfig */,
+				43501CFB165D73C70018EDB7 /* Vienna-dev.xcconfig */,
+				432E5192165D65AF00A8640E /* project-all.xcconfig */,
+			);
+			name = Configs;
 			sourceTree = "<group>";
 		};
 		660AA30914072BFD0082CCF0 /* Google Reader Sync */ = {
@@ -2041,7 +2049,6 @@
 				3A031D0915E144F10092767F /* Copy Growl legacy */,
 			);
 			buildRules = (
-				AA72C5140855314000E2121C /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -2098,7 +2105,9 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = uk.co.opencommunity;
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3858,114 +3867,35 @@
 		52BA64030DE9E2FF0008B3E1 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_NUMBER = 2602;
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Release;
 			};
 			name = Deployment;
 		};
 		AA4F9AB30855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43501CFB165D73C70018EDB7 /* Vienna-dev.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Growl\"",
-					"\"$(SRCROOT)/Growl/Legacy\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=0",
-					"LOG_QUERY_TIMES=1",
-				);
-				GCC_VERSION = "";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PRODUCT_NAME = Vienna;
-				SDKROOT = "";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
 		};
 		AA4F9AB40855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-dep.xcconfig */;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"$(BUILT_PRODUCTS_DIR)",
-					"\"$(SRCROOT)/Growl\"",
-					"\"$(SRCROOT)/Growl/Legacy\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Vienna_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"HAVE_USLEEP=1",
-					"SQLITE_THREADSAFE=0",
-					"NO_LOG_MACROS=1",
-				);
-				GCC_VERSION = "";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PRODUCT_NAME = Vienna;
-				SDKROOT = "";
-				STRIP_INSTALLED_PRODUCT = YES;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Deployment;
 		};
 		AA4F9AB70855422400C18279 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 432E5192165D65AF00A8640E /* project-all.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					x86_64,
-					i386,
-					ppc,
-				);
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = unsupported;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				SDKROOT = "";
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
 		};
 		AA4F9AB80855422400C18279 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 432E5192165D65AF00A8640E /* project-all.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					x86_64,
-					i386,
-					ppc,
-				);
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEPLOYMENT_POSTPROCESSING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = unsupported;
-				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				GCC_VERSION = "";
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				SDKROOT = "";
-				SEPARATE_STRIP = YES;
-				WARNING_CFLAGS = "-Wall";
 			};
 			name = Deployment;
 		};
@@ -3982,9 +3912,7 @@
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				PRODUCT_NAME = ViennaBeta;
-				VIENNA_CHANGELOG_SUFFIX = _beta;
 			};
 			name = Deployment;
 		};
