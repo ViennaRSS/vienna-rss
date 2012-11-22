@@ -1,0 +1,25 @@
+/* NSTextField ((Sample)) : <title:(Sample)> (oid:52) */
+"(Sample)" = "(範例)";
+
+/* NSTextField (Article list font: ) : <title:Article list font:
+> (oid:25) */
+"Article list font:\n" = "文章列表字體：\n";
+
+/* NSTextField (Folder list font:) : <title:Folder list font:> (oid:30) */
+"Folder list font:" = "檔案夾列表字體：";
+
+/* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
+"Never use font sizes smaller than" = "不要使用小於以下大小的字體";
+
+/* NSButton (Select...) : <title:Select...> (oid:54) */
+"Select..." = "選取⋯";
+
+/* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
+"Show folder images in folder list" = "在檔案夾列表中顯示檔案夾圖片";
+
+/* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
+"When viewing articles or web pages:" = "瀏覽文章或網頁時：";
+
+/* NSWindow (Window) : <title:Window> (oid:22) */
+"Window" = "視窗";
+

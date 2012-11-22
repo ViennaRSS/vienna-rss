@@ -1,0 +1,93 @@
+/* NSMenuItem : <title:(Do not localise)> (oid:92) */
+"(Do not localise)" = "(Do not localise)";
+
+/* NSMenuItem : <title:(Path)> (oid:96) */
+"(Path)" = "(Sti)";
+
+/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
+"After \"Next Unread\" command" = "Efter \"Næste ulæste\" kommando";
+
+/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
+"After a short delay" = "Efter et kort øjeblik";
+
+/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
+"Bounce the application icon" = "Bounce the application icon";
+
+/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
+"Check for new articles on start up" = "Tjek for nye artikler ved opstart";
+
+/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
+"Check for new articles:" = "Tjek for nye artikler:";
+
+/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
+"Check for newer versions of Vienna on start up" = "Tjek for nyere versioner af Vienna ved opstart";
+
+/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
+"Default RSS Reader:" = "Standard RSS-læser:";
+
+/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
+"Do nothing" = "Gør intet";
+
+/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
+"Every 15 minutes" = "Every 15 minutes";
+
+/* NSMenuItem : <title:Every 2 hours> (oid:71) */
+"Every 2 hours" = "Hver 2 timer";
+
+/* NSMenuItem : <title:Every 3 hours> (oid:144) */
+"Every 3 hours" = "Every 3 hours";
+
+/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
+"Every 30 minutes" = "Hver 30 minutter";
+
+/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
+"Every 5 minutes" = "Every 5 minutes";
+
+/* NSMenuItem : <title:Every 6 hours> (oid:75) */
+"Every 6 hours" = "Hver 6 timer";
+
+/* NSMenuItem : <title:Every hour> (oid:74) */
+"Every hour" = "Hver time";
+
+/* NSMenuItem : <title:Manually> (oid:73) */
+"Manually" = "Manuelt";
+
+/* NSTextField (Mark current article read: ) : <title:Mark current article read:
+> (oid:130) */
+
+"Mark current article read:\n" = "Marker nuværende artikler som læst:\n";
+
+/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
+"Move articles to Trash:" = "Flyt artikler til Papirkurven:";
+
+/* NSMenuItem : <title:Nothing> (oid:81) */
+"Nothing" = "Intet";
+
+/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
+"Open links in external browser" = "Åben henvisninger i ekstern browser";
+
+/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
+"Open new links in the background" = "Åben nye henvisninger i baggrunden";
+
+/* NSMenuItem : <title:Other...> (oid:97) */
+"Other..." = "Andet...";
+
+/* NSMenu : <title:OtherViews> (oid:95) */
+"OtherViews" = "AndreOversigter";
+
+/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
+"Save downloaded files to:" = "Gem hentede filer i:";
+
+/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
+"Show in menu bar" = "Show in menu bar";
+
+/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
+"Show the unread count on the application icon" = "Vis antallet af ulæste artikler på programikonet";
+
+/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
+> (oid:119) */
+
+"When new unread articles are retrieved:\n" = "Når nye ulæste artikler er modtaget:\n";
+
+/* NSWindow (Window) : <title:Window> (oid:64) */
+"Window" = "Vindue";

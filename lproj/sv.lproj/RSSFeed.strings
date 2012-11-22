@@ -1,0 +1,35 @@
+/* NSButton (Cancel) : <title:Cancel> (oid:54) */
+"Cancel" = "Avbryt";
+
+/* NSTextField (Create a new subscription ) : <title:Create a new subscription
+> (oid:64) */
+"Create a new subscription\n" = "Skapa ny RSS-prenumeration\n";
+
+/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
+"Edit subscription" = "Redigera prenumeration\n";
+
+/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
+"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Ange länk till RSS-ström nedan. Eller välj från listan och ange ett kortnamn på RSS-ström som tillhandahålls av specificerad källa.";
+
+/* NSMenu : <title:OtherViews> (oid:44) */
+"OtherViews" = "Andra vyer";
+
+/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
+"RSS Feed" = "RSS Feed";
+
+/* NSButton (Save) : <title:Save> (oid:53) */
+"Save" = "Spara";
+
+/* NSTextField (Source: ) : <title:Source:
+> (oid:40) */
+"Source:\n" = "Källa:\n";
+
+/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
+"Subscribe" = "Prenumerera";
+
+/* NSMenuItem : <title:URL> (oid:45) */
+"URL" = "URL";
+
+/* NSTextField (URL:) : <title:URL:> (oid:97) */
+"URL:" = "URL:";
+

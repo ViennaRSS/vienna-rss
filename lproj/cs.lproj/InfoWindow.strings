@@ -1,0 +1,53 @@
+/* NSTextField ( ) : <title:
+> (oid:70) */
+"\n" = "\n";
+
+/* NSTextField ((Folder name)) : <title:(Folder name)> (oid:32) */
+"(Folder name)" = "(jméno složky)";
+
+/* NSTextField ((Last refresh date)) : <title:(Last refresh date)> (oid:34) */
+"(Last refresh date)" = "(datum poslední obnovy)";
+
+/* SNDisclosureButton (Authentication:) : <title:Authentication:> (oid:45) */
+"Authentication:" = "Ověření totožnosti:";
+
+/* NSBox (Box) : <title:Box> (oid:101) */
+"Box" = "Box";
+
+/* SNDisclosureButton (Description:) : <title:Description:> (oid:79) */
+"Description:" = "Popis:";
+
+/* SNDisclosureButton (Feed URL:) : <title:Feed URL:> (oid:38) */
+"Feed URL:" = "URL zdroje:";
+
+/* SNDisclosureButton (General:) : <title:General:> (oid:65) */
+"General:" = "Obecné:";
+
+/* NSTextField (Last Refreshed:) : <title:Last Refreshed:> (oid:33) */
+"Last Refreshed:" = "Obnoveno:";
+
+/* NSTextField (Password: ) : <title:Password:
+> (oid:52) */
+"Password:\n" = "Heslo:";
+
+/* NSTextField (Size:) : <title:Size:> (oid:67) */
+"Size:" = "Velikost:";
+
+/* NSButton (Subscribed) : <title:Subscribed> (oid:76) */
+"Subscribed" = "Odebíráno";
+
+/* NSTextField (Unread: ) : <title:Unread:
+> (oid:68) */
+"Unread:\n" = "Nečteno:";
+
+/* NSButton (Update Authentication) : <title:Update Authentication> (oid:91) */
+"Update Authentication" = "Automaticky aktualizovat";
+
+/* NSTextField (User name:) : <title:User name:> (oid:51) */
+"User name:" = "Jméno:";
+
+/* NSButton (Validate) : <title:Validate> (oid:62) */
+"Validate" = "Zkontrolovat";
+
+/* NSWindow (Window) : <title:Window> (oid:5) */
+"Window" = "Okno";

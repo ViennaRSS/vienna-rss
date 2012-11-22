@@ -1,0 +1,15 @@
+/* NSButton (Cancel) : <title:Cancel> (oid:22) */
+"Cancel" = "取消";
+
+/* NSTextField (Enter the group folder name: ) : <title:Enter the group folder name:
+> (oid:23) */
+"Enter the group folder name:\n" = "輸入群組檔案夾名稱：\n";
+
+/* NSTextField (New Group Folder) : <title:New Group Folder> (oid:19) */
+"New Group Folder" = "新增群組檔案夾";
+
+/* NSPanel (Panel) : <title:Panel> (oid:5) */
+"Panel" = "面板";
+
+/* NSButton (Save) : <title:Save> (oid:21) */
+"Save" = "儲存";

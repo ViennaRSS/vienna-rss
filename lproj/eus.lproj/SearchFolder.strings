@@ -1,0 +1,46 @@
+/* NSPanel () : <title:> (oid:6) */
+"" = "";
+
+/* NSButton (+) : <title:+> (oid:31) */
+"+" = "+";
+
+/* NSButton (-) : <title:-> (oid:29) */
+"-" = "-";
+
+/* NSButton (Cancel) : <title:Cancel> (oid:10) */
+"Cancel" = "Ezeztatu";
+
+/* NSMenuItem : <title:Field names go here> (oid:33) */
+"Field names go here" = "Fitxategi izenak hemen doaz";
+
+/* NSMenuItem : <title:Item1> (oid:88) */
+"Item1" = "Item1";
+
+/* NSMenuItem : <title:Item2> (oid:90) */
+"Item2" = "Item2";
+
+/* NSMenuItem : <title:Item3> (oid:89) */
+"Item3" = "Item3";
+
+/* NSMenuItem : <title:Nothing> (oid:82) */
+"Nothing" = "Ezer";
+
+/* NSMenuItem : <title:Operators go here> (oid:56) */
+"Operators go here" = "Operazioak hemen doaz";
+
+/* NSMenu : <title:OtherViews> (oid:87) */
+"OtherViews" = "Bestelakoak";
+
+/* NSButton (Save) : <title:Save> (oid:9) */
+"Save" = "Gorde";
+
+/* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
+"Show all articles that match" = "Erakutsi zerikusia duten artikulu guztiak";
+
+/* NSTextField (Smart folder name: ) : <title:Smart folder name:
+> (oid:7) */
+"Smart folder name:\n" = "Direktorio adimenduaren izena:\n";
+
+/* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
+"of the following conditions:" = "honako baldintzekin:";
+

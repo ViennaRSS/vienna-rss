@@ -1,0 +1,35 @@
+/* NSButton (Cancel) : <title:Cancel> (oid:54) */
+"Cancel" = "Annuleer";
+
+/* NSTextField (Create a new subscription ) : <title:Create a new subscription
+> (oid:64) */
+"Create a new subscription\n" = "Neem een nieuw abonnement";
+
+/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
+"Edit subscription" = "Bewerk abonnement";
+
+/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
+"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Geef hieronder de koppeling voor het abonnement op, of kies een door de uitgever aangegeven koppeling op uit het menu hieronder.";
+
+/* NSMenu : <title:OtherViews> (oid:44) */
+"OtherViews" = "OtherViews";
+
+/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
+"RSS Feed" = "RSS-feed";
+
+/* NSButton (Save) : <title:Save> (oid:53) */
+"Save" = "Bewaar";
+
+/* NSTextField (Source: ) : <title:Source:
+> (oid:40) */
+"Source:\n" = "Bron:";
+
+/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
+"Subscribe" = "Abonneer";
+
+/* NSMenuItem : <title:URL> (oid:45) */
+"URL" = "URL";
+
+/* NSTextField (URL:) : <title:URL:> (oid:97) */
+"URL:" = "URL:";
+

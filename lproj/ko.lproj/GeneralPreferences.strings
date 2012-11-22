@@ -1,0 +1,93 @@
+/* NSMenuItem : <title:(Do not localise)> (oid:92) */
+"(Do not localise)" = "(Do not localise)";
+
+/* NSMenuItem : <title:(Path)> (oid:96) */
+"(Path)" = "(Path)";
+
+/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
+"After \"Next Unread\" command" = "\"읽지 않은 다음 항목\" 명령을 실행한 후에";
+
+/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
+"After a short delay" = "일정 시간 지연 후에";
+
+/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
+"Bounce the application icon" = "Bounce the application icon";
+
+/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
+"Check for new articles on start up" = "시작시 새 기사 확인";
+
+/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
+"Check for new articles:" = "새 기사 확인:";
+
+/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
+"Check for newer versions of Vienna on start up" = "시작시 새 버전의 Vienna 확인";
+
+/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
+"Default RSS Reader:" = "기본 RSS 리더:";
+
+/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
+"Do nothing" = "아무 것도 하지 않음";
+
+/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
+"Every 15 minutes" = "Every 15 minutes";
+
+/* NSMenuItem : <title:Every 2 hours> (oid:71) */
+"Every 2 hours" = "2시간마다";
+
+/* NSMenuItem : <title:Every 3 hours> (oid:144) */
+"Every 3 hours" = "Every 3 hours";
+
+/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
+"Every 30 minutes" = "30분마다";
+
+/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
+"Every 5 minutes" = "Every 5 minutes";
+
+/* NSMenuItem : <title:Every 6 hours> (oid:75) */
+"Every 6 hours" = "6시간마다";
+
+/* NSMenuItem : <title:Every hour> (oid:74) */
+"Every hour" = "1시간마다";
+
+/* NSMenuItem : <title:Manually> (oid:73) */
+"Manually" = "수동으로";
+
+/* NSTextField (Mark current article read: ) : <title:Mark current article read:
+> (oid:130) */
+
+"Mark current article read:\n" = "기사를 읽음으로 표시:";
+
+/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
+"Move articles to Trash:" = "기사를 휴지통으로 이동:";
+
+/* NSMenuItem : <title:Nothing> (oid:81) */
+"Nothing" = "없음";
+
+/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
+"Open links in external browser" = "링크를 외부(기본) 브라우져로 열기";
+
+/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
+"Open new links in the background" = "링크를 항상 백그라운드 상태로 열기";
+
+/* NSMenuItem : <title:Other...> (oid:97) */
+"Other..." = "선택...";
+
+/* NSMenu : <title:OtherViews> (oid:95) */
+"OtherViews" = "OtherViews";
+
+/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
+"Save downloaded files to:" = "다운로드한 파일 저장:";
+
+/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
+"Show in menu bar" = "Show in menu bar";
+
+/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
+"Show the unread count on the application icon" = "응용 프로그램 아이콘에 읽지 않은 항목 수 표시";
+
+/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
+> (oid:119) */
+
+"When new unread articles are retrieved:\n" = "읽지 않은 새 기사 추가시:";
+
+/* NSWindow (Window) : <title:Window> (oid:64) */
+"Window" = "Window";

@@ -1,0 +1,25 @@
+/* NSTextField ((Sample)) : <title:(Sample)> (oid:52) */
+"(Sample)" = "(Sample)";
+
+/* NSTextField (Article list font: ) : <title:Article list font:
+> (oid:25) */
+"Article list font:\n" = "기사 목록  서체:";
+
+/* NSTextField (Folder list font:) : <title:Folder list font:> (oid:30) */
+"Folder list font:" = "폴더 및 구독 목록  서체:";
+
+/* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
+"Never use font sizes smaller than" = "다음보다 작은 서체 크기 사용 안함:";
+
+/* NSButton (Select...) : <title:Select...> (oid:54) */
+"Select..." = "선택...";
+
+/* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
+"Show folder images in folder list" = "구독 목록에 아이콘 이미지 사용";
+
+/* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
+"When viewing articles or web pages:" = "기사 및 웹페이지 보기:";
+
+/* NSWindow (Window) : <title:Window> (oid:22) */
+"Window" = "Window";
+
