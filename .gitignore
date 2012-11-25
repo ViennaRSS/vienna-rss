@@ -1,6 +1,8 @@
 .DS_Store
 .idea
 build/*
+configs/CS-ID.xcconfig
+src/autorevision.h
 Vienna.xcodeproj/project.xcworkspace/xcuserdata/*
 Vienna.xcodeproj/xcuserdata/*
 Vienna.xcodeproj/.LSOverride

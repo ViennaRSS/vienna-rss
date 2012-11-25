@@ -7,29 +7,53 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		52BA63FC0DE9E2E10008B3E1 /* Release */ = {
+		430C4ACF166172BD0079C9FC /* Autorevision */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Release" */;
+			buildConfigurationList = 430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */;
 			buildPhases = (
-				52BA63FB0DE9E2E10008B3E1 /* Changes and Notes */,
-				52BA641C0DE9E41B0008B3E1 /* English and Debug */,
+				430C4ACE166172BD0079C9FC /* Run Autorevision */,
 			);
 			dependencies = (
-				52BA64050DE9E3020008B3E1 /* PBXTargetDependency */,
 			);
-			name = Release;
+			name = Autorevision;
+			productName = Autorevision;
+		};
+		430C4AF71661F07C0079C9FC /* Code Sign ID */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 430C4AFB1661F0B70079C9FC /* Build configuration list for PBXAggregateTarget "Code Sign ID" */;
+			buildPhases = (
+				430C4AF61661F07C0079C9FC /* Make ID Template */,
+			);
+			dependencies = (
+			);
+			name = "Code Sign ID";
+			productName = "Code Sign ID";
+		};
+		52BA63FC0DE9E2E10008B3E1 /* Version Notes */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Version Notes" */;
+			buildPhases = (
+				52BA63FB0DE9E2E10008B3E1 /* Build Notes */,
+			);
+			dependencies = (
+				430C4AEB16619B850079C9FC /* PBXTargetDependency */,
+			);
+			name = "Version Notes";
 			productName = Release;
 		};
-		EAAF335414BDE402002A8837 /* Github Beta */ = {
+		EAAF335414BDE402002A8837 /* Archive and Prep for Upload */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Github Beta" */;
+			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Archive and Prep for Upload" */;
 			buildPhases = (
 				EAAF336614BEF4DF002A8837 /* Release to Github */,
 			);
 			dependencies = (
 				43501CFF165D82ED0018EDB7 /* PBXTargetDependency */,
+				430C4AED16619C550079C9FC /* PBXTargetDependency */,
+				430C4AEF16619C550079C9FC /* PBXTargetDependency */,
+				430C4AFF1661F3090079C9FC /* PBXTargetDependency */,
 			);
-			name = "Github Beta";
+			name = "Archive and Prep for Upload";
 			productName = Release;
 		};
 /* End PBXAggregateTarget section */
@@ -37,6 +61,8 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
+		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
 		43501FA2165DC5CE0018EDB7 /* Growl.framework in Copy Growl current */ = {isa = PBXBuildFile; fileRef = 43501F72165DB9640018EDB7 /* Growl.framework */; };
 		43501FA8165DC5DD0018EDB7 /* Growl.framework in Copy Growl legacy */ = {isa = PBXBuildFile; fileRef = 43501F74165DB9640018EDB7 /* Growl.framework */; };
@@ -723,14 +749,42 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */ = {
+		430C4AD71661730D0079C9FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
-			remoteInfo = Vienna;
+			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
+			remoteInfo = Autorevision;
 		};
-		52BA64040DE9E3020008B3E1 /* PBXContainerItemProxy */ = {
+		430C4AEA16619B850079C9FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
+			remoteInfo = Autorevision;
+		};
+		430C4AEC16619C550079C9FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 430C4ACF166172BD0079C9FC;
+			remoteInfo = Autorevision;
+		};
+		430C4AEE16619C550079C9FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52BA63FC0DE9E2E10008B3E1;
+			remoteInfo = "Version Notes";
+		};
+		430C4AFE1661F3090079C9FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 430C4AF71661F07C0079C9FC;
+			remoteInfo = "Code Sign ID";
+		};
+		43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
@@ -798,6 +852,11 @@
 		3A23F13415276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
+		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autorevision.h; path = src/autorevision.h; sourceTree = SOURCE_ROOT; };
+		430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankPopupMenuButton.tiff; path = Resources/blankPopupMenuButton.tiff; sourceTree = SOURCE_ROOT; };
+		430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankPopupMenuButtonPressed.tiff; path = Resources/blankPopupMenuButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
+		430C4AE0166175C20079C9FC /* Vienna-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Vienna-Info.plist"; path = "Resources/Vienna-Info.plist"; sourceTree = SOURCE_ROOT; };
+		430C4B001661F3270079C9FC /* CS-ID.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "configs/CS-ID.xcconfig"; sourceTree = SOURCE_ROOT; };
 		432E5192165D65AF00A8640E /* project-all.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "project-all.xcconfig"; path = "configs/project-all.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CF9165D73C70018EDB7 /* Vienna-all.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-all.xcconfig"; path = "configs/Vienna-all.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFA165D73C70018EDB7 /* Vienna-dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-dep.xcconfig"; path = "configs/Vienna-dep.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -1751,6 +1810,7 @@
 				43EE754D165E832C000997FB /* Default Lists */,
 				43EE754E165E83D6000997FB /* UI Images */,
 				43EE7551165EA910000997FB /* lproj */,
+				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = SOURCE_ROOT;
@@ -1758,6 +1818,7 @@
 		432E5191165D655C00A8640E /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				430C4B001661F3270079C9FC /* CS-ID.xcconfig */,
 				43501CF9165D73C70018EDB7 /* Vienna-all.xcconfig */,
 				43501CFA165D73C70018EDB7 /* Vienna-dep.xcconfig */,
 				43501CFB165D73C70018EDB7 /* Vienna-dev.xcconfig */,
@@ -1873,6 +1934,8 @@
 		43EE754E165E83D6000997FB /* UI Images */ = {
 			isa = PBXGroup;
 			children = (
+				430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */,
+				430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */,
 				6624683A13C5F81F00C85417 /* sync.tiff */,
 				B2B37ACD110A65DA0070EDA6 /* filter-icon.tiff */,
 				AAD2BF600C2C41A200AA0F11 /* DBListSplitViewBar.tiff */,
@@ -2787,6 +2850,7 @@
 		AAC5063C082A7A530089FF70 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				430C4ADB1661753F0079C9FC /* autorevision.h */,
 				32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */,
 				2A37F4B0FDCFA73011CA2CEA /* main.m */,
 			);
@@ -2909,6 +2973,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 			);
 			name = Vienna;
 			productInstallPath = "$(HOME)/Applications";
@@ -2964,8 +3029,10 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
-				52BA63FC0DE9E2E10008B3E1 /* Release */,
-				EAAF335414BDE402002A8837 /* Github Beta */,
+				430C4ACF166172BD0079C9FC /* Autorevision */,
+				430C4AF71661F07C0079C9FC /* Code Sign ID */,
+				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
+				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
 			);
 		};
 /* End PBXProject section */
@@ -3545,12 +3612,43 @@
 				43EE85F4165EAA71000997FB /* SearchFolder.nib in Resources */,
 				43EE85F5165EAA71000997FB /* SearchFolder.strings in Resources */,
 				43EE85F6165EAA71000997FB /* SyncPreferences.xib in Resources */,
+				430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */,
+				430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		430C4ACE166172BD0079C9FC /* Run Autorevision */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Autorevision";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ". configs/scripts/autorevision.sh";
+		};
+		430C4AF61661F07C0079C9FC /* Make ID Template */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Make ID Template";
+			outputPaths = (
+				"$(SRCROOT)/configs/CS-ID.xcconfig",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ". configs/scripts/Make-ID-Template.sh";
+		};
 		43EE8617165EF9D7000997FB /* Translations */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3565,7 +3663,7 @@
 			shellPath = /bin/bash;
 			shellScript = ". configs/scripts/Translations.sh";
 		};
-		52BA63FB0DE9E2E10008B3E1 /* Changes and Notes */ = {
+		52BA63FB0DE9E2E10008B3E1 /* Build Notes */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3573,28 +3671,12 @@
 			inputPaths = (
 				"$(SRCROOT)/notes.html",
 			);
-			name = "Changes and Notes";
+			name = "Build Notes";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
+			shellPath = /bin/bash;
 			shellScript = ". ./configs/scripts/Changes-and-Notes.sh";
-		};
-		52BA641C0DE9E41B0008B3E1 /* English and Debug */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(BUILT_PRODUCT_DIR)/Vienna.app",
-				"$(BUILT_PRODUCT_DIR)/Vienna.app.dSYM",
-			);
-			name = "English and Debug";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/English-and-Debug.sh";
 		};
 		52FDC71F0C559C7700F9F29B /* Acknowledgements */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3738,15 +3820,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		430C4AD81661730D0079C9FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
+			targetProxy = 430C4AD71661730D0079C9FC /* PBXContainerItemProxy */;
+		};
+		430C4AEB16619B850079C9FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
+			targetProxy = 430C4AEA16619B850079C9FC /* PBXContainerItemProxy */;
+		};
+		430C4AED16619C550079C9FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
+			targetProxy = 430C4AEC16619C550079C9FC /* PBXContainerItemProxy */;
+		};
+		430C4AEF16619C550079C9FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52BA63FC0DE9E2E10008B3E1 /* Version Notes */;
+			targetProxy = 430C4AEE16619C550079C9FC /* PBXContainerItemProxy */;
+		};
+		430C4AFF1661F3090079C9FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 430C4AF71661F07C0079C9FC /* Code Sign ID */;
+			targetProxy = 430C4AFE1661F3090079C9FC /* PBXContainerItemProxy */;
+		};
 		43501CFF165D82ED0018EDB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* Vienna */;
 			targetProxy = 43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */;
-		};
-		52BA64050DE9E3020008B3E1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D15AC270486D014006FF6A4 /* Vienna */;
-			targetProxy = 52BA64040DE9E3020008B3E1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -7669,17 +7771,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		430C4AD0166172BE0079C9FC /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = Autorevision;
+			};
+			name = Development;
+		};
+		430C4AD1166172BE0079C9FC /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = Autorevision;
+			};
+			name = Deployment;
+		};
+		430C4AF81661F0860079C9FC /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Code Sign ID";
+			};
+			name = Development;
+		};
+		430C4AF91661F0860079C9FC /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Code Sign ID";
+			};
+			name = Deployment;
+		};
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = Release;
+				PRODUCT_NAME = "Version Notes";
 			};
 			name = Development;
 		};
 		52BA64030DE9E2FF0008B3E1 /* Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = Release;
+				PRODUCT_NAME = "Version Notes";
 			};
 			name = Deployment;
 		};
@@ -7713,22 +7843,42 @@
 		};
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = "Github Beta";
+				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
 			name = Development;
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
 			buildSettings = {
-				PRODUCT_NAME = "Github Beta";
+				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
 			name = Deployment;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Release" */ = {
+		430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				430C4AD0166172BE0079C9FC /* Development */,
+				430C4AD1166172BE0079C9FC /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		430C4AFB1661F0B70079C9FC /* Build configuration list for PBXAggregateTarget "Code Sign ID" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				430C4AF81661F0860079C9FC /* Development */,
+				430C4AF91661F0860079C9FC /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
+		};
+		52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Version Notes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				52BA64020DE9E2FF0008B3E1 /* Development */,
@@ -7755,7 +7905,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Github Beta" */ = {
+		EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Archive and Prep for Upload" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,

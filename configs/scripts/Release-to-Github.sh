@@ -1,73 +1,90 @@
 #!/bin/bash
 
-set -o errexit
-
-echo "Prepare publication to Github"
-
+. "${OBJROOT}/autorevision.tmp"
+BUILD_NUMBER="2821"
+N_VCS_NUM="$(echo "${BUILD_NUMBER} + ${VCS_NUM}" | bc)"
+N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
+VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
 DOWNLOAD_BASE_URL="https://github.com/downloads/ViennaRSS/vienna-rss"
-# VERSION is similar to 2.6.0.2601 , BUILD_NUMBER is similar to 2601
-VERSION=$(defaults read "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info" CFBundleShortVersionString)
-BUILD_NUMBER=$(defaults read "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info" CFBundleVersion)
-
-VIENNA_BUILD_NAME="$PRODUCT_NAME$VERSION"
-VIENNA_UPLOADS_DIR="$BUILT_PRODUCTS_DIR/Uploads"
-ARCHIVE_FILENAME="$VIENNA_BUILD_NAME.zip"
-DOWNLOAD_URL="$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME"
-
-WD=$PWD
-
-codesign -f -s 'Developer ID Application' "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app"
-
-if [ ! -e "$VIENNA_UPLOADS_DIR" ] ; then
-	mkdir "$VIENNA_UPLOADS_DIR"
+TGZ_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}.tgz"
+dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
+if [[ "${VCS_TAG}" == *_beta* ]]; then
+	VIENNA_CHANGELOG="changelog_beta.xml"
+else
+	VIENNA_CHANGELOG="changelog.xml"
 fi
 
-cd "$BUILT_PRODUCTS_DIR"
-rm -f "$VIENNA_UPLOADS_DIR/$PRODUCT_NAME"*.zip
+# codesign setup
+function signd {
+	if [ ! -z "${CODE_SIGN_IDENTITY}" ]; then
+		# Local Config
+		local idetd="${CODE_SIGN_IDENTITY}"
+		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
+		local appth="${BUILT_PRODUCTS_DIR}/Vienna.app"
 
-# Application
-ditto -ck --keepParent "$PRODUCT_NAME.app" "$VIENNA_UPLOADS_DIR/$ARCHIVE_FILENAME"
+		# Sign and verify the app
+		if [ ! -z "${idetd}" ]; then
+			cp -a "${resrul}" "${appth}/ResourceRules.plist"
+			codesign -f -s "${idetd}" --resource-rules="${appth}/ResourceRules.plist" -vvv "${appth}"
+			rm "${appth}/ResourceRules.plist"
+		else
+			codesign -f -s "${idetd}" -vvv "${appth}"
+		fi
+		codesign -vvv --verify "${appth}"
+	else
+		echo "warning: No code signing identity configured; code will not be signed."
+	fi
+}
 
-SIZE=$(stat -f %z "$VIENNA_UPLOADS_DIR/$ARCHIVE_FILENAME")
-PUBDATE=$(LC_TIME=en_US date +"%a, %d %b %G %T %z")
 
-# dSYM
-VIENNA_APP_DSYM="$PRODUCT_NAME.app.dSYM"
-if [ -e "$VIENNA_APP_DSYM" ] ; then
-	ditto -ck --keepParent --sequesterRsrc "$VIENNA_APP_DSYM" "$VIENNA_UPLOADS_DIR/$VIENNA_BUILD_NAME.dSYM.zip"
+# Fail if not deployment
+if [ ! "${CONFIGURATION}" = "Deployment" ]; then
+	echo "error: This should only be run as Deployment" >&2
+	exit 1
 fi
 
-# Notes related to this build
-VIENNA_NOTES="$SRCROOT/notes.html"
-RELEASENOTES_URL="$DOWNLOAD_BASE_URL/noteson$VERSION.html"
 
-if [ -e "$VIENNA_NOTES" ] ; then
-	cp -f "$VIENNA_NOTES" "$VIENNA_UPLOADS_DIR/noteson$VERSION.html"
-fi
+cd "${BUILT_PRODUCTS_DIR}"
 
-# Changelog for Sparkle
-cat > "$VIENNA_UPLOADS_DIR/changelog$VIENNA_CHANGELOG_SUFFIX.xml" <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
+
+# Make the dSYM Bundle
+mkdir -p "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
+cp -a *.dSYM "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
+cd "${VIENNA_UPLOADS_DIR}"
+tar -czf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' "${dSYM_FILENAME}"
+
+
+# Zip up the app
+cd "${BUILT_PRODUCTS_DIR}"
+signd
+tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
+mv "${TGZ_FILENAME}" "${VIENNA_UPLOADS_DIR}"
+
+
+# Output the sparkle change log
+cd "${VIENNA_UPLOADS_DIR}"
+pubDate="$(LC_TIME=en_US date -jf '%FT%T%z' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
+TGZSIZE="$(stat -f %z "${TGZ_FILENAME}")"
+cat > "${VIENNA_CHANGELOG}" << EOF
+<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
-<channel>
-<title>Vienna Changelog</title>
-<link>http://vienna-rss.sourceforge.net</link>
-<description>Vienna Changelog</description>
-<language>en-us</language>
-<copyright>Copyright 2010-2012, Steve Palmer and contributors</copyright>
-<item>
-<title>BETA Version ($VERSION)</title>
-<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>
-<pubDate>$PUBDATE</pubDate>
-<enclosure
-url="$DOWNLOAD_URL"
-sparkle:version="$BUILD_NUMBER"
-type="application/octet-stream"
-length="$SIZE"
-/>
-<sparkle:minimumSystemVersion>10.5.0</sparkle:minimumSystemVersion>
-</item>
-</channel>
+	<channel>
+		<title>Vienna Changelog</title>
+		<link>http://www.vienna-rss.org/</link>
+		<description>Vienna Changelog</description>
+		<language>en-us</language>
+		<copyright>Copyright 2010-2012, Steve Palmer and contributors</copyright>
+		<item>
+			<title>Vienna ${N_VCS_TAG} :${VCS_SHORT_HASH}:</title>
+			<pubDate>${pubDate}</pubDate>
+			<link>${DOWNLOAD_BASE_URL}/Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}.tgz</link>
+			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
+			<enclosure url="${DOWNLOAD_BASE_URL}/Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}.tgz" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${N_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" type="application/octet-stream"/>
+			<sparkle:releaseNotesLink>${DOWNLOAD_BASE_URL}/noteson${N_VCS_TAG}.${VCS_SHORT_HASH}.html</sparkle:releaseNotesLink>
+		</item>
+	</channel>
 </rss>
+
 EOF
 
+exit 0
