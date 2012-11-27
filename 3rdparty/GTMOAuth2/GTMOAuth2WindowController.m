@@ -236,7 +236,7 @@ const char *kKeychainAccountName = "OAuth";
   self.sheetModalForWindow = parentWindowOrNil;
   hasDoneFinalRedirect_ = NO;
   hasCalledFinished_ = NO;
-  
+
   [self.signIn startSigningIn];
 }
 
@@ -624,7 +624,7 @@ decisionListener:(id<WebPolicyDecisionListener>)listener {
                                                         redirectURI:redirectURI
                                                            clientID:clientID
                                                        clientSecret:clientSecret];
-  
+
   [GTMOAuth2WindowController authorizeFromKeychainForName:keychainItemName
                                            authentication:auth];
   return auth;
@@ -702,7 +702,7 @@ decisionListener:(id<WebPolicyDecisionListener>)listener {
 #pragma mark Accessors
 
 - (GTMOAuth2Authentication *)authentication {
-  return self.signIn.authentication; 
+  return self.signIn.authentication;
 }
 
 - (void)setNetworkLossTimeoutInterval:(NSTimeInterval)val {

@@ -1,0 +1,4 @@
+// GTMOAuth2 settings for Deployment configuration
+
+#include "General-Dep.xcconfig"
+#include "GTMOAuth2-All.xcconfig"

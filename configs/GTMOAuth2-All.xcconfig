@@ -1,0 +1,12 @@
+// GTMOAuth2 settings for all configurations
+
+#include "Base-Framework.xcconfig"
+
+
+PRODUCT_NAME = GTMOAuth2
+USER_HEADER_SEARCH_PATHS =  $(inherited) "$(SRCROOT)/3rdparty/GTMOAuth2"
+INFOPLIST_FILE = 3rdparty/GTMOAuth2/GTMOAuth2Framework-Info.plist
+GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
+
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
