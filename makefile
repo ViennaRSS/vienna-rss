@@ -14,3 +14,4 @@ development:
 clean:
 	xcodebuild -target $(TARGET) -configuration Development clean
 	xcodebuild -target $(TARGET) -configuration Deployment clean
+	rm -fr build

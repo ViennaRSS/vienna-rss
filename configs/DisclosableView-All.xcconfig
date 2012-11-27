@@ -1,0 +1,12 @@
+// DisclosableView settings for all configurations
+
+#include "Base-Framework.xcconfig"
+
+
+PRODUCT_NAME = DisclosableView
+USER_HEADER_SEARCH_PATHS =  $(inherited) "$(SRCROOT)/3rdparty/DisclosableView"
+INFOPLIST_FILE = 3rdparty/DisclosableView/Info-DisclosableView.plist
+GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
+
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
