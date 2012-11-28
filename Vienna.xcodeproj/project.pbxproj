@@ -953,6 +953,18 @@
 		43502892165DE9DF0018EDB7 /* ViennaApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViennaApp.m; path = src/ViennaApp.m; sourceTree = SOURCE_ROOT; };
 		43502893165DE9DF0018EDB7 /* XMLSourceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLSourceWindow.h; path = src/XMLSourceWindow.h; sourceTree = SOURCE_ROOT; };
 		43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLSourceWindow.m; path = src/XMLSourceWindow.m; sourceTree = SOURCE_ROOT; };
+		439824181666B37000FFE219 /* Acknowledgements.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = Acknowledgements.sh; path = configs/scripts/Acknowledgements.sh; sourceTree = SOURCE_ROOT; };
+		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = configs/scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
+		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "configs/scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
+		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "configs/scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
+		4398241C1666B37000FFE219 /* Release-to-Github.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-to-Github.sh"; path = "configs/scripts/Release-to-Github.sh"; sourceTree = SOURCE_ROOT; };
+		4398241D1666B37000FFE219 /* Translations.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = Translations.sh; path = configs/scripts/Translations.sh; sourceTree = SOURCE_ROOT; };
+		4398241E1666B3DB00FFE219 /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = SOURCE_ROOT; };
+		439824201666B3DB00FFE219 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = SOURCE_ROOT; };
+		439824211666B3DB00FFE219 /* DatabaseSchema.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = DatabaseSchema.doc; sourceTree = SOURCE_ROOT; };
+		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
+		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		439824241666B3DB00FFE219 /* Release Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Release Instructions.txt"; sourceTree = SOURCE_ROOT; };
 		43EE7F2A165EAA6E000997FB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = AdvancedPreferences.nib; sourceTree = "<group>"; };
 		43EE7F2C165EAA6E000997FB /* cs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cs; path = AdvancedPreferences.strings; sourceTree = "<group>"; };
 		43EE7F2E165EAA6E000997FB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = AppearancesPreferences.nib; sourceTree = "<group>"; };
@@ -1699,6 +1711,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
+				439824161666B1ED00FFE219 /* Documentation */,
 				432E5191165D655C00A8640E /* Configs */,
 				AAA568BB09EE773200C87343 /* Vienna */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
@@ -1818,6 +1831,7 @@
 		432E5191165D655C00A8640E /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				439824171666B31700FFE219 /* Scripts */,
 				430C4B001661F3270079C9FC /* CS-ID.xcconfig */,
 				43501CF9165D73C70018EDB7 /* Vienna-all.xcconfig */,
 				43501CFA165D73C70018EDB7 /* Vienna-dep.xcconfig */,
@@ -1877,6 +1891,32 @@
 				B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */,
 			);
 			name = DSClickableURLTextField;
+			sourceTree = "<group>";
+		};
+		439824161666B1ED00FFE219 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				4398241E1666B3DB00FFE219 /* Acknowledgements.rtf */,
+				439824201666B3DB00FFE219 /* CHANGES */,
+				439824211666B3DB00FFE219 /* DatabaseSchema.doc */,
+				439824221666B3DB00FFE219 /* notes.html */,
+				439824231666B3DB00FFE219 /* README.md */,
+				439824241666B3DB00FFE219 /* Release Instructions.txt */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+		439824171666B31700FFE219 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				439824181666B37000FFE219 /* Acknowledgements.sh */,
+				439824191666B37000FFE219 /* autorevision.sh */,
+				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
+				4398241B1666B37000FFE219 /* Make-ID-Template.sh */,
+				4398241C1666B37000FFE219 /* Release-to-Github.sh */,
+				4398241D1666B37000FFE219 /* Translations.sh */,
+			);
+			name = Scripts;
 			sourceTree = "<group>";
 		};
 		43EE7546165E80D4000997FB /* Public Keys */ = {
