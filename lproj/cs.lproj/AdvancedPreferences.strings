@@ -1,0 +1,9 @@
+/* NSButton (Enable JavaScript in internal browser) : <title:Enable JavaScript in internal browser> (oid:8) */
+"Enable JavaScript in internal browser" = "Aktivovat JavaScript v interním prohlížeči";
+
+/* NSTextField (The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting. ) : <title:The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.
+> (oid:7) */
+"The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.\n" = "Tato nastavení není třeba při běžném používání programu Vienna měnit. Podrobnosti k jednotlivým volbám naleznete nápovědě.\n";
+
+/* NSWindow (Window) : <title:Window> (oid:5) */
+"Window" = "Okno";

@@ -1,0 +1,54 @@
+/* NSTextField ( ) : <title:
+> (oid:70) */
+"\n" = "\n";
+
+/* NSTextField ((Folder name)) : <title:(Folder name)> (oid:32) */
+"(Folder name)" = "(文件夹名称)";
+
+/* NSTextField ((Last refresh date)) : <title:(Last refresh date)> (oid:34) */
+"(Last refresh date)" = "(上次更新时间)";
+
+/* SNDisclosureButton (Authentication:) : <title:Authentication:> (oid:45) */
+"Authentication:" = "验证:";
+
+/* NSBox (Box) : <title:Box> (oid:101) */
+"Box" = "Box";
+
+/* SNDisclosureButton (Description:) : <title:Description:> (oid:79) */
+"Description:" = "介绍:";
+
+/* SNDisclosureButton (Feed URL:) : <title:Feed URL:> (oid:38) */
+"Feed URL:" = "频道 URL:";
+
+/* SNDisclosureButton (General:) : <title:General:> (oid:65) */
+"General:" = "通用:";
+
+/* NSTextField (Last Refreshed:) : <title:Last Refreshed:> (oid:33) */
+"Last Refreshed:" = "上次更新:";
+
+/* NSTextField (Password: ) : <title:Password:
+> (oid:52) */
+"Password:\n" = "密码:\n";
+
+/* NSTextField (Size:) : <title:Size:> (oid:67) */
+"Size:" = "大小:";
+
+/* NSButton (Subscribed) : <title:Subscribed> (oid:76) */
+"Subscribed" = "订阅";
+
+/* NSTextField (Unread: ) : <title:Unread:
+> (oid:68) */
+"Unread:\n" = "未读:\n";
+
+/* NSButton (Update Authentication) : <title:Update Authentication> (oid:91) */
+"Update Authentication" = "更新验证信息";
+
+/* NSTextField (User name:) : <title:User name:> (oid:51) */
+"User name:" = "用户名:";
+
+/* NSButton (Validate) : <title:Validate> (oid:62) */
+"Validate" = "认证";
+
+/* NSWindow (Window) : <title:Window> (oid:5) */
+"Window" = "窗口";
+

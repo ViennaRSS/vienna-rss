@@ -1,0 +1,25 @@
+/* NSTextField ((Sample)) : <title:(Sample)> (oid:52) */
+"(Sample)" = "(Sample)";
+
+/* NSTextField (Article list font: ) : <title:Article list font:
+> (oid:25) */
+"Article list font:\n" = "Fonte da lista de artigos:\n";
+
+/* NSTextField (Folder list font:) : <title:Folder list font:> (oid:30) */
+"Folder list font:" = "Fonte da lista de pastas:";
+
+/* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
+"Never use font sizes smaller than" = "Nunca usar fontes menores que";
+
+/* NSButton (Select...) : <title:Select...> (oid:54) */
+"Select..." = "Selecionar...";
+
+/* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
+"Show folder images in folder list" = "Mostrar imagens de pastas na lista de pastas";
+
+/* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
+"When viewing articles or web pages:" = "Ao visualizar artigos ou páginas da web:";
+
+/* NSWindow (Window) : <title:Window> (oid:22) */
+"Window" = "Janela";
+

@@ -1,0 +1,93 @@
+/* NSMenuItem : <title:(Do not localise)> (oid:92) */
+"(Do not localise)" = "(Ez itzuli)";
+
+/* NSMenuItem : <title:(Path)> (oid:96) */
+"(Path)" = "(Helbidea)";
+
+/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
+"After \"Next Unread\" command" = "\"Hurrengo Irakurri Gabea\" komandoaren ondoren";
+
+/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
+"After a short delay" = "Atzerapen txiki baten ondoren";
+
+/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
+"Bounce the application icon" = "Bounce the application icon";
+
+/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
+"Check for new articles on start up" = "Begiratu artikulu berririk dauden Vienna hasieratzean";
+
+/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
+"Check for new articles:" = "Begiratu artikulu berririk daude:";
+
+/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
+"Check for newer versions of Vienna on start up" = "Begiratu bertsio berririk dagoen Vienna hasieratzean";
+
+/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
+"Default RSS Reader:" = "RSS Irakurle lehenetsia:";
+
+/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
+"Do nothing" = "Ez egin ezer";
+
+/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
+"Every 15 minutes" = "Every 15 minutes";
+
+/* NSMenuItem : <title:Every 2 hours> (oid:71) */
+"Every 2 hours" = "2 orduro";
+
+/* NSMenuItem : <title:Every 3 hours> (oid:144) */
+"Every 3 hours" = "Every 3 hours";
+
+/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
+"Every 30 minutes" = "30 minuturo";
+
+/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
+"Every 5 minutes" = "Every 5 minutes";
+
+/* NSMenuItem : <title:Every 6 hours> (oid:75) */
+"Every 6 hours" = "6 orduro";
+
+/* NSMenuItem : <title:Every hour> (oid:74) */
+"Every hour" = "Orduro";
+
+/* NSMenuItem : <title:Manually> (oid:73) */
+"Manually" = "Eskuz";
+
+/* NSTextField (Mark current article read: ) : <title:Mark current article read:
+> (oid:130) */
+
+"Mark current article read:\n" = "Jarri irakurrita moduan oraingo artikuluak:\n";
+
+/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
+"Move articles to Trash:" = "Mugitu artikuluak Zakarrontzira:";
+
+/* NSMenuItem : <title:Nothing> (oid:81) */
+"Nothing" = "Ezer";
+
+/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
+"Open links in external browser" = "Ireki estekak kanpo nabegatzailean";
+
+/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
+"Open new links in the background" = "Ireki esteka berriak atzekaldean";
+
+/* NSMenuItem : <title:Other...> (oid:97) */
+"Other..." = "Besteak...";
+
+/* NSMenu : <title:OtherViews> (oid:95) */
+"OtherViews" = "Bestelakoak";
+
+/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
+"Save downloaded files to:" = "Gorde deskargatutako fitxategiak hemen:";
+
+/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
+"Show in menu bar" = "Erakutsi menuan";
+
+/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
+"Show the unread count on the application icon" = "Erakutsi programaren ikonoan irakurri gabeko artikuluen kontadorea";
+
+/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
+> (oid:119) */
+
+"When new unread articles are retrieved:\n" = "Artikulu berri irakurri gabeak jasotzerakoan:\n";
+
+/* NSWindow (Window) : <title:Window> (oid:64) */
+"Window" = "Lehioa";

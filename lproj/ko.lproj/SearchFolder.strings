@@ -1,0 +1,46 @@
+/* NSPanel () : <title:> (oid:6) */
+"" = "";
+
+/* NSButton (+) : <title:+> (oid:31) */
+"+" = "+";
+
+/* NSButton (-) : <title:-> (oid:29) */
+"-" = "-";
+
+/* NSButton (Cancel) : <title:Cancel> (oid:10) */
+"Cancel" = "취소";
+
+/* NSMenuItem : <title:Field names go here> (oid:33) */
+"Field names go here" = "Field names go here";
+
+/* NSMenuItem : <title:Item1> (oid:88) */
+"Item1" = "Item1";
+
+/* NSMenuItem : <title:Item2> (oid:90) */
+"Item2" = "Item2";
+
+/* NSMenuItem : <title:Item3> (oid:89) */
+"Item3" = "Item3";
+
+/* NSMenuItem : <title:Nothing> (oid:82) */
+"Nothing" = "Nothing";
+
+/* NSMenuItem : <title:Operators go here> (oid:56) */
+"Operators go here" = "Operators go here";
+
+/* NSMenu : <title:OtherViews> (oid:87) */
+"OtherViews" = "OtherViews";
+
+/* NSButton (Save) : <title:Save> (oid:9) */
+"Save" = "저장";
+
+/* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
+"Show all articles that match" = "다음의";
+
+/* NSTextField (Smart folder name: ) : <title:Smart folder name:
+> (oid:7) */
+"Smart folder name:\n" = "스마트 폴더 이름:";
+
+/* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
+"of the following conditions:" = "조건에 일치하는 모든 기사 항목:";
+

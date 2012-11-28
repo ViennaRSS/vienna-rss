@@ -1,0 +1,92 @@
+/* NSMenuItem : <title:(Do not localise)> (oid:92) */
+"(Do not localise)" = "(Do not localise)";
+
+/* NSMenuItem : <title:(Path)> (oid:96) */
+"(Path)" = "(Шлях)";
+
+/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
+"After \"Next Unread\" command" = "Післи команди \"Наступне непрочитане\"";
+
+/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
+"After a short delay" = "Після невеликої паузи";
+
+/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
+"Bounce the application icon" = "Заставити іконку програми стрибати";
+
+/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
+"Check for new articles on start up" = "Перевіряти наявність нових статей при запуску";
+
+/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
+"Check for new articles:" = "Перевіряти наявність нових статей:";
+
+/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
+"Check for newer versions of Vienna on start up" = "Перевіряти наявність нових версій Vienna при запуску";
+
+/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
+"Default RSS Reader:" = "RSS-переглядач за замовчуванням:";
+
+/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
+"Do nothing" = "Нічого не робити";
+
+/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
+"Every 15 minutes" = "Кожні 15 хвилин";
+
+/* NSMenuItem : <title:Every 2 hours> (oid:71) */
+"Every 2 hours" = "Кожні 2 години";
+
+/* NSMenuItem : <title:Every 3 hours> (oid:144) */
+"Every 3 hours" = "Кожні 3 години";
+
+/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
+"Every 30 minutes" = "Кожні 30 хвилин";
+
+/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
+"Every 5 minutes" = "Кожні 5 хвилин";
+
+/* NSMenuItem : <title:Every 6 hours> (oid:75) */
+"Every 6 hours" = "Кожні 6 годин";
+
+/* NSMenuItem : <title:Every hour> (oid:74) */
+"Every hour" = "Кожної години";
+
+/* NSMenuItem : <title:Manually> (oid:73) */
+"Manually" = "Вручну";
+
+/* NSTextField (Mark current article read: ) : <title:Mark current article read:
+> (oid:130) */
+"Mark current article read:\n" = "Помітити поточну статтю як прочитану:\n";
+
+/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
+"Move articles to Trash:" = "Перемістити статті до Смітника:";
+
+/* NSMenuItem : <title:Nothing> (oid:81) */
+"Nothing" = "Нічого";
+
+/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
+"Open links in external browser" = "Відкривати посилання у зовнішньому браузері";
+
+/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
+"Open new links in the background" = "Відкривати посилання на задньому плані";
+
+/* NSMenuItem : <title:Other...> (oid:97) */
+"Other..." = "Інше...";
+
+/* NSMenu : <title:OtherViews> (oid:95) */
+"OtherViews" = "OtherViews";
+
+/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
+"Save downloaded files to:" = "Зберігати завантажені файли до:";
+
+/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
+"Show in menu bar" = "Показувати у меню";
+
+/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
+"Show the unread count on the application icon" = "Показувати кількість непрочитаних статей на іконці програми";
+
+/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
+> (oid:119) */
+"When new unread articles are retrieved:\n" = "Коли отримані нові статті:\n";
+
+/* NSWindow (Window) : <title:Window> (oid:64) */
+"Window" = "Вікно";
+
