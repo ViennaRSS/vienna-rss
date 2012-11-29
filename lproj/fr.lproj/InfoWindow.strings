@@ -1,0 +1,54 @@
+/* NSTextField ( ) : <title:
+> (oid:70) */
+"\n" = "\n";
+
+/* NSTextField ((Folder name)) : <title:(Folder name)> (oid:32) */
+"(Folder name)" = "(Folder name)";
+
+/* NSTextField ((Last refresh date)) : <title:(Last refresh date)> (oid:34) */
+"(Last refresh date)" = "(Last refresh date)";
+
+/* SNDisclosureButton (Authentication:) : <title:Authentication:> (oid:45) */
+"Authentication:" = "Identification :";
+
+/* NSBox (Box) : <title:Box> (oid:101) */
+"Box" = "Boîte";
+
+/* SNDisclosureButton (Description:) : <title:Description:> (oid:79) */
+"Description:" = "Description :";
+
+/* SNDisclosureButton (Feed URL:) : <title:Feed URL:> (oid:38) */
+"Feed URL:" = "URL du flux :";
+
+/* SNDisclosureButton (General:) : <title:General:> (oid:65) */
+"General:" = "Général :";
+
+/* NSTextField (Last Refreshed:) : <title:Last Refreshed:> (oid:33) */
+"Last Refreshed:" = "Dernier rafraîchissement :";
+
+/* NSTextField (Password: ) : <title:Password:
+> (oid:52) */
+"Password:\n" = "Mot de passe :\n";
+
+/* NSTextField (Size:) : <title:Size:> (oid:67) */
+"Size:" = "Taille :";
+
+/* NSButton (Subscribed) : <title:Subscribed> (oid:76) */
+"Subscribed" = "Abonné";
+
+/* NSTextField (Unread: ) : <title:Unread:
+> (oid:68) */
+"Unread:\n" = "Non lus :\n";
+
+/* NSButton (Update Authentication) : <title:Update Authentication> (oid:91) */
+"Update Authentication" = "Mise à jour de l'identification";
+
+/* NSTextField (User name:) : <title:User name:> (oid:51) */
+"User name:" = "Nom d'utilisateur :";
+
+/* NSButton (Validate) : <title:Validate> (oid:62) */
+"Validate" = "Valider";
+
+/* NSWindow (Window) : <title:Window> (oid:5) */
+"Window" = "Fenêtre";
+

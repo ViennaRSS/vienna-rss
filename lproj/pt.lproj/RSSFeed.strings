@@ -1,0 +1,35 @@
+/* NSButton (Cancel) : <title:Cancel> (oid:54) */
+"Cancel" = "Cancelar";
+
+/* NSTextField (Create a new subscription ) : <title:Create a new subscription
+> (oid:64) */
+"Create a new subscription\n" = "Criar uma nova subscrição\n";
+
+/* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
+"Edit subscription" = "Editar subscrição";
+
+/* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
+"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Introduza o link para a nova fonte em baixo. Ou escolha na lista de Origens e intriduza um atalho para a fontes disponibilizadas pela origem.";
+
+/* NSMenu : <title:OtherViews> (oid:44) */
+"OtherViews" = "OtherViews";
+
+/* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
+"RSS Feed" = "Fonte RSS";
+
+/* NSButton (Save) : <title:Save> (oid:53) */
+"Save" = "Guardar";
+
+/* NSTextField (Source: ) : <title:Source:
+> (oid:40) */
+"Source:\n" = "Origem:\n";
+
+/* NSButton (Subscribe) : <title:Subscribe> (oid:10) */
+"Subscribe" = "Subscrever";
+
+/* NSMenuItem : <title:URL> (oid:45) */
+"URL" = "URL";
+
+/* NSTextField (URL:) : <title:URL:> (oid:97) */
+"URL:" = "URL:";
+

@@ -1,0 +1,13 @@
+/* NSButton (Do not show this warning again) : <title:Do not show this warning again> (oid:10) */
+"Do not show this warning again" = "Більше не показувати це попередження";
+
+/* NSButton (Don't Empty Trash) : <title:Don't Empty Trash> (oid:8) */
+"Don't Empty Trash" = "Не спорожняти смітник";
+
+/* NSButton (Empty Trash) : <title:Empty Trash> (oid:7) */
+"Empty Trash" = "Спорожнити смітник";
+
+/* NSTextField (There are deleted articles in the trash. Would you like to empty the trash before quitting?) : <title:There are deleted articles in the trash.
+Would you like to empty the trash before quitting?> (oid:9) */
+"There are deleted articles in the trash.\nWould you like to empty the trash before quitting?" = "У смітнику є видалені статті.\nЧи не хотіли б ви спорожнити смітник перед тим, як завершити програму?";
+

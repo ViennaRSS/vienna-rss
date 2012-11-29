@@ -1,0 +1,25 @@
+/* NSTextField ((Sample)) : <title:(Sample)> (oid:52) */
+"(Sample)" = "(Adibidea)";
+
+/* NSTextField (Article list font: ) : <title:Article list font:
+> (oid:25) */
+"Article list font:\n" = "Artikuluentzako letra lista:\n";
+
+/* NSTextField (Folder list font:) : <title:Folder list font:> (oid:30) */
+"Folder list font:" = "Direktorioentzako letra lista:";
+
+/* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
+"Never use font sizes smaller than" = "Ez erabili inoiz letra tamainarik txikiagoa baino";
+
+/* NSButton (Select...) : <title:Select...> (oid:54) */
+"Select..." = "Aukeratu...";
+
+/* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
+"Show folder images in folder list" = "Erakutsi direktorioen irudiak direktorioen listan";
+
+/* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
+"When viewing articles or web pages:" = "Artikuluak edota web orriak ikustean:";
+
+/* NSWindow (Window) : <title:Window> (oid:22) */
+"Window" = "Lehioa";
+

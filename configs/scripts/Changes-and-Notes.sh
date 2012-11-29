@@ -1,40 +1,28 @@
 #!/bin/sh
 
-VIENNA_UPLOADS_DIR="$BUILT_PRODUCTS_DIR/Uploads"
-VIENNA_NOTES="$SRCROOT/notes.html"
-VIENNA_CHANGELOG="changelog$VIENNA_CHANGELOG_SUFFIX.xml"
+. "${OBJROOT}/autorevision.tmp"
+N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
+VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
+VIENNA_NOTES="${SRCROOT}/notes.html"
 
-if [ "$CONFIGURATION" = "Deployment" ] ; then
+
+# Fail if not deployment
+if [ ! "${CONFIGURATION}" = "Deployment" ]; then
+	echo "error: This should only be run as Deployment" >&2
+	exit 1
+fi
+
 echo "Running script to create web site files"
-if [ ! -e "$VIENNA_UPLOADS_DIR" ] ; then
-mkdir "$VIENNA_UPLOADS_DIR"
-fi
-cd "$VIENNA_UPLOADS_DIR"
-
-if [ -e "$VIENNA_NOTES" ] ; then
-cp -f "$VIENNA_NOTES" "noteson$VIENNA_VERSION_NUMBER.$BUILD_NUMBER.html"
+if [ ! -d "${VIENNA_UPLOADS_DIR}" ] ; then
+	mkdir "${VIENNA_UPLOADS_DIR}"
+else
+	rm -fr "${VIENNA_UPLOADS_DIR}"/*
 fi
 
-rm -f "$VIENNA_CHANGELOG"
+cd "${VIENNA_UPLOADS_DIR}"
 
-echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > "$VIENNA_CHANGELOG"
-echo "<rss version=\"2.0\" xmlns:sparkle=\"http://www.andymatuschak.org/xml-namespaces/sparkle\">" >> "$VIENNA_CHANGELOG"
-echo "<channel>" >> "$VIENNA_CHANGELOG"
-echo "<title>Vienna Changelog</title>" >> "$VIENNA_CHANGELOG"
-echo "<link>http://vienna-rss.sourceforge.net</link>" >> "$VIENNA_CHANGELOG"
-echo "<description>Vienna Changelog</description>" >> "$VIENNA_CHANGELOG"
-echo "<language>en-us</language>" >> "$VIENNA_CHANGELOG"
-echo "<copyright>Copyright 2010, Steve Palmer</copyright>" >> "$VIENNA_CHANGELOG"
-echo "<item>" >> "$VIENNA_CHANGELOG"
-echo "<title>Vienna $VIENNA_VERSION_NUMBER.$BUILD_NUMBER</title>" >> "$VIENNA_CHANGELOG"
-echo "<pubDate>$(date '+%a, %d %b %G %T %z')</pubDate>" >> "$VIENNA_CHANGELOG"
-echo "<link>http://master.dl.sourceforge.net/project/vienna-rss/Released%20Versions/$VIENNA_VERSION_NUMBER/Vienna$VIENNA_VERSION_NUMBER.$BUILD_NUMBER.zip</link>" >> "$VIENNA_CHANGELOG"
-echo "<sparkle:minimumSystemVersion>10.4.0</sparkle:minimumSystemVersion>" >> "$VIENNA_CHANGELOG"
-echo "<enclosure sparkle:version=\"$BUILD_NUMBER\" url=\"http://master.dl.sourceforge.net/project/vienna-rss/Released Versions/$VIENNA_VERSION_NUMBER/Vienna$VIENNA_VERSION_NUMBER.$BUILD_NUMBER.zip\" type=\"application/octet-stream\"/>" >> "$VIENNA_CHANGELOG"
-echo "<sparkle:releaseNotesLink>http://vienna-rss.sourceforge.net/noteson$VIENNA_VERSION_NUMBER.$BUILD_NUMBER.html</sparkle:releaseNotesLink>" >> "$VIENNA_CHANGELOG"
-echo "</item>" >> "$VIENNA_CHANGELOG"
-echo "</channel>" >> "$VIENNA_CHANGELOG"
-echo "</rss>" >> "$VIENNA_CHANGELOG"
+if [ -f "${VIENNA_NOTES}" ] ; then
+	cp -a "${VIENNA_NOTES}" "noteson${N_VCS_TAG}.${VCS_SHORT_HASH}.html"
 fi
 
 exit 0

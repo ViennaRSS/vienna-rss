@@ -1,0 +1,46 @@
+/* NSPanel () : <title:> (oid:6) */
+"" = "";
+
+/* NSButton (+) : <title:+> (oid:31) */
+"+" = "+";
+
+/* NSButton (-) : <title:-> (oid:29) */
+"-" = "-";
+
+/* NSButton (Cancel) : <title:Cancel> (oid:10) */
+"Cancel" = "Avbryt";
+
+/* NSMenuItem : <title:Field names go here> (oid:33) */
+"Field names go here" = "Fältnamn här";
+
+/* NSMenuItem : <title:Item1> (oid:88) */
+"Item1" = "Objekt3";
+
+/* NSMenuItem : <title:Item2> (oid:90) */
+"Item2" = "Objekt2";
+
+/* NSMenuItem : <title:Item3> (oid:89) */
+"Item3" = "Objekt3";
+
+/* NSMenuItem : <title:Nothing> (oid:82) */
+"Nothing" = "Ingenting";
+
+/* NSMenuItem : <title:Operators go here> (oid:56) */
+"Operators go here" = "Operatörer hör";
+
+/* NSMenu : <title:OtherViews> (oid:87) */
+"OtherViews" = "Andra vyer";
+
+/* NSButton (Save) : <title:Save> (oid:9) */
+"Save" = "Spara";
+
+/* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
+"Show all articles that match" = "Visa alla artiklar som matchar";
+
+/* NSTextField (Smart folder name: ) : <title:Smart folder name:
+> (oid:7) */
+"Smart folder name:\n" = "Namn på smart mapp:\n";
+
+/* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
+"of the following conditions:" = "av följande villkor:";
+

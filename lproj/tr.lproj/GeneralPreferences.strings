@@ -1,0 +1,91 @@
+/* NSMenuItem : <title:(Do not localise)> (oid:92) */
+"(Do not localise)" = "(Yerelleştirme)";
+
+/* NSMenuItem : <title:(Path)> (oid:96) */
+"(Path)" = "(Yol)";
+
+/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
+"After \"Next Unread\" command" = "\"Next Unread\" komutundan sonra";
+
+/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
+"After a short delay" = "Kısa bir aradan sonra";
+
+/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
+"Bounce the application icon" = "Uygulama simgesini zıplat";
+
+/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
+"Check for new articles on start up" = "Başlangıçta yeni makaleleri kontrol et";
+
+/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
+"Check for new articles:" = "Yeni makaleleri kontrol et:";
+
+/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
+"Check for newer versions of Vienna on start up" = "Başlangıçta Vienna'nın yeni sürümünü kontrol et";
+
+/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
+"Default RSS Reader:" = "Varsayılan RSS Tarayıcısı:";
+
+/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
+"Do nothing" = "Hiçbir şey yapma";
+
+/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
+"Every 15 minutes" = "15 dakikada bir";
+
+/* NSMenuItem : <title:Every 2 hours> (oid:71) */
+"Every 2 hours" = "2 saatte bir";
+
+/* NSMenuItem : <title:Every 3 hours> (oid:144) */
+"Every 3 hours" = "3 saatte bir";
+
+/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
+"Every 30 minutes" = "30 dakikada bir";
+
+/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
+"Every 5 minutes" = "5 dakikada bir";
+
+/* NSMenuItem : <title:Every 6 hours> (oid:75) */
+"Every 6 hours" = "6 saatte bir";
+
+/* NSMenuItem : <title:Every hour> (oid:74) */
+"Every hour" = "Her saat";
+
+/* NSMenuItem : <title:Manually> (oid:73) */
+"Manually" = "El ile";
+
+/* NSTextField (Mark current article read: ) : <title:Mark current article read:
+> (oid:130) */
+"Mark current article read:\n" = "Seçili makaleyi okundu olarak işaretle:\n";
+
+/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
+"Move articles to Trash:" = "Seçili makaleleri çöp kutusuna taşı:";
+
+/* NSMenuItem : <title:Nothing> (oid:81) */
+"Nothing" = "Hiçbir şey";
+
+/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
+"Open links in external browser" = "Bağlantıları harici tarayıcıda aç";
+
+/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
+"Open new links in the background" = "Yeni bağlantıları arkaplanda aç";
+
+/* NSMenuItem : <title:Other...> (oid:97) */
+"Other..." = "Diğer...";
+
+/* NSMenu : <title:OtherViews> (oid:95) */
+"OtherViews" = "DiğerGörünümler";
+
+/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
+"Save downloaded files to:" = "İndirilen dosyaları şuraya kaydet:";
+
+/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
+"Show in menu bar" = "Menü barında göster";
+
+/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
+"Show the unread count on the application icon" = "Okunmamış makale sayısını uygulama ikonunda göster";
+
+/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
+> (oid:119) */
+"When new unread articles are retrieved:\n" = "Yeni okunmamış makale alındığında:\n";
+
+/* NSWindow (Window) : <title:Window> (oid:64) */
+"Window" = "Pencere";

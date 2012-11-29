@@ -1,0 +1,93 @@
+/* NSMenuItem : <title:(Do not localise)> (oid:92) */
+"(Do not localise)" = "(Do not localise)";
+
+/* NSMenuItem : <title:(Path)> (oid:96) */
+"(Path)" = "（パス）";
+
+/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
+"After \"Next Unread\" command" = "\"次の未読\" コマンドの後";
+
+/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
+"After a short delay" = "少したった後";
+
+/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
+"Bounce the application icon" = "Bounce the application icon";
+
+/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
+"Check for new articles on start up" = "起動時に新しい記事をチェック";
+
+/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
+"Check for new articles:" = "新しい記事をチェック：";
+
+/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
+"Check for newer versions of Vienna on start up" = "起動時に Vienna の新しいバージョンをチェック";
+
+/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
+"Default RSS Reader:" = "デフォルト RSS リーダ：";
+
+/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
+"Do nothing" = "何もしない";
+
+/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
+"Every 15 minutes" = "Every 15 minutes";
+
+/* NSMenuItem : <title:Every 2 hours> (oid:71) */
+"Every 2 hours" = "２時間ごと";
+
+/* NSMenuItem : <title:Every 3 hours> (oid:144) */
+"Every 3 hours" = "Every 3 hours";
+
+/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
+"Every 30 minutes" = "３０分ごと";
+
+/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
+"Every 5 minutes" = "Every 5 minutes";
+
+/* NSMenuItem : <title:Every 6 hours> (oid:75) */
+"Every 6 hours" = "６時間ごと";
+
+/* NSMenuItem : <title:Every hour> (oid:74) */
+"Every hour" = "１時間ごと";
+
+/* NSMenuItem : <title:Manually> (oid:73) */
+"Manually" = "手動";
+
+/* NSTextField (Mark current article read: ) : <title:Mark current article read:
+> (oid:130) */
+
+"Mark current article read:\n" = "現在の記事を既読にする：\n";
+
+/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
+"Move articles to Trash:" = "記事をゴミ箱に移動する：";
+
+/* NSMenuItem : <title:Nothing> (oid:81) */
+"Nothing" = "なし";
+
+/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
+"Open links in external browser" = "リンクをデフォルトブラウザで開く";
+
+/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
+"Open new links in the background" = "新しいリンクを背面で開く";
+
+/* NSMenuItem : <title:Other...> (oid:97) */
+"Other..." = "その他...";
+
+/* NSMenu : <title:OtherViews> (oid:95) */
+"OtherViews" = "OtherViews";
+
+/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
+"Save downloaded files to:" = "ダウンロードしたファイルの保存先：";
+
+/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
+"Show in menu bar" = "Show in menu bar";
+
+/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
+"Show the unread count on the application icon" = "未読記事数をアプリケーションアイコンに表示";
+
+/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
+> (oid:119) */
+
+"When new unread articles are retrieved:\n" = "新規未読記事を取得したとき：\n";
+
+/* NSWindow (Window) : <title:Window> (oid:64) */
+"Window" = "Window";

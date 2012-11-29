@@ -1,0 +1,25 @@
+/* NSTextField ((Sample)) : <title:(Sample)> (oid:52) */
+"(Sample)" = "(Prøve)";
+
+/* NSTextField (Article list font: ) : <title:Article list font:
+> (oid:25) */
+"Article list font:\n" = "Artikelliste skrifttype:\n";
+
+/* NSTextField (Folder list font:) : <title:Folder list font:> (oid:30) */
+"Folder list font:" = "Mappeliste skrifttype:";
+
+/* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
+"Never use font sizes smaller than" = "Brug aldrig en skrifttype mindre end";
+
+/* NSButton (Select...) : <title:Select...> (oid:54) */
+"Select..." = "Vælg...";
+
+/* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
+"Show folder images in folder list" = "Vis mappeikoner i mappeliste";
+
+/* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
+"When viewing articles or web pages:" = "Når der læses artikler eller hjemmesider:";
+
+/* NSWindow (Window) : <title:Window> (oid:22) */
+"Window" = "Vindue";
+
