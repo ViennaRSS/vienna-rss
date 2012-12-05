@@ -2,7 +2,7 @@
 "(Do not localise)" = "(Do not localise)";
 
 /* NSMenuItem : <title:(Path)> (oid:96) */
-"(Path)" = "(Path)";
+"(Path)" = "(Pfad)";
 
 /* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
 "After \"Next Unread\" command" = "Nach \"Nächster ungelesener Artikel\" Befehl";
@@ -11,7 +11,7 @@
 "After a short delay" = "Nach kurzer Zeit";
 
 /* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
-"Bounce the application icon" = "Lass das Programmicon hüpfen";
+"Bounce the application icon" = "Lass das Programmicon springen";
 
 /* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
 "Check for new articles on start up" = "Beim Start nach neuen Artikeln suchen";

@@ -15,7 +15,7 @@
 "OtherViews" = "Andere Ansichten";
 
 /* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
-"RSS Feed" = "RSS Feed";
+"RSS Feed" = "RSS-Feed";
 
 /* NSButton (Save) : <title:Save> (oid:53) */
 "Save" = "Speichern";
