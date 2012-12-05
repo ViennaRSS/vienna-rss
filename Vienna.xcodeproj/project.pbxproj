@@ -1075,6 +1075,7 @@
 		43BA9806166483B900B95F35 /* GTMOAuth2-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-All.xcconfig"; path = "configs/GTMOAuth2-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA9807166483B900B95F35 /* GTMOAuth2-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-Dep.xcconfig"; path = "configs/GTMOAuth2-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-Dev.xcconfig"; path = "configs/GTMOAuth2-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
+		43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-StaticAnalyzer.xcconfig"; path = "configs/Vienna-StaticAnalyzer.xcconfig"; sourceTree = "<group>"; };
 		43EE7F2A165EAA6E000997FB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = AdvancedPreferences.nib; sourceTree = "<group>"; };
 		43EE7F2C165EAA6E000997FB /* cs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cs; path = AdvancedPreferences.strings; sourceTree = "<group>"; };
 		43EE7F2E165EAA6E000997FB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = AppearancesPreferences.nib; sourceTree = "<group>"; };
@@ -2001,6 +2002,7 @@
 		432E5191165D655C00A8640E /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */,
 				439824171666B31700FFE219 /* Scripts */,
 				43BA9806166483B900B95F35 /* GTMOAuth2-All.xcconfig */,
 				43BA9807166483B900B95F35 /* GTMOAuth2-Dep.xcconfig */,
@@ -8394,6 +8396,91 @@
 			};
 			name = Deployment;
 		};
+		43D4D6EC166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 432E5192165D65AF00A8640E /* Project-All.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6ED166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6EE166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = Autorevision;
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6EF166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Code Sign ID";
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F0166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43BA978F166449E000B95F35 /* ASIHTTPRequest-Dev.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F1166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43BA97CF1664752A00B95F35 /* DisclosableView-Dev.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F2166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43BA97A616645E1D00B95F35 /* GTMHTTP-Dev.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F3166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F4166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F5166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43BA97BC16646BAA00B95F35 /* SQLiteLib-Dev.xcconfig */;
+			buildSettings = {
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F6166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "Version Notes";
+			};
+			name = StaticAnalyzer;
+		};
+		43D4D6F7166FE08C00BA9675 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430C4B001661F3270079C9FC /* CS-ID.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "Archive and Prep for Upload";
+			};
+			name = StaticAnalyzer;
+		};
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -8460,6 +8547,7 @@
 			buildConfigurations = (
 				430C4AD0166172BE0079C9FC /* Development */,
 				430C4AD1166172BE0079C9FC /* Deployment */,
+				43D4D6EE166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8469,6 +8557,7 @@
 			buildConfigurations = (
 				430C4AF81661F0860079C9FC /* Development */,
 				430C4AF91661F0860079C9FC /* Deployment */,
+				43D4D6EF166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8478,6 +8567,7 @@
 			buildConfigurations = (
 				43BA970B1663E80900B95F35 /* Development */,
 				43BA970C1663E80900B95F35 /* Deployment */,
+				43D4D6F5166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8487,6 +8577,7 @@
 			buildConfigurations = (
 				43BA97131663EA5200B95F35 /* Development */,
 				43BA97141663EA5200B95F35 /* Deployment */,
+				43D4D6F4166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8496,6 +8587,7 @@
 			buildConfigurations = (
 				43BA971B1663EAD000B95F35 /* Development */,
 				43BA971C1663EAD000B95F35 /* Deployment */,
+				43D4D6F2166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8505,6 +8597,7 @@
 			buildConfigurations = (
 				43BA97251663EAEC00B95F35 /* Development */,
 				43BA97261663EAEC00B95F35 /* Deployment */,
+				43D4D6F3166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8514,6 +8607,7 @@
 			buildConfigurations = (
 				43BA97341663EE7C00B95F35 /* Development */,
 				43BA97351663EE7C00B95F35 /* Deployment */,
+				43D4D6F1166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8523,6 +8617,7 @@
 			buildConfigurations = (
 				43BA973D16642A8400B95F35 /* Development */,
 				43BA973E16642A8400B95F35 /* Deployment */,
+				43D4D6F0166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8532,6 +8627,7 @@
 			buildConfigurations = (
 				52BA64020DE9E2FF0008B3E1 /* Development */,
 				52BA64030DE9E2FF0008B3E1 /* Deployment */,
+				43D4D6F6166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8541,6 +8637,7 @@
 			buildConfigurations = (
 				AA4F9AB30855422400C18279 /* Development */,
 				AA4F9AB40855422400C18279 /* Deployment */,
+				43D4D6ED166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8550,6 +8647,7 @@
 			buildConfigurations = (
 				AA4F9AB70855422400C18279 /* Development */,
 				AA4F9AB80855422400C18279 /* Deployment */,
+				43D4D6EC166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
@@ -8559,6 +8657,7 @@
 			buildConfigurations = (
 				EAAF335A14BDE402002A8837 /* Development */,
 				EAAF335B14BDE402002A8837 /* Deployment */,
+				43D4D6F7166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
