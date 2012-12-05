@@ -1,0 +1,4 @@
+// DisclosableView settings for Deployment configuration
+
+#include "General-Dep.xcconfig"
+#include "DisclosableView-All.xcconfig"

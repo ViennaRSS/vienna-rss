@@ -1,0 +1,4 @@
+// DisclosableView settings for Development configuration
+
+#include "General-Dev.xcconfig"
+#include "DisclosableView-All.xcconfig"

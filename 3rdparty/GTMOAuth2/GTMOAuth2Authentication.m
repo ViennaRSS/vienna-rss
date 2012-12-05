@@ -650,29 +650,29 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
   NSString *refreshToken = self.refreshToken;
   NSString *code = self.code;
   NSString *assertion = self.assertion;
-  
+
   if (refreshToken) {
     // We have a refresh token
     [paramsDict setObject:@"refresh_token" forKey:@"grant_type"];
     [paramsDict setObject:refreshToken forKey:@"refresh_token"];
-    
+
     fetchType = kGTMOAuth2FetchTypeRefresh;
     commentTemplate = @"refresh token for %@";
   } else if (code) {
     // We have a code string
     [paramsDict setObject:@"authorization_code" forKey:@"grant_type"];
     [paramsDict setObject:code forKey:@"code"];
-    
+
     NSString *redirectURI = self.redirectURI;
     if ([redirectURI length] > 0) {
       [paramsDict setObject:redirectURI forKey:@"redirect_uri"];
     }
-    
+
     NSString *scope = self.scope;
     if ([scope length] > 0) {
       [paramsDict setObject:scope forKey:@"scope"];
     }
-    
+
     fetchType = kGTMOAuth2FetchTypeToken;
     commentTemplate = @"fetch tokens for %@";
   } else if (assertion) {
@@ -688,7 +688,7 @@ finishedRefreshWithFetcher:(GTMHTTPFetcher *)fetcher
 #endif
     return nil;
   }
-  
+
   NSString *clientID = self.clientID;
   if ([clientID length] > 0) {
     [paramsDict setObject:clientID forKey:@"client_id"];
