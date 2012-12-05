@@ -8,7 +8,7 @@
 "Refresh RSS feeds" = "Abonnements aktualisieren";
 "Refresh All Subscriptions" = "Alle Abonnements aktualisieren";
 "Already subscribed title" = "Fehler";
-"Already subscribed body" = "Sie haben dieses Abonnement bereits aufgenommen.";
+"Already subscribed body" = "Sie haben dieses Abonnement bereits abonniert.";
 "RSS Subscription Import Title" = "Import fertig";
 "%d subscriptions successfully imported" = "%d Abonnements erfolgreich importiert.";
 "RSS Subscription Export Title" = "Export fertig";
@@ -51,12 +51,12 @@
 "Tomorrow" = "Morgen";
 "%@ at %@" = "%@ um %@";
 "Quit" = "Beenden";
-"Refresh cancelled" = "Aktualisierungen abgebrochen";
+"Refresh cancelled" = "Aktualisierung abgebrochen";
 "Additional actions for the selected folder" = "Weitere Befehle für den ausgewählten Ordner";
 "Create a new subscription" = "Ein neues Abonnement erstellen";
 "Refresh all your subscriptions" = "Alle Abonnements aktualisieren";
 "New style title" = "Vienna hat einen neuen Stil installiert";
-"New style body" = "Der Stil '%@' in den Stilordner installiert und zum Stilmenü hinzugefügt.";
+"New style body" = "Der Stil '%@' wurde im Stilordner installiert und zum Stilmenü hinzugefügt.";
 "More Styles..." = "Mehr Stile...";
 "Delete selected message" = "Sind Sie sich sicher, dass Sie die ausgewählte Artikel dauerhaft löschen wollen?";
 "Delete selected message text" = "Dieser Befehl kann nicht wieder rückgängig gemacht werden.";
@@ -65,22 +65,22 @@
 "From" = "Von";
 "To" = "An";
 "(No title)" = "(Kein Betreff)";
-"Refreshing folder images..." = "Refreshing folder images...";
+"Refreshing folder images..." = "Aktualisiere Ordnericons...";
 "Refreshing subscriptions..." = "Abonnements aktualisieren...";
 "Authenticating with user name '%@'" = "Authentifizieren mit Benutzername  '%@'";
 "No new articles available" = "Keine neuen Artikel verfügbar";
 "%d new articles retrieved" = "%d neue Artikel empfangen";
 "HTTP code %d reported from server" = "Der Server lieferte den HTTP-Code %d";
-"Headers:\n" = "Headers:\n";
+"Headers:\n" = "Überschriften:\n";
 "Connection error (%d, %@):\n" = "Verbindungsfehler (%d, %@):\n";
 "\tDescription: %@\n" = "\tBeschreibung: %@\n";
 "\tSuggestion: %@\n" = "\tVorschlag: %@\n";
 "\tCause: %@\n" = "\tGrund: %@\n";
-"Article feed will be compressed" = "Feed wird wird komprimiert.";
+"Article feed will be compressed" = "Feed wird komprimiert.";
 "Redirecting to %@" = "Umleitung zu %@";
 "Error: %@" = "Fehler: %@";
 "Error" = "Fehler";
-"Credentials Prompt" = "Der Zugriff auf den Feed %@ benötigt das einloggen am Server";
+"Credentials Prompt" = "Der Zugriff auf den Feed %@ benötigt das Einloggen am Server";
 "%ld bytes received" = "%ld Bytes empfangen";
 "Authentication failed for user '%@'" = "Authentifizierung für den Benutzer '%@' fehlgeschlagen";
 "Error parsing XML data in feed" = "Fehler beim parsen der XML-Daten des Feeds";
@@ -90,7 +90,7 @@
 "Connect Running" = "Eine Verbindung ist aktiv";
 "Connect Running text" = "Wollen Sie die Verbindung unterbrechen und Vienna jetzt schließen?";
 "Delete group folder" = "Lösche Ordner";
-"Delete group folder text" = "Sind Sie sicher, dass Sie den Ordner '%@' mit alle Unterordner löschen wollen? Dieser Befehl kann nicht rückgängig gemacht werden.";
+"Delete group folder text" = "Sind Sie sicher, dass Sie den Ordner '%@' mit allen Unterordnern löschen wollen? Dieser Befehl kann nicht rückgängig gemacht werden.";
 "Delete smart folder" = "Lösche intelligenten Ordner";
 "Delete smart folder text" = "Sind Sie sicher, dass Sie den intelligenten Ordner '%@' löschen wollen? Dieser Befehl wird nicht die aktuell in dem Ordner gezeigten Artikel löschen.";
 "Delete RSS feed text" = "Sind Sie sicher, dass Sie das Abonnement von '%@' aufheben möchten? Dieser Befehl wird alle zwischengespeicherten Artikel löschen.";
@@ -107,11 +107,11 @@
 "all" = "allen";
 "Open Scripts Folder" = "Öffne Skriptordner";
 "Cannot create database folder" = "Beim Versuch den Datenbankordner zu erstellen ist ein Fehler aufgetreten.";
-"Cannot create database folder text" = "Beim Versuch den Ordner '%@' zu erstellen ist ein Fehler aufgetreten. Bitte überprüfen Sie die Dateizugriffsrechte an dem angegebenem Pfad.";
+"Cannot create database folder text" = "Beim Versuch den Ordner '%@' zu erstellen ist ein Fehler aufgetreten. Bitte überprüfen Sie die Dateizugriffsrechte des angegebenen Pfades.";
 "Unrecognised database format title" = "Das Datenbankdateiformat hat sich geändert.";
-"Unrecognised database format text" = "Ihre existierende %@ Datei wird nicht unterstützt von dieser Vienna-Version. Löschen oder umbenennen Sie diese Datei und starten Sie Vienna neu.\n";
+"Unrecognised database format text" = "Ihre existierende %@ Datei wird von dieser Vienna-Version nicht unterstützt. Löschen oder benennen Sie diese Datei um und starten Sie Vienna erneut.\n";
 "Upgrade Title" = "Datenbank-Aktualisierung";
-"Upgrade Text" = "Ihre existierende Datenbank benötigt eine Aktualisierung um mit dieser Vienna-Version zu arbeiten. Alternativ können Sie eine neue leere Datenbank zu erstellen. In beiden Fällen wird ihre existierende Datenbank unter %@ gesichert. Die neue oder aktualisierte Datenbank wird NICHT von früheren Vienna-Versionen unterstützt.\n\nHinweis: Es wird empfohlen, für diese Version eine neue Datenbank zu erstellen.\n";
+"Upgrade Text" = "Ihre existierende Datenbank benötigt eine Aktualisierung um mit dieser Vienna-Version zu arbeiten. Alternativ können Sie eine neue leere Datenbank erstellen. In beiden Fällen wird ihre existierende Datenbank unter %@ gesichert. Die neue oder aktualisierte Datenbank wird NICHT von früheren Vienna-Versionen unterstützt.\n\nHinweis: Es wird empfohlen, für diese Version eine neue Datenbank zu erstellen.\n";
 "New Database" = "Neue Datenbank";
 "Upgrade" = "Aktualisierung";
 "Exit" = "Beenden";
@@ -127,13 +127,13 @@
 "is after" = "ist nach";
 "is before" = "ist vor";
 "is on or after" = "ist an oder nach";
-"is on or before" = "is an oder vor";
+"is on or before" = "ist an oder vor";
 "contains" = "beinhaltet";
 "does not contain" = "beinhaltet nicht";
-"is less than" = "ist weniger als";
+"is less than" = "ist kleiner als";
 "is greater than" = "is größer als";
-"is less than or equal to" = "ist weniger als oder gleich mit";
-"is greater than or equal to" = "ist größer als oder gleich mit";
+"is less than or equal to" = "ist kleiner als oder gleich";
+"is greater than or equal to" = "ist größer als oder gleich";
 "Cannot open export file message" = "Konnte Exportdatei nicht erstellen";
 "Cannot open export file message text" = "Die angegebene Exportdatei konnte nicht erstellt werden. Überprüfen Sie ob die Datei schreibgeschützt ist oder von einer anderen Anwendung benutzt wird.";
 "Source" = "Quelle";
@@ -158,7 +158,7 @@
 "%d unread articles" = "%d ungelesene Artikel";
 "More Scripts..." = "Mehr Scripte...";
 "Install Update" = "Installiere Aktualisierung";
-"Do Not Install" = "Installiere nicht";
+"Do Not Install" = "Nicht installieren";
 "Replace smart folder title" = "Ein intelligenter Ordner mit dem Namen %@ existiert bereits";
 "Replace smart folder text" = "Wollen Sie den existierenden intelligenten Ordner durch einen mit den neu definierten Kriterien ersetzen?";
 "Replace" = "Ersetzen";
@@ -209,7 +209,7 @@
 "An error occurred when this feed was last refreshed" = "Bei der letzten Aktualisierung dieses Abonnements ist ein Fehler aufgetreten.";
 "Connecting to %@" = "Verbinde mit %@";
 "About Vienna" = "Über Vienna";
-"Acknowledgements" = "Danksagung";
+"Acknowledgements" = "Danksagungen";
 "Article" = "Artikel";
 "Back" = "Zurück";
 "Bring All to Front" = "Alle nach vorne bringen";
@@ -241,7 +241,7 @@
 "Import Subscriptions…" = "Abonnements importieren…";
 "Jump to Selection" = "Auswahl anzeigen";
 "Main Window" = "Hauptfenster";
-"MainMenu" = "MainMenu";
+"MainMenu" = "Hauptmenü";
 "Mark All Articles as Read" = "Alle Artikel als gelesen markieren";
 "Mark Flagged" = "Als markiert markieren";
 "Minimize" = "Minimieren";
@@ -295,8 +295,8 @@
 /* Added in 2.1.0 */
 "Send Link" = "Link senden";
 "Send Links" = "Links senden";
-"Increase Font Size" = "Increase Font Size";
-"Decrease Font Size" = "Decrease Font Size";
+"Increase Font Size" = "Schriftgröße vergrößern";
+"Decrease Font Size" = "Schriftgröße verkleinern";
 "Enter the URL here" = "URL hier eingeben";
 "Refresh the current page" = "Seite neu laden";
 "Return to the previous page" = "Die vorherige Seite anzeigen";
@@ -342,7 +342,7 @@
 "Enclosure" = "Anhang URL";
 "Open New Tab" = "Neuer Tab";
 "Subscribe to the feed for this page" = "Den Feed für diese Seite abonnieren";
-"Open Vienna" = "Open Vienna";
+"Open Vienna" = "Öffne Vienna";
 "Download Enclosure" = "Anhang herunterladen";
 "Download Enclosures" = "Anhänge herunterladen";
 "Local File" = "Lokale Datei";
@@ -359,7 +359,7 @@
 "Growl download completed" = "Datei heruntergeladen";
 "Growl download failed" = "Herunterladen fehlgeschlagen";
 "Download completed" = "Download abgeschlossen";
-"File %@ downloaded" = "Datei zu %@ heruntergeladen";
+"File %@ downloaded" = "Datei %@ heruntergeladen";
 "Download failed" = "Download fehlgeschlagen";
 "File %@ failed to download" = "Datei %@ nicht heruntergeladen";
 "Play" = "Abspielen";
@@ -380,7 +380,7 @@
 
 /* Added in 2.3.0 */
 "Order By" = "Sortiermodus...";
-"Manual" = "Händisch";
+"Manual" = "Manuell";
 "Name" = "Name (alphabetisch)";
 
 /*Added in 2.4*/
@@ -400,15 +400,15 @@
 /* Added in 2.6.0 */
 "Article load completed" = "Der Artikel wurde geladen";
 "Loading HTML article..." = "Artikel laden...";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
+"Ascending" = "Aufsteigend";
+"Descending" = "Absteigend";
 "Use Current Style for Articles" = "Aktuellen Style zur Artikel-Anzeige verwenden";
 "Use Web Page for Articles" = "Sofort die Artikel-Webseite laden";
 
 /* Added for Google Reader support */
-"Force Refresh Selected Subscriptions From Google Reader" = "Force Refresh Selected Subscriptions From Google Reader";
-"Update Subscriptions From Google Reader" = "Update Subscriptions From Google Reader";
-"Hide Toolbar" = "Hide Toolbar";
-"Delete Google Reader RSS feed text" = "Delete Google Reader RSS feed text";
-"Delete Google Reader RSS feed" = "Delete Google Reader RSS feed";
+"Force Refresh Selected Subscriptions From Google Reader" = "Erzwinge das Aktualisieren der ausgewählten Abonnements von Google Reader";
+"Update Subscriptions From Google Reader" = "Aktualisiere die Abonnements von Google Reader";
+"Hide Toolbar" = "Verstecke die Toolbar";
+"Delete Google Reader RSS feed text" = "Lösche den Google Reader RSS-Feed Text";
+"Delete Google Reader RSS feed" = "Lösche den Google Reader RSS-Feed";
 
