@@ -11,31 +11,31 @@
 "Cancel" = "Abbrechen";
 
 /* NSMenuItem : <title:Field names go here> (oid:33) */
-"Field names go here" = "Field names go here";
+"Field names go here" = "Feldname gehört hierhin";
 
 /* NSMenuItem : <title:Item1> (oid:88) */
-"Item1" = "Item1";
+"Item1" = "Objekt 1";
 
 /* NSMenuItem : <title:Item2> (oid:90) */
-"Item2" = "Item2";
+"Item2" = "Objekt 2";
 
 /* NSMenuItem : <title:Item3> (oid:89) */
-"Item3" = "Item3";
+"Item3" = "Objekt 3";
 
 /* NSMenuItem : <title:Nothing> (oid:82) */
-"Nothing" = "Nothing";
+"Nothing" = "Nichts";
 
 /* NSMenuItem : <title:Operators go here> (oid:56) */
-"Operators go here" = "Operators go here";
+"Operators go here" = "Operatoren müssen hier eingefügt werden";
 
 /* NSMenu : <title:OtherViews> (oid:87) */
-"OtherViews" = "OtherViews";
+"OtherViews" = "Andere Ansichten";
 
 /* NSButton (Save) : <title:Save> (oid:9) */
 "Save" = "OK";
 
 /* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
-"Show all articles that match" = "Enthält Artikel mit";
+"Show all articles that match" = "Zeige alle Artikel die passen";
 
 /* NSTextField (Smart folder name: ) : <title:Smart folder name:
 > (oid:7) */
