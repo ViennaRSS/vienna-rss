@@ -3,10 +3,10 @@
 
 /* NSTextField (Article list font: ) : <title:Article list font:
 > (oid:25) */
-"Article list font:\n" = "Artikelliste:";
+"Article list font:\n" = " Schriftart der Artikelliste:\n";
 
 /* NSTextField (Folder list font:) : <title:Folder list font:> (oid:30) */
-"Folder list font:" = "Ordnerliste:";
+"Folder list font:" = "Schriftart der Ordnerliste:";
 
 /* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
 "Never use font sizes smaller than" = "Keine Schriftgrößen verwenden, die kleiner sind als";
@@ -15,7 +15,7 @@
 "Select..." = "Auswählen...";
 
 /* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
-"Show folder images in folder list" = "Abonnementenicons anzeigen";
+"Show folder images in folder list" = "Abonnementenicons in Ordnerliste anzeigen";
 
 /* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
 "When viewing articles or web pages:" = "Beim Betrachten von Artikeln oder Webseiten:";

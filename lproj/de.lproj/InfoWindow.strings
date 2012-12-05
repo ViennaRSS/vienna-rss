@@ -3,13 +3,13 @@
 "\n" = "\n";
 
 /* NSTextField ((Folder name)) : <title:(Folder name)> (oid:32) */
-"(Folder name)" = "(Folder name)";
+"(Folder name)" = "(Ordnername)";
 
 /* NSTextField ((Last refresh date)) : <title:(Last refresh date)> (oid:34) */
-"(Last refresh date)" = "(Last refresh date)";
+"(Last refresh date)" = "(Datum der letzten Aktualisierung)";
 
 /* SNDisclosureButton (Authentication:) : <title:Authentication:> (oid:45) */
-"Authentication:" = "Authentication:";
+"Authentication:" = "Authentifizierung:";
 
 /* NSBox (Box) : <title:Box> (oid:101) */
 "Box" = "Box";

@@ -12,7 +12,7 @@
 "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Geben Sie den Link für das Abonnement ein oder wählen Sie eine Quelle aus der Liste.";
 
 /* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "OtherViews";
+"OtherViews" = "Andere Ansichten";
 
 /* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
 "RSS Feed" = "RSS Feed";

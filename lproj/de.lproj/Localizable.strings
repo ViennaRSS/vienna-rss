@@ -342,7 +342,7 @@
 "Enclosure" = "Anhang URL";
 "Open New Tab" = "Neuer Tab";
 "Subscribe to the feed for this page" = "Den Feed für diese Seite abonnieren";
-"Open Vienna" = "Open Vienna";
+"Open Vienna" = "Öffne Vienna";
 "Download Enclosure" = "Anhang herunterladen";
 "Download Enclosures" = "Anhänge herunterladen";
 "Local File" = "Lokale Datei";
@@ -408,7 +408,7 @@
 /* Added for Google Reader support */
 "Force Refresh Selected Subscriptions From Google Reader" = "Force Refresh Selected Subscriptions From Google Reader";
 "Update Subscriptions From Google Reader" = "Update Subscriptions From Google Reader";
-"Hide Toolbar" = "Hide Toolbar";
+"Hide Toolbar" = "Verstecke die Toolbar";
 "Delete Google Reader RSS feed text" = "Delete Google Reader RSS feed text";
 "Delete Google Reader RSS feed" = "Delete Google Reader RSS feed";
 

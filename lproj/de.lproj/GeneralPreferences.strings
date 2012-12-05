@@ -11,7 +11,7 @@
 "After a short delay" = "Nach kurzer Zeit";
 
 /* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
-"Bounce the application icon" = "Bounce the application icon";
+"Bounce the application icon" = "Lass das Programmicon hüpfen";
 
 /* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
 "Check for new articles on start up" = "Beim Start nach neuen Artikeln suchen";
@@ -29,19 +29,19 @@
 "Do nothing" = "Tue nichts";
 
 /* NSMenuItem : <title:Every 15 minutes> (oid:141) */
-"Every 15 minutes" = "Every 15 minutes";
+"Every 15 minutes" = "alle 15 Minuten";
 
 /* NSMenuItem : <title:Every 2 hours> (oid:71) */
 "Every 2 hours" = "alle 2 Stunden";
 
 /* NSMenuItem : <title:Every 3 hours> (oid:144) */
-"Every 3 hours" = "Every 3 hours";
+"Every 3 hours" = "alle 3 Stunden";
 
 /* NSMenuItem : <title:Every 30 minutes> (oid:76) */
 "Every 30 minutes" = "alle 30 Minuten";
 
 /* NSMenuItem : <title:Every 5 minutes> (oid:142) */
-"Every 5 minutes" = "Every 5 minutes";
+"Every 5 minutes" = "alle 5 Minuten";
 
 /* NSMenuItem : <title:Every 6 hours> (oid:75) */
 "Every 6 hours" = "alle 6 Stunden";
@@ -70,10 +70,10 @@
 "Open new links in the background" = "Öffne Links im Hintergrund";
 
 /* NSMenuItem : <title:Other...> (oid:97) */
-"Other..." = "Aüswählen...";
+"Other..." = "Auswählen...";
 
 /* NSMenu : <title:OtherViews> (oid:95) */
-"OtherViews" = "OtherViews";
+"OtherViews" = "Andere Ansichten";
 
 /* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
 "Save downloaded files to:" = "Geladene Datei sichern:";
