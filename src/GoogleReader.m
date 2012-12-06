@@ -570,7 +570,7 @@ JSONDecoder * jsonDecoder;
 		if (feedID == nil)
 			break;
 		NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
-		if (![feedURL hasPrefix:@"http"])
+		if (![feedURL hasPrefix:@"http:"] && ![feedURL hasPrefix:@"https:"])
             feedURL = [NSString stringWithFormat:@"http://www.google.com/reader/public/atom/%@", feedURL];
 		
 		NSString * folderName = nil;

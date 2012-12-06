@@ -846,7 +846,7 @@
 				NSString * theLink = [[subTree valueOfAttribute:@"href"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (theLink != nil)
 				{
-					if ((linkBaseURL != nil) && ![theLink hasPrefix:@"http://"])
+					if ((linkBaseURL != nil) && ![theLink hasPrefix:@"http://"] && ![theLink hasPrefix:@"https://"])
 					{
 						NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:linkBaseURL];
 						[self setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
