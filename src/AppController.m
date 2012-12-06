@@ -1007,6 +1007,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
 		[dateFormatterArray[i] setLocale:enUS];
+		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	}
 
 	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
