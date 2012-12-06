@@ -1,0 +1,7 @@
+// General settings for Deployment configuration
+
+
+STRIP_INSTALLED_PRODUCT = YES
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+DEPLOYMENT_POSTPROCESSING = YES
+SEPARATE_STRIP = YES

@@ -1,0 +1,8 @@
+// Vienna settings for Development configuration
+
+#include "Vienna-All.xcconfig"
+#include "General-Dev.xcconfig"
+
+
+GCC_DYNAMIC_NO_PIC = NO
+BUILD_PREPROCESSOR_DEFINITIONS = $(inherited) LOG_QUERY_TIMES DEBUG

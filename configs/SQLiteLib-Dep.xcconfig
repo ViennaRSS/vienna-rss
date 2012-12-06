@@ -1,0 +1,4 @@
+// SQLiteLib settings for Deployment configuration
+
+#include "SQLiteLib-All.xcconfig"
+#include "General-Dep.xcconfig"

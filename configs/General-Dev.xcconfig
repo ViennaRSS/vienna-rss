@@ -1,0 +1,5 @@
+// General settings for Development configuration
+
+
+DEBUG_INFORMATION_FORMAT = dwarf
+GCC_OPTIMIZATION_LEVEL = 0
