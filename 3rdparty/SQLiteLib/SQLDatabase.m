@@ -122,6 +122,14 @@ static void sqlite3_regexp(sqlite3_context *DB, int argc, sqlite3_value **argv)
 	NSRange				range = NSMakeRange( 0, [inString length]);
 	NSRange				subRange;
 	
+    if([inString respondsToSelector:@selector(stringValue)]) {
+        inString = [(id)inString stringValue];
+    }
+    if((NSNull*)inString == [NSNull null]) {
+        inString = nil;
+    }
+	if(inString == nil) return nil; // just don't try.
+
 	subRange = [inString rangeOfString:@"'" options:NSLiteralSearch range:range];
 	if( subRange.location == NSNotFound )
 		return inString;
