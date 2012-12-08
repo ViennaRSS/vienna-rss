@@ -2462,8 +2462,24 @@ static Database * _sharedDatabase = nil;
  */
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
 {
-	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-	[self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%d and message_id='%@'", isFlagged, folderId, preparedGuid];
+	Folder * folder = [self folderFromID:folderId];
+	if (folder != nil)
+	{
+		// Prime the article cache
+		[self initArticleArray:folder];
+
+		Article * article = [folder articleFromGuid:guid];
+		if (article != nil && isFlagged != [article isFlagged])
+		{
+			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
+
+			// Verify we're on the right thread
+			[self verifyThreadSafety];
+
+			// Mark an individual article flagged
+			[self executeSQLWithFormat:@"update messages set marked_flag=%ld where folder_id=%ld and message_id='%@'", isFlagged, folderId, preparedGuid];
+		}
+	}
 }
 
 /* markArticleDeleted
