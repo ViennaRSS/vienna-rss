@@ -1606,7 +1606,7 @@ static Database * _sharedDatabase = nil;
 		NSTimeInterval timeDiff = [[[NSCalendarDate calendarDate] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
 
 		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag<>0 and date < %f", timeDiff];
 		[results release];
 	}
 }
@@ -1620,7 +1620,7 @@ static Database * _sharedDatabase = nil;
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
 
-	SQLResult * results = [sqlDatabase performQuery:@"delete from messages where deleted_flag=1"];
+	SQLResult * results = [sqlDatabase performQuery:@"delete from messages where deleted_flag<>0"];
 	if (results)
 	{
 		[self compactDatabase];
@@ -2499,7 +2499,7 @@ static Database * _sharedDatabase = nil;
 -(BOOL)isTrashEmpty
 {
 	[self verifyThreadSafety];
-	SQLResult * results = [sqlDatabase performQuery:@"select deleted_flag from messages where deleted_flag=1"];
+	SQLResult * results = [sqlDatabase performQuery:@"select deleted_flag from messages where deleted_flag<>0"];
 	if (results)
 	{
 		if ([results rowCount] > 0)
