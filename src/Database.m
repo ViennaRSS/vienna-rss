@@ -209,13 +209,13 @@ static Database * _sharedDatabase = nil;
 		[todayCriteria release];
 
 		// Create the trash folder
-		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %d, 0, 0, 0)",
+		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %ld, 0, 0, 0)",
 			NSLocalizedString(@"Trash", nil),
 			MA_Trash_Folder];
 
 		// Set the initial version
 		databaseVersion = MA_Current_DB_Version;
-		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_Manual];
+		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%ld, 0, %ld)", databaseVersion, MA_FolderSort_Manual];
 		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
 		
 		// Set the initial folder order
@@ -287,7 +287,7 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
 		[self commitTransaction];
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
+		NSLog(@"Updated database schema to version %ld.", databaseVersion);
 	}
 	
 	// Upgrade to rev 14.
@@ -317,13 +317,13 @@ static Database * _sharedDatabase = nil;
 			{
 				NSInteger folderId = [[row stringForColumn:@"folder_id"] intValue];
 				NSInteger parentId = [[row stringForColumn:@"parent_id"] intValue];
-				[self executeSQLWithFormat:@"update folders set parent_id=%d where folder_id=%d", parentId, folderId];
+				[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", parentId, folderId];
 			}
 		}
 		[results release];
 		
 		[self commitTransaction];
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
+		NSLog(@"Updated database schema to version %ld.", databaseVersion);
 
 	}
 	
@@ -337,9 +337,9 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"alter table info add column folder_sort"];
 		
 		NSInteger oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
-		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
+		[self executeSQLWithFormat:@"update info set folder_sort=%ld", oldFoldersTreeSortMethod];
 		[self commitTransaction];
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
+		NSLog(@"Updated database schema to version %ld.", databaseVersion);
 	}
 	
 	// Upgrade to rev 16.
@@ -499,7 +499,7 @@ static Database * _sharedDatabase = nil;
 		
 		NSString * preparedCriteriaString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
 		
-		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", [sqlDatabase lastInsertRowId], preparedCriteriaString];
+		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')", [sqlDatabase lastInsertRowId], preparedCriteriaString];
 		[criteriaTree release];
 	}
 }
@@ -611,9 +611,9 @@ static Database * _sharedDatabase = nil;
  */
 -(void)setDatabaseVersion:(NSInteger)newVersion
 {
-	[self executeSQLWithFormat:@"update info set version=%d", newVersion];
+	[self executeSQLWithFormat:@"update info set version=%ld", newVersion];
 	databaseVersion = newVersion;
-	NSLog(@"Updated database schema to version %d.", databaseVersion);
+	NSLog(@"Updated database schema to version %ld.", databaseVersion);
 }
 
 /* readOnly
@@ -666,7 +666,7 @@ static Database * _sharedDatabase = nil;
 	if (folder != nil)
 	{
 		[folder clearFlag:flag];
-		[self executeSQLWithFormat:@"update folders set flags=%d where folder_id=%d", [folder flags], folderId];
+		[self executeSQLWithFormat:@"update folders set flags=%ld where folder_id=%ld", [folder flags], folderId];
 	}
 }
 
@@ -683,7 +683,7 @@ static Database * _sharedDatabase = nil;
 	if (folder != nil)
 	{
 		[folder setFlag:flag];
-		[self executeSQLWithFormat:@"update folders set flags=%d where folder_id=%d", [folder flags], folderId];
+		[self executeSQLWithFormat:@"update folders set flags=%ld where folder_id=%ld", [folder flags], folderId];
 	}
 }
 
@@ -705,7 +705,7 @@ static Database * _sharedDatabase = nil;
 
 		[folder setLastUpdate:lastUpdate];
 		NSTimeInterval interval = [lastUpdate timeIntervalSince1970];
-		[self executeSQLWithFormat:@"update folders set last_update=%f where folder_id=%d", interval, folderId];
+		[self executeSQLWithFormat:@"update folders set last_update=%f where folder_id=%ld", interval, folderId];
 	}
 }
 
@@ -726,7 +726,7 @@ static Database * _sharedDatabase = nil;
 			return;
 		
 		[folder setLastUpdateString:lastUpdateString];
-		[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%d", [folder lastUpdateString], folderId];
+		[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%ld", [folder lastUpdateString], folderId];
 	}
 }
 
@@ -745,7 +745,7 @@ static Database * _sharedDatabase = nil;
 		NSString * preparedURL = [SQLDatabase prepareStringForQuery:url];
 
 		[folder setFeedURL:url];
-		[self executeSQLWithFormat:@"update rss_folders set feed_url='%@' where folder_id=%d", preparedURL, folderId];
+		[self executeSQLWithFormat:@"update rss_folders set feed_url='%@' where folder_id=%ld", preparedURL, folderId];
 	}
 	return YES;
 }
@@ -762,7 +762,7 @@ static Database * _sharedDatabase = nil;
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:
 							   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-							   "values (%d, '%@', '', '', '', '%@', %d)",
+							   "values (%ld, '%@', '', '', '', '%@', %d)",
 							   folderId,
 							   preparedName,
 							   preparedURL,
@@ -792,7 +792,7 @@ static Database * _sharedDatabase = nil;
 		[self verifyThreadSafety];
 		SQLResult * results = [sqlDatabase performQueryWithFormat:
 					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-					 "values (%d, '', '', '', '', '%@', %d)",
+					 "values (%ld, '', '', '', '', '%@', %d)",
 					folderId,
 					preparedURL,
 					0];
@@ -855,7 +855,7 @@ static Database * _sharedDatabase = nil;
 		if (predecessorId < 0)
 		{
 			[self verifyThreadSafety];
-			SQLResult * siblings = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=0", parentId];
+			SQLResult * siblings = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=0", parentId];
 			predecessorId = (siblings && [siblings rowCount]) ? [[[siblings rowAtIndex:0] stringForColumn:@"folder_id"] intValue] : 0;
 			[siblings release];			
 		}
@@ -926,7 +926,7 @@ static Database * _sharedDatabase = nil;
 	// the field here even if its just to an empty value.
 	[self verifyThreadSafety];
 	SQLResult * results = [sqlDatabase performQueryWithFormat:
-		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %d, 0, %f, %d, %d, %d, %d)",
+		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %ld, 0, %f, %ld, %ld, %ld, %ld)",
 		preparedName,
 		parentId,
 		interval,
@@ -979,14 +979,14 @@ static Database * _sharedDatabase = nil;
 	folder = [self folderFromID:folderId];
 	countOfUnread -= [folder unreadCount];
 	if (IsSmartFolder(folder))
-		[self executeSQLWithFormat:@"delete from smart_folders where folder_id=%d", folderId];
+		[self executeSQLWithFormat:@"delete from smart_folders where folder_id=%ld", folderId];
 
 	// If this is an RSS feed, delete from the feeds
 	// and delete raw feed source
 	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 	{
-		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%d", folderId];
-		[self executeSQLWithFormat:@"delete from rss_guids where folder_id=%d", folderId];
+		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%ld", folderId];
+		[self executeSQLWithFormat:@"delete from rss_guids where folder_id=%ld", folderId];
 		
 		NSString * feedSourceFilePath = [folder feedSourceFilePath];
 		if (feedSourceFilePath != nil)
@@ -1016,7 +1016,7 @@ static Database * _sharedDatabase = nil;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%d and next_sibling=%d", [folder parentId], folderId];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=%ld", [folder parentId], folderId];
 		if (results && [results rowCount])
 		{
 			NSInteger previousSibling = [[[results rowAtIndex:0] stringForColumn:@"folder_id"] intValue];
@@ -1029,8 +1029,8 @@ static Database * _sharedDatabase = nil;
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
 	// normal folder had it's type grobbed to MA_Smart_Folder.
-	[self executeSQLWithFormat:@"delete from messages where folder_id=%d", folderId];
-	[self executeSQLWithFormat:@"delete from folders where folder_id=%d", folderId];
+	[self executeSQLWithFormat:@"delete from messages where folder_id=%ld", folderId];
+	[self executeSQLWithFormat:@"delete from folders where folder_id=%ld", folderId];
 
 	// Remove from the folders array. Do this after we send the notification
 	// so that the notification handlers don't fail if they try to dereference the
@@ -1108,7 +1108,7 @@ static Database * _sharedDatabase = nil;
 
 	// Rename in the database
 	NSString * preparedNewName = [SQLDatabase prepareStringForQuery:newName];
-	[self executeSQLWithFormat:@"update folders set foldername='%@' where folder_id=%d", preparedNewName, folderId];
+	[self executeSQLWithFormat:@"update folders set foldername='%@' where folder_id=%ld", preparedNewName, folderId];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the name is the part that has changed.
@@ -1139,7 +1139,7 @@ static Database * _sharedDatabase = nil;
 	
 	// Add a new description or update the one we have
 	NSString * preparedNewDescription = [SQLDatabase prepareStringForQuery:newDescription];
-	[self executeSQLWithFormat:@"update rss_folders set description='%@' where folder_id=%d", preparedNewDescription, folderId];
+	[self executeSQLWithFormat:@"update rss_folders set description='%@' where folder_id=%ld", preparedNewDescription, folderId];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the description is the part that has changed.
@@ -1170,7 +1170,7 @@ static Database * _sharedDatabase = nil;
 
 	// Add a new link or update the one we have
 	NSString * preparedNewLink = [SQLDatabase prepareStringForQuery:newHomePage];
-	[self executeSQLWithFormat:@"update rss_folders set home_page='%@' where folder_id=%d", preparedNewLink, folderId];
+	[self executeSQLWithFormat:@"update rss_folders set home_page='%@' where folder_id=%ld", preparedNewLink, folderId];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
@@ -1201,7 +1201,7 @@ static Database * _sharedDatabase = nil;
 	
 	// Add a new link or update the one we have
 	NSString * preparedName = [SQLDatabase prepareStringForQuery:name];
-	[self executeSQLWithFormat:@"update rss_folders set username='%@' where folder_id=%d", preparedName, folderId];
+	[self executeSQLWithFormat:@"update rss_folders set username='%@' where folder_id=%ld", preparedName, folderId];
 	return YES;
 }
 
@@ -1260,7 +1260,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Update the database now
-	[self executeSQLWithFormat:@"update folders set parent_id=%d where folder_id=%d", newParentID, folderId];
+	[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", newParentID, folderId];
 	return YES;
 }
 
@@ -1275,7 +1275,7 @@ static Database * _sharedDatabase = nil;
 	
 	if (folderId == MA_Root_Folder)
 	{
-		[self executeSQLWithFormat:@"update info set first_folder=%d", childId];
+		[self executeSQLWithFormat:@"update info set first_folder=%ld", childId];
 	}
 	else
 	{
@@ -1285,7 +1285,7 @@ static Database * _sharedDatabase = nil;
 		
 		[folder setFirstChildId:childId];
 		
-		[self executeSQLWithFormat:@"update folders set first_child=%d where folder_id=%d", childId, folderId];
+		[self executeSQLWithFormat:@"update folders set first_child=%ld where folder_id=%ld", childId, folderId];
 	}
 	
 	return YES;
@@ -1306,7 +1306,7 @@ static Database * _sharedDatabase = nil;
 	
 	[folder setNextSiblingId:nextSiblingId];
 	
-	[self executeSQLWithFormat:@"update folders set next_sibling=%d where folder_id=%d", nextSiblingId, folderId];
+	[self executeSQLWithFormat:@"update folders set next_sibling=%ld where folder_id=%ld", nextSiblingId, folderId];
 	return YES;
 }
 
@@ -1392,7 +1392,7 @@ static Database * _sharedDatabase = nil;
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification
 {
 	if (!readOnly)
-		[self executeSQLWithFormat:@"update info set folder_sort=%d", [[Preferences standardPreferences] foldersTreeSortMethod]];
+		[self executeSQLWithFormat:@"update info set folder_sort=%ld", [[Preferences standardPreferences] foldersTreeSortMethod]];
 }
 
 /* createArticle
@@ -1474,7 +1474,7 @@ static Database * _sharedDatabase = nil;
 			
 			results = [sqlDatabase performQueryWithFormat:
 				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
-				@"values('%@', %d, %d, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@',%d)",
+				@"values('%@', %ld, %ld, '%@', '%@', %f, %f, %ld, %ld, %ld, '%@', '%@', %ld, '%@',%d)",
 				preparedArticleGuid,
 				parentId,
 				folderID,
@@ -1493,7 +1493,7 @@ static Database * _sharedDatabase = nil;
 			if (!results)
 				return NO;
 			[results release];
-			[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %d)", preparedArticleGuid, folderID];
+			[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %ld)", preparedArticleGuid, folderID];
 			
 			// Add the article to the folder
 			[article setStatus:MA_MsgStatus_New];
@@ -1547,8 +1547,8 @@ static Database * _sharedDatabase = nil;
 					revised_flag = YES;
 				
 				SQLResult * results;
-				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%d, sender='%@', link='%@', date=%f, "
-					@"read_flag=0, title='%@', text='%@', revised_flag=%d where folder_id=%d and message_id='%@'",
+				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
+					@"read_flag=0, title='%@', text='%@', revised_flag=%ld where folder_id=%ld and message_id='%@'",
 					parentId,
 					preparedUserName,
 					preparedArticleLink,
@@ -1650,7 +1650,7 @@ static Database * _sharedDatabase = nil;
 			// Verify we're on the right thread
 			[self verifyThreadSafety];
 			
-			SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where folder_id=%d and message_id='%@'", folderId, preparedGuid];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"delete from messages where folder_id=%ld and message_id='%@'", folderId, preparedGuid];
 			if (results)
 			{
 				if (![article isRead])
@@ -1728,7 +1728,7 @@ static Database * _sharedDatabase = nil;
 	if (folderId != -1)
 	{
 		NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
-		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%d, '%@')", folderId, preparedQueryString];
+		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')", folderId, preparedQueryString];
 		[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 	}
 	return folderId;
@@ -1745,7 +1745,7 @@ static Database * _sharedDatabase = nil;
 	
 	// Update the smart folder string
 	NSString * preparedQueryString = [SQLDatabase prepareStringForQuery:[criteriaTree string]];
-	[self executeSQLWithFormat:@"update smart_folders set search_string='%@' where folder_id=%d", preparedQueryString, folderId];
+	[self executeSQLWithFormat:@"update smart_folders set search_string='%@' where folder_id=%ld", preparedQueryString, folderId];
 	[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -1930,7 +1930,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%d", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", folderId];
 		if (results && [results rowCount])
 		{
 			NSInteger unread_count = 0;
@@ -2244,7 +2244,7 @@ static Database * _sharedDatabase = nil;
 		else
 		{
 			[self verifyThreadSafety];
-			SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from messages where folder_id=%d and read_flag=0", folderId];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from messages where folder_id=%ld and read_flag=0", folderId];
 			if (results && [results rowCount])
 			{				
 				for (SQLRow * row in [results rowEnumerator])
@@ -2377,7 +2377,7 @@ static Database * _sharedDatabase = nil;
 	if (folder != nil && [folder unreadCount] > 0)
 	{
 		[self verifyThreadSafety];
-		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%d and read_flag=0", folderId];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", folderId];
 		if (results)
 		{
 			NSInteger count = [folder unreadCount];
@@ -2423,7 +2423,7 @@ static Database * _sharedDatabase = nil;
 			[self verifyThreadSafety];
 
 			// Mark an individual article read
-			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%d where folder_id=%d and message_id='%@'", isRead, folderId, preparedGuid];
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=%ld where folder_id=%ld and message_id='%@'", isRead, folderId, preparedGuid];
 			if (results)
 			{
 				NSInteger adjustment = (isRead ? -1 : 1);
@@ -2445,7 +2445,7 @@ static Database * _sharedDatabase = nil;
 {
 	NSInteger unreadCount = [folder unreadCount];
 	[folder setUnreadCount:unreadCount + adjustment];
-	[self executeSQLWithFormat:@"update folders set unread_count=%d where folder_id=%d", [folder unreadCount], [folder itemId]];
+	[self executeSQLWithFormat:@"update folders set unread_count=%ld where folder_id=%ld", [folder unreadCount], [folder itemId]];
 	
 	// Update childUnreadCount for our parent. Since we're just working
 	// on one article, we do this the faster way.
@@ -2474,7 +2474,7 @@ static Database * _sharedDatabase = nil;
 	if (isDeleted)
 		[self markArticleRead:folderId guid:guid isRead:YES];
 	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-	[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%d and message_id='%@'", isDeleted, folderId, preparedGuid];
+	[self executeSQLWithFormat:@"update messages set deleted_flag=%ld where folder_id=%ld and message_id='%@'", isDeleted, folderId, preparedGuid];
 }
 
 /* isTrashEmpty
@@ -2509,7 +2509,7 @@ static Database * _sharedDatabase = nil;
 	NSMutableArray * articleGuids = [NSMutableArray array];
 	
 	[self verifyThreadSafety];
-	SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from rss_guids where folder_id=%i", folderId];
+	SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id from rss_guids where folder_id=%ld", folderId];
 	if (results)
 	{
 		if ([results rowCount] > 0)
