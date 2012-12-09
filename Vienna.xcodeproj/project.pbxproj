@@ -61,6 +61,7 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
@@ -787,6 +788,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A7567A91674EB48009C0900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43BA97111663EA5000B95F35;
+			remoteInfo = JSONKit;
+		};
 		430C4AD71661730D0079C9FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -868,7 +876,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 43BA97111663EA5000B95F35 /* JSONKit */;
+			remoteGlobalIDString = 43BA97111663EA5000B95F35;
 			remoteInfo = JSONKit;
 		};
 /* End PBXContainerItemProxy section */
@@ -1829,6 +1837,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */,
 				B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */,
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */,
@@ -3391,6 +3400,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3A7567AA1674EB48009C0900 /* PBXTargetDependency */,
 				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 				43BA979616644E3900B95F35 /* PBXTargetDependency */,
 				43BA97C816646E6D00B95F35 /* PBXTargetDependency */,
@@ -4305,6 +4315,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A7567AA1674EB48009C0900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43BA97111663EA5000B95F35 /* JSONKit */;
+			targetProxy = 3A7567A91674EB48009C0900 /* PBXContainerItemProxy */;
+		};
 		430C4AD81661730D0079C9FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
