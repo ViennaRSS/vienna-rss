@@ -160,7 +160,6 @@
 		43BA977816642BAC00B95F35 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
 		43BA977916642BAD00B95F35 /* ASIProgressDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */; };
 		43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */; };
-		43BA97B51664681200B95F35 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA970A1663E80700B95F35 /* libSQLiteLib.a */; };
 		43BA97D2166475BC00B95F35 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
@@ -611,6 +610,8 @@
 		43EE85F4165EAA71000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8379165EAA70000997FB /* SearchFolder.nib */; };
 		43EE85F5165EAA71000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE837B165EAA70000997FB /* SearchFolder.strings */; };
 		43EE85F6165EAA71000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE837D165EAA70000997FB /* SyncPreferences.xib */; };
+		43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
+		43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
 		6624683713C5D09400C85417 /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
@@ -835,13 +836,6 @@
 			remoteGlobalIDString = 43BA973B16642A7D00B95F35;
 			remoteInfo = ASIHTTPRequest;
 		};
-		43BA97B31664680A00B95F35 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43BA97111663EA5000B95F35;
-			remoteInfo = JSONKit;
-		};
 		43BA97C716646E6D00B95F35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -869,6 +863,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 43BA97191663EACF00B95F35;
 			remoteInfo = GTMHTTP;
+		};
+		43F9A93F1674D05300A9A8F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43BA97111663EA5000B95F35 /* JSONKit */;
+			remoteInfo = JSONKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1805,6 +1806,7 @@
 				43BA9955166485C100B95F35 /* SystemConfiguration.framework in Frameworks */,
 				43BA9956166485C100B95F35 /* WebKit.framework in Frameworks */,
 				43BA995B166486E500B95F35 /* libGTMHTTP.a in Frameworks */,
+				43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1838,7 +1840,6 @@
 				435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */,
 				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */,
-				43BA97B51664681200B95F35 /* libJSONKit.a in Frameworks */,
 				43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
 				43BA980D166484BC00B95F35 /* GTMOAuth2.framework in Frameworks */,
@@ -3331,6 +3332,7 @@
 			);
 			dependencies = (
 				43BA995A166486DD00B95F35 /* PBXTargetDependency */,
+				43F9A9401674D05300A9A8F9 /* PBXTargetDependency */,
 			);
 			name = GTMOAuth2;
 			productName = GTMOAuth2;
@@ -3391,7 +3393,6 @@
 			dependencies = (
 				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 				43BA979616644E3900B95F35 /* PBXTargetDependency */,
-				43BA97B41664680A00B95F35 /* PBXTargetDependency */,
 				43BA97C816646E6D00B95F35 /* PBXTargetDependency */,
 				43BA97DA1664766100B95F35 /* PBXTargetDependency */,
 				43BA980C166484AE00B95F35 /* PBXTargetDependency */,
@@ -4055,6 +4056,7 @@
 				43EE85F6165EAA71000997FB /* SyncPreferences.xib in Resources */,
 				430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */,
 				430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */,
+				43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4338,11 +4340,6 @@
 			target = 43BA973B16642A7D00B95F35 /* ASIHTTPRequest */;
 			targetProxy = 43BA979516644E3900B95F35 /* PBXContainerItemProxy */;
 		};
-		43BA97B41664680A00B95F35 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43BA97111663EA5000B95F35 /* JSONKit */;
-			targetProxy = 43BA97B31664680A00B95F35 /* PBXContainerItemProxy */;
-		};
 		43BA97C816646E6D00B95F35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43BA97091663E80700B95F35 /* SQLiteLib */;
@@ -4362,6 +4359,11 @@
 			isa = PBXTargetDependency;
 			target = 43BA97191663EACF00B95F35 /* GTMHTTP */;
 			targetProxy = 43BA9959166486DD00B95F35 /* PBXContainerItemProxy */;
+		};
+		43F9A9401674D05300A9A8F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43BA97111663EA5000B95F35 /* JSONKit */;
+			targetProxy = 43F9A93F1674D05300A9A8F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
