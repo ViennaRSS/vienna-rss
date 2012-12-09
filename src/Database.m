@@ -1938,14 +1938,14 @@ static Database * _sharedDatabase = nil;
 
 			for (row in [results rowEnumerator])
 			{
-				NSString * guid = [row stringForColumn:@"message_id"];
-				BOOL read_flag = [[row stringForColumn:@"read_flag"] intValue];
-				BOOL revised_flag = [[row stringForColumn:@"revised_flag"] intValue];
-				BOOL deleted_flag = [[row stringForColumn:@"deleted_flag"] intValue];
-				BOOL hasenclosure_flag = [[row stringForColumn:@"hasenclosure_flag"] intValue];
-				NSString * title = [row stringForColumn:@"title"];
-				NSString * link = [row stringForColumn:@"link"];
-				NSString * enclosure = [row stringForColumn:@"enclosure"];
+				NSString * guid = [row stringForColumnAtIndex:0];
+				BOOL read_flag = [[row stringForColumnAtIndex:1] intValue];
+				BOOL deleted_flag = [[row stringForColumnAtIndex:2] intValue];
+				NSString * title = [row stringForColumnAtIndex:3];
+				NSString * link = [row stringForColumnAtIndex:4];
+				BOOL revised_flag = [[row stringForColumnAtIndex:5] intValue];
+				BOOL hasenclosure_flag = [[row stringForColumnAtIndex:6] intValue];
+				NSString * enclosure = [row stringForColumnAtIndex:7];
 
 				// Keep our own track of unread articles
 				if (!read_flag)
