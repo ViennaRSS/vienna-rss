@@ -61,6 +61,7 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
@@ -72,7 +73,7 @@
 		435021D4165DCB980018EDB7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D3165DCB980018EDB7 /* Security.framework */; };
 		435021D6165DCB980018EDB7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D5165DCB980018EDB7 /* SystemConfiguration.framework */; };
 		435021D8165DCB980018EDB7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D7165DCB980018EDB7 /* WebKit.framework */; };
-		435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; };
+		435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABA673414C7536D00251925 /* libz.dylib */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
@@ -160,7 +161,6 @@
 		43BA977816642BAC00B95F35 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
 		43BA977916642BAD00B95F35 /* ASIProgressDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */; };
 		43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */; };
-		43BA97B51664681200B95F35 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA970A1663E80700B95F35 /* libSQLiteLib.a */; };
 		43BA97D2166475BC00B95F35 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
@@ -174,74 +174,6 @@
 		43BA9956166485C100B95F35 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D7165DCB980018EDB7 /* WebKit.framework */; };
 		43BA995B166486E500B95F35 /* libGTMHTTP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA971A1663EACF00B95F35 /* libGTMHTTP.a */; };
 		43BA9960166486FF00B95F35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D3165DCB980018EDB7 /* Security.framework */; };
-		43EE838B165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F29165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE838C165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F2B165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE838D165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F2D165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE838E165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F2F165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE838F165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F31165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE8390165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F33165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE8391165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F35165EAA6E000997FB /* errorpage.html */; };
-		43EE8392165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F37165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE8393165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F39165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE8394165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F3B165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE8395165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F3D165EAA6E000997FB /* GeneralPreferences.strings */; };
-		43EE8396165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F3F165EAA6E000997FB /* GroupFolder.nib */; };
-		43EE8397165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F41165EAA6E000997FB /* GroupFolder.strings */; };
-		43EE8398165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F43165EAA6E000997FB /* InfoPlist.strings */; };
-		43EE8399165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F45165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE839A165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F47165EAA6E000997FB /* InfoWindow.strings */; };
-		43EE839B165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F49165EAA6E000997FB /* Localizable.strings */; };
-		43EE839C165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F4B165EAA6E000997FB /* RSSFeed.nib */; };
-		43EE839D165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F4D165EAA6E000997FB /* RSSFeed.strings */; };
-		43EE839E165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F4F165EAA6E000997FB /* RSSSources.plist */; };
-		43EE839F165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F51165EAA6E000997FB /* SearchFolder.nib */; };
-		43EE83A0165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F53165EAA6E000997FB /* SearchFolder.strings */; };
-		43EE83A1165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F55165EAA6E000997FB /* SyncPreferences.xib */; };
-		43EE83AE165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F66165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE83AF165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F68165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE83B0165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F6A165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE83B1165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F6C165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE83B2165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F6E165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE83B3165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F70165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE83B4165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F72165EAA6E000997FB /* errorpage.html */; };
-		43EE83B5165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F74165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE83B6165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F76165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE83B7165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F78165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE83B8165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F7A165EAA6E000997FB /* GeneralPreferences.strings */; };
-		43EE83B9165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F7C165EAA6E000997FB /* GroupFolder.nib */; };
-		43EE83BA165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F7E165EAA6E000997FB /* GroupFolder.strings */; };
-		43EE83BB165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F80165EAA6E000997FB /* InfoPlist.strings */; };
-		43EE83BC165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F82165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE83BD165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F84165EAA6E000997FB /* InfoWindow.strings */; };
-		43EE83BE165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F86165EAA6E000997FB /* Localizable.strings */; };
-		43EE83BF165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F88165EAA6E000997FB /* RSSFeed.nib */; };
-		43EE83C0165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F8A165EAA6E000997FB /* RSSFeed.strings */; };
-		43EE83C1165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F8C165EAA6E000997FB /* SearchFolder.nib */; };
-		43EE83C2165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F8E165EAA6E000997FB /* SearchFolder.strings */; };
-		43EE83C3165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F90165EAA6E000997FB /* SyncPreferences.xib */; };
-		43EE83CE165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F9F165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE83CF165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FA1165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE83D0165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FA3165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE83D1165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FA5165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE83D2165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FA7165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE83D3165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FA9165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE83D4165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FAB165EAA6E000997FB /* errorpage.html */; };
-		43EE83D5165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FAD165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE83D6165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FAF165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE83D7165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FB1165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE83D8165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FB3165EAA6E000997FB /* GeneralPreferences.strings */; };
-		43EE83D9165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FB5165EAA6E000997FB /* GroupFolder.nib */; };
-		43EE83DA165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FB7165EAA6E000997FB /* GroupFolder.strings */; };
-		43EE83DB165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FB9165EAA6E000997FB /* InfoPlist.strings */; };
-		43EE83DC165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FBB165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE83DD165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FBD165EAA6E000997FB /* InfoWindow.strings */; };
-		43EE83DE165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FBF165EAA6E000997FB /* Localizable.strings */; };
-		43EE83DF165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FC1165EAA6E000997FB /* RSSFeed.nib */; };
-		43EE83E0165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FC3165EAA6E000997FB /* RSSFeed.strings */; };
-		43EE83E1165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FC5165EAA6E000997FB /* RSSSources.plist */; };
-		43EE83E2165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FC7165EAA6E000997FB /* SearchFolder.nib */; };
-		43EE83E3165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FC9165EAA6E000997FB /* SearchFolder.strings */; };
-		43EE83E4165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FCB165EAA6E000997FB /* SyncPreferences.xib */; };
 		43EE83EE165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FD9165EAA6E000997FB /* AdvancedPreferences.nib */; };
 		43EE83EF165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FDB165EAA6E000997FB /* AdvancedPreferences.strings */; };
 		43EE83F0165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FDD165EAA6E000997FB /* AppearancesPreferences.nib */; };
@@ -267,350 +199,8 @@
 		43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8004165EAA6E000997FB /* SearchFolder.nib */; };
 		43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8006165EAA6E000997FB /* SearchFolder.strings */; };
 		43EE8406165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8008165EAA6E000997FB /* SyncPreferences.xib */; };
-		43EE8411165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8017165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE8412165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8019165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE8413165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE801B165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE8414165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE801D165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE8415165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE801F165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE8416165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8021165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE8417165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8023165EAA6E000997FB /* errorpage.html */; };
-		43EE8418165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8025165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE8419165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8027165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE841A165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8029165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE841B165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE802B165EAA6E000997FB /* GeneralPreferences.strings */; };
-		43EE841C165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE802D165EAA6E000997FB /* GroupFolder.nib */; };
-		43EE841D165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE802F165EAA6E000997FB /* GroupFolder.strings */; };
-		43EE841E165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8031165EAA6E000997FB /* InfoPlist.strings */; };
-		43EE841F165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8033165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE8420165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8035165EAA6E000997FB /* InfoWindow.strings */; };
-		43EE8421165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8037165EAA6E000997FB /* Localizable.strings */; };
-		43EE8422165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8039165EAA6E000997FB /* RSSFeed.nib */; };
-		43EE8423165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE803B165EAA6E000997FB /* RSSFeed.strings */; };
-		43EE8424165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE803D165EAA6E000997FB /* RSSSources.plist */; };
-		43EE8425165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE803F165EAA6E000997FB /* SearchFolder.nib */; };
-		43EE8426165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8041165EAA6E000997FB /* SearchFolder.strings */; };
-		43EE8427165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8043165EAA6E000997FB /* SyncPreferences.xib */; };
-		43EE8432165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8052165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE8433165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8054165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE8434165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8056165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE8435165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8058165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE8436165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE805A165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE8437165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE805C165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE8438165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE805E165EAA6E000997FB /* errorpage.html */; };
-		43EE8439165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8060165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE843A165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8062165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE843B165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8064165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE843C165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8066165EAA6E000997FB /* GeneralPreferences.strings */; };
-		43EE843D165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8068165EAA6E000997FB /* GroupFolder.nib */; };
-		43EE843E165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE806A165EAA6E000997FB /* GroupFolder.strings */; };
-		43EE843F165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE806C165EAA6E000997FB /* InfoPlist.strings */; };
-		43EE8440165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE806E165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE8441165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8070165EAA6E000997FB /* InfoWindow.strings */; };
-		43EE8442165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8072165EAA6E000997FB /* Localizable.strings */; };
-		43EE8443165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8074165EAA6E000997FB /* RSSFeed.nib */; };
-		43EE8444165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8076165EAA6E000997FB /* RSSFeed.strings */; };
-		43EE8445165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8078165EAA6E000997FB /* RSSSources.plist */; };
-		43EE8446165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE807A165EAA6E000997FB /* SearchFolder.nib */; };
-		43EE8447165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE807C165EAA6E000997FB /* SearchFolder.strings */; };
-		43EE8448165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE807E165EAA6E000997FB /* SyncPreferences.xib */; };
-		43EE8453165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE808D165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE8454165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE808F165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE8455165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8091165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE8456165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8093165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE8457165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8095165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE8458165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8097165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE8459165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8099165EAA6E000997FB /* errorpage.html */; };
-		43EE845A165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE809B165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE845B165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE809D165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE845C165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE809F165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE845D165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80A1165EAA6E000997FB /* GeneralPreferences.strings */; };
-		43EE845E165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80A3165EAA6E000997FB /* GroupFolder.nib */; };
-		43EE845F165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80A5165EAA6E000997FB /* GroupFolder.strings */; };
-		43EE8460165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80A7165EAA6E000997FB /* InfoPlist.strings */; };
-		43EE8461165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80A9165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE8462165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80AB165EAA6E000997FB /* InfoWindow.strings */; };
-		43EE8463165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80AD165EAA6E000997FB /* Localizable.strings */; };
-		43EE8464165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80AF165EAA6E000997FB /* RSSFeed.nib */; };
-		43EE8465165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80B1165EAA6E000997FB /* RSSFeed.strings */; };
-		43EE8466165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80B3165EAA6E000997FB /* RSSSources.plist */; };
-		43EE8467165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80B5165EAA6E000997FB /* SearchFolder.nib */; };
-		43EE8468165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80B7165EAA6E000997FB /* SearchFolder.strings */; };
-		43EE8469165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80B9165EAA6E000997FB /* SyncPreferences.xib */; };
-		43EE8474165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80C8165EAA6E000997FB /* AdvancedPreferences.nib */; };
-		43EE8475165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80CA165EAA6E000997FB /* AdvancedPreferences.strings */; };
-		43EE8476165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80CC165EAA6E000997FB /* AppearancesPreferences.nib */; };
-		43EE8477165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80CE165EAA6E000997FB /* AppearancesPreferences.strings */; };
-		43EE8478165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80D0165EAA6E000997FB /* EmptyTrashWarning.nib */; };
-		43EE8479165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80D2165EAA6E000997FB /* EmptyTrashWarning.strings */; };
-		43EE847A165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80D4165EAA6E000997FB /* errorpage.html */; };
-		43EE847B165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80D6165EAA6E000997FB /* FeedCredentials.nib */; };
-		43EE847C165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80D8165EAA6E000997FB /* FeedCredentials.strings */; };
-		43EE847D165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80DA165EAA6E000997FB /* GeneralPreferences.nib */; };
-		43EE847E165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80DC165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE847F165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80DE165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE8480165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80E0165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE8481165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80E2165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE8482165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80E4165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE8483165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80E6165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE8484165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80E8165EAA6F000997FB /* Localizable.strings */; };
-		43EE8485165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80EA165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE8486165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80EC165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE8487165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80EE165EAA6F000997FB /* RSSSources.plist */; };
-		43EE8488165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80F0165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE8489165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80F2165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE848A165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE80F4165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE8494165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8102165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE8495165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8104165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE8496165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8106165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE8497165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8108165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE8498165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE810A165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE8499165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE810C165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE849A165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE810E165EAA6F000997FB /* errorpage.html */; };
-		43EE849B165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8110165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE849C165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8112165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE849D165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8114165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE849E165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8116165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE849F165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8118165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE84A0165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE811A165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE84A1165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE811C165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE84A2165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE811E165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE84A3165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8120165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE84A4165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8122165EAA6F000997FB /* Localizable.strings */; };
-		43EE84A5165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8124165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE84A6165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8126165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE84A7165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8128165EAA6F000997FB /* RSSSources.plist */; };
-		43EE84A8165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE812A165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE84A9165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE812C165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE84AA165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE812E165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE84B5165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE813D165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE84B6165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE813F165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE84B7165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8141165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE84B8165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8143165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE84B9165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8145165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE84BA165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8147165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE84BB165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8149165EAA6F000997FB /* errorpage.html */; };
-		43EE84BC165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE814B165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE84BD165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE814D165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE84BE165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE814F165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE84BF165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8151165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE84C0165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8153165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE84C1165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8155165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE84C2165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8157165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE84C3165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8159165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE84C4165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE815B165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE84C5165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE815D165EAA6F000997FB /* Localizable.strings */; };
-		43EE84C6165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE815F165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE84C7165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8161165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE84C8165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8163165EAA6F000997FB /* RSSSources.plist */; };
-		43EE84C9165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8165165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE84CA165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8167165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE84D6165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8177165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE84D7165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8179165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE84D8165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE817B165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE84D9165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE817D165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE84DA165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE817F165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE84DB165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8181165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE84DC165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8183165EAA6F000997FB /* errorpage.html */; };
-		43EE84DD165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8185165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE84DE165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8187165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE84DF165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8189165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE84E0165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE818B165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE84E1165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE818D165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE84E2165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE818F165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE84E3165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8191165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE84E4165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8193165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE84E5165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8195165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE84E6165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8197165EAA6F000997FB /* Localizable.strings */; };
-		43EE84E7165EAA70000997FB /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8199165EAA6F000997FB /* NewPreferences.nib */; };
-		43EE84E8165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE819B165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE84E9165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE819D165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE84EA165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE819F165EAA6F000997FB /* RSSSources.plist */; };
-		43EE84EB165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81A1165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE84EC165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81A3165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE84ED165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81A5165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE84F8165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81B4165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE84F9165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81B6165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE84FA165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81B8165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE84FB165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81BA165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE84FC165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81BC165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE84FD165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81BE165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE84FE165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81C0165EAA6F000997FB /* errorpage.html */; };
-		43EE84FF165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81C2165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE8500165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81C4165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE8501165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81C6165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE8502165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81C8165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE8503165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81CA165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE8504165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81CC165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE8505165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81CE165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE8506165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81D0165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE8507165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81D2165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE8508165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81D4165EAA6F000997FB /* Localizable.strings */; };
-		43EE8509165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81D6165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE850A165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81D8165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE850B165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81DA165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE850C165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81DC165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE850D165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81DE165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE8518165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81ED165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE8519165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81EF165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE851A165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81F1165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE851B165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81F3165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE851C165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81F5165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE851D165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81F7165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE851E165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81F9165EAA6F000997FB /* errorpage.html */; };
-		43EE851F165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81FB165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE8520165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81FD165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE8521165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE81FF165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE8522165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8201165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE8523165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8203165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE8524165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8205165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE8525165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8207165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE8526165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8209165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE8527165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE820B165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE8528165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE820D165EAA6F000997FB /* Localizable.strings */; };
-		43EE8529165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE820F165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE852A165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8211165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE852B165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8213165EAA6F000997FB /* RSSSources.plist */; };
-		43EE852C165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8215165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE852D165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8217165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE852E165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8219165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE8539165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8228165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE853A165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE822A165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE853B165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE822C165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE853C165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE822E165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE853D165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8230165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE853E165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8232165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE853F165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8234165EAA6F000997FB /* errorpage.html */; };
-		43EE8540165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8236165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE8541165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8238165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE8542165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE823A165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE8543165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE823C165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE8544165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE823E165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE8545165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8240165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE8546165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8242165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE8547165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8244165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE8548165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8246165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE8549165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8248165EAA6F000997FB /* Localizable.strings */; };
-		43EE854A165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE824A165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE854B165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE824C165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE854C165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE824E165EAA6F000997FB /* RSSSources.plist */; };
-		43EE854D165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8250165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE854E165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8252165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE854F165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8254165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE855C165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8265165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE855D165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8267165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE855E165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8269165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE855F165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE826B165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE8560165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE826D165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE8561165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE826F165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE8562165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8271165EAA6F000997FB /* errorpage.html */; };
-		43EE8563165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8273165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE8564165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8275165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE8565165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8277165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE8566165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8279165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE8567165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE827B165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE8568165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE827D165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE8569165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE827F165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE856A165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8281165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE856B165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8283165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE856C165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8285165EAA6F000997FB /* Localizable.strings */; };
-		43EE856D165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8287165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE856E165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8289165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE856F165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE828B165EAA6F000997FB /* RSSSources.plist */; };
-		43EE8570165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE828D165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE8571165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE828F165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE8572165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8291165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE857D165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82A0165EAA6F000997FB /* AdvancedPreferences.nib */; };
-		43EE857E165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82A2165EAA6F000997FB /* AdvancedPreferences.strings */; };
-		43EE857F165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82A4165EAA6F000997FB /* AppearancesPreferences.nib */; };
-		43EE8580165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82A6165EAA6F000997FB /* AppearancesPreferences.strings */; };
-		43EE8581165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82A8165EAA6F000997FB /* EmptyTrashWarning.nib */; };
-		43EE8582165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82AA165EAA6F000997FB /* EmptyTrashWarning.strings */; };
-		43EE8583165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82AC165EAA6F000997FB /* errorpage.html */; };
-		43EE8584165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82AE165EAA6F000997FB /* FeedCredentials.nib */; };
-		43EE8585165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82B0165EAA6F000997FB /* FeedCredentials.strings */; };
-		43EE8586165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82B2165EAA6F000997FB /* GeneralPreferences.nib */; };
-		43EE8587165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82B4165EAA6F000997FB /* GeneralPreferences.strings */; };
-		43EE8588165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82B6165EAA6F000997FB /* GroupFolder.nib */; };
-		43EE8589165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82B8165EAA6F000997FB /* GroupFolder.strings */; };
-		43EE858A165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82BA165EAA6F000997FB /* InfoPlist.strings */; };
-		43EE858B165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82BC165EAA6F000997FB /* InfoWindow.nib */; };
-		43EE858C165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82BE165EAA6F000997FB /* InfoWindow.strings */; };
-		43EE858D165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82C0165EAA6F000997FB /* Localizable.strings */; };
-		43EE858E165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82C2165EAA6F000997FB /* RSSFeed.nib */; };
-		43EE858F165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82C4165EAA6F000997FB /* RSSFeed.strings */; };
-		43EE8590165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82C6165EAA6F000997FB /* RSSSources.plist */; };
-		43EE8591165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82C8165EAA6F000997FB /* SearchFolder.nib */; };
-		43EE8592165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82CA165EAA6F000997FB /* SearchFolder.strings */; };
-		43EE8593165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82CC165EAA6F000997FB /* SyncPreferences.xib */; };
-		43EE859E165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82DB165EAA70000997FB /* AdvancedPreferences.nib */; };
-		43EE859F165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82DD165EAA70000997FB /* AdvancedPreferences.strings */; };
-		43EE85A0165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82DF165EAA70000997FB /* AppearancesPreferences.nib */; };
-		43EE85A1165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82E1165EAA70000997FB /* AppearancesPreferences.strings */; };
-		43EE85A2165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82E3165EAA70000997FB /* EmptyTrashWarning.nib */; };
-		43EE85A3165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82E5165EAA70000997FB /* EmptyTrashWarning.strings */; };
-		43EE85A4165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82E7165EAA70000997FB /* errorpage.html */; };
-		43EE85A5165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82E9165EAA70000997FB /* FeedCredentials.nib */; };
-		43EE85A6165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82EB165EAA70000997FB /* FeedCredentials.strings */; };
-		43EE85A7165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82ED165EAA70000997FB /* GeneralPreferences.nib */; };
-		43EE85A8165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82EF165EAA70000997FB /* GeneralPreferences.strings */; };
-		43EE85A9165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82F1165EAA70000997FB /* GroupFolder.nib */; };
-		43EE85AA165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82F3165EAA70000997FB /* GroupFolder.strings */; };
-		43EE85AB165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82F5165EAA70000997FB /* InfoPlist.strings */; };
-		43EE85AC165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82F7165EAA70000997FB /* InfoWindow.nib */; };
-		43EE85AD165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82F9165EAA70000997FB /* InfoWindow.strings */; };
-		43EE85AE165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82FB165EAA70000997FB /* Localizable.strings */; };
-		43EE85AF165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82FD165EAA70000997FB /* RSSFeed.nib */; };
-		43EE85B0165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82FF165EAA70000997FB /* RSSFeed.strings */; };
-		43EE85B1165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8301165EAA70000997FB /* RSSSources.plist */; };
-		43EE85B2165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8303165EAA70000997FB /* SearchFolder.nib */; };
-		43EE85B3165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8305165EAA70000997FB /* SearchFolder.strings */; };
-		43EE85B4165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8307165EAA70000997FB /* SyncPreferences.xib */; };
-		43EE85BF165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8316165EAA70000997FB /* AdvancedPreferences.nib */; };
-		43EE85C0165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8318165EAA70000997FB /* AdvancedPreferences.strings */; };
-		43EE85C1165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE831A165EAA70000997FB /* AppearancesPreferences.nib */; };
-		43EE85C2165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE831C165EAA70000997FB /* AppearancesPreferences.strings */; };
-		43EE85C3165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE831E165EAA70000997FB /* EmptyTrashWarning.nib */; };
-		43EE85C4165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8320165EAA70000997FB /* EmptyTrashWarning.strings */; };
-		43EE85C5165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8322165EAA70000997FB /* errorpage.html */; };
-		43EE85C6165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8324165EAA70000997FB /* FeedCredentials.nib */; };
-		43EE85C7165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8326165EAA70000997FB /* FeedCredentials.strings */; };
-		43EE85C8165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8328165EAA70000997FB /* GeneralPreferences.nib */; };
-		43EE85C9165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE832A165EAA70000997FB /* GeneralPreferences.strings */; };
-		43EE85CA165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE832C165EAA70000997FB /* GroupFolder.nib */; };
-		43EE85CB165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE832E165EAA70000997FB /* GroupFolder.strings */; };
-		43EE85CC165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8330165EAA70000997FB /* InfoPlist.strings */; };
-		43EE85CD165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8332165EAA70000997FB /* InfoWindow.nib */; };
-		43EE85CE165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8334165EAA70000997FB /* InfoWindow.strings */; };
-		43EE85CF165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8336165EAA70000997FB /* Localizable.strings */; };
-		43EE85D0165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8338165EAA70000997FB /* RSSFeed.nib */; };
-		43EE85D1165EAA70000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE833A165EAA70000997FB /* RSSFeed.strings */; };
-		43EE85D2165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE833C165EAA70000997FB /* RSSSources.plist */; };
-		43EE85D3165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE833E165EAA70000997FB /* SearchFolder.nib */; };
-		43EE85D4165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8340165EAA70000997FB /* SearchFolder.strings */; };
-		43EE85D5165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8342165EAA70000997FB /* SyncPreferences.xib */; };
-		43EE85E0165EAA70000997FB /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8351165EAA70000997FB /* AdvancedPreferences.nib */; };
-		43EE85E1165EAA70000997FB /* AdvancedPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8353165EAA70000997FB /* AdvancedPreferences.strings */; };
-		43EE85E2165EAA70000997FB /* AppearancesPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8355165EAA70000997FB /* AppearancesPreferences.nib */; };
-		43EE85E3165EAA70000997FB /* AppearancesPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8357165EAA70000997FB /* AppearancesPreferences.strings */; };
-		43EE85E4165EAA70000997FB /* EmptyTrashWarning.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8359165EAA70000997FB /* EmptyTrashWarning.nib */; };
-		43EE85E5165EAA70000997FB /* EmptyTrashWarning.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE835B165EAA70000997FB /* EmptyTrashWarning.strings */; };
-		43EE85E6165EAA70000997FB /* errorpage.html in Resources */ = {isa = PBXBuildFile; fileRef = 43EE835D165EAA70000997FB /* errorpage.html */; };
-		43EE85E7165EAA70000997FB /* FeedCredentials.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE835F165EAA70000997FB /* FeedCredentials.nib */; };
-		43EE85E8165EAA70000997FB /* FeedCredentials.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8361165EAA70000997FB /* FeedCredentials.strings */; };
-		43EE85E9165EAA70000997FB /* GeneralPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8363165EAA70000997FB /* GeneralPreferences.nib */; };
-		43EE85EA165EAA70000997FB /* GeneralPreferences.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8365165EAA70000997FB /* GeneralPreferences.strings */; };
-		43EE85EB165EAA70000997FB /* GroupFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8367165EAA70000997FB /* GroupFolder.nib */; };
-		43EE85EC165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8369165EAA70000997FB /* GroupFolder.strings */; };
-		43EE85ED165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE836B165EAA70000997FB /* InfoPlist.strings */; };
-		43EE85EE165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE836D165EAA70000997FB /* InfoWindow.nib */; };
-		43EE85EF165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE836F165EAA70000997FB /* InfoWindow.strings */; };
-		43EE85F0165EAA71000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8371165EAA70000997FB /* Localizable.strings */; };
-		43EE85F1165EAA71000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8373165EAA70000997FB /* RSSFeed.nib */; };
-		43EE85F2165EAA71000997FB /* RSSFeed.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8375165EAA70000997FB /* RSSFeed.strings */; };
-		43EE85F3165EAA71000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8377165EAA70000997FB /* RSSSources.plist */; };
-		43EE85F4165EAA71000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8379165EAA70000997FB /* SearchFolder.nib */; };
-		43EE85F5165EAA71000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE837B165EAA70000997FB /* SearchFolder.strings */; };
-		43EE85F6165EAA71000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE837D165EAA70000997FB /* SyncPreferences.xib */; };
+		43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
+		43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
 		6624683713C5D09400C85417 /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
@@ -786,6 +376,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A7567A91674EB48009C0900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43BA97111663EA5000B95F35;
+			remoteInfo = JSONKit;
+		};
 		430C4AD71661730D0079C9FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -835,13 +432,6 @@
 			remoteGlobalIDString = 43BA973B16642A7D00B95F35;
 			remoteInfo = ASIHTTPRequest;
 		};
-		43BA97B31664680A00B95F35 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43BA97111663EA5000B95F35;
-			remoteInfo = JSONKit;
-		};
 		43BA97C716646E6D00B95F35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -869,6 +459,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 43BA97191663EACF00B95F35;
 			remoteInfo = GTMHTTP;
+		};
+		43F9A93F1674D05300A9A8F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 43BA97111663EA5000B95F35;
+			remoteInfo = JSONKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1805,6 +1402,7 @@
 				43BA9955166485C100B95F35 /* SystemConfiguration.framework in Frameworks */,
 				43BA9956166485C100B95F35 /* WebKit.framework in Frameworks */,
 				43BA995B166486E500B95F35 /* libGTMHTTP.a in Frameworks */,
+				43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1827,6 +1425,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */,
 				B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */,
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */,
@@ -1838,7 +1437,6 @@
 				435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */,
 				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */,
-				43BA97B51664681200B95F35 /* libJSONKit.a in Frameworks */,
 				43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
 				43BA980D166484BC00B95F35 /* GTMOAuth2.framework in Frameworks */,
@@ -3331,6 +2929,7 @@
 			);
 			dependencies = (
 				43BA995A166486DD00B95F35 /* PBXTargetDependency */,
+				43F9A9401674D05300A9A8F9 /* PBXTargetDependency */,
 			);
 			name = GTMOAuth2;
 			productName = GTMOAuth2;
@@ -3389,9 +2988,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				3A7567AA1674EB48009C0900 /* PBXTargetDependency */,
 				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 				43BA979616644E3900B95F35 /* PBXTargetDependency */,
-				43BA97B41664680A00B95F35 /* PBXTargetDependency */,
 				43BA97C816646E6D00B95F35 /* PBXTargetDependency */,
 				43BA97DA1664766100B95F35 /* PBXTargetDependency */,
 				43BA980C166484AE00B95F35 /* PBXTargetDependency */,
@@ -3616,74 +3215,6 @@
 				6624683B13C5F83000C85417 /* sync.tiff in Resources */,
 				EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */,
 				EAAF335314BDD462002A8837 /* ansani_key.pem in Resources */,
-				43EE838B165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE838C165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE838D165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE838E165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE838F165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8390165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE8391165EAA70000997FB /* errorpage.html in Resources */,
-				43EE8392165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8393165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE8394165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE8395165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE8396165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8397165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8398165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8399165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE839A165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE839B165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE839C165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE839D165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE839E165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE839F165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE83A0165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE83A1165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE83AE165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE83AF165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE83B0165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE83B1165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE83B2165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE83B3165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE83B4165EAA70000997FB /* errorpage.html in Resources */,
-				43EE83B5165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE83B6165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE83B7165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE83B8165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE83B9165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE83BA165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE83BB165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE83BC165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE83BD165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE83BE165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE83BF165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE83C0165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE83C1165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE83C2165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE83C3165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE83CE165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE83CF165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE83D0165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE83D1165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE83D2165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE83D3165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE83D4165EAA70000997FB /* errorpage.html in Resources */,
-				43EE83D5165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE83D6165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE83D7165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE83D8165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE83D9165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE83DA165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE83DB165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE83DC165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE83DD165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE83DE165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE83DF165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE83E0165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE83E1165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE83E2165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE83E3165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE83E4165EAA70000997FB /* SyncPreferences.xib in Resources */,
 				43EE83EE165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
 				43EE83EF165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
 				43EE83F0165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
@@ -3709,352 +3240,9 @@
 				43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */,
 				43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */,
 				43EE8406165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8411165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE8412165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE8413165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE8414165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8415165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8416165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE8417165EAA70000997FB /* errorpage.html in Resources */,
-				43EE8418165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8419165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE841A165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE841B165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE841C165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE841D165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE841E165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE841F165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8420165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8421165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE8422165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE8423165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE8424165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE8425165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE8426165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE8427165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8432165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE8433165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE8434165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE8435165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8436165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8437165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE8438165EAA70000997FB /* errorpage.html in Resources */,
-				43EE8439165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE843A165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE843B165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE843C165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE843D165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE843E165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE843F165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8440165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8441165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8442165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE8443165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE8444165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE8445165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE8446165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE8447165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE8448165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8453165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE8454165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE8455165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE8456165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8457165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8458165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE8459165EAA70000997FB /* errorpage.html in Resources */,
-				43EE845A165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE845B165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE845C165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE845D165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE845E165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE845F165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8460165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8461165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8462165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8463165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE8464165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE8465165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE8466165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE8467165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE8468165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE8469165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8474165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE8475165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE8476165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE8477165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8478165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8479165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE847A165EAA70000997FB /* errorpage.html in Resources */,
-				43EE847B165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE847C165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE847D165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE847E165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE847F165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8480165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8481165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8482165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8483165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8484165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE8485165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE8486165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE8487165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE8488165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE8489165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE848A165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8494165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE8495165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE8496165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE8497165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8498165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8499165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE849A165EAA70000997FB /* errorpage.html in Resources */,
-				43EE849B165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE849C165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE849D165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE849E165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE849F165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE84A0165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE84A1165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE84A2165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE84A3165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE84A4165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE84A5165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE84A6165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE84A7165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE84A8165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE84A9165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE84AA165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE84B5165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE84B6165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE84B7165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE84B8165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE84B9165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE84BA165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE84BB165EAA70000997FB /* errorpage.html in Resources */,
-				43EE84BC165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE84BD165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE84BE165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE84BF165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE84C0165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE84C1165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE84C2165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE84C3165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE84C4165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE84C5165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE84C6165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE84C7165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE84C8165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE84C9165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE84CA165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE84D6165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE84D7165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE84D8165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE84D9165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE84DA165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE84DB165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE84DC165EAA70000997FB /* errorpage.html in Resources */,
-				43EE84DD165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE84DE165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE84DF165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE84E0165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE84E1165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE84E2165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE84E3165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE84E4165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE84E5165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE84E6165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE84E7165EAA70000997FB /* NewPreferences.nib in Resources */,
-				43EE84E8165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE84E9165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE84EA165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE84EB165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE84EC165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE84ED165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE84F8165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE84F9165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE84FA165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE84FB165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE84FC165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE84FD165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE84FE165EAA70000997FB /* errorpage.html in Resources */,
-				43EE84FF165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8500165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE8501165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE8502165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE8503165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8504165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8505165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8506165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8507165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8508165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE8509165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE850A165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE850B165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE850C165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE850D165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8518165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE8519165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE851A165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE851B165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE851C165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE851D165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE851E165EAA70000997FB /* errorpage.html in Resources */,
-				43EE851F165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8520165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE8521165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE8522165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE8523165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8524165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8525165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8526165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8527165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8528165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE8529165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE852A165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE852B165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE852C165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE852D165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE852E165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE8539165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE853A165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE853B165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE853C165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE853D165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE853E165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE853F165EAA70000997FB /* errorpage.html in Resources */,
-				43EE8540165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8541165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE8542165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE8543165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE8544165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8545165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8546165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE8547165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE8548165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE8549165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE854A165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE854B165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE854C165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE854D165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE854E165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE854F165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE855C165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE855D165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE855E165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE855F165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8560165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8561165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE8562165EAA70000997FB /* errorpage.html in Resources */,
-				43EE8563165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8564165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE8565165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE8566165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE8567165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8568165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE8569165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE856A165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE856B165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE856C165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE856D165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE856E165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE856F165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE8570165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE8571165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE8572165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE857D165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE857E165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE857F165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE8580165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE8581165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE8582165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE8583165EAA70000997FB /* errorpage.html in Resources */,
-				43EE8584165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE8585165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE8586165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE8587165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE8588165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE8589165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE858A165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE858B165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE858C165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE858D165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE858E165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE858F165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE8590165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE8591165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE8592165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE8593165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE859E165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE859F165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE85A0165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE85A1165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE85A2165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE85A3165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE85A4165EAA70000997FB /* errorpage.html in Resources */,
-				43EE85A5165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE85A6165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE85A7165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE85A8165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE85A9165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE85AA165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE85AB165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE85AC165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE85AD165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE85AE165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE85AF165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE85B0165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE85B1165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE85B2165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE85B3165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE85B4165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE85BF165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE85C0165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE85C1165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE85C2165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE85C3165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE85C4165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE85C5165EAA70000997FB /* errorpage.html in Resources */,
-				43EE85C6165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE85C7165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE85C8165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE85C9165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE85CA165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE85CB165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE85CC165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE85CD165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE85CE165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE85CF165EAA70000997FB /* Localizable.strings in Resources */,
-				43EE85D0165EAA70000997FB /* RSSFeed.nib in Resources */,
-				43EE85D1165EAA70000997FB /* RSSFeed.strings in Resources */,
-				43EE85D2165EAA70000997FB /* RSSSources.plist in Resources */,
-				43EE85D3165EAA70000997FB /* SearchFolder.nib in Resources */,
-				43EE85D4165EAA70000997FB /* SearchFolder.strings in Resources */,
-				43EE85D5165EAA70000997FB /* SyncPreferences.xib in Resources */,
-				43EE85E0165EAA70000997FB /* AdvancedPreferences.nib in Resources */,
-				43EE85E1165EAA70000997FB /* AdvancedPreferences.strings in Resources */,
-				43EE85E2165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
-				43EE85E3165EAA70000997FB /* AppearancesPreferences.strings in Resources */,
-				43EE85E4165EAA70000997FB /* EmptyTrashWarning.nib in Resources */,
-				43EE85E5165EAA70000997FB /* EmptyTrashWarning.strings in Resources */,
-				43EE85E6165EAA70000997FB /* errorpage.html in Resources */,
-				43EE85E7165EAA70000997FB /* FeedCredentials.nib in Resources */,
-				43EE85E8165EAA70000997FB /* FeedCredentials.strings in Resources */,
-				43EE85E9165EAA70000997FB /* GeneralPreferences.nib in Resources */,
-				43EE85EA165EAA70000997FB /* GeneralPreferences.strings in Resources */,
-				43EE85EB165EAA70000997FB /* GroupFolder.nib in Resources */,
-				43EE85EC165EAA70000997FB /* GroupFolder.strings in Resources */,
-				43EE85ED165EAA70000997FB /* InfoPlist.strings in Resources */,
-				43EE85EE165EAA70000997FB /* InfoWindow.nib in Resources */,
-				43EE85EF165EAA70000997FB /* InfoWindow.strings in Resources */,
-				43EE85F0165EAA71000997FB /* Localizable.strings in Resources */,
-				43EE85F1165EAA71000997FB /* RSSFeed.nib in Resources */,
-				43EE85F2165EAA71000997FB /* RSSFeed.strings in Resources */,
-				43EE85F3165EAA71000997FB /* RSSSources.plist in Resources */,
-				43EE85F4165EAA71000997FB /* SearchFolder.nib in Resources */,
-				43EE85F5165EAA71000997FB /* SearchFolder.strings in Resources */,
-				43EE85F6165EAA71000997FB /* SyncPreferences.xib in Resources */,
 				430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */,
 				430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */,
+				43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4303,6 +3491,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A7567AA1674EB48009C0900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43BA97111663EA5000B95F35 /* JSONKit */;
+			targetProxy = 3A7567A91674EB48009C0900 /* PBXContainerItemProxy */;
+		};
 		430C4AD81661730D0079C9FC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 430C4ACF166172BD0079C9FC /* Autorevision */;
@@ -4338,11 +3531,6 @@
 			target = 43BA973B16642A7D00B95F35 /* ASIHTTPRequest */;
 			targetProxy = 43BA979516644E3900B95F35 /* PBXContainerItemProxy */;
 		};
-		43BA97B41664680A00B95F35 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43BA97111663EA5000B95F35 /* JSONKit */;
-			targetProxy = 43BA97B31664680A00B95F35 /* PBXContainerItemProxy */;
-		};
 		43BA97C816646E6D00B95F35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43BA97091663E80700B95F35 /* SQLiteLib */;
@@ -4362,6 +3550,11 @@
 			isa = PBXTargetDependency;
 			target = 43BA97191663EACF00B95F35 /* GTMHTTP */;
 			targetProxy = 43BA9959166486DD00B95F35 /* PBXContainerItemProxy */;
+		};
+		43F9A9401674D05300A9A8F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 43BA97111663EA5000B95F35 /* JSONKit */;
+			targetProxy = 43F9A93F1674D05300A9A8F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
