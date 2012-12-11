@@ -775,7 +775,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 			// Synthesize feed link if it is missing
 			if (feedLink == nil || [feedLink isBlank])
 				feedLink = [[folder feedURL] baseURL];
-			if (feedLink != nil && ![feedLink hasPrefix:@"http"])
+			if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"])
 				feedLink = [[NSURL URLWithString:feedLink relativeToURL:url] absoluteString];
 
 			
@@ -830,7 +830,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 				[article setBody:[newsItem description]];
 				[article setTitle:[newsItem title]];
 				NSString * articleLink = [newsItem link];
-				if (![articleLink hasPrefix:@"http"])
+				if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"])
 					articleLink = [[NSURL URLWithString:articleLink relativeToURL:url] absoluteString];
 				if (articleLink == nil)
 					articleLink = feedLink;

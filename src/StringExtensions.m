@@ -67,7 +67,7 @@
 			
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http://"])
+			if (![srcPath hasPrefix:@"http://"] && ![srcPath hasPrefix:@"https://"])
 			{
 				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (escapedSrcPath != nil)
@@ -125,7 +125,7 @@
 
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http://"])
+			if (![srcPath hasPrefix:@"http://"] && ![srcPath hasPrefix:@"https://"])
 			{
 				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (escapedSrcPath != nil)
@@ -366,6 +366,8 @@ static NSMutableDictionary * entityMap = nil;
 
 	if ([self hasPrefix:@"http://"])
 		beginning = 6;
+	if ([self hasPrefix:@"https://"])
+		beginning = 7;
 	if (index > beginning && [self characterAtIndex:index] == '/')
 		--index;
 	while (index >= beginning && [self characterAtIndex:index] != '/')
