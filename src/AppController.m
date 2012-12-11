@@ -128,7 +128,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 // C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
 //  those we need early in the program launch and keep them in memory.
-#define kNumberOfDateFormatters 8
+#define kNumberOfDateFormatters 4
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
@@ -1007,20 +1007,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
 		[dateFormatterArray[i] setLocale:enUS];
+		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	}
 
 	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
-	// Fri, 12 Dec 2008 18:45:15 -0800
-	[dateFormatterArray[0] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZ"];
-	// Sat, 13 Dec 2008 18:45:15 EAT
+	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
+	[dateFormatterArray[0] setDateFormat:@"yyyy-MM-dd'T'HH:mm:sszzz"];
+	// 2010-09-28T15:31:25.815+02:00
+	[dateFormatterArray[2] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSzzz"];
+	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
 	[dateFormatterArray[1] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-	// 2010-09-28T15:31:25Z
-	[dateFormatterArray[2] setDateFormat:@"yyy-MM-dd'T'HH:mm:ss'Z'"];
-	[dateFormatterArray[3] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss+HH:mm"];
-	[dateFormatterArray[4] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm"];
-	[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"];
-	[dateFormatterArray[6] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-	[dateFormatterArray[7] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
+	[dateFormatterArray[3] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
 
 	[enUS release];
 	// end of initialization of date formatters
