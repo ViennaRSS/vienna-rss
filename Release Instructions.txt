@@ -1,6 +1,8 @@
 ## One time setup step: ##
 
  -	To ensure that releases are properly codesigned make sure that you have properly edited `configs/CS-ID.xcconfig` for your setup.
+    CODE_SIGN_IDENTITY should be the name of your certificate as it is stored in Keychain, and
+    CODE_SIGN_RESOURCE_RULE should generally point to ResourceRules.plist in MacOSX.platform in Xcode.
 
 ## Tag Formatting ##
 
