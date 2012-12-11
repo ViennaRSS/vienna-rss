@@ -3,7 +3,7 @@ Vienna
 
 [Vienna](http://www.vienna-rss.org) is an RSS/Atom reader for Mac OS X.
 
-Vienna can connect directly to websites you want to track or through syncing with a Google Reader account.
+Vienna can connect directly to the websites you want to track and/or sync with a Google Reader account.
 
 Getting support
 ---------------
@@ -61,7 +61,7 @@ You can write plugins by referring to [this document](http://www.vienna-rss.org/
 
 You should have a basic knowledge of Git and read these [advices on workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
-Please let us know what you are working on by posting a note in the [Vienna Development sub-forum](http://forums.cocoaforge.com/viewforum.php?f=20).
+Please let us know what you are working on by posting an issue on Vienna's github and assigning it to yourself.
 
 Licensing
 ---------
