@@ -386,7 +386,7 @@
 	if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
 	{
 		NSString * feedPart = [linkArray objectAtIndex:0];
-		if (![feedPart hasPrefix:@"http:"])
+		if (![feedPart hasPrefix:@"http:"] && ![feedPart hasPrefix:@"https:"])
 		{
 			if (![urlString hasSuffix:@"/"])
 				urlString = [urlString stringByAppendingString:@"/"];

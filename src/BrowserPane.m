@@ -449,7 +449,7 @@
 		{
 			[rssPageURL release];
 			rssPageURL = [arrayOfLinks objectAtIndex:0];
-			if (![rssPageURL hasPrefix:@"http:"])
+			if (![rssPageURL hasPrefix:@"http:"] && ![rssPageURL hasPrefix:@"https:"])
 				rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
 			[rssPageURL retain];
 			[self showRssPageButton:YES];
