@@ -164,12 +164,24 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* constrainMinCoordinate
- * Make sure the article pane width isn't shrunk beyond a minimum width. Otherwise it looks
- * untidy.
+ * Make sure the article pane width isn't shrunk beyond a minimum size for Condensed and Report layouts.
+ * Otherwise it looks untidy.
  */
 -(CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
-	return (sender == splitView2 && offset == 0) ? MA_Minimum_ArticleList_Pane_Width : proposedMin;
+	if (sender == splitView2)
+	{
+		if (tableLayout == MA_Layout_Unified)
+		{
+			return (offset == 0) ? proposedMin :  proposedMin + MA_Minimum_Article_Pane_Width;
+		}
+		else
+		{
+			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Width ;
+		}
+	}
+	else
+		return proposedMin;
 }
 
 /* constrainMaxCoordinate
@@ -178,12 +190,20 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
 {
-	if (sender == splitView2 && offset == 0)
+	if (sender == splitView2)
 	{
-		NSRect mainFrame = [[splitView2 superview] frame];
-		return (tableLayout == MA_Layout_Condensed) ?
-			mainFrame.size.width - MA_Minimum_Article_Pane_Width :
-			mainFrame.size.height - MA_Minimum_Article_Pane_Width;
+		BOOL isVertical = [sender isVertical];
+		if (tableLayout != MA_Layout_Unified)
+		{
+			NSRect mainFrame = [[splitView2 superview] frame];
+
+			if (isVertical)
+				return (offset == 0) ? mainFrame.size.width - MA_Minimum_Article_Pane_Width : mainFrame.size.width - MA_Minimum_ArticleList_Pane_Width;
+			else
+				return (offset == 0) ? mainFrame.size.height - MA_Minimum_Article_Pane_Width : mainFrame.size.height - MA_Minimum_ArticleList_Pane_Width;
+		}
+		else
+			return proposedMax;
 	}
 	return proposedMax;
 }
@@ -194,6 +214,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 -(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
 	CGFloat dividerThickness = [sender dividerThickness];
+	BOOL isVertical = [sender isVertical];
 	id sv1 = [[sender subviews] objectAtIndex:0];
 	id sv2 = [[sender subviews] objectAtIndex:1];
 	NSRect leftFrame = [sv1 frame];
@@ -207,12 +228,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		else
 		{
 			leftFrame.origin = NSMakePoint(0, 0);
-			if (tableLayout == MA_Layout_Condensed)
+			if (isVertical)
 			{
 				leftFrame.size.height = newFrame.size.height;
 				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
 				rightFrame.size.height = newFrame.size.height;
 				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+				rightFrame.origin.y = 0;
 			}
 			else
 			{
@@ -220,6 +242,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
 				rightFrame.size.width = newFrame.size.width;
 				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
+				rightFrame.origin.x = 0;
 			}
 			[sv1 setFrame:leftFrame];
 			[sv2 setFrame:rightFrame];
