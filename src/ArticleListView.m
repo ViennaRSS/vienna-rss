@@ -1754,22 +1754,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	}
 }
 
-/* shouldShowCellExpansionForTableColumn
- * Hook to determine whether the tooltip-like automatic text expansion for 
- * NSTableView text columns that are truncated should be expanded for a
- * given cell. In our case we don't want to show the expansion while the
- * HTML is loading because the redraw for the progress indicator causes the
- * cell expansion text to flash if you hover over the cell while it is still
- * loading and it looks unprofessional.
- */
--(BOOL)tableView:(NSTableView *)tv shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
-{
-	if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
-		return NO;
-	else
-		return YES;
-}
-
 /* copyTableSelection
  * This is the common copy selection code. We build an array of dictionary entries each of
  * which include details of each selected article in the standard RSS item format defined by
