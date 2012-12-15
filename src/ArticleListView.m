@@ -1744,10 +1744,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		
 		// Set the in-progress flag as appropriate so the progress indicator gets
 		// displayed and removed as needed.
-		if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
-			[realCell setInProgress:YES forRow:rowIndex];
-		else
-			[realCell setInProgress:NO forRow:rowIndex];
+		if ([realCell respondsToSelector:@selector(setInProgress:forRow:)])
+		{
+			if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
+				[realCell setInProgress:YES forRow:rowIndex];
+			else
+				[realCell setInProgress:NO forRow:rowIndex];
+        }
 	}
 }
 
