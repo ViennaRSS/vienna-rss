@@ -552,6 +552,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
 	[articleList setAutosaveTableColumns:NO];
+	[articleList setAutosaveName:nil];
 	
 	// Remove old columns
 	NSTableColumn * lastColumn;
