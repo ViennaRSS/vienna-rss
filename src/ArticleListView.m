@@ -637,6 +637,8 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	
 	if (tableLayout == MA_Layout_Report)
 		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+	else if (tableLayout == MA_Layout_Unified)
+		[articleList setAutosaveName:@"Vienna3UnifiedLayoutColumns"];
 	else
 		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
 	[articleList setAutosaveTableColumns:YES];
@@ -920,7 +922,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)loadSplitSettingsForLayout
 {
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ? @"SplitView2ReportLayout" : @"SplitView2CondensedLayout";
+	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
+		@"SplitView2ReportLayout"
+		: ((tableLayout == MA_Layout_Unified)  ? @"SplitView2UnifiedLayout" : @"SplitView2CondensedLayout");
 	[splitView2 setLayout:[[Preferences standardPreferences] objectForKey:splitPrefsName]];
 }
 
@@ -929,7 +933,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)saveSplitSettingsForLayout
 {
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ? @"SplitView2ReportLayout" : @"SplitView2CondensedLayout";
+	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
+		@"SplitView2ReportLayout"
+		: ((tableLayout == MA_Layout_Unified)  ? @"SplitView2UnifiedLayout" : @"SplitView2CondensedLayout");
 	[[Preferences standardPreferences] setObject:[splitView2 layout] forKey:splitPrefsName];
 }
 
