@@ -554,11 +554,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[articleList setAutosaveTableColumns:NO];
 	[articleList setAutosaveName:nil];
 	
-	// Remove old columns
-	NSTableColumn * lastColumn;
-	while ((lastColumn = [[articleList tableColumns] lastObject]))
-		[articleList removeTableColumn:lastColumn];
-	
 	[self updateArticleListRowHeight];
 	
 	// Create the new columns
@@ -581,8 +576,19 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				showField = YES;
 		}
 
+		// hide old columns which shouldn't be visible anymore
+		if ([articleList columnWithIdentifier:identifier]!=-1)
+		{
+			NSArray *columns = [articleList tableColumns];
+
+    		if(columns && [columns count] > 0)
+    		{
+        		NSTableColumn *col = [columns objectAtIndex:[articleList columnWithIdentifier:identifier]];
+              	[col setHidden:!showField];
+        	}
+    	}
 		// Add to the end only those columns that are visible
-		if (showField)
+		if (showField && [articleList columnWithIdentifier:identifier]==-1)
 		{
 			NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			
