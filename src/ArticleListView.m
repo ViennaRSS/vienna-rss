@@ -607,7 +607,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			BOOL isProgressColumn = NO;
 			if (tableLayout == MA_Layout_Report && [[column identifier] isEqualToString:MA_Field_Subject])
 				isProgressColumn = YES;
-			else if (tableLayout == MA_Layout_Condensed && [[column identifier] isEqualToString:MA_Field_Headlines])
+			if (tableLayout == MA_Layout_Condensed && [[column identifier] isEqualToString:MA_Field_Headlines])
 				isProgressColumn = YES;
 			
 			if (isProgressColumn)
