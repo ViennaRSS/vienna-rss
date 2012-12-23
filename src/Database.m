@@ -2297,7 +2297,6 @@ static Database * _sharedDatabase = nil;
 		queryString = [NSString stringWithFormat:@"select * from messages where (%@)%@", [self criteriaToSQL:tree], filterClause];
 	}
 
-	[[RefreshManager articlesUpdateSemaphore] lock];
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
 
@@ -2354,7 +2353,6 @@ static Database * _sharedDatabase = nil;
 
 	// Deallocate
 	[results release];
-	[[RefreshManager articlesUpdateSemaphore] unlock];
 	return newArray;
 }
 

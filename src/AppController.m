@@ -604,9 +604,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case MA_EmptyTrash_WithoutWarning:
 			if (![db isTrashEmpty])
 			{
-				[[RefreshManager articlesUpdateSemaphore] lock];
 				[db purgeDeletedArticles];
-				[[RefreshManager articlesUpdateSemaphore] unlock];
 			}
 			break;
 			
@@ -617,9 +615,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					emptyTrashWarning = [[EmptyTrashWarning alloc] init];
 				if ([emptyTrashWarning shouldEmptyTrash])
 				{
-					[[RefreshManager articlesUpdateSemaphore] lock];
 					[db purgeDeletedArticles];
-					[[RefreshManager articlesUpdateSemaphore] unlock];
 				}
 				[emptyTrashWarning release];
 				emptyTrashWarning = nil;
@@ -2028,9 +2024,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (returnCode == NSAlertDefaultReturn)
 	{
 		[self clearUndoStack];
-		[[RefreshManager articlesUpdateSemaphore] lock];
 		[db purgeDeletedArticles];
-		[[RefreshManager articlesUpdateSemaphore] unlock];
 	}
 }
 
@@ -2432,9 +2426,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
-		[[RefreshManager articlesUpdateSemaphore] lock];
 		[db purgeArticlesOlderThanDays:[prefs autoExpireDuration]];
-		[[RefreshManager articlesUpdateSemaphore] unlock];
 		
 		[self setStatusMessage:NSLocalizedString(@"Refresh completed", nil) persist:YES];
 		[self stopProgressIndicator];
