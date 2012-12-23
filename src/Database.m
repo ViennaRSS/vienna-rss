@@ -531,12 +531,12 @@ static Database * _sharedDatabase = nil;
 }
 
 /* verifyThreadSafety
- * Formerly, in debug mode we asserted if the caller thread wasn't the thread
- * on which the database was created. Now, we just do nothing.
+ * In debug mode we assert if the caller thread isn't the thread on which the database
+ * was created. In release mode, we do nothing.
  */
 -(void)verifyThreadSafety
 {
-	//NSAssert([NSThread currentThread] == mainThread, @"Calling database on wrong thread!");
+	NSAssert([NSThread currentThread] == mainThread, @"Calling database on wrong thread!");
 }
 
 /* syncLastUpdate
