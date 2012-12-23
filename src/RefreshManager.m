@@ -256,7 +256,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+			[self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
 		}
 	}
 }
@@ -660,7 +660,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		// [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
 	}
 	else if (responseStatusCode == 410)
 	{
@@ -674,13 +674,14 @@ static NSRecursiveLock * articlesUpdate_lock;
 		NSData * receivedData = [connector responseData];
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 				
-		[self performSelectorInBackground:@selector(finalizeFolderRefresh:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+		[self performSelectorOnMainThread:@selector(finalizeFolderRefresh:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:
 																					folder, @"folder", 
 																					connectorItem, @"log", 
 																					url, @"url",
 																					receivedData, @"data",
 																					lastModifiedString, @"lastModifiedString",
-																					nil]];
+																					nil]
+																					waitUntilDone:NO];
 	}
 	else	//other HTTP response codes like 404, 403...
 	{
@@ -918,7 +919,7 @@ static NSRecursiveLock * articlesUpdate_lock;
         
 		// If this folder also requires an image refresh, add that
 		if (([folder flags] & MA_FFlag_CheckForImage))
-			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+			[self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
 																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
