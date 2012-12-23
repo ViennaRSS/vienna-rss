@@ -256,7 +256,6 @@ JSONDecoder * jsonDecoder;
 			
 		Database *db = [Database sharedDatabase];
 		NSInteger newArticlesFromFeed = 0;
-		[[RefreshManager articlesUpdateSemaphore] lock];
 
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0)
@@ -287,7 +286,6 @@ JSONDecoder * jsonDecoder;
 				[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:updateDate];
 			// Set the HTML homepage for this folder.
 			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
-		[[RefreshManager articlesUpdateSemaphore] unlock];
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -608,9 +606,7 @@ JSONDecoder * jsonDecoder;
 	for (Folder * f in [[NSApp delegate] folders]) {
 		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
 		{
-			[[RefreshManager articlesUpdateSemaphore] lock];
 			[[Database sharedDatabase] deleteFolder:[f itemId]];
-			[[RefreshManager articlesUpdateSemaphore] unlock];
 		}
 	}
 
