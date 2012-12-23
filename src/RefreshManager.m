@@ -259,7 +259,6 @@ static RefreshManager * _refreshManager = nil;
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
@@ -269,14 +268,12 @@ static RefreshManager * _refreshManager = nil;
 		@synchronized(db) {
 			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		};
-		[pool drain];
 		return;
 	}
 	
 	if (![self isRefreshingFolder:folder ofType:MA_Refresh_FavIcon])
 		[self pumpFolderIconRefresh:folder];
 
-	[pool drain];
 }
 
 /* isRefreshingFolder
@@ -685,7 +682,6 @@ static RefreshManager * _refreshManager = nil;
 -(void)finalizeFolderRefresh:(NSDictionary*)parameters;
 {	
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	ZAssert(parameters!=NULL, @"Null");
 	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
@@ -711,7 +707,6 @@ static RefreshManager * _refreshManager = nil;
 			else
 			{
 				[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
-				[pool drain];
 				return;
 			}
 		}
@@ -752,7 +747,6 @@ static RefreshManager * _refreshManager = nil;
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
 				[newFeed release];
-				[pool drain];
 				return;
 			}
             
@@ -916,7 +910,6 @@ static RefreshManager * _refreshManager = nil;
     	// Unread count may have changed
     	[[NSApp delegate] performSelectorOnMainThread:@selector(showUnreadCountOnApplicationIconAndWindowTitle) withObject:nil waitUntilDone:NO];
 
-	[pool drain];
 }
 
 /* getRedirectURL
