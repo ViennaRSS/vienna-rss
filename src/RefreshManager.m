@@ -36,7 +36,6 @@
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
-static NSRecursiveLock * articlesUpdate_lock;
 
 // Private functions
 @interface RefreshManager (Private)
@@ -61,14 +60,8 @@ static NSRecursiveLock * articlesUpdate_lock;
 
 + (void)initialize
 {
-    // Initializes our multi-thread lock
-    articlesUpdate_lock = [[NSRecursiveLock alloc] init];
 }
 
-+ (NSRecursiveLock *)articlesUpdateSemaphore
-{
-    return articlesUpdate_lock;
-}
 
 /* init
  * Initialise the class.
@@ -256,7 +249,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+			[self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
 		}
 	}
 }
@@ -266,7 +259,6 @@ static NSRecursiveLock * articlesUpdate_lock;
  */
 -(void)refreshFavIcon:(Folder *)folder
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	// Do nothing if there's no homepage associated with the feed
 	// or if the feed already has a favicon.
@@ -276,14 +268,12 @@ static NSRecursiveLock * articlesUpdate_lock;
 		@synchronized(db) {
 			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		};
-		[pool drain];
 		return;
 	}
 	
 	if (![self isRefreshingFolder:folder ofType:MA_Refresh_FavIcon])
 		[self pumpFolderIconRefresh:folder];
 
-	[pool drain];
 }
 
 /* isRefreshingFolder
@@ -641,9 +631,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 	if (responseStatusCode == 304)
 	{		
 		// No modification from last check
-		[[RefreshManager articlesUpdateSemaphore] lock];
 		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
-		[[RefreshManager articlesUpdateSemaphore] unlock];
 
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
@@ -660,7 +648,7 @@ static NSRecursiveLock * articlesUpdate_lock;
 		// [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
 	}
 	else if (responseStatusCode == 410)
 	{
@@ -674,13 +662,14 @@ static NSRecursiveLock * articlesUpdate_lock;
 		NSData * receivedData = [connector responseData];
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 				
-		[self performSelectorInBackground:@selector(finalizeFolderRefresh:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+		[self performSelectorOnMainThread:@selector(finalizeFolderRefresh:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:
 																					folder, @"folder", 
 																					connectorItem, @"log", 
 																					url, @"url",
 																					receivedData, @"data",
 																					lastModifiedString, @"lastModifiedString",
-																					nil]];
+																					nil]
+																					waitUntilDone:NO];
 	}
 	else	//other HTTP response codes like 404, 403...
 	{
@@ -693,7 +682,6 @@ static NSRecursiveLock * articlesUpdate_lock;
 -(void)finalizeFolderRefresh:(NSDictionary*)parameters;
 {	
 	
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	ZAssert(parameters!=NULL, @"Null");
 	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
@@ -719,7 +707,6 @@ static NSRecursiveLock * articlesUpdate_lock;
 			else
 			{
 				[self refreshFeed:folder fromURL:[NSURL URLWithString:redirectURL] withLog:connectorItem shouldForceRefresh:NO];
-				[pool drain];
 				return;
 			}
 		}
@@ -760,7 +747,6 @@ static NSRecursiveLock * articlesUpdate_lock;
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
 				[newFeed release];
-				[pool drain];
 				return;
 			}
             
@@ -845,7 +831,6 @@ static NSRecursiveLock * articlesUpdate_lock;
 				[article release];
 			}
 			
-			[articlesUpdate_lock lock];
 				// Remember the last modified date
 				if (lastModifiedString != nil)
 					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
@@ -901,7 +886,6 @@ static NSRecursiveLock * articlesUpdate_lock;
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 				
-			[articlesUpdate_lock unlock];
 		};
 				  
 		// Send status to the activity log
@@ -918,7 +902,7 @@ static NSRecursiveLock * articlesUpdate_lock;
         
 		// If this folder also requires an image refresh, add that
 		if (([folder flags] & MA_FFlag_CheckForImage))
-			[self performSelectorInBackground:@selector(refreshFavIcon:) withObject:folder];
+			[self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
 																					 
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -926,7 +910,6 @@ static NSRecursiveLock * articlesUpdate_lock;
     	// Unread count may have changed
     	[[NSApp delegate] performSelectorOnMainThread:@selector(showUnreadCountOnApplicationIconAndWindowTitle) withObject:nil waitUntilDone:NO];
 
-	[pool drain];
 }
 
 /* getRedirectURL

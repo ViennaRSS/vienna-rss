@@ -531,12 +531,12 @@ static Database * _sharedDatabase = nil;
 }
 
 /* verifyThreadSafety
- * Formerly, in debug mode we asserted if the caller thread wasn't the thread
- * on which the database was created. Now, we just do nothing.
+ * In debug mode we assert if the caller thread isn't the thread on which the database
+ * was created. In release mode, we do nothing.
  */
 -(void)verifyThreadSafety
 {
-	//NSAssert([NSThread currentThread] == mainThread, @"Calling database on wrong thread!");
+	NSAssert([NSThread currentThread] == mainThread, @"Calling database on wrong thread!");
 }
 
 /* syncLastUpdate
@@ -1683,13 +1683,13 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQuery:@"select * from smart_folders"];
+		results = [sqlDatabase performQuery:@"select folder_id, search_string from smart_folders"];
 		if (results && [results rowCount])
 		{
 			for (SQLRow * row in [results rowEnumerator])
 			{
-				NSString * search_string = [row stringForColumn:@"search_string"];
-				NSInteger folderId = [[row stringForColumn:@"folder_id"] intValue];
+				NSInteger folderId = [[row stringForColumnAtIndex:0] intValue];
+				NSString * search_string = [row stringForColumnAtIndex:1];
 				
 				CriteriaTree * criteriaTree = [[CriteriaTree alloc] initWithString:search_string];
 				[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
@@ -1772,20 +1772,21 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQuery:@"select * from folders order by folder_id"];
+		results = [sqlDatabase performQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
+			@" type, flags, next_sibling, first_child from folders order by folder_id"];
 		if (results && [results rowCount])
 		{			
 			for (SQLRow * row in [results rowEnumerator])
 			{
-				NSString * name = [row stringForColumn:@"foldername"];
-				NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"last_update"] doubleValue]];
-				NSInteger newItemId = [[row stringForColumn:@"folder_id"] intValue];
-				NSInteger newParentId = [[row stringForColumn:@"parent_id"] intValue];
-				NSInteger unreadCount = [[row stringForColumn:@"unread_count"] intValue];
-				NSInteger type = [[row stringForColumn:@"type"] intValue];
-				NSInteger flags = [[row stringForColumn:@"flags"] intValue];
-				NSInteger nextSibling = [[row stringForColumn:@"next_sibling"] intValue];
-				NSInteger firstChild = [[row stringForColumn:@"first_child"] intValue];
+				NSInteger newItemId = [[row stringForColumnAtIndex:0] intValue];
+				NSInteger newParentId = [[row stringForColumnAtIndex:1] intValue];
+				NSString * name = [row stringForColumnAtIndex:2];
+				NSInteger unreadCount = [[row stringForColumnAtIndex:3] intValue];
+				NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[row stringForColumnAtIndex:4] doubleValue]];
+				NSInteger type = [[row stringForColumnAtIndex:5] intValue];
+				NSInteger flags = [[row stringForColumnAtIndex:6] intValue];
+				NSInteger nextSibling = [[row stringForColumnAtIndex:7] intValue];
+				NSInteger firstChild = [[row stringForColumnAtIndex:8] intValue];
 				
 				Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
 				[folder setNextSiblingId:nextSibling];
@@ -1811,17 +1812,17 @@ static Database * _sharedDatabase = nil;
 		[results release];
 
 		// Load all RSS folders and add them to the list.
-		results = [sqlDatabase performQuery:@"select * from rss_folders"];
+		results = [sqlDatabase performQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
 		if (results && [results rowCount])
 		{
 			for (SQLRow * row in[results rowEnumerator])
 			{
-				NSInteger folderId = [[row stringForColumn:@"folder_id"] intValue];
-				NSString * descriptiontext = [row stringForColumn:@"description"];
-				NSString * url = [row stringForColumn:@"feed_url"];
-				NSString * linktext = [row stringForColumn:@"home_page"];
-				NSString * username = [row stringForColumn:@"username"];
-				NSString * lastUpdateString = [row stringForColumn:@"last_update_string"];
+				NSInteger folderId = [[row stringForColumnAtIndex:0] intValue];
+				NSString * url = [row stringForColumnAtIndex:1];
+				NSString * username = [row stringForColumnAtIndex:2];
+				NSString * lastUpdateString = [row stringForColumnAtIndex:3];
+				NSString * descriptiontext = [row stringForColumnAtIndex:4];
+				NSString * linktext = [row stringForColumnAtIndex:5];
 				
 				Folder * folder = [self folderFromID:folderId];
 				[folder setFeedDescription:descriptiontext];
@@ -2274,13 +2275,16 @@ static Database * _sharedDatabase = nil;
 	Folder * folder = nil;
 	NSInteger unread_count = 0;
 
+	queryString=@"select message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender,"
+		@" link, createddate, date, text, revised_flag, hasenclosure_flag, enclosure from messages";
+
 	// If folderId is zero then we're searching the entire
 	// database with or without a filter string.
 	if (folderId == 0)
 	{
 		if ([filterString isNotEqualTo:@""])
 			filterClause = [NSString stringWithFormat:@" where text like '%%%@%%'", filterString];
-		queryString = [NSString stringWithFormat:@"select * from messages%@", filterClause];
+		queryString = [NSString stringWithFormat:@"%@%@", queryString, filterClause];
 	}
 	else
 	{
@@ -2294,10 +2298,9 @@ static Database * _sharedDatabase = nil;
 
 		if ([filterString isNotEqualTo:@""])
 			filterClause = [NSString stringWithFormat:@" and (title like '%%%@%%' or text like '%%%@%%')", filterString, filterString];
-		queryString = [NSString stringWithFormat:@"select * from messages where (%@)%@", [self criteriaToSQL:tree], filterClause];
+		queryString = [NSString stringWithFormat:@"%@ where (%@)%@", queryString, [self criteriaToSQL:tree], filterClause];
 	}
 
-	[[RefreshManager articlesUpdateSemaphore] lock];
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
 
@@ -2310,22 +2313,22 @@ static Database * _sharedDatabase = nil;
 
 		for (SQLRow * row in [results rowEnumerator])
 		{
-			article = [[Article alloc] initWithGuid:[row stringForColumn:@"message_id"]];
-			[article setTitle:[row stringForColumn:@"title"]];
-			[article setAuthor:[row stringForColumn:@"sender"]];
-			[article setLink:[row stringForColumn:@"link"]];
-			[article setEnclosure:[row stringForColumn:@"enclosure"]];
-			[article setHasEnclosure:[[row stringForColumn:@"hasenclosure_flag"] intValue]];
-			[article setDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"date"] doubleValue]]];
-			[article setCreatedDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumn:@"createddate"] doubleValue]]];
-			[article markRead:[[row stringForColumn:@"read_flag"] intValue]];
-			[article markRevised:[[row stringForColumn:@"revised_flag"] intValue]];
-			[article markFlagged:[[row stringForColumn:@"marked_flag"] intValue]];
-			[article markDeleted:[[row stringForColumn:@"deleted_flag"] intValue]];
-			[article setFolderId:[[row stringForColumn:@"folder_id"] intValue]];
-			[article setParentId:[[row stringForColumn:@"parent_id"] intValue]];
-            text = [row stringForColumn:@"text"];
+			article = [[Article alloc] initWithGuid:[row stringForColumnAtIndex:0]];
+			[article setFolderId:[[row stringForColumnAtIndex:1] intValue]];
+			[article setParentId:[[row stringForColumnAtIndex:2] intValue]];
+			[article markRead:[[row stringForColumnAtIndex:3] intValue]];
+			[article markFlagged:[[row stringForColumnAtIndex:4] intValue]];
+			[article markDeleted:[[row stringForColumnAtIndex:5] intValue]];
+			[article setTitle:[row stringForColumnAtIndex:6]];
+			[article setAuthor:[row stringForColumnAtIndex:7]];
+			[article setLink:[row stringForColumnAtIndex:8]];
+			[article setCreatedDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumnAtIndex:9] doubleValue]]];
+			[article setDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumnAtIndex:10] doubleValue]]];
+        	text = [row stringForColumnAtIndex:11];
 			[article setBody:text];
+			[article markRevised:[[row stringForColumnAtIndex:12] intValue]];
+			[article setHasEnclosure:[[row stringForColumnAtIndex:13] intValue]];
+			[article setEnclosure:[row stringForColumnAtIndex:14]];
 			if (folder == nil || ![article isDeleted] || IsTrashFolder(folder))
 				[newArray addObject:article];
 			[folder addArticleToCache:article];
@@ -2354,7 +2357,6 @@ static Database * _sharedDatabase = nil;
 
 	// Deallocate
 	[results release];
-	[[RefreshManager articlesUpdateSemaphore] unlock];
 	return newArray;
 }
 

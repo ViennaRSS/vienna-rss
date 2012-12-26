@@ -312,10 +312,8 @@
 -(void)reloadArrayOfArticles
 {
 	
-	[[RefreshManager articlesUpdateSemaphore] lock];
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
 	[self setFolderArrayOfArticles:[folder articlesWithFilter:[[NSApp delegate] filterString]]];
-	[[RefreshManager articlesUpdateSemaphore] unlock];
 	
 	[self refilterArrayOfArticles];
 }
