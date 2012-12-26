@@ -201,12 +201,17 @@ BOOL isAccessible(NSString * urlString)
 	NSURL * url = [NSURL URLWithString:urlString];
 
 	target = SCNetworkReachabilityCreateWithName(NULL, [[url host] UTF8String]);
-	ok = SCNetworkReachabilityGetFlags(target, &flags);
-	CFRelease(target);
-	
-	if (!ok)
-		return NO;
-	return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+    if (target!= nil)
+    {
+        ok = SCNetworkReachabilityGetFlags(target, &flags);
+        CFRelease(target);
+
+        if (!ok)
+            return NO;
+        return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+    }
+    else
+        return NO;
 }
 
 /* runOKAlertPanel

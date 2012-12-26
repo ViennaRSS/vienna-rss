@@ -2507,7 +2507,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			if (currentArticle && ![[currentArticle link] isBlank])
             {
                 [articlesWithLinks addObject:currentArticle];
-				[urls addObject:[NSURL URLWithString:[currentArticle link]]];
+                NSString * escapedText = [[currentArticle link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+				[urls addObject:[NSURL URLWithString:escapedText]];
             }
 		}
 		[self openURLs:urls inPreferredBrowser:usePreferredBrowser];

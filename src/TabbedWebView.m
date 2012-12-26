@@ -394,6 +394,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self setPolicyDelegate:nil];
 	[self setDownloadDelegate:nil];
+	[self removeFromSuperviewWithoutNeedingDisplay];
 	[controller release];
 	[defaultWebPrefs release];
 	[super dealloc];

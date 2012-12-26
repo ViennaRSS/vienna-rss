@@ -164,12 +164,24 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 }
 
 /* constrainMinCoordinate
- * Make sure the article pane width isn't shrunk beyond a minimum width. Otherwise it looks
- * untidy.
+ * Make sure the article pane width isn't shrunk beyond a minimum size for Condensed and Report layouts.
+ * Otherwise it looks untidy.
  */
 -(CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset
 {
-	return (sender == splitView2 && offset == 0) ? MA_Minimum_ArticleList_Pane_Width : proposedMin;
+	if (sender == splitView2)
+	{
+		if (tableLayout == MA_Layout_Unified)
+		{
+			return (offset == 0) ? proposedMin :  proposedMin + MA_Minimum_Article_Pane_Width;
+		}
+		else
+		{
+			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Width ;
+		}
+	}
+	else
+		return proposedMin;
 }
 
 /* constrainMaxCoordinate
@@ -178,12 +190,20 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset
 {
-	if (sender == splitView2 && offset == 0)
+	if (sender == splitView2)
 	{
-		NSRect mainFrame = [[splitView2 superview] frame];
-		return (tableLayout == MA_Layout_Condensed) ?
-			mainFrame.size.width - MA_Minimum_Article_Pane_Width :
-			mainFrame.size.height - MA_Minimum_Article_Pane_Width;
+		BOOL isVertical = [sender isVertical];
+		if (tableLayout != MA_Layout_Unified)
+		{
+			NSRect mainFrame = [[splitView2 superview] frame];
+
+			if (isVertical)
+				return (offset == 0) ? mainFrame.size.width - MA_Minimum_Article_Pane_Width : mainFrame.size.width - MA_Minimum_ArticleList_Pane_Width;
+			else
+				return (offset == 0) ? mainFrame.size.height - MA_Minimum_Article_Pane_Width : mainFrame.size.height - MA_Minimum_ArticleList_Pane_Width;
+		}
+		else
+			return proposedMax;
 	}
 	return proposedMax;
 }
@@ -194,6 +214,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 -(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
 	CGFloat dividerThickness = [sender dividerThickness];
+	BOOL isVertical = [sender isVertical];
 	id sv1 = [[sender subviews] objectAtIndex:0];
 	id sv2 = [[sender subviews] objectAtIndex:1];
 	NSRect leftFrame = [sv1 frame];
@@ -207,12 +228,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		else
 		{
 			leftFrame.origin = NSMakePoint(0, 0);
-			if (tableLayout == MA_Layout_Condensed)
+			if (isVertical)
 			{
 				leftFrame.size.height = newFrame.size.height;
 				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
 				rightFrame.size.height = newFrame.size.height;
 				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+				rightFrame.origin.y = 0;
 			}
 			else
 			{
@@ -220,6 +242,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
 				rightFrame.size.width = newFrame.size.width;
 				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
+				rightFrame.origin.x = 0;
 			}
 			[sv1 setFrame:leftFrame];
 			[sv2 setFrame:rightFrame];
@@ -351,15 +374,18 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	for (index = 0; index < [dataArray count];)
 	{
 		NSString * name;
+		int width = 100;
 		BOOL visible = NO;
 		
 		name = [dataArray objectAtIndex:index++];
 		if (index < [dataArray count])
 			visible = [[dataArray objectAtIndex:index++] intValue] == YES;
-		index++;
+		if (index < [dataArray count])
+			width = [[dataArray objectAtIndex:index++] intValue];
 		
 		field = [db fieldByName:name];
 		[field setVisible:visible];
+		[field setWidth:width];
 	}
 	
 	// Set the default fonts
@@ -526,11 +552,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
 	[articleList setAutosaveTableColumns:NO];
-	
-	// Remove old columns
-	NSTableColumn * lastColumn;
-	while ((lastColumn = [[articleList tableColumns] lastObject]))
-		[articleList removeTableColumn:lastColumn];
+	[articleList setAutosaveName:nil];
 	
 	[self updateArticleListRowHeight];
 	
@@ -554,8 +576,19 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				showField = YES;
 		}
 
+		// hide old columns which shouldn't be visible anymore
+		if ([articleList columnWithIdentifier:identifier]!=-1)
+		{
+			NSArray *columns = [articleList tableColumns];
+
+    		if(columns && [columns count] > 0)
+    		{
+        		NSTableColumn *col = [columns objectAtIndex:[articleList columnWithIdentifier:identifier]];
+              	[col setHidden:!showField];
+        	}
+    	}
 		// Add to the end only those columns that are visible
-		if (showField)
+		if (showField && [articleList columnWithIdentifier:identifier]==-1)
 		{
 			NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			
@@ -574,7 +607,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			BOOL isProgressColumn = NO;
 			if (tableLayout == MA_Layout_Report && [[column identifier] isEqualToString:MA_Field_Subject])
 				isProgressColumn = YES;
-			else if (tableLayout == MA_Layout_Condensed && [[column identifier] isEqualToString:MA_Field_Headlines])
+			if (tableLayout == MA_Layout_Condensed && [[column identifier] isEqualToString:MA_Field_Headlines])
 				isProgressColumn = YES;
 			
 			if (isProgressColumn)
@@ -614,6 +647,8 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	
 	if (tableLayout == MA_Layout_Report)
 		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+	else if (tableLayout == MA_Layout_Unified)
+		[articleList setAutosaveName:@"Vienna3UnifiedLayoutColumns"];
 	else
 		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
 	[articleList setAutosaveTableColumns:YES];
@@ -643,7 +678,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	{
 		[dataArray addObject:[field name]];
 		[dataArray addObject:[NSNumber numberWithBool:[field visible]]];
-		[dataArray addObject:[NSNumber numberWithInt:0]];
+		[dataArray addObject:[NSNumber numberWithInt:[field width]]];
 	}
 	
 	// Save these to the preferences
@@ -897,7 +932,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)loadSplitSettingsForLayout
 {
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ? @"SplitView2ReportLayout" : @"SplitView2CondensedLayout";
+	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
+		@"SplitView2ReportLayout"
+		: ((tableLayout == MA_Layout_Unified)  ? @"SplitView2UnifiedLayout" : @"SplitView2CondensedLayout");
 	[splitView2 setLayout:[[Preferences standardPreferences] objectForKey:splitPrefsName]];
 }
 
@@ -906,7 +943,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)saveSplitSettingsForLayout
 {
-	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ? @"SplitView2ReportLayout" : @"SplitView2CondensedLayout";
+	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
+		@"SplitView2ReportLayout"
+		: ((tableLayout == MA_Layout_Unified)  ? @"SplitView2UnifiedLayout" : @"SplitView2CondensedLayout");
 	[[Preferences standardPreferences] setObject:[splitView2 layout] forKey:splitPrefsName];
 }
 
@@ -1721,27 +1760,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		
 		// Set the in-progress flag as appropriate so the progress indicator gets
 		// displayed and removed as needed.
-		if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
-			[realCell setInProgress:YES forRow:rowIndex];
-		else
-			[realCell setInProgress:NO forRow:rowIndex];
+		if ([realCell respondsToSelector:@selector(setInProgress:forRow:)])
+		{
+			if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
+				[realCell setInProgress:YES forRow:rowIndex];
+			else
+				[realCell setInProgress:NO forRow:rowIndex];
+        }
 	}
-}
-
-/* shouldShowCellExpansionForTableColumn
- * Hook to determine whether the tooltip-like automatic text expansion for 
- * NSTableView text columns that are truncated should be expanded for a
- * given cell. In our case we don't want to show the expansion while the
- * HTML is loading because the redraw for the progress indicator causes the
- * cell expansion text to flash if you hover over the cell while it is still
- * loading and it looks unprofessional.
- */
--(BOOL)tableView:(NSTableView *)tv shouldShowCellExpansionForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex
-{
-	if (rowIndex == currentSelectedRow && isLoadingHTMLArticle)
-		return NO;
-	else
-		return YES;
 }
 
 /* copyTableSelection

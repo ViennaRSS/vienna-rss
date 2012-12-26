@@ -316,7 +316,6 @@
 	}
 
 	// Draw the text
-	cellFrame.origin.y += 1;
 	cellFrame.origin.x += 2;
 	cellFrame.size.height -= 1;
 	

@@ -759,10 +759,7 @@
 	[rssPageURL release];
 	[self.webPane setFrameLoadDelegate:nil];
 	[self.webPane setUIDelegate:nil];
-	[self willChangeValueForKey:@"isLoading"];
-	[self.webPane stopLoading:self];
-	[self didChangeValueForKey:@"isLoading"];
-	[self.webPane removeFromSuperviewWithoutNeedingDisplay];
+	[self handleStopLoading:nil];
 	[self.webPane close];
 	[lastError release];
 	[pageFilename release];
