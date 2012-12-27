@@ -2,6 +2,8 @@
 
 . "${OBJROOT}/autorevision.tmp"
 N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
+BUILD_NUMBER="2821"
+N_VCS_NUM="$(echo "${BUILD_NUMBER} + ${VCS_NUM}" | bc)"
 VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
 VIENNA_NOTES="${SRCROOT}/notes.html"
 
@@ -22,7 +24,7 @@ fi
 cd "${VIENNA_UPLOADS_DIR}"
 
 if [ -f "${VIENNA_NOTES}" ] ; then
-	cp -a "${VIENNA_NOTES}" "noteson${N_VCS_TAG}.${VCS_SHORT_HASH}.html"
+	cp -a "${VIENNA_NOTES}" "noteson${N_VCS_TAG}.${N_VCS_NUM}.html"
 fi
 
 exit 0
