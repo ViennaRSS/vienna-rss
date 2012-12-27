@@ -45,7 +45,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Archive and Prep for Upload" */;
 			buildPhases = (
-				EAAF336614BEF4DF002A8837 /* Release to Github */,
+				EAAF336614BEF4DF002A8837 /* Release to Sourceforge */,
 			);
 			dependencies = (
 				43501CFF165D82ED0018EDB7 /* PBXTargetDependency */,
@@ -1047,7 +1047,7 @@
 		439824191666B37000FFE219 /* autorevision.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = autorevision.sh; path = configs/scripts/autorevision.sh; sourceTree = SOURCE_ROOT; };
 		4398241A1666B37000FFE219 /* Changes-and-Notes.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Changes-and-Notes.sh"; path = "configs/scripts/Changes-and-Notes.sh"; sourceTree = SOURCE_ROOT; };
 		4398241B1666B37000FFE219 /* Make-ID-Template.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Make-ID-Template.sh"; path = "configs/scripts/Make-ID-Template.sh"; sourceTree = SOURCE_ROOT; };
-		4398241C1666B37000FFE219 /* Release-to-Github.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-to-Github.sh"; path = "configs/scripts/Release-to-Github.sh"; sourceTree = SOURCE_ROOT; };
+		4398241C1666B37000FFE219 /* Release-to-Sourceforge.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "Release-to-Sourceforge.sh"; path = "configs/scripts/Release-to-Sourceforge.sh"; sourceTree = SOURCE_ROOT; };
 		4398241D1666B37000FFE219 /* Translations.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = Translations.sh; path = configs/scripts/Translations.sh; sourceTree = SOURCE_ROOT; };
 		4398241E1666B3DB00FFE219 /* Acknowledgements.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Acknowledgements.rtf; sourceTree = SOURCE_ROOT; };
 		439824201666B3DB00FFE219 /* CHANGES */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES; sourceTree = SOURCE_ROOT; };
@@ -2117,7 +2117,7 @@
 				439824191666B37000FFE219 /* autorevision.sh */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
 				4398241B1666B37000FFE219 /* Make-ID-Template.sh */,
-				4398241C1666B37000FFE219 /* Release-to-Github.sh */,
+				4398241C1666B37000FFE219 /* Release-to-Sourceforge.sh */,
 				4398241D1666B37000FFE219 /* Translations.sh */,
 			);
 			name = Scripts;
@@ -4147,19 +4147,19 @@
 			shellPath = /bin/sh;
 			shellScript = ". configs/scripts/Acknowledgements.sh";
 		};
-		EAAF336614BEF4DF002A8837 /* Release to Github */ = {
+		EAAF336614BEF4DF002A8837 /* Release to Sourceforge */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Release to Github";
+			name = "Release to Sourceforge";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = ". configs/scripts/Release-to-Github.sh";
+			shellScript = ". configs/scripts/Release-to-Sourceforge.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
