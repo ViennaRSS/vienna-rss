@@ -24,4 +24,5 @@ Tags should be in one of the following formats:
  3.	Make a new tag using `git tag -s` (if you do not have a gpg key you can use `git tag -a` instead).
  4.	Run `make clean`.
  5.	Run `make release`.
- 6.	Upload the contents of `Deployment/Uploads` (found in the build directory).
+ 6.	Upload the contents of `Deployment/Uploads` (found in the build directory). It is important that everything gets put in the right place: the .xml file goes in the base directory, for a 3.0.0 beta 2 release everything else goes in `TestVersions/3.0.0_beta2/`, for 3.0.0 Release Candidate 1 `TestVersions/3.0.0_rc1/` and for 3.0.0 stable `ReleasedVersions/3.0.0/`
+ 7. Ensure that any directories you have created are set to be group writable.
