@@ -102,8 +102,6 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
-	<key>SUFeedURL</key>
-	<string>https://github.com/downloads/ViennaRSS/vienna-rss/changelog.xml</string>
 	<key>SmartCrashReports_CompanyName</key>
 	<string>OpenCommunity</string>
 	<key>SmartCrashReports_EmailTicket</key>

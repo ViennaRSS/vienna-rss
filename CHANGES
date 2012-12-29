@@ -8,6 +8,17 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 7
+------------
+- Reorganized on disk layout
+- Reorganized build system and version numbering (thanks to dak180)
+- Revised documentation (English and French)
+- Revised German translation (thanks to biphuhn)
+- Should be more safe for the database
+- Fix issues with dates
+- Fix some problems with layouts
+- Fix problems with certain feeds
+
 3.0b.2821
 --------
 - Refreshes do not interfere anymore with user's reading experience
