@@ -1,3 +1,5 @@
+Instructions for building and uploading Vienna binaries to Sourceforge
+
 ## One time setup step: ##
 
  -	To ensure that releases are properly codesigned make sure that you have properly edited `configs/CS-ID.xcconfig` for your setup.
@@ -7,21 +9,41 @@
 ## Tag Formatting ##
 
 Tags should be in one of the following formats:
+
  -	Normal release: (3.0.0)
 
 		v/3.0.0
+
  -	Beta release (Second beta for 3.0.0)
 
 		v/3.0.0_beta2
+
  -	Release candidate (first for 3.0.0)
 
 		v/3.0.0_rc1
 
 ## Steps to release Vienna: ##
 
- 1.	Make sure `CHANGES` is up to date.
- 2.	Copy the most recent part of `CHANGES` in a new text document and process it with Markdown to get a new `notes.html`.
- 3.	Make a new tag using `git tag -s` (if you do not have a gpg key you can use `git tag -a` instead).
- 4.	Run `make clean`.
- 5.	Run `make release`.
- 6.	Upload the contents of `Deployment/Uploads` (found in the build directory).
+ 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in "Configs/Project-All.xcconfig" in order to protect users whose machines do not match minimum OS X requirements from a counter-productive "upgrade".
+ 2.	Make sure that the "CHANGES" file is up to date.
+ 3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
+ 4.	Commit anything unstaged
+ 5.	Make a new tag using `git tag -s`, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
+ 6.	Run `make clean`.
+ 7.	Run `make release`.
+ 8.	Upload the contents of `Deployment/Uploads` (found in the build directory) using the following steps.
+  (Note: I'm using Vienna 3.0.0_beta2, 3.0.0_rc1 and 3.0.0 as examples here.)
+
+	1. Login to SourceForge's file system with your admin account.  `sftp <username>@frs.sourceforge.net` where `<username>` is your SourceForge user name, then `cd /home/frs/project/vienna-rss/`.
+	2. Create a new folder : for beta releases, it will be something of the form `TestVersions/3.0.0_beta2/` ; for release candidate releases, it will be like `TestVersions/3.0.0_rc1/` ; and for stable releases, something like `ReleasedVersions/3.0.0/`. _Ensure that any directories you have created are set to be group writable_.
+	4. Upload the two .tgz files and the .html file from the build/Deployment/Uploads folder to the newly created folder (filenames should look like "Vienna3.0.0_beta1.tgz", "Vienna3.0.0_beta1.5b272a6-dSYM.tgz" and "noteson3.0.0_beta1.html")
+	4. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
+	5. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.0.0.tgz" and set it as default download for Mac OS X. Don't do this for beta releases!
+	6. Login to the Vienna web site. `sftp <username>@web.sourceforge.net` where `<username>` is your SourceForge user name.
+	7. Upload `changelog.xml` (or `changelog_beta.xml` or `changelog_rc` accordingly) via sftp to `/home/project-web/vienna-rss/htdocs`.
+	8. If you upload a release candidate, change changelog_beta.xml to be a symlink to the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a symlink to the new changelog.xml
+	9. Ensure also that these files are set to be group writable.
+	10. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
+	11. Post an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
+
+ 

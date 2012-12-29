@@ -5,6 +5,11 @@ Vienna
 
 Vienna can connect directly to the websites you want to track and/or sync with a Google Reader account.
 
+Downloading binaries
+--------------------
+
+Admins upload release and test versions at [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).
+
 Getting support
 ---------------
 

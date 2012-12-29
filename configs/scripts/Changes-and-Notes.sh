@@ -22,7 +22,7 @@ fi
 cd "${VIENNA_UPLOADS_DIR}"
 
 if [ -f "${VIENNA_NOTES}" ] ; then
-	cp -a "${VIENNA_NOTES}" "noteson${N_VCS_TAG}.${VCS_SHORT_HASH}.html"
+	cp -a "${VIENNA_NOTES}" "noteson${N_VCS_TAG}.html"
 fi
 
 exit 0
