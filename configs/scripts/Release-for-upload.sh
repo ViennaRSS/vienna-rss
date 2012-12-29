@@ -64,6 +64,7 @@ mkdir -p "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cp -a *.dSYM "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
 tar -czf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' "${dSYM_FILENAME}"
+rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 
 
 # Zip up the app
