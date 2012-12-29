@@ -7,7 +7,7 @@ N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')" # for urls/files
 V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')" # for display
 VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
 DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}" # values set in project-all.xcconfig
-TGZ_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}.tgz"
+TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 case "${N_VCS_TAG}" in
 	*_beta*)
@@ -94,7 +94,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<link>${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}</link>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
 			<enclosure url="${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" type="application/octet-stream"/>
-			<sparkle:releaseNotesLink>${DOWNLOAD_BASE_URL}/noteson${N_VCS_TAG}.${VCS_SHORT_HASH}.html</sparkle:releaseNotesLink>
+			<sparkle:releaseNotesLink>${DOWNLOAD_BASE_URL}/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
 </rss>
