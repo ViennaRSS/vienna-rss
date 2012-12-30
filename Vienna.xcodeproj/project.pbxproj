@@ -1056,6 +1056,7 @@
 		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		439824241666B3DB00FFE219 /* Release Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Release Instructions.txt"; sourceTree = SOURCE_ROOT; };
+		43B4611E1690982D00F6EC9A /* ResourceRules.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ResourceRules.plist; path = Resources/ResourceRules.plist; sourceTree = SOURCE_ROOT; };
 		43BA970A1663E80700B95F35 /* libSQLiteLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSQLiteLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA97121663EA5000B95F35 /* libJSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA971A1663EACF00B95F35 /* libGTMHTTP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGTMHTTP.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2005,6 +2006,7 @@
 				43EE754D165E832C000997FB /* Default Lists */,
 				43EE754E165E83D6000997FB /* UI Images */,
 				43EE7551165EA910000997FB /* lproj */,
+				43B4611E1690982D00F6EC9A /* ResourceRules.plist */,
 				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
 			);
 			name = Resources;

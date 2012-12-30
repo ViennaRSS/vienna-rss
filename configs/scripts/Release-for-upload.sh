@@ -32,7 +32,7 @@ function signd {
 		# Local Config
 		local idetd="${CODE_SIGN_IDENTITY}"
 		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
-		local appth="${BUILT_PRODUCTS_DIR}/Vienna.app"
+		local appth="${1}"
 
 		# Sign and verify the app
 		if [ ! -z "${resrul}" ]; then
@@ -68,10 +68,11 @@ rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 
 
 # Zip up the app
-cd "${BUILT_PRODUCTS_DIR}"
-signd
+cd "${VIENNA_UPLOADS_DIR}"
+# Copy the app cleanly
+rsync -clprt --del --exclude=".DS_Store" "${BUILT_PRODUCTS_DIR}/Vienna.app" "${VIENNA_UPLOADS_DIR}"
+signd "Vienna.app"
 tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
-mv "${TGZ_FILENAME}" "${VIENNA_UPLOADS_DIR}"
 
 
 # Output the sparkle change log
