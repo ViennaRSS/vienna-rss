@@ -108,6 +108,8 @@
 	<string>SCR-15C768BF24</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<string>YES</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>vienna_public_key.pem</string>
 
 </dict>
 </plist>

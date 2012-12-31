@@ -73,6 +73,7 @@ cd "${VIENNA_UPLOADS_DIR}"
 rsync -clprt --del --exclude=".DS_Store" "${BUILT_PRODUCTS_DIR}/Vienna.app" "${VIENNA_UPLOADS_DIR}"
 signd "Vienna.app"
 tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
+rm -rf Vienna.app
 
 
 # Output the sparkle change log
@@ -80,6 +81,16 @@ cd "${VIENNA_UPLOADS_DIR}"
 
 pubDate="$(LC_TIME=en_US date -jf '%FT%T%z' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 TGZSIZE="$(stat -f %z "${TGZ_FILENAME}")"
+
+SIGNATURE=$(
+
+/usr/bin/ruby "${PROJECT_DIR}/keys/sign_update.rb" "${TGZ_FILENAME}" "${PRIVATE_KEY_PATH}"
+
+)
+
+
+[ $SIGNATURE ] || { echo Unable to load signing private key vienna_private_key.pem. Set PRIVATE_KEY_PATH in CS-ID.xcconfig; false; }
+
 
 cat > "${VIENNA_CHANGELOG}" << EOF
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -89,14 +100,14 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 		<link>http://www.vienna-rss.org/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
-		<copyright>Copyright 2010-2012, Steve Palmer and contributors</copyright>
+		<copyright>Copyright 2010-2013, Steve Palmer and contributors</copyright>
 		<item>
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
 			<link>${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}</link>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
-			<enclosure url="${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" type="application/octet-stream"/>
-			<sparkle:releaseNotesLink>${DOWNLOAD_BASE_URL}/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
+			<enclosure url="${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}" sparkle:version="${N_VCS_NUM}" sparkle:shortVersionString="${V_VCS_TAG} :${VCS_SHORT_HASH}:" length="${TGZSIZE}" sparkle:dsaSignature="${SIGNATURE}" type="application/octet-stream"/>
+			<sparkle:releaseNotesLink>http://vienna-rss.org/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 	</channel>
 </rss>
