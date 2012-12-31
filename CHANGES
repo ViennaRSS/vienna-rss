@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 8 ("Happy New Year" edition)
+------------
+- Fixes to the build process
+- Fix date parsing
+- Fix cookies issue with some feeds
+
 3.0.0 Beta 7
 ------------
 - Reorganized on disk layout
