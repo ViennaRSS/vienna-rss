@@ -42,7 +42,9 @@ function signd {
 		else
 			codesign -f -s "${idetd}" -vvv "${appth}"
 		fi
-		codesign -vvv --verify "${appth}"
+		if ! codesign -vvv --verify "${appth}"; then
+			echo "warning: Code is improperly signed!" 1>&2
+		fi
 	else
 		echo "warning: No code signing identity configured; code will not be signed." 1>&2
 	fi
@@ -52,6 +54,11 @@ function signd {
 # Fail if not deployment
 if [ ! "${CONFIGURATION}" = "Deployment" ]; then
 	echo "error: This should only be run as Deployment" >&2
+	exit 1
+fi
+# Fail if incorrectly tagged
+if [[ VCS_TICK == "0" ]] && ! git describe --exact-match "${VCS_TAG}"; then
+	echo 'error: The tag is not annotated; please redo the tag with `git tag -s` or `git tag -a`.' 1>&2
 	exit 1
 fi
 
@@ -81,16 +88,11 @@ cd "${VIENNA_UPLOADS_DIR}"
 
 pubDate="$(LC_TIME=en_US date -jf '%FT%T%z' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 TGZSIZE="$(stat -f %z "${TGZ_FILENAME}")"
+SIGNATURE=$("${PROJECT_DIR}/keys/sign_update.rb" "${TGZ_FILENAME}" "${PRIVATE_KEY_PATH}")
 
-SIGNATURE=$(
-
-/usr/bin/ruby "${PROJECT_DIR}/keys/sign_update.rb" "${TGZ_FILENAME}" "${PRIVATE_KEY_PATH}"
-
-)
-
-
-[ $SIGNATURE ] || { echo Unable to load signing private key vienna_private_key.pem. Set PRIVATE_KEY_PATH in CS-ID.xcconfig; false; }
-
+if [ -z "${SIGNATURE}" ]; then
+	echo "warning: Unable to load signing private key vienna_private_key.pem. Set PRIVATE_KEY_PATH in CS-ID.xcconfig" 1>&2
+fi
 
 cat > "${VIENNA_CHANGELOG}" << EOF
 <?xml version="1.0" encoding="UTF-8" ?>
