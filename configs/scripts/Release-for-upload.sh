@@ -30,23 +30,24 @@ DOWNLOAD_BASE_URL="${DOWNLOAD_BASE_URL}/${DOWNLOAD_SUB_DIR}/${DOWNLOAD_TAG_DIR}"
 function signd {
 	if [ ! -z "${CODE_SIGN_IDENTITY}" ]; then
 		# Local Config
+		local appth="${1}"
 		local idetd="${CODE_SIGN_IDENTITY}"
 		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
-		local appth="${1}"
+		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
 
 		# Sign and verify the app
-		if [ ! -z "${resrul}" ]; then
+		if [[ ! -z "${resrul}" ]] && [[ ! -z "${csreq}" ]]; then
 			cp -a "${resrul}" "${appth}/ResourceRules.plist"
-			codesign -f -s "${idetd}" --resource-rules="${appth}/ResourceRules.plist" -vvv "${appth}"
+			codesign -f --sign "${idetd}" --resource-rules="${appth}/ResourceRules.plist" --requirements "${csreq}" -vvv "${appth}"
 			rm "${appth}/ResourceRules.plist"
 		else
-			codesign -f -s "${idetd}" -vvv "${appth}"
+			codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
 		fi
 		if ! codesign -vvv --verify "${appth}"; then
 			echo "warning: Code is improperly signed!" 1>&2
 		fi
 	else
-		echo "warning: No code signing identity configured; code will not be signed." 1>&2
+		echo "warning: No Code Signing Identity configured or no Code Signing Requirement configured; code will not be signed." 1>&2
 	fi
 }
 
