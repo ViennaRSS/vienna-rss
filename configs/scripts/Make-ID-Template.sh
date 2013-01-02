@@ -7,8 +7,8 @@ if [ ! -f configs/CS-ID.xcconfig ]; then
 CODE_SIGN_IDENTITY = 
 PRIVATE_KEY_PATH = 
 
-CODE_SIGN_REQUIREMENTS_PATH = "$(SRCROOT)/Resources/codesignrequirement.csreq"
-CODE_SIGN_RESOURCE_RULES_PATH = "$(SRCROOT)/Resources/ResourceRules.plist"
+CODE_SIGN_REQUIREMENTS_PATH = $(SRCROOT)/Resources/codesignrequirement.csreq
+CODE_SIGN_RESOURCE_RULES_PATH = $(SRCROOT)/Resources/ResourceRules.plist
 
 EOF
 fi
