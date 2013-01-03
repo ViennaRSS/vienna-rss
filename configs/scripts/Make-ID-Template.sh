@@ -5,7 +5,10 @@ if [ ! -f configs/CS-ID.xcconfig ]; then
 // Global settings for Code Signing
 
 CODE_SIGN_IDENTITY = 
-CODE_SIGN_RESOURCE_RULES_PATH = "$(SRCROOT)/Resources/ResourceRules.plist"
+PRIVATE_KEY_PATH = 
+
+CODE_SIGN_REQUIREMENTS_PATH = $(SRCROOT)/signing/codesignrequirement.csreq
+CODE_SIGN_RESOURCE_RULES_PATH = $(SRCROOT)/signing/ResourceRules.plist
 
 EOF
 fi
