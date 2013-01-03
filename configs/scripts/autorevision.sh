@@ -3,7 +3,8 @@
 # Config
 export PATH=${PATH}:/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin
 BUILD_NUMBER="2821"
-hauto="${SRCROOT}/src/autorevision.h"
+hauto="${DERIVED_FILE_DIR}/autorevision.h"
+fauto="${SRCROOT}/src/autorevision.h"
 xauto="${OBJROOT}/autorevision.h"
 cauto="${OBJROOT}/autorevision.cache"
 tauto="${OBJROOT}/autorevision.tmp"
@@ -37,6 +38,9 @@ fi
 
 # Output for src/autorevision.h.
 ./3rdparty/autorevision -f -o "${tauto}" -t h > "${hauto}"
+if [[ ! -f "${fauto}" ]] || ! cmp -s "${hauto}" "${fauto}"; then
+	cp -a "${hauto}" "${fauto}"
+fi
 
 # Output for info.plist prepossessing.
 ./3rdparty/autorevision -f -o "${cauto}" -t xcode > "${xauto}"
