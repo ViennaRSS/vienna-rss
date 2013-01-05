@@ -128,7 +128,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 // C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
 //  those we need early in the program launch and keep them in memory.
-#define kNumberOfDateFormatters 6
+#define kNumberOfDateFormatters 9
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
@@ -1007,16 +1007,22 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 
 	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
+	//IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20
 	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
 	[dateFormatterArray[0] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
 	// 2010-09-28T15:31:25.815+02:00
 	[dateFormatterArray[1] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"];
 	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
-	[dateFormatterArray[2] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZZ"];
-	[dateFormatterArray[3] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-	[dateFormatterArray[4] setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
-	// Other exotic date formats
-	[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
+	[dateFormatterArray[2] setDateFormat:@"EEE, dd MMM yyyy HH:mmss zzz"];
+	[dateFormatterArray[3] setDateFormat:@"EEE, dd MMM yyyy HH:mmss ZZZ"];
+	[dateFormatterArray[4] setDateFormat:@"EEE, dd MMM yyyy HH:mmss"];
+	// Required by compatibility with older OS X versions
+	[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+	[dateFormatterArray[6] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+	// Other exotic and non standard date formats
+	[dateFormatterArray[7] setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
+	[dateFormatterArray[8] setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+
 
 	[enUS release];
 	// end of initialization of date formatters
@@ -1026,11 +1032,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 
 	NSDate *date ;
+	NSMutableString * modifiedDateString = [NSMutableString stringWithString:dateString];
+	// Hack : remove colon in timezone as NSDateFormatter doesn't recognize them
+	if (modifiedDateString.length > 20)
+	{
+    	modifiedDateString = [modifiedDateString stringByReplacingOccurrencesOfString:@":"
+                            withString:@"" options:0 range:NSMakeRange(20, modifiedDateString.length-20)];
+    }
 
 	[dateFormatters_lock lock];
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
-		date = [dateFormatterArray[i] dateFromString:dateString];
+		date = [dateFormatterArray[i] dateFromString:modifiedDateString];
 		if (date != nil)
 		{
 			[dateFormatters_lock unlock];
