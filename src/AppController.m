@@ -1310,7 +1310,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
 {
-	[self openURL:[NSURL URLWithString:urlString] inPreferredBrowser:openInPreferredBrowserFlag];
+	NSURL * theURL = [NSURL URLWithString:urlString];
+	if (theURL == nil)
+	{
+		NSString * escapedText = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		theURL = [NSURL URLWithString:escapedText];
+	}
+	[self openURL:theURL inPreferredBrowser:openInPreferredBrowserFlag];
 }
 
 /** openURLs
@@ -2502,8 +2508,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			if (currentArticle && ![[currentArticle link] isBlank])
             {
                 [articlesWithLinks addObject:currentArticle];
-                NSString * escapedText = [[currentArticle link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-				[urls addObject:[NSURL URLWithString:escapedText]];
+                NSURL * theURL = [NSURL URLWithString:[currentArticle link]];
+                if (theURL == nil)
+                {
+                	NSString * escapedText = [[currentArticle link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                	theURL = [NSURL URLWithString:escapedText];
+                }
+                [urls addObject:theURL];
             }
 		}
 		[self openURLs:urls inPreferredBrowser:usePreferredBrowser];
