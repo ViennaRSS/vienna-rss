@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. "${OBJROOT}/autorevision.tmp"
+. "${OBJROOT}/autorevision.cache"
 BUILD_NUMBER="2821" # Magic number; do not touch!
 N_VCS_NUM="$(echo "${BUILD_NUMBER} + ${VCS_NUM}" | bc)"
 N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')" # for urls/files
