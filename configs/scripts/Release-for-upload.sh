@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. "${OBJROOT}/autorevision.tmp"
+. "${OBJROOT}/autorevision.cache"
 BUILD_NUMBER="2821" # Magic number; do not touch!
 N_VCS_NUM="$(echo "${BUILD_NUMBER} + ${VCS_NUM}" | bc)"
 N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')" # for urls/files
@@ -28,7 +28,7 @@ DOWNLOAD_BASE_URL="${DOWNLOAD_BASE_URL}/${DOWNLOAD_SUB_DIR}/${DOWNLOAD_TAG_DIR}"
 
 # codesign setup
 function signd {
-	if [ ! -z "${CODE_SIGN_IDENTITY}" ]; then
+	if [[ ! -z "${CODE_SIGN_IDENTITY}" ]] && [[ ! -z ${CODE_SIGN_REQUIREMENTS_PATH} ]]; then
 		# Local Config
 		local appth="${1}"
 		local idetd="${CODE_SIGN_IDENTITY}"
@@ -36,14 +36,10 @@ function signd {
 		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
 
 		# Sign and verify the app
-		if [[ ! -z "${resrul}" ]] && [[ ! -z "${csreq}" ]]; then
-			cp -a "${resrul}" "${appth}/ResourceRules.plist"
-			codesign -f --sign "${idetd}" --resource-rules="${appth}/ResourceRules.plist" --requirements "${csreq}" -vvv "${appth}"
-			rm "${appth}/ResourceRules.plist"
-		else
-			codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
-		fi
-		if ! codesign -vvv --verify "${appth}"; then
+		cp -a "${resrul}" "${appth}/ResourceRules.plist"
+		/usr/bin/codesign -f --sign "${idetd}" --resource-rules="${appth}/ResourceRules.plist" --requirements "${csreq}" -vvv "${appth}"
+		rm "${appth}/ResourceRules.plist"
+		if ! codesign --verify -vvv "${appth}"; then
 			echo "warning: Code is improperly signed!" 1>&2
 		fi
 	else
