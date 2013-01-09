@@ -1199,11 +1199,10 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	// Preserve the article that the user might currently be reading.
 	Preferences * prefs = [Preferences standardPreferences];
 	if (([prefs refreshFrequency] > 0) &&
-		([prefs markReadInterval] > 0) &&
 		(currentSelectedRow >= 0 && currentSelectedRow < (int)[[articleController allArticles] count]))
 	{
 		Article * currentArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
-		if ([currentArticle isRead] && ![currentArticle isDeleted])
+		if (![currentArticle isDeleted])
 			[articleController setArticleToPreserve:currentArticle];
 	}
 	
