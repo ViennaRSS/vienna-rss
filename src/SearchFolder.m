@@ -242,7 +242,7 @@
 {
 	for (Folder * folder in [db arrayOfFolders:fromId])
 	{
-		if (IsRSSFolder(folder) || IsGroupFolder(folder))
+		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
 		{
 			[folderValueField addItemWithTitle:[folder name]];
 			NSMenuItem * menuItem = [folderValueField itemWithTitle:[folder name]];
