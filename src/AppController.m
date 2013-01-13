@@ -1032,12 +1032,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 
 	NSDate *date ;
-	NSMutableString * modifiedDateString = [NSMutableString stringWithString:dateString];
+    NSString *modifiedDateString ;
 	// Hack : remove colon in timezone as NSDateFormatter doesn't recognize them
-	if (modifiedDateString.length > 20)
+	if (dateString.length > 20)
 	{
-    	modifiedDateString = [modifiedDateString stringByReplacingOccurrencesOfString:@":"
-                            withString:@"" options:0 range:NSMakeRange(20, modifiedDateString.length-20)];
+    	modifiedDateString = [dateString stringByReplacingOccurrencesOfString:@":"
+                            withString:@"" options:0 range:NSMakeRange(20, dateString.length-20)];
+    }
+    else
+    {
+        modifiedDateString = dateString;
     }
 
 	[dateFormatters_lock lock];
