@@ -467,9 +467,10 @@
 	if (curlDate != nil)
 		return curlDate;
 
+	// Otherwise do it ourselves.
+	// Expect the string to be loosely like a ISO 8601 subset
 	NSScanner * scanner = [NSScanner scannerWithString:dateString];
 	
-	// Otherwise do it ourselves.
 	[scanner setScanLocation:0u];
 	if (![scanner scanInt:&yearValue])
 		return nil;
