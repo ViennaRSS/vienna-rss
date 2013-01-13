@@ -8,6 +8,19 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 9
+------------
+- Refreshes should be quicker now (especially for Google Reader feeds)
+- Better handling of some ill-formed feeds
+- Videos aren't reset anymore when a feed refresh occurs
+- Fix an issue related to opening articles' original webpages
+- When defining a smart folder criteria, it is now possible to specify a Google Reader feed
+- Code signature modified to be compatible with OS X 10.5
+- Fix an error in German translation
+- Small visual improvements
+- Avoid warnings related to date string formats
+- Improvements to the build process
+
 3.0.0 Beta 8 ("Happy New Year" edition)
 ------------
 - Fixes to the build process
