@@ -373,24 +373,18 @@
 -(NSString *)valueOfElement
 {
 	NSMutableString * valueString = [NSMutableString stringWithCapacity:16];
-	NSString * mimeType = [self valueOfAttribute:@"type"];
 
-	BOOL isXMLContent = [mimeType isEqualToString:@"application/xhtml+xml"];
-	if ([mimeType isEqualToString:@"xhtml"])
-		isXMLContent = YES;
-	if ([mimeType isEqualToString:@"text/html"])
-		isXMLContent = YES;
-	if ([mimeType isEqualToString:@"text/html"] && [[self valueOfAttribute:@"mode"] isEqualToString:@"escaped"])
-		isXMLContent = NO;
+	CFIndex count = CFTreeGetChildCount(tree);
+	CFIndex index;
 
-	if (isXMLContent)
+	for (index = 0; index < count; ++index)
 	{
-		CFIndex count = CFTreeGetChildCount(tree);
-		CFIndex index;
+		CFXMLTreeRef subTree = CFTreeGetChildAtIndex(tree, index);
+		CFXMLNodeRef subNode = CFXMLTreeGetNode(subTree);
+		CFXMLNodeTypeCode type = CFXMLNodeGetTypeCode(subNode);
 		
-		for (index = 0; index < count; ++index)
+		if (type== kCFXMLNodeTypeElement) // XML or HTML...
 		{
-			CFXMLTreeRef subTree = CFTreeGetChildAtIndex(tree, index);
 			CFDataRef valueData = CFXMLTreeCreateXMLData(NULL, subTree);
 
 			NSString * nString = [[NSString alloc] initWithBytes:CFDataGetBytePtr(valueData) length:CFDataGetLength(valueData) encoding:NSUTF8StringEncoding];
@@ -399,20 +393,12 @@
 
 			CFRelease(valueData);
 		}
-	}
-	else
-	{
-		CFIndex count = CFTreeGetChildCount(tree);
-		CFIndex index;
-		
-		for (index = 0; index < count; ++index)
+		else //CDATA, string...
 		{
-			CFXMLTreeRef subTree = CFTreeGetChildAtIndex(tree, index);
-			CFXMLNodeRef subNode = CFXMLTreeGetNode(subTree);
 			NSString * valueName = (NSString *)CFXMLNodeGetString(subNode);
 			if (valueName != nil)
 			{
-				if (CFXMLNodeGetTypeCode(subNode) == kCFXMLNodeTypeEntityReference)
+				if (type == kCFXMLNodeTypeEntityReference)
 					valueName = [NSString mapEntityToString:valueName];
 				[valueString appendString:valueName];
 			}
