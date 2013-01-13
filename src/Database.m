@@ -1932,7 +1932,7 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", folderId];
+		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", folderId];
 		if (results && [results rowCount])
 		{
 			NSInteger unread_count = 0;
@@ -1942,12 +1942,13 @@ static Database * _sharedDatabase = nil;
 			{
 				NSString * guid = [row stringForColumnAtIndex:0];
 				BOOL read_flag = [[row stringForColumnAtIndex:1] intValue];
-				BOOL deleted_flag = [[row stringForColumnAtIndex:2] intValue];
-				NSString * title = [row stringForColumnAtIndex:3];
-				NSString * link = [row stringForColumnAtIndex:4];
-				BOOL revised_flag = [[row stringForColumnAtIndex:5] intValue];
-				BOOL hasenclosure_flag = [[row stringForColumnAtIndex:6] intValue];
-				NSString * enclosure = [row stringForColumnAtIndex:7];
+				BOOL marked_flag = [[row stringForColumnAtIndex:2] intValue];
+				BOOL deleted_flag = [[row stringForColumnAtIndex:3] intValue];
+				NSString * title = [row stringForColumnAtIndex:4];
+				NSString * link = [row stringForColumnAtIndex:5];
+				BOOL revised_flag = [[row stringForColumnAtIndex:6] intValue];
+				BOOL hasenclosure_flag = [[row stringForColumnAtIndex:7] intValue];
+				NSString * enclosure = [row stringForColumnAtIndex:8];
 
 				// Keep our own track of unread articles
 				if (!read_flag)
@@ -1955,6 +1956,7 @@ static Database * _sharedDatabase = nil;
 				
 				Article * article = [[Article alloc] initWithGuid:guid];
 				[article markRead:read_flag];
+				[article markFlagged:marked_flag];
 				[article markRevised:revised_flag];
 				[article markDeleted:deleted_flag];
 				[article setFolderId:folderId];
@@ -2465,8 +2467,30 @@ static Database * _sharedDatabase = nil;
  */
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
 {
-	NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
-	[self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%d and message_id='%@'", isFlagged, folderId, preparedGuid];
+	Folder * folder = [self folderFromID:folderId];
+	if (folder != nil)
+	{
+		// Prime the article cache
+		[self initArticleArray:folder];
+
+		Article * article = [folder articleFromGuid:guid];
+		if (article != nil && isFlagged != [article isFlagged])
+		{
+			NSString * preparedGuid = [SQLDatabase prepareStringForQuery:guid];
+
+			// Verify we're on the right thread
+			[self verifyThreadSafety];
+
+			// Mark an individual article flagged
+			SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set marked_flag=%d where folder_id=%ld and message_id='%@'", isFlagged, folderId, preparedGuid];
+			if (results)
+			{
+
+				[article markFlagged:isFlagged];
+			}
+			[results release];
+		}
+	}
 }
 
 /* markArticleDeleted

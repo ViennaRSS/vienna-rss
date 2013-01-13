@@ -537,8 +537,8 @@
 		if (IsGoogleReaderFolder(myFolder)) {
 			[[GoogleReader sharedManager] markStarred:[theArticle guid] starredFlag:flagged];
 		}
-		[theArticle markFlagged:flagged];
 		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
+        [theArticle markFlagged:flagged];
 	}
 	[db commitTransaction];
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
