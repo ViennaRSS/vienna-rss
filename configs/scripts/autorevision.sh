@@ -3,7 +3,7 @@
 # Config
 export PATH=${PATH}:/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin
 BUILD_NUMBER="2821"
-hauto="${DERIVED_FILE_DIR}/autorevision.h"
+hauto="${BUILT_PRODUCTS_DIR}/autorevision.h"
 fauto="${SRCROOT}/src/autorevision.h"
 xauto="${OBJROOT}/autorevision.h"
 cauto="${OBJROOT}/autorevision.cache"
