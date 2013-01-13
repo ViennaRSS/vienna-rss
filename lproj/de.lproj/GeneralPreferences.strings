@@ -11,19 +11,19 @@
 "After a short delay" = "Nach kurzer Zeit";
 
 /* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
-"Bounce the application icon" = "Lass das Programmicon springen";
+"Bounce the application icon" = "Docksymbol animieren";
 
 /* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
-"Check for new articles on start up" = "Beim Start nach neuen Artikeln suchen";
+"Check for new articles on start up" = "Neue Artikel abrufen beim Programmstart";
 
 /* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
-"Check for new articles:" = "Nach Aktualisierungen suchen:";
+"Check for new articles:" = "Neue Artikel abrufen:";
 
 /* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
 "Check for newer versions of Vienna on start up" = "Beim Start nach neuer Vienna-Version suchen";
 
 /* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
-"Default RSS Reader:" = "Standard-RSS-Reader:\n";
+"Default RSS Reader:" = "Standard RSS Reader:";
 
 /* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
 "Do nothing" = "Tue nichts";
@@ -76,7 +76,7 @@
 "OtherViews" = "Andere Ansichten";
 
 /* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
-"Save downloaded files to:" = "Geladene Datei sichern:";
+"Save downloaded files to:" = "Geladene Dateien sichern in:";
 
 /* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
 "Show in menu bar" = "In der Menüleiste zeigen";
