@@ -1,7 +1,0 @@
-// Vienna settings for Deployment configuration
-
-#include "Vienna-All.xcconfig"
-#include "General-Dep.xcconfig"
-
-
-BUILD_PREPROCESSOR_DEFINITIONS = $(inherited) NO_LOG_MACROS
