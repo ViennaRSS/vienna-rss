@@ -279,7 +279,7 @@
 								<int key="NSPeriodicInterval">75</int>
 								<object class="NSMenuItem" key="NSMenuItem" id="732023975">
 									<reference key="NSMenu" ref="848161439"/>
-									<string key="NSTitle">Nothing</string>
+									<string key="NSTitle">keiner</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -304,7 +304,6 @@
 										<reference ref="732023975"/>
 									</array>
 								</object>
-								<int key="NSSelectedIndex">-1</int>
 								<int key="NSPreferredEdge">3</int>
 								<bool key="NSUsesItemFromMenu">YES</bool>
 								<bool key="NSAltersState">YES</bool>
