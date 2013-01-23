@@ -347,7 +347,7 @@
 							<object class="NSButtonCell" key="NSCell" id="751285207">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Im Google Reader abbonieren</string>
+								<string key="NSContents">Im Google Reader abonnieren</string>
 								<reference key="NSSupport" ref="35791019"/>
 								<reference key="NSControlView" ref="972808856"/>
 								<int key="NSButtonFlags">1211912448</int>
