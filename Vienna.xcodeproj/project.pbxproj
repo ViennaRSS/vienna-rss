@@ -949,7 +949,7 @@
 		430C4AE0166175C20079C9FC /* Vienna-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Vienna-Info.plist"; path = "Resources/Vienna-Info.plist"; sourceTree = SOURCE_ROOT; };
 		430C4B001661F3270079C9FC /* CS-ID.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "configs/CS-ID.xcconfig"; sourceTree = SOURCE_ROOT; };
 		432E5192165D65AF00A8640E /* Project-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Project-All.xcconfig"; path = "configs/Project-All.xcconfig"; sourceTree = SOURCE_ROOT; };
-		434D6B8516937615008CBE8C /* codesignrequirement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = codesignrequirement.txt; path = signing/codesignrequirement.txt; sourceTree = "<group>"; };
+		434D6B8516937615008CBE8C /* codesignrequirement.rqset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = codesignrequirement.rqset; path = signing/codesignrequirement.rqset; sourceTree = "<group>"; };
 		43501CF9165D73C70018EDB7 /* Vienna-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-All.xcconfig"; path = "configs/Vienna-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dep.xcconfig"; path = "configs/Vienna-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dev.xcconfig"; path = "configs/Vienna-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -2005,7 +2005,7 @@
 				43EE754D165E832C000997FB /* Default Lists */,
 				43EE754E165E83D6000997FB /* UI Images */,
 				43EE7551165EA910000997FB /* lproj */,
-				434D6B8516937615008CBE8C /* codesignrequirement.txt */,
+				434D6B8516937615008CBE8C /* codesignrequirement.rqset */,
 				43B4611E1690982D00F6EC9A /* ResourceRules.plist */,
 				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
 			);

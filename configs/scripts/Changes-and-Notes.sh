@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. "${OBJROOT}/autorevision.tmp"
+. "${OBJROOT}/autorevision.cache"
 N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
 VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
 VIENNA_NOTES="${SRCROOT}/notes.html"
