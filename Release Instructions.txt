@@ -3,8 +3,9 @@ Instructions for building and uploading Vienna binaries to Sourceforge
 ## One time setup step: ##
 
  -	To ensure that releases are properly codesigned make sure that you have properly edited `configs/CS-ID.xcconfig` for your setup.
-    CODE_SIGN_IDENTITY should be the name of your certificate as it is stored in Keychain, and
-    PRIVATE_KEY_PATH should be the location of the private DSA key used by Sparkle
+    CODE_SIGN_IDENTITY should be the name of your certificate as it is stored in Keychain,
+    PRIVATE_KEY_PATH should be the location of the private DSA key used by Sparkle,
+    CODE_SIGN_REQUIREMENTS_PATH and CODE_SIGN_RESOURCE_RULES_PATH should generally remain at their default values.
 
 ## Tag Formatting ##
 
@@ -28,7 +29,7 @@ Tags should be in one of the following formats:
  2.	Make sure that the "CHANGES" file is up to date.
  3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
  4.	Commit anything unstaged
- 5.	Make a new tag using `git tag -s`, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
+ 5.	Make a new tag using `git tag -s`, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead). Push the tag to ViennaRSS' master at Github.
  6.	Run `make clean`.
  7.	Run `make release`.
  8.	Upload the contents of `Deployment/Uploads` (found in the build directory) using the following steps.
