@@ -412,3 +412,6 @@
 "Delete Google Reader RSS feed text" = "Delete Google Reader RSS feed text";
 "Delete Google Reader RSS feed" = "Delete Google Reader RSS feed";
 
+/* Added in 3.0.0 */
+"Last 48 hours" = "Last 48 hours";
+"Unread or flagged" = "Unread or flagged";

@@ -65,6 +65,22 @@ static NSMutableArray * _filterList = nil;
 	return ([[theArticle createdDate] compare:[[Preferences standardPreferences] objectForKey:MAPref_LastRefreshDate]] != NSOrderedAscending);
 }
 
+/* twoDaysFilterComparator
+ * Returns TRUE if the specified article was posted in the last 48 hours.
+ */
++(BOOL)twoDaysFilterComparator:(Article *)theArticle
+{
+	return ([[theArticle date] compare:[[NSCalendarDate date] dateByAddingTimeInterval:-172800]] != NSOrderedAscending);
+}
+
+/* unreadOrFlaggedArticleFilterComparator
+ * Returns TRUE if the specified article is unread or is flagge.
+ */
++(BOOL)unreadOrFlaggedArticleFilterComparator:(Article *)theArticle
+{
+	return ( ![theArticle isRead] || [theArticle isFlagged] );
+}
+
 /* initalize
  * Create all the default filters. To add a new filter:
  *
@@ -81,7 +97,9 @@ static NSMutableArray * _filterList = nil;
 	[ArticleFilter createFilter:@"Unread Articles" tag:MA_Filter_Unread comparator:@selector(unreadArticleFilterComparator:)];
 	[ArticleFilter createFilter:@"Last Refresh" tag:MA_Filter_LastRefresh comparator:@selector(lastRefreshFilterComparator:)];
 	[ArticleFilter createFilter:@"Today" tag:MA_Filter_Today comparator:@selector(todayFilterComparator:)];
+	[ArticleFilter createFilter:@"Last 48 hours" tag:MA_Filter_48h comparator:@selector(twoDaysFilterComparator:)];
 	[ArticleFilter createFilter:@"Flagged" tag:MA_Filter_Flagged comparator:@selector(flaggedArticleFilterComparator:)];
+	[ArticleFilter createFilter:@"Unread or flagged" tag:MA_Filter_Unread_Or_Flagged comparator:@selector(unreadOrFlaggedArticleFilterComparator:)];
 }
 
 /* arrayOfFilters
