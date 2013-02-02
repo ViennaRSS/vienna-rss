@@ -172,6 +172,13 @@
 					<key>Name</key>
 					<string>documentHTMLSource</string>
 				</dict>
+				<key>documentTabURL</key>
+				<dict>
+					<key>Description</key>
+					<string>The URL of the currently open tab</string>
+					<key>Name</key>
+					<string>documentTabURL</string>
+				</dict>
 				<key>articleListFont</key>
 				<dict>
 					<key>Description</key>

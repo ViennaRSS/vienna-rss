@@ -306,6 +306,17 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 	return @"";
 }
 
+-(NSString *)documentTabURL
+{
+	NSView<BaseView> * theView = [[(AppController*)[self delegate] browserView] activeTabItemView];
+	if ([theView isKindOfClass:[BrowserPane class]])
+	{
+		return [[(BrowserPane *)theView url] absoluteString];
+	}
+	else
+		return @"";
+}
+
 /* currentArticle
  * Retrieves the current article.
  */
