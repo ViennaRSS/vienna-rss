@@ -468,9 +468,12 @@ static RefreshManager * _refreshManager = nil;
             [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
         }
 		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_Feed], @"type", nil]];
-		[myRequest setUsername:[folder username]];
-		[myRequest setPassword:[folder password]];
-		[myRequest setUseCookiePersistence:NO];
+		if ([folder username] != nil)
+		{
+			[myRequest setUsername:[folder username]];
+			[myRequest setPassword:[folder password]];
+			[myRequest setUseCookiePersistence:NO];
+		}
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
