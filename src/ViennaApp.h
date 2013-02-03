@@ -58,6 +58,7 @@ OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *us
 -(int)totalUnreadCount;
 -(NSString *)currentTextSelection;
 -(NSString *)documentHTMLSource;
+-(NSString *)documentTabURL;
 
 // Change folder selection
 -(Folder *)currentFolder;

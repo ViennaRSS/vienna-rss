@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithSafariReadingList</string>
+	<key>Default</key>
+	<false/>
+	<key>Type</key>
+	<string>Script</string>
+	<key>Script</key>
+	<string>Vienna to Safari Reading List.scpt</string>
+	<key>FriendlyName</key>
+	<string>Safari Reading List</string>
+	<key>Tooltip</key>
+	<string>Add the current article to Safari reading list</string>
+	<key>ButtonImage</key>
+	<string>ReadingListButton</string>
+	<key>MenuPath</key>
+	<string>Add to Safari reading list</string>
+</dict>
+</plist>
