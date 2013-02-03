@@ -302,7 +302,10 @@ JSONDecoder * jsonDecoder;
 		if (newArticlesFromFeed == 0)
 			[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
 		else
+		{
 			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
+		}
 		
 		[dict release];
 
