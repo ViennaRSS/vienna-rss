@@ -118,7 +118,7 @@ JSONDecoder * jsonDecoder;
 		LOG_EXPR([request error]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR([request requestHeaders]);
-		[self resetAuthentication];
+		[self clearAuthentication];
 	}
 }
 
