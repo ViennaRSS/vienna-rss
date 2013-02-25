@@ -123,6 +123,7 @@
 		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
+		[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
     }
     return self;
@@ -849,6 +850,11 @@
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
 	[mainArticleView handleRefreshArticle:nc];
+}
+
+-(void)handleArticleListStateChange:(NSNotification *)nc
+{
+	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
 /* handleFolderUpdate
