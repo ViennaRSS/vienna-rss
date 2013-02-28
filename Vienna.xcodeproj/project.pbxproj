@@ -8533,7 +8533,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = StaticAnalyzer;
 		};
@@ -8626,7 +8625,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = Development;
 		};
@@ -8634,7 +8632,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */;
 			buildSettings = {
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};
 			name = Deployment;
 		};
