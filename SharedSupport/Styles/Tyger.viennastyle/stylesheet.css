@@ -89,3 +89,15 @@ span.articleAuthorStyle
 {
 	color: #600;
 }
+
+/* fix a 100% max size to potentially problematic elements */
+img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
+	max-width: 100%;
+}
+/* keep images ratio and avoid box overflow due to border or padding */
+img {
+	height: auto; width: auto;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
