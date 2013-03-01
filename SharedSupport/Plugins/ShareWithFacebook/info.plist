@@ -16,6 +16,8 @@
 	<string>Share the current article on Facebook</string>
 	<key>ButtonImage</key>
 	<string>facebookButton</string>
+	<key>ButtonImage@2x</key>
+	<string>facebookButton@2x</string>
 	<key>MenuPath</key>
 	<string>Share With Facebook</string>
 </dict>
