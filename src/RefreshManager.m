@@ -899,6 +899,7 @@ static RefreshManager * _refreshManager = nil;
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
 			[connectorItem setStatus:logText];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
 		}
 		
 		// Done with this connection

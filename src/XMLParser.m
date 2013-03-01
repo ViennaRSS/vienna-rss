@@ -379,6 +379,8 @@
 
 	for (index = 0; index < count; ++index)
 	{
+        if (index > 20000)  // there is an episodic problem with some Flickr feeds, which contain multiple <br /> tags ;
+            break;          // so, we speedup things a little...
 		CFXMLTreeRef subTree = CFTreeGetChildAtIndex(tree, index);
 		CFXMLNodeRef subNode = CFXMLTreeGetNode(subTree);
 		CFXMLNodeTypeCode type = CFXMLNodeGetTypeCode(subNode);
