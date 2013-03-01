@@ -16,6 +16,8 @@
 	<string>Share the current article on twitter</string>
 	<key>ButtonImage</key>
 	<string>twitterButton</string>
+	<key>ButtonImage@2x</key>
+	<string>twitterButton@2x</string>
 	<key>ShortenURLs</key>
 	<false/>
 	<key>MenuPath</key>

@@ -104,6 +104,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	[articleText setUIDelegate:self];
@@ -898,6 +899,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
+	if (self == [articleController mainArticleView])
+	{
+		[articleList reloadData];
+	}
+}
+
+-(void)handleArticleListStateChange:(NSNotification *)note
+{
 	if (self == [articleController mainArticleView])
 	{
 		[articleList reloadData];
