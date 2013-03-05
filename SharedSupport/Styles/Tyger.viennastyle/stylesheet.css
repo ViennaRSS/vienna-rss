@@ -96,7 +96,6 @@ img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, v
 }
 /* keep images ratio and avoid box overflow due to border or padding */
 img {
-	height: auto; width: auto;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
