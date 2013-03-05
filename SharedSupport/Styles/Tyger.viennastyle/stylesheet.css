@@ -1,92 +1,76 @@
-a:link
-{
+body {
+	background: #fff;
+	margin: 0;
+	padding: 0 0 10px 0;
+  color: #333;
+  font: medium/150% "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+a:link {
 	color: #009;
 	text-decoration: none;
 	font-weight: bold;
 }
-a:visited
-{
+
+a:visited {
 	color: #66F;
 	text-decoration: none;
 	font-weight: bold;
 }
-a:hover
-{
+a:hover {
 	color: #F30;
 	text-decoration: underline;
 }
 
-body
-{
-	background: #fff;
-	margin: 0;
-	padding: 0 0 10px;
-	font: medium/150% "Lucida Grande", sans-serif;
-	color: #333;
-}
-
-.articleTitleStyle
-{
-	text-shadow: 0 1px 2px #000;
+.articleTitleStyle {
+	text-shadow: 0 1px 2px #1c477f;
 	padding: 7px 0 7px 15px;
-	background: #005FD7 url(tiger.png) repeat-x;
 	border-bottom: 1px solid #1C477F;
 	font-size: large;
 	text-shadow: 0 1px 2px #000;
+	background: #6db3f2;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6db3f2), color-stop(50%,#54a3ee), color-stop(51%,#3690f0), color-stop(100%,#1e69de));
+	background: -webkit-linear-gradient(top,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%);
+	background: linear-gradient(to bottom,  #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%);
 }
-.articleTitleStyle a
-{
-	text-decoration: none;
+
+.articleTitleStyle a {
 	color: #fff;
 }
 
-.info
-{
+.info {
 	border-bottom: 1px solid #ddd;
 	margin: 0 15px 5px;
 	padding: 5px 0;
 }
-.info span
-{
+
+.info span {
 	display: block;
 	margin-bottom: 2px;
 }
-.info span:before
-{
+
+.info span:before {
 	font-weight: bold;
 	color: #777;
 }
-span.feedLinkStyle:before
-{
-	content: "From: ";
-}
-span.articleDateStyle:before
-{
-	content: "Date: ";
-}
 
-span.articleEnclosureStyle:before
-{
-	content: "Enclosure: ";
-}
+span.feedLinkStyle:before { content: "From: " }
+span.articleDateStyle:before { content: "Date: " }
+span.articleEnclosureStyle:before { content: "Enclosure: " }
 
-.articleBodyStyle
-{
-	background: #fff;
+.articleBodyStyle {
 	padding: 0 15px;
-	font: medium/150% "Lucida Grande", sans-serif;
-	color: #333;
 }
-.articleDetails
-{
+
+.articleDetails { 
 	padding: 6px 15px 6px 15px;
 }
-.articleDetails a
-{
+
+.articleDetails a {
 	color: #000;
 }
-span.articleAuthorStyle
-{
+
+span.articleAuthorStyle {
 	color: #600;
 }
 
@@ -94,9 +78,8 @@ span.articleAuthorStyle
 img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
 	max-width: 100%;
 }
+
 /* keep images ratio and avoid box overflow due to border or padding */
 img {
 	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 }
