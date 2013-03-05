@@ -1,84 +1,9 @@
 body {
-	color: #ffffff;
+	color: #fff;
 	font: 13px/1.6em "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-	margin-right: 20px;
-	margin-left: 20px;
-	background-color: #4c4c4c !important;
-	background: url(back.tif) repeat-x top left;
+	margin: 0 20px;
+  background: url(back.tif) repeat-x left top #5d5e5d;
 	text-shadow: #000 1px 2px 4px;
-}
-
-#feedHeading {
-	font-size: 20px;
-	margin-bottom: 10px;
-	margin-top: 20px;
-	height: 40px;
-	background: url(SelectionMiddle.png) repeat-x top left;
-	line-height: 34px;
-	padding-left: 0px;
-	margin-left: 0px !important;
-	margin-right: 0px !important;
-	overflow: hidden;
-}
-
-#feedHeading a {
-	color: #FFFFFF;
-	font-weight: bold;
-}
-
-#left {
-	font-size: 20px;
-	margin-bottom: 10px;
-	margin-top: 20px;
-	margin-right: 0px !important;
-	padding-right: 0px;
-	height: 40px;
-	background: url(SelectionLeft.png) repeat-x top left;
-	line-height: 40px;
-	width: 26px !important;
-}
-
-#right {
-	font-size: 20px;
-	margin-bottom: 10px;
-	margin-top: 20px;
-	margin-left: 0px !important;
-	padding-left: 0px;
-	height: 40px;
-	background: url(SelectionRight.png) repeat-x top left;
-	line-height: 40px;
-	width: 52px !important;
-}
-
-#feedTitle {
-	font-weight: bold;	
-	font-size: 50px;
-	height: 56px;
-	line-height: 50px;
-	padding-left: 70px;
-	color: #FFF;
-	text-align: center;	background: url(feeds.png) no-repeat;
-	max-width: 90%;
-	overflow: hidden;
-}
-
-#feedTitle a {
-	color: #FFFFFF;
-}
-
-#entryDescription {
-	font-size: 13px;
-	margin-right: 30px;
-	margin-left: 30px;
-}
-
-#otherInfo {
-	margin-left: 12px;
-	padding-left: 18px;
-	font-size: 11px;
-	background: url(Unplayed.png) no-repeat top left;
-	line-height: 14px;
-	height: 64px;
 }
 
 a {
@@ -93,4 +18,54 @@ a:hover {
 
 a:active {
 	color: #FD931B;
+}
+
+.feedHeading {
+	height: 40px;
+	margin: 40px 0 20px 0;
+	font-size: 20px;
+	line-height: 40px;
+	border-radius: 20px;
+	overflow: hidden;
+	
+	background: #959595;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#959595), color-stop(46%,#0d0d0d), color-stop(50%,#010101), color-stop(53%,#0a0a0a), color-stop(76%,#4e4e4e), color-stop(87%,#383838), color-stop(100%,#1b1b1b));
+	background: -webkit-linear-gradient(top,  #959595 0%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#4e4e4e 76%,#383838 87%,#1b1b1b 100%);
+	background: linear-gradient(to bottom,  #959595 0%,#0d0d0d 46%,#010101 50%,#0a0a0a 53%,#4e4e4e 76%,#383838 87%,#1b1b1b 100%);
+  text-indent: 25px;
+}
+
+.feedHeading a {
+	color: #fff;
+	font-weight: bold;
+}
+
+.feedTitle {
+	background: url(feeds.png) no-repeat 0;
+	color: #fff;
+	overflow: hidden;
+  text-align: left;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 50px;
+  padding: 0 0 0 70px;
+  margin: 10px 0 0;
+}
+
+.feedTitle a {
+	color: #fff;
+}
+
+.entryDescription {
+	font-size: 13px;
+	margin: 0 30px;
+}
+
+.otherInfo {
+	height: 64px;
+	margin: 0 0 0 12px;
+	padding: 0 0 0 18px;
+	background: url(Unplayed.png) no-repeat top left;
+	font-size: 11px;
+	line-height: 14px;
 }
