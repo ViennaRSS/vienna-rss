@@ -170,9 +170,9 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
 	  NSString * theUser = [[request responseHeaders] objectForKey:@"X-Reader-User"];
-	  if (theUser != nil) { //if Google matches us with a user...
+	  NSData *data = [request responseData];
+	  if (theUser != nil && data != nil) { //if Google matches us with a user...
 		[self setReaderUser:theUser];
-		NSData *data = [request responseData];		
 		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
 		NSDate * updateDate = nil;
 		
