@@ -58,7 +58,7 @@
 	<key>CFBundleHelpBookName</key>
 	<string>Vienna Help</string>
 	<key>CFBundleIconFile</key>
-	<string>New icon</string>
+	<string>vienna-3</string>
 	<key>CFBundleIdentifier</key>
 	<string>uk.co.opencommunity.vienna2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
