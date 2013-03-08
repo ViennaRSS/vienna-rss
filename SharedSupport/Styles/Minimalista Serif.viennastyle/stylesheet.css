@@ -1,0 +1,99 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 1em 2em;
+	font-family: Baskerville, Serif;
+	font-size: 17px;
+	font-weight: normal;
+	line-height: 1.4;
+	color: Black;
+}
+
+a {
+	color: #cc3333;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+h1 {
+	font-size: 140%;
+	font-weight: bold;
+	line-height: 1.1;
+}
+
+h2 {
+	font-size: 125%;
+	font-weight: bold;
+	line-height: 1.1;
+}
+
+h3 {
+	font-size: 110%;
+	font-weight: bold;
+	line-height: 1.1;
+}
+
+p {
+	margin: 1em 0;
+}
+
+ul, ol, dl {
+	margin-left: 2em;
+}
+
+blockquote {
+	border-left: 1px solid #ccc;
+	padding-left: 1em;
+	color: #666;
+}
+
+div.header {
+}
+
+div.header h1 {
+	font-size: 200%;
+	font-weight: normal;
+}
+
+div.info {
+	padding: 0 1px;
+	font-family: "Lucida Grande", Geneva, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+div.info a {
+	color: Black;
+}
+
+div.main {
+	margin: 1em 0 0 0;
+	overflow:auto;
+}
+
+span.articleDateStyle:before, span.articleAuthorStyle:before
+{
+	content: " - ";
+}
+
+span.articleEnclosureStyle:before
+{
+	content: " - Enclosure: ";
+}
+
+/* fix a 100% max size to potentially problematic elements */
+img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
+	max-width: 100%;
+}
+/* keep images ratio and avoid box overflow due to border or padding */
+img {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
