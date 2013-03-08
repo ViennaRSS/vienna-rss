@@ -10,12 +10,7 @@
 	<key>BBC World News</key>
 	<dict>
 		<key>URL</key>
-		<string>http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml</string>
-	</dict>
-	<key>Nibblous - Recipes</key>
-	<dict>
-		<key>URL</key>
-		<string>http://feeds.feedburner.com/nibblous</string>
+		<string>http://feeds.bbci.co.uk/news/world/rss.xml</string>
 	</dict>
 	<key>The Unofficial Apple Weblog (TUAW)</key>
 	<dict>
@@ -25,12 +20,12 @@
 	<key>World of Apple</key>
 	<dict>
 		<key>URL</key>
-		<string>http://loop.worldofapple.com/feed/atom/</string>
+		<string>http://worldofapple.com/feed</string>
 	</dict>
-	<key>Mac OSX Hints</key>
+	<key>Mac OS X Hints</key>
 	<dict>
 		<key>URL</key>
-		<string>http://feeds.macosxhints.com/macosxhints/recent</string>
+		<string>feed://feeds.macosxhints.com/macosxhints/recent</string>
 	</dict>
 	<key>Vienna Developer Blog</key>
 	<dict>
