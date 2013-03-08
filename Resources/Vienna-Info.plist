@@ -53,14 +53,12 @@
 	<string>Vienna</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Vienna version VCS_TAG :VCS_SHORT_HASH:, Copyright 2004-2012 Contributors. See Help/Acknowledgements for list of contributors.</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2004-2012 Contributors. See Help/Acknowledgements for list of contributors.</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna Help</string>
 	<key>CFBundleHelpBookName</key>
 	<string>Vienna Help</string>
 	<key>CFBundleIconFile</key>
-	<string>vienna2.icns</string>
+	<string>New icon</string>
 	<key>CFBundleIdentifier</key>
 	<string>uk.co.opencommunity.vienna2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -86,10 +84,6 @@
 			<true/>
 		</dict>
 	</array>
-	<key>VCSLongHash</key>
-	<string>VCS_FULL_HASH</string>
-	<key>VCSShortHash</key>
-	<string>VCS_SHORT_HASH</string>
 	<key>CFBundleVersion</key>
 	<string>VCS_NUM</string>
 	<key>LSApplicationCategoryType</key>
@@ -98,18 +92,23 @@
 	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright 2004-2012 Contributors. See Help/Acknowledgements for list of contributors.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
-	<key>SmartCrashReports_CompanyName</key>
-	<string>OpenCommunity</string>
-	<key>SmartCrashReports_EmailTicket</key>
-	<string>SCR-15C768BF24</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<string>YES</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>vienna_public_key.pem</string>
-
+	<key>SmartCrashReports_CompanyName</key>
+	<string>OpenCommunity</string>
+	<key>SmartCrashReports_EmailTicket</key>
+	<string>SCR-15C768BF24</string>
+	<key>VCSLongHash</key>
+	<string>VCS_FULL_HASH</string>
+	<key>VCSShortHash</key>
+	<string>VCS_SHORT_HASH</string>
 </dict>
 </plist>
