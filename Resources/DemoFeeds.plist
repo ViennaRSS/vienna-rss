@@ -12,11 +12,6 @@
 		<key>URL</key>
 		<string>http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml</string>
 	</dict>
-	<key>Nibblous - Recipes</key>
-	<dict>
-		<key>URL</key>
-		<string>http://feeds.feedburner.com/nibblous</string>
-	</dict>
 	<key>The Unofficial Apple Weblog (TUAW)</key>
 	<dict>
 		<key>URL</key>
