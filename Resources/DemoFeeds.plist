@@ -20,7 +20,7 @@
 	<key>World of Apple</key>
 	<dict>
 		<key>URL</key>
-		<string>http://loop.worldofapple.com/feed/atom/</string>
+		<string>http://worldofapple.com/feed</string>
 	</dict>
 	<key>Mac OSX Hints</key>
 	<dict>
