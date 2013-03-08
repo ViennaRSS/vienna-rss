@@ -22,10 +22,10 @@
 		<key>URL</key>
 		<string>http://worldofapple.com/feed</string>
 	</dict>
-	<key>Mac OSX Hints</key>
+	<key>Mac OS X Hints</key>
 	<dict>
 		<key>URL</key>
-		<string>http://feeds.macosxhints.com/macosxhints/recent</string>
+		<string>feed://feeds.macosxhints.com/macosxhints/recent</string>
 	</dict>
 	<key>Vienna Developer Blog</key>
 	<dict>
