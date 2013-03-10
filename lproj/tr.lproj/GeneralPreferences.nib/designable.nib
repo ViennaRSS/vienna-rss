@@ -46,7 +46,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{333, 334}, {512, 456}}</string>
 				<int key="NSWTFlags">1886912512</int>
-				<string key="NSWindowTitle">Fenster</string>
+				<string key="NSWindowTitle">Pencere</string>
 				<object class="NSMutableString" key="NSWindowClass">
 					<characters key="NS.bytes">NSWindow</characters>
 				</object>
@@ -69,7 +69,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="955263464">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Neue Artikel abrufen:</string>
+								<string key="NSContents">Yeni makaleleri kontrol et:</string>
 								<object class="NSFont" key="NSSupport" id="525591216">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
@@ -124,7 +124,7 @@
 								<int key="NSPeriodicInterval">75</int>
 								<object class="NSMenuItem" key="NSMenuItem" id="153592526">
 									<reference key="NSMenu" ref="491406057"/>
-									<string key="NSTitle">nur manuell</string>
+									<string key="NSTitle">El ile</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -142,9 +142,7 @@
 								</object>
 								<bool key="NSMenuItemRespectAlignment">YES</bool>
 								<object class="NSMenu" key="NSMenu" id="491406057">
-									<object class="NSMutableString" key="NSTitle">
-										<characters key="NS.bytes">OtherViews</characters>
-									</object>
+									<string key="NSTitle">DiğerGörünümler</string>
 									<array class="NSMutableArray" key="NSMenuItems">
 										<reference ref="153592526"/>
 										<object class="NSMenuItem" id="454943266">
@@ -162,7 +160,7 @@
 										</object>
 										<object class="NSMenuItem" id="318245355">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">alle 5 Minuten</string>
+											<string key="NSTitle">5 dakikada bir</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -174,7 +172,7 @@
 										</object>
 										<object class="NSMenuItem" id="483853417">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">alle 15 Minuten</string>
+											<string key="NSTitle">15 dakikada bir</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -186,7 +184,7 @@
 										</object>
 										<object class="NSMenuItem" id="488400455">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">alle 30 Minuten</string>
+											<string key="NSTitle">30 dakikada bir</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -211,7 +209,7 @@
 										</object>
 										<object class="NSMenuItem" id="384807435">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">jede Stunde</string>
+											<string key="NSTitle">Her saat</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -223,7 +221,7 @@
 										</object>
 										<object class="NSMenuItem" id="90817226">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">alle 2 Stunden</string>
+											<string key="NSTitle">2 saatte bir</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -235,7 +233,7 @@
 										</object>
 										<object class="NSMenuItem" id="73533167">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">alle 3 Stunden</string>
+											<string key="NSTitle">3 saatte bir</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -247,7 +245,7 @@
 										</object>
 										<object class="NSMenuItem" id="519513551">
 											<reference key="NSMenu" ref="491406057"/>
-											<string key="NSTitle">alle 6 Stunden</string>
+											<string key="NSTitle">6 saatte bir</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -277,7 +275,7 @@
 							<object class="NSButtonCell" key="NSCell" id="737128780">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Beim Start nach neuer Vienna-Version suchen</string>
+								<string key="NSContents">Başlangıçta Vienna'nın yeni sürümünü kontrol et</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="878799596"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -306,7 +304,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="672147712">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Standard RSS Reader:</string>
+								<string key="NSContents">Varsayılan RSS Tarayıcısı:</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="819521997"/>
 								<reference key="NSBackgroundColor" ref="643545473"/>
@@ -337,7 +335,7 @@
 								<int key="NSPeriodicInterval">75</int>
 								<object class="NSMenuItem" key="NSMenuItem" id="638305594">
 									<reference key="NSMenu" ref="519198726"/>
-									<string key="NSTitle">Nichts</string>
+									<string key="NSTitle">Hiçbir şey</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -349,7 +347,7 @@
 								</object>
 								<bool key="NSMenuItemRespectAlignment">YES</bool>
 								<object class="NSMenu" key="NSMenu" id="519198726">
-									<string key="NSTitle">Andere Ansichten</string>
+									<string key="NSTitle">DiğerGörünümler</string>
 									<array class="NSMutableArray" key="NSMenuItems">
 										<reference ref="638305594"/>
 									</array>
@@ -372,7 +370,7 @@
 							<object class="NSButtonCell" key="NSCell" id="178339721">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Neue Artikel abrufen beim Programmstart</string>
+								<string key="NSContents">Başlangıçta yeni makaleleri kontrol et</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="662146113"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -396,7 +394,7 @@
 							<object class="NSButtonCell" key="NSCell" id="215422471">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Öffne Links im Hintergrund</string>
+								<string key="NSContents">Yeni bağlantıları arkaplanda aç</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="376700191"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -420,7 +418,7 @@
 							<object class="NSButtonCell" key="NSCell" id="1037061386">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Öffne Links im externen Browser</string>
+								<string key="NSContents">Bağlantıları harici tarayıcıda aç</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="296820080"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -444,7 +442,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="998468604">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Leere Elemente in den Papierkorb:</string>
+								<string key="NSContents">Seçili makaleleri çöp kutusuna taşı:</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="552035516"/>
 								<reference key="NSBackgroundColor" ref="643545473"/>
@@ -475,7 +473,7 @@
 								<int key="NSPeriodicInterval">75</int>
 								<object class="NSMenuItem" key="NSMenuItem" id="1033917453">
 									<reference key="NSMenu" ref="820129883"/>
-									<string key="NSTitle">(Do not localise)</string>
+									<string key="NSTitle">(Yerelleştirme)</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -487,7 +485,7 @@
 								</object>
 								<bool key="NSMenuItemRespectAlignment">YES</bool>
 								<object class="NSMenu" key="NSMenu" id="820129883">
-									<string key="NSTitle">Andere Ansichten</string>
+									<string key="NSTitle">DiğerGörünümler</string>
 									<array class="NSMutableArray" key="NSMenuItems">
 										<reference ref="1033917453"/>
 									</array>
@@ -510,7 +508,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="395347200">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Geladene Dateien sichern in:</string>
+								<string key="NSContents">İndirilen dosyaları şuraya kaydet:</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="786033015"/>
 								<reference key="NSBackgroundColor" ref="643545473"/>
@@ -541,7 +539,7 @@
 								<int key="NSPeriodicInterval">75</int>
 								<object class="NSMenuItem" key="NSMenuItem" id="584674772">
 									<reference key="NSMenu" ref="867197758"/>
-									<string key="NSTitle">(Path)</string>
+									<string key="NSTitle">(Yol)</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -553,7 +551,7 @@
 								</object>
 								<bool key="NSMenuItemRespectAlignment">YES</bool>
 								<object class="NSMenu" key="NSMenu" id="867197758">
-									<string key="NSTitle">Andere Ansichten</string>
+									<string key="NSTitle">DiğerGörünümler</string>
 									<array class="NSMutableArray" key="NSMenuItems">
 										<reference ref="584674772"/>
 										<object class="NSMenuItem" id="825080610">
@@ -571,7 +569,7 @@
 										</object>
 										<object class="NSMenuItem" id="179719287">
 											<reference key="NSMenu" ref="867197758"/>
-											<string key="NSTitle">Aüswählen...</string>
+											<string key="NSTitle">Diğer...</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -600,7 +598,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="749350578">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string key="NSContents">Wenn neue ungelesene Artikel empfangen wurden:</string>
+								<string type="base64-UTF8" key="NSContents">WWVuaSBva3VubWFtxLHFnyBtYWthbGUgYWzEsW5kxLHEn8SxbmRhOgo</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="202000785"/>
 								<reference key="NSBackgroundColor" ref="643545473"/>
@@ -622,12 +620,12 @@
 								<object class="NSButtonCell" id="410323248">
 									<int key="NSCellFlags">-2080374784</int>
 									<int key="NSCellFlags2">0</int>
-									<string key="NSContents">Tue nichts</string>
+									<string key="NSContents">Hiçbir şey yapma</string>
 									<reference key="NSSupport" ref="525591216"/>
 									<reference key="NSControlView" ref="958473856"/>
 									<int key="NSButtonFlags">1211912448</int>
 									<int key="NSButtonFlags2">0</int>
-									<object class="NSCustomResource" key="NSNormalImage" id="1073500013">
+									<object class="NSCustomResource" key="NSNormalImage" id="287111905">
 										<string key="NSClassName">NSImage</string>
 										<string key="NSResourceName">NSRadioButton</string>
 									</object>
@@ -644,13 +642,13 @@
 								<object class="NSButtonCell" id="734264384">
 									<int key="NSCellFlags">67108864</int>
 									<int key="NSCellFlags2">0</int>
-									<string key="NSContents">Zeige die Anzahl der ungelesen Artikel im Docksymbol</string>
+									<string key="NSContents">Okunmamış makale sayısını uygulama ikonunda göster</string>
 									<reference key="NSSupport" ref="525591216"/>
 									<reference key="NSControlView" ref="958473856"/>
 									<int key="NSTag">1</int>
 									<int key="NSButtonFlags">1211912448</int>
 									<int key="NSButtonFlags2">0</int>
-									<reference key="NSNormalImage" ref="1073500013"/>
+									<reference key="NSNormalImage" ref="287111905"/>
 									<reference key="NSAlternateImage" ref="783606962"/>
 									<string key="NSAlternateContents"/>
 									<reference key="NSKeyEquivalent" ref="874086800"/>
@@ -660,12 +658,12 @@
 								<object class="NSButtonCell" id="1020113000">
 									<int key="NSCellFlags">67108864</int>
 									<int key="NSCellFlags2">0</int>
-									<string key="NSContents">Docksymbol animieren</string>
+									<string key="NSContents">Uygulama simgesini zıplat</string>
 									<reference key="NSSupport" ref="525591216"/>
 									<reference key="NSControlView" ref="958473856"/>
 									<int key="NSButtonFlags">1211912448</int>
 									<int key="NSButtonFlags2">2</int>
-									<reference key="NSNormalImage" ref="1073500013"/>
+									<reference key="NSNormalImage" ref="287111905"/>
 									<reference key="NSAlternateImage" ref="783606962"/>
 									<string key="NSAlternateContents"/>
 									<int key="NSPeriodicDelay">400</int>
@@ -683,7 +681,7 @@
 								<reference key="NSSupport" ref="525591216"/>
 								<int key="NSButtonFlags">1211912448</int>
 								<int key="NSButtonFlags2">0</int>
-								<reference key="NSNormalImage" ref="1073500013"/>
+								<reference key="NSNormalImage" ref="287111905"/>
 								<reference key="NSAlternateImage" ref="783606962"/>
 								<string key="NSAlternateContents"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -707,7 +705,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="188801135">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string key="NSContents">Markiere aktuellen Artikel als gelesen:</string>
+								<string type="base64-UTF8" key="NSContents">U2XDp2lsaSBtYWthbGV5aSBva3VuZHUgb2xhcmFrIGnFn2FyZXRsZToKA</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="644710304"/>
 								<reference key="NSBackgroundColor" ref="643545473"/>
@@ -728,12 +726,12 @@
 								<object class="NSButtonCell" id="738935894">
 									<int key="NSCellFlags">-2080374784</int>
 									<int key="NSCellFlags2">0</int>
-									<string key="NSContents">Nach "Nächster ungelesener Artikel" Befehl</string>
+									<string key="NSContents">"Next Unread" komutundan sonra</string>
 									<reference key="NSSupport" ref="525591216"/>
 									<reference key="NSControlView" ref="201269196"/>
 									<int key="NSButtonFlags">1211912448</int>
 									<int key="NSButtonFlags2">0</int>
-									<reference key="NSNormalImage" ref="1073500013"/>
+									<reference key="NSNormalImage" ref="287111905"/>
 									<reference key="NSAlternateImage" ref="783606962"/>
 									<string key="NSAlternateContents"/>
 									<object class="NSMutableString" key="NSKeyEquivalent" id="974697841">
@@ -745,13 +743,13 @@
 								<object class="NSButtonCell" id="707046230">
 									<int key="NSCellFlags">67108864</int>
 									<int key="NSCellFlags2">0</int>
-									<string key="NSContents">Nach kurzer Zeit</string>
+									<string key="NSContents">Kısa bir aradan sonra</string>
 									<reference key="NSSupport" ref="525591216"/>
 									<reference key="NSControlView" ref="201269196"/>
 									<int key="NSTag">1</int>
 									<int key="NSButtonFlags">1211912448</int>
 									<int key="NSButtonFlags2">0</int>
-									<reference key="NSNormalImage" ref="1073500013"/>
+									<reference key="NSNormalImage" ref="287111905"/>
 									<reference key="NSAlternateImage" ref="783606962"/>
 									<string key="NSAlternateContents"/>
 									<reference key="NSKeyEquivalent" ref="974697841"/>
@@ -770,7 +768,7 @@
 								<reference key="NSSupport" ref="525591216"/>
 								<int key="NSButtonFlags">1211912448</int>
 								<int key="NSButtonFlags2">0</int>
-								<reference key="NSNormalImage" ref="1073500013"/>
+								<reference key="NSNormalImage" ref="287111905"/>
 								<reference key="NSAlternateImage" ref="783606962"/>
 								<string key="NSAlternateContents"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -791,7 +789,7 @@
 							<object class="NSButtonCell" key="NSCell" id="608382215">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">In der Menüleiste zeigen</string>
+								<string key="NSContents">Menü barında göster</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="779753614"/>
 								<int key="NSButtonFlags">1211912448</int>
