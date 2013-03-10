@@ -747,7 +747,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		if (numberOfRowsInCell == 0)
 			++numberOfRowsInCell;
 	}
-	[articleList setRowHeight:(height + 3.0f) * (float)numberOfRowsInCell +2.0f];
+	[articleList setRowHeight:(height + 2.0f) * (float)numberOfRowsInCell];
 }
 
 /* showSortDirection
