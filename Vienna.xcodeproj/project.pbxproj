@@ -62,6 +62,8 @@
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
+		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
+		3A8E2EBE16EBB356001DFDD6 /* vienna2plugin.icns in Resources */ = {isa = PBXBuildFile; fileRef = AA1A3DC61100FA6E00F89575 /* vienna2plugin.icns */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
@@ -614,7 +616,6 @@
 		43EE8406165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8008165EAA6E000997FB /* SyncPreferences.xib */; };
 		43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
-		5735F1C716E964760001EB8D /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5735F1C616E964760001EB8D /* vienna-3.icns */; };
 		5745979916E3DC4F00D8AE16 /* stylesMenuButton@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5745979816E3DC4F00D8AE16 /* stylesMenuButton@2x.tiff */; };
 		5749799A16E3D6A90021C8DE /* folderError@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5749799716E3D6A90021C8DE /* folderError@2x.tiff */; };
 		5749799B16E3D6A90021C8DE /* rssFolder@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5749799816E3D6A90021C8DE /* rssFolder@2x.tiff */; };
@@ -642,7 +643,6 @@
 		5766692816DEB694001C8786 /* skipFolderButtonPressed@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5766692616DEB694001C8786 /* skipFolderButtonPressed@2x.tiff */; };
 		5766692B16DEB69E001C8786 /* subscribeButton@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5766692916DEB69E001C8786 /* subscribeButton@2x.tiff */; };
 		5766692C16DEB69E001C8786 /* subscribeButtonPressed@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5766692A16DEB69E001C8786 /* subscribeButtonPressed@2x.tiff */; };
-		57B1721216E9665500C011C9 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
 		57DA9D0B16DFFCD3000889E7 /* unread@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 57DA9D0A16DFFCD3000889E7 /* unread@2x.tiff */; };
 		57DA9D0D16DFFCDB000889E7 /* rssFeedNew@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 57DA9D0C16DFFCDB000889E7 /* rssFeedNew@2x.tiff */; };
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
@@ -1555,7 +1555,6 @@
 		43EE837A165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = SearchFolder.nib; sourceTree = "<group>"; };
 		43EE837C165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_TW; path = SearchFolder.strings; sourceTree = "<group>"; };
 		43EE837E165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = zh_TW; path = SyncPreferences.xib; sourceTree = "<group>"; };
-		5735F1C616E964760001EB8D /* vienna-3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "vienna-3.icns"; sourceTree = "<group>"; };
 		5745979816E3DC4F00D8AE16 /* stylesMenuButton@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "stylesMenuButton@2x.tiff"; path = "Resources/stylesMenuButton@2x.tiff"; sourceTree = "<group>"; };
 		5749799716E3D6A90021C8DE /* folderError@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "folderError@2x.tiff"; path = "Resources/folderError@2x.tiff"; sourceTree = "<group>"; };
 		5749799816E3D6A90021C8DE /* rssFolder@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "rssFolder@2x.tiff"; path = "Resources/rssFolder@2x.tiff"; sourceTree = "<group>"; };
@@ -1583,7 +1582,7 @@
 		5766692616DEB694001C8786 /* skipFolderButtonPressed@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "skipFolderButtonPressed@2x.tiff"; path = "Resources/skipFolderButtonPressed@2x.tiff"; sourceTree = "<group>"; };
 		5766692916DEB69E001C8786 /* subscribeButton@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButton@2x.tiff"; path = "Resources/subscribeButton@2x.tiff"; sourceTree = "<group>"; };
 		5766692A16DEB69E001C8786 /* subscribeButtonPressed@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButtonPressed@2x.tiff"; path = "Resources/subscribeButtonPressed@2x.tiff"; sourceTree = "<group>"; };
-		57B1721116E9665500C011C9 /* vienna-3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "vienna-3.icns"; sourceTree = "<group>"; };
+		57B1721116E9665500C011C9 /* vienna-3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = "vienna-3.icns"; path = "Resources/vienna-3.icns"; sourceTree = "<group>"; };
 		57DA9D0A16DFFCD3000889E7 /* unread@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "unread@2x.tiff"; path = "Resources/unread@2x.tiff"; sourceTree = "<group>"; };
 		57DA9D0C16DFFCDB000889E7 /* rssFeedNew@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "rssFeedNew@2x.tiff"; path = "Resources/rssFeedNew@2x.tiff"; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = revised.tiff; path = Resources/revised.tiff; sourceTree = SOURCE_ROOT; };
@@ -2055,7 +2054,6 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				57B1721116E9665500C011C9 /* vienna-3.icns */,
 				43EE7547165E8109000997FB /* Applescript */,
 				B262610010A033D700E76A37 /* SyntaxHighlighter */,
 				B262610E10A033F700E76A37 /* ErrorPage */,
@@ -2237,7 +2235,7 @@
 		43EE754C165E82F9000997FB /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				5735F1C616E964760001EB8D /* vienna-3.icns */,
+				57B1721116E9665500C011C9 /* vienna-3.icns */,
 				AA4AB5E008971B28006C843E /* vienna2style.icns */,
 				AA1A3DC61100FA6E00F89575 /* vienna2plugin.icns */,
 			);
@@ -3591,6 +3589,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */,
+				3A8E2EBE16EBB356001DFDD6 /* vienna2plugin.icns in Resources */,
 				43E695C8168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */,
 				43E695C9168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */,
 				43E695CA168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */,
@@ -4188,7 +4188,6 @@
 				5749799B16E3D6A90021C8DE /* rssFolder@2x.tiff in Resources */,
 				5749799C16E3D6A90021C8DE /* smartFolder@2x.tiff in Resources */,
 				5745979916E3DC4F00D8AE16 /* stylesMenuButton@2x.tiff in Resources */,
-				5735F1C716E964760001EB8D /* vienna-3.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
