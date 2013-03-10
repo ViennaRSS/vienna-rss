@@ -122,6 +122,9 @@
 	[newArticlesNotificationBadgeButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Badge) ? NSOnState : NSOffState];
 	[newArticlesNotificationBounceButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce) ? NSOnState : NSOffState];
 	
+	// Set whether updated articles are considered as new
+	[markUpdatedAsNew setState:[prefs markUpdatedAsNew] ? NSOnState : NSOffState];
+
 	[self refreshLinkHandler];
 }
 
@@ -233,6 +236,15 @@
 -(IBAction)changeShowAppInMenuBar:(id)sender
 {
 	[[Preferences standardPreferences] setShowAppInStatusBar:[sender state] == NSOnState];
+}
+
+/* changeMarkUpdatedAsNew
+ * Sets whether Vienna considers updated articles
+ * as new ones.
+ */
+-(IBAction)changeMarkUpdatedAsNew:(id)sender
+{
+	[[Preferences standardPreferences] setMarkUpdatedAsNew:[sender state] == NSOnState];
 }
 
 /* changeOpenLinksInExternalBrowser

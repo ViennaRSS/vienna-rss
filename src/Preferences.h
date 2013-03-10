@@ -48,6 +48,7 @@
 	BOOL shouldSaveFeedSource;
     BOOL syncGoogleReader;
     BOOL prefersGoogleNewSubscription;
+    BOOL markUpdatedAsNew;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	NSString * defaultDatabase;
@@ -209,6 +210,10 @@
 // Concurrent download settings
 -(NSUInteger)concurrentDownloads;
 -(void)setConcurrentDownloads:(NSUInteger)downloads;
+
+// Do we show updated articles as new ?
+-(BOOL)markUpdatedAsNew;
+-(void)setMarkUpdatedAsNew:(BOOL)flag;
 
 #pragma mark -
 #pragma mark Google reader syncing

@@ -89,3 +89,6 @@
 
 /* NSWindow (Window) : <title:Window> (oid:64) */
 "Window" = "Window";
+
+/* NSButton (Mark updated articles as new) : <title:Mark updated articles as new> (oid:163) */
+"Mark updated articles as new" = "Mark updated articles as new";
