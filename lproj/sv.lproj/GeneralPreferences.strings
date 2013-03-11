@@ -1,93 +1,108 @@
-/* NSMenuItem : <title:(Do not localise)> (oid:92) */
-"(Do not localise)" = "(Do not localise)";
 
-/* NSMenuItem : <title:(Path)> (oid:96) */
-"(Path)" = "(Sökväg)";
+/* Class = "NSWindow"; title = "Window"; ObjectID = "64"; */
+"64.title" = "Fönster";
 
-/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
-"After \"Next Unread\" command" = "Efter att ha valt \"Nästa olästa\"";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
+"70.title" = "Andra vyer";
 
-/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
-"After a short delay" = "Efter en kort stund";
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "71"; */
+"71.title" = "Varannan timme";
 
-/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
-"Bounce the application icon" = "Bounce the application icon";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "73"; */
+"73.title" = "Manuellt";
 
-/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
-"Check for new articles on start up" = "Uppdatera artiklar vid uppstart";
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "74"; */
+"74.title" = "Varje timme";
 
-/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
-"Check for new articles:" = "Uppdatera artiklar:\n";
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "75"; */
+"75.title" = "Var 6:e timme";
 
-/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
-"Check for newer versions of Vienna on start up" = "Leta efter uppdateringar av Vienna vid uppstart";
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "76"; */
+"76.title" = "Var 30:e minut";
 
-/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
-"Default RSS Reader:" = "Förvald RSS-läsare:\n";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
+"80.title" = "Andra vyer";
 
-/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
-"Do nothing" = "Gör ingenting";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "81"; */
+"81.title" = "Ingenting";
 
-/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
-"Every 15 minutes" = "Every 15 minutes";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
+"91.title" = "Andra vyer";
 
-/* NSMenuItem : <title:Every 2 hours> (oid:71) */
-"Every 2 hours" = "Varannan timme";
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "92"; */
+"92.title" = "(Do not localise)";
 
-/* NSMenuItem : <title:Every 3 hours> (oid:144) */
-"Every 3 hours" = "Every 3 hours";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
+"95.title" = "Andra vyer";
 
-/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
-"Every 30 minutes" = "Var 30:e minut";
+/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "96"; */
+"96.title" = "(Sökväg)";
 
-/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
-"Every 5 minutes" = "Every 5 minutes";
+/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
+"97.title" = "Annan...";
 
-/* NSMenuItem : <title:Every 6 hours> (oid:75) */
-"Every 6 hours" = "Var 6:e timme";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
+"121.title" = "Visa antalet olästa artiklar på programikonen";
 
-/* NSMenuItem : <title:Every hour> (oid:74) */
-"Every hour" = "Varje timme";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "122"; */
+"122.title" = "Stutsa programikonen";
 
-/* NSMenuItem : <title:Manually> (oid:73) */
-"Manually" = "Manuellt";
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "123"; */
+"123.title" = "Gör ingenting";
 
-/* NSTextField (Mark current article read: ) : <title:Mark current article read:
-> (oid:130) */
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "132"; */
+"132.title" = "Efter att ha valt \"Nästa olästa\"";
 
-"Mark current article read:\n" = "Markera nuvarande artikel som läst:\n";
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "133"; */
+"133.title" = "Efter en kort stund";
 
-/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
-"Move articles to Trash:" = "Flytta artiklar till Papperskorgen:";
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "141"; */
+"141.title" = "Var 15:e minut";
 
-/* NSMenuItem : <title:Nothing> (oid:81) */
-"Nothing" = "Ingenting";
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "142"; */
+"142.title" = "Var 5:e minut";
 
-/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
-"Open links in external browser" = "Öppna länkar i extern webbläsare";
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "144"; */
+"144.title" = "Var 3:e timme";
 
-/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
-"Open new links in the background" = "Öppna nya länkar i bakgrunden";
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "146"; */
+"146.title" = "Uppdatera artiklar:\n";
 
-/* NSMenuItem : <title:Other...> (oid:97) */
-"Other..." = "Annan...";
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "148"; */
+"148.title" = "Leta efter uppdateringar av Vienna vid uppstart";
 
-/* NSMenu : <title:OtherViews> (oid:95) */
-"OtherViews" = "Andra vyer";
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
+"149.title" = "Förvald RSS-läsare:\n";
 
-/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
-"Save downloaded files to:" = "Spara nedladdade filer i:";
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
+"151.title" = "Uppdatera artiklar vid uppstart";
 
-/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
-"Show in menu bar" = "Visa i menyraden";
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
+"152.title" = "Öppna nya länkar i bakgrunden";
 
-/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
-"Show the unread count on the application icon" = "Visa antalet olästa artiklar på programikonen";
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
+"153.title" = "Öppna länkar i extern webbläsare";
 
-/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
-> (oid:119) */
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
+"154.title" = "Flytta artiklar till Papperskorgen:";
 
-"When new unread articles are retrieved:\n" = "När nya olästa artiklar är mottagna:\n";
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
+"156.title" = "Spara nedladdade filer i:";
 
-/* NSWindow (Window) : <title:Window> (oid:64) */
-"Window" = "Fönster";
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
+"158.title" = "När nya olästa artiklar är mottagna:\n";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
+"159.title" = "Markera nuvarande artikel som läst:\n";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
+"160.title" = "Visa i menyraden";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
+"161.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "162"; */
+"162.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
+"164.title" = "Mark updated articles as new";

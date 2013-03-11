@@ -1,93 +1,108 @@
-/* NSMenuItem : <title:(Do not localise)> (oid:92) */
-"(Do not localise)" = "(Ez itzuli)";
 
-/* NSMenuItem : <title:(Path)> (oid:96) */
-"(Path)" = "(Helbidea)";
+/* Class = "NSWindow"; title = "Window"; ObjectID = "64"; */
+"64.title" = "Lehioa";
 
-/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
-"After \"Next Unread\" command" = "\"Hurrengo Irakurri Gabea\" komandoaren ondoren";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
+"70.title" = "Bestelakoak";
 
-/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
-"After a short delay" = "Atzerapen txiki baten ondoren";
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "71"; */
+"71.title" = "2 orduro";
 
-/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
-"Bounce the application icon" = "Bounce the application icon";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "73"; */
+"73.title" = "Eskuz";
 
-/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
-"Check for new articles on start up" = "Begiratu artikulu berririk dauden Vienna hasieratzean";
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "74"; */
+"74.title" = "Orduro";
 
-/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
-"Check for new articles:" = "Begiratu artikulu berririk daude:";
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "75"; */
+"75.title" = "6 orduro";
 
-/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
-"Check for newer versions of Vienna on start up" = "Begiratu bertsio berririk dagoen Vienna hasieratzean";
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "76"; */
+"76.title" = "30 minuturo";
 
-/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
-"Default RSS Reader:" = "RSS Irakurle lehenetsia:";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
+"80.title" = "Bestelakoak";
 
-/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
-"Do nothing" = "Ez egin ezer";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "81"; */
+"81.title" = "Ezer";
 
-/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
-"Every 15 minutes" = "Every 15 minutes";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
+"91.title" = "Bestelakoak";
 
-/* NSMenuItem : <title:Every 2 hours> (oid:71) */
-"Every 2 hours" = "2 orduro";
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "92"; */
+"92.title" = "(Do not localise)";
 
-/* NSMenuItem : <title:Every 3 hours> (oid:144) */
-"Every 3 hours" = "Every 3 hours";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
+"95.title" = "Bestelakoak";
 
-/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
-"Every 30 minutes" = "30 minuturo";
+/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "96"; */
+"96.title" = "(Helbidea)";
 
-/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
-"Every 5 minutes" = "Every 5 minutes";
+/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
+"97.title" = "Besteak...";
 
-/* NSMenuItem : <title:Every 6 hours> (oid:75) */
-"Every 6 hours" = "6 orduro";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
+"121.title" = "Erakutsi programaren ikonoan irakurri gabeko artikuluen kontadorea";
 
-/* NSMenuItem : <title:Every hour> (oid:74) */
-"Every hour" = "Orduro";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "122"; */
+"122.title" = "Aplikazioaren ikonoa saltoka jarri";
 
-/* NSMenuItem : <title:Manually> (oid:73) */
-"Manually" = "Eskuz";
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "123"; */
+"123.title" = "Ez egin ezer";
 
-/* NSTextField (Mark current article read: ) : <title:Mark current article read:
-> (oid:130) */
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "132"; */
+"132.title" = "\"Hurrengo Irakurri Gabea\" komandoaren ondoren";
 
-"Mark current article read:\n" = "Jarri irakurrita moduan oraingo artikuluak:\n";
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "133"; */
+"133.title" = "Atzerapen txiki baten ondoren";
 
-/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
-"Move articles to Trash:" = "Mugitu artikuluak Zakarrontzira:";
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "141"; */
+"141.title" = "15 minuturo";
 
-/* NSMenuItem : <title:Nothing> (oid:81) */
-"Nothing" = "Ezer";
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "142"; */
+"142.title" = "5 minuturo Begiratu artikulu berririk daude:";
 
-/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
-"Open links in external browser" = "Ireki estekak kanpo nabegatzailean";
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "144"; */
+"144.title" = "3 orduro";
 
-/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
-"Open new links in the background" = "Ireki esteka berriak atzekaldean";
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "146"; */
+"146.title" = "Begiratu artikulu berririk daude:";
 
-/* NSMenuItem : <title:Other...> (oid:97) */
-"Other..." = "Besteak...";
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "148"; */
+"148.title" = "Check for newer versions of Vienna on start up";
 
-/* NSMenu : <title:OtherViews> (oid:95) */
-"OtherViews" = "Bestelakoak";
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
+"149.title" = "Ireki estekak kanpo nabegatzailean";
 
-/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
-"Save downloaded files to:" = "Gorde deskargatutako fitxategiak hemen:";
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
+"151.title" = "Default RSS Reader:";
 
-/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
-"Show in menu bar" = "Erakutsi menuan";
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
+"152.title" = "Ireki esteka berriak atzekaldean";
 
-/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
-"Show the unread count on the application icon" = "Erakutsi programaren ikonoan irakurri gabeko artikuluen kontadorea";
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
+"153.title" = "Ireki estekak kanpo nabegatzailean";
 
-/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
-> (oid:119) */
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
+"154.title" = "Move articles to Trash:";
 
-"When new unread articles are retrieved:\n" = "Artikulu berri irakurri gabeak jasotzerakoan:\n";
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
+"156.title" = "Gorde deskargatutako fitxategiak hemen";
 
-/* NSWindow (Window) : <title:Window> (oid:64) */
-"Window" = "Lehioa";
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
+"158.title" = "Artikulu berri irakurri gabeak jasotzerakoan";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
+"159.title" = "Mark current article read:\n";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
+"160.title" = "Erakutsi menuan";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
+"161.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "162"; */
+"162.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
+"164.title" = "Mark updated articles as new";

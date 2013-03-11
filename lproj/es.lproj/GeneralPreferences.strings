@@ -1,92 +1,108 @@
-/* NSMenuItem : <title:(Do not localise)> (oid:92) */
-"(Do not localise)" = "(No traducir)";
 
-/* NSMenuItem : <title:(Path)> (oid:96) */
-"(Path)" = "(Ruta)";
+/* Class = "NSWindow"; title = "Window"; ObjectID = "64"; */
+"64.title" = "Ventana";
 
-/* NSButtonCell (After "Next Unread" command) : <title:After "Next Unread" command> (oid:132) */
-"After \"Next Unread\" command" = "Después del comando \"Siguiente artículo no leído\" ";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
+"70.title" = "Otras vistas";
 
-/* NSButtonCell (After a short delay) : <title:After a short delay> (oid:133) */
-"After a short delay" = "Después de un instante";
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "71"; */
+"71.title" = "Cada 2 horas";
 
-/* NSButtonCell (Bounce the application icon) : <title:Bounce the application icon> (oid:122) */
-"Bounce the application icon" = "Animar el icono de la aplicacion (OS X 10.4 only)";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "73"; */
+"73.title" = "Manualmente";
 
-/* NSButton (Check for new articles on start up) : <title:Check for new articles on start up> (oid:82) */
-"Check for new articles on start up" = "Comprobar si hay nuevos artículos al inicio";
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "74"; */
+"74.title" = "Cada hora";
 
-/* NSTextField (Check for new articles:) : <title:Check for new articles:> (oid:68) */
-"Check for new articles:" = "Comprobar si hay nuevos artículos:";
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "75"; */
+"75.title" = "Cada 6 horas";
 
-/* NSButton (Check for newer versions of Vienna on start up) : <title:Check for newer versions of Vienna on start up> (oid:77) */
-"Check for newer versions of Vienna on start up" = "Comprobar si hay nuevas versiones de Vienna al inicio";
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "76"; */
+"76.title" = "Cada 30 minutos";
 
-/* NSTextField (Default RSS Reader:) : <title:Default RSS Reader:> (oid:78) */
-"Default RSS Reader:" = "Lector RSS por defecto:";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
+"80.title" = "Otras vistas";
 
-/* NSButtonCell (Do nothing) : <title:Do nothing> (oid:123) */
-"Do nothing" = "No hacer nada";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "81"; */
+"81.title" = "Nada";
 
-/* NSMenuItem : <title:Every 15 minutes> (oid:141) */
-"Every 15 minutes" = "Every 15 minutes";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
+"91.title" = "Otras vistas";
 
-/* NSMenuItem : <title:Every 2 hours> (oid:71) */
-"Every 2 hours" = "Cada 2 horas";
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "92"; */
+"92.title" = "(Do not localise)";
 
-/* NSMenuItem : <title:Every 3 hours> (oid:144) */
-"Every 3 hours" = "Every 3 hours";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
+"95.title" = "Otras vistas";
 
-/* NSMenuItem : <title:Every 30 minutes> (oid:76) */
-"Every 30 minutes" = "Cada 30 minutos";
+/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "96"; */
+"96.title" = "(Ruta)";
 
-/* NSMenuItem : <title:Every 5 minutes> (oid:142) */
-"Every 5 minutes" = "Every 5 minutes";
+/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
+"97.title" = "Otros";
 
-/* NSMenuItem : <title:Every 6 hours> (oid:75) */
-"Every 6 hours" = "Cada 6 horas";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
+"121.title" = "Mostrar el número de artículos no leídos en el icono de la aplicacion";
 
-/* NSMenuItem : <title:Every hour> (oid:74) */
-"Every hour" = "Cada hora";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "122"; */
+"122.title" = "Animar el icono de la aplicacion";
 
-/* NSMenuItem : <title:Manually> (oid:73) */
-"Manually" = "Manualmente";
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "123"; */
+"123.title" = "No hacer nada";
 
-/* NSTextField (Mark current article read: ) : <title:Mark current article read:
-> (oid:130) */
-"Mark current article read:\n" = "Marcar como leído el artículo seleccionado:\n";
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "132"; */
+"132.title" = "Después del comando \"Siguiente artículo no leído\" ";
 
-/* NSTextField (Move articles to Trash:) : <title:Move articles to Trash:> (oid:89) */
-"Move articles to Trash:" = "Mover los artículos a la papelera:";
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "133"; */
+"133.title" = "Después de un instante";
 
-/* NSMenuItem : <title:Nothing> (oid:81) */
-"Nothing" = "Nada";
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "141"; */
+"141.title" = "Cada 15 minutos";
 
-/* NSButton (Open links in external browser) : <title:Open links in external browser> (oid:88) */
-"Open links in external browser" = "Abrir los enlaces en un navegador externo";
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "142"; */
+"142.title" = "Cada 5 minutos";
 
-/* NSButton (Open new links in the background) : <title:Open new links in the background> (oid:87) */
-"Open new links in the background" = "Abrir los nuevos enlaces en segundo plano";
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "144"; */
+"144.title" = "Cada 3 horas";
 
-/* NSMenuItem : <title:Other...> (oid:97) */
-"Other..." = "Otros";
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "146"; */
+"146.title" = "Comprobar si hay nuevos artículos:";
 
-/* NSMenu : <title:OtherViews> (oid:95) */
-"OtherViews" = "Otras vistas";
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "148"; */
+"148.title" = "Comprobar si hay nuevas versiones de Vienna al inicio";
 
-/* NSTextField (Save downloaded files to:) : <title:Save downloaded files to:> (oid:93) */
-"Save downloaded files to:" = "Guardar descargas en:";
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
+"149.title" = "Lector RSS por defecto:";
 
-/* NSButton (Show in menu bar) : <title:Show in menu bar> (oid:138) */
-"Show in menu bar" = "Mostrar en la barra de menú";
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
+"151.title" = "Comprobar si hay nuevos artículos al inicio";
 
-/* NSButtonCell (Show the unread count on the application icon) : <title:Show the unread count on the application icon> (oid:121) */
-"Show the unread count on the application icon" = "Mostrar el número de artículos no leídos en el icono de la aplicacion";
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
+"152.title" = "Abrir los nuevos enlaces en segundo plano";
 
-/* NSTextField (When new unread articles are retrieved: ) : <title:When new unread articles are retrieved:
-> (oid:119) */
-"When new unread articles are retrieved:\n" = "Cuando se descarguen nuevos artículos:\n";
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
+"153.title" = "Abrir los enlaces en un navegador externo";
 
-/* NSWindow (Window) : <title:Window> (oid:64) */
-"Window" = "Ventana";
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
+"154.title" = "Mover los artículos a la papelera:";
 
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
+"156.title" = "Guardar descargas en:";
+
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
+"158.title" = "Cuando se descarguen nuevos artículos:\n";
+
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
+"159.title" = "Marcar como leído el artículo seleccionado:\n";
+
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
+"160.title" = "Mostrar en la barra de menú";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
+"161.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "162"; */
+"162.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
+"164.title" = "Mark updated articles as new";

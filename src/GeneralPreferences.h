@@ -36,6 +36,7 @@
 	IBOutlet NSButtonCell * newArticlesNotificationBounceButton;
 	IBOutlet NSButtonCell * markReadAfterNext;
 	IBOutlet NSButtonCell * markReadAfterDelay;
+    IBOutlet NSButton * markUpdatedAsNew;
 	NSMutableDictionary * appToPathMap;
 	ICInstance internetConfigHandler;
 }
@@ -52,4 +53,5 @@
 -(IBAction)changeNewArticlesNotification:(id)sender;
 -(IBAction)changeMarkReadBehaviour:(id)sender;
 -(IBAction)changeShowAppInMenuBar:(id)sender;
+-(IBAction)changeMarkUpdatedAsNew:(id)sender;
 @end

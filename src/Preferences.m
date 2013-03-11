@@ -159,6 +159,7 @@ static Preferences * _standardPreferences = nil;
 		filterMode = [self integerForKey:MAPref_FilterMode];
 		layout = [self integerForKey:MAPref_Layout];
 		refreshOnStartup = [self boolForKey:MAPref_CheckForNewArticlesOnStartup];
+		markUpdatedAsNew = [self boolForKey:MAPref_CheckForUpdatedArticles];
 		markReadInterval = [[userPrefs valueForKey:MAPref_MarkReadInterval] floatValue];
 		minimumFontSize = [self integerForKey:MAPref_MinimumFontSize];
 		newArticlesNotification = [self integerForKey:MAPref_NewArticlesNotification];
@@ -778,6 +779,28 @@ static Preferences * _standardPreferences = nil;
 	{
 		openLinksInBackground = flag;
 		[self setBool:flag forKey:MAPref_OpenLinksInBackground];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+	}
+}
+
+/* markUpdatedAsNew
+ * Returns whether or not updated articles are considered as new
+ */
+-(BOOL)markUpdatedAsNew
+{
+	return markUpdatedAsNew;
+}
+
+/* setMarkUpdatedAsNew
+ * Changes whether or not updated articles are considered as new, then sends a notification
+ * that the preferences have changed.
+ */
+-(void)setMarkUpdatedAsNew:(BOOL)flag
+{
+	if (markUpdatedAsNew != flag)
+	{
+		markUpdatedAsNew = flag;
+		[self setBool:flag forKey:MAPref_CheckForUpdatedArticles];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
