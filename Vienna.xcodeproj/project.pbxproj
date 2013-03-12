@@ -620,6 +620,8 @@
 		5749799A16E3D6A90021C8DE /* folderError@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5749799716E3D6A90021C8DE /* folderError@2x.tiff */; };
 		5749799B16E3D6A90021C8DE /* rssFolder@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5749799816E3D6A90021C8DE /* rssFolder@2x.tiff */; };
 		5749799C16E3D6A90021C8DE /* smartFolder@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5749799916E3D6A90021C8DE /* smartFolder@2x.tiff */; };
+		575B229016EEB62D00CAC982 /* blankSmallButton@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 575B228F16EEB62D00CAC982 /* blankSmallButton@2x.tiff */; };
+		575B229216EEB63F00CAC982 /* subscribeButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 575B229116EEB63F00CAC982 /* subscribeButtonSmall@2x.tiff */; };
 		5766690016DEB5A7001C8786 /* filter-icon@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 576668FF16DEB5A7001C8786 /* filter-icon@2x.tiff */; };
 		5766690316DEB5C4001C8786 /* blankButton@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5766690116DEB5C4001C8786 /* blankButton@2x.tiff */; };
 		5766690416DEB5C4001C8786 /* blankButtonPressedBurned@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5766690216DEB5C4001C8786 /* blankButtonPressedBurned@2x.tiff */; };
@@ -1559,6 +1561,8 @@
 		5749799716E3D6A90021C8DE /* folderError@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "folderError@2x.tiff"; path = "Resources/folderError@2x.tiff"; sourceTree = "<group>"; };
 		5749799816E3D6A90021C8DE /* rssFolder@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "rssFolder@2x.tiff"; path = "Resources/rssFolder@2x.tiff"; sourceTree = "<group>"; };
 		5749799916E3D6A90021C8DE /* smartFolder@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "smartFolder@2x.tiff"; path = "Resources/smartFolder@2x.tiff"; sourceTree = "<group>"; };
+		575B228F16EEB62D00CAC982 /* blankSmallButton@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "blankSmallButton@2x.tiff"; path = "Resources/blankSmallButton@2x.tiff"; sourceTree = "<group>"; };
+		575B229116EEB63F00CAC982 /* subscribeButtonSmall@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "subscribeButtonSmall@2x.tiff"; path = "Resources/subscribeButtonSmall@2x.tiff"; sourceTree = "<group>"; };
 		576668FF16DEB5A7001C8786 /* filter-icon@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "filter-icon@2x.tiff"; path = "Resources/filter-icon@2x.tiff"; sourceTree = "<group>"; };
 		5766690116DEB5C4001C8786 /* blankButton@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "blankButton@2x.tiff"; path = "Resources/blankButton@2x.tiff"; sourceTree = "<group>"; };
 		5766690216DEB5C4001C8786 /* blankButtonPressedBurned@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "blankButtonPressedBurned@2x.tiff"; path = "Resources/blankButtonPressedBurned@2x.tiff"; sourceTree = "<group>"; };
@@ -2270,6 +2274,7 @@
 				5766690116DEB5C4001C8786 /* blankButton@2x.tiff */,
 				AA7F231610FA287700856924 /* blankButtonPressedEmbossed.tiff */,
 				AA7F231910FA292700856924 /* blankSmallButton.tiff */,
+				575B228F16EEB62D00CAC982 /* blankSmallButton@2x.tiff */,
 				AA7F231A10FA292700856924 /* blankSmallButtonPressed.tiff */,
 				B25E53DB1067B54600BBF14C /* browserNextButton.tiff */,
 				B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */,
@@ -3066,6 +3071,7 @@
 				5766692916DEB69E001C8786 /* subscribeButton@2x.tiff */,
 				5766692A16DEB69E001C8786 /* subscribeButtonPressed@2x.tiff */,
 				AA077A930C84484B00D71D26 /* subscribeButtonSmall.tiff */,
+				575B229116EEB63F00CAC982 /* subscribeButtonSmall@2x.tiff */,
 				AA077A940C84484B00D71D26 /* subscribeButtonSmallPressed.tiff */,
 			);
 			name = "Toolbar Buttons";
@@ -4188,6 +4194,8 @@
 				5749799B16E3D6A90021C8DE /* rssFolder@2x.tiff in Resources */,
 				5749799C16E3D6A90021C8DE /* smartFolder@2x.tiff in Resources */,
 				5745979916E3DC4F00D8AE16 /* stylesMenuButton@2x.tiff in Resources */,
+				575B229016EEB62D00CAC982 /* blankSmallButton@2x.tiff in Resources */,
+				575B229216EEB63F00CAC982 /* subscribeButtonSmall@2x.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
