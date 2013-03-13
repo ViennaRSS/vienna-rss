@@ -1,181 +1,117 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<title>How Do I?</title>
 	<link rel="stylesheet" href="helpstyle.css" type="text/css">
 </head>
 <body>
-<span><img src="images/Small-Vienna-Logo.jpg" alt="">&nbsp;&nbsp;</span><span class="header">How Do I?</span>
-<p>Below are some of the more common questions asked about Vienna while it was being pre-release tested.
-See the <a href="http://www.vienna-rss.org/vienna_faq.html">Official Vienna FAQ Page</a> for these
-and the latest hints and tips for using Vienna.
+<span><img src="images/Small-Vienna-Logo.jpg" alt="">&nbsp;&nbsp;</span><span class="header">Hoe kan ik?</span>
+<p>Hier zijn een aantal vragen die naar voren kwamen tijdens de ontwikkeling van Vienna in de test-fase.
+Kijk hiervoor op <a href="http://www.vienna-rss.org/?page_id=96">Official Vienna FAQ Page</a> en de laatste hints en tips voor Vienna.
 </p>
 <ul>
-<li><a href="#Where_do_I_get_the_Vienna_source_code">Where do I get 
-the Vienna source code?</a></li>
-<li><a href="#I_found_a_problem_with_Vienna._How_do_I_report_it">I 
-found a problem with Vienna. How do I report it?</a></li>
-<li><a href="#How_do_I_create_my_own_styles">How do I create my own 
-styles?</a></li>
-<li><a href="#How_do_I_create_my_own_scripts">How do I create my own 
-scripts?</a></li>
+<li><a href="#Where_do_I_get_the_Vienna_source_code">Waar kan ik de Vienna broncode vinden?</a></li>
+<li><a href="#I_found_a_problem_with_Vienna._How_do_I_report_it">Ik heb een probleem gevonden in Vienna. Hoe kan ik dit melden?</a></li>
+<li><a href="#How_do_I_create_my_own_styles">Hoe creëer ik mijn eigen stijlen?</a></li>
+<li><a href="#How_do_I_create_my_own_scripts">Hoe kan ik mijn eigen scripts maken?</a></li>
 
 <li>
 <a href="#How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
-How can I see what happened when my subscriptions are refreshed?</a></li>
+Hoe kan ik zien wat er gebeurd als mijn abonnementen worden bijgewerkt?</a></li>
 <li>
-<a href="#How_do_I_move_my_Vienna_database_to_another_folder">How do 
-I move my Vienna database to another folder?</a></li>
+<a href="#How_do_I_move_my_Vienna_database_to_another_folder">Hoe kan ik mijn Vienna database verplaatsen naar een andere map?</a></li>
 <li>
 <a href="#One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
-One of my subscriptions reports &quot;Error parsing XML data in feed&quot;. 
-What does this mean?</a></li>
+Een van mijn abonnementen meldt &quot;Error parsing XML data in feed&quot;.
+Wat betekent dit?</a></li>
 
 <li>
 <a href="#Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
-Is there a shortcut key for going to the next article, marking read, 
-etc?</a></li>
+Is er een toetscombinatie om naar het volgende artikel te gaan, artikelen te markeren, etc?</a></li>
 <li>
-<a href="#How_do_I_use_Auto_Expire_and_what_does_it_do">How do I use 
-Auto Expire and what does it do?</a></li>
+	<a href="#What_do_the_green_dots_mean_in_the_list_of_articles">
+	What do the green dots mean in the list of articles?</a></li>
+	<li>
+<a href="#How_do_I_use_Auto_Expire_and_what_does_it_do">Hoe gebruik ik Auto Expiratie en wat doet het?</a></li>
 <li>
-<a href="#How_do_I_request_an_enhancement_in_Vienna">How do I 
-request an enhancement in Vienna?</a></li>
+<a href="#How_do_I_request_an_enhancement_in_Vienna">Hoe vraag ik om een verbetering aan Vienna?</a></li>
 
 </ul>
-<h2><a name="Where_do_I_get_the_Vienna_source_code">Where do I get the 
-Vienna source code?</a></h2>
-<p>See the <a href="vienna_dev.html">Development page</a> for 
-instructions for getting the source code for Vienna. The source code is 
-freely available if you're interested in learning how Vienna works, if 
-you want to build your own copy of Vienna from scratch on your own 
-machine or if you want to borrow portions for inclusion in your own 
-project. The source is provided under the
-<a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 
-license</a>.</p>
-<h2><a name="I_found_a_problem_with_Vienna._How_do_I_report_it">I found 
-a problem with Vienna. How do I report it?</a></h2>
-<p>Post a message over in the Support forum and somebody will 
-investigate. Provide as much information about the problem as you can 
-including: the build of Vienna (obtained from the About Vienna panel), 
-repro steps and what you expected to happen.</p>
+<h2><a name="Where_do_I_get_the_Vienna_source_code">Waar kan ik de Vienna broncode vinden?</a></h2>
+<p>Kijk op de <a href="https://github.com/ViennaRSS/vienna-rss/">Development</a> pagina voor instructies om de broncode van Vienna te krijgen. De broncode is vrij beschikbaar om in te kijken als u geïnteresseerd bent hoe Vienna werkt, als u zelf een kopie van Vienna wilt compileren of om in een ander project delen ervan te gebruiken. De broncode wordt aangeboden onder de <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 license</a>.</p>
 
-<p>Make sure you're always running the most recent build of Vienna. The 
-Check for Updates command will report if there's a newer build available 
-than the one you have.</p>
-<p>Fixes for bugs take priority over new features so if your problem is 
-confirmed to be a bug with high impact and no simple workaround then 
-I'll look at making a fix available as soon as reasonably possible.</p>
-<h2><a name="How_do_I_create_my_own_styles">How do I create my own 
-styles?</a></h2>
-<p>See the <a href="vienna_styles.html">Custom Styles page</a> for 
-instructions.</p>
-<h2><a name="How_do_I_create_my_own_scripts">How do I create my own 
-scripts?</a></h2>
+<h2><a name="I_found_a_problem_with_Vienna._How_do_I_report_it">Ik heb een probleem gevonden in Vienna. Hoe kan ik dit melden?</a></h2>
+<p>Plaats een bericht in het <a href="http://forums.cocoaforge.com/viewforum.php?f=18"> Support forum</a> of in de <a href="https://github.com/ViennaRSS/vienna-rss/issues">issues list</a> <i>(beide Engels-talig)</i> en iemand zal het onderzoeken. Geef zoveel informatie over het probleem als u kan, inclusief: de 'build' van Vienna (te vinden in het <b>Vienna &rarr; Over Vienna</b> venster), hoe de fout te reproduceren en wat u verwachte dat er zou gebeuren. Er is een sticky note in het forum met tips hoe u een goed bug rapport schrijft.</p>
 
-<p>Vienna's scripts are written using AppleScript. See the
-<a href="http://www.apple.com/macosx/features/applescript/resources.html">
-Apple resource page</a> for more details.</p>
-<p>One way to get started is to download one of the existing scripts 
-from the <a href="vienna_files.html">Vienna Downloads page</a> and view 
-it in the AppleScript editor. Also take a look at the
-<a href="vienna_scripting.html">Scripts page</a> for more details of the 
-Vienna scripting dictionary and examples of what you can accomplish.</p>
+<p>Zorg ervoor dat u altijd de laatste versie van Vienna gebruikt. Het <b>Vienna &rarr; Zoek naar updates</b> menu zal rapporteren of er een nieuwere versie is dan degene die u gebruikt.</p>
 
-<p>To submit your own script, send it to
-<a href="mailto:steve@opencommunity.co.uk">steve@opencommunity.co.uk</a> 
-and after it has been reviewed, it will be made available on the 
-Downloads page.</p>
-<h2>
-<a name="How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
-How can I see what happened when my subscriptions are refreshed?</a></h2>
-<p>Open the Activity Window from the Window menu. The activity window 
-shows all subscriptions and the status of the last time they were 
-refreshed in that session. The bottom of the activity window shows more 
-details include the HTTP headers and may be useful for debugging. (If 
-the details pane is not visible, grab the split bar at the bottom of the 
-Activity Window and drag it up to uncover the pane).</p>
-<h2><a name="How_do_I_move_my_Vienna_database_to_another_folder">How do 
-I move my Vienna database to another folder?</a></h2>
+<h2><a name="How_do_I_create_my_own_styles">Hoe creëer ik mijn eigen stijlen?</a></h2>
+<p>Kijk op de <a href="http://www.vienna-rss.org/?page_id=65">Custom Styles page</a> voor
+instructies.</p>
 
-<p>By default, your Vienna database is the messages.db file which is 
-located at ~/Library/Application Support/Vienna. You can move this to 
-another folder if you wish. The following steps show how:</p>
+<h2><a name="How_do_I_create_my_own_scripts">Hoe kan ik mijn eigen scripts maken?</a></h2>
+<p>Vienna's scripts zijn geschreven in AppleScript. Kijk op <a href="http://developer.apple.com/applescript/"> Apple resource page</a> voor meer informatie.</p>
+<p>Om te beginnen kan u een bestaand script downladen zoals <a href="http://www.cortig.net/files/ShareWithPapers.zip">Cortig's original
+Share with Papers plugin</a> of <a href="https://github.com/reefdog/Vienna-to-Yojimbo-AppleScripts">reefdog's Vienna to Yojimbo script</a> en dit bekijken in AppleScript editor.</p>
+
+<p>Heeft u een script dat u wilt aanmelden, stuur dit naar
+<a href="mailto:steve@opencommunity.co.uk">steve@opencommunity.co.uk</a> en nadat het is bekeken, zal het beschikbaar komen op de Downloads pagina.</p>
+
+<h2><a name="How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
+Hoe kan ik zien wat er gebeurd als mijn abonnementen worden bijgewerkt?</a></h2>
+<p>Selecteer <b>Venster &rarr; Activiteitenoverzicht</b>. Het venster toont alle abonnementen en hun status van de laatste bijwerking. Onderin staan gedetailleerde gegevens en kunnen bruikbaar zijn voor het oplossen van problemen. (Als de details niet zichtbaar zijn pak dan de splitter onder in het venster en sleep deze omhoog om dit paneel te tonen).</p>
+
+<h2><a name="How_do_I_move_my_Vienna_database_to_another_folder">Hoe kan ik mijn Vienna database verplaatsen naar een andere map?</a></h2>
+<p>Standaard is de Vienna database het messages.db bestand die te vinden is in <i>~/Library/Application Support/Vienna</i>. U kan deze op een andere plaats bewaren. Volg deze stappen:</p>
 <ol>
-<li>Shut down Vienna.</li>
-<li>Open a console window and enter:<br>
+<li>Stop Vienna.</li>
+<li>Open een Terminal venster en typ:<br>
 <br>
-<font face="Courier New">defaults write uk.co.opencommunity.vienna2 
-&quot;DefaultDatabase&quot; '&lt;path to new messages.db&gt;'</font><br>
+<font face="Courier New">defaults write uk.co.opencommunity.vienna2
+&quot;DefaultDatabase&quot; '&lt;pad naar nieuwe messages.db&gt;'</font><br>
 
 <br>
-where &lt;path to new messages.db&gt; is the name of the folder that 
-contains the messages.db file. The path itself should have the 
-messages.db filename at the end. For example:<br>
+waar &lt;pad naar nieuwe messages.db&gt; de padnaam naar de map is  die de messages.db gaat bevatten. De padnaam moet de messages.db bestandsnaam aan het einde bevatten. Bijvoorbeeld:<br>
 <br>
-<font face="Courier New">defaults write uk.co.opencommunity.vienna2 
+<font face="Courier New">defaults write uk.co.opencommunity.vienna2
 &quot;DefaultDatabase&quot; '/Users/steve/mydata/messages.db'</font><br>
 </li>
 
-<li>Restart Vienna.</li>
+<li>Start Vienna.</li>
 </ol>
-<h2>
-<a name="One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
-One of my subscriptions reports &quot;Error parsing XML data in feed&quot;. What 
-does this mean?</a></h2>
-<p>It means that Vienna got a feed back from the subscription that it 
-couldn't interpret. There are several reasons for this:</p>
+
+<h2><a name="One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
+Een van mijn abonnementen meldt &quot;Error parsing XML data in feed&quot;.
+Wat betekent dit?</a></h2>
+<p>Dit betekent dat Vienna van een feed uit de abonnementen data kreeg waar het niet mee uit de voeten kan.
+Hier kunnen meerdere redenen voor zijn:</p>
 
 <ol>
-<li>The URL of the feed may not be pointing to an RSS or Atom feed 
-but to a web page. Check the URL of the offending feed carefully.</li>
-<li>The feed itself may contain malformed XML. Some subscriptions 
-make a mistake in putting together the XML that makes up the feed 
-and Vienna cannot interpret malformed XML. Use the Validate Feed 
-command on the File menu to see if this is the case. Unfortunately 
-you cannot do much about this in Vienna except wait for the feed 
-itself to be corrected by the site.</li>
-<li>The feed may be incomplete. If the refresh was interrupted then 
-the XML data will be incomplete and will appear malformed in Vienna. 
-A second refresh may correct this problem.</li>
+<li>De URL van de feed wijst niet naar een RSS of Atom feed maar naar een webpagina. Controleer de URL van de betreffende feed zorgvuldig.</li>
+<li>De feed zelf kan non valide XML bevatten. Kies <b>Map &rarr; Toon info&hellip;</b> en vervolgens Valideer om te zien of dit het geval is. Helaas kunt u in Vienna niets doen om dit op te lossen, behalve wachten tot de site de feed corrigeert.</li>
+<li>De feed kan incompleet zijn. Als het bijwerken werd onderbroken dan kan de XML data incompleet zijn en verminkt lijken voor Vienna. Een tweede keer bijwerken kan dit probleem oplossen.</li>
 </ol>
-<p>If none of the above explain the problem, post a message on the 
-support forum with the URL of the feed exhibiting the problem. </p>
-<h2>
+<p>Als het bovenstaande uw probleem niet verklaart, plaats dan een bericht op het support forum met de problematische feed URL.</p>
 
-<a name="Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
-Is there a shortcut key for going to the next article, marking read, 
-etc?</a></h2>
-<p>Probably. There are single key equivalents for some of the menu 
-commands such as:</p>
-<p>Spacebar - goes to the next unread article. If the current article is 
-several pages long, it will scroll through that article first. If you're 
-at the end of the current article it will then go to the next unread 
-article. By contrast the Next Unread command (Cmd+U) always goes 
-straight to the next unread article.</p>
-<p>R - marks the current article read if it is unread, or unread if it 
-is read.</p>
-<p>F - flags the current article if it isn't already flagged, or removes 
-the existing flag if it is not.</p>
+<h2><a name="Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
+Is er een toetscombinatie om naar het volgende artikel te gaan, artikelen te markeren, etc?</a></h2>
+<p>Waarschijnlijk. Er zijn enkeltoets equivalenten voor sommige menu commando's zoals:</p> <p><b>Spatiebalk</b> - ga naar het volgende ongelezen artikel. Als het huidige artikel enkele pagina's lang is, dan wordt er eerst door dat artikel geschoven. Aan het einde van het artikel zal dan naar het volgende ongelezen artikel gegaan worden. Dit in tegenstelling tot het <b>Volgende ongelezen</b> menu (toetscombinatie <b>&#x2318;U</b>) dat altijd direct naar het volgende ongelezen artikel gaat.</p>
+<p><b>R</b> - markeert het huidige artikel als gelezen als het ongelezen is en vice versa.</p>
+<p><b>F</b> - markeert het huidige artikel met een vlag als het die nog niet heeft, of verwijderd deze als die wel aanwezig is.</p>
 
-<p>Look in the Vienna Help file for more shortcuts.</p>
-<h2><a name="How_do_I_use_Auto_Expire_and_what_does_it_do">How do I use 
-Auto Expire and what does it do?</a></h2>
-<p>Auto-expire moves articles older than a certain number of days to the 
-Trash folder. It allows you to keep your folders manageable by only 
-retaining articles that are recent. The auto-expire runs both when 
-Vienna starts and after you have refreshed any subscriptions. To control 
-the age of articles to auto-expire, change the &quot;Expire articles older 
-than&quot; option in Preferences.</p>
-<p>Auto-expire will NOT remove unread or flagged articles. It assumes 
-that you haven't read these articles and thus leaves them alone.</p>
-<h2><a name="How_do_I_request_an_enhancement_in_Vienna">How do I request 
-an enhancement in Vienna?</a></h2>
+<p>Kijk in het Vienna help bestand voor meer toetscombinaties.</p>
 
-<p>Post a message over at the
-<a href="http://community.novacaster.com/vienna">support forum</a>. All 
-requested enhancements are logged in the TODO file that is included with 
-the source code as a guidance for future developers.</p>
+<h2><a name="What_do_the_green_dots_mean_in_the_list_of_articles">Welke betekenis hebben de groene bolletjes in de artikel lijst?</a></h2>
+<p>Blauwe bolletjes zijn voor nieuwe artikelen, en de groene voor bijgewerkte artikelen:
+artikelen waarvan de tekst gewijzigd is sinds ze voor het laatst zijn gedownload.</p>
+
+<h2><a name="How_do_I_use_Auto_Expire_and_what_does_it_do">Hoe gebruik ik Auto Expiratie en wat doet het?</a></h2>
+<p>Auto-expiratie verplaatst artikelen die ouder zijn dan x dagen naar de prullenmand. Hierdoor kunt u uw mappen handelbaar houden door alleen recente artikelen te bewaren. Dit is actief bij het starten van Vienna en na het bijwerken van abonnementen. Ga naar <b>Voorkeuren &rarr; Algemeen</b> en pas daar de <b>Verplaats artikelen naar prullenmand</b> optie aan.</p>
+<p>Auto-expire verwijderd GEEN ongelezen of gemarkeerde artikelen. Het gaat ervan uit dat u die nog niet gelezen heeft en laat ze daarom met rust.</p>
+
+<h2><a name="How_do_I_request_an_enhancement_in_Vienna">Hoe vraag ik om een verbetering aan Vienna?</a></h2>
+<p>Plaats een bericht in de
+<a href="https://github.com/ViennaRSS/vienna-rss/issues">issues list</a>.</p>
 </body>
 </html>
