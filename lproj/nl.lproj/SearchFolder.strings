@@ -35,12 +35,12 @@
 "Save" = "Bewaar";
 
 /* NSTextField (Show all articles that match) : <title:Show all articles that match> (oid:58) */
-"Show all articles that match" = "Toon alle artikelen die";
+"Show all articles that match" = "Toon alle artikelen die voldoen aan";
 
 /* NSTextField (Smart folder name: ) : <title:Smart folder name:
 > (oid:7) */
 "Smart folder name:\n" = "Naam voor slimme map:";
 
 /* NSTextField (of the following conditions:) : <title:of the following conditions:> (oid:84) */
-"of the following conditions:" = "voldoen aan de volgende voorwaarden:";
+"of the following conditions:" = "van de volgende voorwaarden:";
 
