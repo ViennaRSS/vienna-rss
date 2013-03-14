@@ -8,6 +8,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 10
+-------------
+- New icons (thanks to Nick Dazé and romiq !)
+- New themes (thanks to Nick Dazé and Carles Bellver)
+- New plugin : Add to Safari reading list
+- Two new filters : "Last 48 hours" and "Unread or flagged"
+- New option to treat updated articles as new
+- Updated Danish and German translations
+- Bugfixes
+
 3.0.0 Beta 9
 ------------
 - Refreshes should be quicker now (especially for Google Reader feeds)
