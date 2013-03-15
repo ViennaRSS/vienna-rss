@@ -854,7 +854,7 @@
 
 -(void)handleArticleListStateChange:(NSNotification *)nc
 {
-	[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	[mainArticleView refreshCurrentFolder];
 }
 
 /* handleFolderUpdate
