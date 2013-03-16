@@ -160,8 +160,7 @@
  */
 -(void)refreshCurrentFolder
 {
-	if ([[Preferences standardPreferences] refreshFrequency] == 0)
-		[self refreshFolder:MA_Refresh_ReloadFromDatabase];
+	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 }
 
 /* refreshFolder
