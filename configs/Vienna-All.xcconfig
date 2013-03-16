@@ -22,3 +22,4 @@ WARNING_CFLAGS = -Wall
 GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES
 GCC_TREAT_WARNINGS_AS_ERRORS = NO
 COMBINE_HIDPI_IMAGES = YES
+IBC_PLUGINS = "$(SRC_ROOT)/utilities/DisclosableView.framework/Versions/A/Resources/DisclosableView.ibplugin"
