@@ -72,19 +72,19 @@
 "148.title" = "Zoek naar nieuwere versie bij het starten";
 
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
-"149.title" = "Default RSS Reader:";
+"149.title" = "Standaard RSS-lezer:";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
-"151.title" = "Check for new articles on start up";
+"151.title" = "Zoek naar nieuwe artikelen bij het starten";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
-"152.title" = "Open koppelingen op de achtergrond";
+"152.title" = "Open koppeling op de achtergrond";
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
-"153.title" = "Open koppelingen in externe browser";
+"153.title" = "Open koppeling in externe browser";
 
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
-"154.title" = "Move articles to Trash:";
+"154.title" = "Verplaats artikelen naar prullenmand:";
 
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
 "156.title" = "Bewaar downloads in:";
@@ -93,10 +93,10 @@
 "158.title" = "Wanneer nieuwe ongelezen artikelen zijn opgehaald:\n";
 
 /* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
-"159.title" = "Mark current article read:\n";
+"159.title" = "Markeer huidige artikel als gelezen:\n";
 
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
-"160.title" = "Show in menu bar";
+"160.title" = "Toon in menubalk";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
 "161.title" = "Radio";
@@ -105,4 +105,4 @@
 "162.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
-"164.title" = "Mark updated articles as new";
+"164.title" = "Markeer bijgewerkte artikelen als nieuw";
