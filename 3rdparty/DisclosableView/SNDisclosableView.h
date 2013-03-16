@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2002, Kurt Revis.  All rights reserved.
+ Copyright (c) 2002-2008, Kurt Revis.  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -25,7 +25,7 @@
 }
 
 - (BOOL)isShown;
-- (void)setIsShown:(BOOL)value;
+- (void)setShown:(BOOL)value;
 
 - (float)hiddenHeight;
 - (void)setHiddenHeight:(float)value;

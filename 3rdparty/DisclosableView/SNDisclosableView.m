@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2002, Kurt Revis.  All rights reserved.
+ Copyright (c) 2002-2008, Kurt Revis.  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -29,22 +29,6 @@
 @implementation SNDisclosableView
 
 const float kDefaultHiddenHeight = 0.0;
-
-static BOOL showSubviewsWhileResizing = NO;
-    // Under Mac OS X 10.2, we can show our subviews while we animate the resizing of the window, so this can be set to YES.
-    // Earlier versions of the AppKit would pin a view's y origin to 0, which caused that to fail.
-
-+ (void)initialize;
-{
-    static BOOL initialized = NO;
-
-    if (!initialized) {
-        // Check if we are on 10.2 or later
-        showSubviewsWhileResizing = (floor(NSAppKitVersionNumber) > NSAppKitVersionNumber10_1); 
-
-        initialized = YES;
-    }
-}
 
 - (id)initWithFrame:(NSRect)frameRect;
 {
@@ -107,7 +91,7 @@ static BOOL showSubviewsWhileResizing = NO;
     return isShown;
 }
 
-- (void)setIsShown:(BOOL)value;
+- (void)setShown:(BOOL)value;
 {
     if (value)
         [self show:nil];
@@ -131,7 +115,7 @@ static BOOL showSubviewsWhileResizing = NO;
 
 - (IBAction)toggleDisclosure:(id)sender;
 {
-    [self setIsShown:!isShown];
+    [self setShown:!isShown];
 }
 
 - (IBAction)hide:(id)sender;
@@ -172,13 +156,8 @@ static BOOL showSubviewsWhileResizing = NO;
 
     // Now shrink the window, causing this view to shrink and our subviews to be obscured.
     // Also remove the subviews from the view hierarchy.
-    if (showSubviewsWhileResizing) {
-        [self changeWindowHeightBy:-(originalHeight - hiddenHeight)];
-        [self removeSubviews];
-    } else {
-        [self removeSubviews];
-        [self changeWindowHeightBy:-(originalHeight - hiddenHeight)];
-    }
+    [self changeWindowHeightBy:-(originalHeight - hiddenHeight)];
+    [self removeSubviews];
     
     [self setNeedsDisplay:YES];
 
@@ -191,27 +170,18 @@ static BOOL showSubviewsWhileResizing = NO;
         return;
 
     // Expand the window, causing this view to expand, and put our hidden subviews back into the view hierarchy.
+    [self restoreSubviews];
 
-    if (showSubviewsWhileResizing) {
-        NSSize hiddenSize;
-        
-        [self restoreSubviews];
-
-        // Temporarily set our frame back to its original height.
-        // Then tell our subviews to resize themselves, according to their normal autoresize masks.
-        // (This may cause their widths to change, if the window was resized horizontally while the subviews were out of the view hierarchy.)
-        // Then set our frame size back so we are hidden again.
-        hiddenSize = [self frame].size;
-        [self setFrameSize:NSMakeSize(hiddenSize.width, originalHeight)];
-        [self resizeSubviewsWithOldSize:sizeBeforeHidden];
-        [self setFrameSize:hiddenSize];
-        
-        [self changeWindowHeightBy:(originalHeight - hiddenHeight)];
-    } else {
-        [self changeWindowHeightBy:(originalHeight - hiddenHeight)];
-        [self restoreSubviews];
-        [self resizeSubviewsWithOldSize:sizeBeforeHidden];
-    }
+    // Temporarily set our frame back to its original height.
+    // Then tell our subviews to resize themselves, according to their normal autoresize masks.
+    // (This may cause their widths to change, if the window was resized horizontally while the subviews were out of the view hierarchy.)
+    // Then set our frame size back so we are hidden again.
+    NSSize hiddenSize = [self frame].size;
+    [self setFrameSize:NSMakeSize(hiddenSize.width, originalHeight)];
+    [self resizeSubviewsWithOldSize:sizeBeforeHidden];
+    [self setFrameSize:hiddenSize];
+    
+    [self changeWindowHeightBy:(originalHeight - hiddenHeight)];
 
     if (nonretainedOriginalNextKeyView) {
         // Restore the key loop to its old configuration.
@@ -261,7 +231,7 @@ static BOOL showSubviewsWhileResizing = NO;
     //
     // We want the other views in the window to stay the same size. If a view is above us, we want it to stay in the same position relative to the top of the window; likewise, if a view is below us, we want it to stay in the same position relative to the bottom of the window.
     // Also, we want this view to resize vertically, with its top and bottom attached to the top and bottom of its parent.
-    // And: this view's subviews should not resize vertically, and should stay attached to the top of this view.  (This only matters if showSubviewsWhileResizing is YES; otherwise, we have no subviews at this point in time.)
+    // And: this view's subviews should not resize vertically, and should stay attached to the top of this view.
     //
     // However, all of these views may have their autoresize masks configured differently than we want. So:
     //
@@ -274,31 +244,48 @@ static BOOL showSubviewsWhileResizing = NO;
 
     NSRect ourFrame;
     NSWindow *window;
-    NSView *contentView;
     NSArray *windowSubviews;
-    NSUInteger  windowSubviewCount, windowSubviewIndex;
     NSMutableArray *windowSubviewMasks;
     NSArray *ourSubviews;
-    NSUInteger  ourSubviewCount, ourSubviewIndex;
     NSMutableArray *ourSubviewMasks;
     NSRect newWindowFrame;
     NSSize newWindowMinOrMaxSize;
 
-    ourFrame = [self frame];
     window = [self window];
-    contentView = [window contentView];
 
-    // Adjust the autoresize masks of the window's subviews, remembering the original masks.
-    windowSubviews = [contentView subviews];
-    windowSubviewCount = [windowSubviews count];
-    windowSubviewMasks = [NSMutableArray arrayWithCapacity:windowSubviewCount];
-    for (windowSubviewIndex = 0; windowSubviewIndex < windowSubviewCount; windowSubviewIndex++) {
-        NSView *windowSubview;
-        NSUInteger  mask;
+    // Compute the window's new frame.
+    newWindowFrame = [window frame];
+    newWindowFrame.origin.y -= amount;
+    newWindowFrame.size.height += amount;
+
+    // If we're growing a visible window, will AppKit constrain it?  It might not fit on the screen.
+    if ([window isVisible] && amount > 0) {
+        NSRect constrainedNewWindowFrame = [window constrainFrameRect:newWindowFrame toScreen:[window screen]];
+        if (constrainedNewWindowFrame.size.height < newWindowFrame.size.height) {
+            // We can't actually make the window that size. Something will have to give.
+            // Shrink to a height such that, when we grow later on, the window will fit.
+            float shrunkenHeight = constrainedNewWindowFrame.size.height - amount;
+            NSRect immediateNewFrame = [window frame];
+            immediateNewFrame.origin.y += (immediateNewFrame.size.height - shrunkenHeight);
+            immediateNewFrame.size.height = shrunkenHeight;
+            [window setFrame:immediateNewFrame display:YES animate:YES];
+
+            // Have to recompute based on the new frame...
+            newWindowFrame = [window frame];
+            newWindowFrame.origin.y -= amount;
+            newWindowFrame.size.height += amount;
+        }
+    }        
+
+    // Now that we're in a configuration where we can change the window's size how we want, start with our current frame.
+    ourFrame = [self frame];
         
-        windowSubview = [windowSubviews objectAtIndex:windowSubviewIndex];
-        mask = [windowSubview autoresizingMask];
-        [windowSubviewMasks addObject:[NSNumber numberWithUnsignedInt:mask]];
+    // Adjust the autoresize masks of the window's subviews, remembering the original masks.
+    windowSubviews = [[window contentView] subviews];
+    windowSubviewMasks = [NSMutableArray array];
+    for (NSView* windowSubview in windowSubviews) {
+        NSUInteger mask = [windowSubview autoresizingMask];
+        [windowSubviewMasks addObject:[NSNumber numberWithUnsignedInteger:mask]];
 
         if (windowSubview == self) {
             // This is us.  Make us stick to the top and bottom of the window, and resize vertically.
@@ -323,16 +310,10 @@ static BOOL showSubviewsWhileResizing = NO;
     }
 
     // Adjust the autoresize masks of our subviews, remembering the original masks.
-    // (Note that if showSubviewsWhileResizing is NO, [self subviews] will be empty.)
     ourSubviews = [self subviews];
-    ourSubviewCount = [ourSubviews count];
-    ourSubviewMasks = [NSMutableArray arrayWithCapacity:ourSubviewCount];
-    for (ourSubviewIndex = 0; ourSubviewIndex < ourSubviewCount; ourSubviewIndex++) {
-        NSView *ourSubview;
-        NSUInteger  mask;
-
-        ourSubview = [ourSubviews objectAtIndex:ourSubviewIndex];
-        mask = [ourSubview autoresizingMask];
+    ourSubviewMasks = [NSMutableArray array];
+    for (NSView* ourSubview in ourSubviews) {
+        NSUInteger mask = [ourSubview autoresizingMask];
         [ourSubviewMasks addObject:[NSNumber numberWithUnsignedInt:mask]];
 
         // Don't change height, and stick to the top of the view.
@@ -343,14 +324,17 @@ static BOOL showSubviewsWhileResizing = NO;
         [ourSubview setAutoresizingMask:mask];
     }
 
-    // Compute the window's new frame, and resize it.
-    newWindowFrame = [window frame];
-    newWindowFrame.origin.y -= amount;
-    newWindowFrame.size.height += amount;
-    if ([window isVisible])
+    // Finally we can resize the window.
+    if ([window isVisible]) {
+        BOOL didPreserve = [window preservesContentDuringLiveResize];
+        [window setPreservesContentDuringLiveResize:NO];
+
         [window setFrame:newWindowFrame display:YES animate:YES];
-    else
+        
+        [window setPreservesContentDuringLiveResize:didPreserve];
+    } else {
         [window setFrame:newWindowFrame display:NO];
+    }
 
     // Adjust the window's min and max sizes to make sense.
     newWindowMinOrMaxSize = [window minSize];
@@ -371,8 +355,11 @@ static BOOL showSubviewsWhileResizing = NO;
 
 - (void)restoreAutoresizeMasks:(NSArray *)masks toViews:(NSArray *)views;
 {
-    for (NSUInteger index = 0; index < [masks count]; index++)
-        [(NSView*)[views objectAtIndex:index] setAutoresizingMask:[[masks objectAtIndex:index] unsignedIntValue]];    
+    NSUInteger count, index;
+
+    count = [masks count];
+    for (index = 0; index < count; index++)
+        [(NSView*)[views objectAtIndex:index] setAutoresizingMask:[[masks objectAtIndex:index] unsignedIntValue]];
 }
 
 @end
