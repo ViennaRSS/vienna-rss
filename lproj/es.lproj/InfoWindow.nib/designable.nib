@@ -44,9 +44,9 @@
 				<string key="NSClassName">NSApplication</string>
 			</object>
 			<object class="NSWindowTemplate" id="668191554">
-				<int key="NSWindowStyleMask">15</int>
+				<int key="NSWindowStyleMask">7</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{842, 350}, {292, 483}}</string>
+				<string key="NSWindowRect">{{100, 100}, {292, 483}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Ventana</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -1549,10 +1549,10 @@
 					<string>com.snoize.DisclosableViewIBPlugin</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
-					<string>{{399, 362}, {292, 483}}</string>
+					<string>{{375, 232}, {292, 483}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{399, 362}, {292, 483}}</string>
+					<string>{{375, 232}, {292, 483}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>{270, 461}</string>
@@ -1790,7 +1790,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">InfoWindow.h</string>
+						<string key="minorKey">src/InfoWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1805,39 +1805,39 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">DSClickableURLTextField.h</string>
+						<string key="minorKey">3rdparty/DSClickableURLTextField/DSClickableURLTextField.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">FolderView.h</string>
+						<string key="minorKey">src/FolderView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">TableViewExtensions.h</string>
+						<string key="minorKey">src/TableViewExtensions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="762615226">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="530479604">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">ViewExtensions.h</string>
+						<string key="minorKey">src/ViewExtensions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSView</string>
-					<reference key="sourceIdentifier" ref="762615226"/>
+					<reference key="sourceIdentifier" ref="530479604"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SquareWindow.h</string>
+						<string key="minorKey">src/SquareWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1884,7 +1884,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SNDisclosableView.h</string>
+						<string key="minorKey">3rdparty/DisclosableView/SNDisclosableView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1892,7 +1892,7 @@
 					<string key="superclassName">NSButton</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SNDisclosureButton.h</string>
+						<string key="minorKey">3rdparty/DisclosableView/SNDisclosureButton.h</string>
 					</object>
 				</object>
 			</object>
@@ -1947,6 +1947,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSUserInterfaceItemSearching.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSApplication</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabDragAssistant.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2269,21 +2276,7 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">Growl.framework/Headers/GrowlApplicationBridge.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabBarCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabBarControl.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

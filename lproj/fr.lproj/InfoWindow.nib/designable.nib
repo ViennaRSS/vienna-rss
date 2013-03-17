@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="78"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -46,7 +46,7 @@
 			<object class="NSWindowTemplate" id="934401247">
 				<int key="NSWindowStyleMask">7</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{158, 281}, {381, 487}}</string>
+				<string key="NSWindowRect">{{100, 100}, {381, 487}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Fenêtre</string>
 				<object class="NSMutableString" key="NSWindowClass">
@@ -485,7 +485,7 @@
 									<object class="NSButtonCell" key="NSCell" id="248168740">
 										<int key="NSCellFlags">67239424</int>
 										<int key="NSCellFlags2">131072</int>
-										<string key="NSContents">Afficher la page complète immediatement</string>
+										<string key="NSContents">Afficher la page complète immédiatement</string>
 										<reference key="NSSupport" ref="26"/>
 										<reference key="NSControlView" ref="758815883"/>
 										<int key="NSButtonFlags">1211912703</int>
@@ -1553,9 +1553,9 @@
 					<reference ref="0"/>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
-					<string>{{421, 369}, {381, 487}}</string>
+					<string>{{421, 237}, {381, 487}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{421, 369}, {381, 487}}</string>
+					<string>{{421, 237}, {381, 487}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>{270, 461}</string>
@@ -1821,7 +1821,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">InfoWindow.h</string>
+						<string key="minorKey">src/InfoWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1836,39 +1836,39 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">DSClickableURLTextField.h</string>
+						<string key="minorKey">3rdparty/DSClickableURLTextField/DSClickableURLTextField.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">FolderView.h</string>
+						<string key="minorKey">src/FolderView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">TableViewExtensions.h</string>
+						<string key="minorKey">src/TableViewExtensions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="580158615">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="782210472">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">ViewExtensions.h</string>
+						<string key="minorKey">src/ViewExtensions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSView</string>
-					<reference key="sourceIdentifier" ref="580158615"/>
+					<reference key="sourceIdentifier" ref="782210472"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SquareWindow.h</string>
+						<string key="minorKey">src/SquareWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1915,7 +1915,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SNDisclosableView.h</string>
+						<string key="minorKey">3rdparty/DisclosableView/SNDisclosableView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1923,7 +1923,7 @@
 					<string key="superclassName">NSButton</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SNDisclosureButton.h</string>
+						<string key="minorKey">3rdparty/DisclosableView/SNDisclosureButton.h</string>
 					</object>
 				</object>
 			</object>
@@ -1978,6 +1978,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSUserInterfaceItemSearching.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSApplication</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabDragAssistant.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2300,21 +2307,7 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">Growl.framework/Headers/GrowlApplicationBridge.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabBarCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabBarControl.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

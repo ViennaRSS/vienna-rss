@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="64"/>
+			<integer value="44"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -46,7 +46,7 @@
 			<object class="NSWindowTemplate" id="979712832">
 				<int key="NSWindowStyleMask">7</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{842, 345}, {270, 488}}</string>
+				<string key="NSWindowRect">{{100, 100}, {270, 488}}</string>
 				<int key="NSWTFlags">1886912512</int>
 				<string key="NSWindowTitle">Fönster</string>
 				<object class="NSMutableString" key="NSWindowClass">
@@ -265,12 +265,12 @@
 								<object class="NSTextField" id="125454765">
 									<reference key="NSNextResponder" ref="768590505"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{9, 61}, {60, 13}}</string>
+									<string key="NSFrame">{{9, 61}, {82.3438, 13}}</string>
 									<reference key="NSSuperview" ref="768590505"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="273753797">
 										<int key="NSCellFlags">67239424</int>
-										<int key="NSCellFlags2">272629760</int>
+										<int key="NSCellFlags2">71303168</int>
 										<string key="NSContents">Användarnamn:</string>
 										<object class="NSFont" key="NSSupport" id="35026031">
 											<string key="NSName">LucidaGrande</string>
@@ -285,12 +285,12 @@
 								<object class="NSTextField" id="549056636">
 									<reference key="NSNextResponder" ref="768590505"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{9, 39}, {60, 13}}</string>
+									<string key="NSFrame">{{9, 39}, {82.3438, 13}}</string>
 									<reference key="NSSuperview" ref="768590505"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="762493135">
 										<int key="NSCellFlags">67239424</int>
-										<int key="NSCellFlags2">272629760</int>
+										<int key="NSCellFlags2">71303168</int>
 										<string type="base64-UTF8" key="NSContents">TMO2c2Vub3JkOgo</string>
 										<reference key="NSSupport" ref="35026031"/>
 										<reference key="NSControlView" ref="549056636"/>
@@ -301,7 +301,7 @@
 								<object class="NSTextField" id="501813479">
 									<reference key="NSNextResponder" ref="768590505"/>
 									<int key="NSvFlags">258</int>
-									<string key="NSFrame">{{72, 59}, {163, 19}}</string>
+									<string key="NSFrame">{{91, 59}, {144, 19}}</string>
 									<reference key="NSSuperview" ref="768590505"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="272989199">
@@ -318,7 +318,7 @@
 								<object class="NSTextField" id="754436166">
 									<reference key="NSNextResponder" ref="768590505"/>
 									<int key="NSvFlags">258</int>
-									<string key="NSFrame">{{72, 36}, {163, 19}}</string>
+									<string key="NSFrame">{{91, 36}, {144, 19}}</string>
 									<reference key="NSSuperview" ref="768590505"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="725149156">
@@ -953,7 +953,6 @@
 							<reference ref="1029551358"/>
 							<reference ref="216721157"/>
 							<reference ref="824659856"/>
-							<reference ref="768590505"/>
 							<reference ref="478200635"/>
 							<reference ref="581515022"/>
 							<reference ref="424079739"/>
@@ -963,6 +962,7 @@
 							<reference ref="577939815"/>
 							<reference ref="549627320"/>
 							<reference ref="101788678"/>
+							<reference ref="768590505"/>
 						</object>
 						<reference key="parent" ref="979712832"/>
 					</object>
@@ -1449,6 +1449,7 @@
 					<string>37.ImportedFromIB2</string>
 					<string>38.ImportedFromIB2</string>
 					<string>44.IBPluginDependency</string>
+					<string>44.IBViewBoundsToFrameTransform</string>
 					<string>44.ImportedFromIB2</string>
 					<string>45.ImportedFromIB2</string>
 					<string>5.IBEditorWindowLastContentRect</string>
@@ -1549,12 +1550,15 @@
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>com.snoize.DisclosableViewIBPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">AUFwAABBAAAAA</bytes>
+					</object>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
-					<string>{{404, 356}, {270, 488}}</string>
+					<string>{{404, 236}, {270, 488}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>{{404, 356}, {270, 488}}</string>
+					<string>{{404, 236}, {270, 488}}</string>
 					<boolean value="YES"/>
 					<boolean value="YES"/>
 					<string>{270, 461}</string>
@@ -1792,7 +1796,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">InfoWindow.h</string>
+						<string key="minorKey">src/InfoWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1807,53 +1811,39 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">DSClickableURLTextField.h</string>
+						<string key="minorKey">3rdparty/DSClickableURLTextField/DSClickableURLTextField.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">FolderView.h</string>
+						<string key="minorKey">src/FolderView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">NSObject+SBJson.h</string>
+						<string key="minorKey">src/TableViewExtensions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="934946852">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SBJsonStreamWriter.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">TableViewExtensions.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="445729418">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">ViewExtensions.h</string>
+						<string key="minorKey">src/ViewExtensions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSView</string>
-					<reference key="sourceIdentifier" ref="445729418"/>
+					<reference key="sourceIdentifier" ref="934946852"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSWindow</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SquareWindow.h</string>
+						<string key="minorKey">src/SquareWindow.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1900,7 +1890,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SNDisclosableView.h</string>
+						<string key="minorKey">3rdparty/DisclosableView/SNDisclosableView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1908,7 +1898,7 @@
 					<string key="superclassName">NSButton</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">SNDisclosureButton.h</string>
+						<string key="minorKey">3rdparty/DisclosableView/SNDisclosureButton.h</string>
 					</object>
 				</object>
 			</object>
@@ -1963,6 +1953,13 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">AppKit.framework/Headers/NSUserInterfaceItemSearching.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSApplication</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBFrameworkSource</string>
+						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabDragAssistant.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2285,21 +2282,7 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">Growl.framework/Headers/GrowlApplicationBridge.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
 						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabBarCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBFrameworkSource</string>
-						<string key="minorKey">PSMTabBarControl.framework/Headers/PSMTabBarControl.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
