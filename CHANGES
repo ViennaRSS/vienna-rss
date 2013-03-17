@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 11
+-------------
+- Fix a bug on preserving article currently being read on refreshes
+- Updated Dutch translation
+- Reviewed the localized versions of the "Get Info..." window, which were often mangled
+
 3.0.0 Beta 10
 -------------
 - New icons (thanks to Nick Dazé and romiq !)
