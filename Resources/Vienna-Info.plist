@@ -12,7 +12,7 @@
 				<string>viennastyle</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>vienna2style.icns</string>
+			<string>vienna3style.icns</string>
 			<key>CFBundleTypeName</key>
 			<string>Vienna Style Package</string>
 			<key>CFBundleTypeRole</key>
@@ -26,7 +26,9 @@
 				<string>viennaplugin</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>vienna2plugin.icns</string>
+			<string>vienna3plugin.icns</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>CFBundleTypeName</key>
 			<string>Vienna Plugin Package</string>
 			<key>CFBundleTypeRole</key>
