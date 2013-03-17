@@ -1,53 +1,66 @@
-/* NSTextField ( ) : <title:
-> (oid:70) */
-"\n" = "\n";
 
-/* NSTextField ((Folder name)) : <title:(Folder name)> (oid:32) */
-"(Folder name)" = "(Klasör adı)";
+/* Class = "NSWindow"; title = "Window"; ObjectID = "5"; */
+"5.title" = "Window";
 
-/* NSTextField ((Last refresh date)) : <title:(Last refresh date)> (oid:34) */
-"(Last refresh date)" = "(Son yenilenme zamanı)";
+/* Class = "NSBox"; title = "Box"; ObjectID = "95"; */
+"95.title" = "Box";
 
-/* SNDisclosureButton (Authentication:) : <title:Authentication:> (oid:45) */
-"Authentication:" = "Yetki:";
+/* Class = "NSBox"; title = "Box"; ObjectID = "97"; */
+"97.title" = "Box";
 
-/* NSBox (Box) : <title:Box> (oid:101) */
-"Box" = "Kutu";
+/* Class = "NSBox"; title = "Box"; ObjectID = "99"; */
+"99.title" = "Box";
 
-/* SNDisclosureButton (Description:) : <title:Description:> (oid:79) */
-"Description:" = "Açıklama:";
+/* Class = "NSBox"; title = "Box"; ObjectID = "101"; */
+"101.title" = "Box";
 
-/* SNDisclosureButton (Feed URL:) : <title:Feed URL:> (oid:38) */
-"Feed URL:" = "Besleme URLsi:";
+/* Class = "NSTextFieldCell"; title = "(Folder name)"; ObjectID = "104"; */
+"104.title" = "(Folder name)";
 
-/* SNDisclosureButton (General:) : <title:General:> (oid:65) */
-"General:" = "Genel:";
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
+"105.title" = "En son yenilendi:";
 
-/* NSTextField (Last Refreshed:) : <title:Last Refreshed:> (oid:33) */
-"Last Refreshed:" = "En son yenilendi:";
+/* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
+"106.title" = "(Last refresh date)";
 
-/* NSTextField (Password: ) : <title:Password:
-> (oid:52) */
-"Password:\n" = "Şifre:\n";
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
+"109.title" = "Doğrula";
 
-/* NSTextField (Size:) : <title:Size:> (oid:67) */
-"Size:" = "Boyut:";
+/* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
+"110.title" = "Besleme URLsi:";
 
-/* NSButton (Subscribed) : <title:Subscribed> (oid:76) */
-"Subscribed" = "Abone olundu";
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
+"111.title" = "Kullanıcı adı:";
 
-/* NSTextField (Unread: ) : <title:Unread:
-> (oid:68) */
-"Unread:\n" = "Okunmadı:\n";
+/* Class = "NSTextFieldCell"; title = "Password:\n"; ObjectID = "112"; */
+"112.title" = "Şifre:";
 
-/* NSButton (Update Authentication) : <title:Update Authentication> (oid:91) */
-"Update Authentication" = "Yetkilendirmeyi Güncelle";
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
+"115.title" = "Yetkilendirmeyi Güncelle";
 
-/* NSTextField (User name:) : <title:User name:> (oid:51) */
-"User name:" = "Kullanıcı adı:";
+/* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
+"116.title" = "Yetki:";
 
-/* NSButton (Validate) : <title:Validate> (oid:62) */
-"Validate" = "Doğrula";
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
+"117.title" = "Boyut:";
 
-/* NSWindow (Window) : <title:Window> (oid:5) */
-"Window" = "Pencere";
+/* Class = "NSTextFieldCell"; title = "Unread:\n"; ObjectID = "118"; */
+"118.title" = "Okunmadı:\n";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
+"119.title" = "\n";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
+"120.title" = "\n";
+
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
+"121.title" = "Abone olundu";
+
+/* Class = "NSButtonCell"; title = "General:"; ObjectID = "122"; */
+"122.title" = "Genel:";
+
+/* Class = "NSButtonCell"; title = "Description:"; ObjectID = "124"; */
+"124.title" = "Açıklama:";
+
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Load Full HTML Articles";

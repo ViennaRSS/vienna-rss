@@ -1,54 +1,66 @@
-/* NSTextField ( ) : <title:
-> (oid:70) */
-"\n" = "\n";
 
-/* NSTextField ((Folder name)) : <title:(Folder name)> (oid:32) */
-"(Folder name)" = "(nome Cartella)";
+/* Class = "NSWindow"; title = "Window"; ObjectID = "5"; */
+"5.title" = "Finestra";
 
-/* NSTextField ((Last refresh date)) : <title:(Last refresh date)> (oid:34) */
-"(Last refresh date)" = "(Data ultimo aggiornameto)";
+/* Class = "NSBox"; title = "Box"; ObjectID = "95"; */
+"95.title" = "Box";
 
-/* SNDisclosureButton (Authentication:) : <title:Authentication:> (oid:45) */
-"Authentication:" = "Autenticazione:";
+/* Class = "NSBox"; title = "Box"; ObjectID = "97"; */
+"97.title" = "Box";
 
-/* NSBox (Box) : <title:Box> (oid:101) */
-"Box" = "Box";
+/* Class = "NSBox"; title = "Box"; ObjectID = "99"; */
+"99.title" = "Box";
 
-/* SNDisclosureButton (Description:) : <title:Description:> (oid:79) */
-"Description:" = "Descrizione:";
+/* Class = "NSBox"; title = "Box"; ObjectID = "101"; */
+"101.title" = "Box";
 
-/* SNDisclosureButton (Feed URL:) : <title:Feed URL:> (oid:38) */
-"Feed URL:" = "URL Feed:";
+/* Class = "NSTextFieldCell"; title = "(Folder name)"; ObjectID = "104"; */
+"104.title" = "(nome Cartella)";
 
-/* SNDisclosureButton (General:) : <title:General:> (oid:65) */
-"General:" = "Generale:";
+/* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
+"105.title" = "Ultimo Aggiornamento:";
 
-/* NSTextField (Last Refreshed:) : <title:Last Refreshed:> (oid:33) */
-"Last Refreshed:" = "Ultimo Aggiornamento:";
+/* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
+"106.title" = "(Data ultimo aggiornameto)";
 
-/* NSTextField (Password: ) : <title:Password:
-> (oid:52) */
-"Password:\n" = "Password:\n";
+/* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
+"109.title" = "Convalida";
 
-/* NSTextField (Size:) : <title:Size:> (oid:67) */
-"Size:" = "Dim.:";
+/* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
+"110.title" = "URL Feed:";
 
-/* NSButton (Subscribed) : <title:Subscribed> (oid:76) */
-"Subscribed" = "Iscritto";
+/* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
+"111.title" = "Nome utente:";
 
-/* NSTextField (Unread: ) : <title:Unread:
-> (oid:68) */
-"Unread:\n" = "Non letti:\n";
+/* Class = "NSTextFieldCell"; title = "Password:\n"; ObjectID = "112"; */
+"112.title" = "Password:\n";
 
-/* NSButton (Update Authentication) : <title:Update Authentication> (oid:91) */
-"Update Authentication" = "Aggiorna Autenticazione";
+/* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
+"115.title" = "Aggiorna Autenticazione";
 
-/* NSTextField (User name:) : <title:User name:> (oid:51) */
-"User name:" = "Nome utente:";
+/* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
+"116.title" = "Autenticazione:";
 
-/* NSButton (Validate) : <title:Validate> (oid:62) */
-"Validate" = "Convalida";
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
+"117.title" = "Dim.:";
 
-/* NSWindow (Window) : <title:Window> (oid:5) */
-"Window" = "Finestra";
+/* Class = "NSTextFieldCell"; title = "Unread:\n"; ObjectID = "118"; */
+"118.title" = "Non letti:\n";
 
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "119"; */
+"119.title" = "\n";
+
+/* Class = "NSTextFieldCell"; title = "\n"; ObjectID = "120"; */
+"120.title" = "\n";
+
+/* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
+"121.title" = "Iscritto";
+
+/* Class = "NSButtonCell"; title = "General:"; ObjectID = "122"; */
+"122.title" = "Generale:";
+
+/* Class = "NSButtonCell"; title = "Description:"; ObjectID = "124"; */
+"124.title" = "Descrizione:";
+
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Use Web Page for Articles";

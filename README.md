@@ -50,6 +50,9 @@ We need help keeping Vienna translations up to date into different languages. Ap
 
 Have a look at current localizations in their respective _.lproj_ folders. While translating, the [LangSwitch](http://www.seoxys.com/langswitch-2/) freeware might be handy for checking contexts.
 
+Note : Unless you are able to run Interface Builder version 3.x, don't change InfoWindow.nib. This would break our efforts to maintain Leopard (OS X 10.5) compatibility.
+Instead, just change the InfoWindow.strings file. Your changes will be integrated manually, using either Interface Builder 3.2 or ibtool3 (legacy command line tool included in Xcode 4.x).
+
 ### Writing custom styles
 
 Vienna supports a variety of different display styles for articles. These styles are provided on the Styles sub-menu off the View menu. A style is a combination of an HTML template that is used to control the placement of various parts of the article and a CSS stylesheet that controls the appearance of the article.
