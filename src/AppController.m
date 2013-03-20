@@ -1978,42 +1978,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		return;
 	
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
-	NSImage * iconImageBuffer = [originalIcon copy];
-	NSSize iconSize = [originalIcon size];
-	
-	// Create attributes for drawing the count. In our case, we're drawing using in
-	// 26pt Helvetica bold white.
-	NSDictionary * attributes = [[NSDictionary alloc] 
-								 initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:25], NSFontAttributeName,
-								 [NSColor whiteColor], NSForegroundColorAttributeName, nil];
-	NSSize numSize = [countdown sizeWithAttributes:attributes];
-	
-	// Create a red circle in the icon large enough to hold the count.
-	[iconImageBuffer lockFocus];
-	[originalIcon drawAtPoint:NSMakePoint(0, 0)
-					 fromRect:NSMakeRect(0, 0, iconSize.width, iconSize.height) 
-					operation:NSCompositeSourceOver 
-					 fraction:1.0f];
-	
-	float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
-	max += 21;
-	NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
-	
-	// Draw the star image and scale it so the unread count will fit inside.
-	NSImage * starImage = [NSImage imageNamed:@"unreadStar1.tiff"];
-	[starImage setScalesWhenResized:YES];
-	[starImage setSize:circleRect.size];
-	[starImage drawAtPoint:circleRect.origin fromRect:NSMakeRect(0, 0, max, max) operation:NSCompositeSourceOver fraction:1.0f];
-	
-	// Draw the count in the red circle
-	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f + 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
-	[countdown drawAtPoint:point withAttributes:attributes];
-	
-	// Now set the new app icon and clean up.
-	[iconImageBuffer unlockFocus];
-	[NSApp setApplicationIconImage:iconImageBuffer];
-	[iconImageBuffer release];
-	[attributes release];
+	[NSApp dockTile] setBadgeLabel:countdown];
+
 }
 
 /* handleAbout
