@@ -464,7 +464,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[splitView1 setDelegate:self];
 	
 	// Show the current unread count on the app icon
-	originalIcon = [[NSApp applicationIconImage] copy];
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 	
 	// Set alternate in main menu for opening pages, and check for correct title of menu item
@@ -645,7 +644,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[activityWindow performClose:self];
 		
 		// Put back the original app icon
-		[NSApp setApplicationIconImage:originalIcon];
+		[[NSApp dockTile] setBadgeLabel:nil];
 		
 		// Save the open tabs
 		[browserView saveOpenTabs];
@@ -1944,8 +1943,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case MA_NewArticlesNotification_None:
 		case MA_NewArticlesNotification_Bounce:
 			// Remove the badge if there was one.
-			if ([NSApp applicationIconImage] != originalIcon)
-				[NSApp setApplicationIconImage:originalIcon];
+			[[NSApp dockTile] setBadgeLabel:nil];
 			break;
 	}
 }
@@ -1966,7 +1964,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Don't show a count if there are no unread articles
 	if (currentCountOfUnread <= 0)
 	{
-		[NSApp setApplicationIconImage:originalIcon];
+		[[NSApp dockTile] setBadgeLabel:nil];
 		[mainWindow setTitle:[self appName]];
 		return;	
 	}	
@@ -4679,7 +4677,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[downloadWindow release];
 	[persistedStatusText release];
 	[scriptPathMappings release];
-	[originalIcon release];
 	[smartFolder release];
 	[rssFeed release];
 	[groupFolder release];

@@ -87,7 +87,6 @@
 	Database * db;
 	PluginManager * pluginManager;
 	NSMutableDictionary * scriptPathMappings;
-	NSImage * originalIcon;
 	NSMenu * appDockMenu;
 	NSStatusItem * appStatusItem;
 	int progressCount;
