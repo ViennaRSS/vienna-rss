@@ -206,8 +206,8 @@ static NSLock * dateFormatters_lock;
 	[filterIconInStatusBarButton setEnabled:NO];
 }
 
-/* applicationDidResignActive
- * Do the things we need to do when Vienna becomes inactive, like re-coloring view backgrounds.
+/* applicationDidBecomeActive
+ * Do the things we need to do when Vienna becomes active, like re-coloring view backgrounds.
  */
 -(void)applicationDidBecomeActive:(NSNotification *)notification
 {
@@ -1978,7 +1978,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		return;
 	
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
-	[NSApp dockTile] setBadgeLabel:countdown];
+	[[NSApp dockTile] setBadgeLabel:countdown];
 
 }
 
