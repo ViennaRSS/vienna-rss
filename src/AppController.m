@@ -206,8 +206,8 @@ static NSLock * dateFormatters_lock;
 	[filterIconInStatusBarButton setEnabled:NO];
 }
 
-/* applicationDidResignActive
- * Do the things we need to do when Vienna becomes inactive, like re-coloring view backgrounds.
+/* applicationDidBecomeActive
+ * Do the things we need to do when Vienna becomes active, like re-coloring view backgrounds.
  */
 -(void)applicationDidBecomeActive:(NSNotification *)notification
 {
@@ -464,7 +464,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[splitView1 setDelegate:self];
 	
 	// Show the current unread count on the app icon
-	originalIcon = [[NSApp applicationIconImage] copy];
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 	
 	// Set alternate in main menu for opening pages, and check for correct title of menu item
@@ -645,7 +644,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[activityWindow performClose:self];
 		
 		// Put back the original app icon
-		[NSApp setApplicationIconImage:originalIcon];
+		[[NSApp dockTile] setBadgeLabel:nil];
 		
 		// Save the open tabs
 		[browserView saveOpenTabs];
@@ -1944,8 +1943,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case MA_NewArticlesNotification_None:
 		case MA_NewArticlesNotification_Bounce:
 			// Remove the badge if there was one.
-			if ([NSApp applicationIconImage] != originalIcon)
-				[NSApp setApplicationIconImage:originalIcon];
+			[[NSApp dockTile] setBadgeLabel:nil];
 			break;
 	}
 }
@@ -1966,7 +1964,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Don't show a count if there are no unread articles
 	if (currentCountOfUnread <= 0)
 	{
-		[NSApp setApplicationIconImage:originalIcon];
+		[[NSApp dockTile] setBadgeLabel:nil];
 		[mainWindow setTitle:[self appName]];
 		return;	
 	}	
@@ -1978,42 +1976,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		return;
 	
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
-	NSImage * iconImageBuffer = [originalIcon copy];
-	NSSize iconSize = [originalIcon size];
-	
-	// Create attributes for drawing the count. In our case, we're drawing using in
-	// 26pt Helvetica bold white.
-	NSDictionary * attributes = [[NSDictionary alloc] 
-								 initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:25], NSFontAttributeName,
-								 [NSColor whiteColor], NSForegroundColorAttributeName, nil];
-	NSSize numSize = [countdown sizeWithAttributes:attributes];
-	
-	// Create a red circle in the icon large enough to hold the count.
-	[iconImageBuffer lockFocus];
-	[originalIcon drawAtPoint:NSMakePoint(0, 0)
-					 fromRect:NSMakeRect(0, 0, iconSize.width, iconSize.height) 
-					operation:NSCompositeSourceOver 
-					 fraction:1.0f];
-	
-	float max = (numSize.width > numSize.height) ? numSize.width : numSize.height;
-	max += 21;
-	NSRect circleRect = NSMakeRect(iconSize.width - max, iconSize.height - max, max, max);
-	
-	// Draw the star image and scale it so the unread count will fit inside.
-	NSImage * starImage = [NSImage imageNamed:@"unreadStar1.tiff"];
-	[starImage setScalesWhenResized:YES];
-	[starImage setSize:circleRect.size];
-	[starImage drawAtPoint:circleRect.origin fromRect:NSMakeRect(0, 0, max, max) operation:NSCompositeSourceOver fraction:1.0f];
-	
-	// Draw the count in the red circle
-	NSPoint point = NSMakePoint(NSMidX(circleRect) - numSize.width / 2.0f + 2.0f,  NSMidY(circleRect) - numSize.height / 2.0f + 2.0f);
-	[countdown drawAtPoint:point withAttributes:attributes];
-	
-	// Now set the new app icon and clean up.
-	[iconImageBuffer unlockFocus];
-	[NSApp setApplicationIconImage:iconImageBuffer];
-	[iconImageBuffer release];
-	[attributes release];
+	[[NSApp dockTile] setBadgeLabel:countdown];
+
 }
 
 /* handleAbout
@@ -4713,7 +4677,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[downloadWindow release];
 	[persistedStatusText release];
 	[scriptPathMappings release];
-	[originalIcon release];
 	[smartFolder release];
 	[rssFeed release];
 	[groupFolder release];
