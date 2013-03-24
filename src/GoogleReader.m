@@ -193,13 +193,11 @@ JSONDecoder * jsonDecoder;
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
 					
 		NSMutableArray * articleArray = [NSMutableArray array];
-		NSMutableArray * articleGuidArray = [NSMutableArray array];
 		
 		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
 			
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
 			NSString * articleGuid = [newsItem objectForKey:@"id"];
-			[articleGuidArray addObject:articleGuid];
 			Article *article = [[Article alloc] initWithGuid:articleGuid];
 			[article setFolderId:[refreshedFolder itemId]];
 		
