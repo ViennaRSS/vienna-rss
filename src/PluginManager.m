@@ -387,7 +387,7 @@
 			{
 				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[[NSApp delegate] openURL:urlToLoad inPreferredBrowser:YES];
+					[[NSApp delegate] createNewTab:urlToLoad inBackground:NO];
 			}
 			else
 			{
