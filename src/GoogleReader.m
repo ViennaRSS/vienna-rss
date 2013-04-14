@@ -105,6 +105,8 @@ JSONDecoder * jsonDecoder;
 	LOG_EXPR([request originalURL]);
 	LOG_EXPR([request error]);
 	LOG_EXPR([request responseHeaders]);
+	if ([[request error] code] == ASIAuthenticationErrorType) //Error caused by lack of authentication
+		[self clearAuthentication];
 }
 
 // default handler for didFinishSelector
