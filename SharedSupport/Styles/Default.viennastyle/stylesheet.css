@@ -90,4 +90,5 @@ embed, video {
 /* keep images ratio and avoid box overflow due to border or padding */
 img {
   box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
