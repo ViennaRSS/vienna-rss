@@ -132,6 +132,9 @@ JSONDecoder * jsonDecoder;
 	if ([folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
+
+	if (![self isReady])
+		[self getGoogleOAuthToken];
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%li&ot=%@&ck=%@&T=%@&access_token=%@",APIBaseURL,[GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],ClientName,articleLimit,folderLastUpdate,TIMESTAMP, token, token]];
 		
@@ -317,6 +320,7 @@ JSONDecoder * jsonDecoder;
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[self getGoogleOAuthToken]; //attempt to authenticate for other queued refreshes
 	  }
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
