@@ -60,6 +60,7 @@ span.articleEnclosureStyle:before { content: "Enclosure: " }
 
 .articleBodyStyle {
 	padding: 0 15px;
+	overflow:auto;
 }
 
 .articleDetails { 
