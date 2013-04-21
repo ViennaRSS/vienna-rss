@@ -12,8 +12,8 @@
 @interface PSMOverflowPopUpButton : NSPopUpButton {
 	NSImage									*_PSMTabBarOverflowPopUpImage;
 	NSImage									*_PSMTabBarOverflowDownPopUpImage;
-	BOOL										_down;
-	BOOL										_animatingAlternateImage;
+	BOOL									_down;
+	BOOL									_animatingAlternateImage;
 	NSTimer									*_animationTimer;
 	CGFloat									_animationValue;
 }

@@ -46,7 +46,7 @@
 	[[tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
 	
 	//Metal is the default
-	//[tabBarControl setStyleNamed:@"Metal"];
+	[tabBarControl setStyleNamed:@"Unified"];
 	
 	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setUseOverflowMenu:YES];
