@@ -53,6 +53,7 @@ body {
 	 width: 34em;
 	 padding: 0;
 	 margin: 0 17px 35px 35px;
+	 overflow:auto;
 	}
 		div#viennabody a {
 		 color: #0019ff;

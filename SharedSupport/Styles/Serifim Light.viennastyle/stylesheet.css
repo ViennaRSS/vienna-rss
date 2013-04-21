@@ -101,6 +101,7 @@ a:visited {
   padding-top: 20px;
   font-size: 1.2em;
   line-height: 1.6em;
+  overflow:auto;
 }
 
 p,

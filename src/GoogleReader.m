@@ -105,6 +105,8 @@ JSONDecoder * jsonDecoder;
 	LOG_EXPR([request originalURL]);
 	LOG_EXPR([request error]);
 	LOG_EXPR([request responseHeaders]);
+	if ([[request error] code] == ASIAuthenticationErrorType) //Error caused by lack of authentication
+		[self clearAuthentication];
 }
 
 // default handler for didFinishSelector
@@ -130,8 +132,11 @@ JSONDecoder * jsonDecoder;
 	if ([folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
+
+	if (![self isReady])
+		[self getGoogleOAuthToken];
 		
-	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%li&ot=%@&ck=%@&T=%@&access_token=%@", [GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],ClientName,articleLimit,folderLastUpdate,TIMESTAMP, token, token]];
+	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%li&ot=%@&ck=%@&T=%@&access_token=%@",APIBaseURL,[GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],ClientName,articleLimit,folderLastUpdate,TIMESTAMP, token, token]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -193,13 +198,11 @@ JSONDecoder * jsonDecoder;
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
 					
 		NSMutableArray * articleArray = [NSMutableArray array];
-		NSMutableArray * articleGuidArray = [NSMutableArray array];
 		
 		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
 			
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
 			NSString * articleGuid = [newsItem objectForKey:@"id"];
-			[articleGuidArray addObject:articleGuid];
 			Article *article = [[Article alloc] initWithGuid:articleGuid];
 			[article setFolderId:[refreshedFolder itemId]];
 		
@@ -317,6 +320,7 @@ JSONDecoder * jsonDecoder;
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[self getGoogleOAuthToken]; //attempt to authenticate for other queued refreshes
 	  }
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
@@ -357,7 +361,7 @@ JSONDecoder * jsonDecoder;
 	
 	if (googleReaderStatus == isTokenAcquired) {
 		
-		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/token?client=%@&access_token=%@",ClientName,token]];
+		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@token?client=%@&access_token=%@",APIBaseURL,ClientName,token]];
 		ASIHTTPRequest * tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
 		
 		LLog(@"Start Action Token Request!");
@@ -537,7 +541,7 @@ JSONDecoder * jsonDecoder;
 	[[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
 
 
-	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/list?client=%@&output=json&access_token=%@",ClientName,token]]];
+	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json&access_token=%@",APIBaseURL,ClientName,token]]];
 	[subscriptionRequest setDelegate:self];
 	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
 	LLog(@"Starting subscriptionRequest");
@@ -643,7 +647,7 @@ JSONDecoder * jsonDecoder;
 
 -(void)subscribeToFeed:(NSString *)feedURL 
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/quickadd?client=%@", APIBaseURL, ClientName]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/quickadd?client=%@",APIBaseURL,ClientName]];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
@@ -657,7 +661,7 @@ JSONDecoder * jsonDecoder;
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
 {
-	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/subscription/edit?access_token=%@",token]];
+	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
 	[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
@@ -668,7 +672,7 @@ JSONDecoder * jsonDecoder;
 
 -(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@", APIBaseURL, ClientName]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@",APIBaseURL,ClientName]];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:@"edit" forKey:@"ac"];
@@ -684,7 +688,7 @@ JSONDecoder * jsonDecoder;
 {
 	NSString * theActionToken = [self getGoogleActionToken];
 	LLog(token);
-	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
+	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
@@ -717,7 +721,7 @@ JSONDecoder * jsonDecoder;
 	}
 
 	LLog(token);
-	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
+	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
     NSString *itemGuid = [[request userInfo] objectForKey:@"guid"];
 	ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
 	[request1 setPostValue:@"true" forKey:@"async"];
@@ -731,7 +735,7 @@ JSONDecoder * jsonDecoder;
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
 	NSString * theActionToken = [self getGoogleActionToken];
-	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.google.com/reader/api/0/edit-tag?access_token=%@",token]];
+	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	if (flag) {
 		[myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"a"];

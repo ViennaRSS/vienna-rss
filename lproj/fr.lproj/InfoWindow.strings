@@ -24,7 +24,7 @@
 "106.title" = "(Last refresh date)";
 
 /* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
-"109.title" = "Valider";
+"109.title" = "Vérifier";
 
 /* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
 "110.title" = "URL du flux :";

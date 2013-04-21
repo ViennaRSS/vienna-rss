@@ -60,6 +60,7 @@ span.articleEnclosureStyle:before { content: "Enclosure: " }
 
 .articleBodyStyle {
 	padding: 0 15px;
+	overflow:auto;
 }
 
 .articleDetails { 
@@ -82,4 +83,5 @@ img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, v
 /* keep images ratio and avoid box overflow due to border or padding */
 img {
 	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
