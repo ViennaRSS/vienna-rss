@@ -1471,9 +1471,8 @@ static Database * _sharedDatabase = nil;
 		}
 		else if (existingArticle == nil)
 		{
-			SQLResult * results;
 			
-			results = [sqlDatabase performQueryWithFormat:
+			SQLResult * results = [sqlDatabase performQueryWithFormat:
 				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
 				@"values('%@', %ld, %ld, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@',%d)",
 				preparedArticleGuid,
@@ -1547,8 +1546,7 @@ static Database * _sharedDatabase = nil;
 				if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty))
 					revised_flag = YES;
 				
-				SQLResult * results;
-				results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
+				SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
 					@"read_flag=0, title='%@', text='%@', revised_flag=%d where folder_id=%ld and message_id='%@'",
 					parentId,
 					preparedUserName,
@@ -1678,12 +1676,10 @@ static Database * _sharedDatabase = nil;
 		// Make sure we have a database.
 		NSAssert(sqlDatabase, @"Database not assigned for this item");
 		
-		SQLResult * results;
-
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQuery:@"select folder_id, search_string from smart_folders"];
+		SQLResult * results = [sqlDatabase performQuery:@"select folder_id, search_string from smart_folders"];
 		if (results && [results rowCount])
 		{
 			for (SQLRow * row in [results rowEnumerator])
@@ -1767,12 +1763,10 @@ static Database * _sharedDatabase = nil;
 		// Keep running count of total unread articles
 		countOfUnread = 0;
 		
-		SQLResult * results;
-
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
+		SQLResult * results = [sqlDatabase performQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
 			@" type, flags, next_sibling, first_child from folders order by folder_id"];
 		if (results && [results rowCount])
 		{			
@@ -1924,7 +1918,6 @@ static Database * _sharedDatabase = nil;
 	if ([folder countOfCachedArticles] == -1)
 	{
 		NSInteger folderId = [folder itemId];
-		SQLResult * results;
 
 		// Initialize to indicate that the folder array is valid.
 		[folder markFolderEmpty];
@@ -1932,13 +1925,12 @@ static Database * _sharedDatabase = nil;
 		// Verify we're on the right thread
 		[self verifyThreadSafety];
 		
-		results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", folderId];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", folderId];
 		if (results && [results rowCount])
 		{
 			NSInteger unread_count = 0;
-			SQLRow * row;
 
-			for (row in [results rowEnumerator])
+			for (SQLRow * row in [results rowEnumerator])
 			{
 				NSString * guid = [row stringForColumnAtIndex:0];
 				BOOL read_flag = [[row stringForColumnAtIndex:1] intValue];
@@ -2310,12 +2302,10 @@ static Database * _sharedDatabase = nil;
 	SQLResult * results = [sqlDatabase performQuery:queryString];
 	if (results && [results rowCount])
 	{
-        Article * article;
-        NSString * text;
 
 		for (SQLRow * row in [results rowEnumerator])
 		{
-			article = [[Article alloc] initWithGuid:[row stringForColumnAtIndex:0]];
+			Article * article = [[Article alloc] initWithGuid:[row stringForColumnAtIndex:0]];
 			[article setFolderId:[[row stringForColumnAtIndex:1] intValue]];
 			[article setParentId:[[row stringForColumnAtIndex:2] intValue]];
 			[article markRead:[[row stringForColumnAtIndex:3] intValue]];
@@ -2326,7 +2316,7 @@ static Database * _sharedDatabase = nil;
 			[article setLink:[row stringForColumnAtIndex:8]];
 			[article setCreatedDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumnAtIndex:9] doubleValue]]];
 			[article setDate:[NSDate dateWithTimeIntervalSince1970:[[row stringForColumnAtIndex:10] doubleValue]]];
-        	text = [row stringForColumnAtIndex:11];
+        	NSString * text = [row stringForColumnAtIndex:11];
 			[article setBody:text];
 			[article markRevised:[[row stringForColumnAtIndex:12] intValue]];
 			[article setHasEnclosure:[[row stringForColumnAtIndex:13] intValue]];

@@ -57,6 +57,7 @@ body {
 .container {
   width: 80%;
   margin: 25px auto;
+  overflow:auto;
 }
 
 .articleTitleStyle a:link, .articleTitleStyle a:visited {

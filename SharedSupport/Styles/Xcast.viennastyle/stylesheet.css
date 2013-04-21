@@ -13,6 +13,7 @@ body {
 
 #entryDescription {
 	font-size: 13px;
+	overflow:auto;
 }
 
 #otherInfo {

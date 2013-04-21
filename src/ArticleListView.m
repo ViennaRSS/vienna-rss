@@ -38,6 +38,7 @@
 #import "PopupButton.h"
 #import "BrowserPane.h"
 #import "ProgressTextCell.h"
+#import "BJRVerticallyCenteredTextFieldCell.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -593,14 +594,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		{
 			NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			
-			// Fix for bug where tableviews with alternating background rows lose their "colour".
-			// Only text cells are affected.
-			if ([[column dataCell] isKindOfClass:[NSTextFieldCell class]])
-			{
-				[[column dataCell] setDrawsBackground:NO];
-				[[column dataCell] setWraps:YES];
-			}
-
 			// Replace the normal text field cell with a progress text cell so we can
 			// display a progress indicator when loading HTML pages. NOTE: This is handled
 			// in willDisplayCell:forTableColumn:row: where it sets the inProgress flag.
@@ -617,6 +610,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				
 				progressCell = [[[ProgressTextCell alloc] init] autorelease];
 				[column setDataCell:progressCell];
+			}
+			else
+			{
+				BJRVerticallyCenteredTextFieldCell * cell;
+
+				cell = [[[BJRVerticallyCenteredTextFieldCell alloc] init] autorelease];
+				[column setDataCell:cell];
 			}
 
 			// Set the header attributes.

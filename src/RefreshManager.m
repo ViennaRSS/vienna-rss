@@ -481,7 +481,7 @@ static RefreshManager * _refreshManager = nil;
 	} else if (IsGoogleReaderFolder(folder)) {
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
-	[myRequest setTimeOutSeconds:20];
+	[myRequest setTimeOutSeconds:180];
 	[self addConnection:myRequest];
 }
 
