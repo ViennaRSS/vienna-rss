@@ -60,12 +60,12 @@
 - (void)setTargetCell:(PSMTabBarCell *)cell;
 
 // Functionality
-- (void)startDraggingCell:(PSMTabBarCell *)cell fromTabBar:(PSMTabBarControl *)control withMouseDownEvent:(NSEvent *)event;
-- (void)draggingEnteredTabBar:(PSMTabBarControl *)control atPoint:(NSPoint)mouseLoc;
-- (void)draggingUpdatedInTabBar:(PSMTabBarControl *)control atPoint:(NSPoint)mouseLoc;
-- (void)draggingExitedTabBar:(PSMTabBarControl *)control;
+- (void)startDraggingCell:(PSMTabBarCell *)cell fromTabBarControl:(PSMTabBarControl *)tabBarControl withMouseDownEvent:(NSEvent *)event;
+- (void)draggingEnteredTabBarControl:(PSMTabBarControl *)tabBarControl atPoint:(NSPoint)mouseLoc;
+- (void)draggingUpdatedInTabBarControl:(PSMTabBarControl *)tabBarControl atPoint:(NSPoint)mouseLoc;
+- (void)draggingExitedTabBarControl:(PSMTabBarControl *)tabBarControl;
 - (void)performDragOperation;
-- (void)draggedImageEndedAt:(NSPoint) aPoint operation:(NSDragOperation)operation;
+- (void)draggedImageEndedAt:(NSPoint)aPoint operation:(NSDragOperation)operation;
 - (void)finishDrag;
 
 - (void)draggingBeganAt:(NSPoint)aPoint;
@@ -73,23 +73,12 @@
 
 // Animation
 - (void)animateDrag:(NSTimer *)timer;
-- (void)calculateDragAnimationForTabBar:(PSMTabBarControl *)control;
+- (void)calculateDragAnimationForTabBarControl:(PSMTabBarControl *)tabBarControl;
 
 // Placeholder
-- (void)distributePlaceholdersInTabBar:(PSMTabBarControl *)control withDraggedCell:(PSMTabBarCell *)cell;
-- (void)distributePlaceholdersInTabBar:(PSMTabBarControl *)control;
-- (void)removeAllPlaceholdersFromTabBar:(PSMTabBarControl *)control;
-
-@end
-
-@interface PSMTabBarControl (DragAccessors)
-
-- (id<PSMTabStyle>)style;
-- (NSMutableArray *)cells;
-- (void)setControlView:(id)view;
-- (id)cellForPoint:(NSPoint) point cellFrame:(NSRectPointer)outFrame;
-- (PSMTabBarCell *)lastVisibleTab;
-- (NSInteger)numberOfVisibleTabs;
+- (void)distributePlaceholdersInTabBarControl:(PSMTabBarControl *)tabBarControl withDraggedCell:(PSMTabBarCell *)cell;
+- (void)distributePlaceholdersInTabBarControl:(PSMTabBarControl *)tabBarControl;
+- (void)removeAllPlaceholdersFromTabBarControl:(PSMTabBarControl *)tabBarControl;
 
 @end
 
