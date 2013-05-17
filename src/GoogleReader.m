@@ -687,7 +687,7 @@ JSONDecoder * jsonDecoder;
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
 	NSString * theActionToken = [self getGoogleActionToken];
-	LLog(token);
+	LLog(@"Logged token: %@",token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
@@ -720,7 +720,7 @@ JSONDecoder * jsonDecoder;
 		[self resetAuthentication];
 	}
 
-	LLog(token);
+	LLog(@"Logged token: %@",token);
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
     NSString *itemGuid = [[request userInfo] objectForKey:@"guid"];
 	ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
