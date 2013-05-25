@@ -981,6 +981,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[browserView setPrimaryTabItemView:unifiedListView];
 			if (refreshFlag)
 				[unifiedListView refreshFolder:MA_Refresh_RedrawList];
+			[mainWindow display];
 			[articleController setMainArticleView:unifiedListView];
 			break;
 	}
