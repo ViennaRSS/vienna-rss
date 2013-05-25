@@ -61,6 +61,10 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9517319979006DD2AB /* PXListDocumentView.m */; };
+		3A4DBEA117319979006DD2AB /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9717319979006DD2AB /* PXListView.m */; };
+		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
+		3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9C17319979006DD2AB /* PXListViewCell.m */; };
 		3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
@@ -992,6 +996,18 @@
 		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = MainMenu.nib; path = Interfaces/MainMenu.nib; sourceTree = SOURCE_ROOT; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3A23F13415276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
+		3A4DBE9417319979006DD2AB /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = 3rdparty/PXListView/PXListDocumentView.h; sourceTree = "<group>"; };
+		3A4DBE9517319979006DD2AB /* PXListDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListDocumentView.m; path = 3rdparty/PXListView/PXListDocumentView.m; sourceTree = "<group>"; };
+		3A4DBE9617319979006DD2AB /* PXListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListView.h; path = 3rdparty/PXListView/PXListView.h; sourceTree = "<group>"; };
+		3A4DBE9717319979006DD2AB /* PXListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListView.m; path = 3rdparty/PXListView/PXListView.m; sourceTree = "<group>"; };
+		3A4DBE9817319979006DD2AB /* PXListView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListView+Private.h"; path = "3rdparty/PXListView/PXListView+Private.h"; sourceTree = "<group>"; };
+		3A4DBE9917319979006DD2AB /* PXListView+UserInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListView+UserInteraction.h"; path = "3rdparty/PXListView/PXListView+UserInteraction.h"; sourceTree = "<group>"; };
+		3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PXListView+UserInteraction.m"; path = "3rdparty/PXListView/PXListView+UserInteraction.m"; sourceTree = "<group>"; };
+		3A4DBE9B17319979006DD2AB /* PXListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewCell.h; path = 3rdparty/PXListView/PXListViewCell.h; sourceTree = "<group>"; };
+		3A4DBE9C17319979006DD2AB /* PXListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListViewCell.m; path = 3rdparty/PXListView/PXListViewCell.m; sourceTree = "<group>"; };
+		3A4DBE9D17319979006DD2AB /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListViewCell+Private.h"; path = "3rdparty/PXListView/PXListViewCell+Private.h"; sourceTree = "<group>"; };
+		3A4DBE9E17319979006DD2AB /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = 3rdparty/PXListView/PXListViewDelegate.h; sourceTree = "<group>"; };
+		3A4DBE9F17319979006DD2AB /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = 3rdparty/PXListView/PXListViewDropHighlight.h; sourceTree = "<group>"; };
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
@@ -3302,6 +3318,18 @@
 				3A23F13415276935008AF863 /* NSNotificationAdditions.h */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
+				3A4DBE9417319979006DD2AB /* PXListDocumentView.h */,
+				3A4DBE9517319979006DD2AB /* PXListDocumentView.m */,
+				3A4DBE9617319979006DD2AB /* PXListView.h */,
+				3A4DBE9717319979006DD2AB /* PXListView.m */,
+				3A4DBE9817319979006DD2AB /* PXListView+Private.h */,
+				3A4DBE9917319979006DD2AB /* PXListView+UserInteraction.h */,
+				3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */,
+				3A4DBE9B17319979006DD2AB /* PXListViewCell.h */,
+				3A4DBE9C17319979006DD2AB /* PXListViewCell.m */,
+				3A4DBE9D17319979006DD2AB /* PXListViewCell+Private.h */,
+				3A4DBE9E17319979006DD2AB /* PXListViewDelegate.h */,
+				3A4DBE9F17319979006DD2AB /* PXListViewDropHighlight.h */,
 				AABCFB180900BA4E00984F78 /* SquareWindow.h */,
 				AABCFB190900BA4E00984F78 /* SquareWindow.m */,
 				B2BECB1514CEF22B00706F8F /* SSTextField.h */,
@@ -4538,6 +4566,10 @@
 				435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
 				3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
+				3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */,
+				3A4DBEA117319979006DD2AB /* PXListView.m in Sources */,
+				3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */,
+				3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
