@@ -228,6 +228,7 @@ static NSLock * dateFormatters_lock;
 	{
 		[foldersTree initialiseFoldersTree];
 		[mainArticleView initialiseArticleView];
+		[unifiedListView initTableView];
 		
 		// If the statusbar is hidden, also hide the highlight line on its top and the filter button.
 		if (![self isStatusBarVisible])

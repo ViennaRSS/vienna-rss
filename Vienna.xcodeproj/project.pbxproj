@@ -65,6 +65,7 @@
 		3A4DBEA117319979006DD2AB /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9717319979006DD2AB /* PXListView.m */; };
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
 		3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9C17319979006DD2AB /* PXListViewCell.m */; };
+		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
 		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
@@ -1008,6 +1009,8 @@
 		3A4DBE9D17319979006DD2AB /* PXListViewCell+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PXListViewCell+Private.h"; path = "3rdparty/PXListView/PXListViewCell+Private.h"; sourceTree = "<group>"; };
 		3A4DBE9E17319979006DD2AB /* PXListViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = 3rdparty/PXListView/PXListViewDelegate.h; sourceTree = "<group>"; };
 		3A4DBE9F17319979006DD2AB /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = 3rdparty/PXListView/PXListViewDropHighlight.h; sourceTree = "<group>"; };
+		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleCellView.h; path = src/ArticleCellView.h; sourceTree = "<group>"; };
+		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleCellView.m; path = src/ArticleCellView.m; sourceTree = "<group>"; };
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
@@ -2036,6 +2039,8 @@
 				4350284B165DE9DF0018EDB7 /* AppController.h */,
 				4350284C165DE9DF0018EDB7 /* AppController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
+				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
+				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
 				43502850165DE9DF0018EDB7 /* ArticleFilter.h */,
@@ -4570,6 +4575,7 @@
 				3A4DBEA117319979006DD2AB /* PXListView.m in Sources */,
 				3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */,
 				3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */,
+				3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
