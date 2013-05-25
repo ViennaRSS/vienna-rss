@@ -1616,7 +1616,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[parentView setFrame:mainRect];
 		else
 			[parentView resizeViewWithAnimation:mainRect withTag:MA_ViewTag_Filterbar];
-		[parentView setNeedsDisplay:YES];
+		[parentView display];
 		
 		// Fix up the tab ordering
 		[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
