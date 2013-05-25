@@ -240,14 +240,7 @@ static NSLock * dateFormatters_lock;
 			[filterIconInStatusBarButton setHidden:YES];
 		}
 		
-		// Select the folder and article from the last session
 		Preferences * prefs = [Preferences standardPreferences];
-		int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
-		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
-		if ([previousArticleGuid isBlank])
-			previousArticleGuid = nil;
-		[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
-		
 		// Set the initial filter bar state
 		[self setFilterBarState:[prefs showFilterBar] withAnimation:NO];
 				
@@ -547,6 +540,34 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
+	// Horrible but effective hack : with Unified layout and under certain circumstances,
+	// for some reason, we have to force multiple displays to get correct cell dimensions.
+	//
+	// Select the folder from the last session
+	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
+	[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:nil];
+	// Have it displayed first...
+	[self performSelector:@selector(resetFolderSelection)  withObject:nil afterDelay:0.01];
+}
+
+-(void)resetFolderSelection
+{
+	// ... then display another arbitrary folder (the trash folder)...
+	[[articleController mainArticleView] selectFolderAndArticle:[db trashFolderId] guid:nil];
+	// ... before doing the right thing
+	[self performSelector:@selector(reselectPrevious)  withObject:nil afterDelay:0.5];
+}
+
+-(void)reselectPrevious
+{
+	// Select the folder and article from the last session
+	Preferences * prefs = [Preferences standardPreferences];
+	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
+	NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
+	if ([previousArticleGuid isBlank])
+		previousArticleGuid = nil;
+	[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
+
 	if ([prefs refreshOnStartup]) 
 		[self refreshAllSubscriptions:self];
 }
