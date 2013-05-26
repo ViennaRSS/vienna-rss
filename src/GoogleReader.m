@@ -228,7 +228,7 @@ JSONDecoder * jsonDecoder;
 			}
 				
 			if ([newsItem objectForKey:@"title"]!=nil) {
-				[article setTitle:[NSString stringByRemovingHTML:[newsItem objectForKey:@"title"]]];
+				[article setTitle:[[NSString stringByRemovingHTML:[newsItem objectForKey:@"title"]] summaryTextFromHTML]];
                 
 			} else {
 				[article setTitle:@""];
