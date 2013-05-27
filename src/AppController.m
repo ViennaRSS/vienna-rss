@@ -674,7 +674,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[browserView saveOpenTabs];
 		
 		// Remember the article list column position, sizes, etc.
-		[mainArticleView saveTableSettings];
+		[articleController saveTableSettings];
 		[foldersTree saveFolderSettings];
 		
 		// Finally save preferences
@@ -1422,7 +1422,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)downloadEnclosure:(id)sender
 {
-	for (Article * currentArticle in [mainArticleView markedArticleRange])
+	for (Article * currentArticle in [articleController markedArticleRange])
 	{
 		if ([currentArticle hasEnclosure])
 		{
@@ -2502,7 +2502,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)viewArticlePages:(id)sender inPreferredBrowser:(BOOL)usePreferredBrowser
 {
-	NSArray * articleArray = [mainArticleView markedArticleRange];	
+	NSArray * articleArray = [articleController markedArticleRange];
 	Article * currentArticle;
 	
 	if ([articleArray count] > 0) 
@@ -2940,7 +2940,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Folder * folder = [db folderFromID:[articleController currentFolderId]];
 	if (IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly])
 	{
-		NSArray * articleArray = [mainArticleView markedArticleRange];
+		NSArray * articleArray = [articleController markedArticleRange];
 		[articleController markDeletedByArray:articleArray deleteFlag:NO];
 		[self clearUndoStack];
 	}
@@ -2957,7 +2957,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		Folder * folder = [db folderFromID:[articleController currentFolderId]];
 		if (!IsTrashFolder(folder))
 		{
-			NSArray * articleArray = [mainArticleView markedArticleRange];
+			NSArray * articleArray = [articleController markedArticleRange];
 			[articleController markDeletedByArray:articleArray deleteFlag:YES];
 		}
 		else
@@ -2980,7 +2980,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (returnCode == NSAlertDefaultReturn)
 	{
-		NSArray * articleArray = [mainArticleView markedArticleRange];
+		NSArray * articleArray = [articleController markedArticleRange];
 		[articleController deleteArticlesByArray:articleArray];
 		
 		// Blow away the undo stack here since undo actions may refer to
@@ -3141,7 +3141,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Article * theArticle = [self selectedArticle];
 	if (theArticle != nil && ![db readOnly])
 	{
-		NSArray * articleArray = [mainArticleView markedArticleRange];
+		NSArray * articleArray = [articleController markedArticleRange];
 		[articleController markReadByArray:articleArray readFlag:![theArticle isRead]];
 	}
 }
@@ -3154,7 +3154,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Article * theArticle = [self selectedArticle];
 	if (theArticle != nil && ![db readOnly])
 	{
-		NSArray * articleArray = [mainArticleView markedArticleRange];
+		NSArray * articleArray = [articleController markedArticleRange];
 		[articleController markFlaggedByArray:articleArray flagged:![theArticle isFlagged]];
 	}
 }
@@ -3818,7 +3818,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else
 	{
 		// ... otherwise, iterate over the currently selected articles.
-		NSArray * articleArray = [mainArticleView markedArticleRange];	
+		NSArray * articleArray = [articleController markedArticleRange];
 		if ([articleArray count] > 0) 
 		{
 			if ([articleArray count] == 1)
@@ -3903,7 +3903,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else
 	{
 		// Get the currently selected articles from the ArticleView and iterate over them.
-		for (Article * currentArticle in [mainArticleView markedArticleRange])
+		for (Article * currentArticle in [articleController markedArticleRange])
 			[self sendBlogEvent:externalEditorBundleIdentifier title:[currentArticle title] url:[currentArticle link] body:[NSApp currentTextSelection] author:[currentArticle author] guid:[currentArticle guid]];
 	}
 }
@@ -4155,13 +4155,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (theAction == @selector(mailLinkToArticlePage:))
 	{
 		NSView<BaseView> * theView = [browserView activeTabItemView];
-		BOOL isArticleView = [browserView activeTabItemView] == mainArticleView;
 		Article * thisArticle = [self selectedArticle];
 		
 		if ([theView isKindOfClass:[BrowserPane class]])
 			*validateFlag = ([theView viewLink] != nil);
 		else
-			*validateFlag = (thisArticle != nil && isMainWindowVisible && isArticleView);
+			*validateFlag = (thisArticle != nil && isMainWindowVisible);
 		return NO; // Give the menu handler a chance too.
 	}
 	if (theAction == @selector(emptyTrash:))
@@ -4364,7 +4363,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		Article * thisArticle = [self selectedArticle];
 		if (thisArticle != nil)
-			return ([thisArticle link] && ![[thisArticle link] isBlank] && isMainWindowVisible && isArticleView);
+			return ([thisArticle link] && ![[thisArticle link] isBlank] && isMainWindowVisible);
 		return NO;
 	}
 	else if (theAction == @selector(exportSubscriptions:))
@@ -4383,12 +4382,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(restoreMessage:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView;
+		return IsTrashFolder(folder) && [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible;
 	}
 	else if (theAction == @selector(deleteMessage:))
 	{
 		Folder * folder = [db folderFromID:[foldersTree actualSelection]];
-		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible && isArticleView &&!IsGoogleReaderFolder(folder);
+		return [self selectedArticle] != nil && ![db readOnly] && isMainWindowVisible &&!IsGoogleReaderFolder(folder);
 	}
 	else if (theAction == @selector(previousTab:))
 	{
@@ -4459,7 +4458,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
 		}
-		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible);
 	}
 	else if (theAction == @selector(markRead:))
 	{
@@ -4471,11 +4470,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			else
 				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
 		}
-		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible && isArticleView);
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible);
 	}
 	else if (theAction == @selector(mailLinkToArticlePage:))
 	{
-		if ([[mainArticleView markedArticleRange] count] > 1)
+		if ([[articleController markedArticleRange] count] > 1)
 			[menuItem setTitle:NSLocalizedString(@"Send Links", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Send Link", nil)];
@@ -4483,7 +4482,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else if (theAction == @selector(downloadEnclosure:))
 	{
-		if ([[mainArticleView markedArticleRange] count] > 1)
+		if ([[articleController markedArticleRange] count] > 1)
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", nil)];
 		else
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", nil)];
