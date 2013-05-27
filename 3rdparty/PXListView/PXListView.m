@@ -320,7 +320,8 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 		{
 			for(NSUInteger i = visibleRange.location; i > _currentRange.location; i--)
 			{
-				[self enqueueCell:[_visibleCells objectAtIndex:0]];
+				if ([_visibleCells count])
+					[self enqueueCell:[_visibleCells objectAtIndex:0]];
 			}
 		}
 		
