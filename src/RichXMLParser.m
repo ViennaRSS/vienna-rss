@@ -673,7 +673,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					[newItem setTitle:[NSString stringByRemovingHTML:[subItemTree valueOfElement]]];
+					[newItem setTitle:[[subItemTree valueOfElement] summaryTextFromHTML]];
 					continue;
 				}
 				
@@ -922,7 +922,7 @@
 					NSString * titleType = [subItemTree valueOfAttribute:@"type"];
 					
 					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
-						newTitle = [NSString stringByRemovingHTML:newTitle];
+						newTitle = [newTitle summaryTextFromHTML];
 					
 					[newItem setTitle:newTitle];
 					continue;
