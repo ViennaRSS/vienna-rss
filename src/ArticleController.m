@@ -38,7 +38,7 @@
 @end
 
 @implementation ArticleController
-@synthesize foldersTree, mainArticleView, currentArrayOfArticles, folderArrayOfArticles, backtrackArray;
+@synthesize foldersTree, mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
 
 /* init
  * Initialise.
