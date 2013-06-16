@@ -60,6 +60,8 @@
 -(void)setMainArticleView:(NSView<ArticleBaseView, BaseView> *)newView;
 -(int)currentFolderId;
 -(Article *)selectedArticle;
+-(NSArray *)markedArticleRange;
+-(void)saveTableSettings;
 -(void)sortArticles;
 -(NSArray *)allArticles;
 -(void)displayFirstUnread;

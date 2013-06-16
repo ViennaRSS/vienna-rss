@@ -322,8 +322,8 @@
 "Get Info..." = "Get Info…";
 "Open Web Location..." = "Open Web Location…";
 "Refresh Folder Images" = "Refresh Folder Images";
-"Report" = "Report";
-"Condensed" = "Condensed";
+"Report" = "Horizontal";
+"Condensed" = "Vertical";
 "Unified" =  "Unified";
 "Summary" = "Summary";
 "Blog With..." = "Blog With…";
