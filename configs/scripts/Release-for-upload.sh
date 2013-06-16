@@ -101,7 +101,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 		<language>en-us</language>
 		<copyright>Copyright 2010-2013, Steve Palmer and contributors</copyright>
 		<item>
-			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
+			<title>Vienna ${V_VCS_TAG} (${VCS_SHORT_HASH})</title>
 			<pubDate>${pubDate}</pubDate>
 			<link>${DOWNLOAD_BASE_URL}/${TGZ_FILENAME}</link>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
