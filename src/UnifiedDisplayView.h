@@ -1,9 +1,9 @@
 //
-//  UnifiedListView.h
+//  UnifiedDisplayView.h
 //  Vienna
 //
-//  Created by Steve on 5/5/06.
-//  Copyright (c) 2004-2006 Steve Palmer. All rights reserved.
+//  Created by Steve Palmer, Barijaona Ramaholimihaso and other Vienna contributors
+//  Copyright (c) 2004-2013 Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,22 +20,37 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
-#import "PopupButton.h"
-#import "BaseView.h"
 #import "ArticleBaseView.h"
+#import "PXListView.h"
 
 @class AppController;
 @class ArticleController;
 @class ArticleView;
 @class FoldersTree;
 
-@interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView>
+@interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, PXListViewDelegate>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-	IBOutlet ArticleView * unifiedText;
+    IBOutlet PXListView *articleList;
 	IBOutlet FoldersTree * foldersTree;
+
+	int currentSelectedRow;
+	BOOL blockSelectionHandler;
+	BOOL blockMarkRead;
+
+	NSTimer * markReadTimer;
+	NSString * guidOfArticleToSelect;
+
+	NSURL *	currentURL;
+	BOOL isCurrentPageFullHTML;
+	NSMutableArray * rowHeightArray;
 }
 
 // Public functions
+-(void)initTableView;
+-(void)updateAlternateMenuTitle;
+-(NSArray *)markedArticleRange;
+-(BOOL)canDeleteMessageAtRow:(int)row;
+-(NSURL *)url;
 @end

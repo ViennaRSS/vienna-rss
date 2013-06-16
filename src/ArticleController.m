@@ -144,6 +144,24 @@
 	return currentFolderId;
 }
 
+/* markedArticleRange
+ * Retrieve an array of selected articles.
+ * from the article list.
+ */
+-(NSArray *)markedArticleRange
+{
+	return [mainArticleView markedArticleRange];
+}
+
+/* saveTableSettings
+ * Save selected article and folder
+ * and, for relevant layouts, table settings
+ */
+-(void)saveTableSettings
+{
+	[mainArticleView saveTableSettings];
+}
+
 /* selectedArticle
  * Returns the currently selected article from the article list.
  */

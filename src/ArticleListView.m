@@ -18,6 +18,8 @@
 //  limitations under the License.
 //
 
+// Handle the Horizontal (formerly known as Report) and Vertical layouts
+
 #import "ArticleListView.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -173,14 +175,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (sender == splitView2)
 	{
-		if (tableLayout == MA_Layout_Unified)
-		{
-			return (offset == 0) ? proposedMin :  proposedMin + MA_Minimum_Article_Pane_Width;
-		}
-		else
-		{
-			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Width ;
-		}
+		return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Width ;
 	}
 	else
 		return proposedMin;
@@ -195,17 +190,11 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	if (sender == splitView2)
 	{
 		BOOL isVertical = [sender isVertical];
-		if (tableLayout != MA_Layout_Unified)
-		{
-			NSRect mainFrame = [[splitView2 superview] frame];
-
-			if (isVertical)
-				return (offset == 0) ? mainFrame.size.width - MA_Minimum_Article_Pane_Width : mainFrame.size.width - MA_Minimum_ArticleList_Pane_Width;
-			else
-				return (offset == 0) ? mainFrame.size.height - MA_Minimum_Article_Pane_Width : mainFrame.size.height - MA_Minimum_ArticleList_Pane_Width;
-		}
+		NSRect mainFrame = [[splitView2 superview] frame];
+		if (isVertical)
+			return (offset == 0) ? mainFrame.size.width - MA_Minimum_Article_Pane_Width : mainFrame.size.width - MA_Minimum_ArticleList_Pane_Width;
 		else
-			return proposedMax;
+			return (offset == 0) ? mainFrame.size.height - MA_Minimum_Article_Pane_Width : mainFrame.size.height - MA_Minimum_ArticleList_Pane_Width;
 	}
 	return proposedMax;
 }
@@ -648,8 +637,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	
 	if (tableLayout == MA_Layout_Report)
 		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
-	else if (tableLayout == MA_Layout_Unified)
-		[articleList setAutosaveName:@"Vienna3UnifiedLayoutColumns"];
 	else
 		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
 	[articleList setAutosaveTableColumns:YES];
@@ -943,7 +930,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
 		@"SplitView2ReportLayout"
-		: ((tableLayout == MA_Layout_Unified)  ? @"SplitView2UnifiedLayout" : @"SplitView2CondensedLayout");
+		: @"SplitView2CondensedLayout";
 	[splitView2 setLayout:[[Preferences standardPreferences] objectForKey:splitPrefsName]];
 }
 
@@ -954,7 +941,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
 		@"SplitView2ReportLayout"
-		: ((tableLayout == MA_Layout_Unified)  ? @"SplitView2UnifiedLayout" : @"SplitView2CondensedLayout");
+		: @"SplitView2CondensedLayout";
 	[[Preferences standardPreferences] setObject:[splitView2 layout] forKey:splitPrefsName];
 }
 
