@@ -446,6 +446,7 @@ JSONDecoder * jsonDecoder;
 			return token;
 		}
 	} else {
+		[self authenticate];
 		return nil;
 	}
 }
