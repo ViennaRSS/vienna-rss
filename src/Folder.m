@@ -420,7 +420,7 @@ static NSArray * iconArray = nil;
 		NSString * homePageSiteRoot;
 		if (IsRSSFolder(self)) {
 			homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
-		} else if (IsGoogleReaderFolder(self)) {
+		} else { //GoogleReader
 			homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
 		}
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];

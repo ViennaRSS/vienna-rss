@@ -50,7 +50,6 @@
  */
 -(NSString *)friendlyDescription
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString * theDate;
 	
 	// Note: NSUserDefaults provide built-in localized names for today, yesterday
