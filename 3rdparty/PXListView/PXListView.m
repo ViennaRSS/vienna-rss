@@ -272,8 +272,15 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	if([delegate conformsToProtocol: @protocol(PXListViewDelegate)])
 	{
 		NSRange visibleRange = [self visibleRange];
+		//extend to adjacent rows for offscreen preparation
+		NSUInteger startRow = visibleRange.location;
+		if (startRow > 0)
+			startRow--;
+		NSUInteger endRow = NSMaxRange(visibleRange);
+		if(endRow < [delegate numberOfRowsInListView:self])
+			endRow++;
 		
-		for(NSUInteger i = visibleRange.location; i < NSMaxRange(visibleRange); i++)
+		for(NSUInteger i = startRow; i < endRow; i++)
 		{
 			id cell = nil;
             cell = [delegate listView: self cellForRow: i];
