@@ -61,6 +61,7 @@
 #include <IOKit/IOMessage.h>
 #import "GoogleReader.h"
 #import "VTPG_Common.h"
+#import "Database.h"
 
 
 @interface AppController (Private)
@@ -4172,11 +4173,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = ![db readOnly];
 		return YES;
 	}
-	if (theAction == @selector(setLayoutFromToolbar:))
-	{
-		*validateFlag = isMainWindowVisible;
-		return YES;
-	}
 	if (theAction == @selector(searchUsingToolbarTextField:))
 	{
 		*validateFlag = isMainWindowVisible;
@@ -4374,7 +4370,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return isMainWindowVisible;
 	}
-	else if (theAction == @selector(compactDatabase:))
+	else if (theAction == @selector(compactDatabase))
 	{
 		return ![self isConnecting] && ![db readOnly] && isMainWindowVisible;
 	}
