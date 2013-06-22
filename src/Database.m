@@ -654,6 +654,15 @@ static Database * _sharedDatabase = nil;
 		[self executeSQL:@"vacuum"];
 }
 
+/* reindexDatabase
+ * Reindex the database.
+ */
+-(void)reindexDatabase
+{
+	if (!readOnly)
+		[self executeSQL:@"reindex"];
+}
+
 /* clearFolderFlag
  * Clears the specified flag for the folder.
  */

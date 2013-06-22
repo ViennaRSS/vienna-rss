@@ -946,6 +946,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[NSApp terminate:nil];
 }
 
+/* reindexDatabase
+ * Reindex the database
+ */
+-(IBAction)reindexDatabase:(id)sender
+{
+	[db reindexDatabase];
+}
+
 /* reportLayout
  * Switch to report layout
  */
@@ -4370,7 +4378,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return isMainWindowVisible;
 	}
-	else if (theAction == @selector(compactDatabase))
+	else if (theAction == @selector(reindexDatabase:))
 	{
 		return ![self isConnecting] && ![db readOnly] && isMainWindowVisible;
 	}
