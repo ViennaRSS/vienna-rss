@@ -310,20 +310,23 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			else
 			{
 				// something in the dimensions went wrong : force a reload
+				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 				[(ArticleView *)sender clearHTML];
 				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
 				[articleList reloadRowAtIndex:row];
 				[self display];
 				[cell performSelector:@selector(display) withObject:nil afterDelay:0.01];
 				NSArray * allArticles = [articleController allArticles];
-				NSParameterAssert(row >= 0 && row < (NSInteger)[allArticles count]);
-				Article * theArticle = [allArticles objectAtIndex:row];
-				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-				[cell setInProgress:NO];
-				[cell display];
-				[self performSelector:@selector(redrawCell:) withObject:cell afterDelay:0.01];
+				if (row < (NSInteger)[allArticles count]) // our article list might have changed...
+				{
+					Article * theArticle = [allArticles objectAtIndex:row];
+					NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
+					Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
+					[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
+					[cell setInProgress:NO];
+					[cell display];
+					[self performSelector:@selector(redrawCell:) withObject:cell afterDelay:0.01];
+				}
 			}
 		}
 		else
