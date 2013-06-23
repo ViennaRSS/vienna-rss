@@ -51,6 +51,7 @@
 -(void)beginTransaction;
 -(void)commitTransaction;
 -(void)compactDatabase;
+-(void)reindexDatabase;
 -(NSInteger)countOfUnread;
 -(BOOL)readOnly;
 -(void)close;

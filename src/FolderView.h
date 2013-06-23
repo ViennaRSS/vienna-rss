@@ -30,6 +30,7 @@
 -(void)setEnableTooltips:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)buildTooltips;
+-(void)prvtResizeTheFieldEditor;
 @end
 
 @interface NSObject (FolderViewDataSource)

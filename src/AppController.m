@@ -61,6 +61,7 @@
 #include <IOKit/IOMessage.h>
 #import "GoogleReader.h"
 #import "VTPG_Common.h"
+#import "Database.h"
 
 
 @interface AppController (Private)
@@ -128,7 +129,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 // C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
 //  those we need early in the program launch and keep them in memory.
-#define kNumberOfDateFormatters 9
+#define kNumberOfDateFormatters 13
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
@@ -945,6 +946,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[NSApp terminate:nil];
 }
 
+/* reindexDatabase
+ * Reindex the database
+ */
+-(IBAction)reindexDatabase:(id)sender
+{
+	[db reindexDatabase];
+}
+
 /* reportLayout
  * Switch to report layout
  */
@@ -1031,7 +1040,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 
 	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
-	//IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20
+	//IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20 (first char is #0)
 	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
 	[dateFormatterArray[0] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
 	// 2010-09-28T15:31:25.815+02:00
@@ -1046,6 +1055,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Other exotic and non standard date formats
 	[dateFormatterArray[7] setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
 	[dateFormatterArray[8] setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+	[dateFormatterArray[9] setDateFormat:@"EEE dd MMM yyyy HH:mmss zzz"];
+	[dateFormatterArray[10] setDateFormat:@"EEE dd MMM yyyy HH:mmss ZZZ"];
+	[dateFormatterArray[11] setDateFormat:@"EEE dd MMM yyyy HH:mmss"];
+	[dateFormatterArray[12] setDateFormat:@"EEEE dd MMMM yyyy"];
 
 
 	[enUS release];
@@ -4168,11 +4181,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		*validateFlag = ![db readOnly];
 		return YES;
 	}
-	if (theAction == @selector(setLayoutFromToolbar:))
-	{
-		*validateFlag = isMainWindowVisible;
-		return YES;
-	}
 	if (theAction == @selector(searchUsingToolbarTextField:))
 	{
 		*validateFlag = isMainWindowVisible;
@@ -4370,7 +4378,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		return isMainWindowVisible;
 	}
-	else if (theAction == @selector(compactDatabase:))
+	else if (theAction == @selector(reindexDatabase:))
 	{
 		return ![self isConnecting] && ![db readOnly] && isMainWindowVisible;
 	}

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">10K549</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1038.36</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<int key="IBDocument.SystemTarget">1050</int>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">1938</string>
+			<string key="NS.object.0">3084</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
-			<string>NSTextField</string>
-			<string>NSView</string>
-			<string>NSWindowTemplate</string>
+			<string>NSButton</string>
+			<string>NSButtonCell</string>
 			<string>NSCustomObject</string>
 			<string>NSMenu</string>
 			<string>NSMenuItem</string>
 			<string>NSPopUpButton</string>
-			<string>NSButtonCell</string>
 			<string>NSPopUpButtonCell</string>
-			<string>NSButton</string>
+			<string>NSTextField</string>
 			<string>NSTextFieldCell</string>
+			<string>NSView</string>
+			<string>NSWindowTemplate</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -52,6 +52,7 @@
 				<object class="NSMutableString" key="NSViewClass">
 					<characters key="NS.bytes">View</characters>
 				</object>
+				<nil key="NSUserInterfaceItemIdentifier"/>
 				<string key="NSWindowContentMinSize">{213, 107}</string>
 				<object class="NSView" key="NSWindowView" id="400573569">
 					<reference key="NSNextResponder"/>
@@ -66,7 +67,7 @@
 							<reference key="NSNextKeyView" ref="296842424"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="715382766">
-								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">272629760</int>
 								<string type="base64-UTF8" key="NSContents">Vmllbm5hIOulvCDsnbzrsJjsoIHsnbgg7IKs7Jqp7Iuc7JeQ64qUIOydtCDshKTsoJXrk6TsnYQg67OA
 6rK97ZWgIO2VhOyalOqwgCDsl4bsirXri4jri6QuIOqwgSDshKTsoJXsl5Ag64yA7ZWcIOyDgeyEuOyg
@@ -96,6 +97,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 									</object>
 								</object>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSButton" id="296842424">
 							<reference key="NSNextResponder" ref="400573569"/>
@@ -106,7 +108,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 							<reference key="NSNextKeyView" ref="503230605"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="715935395">
-								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents">내부 브라우져에서 자바스크립트 사용</string>
 								<object class="NSFont" key="NSSupport" id="125589309">
@@ -115,7 +117,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 									<int key="NSfFlags">1044</int>
 								</object>
 								<reference key="NSControlView" ref="296842424"/>
-								<int key="NSButtonFlags">1211912703</int>
+								<int key="NSButtonFlags">1211912448</int>
 								<int key="NSButtonFlags2">2</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -129,6 +131,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 								<int key="NSPeriodicDelay">200</int>
 								<int key="NSPeriodicInterval">25</int>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSButton" id="814759250">
 							<reference key="NSNextResponder" ref="400573569"/>
@@ -136,15 +139,14 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 							<string key="NSFrame">{{452, 17}, {21, 23}}</string>
 							<reference key="NSSuperview" ref="400573569"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="636929700">
-								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="125589309"/>
 								<reference key="NSControlView" ref="814759250"/>
-								<int key="NSButtonFlags">-2038284033</int>
+								<int key="NSButtonFlags">-2038284288</int>
 								<int key="NSButtonFlags2">33</int>
 								<reference key="NSAlternateImage" ref="125589309"/>
 								<string key="NSAlternateContents"/>
@@ -154,6 +156,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 								<int key="NSPeriodicDelay">200</int>
 								<int key="NSPeriodicInterval">25</int>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSTextField" id="1029275215">
 							<reference key="NSNextResponder" ref="400573569"/>
@@ -164,7 +167,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 							<reference key="NSNextKeyView" ref="1049420423"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="670079742">
-								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">272629760</int>
 								<string key="NSContents">The higher the number, the quicker your subscriptions will be downloaded.</string>
 								<reference key="NSSupport" ref="26"/>
@@ -172,6 +175,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 								<reference key="NSBackgroundColor" ref="290811144"/>
 								<reference key="NSTextColor" ref="694531775"/>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSTextField" id="1049420423">
 							<reference key="NSNextResponder" ref="400573569"/>
@@ -182,7 +186,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 							<reference key="NSNextKeyView" ref="814759250"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="761674489">
-								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">272629760</int>
 								<string key="NSContents">However, high numbers also render your computer less responsive while refreshing feeds.</string>
 								<reference key="NSSupport" ref="26"/>
@@ -190,6 +194,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 								<reference key="NSBackgroundColor" ref="290811144"/>
 								<reference key="NSTextColor" ref="694531775"/>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSTextField" id="503230605">
 							<reference key="NSNextResponder" ref="400573569"/>
@@ -200,7 +205,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 							<reference key="NSNextKeyView" ref="472436739"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="326988277">
-								<int key="NSCellFlags">68288064</int>
+								<int key="NSCellFlags">68157504</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents">Concurrent downloads:</string>
 								<reference key="NSSupport" ref="125589309"/>
@@ -208,6 +213,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 								<reference key="NSBackgroundColor" ref="290811144"/>
 								<reference key="NSTextColor" ref="694531775"/>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSPopUpButton" id="472436739">
 							<reference key="NSNextResponder" ref="400573569"/>
@@ -218,11 +224,11 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 							<reference key="NSNextKeyView" ref="1029275215"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSPopUpButtonCell" key="NSCell" id="290667957">
-								<int key="NSCellFlags">-2076049856</int>
+								<int key="NSCellFlags">-2076180416</int>
 								<int key="NSCellFlags2">67110912</int>
 								<reference key="NSSupport" ref="125589309"/>
 								<reference key="NSControlView" ref="472436739"/>
-								<int key="NSButtonFlags">109199615</int>
+								<int key="NSButtonFlags">109199360</int>
 								<int key="NSButtonFlags2">129</int>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -326,6 +332,7 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 								<bool key="NSAltersState">YES</bool>
 								<int key="NSArrowPosition">2</int>
 							</object>
+							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 					</array>
 					<string key="NSFrameSize">{493, 253}</string>
@@ -335,7 +342,8 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
 				<string key="NSMinSize">{213, 129}</string>
-				<string key="NSMaxSize">{1e+13, 1e+13}</string>
+				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -687,11 +695,19 @@ leuztOuKlCDrj4Tsm4Drp5DsnYQg7LC46rOg7ZWY7Iut7Iuc7JikLgo</string>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
+			<real value="1050" key="NS.object.0"/>
+		</object>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.InterfaceBuilder3</string>
+			<real value="3200" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NSMenuCheckmark">{9, 8}</string>
-			<string key="NSMenuMixedState">{7, 2}</string>
+			<string key="NSMenuCheckmark">{11, 11}</string>
+			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="NSSwitch">{15, 15}</string>
 		</dictionary>
 	</data>

@@ -31,6 +31,7 @@
 #import "RefreshManager.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
+#import "NSNotificationAdditions.h"
 
 //Vienna keychain Google Reader name
 static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
@@ -446,6 +447,7 @@ JSONDecoder * jsonDecoder;
 			return token;
 		}
 	} else {
+		[self authenticate];
 		return nil;
 	}
 }
