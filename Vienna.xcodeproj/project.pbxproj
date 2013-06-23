@@ -488,7 +488,6 @@
 		43E696F7168A05F300AB4C09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE82FB165EAA70000997FB /* Localizable.strings */; };
 		43E696F8168A05F300AB4C09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8336165EAA70000997FB /* Localizable.strings */; };
 		43E696F9168A05F300AB4C09 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8371165EAA70000997FB /* Localizable.strings */; };
-		43E696FA168A05F300AB4C09 /* NewPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8199165EAA6F000997FB /* NewPreferences.nib */; };
 		43E696FB168A05F300AB4C09 /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F4B165EAA6E000997FB /* RSSFeed.nib */; };
 		43E696FC168A05F300AB4C09 /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F88165EAA6E000997FB /* RSSFeed.nib */; };
 		43E696FD168A05F300AB4C09 /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FC1165EAA6E000997FB /* RSSFeed.nib */; };
@@ -1409,7 +1408,6 @@
 		43EE8194165EAA6F000997FB /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = InfoWindow.nib; sourceTree = "<group>"; };
 		43EE8196165EAA6F000997FB /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = InfoWindow.strings; sourceTree = "<group>"; };
 		43EE8198165EAA6F000997FB /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = Localizable.strings; sourceTree = "<group>"; };
-		43EE819A165EAA6F000997FB /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = NewPreferences.nib; sourceTree = "<group>"; };
 		43EE819C165EAA6F000997FB /* nl */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = nl; path = RSSFeed.nib; sourceTree = "<group>"; };
 		43EE819E165EAA6F000997FB /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = nl; path = RSSFeed.strings; sourceTree = "<group>"; };
 		43EE81A0165EAA6F000997FB /* nl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = nl; path = RSSSources.plist; sourceTree = "<group>"; };
@@ -2760,7 +2758,6 @@
 				43EE8193165EAA6F000997FB /* InfoWindow.nib */,
 				43EE8195165EAA6F000997FB /* InfoWindow.strings */,
 				43EE8197165EAA6F000997FB /* Localizable.strings */,
-				43EE8199165EAA6F000997FB /* NewPreferences.nib */,
 				43EE819B165EAA6F000997FB /* RSSFeed.nib */,
 				43EE819D165EAA6F000997FB /* RSSFeed.strings */,
 				43EE819F165EAA6F000997FB /* RSSSources.plist */,
@@ -4019,7 +4016,6 @@
 				43E696F7168A05F300AB4C09 /* Localizable.strings in Resources */,
 				43E696F8168A05F300AB4C09 /* Localizable.strings in Resources */,
 				43E696F9168A05F300AB4C09 /* Localizable.strings in Resources */,
-				43E696FA168A05F300AB4C09 /* NewPreferences.nib in Resources */,
 				43E696FB168A05F300AB4C09 /* RSSFeed.nib in Resources */,
 				43E696FC168A05F300AB4C09 /* RSSFeed.nib in Resources */,
 				43E696FD168A05F300AB4C09 /* RSSFeed.nib in Resources */,
@@ -6855,15 +6851,6 @@
 			path = lproj/nl.lproj;
 			sourceTree = SOURCE_ROOT;
 		};
-		43EE8199165EAA6F000997FB /* NewPreferences.nib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43EE819A165EAA6F000997FB /* nl */,
-			);
-			name = NewPreferences.nib;
-			path = lproj/nl.lproj;
-			sourceTree = SOURCE_ROOT;
-		};
 		43EE819B165EAA6F000997FB /* RSSFeed.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -8790,6 +8777,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */;
 			buildSettings = {
+				IBC_FLATTEN_NIBS = NO;
 			};
 			name = Deployment;
 		};
