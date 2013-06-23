@@ -252,7 +252,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
     if([webFrame isEqual:[sender mainFrame]])
     {
-		CGRect frame = sender.frame;
+		NSRect frame = sender.frame;
 		frame.size.height = 1;        // Set the height to a small one.
 		// progress indicator
 		[(ArticleCellView *)[sender superview] setInProgress:YES];
@@ -959,7 +959,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 
 	if(!cellView) {
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
-						inFrame:CGRectMake(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width, [self listView:aListView heightOfRow:row])] autorelease];
+						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width, [self listView:aListView heightOfRow:row])] autorelease];
 	}
 
 	ArticleView * view = [cellView articleView];
@@ -989,15 +989,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	{
 		currentSelectedRow = [articleList selectedRow];
 	}
-}
-
-/* writeRowsWithIndexes
- * Called to initiate a drag from PXListView. Use the common copy selection code to copy to
- * the pasteboard.
- */
--(BOOL)listView:(PXListView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
-{
-	return [self copyIndexesSelection:rowIndexes toPasteboard:pboard];
 }
 
 /* copyTableSelection
@@ -1080,6 +1071,15 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[fullHTMLText release];
 	[fullPlainText release];
 	return YES;
+}
+
+/* writeRowsWithIndexes
+ * Called to initiate a drag from PXListView. Use the common copy selection code to copy to
+ * the pasteboard.
+ */
+-(BOOL)listView:(PXListView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
+{
+	return [self copyIndexesSelection:rowIndexes toPasteboard:pboard];
 }
 
 /* copy
