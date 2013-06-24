@@ -50,7 +50,6 @@
  */
 -(NSString *)friendlyDescription
 {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString * theDate;
 	
 	// Note: NSUserDefaults provide built-in localized names for today, yesterday
@@ -73,8 +72,7 @@
 	}
 	else
 	{
-		NSString * outputFormat = [defaults objectForKey:@"NSShortDateFormatString"];
-		theDate = [self descriptionWithCalendarFormat:outputFormat];
+		theDate = [NSDateFormatter localizedStringFromDate:self dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
 	}
 	
 	// If the time is 12.00 then replace with Noon or Midnight as appropriate.
@@ -91,10 +89,7 @@
 	}
 	else
 	{
-		// Use the user's preferred time format but strip off the seconds.
-		NSMutableString * outputFormat = [NSMutableString stringWithString:[defaults objectForKey:@"NSTimeFormatString"]];
-		[outputFormat replaceOccurrencesOfString:@":%S" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [outputFormat length])];
-		theTime = [self descriptionWithCalendarFormat:outputFormat];
+		theTime = [NSDateFormatter localizedStringFromDate:self dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
 	}
 	return [NSString stringWithFormat:NSLocalizedString(@"%@ at %@", nil), theDate, theTime];
 }

@@ -103,6 +103,7 @@
 // Menu action items
 -(IBAction)handleAbout:(id)sender;
 -(IBAction)exitVienna:(id)sender;
+-(IBAction)reindexDatabase:(id)sender;
 -(IBAction)showPreferencePanel:(id)sender;
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;

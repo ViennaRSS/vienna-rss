@@ -22,6 +22,7 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import <PSMTabBarControl/PSMTabBarControl.h>
+#import "AppController.h"
 
 @interface NSTabView (BrowserViewAdditions)
 	-(NSTabViewItem *)tabViewItemWithIdentifier:(id)identifier;

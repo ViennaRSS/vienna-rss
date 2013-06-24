@@ -617,7 +617,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			[column setEditable:NO];
 			[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
 			[column setMinWidth:10];
-			[column setMaxWidth:1000];
+			[column setMaxWidth:2000];
 			[column setWidth:[field width]];
 			[articleList addTableColumn:column];
 			[column release];

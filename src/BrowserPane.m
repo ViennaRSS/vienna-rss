@@ -132,7 +132,7 @@
 		safariVersion = [safariVersion substringFromIndex:1];
 	else
 		safariVersion = @"532.22";
-	[self.webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [((ViennaApp *)NSApp) applicationVersion], safariVersion]];
+	[self.webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_DefaultUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion]];
 	
 	// Make web preferences 16pt Arial to match Safari
 	[[self.webPane preferences] setStandardFontFamily:@"Arial"];
@@ -515,6 +515,24 @@
 		NSLocalizedString(@"Cancel", @""),	// alt button
 		nil);
 	return NSAlertDefaultReturn == result;
+}
+
+- (void)webView:(WebView *)sender runOpenPanelForFileButtonWithResultListener:(id < WebOpenPanelResultListener >)resultListener
+{
+	// Create the File Open Dialog class.
+	NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+
+	// Enable the selection of files in the dialog.
+	[openDlg setCanChooseFiles:YES];
+
+	// Enable the selection of directories in the dialog.
+	[openDlg setCanChooseDirectories:NO];
+
+	if ( [openDlg runModal] == NSOKButton )
+	{
+		NSArray* files = [[openDlg URLs]valueForKey:@"relativePath"];
+		[resultListener chooseFilenames:files];
+	}
 }
 
 /* setFrame

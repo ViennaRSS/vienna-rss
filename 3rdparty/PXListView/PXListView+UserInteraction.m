@@ -271,7 +271,7 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
 	NSPoint		localMouse = [self convertPoint: NSZeroPoint fromView: clickedCell];
     
 	if ([clickedCell isFlipped]) {
-		localMouse = [self convertPoint:CGPointMake(0, NSHeight(clickedCell.frame) * 2) fromView:clickedCell];
+		localMouse = [self convertPoint:NSMakePoint(0, NSHeight(clickedCell.frame) * 2) fromView:clickedCell];
 	}
     
 	localMouse.y += [self documentVisibleRect].origin.y;
