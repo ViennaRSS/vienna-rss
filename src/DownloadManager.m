@@ -480,6 +480,8 @@ static DownloadManager * _sharedDownloadManager = nil;
 	
 	// Post a notification when the download completes.
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_DownloadCompleted" object:filename];
+
+	[contextDict autorelease];
 }
 
 /* didFailWithError
@@ -506,6 +508,8 @@ static DownloadManager * _sharedDownloadManager = nil;
 							title:NSLocalizedString(@"Download failed", nil)
 					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", nil), filename]
 				 notificationName:NSLocalizedString(@"Growl download failed", nil)];
+
+	[contextDict autorelease];
 }
 
 /* didReceiveDataOfLength
