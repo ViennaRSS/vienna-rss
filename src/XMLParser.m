@@ -312,7 +312,7 @@
 		{
 			[newDict setObject:[dict objectForKey:keyName] forKey:[keyName lowercaseString]];
 		}
-		return newDict;
+		return [newDict autorelease];
 	}
 	return nil;
 }

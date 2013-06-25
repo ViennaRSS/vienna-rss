@@ -127,6 +127,7 @@
 			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
 			++countExported;
 		}
+		[itemDict autorelease];
 	}
 	return countExported;
 }
