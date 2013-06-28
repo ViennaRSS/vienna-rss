@@ -33,13 +33,14 @@
 #import "StringExtensions.h"
 #import "NSNotificationAdditions.h"
 
-//Vienna keychain Google Reader name
-static NSString *const kKeychainItemName = @"OAuth2 Vienna: Google Reader";
-
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
-static NSString * APIBaseURL = @"https://www.google.com/reader/api/0/";
+static NSString * LoginBaseURL = @"https://www.bazqux.com/accounts/ClientLogin?accountType=GOOGLE&service=reader&Email=%@&Passwd=%@";
+static NSString * APIBaseURL = @"https://www.bazqux.com/reader/api/0/";
 static NSString * ClientName = @"ViennaRSS";
+
+static NSString * username = @"";
+static NSString * password = @"";
 
 // Singleton
 static GoogleReader * _googleReader = nil;
@@ -47,16 +48,9 @@ static GoogleReader * _googleReader = nil;
 enum GoogleReaderStatus {
 	notAuthenticated = 0,
 	isAutenthicating,
-	isAuthenticated,
-	isTokenAcquired,
-	isActionTokenAcquired
+	isAuthenticated
 } googleReaderStatus;
 
-// Private functions
-@interface GoogleReader (Private)
-	-(NSString *)getGoogleOAuthToken;
-	-(NSString *)getGoogleActionToken;
-@end
 
 @implementation GoogleReader
 
@@ -64,14 +58,12 @@ enum GoogleReaderStatus {
 @synthesize token;
 @synthesize readerUser;
 @synthesize tokenTimer;
-@synthesize actionToken;
-@synthesize actionTokenTimer;
 
 JSONDecoder * jsonDecoder;
 
 -(BOOL)isReady
 {
-	return (googleReaderStatus == isTokenAcquired || googleReaderStatus == isActionTokenAcquired);
+	return (googleReaderStatus == isAuthenticated);
 }
 
 
@@ -83,8 +75,10 @@ JSONDecoder * jsonDecoder;
 		localFeeds = [[NSMutableArray alloc] init];
 		jsonDecoder = [[JSONDecoder decoder] retain];
 		googleReaderStatus = notAuthenticated;
-		[self authenticate];
 		countOfNewArticles = 0;
+		clientAuthToken= nil;
+		token=nil;
+		tokenTimer=nil;
 	}
     
     return self;
@@ -135,7 +129,7 @@ JSONDecoder * jsonDecoder;
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
 
 	if (![self isReady])
-		[self getGoogleOAuthToken];
+		[self authenticate];
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%li&ot=%@&ck=%@&T=%@&access_token=%@",APIBaseURL,[GTMOAuth2Authentication encodedOAuthValueForString:[thisFolder feedURL]],ClientName,articleLimit,folderLastUpdate,TIMESTAMP, token, token]];
 		
@@ -289,7 +283,11 @@ JSONDecoder * jsonDecoder;
 			if (updateDate != nil)
 				[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:updateDate];
 			// Set the HTML homepage for this folder.
-			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
+			// a legal JSON string can have, as its outer "container", either an array or a dictionary/"object"
+			if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]])
+				[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
+			else
+				[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]];
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -321,7 +319,7 @@ JSONDecoder * jsonDecoder;
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
-		[self getGoogleOAuthToken]; //attempt to authenticate for other queued refreshes
+		[self authenticate]; //attempt to authenticate for other queued refreshes
 	  }
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
@@ -331,169 +329,6 @@ JSONDecoder * jsonDecoder;
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 
-}
-
--(void)refreshGoogleAccessToken:(NSTimer*)timer
-{
-	LLog(@"Access Token expired!!! Refreshing it!");
-	googleReaderStatus = isAuthenticated;
-	[self getGoogleOAuthToken];
-}
-
-
--(void)refreshGoogleActionToken:(NSTimer*)timer
-{
-	LLog(@"Action Token expired!!! Refreshing it!");
-	googleReaderStatus = isTokenAcquired;
-	[self getGoogleActionToken];
-}
-
--(NSString *)getGoogleActionToken
-{
-		
-	[self getGoogleOAuthToken];
-
-	// If we have a not expired access token, simply return it :)
-	
-	if (actionTokenTimer != nil && googleReaderStatus == isActionTokenAcquired) {
-		LLog(@"An action token is available: %@",actionToken);
-		return actionToken;
-	}
-	
-	if (googleReaderStatus == isTokenAcquired) {
-		
-		NSURL *tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@token?client=%@&access_token=%@",APIBaseURL,ClientName,token]];
-		ASIHTTPRequest * tokenRequest = [ASIHTTPRequest requestWithURL:tokenURL];
-		
-		LLog(@"Start Action Token Request!");
-		[tokenRequest startSynchronous];
-		LLog(@"End Action Token Request!");
-		
-		if ([tokenRequest error]) {
-			LLog(@"Error getting the action token");
-			LOG_EXPR([tokenRequest error]);
-			LOG_EXPR([tokenRequest responseHeaders]);
-			[self resetAuthentication];
-			return nil;
-		} else {
-			LLog(@"Action Token Acquired");
-			googleReaderStatus = isActionTokenAcquired;
-			[actionToken release];
-			actionToken = [[[NSString alloc] initWithData:[tokenRequest responseData] encoding:NSUTF8StringEncoding] retain];
-			LOG_EXPR(actionToken);
-			
-			//let expire in 25 mins instead of 30
-			if (actionTokenTimer == nil || ![actionTokenTimer isValid]) {
-				actionTokenTimer = [NSTimer scheduledTimerWithTimeInterval:1500 target:self selector:@selector(refreshGoogleActionToken:) userInfo:nil repeats:YES];
-			}
-			return actionToken;
-		}
-	} else {
-		return nil;
-	}
-}
-
-
--(NSString *)getGoogleOAuthToken
-{
-	
-	// If we have a not expired access token, simply return it :)
-	
-	if (token != nil && googleReaderStatus == isTokenAcquired) {
-		LLog(@"A token is available: %@",token);
-		return token;
-	}
-	
-	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Acquiring OAuth 2.0 token...", nil) persist:NO];
-
-	if (googleReaderStatus == isAuthenticated) {
-		
-		NSURL *tokenURL = [NSURL URLWithString:@"https://accounts.google.com/o/oauth2/token"];
-		ASIFormDataRequest * tokenRequest = [ASIFormDataRequest requestWithURL:tokenURL];
-		
-		[tokenRequest setPostValue:oAuthObject.refreshToken forKey:@"refresh_token"];
-		[tokenRequest setPostValue:@"49097391685.apps.googleusercontent.com" forKey:@"client_id"];
-		[tokenRequest setPostValue:@"0wzzJCfkcNPeqKgjo-pfPZSA" forKey:@"client_secret"];
-		[tokenRequest setPostValue:@"refresh_token" forKey:@"grant_type"];
-
-		LLog(@"Start Token Request!");
-		[tokenRequest startSynchronous];
-		LLog(@"End Token Request!");
-		
-		if ([tokenRequest error]) {
-			LLog(@"Error getting the OAuth 2.0 token");
-			LOG_EXPR([tokenRequest error]);
-			LOG_EXPR([tokenRequest responseHeaders]);
-			[self resetAuthentication];
-			return nil;
-		} else {
-			LLog(@"OAuth 2.0 Token Acquired");
-			googleReaderStatus = isTokenAcquired;
-#ifdef DEBUG
-			NSString *tmpToken = [[NSString alloc] initWithData:[tokenRequest responseData] encoding:NSUTF8StringEncoding];
-			LOG_EXPR(tmpToken);
-			[tmpToken release];
-#endif
-			
-			NSData * jsonData = [tokenRequest responseData];
-			NSDictionary * dict = [jsonDecoder objectWithData:jsonData];
-			[token release];
-			token = [[dict objectForKey:@"access_token"] retain];
-
-			if (tokenTimer == nil || ![tokenTimer isValid]) {
-				tokenTimer = [NSTimer scheduledTimerWithTimeInterval:[[dict objectForKey:@"expires_in"] intValue] target:self selector:@selector(refreshGoogleAccessToken:) userInfo:nil repeats:YES];
-			}
-			
-			return token;
-		}
-	} else {
-		[self authenticate];
-		return nil;
-	}
-}
-
--(void)handleGoogleLoginRequest
-{
-	googleReaderStatus = isAutenthicating;
-	
-	GTMOAuth2WindowController *windowController = [GTMOAuth2WindowController controllerWithScope:@"https://www.google.com/reader/api"
-																						clientID:@"49097391685.apps.googleusercontent.com"
-																					clientSecret:@"0wzzJCfkcNPeqKgjo-pfPZSA"
-																				keychainItemName:kKeychainItemName
-																				  resourceBundle:nil];
-	
-	// Optional: display some html briefly before the sign-in page loads
-	NSString *html = @"<html><body><div align=center>Loading sign-in page...</div></body></html>";
-	windowController.initialHTMLString = html;
-	
-	[windowController 	signInSheetModalForWindow:nil
-						delegate:self
-						finishedSelector:@selector(windowControllerCallback:finishedWithAuth:error:)];
-}
-
-- (void)windowControllerCallback:(GTMOAuth2WindowController *)windowController  finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error
-{
-	if (error != nil)
-	{
-		// Authentication failed
-		googleReaderStatus = notAuthenticated;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_AuthFailed" object:nil];
-	}
-	else
-	{
-		// Authentication succeeded
-		oAuthObject = [auth retain];
-		googleReaderStatus = isAuthenticated;
-		if ([self getGoogleOAuthToken] != nil) {
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
-		}
-		else
-		{
-			//TODO
-			//Better handling of failure to get an OAuth token (wait message to user ?)
-		}
-	}
 }
 
 -(void)authenticate 
@@ -509,21 +344,44 @@ JSONDecoder * jsonDecoder;
 		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Google Reader", nil) persist:NO];
 	}
 	
-	oAuthObject = [[GTMOAuth2WindowController authForGoogleFromKeychainForName:kKeychainItemName
-																					   clientID:@"49097391685.apps.googleusercontent.com"
-																				   clientSecret:@"0wzzJCfkcNPeqKgjo-pfPZSA"] retain];	
-	if (oAuthObject != nil && [oAuthObject canAuthorize]) {
-		LLog(@"Google OAuth 2.0 - OAuth token acquired from keychain");
-		googleReaderStatus = isAuthenticated;	
-		if ([self getGoogleOAuthToken] != nil) {
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"GRSync_Autheticated" object:nil];
-		} else {
-			//TODO
-			//Better handling of failure to get an OAuth token (wait message to user ?)
-		}
-	} else {
-		[self performSelectorOnMainThread:@selector(handleGoogleLoginRequest) withObject:nil waitUntilDone:YES];
+	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, username, password]];
+	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+	[request startSynchronous];
+
+	NSLog(@"Open Reader server auth reponse code: %d", [request responseStatusCode]);
+	NSString * response = [request responseString];
+	NSLog(@"Open Reader server auth response: %@", response);
+
+	if (!response || [request responseStatusCode] != 200)
+	{
+		NSLog(@"Failed to authenticate with Open Reader server");
+		return;
 	}
+
+	NSArray * components = [response componentsSeparatedByString:@"\n"];
+
+	[clientAuthToken release];
+
+	//NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
+	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
+	clientAuthToken = [[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]] retain];
+
+    request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+    [request setUseCookiePersistence:NO];
+    [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+    [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+
+    [request startSynchronous];
+
+    // Save token
+    [token release];
+    token = [request responseString];
+    [token retain];
+
+    if (tokenTimer == nil || ![tokenTimer isValid])
+    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(authenticate) userInfo:nil repeats:YES];
+
+	googleReaderStatus = isAuthenticated;
 }
 
 -(void)clearAuthentication
@@ -535,7 +393,6 @@ JSONDecoder * jsonDecoder;
 {
 	[self clearAuthentication];
 	[self authenticate];
-	[self getGoogleActionToken];
 }
 
 -(void)submitLoadSubscriptions {
@@ -546,6 +403,7 @@ JSONDecoder * jsonDecoder;
 	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json&access_token=%@",APIBaseURL,ClientName,token]]];
 	[subscriptionRequest setDelegate:self];
 	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
+	[subscriptionRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	LLog(@"Starting subscriptionRequest");
 	LOG_EXPR(subscriptionRequest);
 	[subscriptionRequest startAsynchronous];		
@@ -653,9 +511,9 @@ JSONDecoder * jsonDecoder;
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
-    [request setPostValue:[self getGoogleActionToken]  forKey:@"T"];
     [request setDelegate:self];
-    
+   	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+
     // Needs to be synchronous so UI doesn't refresh too soon.
     [request startSynchronous];
     NSLog(@"Subscribe response status code: %d", [request responseStatusCode]);
@@ -665,9 +523,9 @@ JSONDecoder * jsonDecoder;
 {
 	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
-	[myRequest setPostValue:[self getGoogleActionToken] forKey:@"T"];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
 	[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 
 	[myRequest startAsynchronous];		
 }
@@ -680,16 +538,16 @@ JSONDecoder * jsonDecoder;
     [request setPostValue:@"edit" forKey:@"ac"];
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
-    [request setPostValue:[self getGoogleActionToken] forKey:@"T"];
     [request setDelegate:self];
+	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
     [request startSynchronous];
     NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
 }
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
-	NSString * theActionToken = [self getGoogleActionToken];
-	LLog(@"Logged token: %@",token);
+	if (![self isReady])
+		[self authenticate];
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
@@ -704,7 +562,7 @@ JSONDecoder * jsonDecoder;
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
-	[myRequest setPostValue:theActionToken forKey:@"T"];
+	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest startAsynchronous];
 }
 
@@ -728,15 +586,16 @@ JSONDecoder * jsonDecoder;
 	ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
 	[request1 setPostValue:@"true" forKey:@"async"];
 	[request1 setPostValue:itemGuid forKey:@"i"];
-	[request1 setPostValue:[self getGoogleActionToken] forKey:@"T"];
 	[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
+	[request1 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[request1 startAsynchronous];
 }
 
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
-	NSString * theActionToken = [self getGoogleActionToken];
+	if (![self isReady])
+		[self authenticate];
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	if (flag) {
@@ -748,15 +607,14 @@ JSONDecoder * jsonDecoder;
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
-	[myRequest setPostValue:theActionToken forKey:@"T"];
 	[myRequest setDelegate:self];
+	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest startAsynchronous];
 }
 
 
 -(void)dealloc 
 {
-	[oAuthObject release];
 	[localFeeds release];
 	[jsonDecoder release];
 	[super dealloc];
