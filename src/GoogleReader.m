@@ -35,8 +35,9 @@
 
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
-static NSString * LoginBaseURL = @"https://www.bazqux.com/accounts/ClientLogin?accountType=GOOGLE&service=reader&Email=%@&Passwd=%@";
-static NSString * APIBaseURL = @"https://www.bazqux.com/reader/api/0/";
+static NSString * openReaderHost = @"www.bazqux.com";
+static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader&Email=%@&Passwd=%@";
+NSString * APIBaseURL;
 static NSString * ClientName = @"ViennaRSS";
 
 static NSString * username = @"";
@@ -79,6 +80,7 @@ JSONDecoder * jsonDecoder;
 		clientAuthToken= nil;
 		token=nil;
 		tokenTimer=nil;
+		APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
 	}
     
     return self;
@@ -344,7 +346,7 @@ JSONDecoder * jsonDecoder;
 		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Google Reader", nil) persist:NO];
 	}
 	
-	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, username, password]];
+	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost, username, password]];
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
 	[request startSynchronous];
 
@@ -437,7 +439,7 @@ JSONDecoder * jsonDecoder;
 			break;
 		NSString * feedURL = [feedID stringByReplacingOccurrencesOfString:@"feed/" withString:@"" options:0 range:NSMakeRange(0, 5)];
 		if (![feedURL hasPrefix:@"http:"] && ![feedURL hasPrefix:@"https:"])
-            feedURL = [NSString stringWithFormat:@"http://www.google.com/reader/public/atom/%@", feedURL];
+            feedURL = [NSString stringWithFormat:@"https://%@/reader/public/atom/%@", openReaderHost, feedURL];
 		
 		NSString * folderName = nil;
 		
