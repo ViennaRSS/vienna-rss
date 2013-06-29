@@ -38,6 +38,7 @@
 static NSString * openReaderHost = @"www.bazqux.com";
 static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader&Email=%@&Passwd=%@";
 NSString * APIBaseURL;
+NSString* refererURL;
 static NSString * ClientName = @"ViennaRSS";
 
 static NSString * username = @"";
@@ -80,6 +81,7 @@ JSONDecoder * jsonDecoder;
 		token=nil;
 		tokenTimer=nil;
 		APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
+		refererURL = [[NSString stringWithFormat:@"https://%@/", openReaderHost] retain];
 	}
     
     return self;
@@ -503,6 +505,7 @@ JSONDecoder * jsonDecoder;
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
     [request setDelegate:self];
+	[request addRequestHeader:@"Referer" value:refererURL];
    	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 
     // Needs to be synchronous so UI doesn't refresh too soon.
@@ -516,6 +519,7 @@ JSONDecoder * jsonDecoder;
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
 	[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
+	[myRequest addRequestHeader:@"Referer" value:refererURL];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 
 	[myRequest startAsynchronous];		
@@ -530,6 +534,7 @@ JSONDecoder * jsonDecoder;
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     [request setDelegate:self];
+	[request addRequestHeader:@"Referer" value:refererURL];
 	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
     [request startSynchronous];
     NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
@@ -553,6 +558,7 @@ JSONDecoder * jsonDecoder;
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest addRequestHeader:@"Referer" value:refererURL];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest startAsynchronous];
 }
@@ -578,6 +584,7 @@ JSONDecoder * jsonDecoder;
 	[request1 setPostValue:@"true" forKey:@"async"];
 	[request1 setPostValue:itemGuid forKey:@"i"];
 	[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
+	[request1 addRequestHeader:@"Referer" value:refererURL];
 	[request1 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[request1 startAsynchronous];
 }
@@ -599,6 +606,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
 	[myRequest setDelegate:self];
+	[myRequest addRequestHeader:@"Referer" value:refererURL];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest startAsynchronous];
 }
