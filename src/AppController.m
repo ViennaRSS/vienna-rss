@@ -3731,20 +3731,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-	static int waitNumber = 60;
+	static int waitNumber = 20;
 	//TOFIX: we should start local refresh feed, then sync refresh feed
 	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isReady]) {
 		NSLog(@"Waiting until Google Auth is done...");
 		waitNumber-- ;
 		if (![sender isKindOfClass:[NSTimer class]]) {
 			NSLog(@"Create a timer...");
-			[self setStatusMessage:NSLocalizedString(@"Acquiring Google OAuth 2.0 token...", nil) persist:NO];
+			[[GoogleReader sharedManager] authenticate];
 			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
 		}
-		// if we have tried for 3 minutes, we are probably logged out...
+		// if we have tried for 1 minute, there probably is a problem with logging...
 		if (waitNumber<=0) {
 			[[GoogleReader sharedManager] resetAuthentication];
-			waitNumber = 60;
+			waitNumber = 20;
 		}
 		return;
 	} else {
@@ -3752,7 +3752,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if ([sender isKindOfClass:[NSTimer class]]) {
 			[(NSTimer*)sender invalidate];
 			sender = nil;
-			waitNumber = 60;
+			waitNumber = 20;
 		}
 	}
 	
