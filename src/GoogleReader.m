@@ -379,7 +379,8 @@ JSONDecoder * jsonDecoder;
     [token retain];
 
     if (tokenTimer == nil || ![tokenTimer isValid])
-    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(authenticate) userInfo:nil repeats:YES];
+    	//TODO : review this ; do and when auth items expire ?
+    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
 
 	googleReaderStatus = isAuthenticated;
 }
