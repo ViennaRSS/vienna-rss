@@ -126,7 +126,7 @@ JSONDecoder * jsonDecoder;
 	
 	//This is a workaround throw a BAD folderupdate value on DB
 	NSString *folderLastUpdate = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
-	if ([folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
+	if ([folderLastUpdate isEqualToString:@""] || [folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
 	
 	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
 
