@@ -57,7 +57,6 @@ enum GoogleReaderStatus {
 
 @synthesize localFeeds;
 @synthesize token;
-@synthesize readerUser;
 @synthesize tokenTimer;
 
 JSONDecoder * jsonDecoder;
@@ -171,10 +170,7 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
-	  NSString * theUser = [[request responseHeaders] objectForKey:@"X-Reader-User"];
-	  NSData *data = [request responseData];
-	  if (theUser != nil && data != nil) { //if Google matches us with a user...
-		[self setReaderUser:theUser];
+		NSData *data = [request responseData];
 		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
 		NSDate * updateDate = nil;
 		
@@ -317,12 +313,6 @@ JSONDecoder * jsonDecoder;
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
 			[[RefreshManager sharedManager] performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:refreshedFolder waitUntilDone:NO];
 
-	} else { // apparently Google does not recognize the user anymore...
-		[aItem setStatus:NSLocalizedString(@"Error", nil)];
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
-		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
-		[self authenticate]; //attempt to authenticate for other queued refreshes
-	  }
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
@@ -416,8 +406,6 @@ JSONDecoder * jsonDecoder;
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
-	[self setReaderUser:[[request responseHeaders] objectForKey:@"X-Reader-User"]];
-
 	
 	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];
 			

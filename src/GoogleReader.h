@@ -18,14 +18,12 @@
 @private
     NSString * token;
 	NSMutableArray *localFeeds;
-	NSString * readerUser;
 	NSUInteger countOfNewArticles;
 	NSString * clientAuthToken;
 }
 
 @property (nonatomic, copy) NSMutableArray * localFeeds;
 @property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSString *readerUser;
 @property (nonatomic, retain) NSTimer * tokenTimer;
 
 
