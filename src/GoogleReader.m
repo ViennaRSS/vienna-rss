@@ -80,7 +80,7 @@ JSONDecoder * jsonDecoder;
 		clientAuthToken= nil;
 		token=nil;
 		tokenTimer=nil;
-		APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
+		APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
 	}
     
     return self;
