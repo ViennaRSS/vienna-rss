@@ -112,12 +112,14 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request originalURL] absoluteString]);
 	NSString *requestResponse = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
-	LOG_EXPR(requestResponse);
 	if (![requestResponse isEqualToString:@"OK"]) {
 		LLog(@"Error on request");
 		LOG_EXPR([request error]);
-		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request requestHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR(requestResponse);
 		[self clearAuthentication];
 	}
 }
@@ -141,6 +143,7 @@ JSONDecoder * jsonDecoder;
 	[request setDidFinishSelector:@selector(feedRequestDone:)];
 	[request setDidFailSelector:@selector(feedRequestFailed:)];
 	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate", [NSNumber numberWithInt:MA_Refresh_GoogleFeed], @"type", nil]];
+	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	
 	return request;
 }
@@ -317,6 +320,11 @@ JSONDecoder * jsonDecoder;
 
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
+		LOG_EXPR([request originalURL]);
+		LOG_EXPR([request requestHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
@@ -377,6 +385,7 @@ JSONDecoder * jsonDecoder;
     	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
 
 	googleReaderStatus = isAuthenticated;
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"GRSync_Autheticated" object:nil];
 }
 
 -(void)clearAuthentication
@@ -408,6 +417,11 @@ JSONDecoder * jsonDecoder;
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
+		LOG_EXPR([request originalURL]);
+		LOG_EXPR([request requestHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
 	
 	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];
 			
@@ -494,6 +508,7 @@ JSONDecoder * jsonDecoder;
 		} else {
 			LLog(@"Token not available, registering for notification");
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSubscriptions:) name:@"GRSync_Autheticated" object:nil];
+			[self authenticate];
 		}
 	}
 }
@@ -505,7 +520,7 @@ JSONDecoder * jsonDecoder;
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setPostValue:feedURL forKey:@"quickadd"];
     [request setDelegate:self];
-	[request addRequestHeader:@"Referer" value:refererURL];
+	[request setPostValue:token forKey:@"T"];
    	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 
     // Needs to be synchronous so UI doesn't refresh too soon.
@@ -519,7 +534,7 @@ JSONDecoder * jsonDecoder;
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
 	[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
-	[myRequest addRequestHeader:@"Referer" value:refererURL];
+	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 
 	[myRequest startAsynchronous];		
@@ -534,7 +549,7 @@ JSONDecoder * jsonDecoder;
     [request setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
     [request setPostValue:[NSString stringWithFormat:@"user/-/label/%@", folderName] forKey:flag ? @"a" : @"r"];
     [request setDelegate:self];
-	[request addRequestHeader:@"Referer" value:refererURL];
+	[request setPostValue:token forKey:@"T"];
 	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
     [request startSynchronous];
     NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
@@ -558,7 +573,7 @@ JSONDecoder * jsonDecoder;
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
-	[myRequest addRequestHeader:@"Referer" value:refererURL];
+	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest startAsynchronous];
 }
@@ -567,7 +582,6 @@ JSONDecoder * jsonDecoder;
 - (void)keptUnreadDone:(ASIFormDataRequest *)request
 {
 	NSString *requestResponse = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
-	LOG_EXPR(requestResponse);
 	if (![requestResponse isEqualToString:@"OK"]) {
 		LLog(@"Error on request");
 		LOG_EXPR([request error]);
@@ -584,7 +598,7 @@ JSONDecoder * jsonDecoder;
 	[request1 setPostValue:@"true" forKey:@"async"];
 	[request1 setPostValue:itemGuid forKey:@"i"];
 	[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
-	[request1 addRequestHeader:@"Referer" value:refererURL];
+	[request1 setPostValue:token forKey:@"T"];
 	[request1 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[request1 startAsynchronous];
 }
@@ -606,7 +620,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
 	[myRequest setDelegate:self];
-	[myRequest addRequestHeader:@"Referer" value:refererURL];
+	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest startAsynchronous];
 }
