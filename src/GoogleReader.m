@@ -38,7 +38,6 @@
 static NSString * openReaderHost = @"www.bazqux.com";
 static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 NSString * APIBaseURL;
-NSString* refererURL;
 static NSString * ClientName = @"ViennaRSS";
 
 static NSString * username = @"";
@@ -81,7 +80,6 @@ JSONDecoder * jsonDecoder;
 		token=nil;
 		tokenTimer=nil;
 		APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
-		refererURL = [[NSString stringWithFormat:@"https://%@/", openReaderHost] retain];
 	}
     
     return self;
