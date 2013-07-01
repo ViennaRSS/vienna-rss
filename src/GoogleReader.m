@@ -48,7 +48,7 @@ static GoogleReader * _googleReader = nil;
 
 enum GoogleReaderStatus {
 	notAuthenticated = 0,
-	isAutenthicating,
+	isAuthenticating,
 	isAuthenticated
 } googleReaderStatus;
 
@@ -58,12 +58,13 @@ enum GoogleReaderStatus {
 @synthesize localFeeds;
 @synthesize token;
 @synthesize tokenTimer;
+@synthesize authTimer;
 
 JSONDecoder * jsonDecoder;
 
 -(BOOL)isReady
 {
-	return (googleReaderStatus == isAuthenticated);
+	return (googleReaderStatus == isAuthenticated && tokenTimer != nil);
 }
 
 
@@ -79,6 +80,7 @@ JSONDecoder * jsonDecoder;
 		clientAuthToken= nil;
 		token=nil;
 		tokenTimer=nil;
+		authTimer=nil;
 		APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
 	}
     
@@ -340,7 +342,7 @@ JSONDecoder * jsonDecoder;
 		return;
 	} else {
 		LLog(@"Start first authentication...");
-		googleReaderStatus = isAutenthicating;
+		googleReaderStatus = isAuthenticating;
 		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Google Reader", nil) persist:NO];
 	}
 	
@@ -368,23 +370,38 @@ JSONDecoder * jsonDecoder;
 	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
 	clientAuthToken = [[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]] retain];
 
+	[self getToken];
+
+    if (authTimer == nil || ![authTimer isValid])
+    	//new request every 6 days
+    	authTimer = [NSTimer scheduledTimerWithTimeInterval:6*24*3600 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
+}
+
+-(void)getToken
+{
+	LLog(@"Start Token Request!");
     ASIHTTPRequest * request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
     [request setUseCookiePersistence:NO];
     [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
     [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
 
+    googleReaderStatus = isAuthenticating;
     [request startSynchronous];
-
+    if ([request error])
+    {
+		[self resetAuthentication];
+		return;
+	}
     // Save token
     [token release];
     token = [request responseString];
     [token retain];
+	googleReaderStatus = isAuthenticated;
 
     if (tokenTimer == nil || ![tokenTimer isValid])
-    	//TODO : review this ; do and when auth items expire ?
-    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60*60 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
+    	//tokens expire after 30 minutes : renew them every 25 minutes
+    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:25*60 target:self selector:@selector(getToken) userInfo:nil repeats:YES];
 
-	googleReaderStatus = isAuthenticated;
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"GRSync_Autheticated" object:nil];
 }
 
