@@ -352,10 +352,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:password forKey:@"Passwd"];
 	[myRequest startSynchronous];
 
-	NSLog(@"Open Reader server auth reponse code: %d", [myRequest responseStatusCode]);
 	NSString * response = [myRequest responseString];
-	NSLog(@"Open Reader server auth response: %@", response);
-
 	if (!response || [myRequest responseStatusCode] != 200)
 	{
 		NSLog(@"Failed to authenticate with Open Reader server");
@@ -426,7 +423,6 @@ JSONDecoder * jsonDecoder;
 	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
 	[subscriptionRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	LLog(@"Starting subscriptionRequest");
-	LOG_EXPR(subscriptionRequest);
 	[subscriptionRequest startAsynchronous];		
 	LLog(@"subscriptionRequest submitted");	
 }
@@ -434,12 +430,6 @@ JSONDecoder * jsonDecoder;
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
-		LOG_EXPR([request originalURL]);
-		LOG_EXPR([request requestHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
-		LOG_EXPR([request responseHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
-	
 	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];
 			
 	[localFeeds removeAllObjects];
@@ -454,7 +444,6 @@ JSONDecoder * jsonDecoder;
 
 	for (NSDictionary * feed in [dict objectForKey:@"subscriptions"]) 
 	{
-		LOG_EXPR(feed);
 		NSString * feedID = [feed objectForKey:@"id"];
 		if (feedID == nil)
 			break;
@@ -542,7 +531,7 @@ JSONDecoder * jsonDecoder;
 
     // Needs to be synchronous so UI doesn't refresh too soon.
     [request startSynchronous];
-    NSLog(@"Subscribe response status code: %d", [request responseStatusCode]);
+    LLog(@"Subscribe response status code: %d", [request responseStatusCode]);
 }
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
@@ -569,7 +558,7 @@ JSONDecoder * jsonDecoder;
 	[request setPostValue:token forKey:@"T"];
 	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
     [request startSynchronous];
-    NSLog(@"Set folder response status code: %d", [request responseStatusCode]);
+    LLog(@"Set folder response status code: %d", [request responseStatusCode]);
 }
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
@@ -662,7 +651,7 @@ JSONDecoder * jsonDecoder;
 
 -(void)createNewSubscription:(NSArray *)params
 {
-	NSLog(@"createNewSubscription - START");
+	LLog(@"createNewSubscription - START");
     NSInteger underFolder = MA_Root_Folder;
     NSString * feedURL = [params objectAtIndex:0];
 	NSString *rssTitle = [NSString stringWithFormat:@""];
@@ -680,7 +669,7 @@ JSONDecoder * jsonDecoder;
     
     [[NSApp delegate] createNewGoogleReaderSubscription:feedURL underFolder:underFolder withTitle:rssTitle afterChild:-1];
 
-	NSLog(@"createNewSubscription - END");
+	LLog(@"createNewSubscription - END");
 
 }
 
