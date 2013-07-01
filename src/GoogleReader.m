@@ -36,7 +36,7 @@
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
 static NSString * openReaderHost = @"www.bazqux.com";
-static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader&Email=%@&Passwd=%@";
+static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 NSString * APIBaseURL;
 NSString* refererURL;
 static NSString * ClientName = @"ViennaRSS";
@@ -346,15 +346,17 @@ JSONDecoder * jsonDecoder;
 		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Google Reader", nil) persist:NO];
 	}
 	
-	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost, username, password]];
-	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-	[request startSynchronous];
+	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
+	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
+	[myRequest setPostValue:username forKey:@"Email"];
+	[myRequest setPostValue:password forKey:@"Passwd"];
+	[myRequest startSynchronous];
 
-	NSLog(@"Open Reader server auth reponse code: %d", [request responseStatusCode]);
-	NSString * response = [request responseString];
+	NSLog(@"Open Reader server auth reponse code: %d", [myRequest responseStatusCode]);
+	NSString * response = [myRequest responseString];
 	NSLog(@"Open Reader server auth response: %@", response);
 
-	if (!response || [request responseStatusCode] != 200)
+	if (!response || [myRequest responseStatusCode] != 200)
 	{
 		NSLog(@"Failed to authenticate with Open Reader server");
 		return;
@@ -368,7 +370,7 @@ JSONDecoder * jsonDecoder;
 	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
 	clientAuthToken = [[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]] retain];
 
-    request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+    ASIHTTPRequest * request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
     [request setUseCookiePersistence:NO];
     [request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
     [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
