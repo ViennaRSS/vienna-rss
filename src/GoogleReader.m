@@ -405,6 +405,9 @@ JSONDecoder * jsonDecoder;
 -(void)clearAuthentication
 {
 	googleReaderStatus = notAuthenticated;
+	[token release];
+	[clientAuthToken release];
+	clientAuthToken = token = nil;
 }
 
 -(void)resetAuthentication
