@@ -61,6 +61,8 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
+		3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC591783FFC600D75515 /* KnownSyncServers.plist */; };
 		3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9517319979006DD2AB /* PXListDocumentView.m */; };
 		3A4DBEA117319979006DD2AB /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9717319979006DD2AB /* PXListView.m */; };
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
@@ -994,6 +996,8 @@
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ClickableProgressIndicator.m; path = src/ClickableProgressIndicator.m; sourceTree = SOURCE_ROOT; };
 		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = MainMenu.nib; path = Interfaces/MainMenu.nib; sourceTree = SOURCE_ROOT; };
+		3A20DC571783FF8D00D75515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A20DC5A1783FFC600D75515 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3A23F13415276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3A4DBE9417319979006DD2AB /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = 3rdparty/PXListView/PXListDocumentView.h; sourceTree = "<group>"; };
@@ -2538,6 +2542,7 @@
 				43EE8004165EAA6E000997FB /* SearchFolder.nib */,
 				43EE8006165EAA6E000997FB /* SearchFolder.strings */,
 				43EE8008165EAA6E000997FB /* SyncPreferences.xib */,
+				3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */,
 			);
 			name = en.lproj;
 			path = lproj/en.lproj;
@@ -2641,6 +2646,7 @@
 				43EE80B5165EAA6E000997FB /* SearchFolder.nib */,
 				43EE80B7165EAA6E000997FB /* SearchFolder.strings */,
 				43EE80B9165EAA6E000997FB /* SyncPreferences.xib */,
+				3A20DC591783FFC600D75515 /* KnownSyncServers.plist */,
 			);
 			name = fr.lproj;
 			path = lproj/fr.lproj;
@@ -4310,6 +4316,8 @@
 				5740947A16F5112B0087870F /* cancelRefreshButtonSmall@2x.tiff in Resources */,
 				57F7E2F116F534FE00D4702E /* vienna3plugin.icns in Resources */,
 				57F7E2F216F534FE00D4702E /* vienna3style.icns in Resources */,
+				3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */,
+				3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4646,6 +4654,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A20DC571783FF8D00D75515 /* en */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A20DC591783FFC600D75515 /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A20DC5A1783FFC600D75515 /* fr */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
 		43EE7F29165EAA6E000997FB /* AdvancedPreferences.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
