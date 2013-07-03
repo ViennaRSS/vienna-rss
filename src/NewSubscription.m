@@ -111,7 +111,9 @@
 	editFolderId = -1;
 	parentId = itemId;
 	[newRSSFeedWindow makeFirstResponder:feedURL];
-	self.googleOptionButton=[[Preferences standardPreferences] prefersGoogleNewSubscription];  //restore from preferences
+	//restore from preferences, if it can be done ; otherwise, uncheck this option
+	self.googleOptionButton=[[Preferences standardPreferences] syncGoogleReader]
+		&&[[Preferences standardPreferences] prefersGoogleNewSubscription];
 	[NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
