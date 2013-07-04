@@ -379,41 +379,41 @@
 "Display the list of available styles" = "Mostrar lista de estilos disponíveis";
 
 /* Added in 2.3.0 */
-"Order By" = "Order By";
+"Order By" = "Ordnar Por";
 "Manual" = "Manual";
-"Name" = "Name";
+"Name" = "Nome";
 
 /*Added in 2.4*/
-"Show XML Source" = "Show XML Source";
-"Source of folder" = "Source of folder";
-"No feed source to display." = "No feed source to display.";
-"Search current web page" = "Search current web page";
-"Search all articles or the current web page" = "Search all articles or the current web page";
-"Database Upgrade" = "Database Upgrade";
-"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.";
-"Upgrade Database" = "Upgrade Database";
+"Show XML Source" = "Exibir XML fonte";
+"Source of folder" = "Origem do fonte";
+"No feed source to display." = "Nenhuma fonte de notícias para exibir.";
+"Search current web page" = "Pesquisar na página web atual";
+"Search all articles or the current web page" = "Pesquisar em todos os artigos ou na página web atual";
+"Database Upgrade" = "Atualização de Banco de Dados";
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece." = "O Vienna precisa atualizar seu banco de dados para a última versão.  Isto pode demorar um minuto ou dois.  Pedimos desculpas pelo inconveniente.";
+"Upgrade Database" = "Atualizar Banco de Dados";
 
 /* Added in 2.5.0 */
-"Cannot create folder title" = "Cannot create folder";
-"Cannot create folder body" = "The \"%@\" folder cannot be created.";
+"Cannot create folder title" = "Não foi possível criar pasta";
+"Cannot create folder body" = "A pasta \"%@\" não pode ser criada.";
 
 /* Added in 2.6.0 */
-"Article load completed" = "Article load completed";
-"Loading HTML article..." = "Loading HTML article...";
-"Ascending" = "Ascending";
-"Descending" = "Descending";
-"Use Current Style for Articles" = "Use Current Style for Articles";
-"Use Web Page for Articles" = "Use Web Page for Articles";
+"Article load completed" = "Carga de artigos finalizada";
+"Loading HTML article..." = "Carregando artigo HTML...";
+"Ascending" = "Crescente";
+"Descending" = "Decrescente";
+"Use Current Style for Articles" = "Usar Estilo Atual para Artigos";
+"Use Web Page for Articles" = "Usar Página Web para Artigos";
 
 /* Added for Google Reader support */
-"Force Refresh Selected Subscriptions From Google Reader" = "Force Refresh Selected Subscriptions From Google Reader";
-"Update Subscriptions From Google Reader" = "Update Subscriptions From Google Reader";
-"Hide Toolbar" = "Hide Toolbar";
-"Delete Google Reader RSS feed text" = "Delete Google Reader RSS feed text";
-"Delete Google Reader RSS feed" = "Delete Google Reader RSS feed";
+"Force Refresh Selected Subscriptions From Google Reader" = "Forçar Atualização das Assinaturas Selecionadas do Google Reader";
+"Update Subscriptions From Google Reader" = "Atualizar Assinaturas do Google Reader";
+"Hide Toolbar" = "Ocultar Barra de Ferramentas";
+"Delete Google Reader RSS feed text" = "Excluir texto de Assinatura RSS do Google Reader";
+"Delete Google Reader RSS feed" = "Excluir Assinatura RSS do Google Reader";
 
 /* Added in 3.0.0 */
-"Last 48 hours" = "Last 48 hours";
-"Unread or flagged" = "Unread or flagged";
-"Syncing" = "Syncing";
-"Reindex Database" = "Reindex Database";
+"Last 48 hours" = "Últimas 48 horas";
+"Unread or flagged" = "Não lidos ou marcados";
+"Syncing" = "Sincronizando";
+"Reindex Database" = "Reindexando banco de dados";
