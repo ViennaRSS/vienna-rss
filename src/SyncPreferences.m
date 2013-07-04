@@ -58,10 +58,18 @@
     BOOL sync = [sender state] == NSOnState;
 	[[Preferences standardPreferences] setSyncGoogleReader:sync];
 	if (sync) {
+		[openReaderSource setEnabled:YES];
+		[openReaderHost setEnabled:YES];
+		[username setEnabled:YES];
+		[password setEnabled:YES];
 		[[GoogleReader sharedManager] authenticate];
 		[[GoogleReader sharedManager] loadSubscriptions:nil];
 	}
 	else {
+		[openReaderSource setEnabled:NO];
+		[openReaderHost setEnabled:NO];
+		[username setEnabled:NO];
+		[password setEnabled:NO];
     	[[GoogleReader sharedManager] clearAuthentication];
     };
 }
@@ -97,6 +105,14 @@
     
     Preferences * prefs = [Preferences standardPreferences];
 	[syncButton setState:[prefs syncGoogleReader] ? NSOnState : NSOffState];
+
+	if(![prefs syncGoogleReader])
+	{
+		[openReaderSource setEnabled:NO];
+		[openReaderHost setEnabled:NO];
+		[username setEnabled:NO];
+		[password setEnabled:NO];
+	}
 
 	// Load a list of supported servers from the KnownSyncServers property list. The list
 	// is a dictionary with display names which act as keys, host names and a help text
