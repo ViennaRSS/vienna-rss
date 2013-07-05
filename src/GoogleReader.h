@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
-#import "GTMOAuth2WindowController.h"
 #import "Folder.h"
 #import "ASINetworkQueue.h"
 #import "ActivityLog.h"
