@@ -117,7 +117,7 @@
 					[openReaderSource addItemWithTitle:NSLocalizedString(key, nil)];
 				}
 				[openReaderSource setEnabled:YES];
-				[openReaderSource selectItemWithTitle:NSLocalizedString(@"Other...", nil)];
+				[openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
 				[self changeSource:nil];
 			}
 		}

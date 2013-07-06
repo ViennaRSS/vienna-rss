@@ -16,12 +16,12 @@
 		<key>Hint</key>
 		<string>Entrez l&apos;adresse mail et le mot de passe associé à votre compte FeedHQ</string>
 	</dict>
-	<key>Autre...</key>
+	<key>Autre</key>
 	<dict>
 		<key>Address</key>
 		<string></string>
 		<key>Hint</key>
-		<string>Entrez votre nom utilisateur sur ce serveur et le mot de passe associé</string>
+		<string>Entrez l'adresse du serveur, votre nom utilisateur et le mot de passe associé</string>
 	</dict>
 </dict>
 </plist>

@@ -197,8 +197,12 @@
 							<object class="NSTextFieldCell" key="NSCell" id="74398044">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Nombre:</string>
-								<reference key="NSSupport" ref="427605100"/>
+								<string key="NSContents">이름:</string>
+								<object class="NSFont" key="NSSupport" id="514121158">
+									<string key="NSName">AppleSDGothicNeo-Regular</string>
+									<double key="NSSize">13</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<reference key="NSControlView" ref="941710880"/>
 								<reference key="NSBackgroundColor" ref="63135774"/>
 								<reference key="NSTextColor" ref="405153700"/>
@@ -216,8 +220,8 @@
 							<object class="NSTextFieldCell" key="NSCell" id="725382594">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71303168</int>
-								<string key="NSContents">Contraseña:</string>
-								<reference key="NSSupport" ref="427605100"/>
+								<string key="NSContents">암호:</string>
+								<reference key="NSSupport" ref="514121158"/>
 								<reference key="NSControlView" ref="1054133262"/>
 								<reference key="NSBackgroundColor" ref="63135774"/>
 								<reference key="NSTextColor" ref="405153700"/>
@@ -263,6 +267,7 @@
 							<string key="NSFrame">{{140, 19}, {296, 22}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="926376993">
 								<int key="NSCellFlags">-1804599231</int>

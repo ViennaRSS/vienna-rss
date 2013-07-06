@@ -69,7 +69,25 @@
 		3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9C17319979006DD2AB /* PXListViewCell.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */; };
+		3A6D70D417856793009D0D3E /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D217856793009D0D3E /* SyncPreferences.xib */; };
+		3A6D70D717857B0E009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70DA17857B2B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70DD17857B40009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70DB17857B40009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E017857B62009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70DE17857B61009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E317857B89009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70E117857B89009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E617857BA6009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70E417857BA6009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E917857BD2009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70E717857BD2009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70EC17857BF4009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70EA17857BF4009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70EF17857C22009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70ED17857C22009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70F217857C39009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F017857C39009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70F517857C5B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F317857C5B009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70F817857C83009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F617857C83009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70FB17857C9B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F917857C9B009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70FE17857CBD009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70FC17857CBD009D0D3E /* KnownSyncServers.plist */; };
+		3A6D710117857CD6009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */; };
+		3A6D710417857CFB009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */; };
 		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
+		3A8A344D17857D3B00E2E64B /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */; };
 		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
@@ -1017,6 +1035,24 @@
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		3A6D70D317856793009D0D3E /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = SyncPreferences.xib; sourceTree = "<group>"; };
+		3A6D70D617857B0E009D0D3E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cs; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70D917857B2B009D0D3E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70DC17857B40009D0D3E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70DF17857B61009D0D3E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70E217857B89009D0D3E /* eus */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = eus; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70E517857BA6009D0D3E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = it; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70E817857BD2009D0D3E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70EB17857BF4009D0D3E /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ko; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70EE17857C22009D0D3E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70F117857C39009D0D3E /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = pt_BR; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70F417857C5B009D0D3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = pt; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70F717857C83009D0D3E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70FA17857C9B009D0D3E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = sv; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70FD17857CBD009D0D3E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = tr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D710017857CD6009D0D3E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D710317857CFB009D0D3E /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_CN; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A8A344C17857D3B00E2E64B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_TW; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
@@ -2449,6 +2485,7 @@
 				43EE7F51165EAA6E000997FB /* SearchFolder.nib */,
 				43EE7F53165EAA6E000997FB /* SearchFolder.strings */,
 				43EE7F55165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = cs.lproj;
 			path = lproj/cs.lproj;
@@ -2479,6 +2516,7 @@
 				43EE7F8C165EAA6E000997FB /* SearchFolder.nib */,
 				43EE7F8E165EAA6E000997FB /* SearchFolder.strings */,
 				43EE7F90165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = da.lproj;
 			path = lproj/da.lproj;
@@ -2510,6 +2548,7 @@
 				43EE7FC7165EAA6E000997FB /* SearchFolder.nib */,
 				43EE7FC9165EAA6E000997FB /* SearchFolder.strings */,
 				43EE7FCB165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70DB17857B40009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = de.lproj;
 			path = lproj/de.lproj;
@@ -2584,6 +2623,7 @@
 				43EE803F165EAA6E000997FB /* SearchFolder.nib */,
 				43EE8041165EAA6E000997FB /* SearchFolder.strings */,
 				43EE8043165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70DE17857B61009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = es.lproj;
 			path = lproj/es.lproj;
@@ -2615,6 +2655,7 @@
 				43EE807A165EAA6E000997FB /* SearchFolder.nib */,
 				43EE807C165EAA6E000997FB /* SearchFolder.strings */,
 				43EE807E165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70E117857B89009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = eus.lproj;
 			path = lproj/eus.lproj;
@@ -2678,6 +2719,7 @@
 				43EE80F0165EAA6F000997FB /* SearchFolder.nib */,
 				43EE80F2165EAA6F000997FB /* SearchFolder.strings */,
 				43EE80F4165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70E417857BA6009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = it.lproj;
 			path = lproj/it.lproj;
@@ -2709,6 +2751,7 @@
 				43EE812A165EAA6F000997FB /* SearchFolder.nib */,
 				43EE812C165EAA6F000997FB /* SearchFolder.strings */,
 				43EE812E165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70E717857BD2009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = ja.lproj;
 			path = lproj/ja.lproj;
@@ -2739,6 +2782,8 @@
 				43EE8163165EAA6F000997FB /* RSSSources.plist */,
 				43EE8165165EAA6F000997FB /* SearchFolder.nib */,
 				43EE8167165EAA6F000997FB /* SearchFolder.strings */,
+				3A6D70D217856793009D0D3E /* SyncPreferences.xib */,
+				3A6D70EA17857BF4009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = ko.lproj;
 			path = lproj/ko.lproj;
@@ -2770,6 +2815,7 @@
 				43EE81A1165EAA6F000997FB /* SearchFolder.nib */,
 				43EE81A3165EAA6F000997FB /* SearchFolder.strings */,
 				43EE81A5165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70ED17857C22009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = nl.lproj;
 			path = lproj/nl.lproj;
@@ -2800,6 +2846,7 @@
 				43EE81DA165EAA6F000997FB /* SearchFolder.nib */,
 				43EE81DC165EAA6F000997FB /* SearchFolder.strings */,
 				43EE81DE165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F017857C39009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = pt_BR.lproj;
 			path = lproj/pt_BR.lproj;
@@ -2831,6 +2878,7 @@
 				43EE8215165EAA6F000997FB /* SearchFolder.nib */,
 				43EE8217165EAA6F000997FB /* SearchFolder.strings */,
 				43EE8219165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F317857C5B009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = pt.lproj;
 			path = lproj/pt.lproj;
@@ -2862,6 +2910,7 @@
 				43EE8250165EAA6F000997FB /* SearchFolder.nib */,
 				43EE8252165EAA6F000997FB /* SearchFolder.strings */,
 				43EE8254165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F617857C83009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = ru.lproj;
 			path = lproj/ru.lproj;
@@ -2893,6 +2942,7 @@
 				43EE828D165EAA6F000997FB /* SearchFolder.nib */,
 				43EE828F165EAA6F000997FB /* SearchFolder.strings */,
 				43EE8291165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F917857C9B009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = sv.lproj;
 			path = lproj/sv.lproj;
@@ -2924,6 +2974,7 @@
 				43EE82C8165EAA6F000997FB /* SearchFolder.nib */,
 				43EE82CA165EAA6F000997FB /* SearchFolder.strings */,
 				43EE82CC165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70FC17857CBD009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = tr.lproj;
 			path = lproj/tr.lproj;
@@ -2955,6 +3006,7 @@
 				43EE8303165EAA70000997FB /* SearchFolder.nib */,
 				43EE8305165EAA70000997FB /* SearchFolder.strings */,
 				43EE8307165EAA70000997FB /* SyncPreferences.xib */,
+				3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = uk.lproj;
 			path = lproj/uk.lproj;
@@ -2986,6 +3038,7 @@
 				43EE833E165EAA70000997FB /* SearchFolder.nib */,
 				43EE8340165EAA70000997FB /* SearchFolder.strings */,
 				43EE8342165EAA70000997FB /* SyncPreferences.xib */,
+				3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = zh_CN.lproj;
 			path = lproj/zh_CN.lproj;
@@ -3017,6 +3070,7 @@
 				43EE8379165EAA70000997FB /* SearchFolder.nib */,
 				43EE837B165EAA70000997FB /* SearchFolder.strings */,
 				43EE837D165EAA70000997FB /* SyncPreferences.xib */,
+				3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */,
 			);
 			name = zh_TW.lproj;
 			path = lproj/zh_TW.lproj;
@@ -4318,6 +4372,24 @@
 				57F7E2F216F534FE00D4702E /* vienna3style.icns in Resources */,
 				3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */,
 				3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */,
+				3A6D70D417856793009D0D3E /* SyncPreferences.xib in Resources */,
+				3A6D70D717857B0E009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70DA17857B2B009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70DD17857B40009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E017857B62009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E317857B89009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E617857BA6009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E917857BD2009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70EC17857BF4009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70EF17857C22009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70F217857C39009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70F517857C5B009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70F817857C83009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70FB17857C9B009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70FE17857CBD009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D710117857CD6009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D710417857CFB009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A8A344D17857D3B00E2E64B /* KnownSyncServers.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4666,6 +4738,150 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A20DC5A1783FFC600D75515 /* fr */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70D217856793009D0D3E /* SyncPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70D317856793009D0D3E /* ko */,
+			);
+			name = SyncPreferences.xib;
+			sourceTree = "<group>";
+		};
+		3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70D617857B0E009D0D3E /* cs */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70D917857B2B009D0D3E /* da */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70DB17857B40009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70DC17857B40009D0D3E /* de */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70DE17857B61009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70DF17857B61009D0D3E /* es */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70E117857B89009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70E217857B89009D0D3E /* eus */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70E417857BA6009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70E517857BA6009D0D3E /* it */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70E717857BD2009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70E817857BD2009D0D3E /* ja */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70EA17857BF4009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70EB17857BF4009D0D3E /* ko */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70ED17857C22009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70EE17857C22009D0D3E /* nl */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F017857C39009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70F117857C39009D0D3E /* pt_BR */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F317857C5B009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70F417857C5B009D0D3E /* pt */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F617857C83009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70F717857C83009D0D3E /* ru */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F917857C9B009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70FA17857C9B009D0D3E /* sv */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70FC17857CBD009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70FD17857CBD009D0D3E /* tr */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D710017857CD6009D0D3E /* uk */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D710317857CFB009D0D3E /* zh_CN */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A8A344C17857D3B00E2E64B /* zh_TW */,
 			);
 			name = KnownSyncServers.plist;
 			sourceTree = "<group>";
