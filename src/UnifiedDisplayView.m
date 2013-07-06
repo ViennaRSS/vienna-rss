@@ -306,6 +306,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				[cell setInProgress:NO];
 				[self displayIfNeeded];
 				[cell display];
+				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
 			}
 			else
 			{
