@@ -121,4 +121,121 @@
 								   cPassword,
 								   NULL);
 }
+
+/* getWebPasswordFromKeychain
+ * Retrieves an web form password from the Keychain.
+ */
++(NSString *)getWebPasswordFromKeychain:(NSString *)username url:(NSString *)url
+{
+	NSURL * secureUrl = [NSURL URLWithString:url];
+	const char * cServiceName = [[secureUrl host] UTF8String];
+	const char * cUsername = [username UTF8String];
+	int portNumber = 0;
+	SecProtocolType protocolType = kSecProtocolTypeHTTPS ;
+	NSString * thePassword;
+
+	if (!cServiceName || !cUsername)
+		thePassword = @"";
+	else
+	{
+		const char * cPath = "";
+		UInt32 passwordLength;
+		void * passwordPtr;
+		OSStatus status;
+
+		status = SecKeychainFindInternetPassword(NULL,
+												 strlen(cServiceName),
+												 cServiceName,
+												 0,
+												 NULL,
+												 strlen(cUsername),
+												 cUsername,
+												 strlen(cPath),
+												 cPath,
+												 portNumber,
+												 protocolType,
+												 kSecAuthenticationTypeHTMLForm,
+												 &passwordLength,
+												 &passwordPtr,
+												 NULL);
+		if (status != noErr)
+			thePassword = @"";
+		else
+		{
+			thePassword = [[[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
+			SecKeychainItemFreeContent(NULL, passwordPtr);
+		}
+	}
+	return thePassword;
+}
+
+/* getGenericPasswordFromKeychain
+ * Retrieves a generic password from the Keychain.
+ */
++(NSString *)getGenericPasswordFromKeychain:(NSString *)username serviceName:(NSString *)service
+{
+	const char * cServiceName = [service UTF8String];
+	const char * cUsername = [username UTF8String];
+	NSString * thePassword;
+
+	if (!cServiceName || !cUsername)
+		thePassword = @"";
+	else
+	{
+		UInt32 passwordLength;
+		void * passwordPtr;
+		OSStatus status;
+
+		status = SecKeychainFindGenericPassword(NULL,
+											 strlen(cServiceName),
+											 cServiceName,
+											 strlen(cUsername),
+											 cUsername,
+											 &passwordLength,
+											 &passwordPtr,
+											 NULL);
+		if (status != noErr)
+			thePassword = @"";
+		else
+		{
+			thePassword = [[[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
+			SecKeychainItemFreeContent(NULL, passwordPtr);
+		}
+	}
+	return thePassword;
+}
+
+/* setGenericPasswordInKeychain
+ * Updates a generic password for the service.
+ */
++(void)setGenericPasswordInKeychain:(NSString *)password username:(NSString *)username service:(NSString *)service
+{
+	const char * cServiceName = [service UTF8String];
+	const char * cUsername = [username UTF8String];
+	const char * cPassword = [password UTF8String];
+	SecKeychainItemRef itemRef;
+	OSStatus status;
+
+	if (!cServiceName || !cUsername || !cPassword)
+		return;
+	status = SecKeychainFindGenericPassword(NULL,
+											 strlen(cServiceName),
+											 cServiceName,
+											 strlen(cUsername),
+											 cUsername,
+											 NULL,
+											 NULL,
+											 &itemRef);
+	if (status == noErr)
+		SecKeychainItemDelete(itemRef);
+	SecKeychainAddGenericPassword(NULL,
+								   strlen(cServiceName),
+								   cServiceName,
+								   strlen(cUsername),
+								   cUsername,
+								   strlen(cPassword),
+								   cPassword,
+								   NULL);
+}
+
 @end
