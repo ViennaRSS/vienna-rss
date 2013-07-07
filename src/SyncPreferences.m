@@ -23,6 +23,8 @@
 #import "SyncPreferences.h"
 #import "GoogleReader.h"
 #import "Preferences.h"
+#import "KeyChain.h"
+#import "StringExtensions.h"
 
 @implementation SyncPreferences
 
@@ -47,14 +49,22 @@
 
 -(void)windowWillClose:(NSNotification *)notification 
 {
+	// save server and username in Preferences
+	// and password as a generic password in current keychain
     Preferences *prefs = [Preferences standardPreferences];
     [prefs setSyncGoogleReader:([syncButton state] == NSOnState)];
+    [prefs setSyncServer:[openReaderHost stringValue]];
+    [prefs setSyncingUser:[username stringValue]];
     [prefs savePreferences];    
+    [KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[GoogleReader sharedManager] authenticate];
 }
 
 
 -(IBAction)changeSyncGoogleReader:(id)sender 
 {
+    // enable/disable syncing
     BOOL sync = [sender state] == NSOnState;
 	[[Preferences standardPreferences] setSyncGoogleReader:sync];
 	if (sync) {
@@ -95,6 +105,26 @@
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
+/* handleUserTextDidChange [delegate]
+ * This function is called when the contents of the user field is changed.
+ * We use the info to check if the password is already available
+ * in a web form
+ */
+-(void)handleUserTextDidChange:(NSNotification *)aNotification
+{
+	NSTextField * theField = [aNotification object];
+	if (theField == openReaderHost || theField == username)
+	{
+		if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
+		{
+			// can we get password via keychain ?
+			NSString * thePass = [KeyChain getWebPasswordFromKeychain:[username stringValue] url:[NSString stringWithFormat:@"https://%@", [openReaderHost stringValue]]];
+			if (![thePass isBlank])
+				[password setStringValue:thePass];
+		}
+	}
+}
+
 - (void)windowDidLoad
 {
     [super windowDidLoad];
@@ -102,9 +132,23 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
+	[nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
     
+    // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
 	[syncButton setState:[prefs syncGoogleReader] ? NSOnState : NSOffState];
+	NSString * theUsername = [prefs syncingUser];
+	if (!theUsername)
+		theUsername=@"";
+	NSString * theHost = [prefs syncServer];
+	if (!theHost)
+		theHost=@"";
+	NSString * thePassword = [KeyChain getGenericPasswordFromKeychain:theUsername serviceName:@"Vienna sync"];
+	if (!thePassword)
+		thePassword=@"";
+	[username setStringValue:theUsername];
+	[openReaderHost setStringValue:theHost];
+	[password setStringValue:thePassword];
 
 	if(![prefs syncGoogleReader])
 	{
@@ -128,13 +172,24 @@
 			[openReaderSource removeAllItems];
 			if (sourcesDict)
 			{
+				[openReaderSource setEnabled:YES];
+				BOOL match = NO;
 				for (NSString * key in sourcesDict)
 				{
 					[openReaderSource addItemWithTitle:NSLocalizedString(key, nil)];
+					NSDictionary * itemDict = [sourcesDict valueForKey:key];
+					if ([theHost isEqualToString:[itemDict valueForKey:@"Address"]])
+					{
+						[openReaderSource selectItemWithTitle:NSLocalizedString(key, nil)];
+						[self changeSource:nil];
+						match = YES;
+					}
 				}
-				[openReaderSource setEnabled:YES];
-				[openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
-				[self changeSource:nil];
+				if (!match)
+				{
+					[openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
+					[openReaderHost setStringValue:theHost];
+				}
 			}
 		}
 		else
@@ -144,6 +199,15 @@
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {    
+    if ([[self window] isVisible])
+    {
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert addButtonWithTitle:@"OK"];
+        [alert setMessageText:@"Open Reader Authentication Failed"];
+        [alert setInformativeText:@"Please check username and password you entered for the Open Reader server in Vienna's preferences."];
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+    }
 }
 
 -(void)dealloc

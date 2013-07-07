@@ -32,16 +32,17 @@
 #import "Preferences.h"
 #import "StringExtensions.h"
 #import "NSNotificationAdditions.h"
+#import "KeyChain.h"
 
 #define TIMESTAMP [NSString stringWithFormat:@"%0.0f",[[NSDate date] timeIntervalSince1970]]
 
-static NSString * openReaderHost = @"www.bazqux.com";
 static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
-NSString * APIBaseURL;
 static NSString * ClientName = @"ViennaRSS";
 
-static NSString * username = @"";
-static NSString * password = @"";
+NSString * openReaderHost;
+NSString * username;
+NSString * password;
+NSString * APIBaseURL;
 
 // Singleton
 static GoogleReader * _googleReader = nil;
@@ -81,7 +82,10 @@ JSONDecoder * jsonDecoder;
 		token=nil;
 		tokenTimer=nil;
 		authTimer=nil;
-		APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
+		openReaderHost=nil;
+		username=nil;
+		password=nil;
+		APIBaseURL=nil;
 	}
     
     return self;
@@ -335,7 +339,8 @@ JSONDecoder * jsonDecoder;
 
 -(void)authenticate 
 {    	
-	if (![[Preferences standardPreferences] syncGoogleReader])
+    Preferences * prefs = [Preferences standardPreferences];
+	if (![prefs syncGoogleReader])
 		return;
 	if (googleReaderStatus != notAuthenticated) {
 		LLog(@"Another instance is authenticating...");
@@ -346,6 +351,16 @@ JSONDecoder * jsonDecoder;
 		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Google Reader", nil) persist:NO];
 	}
 	
+    // restore from Preferences and from keychain
+    [username release];
+	username = [[prefs syncingUser] retain];
+	[openReaderHost release];
+	openReaderHost = [[prefs syncServer] retain];
+	[password release];
+	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
+	[APIBaseURL release];
+	APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
+
 	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
 	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
 	[myRequest setPostValue:username forKey:@"Email"];
@@ -355,7 +370,9 @@ JSONDecoder * jsonDecoder;
 	NSString * response = [myRequest responseString];
 	if (!response || [myRequest responseStatusCode] != 200)
 	{
-		NSLog(@"Failed to authenticate with Open Reader server");
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
+		[[NSApp delegate] setStatusMessage:nil persist:NO];
+		googleReaderStatus = notAuthenticated;
 		return;
 	}
 
@@ -639,6 +656,12 @@ JSONDecoder * jsonDecoder;
 {
 	[localFeeds release];
 	[jsonDecoder release];
+    [username release];
+	[openReaderHost release];
+	[password release];
+	[APIBaseURL release];
+	[clientAuthToken release];
+	[token release];
 	[super dealloc];
 }
 

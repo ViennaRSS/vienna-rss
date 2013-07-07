@@ -1550,8 +1550,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     if ([mainWindow isKeyWindow]) {
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert addButtonWithTitle:@"OK"];
-    [alert setMessageText:@"Google Authentication Failed"];
-    [alert setInformativeText:@"Please check Google username and password you entered in Sign In window."];
+    [alert setMessageText:@"Open Reader Authentication Failed"];
+    [alert setInformativeText:@"Please check username and password you entered for the Open Reader server in Vienna's preferences."];
     [alert setAlertStyle:NSWarningAlertStyle];
     [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     }
