@@ -360,6 +360,8 @@ JSONDecoder * jsonDecoder;
 	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
 	[APIBaseURL release];
 	APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
+		LOG_EXPR(username);
+		LOG_EXPR(password);
 
 	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
 	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
@@ -370,6 +372,8 @@ JSONDecoder * jsonDecoder;
 	NSString * response = [myRequest responseString];
 	if (!response || [myRequest responseStatusCode] != 200)
 	{
+		LOG_EXPR([myRequest responseStatusCode]);
+		LOG_EXPR([myRequest responseHeaders]);
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
 		[[NSApp delegate] setStatusMessage:nil persist:NO];
 		googleReaderStatus = notAuthenticated;

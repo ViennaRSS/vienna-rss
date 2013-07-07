@@ -1060,8 +1060,8 @@
 	NSString * newName = (NSString *)object;
 	Folder * folder = [node folder];
 	
-	// Remove the "[G] " character on Google Reader feeds
-	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"[G] "]) {
+	// Remove the "[S] " character on Google Reader feeds
+	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"[S] "]) {
 		NSString *tmpName = [newName substringFromIndex:4];
 		newName = tmpName;
 	}
