@@ -1450,7 +1450,7 @@ static Database * _sharedDatabase = nil;
 		
 		// Parse off the title
 		if (articleTitle == nil || [articleTitle isBlank])
-			articleTitle = [articleBody firstNonBlankLine];
+			articleTitle = [[NSString stringByRemovingHTML:articleBody] firstNonBlankLine];
 		
 		// Save date as time intervals
 		NSTimeInterval interval = [articleDate timeIntervalSince1970];
