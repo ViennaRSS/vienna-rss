@@ -236,7 +236,7 @@ JSONDecoder * jsonDecoder;
 				[article setTitle:@""];
 			}
 			
-			if ([newsItem objectForKey:@"alternate"] != nil) {
+			if ([[newsItem objectForKey:@"alternate"] count] != 0) {
 				[article setLink:[[[newsItem objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
 			} else {
 				[article setLink:[refreshedFolder feedURL]];
@@ -244,7 +244,7 @@ JSONDecoder * jsonDecoder;
 		
 			[article setDate:articleDate];
 
-			if ([newsItem objectForKey:@"enclosure"] != nil) {
+			if ([[newsItem objectForKey:@"enclosure"] count] != 0) {
 				[article setEnclosure:[[[newsItem objectForKey:@"enclosure"] objectAtIndex:0] objectForKey:@"href"]];
 			} else {
 				[article setEnclosure:@""];
