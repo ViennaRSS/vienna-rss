@@ -543,6 +543,8 @@ JSONDecoder * jsonDecoder;
 
 -(void)subscribeToFeed:(NSString *)feedURL 
 {
+	if (![self isReady])
+		[self authenticate];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/quickadd?client=%@",APIBaseURL,ClientName]];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -558,6 +560,8 @@ JSONDecoder * jsonDecoder;
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
 {
+	if (![self isReady])
+		[self authenticate];
 	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?access_token=%@",APIBaseURL,token]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
@@ -570,6 +574,8 @@ JSONDecoder * jsonDecoder;
 
 -(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag
 {
+	if (![self isReady])
+		[self authenticate];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@",APIBaseURL,ClientName]];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
