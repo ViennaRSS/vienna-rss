@@ -262,7 +262,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_Manual] forKey:MAPref_AutoSortFoldersTree];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_ByName] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
