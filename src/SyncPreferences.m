@@ -27,6 +27,7 @@
 #import "StringExtensions.h"
 
 @implementation SyncPreferences
+static BOOL _credentialsChanged;
 
 @synthesize syncButton;
 
@@ -58,7 +59,11 @@
     [prefs savePreferences];    
     [KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[[GoogleReader sharedManager] authenticate];
+	if([syncButton state] == NSOnState && _credentialsChanged)
+	{
+		[[GoogleReader sharedManager] resetAuthentication];
+		[[GoogleReader sharedManager] loadSubscriptions:nil];
+	}
 }
 
 
@@ -66,14 +71,12 @@
 {
     // enable/disable syncing
     BOOL sync = [sender state] == NSOnState;
-	[[Preferences standardPreferences] setSyncGoogleReader:sync];
 	if (sync) {
 		[openReaderSource setEnabled:YES];
 		[openReaderHost setEnabled:YES];
 		[username setEnabled:YES];
 		[password setEnabled:YES];
-		[[GoogleReader sharedManager] authenticate];
-		[[GoogleReader sharedManager] loadSubscriptions:nil];
+		_credentialsChanged = YES;
 	}
 	else {
 		[openReaderSource setEnabled:NO];
@@ -97,6 +100,8 @@
 		hint=@"";
 	[openReaderHost setStringValue:hostName];
 	[credentialsInfoText setStringValue:hint];
+	if (sender != nil)	//user action
+		_credentialsChanged=YES;
 }
 
 - (IBAction)visitWebsite:(id)sender
@@ -123,6 +128,7 @@
 				[password setStringValue:thePass];
 		}
 	}
+	_credentialsChanged = YES;
 }
 
 - (void)windowDidLoad
@@ -157,6 +163,7 @@
 		[username setEnabled:NO];
 		[password setEnabled:NO];
 	}
+	_credentialsChanged = NO;
 
 	// Load a list of supported servers from the KnownSyncServers property list. The list
 	// is a dictionary with display names which act as keys, host names and a help text
@@ -207,6 +214,7 @@
         [alert setInformativeText:@"Please check username and password you entered for the Open Reader server in Vienna's preferences."];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
+        [[GoogleReader sharedManager] clearAuthentication];
     }
 }
 

@@ -360,8 +360,6 @@ JSONDecoder * jsonDecoder;
 	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
 	[APIBaseURL release];
 	APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
-		LOG_EXPR(username);
-		LOG_EXPR(password);
 
 	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
 	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
