@@ -1105,7 +1105,7 @@ static Preferences * _standardPreferences = nil;
 }
 
 #pragma mark -
-#pragma mark Google Reader syncing
+#pragma mark Open Reader syncing
 
 -(BOOL)syncGoogleReader 
 {
@@ -1123,7 +1123,7 @@ static Preferences * _standardPreferences = nil;
 }
 
 /* Getter/setters for prefersGoogleNewSubscription
- * Specifies whether Vienna defaults to Google Reader when entering a new subscription
+ * Specifies whether Vienna defaults to Open Reader when entering a new subscription
  */
 -(BOOL)prefersGoogleNewSubscription
 {

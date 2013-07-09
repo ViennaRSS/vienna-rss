@@ -413,7 +413,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-	//Google Reader Notifications
+	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 		
 	// Init the progress counter and status bar.
@@ -2832,12 +2832,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* createNewGoogleReaderSubscription
- * Create a new Google Reader subscription for the specified URL under the given parent folder.
+ * Create a new Open Reader subscription for the specified URL under the given parent folder.
  */
 
 -(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId
 {
-	NSLog(@"Adding Google Reader Feed: %@ with Title: %@",url,title);
+	NSLog(@"Adding Open Reader Feed: %@ with Title: %@",url,title);
 	// Replace feed:// with http:// if necessary
 	if ([url hasPrefix:@"feed://"])
 		url = [NSString stringWithFormat:@"http://%@", [url substringFromIndex:7]];
@@ -3220,8 +3220,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		else if (IsGoogleReaderFolder(folder))
 		{
-			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Google Reader RSS feed text", nil), [folder name]];
-			alertTitle = NSLocalizedString(@"Delete Google Reader RSS feed", nil);
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Open Reader RSS feed text", nil), [folder name]];
+			alertTitle = NSLocalizedString(@"Delete Open Reader RSS feed", nil);
 		}
 		else if (IsGroupFolder(folder))
 		{
@@ -3289,7 +3289,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[db deleteFolder:[folder itemId]];
             
 			if (IsGoogleReaderFolder(folder)) {
-				NSLog(@"Unsubscribe Google Reader folder");
+				NSLog(@"Unsubscribe Open Reader folder");
 				[[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
 			}
             // Unsubscribe at Google

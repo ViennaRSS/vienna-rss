@@ -256,7 +256,7 @@
 
 
 /* doGoogleOption
- * Action called by the Google Reader checkbox
+ * Action called by the Open Reader checkbox
  * Memorizes the setting in preferences
 */
 -(IBAction)doGoogleOption:(id)sender

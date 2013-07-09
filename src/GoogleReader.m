@@ -348,7 +348,7 @@ JSONDecoder * jsonDecoder;
 	} else {
 		LLog(@"Start first authentication...");
 		googleReaderStatus = isAuthenticating;
-		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Google Reader", nil) persist:NO];
+		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
 	}
 	
     // restore from Preferences and from keychain
@@ -437,7 +437,7 @@ JSONDecoder * jsonDecoder;
 
 -(void)submitLoadSubscriptions {
 	
-	[[NSApp delegate] setStatusMessage:@"Fetching Google Reader Subscriptions..." persist:NO];
+	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions...", nil) persist:NO];
 
 
 	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json&access_token=%@",APIBaseURL,ClientName,token]]];
@@ -504,7 +504,7 @@ JSONDecoder * jsonDecoder;
         [googleFeeds addObject:feedURL];
 	}
 	
-	//check if we have a folder which is not registered as a Google Reader feed
+	//check if we have a folder which is not registered as a Open Reader feed
 	for (Folder * f in [[NSApp delegate] folders]) {
 		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
 		{
@@ -674,7 +674,7 @@ JSONDecoder * jsonDecoder;
 }
 
 /* sharedManager
- * Returns the single instance of the Google Reader.
+ * Returns the single instance of the Open Reader.
  */
 +(GoogleReader *)sharedManager
 {

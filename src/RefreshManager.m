@@ -442,7 +442,7 @@ static RefreshManager * _refreshManager = nil;
 	
 	// Additional detail for the log
 	if (IsGoogleReaderFolder(folder)) {
-		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Google Reader to retrieve %@", nil), urlString]];
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Open Reader to retrieve %@", nil), urlString]];
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
 	}
@@ -513,7 +513,7 @@ static RefreshManager * _refreshManager = nil;
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} else { // GoogleReader
-		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Google Reader Feed", nil)];
+		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Open Reader Feed", nil)];
 		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} 
 

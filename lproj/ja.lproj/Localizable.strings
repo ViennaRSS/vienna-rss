@@ -418,3 +418,7 @@
 "Syncing" = "Syncing";
 "Reindex Database" = "Reindex Database";
 "Other" = "その他";
+"Authenticating on Open Reader" = "Authenticating on Open Reader";
+"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
+"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
+"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";

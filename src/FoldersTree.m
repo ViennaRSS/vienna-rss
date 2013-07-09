@@ -158,7 +158,7 @@
 
 -(void)handleGRSFolderChange:(NSNotification *)nc
 {
-    // No need to sync with Google because this is triggered when Google Reader
+    // No need to sync with Google because this is triggered when Open Reader
     // folder layout has changed. Making a sync call would be redundant.
     [self moveFolders:[nc object] withGoogleSync:NO];
 }
@@ -1060,7 +1060,7 @@
 	NSString * newName = (NSString *)object;
 	Folder * folder = [node folder];
 	
-	// Remove the "[S] " character on Google Reader feeds
+	// Remove the "[S] " character on Open Reader feeds
 	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"[S] "]) {
 		NSString *tmpName = [newName substringFromIndex:4];
 		newName = tmpName;
