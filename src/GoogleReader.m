@@ -140,7 +140,7 @@ JSONDecoder * jsonDecoder;
 	if (![self isReady])
 		[self authenticate];
 		
-	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false&r=n&n=%li&ot=%@&ck=%@&T=%@&access_token=%@",APIBaseURL,percentEscape([thisFolder feedURL]),ClientName,articleLimit,folderLastUpdate,TIMESTAMP, token, token]];
+	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false&r=o&ot=%@&ck=%@&n=%li&T=%@&access_token=%@",APIBaseURL,percentEscape([thisFolder feedURL]),ClientName,folderLastUpdate,TIMESTAMP,articleLimit, token, token]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
