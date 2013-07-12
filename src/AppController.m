@@ -1550,8 +1550,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     if ([mainWindow isKeyWindow]) {
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert addButtonWithTitle:@"OK"];
-    [alert setMessageText:@"Open Reader Authentication Failed"];
-    [alert setInformativeText:@"Please check username and password you entered for the Open Reader server in Vienna's preferences."];
+    [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
+    [alert setInformativeText:NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.",nil)];
     [alert setAlertStyle:NSWarningAlertStyle];
     [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     }
