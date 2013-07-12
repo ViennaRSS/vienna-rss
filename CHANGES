@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 12
+-------------
+- Replaced Google Reader support with support of BazQux and FeedHQ (other services might work too, just give them a try !)
+- Renamed our layouts : Horizontal, Vertical and Unified
+- The Unified layout has been completely rewritten. It now allows selection of an article (right click or click in the left margin)) for sharing it or marking it.
+- Vienna's integrated browser is now able to present the user a file selection dialog (for instance for uploading a file)
+- Added a "Reindex Database" menu item
+- Fix problems with icons in Leopard and Snow Leopard
+- Visual tweaks and improvements
+- Translation improvements (Brazilian Portuguese, Dutch, German, French, Korean)
+- Many bugfixes
+
 3.0.0 Beta 11
 -------------
 - Fix a bug on preserving article currently being read on refreshes

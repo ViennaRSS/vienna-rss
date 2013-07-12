@@ -46,5 +46,6 @@ Tags should be in one of the following formats:
 	9. Ensure also that these files are set to be group writable.
 	10. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
 	11. Post an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
+  9. Push the new tag to Github
 
  
