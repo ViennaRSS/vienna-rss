@@ -413,7 +413,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowStatusBar:) name:@"MA_Notify_StatusBarChanged" object:nil];
 	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-	//Google Reader Notifications
+	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 		
 	// Init the progress counter and status bar.
@@ -1550,8 +1550,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     if ([mainWindow isKeyWindow]) {
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
     [alert addButtonWithTitle:@"OK"];
-    [alert setMessageText:@"Google Authentication Failed"];
-    [alert setInformativeText:@"Please check Google username and password you entered in Sign In window."];
+    [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
+    [alert setInformativeText:NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.",nil)];
     [alert setAlertStyle:NSWarningAlertStyle];
     [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     }
@@ -2832,12 +2832,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 /* createNewGoogleReaderSubscription
- * Create a new Google Reader subscription for the specified URL under the given parent folder.
+ * Create a new Open Reader subscription for the specified URL under the given parent folder.
  */
 
 -(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId
 {
-	NSLog(@"Adding Google Reader Feed: %@ with Title: %@",url,title);
+	NSLog(@"Adding Open Reader Feed: %@ with Title: %@",url,title);
 	// Replace feed:// with http:// if necessary
 	if ([url hasPrefix:@"feed://"])
 		url = [NSString stringWithFormat:@"http://%@", [url substringFromIndex:7]];
@@ -3220,8 +3220,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		}
 		else if (IsGoogleReaderFolder(folder))
 		{
-			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Google Reader RSS feed text", nil), [folder name]];
-			alertTitle = NSLocalizedString(@"Delete Google Reader RSS feed", nil);
+			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Delete Open Reader RSS feed text", nil), [folder name]];
+			alertTitle = NSLocalizedString(@"Delete Open Reader RSS feed", nil);
 		}
 		else if (IsGroupFolder(folder))
 		{
@@ -3289,7 +3289,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[db deleteFolder:[folder itemId]];
             
 			if (IsGoogleReaderFolder(folder)) {
-				NSLog(@"Unsubscribe Google Reader folder");
+				NSLog(@"Unsubscribe Open Reader folder");
 				[[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
 			}
             // Unsubscribe at Google
@@ -3731,20 +3731,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-	static int waitNumber = 60;
+	static int waitNumber = 20;
 	//TOFIX: we should start local refresh feed, then sync refresh feed
 	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isReady]) {
 		NSLog(@"Waiting until Google Auth is done...");
 		waitNumber-- ;
 		if (![sender isKindOfClass:[NSTimer class]]) {
 			NSLog(@"Create a timer...");
-			[self setStatusMessage:NSLocalizedString(@"Acquiring Google OAuth 2.0 token...", nil) persist:NO];
+			[[GoogleReader sharedManager] authenticate];
 			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
 		}
-		// if we have tried for 3 minutes, we are probably logged out...
+		// if we have tried for 1 minute, there probably is a problem with logging...
 		if (waitNumber<=0) {
 			[[GoogleReader sharedManager] resetAuthentication];
-			waitNumber = 60;
+			waitNumber = 20;
 		}
 		return;
 	} else {
@@ -3752,7 +3752,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if ([sender isKindOfClass:[NSTimer class]]) {
 			[(NSTimer*)sender invalidate];
 			sender = nil;
-			waitNumber = 60;
+			waitNumber = 20;
 		}
 	}
 	

@@ -707,7 +707,7 @@
 		}
 		else
 		{
-			// Google Reader feeds and smart folders
+			// Open Reader feeds and smart folders
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
 			if (undoFlag && (IsGoogleReaderFolder(folder) || folderId == currentFolderId))

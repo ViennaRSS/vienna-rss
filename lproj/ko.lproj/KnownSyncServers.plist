@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BazQux</key>
+	<dict>
+		<key>Address</key>
+		<string>www.bazqux.com</string>
+		<key>Hint</key>
+		<string>Enter the info you set in BazQux's 'Mobile login' settings</string>
+	</dict>
+	<key>FeedHQ</key>
+	<dict>
+		<key>Address</key>
+		<string>feedhq.org</string>
+		<key>Hint</key>
+		<string>Enter email address and password associated to your FeedHQ account</string>
+	</dict>
+	<key>선택</key>
+	<dict>
+		<key>Address</key>
+		<string></string>
+		<key>Hint</key>
+		<string>Enter server's address and your credentials for this server</string>
+	</dict>
+</dict>
+</plist>

@@ -405,15 +405,22 @@
 "Use Current Style for Articles" = "Use Current Style for Articles";
 "Use Web Page for Articles" = "Use Web Page for Articles";
 
-/* Added for Google Reader support */
-"Force Refresh Selected Subscriptions From Google Reader" = "Force Refresh Selected Subscriptions From Google Reader";
-"Update Subscriptions From Google Reader" = "Update Subscriptions From Google Reader";
+/* Added for Open Reader support */
+"Force Refresh Selected Subscriptions From Open Reader" = "Force Refresh Selected Subscriptions From Open Reader";
+"Update Subscriptions From Open Reader" = "Update Subscriptions From Open Reader";
 "Hide Toolbar" = "Hide Toolbar";
-"Delete Google Reader RSS feed text" = "Delete Google Reader RSS feed text";
-"Delete Google Reader RSS feed" = "Delete Google Reader RSS feed";
+"Delete Open Reader RSS feed text" = "Delete Open Reader RSS feed text";
+"Delete Open Reader RSS feed" = "Delete Open Reader RSS feed";
 
 /* Added in 3.0.0 */
 "Last 48 hours" = "Last 48 hours";
 "Unread or flagged" = "Unread or flagged";
 "Syncing" = "Syncing";
 "Reindex Database" = "Reindex Database";
+"Other" = "Besteak";
+"Authenticating on Open Reader" = "Authenticating on Open Reader";
+"Connecting to Open Reader server to retrieve %@" = "Connecting to Open Reader server to retrieve %@";
+"Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
+"Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
+"Open Reader Authentication Failed" = "Open Reader Authentication Failed";
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";

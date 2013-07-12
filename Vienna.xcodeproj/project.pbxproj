@@ -61,13 +61,33 @@
 /* Begin PBXBuildFile section */
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
+		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
+		3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC591783FFC600D75515 /* KnownSyncServers.plist */; };
 		3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9517319979006DD2AB /* PXListDocumentView.m */; };
 		3A4DBEA117319979006DD2AB /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9717319979006DD2AB /* PXListView.m */; };
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
 		3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9C17319979006DD2AB /* PXListViewCell.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */; };
+		3A6D70D417856793009D0D3E /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D217856793009D0D3E /* SyncPreferences.xib */; };
+		3A6D70D717857B0E009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70DA17857B2B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70DD17857B40009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70DB17857B40009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E017857B62009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70DE17857B61009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E317857B89009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70E117857B89009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E617857BA6009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70E417857BA6009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70E917857BD2009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70E717857BD2009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70EC17857BF4009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70EA17857BF4009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70EF17857C22009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70ED17857C22009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70F217857C39009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F017857C39009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70F517857C5B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F317857C5B009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70F817857C83009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F617857C83009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70FB17857C9B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70F917857C9B009D0D3E /* KnownSyncServers.plist */; };
+		3A6D70FE17857CBD009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70FC17857CBD009D0D3E /* KnownSyncServers.plist */; };
+		3A6D710117857CD6009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */; };
+		3A6D710417857CFB009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */; };
 		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
+		3A8A344D17857D3B00E2E64B /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */; };
 		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
@@ -132,17 +152,6 @@
 		43BA974D16642B0000B95F35 /* SQLRow.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4830604911B00FE7994 /* SQLRow.m */; };
 		43BA974E16642B1900B95F35 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 662468AF13C60A2800C85417 /* JSONKit.h */; };
 		43BA974F16642B1B00B95F35 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
-		43BA975016642B2F00B95F35 /* GTMOAuth2Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = EACB097514A0EFDA00F48809 /* GTMOAuth2Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43BA975116642B3000B95F35 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */; };
-		43BA975216642B3200B95F35 /* GTMOAuth2SignIn.h in Headers */ = {isa = PBXBuildFile; fileRef = EACB097714A0EFDA00F48809 /* GTMOAuth2SignIn.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43BA975316642B3300B95F35 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */; };
-		43BA975416642B3400B95F35 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
-		43BA975516642B3600B95F35 /* GTMOAuth2WindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = EACB098214A0F01500F48809 /* GTMOAuth2WindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43BA975616642B3700B95F35 /* GTMOAuth2WindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB098314A0F01500F48809 /* GTMOAuth2WindowController.m */; };
-		43BA975716642B4100B95F35 /* GTMHTTPFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EACB097B14A0EFEE00F48809 /* GTMHTTPFetcher.h */; };
-		43BA975816642B4300B95F35 /* GTMHTTPFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */; };
-		43BA975916642B4400B95F35 /* GTMHTTPFetchHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = EACB097E14A0F00000F48809 /* GTMHTTPFetchHistory.h */; };
-		43BA975A16642B4500B95F35 /* GTMHTTPFetchHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = EACB097F14A0F00000F48809 /* GTMHTTPFetchHistory.m */; };
 		43BA976116642B8300B95F35 /* DisclosableView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAED83020A037A8200ED56E5 /* DisclosableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43BA976216642B8500B95F35 /* SNDisclosableView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAED82FE0A037A6700ED56E5 /* SNDisclosableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43BA976316642B8600B95F35 /* SNDisclosableView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAED82FF0A037A6700ED56E5 /* SNDisclosableView.m */; };
@@ -174,14 +183,6 @@
 		43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
 		43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
 		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
-		43BA980D166484BC00B95F35 /* GTMOAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97231663EAEB00B95F35 /* GTMOAuth2.framework */; };
-		43BA9811166484D000B95F35 /* GTMOAuth2.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97231663EAEB00B95F35 /* GTMOAuth2.framework */; };
-		43BA9953166485C100B95F35 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
-		43BA9954166485C100B95F35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43502506165DCC410018EDB7 /* Foundation.framework */; };
-		43BA9955166485C100B95F35 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D5165DCB980018EDB7 /* SystemConfiguration.framework */; };
-		43BA9956166485C100B95F35 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D7165DCB980018EDB7 /* WebKit.framework */; };
-		43BA995B166486E500B95F35 /* libGTMHTTP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA971A1663EACF00B95F35 /* libGTMHTTP.a */; };
-		43BA9960166486FF00B95F35 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D3165DCB980018EDB7 /* Security.framework */; };
 		43E695C8168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F29165EAA6E000997FB /* AdvancedPreferences.nib */; };
 		43E695C9168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F66165EAA6E000997FB /* AdvancedPreferences.nib */; };
 		43E695CA168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F9F165EAA6E000997FB /* AdvancedPreferences.nib */; };
@@ -618,8 +619,6 @@
 		43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8004165EAA6E000997FB /* SearchFolder.nib */; };
 		43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8006165EAA6E000997FB /* SearchFolder.strings */; };
 		43EE8406165EAA70000997FB /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8008165EAA6E000997FB /* SyncPreferences.xib */; };
-		43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
-		43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */; };
 		5740946716F5112B0087870F /* stylesMenuButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945316F5112B0087870F /* stylesMenuButtonSmall.tiff */; };
 		5740946816F5112B0087870F /* stylesMenuButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */; };
 		5740946916F5112B0087870F /* skipFolderButtonSmall.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945516F5112B0087870F /* skipFolderButtonSmall.tiff */; };
@@ -914,27 +913,6 @@
 			remoteGlobalIDString = 43BA97311663EE7B00B95F35;
 			remoteInfo = DisclosableView;
 		};
-		43BA980B166484AE00B95F35 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43BA97221663EAEB00B95F35;
-			remoteInfo = GTMOAuth2;
-		};
-		43BA9959166486DD00B95F35 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43BA97191663EACF00B95F35;
-			remoteInfo = GTMHTTP;
-		};
-		43F9A93F1674D05300A9A8F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43BA97111663EA5000B95F35;
-			remoteInfo = JSONKit;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -967,7 +945,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */,
-				43BA9811166484D000B95F35 /* GTMOAuth2.framework in Copy Frameworks */,
 				43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */,
 				B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */,
 			);
@@ -994,6 +971,8 @@
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
 		34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ClickableProgressIndicator.m; path = src/ClickableProgressIndicator.m; sourceTree = SOURCE_ROOT; };
 		344D9C020C3D4B2200498CA1 /* MainMenu.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = MainMenu.nib; path = Interfaces/MainMenu.nib; sourceTree = SOURCE_ROOT; };
+		3A20DC571783FF8D00D75515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A20DC5A1783FFC600D75515 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3A23F13415276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3A4DBE9417319979006DD2AB /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = 3rdparty/PXListView/PXListDocumentView.h; sourceTree = "<group>"; };
@@ -1013,6 +992,24 @@
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
 		3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		3A6D70D317856793009D0D3E /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = SyncPreferences.xib; sourceTree = "<group>"; };
+		3A6D70D617857B0E009D0D3E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cs; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70D917857B2B009D0D3E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70DC17857B40009D0D3E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70DF17857B61009D0D3E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70E217857B89009D0D3E /* eus */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = eus; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70E517857BA6009D0D3E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = it; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70E817857BD2009D0D3E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70EB17857BF4009D0D3E /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ko; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70EE17857C22009D0D3E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70F117857C39009D0D3E /* pt_BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = pt_BR; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70F417857C5B009D0D3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = pt; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70F717857C83009D0D3E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70FA17857C9B009D0D3E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = sv; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D70FD17857CBD009D0D3E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = tr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D710017857CD6009D0D3E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A6D710317857CFB009D0D3E /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_CN; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A8A344C17857D3B00E2E64B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_TW; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
@@ -1133,8 +1130,6 @@
 		43B4611E1690982D00F6EC9A /* ResourceRules.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ResourceRules.plist; path = signing/ResourceRules.plist; sourceTree = "<group>"; };
 		43BA970A1663E80700B95F35 /* libSQLiteLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSQLiteLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA97121663EA5000B95F35 /* libJSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		43BA971A1663EACF00B95F35 /* libGTMHTTP.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGTMHTTP.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		43BA97231663EAEB00B95F35 /* GTMOAuth2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMOAuth2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA97321663EE7C00B95F35 /* DisclosableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DisclosableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libASIHTTPRequest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA978D166449E000B95F35 /* ASIHTTPRequest-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "ASIHTTPRequest-All.xcconfig"; path = "configs/ASIHTTPRequest-All.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -1156,7 +1151,6 @@
 		43BA97CD1664752A00B95F35 /* DisclosableView-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "DisclosableView-All.xcconfig"; path = "configs/DisclosableView-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97CE1664752A00B95F35 /* DisclosableView-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "DisclosableView-Dep.xcconfig"; path = "configs/DisclosableView-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97CF1664752A00B95F35 /* DisclosableView-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "DisclosableView-Dev.xcconfig"; path = "configs/DisclosableView-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA98051664835500B95F35 /* GTMOAuth2Framework-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GTMOAuth2Framework-Info.plist"; path = "3rdparty/GTMOAuth2/GTMOAuth2Framework-Info.plist"; sourceTree = SOURCE_ROOT; };
 		43BA9806166483B900B95F35 /* GTMOAuth2-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-All.xcconfig"; path = "configs/GTMOAuth2-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA9807166483B900B95F35 /* GTMOAuth2-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-Dep.xcconfig"; path = "configs/GTMOAuth2-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-Dev.xcconfig"; path = "configs/GTMOAuth2-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -1892,17 +1886,6 @@
 		EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASINetworkQueue.m; path = 3rdparty/ASIHTTPRequest/ASINetworkQueue.m; sourceTree = SOURCE_ROOT; };
 		EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = 3rdparty/ASIHTTPRequest/ASIProgressDelegate.h; sourceTree = SOURCE_ROOT; };
 		EA6D3E5914D8048C004DCB80 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = src/Debug.h; sourceTree = SOURCE_ROOT; };
-		EACB097514A0EFDA00F48809 /* GTMOAuth2Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2Authentication.h; path = 3rdparty/GTMOAuth2/GTMOAuth2Authentication.h; sourceTree = SOURCE_ROOT; };
-		EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2Authentication.m; path = 3rdparty/GTMOAuth2/GTMOAuth2Authentication.m; sourceTree = SOURCE_ROOT; };
-		EACB097714A0EFDA00F48809 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2SignIn.h; path = 3rdparty/GTMOAuth2/GTMOAuth2SignIn.h; sourceTree = SOURCE_ROOT; };
-		EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2SignIn.m; path = 3rdparty/GTMOAuth2/GTMOAuth2SignIn.m; sourceTree = SOURCE_ROOT; };
-		EACB097B14A0EFEE00F48809 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = 3rdparty/GTMHTTP/GTMHTTPFetcher.h; sourceTree = SOURCE_ROOT; };
-		EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = 3rdparty/GTMHTTP/GTMHTTPFetcher.m; sourceTree = SOURCE_ROOT; };
-		EACB097E14A0F00000F48809 /* GTMHTTPFetchHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetchHistory.h; path = 3rdparty/GTMHTTP/GTMHTTPFetchHistory.h; sourceTree = SOURCE_ROOT; };
-		EACB097F14A0F00000F48809 /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetchHistory.m; path = 3rdparty/GTMHTTP/GTMHTTPFetchHistory.m; sourceTree = SOURCE_ROOT; };
-		EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GTMOAuth2Window.xib; path = 3rdparty/GTMOAuth2/GTMOAuth2Window.xib; sourceTree = SOURCE_ROOT; };
-		EACB098214A0F01500F48809 /* GTMOAuth2WindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2WindowController.h; path = 3rdparty/GTMOAuth2/GTMOAuth2WindowController.h; sourceTree = SOURCE_ROOT; };
-		EACB098314A0F01500F48809 /* GTMOAuth2WindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2WindowController.m; path = 3rdparty/GTMOAuth2/GTMOAuth2WindowController.m; sourceTree = SOURCE_ROOT; };
 		EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSMTabBarControl.framework; path = 3rdparty/PSMTabBarControl.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1918,27 +1901,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43BA97181663EACF00B95F35 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43BA97211663EAEB00B95F35 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA9953166485C100B95F35 /* Cocoa.framework in Frameworks */,
-				43BA9954166485C100B95F35 /* Foundation.framework in Frameworks */,
-				43BA9960166486FF00B95F35 /* Security.framework in Frameworks */,
-				43BA9955166485C100B95F35 /* SystemConfiguration.framework in Frameworks */,
-				43BA9956166485C100B95F35 /* WebKit.framework in Frameworks */,
-				43BA995B166486E500B95F35 /* libGTMHTTP.a in Frameworks */,
-				43F9A9411674D05900A9A8F9 /* libJSONKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1975,7 +1937,6 @@
 				43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */,
 				43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
-				43BA980D166484BC00B95F35 /* GTMOAuth2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2005,8 +1966,6 @@
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
 				43BA970A1663E80700B95F35 /* libSQLiteLib.a */,
 				43BA97121663EA5000B95F35 /* libJSONKit.a */,
-				43BA971A1663EACF00B95F35 /* libGTMHTTP.a */,
-				43BA97231663EAEB00B95F35 /* GTMOAuth2.framework */,
 				43BA97321663EE7C00B95F35 /* DisclosableView.framework */,
 				43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */,
 			);
@@ -2206,8 +2165,6 @@
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
 				AAED82F40A0379FE00ED56E5 /* DisclosableView */,
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
-				EACB097314A0EF9F00F48809 /* GTMHTTP */,
-				43BA97051663E5CD00B95F35 /* GTMOAuth2 */,
 				662468AE13C609F900C85417 /* JSONKit */,
 				AA2B6CEF0C2E653C00415851 /* SQLite */,
 				AA26F478060490F400FE7994 /* SQLiteLib */,
@@ -2250,21 +2207,6 @@
 				4398241D1666B37000FFE219 /* Translations.sh */,
 			);
 			name = Scripts;
-			sourceTree = "<group>";
-		};
-		43BA97051663E5CD00B95F35 /* GTMOAuth2 */ = {
-			isa = PBXGroup;
-			children = (
-				43BA98051664835500B95F35 /* GTMOAuth2Framework-Info.plist */,
-				EACB097514A0EFDA00F48809 /* GTMOAuth2Authentication.h */,
-				EACB097614A0EFDA00F48809 /* GTMOAuth2Authentication.m */,
-				EACB097714A0EFDA00F48809 /* GTMOAuth2SignIn.h */,
-				EACB097814A0EFDA00F48809 /* GTMOAuth2SignIn.m */,
-				EACB098114A0F01500F48809 /* GTMOAuth2Window.xib */,
-				EACB098214A0F01500F48809 /* GTMOAuth2WindowController.h */,
-				EACB098314A0F01500F48809 /* GTMOAuth2WindowController.m */,
-			);
-			name = GTMOAuth2;
 			sourceTree = "<group>";
 		};
 		43EE7546165E80D4000997FB /* Public Keys */ = {
@@ -2445,6 +2387,7 @@
 				43EE7F51165EAA6E000997FB /* SearchFolder.nib */,
 				43EE7F53165EAA6E000997FB /* SearchFolder.strings */,
 				43EE7F55165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = cs.lproj;
 			path = lproj/cs.lproj;
@@ -2475,6 +2418,7 @@
 				43EE7F8C165EAA6E000997FB /* SearchFolder.nib */,
 				43EE7F8E165EAA6E000997FB /* SearchFolder.strings */,
 				43EE7F90165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = da.lproj;
 			path = lproj/da.lproj;
@@ -2506,6 +2450,7 @@
 				43EE7FC7165EAA6E000997FB /* SearchFolder.nib */,
 				43EE7FC9165EAA6E000997FB /* SearchFolder.strings */,
 				43EE7FCB165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70DB17857B40009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = de.lproj;
 			path = lproj/de.lproj;
@@ -2538,6 +2483,7 @@
 				43EE8004165EAA6E000997FB /* SearchFolder.nib */,
 				43EE8006165EAA6E000997FB /* SearchFolder.strings */,
 				43EE8008165EAA6E000997FB /* SyncPreferences.xib */,
+				3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */,
 			);
 			name = en.lproj;
 			path = lproj/en.lproj;
@@ -2579,6 +2525,7 @@
 				43EE803F165EAA6E000997FB /* SearchFolder.nib */,
 				43EE8041165EAA6E000997FB /* SearchFolder.strings */,
 				43EE8043165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70DE17857B61009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = es.lproj;
 			path = lproj/es.lproj;
@@ -2610,6 +2557,7 @@
 				43EE807A165EAA6E000997FB /* SearchFolder.nib */,
 				43EE807C165EAA6E000997FB /* SearchFolder.strings */,
 				43EE807E165EAA6E000997FB /* SyncPreferences.xib */,
+				3A6D70E117857B89009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = eus.lproj;
 			path = lproj/eus.lproj;
@@ -2641,6 +2589,7 @@
 				43EE80B5165EAA6E000997FB /* SearchFolder.nib */,
 				43EE80B7165EAA6E000997FB /* SearchFolder.strings */,
 				43EE80B9165EAA6E000997FB /* SyncPreferences.xib */,
+				3A20DC591783FFC600D75515 /* KnownSyncServers.plist */,
 			);
 			name = fr.lproj;
 			path = lproj/fr.lproj;
@@ -2672,6 +2621,7 @@
 				43EE80F0165EAA6F000997FB /* SearchFolder.nib */,
 				43EE80F2165EAA6F000997FB /* SearchFolder.strings */,
 				43EE80F4165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70E417857BA6009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = it.lproj;
 			path = lproj/it.lproj;
@@ -2703,6 +2653,7 @@
 				43EE812A165EAA6F000997FB /* SearchFolder.nib */,
 				43EE812C165EAA6F000997FB /* SearchFolder.strings */,
 				43EE812E165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70E717857BD2009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = ja.lproj;
 			path = lproj/ja.lproj;
@@ -2733,6 +2684,8 @@
 				43EE8163165EAA6F000997FB /* RSSSources.plist */,
 				43EE8165165EAA6F000997FB /* SearchFolder.nib */,
 				43EE8167165EAA6F000997FB /* SearchFolder.strings */,
+				3A6D70D217856793009D0D3E /* SyncPreferences.xib */,
+				3A6D70EA17857BF4009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = ko.lproj;
 			path = lproj/ko.lproj;
@@ -2764,6 +2717,7 @@
 				43EE81A1165EAA6F000997FB /* SearchFolder.nib */,
 				43EE81A3165EAA6F000997FB /* SearchFolder.strings */,
 				43EE81A5165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70ED17857C22009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = nl.lproj;
 			path = lproj/nl.lproj;
@@ -2794,6 +2748,7 @@
 				43EE81DA165EAA6F000997FB /* SearchFolder.nib */,
 				43EE81DC165EAA6F000997FB /* SearchFolder.strings */,
 				43EE81DE165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F017857C39009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = pt_BR.lproj;
 			path = lproj/pt_BR.lproj;
@@ -2825,6 +2780,7 @@
 				43EE8215165EAA6F000997FB /* SearchFolder.nib */,
 				43EE8217165EAA6F000997FB /* SearchFolder.strings */,
 				43EE8219165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F317857C5B009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = pt.lproj;
 			path = lproj/pt.lproj;
@@ -2856,6 +2812,7 @@
 				43EE8250165EAA6F000997FB /* SearchFolder.nib */,
 				43EE8252165EAA6F000997FB /* SearchFolder.strings */,
 				43EE8254165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F617857C83009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = ru.lproj;
 			path = lproj/ru.lproj;
@@ -2887,6 +2844,7 @@
 				43EE828D165EAA6F000997FB /* SearchFolder.nib */,
 				43EE828F165EAA6F000997FB /* SearchFolder.strings */,
 				43EE8291165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70F917857C9B009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = sv.lproj;
 			path = lproj/sv.lproj;
@@ -2918,6 +2876,7 @@
 				43EE82C8165EAA6F000997FB /* SearchFolder.nib */,
 				43EE82CA165EAA6F000997FB /* SearchFolder.strings */,
 				43EE82CC165EAA6F000997FB /* SyncPreferences.xib */,
+				3A6D70FC17857CBD009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = tr.lproj;
 			path = lproj/tr.lproj;
@@ -2949,6 +2908,7 @@
 				43EE8303165EAA70000997FB /* SearchFolder.nib */,
 				43EE8305165EAA70000997FB /* SearchFolder.strings */,
 				43EE8307165EAA70000997FB /* SyncPreferences.xib */,
+				3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = uk.lproj;
 			path = lproj/uk.lproj;
@@ -2980,6 +2940,7 @@
 				43EE833E165EAA70000997FB /* SearchFolder.nib */,
 				43EE8340165EAA70000997FB /* SearchFolder.strings */,
 				43EE8342165EAA70000997FB /* SyncPreferences.xib */,
+				3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */,
 			);
 			name = zh_CN.lproj;
 			path = lproj/zh_CN.lproj;
@@ -3011,6 +2972,7 @@
 				43EE8379165EAA70000997FB /* SearchFolder.nib */,
 				43EE837B165EAA70000997FB /* SearchFolder.strings */,
 				43EE837D165EAA70000997FB /* SyncPreferences.xib */,
+				3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */,
 			);
 			name = zh_TW.lproj;
 			path = lproj/zh_TW.lproj;
@@ -3387,17 +3349,6 @@
 			name = DebugHelper;
 			sourceTree = "<group>";
 		};
-		EACB097314A0EF9F00F48809 /* GTMHTTP */ = {
-			isa = PBXGroup;
-			children = (
-				EACB097B14A0EFEE00F48809 /* GTMHTTPFetcher.h */,
-				EACB097E14A0F00000F48809 /* GTMHTTPFetchHistory.h */,
-				EACB097F14A0F00000F48809 /* GTMHTTPFetchHistory.m */,
-				EACB097C14A0EFEE00F48809 /* GTMHTTPFetcher.m */,
-			);
-			name = GTMHTTP;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3416,25 +3367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BA974E16642B1900B95F35 /* JSONKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43BA97161663EACF00B95F35 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA975716642B4100B95F35 /* GTMHTTPFetcher.h in Headers */,
-				43BA975916642B4400B95F35 /* GTMHTTPFetchHistory.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43BA971E1663EAEB00B95F35 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA975016642B2F00B95F35 /* GTMOAuth2Authentication.h in Headers */,
-				43BA975216642B3200B95F35 /* GTMOAuth2SignIn.h in Headers */,
-				43BA975516642B3600B95F35 /* GTMOAuth2WindowController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3503,43 +3435,6 @@
 			productReference = 43BA97121663EA5000B95F35 /* libJSONKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		43BA97191663EACF00B95F35 /* GTMHTTP */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43BA971D1663EAD400B95F35 /* Build configuration list for PBXNativeTarget "GTMHTTP" */;
-			buildPhases = (
-				43BA97161663EACF00B95F35 /* Headers */,
-				43BA97171663EACF00B95F35 /* Sources */,
-				43BA97181663EACF00B95F35 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = GTMHTTP;
-			productName = GTMHTTP;
-			productReference = 43BA971A1663EACF00B95F35 /* libGTMHTTP.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		43BA97221663EAEB00B95F35 /* GTMOAuth2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43BA97271663EAEC00B95F35 /* Build configuration list for PBXNativeTarget "GTMOAuth2" */;
-			buildPhases = (
-				43BA971E1663EAEB00B95F35 /* Headers */,
-				43BA971F1663EAEB00B95F35 /* Resources */,
-				43BA97201663EAEB00B95F35 /* Sources */,
-				43BA97211663EAEB00B95F35 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				43BA995A166486DD00B95F35 /* PBXTargetDependency */,
-				43F9A9401674D05300A9A8F9 /* PBXTargetDependency */,
-			);
-			name = GTMOAuth2;
-			productName = GTMOAuth2;
-			productReference = 43BA97231663EAEB00B95F35 /* GTMOAuth2.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		43BA97311663EE7B00B95F35 /* DisclosableView */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43BA97361663EE7C00B95F35 /* Build configuration list for PBXNativeTarget "DisclosableView" */;
@@ -3594,11 +3489,10 @@
 			);
 			dependencies = (
 				3A7567AA1674EB48009C0900 /* PBXTargetDependency */,
-				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 				43BA979616644E3900B95F35 /* PBXTargetDependency */,
 				43BA97C816646E6D00B95F35 /* PBXTargetDependency */,
 				43BA97DA1664766100B95F35 /* PBXTargetDependency */,
-				43BA980C166484AE00B95F35 /* PBXTargetDependency */,
+				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 			);
 			name = Vienna;
 			productInstallPath = "$(HOME)/Applications";
@@ -3654,29 +3548,19 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Vienna */,
-				430C4ACF166172BD0079C9FC /* Autorevision */,
-				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				43BA973B16642A7D00B95F35 /* ASIHTTPRequest */,
 				43BA97311663EE7B00B95F35 /* DisclosableView */,
-				43BA97191663EACF00B95F35 /* GTMHTTP */,
-				43BA97221663EAEB00B95F35 /* GTMOAuth2 */,
 				43BA97111663EA5000B95F35 /* JSONKit */,
 				43BA97091663E80700B95F35 /* SQLiteLib */,
+				430C4ACF166172BD0079C9FC /* Autorevision */,
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
+				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		43BA971F1663EAEB00B95F35 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA975416642B3400B95F35 /* GTMOAuth2Window.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		43BA972E1663EE7B00B95F35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4255,7 +4139,6 @@
 				EA1A7620148FA32B004A6B8F /* googleFeed.tiff in Resources */,
 				430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */,
 				430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */,
-				43F9A9811674DBA000A9A8F9 /* GTMOAuth2Window.xib in Resources */,
 				3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */,
 				5766690016DEB5A7001C8786 /* filter-icon@2x.tiff in Resources */,
 				5766690316DEB5C4001C8786 /* blankButton@2x.tiff in Resources */,
@@ -4310,6 +4193,26 @@
 				5740947A16F5112B0087870F /* cancelRefreshButtonSmall@2x.tiff in Resources */,
 				57F7E2F116F534FE00D4702E /* vienna3plugin.icns in Resources */,
 				57F7E2F216F534FE00D4702E /* vienna3style.icns in Resources */,
+				3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */,
+				3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */,
+				3A6D70D417856793009D0D3E /* SyncPreferences.xib in Resources */,
+				3A6D70D717857B0E009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70DA17857B2B009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70DD17857B40009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E017857B62009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E317857B89009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E617857BA6009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70E917857BD2009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70EC17857BF4009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70EF17857C22009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70F217857C39009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70F517857C5B009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70F817857C83009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70FB17857C9B009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D70FE17857CBD009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D710117857CD6009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A6D710417857CFB009D0D3E /* KnownSyncServers.plist in Resources */,
+				3A8A344D17857D3B00E2E64B /* KnownSyncServers.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4437,25 +4340,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				43BA974F16642B1B00B95F35 /* JSONKit.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43BA97171663EACF00B95F35 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA975816642B4300B95F35 /* GTMHTTPFetcher.m in Sources */,
-				43BA975A16642B4500B95F35 /* GTMHTTPFetchHistory.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43BA97201663EAEB00B95F35 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA975116642B3000B95F35 /* GTMOAuth2Authentication.m in Sources */,
-				43BA975316642B3300B95F35 /* GTMOAuth2SignIn.m in Sources */,
-				43BA975616642B3700B95F35 /* GTMOAuth2WindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4628,24 +4512,169 @@
 			target = 43BA97311663EE7B00B95F35 /* DisclosableView */;
 			targetProxy = 43BA97D91664766100B95F35 /* PBXContainerItemProxy */;
 		};
-		43BA980C166484AE00B95F35 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43BA97221663EAEB00B95F35 /* GTMOAuth2 */;
-			targetProxy = 43BA980B166484AE00B95F35 /* PBXContainerItemProxy */;
-		};
-		43BA995A166486DD00B95F35 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43BA97191663EACF00B95F35 /* GTMHTTP */;
-			targetProxy = 43BA9959166486DD00B95F35 /* PBXContainerItemProxy */;
-		};
-		43F9A9401674D05300A9A8F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43BA97111663EA5000B95F35 /* JSONKit */;
-			targetProxy = 43F9A93F1674D05300A9A8F9 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A20DC571783FF8D00D75515 /* en */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A20DC591783FFC600D75515 /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A20DC5A1783FFC600D75515 /* fr */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70D217856793009D0D3E /* SyncPreferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70D317856793009D0D3E /* ko */,
+			);
+			name = SyncPreferences.xib;
+			sourceTree = "<group>";
+		};
+		3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70D617857B0E009D0D3E /* cs */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70D917857B2B009D0D3E /* da */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70DB17857B40009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70DC17857B40009D0D3E /* de */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70DE17857B61009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70DF17857B61009D0D3E /* es */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70E117857B89009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70E217857B89009D0D3E /* eus */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70E417857BA6009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70E517857BA6009D0D3E /* it */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70E717857BD2009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70E817857BD2009D0D3E /* ja */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70EA17857BF4009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70EB17857BF4009D0D3E /* ko */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70ED17857C22009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70EE17857C22009D0D3E /* nl */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F017857C39009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70F117857C39009D0D3E /* pt_BR */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F317857C5B009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70F417857C5B009D0D3E /* pt */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F617857C83009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70F717857C83009D0D3E /* ru */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70F917857C9B009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70FA17857C9B009D0D3E /* sv */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70FC17857CBD009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D70FD17857CBD009D0D3E /* tr */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D710017857CD6009D0D3E /* uk */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A6D710317857CFB009D0D3E /* zh_CN */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
+		3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A8A344C17857D3B00E2E64B /* zh_TW */,
+			);
+			name = KnownSyncServers.plist;
+			sourceTree = "<group>";
+		};
 		43EE7F29165EAA6E000997FB /* AdvancedPreferences.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -8611,34 +8640,6 @@
 			};
 			name = Deployment;
 		};
-		43BA971B1663EAD000B95F35 /* Development */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA97A616645E1D00B95F35 /* GTMHTTP-Dev.xcconfig */;
-			buildSettings = {
-			};
-			name = Development;
-		};
-		43BA971C1663EAD000B95F35 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA97A516645E1D00B95F35 /* GTMHTTP-Dep.xcconfig */;
-			buildSettings = {
-			};
-			name = Deployment;
-		};
-		43BA97251663EAEC00B95F35 /* Development */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */;
-			buildSettings = {
-			};
-			name = Development;
-		};
-		43BA97261663EAEC00B95F35 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA9807166483B900B95F35 /* GTMOAuth2-Dep.xcconfig */;
-			buildSettings = {
-			};
-			name = Deployment;
-		};
 		43BA97341663EE7C00B95F35 /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97CF1664752A00B95F35 /* DisclosableView-Dev.xcconfig */;
@@ -8705,20 +8706,6 @@
 		43D4D6F1166FE08C00BA9675 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97CF1664752A00B95F35 /* DisclosableView-Dev.xcconfig */;
-			buildSettings = {
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6F2166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA97A616645E1D00B95F35 /* GTMHTTP-Dev.xcconfig */;
-			buildSettings = {
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6F3166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */;
 			buildSettings = {
 			};
 			name = StaticAnalyzer;
@@ -8850,26 +8837,6 @@
 				43BA97131663EA5200B95F35 /* Development */,
 				43BA97141663EA5200B95F35 /* Deployment */,
 				43D4D6F4166FE08C00BA9675 /* StaticAnalyzer */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		43BA971D1663EAD400B95F35 /* Build configuration list for PBXNativeTarget "GTMHTTP" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43BA971B1663EAD000B95F35 /* Development */,
-				43BA971C1663EAD000B95F35 /* Deployment */,
-				43D4D6F2166FE08C00BA9675 /* StaticAnalyzer */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		43BA97271663EAEC00B95F35 /* Build configuration list for PBXNativeTarget "GTMOAuth2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43BA97251663EAEC00B95F35 /* Development */,
-				43BA97261663EAEC00B95F35 /* Deployment */,
-				43D4D6F3166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;

@@ -180,9 +180,11 @@ static Preferences * _standardPreferences = nil;
 		searchMethod = [[NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]] retain];
 		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
         
-        // Google reader sync
+        // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
+		syncServer = [[userPrefs valueForKey:MAPref_SyncServer] retain];
+		syncingUser = [[userPrefs valueForKey:MAPref_SyncingUser] retain];
 				
 		//Sparkle autoupdate
 		checkForNewOnStartup = [[SUUpdater sharedUpdater] automaticallyChecksForUpdates];
@@ -227,6 +229,8 @@ static Preferences * _standardPreferences = nil;
 	[profilePath release];
 	[feedSourcesFolder release];
 	[searchMethod release];
+	[syncServer release];
+	[syncingUser release];
 	[super dealloc];
 }
 
@@ -258,7 +262,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
-	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_Manual] forKey:MAPref_AutoSortFoldersTree];
+	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_ByName] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
@@ -1101,7 +1105,7 @@ static Preferences * _standardPreferences = nil;
 }
 
 #pragma mark -
-#pragma mark Google Reader syncing
+#pragma mark Open Reader syncing
 
 -(BOOL)syncGoogleReader 
 {
@@ -1119,7 +1123,7 @@ static Preferences * _standardPreferences = nil;
 }
 
 /* Getter/setters for prefersGoogleNewSubscription
- * Specifies whether Vienna defaults to Google Reader when entering a new subscription
+ * Specifies whether Vienna defaults to Open Reader when entering a new subscription
  */
 -(BOOL)prefersGoogleNewSubscription
 {
@@ -1133,6 +1137,46 @@ static Preferences * _standardPreferences = nil;
 		prefersGoogleNewSubscription = flag;
 		[self setBool:prefersGoogleNewSubscription forKey:MAPref_GoogleNewSubscription];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleReaderNewSubscriptionChange" object:nil];
+	}
+}
+
+-(NSString *)syncServer
+{
+	return syncServer;
+}
+
+/* setSyncServer
+ * Changes the server used for synchronization and sends a notification
+ */
+-(void)setSyncServer:(NSString *)newServer
+{
+	if (![syncServer isEqualToString:newServer])
+	{
+		[newServer retain];
+		[syncServer release];
+		syncServer = newServer;
+		[self setString:syncServer forKey:MAPref_SyncServer];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+	}
+}
+
+-(NSString *)syncingUser
+{
+	return syncingUser;
+}
+
+/* setSyncingUser
+ * Changes the user name used for synchronization and sends a notification
+ */
+-(void)setSyncingUser:(NSString *)newUser
+{
+	if (![syncingUser isEqualToString:newUser])
+	{
+		[newUser retain];
+		[syncingUser release];
+		syncingUser = newUser;
+		[self setString:syncingUser forKey:MAPref_SyncingUser];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
 }
 

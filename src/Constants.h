@@ -71,6 +71,8 @@ extern NSString * MAPref_SearchMethod;
 extern NSString * MAPref_SyncGoogleReader;
 extern NSString * MAPref_GoogleNewSubscription;
 extern NSString * MAPref_ConcurrentDownloads;
+extern NSString * MAPref_SyncServer;
+extern NSString * MAPref_SyncingUser;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;

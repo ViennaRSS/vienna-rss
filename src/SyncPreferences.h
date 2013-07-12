@@ -10,14 +10,17 @@
 
 @interface SyncPreferences : NSWindowController <NSTextFieldDelegate, NSWindowDelegate> {
     NSButton * syncButton;
-    NSButton * createButton;
-    NSModalSession modalSession;
+	IBOutlet NSPopUpButton * openReaderSource; //List of known service providers
+	NSDictionary * sourcesDict;
+    IBOutlet NSTextField * credentialsInfoText;
+	IBOutlet NSTextField * openReaderHost;
+	IBOutlet NSTextField * username;
+    IBOutlet NSSecureTextField * password;
 }
 
 @property (assign) IBOutlet NSButton *syncButton;
-@property (assign) IBOutlet NSButton *createButton;
 
 -(IBAction)changeSyncGoogleReader:(id)sender;
--(IBAction)createGoogleAccount:(id)sender;
-
+-(IBAction)changeSource:(id)sender;
+-(IBAction)visitWebsite:(id)sender;
 @end
