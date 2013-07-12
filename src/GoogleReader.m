@@ -271,40 +271,40 @@ JSONDecoder * jsonDecoder;
 		Database *db = [Database sharedDatabase];
 		NSInteger newArticlesFromFeed = 0;
 
-			// Here's where we add the articles to the database
-			if ([articleArray count] > 0)
-			{
-				NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
+		// Here's where we add the articles to the database
+		if ([articleArray count] > 0)
+		{
+			NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
 
-				[refreshedFolder clearCache];
-				// Should we wrap the entire loop or just individual article updates?
-				[db beginTransaction];
-				//BOOL hasCache = [db initArticleArray:refreshedFolder];
-					
-				for (Article * article in articleArray)
+			[refreshedFolder clearCache];
+			// Should we wrap the entire loop or just individual article updates?
+			[db beginTransaction];
+			//BOOL hasCache = [db initArticleArray:refreshedFolder];
+
+			for (Article * article in articleArray)
+			{
+				if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
 				{
-					if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
-					{
-						[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
-						[db markArticleFlagged:[refreshedFolder itemId] guid:[article guid] isFlagged:[article isFlagged]];
-					}
-					else
-						newArticlesFromFeed++;
+					[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
+					[db markArticleFlagged:[refreshedFolder itemId] guid:[article guid] isFlagged:[article isFlagged]];
 				}
-				
-				// Set the last update date for this folder.
-				[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-				[db commitTransaction];
+				else
+					newArticlesFromFeed++;
 			}
-							
-			// Set the last update date given by the Open Reader server for this folder.
-			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
-			// Set the HTML homepage for this folder.
-			// a legal JSON string can have, as its outer "container", either an array or a dictionary/"object"
-			if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]])
-				[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
-			else
-				[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]];
+
+			// Set the last update date for this folder.
+			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
+			[db commitTransaction];
+		}
+
+		// Set the last update date given by the Open Reader server for this folder.
+		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
+		// Set the HTML homepage for this folder.
+		// a legal JSON string can have, as its outer "container", either an array or a dictionary/"object"
+		if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]])
+			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
+		else
+			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]];
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
