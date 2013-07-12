@@ -61,8 +61,9 @@
 	NSFont * articleFont;
 	NSArray * articleSortDescriptors;
 	SearchMethod * searchMethod;
-    NSDate * lastGoogleSyncDate;
 	NSUInteger concurrentDownloads;
+	NSString * syncServer;
+	NSString * syncingUser;
 }
 
 // Accessor functions
@@ -216,7 +217,7 @@
 -(void)setMarkUpdatedAsNew:(BOOL)flag;
 
 #pragma mark -
-#pragma mark Google reader syncing
+#pragma mark Open Reader syncing
 
 -(BOOL)syncGoogleReader;
 -(void)setSyncGoogleReader:(BOOL)flag;
@@ -224,4 +225,11 @@
 -(BOOL)prefersGoogleNewSubscription;
 -(void)setPrefersGoogleNewSubscription:(BOOL)flag;
 
+// server used for syncing
+-(NSString *)syncServer;
+-(void)setSyncServer:(NSString *)newServer;
+
+// username used for syncing
+-(NSString *)syncingUser;
+-(void)setSyncingUser:(NSString *)newUser;
 @end

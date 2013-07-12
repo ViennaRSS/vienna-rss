@@ -3,7 +3,8 @@ Vienna
 
 [Vienna](http://www.vienna-rss.org) is an RSS/Atom reader for Mac OS X.
 
-Vienna can connect directly to the websites you want to track and/or sync with a Google Reader account.
+Vienna can connect directly to the websites you want to track.
+Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com and FeedHQ.org.
 
 Downloading binaries
 --------------------

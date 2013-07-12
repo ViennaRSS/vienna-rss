@@ -335,7 +335,7 @@
 						<object class="NSButton" id="972808856">
 							<reference key="NSNextResponder" ref="607508653"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{21, 43}, {195, 18}}</string>
+							<string key="NSFrame">{{21, 43}, {185, 18}}</string>
 							<reference key="NSSuperview" ref="607508653"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="293587667"/>
@@ -343,7 +343,7 @@
 							<object class="NSButtonCell" key="NSCell" id="751285207">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Subscribe in Google Reader</string>
+								<string key="NSContents">Subscribe in Open Reader</string>
 								<reference key="NSSupport" ref="35791019"/>
 								<reference key="NSControlView" ref="972808856"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -368,7 +368,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="591935437"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -477,7 +477,7 @@
 					<string key="NSFrame">{{1, 9}, {423, 167}}</string>
 					<reference key="NSNextKeyView" ref="60278165"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>

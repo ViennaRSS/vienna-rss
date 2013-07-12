@@ -70,6 +70,8 @@ NSString * MAPref_SearchMethod = @"SearchMethod";
 NSString * MAPref_SyncGoogleReader = @"SyncGoogleReader";
 NSString * MAPref_GoogleNewSubscription = @"GoogleNewSubscription";
 NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads"; 
+NSString * MAPref_SyncServer = @"SyncServer";
+NSString * MAPref_SyncingUser = @"SyncingUser";
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;
 const NSInteger MA_Default_RefreshThreads = 20;
@@ -106,4 +108,4 @@ NSString * MA_PBoardType_url = @"CorePasteboardFlavorType 0x75726C20";
 NSString * MA_PBoardType_urln = @"CorePasteboardFlavorType 0x75726C6E";
 
 // Sync folder separator
-//NSString * MA_Sync_FolderSeparator = @" Ñ ";
+//NSString * MA_Sync_FolderSeparator = @" â€” ";

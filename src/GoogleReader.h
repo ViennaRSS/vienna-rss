@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
-#import "GTMOAuth2WindowController.h"
 #import "Folder.h"
 #import "ASINetworkQueue.h"
 #import "ActivityLog.h"
@@ -17,22 +16,15 @@
 @interface GoogleReader : NSObject <ASIHTTPRequestDelegate> {
 @private
     NSString * token;
-	NSString * actionToken;
-	GTMOAuth2Authentication *oAuthObject;
 	NSMutableArray *localFeeds;
-	NSString * readerUser;
-	NSTimer * tokenTimer;
-	NSTimer * actionTokenTimer;
 	NSUInteger countOfNewArticles;
+	NSString * clientAuthToken;
 }
 
 @property (nonatomic, copy) NSMutableArray * localFeeds;
 @property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSString *actionToken;
-@property (nonatomic, retain) NSString *readerUser;
 @property (nonatomic, retain) NSTimer * tokenTimer;
-@property (nonatomic, retain) NSTimer * actionTokenTimer;
-
+@property (nonatomic, retain) NSTimer * authTimer;
 
 +(GoogleReader *)sharedManager;
 

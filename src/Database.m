@@ -886,7 +886,7 @@ static Database * _sharedDatabase = nil;
 	NSInteger newItemId = [self createFolderOnDatabase:name underParent:parentId withType:type];
 	if (newItemId != -1)
 	{
-		// Add this new folder to our internal cache. If this is an RSS or Google Reader
+		// Add this new folder to our internal cache. If this is an RSS or Open Reader
 		// folder, mark it so that somewhere down the line we'll request the
 		// image for the folder.
 		folder = [[[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type] autorelease];
@@ -1450,7 +1450,7 @@ static Database * _sharedDatabase = nil;
 		
 		// Parse off the title
 		if (articleTitle == nil || [articleTitle isBlank])
-			articleTitle = [articleBody firstNonBlankLine];
+			articleTitle = [[NSString stringByRemovingHTML:articleBody] firstNonBlankLine];
 		
 		// Save date as time intervals
 		NSTimeInterval interval = [articleDate timeIntervalSince1970];

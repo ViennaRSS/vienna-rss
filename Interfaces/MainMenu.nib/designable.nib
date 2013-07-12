@@ -188,7 +188,7 @@
 																<object class="NSOutlineView" id="488899772">
 																	<reference key="NSNextResponder" ref="1013165342"/>
 																	<int key="NSvFlags">4370</int>
-																	<string key="NSFrameSize">{287, 601}</string>
+																	<string key="NSFrameSize">{287.5, 601}</string>
 																	<reference key="NSSuperview" ref="1013165342"/>
 																	<reference key="NSWindow"/>
 																	<reference key="NSNextKeyView" ref="797132267"/>
@@ -271,6 +271,7 @@
 																</object>
 															</array>
 															<string key="NSFrameSize">{287, 601}</string>
+															<string key="NSBounds">{{0.5, 0}, {287, 601}}</string>
 															<reference key="NSSuperview" ref="738924574"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="488899772"/>
@@ -297,6 +298,7 @@
 															<reference key="NSSuperview" ref="738924574"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="344562231"/>
+															<bool key="NSEnabled">YES</bool>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 															<int key="NSsFlags">1</int>
 															<reference key="NSTarget" ref="738924574"/>
@@ -308,7 +310,7 @@
 													<reference key="NSSuperview" ref="280791632"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="212359314"/>
-													<int key="NSsFlags">133648</int>
+													<int key="NSsFlags">133776</int>
 													<reference key="NSVScroller" ref="344562231"/>
 													<reference key="NSHScroller" ref="212359314"/>
 													<reference key="NSContentView" ref="1013165342"/>
@@ -399,7 +401,6 @@
 														<string key="NSFrameSize">{650, 582}</string>
 														<reference key="NSSuperview" ref="545615107"/>
 														<reference key="NSWindow"/>
-														<reference key="NSNextKeyView" ref="350323120"/>
 													</object>
 													<string key="NSLabel">Tab</string>
 													<reference key="NSColor" ref="552467039"/>
@@ -527,7 +528,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="988368209"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1058}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMinSize">{213, 129}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">mainWindow</string>
@@ -842,7 +843,7 @@
 								</object>
 								<object class="NSMenuItem" id="577855883">
 									<reference key="NSMenu" ref="132468699"/>
-									<string key="NSTitle">Force Refresh Selected Subscriptions From Google Reader</string>
+									<string key="NSTitle">Force Refresh Selected Subscriptions From Open Reader</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="987756768"/>
@@ -850,7 +851,7 @@
 								</object>
 								<object class="NSMenuItem" id="1033731666">
 									<reference key="NSMenu" ref="132468699"/>
-									<string key="NSTitle">Update Subscriptions From Google Reader</string>
+									<string key="NSTitle">Update Subscriptions From Open Reader</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="987756768"/>
@@ -2300,7 +2301,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="NSExtension">NSView</string>
 			</object>
 			<object class="NSCustomView" id="1056405994">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">286</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSScrollView" id="758570519">
@@ -2344,7 +2345,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<int key="NSvFlags">-2147483392</int>
 								<string key="NSFrame">{{1, 591}, {684, 15}}</string>
 								<reference key="NSSuperview" ref="758570519"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
 								<reference key="NSTarget" ref="758570519"/>
@@ -2365,7 +2365,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 				</array>
 				<string key="NSFrameSize">{701, 607}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="758570519"/>
 				<string key="NSClassName">UnifiedDisplayView</string>
 				<string key="NSExtension">NSView</string>

@@ -274,7 +274,7 @@
 	//	return folder ? [folder name] : @"";
 	if (folder != nil) {
 		if (IsGoogleReaderFolder(folder)) {
-			return [NSString stringWithFormat:@"[G] %@",[folder name]];
+			return [NSString stringWithFormat:@"[C] %@",[folder name]];
 		} else {
 			return [folder name];
 		}
