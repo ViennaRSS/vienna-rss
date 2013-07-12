@@ -199,6 +199,7 @@ JSONDecoder * jsonDecoder;
 		// Log number of bytes we received
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
 					
+		LOG_EXPR([[dict objectForKey:@"items"] count]);
 		NSMutableArray * articleArray = [NSMutableArray array];
 		
 		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
@@ -405,6 +406,11 @@ JSONDecoder * jsonDecoder;
     [request startSynchronous];
     if ([request error])
     {
+		LOG_EXPR([request originalURL]);
+		LOG_EXPR([request requestHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
 		[self resetAuthentication];
 		return;
 	}
