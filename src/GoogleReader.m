@@ -132,22 +132,32 @@ JSONDecoder * jsonDecoder;
 {				
 	
 	//This is a workaround throw a BAD folderupdate value on DB
-	NSString *folderLastUpdate = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
-	if ([folderLastUpdate isEqualToString:@""] || [folderLastUpdate isEqualToString:@"(null)"]) folderLastUpdate=@"0";
+	NSString *folderLastUpdateString = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
+	if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
 	
-	NSInteger articleLimit = ignoreLimit ? 10000 : 100;
+	NSString *itemsLimitation;
+	if (ignoreLimit)
+		itemsLimitation = @"&n=10000"; //just stay reasonable…
+	else
+		//Note : we don't set "r" (sorting order) here.
+		//But according to some documentation, Google Reader and TheOldReader
+		//need "r=o" order to make the "ot" time limitation work.
+		//In fact, Vienna used successfully "r=n" with Google Reader,
+		//and FeedHQ does not work with "r=o"
+		itemsLimitation = [NSString stringWithFormat:@"&ot=%@",folderLastUpdateString];
 
 	if (![self isReady])
 		[self authenticate];
 		
-	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false&r=o&ot=%@&ck=%@&n=%li&T=%@&access_token=%@",APIBaseURL,percentEscape([thisFolder feedURL]),ClientName,folderLastUpdate,TIMESTAMP,articleLimit, token, token]];
+	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@",APIBaseURL,percentEscape([thisFolder feedURL]),ClientName,itemsLimitation,TIMESTAMP]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
 	[request setDidFinishSelector:@selector(feedRequestDone:)];
 	[request setDidFailSelector:@selector(feedRequestFailed:)];
-	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdate,@"lastupdate", [NSNumber numberWithInt:MA_Refresh_GoogleFeed], @"type", nil]];
+	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdateString,@"lastupdatestring", [NSNumber numberWithInt:MA_Refresh_GoogleFeed], @"type", nil]];
 	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[request setUseCookiePersistence:NO];
 	
 	return request;
 }
@@ -170,7 +180,6 @@ JSONDecoder * jsonDecoder;
 		
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
-    NSString *folderLastUpdate = [[request userInfo] objectForKey:@"lastupdate"];
 	LLog(@"Refresh Done: %@",[refreshedFolder feedURL]);
 
 	if ([request responseStatusCode] == 404) {
@@ -181,20 +190,19 @@ JSONDecoder * jsonDecoder;
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];
 		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
-		NSDate * updateDate = nil;
-		
-		if ([dict objectForKey:@"updated"] == nil) {
+		NSString *folderLastUpdateString = [[dict objectForKey:@"updated"] stringValue];
+		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
 			LOG_EXPR([request url]);
 			NSLog(@"Feed name: %@",[dict objectForKey:@"title"]);
-			NSLog(@"Last Check: %@",folderLastUpdate);
-			NSLog(@"Last update: %@",[dict objectForKey:@"updated"]);
+			NSLog(@"Last Check: %@",[[request userInfo] objectForKey:@"lastupdatestring"]);
+			NSLog(@"Last update: %@",folderLastUpdateString);
 			NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
 			LOG_EXPR(dict);
 			LOG_EXPR([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 			ALog(@"Error !!! Incoherent data !");
+			//keep the previously recorded one
+			folderLastUpdateString = [[request userInfo] objectForKey:@"lastupdatestring"];
 		}
-		else
-			updateDate = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"updated"] doubleValue]];;
 	
 		// Log number of bytes we received
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
@@ -284,12 +292,13 @@ JSONDecoder * jsonDecoder;
 						newArticlesFromFeed++;
 				}
 				
+				// Set the last update date for this folder.
+				[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
 				[db commitTransaction];
 			}
 							
-			// Set the last update date for this folder.
-			if (updateDate != nil)
-				[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:updateDate];
+			// Set the last update date given by the Open Reader server for this folder.
+			[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
 			// Set the HTML homepage for this folder.
 			// a legal JSON string can have, as its outer "container", either an array or a dictionary/"object"
 			if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]])
@@ -366,6 +375,7 @@ JSONDecoder * jsonDecoder;
 	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
 	[myRequest setPostValue:username forKey:@"Email"];
 	[myRequest setPostValue:password forKey:@"Passwd"];
+	[myRequest setUseCookiePersistence:NO];
 	[myRequest startSynchronous];
 
 	NSString * response = [myRequest responseString];
@@ -403,6 +413,7 @@ JSONDecoder * jsonDecoder;
     [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
 
     googleReaderStatus = isAuthenticating;
+	[request setUseCookiePersistence:NO];
     [request startSynchronous];
     if ([request error])
     {
@@ -446,10 +457,11 @@ JSONDecoder * jsonDecoder;
 	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions...", nil) persist:NO];
 
 
-	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json&access_token=%@",APIBaseURL,ClientName,token]]];
+	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json",APIBaseURL,ClientName]]];
 	[subscriptionRequest setDelegate:self];
 	[subscriptionRequest setDidFinishSelector:@selector(subscriptionsRequestDone:)];
 	[subscriptionRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[subscriptionRequest setUseCookiePersistence:NO];
 	LLog(@"Starting subscriptionRequest");
 	[subscriptionRequest startAsynchronous];		
 	LLog(@"subscriptionRequest submitted");	
@@ -558,6 +570,7 @@ JSONDecoder * jsonDecoder;
     [request setDelegate:self];
 	[request setPostValue:token forKey:@"T"];
    	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[request setUseCookiePersistence:NO];
 
     // Needs to be synchronous so UI doesn't refresh too soon.
     [request startSynchronous];
@@ -568,12 +581,13 @@ JSONDecoder * jsonDecoder;
 {
 	if (![self isReady])
 		[self authenticate];
-	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?access_token=%@",APIBaseURL,token]];
+	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:unsubscribeURL];
 	[myRequest setPostValue:@"unsubscribe" forKey:@"ac"];
 	[myRequest setPostValue:[NSString stringWithFormat:@"feed/%@", feedURL] forKey:@"s"];
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[myRequest setUseCookiePersistence:NO];
 
 	[myRequest startAsynchronous];		
 }
@@ -591,6 +605,7 @@ JSONDecoder * jsonDecoder;
     [request setDelegate:self];
 	[request setPostValue:token forKey:@"T"];
 	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[request setUseCookiePersistence:NO];
     [request startSynchronous];
     LLog(@"Set folder response status code: %d", [request responseStatusCode]);
 }
@@ -599,7 +614,7 @@ JSONDecoder * jsonDecoder;
 {
 	if (![self isReady])
 		[self authenticate];
-	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
+	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
@@ -615,6 +630,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:itemGuid forKey:@"i"];
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[myRequest setUseCookiePersistence:NO];
 	[myRequest startAsynchronous];
 }
 
@@ -632,7 +648,7 @@ JSONDecoder * jsonDecoder;
 	}
 
 	LLog(@"Logged token: %@",token);
-	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
+	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
     NSString *itemGuid = [[request userInfo] objectForKey:@"guid"];
 	ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
 	[request1 setPostValue:@"true" forKey:@"async"];
@@ -640,6 +656,7 @@ JSONDecoder * jsonDecoder;
 	[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
 	[request1 setPostValue:token forKey:@"T"];
 	[request1 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[request1 setUseCookiePersistence:NO];
 	[request1 startAsynchronous];
 }
 
@@ -648,7 +665,7 @@ JSONDecoder * jsonDecoder;
 {
 	if (![self isReady])
 		[self authenticate];
-	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag?access_token=%@",APIBaseURL,token]];
+	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markStarredURL];
 	if (flag) {
 		[myRequest setPostValue:@"user/-/state/com.google/starred" forKey:@"a"];
@@ -662,6 +679,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setDelegate:self];
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	[myRequest setUseCookiePersistence:NO];
 	[myRequest startAsynchronous];
 }
 
