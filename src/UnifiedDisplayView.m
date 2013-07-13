@@ -968,15 +968,17 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[view performSelector:@selector(display) withObject:nil afterDelay:0.01];
 
 	NSArray * allArticles = [articleController allArticles];
-	NSParameterAssert(row >= 0 && row < (NSInteger)[allArticles count]);
-	Article * theArticle = [allArticles objectAtIndex:row];
-	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-	Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-	[view setHTML:htmlText withBase:SafeString([folder feedURL])];
-	[cellView addSubview:view];
-	// Make sure we are well positioned
-	[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-	[view performSelector:@selector(display) withObject:nil afterDelay:0.2];
+	if (row < (NSInteger)[allArticles count])
+	{
+		Article * theArticle = [allArticles objectAtIndex:row];
+		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
+		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
+		[view setHTML:htmlText withBase:SafeString([folder feedURL])];
+		[cellView addSubview:view];
+		// Make sure we are well positioned
+		[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+		[view performSelector:@selector(display) withObject:nil afterDelay:0.2];
+	}
 
     return cellView;
 }
