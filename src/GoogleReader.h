@@ -19,6 +19,8 @@
 	NSMutableArray *localFeeds;
 	NSUInteger countOfNewArticles;
 	NSString * clientAuthToken;
+	NSTimer * tokenTimer;
+	NSTimer * authTimer;
 }
 
 @property (nonatomic, copy) NSMutableArray * localFeeds;
