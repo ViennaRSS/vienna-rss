@@ -50,14 +50,6 @@ static BOOL _credentialsChanged;
 
 -(void)windowWillClose:(NSNotification *)notification 
 {
-	// save server and username in Preferences
-	// and password as a generic password in current keychain
-    Preferences *prefs = [Preferences standardPreferences];
-    [prefs setSyncGoogleReader:([syncButton state] == NSOnState)];
-    [prefs setSyncServer:[openReaderHost stringValue]];
-    [prefs setSyncingUser:[username stringValue]];
-    [prefs savePreferences];    
-    [KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	if([syncButton state] == NSOnState && _credentialsChanged)
 	{
@@ -71,6 +63,9 @@ static BOOL _credentialsChanged;
 {
     // enable/disable syncing
     BOOL sync = [sender state] == NSOnState;
+	Preferences *prefs = [Preferences standardPreferences];
+	[prefs setSyncGoogleReader:sync];
+	[prefs savePreferences];
 	if (sync) {
 		[openReaderSource setEnabled:YES];
 		[openReaderHost setEnabled:YES];
@@ -101,13 +96,36 @@ static BOOL _credentialsChanged;
 	[openReaderHost setStringValue:hostName];
 	[credentialsInfoText setStringValue:hint];
 	if (sender != nil)	//user action
-		_credentialsChanged=YES;
+		[self handleServerTextDidChange:nil];
 }
 
 - (IBAction)visitWebsite:(id)sender
 {
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/", [openReaderHost stringValue]]];
     [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+/* handleServerTextDidChange [delegate]
+ * This function is called when the contents of the server field is changed.
+ * We use the info to check if the password is already available
+ * in a web form
+ */
+-(void)handleServerTextDidChange:(NSNotification *)aNotification
+{
+	_credentialsChanged = YES;
+	Preferences *prefs = [Preferences standardPreferences];
+	if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
+	{
+		// can we get password via keychain ?
+		NSString * thePass = [KeyChain getWebPasswordFromKeychain:[username stringValue] url:[NSString stringWithFormat:@"https://%@", [openReaderHost stringValue]]];
+		if (![thePass isBlank])
+		{
+			[password setStringValue:thePass];
+			[KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
+		}
+	}
+	[prefs setSyncServer:[openReaderHost stringValue]];
+	[prefs savePreferences];
 }
 
 /* handleUserTextDidChange [delegate]
@@ -117,18 +135,31 @@ static BOOL _credentialsChanged;
  */
 -(void)handleUserTextDidChange:(NSNotification *)aNotification
 {
-	NSTextField * theField = [aNotification object];
-	if (theField == openReaderHost || theField == username)
+	_credentialsChanged = YES;
+	Preferences *prefs = [Preferences standardPreferences];
+	if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
 	{
-		if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
+		// can we get password via keychain ?
+		NSString * thePass = [KeyChain getWebPasswordFromKeychain:[username stringValue] url:[NSString stringWithFormat:@"https://%@", [openReaderHost stringValue]]];
+		if (![thePass isBlank])
 		{
-			// can we get password via keychain ?
-			NSString * thePass = [KeyChain getWebPasswordFromKeychain:[username stringValue] url:[NSString stringWithFormat:@"https://%@", [openReaderHost stringValue]]];
-			if (![thePass isBlank])
-				[password setStringValue:thePass];
+			[password setStringValue:thePass];
+			[KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
 		}
 	}
+	[prefs setSyncingUser:[username stringValue]];
+	[prefs savePreferences];
+}
+
+/* handlePasswordTextDidChange [delegate]
+ * This function is called when the contents of the user field is changed.
+ * We use the info to check if the password is already available
+ * in a web form
+ */
+-(void)handlePasswordTextDidChange:(NSNotification *)aNotification
+{
 	_credentialsChanged = YES;
+	[KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
 }
 
 - (void)windowDidLoad
@@ -138,7 +169,9 @@ static BOOL _credentialsChanged;
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
+	[nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:username];
 	[nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
+	[nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidEndEditingNotification object:username];
     
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
