@@ -1240,7 +1240,7 @@ static Database * _sharedDatabase = nil;
 
 	// Adjust the child unread count for the old parent.
 	NSInteger adjustment = 0;
-	if ([folder isRSSFolder])
+	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		adjustment = [folder unreadCount];
 	else if ([folder isGroupFolder])
 		adjustment = [folder childUnreadCount];
@@ -2344,7 +2344,7 @@ static Database * _sharedDatabase = nil;
 		// This is a good time to do a quick check to ensure that our
 		// own count of unread is in sync with the folders count and fix
 		// them if not.
-		if (folder && [filterString isEqualTo:@""] && IsRSSFolder(folder))
+		if (folder && [filterString isEqualTo:@""] && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
 		{
 			if (unread_count != [folder unreadCount])
 			{

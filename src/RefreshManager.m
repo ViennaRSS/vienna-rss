@@ -478,7 +478,7 @@ static RefreshManager * _refreshManager = nil;
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
 		[myRequest setWillRedirectSelector:@selector(folderRefreshRedirect:)];
-	} else { //GoogleReader
+	} else { // Open Reader feed
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
 	[myRequest setTimeOutSeconds:180];
@@ -512,7 +512,7 @@ static RefreshManager * _refreshManager = nil;
 	if (IsRSSFolder(folder)) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
 		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
-	} else { // GoogleReader
+	} else { // Open Reader feed
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Open Reader Feed", nil)];
 		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} 
