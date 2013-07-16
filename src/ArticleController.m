@@ -705,12 +705,17 @@
                 
 			}
 		}
+		else if (IsGoogleReaderFolder(folder))
+		{
+			if (undoFlag)
+				[refArray addObjectsFromArray:currentArrayOfArticles];
+			[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
+		}
 		else
 		{
-			// Open Reader feeds and smart folders
 			// For smart folders, we only mark all read the current folder to
 			// simplify things.
-			if (undoFlag && (IsGoogleReaderFolder(folder) || folderId == currentFolderId))
+			if (undoFlag && folderId == currentFolderId)
 			{
 				[refArray addObjectsFromArray:currentArrayOfArticles];
 				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
@@ -758,7 +763,11 @@
 	for (ArticleReference *ref in refArray)
 	{
 		int folderId = [ref folderId];
-		[db markArticleRead:folderId guid:[ref guid] isRead:readFlag];
+		NSString * theGuid = [ref guid];
+		if (IsGoogleReaderFolder([db folderFromID:folderId]))
+			[[GoogleReader sharedManager] markRead:theGuid readFlag:readFlag];
+
+		[db markArticleRead:folderId guid:theGuid isRead:readFlag];
 		if (folderId != lastFolderId && lastFolderId != -1)
 		{
 			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
