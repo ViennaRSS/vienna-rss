@@ -631,6 +631,23 @@ static RefreshManager * _refreshManager = nil;
 	Database * db = [Database sharedDatabase];	
 	
     [self syncFinishedForFolder:folder];
+
+     // hack for handling file:// URLs
+     // needed because current versions of ASIHttpRequest return error 404 for those URLs
+	if ([url isFileURL])
+	{
+		NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
+		NSString *filePath = [url path];
+		BOOL isDirectory = NO;
+		if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory)
+		{
+        	responseStatusCode = 200;
+			NSData * receivedData = [NSData dataWithContentsOfFile:filePath];
+			[connector setRawResponseData:[NSData dataWithContentsOfFile:filePath]];
+			[connector setContentLength:[receivedData length]];
+			[connector setTotalBytesRead:[receivedData length]];
+		}
+	}
 	
 	if (responseStatusCode == 304)
 	{		
