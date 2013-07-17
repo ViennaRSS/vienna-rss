@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 13
+-------------
+Bugfixes :
+- Open Reader server settings were often uncorrectly saved
+- count of unread articles on Open Reader feeds was often incorrect
+- fixed Undo for "mark all read/unread" and Open Reader feeds
+- author names containing linefeeds weren't correctly displayed
+
 3.0.0 Beta 12
 -------------
 - Replaced Google Reader support with support of BazQux and FeedHQ (other services might work too, just give them a try !)
