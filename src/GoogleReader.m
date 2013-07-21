@@ -207,7 +207,7 @@ JSONDecoder * jsonDecoder;
 		// Log number of bytes we received
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
 					
-		LOG_EXPR([[dict objectForKey:@"items"] count]);
+		LLog(@"%ld items returned from %@", [[dict objectForKey:@"items"] count], [request url]);
 		NSMutableArray * articleArray = [NSMutableArray array];
 		
 		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
