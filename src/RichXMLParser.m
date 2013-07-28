@@ -918,13 +918,7 @@
 				// Parse item title
 				if ([itemNodeName isEqualToString:@"title"])
 				{
-					NSString * newTitle = [[subItemTree valueOfElement] stringByUnescapingExtendedCharacters];
-					NSString * titleType = [subItemTree valueOfAttribute:@"type"];
-					
-					if ([titleType isEqualToString:@"html"] || [titleType isEqualToString:@"xhtml"])
-						newTitle = [newTitle summaryTextFromHTML];
-					
-					[newItem setTitle:newTitle];
+					[newItem setTitle:[[subItemTree valueOfElement] summaryTextFromHTML]];
 					continue;
 				}
 
