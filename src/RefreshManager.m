@@ -809,22 +809,15 @@ static RefreshManager * _refreshManager = nil;
 					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", folderId, [newsItem link], [newsItem title]];
 				
 				// This is a horrible hack for horrible feeds that contain more than one item with the same guid.
-				// Bad feeds! I'm talking to you, WordPress Trac.
+				// Bad feeds! I'm talking to you, Orange Madagascar.
 				NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
 				if (articleIndex != NSNotFound)
 				{
 					if (articleDate == nil)
 						continue; // Skip this duplicate article
 					
-					Article * existingArticle = [articleArray objectAtIndex:articleIndex];
-					if ([articleDate compare:[existingArticle date]] == NSOrderedDescending)
-					{
-						// This article is later, so use it instead
-						[articleArray removeObjectAtIndex:articleIndex];
-						[articleGuidArray removeObjectAtIndex:articleIndex];
-					}
-					else
-						continue; // Skip this duplicate article
+					// rebuild a complex guid which should eliminate most duplicates
+					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
 				}
 				[articleGuidArray addObject:articleGuid];
 				
