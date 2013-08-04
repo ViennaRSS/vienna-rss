@@ -472,8 +472,8 @@ static RefreshManager * _refreshManager = nil;
 		{
 			[myRequest setUsername:[folder username]];
 			[myRequest setPassword:[folder password]];
-			[myRequest setUseCookiePersistence:NO];
 		}
+		[myRequest setUseCookiePersistence:NO];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
