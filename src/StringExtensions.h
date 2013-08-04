@@ -45,6 +45,7 @@
 	-(NSComparisonResult)numericCompare:(NSString *)aString;
 	-(NSString *)normalised;
 	-(NSString *)baseURL;
+	-(NSString *)host;
 	-(NSString *)trim;
 	-(int)hexValue;
 	-(BOOL)isBlank;
