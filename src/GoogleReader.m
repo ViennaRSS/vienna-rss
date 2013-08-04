@@ -653,7 +653,11 @@ JSONDecoder * jsonDecoder;
 	[myRequest startAsynchronous];		
 }
 
--(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag
+/* setFolderName
+ * set or remove a folder name to a newsfeed
+ * set parameter : TRUE => add ; FALSE => remove
+ */
+-(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
 {
 	if (![self isReady])
 		[self authenticate];

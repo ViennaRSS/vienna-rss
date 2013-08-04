@@ -2893,7 +2893,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[myGoogle subscribeToFeed:urlString];
 		NSString * folderName = [[db folderFromID:parentId] name];
 		if (folderName != nil)
-			[myGoogle setFolder:folderName forFeed:urlString folderFlag:TRUE];
+			[myGoogle setFolderName:folderName forFeed:urlString set:TRUE];
 		[myGoogle loadSubscriptions:nil];
 
 	}
