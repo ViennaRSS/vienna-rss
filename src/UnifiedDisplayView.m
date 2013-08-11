@@ -147,6 +147,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[controller openURL:[request URL] inPreferredBrowser:YES];
 	// Change this to handle modifier key?
 	// Is this covered by the webView policy?
+	[[NSApp mainWindow] makeFirstResponder:self];
 	return nil;
 }
 
