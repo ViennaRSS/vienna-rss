@@ -28,6 +28,7 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "BrowserPane.h"
+#import "PXListView+Private.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 #define XPOS_IN_CELL	6
@@ -246,15 +247,16 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 #pragma mark -
 #pragma mark WebFrameLoadDelegate
 
-/* didStartProvisionalLoadForFrame
- * Invoked when a new client request is made by sender to load a provisional data source for frame.
+/* didCommitLoadForFrame
+ * Invoked when content of a frame starts arriving for a webview load
  */
--(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)webFrame
+-(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)webFrame
 {
     if([webFrame isEqual:[sender mainFrame]])
     {
 		NSRect frame = sender.frame;
 		frame.size.height = 1;        // Set the height to a small one.
+		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		// progress indicator
 		[(ArticleCellView *)[sender superview] setInProgress:YES];
 	}
@@ -303,31 +305,27 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 
 			if ([bodyHeight isEqualToString:outputHeight])
 			{
-				[articleList reloadRowAtIndex:row];
 				[cell setInProgress:NO];
-				[self displayIfNeeded];
-				[cell display];
-				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
+				[self redrawCell:cell];
+				[sender performSelector:@selector(display) withObject:nil afterDelay:0.03];
 			}
 			else
 			{
 				// something in the dimensions went wrong : force a reload
 				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 				[(ArticleView *)sender clearHTML];
+				[self redrawCell:cell];
 				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
-				[articleList reloadRowAtIndex:row];
-				[self display];
-				[cell performSelector:@selector(display) withObject:nil afterDelay:0.01];
 				NSArray * allArticles = [articleController allArticles];
 				if (row < (NSInteger)[allArticles count]) // our article list might have changed...
 				{
 					Article * theArticle = [allArticles objectAtIndex:row];
 					NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
+					[cell setInProgress:NO];
 					Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
 					[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-					[cell setInProgress:NO];
-					[cell display];
-					[self performSelector:@selector(redrawCell:) withObject:cell afterDelay:0.01];
+					[self redrawCell:cell];
+					[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
 				}
 			}
 		}
@@ -356,17 +354,15 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if (row < (NSInteger)[allArticles count])
 			{
 				[(ArticleView *)sender clearHTML];
+				[self redrawCell:cell];
 				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
-				[articleList reloadRowAtIndex:row];
-				[self display];
-				[cell performSelector:@selector(display) withObject:nil afterDelay:0.01];
 				Article * theArticle = [allArticles objectAtIndex:row];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
 				[cell setInProgress:NO];
 				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-				[cell display];
-				[self performSelector:@selector(redrawCell:) withObject:cell afterDelay:0.2];
+				[self redrawCell:cell];
+				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
 			}
 			else
 				// the article list has probably changed and we aren't relevant anymore
@@ -383,7 +379,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(void)redrawCell:(ArticleCellView *)cell
 {
+	[cell display];
 	[articleList reloadRowAtIndex:[cell row]];
+	[articleList updateCells];
 	[self display];
 }
 
