@@ -472,8 +472,8 @@ static RefreshManager * _refreshManager = nil;
 		{
 			[myRequest setUsername:[folder username]];
 			[myRequest setPassword:[folder password]];
-			[myRequest setUseCookiePersistence:NO];
 		}
+		[myRequest setUseCookiePersistence:NO];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
@@ -511,10 +511,10 @@ static RefreshManager * _refreshManager = nil;
 	
 	if (IsRSSFolder(folder)) {
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image", nil)];
-		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
+		favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} else { // Open Reader feed
 		[aItem appendDetail:NSLocalizedString(@"Retrieving folder image for Open Reader Feed", nil)];
-		favIconPath = [NSString stringWithFormat:@"http://%@/favicon.ico", [[[folder homePage] trim] baseURL]];
+		favIconPath = [NSString stringWithFormat:@"%@/favicon.ico", [[[folder homePage] trim] baseURL]];
 	} 
 
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
@@ -809,22 +809,15 @@ static RefreshManager * _refreshManager = nil;
 					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", folderId, [newsItem link], [newsItem title]];
 				
 				// This is a horrible hack for horrible feeds that contain more than one item with the same guid.
-				// Bad feeds! I'm talking to you, WordPress Trac.
+				// Bad feeds! I'm talking to you, Orange Madagascar.
 				NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
 				if (articleIndex != NSNotFound)
 				{
 					if (articleDate == nil)
 						continue; // Skip this duplicate article
 					
-					Article * existingArticle = [articleArray objectAtIndex:articleIndex];
-					if ([articleDate compare:[existingArticle date]] == NSOrderedDescending)
-					{
-						// This article is later, so use it instead
-						[articleArray removeObjectAtIndex:articleIndex];
-						[articleGuidArray removeObjectAtIndex:articleIndex];
-					}
-					else
-						continue; // Skip this duplicate article
+					// rebuild a complex guid which should eliminate most duplicates
+					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
 				}
 				[articleGuidArray addObject:articleGuid];
 				

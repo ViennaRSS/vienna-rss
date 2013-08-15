@@ -641,6 +641,22 @@ static NSMutableDictionary * entityMap = nil;
 }
 
 /* baseURL
+ * Given a URL, this function returns the base URL.
+ * Thus if the string is:
+ *
+ *  http://www.livejournal.com/users/stevewpalmer
+ *
+ * Then it returns http://www.livejournal.com. If the URL itself is the root or
+ * we can't parse anything, we just return ourselves. Thus we're guaranteed to
+ * return a non-nil value.
+ */
+-(NSString *)baseURL
+{
+	NSURL * url = [NSURL URLWithString:self];
+	return (url && [url host]) ? [NSString stringWithFormat:@"%@://%@", [url scheme], [url host]] : self;
+}
+
+/* host
  * Given a URL, this function returns the root of the URL minus the scheme and
  * any path. Thus if the string is:
  *
@@ -650,7 +666,7 @@ static NSMutableDictionary * entityMap = nil;
  * we can't parse anything, we just return ourselves. Thus we're guaranteed to
  * return a non-nil value.
  */
--(NSString *)baseURL
+-(NSString *)host
 {
 	NSURL * url = [NSURL URLWithString:self];
 	return (url && [url host]) ? [url host] : self;
