@@ -144,7 +144,7 @@ JSONDecoder * jsonDecoder;
 		//need "r=o" order to make the "ot" time limitation work.
 		//In fact, Vienna used successfully "r=n" with Google Reader,
 		//and FeedHQ does not work with "r=o"
-		itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",folderLastUpdateString];
+		itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=100",folderLastUpdateString];
 
 	if (![self isReady])
 		[self authenticate];
