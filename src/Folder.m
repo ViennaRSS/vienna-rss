@@ -362,9 +362,9 @@ static NSArray * iconArray = nil;
 		{	
 			NSString * homePageSiteRoot;
 			if (IsRSSFolder(self)) {
-				homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+				homePageSiteRoot = [[[self homePage] host] convertStringToValidPath];
 			} else {
-				homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
+				homePageSiteRoot = [[[self feedURL] host] convertStringToValidPath];
 			}
 			imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 		}
@@ -391,7 +391,7 @@ static NSArray * iconArray = nil;
 	NSImage * imagePtr = nil;
 	if ([self feedURL])
 	{
-		NSString * homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+		NSString * homePageSiteRoot = [[[self homePage] host] convertStringToValidPath];
 		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 	}
 	return (imagePtr != nil);
@@ -419,9 +419,9 @@ static NSArray * iconArray = nil;
 	{
 		NSString * homePageSiteRoot;
 		if (IsRSSFolder(self)) {
-			homePageSiteRoot = [[[self homePage] baseURL] convertStringToValidPath];
+			homePageSiteRoot = [[[self homePage] host] convertStringToValidPath];
 		} else { //GoogleReader
-			homePageSiteRoot = [[[self feedURL] baseURL] convertStringToValidPath];
+			homePageSiteRoot = [[[self feedURL] host] convertStringToValidPath];
 		}
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
 	}
