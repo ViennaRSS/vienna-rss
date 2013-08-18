@@ -8,6 +8,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 14
+-------------
+- Fixed a bug in sync password management (__Note__ : if you had connection problems with your Open Reader server, open Keychain Access and delete all Vienna-related elements. Then, reenter your credentials in Vienna).
+- Added a Google Plus plugin
+- Better handling of feeds containing linefeeds
+- Better handling of feeds reusing the same GUID
+- Changed handling of read/starred status for Open Reader feeds
+- Changed handling of Unified layout
+
 3.0.0 Beta 13
 -------------
 Bugfixes :
