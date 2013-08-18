@@ -35,6 +35,7 @@
 
 -(void)loadSubscriptions:(NSNotification*)nc;
 -(void)authenticate;
+-(void)getToken;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
@@ -42,7 +43,7 @@
 -(void)unsubscribeFromFeed:(NSString *)feedURL;
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag;
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag;
--(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag;
+-(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag;
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit;
 -(NSUInteger)countOfNewArticles;
 

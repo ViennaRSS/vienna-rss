@@ -313,7 +313,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 				if (interval > frequency)
 				{
 					if ([[Preferences standardPreferences] syncGoogleReader])
-						[[GoogleReader sharedManager] resetAuthentication];
+						[[GoogleReader sharedManager] getToken];
 					[NSTimer scheduledTimerWithTimeInterval:15.0
 													 target:app
 												   selector:@selector(refreshOnTimer:)
@@ -2893,7 +2893,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[myGoogle subscribeToFeed:urlString];
 		NSString * folderName = [[db folderFromID:parentId] name];
 		if (folderName != nil)
-			[myGoogle setFolder:folderName forFeed:urlString folderFlag:TRUE];
+			[myGoogle setFolderName:folderName forFeed:urlString set:TRUE];
 		[myGoogle loadSubscriptions:nil];
 
 	}

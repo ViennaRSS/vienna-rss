@@ -52,6 +52,7 @@
 -(NSUInteger)countOfNewArticles;
 -(NSString *)statusMessageDuringRefresh;
 -(void)refreshFavIcon:(Folder *)folder;
+-(void)addConnection:(ASIHTTPRequest *)conn;
 @end
 
 // Refresh types

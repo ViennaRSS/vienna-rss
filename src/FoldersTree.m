@@ -1257,8 +1257,12 @@
 				if (IsGoogleReaderFolder(folder))
 				{
 					GoogleReader * myGoogle = [GoogleReader sharedManager];
-					NSString * folderName = [[db folderFromID:newParentId] name];
-					[myGoogle setFolder:folderName forFeed:[folder feedURL] folderFlag:TRUE];
+					// remove old label
+					NSString * folderName = [[db folderFromID:oldParentId] name];
+					[myGoogle setFolderName:folderName forFeed:[folder feedURL] set:FALSE];
+					// add new label
+					folderName = [[db folderFromID:newParentId] name];
+					[myGoogle setFolderName:folderName forFeed:[folder feedURL] set:TRUE];
 				}
 			}
 			else
