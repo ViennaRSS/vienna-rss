@@ -49,7 +49,6 @@ static RefreshManager * _refreshManager = nil;
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
 -(void)beginRefreshTimer;
 -(void)refreshPumper:(NSTimer *)aTimer;
--(void)addConnection:(ASIHTTPRequest *)conn;
 -(void)removeConnection:(ASIHTTPRequest *)conn;
 -(void)folderIconRefreshCompleted:(ASIHTTPRequest *)connector;
 -(NSString *)getRedirectURL:(NSData *)data;

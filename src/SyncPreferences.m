@@ -137,6 +137,7 @@ static BOOL _credentialsChanged;
 {
 	_credentialsChanged = YES;
 	Preferences *prefs = [Preferences standardPreferences];
+	[KeyChain deleteGenericPasswordInKeychain:[prefs syncingUser] service:@"Vienna sync"];
 	if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
 	{
 		// can we get password via keychain ?
@@ -169,9 +170,9 @@ static BOOL _credentialsChanged;
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
-	[nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:username];
+	[nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:openReaderHost];
 	[nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
-	[nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidEndEditingNotification object:username];
+	[nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidEndEditingNotification object:password];
     
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];

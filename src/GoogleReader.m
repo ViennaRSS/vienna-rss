@@ -144,7 +144,7 @@ JSONDecoder * jsonDecoder;
 		//need "r=o" order to make the "ot" time limitation work.
 		//In fact, Vienna used successfully "r=n" with Google Reader,
 		//and FeedHQ does not work with "r=o"
-		itemsLimitation = [NSString stringWithFormat:@"&n=100&ot=%@",folderLastUpdateString];
+		itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=100",folderLastUpdateString];
 
 	if (![self isReady])
 		[self authenticate];
@@ -207,7 +207,7 @@ JSONDecoder * jsonDecoder;
 		// Log number of bytes we received
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
 					
-		LOG_EXPR([[dict objectForKey:@"items"] count]);
+		LLog(@"%ld items returned from %@", [[dict objectForKey:@"items"] count], [request url]);
 		NSMutableArray * articleArray = [NSMutableArray array];
 		
 		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
@@ -283,12 +283,7 @@ JSONDecoder * jsonDecoder;
 
 			for (Article * article in articleArray)
 			{
-				if (!([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)))
-				{
-					[db markArticleRead:[refreshedFolder itemId] guid:[article guid] isRead:[article isRead]];
-					[db markArticleFlagged:[refreshedFolder itemId] guid:[article guid] isFlagged:[article isFlagged]];
-				}
-				else
+				if ([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
 					newArticlesFromFeed++;
 			}
 
@@ -328,6 +323,30 @@ JSONDecoder * jsonDecoder;
 		
 		[dict release];
 
+		// Request id's of unread items
+		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
+		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
+		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
+		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
+		[request2 setDelegate:self];
+		[request2 setDidFinishSelector:@selector(readRequestDone:)];
+		[request2 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+		[request2 setUseCookiePersistence:NO];
+		[request2 setTimeOutSeconds:180];
+		[[RefreshManager sharedManager] addConnection:request2];
+
+		// Request id's of starred items
+		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
+		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
+		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
+		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
+		[request3 setDelegate:self];
+		[request3 setDidFinishSelector:@selector(starredRequestDone:)];
+		[request3 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+		[request3 setUseCookiePersistence:NO];
+		[request3 setTimeOutSeconds:180];
+		[[RefreshManager sharedManager] addConnection:request3];
+
 		// If this folder also requires an image refresh, add that
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
 			[[RefreshManager sharedManager] performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:refreshedFolder waitUntilDone:NO];
@@ -345,6 +364,48 @@ JSONDecoder * jsonDecoder;
 	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 
+}
+
+// callback
+- (void)readRequestDone:(ASIHTTPRequest *)request
+{
+	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+	if ([request responseStatusCode] == 200)
+	{
+		NSArray * dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
+		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
+		for (NSDictionary *itemRef in dict)
+		{
+			// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
+			// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
+			NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
+			NSString * guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
+			[guidArray addObject:guid];
+		}
+		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
+		[[Database sharedDatabase] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+	}
+}
+
+// callback
+- (void)starredRequestDone:(ASIHTTPRequest *)request
+{
+	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+	if ([request responseStatusCode] == 200)
+	{
+		NSArray * dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
+		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
+		for (NSDictionary *itemRef in dict)
+		{
+			// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
+			// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
+			NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
+			NSString * guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
+			[guidArray addObject:guid];
+		}
+		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
+		[[Database sharedDatabase] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
+	}
 }
 
 -(void)authenticate 
@@ -592,7 +653,11 @@ JSONDecoder * jsonDecoder;
 	[myRequest startAsynchronous];		
 }
 
--(void)setFolder:(NSString *)folderName forFeed:(NSString *)feedURL folderFlag:(BOOL)flag
+/* setFolderName
+ * set or remove a folder name to a newsfeed
+ * set parameter : TRUE => add ; FALSE => remove
+ */
+-(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
 {
 	if (![self isReady])
 		[self authenticate];

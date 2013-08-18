@@ -2441,6 +2441,55 @@ static Database * _sharedDatabase = nil;
 	}
 }
 
+/* markUnreadArticlesFromFolder
+ * Marks as unread a set of articles.
+ */
+-(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
+{
+	NSInteger folderId = [folder itemId];
+	// Verify we're on the right thread
+	[self verifyThreadSafety];
+	if([guidArray count]>0)
+	{
+		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0 and message_id NOT IN ('%@')", folderId, guidList];
+		[results release];
+		results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=0 where folder_id=%ld and read_flag=1 and message_id IN ('%@')", folderId, guidList];
+		[results release];
+	}
+	else
+	{
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", folderId];
+		[results release];
+	}
+	NSInteger adjustment = [guidArray count]-[folder unreadCount];
+	countOfUnread += adjustment;
+	[self setFolderUnreadCount:folder adjustment:adjustment];
+}
+
+/* markStarredArticlesFromFolder
+ * Marks starred a set of articles.
+ */
+-(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
+{
+	NSInteger folderId = [folder itemId];
+	// Verify we're on the right thread
+	[self verifyThreadSafety];
+	if([guidArray count]>0)
+	{
+		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set marked_flag=1 where folder_id=%ld and marked_flag=0 and message_id IN ('%@')", folderId, guidList];
+		[results release];
+		results = [sqlDatabase performQueryWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1 and message_id NOT IN ('%@')", folderId, guidList];
+		[results release];
+	}
+	else
+	{
+		SQLResult * results = [sqlDatabase performQueryWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1", folderId];
+		[results release];
+	}
+}
+
 /* setFolderUnreadCount
  * Adjusts the unread count on the specified folder by the given delta. The same delta is
  * also applied to the childUnreadCount of all ancestor folders.
