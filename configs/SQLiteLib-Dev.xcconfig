@@ -1,7 +1,0 @@
-// SQLiteLib settings for Development configuration
-
-#include "SQLiteLib-All.xcconfig"
-#include "General-Dev.xcconfig"
-
-
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) LOG_QUERY_TIMES
