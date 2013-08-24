@@ -1753,8 +1753,6 @@
 		AA71168E09BEB17300E3EA8A /* AddressBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AddressBarCell.m; path = src/AddressBarCell.m; sourceTree = SOURCE_ROOT; };
 		AA71173609BEB70D00E3EA8A /* webpage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = webpage.tiff; path = Resources/webpage.tiff; sourceTree = SOURCE_ROOT; };
 		AA71187B09BFE19D00E3EA8A /* lockedPage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = lockedPage.tiff; path = Resources/lockedPage.tiff; sourceTree = SOURCE_ROOT; };
-		AA785DBA0BF62AE60089DCF0 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = 3rdparty/SQLite/sqlite3.h; sourceTree = "<group>"; };
-		AA785DBB0BF62AE60089DCF0 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = 3rdparty/SQLite/sqlite3.c; sourceTree = "<group>"; };
 		AA7AB45708CA742A000D34F9 /* ArticleRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ArticleRef.h; path = src/ArticleRef.h; sourceTree = SOURCE_ROOT; };
 		AA7F231510FA287700856924 /* blankButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankButton.tiff; path = Resources/blankButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA7F231610FA287700856924 /* blankButtonPressedEmbossed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankButtonPressedEmbossed.tiff; path = Resources/blankButtonPressedEmbossed.tiff; sourceTree = SOURCE_ROOT; };
@@ -2136,7 +2134,6 @@
 				AAED82F40A0379FE00ED56E5 /* DisclosableView */,
 				43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */,
 				662468AE13C609F900C85417 /* JSONKit */,
-				AA2B6CEF0C2E653C00415851 /* SQLite */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 			);
 			name = "Third Party";
@@ -3087,15 +3084,6 @@
 				AA077A940C84484B00D71D26 /* subscribeButtonSmallPressed.tiff */,
 			);
 			name = "Toolbar Buttons";
-			sourceTree = "<group>";
-		};
-		AA2B6CEF0C2E653C00415851 /* SQLite */ = {
-			isa = PBXGroup;
-			children = (
-				AA785DBA0BF62AE60089DCF0 /* sqlite3.h */,
-				AA785DBB0BF62AE60089DCF0 /* sqlite3.c */,
-			);
-			name = SQLite;
 			sourceTree = "<group>";
 		};
 		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
