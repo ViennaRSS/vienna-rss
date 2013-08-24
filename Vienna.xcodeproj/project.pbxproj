@@ -143,8 +143,6 @@
 		435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */; };
 		435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502892165DE9DF0018EDB7 /* ViennaApp.m */; };
 		435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */; };
-		43BA974A16642AFC00B95F35 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = AA785DBB0BF62AE60089DCF0 /* sqlite3.c */; };
-		43BA974B16642AFD00B95F35 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = AA785DBA0BF62AE60089DCF0 /* sqlite3.h */; };
 		43BA974E16642B1900B95F35 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 662468AF13C60A2800C85417 /* JSONKit.h */; };
 		43BA974F16642B1B00B95F35 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 662468B013C60A2800C85417 /* JSONKit.m */; };
 		43BA976116642B8300B95F35 /* DisclosableView.h in Headers */ = {isa = PBXBuildFile; fileRef = AAED83020A037A8200ED56E5 /* DisclosableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -173,7 +171,6 @@
 		43BA977816642BAC00B95F35 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4BF68414B3161D008FCBE5 /* ASINetworkQueue.m */; };
 		43BA977916642BAD00B95F35 /* ASIProgressDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4BF68514B3161D008FCBE5 /* ASIProgressDelegate.h */; };
 		43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */; };
-		43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA970A1663E80700B95F35 /* libSQLiteLib.a */; };
 		43BA97D2166475BC00B95F35 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
 		43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
@@ -894,13 +891,6 @@
 			remoteGlobalIDString = 43BA973B16642A7D00B95F35;
 			remoteInfo = ASIHTTPRequest;
 		};
-		43BA97C716646E6D00B95F35 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 43BA97091663E80700B95F35;
-			remoteInfo = SQLiteLib;
-		};
 		43BA97D91664766100B95F35 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -1123,7 +1113,6 @@
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		439824241666B3DB00FFE219 /* Release Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Release Instructions.txt"; sourceTree = SOURCE_ROOT; };
 		43B4611E1690982D00F6EC9A /* ResourceRules.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ResourceRules.plist; path = signing/ResourceRules.plist; sourceTree = "<group>"; };
-		43BA970A1663E80700B95F35 /* libSQLiteLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSQLiteLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA97121663EA5000B95F35 /* libJSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA97321663EE7C00B95F35 /* DisclosableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DisclosableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libASIHTTPRequest.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1880,13 +1869,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		43BA97081663E80700B95F35 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		43BA97101663EA5000B95F35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1925,7 +1907,6 @@
 				435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */,
 				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */,
-				43BA97C916646E7300B95F35 /* libSQLiteLib.a in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1954,7 +1935,6 @@
 			isa = PBXGroup;
 			children = (
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
-				43BA970A1663E80700B95F35 /* libSQLiteLib.a */,
 				43BA97121663EA5000B95F35 /* libJSONKit.a */,
 				43BA97321663EE7C00B95F35 /* DisclosableView.framework */,
 				43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */,
@@ -3329,14 +3309,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		43BA97061663E80700B95F35 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA974B16642AFD00B95F35 /* sqlite3.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		43BA970E1663EA5000B95F35 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3376,23 +3348,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		43BA97091663E80700B95F35 /* SQLiteLib */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 43BA970D1663E82700B95F35 /* Build configuration list for PBXNativeTarget "SQLiteLib" */;
-			buildPhases = (
-				43BA97061663E80700B95F35 /* Headers */,
-				43BA97071663E80700B95F35 /* Sources */,
-				43BA97081663E80700B95F35 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SQLiteLib;
-			productName = SQLiteLib;
-			productReference = 43BA970A1663E80700B95F35 /* libSQLiteLib.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		43BA97111663EA5000B95F35 /* JSONKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43BA97151663EA5B00B95F35 /* Build configuration list for PBXNativeTarget "JSONKit" */;
@@ -3465,7 +3420,6 @@
 			dependencies = (
 				3A7567AA1674EB48009C0900 /* PBXTargetDependency */,
 				43BA979616644E3900B95F35 /* PBXTargetDependency */,
-				43BA97C816646E6D00B95F35 /* PBXTargetDependency */,
 				43BA97DA1664766100B95F35 /* PBXTargetDependency */,
 				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 			);
@@ -3526,7 +3480,6 @@
 				43BA973B16642A7D00B95F35 /* ASIHTTPRequest */,
 				43BA97311663EE7B00B95F35 /* DisclosableView */,
 				43BA97111663EA5000B95F35 /* JSONKit */,
-				43BA97091663E80700B95F35 /* SQLiteLib */,
 				430C4ACF166172BD0079C9FC /* Autorevision */,
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
@@ -4299,14 +4252,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		43BA97071663E80700B95F35 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				43BA974A16642AFC00B95F35 /* sqlite3.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		43BA970F1663EA5000B95F35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4473,11 +4418,6 @@
 			isa = PBXTargetDependency;
 			target = 43BA973B16642A7D00B95F35 /* ASIHTTPRequest */;
 			targetProxy = 43BA979516644E3900B95F35 /* PBXContainerItemProxy */;
-		};
-		43BA97C816646E6D00B95F35 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 43BA97091663E80700B95F35 /* SQLiteLib */;
-			targetProxy = 43BA97C716646E6D00B95F35 /* PBXContainerItemProxy */;
 		};
 		43BA97DA1664766100B95F35 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -8584,20 +8524,6 @@
 			};
 			name = Deployment;
 		};
-		43BA970B1663E80900B95F35 /* Development */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA97BC16646BAA00B95F35 /* SQLiteLib-Dev.xcconfig */;
-			buildSettings = {
-			};
-			name = Development;
-		};
-		43BA970C1663E80900B95F35 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA97BB16646BAA00B95F35 /* SQLiteLib-Dep.xcconfig */;
-			buildSettings = {
-			};
-			name = Deployment;
-		};
 		43BA97131663EA5200B95F35 /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */;
@@ -8685,13 +8611,6 @@
 		43D4D6F4166FE08C00BA9675 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */;
-			buildSettings = {
-			};
-			name = StaticAnalyzer;
-		};
-		43D4D6F5166FE08C00BA9675 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 43BA97BC16646BAA00B95F35 /* SQLiteLib-Dev.xcconfig */;
 			buildSettings = {
 			};
 			name = StaticAnalyzer;
@@ -8789,16 +8708,6 @@
 				430C4AF81661F0860079C9FC /* Development */,
 				430C4AF91661F0860079C9FC /* Deployment */,
 				43D4D6EF166FE08C00BA9675 /* StaticAnalyzer */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		43BA970D1663E82700B95F35 /* Build configuration list for PBXNativeTarget "SQLiteLib" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43BA970B1663E80900B95F35 /* Development */,
-				43BA970C1663E80900B95F35 /* Deployment */,
-				43D4D6F5166FE08C00BA9675 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
