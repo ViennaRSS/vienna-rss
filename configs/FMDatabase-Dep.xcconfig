@@ -1,0 +1,4 @@
+// FMDatabase settings for Deployment configuration
+
+#include "FMDatabase-All.xcconfig"
+#include "General-Dep.xcconfig"

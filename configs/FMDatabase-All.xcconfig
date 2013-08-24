@@ -1,0 +1,9 @@
+// FMDatabase settings for all configurations
+
+
+PRODUCT_NAME = FMDatabase
+USER_HEADER_SEARCH_PATHS =  $(inherited) "$(SRCROOT)/3rdparty/FMDatabase"
+GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
+
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
