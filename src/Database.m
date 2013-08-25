@@ -544,7 +544,7 @@ static Database * _sharedDatabase = nil;
 {
 	[self verifyThreadSafety];
 	BOOL result = [sqlDatabase executeUpdateWithFormat:@"update info set last_opened='%@'", [NSDate date]];
-	readOnly = (result == nil);
+	readOnly = (result == FALSE);
 }
 
 /* countOfUnread
