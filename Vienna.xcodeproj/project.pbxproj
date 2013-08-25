@@ -843,6 +843,8 @@
 		F0E01EF417C8856600E20329 /* libFMDatabase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F06BE30317C87DEA00A74FBB /* libFMDatabase.a */; };
 		F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
 		F0E01EF917C8869F00E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
+		F0FBD16617C88BFF006E5756 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FBD16417C88BFF006E5756 /* FMDatabasePool.h */; };
+		F0FBD16717C88BFF006E5756 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FBD16517C88BFF006E5756 /* FMDatabasePool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1892,6 +1894,8 @@
 		F0E01EEA17C884D800E20329 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		F0E01EEB17C884D800E20329 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		F0E01EF717C885A900E20329 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F0FBD16417C88BFF006E5756 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		F0FBD16517C88BFF006E5756 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3342,6 +3346,8 @@
 				F0E01EE517C884D800E20329 /* FMDatabase.m */,
 				F0E01EE617C884D800E20329 /* FMDatabaseAdditions.h */,
 				F0E01EE717C884D800E20329 /* FMDatabaseAdditions.m */,
+				F0FBD16417C88BFF006E5756 /* FMDatabasePool.h */,
+				F0FBD16517C88BFF006E5756 /* FMDatabasePool.m */,
 				F0E01EE817C884D800E20329 /* FMDatabaseQueue.h */,
 				F0E01EE917C884D800E20329 /* FMDatabaseQueue.m */,
 				F0E01EEA17C884D800E20329 /* FMResultSet.h */,
@@ -3398,6 +3404,7 @@
 				F0E01EEE17C884D800E20329 /* FMDatabaseAdditions.h in Headers */,
 				F0E01EF017C884D800E20329 /* FMDatabaseQueue.h in Headers */,
 				F0E01EF217C884D800E20329 /* FMResultSet.h in Headers */,
+				F0FBD16617C88BFF006E5756 /* FMDatabasePool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4459,6 +4466,7 @@
 				F0E01EEF17C884D800E20329 /* FMDatabaseAdditions.m in Sources */,
 				F0E01EF117C884D800E20329 /* FMDatabaseQueue.m in Sources */,
 				F0E01EF317C884D800E20329 /* FMResultSet.m in Sources */,
+				F0FBD16717C88BFF006E5756 /* FMDatabasePool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
