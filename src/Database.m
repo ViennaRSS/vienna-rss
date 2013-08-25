@@ -393,7 +393,7 @@ static Database * _sharedDatabase = nil;
 	{
 		newFoldersTreeSortMethod = [[sortResults stringForColumn:@"folder_sort"] intValue];
 	}
-	[sortResults release];
+
 	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
 	
 	// Register for notifications of change in folders tree sort method.
@@ -856,7 +856,6 @@ static Database * _sharedDatabase = nil;
                 predecessorId = [[siblings stringForColumn:@"folder_id"] intValue];
             else
                 predecessorId =  0;
-			[siblings release];			
 		}
 		if (predecessorId == 0)
 		{
