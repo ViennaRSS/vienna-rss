@@ -148,7 +148,6 @@ static Database * _sharedDatabase = nil;
 		NSString * versionString = [results stringForColumn:@"version"];
 		databaseVersion = [versionString intValue];
 	}
-	[results release];
 
 	// Save this thread handle to ensure we trap cases of calling the db on
 	// the wrong thread.
@@ -318,7 +317,6 @@ static Database * _sharedDatabase = nil;
 			NSInteger parentId = [[results stringForColumn:@"parent_id"] intValue];
 			[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", parentId, folderId];
 		}
-		[results release];
 		
 		[self commitTransaction];
 		NSLog(@"Updated database schema to version %d.", databaseVersion);
@@ -545,7 +543,7 @@ static Database * _sharedDatabase = nil;
 -(void)syncLastUpdate
 {
 	[self verifyThreadSafety];
-	BOOL * result = [sqlDatabase executeUpdateWithFormat:@"update info set last_opened='%@'", [NSDate date]];
+	BOOL result = [sqlDatabase executeUpdateWithFormat:@"update info set last_opened='%@'", [NSDate date]];
 	readOnly = (result == nil);
 }
 
@@ -762,7 +760,7 @@ static Database * _sharedDatabase = nil;
 	if (folderId != -1)
 	{
 		[self verifyThreadSafety];
-		BOOL * results = [sqlDatabase executeUpdateWithFormat:
+		BOOL results = [sqlDatabase executeUpdateWithFormat:
 							   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
 							   "values (%ld, '%@', '', '', '', '%@', %d)",
 							   folderId,
@@ -789,7 +787,7 @@ static Database * _sharedDatabase = nil;
 	if (folderId != -1)
 	{
 		[self verifyThreadSafety];
-		BOOL * results = [sqlDatabase executeUpdateWithFormat:
+		BOOL results = [sqlDatabase executeUpdateWithFormat:
 					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
 					 "values (%ld, '', '', '', '', '%@', %d)",
 					folderId,
@@ -925,7 +923,7 @@ static Database * _sharedDatabase = nil;
 	// bit me before. When adding new fields to the folders table, remember to init
 	// the field here even if its just to an empty value.
 	[self verifyThreadSafety];
-	BOOL * results = [sqlDatabase executeUpdateWithFormat:
+	BOOL results = [sqlDatabase executeUpdateWithFormat:
 		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %ld, 0, %f, %ld, %ld, %ld, %ld)",
 		name,
 		parentId,
@@ -1023,7 +1021,6 @@ static Database * _sharedDatabase = nil;
 		}
 		else
 			[self setFirstChild:[folder nextSiblingId] forFolder:[folder parentId]];
-		[results release];
 	}
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
@@ -1317,7 +1314,6 @@ static Database * _sharedDatabase = nil;
 	{
 		folderId = [[results stringForColumn:@"first_folder"] intValue];
 	}
-	[results release];
 	return folderId;
 }
 
@@ -1458,7 +1454,7 @@ static Database * _sharedDatabase = nil;
 		else if (existingArticle == nil)
 		{
 			
-			BOOL * results = [sqlDatabase executeUpdateWithFormat:
+			BOOL results = [sqlDatabase executeUpdateWithFormat:
 				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
 				@"values('%@', %ld, %ld, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@',%d)",
 				articleGuid,
@@ -1516,7 +1512,6 @@ static Database * _sharedDatabase = nil;
 					}
 					else
 						existingBody = @"";
-					[results release];
 				}
 				
 				isArticleRevised = ![existingBody isEqualToString:articleBody];
@@ -1531,7 +1526,7 @@ static Database * _sharedDatabase = nil;
 				if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty))
 					revised_flag = YES;
 				
-				BOOL * results = [sqlDatabase executeUpdateWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
+				BOOL results = [sqlDatabase executeUpdateWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
 					@"read_flag=0, title='%@', text='%@', revised_flag=%d where folder_id=%ld and message_id='%@'",
 					parentId,
 					userName,
@@ -1602,7 +1597,7 @@ static Database * _sharedDatabase = nil;
 	// Verify we're on the right thread
 	[self verifyThreadSafety];
 
-	BOOL * results = [sqlDatabase executeUpdate:@"delete from messages where deleted_flag=1"];
+	BOOL results = [sqlDatabase executeUpdate:@"delete from messages where deleted_flag=1"];
 	if (results)
 	{
 		[self compactDatabase];
@@ -1629,7 +1624,7 @@ static Database * _sharedDatabase = nil;
 			// Verify we're on the right thread
 			[self verifyThreadSafety];
 			
-			BOOL * results = [sqlDatabase executeUpdateWithFormat:@"delete from messages where folder_id=%ld and message_id='%@'", folderId, guid];
+			BOOL results = [sqlDatabase executeUpdateWithFormat:@"delete from messages where folder_id=%ld and message_id='%@'", folderId, guid];
 			if (results)
 			{
 				if (![article isRead])
@@ -1668,7 +1663,6 @@ static Database * _sharedDatabase = nil;
 			[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 			[criteriaTree release];
 		}
-		[results release];
 		initializedSmartfoldersDict = YES;
 	}
 }
@@ -1774,7 +1768,6 @@ static Database * _sharedDatabase = nil;
 			if (IsSearchFolder(folder))
 				searchFolder = [folder retain];
 		}
-		[results release];
 
 		// Load all RSS folders and add them to the list.
 		results = [sqlDatabase executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
@@ -1794,7 +1787,6 @@ static Database * _sharedDatabase = nil;
 			[folder setLastUpdateString:lastUpdateString];
 			[folder setUsername:username];
 		}
-		[results release];
 		
 		// Fix the childUnreadCount for every parent		
 		for (Folder * folder in [foldersDict objectEnumerator])
@@ -1925,7 +1917,6 @@ static Database * _sharedDatabase = nil;
 			[folder addArticleToCache:article];
 			[article release];
 		}
-		[results release];
         
         // This is a good time to do a quick check to ensure that our
         // own count of unread is in sync with the folders count and fix
@@ -2211,7 +2202,6 @@ static Database * _sharedDatabase = nil;
 				NSString * guid = [results stringForColumn:@"message_id"];
 				[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 			}
-			[results release];
 		}
 	}
 	return newArray;
@@ -2306,8 +2296,6 @@ static Database * _sharedDatabase = nil;
         }
     }
 
-	// Deallocate
-	[results release];
 	return newArray;
 }
 
@@ -2331,7 +2319,7 @@ static Database * _sharedDatabase = nil;
 	if (folder != nil && [folder unreadCount] > 0)
 	{
 		[self verifyThreadSafety];
-		BOOL * results = [sqlDatabase executeUpdateWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", folderId];
+		BOOL results = [sqlDatabase executeUpdateWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", folderId];
 		if (results)
 		{
 			NSInteger count = [folder unreadCount];
@@ -2374,7 +2362,7 @@ static Database * _sharedDatabase = nil;
 			[self verifyThreadSafety];
 
 			// Mark an individual article read
-			BOOL * results = [sqlDatabase executeUpdateWithFormat:@"update messages set read_flag=%d where folder_id=%ld and message_id='%@'", isRead, folderId, guid];
+			BOOL results = [sqlDatabase executeUpdateWithFormat:@"update messages set read_flag=%d where folder_id=%ld and message_id='%@'", isRead, folderId, guid];
 			if (results)
 			{
 				NSInteger adjustment = (isRead ? -1 : 1);
@@ -2468,7 +2456,7 @@ static Database * _sharedDatabase = nil;
 			[self verifyThreadSafety];
 
 			// Mark an individual article flagged
-			BOOL * results = [sqlDatabase executeUpdateWithFormat:@"update messages set marked_flag=%d where folder_id=%ld and message_id='%@'", isFlagged, folderId, guid];
+			BOOL results = [sqlDatabase executeUpdateWithFormat:@"update messages set marked_flag=%d where folder_id=%ld and message_id='%@'", isFlagged, folderId, guid];
 			if (results)
 			{
 
@@ -2497,7 +2485,6 @@ static Database * _sharedDatabase = nil;
 	FMResultSet * results = [sqlDatabase executeQuery:@"select deleted_flag from messages where deleted_flag=1"];
 	if ([results next])
 	{
-        [results release];
         return NO;
 	}
 	else
@@ -2521,7 +2508,6 @@ static Database * _sharedDatabase = nil;
 			[articleGuids addObject:guid];
 		}
 	}
-    [results release];
 	
 	return articleGuids;
 }
