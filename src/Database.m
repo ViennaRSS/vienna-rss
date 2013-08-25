@@ -129,7 +129,7 @@ static Database * _sharedDatabase = nil;
 	}
 	
 	// Open the database at the well known location
-	sqlDatabase = [FMDatabase databaseWithPath:qualifiedDatabaseFileName];
+	sqlDatabase = [[FMDatabase alloc] initWithPath:qualifiedDatabaseFileName];
 	if (!sqlDatabase || ![sqlDatabase open])
 	{
 		NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
@@ -463,7 +463,7 @@ static Database * _sharedDatabase = nil;
 		NSString * newPath = [[[openPanel filenames] objectAtIndex:0] stringByAppendingPathComponent:databaseName];
 		
 		// And try to open it.
-		sqlDatabase = [FMDatabase databaseWithPath:newPath];
+		sqlDatabase = [[FMDatabase alloc] initWithPath:newPath];
 		if (!sqlDatabase || ![sqlDatabase open])
 		{
 			NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
