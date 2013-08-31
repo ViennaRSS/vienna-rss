@@ -4185,6 +4185,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		*validateFlag = isMainWindowVisible;
 	}
+	*validateFlag = NO;
 	return NO;
 }
 
