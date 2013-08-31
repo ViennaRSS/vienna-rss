@@ -4117,6 +4117,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
 	
+	*validateFlag = NO;
+    
 	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshesToolbar:))
 	{
 		*validateFlag = ![db readOnly];
