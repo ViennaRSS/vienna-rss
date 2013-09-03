@@ -546,7 +546,7 @@ static Database * _sharedDatabase = nil;
 #ifdef DEBUG
 	NSDate *start = [NSDate date];
 #endif
-	[sqlDatabase executeUpdate:sqlStatement withArgumentsInArray:[NSArray arrayWithObjects:nil]];
+	[sqlDatabase executeUpdate:sqlStatement withArgumentsInArray:[NSArray array]];
 #ifdef DEBUG
 	NSLog(@"Query (%f secs): %@", [[NSDate date] timeIntervalSinceDate:start], sqlStatement);
 #endif
