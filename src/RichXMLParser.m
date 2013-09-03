@@ -757,8 +757,9 @@
 			if (!hasLink && [self link])
 				[newItem setLink:[self link]];
 
-			// Do relative IMG and A tags fixup
+			// Do relative IMG, IFRAME and A tags fixup
 			[articleBody fixupRelativeImgTags:[self link]];
+			[articleBody fixupRelativeIframeTags:[self link]];
 			[articleBody fixupRelativeAnchorTags:[self link]];
 			[newItem setDescription:SafeString(articleBody)];
 
@@ -1022,8 +1023,9 @@
 				}
 			}
 
-			// Do relative IMG and A tags fixup
+			// Do relative IMG, IFRAME and A tags fixup
 			[articleBody fixupRelativeImgTags:entryBase];
+			[articleBody fixupRelativeIframeTags:entryBase];
 			[articleBody fixupRelativeAnchorTags:entryBase];
 			[newItem setDescription:SafeString(articleBody)];
 			

@@ -1095,7 +1095,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	[dateFormatters_lock unlock];
 
-	NSLog(@"Conversion error: %@",dateString);
+	// expensive last resort attempt
+	date = [NSDate dateWithNaturalLanguageString:dateString locale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
 	return date;
 }
 
