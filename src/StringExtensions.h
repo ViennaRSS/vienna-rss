@@ -26,6 +26,7 @@
 	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
 	-(void)fixupRelativeImgTags:(NSString *)baseURL;
 	-(void)fixupRelativeAnchorTags:(NSString *)baseURL;
+	-(void)fixupRelativeIframeTags:(NSString *)baseURL;
 @end
 
 @interface NSString (StringExtensions)

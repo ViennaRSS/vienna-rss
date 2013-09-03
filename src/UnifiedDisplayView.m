@@ -286,10 +286,15 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			NSString* bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
 			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
 			CGFloat fittingHeight = [outputHeight floatValue];
+			CGFloat formerHeight = 0;
 
 			NSUInteger row= [cell row];
-			if (row < [rowHeightArray count])
-				[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
+			if (row < [rowHeightArray count]) {
+				id obj = [rowHeightArray objectAtIndex:row];
+				formerHeight = [obj floatValue];
+				if (fittingHeight != formerHeight)
+					[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
+			}
 			else
 				[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
 
@@ -303,31 +308,16 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			//set the new frame to the webview
 			[sender setFrame:newWebViewRect];
 
-			if ([bodyHeight isEqualToString:outputHeight])
-			{
-				[cell setInProgress:NO];
-				[self redrawCell:cell];
-				[sender performSelector:@selector(display) withObject:nil afterDelay:0.03];
-			}
-			else
-			{
+			if ((fittingHeight != formerHeight) && (![bodyHeight isEqualToString:outputHeight]) ) {
 				// something in the dimensions went wrong : force a reload
-				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-				[(ArticleView *)sender clearHTML];
-				[self redrawCell:cell];
-				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
-				NSArray * allArticles = [articleController allArticles];
-				if (row < (NSInteger)[allArticles count]) // our article list might have changed...
-				{
-					Article * theArticle = [allArticles objectAtIndex:row];
-					NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-					[cell setInProgress:NO];
-					Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-					[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-					[self redrawCell:cell];
-					[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
-				}
+				NSRect frame = sender.frame;
+				frame.size.height = 1;        // Set the height to a small one.
 			}
+			[cell setInProgress:NO];
+			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+			[cell display];
+			[articleList reloadRowAtIndex:[cell row]];
+
 		}
 		else
 		{
@@ -354,15 +344,16 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if (row < (NSInteger)[allArticles count])
 			{
 				[(ArticleView *)sender clearHTML];
-				[self redrawCell:cell];
-				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
+				[cell display];
+				[articleList reloadRowAtIndex:[cell row]];
 				Article * theArticle = [allArticles objectAtIndex:row];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
 				[cell setInProgress:NO];
 				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-				[self redrawCell:cell];
-				[sender performSelector:@selector(display) withObject:nil afterDelay:0.01];
+				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+				[cell display];
+				[articleList reloadRowAtIndex:[cell row]];
 			}
 			else
 				// the article list has probably changed and we aren't relevant anymore
@@ -372,17 +363,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			// TODO : what should we do ?
 			NSLog(@"Webview error associated to object of class %@", [obj class]);
 	}
-}
-
-/* redrawCell
- * forces a redraw after a cell's content has been modified
- */
--(void)redrawCell:(ArticleCellView *)cell
-{
-	[cell display];
-	[articleList reloadRowAtIndex:[cell row]];
-	[articleList updateCells];
-	[self display];
 }
 
 /* updateAlternateMenuTitle

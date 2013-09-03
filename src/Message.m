@@ -334,6 +334,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 	[articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
 	[articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
 	[articleBody fixupRelativeImgTags:[self link]];
+	[articleBody fixupRelativeIframeTags:[self link]];
 	[articleBody fixupRelativeAnchorTags:[self link]];
 	return articleBody;
 }
