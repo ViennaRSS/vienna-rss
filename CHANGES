@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 15
+-------------
+- Improved speed thanks to a new database wrapper (contributed by echelon9 and barijaona)
+- Fix many Unified display view problems
+- Fix for some iframes/videos which did not show
+- Improved string to date conversion routine (solves problems with some feeds which wrongly showed as updated)
+- Fix some problems reported by analyser
+
 3.0.0 Beta 14
 -------------
 - Fixed a bug in sync password management (__Note__ : if you had connection problems with your Open Reader server, open Keychain Access and delete all Vienna-related elements. Then, reenter your credentials in Vienna).
