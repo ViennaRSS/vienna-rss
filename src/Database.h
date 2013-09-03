@@ -19,13 +19,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "SQLDatabase.h"
+#import "FMDatabase.h"
 #import "Folder.h"
 #import "Field.h"
 #import "Criteria.h"
 
 @interface Database : NSObject {
-	SQLDatabase * sqlDatabase;
+	FMDatabase * sqlDatabase;
 	BOOL initializedfoldersDict;
 	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
