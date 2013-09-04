@@ -1557,7 +1557,7 @@ static Database * _sharedDatabase = nil;
 				// If the folder is not displayed, then the article text has not been loaded yet.
 				if (existingBody == nil)
 				{
-					FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select text from messages where folder_id=%ld and message_id='%@'", (long)folderID, preparedArticleGuid];
+					FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select text from messages where folder_id=%ld and message_id=%@", (long)folderID, preparedArticleGuid];
 					if ([results next])
 					{
 						existingBody = [results stringForColumn:@"text"];
