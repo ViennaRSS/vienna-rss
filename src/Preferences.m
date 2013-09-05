@@ -42,7 +42,7 @@ static Preferences * _standardPreferences = nil;
 
 // Private methods
 @interface Preferences (Private)
--(NSDictionary *)factoryDefaults;
+-(NSDictionary *)allocFactoryDefaults;
 -(void)createFeedSourcesFolderIfNecessary;
 -(void)handleUpdateRestart:(NSNotification *)nc;
 @end
@@ -97,7 +97,7 @@ static Preferences * _standardPreferences = nil;
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MAPref_Profile_Path];
 		
 		// Merge in the user preferences from the defaults.
-		NSDictionary * defaults = [self factoryDefaults];
+		NSDictionary * defaults = [self allocFactoryDefaults];
 		if (profilePath == nil)
 		{
 			preferencesPath = nil;
@@ -142,7 +142,7 @@ static Preferences * _standardPreferences = nil;
 			userPrefs = [[NSMutableDictionary alloc] initWithDictionary:defaults];
 			if (preferencesPath != nil)
 				[userPrefs addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:preferencesPath]];
-			
+            
 			// Other folders are local to the profilePath
 			defaultDatabase = [[profilePath stringByAppendingPathComponent:MA_Database_Name] retain];
 			imagesFolder = [[[profilePath stringByAppendingPathComponent:MA_ImagesFolder_Name] stringByExpandingTildeInPath] retain];
@@ -151,6 +151,8 @@ static Preferences * _standardPreferences = nil;
 			pluginsFolder = [[[profilePath stringByAppendingPathComponent:MA_PluginsFolder_Name] stringByExpandingTildeInPath] retain];
 			feedSourcesFolder = [[[profilePath stringByAppendingPathComponent:MA_FeedSourcesFolder_Name] stringByExpandingTildeInPath] retain];
 		}
+        
+		[defaults release];
 		
 		// Load those settings that we cache.
 		foldersTreeSortMethod = [self integerForKey:MAPref_AutoSortFoldersTree];
@@ -234,10 +236,10 @@ static Preferences * _standardPreferences = nil;
 	[super dealloc];
 }
 
-/* factoryDefaults
+/* allocFactoryDefaults
  * The standard class initialization object.
  */
--(NSDictionary *)factoryDefaults
+-(NSDictionary *)allocFactoryDefaults
 {
 	// Set the preference defaults
 	NSMutableDictionary * defaultValues = [[NSMutableDictionary alloc] init];
