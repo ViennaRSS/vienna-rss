@@ -284,17 +284,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			[[sender preferences] setJavaScriptEnabled:YES];
 			NSString* outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
 			NSString* bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
+			NSString* clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
 			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
 			CGFloat fittingHeight = [outputHeight floatValue];
-			CGFloat formerHeight = 0;
 
 			NSUInteger row= [cell row];
-			if (row < [rowHeightArray count]) {
-				id obj = [rowHeightArray objectAtIndex:row];
-				formerHeight = [obj floatValue];
-				if (fittingHeight != formerHeight)
-					[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
-			}
+			if (row < [rowHeightArray count])
+				[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
 			else
 				[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
 
@@ -308,16 +304,17 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			//set the new frame to the webview
 			[sender setFrame:newWebViewRect];
 
-			if ((fittingHeight != formerHeight) && (![bodyHeight isEqualToString:outputHeight]) ) {
-				// something in the dimensions went wrong : force a reload
-				NSRect frame = sender.frame;
-				frame.size.height = 1;        // Set the height to a small one.
+			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
+				[cell setInProgress:NO];
+				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+				[cell setNeedsDisplay:YES];
+				[articleList reloadRowAtIndex:row];
 			}
-			[cell setInProgress:NO];
-			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-			[cell display];
-			[articleList reloadRowAtIndex:[cell row]];
-
+			else {
+				// something in the dimensions went wrong : force a reload, then wait a while
+				[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
+				[cell setInProgress:YES];
+			}
 		}
 		else
 		{
@@ -325,6 +322,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			[sender display];
 		}
 	}
+}
+
+-(void)resubmitWebView:(WebView *)sender
+{
+	ArticleCellView * cell = (ArticleCellView *)[sender superview];
+	[cell setNeedsDisplay:YES];
+	[articleList reloadRowAtIndex:[cell row]];
+	[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
 }
 
 /* didFailLoadWithError
@@ -344,16 +349,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if (row < (NSInteger)[allArticles count])
 			{
 				[(ArticleView *)sender clearHTML];
-				[cell display];
+				[cell setNeedsDisplay:YES];
 				[articleList reloadRowAtIndex:[cell row]];
 				Article * theArticle = [allArticles objectAtIndex:row];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[cell setInProgress:NO];
 				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-				[cell display];
-				[articleList reloadRowAtIndex:[cell row]];
+				[cell setNeedsDisplay:YES];
+				[articleList reloadRowAtIndex:row];
 			}
 			else
 				// the article list has probably changed and we aren't relevant anymore
@@ -943,9 +946,8 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	}
 
 	ArticleView * view = [cellView articleView];
+	[view setNeedsDisplay:NO];
 	[view clearHTML];
-	[view performSelector:@selector(display) withObject:nil afterDelay:0.01];
-
 	NSArray * allArticles = [articleController allArticles];
 	if (row < (NSInteger)[allArticles count])
 	{
@@ -954,11 +956,11 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
 		[view setHTML:htmlText withBase:SafeString([folder feedURL])];
 		[cellView addSubview:view];
-		// Make sure we are well positioned
-		[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-		[view performSelector:@selector(display) withObject:nil afterDelay:0.2];
 	}
 
+	// Make sure we are well positioned
+	[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+	[view setNeedsDisplay:YES];
     return cellView;
 }
 
