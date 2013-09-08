@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-NSString * MA_DefaultUserAgentString = @"Vienna/%@ Safari/%@";
+NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 Vienna/%@ Safari/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
