@@ -88,6 +88,7 @@
 	if (![DownloadManager isFileDownloaded:destPath])
 	{
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
+		[downloadButton sizeToFit];
 		[downloadButton setAction:@selector(downloadFile:)];
 		[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
 	}
@@ -109,12 +110,14 @@
 		if (isITunes)
 		{
 			[downloadButton setTitle:NSLocalizedString(@"Play", nil)];
+			[downloadButton sizeToFit];
 			[downloadButton setAction:@selector(openFile:)];
 			[filenameLabel setStringValue:NSLocalizedString(@"Click the Play button to play this enclosure in iTunes.", nil)];
 		}
 		else
 		{
 			[downloadButton setTitle:NSLocalizedString(@"Open", nil)];
+			[downloadButton sizeToFit];
 			[downloadButton setAction:@selector(openFile:)];
 			[filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
 		}
