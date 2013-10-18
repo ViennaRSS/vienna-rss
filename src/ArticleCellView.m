@@ -44,7 +44,7 @@
 		// Disable caching
 		[[articleView preferences] setUsesPageCache:NO];
 		[articleView setMaintainsBackForwardList:NO];
-		
+		[self setInProgress:NO];
 		progressIndicator = nil;
 	}
 	return self;
