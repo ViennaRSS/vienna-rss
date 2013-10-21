@@ -267,34 +267,22 @@
 	[openPanel setCanChooseDirectories:YES];
 	[openPanel setCanCreateDirectories:YES];
 	[openPanel setCanChooseFiles:NO];
-	[openPanel beginSheetForDirectory:nil
-								 file:nil
-								types:nil
-					   modalForWindow:prefPaneWindow
-						modalDelegate:self
-					   didEndSelector:@selector(openPanelDidEnd:returnCode:contextInfo:)
-						  contextInfo:nil];
-}
+	[openPanel setDirectoryURL:[[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil]];
+	[openPanel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
+			// Force the focus back to the main preferences pane
+			[openPanel orderOut:self];
+			[prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
 
-/* openPanelDidEnd
- * Called when the user completes the Import open panel
- */
--(void)openPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	// Force the focus back to the main preferences pane
-	[panel orderOut:self];
-	NSWindow * prefPaneWindow = [downloadFolder window];
-	[prefPaneWindow makeKeyAndOrderFront:prefPaneWindow];
+			if (returnCode == NSOKButton)
+			{
+				NSString * downloadFolderPath = [[openPanel directoryURL] path];
+				[[Preferences standardPreferences] setDownloadFolder:downloadFolderPath];
+				[self updateDownloadsPopUp:downloadFolderPath];
+			}
 
-	if (returnCode == NSOKButton)
-	{
-		NSString * downloadFolderPath = [panel directory];
-		[[Preferences standardPreferences] setDownloadFolder:downloadFolderPath];
-		[self updateDownloadsPopUp:downloadFolderPath];
-	}
-
-	if (returnCode == NSCancelButton)
-		[downloadFolder selectItemAtIndex:0];
+			if (returnCode == NSCancelButton)
+				[downloadFolder selectItemAtIndex:0];
+		}];
 }
 
 /* updateDownloadsPopUp
@@ -359,31 +347,17 @@
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
 	NSWindow * prefPaneWindow = [linksHandler window];
 
-	[panel beginSheetForDirectory:@"/Applications/"
-							 file:nil
-							types:[NSArray arrayWithObjects:NSFileTypeForHFSTypeCode('APPL'), nil]
-				   modalForWindow:prefPaneWindow
-					modalDelegate:self
-				   didEndSelector:@selector(linkSelectorDidEnd:returnCode:contextInfo:)
-					  contextInfo:nil];
-}
+	[panel setDirectoryURL:[[NSFileManager defaultManager] URLForDirectory:NSApplicationDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:NO error:nil]];
+	[panel setAllowedFileTypes:[NSArray arrayWithObjects:NSFileTypeForHFSTypeCode('APPL'), nil]];
+	[panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
+		[panel orderOut:self];
+		NSWindow * prefPaneWindow = [linksHandler window];
+		[prefPaneWindow makeKeyAndOrderFront:self];
 
-/* linkSelectorDidEnd
- * Called when the user completes the open panel
- */
--(void)linkSelectorDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	[panel orderOut:self];
-	NSWindow * prefPaneWindow = [linksHandler window];
-	[prefPaneWindow makeKeyAndOrderFront:self];
-
-	if (returnCode == NSOKButton)
-	{
-		NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[panel filename]];
-		[self setDefaultLinksHandler:fileURL];
-		[fileURL release];
-	}
-	[self refreshLinkHandler];
+		if (returnCode == NSOKButton)
+			[self setDefaultLinksHandler:[panel URL]];
+		[self refreshLinkHandler];
+	}];
 }
 
 /* setDefaultLinksHandler
