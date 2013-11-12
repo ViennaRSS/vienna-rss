@@ -256,9 +256,15 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
     {
 		id obj = [sender superview];
 		if ([obj isKindOfClass:[ArticleCellView class]]) {
-			NSRect frame = sender.frame;
-			frame.size.height = 1;        // Set the height to a small one.
-			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+			ArticleCellView * cell = (ArticleCellView *)obj;
+			NSUInteger row= [cell row];
+			if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+				NSRect frame = sender.frame;
+				frame.size.height = 1;        // Set the height to a small one.
+				frame.size.width = 1;
+				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+			} else
+				[cell setInProgress:NO];
 		}
 	}
 }
@@ -308,14 +314,16 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
 				[cell setInProgress:NO];
 				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
 					[cell setNeedsDisplay:YES];
-					[articleList reloadRowAtIndex:row];
-				}
+				[articleList reloadRowAtIndex:row];
 			}
 			else {
-				// something in the dimensions went wrong : force a reload, then wait a while
-				[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
+				// something in the dimensions went wrong : wait a while, then force a reload
+				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
+					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
+				else
+					[articleList reloadRowAtIndex:row];
 			}
 		}
 	}
@@ -327,12 +335,20 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 	NSUInteger row = [cell row];
 	if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+		NSRect frame = sender.frame;
+		frame.size.height = 1;        // Set the height to a small one.
+		frame.size.width = 1;
+		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		[cell setNeedsDisplay:YES];
-		[articleList reloadRowAtIndex:[cell row]];
+		[articleList reloadRowAtIndex:row];
+		[articleList setNeedsDisplay:YES];
 		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
 	} else {
-		[cell setInProgress:NO];
-		[cell setNeedsDisplay:YES];
+		if (cell != nil) {
+			[cell setInProgress:NO];
+			[articleList reloadRowAtIndex:row];
+			[articleList performSelector:@selector(updateCells) withObject:nil afterDelay:0.3];
+		}
 	}
 }
 
@@ -842,15 +858,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 -(void)selectFolderWithFilter:(int)newFolderId
 {
 	currentSelectedRow = -1;
+	[rowHeightArray removeAllObjects];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
-	[rowHeightArray removeAllObjects];
 	[articleList reloadData];
 	if (guidOfArticleToSelect == nil)
 		[articleList scrollRowToVisible:0];
 	else
 		[self selectArticleAfterReload];
-	[articleList performSelector:@selector(displayIfNeeded) withObject:nil afterDelay:1];
 }
 
 /* handleRefreshArticle
@@ -941,30 +956,37 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (![aListView isEqualTo:articleList])
 		return nil;
-	ArticleCellView *cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+	NSArray * allArticles = [articleController allArticles];
+	Article * theArticle = [allArticles objectAtIndex:row];
+	int articleFolderId = [theArticle folderId];
 
-	if(!cellView) {
+	// is a cell already being drawn for the same row /article ?
+	// if not, get a new cell
+	ArticleCellView *cellView = (ArticleCellView*)[articleList cellForRowAtIndex:row];
+	if ( cellView != nil && [cellView inProgress] && [cellView folderId] == articleFolderId )
+		return cellView;
+	else
+		cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+
+	if(cellView == nil || [cellView inProgress]) {
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
 						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width, [self listView:aListView heightOfRow:row])] autorelease];
 	}
 
 	ArticleView * view = [cellView articleView];
-	[view setNeedsDisplay:NO];
-	NSArray * allArticles = [articleController allArticles];
 	if (row < (NSInteger)[allArticles count])
 	{
 		[view clearHTML];
-		Article * theArticle = [allArticles objectAtIndex:row];
 		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-		Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
+		Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
 		[cellView setInProgress:YES];
+		[cellView setFolderId:articleFolderId];
 		[view setHTML:htmlText withBase:SafeString([folder feedURL])];
 	}
 
 	[cellView addSubview:view];
 	// Make sure we are well positioned
 	[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-	[view setNeedsDisplay:YES];
     return cellView;
 }
 
