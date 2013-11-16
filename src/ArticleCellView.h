@@ -17,8 +17,6 @@
 	AppController * controller;
 	ArticleView *articleView;
 	NSProgressIndicator * progressIndicator;
-	BOOL _inProgress;
-	int folderId;
 }
 
 @property (nonatomic, retain) ArticleView *articleView;
