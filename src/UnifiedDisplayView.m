@@ -545,7 +545,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
+	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
 	[prefs setInteger:[articleController currentFolderId] forKey:MAPref_CachedFolderID];
 	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 }
@@ -577,7 +577,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0) ? [[articleController allArticles] objectAtIndex:currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]) ? [[articleController allArticles] objectAtIndex:currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -957,6 +957,8 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
+	if (row >= [allArticles count])
+		return nil;
 	Article * theArticle = [allArticles objectAtIndex:row];
 	int articleFolderId = [theArticle folderId];
 
