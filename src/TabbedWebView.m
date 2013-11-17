@@ -254,7 +254,7 @@
 		}
 	}
 	NSString * scheme = [[[request URL] scheme] lowercaseString];
-	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"])
+	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"about"])
 	{
 		[listener use];
 	}
