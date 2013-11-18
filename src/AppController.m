@@ -133,6 +133,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
+static NSLocale * enUSLocale;
 
 /* init
  * Class instance initialisation.
@@ -1016,12 +1017,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     dateFormatters_lock = [[NSLock alloc] init];
 
 	// Initializes the date formatters
-	NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
 
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
 		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
-		[dateFormatterArray[i] setLocale:enUS];
+		[dateFormatterArray[i] setLocale:enUSLocale];
 		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	}
 
@@ -1047,7 +1048,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[dateFormatterArray[12] setDateFormat:@"EEEE dd MMMM yyyy"];
 
 
-	[enUS release];
 	// end of initialization of date formatters
 }
 
@@ -1082,7 +1082,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[dateFormatters_lock unlock];
 
 	// expensive last resort attempt
-	date = [NSDate dateWithNaturalLanguageString:dateString locale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
 	return date;
 }
 
