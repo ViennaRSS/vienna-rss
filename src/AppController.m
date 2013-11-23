@@ -1442,8 +1442,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (newBrowserTemplate)
 	{
 		BrowserPane * newBrowserPane = [newBrowserTemplate mainView];
-		if (didCompleteInitialisation)
-			[browserView saveOpenTabs];
 		
 		[browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
@@ -1454,6 +1452,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		[newBrowserTemplate release];
 	}
+	if (didCompleteInitialisation)
+			[browserView performSelector:@selector(saveOpenTabs) withObject:nil afterDelay:3];
 }
 
 /* loadOpenTabs
