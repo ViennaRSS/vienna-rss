@@ -315,7 +315,12 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				[cell setInProgress:NO];
 				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
-					[cell setNeedsDisplay:YES];
+					[sender setNeedsDisplay:YES];
+				else {
+					// this is not the relevant cell
+					[articleList setNeedsDisplay:YES];
+					[cell setFrame:NSMakeRect(0, 0, 0, 0)];
+				}
 				[articleList reloadRowAtIndex:row];
 			}
 			else {
@@ -325,7 +330,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				else
 					[articleList reloadRowAtIndex:row];
 			}
+		} else {
+			// not an ArticleCellView anymore : hide it
+			[sender setFrame:NSMakeRect(0, 0, 0, 0)];
 		}
+	} else {
+		// something went probably wrong : this is not the main frame
+		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
 	}
 }
 
@@ -339,7 +350,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		frame.size.height = 1;        // Set the height to a small one.
 		frame.size.width = 1;
 		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-		[cell setNeedsDisplay:YES];
+		[sender setNeedsDisplay:YES];
 		[articleList reloadRowAtIndex:row];
 		[articleList setNeedsDisplay:YES];
 		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
@@ -937,9 +948,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	CGFloat height;
 	if (row >= [rowHeightArray count])
 	{
-		// 100 seems a reasonable value to avoid calculating too many frames before being able to update display
-		[rowHeightArray addObject:[NSNumber numberWithFloat:100]];
-		return 100.;
+		// 150 seems a reasonable value to avoid calculating too many frames before being able to update display
+		[rowHeightArray addObject:[NSNumber numberWithFloat:150]];
+		return 150.;
 	}
 	else
 	{
