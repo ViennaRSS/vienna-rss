@@ -271,10 +271,9 @@
  */
 -(NSString *)nodeName
 {
-	//	return folder ? [folder name] : @"";
 	if (folder != nil) {
 		if (IsGoogleReaderFolder(folder)) {
-			return [NSString stringWithFormat:@"[C] %@",[folder name]];
+			return [NSString stringWithFormat:@"☁️ %@",[folder name]];
 		} else {
 			return [folder name];
 		}
