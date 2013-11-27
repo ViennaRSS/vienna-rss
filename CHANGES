@@ -8,6 +8,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 19
+-------------
+- Fix a crash which occured when deleting multiple articles under OS X Mavericks
+- Improved Unified display view
+- Triggers gzip compression with servers using Google Servlet Engine (ie Blogspot)
+- Various Open Reader improvements
+- The list of open tabs was sometimes lost after a crash
+- Fix memory management problems
+- Other bug fixes and code modernization
+
 3.0.0 Beta 18
 -------------
 - Improvement on Beta 17
