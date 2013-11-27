@@ -354,7 +354,7 @@
 "Delete all articles in the trash" = "Placer tous les articles dans la corbeille";
 "Unsubscribe" = "Se désabonner du flux";
 "Resubscribe" = "Se réabonner au flux";
-"Download" = "Téléchargement";
+"Download" = "Télécharger";
 "This article contains an enclosed file." = "Cet article contient un fichier incorporé.";
 "Growl download completed" = "Téléchargement de fichier réussi";
 "Growl download failed" = "Téléchargement de fichier non réussi";

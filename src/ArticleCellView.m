@@ -18,8 +18,7 @@
 @implementation ArticleCellView
 
 @synthesize articleView;
-@synthesize inProgress = _inProgress;
-
+@synthesize inProgress, folderId;
 
 #pragma mark -
 #pragma mark Init/Dealloc
@@ -44,7 +43,7 @@
 		// Disable caching
 		[[articleView preferences] setUsesPageCache:NO];
 		[articleView setMaintainsBackForwardList:NO];
-		
+		[self setInProgress:NO];
 		progressIndicator = nil;
 	}
 	return self;

@@ -260,7 +260,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	// If the current HTML is the same as the new HTML then we don't need to
 	// do anything here. This will stop the view from spurious redraws of the same
 	// article after a refresh.
-	if (currentHTML != nil && [currentHTML compare:htmlText] == NSOrderedSame)
+	if ([currentHTML isEqualToString:htmlText])
 		return;
 	
 	// Remember the current html string.

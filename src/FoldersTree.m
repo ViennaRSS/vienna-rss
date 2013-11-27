@@ -1060,9 +1060,9 @@
 	NSString * newName = (NSString *)object;
 	Folder * folder = [node folder];
 	
-	// Remove the "[C] " character on Open Reader feeds
-	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"[C] "]) {
-		NSString *tmpName = [newName substringFromIndex:4];
+	// Remove the "☁️ " symbols on Open Reader feeds
+	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"☁️ "]) {
+		NSString *tmpName = [newName substringFromIndex:2];
 		newName = tmpName;
 	}
 	

@@ -31,25 +31,15 @@
 -(IBAction)importSubscriptions:(id)sender
 {
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
-	[panel beginSheetForDirectory:nil
-							 file:nil
-							types:nil
-				   modalForWindow:mainWindow
-					modalDelegate:self
-				   didEndSelector:@selector(importOpenPanelDidEnd:returnCode:contextInfo:)
-					  contextInfo:nil];
-}
-
-/* importOpenPanelDidEnd
- * Called when the user completes the Import open panel
- */
--(void)importOpenPanelDidEnd:(NSOpenPanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton)
-	{
-		[panel orderOut:self];
-		[self importFromFile:[panel filename]];
-	}
+	[panel beginSheetModalForWindow:mainWindow
+			completionHandler: ^(NSInteger returnCode) {
+		if (returnCode == NSOKButton)
+		{
+			[panel orderOut:self];
+			[self importFromFile:[[panel URL] path]];
+		}
+	}];
+	panel = nil;
 }
 
 /* importSubscriptionGroup

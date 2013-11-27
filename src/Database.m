@@ -488,12 +488,12 @@ static Database * _sharedDatabase = nil;
 		NSOpenPanel * openPanel = [NSOpenPanel openPanel];
 		[openPanel setCanChooseFiles:NO];
 		[openPanel setCanChooseDirectories:YES];
-		if ([openPanel runModalForDirectory:nil file:nil] == NSCancelButton)
+		if ([openPanel runModal] == NSCancelButton)
 			return nil;
 		
 		// Make the new database name.
 		NSString * databaseName = [path lastPathComponent];
-		NSString * newPath = [[[openPanel filenames] objectAtIndex:0] stringByAppendingPathComponent:databaseName];
+		NSString * newPath = [[[[openPanel URLs] objectAtIndex:0] path] stringByAppendingPathComponent:databaseName];
 		
 		// And try to open it.
 		sqlDatabase = [[FMDatabase alloc] initWithPath:newPath];

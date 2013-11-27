@@ -653,7 +653,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
+	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
 	[prefs setInteger:[articleController currentFolderId] forKey:MAPref_CachedFolderID];
 	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 
@@ -859,7 +859,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 -(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0) ? [[articleController allArticles] objectAtIndex:currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]) ? [[articleController allArticles] objectAtIndex:currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -1323,7 +1323,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[self refreshArticlePane];
 	
 	// If we mark read after an interval, start the timer here.
-	if (currentSelectedRow >= 0)
+	if (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count])
 	{
 		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead] && !blockMarkRead)

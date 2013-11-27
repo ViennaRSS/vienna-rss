@@ -133,6 +133,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
+static NSLocale * enUSLocale;
 
 /* init
  * Class instance initialisation.
@@ -548,28 +549,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
-	// Horrible but effective hack : with Unified layout and under certain circumstances,
-	// for some reason, we have to force multiple displays to get correct cell dimensions.
-	//
-	// Select the folder from the last session
-	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
-	[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:nil];
-	// Have it displayed first...
-	[self performSelector:@selector(resetFolderSelection)  withObject:nil afterDelay:0.01];
-}
-
--(void)resetFolderSelection
-{
-	// ... then display another arbitrary folder (the trash folder)...
-	[[articleController mainArticleView] selectFolderAndArticle:[db trashFolderId] guid:nil];
-	// ... before doing the right thing
-	[self performSelector:@selector(reselectPrevious)  withObject:nil afterDelay:0.5];
-}
-
--(void)reselectPrevious
-{
 	// Select the folder and article from the last session
-	Preferences * prefs = [Preferences standardPreferences];
 	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 	NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
 	if ([previousArticleGuid isBlank])
@@ -1037,12 +1017,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     dateFormatters_lock = [[NSLock alloc] init];
 
 	// Initializes the date formatters
-	NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
 
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
 		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
-		[dateFormatterArray[i] setLocale:enUS];
+		[dateFormatterArray[i] setLocale:enUSLocale];
 		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 	}
 
@@ -1068,7 +1048,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[dateFormatterArray[12] setDateFormat:@"EEEE dd MMMM yyyy"];
 
 
-	[enUS release];
 	// end of initialization of date formatters
 }
 
@@ -1103,7 +1082,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[dateFormatters_lock unlock];
 
 	// expensive last resort attempt
-	date = [NSDate dateWithNaturalLanguageString:dateString locale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
 	return date;
 }
 
@@ -1463,8 +1442,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (newBrowserTemplate)
 	{
 		BrowserPane * newBrowserPane = [newBrowserTemplate mainView];
-		if (didCompleteInitialisation)
-			[browserView saveOpenTabs];
 		
 		[browserView createNewTabWithView:newBrowserPane makeKey:!openInBackgroundFlag];
 		[newBrowserPane setController:self];
@@ -1475,6 +1452,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		[newBrowserTemplate release];
 	}
+	if (didCompleteInitialisation)
+			[browserView performSelector:@selector(saveOpenTabs) withObject:nil afterDelay:3];
 }
 
 /* loadOpenTabs
@@ -3740,21 +3719,27 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
 	static int waitNumber = 20;
-	//TOFIX: we should start local refresh feed, then sync refresh feed
+	// Check the Open Reader status
 	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isReady]) {
-		NSLog(@"Waiting until Google Auth is done...");
+		LLog(@"Waiting until Google Auth is done...");
 		waitNumber-- ;
 		if (![sender isKindOfClass:[NSTimer class]]) {
-			NSLog(@"Create a timer...");
+			LLog(@"Create a timer...");
 			[[GoogleReader sharedManager] authenticate];
 			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
 		}
-		// if we have tried for 1 minute, there probably is a problem with logging...
+		// if we have tried for 1 minute, there is probably a serious problem with logging in...
+		// don't insist any further for now regarding Open Reader
 		if (waitNumber<=0) {
-			[[GoogleReader sharedManager] resetAuthentication];
-			waitNumber = 20;
+			[[GoogleReader sharedManager] clearAuthentication];
+			if ([sender isKindOfClass:[NSTimer class]]) {
+				[(NSTimer*)sender invalidate];
+				sender = nil;
+				waitNumber = 20;
+			}
 		}
-		return;
+		else
+			return;
 	} else {
 		[self setStatusMessage:nil persist:NO];
 		if ([sender isKindOfClass:[NSTimer class]]) {

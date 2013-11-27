@@ -52,41 +52,30 @@
 
 	[panel setAccessoryView:exportSaveAccessory];
 	[panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
-	[panel beginSheetForDirectory:nil
-							 file:@""
-				   modalForWindow:mainWindow
-					modalDelegate:self
-				   didEndSelector:@selector(exportSavePanelDidEnd:returnCode:contextInfo:)
-					  contextInfo:nil];
-}
+	[panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
+		if (returnCode == NSOKButton)
+		{
+			[panel orderOut:self];
 
-/* exportSavePanelDidEnd
- * Called when the user completes the Export save panel
- */
--(void)exportSavePanelDidEnd:(NSSavePanel *)panel returnCode:(int)returnCode contextInfo:(void *)contextInfo
-{
-	if (returnCode == NSOKButton)
-	{
-		[panel orderOut:self];
-
-		NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-		int countExported = [self exportToFile:[panel filename] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+			NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
+			int countExported = [self exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
 		
-		if (countExported < 0)
-		{
-			NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
-									  NSLocalizedString(@"OK", nil),
-									  nil,
-									  nil, [NSApp mainWindow], self,
-									  nil, nil, nil,
-									  NSLocalizedString(@"Cannot open export file message text", nil));
+			if (countExported < 0)
+			{
+				NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
+										  NSLocalizedString(@"OK", nil),
+										  nil,
+										  nil, [NSApp mainWindow], self,
+										  nil, nil, nil,
+										  NSLocalizedString(@"Cannot open export file message text", nil));
+			}
+			else
+			{
+				// Announce how many we successfully imported
+				NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
+			}
 		}
-		else
-		{
-			// Announce how many we successfully imported
-			NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
-		}
-	}
+	}];
 }
 
 /* exportSubscriptionGroup

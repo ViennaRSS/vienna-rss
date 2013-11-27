@@ -17,11 +17,13 @@
 	AppController * controller;
 	ArticleView *articleView;
 	NSProgressIndicator * progressIndicator;
-	BOOL _inProgress;
+	BOOL inProgress;
+	int folderId;
 }
 
 @property (nonatomic, retain) ArticleView *articleView;
 @property BOOL inProgress;
+@property int folderId;
 
 // Public functions
 -(id)initWithReusableIdentifier: (NSString*)identifier inFrame:(NSRect)frameRect;
