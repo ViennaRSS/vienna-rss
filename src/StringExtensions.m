@@ -435,6 +435,20 @@ static NSMutableDictionary * entityMap = nil;
 	return [self substringWithRange:NSMakeRange(0, index)];
 }
 
+/* lastURLComponent
+ * Returns a string with the last URL component.
+ */
+-(NSString *)lastURLComponent
+{
+	int index = [self length] - 1;
+
+	while (index >= 0 && [self characterAtIndex:index] != '/')
+		--index;
+	if (index <= 0)
+		return self;
+	return [self substringWithRange:NSMakeRange(index+1, [self length] -1-index)];
+}
+
 /* stringByAppendingURLComponent
  * Appends the specified component to the end of our URL. It is similar to stringByAppendingPathComponent
  * but it doesn't attempt to interpret the current string as a file path and 'fixup' slashes.
@@ -691,6 +705,7 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)convertStringToValidPath
 {
 	NSMutableString * baseURLString = [NSMutableString stringWithString:self];
+    [baseURLString replaceOccurrencesOfString:@":" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
 	[baseURLString replaceOccurrencesOfString:@"." withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
 	[baseURLString replaceOccurrencesOfString:@"/" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
 	[baseURLString replaceOccurrencesOfString:@"?" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];

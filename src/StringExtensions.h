@@ -39,6 +39,7 @@
 	-(NSString *)stringByEscapingExtendedCharacters;
 	-(NSString *)stringByUnescapingExtendedCharacters;
 	-(NSString *)stringByDeletingLastURLComponent;
+	-(NSString *)lastURLComponent;
 	-(NSString *)stringByAppendingURLComponent:(NSString *)newComponent;
 	-(BOOL)hasCharacter:(char)ch;
 	-(NSString *)firstWord;
