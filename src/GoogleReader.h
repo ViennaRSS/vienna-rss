@@ -39,6 +39,7 @@
 -(void)clearAuthentication;
 -(void)resetAuthentication;
 
+
 -(void)subscribeToFeed:(NSString *)feedURL;
 -(void)unsubscribeFromFeed:(NSString *)feedURL;
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag;
