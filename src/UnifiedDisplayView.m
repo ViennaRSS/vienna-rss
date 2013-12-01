@@ -48,9 +48,6 @@
 	-(void)printDocument;
 @end
 
-static const CGFloat MA_Minimum_ArticleList_Pane_Width = 80;
-static const CGFloat MA_Minimum_Article_Pane_Width = 80;
-
 @implementation UnifiedDisplayView
 
 #pragma mark -
@@ -259,6 +256,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			NSUInteger row= [cell row];
 			if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+				[cell setFrame:NSMakeRect(0, 0, NSWidth([sender frame]), 50)];
 				NSRect frame = sender.frame;
 				frame.size.height = 1;        // Set the height to a small one.
 				frame.size.width = 1;
@@ -296,10 +294,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			CGFloat fittingHeight = [outputHeight floatValue];
 
 			NSUInteger row= [cell row];
-			if (row < [rowHeightArray count])
-				[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
-			else
-				[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
 
 			//get the rect of the current webview frame
 			NSRect webViewRect = [sender frame];
@@ -313,22 +307,29 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 
 			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
 				[cell setInProgress:NO];
-				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
+				{
+					if (row < [rowHeightArray count])
+						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
+					else
+						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
 					[sender setNeedsDisplay:YES];
+					[articleList reloadRowAtIndex:row];
+				}
 				else {
 					// this is not the relevant cell
-					[articleList setNeedsDisplay:YES];
 					[cell setFrame:NSMakeRect(0, 0, 0, 0)];
 				}
-				[articleList reloadRowAtIndex:row];
 			}
 			else {
 				// something in the dimensions went wrong : wait a while, then force a reload
 				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
 					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
 				else
-					[articleList reloadRowAtIndex:row];
+				{
+					[cell setFrame:NSMakeRect(0, 0, 0, 0)];
+					[articleList setNeedsDisplay:YES];
+				}
 			}
 		} else {
 			// not an ArticleCellView anymore : hide it
@@ -981,15 +982,17 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	else
 		cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
 
-	if(cellView == nil || [cellView inProgress]) {
+	if (cellView == nil || [cellView inProgress]
+	  || ([cellView folderId] == articleFolderId && [cellView row] >= [articleList visibleRange].location &&  [cellView row] < [articleList visibleRange].location + [articleList visibleRange].length) )
+	// don't recycle a cell which might be currently viewable
+	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
-						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width, [self listView:aListView heightOfRow:row])] autorelease];
+						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, [self listView:aListView heightOfRow:row])] autorelease];
 	}
 
 	ArticleView * view = [cellView articleView];
 	if (row < (NSInteger)[allArticles count])
 	{
-		[view clearHTML];
 		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 		Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
 		[cellView setInProgress:YES];
