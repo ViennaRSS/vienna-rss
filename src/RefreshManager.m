@@ -477,6 +477,7 @@ static RefreshManager * _refreshManager = nil;
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
 		[myRequest setWillRedirectSelector:@selector(folderRefreshRedirect:)];
+		[myRequest addRequestHeader:@"Accept" value:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"];
 	} else { // Open Reader feed
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
