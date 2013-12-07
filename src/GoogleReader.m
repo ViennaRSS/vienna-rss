@@ -291,6 +291,7 @@ JSONDecoder * jsonDecoder;
 			[db commitTransaction];
 		}
 
+		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
 		// Set the last update date given by the Open Reader server for this folder.
 		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
 		// Set the HTML homepage for this folder.
