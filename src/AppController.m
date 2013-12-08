@@ -3279,15 +3279,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				NSLog(@"Unsubscribe Open Reader folder");
 				[[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
 			}
-            // Unsubscribe at Google
-			//TOFIX
-			/*
-            GRSSubscribeOperation *op = [[GRSSubscribeOperation alloc] init];
-            [op setFolders:rssFolders];
-            [op setSubscribeFlag:NO];
-            [operationQueue addOperation:op];
-            [op release];
-			 */
 		}
 	}
 	
@@ -3314,27 +3305,36 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
 	int count = [selectedFolders count];
 	int index;
-    
-    NSMutableArray * rssFolders = [NSMutableArray array];
 	
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
 		int folderID = [folder itemId];
         
-        [rssFolders addObject:folder];
+        if (IsUnsubscribed(folder)) {
+            // Currently unsubscribed, so re-subscribe locally and subscribe on Open Reader
+            
+            [[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
+            
+            if (IsGoogleReaderFolder(folder)) {
+                NSLog(@"Subscribe Open Reader feed");
+                [[GoogleReader sharedManager] subscribeToFeed:[folder feedURL]];
+            }
+        } else {
+            // Currently subscribed, so unsubscribe locally and unsubscribe on Open Reader
+            
+            [[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
+            
+            if (IsGoogleReaderFolder(folder)) {
+                NSLog(@"Unsubscribe Open Reader feed");
+                [[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
+            }
+        }
 
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
 	}
     
-	//TOFIX
-	/*
-    GRSSubscribeOperation *op = [[GRSSubscribeOperation alloc] init];
-    [op setFolders:rssFolders];
-    [op setSubscribeFlag:doSubscribe];
-    [operationQueue addOperation:op];
-    [op release];
-	 */
+
 }
 
 /* setLoadFullHTMLFlag
