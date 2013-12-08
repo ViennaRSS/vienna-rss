@@ -3312,23 +3312,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		int folderID = [folder itemId];
         
         if (IsUnsubscribed(folder)) {
-            // Currently unsubscribed, so re-subscribe locally and subscribe on Open Reader
-            
+            // Currently unsubscribed, so re-subscribe locally
             [[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
-            
-            if (IsGoogleReaderFolder(folder)) {
-                NSLog(@"Subscribe Open Reader feed");
-                [[GoogleReader sharedManager] subscribeToFeed:[folder feedURL]];
             }
         } else {
-            // Currently subscribed, so unsubscribe locally and unsubscribe on Open Reader
-            
+            // Currently subscribed, so unsubscribe locally
             [[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
-            
-            if (IsGoogleReaderFolder(folder)) {
-                NSLog(@"Unsubscribe Open Reader feed");
-                [[GoogleReader sharedManager] unsubscribeFromFeed:[folder feedURL]];
-            }
         }
 
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
