@@ -3314,7 +3314,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
         if (IsUnsubscribed(folder)) {
             // Currently unsubscribed, so re-subscribe locally
             [[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
-            }
         } else {
             // Currently subscribed, so unsubscribe locally
             [[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
