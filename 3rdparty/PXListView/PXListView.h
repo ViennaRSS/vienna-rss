@@ -22,7 +22,7 @@
 	id <PXListViewDelegate> _delegate;
 	
 	NSMutableArray *_reusableCells;
-	NSMutableArray *_visibleCells;
+	NSMutableArray *_extendedCells;
 	NSRange _currentRange;
 	
 	NSUInteger _numberOfRows;
