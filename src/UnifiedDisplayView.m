@@ -438,7 +438,7 @@
 {
 	if (singleSelection)
 	{
-		int nextRow =0;
+		int nextRow =[[articleList selectedRows] firstIndex];
 		int articlesCount = [[articleController allArticles] count];
 
 		currentSelectedRow = -1;
@@ -604,7 +604,13 @@
 {
 	if (self == [articleController mainArticleView])
 	{
-		[articleList reloadData];
+		NSInteger folderId = [(Folder *)[note object] itemId];
+		NSInteger controllerFolderId = [controller currentFolderId];
+		Folder * controllerFolder = [[Database sharedDatabase] folderFromID:controllerFolderId];
+		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
+		{
+			[self refreshCurrentFolder];
+		}
 	}
 }
 
@@ -629,24 +635,14 @@
 	{
 		currentSelectedRow = -1;
 	}
-	else if (rowIndex == currentSelectedRow)
-	{
-	}
 	else
 	{
-		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
+		[articleList setSelectedRow:rowIndex];
 		if (currentSelectedRow == -1 || blockSelectionHandler)
 		{
 			currentSelectedRow = rowIndex;
 		}
-		int pageSize = 1;
-		int lastRow = 1;
-		int visibleRow = currentSelectedRow + (pageSize / 2);
-
-		if (visibleRow > lastRow)
-			visibleRow = lastRow;
-		[articleList scrollRowToVisible:currentSelectedRow];
-		[articleList scrollRowToVisible:visibleRow];
+		[articleList scrollRowToVisible:rowIndex];
 	}
 }
 
@@ -809,7 +805,7 @@
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;
 	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
-		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
+		guid = [[[allArticles objectAtIndex:[articleList visibleRange].location] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
@@ -819,24 +815,18 @@
 	[articleList reloadData];
 	if (guid != nil)
 	{
-		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
-		// the same and the GUID of the article at the selection is the same.
+		// To avoid upsetting the current displayed article after a refresh, we check to see if the first visible article is the same
+		// elsewhere we scroll to the previous article
 		allArticles = [articleController allArticles];
-		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (int)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
-		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
+		BOOL isUnchanged = [guid isEqualToString:[[allArticles objectAtIndex:[articleList visibleRange].location] guid]];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
 			{
 				currentSelectedRow = -1;
 				[articleList deselectRows];
-				[self refreshArticlePane];
 			}
 		}
-		else if (refreshFlag == MA_Refresh_ReloadFromDatabase &&
-				 [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles] &&
-				 [currentArticle isRevised] && ![currentArticle isRead]) // The article may have been updated, so refresh the article pane.
-			[self refreshArticlePane];
 	}
 	else
 		currentSelectedRow = -1;
@@ -983,7 +973,7 @@
 		cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
 
 	if (cellView == nil || [cellView inProgress]
-	  || ([cellView folderId] == articleFolderId && [cellView row] >= [articleList visibleRange].location &&  [cellView row] < [articleList visibleRange].location + [articleList visibleRange].length) )
+	  || ([cellView folderId] == articleFolderId && [cellView row] >= [articleList visibleRange].location &&  [cellView row] < NSMaxRange([articleList visibleRange])) )
 	// don't recycle a cell which might be currently viewable
 	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
