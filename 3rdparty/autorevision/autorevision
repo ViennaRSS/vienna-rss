@@ -16,7 +16,7 @@ usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-s symbol		= specify symbol output
 	-o cache-file		= specify cache file location
 	-f			= force the use of cache data
-	-U			= Check for untracked files in svn
+	-U			= check for untracked files in svn
 	-V			= emit version and exit
 	-?			= help message
 
@@ -52,9 +52,9 @@ EOF
 }
 
 # Config
-ARVERSION="1.6"
+ARVERSION="1.7"
 TARGETFILE="/dev/stdout"
-while getopts ":t:o:s:Vf" OPTION; do
+while getopts ":t:o:s:VfU" OPTION; do
 	case "${OPTION}" in
 		t)
 			AFILETYPE="${OPTARG}"
@@ -96,7 +96,7 @@ fi
 
 # Make sure that the path we are given is one we can source
 # (dash, we are looking at you).
-if ! echo "${CACHEFILE}" | grep -q '^\.*/'; then
+if [ ! -z "${CACHEFILE}" ] && ! echo "${CACHEFILE}" | grep -q '^\.*/'; then
 	CACHEFILE="./${CACHEFILE}"
 fi
 
