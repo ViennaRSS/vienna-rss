@@ -1,0 +1,35 @@
+			autorevision history
+
+1.7 @ 2013-12-01
+  Autogenerate the AUTHORS file.
+  Do not change empty CACHEFILE to `./`.
+  Make sure the -U option works properly.
+
+1.6 @ 2013-08-28
+  Use autorevision in autorevision.
+  Ensure that the cache path is one that can be sourced.
+  Add an AUTHORS file.
+
+1.5 @ 2013-08-12
+  Add support for git-svn - gives back the Subversion revision, not the hash.
+  Add a -U to check for unversioned files in svn.
+
+1.4 @ 2013-01-18
+  Remove bashisms.
+  Add "python" and "perl" language synonyms.
+  Add m4.
+  Work around unreliable return value of git diff in 1.7.9.5.
+
+1.3 @ 2012-12-09
+  (La)TeX output support added.
+
+1.2 @ 2012-10-30
+  Bazaar extractor added.
+  autorevision can now usually be called safely from subdirectories.
+  Drop back to numeric VCS_WC_MODIFIED so the C processor can use it.
+
+1.1 @ 2012-10-28
+  Java and Java properties support added.
+
+1.0 @ 2012-10-25
+  Initial release.
