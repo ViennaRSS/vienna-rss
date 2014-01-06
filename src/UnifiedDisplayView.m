@@ -28,7 +28,6 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "BrowserPane.h"
-#import "PXListView+Private.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 #define XPOS_IN_CELL	6
@@ -313,53 +312,41 @@
 						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
 					else
 						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
-					[sender setNeedsDisplay:YES];
 					[articleList reloadRowAtIndex:row];
-				}
-				else {
-					// this is not the relevant cell
-					[cell setFrame:NSMakeRect(0, 0, 0, 0)];
+					[articleList setNeedsDisplay:YES];
 				}
 			}
 			else {
 				// something in the dimensions went wrong : wait a while, then force a reload
 				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
 					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
-				else
-				{
-					[cell setFrame:NSMakeRect(0, 0, 0, 0)];
-					[articleList setNeedsDisplay:YES];
-				}
 			}
 		} else {
-			// not an ArticleCellView anymore : hide it
-			[sender setFrame:NSMakeRect(0, 0, 0, 0)];
+			// not an ArticleCellView anymore : reposition it, just in case...
+			[sender setNeedsDisplay:NO];
+			NSRect frame = sender.frame;
+			frame.size.height = 1;        // Set the height to a small one.
+			frame.size.width = 1;
+			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		}
-	} else {
-		// something went probably wrong : this is not the main frame
-		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
 	}
 }
 
 -(void)resubmitWebView:(WebView *)sender
 {
 	ArticleCellView * cell = (ArticleCellView *)[sender superview];
-	[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 	NSUInteger row = [cell row];
 	if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
 		NSRect frame = sender.frame;
 		frame.size.height = 1;        // Set the height to a small one.
 		frame.size.width = 1;
 		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-		[sender setNeedsDisplay:YES];
 		[articleList reloadRowAtIndex:row];
-		[articleList setNeedsDisplay:YES];
 		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
 	} else {
 		if (cell != nil) {
+			// not the relevant cell anymore
 			[cell setInProgress:NO];
-			[articleList reloadRowAtIndex:row];
-			[articleList performSelector:@selector(updateCells) withObject:nil afterDelay:0.3];
 		}
 	}
 }
@@ -380,7 +367,6 @@
 			NSArray * allArticles = [articleController allArticles];
 			if (row < (NSInteger)[allArticles count])
 			{
-				[(ArticleView *)sender clearHTML];
 				Article * theArticle = [allArticles objectAtIndex:row];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
@@ -956,43 +942,39 @@
  */
 - (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row
 {
+	BOOL newCell = NO;
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
-	if (row >= [allArticles count])
+	NSUInteger count = [allArticles count];
+	if (row >= count)
 		return nil;
+
 	Article * theArticle = [allArticles objectAtIndex:row];
-	int articleFolderId = [theArticle folderId];
+	NSInteger articleFolderId = [theArticle folderId];
+	Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
+	NSString * feedURL = SafeString([folder feedURL]);
 
-	// is a cell already being drawn for the same row /article ?
-	// if not, get a new cell
-	ArticleCellView *cellView = (ArticleCellView*)[articleList cellForRowAtIndex:row];
-	if ( cellView != nil && [cellView inProgress] && [cellView folderId] == articleFolderId )
-		return cellView;
-	else
-		cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+	ArticleCellView *cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
 
-	if (cellView == nil || [cellView inProgress]
-	  || ([cellView folderId] == articleFolderId && [cellView row] >= [articleList visibleRange].location &&  [cellView row] < NSMaxRange([articleList visibleRange])) )
-	// don't recycle a cell which might be currently viewable
+	if (cellView == nil)
 	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
 						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, [self listView:aListView heightOfRow:row])] autorelease];
+		newCell = YES;
 	}
 
 	ArticleView * view = [cellView articleView];
-	if (row < (NSInteger)[allArticles count])
+	if (row < count)
 	{
 		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-		Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
-		[cellView setInProgress:YES];
+		if (newCell)
+			[cellView setInProgress:YES];
 		[cellView setFolderId:articleFolderId];
-		[view setHTML:htmlText withBase:SafeString([folder feedURL])];
+		[view setHTML:htmlText withBase:feedURL];
 	}
 
 	[cellView addSubview:view];
-	// Make sure we are well positioned
-	[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
     return cellView;
 }
 

@@ -98,12 +98,11 @@
 		if (!progressIndicator)
 		{
 			// Allocate and initialize the spinning progress indicator.
-			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight([self frame]) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
+			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight([self bounds]) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
 												PROGRESS_INDICATOR_DIMENSION_REGULAR, PROGRESS_INDICATOR_DIMENSION_REGULAR);
 			progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
 			[progressIndicator setControlSize:NSRegularControlSize];
 			[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
-			[progressIndicator setUsesThreadedAnimation:NO]; //priority to display
 
 			// Start the animation.
 			[progressIndicator startAnimation:self];
