@@ -278,7 +278,7 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
 	
 	// Determine how large an image we'll need to hold all cells, with their
 	//	*unclipped* rectangles:
-	for( PXListViewCell* currCell in _extendedCells )
+	for( PXListViewCell* currCell in _cellsInViewHierarchy )
 	{
 		NSUInteger		currRow = [currCell row];
 		if( [dragRows containsIndex: currRow] )
@@ -301,7 +301,7 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
 	
 	[dragImage lockFocus];
     
-    for( PXListViewCell* currCell in _extendedCells )
+    for( PXListViewCell* currCell in _cellsInViewHierarchy )
     {
         NSUInteger		currRow = [currCell row];
         if( [dragRows containsIndex: currRow] )

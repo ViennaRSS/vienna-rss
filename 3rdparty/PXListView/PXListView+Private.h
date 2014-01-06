@@ -26,7 +26,6 @@ typedef NSInteger PXIsDragStartResult;
 - (void)layoutCells;
 - (void)layoutCell:(PXListViewCell*)cell atRow:(NSUInteger)row;
 
-- (void)addCellsFromVisibleRange;
 - (void)addCellsFromExtendedRange;
 - (PXListViewCell*)visibleCellForRow:(NSUInteger)row;
 - (NSArray*)visibleCellsForRowIndexes:(NSIndexSet*)rows;

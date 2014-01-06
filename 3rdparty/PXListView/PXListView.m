@@ -32,7 +32,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	if((self = [super initWithFrame:theFrame]))
 	{
 		_reusableCells = [[NSMutableArray alloc] init];
-		_extendedCells = [[NSMutableArray alloc] init];
+		_cellsInViewHierarchy = [[NSMutableArray alloc] init];
 		_selectedRows = [[NSMutableIndexSet alloc] init];
 		_allowsEmptySelection = YES;
         _usesLiveResize = YES;
@@ -46,7 +46,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	if((self = [super initWithCoder:decoder]))
 	{
 		_reusableCells = [[NSMutableArray alloc] init];
-		_extendedCells = [[NSMutableArray alloc] init];
+		_cellsInViewHierarchy = [[NSMutableArray alloc] init];
 		_selectedRows = [[NSMutableIndexSet alloc] init];
 		_allowsEmptySelection = YES;
         _usesLiveResize = YES;
@@ -76,7 +76,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	
 	[_reusableCells release], _reusableCells = nil;
-	[_extendedCells release], _extendedCells = nil;
+	[_cellsInViewHierarchy release], _cellsInViewHierarchy = nil;
 	[_selectedRows release], _selectedRows = nil;
 	
 	[super dealloc];
@@ -118,15 +118,15 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	id <PXListViewDelegate> delegate = [self delegate];
 	
 	// Move all managed cells to the reusable cells array
-	NSUInteger numCells = [_extendedCells count];
+	NSUInteger numCells = [_cellsInViewHierarchy count];
 	for (NSUInteger i = 0; i < numCells; i++)
 	{
-		PXListViewCell *cell = [_extendedCells objectAtIndex:i];
+		PXListViewCell *cell = [_cellsInViewHierarchy objectAtIndex:i];
 		[_reusableCells addObject:cell];
 		[cell setHidden:YES];
 	}
 	
-	[_extendedCells removeAllObjects];
+	[_cellsInViewHierarchy removeAllObjects];
 	free(_cellYOffsets);
 	
 	[_selectedRows removeAllIndexes];
@@ -158,7 +158,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	if (cell != nil)
 	{
 		[_reusableCells addObject:cell];
-		[_extendedCells removeObject:cell];
+		[_cellsInViewHierarchy removeObject:cell];
 		[cell setHidden:YES];
 	}
 }
@@ -193,16 +193,16 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 {
 	NSRange visibleRange = [self visibleRange];
 	NSUInteger firstIndex;
-	for(PXListViewCell *cell in _extendedCells)
+	for(PXListViewCell *cell in _cellsInViewHierarchy)
 	{
 		NSUInteger row = [cell row];
 		if ( row >= visibleRange.location)
 		{
-			firstIndex =  [_extendedCells indexOfObject:cell];
+			firstIndex =  [_cellsInViewHierarchy indexOfObject:cell];
 			break;
 		}
 	}
-    return [_extendedCells subarrayWithRange:NSMakeRange(firstIndex, visibleRange.length)];
+    return [_cellsInViewHierarchy subarrayWithRange:NSMakeRange(firstIndex, visibleRange.length)];
 }
 
 - (NSRange)visibleRange
@@ -240,6 +240,11 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	return NSMakeRange(startRow, endRow-startRow);
 }
 
+/* extendedRange
+ * Range of rows we need to keep in the cell view hierarchy
+ * we include the visible rows, plus those needed to be able to respond quickly
+ * to pageDown and pageUp requests
+ */
 - (NSRange)extendedRange
 {
 	NSRect visibleRect = [[self contentView] documentVisibleRect];
@@ -285,7 +290,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	NSRange visibleRange = [self visibleRange];
 	if ( row < visibleRange.location || row >= NSMaxRange(visibleRange) )
 		return nil;
-	for(PXListViewCell *cell in _extendedCells)
+	for(PXListViewCell *cell in _cellsInViewHierarchy)
 	{
 		if([cell row] == row)
 		{
@@ -300,7 +305,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 -(PXListViewCell *)cellForRowAtIndex:(NSUInteger)inIndex
 {
 	PXListViewCell *outCell = nil;
-	for(PXListViewCell *cell in _extendedCells)
+	for(PXListViewCell *cell in _cellsInViewHierarchy)
 	{
 		if([cell row] == inIndex)
 		{
@@ -317,7 +322,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	NSMutableArray *theCells = [NSMutableArray array];
 	NSRange visibleRange = [self visibleRange];
 	
-	for(PXListViewCell *cell in _extendedCells)
+	for(PXListViewCell *cell in _cellsInViewHierarchy)
 	{
 		NSUInteger row = [cell row];
 		if ( row >= visibleRange.location && row < NSMaxRange(visibleRange) && [rows containsIndex:row] )
@@ -327,25 +332,6 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	}
 	
 	return theCells;
-}
-
-- (void)addCellsFromVisibleRange
-{
-	id<PXListViewDelegate>	delegate = [self delegate];
-	
-	if([delegate conformsToProtocol: @protocol(PXListViewDelegate)])
-	{
-		NSRange visibleRange = [self visibleRange];
-		
-		for(NSUInteger i = visibleRange.location; i < NSMaxRange(visibleRange); i++)
-		{
-			id cell = nil;
-            cell = [delegate listView: self cellForRow: i];
-			[_extendedCells addObject:cell];
-
-			[self layoutCell:cell atRow:i];
-		}
-	}
 }
 
 - (void)addCellsFromExtendedRange
@@ -360,7 +346,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 		{
 			id cell = nil;
             cell = [delegate listView: self cellForRow: i];
-			[_extendedCells addObject:cell];
+			[_cellsInViewHierarchy addObject:cell];
 			
 			[self layoutCell:cell atRow:i];
 		}
@@ -380,8 +366,8 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	if((intersectionRange.location == 0) && (intersectionRange.length == 0))
 	{
 		// We'll have to rebuild all the cells:
-		[_reusableCells addObjectsFromArray:_extendedCells];
-		[_extendedCells removeAllObjects];
+		[_reusableCells addObjectsFromArray:_cellsInViewHierarchy];
+		[_cellsInViewHierarchy removeAllObjects];
 		[[self documentView] setSubviews:[NSArray array]];
 		[self addCellsFromExtendedRange];
 	}
@@ -394,7 +380,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 				NSUInteger newRow = i -1;
 				PXListViewCell *cell = [[self delegate] listView:self cellForRow:newRow];
                 
-				[_extendedCells insertObject: cell atIndex:0];
+				[_cellsInViewHierarchy insertObject: cell atIndex:0];
 				[self layoutCell:cell atRow:newRow];
 			}
 		}
@@ -403,8 +389,8 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 		{
 			for(NSUInteger i = extendedRange.location; i > _currentRange.location; i--)
 			{
-				if ([_extendedCells count])
-					[self enqueueCell:[_extendedCells objectAtIndex:0]];
+				if ([_cellsInViewHierarchy count])
+					[self enqueueCell:[_cellsInViewHierarchy objectAtIndex:0]];
 			}
 		}
 		
@@ -415,7 +401,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 				NSInteger newRow = i;
 				PXListViewCell *cell = [[self delegate] listView:self cellForRow: newRow];
                 
-				[_extendedCells addObject:cell];
+				[_cellsInViewHierarchy addObject:cell];
 				[self layoutCell:cell atRow:newRow];
 			}
 		}
@@ -424,7 +410,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 		{
 			for(NSUInteger i = NSMaxRange(_currentRange); i > NSMaxRange(extendedRange); i--)
 			{
-				[self enqueueCell:[_extendedCells lastObject]];
+				[self enqueueCell:[_cellsInViewHierarchy lastObject]];
 			}
 		}
 	}
@@ -589,7 +575,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 - (void)layoutCells
 {	
 	//Set the frames of the cells
-	for(id cell in _extendedCells)
+	for(id cell in _cellsInViewHierarchy)
 	{
 		NSInteger row = [cell row];
 		[cell setFrame:[self rectOfRow:row]];
@@ -621,7 +607,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	
 	if(![self inLiveResize]||[self usesLiveResize])
 	{
-		[_extendedCells removeAllObjects];
+		[_cellsInViewHierarchy removeAllObjects];
 		[[self documentView] setSubviews:[NSArray array]];
 		
 		[self cacheCellLayout];
@@ -702,7 +688,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 -(void)layoutCellsForResizeEvent 
 {
     //Change the layout of the cells
-    [_extendedCells removeAllObjects];
+    [_cellsInViewHierarchy removeAllObjects];
     [[self documentView] setSubviews:[NSArray array]];
     
     [self cacheCellLayout];
@@ -790,7 +776,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 				|| [attribute isEqualToString: NSAccessibilityContentsAttribute]
 				|| [attribute isEqualToString: NSAccessibilityChildrenAttribute] )
 	{
-		return _extendedCells;
+		return _cellsInViewHierarchy;
 	}
 	else if( [attribute isEqualToString: NSAccessibilitySelectedChildrenAttribute] )
 	{
