@@ -53,4 +53,5 @@
 -(NSArray *)markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(int)row;
 -(NSURL *)url;
+- (void)webViewLoadFinished:(NSNotification *)notification;
 @end

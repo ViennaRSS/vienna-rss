@@ -266,18 +266,55 @@
 	}
 }
 
-
-/* didFinishLoadForFrame
- * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
+/* didFailLoadWithError
+ * Invoked when a location request for frame has failed to load.
  */
--(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
+-(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)webFrame
 {
-    if([webFrame isEqual:[sender mainFrame]])
-    {
+	// Not really an error. A plugin is grabbing the URL and will handle it by itself.
+	if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
+	{
 		id obj = [sender superview];
 		if ([obj isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)obj;
+			NSUInteger row= [cell row];
+			NSArray * allArticles = [articleController allArticles];
+			if (row < (NSInteger)[allArticles count])
+			{
+				Article * theArticle = [allArticles objectAtIndex:row];
+				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
+				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
+				[cell setInProgress:YES];
+				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
+				[sender setNeedsDisplay:NO];
+			}
+			else
+				// the article list has probably changed and we aren't relevant anymore
+				[cell setInProgress:NO];
+		}
+		else
+			// TODO : what should we do ?
+			NSLog(@"Webview error associated to object of class %@", [obj class]);
+	}
+}
+
+#pragma mark -
+#pragma mark webView progress notifications
+
+/* webViewLoadFinished
+ * Invoked when a web view load has finished
+ */
+- (void)webViewLoadFinished:(NSNotification *)notification
+{
+    id obj = [notification object];
+    if([obj isKindOfClass:[ArticleView class]])
+    {
+		ArticleView * sender = (ArticleView *)obj;
+		id objView = [sender superview];
+		if ([objView isKindOfClass:[ArticleCellView class]])
+		{
+			ArticleCellView * cell = (ArticleCellView *)objView;
 			// get the height of the rendered frame.
 			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
 			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
@@ -342,44 +379,12 @@
 		frame.size.width = 1;
 		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		[articleList reloadRowAtIndex:row];
-		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
+		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
 	} else {
 		if (cell != nil) {
 			// not the relevant cell anymore
 			[cell setInProgress:NO];
 		}
-	}
-}
-
-/* didFailLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)webFrame
-{
-	// Not really an error. A plugin is grabbing the URL and will handle it by itself.
-	if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
-	{
-		id obj = [sender superview];
-		if ([obj isKindOfClass:[ArticleCellView class]])
-		{
-			ArticleCellView * cell = (ArticleCellView *)obj;
-			NSUInteger row= [cell row];
-			NSArray * allArticles = [articleController allArticles];
-			if (row < (NSInteger)[allArticles count])
-			{
-				Article * theArticle = [allArticles objectAtIndex:row];
-				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[cell setInProgress:YES];
-				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-			}
-			else
-				// the article list has probably changed and we aren't relevant anymore
-				[cell setInProgress:NO];
-		}
-		else
-			// TODO : what should we do ?
-			NSLog(@"Webview error associated to object of class %@", [obj class]);
 	}
 }
 
