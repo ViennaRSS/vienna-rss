@@ -336,7 +336,7 @@ JSONDecoder * jsonDecoder;
 		[[RefreshManager sharedManager] addConnection:request2];
 
 		// Request id's of starred items
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
+		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&it=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
