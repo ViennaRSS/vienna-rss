@@ -16,6 +16,13 @@
 		<key>Hint</key>
 		<string>Enter email address and password associated to your FeedHQ account</string>
 	</dict>
+	<key>InoReader</key>
+	<dict>
+		<key>Address</key>
+		<string>www.inoreader.com</string>
+		<key>Hint</key>
+		<string>Enter username and password associated to your InoReader account</string>
+	</dict>
 	<key>Otros</key>
 	<dict>
 		<key>Address</key>
