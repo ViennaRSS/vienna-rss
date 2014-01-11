@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve Palmer, Barijaona Ramaholimihaso and other Vienna contributors
-//  Copyright (c) 2004-2013 Vienna contributors. All rights reserved.
+//  Copyright (c) 2004-2014 Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
