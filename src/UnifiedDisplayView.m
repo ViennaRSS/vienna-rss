@@ -253,6 +253,7 @@
 		id obj = [sender superview];
 		if ([obj isKindOfClass:[ArticleCellView class]]) {
 			ArticleCellView * cell = (ArticleCellView *)obj;
+			[cell setInProgress:YES];
 			NSUInteger row= [cell row];
 			if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
 				[cell setFrame:NSMakeRect(0, 0, NSWidth([sender frame]), 50)];
@@ -260,8 +261,7 @@
 				frame.size.height = 1;        // Set the height to a small one.
 				frame.size.width = 1;
 				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-			} else
-				[cell setInProgress:NO];
+			}
 		}
 	}
 }
@@ -278,6 +278,7 @@
 		if ([obj isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)obj;
+			[cell setInProgress:NO];
 			NSUInteger row= [cell row];
 			NSArray * allArticles = [articleController allArticles];
 			if (row < (NSInteger)[allArticles count])
@@ -285,13 +286,9 @@
 				Article * theArticle = [allArticles objectAtIndex:row];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[cell setInProgress:YES];
 				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
 				[sender setNeedsDisplay:NO];
 			}
-			else
-				// the article list has probably changed and we aren't relevant anymore
-				[cell setInProgress:NO];
 		}
 		else
 			// TODO : what should we do ?
@@ -315,6 +312,7 @@
 		if ([objView isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
+			[cell setInProgress:NO];
 			// get the height of the rendered frame.
 			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
 			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
@@ -342,7 +340,6 @@
 			[sender setFrame:newWebViewRect];
 
 			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
-				[cell setInProgress:NO];
 				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
 				{
 					if (row < [rowHeightArray count])
@@ -380,11 +377,6 @@
 		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		[articleList reloadRowAtIndex:row];
 		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
-	} else {
-		if (cell != nil) {
-			// not the relevant cell anymore
-			[cell setInProgress:NO];
-		}
 	}
 }
 
@@ -973,11 +965,11 @@
 	if (row < count)
 	{
 		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-		if (newCell)
-			[cellView setInProgress:YES];
 		[cellView setFolderId:articleFolderId];
 		[view setHTML:htmlText withBase:feedURL];
 	}
+	else
+		[cellView setInProgress:NO];
 
 	[cellView addSubview:view];
     return cellView;

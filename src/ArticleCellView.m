@@ -107,9 +107,7 @@
 			progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
 			[progressIndicator setControlSize:NSRegularControlSize];
 			[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
-
-			// Start the animation.
-			[progressIndicator startAnimation:self];
+			[progressIndicator setDisplayedWhenStopped:NO];
 		}
 
 		// Add the progress indicator as a subview of the cell if
@@ -117,6 +115,8 @@
 		if ([progressIndicator superview] != self)
 			[self addSubview:progressIndicator];
 
+		// Start the animation.
+		[progressIndicator startAnimation:self];
 	}
 	else
 	{
