@@ -488,10 +488,23 @@
  */
 -(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-	[controller openURL:[request URL] inPreferredBrowser:YES];
+	if (request != nil)
+	// Request made through a click on an HTML link
 	// Change this to handle modifier key?
 	// Is this covered by the webView policy?
-	return nil;
+	{
+		[controller openURL:[request URL] inPreferredBrowser:YES];
+		return nil;
+	}
+	else
+	// a script or a plugin requests a new window
+	// open a new tab and return its main webview
+	{
+		[controller newTab:nil];
+		NSView<BaseView> * theView = [[controller browserView] activeTabItemView];
+		BrowserPane * browserPane = (BrowserPane *)theView;
+		return [browserPane webPane];
+	}
 }
 
 /* runJavaScriptAlertPanelWithMessage
