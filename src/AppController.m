@@ -1670,7 +1670,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 									description:description
 							   notificationName:notificationName
 									   iconData:nil
-									   priority:0.0
+									   priority:0
 									   isSticky:NO
 								   clickContext:notifyContext];
 }

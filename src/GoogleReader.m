@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Adam Hartford on 7/7/11.
-//  Copyright 2011-2012 Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
+//  Copyright 2011-2014 Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -291,6 +291,7 @@ JSONDecoder * jsonDecoder;
 			[db commitTransaction];
 		}
 
+		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
 		// Set the last update date given by the Open Reader server for this folder.
 		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
 		// Set the HTML homepage for this folder.
@@ -317,7 +318,7 @@ JSONDecoder * jsonDecoder;
 		else
 		{
 			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:refreshedFolder];
 		}
 		
 		[dict release];
@@ -335,7 +336,7 @@ JSONDecoder * jsonDecoder;
 		[[RefreshManager sharedManager] addConnection:request2];
 
 		// Request id's of starred items
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
+		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&it=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];

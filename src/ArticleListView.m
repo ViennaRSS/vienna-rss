@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 8/27/05.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2014 Steve Palmer and Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -40,7 +40,6 @@
 #import "PopupButton.h"
 #import "BrowserPane.h"
 #import "ProgressTextCell.h"
-#import "BJRVerticallyCenteredTextFieldCell.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -599,13 +598,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				
 				progressCell = [[[ProgressTextCell alloc] init] autorelease];
 				[column setDataCell:progressCell];
-			}
-			else
-			{
-				BJRVerticallyCenteredTextFieldCell * cell;
-
-				cell = [[[BJRVerticallyCenteredTextFieldCell alloc] init] autorelease];
-				[column setDataCell:cell];
 			}
 
 			// Set the header attributes.
@@ -1575,7 +1567,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
 			else
 				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
-			NSString * topString = [NSString stringWithFormat:@"%@\n", [theArticle title]];
+			NSString * topString = [NSString stringWithFormat:@"%@", [theArticle title]];
 			NSMutableAttributedString * topAttributedString = [[NSMutableAttributedString alloc] initWithString:topString attributes:topLineDictPtr];
 			[topAttributedString fixFontAttributeInRange:NSMakeRange(0u, [topAttributedString length])];
 			[theAttributedString appendAttributedString:[topAttributedString autorelease]];
@@ -1586,7 +1578,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		{
 			NSString * summaryString = [theArticle summary];
 			int maxSummaryLength = MIN([summaryString length], 80);
-			NSString * middleString = [NSString stringWithFormat:@"%@\n", [summaryString substringToIndex:maxSummaryLength]];
+			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
 			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
 			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
 			[middleAttributedString fixFontAttributeInRange:NSMakeRange(0u, [middleAttributedString length])];
@@ -1599,7 +1591,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			NSString * articleLink = [theArticle link];
 			if (articleLink != nil)
 			{
-				NSString * linkString = [NSString stringWithFormat:@"%@\n", articleLink];
+				NSString * linkString = [NSString stringWithFormat:@"\n%@", articleLink];
 				NSMutableDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
 				NSURL * articleURL = [NSURL URLWithString:articleLink];
 				if (articleURL != nil)
@@ -1635,6 +1627,9 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if (![[theArticle author] isBlank])
 				[summaryString appendFormat:@"%@%@", delimiter, [theArticle author]];
 		}
+		if (![summaryString isEqualToString:@""])
+			summaryString = [NSMutableString stringWithFormat:@"\n%@", summaryString];
+
 		NSMutableAttributedString * summaryAttributedString = [[NSMutableAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
 		[summaryAttributedString fixFontAttributeInRange:NSMakeRange(0u, [summaryAttributedString length])];
 		[theAttributedString appendAttributedString:[summaryAttributedString autorelease]];

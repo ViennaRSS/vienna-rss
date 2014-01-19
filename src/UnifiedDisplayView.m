@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve Palmer, Barijaona Ramaholimihaso and other Vienna contributors
-//  Copyright (c) 2004-2013 Vienna contributors. All rights reserved.
+//  Copyright (c) 2004-2014 Vienna contributors. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "BrowserPane.h"
-#import "PXListView+Private.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 #define XPOS_IN_CELL	6
@@ -47,9 +46,6 @@
 	-(void)makeRowSelectedAndVisible:(int)rowIndex;
 	-(void)printDocument;
 @end
-
-static const CGFloat MA_Minimum_ArticleList_Pane_Width = 80;
-static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 
 @implementation UnifiedDisplayView
 
@@ -257,108 +253,15 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		id obj = [sender superview];
 		if ([obj isKindOfClass:[ArticleCellView class]]) {
 			ArticleCellView * cell = (ArticleCellView *)obj;
+			[cell setInProgress:YES];
 			NSUInteger row= [cell row];
 			if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+				[cell setFrame:NSMakeRect(0, 0, NSWidth([sender frame]), 50)];
 				NSRect frame = sender.frame;
 				frame.size.height = 1;        // Set the height to a small one.
 				frame.size.width = 1;
 				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-			} else
-				[cell setInProgress:NO];
-		}
-	}
-}
-
-
-/* didFinishLoadForFrame
- * Invoked when a location request for frame has successfully; that is, when all the resources are done loading.
- */
--(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
-{
-    if([webFrame isEqual:[sender mainFrame]])
-    {
-		id obj = [sender superview];
-		if ([obj isKindOfClass:[ArticleCellView class]])
-		{
-			ArticleCellView * cell = (ArticleCellView *)obj;
-			// get the height of the rendered frame.
-			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
-			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
-			// way to get the height with WebKit
-			// Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
-			//
-			// this temporary enable Javascript if it is not enabled, then reset to preference
-			[[sender preferences] setJavaScriptEnabled:YES];
-			NSString* outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
-			NSString* bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
-			NSString* clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
-			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
-			CGFloat fittingHeight = [outputHeight floatValue];
-
-			NSUInteger row= [cell row];
-			if (row < [rowHeightArray count])
-				[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
-			else
-				[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
-
-			//get the rect of the current webview frame
-			NSRect webViewRect = [sender frame];
-			//calculate the new frame
-			NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-									   YPOS_IN_CELL,
-									   NSWidth(webViewRect),
-									   fittingHeight);
-			//set the new frame to the webview
-			[sender setFrame:newWebViewRect];
-
-			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
-				[cell setInProgress:NO];
-				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
-					[sender setNeedsDisplay:YES];
-				else {
-					// this is not the relevant cell
-					[articleList setNeedsDisplay:YES];
-					[cell setFrame:NSMakeRect(0, 0, 0, 0)];
-				}
-				[articleList reloadRowAtIndex:row];
 			}
-			else {
-				// something in the dimensions went wrong : wait a while, then force a reload
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
-					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
-				else
-					[articleList reloadRowAtIndex:row];
-			}
-		} else {
-			// not an ArticleCellView anymore : hide it
-			[sender setFrame:NSMakeRect(0, 0, 0, 0)];
-		}
-	} else {
-		// something went probably wrong : this is not the main frame
-		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
-	}
-}
-
--(void)resubmitWebView:(WebView *)sender
-{
-	ArticleCellView * cell = (ArticleCellView *)[sender superview];
-	[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-	NSUInteger row = [cell row];
-	if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
-		NSRect frame = sender.frame;
-		frame.size.height = 1;        // Set the height to a small one.
-		frame.size.width = 1;
-		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-		[sender setNeedsDisplay:YES];
-		[articleList reloadRowAtIndex:row];
-		[articleList setNeedsDisplay:YES];
-		[self webView:sender didFinishLoadForFrame:[sender mainFrame]];
-	} else {
-		if (cell != nil) {
-			[cell setInProgress:NO];
-			[articleList reloadRowAtIndex:row];
-			[articleList performSelector:@selector(updateCells) withObject:nil afterDelay:0.3];
 		}
 	}
 }
@@ -375,24 +278,105 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		if ([obj isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)obj;
+			[cell setInProgress:NO];
 			NSUInteger row= [cell row];
 			NSArray * allArticles = [articleController allArticles];
 			if (row < (NSInteger)[allArticles count])
 			{
-				[(ArticleView *)sender clearHTML];
 				Article * theArticle = [allArticles objectAtIndex:row];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[cell setInProgress:YES];
 				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
+				[sender setNeedsDisplay:NO];
 			}
-			else
-				// the article list has probably changed and we aren't relevant anymore
-				[cell setInProgress:NO];
 		}
 		else
 			// TODO : what should we do ?
 			NSLog(@"Webview error associated to object of class %@", [obj class]);
+	}
+}
+
+#pragma mark -
+#pragma mark webView progress notifications
+
+/* webViewLoadFinished
+ * Invoked when a web view load has finished
+ */
+- (void)webViewLoadFinished:(NSNotification *)notification
+{
+    id obj = [notification object];
+    if([obj isKindOfClass:[ArticleView class]])
+    {
+		ArticleView * sender = (ArticleView *)obj;
+		id objView = [sender superview];
+		if ([objView isKindOfClass:[ArticleCellView class]])
+		{
+			ArticleCellView * cell = (ArticleCellView *)objView;
+			[cell setInProgress:NO];
+			// get the height of the rendered frame.
+			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
+			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
+			// way to get the height with WebKit
+			// Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
+			//
+			// this temporary enable Javascript if it is not enabled, then reset to preference
+			[[sender preferences] setJavaScriptEnabled:YES];
+			NSString* outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
+			NSString* bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
+			NSString* clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
+			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
+			CGFloat fittingHeight = [outputHeight floatValue];
+
+			NSUInteger row= [cell row];
+
+			//get the rect of the current webview frame
+			NSRect webViewRect = [sender frame];
+			//calculate the new frame
+			NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+									   YPOS_IN_CELL,
+									   NSWidth(webViewRect),
+									   fittingHeight);
+			//set the new frame to the webview
+			[sender setFrame:newWebViewRect];
+
+			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
+				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
+				{
+					if (row < [rowHeightArray count])
+						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
+					else
+						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
+					[articleList reloadRowAtIndex:row];
+					[articleList setNeedsDisplay:YES];
+				}
+			}
+			else {
+				// something in the dimensions went wrong : wait a while, then force a reload
+				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
+					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
+			}
+		} else {
+			// not an ArticleCellView anymore : reposition it, just in case...
+			[sender setNeedsDisplay:NO];
+			NSRect frame = sender.frame;
+			frame.size.height = 1;        // Set the height to a small one.
+			frame.size.width = 1;
+			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+		}
+	}
+}
+
+-(void)resubmitWebView:(WebView *)sender
+{
+	ArticleCellView * cell = (ArticleCellView *)[sender superview];
+	NSUInteger row = [cell row];
+	if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+		NSRect frame = sender.frame;
+		frame.size.height = 1;        // Set the height to a small one.
+		frame.size.width = 1;
+		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
+		[articleList reloadRowAtIndex:row];
+		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
 	}
 }
 
@@ -437,7 +421,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (singleSelection)
 	{
-		int nextRow =0;
+		int nextRow =[[articleList selectedRows] firstIndex];
 		int articlesCount = [[articleController allArticles] count];
 
 		currentSelectedRow = -1;
@@ -603,7 +587,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (self == [articleController mainArticleView])
 	{
-		[articleList reloadData];
+		NSInteger folderId = [(Folder *)[note object] itemId];
+		NSInteger controllerFolderId = [controller currentFolderId];
+		Folder * controllerFolder = [[Database sharedDatabase] folderFromID:controllerFolderId];
+		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
+		{
+			[self refreshCurrentFolder];
+		}
 	}
 }
 
@@ -628,24 +618,14 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	{
 		currentSelectedRow = -1;
 	}
-	else if (rowIndex == currentSelectedRow)
-	{
-	}
 	else
 	{
-		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
+		[articleList setSelectedRow:rowIndex];
 		if (currentSelectedRow == -1 || blockSelectionHandler)
 		{
 			currentSelectedRow = rowIndex;
 		}
-		int pageSize = 1;
-		int lastRow = 1;
-		int visibleRow = currentSelectedRow + (pageSize / 2);
-
-		if (visibleRow > lastRow)
-			visibleRow = lastRow;
-		[articleList scrollRowToVisible:currentSelectedRow];
-		[articleList scrollRowToVisible:visibleRow];
+		[articleList scrollRowToVisible:rowIndex];
 	}
 }
 
@@ -808,7 +788,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;
 	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
-		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
+		guid = [[[allArticles objectAtIndex:[articleList visibleRange].location] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
@@ -818,24 +798,18 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[articleList reloadData];
 	if (guid != nil)
 	{
-		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
-		// the same and the GUID of the article at the selection is the same.
+		// To avoid upsetting the current displayed article after a refresh, we check to see if the first visible article is the same
+		// elsewhere we scroll to the previous article
 		allArticles = [articleController allArticles];
-		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (int)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
-		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
+		BOOL isUnchanged = [guid isEqualToString:[[allArticles objectAtIndex:[articleList visibleRange].location] guid]];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
 			{
 				currentSelectedRow = -1;
 				[articleList deselectRows];
-				[self refreshArticlePane];
 			}
 		}
-		else if (refreshFlag == MA_Refresh_ReloadFromDatabase &&
-				 [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles] &&
-				 [currentArticle isRevised] && ![currentArticle isRead]) // The article may have been updated, so refresh the article pane.
-			[self refreshArticlePane];
 	}
 	else
 		currentSelectedRow = -1;
@@ -965,41 +939,39 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
  */
 - (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row
 {
+	BOOL newCell = NO;
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
-	if (row >= [allArticles count])
+	NSUInteger count = [allArticles count];
+	if (row >= count)
 		return nil;
+
 	Article * theArticle = [allArticles objectAtIndex:row];
-	int articleFolderId = [theArticle folderId];
+	NSInteger articleFolderId = [theArticle folderId];
+	Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
+	NSString * feedURL = SafeString([folder feedURL]);
 
-	// is a cell already being drawn for the same row /article ?
-	// if not, get a new cell
-	ArticleCellView *cellView = (ArticleCellView*)[articleList cellForRowAtIndex:row];
-	if ( cellView != nil && [cellView inProgress] && [cellView folderId] == articleFolderId )
-		return cellView;
-	else
-		cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+	ArticleCellView *cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
 
-	if(cellView == nil || [cellView inProgress]) {
+	if (cellView == nil)
+	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
-						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width, [self listView:aListView heightOfRow:row])] autorelease];
+						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, [self listView:aListView heightOfRow:row])] autorelease];
+		newCell = YES;
 	}
 
 	ArticleView * view = [cellView articleView];
-	if (row < (NSInteger)[allArticles count])
+	if (row < count)
 	{
-		[view clearHTML];
 		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-		Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
-		[cellView setInProgress:YES];
 		[cellView setFolderId:articleFolderId];
-		[view setHTML:htmlText withBase:SafeString([folder feedURL])];
+		[view setHTML:htmlText withBase:feedURL];
 	}
+	else
+		[cellView setInProgress:NO];
 
 	[cellView addSubview:view];
-	// Make sure we are well positioned
-	[view setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
     return cellView;
 }
 

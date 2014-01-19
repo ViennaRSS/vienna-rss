@@ -32,6 +32,9 @@
 		// Make the list view the frame load and UI delegate for the web view
 		[articleView setUIDelegate:[[controller browserView] primaryTabItemView]];
 		[articleView setFrameLoadDelegate:[[controller browserView] primaryTabItemView]];
+		// Notify the list view when the article view has finished loading
+		SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
+		[[NSNotificationCenter defaultCenter] addObserver:[[controller browserView] primaryTabItemView] selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
 		[articleView setOpenLinksInNewBrowser:YES];
 		[articleView setController:controller];
 		[[[articleView mainFrame] frameView] setAllowsScrolling:NO];
@@ -51,6 +54,7 @@
 
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:[[controller browserView] primaryTabItemView] name:WebViewProgressFinishedNotification object:articleView];
 	[articleView release], articleView=nil;
 	[progressIndicator release], progressIndicator=nil;
 
@@ -98,15 +102,12 @@
 		if (!progressIndicator)
 		{
 			// Allocate and initialize the spinning progress indicator.
-			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight([self frame]) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
+			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight([self bounds]) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
 												PROGRESS_INDICATOR_DIMENSION_REGULAR, PROGRESS_INDICATOR_DIMENSION_REGULAR);
 			progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
 			[progressIndicator setControlSize:NSRegularControlSize];
 			[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
-			[progressIndicator setUsesThreadedAnimation:NO]; //priority to display
-
-			// Start the animation.
-			[progressIndicator startAnimation:self];
+			[progressIndicator setDisplayedWhenStopped:NO];
 		}
 
 		// Add the progress indicator as a subview of the cell if
@@ -114,6 +115,8 @@
 		if ([progressIndicator superview] != self)
 			[self addSubview:progressIndicator];
 
+		// Start the animation.
+		[progressIndicator startAnimation:self];
 	}
 	else
 	{
