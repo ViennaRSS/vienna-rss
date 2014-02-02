@@ -491,6 +491,12 @@ static RefreshManager * _refreshManager = nil;
 
 {	LOG_EXPR([request error]);
 	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
+	if ([[request error] code] == ASIAuthenticationErrorType) //Error caused by lack of authentication
+	{
+		if (![authQueue containsObject:folder])
+			[authQueue addObject:folder];
+		[self getCredentialsForFolder];
+	}
     ActivityItem * aItem = (ActivityItem *)[[request userInfo] objectForKey:@"log"];
 	[self setFolderErrorFlag:folder flag:YES];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[request error] localizedDescription ]]];
