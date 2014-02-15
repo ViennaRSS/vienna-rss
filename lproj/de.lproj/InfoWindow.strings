@@ -39,7 +39,7 @@
 "115.title" = "Authentifizierung aktualisieren";
 
 /* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
-"116.title" = "Authentication:";
+"116.title" = "Authentifizierung:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "117"; */
 "117.title" = "Artikelanzahl:";

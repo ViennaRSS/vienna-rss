@@ -39,7 +39,7 @@
 "96.title" = "(Path)";
 
 /* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
-"97.title" = "Aüswählen...";
+"97.title" = "Auswählen...";
 
 /* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
 "121.title" = "Zeige die Anzahl der ungelesen Artikel im Docksymbol";
@@ -75,7 +75,7 @@
 "149.title" = "Standard RSS Reader:";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
-"151.title" = "Neue Artikel abrufen beim Programmstart";
+"151.title" = "Neue Artikel beim Programmstart abrufen";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
 "152.title" = "Öffne Links im Hintergrund";
@@ -84,10 +84,10 @@
 "153.title" = "Öffne Links im externen Browser";
 
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
-"154.title" = "Leere Elemente in den Papierkorb:";
+"154.title" = "Bewege Artikel in den Papierkorb:";
 
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
-"156.title" = "Geladene Dateien sichern in:";
+"156.title" = "Sichere geladene Dateien in:";
 
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
 "158.title" = "Wenn neue ungelesene Artikel empfangen wurden:";
@@ -105,4 +105,4 @@
 "162.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
-"164.title" = "Mark updated articles as new";
+"164.title" = "Markiere aktualisierte Artikel als Neu";
