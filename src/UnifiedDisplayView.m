@@ -30,6 +30,8 @@
 #import "BrowserPane.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
+// 150 seems a reasonable value to avoid calculating too many frames before being able to update display
+#define DEFAULT_CELL_HEIGHT	150
 #define XPOS_IN_CELL	6
 #define YPOS_IN_CELL	2
 
@@ -347,7 +349,6 @@
 					else
 						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
 					[articleList reloadRowAtIndex:row];
-					[articleList setNeedsDisplay:YES];
 				}
 			}
 			else {
@@ -358,7 +359,6 @@
 			}
 		} else {
 			// not an ArticleCellView anymore : reposition it, just in case...
-			[sender setNeedsDisplay:NO];
 			NSRect frame = sender.frame;
 			frame.size.height = 1;        // Set the height to a small one.
 			frame.size.width = 1;
@@ -453,7 +453,6 @@
 	{
 		if ([[thisArticle guid] isEqualToString:guid])
 		{
-			[articleList setNeedsDisplay:YES];
 			[self makeRowSelectedAndVisible:rowIndex];
 			found = YES;
 			break;
@@ -924,9 +923,8 @@
 	CGFloat height;
 	if (row >= [rowHeightArray count])
 	{
-		// 150 seems a reasonable value to avoid calculating too many frames before being able to update display
-		[rowHeightArray addObject:[NSNumber numberWithFloat:150]];
-		return 150.;
+		[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
 	else
 	{
@@ -958,7 +956,7 @@
 	if (cellView == nil)
 	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
-						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, [self listView:aListView heightOfRow:row])] autorelease];
+						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, DEFAULT_CELL_HEIGHT)] autorelease];
 	}
 
 	ArticleView * view = [cellView articleView];
