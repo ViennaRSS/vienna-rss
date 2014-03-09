@@ -254,14 +254,10 @@
 		if ([obj isKindOfClass:[ArticleCellView class]]) {
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			[cell setInProgress:YES];
-			NSUInteger row= [cell row];
-			if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
-				[cell setFrame:NSMakeRect(0, 0, NSWidth([sender frame]), 50)];
-				NSRect frame = sender.frame;
-				frame.size.height = 1;        // Set the height to a small one.
-				frame.size.width = 1;
-				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-			}
+			NSRect frame = sender.frame;
+			frame.size.height = 1;        // Set the height to a small one.
+			frame.size.width = 1;
+			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		}
 	}
 }
@@ -284,10 +280,14 @@
 			if (row < (NSInteger)[allArticles count])
 			{
 				Article * theArticle = [allArticles objectAtIndex:row];
+				NSInteger articleFolderId = [theArticle folderId];
+				Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
+				NSString * feedURL = SafeString([folder feedURL]);
+				[cell setFolderId:articleFolderId];
+				[cell setArticleRow:row];
+				[(ArticleView *)sender clearHTML];
 				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-				[sender setNeedsDisplay:NO];
+				[(ArticleView *)sender setHTML:htmlText withBase:feedURL];
 			}
 		}
 		else
@@ -312,6 +312,7 @@
 		if ([objView isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
+			NSUInteger row= [cell row];
 			[cell setInProgress:NO];
 			// get the height of the rendered frame.
 			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
@@ -327,8 +328,6 @@
 			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
 			CGFloat fittingHeight = [outputHeight floatValue];
 
-			NSUInteger row= [cell row];
-
 			//get the rect of the current webview frame
 			NSRect webViewRect = [sender frame];
 			//calculate the new frame
@@ -340,8 +339,9 @@
 			[sender setFrame:newWebViewRect];
 
 			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
-				{
+				if (row == [cell articleRow] && row < [[articleController allArticles] count]
+				  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
+				{	//relevant cell
 					if (row < [rowHeightArray count])
 						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
 					else
@@ -352,7 +352,8 @@
 			}
 			else {
 				// something in the dimensions went wrong : wait a while, then force a reload
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
+				if (row == [cell articleRow] && row < [[articleController allArticles] count]
+				  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
 					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
 			}
 		} else {
@@ -370,7 +371,8 @@
 {
 	ArticleCellView * cell = (ArticleCellView *)[sender superview];
 	NSUInteger row = [cell row];
-	if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+	if (cell != nil)
+	{
 		NSRect frame = sender.frame;
 		frame.size.height = 1;        // Set the height to a small one.
 		frame.size.width = 1;
@@ -787,7 +789,7 @@
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;
-	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
+	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count] && [articleList visibleRange].location < [allArticles count])
 		guid = [[[allArticles objectAtIndex:[articleList visibleRange].location] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
@@ -939,7 +941,6 @@
  */
 - (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row
 {
-	BOOL newCell = NO;
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
@@ -958,7 +959,6 @@
 	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
 						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, [self listView:aListView heightOfRow:row])] autorelease];
-		newCell = YES;
 	}
 
 	ArticleView * view = [cellView articleView];
@@ -966,6 +966,7 @@
 	{
 		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 		[cellView setFolderId:articleFolderId];
+		[cellView setArticleRow:row];
 		[view setHTML:htmlText withBase:feedURL];
 	}
 	else

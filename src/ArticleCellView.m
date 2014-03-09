@@ -18,7 +18,7 @@
 @implementation ArticleCellView
 
 @synthesize articleView;
-@synthesize inProgress, folderId;
+@synthesize inProgress, folderId, articleRow;
 
 #pragma mark -
 #pragma mark Init/Dealloc
