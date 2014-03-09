@@ -43,8 +43,8 @@
 		[[articleView preferences] setStandardFontFamily:@"Arial"];
 		[[articleView preferences] setDefaultFontSize:16];
 
-		// Disable caching
-		[[articleView preferences] setUsesPageCache:NO];
+		// Enable caching
+		[[articleView preferences] setUsesPageCache:YES];
 		[articleView setMaintainsBackForwardList:NO];
 		[self setInProgress:NO];
 		progressIndicator = nil;
