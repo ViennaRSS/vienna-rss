@@ -315,7 +315,6 @@
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
 			NSUInteger row= [cell row];
-			[cell setInProgress:NO];
 			// get the height of the rendered frame.
 			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
 			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
@@ -339,23 +338,26 @@
 									   fittingHeight);
 			//set the new frame to the webview
 			[sender setFrame:newWebViewRect];
-
-			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
-				if (row == [cell articleRow] && row < [[articleController allArticles] count]
-				  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
-				{	//relevant cell
+			if (row == [cell articleRow] && row < [[articleController allArticles] count]
+			  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
+			{	//relevant cell
+				if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
 					if (row < [rowHeightArray count])
 						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
 					else
 						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
+					[cell setInProgress:NO];
 					[articleList reloadRowAtIndex:row];
 				}
+				else
+				{
+					// something in the dimensions went wrong : force a reload
+					[self resubmitWebView:sender];
+				}
 			}
-			else {
-				// something in the dimensions went wrong : wait a while, then force a reload
-				if (row == [cell articleRow] && row < [[articleController allArticles] count]
-				  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
-					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
+			else {	//non relevant cell
+				[cell setInProgress:NO];
+				[articleList reloadRowAtIndex:row];
 			}
 		} else {
 			// not an ArticleCellView anymore : reposition it, just in case...
@@ -380,6 +382,8 @@
 		[articleList reloadRowAtIndex:row];
 		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
 	}
+	else
+		[articleList reloadRowAtIndex:row];
 }
 
 /* updateAlternateMenuTitle
@@ -942,9 +946,6 @@
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
-	NSUInteger count = [allArticles count];
-	if (row >= count)
-		return nil;
 
 	Article * theArticle = [allArticles objectAtIndex:row];
 	NSInteger articleFolderId = [theArticle folderId];
@@ -960,16 +961,11 @@
 	}
 
 	ArticleView * view = [cellView articleView];
-	if (row < count)
-	{
-		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-		[cellView setFolderId:articleFolderId];
-		[cellView setArticleRow:row];
-		[view setHTML:htmlText withBase:feedURL];
-	}
-	else
-		[cellView setInProgress:NO];
-
+	[cellView setFolderId:articleFolderId];
+	[cellView setArticleRow:row];
+	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
+	[cellView setInProgress:YES];
+	[view setHTML:htmlText withBase:feedURL];
 	[cellView addSubview:view];
     return cellView;
 }

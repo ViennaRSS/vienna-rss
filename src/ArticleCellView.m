@@ -76,6 +76,7 @@
 							   DEFAULT_CELL_HEIGHT);
 	//set the new frame to the webview
 	[articleView setFrame:newWebViewRect];
+	[self setInProgress:YES];
 	[articleView clearHTML];
 	[super prepareForReuse];
 }
