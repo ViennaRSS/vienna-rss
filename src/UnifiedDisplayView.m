@@ -345,7 +345,12 @@
 					if (row < [rowHeightArray count])
 						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
 					else
+					{	NSInteger toAdd = row - [rowHeightArray count] ;
+						for (NSInteger i = 0 ; i < toAdd ; i++) {
+							[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+						}
 						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
+					}
 					[cell setInProgress:NO];
 					[articleList reloadRowAtIndex:row];
 				}
@@ -927,7 +932,10 @@
 	CGFloat height;
 	if (row >= [rowHeightArray count])
 	{
-		[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+		NSInteger toAdd = row - [rowHeightArray count] + 1 ;
+		for (NSInteger i = 0 ; i < toAdd ; i++) {
+			[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+		}
 		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
 	else
