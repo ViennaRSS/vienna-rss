@@ -152,6 +152,18 @@
 
 }
 
+-(void)layoutSubviews
+{
+	//calculate the new frame
+	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+							   YPOS_IN_CELL,
+							   NSWidth([self frame]) - XPOS_IN_CELL,
+							   NSHeight([self frame]) -YPOS_IN_CELL);
+	//set the new frame to the webview
+	[articleView setFrame:newWebViewRect];
+	[super layoutSubviews];
+}
+
 - (BOOL)acceptsFirstResponder
 {
 	return YES;

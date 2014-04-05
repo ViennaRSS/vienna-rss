@@ -259,7 +259,6 @@
 			NSRect frame = sender.frame;
 			frame.size.height = 1;        // Set the height to a small one.
 			frame.size.width = 1;
-			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		}
 	}
 }
@@ -367,7 +366,6 @@
 			NSRect frame = sender.frame;
 			frame.size.height = 1;        // Set the height to a small one.
 			frame.size.width = 1;
-			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		}
 	}
 }
@@ -381,8 +379,6 @@
 		NSRect frame = sender.frame;
 		frame.size.height = 1;        // Set the height to a small one.
 		frame.size.width = 1;
-		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-		[articleList reloadRowAtIndex:row];
 		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
 	}
 	else
