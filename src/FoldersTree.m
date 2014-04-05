@@ -92,6 +92,7 @@
 
 	// Folder image
 	folderErrorImage = [NSImage imageNamed:@"folderError.tiff"];
+    folderErrorImage.accessibilityDescription = NSLocalizedString(@"Error", nil);
 	refreshProgressImage = [NSImage imageNamed:@"refreshProgress.tiff"];
 	
 	// Create and set whatever font we're using for the folders
@@ -118,6 +119,8 @@
 	
 	// Make sure selected row is visible
 	[outlineView scrollRowToVisible:[outlineView selectedRow]];
+
+    [outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Folders", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 /* setOutlineViewBackgroundColor

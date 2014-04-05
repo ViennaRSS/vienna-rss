@@ -415,6 +415,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[articleList setDelegate:self];
 	[articleList setDataSource:self];
 	[articleList setTarget:self];
+    [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 /* singleClickRow
