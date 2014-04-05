@@ -118,6 +118,8 @@
 	
 	// Make sure selected row is visible
 	[outlineView scrollRowToVisible:[outlineView selectedRow]];
+
+    [outlineView accessibilitySetOverrideValue:NSLocalizedString(@"Feeds", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 /* setOutlineViewBackgroundColor
