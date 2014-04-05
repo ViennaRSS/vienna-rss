@@ -339,6 +339,34 @@
 	[super selectWithFrame:aRect inView:controlView editor:textObj delegate:anObject start:selStart length:selLength];
 }
 
+-(NSArray*)accessibilityAttributeNames
+{
+    static NSArray * attributes = nil;
+    if (!attributes)
+    {
+        NSSet * set = [NSSet setWithArray:[super accessibilityAttributeNames]];
+        attributes = [[[set setByAddingObject:NSAccessibilityDescriptionAttribute] allObjects] retain];
+    }
+    return attributes;
+}
+
+-(id)accessibilityAttributeValue:(NSString *)attribute
+{
+    if ([attribute isEqualToString:NSAccessibilityDescriptionAttribute])
+    {
+        NSMutableArray * bits = [NSMutableArray arrayWithCapacity:3];
+        if (auxiliaryImage && auxiliaryImage.accessibilityDescription)
+            [bits addObject:auxiliaryImage.accessibilityDescription];
+        if (hasCount)
+            [bits addObject:[NSString stringWithFormat:NSLocalizedString(@"%@ unread articles", nil), @(count)]];
+        if (inProgress)
+            [bits addObject:NSLocalizedString(@"Loading", nil)];
+        if (bits.count)
+            return [bits componentsJoinedByString:@", "];
+    }
+    return [super accessibilityAttributeValue:attribute];
+}
+
 /* dealloc
  * Delete our resources.
  */
