@@ -277,19 +277,14 @@
 		{
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			[cell setInProgress:NO];
-			NSUInteger row= [cell row];
+			NSUInteger row= [cell articleRow];
 			NSArray * allArticles = [articleController allArticles];
 			if (row < (NSInteger)[allArticles count])
 			{
-				Article * theArticle = [allArticles objectAtIndex:row];
-				NSInteger articleFolderId = [theArticle folderId];
-				Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
-				NSString * feedURL = SafeString([folder feedURL]);
-				[cell setFolderId:articleFolderId];
-				[cell setArticleRow:row];
-				[(ArticleView *)sender clearHTML];
-				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-				[(ArticleView *)sender setHTML:htmlText withBase:feedURL];
+				NSRect frame = sender.frame;
+				frame.size.height = 1;        // Set the height to a small one.
+				frame.size.width = 1;
+				[articleList reloadRowAtIndex:row];
 			}
 		}
 		else
@@ -362,6 +357,9 @@
 			}
 			else {	//non relevant cell
 				[cell setInProgress:NO];
+				NSRect frame = sender.frame;
+				frame.size.height = 1;        // Set the height to a small one.
+				frame.size.width = 1;
 				[articleList reloadRowAtIndex:row];
 			}
 		} else {
