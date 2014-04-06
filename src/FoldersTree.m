@@ -1065,7 +1065,7 @@
 	
 	// Remove the "☁️ " symbols on Open Reader feeds
 	if (IsGoogleReaderFolder(folder) && [newName hasPrefix:@"☁️ "]) {
-		NSString *tmpName = [newName substringFromIndex:2];
+		NSString *tmpName = [newName substringFromIndex:3];
 		newName = tmpName;
 	}
 	
