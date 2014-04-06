@@ -101,7 +101,7 @@
 	// Set background colour
 	[outlineView setBackgroundColor:[NSColor colorWithCalibratedRed:0.84 green:0.87 blue:0.90 alpha:1.00]];
 		
-	// Allow double-click a node to edit the node
+	// Allow a second click in a node to edit the node
 	[outlineView setAction:@selector(handleSingleClick:)];
 	[outlineView setDoubleAction:@selector(handleDoubleClick:)];
 	[outlineView setTarget:self];
@@ -1033,7 +1033,7 @@
 -(void)enableFoldersRenamingAfterDelay
 {
 	canRenameFolders = NO;
-	[NSTimer scheduledTimerWithTimeInterval:0.9 target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval] target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
 }
 
 /* outlineViewWillBecomeFirstResponder
