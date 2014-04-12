@@ -228,12 +228,7 @@ static NSLocale * enUSLocale;
 	static BOOL doneSafeInit = NO;
 	if (!doneSafeInit)
 	{
-		NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
-		if (safariVersion)
-			safariVersion = [safariVersion substringFromIndex:1];
-		else
-			safariVersion = @"532.22";
-		[ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion]];
+		[ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord]]];
         
 		[foldersTree initialiseFoldersTree];
 		[mainArticleView initialiseArticleView];
