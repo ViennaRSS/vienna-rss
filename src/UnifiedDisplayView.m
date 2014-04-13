@@ -791,7 +791,7 @@
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;
-	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count] && [articleList visibleRange].location < [allArticles count])
+	if ([articleList visibleRange].location < [allArticles count])
 		guid = [[[allArticles objectAtIndex:[articleList visibleRange].location] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
@@ -805,7 +805,8 @@
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the first visible article is the same
 		// elsewhere we scroll to the previous article
 		allArticles = [articleController allArticles];
-		BOOL isUnchanged = [guid isEqualToString:[[allArticles objectAtIndex:[articleList visibleRange].location] guid]];
+		BOOL isUnchanged = [articleList visibleRange].location < [allArticles count]
+			&& [guid isEqualToString:[[allArticles objectAtIndex:[articleList visibleRange].location] guid]];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
