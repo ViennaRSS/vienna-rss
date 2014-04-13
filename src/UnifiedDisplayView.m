@@ -30,6 +30,8 @@
 #import "BrowserPane.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
+// 150 seems a reasonable value to avoid calculating too many frames before being able to update display
+#define DEFAULT_CELL_HEIGHT	150
 #define XPOS_IN_CELL	6
 #define YPOS_IN_CELL	2
 
@@ -254,14 +256,9 @@
 		if ([obj isKindOfClass:[ArticleCellView class]]) {
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			[cell setInProgress:YES];
-			NSUInteger row= [cell row];
-			if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
-				[cell setFrame:NSMakeRect(0, 0, NSWidth([sender frame]), 50)];
-				NSRect frame = sender.frame;
-				frame.size.height = 1;        // Set the height to a small one.
-				frame.size.width = 1;
-				[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-			}
+			NSRect frame = sender.frame;
+			frame.size.height = 1;        // Set the height to a small one.
+			frame.size.width = 1;
 		}
 	}
 }
@@ -279,15 +276,14 @@
 		{
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			[cell setInProgress:NO];
-			NSUInteger row= [cell row];
+			NSUInteger row= [cell articleRow];
 			NSArray * allArticles = [articleController allArticles];
 			if (row < (NSInteger)[allArticles count])
 			{
-				Article * theArticle = [allArticles objectAtIndex:row];
-				NSString * htmlText = [(ArticleView *)sender articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-				Folder * folder = [[Database sharedDatabase] folderFromID:[theArticle folderId]];
-				[(ArticleView *)sender setHTML:htmlText withBase:SafeString([folder feedURL])];
-				[sender setNeedsDisplay:NO];
+				NSRect frame = sender.frame;
+				frame.size.height = 1;        // Set the height to a small one.
+				frame.size.width = 1;
+				[articleList reloadRowAtIndex:row];
 			}
 		}
 		else
@@ -312,7 +308,7 @@
 		if ([objView isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
-			[cell setInProgress:NO];
+			NSUInteger row= [cell row];
 			// get the height of the rendered frame.
 			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
 			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
@@ -327,8 +323,6 @@
 			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
 			CGFloat fittingHeight = [outputHeight floatValue];
 
-			NSUInteger row= [cell row];
-
 			//get the rect of the current webview frame
 			NSRect webViewRect = [sender frame];
 			//calculate the new frame
@@ -338,30 +332,40 @@
 									   fittingHeight);
 			//set the new frame to the webview
 			[sender setFrame:newWebViewRect];
-
-			if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
-				{
+			if (row == [cell articleRow] && row < [[articleController allArticles] count]
+			  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
+			{	//relevant cell
+				if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
 					if (row < [rowHeightArray count])
 						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
 					else
+					{	NSInteger toAdd = row - [rowHeightArray count] ;
+						for (NSInteger i = 0 ; i < toAdd ; i++) {
+							[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+						}
 						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
+					}
+					[cell setInProgress:NO];
 					[articleList reloadRowAtIndex:row];
-					[articleList setNeedsDisplay:YES];
+				}
+				else
+				{
+					// something in the dimensions went wrong : force a reload
+					[self resubmitWebView:sender];
 				}
 			}
-			else {
-				// something in the dimensions went wrong : wait a while, then force a reload
-				if ([cell isEqualTo:[articleList cellForRowAtIndex:row]])
-					[self performSelector:@selector(resubmitWebView:) withObject:sender afterDelay:0.3];
+			else {	//non relevant cell
+				[cell setInProgress:NO];
+				NSRect frame = sender.frame;
+				frame.size.height = 1;        // Set the height to a small one.
+				frame.size.width = 1;
+				[articleList reloadRowAtIndex:row];
 			}
 		} else {
 			// not an ArticleCellView anymore : reposition it, just in case...
-			[sender setNeedsDisplay:NO];
 			NSRect frame = sender.frame;
 			frame.size.height = 1;        // Set the height to a small one.
 			frame.size.width = 1;
-			[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
 		}
 	}
 }
@@ -370,14 +374,15 @@
 {
 	ArticleCellView * cell = (ArticleCellView *)[sender superview];
 	NSUInteger row = [cell row];
-	if ([cell isEqualTo:[articleList cellForRowAtIndex:row]]) {
+	if (cell != nil)
+	{
 		NSRect frame = sender.frame;
 		frame.size.height = 1;        // Set the height to a small one.
 		frame.size.width = 1;
-		[sender setFrameOrigin:NSMakePoint(XPOS_IN_CELL, YPOS_IN_CELL)];
-		[articleList reloadRowAtIndex:row];
 		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
 	}
+	else
+		[articleList reloadRowAtIndex:row];
 }
 
 /* updateAlternateMenuTitle
@@ -451,7 +456,6 @@
 	{
 		if ([[thisArticle guid] isEqualToString:guid])
 		{
-			[articleList setNeedsDisplay:YES];
 			[self makeRowSelectedAndVisible:rowIndex];
 			found = YES;
 			break;
@@ -787,7 +791,7 @@
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;
-	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
+	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count] && [articleList visibleRange].location < [allArticles count])
 		guid = [[[allArticles objectAtIndex:[articleList visibleRange].location] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
@@ -922,9 +926,11 @@
 	CGFloat height;
 	if (row >= [rowHeightArray count])
 	{
-		// 150 seems a reasonable value to avoid calculating too many frames before being able to update display
-		[rowHeightArray addObject:[NSNumber numberWithFloat:150]];
-		return 150.;
+		NSInteger toAdd = row - [rowHeightArray count] + 1 ;
+		for (NSInteger i = 0 ; i < toAdd ; i++) {
+			[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+		}
+		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
 	else
 	{
@@ -939,13 +945,9 @@
  */
 - (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row
 {
-	BOOL newCell = NO;
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
-	NSUInteger count = [allArticles count];
-	if (row >= count)
-		return nil;
 
 	Article * theArticle = [allArticles objectAtIndex:row];
 	NSInteger articleFolderId = [theArticle folderId];
@@ -957,20 +959,15 @@
 	if (cellView == nil)
 	{
 		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
-						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, [self listView:aListView heightOfRow:row])] autorelease];
-		newCell = YES;
+						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, DEFAULT_CELL_HEIGHT)] autorelease];
 	}
 
 	ArticleView * view = [cellView articleView];
-	if (row < count)
-	{
-		NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-		[cellView setFolderId:articleFolderId];
-		[view setHTML:htmlText withBase:feedURL];
-	}
-	else
-		[cellView setInProgress:NO];
-
+	[cellView setFolderId:articleFolderId];
+	[cellView setArticleRow:row];
+	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
+	[cellView setInProgress:YES];
+	[view setHTML:htmlText withBase:feedURL];
 	[cellView addSubview:view];
     return cellView;
 }

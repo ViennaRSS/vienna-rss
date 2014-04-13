@@ -19,11 +19,13 @@
 	NSProgressIndicator * progressIndicator;
 	BOOL inProgress;
 	int folderId;
+	NSUInteger articleRow;
 }
 
 @property (nonatomic, retain) ArticleView *articleView;
 @property BOOL inProgress;
 @property int folderId;
+@property NSUInteger articleRow;
 
 // Public functions
 -(id)initWithReusableIdentifier: (NSString*)identifier inFrame:(NSRect)frameRect;

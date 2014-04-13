@@ -14,11 +14,14 @@
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
+#define DEFAULT_CELL_HEIGHT	150
+#define XPOS_IN_CELL	6
+#define YPOS_IN_CELL	2
 
 @implementation ArticleCellView
 
 @synthesize articleView;
-@synthesize inProgress, folderId;
+@synthesize inProgress, folderId, articleRow;
 
 #pragma mark -
 #pragma mark Init/Dealloc
@@ -43,8 +46,8 @@
 		[[articleView preferences] setStandardFontFamily:@"Arial"];
 		[[articleView preferences] setDefaultFontSize:16];
 
-		// Disable caching
-		[[articleView preferences] setUsesPageCache:NO];
+		// Enable caching
+		[[articleView preferences] setUsesPageCache:YES];
 		[articleView setMaintainsBackForwardList:NO];
 		[self setInProgress:NO];
 		progressIndicator = nil;
@@ -59,6 +62,23 @@
 	[progressIndicator release], progressIndicator=nil;
 
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark Reusing Cells
+
+- (void)prepareForReuse
+{
+	//calculate the frame
+	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+							   YPOS_IN_CELL,
+							   NSWidth([self frame]) - XPOS_IN_CELL,
+							   DEFAULT_CELL_HEIGHT);
+	//set the new frame to the webview
+	[articleView setFrame:newWebViewRect];
+	[self setInProgress:YES];
+	[articleView clearHTML];
+	[super prepareForReuse];
 }
 
 #pragma mark -
@@ -130,6 +150,18 @@
 		progressIndicator = nil;
 	}
 
+}
+
+-(void)layoutSubviews
+{
+	//calculate the new frame
+	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+							   YPOS_IN_CELL,
+							   NSWidth([self frame]) - XPOS_IN_CELL,
+							   NSHeight([self frame]) -YPOS_IN_CELL);
+	//set the new frame to the webview
+	[articleView setFrame:newWebViewRect];
+	[super layoutSubviews];
 }
 
 - (BOOL)acceptsFirstResponder
