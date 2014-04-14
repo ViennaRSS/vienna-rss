@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Steve on 7/19/05.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2014 Steve Palmer and Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -467,16 +467,17 @@ static RefreshManager * _refreshManager = nil;
             [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
         }
 		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_Feed], @"type", nil]];
-		if ([folder username] != nil)
+		if (![[folder username] isEqualToString:@""])
 		{
 			[myRequest setUsername:[folder username]];
 			[myRequest setPassword:[folder password]];
+			[myRequest setUseCookiePersistence:NO];
 		}
-		[myRequest setUseCookiePersistence:NO];
 		[myRequest setDelegate:self];
 		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
 		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
 		[myRequest setWillRedirectSelector:@selector(folderRefreshRedirect:)];
+		[myRequest addRequestHeader:@"Accept" value:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"];
 	} else { // Open Reader feed
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
@@ -490,6 +491,12 @@ static RefreshManager * _refreshManager = nil;
 
 {	LOG_EXPR([request error]);
 	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
+	if ([[request error] code] == ASIAuthenticationErrorType) //Error caused by lack of authentication
+	{
+		if (![authQueue containsObject:folder])
+			[authQueue addObject:folder];
+		[self getCredentialsForFolder];
+	}
     ActivityItem * aItem = (ActivityItem *)[[request userInfo] objectForKey:@"log"];
 	[self setFolderErrorFlag:folder flag:YES];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[request error] localizedDescription ]]];
@@ -908,7 +915,7 @@ static RefreshManager * _refreshManager = nil;
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
 			[connectorItem setStatus:logText];
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:folder];
 		}
 		
 		// Done with this connection

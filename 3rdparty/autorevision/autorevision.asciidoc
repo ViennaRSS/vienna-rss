@@ -1,0 +1,201 @@
+= AUTOREVISION(1) =
+:doctype: manpage
+
+== NAME ==
+autorevision - extract current-revision metadata from version-control repositories
+
+== SYNOPSIS ==
+*`autorevision`* {*`-t`* `<output-type>` | *`-s`* `<symbol>`} [*`-o`* `<cache-file>` [*`-f`*] ] [*`-U`*] [*`-V`*]
+
+== DESCRIPTION ==
+Extracts metadata about the head revision from your repository.
+
+This program is meant to be used by project build systems to extract
+properties that can be used in software version strings. It can emit
+source files containing variable and macro definitions suitable for
+use with C, C++, Java, sh, Python, Perl, Mac info.plist and other
+types of files (see below for the full list).
+
+The generated source is written to standard output.
+
+This program can normally be called from anywhere within a repository
+copy.  Under bzr the copy must be of a branch, not a full multibranch
+repository.  Under Subversion it must be called under a repository
+checkout, not the repository itself.
+
+If you specify a cache file, then when *autorevision* is run where no
+repository can be recognized, the values from the cache file will be
+used instead.  If a repository can be recognized, the cache is
+rewritten. This feature makes it possible for your build to run
+from an unpacked tarball that includes the cache file.
+
+=== Valid Repository Types ===
+
+*Git*: A version greater than 1.7.2.3 is recommended.
+
+*Mercurial*: A version greater than 1.6 is recommended.
+
+*Subversion*: Any production version.
+
+*Bazaar*: Any production version.
+
+=== Valid Output Types ===
+
+*h*::
+A header file suitable for C/C++.
+
+*xcode*::
+A header like output for use with xcode to populate info.plist strings.
+
+*sh*::
+A text file suitable for including from a bash script.  Will work with
+Ruby.
+
+*py*::
+A Python source file setting Python variables (*`python`* is an
+acceptable synonym).
+
+*pl*::
+A Perl source file setting Perl variables  (*`perl`* is an acceptable
+synonym).
+
+*lua*::
+A lua source file setting lua variables.
+
+*php*::
+A PHP source file setting PHP variables.
+
+*ini*::
+A ini source file setting ini variables.
+
+*js*::
+A javascript source file setting javascript variables.
+
+*json*::
+A JSON format file.
+
+*java*::
+A Java source file setting class properties.
+
+*javaprop*::
+A Java properties file (like ini); useful when META-INF is readable in
+Java.
+
+*tex*::
+A TeX source file defining TeX macros.  Note that the symbols are given
+different names since the underscore has a special meaning in TeX.
+For example, VCS_SHORT_HASH is renamed to \vcsShortHash.
+
+*m4*::
+An m4 source file defining m4 macros.
+
+
+=== Valid Symbol Names ===
+
+*VCS_TYPE*::
+The repository type - "git", "hg", "bzr", or "svn".
+
+*VCS_BASENAME*::
+The basename of the directory root.  For most VCSes this will simply
+be the basename of the repository root directory.  For Subversion,
+*autorevision* will navigate up though trunk, branches, and tags
+directories to find the actual root.
+
+*VCS_NUM*::
+A count of revisions between the current one and the initial
+one; useful for reporting build numbers.
+
+*VCS_UUID*::
+A universally unique identifier, generated from the root commit in git
+and hg; for svn it uses the supplied UUID.
+Not currently implemented for bzr.
+
+*VCS_DATE*::
+The date of the most recent commit in true ISO-8601/RFC3339
+format, including seconds.
+
+*VCS_BRANCH*::
+The name of the branch of the commit graph that was selected when
+autoversion was run.  Under Subversion this will normally be either
+'trunk' or the basename of some branch or tag subdirectory, depending
+on where *autoversion* was run.  Under git, this will normally be the
+shortname of the current branch (the asterisked line in the output of
+of "git branch") except that when the branch doesn't have a shortname
+it will be a full refspec.  Under hg the feature that is called
+'branches' is actually a sort of graph coloring (multiple heads can
+have the same branch name) so this variable is filled with the current
+bookmark if it exists, with the current branch name as a fallback.
+Under bzr, this is the nick of the branch you are on.
+
+*VCS_TAG*::
+The name of the most recent tag ancestral to the current commit.
+Empty under Subversion.
+
+*VCS_TICK*::
+A count of commits since most recent tag ancestral to the current
+commit or an alias of *VCS_NUM* if there are no prior tags.
+Empty under Subversion.
+
+*VCS_EXTRA*::
+A symbol set aside specifically to be set by the user through the
+environment or via scripts.
+
+*VCS_FULL_HASH*::
+A full unique identifier for the current revision.
+
+*VCS_SHORT_HASH*::
+A shortened version of VCS_FULL_HASH, but VCS_FULL_HASH if it cannot be
+shortened.
+
+*VCS_WC_MODIFIED*::
+Set to `1` if the current working directory has been modified and `0`
+if not. 'Untracked files are not ignored; see *`-U`* for details.'  If
+the output language is interpreted and has native Boolean literals,
+true will mean modified and false unmodified.  The C/C++ output is left
+as numeric so the preprocessor can test it.
+
+== OPTIONS ==
+
+*-t* '<output-type>'::
+Sets the output type. It is required unless *`-s`* is specified; both
+*`-t`* and *`-s`* cannot be used in the same invocation.
+
+*-s* '<symbol>'::
+Changes the reporting behavior; instead of emitting a symbol file to
+stdout, only the value of that individual symbol will be reported. It
+is required unless *`-t`* is specified; both *`-t`* and *`-s`* cannot
+be used in the same invocation.
+
+*-o* '<cache-file>'::
+Sets the name of the cache file.
+
+*-f*::
+Forces the use cache data even when in a repo; useful if you want to
+preprocess the data before final output.
+
+*-U*::
+Causes untracked files to be checked when determining if the
+working copy is modified 'for Subversion only'.  While this is the
+default behavior for all other repository types it is off by default
+for Subversion because of speed concerns.
+
+*-V*::
+Emits the autorevision version and exits.
+
+== BUGS ==
+The bzr extractor is not very well tested as yet.
+
+When a git repo is actually a git-svn remote, this tool tries to do
+the right thing and return a Subversion revision. The bug is that the
+detector code for this case is somewhat unreliable; you will get the
+hash instead if your configuration doesn't use svn-remote.svn.url.
+
+Nested repositories, particularly repositories of different types, may
+result in incorrect and unintended behavior.
+
+== AUTHORS ==
+
+dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
+support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
+Python/Perl/lua/m4 support, svn and bzr extraction, git-svn support,
+CLI design, man page.

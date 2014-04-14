@@ -47,6 +47,7 @@
 	// Set some useful tooltips.
 	[filterSearchField setToolTip:NSLocalizedString(@"Filter displayed articles by matching text", nil)];
 	[filterViewPopUp setToolTip:NSLocalizedString(@"Filter articles", nil)];
+    [filterViewPopUp.cell accessibilitySetOverrideValue:filterByLabel.cell forAttribute:NSAccessibilityTitleUIElementAttribute];
 	[filterCloseButton setToolTip:NSLocalizedString(@"Close the filter bar", nil)];
 	[[filterCloseButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Close the filter bar", nil) forAttribute:NSAccessibilityTitleAttribute];
 }

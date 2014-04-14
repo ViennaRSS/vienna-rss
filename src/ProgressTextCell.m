@@ -3,7 +3,7 @@
 //  Vienna
 //
 //  Created by Curtis Faith on Mon Mar 15, 2010 based on ImageAndTextCell.m
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright (c) 2004-2014 Steve Palmer and Vienna contributors (see Help/Acknowledgements for list of contributors). All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -140,7 +140,9 @@
 	}
 
 	// Draw the text
+	cellFrame.origin.y += 1;
 	cellFrame.origin.x += 2;
+	cellFrame.size.height -= 1;
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
 }
 

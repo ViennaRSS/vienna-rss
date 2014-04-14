@@ -36,7 +36,7 @@
     NSRect textRect = [attrString boundingRectWithSize: titleFrame.size
                                                options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin ];
 
-	titleFrame.origin.y = theRect.origin.y + (theRect.size.height - textRect.size.height )/2.0 - 1.0;
+	titleFrame.origin.y = theRect.origin.y + (theRect.size.height - textRect.size.height )/2.0;
 	titleFrame.size.height = textRect.size.height;
 
     return titleFrame;

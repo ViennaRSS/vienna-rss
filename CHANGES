@@ -8,6 +8,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 Beta 20
+-------------
+- Largely improved Unified layout
+- Added InoReader (<http://www.inoreader.com>) as a supported OpenReader provider, fix some OpenReader behaviors.
+- Fix 'Feed->Unsubscribe' command with OpenReader feeds
+- Handle requests by scripts/plugins to open new windows
+- Fix problems with feeds from some servers
+- Fix Vertical layout in situations where there is only a line per cell
+
 3.0.0 Beta 19
 -------------
 - Fix a crash which occured when deleting multiple articles under OS X Mavericks

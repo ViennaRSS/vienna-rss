@@ -9,8 +9,16 @@ xauto="${OBJROOT}/autorevision.h"
 cauto="${OBJROOT}/autorevision.cache"
 tauto="${OBJROOT}/autorevision.tmp"
 
+# Check our paths
+if [ ! -d "${BUILT_PRODUCTS_DIR}" ]; then
+	mkdir -p "${BUILT_PRODUCTS_DIR}"
+fi
+if [ ! -d "${OBJROOT}" ]; then
+	mkdir -p "${OBJROOT}"
+fi
 
-if ! ./3rdparty/autorevision -o "${cauto}" -t sh; then
+
+if ! ./3rdparty/autorevision/autorevision -o "${cauto}" -t sh; then
 	exit ${?}
 fi
 
@@ -37,12 +45,12 @@ fi
 
 
 # Output for src/autorevision.h.
-./3rdparty/autorevision -f -o "${cauto}" -t h > "${hauto}"
+./3rdparty/autorevision/autorevision -f -o "${cauto}" -t h > "${hauto}"
 if [[ ! -f "${fauto}" ]] || ! cmp -s "${hauto}" "${fauto}"; then
 	cp -a "${hauto}" "${fauto}"
 fi
 
 # Output for info.plist prepossessing.
-./3rdparty/autorevision -f -o "${tauto}" -t xcode > "${xauto}"
+./3rdparty/autorevision/autorevision -f -o "${tauto}" -t xcode > "${xauto}"
 
 exit ${?}
