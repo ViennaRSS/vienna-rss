@@ -127,9 +127,34 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 
 @implementation AppController
 
+// C array of NSDateFormatter format strings. This is array is used only once to populate dateFormatterArray.
+// Note: for every four-digit year entry, we need an earlier two-digit year entry so that NSDateFormatter parses
+//       two-digit years considering the two-digit-year start date.
+static NSString * kDateFormats[] = {
+	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
+	//IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20 (first char is #0)
+	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
+	@"yy-MM-dd'T'HH:mm:ssZZZ",     @"yyyy-MM-dd'T'HH:mm:ssZZZ",
+	// 2010-09-28T15:31:25.815+02:00
+	@"yy-MM-dd'T'HH:mm:ss.SSSZZZ", @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZ",
+	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
+	@"EEE, dd MMM yy HH:mmss zzz", @"EEE, dd MMM yyyy HH:mmss zzz",
+	@"EEE, dd MMM yy HH:mmss ZZZ", @"EEE, dd MMM yyyy HH:mmss ZZZ",
+	@"EEE, dd MMM yy HH:mmss",     @"EEE, dd MMM yyyy HH:mmss",
+	// Required by compatibility with older OS X versions
+	@"yy-MM-dd'T'HH:mm:ss'Z'",     @"yyyy-MM-dd'T'HH:mm:ss'Z'",
+	@"yy-MM-dd'T'HH:mm:ss.SSS'Z'", @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+	// Other exotic and non standard date formats
+	@"yy-MM-dd HH:mm:ss ZZZ",      @"yyyy-MM-dd HH:mm:ss ZZZ",
+	@"yy-MM-dd HH:mm:ss zzz",      @"yyyy-MM-dd HH:mm:ss zzz",
+	@"EEE dd MMM yy HH:mmss zzz",  @"EEE dd MMM yyyy HH:mmss zzz",
+	@"EEE dd MMM yy HH:mmss ZZZ",  @"EEE dd MMM yyyy HH:mmss ZZZ",
+	@"EEE dd MMM yy HH:mmss",      @"EEE dd MMM yyyy HH:mmss",
+	@"EEEE dd MMMM yy",            @"EEEE dd MMMM yyyy",
+};
+static const size_t kNumberOfDateFormatters = sizeof(kDateFormats) / sizeof(kDateFormats[0]);
 // C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
 //  those we need early in the program launch and keep them in memory.
-#define kNumberOfDateFormatters 13
 static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
@@ -1019,34 +1044,15 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Initializes the date formatters
 	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
 
+    NSLog(@"number of date formatters is %lu", kNumberOfDateFormatters);
+
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
 		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
 		[dateFormatterArray[i] setLocale:enUSLocale];
 		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        [dateFormatterArray[i] setDateFormat:kDateFormats[i]];
 	}
-
-	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
-	//IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20 (first char is #0)
-	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
-	[dateFormatterArray[0] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-	// 2010-09-28T15:31:25.815+02:00
-	[dateFormatterArray[1] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZ"];
-	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
-	[dateFormatterArray[2] setDateFormat:@"EEE, dd MMM yyyy HH:mmss zzz"];
-	[dateFormatterArray[3] setDateFormat:@"EEE, dd MMM yyyy HH:mmss ZZZ"];
-	[dateFormatterArray[4] setDateFormat:@"EEE, dd MMM yyyy HH:mmss"];
-	// Required by compatibility with older OS X versions
-	[dateFormatterArray[5] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-	[dateFormatterArray[6] setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-	// Other exotic and non standard date formats
-	[dateFormatterArray[7] setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-	[dateFormatterArray[8] setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-	[dateFormatterArray[9] setDateFormat:@"EEE dd MMM yyyy HH:mmss zzz"];
-	[dateFormatterArray[10] setDateFormat:@"EEE dd MMM yyyy HH:mmss ZZZ"];
-	[dateFormatterArray[11] setDateFormat:@"EEE dd MMM yyyy HH:mmss"];
-	[dateFormatterArray[12] setDateFormat:@"EEEE dd MMMM yyyy"];
-
 
 	// end of initialization of date formatters
 }
