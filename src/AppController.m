@@ -1044,8 +1044,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Initializes the date formatters
 	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
 
-    NSLog(@"number of date formatters is %lu", kNumberOfDateFormatters);
-
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
 		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
