@@ -38,6 +38,7 @@
 
 static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString * ClientName = @"ViennaRSS";
+static NSString * TheOldReaderCom = @"theoldreader.com";
 
 NSString * openReaderHost;
 NSString * username;
@@ -129,14 +130,16 @@ JSONDecoder * jsonDecoder;
 }
 
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit
-{				
+{
+    
+    ignoreLimit = TRUE;
 	
 	//This is a workaround throw a BAD folderupdate value on DB
 	NSString *folderLastUpdateString = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
 	if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
 	
 	NSString *itemsLimitation;
-	if (ignoreLimit)
+  	if (ignoreLimit)
 		itemsLimitation = @"&n=10000"; //just stay reasonable…
 	else
 		//Note : we don't set "r" (sorting order) here.
@@ -147,8 +150,15 @@ JSONDecoder * jsonDecoder;
 
 	if (![self isReady])
 		[self authenticate];
+
+    NSString* tmpfeedURL = [thisFolder feedURL];
+    if( [openReaderHost isEqualToString:TheOldReaderCom] )
+    {
+        tmpfeedURL = [[thisFolder feedURL] lastPathComponent];
+    }
 		
-	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@",APIBaseURL,percentEscape([thisFolder feedURL]),ClientName,itemsLimitation,TIMESTAMP]];
+	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
+                                                  percentEscape(tmpfeedURL),ClientName,itemsLimitation,TIMESTAMP]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -323,8 +333,15 @@ JSONDecoder * jsonDecoder;
 		
 		[dict release];
 
+        NSString* tmpfeedURL = [refreshedFolder feedURL];
+        if( [openReaderHost isEqualToString:TheOldReaderCom] )
+        {
+            tmpfeedURL = [[refreshedFolder feedURL] lastURLComponent];
+        }
+
 		// Request id's of unread items
-		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
+		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
+                           percentEscape(tmpfeedURL)];
 		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
 		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -336,7 +353,12 @@ JSONDecoder * jsonDecoder;
 		[[RefreshManager sharedManager] addConnection:request2];
 
 		// Request id's of starred items
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&it=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([refreshedFolder feedURL])];
+		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
+        if( [openReaderHost isEqualToString:TheOldReaderCom] ) {
+			args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(tmpfeedURL)];
+		} else {
+			args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&it=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(tmpfeedURL)];
+		}
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -376,11 +398,20 @@ JSONDecoder * jsonDecoder;
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
 		{
-			// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
-			// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
-			NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
-			NSString * guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
-			[guidArray addObject:guid];
+            NSString * guid;
+            if( [openReaderHost isEqualToString:TheOldReaderCom] )
+            {
+                guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@",[itemRef objectForKey:@"id"]];
+            }
+            else
+            {
+				// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
+				// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
+                NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
+                guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
+            }
+
+            [guidArray addObject:guid];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
 		[[Database sharedDatabase] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
@@ -397,10 +428,18 @@ JSONDecoder * jsonDecoder;
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
 		{
-			// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
-			// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
-			NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
-			NSString * guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
+            NSString * guid;
+            if( [openReaderHost isEqualToString:TheOldReaderCom] )
+            {
+                guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@",[itemRef objectForKey:@"id"]];
+            }
+            else
+            {
+				// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
+				// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
+                NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
+                guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
+            }
 			[guidArray addObject:guid];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);

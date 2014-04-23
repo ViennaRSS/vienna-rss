@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>BazQux</key>
@@ -7,7 +7,7 @@
 		<key>Address</key>
 		<string>www.bazqux.com</string>
 		<key>Hint</key>
-		<string>Enter the info you set in BazQux's 'Mobile login' settings</string>
+		<string>Enter the info you set in BazQux&apos;s &apos;Mobile login&apos; settings</string>
 	</dict>
 	<key>FeedHQ</key>
 	<dict>
@@ -28,7 +28,14 @@
 		<key>Address</key>
 		<string></string>
 		<key>Hint</key>
-		<string>Enter server's address and your credentials for this server</string>
+		<string>Enter server&apos;s address and your credentials for this server</string>
+	</dict>
+	<key>TheOldReader</key>
+	<dict>
+		<key>Address</key>
+		<string>theoldreader.com</string>
+		<key>Hist</key>
+		<string>Enter server&apos;s address and your credentials for this server</string>
 	</dict>
 </dict>
 </plist>

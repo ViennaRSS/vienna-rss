@@ -526,6 +526,7 @@ static RefreshManager * _refreshManager = nil;
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
 	[myRequest setDelegate:self];
 	[myRequest setDidFinishSelector:@selector(iconRequestDone:)];
+	[myRequest setDidFailSelector:@selector(iconRequestFailed:)];
 	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_FavIcon], @"type", nil]];
 	[self addConnection:myRequest];
 
@@ -539,10 +540,6 @@ static RefreshManager * _refreshManager = nil;
 	[self setFolderUpdatingFlag:folder flag:NO];
 	if ([request responseStatusCode] == 404) {
 		[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-		Database *db = [Database sharedDatabase];
-		@synchronized(db) {
-			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
-			}
 	} else if ([request responseStatusCode] == 200) {
 		
 		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
@@ -558,23 +555,16 @@ static RefreshManager * _refreshManager = nil;
 			// Log additional details about this.
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
-
-			Database *db = [Database sharedDatabase];
-			@synchronized(db) {
-				[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
-				}
-
-		} else {
-			// many servers send null data instead of a favicon
-			Database *db = [Database sharedDatabase];
-			@synchronized(db) {
-				[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
-			};
 		}
 		[iconImage release];
 	} else {
-		ALog(@"Unhandled error code: %d",[request responseStatusCode]);
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 	}
+
+	Database *db = [Database sharedDatabase];
+	@synchronized(db) {
+		[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+		}
 }
 
 // failure callback
@@ -583,6 +573,11 @@ static RefreshManager * _refreshManager = nil;
 	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),[[request error] localizedDescription ]]];
+
+	Database *db = [Database sharedDatabase];
+	@synchronized(db) {
+		[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
+		}
 }
 
 - (void)syncFinishedForFolder:(Folder *)folder 
