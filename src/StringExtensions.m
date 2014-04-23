@@ -441,7 +441,7 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)lastURLComponent
 {
 	int index = [self length] - 1;
-	
+
 	while (index >= 0 && [self characterAtIndex:index] != '/')
 		--index;
 	if (index <= 0)

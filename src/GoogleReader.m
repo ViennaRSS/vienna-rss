@@ -150,7 +150,7 @@ JSONDecoder * jsonDecoder;
 
 	if (![self isReady])
 		[self authenticate];
-    
+
     NSString* tmpfeedURL = [thisFolder feedURL];
     if( [openReaderHost isEqualToString:TheOldReaderCom] )
     {
@@ -338,7 +338,7 @@ JSONDecoder * jsonDecoder;
         {
             tmpfeedURL = [[refreshedFolder feedURL] lastURLComponent];
         }
-		
+
 		// Request id's of unread items
 		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
                            percentEscape(tmpfeedURL)];
@@ -353,8 +353,12 @@ JSONDecoder * jsonDecoder;
 		[[RefreshManager sharedManager] addConnection:request2];
 
 		// Request id's of starred items
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape([[refreshedFolder feedURL] lastURLComponent])];
-
+		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
+        if( [openReaderHost isEqualToString:TheOldReaderCom] ) {
+			args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(tmpfeedURL)];
+		} else {
+			args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&it=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(tmpfeedURL)];
+		}
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -394,21 +398,17 @@ JSONDecoder * jsonDecoder;
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
 		{
-			// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
-			// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
-            
-            
             NSString * guid;
             if( [openReaderHost isEqualToString:TheOldReaderCom] )
             {
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@",[itemRef objectForKey:@"id"]];
-                
             }
             else
             {
+				// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
+				// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
                 NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
-                
             }
 
             [guidArray addObject:guid];
@@ -428,19 +428,17 @@ JSONDecoder * jsonDecoder;
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
 		{
-			// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
-			// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
             NSString * guid;
             if( [openReaderHost isEqualToString:TheOldReaderCom] )
             {
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@",[itemRef objectForKey:@"id"]];
-                
             }
             else
             {
+				// as described in http://code.google.com/p/google-reader-api/wiki/ItemId
+				// the short version of id is a base 10 signed integer ; the long version includes a 16 characters base 16 representation
                 NSInteger shortId = [[itemRef objectForKey:@"id"] integerValue];
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
-                
             }
 			[guidArray addObject:guid];
 		}
