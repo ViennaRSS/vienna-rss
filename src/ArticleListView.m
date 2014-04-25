@@ -889,7 +889,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (self == [articleController mainArticleView])
 	{
-		[articleList reloadData];
+		[self refreshCurrentFolder];
 	}
 }
 
