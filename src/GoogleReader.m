@@ -646,13 +646,12 @@ JSONDecoder * jsonDecoder;
 		else
 		{
 			// the feed is already known
-			// set HomePage if the info is available and not yet stored
+			// set HomePage if the info is available
 			NSString* homePageURL = [feed objectForKey:@"htmlUrl"];
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
-					if (IsGoogleReaderFolder(f) && [[f homePage] isEqualToString:@""] && [[f feedURL] isEqualToString:feedURL]) {
-						Database * db = [Database sharedDatabase];
-						[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
+					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL]) {
+						[[Database sharedDatabase] setFolderHomePage:[f itemId] newHomePage:homePageURL];
 						break;
 					}
 				}
