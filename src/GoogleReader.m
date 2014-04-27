@@ -650,7 +650,7 @@ JSONDecoder * jsonDecoder;
 			NSString* homePageURL = [feed objectForKey:@"htmlUrl"];
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
-					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL] && [[f homePage] isEqualToString:@""]) {
+					if (IsGoogleReaderFolder(f) && [[f homePage] isEqualToString:@""] && [[f feedURL] isEqualToString:feedURL]) {
 						Database * db = [Database sharedDatabase];
 						[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
 						break;
