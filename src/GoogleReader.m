@@ -38,12 +38,15 @@
 
 static NSString * LoginBaseURL = @"https://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString * ClientName = @"ViennaRSS";
-static NSString * TheOldReaderCom = @"theoldreader.com";
 
+// host specific variables
 NSString * openReaderHost;
 NSString * username;
 NSString * password;
 NSString * APIBaseURL;
+BOOL hostSupportsLongId;
+BOOL hostRequiresSParameter;
+BOOL hostRequiresLastPathOnly;
 
 // Singleton
 static GoogleReader * _googleReader = nil;
@@ -149,14 +152,18 @@ JSONDecoder * jsonDecoder;
 	if (![self isReady])
 		[self authenticate];
 
-    NSString* tmpfeedURL = [thisFolder feedURL];
-    if( [openReaderHost isEqualToString:TheOldReaderCom] )
+    NSString* feedIdentifier;
+    if( hostRequiresLastPathOnly )
     {
-        tmpfeedURL = [[thisFolder feedURL] lastPathComponent];
+        feedIdentifier = [[thisFolder feedURL] lastPathComponent];
+    }
+    else
+    {
+    	feedIdentifier =  [thisFolder feedURL];
     }
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
-                                                  percentEscape(tmpfeedURL),ClientName,itemsLimitation,TIMESTAMP]];
+                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,TIMESTAMP]];
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -331,15 +338,19 @@ JSONDecoder * jsonDecoder;
 		
 		[dict release];
 
-        NSString* tmpfeedURL = [refreshedFolder feedURL];
-        if( [openReaderHost isEqualToString:TheOldReaderCom] )
-        {
-            tmpfeedURL = [[refreshedFolder feedURL] lastURLComponent];
-        }
+		NSString* feedIdentifier;
+		if( hostRequiresLastPathOnly )
+		{
+			feedIdentifier = [[refreshedFolder feedURL] lastPathComponent];
+		}
+		else
+		{
+			feedIdentifier =  [refreshedFolder feedURL];
+		}
 
 		// Request id's of unread items
 		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
-                           percentEscape(tmpfeedURL)];
+                           percentEscape(feedIdentifier)];
 		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
 		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -352,11 +363,16 @@ JSONDecoder * jsonDecoder;
 
 		// Request id's of starred items
 		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
-        if( [openReaderHost isEqualToString:TheOldReaderCom] ) {
-			args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&s=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(tmpfeedURL)];
-		} else {
-			args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&it=user/-/state/com.google/starred&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(tmpfeedURL)];
+		NSString* starredSelector;
+		if (hostRequiresSParameter)
+		{
+			starredSelector=@"s=user/-/state/com.google/starred";
 		}
+		else
+		{
+			starredSelector=@"it=user/-/state/com.google/starred";
+		}
+		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -397,7 +413,7 @@ JSONDecoder * jsonDecoder;
 		for (NSDictionary *itemRef in dict)
 		{
             NSString * guid;
-            if( [openReaderHost isEqualToString:TheOldReaderCom] )
+            if( hostSupportsLongId )
             {
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@",[itemRef objectForKey:@"id"]];
             }
@@ -427,7 +443,7 @@ JSONDecoder * jsonDecoder;
 		for (NSDictionary *itemRef in dict)
 		{
             NSString * guid;
-            if( [openReaderHost isEqualToString:TheOldReaderCom] )
+            if( hostSupportsLongId )
             {
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@",[itemRef objectForKey:@"id"]];
             }
@@ -464,6 +480,16 @@ JSONDecoder * jsonDecoder;
 	username = [[prefs syncingUser] retain];
 	[openReaderHost release];
 	openReaderHost = [[prefs syncServer] retain];
+	// set server-specific particularities
+	hostSupportsLongId=NO;
+	hostRequiresSParameter=NO;
+	hostRequiresLastPathOnly=NO;
+	if([openReaderHost isEqualToString:@"theoldreader.com"]){
+		hostSupportsLongId=YES;
+		hostRequiresSParameter=YES;
+		hostRequiresLastPathOnly=YES;
+	}
+
 	[password release];
 	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
 	[APIBaseURL release];
