@@ -355,7 +355,7 @@
 				}
 				else 
 				{
-					[urlString replaceString:@"$ArticleLink$" withString:[theView viewLink]];					
+					[urlString replaceString:@"$ArticleLink$" withString:[[theView viewLink] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 				}
 
 			}
@@ -374,12 +374,12 @@
 					NSString * shortURL = [bitlyHelper shortenURL:[currentMessage link]];
 					
 					// If URL shortening fails, we fall back to the long URL.
-					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [currentMessage link])];
+					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [[[currentMessage link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding])];
 					[bitlyHelper release];
 				}
 				else 
 				{
-					[urlString replaceString:@"$ArticleLink$" withString: [currentMessage link]];
+					[urlString replaceString:@"$ArticleLink$" withString: [[[currentMessage link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 				}
 			}
 						

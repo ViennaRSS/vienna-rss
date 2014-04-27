@@ -15,7 +15,7 @@
 "Select..." = "Select...";
 
 /* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
-"Show folder images in folder list" = "Show folder images in folder list";
+"Show folder images in folder list" = "Show feeds icons in folder list";
 
 /* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
 "When viewing articles or web pages:" = "When viewing articles or web pages:";
