@@ -597,8 +597,9 @@ JSONDecoder * jsonDecoder;
 	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];
 			
 	[localFeeds removeAllObjects];
+	NSArray * localFolders = [[NSApp delegate] folders];
 	
-	for (Folder * f in [[NSApp delegate] folders]) {
+	for (Folder * f in localFolders) {
 		if ([f feedURL]) {
 			[localFeeds addObject:[f feedURL]];
 		}
@@ -641,6 +642,21 @@ JSONDecoder * jsonDecoder;
 			}
 			NSArray * params = [NSArray arrayWithObjects:feedURL, rssTitle, folderName, nil];
 			[self performSelectorOnMainThread:@selector(createNewSubscription:) withObject:params waitUntilDone:YES];
+		}
+		else
+		{
+			// the feed is already known
+			// set HomePage if the info is available and not yet stored
+			NSString* homePageURL = [feed objectForKey:@"htmlUrl"];
+			if (homePageURL) {
+				for (Folder * f in localFolders) {
+					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL] && [[f homePage] isEqualToString:@""]) {
+						Database * db = [Database sharedDatabase];
+						[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
+						break;
+					}
+				}
+			}
 		}
 
         [googleFeeds addObject:feedURL];
