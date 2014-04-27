@@ -23,6 +23,13 @@
 		<key>Hint</key>
 		<string>Entrez le nom d'utilisateur et le mot de passe de votre compte InoReader</string>
 	</dict>
+	<key>TheOldReader</key>
+	<dict>
+		<key>Address</key>
+		<string>theoldreader.com</string>
+		<key>Hint</key>
+		<string>Entrez le nom d'utilisateur et le mot de passe définis dans la section Réglage/Général du site theoldreader.com</string>
+	</dict>
 	<key>Autre</key>
 	<dict>
 		<key>Address</key>

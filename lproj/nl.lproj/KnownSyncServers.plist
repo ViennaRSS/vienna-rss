@@ -23,6 +23,13 @@
 		<key>Hint</key>
 		<string>Enter username and password associated to your InoReader account</string>
 	</dict>
+	<key>TheOldReader</key>
+	<dict>
+		<key>Address</key>
+		<string>theoldreader.com</string>
+		<key>Hint</key>
+		<string>Enter username and password defined in Settings/General section of theoldreader.com</string>
+	</dict>
 	<key>Andere</key>
 	<dict>
 		<key>Address</key>
