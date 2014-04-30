@@ -2979,13 +2979,13 @@
 			path = lproj/zh_TW.lproj;
 			sourceTree = SOURCE_ROOT;
 		};
-		660AA30914072BFD0082CCF0 /* Google Reader Sync */ = {
+		660AA30914072BFD0082CCF0 /* OpenReader Sync */ = {
 			isa = PBXGroup;
 			children = (
 				664F87C513C62DFE00E266DE /* GoogleReader.h */,
 				664F87C613C62DFE00E266DE /* GoogleReader.m */,
 			);
-			name = "Google Reader Sync";
+			name = "OpenReader Sync";
 			sourceTree = SOURCE_ROOT;
 		};
 		6624689213C6063200C85417 /* ASIHTTPRequest */ = {
@@ -3211,7 +3211,7 @@
 		AAA568BB09EE773200C87343 /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
-				660AA30914072BFD0082CCF0 /* Google Reader Sync */,
+				660AA30914072BFD0082CCF0 /* OpenReader Sync */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AA4F657B062B873100D4837C /* Extensions */,
 				AA8C76C006420CA800649BA2 /* Database */,
