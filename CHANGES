@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 1
+----------
+- Add The Old Reader (<https://theoldreader.com>) as a supported OpenReader provider
+- Improved InoReader support (handles homepage and icons)
+- Improved Unified layout
+- Improved accessibility
+- Improved German translation
+- Fix credentials input for feeds requiring authentication
+- Handle dates with a two-digit date formatter
+- Fix some plugins
+Thanks to Emiliano Necciari, Boris Dušek, bavarious and biphuhn for their contributions !
+
 3.0.0 Beta 20
 -------------
 - Largely improved Unified layout
