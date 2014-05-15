@@ -951,7 +951,7 @@
 				// Parse item link
 				if ([itemNodeName isEqualToString:@"link"])
 				{
-					if ([[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"enclosure"])
+					if ([[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"enclosure"] || [[subItemTree valueOfAttribute:@"rel"] isEqualToString:@"http://opds-spec.org/acquisition"])
 					{
 						NSString * theLink = [[subItemTree valueOfAttribute:@"href"] stringByUnescapingExtendedCharacters];
 						if (theLink != nil)

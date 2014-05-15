@@ -837,8 +837,11 @@ static RefreshManager * _refreshManager = nil;
 					articleLink = feedLink;
 				[article setLink:articleLink];
 				[article setDate:articleDate];
-				[article setEnclosure:[newsItem enclosure]];
-				if ([[article enclosure] isNotEqualTo:@""])
+				NSString * enclosureLink = [newsItem enclosure];
+				if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"])
+					enclosureLink = [[NSURL URLWithString:enclosureLink relativeToURL:url] absoluteString];
+				[article setEnclosure:enclosureLink];
+				if ([enclosureLink isNotEqualTo:@""])
 				{
 					[article setHasEnclosure:YES];
 				}
