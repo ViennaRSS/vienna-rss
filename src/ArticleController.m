@@ -428,9 +428,14 @@
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)
 	{
-		if (![theArticle isRead])
+		NSInteger folderId = [theArticle folderId];
+		if (![theArticle isRead]) {
 			needFolderRedraw = YES;
-		[db markArticleDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
+			if (deleteFlag && IsGoogleReaderFolder([db folderFromID:folderId])) {
+				[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+			}
+		}
+		[db markArticleDeleted:folderId guid:[theArticle guid] isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
 		else if (deleteFlag && (currentFolderId != [db trashFolderId]))
@@ -488,9 +493,14 @@
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)	
 	{
-		if (![theArticle isRead])
+		NSInteger folderId = [theArticle folderId];
+		if (![theArticle isRead]) {
 			needFolderRedraw = YES;
-		if ([db deleteArticle:[theArticle folderId] guid:[theArticle guid]])
+			if (IsGoogleReaderFolder([db folderFromID:folderId])) {
+				[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+			}
+		}
+		if ([db deleteArticle:folderId guid:[theArticle guid]])
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
