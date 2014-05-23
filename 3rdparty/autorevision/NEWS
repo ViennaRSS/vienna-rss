@@ -1,5 +1,14 @@
 			autorevision history
 
+1.9 @ 2014-5-23
+  Add a logo.
+  Only update the cache file when there are changes.
+  New dependency `cmp`.
+
+1.8 @ 2013-12-27
+  Added user-set symbol VC_EXTRA.
+  Added VCS_UUID as a unique repostory key.
+
 1.7 @ 2013-12-01
   Autogenerate the AUTHORS file.
   Do not change empty CACHEFILE to `./`.
