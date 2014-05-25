@@ -112,7 +112,7 @@ gitRepo() {
 
 	VCS_BASENAME="$(basename "${PWD}")"
 
-	VCS_UUID="$(git rev-list --max-parents=0 HEAD 2>/dev/null)"
+	VCS_UUID="$(git rev-list --max-parents=0 --date-order --reverse HEAD 2>/dev/null | sed -n 1p)"
 	if [ -z "${VCS_UUID}" ]; then
 		VCS_UUID="$(git rev-list --topo-order HEAD | tail -n 1)"
 	fi
