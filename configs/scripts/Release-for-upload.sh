@@ -1,14 +1,22 @@
 #!/bin/bash
 
 . "${OBJROOT}/autorevision.cache"
-BUILD_NUMBER="2821" # Magic number; do not touch!
-N_VCS_NUM="$(echo "${BUILD_NUMBER} + ${VCS_NUM}" | bc)"
-N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')" # for urls/files
-V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')" # for display
+# Magic number; do not touch!
+BUILD_NUMBER="2821"
+N_VCS_NUM="$((BUILD_NUMBER + VCS_NUM))"
+
+# for urls/files
+N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')"
+# for display
+V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')"
+
+# values set in project-all.xcconfig
 VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
-DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}" # values set in project-all.xcconfig
+DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}"
+
 TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
+
 case "${N_VCS_TAG}" in
 	*_beta*)
 		VIENNA_CHANGELOG="changelog_beta.xml"
@@ -23,6 +31,7 @@ case "${N_VCS_TAG}" in
 		DOWNLOAD_SUB_DIR="ReleasedVersions"
 	;;
 esac
+
 DOWNLOAD_TAG_DIR="${N_VCS_TAG}"
 DOWNLOAD_BASE_URL="${DOWNLOAD_BASE_URL}/${DOWNLOAD_SUB_DIR}/${DOWNLOAD_TAG_DIR}"
 
@@ -54,7 +63,7 @@ if [ ! "${CONFIGURATION}" = "Deployment" ]; then
 	exit 1
 fi
 # Fail if incorrectly tagged
-if [[ VCS_TICK == "0" ]] && ! git describe --exact-match "${VCS_TAG}"; then
+if [[ "${VCS_TICK}" == "0" ]] && ! git describe --exact-match "${VCS_TAG}"; then
 	echo 'error: The tag is not annotated; please redo the tag with `git tag -s` or `git tag -a`.' 1>&2
 	exit 1
 fi
@@ -65,7 +74,7 @@ cd "${BUILT_PRODUCTS_DIR}"
 
 # Make the dSYM Bundle
 mkdir -p "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
-cp -a *.dSYM "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
+cp -a ./*.dSYM "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
 tar -czf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' "${dSYM_FILENAME}"
 rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"

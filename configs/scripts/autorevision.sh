@@ -29,12 +29,12 @@ fi
 
 # Filter the output.
 
-N_VCS_NUM="$(echo "${BUILD_NUMBER} + ${VCS_NUM}" | bc)"
+N_VCS_NUM="$((BUILD_NUMBER + VCS_NUM))"
 
 # Prettify the branch name
 N_VCS_BRANCH="$(echo "${VCS_BRANCH}" | sed -e 's:remotes/:remote/:' -e 's:/:-:' -e 's:master:Master:')"
 
-if [[ ! "${VCS_TICK}" = "0" ]] && [[ ! -z "${VCS_BRANCH}" ]]; then
+if [ ! "${VCS_TICK}" = "0" ] && [ ! -z "${VCS_BRANCH}" ]; then
 	# If we are not exactly on a tag try using the branch name instead
 	sed -e "s:${VCS_TAG}:${N_VCS_BRANCH}:" -e "s:${VCS_BRANCH}:${N_VCS_BRANCH}:" -e "s:${VCS_NUM}:${N_VCS_NUM}:" "${cauto}" > "${tauto}"
 else
@@ -46,7 +46,7 @@ fi
 
 # Output for src/autorevision.h.
 ./3rdparty/autorevision/autorevision -f -o "${cauto}" -t h > "${hauto}"
-if [[ ! -f "${fauto}" ]] || ! cmp -s "${hauto}" "${fauto}"; then
+if [ ! -f "${fauto}" ] || ! cmp -s "${hauto}" "${fauto}"; then
 	cp -a "${hauto}" "${fauto}"
 fi
 

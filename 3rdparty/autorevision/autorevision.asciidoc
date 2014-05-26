@@ -1,5 +1,6 @@
 = AUTOREVISION(1) =
 :doctype: manpage
+:br: {empty} +
 
 == NAME ==
 autorevision - extract current-revision metadata from version-control repositories
@@ -107,7 +108,7 @@ one; useful for reporting build numbers.
 
 *VCS_UUID*::
 A universally unique identifier, generated from the root commit in git
-and hg; for svn it uses the supplied UUID.
+and hg; for svn it uses the supplied UUID.{br}
 Not currently implemented for bzr.
 
 *VCS_DATE*::
@@ -124,16 +125,16 @@ of "git branch") except that when the branch doesn't have a shortname
 it will be a full refspec.  Under hg the feature that is called
 'branches' is actually a sort of graph coloring (multiple heads can
 have the same branch name) so this variable is filled with the current
-bookmark if it exists, with the current branch name as a fallback.
+bookmark if it exists, with the current branch name as a fallback.{br}
 Under bzr, this is the nick of the branch you are on.
 
 *VCS_TAG*::
-The name of the most recent tag ancestral to the current commit.
+The name of the most recent tag ancestral to the current commit.{br}
 Empty under Subversion.
 
 *VCS_TICK*::
 A count of commits since most recent tag ancestral to the current
-commit or an alias of *VCS_NUM* if there are no prior tags.
+commit or an alias of *VCS_NUM* if there are no prior tags.{br}
 Empty under Subversion.
 
 *VCS_EXTRA*::
@@ -190,12 +191,22 @@ the right thing and return a Subversion revision. The bug is that the
 detector code for this case is somewhat unreliable; you will get the
 hash instead if your configuration doesn't use svn-remote.svn.url.
 
-Nested repositories, particularly repositories of different types, may
-result in incorrect and unintended behavior.
+Nested repositories, particularly repositories of different types,
+_may_ result in incorrect and unintended behavior.
+
+Unpacking a tarball into a repository _will_ result in incorrect and
+unintended behavior.
+
+== Notes ==
+Development of autorevision is carried out at
+https://github.com/Autorevision/autorevision
+
+Tarballs and HTML rendered docs are also hosted at
+http://www.catb.org/esr/autorevision/
 
 == AUTHORS ==
 
 dak180 <dak180@users.sf.net>: concept, bash/C/C++/XCode/PHP/ini
-support, git and hg extraction.  Eric S. Raymond <esr@thyrsus.com>:
-Python/Perl/lua/m4 support, svn and bzr extraction, git-svn support,
-CLI design, man page.
+support, git and hg extraction.{br}
+Eric S. Raymond <esr@thyrsus.com>: Python/Perl/lua/m4 support, svn and
+bzr extraction, git-svn support, CLI design, man page.
