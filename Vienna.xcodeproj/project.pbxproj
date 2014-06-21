@@ -92,9 +92,9 @@
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
-		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; };
-		43501FA2165DC5CE0018EDB7 /* Growl.framework in Copy Growl current */ = {isa = PBXBuildFile; fileRef = 43501F72165DB9640018EDB7 /* Growl.framework */; };
-		43501FA8165DC5DD0018EDB7 /* Growl.framework in Copy Growl legacy */ = {isa = PBXBuildFile; fileRef = 43501F74165DB9640018EDB7 /* Growl.framework */; };
+		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		43501FA2165DC5CE0018EDB7 /* Growl.framework in Copy Growl current */ = {isa = PBXBuildFile; fileRef = 43501F72165DB9640018EDB7 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		43501FA8165DC5DD0018EDB7 /* Growl.framework in Copy Growl legacy */ = {isa = PBXBuildFile; fileRef = 43501F74165DB9640018EDB7 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CD165DCB980018EDB7 /* Carbon.framework */; };
 		435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D1165DCB980018EDB7 /* IOKit.framework */; };
@@ -173,7 +173,7 @@
 		43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */; };
 		43BA97D2166475BC00B95F35 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
-		43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; };
+		43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
 		43E695C8168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F29165EAA6E000997FB /* AdvancedPreferences.nib */; };
 		43E695C9168A05F300AB4C09 /* AdvancedPreferences.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7F66165EAA6E000997FB /* AdvancedPreferences.nib */; };
@@ -792,7 +792,7 @@
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
 		B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
-		B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
+		B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
@@ -3507,7 +3507,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
@@ -8607,6 +8607,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Development;
 		};
@@ -8614,6 +8615,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97AF1664677600B95F35 /* JSONKit-Dep.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Deployment;
 		};
@@ -8637,6 +8639,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA978F166449E000B95F35 /* ASIHTTPRequest-Dev.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Development;
 		};
@@ -8644,6 +8647,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA978E166449E000B95F35 /* ASIHTTPRequest-Dep.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Deployment;
 		};
@@ -8656,7 +8660,9 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -8690,6 +8696,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA978F166449E000B95F35 /* ASIHTTPRequest-Dev.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = StaticAnalyzer;
 		};
@@ -8705,6 +8712,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = StaticAnalyzer;
 		};
@@ -8761,7 +8769,9 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -8779,7 +8789,9 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -8809,6 +8821,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F06BE30617C87FEF00A74FBB /* FMDatabase-Dev.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Development;
 		};
@@ -8816,6 +8829,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F06BE30517C87FEF00A74FBB /* FMDatabase-Dep.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Deployment;
 		};
@@ -8823,6 +8837,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F06BE30617C87FEF00A74FBB /* FMDatabase-Dev.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = StaticAnalyzer;
 		};

@@ -64,6 +64,8 @@ static PXIsDragStartResult PXIsDragStart( NSEvent *startEvent, NSTimeInterval th
 					}
 					break;
 				}
+				default:
+					break;
 			}
 		}
 		

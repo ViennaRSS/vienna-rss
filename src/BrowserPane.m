@@ -477,7 +477,6 @@
 {
 	if (frame == [self.webPane mainFrame])
 	{
-		[image setScalesWhenResized:YES];
 		[image setSize:NSMakeSize(14, 14)];
 		[iconImage setImage:image];
 	}
@@ -512,10 +511,11 @@
  */
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
 	NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		message,	// message
+		@"%@",	// message placeholder
 		NSLocalizedString(@"OK", @""),	// default button
 		nil,	// alt button
-		nil);	// other button
+		nil,	// other button
+		message);
 }
 
 /* runJavaScriptConfirmPanelWithMessage
@@ -523,10 +523,11 @@
  */
 - (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
 	NSInteger result = NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		message,	// message
+		@"%@",	// message placeholder
 		NSLocalizedString(@"OK", @""),	// default button
 		NSLocalizedString(@"Cancel", @""),	// alt button
-		nil);
+		nil,
+		message);
 	return NSAlertDefaultReturn == result;
 }
 
