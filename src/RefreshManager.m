@@ -551,7 +551,6 @@ static RefreshManager * _refreshManager = nil;
 		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
 		if (iconImage != nil && [iconImage isValid])
 		{
-			[iconImage setScalesWhenResized:YES];
 			[iconImage setSize:NSMakeSize(16, 16)];
 			[folder setImage:iconImage];
 			
@@ -650,7 +649,7 @@ static RefreshManager * _refreshManager = nil;
 		{
         	responseStatusCode = 200;
 			NSData * receivedData = [NSData dataWithContentsOfFile:filePath];
-			[connector setRawResponseData:[NSData dataWithContentsOfFile:filePath]];
+			[connector setRawResponseData:[NSMutableData dataWithContentsOfFile:filePath]];
 			[connector setContentLength:[receivedData length]];
 			[connector setTotalBytesRead:[receivedData length]];
 		} else {
