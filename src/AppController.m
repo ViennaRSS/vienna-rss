@@ -3818,8 +3818,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableString *mailtoLink = nil;
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
-	CFStringRef title;
-	CFStringRef link;
+	NSString * title;
+	NSString * link;
 	Article * currentArticle;
 	
 	// If the active tab is a web view, mail the URL ...
@@ -3832,8 +3832,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			title = percentEscape([browserView tabItemViewTitle:theView]);
 			link = percentEscape(viewLink);
 			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
-			CFRelease(title);
-			CFRelease(link);
 		}
 	}
 	else
@@ -3848,8 +3846,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				title = percentEscape([currentArticle title]);
 				link = percentEscape([currentArticle link]);
 				mailtoLink = [NSMutableString stringWithFormat: @"mailto:?subject=%@&body=%@", title, link];
-				CFRelease(title);
-				CFRelease(link);
 			}
 			else
 			{
@@ -3859,8 +3855,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					title = percentEscape([currentArticle title]);
 					link = percentEscape([currentArticle link]);
 					[mailtoLink appendFormat: @"%@%@%@%@%@", title, mailtoLineBreak, link, mailtoLineBreak, mailtoLineBreak];
-					CFRelease(title);
-					CFRelease(link);
 				}
 			}
 		}
