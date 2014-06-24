@@ -162,8 +162,10 @@ JSONDecoder * jsonDecoder;
     	feedIdentifier =  [thisFolder feedURL];
     }
 		
+	CFStringRef identifierCF = percentEscape(feedIdentifier);
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
-                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,TIMESTAMP]];
+                                                  identifierCF,ClientName,itemsLimitation,TIMESTAMP]];
+    CFRelease(identifierCF);
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -349,8 +351,9 @@ JSONDecoder * jsonDecoder;
 		}
 
 		// Request id's of unread items
+		CFStringRef identifierCF = percentEscape(feedIdentifier);
 		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
-                           percentEscape(feedIdentifier)];
+                           identifierCF];
 		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
 		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -372,7 +375,8 @@ JSONDecoder * jsonDecoder;
 		{
 			starredSelector=@"it=user/-/state/com.google/starred";
 		}
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
+		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, identifierCF, starredSelector];
+        CFRelease(identifierCF);
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
