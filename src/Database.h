@@ -49,8 +49,6 @@
 -(BOOL)initDatabase:(NSString *)databaseFileName;
 -(void)syncLastUpdate;
 -(NSInteger)databaseVersion;
--(void)beginTransaction;
--(void)commitTransaction;
 -(void)compactDatabase;
 -(void)reindexDatabase;
 -(NSInteger)countOfUnread;

@@ -668,7 +668,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)beginTransaction
 {
-	NSAssert(!inTransaction, @"Whoops! Already in a transaction. You forgot to call commitTransaction somewhere");
+	NSAssert(!inTransaction, @"Whoops! Already in a transaction. You cannot nest transactions");
 	[sqlDatabase beginTransaction];
 	inTransaction = YES;
 }
@@ -678,7 +678,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)commitTransaction
 {
-	NSAssert(inTransaction, @"Whoops! Commit while not in a transaction. You forgot to call beginTransaction first");
+	NSAssert(inTransaction, @"Whoops! Commit while not in a transaction. Someone forgot to call beginTransaction first");
 	[sqlDatabase commit];
 	inTransaction = NO;
 }
@@ -688,7 +688,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)rollbackTransaction
 {
-	NSAssert(inTransaction, @"Whoops! Rollback while not in a transaction. You forgot to call beginTransaction first");
+	NSAssert(inTransaction, @"Whoops! Rollback while not in a transaction. Someone forgot to call beginTransaction first");
 	[sqlDatabase rollback];
 	inTransaction = NO;
 }
