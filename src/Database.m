@@ -216,7 +216,7 @@ static Database * _sharedDatabase = nil;
 			qualifiedDatabaseFileName = newPath;
 		}
 		
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 
 		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
 		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
@@ -288,7 +288,7 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 		
-		[self commitTransaction];
+		}]; //end transaction block
 	}
 	else if (databaseVersion < MA_Current_DB_Version)
 	{
@@ -314,13 +314,13 @@ static Database * _sharedDatabase = nil;
 	// Create an index on the message_id column.
 	if (databaseVersion < 13)
 	{
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 		
 		[self executeSQL:@"alter table messages add column createddate"];
 		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
 		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
 
-		[self commitTransaction];
+		}]; //end transaction block
 		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}
 	
@@ -331,7 +331,7 @@ static Database * _sharedDatabase = nil;
 	// set them as strings.
 	if (databaseVersion < 14)
 	{
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 		
 		[self executeSQL:@"alter table info add column first_folder"];
 		[self executeSQL:@"update info set first_folder=0"];
@@ -352,7 +352,7 @@ static Database * _sharedDatabase = nil;
 			[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", parentId, folderId];
 		}
 		
-		[self commitTransaction];
+		}]; //end transaction block
 		NSLog(@"Updated database schema to version %d.", databaseVersion);
 
 	}
@@ -362,13 +362,13 @@ static Database * _sharedDatabase = nil;
 	// Do not disturb the manual sort order, if it exists.
 	if (databaseVersion < 15)
 	{
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 		
 		[self executeSQL:@"alter table info add column folder_sort"];
 		
 		NSInteger oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
 		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
-		[self commitTransaction];
+		}]; //end transaction block
 		NSLog(@"Updated database schema to version %d.", databaseVersion);
 	}
 	
@@ -376,14 +376,14 @@ static Database * _sharedDatabase = nil;
 	// Add revised_flag to messages table, and initialize all values to 0.
 	if (databaseVersion < 16)
 	{
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 		
 		[self executeSQL:@"alter table messages add column revised_flag"];
 		[self executeSQL:@"update messages set revised_flag=0"];
 		
 		// Set the new version
 		[self setDatabaseVersion:16];		
-		[self commitTransaction];
+		}]; //end transaction block
 	}
 	
 	
@@ -391,7 +391,7 @@ static Database * _sharedDatabase = nil;
 	// Add hasenclosure_flag, enclosuredownloaded_flag and enclosure to messages table, and initialize stuff.
 	if (databaseVersion < 17)
 	{
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 		
 		[self executeSQL:@"alter table messages add column hasenclosure_flag"];
 		[self executeSQL:@"update messages set hasenclosure_flag=0"];
@@ -402,21 +402,21 @@ static Database * _sharedDatabase = nil;
 		
 		// Set the new version
 		[self setDatabaseVersion:17];		
-		[self commitTransaction];
+		}]; //end transaction block
 	}		
 	
 	// Upgrade to rev 18.
 	// Add table all message guids.
 	if (databaseVersion < 18)
 	{
-		[self beginTransaction];
+		[self doTransactionWithBlock:^(BOOL *rollback) {
 		
 		[self executeSQL:@"create table rss_guids as select message_id, folder_id from messages"];
 		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
 		
 		// Set the new version
 		[self setDatabaseVersion:18];		
-		[self commitTransaction];
+		}]; //end transaction block
 	}
 	
 	// Read the folders tree sort method from the database.
@@ -1117,7 +1117,7 @@ static Database * _sharedDatabase = nil;
 	NSArray * arrayOfChildFolders;
 	NSNumber * numFolder;
 	Folder * folder;
-	BOOL result;
+	__block BOOL result;
 
 	// Exit now if we're read-only
 	if (readOnly)
@@ -1141,9 +1141,9 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Now do the deletion.
-	[self beginTransaction];
+	[self doTransactionWithBlock:^(BOOL *rollback) {
 	result = [self wrappedDeleteFolder:folderId];
-	[self commitTransaction];
+	}]; //end transaction block
 
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.

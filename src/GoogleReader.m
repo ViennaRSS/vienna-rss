@@ -283,16 +283,14 @@ JSONDecoder * jsonDecoder;
 		}
 			
 		Database *db = [Database sharedDatabase];
-		NSInteger newArticlesFromFeed = 0;
+		__block NSInteger newArticlesFromFeed = 0;
 
 		// Here's where we add the articles to the database
 		if ([articleArray count] > 0)
 		{
+			[db doTransactionWithBlock:^(BOOL *rollback) {
 			NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
-
 			[refreshedFolder clearCache];
-			// Should we wrap the entire loop or just individual article updates?
-			[db beginTransaction];
 			//BOOL hasCache = [db initArticleArray:refreshedFolder];
 
 			for (Article * article in articleArray)
@@ -303,10 +301,12 @@ JSONDecoder * jsonDecoder;
 
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-			[db commitTransaction];
+			}]; //end transaction block
 		}
 
 		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
+
+		[db doTransactionWithBlock:^(BOOL *rollback) {
 		// Set the last update date given by the Open Reader server for this folder.
 		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
 		// Set the HTML homepage for this folder.
@@ -315,6 +315,7 @@ JSONDecoder * jsonDecoder;
 			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
 		else
 			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]];
+		}]; //end transaction block
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -428,7 +429,10 @@ JSONDecoder * jsonDecoder;
             [guidArray addObject:guid];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		[[Database sharedDatabase] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		Database * db = [Database sharedDatabase];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		}]; //end transaction block
 	}
 }
 
@@ -457,7 +461,10 @@ JSONDecoder * jsonDecoder;
 			[guidArray addObject:guid];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
-		[[Database sharedDatabase] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		Database * db = [Database sharedDatabase];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		}]; //end transaction block
 	}
 }
 
@@ -890,9 +897,10 @@ JSONDecoder * jsonDecoder;
     
     if (!folder)
     {
-        [db beginTransaction];
-        NSInteger newFolderId = [db addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
-        [db commitTransaction];
+		__block NSInteger newFolderId;
+        [db doTransactionWithBlock:^(BOOL *rollback) {
+	        newFolderId = [db addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
+        }]; //end transaction block
         
         parentNumber = [NSNumber numberWithInteger:newFolderId];
     }
