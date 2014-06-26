@@ -12,7 +12,7 @@
 "Never use font sizes smaller than" = "No usar fuentes más pequeñas que:";
 
 /* NSButton (Select...) : <title:Select...> (oid:54) */
-"Select..." = "Seleccionar";
+"Select..." = "Seleccionar...";
 
 /* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
 "Show folder images in folder list" = "Mostrar iconos en la lista";
