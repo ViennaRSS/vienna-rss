@@ -41,6 +41,7 @@
 	NSMutableDictionary * fieldsByTitle;
 	NSMutableDictionary * foldersDict;
 	NSMutableDictionary * smartfoldersDict;
+	dispatch_queue_t _transactionQueue;
 }
 
 // General database functions
@@ -55,6 +56,26 @@
 -(NSInteger)countOfUnread;
 -(BOOL)readOnly;
 -(void)close;
+
+/*
+ * Submits a transaction block
+ * An easy way to wrap things up in a transaction can be done like this:
+    [db doTransactionWithBlock:^(BOOL *rollback) {
+        ...
+        [db ...];
+        ...
+
+        if (whoopsSomethingWrongHappened) {
+            *rollback = YES;
+            return;  // leave the block
+        }
+        // etc…
+
+        ...
+
+    }];
+*/
+- (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block;
 
 // Fields functions
 -(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;

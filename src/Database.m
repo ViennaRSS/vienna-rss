@@ -75,6 +75,7 @@ static Database * _sharedDatabase = nil;
 		searchString = @"";
 		smartfoldersDict = [[[NSMutableDictionary alloc] init] retain];
 		foldersDict = [[[NSMutableDictionary alloc] init] retain];
+		_transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
 	}
 	return self;
 }
@@ -668,7 +669,7 @@ static Database * _sharedDatabase = nil;
 -(void)beginTransaction
 {
 	NSAssert(!inTransaction, @"Whoops! Already in a transaction. You forgot to call commitTransaction somewhere");
-	[self executeSQL:@"begin transaction"];
+	[sqlDatabase beginTransaction];
 	inTransaction = YES;
 }
 
@@ -677,9 +678,37 @@ static Database * _sharedDatabase = nil;
  */
 -(void)commitTransaction
 {
-	NSAssert(inTransaction, @"Whoops! Not in a transaction. You forgot to call beginTransaction first");
-	[self executeSQL:@"commit transaction"];
+	NSAssert(inTransaction, @"Whoops! Commit while not in a transaction. You forgot to call beginTransaction first");
+	[sqlDatabase commit];
 	inTransaction = NO;
+}
+
+/* rollbackTransaction
+ * Rollbacks a SQL transaction.
+ */
+-(void)rollbackTransaction
+{
+	NSAssert(inTransaction, @"Whoops! Rollback while not in a transaction. You forgot to call beginTransaction first");
+	[sqlDatabase rollback];
+	inTransaction = NO;
+}
+
+/* doTransactionWithBlock
+ * Submits a transaction block
+ */
+- (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block {
+	dispatch_sync(_transactionQueue, ^() {
+		@autoreleasepool {
+			BOOL shouldRollback = NO;
+			[self beginTransaction];
+			block(&shouldRollback);
+			if (shouldRollback) {
+				[self rollbackTransaction];
+			} else {
+				[self commitTransaction];
+			}
+        }
+    }); //block for dispatch_sync
 }
 
 /* compactDatabase
@@ -2582,6 +2611,7 @@ static Database * _sharedDatabase = nil;
 	[searchString release];
 	[foldersDict release];
 	[smartfoldersDict release];
+	dispatch_release(_transactionQueue);
 	if (sqlDatabase)
 		[self close];
 	[sqlDatabase release];
