@@ -33,8 +33,6 @@
 	int countOfUnread;
 	NSThread * mainThread;
 	BOOL inTransaction;
-	Folder * trashFolder;
-	Folder * searchFolder;
 	NSString * searchString;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
@@ -42,7 +40,11 @@
 	NSMutableDictionary * foldersDict;
 	NSMutableDictionary * smartfoldersDict;
 	dispatch_queue_t _transactionQueue;
+	dispatch_queue_t _execQueue;
 }
+
+@property(nonatomic, retain) Folder * trashFolder;
+@property(nonatomic, retain) Folder * searchFolder;
 
 // General database functions
 +(Database *)sharedDatabase;
