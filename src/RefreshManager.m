@@ -86,6 +86,7 @@ static RefreshManager * _refreshManager = nil;
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
+		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
 	}
 	return self;
 }
@@ -622,6 +623,7 @@ static RefreshManager * _refreshManager = nil;
  */
 -(void)folderRefreshCompleted:(ASIHTTPRequest *)connector
 {
+	dispatch_async(_queue, ^() {
 		
 	Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
 	ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
@@ -670,7 +672,7 @@ static RefreshManager * _refreshManager = nil;
 		// [db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-		if (([folder flags] & MA_FFlag_CheckForImage)) [self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
+		if (([folder flags] & MA_FFlag_CheckForImage)) [self refreshFavIcon:folder];
 	}
 	else if (responseStatusCode == 410)
 	{
@@ -684,14 +686,13 @@ static RefreshManager * _refreshManager = nil;
 		NSData * receivedData = [connector responseData];
 		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
 				
-		[self performSelectorOnMainThread:@selector(finalizeFolderRefresh:) withObject:[NSDictionary dictionaryWithObjectsAndKeys:
+		[self finalizeFolderRefresh:[NSDictionary dictionaryWithObjectsAndKeys:
 																					folder, @"folder", 
 																					connectorItem, @"log", 
 																					url, @"url",
 																					receivedData, @"data",
 																					lastModifiedString, @"lastModifiedString",
-																					nil]
-																					waitUntilDone:NO];
+																					nil]];
 	}
 	else	//other HTTP response codes like 404, 403...
 	{
@@ -699,6 +700,8 @@ static RefreshManager * _refreshManager = nil;
 		[connectorItem setStatus:NSLocalizedString(@"Error", nil)];
 		[self setFolderErrorFlag:folder flag:YES];
 	}
+
+	}); //block for dispatch_async
 };
 
 -(void)finalizeFolderRefresh:(NSDictionary*)parameters;
@@ -1067,6 +1070,7 @@ static RefreshManager * _refreshManager = nil;
 	[pumpTimer release];
 	[authQueue release];
 	[networkQueue release];
+	dispatch_release(_queue);
 	[super dealloc];
 }
 @end

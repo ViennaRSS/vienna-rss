@@ -90,6 +90,7 @@ JSONDecoder * jsonDecoder;
 		username=nil;
 		password=nil;
 		APIBaseURL=nil;
+		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReader-refresh", NULL);
 	}
     
     return self;
@@ -191,6 +192,7 @@ JSONDecoder * jsonDecoder;
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
+	dispatch_async(_queue, ^() {
 		
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
@@ -399,8 +401,9 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 
+	}); //block for dispatch_async
 }
 
 // callback
@@ -844,6 +847,7 @@ JSONDecoder * jsonDecoder;
 	[APIBaseURL release];
 	[clientAuthToken release];
 	[token release];
+	dispatch_release(_queue);
 	[super dealloc];
 }
 

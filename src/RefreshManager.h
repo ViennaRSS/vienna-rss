@@ -35,6 +35,7 @@
 	NSString * statusMessageDuringRefresh;
     SyncTypes syncType;
 	ASINetworkQueue *networkQueue;
+	dispatch_queue_t _queue;
 }
 
 +(RefreshManager *)sharedManager;

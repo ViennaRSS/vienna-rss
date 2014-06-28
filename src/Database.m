@@ -584,7 +584,6 @@ static Database * _sharedDatabase = nil;
  */
 -(void)verifyThreadSafety
 {
-	NSAssert([NSThread currentThread] == mainThread, @"Calling database on wrong thread!");
 }
 
 /* syncLastUpdate
