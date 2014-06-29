@@ -388,7 +388,9 @@ JSONDecoder * jsonDecoder;
 
 		// If this folder also requires an image refresh, add that
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
-			[[RefreshManager sharedManager] performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:refreshedFolder waitUntilDone:NO];
+			dispatch_async(_queue, ^() {
+				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
+			});
 
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
@@ -639,7 +641,7 @@ JSONDecoder * jsonDecoder;
 				// NNW nested folder char: — 
 				
 				NSMutableArray * params = [NSMutableArray arrayWithObjects:[[folderNames mutableCopy] autorelease], [NSNumber numberWithInt:MA_Root_Folder], nil];
-				[self performSelectorOnMainThread:@selector(createFolders:) withObject:params waitUntilDone:YES];
+				[self createFolders:params];
 				break; //In case of multiple labels, we retain only the first one
 			} 
 		}
@@ -651,7 +653,7 @@ JSONDecoder * jsonDecoder;
 				rssTitle = [feed objectForKey:@"title"];
 			}
 			NSArray * params = [NSArray arrayWithObjects:feedURL, rssTitle, folderName, nil];
-			[self performSelectorOnMainThread:@selector(createNewSubscription:) withObject:params waitUntilDone:YES];
+			[self createNewSubscription:params];
 		}
 		else
 		{
@@ -693,13 +695,13 @@ JSONDecoder * jsonDecoder;
 	if (nc != nil) {
 		LLog(@"Firing after notification");
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:@"GRSync_Autheticated" object:nil];		
-		[self performSelectorOnMainThread:@selector(submitLoadSubscriptions) withObject:nil waitUntilDone:YES];
+		[self submitLoadSubscriptions];
 	} else {
 		LLog(@"Firing directly");
 
 		if ([self isReady]) {
 			LLog(@"Token available, finish subscription");
-			[self performSelectorOnMainThread:@selector(submitLoadSubscriptions) withObject:nil waitUntilDone:YES];
+			[self submitLoadSubscriptions];
 		} else {
 			LLog(@"Token not available, registering for notification");
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSubscriptions:) name:@"GRSync_Autheticated" object:nil];

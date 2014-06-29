@@ -927,7 +927,9 @@ static RefreshManager * _refreshManager = nil;
 		countOfNewArticles += newArticlesFromFeed;
 	
     	// Unread count may have changed
-    	[[NSApp delegate] performSelectorOnMainThread:@selector(showUnreadCountOnApplicationIconAndWindowTitle) withObject:nil waitUntilDone:NO];
+    	dispatch_async(dispatch_get_main_queue(), ^() {
+    		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+    	 });
 
 		// If this folder also requires an image refresh, do that
 		if (([folder flags] & MA_FFlag_CheckForImage))
