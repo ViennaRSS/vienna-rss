@@ -1079,16 +1079,19 @@ static Database * _sharedDatabase = nil;
 	// Update the sort order if necessary
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
+		__block NSInteger previousSibling = -999;
 		dispatch_sync(_execQueue, ^() {
 			FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=%ld", (long)[folder parentId], (long)folderId];
 			if ([results next])
 			{
-				NSInteger previousSibling = [[results stringForColumn:@"folder_id"] intValue];
-				[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
+				previousSibling = [[results stringForColumn:@"folder_id"] intValue];
 			}
-			else
-				[self setFirstChild:[folder nextSiblingId] forFolder:[folder parentId]];
 		});
+		if (previousSibling != -999)
+			[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
+		else
+			[self setFirstChild:[folder nextSiblingId] forFolder:[folder parentId]];
+
 
 	}
 	
