@@ -168,6 +168,7 @@ a:link[href*="googleadservices"],
 a:link[href*="ads_by_google"],
 a img[src*="pheedo"],
 a img[src*="doubleclick"],
+img[src*="da.feedsportal.com"],
 a img[src^="http://feeds."] {
 	display: none !important;
 }
