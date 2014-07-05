@@ -62,6 +62,7 @@ enum GoogleReaderStatus {
 
 @synthesize localFeeds;
 @synthesize token;
+@synthesize clientAuthToken;
 @synthesize tokenTimer;
 @synthesize authTimer;
 
@@ -519,11 +520,9 @@ JSONDecoder * jsonDecoder;
 
 	NSArray * components = [response componentsSeparatedByString:@"\n"];
 
-	[clientAuthToken release];
-
 	//NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
 	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
-	clientAuthToken = [[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]] retain];
+	[self setClientAuthToken:[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]]];
 
 	[self getToken];
 
@@ -554,9 +553,7 @@ JSONDecoder * jsonDecoder;
 		return;
 	}
     // Save token
-    [token release];
-    token = [request responseString];
-    [token retain];
+    [self setToken:[request responseString]];
 	googleReaderStatus = isAuthenticated;
 
     if (tokenTimer == nil || ![tokenTimer isValid])
@@ -569,9 +566,8 @@ JSONDecoder * jsonDecoder;
 -(void)clearAuthentication
 {
 	googleReaderStatus = notAuthenticated;
-	[token release];
-	[clientAuthToken release];
-	clientAuthToken = token = nil;
+	[self setClientAuthToken:nil];
+	[self setToken:nil];
 }
 
 -(void)resetAuthentication
