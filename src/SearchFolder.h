@@ -38,7 +38,6 @@
 	IBOutlet NSTextField * numberValueField;
 	IBOutlet NSPopUpButton * flagValueField;
 	IBOutlet NSPopUpButton * folderValueField;
-	NSMutableDictionary * fieldToNameMap;
 	NSMutableDictionary * nameToFieldMap;
 	NSMutableArray * arrayOfViews;
 	Database * db;
