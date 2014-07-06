@@ -393,6 +393,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	// explicitly localise in the NIB file.
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markRead:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markUnread:))];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markFlagged:))];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(deleteMessage:))];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(restoreMessage:))];
