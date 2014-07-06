@@ -850,6 +850,7 @@
 -(void)selectFolderWithFilter:(int)newFolderId
 {
 	currentSelectedRow = -1;
+	[articleList setNeedsDisplay:NO];
 	[rowHeightArray removeAllObjects];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
@@ -858,6 +859,7 @@
 		[articleList scrollRowToVisible:0];
 	else
 		[self selectArticleAfterReload];
+	[articleList setNeedsDisplay:YES];
 }
 
 /* handleRefreshArticle
