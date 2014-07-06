@@ -919,14 +919,14 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mainArticleView release];
-	self.mainArticleView=nil;
+	mainArticleView=nil;
 	[backtrackArray release];
-	self.backtrackArray=nil;
+	backtrackArray=nil;
 	[sortColumnIdentifier release];
 	[folderArrayOfArticles release];
-	self.folderArrayOfArticles=nil;
+	folderArrayOfArticles=nil;
 	[currentArrayOfArticles release];
-	self.currentArrayOfArticles=nil;
+	currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
 	[super dealloc];

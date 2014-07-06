@@ -123,20 +123,20 @@
 -(void)awakeFromNib
 {
 	// Create our webview
-	[self.webPane initTabbedWebView];
-	[self.webPane retain];
-	[self.webPane setUIDelegate:self];
-	[self.webPane setFrameLoadDelegate:self];
+	[webPane initTabbedWebView];
+	[webPane retain];
+	[webPane setUIDelegate:self];
+	[webPane setFrameLoadDelegate:self];
 	NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
 	if (safariVersion)
 		safariVersion = [safariVersion substringFromIndex:1];
 	else
 		safariVersion = @"532.22";
-	[self.webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion]];
+	[webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion]];
 	
 	// Make web preferences 16pt Arial to match Safari
-	[[self.webPane preferences] setStandardFontFamily:@"Arial"];
-	[[self.webPane preferences] setDefaultFontSize:16];
+	[[webPane preferences] setStandardFontFamily:@"Arial"];
+	[[webPane preferences] setDefaultFontSize:16];
 	
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
@@ -789,14 +789,14 @@
 {
 	[viewTitle release];
 	[rssPageURL release];
-	[self.webPane setFrameLoadDelegate:nil];
-	[self.webPane setUIDelegate:nil];
+	[webPane setFrameLoadDelegate:nil];
+	[webPane setUIDelegate:nil];
 	[self handleStopLoading:nil];
-	[self.webPane close];
+	[webPane close];
 	[lastError release];
 	[pageFilename release];
-	[self.webPane release];
-	self.webPane = nil;
+	[webPane release];
+	webPane = nil;
 	[super dealloc];
 }
 @end
