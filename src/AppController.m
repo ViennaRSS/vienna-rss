@@ -2698,7 +2698,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		case 'U':
 		case 'r':
 		case 'R':
-			[self markRead:self];
+			[self markReadToggle:self];
 			return YES;
 			
 		case 's':
@@ -3134,8 +3134,21 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 }
 
-/* markRead
+/* markReadToggle
  * Toggle the read/unread state of the selected articles
+ */
+-(IBAction)markReadToggle:(id)sender
+{
+	Article * theArticle = [self selectedArticle];
+	if (theArticle != nil && ![db readOnly])
+	{
+		NSArray * articleArray = [articleController markedArticleRange];
+		[articleController markReadByArray:articleArray readFlag:![theArticle isRead]];
+	}
+}
+
+/* markRead
+ * Mark read the selected articles
  */
 -(IBAction)markRead:(id)sender
 {
@@ -3143,7 +3156,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	if (theArticle != nil && ![db readOnly])
 	{
 		NSArray * articleArray = [articleController markedArticleRange];
-		[articleController markReadByArray:articleArray readFlag:![theArticle isRead]];
+		[articleController markReadByArray:articleArray readFlag:YES];
+	}
+}
+
+/* markUnread
+ * Mark unread the selected articles
+ */
+-(IBAction)markUnread:(id)sender
+{
+	Article * theArticle = [self selectedArticle];
+	if (theArticle != nil && ![db readOnly])
+	{
+		NSArray * articleArray = [articleController markedArticleRange];
+		[articleController markReadByArray:articleArray readFlag:NO];
 	}
 }
 
@@ -4455,13 +4481,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if (theAction == @selector(markRead:))
 	{
 		Article * thisArticle = [self selectedArticle];
-		if (thisArticle != nil)
-		{
-			if ([thisArticle isRead])
-				[menuItem setTitle:NSLocalizedString(@"Mark Unread", nil)];
-			else
-				[menuItem setTitle:NSLocalizedString(@"Mark Read", nil)];
-		}
+		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible);
+	}
+	else if (theAction == @selector(markUnread:))
+	{
+		Article * thisArticle = [self selectedArticle];
 		return (thisArticle != nil && ![db readOnly] && isMainWindowVisible);
 	}
 	else if (theAction == @selector(mailLinkToArticlePage:))
