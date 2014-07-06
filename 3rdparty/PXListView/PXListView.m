@@ -79,6 +79,8 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	[_cellsInViewHierarchy release], _cellsInViewHierarchy = nil;
 	[_selectedRows release], _selectedRows = nil;
 	
+	free(_cellYOffsets);
+
 	[super dealloc];
 }
 
@@ -127,7 +129,6 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	}
 	
 	[_cellsInViewHierarchy removeAllObjects];
-	free(_cellYOffsets);
 	
 	[_selectedRows removeAllIndexes];
     _lastSelectedRow = -1;
@@ -142,6 +143,11 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 		[self addCellsFromExtendedRange];
 		
 		[self layoutCells];
+	}
+	else
+	{
+		free(_cellYOffsets);
+		_cellYOffsets=NULL;
 	}
 }
 
@@ -552,6 +558,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 	{
 		CGFloat totalHeight = 0;
 		
+		free(_cellYOffsets);
 		//Allocate the offset caching array
 		_cellYOffsets = (CGFloat*)malloc(sizeof(CGFloat)*_numberOfRows);
 		
