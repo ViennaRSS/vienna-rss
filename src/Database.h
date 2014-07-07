@@ -41,6 +41,8 @@
 	NSMutableDictionary * smartfoldersDict;
 	dispatch_queue_t _transactionQueue;
 	dispatch_queue_t _execQueue;
+	Folder * trashFolder;
+	Folder * searchFolder;
 }
 
 @property(nonatomic, retain) Folder * trashFolder;

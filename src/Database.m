@@ -57,6 +57,8 @@ static Database * _sharedDatabase = nil;
 
 @implementation Database
 
+@synthesize trashFolder, searchFolder;
+
 /* init
  * General object initialization.
  */
@@ -69,8 +71,8 @@ static Database * _sharedDatabase = nil;
 		initializedfoldersDict = NO;
 		initializedSmartfoldersDict = NO;
 		countOfUnread = 0;
-		_trashFolder = nil;
-		_searchFolder = nil;
+		trashFolder = nil;
+		searchFolder = nil;
 		searchString = @"";
 		smartfoldersDict = [[[NSMutableDictionary alloc] init] retain];
 		foldersDict = [[[NSMutableDictionary alloc] init] retain];
@@ -1399,7 +1401,7 @@ static Database * _sharedDatabase = nil;
  */
 -(NSInteger)trashFolderId
 {
-	return [_trashFolder itemId];
+	return [trashFolder itemId];
 }
 
 /* searchFolderId;
@@ -1681,7 +1683,7 @@ static Database * _sharedDatabase = nil;
 	if (results == SQLITE_OK)
 	{
 		[self compactDatabase];
-		[_trashFolder clearCache];
+		[trashFolder clearCache];
 
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
 	}
