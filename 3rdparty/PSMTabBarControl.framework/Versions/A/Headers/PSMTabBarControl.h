@@ -42,17 +42,17 @@
 @class PSMTabBarController;
 @protocol PSMTabStyle;
 
-typedef enum PSMTabBarOrientation {
+typedef enum PSMTabBarOrientation : NSInteger {
 	PSMTabBarHorizontalOrientation,
 	PSMTabBarVerticalOrientation
 } PSMTabBarOrientation;
 
-typedef enum PSMTabBarTearOffStyle {
+typedef enum PSMTabBarTearOffStyle : NSInteger {
 	PSMTabBarTearOffAlphaWindow,
 	PSMTabBarTearOffMiniwindow
 } PSMTabBarTearOffStyle;
 
-typedef enum PSMTabStateMask {
+typedef enum PSMTabStateMask : NSInteger {
 	PSMTab_SelectedMask				= 1 << 1,
 	PSMTab_LeftIsSelectedMask		= 1 << 2,
 	PSMTab_RightIsSelectedMask		= 1 << 3,
@@ -64,7 +64,7 @@ typedef enum PSMTabStateMask {
 
 @protocol PSMTabBarControlDelegate;
 
-@interface PSMTabBarControl : NSControl {
+@interface PSMTabBarControl : NSControl <NSTabViewDelegate> {
 												
 	// control basics
 	NSMutableArray							*_cells;								// the cells that draw the tabs
@@ -222,7 +222,7 @@ typedef enum PSMTabStateMask {
 #pragma mark Tab Information
 
 - (NSMutableArray *)representedTabViewItems;
-- (NSInteger)numberOfVisibleTabs;
+- (NSUInteger)numberOfVisibleTabs;
 - (PSMTabBarCell *)lastVisibleTab;
 
 #pragma mark Special Effects
