@@ -48,4 +48,6 @@ NSString * getDefaultBrowser(void);
 NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl);
 BOOL hasOSScriptsMenu(void);
 OSStatus GotoHelpPage(CFStringRef pagePath, CFStringRef anchorName);
+// Note : this function returns a created core foundation object : you need to release it
+// with CFRelease once you don't need its content anymore
 CFStringRef percentEscape(NSString *string);

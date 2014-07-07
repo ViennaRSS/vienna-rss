@@ -32,6 +32,7 @@
 	{
 		controller = (AppController *)[NSApp delegate];
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
+		[articleView setNeedsDisplay:NO];
 		// Make the list view the frame load and UI delegate for the web view
 		[articleView setUIDelegate:[[controller browserView] primaryTabItemView]];
 		[articleView setFrameLoadDelegate:[[controller browserView] primaryTabItemView]];
@@ -69,6 +70,7 @@
 
 - (void)prepareForReuse
 {
+	[articleView setNeedsDisplay:NO];
 	//calculate the frame
 	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
 							   YPOS_IN_CELL,

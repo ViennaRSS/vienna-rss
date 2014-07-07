@@ -36,15 +36,12 @@
 -(BOOL)setData:(NSData *)data
 {
 	CFXMLTreeRef newTree;
-	CFDictionaryRef error = nil;
 
 	NS_DURING
-		newTree = CFXMLTreeCreateFromDataWithError(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserNoOptions, kCFXMLNodeCurrentVersion, &error);
+		newTree = CFXMLTreeCreateFromDataWithError(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserNoOptions, kCFXMLNodeCurrentVersion, NULL);
 	NS_HANDLER
 		newTree = nil;
 	NS_ENDHANDLER
-	if (error != nil)
-		CFRelease(error);
 	if (newTree != nil)
 	{
 		[self setTreeRef:newTree];
@@ -304,7 +301,7 @@
 	{
 		CFXMLElementInfo eInfo = *(CFXMLElementInfo *)CFXMLNodeGetInfoPtr(node);
 		NSDictionary * dict = (NSDictionary *)eInfo.attributes;
-		NSMutableDictionary * newDict = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary * newDict = [NSMutableDictionary dictionary];
 
 		// Make a copy of the attributes dictionary but force the keys to
 		// lowercase.
@@ -312,7 +309,7 @@
 		{
 			[newDict setObject:[dict objectForKey:keyName] forKey:[keyName lowercaseString]];
 		}
-		return [newDict autorelease];
+		return newDict;
 	}
 	return nil;
 }

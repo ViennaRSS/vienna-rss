@@ -103,8 +103,6 @@
  */
 -(void)setAuxiliaryImage:(NSImage *)newAuxiliaryImage
 {
-	[newAuxiliaryImage retain];
-	[auxiliaryImage release];
 	auxiliaryImage = newAuxiliaryImage;
 }
 

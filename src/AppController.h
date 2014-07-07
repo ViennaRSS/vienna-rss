@@ -111,6 +111,7 @@
 -(IBAction)searchUsingFilterField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
 -(IBAction)markAllSubscriptionsRead:(id)sender;
+-(IBAction)markUnread:(id)sender;
 -(IBAction)markRead:(id)sender;
 -(IBAction)markFlagged:(id)sender;
 -(IBAction)renameFolder:(id)sender;

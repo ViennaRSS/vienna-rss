@@ -3,7 +3,7 @@
 "64.title" = "Ventana";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
-"70.title" = "Otras vistas";
+"70.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "71"; */
 "71.title" = "Cada 2 horas";
@@ -21,40 +21,40 @@
 "76.title" = "Cada 30 minutos";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
-"80.title" = "Otras vistas";
+"80.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "81"; */
-"81.title" = "Nada";
+"81.title" = "Ninguno";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
-"91.title" = "Otras vistas";
+"91.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "92"; */
 "92.title" = "(Do not localise)";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
-"95.title" = "Otras vistas";
+"95.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "96"; */
-"96.title" = "(Ruta)";
+"96.title" = "(Path)";
 
 /* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
-"97.title" = "Otros";
+"97.title" = "Otra...";
 
 /* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
-"121.title" = "Mostrar el número de artículos no leídos en el icono de la aplicacion";
+"121.title" = "Mostrar número de no leídos en el icono de la aplicación";
 
 /* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "122"; */
-"122.title" = "Animar el icono de la aplicacion";
+"122.title" = "Animar icono de la aplicación";
 
 /* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "123"; */
 "123.title" = "No hacer nada";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "132"; */
-"132.title" = "Después del comando \"Siguiente artículo no leído\" ";
+"132.title" = "Después del comando \"No leído siguiente\" ";
 
 /* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "133"; */
-"133.title" = "Después de un instante";
+"133.title" = "Después de un breve instante";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "141"; */
 "141.title" = "Cada 15 minutos";
@@ -66,37 +66,37 @@
 "144.title" = "Cada 3 horas";
 
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "146"; */
-"146.title" = "Comprobar si hay nuevos artículos:";
+"146.title" = "Buscar nuevos artículos:";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "148"; */
-"148.title" = "Comprobar si hay nuevas versiones de Vienna al inicio";
+"148.title" = "Buscar nuevas versiones de Vienna al inicio";
 
 /* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
-"149.title" = "Lector RSS por defecto:";
+"149.title" = "Lector RSS predeterminado:";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
-"151.title" = "Comprobar si hay nuevos artículos al inicio";
+"151.title" = "Buscar nuevos artículos al inicio";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
-"152.title" = "Abrir los nuevos enlaces en segundo plano";
+"152.title" = "Abrir nuevos enlaces en segundo plano";
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
-"153.title" = "Abrir los enlaces en un navegador externo";
+"153.title" = "Abrir enlaces en un navegador externo";
 
 /* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
-"154.title" = "Mover los artículos a la papelera:";
+"154.title" = "Mover artículos a la papelera:";
 
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
-"156.title" = "Guardar descargas en:";
+"156.title" = "Guardar archivos descargados en:";
 
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
-"158.title" = "Cuando se descarguen nuevos artículos:\n";
+"158.title" = "When new unread articles are retrieved:\n";
 
 /* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
-"159.title" = "Marcar como leído el artículo seleccionado:\n";
+"159.title" = "Marcar artículo actual como leído:\n";
 
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
-"160.title" = "Mostrar en la barra de menú";
+"160.title" = "Mostrar en la barra de menús";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
 "161.title" = "Radio";
@@ -105,4 +105,4 @@
 "162.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
-"164.title" = "Mark updated articles as new";
+"164.title" = "Marcar artículos actualizados como nuevos";

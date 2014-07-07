@@ -428,9 +428,14 @@
 	[db beginTransaction];
 	for (Article * theArticle in articleArray)
 	{
-		if (![theArticle isRead])
+		NSInteger folderId = [theArticle folderId];
+		if (![theArticle isRead]) {
 			needFolderRedraw = YES;
-		[db markArticleDeleted:[theArticle folderId] guid:[theArticle guid] isDeleted:deleteFlag];
+			if (deleteFlag && IsGoogleReaderFolder([db folderFromID:folderId])) {
+				[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+			}
+		}
+		[db markArticleDeleted:folderId guid:[theArticle guid] isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
 		else if (deleteFlag && (currentFolderId != [db trashFolderId]))
@@ -488,9 +493,14 @@
 	[db beginTransaction];
 	for (Article * theArticle in articleArray)	
 	{
-		if (![theArticle isRead])
+		NSInteger folderId = [theArticle folderId];
+		if (![theArticle isRead]) {
 			needFolderRedraw = YES;
-		if ([db deleteArticle:[theArticle folderId] guid:[theArticle guid]])
+			if (IsGoogleReaderFolder([db folderFromID:folderId])) {
+				[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+			}
+		}
+		if ([db deleteArticle:folderId guid:[theArticle guid]])
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
@@ -909,14 +919,14 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mainArticleView release];
-	self.mainArticleView=nil;
+	mainArticleView=nil;
 	[backtrackArray release];
-	self.backtrackArray=nil;
+	backtrackArray=nil;
 	[sortColumnIdentifier release];
 	[folderArrayOfArticles release];
-	self.folderArrayOfArticles=nil;
+	folderArrayOfArticles=nil;
 	[currentArrayOfArticles release];
-	self.currentArrayOfArticles=nil;
+	currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
 	[super dealloc];

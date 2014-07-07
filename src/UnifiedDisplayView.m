@@ -100,6 +100,7 @@
 	// explicitly localise in the NIB file.
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markRead:))];
+	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markUnread:))];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(markFlagged:))];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(deleteMessage:))];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(restoreMessage:))];
@@ -155,10 +156,11 @@
  */
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
 	NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		message,	// message
+		@"%@",	// message placeholder
 		NSLocalizedString(@"OK", @""),	// default button
 		nil,	// alt button
-		nil);	// other button
+		nil,	// other button
+		message);
 }
 
 /* runJavaScriptConfirmPanelWithMessage
@@ -166,10 +168,11 @@
  */
 - (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
 	NSInteger result = NSRunInformationalAlertPanel(NSLocalizedString(@"JavaScript", @""),	// title
-		message,	// message
+		@"%@",	// message placeholder
 		NSLocalizedString(@"OK", @""),	// default button
 		NSLocalizedString(@"Cancel", @""),	// alt button
-		nil);
+		nil,
+		message);
 	return NSAlertDefaultReturn == result;
 }
 
@@ -848,6 +851,7 @@
 -(void)selectFolderWithFilter:(int)newFolderId
 {
 	currentSelectedRow = -1;
+	[articleList setNeedsDisplay:NO];
 	[rowHeightArray removeAllObjects];
 	[articleController reloadArrayOfArticles];
 	[articleController sortArticles];
@@ -856,6 +860,7 @@
 		[articleList scrollRowToVisible:0];
 	else
 		[self selectArticleAfterReload];
+	[articleList setNeedsDisplay:YES];
 }
 
 /* handleRefreshArticle

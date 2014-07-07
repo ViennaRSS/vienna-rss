@@ -62,6 +62,7 @@ enum GoogleReaderStatus {
 
 @synthesize localFeeds;
 @synthesize token;
+@synthesize clientAuthToken;
 @synthesize tokenTimer;
 @synthesize authTimer;
 
@@ -162,8 +163,10 @@ JSONDecoder * jsonDecoder;
     	feedIdentifier =  [thisFolder feedURL];
     }
 		
+	CFStringRef identifierCF = percentEscape(feedIdentifier);
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
-                                                  percentEscape(feedIdentifier),ClientName,itemsLimitation,TIMESTAMP]];
+                                                  identifierCF,ClientName,itemsLimitation,TIMESTAMP]];
+    CFRelease(identifierCF);
 		
 	ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:refreshFeedUrl];	
 	[request setDelegate:self];
@@ -349,8 +352,9 @@ JSONDecoder * jsonDecoder;
 		}
 
 		// Request id's of unread items
+		CFStringRef identifierCF = percentEscape(feedIdentifier);
 		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
-                           percentEscape(feedIdentifier)];
+                           identifierCF];
 		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
 		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -372,7 +376,8 @@ JSONDecoder * jsonDecoder;
 		{
 			starredSelector=@"it=user/-/state/com.google/starred";
 		}
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
+		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, identifierCF, starredSelector];
+        CFRelease(identifierCF);
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
 		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
@@ -515,11 +520,9 @@ JSONDecoder * jsonDecoder;
 
 	NSArray * components = [response componentsSeparatedByString:@"\n"];
 
-	[clientAuthToken release];
-
 	//NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
 	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
-	clientAuthToken = [[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]] retain];
+	[self setClientAuthToken:[NSString stringWithString:[[components objectAtIndex:2] substringFromIndex:5]]];
 
 	[self getToken];
 
@@ -550,9 +553,7 @@ JSONDecoder * jsonDecoder;
 		return;
 	}
     // Save token
-    [token release];
-    token = [request responseString];
-    [token retain];
+    [self setToken:[request responseString]];
 	googleReaderStatus = isAuthenticated;
 
     if (tokenTimer == nil || ![tokenTimer isValid])
@@ -565,9 +566,8 @@ JSONDecoder * jsonDecoder;
 -(void)clearAuthentication
 {
 	googleReaderStatus = notAuthenticated;
-	[token release];
-	[clientAuthToken release];
-	clientAuthToken = token = nil;
+	[self setClientAuthToken:nil];
+	[self setToken:nil];
 }
 
 -(void)resetAuthentication

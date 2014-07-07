@@ -3,16 +3,16 @@
 
 /* NSTextField (Create a new subscription ) : <title:Create a new subscription
 > (oid:64) */
-"Create a new subscription\n" = "Crear una nueva suscripción ";
+"Create a new subscription\n" = "Crear nueva suscripción ";
 
 /* NSTextField (Edit subscription) : <title:Edit subscription> (oid:67) */
-"Edit subscription" = "Editar la suscripción:";
+"Edit subscription" = "Editar suscripción:";
 
 /* NSTextField (Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.) : <title:Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.> (oid:65) */
-"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Introduzca la dirección URL de la fuente, o elija otra opción de la lista.";
+"Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source." = "Introduzca el enlace de la fuente de noticias a continuación, o elija de la lista de fuentes para introducir el acceso directo proporcionado por la fuente de noticias.";
 
 /* NSMenu : <title:OtherViews> (oid:44) */
-"OtherViews" = "Otras vistas";
+"OtherViews" = "OtherViews";
 
 /* NSPanel (RSS Feed) : <title:RSS Feed> (oid:49) */
 "RSS Feed" = "Fuente RSS";
