@@ -26,6 +26,8 @@
 
 @optional
 
++ (CGFloat)desiredTabBarControlHeight;
+
 // control specific parameters
 - (CGFloat)leftMarginForTabBarControl:(PSMTabBarControl *)tabBarControl;
 - (CGFloat)rightMarginForTabBarControl:(PSMTabBarControl *)tabBarControl;
