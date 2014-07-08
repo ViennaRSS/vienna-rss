@@ -4710,6 +4710,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)dealloc
 {
+	[mainWindow setDelegate:nil];
+	[splitView1 setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pluginManager release];
 	[scriptsMenuItem release];

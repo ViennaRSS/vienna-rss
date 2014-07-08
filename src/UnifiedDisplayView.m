@@ -129,6 +129,7 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[articleList setDelegate:nil];
 	[markReadTimer release];
 	[guidOfArticleToSelect release];
 	[currentURL release];

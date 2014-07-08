@@ -201,6 +201,7 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[activityWindow setDelegate:nil];
 	[allItems release];
 	[super dealloc];
 }

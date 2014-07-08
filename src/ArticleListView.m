@@ -1959,6 +1959,10 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[articleText setUIDelegate:nil];
+	[articleText setFrameLoadDelegate:nil];
+	[splitView2 setDelegate:nil];
+	[articleList setDelegate:nil];
 	[markReadTimer release];
 	[articleListFont release];
 	[articleListUnreadFont release];

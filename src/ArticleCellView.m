@@ -58,6 +58,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:[[controller browserView] primaryTabItemView] name:WebViewProgressFinishedNotification object:articleView];
+	[articleView setUIDelegate:nil];
+	[articleView setFrameLoadDelegate:nil];
 	[articleView release], articleView=nil;
 	[progressIndicator release], progressIndicator=nil;
 
