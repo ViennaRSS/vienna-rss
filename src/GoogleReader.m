@@ -845,6 +845,8 @@ JSONDecoder * jsonDecoder;
 	[APIBaseURL release];
 	[clientAuthToken release];
 	[token release];
+	[tokenTimer release];
+	[authTimer release];
 	dispatch_release(_queue);
 	[super dealloc];
 }

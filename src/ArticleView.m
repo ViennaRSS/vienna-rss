@@ -375,6 +375,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	[cssStylesheet release];
 	[htmlTemplate release];
 	[currentHTML release];
+	[jsScript release];
 	[super dealloc];
 }
 @end

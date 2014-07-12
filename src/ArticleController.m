@@ -115,7 +115,7 @@
 		[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
 		
 		// Create a backtrack array
-		[self setBacktrackArray:[[[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]] autorelease]];
+		backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -923,6 +923,7 @@
 	currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
 	[articleToPreserve release];
+	[foldersTree release];
 	[super dealloc];
 }
 @end

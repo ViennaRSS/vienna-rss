@@ -52,8 +52,8 @@
 @property (nonatomic, retain) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, retain) NSArray * currentArrayOfArticles;
 @property (nonatomic, retain) NSArray * folderArrayOfArticles;
-@property (nonatomic, retain) NSDictionary * articleSortSpecifiers;
-@property (nonatomic, retain) BackTrackArray * backtrackArray;
+@property (nonatomic, assign) NSDictionary * articleSortSpecifiers;
+@property (nonatomic, assign) BackTrackArray * backtrackArray;
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;

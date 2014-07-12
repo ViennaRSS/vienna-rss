@@ -2632,6 +2632,8 @@ static Database * _sharedDatabase = nil;
  */
 -(void)dealloc
 {
+	[trashFolder release];
+	[searchFolder release];
 	[searchString release];
 	[foldersDict release];
 	[smartfoldersDict release];

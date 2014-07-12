@@ -124,7 +124,6 @@
 {
 	// Create our webview
 	[webPane initTabbedWebView];
-	[webPane retain];
 	[webPane setUIDelegate:self];
 	[webPane setFrameLoadDelegate:self];
 	NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
