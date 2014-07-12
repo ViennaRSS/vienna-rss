@@ -183,6 +183,7 @@
 
 				[tag setAttributes:tagDict];
 				[tagArray addObject:tag];
+				[tagDict release];
 				[tag release];
 			}
 			inTag = NO;
