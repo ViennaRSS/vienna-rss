@@ -680,8 +680,10 @@ static NSArray * iconArray = nil;
  */
 -(void)clearCache
 {
-	[cachedArticles removeAllObjects];
-	isCached = NO;
+@autoreleasepool {
+		[cachedArticles removeAllObjects];
+		isCached = NO;
+	}
 }
 
 /* addArticleToCache
