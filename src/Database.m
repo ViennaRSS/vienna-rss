@@ -184,6 +184,7 @@ static Database * _sharedDatabase = nil;
 		NSString * versionString = [results stringForColumn:@"version"];
 		databaseVersion = [versionString intValue];
 	}
+	[results close];
 
 	// Trap unsupported databases
 	if (databaseVersion > 0 && databaseVersion < MA_Min_Supported_DB_Version)
@@ -349,6 +350,7 @@ static Database * _sharedDatabase = nil;
 			NSInteger parentId = [[results stringForColumn:@"parent_id"] intValue];
 			[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", parentId, folderId];
 		}
+		[results close];
 		
 		}]; //end transaction block
 		NSLog(@"Updated database schema to version %d.", databaseVersion);
@@ -426,6 +428,7 @@ static Database * _sharedDatabase = nil;
 		{
 			newFoldersTreeSortMethod = [[sortResults stringForColumn:@"folder_sort"] intValue];
 		}
+		[sortResults close];
 	});
 
 	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
@@ -926,6 +929,7 @@ static Database * _sharedDatabase = nil;
 					predecessorId = [[siblings stringForColumn:@"folder_id"] intValue];
 				else
 					predecessorId =  0;
+				[siblings close];
 			});
 		}
 		if (predecessorId == 0)
@@ -1088,6 +1092,7 @@ static Database * _sharedDatabase = nil;
 			{
 				previousSibling = [[results stringForColumn:@"folder_id"] intValue];
 			}
+			[results close];
 		});
 		if (previousSibling != -999)
 			[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
@@ -1392,6 +1397,7 @@ static Database * _sharedDatabase = nil;
 		{
 			folderId = [[results stringForColumn:@"first_folder"] intValue];
 		}
+		[results close];
 	});
 	return folderId;
 }
@@ -1597,6 +1603,7 @@ static Database * _sharedDatabase = nil;
 						}
 						else
 							existingBody = @"";
+						[results close];
 					});
 				}
 				
@@ -1742,6 +1749,7 @@ static Database * _sharedDatabase = nil;
 				[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
 				[criteriaTree release];
 			}
+			[results close];
 		});
 		initializedSmartfoldersDict = YES;
 	}
@@ -1848,6 +1856,7 @@ static Database * _sharedDatabase = nil;
 				if (IsSearchFolder(folder))
 					[self setSearchFolder:folder];
 			}
+			[results close];
 		});
 
 		// Load all RSS folders and add them to the list.
@@ -1869,6 +1878,7 @@ static Database * _sharedDatabase = nil;
 				[folder setLastUpdateString:lastUpdateString];
 				[folder setUsername:username];
 			}
+			[results close];
 		});
 		
 		// Fix the childUnreadCount for every parent		
@@ -1998,6 +2008,7 @@ static Database * _sharedDatabase = nil;
 				[folder addArticleToCache:article];
 				[article release];
 			}
+			[results close];
         });
         
         // This is a good time to do a quick check to ensure that our
@@ -2284,6 +2295,7 @@ static Database * _sharedDatabase = nil;
 					NSString * guid = [results stringForColumn:@"message_id"];
 					[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 				}
+				[results close];
 			});
 		}
 	}
@@ -2362,6 +2374,7 @@ static Database * _sharedDatabase = nil;
 			
 			[article release];
 		}
+		[results close];
 	});
     
     // This is a good time to do a quick check to ensure that our
@@ -2566,6 +2579,7 @@ static Database * _sharedDatabase = nil;
 		}
 		else
 			result=YES;
+		[results close];
 	});
 	return result;
 }
@@ -2587,6 +2601,7 @@ static Database * _sharedDatabase = nil;
 				[articleGuids addObject:guid];
 			}
 		}
+		[results close];
 	});
 	
 	return articleGuids;
