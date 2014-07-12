@@ -57,6 +57,13 @@ enum GoogleReaderStatus {
 	isAuthenticated
 } googleReaderStatus;
 
+@interface GoogleReader()
+@property (nonatomic, copy) NSMutableArray * localFeeds;
+@property (nonatomic, retain) NSString *token;
+@property (nonatomic, retain) NSString *clientAuthToken;
+@property (nonatomic, retain) NSTimer * tokenTimer;
+@property (nonatomic, retain) NSTimer * authTimer;
+@end
 
 @implementation GoogleReader
 

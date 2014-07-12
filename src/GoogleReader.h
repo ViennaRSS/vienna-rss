@@ -24,12 +24,6 @@
 	dispatch_queue_t _queue;
 }
 
-@property (nonatomic, copy) NSMutableArray * localFeeds;
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSString *clientAuthToken;
-@property (nonatomic, retain) NSTimer * tokenTimer;
-@property (nonatomic, retain) NSTimer * authTimer;
-
 +(GoogleReader *)sharedManager;
 
 // Check if an accessToken is available
