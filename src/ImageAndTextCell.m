@@ -113,7 +113,7 @@
  */
 -(NSImage *)auxiliaryImage
 {
-	return auxiliaryImage;
+	return [[auxiliaryImage retain] autorelease];;
 }
 
 /* setCount
