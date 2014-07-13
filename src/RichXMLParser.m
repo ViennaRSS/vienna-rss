@@ -254,7 +254,7 @@
 -(BOOL)parseRichXML:(NSData *)xmlData
 {
 	BOOL success = NO;
-	NS_DURING
+	@try {
 	NSData * parsedXmlData = [self preFlightValidation:xmlData];
 	if (parsedXmlData && [self setData:parsedXmlData])
 	{
@@ -272,9 +272,10 @@
 		else if ((subtree = [self treeByName:@"feed"]) != nil)
 			success = [self initAtomFeed:subtree];
 	}
-	NS_HANDLER
+	}
+	@catch (NSException *error) {
 		success = NO;
-	NS_ENDHANDLER
+	}
 	return success;
 }
 
@@ -286,7 +287,7 @@
 +(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray
 {
 	BOOL success = NO;
-	NS_DURING
+	@try {
 	NSArray * arrayOfTags = [XMLTag parserFromData:xmlData];
 	if (arrayOfTags != nil)
 	{
@@ -325,9 +326,10 @@
 			success = [linkArray count] > 0;
 		}
 	}
-	NS_HANDLER
-	success = NO;
-	NS_ENDHANDLER
+	}
+	@catch (NSException *error) {
+		success = NO;
+	}
 	return success;
 }
 

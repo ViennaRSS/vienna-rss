@@ -104,12 +104,13 @@ static NSArray * iconArray = nil;
 	{
 		NSString * fullFilePath = [[imagesCacheFolder stringByAppendingPathComponent:baseURL] stringByAppendingPathExtension:@"tiff"];
 		NSData *imageData = nil;
-		NS_DURING
+		@try {
 			imageData = [image TIFFRepresentation];
-		NS_HANDLER
+		}
+		@catch (NSException *error) {
 			imageData = nil;
 			NSLog(@"tiff exception with %@", fullFilePath);
-		NS_ENDHANDLER
+		}
 		if (imageData != nil)
 			[[NSFileManager defaultManager] createFileAtPath:fullFilePath contents:imageData attributes:nil];
 	}
