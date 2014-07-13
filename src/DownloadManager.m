@@ -181,7 +181,6 @@ static DownloadManager * _sharedDownloadManager = nil;
 		else
 		{
 			[image retain];
-			[image setScalesWhenResized:YES];
 			[image setSize:NSMakeSize(32, 32)];
 		}
 	}

@@ -3,16 +3,16 @@
 "5.title" = "Ventana";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "95"; */
-"95.title" = "Caja";
+"95.title" = "Cuadro";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "97"; */
-"97.title" = "Caja";
+"97.title" = "Cuadro";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "99"; */
-"99.title" = "Caja";
+"99.title" = "Cuadro";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "101"; */
-"101.title" = "Caja";
+"101.title" = "Cuadro";
 
 /* Class = "NSTextFieldCell"; title = "(Folder name)"; ObjectID = "104"; */
 "104.title" = "(Nombre de la carpeta)";
@@ -21,13 +21,13 @@
 "105.title" = "Última actualización:";
 
 /* Class = "NSTextFieldCell"; title = "(Last refresh date)"; ObjectID = "106"; */
-"106.title" = "(Última fecha de actualización)";
+"106.title" = "(Fecha de última actualización)";
 
 /* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
 "109.title" = "Validar";
 
 /* Class = "NSButtonCell"; title = "Feed URL:"; ObjectID = "110"; */
-"110.title" = "Dirección URL de la fuente:";
+"110.title" = "URL de la fuente:";
 
 /* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
 "111.title" = "Nombre de usuario:";
@@ -36,7 +36,7 @@
 "112.title" = "Contraseña:\n";
 
 /* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
-"115.title" = "Actualización de la autenticación";
+"115.title" = "Actualizar autenticación";
 
 /* Class = "NSButtonCell"; title = "Authentication:"; ObjectID = "116"; */
 "116.title" = "Autenticación:";
@@ -63,4 +63,4 @@
 "124.title" = "Descripción:";
 
 /* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
-"126.title" = "Use página del red para artículos";
+"126.title" = "Cargar artículos HTML completamente";

@@ -483,7 +483,12 @@ static RefreshManager * _refreshManager = nil;
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
 	[myRequest setTimeOutSeconds:180];
-	[self addConnection:myRequest];
+	// hack for handling file:// URLs
+	if ([url isFileURL]) {
+		[self folderRefreshCompleted:myRequest];
+	} else {
+		[self addConnection:myRequest];
+	}
 }
 
 
@@ -546,7 +551,6 @@ static RefreshManager * _refreshManager = nil;
 		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
 		if (iconImage != nil && [iconImage isValid])
 		{
-			[iconImage setScalesWhenResized:YES];
 			[iconImage setSize:NSMakeSize(16, 16)];
 			[folder setImage:iconImage];
 			
@@ -636,19 +640,20 @@ static RefreshManager * _refreshManager = nil;
     [self syncFinishedForFolder:folder];
 
      // hack for handling file:// URLs
-     // needed because current versions of ASIHttpRequest return error 404 for those URLs
 	if ([url isFileURL])
 	{
 		NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
-		NSString *filePath = [url path];
+		NSString *filePath = [[url path] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		BOOL isDirectory = NO;
 		if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory)
 		{
         	responseStatusCode = 200;
 			NSData * receivedData = [NSData dataWithContentsOfFile:filePath];
-			[connector setRawResponseData:[NSData dataWithContentsOfFile:filePath]];
+			[connector setRawResponseData:[NSMutableData dataWithContentsOfFile:filePath]];
 			[connector setContentLength:[receivedData length]];
 			[connector setTotalBytesRead:[receivedData length]];
+		} else {
+			responseStatusCode = 404;
 		}
 	}
 	

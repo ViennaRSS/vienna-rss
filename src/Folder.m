@@ -177,7 +177,6 @@ static NSArray * iconArray = nil;
 					NSImage * iconImage = [[NSImage alloc] initWithData:imageData];
 					if ([iconImage isValid])
 					{
-						[iconImage setScalesWhenResized:YES];
 						[iconImage setSize:NSMakeSize(16, 16)];
 						NSString * homePageSiteRoot = [[[fullPath lastPathComponent] stringByDeletingPathExtension] convertStringToValidPath];
 						[folderImagesArray setObject:iconImage forKey:homePageSiteRoot];

@@ -293,7 +293,6 @@
 	NSMenuItem * downloadPathItem = [downloadFolder itemAtIndex:0];
 	NSImage * pathImage = [[NSWorkspace sharedWorkspace] iconForFile:downloadFolderPath];
 	
-	[pathImage setScalesWhenResized:YES];
 	[pathImage setSize:NSMakeSize(16, 16)];
 	
 	[downloadPathItem setTitle:[downloadFolderPath lastPathComponent]];
