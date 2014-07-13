@@ -182,6 +182,7 @@ static NSMutableArray * _filterList = nil;
 -(void)dealloc
 {
 	[name release];
+	name=nil;
 	[super dealloc];
 }
 @end

@@ -255,7 +255,9 @@ static BOOL _credentialsChanged;
 -(void)dealloc
 {
     [syncButton release];
+    syncButton=nil;
     [sourcesDict release];
+    sourcesDict=nil;
     [super dealloc];
 
 }

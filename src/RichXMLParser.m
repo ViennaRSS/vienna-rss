@@ -201,12 +201,19 @@
 -(void)dealloc
 {
 	[guid release];
+	guid=nil;
 	[title release];
+	title=nil;
 	[description release];
+	description=nil;
 	[author release];
+	author=nil;
 	[date release];
+	date=nil;
 	[link release];
+	link=nil;
 	[enclosure release];
+	enclosure=nil;
 	[super dealloc];
 }
 @end
@@ -1141,11 +1148,17 @@
 -(void)dealloc
 {
 	[orderArray release];
+	orderArray=nil;
 	[title release];
+	title=nil;
 	[description release];
+	description=nil;
 	[lastModified release];
+	lastModified=nil;
 	[link release];
+	link=nil;
 	[items release];
+	items=nil;
 	[super dealloc];
 }
 @end

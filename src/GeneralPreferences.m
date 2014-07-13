@@ -443,6 +443,7 @@
 -(void)dealloc
 {
 	[appToPathMap release];
+	appToPathMap=nil;
 	if (internetConfigHandler != nil)
 		ICEnd(internetConfigHandler);
 	[[NSNotificationCenter defaultCenter] removeObserver:self];

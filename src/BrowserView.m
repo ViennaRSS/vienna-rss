@@ -331,8 +331,11 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[tabBarControl release];
+	tabBarControl=nil;
 	[primaryTabItemView release];
+	primaryTabItemView=nil;
 	[tabView release];
+	tabView=nil;
 	[super dealloc];
 }
 @end

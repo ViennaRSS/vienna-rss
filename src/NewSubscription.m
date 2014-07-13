@@ -407,7 +407,9 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[sourcesDict release];
+	sourcesDict=nil;
 	[db release];
+	db=nil;
 	[super dealloc];
 }
 @end

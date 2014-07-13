@@ -113,6 +113,7 @@
 -(void)dealloc
 {
 	[theMenu release];
+	theMenu=nil;
 	[super dealloc];
 }
 @end

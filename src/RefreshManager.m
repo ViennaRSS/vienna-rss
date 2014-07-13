@@ -1075,8 +1075,11 @@ static RefreshManager * _refreshManager = nil;
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pumpTimer release];
+	pumpTimer=nil;
 	[authQueue release];
+	authQueue=nil;
 	[networkQueue release];
+	networkQueue=nil;
 	dispatch_release(_queue);
 	[super dealloc];
 }

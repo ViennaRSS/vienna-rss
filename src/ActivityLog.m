@@ -127,8 +127,11 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 -(void)dealloc
 {
 	[details release];
+	details=nil;
 	[status release];
+	status=nil;
 	[name release];
+	name=nil;
 	[super dealloc];
 }
 @end
@@ -233,6 +236,7 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[log release];
+	log=nil;
 	[super dealloc];
 }
 @end

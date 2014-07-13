@@ -202,7 +202,9 @@
 -(void)dealloc
 {
 	[name release];
+	name=nil;
 	[attributes release];
+	attributes=nil;
 	[super dealloc];
 }
 @end

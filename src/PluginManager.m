@@ -424,6 +424,7 @@
 -(void)dealloc
 {
 	[allPlugins release];
+	allPlugins=nil;
 	[super dealloc];
 }
 @end

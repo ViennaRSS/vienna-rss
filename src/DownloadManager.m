@@ -211,8 +211,11 @@ static DownloadManager * _sharedDownloadManager = nil;
 -(void)dealloc
 {
 	[filename release];
+	filename=nil;
 	[download release];
+	download=nil;
 	[image release];
+	image=nil;
 	[super dealloc];
 }
 @end
@@ -587,6 +590,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 -(void)dealloc
 {
 	[downloadsList release];
+	downloadsList=nil;
 	[super dealloc];
 }
 @end

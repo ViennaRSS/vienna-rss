@@ -2633,15 +2633,21 @@ static Database * _sharedDatabase = nil;
 -(void)dealloc
 {
 	[trashFolder release];
+	trashFolder=nil;
 	[searchFolder release];
+	searchFolder=nil;
 	[searchString release];
+	searchString=nil;
 	[foldersDict release];
+	foldersDict=nil;
 	[smartfoldersDict release];
+	smartfoldersDict=nil;
 	dispatch_release(_execQueue);
 	dispatch_release(_transactionQueue);
 	if (sqlDatabase)
 		[self close];
 	[sqlDatabase release];
+	sqlDatabase=nil;
 	[super dealloc];
 }
 @end

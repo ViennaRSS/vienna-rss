@@ -626,8 +626,11 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[arrayOfViews release];
+	arrayOfViews=nil;
 	[nameToFieldMap release];
+	nameToFieldMap=nil;
 	[db release];
+	db=nil;
 	[super dealloc];
 }
 @end

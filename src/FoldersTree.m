@@ -1511,10 +1511,15 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cellFont release];
+	cellFont=nil;
 	[boldCellFont release];
+	boldCellFont=nil;
 	[folderErrorImage release];
+	folderErrorImage=nil;
 	[refreshProgressImage release];
+	refreshProgressImage=nil;
 	[rootNode release];
+	rootNode=nil;
 	[super dealloc];
 }
 @end

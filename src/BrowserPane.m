@@ -787,13 +787,17 @@
 -(void)dealloc
 {
 	[viewTitle release];
+	viewTitle=nil;
 	[rssPageURL release];
+	rssPageURL=nil;
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane close];
 	[lastError release];
+	lastError=nil;
 	[pageFilename release];
+	pageFilename=nil;
 	[webPane release];
 	webPane = nil;
 	[super dealloc];

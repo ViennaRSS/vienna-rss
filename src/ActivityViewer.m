@@ -203,6 +203,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[activityWindow setDelegate:nil];
 	[allItems release];
+	allItems=nil;
 	[super dealloc];
 }
 @end

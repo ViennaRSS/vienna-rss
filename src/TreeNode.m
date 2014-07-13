@@ -385,7 +385,9 @@
 -(void)dealloc
 {
 	[children release];
+	children=nil;
 	[folder release];
+	folder=nil;
 	[super dealloc];
 }
 @end

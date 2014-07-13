@@ -373,9 +373,13 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cssStylesheet release];
+	cssStylesheet=nil;
 	[htmlTemplate release];
+	htmlTemplate=nil;
 	[currentHTML release];
+	currentHTML=nil;
 	[jsScript release];
+	jsScript=nil;
 	[super dealloc];
 }
 @end

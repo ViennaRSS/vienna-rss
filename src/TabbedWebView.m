@@ -396,7 +396,9 @@
 	[self setDownloadDelegate:nil];
 	[self removeFromSuperviewWithoutNeedingDisplay];
 	[controller release];
+	controller=nil;
 	[defaultWebPrefs release];
+	defaultWebPrefs=nil;
 	[super dealloc];
 }
 @end

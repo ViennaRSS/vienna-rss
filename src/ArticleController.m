@@ -917,12 +917,15 @@
 	[backtrackArray release];
 	backtrackArray=nil;
 	[sortColumnIdentifier release];
+	sortColumnIdentifier=nil;
 	[folderArrayOfArticles release];
 	folderArrayOfArticles=nil;
 	[currentArrayOfArticles release];
 	currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
+	articleSortSpecifiers=nil;
 	[articleToPreserve release];
+	articleToPreserve=nil;
 	[foldersTree release];
 	[super dealloc];
 }

@@ -858,15 +858,25 @@ JSONDecoder * jsonDecoder;
 -(void)dealloc 
 {
 	[localFeeds release];
+	localFeeds=nil;
 	[jsonDecoder release];
+	jsonDecoder=nil;
     [username release];
+    username=nil;
 	[openReaderHost release];
+	openReaderHost=nil;
 	[password release];
+	password=nil;
 	[APIBaseURL release];
+	APIBaseURL=nil;
 	[clientAuthToken release];
+	clientAuthToken=nil;
 	[token release];
+	token=nil;
 	[tokenTimer release];
+	tokenTimer=nil;
 	[authTimer release];
+	authTimer=nil;
 	dispatch_release(_queue);
 	[super dealloc];
 }

@@ -196,6 +196,7 @@ static NSArray * iconArray = nil;
 -(void)dealloc
 {
 	[folderImagesArray release];
+	folderImagesArray=nil;
 	[super dealloc];
 }
 @end
@@ -813,8 +814,11 @@ static NSArray * iconArray = nil;
 -(void)dealloc
 {
 	[lastUpdate release];
+	lastUpdate=nil;
 	[attributes release];
+	attributes=nil;
 	[cachedArticles release];
+	cachedArticles=nil;
 	[super dealloc];
 }
 @end

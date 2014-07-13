@@ -373,9 +373,11 @@
 -(void)dealloc
 {
 	[countBackgroundColour release];
+	countBackgroundColour=nil;
 	[auxiliaryImage release];
+	auxiliaryImage=nil;
 	[image release];
-	
+	image=nil;
 	[super dealloc];
 }
 

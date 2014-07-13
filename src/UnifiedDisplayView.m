@@ -131,9 +131,13 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[articleList setDelegate:nil];
 	[markReadTimer release];
+	markReadTimer=nil;
 	[guidOfArticleToSelect release];
+	guidOfArticleToSelect=nil;
 	[currentURL release];
+	currentURL=nil;
 	[rowHeightArray release];
+	rowHeightArray=nil;
 	[super dealloc];
 }
 

@@ -211,8 +211,11 @@
 -(void)dealloc
 {
 	[sqlField release];
+	sqlField=nil;
 	[displayName release];
+	displayName=nil;
 	[name release];
+	name=nil;
 	[super dealloc];
 }
 @end
