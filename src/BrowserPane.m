@@ -788,9 +788,9 @@
 {
 	[viewTitle release];
 	[rssPageURL release];
+	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
-	[self handleStopLoading:nil];
 	[webPane close];
 	[lastError release];
 	[pageFilename release];
