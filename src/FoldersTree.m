@@ -624,9 +624,10 @@
 	
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
-		[[Database sharedDatabase] beginTransaction];
+		Database * db = [Database sharedDatabase];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
 		[self setManualSortOrderForNode:rootNode];
-		[[Database sharedDatabase] commitTransaction];
+		}]; //end transaction block
 	}
 	
 	blockSelectionHandler = YES;
@@ -1209,7 +1210,7 @@
 {
 	NSAssert(([array count] % 3) == 0, @"Incorrect number of items in array passed to moveFolders");
 	int count = [array count];
-	int index = 0;
+	__block int index = 0;
 
 	// Need to create a running undo array
 	NSMutableArray * undoArray = [[NSMutableArray alloc] initWithCapacity:count];
@@ -1220,7 +1221,7 @@
 	Database * db = [Database sharedDatabase];
 	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual;
 
-	[db beginTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
 	while (index < count)
 	{
 		int folderId = [[array objectAtIndex:index++] intValue];
@@ -1313,7 +1314,7 @@
 			}
 		}
 	}
-	[db commitTransaction];
+	}]; //end transaction block
 	
 	// If undo array is empty, then nothing has been moved.
 	if ([undoArray count] == 0u)
@@ -1363,9 +1364,10 @@
 /* acceptDrop
  * Accept a drop on or between nodes either from within the folder view or from outside.
  */
--(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)childIndex
+-(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(int)child
 { 
-	NSPasteboard * pb = [info draggingPasteboard]; 
+	__block int childIndex = child;
+	NSPasteboard * pb = [info draggingPasteboard];
 	NSString * type = [pb availableTypeFromArray:[NSArray arrayWithObjects:MA_PBoardType_FolderList, MA_PBoardType_RSSSource, @"WebURLsWithTitlesPboardType", NSStringPboardType, nil]];
 	TreeNode * node = targetItem ? (TreeNode *)targetItem : rootNode;
 
@@ -1424,10 +1426,10 @@
 		// This is an RSS drag using the protocol defined by Ranchero for NetNewsWire. See
 		// http://ranchero.com/netnewswire/rssclipboard.php for more details.
 		//
-		int folderToSelect = -1;
+		__block int folderToSelect = -1;
 		for (index = 0; index < count; ++index)
 		{
-			[db beginTransaction];
+			[db doTransactionWithBlock:^(BOOL *rollback) {
 			NSDictionary * sourceItem = [arrayOfSources objectAtIndex:index];
 			NSString * feedTitle = [sourceItem valueForKey:@"sourceName"];
 			NSString * feedHomePage = [sourceItem valueForKey:@"sourceHomeURL"];
@@ -1446,7 +1448,7 @@
 					folderToSelect = folderId;
 				++childIndex;
 			}
-			[db commitTransaction];
+			}]; //end transaction block
 		}
 
 		// If parent was a group, expand it now
@@ -1468,10 +1470,10 @@
 		int count = [arrayOfURLs count];
 		int index;
 		
-		int folderToSelect = -1;
+		__block int folderToSelect = -1;
 		for (index = 0; index < count; ++index)
 		{
-			[db beginTransaction];
+			[db doTransactionWithBlock:^(BOOL *rollback) {
 			NSString * feedTitle = [arrayOfTitles objectAtIndex:index];
 			NSString * feedURL = [arrayOfURLs objectAtIndex:index];
 			NSURL * draggedURL = [NSURL URLWithString:feedURL];
@@ -1486,7 +1488,7 @@
 					folderToSelect = newFolderId;
 				++childIndex;
 			}
-			[db commitTransaction];
+			}]; //end transaction block
 		}
 		
 		// If parent was a group, expand it now

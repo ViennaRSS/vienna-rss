@@ -470,19 +470,18 @@
 	// Set the criteria condition
 	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
 	
-	[db beginTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
 	if (smartFolderId == -1)
 	{
 		AppController * controller = (AppController *)[NSApp delegate];
 		smartFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
-        [db commitTransaction];
 		[controller selectFolder:smartFolderId];
 	}
 	else
     {
 		[db updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
-        [db commitTransaction];
     }
+    }]; //end transaction block
 
 	[criteriaTree release];
 	

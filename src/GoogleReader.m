@@ -90,6 +90,7 @@ JSONDecoder * jsonDecoder;
 		username=nil;
 		password=nil;
 		APIBaseURL=nil;
+		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReader-refresh", NULL);
 	}
     
     return self;
@@ -191,6 +192,7 @@ JSONDecoder * jsonDecoder;
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
+	dispatch_async(_queue, ^() {
 		
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
@@ -283,16 +285,14 @@ JSONDecoder * jsonDecoder;
 		}
 			
 		Database *db = [Database sharedDatabase];
-		NSInteger newArticlesFromFeed = 0;
+		__block NSInteger newArticlesFromFeed = 0;
 
 		// Here's where we add the articles to the database
 		if ([articleArray count] > 0)
 		{
+			[db doTransactionWithBlock:^(BOOL *rollback) {
 			NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
-
 			[refreshedFolder clearCache];
-			// Should we wrap the entire loop or just individual article updates?
-			[db beginTransaction];
 			//BOOL hasCache = [db initArticleArray:refreshedFolder];
 
 			for (Article * article in articleArray)
@@ -303,10 +303,12 @@ JSONDecoder * jsonDecoder;
 
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-			[db commitTransaction];
+			}]; //end transaction block
 		}
 
 		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
+
+		[db doTransactionWithBlock:^(BOOL *rollback) {
 		// Set the last update date given by the Open Reader server for this folder.
 		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
 		// Set the HTML homepage for this folder.
@@ -315,6 +317,7 @@ JSONDecoder * jsonDecoder;
 			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
 		else
 			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]];
+		}]; //end transaction block
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -385,7 +388,9 @@ JSONDecoder * jsonDecoder;
 
 		// If this folder also requires an image refresh, add that
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
-			[[RefreshManager sharedManager] performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:refreshedFolder waitUntilDone:NO];
+			dispatch_async(_queue, ^() {
+				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
+			});
 
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
@@ -398,8 +403,9 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 
+	}); //block for dispatch_async
 }
 
 // callback
@@ -428,7 +434,10 @@ JSONDecoder * jsonDecoder;
             [guidArray addObject:guid];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		[[Database sharedDatabase] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		Database * db = [Database sharedDatabase];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		}]; //end transaction block
 	}
 }
 
@@ -457,7 +466,10 @@ JSONDecoder * jsonDecoder;
 			[guidArray addObject:guid];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
-		[[Database sharedDatabase] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		Database * db = [Database sharedDatabase];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
+		}]; //end transaction block
 	}
 }
 
@@ -629,7 +641,7 @@ JSONDecoder * jsonDecoder;
 				// NNW nested folder char: — 
 				
 				NSMutableArray * params = [NSMutableArray arrayWithObjects:[[folderNames mutableCopy] autorelease], [NSNumber numberWithInt:MA_Root_Folder], nil];
-				[self performSelectorOnMainThread:@selector(createFolders:) withObject:params waitUntilDone:YES];
+				[self createFolders:params];
 				break; //In case of multiple labels, we retain only the first one
 			} 
 		}
@@ -641,7 +653,7 @@ JSONDecoder * jsonDecoder;
 				rssTitle = [feed objectForKey:@"title"];
 			}
 			NSArray * params = [NSArray arrayWithObjects:feedURL, rssTitle, folderName, nil];
-			[self performSelectorOnMainThread:@selector(createNewSubscription:) withObject:params waitUntilDone:YES];
+			[self createNewSubscription:params];
 		}
 		else
 		{
@@ -683,13 +695,13 @@ JSONDecoder * jsonDecoder;
 	if (nc != nil) {
 		LLog(@"Firing after notification");
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:@"GRSync_Autheticated" object:nil];		
-		[self performSelectorOnMainThread:@selector(submitLoadSubscriptions) withObject:nil waitUntilDone:YES];
+		[self submitLoadSubscriptions];
 	} else {
 		LLog(@"Firing directly");
 
 		if ([self isReady]) {
 			LLog(@"Token available, finish subscription");
-			[self performSelectorOnMainThread:@selector(submitLoadSubscriptions) withObject:nil waitUntilDone:YES];
+			[self submitLoadSubscriptions];
 		} else {
 			LLog(@"Token not available, registering for notification");
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSubscriptions:) name:@"GRSync_Autheticated" object:nil];
@@ -837,6 +849,7 @@ JSONDecoder * jsonDecoder;
 	[APIBaseURL release];
 	[clientAuthToken release];
 	[token release];
+	dispatch_release(_queue);
 	[super dealloc];
 }
 
@@ -890,9 +903,10 @@ JSONDecoder * jsonDecoder;
     
     if (!folder)
     {
-        [db beginTransaction];
-        NSInteger newFolderId = [db addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
-        [db commitTransaction];
+		__block NSInteger newFolderId;
+        [db doTransactionWithBlock:^(BOOL *rollback) {
+	        newFolderId = [db addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
+        }]; //end transaction block
         
         parentNumber = [NSNumber numberWithInteger:newFolderId];
     }

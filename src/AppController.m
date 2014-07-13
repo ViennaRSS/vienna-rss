@@ -2838,9 +2838,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Create then select the new folder.
-	[db beginTransaction];
-	NSInteger folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
-	[db commitTransaction];
+	__block NSInteger folderId;
+	[db doTransactionWithBlock:^(BOOL *rollback) {
+		folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
+	}]; //end transaction block
 	
 	
 	if (folderId != -1)
@@ -2885,9 +2886,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else
 	{ //creates locally
-		[db beginTransaction];
-		NSInteger folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
-		[db commitTransaction];
+		__block NSInteger folderId;
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
+		}]; //end transaction block
 
 		if (folderId != -1)
 		{

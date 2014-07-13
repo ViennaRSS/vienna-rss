@@ -21,6 +21,7 @@
 	NSString * clientAuthToken;
 	NSTimer * tokenTimer;
 	NSTimer * authTimer;
+	dispatch_queue_t _queue;
 }
 
 @property (nonatomic, copy) NSMutableArray * localFeeds;

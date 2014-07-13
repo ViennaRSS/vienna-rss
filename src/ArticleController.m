@@ -419,13 +419,13 @@
 	// We will make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected articles removed.
 	NSMutableArray * currentArrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
 	NSMutableArray * folderArrayCopy = [[NSMutableArray alloc] initWithArray:folderArrayOfArticles];
-	BOOL needFolderRedraw = NO;
-	BOOL needReload = NO;
+	__block BOOL needFolderRedraw = NO;
+	__block BOOL needReload = NO;
 	
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
 	Database * db = [Database sharedDatabase];
-	[db beginTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)
 	{
 		if (![theArticle isRead])
@@ -446,7 +446,7 @@
 		else
 			needReload = YES;
 	}
-	[db commitTransaction];
+	}]; //end transaction block
 	[self setCurrentArrayOfArticles:currentArrayCopy];
 	[currentArrayCopy release];
 	[self setFolderArrayOfArticles:folderArrayCopy];
@@ -479,13 +479,13 @@
 	// Make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected article removed.
 	NSMutableArray * currentArrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
 	NSMutableArray * folderArrayCopy = [[NSMutableArray alloc] initWithArray:folderArrayOfArticles];
-	BOOL needFolderRedraw = NO;
+	__block BOOL needFolderRedraw = NO;
 	
 	// Iterate over every selected article in the table and remove it from
 	// the database.
 	Database * db = [Database sharedDatabase];
 
-	[db beginTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)	
 	{
 		if (![theArticle isRead])
@@ -496,7 +496,7 @@
 			[folderArrayCopy removeObject:theArticle];
 		}
 	}
-	[db commitTransaction];
+	}]; //end transaction block
 	[self setCurrentArrayOfArticles:currentArrayCopy];
 	[currentArrayCopy release];
 	[self setFolderArrayOfArticles:folderArrayCopy];
@@ -548,7 +548,7 @@
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
-	[db beginTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [db folderFromID:[theArticle folderId]];
@@ -558,7 +558,7 @@
 		[db markArticleFlagged:[theArticle folderId] guid:[theArticle guid] isFlagged:flagged];
         [theArticle markFlagged:flagged];
 	}
-	[db commitTransaction];
+	}]; //end transaction block
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
@@ -589,14 +589,10 @@
 	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
 
-	Database * db = [Database sharedDatabase];
-	BOOL singleArticle = [articleArray count] < 2;
-	
-	if (!singleArticle)
-		[db beginTransaction];
-	[self innerMarkReadByArray:articleArray readFlag:readFlag];
-	if (!singleArticle)
-		[db commitTransaction];
+	Database * db = [Database sharedDatabase];	
+	[db doTransactionWithBlock:^(BOOL *rollback) {
+		[self innerMarkReadByArray:articleArray readFlag:readFlag];
+	}]; //end transaction block
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	
 	// The info bar has a count of unread articles so we need to
@@ -652,17 +648,15 @@
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag
 {
 	Database * db = [Database sharedDatabase];
-	NSArray * refArray = nil;
-
-	[db beginTransaction];
-	refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
-	[db commitTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
+	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
 	if (refArray != nil && [refArray count] > 0)
 	{
 		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
+	}]; //end transaction block
 
 	for (Article * theArticle in folderArrayOfArticles)
 	{
@@ -749,8 +743,8 @@
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	Database * db = [Database sharedDatabase];
-	int lastFolderId = -1;
-	BOOL needRefilter = NO;
+	__block int lastFolderId = -1;
+	__block BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -758,7 +752,7 @@
 	[undoManager registerUndoWithTarget:self selector:markAllReadUndoAction object:refArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	
-	[db beginTransaction];
+	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (ArticleReference *ref in refArray)
 	{
 		int folderId = [ref folderId];
@@ -775,7 +769,7 @@
 		}
 		lastFolderId = folderId;
 	}
-	[db commitTransaction];
+	}]; //end transaction block
 	
 	if (lastFolderId != -1)
 	{

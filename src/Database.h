@@ -33,28 +33,51 @@
 	int countOfUnread;
 	NSThread * mainThread;
 	BOOL inTransaction;
-	Folder * trashFolder;
-	Folder * searchFolder;
 	NSString * searchString;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
 	NSMutableDictionary * fieldsByTitle;
 	NSMutableDictionary * foldersDict;
 	NSMutableDictionary * smartfoldersDict;
+	dispatch_queue_t _transactionQueue;
+	dispatch_queue_t _execQueue;
+	Folder * trashFolder;
+	Folder * searchFolder;
 }
+
+@property(nonatomic, retain) Folder * trashFolder;
+@property(nonatomic, retain) Folder * searchFolder;
 
 // General database functions
 +(Database *)sharedDatabase;
 -(BOOL)initDatabase:(NSString *)databaseFileName;
 -(void)syncLastUpdate;
 -(NSInteger)databaseVersion;
--(void)beginTransaction;
--(void)commitTransaction;
 -(void)compactDatabase;
 -(void)reindexDatabase;
 -(NSInteger)countOfUnread;
 -(BOOL)readOnly;
 -(void)close;
+
+/*
+ * Submits a transaction block
+ * An easy way to wrap things up in a transaction can be done like this:
+    [db doTransactionWithBlock:^(BOOL *rollback) {
+        ...
+        [db ...];
+        ...
+
+        if (whoopsSomethingWrongHappened) {
+            *rollback = YES;
+            return;  // leave the block
+        }
+        // etc…
+
+        ...
+
+    }];
+*/
+- (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block;
 
 // Fields functions
 -(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;

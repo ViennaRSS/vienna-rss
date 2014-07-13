@@ -112,7 +112,7 @@
 {
 	NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
 	BOOL hasError = NO;
-	int countImported = 0;
+	__block int countImported = 0;
 
 	if (data != nil)
 	{
@@ -127,9 +127,9 @@
 		else
 		{
 			XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
-			[db beginTransaction];
+			[db doTransactionWithBlock:^(BOOL *rollback) {
 			countImported = [self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
-			[db commitTransaction];
+			}]; //end transaction block
 		}
 		[tree release];
 	}
