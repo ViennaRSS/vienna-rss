@@ -2332,7 +2332,6 @@ static Database * _sharedDatabase = nil;
 		folder = [self folderFromID:folderId];
 		if (folder == nil)
 			return nil;
-		[folder clearCache];
 
 		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
@@ -2343,7 +2342,8 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Time to run the query
-	dispatch_sync(_execQueue, ^() {
+	[self doTransactionWithBlock:^(BOOL *rollback) {
+		[folder clearCache];
 		FMResultSet * results = [sqlDatabase executeQuery:queryString];
 		while ([results next])
 		{
@@ -2375,7 +2375,7 @@ static Database * _sharedDatabase = nil;
 			[article release];
 		}
 		[results close];
-	});
+	}];
     
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
