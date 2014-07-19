@@ -833,7 +833,7 @@ static RefreshManager * _refreshManager = nil;
 				if (articleDate == nil)
 					articleDate = [NSDate date];
 				
-				Article * article = [[Article alloc] initWithGuid:articleGuid];
+				Article * article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
 				[article setFolderId:folderId];
 				[article setAuthor:[newsItem author]];
 				[article setBody:[newsItem description]];
@@ -854,7 +854,6 @@ static RefreshManager * _refreshManager = nil;
 					[article setHasEnclosure:YES];
 				}
 				[articleArray addObject:article];
-				[article release];
 			}
 			
 				// Remember the last modified date

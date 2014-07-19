@@ -237,12 +237,11 @@
 
 		if (isItemExpanded || isItemSelected)
 		{
-			NSDictionary * newDict = [[NSMutableDictionary alloc] init];
+			NSDictionary * newDict = [NSMutableDictionary dictionary];
 			[newDict setValue:[NSNumber numberWithInt:[node nodeId]] forKey:@"NodeID"];
 			[newDict setValue:[NSNumber numberWithBool:isItemExpanded] forKey:@"ExpandedState"];
 			[newDict setValue:[NSNumber numberWithBool:isItemSelected] forKey:@"SelectedState"];
 			[archiveArray addObject:newDict];
-			[newDict release];
 		}
 	}
 	return archiveArray;
@@ -1160,13 +1159,12 @@
 		{
 			NSString * feedURL = [folder feedURL];
 			
-			NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+			NSMutableDictionary * dict = [NSMutableDictionary dictionary];
 			[dict setValue:[folder name] forKey:@"sourceName"];
 			[dict setValue:[folder description] forKey:@"sourceDescription"];
 			[dict setValue:feedURL forKey:@"sourceRSSURL"];
 			[dict setValue:[folder homePage] forKey:@"sourceHomeURL"];
 			[externalDragData addObject:dict];
-			[dict release];
 
 			[stringDragData appendString:feedURL];
 			[stringDragData appendString:@"\n"];

@@ -1028,7 +1028,7 @@
 		[arrayOfURLs addObject:msgLink];
 		[arrayOfTitles addObject:msgTitle];
 
-		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary * articleDict = [NSMutableDictionary dictionary];
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
 		[articleDict setValue:msgLink forKey:@"rssItemLink"];
 		[articleDict setValue:msgText forKey:@"rssItemDescription"];
@@ -1036,7 +1036,6 @@
 		[articleDict setValue:[folder homePage] forKey:@"sourceHomeURL"];
 		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
-		[articleDict release];
 
 		// Plain text
 		[fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, msgText];

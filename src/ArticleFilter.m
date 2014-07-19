@@ -169,11 +169,10 @@ static NSMutableArray * _filterList = nil;
  */
 +(void)createFilter:(NSString *)name tag:(NSInteger)tag comparator:(SEL)comparator
 {
-	ArticleFilter * newFilter = [[ArticleFilter alloc] initWithName:name tag:tag comparator:comparator];
+	ArticleFilter * newFilter = [[[ArticleFilter alloc] initWithName:name tag:tag comparator:comparator] autorelease];
 	if (_filterList == nil)
 		_filterList = [[NSMutableArray alloc] init];
 	[_filterList addObject:newFilter];
-	[newFilter release];
 }
 
 /* dealloc

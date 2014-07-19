@@ -1131,7 +1131,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[menuItem setAction:@selector(openWebElementInNewTab:)];
 					[menuItem setRepresentedObject:imageURL];
 					[menuItem setTag:WebMenuItemTagOther];
-					newMenuItem = [[NSMenuItem alloc] init];
+					newMenuItem = [[NSMenuItem new] autorelease];
 					if (newMenuItem != nil)
 					{
 						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultBrowser]];
@@ -1141,7 +1141,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 						[newMenuItem setTag:WebMenuItemTagOther];
 						[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 					}
-					[newMenuItem release];
 				}
 				break;
 				
@@ -1180,7 +1179,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
 		
 		// Add command to open the current page in the external browser
-		newMenuItem = [[NSMenuItem alloc] init];
+		newMenuItem = [[NSMenuItem new] autorelease];
 		if (newMenuItem != nil)
 		{
 			[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Page in %@", nil), defaultBrowser]];
@@ -1189,10 +1188,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[newMenuItem setTag:WebMenuItemTagOther];
 			[newDefaultMenu addObject:newMenuItem];
 		}
-		[newMenuItem release];
 		
 		// Add command to copy the URL of the current page to the clipboard
-		newMenuItem = [[NSMenuItem alloc] init];
+		newMenuItem = [[NSMenuItem new] autorelease];
 		if (newMenuItem != nil)
 		{
 			[newMenuItem setTitle:NSLocalizedString(@"Copy Page Link to Clipboard", nil)];
@@ -1201,7 +1199,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[newMenuItem setTag:WebMenuItemTagOther];
 			[newDefaultMenu addObject:newMenuItem];
 		}
-		[newMenuItem release];
 	}
 	
 	return [newDefaultMenu autorelease];
@@ -3009,14 +3006,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		if ([folder isRSSFolder])
 		{
-			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
+			XMLSourceWindow * sourceWindow = [[[XMLSourceWindow alloc] initWithFolder:folder] autorelease];
 			
 			if (sourceWindow != nil)
 			{
 				if (sourceWindows == nil)
 					sourceWindows = [[NSMutableArray alloc] init];
 				[sourceWindows addObject:sourceWindow];
-				[sourceWindow release];
 			}
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
 			

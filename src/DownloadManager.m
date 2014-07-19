@@ -340,12 +340,11 @@ static DownloadManager * _sharedDownloadManager = nil;
 	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
 	if (theDownload)
 	{
-		DownloadItem * newItem = [[DownloadItem alloc] init];
+		DownloadItem * newItem = [[DownloadItem new] autorelease];
 		[newItem setState:DOWNLOAD_INIT];
 		[newItem setDownload:theDownload];
 		[newItem setFilename:filename];
 		[downloadsList addObject:newItem];
-		[newItem release];
 
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
 		[theDownload setDestination:filename allowOverwrite:YES];

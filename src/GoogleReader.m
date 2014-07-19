@@ -238,7 +238,7 @@ JSONDecoder * jsonDecoder;
 			
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
 			NSString * articleGuid = [newsItem objectForKey:@"id"];
-			Article *article = [[Article alloc] initWithGuid:articleGuid];
+			Article *article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
 			[article setFolderId:[refreshedFolder itemId]];
 		
 			if ([newsItem objectForKey:@"author"] != nil) {
@@ -289,7 +289,6 @@ JSONDecoder * jsonDecoder;
 				}
 
 			[articleArray addObject:article];
-			[article release];
 		}
 			
 		Database *db = [Database sharedDatabase];

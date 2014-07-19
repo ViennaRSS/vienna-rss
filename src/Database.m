@@ -603,7 +603,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width
 {
-	Field * field = [[Field alloc] init];
+	Field * field = [[Field new] autorelease];
 	if (field != nil)
 	{
 		[field setName:name];
@@ -615,7 +615,6 @@ static Database * _sharedDatabase = nil;
 		[field setSqlField:sqlField];
 		[fieldsOrdered addObject:field];
 		[fieldsByName setValue:field forKey:name];
-		[field release];
 	}
 }
 
@@ -1995,7 +1994,7 @@ static Database * _sharedDatabase = nil;
 				if (!read_flag)
 					++unread_count;
 				
-				Article * article = [[Article alloc] initWithGuid:guid];
+				Article * article = [[[Article alloc] initWithGuid:guid] autorelease];
 				[article markRead:read_flag];
 				[article markFlagged:marked_flag];
 				[article markRevised:revised_flag];
@@ -2006,7 +2005,6 @@ static Database * _sharedDatabase = nil;
 				[article setEnclosure:enclosure];
 				[article setHasEnclosure:hasenclosure_flag];
 				[folder addArticleToCache:article];
-				[article release];
 			}
 			[results close];
         });
@@ -2347,7 +2345,7 @@ static Database * _sharedDatabase = nil;
 		FMResultSet * results = [sqlDatabase executeQuery:queryString];
 		while ([results next])
 		{
-			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
+			Article * article = [[[Article alloc] initWithGuid:[results stringForColumnIndex:0]] autorelease];
 			[article setFolderId:[[results stringForColumnIndex:1] intValue]];
 			[article setParentId:[[results stringForColumnIndex:2] intValue]];
 			[article markRead:[[results stringForColumnIndex:3] intValue]];
@@ -2372,7 +2370,6 @@ static Database * _sharedDatabase = nil;
 			if (![article isRead])
 				++unread_count;
 			
-			[article release];
 		}
 		[results close];
 	}];

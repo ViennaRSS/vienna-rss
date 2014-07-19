@@ -664,7 +664,7 @@
 		// the items array we maintain.
 		if ([nodeName isEqualToString:@"item"])
 		{
-			FeedItem * newItem = [[FeedItem alloc] init];
+			FeedItem * newItem = [[FeedItem new] autorelease];
 			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
 			BOOL hasDetailedContent = NO;
@@ -781,7 +781,6 @@
 				[items addObject:newItem];
 			else
 				[items insertObject:newItem atIndex:indexOfItem];
-			[newItem release];
 		}
 	}
 
@@ -902,7 +901,7 @@
 		// the items array we maintain.
 		if ([nodeName isEqualToString:@"entry"])
 		{
-			FeedItem * newItem = [[FeedItem alloc] init];
+			FeedItem * newItem = [[FeedItem new] autorelease];
 			[newItem setAuthor:defaultAuthor];
 			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
@@ -1041,7 +1040,6 @@
 			// Derive any missing title
 			[self ensureTitle:newItem];
 			[items addObject:newItem];
-			[newItem release];
 		}
 	}
 	

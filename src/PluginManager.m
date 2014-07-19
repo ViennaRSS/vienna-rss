@@ -227,9 +227,8 @@
 	{
 		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"])
 		{
-			SearchMethod * method = [[SearchMethod alloc] initWithDictionary:plugin];
+			SearchMethod * method = [[[SearchMethod alloc] initWithDictionary:plugin] autorelease];
 			[searchMethods addObject:method];
-			[method release];
 		}
 	}
 	return searchMethods;
