@@ -826,7 +826,7 @@
 	}
 	else
 		currentSelectedRow = -1;
-	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
+	if ((currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
 		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;
