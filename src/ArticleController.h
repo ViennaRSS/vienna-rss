@@ -50,8 +50,8 @@
 
 @property (nonatomic, retain) IBOutlet FoldersTree * foldersTree;
 @property (nonatomic, retain) NSView<ArticleBaseView, BaseView> * mainArticleView;
-@property (nonatomic, retain) NSArray * currentArrayOfArticles;
-@property (nonatomic, retain) NSArray * folderArrayOfArticles;
+@property (nonatomic, copy) NSArray * currentArrayOfArticles;
+@property (nonatomic, copy) NSArray * folderArrayOfArticles;
 @property (nonatomic, assign) NSDictionary * articleSortSpecifiers;
 @property (nonatomic, assign) BackTrackArray * backtrackArray;
 
