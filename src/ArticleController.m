@@ -319,6 +319,8 @@
 	{
 		[[[Database sharedDatabase] folderFromID:currentFolderId] clearCache];
 		currentFolderId = newFolderId;
+		[self reloadArrayOfArticles];
+		[self sortArticles];
 		[mainArticleView selectFolderWithFilter:newFolderId];		
 	}
 }

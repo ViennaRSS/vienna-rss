@@ -858,8 +858,6 @@
 	@autoreleasepool {
 		currentSelectedRow = -1;
 		[rowHeightArray removeAllObjects];
-		[articleController reloadArrayOfArticles];
-		[articleController sortArticles];
 		[articleList reloadData];
 		if (guidOfArticleToSelect == nil)
 			[articleList scrollRowToVisible:0];

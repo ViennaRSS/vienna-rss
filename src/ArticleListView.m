@@ -1302,8 +1302,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	[articleList deselectAll:self];
 	currentSelectedRow = -1;
-	[articleController reloadArrayOfArticles];
-	[articleController sortArticles];
 	[articleList reloadData];
 	if (guidOfArticleToSelect == nil)
 		[articleList scrollRowToVisible:0];
