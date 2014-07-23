@@ -47,7 +47,6 @@
 	NSDate * lastModified;
 	NSMutableArray * items;
 	NSMutableArray * orderArray;
-	NSArray * titleTags;
 }
 
 // General functions

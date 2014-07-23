@@ -27,7 +27,6 @@
 @interface RefreshManager : NSObject {
 	NSUInteger maximumConnections;
 	NSUInteger countOfNewArticles;
-	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
