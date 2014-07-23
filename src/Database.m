@@ -74,8 +74,8 @@ static Database * _sharedDatabase = nil;
 		trashFolder = nil;
 		searchFolder = nil;
 		searchString = @"";
-		smartfoldersDict = [[[NSMutableDictionary alloc] init] retain];
-		foldersDict = [[[NSMutableDictionary alloc] init] retain];
+		smartfoldersDict = [[NSMutableDictionary alloc] init];
+		foldersDict = [[NSMutableDictionary alloc] init];
 		_transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
 		_execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
 	}
@@ -440,7 +440,7 @@ static Database * _sharedDatabase = nil;
 	[self syncLastUpdate];
 
 	// Create fields
-	fieldsByName = [[[NSMutableDictionary alloc] init] retain];
+	fieldsByName = [[NSMutableDictionary alloc] init];
 	fieldsOrdered = [[NSMutableArray alloc] init];
 
 	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];

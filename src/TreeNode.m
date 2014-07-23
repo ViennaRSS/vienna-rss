@@ -388,6 +388,8 @@
 	children=nil;
 	[folder release];
 	folder=nil;
+	[progressIndicator release];
+	progressIndicator=nil;
 	[super dealloc];
 }
 @end

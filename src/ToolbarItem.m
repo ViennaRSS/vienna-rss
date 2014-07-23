@@ -88,6 +88,7 @@
 	}
 	else
 	{
+		[smallUserImage release];
 		smallUserImage = [userImage retain];
 		smallUserImageSize = NSMakeSize(12.0, 12.0);
 		smallUserImageRect = userImageRect;
