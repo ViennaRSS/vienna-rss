@@ -91,6 +91,9 @@ static RefreshManager * _refreshManager = nil;
 	return self;
 }
 
+-(dispatch_queue_t)asyncQueue {
+	return _queue;
+}
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];

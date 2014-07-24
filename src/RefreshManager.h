@@ -53,6 +53,7 @@
 -(NSString *)statusMessageDuringRefresh;
 -(void)refreshFavIcon:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
+-(dispatch_queue_t)asyncQueue;
 @end
 
 // Refresh types

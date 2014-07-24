@@ -98,7 +98,6 @@ JSONDecoder * jsonDecoder;
 		username=nil;
 		password=nil;
 		APIBaseURL=nil;
-		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReader-refresh", NULL);
 	}
     
     return self;
@@ -200,7 +199,8 @@ JSONDecoder * jsonDecoder;
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_async(_queue, ^() {
+	dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
+	dispatch_async(queue, ^() {
 		
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
@@ -395,7 +395,7 @@ JSONDecoder * jsonDecoder;
 
 		// If this folder also requires an image refresh, add that
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
-			dispatch_async(_queue, ^() {
+			dispatch_async(queue, ^() {
 				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
 			});
 
@@ -876,7 +876,6 @@ JSONDecoder * jsonDecoder;
 	tokenTimer=nil;
 	[authTimer release];
 	authTimer=nil;
-	dispatch_release(_queue);
 	[super dealloc];
 }
 

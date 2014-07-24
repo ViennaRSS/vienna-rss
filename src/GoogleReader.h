@@ -21,7 +21,6 @@
 	NSString * clientAuthToken;
 	NSTimer * tokenTimer;
 	NSTimer * authTimer;
-	dispatch_queue_t _queue;
 }
 
 +(GoogleReader *)sharedManager;
