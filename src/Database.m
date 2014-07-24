@@ -697,13 +697,15 @@ static Database * _sharedDatabase = nil;
 - (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block {
 	dispatch_sync(_transactionQueue, ^() {
 		@autoreleasepool {
-			BOOL shouldRollback = NO;
-			[self beginTransaction];
-			block(&shouldRollback);
-			if (shouldRollback) {
-				[self rollbackTransaction];
-			} else {
-				[self commitTransaction];
+			@synchronized(self) {
+				BOOL shouldRollback = NO;
+				[self beginTransaction];
+				block(&shouldRollback);
+				if (shouldRollback) {
+					[self rollbackTransaction];
+				} else {
+					[self commitTransaction];
+				}
 			}
         }
     }); //block for dispatch_sync
@@ -2340,7 +2342,7 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Time to run the query
-	[self doTransactionWithBlock:^(BOOL *rollback) {
+	@synchronized(self) {
 		[folder clearCache];
 		FMResultSet * results = [sqlDatabase executeQuery:queryString];
 		while ([results next])
@@ -2372,7 +2374,7 @@ static Database * _sharedDatabase = nil;
 			
 		}
 		[results close];
-	}];
+	};
     
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
