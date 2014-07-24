@@ -663,7 +663,9 @@ static RefreshManager * _refreshManager = nil;
 	if (responseStatusCode == 304)
 	{		
 		// No modification from last check
-		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		}];
 
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
@@ -859,11 +861,6 @@ static RefreshManager * _refreshManager = nil;
 				[articleArray addObject:article];
 			}
 			
-				// Remember the last modified date
-				if (lastModifiedString != nil)
-					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
-		
-		
 			
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0u)
@@ -903,6 +900,10 @@ static RefreshManager * _refreshManager = nil;
             
 			if (feedLink!= nil)
 				[db setFolderHomePage:folderId newHomePage:feedLink];
+
+			// Remember the last modified date
+			if (lastModifiedString != nil)
+				[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
 
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
