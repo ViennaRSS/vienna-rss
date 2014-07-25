@@ -201,12 +201,19 @@
 -(void)dealloc
 {
 	[guid release];
+	guid=nil;
 	[title release];
+	title=nil;
 	[description release];
+	description=nil;
 	[author release];
+	author=nil;
 	[date release];
+	date=nil;
 	[link release];
+	link=nil;
 	[enclosure release];
+	enclosure=nil;
 	[super dealloc];
 }
 @end
@@ -254,7 +261,7 @@
 -(BOOL)parseRichXML:(NSData *)xmlData
 {
 	BOOL success = NO;
-	NS_DURING
+	@try {
 	NSData * parsedXmlData = [self preFlightValidation:xmlData];
 	if (parsedXmlData && [self setData:parsedXmlData])
 	{
@@ -272,9 +279,10 @@
 		else if ((subtree = [self treeByName:@"feed"]) != nil)
 			success = [self initAtomFeed:subtree];
 	}
-	NS_HANDLER
+	}
+	@catch (NSException *error) {
 		success = NO;
-	NS_ENDHANDLER
+	}
 	return success;
 }
 
@@ -286,7 +294,7 @@
 +(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray
 {
 	BOOL success = NO;
-	NS_DURING
+	@try {
 	NSArray * arrayOfTags = [XMLTag parserFromData:xmlData];
 	if (arrayOfTags != nil)
 	{
@@ -325,9 +333,10 @@
 			success = [linkArray count] > 0;
 		}
 	}
-	NS_HANDLER
-	success = NO;
-	NS_ENDHANDLER
+	}
+	@catch (NSException *error) {
+		success = NO;
+	}
 	return success;
 }
 
@@ -655,7 +664,7 @@
 		// the items array we maintain.
 		if ([nodeName isEqualToString:@"item"])
 		{
-			FeedItem * newItem = [[FeedItem alloc] init];
+			FeedItem * newItem = [[FeedItem new] autorelease];
 			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
 			BOOL hasDetailedContent = NO;
@@ -772,7 +781,6 @@
 				[items addObject:newItem];
 			else
 				[items insertObject:newItem atIndex:indexOfItem];
-			[newItem release];
 		}
 	}
 
@@ -893,7 +901,7 @@
 		// the items array we maintain.
 		if ([nodeName isEqualToString:@"entry"])
 		{
-			FeedItem * newItem = [[FeedItem alloc] init];
+			FeedItem * newItem = [[FeedItem new] autorelease];
 			[newItem setAuthor:defaultAuthor];
 			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
@@ -1032,7 +1040,6 @@
 			// Derive any missing title
 			[self ensureTitle:newItem];
 			[items addObject:newItem];
-			[newItem release];
 		}
 	}
 	
@@ -1139,11 +1146,17 @@
 -(void)dealloc
 {
 	[orderArray release];
+	orderArray=nil;
 	[title release];
+	title=nil;
 	[description release];
+	description=nil;
 	[lastModified release];
+	lastModified=nil;
 	[link release];
+	link=nil;
 	[items release];
+	items=nil;
 	[super dealloc];
 }
 @end

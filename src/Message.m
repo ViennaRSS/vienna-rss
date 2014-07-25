@@ -446,7 +446,9 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(void)dealloc
 {
 	[commentsArray release];
+	commentsArray=nil;
 	[articleData release];
+	articleData=nil;
 	[super dealloc];
 }
 @end

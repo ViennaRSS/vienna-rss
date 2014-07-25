@@ -120,7 +120,7 @@
 			// tag name so collect and save it.
 			if (*tagStartPtr != '!')
 			{
-				XMLTag * tag = [[XMLTag alloc] init];
+				XMLTag * tag = [[XMLTag new] autorelease];
 				NSMutableDictionary * tagDict = [[NSMutableDictionary alloc] init];
 				const char * tagEndPtr = tagStartPtr;
 
@@ -183,7 +183,7 @@
 
 				[tag setAttributes:tagDict];
 				[tagArray addObject:tag];
-				[tag release];
+				[tagDict release];
 			}
 			inTag = NO;
 			inQuote = NO;
@@ -201,7 +201,9 @@
 -(void)dealloc
 {
 	[name release];
+	name=nil;
 	[attributes release];
+	attributes=nil;
 	[super dealloc];
 }
 @end

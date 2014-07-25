@@ -104,12 +104,13 @@ static NSArray * iconArray = nil;
 	{
 		NSString * fullFilePath = [[imagesCacheFolder stringByAppendingPathComponent:baseURL] stringByAppendingPathExtension:@"tiff"];
 		NSData *imageData = nil;
-		NS_DURING
+		@try {
 			imageData = [image TIFFRepresentation];
-		NS_HANDLER
+		}
+		@catch (NSException *error) {
 			imageData = nil;
 			NSLog(@"tiff exception with %@", fullFilePath);
-		NS_ENDHANDLER
+		}
 		if (imageData != nil)
 			[[NSFileManager defaultManager] createFileAtPath:fullFilePath contents:imageData attributes:nil];
 	}
@@ -195,6 +196,7 @@ static NSArray * iconArray = nil;
 -(void)dealloc
 {
 	[folderImagesArray release];
+	folderImagesArray=nil;
 	[super dealloc];
 }
 @end
@@ -680,8 +682,10 @@ static NSArray * iconArray = nil;
  */
 -(void)clearCache
 {
-	[cachedArticles removeAllObjects];
-	isCached = NO;
+@autoreleasepool {
+		[cachedArticles removeAllObjects];
+		isCached = NO;
+	}
 }
 
 /* addArticleToCache
@@ -810,8 +814,11 @@ static NSArray * iconArray = nil;
 -(void)dealloc
 {
 	[lastUpdate release];
+	lastUpdate=nil;
 	[attributes release];
+	attributes=nil;
 	[cachedArticles release];
+	cachedArticles=nil;
 	[super dealloc];
 }
 @end

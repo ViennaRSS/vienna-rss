@@ -115,7 +115,7 @@
 		[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
 		
 		// Create a backtrack array
-		[self setBacktrackArray:[[[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]] autorelease]];
+		backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -319,6 +319,8 @@
 	{
 		[[[Database sharedDatabase] folderFromID:currentFolderId] clearCache];
 		currentFolderId = newFolderId;
+		[self reloadArrayOfArticles];
+		[self sortArticles];
 		[mainArticleView selectFolderWithFilter:newFolderId];		
 	}
 }
@@ -417,8 +419,8 @@
 	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
 	
 	// We will make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected articles removed.
-	NSMutableArray * currentArrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
-	NSMutableArray * folderArrayCopy = [[NSMutableArray alloc] initWithArray:folderArrayOfArticles];
+	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
+	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	__block BOOL needFolderRedraw = NO;
 	__block BOOL needReload = NO;
 	
@@ -453,9 +455,7 @@
 	}
 	}]; //end transaction block
 	[self setCurrentArrayOfArticles:currentArrayCopy];
-	[currentArrayCopy release];
 	[self setFolderArrayOfArticles:folderArrayCopy];
-	[folderArrayCopy release];
 	if (needReload)
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
@@ -482,8 +482,8 @@
 -(void)deleteArticlesByArray:(NSArray *)articleArray
 {		
 	// Make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected article removed.
-	NSMutableArray * currentArrayCopy = [[NSMutableArray alloc] initWithArray:currentArrayOfArticles];
-	NSMutableArray * folderArrayCopy = [[NSMutableArray alloc] initWithArray:folderArrayOfArticles];
+	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
+	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	__block BOOL needFolderRedraw = NO;
 	
 	// Iterate over every selected article in the table and remove it from
@@ -508,9 +508,7 @@
 	}
 	}]; //end transaction block
 	[self setCurrentArrayOfArticles:currentArrayCopy];
-	[currentArrayCopy release];
 	[self setFolderArrayOfArticles:folderArrayCopy];
-	[folderArrayCopy release];
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
 	// If any of the articles we deleted were unread then the
@@ -913,16 +911,20 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[mainArticleView release];
-	self.mainArticleView=nil;
+	mainArticleView=nil;
 	[backtrackArray release];
-	self.backtrackArray=nil;
+	backtrackArray=nil;
 	[sortColumnIdentifier release];
+	sortColumnIdentifier=nil;
 	[folderArrayOfArticles release];
-	self.folderArrayOfArticles=nil;
+	folderArrayOfArticles=nil;
 	[currentArrayOfArticles release];
-	self.currentArrayOfArticles=nil;
+	currentArrayOfArticles=nil;
 	[articleSortSpecifiers release];
+	articleSortSpecifiers=nil;
 	[articleToPreserve release];
+	articleToPreserve=nil;
+	[foldersTree release];
 	[super dealloc];
 }
 @end

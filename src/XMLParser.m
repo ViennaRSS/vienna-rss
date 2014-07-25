@@ -37,13 +37,14 @@
 {
 	CFXMLTreeRef newTree;
 
-	NS_DURING
+	@try {
 		newTree = CFXMLTreeCreateFromDataWithError(kCFAllocatorDefault, (CFDataRef)data, NULL, kCFXMLParserNoOptions, kCFXMLNodeCurrentVersion, NULL);
-	NS_HANDLER
+	}
+	@catch (NSException *error) {
 		if (newTree != nil)
 			CFRelease(newTree);
 		newTree = nil;
-	NS_ENDHANDLER
+	}
 	if (newTree != nil)
 	{
 		[self setTreeRef:newTree];

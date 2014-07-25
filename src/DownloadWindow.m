@@ -304,6 +304,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[downloadWindow setDelegate:nil];
+	[table setDelegate:nil];
 	[super dealloc];
 }
 @end

@@ -80,6 +80,7 @@
 -(void)dealloc
 {
 	[guid release];
+	guid=nil;
 	[super dealloc];
 }
 @end

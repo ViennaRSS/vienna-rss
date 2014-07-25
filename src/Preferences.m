@@ -221,18 +221,31 @@ static Preferences * _standardPreferences = nil;
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[defaultDatabase release];
+	defaultDatabase=nil;
 	[imagesFolder release];
+	imagesFolder=nil;
 	[downloadFolder release];
+	downloadFolder=nil;
 	[folderFont release];
+	folderFont=nil;
 	[articleFont release];
+	articleFont=nil;
 	[displayStyle release];
+	displayStyle=nil;
 	[preferencesPath release];
+	preferencesPath=nil;
 	[articleSortDescriptors release];
+	articleSortDescriptors=nil;
 	[profilePath release];
+	profilePath=nil;
 	[feedSourcesFolder release];
+	feedSourcesFolder=nil;
 	[searchMethod release];
+	searchMethod=nil;
 	[syncServer release];
+	syncServer=nil;
 	[syncingUser release];
+	syncingUser=nil;
 	[super dealloc];
 }
 

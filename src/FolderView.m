@@ -416,7 +416,9 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[grayGradient release];
+	grayGradient=nil;
 	[blueGradient release];
+	blueGradient=nil;
 	[super dealloc];
 }
 @end

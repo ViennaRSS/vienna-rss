@@ -27,7 +27,6 @@
 @interface RefreshManager : NSObject {
 	NSUInteger maximumConnections;
 	NSUInteger countOfNewArticles;
-	NSMutableArray * refreshArray;
 	NSMutableArray * authQueue;
 	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
@@ -54,6 +53,7 @@
 -(NSString *)statusMessageDuringRefresh;
 -(void)refreshFavIcon:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
+-(dispatch_queue_t)asyncQueue;
 @end
 
 // Refresh types

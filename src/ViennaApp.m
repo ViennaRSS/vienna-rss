@@ -31,12 +31,6 @@
 #import "UnifiedDisplayView.h"
 #import <WebKit/WebKit.h>
 
-// This is needed for iTunes-like buttons with different option-key personalities.
-OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData) 
-{
-	return CallNextEventHandler(nextHandler, theEvent);
-}
-
 @implementation ViennaApp
 
 /* sendEvent

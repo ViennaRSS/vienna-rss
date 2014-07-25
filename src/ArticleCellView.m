@@ -58,6 +58,9 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:[[controller browserView] primaryTabItemView] name:WebViewProgressFinishedNotification object:articleView];
+	[articleView stopLoading:self];
+	[articleView setUIDelegate:nil];
+	[articleView setFrameLoadDelegate:nil];
 	[articleView release], articleView=nil;
 	[progressIndicator release], progressIndicator=nil;
 
@@ -75,6 +78,7 @@
 							   NSWidth([self frame]) - XPOS_IN_CELL,
 							   DEFAULT_CELL_HEIGHT);
 	//set the new frame to the webview
+	[articleView stopLoading:self];
 	[articleView setFrame:newWebViewRect];
 	[self setInProgress:YES];
 	[articleView clearHTML];

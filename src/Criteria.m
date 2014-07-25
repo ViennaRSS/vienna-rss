@@ -178,7 +178,9 @@
 -(void)dealloc
 {
 	[value release];
+	value=nil;
 	[field release];
+	field=nil;
 	[super dealloc];
 }
 @end
@@ -335,6 +337,7 @@
 -(void)dealloc
 {
 	[criteriaTree release];
+	criteriaTree=nil;
 	[super dealloc];
 }
 @end

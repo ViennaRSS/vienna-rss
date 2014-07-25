@@ -129,10 +129,15 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[articleList setDelegate:nil];
 	[markReadTimer release];
+	markReadTimer=nil;
 	[guidOfArticleToSelect release];
+	guidOfArticleToSelect=nil;
 	[currentURL release];
+	currentURL=nil;
 	[rowHeightArray release];
+	rowHeightArray=nil;
 	[super dealloc];
 }
 
@@ -821,7 +826,7 @@
 	}
 	else
 		currentSelectedRow = -1;
-	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
+	if ((currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
 		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;
@@ -850,15 +855,15 @@
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	currentSelectedRow = -1;
-	[rowHeightArray removeAllObjects];
-	[articleController reloadArrayOfArticles];
-	[articleController sortArticles];
-	[articleList reloadData];
-	if (guidOfArticleToSelect == nil)
-		[articleList scrollRowToVisible:0];
-	else
-		[self selectArticleAfterReload];
+	@autoreleasepool {
+		currentSelectedRow = -1;
+		[rowHeightArray removeAllObjects];
+		[articleList reloadData];
+		if (guidOfArticleToSelect == nil)
+			[articleList scrollRowToVisible:0];
+		else
+			[self selectArticleAfterReload];
+	}
 }
 
 /* handleRefreshArticle
@@ -1023,7 +1028,7 @@
 		[arrayOfURLs addObject:msgLink];
 		[arrayOfTitles addObject:msgTitle];
 
-		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary * articleDict = [NSMutableDictionary dictionary];
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
 		[articleDict setValue:msgLink forKey:@"rssItemLink"];
 		[articleDict setValue:msgText forKey:@"rssItemDescription"];
@@ -1031,7 +1036,6 @@
 		[articleDict setValue:[folder homePage] forKey:@"sourceHomeURL"];
 		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
-		[articleDict release];
 
 		// Plain text
 		[fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, msgText];

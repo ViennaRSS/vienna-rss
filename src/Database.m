@@ -74,8 +74,8 @@ static Database * _sharedDatabase = nil;
 		trashFolder = nil;
 		searchFolder = nil;
 		searchString = @"";
-		smartfoldersDict = [[[NSMutableDictionary alloc] init] retain];
-		foldersDict = [[[NSMutableDictionary alloc] init] retain];
+		smartfoldersDict = [[NSMutableDictionary alloc] init];
+		foldersDict = [[NSMutableDictionary alloc] init];
 		_transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
 		_execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
 	}
@@ -440,7 +440,7 @@ static Database * _sharedDatabase = nil;
 	[self syncLastUpdate];
 
 	// Create fields
-	fieldsByName = [[[NSMutableDictionary alloc] init] retain];
+	fieldsByName = [[NSMutableDictionary alloc] init];
 	fieldsOrdered = [[NSMutableArray alloc] init];
 
 	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
@@ -603,7 +603,7 @@ static Database * _sharedDatabase = nil;
  */
 -(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width
 {
-	Field * field = [[Field alloc] init];
+	Field * field = [[Field new] autorelease];
 	if (field != nil)
 	{
 		[field setName:name];
@@ -615,7 +615,6 @@ static Database * _sharedDatabase = nil;
 		[field setSqlField:sqlField];
 		[fieldsOrdered addObject:field];
 		[fieldsByName setValue:field forKey:name];
-		[field release];
 	}
 }
 
@@ -698,13 +697,15 @@ static Database * _sharedDatabase = nil;
 - (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block {
 	dispatch_sync(_transactionQueue, ^() {
 		@autoreleasepool {
-			BOOL shouldRollback = NO;
-			[self beginTransaction];
-			block(&shouldRollback);
-			if (shouldRollback) {
-				[self rollbackTransaction];
-			} else {
-				[self commitTransaction];
+			@synchronized(self) {
+				BOOL shouldRollback = NO;
+				[self beginTransaction];
+				block(&shouldRollback);
+				if (shouldRollback) {
+					[self rollbackTransaction];
+				} else {
+					[self commitTransaction];
+				}
 			}
         }
     }); //block for dispatch_sync
@@ -1995,7 +1996,7 @@ static Database * _sharedDatabase = nil;
 				if (!read_flag)
 					++unread_count;
 				
-				Article * article = [[Article alloc] initWithGuid:guid];
+				Article * article = [[[Article alloc] initWithGuid:guid] autorelease];
 				[article markRead:read_flag];
 				[article markFlagged:marked_flag];
 				[article markRevised:revised_flag];
@@ -2006,7 +2007,6 @@ static Database * _sharedDatabase = nil;
 				[article setEnclosure:enclosure];
 				[article setHasEnclosure:hasenclosure_flag];
 				[folder addArticleToCache:article];
-				[article release];
 			}
 			[results close];
         });
@@ -2332,7 +2332,6 @@ static Database * _sharedDatabase = nil;
 		folder = [self folderFromID:folderId];
 		if (folder == nil)
 			return nil;
-		[folder clearCache];
 
 		// Construct a criteria tree for this query
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
@@ -2343,11 +2342,12 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Time to run the query
-	dispatch_sync(_execQueue, ^() {
+	@synchronized(self) {
+		[folder clearCache];
 		FMResultSet * results = [sqlDatabase executeQuery:queryString];
 		while ([results next])
 		{
-			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
+			Article * article = [[[Article alloc] initWithGuid:[results stringForColumnIndex:0]] autorelease];
 			[article setFolderId:[[results stringForColumnIndex:1] intValue]];
 			[article setParentId:[[results stringForColumnIndex:2] intValue]];
 			[article markRead:[[results stringForColumnIndex:3] intValue]];
@@ -2372,10 +2372,9 @@ static Database * _sharedDatabase = nil;
 			if (![article isRead])
 				++unread_count;
 			
-			[article release];
 		}
 		[results close];
-	});
+	};
     
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
@@ -2632,14 +2631,22 @@ static Database * _sharedDatabase = nil;
  */
 -(void)dealloc
 {
+	[trashFolder release];
+	trashFolder=nil;
+	[searchFolder release];
+	searchFolder=nil;
 	[searchString release];
+	searchString=nil;
 	[foldersDict release];
+	foldersDict=nil;
 	[smartfoldersDict release];
+	smartfoldersDict=nil;
 	dispatch_release(_execQueue);
 	dispatch_release(_transactionQueue);
 	if (sqlDatabase)
 		[self close];
 	[sqlDatabase release];
+	sqlDatabase=nil;
 	[super dealloc];
 }
 @end

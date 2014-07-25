@@ -244,10 +244,15 @@
 -(void)dealloc
 {
 	[selectedIdentifier release];
+	selectedIdentifier=nil;
 	[blankView release];
+	blankView=nil;
 	[prefPanes release];
+	prefPanes=nil;
 	[prefsIdentifiers release];
+	prefsIdentifiers=nil;
 	[prefsDict release];
+	prefsDict=nil;
 	[super dealloc];
 }
 @end

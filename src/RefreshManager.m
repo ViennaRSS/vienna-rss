@@ -91,6 +91,9 @@ static RefreshManager * _refreshManager = nil;
 	return self;
 }
 
+-(dispatch_queue_t)asyncQueue {
+	return _queue;
+}
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
@@ -594,8 +597,6 @@ static RefreshManager * _refreshManager = nil;
     [controller showUnreadCountOnApplicationIconAndWindowTitle];
     
     [self setFolderUpdatingFlag:folder flag:NO];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
 }
 
 /* folderRefreshRedirect
@@ -637,8 +638,6 @@ static RefreshManager * _refreshManager = nil;
 	NSInteger folderId = [folder itemId];
 	Database * db = [Database sharedDatabase];	
 	
-    [self syncFinishedForFolder:folder];
-
      // hack for handling file:// URLs
 	if ([url isFileURL])
 	{
@@ -660,11 +659,14 @@ static RefreshManager * _refreshManager = nil;
 	if (responseStatusCode == 304)
 	{		
 		// No modification from last check
-		[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
+		}];
 
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+		[self syncFinishedForFolder:folder];
 		return;
 	}
 	else if (isCancelled) 
@@ -705,6 +707,8 @@ static RefreshManager * _refreshManager = nil;
 		[connectorItem setStatus:NSLocalizedString(@"Error", nil)];
 		[self setFolderErrorFlag:folder flag:YES];
 	}
+
+    [self syncFinishedForFolder:folder];
 
 	}); //block for dispatch_async
 };
@@ -833,7 +837,7 @@ static RefreshManager * _refreshManager = nil;
 				if (articleDate == nil)
 					articleDate = [NSDate date];
 				
-				Article * article = [[Article alloc] initWithGuid:articleGuid];
+				Article * article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
 				[article setFolderId:folderId];
 				[article setAuthor:[newsItem author]];
 				[article setBody:[newsItem description]];
@@ -854,14 +858,8 @@ static RefreshManager * _refreshManager = nil;
 					[article setHasEnclosure:YES];
 				}
 				[articleArray addObject:article];
-				[article release];
 			}
 			
-				// Remember the last modified date
-				if (lastModifiedString != nil)
-					[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
-		
-		
 			
 			// Here's where we add the articles to the database
 			if ([articleArray count] > 0u)
@@ -902,6 +900,10 @@ static RefreshManager * _refreshManager = nil;
 			if (feedLink!= nil)
 				[db setFolderHomePage:folderId newHomePage:feedLink];
 
+			// Remember the last modified date
+			if (lastModifiedString != nil)
+				[db setFolderLastUpdateString:folderId lastUpdateString:lastModifiedString];
+
 			// Set the last update date for this folder.
 			[db setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 			
@@ -910,9 +912,6 @@ static RefreshManager * _refreshManager = nil;
 			// Mark the feed as succeeded
 			[self setFolderErrorFlag:folder flag:NO];
 
-			// Let interested callers know that the folder has changed.
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
-				
 		};
 				  
 		// Send status to the activity log
@@ -931,11 +930,6 @@ static RefreshManager * _refreshManager = nil;
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 	
-    	// Unread count may have changed
-    	dispatch_async(dispatch_get_main_queue(), ^() {
-    		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
-    	 });
-
 		// If this folder also requires an image refresh, do that
 		if (([folder flags] & MA_FFlag_CheckForImage))
 			[self refreshFavIcon:folder];
@@ -1075,8 +1069,11 @@ static RefreshManager * _refreshManager = nil;
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pumpTimer release];
+	pumpTimer=nil;
 	[authQueue release];
+	authQueue=nil;
 	[networkQueue release];
+	networkQueue=nil;
 	dispatch_release(_queue);
 	[super dealloc];
 }

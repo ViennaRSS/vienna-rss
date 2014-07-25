@@ -246,10 +246,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 	currentHTML = [[NSString alloc] initWithString: @"<HTML></HTML>"];
 	
 	// Load a blank HTML page.
-	NSString * htmlText = [[NSString alloc] initWithString: @"<HTML></HTML>"];
+	NSString * htmlText = @"<HTML></HTML>";
 	[[self mainFrame] loadHTMLString:htmlText
 					   baseURL:[NSURL URLWithString:@""]];
-	[htmlText release];
 }
 
 /* setHTML
@@ -373,8 +372,13 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[cssStylesheet release];
+	cssStylesheet=nil;
 	[htmlTemplate release];
+	htmlTemplate=nil;
 	[currentHTML release];
+	currentHTML=nil;
+	[jsScript release];
+	jsScript=nil;
 	[super dealloc];
 }
 @end

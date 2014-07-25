@@ -308,7 +308,7 @@
  */
 -(void)saveOpenTabs
 {
-	NSMutableArray *tabLinks = [[NSMutableArray alloc] initWithCapacity:[self countOfTabs]];
+	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:[self countOfTabs]];
 	
 	for (NSTabViewItem * tabViewItem in [tabView tabViewItems])
 	{
@@ -319,7 +319,6 @@
 	}
 
 	[[Preferences standardPreferences] setObject:tabLinks forKey:MAPref_TabList];
-	[tabLinks release];
 
 	[[Preferences standardPreferences] savePreferences];
 }
@@ -331,8 +330,11 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[tabBarControl release];
+	tabBarControl=nil;
 	[primaryTabItemView release];
+	primaryTabItemView=nil;
 	[tabView release];
+	tabView=nil;
 	[super dealloc];
 }
 @end

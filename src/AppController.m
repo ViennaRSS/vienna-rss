@@ -1131,7 +1131,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[menuItem setAction:@selector(openWebElementInNewTab:)];
 					[menuItem setRepresentedObject:imageURL];
 					[menuItem setTag:WebMenuItemTagOther];
-					newMenuItem = [[NSMenuItem alloc] init];
+					newMenuItem = [[NSMenuItem new] autorelease];
 					if (newMenuItem != nil)
 					{
 						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultBrowser]];
@@ -1141,7 +1141,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 						[newMenuItem setTag:WebMenuItemTagOther];
 						[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 					}
-					[newMenuItem release];
 				}
 				break;
 				
@@ -1180,7 +1179,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
 		
 		// Add command to open the current page in the external browser
-		newMenuItem = [[NSMenuItem alloc] init];
+		newMenuItem = [[NSMenuItem new] autorelease];
 		if (newMenuItem != nil)
 		{
 			[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Page in %@", nil), defaultBrowser]];
@@ -1189,10 +1188,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[newMenuItem setTag:WebMenuItemTagOther];
 			[newDefaultMenu addObject:newMenuItem];
 		}
-		[newMenuItem release];
 		
 		// Add command to copy the URL of the current page to the clipboard
-		newMenuItem = [[NSMenuItem alloc] init];
+		newMenuItem = [[NSMenuItem new] autorelease];
 		if (newMenuItem != nil)
 		{
 			[newMenuItem setTitle:NSLocalizedString(@"Copy Page Link to Clipboard", nil)];
@@ -1201,7 +1199,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			[newMenuItem setTag:WebMenuItemTagOther];
 			[newDefaultMenu addObject:newMenuItem];
 		}
-		[newMenuItem release];
 	}
 	
 	return [newDefaultMenu autorelease];
@@ -2454,9 +2451,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
-		// Refresh the current folder.
-		[articleController refreshCurrentFolder];
-		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles] + [[GoogleReader sharedManager] countOfNewArticles];
 		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce)
@@ -3012,14 +3006,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		if ([folder isRSSFolder])
 		{
-			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
+			XMLSourceWindow * sourceWindow = [[[XMLSourceWindow alloc] initWithFolder:folder] autorelease];
 			
 			if (sourceWindow != nil)
 			{
 				if (sourceWindows == nil)
 					sourceWindows = [[NSMutableArray alloc] init];
 				[sourceWindows addObject:sourceWindow];
-				[sourceWindow release];
 			}
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sourceWindowWillClose:) name:NSWindowWillCloseNotification object:sourceWindow];
 			
@@ -3818,8 +3811,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	NSMutableString *mailtoLink = nil;
 	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
-	CFStringRef title;
-	CFStringRef link;
+	NSString * title;
+	NSString * link;
 	Article * currentArticle;
 	
 	// If the active tab is a web view, mail the URL ...
@@ -3832,8 +3825,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			title = percentEscape([browserView tabItemViewTitle:theView]);
 			link = percentEscape(viewLink);
 			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
-			CFRelease(title);
-			CFRelease(link);
 		}
 	}
 	else
@@ -3848,8 +3839,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 				title = percentEscape([currentArticle title]);
 				link = percentEscape([currentArticle link]);
 				mailtoLink = [NSMutableString stringWithFormat: @"mailto:?subject=%@&body=%@", title, link];
-				CFRelease(title);
-				CFRelease(link);
 			}
 			else
 			{
@@ -3859,8 +3848,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					title = percentEscape([currentArticle title]);
 					link = percentEscape([currentArticle link]);
 					[mailtoLink appendFormat: @"%@%@%@%@%@", title, mailtoLineBreak, link, mailtoLineBreak, mailtoLineBreak];
-					CFRelease(title);
-					CFRelease(link);
 				}
 			}
 		}
@@ -4710,6 +4697,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)dealloc
 {
+	[mainWindow setDelegate:nil];
+	[splitView1 setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[pluginManager release];
 	[scriptsMenuItem release];

@@ -128,6 +128,7 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[folder release];
+	folder=nil;
 	[super dealloc];
 }
 @end

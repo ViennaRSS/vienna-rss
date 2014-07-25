@@ -182,7 +182,9 @@
 -(void)dealloc 
 { 
 	[friendlyName release]; 
+	friendlyName=nil;
 	[searchQueryString release]; 
+	searchQueryString=nil;
 	[super dealloc]; 
 }
 

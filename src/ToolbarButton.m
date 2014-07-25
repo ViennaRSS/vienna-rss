@@ -173,9 +173,13 @@
 -(void)dealloc
 {
 	[image release];
+	image=nil;
 	[alternateImage release];
+	alternateImage=nil;
 	[smallImage release];
+	smallImage=nil;
 	[smallAlternateImage release];
+	smallAlternateImage=nil;
 	[super dealloc];
 }
 @end

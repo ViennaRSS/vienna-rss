@@ -171,6 +171,7 @@
 -(void)dealloc
 {
 	[enclosureFilename release];
+	enclosureFilename=nil;
 	[super dealloc];
 }
 @end

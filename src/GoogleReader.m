@@ -57,6 +57,13 @@ enum GoogleReaderStatus {
 	isAuthenticated
 } googleReaderStatus;
 
+@interface GoogleReader()
+@property (nonatomic, copy) NSMutableArray * localFeeds;
+@property (nonatomic, retain) NSString *token;
+@property (nonatomic, retain) NSString *clientAuthToken;
+@property (nonatomic, retain) NSTimer * tokenTimer;
+@property (nonatomic, retain) NSTimer * authTimer;
+@end
 
 @implementation GoogleReader
 
@@ -91,7 +98,6 @@ JSONDecoder * jsonDecoder;
 		username=nil;
 		password=nil;
 		APIBaseURL=nil;
-		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReader-refresh", NULL);
 	}
     
     return self;
@@ -193,7 +199,8 @@ JSONDecoder * jsonDecoder;
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_async(_queue, ^() {
+	dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
+	dispatch_async(queue, ^() {
 		
 	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
@@ -231,7 +238,7 @@ JSONDecoder * jsonDecoder;
 			
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
 			NSString * articleGuid = [newsItem objectForKey:@"id"];
-			Article *article = [[Article alloc] initWithGuid:articleGuid];
+			Article *article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
 			[article setFolderId:[refreshedFolder itemId]];
 		
 			if ([newsItem objectForKey:@"author"] != nil) {
@@ -282,7 +289,6 @@ JSONDecoder * jsonDecoder;
 				}
 
 			[articleArray addObject:article];
-			[article release];
 		}
 			
 		Database *db = [Database sharedDatabase];
@@ -389,7 +395,7 @@ JSONDecoder * jsonDecoder;
 
 		// If this folder also requires an image refresh, add that
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
-			dispatch_async(_queue, ^() {
+			dispatch_async(queue, ^() {
 				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
 			});
 
@@ -513,6 +519,7 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:username forKey:@"Email"];
 	[myRequest setPostValue:password forKey:@"Passwd"];
 	[myRequest setUseCookiePersistence:NO];
+	[myRequest setTimeOutSeconds:180];
 	[myRequest startSynchronous];
 
 	NSString * response = [myRequest responseString];
@@ -523,10 +530,12 @@ JSONDecoder * jsonDecoder;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
 		[[NSApp delegate] setStatusMessage:nil persist:NO];
 		googleReaderStatus = notAuthenticated;
+		[myRequest clearDelegatesAndCancel];
 		return;
 	}
 
 	NSArray * components = [response componentsSeparatedByString:@"\n"];
+	[myRequest clearDelegatesAndCancel];
 
 	//NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
 	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
@@ -549,6 +558,7 @@ JSONDecoder * jsonDecoder;
 
     googleReaderStatus = isAuthenticating;
 	[request setUseCookiePersistence:NO];
+	[request setTimeOutSeconds:180];
     [request startSynchronous];
     if ([request error])
     {
@@ -558,10 +568,12 @@ JSONDecoder * jsonDecoder;
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
 		[self resetAuthentication];
+		[request clearDelegatesAndCancel];
 		return;
 	}
     // Save token
     [self setToken:[request responseString]];
+    [request clearDelegatesAndCancel];
 	googleReaderStatus = isAuthenticated;
 
     if (tokenTimer == nil || ![tokenTimer isValid])
@@ -595,7 +607,8 @@ JSONDecoder * jsonDecoder;
 	[subscriptionRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[subscriptionRequest setUseCookiePersistence:NO];
 	LLog(@"Starting subscriptionRequest");
-	[subscriptionRequest startAsynchronous];		
+	[subscriptionRequest setTimeOutSeconds:180];
+	[[RefreshManager sharedManager] addConnection:subscriptionRequest];
 	LLog(@"subscriptionRequest submitted");	
 }
 
@@ -718,10 +731,11 @@ JSONDecoder * jsonDecoder;
 	[request setPostValue:token forKey:@"T"];
    	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[request setUseCookiePersistence:NO];
-
+	[request setTimeOutSeconds:180];
     // Needs to be synchronous so UI doesn't refresh too soon.
     [request startSynchronous];
     LLog(@"Subscribe response status code: %d", [request responseStatusCode]);
+    [request clearDelegatesAndCancel];
 }
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
@@ -735,8 +749,8 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest setUseCookiePersistence:NO];
-
-	[myRequest startAsynchronous];		
+	[myRequest setTimeOutSeconds:180];
+	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
 /* setFolderName
@@ -757,8 +771,10 @@ JSONDecoder * jsonDecoder;
 	[request setPostValue:token forKey:@"T"];
 	[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[request setUseCookiePersistence:NO];
+	[request setTimeOutSeconds:180];
     [request startSynchronous];
     LLog(@"Set folder response status code: %d", [request responseStatusCode]);
+    [request clearDelegatesAndCancel];
 }
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
@@ -782,7 +798,8 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest setUseCookiePersistence:NO];
-	[myRequest startAsynchronous];
+	[myRequest setTimeOutSeconds:180];
+	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
 // callback
@@ -808,7 +825,8 @@ JSONDecoder * jsonDecoder;
 	[request1 setPostValue:token forKey:@"T"];
 	[request1 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[request1 setUseCookiePersistence:NO];
-	[request1 startAsynchronous];
+	[request1 setTimeOutSeconds:180];
+	[[RefreshManager sharedManager] addConnection:request1];
 }
 
 
@@ -831,21 +849,33 @@ JSONDecoder * jsonDecoder;
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest setUseCookiePersistence:NO];
-	[myRequest startAsynchronous];
+	[myRequest setTimeOutSeconds:180];
+	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
 
 -(void)dealloc 
 {
 	[localFeeds release];
+	localFeeds=nil;
 	[jsonDecoder release];
+	jsonDecoder=nil;
     [username release];
+    username=nil;
 	[openReaderHost release];
+	openReaderHost=nil;
 	[password release];
+	password=nil;
 	[APIBaseURL release];
+	APIBaseURL=nil;
 	[clientAuthToken release];
+	clientAuthToken=nil;
 	[token release];
-	dispatch_release(_queue);
+	token=nil;
+	[tokenTimer release];
+	tokenTimer=nil;
+	[authTimer release];
+	authTimer=nil;
 	[super dealloc];
 }
 

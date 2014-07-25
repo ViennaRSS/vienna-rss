@@ -1302,8 +1302,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	[articleList deselectAll:self];
 	currentSelectedRow = -1;
-	[articleController reloadArrayOfArticles];
-	[articleController sortArticles];
 	[articleList reloadData];
 	if (guidOfArticleToSelect == nil)
 		[articleList scrollRowToVisible:0];
@@ -1801,7 +1799,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		[arrayOfURLs addObject:msgLink];
 		[arrayOfTitles addObject:msgTitle];
 
-		NSMutableDictionary * articleDict = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary * articleDict = [NSMutableDictionary dictionary];
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
 		[articleDict setValue:msgLink forKey:@"rssItemLink"];
 		[articleDict setValue:msgText forKey:@"rssItemDescription"];
@@ -1809,7 +1807,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		[articleDict setValue:[folder homePage] forKey:@"sourceHomeURL"];
 		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
-		[articleDict release];
 
 		// Plain text
 		[fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, msgText];
@@ -1959,21 +1956,40 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[articleText setUIDelegate:nil];
+	[articleText setFrameLoadDelegate:nil];
+	[splitView2 setDelegate:nil];
+	[articleList setDelegate:nil];
 	[markReadTimer release];
+	markReadTimer=nil;
 	[articleListFont release];
+	articleListFont=nil;
 	[articleListUnreadFont release];
+	articleListUnreadFont=nil;
 	[reportCellDict release];
+	reportCellDict=nil;
 	[unreadReportCellDict release];
+	unreadReportCellDict=nil;
 	[guidOfArticleToSelect release];
+	guidOfArticleToSelect=nil;
 	[unreadTopLineSelectionDict release];
+	unreadTopLineSelectionDict=nil;
 	[selectionDict release];
+	selectionDict=nil;
 	[unreadTopLineDict release];
+	unreadTopLineDict=nil;
 	[topLineDict release];
+	topLineDict=nil;
 	[middleLineDict release];
+	middleLineDict=nil;
 	[linkLineDict release];
+	linkLineDict=nil;
 	[bottomLineDict release];
+	bottomLineDict=nil;
 	[lastError release];
+	lastError=nil;
 	[currentURL release];
+	currentURL=nil;
 	[super dealloc];
 }
 @end
