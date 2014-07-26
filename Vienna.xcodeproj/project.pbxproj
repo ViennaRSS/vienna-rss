@@ -601,8 +601,6 @@
 		43EE83FA165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF1165EAA6E000997FB /* GroupFolder.strings */; };
 		43EE83FB165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF3165EAA6E000997FB /* InfoPlist.strings */; };
 		43EE83FC165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF5165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE83FD165EAA70000997FB /* designable.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF8165EAA6E000997FB /* designable.nib */; };
-		43EE83FE165EAA70000997FB /* keyedobjects.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF9165EAA6E000997FB /* keyedobjects.nib */; };
 		43EE83FF165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FFA165EAA6E000997FB /* InfoWindow.strings */; };
 		43EE8400165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FFC165EAA6E000997FB /* Localizable.strings */; };
 		43EE8401165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FFE165EAA6E000997FB /* RSSFeed.nib */; };
@@ -1229,8 +1227,6 @@
 		43EE7FF2165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = GroupFolder.strings; sourceTree = "<group>"; };
 		43EE7FF4165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		43EE7FF6165EAA6E000997FB /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = InfoWindow.nib; sourceTree = "<group>"; };
-		43EE7FF8165EAA6E000997FB /* designable.nib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = designable.nib; path = lproj/en.lproj/InfoWindow.nib.original/designable.nib; sourceTree = SOURCE_ROOT; };
-		43EE7FF9165EAA6E000997FB /* keyedobjects.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = keyedobjects.nib; path = lproj/en.lproj/InfoWindow.nib.original/keyedobjects.nib; sourceTree = SOURCE_ROOT; };
 		43EE7FFB165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = InfoWindow.strings; sourceTree = "<group>"; };
 		43EE7FFD165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		43EE7FFF165EAA6E000997FB /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = RSSFeed.nib; sourceTree = "<group>"; };
@@ -2475,7 +2471,6 @@
 				43EE7FF1165EAA6E000997FB /* GroupFolder.strings */,
 				43EE7FF3165EAA6E000997FB /* InfoPlist.strings */,
 				43EE7FF5165EAA6E000997FB /* InfoWindow.nib */,
-				43EE7FF7165EAA6E000997FB /* InfoWindow.nib.original */,
 				43EE7FFA165EAA6E000997FB /* InfoWindow.strings */,
 				43EE7FFC165EAA6E000997FB /* Localizable.strings */,
 				43EE7FFE165EAA6E000997FB /* RSSFeed.nib */,
@@ -2488,16 +2483,6 @@
 			);
 			name = en.lproj;
 			path = lproj/en.lproj;
-			sourceTree = SOURCE_ROOT;
-		};
-		43EE7FF7165EAA6E000997FB /* InfoWindow.nib.original */ = {
-			isa = PBXGroup;
-			children = (
-				43EE7FF8165EAA6E000997FB /* designable.nib */,
-				43EE7FF9165EAA6E000997FB /* keyedobjects.nib */,
-			);
-			name = InfoWindow.nib.original;
-			path = lproj/en.lproj/InfoWindow.nib.original;
 			sourceTree = SOURCE_ROOT;
 		};
 		43EE8016165EAA6E000997FB /* es.lproj */ = {
@@ -3651,7 +3636,6 @@
 				43E6960D168A05F300AB4C09 /* AppearancesPreferences.strings in Resources */,
 				43E6960E168A05F300AB4C09 /* AppearancesPreferences.strings in Resources */,
 				43E6960F168A05F300AB4C09 /* AppearancesPreferences.strings in Resources */,
-				43EE83FD165EAA70000997FB /* designable.nib in Resources */,
 				43E69610168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E69611168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E69612168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
@@ -3880,7 +3864,6 @@
 				43E696E5168A05F300AB4C09 /* InfoWindow.strings in Resources */,
 				43E696E6168A05F300AB4C09 /* InfoWindow.strings in Resources */,
 				43E696E7168A05F300AB4C09 /* InfoWindow.strings in Resources */,
-				43EE83FE165EAA70000997FB /* keyedobjects.nib in Resources */,
 				43E696E8168A05F300AB4C09 /* Localizable.strings in Resources */,
 				43E696E9168A05F300AB4C09 /* Localizable.strings in Resources */,
 				43E696EA168A05F300AB4C09 /* Localizable.strings in Resources */,
