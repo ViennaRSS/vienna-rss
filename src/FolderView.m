@@ -384,12 +384,25 @@
 	[self prvtResizeTheFieldEditor];
 }
 
+/* textDidBeginEditing
+ * in order to handle user's change of mind, backup the current folder name
+ */
+- (void)textDidBeginEditing:(NSNotification *)aNotification
+{
+	NSText * editor = [[self window] fieldEditor:YES forObject:self];
+	backupString = [[editor string] copy];
+	[super textDidBeginEditing:aNotification];
+}
+
 /* textDidEndEditing
  * Code from Omni that ensures that when the user hits the Enter key, we finish editing and do NOT move to the next
  * cell which is the default outlineview control cell editing behaviour.
  */
 -(void)textDidEndEditing:(NSNotification *)notification;
 {
+	[backupString release];
+	backupString=nil;
+
 	// This is ugly, but just about the only way to do it. NSTableView is determined to select and edit something else, even the
 	// text field that it just finished editing, unless we mislead it about what key was pressed to end editing.
 	if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
@@ -409,12 +422,28 @@
 		[super textDidEndEditing:notification];
 }
 
+/* cancelOperation
+ * If Escape key or Command-. is pressed,
+ * stop editing and restore folder's name from backup
+ */
+- (void)cancelOperation:(id)sender
+{
+	if (backupString !=nil)
+	{
+		NSText * editor = [[self window] fieldEditor:YES forObject:self];
+		[editor setString:backupString];
+	}
+	[self reloadData];
+}
+
 /* dealloc
  * Clean up.
  */
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[backupString release];
+	backupString=nil;
 	[grayGradient release];
 	grayGradient=nil;
 	[blueGradient release];

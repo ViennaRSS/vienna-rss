@@ -25,6 +25,7 @@
 	NSImage * grayGradient;
 	NSRect iRect;
 	BOOL useTooltips;
+	NSString * backupString;
 }
 
 -(void)setEnableTooltips:(BOOL)flag;
