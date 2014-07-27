@@ -178,25 +178,10 @@
 		}
 		imageFrame.origin.x += 3;
 		imageFrame.size = imageSize;
+		// vertically center
+		imageFrame.origin.y += (cellFrame->size.height - imageSize.height) / 2.0;
 		
-		// The following stuff is equivalent to Snow Leopard's instance method
-		// drawInRect: fromRect: operation: fraction: respectFlipped:YES hints:NULL
-		// but it is Leopard compatible. Adapted from Chromium's image_utils.mm
-		NSAffineTransform *transform = nil;
-		if ([[NSGraphicsContext currentContext] isFlipped]) {
-			transform = [NSAffineTransform transform];
-			[transform scaleXBy:1.0 yBy:-1.0];
-			[transform concat];
-
-			// The lower edge of the image is as far from the origin as the
-			// upper edge was, plus it's on the other side of the origin.
-			imageFrame.origin.y -= NSMaxY(imageFrame) + NSMinY(imageFrame);
-  		}
-		
-		[image drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
-
-		// Flip drawing back, if needed.
-		[transform concat];
+		[image drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:NULL];
 
 	}
 }
@@ -220,6 +205,7 @@
 
 		progressIndicatorFrame.size = NSMakeSize(PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
 		progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
+		progressIndicatorFrame.origin.y += (cellFrame.size.height - PROGRESS_INDICATOR_DIMENSION) / 2.0;
 
 		if ([progressIndicator superview] != controlView)
 			[controlView addSubview:progressIndicator];
@@ -253,25 +239,10 @@
 			NSRectFill(imageFrame);
 		}
 		imageFrame.size = imageSize;
+		// vertically center
+		imageFrame.origin.y += (cellFrame.size.height - imageSize.height) / 2.0;
 		
-		// The following stuff is equivalent to Snow Leopard's instance method
-		// drawInRect: fromRect: operation: fraction: respectFlipped:YES hints:NULL
-		// but it is Leopard compatible. Adapted from Chromium's image_utils.mm
-		NSAffineTransform *transform = nil;
-		if ([[NSGraphicsContext currentContext] isFlipped]) {
-			transform = [NSAffineTransform transform];
-			[transform scaleXBy:1.0 yBy:-1.0];
-			[transform concat];
-
-			// The lower edge of the image is as far from the origin as the
-			// upper edge was, plus it's on the other side of the origin.
-			imageFrame.origin.y -= NSMaxY(imageFrame) + NSMinY(imageFrame);
-  		}
-		
-		[auxiliaryImage drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f];
-
-		// Flip drawing back, if needed.
-		[transform concat];
+		[auxiliaryImage drawInRect:imageFrame fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:NULL];
 
 	}
 	
