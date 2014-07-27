@@ -67,7 +67,7 @@
 			
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http"])
+			if (![srcPath hasPrefix:@"http"] && ![srcPath hasPrefix:@"data:"])
 			{
 				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (escapedSrcPath != nil)
