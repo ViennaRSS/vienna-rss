@@ -11,19 +11,19 @@
 
 <h1>Version notes</h1>
 
-<h2 id="rc1">3.0.0 rc 1</h2>
+<h2 id="rc2">3.0.0 rc 2</h2>
 
 <ul>
-<li>Add The Old Reader (<a href="https://theoldreader.com">https://theoldreader.com</a>) as a supported OpenReader provider</li>
-<li>Improved <a href="http://www.inoreader.com">InoReader</a> support (handles homepage and icons)</li>
-<li>Improved Unified layout</li>
-<li>Improved accessibility</li>
-<li>Improved German translation</li>
-<li>Fix credentials input for feeds requiring authentication</li>
-<li>Handle dates with a two-digit date formatter</li>
-<li>Fix some plugins</li>
+<li>Background fetching and database writing of feeds (yes, such an important change is not expected between two release candidates versions, but the risk has been thoroughly pondered)</li>
+<li>Separated &#8220;Mark Read&#8221; and &#8220;Mark Unread&#8221; menu items for articles</li>
+<li>Rudimentary support of OPDS feeds (ebooks), like those provided by Calibre</li>
+<li>Fix an issue with number of unread articles caused by user deleting articles stored in OpenReader before having read them</li>
+<li>Spanish localization improvements, thanks to Juan Pablo Atienza Martinez</li>
+<li>Another fix for file:// URLs</li>
+<li>Fix relative links to enclosures</li>
+<li>Handle embedded images <code>&lt;img src="data:..." ...&gt;</code></li>
+<li>Multiple improvements and fixes on memory management</li>
+<li>Other cosmetic or UI fixes</li>
 </ul>
-
-<p>Thanks to Emiliano Necciari, Boris Dušek, bavarious and biphuhn for their contributions !</p>
 </body>
 </html>

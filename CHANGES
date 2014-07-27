@@ -8,6 +8,19 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 2
+----------
+- Background fetching and database writing of feeds (yes, such an important change is not expected between two release candidates versions, but the risk has been thoroughly pondered)
+- Separated "Mark Read" and "Mark Unread" menu items for articles
+- Rudimentary support of OPDS feeds (ebooks), like those provided by Calibre
+- Fix an issue with number of unread articles caused by user deleting articles stored in OpenReader before having read them
+- Spanish localization improvements, thanks to Juan Pablo Atienza Martinez
+- Another fix for file:// URLs
+- Fix relative links to enclosures
+- Handle embedded images `<img src="data:..." ...>`
+- Multiple improvements and fixes on memory management
+- Other cosmetic or UI fixes
+
 3.0.0 rc 1
 ----------
 - Add The Old Reader (<https://theoldreader.com>) as a supported OpenReader provider
