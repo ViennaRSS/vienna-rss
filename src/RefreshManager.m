@@ -888,7 +888,7 @@ static RefreshManager * _refreshManager = nil;
 				NSString * newFeedTitle = feedTitle;
 				NSUInteger index = 1;
                 
-				while (([db folderFromName:feedTitle]) != nil)
+				while (([db folderFromName:newFeedTitle]) != nil)
 					newFeedTitle = [NSString stringWithFormat:@"%@ (%li)", oldFeedTitle, index++];
                 
 				[connectorItem setName:newFeedTitle];
