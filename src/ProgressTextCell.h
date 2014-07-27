@@ -19,13 +19,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BJRVerticallyCenteredTextFieldCell.h"
 
 /* ProgressTextCell
  * This class is used to draw a progress indicator next to the text for a text cell. If you set
  * the inProgress flag to true then it will draw the progress indicator.
  */
-@interface ProgressTextCell : BJRVerticallyCenteredTextFieldCell {
+@interface ProgressTextCell : NSTextFieldCell {
 	@private
 
 	BOOL inProgress;

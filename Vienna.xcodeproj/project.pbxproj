@@ -68,7 +68,6 @@
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
 		3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9C17319979006DD2AB /* PXListViewCell.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
-		3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3A6D70D417856793009D0D3E /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D217856793009D0D3E /* SyncPreferences.xib */; };
 		3A6D70D717857B0E009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */; };
 		3A6D70DA17857B2B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */; };
@@ -601,8 +600,6 @@
 		43EE83FA165EAA70000997FB /* GroupFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF1165EAA6E000997FB /* GroupFolder.strings */; };
 		43EE83FB165EAA70000997FB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF3165EAA6E000997FB /* InfoPlist.strings */; };
 		43EE83FC165EAA70000997FB /* InfoWindow.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF5165EAA6E000997FB /* InfoWindow.nib */; };
-		43EE83FD165EAA70000997FB /* designable.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF8165EAA6E000997FB /* designable.nib */; };
-		43EE83FE165EAA70000997FB /* keyedobjects.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FF9165EAA6E000997FB /* keyedobjects.nib */; };
 		43EE83FF165EAA70000997FB /* InfoWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FFA165EAA6E000997FB /* InfoWindow.strings */; };
 		43EE8400165EAA70000997FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FFC165EAA6E000997FB /* Localizable.strings */; };
 		43EE8401165EAA70000997FB /* RSSFeed.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE7FFE165EAA6E000997FB /* RSSFeed.nib */; };
@@ -985,8 +982,6 @@
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleCellView.h; path = src/ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleCellView.m; path = src/ArticleCellView.m; sourceTree = "<group>"; };
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
-		3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
-		3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A6D70D317856793009D0D3E /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = SyncPreferences.xib; sourceTree = "<group>"; };
 		3A6D70D617857B0E009D0D3E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cs; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A6D70D917857B2B009D0D3E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = KnownSyncServers.plist; sourceTree = "<group>"; };
@@ -1229,8 +1224,6 @@
 		43EE7FF2165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = GroupFolder.strings; sourceTree = "<group>"; };
 		43EE7FF4165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		43EE7FF6165EAA6E000997FB /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = InfoWindow.nib; sourceTree = "<group>"; };
-		43EE7FF8165EAA6E000997FB /* designable.nib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = designable.nib; path = lproj/en.lproj/InfoWindow.nib.original/designable.nib; sourceTree = SOURCE_ROOT; };
-		43EE7FF9165EAA6E000997FB /* keyedobjects.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = keyedobjects.nib; path = lproj/en.lproj/InfoWindow.nib.original/keyedobjects.nib; sourceTree = SOURCE_ROOT; };
 		43EE7FFB165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = InfoWindow.strings; sourceTree = "<group>"; };
 		43EE7FFD165EAA6E000997FB /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		43EE7FFF165EAA6E000997FB /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = RSSFeed.nib; sourceTree = "<group>"; };
@@ -2475,7 +2468,6 @@
 				43EE7FF1165EAA6E000997FB /* GroupFolder.strings */,
 				43EE7FF3165EAA6E000997FB /* InfoPlist.strings */,
 				43EE7FF5165EAA6E000997FB /* InfoWindow.nib */,
-				43EE7FF7165EAA6E000997FB /* InfoWindow.nib.original */,
 				43EE7FFA165EAA6E000997FB /* InfoWindow.strings */,
 				43EE7FFC165EAA6E000997FB /* Localizable.strings */,
 				43EE7FFE165EAA6E000997FB /* RSSFeed.nib */,
@@ -2488,16 +2480,6 @@
 			);
 			name = en.lproj;
 			path = lproj/en.lproj;
-			sourceTree = SOURCE_ROOT;
-		};
-		43EE7FF7165EAA6E000997FB /* InfoWindow.nib.original */ = {
-			isa = PBXGroup;
-			children = (
-				43EE7FF8165EAA6E000997FB /* designable.nib */,
-				43EE7FF9165EAA6E000997FB /* keyedobjects.nib */,
-			);
-			name = InfoWindow.nib.original;
-			path = lproj/en.lproj/InfoWindow.nib.original;
 			sourceTree = SOURCE_ROOT;
 		};
 		43EE8016165EAA6E000997FB /* es.lproj */ = {
@@ -3246,8 +3228,6 @@
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
 				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
 				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
-				3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */,
-				3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
@@ -3651,7 +3631,6 @@
 				43E6960D168A05F300AB4C09 /* AppearancesPreferences.strings in Resources */,
 				43E6960E168A05F300AB4C09 /* AppearancesPreferences.strings in Resources */,
 				43E6960F168A05F300AB4C09 /* AppearancesPreferences.strings in Resources */,
-				43EE83FD165EAA70000997FB /* designable.nib in Resources */,
 				43E69610168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E69611168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E69612168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
@@ -3880,7 +3859,6 @@
 				43E696E5168A05F300AB4C09 /* InfoWindow.strings in Resources */,
 				43E696E6168A05F300AB4C09 /* InfoWindow.strings in Resources */,
 				43E696E7168A05F300AB4C09 /* InfoWindow.strings in Resources */,
-				43EE83FE165EAA70000997FB /* keyedobjects.nib in Resources */,
 				43E696E8168A05F300AB4C09 /* Localizable.strings in Resources */,
 				43E696E9168A05F300AB4C09 /* Localizable.strings in Resources */,
 				43E696EA168A05F300AB4C09 /* Localizable.strings in Resources */,
@@ -4429,7 +4407,6 @@
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
 				435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
-				3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
 				3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */,
 				3A4DBEA117319979006DD2AB /* PXListView.m in Sources */,
 				3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */,

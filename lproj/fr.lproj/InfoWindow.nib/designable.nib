@@ -2,29 +2,19 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">12D78</string>
-		<string key="IBDocument.InterfaceBuilderVersion">931</string>
-		<string key="IBDocument.AppKitVersion">1187.37</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.SystemVersion">13E28</string>
+		<string key="IBDocument.InterfaceBuilderVersion">940</string>
+		<string key="IBDocument.AppKitVersion">1265.21</string>
+		<string key="IBDocument.HIToolboxVersion">698.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string>com.snoize.DisclosableViewIBPlugin</string>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>931</string>
-				<string>1.3</string>
-			</object>
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
+			<string key="NS.object.0">940</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>com.snoize.DisclosableViewIBPlugin</string>
 			<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.Metadata">
@@ -73,7 +63,7 @@
 								<int key="NSCellFlags2">272632320</int>
 								<string key="NSContents">(Folder name)</string>
 								<object class="NSFont" key="NSSupport">
-									<string key="NSName">LucidaGrande-Bold</string>
+									<string key="NSName">.LucidaGrandeUI-Bold</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">2064</int>
 								</object>
@@ -98,6 +88,7 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSTextField" id="849296344">
 							<reference key="NSNextResponder" ref="127603694"/>
@@ -110,7 +101,7 @@
 								<int key="NSCellFlags2">272629760</int>
 								<string key="NSContents">Dernier rafraîchissement :</string>
 								<object class="NSFont" key="NSSupport" id="26">
-									<string key="NSName">LucidaGrande</string>
+									<string key="NSName">.LucidaGrandeUI</string>
 									<double key="NSSize">11</double>
 									<int key="NSfFlags">3088</int>
 								</object>
@@ -127,6 +118,7 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSTextField" id="167203166">
 							<reference key="NSNextResponder" ref="127603694"/>
@@ -144,6 +136,7 @@
 								<reference key="NSTextColor" ref="753321726"/>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSImageView" id="533846481">
 							<reference key="NSNextResponder" ref="127603694"/>
@@ -174,7 +167,7 @@
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							<bool key="NSEditable">YES</bool>
 						</object>
-						<object class="SNDisclosableView" id="4920336">
+						<object class="NSCustomView" id="4920336">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">266</int>
 							<object class="NSMutableArray" key="NSSubviews">
@@ -209,6 +202,7 @@
 										</object>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSButton" id="783755249">
 									<reference key="NSNextResponder" ref="4920336"/>
@@ -237,9 +231,9 @@
 							</object>
 							<string key="NSFrame">{{8, 126}, {341, 89}}</string>
 							<reference key="NSSuperview" ref="127603694"/>
-							<double key="$0">0.0</double>
+							<string key="NSClassName">SNDisclosableView</string>
 						</object>
-						<object class="SNDisclosureButton" id="276833346">
+						<object class="NSButton" id="276833346">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{5, 225}, {151, 18}}</string>
@@ -250,7 +244,7 @@
 								<int key="NSCellFlags2">0</int>
 								<string key="NSContents">URL du flux :</string>
 								<object class="NSFont" key="NSSupport" id="436638426">
-									<string key="NSName">LucidaGrande</string>
+									<string key="NSName">.LucidaGrandeUI</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">1040</int>
 								</object>
@@ -264,7 +258,7 @@
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
-						<object class="SNDisclosableView" id="874818748">
+						<object class="NSCustomView" id="874818748">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">266</int>
 							<object class="NSMutableArray" key="NSSubviews">
@@ -280,7 +274,7 @@
 										<int key="NSCellFlags2">71303168</int>
 										<string key="NSContents">Nom d'utilisateur :</string>
 										<object class="NSFont" key="NSSupport" id="590851473">
-											<string key="NSName">LucidaGrande</string>
+											<string key="NSName">.LucidaGrandeUI</string>
 											<double key="NSSize">10</double>
 											<int key="NSfFlags">2832</int>
 										</object>
@@ -289,6 +283,7 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="832172646">
 									<reference key="NSNextResponder" ref="874818748"/>
@@ -306,6 +301,7 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="727464014">
 									<reference key="NSNextResponder" ref="874818748"/>
@@ -324,6 +320,7 @@
 										<reference key="NSTextColor" ref="956340321"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="729784756">
 									<reference key="NSNextResponder" ref="874818748"/>
@@ -342,6 +339,7 @@
 										<reference key="NSTextColor" ref="956340321"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSButton" id="180023604">
 									<reference key="NSNextResponder" ref="874818748"/>
@@ -374,9 +372,9 @@
 							</object>
 							<string key="NSFrame">{{8, 22}, {341, 78}}</string>
 							<reference key="NSSuperview" ref="127603694"/>
-							<double key="$0">0.0</double>
+							<string key="NSClassName">SNDisclosableView</string>
 						</object>
-						<object class="SNDisclosureButton" id="968115136">
+						<object class="NSButton" id="968115136">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{5, 107}, {114, 18}}</string>
@@ -397,7 +395,7 @@
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
-						<object class="SNDisclosableView" id="653026695">
+						<object class="NSCustomView" id="653026695">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">266</int>
 							<object class="NSMutableArray" key="NSSubviews">
@@ -418,6 +416,7 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="83245368">
 									<reference key="NSNextResponder" ref="653026695"/>
@@ -435,6 +434,7 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="332536157">
 									<reference key="NSNextResponder" ref="653026695"/>
@@ -452,6 +452,7 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="797437798">
 									<reference key="NSNextResponder" ref="653026695"/>
@@ -469,6 +470,7 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSButton" id="949207318">
 									<reference key="NSNextResponder" ref="653026695"/>
@@ -524,9 +526,9 @@
 							</object>
 							<string key="NSFrame">{{8, 250}, {341, 79}}</string>
 							<reference key="NSSuperview" ref="127603694"/>
-							<double key="$0">0.0</double>
+							<string key="NSClassName">SNDisclosableView</string>
 						</object>
-						<object class="SNDisclosureButton" id="3067190">
+						<object class="NSButton" id="3067190">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{5, 336}, {80, 18}}</string>
@@ -547,7 +549,7 @@
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
-						<object class="SNDisclosableView" id="378536777">
+						<object class="NSCustomView" id="378536777">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">266</int>
 							<object class="NSMutableArray" key="NSSubviews">
@@ -568,13 +570,14 @@
 										<reference key="NSTextColor" ref="680058356"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 							</object>
 							<string key="NSFrame">{{8, 361}, {338, 58}}</string>
 							<reference key="NSSuperview" ref="127603694"/>
-							<double key="$0">0.0</double>
+							<string key="NSClassName">SNDisclosableView</string>
 						</object>
-						<object class="SNDisclosureButton" id="59005432">
+						<object class="NSButton" id="59005432">
 							<reference key="NSNextResponder" ref="127603694"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{5, 426}, {94, 18}}</string>
@@ -1470,13 +1473,19 @@
 					<string>34.ImportedFromIB2</string>
 					<string>35.IBPluginDependency</string>
 					<string>35.ImportedFromIB2</string>
+					<string>36.IBAttributePlaceholdersKey</string>
 					<string>36.IBPluginDependency</string>
 					<string>36.ImportedFromIB2</string>
 					<string>37.IBPluginDependency</string>
 					<string>37.ImportedFromIB2</string>
+					<string>38.CustomClassName</string>
+					<string>38.IBPluginDependency</string>
 					<string>38.ImportedFromIB2</string>
+					<string>44.IBAttributePlaceholdersKey</string>
 					<string>44.IBPluginDependency</string>
 					<string>44.ImportedFromIB2</string>
+					<string>45.CustomClassName</string>
+					<string>45.IBPluginDependency</string>
 					<string>45.ImportedFromIB2</string>
 					<string>5.IBEditorWindowLastContentRect</string>
 					<string>5.IBPluginDependency</string>
@@ -1501,8 +1510,11 @@
 					<string>62.IBPluginDependency</string>
 					<string>62.IBViewBoundsToFrameTransform</string>
 					<string>62.ImportedFromIB2</string>
+					<string>64.IBAttributePlaceholdersKey</string>
 					<string>64.IBPluginDependency</string>
 					<string>64.ImportedFromIB2</string>
+					<string>65.CustomClassName</string>
+					<string>65.IBPluginDependency</string>
 					<string>65.ImportedFromIB2</string>
 					<string>67.IBPluginDependency</string>
 					<string>67.ImportedFromIB2</string>
@@ -1514,8 +1526,11 @@
 					<string>70.ImportedFromIB2</string>
 					<string>76.IBPluginDependency</string>
 					<string>76.ImportedFromIB2</string>
+					<string>78.IBAttributePlaceholdersKey</string>
 					<string>78.IBPluginDependency</string>
 					<string>78.ImportedFromIB2</string>
+					<string>79.CustomClassName</string>
+					<string>79.IBPluginDependency</string>
 					<string>79.ImportedFromIB2</string>
 					<string>81.IBPluginDependency</string>
 					<string>81.ImportedFromIB2</string>
@@ -1574,13 +1589,59 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>com.snoize.DisclosableViewIBPlugin</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+						<object class="IBUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
+							<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+							<reference key="object" ref="4920336"/>
+							<object class="NSArray" key="userDefinedRuntimeAttributes">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">isShown</string>
+									<boolean value="YES" key="value"/>
+								</object>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">hiddenHeight</string>
+									<real value="0.0" key="value"/>
+									<bool key="localized">YES</bool>
+								</object>
+							</object>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>SNDisclosureButton</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>com.snoize.DisclosableViewIBPlugin</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+						<object class="IBUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
+							<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+							<reference key="object" ref="874818748"/>
+							<object class="NSArray" key="userDefinedRuntimeAttributes">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">isShown</string>
+									<boolean value="YES" key="value"/>
+								</object>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">hiddenHeight</string>
+									<real value="0.0" key="value"/>
+									<bool key="localized">YES</bool>
+								</object>
+							</object>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<string>SNDisclosureButton</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>{{107, 227}, {365, 497}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1634,9 +1695,30 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAABDXwAAwaAAAA</bytes>
 					</object>
 					<boolean value="YES"/>
-					<string>com.snoize.DisclosableViewIBPlugin</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+						<object class="IBUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
+							<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+							<reference key="object" ref="653026695"/>
+							<object class="NSArray" key="userDefinedRuntimeAttributes">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">isShown</string>
+									<boolean value="YES" key="value"/>
+								</object>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">hiddenHeight</string>
+									<real value="0.0" key="value"/>
+									<bool key="localized">YES</bool>
+								</object>
+							</object>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<boolean value="YES"/>
+					<string>SNDisclosureButton</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1647,8 +1729,33 @@
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
-					<string>com.snoize.DisclosableViewIBPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+						<object class="IBUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
+							<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
+							<reference key="object" ref="378536777"/>
+							<object class="NSArray" key="userDefinedRuntimeAttributes">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">isShown</string>
+									<boolean value="YES" key="value"/>
+								</object>
+								<object class="IBUserDefinedRuntimeAttribute">
+									<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.number</string>
+									<string key="keyPath">hiddenHeight</string>
+									<real value="0.0" key="value"/>
+									<bool key="localized">YES</bool>
+								</object>
+							</object>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<boolean value="YES"/>
+					<string>SNDisclosureButton</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<boolean value="YES"/>
