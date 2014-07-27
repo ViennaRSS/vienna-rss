@@ -68,7 +68,6 @@
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
 		3A4DBEA317319979006DD2AB /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9C17319979006DD2AB /* PXListViewCell.m */; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
-		3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3A6D70D417856793009D0D3E /* SyncPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D217856793009D0D3E /* SyncPreferences.xib */; };
 		3A6D70D717857B0E009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D517857B0E009D0D3E /* KnownSyncServers.plist */; };
 		3A6D70DA17857B2B009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70D817857B2B009D0D3E /* KnownSyncServers.plist */; };
@@ -983,8 +982,6 @@
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleCellView.h; path = src/ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleCellView.m; path = src/ArticleCellView.m; sourceTree = "<group>"; };
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "Sparkle-setup.sh"; path = "configs/scripts/Sparkle-setup.sh"; sourceTree = "<group>"; };
-		3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
-		3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A6D70D317856793009D0D3E /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = SyncPreferences.xib; sourceTree = "<group>"; };
 		3A6D70D617857B0E009D0D3E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cs; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A6D70D917857B2B009D0D3E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = KnownSyncServers.plist; sourceTree = "<group>"; };
@@ -3231,8 +3228,6 @@
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
 				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
 				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
-				3A69FE7C172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.h */,
-				3A69FE7D172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
@@ -4412,7 +4407,6 @@
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
 				435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
-				3A69FE7E172352BA002CA1DE /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
 				3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */,
 				3A4DBEA117319979006DD2AB /* PXListView.m in Sources */,
 				3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */,
