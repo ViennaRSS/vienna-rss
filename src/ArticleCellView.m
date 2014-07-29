@@ -182,4 +182,34 @@
 	[[[self listView] superview] keyDown:theEvent];
 }
 
+/* canMakeTextSmaller
+ */
+-(IBAction)canMakeTextSmaller
+{
+	[articleView canMakeTextSmaller];
+}
+
+/* canMakeTextLarger
+ */
+-(IBAction)canMakeTextLarger
+{
+	[articleView canMakeTextLarger];
+}
+
+/* makeTextSmaller
+ * Make webview text size smaller
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	[articleView makeTextSmaller:sender];
+}
+
+/* makeTextLarger
+ * Make webview text size larger
+ */
+-(IBAction)makeTextLarger:(id)sender
+{
+	[articleView makeTextLarger:sender];
+}
+
 @end

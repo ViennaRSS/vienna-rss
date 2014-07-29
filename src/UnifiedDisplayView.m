@@ -473,7 +473,8 @@
  */
 -(WebView *)webView
 {
-	return nil;
+	ArticleCellView * cellView = (ArticleCellView *)[[articleList visibleCells] objectAtIndex:0];
+	return [cellView articleView];
 }
 
 /* performFindPanelAction
@@ -503,7 +504,7 @@
  */
 -(BOOL)canGoForward
 {
-	return [articleController canGoForward];
+	return FALSE;
 }
 
 /* canGoBack
