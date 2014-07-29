@@ -37,6 +37,7 @@ extern NSString * MAPref_CheckForNewArticlesOnStartup;
 extern NSString * MAPref_FolderImagesFolder;
 extern NSString * MAPref_RefreshThreads;
 extern NSString * MAPref_ActiveStyleName;
+extern NSString * MAPref_ActiveTextSizeMultiplier;
 extern NSString * MAPref_StylesFolder;
 extern NSString * MAPref_PluginsFolder;
 extern NSString * MAPref_ScriptsFolder;

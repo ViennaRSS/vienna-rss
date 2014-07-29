@@ -39,6 +39,7 @@ NSString * MAPref_PluginsFolder = @"PluginsFolder";
 NSString * MAPref_ScriptsFolder = @"ScriptsFolder";
 NSString * MAPref_RefreshThreads = @"MaxRefreshThreads";
 NSString * MAPref_ActiveStyleName = @"ActiveStyle";
+NSString * MAPref_ActiveTextSizeMultiplier = @"TextSizeMultiplier";
 NSString * MAPref_FolderStates = @"FolderStates";
 NSString * MAPref_BacktrackQueueSize = @"BacktrackQueueSize";
 NSString * MAPref_MarkReadInterval = @"MarkReadInterval";
