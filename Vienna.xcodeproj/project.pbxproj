@@ -86,6 +86,7 @@
 		3A6D710117857CD6009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D70FF17857CD6009D0D3E /* KnownSyncServers.plist */; };
 		3A6D710417857CFB009D0D3E /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D710217857CFB009D0D3E /* KnownSyncServers.plist */; };
 		3A7567A51674E996009C0900 /* libJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA97121663EA5000B95F35 /* libJSONKit.a */; };
+		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3A8A344D17857D3B00E2E64B /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */; };
 		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
@@ -999,6 +1000,8 @@
 		3A6D70FD17857CBD009D0D3E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = tr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A6D710017857CD6009D0D3E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A6D710317857CFB009D0D3E /* zh_CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_CN; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
+		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A8A344C17857D3B00E2E64B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_TW; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
@@ -3221,6 +3224,8 @@
 		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */,
+				3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
@@ -4406,6 +4411,7 @@
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
 				435028BA165DE9E00018EDB7 /* XMLSourceWindow.m in Sources */,
+				3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */,
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
 				3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */,
 				3A4DBEA117319979006DD2AB /* PXListView.m in Sources */,

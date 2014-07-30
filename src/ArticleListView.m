@@ -40,6 +40,7 @@
 #import "PopupButton.h"
 #import "BrowserPane.h"
 #import "ProgressTextCell.h"
+#import "BJRVerticallyCenteredTextFieldCell.h"
 
 // Private functions
 @interface ArticleListView (Private)
@@ -602,6 +603,13 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				
 				progressCell = [[[ProgressTextCell alloc] init] autorelease];
 				[column setDataCell:progressCell];
+			}
+			else
+			{
+				BJRVerticallyCenteredTextFieldCell * cell;
+
+				cell = [[[BJRVerticallyCenteredTextFieldCell alloc] init] autorelease];
+				[column setDataCell:cell];
 			}
 
 			// Set the header attributes.
