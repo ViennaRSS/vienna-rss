@@ -876,7 +876,7 @@
  * Returns the actual string that is displayed in the cell. Folders that have child folders with unread
  * articles show the aggregate unread article count.
  */
--(id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+-(id)outlineView:(NSOutlineView *)olv objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
 	TreeNode * node = (TreeNode *)item;
 	if (node == nil)
@@ -890,8 +890,22 @@
 		info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
 		[style release];
 	}
+
+	Folder * folder = [node folder];
+	int rowIndex = [olv rowForItem:item];
+	NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
+	// Set the colour of the text in the cell : default is blackColor
+	if (IsUnsubscribed(folder))
+		[myInfo setObject:[NSColor grayColor] forKey:NSForegroundColorAttributeName];
+	else if ([olv selectedRow] == rowIndex && [olv editedRow] != rowIndex)
+		[myInfo setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
+	// Set the font
+	if ([folder unreadCount] ||  ([folder childUnreadCount] && ![olv isItemExpanded:item]))
+		[myInfo setObject:boldCellFont forKey:NSFontAttributeName];
+	else
+		[myInfo setObject:cellFont forKey:NSFontAttributeName];
 	
-	return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:info] autorelease];
+	return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:myInfo] autorelease];
 }
 
 /* willDisplayCell
@@ -906,20 +920,6 @@
 		TreeNode * node = (TreeNode *)item;
 		Folder * folder = [node folder];
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
-
-		// Set the colour of the text in the cell
-		int rowIndex = [olv rowForItem:item];
-		NSColor * textColor;
-
-		if (IsUnsubscribed(folder))
-			textColor = [NSColor grayColor];
-		else if ([olv editedRow] == rowIndex)
-			textColor = [NSColor blackColor];
-		else if ([olv selectedRow] == rowIndex)
-			textColor = [NSColor whiteColor];
-		else
-			textColor = [NSColor blackColor];
-		[realCell setTextColor:textColor];
 
 		[realCell setItem:item];
 
@@ -945,24 +945,20 @@
 		if (IsSmartFolder(folder))  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
 		{
 			[realCell clearCount];
-			[realCell setFont:cellFont];
 		}
 		else if ([folder unreadCount])
 		{
-			[realCell setFont:boldCellFont];
 			[realCell setCount:[folder unreadCount]];
 			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else if ([folder childUnreadCount] && ![olv isItemExpanded:item])
 		{
-			[realCell setFont:boldCellFont];
 			[realCell setCount:[folder childUnreadCount]];
 			[realCell setCountBackgroundColour:[NSColor colorForControlTint:[NSColor currentControlTint]]];
 		}
 		else
 		{
 			[realCell clearCount];
-			[realCell setFont:cellFont];
 		}
 
 		// Only show folder images if the user prefers them.
