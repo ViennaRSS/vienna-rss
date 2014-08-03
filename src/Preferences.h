@@ -51,6 +51,7 @@
     BOOL markUpdatedAsNew;
 	NSString * downloadFolder;
 	NSString * displayStyle;
+	float textSizeMultiplier;
 	NSString * defaultDatabase;
 	NSString * imagesFolder;
 	NSString * scriptsFolder;
@@ -163,6 +164,8 @@
 -(NSString *)displayStyle;
 -(void)setDisplayStyle:(NSString *)newStyle;
 -(void)setDisplayStyle:(NSString *)newStyle withNotification:(BOOL)flag;
+-(float)textSizeMultiplier;
+-(void)setTextSizeMultiplier:(float)newValue;
 
 // Folder list font
 -(NSString *)folderListFont;

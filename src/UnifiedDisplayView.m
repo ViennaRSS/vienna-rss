@@ -66,8 +66,6 @@
 		blockMarkRead = NO;
 		guidOfArticleToSelect = nil;
 		markReadTimer = nil;
-		isCurrentPageFullHTML = NO;
-		currentURL = nil;
 		rowHeightArray = [[NSMutableArray alloc] init];
     }
     return self;
@@ -134,8 +132,6 @@
 	markReadTimer=nil;
 	[guidOfArticleToSelect release];
 	guidOfArticleToSelect=nil;
-	[currentURL release];
-	currentURL=nil;
 	[rowHeightArray release];
 	rowHeightArray=nil;
 	[super dealloc];
@@ -211,40 +207,28 @@
 	if (urlLink != nil)
 		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 
-	// If we have a full HTML page then do the additional web-page specific items.
-	if (isCurrentPageFullHTML)
+	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
+	int count = [defaultMenuItems count];
+	int index;
+
+	// Copy over everything but the reload menu item, which we can't handle if
+	// this is not a full HTML page since we don't have an URL.
+	for (index = 0; index < count; index++)
 	{
-		WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
-		if (frameKey != nil)
-			return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
+		NSMenuItem * menuItem = [defaultMenuItems objectAtIndex:index];
+		if ([menuItem tag] != WebMenuItemTagReload)
+			[newDefaultMenu addObject:menuItem];
 	}
 
-	// Remove the reload menu item if we don't have a full HTML page.
-	if (!isCurrentPageFullHTML)
+	// If we still have some menu items then use that for the new default menu, otherwise
+	// set the default items to nil as we may have removed all the items.
+	if ([newDefaultMenu count] > 0)
+		defaultMenuItems = [newDefaultMenu autorelease];
+	else
 	{
-		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
-		int count = [defaultMenuItems count];
-		int index;
-
-		// Copy over everything but the reload menu item, which we can't handle if
-		// this is not a full HTML page since we don't have an URL.
-		for (index = 0; index < count; index++)
-		{
-			NSMenuItem * menuItem = [defaultMenuItems objectAtIndex:index];
-			if ([menuItem tag] != WebMenuItemTagReload)
-				[newDefaultMenu addObject:menuItem];
-		}
-
-		// If we still have some menu items then use that for the new default menu, otherwise
-		// set the default items to nil as we may have removed all the items.
-		if ([newDefaultMenu count] > 0)
-			defaultMenuItems = [newDefaultMenu autorelease];
-		else
-        {
-			defaultMenuItems = nil;
-            [newDefaultMenu release];
-        }
-    }
+		defaultMenuItems = nil;
+		[newDefaultMenu release];
+	}
 
 	// Return the default menu items.
     return defaultMenuItems;
@@ -489,7 +473,8 @@
  */
 -(WebView *)webView
 {
-	return nil;
+	ArticleCellView * cellView = (ArticleCellView *)[[articleList visibleCells] objectAtIndex:0];
+	return [cellView articleView];
 }
 
 /* performFindPanelAction
@@ -519,7 +504,7 @@
  */
 -(BOOL)canGoForward
 {
-	return [articleController canGoForward];
+	return FALSE;
 }
 
 /* canGoBack
@@ -871,30 +856,6 @@
  */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-}
-
-/* clearCurrentURL
- * Clears the current URL.
- */
--(void)clearCurrentURL
-{
-	// If we already have an URL release it.
-	if (currentURL)
-	{
-		[currentURL release];
-		currentURL = nil;
-	}
-}
-
-/* url
- * Return the URL of current article.
- */
--(NSURL *)url
-{
-	if (isCurrentPageFullHTML)
-		return currentURL;
-	else
-		return nil;
 }
 
 /* refreshArticlePane

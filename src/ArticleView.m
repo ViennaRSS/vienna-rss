@@ -56,7 +56,10 @@ static NSMutableDictionary * stylePathMappings = nil;
 
 		// Select the user's current style or revert back to the
 		// default style otherwise.
-		[self initForStyle:[[Preferences standardPreferences] displayStyle]];
+		Preferences * prefs = [Preferences standardPreferences];
+		[self initForStyle:[prefs displayStyle]];
+		// enlarge / reduce the text size according to user's setting
+		[self setTextSizeMultiplier:[prefs textSizeMultiplier]];
 	}
 	return self;
 }
@@ -66,7 +69,9 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)handleStyleChange:(NSNotificationCenter *)nc
 {
-	[self initForStyle:[[Preferences standardPreferences] displayStyle]];
+	Preferences * prefs = [Preferences standardPreferences];
+	[self initForStyle:[prefs displayStyle]];
+	[self setTextSizeMultiplier:[prefs textSizeMultiplier]];
 }
 
 /* performDragOperation
@@ -327,6 +332,28 @@ static NSMutableDictionary * stylePathMappings = nil;
 		}
 	}		
 }
+
+#pragma mark -
+#pragma mark WebView methods overrides
+
+/* makeTextSmaller
+ */
+-(IBAction)makeTextSmaller:(id)sender
+{
+	[super makeTextSmaller:sender];
+	[[Preferences standardPreferences] setTextSizeMultiplier:[self textSizeMultiplier]];
+}
+
+/* makeTextLarger
+ */
+-(IBAction)makeTextLarger:(id)sender
+{
+	[super makeTextLarger:sender];
+	[[Preferences standardPreferences] setTextSizeMultiplier:[self textSizeMultiplier]];
+}
+
+#pragma mark -
+#pragma mark WebKit protocols
 
 /* decidePolicyForNewWindowAction
  * Called by the web view to get our policy on handling actions that would open a new window.

@@ -42,8 +42,6 @@
 	NSTimer * markReadTimer;
 	NSString * guidOfArticleToSelect;
 
-	NSURL *	currentURL;
-	BOOL isCurrentPageFullHTML;
 	NSMutableArray * rowHeightArray;
 }
 
@@ -52,6 +50,5 @@
 -(void)updateAlternateMenuTitle;
 -(NSArray *)markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(int)row;
--(NSURL *)url;
 - (void)webViewLoadFinished:(NSNotification *)notification;
 @end

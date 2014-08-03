@@ -170,6 +170,7 @@ static Preferences * _standardPreferences = nil;
 		openLinksInVienna = [self boolForKey:MAPref_OpenLinksInVienna];
 		openLinksInBackground = [self boolForKey:MAPref_OpenLinksInBackground];
 		displayStyle = [[userPrefs valueForKey:MAPref_ActiveStyleName] retain];
+		textSizeMultiplier = [[userPrefs valueForKey:MAPref_ActiveTextSizeMultiplier] floatValue];
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
@@ -276,6 +277,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
 	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
+	[defaultValues setObject:[NSNumber numberWithFloat:1.0] forKey:MAPref_ActiveTextSizeMultiplier];
 	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_ByName] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
@@ -853,6 +855,27 @@ static Preferences * _standardPreferences = nil;
 		[self setString:displayStyle forKey:MAPref_ActiveStyleName];
 		if (flag)
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
+	}
+}
+
+/* textSizeMultiplier
+ * Return the textSizeMultiplier to be applied to an ArticleView
+ */
+-(float)textSizeMultiplier
+{
+	return textSizeMultiplier;
+}
+
+/* setTextSizeMultiplier
+ * Changes the textSizeMultiplier to be applied to an ArticleView
+ */
+-(void)setTextSizeMultiplier:(float)newValue
+{
+	if (newValue != textSizeMultiplier)
+	{
+		textSizeMultiplier = newValue;
+		[self setObject:[NSNumber numberWithFloat:newValue] forKey:MAPref_ActiveTextSizeMultiplier];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
 	}
 }
 
