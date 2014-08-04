@@ -334,7 +334,6 @@ JSONDecoder * jsonDecoder;
 		// Unread count may have changed
 		[controller setStatusMessage:nil persist:NO];
 		[controller showUnreadCountOnApplicationIconAndWindowTitle];
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
 
 		// Send status to the activity log
@@ -410,8 +409,6 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
-
 	}); //block for dispatch_async
 }
 
@@ -450,6 +447,7 @@ JSONDecoder * jsonDecoder;
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}  // try/catch
 	}
@@ -486,12 +484,16 @@ JSONDecoder * jsonDecoder;
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}  // try/catch
 	}
+
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 }
 
 -(void)authenticate 
@@ -686,7 +688,10 @@ JSONDecoder * jsonDecoder;
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
 					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL]) {
-						[[Database sharedDatabase] setFolderHomePage:[f itemId] newHomePage:homePageURL];
+						Database *db = [Database sharedDatabase];
+						[db doTransactionWithBlock:^(BOOL *rollback) {
+							[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
+						}];
 						break;
 					}
 				}
