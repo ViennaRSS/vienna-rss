@@ -59,8 +59,8 @@ enum GoogleReaderStatus {
 
 @interface GoogleReader()
 @property (nonatomic, copy) NSMutableArray * localFeeds;
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSString *clientAuthToken;
+@property (atomic, copy) NSString *token;
+@property (atomic, copy) NSString *clientAuthToken;
 @property (nonatomic, retain) NSTimer * tokenTimer;
 @property (nonatomic, retain) NSTimer * authTimer;
 @end
@@ -363,7 +363,7 @@ JSONDecoder * jsonDecoder;
                            percentEscape(feedIdentifier)];
 		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
-		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
+		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", aItem, @"log", nil]];
 		[request2 setDelegate:self];
 		[request2 setDidFinishSelector:@selector(readRequestDone:)];
 		[request2 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
@@ -385,7 +385,7 @@ JSONDecoder * jsonDecoder;
 		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
-		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
+		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", aItem, @"log", nil]];
 		[request3 setDelegate:self];
 		[request3 setDidFinishSelector:@selector(starredRequestDone:)];
 		[request3 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
@@ -419,8 +419,10 @@ JSONDecoder * jsonDecoder;
 - (void)readRequestDone:(ASIHTTPRequest *)request
 {
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	if ([request responseStatusCode] == 200)
 	{
+	@try {
 		NSArray * dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
@@ -445,6 +447,11 @@ JSONDecoder * jsonDecoder;
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
+	} @catch (NSException *exception) {
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	}  // try/catch
 	}
 }
 
@@ -452,8 +459,10 @@ JSONDecoder * jsonDecoder;
 - (void)starredRequestDone:(ASIHTTPRequest *)request
 {
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	if ([request responseStatusCode] == 200)
 	{
+	@try {
 		NSArray * dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
@@ -477,6 +486,11 @@ JSONDecoder * jsonDecoder;
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
+	} @catch (NSException *exception) {
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	}  // try/catch
 	}
 }
 
