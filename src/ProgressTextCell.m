@@ -97,9 +97,6 @@
 				[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
 				[progressIndicator setDisplayedWhenStopped:YES];
 				[progressIndicator setUsesThreadedAnimation:YES];
-				
-				// Start the animation.
-				[progressIndicator startAnimation:self];
 			}
 			
 			// Recompute the new cell frame taking out space on the right for the
@@ -145,6 +142,11 @@
 	cellFrame.origin.x += 2;
 	cellFrame.size.height -= 1;
 	[super drawInteriorWithFrame:cellFrame inView:controlView];
+
+	// Now that everything is set, start the animation if necessary
+	if (currentRow == progressRow && inProgress) {
+		[progressIndicator startAnimation:self];
+	}
 }
 
 @end
