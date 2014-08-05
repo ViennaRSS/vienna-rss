@@ -214,7 +214,7 @@ JSONDecoder * jsonDecoder;
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];
 		NSDictionary * dict;
-		@synchronized(self) {
+		@synchronized(jsonDecoder) {
 			dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
 		}
 		NSString *folderLastUpdateString = [[dict objectForKey:@"updated"] stringValue];
@@ -396,7 +396,7 @@ JSONDecoder * jsonDecoder;
 	{
 	@try {
 		NSArray * dict;
-		@synchronized(self) {
+		@synchronized(jsonDecoder) {
 			dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
 		}
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
@@ -490,7 +490,7 @@ JSONDecoder * jsonDecoder;
 	{
 	@try {
 		NSArray * dict;
-		@synchronized(self) {
+		@synchronized(jsonDecoder) {
 			dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
 		}
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
@@ -670,7 +670,7 @@ JSONDecoder * jsonDecoder;
 {
 	LLog(@"Ending subscriptionRequest");
 	NSDictionary * dict;
-	@synchronized(self) {
+	@synchronized(jsonDecoder) {
 		dict = [jsonDecoder objectWithData:[request responseData]];
 	}
 	[localFeeds removeAllObjects];
