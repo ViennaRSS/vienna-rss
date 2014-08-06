@@ -4062,15 +4062,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag
 {
-	if (persistenceFlag)
-	{
-		[newStatusText retain];
-		[persistedStatusText release];
-		persistedStatusText = newStatusText;
+	@synchronized(persistedStatusText){
+		if (persistenceFlag)
+		{
+			[newStatusText retain];
+			[persistedStatusText release];
+			persistedStatusText = newStatusText;
+		}
+		if (newStatusText == nil || [newStatusText isBlank])
+			newStatusText = persistedStatusText;
+		[statusText setStringValue:(newStatusText ? newStatusText : @"")];
 	}
-	if (newStatusText == nil || [newStatusText isBlank])
-		newStatusText = persistedStatusText;
-	[statusText setStringValue:(newStatusText ? newStatusText : @"")];
 }
 
 /* viewAnimationCompleted
