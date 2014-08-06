@@ -606,7 +606,9 @@ static NSArray * iconArray = nil;
  */
 -(void)setNonPersistedFlag:(NSUInteger)flagToSet
 {
-	nonPersistedFlags |= flagToSet;
+	@synchronized(self) {
+		nonPersistedFlags |= flagToSet;
+	}
 }
 
 /* clearNonPersistedFlag
@@ -614,7 +616,9 @@ static NSArray * iconArray = nil;
  */
 -(void)clearNonPersistedFlag:(NSUInteger)flagToClear
 {
-	nonPersistedFlags &= ~flagToClear;
+	@synchronized(self) {
+		nonPersistedFlags &= ~flagToClear;
+	}
 }
 
 /* setParent
@@ -663,8 +667,10 @@ static NSArray * iconArray = nil;
  */
 -(void)setUnreadCount:(NSInteger)count
 {
-	NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
-	unreadCount = count;
+	@synchronized(self) {
+		NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
+		unreadCount = count;
+	}
 }
 
 /* setChildUnreadCount
@@ -673,8 +679,10 @@ static NSArray * iconArray = nil;
  */
 -(void)setChildUnreadCount:(NSInteger)count
 {
-	NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
-	childUnreadCount = count;
+	@synchronized(self) {
+		NSAssert1(count >= 0, @"Attempting to set a negative unread count on folder %@", [self name]);
+		childUnreadCount = count;
+	}
 }
 
 /* clearCache
