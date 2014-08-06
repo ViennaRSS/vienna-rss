@@ -1974,6 +1974,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)showUnreadCountOnApplicationIconAndWindowTitle
 {
+	@synchronized([NSApp dockTile]) {
 	int currentCountOfUnread = [db countOfUnread];
 	if (currentCountOfUnread == lastCountOfUnread)
 		return;
@@ -1999,6 +2000,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
 	[[NSApp dockTile] setBadgeLabel:countdown];
 
+	} // @synchronized
 }
 
 /* handleAbout
