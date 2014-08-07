@@ -45,6 +45,12 @@ function signd {
 
 		# Sign the DisclosableView framework
 		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/DisclosableView.framework"
+		# Sign the Growl framework
+		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/Growl.framework"
+		# Sign the PSMTabBarControl framework
+		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/PSMTabBarControl.framework"
+		# Sign the Sparkle framework
+		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/Sparkle.framework"
 		# Sign and verify the app
 		/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
 		if ! codesign --verify -vvv "${appth}"; then
