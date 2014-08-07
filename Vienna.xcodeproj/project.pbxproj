@@ -830,7 +830,6 @@
 		F0E01EF317C884D800E20329 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E01EEB17C884D800E20329 /* FMResultSet.m */; };
 		F0E01EF417C8856600E20329 /* libFMDatabase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F06BE30317C87DEA00A74FBB /* libFMDatabase.a */; };
 		F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
-		F0E01EF917C8869F00E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
 		F0FBD16617C88BFF006E5756 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FBD16417C88BFF006E5756 /* FMDatabasePool.h */; };
 		F0FBD16717C88BFF006E5756 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FBD16517C88BFF006E5756 /* FMDatabasePool.m */; };
 /* End PBXBuildFile section */
@@ -1926,14 +1925,6 @@
 				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06BE2FE17C87DEA00A74FBB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F0E01EF917C8869F00E20329 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3474,7 +3465,6 @@
 			buildPhases = (
 				F06BE2FA17C87DEA00A74FBB /* Headers */,
 				F06BE2FC17C87DEA00A74FBB /* Sources */,
-				F06BE2FE17C87DEA00A74FBB /* Frameworks */,
 			);
 			buildRules = (
 			);
