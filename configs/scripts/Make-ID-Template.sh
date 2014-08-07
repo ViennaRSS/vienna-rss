@@ -8,6 +8,7 @@ CODE_SIGN_IDENTITY =
 PRIVATE_KEY_PATH = 
 
 CODE_SIGN_REQUIREMENTS_PATH = $(SRCROOT)/signing/codesignrequirement.rqset
+// CODE_SIGN_RESOURCE_RULES_PATH = $(SRCROOT)/signing/ResourceRules.plist
 
 EOF
 fi

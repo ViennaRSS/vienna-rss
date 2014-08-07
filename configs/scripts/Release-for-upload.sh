@@ -41,17 +41,39 @@ function signd {
 		# Local Config
 		local appth="${1}"
 		local idetd="${CODE_SIGN_IDENTITY}"
+		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
 		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
 
-		# Sign the frameworks
-		for i in $(unset CLICOLOR_FORCE; ls -w "${appth}/Contents/Frameworks/")
-		do
-			/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/${i}"
-		done
 		# Sign and verify the app
-		/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
-		if ! spctl --verbose=4 --assess --type execute "${appth}" ; then
+		if [ ! -z "${resrul}" ]; then
+			cp -a "${resrul}" "${appth}/ResourceRules.plist"
+			/usr/bin/codesign -f --sign "${idetd}" --resource-rules="${appth}/ResourceRules.plist" --requirements "${csreq}" -vvv "${appth}"
+			rm "${appth}/ResourceRules.plist"
+		else
+			/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
+		fi
+		if ! codesign --verify -vvv "${appth}"; then
 			echo "warning: Code is improperly signed!" 1>&2
+		fi
+
+		# Verify and sign the frameworks
+		local fsignd=''
+		local framelst="$(\ls -1 "${appth}/Contents/Frameworks" | sed -n 's:.framework$:&:p')"
+		for fsignd in ${framelst}; do
+			local framepth="${appth}/Contents/Frameworks/${fsignd}/Versions/A"
+			local signvs="$(/usr/bin/codesign -dv "${framepth}" 2>&1 | grep "Sealed Resources" | sed 's:Sealed Resources version=::' | cut -d ' ' -f 1)"
+			if [[ -d "${framepth}" ]]; then
+				if ! /usr/bin/codesign --verify -vvv "${framepth}" || [ ! "${signvs}" = "2" ]; then
+					# Sign if the verification fails or if the version is not 2
+					/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" --preserve-metadata=entitlements -vvv "${framepth}"
+					if ! /usr/bin/codesign --verify -vvv "${framepth}"; then
+						echo "warning: ${fsignd} is not properly signed." 1>&2
+					fi
+				fi
+			fi
+		done
+		if ! spctl --verbose=4 --assess --type execute "${appth}"; then
+			echo "error: Signature will not be accepted by Gatekeeper!" 1>&2
 		fi
 	else
 		echo "warning: No Code Signing Identity configured or no Code Signing Requirement configured; code will not be signed." 1>&2
