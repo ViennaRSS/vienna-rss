@@ -59,8 +59,8 @@ enum GoogleReaderStatus {
 
 @interface GoogleReader()
 @property (nonatomic, copy) NSMutableArray * localFeeds;
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSString *clientAuthToken;
+@property (atomic, copy) NSString *token;
+@property (atomic, copy) NSString *clientAuthToken;
 @property (nonatomic, retain) NSTimer * tokenTimer;
 @property (nonatomic, retain) NSTimer * authTimer;
 @end
@@ -213,7 +213,10 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];
-		NSDictionary * dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
+		NSDictionary * dict;
+		@synchronized(jsonDecoder) {
+			dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
+		}
 		NSString *folderLastUpdateString = [[dict objectForKey:@"updated"] stringValue];
 		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
 			LOG_EXPR([request url]);
@@ -334,7 +337,6 @@ JSONDecoder * jsonDecoder;
 		// Unread count may have changed
 		[controller setStatusMessage:nil persist:NO];
 		[controller showUnreadCountOnApplicationIconAndWindowTitle];
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
 
 		// Send status to the activity log
@@ -363,41 +365,13 @@ JSONDecoder * jsonDecoder;
                            percentEscape(feedIdentifier)];
 		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
 		ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];
-		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
+		[request2 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", aItem, @"log", nil]];
 		[request2 setDelegate:self];
 		[request2 setDidFinishSelector:@selector(readRequestDone:)];
 		[request2 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 		[request2 setUseCookiePersistence:NO];
 		[request2 setTimeOutSeconds:180];
 		[[RefreshManager sharedManager] addConnection:request2];
-
-		// Request id's of starred items
-		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
-		NSString* starredSelector;
-		if (hostRequiresSParameter)
-		{
-			starredSelector=@"s=user/-/state/com.google/starred";
-		}
-		else
-		{
-			starredSelector=@"it=user/-/state/com.google/starred";
-		}
-		args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
-		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
-		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
-		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", nil]];
-		[request3 setDelegate:self];
-		[request3 setDidFinishSelector:@selector(starredRequestDone:)];
-		[request3 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
-		[request3 setUseCookiePersistence:NO];
-		[request3 setTimeOutSeconds:180];
-		[[RefreshManager sharedManager] addConnection:request3];
-
-		// If this folder also requires an image refresh, add that
-		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
-			dispatch_async(queue, ^() {
-				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
-			});
 
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
@@ -410,8 +384,6 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
-
 	}); //block for dispatch_async
 }
 
@@ -419,9 +391,14 @@ JSONDecoder * jsonDecoder;
 - (void)readRequestDone:(ASIHTTPRequest *)request
 {
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	if ([request responseStatusCode] == 200)
 	{
-		NSArray * dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
+	@try {
+		NSArray * dict;
+		@synchronized(jsonDecoder) {
+			dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
+		}
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
 		{
@@ -445,16 +422,77 @@ JSONDecoder * jsonDecoder;
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
+	} @catch (NSException *exception) {
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
+		return;
+	}  // try/catch
+
+		// Request id's of starred items
+		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
+		NSString* starredSelector;
+		if (hostRequiresSParameter)
+		{
+			starredSelector=@"s=user/-/state/com.google/starred";
+		}
+		else
+		{
+			starredSelector=@"it=user/-/state/com.google/starred";
+		}
+		NSString* feedIdentifier;
+		if( hostRequiresLastPathOnly )
+		{
+			feedIdentifier = [[refreshedFolder feedURL] lastPathComponent];
+		}
+		else
+		{
+			feedIdentifier =  [refreshedFolder feedURL];
+		}
+
+		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
+		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
+		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
+		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", aItem, @"log", nil]];
+		[request3 setDelegate:self];
+		[request3 setDidFinishSelector:@selector(starredRequestDone:)];
+		[request3 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+		[request3 setUseCookiePersistence:NO];
+		[request3 setTimeOutSeconds:180];
+		[[RefreshManager sharedManager] addConnection:request3];
+
+		// If this folder also requires an image refresh, add that
+		dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
+		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
+			dispatch_async(queue, ^() {
+				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
+			});
+
 	}
+	else //response status other than OK (200)
+	{
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),[[request error] localizedDescription ]]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	}
+
 }
 
 // callback
 - (void)starredRequestDone:(ASIHTTPRequest *)request
 {
 	Folder *refreshedFolder = [[request userInfo] objectForKey:@"folder"];
+	ActivityItem *aItem = [[request userInfo] objectForKey:@"log"];
 	if ([request responseStatusCode] == 200)
 	{
-		NSArray * dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
+	@try {
+		NSArray * dict;
+		@synchronized(jsonDecoder) {
+			dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
+		}
 		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
 		for (NSDictionary *itemRef in dict)
 		{
@@ -477,7 +515,23 @@ JSONDecoder * jsonDecoder;
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+	} @catch (NSException *exception) {
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	}  // try/catch
 	}
+	else //response status other than OK (200)
+	{
+		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),[[request error] localizedDescription ]]];
+		[aItem setStatus:NSLocalizedString(@"Error", nil)];
+		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
+		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
+	}
+
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
 }
 
 -(void)authenticate 
@@ -615,8 +669,10 @@ JSONDecoder * jsonDecoder;
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
-	NSDictionary * dict = [jsonDecoder objectWithData:[request responseData]];
-			
+	NSDictionary * dict;
+	@synchronized(jsonDecoder) {
+		dict = [jsonDecoder objectWithData:[request responseData]];
+	}
 	[localFeeds removeAllObjects];
 	NSArray * localFolders = [[NSApp delegate] folders];
 	
@@ -672,7 +728,10 @@ JSONDecoder * jsonDecoder;
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
 					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL]) {
-						[[Database sharedDatabase] setFolderHomePage:[f itemId] newHomePage:homePageURL];
+						Database *db = [Database sharedDatabase];
+						[db doTransactionWithBlock:^(BOOL *rollback) {
+							[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
+						}];
 						break;
 					}
 				}

@@ -616,7 +616,9 @@ static RefreshManager * _refreshManager = nil;
 		NSInteger folderId = [folder itemId];
 		Database * db = [Database sharedDatabase];
 
-		[db setFolderFeedURL:folderId newFeedURL:[newURL absoluteString]];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db setFolderFeedURL:folderId newFeedURL:[newURL absoluteString]];
+		}]; //end transaction block
 		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
 	}
 
@@ -684,7 +686,9 @@ static RefreshManager * _refreshManager = nil;
 	else if (responseStatusCode == 410)
 	{
 		// We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
-		[db setFolderFlag:folderId flagToSet:MA_FFlag_Unsubscribed];
+		[db doTransactionWithBlock:^(BOOL *rollback) {
+			[db setFolderFlag:folderId flagToSet:MA_FFlag_Unsubscribed];
+		}];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
 	}
 	else if (responseStatusCode == 200)
