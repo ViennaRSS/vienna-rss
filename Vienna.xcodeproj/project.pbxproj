@@ -89,12 +89,12 @@
 		3A7BD0DD1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */; };
 		3A8A344D17857D3B00E2E64B /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8A344B17857D3B00E2E64B /* KnownSyncServers.plist */; };
 		3A8E2EBD16EBB356001DFDD6 /* vienna-3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57B1721116E9665500C011C9 /* vienna-3.icns */; };
+		3A9903951993638900EA69B2 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
+		3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		43501FA2165DC5CE0018EDB7 /* Growl.framework in Copy Growl current */ = {isa = PBXBuildFile; fileRef = 43501F72165DB9640018EDB7 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		43501FA8165DC5DD0018EDB7 /* Growl.framework in Copy Growl legacy */ = {isa = PBXBuildFile; fileRef = 43501F74165DB9640018EDB7 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CD165DCB980018EDB7 /* Carbon.framework */; };
 		435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021CF165DCB980018EDB7 /* Cocoa.framework */; };
 		435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 435021D1165DCB980018EDB7 /* IOKit.framework */; };
@@ -830,7 +830,6 @@
 		F0E01EF317C884D800E20329 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E01EEB17C884D800E20329 /* FMResultSet.m */; };
 		F0E01EF417C8856600E20329 /* libFMDatabase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F06BE30317C87DEA00A74FBB /* libFMDatabase.a */; };
 		F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
-		F0E01EF917C8869F00E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
 		F0FBD16617C88BFF006E5756 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FBD16417C88BFF006E5756 /* FMDatabasePool.h */; };
 		F0FBD16717C88BFF006E5756 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FBD16517C88BFF006E5756 /* FMDatabasePool.m */; };
 /* End PBXBuildFile section */
@@ -909,34 +908,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3A031D0615E1443E0092767F /* Copy Growl current */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Growl;
-			dstSubfolderSpec = 10;
-			files = (
-				43501FA2165DC5CE0018EDB7 /* Growl.framework in Copy Growl current */,
-			);
-			name = "Copy Growl current";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3A031D0915E144F10092767F /* Copy Growl legacy */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = Growl/Legacy;
-			dstSubfolderSpec = 10;
-			files = (
-				43501FA8165DC5DD0018EDB7 /* Growl.framework in Copy Growl legacy */,
-			);
-			name = "Copy Growl legacy";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AA65D27F083CF46F00BC387C /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */,
 				43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */,
 				43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */,
 				B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */,
@@ -1003,6 +981,7 @@
 		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRVerticallyCenteredTextFieldCell.h; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRVerticallyCenteredTextFieldCell.m; path = 3rdparty/BJRVerticallyCenteredTextFieldCell/BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
 		3A8A344C17857D3B00E2E64B /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = zh_TW; path = KnownSyncServers.plist; sourceTree = "<group>"; };
+		3A9903941993638900EA69B2 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl.framework; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
@@ -1016,8 +995,6 @@
 		43501CF9165D73C70018EDB7 /* Vienna-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-All.xcconfig"; path = "configs/Vienna-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dep.xcconfig"; path = "configs/Vienna-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-Dev.xcconfig"; path = "configs/Vienna-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43501F72165DB9640018EDB7 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl/Growl.framework; sourceTree = SOURCE_ROOT; };
-		43501F74165DB9640018EDB7 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl/Legacy/Growl.framework; sourceTree = SOURCE_ROOT; };
 		435021CD165DCB980018EDB7 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		435021CF165DCB980018EDB7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		435021D1165DCB980018EDB7 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -1917,6 +1894,7 @@
 				B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */,
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */,
+				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
 				435021D0165DCB980018EDB7 /* Cocoa.framework in Frameworks */,
 				435021D2165DCB980018EDB7 /* IOKit.framework in Frameworks */,
 				435021D4165DCB980018EDB7 /* Security.framework in Frameworks */,
@@ -1926,14 +1904,6 @@
 				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA979716644E4B00B95F35 /* libASIHTTPRequest.a in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F06BE2FE17C87DEA00A74FBB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F0E01EF917C8869F00E20329 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2132,30 +2102,12 @@
 		43501F70165DB92B0018EDB7 /* External frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				43501F71165DB9640018EDB7 /* Growl */,
+				3A9903941993638900EA69B2 /* Growl.framework */,
 				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
 				B23A794310FF50B10085C85B /* Sparkle.framework */,
 			);
 			name = "External frameworks";
 			sourceTree = SOURCE_ROOT;
-		};
-		43501F71165DB9640018EDB7 /* Growl */ = {
-			isa = PBXGroup;
-			children = (
-				43501F72165DB9640018EDB7 /* Growl.framework */,
-				43501F73165DB9640018EDB7 /* Legacy */,
-			);
-			name = Growl;
-			path = 3rdparty/Growl;
-			sourceTree = "<group>";
-		};
-		43501F73165DB9640018EDB7 /* Legacy */ = {
-			isa = PBXGroup;
-			children = (
-				43501F74165DB9640018EDB7 /* Growl.framework */,
-			);
-			path = Legacy;
-			sourceTree = "<group>";
 		};
 		43501F8D165DB9DD0018EDB7 /* Third Party */ = {
 			isa = PBXGroup;
@@ -3450,8 +3402,6 @@
 				52FDC71F0C559C7700F9F29B /* Acknowledgements */,
 				43EE8617165EF9D7000997FB /* Translations */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
-				3A031D0615E1443E0092767F /* Copy Growl current */,
-				3A031D0915E144F10092767F /* Copy Growl legacy */,
 			);
 			buildRules = (
 			);
@@ -3474,7 +3424,6 @@
 			buildPhases = (
 				F06BE2FA17C87DEA00A74FBB /* Headers */,
 				F06BE2FC17C87DEA00A74FBB /* Sources */,
-				F06BE2FE17C87DEA00A74FBB /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -8658,6 +8607,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/3rdparty",
+				);
 			};
 			name = StaticAnalyzer;
 		};
@@ -8732,6 +8685,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFB165D73C70018EDB7 /* Vienna-Dev.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/3rdparty",
+				);
 			};
 			name = Development;
 		};
@@ -8739,6 +8696,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43501CFA165D73C70018EDB7 /* Vienna-Dep.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/3rdparty",
+				);
 				IBC_FLATTEN_NIBS = NO;
 			};
 			name = Deployment;

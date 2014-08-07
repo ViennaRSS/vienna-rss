@@ -643,7 +643,7 @@ static RefreshManager * _refreshManager = nil;
      // hack for handling file:// URLs
 	if ([url isFileURL])
 	{
-		NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
+		NSFileManager *fileManager = [NSFileManager defaultManager];
 		NSString *filePath = [[url path] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		BOOL isDirectory = NO;
 		if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory)

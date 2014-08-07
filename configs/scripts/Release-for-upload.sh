@@ -41,13 +41,12 @@ function signd {
 		# Local Config
 		local appth="${1}"
 		local idetd="${CODE_SIGN_IDENTITY}"
-		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
 		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
 
+		# Sign the DisclosableView framework
+		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/DisclosableView.framework"
 		# Sign and verify the app
-		cp -a "${resrul}" "${appth}/ResourceRules.plist"
-		/usr/bin/codesign -f --sign "${idetd}" --resource-rules="${appth}/ResourceRules.plist" --requirements "${csreq}" -vvv "${appth}"
-		rm "${appth}/ResourceRules.plist"
+		/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
 		if ! codesign --verify -vvv "${appth}"; then
 			echo "warning: Code is improperly signed!" 1>&2
 		fi
