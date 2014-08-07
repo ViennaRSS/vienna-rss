@@ -529,11 +529,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	
 	// Growl initialization
 	NSBundle *mainBundle = [NSBundle mainBundle];
-	NSString *path = [[mainBundle privateFrameworksPath] stringByAppendingPathComponent:@"Growl"];
-	if(NSAppKitVersionNumber < 1038)
-		path = [path stringByAppendingPathComponent:@"Legacy"];
-
-	path = [path stringByAppendingPathComponent:@"Growl.framework"];
+	NSString *path = [[mainBundle privateFrameworksPath] stringByAppendingPathComponent:@"Growl.framework"];
 	LOG_NS(@"path: %@", path);
 	NSBundle *growlFramework = [NSBundle bundleWithPath:path];
 	if([growlFramework load])
