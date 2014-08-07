@@ -80,11 +80,12 @@
 	enclosureFilename = newFilename;
 
 	NSString * basename = [enclosureFilename lastPathComponent];
-	NSString * ext = [basename pathExtension];
+    NSString * encodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString * ext = [encodedname pathExtension];
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
-	NSString * destPath = [DownloadManager fullDownloadPath:basename];
+	NSString * destPath = [DownloadManager fullDownloadPath:encodedname];
 	if (![DownloadManager isFileDownloaded:destPath])
 	{
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
@@ -130,7 +131,7 @@
 															[NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f], NSForegroundColorAttributeName,
 															[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName,
 															nil];
-	NSAttributedString * link = [[[NSAttributedString alloc] initWithString:basename attributes:linkAttributes] autorelease];
+	NSAttributedString * link = [[[NSAttributedString alloc] initWithString:encodedname attributes:linkAttributes] autorelease];
 	[filenameField setAttributedStringValue:link];
 }
 

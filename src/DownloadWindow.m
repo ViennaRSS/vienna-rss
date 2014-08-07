@@ -209,7 +209,8 @@
 
 	// TODO: return item when we have a cell that can parse it. Until then, construct our
 	// own data.
-	NSString * filename = [[item filename] lastPathComponent];
+	NSString * rawfilename = [[item filename] lastPathComponent];
+    NSString * filename = [rawfilename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	if (filename == nil)
 		filename = @"";
 
