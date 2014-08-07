@@ -53,7 +53,7 @@ function signd {
 		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/Sparkle.framework"
 		# Sign and verify the app
 		/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
-		if ! codesign --verify -vvv "${appth}"; then
+		if ! spctl --verbose=4 --assess --type execute "${appth}" ; then
 			echo "warning: Code is improperly signed!" 1>&2
 		fi
 	else
