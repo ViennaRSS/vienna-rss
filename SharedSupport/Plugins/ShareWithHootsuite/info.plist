@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Name</key>
+    <string>ShareWithHootsuite</string>
+    <key>Type</key>
+    <string>Link</string>
+    <key>URL</key>
+    <string>https://hootsuite.com/hootlet/load?address=$ArticleLink$&amp;title=$ArticleTitle$</string>
+    <key>Default</key>
+    <false/>
+    <key>FriendlyName</key>
+    <string>Hootsuite</string>
+    <key>Tooltip</key>
+    <string>Share the current article on Hootsuite</string>
+    <key>ButtonImage</key>
+    <string>Hootlet</string>
+    <key>MenuPath</key>
+    <string>Share With Hootsuite</string>
+    <key>ShortenURLs</key>
+    <false/>
+</dict>
+</plist>
