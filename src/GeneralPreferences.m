@@ -360,39 +360,15 @@
 }
 
 /* setDefaultLinksHandler
- * Set the default handler for feed links via Internet Config.
+ * Set the default handler for feed links via Launch Services
  */
 -(void)setDefaultLinksHandler:(NSURL *)fileURLToNewHandler
 {
-	// First time registration of IC.
-	if (!internetConfigHandler)
-	{
-		NSBundle * appBundle = [NSBundle mainBundle];
-		NSDictionary * fileAttributes = [appBundle infoDictionary];
-		NSString * creatorString = [NSString stringWithFormat:@"'%@'", [fileAttributes objectForKey:@"CFBundleSignature"]];
-		int appCode = NSHFSTypeCodeFromFileType(creatorString);
-		
-		if (ICStart(&internetConfigHandler, appCode) != noErr)
-			internetConfigHandler = nil;
-	}
-	
-	if (internetConfigHandler)
-	{
-		if (ICBegin(internetConfigHandler, icReadWritePerm) == noErr)
-		{
-			LSItemInfoRecord outItemInfo;
-			ICAppSpec spec;
-			int attr = 0;
-			
-			LSCopyItemInfoForURL((CFURLRef)fileURLToNewHandler, kLSRequestTypeCreator, &outItemInfo);
-			spec.fCreator = outItemInfo.creator;
-			
-			CFStringGetPascalString((CFStringRef)[fileURLToNewHandler path], (StringPtr)&spec.name, sizeof(spec.name), kCFStringEncodingMacRoman);
-			ICSetPref(internetConfigHandler, kICHelper "feed", attr, &spec, sizeof(spec));
-			
-			ICEnd(internetConfigHandler);
-		}
-	}
+	NSBundle * appBundle = [NSBundle bundleWithURL:fileURLToNewHandler];
+	NSDictionary * fileAttributes = [appBundle infoDictionary];
+	CFStringRef bundleIdentifier = (__bridge CFStringRef)[fileAttributes objectForKey:@"CFBundleIdentifier"];
+	CFStringRef scheme = (__bridge CFStringRef)@"feed";
+	LSSetDefaultHandlerForURLScheme(scheme, bundleIdentifier);
 }
 
 /* changeCheckFrequency
