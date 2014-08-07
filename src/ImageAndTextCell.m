@@ -295,13 +295,12 @@
 
 /* selectWithFrame
  * Draws the selection around the cell. We overload this to handle our custom field editor
- * frame in the FolderView class.
+ * frame in the FolderView class, and to keep the image visible
  */
 -(void)selectWithFrame:(NSRect)aRect inView:(NSView *)controlView editor:(NSText *)textObj delegate:(id)anObject start:(NSInteger)selStart length:(NSInteger)selLength
 {
 	if ([controlView isKindOfClass:[FolderView class]])
 	{
-		aRect.size = [self cellSize];
 		if (image != nil)
 			aRect.origin.x += [image size].width + 3;
 		++aRect.origin.y;
