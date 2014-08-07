@@ -54,7 +54,6 @@
 	grayGradient = [[NSImage alloc] initWithContentsOfFile: grayGradientURL ];
 
 	iRect = NSMakeRect(0,0,1,[blueGradient size].height-1);					
-	[grayGradient setFlipped:YES];
 	
 	// Add the notifications for collapse and expand.
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -291,14 +290,12 @@
 		NSRect selectedRect = [self rectOfRow:rowIndex];
 		if (NSIntersectsRect(selectedRect, rect))
 		{
-			[blueGradient setFlipped:YES];
-			[blueGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
-			[blueGradient setFlipped:NO];
+			[blueGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 
 			if ([self editedRow] == -1)
 			{
 				if ([[self window] firstResponder] != self || ![[self window] isKeyWindow])
-					[grayGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
+					[grayGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 			}
 			if ([self editedRow] != -1)
 				[self performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
@@ -340,9 +337,7 @@
 		// Get rid of the white border, leftover from resizing the fieldEditor..
 		editRect.origin.x -= 6;
 		editRect.size.width += 6;
-		[blueGradient setFlipped:YES];
-		[blueGradient drawInRect:editRect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
-		[blueGradient setFlipped:NO];
+		[blueGradient drawInRect:editRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 		
 		// Put back any cell image
 		int editColumnIndex = [self editedColumn];
