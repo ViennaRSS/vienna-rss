@@ -1,7 +1,0 @@
-// GTMHTTP settings for Development configuration
-
-#include "GTMHTTP-All.xcconfig"
-#include "General-Dev.xcconfig"
-
-
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) DEBUG

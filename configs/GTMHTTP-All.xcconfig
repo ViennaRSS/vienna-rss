@@ -1,9 +1,0 @@
-// GTMHTTP settings for all configurations
-
-
-PRODUCT_NAME = GTMHTTP
-USER_HEADER_SEARCH_PATHS =  $(inherited) "$(SRCROOT)/3rdparty/GTMHTTP"
-GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
-
-
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
