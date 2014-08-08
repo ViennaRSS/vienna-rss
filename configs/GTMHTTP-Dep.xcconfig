@@ -1,4 +1,0 @@
-// GTMHTTP settings for Deployment configuration
-
-#include "GTMHTTP-All.xcconfig"
-#include "General-Dep.xcconfig"

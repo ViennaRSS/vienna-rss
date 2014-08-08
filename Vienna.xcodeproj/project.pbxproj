@@ -92,6 +92,7 @@
 		3A9903951993638900EA69B2 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
 		3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
+		3AF003011994755C00509FF6 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF003001994755C00509FF6 /* FMDB.h */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -984,6 +985,7 @@
 		3A9903941993638900EA69B2 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl.framework; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
+		3AF003001994755C00509FF6 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autorevision.h; path = src/autorevision.h; sourceTree = SOURCE_ROOT; };
 		430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankPopupMenuButton.tiff; path = Resources/blankPopupMenuButton.tiff; sourceTree = SOURCE_ROOT; };
@@ -1097,7 +1099,6 @@
 		439824221666B3DB00FFE219 /* notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = notes.html; sourceTree = SOURCE_ROOT; };
 		439824231666B3DB00FFE219 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		439824241666B3DB00FFE219 /* Release Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Release Instructions.txt"; sourceTree = SOURCE_ROOT; };
-		43B4611E1690982D00F6EC9A /* ResourceRules.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ResourceRules.plist; path = signing/ResourceRules.plist; sourceTree = "<group>"; };
 		43BA97121663EA5000B95F35 /* libJSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJSONKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA97321663EE7C00B95F35 /* DisclosableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DisclosableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libASIHTTPRequest.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1107,9 +1108,6 @@
 		43BA9790166449E000B95F35 /* Base-Framework.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Base-Framework.xcconfig"; path = "configs/Base-Framework.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA9791166449E000B95F35 /* General-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "General-Dep.xcconfig"; path = "configs/General-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA9792166449E000B95F35 /* General-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "General-Dev.xcconfig"; path = "configs/General-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA97A416645E1D00B95F35 /* GTMHTTP-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMHTTP-All.xcconfig"; path = "configs/GTMHTTP-All.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA97A516645E1D00B95F35 /* GTMHTTP-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMHTTP-Dep.xcconfig"; path = "configs/GTMHTTP-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA97A616645E1D00B95F35 /* GTMHTTP-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMHTTP-Dev.xcconfig"; path = "configs/GTMHTTP-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97AE1664677600B95F35 /* JSONKit-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "JSONKit-All.xcconfig"; path = "configs/JSONKit-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97AF1664677600B95F35 /* JSONKit-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "JSONKit-Dep.xcconfig"; path = "configs/JSONKit-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "JSONKit-Dev.xcconfig"; path = "configs/JSONKit-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -1117,9 +1115,6 @@
 		43BA97CD1664752A00B95F35 /* DisclosableView-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "DisclosableView-All.xcconfig"; path = "configs/DisclosableView-All.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97CE1664752A00B95F35 /* DisclosableView-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "DisclosableView-Dep.xcconfig"; path = "configs/DisclosableView-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43BA97CF1664752A00B95F35 /* DisclosableView-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "DisclosableView-Dev.xcconfig"; path = "configs/DisclosableView-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA9806166483B900B95F35 /* GTMOAuth2-All.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-All.xcconfig"; path = "configs/GTMOAuth2-All.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA9807166483B900B95F35 /* GTMOAuth2-Dep.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-Dep.xcconfig"; path = "configs/GTMOAuth2-Dep.xcconfig"; sourceTree = SOURCE_ROOT; };
-		43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "GTMOAuth2-Dev.xcconfig"; path = "configs/GTMOAuth2-Dev.xcconfig"; sourceTree = SOURCE_ROOT; };
 		43D4D6F9166FE0DB00BA9675 /* Vienna-StaticAnalyzer.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "Vienna-StaticAnalyzer.xcconfig"; path = "configs/Vienna-StaticAnalyzer.xcconfig"; sourceTree = "<group>"; };
 		43EE7F2A165EAA6E000997FB /* cs */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = cs; path = AdvancedPreferences.nib; sourceTree = "<group>"; };
 		43EE7F2C165EAA6E000997FB /* cs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = cs; path = AdvancedPreferences.strings; sourceTree = "<group>"; };
@@ -2058,7 +2053,6 @@
 				43EE754E165E83D6000997FB /* UI Images */,
 				43EE7551165EA910000997FB /* lproj */,
 				434D6B8516937615008CBE8C /* codesignrequirement.rqset */,
-				43B4611E1690982D00F6EC9A /* ResourceRules.plist */,
 				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
 			);
 			name = Resources;
@@ -2080,12 +2074,6 @@
 				F06BE30617C87FEF00A74FBB /* FMDatabase-Dev.xcconfig */,
 				43BA9791166449E000B95F35 /* General-Dep.xcconfig */,
 				43BA9792166449E000B95F35 /* General-Dev.xcconfig */,
-				43BA97A416645E1D00B95F35 /* GTMHTTP-All.xcconfig */,
-				43BA97A516645E1D00B95F35 /* GTMHTTP-Dep.xcconfig */,
-				43BA97A616645E1D00B95F35 /* GTMHTTP-Dev.xcconfig */,
-				43BA9806166483B900B95F35 /* GTMOAuth2-All.xcconfig */,
-				43BA9807166483B900B95F35 /* GTMOAuth2-Dep.xcconfig */,
-				43BA9808166483B900B95F35 /* GTMOAuth2-Dev.xcconfig */,
 				43BA97AE1664677600B95F35 /* JSONKit-All.xcconfig */,
 				43BA97AF1664677600B95F35 /* JSONKit-Dep.xcconfig */,
 				43BA97B01664677600B95F35 /* JSONKit-Dev.xcconfig */,
@@ -3269,6 +3257,7 @@
 		F0E01EE317C884D800E20329 /* FMDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				3AF003001994755C00509FF6 /* FMDB.h */,
 				F0E01EE417C884D800E20329 /* FMDatabase.h */,
 				F0E01EE517C884D800E20329 /* FMDatabase.m */,
 				F0E01EE617C884D800E20329 /* FMDatabaseAdditions.h */,
@@ -3330,6 +3319,7 @@
 				F0E01EEC17C884D800E20329 /* FMDatabase.h in Headers */,
 				F0E01EEE17C884D800E20329 /* FMDatabaseAdditions.h in Headers */,
 				F0E01EF017C884D800E20329 /* FMDatabaseQueue.h in Headers */,
+				3AF003011994755C00509FF6 /* FMDB.h in Headers */,
 				F0E01EF217C884D800E20329 /* FMResultSet.h in Headers */,
 				F0FBD16617C88BFF006E5756 /* FMDatabasePool.h in Headers */,
 			);

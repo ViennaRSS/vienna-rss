@@ -43,11 +43,14 @@ function signd {
 		local idetd="${CODE_SIGN_IDENTITY}"
 		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
 
-		# Sign the DisclosableView framework
-		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/DisclosableView.framework"
+		# Sign the frameworks
+		for i in $(unset CLICOLOR_FORCE; ls -w "${appth}/Contents/Frameworks/")
+		do
+			/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/${i}"
+		done
 		# Sign and verify the app
 		/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
-		if ! codesign --verify -vvv "${appth}"; then
+		if ! spctl --verbose=4 --assess --type execute "${appth}" ; then
 			echo "warning: Code is improperly signed!" 1>&2
 		fi
 	else
@@ -62,7 +65,7 @@ if [ ! "${CONFIGURATION}" = "Deployment" ]; then
 	exit 1
 fi
 # Fail if incorrectly tagged
-if [[ "${VCS_TICK}" == "0" ]] && ! git describe --exact-match "${VCS_TAG}"; then
+if ! git describe --dirty --exact-match --match "${VCS_TAG}"; then
 	echo 'error: The tag is not annotated; please redo the tag with `git tag -s` or `git tag -a`.' 1>&2
 	exit 1
 fi
@@ -107,7 +110,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 		<link>http://www.vienna-rss.org/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
-		<copyright>Copyright 2010-2013, Steve Palmer and contributors</copyright>
+		<copyright>Copyright 2010-2014, Steve Palmer and contributors</copyright>
 		<item>
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
