@@ -43,14 +43,11 @@ function signd {
 		local idetd="${CODE_SIGN_IDENTITY}"
 		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
 
-		# Sign the DisclosableView framework
-		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/DisclosableView.framework"
-		# Sign the Growl framework
-		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/Growl.framework"
-		# Sign the PSMTabBarControl framework
-		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/PSMTabBarControl.framework"
-		# Sign the Sparkle framework
-		/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/Sparkle.framework"
+		# Sign the frameworks
+		for i in $(unset CLICOLOR_FORCE; ls -w "${appth}/Contents/Frameworks/")
+		do
+			/usr/bin/codesign -f --sign "${idetd}" -vvv "${appth}/Contents/Frameworks/${i}"
+		done
 		# Sign and verify the app
 		/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" -vvv "${appth}"
 		if ! spctl --verbose=4 --assess --type execute "${appth}" ; then
