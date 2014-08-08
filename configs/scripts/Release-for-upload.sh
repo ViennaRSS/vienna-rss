@@ -65,7 +65,7 @@ if [ ! "${CONFIGURATION}" = "Deployment" ]; then
 	exit 1
 fi
 # Fail if incorrectly tagged
-if [[ "${VCS_TICK}" == "0" ]] && ! git describe --exact-match "${VCS_TAG}"; then
+if ! git describe --dirty --exact-match --match "${VCS_TAG}"; then
 	echo 'error: The tag is not annotated; please redo the tag with `git tag -s` or `git tag -a`.' 1>&2
 	exit 1
 fi
