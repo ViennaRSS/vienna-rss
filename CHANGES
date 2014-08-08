@@ -8,6 +8,15 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 3
+----------
+- Fix some crashes
+- Remember chosen text size in article view
+- Fix text vertical centering
+- Add a "Share with Hootsuite" plugin
+- Handle enclosures with filenames containing spaces or special characters
+- Improved build process
+
 3.0.0 rc 2
 ----------
 - Background fetching and database writing of feeds (yes, such an important change is not expected between two release candidates versions, but the risk has been thoroughly pondered)
