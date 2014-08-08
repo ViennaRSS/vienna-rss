@@ -110,7 +110,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 		<link>http://www.vienna-rss.org/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
-		<copyright>Copyright 2010-2013, Steve Palmer and contributors</copyright>
+		<copyright>Copyright 2010-2014, Steve Palmer and contributors</copyright>
 		<item>
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
