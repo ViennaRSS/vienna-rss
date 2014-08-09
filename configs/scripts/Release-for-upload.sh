@@ -59,6 +59,7 @@ function signd {
 		# Verify and sign the frameworks
 		local fsignd=''
 		local framelst="$(\ls -1 "${appth}/Contents/Frameworks" | sed -n 's:.framework$:&:p')"
+		unset CLICOLOR_FORCE
 		for fsignd in ${framelst}; do
 			local framepth="${appth}/Contents/Frameworks/${fsignd}/Versions/A"
 			local signvs="$(/usr/bin/codesign -dv "${framepth}" 2>&1 | grep "Sealed Resources" | sed 's:Sealed Resources version=::' | cut -d ' ' -f 1)"
