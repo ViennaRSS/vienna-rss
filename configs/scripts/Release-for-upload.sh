@@ -52,9 +52,14 @@ function signd {
 			local framepth="${appth}/Contents/Frameworks/${fsignd}/Versions/A"
 			local signvs="$(/usr/bin/codesign -dv "${framepth}" 2>&1 | grep "Sealed Resources" | sed 's:Sealed Resources version=::' | cut -d ' ' -f 1)"
 			if [[ -d "${framepth}" ]]; then
+				local frmcsreq="${DERIVED_FILES_DIR}/${fsignd}.rqset"
+				local frmid="$(defaults read "${framepth}/Resources/Info.plist" CFBundleIdentifier)"
 				if ! /usr/bin/codesign --verify -vvv "${framepth}" || [ ! "${signvs}" = "2" ]; then
 					# Sign if the verification fails or if the version is not 2
-					/usr/bin/codesign -f --sign "${idetd}" --requirements "${csreq}" --preserve-metadata=entitlements -vvv "${framepth}"
+					
+					sed -e "s:uk.co.opencommunity.vienna2:${frmid}:" "${csreq}" > "${frmcsreq}"
+					
+					/usr/bin/codesign -f --sign "${idetd}" --requirements "${frmcsreq}" --preserve-metadata=entitlements -vvv "${framepth}"
 					if ! /usr/bin/codesign --verify -vvv "${framepth}"; then
 						echo "warning: ${fsignd} is not properly signed." 1>&2
 					fi
