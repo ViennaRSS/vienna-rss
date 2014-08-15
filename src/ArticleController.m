@@ -666,15 +666,6 @@
 	}
 	}]; //end transaction block
 
-	for (Article * theArticle in folderArrayOfArticles)
-	{
-		if (IsGoogleReaderFolder([db folderFromID:[theArticle folderId]]) && ![theArticle isRead]) {
-			[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
-		}
-		[theArticle markRead:YES];
-
-	}
-    
 	if (refreshFlag)
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
