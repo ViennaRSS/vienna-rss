@@ -2259,11 +2259,11 @@ static Database * _sharedDatabase = nil;
 	return [tree autorelease];
 }
 
-/* arrayOfUnreadArticles
+/* arrayOfUnreadArticlesRefs
  * Retrieves an array of ArticleReference objects that represent all unread
  * articles in the specified folder.
  */
--(NSArray *)arrayOfUnreadArticles:(NSInteger)folderId
+-(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId
 {
 	Folder * folder = [self folderFromID:folderId];
 	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[folder unreadCount]];

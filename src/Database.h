@@ -134,7 +134,7 @@
 // Article functions
 -(BOOL)createArticle:(NSInteger)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(BOOL)deleteArticle:(NSInteger)folderId guid:(NSString *)guid;
--(NSArray *)arrayOfUnreadArticles:(NSInteger)folderId;
+-(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
 -(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
 -(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;

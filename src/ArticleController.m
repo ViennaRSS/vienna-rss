@@ -633,6 +633,30 @@
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 }
 
+/* innerMarkReadByRefsArray
+ * Marks all articles in the specified references array read or unread.
+ */
+-(void)innerMarkReadByRefsArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
+{
+	Database * db = [Database sharedDatabase];
+	NSInteger lastFolderId = -1;
+
+	for (ArticleReference * articleRef in articleArray)
+	{
+		NSInteger folderId = [articleRef folderId];
+		if (IsGoogleReaderFolder([db folderFromID:folderId])){
+			[[GoogleReader sharedManager] markRead:[articleRef guid] readFlag:readFlag];
+		}
+		//FIX: article status should be "settato" from httprequest success block
+		[db markArticleRead:folderId guid:[articleRef guid] isRead:readFlag];
+		if (folderId != lastFolderId && lastFolderId != -1)
+			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+		lastFolderId = folderId;
+	}
+	if (lastFolderId != -1)
+		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+}
+
 /* markAllReadUndo
  * Undo the most recent Mark All Read.
  */
@@ -690,7 +714,7 @@
 		else if (IsRSSFolder(folder))
 		{
 			if (undoFlag)
-				[refArray addObjectsFromArray:[db arrayOfUnreadArticles:folderId]];
+				[refArray addObjectsFromArray:[db arrayOfUnreadArticlesRefs:folderId]];
 			if ([db markFolderRead:folderId])
 			{
 				[foldersTree updateFolder:folderId recurseToParents:YES];
@@ -699,9 +723,10 @@
 		}
 		else if (IsGoogleReaderFolder(folder))
 		{
+			NSArray * articleArray = [db arrayOfUnreadArticlesRefs:folderId];
 			if (undoFlag)
-				[refArray addObjectsFromArray:currentArrayOfArticles];
-			[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
+				[refArray addObjectsFromArray:articleArray];
+			[self innerMarkReadByRefsArray:articleArray readFlag:YES];
 		}
 		else
 		{
