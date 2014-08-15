@@ -170,7 +170,7 @@
 
 - (BOOL)acceptsFirstResponder
 {
-	return YES;
+	return NO;
 };
 
 /* keyDown
