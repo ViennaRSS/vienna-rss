@@ -3120,8 +3120,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (![db readOnly])
 	{
-		[articleController markAllReadByArray:[foldersTree folders:0] withUndo:NO withRefresh:YES];
-		[self clearUndoStack];
+		[articleController markAllReadByArray:[foldersTree folders:0] withUndo:YES withRefresh:YES];
 	}
 }
 
