@@ -878,6 +878,13 @@
 			remoteGlobalIDString = 430C4AF71661F07C0079C9FC;
 			remoteInfo = "Code Sign ID";
 		};
+		431A91C01992D43A00155418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 430C4AF71661F07C0079C9FC;
+			remoteInfo = "Code Sign ID";
+		};
 		43501CFE165D82ED0018EDB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -3357,6 +3364,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				431A91C11992D43A00155418 /* PBXTargetDependency */,
 			);
 			name = DisclosableView;
 			productName = DisclosableView;
@@ -3431,7 +3439,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = uk.co.opencommunity;
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
@@ -4404,6 +4412,11 @@
 			isa = PBXTargetDependency;
 			target = 430C4AF71661F07C0079C9FC /* Code Sign ID */;
 			targetProxy = 430C4AFE1661F3090079C9FC /* PBXContainerItemProxy */;
+		};
+		431A91C11992D43A00155418 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 430C4AF71661F07C0079C9FC /* Code Sign ID */;
+			targetProxy = 431A91C01992D43A00155418 /* PBXContainerItemProxy */;
 		};
 		43501CFF165D82ED0018EDB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
