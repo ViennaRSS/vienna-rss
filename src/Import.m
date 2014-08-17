@@ -22,6 +22,7 @@
 #import "XMLParser.h"
 #import "StringExtensions.h"
 #import "ViennaApp.h"
+#import "BJRWindowWithToolbar.h"
 
 @implementation AppController (Import)
 

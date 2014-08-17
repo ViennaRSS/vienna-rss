@@ -62,6 +62,7 @@
 #import "GoogleReader.h"
 #import "VTPG_Common.h"
 #import "Database.h"
+#import "BJRWindowWithToolbar.h"
 
 
 @interface AppController (Private)

@@ -279,7 +279,7 @@
 "Validate Feed" = "Validez le flux";
 "Vienna Help" = "Aide Vienna";
 "Vienna Web Site" = "Site internet";
-"View" = "Affichage";
+"View" = "Présentation";
 "Window" = "Fenêtre";
 "Zoom" = "Réduire/Agrandir";
 "Export all subscriptions" = "Exporter tous les abonnements";
@@ -408,7 +408,6 @@
 /* Added for Open Reader support */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader";
 "Update Subscriptions From Open Reader" = "Mettre à jour les abonnements à partir de Open Reader";
-"Hide Toolbar" = "Masquer la barre d'outils";
 "Delete Open Reader RSS feed text" = "Se désabonner d'un fil RSS dans Open Reader";
 "Delete Open Reader RSS feed" = "Supprimer un fil RSS de Open Reader";
 

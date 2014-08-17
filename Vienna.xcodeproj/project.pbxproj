@@ -93,6 +93,7 @@
 		3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
 		3AF003011994755C00509FF6 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AF003001994755C00509FF6 /* FMDB.h */; };
+		3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
 		43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -953,7 +954,6 @@
 		3A20DC571783FF8D00D75515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A20DC5A1783FFC600D75515 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
-		3A23F13415276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
 		3A4DBE9417319979006DD2AB /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = 3rdparty/PXListView/PXListDocumentView.h; sourceTree = "<group>"; };
 		3A4DBE9517319979006DD2AB /* PXListDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListDocumentView.m; path = 3rdparty/PXListView/PXListDocumentView.m; sourceTree = "<group>"; };
 		3A4DBE9617319979006DD2AB /* PXListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListView.h; path = 3rdparty/PXListView/PXListView.h; sourceTree = "<group>"; };
@@ -994,6 +994,8 @@
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF003001994755C00509FF6 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
+		3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRWindowWithToolbar.m; path = src/BJRWindowWithToolbar.m; sourceTree = "<group>"; };
+		3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRWindowWithToolbar.h; path = src/BJRWindowWithToolbar.h; sourceTree = "<group>"; };
 		430C4ADB1661753F0079C9FC /* autorevision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autorevision.h; path = src/autorevision.h; sourceTree = SOURCE_ROOT; };
 		430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankPopupMenuButton.tiff; path = Resources/blankPopupMenuButton.tiff; sourceTree = SOURCE_ROOT; };
 		430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = blankPopupMenuButtonPressed.tiff; path = Resources/blankPopupMenuButtonPressed.tiff; sourceTree = SOURCE_ROOT; };
@@ -3171,15 +3173,16 @@
 		AAC5063D082A7AE00089FF70 /* Support Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */,
-				3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */,
-				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				AAD7999D088B617900E2CE5E /* AddressBarCell.h */,
 				AA71168E09BEB17300E3EA8A /* AddressBarCell.m */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
 				B27CD04D1100F408001F3C83 /* BitlyAPIHelper.h */,
 				B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */,
+				3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */,
+				3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */,
+				3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */,
+				3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */,
 				34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */,
 				34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */,
 				AA8B36BF0C12D6480035FBD7 /* GradientView.h */,
@@ -3191,7 +3194,7 @@
 				AAFAF3FB088056D800DAFF04 /* KeyChain.h */,
 				AAFAF3FC088056D800DAFF04 /* KeyChain.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
-				3A23F13415276935008AF863 /* NSNotificationAdditions.h */,
+				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
 				AAE7A8FF086BB5C4009A487E /* PopupButton.h */,
 				AAE7A900086BB5C4009A487E /* PopupButton.m */,
 				3A4DBE9417319979006DD2AB /* PXListDocumentView.h */,
@@ -4346,6 +4349,7 @@
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
+				3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
 				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,

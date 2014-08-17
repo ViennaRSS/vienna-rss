@@ -408,7 +408,6 @@
 /* Added for Open Reader support */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
 "Update Subscriptions From Open Reader" = "Bijwerken abonnementen van Open Reader";
-"Hide Toolbar" = "Verberg knoppenbalk";
 "Delete Open Reader RSS feed text" = "Wis Open Reader RSS feed tekst";
 "Delete Open Reader RSS feed" = "Wis Open Reader RSS feed";
 
