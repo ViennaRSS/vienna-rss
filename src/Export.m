@@ -22,6 +22,7 @@
 #import "FoldersTree.h"
 #import "XMLParser.h"
 #import "StringExtensions.h"
+#import "BJRWindowWithToolbar.h"
 
 @implementation AppController (Export)
 
