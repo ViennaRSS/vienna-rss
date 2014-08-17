@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1050" defaultVersion="1060" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -31,7 +31,7 @@
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="333" y="334" width="512" height="456"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1600" height="1178"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="444" height="252"/>
             <view key="contentView" id="65">
                 <rect key="frame" x="0.0" y="0.0" width="512" height="456"/>
@@ -51,10 +51,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Cada 5 minutos" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" tag="300" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="142" id="147">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="70">
                                 <items>
-                                    <menuItem title="Manualmente" state="on" id="73"/>
+                                    <menuItem title="Manualmente" id="73"/>
                                     <menuItem isSeparatorItem="YES" id="72">
                                         <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                     </menuItem>
@@ -100,7 +100,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Ninguno" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="81" id="150">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="80">
                                 <items>
                                     <menuItem title="Ninguno" state="on" id="81"/>
@@ -156,12 +156,12 @@
                     <popUpButton verticalHuggingPriority="750" id="90">
                         <rect key="frame" x="303" y="382" width="193" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <popUpButtonCell key="cell" type="push" title="(Do not localise)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="155">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="155">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="91">
                                 <items>
-                                    <menuItem title="(Do not localise)" state="on" id="92"/>
+                                    <menuItem title="(Do not localise)" id="92"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -183,10 +183,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <popUpButtonCell key="cell" type="push" title="Otra..." bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="97" id="157">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
+                            <font key="font" metaFont="menu"/>
                             <menu key="menu" title="OtherViews" id="95">
                                 <items>
-                                    <menuItem title="(Path)" state="on" id="96"/>
+                                    <menuItem title="(Path)" id="96"/>
                                     <menuItem isSeparatorItem="YES" id="98">
                                         <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                     </menuItem>
@@ -202,10 +202,8 @@
                     <textField verticalHuggingPriority="750" id="119">
                         <rect key="frame" x="17" y="148" width="478" height="17"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="158">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Cuando se recuperan nuevos artículos no leídos:" id="158">
                             <font key="font" metaFont="system"/>
-                            <string key="title">When new unread articles are retrieved:
-</string>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>

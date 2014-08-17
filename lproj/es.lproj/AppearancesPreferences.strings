@@ -9,13 +9,13 @@
 "Folder list font:" = "Lista de carpetas:";
 
 /* NSButton (Never use font sizes smaller than) : <title:Never use font sizes smaller than> (oid:36) */
-"Never use font sizes smaller than" = "No usar fuentes más pequeñas que:";
+"Never use font sizes smaller than" = "No usar fuentes más pequeñas de:";
 
 /* NSButton (Select...) : <title:Select...> (oid:54) */
 "Select..." = "Seleccionar...";
 
 /* NSButton (Show folder images in folder list) : <title:Show folder images in folder list> (oid:64) */
-"Show folder images in folder list" = "Mostrar iconos en la lista";
+"Show folder images in folder list" = "Mostrar iconos de las carpetas en la lista de carpetas";
 
 /* NSTextField (When viewing articles or web pages:) : <title:When viewing articles or web pages:> (oid:63) */
 "When viewing articles or web pages:" = "Al ver artículos o páginas web:";
