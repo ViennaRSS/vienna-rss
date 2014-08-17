@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 4
+----------
+- Fix another crash
+- Improve localizations (including Spanish, thanks to Juan Pablo Atienza Martinez)
+- Improved Unified layout
+
 3.0.0 rc 3
 ----------
 - Fix some crashes
