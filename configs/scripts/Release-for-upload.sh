@@ -122,7 +122,7 @@ rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
 # Copy the app cleanly
 rsync -clprt --del --exclude=".DS_Store" "${BUILT_PRODUCTS_DIR}/Vienna.app" "${VIENNA_UPLOADS_DIR}"
-signd "Vienna.app"
+signd "${VIENNA_UPLOADS_DIR}/Vienna.app"
 tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
