@@ -43,6 +43,9 @@ function signd {
 		local idetd="${CODE_SIGN_IDENTITY}"
 		local resrul="${CODE_SIGN_RESOURCE_RULES_PATH}"
 		local csreq="${CODE_SIGN_REQUIREMENTS_PATH}"
+		if [ ! -d "${DERIVED_FILES_DIR}" ]; then
+			mkdir -p "${DERIVED_FILES_DIR}"
+		fi
 
 		# Verify and sign the frameworks
 		local fsignd=''
@@ -52,8 +55,8 @@ function signd {
 			local framepth="${appth}/Contents/Frameworks/${fsignd}/Versions/A"
 			local signvs="$(/usr/bin/codesign -dv "${framepth}" 2>&1 | grep "Sealed Resources" | sed 's:Sealed Resources version=::' | cut -d ' ' -f 1)"
 			if [[ -d "${framepth}" ]]; then
-				local frmcsreq="/${TEMP_FILE_DIR}/${fsignd}.rqset"
-				local frmid="$(defaults read "$(pwd)/${framepth}/Resources/Info.plist" CFBundleIdentifier)"
+				local frmcsreq="${DERIVED_FILES_DIR}/${fsignd}.rqset"
+				local frmid="$(defaults read "${framepth}/Resources/Info.plist" CFBundleIdentifier)"
 				if ! /usr/bin/codesign --verify -vvv "${framepth}" || [ ! "${signvs}" = "2" ]; then
 					# Sign if the verification fails or if the version is not 2
 					
@@ -92,8 +95,13 @@ if [ ! "${CONFIGURATION}" = "Deployment" ]; then
 	echo "error: This should only be run as Deployment" >&2
 	exit 1
 fi
+# Fail if not clean
+if [ ! "${VCS_WC_MODIFIED}" == "0" ]; then
+	echo 'error: The Working directory is not clean; please commit or revert any changes.' 1>&2
+	exit 1
+fi
 # Fail if incorrectly tagged
-if ! git describe --dirty --exact-match --match "${VCS_TAG}"; then
+if [[ "${VCS_TICK}" == "0" ]] && ! git describe --exact-match "${VCS_TAG}"; then
 	echo 'error: The tag is not annotated; please redo the tag with `git tag -s` or `git tag -a`.' 1>&2
 	exit 1
 fi
@@ -114,7 +122,7 @@ rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
 # Copy the app cleanly
 rsync -clprt --del --exclude=".DS_Store" "${BUILT_PRODUCTS_DIR}/Vienna.app" "${VIENNA_UPLOADS_DIR}"
-signd "Vienna.app"
+signd "${VIENNA_UPLOADS_DIR}/Vienna.app"
 tar -czf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
