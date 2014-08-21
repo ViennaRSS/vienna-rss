@@ -2558,10 +2558,16 @@ static Database * _sharedDatabase = nil;
  */
 -(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
 {
-	if (isDeleted)
-		[self markArticleRead:folderId guid:guid isRead:YES];
-	NSString * preparedGuid = [Database prepareStringForQuery:guid];
-	[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%ld and message_id='%@'", isDeleted, (long)folderId, preparedGuid];
+	Folder * folder = [self folderFromID:folderId];
+	if (folder !=nil) {
+		// Prime the article cache
+		[self initArticleArray:folder];
+		Article * article = [folder articleFromGuid:guid];
+		if (isDeleted && ![article isRead])
+			[self markArticleRead:folderId guid:guid isRead:YES];
+		NSString * preparedGuid = [Database prepareStringForQuery:guid];
+		[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%ld and message_id='%@'", isDeleted, (long)folderId, preparedGuid];
+	}
 }
 
 /* isTrashEmpty
