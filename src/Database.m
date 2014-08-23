@@ -1880,21 +1880,20 @@ static Database * _sharedDatabase = nil;
 				[folder setUsername:username];
 			}
 			[results close];
-		});
-		
-		// Fix the childUnreadCount for every parent		
-		for (Folder * folder in [foldersDict objectEnumerator])
-		{
-			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
+			// Fix the childUnreadCount for every parent		
+			for (Folder * folder in [foldersDict objectEnumerator])
 			{
-				Folder * parentFolder = [self folderFromID:[folder parentId]];
-				while (parentFolder != nil)
+				if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
 				{
-					[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
-					parentFolder = [self folderFromID:[parentFolder parentId]];
+					Folder * parentFolder = [self folderFromID:[folder parentId]];
+					while (parentFolder != nil)
+					{
+						[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
+						parentFolder = [self folderFromID:[parentFolder parentId]];
+					}
 				}
 			}
-		}
+		});
 		// Done
 		initializedfoldersDict = YES;
 	}
@@ -2512,18 +2511,20 @@ static Database * _sharedDatabase = nil;
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
-	NSInteger unreadCount = [folder unreadCount];
-	[folder setUnreadCount:unreadCount + adjustment];
-	[self executeSQLWithFormat:@"update folders set unread_count=%ld where folder_id=%ld", [folder unreadCount], [folder itemId]];
+	dispatch_sync(_execQueue, ^() {
+		NSInteger newCount = [folder unreadCount] + adjustment;
+		[folder setUnreadCount:newCount];
+		[sqlDatabase executeUpdate:[NSString stringWithFormat:@"update folders set unread_count=%ld where folder_id=%ld", newCount, [folder itemId]]];
 	
-	// Update childUnreadCount for our parent. Since we're just working
-	// on one article, we do this the faster way.
-	Folder * tmpFolder = folder;
-	while ([tmpFolder parentId] != MA_Root_Folder)
-	{
-		tmpFolder = [self folderFromID:[tmpFolder parentId]];
-		[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
-	}
+		// Update childUnreadCount for our parent. Since we're just working
+		// on one article, we do this the faster way.
+		Folder * tmpFolder = folder;
+		while ([tmpFolder parentId] != MA_Root_Folder)
+		{
+			tmpFolder = [self folderFromID:[tmpFolder parentId]];
+			[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
+		}
+	});
 }
 
 /* markArticleFlagged
