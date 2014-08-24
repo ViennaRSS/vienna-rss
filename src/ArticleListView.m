@@ -120,6 +120,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	[[articleText preferences] setDefaultFontSize:16];
 	
 	// Disable caching
+	[[articleText preferences] setUsesPageCache:NO];
 	[articleText setMaintainsBackForwardList:NO];
 	[[articleText backForwardList] setPageCacheSize:0];
 }

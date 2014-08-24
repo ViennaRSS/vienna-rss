@@ -688,6 +688,10 @@
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
+
+	for (Article * theArticle in folderArrayOfArticles)
+		[theArticle markRead:YES];
+
 	}]; //end transaction block
 
 	if (refreshFlag)
