@@ -552,7 +552,7 @@ static Database * _sharedDatabase = nil;
 #endif
 	__block int errorCode;
 	dispatch_sync(_execQueue, ^() {
-		[sqlDatabase executeUpdate:sqlStatement withArgumentsInArray:[NSArray array]];
+		[sqlDatabase executeUpdate:sqlStatement withArgumentsInArray:nil];
 		errorCode = [sqlDatabase lastErrorCode];
 	});
 #ifdef DEBUG
