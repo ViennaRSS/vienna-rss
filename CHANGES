@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 5
+----------
+- Improved stability
+- Solves a bug where articles' read/unread situation was not currently reflected in the article list
+
 3.0.0 rc 4
 ----------
 - Fix another crash
