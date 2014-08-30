@@ -220,10 +220,11 @@
 			[newDefaultMenu addObject:menuItem];
 	}
 
-	// If we still have some menu items then use that for the new default menu, otherwise
-	// set the default items to nil as we may have removed all the items.
-	if ([newDefaultMenu count] > 0)
+	// If we still have some useful menu items (other than Webkit's Web Inspector)
+	// then use them for the new default menu
+	if ([newDefaultMenu count] > 0 && ![[newDefaultMenu objectAtIndex:0] isSeparatorItem])
 		defaultMenuItems = [newDefaultMenu autorelease];
+	// otherwise set the default items to nil as we may have removed all the items.
 	else
 	{
 		defaultMenuItems = nil;
