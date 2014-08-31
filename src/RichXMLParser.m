@@ -949,10 +949,20 @@
 				if ([itemNodeName isEqualToString:@"author"])
 				{
 					NSString * authorName = [[subItemTree treeByName:@"name"] valueOfElement];
-					if (authorName == nil)
+					if (authorName == nil) {
 						authorName = [[subItemTree treeByName:@"email"] valueOfElement];
-					if (authorName != nil)
-						[newItem setAuthor:authorName];
+                    }
+                    // the author is in the feed's entry
+					if (authorName != nil) {
+						// if we currently have a string set as the author
+                        if ([[newItem author] length] > 0) {
+                            [newItem setAuthor:[NSString stringWithFormat:@"%@, %@", [newItem author], authorName]];
+                        }
+                        // else we currently don't have an author set, so set it to the first author
+                        else {
+                            [newItem setAuthor:authorName];
+                        }
+                    }
 					continue;
 				}
 				
