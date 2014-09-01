@@ -954,9 +954,9 @@
                     }
                     // the author is in the feed's entry
 					if (authorName != nil) {
-						// if we currently have a string set as the author
+						// if we currently have a string set as the author then append the new author name
                         if ([[newItem author] length] > 0) {
-                            [newItem setAuthor:[NSString stringWithFormat:@"%@, %@", [newItem author], authorName]];
+                            [newItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newItem author], authorName]];
                         }
                         // else we currently don't have an author set, so set it to the first author
                         else {
