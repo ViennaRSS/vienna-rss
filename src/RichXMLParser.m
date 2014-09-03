@@ -902,7 +902,6 @@
 		if ([nodeName isEqualToString:@"entry"])
 		{
 			FeedItem * newItem = [[FeedItem new] autorelease];
-			[newItem setAuthor:defaultAuthor];
 			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
 			CFIndex itemIndex;
@@ -949,10 +948,20 @@
 				if ([itemNodeName isEqualToString:@"author"])
 				{
 					NSString * authorName = [[subItemTree treeByName:@"name"] valueOfElement];
-					if (authorName == nil)
+					if (authorName == nil) {
 						authorName = [[subItemTree treeByName:@"email"] valueOfElement];
-					if (authorName != nil)
-						[newItem setAuthor:authorName];
+                    }
+                    // the author is in the feed's entry
+					if (authorName != nil) {
+						// if we currently have a string set as the author then append the new author name
+                        if ([[newItem author] length] > 0) {
+                            [newItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newItem author], authorName]];
+                        }
+                        // else we currently don't have an author set, so set it to the first author
+                        else {
+                            [newItem setAuthor:authorName];
+                        }
+                    }
 					continue;
 				}
 				
@@ -1030,6 +1039,10 @@
 					continue;
 				}
 			}
+
+			// if we didn't find an author, set it to the default one
+			if ([[newItem author] isEqualToString:@""])
+				[newItem setAuthor:defaultAuthor];
 
 			// Do relative IMG, IFRAME and A tags fixup
 			[articleBody fixupRelativeImgTags:entryBase];
