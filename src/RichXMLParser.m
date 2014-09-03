@@ -902,7 +902,6 @@
 		if ([nodeName isEqualToString:@"entry"])
 		{
 			FeedItem * newItem = [[FeedItem new] autorelease];
-			[newItem setAuthor:defaultAuthor];
 			CFIndex itemCount = [subTree countOfChildren];
 			NSMutableString * articleBody = nil;
 			CFIndex itemIndex;
@@ -1040,6 +1039,10 @@
 					continue;
 				}
 			}
+
+			// if we didn't find an author, set it to the default one
+			if ([[newItem author] isEqualToString:@""])
+				[newItem setAuthor:defaultAuthor];
 
 			// Do relative IMG, IFRAME and A tags fixup
 			[articleBody fixupRelativeImgTags:entryBase];
