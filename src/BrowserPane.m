@@ -560,8 +560,7 @@
  */
 -(void)webViewClose:(WebView *)sender
 {
-	if ([sender isEqualTo:self.webPane])
-		[self handleStopLoading:self];
+	[self handleStopLoading:self];
 	[[controller browserView] closeTabItemView:self];
 }
 
