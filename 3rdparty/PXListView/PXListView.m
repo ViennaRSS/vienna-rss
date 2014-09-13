@@ -198,7 +198,7 @@ NSString * const PXListViewSelectionDidChange = @"PXListViewSelectionDidChange";
 - (NSArray*)visibleCells
 {
 	NSRange visibleRange = [self visibleRange];
-	NSUInteger firstIndex;
+	NSUInteger firstIndex = 0;
 	for(PXListViewCell *cell in _cellsInViewHierarchy)
 	{
 		NSUInteger row = [cell row];
