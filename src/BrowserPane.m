@@ -560,6 +560,7 @@
  */
 -(void)webViewClose:(WebView *)sender
 {
+	[self handleStopLoading:self];
 	[[controller browserView] closeTabItemView:self];
 }
 

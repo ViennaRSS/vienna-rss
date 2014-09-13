@@ -2856,6 +2856,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
+
+	urlString = [cleanedUpAndEscapedUrlFromString(urlString) absoluteString];
 	
 	// If the folder already exists, just select it.
 	Folder * folder = [db folderFromFeedURL:urlString];
