@@ -714,18 +714,42 @@
 					continue;
 				}
 				
-				// Parse item author
+                // Parse item author
 				if ([itemNodeName isEqualToString:@"author"])
 				{
-					[newItem setAuthor:[subItemTree valueOfElement]];
-					continue;
+					NSString *authorName = [subItemTree valueOfElement];
+                    
+                    // the author is in the feed's entry
+                    if (authorName != nil) {
+                        // if we currently have a string set as the author then append the new author name
+                        if ([[newItem author] length] > 0) {
+                            [newItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newItem author], authorName]];
+                        }
+                        // else we currently don't have an author set, so set it to the first author
+                        else {
+                            [newItem setAuthor:authorName];
+                        }
+                    }
+                    continue;
 				}
-				
+                
 				// Parse item author
 				if ([itemNodeName isEqualToString:@"dc:creator"])
 				{
-					[newItem setAuthor:[subItemTree valueOfElement]];
-					continue;
+                    NSString *authorName = [subItemTree valueOfElement];
+                    
+                    // the author is in the feed's entry
+                    if (authorName != nil) {
+                        // if we currently have a string set as the author then append the new author name
+                        if ([[newItem author] length] > 0) {
+                            [newItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newItem author], authorName]];
+                        }
+                        // else we currently don't have an author set, so set it to the first author
+                        else {
+                            [newItem setAuthor:authorName];
+                        }
+                    }
+                    continue;
 				}
 				
 				// Parse item date
