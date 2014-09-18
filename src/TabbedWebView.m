@@ -234,8 +234,15 @@
 	NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
 	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 	
+	NSString * scheme = [[[request URL] scheme] lowercaseString];
 	if (navType == WebNavigationTypeLinkClicked)
 	{
+		if ([scheme isEqualToString:@"file"] && [[[request URL] resourceSpecifier] hasPrefix:@"/#"])
+		// clicked a link to an anchor in the same webview
+		{
+			[listener use];
+			return;
+		}
 		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
 		{
 			[listener ignore];
@@ -253,7 +260,6 @@
 			}
 		}
 	}
-	NSString * scheme = [[[request URL] scheme] lowercaseString];
 	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"about"])
 	{
 		[listener use];
