@@ -70,8 +70,9 @@
 	-(void)endMainFrameLoad;
 @end
 
-static const CGFloat MA_Minimum_ArticleList_Pane_Width = 80;
-static const CGFloat MA_Minimum_Article_Pane_Width = 80;
+static const CGFloat MA_Minimum_ArticleList_Pane_Width = 150;
+static const CGFloat MA_Minimum_ArticleList_Pane_Height = 80;
+static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 @implementation ArticleListView
 
@@ -176,7 +177,11 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (sender == splitView2)
 	{
-		return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Width ;
+		BOOL isVertical = [sender isVertical];
+		if (isVertical)
+			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Dimension ;
+		else
+			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Height : proposedMin + MA_Minimum_Article_Pane_Dimension ;
 	}
 	else
 		return proposedMin;
@@ -191,11 +196,10 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	if (sender == splitView2)
 	{
 		BOOL isVertical = [sender isVertical];
-		NSRect mainFrame = [[splitView2 superview] frame];
 		if (isVertical)
-			return (offset == 0) ? mainFrame.size.width - MA_Minimum_Article_Pane_Width : mainFrame.size.width - MA_Minimum_ArticleList_Pane_Width;
+			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Width;
 		else
-			return (offset == 0) ? mainFrame.size.height - MA_Minimum_Article_Pane_Width : mainFrame.size.height - MA_Minimum_ArticleList_Pane_Width;
+			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Height;
 	}
 	return proposedMax;
 }
@@ -223,6 +227,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if (isVertical)
 			{
 				leftFrame.size.height = newFrame.size.height;
+                leftFrame.size.width = MIN(leftFrame.size.width , newFrame.size.width - dividerThickness - MA_Minimum_Article_Pane_Dimension);
 				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
 				rightFrame.size.height = newFrame.size.height;
 				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
@@ -231,6 +236,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			else
 			{
 				leftFrame.size.width = newFrame.size.width;
+                leftFrame.size.height = MIN(leftFrame.size.height , newFrame.size.height - dividerThickness - MA_Minimum_Article_Pane_Dimension);
 				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
 				rightFrame.size.width = newFrame.size.width;
 				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
