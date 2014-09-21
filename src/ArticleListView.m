@@ -553,8 +553,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
-	[articleList setAutosaveTableColumns:NO];
-	[articleList setAutosaveName:nil];
+	if (tableLayout == MA_Layout_Report)
+		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+	else
+		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
+	[articleList setAutosaveTableColumns:YES];
 	
 	[self updateArticleListRowHeight];
 	
@@ -649,12 +652,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
-	if (tableLayout == MA_Layout_Report)
-		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
-	else
-		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
-	[articleList setAutosaveTableColumns:YES];
-
 	// Done
 	isInTableInit = NO;
 }
