@@ -2175,12 +2175,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	{
 		if (lastCountOfUnread == 0)
 		{
-			[appStatusItem setImage:[NSImage imageNamed:@"statusBarIcon.tiff"]];
+			[appStatusItem setImage:[NSImage imageNamed:@"statusBarIcon.png"]];
 			[appStatusItem setTitle:nil];
 		}
 		else
 		{
-			[appStatusItem setImage:[NSImage imageNamed:@"statusBarIconUnread.tiff"]];
+			[appStatusItem setImage:[NSImage imageNamed:@"statusBarIconUnread.png"]];
 			[appStatusItem setTitle:[NSString stringWithFormat:@"%u", lastCountOfUnread]];
 		}
 	}
