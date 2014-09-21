@@ -619,14 +619,17 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 				[column setDataCell:cell];
 			}
 
+			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
+			[column setResizingMask:(isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing)];
+			// the headline column is auto-resizable
+			[column setResizingMask:[column resizingMask] | ([[column identifier] isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0)];
+
 			// Set the header attributes.
 			NSTableHeaderCell * headerCell = [column headerCell];
-			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
 			[headerCell setTitle:[field displayName]];
 			
 			// Set the other column atributes.
 			[column setEditable:NO];
-			[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
 			[column setMinWidth:10];
 			[column setMaxWidth:2000];
 			[column setWidth:[field width]];
@@ -1594,7 +1597,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		if ([[db fieldByName:MA_Field_Summary] visible])
 		{
 			NSString * summaryString = [theArticle summary];
-			int maxSummaryLength = MIN([summaryString length], 80);
+			int maxSummaryLength = MIN([summaryString length], 150);
 			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
 			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
 			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
