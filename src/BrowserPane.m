@@ -736,6 +736,7 @@
 	[self willChangeValueForKey:@"isLoading"];
 	[self.webPane stopLoading:self];
 	[self didChangeValueForKey:@"isLoading"];
+	[[self.webPane mainFrame] loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage
