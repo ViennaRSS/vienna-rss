@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-// Handle the Horizontal (formerly known as Report) and Vertical layouts
+// Handle the Horizontal (also known as Report) and Vertical (also known as Condensed) layouts
 
 #import "ArticleListView.h"
 #import "Preferences.h"
@@ -569,7 +569,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		int tag = [field tag];
 		BOOL showField;
 		
-		// Handle condensed layout vs. table layout
+		// Handle which fields can be visible in the condensed (vertical) layout
+		// versus the table (horizontal) layout
 		if (tableLayout == MA_Layout_Report)
 			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
