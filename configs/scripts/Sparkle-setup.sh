@@ -7,13 +7,13 @@ V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')" #
 
 case "${N_VCS_TAG}" in
 	*_beta*)
-		SU_FEED_URL="http://vienna-rss.org/changelog_beta.xml"
+		SU_FEED_URL="http://vienna-rss.org/spstats/changelog_beta.php"
 	;;
 	*_rc*)
-		SU_FEED_URL="http://vienna-rss.org/changelog_rc.xml"
+		SU_FEED_URL="http://vienna-rss.org/spstats/changelog_rc.php"
 	;;
 	*)
-		SU_FEED_URL="http://vienna-rss.org/changelog.xml"
+		SU_FEED_URL="http://vienna-rss.org/spstats/changelog.php"
 	;;
 esac
 
