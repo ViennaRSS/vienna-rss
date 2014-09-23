@@ -1238,6 +1238,14 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					</object>
 					<int key="connectionID">173</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">sendSystemSpecs</string>
+						<reference key="source" ref="484714068"/>
+						<reference key="destination" ref="632970026"/>
+					</object>
+					<int key="connectionID">174</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -1783,7 +1791,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">173</int>
+			<int key="maxID">174</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1801,6 +1809,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<string key="changeNewArticlesNotification:">id</string>
 						<string key="changeOpenLinksInBackground:">id</string>
 						<string key="changeOpenLinksInExternalBrowser:">id</string>
+						<string key="changeSendSystemSpecs:">id</string>
 						<string key="changeShowAppInMenuBar:">id</string>
 						<string key="selectDefaultLinksHandler:">id</string>
 					</dictionary>
@@ -1845,6 +1854,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 							<string key="name">changeOpenLinksInExternalBrowser:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="changeSendSystemSpecs:">
+							<string key="name">changeSendSystemSpecs:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="changeShowAppInMenuBar:">
 							<string key="name">changeShowAppInMenuBar:</string>
 							<string key="candidateClassName">id</string>
@@ -1869,6 +1882,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						<string key="newArticlesNotificationNothingButton">NSButtonCell</string>
 						<string key="openLinksInBackground">NSButton</string>
 						<string key="openLinksInExternalBrowser">NSButton</string>
+						<string key="sendSystemSpecs">NSButton</string>
 						<string key="showAppInMenuBar">NSButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1926,6 +1940,10 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 						</object>
 						<object class="IBToOneOutletInfo" key="openLinksInExternalBrowser">
 							<string key="name">openLinksInExternalBrowser</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sendSystemSpecs">
+							<string key="name">sendSystemSpecs</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="showAppInMenuBar">
