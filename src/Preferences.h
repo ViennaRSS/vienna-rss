@@ -49,6 +49,7 @@
     BOOL syncGoogleReader;
     BOOL prefersGoogleNewSubscription;
     BOOL markUpdatedAsNew;
+    BOOL sendSystemSpecs;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	float textSizeMultiplier;
@@ -218,6 +219,10 @@
 // Do we show updated articles as new ?
 -(BOOL)markUpdatedAsNew;
 -(void)setMarkUpdatedAsNew:(BOOL)flag;
+
+// Do we send system specs when checking for updates?
+-(BOOL)sendSystemSpecs;
+-(void)setSendSystemSpecs:(BOOL)flag;
 
 #pragma mark -
 #pragma mark Open Reader syncing

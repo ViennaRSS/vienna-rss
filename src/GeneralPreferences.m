@@ -413,6 +413,16 @@
 	[[Preferences standardPreferences] setMarkReadInterval:newReadInterval];
 }
 
+
+/* changeSendSystemSpecs
+ * Set whether Vienna send system specifications when checking for updates.
+ */
+-(IBAction)changeSendSystemSpecs:(id)sender
+{
+    [[Preferences standardPreferences] setSendSystemSpecs:[sender state] == NSOnState];
+}
+
+
 /* dealloc
  * Clean up and release resources.
  */
