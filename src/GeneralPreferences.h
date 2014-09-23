@@ -27,6 +27,7 @@
 	IBOutlet NSPopUpButton * expireDuration;
 	IBOutlet NSButton * checkForUpdates;
 	IBOutlet NSButton * checkOnStartUp;
+    IBOutlet NSButton * sendSystemSpecs;
 	IBOutlet NSButton * openLinksInBackground;
 	IBOutlet NSButton * openLinksInExternalBrowser;
 	IBOutlet NSButton * showAppInMenuBar;
@@ -44,6 +45,7 @@
 // Action functions
 -(IBAction)changeCheckFrequency:(id)sender;
 -(IBAction)changeCheckOnStartUp:(id)sender;
+-(IBAction)changeSendSystemSpecs:(id)sender;
 -(IBAction)selectDefaultLinksHandler:(id)sender;
 -(IBAction)changeCheckForUpdates:(id)sender;
 -(IBAction)changeOpenLinksInBackground:(id)sender;

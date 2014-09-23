@@ -85,6 +85,9 @@
 	
 	// Set check for updates when starting
 	[checkForUpdates setState:[prefs checkForNewOnStartup] ? NSOnState : NSOffState];
+    
+    // Set sending system specs when checking for updates
+    [sendSystemSpecs setState:[prefs sendSystemSpecs] ? NSOnState : NSOffState];
 	
 	// Set check for new articles when starting
 	[checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
