@@ -106,3 +106,6 @@
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
 "164.title" = "Mark updated articles as new";
+
+/* Class = "NSButtonCell"; title = "Send system specs when checking for new versions"; ObjectID = "171"; */
+"171.title" = "Send system specs when checking for new versions";
