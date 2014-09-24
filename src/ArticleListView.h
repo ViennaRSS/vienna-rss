@@ -79,4 +79,5 @@
 -(BOOL)canDeleteMessageAtRow:(int)row;
 -(void)loadArticleLink:(NSString *) articleLink;
 -(NSURL *)url;
+-(void)webViewLoadFinished:(NSNotification *)notification;
 @end

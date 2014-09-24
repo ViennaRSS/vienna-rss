@@ -1965,6 +1965,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		[self endMainFrameLoad];
 }
 
+-(void)webViewLoadFinished:(NSNotification *)notification
+{
+}
+
 /* dealloc
  * Clean up behind ourself.
  */
