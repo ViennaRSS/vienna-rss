@@ -311,7 +311,7 @@
 							<object class="NSButtonCell" key="NSCell" id="718453087">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Send system specs when checking for new versions</string>
+								<string key="NSContents">Include anonymous system profile when checking for updates</string>
 								<reference key="NSSupport" ref="525591216"/>
 								<reference key="NSControlView" ref="632970026"/>
 								<int key="NSButtonFlags">1211912448</int>
@@ -765,6 +765,7 @@
 							<string key="NSFrame">{{31, 20}, {462, 38}}</string>
 							<reference key="NSSuperview" ref="506346381"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="NSEnabled">YES</bool>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							<int key="NSNumRows">2</int>
@@ -973,7 +974,7 @@ y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="581609175"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1057}}</string>
 				<string key="NSMinSize">{444, 274}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
