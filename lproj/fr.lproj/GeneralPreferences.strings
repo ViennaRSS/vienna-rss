@@ -106,3 +106,10 @@
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
 "164.title" = "Indiquer comme non-lus les articles mis à jour";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "171"; */
+"171.title" = "Inclure un profil anonyme du système";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "176"; */
+"176.title" = "Updates:";
+

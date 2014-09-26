@@ -85,6 +85,9 @@
 	
 	// Set check for updates when starting
 	[checkForUpdates setState:[prefs checkForNewOnStartup] ? NSOnState : NSOffState];
+    
+    // Set sending system specs when checking for updates
+    [sendSystemSpecs setState:[prefs sendSystemSpecs] ? NSOnState : NSOffState];
 	
 	// Set check for new articles when starting
 	[checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
@@ -412,6 +415,16 @@
 	float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
 	[[Preferences standardPreferences] setMarkReadInterval:newReadInterval];
 }
+
+
+/* changeSendSystemSpecs
+ * Set whether Vienna send system specifications when checking for updates.
+ */
+-(IBAction)changeSendSystemSpecs:(id)sender
+{
+    [[Preferences standardPreferences] setSendSystemSpecs:[sender state] == NSOnState];
+}
+
 
 /* dealloc
  * Clean up and release resources.

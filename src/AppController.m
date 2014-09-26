@@ -575,6 +575,13 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 
 	if ([prefs refreshOnStartup]) 
 		[self refreshAllSubscriptions:self];
+    
+    
+    // Check if we have previously asked the user to send anonymous system profile
+    if([[NSUserDefaults standardUserDefaults] objectForKey:MAPref_SendSystemProfileInfo] == nil) {
+        [self showSystemProfileInfoAlert];
+    }
+
 }
 
 /* applicationShouldHandleReopen
@@ -4697,6 +4704,36 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			 [pluginManager toolbarItems],
 			 nil];
 }
+
+/*! showSystemProfileInfoAlert
+ * displays an alert asking the user to opt-in to sending anonymous system profile throug Sparkle
+ */
+-(void)showSystemProfileInfoAlert {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
+    [alert addButtonWithTitle:NSLocalizedString(@"No thanks", @"No thanks")];
+    [alert setMessageText:NSLocalizedString(@"Include anonymous system profile when checking for updates?", @"Include anonymous system profile when checking for updates?")];
+    [alert setInformativeText:NSLocalizedString(@"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.", @"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.")];
+    [alert setAlertStyle:NSInformationalAlertStyle];
+    int buttonClicked = alert.runModal;
+    NSLog(@"buttonClicked: %d", buttonClicked);
+    switch (buttonClicked) {
+        case NSAlertFirstButtonReturn:
+            /* Agreed to send system profile. Uses preferences to set value otherwise 
+             the preference control is out of sync */
+            [[Preferences standardPreferences] setSendSystemSpecs:YES];
+            break;
+        case NSAlertSecondButtonReturn:
+            /* Declined to send system profile. Uses SUUpdater to set the value
+             otherwise it stays nil instead of being set to 0 */
+            [[SUUpdater sharedUpdater] setSendsSystemProfile:NO];
+            break;
+        default:
+            break;
+    }
+    [alert release];
+}
+
 
 /* dealloc
  * Clean up and release resources.

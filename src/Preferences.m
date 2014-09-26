@@ -191,6 +191,7 @@ static Preferences * _standardPreferences = nil;
 				
 		//Sparkle autoupdate
 		checkForNewOnStartup = [[SUUpdater sharedUpdater] automaticallyChecksForUpdates];
+        sendSystemSpecs = [[SUUpdater sharedUpdater] sendsSystemProfile];
 
 		if (shouldSaveFeedSource)
 		{
@@ -1140,6 +1141,27 @@ static Preferences * _standardPreferences = nil;
 		// Huh, there's a Sources file there, but it's not a directory.
 		NSLog(@"Could not create feed sources folder, because a non-directory file already exists at path '%@'.", feedSourcesFolder);
 	}
+}
+
+/* sendSystemSpecs
+ * Returns whether or not Vienna sends system specs when checking for updates.
+ */
+-(BOOL)sendSystemSpecs
+{
+    return sendSystemSpecs;
+}
+
+/* setCheckForNewOnStartup
+ * Changes whether or not Vienna sends system specs when checking for updates.
+ */
+-(void)setSendSystemSpecs:(BOOL)flag
+{
+    if (flag != sendSystemSpecs)
+    {
+        sendSystemSpecs = flag;
+        [[SUUpdater sharedUpdater] setSendsSystemProfile:flag];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+    }
 }
 
 #pragma mark -
