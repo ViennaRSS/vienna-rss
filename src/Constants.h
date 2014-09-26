@@ -75,6 +75,7 @@ extern NSString * MAPref_GoogleNewSubscription;
 extern NSString * MAPref_ConcurrentDownloads;
 extern NSString * MAPref_SyncServer;
 extern NSString * MAPref_SyncingUser;
+extern NSString * MAPref_SendSystemProfileInfo;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;
