@@ -2900,7 +2900,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (folderId != -1)
 		{
 			[foldersTree selectFolder:folderId];
-			if (isAccessible(urlString))
+			if (isAccessible(urlString) || [[[NSURL URLWithString:urlString] scheme] isEqualToString:@"file"])
 			{
 				Folder * folder = [db folderFromID:folderId];
 				[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
