@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-// Handle the Horizontal (formerly known as Report) and Vertical layouts
+// Handle the Horizontal (also known as Report) and Vertical (also known as Condensed) layouts
 
 #import "ArticleListView.h"
 #import "Preferences.h"
@@ -70,8 +70,9 @@
 	-(void)endMainFrameLoad;
 @end
 
-static const CGFloat MA_Minimum_ArticleList_Pane_Width = 80;
-static const CGFloat MA_Minimum_Article_Pane_Width = 80;
+static const CGFloat MA_Minimum_ArticleList_Pane_Width = 150;
+static const CGFloat MA_Minimum_ArticleList_Pane_Height = 80;
+static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 @implementation ArticleListView
 
@@ -176,7 +177,11 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (sender == splitView2)
 	{
-		return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Width ;
+		BOOL isVertical = [sender isVertical];
+		if (isVertical)
+			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Dimension ;
+		else
+			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Height : proposedMin + MA_Minimum_Article_Pane_Dimension ;
 	}
 	else
 		return proposedMin;
@@ -191,11 +196,10 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	if (sender == splitView2)
 	{
 		BOOL isVertical = [sender isVertical];
-		NSRect mainFrame = [[splitView2 superview] frame];
 		if (isVertical)
-			return (offset == 0) ? mainFrame.size.width - MA_Minimum_Article_Pane_Width : mainFrame.size.width - MA_Minimum_ArticleList_Pane_Width;
+			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Width;
 		else
-			return (offset == 0) ? mainFrame.size.height - MA_Minimum_Article_Pane_Width : mainFrame.size.height - MA_Minimum_ArticleList_Pane_Width;
+			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Height;
 	}
 	return proposedMax;
 }
@@ -223,6 +227,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			if (isVertical)
 			{
 				leftFrame.size.height = newFrame.size.height;
+                leftFrame.size.width = MIN(leftFrame.size.width , newFrame.size.width - dividerThickness - MA_Minimum_Article_Pane_Dimension);
 				rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
 				rightFrame.size.height = newFrame.size.height;
 				rightFrame.origin.x = leftFrame.size.width + dividerThickness;
@@ -231,6 +236,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 			else
 			{
 				leftFrame.size.width = newFrame.size.width;
+                leftFrame.size.height = MIN(leftFrame.size.height , newFrame.size.height - dividerThickness - MA_Minimum_Article_Pane_Dimension);
 				rightFrame.size.height = newFrame.size.height - leftFrame.size.height - dividerThickness;
 				rightFrame.size.width = newFrame.size.width;
 				rightFrame.origin.y = leftFrame.size.height + dividerThickness;
@@ -547,8 +553,11 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
-	[articleList setAutosaveTableColumns:NO];
-	[articleList setAutosaveName:nil];
+	if (tableLayout == MA_Layout_Report)
+		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+	else
+		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
+	[articleList setAutosaveTableColumns:YES];
 	
 	[self updateArticleListRowHeight];
 	
@@ -560,7 +569,8 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		int tag = [field tag];
 		BOOL showField;
 		
-		// Handle condensed layout vs. table layout
+		// Handle which fields can be visible in the condensed (vertical) layout
+		// versus the table (horizontal) layout
 		if (tableLayout == MA_Layout_Report)
 			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
@@ -613,14 +623,17 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 				[column setDataCell:cell];
 			}
 
+			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
+			[column setResizingMask:(isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing)];
+			// the headline column is auto-resizable
+			[column setResizingMask:[column resizingMask] | ([[column identifier] isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0)];
+
 			// Set the header attributes.
 			NSTableHeaderCell * headerCell = [column headerCell];
-			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
 			[headerCell setTitle:[field displayName]];
 			
 			// Set the other column atributes.
 			[column setEditable:NO];
-			[column setResizingMask:(isResizable ? (NSTableColumnAutoresizingMask | NSTableColumnUserResizingMask) : NSTableColumnNoResizing)];
 			[column setMinWidth:10];
 			[column setMaxWidth:2000];
 			[column setWidth:[field width]];
@@ -640,12 +653,6 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
-	if (tableLayout == MA_Layout_Report)
-		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
-	else
-		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
-	[articleList setAutosaveTableColumns:YES];
-
 	// Done
 	isInTableInit = NO;
 }
@@ -1588,7 +1595,7 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 		if ([[db fieldByName:MA_Field_Summary] visible])
 		{
 			NSString * summaryString = [theArticle summary];
-			int maxSummaryLength = MIN([summaryString length], 80);
+			int maxSummaryLength = MIN([summaryString length], 150);
 			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
 			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
 			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
@@ -1957,6 +1964,10 @@ static const CGFloat MA_Minimum_Article_Pane_Width = 80;
 {
 	if (frame == [articleText mainFrame])
 		[self endMainFrameLoad];
+}
+
+-(void)webViewLoadFinished:(NSNotification *)notification
+{
 }
 
 /* dealloc
