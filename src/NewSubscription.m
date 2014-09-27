@@ -194,7 +194,7 @@
     } 
 
 	// Replace feed:// with http:// if necessary
-    if([rssFeedURL.scheme isEqual:@"feed"]) {
+    if([rssFeedURL.scheme isEqualToString:@"feed"]) {
         rssFeedURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://%@", [rssFeedURL.relativeString substringFromIndex:7]]];
     }
     
