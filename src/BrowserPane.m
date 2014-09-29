@@ -72,15 +72,13 @@
 
 + (void)load
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-	if (self == [BrowserPane class]) {
-		//These are synonyms
-		[self exposeBinding:@"isLoading"];
-		[self exposeBinding:@"isProcessing"];
-	}
-	
-	[pool drain];
+    @autoreleasepool {
+        if (self == [BrowserPane class]) {
+            //These are synonyms
+            [self exposeBinding:@"isLoading"];
+            [self exposeBinding:@"isProcessing"];
+        }
+    }
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key
