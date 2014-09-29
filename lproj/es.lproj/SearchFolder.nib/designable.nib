@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1050" defaultVersion="1060" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -105,7 +105,7 @@ Gw
                     <textField verticalHuggingPriority="750" id="58">
                         <rect key="frame" x="17" y="118" width="201" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Mostrar artículos que cumplan" id="98">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Mostrar todos los artículos que cumplan" id="98">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -114,12 +114,12 @@ Gw
                     <popUpButton verticalHuggingPriority="750" id="79">
                         <rect key="frame" x="215" y="112" width="80" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <popUpButtonCell key="cell" type="push" title="Nada" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="99">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="99">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <menu key="menu" title="Otras vistas" id="80">
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="OtherViews" id="80">
                                 <items>
-                                    <menuItem title="Nada" state="on" id="82"/>
+                                    <menuItem title="Nothing" id="82"/>
                                 </items>
                             </menu>
                         </popUpButtonCell>
@@ -143,14 +143,14 @@ Gw
                 <popUpButton hidden="YES" verticalHuggingPriority="750" tag="1004" id="86">
                     <rect key="frame" x="299" y="0.0" width="189" height="26"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <popUpButtonCell key="cell" type="push" title="Ítem1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="109">
+                    <popUpButtonCell key="cell" type="push" title="Item3" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="89" id="109">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <menu key="menu" title="Otras vistas" id="87">
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="87">
                             <items>
-                                <menuItem title="Ítem1" state="on" id="88"/>
-                                <menuItem title="Ítem2" id="90"/>
-                                <menuItem title="Ítem3" id="89"/>
+                                <menuItem title="Item1" id="88"/>
+                                <menuItem title="Item2" id="90"/>
+                                <menuItem title="Item3" state="on" id="89"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -158,13 +158,13 @@ Gw
                 <popUpButton hidden="YES" verticalHuggingPriority="750" tag="1008" id="73">
                     <rect key="frame" x="299" y="0.0" width="189" height="26"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <popUpButtonCell key="cell" type="push" title="Ítem2" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="108">
+                    <popUpButtonCell key="cell" type="push" title="Item3" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="75" id="108">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <menu key="menu" title="Otras vistas" id="74">
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="74">
                             <items>
-                                <menuItem title="Ítem2" state="on" id="76"/>
-                                <menuItem title="Ítem3" id="75"/>
+                                <menuItem title="Item2" id="76"/>
+                                <menuItem title="Item3" state="on" id="75"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -188,12 +188,12 @@ Gw
                 <popUpButton hidden="YES" verticalHuggingPriority="750" id="61">
                     <rect key="frame" x="299" y="0.0" width="100" height="26"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <popUpButtonCell key="cell" type="push" title="Nada" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="106">
+                    <popUpButtonCell key="cell" type="push" title="Nothing" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="62" id="106">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <menu key="menu" title="Otras vistas" id="64">
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="64">
                             <items>
-                                <menuItem title="Nada" state="on" id="62"/>
+                                <menuItem title="Nothing" state="on" id="62"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -201,12 +201,12 @@ Gw
                 <popUpButton verticalHuggingPriority="750" id="35">
                     <rect key="frame" x="151" y="0.0" width="135" height="26"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <popUpButtonCell key="cell" type="push" title="Los operadores van aquí" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="105">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="105">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <menu key="menu" title="Otras vistas" id="34">
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="34">
                             <items>
-                                <menuItem title="Los operadores van aquí" state="on" id="56"/>
+                                <menuItem title="Operators go here" id="56"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -246,12 +246,12 @@ Gw
                 <popUpButton verticalHuggingPriority="750" id="27">
                     <rect key="frame" x="-3" y="0.0" width="135" height="26"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <popUpButtonCell key="cell" type="push" title="Los nombres de campo van aquí" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="101">
+                    <popUpButtonCell key="cell" type="push" title="Field names go here" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="33" id="101">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <menu key="menu" title="Otras vistas" id="32">
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="32">
                             <items>
-                                <menuItem title="Los nombres de campo van aquí" state="on" id="33"/>
+                                <menuItem title="Field names go here" state="on" id="33"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
