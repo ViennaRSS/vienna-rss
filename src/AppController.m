@@ -2147,22 +2147,51 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([prefs showAppInStatusBar] && appStatusItem == nil)
 	{
-		appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
-		[self setAppStatusBarIcon];
-		[appStatusItem setHighlightMode:YES];
+        appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
 		
-		NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
-		[statusBarMenu addItem:menuItemWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(showPreferencePanel:))];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(handleAbout:))];
-		[statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
-		[appStatusItem setMenu:statusBarMenu];
-		[statusBarMenu release];
+        
+        NSMenu * statusBarMenu = [[NSMenu alloc] initWithTitle:@"StatusBarMenu"];
+        [statusBarMenu addItem:menuItemWithTitleAndAction(NSLocalizedString(@"Open Vienna", nil), @selector(openVienna:))];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
+        [statusBarMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItem:copyOfMenuItemWithAction(@selector(showPreferencePanel:))];
+        [statusBarMenu addItem:copyOfMenuItemWithAction(@selector(handleAbout:))];
+        [statusBarMenu addItem:[NSMenuItem separatorItem]];
+        [statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
+        
+        
+        if([appStatusItem respondsToSelector:@selector(button)]) {
+            // Set up for Yosemite here
+            appStatusItem.button.target = self;
+            appStatusItem.menu = statusBarMenu;
+            
+            if (lastCountOfUnread == 0)
+            {
+                NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon.png"];
+                statusBarImage.template = YES;
+                appStatusItem.button.image = statusBarImage;
+                appStatusItem.button.imagePosition = NSImageLeft;
+                appStatusItem.button.title = nil;
+            }
+            else
+            {
+                NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread.png"];
+                statusBarImage.template = YES;
+                appStatusItem.button.image = statusBarImage;
+                appStatusItem.button.imagePosition = NSImageLeft;
+                appStatusItem.button.title = [NSString stringWithFormat:@"%u", lastCountOfUnread];
+            }
+           
+        }
+        else {
+            [self setAppStatusBarIcon];
+            [appStatusItem setHighlightMode:YES];
+            [appStatusItem setMenu:statusBarMenu];
+            
+        }
+        [statusBarMenu release];
 	}
 	else if (![prefs showAppInStatusBar] && appStatusItem != nil)
 	{
