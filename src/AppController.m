@@ -2164,24 +2164,25 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
         
         if([appStatusItem respondsToSelector:@selector(button)]) {
             // Set up for Yosemite here
-            appStatusItem.button.target = self;
+            [[appStatusItem button] setTarget:self];
             appStatusItem.menu = statusBarMenu;
             
             if (lastCountOfUnread == 0)
             {
                 NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon.png"];
                 statusBarImage.template = YES;
-                appStatusItem.button.image = statusBarImage;
-                appStatusItem.button.imagePosition = NSImageLeft;
-                appStatusItem.button.title = nil;
+                [[appStatusItem button] setImage:statusBarImage];
+                [[appStatusItem button] setImagePosition:NSImageLeft];
+                [[appStatusItem button] setTitle:nil];
             }
             else
             {
                 NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread.png"];
                 statusBarImage.template = YES;
-                appStatusItem.button.image = statusBarImage;
-                appStatusItem.button.imagePosition = NSImageLeft;
-                appStatusItem.button.title = [NSString stringWithFormat:@"%u", lastCountOfUnread];
+                [[appStatusItem button] setImage:statusBarImage];
+                [[appStatusItem button] setImagePosition:NSImageLeft];
+                [[appStatusItem button] setTitle:nil];
+                [[appStatusItem button] setTitle:[NSString stringWithFormat:@"%u", lastCountOfUnread]];
             }
            
         }
