@@ -47,13 +47,12 @@
 	[[tabView tabViewItemAtIndex:0] setLabel:NSLocalizedString(@"Articles", nil)];
 	
 	//Metal is the default
-	[tabBarControl setStyleNamed:@"Unified"];
+	[tabBarControl setStyleNamed:@"Card"];
 	
 	[tabBarControl setHideForSingleTab:YES];
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
 	[tabBarControl setAutomaticallyAnimates:NO];
-	[tabBarControl setSizeCellsToFit:YES];
 	[tabBarControl setCellMinWidth:60];
 	[tabBarControl setCellMaxWidth:350];
 
