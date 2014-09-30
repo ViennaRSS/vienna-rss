@@ -53,7 +53,6 @@
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
 	[tabBarControl setAutomaticallyAnimates:NO];
-	[tabBarControl setSizeCellsToFit:YES];
 	[tabBarControl setCellMinWidth:60];
 	[tabBarControl setCellMaxWidth:350];
 
