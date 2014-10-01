@@ -2193,6 +2193,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
             [statusBarImage setTemplate:YES];
             [appStatusItem setImage:statusBarImage];
 			[appStatusItem setTitle:[NSString stringWithFormat:@"%u", lastCountOfUnread]];
+			// Yosemite hack : need to insist for displaying correctly icon and text
+            [appStatusItem setImage:statusBarImage];
 		}
 	}
 }
