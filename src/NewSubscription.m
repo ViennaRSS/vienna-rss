@@ -174,6 +174,7 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSString * feedURLString = [[feedURL stringValue] trim];
+    NSURL * rssFeedURL = [[NSURL alloc] initWithString:feedURLString];
 
 	// Format the URL based on the selected feed source.
 	if (sourcesDict != nil)
@@ -182,13 +183,23 @@
 		NSString * key = [feedSourceItem title];
 		NSDictionary * itemDict = [sourcesDict valueForKey:key];
 		NSString * linkName = [itemDict valueForKey:@"LinkTemplate"];
-		if (linkName != nil)
-			feedURLString = [NSString stringWithFormat:linkName, feedURLString];
-	}
+        if (linkName != nil) {
+            if ([linkName hasPrefix:@"file://"]) {
+                rssFeedURL = [[NSURL alloc] initFileURLWithPath:feedURLString.stringByExpandingTildeInPath];
+            } else {
+                feedURLString = [NSString stringWithFormat:linkName, feedURLString];
+                rssFeedURL = [[NSURL alloc] initWithString:feedURLString];
+            } 
+        }
+    } 
 
 	// Replace feed:// with http:// if necessary
-	if ([feedURLString hasPrefix:@"feed://"])
-		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
+    if([rssFeedURL.scheme isEqualToString:@"feed"]) {
+        rssFeedURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://%@", [rssFeedURL.relativeString substringFromIndex:7]]];
+    }
+    
+    // the rest of the method uses strings instead of URLs, so we convert the URL to a string here until we refactor the entire method
+    feedURLString = rssFeedURL.relativeString;
 
 	// Create the RSS folder in the database
 	if ([db folderFromFeedURL:feedURLString] != nil)
