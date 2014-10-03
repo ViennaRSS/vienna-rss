@@ -80,7 +80,6 @@
 	//set the new frame to the webview
 	[articleView stopLoading:self];
 	[articleView setFrame:newWebViewRect];
-	[self setInProgress:YES];
 	[articleView clearHTML];
 	[super prepareForReuse];
 }
