@@ -333,7 +333,7 @@
 {
 	
 	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
-	[self setFolderArrayOfArticles:[folder articlesWithFilter:[[NSApp delegate] filterString]]];
+	[self setFolderArrayOfArticles:[folder articlesWithFilter:[APPCONTROLLER filterString]]];
 	
 	[self refilterArrayOfArticles];
 }
@@ -472,7 +472,7 @@
 	if (needFolderRedraw)
 	{
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+		[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 	}
 }
 
@@ -524,7 +524,7 @@
 	
 	// Read and/or unread count may have changed
 	if (needFolderRedraw)
-		[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+		[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* markUnflagUndo
@@ -605,7 +605,7 @@
 	
 	// The info bar has a count of unread articles so we need to
 	// update that.
-	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* innerMarkReadByArray
@@ -696,7 +696,7 @@
 
 	if (refreshFlag)
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* wrappedMarkAllReadInArray
@@ -812,7 +812,7 @@
 	
 	// The info bar has a count of unread articles so we need to
 	// update that.
-	[[NSApp delegate] showUnreadCountOnApplicationIconAndWindowTitle];
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* addBacktrack

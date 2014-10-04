@@ -453,7 +453,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	[self notifyDownloadItemChange:theItem];
 
 	// If there's no download window visible, display one now.
-	[[NSApp delegate] conditionalShowDownloadsWindow:self];
+	[APPCONTROLLER conditionalShowDownloadsWindow:self];
 }
 
 /* downloadDidFinish
@@ -476,7 +476,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
-	[[NSApp delegate] growlNotify:contextDict
+	[APPCONTROLLER growlNotify:contextDict
 							title:NSLocalizedString(@"Download completed", nil)
 					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", nil), filename]
 				 notificationName:NSLocalizedString(@"Growl download completed", nil)];
@@ -507,7 +507,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
-	[[NSApp delegate] growlNotify:contextDict
+	[APPCONTROLLER growlNotify:contextDict
 							title:NSLocalizedString(@"Download failed", nil)
 					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", nil), filename]
 				 notificationName:NSLocalizedString(@"Growl download failed", nil)];

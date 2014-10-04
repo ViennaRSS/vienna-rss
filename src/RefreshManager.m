@@ -103,13 +103,13 @@ static RefreshManager * _refreshManager = nil;
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
-	[[NSApp delegate] setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
+	[APPCONTROLLER setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
 	LLog(@"Removed queue: %d", [networkQueue requestsCount]);
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
-	[[NSApp delegate] setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
+	[APPCONTROLLER setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
 	LLog(@"Added queue: %d", [networkQueue requestsCount]);
 
 }
@@ -594,7 +594,7 @@ static RefreshManager * _refreshManager = nil;
 
 - (void)syncFinishedForFolder:(Folder *)folder 
 {
-    AppController *controller = [NSApp delegate];
+    AppController *controller = APPCONTROLLER;
     
     // Unread count may have changed
     [controller setStatusMessage:nil persist:NO];

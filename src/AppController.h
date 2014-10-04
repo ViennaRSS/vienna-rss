@@ -29,6 +29,8 @@
 #import "PluginManager.h"
 #import <AppKit/AppKit.h>
 
+#define APPCONTROLLER (AppController *)[NSApp delegate]
+
 @class NewPreferencesController;
 @class FoldersTree;
 @class SmartFolder;

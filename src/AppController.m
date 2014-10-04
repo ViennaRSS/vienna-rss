@@ -210,7 +210,7 @@ static NSLocale * enUSLocale;
 	// Set the delegates and title
 	[mainWindow setDelegate:self];
 	[mainWindow setTitle:[self appName]];
-	[NSApp setDelegate:self];
+	[[NSApplication sharedApplication] setDelegate:self];
 	[mainWindow setMinSize: NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height)];
 	
 	// Initialise the plugin manager now that the UI is ready
@@ -327,7 +327,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 {
 	if (messageType == kIOMessageSystemHasPoweredOn)
 	{
-		AppController * app = (AppController *)[NSApp delegate];
+		AppController * app = APPCONTROLLER;
 		Preferences * prefs = [Preferences standardPreferences];
 		int frequency = [prefs refreshFrequency];
 		if (frequency > 0)

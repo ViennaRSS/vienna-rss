@@ -332,7 +332,7 @@ JSONDecoder * jsonDecoder;
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 
-		AppController *controller = [NSApp delegate];
+		AppController *controller = APPCONTROLLER;
 		
 		// Unread count may have changed
 		[controller setStatusMessage:nil persist:NO];
@@ -545,7 +545,7 @@ JSONDecoder * jsonDecoder;
 	} else {
 		LLog(@"Start first authentication...");
 		googleReaderStatus = isAuthenticating;
-		[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
+		[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
 	}
 	
     // restore from Preferences and from keychain
@@ -582,7 +582,7 @@ JSONDecoder * jsonDecoder;
 		LOG_EXPR([myRequest responseStatusCode]);
 		LOG_EXPR([myRequest responseHeaders]);
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
-		[[NSApp delegate] setStatusMessage:nil persist:NO];
+		[APPCONTROLLER setStatusMessage:nil persist:NO];
 		googleReaderStatus = notAuthenticated;
 		[myRequest clearDelegatesAndCancel];
 		return;
@@ -652,7 +652,7 @@ JSONDecoder * jsonDecoder;
 
 -(void)submitLoadSubscriptions {
 	
-	[[NSApp delegate] setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions...", nil) persist:NO];
+	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions...", nil) persist:NO];
 
 
 	ASIHTTPRequest *subscriptionRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json",APIBaseURL,ClientName]]];
@@ -674,7 +674,7 @@ JSONDecoder * jsonDecoder;
 		dict = [jsonDecoder objectWithData:[request responseData]];
 	}
 	[localFeeds removeAllObjects];
-	NSArray * localFolders = [[NSApp delegate] folders];
+	NSArray * localFolders = [APPCONTROLLER folders];
 	
 	for (Folder * f in localFolders) {
 		if ([f feedURL]) {
@@ -742,14 +742,14 @@ JSONDecoder * jsonDecoder;
 	}
 	
 	//check if we have a folder which is not registered as a Open Reader feed
-	for (Folder * f in [[NSApp delegate] folders]) {
+	for (Folder * f in [APPCONTROLLER folders]) {
 		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
 		{
 			[[Database sharedDatabase] deleteFolder:[f itemId]];
 		}
 	}
 
-	AppController *controller = [NSApp delegate];
+	AppController *controller = APPCONTROLLER;
 	
 	// Unread count may have changed
 	[controller setStatusMessage:nil persist:NO];
@@ -966,7 +966,7 @@ JSONDecoder * jsonDecoder;
 		rssTitle = [params objectAtIndex:1];
     }
     
-    [[NSApp delegate] createNewGoogleReaderSubscription:feedURL underFolder:underFolder withTitle:rssTitle afterChild:-1];
+    [APPCONTROLLER createNewGoogleReaderSubscription:feedURL underFolder:underFolder withTitle:rssTitle afterChild:-1];
 
 	LLog(@"createNewSubscription - END");
 

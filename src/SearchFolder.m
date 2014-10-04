@@ -473,7 +473,7 @@
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 	if (smartFolderId == -1)
 	{
-		AppController * controller = (AppController *)[NSApp delegate];
+		AppController * controller = APPCONTROLLER;
 		smartFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
 		[controller selectFolder:smartFolderId];
 	}
