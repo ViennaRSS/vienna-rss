@@ -189,6 +189,7 @@
 /* showRssPageButton
  * Conditionally show or hide the RSS page button.
  */
+ // TODO : associate a menu when there are multiple feeds
 -(void)showRssPageButton:(BOOL)showButton
 {
 	[rssPageButton setEnabled:showButton];

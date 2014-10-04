@@ -51,11 +51,12 @@
     if (urlContent == nil)
         return rssFeedURL;
     
-    // Get all the feeds on the page. If there's more than one, use the first one. Later we
-    // could put up UI inviting the user to pick one but I don't know if it makes sense to
-    // do this. How would they know which one would be best? We'd have to query each feed, get
-    // the title and then ask them.
     NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
+    // Get all the feeds on the page. If there's more than one, use the first one.
+	// TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one
+	// That would require modifying extractFeeds to provide URL strings and titles
+	// as feeds' links are often advertised in the HTML head
+	// as <link rel="alternate" type="application/rss+xml" title="..." href="...">
     if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
     {
         NSString * feedPart = linkArray.firstObject;
