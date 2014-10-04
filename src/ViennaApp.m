@@ -40,7 +40,7 @@
 {
 	if(([anEvent type] == NSFlagsChanged) && ( ([anEvent keyCode] == 61) || ([anEvent keyCode] == 58)))
 	{
-		AppController * controller = (AppController *)[NSApp delegate];
+		AppController * controller = APPCONTROLLER;
 		[controller toggleOptionKeyButtonStates]; 
 	}
 	else
@@ -332,7 +332,7 @@
  */
 -(void)setCurrentFolder:(Folder *)newCurrentFolder
 {
-	AppController * controller = (AppController *)[NSApp delegate];
+	AppController * controller = APPCONTROLLER;
 	int folderId = [newCurrentFolder itemId];
 	[controller selectFolder:folderId];
 }

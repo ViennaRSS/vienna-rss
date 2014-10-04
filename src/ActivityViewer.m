@@ -97,7 +97,7 @@
 			folder = [db folderFromFeedURL:[selectedItem name]];
 		if (folder != nil)
 		{
-			AppController * controller = (AppController *)[NSApp delegate];
+			AppController * controller = APPCONTROLLER;
 			[controller selectFolder:[folder itemId]];
 		}
 	}

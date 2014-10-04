@@ -39,7 +39,7 @@
 	if (!searchPanelWindow)
 	{
 		[NSBundle loadNibNamed:@"SearchPanel" owner:self];
-		[[searchField cell] setSearchMenuTemplate:[[NSApp delegate] searchFieldMenu]];
+		[[searchField cell] setSearchMenuTemplate:[APPCONTROLLER searchFieldMenu]];
 	}
 	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
 	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
@@ -60,16 +60,16 @@
  */
 -(IBAction)searchStringChanged:(id)sender;
 {
-	[[NSApp delegate] setSearchString:[searchField stringValue]];
+	[APPCONTROLLER setSearchString:[searchField stringValue]];
 	
-	NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
+	NSView<BaseView> * theView = [[APPCONTROLLER browserView] activeTabItemView];
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[theView performFindPanelAction:NSFindPanelActionSetFindString];
-		[[NSApp delegate] setFocusToSearchField:self];
+		[APPCONTROLLER setFocusToSearchField:self];
 	}
 	else
-		[[NSApp delegate] searchArticlesWithString:[searchField stringValue]];
+		[APPCONTROLLER searchArticlesWithString:[searchField stringValue]];
 	
 	[NSApp endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];

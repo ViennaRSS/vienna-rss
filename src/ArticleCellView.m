@@ -30,7 +30,7 @@
 {
 	if((self = [super initWithReusableIdentifier:identifier]))
 	{
-		controller = (AppController *)[NSApp delegate];
+		controller = APPCONTROLLER;
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
 		// Make the list view the frame load and UI delegate for the web view
 		[articleView setUIDelegate:[[controller browserView] primaryTabItemView]];

@@ -753,7 +753,7 @@
 			parentFolderId = currentFolderId;
 			currentFolderId = 0;
 		}
-		[[NSApp delegate] createNewSubscription:rssPageURL underFolder:parentFolderId afterChild:currentFolderId];
+		[APPCONTROLLER createNewSubscription:rssPageURL underFolder:parentFolderId afterChild:currentFolderId];
 	}
 }
 

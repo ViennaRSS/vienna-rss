@@ -216,7 +216,7 @@
 
 	// We've now confirmed the URL isn't already subscribed to and verified it.
     // call the controller to create the new subscription.
-	[[NSApp delegate] createNewSubscription:rssFeedURL.absoluteString underFolder:parentId afterChild:-1];
+	[APPCONTROLLER createNewSubscription:rssFeedURL.absoluteString underFolder:parentId afterChild:-1];
     
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];

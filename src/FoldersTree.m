@@ -141,7 +141,7 @@
 	[outlineView setEnableTooltips:YES];
 	
 	// Set the menu for the popup button
-	[outlineView setMenu:[[NSApp delegate] folderMenu]];
+	[outlineView setMenu:[APPCONTROLLER folderMenu]];
 	
 	blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
@@ -190,7 +190,7 @@
 	cellFont = [[NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]] retain];
 	boldCellFont = [[[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont] retain];
 
-	height = [[[NSApp delegate] layoutManager] defaultLineHeightForFont:boldCellFont];
+	height = [[APPCONTROLLER layoutManager] defaultLineHeightForFont:boldCellFont];
 	[outlineView setRowHeight:height + 5];
 	[outlineView setIntercellSpacing:NSMakeSize(10, 2)];
 }
@@ -672,7 +672,7 @@
 	{
 		NSString * urlString = [[node folder] homePage];
 		if (urlString && ![urlString isBlank])
-			[[NSApp delegate] openURLFromString:urlString inPreferredBrowser:YES];
+			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
 	}
 	else if (IsSmartFolder([node folder]))
 	{
@@ -1375,7 +1375,7 @@
 		// This is possibly a URL that we'll handle as a potential feed subscription. It's
 		// not our call to make though.
 		int predecessorId = (childIndex > 0) ? [[node childByIndex:(childIndex - 1)] nodeId] : 0;
-		[[NSApp delegate] createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
+		[APPCONTROLLER createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
 		return YES;
 	}
 	if ([type isEqualToString:MA_PBoardType_FolderList])

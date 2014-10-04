@@ -146,7 +146,7 @@
 		if (navigationType == WebNavigationTypeLinkClicked)
 		{
 			[listener ignore];
-			[[NSApp delegate] openURL:[request URL] inPreferredBrowser:YES];
+			[APPCONTROLLER openURL:[request URL] inPreferredBrowser:YES];
 			return;
 		}
 	}

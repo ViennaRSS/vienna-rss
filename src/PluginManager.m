@@ -299,8 +299,8 @@
  */
 -(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
 {	
-	NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
-	Article * thisArticle = [[NSApp delegate] selectedArticle];
+	NSView<BaseView> * theView = [[APPCONTROLLER browserView] activeTabItemView];
+	Article * thisArticle = [APPCONTROLLER selectedArticle];
 	
 	if ([theView isKindOfClass:[BrowserPane class]])
 		return (([theView viewLink] != nil) && [NSApp isActive]);
@@ -336,7 +336,7 @@
 				return;
 			
 			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = [[[NSApp delegate] browserView] activeTabItemView];
+			NSView<BaseView> * theView = [[APPCONTROLLER browserView] activeTabItemView];
 			
 			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
@@ -363,7 +363,7 @@
 			else
 			{
 				// We can only work on one article, so ignore selection range.
-				Article * currentMessage = [[NSApp delegate] selectedArticle];
+				Article * currentMessage = [APPCONTROLLER selectedArticle];
 				[urlString replaceString:@"$ArticleTitle$" withString: [currentMessage title]];
 				
 				// URL shortening again, as above...
@@ -386,7 +386,7 @@
 			{
 				NSURL * urlToLoad = cleanedUpAndEscapedUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[[NSApp delegate] createNewTab:urlToLoad inBackground:NO];
+					[APPCONTROLLER createNewTab:urlToLoad inBackground:NO];
 			}
 			else
 			{
@@ -406,13 +406,13 @@
 				return;
 
 			// Just run the script
-			[[NSApp delegate] runAppleScript:scriptFile];
+			[APPCONTROLLER runAppleScript:scriptFile];
 		}
 
 		else if ([itemType isEqualToString:@"BlogEditor"])
 		{
 			// This is a blog-editor plugin. Simply send the info to the application.
-			[[NSApp delegate] blogWithExternalEditor:[pluginItem objectForKey:@"BundleIdentifier"]];
+			[APPCONTROLLER blogWithExternalEditor:[pluginItem objectForKey:@"BundleIdentifier"]];
 		}
 	}
 }

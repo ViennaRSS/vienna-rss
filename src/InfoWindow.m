@@ -323,7 +323,7 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(IBAction)validateURL:(id)sender
 {
-	NSString * validatorPage = [[[NSApp delegate] standardURLs] valueForKey:@"FeedValidatorTemplate"];
+	NSString * validatorPage = [[APPCONTROLLER standardURLs] valueForKey:@"FeedValidatorTemplate"];
 	if (validatorPage != nil)
 	{
 		NSString * url = [[urlField stringValue] trim];
@@ -342,7 +342,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 		}
 		
 		NSString * validatorURL = [NSString stringWithFormat:validatorPage, url];
-		[[NSApp delegate] openURLFromString:validatorURL inPreferredBrowser:YES];
+		[APPCONTROLLER openURLFromString:validatorURL inPreferredBrowser:YES];
 	}
 }
 

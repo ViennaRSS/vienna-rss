@@ -21,6 +21,7 @@
 #import "FolderView.h"
 #import "ImageAndTextCell.h"
 #import "TreeNode.h"
+#import "AppController.h"
 
 @interface NSObject (FolderViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
@@ -98,7 +99,7 @@
 	if ([[theEvent characters] length] == 1)
 	{
 		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([[NSApp delegate] handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
 			return;
 	}
 	[super keyDown:theEvent];
@@ -244,7 +245,7 @@
  */
 -(IBAction)delete:(id)sender
 {
-	[[NSApp delegate] deleteFolder:self];
+	[APPCONTROLLER deleteFolder:self];
 }
 
 /* validateMenuItem

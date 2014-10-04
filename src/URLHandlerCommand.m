@@ -61,7 +61,7 @@
 
 		// Allow the run loop to run first, because this may be called at launch,
 		// In which case the db is not fully initialized yet.
-		[[NSApp delegate] performSelector:@selector(handleRSSLink:) withObject:linkPath afterDelay:0.0];
+		[APPCONTROLLER performSelector:@selector(handleRSSLink:) withObject:linkPath afterDelay:0.0];
 	}
 	return nil;
 }

@@ -66,7 +66,7 @@
 	[newGroupFolderWindow orderOut:self];
 	
 	if (newFolderId != -1)
-		[(AppController *)[NSApp delegate] selectFolder:newFolderId];
+		[APPCONTROLLER selectFolder:newFolderId];
 }
 
 /* doCancel
