@@ -8,6 +8,7 @@
 
 #import "SubscriptionModel.h"
 #import "RichXMLParser.h"
+#import "StringExtensions.h"
 
 @implementation SubscriptionModel
 
@@ -26,7 +27,7 @@
 */
 +(NSString *)verifiedFeedURLFromString:(NSString *)feedURLString
 {
-    NSString * urlString = [[feedURLString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] lowercaseString];
+    NSString * urlString = [[feedURLString trim] lowercaseString];
     
     // If the URL starts with feed or ends with a feed extension then we're going
     // assume it's a feed.
