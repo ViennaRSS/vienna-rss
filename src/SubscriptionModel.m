@@ -61,7 +61,7 @@
         NSString * feedPart = linkArray.firstObject;
         if (![feedPart hasPrefix:@"http"] && ![feedPart hasPrefix:@"https"])
         {
-            rssFeedURL = [rssFeedURL URLByAppendingPathComponent:feedPart];
+            rssFeedURL = [[NSURL alloc] initWithScheme:rssFeedURL.scheme host:rssFeedURL.host path:feedPart];
         }
         else {
             rssFeedURL = [NSURL URLWithString:feedPart];
