@@ -180,7 +180,7 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSString * feedURLString = [[feedURL stringValue] trim];
-    NSURL * rssFeedURL = [[NSURL alloc] init];
+    NSURL * rssFeedURL = [[[NSURL alloc] init] autorelease];
 
 	// Format the URL based on the selected feed source.
 	if (sourcesDict != nil)
@@ -217,8 +217,7 @@
 	// We've now confirmed the URL isn't already subscribed to and verified it.
     // call the controller to create the new subscription.
 	[[NSApp delegate] createNewSubscription:rssFeedURL.relativeString underFolder:parentId afterChild:-1];
-	
-    [rssFeedURL release];
+    
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];
 	[newRSSFeedWindow orderOut:self];
