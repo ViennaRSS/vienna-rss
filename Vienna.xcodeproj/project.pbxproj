@@ -59,6 +59,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
@@ -946,6 +947,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		031E082E19DFA3A900194F9F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionModel.h; path = src/SubscriptionModel.h; sourceTree = "<group>"; };
+		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -1914,6 +1917,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031E082D19DFA36900194F9F /* NewSubscription */ = {
+			isa = PBXGroup;
+			children = (
+				43502877165DE9DF0018EDB7 /* NewSubscription.h */,
+				43502878165DE9DF0018EDB7 /* NewSubscription.m */,
+				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
+				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
+			);
+			name = NewSubscription;
+			sourceTree = "<group>";
+		};
 		1058C7A6FEA54F5311CA2CBB /* System frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2011,8 +2025,7 @@
 				43502874165DE9DF0018EDB7 /* MessageListView.m */,
 				43502875165DE9DF0018EDB7 /* NewGroupFolder.h */,
 				43502876165DE9DF0018EDB7 /* NewGroupFolder.m */,
-				43502877165DE9DF0018EDB7 /* NewSubscription.h */,
-				43502878165DE9DF0018EDB7 /* NewSubscription.m */,
+				031E082D19DFA36900194F9F /* NewSubscription */,
 				43502879165DE9DF0018EDB7 /* PluginManager.h */,
 				4350287A165DE9DF0018EDB7 /* PluginManager.m */,
 				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
@@ -4302,6 +4315,7 @@
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
+				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
 				AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */,
 				AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */,

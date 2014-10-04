@@ -43,7 +43,7 @@
 @class SearchPanel;
 @class BJRWindowWithToolbar;
 
-@interface AppController : NSObject <NSApplicationDelegate,GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;
@@ -189,7 +189,7 @@
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(int)folderId;
--(void)createNewSubscription:(NSString *)url underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
+-(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
 -(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;

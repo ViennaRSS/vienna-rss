@@ -2902,11 +2902,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (folderId != -1)
 		{
 			[foldersTree selectFolder:folderId];
-			if (isAccessible(urlString))
+            if (isAccessible(urlString))
 			{
 				Folder * folder = [db folderFromID:folderId];
 				[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
-			}
+            } else if ([urlString hasPrefix:@"file"]) {
+                Folder * folder = [db folderFromID:folderId];
+                [[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:NO];
+            }
 		}
 	}
 }
