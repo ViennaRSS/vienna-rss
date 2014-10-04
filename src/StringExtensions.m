@@ -67,7 +67,7 @@
 			
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http"] && ![srcPath hasPrefix:@"data:"])
+			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"])
 			{
 				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (escapedSrcPath != nil)
@@ -125,7 +125,7 @@
 
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http"] && ![srcPath hasPrefix:@"#"])
+			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"#"])
 			{
 				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (escapedSrcPath != nil)
@@ -183,7 +183,7 @@
 
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http"])
+			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"])
 			{
 				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 				if (escapedSrcPath != nil)
