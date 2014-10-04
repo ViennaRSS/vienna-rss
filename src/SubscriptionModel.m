@@ -62,7 +62,7 @@
         if (![feedPart hasPrefix:@"http"] && ![feedPart hasPrefix:@"https"])
         {
             if ([feedPart hasPrefix:@"/"]) {
-                rssFeedURL = [[NSURL alloc] initWithScheme:rssFeedURL.scheme host:rssFeedURL.host path:feedPart];
+                rssFeedURL = [[[NSURL alloc] initWithScheme:rssFeedURL.scheme host:rssFeedURL.host path:feedPart] autorelease];
             } else {
                 rssFeedURL = [[NSURL URLWithString:feedPart relativeToURL:rssFeedURL] absoluteURL];
             }

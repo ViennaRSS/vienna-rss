@@ -198,7 +198,7 @@
 
 	// Replace feed:// with http:// if necessary
     if ([rssFeedURL.scheme isEqualToString:@"feed"]) {
-        rssFeedURL = [[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path];
+        rssFeedURL = [[[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path] autorelease];
     }
     
 	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
@@ -363,8 +363,9 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[sourcesDict release];
+    sourcesDict=nil;
     [subscriptionModel release];
-	sourcesDict=nil;
+    subscriptionModel=nil;
 	[db release];
 	db=nil;
 	[super dealloc];
