@@ -47,6 +47,7 @@
 		sourcesDict = nil;
 		editFolderId = -1;
 		parentId = MA_Root_Folder;
+        subscriptionModel = [[SubscriptionModel alloc] init];
 	}
 	return self;
 }
@@ -211,7 +212,7 @@
 
 	// Validate the subscription, possibly replacing the feedURLString with a real one if
 	// it originally pointed to a web page.
-	rssFeedURL = [SubscriptionModel verifiedFeedURLFromURL:rssFeedURL];
+	rssFeedURL = [subscriptionModel verifiedFeedURLFromURL:rssFeedURL];
 
 	// We've now confirmed the URL isn't already subscribed to and verified it.
     // call the controller to create the new subscription.
@@ -363,6 +364,7 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[sourcesDict release];
+    [subscriptionModel release];
 	sourcesDict=nil;
 	[db release];
 	db=nil;

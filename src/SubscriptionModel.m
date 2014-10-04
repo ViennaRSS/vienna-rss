@@ -25,7 +25,7 @@
 *
 *  @return A pointer to an NSString containing a verified URL
 */
-+(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL
+-(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL
 {
     // If the URL starts with feed or ends with a feed extension then we're going
     // assume it's a feed.

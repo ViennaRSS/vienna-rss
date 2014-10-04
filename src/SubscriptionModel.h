@@ -11,6 +11,6 @@
 @interface SubscriptionModel : NSObject
 
 
-+(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL;
+-(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL;
 
 @end

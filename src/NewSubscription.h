@@ -21,6 +21,8 @@
 #import <Cocoa/Cocoa.h>
 #import "Database.h"
 
+@class SubscriptionModel;
+
 @interface NewSubscription : NSWindowController {
 	IBOutlet NSTextField * linkTitle;
 	IBOutlet NSTextField * feedURL;
@@ -38,6 +40,8 @@
 	Database * db;
 	int parentId;
 	int editFolderId;
+    SubscriptionModel *subscriptionModel;
+    
 }
 
 @property BOOL googleOptionButton;
