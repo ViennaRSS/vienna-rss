@@ -252,7 +252,9 @@ static RefreshManager * _refreshManager = nil;
 			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			[self performSelectorOnMainThread:@selector(refreshFavIcon:) withObject:folder waitUntilDone:NO];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self refreshFavIcon:folder];
+			});
 		}
 	}
 }
@@ -510,7 +512,9 @@ static RefreshManager * _refreshManager = nil;
 	[self setFolderErrorFlag:folder flag:YES];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[request error] localizedDescription ]]];
 	[aItem setStatus:NSLocalizedString(@"Error",nil)];
-	[self performSelectorOnMainThread:@selector(syncFinishedForFolder:) withObject:folder waitUntilDone:NO];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self syncFinishedForFolder:folder];
+	});
 }
 
 /* pumpFolderIconRefresh
@@ -668,7 +672,9 @@ static RefreshManager * _refreshManager = nil;
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-		[self performSelectorOnMainThread:@selector(syncFinishedForFolder:) withObject:folder waitUntilDone:NO];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[self syncFinishedForFolder:folder];
+		});
 		return;
 	}
 	else if (isCancelled) 
@@ -712,9 +718,11 @@ static RefreshManager * _refreshManager = nil;
 		[self setFolderErrorFlag:folder flag:YES];
 	}
 
-	[self performSelectorOnMainThread:@selector(syncFinishedForFolder:) withObject:folder waitUntilDone:NO];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self syncFinishedForFolder:folder];
+	}); //block for dispatch_async on main queue
 
-	}); //block for dispatch_async
+	}); //block for dispatch_async on _queue
 };
 
 -(void)finalizeFolderRefresh:(NSDictionary*)parameters;

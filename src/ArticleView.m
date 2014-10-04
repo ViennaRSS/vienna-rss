@@ -248,10 +248,10 @@ static NSMutableDictionary * stylePathMappings = nil;
 	// Reset current html string.
 	if (currentHTML != nil)
 		[currentHTML release];
-	currentHTML = [[NSString alloc] initWithString: @"<HTML></HTML>"];
+	currentHTML = [[NSString alloc] initWithString: @""];
 	
 	// Load a blank HTML page.
-	NSString * htmlText = @"<HTML></HTML>";
+	NSString * htmlText = @"";
 	[[self mainFrame] loadHTMLString:htmlText
 					   baseURL:[NSURL URLWithString:@""]];
 }
