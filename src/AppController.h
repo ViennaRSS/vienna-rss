@@ -43,7 +43,7 @@
 @class SearchPanel;
 @class BJRWindowWithToolbar;
 
-@interface AppController : NSObject <NSApplicationDelegate,GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
+@interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;

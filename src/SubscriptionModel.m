@@ -25,33 +25,31 @@
 *
 *  @return A pointer to an NSString containing a verified URL
 */
-+(NSString *)verifiedFeedURLFromString:(NSString *)feedURLString
++(NSURL *)verifiedFeedURLFromURL:(NSURL *)rssFeedURL
 {
-    NSString * urlString = [[feedURLString trim] lowercaseString];
-    
     // If the URL starts with feed or ends with a feed extension then we're going
     // assume it's a feed.
-    if ([urlString hasPrefix:@"feed:"])
-        return feedURLString;
+    if ([rssFeedURL.scheme isEqualToString:@"feed"]) {
+        return rssFeedURL;
+    }
     
-    if ([urlString hasSuffix:@".rss"] || [urlString hasSuffix:@".rdf"] || [urlString hasSuffix:@".xml"])
-        return feedURLString;
+    if ([rssFeedURL.pathExtension isEqualToString:@"rss"] || [rssFeedURL.pathExtension isEqualToString:@"rdf"] || [rssFeedURL.pathExtension isEqualToString:@"xml"]) {
+        return rssFeedURL;
+    }
     
     // OK. Now we're at the point where can't be reasonably sure that
     // the URL points to a feed. Time to look at the content.
-    NSURL * url = [NSURL URLWithString:urlString];
-    if ([url scheme] == nil)
+    if (rssFeedURL.scheme == nil)
     {
-        urlString = [@"http://" stringByAppendingString:urlString];
-        url = [NSURL URLWithString:urlString];
+        rssFeedURL = [NSURL URLWithString:[@"http://" stringByAppendingString:rssFeedURL.absoluteString]];
     }
     
     // Use this rather than [NSData dataWithContentsOfURL:],
     // because that method will not necessarily unzip gzipped content from server.
     // Thanks to http://www.omnigroup.com/mailman/archive/macosx-dev/2004-March/051547.html
-    NSData * urlContent = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:NULL error:NULL];
+    NSData * urlContent = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:rssFeedURL] returningResponse:NULL error:NULL];
     if (urlContent == nil)
-        return feedURLString;
+        return rssFeedURL;
     
     // Get all the feeds on the page. If there's more than one, use the first one. Later we
     // could put up UI inviting the user to pick one but I don't know if it makes sense to
@@ -60,17 +58,16 @@
     NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
     if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
     {
-        NSString * feedPart = [linkArray objectAtIndex:0];
-        if (![feedPart hasPrefix:@"http:"] && ![feedPart hasPrefix:@"https:"])
+        NSString * feedPart = linkArray.firstObject;
+        if (![feedPart hasPrefix:@"http"] && ![feedPart hasPrefix:@"https"])
         {
-            if (![urlString hasSuffix:@"/"])
-                urlString = [urlString stringByAppendingString:@"/"];
-            feedURLString = [urlString stringByAppendingString:feedPart];
+            rssFeedURL = [rssFeedURL URLByAppendingPathComponent:feedPart];
         }
-        else
-            feedURLString = feedPart;
+        else {
+            rssFeedURL = [NSURL URLWithString:feedPart];
+        }
     }
-    return feedURLString;
+    return rssFeedURL;
 }
 
 

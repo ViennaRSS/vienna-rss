@@ -24,6 +24,7 @@
 #import "RichXMLParser.h"
 #import "Preferences.h"
 #import "GoogleReader.h"
+#import "SubscriptionModel.h"
 
 // Private functions
 @interface NewSubscription (Private)
@@ -64,17 +65,21 @@
 	if (!sourcesDict)
 	{
 		NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-		NSString * pathToPList = [thisBundle pathForResource:@"RSSSources.plist" ofType:@""];
-		if (pathToPList != nil)
+		NSString * pathToPList = [thisBundle pathForResource:@"RSSSources" ofType:@"plist"];
+		if ([[NSFileManager defaultManager] fileExistsAtPath:pathToPList])
 		{
 			sourcesDict = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
 			[feedSource removeAllItems];
-			if (sourcesDict)
+			if (sourcesDict.count > 0)
 			{
-				for (NSString * key in sourcesDict)
-					[feedSource addItemWithTitle:NSLocalizedString(key, nil)];
+                for (NSString *feedSourceType in sourcesDict.allKeys) {
+					//[feedSource addItemWithTitle:NSLocalizedString(feedSourceType, nil)];
+                    NSMenuItem *feedMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(feedSourceType, nil) action:NULL keyEquivalent:@""] autorelease];
+                    feedMenuItem.representedObject = feedSourceType;
+                    [feedSource.menu addItem:feedMenuItem];
+                }
 				[feedSource setEnabled:YES];
-				[feedSource selectItemWithTitle:@"URL"];
+				[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 			}
 		}
 	}
@@ -86,7 +91,7 @@
 	if (initialURL != nil)
 	{
 		[feedURL setStringValue:initialURL];
-		[feedSource selectItemWithTitle:@"URL"];
+		[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 	}
 	else
 	{
@@ -100,7 +105,7 @@
 			{
 				[feedURL setStringValue:pasteString];
 				[feedURL selectText:self];
-				[feedSource selectItemWithTitle:@"URL"];
+				[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 			}
 		}
 	}
@@ -174,38 +179,45 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSString * feedURLString = [[feedURL stringValue] trim];
+    NSURL * rssFeedURL = [[NSURL alloc] init];
 
 	// Format the URL based on the selected feed source.
 	if (sourcesDict != nil)
 	{
-		NSMenuItem * feedSourceItem = [feedSource selectedItem];
-		NSString * key = [feedSourceItem title];
-		NSDictionary * itemDict = [sourcesDict valueForKey:key];
-		NSString * linkName = [itemDict valueForKey:@"LinkTemplate"];
-		if (linkName != nil)
-			feedURLString = [NSString stringWithFormat:linkName, feedURLString];
+		NSString * selectedSource = (NSString *)[[feedSource selectedItem] representedObject];
+		NSDictionary * feedSourceType = [sourcesDict valueForKey:selectedSource];
+		NSString * linkTemplate = [feedSourceType valueForKey:@"LinkTemplate"];
+        if ([selectedSource.lowercaseString isEqualToString:@"local file"]) {
+            rssFeedURL = [NSURL fileURLWithPath:feedURLString.stringByExpandingTildeInPath];
+        }
+        else if (linkTemplate.length > 0) {
+            rssFeedURL = [NSURL URLWithString:[NSString stringWithFormat:linkTemplate, feedURLString]];
+        }
 	}
 
 	// Replace feed:// with http:// if necessary
-	if ([feedURLString hasPrefix:@"feed://"])
-		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
-
-	// Create the RSS folder in the database
-	if ([db folderFromFeedURL:feedURLString] != nil)
+    if ([rssFeedURL.scheme isEqualToString:@"feed"]) {
+        rssFeedURL = [[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path];
+    }
+    
+	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
+	if ([db folderFromFeedURL:rssFeedURL.relativeString] != nil)
 	{
-		NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", nil),
-						NSLocalizedString(@"Already subscribed body", nil),
+		NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", @"Already subscribed title"),
+						NSLocalizedString(@"Already subscribed body", @"Already subscribed body"),
 						NSLocalizedString(@"OK", nil), nil, nil);
 		return;
 	}
 
 	// Validate the subscription, possibly replacing the feedURLString with a real one if
 	// it originally pointed to a web page.
-	feedURLString = [self verifyFeedURL:feedURLString];
+	rssFeedURL = [SubscriptionModel verifiedFeedURLFromURL:rssFeedURL];
 
-	// Call the controller to create the new subscription.
-	[[NSApp delegate] createNewSubscription:feedURLString underFolder:parentId afterChild:-1];
+	// We've now confirmed the URL isn't already subscribed to and verified it.
+    // call the controller to create the new subscription.
+	[[NSApp delegate] createNewSubscription:rssFeedURL.relativeString underFolder:parentId afterChild:-1];
 	
+    [rssFeedURL release];
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];
 	[newRSSFeedWindow orderOut:self];
@@ -342,62 +354,6 @@
 {
 	NSString * feedURLString = [editFeedURL stringValue];
 	[saveButton setEnabled:![feedURLString isBlank]];
-}
-
-/* verifyFeedURL
- * Verify the specified URL. This is the auto-discovery phase that is described at
- * http://diveintomark.org/archives/2002/08/15/ultraliberal_rss_locator
- *
- * Basically we examine the data at the specified URL and if it is an RSS feed
- * then OK. Otherwise if it looks like an HTML page, we scan for links in the
- * page text.
- */
--(NSString *)verifyFeedURL:(NSString *)feedURLString
-{
-	NSString * urlString = [[feedURLString trim] lowercaseString];
-
-	// If the URL starts with feed or ends with a feed extension then we're going
-	// assume it's a feed.
-	if ([urlString hasPrefix:@"feed:"])
-		return feedURLString;
-
-	if ([urlString hasSuffix:@".rss"] || [urlString hasSuffix:@".rdf"] || [urlString hasSuffix:@".xml"])
-		 return feedURLString;
-
-	// OK. Now we're at the point where can't be reasonably sure that
-	// the URL points to a feed. Time to look at the content.
-	NSURL * url = [NSURL URLWithString:urlString];
-	if ([url scheme] == nil)
-	{
-		urlString = [@"http://" stringByAppendingString:urlString];
-		url = [NSURL URLWithString:urlString];
-	}
-	
-	// Use this rather than [NSData dataWithContentsOfURL:],
-	// because that method will not necessarily unzip gzipped content from server.
-	// Thanks to http://www.omnigroup.com/mailman/archive/macosx-dev/2004-March/051547.html
-	NSData * urlContent = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:url] returningResponse:NULL error:NULL];
-	if (urlContent == nil)
-		return feedURLString;
-
-	// Get all the feeds on the page. If there's more than one, use the first one. Later we
-	// could put up UI inviting the user to pick one but I don't know if it makes sense to
-	// do this. How would they know which one would be best? We'd have to query each feed, get
-	// the title and then ask them.
-	NSMutableArray * linkArray = [NSMutableArray arrayWithCapacity:10];
-	if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
-	{
-		NSString * feedPart = [linkArray objectAtIndex:0];
-		if (![feedPart hasPrefix:@"http:"] && ![feedPart hasPrefix:@"https:"])
-		{
-			if (![urlString hasSuffix:@"/"])
-				urlString = [urlString stringByAppendingString:@"/"];
-			feedURLString = [urlString stringByAppendingString:feedPart];
-		}
-		else
-			feedURLString = feedPart;
-	}
-	return feedURLString;
 }
 
 /* dealloc
