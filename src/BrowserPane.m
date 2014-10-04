@@ -189,6 +189,7 @@
 /* showRssPageButton
  * Conditionally show or hide the RSS page button.
  */
+ // TODO : associate a menu when there are multiple feeds
 -(void)showRssPageButton:(BOOL)showButton
 {
 	[rssPageButton setEnabled:showButton];
@@ -447,7 +448,7 @@
 			[rssPageURL release];
 			rssPageURL = [arrayOfLinks objectAtIndex:0];
 			if (![rssPageURL hasPrefix:@"http:"] && ![rssPageURL hasPrefix:@"https:"])
-				rssPageURL = [[self viewLink] stringByAppendingString:rssPageURL];
+				rssPageURL = [[NSURL URLWithString:rssPageURL relativeToURL:[self url]] absoluteString];
 			[rssPageURL retain];
 			[self showRssPageButton:YES];
 		}

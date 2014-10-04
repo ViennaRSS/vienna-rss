@@ -198,11 +198,11 @@
 
 	// Replace feed:// with http:// if necessary
     if ([rssFeedURL.scheme isEqualToString:@"feed"]) {
-        rssFeedURL = [[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path];
+        rssFeedURL = [[[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path] autorelease];
     }
     
 	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
-	if ([db folderFromFeedURL:rssFeedURL.relativeString] != nil)
+	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
 	{
 		NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", @"Already subscribed title"),
 						NSLocalizedString(@"Already subscribed body", @"Already subscribed body"),
@@ -216,7 +216,7 @@
 
 	// We've now confirmed the URL isn't already subscribed to and verified it.
     // call the controller to create the new subscription.
-	[[NSApp delegate] createNewSubscription:rssFeedURL.relativeString underFolder:parentId afterChild:-1];
+	[[NSApp delegate] createNewSubscription:rssFeedURL.absoluteString underFolder:parentId afterChild:-1];
     
 	// Close the window
 	[NSApp endSheet:newRSSFeedWindow];
@@ -363,8 +363,9 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[sourcesDict release];
+    sourcesDict=nil;
     [subscriptionModel release];
-	sourcesDict=nil;
+    subscriptionModel=nil;
 	[db release];
 	db=nil;
 	[super dealloc];
