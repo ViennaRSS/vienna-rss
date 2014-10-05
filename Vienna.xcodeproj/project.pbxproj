@@ -60,6 +60,8 @@
 
 /* Begin PBXBuildFile section */
 		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
+		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
+		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
@@ -838,6 +840,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		035B703B19E0E4AE00197334 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
+			remoteInfo = Vienna;
+		};
 		3A7567A91674EB48009C0900 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -949,6 +958,10 @@
 /* Begin PBXFileReference section */
 		031E082E19DFA3A900194F9F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionModel.h; path = src/SubscriptionModel.h; sourceTree = "<group>"; };
 		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
+		035B703519E0E4AE00197334 /* Vienna Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
+		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -1869,6 +1882,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		035B703219E0E4AE00197334 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43BA97101663EA5000B95F35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1928,6 +1948,24 @@
 			name = NewSubscription;
 			sourceTree = "<group>";
 		};
+		035B703619E0E4AE00197334 /* Vienna Tests */ = {
+			isa = PBXGroup;
+			children = (
+				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
+				035B703719E0E4AE00197334 /* Supporting Files */,
+				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
+			);
+			path = "Vienna Tests";
+			sourceTree = "<group>";
+		};
+		035B703719E0E4AE00197334 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				035B703819E0E4AE00197334 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		1058C7A6FEA54F5311CA2CBB /* System frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1954,6 +1992,7 @@
 				43BA97321663EE7C00B95F35 /* DisclosableView.framework */,
 				43BA973C16642A7E00B95F35 /* libASIHTTPRequest.a */,
 				F06BE30317C87DEA00A74FBB /* libFMDatabase.a */,
+				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = SOURCE_ROOT;
@@ -1968,6 +2007,7 @@
 				43501F8D165DB9DD0018EDB7 /* Third Party */,
 				43501F70165DB92B0018EDB7 /* External frameworks */,
 				1058C7A6FEA54F5311CA2CBB /* System frameworks */,
+				035B703619E0E4AE00197334 /* Vienna Tests */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			name = Vienna;
@@ -3351,6 +3391,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		035B703419E0E4AE00197334 /* Vienna Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 035B704019E0E4AE00197334 /* Build configuration list for PBXNativeTarget "Vienna Tests" */;
+			buildPhases = (
+				035B703119E0E4AE00197334 /* Sources */,
+				035B703219E0E4AE00197334 /* Frameworks */,
+				035B703319E0E4AE00197334 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				035B703C19E0E4AE00197334 /* PBXTargetDependency */,
+			);
+			name = "Vienna Tests";
+			productName = "Vienna Tests";
+			productReference = 035B703519E0E4AE00197334 /* Vienna Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		43BA97111663EA5000B95F35 /* JSONKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43BA97151663EA5B00B95F35 /* Build configuration list for PBXNativeTarget "JSONKit" */;
@@ -3457,6 +3515,12 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = uk.co.opencommunity;
+				TargetAttributes = {
+					035B703419E0E4AE00197334 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 8D15AC270486D014006FF6A4;
+					};
+				};
 			};
 			buildConfigurationList = AA4F9AB60855422400C18279 /* Build configuration list for PBXProject "Vienna" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3504,11 +3568,19 @@
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
+				035B703419E0E4AE00197334 /* Vienna Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		035B703319E0E4AE00197334 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43BA972E1663EE7B00B95F35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4260,6 +4332,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		035B703119E0E4AE00197334 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
+				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		43BA970F1663EA5000B95F35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4401,6 +4482,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		035B703C19E0E4AE00197334 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D15AC270486D014006FF6A4 /* Vienna */;
+			targetProxy = 035B703B19E0E4AE00197334 /* PBXContainerItemProxy */;
+		};
 		3A7567AA1674EB48009C0900 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 43BA97111663EA5000B95F35 /* JSONKit */;
@@ -8528,6 +8614,144 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		035B703D19E0E4AE00197334 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Vienna Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
+			};
+			name = Development;
+		};
+		035B703E19E0E4AE00197334 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Vienna Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
+			};
+			name = Deployment;
+		};
+		035B703F19E0E4AE00197334 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Vienna Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vienna.app/Contents/MacOS/Vienna";
+			};
+			name = StaticAnalyzer;
+		};
 		430C4AD0166172BE0079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -8632,6 +8856,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/3rdparty",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 			};
 			name = StaticAnalyzer;
 		};
@@ -8710,6 +8935,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/3rdparty",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 			};
 			name = Development;
 		};
@@ -8721,6 +8947,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/3rdparty",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				IBC_FLATTEN_NIBS = NO;
 			};
 			name = Deployment;
@@ -8809,6 +9036,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		035B704019E0E4AE00197334 /* Build configuration list for PBXNativeTarget "Vienna Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				035B703D19E0E4AE00197334 /* Development */,
+				035B703E19E0E4AE00197334 /* Deployment */,
+				035B703F19E0E4AE00197334 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

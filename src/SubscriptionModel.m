@@ -68,7 +68,7 @@
             rssFeedURL = [NSURL URLWithString:feedPart];
         }
     }
-    return rssFeedURL;
+    return rssFeedURL.absoluteURL;
 }
 
 
