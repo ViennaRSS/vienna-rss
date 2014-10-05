@@ -31,16 +31,32 @@
     subscriptionModel = nil;
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testVerificationOfCompleteFileURLS {
+    // Test that when passed a complete file URL, the verification doesn't change the original
+    NSURL *unverifiedURL = [NSURL URLWithString:@"file:///Users/test/test.xml"];
+    NSURL *expectedURL = [NSURL URLWithString:@"file:///Users/test/test.xml"];
+    
+    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testVerificationOfCompleteWebURLS {
+    // Test that then passed a complete web URL to an rss feed, the verification doesn't change the original
+    NSURL *unverifiedURL = [NSURL URLWithString:@"http://www.abc.net.au/news/feed/51120/rss.xml"];
+    NSURL *expectedURL = [NSURL URLWithString:@"http://www.abc.net.au/news/feed/51120/rss.xml"];
+    
+    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
 }
+
+- (void)testVerificationOfIncompleteWebURLS {
+    // Test that when passed a URL without an rss feed in the path component and without a scheme
+    // that the returned URL is correct
+    NSURL *unverifiedURL = [NSURL URLWithString:@"abc.net.au/news"];
+    NSURL *expectedURL = [NSURL URLWithString:@"http://abc.net.au/news/feed/51120/rss.xml"];
+    
+    XCTAssertEqualObjects(expectedURL, [subscriptionModel verifiedFeedURLFromURL:unverifiedURL]);
+    
+}
+
+
 
 @end
