@@ -332,21 +332,22 @@ JSONDecoder * jsonDecoder;
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
 
-		AppController *controller = APPCONTROLLER;
-		
 		// Unread count may have changed
-		[controller setStatusMessage:nil persist:NO];
-		[controller showUnreadCountOnApplicationIconAndWindowTitle];
-		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
+		dispatch_async(dispatch_get_main_queue(), ^{
+			AppController *controller = APPCONTROLLER;
+			[controller setStatusMessage:nil persist:NO];
+			[controller showUnreadCountOnApplicationIconAndWindowTitle];
+			[refreshedFolder clearNonPersistedFlag:MA_FFlag_Error];
 
-		// Send status to the activity log
-		if (newArticlesFromFeed == 0)
-			[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-		else
-		{
-			[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:refreshedFolder];
-		}
+			// Send status to the activity log
+			if (newArticlesFromFeed == 0)
+				[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
+			else
+			{
+				[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:refreshedFolder];
+			}
+		});
 		
 		[dict release];
 
