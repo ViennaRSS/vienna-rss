@@ -8,6 +8,19 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 6
+----------
+- Handles multiple authors
+- Adaptations for OS X Yosemite (10.10)
+- Fixed some crashes
+- Ask the user if she/he wants to send (anonymous) system configuration informations to Vienna developers
+- Localization and help files improvements (English, French, Danish)
+- Fixed a problem with video sounds still playing after the tab was closed
+- Fixed panes dimensions inside the main window
+- Changed code for subscribing, especially for subscription to local files
+- Start implementing a test suite
+- Built on OS X Yosemite SDK (for running, requirements are limited to OS X Snow Leopard or better)
+
 3.0.0 rc 5
 ----------
 - Improved stability
