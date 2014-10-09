@@ -447,7 +447,7 @@ static RefreshManager * _refreshManager = nil;
 	
 	// Additional detail for the log
 	if (IsGoogleReaderFolder(folder)) {
-		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Open Reader to retrieve %@", nil), urlString]];
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to Open Reader server to retrieve %@", nil), urlString]];
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Connecting to %@", nil), urlString]];
 	}

@@ -12,17 +12,13 @@ Reportez-vous à la page <a href="http://www.vienna-rss.org/vienna_faq.html">Off
 </p>
 <ul>
 <li>
-<a href="#Where_do_I_get_the_Vienna_source_code">Où obtenir le code source de Vienna ?</a></li>
-<li>
 <a href="#I_found_a_problem_with_Vienna._How_do_I_report_it">J'ai rencontré un problème avec Vienna. Comment faire un rapport ?</a></li>
-<li>
-<a href="#How_do_I_create_my_own_styles">Comment créer mes propres styles ?</a></li>
-<li>
-<a href="#How_do_I_create_my_own_scripts">Comment créer mes propres scripts ?</a></li>
-
 <li>
 <a href="#How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
 Comment puis-je voir ce qui se passe quand les abonnements sont rafraîchis ?</a></li>
+<li>
+<a href="#How_do_I_subscribe_to_a_feed_requiring_user_authentication">
+Comment puis je m'abonner à un flux exigeant une authentification de l'utilisateur ?</a></li>
 <li>
 <a href="#How_do_I_move_my_Vienna_database_to_another_folder">Comment 
 déplacer la base de données Vienna dans un autre dossier ?</a></li>
@@ -42,18 +38,17 @@ Que signifie le point vert dans la liste des articles ?</a></li>
 <a href="#How_do_I_use_Auto_Expire_and_what_does_it_do">Comment utiliser
 Auto Expire, et qu'est que cela fait ?</a></li>
 <li>
+<a href="#How_do_I_create_my_own_styles">Comment créer mes propres styles ?</a></li>
+<li>
+<a href="#How_do_I_create_my_own_scripts">Comment créer mes propres scripts ?</a></li>
+
+<li>
 <a href="#How_do_I_request_an_enhancement_in_Vienna">Comment demander des 
 améliorations dans Vienna ?</a></li>
+<li>
+<a href="#Where_do_I_get_the_Vienna_source_code">Où obtenir le code source de Vienna ?</a></li>
 
 </ul>
-<h2><a name="Where_do_I_get_the_Vienna_source_code">
-Où obtenir le code source de Vienna ?</a></h2>
-<p>Voir la <a href="https://github.com/ViennaRSS/vienna-rss/">page de développement</a> contenant les instructions 
-pour obtenir le code source de Vienna. Le code source est disponible librement 
-si vous vous intéressez au fonctionnement de Vienna, si vous souhaitez compiler votre propre 
-copie de Vienna sur votre ordinateur ou si vous souhaitez emprunter des portions de codes 
-pour les inclures dans votre propre projet. Le code source est diffusé sous la  
-<a href="http://www.apache.org/licenses/LICENSE-2.0.html">licence Apache 2.0</a>.</p>
 <h2><a name="I_found_a_problem_with_Vienna._How_do_I_report_it">J'ai rencontré un problème 
 avec Vienna. Comment faire un rapport ?</a></h2>
 <p>Postez un message dans le <a href="http://forums.cocoaforge.com/viewforum.php?f=18">forum de support</a>
@@ -68,22 +63,6 @@ de mise à jour vous informera si une version plus récente que la votre existe.
 <p>La résolution des boggues est prioritaire sur l'ajout de fonctionnalités, aussi si votre problème 
 est bien un boggue ayant un impact important et pas une simple amélioration, alors une résolution du 
 problème sera mise à disposition dès que possible.</p>
-<h2><a name="How_do_I_create_my_own_styles">Comment créer mes propres styles ?</a></h2>
-<p>Voir la page <a href="http://www.vienna-rss.org/?page_id=65">Styles personnalisés</a> pour les instructions.</p>
-<h2><a name="How_do_I_create_my_own_scripts">Comment créer mes propres scripts ?</a></h2>
-
-<p>Le pilotage de Vienna par des scripts est possible en utilisant AppleScript. Voir la page de 
-<a href="http://developer.apple.com/applescript/">
-ressources Apple</a> pour plus de détails.</p>
-<p>Un moyen de débuter est de télécharger un des scripts existants comme celui du
-<a href="http://www.cortig.net/files/ShareWithPapers.zip">plugin de partage avec Papers</a>
-écrit par Cortig ou le script de partage de
-<a href="https://github.com/reefdog/Vienna-to-Yojimbo-AppleScripts">Vienna vers Yojimbo</a> écrit par reefdog
-et de les visualiser dans l'éditeur d'AppleScript.
-
-<p>Pour soumettre vos propres scripts, envoyez-les à <a href="mailto:steve@opencommunity.co.uk">
-steve@opencommunity.co.uk</a> ou dans le forum de support, et après qu'ils sont revus, ils seront diffusés sur la page de
-téléchargement.</p>
 <h2>
 <a name="How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
 Comment puis-je voir ce qui se passe quand les abonnements sont rafraîchis ?</a></h2>
@@ -92,6 +71,45 @@ tous les abonnements et le statut de leur dernière rafraîchissement dans la se
 la fenêtre d'activité montre plus de détails et inclut les entêtes HTTP qui peuvent être utiles
 pour débogguer. (Si le panneau de détails n'est pas visible, découvrez-le en faisant glisser la barre 
 située en bas de la fenêtre).</p>
+
+<h2>
+<a name="How_do_I_subscribe_to_a_feed_requiring_user_authentication">
+Comment puis je m'abonner à un flux exigeant une authentification de l'utilisateur ?</a></h2>
+
+<p>Il est important de comprendre que les services de type Open Reader ne permettent pas
+de s'authentifier auprès d'un service tiers. Vienna devra accéder directement au serveur
+qui exige une identification et une authentification de l'utilisateur.<br>
+Quand vous vous abonnez, assurez vous que la case "S'abonner à travers le serveur Open
+Reader" n'est PAS cochée.</p>
+
+<p>Ensuite, il est utile de savoir qu'il y a deux principales méthodes d'authentification
+des utilisateurs qui demandent un flux, et ce selon les serveurs que l'on rencontre :</p>
+<ul>
+<li>certains serveurs exigent un nom d'utilisateur et le mot de passe associé ;</li>
+<li>d'autres serveurs exigent un cookie spécifique.</li>
+</ul>
+<p>Le problème, c'est que beaucoup de serveurs n'indiquent pas clairement quelle méthode
+ils mettent en oeuvre pour les flux nécessitant une authentification.</p>
+
+<p>La demande d'un nom d'utilisateur et du mot de passe associé est la méthode la plus
+courante. C'est aussi celle qui est la plus explicite vis-à-vis de l'utilisateur.
+Lors du premier rafraîchissement du flux, Vienna vous présentera une boite de dialogue
+où vous pourrez entrer le nom d'utilisateur et le mot de passe.<br>
+Vous pouvez vérifier que vous avez fourni un nom d'utilisateur et un mot de passe – et les
+mettre à jour si nécessaire – à travers la boite de dialogue "Infos" du flux.
+Vous accédez à cette boite de dialogue à travers le menu "Dossier → Obtenir les
+infos…" ou via le menu contextuel (clic droit) dans la liste des flux.<br>
+Le mot de passe est stocké de manière sécurisée dans le Trousseau d'accès.</p>
+
+<p>Par contre, pour les serveurs qui exigent un cookie, le nom d'utilisateur et le mot
+de passe ne doivent PAS apparaître dans la boite de dialogue "Infos" du flux. Les deux
+champs DOIVENT être laissés à blanc.<br>
+Par contre, vous devrez être authentifiés auprès du site en vous connectant via le web
+à travers le navigateur Safari ou à travers un onglet de navigation dans Vienna.<br>
+Comme les cookies peuvent expirer après un certain temps, vous serez peut-être obligés
+de vous reconnecter de temps à autres.
+</p>
+
 <h2><a name="How_do_I_move_my_Vienna_database_to_another_folder">Comment 
 déplacer la base de données Vienna dans un autre dossier ?</a></h2>
 
@@ -165,10 +183,36 @@ conservant uniquement les articles les plus récents. Cette fonction s'exécute
 Dans les préférences, modifiez le paramètre &quot;Expirer les articles vieux de&quot;
 pour déterminer les articles à expurger.</p>
 <p>Auto-expire n'effacera pas les articles non lus ou marqués d'un drapeau.</p>
+
+<h2><a name="How_do_I_create_my_own_styles">Comment créer mes propres styles ?</a></h2>
+<p>Voir la page <a href="http://www.vienna-rss.org/?page_id=65">Styles personnalisés</a> pour les instructions.</p>
+
+<h2><a name="How_do_I_create_my_own_scripts">Comment créer mes propres scripts ?</a></h2>
+
+<p>Le pilotage de Vienna par des scripts est possible en utilisant AppleScript. Voir la page de 
+<a href="http://developer.apple.com/applescript/">
+ressources Apple</a> pour plus de détails.</p>
+<p>Un moyen de débuter est de télécharger un des scripts existants comme celui du
+<a href="http://www.cortig.net/files/ShareWithPapers.zip">plugin de partage avec Papers</a>
+écrit par Cortig ou le script de partage de
+<a href="https://github.com/reefdog/Vienna-to-Yojimbo-AppleScripts">Vienna vers Yojimbo</a> écrit par reefdog
+et de les visualiser dans l'éditeur d'AppleScript.
+
+<p>Pour soumettre vos propres scripts, envoyez-les dans le forum de support, et après qu'ils sont revus, ils seront diffusés sur la page de
+téléchargement.</p>
+
 <h2><a name="How_do_I_request_an_enhancement_in_Vienna">Comment demander des 
 améliorations dans Vienna ?</a></h2>
 
 <p>Laisser un message sur la
 <a href="https://github.com/ViennaRSS/vienna-rss/issues">liste de problèmes ou demandes</a> (en anglais).</p>
+<h2><a name="Where_do_I_get_the_Vienna_source_code">
+Où obtenir le code source de Vienna ?</a></h2>
+<p>Voir la <a href="https://github.com/ViennaRSS/vienna-rss/">page de développement</a> contenant les instructions 
+pour obtenir le code source de Vienna. Le code source est disponible librement 
+si vous vous intéressez au fonctionnement de Vienna, si vous souhaitez compiler votre propre 
+copie de Vienna sur votre ordinateur ou si vous souhaitez emprunter des portions de codes 
+pour les inclures dans votre propre projet. Le code source est diffusé sous la  
+<a href="http://www.apache.org/licenses/LICENSE-2.0.html">licence Apache 2.0</a>.</p>
 </body>
 </html>
