@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 7
+----------
+- Fix a crash
+
 3.0.0 rc 6
 ----------
 - Handles multiple authors
