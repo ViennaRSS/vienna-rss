@@ -8983,6 +8983,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -9044,6 +9045,7 @@
 				035B703F19E0E4AE00197334 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
 		};
 		430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */ = {
 			isa = XCConfigurationList;
