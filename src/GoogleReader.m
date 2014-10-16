@@ -374,6 +374,29 @@ JSONDecoder * jsonDecoder;
 		[request2 setTimeOutSeconds:180];
 		[[RefreshManager sharedManager] addConnection:request2];
 
+		// Request id's of starred items
+		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
+		NSString* starredSelector;
+		if (hostRequiresSParameter)
+		{
+			starredSelector=@"s=user/-/state/com.google/starred";
+		}
+		else
+		{
+			starredSelector=@"it=user/-/state/com.google/starred";
+		}
+
+		NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
+		NSURL * url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
+		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url3];
+		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", aItem, @"log", nil]];
+		[request3 setDelegate:self];
+		[request3 setDidFinishSelector:@selector(starredRequestDone:)];
+		[request3 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+		[request3 setUseCookiePersistence:NO];
+		[request3 setTimeOutSeconds:180];
+		[[RefreshManager sharedManager] addConnection:request3];
+
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 		LOG_EXPR([request originalURL]);
@@ -432,37 +455,6 @@ JSONDecoder * jsonDecoder;
 		return;
 	}  // try/catch
 
-		// Request id's of starred items
-		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
-		NSString* starredSelector;
-		if (hostRequiresSParameter)
-		{
-			starredSelector=@"s=user/-/state/com.google/starred";
-		}
-		else
-		{
-			starredSelector=@"it=user/-/state/com.google/starred";
-		}
-		NSString* feedIdentifier;
-		if( hostRequiresLastPathOnly )
-		{
-			feedIdentifier = [[refreshedFolder feedURL] lastPathComponent];
-		}
-		else
-		{
-			feedIdentifier =  [refreshedFolder feedURL];
-		}
-
-		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
-		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
-		ASIHTTPRequest *request3 = [ASIHTTPRequest requestWithURL:url];
-		[request3 setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:refreshedFolder, @"folder", aItem, @"log", nil]];
-		[request3 setDelegate:self];
-		[request3 setDidFinishSelector:@selector(starredRequestDone:)];
-		[request3 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
-		[request3 setUseCookiePersistence:NO];
-		[request3 setTimeOutSeconds:180];
-		[[RefreshManager sharedManager] addConnection:request3];
 
 		// If this folder also requires an image refresh, add that
 		dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
