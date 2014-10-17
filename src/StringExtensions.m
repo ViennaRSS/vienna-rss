@@ -127,17 +127,13 @@
 			NSString * srcPath = [self substringWithRange:srcRange];
 			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"#"])
 			{
-				NSString * escapedSrcPath = [srcPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-				if (escapedSrcPath != nil)
-				{
-					NSURL * anchorURL = [NSURL URLWithString:escapedSrcPath relativeToURL:anchorBaseURL];
+					NSURL * anchorURL = [NSURL URLWithString:srcPath relativeToURL:anchorBaseURL];
 					if (anchorURL != nil)
 					{
 						srcPath = [anchorURL absoluteString];
 						[self replaceCharactersInRange:srcRange withString:srcPath];
 						textLength = [self length];
 					}
-				}
 			}
 
 			// Start searching again from beyond the URL
