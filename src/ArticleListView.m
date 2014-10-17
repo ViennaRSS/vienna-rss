@@ -391,12 +391,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Set the default fonts
 	[self setTableViewFont];
 	
-	// In condensed mode, the summary field takes up the whole space.
-	[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
-	
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
 	
+	// In condensed mode, the summary field takes up the whole space.
+	[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
+
 	// Dynamically create the popup menu. This is one less thing to
 	// explicitly localise in the NIB file.
 	NSMenu * articleListMenu = [[NSMenu alloc] init];
@@ -553,11 +553,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
-	if (tableLayout == MA_Layout_Report)
-		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
-	else
-		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
-	[articleList setAutosaveTableColumns:YES];
+	[articleList setAutosaveName:nil];
 	
 	[self updateArticleListRowHeight];
 	
@@ -653,6 +649,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
+	if (tableLayout == MA_Layout_Report)
+		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+	else
+		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
+	[articleList setAutosaveTableColumns:YES];
+
 	// Done
 	isInTableInit = NO;
 }
