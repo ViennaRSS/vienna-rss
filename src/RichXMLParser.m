@@ -808,18 +808,6 @@
 		}
 	}
 
-	// Now scan the array and set the article date if it is missing. We'll use the
-	// last modified date of the feed and set each article to be 1 second older than the
-	// previous one. So the array is effectively newest first.
-	NSDate * itemDate = [self lastModified];
-	if (itemDate == nil)
-		itemDate = [NSDate date];
-	for (FeedItem * anItem in items)
-	{
-		if ([anItem date] == nil)
-			[anItem setDate:itemDate];
-		itemDate = [itemDate dateByAddingTimeInterval:-1.0];
-	}
 	return success;
 }
 

@@ -826,6 +826,10 @@ static RefreshManager * _refreshManager = nil;
 			NSMutableArray * articleArray = [NSMutableArray array];
 			NSMutableArray * articleGuidArray = [NSMutableArray array];
 			
+			NSDate * itemAlternativeDate = [newFeed lastModified];
+			if (itemAlternativeDate == nil)
+				itemAlternativeDate = [NSDate date];
+
 			// Parse off items.
 			
 			for (FeedItem * newsItem in [newFeed items])
@@ -849,16 +853,22 @@ static RefreshManager * _refreshManager = nil;
 				NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
 				if (articleIndex != NSNotFound)
 				{
-					if (articleDate == nil)
-						continue; // Skip this duplicate article
-					
 					// rebuild a complex guid which should eliminate most duplicates
-					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
+					if (articleDate == nil)
+						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", folderId, [newsItem link], [newsItem title]];
+					else
+						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
 				}
 				[articleGuidArray addObject:articleGuid];
 				
+				// set the article date if it is missing. We'll use the
+				// last modified date of the feed and set each article to be 1 second older than the
+				// previous one. So the array is effectively newest first.
 				if (articleDate == nil)
-					articleDate = [NSDate date];
+				{
+					articleDate = itemAlternativeDate;
+					itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
+				}
 				
 				Article * article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
 				[article setFolderId:folderId];
