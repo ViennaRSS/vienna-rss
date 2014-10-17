@@ -87,6 +87,7 @@ static RefreshManager * _refreshManager = nil;
 		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
 		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
+		hasStarted = NO;
 	}
 	return self;
 }
@@ -97,7 +98,11 @@ static RefreshManager * _refreshManager = nil;
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
+	if (hasStarted)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
+		hasStarted = NO;
+	}
 	LLog(@"Queue empty!!!");
 }
 
@@ -463,6 +468,12 @@ static RefreshManager * _refreshManager = nil;
  */
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force
 {	
+	if (!hasStarted)
+	{
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
+			hasStarted = YES;
+	}
+
 	ASIHTTPRequest *myRequest;
 	
 	if (IsRSSFolder(folder)) {
@@ -1046,7 +1057,6 @@ static RefreshManager * _refreshManager = nil;
 		if ([networkQueue requestsCount] == 1) // networkQueue is NOT YET started
 		{
 			countOfNewArticles = 0;
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 			[networkQueue go];
 		}
 	}

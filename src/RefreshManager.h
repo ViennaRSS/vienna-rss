@@ -30,7 +30,7 @@
 	NSMutableArray * authQueue;
 	NSTimer * pumpTimer;
 	FeedCredentials * credentialsController;
-	//BOOL hasStarted;
+	BOOL hasStarted;
 	NSString * statusMessageDuringRefresh;
     SyncTypes syncType;
 	ASINetworkQueue *networkQueue;
