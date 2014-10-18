@@ -24,7 +24,7 @@
     }
 
     [attrString drawWithRect: [self titleRectForBounds:cellFrame]
-                     options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
+                     options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
 }
 
 - (NSRect)titleRectForBounds:(NSRect)theRect {
@@ -34,7 +34,7 @@
     /* find out how big the rendered text will be */
     NSAttributedString *attrString = self.attributedStringValue;
     NSRect textRect = [attrString boundingRectWithSize: titleFrame.size
-                                               options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
+                                               options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
 
     /* If the height of the rendered text is less then the available height,
      * we modify the titleFrame to center the text vertically */
