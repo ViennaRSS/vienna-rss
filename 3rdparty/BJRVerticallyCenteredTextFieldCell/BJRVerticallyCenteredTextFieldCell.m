@@ -36,14 +36,20 @@
     NSRect textRect = [attrString boundingRectWithSize: titleFrame.size
                                                options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
 
+    CGFloat tHeight = textRect.size.height;
+    CGFloat fHeight = titleFrame.size.height;
     /* If the height of the rendered text is less then the available height,
      * we modify the titleFrame to center the text vertically */
-    if (textRect.size.height < titleFrame.size.height) {
-        titleFrame.origin.y = theRect.origin.y + (theRect.size.height - textRect.size.height )/2.0;
+    if (tHeight < fHeight) {
+        titleFrame.origin.y = theRect.origin.y + (theRect.size.height - tHeight )/2.0;
+        titleFrame.size.height = tHeight;
     } else {
-    	titleFrame.origin.y = theRect.origin.y + (titleFrame.size.height - textRect.size.height);
+    	if (tHeight < 1.5 * fHeight)
+    	{
+    		titleFrame.origin.y = theRect.origin.y + (fHeight - tHeight);
+    		titleFrame.size.height = tHeight;
+    	}
     }
-    titleFrame.size.height = textRect.size.height;
     return titleFrame;
 }
 
