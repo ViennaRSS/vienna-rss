@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0 rc 9
+----------
+- Fix repeating articles problem on some feeds with repeating GUIDs (notably Netflix)
+- Fix some overly aggressive URL escaping
+- Fix column order and dimensions not being remembered in article list
+- Fix visual glitches with some feeds in article list
+
 3.0.0 rc 8
 ----------
 - Follow-up on crash : disable assertions for deployment config
