@@ -69,6 +69,7 @@
 #import "VTPG_Common.h"
 #import "Database.h"
 #import "BJRWindowWithToolbar.h"
+#import "NSURL+Utils.h"
 
 
 @interface AppController (Private)
@@ -132,7 +133,10 @@ static const int MA_StatusBarHeight = 23;
 static io_connect_t root_port;
 static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
-@implementation AppController
+@implementation AppController {
+@private
+    NewSubscription *_rssFeed;
+}
 
 // C array of NSDateFormatter format strings. This is array is used only once to populate dateFormatterArray.
 // Note: for every four-digit year entry, we need an earlier two-digit year entry so that NSDateFormatter parses
@@ -166,6 +170,8 @@ static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
 static NSLocale * enUSLocale;
+
+@synthesize rssFeed = _rssFeed;
 
 /* init
  * Class instance initialisation.
@@ -321,6 +327,14 @@ static NSLocale * enUSLocale;
 				[menuItem setTitle:localisedMenuTitle];
 		}
 	}
+}
+
+#pragma mark Accessor Methods
+
+- (NewSubscription *)rssFeed {
+    if (!_rssFeed)
+        _rssFeed = [[NewSubscription alloc] initWithDatabase:db];
+    return _rssFeed;
 }
 
 #pragma mark IORegisterForSystemPower
@@ -764,6 +778,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return NO;
 		[self importFromFile:filename];
 	}
+    if ([[filename pathExtension] isEqualToString:@"webloc"])
+    {
+        NSURL* url = [NSURL URLFromInetloc:filename];
+        if (url != nil)
+            [self.rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:[url absoluteString]];
+    }
 	return NO;
 }
 
@@ -2241,9 +2261,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 {
 	if (IsRSSFolder(folder))
 	{
-		if (!rssFeed)
-			rssFeed = [[NewSubscription alloc] initWithDatabase:db];
-		[rssFeed editSubscription:mainWindow folderId:[folder itemId]];
+		[self.rssFeed editSubscription:mainWindow folderId:[folder itemId]];
 	}
 	else if (IsSmartFolder(folder))
 	{
@@ -2926,9 +2944,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(IBAction)newSubscription:(id)sender
 {
-	if (!rssFeed)
-		rssFeed = [[NewSubscription alloc] initWithDatabase:db];
-	[rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:nil];
+	[self.rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:nil];
 }
 
 /* newSmartFolder
@@ -3279,8 +3295,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// End any editing
-	if (rssFeed != nil)
-		[rssFeed doEditCancel:nil];
+	[self.rssFeed doEditCancel:nil];
 	if (smartFolder != nil)
 		[smartFolder doCancel:nil];
 	if ([(NSControl *)[foldersTree mainView] abortEditing])
@@ -4808,7 +4823,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 	[persistedStatusText release];
 	[scriptPathMappings release];
 	[smartFolder release];
-	[rssFeed release];
 	[groupFolder release];
 	[preferenceController release];
 	[activityViewer release];
@@ -4820,9 +4834,9 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 	[searchField release];
 	[sourceWindows release];
 	[searchString release];
-    
     [_preferencesWindowController release];
+    [self.rssFeed release];
 
-	[super dealloc];
+    [super dealloc];
 }
 @end
