@@ -221,6 +221,17 @@ static NSLocale * enUSLocale;
 	// we will need them if they are added back later.
 	[spinner retain];
 	[searchField retain];
+    
+    // We need to register the handlers early to catch events fired on launch.
+    NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
+    [em setEventHandler:self
+            andSelector:@selector(getUrl:withReplyEvent:)
+          forEventClass:kInternetEventClass
+             andEventID:kAEGetURL];
+    [em setEventHandler:self
+            andSelector:@selector(getUrl:withReplyEvent:)
+          forEventClass:'WWW!'    // A particularly ancient AppleEvent that dates
+             andEventID:'OURL'];  // back to the Spyglass days.
 }
 
 /* applicationDidResignActive
@@ -663,11 +674,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	return NSTerminateNow;
 }
 
+- (void)unregisterEventHandlers
+{
+    NSAppleEventManager* em = [NSAppleEventManager sharedAppleEventManager];
+    [em removeEventHandlerForEventClass:kInternetEventClass
+                             andEventID:kAEGetURL];
+}
+
 /* applicationWillTerminate
  * This is where we put the clean-up code.
  */
 -(void)applicationWillTerminate:(NSNotification *)aNotification
 {
+    [self unregisterEventHandlers];
+    
 	if (didCompleteInitialisation)
 	{
 		// Save the splitview layout
@@ -1087,6 +1107,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// expensive last resort attempt
 	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
 	return date;
+}
+
+/* getUrl
+ * Handle http https URL Scheme passed to applicaton
+ */
+- (void)getUrl:(NSAppleEventDescriptor *)event
+withReplyEvent:(NSAppleEventDescriptor *)replyEvent
+{
+    NSString *urlStr = [[event paramDescriptorForKeyword:keyDirectObject]
+                        stringValue];
+    if(urlStr)
+        [rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:urlStr];
 }
 
 #pragma mark Dock Menu
