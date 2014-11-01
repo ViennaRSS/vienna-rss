@@ -207,11 +207,11 @@
 		progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
 		progressIndicatorFrame.origin.y += (cellFrame.size.height - PROGRESS_INDICATOR_DIMENSION) / 2.0;
 
-		if ([progressIndicator superview] != controlView)
-			[controlView addSubview:progressIndicator];
-
 		if (!NSEqualRects([progressIndicator frame], progressIndicatorFrame)) {
 			[progressIndicator setFrame:progressIndicatorFrame];
+
+		if ([progressIndicator superview] != controlView)
+			[controlView addSubview:progressIndicator];
 		}
 	}
 	else
