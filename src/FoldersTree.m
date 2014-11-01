@@ -921,8 +921,6 @@
 		Folder * folder = [node folder];
 		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
 
-		[realCell setItem:item];
-
 		// Use the auxiliary position of the feed item to show
 		// the refresh icon if the feed is being refreshed, or an
 		// error icon if the feed failed to refresh last time.
@@ -964,6 +962,8 @@
 		// Only show folder images if the user prefers them.
 		Preferences * prefs = [Preferences standardPreferences];
 		[realCell setImage:([prefs showFolderImages] ? [folder image] : [folder standardImage])];
+
+		[realCell setItem:item];
 	}
 }
 

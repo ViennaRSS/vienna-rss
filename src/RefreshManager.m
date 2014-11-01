@@ -523,9 +523,7 @@ static RefreshManager * _refreshManager = nil;
 	[self setFolderErrorFlag:folder flag:YES];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[request error] localizedDescription ]]];
 	[aItem setStatus:NSLocalizedString(@"Error",nil)];
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self syncFinishedForFolder:folder];
-	});
+	[self syncFinishedForFolder:folder];
 }
 
 /* pumpFolderIconRefresh
@@ -605,13 +603,13 @@ static RefreshManager * _refreshManager = nil;
 
 - (void)syncFinishedForFolder:(Folder *)folder 
 {
-    AppController *controller = APPCONTROLLER;
-    
-    // Unread count may have changed
-    [controller setStatusMessage:nil persist:NO];
-    [controller showUnreadCountOnApplicationIconAndWindowTitle];
-    
     [self setFolderUpdatingFlag:folder flag:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+		// Unread count may have changed
+		AppController *controller = APPCONTROLLER;
+		[controller setStatusMessage:nil persist:NO];
+		[controller showUnreadCountOnApplicationIconAndWindowTitle];
+	});
 }
 
 /* folderRefreshRedirect
@@ -683,9 +681,7 @@ static RefreshManager * _refreshManager = nil;
 		[self setFolderErrorFlag:folder flag:NO];
 		[connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
 		[connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[self syncFinishedForFolder:folder];
-		});
+		[self syncFinishedForFolder:folder];
 		return;
 	}
 	else if (isCancelled) 
@@ -729,9 +725,7 @@ static RefreshManager * _refreshManager = nil;
 		[self setFolderErrorFlag:folder flag:YES];
 	}
 
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self syncFinishedForFolder:folder];
-	}); //block for dispatch_async on main queue
+	[self syncFinishedForFolder:folder];
 
 	}); //block for dispatch_async on _queue
 };
