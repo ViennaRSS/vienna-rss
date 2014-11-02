@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/css?family=Oswald:300,400,700|Armata|Droid+Serif:400,400italic,700,700italic|Droid+Sans:400,700);
+body {
+	font-family: 'Droid Serif';
+	color:#444;
+	background-color:#fcfcfc;
+}
+.content {
+	line-height:2em;
+}
+a, a:visited, a:active {
+	color:#888;
+	text-decoration:none;
+}
+a:hover {
+	color:#333;
+}
+h1, h1 a {
+	font-family: 'Oswald', sans-serif;
+	color:#000;
+	font-size:1.7em;
+	font-weight:300;
+	text-decoration:none;
+}
+.title {
+	text-align:center;
+}
+.date {
+	font-family: 'Armata', sans-serif;
+	text-align:center;
+}
