@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.0
+-----
+- New style : Classy (contributed by user PMP on cocoaforge)
+- Fix some crashes when sharing a link on Google+
+- Improved management of animations in folders list
+
 3.0.0 rc 9
 ----------
 - Fix repeating articles problem on some feeds with repeating GUIDs (notably Netflix)
