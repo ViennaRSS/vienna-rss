@@ -732,11 +732,11 @@
  */
 -(void)handleStopLoading:(id)sender
 {
-    if ([self.webPane isLoading]) {
-        [self willChangeValueForKey:@"isLoading"];
-        [self.webPane stopLoading:self];
-        [self didChangeValueForKey:@"isLoading"];
-    }
+	[self willChangeValueForKey:@"isLoading"];
+	[self.webPane setFrameLoadDelegate:nil];
+	[self.webPane setUIDelegate:nil];
+	[self.webPane stopLoading:self];
+	[self didChangeValueForKey:@"isLoading"];
 	[[self.webPane mainFrame] loadHTMLString:@"" baseURL:nil];
 }
 
