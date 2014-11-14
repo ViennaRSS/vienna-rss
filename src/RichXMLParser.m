@@ -560,14 +560,14 @@
 		NSString * nodeName = [subTree nodeName];
 
 		// Parse title
-		if ([nodeName isEqualToString:@"title"])
+		if ([nodeName isEqualToString:@"title"] || [nodeName isEqualToString:@"rss:title"])
 		{
 			[self setTitle:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
 			continue;
 		}
 
 		// Parse items group which dictates the sequence of the articles.
-		if ([nodeName isEqualToString:@"items"])
+		if ([nodeName isEqualToString:@"items"] || [nodeName isEqualToString:@"rss:items"])
 		{
 			XMLParser * seqTree = [subTree treeByName:@"rdf:Seq"];
 			if (seqTree != nil)
@@ -575,37 +575,21 @@
 		}
 
 		// Parse description
-		if ([nodeName isEqualToString:@"description"])
+		if ([nodeName isEqualToString:@"description"] || [nodeName isEqualToString:@"rss:description"])
 		{
 			[self setDescription:[subTree valueOfElement]];
 			continue;
 		}			
 		
 		// Parse link
-		if ([nodeName isEqualToString:@"link"])
+		if ([nodeName isEqualToString:@"link"] || [nodeName isEqualToString:@"rss:link"])
 		{
 			[self setLink:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
 			continue;
 		}			
 		
 		// Parse the date when this feed was last updated
-		if ([nodeName isEqualToString:@"lastBuildDate"])
-		{
-			NSString * dateString = [subTree valueOfElement];
-			[self setLastModified:[XMLParser parseXMLDate:dateString]];
-			continue;
-		}
-		
-		// Parse item date
-		if ([nodeName isEqualToString:@"dc:date"])
-		{
-			NSString * dateString = [subTree valueOfElement];
-			[self setLastModified:[XMLParser parseXMLDate:dateString]];
-			continue;
-		}
-		
-		// Parse item date
-		if ([nodeName isEqualToString:@"pubDate"])
+		if ([nodeName isEqualToString:@"lastBuildDate"] || [nodeName isEqualToString:@"pubDate"] || [nodeName isEqualToString:@"dc:date"])
 		{
 			NSString * dateString = [subTree valueOfElement];
 			[self setLastModified:[XMLParser parseXMLDate:dateString]];
@@ -662,7 +646,7 @@
 		
 		// Parse a single item to construct a FeedItem object which is appended to
 		// the items array we maintain.
-		if ([nodeName isEqualToString:@"item"])
+		if ([nodeName isEqualToString:@"item"] || [nodeName isEqualToString:@"rss:item"])
 		{
 			FeedItem * newItem = [[FeedItem new] autorelease];
 			CFIndex itemCount = [subTree countOfChildren];
@@ -680,14 +664,14 @@
 				NSString * itemNodeName = [subItemTree nodeName];
 
 				// Parse item title
-				if ([itemNodeName isEqualToString:@"title"])
+				if ([itemNodeName isEqualToString:@"title"] || [itemNodeName isEqualToString:@"rss:title"])
 				{
 					[newItem setTitle:[[subItemTree valueOfElement] summaryTextFromHTML]];
 					continue;
 				}
 				
 				// Parse item description
-				if ([itemNodeName isEqualToString:@"description"] && !hasDetailedContent)
+				if (([itemNodeName isEqualToString:@"description"] || [itemNodeName isEqualToString:@"rss:description"]) && !hasDetailedContent)
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
 					continue;
@@ -696,7 +680,7 @@
 				// Parse GUID. The GUID may optionally have a permaLink attribute
 				// in which case this is also the article link unless overridden by
 				// an explicit link tag.
-				if ([itemNodeName isEqualToString:@"guid"])
+				if ([itemNodeName isEqualToString:@"guid"] || [itemNodeName isEqualToString:@"rss:guid"])
 				{
 					NSString * permaLink = [subItemTree valueOfAttribute:@"isPermaLink"];
 					if (permaLink && [permaLink isEqualToString:@"true"] && !hasLink)
@@ -715,7 +699,7 @@
 				}
 				
                 // Parse item author
-				if ([itemNodeName isEqualToString:@"author"])
+				if ([itemNodeName isEqualToString:@"author"] || [itemNodeName isEqualToString:@"dc:creator"] || [itemNodeName isEqualToString:@"rss:author"])
 				{
 					NSString *authorName = [subItemTree valueOfElement];
                     
@@ -732,28 +716,9 @@
                     }
                     continue;
 				}
-                
-				// Parse item author
-				if ([itemNodeName isEqualToString:@"dc:creator"])
-				{
-                    NSString *authorName = [subItemTree valueOfElement];
-                    
-                    // the author is in the feed's entry
-                    if (authorName != nil) {
-                        // if we currently have a string set as the author then append the new author name
-                        if ([[newItem author] length] > 0) {
-                            [newItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newItem author], authorName]];
-                        }
-                        // else we currently don't have an author set, so set it to the first author
-                        else {
-                            [newItem setAuthor:authorName];
-                        }
-                    }
-                    continue;
-				}
 				
 				// Parse item date
-				if ([itemNodeName isEqualToString:@"dc:date"])
+				if ([itemNodeName isEqualToString:@"dc:date"] || [itemNodeName isEqualToString:@"pubDate"])
 				{
 					NSString * dateString = [subItemTree valueOfElement];
 					[newItem setDate:[XMLParser parseXMLDate:dateString]];
@@ -761,18 +726,10 @@
 				}
 				
 				// Parse item link
-				if ([itemNodeName isEqualToString:@"link"])
+				if ([itemNodeName isEqualToString:@"link"] || [itemNodeName isEqualToString:@"rss:link"])
 				{
 					[newItem setLink:[[subItemTree valueOfElement] stringByUnescapingExtendedCharacters]];
 					hasLink = YES;
-					continue;
-				}
-				
-				// Parse item date
-				if ([itemNodeName isEqualToString:@"pubDate"])
-				{
-					NSString * dateString = [subItemTree valueOfElement];
-					[newItem setDate:[XMLParser parseXMLDate:dateString]];
 					continue;
 				}
 				
