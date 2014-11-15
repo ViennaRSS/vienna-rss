@@ -423,3 +423,20 @@
 "Fetching Open Reader Subscriptions..." = "Récupération de la liste des abonnements Open Reader...";
 "Open Reader Authentication Failed" = "Échec d'authentification sur le serveur Open Reader";
 "Open Reader Authentication Failed text" = "Vérifiez dans les préférences le nom d'utilisateur et le mot de passe pour accéder au serveur Open Reader.\nVérifiez également votre accès réseau.";
+
+/* Added in 3.0.1 */
+"Plugin installed" = "Plugin installé";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Un nouveau plugin a été installé. Il figure maintenant dans le menu et vous pouvez l'installer dans la barre d'outils.";
+"Error loading script '%@'" = "Erreur de chargement du script \"%@\"";
+"AppleScript Error in '%@' script" = "Erreur AppleScript dans le script \"%@\"";
+"No thanks" = "Non merci";
+"Include anonymous system profile when checking for updates?" = "Inclure un profil anonyme du système lors des recherches de mises à jour ?";
+"Include anonymous system profile when checking for updates text" = "Inclure un profil anonyme de la machine que vous utilisez facilite le développement de Vienna en nous permettant de savoir quelles versions d'OS X sont les plus utilisées par nos utilisateurs.";
+"Error: Feed not found!" = "Erreur : fil RSS non trouvé !";
+"Loading" = "Chargement";
+"Plugin could not be installed" = "Le plugin n'a pas pu être installé";
+"Vienna failed to install the plugin." = "Vienna n'a pas réussi à installer le plugin.";
+"Queue" = "Queue";
+"Forcing Refresh subscriptions..." = "Rafraichissement forcé des abonnements…";
+"Improper infinitely looping URL redirect to %@" = "Problème de boucle infinie de redirections d'URL vers %@";
+

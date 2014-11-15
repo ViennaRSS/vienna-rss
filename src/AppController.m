@@ -4718,7 +4718,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
     [alert addButtonWithTitle:NSLocalizedString(@"No thanks", @"No thanks")];
     [alert setMessageText:NSLocalizedString(@"Include anonymous system profile when checking for updates?", @"Include anonymous system profile when checking for updates?")];
-    [alert setInformativeText:NSLocalizedString(@"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.", @"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.")];
+    [alert setInformativeText:NSLocalizedString(@"Include anonymous system profile when checking for updates text", @"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.")];
     [alert setAlertStyle:NSInformationalAlertStyle];
     int buttonClicked = alert.runModal;
     NSLog(@"buttonClicked: %d", buttonClicked);
