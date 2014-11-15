@@ -422,4 +422,4 @@
 "Retrieving folder image for Open Reader Feed" = "Empfange Ordnerbilder für den Open Reader Feed";
 "Fetching Open Reader Subscriptions..." = "Rufe Open Reader Abonnements ab...";
 "Open Reader Authentication Failed" = "Open Reader Authentifizierungsfehler";
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind.\nÜberprüfe auch ob Zugang zum Internet besteht.";
+"Open Reader Authentication Failed text" = "Überprüfe ob Benutzername und Passwort für den Zugang zum Open Reader Server in den Einstellungen von Vienna richtig gespeichert sind.\nÜberprüfe auch ob Zugang zum Internet besteht.";

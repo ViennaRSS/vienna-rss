@@ -422,4 +422,4 @@
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
 "Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";

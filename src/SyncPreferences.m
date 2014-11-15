@@ -245,7 +245,7 @@ static BOOL _credentialsChanged;
         NSAlert *alert = [[[NSAlert alloc] init] autorelease];
         [alert addButtonWithTitle:@"OK"];
     	[alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
-    	[alert setInformativeText:NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.",nil)];
+    	[alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[self window] modalDelegate:self didEndSelector:nil contextInfo:nil];
         [[GoogleReader sharedManager] clearAuthentication];
