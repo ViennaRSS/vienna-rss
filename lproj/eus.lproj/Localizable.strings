@@ -408,7 +408,7 @@
 /* Added for Open Reader support */
 "Force Refresh Selected Subscriptions From Open Reader" = "Force Refresh Selected Subscriptions From Open Reader";
 "Update Subscriptions From Open Reader" = "Update Subscriptions From Open Reader";
-"Delete Open Reader RSS feed text" = "Delete Open Reader RSS feed text";
+"Delete Open Reader RSS feed text" = "Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.";
 "Delete Open Reader RSS feed" = "Delete Open Reader RSS feed";
 
 /* Added in 3.0.0 */

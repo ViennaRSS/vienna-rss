@@ -408,7 +408,7 @@
 /* Added for Open Reader support */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader";
 "Update Subscriptions From Open Reader" = "Mettre à jour les abonnements à partir de Open Reader";
-"Delete Open Reader RSS feed text" = "Se désabonner d'un fil RSS dans Open Reader";
+"Delete Open Reader RSS feed text" = "Se désabonner d'un fil RSS dans Open Reader supprimera aussi les copies locales des articles.";
 "Delete Open Reader RSS feed" = "Supprimer un fil RSS de Open Reader";
 
 /* Added in 3.0.0 */
