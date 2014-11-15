@@ -408,7 +408,7 @@
 /* Added for Open Reader support */
 "Force Refresh Selected Subscriptions From Open Reader" = "Forçar Atualização das Assinaturas Selecionadas do Open Reader";
 "Update Subscriptions From Open Reader" = "Atualizar Assinaturas do Open Reader";
-"Delete Open Reader RSS feed text" = "Excluir texto de Assinatura RSS do Open Reader";
+"Delete Open Reader RSS feed text" = "Excluir Assinatura RSS do Open Reader";
 "Delete Open Reader RSS feed" = "Excluir Assinatura RSS do Open Reader";
 
 /* Added in 3.0.0 */
@@ -422,4 +422,20 @@
 "Retrieving folder image for Open Reader Feed" = "Retrieving folder image for Open Reader Feed";
 "Fetching Open Reader Subscriptions..." = "Fetching Open Reader Subscriptions...";
 "Open Reader Authentication Failed" = "Open Reader Authentication Failed";
-"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access." = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+"Open Reader Authentication Failed text" = "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.";
+
+/* Added in 3.0.1 */
+"Plugin installed" = "Plugin installed";
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.";
+"Error loading script '%@'" = "Error loading script '%@'";
+"AppleScript Error in '%@' script" = "AppleScript Error in '%@' script";
+"No thanks" = "No thanks";
+"Include anonymous system profile when checking for updates?" = "Include anonymous system profile when checking for updates?";
+"Include anonymous system profile when checking for updates text" = "This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.";
+"Error: Feed not found!" = "Error: Feed not found!";
+"Loading" = "Loading";
+"Plugin could not be installed" = "Plugin could not be installed";
+"Vienna failed to install the plugin." = "Vienna failed to install the plugin.";
+"Queue" = "Queue";
+"Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
+"Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
