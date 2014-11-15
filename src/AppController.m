@@ -4656,7 +4656,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	else if ([itemIdentifier isEqualToString: @"Action"])
 	{
 		[item setPopup:@"popupMenuButton" withMenu:(willBeInserted ? [self folderMenu] : nil)];
-		[item setLabel:NSLocalizedString(@"Actions", nil)];
+		[item setLabel:NSLocalizedString(@"Action", nil)];
 		[item setPaletteLabel:[item label]];
 		[item setToolTip:NSLocalizedString(@"Additional actions for the selected folder", nil)];
 	}
