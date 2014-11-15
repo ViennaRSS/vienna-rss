@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.1
+-----
+- Fix a crash
+- Parse RSS feeds having `rss:title`, `rss:link`, `rss:description`, `rss:items` and `rss:item` tags instead of the standard `title`, `link`, `description`, `items` and `item`
+- Fix diverse localization issues
+
 3.0.0
 -----
 - New style : Classy (contributed by user PMP on cocoaforge)
