@@ -108,8 +108,8 @@
 "164.title" = "Marcar artículos actualizados como nuevos";
 
 /* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "171"; */
-"171.title" = "Include anonymous system profile";
+"171.title" = "Incluir perfil anónimo del sistema";
 
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "176"; */
-"176.title" = "Updates:";
+"176.title" = "Actualizaciones:";
 
