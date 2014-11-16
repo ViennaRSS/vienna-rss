@@ -60,6 +60,7 @@
 
 /* Begin PBXBuildFile section */
 		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
+		034132961A18251E000BD620 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 034132951A18251E000BD620 /* Article.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
@@ -713,7 +714,6 @@
 		AA26F453060490BE00FE7994 /* smallFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F440060490BD00FE7994 /* smallFolder.tiff */; };
 		AA26F454060490BE00FE7994 /* unread_header.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA26F441060490BD00FE7994 /* unread_header.tiff */; };
 		AA26F4E30604927300FE7994 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CB0604927300FE7994 /* Folder.m */; };
-		AA26F4E60604927300FE7994 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CE0604927300FE7994 /* Message.m */; };
 		AA26F4ED0604927300FE7994 /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
 		AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D80604927300FE7994 /* BackTrackArray.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
@@ -958,6 +958,8 @@
 /* Begin PBXFileReference section */
 		031E082E19DFA3A900194F9F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionModel.h; path = src/SubscriptionModel.h; sourceTree = "<group>"; };
 		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
+		034132941A18251E000BD620 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = src/models/Article.h; sourceTree = "<group>"; };
+		034132951A18251E000BD620 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = src/models/Article.m; sourceTree = "<group>"; };
 		035B703519E0E4AE00197334 /* Vienna Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
@@ -1695,8 +1697,6 @@
 		AA26F4C90604927300FE7994 /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Database.h; path = src/Database.h; sourceTree = SOURCE_ROOT; };
 		AA26F4CA0604927300FE7994 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Folder.h; path = src/Folder.h; sourceTree = SOURCE_ROOT; };
 		AA26F4CB0604927300FE7994 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Folder.m; path = src/Folder.m; sourceTree = SOURCE_ROOT; };
-		AA26F4CD0604927300FE7994 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Message.h; path = src/Message.h; sourceTree = SOURCE_ROOT; };
-		AA26F4CE0604927300FE7994 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Message.m; path = src/Message.m; sourceTree = SOURCE_ROOT; };
 		AA26F4D50604927300FE7994 /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Database.m; path = src/Database.m; sourceTree = SOURCE_ROOT; };
 		AA26F4D70604927300FE7994 /* BackTrackArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = BackTrackArray.h; path = src/BackTrackArray.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AA26F4D80604927300FE7994 /* BackTrackArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BackTrackArray.m; path = src/BackTrackArray.m; sourceTree = SOURCE_ROOT; };
@@ -1946,6 +1946,15 @@
 				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
 			);
 			name = NewSubscription;
+			sourceTree = "<group>";
+		};
+		034132971A18253F000BD620 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				034132941A18251E000BD620 /* Article.h */,
+				034132951A18251E000BD620 /* Article.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		035B703619E0E4AE00197334 /* Vienna Tests */ = {
@@ -3174,10 +3183,9 @@
 				AA36CD7A06100692001E33A4 /* Field.m */,
 				AA26F4CA0604927300FE7994 /* Folder.h */,
 				AA26F4CB0604927300FE7994 /* Folder.m */,
-				AA26F4CD0604927300FE7994 /* Message.h */,
-				AA26F4CE0604927300FE7994 /* Message.m */,
 				AA5AC2640C3ECAA000B2E14F /* SearchString.m */,
 				AA5AC2750C3ECB3F00B2E14F /* SearchString.h */,
+				034132971A18253F000BD620 /* Models */,
 			);
 			name = Database;
 			sourceTree = SOURCE_ROOT;
@@ -4381,7 +4389,6 @@
 				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
 				AA26F4E30604927300FE7994 /* Folder.m in Sources */,
-				AA26F4E60604927300FE7994 /* Message.m in Sources */,
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
 				AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */,
@@ -4392,6 +4399,7 @@
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
+				034132961A18251E000BD620 /* Article.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,

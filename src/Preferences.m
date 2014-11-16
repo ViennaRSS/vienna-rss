@@ -20,7 +20,7 @@
 
 #import "Preferences.h"
 #import "Constants.h"
-#import "Message.h"
+#import "Article.h"
 #import "SearchMethod.h"
 #import <Sparkle/Sparkle.h>
 
