@@ -60,6 +60,12 @@
 
 /* Begin PBXBuildFile section */
 		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
+		0349812E1A206D8400014F29 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 034981261A206D8400014F29 /* .gitignore */; };
+		0349812F1A206D8400014F29 /* LICENSE.md in Sources */ = {isa = PBXBuildFile; fileRef = 034981271A206D8400014F29 /* LICENSE.md */; };
+		034981301A206D8400014F29 /* MASPreferences.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 034981281A206D8400014F29 /* MASPreferences.podspec */; };
+		034981311A206D8400014F29 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0349812A1A206D8400014F29 /* MASPreferencesWindow.xib */; };
+		034981321A206D8400014F29 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */; };
+		034981331A206D8400014F29 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0349812D1A206D8400014F29 /* README.md */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
@@ -958,6 +964,14 @@
 /* Begin PBXFileReference section */
 		031E082E19DFA3A900194F9F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionModel.h; path = src/SubscriptionModel.h; sourceTree = "<group>"; };
 		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
+		034981261A206D8400014F29 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		034981271A206D8400014F29 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		034981281A206D8400014F29 /* MASPreferences.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MASPreferences.podspec; sourceTree = "<group>"; };
+		034981291A206D8400014F29 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
+		0349812A1A206D8400014F29 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
+		0349812B1A206D8400014F29 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
+		0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
+		0349812D1A206D8400014F29 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		035B703519E0E4AE00197334 /* Vienna Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
@@ -1948,6 +1962,21 @@
 			name = NewSubscription;
 			sourceTree = "<group>";
 		};
+		034981251A206D8400014F29 /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				034981261A206D8400014F29 /* .gitignore */,
+				034981271A206D8400014F29 /* LICENSE.md */,
+				034981281A206D8400014F29 /* MASPreferences.podspec */,
+				034981291A206D8400014F29 /* MASPreferencesViewController.h */,
+				0349812A1A206D8400014F29 /* MASPreferencesWindow.xib */,
+				0349812B1A206D8400014F29 /* MASPreferencesWindowController.h */,
+				0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */,
+				0349812D1A206D8400014F29 /* README.md */,
+			);
+			path = MASPreferences;
+			sourceTree = "<group>";
+		};
 		035B703619E0E4AE00197334 /* Vienna Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -2162,6 +2191,7 @@
 		43501F8D165DB9DD0018EDB7 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				034981251A206D8400014F29 /* MASPreferences */,
 				6624689213C6063200C85417 /* ASIHTTPRequest */,
 				EA43C70614A370CB00F2D843 /* DebugHelper */,
 				AAED82F40A0379FE00ED56E5 /* DisclosableView */,
@@ -3850,6 +3880,7 @@
 				43E696B5168A05F300AB4C09 /* InfoPlist.strings in Resources */,
 				43E696B6168A05F300AB4C09 /* InfoPlist.strings in Resources */,
 				43E696B7168A05F300AB4C09 /* InfoPlist.strings in Resources */,
+				0349812E1A206D8400014F29 /* .gitignore in Resources */,
 				43E696B8168A05F300AB4C09 /* InfoPlist.strings in Resources */,
 				43E696B9168A05F300AB4C09 /* InfoPlist.strings in Resources */,
 				43E696BA168A05F300AB4C09 /* InfoPlist.strings in Resources */,
@@ -4075,8 +4106,10 @@
 				AA681C8A0B199E1900CFD5B7 /* advancedPrefImage.tiff in Resources */,
 				B28DE7F70B754E590062F879 /* enclosure_header.tiff in Resources */,
 				B28DE7F80B754E590062F879 /* enclosure.tiff in Resources */,
+				034981311A206D8400014F29 /* MASPreferencesWindow.xib in Resources */,
 				AA1A25170C077F49005968DC /* columnIcon.tiff in Resources */,
 				AA1A25180C077F49005968DC /* columnIconPressed.tiff in Resources */,
+				034981301A206D8400014F29 /* MASPreferences.podspec in Resources */,
 				AA1A25DF0C096D68005968DC /* refreshButton.tiff in Resources */,
 				AA1A26610C099EAA005968DC /* refreshButtonPressed.tiff in Resources */,
 				AA1A26620C099EAA005968DC /* subscribeButton.tiff in Resources */,
@@ -4393,6 +4426,7 @@
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
+				034981331A206D8400014F29 /* README.md in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
@@ -4434,6 +4468,8 @@
 				435028A2165DE9E00018EDB7 /* EmptyTrashWarning.m in Sources */,
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,
 				435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */,
+				034981321A206D8400014F29 /* MASPreferencesWindowController.m in Sources */,
+				0349812F1A206D8400014F29 /* LICENSE.md in Sources */,
 				435028A5165DE9E00018EDB7 /* FilterView.m in Sources */,
 				435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */,
 				435028A7165DE9E00018EDB7 /* FolderView.m in Sources */,
