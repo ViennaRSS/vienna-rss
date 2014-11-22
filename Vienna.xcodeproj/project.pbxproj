@@ -68,6 +68,10 @@
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
+		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
+		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
+		0379E23D1A20849E00D58BFE /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0379E23C1A20849E00D58BFE /* AppearancePreferencesView.xib */; };
+		0379E23F1A2084B600D58BFE /* SyncingPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
@@ -982,6 +986,12 @@
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
+		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppearancePreferencesViewController.h; path = src/Preferences/AppearancePreferencesViewController.h; sourceTree = "<group>"; };
+		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppearancePreferencesViewController.m; path = src/Preferences/AppearancePreferencesViewController.m; sourceTree = "<group>"; };
+		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
+		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
+		0379E23C1A20849E00D58BFE /* AppearancePreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppearancePreferencesView.xib; path = Interfaces/Preferences/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyncingPreferencesView.xib; path = Interfaces/Preferences/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -1988,6 +1998,10 @@
 			children = (
 				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
 				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
+				0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */,
+				0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */,
+				0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */,
+				0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */,
 				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
 				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
 			);
@@ -1998,6 +2012,8 @@
 			isa = PBXGroup;
 			children = (
 				034981381A206F6D00014F29 /* GeneralPreferencesView.xib */,
+				0379E23C1A20849E00D58BFE /* AppearancePreferencesView.xib */,
+				0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */,
 				0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */,
 			);
 			name = Preferences;
@@ -3692,6 +3708,7 @@
 				43E695EA168A05F300AB4C09 /* AdvancedPreferences.strings in Resources */,
 				43E695EB168A05F300AB4C09 /* AdvancedPreferences.strings in Resources */,
 				43E695EC168A05F300AB4C09 /* AppearancesPreferences.nib in Resources */,
+				0379E23D1A20849E00D58BFE /* AppearancePreferencesView.xib in Resources */,
 				43E695ED168A05F300AB4C09 /* AppearancesPreferences.nib in Resources */,
 				43E695EE168A05F300AB4C09 /* AppearancesPreferences.nib in Resources */,
 				43EE83F0165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
@@ -3774,6 +3791,7 @@
 				43EE83F4165EAA70000997FB /* errorpage.html in Resources */,
 				43E69637168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69638168A05F300AB4C09 /* errorpage.html in Resources */,
+				0379E23F1A2084B600D58BFE /* SyncingPreferencesView.xib in Resources */,
 				43E69639168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963A168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963B168A05F300AB4C09 /* errorpage.html in Resources */,
@@ -4466,6 +4484,7 @@
 				AA31147F090214AD00E80DF1 /* AppearancesPreferences.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */,
+				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
 				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
 				34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */,
@@ -4494,6 +4513,7 @@
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
 				435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */,
 				435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */,
+				0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */,
 				435028A2165DE9E00018EDB7 /* EmptyTrashWarning.m in Sources */,
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,
 				435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */,

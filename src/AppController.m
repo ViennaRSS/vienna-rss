@@ -24,6 +24,8 @@
 // New Preferences
 #import "MASPreferencesWindowController.h"
 #import "GeneralPreferencesViewController.h"
+#import "AppearancePreferencesViewController.h"
+#import "SyncingPreferencesViewController.h"
 #import "AdvancedPreferencesViewController.h"
 
 #import "FoldersTree.h"
@@ -4754,13 +4756,17 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     if (_preferencesWindowController == nil)
     {
         NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
+        NSViewController *appearanceViewController = [[AppearancePreferencesViewController alloc] init];
+        NSViewController *syncingViewController = [[SyncingPreferencesViewController alloc] init];
         NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
-        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, advancedViewController, nil];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, appearanceViewController, syncingViewController, advancedViewController, nil];
         
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
         
         [generalViewController release];
+        [appearanceViewController release];
+        [syncingViewController release];
         [advancedViewController release];
         
         NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
