@@ -20,6 +20,12 @@
 
 #import "AppController.h"
 #import "NewPreferencesController.h"
+
+// New Preferences
+#import "MASPreferencesWindowController.h"
+#import "GeneralPreferencesViewController.h"
+#import "AdvancedPreferencesViewController.h"
+
 #import "FoldersTree.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
@@ -2058,13 +2064,14 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 /* showPreferencePanel
  * Display the Preference Panel.
  */
+/*
 -(IBAction)showPreferencePanel:(id)sender
 {
 	if (!preferenceController)
 		preferenceController = [[NewPreferencesController alloc] init];
 	[NSApp activateIgnoringOtherApps:YES];
 	[preferenceController showWindow:self];
-}
+} */
 
 /* printDocument
  * Print the selected articles in the article window.
@@ -4740,6 +4747,48 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 }
 
 
+#pragma mark - MASPreferences
+
+- (NSWindowController *)preferencesWindowController
+{
+    if (_preferencesWindowController == nil)
+    {
+        NSViewController *generalViewController = [[GeneralPreferencesViewController alloc] init];
+        NSViewController *advancedViewController = [[AdvancedPreferencesViewController alloc] init];
+        NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, advancedViewController, nil];
+        
+        // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
+        //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
+        
+        [generalViewController release];
+        [advancedViewController release];
+        
+        NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
+        _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
+        [controllers release];
+    }
+    return _preferencesWindowController;
+}
+
+#pragma mark - MASPreferences Actions
+
+- (IBAction)showPreferencePanel:(id)sender
+{
+    [self.preferencesWindowController showWindow:nil];
+}
+
+NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
+
+- (NSInteger)focusedAdvancedControlIndex
+{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:kFocusedAdvancedControlIndex];
+}
+
+- (void)setFocusedAdvancedControlIndex:(NSInteger)focusedAdvancedControlIndex
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:focusedAdvancedControlIndex forKey:kFocusedAdvancedControlIndex];
+}
+
 /* dealloc
  * Clean up and release resources.
  */
@@ -4767,6 +4816,8 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[searchField release];
 	[sourceWindows release];
 	[searchString release];
+    
+    [_preferencesWindowController release];
 
 	[super dealloc];
 }
