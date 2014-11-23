@@ -1,6 +1,8 @@
 Vienna
 ======
 
+[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss)
+
 [Vienna](http://www.vienna-rss.org) is an RSS/Atom reader for Mac OS X.
 
 Vienna can connect directly to the websites you want to track.

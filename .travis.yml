@@ -1,0 +1,12 @@
+language: objective-c
+before_install:
+- brew update
+- brew upgrade xctool
+# - gem install cocoapods
+xcode_project: Vienna.xcodeproj
+xcode_scheme: Vienna
+before_script: make clean
+script: make development
+notifications:
+  slack:
+    secure: KaYeG8xgiCCROn0yBrDj0xMI5f1LECVgqJalp+2APy2AdQzHmYQdysiy6c1xNL1//kW3TPAakopgpBwpQ6YTVBfI9F/n9SCvMEwHKKZVT1kwqYJDNwGKXy1tXJKQfhI2x6bs2+HJOgOTLhU+otrDlYyZWEel56q/NzNVx0dwHFs=

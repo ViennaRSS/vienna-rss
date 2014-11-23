@@ -19,7 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Message.h"
+#import "Article.h"
 
 @interface ArticleReference : NSObject
 {
