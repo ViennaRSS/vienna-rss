@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/viennarss/vienna-rss.png?label=ready&title=Ready)](https://waffle.io/viennarss/vienna-rss)
 Vienna
 ======
 
