@@ -19,9 +19,7 @@
 //
 
 #import "AppController.h"
-#import "NewPreferencesController.h"
 
-// New Preferences
 #import "MASPreferencesWindowController.h"
 #import "GeneralPreferencesViewController.h"
 #import "AppearancePreferencesViewController.h"

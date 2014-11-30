@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SyncingPreferencesViewController">
             <connections>
+                <outlet property="credentialsInfoText" destination="5uV-sN-sk6" id="gP4-4r-Svd"/>
+                <outlet property="openReaderHost" destination="l0a-XC-3An" id="H7r-Sf-csG"/>
+                <outlet property="openReaderSource" destination="zAy-oc-zmb" id="4Yl-G7-Xv9"/>
+                <outlet property="password" destination="y60-8l-5RI" id="ncM-1D-HKY"/>
+                <outlet property="syncButton" destination="5EN-Cn-aOH" id="uE9-FQ-nfW"/>
+                <outlet property="username" destination="l0e-TX-B3B" id="keD-my-qXu"/>
                 <outlet property="view" destination="Z8l-az-tZs" id="Mvn-6y-rlX"/>
             </connections>
         </customObject>
@@ -22,6 +28,9 @@
                     <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="systemBold"/>
+                        <connections>
+                            <action selector="changeSyncOpenReader:" target="-2" id="Se1-hh-Rng"/>
+                        </connections>
                     </buttonCell>
                     <connections>
                         <outlet property="nextKeyView" destination="zAy-oc-zmb" id="t7m-8r-wXY"/>
@@ -36,17 +45,20 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton verticalHuggingPriority="750" id="zAy-oc-zmb">
+                <popUpButton verticalHuggingPriority="750" id="zAy-oc-zmb" userLabel="URL">
                     <rect key="frame" x="138" y="160" width="175" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="URL" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" tag="100" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="xdj-NS-PwU">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="xdj-NS-PwU" userLabel="URL">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="menu"/>
                         <menu key="menu" title="ServicesView" id="LVH-iR-bmO">
                             <items>
-                                <menuItem title="URL" state="on" tag="100" id="RMd-14-2Bl"/>
+                                <menuItem title="URL" tag="100" id="RMd-14-2Bl"/>
                             </items>
                         </menu>
+                        <connections>
+                            <action selector="changeSource:" target="-2" id="8au-Ls-4nR"/>
+                        </connections>
                     </popUpButtonCell>
                     <accessibility description="Select a server supporting the Open Reader API"/>
                     <connections>
@@ -138,6 +150,9 @@
                     <buttonCell key="cell" type="push" title="🌍" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e0z-IA-uBQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="visitWebsite:" target="-2" id="bS3-sa-Mdl"/>
+                        </connections>
                     </buttonCell>
                     <accessibility description="Visit the website"/>
                     <connections>

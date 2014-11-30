@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AdvancedPreferencesViewController">
             <connections>
+                <outlet property="concurrentDownloads" destination="H1P-vO-Noj" id="1K8-fw-g1L"/>
+                <outlet property="useJavaScriptButton" destination="tVa-eQ-1Ic" id="IxK-oW-UeJ"/>
                 <outlet property="view" destination="Vsf-39-2Yj" id="Dp5-Be-4cB"/>
             </connections>
         </customObject>
@@ -17,23 +19,25 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <textField verticalHuggingPriority="750" id="8eN-mz-Hbd">
-                    <rect key="frame" x="17" y="197" width="392" height="33"/>
+                    <rect key="frame" x="17" y="188" width="381" height="42"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="GaX-8c-QaN">
                         <font key="font" metaFont="smallSystem"/>
-                        <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.
-</string>
+                        <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button id="tVa-eQ-1Ic">
-                    <rect key="frame" x="18" y="173" width="252" height="18"/>
+                    <rect key="frame" x="18" y="164" width="252" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Enable JavaScript in internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="guK-dE-f6n">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="changeUseJavaScript:" target="-2" id="K6B-6z-GDo"/>
+                    </connections>
                 </button>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" id="f3h-IR-LHW">
                     <rect key="frame" x="387" y="17" width="21" height="23"/>
@@ -42,16 +46,10 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="showAdvancedHelp:" target="-2" id="laa-9P-oV8"/>
+                    </connections>
                 </button>
-                <textField verticalHuggingPriority="750" id="Lbl-Gt-1fA">
-                    <rect key="frame" x="17" y="68" width="392" height="33"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="The higher the number, the quicker your subscriptions will be downloaded." id="2GQ-cu-fbh" propertyAccessControl="none">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <textField verticalHuggingPriority="750" id="wYk-Hr-rn0">
                     <rect key="frame" x="17" y="27" width="392" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -75,7 +73,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" title="10" bezelStyle="rounded" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="p15-eO-dBa" id="hDb-uR-Acz">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="Gua-yV-73n">
                             <items>
                                 <menuItem title="1" id="koF-ku-VbZ"/>
@@ -87,8 +85,20 @@
                                 <menuItem title="50" id="q0t-6p-Xd6"/>
                             </items>
                         </menu>
+                        <connections>
+                            <action selector="changeConcurrentDownloads:" target="-2" id="XjX-o8-qjm"/>
+                        </connections>
                     </popUpButtonCell>
                 </popUpButton>
+                <textField verticalHuggingPriority="750" id="Lbl-Gt-1fA">
+                    <rect key="frame" x="17" y="68" width="392" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="The higher the number, the quicker your subscriptions will be downloaded." id="2GQ-cu-fbh" propertyAccessControl="none">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
         </view>
     </objects>

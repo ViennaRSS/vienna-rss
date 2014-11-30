@@ -7,6 +7,13 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AppearancePreferencesViewController">
             <connections>
+                <outlet property="articleFontSample" destination="omz-Xk-hdX" id="7Ig-eh-tQq"/>
+                <outlet property="articleFontSelectButton" destination="o7p-1v-UGN" id="7vH-Ko-oWG"/>
+                <outlet property="enableMinimumFontSize" destination="zi1-dQ-UMg" id="Dzf-DA-ADP"/>
+                <outlet property="folderFontSample" destination="7Ry-8o-LiV" id="YCO-zW-Xtc"/>
+                <outlet property="folderFontSelectButton" destination="V2j-NG-qbV" id="P3f-4O-2wm"/>
+                <outlet property="minimumFontSizes" destination="84p-cY-I9v" id="Iw4-0A-H89"/>
+                <outlet property="showFolderImagesButton" destination="zi1-dQ-UMg" id="wbj-1h-VOw"/>
                 <outlet property="view" destination="S8x-KB-PLV" id="f0L-FL-UFq"/>
             </connections>
         </customObject>
@@ -42,6 +49,9 @@
                     <buttonCell key="cell" type="check" title="Never use font sizes smaller than" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="zfJ-Ge-Cxe">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeMinimumFontSize:" target="-2" id="5HB-BF-4LF"/>
+                        </connections>
                     </buttonCell>
                 </button>
                 <comboBox verticalHuggingPriority="750" id="84p-cY-I9v">
@@ -52,6 +62,9 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </comboBoxCell>
+                    <connections>
+                        <action selector="selectMinimumFontSize:" target="-2" id="xmp-Ar-KRX"/>
+                    </connections>
                 </comboBox>
                 <textField verticalHuggingPriority="750" id="omz-Xk-hdX">
                     <rect key="frame" x="176" y="142" width="204" height="22"/>
@@ -78,6 +91,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="selectArticleFont:" target="-2" id="KUO-H6-381"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="V2j-NG-qbV">
                     <rect key="frame" x="382" y="105" width="105" height="32"/>
@@ -86,6 +102,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="selectFolderFont:" target="-2" id="SnU-Cs-LlA"/>
+                    </connections>
                 </button>
                 <textField verticalHuggingPriority="750" id="FYe-O0-wsA">
                     <rect key="frame" x="17" y="76" width="467" height="17"/>
@@ -102,6 +121,9 @@
                     <buttonCell key="cell" type="check" title="Show feeds icons in folder list" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MEV-HA-bdL">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeShowFolderImages:" target="-2" id="0WQ-A5-bwr"/>
+                        </connections>
                     </buttonCell>
                 </button>
             </subviews>

@@ -62,15 +62,15 @@
 		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
 		034981311A206D8400014F29 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0349812A1A206D8400014F29 /* MASPreferencesWindow.xib */; };
 		034981321A206D8400014F29 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */; };
-		034981391A206F6D00014F29 /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034981381A206F6D00014F29 /* GeneralPreferencesView.xib */; };
 		0349813B1A206F8D00014F29 /* AdvancedPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */; };
 		0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */; };
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
 		035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B704119E0E4DC00197334 /* SubscriptionModelTests.m */; };
+		03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */; };
+		03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E701A218D4B009C020C /* AppearancePreferencesView.xib */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
-		0379E23D1A20849E00D58BFE /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0379E23C1A20849E00D58BFE /* AppearancePreferencesView.xib */; };
 		0379E23F1A2084B600D58BFE /* SyncingPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
@@ -668,7 +668,6 @@
 		57F7E2F116F534FE00D4702E /* vienna3plugin.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */; };
 		57F7E2F216F534FE00D4702E /* vienna3style.icns in Resources */ = {isa = PBXBuildFile; fileRef = 57F7E2F016F534FE00D4702E /* vienna3style.icns */; };
 		61A2CB610A8AC68C006348E8 /* revised.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 61A2CB600A8AC68C006348E8 /* revised.tiff */; };
-		6624683713C5D09400C85417 /* SyncPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 6624683613C5D09300C85417 /* SyncPreferences.m */; };
 		6624683B13C5F83000C85417 /* sync.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 6624683A13C5F81F00C85417 /* sync.tiff */; };
 		664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* GoogleReader.m */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -728,9 +727,7 @@
 		AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D80604927300FE7994 /* BackTrackArray.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
 		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
-		AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */; };
 		AA3113EB09020E0F00E80DF1 /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */; };
-		AA31147F090214AD00E80DF1 /* AppearancesPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */; };
 		AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */; };
 		AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA32E2A30940A9970034D9CC /* folderError.tiff */; };
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
@@ -757,7 +754,6 @@
 		AA6321510885F0BB006382D3 /* comments.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA6321500885F0BB006382D3 /* comments.tiff */; };
 		AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
 		AA67F3990897377C008BBC37 /* stopRefresh.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA67F3980897377C008BBC37 /* stopRefresh.tiff */; };
-		AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */; };
 		AA681C8A0B199E1900CFD5B7 /* advancedPrefImage.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */; };
 		AA71096D09BA74AA00E3EA8A /* leftArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */; };
 		AA71097009BA74BF00E3EA8A /* rightArrow.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */; };
@@ -976,7 +972,6 @@
 		0349812B1A206D8400014F29 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
 		0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
 		0349812D1A206D8400014F29 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		034981381A206F6D00014F29 /* GeneralPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GeneralPreferencesView.xib; path = Interfaces/Preferences/GeneralPreferencesView.xib; sourceTree = "<group>"; };
 		0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedPreferencesView.xib; path = Interfaces/Preferences/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 		0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeneralPreferencesViewController.h; path = src/Preferences/GeneralPreferencesViewController.h; sourceTree = "<group>"; };
 		0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneralPreferencesViewController.m; path = src/Preferences/GeneralPreferencesViewController.m; sourceTree = "<group>"; };
@@ -986,11 +981,48 @@
 		035B703819E0E4AE00197334 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		035B703919E0E4AE00197334 /* Vienna_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Tests.m; sourceTree = "<group>"; };
 		035B704119E0E4DC00197334 /* SubscriptionModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModelTests.m; sourceTree = "<group>"; };
+		03721E5A1A218CFC009C020C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E5C1A218D0C009C020C /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E5D1A218D0D009C020C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E5E1A218D0F009C020C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E5F1A218D12009C020C /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E601A218D13009C020C /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E611A218D14009C020C /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E621A218D15009C020C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/GeneralPreferencesView.xib"; sourceTree = "<group>"; };
+		03721E631A218D16009C020C /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E641A218D17009C020C /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E651A218D19009C020C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "pt-BR"; path = "pt-BR.lproj/GeneralPreferencesView.xib"; sourceTree = "<group>"; };
+		03721E661A218D1A009C020C /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = ko.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E671A218D1B009C020C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/GeneralPreferencesView.xib"; sourceTree = "<group>"; };
+		03721E681A218D1C009C020C /* da */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = da; path = da.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E691A218D1D009C020C /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E6A1A218D1D009C020C /* eu */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = eu; path = eu.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E6B1A218D20009C020C /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E6C1A218D21009C020C /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E6D1A218D22009C020C /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		03721E6F1A218D4B009C020C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E711A218D4E009C020C /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E721A218D4F009C020C /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E731A218D50009C020C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E741A218D51009C020C /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E751A218D52009C020C /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E761A218D53009C020C /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E771A218D54009C020C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/AppearancePreferencesView.xib"; sourceTree = "<group>"; };
+		03721E781A218D55009C020C /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E791A218D56009C020C /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E7A1A218D5A009C020C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "pt-BR"; path = "pt-BR.lproj/AppearancePreferencesView.xib"; sourceTree = "<group>"; };
+		03721E7B1A218D5B009C020C /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = ko.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E7C1A218D5C009C020C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/AppearancePreferencesView.xib"; sourceTree = "<group>"; };
+		03721E7D1A218D5C009C020C /* da */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = da; path = da.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E7E1A218D5D009C020C /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E7F1A218D5E009C020C /* eu */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = eu; path = eu.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E801A218D5F009C020C /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E811A218D60009C020C /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
+		03721E821A218D60009C020C /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppearancePreferencesViewController.h; path = src/Preferences/AppearancePreferencesViewController.h; sourceTree = "<group>"; };
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppearancePreferencesViewController.m; path = src/Preferences/AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
-		0379E23C1A20849E00D58BFE /* AppearancePreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppearancePreferencesView.xib; path = Interfaces/Preferences/AppearancePreferencesView.xib; sourceTree = "<group>"; };
 		0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyncingPreferencesView.xib; path = Interfaces/Preferences/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
@@ -2011,8 +2043,8 @@
 		034981351A206E3C00014F29 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				034981381A206F6D00014F29 /* GeneralPreferencesView.xib */,
-				0379E23C1A20849E00D58BFE /* AppearancePreferencesView.xib */,
+				03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */,
+				03721E701A218D4B009C020C /* AppearancePreferencesView.xib */,
 				0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */,
 				0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */,
 			);
@@ -3186,11 +3218,11 @@
 			children = (
 				034981341A206DBC00014F29 /* Preferences NG */,
 				4350283C165DE3600018EDB7 /* GeneralPreferences.h */,
+				AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */,
 				AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */,
 				AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */,
 				AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */,
 				AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */,
-				AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */,
 				AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */,
 				AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */,
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
@@ -3628,6 +3660,10 @@
 				uk,
 				pt,
 				tr,
+				"zh-Hant",
+				"pt-BR",
+				"zh-Hans",
+				eu,
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			projectDirPath = "";
@@ -3708,7 +3744,7 @@
 				43E695EA168A05F300AB4C09 /* AdvancedPreferences.strings in Resources */,
 				43E695EB168A05F300AB4C09 /* AdvancedPreferences.strings in Resources */,
 				43E695EC168A05F300AB4C09 /* AppearancesPreferences.nib in Resources */,
-				0379E23D1A20849E00D58BFE /* AppearancePreferencesView.xib in Resources */,
+				03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */,
 				43E695ED168A05F300AB4C09 /* AppearancesPreferences.nib in Resources */,
 				43E695EE168A05F300AB4C09 /* AppearancesPreferences.nib in Resources */,
 				43EE83F0165EAA70000997FB /* AppearancesPreferences.nib in Resources */,
@@ -3892,7 +3928,7 @@
 				43E69694168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69695168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69696168A05F300AB4C09 /* GroupFolder.nib in Resources */,
-				034981391A206F6D00014F29 /* GeneralPreferencesView.xib in Resources */,
+				03721E591A218CFC009C020C /* GeneralPreferencesView.xib in Resources */,
 				43E69697168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69698168A05F300AB4C09 /* GroupFolder.nib in Resources */,
 				43E69699168A05F300AB4C09 /* GroupFolder.nib in Resources */,
@@ -4479,11 +4515,8 @@
 				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
 				AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */,
-				AA3111BD0901A2F100E80DF1 /* NewPreferencesController.m in Sources */,
 				AA3113EB09020E0F00E80DF1 /* GeneralPreferences.m in Sources */,
-				AA31147F090214AD00E80DF1 /* AppearancesPreferences.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
-				AA681B220B18E46800CFD5B7 /* AdvancedPreferences.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
 				AA1A27560C09B27E005968DC /* ViewExtensions.m in Sources */,
@@ -4493,7 +4526,6 @@
 				AA5AB4C80C3D511700B2E14F /* ToolbarItem.m in Sources */,
 				AA5AC2660C3ECAA000B2E14F /* SearchString.m in Sources */,
 				B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */,
-				6624683713C5D09400C85417 /* SyncPreferences.m in Sources */,
 				664F87C713C62DFE00E266DE /* GoogleReader.m in Sources */,
 				EA43C70914A370DB00F2D843 /* VTPG_Common.m in Sources */,
 				B2BECB1714CEF22B00706F8F /* SSTextField.m in Sources */,
@@ -4629,6 +4661,60 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03721E5A1A218CFC009C020C /* en */,
+				03721E5C1A218D0C009C020C /* ja */,
+				03721E5D1A218D0D009C020C /* fr */,
+				03721E5E1A218D0F009C020C /* de */,
+				03721E5F1A218D12009C020C /* sv */,
+				03721E601A218D13009C020C /* it */,
+				03721E611A218D14009C020C /* ru */,
+				03721E621A218D15009C020C /* zh-Hant */,
+				03721E631A218D16009C020C /* nl */,
+				03721E641A218D17009C020C /* es */,
+				03721E651A218D19009C020C /* pt-BR */,
+				03721E661A218D1A009C020C /* ko */,
+				03721E671A218D1B009C020C /* zh-Hans */,
+				03721E681A218D1C009C020C /* da */,
+				03721E691A218D1D009C020C /* cs */,
+				03721E6A1A218D1D009C020C /* eu */,
+				03721E6B1A218D20009C020C /* uk */,
+				03721E6C1A218D21009C020C /* pt */,
+				03721E6D1A218D22009C020C /* tr */,
+			);
+			name = GeneralPreferencesView.xib;
+			path = Interfaces/Preferences;
+			sourceTree = "<group>";
+		};
+		03721E701A218D4B009C020C /* AppearancePreferencesView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03721E6F1A218D4B009C020C /* en */,
+				03721E711A218D4E009C020C /* ja */,
+				03721E721A218D4F009C020C /* fr */,
+				03721E731A218D50009C020C /* de */,
+				03721E741A218D51009C020C /* sv */,
+				03721E751A218D52009C020C /* it */,
+				03721E761A218D53009C020C /* ru */,
+				03721E771A218D54009C020C /* zh-Hant */,
+				03721E781A218D55009C020C /* nl */,
+				03721E791A218D56009C020C /* es */,
+				03721E7A1A218D5A009C020C /* pt-BR */,
+				03721E7B1A218D5B009C020C /* ko */,
+				03721E7C1A218D5C009C020C /* zh-Hans */,
+				03721E7D1A218D5C009C020C /* da */,
+				03721E7E1A218D5D009C020C /* cs */,
+				03721E7F1A218D5E009C020C /* eu */,
+				03721E801A218D5F009C020C /* uk */,
+				03721E811A218D60009C020C /* pt */,
+				03721E821A218D60009C020C /* tr */,
+			);
+			name = AppearancePreferencesView.xib;
+			path = Interfaces/Preferences;
+			sourceTree = "<group>";
+		};
 		3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
