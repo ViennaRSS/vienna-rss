@@ -81,8 +81,7 @@
 	NewPreferencesController * preferenceController;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
-	NewSubscription * rssFeed;
-	NewGroupFolder * groupFolder;
+    NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
 	NSMutableArray * sourceWindows;
@@ -102,6 +101,8 @@
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
 }
+
+@property(nonatomic, retain) NewSubscription *rssFeed;
 
 // Menu action items
 -(IBAction)handleAbout:(id)sender;
