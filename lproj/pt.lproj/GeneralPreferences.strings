@@ -2,8 +2,8 @@
 /* Class = "NSWindow"; title = "Window"; ObjectID = "64"; */
 "64.title" = "Janela";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
-"70.title" = "OtherViews";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "XAi-oh-7Fq.title"; */
+"XAi-oh-7Fq.title.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV"; */
 "6wU-yO-cnV.title" = "A cada 2 horas";
@@ -20,20 +20,20 @@
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
 "5VQ-jP-2rL.title" = "A cada 30 minutos";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
-"80.title" = "OtherViews";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "GAY-ra-eQY"; */
 "GAY-ra-eQY.title" = "Nenhum";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
-"91.title" = "OtherViews";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "OtherViews";
 
-/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "92"; */
-"92.title" = "(Do not localise)";
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
 
-/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
-"95.title" = "OtherViews";
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "OtherViews";
 
 /* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "5Cq-8f-vbL"; */
 "5Cq-8f-vbL.title" = "(Localização)";
@@ -98,11 +98,11 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Mostrar na barra de menu";
 
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
-"161.title" = "Radio";
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "QD9-FF-HxG"; */
+"QD9-FF-HxG.title" = "Radio";
 
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "162"; */
-"162.title" = "Radio";
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
 "meo-78-YOl.title" = "Mark updated articles as new";

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
@@ -44,7 +44,7 @@
                 <popUpButton verticalHuggingPriority="750" id="OUV-X4-SZX" userLabel="Manually">
                     <rect key="frame" x="304" y="455" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Every 15 minutes" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" tag="900" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1Ll-uG-QWh" id="uYS-Ag-cif" userLabel="Manually">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="uYS-Ag-cif" userLabel="Manually">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="XAi-oh-7Fq">
@@ -54,7 +54,7 @@
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
                                 <menuItem title="Every 5 minutes" tag="300" id="oVW-ee-uJT"/>
-                                <menuItem title="Every 15 minutes" state="on" tag="900" id="1Ll-uG-QWh"/>
+                                <menuItem title="Every 15 minutes" tag="900" id="1Ll-uG-QWh"/>
                                 <menuItem title="Every 30 minutes" tag="1800" id="5VQ-jP-2rL"/>
                                 <menuItem isSeparatorItem="YES" id="udF-L6-rzR">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
@@ -162,12 +162,12 @@
                 <popUpButton verticalHuggingPriority="750" id="1LP-jv-eDe" userLabel="(Do not localise)">
                     <rect key="frame" x="304" y="425" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="NX4-hw-8Jr" userLabel="(Do not localise)">
+                    <popUpButtonCell key="cell" type="push" title="(Do not localise)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="fYn-Rz-G69" id="NX4-hw-8Jr" userLabel="(Do not localise)">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="DFg-c6-rCy">
                             <items>
-                                <menuItem title="(Do not localise)" id="fYn-Rz-G69"/>
+                                <menuItem title="(Do not localise)" state="on" id="fYn-Rz-G69"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -187,7 +187,7 @@
                 <popUpButton verticalHuggingPriority="750" id="5fV-8g-Bux" userLabel="(Path)">
                     <rect key="frame" x="304" y="366" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Other..." bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="FiK-E7-RnG" id="Sdl-yU-zPs" userLabel="(Path)">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Sdl-yU-zPs" userLabel="(Path)">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="Klv-JA-PvP">
@@ -196,7 +196,7 @@
                                 <menuItem isSeparatorItem="YES" id="nxI-oL-X6j">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Other..." state="on" id="FiK-E7-RnG">
+                                <menuItem title="Other..." id="FiK-E7-RnG">
                                     <connections>
                                         <action selector="changeDownloadFolder:" target="-2" id="ex0-2r-Dq5"/>
                                     </connections>
