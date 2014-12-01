@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
     </dependencies>
     <objects>
@@ -35,7 +34,7 @@
                 <textField verticalHuggingPriority="750" id="Zeb-iF-Qki">
                     <rect key="frame" x="18" y="461" width="278" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Check for new articles:" id="ewU-JH-fMC">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="新しい記事をチェック：" id="ewU-JH-fMC">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -49,20 +48,20 @@
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="XAi-oh-7Fq">
                             <items>
-                                <menuItem title="Manually" id="H9Q-du-oax"/>
+                                <menuItem title="手動" id="H9Q-du-oax"/>
                                 <menuItem isSeparatorItem="YES" id="5lr-Lv-UnM">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Every 5 minutes" tag="300" id="oVW-ee-uJT"/>
-                                <menuItem title="Every 15 minutes" tag="900" id="1Ll-uG-QWh"/>
-                                <menuItem title="Every 30 minutes" tag="1800" id="5VQ-jP-2rL"/>
+                                <menuItem title="5分ごと" tag="300" id="oVW-ee-uJT"/>
+                                <menuItem title="15分ごと" tag="900" id="1Ll-uG-QWh"/>
+                                <menuItem title="３０分ごと" tag="1800" id="5VQ-jP-2rL"/>
                                 <menuItem isSeparatorItem="YES" id="udF-L6-rzR">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Every hour" tag="3600" id="sSj-zI-6RY"/>
-                                <menuItem title="Every 2 hours" tag="7200" id="6wU-yO-cnV"/>
-                                <menuItem title="Every 3 hours" tag="10800" id="gnX-dW-XUD"/>
-                                <menuItem title="Every 6 hours" tag="21600" id="IMa-1h-lIO"/>
+                                <menuItem title="１時間ごと" tag="3600" id="sSj-zI-6RY"/>
+                                <menuItem title="２時間ごと" tag="7200" id="6wU-yO-cnV"/>
+                                <menuItem title="3時間ごと" tag="10800" id="gnX-dW-XUD"/>
+                                <menuItem title="６時間ごと" tag="21600" id="IMa-1h-lIO"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -109,7 +108,7 @@
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="HFO-4f-zYZ">
                             <items>
-                                <menuItem title="Nothing" id="GAY-ra-eQY"/>
+                                <menuItem title="なし" id="GAY-ra-eQY"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -131,7 +130,7 @@
                 <button id="IRs-ch-SmE">
                     <rect key="frame" x="19" y="314" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Open new links in the background" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pjg-Ze-H3l">
+                    <buttonCell key="cell" type="check" title="新しいリンクを背面で開く" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pjg-Ze-H3l">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -142,7 +141,7 @@
                 <button id="nIa-fG-2el">
                     <rect key="frame" x="19" y="291" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Open links in external browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YoM-Gv-hXn">
+                    <buttonCell key="cell" type="check" title="リンクをデフォルトブラウザで開く" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YoM-Gv-hXn">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -162,12 +161,12 @@
                 <popUpButton verticalHuggingPriority="750" id="1LP-jv-eDe" userLabel="(Do not localise)">
                     <rect key="frame" x="304" y="425" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="NX4-hw-8Jr" userLabel="(Do not localise)">
+                    <popUpButtonCell key="cell" type="push" title="(Do not localise)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="fYn-Rz-G69" id="NX4-hw-8Jr" userLabel="(Do not localise)">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="DFg-c6-rCy">
                             <items>
-                                <menuItem title="(Do not localise)" id="fYn-Rz-G69"/>
+                                <menuItem title="(Do not localise)" state="on" id="fYn-Rz-G69"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -178,7 +177,7 @@
                 <textField verticalHuggingPriority="750" id="JQX-Cj-imk">
                     <rect key="frame" x="18" y="373" width="278" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Save downloaded files to:" id="geD-Ws-mQm">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="ダウンロードしたファイルの保存先：" id="geD-Ws-mQm">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -187,16 +186,16 @@
                 <popUpButton verticalHuggingPriority="750" id="5fV-8g-Bux" userLabel="(Path)">
                     <rect key="frame" x="304" y="366" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Other..." bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="FiK-E7-RnG" id="Sdl-yU-zPs" userLabel="(Path)">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Sdl-yU-zPs" userLabel="(Path)">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="OtherViews" id="Klv-JA-PvP">
                             <items>
-                                <menuItem title="(Path)" id="5Cq-8f-vbL"/>
+                                <menuItem title="（パス）" id="5Cq-8f-vbL"/>
                                 <menuItem isSeparatorItem="YES" id="nxI-oL-X6j">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Other..." state="on" id="FiK-E7-RnG">
+                                <menuItem title="その他..." id="FiK-E7-RnG">
                                     <connections>
                                         <action selector="changeDownloadFolder:" target="-2" id="ex0-2r-Dq5"/>
                                     </connections>
@@ -217,21 +216,21 @@
                     </buttonCell>
                     <cells>
                         <column>
-                            <buttonCell type="radio" title="Do nothing" imagePosition="left" alignment="left" state="on" inset="2" id="ayi-vd-Hro">
+                            <buttonCell type="radio" title="何もしない" imagePosition="left" alignment="left" state="on" inset="2" id="ayi-vd-Hro">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
                                     <action selector="changeNewArticlesNotification:" target="-2" id="Z97-Ta-jjG"/>
                                 </connections>
                             </buttonCell>
-                            <buttonCell type="radio" title="Show the unread count on the application icon" imagePosition="left" alignment="left" tag="1" inset="2" id="vPK-r4-Kwp">
+                            <buttonCell type="radio" title="未読記事数をアプリケーションアイコンに表示" imagePosition="left" alignment="left" tag="1" inset="2" id="vPK-r4-Kwp">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
                                     <action selector="changeNewArticlesNotification:" target="-2" id="Nv0-1e-gdz"/>
                                 </connections>
                             </buttonCell>
-                            <buttonCell type="radio" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4kj-ax-3ec">
+                            <buttonCell type="radio" title="アプリケーションアイコンを跳ねさせる" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4kj-ax-3ec">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -264,14 +263,14 @@
                     </buttonCell>
                     <cells>
                         <column>
-                            <buttonCell type="radio" title="After &quot;Next Unread&quot; command" imagePosition="left" alignment="left" state="on" inset="2" id="2oy-1i-QQP">
+                            <buttonCell type="radio" title="&quot;次の未読&quot; コマンドの後" imagePosition="left" alignment="left" state="on" inset="2" id="2oy-1i-QQP">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
                                     <action selector="changeMarkReadBehaviour:" target="-2" id="eXd-lf-uWH"/>
                                 </connections>
                             </buttonCell>
-                            <buttonCell type="radio" title="After a short delay" imagePosition="left" alignment="left" tag="1" inset="2" id="JDV-ek-xja">
+                            <buttonCell type="radio" title="少したった後" imagePosition="left" alignment="left" tag="1" inset="2" id="JDV-ek-xja">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -317,7 +316,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="BbI-0A-zEG">
                         <font key="font" metaFont="system"/>
-                        <string key="title">When new unread articles are retrieved:
+                        <string key="title">新規未読記事を取得したとき：
 </string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
