@@ -5,26 +5,26 @@
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
 "70.title" = "DiğerGörünümler";
 
-/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "71"; */
-"71.title" = "2 saatte bir";
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "2 saatte bir";
 
-/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "73"; */
-"73.title" = "El ile";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "El ile";
 
-/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "74"; */
-"74.title" = "Her saat";
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Her saat";
 
-/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "75"; */
-"75.title" = "6 saatte bir";
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "6 saatte bir";
 
-/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "76"; */
-"76.title" = "30 dakikada bir";
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "30 dakikada bir";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
 "80.title" = "DiğerGörünümler";
 
-/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "81"; */
-"81.title" = "Hiçbir şey";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Hiçbir şey";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
 "91.title" = "DiğerGörünümler";
@@ -35,68 +35,68 @@
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
 "95.title" = "DiğerGörünümler";
 
-/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "96"; */
-"96.title" = "(Yol)";
+/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(Yol)";
 
-/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
-"97.title" = "Diğer...";
+/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Diğer...";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
-"121.title" = "Okunmamış makale sayısını uygulama ikonunda göster";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "vPK-r4-Kwp"; */
+"vPK-r4-Kwp.title" = "Okunmamış makale sayısını uygulama ikonunda göster";
 
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "122"; */
-"122.title" = "Uygulama simgesini zıplat";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "4kj-ax-3ec"; */
+"4kj-ax-3ec.title" = "Uygulama simgesini zıplat";
 
-/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "123"; */
-"123.title" = "Hiçbir şey yapma";
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "ayi-vd-Hro"; */
+"ayi-vd-Hro.title" = "Hiçbir şey yapma";
 
-/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "132"; */
-"132.title" = "\"Next Unread\" komutundan sonra";
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "\"Next Unread\" komutundan sonra";
 
-/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "133"; */
-"133.title" = "Kısa bir aradan sonra";
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "Kısa bir aradan sonra";
 
-/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "141"; */
-"141.title" = "15 dakikada bir";
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "15 dakikada bir";
 
-/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "142"; */
-"142.title" = "5 dakikada bir";
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "5 dakikada bir";
 
-/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "144"; */
-"144.title" = "3 saatte bir";
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "3 saatte bir";
 
-/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "146"; */
-"146.title" = "Yeni makaleleri kontrol et:";
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Yeni makaleleri kontrol et:";
 
-/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "148"; */
-"148.title" = "Başlangıçta Vienna'nın yeni sürümünü kontrol et";
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Başlangıçta Vienna'nın yeni sürümünü kontrol et";
 
-/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
-"149.title" = "Varsayılan RSS Tarayıcısı:";
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Varsayılan RSS Tarayıcısı:";
 
-/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
-"151.title" = "Başlangıçta yeni makaleleri kontrol et";
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Başlangıçta yeni makaleleri kontrol et";
 
-/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
-"152.title" = "Yeni bağlantıları arkaplanda aç";
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Yeni bağlantıları arkaplanda aç";
 
-/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
-"153.title" = "Bağlantıları harici tarayıcıda aç";
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Bağlantıları harici tarayıcıda aç";
 
-/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
-"154.title" = "Seçili makaleleri çöp kutusuna taşı:";
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Seçili makaleleri çöp kutusuna taşı:";
 
-/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
-"156.title" = "İndirilen dosyaları şuraya kaydet:";
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "İndirilen dosyaları şuraya kaydet:";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
-"158.title" = "Yeni okunmamış makale alındığında:\n";
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "Yeni okunmamış makale alındığında:\n";
 
-/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
-"159.title" = "Seçili makaleyi okundu olarak işaretle:\n";
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Seçili makaleyi okundu olarak işaretle:\n";
 
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
-"160.title" = "Menü barında göster";
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Menü barında göster";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
 "161.title" = "Radio";
@@ -104,11 +104,11 @@
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "162"; */
 "162.title" = "Radio";
 
-/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
-"164.title" = "Mark updated articles as new";
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
 
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "171"; */
-"171.title" = "Include anonymous system profile";
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
 
-/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "176"; */
-"176.title" = "Updates:";
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";

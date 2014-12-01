@@ -5,26 +5,26 @@
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "70"; */
 "70.title" = "其他显示方式";
 
-/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "71"; */
-"71.title" = "每两小时";
+/* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "每两小时";
 
-/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "73"; */
-"73.title" = "手动";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "手动";
 
-/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "74"; */
-"74.title" = "每小时";
+/* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "每小时";
 
-/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "75"; */
-"75.title" = "每六小时";
+/* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "每六小时";
 
-/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "76"; */
-"76.title" = "每三十分钟";
+/* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "每三十分钟";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "80"; */
 "80.title" = "其他显示方式";
 
-/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "81"; */
-"81.title" = "Nothing";
+/* Class = "NSMenuItem"; title = "Nothing"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Nothing";
 
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "91"; */
 "91.title" = "其他显示方式";
@@ -35,68 +35,68 @@
 /* Class = "NSMenu"; title = "OtherViews"; ObjectID = "95"; */
 "95.title" = "其他显示方式";
 
-/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "96"; */
-"96.title" = "(路径)";
+/* Class = "NSMenuItem"; title = "(Path)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(路径)";
 
-/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "97"; */
-"97.title" = "其他...";
+/* Class = "NSMenuItem"; title = "Other..."; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "其他...";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "121"; */
-"121.title" = "在程序图标中显示未读文章数目";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "vPK-r4-Kwp"; */
+"vPK-r4-Kwp.title" = "在程序图标中显示未读文章数目";
 
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "122"; */
-"122.title" = "弹跳程序图标 (仅限于 OS X 10.4)";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "4kj-ax-3ec"; */
+"4kj-ax-3ec.title" = "弹跳程序图标 (仅限于 OS X 10.4)";
 
-/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "123"; */
-"123.title" = "什么都不做";
+/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "ayi-vd-Hro"; */
+"ayi-vd-Hro.title" = "什么都不做";
 
-/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "132"; */
-"132.title" = "执行 \"下一篇未读文章\" 命令后";
+/* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "执行 \"下一篇未读文章\" 命令后";
 
-/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "133"; */
-"133.title" = "略微延迟一下后";
+/* Class = "NSButtonCell"; title = "After a short delay"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "略微延迟一下后";
 
-/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "141"; */
-"141.title" = "每15分钟";
+/* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "每15分钟";
 
-/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "142"; */
-"142.title" = "每5分钟";
+/* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "每5分钟";
 
-/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "144"; */
-"144.title" = "每三小时";
+/* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "每三小时";
 
-/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "146"; */
-"146.title" = "检查新文章:";
+/* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "检查新文章:";
 
-/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "148"; */
-"148.title" = "程序启动后核查 Vienna 是否有新版本";
+/* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "程序启动后核查 Vienna 是否有新版本";
 
-/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "149"; */
-"149.title" = "默认 RSS 阅读工具:";
+/* Class = "NSTextFieldCell"; title = "Default RSS Reader:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "默认 RSS 阅读工具:";
 
-/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "151"; */
-"151.title" = "程序启动后核查新文章";
+/* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "程序启动后核查新文章";
 
-/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "152"; */
-"152.title" = "在当前窗口后面打开连接";
+/* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "在当前窗口后面打开连接";
 
-/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "153"; */
-"153.title" = "在外部浏览器中打开连接";
+/* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "在外部浏览器中打开连接";
 
-/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "154"; */
-"154.title" = "移动文章到废纸篓于:";
+/* Class = "NSTextFieldCell"; title = "Move articles to Trash:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "移动文章到废纸篓于:";
 
-/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "156"; */
-"156.title" = "下载文件至:";
+/* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "下载文件至:";
 
-/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "158"; */
-"158.title" = "当接收到新文章后:\n";
+/* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:\n"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "当接收到新文章后:\n";
 
-/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "159"; */
-"159.title" = "标记当前文章为已读于:\n";
+/* Class = "NSTextFieldCell"; title = "Mark current article read:\n"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "标记当前文章为已读于:\n";
 
-/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "160"; */
-"160.title" = "在菜单栏中显示";
+/* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "在菜单栏中显示";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "161"; */
 "161.title" = "Radio";
@@ -104,11 +104,11 @@
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "162"; */
 "162.title" = "Radio";
 
-/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "164"; */
-"164.title" = "Mark updated articles as new";
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Mark updated articles as new";
 
-/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "171"; */
-"171.title" = "Include anonymous system profile";
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Include anonymous system profile";
 
-/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "176"; */
-"176.title" = "Updates:";
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Updates:";
