@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
@@ -35,7 +34,7 @@
                 <textField verticalHuggingPriority="750" id="Zeb-iF-Qki">
                     <rect key="frame" x="18" y="461" width="278" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Check for new articles:" id="ewU-JH-fMC">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="检查新文章:" id="ewU-JH-fMC">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -47,22 +46,22 @@
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="uYS-Ag-cif" userLabel="Manually">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="XAi-oh-7Fq">
+                        <menu key="menu" title="其他显示方式" id="XAi-oh-7Fq">
                             <items>
-                                <menuItem title="Manually" id="H9Q-du-oax"/>
+                                <menuItem title="手动" id="H9Q-du-oax"/>
                                 <menuItem isSeparatorItem="YES" id="5lr-Lv-UnM">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Every 5 minutes" tag="300" id="oVW-ee-uJT"/>
-                                <menuItem title="Every 15 minutes" tag="900" id="1Ll-uG-QWh"/>
-                                <menuItem title="Every 30 minutes" tag="1800" id="5VQ-jP-2rL"/>
+                                <menuItem title="每5分钟" tag="300" id="oVW-ee-uJT"/>
+                                <menuItem title="每15分钟" tag="900" id="1Ll-uG-QWh"/>
+                                <menuItem title="每三十分钟" tag="1800" id="5VQ-jP-2rL"/>
                                 <menuItem isSeparatorItem="YES" id="udF-L6-rzR">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Every hour" tag="3600" id="sSj-zI-6RY"/>
-                                <menuItem title="Every 2 hours" tag="7200" id="6wU-yO-cnV"/>
-                                <menuItem title="Every 3 hours" tag="10800" id="gnX-dW-XUD"/>
-                                <menuItem title="Every 6 hours" tag="21600" id="IMa-1h-lIO"/>
+                                <menuItem title="每小时" tag="3600" id="sSj-zI-6RY"/>
+                                <menuItem title="每两小时" tag="7200" id="6wU-yO-cnV"/>
+                                <menuItem title="每三小时" tag="10800" id="gnX-dW-XUD"/>
+                                <menuItem title="每六小时" tag="21600" id="IMa-1h-lIO"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -73,7 +72,7 @@
                 <button id="L14-7c-vWr">
                     <rect key="frame" x="31" y="198" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Check for newer versions of Vienna on start up" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="GnT-xT-rAZ">
+                    <buttonCell key="cell" type="check" title="程序启动后核查 Vienna 是否有新版本" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="GnT-xT-rAZ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -95,7 +94,7 @@
                 <textField verticalHuggingPriority="750" id="jvo-2D-Yfm">
                     <rect key="frame" x="18" y="402" width="278" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Default RSS Reader:" id="kGA-Sa-RLG">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="默认 RSS 阅读工具:" id="kGA-Sa-RLG">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -107,7 +106,7 @@
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="eOP-c9-a3m" userLabel="Nothing">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="HFO-4f-zYZ">
+                        <menu key="menu" title="其他显示方式" id="HFO-4f-zYZ">
                             <items>
                                 <menuItem title="Nothing" id="GAY-ra-eQY"/>
                             </items>
@@ -120,7 +119,7 @@
                 <button id="RGz-v2-Eij">
                     <rect key="frame" x="19" y="337" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Check for new articles on start up" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pXX-MI-tJX">
+                    <buttonCell key="cell" type="check" title="程序启动后核查新文章" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pXX-MI-tJX">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -131,7 +130,7 @@
                 <button id="IRs-ch-SmE">
                     <rect key="frame" x="19" y="314" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Open new links in the background" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pjg-Ze-H3l">
+                    <buttonCell key="cell" type="check" title="在当前窗口后面打开连接" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pjg-Ze-H3l">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -142,7 +141,7 @@
                 <button id="nIa-fG-2el">
                     <rect key="frame" x="19" y="291" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Open links in external browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YoM-Gv-hXn">
+                    <buttonCell key="cell" type="check" title="在外部浏览器中打开连接" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YoM-Gv-hXn">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -153,7 +152,7 @@
                 <textField verticalHuggingPriority="750" id="uT7-Bq-SAH">
                     <rect key="frame" x="18" y="431" width="278" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Move articles to Trash:" id="k6Y-ib-PGb">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="移动文章到废纸篓于:" id="k6Y-ib-PGb">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -162,12 +161,12 @@
                 <popUpButton verticalHuggingPriority="750" id="1LP-jv-eDe" userLabel="(Do not localise)">
                     <rect key="frame" x="304" y="425" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="NX4-hw-8Jr" userLabel="(Do not localise)">
+                    <popUpButtonCell key="cell" type="push" title="(Do not localise)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="fYn-Rz-G69" id="NX4-hw-8Jr" userLabel="(Do not localise)">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="DFg-c6-rCy">
+                        <menu key="menu" title="其他显示方式" id="DFg-c6-rCy">
                             <items>
-                                <menuItem title="(Do not localise)" id="fYn-Rz-G69"/>
+                                <menuItem title="(Do not localise)" state="on" id="fYn-Rz-G69"/>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -178,7 +177,7 @@
                 <textField verticalHuggingPriority="750" id="JQX-Cj-imk">
                     <rect key="frame" x="18" y="373" width="278" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Save downloaded files to:" id="geD-Ws-mQm">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="下载文件至:" id="geD-Ws-mQm">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -187,16 +186,16 @@
                 <popUpButton verticalHuggingPriority="750" id="5fV-8g-Bux" userLabel="(Path)">
                     <rect key="frame" x="304" y="366" width="193" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title="Other..." bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="FiK-E7-RnG" id="Sdl-yU-zPs" userLabel="(Path)">
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Sdl-yU-zPs" userLabel="(Path)">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="Klv-JA-PvP">
+                        <menu key="menu" title="其他显示方式" id="Klv-JA-PvP">
                             <items>
-                                <menuItem title="(Path)" id="5Cq-8f-vbL"/>
+                                <menuItem title="(路径)" id="5Cq-8f-vbL"/>
                                 <menuItem isSeparatorItem="YES" id="nxI-oL-X6j">
                                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </menuItem>
-                                <menuItem title="Other..." state="on" id="FiK-E7-RnG">
+                                <menuItem title="其他..." id="FiK-E7-RnG">
                                     <connections>
                                         <action selector="changeDownloadFolder:" target="-2" id="ex0-2r-Dq5"/>
                                     </connections>
@@ -217,21 +216,21 @@
                     </buttonCell>
                     <cells>
                         <column>
-                            <buttonCell type="radio" title="Do nothing" imagePosition="left" alignment="left" state="on" inset="2" id="ayi-vd-Hro">
+                            <buttonCell type="radio" title="什么都不做" imagePosition="left" alignment="left" state="on" inset="2" id="ayi-vd-Hro">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
                                     <action selector="changeNewArticlesNotification:" target="-2" id="Z97-Ta-jjG"/>
                                 </connections>
                             </buttonCell>
-                            <buttonCell type="radio" title="Show the unread count on the application icon" imagePosition="left" alignment="left" tag="1" inset="2" id="vPK-r4-Kwp">
+                            <buttonCell type="radio" title="在程序图标中显示未读文章数目" imagePosition="left" alignment="left" tag="1" inset="2" id="vPK-r4-Kwp">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
                                     <action selector="changeNewArticlesNotification:" target="-2" id="Nv0-1e-gdz"/>
                                 </connections>
                             </buttonCell>
-                            <buttonCell type="radio" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4kj-ax-3ec">
+                            <buttonCell type="radio" title="弹跳程序图标 (仅限于 OS X 10.4)" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4kj-ax-3ec">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -246,7 +245,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="sCl-hz-PFF">
                         <font key="font" metaFont="system"/>
-                        <string key="title">Mark current article read:
+                        <string key="title">标记当前文章为已读于:
 </string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -264,14 +263,14 @@
                     </buttonCell>
                     <cells>
                         <column>
-                            <buttonCell type="radio" title="After &quot;Next Unread&quot; command" imagePosition="left" alignment="left" state="on" inset="2" id="2oy-1i-QQP">
+                            <buttonCell type="radio" title="执行 &quot;下一篇未读文章&quot; 命令后" imagePosition="left" alignment="left" state="on" inset="2" id="2oy-1i-QQP">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
                                     <action selector="changeMarkReadBehaviour:" target="-2" id="eXd-lf-uWH"/>
                                 </connections>
                             </buttonCell>
-                            <buttonCell type="radio" title="After a short delay" imagePosition="left" alignment="left" tag="1" inset="2" id="JDV-ek-xja">
+                            <buttonCell type="radio" title="略微延迟一下后" imagePosition="left" alignment="left" tag="1" inset="2" id="JDV-ek-xja">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <connections>
@@ -284,7 +283,7 @@
                 <button id="SJi-cJ-mf8">
                     <rect key="frame" x="19" y="245" width="476" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Show in menu bar" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="JN6-lj-bQ1">
+                    <buttonCell key="cell" type="check" title="在菜单栏中显示" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="JN6-lj-bQ1">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -317,7 +316,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="BbI-0A-zEG">
                         <font key="font" metaFont="system"/>
-                        <string key="title">When new unread articles are retrieved:
+                        <string key="title">当接收到新文章后:
 </string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
