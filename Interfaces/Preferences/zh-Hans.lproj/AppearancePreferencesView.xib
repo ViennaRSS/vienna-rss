@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AppearancePreferencesViewController">
@@ -28,7 +27,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="auD-UC-Pij">
                         <font key="font" metaFont="system"/>
-                        <string key="title">Article list font:
+                        <string key="title">文章列表字体:
 </string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -37,7 +36,7 @@
                 <textField verticalHuggingPriority="750" id="2ko-ff-Gpu">
                     <rect key="frame" x="17" y="115" width="154" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Folder list font:" id="B5v-p5-vrf">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="文件夹列表字体:" id="B5v-p5-vrf">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -46,7 +45,7 @@
                 <button id="94k-AE-ngj">
                     <rect key="frame" x="30" y="52" width="233" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Never use font sizes smaller than" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="zfJ-Ge-Cxe">
+                    <buttonCell key="cell" type="check" title="字体永远大于" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="zfJ-Ge-Cxe">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
@@ -69,7 +68,7 @@
                 <textField verticalHuggingPriority="750" id="omz-Xk-hdX">
                     <rect key="frame" x="176" y="142" width="204" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(Sample)" drawsBackground="YES" id="azr-ft-M4J">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(示范)" drawsBackground="YES" id="azr-ft-M4J">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -78,7 +77,7 @@
                 <textField verticalHuggingPriority="750" id="7Ry-8o-LiV">
                     <rect key="frame" x="176" y="112" width="204" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(Sample)" drawsBackground="YES" id="g63-xD-ICn">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(示范)" drawsBackground="YES" id="g63-xD-ICn">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -87,7 +86,7 @@
                 <button verticalHuggingPriority="750" id="o7p-1v-UGN">
                     <rect key="frame" x="382" y="134" width="105" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="gGT-YP-aum">
+                    <buttonCell key="cell" type="push" title="选择..." bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="gGT-YP-aum">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -98,7 +97,7 @@
                 <button verticalHuggingPriority="750" id="V2j-NG-qbV">
                     <rect key="frame" x="382" y="105" width="105" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Select..." bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="BDw-v3-mpF">
+                    <buttonCell key="cell" type="push" title="选择..." bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="BDw-v3-mpF">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -109,7 +108,7 @@
                 <textField verticalHuggingPriority="750" id="FYe-O0-wsA">
                     <rect key="frame" x="17" y="76" width="467" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When viewing articles or web pages:" id="71S-pg-AjX">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="浏览文章或网页时:" id="71S-pg-AjX">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -118,7 +117,7 @@
                 <button id="zi1-dQ-UMg">
                     <rect key="frame" x="18" y="18" width="465" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Show feeds icons in folder list" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MEV-HA-bdL">
+                    <buttonCell key="cell" type="check" title="在文件夹列表中显示文件夹图片" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MEV-HA-bdL">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
