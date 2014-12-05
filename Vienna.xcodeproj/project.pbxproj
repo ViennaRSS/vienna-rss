@@ -60,9 +60,10 @@
 
 /* Begin PBXBuildFile section */
 		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
+		03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */; };
+		03493D2F1A303C1000AA3F36 /* AdvancedPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */; };
 		034981311A206D8400014F29 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0349812A1A206D8400014F29 /* MASPreferencesWindow.xib */; };
 		034981321A206D8400014F29 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */; };
-		0349813B1A206F8D00014F29 /* AdvancedPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */; };
 		0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */; };
 		034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 034981401A20701600014F29 /* AdvancedPreferencesViewController.m */; };
 		035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 035B703919E0E4AE00197334 /* Vienna_Tests.m */; };
@@ -71,7 +72,6 @@
 		03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E701A218D4B009C020C /* AppearancePreferencesView.xib */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
-		0379E23F1A2084B600D58BFE /* SyncingPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
@@ -964,6 +964,44 @@
 /* Begin PBXFileReference section */
 		031E082E19DFA3A900194F9F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionModel.h; path = src/SubscriptionModel.h; sourceTree = "<group>"; };
 		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
+		03493D1B1A303BF700AA3F36 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D1D1A303BFA00AA3F36 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D1E1A303BFA00AA3F36 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D1F1A303BFB00AA3F36 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D201A303BFC00AA3F36 /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D211A303BFC00AA3F36 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D221A303BFD00AA3F36 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D231A303BFD00AA3F36 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/SyncingPreferencesView.xib"; sourceTree = "<group>"; };
+		03493D241A303BFE00AA3F36 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D251A303BFF00AA3F36 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D261A303C0200AA3F36 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "pt-BR"; path = "pt-BR.lproj/SyncingPreferencesView.xib"; sourceTree = "<group>"; };
+		03493D271A303C0300AA3F36 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = ko.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D281A303C0300AA3F36 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/SyncingPreferencesView.xib"; sourceTree = "<group>"; };
+		03493D291A303C0400AA3F36 /* da */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = da; path = da.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D2A1A303C0500AA3F36 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D2B1A303C0500AA3F36 /* eu */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = eu; path = eu.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D2C1A303C0600AA3F36 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D2D1A303C0600AA3F36 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D2E1A303C0700AA3F36 /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/SyncingPreferencesView.xib; sourceTree = "<group>"; };
+		03493D301A303C1000AA3F36 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D321A303C1100AA3F36 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D331A303C1200AA3F36 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D341A303C1300AA3F36 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D351A303C1300AA3F36 /* sv */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = sv; path = sv.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D361A303C1400AA3F36 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = it.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D371A303C1400AA3F36 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D381A303C1500AA3F36 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/AdvancedPreferencesView.xib"; sourceTree = "<group>"; };
+		03493D391A303C1500AA3F36 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D3A1A303C1600AA3F36 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D3B1A303C1A00AA3F36 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "pt-BR"; path = "pt-BR.lproj/AdvancedPreferencesView.xib"; sourceTree = "<group>"; };
+		03493D3C1A303C1B00AA3F36 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ko; path = ko.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D3D1A303C1B00AA3F36 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/AdvancedPreferencesView.xib"; sourceTree = "<group>"; };
+		03493D3E1A303C1C00AA3F36 /* da */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = da; path = da.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D3F1A303C1E00AA3F36 /* uk */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = uk; path = uk.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D401A303C1E00AA3F36 /* pt */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = pt; path = pt.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D411A303C2000AA3F36 /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D421A303C2100AA3F36 /* eu */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = eu; path = eu.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
+		03493D431A303C2100AA3F36 /* tr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = tr; path = tr.lproj/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 		034981261A206D8400014F29 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		034981271A206D8400014F29 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		034981281A206D8400014F29 /* MASPreferences.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MASPreferences.podspec; sourceTree = "<group>"; };
@@ -972,7 +1010,6 @@
 		0349812B1A206D8400014F29 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
 		0349812C1A206D8400014F29 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
 		0349812D1A206D8400014F29 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AdvancedPreferencesView.xib; path = Interfaces/Preferences/AdvancedPreferencesView.xib; sourceTree = "<group>"; };
 		0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeneralPreferencesViewController.h; path = src/Preferences/GeneralPreferencesViewController.h; sourceTree = "<group>"; };
 		0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeneralPreferencesViewController.m; path = src/Preferences/GeneralPreferencesViewController.m; sourceTree = "<group>"; };
 		0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdvancedPreferencesViewController.h; path = src/Preferences/AdvancedPreferencesViewController.h; sourceTree = "<group>"; };
@@ -1023,7 +1060,6 @@
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppearancePreferencesViewController.m; path = src/Preferences/AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
-		0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SyncingPreferencesView.xib; path = Interfaces/Preferences/SyncingPreferencesView.xib; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -2045,8 +2081,8 @@
 			children = (
 				03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */,
 				03721E701A218D4B009C020C /* AppearancePreferencesView.xib */,
-				0379E23E1A2084B600D58BFE /* SyncingPreferencesView.xib */,
-				0349813A1A206F8D00014F29 /* AdvancedPreferencesView.xib */,
+				03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */,
+				03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -3792,7 +3828,7 @@
 				43E69616168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E69617168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E69618168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
-				0349813B1A206F8D00014F29 /* AdvancedPreferencesView.xib in Resources */,
+				03493D2F1A303C1000AA3F36 /* AdvancedPreferencesView.xib in Resources */,
 				43E69619168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E6961A168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
 				43E6961B168A05F300AB4C09 /* EmptyTrashWarning.nib in Resources */,
@@ -3827,7 +3863,7 @@
 				43EE83F4165EAA70000997FB /* errorpage.html in Resources */,
 				43E69637168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E69638168A05F300AB4C09 /* errorpage.html in Resources */,
-				0379E23F1A2084B600D58BFE /* SyncingPreferencesView.xib in Resources */,
+				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
 				43E69639168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963A168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963B168A05F300AB4C09 /* errorpage.html in Resources */,
@@ -4661,6 +4697,60 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03493D1B1A303BF700AA3F36 /* en */,
+				03493D1D1A303BFA00AA3F36 /* ja */,
+				03493D1E1A303BFA00AA3F36 /* fr */,
+				03493D1F1A303BFB00AA3F36 /* de */,
+				03493D201A303BFC00AA3F36 /* sv */,
+				03493D211A303BFC00AA3F36 /* it */,
+				03493D221A303BFD00AA3F36 /* ru */,
+				03493D231A303BFD00AA3F36 /* zh-Hant */,
+				03493D241A303BFE00AA3F36 /* nl */,
+				03493D251A303BFF00AA3F36 /* es */,
+				03493D261A303C0200AA3F36 /* pt-BR */,
+				03493D271A303C0300AA3F36 /* ko */,
+				03493D281A303C0300AA3F36 /* zh-Hans */,
+				03493D291A303C0400AA3F36 /* da */,
+				03493D2A1A303C0500AA3F36 /* cs */,
+				03493D2B1A303C0500AA3F36 /* eu */,
+				03493D2C1A303C0600AA3F36 /* uk */,
+				03493D2D1A303C0600AA3F36 /* pt */,
+				03493D2E1A303C0700AA3F36 /* tr */,
+			);
+			name = SyncingPreferencesView.xib;
+			path = Interfaces/Preferences;
+			sourceTree = "<group>";
+		};
+		03493D311A303C1000AA3F36 /* AdvancedPreferencesView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03493D301A303C1000AA3F36 /* en */,
+				03493D321A303C1100AA3F36 /* ja */,
+				03493D331A303C1200AA3F36 /* fr */,
+				03493D341A303C1300AA3F36 /* de */,
+				03493D351A303C1300AA3F36 /* sv */,
+				03493D361A303C1400AA3F36 /* it */,
+				03493D371A303C1400AA3F36 /* ru */,
+				03493D381A303C1500AA3F36 /* zh-Hant */,
+				03493D391A303C1500AA3F36 /* nl */,
+				03493D3A1A303C1600AA3F36 /* es */,
+				03493D3B1A303C1A00AA3F36 /* pt-BR */,
+				03493D3C1A303C1B00AA3F36 /* ko */,
+				03493D3D1A303C1B00AA3F36 /* zh-Hans */,
+				03493D3E1A303C1C00AA3F36 /* da */,
+				03493D3F1A303C1E00AA3F36 /* uk */,
+				03493D401A303C1E00AA3F36 /* pt */,
+				03493D411A303C2000AA3F36 /* cs */,
+				03493D421A303C2100AA3F36 /* eu */,
+				03493D431A303C2100AA3F36 /* tr */,
+			);
+			name = AdvancedPreferencesView.xib;
+			path = Interfaces/Preferences;
+			sourceTree = "<group>";
+		};
 		03721E5B1A218CFC009C020C /* GeneralPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
