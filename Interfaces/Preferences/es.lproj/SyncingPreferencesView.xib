@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SyncingPreferencesViewController">
@@ -25,7 +24,7 @@
                 <button id="5EN-Cn-aOH">
                     <rect key="frame" x="18" y="211" width="463" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
+                    <buttonCell key="cell" type="check" title="Sincronizar con servidor Open Reader" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="systemBold"/>
                         <connections>
@@ -36,10 +35,10 @@
                         <outlet property="nextKeyView" destination="zAy-oc-zmb" id="t7m-8r-wXY"/>
                     </connections>
                 </button>
-                <textField toolTip="Select a server supporting the Open Reader API" verticalHuggingPriority="750" id="kM0-7a-obO">
+                <textField toolTip="Seleccione un servidor compatible con la API Open Reader" verticalHuggingPriority="750" id="kM0-7a-obO">
                     <rect key="frame" x="17" y="163" width="119" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Server:" id="uTl-XE-0ym">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Servidor:" id="uTl-XE-0ym">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -48,12 +47,12 @@
                 <popUpButton verticalHuggingPriority="750" id="zAy-oc-zmb" userLabel="URL">
                     <rect key="frame" x="138" y="160" width="175" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="xdj-NS-PwU" userLabel="URL">
+                    <popUpButtonCell key="cell" type="push" title="URL" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" tag="100" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="RMd-14-2Bl" id="xdj-NS-PwU" userLabel="URL">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" title="ServicesView" id="LVH-iR-bmO">
                             <items>
-                                <menuItem title="URL" tag="100" id="RMd-14-2Bl"/>
+                                <menuItem title="URL" state="on" tag="100" id="RMd-14-2Bl"/>
                             </items>
                         </menu>
                         <connections>
@@ -69,7 +68,7 @@
                 <textField verticalHuggingPriority="750" id="l0e-TX-B3B">
                     <rect key="frame" x="-3" y="54" width="139" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Login:" id="O2q-8o-CSb">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Usuario:" id="O2q-8o-CSb">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -78,7 +77,7 @@
                 <textField verticalHuggingPriority="750" id="pcs-nc-XN1">
                     <rect key="frame" x="-3" y="22" width="139" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Password:" id="NKI-36-zCY">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Contraseña:" id="NKI-36-zCY">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -123,7 +122,7 @@
                         <outlet property="nextKeyView" destination="Ar5-Qc-YTe" id="qQP-Vo-tmY"/>
                     </connections>
                 </textField>
-                <textField toolTip="Address of a server supporting the Open Reader API" verticalHuggingPriority="750" id="vZE-Pl-S9H">
+                <textField toolTip="Dirección del servidor compatible con la API Open Reader" verticalHuggingPriority="750" id="vZE-Pl-S9H">
                     <rect key="frame" x="17" y="128" width="119" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="URL: https://" id="tec-2d-Xej">
@@ -144,7 +143,7 @@
                         <outlet property="nextKeyView" destination="XVM-1J-3vY" id="AK1-mh-HDE"/>
                     </connections>
                 </textField>
-                <button toolTip="Visit the website" verticalHuggingPriority="750" id="Ar5-Qc-YTe">
+                <button toolTip="Visitar página web" verticalHuggingPriority="750" id="Ar5-Qc-YTe">
                     <rect key="frame" x="437" y="125" width="48" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="🌍" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e0z-IA-uBQ">
