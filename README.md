@@ -1,5 +1,6 @@
-Vienna
-======
+![Vienna](http://vienna-rss.sourceforge.net/img/vienna_logo.png)
+
+[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss) [![Stories in Ready](https://badge.waffle.io/viennarss/vienna-rss.png?label=ready&title=Ready)](https://waffle.io/viennarss/vienna-rss)
 
 [Vienna](http://www.vienna-rss.org) is an RSS/Atom reader for Mac OS X.
 
@@ -9,7 +10,8 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Downloading binaries
 --------------------
 
-Admins upload release and test versions at [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).
+Admins upload release and test versions at [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
+Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases)
 
 Getting support
 ---------------

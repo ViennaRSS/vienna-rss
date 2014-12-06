@@ -19,7 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Message.h"
+#import "Article.h"
 
 // Folder types
 //   MA_Root_Folder = the abstract root folder

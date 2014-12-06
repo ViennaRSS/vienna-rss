@@ -23,7 +23,7 @@
 #import "StringExtensions.h"
 #import "AppController.h"
 #import "Preferences.h"
-#import "Message.h"
+#import "Article.h"
 #import "BrowserPane.h"
 #import "BitlyAPIHelper.h"
 #import "SearchMethod.h"

@@ -1,9 +1,9 @@
 //
-//  Message.h
+//  Article.h
 //  Vienna
 //
-//  Created by Steve on Thu Feb 19 2004.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Created by Joshua Pore on 16/11/2014.
+//  Copyright (c) 2014 uk.co.opencommunity. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Cocoa/Cocoa.h>
+
+#import <Foundation/Foundation.h>
 
 extern NSString * MA_Field_GUID;
 extern NSString * MA_Field_Subject;
@@ -65,16 +66,17 @@ extern NSString * MA_Field_HasEnclosure;
 #define MA_FieldID_HasEnclosure			417
 
 @class Folder;
+
 @interface Article : NSObject {
-	NSMutableDictionary * articleData;
-	NSMutableArray * commentsArray;
-	BOOL readFlag;
-	BOOL revisedFlag;
-	BOOL markedFlag;
-	BOOL deletedFlag;
-	BOOL enclosureDownloadedFlag;
-	BOOL hasEnclosureFlag;
-	int status;
+    NSMutableDictionary * articleData;
+    NSMutableArray * commentsArray;
+    BOOL readFlag;
+    BOOL revisedFlag;
+    BOOL markedFlag;
+    BOOL deletedFlag;
+    BOOL enclosureDownloadedFlag;
+    BOOL hasEnclosureFlag;
+    int status;
 }
 
 // Accessor functions
@@ -117,4 +119,5 @@ extern NSString * MA_Field_HasEnclosure;
 -(void)markDeleted:(BOOL)flag;
 -(void)markEnclosureDownloaded:(BOOL)flag;
 -(NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond;
+
 @end

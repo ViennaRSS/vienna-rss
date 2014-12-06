@@ -26,7 +26,7 @@
 #import "Folder.h"
 #import "Database.h"
 #import <Foundation/Foundation.h>
-#import "Message.h"
+#import "Article.h"
 #import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
