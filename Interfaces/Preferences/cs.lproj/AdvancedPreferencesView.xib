@@ -22,7 +22,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="GaX-8c-QaN">
                         <font key="font" metaFont="smallSystem"/>
-                        <string key="title">Tato nastavení není třeba při běžném používání programu Vienna měnit. Podrobnosti k jednotlivým volbám naleznete nápovědě.
+                        <string key="title">Tato nastavení není třeba při běžném používání programu Vienna měnit. Podrobnosti k jednotlivým volbám naleznete v nápovědě.
 </string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -53,7 +53,7 @@
                 <textField verticalHuggingPriority="750" id="wYk-Hr-rn0">
                     <rect key="frame" x="17" y="27" width="392" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="However, high numbers also render your computer less responsive while refreshing feeds." id="S3T-cW-hys">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Nicméně vyšší čísla zároveň způsobí horší odezvu počítače během aktualizování odebírání." id="S3T-cW-hys">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -62,7 +62,7 @@
                 <textField verticalHuggingPriority="750" id="x1e-Vb-sUJ">
                     <rect key="frame" x="17" y="121" width="151" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Concurrent downloads:" id="Ngw-hP-yW4">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Souběžná stahování:" id="Ngw-hP-yW4">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -93,7 +93,7 @@
                 <textField verticalHuggingPriority="750" id="Lbl-Gt-1fA">
                     <rect key="frame" x="17" y="68" width="392" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="The higher the number, the quicker your subscriptions will be downloaded." id="2GQ-cu-fbh" propertyAccessControl="none">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Čím vyšší číslo, tím rychleji se Vám budou načítat Vaše odebírání." id="2GQ-cu-fbh" propertyAccessControl="none">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

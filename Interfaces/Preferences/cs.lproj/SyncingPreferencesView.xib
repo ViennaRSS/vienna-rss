@@ -24,7 +24,7 @@
                 <button id="5EN-Cn-aOH">
                     <rect key="frame" x="18" y="211" width="463" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
+                    <buttonCell key="cell" type="check" title="Synchronizovat s Open Reader serverem" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="systemBold"/>
                         <connections>
@@ -35,7 +35,7 @@
                         <outlet property="nextKeyView" destination="zAy-oc-zmb" id="t7m-8r-wXY"/>
                     </connections>
                 </button>
-                <textField toolTip="Select a server supporting the Open Reader API" verticalHuggingPriority="750" id="kM0-7a-obO">
+                <textField toolTip="Vyberte server podporující Open Reader API" verticalHuggingPriority="750" id="kM0-7a-obO">
                     <rect key="frame" x="17" y="163" width="119" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Server:" id="uTl-XE-0ym">
@@ -59,7 +59,7 @@
                             <action selector="changeSource:" target="-2" id="8au-Ls-4nR"/>
                         </connections>
                     </popUpButtonCell>
-                    <accessibility description="Select a server supporting the Open Reader API"/>
+                    <accessibility description="Vyberte server podporující Open Reader API"/>
                     <connections>
                         <accessibilityConnection property="title" destination="kM0-7a-obO" id="BSh-iY-0Hm"/>
                         <outlet property="nextKeyView" destination="l0a-XC-3An" id="QxL-dc-u8j"/>
@@ -122,7 +122,7 @@
                         <outlet property="nextKeyView" destination="Ar5-Qc-YTe" id="qQP-Vo-tmY"/>
                     </connections>
                 </textField>
-                <textField toolTip="Address of a server supporting the Open Reader API" verticalHuggingPriority="750" id="vZE-Pl-S9H">
+                <textField toolTip="Adresa serveru podporujícího Open Reader API" verticalHuggingPriority="750" id="vZE-Pl-S9H">
                     <rect key="frame" x="17" y="128" width="119" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="URL: https://" id="tec-2d-Xej">
@@ -134,7 +134,7 @@
                 <textField verticalHuggingPriority="750" id="5uV-sN-sk6">
                     <rect key="frame" x="17" y="79" width="422" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Hint (Do Not Localise)" placeholderString="Placeholder for server specific explanations" id="3WF-BJ-rBh">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Hint (Do Not Localise)" placeholderString="Zástupce pro vysvětlení specifická pro daný server" id="3WF-BJ-rBh">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -143,7 +143,7 @@
                         <outlet property="nextKeyView" destination="XVM-1J-3vY" id="AK1-mh-HDE"/>
                     </connections>
                 </textField>
-                <button toolTip="Visit the website" verticalHuggingPriority="750" id="Ar5-Qc-YTe">
+                <button toolTip="Navštívit webovou stránku" verticalHuggingPriority="750" id="Ar5-Qc-YTe">
                     <rect key="frame" x="437" y="125" width="48" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="🌍" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e0z-IA-uBQ">
@@ -153,7 +153,7 @@
                             <action selector="visitWebsite:" target="-2" id="bS3-sa-Mdl"/>
                         </connections>
                     </buttonCell>
-                    <accessibility description="Visit the website"/>
+                    <accessibility description="Navštívit webovou stránku"/>
                     <connections>
                         <outlet property="nextKeyView" destination="5uV-sN-sk6" id="gvu-az-MpG"/>
                     </connections>
