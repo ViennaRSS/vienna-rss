@@ -606,7 +606,6 @@
 		AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D80604927300FE7994 /* BackTrackArray.m */; };
 		AA2A1DFD089F2B940038770C /* trashFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA2A1DFC089F2B940038770C /* trashFolder.tiff */; };
 		AA3111B90901A2DC00E80DF1 /* Preferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA3111B80901A2DC00E80DF1 /* Preferences.plist */; };
-		AA3113EB09020E0F00E80DF1 /* GeneralPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */; };
 		AA31192D08FE5E8E0069ECD2 /* highlightedCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */; };
 		AA32E2A40940A9970034D9CC /* folderError.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AA32E2A30940A9970034D9CC /* folderError.tiff */; };
 		AA36CD7C06100692001E33A4 /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
@@ -1016,7 +1015,6 @@
 		43502504165DCC410018EDB7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		43502506165DCC410018EDB7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ArticleRef.m; path = src/ArticleRef.m; sourceTree = SOURCE_ROOT; };
-		4350283C165DE3600018EDB7 /* GeneralPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GeneralPreferences.h; path = src/GeneralPreferences.h; sourceTree = SOURCE_ROOT; };
 		4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSNotificationAdditions.m; path = src/NSNotificationAdditions.m; sourceTree = SOURCE_ROOT; };
 		43502845165DE9560018EDB7 /* RenameFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenameFolder.h; path = src/RenameFolder.h; sourceTree = SOURCE_ROOT; };
 		43502846165DE9560018EDB7 /* RenameFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RenameFolder.m; path = src/RenameFolder.m; sourceTree = SOURCE_ROOT; };
@@ -1483,8 +1481,6 @@
 		57F7E2EF16F534FE00D4702E /* vienna3plugin.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3plugin.icns; path = Resources/vienna3plugin.icns; sourceTree = "<group>"; };
 		57F7E2F016F534FE00D4702E /* vienna3style.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = vienna3style.icns; path = Resources/vienna3style.icns; sourceTree = "<group>"; };
 		61A2CB600A8AC68C006348E8 /* revised.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = revised.tiff; path = Resources/revised.tiff; sourceTree = SOURCE_ROOT; };
-		6624683513C5D09200C85417 /* SyncPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SyncPreferences.h; path = src/SyncPreferences.h; sourceTree = SOURCE_ROOT; };
-		6624683613C5D09300C85417 /* SyncPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SyncPreferences.m; path = src/SyncPreferences.m; sourceTree = SOURCE_ROOT; };
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		662468AF13C60A2800C85417 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = 3rdparty/JSONKit/JSONKit.h; sourceTree = SOURCE_ROOT; };
 		662468B013C60A2800C85417 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = 3rdparty/JSONKit/JSONKit.m; sourceTree = SOURCE_ROOT; };
@@ -1553,11 +1549,6 @@
 		AA26F4D80604927300FE7994 /* BackTrackArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BackTrackArray.m; path = src/BackTrackArray.m; sourceTree = SOURCE_ROOT; };
 		AA2A1DFC089F2B940038770C /* trashFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = trashFolder.tiff; path = Resources/trashFolder.tiff; sourceTree = SOURCE_ROOT; };
 		AA3111B80901A2DC00E80DF1 /* Preferences.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; name = Preferences.plist; path = Resources/Preferences.plist; sourceTree = SOURCE_ROOT; };
-		AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NewPreferencesController.h; path = src/NewPreferencesController.h; sourceTree = SOURCE_ROOT; };
-		AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NewPreferencesController.m; path = src/NewPreferencesController.m; sourceTree = SOURCE_ROOT; };
-		AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GeneralPreferences.m; path = src/GeneralPreferences.m; sourceTree = SOURCE_ROOT; };
-		AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AppearancesPreferences.h; path = src/AppearancesPreferences.h; sourceTree = SOURCE_ROOT; };
-		AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AppearancesPreferences.m; path = src/AppearancesPreferences.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = highlightedCloseButton.tiff; path = Resources/highlightedCloseButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RichXMLParser.h; path = src/RichXMLParser.h; sourceTree = SOURCE_ROOT; };
 		AA3281A4084161EB00A7AD5A /* RichXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RichXMLParser.m; path = src/RichXMLParser.m; sourceTree = SOURCE_ROOT; };
@@ -1594,8 +1585,6 @@
 		AA6321500885F0BB006382D3 /* comments.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = comments.tiff; path = Resources/comments.tiff; sourceTree = SOURCE_ROOT; };
 		AA67F32E089727FB008BBC37 /* Styles */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Styles; path = SharedSupport/Styles; sourceTree = SOURCE_ROOT; };
 		AA67F3980897377C008BBC37 /* stopRefresh.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = stopRefresh.tiff; path = Resources/stopRefresh.tiff; sourceTree = SOURCE_ROOT; };
-		AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AdvancedPreferences.h; path = src/AdvancedPreferences.h; sourceTree = SOURCE_ROOT; };
-		AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AdvancedPreferences.m; path = src/AdvancedPreferences.m; sourceTree = SOURCE_ROOT; };
 		AA681C890B199E1900CFD5B7 /* advancedPrefImage.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = advancedPrefImage.tiff; path = Resources/advancedPrefImage.tiff; sourceTree = SOURCE_ROOT; };
 		AA71096B09BA74AA00E3EA8A /* leftArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = leftArrow.tiff; path = Resources/leftArrow.tiff; sourceTree = SOURCE_ROOT; };
 		AA71096F09BA74BF00E3EA8A /* rightArrow.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = rightArrow.tiff; path = Resources/rightArrow.tiff; sourceTree = SOURCE_ROOT; };
@@ -1820,21 +1809,6 @@
 				0349812D1A206D8400014F29 /* README.md */,
 			);
 			path = MASPreferences;
-			sourceTree = "<group>";
-		};
-		034981341A206DBC00014F29 /* Preferences NG */ = {
-			isa = PBXGroup;
-			children = (
-				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
-				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
-				0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */,
-				0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */,
-				0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */,
-				0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */,
-				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
-				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
-			);
-			name = "Preferences NG";
 			sourceTree = "<group>";
 		};
 		034981351A206E3C00014F29 /* Preferences */ = {
@@ -2880,19 +2854,16 @@
 		AA3113EC09020E1B00E80DF1 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				034981341A206DBC00014F29 /* Preferences NG */,
-				4350283C165DE3600018EDB7 /* GeneralPreferences.h */,
-				AA3113E909020E0F00E80DF1 /* GeneralPreferences.m */,
-				AA681B1F0B18E46800CFD5B7 /* AdvancedPreferences.h */,
-				AA681B200B18E46800CFD5B7 /* AdvancedPreferences.m */,
-				AA31147C090214AD00E80DF1 /* AppearancesPreferences.h */,
-				AA31147D090214AD00E80DF1 /* AppearancesPreferences.m */,
-				AA3111BA0901A2F100E80DF1 /* NewPreferencesController.h */,
-				AA3111BB0901A2F100E80DF1 /* NewPreferencesController.m */,
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
-				6624683513C5D09200C85417 /* SyncPreferences.h */,
-				6624683613C5D09300C85417 /* SyncPreferences.m */,
+				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
+				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
+				0379E2361A2082E600D58BFE /* AppearancePreferencesViewController.h */,
+				0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */,
+				0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */,
+				0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */,
+				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
+				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
 			);
 			name = Preferences;
 			sourceTree = SOURCE_ROOT;
@@ -4061,7 +4032,6 @@
 				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
 				AAEB1A5308E74EE300917920 /* ArrayExtensions.m in Sources */,
 				AABCFB1B0900BA4E00984F78 /* SquareWindow.m in Sources */,
-				AA3113EB09020E0F00E80DF1 /* GeneralPreferences.m in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
 				AA1A23DB0C07475B005968DC /* SplitViewExtensions.m in Sources */,
