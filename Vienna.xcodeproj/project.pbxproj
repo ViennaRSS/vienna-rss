@@ -88,6 +88,7 @@
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
 		3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC591783FFC600D75515 /* KnownSyncServers.plist */; };
+		3A2EB8801A351C1100439A38 /* Modules.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3A2EB87F1A351C1100439A38 /* Modules.sh */; };
 		3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9517319979006DD2AB /* PXListDocumentView.m */; };
 		3A4DBEA117319979006DD2AB /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9717319979006DD2AB /* PXListView.m */; };
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
@@ -954,6 +955,7 @@
 		3A20DC571783FF8D00D75515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A20DC5A1783FFC600D75515 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
+		3A2EB87F1A351C1100439A38 /* Modules.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = Modules.sh; path = configs/scripts/Modules.sh; sourceTree = "<group>"; };
 		3A4DBE9417319979006DD2AB /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = 3rdparty/PXListView/PXListDocumentView.h; sourceTree = "<group>"; };
 		3A4DBE9517319979006DD2AB /* PXListDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListDocumentView.m; path = 3rdparty/PXListView/PXListDocumentView.m; sourceTree = "<group>"; };
 		3A4DBE9617319979006DD2AB /* PXListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListView.h; path = 3rdparty/PXListView/PXListView.h; sourceTree = "<group>"; };
@@ -2096,12 +2098,13 @@
 		439824171666B31700FFE219 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
 				439824181666B37000FFE219 /* Acknowledgements.sh */,
 				439824191666B37000FFE219 /* autorevision.sh */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
 				4398241B1666B37000FFE219 /* Make-ID-Template.sh */,
+				3A2EB87F1A351C1100439A38 /* Modules.sh */,
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
+				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
 				4398241D1666B37000FFE219 /* Translations.sh */,
 			);
 			name = Scripts;
@@ -3415,6 +3418,7 @@
 				43E69638168A05F300AB4C09 /* errorpage.html in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
 				43E69639168A05F300AB4C09 /* errorpage.html in Resources */,
+				3A2EB8801A351C1100439A38 /* Modules.sh in Resources */,
 				43E6963A168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963B168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963C168A05F300AB4C09 /* errorpage.html in Resources */,
