@@ -12,7 +12,7 @@
                 <outlet property="openReaderSource" destination="zAy-oc-zmb" id="4Yl-G7-Xv9"/>
                 <outlet property="password" destination="y60-8l-5RI" id="ncM-1D-HKY"/>
                 <outlet property="syncButton" destination="5EN-Cn-aOH" id="uE9-FQ-nfW"/>
-                <outlet property="username" destination="l0e-TX-B3B" id="keD-my-qXu"/>
+                <outlet property="username" destination="XVM-1J-3vY" id="bdc-db-Dtk"/>
                 <outlet property="view" destination="Z8l-az-tZs" id="Mvn-6y-rlX"/>
             </connections>
         </customObject>
