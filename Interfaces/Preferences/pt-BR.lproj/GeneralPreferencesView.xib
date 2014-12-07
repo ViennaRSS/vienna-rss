@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
+            <connections>
+                <outlet property="checkForUpdates" destination="L14-7c-vWr" id="Rnu-af-rSy"/>
+                <outlet property="checkFrequency" destination="OUV-X4-SZX" id="giT-Ny-Hl9"/>
+                <outlet property="checkOnStartUp" destination="RGz-v2-Eij" id="R9Q-Ig-f1U"/>
+                <outlet property="downloadFolder" destination="5fV-8g-Bux" id="4gx-eX-u8r"/>
+                <outlet property="expireDuration" destination="1LP-jv-eDe" id="Xr7-cb-QdV"/>
+                <outlet property="linksHandler" destination="XQb-OU-HqZ" id="oNd-rZ-J97"/>
+                <outlet property="markReadAfterDelay" destination="JDV-ek-xja" id="gj7-ou-SaS"/>
+                <outlet property="markReadAfterNext" destination="2oy-1i-QQP" id="VAp-Mc-iCX"/>
+                <outlet property="markUpdatedAsNew" destination="cWz-UE-9Jd" id="og1-bg-3Er"/>
+                <outlet property="newArticlesNotificationBadgeButton" destination="vPK-r4-Kwp" id="Gxh-iX-E1H"/>
+                <outlet property="newArticlesNotificationBounceButton" destination="4kj-ax-3ec" id="Kd4-X5-L0N"/>
+                <outlet property="newArticlesNotificationNothingButton" destination="ayi-vd-Hro" id="Ng1-UX-hlU"/>
+                <outlet property="openLinksInBackground" destination="IRs-ch-SmE" id="y6W-LQ-RS2"/>
+                <outlet property="openLinksInExternalBrowser" destination="nIa-fG-2el" id="rRD-ze-ERB"/>
+                <outlet property="sendSystemSpecs" destination="Yp8-ZH-Tpp" id="iPd-5G-2aH"/>
+                <outlet property="showAppInMenuBar" destination="SJi-cJ-mf8" id="TeD-T3-HKP"/>
+                <outlet property="view" destination="VGA-Uv-Tpy" id="CFz-VA-Sii"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="VGA-Uv-Tpy">
+            <rect key="frame" x="0.0" y="0.0" width="525" height="499"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" id="Zeb-iF-Qki">
+                    <rect key="frame" x="18" y="461" width="278" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Verificar novos artigos:" id="ewU-JH-fMC">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" id="OUV-X4-SZX" userLabel="Manually">
+                    <rect key="frame" x="304" y="455" width="193" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="uYS-Ag-cif" userLabel="Manually">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="XAi-oh-7Fq">
+                            <items>
+                                <menuItem title="Manualmente" id="H9Q-du-oax"/>
+                                <menuItem isSeparatorItem="YES" id="5lr-Lv-UnM">
+                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                </menuItem>
+                                <menuItem title="A cada 5 minutos" tag="300" id="oVW-ee-uJT"/>
+                                <menuItem title="A cada 15 minutos" tag="900" id="1Ll-uG-QWh"/>
+                                <menuItem title="A cada 30 minutos" tag="1800" id="5VQ-jP-2rL"/>
+                                <menuItem isSeparatorItem="YES" id="udF-L6-rzR">
+                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                </menuItem>
+                                <menuItem title="A cada hora" tag="3600" id="sSj-zI-6RY"/>
+                                <menuItem title="A cada 2 horas" tag="7200" id="6wU-yO-cnV"/>
+                                <menuItem title="A cada 3 horas" tag="10800" id="gnX-dW-XUD"/>
+                                <menuItem title="A cada 6 horas" tag="21600" id="IMa-1h-lIO"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="changeCheckFrequency:" target="-2" id="kUx-SR-DSa"/>
+                    </connections>
+                </popUpButton>
+                <button id="L14-7c-vWr">
+                    <rect key="frame" x="31" y="198" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Verificar novas versões do Vienna ao iniciar" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="GnT-xT-rAZ">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeCheckForUpdates:" target="-2" id="wEp-U3-1po"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <button id="Yp8-ZH-Tpp">
+                    <rect key="frame" x="31" y="176" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Include anonymous system profile" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="qno-Cg-EkC">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeSendSystemSpecs:" target="-2" id="fCO-2g-ccC"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <textField verticalHuggingPriority="750" id="jvo-2D-Yfm">
+                    <rect key="frame" x="18" y="402" width="278" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Leitor RSS padrão:" id="kGA-Sa-RLG">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" id="XQb-OU-HqZ" userLabel="Nothing">
+                    <rect key="frame" x="304" y="396" width="193" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="eOP-c9-a3m" userLabel="Nothing">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="HFO-4f-zYZ">
+                            <items>
+                                <menuItem title="Nada" id="GAY-ra-eQY"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="selectDefaultLinksHandler:" target="-2" id="bAF-YJ-apy"/>
+                    </connections>
+                </popUpButton>
+                <button id="RGz-v2-Eij">
+                    <rect key="frame" x="19" y="337" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Verificar novos artigos ao iniciar" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pXX-MI-tJX">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="changeCheckOnStartUp:" target="-2" id="gxB-32-TJB"/>
+                    </connections>
+                </button>
+                <button id="IRs-ch-SmE">
+                    <rect key="frame" x="19" y="314" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Abrir novos links no fundo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pjg-Ze-H3l">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeOpenLinksInBackground:" target="-2" id="lPn-xj-GmZ"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <button id="nIa-fG-2el">
+                    <rect key="frame" x="19" y="291" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Abrir links em um navegador externo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="YoM-Gv-hXn">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeOpenLinksInExternalBrowser:" target="-2" id="vkl-fJ-F8m"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <textField verticalHuggingPriority="750" id="uT7-Bq-SAH">
+                    <rect key="frame" x="18" y="431" width="278" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Mover artigos para o Lixo:" id="k6Y-ib-PGb">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" id="1LP-jv-eDe" userLabel="(Do not localise)">
+                    <rect key="frame" x="304" y="425" width="193" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="(Do not localise)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="fYn-Rz-G69" id="NX4-hw-8Jr" userLabel="(Do not localise)">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="DFg-c6-rCy">
+                            <items>
+                                <menuItem title="(Do not localise)" state="on" id="fYn-Rz-G69"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="changeExpireDuration:" target="-2" id="EhR-rh-ZLo"/>
+                    </connections>
+                </popUpButton>
+                <textField verticalHuggingPriority="750" id="JQX-Cj-imk">
+                    <rect key="frame" x="18" y="373" width="278" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Salvar arquivos descarregados em:" id="geD-Ws-mQm">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" id="5fV-8g-Bux" userLabel="(Path)">
+                    <rect key="frame" x="304" y="366" width="193" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Sdl-yU-zPs" userLabel="(Path)">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="Klv-JA-PvP">
+                            <items>
+                                <menuItem title="(Caminho)" id="5Cq-8f-vbL"/>
+                                <menuItem isSeparatorItem="YES" id="nxI-oL-X6j">
+                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                                </menuItem>
+                                <menuItem title="Outro..." id="FiK-E7-RnG">
+                                    <connections>
+                                        <action selector="changeDownloadFolder:" target="-2" id="ex0-2r-Dq5"/>
+                                    </connections>
+                                </menuItem>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
+                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="obL-Jh-Dna">
+                    <rect key="frame" x="32" y="87" width="462" height="58"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <size key="cellSize" width="462" height="18"/>
+                    <size key="intercellSpacing" width="4" height="2"/>
+                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="QD9-FF-HxG">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <cells>
+                        <column>
+                            <buttonCell type="radio" title="Não fazer nada" imagePosition="left" alignment="left" state="on" inset="2" id="ayi-vd-Hro">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="changeNewArticlesNotification:" target="-2" id="Z97-Ta-jjG"/>
+                                </connections>
+                            </buttonCell>
+                            <buttonCell type="radio" title="Mostrar número de não lidos no ícone do programa" imagePosition="left" alignment="left" tag="1" inset="2" id="vPK-r4-Kwp">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="changeNewArticlesNotification:" target="-2" id="Nv0-1e-gdz"/>
+                                </connections>
+                            </buttonCell>
+                            <buttonCell type="radio" title="Animar o ícone do programa" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4kj-ax-3ec">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="changeNewArticlesNotification:" target="-2" id="Apw-79-2be"/>
+                                </connections>
+                            </buttonCell>
+                        </column>
+                    </cells>
+                </matrix>
+                <textField verticalHuggingPriority="750" id="2OY-6J-jph">
+                    <rect key="frame" x="19" y="64" width="410" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="sCl-hz-PFF">
+                        <font key="font" metaFont="system"/>
+                        <string key="title">Marcar artigo atual como lido:
+</string>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="Vus-CA-Da4">
+                    <rect key="frame" x="32" y="20" width="462" height="38"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    <size key="cellSize" width="462" height="18"/>
+                    <size key="intercellSpacing" width="4" height="2"/>
+                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="NAE-EF-SsE">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <cells>
+                        <column>
+                            <buttonCell type="radio" title="Após o comando &quot;Próxima não lida&quot; " imagePosition="left" alignment="left" state="on" inset="2" id="2oy-1i-QQP">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="changeMarkReadBehaviour:" target="-2" id="eXd-lf-uWH"/>
+                                </connections>
+                            </buttonCell>
+                            <buttonCell type="radio" title="Após pequeno atraso" imagePosition="left" alignment="left" tag="1" inset="2" id="JDV-ek-xja">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <action selector="changeMarkReadBehaviour:" target="-2" id="5Ol-vt-DJ3"/>
+                                </connections>
+                            </buttonCell>
+                        </column>
+                    </cells>
+                </matrix>
+                <button id="SJi-cJ-mf8">
+                    <rect key="frame" x="19" y="245" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Mostrar na barra de menu" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="JN6-lj-bQ1">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeShowAppInMenuBar:" target="-2" id="Fz7-GF-p0i"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <button id="cWz-UE-9Jd">
+                    <rect key="frame" x="19" y="268" width="476" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" inset="2" id="meo-78-YOl">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeMarkUpdatedAsNew:" target="-2" id="6qM-FT-nA0"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="0SP-XH-wW9">
+                    <rect key="frame" x="19" y="222" width="410" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Updates:" id="qeb-at-hYb">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="L7n-i6-BJc">
+                    <rect key="frame" x="19" y="153" width="410" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="BbI-0A-zEG">
+                        <font key="font" metaFont="system"/>
+                        <string key="title">Quando novos artigos são recebidos:
+</string>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+        </view>
+    </objects>
+</document>

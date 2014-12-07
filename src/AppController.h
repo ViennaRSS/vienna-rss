@@ -101,7 +101,13 @@
 	NSMenuItem * scriptsMenuItem;
 	BOOL didCompleteInitialisation;
 	NSString * searchString;
+    
+    NSWindowController *_preferencesWindowController;
+    
 }
+
+@property (nonatomic, readonly) NSWindowController *preferencesWindowController;
+
 
 // Menu action items
 -(IBAction)handleAbout:(id)sender;
@@ -179,6 +185,7 @@
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
+
 
 // Public functions
 -(void)setStatusMessage:(NSString *)newStatusText persist:(BOOL)persistenceFlag;

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SyncingPreferencesViewController">
+            <connections>
+                <outlet property="credentialsInfoText" destination="5uV-sN-sk6" id="gP4-4r-Svd"/>
+                <outlet property="openReaderHost" destination="l0a-XC-3An" id="H7r-Sf-csG"/>
+                <outlet property="openReaderSource" destination="zAy-oc-zmb" id="4Yl-G7-Xv9"/>
+                <outlet property="password" destination="y60-8l-5RI" id="ncM-1D-HKY"/>
+                <outlet property="syncButton" destination="5EN-Cn-aOH" id="uE9-FQ-nfW"/>
+                <outlet property="username" destination="XVM-1J-3vY" id="bdc-db-Dtk"/>
+                <outlet property="view" destination="Z8l-az-tZs" id="Mvn-6y-rlX"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="Z8l-az-tZs">
+            <rect key="frame" x="0.0" y="0.0" width="507" height="247"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button id="5EN-Cn-aOH">
+                    <rect key="frame" x="18" y="211" width="463" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Sync with an Open Reader server" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Lkv-md-rEW">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="systemBold"/>
+                        <connections>
+                            <action selector="changeSyncOpenReader:" target="-2" id="Se1-hh-Rng"/>
+                        </connections>
+                    </buttonCell>
+                    <connections>
+                        <outlet property="nextKeyView" destination="zAy-oc-zmb" id="t7m-8r-wXY"/>
+                    </connections>
+                </button>
+                <textField toolTip="Select a server supporting the Open Reader API" verticalHuggingPriority="750" id="kM0-7a-obO">
+                    <rect key="frame" x="17" y="163" width="119" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Server:" id="uTl-XE-0ym">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" id="zAy-oc-zmb" userLabel="URL">
+                    <rect key="frame" x="138" y="160" width="175" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="URL" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" tag="100" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="RMd-14-2Bl" id="xdj-NS-PwU" userLabel="URL">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="ServicesView" id="LVH-iR-bmO">
+                            <items>
+                                <menuItem title="URL" state="on" tag="100" id="RMd-14-2Bl"/>
+                            </items>
+                        </menu>
+                        <connections>
+                            <action selector="changeSource:" target="-2" id="8au-Ls-4nR"/>
+                        </connections>
+                    </popUpButtonCell>
+                    <accessibility description="Select a server supporting the Open Reader API"/>
+                    <connections>
+                        <accessibilityConnection property="title" destination="kM0-7a-obO" id="BSh-iY-0Hm"/>
+                        <outlet property="nextKeyView" destination="l0a-XC-3An" id="QxL-dc-u8j"/>
+                    </connections>
+                </popUpButton>
+                <textField verticalHuggingPriority="750" id="l0e-TX-B3B">
+                    <rect key="frame" x="-3" y="54" width="139" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Login:" id="O2q-8o-CSb">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="pcs-nc-XN1">
+                    <rect key="frame" x="-3" y="22" width="139" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Password:" id="NKI-36-zCY">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="XVM-1J-3vY">
+                    <rect key="frame" x="140" y="51" width="296" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ixu-KQ-AHB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <accessibilityConnection property="title" destination="l0e-TX-B3B" id="918-LH-AAo"/>
+                        <outlet property="nextKeyView" destination="y60-8l-5RI" id="lYL-JW-F2S"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" id="y60-8l-5RI" customClass="NSSecureTextField">
+                    <rect key="frame" x="140" y="19" width="296" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="9At-zM-xFB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <accessibilityConnection property="title" destination="pcs-nc-XN1" id="jEH-s2-uQC"/>
+                        <outlet property="nextKeyView" destination="5EN-Cn-aOH" id="NAE-on-stl"/>
+                    </connections>
+                </textField>
+                <textField verticalHuggingPriority="750" id="l0a-XC-3An">
+                    <rect key="frame" x="140" y="131" width="296" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="1n4-eP-Qqp">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <accessibilityConnection property="title" destination="vZE-Pl-S9H" id="BIS-TT-uUK"/>
+                        <outlet property="nextKeyView" destination="Ar5-Qc-YTe" id="qQP-Vo-tmY"/>
+                    </connections>
+                </textField>
+                <textField toolTip="Address of a server supporting the Open Reader API" verticalHuggingPriority="750" id="vZE-Pl-S9H">
+                    <rect key="frame" x="17" y="128" width="119" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="URL: https://" id="tec-2d-Xej">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="5uV-sN-sk6">
+                    <rect key="frame" x="17" y="79" width="422" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Hint (Do Not Localise)" placeholderString="Placeholder for server specific explanations" id="3WF-BJ-rBh">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <outlet property="nextKeyView" destination="XVM-1J-3vY" id="AK1-mh-HDE"/>
+                    </connections>
+                </textField>
+                <button toolTip="Visit the website" verticalHuggingPriority="750" id="Ar5-Qc-YTe">
+                    <rect key="frame" x="437" y="125" width="48" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="🌍" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e0z-IA-uBQ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="visitWebsite:" target="-2" id="bS3-sa-Mdl"/>
+                        </connections>
+                    </buttonCell>
+                    <accessibility description="Visit the website"/>
+                    <connections>
+                        <outlet property="nextKeyView" destination="5uV-sN-sk6" id="gvu-az-MpG"/>
+                    </connections>
+                </button>
+            </subviews>
+        </view>
+    </objects>
+</document>

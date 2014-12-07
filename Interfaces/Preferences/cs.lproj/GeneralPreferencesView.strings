@@ -1,0 +1,111 @@
+
+/* Class = "NSMenuItem"; title = "Každých 15 minut"; ObjectID = "1Ll-uG-QWh"; */
+"1Ll-uG-QWh.title" = "Každých 15 minut";
+
+/* Class = "NSButtonCell"; title = "Po příkazu „Další nečtený“"; ObjectID = "2oy-1i-QQP"; */
+"2oy-1i-QQP.title" = "Po příkazu „Další nečtený“";
+
+/* Class = "NSButtonCell"; title = "Upozornit poskakováním ikony aplikace"; ObjectID = "4kj-ax-3ec"; */
+"4kj-ax-3ec.title" = "Upozornit poskakováním ikony aplikace";
+
+/* Class = "NSMenuItem"; title = "(cesta)"; ObjectID = "5Cq-8f-vbL"; */
+"5Cq-8f-vbL.title" = "(cesta)";
+
+/* Class = "NSMenuItem"; title = "Každých 30 minut"; ObjectID = "5VQ-jP-2rL"; */
+"5VQ-jP-2rL.title" = "Každých 30 minut";
+
+/* Class = "NSMenuItem"; title = "Každé dvě hodiny"; ObjectID = "6wU-yO-cnV"; */
+"6wU-yO-cnV.title" = "Každé dvě hodiny";
+
+/* Class = "NSTextFieldCell"; title = "Po přijmutí nových nepřečtených příspěvků:"; ObjectID = "BbI-0A-zEG"; */
+"BbI-0A-zEG.title" = "Po přijmutí nových nepřečtených příspěvků:";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "DFg-c6-rCy"; */
+"DFg-c6-rCy.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Jiná…"; ObjectID = "FiK-E7-RnG"; */
+"FiK-E7-RnG.title" = "Jiná…";
+
+/* Class = "NSMenuItem"; title = "Žádná"; ObjectID = "GAY-ra-eQY"; */
+"GAY-ra-eQY.title" = "Žádná";
+
+/* Class = "NSButtonCell"; title = "Ověřovat nové aktualizace programu Vienna při spouštění"; ObjectID = "GnT-xT-rAZ"; */
+"GnT-xT-rAZ.title" = "Ověřovat nové aktualizace programu Vienna při spouštění";
+
+/* Class = "NSMenuItem"; title = "Manuálně"; ObjectID = "H9Q-du-oax"; */
+"H9Q-du-oax.title" = "Manuálně";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "HFO-4f-zYZ"; */
+"HFO-4f-zYZ.title" = "OtherViews";
+
+/* Class = "NSMenuItem"; title = "Každých šest hodin"; ObjectID = "IMa-1h-lIO"; */
+"IMa-1h-lIO.title" = "Každých šest hodin";
+
+/* Class = "NSButtonCell"; title = "Po krátké prodlevě"; ObjectID = "JDV-ek-xja"; */
+"JDV-ek-xja.title" = "Po krátké prodlevě";
+
+/* Class = "NSButtonCell"; title = "Zobrazit v řádku nabídek"; ObjectID = "JN6-lj-bQ1"; */
+"JN6-lj-bQ1.title" = "Zobrazit v řádku nabídek";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "Klv-JA-PvP"; */
+"Klv-JA-PvP.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
+"NAE-EF-SsE.title" = "Radio";
+
+/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "QD9-FF-HxG"; */
+"QD9-FF-HxG.title" = "Radio";
+
+/* Class = "NSMenu"; title = "OtherViews"; ObjectID = "XAi-oh-7Fq"; */
+"XAi-oh-7Fq.title" = "OtherViews";
+
+/* Class = "NSButtonCell"; title = "Otvírat odkazy v externím prohlížeči"; ObjectID = "YoM-Gv-hXn"; */
+"YoM-Gv-hXn.title" = "Otvírat odkazy v externím prohlížeči";
+
+/* Class = "NSButtonCell"; title = "Neprovádět nic"; ObjectID = "ayi-vd-Hro"; */
+"ayi-vd-Hro.title" = "Neprovádět nic";
+
+/* Class = "NSTextFieldCell"; title = "Ověřovat nové položky:"; ObjectID = "ewU-JH-fMC"; */
+"ewU-JH-fMC.title" = "Ověřovat nové položky:";
+
+/* Class = "NSMenuItem"; title = "(Do not localise)"; ObjectID = "fYn-Rz-G69"; */
+"fYn-Rz-G69.title" = "(Do not localise)";
+
+/* Class = "NSTextFieldCell"; title = "Složka pro zkopírované soubory:"; ObjectID = "geD-Ws-mQm"; */
+"geD-Ws-mQm.title" = "Složka pro zkopírované soubory:";
+
+/* Class = "NSMenuItem"; title = "Každé tři hodiny"; ObjectID = "gnX-dW-XUD"; */
+"gnX-dW-XUD.title" = "Každé tři hodiny";
+
+/* Class = "NSTextFieldCell"; title = "Přesunout příspěvky do koše:"; ObjectID = "k6Y-ib-PGb"; */
+"k6Y-ib-PGb.title" = "Přesunout příspěvky do koše:";
+
+/* Class = "NSTextFieldCell"; title = "Výchozí aplikace pro RSS:"; ObjectID = "kGA-Sa-RLG"; */
+"kGA-Sa-RLG.title" = "Výchozí aplikace pro RSS:";
+
+/* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "meo-78-YOl"; */
+"meo-78-YOl.title" = "Označit aktualizované příspěvky jako nové";
+
+/* Class = "NSMenuItem"; title = "Každých 5 minut"; ObjectID = "oVW-ee-uJT"; */
+"oVW-ee-uJT.title" = "Každých 5 minut";
+
+/* Class = "NSButtonCell"; title = "Ověřovat nové příspěvky po spuštění"; ObjectID = "pXX-MI-tJX"; */
+"pXX-MI-tJX.title" = "Ověřovat nové příspěvky po spuštění";
+
+/* Class = "NSButtonCell"; title = "Otvírat nové odkazy v pozadí"; ObjectID = "pjg-Ze-H3l"; */
+"pjg-Ze-H3l.title" = "Otvírat nové odkazy v pozadí";
+
+/* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
+"qeb-at-hYb.title" = "Aktualizace:";
+
+/* Class = "NSButtonCell"; title = "Include anonymous system profile"; ObjectID = "qno-Cg-EkC"; */
+"qno-Cg-EkC.title" = "Zahrnout anonymní systémový profil";
+
+/* Class = "NSTextFieldCell"; title = "Označit stávající příspěvky jako čtené:"; ObjectID = "sCl-hz-PFF"; */
+"sCl-hz-PFF.title" = "Označit stávající příspěvky jako čtené:";
+
+/* Class = "NSMenuItem"; title = "Každou hodinu"; ObjectID = "sSj-zI-6RY"; */
+"sSj-zI-6RY.title" = "Každou hodinu";
+
+/* Class = "NSButtonCell"; title = "Zobrazit počet nepřečtených položek na ikoně aplikace"; ObjectID = "vPK-r4-Kwp"; */
+"vPK-r4-Kwp.title" = "Zobrazit počet nepřečtených položek na ikoně aplikace";

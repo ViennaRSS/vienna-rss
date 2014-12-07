@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AppearancePreferencesViewController">
+            <connections>
+                <outlet property="articleFontSample" destination="omz-Xk-hdX" id="7Ig-eh-tQq"/>
+                <outlet property="articleFontSelectButton" destination="o7p-1v-UGN" id="7vH-Ko-oWG"/>
+                <outlet property="enableMinimumFontSize" destination="zi1-dQ-UMg" id="Dzf-DA-ADP"/>
+                <outlet property="folderFontSample" destination="7Ry-8o-LiV" id="YCO-zW-Xtc"/>
+                <outlet property="folderFontSelectButton" destination="V2j-NG-qbV" id="P3f-4O-2wm"/>
+                <outlet property="minimumFontSizes" destination="84p-cY-I9v" id="Iw4-0A-H89"/>
+                <outlet property="showFolderImagesButton" destination="zi1-dQ-UMg" id="wbj-1h-VOw"/>
+                <outlet property="view" destination="S8x-KB-PLV" id="f0L-FL-UFq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <view id="S8x-KB-PLV">
+            <rect key="frame" x="0.0" y="0.0" width="501" height="184"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" id="ftO-a4-X4r">
+                    <rect key="frame" x="17" y="145" width="154" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="auD-UC-Pij">
+                        <font key="font" metaFont="system"/>
+                        <string key="title">Artikellista:
+</string>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="2ko-ff-Gpu">
+                    <rect key="frame" x="17" y="115" width="154" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Mapplista:" id="B5v-p5-vrf">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button id="94k-AE-ngj">
+                    <rect key="frame" x="30" y="52" width="222" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Använd aldrig typsnitt mindre än" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="zfJ-Ge-Cxe">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeMinimumFontSize:" target="-2" id="5HB-BF-4LF"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <textField verticalHuggingPriority="750" id="omz-Xk-hdX">
+                    <rect key="frame" x="176" y="142" width="204" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(Sample)" drawsBackground="YES" id="azr-ft-M4J">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" id="7Ry-8o-LiV">
+                    <rect key="frame" x="176" y="112" width="204" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="(Sample)" drawsBackground="YES" id="g63-xD-ICn">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" id="o7p-1v-UGN">
+                    <rect key="frame" x="382" y="134" width="105" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Välj..." bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="gGT-YP-aum">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="selectArticleFont:" target="-2" id="KUO-H6-381"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" id="V2j-NG-qbV">
+                    <rect key="frame" x="382" y="105" width="105" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Välj..." bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="BDw-v3-mpF">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="selectFolderFont:" target="-2" id="SnU-Cs-LlA"/>
+                    </connections>
+                </button>
+                <textField verticalHuggingPriority="750" id="FYe-O0-wsA">
+                    <rect key="frame" x="17" y="76" width="467" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Vid visning av artiklar eller webbsidor:" id="71S-pg-AjX">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button id="zi1-dQ-UMg">
+                    <rect key="frame" x="18" y="18" width="465" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Visa ikoner i mapplistan" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MEV-HA-bdL">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeShowFolderImages:" target="-2" id="0WQ-A5-bwr"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <comboBox verticalHuggingPriority="750" id="84p-cY-I9v">
+                    <rect key="frame" x="258" y="48" width="48" height="26"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="hia-tO-kK6">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </comboBoxCell>
+                    <connections>
+                        <action selector="selectMinimumFontSize:" target="-2" id="xmp-Ar-KRX"/>
+                    </connections>
+                </comboBox>
+            </subviews>
+        </view>
+    </objects>
+</document>
