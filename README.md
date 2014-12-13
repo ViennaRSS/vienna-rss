@@ -7,11 +7,19 @@
 Vienna can connect directly to the websites you want to track.
 Additionally or alternatively, you can also sync with a server supporting the [Open Reader API](http://rss-sync.github.io/Open-Reader-API/rssconsensus/) (an adaptation of the now deceased Google Reader API). Vienna has been successfully tested with BazQux.com and FeedHQ.org.
 
-Downloading binaries
---------------------
+Installing
+----------
 
 Admins upload release and test versions at [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
 Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases)
+
+**Homebrew**
+
+Vienna is also available as a Cask for [Homebrew Cask](https://github.com/phinze/homebrew-cask).
+
+    brew cask install vienna
+
+
 
 Getting support
 ---------------
