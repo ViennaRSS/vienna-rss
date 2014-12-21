@@ -837,50 +837,18 @@ JSONDecoder * jsonDecoder;
 	ASIFormDataRequest * myRequest = [ASIFormDataRequest requestWithURL:markReadURL];
 	if (flag) {
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"a"];
-		[myRequest setDelegate:self];
 	} else {
-		[myRequest setPostValue:@"user/-/state/com.google/kept-unread" forKey:@"a"];
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"r"];
-		[myRequest setDelegate:self];
-		[myRequest setDidFinishSelector:@selector(keptUnreadDone:)];
-        [myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:itemGuid, @"guid", nil]];
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setDelegate:self];
 	[myRequest setPostValue:token forKey:@"T"];
 	[myRequest addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	[myRequest setUseCookiePersistence:NO];
 	[myRequest setTimeOutSeconds:180];
 	[[RefreshManager sharedManager] addConnection:myRequest];
 }
-
-// callback
-- (void)keptUnreadDone:(ASIFormDataRequest *)request
-{
-	NSString *requestResponse = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
-	if (![requestResponse isEqualToString:@"OK"]) {
-		LLog(@"Error on request");
-		LOG_EXPR([request error]);
-		LOG_EXPR([request originalURL]);
-		LOG_EXPR([request responseHeaders]);
-		LOG_EXPR([request requestHeaders]);
-		[self resetAuthentication];
-	}
-
-	LLog(@"Logged token: %@",token);
-	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
-    NSString *itemGuid = [[request userInfo] objectForKey:@"guid"];
-	ASIFormDataRequest * request1 = [ASIFormDataRequest requestWithURL:markReadURL];
-	[request1 setPostValue:@"true" forKey:@"async"];
-	[request1 setPostValue:itemGuid forKey:@"i"];
-	[request1 setPostValue:@"user/-/state/com.google/tracking-kept-unread" forKey:@"a"];
-	[request1 setPostValue:token forKey:@"T"];
-	[request1 addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
-	[request1 setUseCookiePersistence:NO];
-	[request1 setTimeOutSeconds:180];
-	[[RefreshManager sharedManager] addConnection:request1];
-}
-
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
