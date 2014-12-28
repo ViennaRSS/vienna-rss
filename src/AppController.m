@@ -770,6 +770,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			if (!hasOSScriptsMenu())
 				[self initScriptsMenu];
 		}
+		return YES;
 	}
 	if ([[filename pathExtension] isEqualToString:@"opml"])
 	{
@@ -777,6 +778,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (returnCode == NSAlertAlternateReturn)
 			return NO;
 		[self importFromFile:filename];
+		return YES;
 	}
     if ([[filename pathExtension] isEqualToString:@"webloc"])
     {
@@ -784,7 +786,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
         if (![mainWindow isVisible])
         	[mainWindow makeKeyAndOrderFront:self];
         if (url != nil && ![db readOnly])
+        {
             [self.rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:[url absoluteString]];
+		    return YES;
+        }
         else
         	return NO;
     }
