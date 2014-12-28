@@ -781,8 +781,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
     if ([[filename pathExtension] isEqualToString:@"webloc"])
     {
         NSURL* url = [NSURL URLFromInetloc:filename];
-        if (url != nil)
+        if (![mainWindow isVisible])
+        	[mainWindow makeKeyAndOrderFront:self];
+        if (url != nil && ![db readOnly])
             [self.rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:[url absoluteString]];
+        else
+        	return NO;
     }
 	return NO;
 }
