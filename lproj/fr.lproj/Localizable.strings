@@ -440,3 +440,10 @@
 "Forcing Refresh subscriptions..." = "Rafraichissement forcé des abonnements…";
 "Improper infinitely looping URL redirect to %@" = "Problème de boucle infinie de redirections d'URL vers %@";
 
+/* Added in 3.0.2 */
+"Close" = "Fermer";
+"Locate" = "Rechercher";
+"Error retrieving RSS feed:"="Erreur de récupération du flux RSS :";
+"Got HTTP status 304 - No news from last check" = "Code retour HTTP 304 - Pas de nouvel article depuis la dernière recherche";
+"Error retrieving RSS Icon:" = "Erreur lors de la recherche de l'icône RSS";
+"RSS Icon not found!" = "Icône RSS non trouvée !";

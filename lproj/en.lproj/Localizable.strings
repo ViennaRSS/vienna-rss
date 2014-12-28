@@ -439,3 +439,11 @@
 "Queue" = "Queue";
 "Forcing Refresh subscriptions..." = "Forcing Refresh subscriptions...";
 "Improper infinitely looping URL redirect to %@" = "Improper infinitely looping URL redirect to %@";
+
+/* Added in 3.0.2 */
+"Close" = "Close";
+"Locate" = "Locate";
+"Error retrieving RSS feed:"="Error retrieving RSS feed:";
+"Got HTTP status 304 - No news from last check" = "Got HTTP status 304 - No news from last check";
+"Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
+"RSS Icon not found!" = "RSS Icon not found!";
