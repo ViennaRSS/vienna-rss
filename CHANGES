@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.2
+-----
+- Handles dragging and dropping of .webloc files
+- More accessible Preferences window
+- Fix a synchronization issue with InoReader
+- Various adaptations in development/building environment
+- Fix various localization issues
+
 3.0.1
 -----
 - Fix a crash
