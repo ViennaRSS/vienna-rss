@@ -27,6 +27,7 @@
     IBOutlet NSTextField * openReaderHost;
     IBOutlet NSTextField * username;
     IBOutlet NSSecureTextField * password;
+    IBOutlet NSButton *syncButton;
 }
 
 @property (assign) IBOutlet NSButton *syncButton;
