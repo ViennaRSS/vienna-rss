@@ -81,7 +81,6 @@
 	NewPreferencesController * preferenceController;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
-	NewSubscription * rssFeed;
 	NewGroupFolder * groupFolder;
 	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
@@ -107,7 +106,7 @@
 }
 
 @property (nonatomic, readonly) NSWindowController *preferencesWindowController;
-
+@property(nonatomic, retain) NewSubscription *rssFeed;
 
 // Menu action items
 -(IBAction)handleAbout:(id)sender;
