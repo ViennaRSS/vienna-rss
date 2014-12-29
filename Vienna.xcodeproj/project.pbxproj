@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		3A2EB8771A34B44300439A38 /* Modules */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 3A2EB8791A34B44300439A38 /* Build configuration list for PBXAggregateTarget "Modules" */;
-			buildPhases = (
-				3A2EB8781A34B44300439A38 /* Run Modules */,
-			);
-			dependencies = (
-			);
-			name = Modules;
-			productName = Modules;
-		};
 		430C4ACF166172BD0079C9FC /* Autorevision */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 430C4AD6166172C70079C9FC /* Build configuration list for PBXAggregateTarget "Autorevision" */;
@@ -89,7 +78,6 @@
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
 		3A20DC581783FF8D00D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC561783FF8D00D75515 /* KnownSyncServers.plist */; };
 		3A20DC5B1783FFC700D75515 /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A20DC591783FFC600D75515 /* KnownSyncServers.plist */; };
-		3A2EB8801A351C1100439A38 /* Modules.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3A2EB87F1A351C1100439A38 /* Modules.sh */; };
 		3A4DBEA017319979006DD2AB /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9517319979006DD2AB /* PXListDocumentView.m */; };
 		3A4DBEA117319979006DD2AB /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9717319979006DD2AB /* PXListView.m */; };
 		3A4DBEA217319979006DD2AB /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBE9A17319979006DD2AB /* PXListView+UserInteraction.m */; };
@@ -731,13 +719,6 @@
 			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
 			remoteInfo = Vienna;
 		};
-		3A2EB87D1A34B48F00439A38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3A2EB8771A34B44300439A38;
-			remoteInfo = Modules;
-		};
 		3A7567A91674EB48009C0900 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
@@ -957,7 +938,6 @@
 		3A20DC571783FF8D00D75515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A20DC5A1783FFC600D75515 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = KnownSyncServers.plist; sourceTree = "<group>"; };
 		3A23F13315276935008AF863 /* NSNotificationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = NSNotificationAdditions.h; path = src/NSNotificationAdditions.h; sourceTree = SOURCE_ROOT; };
-		3A2EB87F1A351C1100439A38 /* Modules.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = Modules.sh; path = configs/scripts/Modules.sh; sourceTree = "<group>"; };
 		3A4DBE9417319979006DD2AB /* PXListDocumentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = 3rdparty/PXListView/PXListDocumentView.h; sourceTree = "<group>"; };
 		3A4DBE9517319979006DD2AB /* PXListDocumentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PXListDocumentView.m; path = 3rdparty/PXListView/PXListDocumentView.m; sourceTree = "<group>"; };
 		3A4DBE9617319979006DD2AB /* PXListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PXListView.h; path = 3rdparty/PXListView/PXListView.h; sourceTree = "<group>"; };
@@ -2079,7 +2059,6 @@
 				439824191666B37000FFE219 /* autorevision.sh */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
 				4398241B1666B37000FFE219 /* Make-ID-Template.sh */,
-				3A2EB87F1A351C1100439A38 /* Modules.sh */,
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
 				3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */,
 				4398241D1666B37000FFE219 /* Translations.sh */,
@@ -3227,7 +3206,6 @@
 				3A7567AA1674EB48009C0900 /* PBXTargetDependency */,
 				43BA979616644E3900B95F35 /* PBXTargetDependency */,
 				43BA97DA1664766100B95F35 /* PBXTargetDependency */,
-				3A2EB87E1A34B48F00439A38 /* PBXTargetDependency */,
 				430C4AD81661730D0079C9FC /* PBXTargetDependency */,
 			);
 			name = Vienna;
@@ -3315,7 +3293,6 @@
 				43BA97111663EA5000B95F35 /* JSONKit */,
 				F06BE2F917C87DEA00A74FBB /* FMDatabase */,
 				430C4ACF166172BD0079C9FC /* Autorevision */,
-				3A2EB8771A34B44300439A38 /* Modules */,
 				52BA63FC0DE9E2E10008B3E1 /* Version Notes */,
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
@@ -3394,7 +3371,6 @@
 				43E69638168A05F300AB4C09 /* errorpage.html in Resources */,
 				03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */,
 				43E69639168A05F300AB4C09 /* errorpage.html in Resources */,
-				3A2EB8801A351C1100439A38 /* Modules.sh in Resources */,
 				43E6963A168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963B168A05F300AB4C09 /* errorpage.html in Resources */,
 				43E6963C168A05F300AB4C09 /* errorpage.html in Resources */,
@@ -3850,20 +3826,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A2EB8781A34B44300439A38 /* Run Modules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Modules";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". configs/scripts/Modules.sh";
-		};
 		3A5482F6168F5C1700887F91 /* Sparkle autoupdate setup */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4124,11 +4086,6 @@
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* Vienna */;
 			targetProxy = 035B703B19E0E4AE00197334 /* PBXContainerItemProxy */;
-		};
-		3A2EB87E1A34B48F00439A38 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3A2EB8771A34B44300439A38 /* Modules */;
-			targetProxy = 3A2EB87D1A34B48F00439A38 /* PBXContainerItemProxy */;
 		};
 		3A7567AA1674EB48009C0900 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -7307,27 +7264,6 @@
 			};
 			name = StaticAnalyzer;
 		};
-		3A2EB87A1A34B44300439A38 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = Modules;
-			};
-			name = Development;
-		};
-		3A2EB87B1A34B44300439A38 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = Modules;
-			};
-			name = Deployment;
-		};
-		3A2EB87C1A34B44300439A38 /* StaticAnalyzer */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = Modules;
-			};
-			name = StaticAnalyzer;
-		};
 		430C4AD0166172BE0079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -7619,16 +7555,6 @@
 				035B703D19E0E4AE00197334 /* Development */,
 				035B703E19E0E4AE00197334 /* Deployment */,
 				035B703F19E0E4AE00197334 /* StaticAnalyzer */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Deployment;
-		};
-		3A2EB8791A34B44300439A38 /* Build configuration list for PBXAggregateTarget "Modules" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3A2EB87A1A34B44300439A38 /* Development */,
-				3A2EB87B1A34B44300439A38 /* Deployment */,
-				3A2EB87C1A34B44300439A38 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
