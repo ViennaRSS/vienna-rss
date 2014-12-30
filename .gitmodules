@@ -1,3 +1,4 @@
 [submodule "MASPreferences"]
 	path = MASPreferences
 	url = https://github.com/barijaona/MASPreferences.git
+	branch = 32bits
