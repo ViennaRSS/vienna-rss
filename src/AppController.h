@@ -102,7 +102,7 @@
 	NSString * searchString;
     
     NSWindowController *_preferencesWindowController;
-    
+    NewSubscription * _rssFeed;
 }
 
 @property (nonatomic, readonly) NSWindowController *preferencesWindowController;

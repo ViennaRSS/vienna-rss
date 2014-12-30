@@ -134,8 +134,6 @@ static io_connect_t root_port;
 static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
 @implementation AppController {
-@private
-    NewSubscription *_rssFeed;
 }
 
 // C array of NSDateFormatter format strings. This is array is used only once to populate dateFormatterArray.
