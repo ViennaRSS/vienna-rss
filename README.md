@@ -1,6 +1,6 @@
 ![Vienna](http://vienna-rss.sourceforge.net/img/vienna_logo.png)
 
-[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=master)](https://travis-ci.org/ViennaRSS/vienna-rss) [![Stories in Ready](https://badge.waffle.io/viennarss/vienna-rss.png?label=ready&title=Ready)](https://waffle.io/viennarss/vienna-rss)
+[![Build Status](https://travis-ci.org/ViennaRSS/vienna-rss.svg?branch=legacy3.0.x)](https://travis-ci.org/ViennaRSS/vienna-rss) 
 
 [Vienna](http://www.vienna-rss.org) is an RSS/Atom reader for Mac OS X.
 
