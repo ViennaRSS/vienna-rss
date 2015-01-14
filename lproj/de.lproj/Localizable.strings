@@ -83,7 +83,7 @@
 "Credentials Prompt" = "Der Zugriff auf den Feed %@ benötigt das Einloggen am Server";
 "%ld bytes received" = "%ld Bytes empfangen";
 "Authentication failed for user '%@'" = "Authentifizierung für den Benutzer '%@' fehlgeschlagen";
-"Error parsing XML data in feed" = "Fehler beim parsen der XML-Daten des Feeds";
+"Error parsing XML data in feed" = "Fehler beim Parsen der XML-Daten des Feeds";
 "Retrieving folder image" = "Empfange Ordnerbild";
 "Folder image retrieved from %@" = "Ordnerbild von %@ empfangen";
 "Contacting..." = "Kontaktiere...";
