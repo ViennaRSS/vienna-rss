@@ -42,8 +42,16 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 
 @implementation AppearancePreferencesViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+
+- (instancetype)init {
+    return [super initWithNibName:@"AppearancePreferencesView" bundle:nil];
+}
+
+
+- (void)viewWillAppear {
+    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
+        [super viewWillAppear];
+    }
     // Do view setup here.
     [self initializePreferences];
     
@@ -53,11 +61,7 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
     [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_MinimumFontSizeChange" object:nil];
     [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-
-}
-
-- (instancetype)init {
-    return [super initWithNibName:@"AppearancePreferencesView" bundle:nil];
+    
 }
 
 #pragma mark - MASPreferencesViewController
