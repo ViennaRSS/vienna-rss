@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.3
+-----
+- Fix problems with preferences dialog on OS X < 10.10
+- Fix small localization issues
+
 3.0.2
 -----
 - Handles dragging and dropping of .webloc files
