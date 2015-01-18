@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="articleFontSample" destination="omz-Xk-hdX" id="7Ig-eh-tQq"/>
                 <outlet property="articleFontSelectButton" destination="o7p-1v-UGN" id="7vH-Ko-oWG"/>
-                <outlet property="enableMinimumFontSize" destination="zi1-dQ-UMg" id="Dzf-DA-ADP"/>
+                <outlet property="enableMinimumFontSize" destination="94k-AE-ngj" id="evd-iO-FW1"/>
                 <outlet property="folderFontSample" destination="7Ry-8o-LiV" id="YCO-zW-Xtc"/>
                 <outlet property="folderFontSelectButton" destination="V2j-NG-qbV" id="P3f-4O-2wm"/>
                 <outlet property="minimumFontSizes" destination="84p-cY-I9v" id="Iw4-0A-H89"/>
@@ -26,10 +26,8 @@
                 <textField verticalHuggingPriority="750" id="ftO-a4-X4r">
                     <rect key="frame" x="17" y="145" width="154" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="auD-UC-Pij">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Article list font:" id="auD-UC-Pij">
                         <font key="font" metaFont="system"/>
-                        <string key="title">Article list font:
-</string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
