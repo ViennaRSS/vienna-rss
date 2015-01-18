@@ -29,15 +29,18 @@
 @implementation AdvancedPreferencesViewController
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (instancetype)init {
+    return [super initWithNibName:@"AdvancedPreferencesView" bundle:nil];
+}
+
+- (void)viewWillAppear {
+    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
+        [super viewWillAppear];
+    }
     // Do view setup here.
     [self initializePreferences];
 }
 
-- (instancetype)init {
-    return [super initWithNibName:@"AdvancedPreferencesView" bundle:nil];
-}
 
 #pragma mark - MASPreferencesViewController
 

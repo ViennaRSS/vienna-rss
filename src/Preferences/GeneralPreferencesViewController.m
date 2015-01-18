@@ -37,8 +37,16 @@
 
 @implementation GeneralPreferencesViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+
+- (instancetype)init {
+    return [super initWithNibName:@"GeneralPreferencesView" bundle:nil];
+}
+
+
+- (void)viewWillAppear {
+    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
+        [super viewWillAppear];
+    }
     
     [self initializePreferences];
     
@@ -46,11 +54,8 @@
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
     [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-} 
-
-- (instancetype)init {
-    return [super initWithNibName:@"GeneralPreferencesView" bundle:nil];
 }
+
 
 #pragma mark - MASPreferencesViewController
 
