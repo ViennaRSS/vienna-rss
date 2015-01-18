@@ -34,8 +34,14 @@ static BOOL _credentialsChanged;
 @synthesize syncButton;
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (instancetype)init {
+    return [super initWithNibName:@"SyncingPreferencesView" bundle:nil];
+}
+
+- (void)viewWillAppear {
+    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
+        [super viewWillAppear];
+    }
     // Do view setup here.
     sourcesDict = nil;
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
@@ -110,9 +116,7 @@ static BOOL _credentialsChanged;
     
 }
 
-- (instancetype)init {
-    return [super initWithNibName:@"SyncingPreferencesView" bundle:nil];
-}
+
 
 #pragma mark - MASPreferencesViewController
 
