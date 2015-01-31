@@ -75,17 +75,7 @@ You can write plugins by referring to [this document](http://www.vienna-rss.org/
 
 ### Writing code
 
-For setting up your development environment, you will need to do one of these two things in an empty folder.
-
-**Do a recursive git clone command :**
-
-`git clone --recursive REPO_URL`  
-most commonly : `git clone --recursive https://github.com/ViennaRSS/vienna-rss.git`
-
-**… or manually initialize and update the submodules after the clone :**
-
-`git clone REPO_URL`
-`git submodule update --init --recursive`
+Vienna uses [cocoapods](http://cocoapods.org) for managing dependancies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
 
 You should have a basic knowledge of Git and read these [advices on workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
 
