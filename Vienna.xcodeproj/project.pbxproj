@@ -669,6 +669,7 @@
 		F061590419CE8A90005F61CC /* statusBarIconUnread.png in Resources */ = {isa = PBXBuildFile; fileRef = F061590319CE8A90005F61CC /* statusBarIconUnread.png */; };
 		F061590619CE8A9E005F61CC /* statusBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = F061590519CE8A9E005F61CC /* statusBarIcon.png */; };
 		F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E01EF717C885A900E20329 /* libsqlite3.dylib */; };
+		FD4F043559497BBB5BC4F2D3 /* libPods-Vienna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC40E3945CB6EC4B528CABA5 /* libPods-Vienna.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1569,6 +1570,7 @@
 		B2BECB1614CEF22B00706F8F /* SSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SSTextField.m; path = src/SSTextField.m; sourceTree = SOURCE_ROOT; };
 		B2E09F2B111192B7003B530A /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSClickableURLTextField.h; path = 3rdparty/DSClickableURLTextField/DSClickableURLTextField.h; sourceTree = SOURCE_ROOT; };
 		B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSClickableURLTextField.m; path = 3rdparty/DSClickableURLTextField/DSClickableURLTextField.m; sourceTree = SOURCE_ROOT; };
+		BC40E3945CB6EC4B528CABA5 /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA1A761F148FA32B004A6B8F /* googleFeed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = googleFeed.tiff; path = Resources/googleFeed.tiff; sourceTree = SOURCE_ROOT; };
 		EA43C70714A370DB00F2D843 /* VTPG_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VTPG_Common.h; path = 3rdparty/VTPG/VTPG_Common.h; sourceTree = SOURCE_ROOT; };
 		EA43C70814A370DB00F2D843 /* VTPG_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VTPG_Common.m; path = 3rdparty/VTPG/VTPG_Common.m; sourceTree = SOURCE_ROOT; };
@@ -1612,6 +1614,7 @@
 				435021D9165DCB980018EDB7 /* libSystem.B.dylib in Frameworks */,
 				435021DA165DCB980018EDB7 /* libz.dylib in Frameworks */,
 				43BA97DB1664766800B95F35 /* DisclosableView.framework in Frameworks */,
+				FD4F043559497BBB5BC4F2D3 /* libPods-Vienna.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1707,6 +1710,8 @@
 				1058C7A6FEA54F5311CA2CBB /* System frameworks */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
+				E79786E26AEA76CD39BCC4A8 /* Pods */,
+				553D6CD42F89C906889AA31B /* Frameworks */,
 			);
 			name = Vienna;
 			sourceTree = "<group>";
@@ -2519,6 +2524,14 @@
 			path = lproj/zh_TW.lproj;
 			sourceTree = SOURCE_ROOT;
 		};
+		553D6CD42F89C906889AA31B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BC40E3945CB6EC4B528CABA5 /* libPods-Vienna.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		660AA30914072BFD0082CCF0 /* OpenReader Sync */ = {
 			isa = PBXGroup;
 			children = (
@@ -2812,6 +2825,13 @@
 			name = ErrorPage;
 			sourceTree = "<group>";
 		};
+		E79786E26AEA76CD39BCC4A8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EA43C70614A370CB00F2D843 /* DebugHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -2879,6 +2899,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
 			buildPhases = (
+				AFD33770C14F1E31D77A960C /* Check Pods Manifest.lock */,
 				8D15AC300486D014006FF6A4 /* Sources */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				8D15AC2B0486D014006FF6A4 /* Resources */,
@@ -2887,6 +2908,7 @@
 				52FDC71F0C559C7700F9F29B /* Acknowledgements */,
 				43EE8617165EF9D7000997FB /* Translations */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
+				F5708274131698B4743C1F3B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3580,6 +3602,21 @@
 			shellPath = /bin/sh;
 			shellScript = ". configs/scripts/Acknowledgements.sh";
 		};
+		AFD33770C14F1E31D77A960C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		EAAF336614BEF4DF002A8837 /* Release for upload */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3593,6 +3630,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = ". configs/scripts/Release-for-upload.sh";
+		};
+		F5708274131698B4743C1F3B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna/Pods-Vienna-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
