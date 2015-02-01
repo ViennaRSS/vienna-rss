@@ -2,7 +2,7 @@
 
 #include "Vienna-All.xcconfig"
 #include "General-Dev.xcconfig"
-
+#include "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"
 
 GCC_DYNAMIC_NO_PIC = NO
 BUILD_PREPROCESSOR_DEFINITIONS = $(inherited) LOG_QUERY_TIMES DEBUG

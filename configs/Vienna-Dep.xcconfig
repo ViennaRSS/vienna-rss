@@ -2,6 +2,6 @@
 
 #include "Vienna-All.xcconfig"
 #include "General-Dep.xcconfig"
-
+#include "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.deployment.xcconfig"
 
 BUILD_PREPROCESSOR_DEFINITIONS = $(inherited) NO_LOG_MACROS
