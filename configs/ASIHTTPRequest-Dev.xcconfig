@@ -1,4 +1,0 @@
-// ASIHTTPRequest settings for Development configuration
-
-#include "ASIHTTPRequest-All.xcconfig"
-#include "General-Dev.xcconfig"

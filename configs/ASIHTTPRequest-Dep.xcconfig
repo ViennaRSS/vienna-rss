@@ -1,4 +1,0 @@
-// ASIHTTPRequest settings for Deployment configuration
-
-#include "ASIHTTPRequest-All.xcconfig"
-#include "General-Dep.xcconfig"

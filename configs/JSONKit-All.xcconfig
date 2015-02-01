@@ -1,9 +1,0 @@
-// JSONKit settings for all configurations
-
-
-PRODUCT_NAME = JSONKit
-USER_HEADER_SEARCH_PATHS =  $(inherited) "$(SRCROOT)/3rdparty/JSONKit"
-GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
-
-
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
