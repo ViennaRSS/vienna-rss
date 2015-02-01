@@ -3,7 +3,7 @@ before_install:
 # - brew update
 # - brew upgrade xctool
 # - gem install cocoapods
-xcode_project: Vienna.xcodeproj
+xcode_workspace: Vienna.xcworkspace
 xcode_scheme: Vienna
 before_script: make clean
 script: make development
