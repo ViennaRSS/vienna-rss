@@ -1,4 +1,0 @@
-// JSONKit settings for Development configuration
-
-#include "JSONKit-All.xcconfig"
-#include "General-Dev.xcconfig"

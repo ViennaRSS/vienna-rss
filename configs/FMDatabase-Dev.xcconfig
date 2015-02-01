@@ -1,4 +1,0 @@
-// FMDatabase settings for Development configuration
-
-#include "FMDatabase-All.xcconfig"
-#include "General-Dev.xcconfig"
