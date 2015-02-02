@@ -1,7 +1,7 @@
 // Vienna settings for StaticAnalyzer configuration
 
 #include "Vienna-Dev.xcconfig"
-
+#include "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.staticanalyzer.xcconfig"
 
 BUILD_VARIANTS = debug profile
 RUN_CLANG_STATIC_ANALYZER = YES

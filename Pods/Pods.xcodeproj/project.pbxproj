@@ -1,0 +1,1752 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00A2E8B5297DF29B8BE946D6 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEBF6091D701A6A7C7465F5 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		013917B4DE82E4726C24A9E0 /* ASIDownloadCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CDCC10B5ACDA38B6400B882 /* ASIDownloadCache.h */; };
+		015022613647263D19D329E1 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = F266C3B65E6448D30BBDCA47 /* FMDB.h */; };
+		07ABBDDB428D08D0EAA4508B /* ASICloudFilesRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = CF0D80070FBCDBCDA814A11A /* ASICloudFilesRequest.h */; };
+		0CF1BF96F4B635F41DFE4770 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F8EB4ADDB1952A2BC93F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0E28D07EF950D1F2A8FF798C /* ASIS3BucketRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 622FE89DD858295F8EA99F75 /* ASIS3BucketRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		121AA456E63CC4C0C5B2A43E /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7C62271433C2D6B68C0879 /* MASPreferencesWindowController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		16C12F7E1531ED47212259C7 /* ASIS3BucketRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B44A0CEF01231C3704BCDF35 /* ASIS3BucketRequest.h */; };
+		1BA4E9621EFACFB97B41A2A8 /* ASINetworkQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 731061C17E2EE5C45D51D435 /* ASINetworkQueue.h */; };
+		24E1157FAA9EAFFFA0868A9F /* ASICloudFilesContainerXMLParserDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = DF0992E7252E63F723B0E667 /* ASICloudFilesContainerXMLParserDelegate.h */; };
+		26D1AF236812BE367B9552E4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */; };
+		29B9414A04AF0DE47D1369EA /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 0717F0A61E28DCC62DD26FDC /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		29CEBD1F5FDECBFE011DE17B /* ASIS3BucketObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 68FB3CEA3784D5C09B201594 /* ASIS3BucketObject.h */; };
+		2AB4AAC9DFC06E1292098171 /* ASIS3ObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B2C7FD2BB3FC8D094F8BEE /* ASIS3ObjectRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2B50A435BAEE24122D9A4742 /* ASIDataCompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = CEBB72AAB56138633FE75173 /* ASIDataCompressor.h */; };
+		2BA8A17D6235ADE5689C36EE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4D286D33108A842FD749E6 /* SystemConfiguration.framework */; };
+		2CAB890E6CD1CB07683AE9BF /* ASIS3ObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A09D4A2B8506A8668CBC507 /* ASIS3ObjectRequest.h */; };
+		3630394E1F584E1A8C9E1F56 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = C00D6EA8C077C6333FE1DEB3 /* FMDatabasePool.h */; };
+		3697E56EBF6F11B0A4DF19B9 /* ASIWebPageRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 328DEA5B5241A3560A7071D4 /* ASIWebPageRequest.h */; };
+		3700A43877803809C8D444C2 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = DB19BBCF6C7194378C8D9D35 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3786506BF711F7434FD59420 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C86629B84B1D8B9E260CC7C /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3870C6FF75FE2DC2E3BC0CB1 /* ASICloudFilesObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 31137060870C8912016A7DAD /* ASICloudFilesObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3BDC41178D9156C8CDAB82C5 /* ASIS3Bucket.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D83502778B54DA7F53DE5FE /* ASIS3Bucket.h */; };
+		3C09522356C456C088A8D103 /* ASICloudFilesContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = EC365C978EADE8A31A4AE546 /* ASICloudFilesContainer.h */; };
+		4444C6E85DDB77DB0B9A657F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */; };
+		45359C3EEBB646C95FCC9732 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 94F1E6605790DBB2ED0CCC33 /* FMResultSet.h */; };
+		46A202EF99584DDCC8292E7D /* PXListViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 27DF09876A994D48A10BEEE1 /* PXListViewCell.h */; };
+		484D6C8D998649B6FEF18A1B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C65562AE29928BCC6FBC833C /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4E759638BA82BA8C9265AB29 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */; };
+		532178BACF605AE938CB31CB /* ASIFormDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C5E08A81AEC3287D75CDD380 /* ASIFormDataRequest.h */; };
+		5722DDE4809D4A6F89FAF8E1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */; };
+		581A7B1C5D34FFB23E260EA7 /* PXListViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = CEFF842F26B6CF8825EE003F /* PXListViewDelegate.h */; };
+		58572E3A9A72191F3D7FFADC /* PXListView+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 19CFD0C0791C5E601F5C06C4 /* PXListView+Private.h */; };
+		590036C3A6F1E0F1A8894EF7 /* Pods-Vienna-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6728216F8CEAEEB9098787D6 /* Pods-Vienna-dummy.m */; };
+		5984DDF8A2B37242C6B1F6CE /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3128D551278A97A86479E823 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6435BB4E2ECCC60113A1C025 /* Pods-Vienna-ASIHTTPRequest-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2043DE1FE57C0AEDC696C49 /* Pods-Vienna-ASIHTTPRequest-dummy.m */; };
+		649C0A9EF1FD44123AC00820 /* PXListView+UserInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 645F121E635BD3FF4932546A /* PXListView+UserInteraction.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		651D8E5146B8A455E66C9890 /* PXListView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB971071D25A3E38723E4689 /* PXListView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6FCEA25E8A930D0B2AE71C4E /* ASICloudFilesContainerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A1769004F38FBEA3FEE8686B /* ASICloudFilesContainerRequest.h */; };
+		7154BDD1860F7C518FA06054 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CC3F728C2DD708C3632F9EF /* FMDatabase.h */; };
+		7FA0C8F24CAB7209B14C38BD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 3023EC3198FAC7ACA18FA9D2 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8A461B6B3A3C1EAFC98123B0 /* ASIS3BucketObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 46D28B04963FDDF2E7AEFFE8 /* ASIS3BucketObject.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8DA7D99F83998489808959D6 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = DA96F3CB52E44C086D620430 /* FMDatabaseQueue.h */; };
+		8E9B66BBA706AA45E1EF80CC /* ASIDataDecompressor.h in Headers */ = {isa = PBXBuildFile; fileRef = BDD393AABBA14FD0EAEA2AAC /* ASIDataDecompressor.h */; };
+		91EFC02610195AEB83A8316A /* Pods-Vienna-JSONKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A022297B1E352DAED2365C /* Pods-Vienna-JSONKit-dummy.m */; };
+		938E039382CA818A612F277C /* PXListDocumentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E2048287A83B9DEA1948BC /* PXListDocumentView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		93E8FE06427CD0CD70C888F6 /* ASIInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EA0045509B9312629E3814B /* ASIInputStream.h */; };
+		96D02C8AE530A6E34097DF36 /* PXListDocumentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 216FC378990582E088AFF05F /* PXListDocumentView.h */; };
+		9882C8E3B6963C222457B1EA /* PXListViewCell+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 15657618B67CEBF66E7A504D /* PXListViewCell+Private.h */; };
+		98F705E4BE970D6503F98EAC /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246D0F5E8ED5BFF842621482 /* CoreServices.framework */; };
+		9D47083B70D9BF9C2B790815 /* PXListView+UserInteraction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DAC4B28C240E129D43A9871 /* PXListView+UserInteraction.h */; };
+		9FB0BD6D3EB8F7A033B7F193 /* MASPreferencesWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 85E42F603322F2A40A0981D2 /* MASPreferencesWindowController.h */; };
+		A591D9FC35396139710918ED /* ASIS3Bucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8136A6460B3197D6D0FF0B2F /* ASIS3Bucket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AA6CBF8CB49D3EED01054291 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D99769DDF1D297200BC84DE2 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B038835CAA2AF7E255DDEFB5 /* ASIHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B1C8DE8F9017954A6E4C9A59 /* ASIHTTPRequest.h */; };
+		B08F28F630B0D23B2532586D /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 16132583D0C645A605722AD7 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B2F104113C0845F44EF54B4C /* ASICloudFilesObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8D4FCD6F643FF765624C0E /* ASICloudFilesObjectRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B6D51319AA927CD5E9969FE0 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7521A610FFD64BD864360F3A /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B990BAFB38383E17982B0DF0 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 694BE3DCC727B0A94E04AD03 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BA172845155860A7E3B6404E /* ASICloudFilesObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 22CB8B6D80D25D88AC331E39 /* ASICloudFilesObject.h */; };
+		C4130CA16E8DF606285D79E1 /* PXListViewDropHighlight.h in Headers */ = {isa = PBXBuildFile; fileRef = 02448879A41A623989E2A545 /* PXListViewDropHighlight.h */; };
+		C59F63AD1D62E77B118AE6AD /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C88DE3DA386E31787F713EA /* FMDatabaseAdditions.h */; };
+		C82C858647251F1F9A7663CB /* ASICloudFilesObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 86760933565207FAB6EB5CE9 /* ASICloudFilesObjectRequest.h */; };
+		CA680521FEC6E3FA539FEEE5 /* ASIS3ServiceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A5E91D5BD14A9502524CD10 /* ASIS3ServiceRequest.h */; };
+		CD5339F4F74630660500AA60 /* Pods-Vienna-MASPreferences-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 157F62332193ACD38562523D /* Pods-Vienna-MASPreferences-dummy.m */; };
+		CD9EB447D0220CC6AE65D9EA /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 3671D12312345041A5555BD6 /* JSONKit.h */; };
+		CF7680BAE357FD0C45D00670 /* ASIWebPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 435C038EE6E60DC2ED246E7C /* ASIWebPageRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D30C879F01831AADB4A2D757 /* ASIHTTPRequestDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 33F9C544CBF28DBB27A57168 /* ASIHTTPRequestDelegate.h */; };
+		D4386E0617C03631518713AE /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FE815E8BF0FDF22CB616A79F /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D48A56CF25303FD8FC1057CA /* ASICloudFilesContainerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 68609902AF5DEE002838DD5A /* ASICloudFilesContainerRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D6639653C1BC2A6DE1E3F4CB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */; };
+		D7C1CBF0395C4FD8A17F983D /* ASICloudFilesCDNRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 196760E3A0298E4F431DB04D /* ASICloudFilesCDNRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D991C422B638092C8B4DD886 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A9135CFF3BE38EC6A4E96521 /* ASICloudFilesContainerXMLParserDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D9B460BC5E360F1134FA6121 /* ASIS3Request.h in Headers */ = {isa = PBXBuildFile; fileRef = 745871C5F6220AE5D8D56329 /* ASIS3Request.h */; };
+		DA0EC1EDD500164C27D3833B /* Pods-Vienna-FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A300AD70CB6AB8B7B4CE1A00 /* Pods-Vienna-FMDB-dummy.m */; };
+		DCC904ADB69CF3EC65306CA3 /* PXListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B5740B5B400A53FBF107AE6F /* PXListViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E30A1C0FD5A2557E6FECAAFE /* ASICacheDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 01402D8B8F3071C0AE3DDEAA /* ASICacheDelegate.h */; };
+		E5ED4D74D8BBD980BC2948BC /* MASPreferencesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 848E2F4301FAAF79C7055A43 /* MASPreferencesViewController.h */; };
+		E77C9F11D17A0A0246559839 /* ASIProgressDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B00FD90A275AEB0FA46806E /* ASIProgressDelegate.h */; };
+		EAF8B5BD17604D20D1E5A602 /* ASIS3ServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7F0978243F542A025599AB /* ASIS3ServiceRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		ECEE45C37F5CF2CCB4F7FF11 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */; };
+		ED0D4A5CBC3DEA8997B7B176 /* PXListView.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FDFE06811744682F446778 /* PXListView.h */; };
+		F08B77E150B03D51B7963C18 /* ASICloudFilesContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C68A465DB66659C562D854D0 /* ASICloudFilesContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F3AF7CBF55697A8DEC9E7CE9 /* ASINSXMLParserCompat.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C7891F868E837C8EF958743 /* ASINSXMLParserCompat.h */; };
+		F649BA06DF9D252C618A3560 /* ASICloudFilesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C889E2B2A7181337AFDE2159 /* ASICloudFilesRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FB425913E5458E8914E741CE /* ASICloudFilesCDNRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 015124D82A12F098002F870E /* ASICloudFilesCDNRequest.h */; };
+		FCDEE35B0E9C7580A9037F3B /* Pods-Vienna-PXListView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA2C7D99ADED28DC3578AE9 /* Pods-Vienna-PXListView-dummy.m */; };
+		FD17D962EB3B08E05F0ACA50 /* ASIHTTPRequestConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 42608E7E811653E55F3F825B /* ASIHTTPRequestConfig.h */; };
+		FF4696183EF959A45432A7F9 /* ASIS3Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 083D47813FAA849173CDC9B9 /* ASIS3Request.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20CF29DAAE1F78A6B7F15EE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F19C85184931E0F603D4C7C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E18FB03175D99B486EA69633;
+			remoteInfo = "Pods-Vienna-FMDB";
+		};
+		71A471D4E3FF6F29C1A28877 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F19C85184931E0F603D4C7C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8995B6F8270FBD6D0F79ADC9;
+			remoteInfo = "Pods-Vienna-MASPreferences";
+		};
+		8C1DE61E9BAF66D8DBB0A46A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F19C85184931E0F603D4C7C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86A905B621D8CEEFC94AAADE;
+			remoteInfo = "Pods-Vienna-ASIHTTPRequest";
+		};
+		8FCB6E6BAF4E6048146B5F1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F19C85184931E0F603D4C7C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 139517F754D1137128F26830;
+			remoteInfo = "Pods-Vienna-JSONKit";
+		};
+		D4BE3183FFC54C2564D9DDA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F19C85184931E0F603D4C7C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B444DEA37971A59A2BB6BE9;
+			remoteInfo = "Pods-Vienna-PXListView";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01402D8B8F3071C0AE3DDEAA /* ASICacheDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICacheDelegate.h; path = Classes/ASICacheDelegate.h; sourceTree = "<group>"; };
+		015124D82A12F098002F870E /* ASICloudFilesCDNRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesCDNRequest.h; path = Classes/CloudFiles/ASICloudFilesCDNRequest.h; sourceTree = "<group>"; };
+		02448879A41A623989E2A545 /* PXListViewDropHighlight.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PXListViewDropHighlight.h; path = Classes/PXListViewDropHighlight.h; sourceTree = "<group>"; };
+		03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-ASIHTTPRequest-Private.xcconfig"; sourceTree = "<group>"; };
+		0717F0A61E28DCC62DD26FDC /* ASIInputStream.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIInputStream.m; path = Classes/ASIInputStream.m; sourceTree = "<group>"; };
+		083D47813FAA849173CDC9B9 /* ASIS3Request.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIS3Request.m; path = Classes/S3/ASIS3Request.m; sourceTree = "<group>"; };
+		0C88DE3DA386E31787F713EA /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		0DAC4B28C240E129D43A9871 /* PXListView+UserInteraction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PXListView+UserInteraction.h"; path = "Classes/PXListView+UserInteraction.h"; sourceTree = "<group>"; };
+		15657618B67CEBF66E7A504D /* PXListViewCell+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PXListViewCell+Private.h"; path = "Classes/PXListViewCell+Private.h"; sourceTree = "<group>"; };
+		157F62332193ACD38562523D /* Pods-Vienna-MASPreferences-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vienna-MASPreferences-dummy.m"; sourceTree = "<group>"; };
+		16132583D0C645A605722AD7 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
+		196760E3A0298E4F431DB04D /* ASICloudFilesCDNRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesCDNRequest.m; path = Classes/CloudFiles/ASICloudFilesCDNRequest.m; sourceTree = "<group>"; };
+		19CFD0C0791C5E601F5C06C4 /* PXListView+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PXListView+Private.h"; path = "Classes/PXListView+Private.h"; sourceTree = "<group>"; };
+		1D83502778B54DA7F53DE5FE /* ASIS3Bucket.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIS3Bucket.h; path = Classes/S3/ASIS3Bucket.h; sourceTree = "<group>"; };
+		1F7C62271433C2D6B68C0879 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
+		216FC378990582E088AFF05F /* PXListDocumentView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PXListDocumentView.h; path = Classes/PXListDocumentView.h; sourceTree = "<group>"; };
+		22CB8B6D80D25D88AC331E39 /* ASICloudFilesObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesObject.h; path = Classes/CloudFiles/ASICloudFilesObject.h; sourceTree = "<group>"; };
+		246D0F5E8ED5BFF842621482 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		24FBB06B833F7FF24A52D54B /* Pods-Vienna-ASIHTTPRequest-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vienna-ASIHTTPRequest-prefix.pch"; sourceTree = "<group>"; };
+		25B2C7FD2BB3FC8D094F8BEE /* ASIS3ObjectRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIS3ObjectRequest.m; path = Classes/S3/ASIS3ObjectRequest.m; sourceTree = "<group>"; };
+		27DF09876A994D48A10BEEE1 /* PXListViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PXListViewCell.h; path = Classes/PXListViewCell.h; sourceTree = "<group>"; };
+		29F933B010B7A0C7DF140B41 /* Pods-Vienna-FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-FMDB.xcconfig"; sourceTree = "<group>"; };
+		2A09D4A2B8506A8668CBC507 /* ASIS3ObjectRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIS3ObjectRequest.h; path = Classes/S3/ASIS3ObjectRequest.h; sourceTree = "<group>"; };
+		2B00FD90A275AEB0FA46806E /* ASIProgressDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIProgressDelegate.h; path = Classes/ASIProgressDelegate.h; sourceTree = "<group>"; };
+		2B15E6DAFACEE62230402DF3 /* Pods-Vienna-FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vienna-FMDB-prefix.pch"; sourceTree = "<group>"; };
+		2D457AD2D80E968F6845A6AF /* Pods-Vienna-MASPreferences.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-MASPreferences.xcconfig"; sourceTree = "<group>"; };
+		2EA0045509B9312629E3814B /* ASIInputStream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIInputStream.h; path = Classes/ASIInputStream.h; sourceTree = "<group>"; };
+		3023EC3198FAC7ACA18FA9D2 /* JSONKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		31137060870C8912016A7DAD /* ASICloudFilesObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesObject.m; path = Classes/CloudFiles/ASICloudFilesObject.m; sourceTree = "<group>"; };
+		3128D551278A97A86479E823 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIHTTPRequest.m; path = Classes/ASIHTTPRequest.m; sourceTree = "<group>"; };
+		328DEA5B5241A3560A7071D4 /* ASIWebPageRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIWebPageRequest.h; path = Classes/ASIWebPageRequest/ASIWebPageRequest.h; sourceTree = "<group>"; };
+		33F9C544CBF28DBB27A57168 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequestDelegate.h; path = Classes/ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		34A022297B1E352DAED2365C /* Pods-Vienna-JSONKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vienna-JSONKit-dummy.m"; sourceTree = "<group>"; };
+		3671D12312345041A5555BD6 /* JSONKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		39741A13D0C05EC41A6C831B /* Pods-Vienna-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vienna-acknowledgements.plist"; sourceTree = "<group>"; };
+		3C7891F868E837C8EF958743 /* ASINSXMLParserCompat.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASINSXMLParserCompat.h; path = Classes/S3/ASINSXMLParserCompat.h; sourceTree = "<group>"; };
+		3CD6F3C217933693D724FDC3 /* Pods-Vienna.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna.debug.xcconfig"; sourceTree = "<group>"; };
+		3D8FAF8223396BD50CEB829B /* libPods-Vienna-FMDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna-FMDB.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F4D286D33108A842FD749E6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-PXListView-Private.xcconfig"; sourceTree = "<group>"; };
+		42608E7E811653E55F3F825B /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequestConfig.h; path = Classes/ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		4282B2DCAE4534DD95C1AB4D /* Pods-Vienna.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna.release.xcconfig"; sourceTree = "<group>"; };
+		435C038EE6E60DC2ED246E7C /* ASIWebPageRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIWebPageRequest.m; path = Classes/ASIWebPageRequest/ASIWebPageRequest.m; sourceTree = "<group>"; };
+		46D28B04963FDDF2E7AEFFE8 /* ASIS3BucketObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIS3BucketObject.m; path = Classes/S3/ASIS3BucketObject.m; sourceTree = "<group>"; };
+		4A5E91D5BD14A9502524CD10 /* ASIS3ServiceRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIS3ServiceRequest.h; path = Classes/S3/ASIS3ServiceRequest.h; sourceTree = "<group>"; };
+		4C86629B84B1D8B9E260CC7C /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
+		4E8D4FCD6F643FF765624C0E /* ASICloudFilesObjectRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesObjectRequest.m; path = Classes/CloudFiles/ASICloudFilesObjectRequest.m; sourceTree = "<group>"; };
+		4F25049648D1FA1883E22F5A /* Pods-Vienna-ASIHTTPRequest.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-ASIHTTPRequest.xcconfig"; sourceTree = "<group>"; };
+		5385E488ED1FEFFEBEB08F71 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
+		54D940FDB3541FA1ADB43A2A /* Pods-Vienna-PXListView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vienna-PXListView-prefix.pch"; sourceTree = "<group>"; };
+		622FE89DD858295F8EA99F75 /* ASIS3BucketRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIS3BucketRequest.m; path = Classes/S3/ASIS3BucketRequest.m; sourceTree = "<group>"; };
+		645F121E635BD3FF4932546A /* PXListView+UserInteraction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "PXListView+UserInteraction.m"; path = "Classes/PXListView+UserInteraction.m"; sourceTree = "<group>"; };
+		6728216F8CEAEEB9098787D6 /* Pods-Vienna-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vienna-dummy.m"; sourceTree = "<group>"; };
+		67D01D02187F9494A07A8929 /* Pods-Vienna-PXListView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-PXListView.xcconfig"; sourceTree = "<group>"; };
+		68609902AF5DEE002838DD5A /* ASICloudFilesContainerRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesContainerRequest.m; path = Classes/CloudFiles/ASICloudFilesContainerRequest.m; sourceTree = "<group>"; };
+		68FB3CEA3784D5C09B201594 /* ASIS3BucketObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIS3BucketObject.h; path = Classes/S3/ASIS3BucketObject.h; sourceTree = "<group>"; };
+		694BE3DCC727B0A94E04AD03 /* ASIDownloadCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIDownloadCache.m; path = Classes/ASIDownloadCache.m; sourceTree = "<group>"; };
+		6BC90A775BB165CCA8EC2079 /* Pods-Vienna-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vienna-resources.sh"; sourceTree = "<group>"; };
+		6CC3F728C2DD708C3632F9EF /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
+		6D35922D16E1E8A9EC9C561B /* Pods-Vienna.deployment.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna.deployment.xcconfig"; sourceTree = "<group>"; };
+		731061C17E2EE5C45D51D435 /* ASINetworkQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASINetworkQueue.h; path = Classes/ASINetworkQueue.h; sourceTree = "<group>"; };
+		745871C5F6220AE5D8D56329 /* ASIS3Request.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIS3Request.h; path = Classes/S3/ASIS3Request.h; sourceTree = "<group>"; };
+		7521A610FFD64BD864360F3A /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		7A11E21541C98FA5AE80AC8C /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CDCC10B5ACDA38B6400B882 /* ASIDownloadCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIDownloadCache.h; path = Classes/ASIDownloadCache.h; sourceTree = "<group>"; };
+		80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-MASPreferences-Private.xcconfig"; sourceTree = "<group>"; };
+		8126DB299B4DE752F3D60DC8 /* Pods-Vienna-MASPreferences-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vienna-MASPreferences-prefix.pch"; sourceTree = "<group>"; };
+		8136A6460B3197D6D0FF0B2F /* ASIS3Bucket.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIS3Bucket.m; path = Classes/S3/ASIS3Bucket.m; sourceTree = "<group>"; };
+		82FDFE06811744682F446778 /* PXListView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PXListView.h; path = Classes/PXListView.h; sourceTree = "<group>"; };
+		848E2F4301FAAF79C7055A43 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
+		85E42F603322F2A40A0981D2 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
+		86760933565207FAB6EB5CE9 /* ASICloudFilesObjectRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesObjectRequest.h; path = Classes/CloudFiles/ASICloudFilesObjectRequest.h; sourceTree = "<group>"; };
+		86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-JSONKit-Private.xcconfig"; sourceTree = "<group>"; };
+		8DF815E011F94B9D68D73207 /* libPods-Vienna-PXListView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna-PXListView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90C806B2F53633E0A43BF858 /* libPods-Vienna-MASPreferences.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna-MASPreferences.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D8F8EB4ADDB1952A2BC93F /* ASINetworkQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASINetworkQueue.m; path = Classes/ASINetworkQueue.m; sourceTree = "<group>"; };
+		94F1E6605790DBB2ED0CCC33 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
+		9B06969BFE75DA586913B095 /* libPods-Vienna-JSONKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna-JSONKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FF60A1FC6ED3A1B272B2D23 /* Pods-Vienna.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
+		A1769004F38FBEA3FEE8686B /* ASICloudFilesContainerRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesContainerRequest.h; path = Classes/CloudFiles/ASICloudFilesContainerRequest.h; sourceTree = "<group>"; };
+		A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-FMDB-Private.xcconfig"; sourceTree = "<group>"; };
+		A300AD70CB6AB8B7B4CE1A00 /* Pods-Vienna-FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vienna-FMDB-dummy.m"; sourceTree = "<group>"; };
+		A9135CFF3BE38EC6A4E96521 /* ASICloudFilesContainerXMLParserDelegate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesContainerXMLParserDelegate.m; path = Classes/CloudFiles/ASICloudFilesContainerXMLParserDelegate.m; sourceTree = "<group>"; };
+		AA52D3DC7836969441076F20 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AE4C3CF90EEC34DF7C8763EA /* Pods-Vienna-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vienna-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B15C2CC5ABDAAF706E9DD5EC /* Pods-Vienna-JSONKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna-JSONKit.xcconfig"; sourceTree = "<group>"; };
+		B1C8DE8F9017954A6E4C9A59 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIHTTPRequest.h; path = Classes/ASIHTTPRequest.h; sourceTree = "<group>"; };
+		B44A0CEF01231C3704BCDF35 /* ASIS3BucketRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIS3BucketRequest.h; path = Classes/S3/ASIS3BucketRequest.h; sourceTree = "<group>"; };
+		B5740B5B400A53FBF107AE6F /* PXListViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PXListViewCell.m; path = Classes/PXListViewCell.m; sourceTree = "<group>"; };
+		BD50F57D5CCA07D54FC7B2AE /* libPods-Vienna-ASIHTTPRequest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna-ASIHTTPRequest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDD393AABBA14FD0EAEA2AAC /* ASIDataDecompressor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIDataDecompressor.h; path = Classes/ASIDataDecompressor.h; sourceTree = "<group>"; };
+		C00D6EA8C077C6333FE1DEB3 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
+		C2043DE1FE57C0AEDC696C49 /* Pods-Vienna-ASIHTTPRequest-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vienna-ASIHTTPRequest-dummy.m"; sourceTree = "<group>"; };
+		C502470FBF70E7BBBBC7DB46 /* Pods-Vienna-JSONKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vienna-JSONKit-prefix.pch"; sourceTree = "<group>"; };
+		C5E08A81AEC3287D75CDD380 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIFormDataRequest.h; path = Classes/ASIFormDataRequest.h; sourceTree = "<group>"; };
+		C65562AE29928BCC6FBC833C /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		C68A465DB66659C562D854D0 /* ASICloudFilesContainer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesContainer.m; path = Classes/CloudFiles/ASICloudFilesContainer.m; sourceTree = "<group>"; };
+		C889E2B2A7181337AFDE2159 /* ASICloudFilesRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASICloudFilesRequest.m; path = Classes/CloudFiles/ASICloudFilesRequest.m; sourceTree = "<group>"; };
+		CB7F0978243F542A025599AB /* ASIS3ServiceRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIS3ServiceRequest.m; path = Classes/S3/ASIS3ServiceRequest.m; sourceTree = "<group>"; };
+		CB971071D25A3E38723E4689 /* PXListView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PXListView.m; path = Classes/PXListView.m; sourceTree = "<group>"; };
+		CEBB72AAB56138633FE75173 /* ASIDataCompressor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASIDataCompressor.h; path = Classes/ASIDataCompressor.h; sourceTree = "<group>"; };
+		CEFF842F26B6CF8825EE003F /* PXListViewDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PXListViewDelegate.h; path = Classes/PXListViewDelegate.h; sourceTree = "<group>"; };
+		CF0D80070FBCDBCDA814A11A /* ASICloudFilesRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesRequest.h; path = Classes/CloudFiles/ASICloudFilesRequest.h; sourceTree = "<group>"; };
+		D3279F6C7B85D05100753407 /* Pods-Vienna-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Vienna-environment.h"; sourceTree = "<group>"; };
+		D99769DDF1D297200BC84DE2 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
+		DA96F3CB52E44C086D620430 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		DB19BBCF6C7194378C8D9D35 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIDataDecompressor.m; path = Classes/ASIDataDecompressor.m; sourceTree = "<group>"; };
+		DEA2C7D99ADED28DC3578AE9 /* Pods-Vienna-PXListView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vienna-PXListView-dummy.m"; sourceTree = "<group>"; };
+		DF0992E7252E63F723B0E667 /* ASICloudFilesContainerXMLParserDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesContainerXMLParserDelegate.h; path = Classes/CloudFiles/ASICloudFilesContainerXMLParserDelegate.h; sourceTree = "<group>"; };
+		E4E2048287A83B9DEA1948BC /* PXListDocumentView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PXListDocumentView.m; path = Classes/PXListDocumentView.m; sourceTree = "<group>"; };
+		EC365C978EADE8A31A4AE546 /* ASICloudFilesContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ASICloudFilesContainer.h; path = Classes/CloudFiles/ASICloudFilesContainer.h; sourceTree = "<group>"; };
+		F266C3B65E6448D30BBDCA47 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		FAEBF6091D701A6A7C7465F5 /* ASIDataCompressor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIDataCompressor.m; path = Classes/ASIDataCompressor.m; sourceTree = "<group>"; };
+		FB0CA48C8C21E3BD4377B393 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
+		FE815E8BF0FDF22CB616A79F /* ASIFormDataRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ASIFormDataRequest.m; path = Classes/ASIFormDataRequest.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		10AB344B98EADD69B5B83FAB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26D1AF236812BE367B9552E4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		450CA61C42A9F52C33DAAD7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5722DDE4809D4A6F89FAF8E1 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC71060A71441CC1F050C51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6639653C1BC2A6DE1E3F4CB /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB7C0084FA682064E3A0C21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4444C6E85DDB77DB0B9A657F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB1186262A4C73D335BD9BB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECEE45C37F5CF2CCB4F7FF11 /* Cocoa.framework in Frameworks */,
+				98F705E4BE970D6503F98EAC /* CoreServices.framework in Frameworks */,
+				2BA8A17D6235ADE5689C36EE /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C87F53CB1DA98E47B05326F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E759638BA82BA8C9265AB29 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0EBB7D8A2E960B547C363A30 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5385E488ED1FEFFEBEB08F71 /* MASPreferencesWindow.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		156DF1CBD219641F4AD8DD1B /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				7A06E14EE168EEE50B4F4AFD /* Cocoa.framework */,
+				246D0F5E8ED5BFF842621482 /* CoreServices.framework */,
+				3F4D286D33108A842FD749E6 /* SystemConfiguration.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		167AD5EFDC4C3C946AAF8A97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				156DF1CBD219641F4AD8DD1B /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45620754E4E9EFD55AB9E9DD /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				29F933B010B7A0C7DF140B41 /* Pods-Vienna-FMDB.xcconfig */,
+				A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */,
+				A300AD70CB6AB8B7B4CE1A00 /* Pods-Vienna-FMDB-dummy.m */,
+				2B15E6DAFACEE62230402DF3 /* Pods-Vienna-FMDB-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Vienna-FMDB";
+			sourceTree = "<group>";
+		};
+		4BD92366FB55693B556A5C0D /* ASIHTTPRequest */ = {
+			isa = PBXGroup;
+			children = (
+				5B2C9EFD42D51A210F02F35D /* ASIWebPageRequest */,
+				C85C2F7BFB5524F4B8AA66B0 /* CloudFiles */,
+				D6D53747D366057E600CF764 /* Core */,
+				8E02F44904760B01C774103C /* S3 */,
+				A16E25874A393A636997ACF1 /* Support Files */,
+			);
+			path = ASIHTTPRequest;
+			sourceTree = "<group>";
+		};
+		541D951A0BF61966CC594071 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B15C2CC5ABDAAF706E9DD5EC /* Pods-Vienna-JSONKit.xcconfig */,
+				86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */,
+				34A022297B1E352DAED2365C /* Pods-Vienna-JSONKit-dummy.m */,
+				C502470FBF70E7BBBBC7DB46 /* Pods-Vienna-JSONKit-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Vienna-JSONKit";
+			sourceTree = "<group>";
+		};
+		5A66B1E7DCA8A05FE11C3F44 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				67D01D02187F9494A07A8929 /* Pods-Vienna-PXListView.xcconfig */,
+				40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */,
+				DEA2C7D99ADED28DC3578AE9 /* Pods-Vienna-PXListView-dummy.m */,
+				54D940FDB3541FA1ADB43A2A /* Pods-Vienna-PXListView-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Vienna-PXListView";
+			sourceTree = "<group>";
+		};
+		5B2C9EFD42D51A210F02F35D /* ASIWebPageRequest */ = {
+			isa = PBXGroup;
+			children = (
+				328DEA5B5241A3560A7071D4 /* ASIWebPageRequest.h */,
+				435C038EE6E60DC2ED246E7C /* ASIWebPageRequest.m */,
+			);
+			name = ASIWebPageRequest;
+			sourceTree = "<group>";
+		};
+		6E883CF10F28066E13415901 /* PXListView */ = {
+			isa = PBXGroup;
+			children = (
+				216FC378990582E088AFF05F /* PXListDocumentView.h */,
+				E4E2048287A83B9DEA1948BC /* PXListDocumentView.m */,
+				82FDFE06811744682F446778 /* PXListView.h */,
+				CB971071D25A3E38723E4689 /* PXListView.m */,
+				19CFD0C0791C5E601F5C06C4 /* PXListView+Private.h */,
+				0DAC4B28C240E129D43A9871 /* PXListView+UserInteraction.h */,
+				645F121E635BD3FF4932546A /* PXListView+UserInteraction.m */,
+				27DF09876A994D48A10BEEE1 /* PXListViewCell.h */,
+				B5740B5B400A53FBF107AE6F /* PXListViewCell.m */,
+				15657618B67CEBF66E7A504D /* PXListViewCell+Private.h */,
+				CEFF842F26B6CF8825EE003F /* PXListViewDelegate.h */,
+				02448879A41A623989E2A545 /* PXListViewDropHighlight.h */,
+				5A66B1E7DCA8A05FE11C3F44 /* Support Files */,
+			);
+			path = PXListView;
+			sourceTree = "<group>";
+		};
+		6F3D05D615583658E20D2283 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A11E21541C98FA5AE80AC8C /* libPods-Vienna.a */,
+				BD50F57D5CCA07D54FC7B2AE /* libPods-Vienna-ASIHTTPRequest.a */,
+				3D8FAF8223396BD50CEB829B /* libPods-Vienna-FMDB.a */,
+				9B06969BFE75DA586913B095 /* libPods-Vienna-JSONKit.a */,
+				90C806B2F53633E0A43BF858 /* libPods-Vienna-MASPreferences.a */,
+				8DF815E011F94B9D68D73207 /* libPods-Vienna-PXListView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7902C36D6BF88C6C2F3AA659 /* Pods-Vienna */ = {
+			isa = PBXGroup;
+			children = (
+				AE4C3CF90EEC34DF7C8763EA /* Pods-Vienna-acknowledgements.markdown */,
+				39741A13D0C05EC41A6C831B /* Pods-Vienna-acknowledgements.plist */,
+				6728216F8CEAEEB9098787D6 /* Pods-Vienna-dummy.m */,
+				D3279F6C7B85D05100753407 /* Pods-Vienna-environment.h */,
+				6BC90A775BB165CCA8EC2079 /* Pods-Vienna-resources.sh */,
+				3CD6F3C217933693D724FDC3 /* Pods-Vienna.debug.xcconfig */,
+				6D35922D16E1E8A9EC9C561B /* Pods-Vienna.deployment.xcconfig */,
+				FB0CA48C8C21E3BD4377B393 /* Pods-Vienna.development.xcconfig */,
+				4282B2DCAE4534DD95C1AB4D /* Pods-Vienna.release.xcconfig */,
+				9FF60A1FC6ED3A1B272B2D23 /* Pods-Vienna.staticanalyzer.xcconfig */,
+			);
+			name = "Pods-Vienna";
+			path = "Target Support Files/Pods-Vienna";
+			sourceTree = "<group>";
+		};
+		8A18A2E5036F24D931A6B950 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4BD92366FB55693B556A5C0D /* ASIHTTPRequest */,
+				C51399AD82896D5E737339B8 /* FMDB */,
+				AA2CF1455BC57FB4A65B3BAE /* JSONKit */,
+				D78E974594367DCA67510DBC /* MASPreferences */,
+				6E883CF10F28066E13415901 /* PXListView */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8E02F44904760B01C774103C /* S3 */ = {
+			isa = PBXGroup;
+			children = (
+				1D83502778B54DA7F53DE5FE /* ASIS3Bucket.h */,
+				8136A6460B3197D6D0FF0B2F /* ASIS3Bucket.m */,
+				68FB3CEA3784D5C09B201594 /* ASIS3BucketObject.h */,
+				46D28B04963FDDF2E7AEFFE8 /* ASIS3BucketObject.m */,
+				B44A0CEF01231C3704BCDF35 /* ASIS3BucketRequest.h */,
+				622FE89DD858295F8EA99F75 /* ASIS3BucketRequest.m */,
+				2A09D4A2B8506A8668CBC507 /* ASIS3ObjectRequest.h */,
+				25B2C7FD2BB3FC8D094F8BEE /* ASIS3ObjectRequest.m */,
+				745871C5F6220AE5D8D56329 /* ASIS3Request.h */,
+				083D47813FAA849173CDC9B9 /* ASIS3Request.m */,
+				4A5E91D5BD14A9502524CD10 /* ASIS3ServiceRequest.h */,
+				CB7F0978243F542A025599AB /* ASIS3ServiceRequest.m */,
+			);
+			name = S3;
+			sourceTree = "<group>";
+		};
+		900CB79E40E36EE2283818A6 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				F266C3B65E6448D30BBDCA47 /* FMDB.h */,
+				6CC3F728C2DD708C3632F9EF /* FMDatabase.h */,
+				D99769DDF1D297200BC84DE2 /* FMDatabase.m */,
+				0C88DE3DA386E31787F713EA /* FMDatabaseAdditions.h */,
+				C65562AE29928BCC6FBC833C /* FMDatabaseAdditions.m */,
+				C00D6EA8C077C6333FE1DEB3 /* FMDatabasePool.h */,
+				16132583D0C645A605722AD7 /* FMDatabasePool.m */,
+				DA96F3CB52E44C086D620430 /* FMDatabaseQueue.h */,
+				7521A610FFD64BD864360F3A /* FMDatabaseQueue.m */,
+				94F1E6605790DBB2ED0CCC33 /* FMResultSet.h */,
+				4C86629B84B1D8B9E260CC7C /* FMResultSet.m */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		A16E25874A393A636997ACF1 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F25049648D1FA1883E22F5A /* Pods-Vienna-ASIHTTPRequest.xcconfig */,
+				03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */,
+				C2043DE1FE57C0AEDC696C49 /* Pods-Vienna-ASIHTTPRequest-dummy.m */,
+				24FBB06B833F7FF24A52D54B /* Pods-Vienna-ASIHTTPRequest-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Vienna-ASIHTTPRequest";
+			sourceTree = "<group>";
+		};
+		AA2CF1455BC57FB4A65B3BAE /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				3671D12312345041A5555BD6 /* JSONKit.h */,
+				3023EC3198FAC7ACA18FA9D2 /* JSONKit.m */,
+				541D951A0BF61966CC594071 /* Support Files */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		C2F04F7A5E9DD900B2D56999 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2D457AD2D80E968F6845A6AF /* Pods-Vienna-MASPreferences.xcconfig */,
+				80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */,
+				157F62332193ACD38562523D /* Pods-Vienna-MASPreferences-dummy.m */,
+				8126DB299B4DE752F3D60DC8 /* Pods-Vienna-MASPreferences-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-Vienna-MASPreferences";
+			sourceTree = "<group>";
+		};
+		C51399AD82896D5E737339B8 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				45620754E4E9EFD55AB9E9DD /* Support Files */,
+				900CB79E40E36EE2283818A6 /* common */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		C85C2F7BFB5524F4B8AA66B0 /* CloudFiles */ = {
+			isa = PBXGroup;
+			children = (
+				015124D82A12F098002F870E /* ASICloudFilesCDNRequest.h */,
+				196760E3A0298E4F431DB04D /* ASICloudFilesCDNRequest.m */,
+				EC365C978EADE8A31A4AE546 /* ASICloudFilesContainer.h */,
+				C68A465DB66659C562D854D0 /* ASICloudFilesContainer.m */,
+				A1769004F38FBEA3FEE8686B /* ASICloudFilesContainerRequest.h */,
+				68609902AF5DEE002838DD5A /* ASICloudFilesContainerRequest.m */,
+				DF0992E7252E63F723B0E667 /* ASICloudFilesContainerXMLParserDelegate.h */,
+				A9135CFF3BE38EC6A4E96521 /* ASICloudFilesContainerXMLParserDelegate.m */,
+				22CB8B6D80D25D88AC331E39 /* ASICloudFilesObject.h */,
+				31137060870C8912016A7DAD /* ASICloudFilesObject.m */,
+				86760933565207FAB6EB5CE9 /* ASICloudFilesObjectRequest.h */,
+				4E8D4FCD6F643FF765624C0E /* ASICloudFilesObjectRequest.m */,
+				CF0D80070FBCDBCDA814A11A /* ASICloudFilesRequest.h */,
+				C889E2B2A7181337AFDE2159 /* ASICloudFilesRequest.m */,
+				3C7891F868E837C8EF958743 /* ASINSXMLParserCompat.h */,
+			);
+			name = CloudFiles;
+			sourceTree = "<group>";
+		};
+		D6D53747D366057E600CF764 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				01402D8B8F3071C0AE3DDEAA /* ASICacheDelegate.h */,
+				CEBB72AAB56138633FE75173 /* ASIDataCompressor.h */,
+				FAEBF6091D701A6A7C7465F5 /* ASIDataCompressor.m */,
+				BDD393AABBA14FD0EAEA2AAC /* ASIDataDecompressor.h */,
+				DB19BBCF6C7194378C8D9D35 /* ASIDataDecompressor.m */,
+				7CDCC10B5ACDA38B6400B882 /* ASIDownloadCache.h */,
+				694BE3DCC727B0A94E04AD03 /* ASIDownloadCache.m */,
+				C5E08A81AEC3287D75CDD380 /* ASIFormDataRequest.h */,
+				FE815E8BF0FDF22CB616A79F /* ASIFormDataRequest.m */,
+				B1C8DE8F9017954A6E4C9A59 /* ASIHTTPRequest.h */,
+				3128D551278A97A86479E823 /* ASIHTTPRequest.m */,
+				42608E7E811653E55F3F825B /* ASIHTTPRequestConfig.h */,
+				33F9C544CBF28DBB27A57168 /* ASIHTTPRequestDelegate.h */,
+				2EA0045509B9312629E3814B /* ASIInputStream.h */,
+				0717F0A61E28DCC62DD26FDC /* ASIInputStream.m */,
+				731061C17E2EE5C45D51D435 /* ASINetworkQueue.h */,
+				90D8F8EB4ADDB1952A2BC93F /* ASINetworkQueue.m */,
+				2B00FD90A275AEB0FA46806E /* ASIProgressDelegate.h */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		D78E974594367DCA67510DBC /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				848E2F4301FAAF79C7055A43 /* MASPreferencesViewController.h */,
+				85E42F603322F2A40A0981D2 /* MASPreferencesWindowController.h */,
+				1F7C62271433C2D6B68C0879 /* MASPreferencesWindowController.m */,
+				0EBB7D8A2E960B547C363A30 /* Resources */,
+				C2F04F7A5E9DD900B2D56999 /* Support Files */,
+			);
+			path = MASPreferences;
+			sourceTree = "<group>";
+		};
+		DFAB00B2463CE03EC85382A4 = {
+			isa = PBXGroup;
+			children = (
+				AA52D3DC7836969441076F20 /* Podfile */,
+				167AD5EFDC4C3C946AAF8A97 /* Frameworks */,
+				8A18A2E5036F24D931A6B950 /* Pods */,
+				6F3D05D615583658E20D2283 /* Products */,
+				EA55D9981A4F7AD5A90E159C /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		EA55D9981A4F7AD5A90E159C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7902C36D6BF88C6C2F3AA659 /* Pods-Vienna */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7F6207AB429059F222657129 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5ED4D74D8BBD980BC2948BC /* MASPreferencesViewController.h in Headers */,
+				9FB0BD6D3EB8F7A033B7F193 /* MASPreferencesWindowController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC9DAD3CA3F64410009B50E7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD9EB447D0220CC6AE65D9EA /* JSONKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1C6CBB450EE35A371A18E64 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E30A1C0FD5A2557E6FECAAFE /* ASICacheDelegate.h in Headers */,
+				FB425913E5458E8914E741CE /* ASICloudFilesCDNRequest.h in Headers */,
+				3C09522356C456C088A8D103 /* ASICloudFilesContainer.h in Headers */,
+				6FCEA25E8A930D0B2AE71C4E /* ASICloudFilesContainerRequest.h in Headers */,
+				24E1157FAA9EAFFFA0868A9F /* ASICloudFilesContainerXMLParserDelegate.h in Headers */,
+				BA172845155860A7E3B6404E /* ASICloudFilesObject.h in Headers */,
+				C82C858647251F1F9A7663CB /* ASICloudFilesObjectRequest.h in Headers */,
+				07ABBDDB428D08D0EAA4508B /* ASICloudFilesRequest.h in Headers */,
+				2B50A435BAEE24122D9A4742 /* ASIDataCompressor.h in Headers */,
+				8E9B66BBA706AA45E1EF80CC /* ASIDataDecompressor.h in Headers */,
+				013917B4DE82E4726C24A9E0 /* ASIDownloadCache.h in Headers */,
+				532178BACF605AE938CB31CB /* ASIFormDataRequest.h in Headers */,
+				B038835CAA2AF7E255DDEFB5 /* ASIHTTPRequest.h in Headers */,
+				FD17D962EB3B08E05F0ACA50 /* ASIHTTPRequestConfig.h in Headers */,
+				D30C879F01831AADB4A2D757 /* ASIHTTPRequestDelegate.h in Headers */,
+				93E8FE06427CD0CD70C888F6 /* ASIInputStream.h in Headers */,
+				F3AF7CBF55697A8DEC9E7CE9 /* ASINSXMLParserCompat.h in Headers */,
+				1BA4E9621EFACFB97B41A2A8 /* ASINetworkQueue.h in Headers */,
+				E77C9F11D17A0A0246559839 /* ASIProgressDelegate.h in Headers */,
+				3BDC41178D9156C8CDAB82C5 /* ASIS3Bucket.h in Headers */,
+				29CEBD1F5FDECBFE011DE17B /* ASIS3BucketObject.h in Headers */,
+				16C12F7E1531ED47212259C7 /* ASIS3BucketRequest.h in Headers */,
+				2CAB890E6CD1CB07683AE9BF /* ASIS3ObjectRequest.h in Headers */,
+				D9B460BC5E360F1134FA6121 /* ASIS3Request.h in Headers */,
+				CA680521FEC6E3FA539FEEE5 /* ASIS3ServiceRequest.h in Headers */,
+				3697E56EBF6F11B0A4DF19B9 /* ASIWebPageRequest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C756D4BC0F0DFE5AD2DB58E8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				015022613647263D19D329E1 /* FMDB.h in Headers */,
+				7154BDD1860F7C518FA06054 /* FMDatabase.h in Headers */,
+				C59F63AD1D62E77B118AE6AD /* FMDatabaseAdditions.h in Headers */,
+				3630394E1F584E1A8C9E1F56 /* FMDatabasePool.h in Headers */,
+				8DA7D99F83998489808959D6 /* FMDatabaseQueue.h in Headers */,
+				45359C3EEBB646C95FCC9732 /* FMResultSet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F306864EED323BF6B75702FC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96D02C8AE530A6E34097DF36 /* PXListDocumentView.h in Headers */,
+				58572E3A9A72191F3D7FFADC /* PXListView+Private.h in Headers */,
+				9D47083B70D9BF9C2B790815 /* PXListView+UserInteraction.h in Headers */,
+				ED0D4A5CBC3DEA8997B7B176 /* PXListView.h in Headers */,
+				9882C8E3B6963C222457B1EA /* PXListViewCell+Private.h in Headers */,
+				46A202EF99584DDCC8292E7D /* PXListViewCell.h in Headers */,
+				581A7B1C5D34FFB23E260EA7 /* PXListViewDelegate.h in Headers */,
+				C4130CA16E8DF606285D79E1 /* PXListViewDropHighlight.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		139517F754D1137128F26830 /* Pods-Vienna-JSONKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B21A0BF4CF5A6208B3DAD65F /* Build configuration list for PBXNativeTarget "Pods-Vienna-JSONKit" */;
+			buildPhases = (
+				78C54E90FEDA58F7CAF2CB9C /* Sources */,
+				6DC71060A71441CC1F050C51 /* Frameworks */,
+				BC9DAD3CA3F64410009B50E7 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Vienna-JSONKit";
+			productName = "Pods-Vienna-JSONKit";
+			productReference = 9B06969BFE75DA586913B095 /* libPods-Vienna-JSONKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		2148C72F6335EBE4E45CD5E2 /* Pods-Vienna */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 775DE47F9D83F1FB7F33D4DC /* Build configuration list for PBXNativeTarget "Pods-Vienna" */;
+			buildPhases = (
+				08D7C1242AF41F69767992B0 /* Sources */,
+				C87F53CB1DA98E47B05326F5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E63E1EDC22C33FF62BE2AC9 /* PBXTargetDependency */,
+				558AA8209D4BF985D1BD1EB2 /* PBXTargetDependency */,
+				DA16208087B78B974B003072 /* PBXTargetDependency */,
+				731832F79B3E207EF2923DFC /* PBXTargetDependency */,
+				627E76F7D8679FEFC63B5B32 /* PBXTargetDependency */,
+			);
+			name = "Pods-Vienna";
+			productName = "Pods-Vienna";
+			productReference = 7A11E21541C98FA5AE80AC8C /* libPods-Vienna.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		86A905B621D8CEEFC94AAADE /* Pods-Vienna-ASIHTTPRequest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5F1B493A968310963CB8E6A /* Build configuration list for PBXNativeTarget "Pods-Vienna-ASIHTTPRequest" */;
+			buildPhases = (
+				F18045ACDEB310334A1DDE78 /* Sources */,
+				BB1186262A4C73D335BD9BB9 /* Frameworks */,
+				C1C6CBB450EE35A371A18E64 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Vienna-ASIHTTPRequest";
+			productName = "Pods-Vienna-ASIHTTPRequest";
+			productReference = BD50F57D5CCA07D54FC7B2AE /* libPods-Vienna-ASIHTTPRequest.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		8995B6F8270FBD6D0F79ADC9 /* Pods-Vienna-MASPreferences */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E0038D06415E98C616868C5 /* Build configuration list for PBXNativeTarget "Pods-Vienna-MASPreferences" */;
+			buildPhases = (
+				953E064F514EF88EDECC336F /* Sources */,
+				450CA61C42A9F52C33DAAD7B /* Frameworks */,
+				7F6207AB429059F222657129 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Vienna-MASPreferences";
+			productName = "Pods-Vienna-MASPreferences";
+			productReference = 90C806B2F53633E0A43BF858 /* libPods-Vienna-MASPreferences.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9B444DEA37971A59A2BB6BE9 /* Pods-Vienna-PXListView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78AF588A82088F120F2A4377 /* Build configuration list for PBXNativeTarget "Pods-Vienna-PXListView" */;
+			buildPhases = (
+				0FBA6916E7DA0E6EFCDBC330 /* Sources */,
+				7EB7C0084FA682064E3A0C21 /* Frameworks */,
+				F306864EED323BF6B75702FC /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Vienna-PXListView";
+			productName = "Pods-Vienna-PXListView";
+			productReference = 8DF815E011F94B9D68D73207 /* libPods-Vienna-PXListView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E18FB03175D99B486EA69633 /* Pods-Vienna-FMDB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D58A232EA1C28C15694CABF4 /* Build configuration list for PBXNativeTarget "Pods-Vienna-FMDB" */;
+			buildPhases = (
+				1182E17E8BAF6D79E4E0325C /* Sources */,
+				10AB344B98EADD69B5B83FAB /* Frameworks */,
+				C756D4BC0F0DFE5AD2DB58E8 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-Vienna-FMDB";
+			productName = "Pods-Vienna-FMDB";
+			productReference = 3D8FAF8223396BD50CEB829B /* libPods-Vienna-FMDB.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F19C85184931E0F603D4C7C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = 0783F5A5DC8594834EB21CB1 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFAB00B2463CE03EC85382A4;
+			productRefGroup = 6F3D05D615583658E20D2283 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2148C72F6335EBE4E45CD5E2 /* Pods-Vienna */,
+				86A905B621D8CEEFC94AAADE /* Pods-Vienna-ASIHTTPRequest */,
+				E18FB03175D99B486EA69633 /* Pods-Vienna-FMDB */,
+				139517F754D1137128F26830 /* Pods-Vienna-JSONKit */,
+				8995B6F8270FBD6D0F79ADC9 /* Pods-Vienna-MASPreferences */,
+				9B444DEA37971A59A2BB6BE9 /* Pods-Vienna-PXListView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		08D7C1242AF41F69767992B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				590036C3A6F1E0F1A8894EF7 /* Pods-Vienna-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FBA6916E7DA0E6EFCDBC330 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				938E039382CA818A612F277C /* PXListDocumentView.m in Sources */,
+				649C0A9EF1FD44123AC00820 /* PXListView+UserInteraction.m in Sources */,
+				651D8E5146B8A455E66C9890 /* PXListView.m in Sources */,
+				DCC904ADB69CF3EC65306CA3 /* PXListViewCell.m in Sources */,
+				FCDEE35B0E9C7580A9037F3B /* Pods-Vienna-PXListView-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1182E17E8BAF6D79E4E0325C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA6CBF8CB49D3EED01054291 /* FMDatabase.m in Sources */,
+				484D6C8D998649B6FEF18A1B /* FMDatabaseAdditions.m in Sources */,
+				B08F28F630B0D23B2532586D /* FMDatabasePool.m in Sources */,
+				B6D51319AA927CD5E9969FE0 /* FMDatabaseQueue.m in Sources */,
+				3786506BF711F7434FD59420 /* FMResultSet.m in Sources */,
+				DA0EC1EDD500164C27D3833B /* Pods-Vienna-FMDB-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78C54E90FEDA58F7CAF2CB9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FA0C8F24CAB7209B14C38BD /* JSONKit.m in Sources */,
+				91EFC02610195AEB83A8316A /* Pods-Vienna-JSONKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953E064F514EF88EDECC336F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				121AA456E63CC4C0C5B2A43E /* MASPreferencesWindowController.m in Sources */,
+				CD5339F4F74630660500AA60 /* Pods-Vienna-MASPreferences-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F18045ACDEB310334A1DDE78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C1CBF0395C4FD8A17F983D /* ASICloudFilesCDNRequest.m in Sources */,
+				F08B77E150B03D51B7963C18 /* ASICloudFilesContainer.m in Sources */,
+				D48A56CF25303FD8FC1057CA /* ASICloudFilesContainerRequest.m in Sources */,
+				D991C422B638092C8B4DD886 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
+				3870C6FF75FE2DC2E3BC0CB1 /* ASICloudFilesObject.m in Sources */,
+				B2F104113C0845F44EF54B4C /* ASICloudFilesObjectRequest.m in Sources */,
+				F649BA06DF9D252C618A3560 /* ASICloudFilesRequest.m in Sources */,
+				00A2E8B5297DF29B8BE946D6 /* ASIDataCompressor.m in Sources */,
+				3700A43877803809C8D444C2 /* ASIDataDecompressor.m in Sources */,
+				B990BAFB38383E17982B0DF0 /* ASIDownloadCache.m in Sources */,
+				D4386E0617C03631518713AE /* ASIFormDataRequest.m in Sources */,
+				5984DDF8A2B37242C6B1F6CE /* ASIHTTPRequest.m in Sources */,
+				29B9414A04AF0DE47D1369EA /* ASIInputStream.m in Sources */,
+				0CF1BF96F4B635F41DFE4770 /* ASINetworkQueue.m in Sources */,
+				A591D9FC35396139710918ED /* ASIS3Bucket.m in Sources */,
+				8A461B6B3A3C1EAFC98123B0 /* ASIS3BucketObject.m in Sources */,
+				0E28D07EF950D1F2A8FF798C /* ASIS3BucketRequest.m in Sources */,
+				2AB4AAC9DFC06E1292098171 /* ASIS3ObjectRequest.m in Sources */,
+				FF4696183EF959A45432A7F9 /* ASIS3Request.m in Sources */,
+				EAF8B5BD17604D20D1E5A602 /* ASIS3ServiceRequest.m in Sources */,
+				CF7680BAE357FD0C45D00670 /* ASIWebPageRequest.m in Sources */,
+				6435BB4E2ECCC60113A1C025 /* Pods-Vienna-ASIHTTPRequest-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E63E1EDC22C33FF62BE2AC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Vienna-ASIHTTPRequest";
+			target = 86A905B621D8CEEFC94AAADE /* Pods-Vienna-ASIHTTPRequest */;
+			targetProxy = 8C1DE61E9BAF66D8DBB0A46A /* PBXContainerItemProxy */;
+		};
+		558AA8209D4BF985D1BD1EB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Vienna-FMDB";
+			target = E18FB03175D99B486EA69633 /* Pods-Vienna-FMDB */;
+			targetProxy = 20CF29DAAE1F78A6B7F15EE7 /* PBXContainerItemProxy */;
+		};
+		627E76F7D8679FEFC63B5B32 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Vienna-PXListView";
+			target = 9B444DEA37971A59A2BB6BE9 /* Pods-Vienna-PXListView */;
+			targetProxy = D4BE3183FFC54C2564D9DDA3 /* PBXContainerItemProxy */;
+		};
+		731832F79B3E207EF2923DFC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Vienna-MASPreferences";
+			target = 8995B6F8270FBD6D0F79ADC9 /* Pods-Vienna-MASPreferences */;
+			targetProxy = 71A471D4E3FF6F29C1A28877 /* PBXContainerItemProxy */;
+		};
+		DA16208087B78B974B003072 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Vienna-JSONKit";
+			target = 139517F754D1137128F26830 /* Pods-Vienna-JSONKit */;
+			targetProxy = 8FCB6E6BAF4E6048146B5F1A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00BD07587657B7FC6E0F8894 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-ASIHTTPRequest/Pods-Vienna-ASIHTTPRequest-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		07BB33F940873E71867A18C1 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-PXListView/Pods-Vienna-PXListView-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		1014D50F2703C455F03F32B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-ASIHTTPRequest/Pods-Vienna-ASIHTTPRequest-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		127431E1801F811849C694C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-MASPreferences/Pods-Vienna-MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		12EEC55192F5E81945A35FC0 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-FMDB/Pods-Vienna-FMDB-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
+		19A20D66285B70B13691C4E8 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D35922D16E1E8A9EC9C561B /* Pods-Vienna.deployment.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		19C243ED0B6939030D819987 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "STATICANALYZER=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = StaticAnalyzer;
+		};
+		28E96E7B62671B22C9FA2A68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-JSONKit/Pods-Vienna-JSONKit-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2E41779DED73AA4522671AB0 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-MASPreferences/Pods-Vienna-MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
+		3CBEEABC501288B6B8BA1FCC /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-JSONKit/Pods-Vienna-JSONKit-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		3E191EE2ADE6784C5E1DE424 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-ASIHTTPRequest/Pods-Vienna-ASIHTTPRequest-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
+		45B7970EEE9BEBC5497B693F /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FF60A1FC6ED3A1B272B2D23 /* Pods-Vienna.staticanalyzer.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
+		576AE139050F0183A49C4685 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CD6F3C217933693D724FDC3 /* Pods-Vienna.debug.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		598568E6D9497888F9932241 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEVELOPMENT=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Development;
+		};
+		5EB4086D50C3E576B98C8888 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		784FC075FE0E31441EDAE684 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-MASPreferences/Pods-Vienna-MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7D314481EFD65C49CFC88EA4 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-FMDB/Pods-Vienna-FMDB-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		80A8D7FF3C5AB89162EA7FB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-PXListView/Pods-Vienna-PXListView-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		833CE2D1C77D45115D3F6921 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB0CA48C8C21E3BD4377B393 /* Pods-Vienna.development.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		8EBC95FF75D82B7FFD31DAC4 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-PXListView/Pods-Vienna-PXListView-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		9B8B98426F18CC1E275F1B2B /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEPLOYMENT=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Deployment;
+		};
+		9E1B00FC46E0B5F31B9A6957 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-FMDB/Pods-Vienna-FMDB-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		AE60052E450CBAE0856EC0F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-FMDB/Pods-Vienna-FMDB-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AF2A00E4D1E577BA0B6DE289 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-JSONKit/Pods-Vienna-JSONKit-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
+		B25211A6AB0E0497B4E945DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4282B2DCAE4534DD95C1AB4D /* Pods-Vienna.release.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B3EA0564E1BC11816DB31D04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-ASIHTTPRequest/Pods-Vienna-ASIHTTPRequest-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B95E2F1B5D24B8FE42280F7F /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-JSONKit/Pods-Vienna-JSONKit-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		BCCF755D66E0373E058A9E74 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03F47C70B1150333AE03B1C3 /* Pods-Vienna-ASIHTTPRequest-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-ASIHTTPRequest/Pods-Vienna-ASIHTTPRequest-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		BD122EB7635BDB30E11C5F46 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-PXListView/Pods-Vienna-PXListView-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
+		BF303C0A46BC150570D64920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86EA8FC52558F855AA4C48D6 /* Pods-Vienna-JSONKit-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-JSONKit/Pods-Vienna-JSONKit-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D9887182AAA0080E536979DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DF98F5D5D6FE57F6B445A0C6 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-MASPreferences/Pods-Vienna-MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		E19C5312FC45D582B9ED02BA /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80C2B59FC41AB96FBB85218E /* Pods-Vienna-MASPreferences-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-MASPreferences/Pods-Vienna-MASPreferences-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		EDF2BF9FBE40FB576949E1D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40677907499F0C5052F86173 /* Pods-Vienna-PXListView-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-PXListView/Pods-Vienna-PXListView-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FCDC6A923B17054E4BB911AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2605B9C73BF253580C838BA /* Pods-Vienna-FMDB-Private.xcconfig */;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-Vienna-FMDB/Pods-Vienna-FMDB-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0783F5A5DC8594834EB21CB1 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5EB4086D50C3E576B98C8888 /* Debug */,
+				9B8B98426F18CC1E275F1B2B /* Deployment */,
+				598568E6D9497888F9932241 /* Development */,
+				D9887182AAA0080E536979DD /* Release */,
+				19C243ED0B6939030D819987 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E0038D06415E98C616868C5 /* Build configuration list for PBXNativeTarget "Pods-Vienna-MASPreferences" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				784FC075FE0E31441EDAE684 /* Debug */,
+				E19C5312FC45D582B9ED02BA /* Deployment */,
+				DF98F5D5D6FE57F6B445A0C6 /* Development */,
+				127431E1801F811849C694C2 /* Release */,
+				2E41779DED73AA4522671AB0 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		775DE47F9D83F1FB7F33D4DC /* Build configuration list for PBXNativeTarget "Pods-Vienna" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				576AE139050F0183A49C4685 /* Debug */,
+				19A20D66285B70B13691C4E8 /* Deployment */,
+				833CE2D1C77D45115D3F6921 /* Development */,
+				B25211A6AB0E0497B4E945DF /* Release */,
+				45B7970EEE9BEBC5497B693F /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78AF588A82088F120F2A4377 /* Build configuration list for PBXNativeTarget "Pods-Vienna-PXListView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDF2BF9FBE40FB576949E1D9 /* Debug */,
+				07BB33F940873E71867A18C1 /* Deployment */,
+				8EBC95FF75D82B7FFD31DAC4 /* Development */,
+				80A8D7FF3C5AB89162EA7FB1 /* Release */,
+				BD122EB7635BDB30E11C5F46 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5F1B493A968310963CB8E6A /* Build configuration list for PBXNativeTarget "Pods-Vienna-ASIHTTPRequest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1014D50F2703C455F03F32B2 /* Debug */,
+				BCCF755D66E0373E058A9E74 /* Deployment */,
+				00BD07587657B7FC6E0F8894 /* Development */,
+				B3EA0564E1BC11816DB31D04 /* Release */,
+				3E191EE2ADE6784C5E1DE424 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B21A0BF4CF5A6208B3DAD65F /* Build configuration list for PBXNativeTarget "Pods-Vienna-JSONKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF303C0A46BC150570D64920 /* Debug */,
+				B95E2F1B5D24B8FE42280F7F /* Deployment */,
+				3CBEEABC501288B6B8BA1FCC /* Development */,
+				28E96E7B62671B22C9FA2A68 /* Release */,
+				AF2A00E4D1E577BA0B6DE289 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D58A232EA1C28C15694CABF4 /* Build configuration list for PBXNativeTarget "Pods-Vienna-FMDB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FCDC6A923B17054E4BB911AA /* Debug */,
+				7D314481EFD65C49CFC88EA4 /* Deployment */,
+				9E1B00FC46E0B5F31B9A6957 /* Development */,
+				AE60052E450CBAE0856EC0F7 /* Release */,
+				12EEC55192F5E81945A35FC0 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F19C85184931E0F603D4C7C /* Project object */;
+}

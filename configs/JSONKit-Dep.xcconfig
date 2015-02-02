@@ -1,4 +1,0 @@
-// JSONKit settings for Deployment configuration
-
-#include "JSONKit-All.xcconfig"
-#include "General-Dep.xcconfig"
