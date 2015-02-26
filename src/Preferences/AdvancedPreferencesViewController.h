@@ -23,11 +23,13 @@
 @interface AdvancedPreferencesViewController : NSViewController <MASPreferencesViewController> {
     IBOutlet NSButton * useJavaScriptButton;
     IBOutlet NSPopUpButton * concurrentDownloads;
+    IBOutlet NSButton *useWebPluginsButton;
 }
 
 // Action functions
 -(IBAction)changeUseJavaScript:(id)sender;
 -(IBAction)changeConcurrentDownloads:(id)sender;
 -(IBAction)showAdvancedHelp:(id)sender;
+- (IBAction)changeUseWebPlugins:(NSButton *)sender;
 
 @end

@@ -42,6 +42,7 @@
 	BOOL hasPrefs;
 	BOOL showFolderImages;
 	BOOL useJavaScript;
+    BOOL useWebPlugins;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
 	BOOL showFilterBar;
@@ -67,6 +68,11 @@
 	NSString * syncServer;
 	NSString * syncingUser;
 }
+
+// String constants for NSNotificationCenter
+extern NSString * const kMA_Notify_MinimumFontSizeChange;
+extern NSString * const kMA_Notify_UseJavaScriptChange;
+extern NSString * const kMA_Notify_UseWebPluginsChange;
 
 // Accessor functions
 +(Preferences *)standardPreferences;
@@ -156,6 +162,10 @@
 // JavaScript settings
 -(BOOL)useJavaScript;
 -(void)setUseJavaScript:(BOOL)flag;
+
+// Web Plugins settings
+-(BOOL)useWebPlugins;
+-(void)setUseWebPlugins:(BOOL)flag;
 
 // Refresh frequency
 -(void)setRefreshFrequency:(int)newFrequency;
