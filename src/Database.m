@@ -55,6 +55,7 @@ const NSInteger MA_Current_DB_Version = 18;
 
 @implementation Database
 
+@synthesize databaseQueue;
 @synthesize trashFolder, searchFolder;
 
 /* init
@@ -74,6 +75,7 @@ const NSInteger MA_Current_DB_Version = 18;
         searchString = @"";
         smartfoldersDict = [[NSMutableDictionary alloc] init];
         foldersDict = [[NSMutableDictionary alloc] init];
+        databaseQueue = nil;
         //_databaseQueue = [[FMDatabaseQueue alloc] initWithPath:[self databasePath]];
         _transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
         _execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
@@ -2661,8 +2663,8 @@ const NSInteger MA_Current_DB_Version = 18;
 		[self close];
 	[sqlDatabase release];
 	sqlDatabase=nil;
-    [_databaseQueue release];
-    _databaseQueue=nil;
+    [databaseQueue release];
+    databaseQueue=nil;
 	[super dealloc];
 }
 @end
