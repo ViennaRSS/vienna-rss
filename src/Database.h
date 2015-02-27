@@ -43,6 +43,7 @@
 	dispatch_queue_t _execQueue;
 	Folder * trashFolder;
 	Folder * searchFolder;
+    FMDatabaseQueue *databaseQueue;
 }
 
 @property(nonatomic, retain) Folder * trashFolder;
