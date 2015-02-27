@@ -93,7 +93,7 @@
 	NSString * usernameString = [[userName stringValue] trim];
 	NSString * passwordString = [password stringValue];
 
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	[db setFolderUsername:[folder itemId] newUsername:usernameString];
 	[folder setPassword:passwordString];
 	

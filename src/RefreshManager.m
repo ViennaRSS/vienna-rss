@@ -145,7 +145,7 @@ static RefreshManager * _refreshManager = nil;
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
+	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] intValue]];
 	if (folder != nil)
 	{
         for (ASIHTTPRequest *theRequest in [networkQueue operations]) {
@@ -165,7 +165,7 @@ static RefreshManager * _refreshManager = nil;
 	for (Folder * folder in foldersArray)
 	{
 		if (IsGroupFolder(folder))
-			[self forceRefreshSubscriptionForFolders:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
+			[self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:[folder itemId]]];
 		else if (IsGoogleReaderFolder(folder))
 		{
 			if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] && ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
@@ -184,7 +184,7 @@ static RefreshManager * _refreshManager = nil;
 	for (Folder * folder in foldersArray)
 	{
 		if (IsGroupFolder(folder))
-			[self refreshSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]] ignoringSubscriptionStatus:NO];
+			[self refreshSubscriptions:[[Database sharedManager] arrayOfFolders:[folder itemId]] ignoringSubscriptionStatus:NO];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
 			if (!IsUnsubscribed(folder) || ignoreSubStatus)
@@ -229,7 +229,7 @@ static RefreshManager * _refreshManager = nil;
     if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) [array addObject:folder];
     else
     {
-        Database * db = [Database sharedDatabase];
+        Database * db = [Database sharedManager];
         for (Folder * f in [db arrayOfFolders:[folder itemId]])
             [self addRSSFoldersIn:f toArray:array];
     }
@@ -254,7 +254,7 @@ static RefreshManager * _refreshManager = nil;
 	for (Folder * folder in foldersArray)
 	{
 		if (IsGroupFolder(folder))
-			[self refreshFolderIconCacheForSubscriptions:[[Database sharedDatabase] arrayOfFolders:[folder itemId]]];
+			[self refreshFolderIconCacheForSubscriptions:[[Database sharedManager] arrayOfFolders:[folder itemId]]];
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
 			dispatch_async(dispatch_get_main_queue(), ^{
@@ -274,7 +274,7 @@ static RefreshManager * _refreshManager = nil;
 	// or if the feed already has a favicon.
 	if ((IsRSSFolder(folder)||IsGoogleReaderFolder(folder)) && ([folder homePage] == nil || [[folder homePage] isBlank] || [folder hasCachedImage]))
 	{
-		Database *db = [Database sharedDatabase];
+		Database *db = [Database sharedManager];
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 		}]; //end transaction block
@@ -376,7 +376,7 @@ static RefreshManager * _refreshManager = nil;
 -(void)handleGotAuthenticationForFolder:(NSNotification *)nc
 {
 	Folder * folder = (Folder *)[nc object];
-	[[Database sharedDatabase] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_NeedCredentials];
+	[[Database sharedManager] clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_NeedCredentials];
 	[authQueue removeObject:folder];
 	[self refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:YES];
 	
@@ -582,7 +582,7 @@ static RefreshManager * _refreshManager = nil;
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 	}
 
-	Database *db = [Database sharedDatabase];
+	Database *db = [Database sharedManager];
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 		[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 	}]; //end transaction block
@@ -595,7 +595,7 @@ static RefreshManager * _refreshManager = nil;
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
 	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),[[request error] localizedDescription ]]];
 
-	Database *db = [Database sharedDatabase];
+	Database *db = [Database sharedManager];
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 		[db clearFolderFlag:[folder itemId] flagToClear:MA_FFlag_CheckForImage];
 	}]; //end transaction block
@@ -627,7 +627,7 @@ static RefreshManager * _refreshManager = nil;
 		Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
 		ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
 		NSInteger folderId = [folder itemId];
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db setFolderFeedURL:folderId newFeedURL:[newURL absoluteString]];
@@ -651,7 +651,7 @@ static RefreshManager * _refreshManager = nil;
 	NSURL *url = [connector url];
 	BOOL isCancelled = [connector isCancelled];
 	NSInteger folderId = [folder itemId];
-	Database * db = [Database sharedDatabase];	
+	Database * db = [Database sharedManager];	
 	
      // hack for handling file:// URLs
 	if ([url isFileURL])
@@ -736,7 +736,7 @@ static RefreshManager * _refreshManager = nil;
 	ZAssert(parameters!=NULL, @"Null");
 	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
 	NSInteger folderId = [folder itemId];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	ActivityItem *connectorItem = [parameters objectForKey:@"log"];
 	NSURL *url = [parameters objectForKey:@"url"];
 	NSData * receivedData = [parameters objectForKey:@"data"];

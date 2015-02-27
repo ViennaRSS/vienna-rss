@@ -51,9 +51,6 @@
 const NSInteger MA_Min_Supported_DB_Version = 12;
 const NSInteger MA_Current_DB_Version = 18;
 
-// There's just one database and we manage access to it through a
-// singleton object.
-static Database * _sharedDatabase = nil;
 
 @implementation Database
 
@@ -62,42 +59,56 @@ static Database * _sharedDatabase = nil;
 /* init
  * General object initialization.
  */
--(id)init
+- (instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
-		inTransaction = NO;
-		sqlDatabase = NULL;
-		initializedfoldersDict = NO;
-		initializedSmartfoldersDict = NO;
-		countOfUnread = 0;
-		trashFolder = nil;
-		searchFolder = nil;
-		searchString = @"";
-		smartfoldersDict = [[NSMutableDictionary alloc] init];
-		foldersDict = [[NSMutableDictionary alloc] init];
-		_transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
-		_execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        inTransaction = NO;
+        sqlDatabase = NULL;
+        initializedfoldersDict = NO;
+        initializedSmartfoldersDict = NO;
+        countOfUnread = 0;
+        trashFolder = nil;
+        searchFolder = nil;
+        searchString = @"";
+        smartfoldersDict = [[NSMutableDictionary alloc] init];
+        foldersDict = [[NSMutableDictionary alloc] init];
+        _transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
+        _execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
+    }
+    return self;
 }
 
-/* sharedDatabase
- * Returns the single instance of the refresh manager.
+
+/* sharedManager
+ * Returns the single instance of the database manager.
  */
-+(Database *)sharedDatabase
-{
-	if (!_sharedDatabase)
-	{
-		_sharedDatabase = [[Database alloc] init];
-		if (![_sharedDatabase initDatabase:[[Preferences standardPreferences] defaultDatabase]])
-		{
-			[_sharedDatabase release];
-			_sharedDatabase = nil;
-		}
-	}
-	return _sharedDatabase;
++ (instancetype)sharedManager {
+    static id sharedMyManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        //sharedMyManager = [[self alloc] init];
+        sharedMyManager = [[Database alloc] init];
+        if (![sharedMyManager initDatabase:[[Preferences standardPreferences] defaultDatabase]]) {
+            [sharedMyManager release];
+            sharedMyManager = nil;
+        }
+    });
+    
+    return sharedMyManager;
 }
+
+//	if (!_sharedDatabase)
+//	{
+//		_sharedDatabase = [[Database alloc] init];
+//		if (![_sharedDatabase initDatabase:[[Preferences standardPreferences] defaultDatabase]])
+//		{
+//			[_sharedDatabase release];
+//			_sharedDatabase = nil;
+//		}
+//	}
+//	return _sharedDatabase;
+//}
 
 + (NSString*)prepareStringForQuery:(NSString*)inString
 {

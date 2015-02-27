@@ -194,7 +194,7 @@
 	if (currentFolderId == -1)
 		return @"";
 
-	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
+	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
 	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]];
 }
 
@@ -317,7 +317,7 @@
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
-		[[[Database sharedDatabase] folderFromID:currentFolderId] clearCache];
+		[[[Database sharedManager] folderFromID:currentFolderId] clearCache];
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 		[self sortArticles];
@@ -332,7 +332,7 @@
 -(void)reloadArrayOfArticles
 {
 	
-	Folder * folder = [[Database sharedDatabase] folderFromID:currentFolderId];
+	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
 	[self setFolderArrayOfArticles:[folder articlesWithFilter:[APPCONTROLLER filterString]]];
 	
 	[self refilterArrayOfArticles];
@@ -374,7 +374,7 @@
 	if (![guidOfArticleToPreserve isEqualToString:@""])
 	{
 		Article * articleToAdd = nil;
-		Folder * folder = [[Database sharedDatabase] folderFromID:folderIdOfArticleToPreserve];
+		Folder * folder = [[Database sharedManager] folderFromID:folderIdOfArticleToPreserve];
 		if (folder != nil)
 		{
 			[folder clearCache];
@@ -426,7 +426,7 @@
 	
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)
 	{
@@ -488,7 +488,7 @@
 	
 	// Iterate over every selected article in the table and remove it from
 	// the database.
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 	for (Article * theArticle in articleArray)	
@@ -548,7 +548,7 @@
  */
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	
 	// Set up to undo this action
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
@@ -597,7 +597,7 @@
 	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
 
-	Database * db = [Database sharedDatabase];	
+	Database * db = [Database sharedManager];	
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 		[self innerMarkReadByArray:articleArray readFlag:readFlag];
 	}]; //end transaction block
@@ -613,7 +613,7 @@
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	NSInteger lastFolderId = -1;
 	
 	for (Article * theArticle in articleArray)
@@ -638,7 +638,7 @@
  */
 -(void)innerMarkReadByRefsArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	NSInteger lastFolderId = -1;
 
 	for (ArticleReference * articleRef in articleArray)
@@ -679,7 +679,7 @@
  */
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	[db doTransactionWithBlock:^(BOOL *rollback) {
 	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
 	if (refArray != nil && [refArray count] > 0)
@@ -706,7 +706,7 @@
 -(NSArray *)wrappedMarkAllReadInArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag
 {
 	NSMutableArray * refArray = [NSMutableArray array];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	
 	for (Folder * folder in folderArray)
 	{
@@ -770,7 +770,7 @@
  */
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	__block int lastFolderId = -1;
 	__block BOOL needRefilter = NO;
 	
@@ -909,7 +909,7 @@
 	if (folderId != currentFolderId)
 		return;
 	
-	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
+	Folder * folder = [[Database sharedManager] folderFromID:folderId];
 	if (IsSmartFolder(folder) || IsTrashFolder(folder))
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 }

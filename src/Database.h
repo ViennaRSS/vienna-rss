@@ -49,7 +49,7 @@
 @property(nonatomic, retain) Folder * searchFolder;
 
 // General database functions
-+(Database *)sharedDatabase;
++(instancetype)sharedManager;
 -(BOOL)initDatabase:(NSString *)databaseFileName;
 -(void)syncLastUpdate;
 -(NSInteger)databaseVersion;

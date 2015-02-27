@@ -201,11 +201,11 @@
 -(void)reloadDatabase:(NSArray *)stateArray
 {
 	[rootNode removeChildren];
-	if (![self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode])
+	if (![self loadTree:[[Database sharedManager] arrayOfFolders:MA_Root_Folder] rootNode:rootNode])
 	{
 		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
 		[rootNode removeChildren];
-		[self loadTree:[[Database sharedDatabase] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
+		[self loadTree:[[Database sharedManager] arrayOfFolders:MA_Root_Folder] rootNode:rootNode];
 	}
 	[outlineView reloadData];
 	[self unarchiveState:stateArray];
@@ -288,7 +288,7 @@
 		for (folder in listOfFolders)
 		{
 			int itemId = [folder itemId];
-			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:itemId];
+			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:itemId];
 			int count = [listOfSubFolders count];
 			TreeNode * subNode;
 
@@ -303,7 +303,7 @@
 	{
 		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
 		NSUInteger index = 0;
-		NSInteger nextChildId = (node == rootNode) ? [[Database sharedDatabase] firstFolderId] : [[node folder] firstChildId];
+		NSInteger nextChildId = (node == rootNode) ? [[Database sharedManager] firstFolderId] : [[node folder] firstChildId];
 		while (nextChildId > 0)
 		{
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:[NSNumber numberWithInt:nextChildId]];
@@ -313,7 +313,7 @@
 				return NO;
 			}
 			folder = [listOfFolders objectAtIndex:listIndex];
-			NSArray * listOfSubFolders = [[Database sharedDatabase] arrayOfFolders:nextChildId];
+			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:nextChildId];
 			NSUInteger count = [listOfSubFolders count];
 			TreeNode * subNode;
 			
@@ -417,8 +417,8 @@
 		TreeNode * node = [outlineView itemAtRow:row];
 		if (node != nil)
 		{
-			Folder * folder = [[Database sharedDatabase] folderFromID:[node nodeId]];
-			return folder && !IsSearchFolder(folder) && !IsTrashFolder(folder) && ![[Database sharedDatabase] readOnly] && [[outlineView window] isVisible];
+			Folder * folder = [[Database sharedManager] folderFromID:[node nodeId]];
+			return folder && !IsSearchFolder(folder) && !IsTrashFolder(folder) && ![[Database sharedManager] readOnly] && [[outlineView window] isVisible];
 		}
 	}
 	return NO;
@@ -536,7 +536,7 @@
  */
 -(int)groupParentSelection
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:[self actualSelection]];
+	Folder * folder = [[Database sharedManager] folderFromID:[self actualSelection]];
 	return folder ? ((IsGroupFolder(folder)) ? [folder itemId] : [folder parentId]) : MA_Root_Folder;
 }
 
@@ -594,7 +594,7 @@
 {
 	if (node == nil)
 		return;
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	int folderId = [node nodeId];
 	
 	int count = [node countOfChildren];
@@ -623,7 +623,7 @@
 	
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 		[self setManualSortOrderForNode:rootNode];
 		}]; //end transaction block
@@ -1067,7 +1067,7 @@
 	
 	if (![[folder name] isEqualToString:newName])
 	{
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		if ([db folderFromName:newName] != nil)
 			runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		else
@@ -1212,7 +1212,7 @@
 	// Internal drag and drop so we're just changing the parent IDs around. One thing
 	// we have to watch for is to make sure that we don't re-parent to a subordinate
 	// folder.
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	BOOL autoSort = [[Preferences standardPreferences] foldersTreeSortMethod] != MA_FolderSort_Manual;
 
 	[db doTransactionWithBlock:^(BOOL *rollback) {
@@ -1380,7 +1380,7 @@
 	}
 	if ([type isEqualToString:MA_PBoardType_FolderList])
 	{
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
 		int index;
@@ -1412,7 +1412,7 @@
 	}
 	if ([type isEqualToString:MA_PBoardType_RSSSource])
 	{
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		NSArray * arrayOfSources = [pb propertyListForType:type];
 		int count = [arrayOfSources count];
 		int index;
@@ -1457,7 +1457,7 @@
 	}
 	if ([type isEqualToString:@"WebURLsWithTitlesPboardType"])
 	{
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		NSArray * webURLsWithTitles = [pb propertyListForType:type];
 		NSArray * arrayOfURLs = [webURLsWithTitles objectAtIndex:0];
 		NSArray * arrayOfTitles = [webURLsWithTitles objectAtIndex:1];
