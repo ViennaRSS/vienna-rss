@@ -45,6 +45,7 @@
 	-(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
 	-(NSInteger)executeSQL:(NSString *)sqlStatement;
 	-(NSInteger)executeSQLWithFormat:(NSString *)sqlStatement, ...;
+    +(NSString *)databasePath;
 @end
 
 // The current database version number
@@ -73,6 +74,7 @@ const NSInteger MA_Current_DB_Version = 18;
         searchString = @"";
         smartfoldersDict = [[NSMutableDictionary alloc] init];
         foldersDict = [[NSMutableDictionary alloc] init];
+        //_databaseQueue = [[FMDatabaseQueue alloc] initWithPath:[self databasePath]];
         _transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
         _execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
     }
@@ -87,9 +89,8 @@ const NSInteger MA_Current_DB_Version = 18;
     static id sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        //sharedMyManager = [[self alloc] init];
         sharedMyManager = [[Database alloc] init];
-        if (![sharedMyManager initDatabase:[[Preferences standardPreferences] defaultDatabase]]) {
+        if (![sharedMyManager initDatabase]) {
             [sharedMyManager release];
             sharedMyManager = nil;
         }
@@ -98,17 +99,6 @@ const NSInteger MA_Current_DB_Version = 18;
     return sharedMyManager;
 }
 
-//	if (!_sharedDatabase)
-//	{
-//		_sharedDatabase = [[Database alloc] init];
-//		if (![_sharedDatabase initDatabase:[[Preferences standardPreferences] defaultDatabase]])
-//		{
-//			[_sharedDatabase release];
-//			_sharedDatabase = nil;
-//		}
-//	}
-//	return _sharedDatabase;
-//}
 
 + (NSString*)prepareStringForQuery:(NSString*)inString
 {
@@ -146,37 +136,11 @@ const NSInteger MA_Current_DB_Version = 18;
  * Initalizes the database. The database is first checked to ensure it exists
  * and, if not, it is created with all the tables.
  */
--(BOOL)initDatabase:(NSString *)databaseFileName
-{
-	// Don't allow nested opens
-	if (sqlDatabase)
-		return NO;
-
-	// Fully expand the path and make sure it exists because if the
-	// database file itself doesn't exist, we want to create it and
-	// we can't create it on a non-existent path.
-	NSFileManager * fileManager = [NSFileManager defaultManager];
-	NSString * qualifiedDatabaseFileName = [databaseFileName stringByExpandingTildeInPath];
-	NSString * databaseFolder = [qualifiedDatabaseFileName stringByDeletingLastPathComponent];
-	BOOL isDir;
-
-	
-	if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
-	{
-		NSError *error;
-		if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
-		{
-			NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
-							[NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
-							NSLocalizedString(@"Close", nil), @"", @"",
-							databaseFolder);
-			[error release];
-			return NO;
-		}
-	}
+-(BOOL)initDatabase {
+    NSString *qualifiedDatabaseFileName = [Database databasePath];
 	
 	// Open the database at the well known location
-	sqlDatabase = [[FMDatabase alloc] initWithPath:qualifiedDatabaseFileName];
+	sqlDatabase = [[FMDatabase alloc] initWithPath:[Database databasePath]];
 	if (!sqlDatabase || ![sqlDatabase open])
 	{
 		NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
@@ -2624,6 +2588,38 @@ const NSInteger MA_Current_DB_Version = 18;
 	return articleGuids;
 }
 
+/*!
+ *  Get the path to the database file
+ *
+ *  @return A string representation of the database file's path
+ */
++ (NSString *)databasePath {
+    // Fully expand the path and make sure it exists because if the
+    // database file itself doesn't exist, we want to create it and
+    // we can't create it on a non-existent path.
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    NSString * qualifiedDatabaseFileName = [[[Preferences standardPreferences] defaultDatabase] stringByExpandingTildeInPath];
+    NSString * databaseFolder = [qualifiedDatabaseFileName stringByDeletingLastPathComponent];
+    BOOL isDir;
+    
+    
+    if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
+    {
+        NSError *error;
+        if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
+        {
+            NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
+                            [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
+                            NSLocalizedString(@"Close", nil), @"", @"",
+                            databaseFolder);
+            [error release];
+            return NO;
+        }
+    }
+    
+    return qualifiedDatabaseFileName;
+}
+
 /* close
  * Close the database. All internal resources are released and a new,
  * possibly different, database can be opened instead.
@@ -2665,6 +2661,8 @@ const NSInteger MA_Current_DB_Version = 18;
 		[self close];
 	[sqlDatabase release];
 	sqlDatabase=nil;
+    [_databaseQueue release];
+    _databaseQueue=nil;
 	[super dealloc];
 }
 @end

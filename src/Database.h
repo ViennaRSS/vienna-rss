@@ -19,7 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FMDatabase.h"
+#import "FMDB.h"
 #import "Folder.h"
 #import "Field.h"
 #import "Criteria.h"
@@ -47,10 +47,11 @@
 
 @property(nonatomic, retain) Folder * trashFolder;
 @property(nonatomic, retain) Folder * searchFolder;
+@property (nonatomic, strong) FMDatabaseQueue *databaseQueue;
 
 // General database functions
 +(instancetype)sharedManager;
--(BOOL)initDatabase:(NSString *)databaseFileName;
+-(BOOL)initDatabase;
 -(void)syncLastUpdate;
 -(NSInteger)databaseVersion;
 -(void)compactDatabase;
