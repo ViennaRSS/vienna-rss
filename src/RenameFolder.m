@@ -42,7 +42,7 @@
 
 	// Reset from the last time we used this sheet.
 	folderId = itemId;
-	Folder * folder = [[Database sharedDatabase] folderFromID:folderId];
+	Folder * folder = [[Database sharedManager] folderFromID:folderId];
 	[folderName setStringValue:[folder name]];
 
 	[self enableSaveButton];
@@ -55,7 +55,7 @@
 -(IBAction)doRename:(id)sender
 {
 	NSString * newName = [[folderName stringValue] trim];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	Folder * folder = [db folderFromID:folderId];
 	
 	if ([[folder name] isEqualToString:newName])

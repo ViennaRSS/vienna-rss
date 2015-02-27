@@ -224,7 +224,7 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(void)updateFolder
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:infoFolderId];
+	Folder * folder = [[Database sharedManager] folderFromID:infoFolderId];
 	
 	// Set the window caption
 	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", nil), [folder name]];
@@ -265,7 +265,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 -(IBAction)urlFieldChanged:(id)sender
 {
 	NSString * newUrl = [[urlField stringValue] trim];
-	[[Database sharedDatabase] setFolderFeedURL:infoFolderId newFeedURL:newUrl];
+	[[Database sharedManager] setFolderFeedURL:infoFolderId newFeedURL:newUrl];
 }
 
 /* subscribedChanged
@@ -274,9 +274,9 @@ static InfoWindowManager * _infoWindowManager = nil;
 -(IBAction)subscribedChanged:(id)sender
 {
 	if ([isSubscribed state] == NSOnState)
-		[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
+		[[Database sharedManager] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
 	else
-		[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
+		[[Database sharedManager] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
 }
 
@@ -286,9 +286,9 @@ static InfoWindowManager * _infoWindowManager = nil;
 -(IBAction)loadFullHTMLChanged:(id)sender
 {
 	if ([loadFullHTML state] == NSOnState)
-		[[Database sharedDatabase] setFolderFlag:infoFolderId flagToSet:MA_FFlag_LoadFullHTML];
+		[[Database sharedManager] setFolderFlag:infoFolderId flagToSet:MA_FFlag_LoadFullHTML];
 	else
-		[[Database sharedDatabase] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_LoadFullHTML];
+		[[Database sharedManager] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_LoadFullHTML];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:infoFolderId]];
 }
 
@@ -307,7 +307,7 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(void)handleFolderNameTextDidChange:(NSNotification *)aNotification
 {
-	[[Database sharedDatabase] setFolderName:infoFolderId newName:[folderName stringValue]];
+	[[Database sharedManager] setFolderName:infoFolderId newName:[folderName stringValue]];
 }
 
 /* enableValidateButton
@@ -355,7 +355,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	NSString * usernameString = [[username stringValue] trim];
 	NSString * passwordString = [password stringValue];
 	
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	Folder * folder = [db folderFromID:infoFolderId];
 	[db setFolderUsername:[folder itemId] newUsername:usernameString];
 	[folder setPassword:passwordString];

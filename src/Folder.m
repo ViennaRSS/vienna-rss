@@ -739,7 +739,7 @@ static NSArray * iconArray = nil;
 -(NSArray *)articles
 {
 	if (!isCached)
-		[[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
+		[[Database sharedManager] arrayOfArticles:itemId filterString:nil];
 	return [cachedArticles allValues];
 }
 
@@ -748,7 +748,7 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articlesWithFilter:(NSString *)fstring
 {
-	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:fstring];
+	return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
 }
 
 /* folderNameCompare

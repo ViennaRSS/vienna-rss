@@ -294,7 +294,7 @@ JSONDecoder * jsonDecoder;
 			[articleArray addObject:article];
 		}
 			
-		Database *db = [Database sharedDatabase];
+		Database *db = [Database sharedManager];
 		__block NSInteger newArticlesFromFeed = 0;
 
 		// Here's where we add the articles to the database
@@ -442,7 +442,7 @@ JSONDecoder * jsonDecoder;
             [guidArray addObject:guid];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
@@ -504,7 +504,7 @@ JSONDecoder * jsonDecoder;
 			[guidArray addObject:guid];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
-		Database * db = [Database sharedDatabase];
+		Database * db = [Database sharedManager];
 		[db doTransactionWithBlock:^(BOOL *rollback) {
 			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 		}]; //end transaction block
@@ -721,7 +721,7 @@ JSONDecoder * jsonDecoder;
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
 					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL]) {
-						Database *db = [Database sharedDatabase];
+						Database *db = [Database sharedManager];
 						[db doTransactionWithBlock:^(BOOL *rollback) {
 							[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
 						}];
@@ -738,7 +738,7 @@ JSONDecoder * jsonDecoder;
 	for (Folder * f in [APPCONTROLLER folders]) {
 		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
 		{
-			[[Database sharedDatabase] deleteFolder:[f itemId]];
+			[[Database sharedManager] deleteFolder:[f itemId]];
 		}
 	}
 
@@ -920,7 +920,7 @@ JSONDecoder * jsonDecoder;
     {
 		if ([params count] > 2 ) {
 			NSString * folderName = [params objectAtIndex:2];
-			Database * db = [Database sharedDatabase];
+			Database * db = [Database sharedManager];
 			Folder * folder = [db folderFromName:folderName];
 			underFolder = [folder itemId];
 		}
@@ -943,7 +943,7 @@ JSONDecoder * jsonDecoder;
     // Remove the parent parameter. We'll re-add it with a new value later.
     [params removeObjectAtIndex:1];
     
-    Database * db = [Database sharedDatabase];
+    Database * db = [Database sharedManager];
     NSString * folderName = [folderNames objectAtIndex:0];
     Folder * folder = [db folderFromName:folderName];
     

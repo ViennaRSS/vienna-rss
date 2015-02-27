@@ -166,7 +166,7 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedDatabase] folderFromID:[[nc object] intValue]];
+	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] intValue]];
 	ActivityItem * item = [self itemByName:[folder name]];
 	[log removeObject:item];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];

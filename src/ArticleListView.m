@@ -367,7 +367,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 	// Initialize the article columns from saved data
 	NSArray * dataArray = [prefs arrayForKey:MAPref_ArticleListColumns];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	Field * field;
 	NSUInteger  index;
 	
@@ -544,7 +544,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)updateVisibleColumns
 {
-	NSArray * fields = [[Database sharedDatabase] arrayOfFields];
+	NSArray * fields = [[Database sharedManager] arrayOfFields];
 	int count = [fields count];
 	int index;
 
@@ -676,7 +676,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Create the new columns
 	
-	for (Field * field in  [[Database sharedDatabase] arrayOfFields])
+	for (Field * field in  [[Database sharedManager] arrayOfFields])
 	{
 		[dataArray addObject:[field name]];
 		[dataArray addObject:[NSNumber numberWithBool:[field visible]]];
@@ -728,7 +728,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)updateArticleListRowHeight
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	float height = [[APPCONTROLLER layoutManager] defaultLineHeightForFont:articleListFont];
 	int numberOfRowsInCell;
 
@@ -820,7 +820,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if ((row >= 0) && (row < [[articleController allArticles] count]))
 	{
 		Article * article = [[articleController allArticles] objectAtIndex:row];
-		return (article != nil) && ![[Database sharedDatabase] readOnly] && [[articleList window] isVisible];
+		return (article != nil) && ![[Database sharedManager] readOnly] && [[articleList window] isVisible];
 	}
 	return NO;
 }
@@ -1024,7 +1024,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
-	if ([[Database sharedDatabase] countOfUnread] > 0)
+	if ([[Database sharedManager] countOfUnread] > 0)
 	{
 		guidOfArticleToSelect = nil;
 		
@@ -1052,7 +1052,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
-	if (([[Database sharedDatabase] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
+	if (([[Database sharedManager] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
 	{
 		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
 		if (nextFolderWithUnread != -1)
@@ -1457,7 +1457,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	else
 	{
 		Article * firstArticle = [msgArray objectAtIndex:0];
-		Folder * folder = [[Database sharedDatabase] folderFromID:[firstArticle folderId]];
+		Folder * folder = [[Database sharedManager] folderFromID:[firstArticle folderId]];
 		if ([folder loadsFullHTML] && [msgArray count] == 1)
 		{
 			// Remember we have a full HTML page so we can setup the context menus
@@ -1517,7 +1517,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	NSArray * allArticles = [articleController allArticles];
-	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedDatabase] readOnly])
+	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedManager] readOnly])
 	{
 		Article * theArticle = [allArticles objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
@@ -1540,7 +1540,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	NSArray * allArticles = [articleController allArticles];
 	Article * theArticle;
 	
@@ -1729,7 +1729,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if (!isInTableInit && !isAppInitialising && !isChangingOrientation)
 	{
 		NSTableColumn * tableColumn = [[notification userInfo] objectForKey:@"NSTableColumn"];
-		Field * field = [[Database sharedDatabase] fieldByName:[tableColumn identifier]];
+		Field * field = [[Database sharedManager] fieldByName:[tableColumn identifier]];
 		int oldWidth = [[[notification userInfo] objectForKey:@"NSOldWidth"] intValue];
 		
 		if (oldWidth != [tableColumn width])
@@ -1792,7 +1792,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSMutableArray * arrayOfTitles = [[NSMutableArray alloc] init];
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	int count = [rows count];
 	int index;
 	
