@@ -438,6 +438,8 @@ const NSInteger MA_Current_DB_Version = 18;
 	[self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
 	[self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
 	
+    [sqlDatabase close];
+    databaseQueue = [[FMDatabaseQueue alloc] initWithPath:[Database databasePath]];
 	return YES;
 }
 
@@ -1794,52 +1796,57 @@ const NSInteger MA_Current_DB_Version = 18;
 	if (!initializedfoldersDict)
 	{
 		// Make sure we have a database.
-		NSAssert(sqlDatabase, @"Database not assigned for this item");
+		NSAssert(databaseQueue, @"Database not assigned for this item");
 		
 		// Keep running count of total unread articles
 		countOfUnread = 0;
+        
+        [databaseQueue inDatabase:^(FMDatabase *db) {
+            FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
+                @" type, flags, next_sibling, first_child from folders order by folder_id"];
+            if (!results) {
+                NSLog(@"%s: executeQuery error: %@", __FUNCTION__, [db lastErrorMessage]);
+                return;
+            }
+            
+            while ([results next])
+            {
+                NSInteger newItemId = [[results stringForColumnIndex:0] intValue];
+                NSInteger newParentId = [[results stringForColumnIndex:1] intValue];
+                NSString * name = [results stringForColumnIndex:2];
+                NSInteger unreadCount = [[results stringForColumnIndex:3] intValue];
+                NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[results stringForColumnIndex:4] doubleValue]];
+                NSInteger type = [[results stringForColumnIndex:5] intValue];
+                NSInteger flags = [[results stringForColumnIndex:6] intValue];
+                NSInteger nextSibling = [[results stringForColumnIndex:7] intValue];
+                NSInteger firstChild = [[results stringForColumnIndex:8] intValue];
+                
+                Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
+                [folder setNextSiblingId:nextSibling];
+                [folder setFirstChildId:firstChild];
+                if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
+                    unreadCount = 0;
+                [folder setUnreadCount:unreadCount];
+                [folder setLastUpdate:lastUpdate];
+                [folder setFlag:flags];
+                if (unreadCount > 0)
+                    countOfUnread += unreadCount;
+                [foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
+                
+                // Remember the trash folder
+                if (IsTrashFolder(folder))
+                    [self setTrashFolder:folder];
+                
+                // Remember the search folder
+                if (IsSearchFolder(folder))
+                    [self setSearchFolder:folder];
+            }
+            [results close];
+        }];
 		
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
-				@" type, flags, next_sibling, first_child from folders order by folder_id"];
-			while ([results next])
-			{
-				NSInteger newItemId = [[results stringForColumnIndex:0] intValue];
-				NSInteger newParentId = [[results stringForColumnIndex:1] intValue];
-				NSString * name = [results stringForColumnIndex:2];
-				NSInteger unreadCount = [[results stringForColumnIndex:3] intValue];
-				NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[results stringForColumnIndex:4] doubleValue]];
-				NSInteger type = [[results stringForColumnIndex:5] intValue];
-				NSInteger flags = [[results stringForColumnIndex:6] intValue];
-				NSInteger nextSibling = [[results stringForColumnIndex:7] intValue];
-				NSInteger firstChild = [[results stringForColumnIndex:8] intValue];
-				
-				Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
-				[folder setNextSiblingId:nextSibling];
-				[folder setFirstChildId:firstChild];
-				if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
-					unreadCount = 0;
-				[folder setUnreadCount:unreadCount];
-				[folder setLastUpdate:lastUpdate];
-				[folder setFlag:flags];
-				if (unreadCount > 0)
-					countOfUnread += unreadCount;
-				[foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
-
-				// Remember the trash folder
-				if (IsTrashFolder(folder))
-					[self setTrashFolder:folder];
-
-				// Remember the search folder
-				if (IsSearchFolder(folder))
-					[self setSearchFolder:folder];
-			}
-			[results close];
-		});
-
-		// Load all RSS folders and add them to the list.
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
+        // Load all RSS folders and add them to the list.
+		[databaseQueue inDatabase:^(FMDatabase *db) {
+			FMResultSet * results = [db executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
 			while ([results next])
 			{
 				NSInteger folderId = [[results stringForColumnIndex:0] intValue];
@@ -1870,7 +1877,7 @@ const NSInteger MA_Current_DB_Version = 18;
 					}
 				}
 			}
-		});
+		}];
 		// Done
 		initializedfoldersDict = YES;
 	}
