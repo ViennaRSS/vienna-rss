@@ -75,9 +75,6 @@ const NSInteger MA_Current_DB_Version = 18;
         searchString = @"";
         smartfoldersDict = [[NSMutableDictionary alloc] init];
         foldersDict = [[NSMutableDictionary alloc] init];
-        //databaseQueue = nil;
-        databaseQueue = [[FMDatabaseQueue alloc] initWithPath:[Database databasePath]];
-        [self initaliseFields];
         _transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
         _execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
     }
@@ -93,10 +90,10 @@ const NSInteger MA_Current_DB_Version = 18;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[Database alloc] init];
-//        if (![sharedMyManager initDatabase]) {
-//            [sharedMyManager release];
-//            sharedMyManager = nil;
-//        }
+        if (![sharedMyManager initDatabase]) {
+            [sharedMyManager release];
+            sharedMyManager = nil;
+        }
     });
     
     return sharedMyManager;
@@ -136,28 +133,7 @@ const NSInteger MA_Current_DB_Version = 18;
 }
 
 
--(void)initaliseFields {
-    fieldsByName = [[NSMutableDictionary alloc] init];
-    fieldsOrdered = [[NSMutableArray alloc] init];
-    
-    [self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
-    [self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
-    [self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
-    [self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
-    [self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
-    [self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
-    [self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
-    [self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
-    [self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
-    [self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
-    [self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
-    [self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
-    [self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
-    [self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
-    [self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
-    [self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
-    [self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
-}
+
 
 /* initDatabase
  * Initalizes the database. The database is first checked to ensure it exists
@@ -442,33 +418,44 @@ const NSInteger MA_Current_DB_Version = 18;
 	[self syncLastUpdate];
 
 	// Create fields
-	fieldsByName = [[NSMutableDictionary alloc] init];
-	fieldsOrdered = [[NSMutableArray alloc] init];
-
-	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
-	[self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
-	[self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
-	[self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
-	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
-	[self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
-	[self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
-	[self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
-	[self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
-	[self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
-	[self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
-	[self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
-	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
-	[self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
-	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
-	[self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
-	[self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
-	
+    [self initaliseFields];
+    
     [sqlDatabase close];
-    databaseQueue = [FMDatabaseQueue databaseQueueWithPath:[Database databasePath]];
-    if(!databaseQueue) {
+    [sqlDatabase release];
+    
+    
+    [self setDatabaseQueue:[FMDatabaseQueue databaseQueueWithPath:[Database databasePath]]];
+    if(![self databaseQueue]) {
         NSLog(@"error creating database queue");
     }
 	return YES;
+}
+
+/**
+ *  Initialise the mappings between the names of
+ *  the database fields and the model fields
+ */
+-(void)initaliseFields {
+    fieldsByName = [[NSMutableDictionary alloc] init];
+    fieldsOrdered = [[NSMutableArray alloc] init];
+    
+    [self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
+    [self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
+    [self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
+    [self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
+    [self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
+    [self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
+    [self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
+    [self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
+    [self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
+    [self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
+    [self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
+    [self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
+    [self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
+    [self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
+    [self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
+    [self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
+    [self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
 }
 
 /* relocateLockedDatabase
@@ -1399,14 +1386,16 @@ const NSInteger MA_Current_DB_Version = 18;
 -(NSInteger)firstFolderId
 {
 	__block NSInteger folderId = 0;
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * results = [sqlDatabase executeQuery:@"select first_folder from info"];
-		if ([results next])
-		{
-			folderId = [[results stringForColumn:@"first_folder"] intValue];
-		}
-		[results close];
-	});
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQuery:@"select first_folder from info"];
+        if ([results next])
+        {
+            folderId = [[results stringForColumn:@"first_folder"] intValue];
+        }
+        [results close];
+    }];
+    
 	return folderId;
 }
 
@@ -2593,16 +2582,18 @@ const NSInteger MA_Current_DB_Version = 18;
 -(BOOL)isTrashEmpty
 {
 	__block BOOL result;
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * results = [sqlDatabase executeQuery:@"select deleted_flag from messages where deleted_flag=1"];
-		if ([results next])
-		{
-			result= NO;
-		}
-		else
-			result=YES;
-		[results close];
-	});
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+	[queue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQuery:@"select deleted_flag from messages where deleted_flag=1"];
+        if ([results next])
+        {
+            result= NO;
+        }
+        else
+            result=YES;
+        [results close];
+    }];
+
 	return result;
 }
 
@@ -2674,11 +2665,11 @@ const NSInteger MA_Current_DB_Version = 18;
 	[fieldsByName release];
 	[self setTrashFolder:nil];
 	[self setSearchFolder:nil];
-	[sqlDatabase close];
 	initializedfoldersDict = NO;
 	initializedSmartfoldersDict = NO;
 	countOfUnread = 0;
 	sqlDatabase = nil;
+    [[self databaseQueue] close];
 }
 
 /* dealloc
