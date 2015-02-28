@@ -1991,8 +1991,9 @@ const NSInteger MA_Current_DB_Version = 18;
 		
         __block NSInteger unread_count = 0;
         
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+			FMResultSet * results = [db executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
 			while([results next])
 			{
 				NSString * guid = [results stringForColumnIndex:0];
@@ -2022,7 +2023,7 @@ const NSInteger MA_Current_DB_Version = 18;
 				[folder addArticleToCache:article];
 			}
 			[results close];
-        });
+        }];
         
         // This is a good time to do a quick check to ensure that our
         // own count of unread is in sync with the folders count and fix
@@ -2325,7 +2326,7 @@ const NSInteger MA_Current_DB_Version = 18;
 {
 	NSMutableArray * newArray = [NSMutableArray array];
 	NSString * filterClause = @"";
-	NSString * queryString;
+	__block NSString * queryString;
 	Folder * folder = nil;
 	__block NSInteger unread_count = 0;
 
@@ -2355,9 +2356,10 @@ const NSInteger MA_Current_DB_Version = 18;
 	}
 
 	// Time to run the query
-	@synchronized(self) {
-		[folder clearCache];
-		FMResultSet * results = [sqlDatabase executeQuery:queryString];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [folder clearCache];
+    [queue inDatabase:^(FMDatabase *db) {
+		FMResultSet * results = [db executeQuery:queryString];
 		while ([results next])
 		{
 			Article * article = [[[Article alloc] initWithGuid:[results stringForColumnIndex:0]] autorelease];
@@ -2387,7 +2389,7 @@ const NSInteger MA_Current_DB_Version = 18;
 			
 		}
 		[results close];
-	};
+	}];
     
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
