@@ -48,7 +48,7 @@
 
 @property(nonatomic, retain) Folder * trashFolder;
 @property(nonatomic, retain) Folder * searchFolder;
-@property (nonatomic, strong) FMDatabaseQueue *databaseQueue;
+@property (nonatomic, retain) FMDatabaseQueue *databaseQueue;
 
 // General database functions
 +(instancetype)sharedManager;
