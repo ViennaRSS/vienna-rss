@@ -918,14 +918,15 @@ const NSInteger MA_Current_DB_Version = 18;
 		}
 		if (predecessorId < 0)
 		{
-			dispatch_sync(_execQueue, ^() {
-				FMResultSet * siblings = [sqlDatabase executeQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=0", (long)parentId];
+            FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+            [queue inDatabase:^(FMDatabase *db) {
+				FMResultSet * siblings = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=0", [NSNumber numberWithInteger:parentId]];
 				if([siblings next])
 					predecessorId = [[siblings stringForColumn:@"folder_id"] intValue];
 				else
 					predecessorId =  0;
 				[siblings close];
-			});
+			}];
 		}
 		if (predecessorId == 0)
 		{
@@ -1081,14 +1082,15 @@ const NSInteger MA_Current_DB_Version = 18;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		__block NSInteger previousSibling = -999;
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=%ld", (long)[folder parentId], (long)folderId];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            FMResultSet * results = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=?", [NSNumber numberWithInteger:[folder parentId]], [NSNumber numberWithInteger:folderId]];
 			if ([results next])
 			{
-				previousSibling = [[results stringForColumn:@"folder_id"] intValue];
+				previousSibling = [results intForColumn:@"folder_id"];
 			}
 			[results close];
-		});
+		}];
 		if (previousSibling != -999)
 			[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
 		else
@@ -2516,20 +2518,21 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
-	dispatch_sync(_execQueue, ^() {
-		NSInteger newCount = [folder unreadCount] + adjustment;
-		[folder setUnreadCount:newCount];
-		[sqlDatabase executeUpdate:[NSString stringWithFormat:@"update folders set unread_count=%ld where folder_id=%ld", newCount, [folder itemId]]];
-	
-		// Update childUnreadCount for our parent. Since we're just working
-		// on one article, we do this the faster way.
-		Folder * tmpFolder = folder;
-		while ([tmpFolder parentId] != MA_Root_Folder)
-		{
-			tmpFolder = [self folderFromID:[tmpFolder parentId]];
-			[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
-		}
-	});
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSInteger newCount = [folder unreadCount] + adjustment;
+        [folder setUnreadCount:newCount];
+        [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", [NSNumber numberWithInteger:newCount], [NSNumber numberWithInteger:[folder itemId]]];
+        
+        // Update childUnreadCount for our parent. Since we're just working
+        // on one article, we do this the faster way.
+        Folder * tmpFolder = folder;
+        while ([tmpFolder parentId] != MA_Root_Folder)
+        {
+            tmpFolder = [self folderFromID:[tmpFolder parentId]];
+            [tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
+        }
+    }];
 }
 
 /* markArticleFlagged
@@ -2603,9 +2606,9 @@ const NSInteger MA_Current_DB_Version = 18;
 -(NSArray *)guidHistoryForFolderId:(NSInteger)folderId
 {
 	NSMutableArray * articleGuids = [NSMutableArray array];
-	
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select message_id from rss_guids where folder_id=%ld", (long)folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+		FMResultSet * results = [db executeQueryWithFormat:@"select message_id from rss_guids where folder_id=%ld", (long)folderId];
 		while ([results next])
 		{
 			NSString * guid = [results stringForColumn:@"message_id"];
@@ -2615,7 +2618,7 @@ const NSInteger MA_Current_DB_Version = 18;
 			}
 		}
 		[results close];
-	});
+	}];
 	
 	return articleGuids;
 }
