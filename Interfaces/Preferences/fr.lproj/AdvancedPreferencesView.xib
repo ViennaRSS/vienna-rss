@@ -31,7 +31,7 @@
                     </textFieldCell>
                 </textField>
                 <button id="tVa-eQ-1Ic">
-                    <rect key="frame" x="18" y="187" width="275" height="18"/>
+                    <rect key="frame" x="18" y="187" width="380" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Activer JavaScript dans le navigateur interne" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="guK-dE-f6n">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -71,7 +71,7 @@
                 <button id="E4n-wq-fUN">
                     <rect key="frame" x="18" y="166" width="390" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Enable Plugins in the internal browser" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="fIz-4t-Ogg">
+                    <buttonCell key="cell" type="check" title="Activer les plugins dans le navigateur interne" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="fIz-4t-Ogg">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

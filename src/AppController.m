@@ -3941,7 +3941,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 {
 	// Is our target application running? If not, we'll launch it.
-	if (![[[[NSWorkspace sharedWorkspace] launchedApplications] valueForKey:@"NSApplicationBundleIdentifier"] containsObject:externalEditorBundleIdentifier])
+	if ([[NSRunningApplication runningApplicationsWithBundleIdentifier:externalEditorBundleIdentifier] count] == 0)
 	{
 		[[NSWorkspace sharedWorkspace] launchAppWithBundleIdentifier:externalEditorBundleIdentifier
 															 options:NSWorkspaceLaunchWithoutActivation
