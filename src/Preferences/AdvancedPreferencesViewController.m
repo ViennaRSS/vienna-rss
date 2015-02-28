@@ -68,6 +68,7 @@
     GotoHelpPage((CFStringRef)@"advanced.html", NULL);
 }
 
+
 /* initializePreferences
  * Set the preference settings from the user defaults.
  */
@@ -77,6 +78,7 @@
     
     // Show use JavaScript option
     [useJavaScriptButton setState:[prefs useJavaScript] ? NSOnState : NSOffState];
+    [useWebPluginsButton setState:[prefs useWebPlugins] ? NSOnState : NSOffState];
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%ld",[prefs concurrentDownloads]]];
 }
 
@@ -87,6 +89,15 @@
 {
     BOOL useJavaScript = [sender state] == NSOnState;
     [[Preferences standardPreferences] setUseJavaScript:useJavaScript];
+}
+
+/* changeUseWebPlugins
+ * Toggle whether or not the internel webkit browser should use plugins
+ * e.g. Flash
+ */
+- (IBAction)changeUseWebPlugins:(NSButton *)sender {
+    BOOL useWebPlugins = [sender state] == NSOnState;
+    [[Preferences standardPreferences] setUseWebPlugins:useWebPlugins];
 }
 
 

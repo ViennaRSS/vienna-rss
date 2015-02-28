@@ -37,6 +37,12 @@ NSString * MA_ScriptsFolder_Name = @"Scripts";
 NSString * MA_PluginsFolder_Name = @"Plugins";
 NSString * MA_FeedSourcesFolder_Name = @"Sources";
 
+// NSNotificationCenter string constants
+NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
+NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
+NSString * const kMA_Notify_UseWebPluginsChange = @"MA_Notify_UseWebPluginsChange";
+
+
 // The default preferences object.
 static Preferences * _standardPreferences = nil;
 
@@ -175,6 +181,7 @@ static Preferences * _standardPreferences = nil;
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
 		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
+        useWebPlugins = [self boolForKey:MAPref_UseWebPlugins];
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
@@ -283,6 +290,7 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_ByName] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
 	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
+    [defaultValues setObject:boolYes forKey:MAPref_UseWebPlugins];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:boolNo forKey:MAPref_ShowAppInStatusBar];
@@ -491,10 +499,33 @@ static Preferences * _standardPreferences = nil;
 	{
 		useJavaScript = flag;
 		[self setBool:flag forKey:MAPref_UseJavaScript];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_UseJavaScriptChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseJavaScriptChange
+                                                            object:nil];
 	}
 }
 
+
+/* useWebPlugins
+ * Specifies whether or not to enable web plugins
+ */
+-(BOOL)useWebPlugins
+{
+    return useWebPlugins;
+}
+
+/* setEnableJavaScript
+ * Enable whether JavaScript is used.
+ */
+-(void)setUseWebPlugins:(BOOL)flag
+{
+    if (useWebPlugins != flag)
+    {
+        useWebPlugins = flag;
+        [self setBool:flag forKey:MAPref_UseWebPlugins];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseWebPluginsChange
+                                                            object:nil];
+    }
+}
 
 -(NSUInteger)concurrentDownloads {
 	return concurrentDownloads;
@@ -527,7 +558,8 @@ static Preferences * _standardPreferences = nil;
 	{
 		minimumFontSize = newSize;
 		[self setInteger:minimumFontSize forKey:MAPref_MinimumFontSize];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_MinimumFontSizeChange
+                                                            object:nil];
 	}
 }
 
@@ -540,7 +572,8 @@ static Preferences * _standardPreferences = nil;
 	{
 		enableMinimumFontSize = flag;
 		[self setBool:flag forKey:MAPref_UseMinimumFontSize];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_MinimumFontSizeChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_MinimumFontSizeChange
+                                                            object:nil];
 	}
 }
 
