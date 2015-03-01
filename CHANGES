@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.4
+-----
+- Add option to enable/disable Webkit plugins (including Flash)
+- Code reorganization : use of Cocoapod for dependancies
+
 3.0.3
 -----
 - Fix problems with preferences dialog on OS X < 10.10
