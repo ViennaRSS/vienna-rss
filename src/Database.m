@@ -464,7 +464,7 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(NSString *)relocateLockedDatabase:(NSString *)path
 {
-	FMDatabase *sqlDatabase = [[FMDatabase alloc] initWithPath:[Database databasePath]];
+	FMDatabase *sqlDatabase = [FMDatabase databaseWithPath:[Database databasePath]];
     NSString * errorTitle = NSLocalizedString(@"Locate Title", nil);
 	NSString * errorText = NSLocalizedString(@"Locate Text", nil);
 	NSInteger option = NSRunAlertPanel(errorTitle, errorText, NSLocalizedString(@"Locate", nil), NSLocalizedString(@"Exit", nil), nil, path);
@@ -478,7 +478,6 @@ const NSInteger MA_Current_DB_Version = 18;
 		if (sqlDatabase != nil)
 		{
 			[sqlDatabase close];
-			[sqlDatabase release];
 			sqlDatabase = nil;
 			[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 		}
@@ -512,7 +511,6 @@ const NSInteger MA_Current_DB_Version = 18;
 		return newPath;
 	}
     [sqlDatabase close];
-    [sqlDatabase release];
     return nil;
 }
 
@@ -875,14 +873,15 @@ const NSInteger MA_Current_DB_Version = 18;
 		}
 		if (predecessorId < 0)
 		{
-            FMDatabaseQueue *dbqueue = [[Database sharedManager] databaseQueue];
+            FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
             
-            [dbqueue inDatabase:^(FMDatabase *db) {
-				FMResultSet * siblings = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=0", [NSNumber numberWithInteger:parentId]];
-				if([siblings next])
-					predecessorId = [[siblings stringForColumn:@"folder_id"] intValue];
-				else
-					predecessorId =  0;
+            [queue inDatabase:^(FMDatabase *db) {
+                FMResultSet * siblings = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=0", @(parentId)];
+                if([siblings next]) {
+                    predecessorId = [siblings intForColumn:@"folder_id"];
+                } else {
+                    predecessorId =  0;
+                }
 				[siblings close];
 			}];
 		}
@@ -981,17 +980,18 @@ const NSInteger MA_Current_DB_Version = 18;
 }
 
 /* wrappedDeleteFolder
- * Delete the specified folder. This function should be called from within a
- * transaction wrapper since it can be very SQL intensive.
+ * Delete the specified folder. This function can be very SQL intensive.
  */
 -(BOOL)wrappedDeleteFolder:(NSInteger)folderId
 {
-	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
-	Folder * folder;
+    NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
+    Folder * folder;
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
 
 	// Recurse and delete child folders
-	for (folder in arrayOfChildFolders)
+    for (folder in arrayOfChildFolders) {
 		[self wrappedDeleteFolder:[folder itemId]];
+    }
 
 	// Adjust unread counts on parents
 	folder = [self folderFromID:folderId];
@@ -1005,15 +1005,20 @@ const NSInteger MA_Current_DB_Version = 18;
 	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
 	countOfUnread -= [folder unreadCount];
-	if (IsSmartFolder(folder))
-		[self executeSQLWithFormat:@"delete from smart_folders where folder_id=%ld", folderId];
+    if (IsSmartFolder(folder)) {
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeQuery:@"delete from smart_folders where folder_id=?", @(folderId)];
+        }];
+    }
 
 	// If this is an RSS feed, delete from the feeds
 	// and delete raw feed source
 	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 	{
-		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%ld", folderId];
-		[self executeSQLWithFormat:@"delete from rss_guids where folder_id=%ld", folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeQuery:@"delete from rss_folders where folder_id=?", @(folderId)];
+            [db executeQuery:@"delete from rss_guids where folder_id=?", @(folderId)];
+        }];
 		
 		NSString * feedSourceFilePath = [folder feedSourceFilePath];
 		if (feedSourceFilePath != nil)
@@ -1042,9 +1047,8 @@ const NSInteger MA_Current_DB_Version = 18;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		__block NSInteger previousSibling = -999;
-        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
         [queue inDatabase:^(FMDatabase *db) {
-            FMResultSet * results = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=?", [NSNumber numberWithInteger:[folder parentId]], [NSNumber numberWithInteger:folderId]];
+            FMResultSet * results = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=?", @([folder parentId]), @(folderId)];
 			if ([results next])
 			{
 				previousSibling = [results intForColumn:@"folder_id"];
@@ -1061,8 +1065,10 @@ const NSInteger MA_Current_DB_Version = 18;
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
 	// normal folder had it's type grobbed to MA_Smart_Folder.
-	[self executeSQLWithFormat:@"delete from messages where folder_id=%ld", folderId];
-	[self executeSQLWithFormat:@"delete from folders where folder_id=%ld", folderId];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeQuery:@"delete from messages where folder_id=?", @(folderId)];
+        [db executeQuery:@"delete from folders where folder_id=?", @(folderId)];
+    }];
 
 	// Remove from the folders array. Do this after we send the notification
 	// so that the notification handlers don't fail if they try to dereference the
@@ -1081,7 +1087,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	NSArray * arrayOfChildFolders;
 	NSNumber * numFolder;
 	Folder * folder;
-	__block BOOL result;
+	BOOL result;
 
 	// Exit now if we're read-only
 	if (readOnly)
@@ -1105,14 +1111,13 @@ const NSInteger MA_Current_DB_Version = 18;
 	}
 
 	// Now do the deletion.
-	[self doTransactionWithBlock:^(BOOL *rollback) {
 	result = [self wrappedDeleteFolder:folderId];
-	}]; //end transaction block
 
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
-	for (numFolder in arrayOfFolderIds)
+    for (numFolder in arrayOfFolderIds) {
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDeleted" object:numFolder];
+    }
 	
 	return result;
 }
@@ -1353,7 +1358,7 @@ const NSInteger MA_Current_DB_Version = 18;
         FMResultSet * results = [db executeQuery:@"select first_folder from info"];
         if ([results next])
         {
-            folderId = [[results stringForColumn:@"first_folder"] intValue];
+            folderId = [results intForColumn:@"first_folder"];
         }
         [results close];
     }];
@@ -1559,11 +1564,11 @@ const NSInteger MA_Current_DB_Version = 18;
 					[queue inDatabase:^(FMDatabase *db) {
 						FMResultSet * results = [db executeQuery:@"select text from messages where folder_id=? and message_id=?",
                                                  @(folderID), articleGuid];
-						if ([results next]) {
+                    if ([results next]) {
 							existingBody = [results stringForColumn:@"text"];
-						} else {
+                    } else {
 							existingBody = @"";
-                        }
+                    }
                         
 						[results close];
 					}];
@@ -2259,7 +2264,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		{
             FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
             [queue inDatabase:^(FMDatabase *db) {
-				FMResultSet * results = [db executeQuery:@"select message_id from messages where folder_id=%? and read_flag=0", @(folderId)];
+				FMResultSet * results = [db executeQuery:@"select message_id from messages where folder_id=? and read_flag=0", @(folderId)];
 				while ([results next])
 				{
 					NSString * guid = [results stringForColumn:@"message_id"];
@@ -2573,7 +2578,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	NSMutableArray * articleGuids = [NSMutableArray array];
     FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
     [queue inDatabase:^(FMDatabase *db) {
-		FMResultSet * results = [db executeQueryWithFormat:@"select message_id from rss_guids where folder_id=%ld", (long)folderId];
+		FMResultSet * results = [db executeQuery:@"select message_id from rss_guids where folder_id=?", @(folderId)];
 		while ([results next])
 		{
 			NSString * guid = [results stringForColumn:@"message_id"];
