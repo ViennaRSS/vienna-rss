@@ -25,7 +25,6 @@
 #import "Criteria.h"
 
 @interface Database : NSObject {
-	FMDatabase * sqlDatabase;
 	BOOL initializedfoldersDict;
 	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
@@ -48,7 +47,7 @@
 
 @property(nonatomic, retain) Folder * trashFolder;
 @property(nonatomic, retain) Folder * searchFolder;
-@property (nonatomic, retain) FMDatabaseQueue *databaseQueue;
+@property(nonatomic, retain) FMDatabaseQueue * databaseQueue;
 
 // General database functions
 +(instancetype)sharedManager;
@@ -60,26 +59,6 @@
 -(NSInteger)countOfUnread;
 -(BOOL)readOnly;
 -(void)close;
-
-/*
- * Submits a transaction block
- * An easy way to wrap things up in a transaction can be done like this:
-    [db doTransactionWithBlock:^(BOOL *rollback) {
-        ...
-        [db ...];
-        ...
-
-        if (whoopsSomethingWrongHappened) {
-            *rollback = YES;
-            return;  // leave the block
-        }
-        // etc…
-
-        ...
-
-    }];
-*/
-- (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block;
 
 // Fields functions
 -(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;
