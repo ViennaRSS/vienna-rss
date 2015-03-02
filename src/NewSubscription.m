@@ -231,7 +231,7 @@
 	NSString * feedURLString = [[editFeedURL stringValue] trim];
 
 	// Save the new information to the database
-	[db setFolderFeedURL:editFolderId newFeedURL:feedURLString];
+    [[Database sharedManager] setFeedURL:feedURLString forFolder:editFolderId];
 	
 	// Close the window
 	[NSApp endSheet:editRSSFeedWindow];
