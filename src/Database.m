@@ -774,53 +774,75 @@ const NSInteger MA_Current_DB_Version = 18;
 	return YES;
 }
 
-
--(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url {
+/*!
+ *  Add a Google Reader RSS Feed folder and return the ID of the new folder.
+ *
+ *  @param feedName      The name of the RSS folder
+ *  @param parentId      The parent folder ID
+ *  @param predecessorId The predecessor folder ID
+ *  @param feed_url      The URL of the RSS Feed folder
+ *
+ *  @return The ID of the new folder
+ */
+-(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url {
 	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_GoogleReader_Folder canAppendIndex:YES];
 	//TODO: optimization using unique add function for addRSSFolder
 	if (folderId != -1)
 	{
-		NSString * preparedURL = [Database prepareStringForQuery:url];
-		NSString *preparedName = [Database prepareStringForQuery:feedName];
-		NSInteger results = [self executeSQLWithFormat:
-							   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-							   "values (%ld, '%@', '', '', '', '%@', %d)",
-							   (long)folderId,
-							   preparedName,
-							   preparedURL,
-							   0];
-		if (results != SQLITE_OK)
-			return -1;
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) values (?, ?, '', '', '', ?, 0)",
+             @(folderId),
+             feedName, // description
+             // username
+             // home_page
+             // last_update_string
+             feed_url];
+        }];
+        if (!success) {
+            return -1;
+        }
 		
 		// Add this new folder to our internal cache
 		Folder * folder = [self folderFromID:folderId];
-		[folder setFeedURL:url];
+		[folder setFeedURL:feed_url];
 	}
 	return folderId;
 }
 
 
-/* addRSSFolder
- * Add an RSS Feed folder and return the ID of the new folder.
+/*!
+ *  Add a RSS Feed folder and return the ID of the new folder.
+ *
+ *  @param feedName      The name of the RSS folder
+ *  @param parentId      The parent folder ID
+ *  @param predecessorId The predecessor folder ID
+ *  @param feed_url      The URL of the RSS Feed folder
+ *
+ *  @return The ID of the new folder
  */
--(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url
+-(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url
 {
 	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
 	if (folderId != -1)
 	{
-		NSString * preparedURL = [Database prepareStringForQuery:url];
-		NSInteger results = [self executeSQLWithFormat:
-					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-					 "values (%ld, '', '', '', '', '%@', %d)",
-					(long)folderId,
-					preparedURL,
-					0];
-		if (results != SQLITE_OK)
-			return -1;
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
+             "values (?, '', '', '', '', ?, 0)",
+             @(folderId),
+             feed_url];
+        }];
 
+        if (!success) {
+			return -1;
+        }
+        
 		// Add this new folder to our internal cache
 		Folder * folder = [self folderFromID:folderId];
-		[folder setFeedURL:url];
+		[folder setFeedURL:feed_url];
 	}
 	return folderId;
 }
@@ -1410,8 +1432,13 @@ const NSInteger MA_Current_DB_Version = 18;
 	return folder;
 }
 
-/* folderFromFeedURL
- * Returns the RSSFolder that is subscribed to the specified feed URL.
+
+/*!
+ *  folderFromFeedURL
+ *
+ *  @param wantedFeedURL The feed URL the folder is wanted for
+ *
+ *  @return An RSSFolder that is subscribed to the specified feed URL.
  */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 {
@@ -1666,7 +1693,7 @@ const NSInteger MA_Current_DB_Version = 18;
 /* deleteArticle
  * Permanently deletes a article from the specified folder
  */
--(BOOL)deleteArticle:(NSInteger)folderId guid:(NSString *)guid
+-(BOOL)deleteArticleFromFolder:(NSInteger)folderId guid:(NSString *)guid
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
@@ -1677,10 +1704,14 @@ const NSInteger MA_Current_DB_Version = 18;
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil)
 		{
-			NSString * preparedGuid = [Database prepareStringForQuery:guid];
+            FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"delete from messages where folder_id=? and message_id=?",
+                           @(folderId), guid];
+            }];
 
-			NSInteger results = [self executeSQLWithFormat:@"delete from messages where folder_id=%ld and message_id='%@'", (long)folderId, preparedGuid];
-			if (results == SQLITE_OK)
+			if (success)
 			{
 				if (![article isRead])
 				{
@@ -2388,8 +2419,14 @@ const NSInteger MA_Current_DB_Version = 18;
 	folder = [self folderFromID:folderId];
 	if (folder != nil && [folder unreadCount] > 0)
 	{
-		NSInteger results = [self executeSQLWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", (long)folderId];
-		if (results == SQLITE_OK)
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0",
+             @(folderId)];
+        }];
+
+		if (success)
 		{
 			NSInteger count = [folder unreadCount];
 			if ([folder countOfCachedArticles] > 0)
@@ -2398,12 +2435,13 @@ const NSInteger MA_Current_DB_Version = 18;
 				NSInteger remainingUnread = count;
 				Article * article;
 
-				while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil)
+                while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil) {
 					if (![article isRead])
 					{
 						[article markRead:YES];
 						--remainingUnread;
 					}
+                }
 			}
 			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
@@ -2427,11 +2465,14 @@ const NSInteger MA_Current_DB_Version = 18;
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isRead != [article isRead])
 		{
-			NSString * preparedGuid = [Database prepareStringForQuery:guid];
-
 			// Mark an individual article read
-			NSInteger results = [self executeSQLWithFormat:@"update messages set read_flag=%d where folder_id=%ld and message_id='%@'", isRead, (long)folderId, preparedGuid];
-			if (results == SQLITE_OK)
+            FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"update messages set read_flag=? where folder_id=? and message_id=?",
+                           @(isRead), @(folderId), guid];
+            }];
+			if (success)
 			{
 				NSInteger adjustment = (isRead ? -1 : 1);
 
@@ -2519,14 +2560,19 @@ const NSInteger MA_Current_DB_Version = 18;
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isFlagged != [article isFlagged])
 		{
-			NSString * preparedGuid = [Database prepareStringForQuery:guid];
+            FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"update messages set marked_flag=? where folder_id=? and message_id=?",
+                 @(isFlagged),
+                 @(folderId),
+                 guid];
+            }];
 
-			// Mark an individual article flagged
-			NSInteger results = [self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%ld and message_id='%@'", isFlagged, (long)folderId, preparedGuid];
-			if (results == SQLITE_OK)
+			if (success)
 			{
-
-				[article markFlagged:isFlagged];
+				// Mark an individual article flagged
+                [article markFlagged:isFlagged];
 			}
 		}
 	}
@@ -2544,8 +2590,13 @@ const NSInteger MA_Current_DB_Version = 18;
 		Article * article = [folder articleFromGuid:guid];
 		if (isDeleted && ![article isRead])
 			[self markArticleRead:folderId guid:guid isRead:YES];
-		NSString * preparedGuid = [Database prepareStringForQuery:guid];
-		[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%ld and message_id='%@'", isDeleted, (long)folderId, preparedGuid];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set deleted_flag=? where folder_id=? and message_id=?",
+             @(isDeleted),
+             @(folderId),
+             guid];
+        }];
 	}
 }
 
