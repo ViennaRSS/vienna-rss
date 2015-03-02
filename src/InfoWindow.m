@@ -265,7 +265,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 -(IBAction)urlFieldChanged:(id)sender
 {
 	NSString * newUrl = [[urlField stringValue] trim];
-	[[Database sharedManager] setFolderFeedURL:infoFolderId newFeedURL:newUrl];
+    [[Database sharedManager] setFeedURL:newUrl forFolder:infoFolderId];
 }
 
 /* subscribedChanged
@@ -273,11 +273,14 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(IBAction)subscribedChanged:(id)sender
 {
-	if ([isSubscribed state] == NSOnState)
-		[[Database sharedManager] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_Unsubscribed];
-	else
-		[[Database sharedManager] setFolderFlag:infoFolderId flagToSet:MA_FFlag_Unsubscribed];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:infoFolderId]];
+    if ([isSubscribed state] == NSOnState) {
+        [[Database sharedManager] clearFlag:MA_FFlag_Unsubscribed forFolder:infoFolderId];
+    }
+    else {
+		[[Database sharedManager] setFlag:MA_FFlag_Unsubscribed forFolder:infoFolderId];
+    }
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+                                                        object:@(infoFolderId)];
 }
 
 /* loadFullHTMLChanged
@@ -285,11 +288,14 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(IBAction)loadFullHTMLChanged:(id)sender
 {
-	if ([loadFullHTML state] == NSOnState)
-		[[Database sharedManager] setFolderFlag:infoFolderId flagToSet:MA_FFlag_LoadFullHTML];
-	else
-		[[Database sharedManager] clearFolderFlag:infoFolderId flagToClear:MA_FFlag_LoadFullHTML];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:infoFolderId]];
+    if ([loadFullHTML state] == NSOnState) {
+        [[Database sharedManager] setFlag:MA_FFlag_LoadFullHTML forFolder:infoFolderId];
+    }
+    else {
+		[[Database sharedManager] clearFlag:MA_FFlag_LoadFullHTML forFolder:infoFolderId];
+    }
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange"
+                                                        object:@(infoFolderId)];
 }
 
 /* handleUrlTextDidChange [delegate]
@@ -307,7 +313,7 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 -(void)handleFolderNameTextDidChange:(NSNotification *)aNotification
 {
-	[[Database sharedManager] setFolderName:infoFolderId newName:[folderName stringValue]];
+    [[Database sharedManager] setName:folderName.stringValue forFolder:infoFolderId];
 }
 
 /* enableValidateButton

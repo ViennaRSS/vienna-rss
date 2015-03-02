@@ -777,7 +777,7 @@ static NSArray * iconArray = nil;
 	NSString * feedSourceFilePath = nil;
 	if ([self isRSSFolder])
 	{
-		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", [self itemId]];
+		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)[self itemId]];
 		feedSourceFilePath = [[[Preferences standardPreferences] feedSourcesFolder] stringByAppendingPathComponent:feedSourceFileName];
 	}
 	return feedSourceFilePath;
@@ -813,7 +813,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %ld (%@)", itemId, [self name]];
+	return [NSString stringWithFormat:@"Folder id %ld (%@)", (long)itemId, [self name]];
 }
 
 /* dealloc
