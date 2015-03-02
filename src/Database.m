@@ -1341,8 +1341,9 @@ const NSInteger MA_Current_DB_Version = 18;
 -(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
+    }
 	
 	Folder * folder = [self folderFromID:folderId];
 	if ([folder parentId] == newParentID)
@@ -1390,7 +1391,11 @@ const NSInteger MA_Current_DB_Version = 18;
 	}
 
 	// Update the database now
-	[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", newParentID, folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update folders set parent_id=? where folder_id=?",
+         @(newParentID), @(folderId)];
+    }];
 	return YES;
 }
 
@@ -1400,12 +1405,17 @@ const NSInteger MA_Current_DB_Version = 18;
 -(BOOL)setFirstChild:(NSInteger)childId forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
+    }
 	
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    
 	if (folderId == MA_Root_Folder)
 	{
-		[self executeSQLWithFormat:@"update info set first_folder=%ld", childId];
+		[queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update info set first_folder=?", @(childId)];
+        }];
 	}
 	else
 	{
@@ -1414,8 +1424,10 @@ const NSInteger MA_Current_DB_Version = 18;
 			return NO;
 		
 		[folder setFirstChildId:childId];
-		
-		[self executeSQLWithFormat:@"update folders set first_child=%ld where folder_id=%ld", childId, folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set first_child=? where folder_id=?",
+             @(childId), @(folderId)];
+        }];
 	}
 	
 	return YES;
@@ -1427,16 +1439,22 @@ const NSInteger MA_Current_DB_Version = 18;
 -(BOOL)setNextSibling:(NSUInteger)nextSiblingId forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-	
+    }
+    
 	Folder * folder = [self folderFromID:folderId];
 	if (folder == nil)
 		return NO;
 	
 	[folder setNextSiblingId:nextSiblingId];
 	
-	[self executeSQLWithFormat:@"update folders set next_sibling=%lu where folder_id=%ld", nextSiblingId, folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update folders set next_sibling=%lu where folder_id=%ld",
+         @(nextSiblingId), @(folderId)];
+    }];
+
 	return YES;
 }
 
@@ -2572,16 +2590,23 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
 {
-	NSInteger folderId = [folder itemId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    NSInteger folderId = [folder itemId];
 	if([guidArray count]>0)
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
-		[self executeSQLWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0 and message_id NOT IN ('%@')", (long)folderId, guidList];
-		[self executeSQLWithFormat:@"update messages set read_flag=0 where folder_id=%ld and read_flag=1 and message_id IN ('%@')", (long)folderId, guidList];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0 and message_id NOT IN (?)",
+             @(folderId), guidList];
+            [db executeUpdate:@"update messages set read_flag=0 where folder_id=? and read_flag=1 and message_id IN (?)",
+             @(folderId), guidList];
+        }];
 	}
 	else
 	{
-		[self executeSQLWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", (long)folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0", @(folderId)];
+        }];
 	}
 	NSInteger adjustment = [guidArray count]-[folder unreadCount];
 	countOfUnread += adjustment;
@@ -2593,16 +2618,23 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
 {
-	NSInteger folderId = [folder itemId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    NSInteger folderId = [folder itemId];
 	if([guidArray count]>0)
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
-		[self executeSQLWithFormat:@"update messages set marked_flag=1 where folder_id=%ld and marked_flag=0 and message_id IN ('%@')", (long)folderId, guidList];
-		[self executeSQLWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1 and message_id NOT IN ('%@')", (long)folderId, guidList];
+		[queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set marked_flag=1 where folder_id=? and marked_flag=0 and message_id IN (?)",
+             @(folderId), guidList];
+            [db executeUpdate:@"update messages set marked_flag=0 where folder_id=? and marked_flag=1 and message_id NOT IN (?)",
+             @(folderId), guidList];
+        }];
 	}
 	else
 	{
-		[self executeSQLWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1", (long)folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set marked_flag=0 where folder_id=? and marked_flag=1", @(folderId)];
+        }];
 	}
 }
 
