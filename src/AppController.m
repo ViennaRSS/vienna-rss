@@ -3373,20 +3373,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
-		int folderID = [folder itemId];
         
         if (IsUnsubscribed(folder)) {
             // Currently unsubscribed, so re-subscribe locally
-            [[Database sharedManager] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
+            [[Database sharedManager] clearFlag:MA_FFlag_Unsubscribed forFolder:folder.itemId];
         } else {
             // Currently subscribed, so unsubscribe locally
-            [[Database sharedManager] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
+            [[Database sharedManager] setFlag:MA_FFlag_Unsubscribed forFolder:folder.itemId];
         }
 
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+                                                            object:@(folder.itemId)];
 	}
-    
-
 }
 
 /* setLoadFullHTMLFlag
@@ -3407,12 +3405,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (loadFullHTMLPages)
 		{
 			[folder setFlag:MA_FFlag_LoadFullHTML];
-			[[Database sharedManager] setFolderFlag:folderID flagToSet:MA_FFlag_LoadFullHTML];
+            [[Database sharedManager] setFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
 		}
 		else
 		{
 			[folder clearFlag:MA_FFlag_LoadFullHTML];
-			[[Database sharedManager] clearFolderFlag:folderID flagToClear:MA_FFlag_LoadFullHTML];
+            [[Database sharedManager] clearFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
 		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:folderID]];
 	}

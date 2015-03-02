@@ -60,6 +60,7 @@
 		NSString * feedDescription = [[entry objectForKey:@"description"] stringByUnescapingExtendedCharacters];
 		NSString * feedURL = [[entry objectForKey:@"xmlurl"] stringByUnescapingExtendedCharacters];
 		NSString * feedHomePage = [[entry objectForKey:@"htmlurl"] stringByUnescapingExtendedCharacters];
+        Database * dbManager = [Database sharedManager];
 
 		// Some OPML exports use 'text' instead of 'title'.
 		if (feedTitle == nil || [feedTitle length] == 0u)
@@ -79,7 +80,7 @@
 			// the sub-group items under the parent.
 			if (feedTitle != nil)
 			{
-				int folderId = [db addFolder:parentId afterChild:-1 folderName:feedTitle type:MA_Group_Folder canAppendIndex:NO];
+				int folderId = [dbManager addFolder:parentId afterChild:-1 folderName:feedTitle type:MA_Group_Folder canAppendIndex:NO];
 				if (folderId == -1)
 					folderId = MA_Root_Folder;
 				countImported += [self importSubscriptionGroup:outlineItem underParent:folderId];
@@ -90,17 +91,19 @@
 			Folder * folder;
 			int folderId;
 
-			if ((folder = [db folderFromFeedURL:feedURL]) != nil)
+			if ((folder = [dbManager folderFromFeedURL:feedURL]) != nil)
 				folderId = [folder itemId];
 			else
 			{
-				folderId = [db addRSSFolder:feedTitle underParent:parentId afterChild:-1 subscriptionURL:feedURL];
+				folderId = [dbManager addRSSFolder:feedTitle underParent:parentId afterChild:-1 subscriptionURL:feedURL];
 				++countImported;
 			}
-			if (feedDescription != nil)
-				[db setFolderDescription:folderId newDescription:feedDescription];
-			if (feedHomePage != nil)
-				[db setFolderHomePage:folderId newHomePage:feedHomePage];
+            if (feedDescription != nil) {
+                [dbManager setDescription:feedDescription forFolder:folderId];
+            }
+            if (feedHomePage != nil) {
+                [dbManager setHomePage:feedHomePage forFolder:folderId];
+            }
 		}
 	}
 	return countImported;

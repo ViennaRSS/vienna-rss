@@ -678,10 +678,13 @@ const NSInteger MA_Current_DB_Version = 18;
 		[self executeSQL:@"reindex"];
 }
 
-/* clearFolderFlag
- * Clears the specified flag for the folder.
+/**
+ *  Clears a specified flag for the specified folder
+ *
+ *  @param flag     the flag to clear
+ *  @param folderId the folder to clear the flag from
  */
--(void)clearFolderFlag:(NSInteger)folderId flagToClear:(NSUInteger)flag
+-(void)clearFlag:(NSUInteger)flag forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
 	if (readOnly)
@@ -691,58 +694,79 @@ const NSInteger MA_Current_DB_Version = 18;
 	if (folder != nil)
 	{
 		[folder clearFlag:flag];
-		[self executeSQLWithFormat:@"update folders set flags=%d where folder_id=%d", [folder flags], folderId];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+        }];
 	}
 }
 
-/* setFolderFlag
- * Sets the specified flag for the folder.
+
+/**
+ *  Sets the specified flag for the folder.
+ *
+ *  @param flag     flag to set
+ *  @param folderId folder to set the flag for
  */
--(void)setFolderFlag:(NSInteger)folderId flagToSet:(NSUInteger)flag
+-(void)setFlag:(NSUInteger)flag forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return;
-	
+    }
+    
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
 		[folder setFlag:flag];
-		[self executeSQLWithFormat:@"update folders set flags=%lu where folder_id=%ld", [folder flags], folderId];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+        }];
 	}
 }
 
-/* setFolderLastUpdate
- * Sets the date when the folder was last updated.
+/**
+ *  Sets the date when the folder was last updated.
+ *
+ *  @param lastUpdate The date of the last update
+ *  @param folderId   The ID of the folder being updated
  */
--(void)setFolderLastUpdate:(NSInteger)folderId lastUpdate:(NSDate *)lastUpdate
+-(void)setLastUpdate:(NSDate *)lastUpdate forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return;
-
+    }
 	// If no change to last update, do nothing
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
 	{
-		if ([[folder lastUpdate] isEqualToDate:lastUpdate])
+        if ([[folder lastUpdate] isEqualToDate:lastUpdate]) {
 			return;
-
+        }
 		[folder setLastUpdate:lastUpdate];
 		NSTimeInterval interval = [lastUpdate timeIntervalSince1970];
-		[self executeSQLWithFormat:@"update folders set last_update=%f where folder_id=%ld", interval, folderId];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set last_update=? where folder_id=?", @(interval), @(folderId)];
+        }];
 	}
 }
 
-/* setFolderLastUpdateString
- * Sets the last update string for the folder.
+
+/**
+ *  Sets the last update string for the folder.
+ *
+ *  @param lastUpdateString The new last update string
+ *  @param folderId         The ID of the folder being updated
  */
--(void)setFolderLastUpdateString:(NSInteger)folderId lastUpdateString:(NSString *)lastUpdateString
+-(void)setLastUpdateString:(NSString *)lastUpdateString forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return;
-	
+    }
 	// If no change to last update string, do nothing
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
@@ -751,25 +775,37 @@ const NSInteger MA_Current_DB_Version = 18;
 			return;
 		
 		[folder setLastUpdateString:lastUpdateString];
-		[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%ld", [folder lastUpdateString], folderId];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update rss_folders set last_update_string=? where folder_id=?",
+             folder.lastUpdateString, @(folderId)];
+        }];
 	}
 }
 
-/* setFolderFeedURL
- * Change the URL of the feed on the specified RSS folder subscription.
+/**
+ *  Change the URL of the feed on the specified RSS folder subscription.
+ *
+ *  @param feed_url the URL to set the folder's feed to
+ *  @param folderId the ID of the folder whose URL we are changing
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderFeedURL:(NSInteger)folderId newFeedURL:(NSString *)url
+-(BOOL)setFeedURL:(NSString *)feed_url forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
+    }
 	
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && ![[folder feedURL] isEqualToString:url])
+	if (folder != nil && ![[folder feedURL] isEqualToString:feed_url])
 	{
-		NSString * preparedURL = [Database prepareStringForQuery:url];
-		[folder setFeedURL:url];
-		[self executeSQLWithFormat:@"update rss_folders set feed_url='%@' where folder_id=%ld", preparedURL, (long)folderId];
+		[folder setFeedURL:feed_url];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update rss_folders set feed_url=? where folder_id=?", feed_url, @(folderId)];
+        }];
 	}
 	return YES;
 }
@@ -1144,15 +1180,22 @@ const NSInteger MA_Current_DB_Version = 18;
 	return result;
 }
 
-/* setFolderName
- * Renames the specified folder.
+
+/**
+ *  Renames the specified folder.
+ *
+ *  @param newName  the name name for the folder
+ *  @param folderId the ID of the folder to rename
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderName:(NSInteger)folderId newName:(NSString *)newName
+-(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-
+    }
+    
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
 	if (!folder)
@@ -1160,61 +1203,83 @@ const NSInteger MA_Current_DB_Version = 18;
 
 	// Do nothing if the name hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder name] isEqualToString:newName])
+    if ([[folder name] isEqualToString:newName]) {
 		return NO;
+    }
 
 	[folder setName:newName];
 
 	// Rename in the database
-	NSString * preparedNewName = [Database prepareStringForQuery:newName];
-	[self executeSQLWithFormat:@"update folders set foldername='%@' where folder_id=%ld", preparedNewName, folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update folders set foldername=? where folder_id=?", newName, @(folderId)];
+    }];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the name is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:@(folderId)];
 	return YES;
 }
 
-/* setFolderDescription
- * Sets the folder description both in the internal structure and in the folder_description table.
+
+/**
+ *  Sets the folder description both in the internal structure and in the folder_description table.
+ *
+ *  @param newDescription The new description for the folder
+ *  @param folderId       The ID of the folder
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderDescription:(NSInteger)folderId newDescription:(NSString *)newDescription
+-(BOOL)setDescription:(NSString *)newDescription forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-	
+    }
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
-	if (!folder)
+    if (!folder) {
 		return NO;
+    }
 	
 	// Do nothing if the description hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder feedDescription] isEqualToString:newDescription])
+    if ([[folder feedDescription] isEqualToString:newDescription]) {
 		return NO;
+    }
 	
 	[folder setFeedDescription:newDescription];
 	
 	// Add a new description or update the one we have
-	NSString * preparedNewDescription = [Database prepareStringForQuery:newDescription];
-	[self executeSQLWithFormat:@"update rss_folders set description='%@' where folder_id=%ld", preparedNewDescription, (long)folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update rss_folders set description=? where folder_id=?",
+         newDescription, @(folderId)];
+    }];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the description is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged"
+                                                                        object:@(folderId)];
 	return YES;
 }
 
-/* setFolderHomePage
- * Sets the folder's associated URL link in both in the internal structure and in the folder_description table.
+
+/**
+ *  Sets the folder's associated home page URL link in both in the internal 
+ *  structure and in the folder_description table.
+ *
+ *  @param homePageURL The home page URL
+ *  @param folderId The ID of the folder getting updated
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderHomePage:(NSInteger)folderId newHomePage:(NSString *)newHomePage
+-(BOOL)setHomePage:(NSString *)homePageURL forFolder:(NSInteger)folderId;
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-	
+    }
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
 	if (!folder)
@@ -1222,18 +1287,24 @@ const NSInteger MA_Current_DB_Version = 18;
 
 	// Do nothing if the link hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder homePage] isEqualToString:newHomePage]||newHomePage==nil)
+    if ([[folder homePage] isEqualToString:homePageURL] || homePageURL==nil) {
 		return NO;
+    }
 
-	[folder setHomePage:newHomePage];
+	[folder setHomePage:homePageURL];
 
 	// Add a new link or update the one we have
-	NSString * preparedNewLink = [Database prepareStringForQuery:newHomePage];
-	[self executeSQLWithFormat:@"update rss_folders set home_page='%@' where folder_id=%ld", preparedNewLink, (long)folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update rss_folders set home_page=? where folder_id=?",
+         homePageURL, @(folderId)];
+    }];
+
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged"
+                                                                        object:@(folderId)];
 	return YES;
 }
 
@@ -1781,9 +1852,14 @@ const NSInteger MA_Current_DB_Version = 18;
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId != -1)
 	{
-		NSString * preparedQueryString = [Database prepareStringForQuery:[criteriaTree string]];
-		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')", (long)folderId, preparedQueryString];
-		[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+        FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')",
+             @(folderId),
+             criteriaTree.string];
+        }];
+
+		[smartfoldersDict setObject:criteriaTree forKey:@(folderId)];
 	}
 	return folderId;
 }
@@ -1794,16 +1870,23 @@ const NSInteger MA_Current_DB_Version = 18;
 -(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromID:folderId];
-	if (![[folder name] isEqualToString:folderName])
-		[self setFolderName:folderId newName:folderName];
-	
+    if (![[folder name] isEqualToString:folderName]) {
+        [[Database sharedManager] setName:folderName forFolder:folderId];
+    }
+
 	// Update the smart folder string
-	NSString * preparedQueryString = [Database prepareStringForQuery:[criteriaTree string]];
-	[self executeSQLWithFormat:@"update smart_folders set search_string='%@' where folder_id=%ld", preparedQueryString, (long)folderId];
-	[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update smart_folders set search_string=? where folder_id=?",
+         criteriaTree.string,
+         @(folderId)];
+    }];
+
+	[smartfoldersDict setObject:criteriaTree forKey:@(folderId)];
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                                      object:@(folderId)];
 	return YES;
 }
 
