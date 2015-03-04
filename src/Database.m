@@ -46,8 +46,6 @@
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
 -(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
 -(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
--(NSInteger)executeSQL:(NSString *)sqlStatement;
--(NSInteger)executeSQLWithFormat:(NSString *)sqlStatement, ...;
 +(NSString *)databasePath;
 @end
 
@@ -68,7 +66,6 @@ const NSInteger MA_Current_DB_Version = 18;
 {
     self = [super init];
     if (self) {
-        inTransaction = NO;
         initializedfoldersDict = NO;
         initializedSmartfoldersDict = NO;
         countOfUnread = 0;
@@ -78,8 +75,6 @@ const NSInteger MA_Current_DB_Version = 18;
         smartfoldersDict = [[NSMutableDictionary alloc] init];
         foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
-        _transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
-        _execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
         databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:[Database databasePath]] retain];
         
     }
@@ -409,46 +404,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	}
 }
 
-/* executeSQL
- * Executes the specified SQL statement and discards the result. Should be used for
- * SQL statements that do not return results.
- * Returns an error code.
- */
--(NSInteger)executeSQL:(NSString *)sqlStatement
-{
-    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-// In debug mode, log the execution duration in the console
-#ifdef DEBUG
-	NSDate *start = [NSDate date];
-#endif
-	__block int errorCode;
-	[queue inDatabase:^(FMDatabase *db) {
-		[db executeUpdate:sqlStatement withArgumentsInArray:nil];
-		errorCode = [db lastErrorCode];
-	}];
-#ifdef DEBUG
-	NSLog(@"Query (%f secs): %@", [[NSDate date] timeIntervalSinceDate:start], sqlStatement);
-#endif
-	return errorCode;
-}
-
-/* executeSQLWithFormat
- * Formats and executes the specified SQL statement and discards the result. Should be used for
- * SQL statements that do not return results.
- * Returns an error code.
- */
--(NSInteger)executeSQLWithFormat:(NSString *)sqlStatement, ...
-{
-	va_list arguments;
-	va_start(arguments, sqlStatement);
-	int errorCode;
-	NSString * query = [[NSString alloc] initWithFormat:sqlStatement arguments:arguments];
-	errorCode = [self executeSQL:query];
-	[query release];
-	va_end(arguments);
-	return errorCode;
-}
-
 /* syncLastUpdate
  * Call this function to update the field in the info table which contains the last_updated
  * date. This is basically auditing data and is only called when the database is first opened
@@ -456,8 +411,18 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)syncLastUpdate
 {
-	NSInteger result = [self executeSQLWithFormat:@"update info set last_opened='%@'", [NSDate date]];
-	readOnly = (result != SQLITE_OK);
+    __block BOOL success;
+    
+    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"update info set last_opened=?", [NSDate date]];
+
+        }];
+    if (success) {
+        readOnly = NO;
+    } else {
+        readOnly = YES;
+    }
 }
 
 /* countOfUnread
@@ -551,8 +516,12 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)compactDatabase
 {
-	if (!readOnly)
-		[self executeSQL:@"vacuum"];
+    if (!readOnly) {
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"vacuum"];
+        }];
+    }
 }
 
 /* reindexDatabase
@@ -560,8 +529,12 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)reindexDatabase
 {
-	if (!readOnly)
-		[self executeSQL:@"reindex"];
+    if (!readOnly) {
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"reindex"];
+        }];
+    }
 }
 
 /**
@@ -1434,8 +1407,12 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification
 {
-	if (!readOnly)
-		[self executeSQLWithFormat:@"update info set folder_sort=%d", [[Preferences standardPreferences] foldersTreeSortMethod]];
+    if (!readOnly) {
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update info set folder_sort=?", @([[Preferences standardPreferences] foldersTreeSortMethod])];
+        }];
+    }
 }
 
 /* createArticle
@@ -1645,9 +1622,12 @@ const NSInteger MA_Current_DB_Version = 18;
 		NSInteger dayDelta = (daysToKeep % 1000);
 		NSInteger monthDelta = (daysToKeep / 1000);
 		NSTimeInterval timeDiff = [[[NSCalendarDate calendarDate] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
-
-		[self executeSQLWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
-	}
+        
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < ?", @(timeDiff)];
+        }];
+    }
 }
 
 /* purgeDeletedArticles
@@ -1656,13 +1636,18 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)purgeDeletedArticles
 {
-	NSInteger results = [self executeSQL:@"delete from messages where deleted_flag=1"];
-	if (results == SQLITE_OK)
+    __block BOOL success;
+    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"delete from messages where deleted_flag=1"];
+        }];
+
+	if (success)
 	{
 		[self compactDatabase];
 		[trashFolder clearCache];
 
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(self.trashFolderId)];
 	}
 }
 
@@ -2714,8 +2699,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	foldersDict=nil;
 	[smartfoldersDict release];
 	smartfoldersDict=nil;
-	dispatch_release(_execQueue);
-	dispatch_release(_transactionQueue);
     [databaseQueue release];
     databaseQueue=nil;
 	[super dealloc];
