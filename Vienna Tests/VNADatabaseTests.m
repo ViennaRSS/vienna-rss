@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "Database.h"
 
 @interface VNADatabaseTests : XCTestCase
 
