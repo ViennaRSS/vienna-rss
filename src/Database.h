@@ -29,16 +29,12 @@
 	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
 	int countOfUnread;
-	NSThread * mainThread;
-	BOOL inTransaction;
 	NSString * searchString;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
 	NSMutableDictionary * fieldsByTitle;
 	NSMutableDictionary * foldersDict;
 	NSMutableDictionary * smartfoldersDict;
-	dispatch_queue_t _transactionQueue;
-	dispatch_queue_t _execQueue;
 	Folder * trashFolder;
 	Folder * searchFolder;
     FMDatabaseQueue *databaseQueue;
