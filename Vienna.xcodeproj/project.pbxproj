@@ -71,6 +71,8 @@
 		03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E701A218D4B009C020C /* AppearancePreferencesView.xib */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
+		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
+		03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B41AA670850037471F /* VNADatabaseTests.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
@@ -860,6 +862,9 @@
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppearancePreferencesViewController.m; path = src/Preferences/AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
+		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
+		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
+		03A131B41AA670850037471F /* VNADatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNADatabaseTests.m; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -1658,6 +1663,7 @@
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
 				035B703719E0E4AE00197334 /* Supporting Files */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
+				03A131B41AA670850037471F /* VNADatabaseTests.m */,
 			);
 			path = "Vienna Tests";
 			sourceTree = "<group>";
@@ -2702,6 +2708,8 @@
 				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
 				AA26F4C90604927300FE7994 /* Database.h */,
 				AA26F4D50604927300FE7994 /* Database.m */,
+				03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */,
+				03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */,
 				AA36CD7906100692001E33A4 /* Field.h */,
 				AA36CD7A06100692001E33A4 /* Field.m */,
 				AA26F4CA0604927300FE7994 /* Folder.h */,
@@ -3655,6 +3663,7 @@
 			files = (
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
+				03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3675,6 +3684,7 @@
 				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
 				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
+				03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */,
 				AA26F4E30604927300FE7994 /* Folder.m in Sources */,
 				AA26F4ED0604927300FE7994 /* Database.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
