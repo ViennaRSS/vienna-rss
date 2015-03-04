@@ -28,6 +28,7 @@
 #import "NSNotificationAdditions.h"
 #import "RefreshManager.h"
 #import "Debug.h"
+#import "VNADatabaseMigration.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
@@ -35,8 +36,10 @@
 
 // Private functions
 @interface Database ()
+
+- (BOOL)setupInitialDatabase:(FMDatabase *)initialDatabase;
+- (void)initaliseFields;
 -(NSString *)relocateLockedDatabase:(NSString *)path;
--(void)setDatabaseVersion:(NSInteger)newVersion;
 -(BOOL)initArticleArray:(Folder *)folder;
 -(CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
 -(NSArray *)arrayOfSubFolders:(Folder *)folder;
@@ -102,41 +105,6 @@ const NSInteger MA_Current_DB_Version = 18;
 }
 
 
-+ (NSString*)prepareStringForQuery:(NSString*)inString
-{
-	NSMutableString*	string;
-	NSRange				range = NSMakeRange( 0, [inString length]);
-	NSRange				subRange;
-
-    if([inString respondsToSelector:@selector(stringValue)]) {
-        inString = [(id)inString stringValue];
-    }
-    if((NSNull*)inString == [NSNull null]) {
-        inString = nil;
-    }
-	if(inString == nil) return nil; // just don't try.
-
-	subRange = [inString rangeOfString:@"'" options:NSLiteralSearch range:range];
-	if( subRange.location == NSNotFound )
-		return inString;
-
-	string = [NSMutableString stringWithString:inString];
-	for( ; subRange.location != NSNotFound && range.length > 0;  )
-	{
-		subRange = [string rangeOfString:@"'" options:NSLiteralSearch range:range];
-		if( subRange.location != NSNotFound )
-			[string replaceCharactersInRange:subRange withString:@"''"];
-
-		range.location = subRange.location + 2;
-		range.length = ( [string length] < range.location ) ? 0 : ( [string length] - range.location );
-	}
-
-	return string;
-}
-
-
-
-
 /* initDatabase
  * Initalizes the database. The database is first checked to ensure it exists
  * and, if not, it is created with all the tables.
@@ -157,15 +125,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		return NO;
 	}
 
-	// Get the info table. If it doesn't exist then the database is new
-	FMResultSet * results = [sqlDatabase executeQuery:@"select version from info"];
-	databaseVersion = 0;
-	if ([results next])
-	{
-		NSString * versionString = [results stringForColumn:@"version"];
-		databaseVersion = [versionString intValue];
-	}
-	[results close];
+	int databaseVersion = [self databaseVersion];
 
 	// Trap unsupported databases
 	if (databaseVersion > 0 && databaseVersion < MA_Min_Supported_DB_Version)
@@ -180,95 +140,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	// Create the tables when the database is empty.
 	if (databaseVersion == 0)
 	{
-		// Create the tables. We use the first table as a test whether we can actually
-		// write to the specified location. If not then we need to prompt the user for
-		// a different location.
-		NSInteger resultCode;
-		while ((resultCode = [self executeSQL:@"create table info (version, last_opened, first_folder, folder_sort)"]) != SQLITE_OK)
-		{
-			if (resultCode != SQLITE_LOCKED)
-				return NO;
-
-			// Database was opened but table was locked.
-			NSString * newPath = [self relocateLockedDatabase:qualifiedDatabaseFileName];
-			if (newPath == nil)
-				return NO;
-			qualifiedDatabaseFileName = newPath;
-		}
-		
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-
-		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
-		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
-		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
-		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
-		[self executeSQL:@"create table rss_guids (message_id, folder_id)"];
-		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
-		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
-		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
-
-		// Create a criteria to find all marked articles
-		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
-		[self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
-		[markedCriteria release];
-
-		// Create a criteria to show all unread articles
-		Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
-		[self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
-		[unreadCriteria release];
-		
-		// Create a criteria to show all articles received today
-		Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
-		[self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
-		[todayCriteria release];
-
-		// Create the trash folder
-		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %d, 0, 0, 0)",
-			NSLocalizedString(@"Trash", nil),
-			MA_Trash_Folder];
-
-		// Set the initial version
-		databaseVersion = MA_Current_DB_Version;
-		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_Manual];
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
-		
-		// Set the initial folder order
-		[self initFolderArray];
-		NSInteger folderId = 0;
-		NSInteger previousSibling = 0;
-		NSArray * allFolders = [foldersDict allKeys];
-		NSUInteger count = [allFolders count];
-		NSUInteger index;
-		for (index = 0u; index < count; ++index)
-		{
-			previousSibling = folderId;
-			folderId = [[allFolders objectAtIndex:index] intValue];
-			if (index == 0u)
-				[self setFirstChild:folderId forFolder:MA_Root_Folder];
-			else
-				[self setNextSibling:folderId forFolder:previousSibling];
-		}
-		
-		// If we have a DemoFeeds.plist in the resources then use it to create some initial demo
-		// RSS feeds.
-		NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-		NSString * pathToPList = [thisBundle pathForResource:@"DemoFeeds.plist" ofType:@""];
-		if (pathToPList != nil)
-		{
-			NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
-			if (demoFeedsDict)
-			{
-				for (NSString * feedName in demoFeedsDict)
-				{
-					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
-					NSString * feedURL = [itemDict valueForKey:@"URL"];
-					if (feedURL != nil && feedName != nil)
-						previousSibling = [self addRSSFolder:feedName underParent:MA_Root_Folder afterChild:previousSibling subscriptionURL:feedURL];
-				}
-			}
-		}
-		
-		}]; //end transaction block
+        [self setupInitialDatabase:sqlDatabase];
 	}
 	else if (databaseVersion < MA_Current_DB_Version)
 	{
@@ -289,128 +161,19 @@ const NSInteger MA_Current_DB_Version = 18;
 		[[NSFileManager defaultManager] copyItemAtPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName error:nil];
 	}
 		
-	// Upgrade to rev 13.
-	// Add createddate field to the messages table and initialise it to a date in the past.
-	// Create an index on the message_id column.
-	if (databaseVersion < 13)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table messages add column createddate"];
-		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
-		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
+	
 
-		}]; //end transaction block
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
-	}
-	
-	// Upgrade to rev 14.
-	// Add next_sibling and next_child columns to folders table and first_folder column to info table to allow for manual sorting.
-	// Initialize all values to 0. The correct values will be set by -[FoldersTree setManualSortOrderForNode:].
-	// Make sure that all parent_id values are integers rather than strings, because previous versions of setParent:forFolder:
-	// set them as strings.
-	if (databaseVersion < 14)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table info add column first_folder"];
-		[self executeSQL:@"update info set first_folder=0"];
-		
-		[self executeSQL:@"alter table folders add column next_sibling"];
-		[self executeSQL:@"update folders set next_sibling=0"];
-		
-		[self executeSQL:@"alter table folders add column first_child"];
-		[self executeSQL:@"update folders set first_child=0"];
-		
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
-		
-		FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, parent_id from folders"];
-		while([results next])
-		{
-			NSInteger folderId = [[results stringForColumn:@"folder_id"] intValue];
-			NSInteger parentId = [[results stringForColumn:@"parent_id"] intValue];
-			[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", parentId, folderId];
-		}
-		[results close];
-		
-		}]; //end transaction block
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
-
-	}
-	
-	// Upgrade to rev 15.
-	// Move the folders tree sort method preference to the database, so that it can survive deletion of the preferences file.
-	// Do not disturb the manual sort order, if it exists.
-	if (databaseVersion < 15)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table info add column folder_sort"];
-		
-		NSInteger oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
-		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
-		}]; //end transaction block
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
-	}
-	
-	// Upgrade to rev 16.
-	// Add revised_flag to messages table, and initialize all values to 0.
-	if (databaseVersion < 16)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table messages add column revised_flag"];
-		[self executeSQL:@"update messages set revised_flag=0"];
-		
-		// Set the new version
-		[self setDatabaseVersion:16];		
-		}]; //end transaction block
-	}
-	
-	
-	// Upgrade to rev 17.
-	// Add hasenclosure_flag, enclosuredownloaded_flag and enclosure to messages table, and initialize stuff.
-	if (databaseVersion < 17)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table messages add column hasenclosure_flag"];
-		[self executeSQL:@"update messages set hasenclosure_flag=0"];
-		[self executeSQL:@"alter table messages add column enclosure"];
-		[self executeSQL:@"update messages set enclosure=''"];
-		[self executeSQL:@"alter table messages add column enclosuredownloaded_flag"];
-		[self executeSQL:@"update messages set enclosuredownloaded_flag=0"];
-		
-		// Set the new version
-		[self setDatabaseVersion:17];		
-		}]; //end transaction block
-	}		
-	
-	// Upgrade to rev 18.
-	// Add table all message guids.
-	if (databaseVersion < 18)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"create table rss_guids as select message_id, folder_id from messages"];
-		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
-		
-		// Set the new version
-		[self setDatabaseVersion:18];		
-		}]; //end transaction block
-	}
-	
 	// Read the folders tree sort method from the database.
 	// Make sure that the folders tree is not yet registered to receive notifications at this point.
 	__block NSInteger newFoldersTreeSortMethod = MA_FolderSort_ByName;
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * sortResults = [sqlDatabase executeQuery:@"select folder_sort from info"];
-		if ([sortResults next])
-		{
-			newFoldersTreeSortMethod = [[sortResults stringForColumn:@"folder_sort"] intValue];
-		}
-		[sortResults close];
-	});
+    [databaseQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet * sortResults = [sqlDatabase executeQuery:@"select folder_sort from info"];
+        if ([sortResults next])
+        {
+            newFoldersTreeSortMethod = [sortResults intForColumn:@"folder_sort"];
+        }
+        [sortResults close];
+    }];
 
 	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
 	
@@ -431,7 +194,117 @@ const NSInteger MA_Current_DB_Version = 18;
 	return YES;
 }
 
-/**
+/*!
+ *  sets up an inital Vienna database at the given path
+ *
+ *  @param dbPath The path to create the database at
+ *
+ *  @return True on succes
+ */
+- (BOOL)setupInitialDatabase:(FMDatabase *)initialDatabase {
+    // Create the tables. We use the first table as a test whether we can actually
+    // write to the specified location. If not then we need to prompt the user for
+    // a different location.
+    BOOL success = [initialDatabase executeUpdate:@"create table info (version, last_opened, first_folder, folder_sort)"];
+    
+    if(success) {
+        [self createTablesOnDatabase:initialDatabase];
+    } else {
+        if ([initialDatabase lastErrorCode] == SQLITE_LOCKED) {
+            // Database was opened but table was locked.
+            NSString * newPath = [self relocateLockedDatabase:initialDatabase.databasePath];
+            if (newPath == nil) {
+                return NO;
+            } else {
+                initialDatabase = [FMDatabase databaseWithPath:newPath];
+            }
+        } else {
+            return NO;
+        }
+    }
+
+    
+    // Create a criteria to find all marked articles
+    Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
+    [self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
+    [markedCriteria release];
+    
+    // Create a criteria to show all unread articles
+    Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
+    [self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
+    [unreadCriteria release];
+    
+    // Create a criteria to show all articles received today
+    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
+    [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
+    [todayCriteria release];
+    
+    // Create the trash folder
+    [initialDatabase executeUpdate:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, ?, 0, 0, ?, 0, 0, 0)",
+     NSLocalizedString(@"Trash", nil), @(MA_Trash_Folder)];
+    
+    // Set the initial version
+    [initialDatabase setUserVersion:(uint32_t)MA_Current_DB_Version];
+    
+    // Set the default sort order and write it to both the db and the prefs
+    [initialDatabase executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(MA_FolderSort_Manual)];
+    [[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
+    
+    // Set the initial folder order
+    [self initFolderArray];
+    NSInteger folderId = 0;
+    NSInteger previousSibling = 0;
+    NSArray * allFolders = [foldersDict allKeys];
+    NSUInteger count = [allFolders count];
+    NSUInteger index;
+    for (index = 0u; index < count; ++index)
+    {
+        previousSibling = folderId;
+        folderId = [[allFolders objectAtIndex:index] intValue];
+        if (index == 0u)
+            [self setFirstChild:folderId forFolder:MA_Root_Folder];
+        else
+            [self setNextSibling:folderId forFolder:previousSibling];
+    }
+    
+    // If we have a DemoFeeds.plist in the resources then use it to create some initial demo
+    // RSS feeds.
+    NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+    NSString * pathToPList = [thisBundle pathForResource:@"DemoFeeds.plist" ofType:@""];
+    if (pathToPList != nil)
+    {
+        NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+        if (demoFeedsDict)
+        {
+            for (NSString * feedName in demoFeedsDict)
+            {
+                NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
+                NSString * feedURL = [itemDict valueForKey:@"URL"];
+                if (feedURL != nil && feedName != nil)
+                    previousSibling = [self addRSSFolder:feedName underParent:MA_Root_Folder afterChild:previousSibling subscriptionURL:feedURL];
+            }
+        }
+    }
+    return YES;
+}
+
+
+-(BOOL)createTablesOnDatabase:(FMDatabase *)db {
+    [db executeUpdate:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
+    [db executeUpdate:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
+    [db executeUpdate:@"create table smart_folders (folder_id, search_string)"];
+    [db executeUpdate:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
+    [db executeUpdate:@"create table rss_guids (message_id, folder_id)"];
+    [db executeUpdate:@"create index messages_folder_idx on messages (folder_id)"];
+    [db executeUpdate:@"create index messages_message_idx on messages (message_id)"];
+    [db executeUpdate:@"create index rss_guids_idx on rss_guids (folder_id)"];
+    if ([db hadError]) {
+        return NO;
+    }
+    return YES;
+}
+
+/*!
  *  Initialise the mappings between the names of
  *  the database fields and the model fields
  */
@@ -633,22 +506,35 @@ const NSInteger MA_Current_DB_Version = 18;
 	return [fieldsByName valueForKey:name];
 }
 
-/* databaseVersion
- * Return the database version.
+/*!
+ *  Get the current database version from the database
+ *  This method fetches the version information from both
+ *  the SQLite PRAGMA user_version and the legacy Vienna info
+ *  table, returning the highest version number.
+ *
+ *  @return the current database version
  */
 -(NSInteger)databaseVersion
 {
-	return databaseVersion;
-}
+    __block NSInteger dbVersion = 0;
+    
+    FMDatabaseQueue  *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQuery:@"select version from info"];
+        dbVersion = 0;
+        if ([results next])
+        {
+            dbVersion = [results intForColumn:@"version"];
+        }
+        [results close];
+        
+        // compare the SQLite PRAGMA user_version to the legacy version number
+        if ([db userVersion] > dbVersion) {
+            dbVersion = [db userVersion];
+        }
+    }];
 
-/* setDatabaseVersion
- * Sets the version stamp in the database.
- */
--(void)setDatabaseVersion:(NSInteger)newVersion
-{
-	[self executeSQLWithFormat:@"update info set version=%ld", newVersion];
-	databaseVersion = newVersion;
-	NSLog(@"Updated database schema to version %d.", databaseVersion);
+    return dbVersion;
 }
 
 /* readOnly
@@ -1314,24 +1200,25 @@ const NSInteger MA_Current_DB_Version = 18;
 -(BOOL)setFolderUsername:(NSInteger)folderId newUsername:(NSString *)name
 {
 	// Exit now if we're read-only
-	if (readOnly)
-		return NO;
+	if (readOnly) return NO;
 	
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
-	if (!folder)
-		return NO;
+	if (!folder) return NO;
 	
 	// Do nothing if the link hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder username] isEqualToString:name])
-		return NO;
+	if ([[folder username] isEqualToString:name]) return NO;
 	
 	[folder setUsername:name];
 	
 	// Add a new link or update the one we have
-	NSString * preparedName = [Database prepareStringForQuery:name];
-	[self executeSQLWithFormat:@"update rss_folders set username='%@' where folder_id=%ld", preparedName, (long)folderId];
+    FMDatabaseQueue *queue = [[Database sharedManager] databaseQueue];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update rss_folders set username=? where folder_id=?",
+         name, @(folderId)];
+    }];
+
 	return YES;
 }
 
@@ -1608,14 +1495,6 @@ const NSInteger MA_Current_DB_Version = 18;
 		Article * existingArticle = [folder articleFromGuid:articleGuid];
 		// We're going to ignore the problem of feeds re-using guids, which is very naughty! Bad feed!
 		
-		// Fix title and article body so they're acceptable to SQL
-		NSString * preparedArticleTitle = [Database prepareStringForQuery:articleTitle];
-		NSString * preparedArticleText = [Database prepareStringForQuery:articleBody];
-		NSString * preparedArticleLink = [Database prepareStringForQuery:articleLink];
-		NSString * preparedUserName = [Database prepareStringForQuery:userName];
-		NSString * preparedArticleGuid = [Database prepareStringForQuery:articleGuid];
-		NSString * preparedEnclosure = [Database prepareStringForQuery:articleEnclosure];
-
 		// Unread count adjustment factor
 		NSInteger adjustment = 0;
 		
@@ -1626,36 +1505,38 @@ const NSInteger MA_Current_DB_Version = 18;
 		else if (existingArticle == nil)
 		{
 			
-			NSInteger results = [self executeSQLWithFormat:
-				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
-				@"values('%@', %ld, %ld, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@', %d)",
-				preparedArticleGuid,
-				(long)parentId,
-				(long)folderID,
-				preparedUserName,
-				preparedArticleLink,
-				interval,
-				createdInterval,
-				read_flag,
-				marked_flag,
-				deleted_flag,
-				preparedArticleTitle,
-				preparedArticleText,
-				revised_flag,
-				preparedEnclosure,
-				hasenclosure_flag];
-			if (results != SQLITE_OK)
-				return NO;
-			[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %ld)", preparedArticleGuid, folderID];
-			
-			// Add the article to the folder
-			[article setStatus:MA_MsgStatus_New];
-			[folder addArticleToCache:article];
-			
-			// Update folder unread count
-			if (!read_flag)
-				adjustment = 1;
-		}
+			[queue inDatabase:^(FMDatabase *db) {
+                [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+                 @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                 articleGuid,
+                 @(parentId),
+                 @(folderID),
+                 userName,
+                 articleLink,
+                 @(interval),
+                 @(createdInterval),
+                 @(read_flag),
+                 @(marked_flag),
+                 @(deleted_flag),
+                 articleTitle,
+                 articleBody,
+                 @(revised_flag),
+                 articleEnclosure,
+                 @(hasenclosure_flag)];
+//                if (results != SQLITE_OK)
+//                    return NO;
+                [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
+                
+                // Add the article to the folder
+                [article setStatus:MA_MsgStatus_New];
+                [folder addArticleToCache:article];
+                
+                // Update folder unread count
+//                if (!read_flag)
+//                    adjustment = 1;
+
+            }];
+        }
 		else if ([existingArticle isDeleted])
 		{
 			return NO;
@@ -1699,22 +1580,28 @@ const NSInteger MA_Current_DB_Version = 18;
 				// New articles created during the current refresh should not be marked as revised,
 				// even if there are multiple versions of the new article in the feed.
 				revised_flag = [existingArticle isRevised];
-				if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty))
+                if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty)) {
 					revised_flag = YES;
+                }
 				
-				NSInteger results = [self executeSQLWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
-					@"read_flag=0, title='%@', text='%@', revised_flag=%d where folder_id=%ld and message_id='%@'",
-					(long)parentId,
-					preparedUserName,
-					preparedArticleLink,
-					interval,
-					preparedArticleTitle,
-					preparedArticleText,
-					revised_flag,
-					(long)folderID,
-					preparedArticleGuid];
-				if (results != SQLITE_OK)
-					return NO;
+                __block int lastErrorCode = 0;
+                [queue inDatabase:^(FMDatabase *db) {
+                    [db executeUpdate:@"update messages set parent_id=?, sender=?, link=?, date=?, "
+                     @"read_flag=0, title=?, text=?, revised_flag=? where folder_id=? and message_id=?",
+                     @(parentId),
+                     userName,
+                     articleLink,
+                     @(interval),
+                     articleTitle,
+                     articleBody,
+                     @(revised_flag),
+                     @(folderID),
+                     articleGuid];
+                    
+                    lastErrorCode = [db lastErrorCode];
+                }];
+
+				if (lastErrorCode != SQLITE_OK) return NO;
 				
 				[existingArticle setTitle:articleTitle];
 				[existingArticle setBody:articleBody];
@@ -2790,6 +2677,7 @@ const NSInteger MA_Current_DB_Version = 18;
     
     return qualifiedDatabaseFileName;
 }
+
 
 /* close
  * Close the database. All internal resources are released and a new,

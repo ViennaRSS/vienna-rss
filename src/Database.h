@@ -28,7 +28,6 @@
 	BOOL initializedfoldersDict;
 	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
-	int databaseVersion;
 	int countOfUnread;
 	NSThread * mainThread;
 	BOOL inTransaction;
@@ -53,10 +52,10 @@
 +(instancetype)sharedManager;
 -(BOOL)initDatabase;
 -(void)syncLastUpdate;
--(NSInteger)databaseVersion;
 -(void)compactDatabase;
 -(void)reindexDatabase;
 -(NSInteger)countOfUnread;
+-(NSInteger)databaseVersion;
 -(BOOL)readOnly;
 -(void)close;
 
