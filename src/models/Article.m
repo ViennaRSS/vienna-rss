@@ -61,7 +61,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
         deletedFlag = NO;
         hasEnclosureFlag = NO;
         enclosureDownloadedFlag = NO;
-        status = MA_MsgStatus_Empty;
+        status = ArticleStatusEmpty;
         [self setFolderId:-1];
         [self setGuid:theGuid];
         [self setParentId:0];

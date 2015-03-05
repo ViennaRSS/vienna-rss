@@ -1505,7 +1505,7 @@ const NSInteger MA_Current_DB_Version = 18;
                 [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
                 
                 // Add the article to the folder
-                [article setStatus:MA_MsgStatus_New];
+                [article setStatus:ArticleStatusNew];
                 [folder addArticleToCache:article];
                 
                 // Update folder unread count
@@ -1557,7 +1557,7 @@ const NSInteger MA_Current_DB_Version = 18;
 				// New articles created during the current refresh should not be marked as revised,
 				// even if there are multiple versions of the new article in the feed.
 				revised_flag = [existingArticle isRevised];
-                if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty)) {
+                if (!revised_flag && ([existingArticle status] == ArticleStatusEmpty)) {
 					revised_flag = YES;
                 }
 				
@@ -1588,11 +1588,12 @@ const NSInteger MA_Current_DB_Version = 18;
 				if ([existingArticle isRead])
 				{
 					adjustment = 1;
-					[article setStatus:MA_MsgStatus_New];
+					[article setStatus:ArticleStatusNew];
 					[existingArticle markRead:NO];
 				}
-				else
-					[article setStatus:MA_MsgStatus_Updated];
+                else {
+					[article setStatus:ArticleStatusUpdated];
+                }
 			}
 			else
 			{
