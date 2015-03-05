@@ -1,8 +1,7 @@
 language: objective-c
 before_install:
-	- brew update
-	- brew install xctool
-# - gem install cocoapods
+ - brew update
+ - brew install xctool
 xcode_workspace: Vienna.xcworkspace
 xcode_scheme: Vienna
 script: xctool -workspace Vienna.xcworkspace -scheme Vienna -configuration Development
