@@ -307,7 +307,7 @@ JSONDecoder * jsonDecoder;
 			for (Article * article in articleArray)
 			{
                 if ([dbManager createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] &&
-                    ([article status] == MA_MsgStatus_New)) {
+                    ([article status] == ArticleStatusNew)) {
 					newArticlesFromFeed++;
                 }
 			}

@@ -40,7 +40,6 @@ static RefreshManager * _refreshManager = nil;
 // Private functions
 @interface RefreshManager (Private)
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
--(void)refreshFavIcon:(Folder *)folder;
 -(void)getCredentialsForFolder;
 -(void)setFolderErrorFlag:(Folder *)folder flag:(BOOL)theFlag;
 -(void)setFolderUpdatingFlag:(Folder *)folder flag:(BOOL)theFlag;
@@ -258,7 +257,7 @@ static RefreshManager * _refreshManager = nil;
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
 			dispatch_async(dispatch_get_main_queue(), ^{
-				[self refreshFavIcon:folder];
+				[self refreshFavIconForFolder:folder];
 			});
 		}
 	}
@@ -689,7 +688,7 @@ static RefreshManager * _refreshManager = nil;
 		// [dbManager setFolderLastUpdate:folderId lastUpdate:[NSDate date]];
 		
 		// If this folder also requires an image refresh, add that
-		if (([folder flags] & MA_FFlag_CheckForImage)) [self refreshFavIcon:folder];
+        if (([folder flags] & MA_FFlag_CheckForImage)) [self refreshFavIconForFolder:folder];
 	}
 	else if (responseStatusCode == 410)
 	{
@@ -894,7 +893,7 @@ static RefreshManager * _refreshManager = nil;
 				{
 					if ([dbManager createArticle:folderId
                                          article:article
-                                     guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New)) {
+                                     guidHistory:guidHistory] && ([article status] == ArticleStatusNew)) {
 						++newArticlesFromFeed;
                     }
 				}
@@ -955,7 +954,7 @@ static RefreshManager * _refreshManager = nil;
 	
 		// If this folder also requires an image refresh, do that
         if (([folder flags] & MA_FFlag_CheckForImage)) {
-                [self refreshFavIcon:folder];
+                [self refreshFavIconForFolder:folder];
         }
 
 }
