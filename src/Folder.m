@@ -739,7 +739,7 @@ static NSArray * iconArray = nil;
 -(NSArray *)articles
 {
 	if (!isCached)
-		[[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
+		[[Database sharedManager] arrayOfArticles:itemId filterString:nil];
 	return [cachedArticles allValues];
 }
 
@@ -748,7 +748,7 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articlesWithFilter:(NSString *)fstring
 {
-	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:fstring];
+	return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
 }
 
 /* folderNameCompare
@@ -777,7 +777,7 @@ static NSArray * iconArray = nil;
 	NSString * feedSourceFilePath = nil;
 	if ([self isRSSFolder])
 	{
-		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", [self itemId]];
+		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)[self itemId]];
 		feedSourceFilePath = [[[Preferences standardPreferences] feedSourcesFolder] stringByAppendingPathComponent:feedSourceFileName];
 	}
 	return feedSourceFilePath;
@@ -813,7 +813,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %ld (%@)", itemId, [self name]];
+	return [NSString stringWithFormat:@"Folder id %ld (%@)", (long)itemId, [self name]];
 }
 
 /* dealloc

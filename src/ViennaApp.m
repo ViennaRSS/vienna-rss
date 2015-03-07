@@ -155,7 +155,7 @@
  */
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd
 {
-	[[Database sharedDatabase] compactDatabase];
+	[[Database sharedManager] compactDatabase];
 	return nil;
 }
 
@@ -165,7 +165,7 @@
 -(id)handleEmptyTrash:(NSScriptCommand *)cmd
 {
 	[(AppController*)[self delegate] clearUndoStack];
-	[[Database sharedDatabase] purgeDeletedArticles];
+	[[Database sharedManager] purgeDeletedArticles];
 	return nil;
 }
 
@@ -186,7 +186,7 @@
 {
 	NSDictionary * args = [cmd evaluatedArguments];
 	id argObject = [args objectForKey:@"Folder"];
-	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedDatabase] arrayOfFolders:MA_Root_Folder];
+	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:MA_Root_Folder];
 
 	int countExported = 0;
 	if (argArray != nil)
@@ -251,7 +251,7 @@
  */
 -(int)totalUnreadCount
 {
-	return [[Database sharedDatabase] countOfUnread];
+	return [[Database sharedManager] countOfUnread];
 }
 
 /* currentSelection
@@ -324,7 +324,7 @@
  */
 -(Folder *)currentFolder
 {
-	return [[Database sharedDatabase] folderFromID:[(AppController*)[self delegate] currentFolderId]];
+	return [[Database sharedManager] folderFromID:[(AppController*)[self delegate] currentFolderId]];
 }
 
 /* setCurrentFolder

@@ -294,40 +294,45 @@ JSONDecoder * jsonDecoder;
 			[articleArray addObject:article];
 		}
 			
-		Database *db = [Database sharedDatabase];
-		__block NSInteger newArticlesFromFeed = 0;
+		Database *dbManager = [Database sharedManager];
+		NSInteger newArticlesFromFeed = 0;
 
 		// Here's where we add the articles to the database
 		if ([articleArray count] > 0)
 		{
-			[db doTransactionWithBlock:^(BOOL *rollback) {
-			NSArray * guidHistory = [db guidHistoryForFolderId:[refreshedFolder itemId]];
+			NSArray * guidHistory = [dbManager guidHistoryForFolderId:[refreshedFolder itemId]];
 			[refreshedFolder clearCache];
 			//BOOL hasCache = [db initArticleArray:refreshedFolder];
 
 			for (Article * article in articleArray)
 			{
-				if ([db createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] && ([article status] == MA_MsgStatus_New))
+                if ([dbManager createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] &&
+                    ([article status] == ArticleStatusNew)) {
 					newArticlesFromFeed++;
+                }
 			}
 
 			// Set the last update date for this folder.
-			[db setFolderLastUpdate:[refreshedFolder itemId] lastUpdate:[NSDate date]];
-			}]; //end transaction block
+            [dbManager setLastUpdate:[NSDate date] forFolder:refreshedFolder.itemId];
+            
 		}
 
-		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
+        if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
+            folderLastUpdateString=@"0";
+        }
 
-		[db doTransactionWithBlock:^(BOOL *rollback) {
 		// Set the last update date given by the Open Reader server for this folder.
-		[db setFolderLastUpdateString:[refreshedFolder itemId] lastUpdateString:folderLastUpdateString];
+        [dbManager setLastUpdateString:folderLastUpdateString forFolder:refreshedFolder.itemId];
 		// Set the HTML homepage for this folder.
 		// a legal JSON string can have, as its outer "container", either an array or a dictionary/"object"
-		if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]])
-			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]];
-		else
-			[db setFolderHomePage:[refreshedFolder itemId] newHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]];
-		}]; //end transaction block
+        if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]]) {
+            [dbManager setHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]
+                         forFolder:refreshedFolder.itemId];
+        }
+        else {
+            [dbManager setHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]
+                         forFolder:refreshedFolder.itemId];
+        }
 		
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -442,10 +447,9 @@ JSONDecoder * jsonDecoder;
             [guidArray addObject:guid];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		Database * db = [Database sharedDatabase];
-		[db doTransactionWithBlock:^(BOOL *rollback) {
-			[db markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
-		}]; //end transaction block
+
+        [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
@@ -460,7 +464,7 @@ JSONDecoder * jsonDecoder;
 		dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
 		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
 			dispatch_async(queue, ^() {
-				[[RefreshManager sharedManager] refreshFavIcon:refreshedFolder];
+				[[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
 			});
 
 	}
@@ -504,10 +508,9 @@ JSONDecoder * jsonDecoder;
 			[guidArray addObject:guid];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
-		Database * db = [Database sharedDatabase];
-		[db doTransactionWithBlock:^(BOOL *rollback) {
-			[db markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
-		}]; //end transaction block
+
+        [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
+
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
@@ -721,10 +724,7 @@ JSONDecoder * jsonDecoder;
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
 					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL]) {
-						Database *db = [Database sharedDatabase];
-						[db doTransactionWithBlock:^(BOOL *rollback) {
-							[db setFolderHomePage:[f itemId] newHomePage:homePageURL];
-						}];
+                        [[Database sharedManager] setHomePage:homePageURL forFolder:f.itemId];
 						break;
 					}
 				}
@@ -738,7 +738,7 @@ JSONDecoder * jsonDecoder;
 	for (Folder * f in [APPCONTROLLER folders]) {
 		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
 		{
-			[[Database sharedDatabase] deleteFolder:[f itemId]];
+			[[Database sharedManager] deleteFolder:[f itemId]];
 		}
 	}
 
@@ -920,7 +920,7 @@ JSONDecoder * jsonDecoder;
     {
 		if ([params count] > 2 ) {
 			NSString * folderName = [params objectAtIndex:2];
-			Database * db = [Database sharedDatabase];
+			Database * db = [Database sharedManager];
 			Folder * folder = [db folderFromName:folderName];
 			underFolder = [folder itemId];
 		}
@@ -943,20 +943,20 @@ JSONDecoder * jsonDecoder;
     // Remove the parent parameter. We'll re-add it with a new value later.
     [params removeObjectAtIndex:1];
     
-    Database * db = [Database sharedDatabase];
+    Database * dbManager = [Database sharedManager];
     NSString * folderName = [folderNames objectAtIndex:0];
-    Folder * folder = [db folderFromName:folderName];
+    Folder * folder = [dbManager folderFromName:folderName];
     
     if (!folder)
     {
-		__block NSInteger newFolderId;
-        [db doTransactionWithBlock:^(BOOL *rollback) {
-	        newFolderId = [db addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
-        }]; //end transaction block
-        
-        parentNumber = [NSNumber numberWithInteger:newFolderId];
+		NSInteger newFolderId;
+        newFolderId = [dbManager addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
+ 
+        parentNumber = @(newFolderId);
     }
-    else parentNumber = [NSNumber numberWithInteger:[folder itemId]];
+    else  {
+        parentNumber = @(folder.itemId);
+    }
     
     [folderNames removeObjectAtIndex:0];
     if ([folderNames count] > 0)

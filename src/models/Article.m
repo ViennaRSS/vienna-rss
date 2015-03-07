@@ -61,7 +61,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
         deletedFlag = NO;
         hasEnclosureFlag = NO;
         enclosureDownloadedFlag = NO;
-        status = MA_MsgStatus_Empty;
+        status = ArticleStatusEmpty;
         [self setFolderId:-1];
         [self setGuid:theGuid];
         [self setParentId:0];
@@ -250,7 +250,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(Folder *)containingFolder
 {
-    return [[Database sharedDatabase] folderFromID:[self folderId]];
+    return [[Database sharedManager] folderFromID:[self folderId]];
 }
 
 /* setFolderId
@@ -294,7 +294,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
-    Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
     NSUInteger index = [folder indexOfArticle:self];
     if (index != NSNotFound)
     {
@@ -377,7 +377,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagFeedTitle
 {
-    Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
     return [XMLParser quoteAttributes:SafeString([folder name])];
 }
 
@@ -386,7 +386,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagFeedLink
 {
-    Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
     return SafeString([folder homePage]);
 }
 
@@ -395,7 +395,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagFeedDescription
 {
-    Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
+    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
     return [folder feedDescription];
 }
 

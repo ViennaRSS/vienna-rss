@@ -55,11 +55,11 @@
 	NSString * folderNameString = [[folderName stringValue] trim];
 	
 	// Create the new folder in the database
-	Database * db = [Database sharedDatabase];
-	__block int newFolderId;
-	[db doTransactionWithBlock:^(BOOL *rollback) {
-		newFolderId = [db addFolder:parentId afterChild:-1 folderName:folderNameString type:MA_Group_Folder canAppendIndex:NO];
-	}]; //end transaction block
+    int newFolderId = [[Database sharedManager] addFolder:parentId
+                                               afterChild:-1
+                                               folderName:folderNameString
+                                                     type:MA_Group_Folder
+                                           canAppendIndex:NO];
 
 	// Close the window
 	[NSApp endSheet:newGroupFolderWindow];

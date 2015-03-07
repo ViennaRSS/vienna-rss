@@ -467,7 +467,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[self setStatusMessage:nil persist:NO];
 	
 	// Initialize the database
-	if ((db = [Database sharedDatabase]) == nil)
+	if ((db = [Database sharedManager]) == nil)
 	{
 		[NSApp terminate:nil];
 		return;
@@ -2876,12 +2876,11 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	
 	// Create then select the new folder.
-	__block NSInteger folderId;
-	[db doTransactionWithBlock:^(BOOL *rollback) {
-		folderId = [db addGoogleReaderFolder:title underParent:parentId afterChild:predecessorId subscriptionURL:url];
-	}]; //end transaction block
-	
-	
+	NSInteger folderId = [db addGoogleReaderFolder:title
+                                       underParent:parentId
+                                        afterChild:predecessorId
+                                   subscriptionURL:url];
+		
 	if (folderId != -1)
 	{
 		//		[foldersTree selectFolder:folderId];
@@ -2926,10 +2925,10 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	else
 	{ //creates locally
-		__block NSInteger folderId;
-		[db doTransactionWithBlock:^(BOOL *rollback) {
-			folderId = [db addRSSFolder:[Database untitledFeedFolderName] underParent:parentId afterChild:predecessorId subscriptionURL:urlString];
-		}]; //end transaction block
+		NSInteger folderId = [db addRSSFolder:[Database untitledFeedFolderName]
+                                  underParent:parentId
+                                   afterChild:predecessorId
+                              subscriptionURL:urlString];
 
 		if (folderId != -1)
 		{
@@ -3374,20 +3373,18 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
-		int folderID = [folder itemId];
         
         if (IsUnsubscribed(folder)) {
             // Currently unsubscribed, so re-subscribe locally
-            [[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_Unsubscribed];
+            [[Database sharedManager] clearFlag:MA_FFlag_Unsubscribed forFolder:folder.itemId];
         } else {
             // Currently subscribed, so unsubscribe locally
-            [[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_Unsubscribed];
+            [[Database sharedManager] setFlag:MA_FFlag_Unsubscribed forFolder:folder.itemId];
         }
 
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderID]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+                                                            object:@(folder.itemId)];
 	}
-    
-
 }
 
 /* setLoadFullHTMLFlag
@@ -3408,12 +3405,12 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		if (loadFullHTMLPages)
 		{
 			[folder setFlag:MA_FFlag_LoadFullHTML];
-			[[Database sharedDatabase] setFolderFlag:folderID flagToSet:MA_FFlag_LoadFullHTML];
+            [[Database sharedManager] setFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
 		}
 		else
 		{
 			[folder clearFlag:MA_FFlag_LoadFullHTML];
-			[[Database sharedDatabase] clearFolderFlag:folderID flagToClear:MA_FFlag_LoadFullHTML];
+            [[Database sharedManager] clearFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
 		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:folderID]];
 	}
