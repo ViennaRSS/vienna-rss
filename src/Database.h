@@ -46,7 +46,6 @@
 
 // General database functions
 +(instancetype)sharedManager;
--(BOOL)initDatabase;
 -(void)syncLastUpdate;
 -(void)compactDatabase;
 -(void)reindexDatabase;

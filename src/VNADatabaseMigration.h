@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FMDB.h>
 
 @interface VNADatabaseMigration : NSObject
 
-- (void)migrateSchemaFromVersion:(NSInteger)fromVersion toVersion:(NSInteger)toVersion;
++ (void)migrateDatabase:(FMDatabase *)db fromVersion:(NSInteger)fromVersion;
 
 @end
