@@ -16,6 +16,7 @@
 @end
 
 
+static FolderImageCache * _folderImageCache = nil;
 
 @implementation FolderImageCache
 

@@ -33,7 +33,6 @@
 
 
 // Static pointers
-static FolderImageCache * _folderImageCache = nil;
 static NSArray * iconArray = nil;
 
 
