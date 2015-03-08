@@ -116,6 +116,22 @@ const NSInteger MA_Current_DB_Version = 18;
         // Nothing to do here
         return YES;
     } else if (databaseVersion >= MA_Min_Supported_DB_Version) {
+        NSAlert * alert = [[NSAlert alloc] init];
+        [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
+        [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
+        NSInteger modalReturn = [alert runModal];
+        [alert release];
+        if (modalReturn == NSAlertSecondButtonReturn)
+        {
+            return NO;
+        }
+
+        // Backup the database before any upgrade
+        NSString * backupDatabaseFileName = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
+        [[NSFileManager defaultManager] copyItemAtPath:[Database databasePath] toPath:backupDatabaseFileName error:nil];
+        
         [databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
@@ -175,21 +191,7 @@ const NSInteger MA_Current_DB_Version = 18;
 //
 //	else if (databaseVersion < MA_Current_DB_Version)
 //	{
-//		NSAlert * alert = [[NSAlert alloc] init];
-//		[alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
-//		[alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
-//		[alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
-//		[alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
-//		NSInteger modalReturn = [alert runModal];
-//		[alert release];
-//		if (modalReturn == NSAlertSecondButtonReturn)
-//		{
-//			return NO;
-//		}
-//		
-//		// Backup the database before any upgrade
-//		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-//		[[NSFileManager defaultManager] copyItemAtPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName error:nil];
+//
 //	}
 //		
 //	

@@ -59,6 +59,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */; };
 		031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
 		032280311A33BCD8007DE933 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 032280301A33BCD8007DE933 /* Article.m */; };
 		03493D1A1A303BF700AA3F36 /* SyncingPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03493D1C1A303BF700AA3F36 /* SyncingPreferencesView.xib */; };
@@ -782,6 +783,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		030C388E1AABF12D00AE1EB8 /* FolderImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FolderImageCache.h; path = src/models/FolderImageCache.h; sourceTree = "<group>"; };
+		030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FolderImageCache.m; path = src/models/FolderImageCache.m; sourceTree = "<group>"; };
 		031E082E19DFA3A900194F9F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscriptionModel.h; path = src/SubscriptionModel.h; sourceTree = "<group>"; };
 		031E082F19DFA3A900194F9F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscriptionModel.m; path = src/SubscriptionModel.m; sourceTree = "<group>"; };
 		0322802F1A33BCD8007DE933 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = src/models/Article.h; sourceTree = "<group>"; };
@@ -1659,6 +1662,10 @@
 			children = (
 				0322802F1A33BCD8007DE933 /* Article.h */,
 				032280301A33BCD8007DE933 /* Article.m */,
+				AA26F4CA0604927300FE7994 /* Folder.h */,
+				AA26F4CB0604927300FE7994 /* Folder.m */,
+				030C388E1AABF12D00AE1EB8 /* FolderImageCache.h */,
+				030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2730,8 +2737,6 @@
 				03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */,
 				AA36CD7906100692001E33A4 /* Field.h */,
 				AA36CD7A06100692001E33A4 /* Field.m */,
-				AA26F4CA0604927300FE7994 /* Folder.h */,
-				AA26F4CB0604927300FE7994 /* Folder.m */,
 				AA5AC2640C3ECAA000B2E14F /* SearchString.m */,
 				AA5AC2750C3ECB3F00B2E14F /* SearchString.h */,
 			);
@@ -3752,6 +3757,7 @@
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
 				AAD794E7088A25D200E2CE5E /* PopUpButtonExtensions.m in Sources */,
 				032280311A33BCD8007DE933 /* Article.m in Sources */,
+				030C38901AABF12D00AE1EB8 /* FolderImageCache.m in Sources */,
 				AAD799A0088B617900E2CE5E /* ImageAndTextCell.m in Sources */,
 				AA86B2AB0892DCAA0071FB33 /* BezierPathExtensions.m in Sources */,
 				AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */,
