@@ -77,7 +77,7 @@ const NSInteger MA_Current_DB_Version = 18;
         [self initaliseFields];
         databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:[Database databasePath]] retain];
         [self initialiseDatabase];
-        NSLog(@"Database version: %ld", (long)[self databaseVersion]);
+        LLog(@"Database version: %ld", (long)[self databaseVersion]);
     }
     return self;
 }
@@ -109,7 +109,7 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 - (BOOL)initialiseDatabase {
     int databaseVersion = [self databaseVersion];
-    NSLog(@"database version: %d", databaseVersion);
+    LLog(@"database version: %d", databaseVersion);
     
     if (databaseVersion >= MA_Current_DB_Version) {
         // Most common case, so it is first
