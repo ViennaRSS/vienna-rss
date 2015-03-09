@@ -21,185 +21,20 @@
 #import "Folder.h"
 #import "AppController.h"
 #import "Constants.h"
-#import "Preferences.h"
-#import "StringExtensions.h"
 #import "KeyChain.h"
-
-// Indexes into folder image array
-enum {
-	MA_FolderIcon = 0,
-	MA_SmartFolderIcon,
-	MA_RSSFolderIcon,
-	MA_RSSFeedIcon,
-	MA_TrashFolderIcon,
-	MA_SearchFolderIcon,
-	MA_GoogleReaderFolderIcon,
-	MA_Max_Icons
-};
-
-// Folder image cache interface. This is exclusive to the
-// folder code and only used privately.
-@interface FolderImageCache : NSObject {
-	NSString * imagesCacheFolder;
-	NSMutableDictionary * folderImagesArray;
-	BOOL initializedFolderImagesArray;
-}
-
-// Accessor functions
-+(FolderImageCache *)defaultCache;
--(void)addImage:(NSImage *)image forURL:(NSString *)baseURL;
--(NSImage *)retrieveImage:(NSString *)baseURL;
-
-// Support functions
--(void)initFolderImagesArray;
-@end
-
-// Static pointers
-static FolderImageCache * _folderImageCache = nil;
-static NSArray * iconArray = nil;
+#import "FolderImageCache.h"
+#import "StringExtensions.h"
+#import "Preferences.h"
 
 // Private internal functions
 @interface Folder (Private)
 	+(NSArray *)_iconArray;
 @end
 
-@implementation FolderImageCache
 
-/* defaultCache
- * Returns a pointer to the default cache. There is just one default cache
- * and we instantiate it if it doesn't exist.
- */
-+(FolderImageCache *)defaultCache
-{
-	if (_folderImageCache == nil)
-		_folderImageCache = [[FolderImageCache alloc] init];
-	return _folderImageCache;
-}
+// Static pointers
+static NSArray * iconArray = nil;
 
-/* init
- * Init an instance of the folder image cache.
- */
--(id)init
-{
-	if ((self = [super init]) != nil)
-	{
-		imagesCacheFolder = nil;
-		initializedFolderImagesArray = NO;
-		folderImagesArray = [[NSMutableDictionary alloc] init];
-	}
-	return self;
-}
-
-/* addImage
- * Add the specified image to the cache and save it to disk.
- */
--(void)addImage:(NSImage *)image forURL:(NSString *)baseURL
-{
-	// Add in memory
-	[self initFolderImagesArray];
-	[folderImagesArray setObject:image forKey:baseURL];
-
-	// Save icon to disk here.
-	if (imagesCacheFolder != nil)
-	{
-		NSString * fullFilePath = [[imagesCacheFolder stringByAppendingPathComponent:baseURL] stringByAppendingPathExtension:@"tiff"];
-		NSData *imageData = nil;
-		@try {
-			imageData = [image TIFFRepresentation];
-		}
-		@catch (NSException *error) {
-			imageData = nil;
-			NSLog(@"tiff exception with %@", fullFilePath);
-		}
-		if (imageData != nil)
-			[[NSFileManager defaultManager] createFileAtPath:fullFilePath contents:imageData attributes:nil];
-	}
-}
-
-/* retrieveImage
- * Retrieve the image for the specified URL from the cache.
- */
--(NSImage *)retrieveImage:(NSString *)baseURL
-{
-	[self initFolderImagesArray];
-	return [folderImagesArray objectForKey:baseURL];
-}
-
-/* initFolderImagesArray
- * Load the existing list of folder images from the designated folder image cache. We
- * do this only once and we do it as quickly as possible. When we're done, the folderImagesArray
- * will be filled with image representations for each valid image file we find in the cache.
- */
--(void)initFolderImagesArray
-{
-	if (!initializedFolderImagesArray)
-	{
-		NSFileManager * fileManager = [NSFileManager defaultManager];
-		NSArray * listOfFiles;
-		BOOL isDir;
-		
-		// Get and cache the path to the folder. This is the best time to make sure it
-		// exists. The penalty for it not existing AND us being unable to create it is that
-		// we don't cache folder icons in this session.
-		imagesCacheFolder = [[Preferences standardPreferences] imagesFolder];
-		if (![fileManager fileExistsAtPath:imagesCacheFolder isDirectory:&isDir])
-		{
-			if (![fileManager createDirectoryAtPath:imagesCacheFolder withIntermediateDirectories:YES attributes:nil error:nil])
-			{
-				NSLog(@"Cannot create image cache at %@. Will not cache folder images in this session.", imagesCacheFolder);
-				imagesCacheFolder = nil;
-			}
-			initializedFolderImagesArray = YES;
-			return;
-		}
-		
-		if (!isDir)
-		{
-			NSLog(@"The file at %@ is not a directory. Will not cache folder images in this session.", imagesCacheFolder);
-			[imagesCacheFolder release];
-			imagesCacheFolder = nil;
-			initializedFolderImagesArray = YES;
-			return;
-		}
-		
-		// Remember - not every file we find may be a valid image file. We use the filename as
-		// the key but check the extension too.
-		listOfFiles = [fileManager contentsOfDirectoryAtPath:imagesCacheFolder error:nil];
-		if (listOfFiles != nil)
-		{
-			NSString * fileName;
-			
-			for (fileName in listOfFiles)
-			{
-				if ([[fileName pathExtension] isEqualToString:@"tiff"])
-				{
-					NSString * fullPath = [imagesCacheFolder stringByAppendingPathComponent:fileName];
-					NSData * imageData = [fileManager contentsAtPath:fullPath];
-					NSImage * iconImage = [[NSImage alloc] initWithData:imageData];
-					if ([iconImage isValid])
-					{
-						[iconImage setSize:NSMakeSize(16, 16)];
-						NSString * homePageSiteRoot = [[[fullPath lastPathComponent] stringByDeletingPathExtension] convertStringToValidPath];
-						[folderImagesArray setObject:iconImage forKey:homePageSiteRoot];
-					}
-					[iconImage release];
-				}
-			}
-		}
-		initializedFolderImagesArray = YES;
-	}
-}
-
-/* dealloc
- * Clean up.
- */
--(void)dealloc
-{
-	[folderImagesArray release];
-	folderImagesArray=nil;
-	[super dealloc];
-}
-@end
 
 @implementation Folder
 
@@ -739,7 +574,7 @@ static NSArray * iconArray = nil;
 -(NSArray *)articles
 {
 	if (!isCached)
-		[[Database sharedDatabase] arrayOfArticles:itemId filterString:nil];
+		[[Database sharedManager] arrayOfArticles:itemId filterString:nil];
 	return [cachedArticles allValues];
 }
 
@@ -748,7 +583,7 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articlesWithFilter:(NSString *)fstring
 {
-	return [[Database sharedDatabase] arrayOfArticles:itemId filterString:fstring];
+	return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
 }
 
 /* folderNameCompare
@@ -777,7 +612,7 @@ static NSArray * iconArray = nil;
 	NSString * feedSourceFilePath = nil;
 	if ([self isRSSFolder])
 	{
-		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", [self itemId]];
+		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)[self itemId]];
 		feedSourceFilePath = [[[Preferences standardPreferences] feedSourcesFolder] stringByAppendingPathComponent:feedSourceFileName];
 	}
 	return feedSourceFilePath;
@@ -813,7 +648,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %ld (%@)", itemId, [self name]];
+	return [NSString stringWithFormat:@"Folder id %ld (%@)", (long)itemId, [self name]];
 }
 
 /* dealloc

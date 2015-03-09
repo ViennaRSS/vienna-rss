@@ -28,440 +28,340 @@
 #import "NSNotificationAdditions.h"
 #import "RefreshManager.h"
 #import "Debug.h"
+#import "VNADatabaseMigration.h"
 
 // Private scope flags
 #define MA_Scope_Inclusive		1
 #define MA_Scope_SubFolders		2
 
 // Private functions
-@interface Database (Private)
-	-(NSString *)relocateLockedDatabase:(NSString *)path;
-	-(void)setDatabaseVersion:(NSInteger)newVersion;
-	-(BOOL)initArticleArray:(Folder *)folder;
-	-(CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
-	-(NSArray *)arrayOfSubFolders:(Folder *)folder;
-	-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
-	-(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
-	-(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
-	-(NSInteger)executeSQL:(NSString *)sqlStatement;
-	-(NSInteger)executeSQLWithFormat:(NSString *)sqlStatement, ...;
+@interface Database ()
+
+- (BOOL)setupInitialDatabase:(FMDatabase *)initialDatabase;
+- (void)initaliseFields;
+-(NSString *)relocateLockedDatabase:(NSString *)path;
+-(BOOL)initArticleArray:(Folder *)folder;
+-(CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
+-(NSArray *)arrayOfSubFolders:(Folder *)folder;
+-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
+-(void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
+-(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
++(NSString *)databasePath;
 @end
 
 // The current database version number
 const NSInteger MA_Min_Supported_DB_Version = 12;
 const NSInteger MA_Current_DB_Version = 18;
 
-// There's just one database and we manage access to it through a
-// singleton object.
-static Database * _sharedDatabase = nil;
 
 @implementation Database
 
 @synthesize trashFolder, searchFolder;
+@synthesize databaseQueue;
 
 /* init
  * General object initialization.
  */
--(id)init
+- (instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
-		inTransaction = NO;
-		sqlDatabase = NULL;
-		initializedfoldersDict = NO;
-		initializedSmartfoldersDict = NO;
-		countOfUnread = 0;
-		trashFolder = nil;
-		searchFolder = nil;
-		searchString = @"";
-		smartfoldersDict = [[NSMutableDictionary alloc] init];
-		foldersDict = [[NSMutableDictionary alloc] init];
-		_transactionQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-transaction", NULL);
-		_execQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.database-access", NULL);
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        initializedfoldersDict = NO;
+        initializedSmartfoldersDict = NO;
+        countOfUnread = 0;
+        trashFolder = nil;
+        searchFolder = nil;
+        searchString = @"";
+        smartfoldersDict = [[NSMutableDictionary alloc] init];
+        foldersDict = [[NSMutableDictionary alloc] init];
+        [self initaliseFields];
+        databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:[Database databasePath]] retain];
+        [self initialiseDatabase];
+        LLog(@"Database version: %ld", (long)[self databaseVersion]);
+    }
+    return self;
 }
 
-/* sharedDatabase
- * Returns the single instance of the refresh manager.
+
+/* sharedManager
+ * Returns the single instance of the database manager.
  */
-+(Database *)sharedDatabase
-{
-	if (!_sharedDatabase)
-	{
-		_sharedDatabase = [[Database alloc] init];
-		if (![_sharedDatabase initDatabase:[[Preferences standardPreferences] defaultDatabase]])
-		{
-			[_sharedDatabase release];
-			_sharedDatabase = nil;
-		}
-	}
-	return _sharedDatabase;
++ (instancetype)sharedManager {
+    static id sharedMyManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedMyManager = [[Database alloc] init];
+//        if (![sharedMyManager initDatabase]) {
+//            [sharedMyManager release];
+//            sharedMyManager = nil;
+//        }
+    });
+    
+    return sharedMyManager;
 }
 
-+ (NSString*)prepareStringForQuery:(NSString*)inString
-{
-	NSMutableString*	string;
-	NSRange				range = NSMakeRange( 0, [inString length]);
-	NSRange				subRange;
 
-    if([inString respondsToSelector:@selector(stringValue)]) {
-        inString = [(id)inString stringValue];
+/*!
+ *  Initialise the Vienna database. Create the initial database if
+ *  necessary, otherwise migrate to the correct version if it is out of date
+ *
+ *  @return YES if the database is at the correct version and good to go
+ */
+- (BOOL)initialiseDatabase {
+    int databaseVersion = [self databaseVersion];
+    LLog(@"database version: %d", databaseVersion);
+    
+    if (databaseVersion >= MA_Current_DB_Version) {
+        // Most common case, so it is first
+        // Nothing to do here
+        return YES;
+    } else if (databaseVersion >= MA_Min_Supported_DB_Version) {
+        NSAlert * alert = [[NSAlert alloc] init];
+        [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
+        [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
+        NSInteger modalReturn = [alert runModal];
+        [alert release];
+        if (modalReturn == NSAlertSecondButtonReturn)
+        {
+            return NO;
+        }
+
+        // Backup the database before any upgrade
+        NSString * backupDatabaseFileName = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
+        [[NSFileManager defaultManager] copyItemAtPath:[Database databasePath] toPath:backupDatabaseFileName error:nil];
+        
+        [databaseQueue inDatabase:^(FMDatabase *db) {
+            // Migrate the database to the newest version
+            // TODO: move this into transaction so we can rollback on failure
+            [VNADatabaseMigration migrateDatabase:db fromVersion:databaseVersion];
+        }];
+        
+        // Confirm the database is now at the correct version
+        if ([self databaseVersion] == MA_Current_DB_Version) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else if ((databaseVersion > 0) && (databaseVersion < MA_Min_Supported_DB_Version)) {
+        // database version is too old or schema not supported
+        // TODO: help text for the user to fix the issue
+        NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
+                        NSLocalizedString(@"Unrecognised database format text", nil),
+                        NSLocalizedString(@"Close", nil), @"", @"",
+                        [databaseQueue path]);
+        return NO;
+    } else if (databaseVersion == 0) {
+        // database is fresh
+        
+        [databaseQueue inDatabase:^(FMDatabase *db) {
+            [self setupInitialDatabase:db];
+        }];
+        
     }
-    if((NSNull*)inString == [NSNull null]) {
-        inString = nil;
-    }
-	if(inString == nil) return nil; // just don't try.
-
-	subRange = [inString rangeOfString:@"'" options:NSLiteralSearch range:range];
-	if( subRange.location == NSNotFound )
-		return inString;
-
-	string = [NSMutableString stringWithString:inString];
-	for( ; subRange.location != NSNotFound && range.length > 0;  )
-	{
-		subRange = [string rangeOfString:@"'" options:NSLiteralSearch range:range];
-		if( subRange.location != NSNotFound )
-			[string replaceCharactersInRange:subRange withString:@"''"];
-
-		range.location = subRange.location + 2;
-		range.length = ( [string length] < range.location ) ? 0 : ( [string length] - range.location );
-	}
-
-	return string;
+    
+    return NO;
 }
 
 /* initDatabase
  * Initalizes the database. The database is first checked to ensure it exists
  * and, if not, it is created with all the tables.
  */
--(BOOL)initDatabase:(NSString *)databaseFileName
-{
-	// Don't allow nested opens
-	if (sqlDatabase)
-		return NO;
+//-(BOOL)initDatabase {
+//    
+//    NSString *qualifiedDatabaseFileName = [Database databasePath];
+//	
+//	// Open the database at the well known location
+//	FMDatabase *sqlDatabase = [[FMDatabase alloc] initWithPath:[Database databasePath]];
+//	if (!sqlDatabase || ![sqlDatabase open])
+//	{
+//		NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
+//						NSLocalizedString(@"Cannot open database text", nil),
+//						NSLocalizedString(@"Close", nil), @"", @"",
+//						qualifiedDatabaseFileName);
+//		[sqlDatabase release];
+//		return NO;
+//	}
+//
+//
+//
+//	
+//	// Create the tables when the database is empty.
+//
+//	else if (databaseVersion < MA_Current_DB_Version)
+//	{
+//
+//	}
+//		
+//	
+//
+//	// Read the folders tree sort method from the database.
+//	// Make sure that the folders tree is not yet registered to receive notifications at this point.
+//	__block NSInteger newFoldersTreeSortMethod = MA_FolderSort_ByName;
+//    [databaseQueue inDatabase:^(FMDatabase *db) {
+//        FMResultSet * sortResults = [sqlDatabase executeQuery:@"select folder_sort from info"];
+//        if ([sortResults next])
+//        {
+//            newFoldersTreeSortMethod = [sortResults intForColumn:@"folder_sort"];
+//        }
+//        [sortResults close];
+//    }];
+//
+//	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
+//	
+//	// Register for notifications of change in folders tree sort method.
+//	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
+//	
+//	// Initial check if the database is read-only
+//	[self syncLastUpdate];
+//    
+//    [sqlDatabase close];
+//    [sqlDatabase release];
+//    
+//    
+//    databaseQueue = [FMDatabaseQueue databaseQueueWithPath:[Database databasePath]];
+//    if(!databaseQueue) {
+//        NSLog(@"error creating database queue");
+//    }
+//	return YES;
+//}
 
-	// Fully expand the path and make sure it exists because if the
-	// database file itself doesn't exist, we want to create it and
-	// we can't create it on a non-existent path.
-	NSFileManager * fileManager = [NSFileManager defaultManager];
-	NSString * qualifiedDatabaseFileName = [databaseFileName stringByExpandingTildeInPath];
-	NSString * databaseFolder = [qualifiedDatabaseFileName stringByDeletingLastPathComponent];
-	BOOL isDir;
+/*!
+ *  sets up an inital Vienna database at the given path
+ *
+ *  @param dbPath The path to create the database at
+ *
+ *  @return True on succes
+ */
+- (BOOL)setupInitialDatabase:(FMDatabase *)initialDatabase {
+    // Create the tables. We use the first table as a test whether we can actually
+    // write to the specified location. If not then we need to prompt the user for
+    // a different location.
+    BOOL success = [initialDatabase executeUpdate:@"create table info (version, last_opened, first_folder, folder_sort)"];
+    
+    if(success) {
+        [self createTablesOnDatabase:initialDatabase];
+    } else {
+        if ([initialDatabase lastErrorCode] == SQLITE_LOCKED) {
+            // Database was opened but table was locked.
+            NSString * newPath = [self relocateLockedDatabase:initialDatabase.databasePath];
+            if (newPath == nil) {
+                return NO;
+            } else {
+                initialDatabase = [FMDatabase databaseWithPath:newPath];
+            }
+        } else {
+            return NO;
+        }
+    }
 
-	
-	if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
-	{
-		NSError *error;
-		if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
-		{
-			NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
-							[NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
-							NSLocalizedString(@"Close", nil), @"", @"",
-							databaseFolder);
-			[error release];
-			return NO;
-		}
-	}
-	
-	// Open the database at the well known location
-	sqlDatabase = [[FMDatabase alloc] initWithPath:qualifiedDatabaseFileName];
-	if (!sqlDatabase || ![sqlDatabase open])
-	{
-		NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
-						NSLocalizedString(@"Cannot open database text", nil),
-						NSLocalizedString(@"Close", nil), @"", @"",
-						qualifiedDatabaseFileName);
-		[sqlDatabase release];
-		return NO;
-	}
+    
+    // Create a criteria to find all marked articles
+    Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
+    [self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
+    [markedCriteria release];
+    
+    // Create a criteria to show all unread articles
+    Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
+    [self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
+    [unreadCriteria release];
+    
+    // Create a criteria to show all articles received today
+    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
+    [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
+    [todayCriteria release];
+    
+    // Create the trash folder
+    [initialDatabase executeUpdate:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, ?, 0, 0, ?, 0, 0, 0)",
+     NSLocalizedString(@"Trash", nil), @(MA_Trash_Folder)];
+    
+    // Set the initial version
+    [initialDatabase setUserVersion:(uint32_t)MA_Current_DB_Version];
+    
+    // Set the default sort order and write it to both the db and the prefs
+    [initialDatabase executeUpdate:@"insert into info (first_folder, folder_sort) values (0, ?)",  @(MA_FolderSort_Manual)];
+    [[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
+    
+    // Set the initial folder order
+    [self initFolderArray];
+    NSInteger folderId = 0;
+    NSInteger previousSibling = 0;
+    NSArray * allFolders = [foldersDict allKeys];
+    NSUInteger count = [allFolders count];
+    NSUInteger index;
+    for (index = 0u; index < count; ++index)
+    {
+        previousSibling = folderId;
+        folderId = [[allFolders objectAtIndex:index] intValue];
+        if (index == 0u)
+            [self setFirstChild:folderId forFolder:MA_Root_Folder];
+        else
+            [self setNextSibling:folderId forFolder:previousSibling];
+    }
+    
+    // If we have a DemoFeeds.plist in the resources then use it to create some initial demo
+    // RSS feeds.
+    NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+    NSString * pathToPList = [thisBundle pathForResource:@"DemoFeeds.plist" ofType:@""];
+    if (pathToPList != nil)
+    {
+        NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+        if (demoFeedsDict)
+        {
+            for (NSString * feedName in demoFeedsDict)
+            {
+                NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
+                NSString * feedURL = [itemDict valueForKey:@"URL"];
+                if (feedURL != nil && feedName != nil)
+                    previousSibling = [self addRSSFolder:feedName underParent:MA_Root_Folder afterChild:previousSibling subscriptionURL:feedURL];
+            }
+        }
+    }
+    return YES;
+}
 
-	// Get the info table. If it doesn't exist then the database is new
-	FMResultSet * results = [sqlDatabase executeQuery:@"select version from info"];
-	databaseVersion = 0;
-	if ([results next])
-	{
-		NSString * versionString = [results stringForColumn:@"version"];
-		databaseVersion = [versionString intValue];
-	}
-	[results close];
 
-	// Trap unsupported databases
-	if (databaseVersion > 0 && databaseVersion < MA_Min_Supported_DB_Version)
-	{
-		NSRunAlertPanel(NSLocalizedString(@"Unrecognised database format", nil),
-						NSLocalizedString(@"Unrecognised database format text", nil),
-						NSLocalizedString(@"Close", nil), @"", @"",
-						qualifiedDatabaseFileName);
-		return NO;
-	}
-	
-	// Create the tables when the database is empty.
-	if (databaseVersion == 0)
-	{
-		// Create the tables. We use the first table as a test whether we can actually
-		// write to the specified location. If not then we need to prompt the user for
-		// a different location.
-		NSInteger resultCode;
-		while ((resultCode = [self executeSQL:@"create table info (version, last_opened, first_folder, folder_sort)"]) != SQLITE_OK)
-		{
-			if (resultCode != SQLITE_LOCKED)
-				return NO;
+-(BOOL)createTablesOnDatabase:(FMDatabase *)db {
+    [db executeUpdate:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
+    [db executeUpdate:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
+    [db executeUpdate:@"create table smart_folders (folder_id, search_string)"];
+    [db executeUpdate:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
+    [db executeUpdate:@"create table rss_guids (message_id, folder_id)"];
+    [db executeUpdate:@"create index messages_folder_idx on messages (folder_id)"];
+    [db executeUpdate:@"create index messages_message_idx on messages (message_id)"];
+    [db executeUpdate:@"create index rss_guids_idx on rss_guids (folder_id)"];
+    if ([db hadError]) {
+        return NO;
+    }
+    return YES;
+}
 
-			// Database was opened but table was locked.
-			NSString * newPath = [self relocateLockedDatabase:qualifiedDatabaseFileName];
-			if (newPath == nil)
-				return NO;
-			qualifiedDatabaseFileName = newPath;
-		}
-		
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-
-		[self executeSQL:@"create table folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
-		[self executeSQL:@"create table messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
-		[self executeSQL:@"create table smart_folders (folder_id, search_string)"];
-		[self executeSQL:@"create table rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
-		[self executeSQL:@"create table rss_guids (message_id, folder_id)"];
-		[self executeSQL:@"create index messages_folder_idx on messages (folder_id)"];
-		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
-		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
-
-		// Create a criteria to find all marked articles
-		Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
-		[self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
-		[markedCriteria release];
-
-		// Create a criteria to show all unread articles
-		Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
-		[self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
-		[unreadCriteria release];
-		
-		// Create a criteria to show all articles received today
-		Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
-		[self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
-		[todayCriteria release];
-
-		// Create the trash folder
-		[self executeSQLWithFormat:@"insert into folders (parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child) values (-1, '%@', 0, 0, %d, 0, 0, 0)",
-			NSLocalizedString(@"Trash", nil),
-			MA_Trash_Folder];
-
-		// Set the initial version
-		databaseVersion = MA_Current_DB_Version;
-		[self executeSQLWithFormat:@"insert into info (version, first_folder, folder_sort) values (%d, 0, %d)", databaseVersion, MA_FolderSort_Manual];
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_Manual];
-		
-		// Set the initial folder order
-		[self initFolderArray];
-		NSInteger folderId = 0;
-		NSInteger previousSibling = 0;
-		NSArray * allFolders = [foldersDict allKeys];
-		NSUInteger count = [allFolders count];
-		NSUInteger index;
-		for (index = 0u; index < count; ++index)
-		{
-			previousSibling = folderId;
-			folderId = [[allFolders objectAtIndex:index] intValue];
-			if (index == 0u)
-				[self setFirstChild:folderId forFolder:MA_Root_Folder];
-			else
-				[self setNextSibling:folderId forFolder:previousSibling];
-		}
-		
-		// If we have a DemoFeeds.plist in the resources then use it to create some initial demo
-		// RSS feeds.
-		NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-		NSString * pathToPList = [thisBundle pathForResource:@"DemoFeeds.plist" ofType:@""];
-		if (pathToPList != nil)
-		{
-			NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
-			if (demoFeedsDict)
-			{
-				for (NSString * feedName in demoFeedsDict)
-				{
-					NSDictionary * itemDict = [demoFeedsDict objectForKey:feedName];
-					NSString * feedURL = [itemDict valueForKey:@"URL"];
-					if (feedURL != nil && feedName != nil)
-						previousSibling = [self addRSSFolder:feedName underParent:MA_Root_Folder afterChild:previousSibling subscriptionURL:feedURL];
-				}
-			}
-		}
-		
-		}]; //end transaction block
-	}
-	else if (databaseVersion < MA_Current_DB_Version)
-	{
-		NSAlert * alert = [[NSAlert alloc] init];
-		[alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
-		[alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconveninece.", nil)];
-		[alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
-		[alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
-		NSInteger modalReturn = [alert runModal];
-		[alert release];
-		if (modalReturn == NSAlertSecondButtonReturn)
-		{
-			return NO;
-		}
-		
-		// Backup the database before any upgrade
-		NSString * backupDatabaseFileName = [qualifiedDatabaseFileName stringByAppendingPathExtension:@"bak"];
-		[[NSFileManager defaultManager] copyItemAtPath:qualifiedDatabaseFileName toPath:backupDatabaseFileName error:nil];
-	}
-		
-	// Upgrade to rev 13.
-	// Add createddate field to the messages table and initialise it to a date in the past.
-	// Create an index on the message_id column.
-	if (databaseVersion < 13)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table messages add column createddate"];
-		[self executeSQLWithFormat:@"update messages set createddate=%f", [[NSDate distantPast] timeIntervalSince1970]];
-		[self executeSQL:@"create index messages_message_idx on messages (message_id)"];
-
-		}]; //end transaction block
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
-	}
-	
-	// Upgrade to rev 14.
-	// Add next_sibling and next_child columns to folders table and first_folder column to info table to allow for manual sorting.
-	// Initialize all values to 0. The correct values will be set by -[FoldersTree setManualSortOrderForNode:].
-	// Make sure that all parent_id values are integers rather than strings, because previous versions of setParent:forFolder:
-	// set them as strings.
-	if (databaseVersion < 14)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table info add column first_folder"];
-		[self executeSQL:@"update info set first_folder=0"];
-		
-		[self executeSQL:@"alter table folders add column next_sibling"];
-		[self executeSQL:@"update folders set next_sibling=0"];
-		
-		[self executeSQL:@"alter table folders add column first_child"];
-		[self executeSQL:@"update folders set first_child=0"];
-		
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:MA_FolderSort_ByName];
-		
-		FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, parent_id from folders"];
-		while([results next])
-		{
-			NSInteger folderId = [[results stringForColumn:@"folder_id"] intValue];
-			NSInteger parentId = [[results stringForColumn:@"parent_id"] intValue];
-			[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", parentId, folderId];
-		}
-		[results close];
-		
-		}]; //end transaction block
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
-
-	}
-	
-	// Upgrade to rev 15.
-	// Move the folders tree sort method preference to the database, so that it can survive deletion of the preferences file.
-	// Do not disturb the manual sort order, if it exists.
-	if (databaseVersion < 15)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table info add column folder_sort"];
-		
-		NSInteger oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
-		[self executeSQLWithFormat:@"update info set folder_sort=%d", oldFoldersTreeSortMethod];
-		}]; //end transaction block
-		NSLog(@"Updated database schema to version %d.", databaseVersion);
-	}
-	
-	// Upgrade to rev 16.
-	// Add revised_flag to messages table, and initialize all values to 0.
-	if (databaseVersion < 16)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table messages add column revised_flag"];
-		[self executeSQL:@"update messages set revised_flag=0"];
-		
-		// Set the new version
-		[self setDatabaseVersion:16];		
-		}]; //end transaction block
-	}
-	
-	
-	// Upgrade to rev 17.
-	// Add hasenclosure_flag, enclosuredownloaded_flag and enclosure to messages table, and initialize stuff.
-	if (databaseVersion < 17)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"alter table messages add column hasenclosure_flag"];
-		[self executeSQL:@"update messages set hasenclosure_flag=0"];
-		[self executeSQL:@"alter table messages add column enclosure"];
-		[self executeSQL:@"update messages set enclosure=''"];
-		[self executeSQL:@"alter table messages add column enclosuredownloaded_flag"];
-		[self executeSQL:@"update messages set enclosuredownloaded_flag=0"];
-		
-		// Set the new version
-		[self setDatabaseVersion:17];		
-		}]; //end transaction block
-	}		
-	
-	// Upgrade to rev 18.
-	// Add table all message guids.
-	if (databaseVersion < 18)
-	{
-		[self doTransactionWithBlock:^(BOOL *rollback) {
-		
-		[self executeSQL:@"create table rss_guids as select message_id, folder_id from messages"];
-		[self executeSQL:@"create index rss_guids_idx on rss_guids (folder_id)"];
-		
-		// Set the new version
-		[self setDatabaseVersion:18];		
-		}]; //end transaction block
-	}
-	
-	// Read the folders tree sort method from the database.
-	// Make sure that the folders tree is not yet registered to receive notifications at this point.
-	__block NSInteger newFoldersTreeSortMethod = MA_FolderSort_ByName;
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * sortResults = [sqlDatabase executeQuery:@"select folder_sort from info"];
-		if ([sortResults next])
-		{
-			newFoldersTreeSortMethod = [[sortResults stringForColumn:@"folder_sort"] intValue];
-		}
-		[sortResults close];
-	});
-
-	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
-	
-	// Register for notifications of change in folders tree sort method.
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
-	
-	// Initial check if the database is read-only
-	[self syncLastUpdate];
-
-	// Create fields
-	fieldsByName = [[NSMutableDictionary alloc] init];
-	fieldsOrdered = [[NSMutableArray alloc] init];
-
-	[self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
-	[self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
-	[self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
-	[self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
-	[self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
-	[self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
-	[self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
-	[self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
-	[self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
-	[self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
-	[self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
-	[self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
-	[self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
-	[self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
-	[self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
-	[self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
-	[self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
-	
-	return YES;
+/*!
+ *  Initialise the mappings between the names of
+ *  the database fields and the model fields
+ */
+-(void)initaliseFields {
+    fieldsByName = [[NSMutableDictionary alloc] init];
+    fieldsOrdered = [[NSMutableArray alloc] init];
+    
+    [self addField:MA_Field_Read type:MA_FieldType_Flag tag:MA_FieldID_Read sqlField:@"read_flag" visible:YES width:17];
+    [self addField:MA_Field_Flagged type:MA_FieldType_Flag tag:MA_FieldID_Flagged sqlField:@"marked_flag" visible:YES width:17];
+    [self addField:MA_Field_HasEnclosure type:MA_FieldType_Flag tag:MA_FieldID_HasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
+    [self addField:MA_Field_Deleted type:MA_FieldType_Flag tag:MA_FieldID_Deleted sqlField:@"deleted_flag" visible:NO width:15];
+    [self addField:MA_Field_Comments type:MA_FieldType_Integer tag:MA_FieldID_Comments sqlField:@"comment_flag" visible:NO width:15];
+    [self addField:MA_Field_GUID type:MA_FieldType_Integer tag:MA_FieldID_GUID sqlField:@"message_id" visible:NO width:72];
+    [self addField:MA_Field_Subject type:MA_FieldType_String tag:MA_FieldID_Subject sqlField:@"title" visible:YES width:472];
+    [self addField:MA_Field_Folder type:MA_FieldType_Folder tag:MA_FieldID_Folder sqlField:@"folder_id" visible:NO width:130];
+    [self addField:MA_Field_Date type:MA_FieldType_Date tag:MA_FieldID_Date sqlField:@"date" visible:YES width:152];
+    [self addField:MA_Field_Parent type:MA_FieldType_Integer tag:MA_FieldID_Parent sqlField:@"parent_id" visible:NO width:72];
+    [self addField:MA_Field_Author type:MA_FieldType_String tag:MA_FieldID_Author sqlField:@"sender" visible:YES width:138];
+    [self addField:MA_Field_Link type:MA_FieldType_String tag:MA_FieldID_Link sqlField:@"link" visible:NO width:138];
+    [self addField:MA_Field_Text type:MA_FieldType_String tag:MA_FieldID_Text sqlField:@"text" visible:NO width:152];
+    [self addField:MA_Field_Summary type:MA_FieldType_String tag:MA_FieldID_Summary sqlField:@"summary" visible:NO width:152];
+    [self addField:MA_Field_Headlines type:MA_FieldType_String tag:MA_FieldID_Headlines sqlField:@"" visible:NO width:100];
+    [self addField:MA_Field_Enclosure type:MA_FieldType_String tag:MA_FieldID_Enclosure sqlField:@"enclosure" visible:NO width:100];
+    [self addField:MA_Field_EnclosureDownloaded type:MA_FieldType_Flag tag:MA_FieldID_EnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
 }
 
 /* relocateLockedDatabase
@@ -470,7 +370,8 @@ static Database * _sharedDatabase = nil;
  */
 -(NSString *)relocateLockedDatabase:(NSString *)path
 {
-	NSString * errorTitle = NSLocalizedString(@"Locate Title", nil);
+	FMDatabase *sqlDatabase = [FMDatabase databaseWithPath:[Database databasePath]];
+    NSString * errorTitle = NSLocalizedString(@"Locate Title", nil);
 	NSString * errorText = NSLocalizedString(@"Locate Text", nil);
 	NSInteger option = NSRunAlertPanel(errorTitle, errorText, NSLocalizedString(@"Locate", nil), NSLocalizedString(@"Exit", nil), nil, path);
 	if (option == 0)
@@ -483,7 +384,6 @@ static Database * _sharedDatabase = nil;
 		if (sqlDatabase != nil)
 		{
 			[sqlDatabase close];
-			[sqlDatabase release];
 			sqlDatabase = nil;
 			[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 		}
@@ -516,7 +416,8 @@ static Database * _sharedDatabase = nil;
 		[[Preferences standardPreferences] setDefaultDatabase:newPath];
 		return newPath;
 	}
-	return nil;
+    [sqlDatabase close];
+    return nil;
 }
 
 /* createInitialSmartFolder
@@ -532,50 +433,13 @@ static Database * _sharedDatabase = nil;
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
 		[criteriaTree addCriteria:criteria];
 		
-		NSString * preparedCriteriaString = [Database prepareStringForQuery:[criteriaTree string]];
-		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%lld, '%@')", [sqlDatabase lastInsertRowId], preparedCriteriaString];
+		__block NSString * preparedCriteriaString = [criteriaTree string];
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)", @([db lastInsertRowId]), preparedCriteriaString];
+        }];
 		[criteriaTree release];
 	}
-}
-
-/* executeSQL
- * Executes the specified SQL statement and discards the result. Should be used for
- * SQL statements that do not return results.
- * Returns an error code.
- */
--(NSInteger)executeSQL:(NSString *)sqlStatement
-{
-
-// In debug mode, log the execution duration in the console
-#ifdef DEBUG
-	NSDate *start = [NSDate date];
-#endif
-	__block int errorCode;
-	dispatch_sync(_execQueue, ^() {
-		[sqlDatabase executeUpdate:sqlStatement withArgumentsInArray:nil];
-		errorCode = [sqlDatabase lastErrorCode];
-	});
-#ifdef DEBUG
-	NSLog(@"Query (%f secs): %@", [[NSDate date] timeIntervalSinceDate:start], sqlStatement);
-#endif
-	return errorCode;
-}
-
-/* executeSQLWithFormat
- * Formats and executes the specified SQL statement and discards the result. Should be used for
- * SQL statements that do not return results.
- * Returns an error code.
- */
--(NSInteger)executeSQLWithFormat:(NSString *)sqlStatement, ...
-{
-	va_list arguments;
-	va_start(arguments, sqlStatement);
-	int errorCode;
-	NSString * query = [[NSString alloc] initWithFormat:sqlStatement arguments:arguments];
-	errorCode = [self executeSQL:query];
-	[query release];
-	va_end(arguments);
-	return errorCode;
 }
 
 /* syncLastUpdate
@@ -585,8 +449,18 @@ static Database * _sharedDatabase = nil;
  */
 -(void)syncLastUpdate
 {
-	NSInteger result = [self executeSQLWithFormat:@"update info set last_opened='%@'", [NSDate date]];
-	readOnly = (result != SQLITE_OK);
+    __block BOOL success;
+    
+    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"update info set last_opened=?", [NSDate date]];
+
+        }];
+    if (success) {
+        readOnly = NO;
+    } else {
+        readOnly = YES;
+    }
 }
 
 /* countOfUnread
@@ -635,22 +509,35 @@ static Database * _sharedDatabase = nil;
 	return [fieldsByName valueForKey:name];
 }
 
-/* databaseVersion
- * Return the database version.
+/*!
+ *  Get the current database version from the database
+ *  This method fetches the version information from both
+ *  the SQLite PRAGMA user_version and the legacy Vienna info
+ *  table, returning the highest version number.
+ *
+ *  @return the current database version
  */
 -(NSInteger)databaseVersion
 {
-	return databaseVersion;
-}
+    __block NSInteger dbVersion = 0;
+    
+    // FMDatabaseQueue  *queue = [[Database sharedManager] databaseQueue];
+    [databaseQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQuery:@"select version from info"];
+        dbVersion = 0;
+        if ([results next])
+        {
+            dbVersion = [results intForColumn:@"version"];
+        }
+        [results close];
+        
+        // compare the SQLite PRAGMA user_version to the legacy version number
+        if ([db userVersion] > dbVersion) {
+            dbVersion = [db userVersion];
+        }
+    }];
 
-/* setDatabaseVersion
- * Sets the version stamp in the database.
- */
--(void)setDatabaseVersion:(NSInteger)newVersion
-{
-	[self executeSQLWithFormat:@"update info set version=%ld", newVersion];
-	databaseVersion = newVersion;
-	NSLog(@"Updated database schema to version %d.", databaseVersion);
+    return dbVersion;
 }
 
 /* readOnly
@@ -661,63 +548,18 @@ static Database * _sharedDatabase = nil;
 	return readOnly;
 }
 
-/* beginTransaction
- * Starts a SQL transaction.
- */
--(void)beginTransaction
-{
-	NSAssert(!inTransaction, @"Whoops! Already in a transaction. You cannot nest transactions");
-	[sqlDatabase beginTransaction];
-	inTransaction = YES;
-}
-
-/* commitTransaction
- * Commits a SQL transaction.
- */
--(void)commitTransaction
-{
-	NSAssert(inTransaction, @"Whoops! Commit while not in a transaction. Someone forgot to call beginTransaction first");
-	[sqlDatabase commit];
-	inTransaction = NO;
-}
-
-/* rollbackTransaction
- * Rollbacks a SQL transaction.
- */
--(void)rollbackTransaction
-{
-	NSAssert(inTransaction, @"Whoops! Rollback while not in a transaction. Someone forgot to call beginTransaction first");
-	[sqlDatabase rollback];
-	inTransaction = NO;
-}
-
-/* doTransactionWithBlock
- * Submits a transaction block
- */
-- (void)doTransactionWithBlock:(void (^)(BOOL *rollback))block {
-	dispatch_sync(_transactionQueue, ^() {
-		@autoreleasepool {
-			@synchronized(self) {
-				BOOL shouldRollback = NO;
-				[self beginTransaction];
-				block(&shouldRollback);
-				if (shouldRollback) {
-					[self rollbackTransaction];
-				} else {
-					[self commitTransaction];
-				}
-			}
-        }
-    }); //block for dispatch_sync
-}
 
 /* compactDatabase
  * Compact the database using the vacuum command.
  */
 -(void)compactDatabase
 {
-	if (!readOnly)
-		[self executeSQL:@"vacuum"];
+    if (!readOnly) {
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"vacuum"];
+        }];
+    }
 }
 
 /* reindexDatabase
@@ -725,14 +567,21 @@ static Database * _sharedDatabase = nil;
  */
 -(void)reindexDatabase
 {
-	if (!readOnly)
-		[self executeSQL:@"reindex"];
+    if (!readOnly) {
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"reindex"];
+        }];
+    }
 }
 
-/* clearFolderFlag
- * Clears the specified flag for the folder.
+/**
+ *  Clears a specified flag for the specified folder
+ *
+ *  @param flag     the flag to clear
+ *  @param folderId the folder to clear the flag from
  */
--(void)clearFolderFlag:(NSInteger)folderId flagToClear:(NSUInteger)flag
+-(void)clearFlag:(NSUInteger)flag forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
 	if (readOnly)
@@ -742,58 +591,79 @@ static Database * _sharedDatabase = nil;
 	if (folder != nil)
 	{
 		[folder clearFlag:flag];
-		[self executeSQLWithFormat:@"update folders set flags=%d where folder_id=%d", [folder flags], folderId];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+        }];
 	}
 }
 
-/* setFolderFlag
- * Sets the specified flag for the folder.
+
+/**
+ *  Sets the specified flag for the folder.
+ *
+ *  @param flag     flag to set
+ *  @param folderId folder to set the flag for
  */
--(void)setFolderFlag:(NSInteger)folderId flagToSet:(NSUInteger)flag
+-(void)setFlag:(NSUInteger)flag forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return;
-	
+    }
+    
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
 		[folder setFlag:flag];
-		[self executeSQLWithFormat:@"update folders set flags=%lu where folder_id=%ld", [folder flags], folderId];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set flags=? where folder_id=?", @(folder.flags), @(folderId)];
+        }];
 	}
 }
 
-/* setFolderLastUpdate
- * Sets the date when the folder was last updated.
+/**
+ *  Sets the date when the folder was last updated.
+ *
+ *  @param lastUpdate The date of the last update
+ *  @param folderId   The ID of the folder being updated
  */
--(void)setFolderLastUpdate:(NSInteger)folderId lastUpdate:(NSDate *)lastUpdate
+-(void)setLastUpdate:(NSDate *)lastUpdate forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return;
-
+    }
 	// If no change to last update, do nothing
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
 	{
-		if ([[folder lastUpdate] isEqualToDate:lastUpdate])
+        if ([[folder lastUpdate] isEqualToDate:lastUpdate]) {
 			return;
-
+        }
 		[folder setLastUpdate:lastUpdate];
 		NSTimeInterval interval = [lastUpdate timeIntervalSince1970];
-		[self executeSQLWithFormat:@"update folders set last_update=%f where folder_id=%ld", interval, folderId];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set last_update=? where folder_id=?", @(interval), @(folderId)];
+        }];
 	}
 }
 
-/* setFolderLastUpdateString
- * Sets the last update string for the folder.
+
+/**
+ *  Sets the last update string for the folder.
+ *
+ *  @param lastUpdateString The new last update string
+ *  @param folderId         The ID of the folder being updated
  */
--(void)setFolderLastUpdateString:(NSInteger)folderId lastUpdateString:(NSString *)lastUpdateString
+-(void)setLastUpdateString:(NSString *)lastUpdateString forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return;
-	
+    }
 	// If no change to last update string, do nothing
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil && (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)))
@@ -802,76 +672,110 @@ static Database * _sharedDatabase = nil;
 			return;
 		
 		[folder setLastUpdateString:lastUpdateString];
-		[self executeSQLWithFormat:@"update rss_folders set last_update_string='%@' where folder_id=%ld", [folder lastUpdateString], folderId];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update rss_folders set last_update_string=? where folder_id=?",
+             folder.lastUpdateString, @(folderId)];
+        }];
 	}
 }
 
-/* setFolderFeedURL
- * Change the URL of the feed on the specified RSS folder subscription.
+/**
+ *  Change the URL of the feed on the specified RSS folder subscription.
+ *
+ *  @param feed_url the URL to set the folder's feed to
+ *  @param folderId the ID of the folder whose URL we are changing
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderFeedURL:(NSInteger)folderId newFeedURL:(NSString *)url
+-(BOOL)setFeedURL:(NSString *)feed_url forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
+    }
 	
 	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil && ![[folder feedURL] isEqualToString:url])
+	if (folder != nil && ![[folder feedURL] isEqualToString:feed_url])
 	{
-		NSString * preparedURL = [Database prepareStringForQuery:url];
-		[folder setFeedURL:url];
-		[self executeSQLWithFormat:@"update rss_folders set feed_url='%@' where folder_id=%ld", preparedURL, (long)folderId];
+		[folder setFeedURL:feed_url];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update rss_folders set feed_url=? where folder_id=?", feed_url, @(folderId)];
+        }];
 	}
 	return YES;
 }
 
-
--(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url {
+/*!
+ *  Add a Google Reader RSS Feed folder and return the ID of the new folder.
+ *
+ *  @param feedName      The name of the RSS folder
+ *  @param parentId      The parent folder ID
+ *  @param predecessorId The predecessor folder ID
+ *  @param feed_url      The URL of the RSS Feed folder
+ *
+ *  @return The ID of the new folder
+ */
+-(NSInteger)addGoogleReaderFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url {
 	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_GoogleReader_Folder canAppendIndex:YES];
 	//TODO: optimization using unique add function for addRSSFolder
 	if (folderId != -1)
 	{
-		NSString * preparedURL = [Database prepareStringForQuery:url];
-		NSString *preparedName = [Database prepareStringForQuery:feedName];
-		NSInteger results = [self executeSQLWithFormat:
-							   @"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-							   "values (%ld, '%@', '', '', '', '%@', %d)",
-							   (long)folderId,
-							   preparedName,
-							   preparedURL,
-							   0];
-		if (results != SQLITE_OK)
-			return -1;
+        FMDatabaseQueue *queue = databaseQueue;
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) values (?, ?, '', '', '', ?, 0)",
+             @(folderId),
+             feedName, // description
+             // username
+             // home_page
+             // last_update_string
+             feed_url];
+        }];
+        if (!success) {
+            return -1;
+        }
 		
 		// Add this new folder to our internal cache
 		Folder * folder = [self folderFromID:folderId];
-		[folder setFeedURL:url];
+		[folder setFeedURL:feed_url];
 	}
 	return folderId;
 }
 
 
-/* addRSSFolder
- * Add an RSS Feed folder and return the ID of the new folder.
+/*!
+ *  Add a RSS Feed folder and return the ID of the new folder.
+ *
+ *  @param feedName      The name of the RSS folder
+ *  @param parentId      The parent folder ID
+ *  @param predecessorId The predecessor folder ID
+ *  @param feed_url      The URL of the RSS Feed folder
+ *
+ *  @return The ID of the new folder
  */
--(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)url
+-(NSInteger)addRSSFolder:(NSString *)feedName underParent:(NSInteger)parentId afterChild:(NSInteger)predecessorId subscriptionURL:(NSString *)feed_url
 {
 	NSInteger folderId = [self addFolder:parentId afterChild:predecessorId folderName:feedName type:MA_RSS_Folder canAppendIndex:YES];
 	if (folderId != -1)
 	{
-		NSString * preparedURL = [Database prepareStringForQuery:url];
-		NSInteger results = [self executeSQLWithFormat:
-					@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
-					 "values (%ld, '', '', '', '', '%@', %d)",
-					(long)folderId,
-					preparedURL,
-					0];
-		if (results != SQLITE_OK)
-			return -1;
+        FMDatabaseQueue *queue = databaseQueue;
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"insert into rss_folders (folder_id, description, username, home_page, last_update_string, feed_url, bloglines_id) "
+             "values (?, '', '', '', '', ?, 0)",
+             @(folderId),
+             feed_url];
+        }];
 
+        if (!success) {
+			return -1;
+        }
+        
 		// Add this new folder to our internal cache
 		Folder * folder = [self folderFromID:folderId];
-		[folder setFeedURL:url];
+		[folder setFeedURL:feed_url];
 	}
 	return folderId;
 }
@@ -924,14 +828,17 @@ static Database * _sharedDatabase = nil;
 		}
 		if (predecessorId < 0)
 		{
-			dispatch_sync(_execQueue, ^() {
-				FMResultSet * siblings = [sqlDatabase executeQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=0", (long)parentId];
-				if([siblings next])
-					predecessorId = [[siblings stringForColumn:@"folder_id"] intValue];
-				else
-					predecessorId =  0;
+            FMDatabaseQueue *queue = databaseQueue;
+            
+            [queue inDatabase:^(FMDatabase *db) {
+                FMResultSet * siblings = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=0", @(parentId)];
+                if([siblings next]) {
+                    predecessorId = [siblings intForColumn:@"folder_id"];
+                } else {
+                    predecessorId =  0;
+                }
 				[siblings close];
-			});
+			}];
 		}
 		if (predecessorId == 0)
 		{
@@ -981,8 +888,9 @@ static Database * _sharedDatabase = nil;
  */
 -(NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type
 {
-	NSString * preparedName = [Database prepareStringForQuery:name];
-	NSInteger newItemId = -1;
+    FMDatabaseQueue *queue = databaseQueue;
+
+	__block NSInteger newItemId = -1;
 	NSInteger flags = 0;
 	NSInteger nextSibling = 0;
 	NSInteger firstChild = 0;
@@ -992,28 +900,29 @@ static Database * _sharedDatabase = nil;
 	NSTimeInterval interval = [lastUpdate timeIntervalSince1970];
 
 	// Require an image check if we're a subscription folder
-	if ((type == MA_RSS_Folder) || (type == MA_GoogleReader_Folder))
+    if ((type == MA_RSS_Folder) || (type == MA_GoogleReader_Folder)) {
 		flags = MA_FFlag_CheckForImage;
-
+    }
 	// Create the folder in the database. One thing to watch out for here that has
 	// bit me before. When adding new fields to the folders table, remember to init
 	// the field here even if its just to an empty value.
-	NSInteger results = [self executeSQLWithFormat:
-		@"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values('%@', %ld, 0, %f, %ld, %ld, %ld, %ld)",
-		preparedName,
-		(long)parentId,
-		interval,
-		(long)type,
-		(long)flags,
-		(long)nextSibling,
-		(long)firstChild];
+    [queue inDatabase:^(FMDatabase *db) {
+        BOOL success = [db executeUpdate:
+                             @"insert into folders (foldername, parent_id, unread_count, last_update, type, flags, next_sibling, first_child) values(?, ?, 0, ?, ?, ?, ?, ?)",
+                             name,
+                             @(parentId),
+                             // unread_count = 0
+                             @(interval),
+                             @(type),
+                             @(flags),
+                             @(nextSibling),
+                             @(firstChild)];
 	
-	// Quick way of getting the last autoincrement primary key value (the folder_id).
-	if (results == SQLITE_OK)
-	{
-		newItemId = [sqlDatabase lastInsertRowId];
-	}
-	
+        // Quick way of getting the last autoincrement primary key value (the folder_id).
+        if (success) {
+            newItemId = [db lastInsertRowId];
+        }
+    }];
 	return newItemId;
 }
 
@@ -1026,17 +935,18 @@ static Database * _sharedDatabase = nil;
 }
 
 /* wrappedDeleteFolder
- * Delete the specified folder. This function should be called from within a
- * transaction wrapper since it can be very SQL intensive.
+ * Delete the specified folder. This function can be very SQL intensive.
  */
 -(BOOL)wrappedDeleteFolder:(NSInteger)folderId
 {
-	NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
-	Folder * folder;
+    NSArray * arrayOfChildFolders = [self arrayOfFolders:folderId];
+    Folder * folder;
+    FMDatabaseQueue *queue = databaseQueue;
 
 	// Recurse and delete child folders
-	for (folder in arrayOfChildFolders)
+    for (folder in arrayOfChildFolders) {
 		[self wrappedDeleteFolder:[folder itemId]];
+    }
 
 	// Adjust unread counts on parents
 	folder = [self folderFromID:folderId];
@@ -1050,15 +960,20 @@ static Database * _sharedDatabase = nil;
 	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
 	countOfUnread -= [folder unreadCount];
-	if (IsSmartFolder(folder))
-		[self executeSQLWithFormat:@"delete from smart_folders where folder_id=%ld", folderId];
+    if (IsSmartFolder(folder)) {
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeQuery:@"delete from smart_folders where folder_id=?", @(folderId)];
+        }];
+    }
 
 	// If this is an RSS feed, delete from the feeds
 	// and delete raw feed source
 	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 	{
-		[self executeSQLWithFormat:@"delete from rss_folders where folder_id=%ld", folderId];
-		[self executeSQLWithFormat:@"delete from rss_guids where folder_id=%ld", folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeQuery:@"delete from rss_folders where folder_id=?", @(folderId)];
+            [db executeQuery:@"delete from rss_guids where folder_id=?", @(folderId)];
+        }];
 		
 		NSString * feedSourceFilePath = [folder feedSourceFilePath];
 		if (feedSourceFilePath != nil)
@@ -1087,14 +1002,14 @@ static Database * _sharedDatabase = nil;
 	if ([[Preferences standardPreferences] foldersTreeSortMethod] == MA_FolderSort_Manual)
 	{
 		__block NSInteger previousSibling = -999;
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select folder_id from folders where parent_id=%ld and next_sibling=%ld", (long)[folder parentId], (long)folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            FMResultSet * results = [db executeQuery:@"SELECT folder_id from folders where parent_id=? and next_sibling=?", @([folder parentId]), @(folderId)];
 			if ([results next])
 			{
-				previousSibling = [[results stringForColumn:@"folder_id"] intValue];
+				previousSibling = [results intForColumn:@"folder_id"];
 			}
 			[results close];
-		});
+		}];
 		if (previousSibling != -999)
 			[self setNextSibling:[folder nextSiblingId] forFolder:previousSibling];
 		else
@@ -1105,8 +1020,10 @@ static Database * _sharedDatabase = nil;
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
 	// normal folder had it's type grobbed to MA_Smart_Folder.
-	[self executeSQLWithFormat:@"delete from messages where folder_id=%ld", folderId];
-	[self executeSQLWithFormat:@"delete from folders where folder_id=%ld", folderId];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeQuery:@"delete from messages where folder_id=?", @(folderId)];
+        [db executeQuery:@"delete from folders where folder_id=?", @(folderId)];
+    }];
 
 	// Remove from the folders array. Do this after we send the notification
 	// so that the notification handlers don't fail if they try to dereference the
@@ -1125,7 +1042,7 @@ static Database * _sharedDatabase = nil;
 	NSArray * arrayOfChildFolders;
 	NSNumber * numFolder;
 	Folder * folder;
-	__block BOOL result;
+	BOOL result;
 
 	// Exit now if we're read-only
 	if (readOnly)
@@ -1149,27 +1066,33 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Now do the deletion.
-	[self doTransactionWithBlock:^(BOOL *rollback) {
 	result = [self wrappedDeleteFolder:folderId];
-	}]; //end transaction block
 
 	// Send the post-delete notification after we're finished. Note that the folder actually corresponding to
 	// each numFolder won't exist any more and the handlers need to be aware of this.
-	for (numFolder in arrayOfFolderIds)
+    for (numFolder in arrayOfFolderIds) {
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDeleted" object:numFolder];
+    }
 	
 	return result;
 }
 
-/* setFolderName
- * Renames the specified folder.
+
+/**
+ *  Renames the specified folder.
+ *
+ *  @param newName  the name name for the folder
+ *  @param folderId the ID of the folder to rename
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderName:(NSInteger)folderId newName:(NSString *)newName
+-(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-
+    }
+    
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
 	if (!folder)
@@ -1177,61 +1100,83 @@ static Database * _sharedDatabase = nil;
 
 	// Do nothing if the name hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder name] isEqualToString:newName])
+    if ([[folder name] isEqualToString:newName]) {
 		return NO;
+    }
 
 	[folder setName:newName];
 
 	// Rename in the database
-	NSString * preparedNewName = [Database prepareStringForQuery:newName];
-	[self executeSQLWithFormat:@"update folders set foldername='%@' where folder_id=%ld", preparedNewName, folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update folders set foldername=? where folder_id=?", newName, @(folderId)];
+    }];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the name is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderNameChanged" object:@(folderId)];
 	return YES;
 }
 
-/* setFolderDescription
- * Sets the folder description both in the internal structure and in the folder_description table.
+
+/**
+ *  Sets the folder description both in the internal structure and in the folder_description table.
+ *
+ *  @param newDescription The new description for the folder
+ *  @param folderId       The ID of the folder
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderDescription:(NSInteger)folderId newDescription:(NSString *)newDescription
+-(BOOL)setDescription:(NSString *)newDescription forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-	
+    }
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
-	if (!folder)
+    if (!folder) {
 		return NO;
+    }
 	
 	// Do nothing if the description hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder feedDescription] isEqualToString:newDescription])
+    if ([[folder feedDescription] isEqualToString:newDescription]) {
 		return NO;
+    }
 	
 	[folder setFeedDescription:newDescription];
 	
 	// Add a new description or update the one we have
-	NSString * preparedNewDescription = [Database prepareStringForQuery:newDescription];
-	[self executeSQLWithFormat:@"update rss_folders set description='%@' where folder_id=%ld", preparedNewDescription, (long)folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update rss_folders set description=? where folder_id=?",
+         newDescription, @(folderId)];
+    }];
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the description is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderDescriptionChanged"
+                                                                        object:@(folderId)];
 	return YES;
 }
 
-/* setFolderHomePage
- * Sets the folder's associated URL link in both in the internal structure and in the folder_description table.
+
+/**
+ *  Sets the folder's associated home page URL link in both in the internal 
+ *  structure and in the folder_description table.
+ *
+ *  @param homePageURL The home page URL
+ *  @param folderId The ID of the folder getting updated
+ *
+ *  @return YES on success
  */
--(BOOL)setFolderHomePage:(NSInteger)folderId newHomePage:(NSString *)newHomePage
+-(BOOL)setHomePage:(NSString *)homePageURL forFolder:(NSInteger)folderId;
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-	
+    }
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
 	if (!folder)
@@ -1239,18 +1184,24 @@ static Database * _sharedDatabase = nil;
 
 	// Do nothing if the link hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder homePage] isEqualToString:newHomePage]||newHomePage==nil)
+    if ([[folder homePage] isEqualToString:homePageURL] || homePageURL==nil) {
 		return NO;
+    }
 
-	[folder setHomePage:newHomePage];
+	[folder setHomePage:homePageURL];
 
 	// Add a new link or update the one we have
-	NSString * preparedNewLink = [Database prepareStringForQuery:newHomePage];
-	[self executeSQLWithFormat:@"update rss_folders set home_page='%@' where folder_id=%ld", preparedNewLink, (long)folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update rss_folders set home_page=? where folder_id=?",
+         homePageURL, @(folderId)];
+    }];
+
 
 	// Send a notification that the folder has changed. It is the responsibility of the
 	// notifiee that they work out that the link is the part that has changed.
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged" object:[NSNumber numberWithInt:folderId]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FolderHomePageChanged"
+                                                                        object:@(folderId)];
 	return YES;
 }
 
@@ -1260,24 +1211,25 @@ static Database * _sharedDatabase = nil;
 -(BOOL)setFolderUsername:(NSInteger)folderId newUsername:(NSString *)name
 {
 	// Exit now if we're read-only
-	if (readOnly)
-		return NO;
+	if (readOnly) return NO;
 	
 	// Find our folder element.
 	Folder * folder = [self folderFromID:folderId];
-	if (!folder)
-		return NO;
+	if (!folder) return NO;
 	
 	// Do nothing if the link hasn't changed. Otherwise it is wasted
 	// effort, basically.
-	if ([[folder username] isEqualToString:name])
-		return NO;
+	if ([[folder username] isEqualToString:name]) return NO;
 	
 	[folder setUsername:name];
 	
 	// Add a new link or update the one we have
-	NSString * preparedName = [Database prepareStringForQuery:name];
-	[self executeSQLWithFormat:@"update rss_folders set username='%@' where folder_id=%ld", preparedName, (long)folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update rss_folders set username=? where folder_id=?",
+         name, @(folderId)];
+    }];
+
 	return YES;
 }
 
@@ -1287,8 +1239,9 @@ static Database * _sharedDatabase = nil;
 -(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
+    }
 	
 	Folder * folder = [self folderFromID:folderId];
 	if ([folder parentId] == newParentID)
@@ -1336,7 +1289,11 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Update the database now
-	[self executeSQLWithFormat:@"update folders set parent_id=%ld where folder_id=%ld", newParentID, folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update folders set parent_id=? where folder_id=?",
+         @(newParentID), @(folderId)];
+    }];
 	return YES;
 }
 
@@ -1346,12 +1303,17 @@ static Database * _sharedDatabase = nil;
 -(BOOL)setFirstChild:(NSInteger)childId forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
+    }
 	
+    FMDatabaseQueue *queue = databaseQueue;
+    
 	if (folderId == MA_Root_Folder)
 	{
-		[self executeSQLWithFormat:@"update info set first_folder=%ld", childId];
+		[queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update info set first_folder=?", @(childId)];
+        }];
 	}
 	else
 	{
@@ -1360,8 +1322,10 @@ static Database * _sharedDatabase = nil;
 			return NO;
 		
 		[folder setFirstChildId:childId];
-		
-		[self executeSQLWithFormat:@"update folders set first_child=%ld where folder_id=%ld", childId, folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update folders set first_child=? where folder_id=?",
+             @(childId), @(folderId)];
+        }];
 	}
 	
 	return YES;
@@ -1373,16 +1337,22 @@ static Database * _sharedDatabase = nil;
 -(BOOL)setNextSibling:(NSUInteger)nextSiblingId forFolder:(NSInteger)folderId
 {
 	// Exit now if we're read-only
-	if (readOnly)
+    if (readOnly) {
 		return NO;
-	
+    }
+    
 	Folder * folder = [self folderFromID:folderId];
 	if (folder == nil)
 		return NO;
 	
 	[folder setNextSiblingId:nextSiblingId];
 	
-	[self executeSQLWithFormat:@"update folders set next_sibling=%lu where folder_id=%ld", nextSiblingId, folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update folders set next_sibling=%lu where folder_id=%ld",
+         @(nextSiblingId), @(folderId)];
+    }];
+
 	return YES;
 }
 
@@ -1392,14 +1362,16 @@ static Database * _sharedDatabase = nil;
 -(NSInteger)firstFolderId
 {
 	__block NSInteger folderId = 0;
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * results = [sqlDatabase executeQuery:@"select first_folder from info"];
-		if ([results next])
-		{
-			folderId = [[results stringForColumn:@"first_folder"] intValue];
-		}
-		[results close];
-	});
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQuery:@"select first_folder from info"];
+        if ([results next])
+        {
+            folderId = [results intForColumn:@"first_folder"];
+        }
+        [results close];
+    }];
+    
 	return folderId;
 }
 
@@ -1447,8 +1419,13 @@ static Database * _sharedDatabase = nil;
 	return folder;
 }
 
-/* folderFromFeedURL
- * Returns the RSSFolder that is subscribed to the specified feed URL.
+
+/*!
+ *  folderFromFeedURL
+ *
+ *  @param wantedFeedURL The feed URL the folder is wanted for
+ *
+ *  @return An RSSFolder that is subscribed to the specified feed URL.
  */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 {
@@ -1468,8 +1445,12 @@ static Database * _sharedDatabase = nil;
  */
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification
 {
-	if (!readOnly)
-		[self executeSQLWithFormat:@"update info set folder_sort=%d", [[Preferences standardPreferences] foldersTreeSortMethod]];
+    if (!readOnly) {
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update info set folder_sort=?", @([[Preferences standardPreferences] foldersTreeSortMethod])];
+        }];
+    }
 }
 
 /* createArticle
@@ -1479,7 +1460,9 @@ static Database * _sharedDatabase = nil;
  */
 -(BOOL)createArticle:(NSInteger)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory
 {
-	// Exit now if we're read-only
+    FMDatabaseQueue *queue = databaseQueue;
+    
+    // Exit now if we're read-only
 	if (readOnly)
 		return NO;
 	
@@ -1527,14 +1510,6 @@ static Database * _sharedDatabase = nil;
 		Article * existingArticle = [folder articleFromGuid:articleGuid];
 		// We're going to ignore the problem of feeds re-using guids, which is very naughty! Bad feed!
 		
-		// Fix title and article body so they're acceptable to SQL
-		NSString * preparedArticleTitle = [Database prepareStringForQuery:articleTitle];
-		NSString * preparedArticleText = [Database prepareStringForQuery:articleBody];
-		NSString * preparedArticleLink = [Database prepareStringForQuery:articleLink];
-		NSString * preparedUserName = [Database prepareStringForQuery:userName];
-		NSString * preparedArticleGuid = [Database prepareStringForQuery:articleGuid];
-		NSString * preparedEnclosure = [Database prepareStringForQuery:articleEnclosure];
-
 		// Unread count adjustment factor
 		NSInteger adjustment = 0;
 		
@@ -1545,36 +1520,38 @@ static Database * _sharedDatabase = nil;
 		else if (existingArticle == nil)
 		{
 			
-			NSInteger results = [self executeSQLWithFormat:
-				@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
-				@"values('%@', %ld, %ld, '%@', '%@', %f, %f, %d, %d, %d, '%@', '%@', %d, '%@', %d)",
-				preparedArticleGuid,
-				(long)parentId,
-				(long)folderID,
-				preparedUserName,
-				preparedArticleLink,
-				interval,
-				createdInterval,
-				read_flag,
-				marked_flag,
-				deleted_flag,
-				preparedArticleTitle,
-				preparedArticleText,
-				revised_flag,
-				preparedEnclosure,
-				hasenclosure_flag];
-			if (results != SQLITE_OK)
-				return NO;
-			[self executeSQLWithFormat:@"insert into rss_guids (message_id, folder_id) values ('%@', %ld)", preparedArticleGuid, folderID];
-			
-			// Add the article to the folder
-			[article setStatus:MA_MsgStatus_New];
-			[folder addArticleToCache:article];
-			
-			// Update folder unread count
-			if (!read_flag)
-				adjustment = 1;
-		}
+			[queue inDatabase:^(FMDatabase *db) {
+                [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+                 @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                 articleGuid,
+                 @(parentId),
+                 @(folderID),
+                 userName,
+                 articleLink,
+                 @(interval),
+                 @(createdInterval),
+                 @(read_flag),
+                 @(marked_flag),
+                 @(deleted_flag),
+                 articleTitle,
+                 articleBody,
+                 @(revised_flag),
+                 articleEnclosure,
+                 @(hasenclosure_flag)];
+//                if (results != SQLITE_OK)
+//                    return NO;
+                [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
+                
+                // Add the article to the folder
+                [article setStatus:ArticleStatusNew];
+                [folder addArticleToCache:article];
+                
+                // Update folder unread count
+//                if (!read_flag)
+//                    adjustment = 1;
+
+            }];
+        }
 		else if ([existingArticle isDeleted])
 		{
 			return NO;
@@ -1596,16 +1573,17 @@ static Database * _sharedDatabase = nil;
 				// If the folder is not displayed, then the article text has not been loaded yet.
 				if (existingBody == nil)
 				{
-					dispatch_sync(_execQueue, ^() {
-						FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select text from messages where folder_id=%ld and message_id=%@", (long)folderID, articleGuid];
-						if ([results next])
-						{
+					[queue inDatabase:^(FMDatabase *db) {
+						FMResultSet * results = [db executeQuery:@"select text from messages where folder_id=? and message_id=?",
+                                                 @(folderID), articleGuid];
+                    if ([results next]) {
 							existingBody = [results stringForColumn:@"text"];
-						}
-						else
+                    } else {
 							existingBody = @"";
+                    }
+                        
 						[results close];
-					});
+					}];
 				}
 				
 				isArticleRevised = ![existingBody isEqualToString:articleBody];
@@ -1617,22 +1595,28 @@ static Database * _sharedDatabase = nil;
 				// New articles created during the current refresh should not be marked as revised,
 				// even if there are multiple versions of the new article in the feed.
 				revised_flag = [existingArticle isRevised];
-				if (!revised_flag && ([existingArticle status] == MA_MsgStatus_Empty))
+                if (!revised_flag && ([existingArticle status] == ArticleStatusEmpty)) {
 					revised_flag = YES;
+                }
 				
-				NSInteger results = [self executeSQLWithFormat:@"update messages set parent_id=%ld, sender='%@', link='%@', date=%f, "
-					@"read_flag=0, title='%@', text='%@', revised_flag=%d where folder_id=%ld and message_id='%@'",
-					(long)parentId,
-					preparedUserName,
-					preparedArticleLink,
-					interval,
-					preparedArticleTitle,
-					preparedArticleText,
-					revised_flag,
-					(long)folderID,
-					preparedArticleGuid];
-				if (results != SQLITE_OK)
-					return NO;
+                __block int lastErrorCode = 0;
+                [queue inDatabase:^(FMDatabase *db) {
+                    [db executeUpdate:@"update messages set parent_id=?, sender=?, link=?, date=?, "
+                     @"read_flag=0, title=?, text=?, revised_flag=? where folder_id=? and message_id=?",
+                     @(parentId),
+                     userName,
+                     articleLink,
+                     @(interval),
+                     articleTitle,
+                     articleBody,
+                     @(revised_flag),
+                     @(folderID),
+                     articleGuid];
+                    
+                    lastErrorCode = [db lastErrorCode];
+                }];
+
+				if (lastErrorCode != SQLITE_OK) return NO;
 				
 				[existingArticle setTitle:articleTitle];
 				[existingArticle setBody:articleBody];
@@ -1642,11 +1626,12 @@ static Database * _sharedDatabase = nil;
 				if ([existingArticle isRead])
 				{
 					adjustment = 1;
-					[article setStatus:MA_MsgStatus_New];
+					[article setStatus:ArticleStatusNew];
 					[existingArticle markRead:NO];
 				}
-				else
-					[article setStatus:MA_MsgStatus_Updated];
+                else {
+					[article setStatus:ArticleStatusUpdated];
+                }
 			}
 			else
 			{
@@ -1676,9 +1661,12 @@ static Database * _sharedDatabase = nil;
 		NSInteger dayDelta = (daysToKeep % 1000);
 		NSInteger monthDelta = (daysToKeep / 1000);
 		NSTimeInterval timeDiff = [[[NSCalendarDate calendarDate] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
-
-		[self executeSQLWithFormat:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < %f", timeDiff];
-	}
+        
+        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < ?", @(timeDiff)];
+        }];
+    }
 }
 
 /* purgeDeletedArticles
@@ -1687,20 +1675,25 @@ static Database * _sharedDatabase = nil;
  */
 -(void)purgeDeletedArticles
 {
-	NSInteger results = [self executeSQL:@"delete from messages where deleted_flag=1"];
-	if (results == SQLITE_OK)
+    __block BOOL success;
+    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"delete from messages where deleted_flag=1"];
+        }];
+
+	if (success)
 	{
 		[self compactDatabase];
 		[trashFolder clearCache];
 
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[self trashFolderId]]];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(self.trashFolderId)];
 	}
 }
 
 /* deleteArticle
  * Permanently deletes a article from the specified folder
  */
--(BOOL)deleteArticle:(NSInteger)folderId guid:(NSString *)guid
+-(BOOL)deleteArticleFromFolder:(NSInteger)folderId guid:(NSString *)guid
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
@@ -1711,10 +1704,14 @@ static Database * _sharedDatabase = nil;
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil)
 		{
-			NSString * preparedGuid = [Database prepareStringForQuery:guid];
+            FMDatabaseQueue *queue = databaseQueue;
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"delete from messages where folder_id=? and message_id=?",
+                           @(folderId), guid];
+            }];
 
-			NSInteger results = [self executeSQLWithFormat:@"delete from messages where folder_id=%ld and message_id='%@'", (long)folderId, preparedGuid];
-			if (results == SQLITE_OK)
+			if (success)
 			{
 				if (![article isRead])
 				{
@@ -1736,11 +1733,12 @@ static Database * _sharedDatabase = nil;
 {
 	if (!initializedSmartfoldersDict)
 	{
-		// Make sure we have a database.
-		NSAssert(sqlDatabase, @"Database not assigned for this item");
+        FMDatabaseQueue *queue = databaseQueue;
+        // Make sure we have a database queue.
+		NSAssert(queue, @"Database queue not assigned for this item");
 		
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, search_string from smart_folders"];
+		[queue inDatabase:^(FMDatabase *db) {
+			FMResultSet * results = [db executeQuery:@"select folder_id, search_string from smart_folders"];
 			while([results next])
 			{
 				NSInteger folderId = [[results stringForColumnIndex:0] intValue];
@@ -1751,7 +1749,7 @@ static Database * _sharedDatabase = nil;
 				[criteriaTree release];
 			}
 			[results close];
-		});
+		}];
 		initializedSmartfoldersDict = YES;
 	}
 }
@@ -1783,9 +1781,14 @@ static Database * _sharedDatabase = nil;
 	NSInteger folderId = [self addFolder:parentId afterChild:0 folderName:folderName type:MA_Smart_Folder canAppendIndex:NO];
 	if (folderId != -1)
 	{
-		NSString * preparedQueryString = [Database prepareStringForQuery:[criteriaTree string]];
-		[self executeSQLWithFormat:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')", (long)folderId, preparedQueryString];
-		[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')",
+             @(folderId),
+             criteriaTree.string];
+        }];
+
+		[smartfoldersDict setObject:criteriaTree forKey:@(folderId)];
 	}
 	return folderId;
 }
@@ -1796,16 +1799,23 @@ static Database * _sharedDatabase = nil;
 -(BOOL)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromID:folderId];
-	if (![[folder name] isEqualToString:folderName])
-		[self setFolderName:folderId newName:folderName];
-	
+    if (![[folder name] isEqualToString:folderName]) {
+        [[Database sharedManager] setName:folderName forFolder:folderId];
+    }
+
 	// Update the smart folder string
-	NSString * preparedQueryString = [Database prepareStringForQuery:[criteriaTree string]];
-	[self executeSQLWithFormat:@"update smart_folders set search_string='%@' where folder_id=%ld", preparedQueryString, (long)folderId];
-	[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"update smart_folders set search_string=? where folder_id=?",
+         criteriaTree.string,
+         @(folderId)];
+    }];
+
+	[smartfoldersDict setObject:criteriaTree forKey:@(folderId)];
 	
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:folderId]];
+	[nc postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                                      object:@(folderId)];
 	return YES;
 }
 
@@ -1817,52 +1827,59 @@ static Database * _sharedDatabase = nil;
 	if (!initializedfoldersDict)
 	{
 		// Make sure we have a database.
-		NSAssert(sqlDatabase, @"Database not assigned for this item");
+		NSAssert(databaseQueue, @"Database not assigned for this item");
 		
 		// Keep running count of total unread articles
 		countOfUnread = 0;
+        
+        FMDatabaseQueue *queue = databaseQueue;
+        
+        [queue inDatabase:^(FMDatabase *db) {
+            FMResultSet * results = [db executeQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
+                @" type, flags, next_sibling, first_child from folders order by folder_id"];
+            if (!results) {
+                NSLog(@"%s: executeQuery error: %@", __FUNCTION__, [db lastErrorMessage]);
+                return;
+            }
+            
+            while ([results next])
+            {
+                NSInteger newItemId = [[results stringForColumnIndex:0] intValue];
+                NSInteger newParentId = [[results stringForColumnIndex:1] intValue];
+                NSString * name = [results stringForColumnIndex:2];
+                NSInteger unreadCount = [[results stringForColumnIndex:3] intValue];
+                NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[results stringForColumnIndex:4] doubleValue]];
+                NSInteger type = [[results stringForColumnIndex:5] intValue];
+                NSInteger flags = [[results stringForColumnIndex:6] intValue];
+                NSInteger nextSibling = [[results stringForColumnIndex:7] intValue];
+                NSInteger firstChild = [[results stringForColumnIndex:8] intValue];
+                
+                Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
+                [folder setNextSiblingId:nextSibling];
+                [folder setFirstChildId:firstChild];
+                if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
+                    unreadCount = 0;
+                [folder setUnreadCount:unreadCount];
+                [folder setLastUpdate:lastUpdate];
+                [folder setFlag:flags];
+                if (unreadCount > 0)
+                    countOfUnread += unreadCount;
+                [foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
+                
+                // Remember the trash folder
+                if (IsTrashFolder(folder))
+                    [self setTrashFolder:folder];
+                
+                // Remember the search folder
+                if (IsSearchFolder(folder))
+                    [self setSearchFolder:folder];
+            }
+            [results close];
+        }];
 		
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
-				@" type, flags, next_sibling, first_child from folders order by folder_id"];
-			while ([results next])
-			{
-				NSInteger newItemId = [[results stringForColumnIndex:0] intValue];
-				NSInteger newParentId = [[results stringForColumnIndex:1] intValue];
-				NSString * name = [results stringForColumnIndex:2];
-				NSInteger unreadCount = [[results stringForColumnIndex:3] intValue];
-				NSDate * lastUpdate = [NSDate dateWithTimeIntervalSince1970:[[results stringForColumnIndex:4] doubleValue]];
-				NSInteger type = [[results stringForColumnIndex:5] intValue];
-				NSInteger flags = [[results stringForColumnIndex:6] intValue];
-				NSInteger nextSibling = [[results stringForColumnIndex:7] intValue];
-				NSInteger firstChild = [[results stringForColumnIndex:8] intValue];
-				
-				Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
-				[folder setNextSiblingId:nextSibling];
-				[folder setFirstChildId:firstChild];
-				if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
-					unreadCount = 0;
-				[folder setUnreadCount:unreadCount];
-				[folder setLastUpdate:lastUpdate];
-				[folder setFlag:flags];
-				if (unreadCount > 0)
-					countOfUnread += unreadCount;
-				[foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
-
-				// Remember the trash folder
-				if (IsTrashFolder(folder))
-					[self setTrashFolder:folder];
-
-				// Remember the search folder
-				if (IsSearchFolder(folder))
-					[self setSearchFolder:folder];
-			}
-			[results close];
-		});
-
-		// Load all RSS folders and add them to the list.
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
+        // Load all RSS folders and add them to the list.
+		[queue inDatabase:^(FMDatabase *db) {
+			FMResultSet * results = [db executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
 			while ([results next])
 			{
 				NSInteger folderId = [[results stringForColumnIndex:0] intValue];
@@ -1893,7 +1910,7 @@ static Database * _sharedDatabase = nil;
 					}
 				}
 			}
-		});
+		}];
 		// Done
 		initializedfoldersDict = YES;
 	}
@@ -1977,8 +1994,9 @@ static Database * _sharedDatabase = nil;
 		
         __block NSInteger unread_count = 0;
         
-		dispatch_sync(_execQueue, ^() {
-			FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+			FMResultSet * results = [db executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
 			while([results next])
 			{
 				NSString * guid = [results stringForColumnIndex:0];
@@ -2008,7 +2026,7 @@ static Database * _sharedDatabase = nil;
 				[folder addArticleToCache:article];
 			}
 			[results close];
-        });
+        }];
         
         // This is a good time to do a quick check to ensure that our
         // own count of unread is in sync with the folders count and fix
@@ -2287,15 +2305,16 @@ static Database * _sharedDatabase = nil;
 		}
 		else
 		{
-			dispatch_sync(_execQueue, ^() {
-				FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select message_id from messages where folder_id=%ld and read_flag=0", (long)folderId];
+            FMDatabaseQueue *queue = databaseQueue;
+            [queue inDatabase:^(FMDatabase *db) {
+				FMResultSet * results = [db executeQuery:@"select message_id from messages where folder_id=? and read_flag=0", @(folderId)];
 				while ([results next])
 				{
 					NSString * guid = [results stringForColumn:@"message_id"];
 					[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 				}
 				[results close];
-			});
+			}];
 		}
 	}
 	return newArray;
@@ -2311,7 +2330,7 @@ static Database * _sharedDatabase = nil;
 {
 	NSMutableArray * newArray = [NSMutableArray array];
 	NSString * filterClause = @"";
-	NSString * queryString;
+	__block NSString * queryString;
 	Folder * folder = nil;
 	__block NSInteger unread_count = 0;
 
@@ -2341,9 +2360,10 @@ static Database * _sharedDatabase = nil;
 	}
 
 	// Time to run the query
-	@synchronized(self) {
-		[folder clearCache];
-		FMResultSet * results = [sqlDatabase executeQuery:queryString];
+    FMDatabaseQueue *queue = databaseQueue;
+    [folder clearCache];
+    [queue inDatabase:^(FMDatabase *db) {
+		FMResultSet * results = [db executeQuery:queryString];
 		while ([results next])
 		{
 			Article * article = [[[Article alloc] initWithGuid:[results stringForColumnIndex:0]] autorelease];
@@ -2373,7 +2393,7 @@ static Database * _sharedDatabase = nil;
 			
 		}
 		[results close];
-	};
+	}];
     
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
@@ -2411,8 +2431,14 @@ static Database * _sharedDatabase = nil;
 	folder = [self folderFromID:folderId];
 	if (folder != nil && [folder unreadCount] > 0)
 	{
-		NSInteger results = [self executeSQLWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", (long)folderId];
-		if (results == SQLITE_OK)
+        FMDatabaseQueue *queue = databaseQueue;
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0",
+             @(folderId)];
+        }];
+
+		if (success)
 		{
 			NSInteger count = [folder unreadCount];
 			if ([folder countOfCachedArticles] > 0)
@@ -2421,12 +2447,13 @@ static Database * _sharedDatabase = nil;
 				NSInteger remainingUnread = count;
 				Article * article;
 
-				while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil)
+                while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil) {
 					if (![article isRead])
 					{
 						[article markRead:YES];
 						--remainingUnread;
 					}
+                }
 			}
 			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
@@ -2450,11 +2477,14 @@ static Database * _sharedDatabase = nil;
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isRead != [article isRead])
 		{
-			NSString * preparedGuid = [Database prepareStringForQuery:guid];
-
 			// Mark an individual article read
-			NSInteger results = [self executeSQLWithFormat:@"update messages set read_flag=%d where folder_id=%ld and message_id='%@'", isRead, (long)folderId, preparedGuid];
-			if (results == SQLITE_OK)
+            FMDatabaseQueue *queue = databaseQueue;
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"update messages set read_flag=? where folder_id=? and message_id=?",
+                           @(isRead), @(folderId), guid];
+            }];
+			if (success)
 			{
 				NSInteger adjustment = (isRead ? -1 : 1);
 
@@ -2471,16 +2501,23 @@ static Database * _sharedDatabase = nil;
  */
 -(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
 {
-	NSInteger folderId = [folder itemId];
+    FMDatabaseQueue *queue = databaseQueue;
+    NSInteger folderId = [folder itemId];
 	if([guidArray count]>0)
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
-		[self executeSQLWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0 and message_id NOT IN ('%@')", (long)folderId, guidList];
-		[self executeSQLWithFormat:@"update messages set read_flag=0 where folder_id=%ld and read_flag=1 and message_id IN ('%@')", (long)folderId, guidList];
+        [queue inDatabase:^(FMDatabase *db) {
+			NSString * statement1 = [NSString stringWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0 and message_id NOT IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement1];
+			NSString * statement2 = [NSString stringWithFormat:@"update messages set read_flag=0 where folder_id=%ld and read_flag=1 and message_id IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement2];
+        }];
 	}
 	else
 	{
-		[self executeSQLWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0", (long)folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0", @(folderId)];
+        }];
 	}
 	NSInteger adjustment = [guidArray count]-[folder unreadCount];
 	countOfUnread += adjustment;
@@ -2492,16 +2529,23 @@ static Database * _sharedDatabase = nil;
  */
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray
 {
-	NSInteger folderId = [folder itemId];
+    FMDatabaseQueue *queue = databaseQueue;
+    NSInteger folderId = [folder itemId];
 	if([guidArray count]>0)
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
-		[self executeSQLWithFormat:@"update messages set marked_flag=1 where folder_id=%ld and marked_flag=0 and message_id IN ('%@')", (long)folderId, guidList];
-		[self executeSQLWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1 and message_id NOT IN ('%@')", (long)folderId, guidList];
+		[queue inDatabase:^(FMDatabase *db) {
+			NSString * statement1 = [NSString stringWithFormat:@"update messages set marked_flag=1 where folder_id=%ld and marked_flag=0 and message_id IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement1];
+			NSString * statement2 = [NSString stringWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1 and message_id NOT IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement2];
+        }];
 	}
 	else
 	{
-		[self executeSQLWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1", (long)folderId];
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set marked_flag=0 where folder_id=? and marked_flag=1", @(folderId)];
+        }];
 	}
 }
 
@@ -2511,20 +2555,21 @@ static Database * _sharedDatabase = nil;
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
-	dispatch_sync(_execQueue, ^() {
-		NSInteger newCount = [folder unreadCount] + adjustment;
-		[folder setUnreadCount:newCount];
-		[sqlDatabase executeUpdate:[NSString stringWithFormat:@"update folders set unread_count=%ld where folder_id=%ld", newCount, [folder itemId]]];
-	
-		// Update childUnreadCount for our parent. Since we're just working
-		// on one article, we do this the faster way.
-		Folder * tmpFolder = folder;
-		while ([tmpFolder parentId] != MA_Root_Folder)
-		{
-			tmpFolder = [self folderFromID:[tmpFolder parentId]];
-			[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
-		}
-	});
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        NSInteger newCount = [folder unreadCount] + adjustment;
+        [folder setUnreadCount:newCount];
+        [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", [NSNumber numberWithInteger:newCount], [NSNumber numberWithInteger:[folder itemId]]];
+        
+        // Update childUnreadCount for our parent. Since we're just working
+        // on one article, we do this the faster way.
+        Folder * tmpFolder = folder;
+        while ([tmpFolder parentId] != MA_Root_Folder)
+        {
+            tmpFolder = [self folderFromID:[tmpFolder parentId]];
+            [tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
+        }
+    }];
 }
 
 /* markArticleFlagged
@@ -2541,14 +2586,19 @@ static Database * _sharedDatabase = nil;
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isFlagged != [article isFlagged])
 		{
-			NSString * preparedGuid = [Database prepareStringForQuery:guid];
+            FMDatabaseQueue *queue = databaseQueue;
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"update messages set marked_flag=? where folder_id=? and message_id=?",
+                 @(isFlagged),
+                 @(folderId),
+                 guid];
+            }];
 
-			// Mark an individual article flagged
-			NSInteger results = [self executeSQLWithFormat:@"update messages set marked_flag=%d where folder_id=%ld and message_id='%@'", isFlagged, (long)folderId, preparedGuid];
-			if (results == SQLITE_OK)
+			if (success)
 			{
-
-				[article markFlagged:isFlagged];
+				// Mark an individual article flagged
+                [article markFlagged:isFlagged];
 			}
 		}
 	}
@@ -2566,8 +2616,13 @@ static Database * _sharedDatabase = nil;
 		Article * article = [folder articleFromGuid:guid];
 		if (isDeleted && ![article isRead])
 			[self markArticleRead:folderId guid:guid isRead:YES];
-		NSString * preparedGuid = [Database prepareStringForQuery:guid];
-		[self executeSQLWithFormat:@"update messages set deleted_flag=%d where folder_id=%ld and message_id='%@'", isDeleted, (long)folderId, preparedGuid];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set deleted_flag=? where folder_id=? and message_id=?",
+             @(isDeleted),
+             @(folderId),
+             guid];
+        }];
 	}
 }
 
@@ -2577,16 +2632,18 @@ static Database * _sharedDatabase = nil;
 -(BOOL)isTrashEmpty
 {
 	__block BOOL result;
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * results = [sqlDatabase executeQuery:@"select deleted_flag from messages where deleted_flag=1"];
-		if ([results next])
-		{
-			result= NO;
-		}
-		else
-			result=YES;
-		[results close];
-	});
+    FMDatabaseQueue *queue = databaseQueue;
+	[queue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQuery:@"select deleted_flag from messages where deleted_flag=1"];
+        if ([results next])
+        {
+            result= NO;
+        }
+        else
+            result=YES;
+        [results close];
+    }];
+
 	return result;
 }
 
@@ -2596,9 +2653,9 @@ static Database * _sharedDatabase = nil;
 -(NSArray *)guidHistoryForFolderId:(NSInteger)folderId
 {
 	NSMutableArray * articleGuids = [NSMutableArray array];
-	
-	dispatch_sync(_execQueue, ^() {
-		FMResultSet * results = [sqlDatabase executeQueryWithFormat:@"select message_id from rss_guids where folder_id=%ld", (long)folderId];
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+		FMResultSet * results = [db executeQuery:@"select message_id from rss_guids where folder_id=?", @(folderId)];
 		while ([results next])
 		{
 			NSString * guid = [results stringForColumn:@"message_id"];
@@ -2608,10 +2665,43 @@ static Database * _sharedDatabase = nil;
 			}
 		}
 		[results close];
-	});
+	}];
 	
 	return articleGuids;
 }
+
+/*!
+ *  Get the path to the database file
+ *
+ *  @return A string representation of the database file's path
+ */
++ (NSString *)databasePath {
+    // Fully expand the path and make sure it exists because if the
+    // database file itself doesn't exist, we want to create it and
+    // we can't create it on a non-existent path.
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    NSString * qualifiedDatabaseFileName = [[[Preferences standardPreferences] defaultDatabase] stringByExpandingTildeInPath];
+    NSString * databaseFolder = [qualifiedDatabaseFileName stringByDeletingLastPathComponent];
+    BOOL isDir;
+    
+    
+    if (![fileManager fileExistsAtPath:databaseFolder isDirectory:&isDir])
+    {
+        NSError *error;
+        if (![fileManager createDirectoryAtPath:databaseFolder withIntermediateDirectories:YES attributes:NULL error:&error])
+        {
+            NSRunAlertPanel(NSLocalizedString(@"Cannot create database folder", nil),
+                            [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
+                            NSLocalizedString(@"Close", nil), @"", @"",
+                            databaseFolder);
+            [error release];
+            return NO;
+        }
+    }
+    
+    return qualifiedDatabaseFileName;
+}
+
 
 /* close
  * Close the database. All internal resources are released and a new,
@@ -2626,11 +2716,10 @@ static Database * _sharedDatabase = nil;
 	[fieldsByName release];
 	[self setTrashFolder:nil];
 	[self setSearchFolder:nil];
-	[sqlDatabase close];
 	initializedfoldersDict = NO;
 	initializedSmartfoldersDict = NO;
 	countOfUnread = 0;
-	sqlDatabase = nil;
+    [[self databaseQueue] close];
 }
 
 /* dealloc
@@ -2638,7 +2727,8 @@ static Database * _sharedDatabase = nil;
  */
 -(void)dealloc
 {
-	[trashFolder release];
+	[self close];
+    [trashFolder release];
 	trashFolder=nil;
 	[searchFolder release];
 	searchFolder=nil;
@@ -2648,12 +2738,8 @@ static Database * _sharedDatabase = nil;
 	foldersDict=nil;
 	[smartfoldersDict release];
 	smartfoldersDict=nil;
-	dispatch_release(_execQueue);
-	dispatch_release(_transactionQueue);
-	if (sqlDatabase)
-		[self close];
-	[sqlDatabase release];
-	sqlDatabase=nil;
+    [databaseQueue release];
+    databaseQueue=nil;
 	[super dealloc];
 }
 @end

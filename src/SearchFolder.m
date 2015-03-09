@@ -470,18 +470,16 @@
 	// Set the criteria condition
 	[criteriaTree setCondition:[criteriaConditionPopup selectedTag]];
 	
-	[db doTransactionWithBlock:^(BOOL *rollback) {
 	if (smartFolderId == -1)
 	{
 		AppController * controller = APPCONTROLLER;
-		smartFolderId = [db addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
+		smartFolderId = [[Database sharedManager] addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
 		[controller selectFolder:smartFolderId];
 	}
 	else
     {
-		[db updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
+		[[Database sharedManager] updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
     }
-    }]; //end transaction block
 
 	[criteriaTree release];
 	

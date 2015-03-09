@@ -40,12 +40,8 @@ extern NSString * MA_Field_Enclosure;
 extern NSString * MA_Field_EnclosureDownloaded;
 extern NSString * MA_Field_HasEnclosure;
 
-// Article status values
-#define MA_MsgStatus_Empty		0
-#define MA_MsgStatus_New		1
-#define MA_MsgStatus_Updated	2
 
-// Article field IDs
+// Article field IDs. Convert to enum
 #define MA_FieldID_GUID					400
 #define MA_FieldID_Subject				401
 #define MA_FieldID_Author				402
@@ -78,6 +74,12 @@ extern NSString * MA_Field_HasEnclosure;
     BOOL hasEnclosureFlag;
     int status;
 }
+
+typedef enum {
+    ArticleStatusEmpty = 0,
+    ArticleStatusNew,
+    ArticleStatusUpdated
+} ArticleStatus;
 
 // Accessor functions
 -(id)initWithGuid:(NSString *)theGuid;

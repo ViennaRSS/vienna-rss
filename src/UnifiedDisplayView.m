@@ -560,7 +560,7 @@
 	if ((row >= 0) && (row < [[articleController allArticles] count]))
 	{
 		Article * article = [[articleController allArticles] objectAtIndex:row];
-		return (article != nil) && ![[Database sharedDatabase] readOnly] && [[articleList window] isVisible];
+		return (article != nil) && ![[Database sharedManager] readOnly] && [[articleList window] isVisible];
 	}
 	return NO;
 }
@@ -587,7 +587,7 @@
 	{
 		NSInteger folderId = [(Folder *)[note object] itemId];
 		NSInteger controllerFolderId = [controller currentFolderId];
-		Folder * controllerFolder = [[Database sharedDatabase] folderFromID:controllerFolderId];
+		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
 		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
 		{
 			[self refreshCurrentFolder];
@@ -637,7 +637,7 @@
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
-	if ([[Database sharedDatabase] countOfUnread] > 0)
+	if ([[Database sharedManager] countOfUnread] > 0)
 	{
 		guidOfArticleToSelect = nil;
 
@@ -665,7 +665,7 @@
 
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
-	if (([[Database sharedDatabase] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
+	if (([[Database sharedManager] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
 	{
 		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
 		if (nextFolderWithUnread != -1)
@@ -872,7 +872,7 @@
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	NSArray * allArticles = [articleController allArticles];
-	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedDatabase] readOnly])
+	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedManager] readOnly])
 	{
 		Article * theArticle = [allArticles objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
@@ -922,7 +922,7 @@
 
 	Article * theArticle = [allArticles objectAtIndex:row];
 	NSInteger articleFolderId = [theArticle folderId];
-	Folder * folder = [[Database sharedDatabase] folderFromID:articleFolderId];
+	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
 	NSString * feedURL = SafeString([folder feedURL]);
 
 	ArticleCellView *cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
@@ -966,7 +966,7 @@
 	NSMutableArray * arrayOfTitles = [[NSMutableArray alloc] init];
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
-	Database * db = [Database sharedDatabase];
+	Database * db = [Database sharedManager];
 	int count = [rowIndexes count];
 
 	// Set up the pasteboard
