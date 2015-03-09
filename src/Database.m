@@ -77,7 +77,7 @@ const NSInteger MA_Current_DB_Version = 18;
         [self initaliseFields];
         databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:[Database databasePath]] retain];
         [self initialiseDatabase];
-        NSLog(@"Database version: %ld", (long)[self databaseVersion]);
+        LLog(@"Database version: %ld", (long)[self databaseVersion]);
     }
     return self;
 }
@@ -109,7 +109,7 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 - (BOOL)initialiseDatabase {
     int databaseVersion = [self databaseVersion];
-    NSLog(@"database version: %d", databaseVersion);
+    LLog(@"database version: %d", databaseVersion);
     
     if (databaseVersion >= MA_Current_DB_Version) {
         // Most common case, so it is first
@@ -2507,10 +2507,10 @@ const NSInteger MA_Current_DB_Version = 18;
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
         [queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"update messages set read_flag=1 where folder_id=? and read_flag=0 and message_id NOT IN (?)",
-             @(folderId), guidList];
-            [db executeUpdate:@"update messages set read_flag=0 where folder_id=? and read_flag=1 and message_id IN (?)",
-             @(folderId), guidList];
+			NSString * statement1 = [NSString stringWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0 and message_id NOT IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement1];
+			NSString * statement2 = [NSString stringWithFormat:@"update messages set read_flag=0 where folder_id=%ld and read_flag=1 and message_id IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement2];
         }];
 	}
 	else
@@ -2535,10 +2535,10 @@ const NSInteger MA_Current_DB_Version = 18;
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
 		[queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"update messages set marked_flag=1 where folder_id=? and marked_flag=0 and message_id IN (?)",
-             @(folderId), guidList];
-            [db executeUpdate:@"update messages set marked_flag=0 where folder_id=? and marked_flag=1 and message_id NOT IN (?)",
-             @(folderId), guidList];
+			NSString * statement1 = [NSString stringWithFormat:@"update messages set marked_flag=1 where folder_id=%ld and marked_flag=0 and message_id IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement1];
+			NSString * statement2 = [NSString stringWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1 and message_id NOT IN ('%@')", (long)folderId, guidList];
+			[db executeUpdate:statement2];
         }];
 	}
 	else
