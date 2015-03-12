@@ -41,6 +41,7 @@ NSString * MA_FeedSourcesFolder_Name = @"Sources";
 NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
 NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
 NSString * const kMA_Notify_UseWebPluginsChange = @"MA_Notify_UseWebPluginsChange";
+NSString * const kMA_Notify_IgnoreHTTP301RedirectChange = @"MA_Notify_IgnoreHTTP301RedirectChange";
 
 
 // The default preferences object.
@@ -180,21 +181,24 @@ static Preferences * _standardPreferences = nil;
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
 		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
-		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
-        useWebPlugins = [self boolForKey:MAPref_UseWebPlugins];
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		folderFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_FolderFont]] retain];
 		articleFont = [[NSUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_ArticleListFont]] retain];
 		downloadFolder = [[userPrefs valueForKey:MAPref_DownloadsFolder] retain];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		searchMethod = [[NSKeyedUnarchiver unarchiveObjectWithData:[userPrefs objectForKey:MAPref_SearchMethod]] retain];
-		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
         
         // Open Reader sync
         syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
         prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
 		syncServer = [[userPrefs valueForKey:MAPref_SyncServer] retain];
 		syncingUser = [[userPrefs valueForKey:MAPref_SyncingUser] retain];
+        
+        // Advanced preferences
+        concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
+        ignoreHTTP301Redirect = [self boolForKey:MAPref_IgnoreHTTP301Redirect];
+        useJavaScript = [self boolForKey:MAPref_UseJavaScript];
+        useWebPlugins = [self boolForKey:MAPref_UseWebPlugins];
 				
 		//Sparkle autoupdate
 		checkForNewOnStartup = [[SUUpdater sharedUpdater] automaticallyChecksForUpdates];
@@ -290,8 +294,6 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_FolderSort_ByName] forKey:MAPref_AutoSortFoldersTree];
 	[defaultValues setObject:boolYes forKey:MAPref_ShowFolderImages];
-	[defaultValues setObject:boolYes forKey:MAPref_UseJavaScript];
-    [defaultValues setObject:boolYes forKey:MAPref_UseWebPlugins];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInVienna];
 	[defaultValues setObject:boolYes forKey:MAPref_OpenLinksInBackground];
 	[defaultValues setObject:boolNo forKey:MAPref_ShowAppInStatusBar];
@@ -313,10 +315,15 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:boolYes forKey:MAPref_ShouldSaveFeedSource];
 	[defaultValues setObject:boolNo forKey:MAPref_ShouldSaveFeedSourceBackup];
 	[defaultValues setObject:[NSKeyedArchiver archivedDataWithRootObject:[SearchMethod searchAllArticlesMethod]] forKey:MAPref_SearchMethod];
-    [defaultValues setObject:[NSNumber numberWithInteger:MA_Default_ConcurrentDownloads] forKey:MAPref_ConcurrentDownloads];
     [defaultValues setObject:boolNo forKey:MAPref_SyncGoogleReader];
     [defaultValues setObject:boolNo forKey:MAPref_GoogleNewSubscription];
     [defaultValues setObject:boolNo forKey:MAPref_AlwaysAcceptBetas];
+    
+    // Advanced Preferences
+    [defaultValues setObject:@(MA_Default_ConcurrentDownloads) forKey:MAPref_ConcurrentDownloads];
+    [defaultValues setObject:@NO forKey:MAPref_IgnoreHTTP301Redirect];
+    [defaultValues setObject:@YES forKey:MAPref_UseJavaScript];
+    [defaultValues setObject:@YES forKey:MAPref_UseWebPlugins];
 	
 	return defaultValues;
 }
@@ -482,64 +489,6 @@ static Preferences * _standardPreferences = nil;
 -(BOOL)enableMinimumFontSize
 {
 	return enableMinimumFontSize;
-}
-
-/* enableJavaScript
- * Specifies whether or not using JavaScript
- */
--(BOOL)useJavaScript
-{
-	return useJavaScript;
-}
-
-/* setEnableJavaScript
- * Enable whether JavaScript is used.
- */
--(void)setUseJavaScript:(BOOL)flag
-{
-	if (useJavaScript != flag)
-	{
-		useJavaScript = flag;
-		[self setBool:flag forKey:MAPref_UseJavaScript];
-		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseJavaScriptChange
-                                                            object:nil];
-	}
-}
-
-
-/* useWebPlugins
- * Specifies whether or not to enable web plugins
- */
--(BOOL)useWebPlugins
-{
-    return useWebPlugins;
-}
-
-/* setEnableJavaScript
- * Enable whether JavaScript is used.
- */
--(void)setUseWebPlugins:(BOOL)flag
-{
-    if (useWebPlugins != flag)
-    {
-        useWebPlugins = flag;
-        [self setBool:flag forKey:MAPref_UseWebPlugins];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseWebPluginsChange
-                                                            object:nil];
-    }
-}
-
--(NSUInteger)concurrentDownloads {
-	return concurrentDownloads;
-}
-
--(void)setConcurrentDownloads:(NSUInteger)downloads {
-	if (downloads != concurrentDownloads) {
-		concurrentDownloads = downloads;
-		[self setInteger:downloads forKey:MAPref_ConcurrentDownloads];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
-
-	}
 }
 
 
@@ -1229,8 +1178,7 @@ static Preferences * _standardPreferences = nil;
     }
 }
 
-#pragma mark -
-#pragma mark Open Reader syncing
+#pragma mark - Open Reader syncing
 
 -(BOOL)syncGoogleReader 
 {
@@ -1303,6 +1251,82 @@ static Preferences * _standardPreferences = nil;
 		[self setString:syncingUser forKey:MAPref_SyncingUser];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
 	}
+}
+
+
+#pragma mark - Advanced Preferences
+
+
+-(NSUInteger)concurrentDownloads {
+    return concurrentDownloads;
+}
+
+-(void)setConcurrentDownloads:(NSUInteger)downloads {
+    if (downloads != concurrentDownloads) {
+        concurrentDownloads = downloads;
+        [self setInteger:downloads forKey:MAPref_ConcurrentDownloads];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
+        
+    }
+}
+
+- (BOOL)ignoreHTTP301Redirect {
+    return ignoreHTTP301Redirect;
+}
+
+- (void)setIgnoreHTTP301Redirect:(BOOL)flag {
+    if (ignoreHTTP301Redirect != flag)
+    {
+        ignoreHTTP301Redirect = flag;
+        [self setBool:flag forKey:MAPref_IgnoreHTTP301Redirect];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_IgnoreHTTP301RedirectChange object:nil];
+    }
+}
+
+
+/* enableJavaScript
+ * Specifies whether or not using JavaScript
+ */
+-(BOOL)useJavaScript
+{
+    return useJavaScript;
+}
+
+/* setEnableJavaScript
+ * Enable whether JavaScript is used.
+ */
+-(void)setUseJavaScript:(BOOL)flag
+{
+    if (useJavaScript != flag)
+    {
+        useJavaScript = flag;
+        [self setBool:flag forKey:MAPref_UseJavaScript];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseJavaScriptChange
+                                                            object:nil];
+    }
+}
+
+
+/* useWebPlugins
+ * Specifies whether or not to enable web plugins
+ */
+-(BOOL)useWebPlugins
+{
+    return useWebPlugins;
+}
+
+/* setEnableJavaScript
+ * Enable whether JavaScript is used.
+ */
+-(void)setUseWebPlugins:(BOOL)flag
+{
+    if (useWebPlugins != flag)
+    {
+        useWebPlugins = flag;
+        [self setBool:flag forKey:MAPref_UseWebPlugins];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseWebPluginsChange
+                                                            object:nil];
+    }
 }
 
 @end

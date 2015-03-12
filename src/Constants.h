@@ -78,6 +78,7 @@ extern NSString * MAPref_SyncServer;
 extern NSString * MAPref_SyncingUser;
 extern NSString * MAPref_SendSystemProfileInfo;
 extern NSString * MAPref_AlwaysAcceptBetas;
+extern NSString * MAPref_IgnoreHTTP301Redirect;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;

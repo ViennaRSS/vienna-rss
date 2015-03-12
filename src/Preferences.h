@@ -52,6 +52,7 @@
     BOOL prefersGoogleNewSubscription;
     BOOL markUpdatedAsNew;
     BOOL sendSystemSpecs;
+    BOOL ignoreHTTP301Redirect;
 	NSString * downloadFolder;
 	NSString * displayStyle;
 	float textSizeMultiplier;
@@ -74,6 +75,7 @@
 extern NSString * const kMA_Notify_MinimumFontSizeChange;
 extern NSString * const kMA_Notify_UseJavaScriptChange;
 extern NSString * const kMA_Notify_UseWebPluginsChange;
+extern NSString * const kMA_Notify_IgnoreHTTP301RedirectChange;
 
 // Accessor functions
 +(Preferences *)standardPreferences;
@@ -255,4 +257,8 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // username used for syncing
 -(NSString *)syncingUser;
 -(void)setSyncingUser:(NSString *)newUser;
+
+#pragma mark - Advanced Preferences
+- (BOOL)ignoreHTTP301Redirect;
+- (void)setIgnoreHTTP301Redirect:(BOOL)flag;
 @end
