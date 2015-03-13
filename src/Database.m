@@ -1783,7 +1783,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	{
         FMDatabaseQueue *queue = databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')",
+            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)",
              @(folderId),
              criteriaTree.string];
         }];
