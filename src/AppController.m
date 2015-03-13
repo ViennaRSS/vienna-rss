@@ -3300,8 +3300,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 			return;
 	}
 	
-	// End any editing
-	[self.rssFeed doEditCancel:nil];
+
 	if (smartFolder != nil)
 		[smartFolder doCancel:nil];
 	if ([(NSControl *)[foldersTree mainView] abortEditing])
