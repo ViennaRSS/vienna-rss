@@ -1546,11 +1546,10 @@ const NSInteger MA_Current_DB_Version = 18;
                 [article setStatus:ArticleStatusNew];
                 [folder addArticleToCache:article];
                 
-                // Update folder unread count
-//                if (!read_flag)
-//                    adjustment = 1;
-
             }];
+            // Update folder unread count
+            if (!read_flag)
+                    adjustment = 1;
         }
 		else if ([existingArticle isDeleted])
 		{
