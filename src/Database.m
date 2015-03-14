@@ -962,7 +962,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	countOfUnread -= [folder unreadCount];
     if (IsSmartFolder(folder)) {
         [queue inDatabase:^(FMDatabase *db) {
-            [db executeQuery:@"delete from smart_folders where folder_id=?", @(folderId)];
+            [db executeUpdate:@"delete from smart_folders where folder_id=?", @(folderId)];
         }];
     }
 
@@ -971,8 +971,8 @@ const NSInteger MA_Current_DB_Version = 18;
 	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 	{
         [queue inDatabase:^(FMDatabase *db) {
-            [db executeQuery:@"delete from rss_folders where folder_id=?", @(folderId)];
-            [db executeQuery:@"delete from rss_guids where folder_id=?", @(folderId)];
+            [db executeUpdate:@"delete from rss_folders where folder_id=?", @(folderId)];
+            [db executeUpdate:@"delete from rss_guids where folder_id=?", @(folderId)];
         }];
 		
 		NSString * feedSourceFilePath = [folder feedSourceFilePath];
@@ -1021,8 +1021,8 @@ const NSInteger MA_Current_DB_Version = 18;
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
 	// normal folder had it's type grobbed to MA_Smart_Folder.
     [queue inDatabase:^(FMDatabase *db) {
-        [db executeQuery:@"delete from messages where folder_id=?", @(folderId)];
-        [db executeQuery:@"delete from folders where folder_id=?", @(folderId)];
+        [db executeUpdate:@"delete from messages where folder_id=?", @(folderId)];
+        [db executeUpdate:@"delete from folders where folder_id=?", @(folderId)];
     }];
 
 	// Remove from the folders array. Do this after we send the notification
@@ -1349,7 +1349,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	
     FMDatabaseQueue *queue = databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"update folders set next_sibling=%lu where folder_id=%ld",
+        [db executeUpdate:@"update folders set next_sibling=? where folder_id=?",
          @(nextSiblingId), @(folderId)];
     }];
 
@@ -1783,7 +1783,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	{
         FMDatabaseQueue *queue = databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (%ld, '%@')",
+            [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)",
              @(folderId),
              criteriaTree.string];
         }];
