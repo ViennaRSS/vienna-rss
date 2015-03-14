@@ -59,10 +59,16 @@ const NSInteger MA_Current_DB_Version = 18;
 @synthesize trashFolder, searchFolder;
 @synthesize databaseQueue;
 
-/* init
- * General object initialization.
+
+
+/*!
+ *  initialise the Database object with a specific path
+ *
+ *  @param dbPath the path to the database we want to initialise
+ *
+ *  @return an initialised Database object
  */
-- (instancetype)init
+- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath
 {
     self = [super init];
     if (self) {
@@ -75,7 +81,7 @@ const NSInteger MA_Current_DB_Version = 18;
         smartfoldersDict = [[NSMutableDictionary alloc] init];
         foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
-        databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:[Database databasePath]] retain];
+        databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:dbPath] retain];
         [self initialiseDatabase];
         LLog(@"Database version: %ld", (long)[self databaseVersion]);
     }
@@ -90,11 +96,7 @@ const NSInteger MA_Current_DB_Version = 18;
     static id sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMyManager = [[Database alloc] init];
-//        if (![sharedMyManager initDatabase]) {
-//            [sharedMyManager release];
-//            sharedMyManager = nil;
-//        }
+        sharedMyManager = [[Database alloc] initWithDatabaseAtPath:[Database databasePath]];
     });
     
     return sharedMyManager;
