@@ -2456,8 +2456,8 @@ const NSInteger MA_Current_DB_Version = 18;
 			}
 			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
+			result = YES;
 		}
-		result = YES;
 	}
 	return result;
 }
