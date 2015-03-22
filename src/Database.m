@@ -970,7 +970,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	// and delete raw feed source
 	if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 	{
-        [queue inDatabase:^(FMDatabase *db) {
+        [queue inTransaction:^(FMDatabase *db, BOOL * rollback) {
             [db executeUpdate:@"delete from rss_folders where folder_id=?", @(folderId)];
             [db executeUpdate:@"delete from rss_guids where folder_id=?", @(folderId)];
         }];
@@ -1020,7 +1020,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	
 	// For a smart folder, the next line is a no-op but it helpfully takes care of the case where a
 	// normal folder had it's type grobbed to MA_Smart_Folder.
-    [queue inDatabase:^(FMDatabase *db) {
+    [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         [db executeUpdate:@"delete from messages where folder_id=?", @(folderId)];
         [db executeUpdate:@"delete from folders where folder_id=?", @(folderId)];
     }];
@@ -1519,8 +1519,8 @@ const NSInteger MA_Current_DB_Version = 18;
 		}
 		else if (existingArticle == nil)
 		{
-			
-			[queue inDatabase:^(FMDatabase *db) {
+			__block int lastErrorCode = 0;
+			[queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
                 [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
                  @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                  articleGuid,
@@ -1538,15 +1538,25 @@ const NSInteger MA_Current_DB_Version = 18;
                  @(revised_flag),
                  articleEnclosure,
                  @(hasenclosure_flag)];
-//                if (results != SQLITE_OK)
-//                    return NO;
+                lastErrorCode = [db lastErrorCode];
+                if (lastErrorCode != SQLITE_OK) {
+                    *rollback = YES;
+					return;
+                 }
                 [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
-                
-                // Add the article to the folder
-                [article setStatus:ArticleStatusNew];
-                [folder addArticleToCache:article];
+                lastErrorCode = [db lastErrorCode];
+                if (lastErrorCode != SQLITE_OK) {
+                    *rollback = YES;
+					return;
+                 }
                 
             }];
+			if (lastErrorCode != SQLITE_OK)
+				return NO;
+			// Add the article to the folder cache
+			[article setStatus:ArticleStatusNew];
+			[folder addArticleToCache:article];
+
             // Update folder unread count
             if (!read_flag)
                     adjustment = 1;
@@ -1833,7 +1843,7 @@ const NSInteger MA_Current_DB_Version = 18;
         
         FMDatabaseQueue *queue = databaseQueue;
         
-        [queue inDatabase:^(FMDatabase *db) {
+        [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
             FMResultSet * results = [db executeQuery:@"select folder_id, parent_id, foldername, unread_count, last_update,"
                 @" type, flags, next_sibling, first_child from folders order by folder_id"];
             if (!results) {
@@ -1874,11 +1884,9 @@ const NSInteger MA_Current_DB_Version = 18;
                     [self setSearchFolder:folder];
             }
             [results close];
-        }];
 		
-        // Load all RSS folders and add them to the list.
-		[queue inDatabase:^(FMDatabase *db) {
-			FMResultSet * results = [db executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
+        	// Load all RSS folders and add them to the list.
+			results = [db executeQuery:@"select folder_id, feed_url, username, last_update_string, description, home_page from rss_folders"];
 			while ([results next])
 			{
 				NSInteger folderId = [[results stringForColumnIndex:0] intValue];
@@ -1896,20 +1904,20 @@ const NSInteger MA_Current_DB_Version = 18;
 				[folder setUsername:username];
 			}
 			[results close];
-			// Fix the childUnreadCount for every parent		
-			for (Folder * folder in [foldersDict objectEnumerator])
+		}];
+		// Fix the childUnreadCount for every parent
+		for (Folder * folder in [foldersDict objectEnumerator])
+		{
+			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
 			{
-				if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
+				Folder * parentFolder = [self folderFromID:[folder parentId]];
+				while (parentFolder != nil)
 				{
-					Folder * parentFolder = [self folderFromID:[folder parentId]];
-					while (parentFolder != nil)
-					{
-						[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
-						parentFolder = [self folderFromID:[parentFolder parentId]];
-					}
+					[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
+					parentFolder = [self folderFromID:[parentFolder parentId]];
 				}
 			}
-		}];
+		}
 		// Done
 		initializedfoldersDict = YES;
 	}
@@ -2456,8 +2464,8 @@ const NSInteger MA_Current_DB_Version = 18;
 			}
 			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
+			result = YES;
 		}
-		result = YES;
 	}
 	return result;
 }
@@ -2505,7 +2513,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	if([guidArray count]>0)
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
-        [queue inDatabase:^(FMDatabase *db) {
+        [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
 			NSString * statement1 = [NSString stringWithFormat:@"update messages set read_flag=1 where folder_id=%ld and read_flag=0 and message_id NOT IN ('%@')", (long)folderId, guidList];
 			[db executeUpdate:statement1];
 			NSString * statement2 = [NSString stringWithFormat:@"update messages set read_flag=0 where folder_id=%ld and read_flag=1 and message_id IN ('%@')", (long)folderId, guidList];
@@ -2533,7 +2541,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	if([guidArray count]>0)
 	{
 		NSString * guidList = [guidArray componentsJoinedByString:@"','"];
-		[queue inDatabase:^(FMDatabase *db) {
+		[queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
 			NSString * statement1 = [NSString stringWithFormat:@"update messages set marked_flag=1 where folder_id=%ld and marked_flag=0 and message_id IN ('%@')", (long)folderId, guidList];
 			[db executeUpdate:statement1];
 			NSString * statement2 = [NSString stringWithFormat:@"update messages set marked_flag=0 where folder_id=%ld and marked_flag=1 and message_id NOT IN ('%@')", (long)folderId, guidList];
@@ -2554,21 +2562,21 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
+	NSInteger newCount = [folder unreadCount] + adjustment;
+	[folder setUnreadCount:newCount];
     FMDatabaseQueue *queue = databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-        NSInteger newCount = [folder unreadCount] + adjustment;
-        [folder setUnreadCount:newCount];
         [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", [NSNumber numberWithInteger:newCount], [NSNumber numberWithInteger:[folder itemId]]];
-        
-        // Update childUnreadCount for our parent. Since we're just working
-        // on one article, we do this the faster way.
-        Folder * tmpFolder = folder;
-        while ([tmpFolder parentId] != MA_Root_Folder)
-        {
-            tmpFolder = [self folderFromID:[tmpFolder parentId]];
-            [tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
-        }
     }];
+
+	// Update childUnreadCount for our parent. Since we're just working
+	// on one article, we do this the faster way.
+	Folder * tmpFolder = folder;
+	while ([tmpFolder parentId] != MA_Root_Folder)
+	{
+		tmpFolder = [self folderFromID:[tmpFolder parentId]];
+		[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
+	}
 }
 
 /* markArticleFlagged
