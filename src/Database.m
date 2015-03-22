@@ -1544,10 +1544,6 @@ const NSInteger MA_Current_DB_Version = 18;
 					return;
                  }
                 [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
-                
-                // Add the article to the folder
-                [article setStatus:ArticleStatusNew];
-                [folder addArticleToCache:article];
                 lastErrorCode = [db lastErrorCode];
                 if (lastErrorCode != SQLITE_OK) {
                     *rollback = YES;
@@ -1557,6 +1553,10 @@ const NSInteger MA_Current_DB_Version = 18;
             }];
 			if (lastErrorCode != SQLITE_OK)
 				return NO;
+			// Add the article to the folder cache
+			[article setStatus:ArticleStatusNew];
+			[folder addArticleToCache:article];
+
             // Update folder unread count
             if (!read_flag)
                     adjustment = 1;
@@ -1904,20 +1904,20 @@ const NSInteger MA_Current_DB_Version = 18;
 				[folder setUsername:username];
 			}
 			[results close];
-			// Fix the childUnreadCount for every parent		
-			for (Folder * folder in [foldersDict objectEnumerator])
+		}];
+		// Fix the childUnreadCount for every parent
+		for (Folder * folder in [foldersDict objectEnumerator])
+		{
+			if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
 			{
-				if ([folder unreadCount] > 0 && [folder parentId] != MA_Root_Folder)
+				Folder * parentFolder = [self folderFromID:[folder parentId]];
+				while (parentFolder != nil)
 				{
-					Folder * parentFolder = [self folderFromID:[folder parentId]];
-					while (parentFolder != nil)
-					{
-						[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
-						parentFolder = [self folderFromID:[parentFolder parentId]];
-					}
+					[parentFolder setChildUnreadCount:[parentFolder childUnreadCount] + [folder unreadCount]];
+					parentFolder = [self folderFromID:[parentFolder parentId]];
 				}
 			}
-		}];
+		}
 		// Done
 		initializedfoldersDict = YES;
 	}
@@ -2562,21 +2562,21 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
+	NSInteger newCount = [folder unreadCount] + adjustment;
+	[folder setUnreadCount:newCount];
     FMDatabaseQueue *queue = databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-        NSInteger newCount = [folder unreadCount] + adjustment;
-        [folder setUnreadCount:newCount];
         [db executeUpdate:@"UPDATE folders set unread_count=? where folder_id=?", [NSNumber numberWithInteger:newCount], [NSNumber numberWithInteger:[folder itemId]]];
-        
-        // Update childUnreadCount for our parent. Since we're just working
-        // on one article, we do this the faster way.
-        Folder * tmpFolder = folder;
-        while ([tmpFolder parentId] != MA_Root_Folder)
-        {
-            tmpFolder = [self folderFromID:[tmpFolder parentId]];
-            [tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
-        }
     }];
+
+	// Update childUnreadCount for our parent. Since we're just working
+	// on one article, we do this the faster way.
+	Folder * tmpFolder = folder;
+	while ([tmpFolder parentId] != MA_Root_Folder)
+	{
+		tmpFolder = [self folderFromID:[tmpFolder parentId]];
+		[tmpFolder setChildUnreadCount:[tmpFolder childUnreadCount] + adjustment];
+	}
 }
 
 /* markArticleFlagged
