@@ -1519,7 +1519,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		}
 		else if (existingArticle == nil)
 		{
-			
+			__block int lastErrorCode = 0;
 			[queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
                 [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
                  @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -1538,15 +1538,25 @@ const NSInteger MA_Current_DB_Version = 18;
                  @(revised_flag),
                  articleEnclosure,
                  @(hasenclosure_flag)];
-//                if (results != SQLITE_OK)
-//                    return NO;
+                lastErrorCode = [db lastErrorCode];
+                if (lastErrorCode != SQLITE_OK) {
+                    *rollback = YES;
+					return;
+                 }
                 [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
                 
                 // Add the article to the folder
                 [article setStatus:ArticleStatusNew];
                 [folder addArticleToCache:article];
+                lastErrorCode = [db lastErrorCode];
+                if (lastErrorCode != SQLITE_OK) {
+                    *rollback = YES;
+					return;
+                 }
                 
             }];
+			if (lastErrorCode != SQLITE_OK)
+				return NO;
             // Update folder unread count
             if (!read_flag)
                     adjustment = 1;
