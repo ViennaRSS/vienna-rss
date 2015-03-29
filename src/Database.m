@@ -1693,7 +1693,8 @@ const NSInteger MA_Current_DB_Version = 18;
 	if (success)
 	{
 		[self compactDatabase];
-		[trashFolder clearCache];
+		for (Folder * folder in [foldersDict objectEnumerator])
+			[folder clearCache];
 
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(self.trashFolderId)];
 	}
