@@ -433,8 +433,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		[criteriaTree addCriteria:criteria];
 		
 		__block NSString * preparedCriteriaString = [criteriaTree string];
-        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)", @([db lastInsertRowId]), preparedCriteriaString];
         }];
 		[criteriaTree release];
@@ -450,11 +449,10 @@ const NSInteger MA_Current_DB_Version = 18;
 {
     __block BOOL success;
     
-    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"update info set last_opened=?", [NSDate date]];
+	[databaseQueue inDatabase:^(FMDatabase *db) {
+		success = [db executeUpdate:@"update info set last_opened=?", [NSDate date]];
 
-        }];
+	}];
     if (success) {
         readOnly = NO;
     } else {
@@ -554,8 +552,7 @@ const NSInteger MA_Current_DB_Version = 18;
 -(void)compactDatabase
 {
     if (!readOnly) {
-        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"vacuum"];
         }];
     }
@@ -567,8 +564,7 @@ const NSInteger MA_Current_DB_Version = 18;
 -(void)reindexDatabase
 {
     if (!readOnly) {
-        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"reindex"];
         }];
     }
@@ -1445,8 +1441,7 @@ const NSInteger MA_Current_DB_Version = 18;
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification
 {
     if (!readOnly) {
-        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update info set folder_sort=?", @([[Preferences standardPreferences] foldersTreeSortMethod])];
         }];
     }
@@ -1670,8 +1665,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		NSInteger monthDelta = (daysToKeep / 1000);
 		NSTimeInterval timeDiff = [[[NSCalendarDate calendarDate] dateByAddingYears:0 months:-monthDelta days:-dayDelta hours:0 minutes:0 seconds:0] timeIntervalSince1970];
         
-        FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=1 where deleted_flag=0 and marked_flag=0 and read_flag=1 and date < ?", @(timeDiff)];
         }];
     }
@@ -1684,10 +1678,9 @@ const NSInteger MA_Current_DB_Version = 18;
 -(void)purgeDeletedArticles
 {
     __block BOOL success;
-    FMDatabaseQueue * queue = [[Database sharedManager] databaseQueue];
-        [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"delete from messages where deleted_flag=1"];
-        }];
+	[databaseQueue inDatabase:^(FMDatabase *db) {
+		success = [db executeUpdate:@"delete from messages where deleted_flag=1"];
+	}];
 
 	if (success)
 	{
@@ -1809,7 +1802,7 @@ const NSInteger MA_Current_DB_Version = 18;
 {
 	Folder * folder = [self folderFromID:folderId];
     if (![[folder name] isEqualToString:folderName]) {
-        [[Database sharedManager] setName:folderName forFolder:folderId];
+        [self setName:folderName forFolder:folderId];
     }
 
 	// Update the smart folder string
