@@ -113,7 +113,6 @@
 	-(void)toggleOptionKeyButtonStates;
 	-(FoldersTree *)foldersTree;
 	-(void)updateCloseCommands;
-	-(void)loadOpenTabs;
 	-(BOOL)isFilterBarVisible;
 	-(BOOL)isStatusBarVisible;
 	-(NSDictionary *)registrationDictionaryForGrowl;
@@ -256,8 +255,8 @@ static NSLocale * enUSLocale;
 }
 
 /* doSafeInitialisation
- * Do the stuff that requires that all NIBs are awoken. I can't find a notification
- * from Cocoa for this so we hack it.
+ * Do the stuff that requires that all NIBs and the database are awoken. I can't find a notification
+ * from Cocoa for this so we hack it after applicationDidFinishLaunching
  */
 -(void)doSafeInitialisation
 {
@@ -287,10 +286,23 @@ static NSLocale * enUSLocale;
 		// Make article list the first responder
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
 		
+		// Select the folder and article from the last session
+		int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
+		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
+		if ([previousArticleGuid isBlank])
+			previousArticleGuid = nil;
+		[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
+
+		if ([prefs refreshOnStartup])
+			[self refreshAllSubscriptions:self];
+
 		// Start opening the old tabs once everything else has finished initializing and setting up
-		[self performSelector:@selector(loadOpenTabs)
-				   withObject:nil
-				   afterDelay:0];
+		NSArray * tabLinks = [prefs arrayForKey:MAPref_TabList];
+		for (NSString * tabLink in tabLinks)
+		{
+			[self createNewTab:([tabLink length] ? [NSURL URLWithString:tabLink] : nil) inBackground:YES];
+		}
+
 		doneSafeInit = YES;
 		
 	}
@@ -576,29 +588,20 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	// Fix up the Close commands
 	[self updateCloseCommands];
 	
-	// Do safe initialisation. 	 
-	[self doSafeInitialisation];
-	
 	[self showMainWindow:self];
 	
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 	
-	// Select the folder and article from the last session
-	int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
-	NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
-	if ([previousArticleGuid isBlank])
-		previousArticleGuid = nil;
-	[[articleController mainArticleView] selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
-
-	if ([prefs refreshOnStartup]) 
-		[self refreshAllSubscriptions:self];
-    
-    
     // Check if we have previously asked the user to send anonymous system profile
     if([[NSUserDefaults standardUserDefaults] objectForKey:MAPref_SendSystemProfileInfo] == nil) {
         [self showSystemProfileInfoAlert];
     }
+
+	// Do safe initialisation.
+	[self performSelector:@selector(doSafeInitialisation)
+			   withObject:nil
+			   afterDelay:0];
 
 }
 
@@ -1487,19 +1490,6 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	}
 	if (didCompleteInitialisation)
 			[browserView performSelector:@selector(saveOpenTabs) withObject:nil afterDelay:3];
-}
-
-/* loadOpenTabs
- * Opens separate tabs for each of the URLs persisted to the TabList preference.
- */
--(void)loadOpenTabs
-{
-	NSArray * tabLinks = [[Preferences standardPreferences] arrayForKey:MAPref_TabList];
-	
-	for (NSString * tabLink in tabLinks)
-	{
-		[self createNewTab:([tabLink length] ? [NSURL URLWithString:tabLink] : nil) inBackground:YES];
-	}
 }
 
 /* openVienna
