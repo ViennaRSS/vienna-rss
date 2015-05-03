@@ -888,7 +888,6 @@ static RefreshManager * _refreshManager = nil;
 			if ([articleArray count] > 0u)
 			{
 				NSArray * guidHistory = [dbManager guidHistoryForFolderId:folderId];
-				[folder clearCache];
 				for (Article * article in articleArray)
 				{
 					if ([dbManager createArticle:folderId

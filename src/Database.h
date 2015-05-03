@@ -45,6 +45,7 @@
 @property(nonatomic, retain) FMDatabaseQueue * databaseQueue;
 
 // General database functions
+- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath;
 +(instancetype)sharedManager;
 -(void)syncLastUpdate;
 -(void)compactDatabase;

@@ -301,8 +301,6 @@ JSONDecoder * jsonDecoder;
 		if ([articleArray count] > 0)
 		{
 			NSArray * guidHistory = [dbManager guidHistoryForFolderId:[refreshedFolder itemId]];
-			[refreshedFolder clearCache];
-			//BOOL hasCache = [db initArticleArray:refreshedFolder];
 
 			for (Article * article in articleArray)
 			{
