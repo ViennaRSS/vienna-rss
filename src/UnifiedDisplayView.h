@@ -21,18 +21,18 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
 #import "ArticleBaseView.h"
-#import "PXListView.h"
+#import "TableViewExtensions.h"
 
 @class AppController;
 @class ArticleController;
 @class ArticleView;
 @class FoldersTree;
 
-@interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, PXListViewDelegate>
+@interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-    IBOutlet PXListView *articleList;
+    IBOutlet ExtendedTableView *articleList;
 	IBOutlet FoldersTree * foldersTree;
 
 	int currentSelectedRow;

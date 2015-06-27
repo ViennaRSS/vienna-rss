@@ -1,6 +1,5 @@
 //
 //  ArticleCellView.m
-//  PXListView
 //
 //  Adapted from PXListView by Alex Rozanski
 //  Modified by Barijaona Ramaholimihaso
@@ -9,8 +8,6 @@
 #import "ArticleCellView.h"
 #import "AppController.h"
 #import "BrowserView.h"
-#import "PXListView.h"
-#import "PXListView+Private.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
@@ -20,15 +17,16 @@
 
 @implementation ArticleCellView
 
+@synthesize listView = _listView;
 @synthesize articleView;
 @synthesize inProgress, folderId, articleRow;
 
 #pragma mark -
 #pragma mark Init/Dealloc
 
--(id)initWithReusableIdentifier: (NSString*)identifier inFrame:(NSRect)frameRect
+-(id)initWithFrame:(NSRect)frameRect
 {
-	if((self = [super initWithReusableIdentifier:identifier]))
+	if((self = [super initWithFrame:frameRect]))
 	{
 		controller = APPCONTROLLER;
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
@@ -95,12 +93,12 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-	NSUInteger row = [self row];
-	PXListView *listView = [self listView];
+	NSUInteger row = [self articleRow];
+	NSTableView *listView = [self listView];
 	NSUInteger currentSelectedRow = [listView selectedRow];
 	if (row != currentSelectedRow)
 		[listView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-	return ([[listView selectedRows] count] > 0 ? [self menu] : nil);
+	return ([[listView selectedRowIndexes] count] > 0 ? [self menu] : nil);
 }
 
 #pragma mark -
@@ -109,12 +107,13 @@
 -(void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-	if([self isSelected]) {
+	if([[[self listView] selectedRowIndexes] containsIndex:articleRow]) {
 		[[NSColor selectedControlColor] set];
 	}
 	else {
 		[[NSColor controlColor] set];
     }
+    [self layoutSubviews];
 
     //Draw the border and background
 	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRect:[self bounds]];
@@ -165,7 +164,6 @@
 							   NSHeight([self frame]) -YPOS_IN_CELL);
 	//set the new frame to the webview
 	[articleView setFrame:newWebViewRect];
-	[super layoutSubviews];
 }
 
 - (BOOL)acceptsFirstResponder

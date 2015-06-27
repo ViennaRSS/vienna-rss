@@ -119,6 +119,8 @@
 
 	// Set the target for copy, drag...
 	[articleList setDelegate:self];
+	[articleList setDataSource:self];
+    [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 /* dealloc
@@ -127,6 +129,7 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
 	[markReadTimer release];
 	markReadTimer=nil;
@@ -249,9 +252,6 @@
 		if ([obj isKindOfClass:[ArticleCellView class]]) {
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			[cell setInProgress:YES];
-			NSRect frame = sender.frame;
-			frame.size.height = 1;        // Set the height to a small one.
-			frame.size.width = 1;
 		}
 	}
 }
@@ -273,10 +273,7 @@
 			NSArray * allArticles = [articleController allArticles];
 			if (row < (NSInteger)[allArticles count])
 			{
-				NSRect frame = sender.frame;
-				frame.size.height = 1;        // Set the height to a small one.
-				frame.size.width = 1;
-				[articleList reloadRowAtIndex:row];
+				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 			}
 		}
 		else
@@ -301,7 +298,7 @@
 		if ([objView isKindOfClass:[ArticleCellView class]])
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
-			NSUInteger row= [cell row];
+			NSUInteger row= [articleList rowForView:objView];
 			// get the height of the rendered frame.
 			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
 			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
@@ -339,7 +336,7 @@
 						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
 					}
 					[cell setInProgress:NO];
-					[articleList reloadRowAtIndex:row];
+					[articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
 				}
 				else
 				{
@@ -349,16 +346,11 @@
 			}
 			else {	//non relevant cell
 				[cell setInProgress:NO];
-				NSRect frame = sender.frame;
-				frame.size.height = 1;        // Set the height to a small one.
-				frame.size.width = 1;
-				[articleList reloadRowAtIndex:row];
+				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 			}
 		} else {
-			// not an ArticleCellView anymore : reposition it, just in case...
-			NSRect frame = sender.frame;
-			frame.size.height = 1;        // Set the height to a small one.
-			frame.size.width = 1;
+			// not an ArticleCellView anymore
+			// ???
 		}
 	}
 }
@@ -366,16 +358,13 @@
 -(void)resubmitWebView:(WebView *)sender
 {
 	ArticleCellView * cell = (ArticleCellView *)[sender superview];
-	NSUInteger row = [cell row];
+	NSUInteger row = [articleList rowForView:cell];
 	if (cell != nil)
 	{
-		NSRect frame = sender.frame;
-		frame.size.height = 1;        // Set the height to a small one.
-		frame.size.width = 1;
 		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
 	}
 	else
-		[articleList reloadRowAtIndex:row];
+		[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 }
 
 /* updateAlternateMenuTitle
@@ -419,7 +408,7 @@
 {
 	if (singleSelection)
 	{
-		int nextRow =[[articleList selectedRows] firstIndex];
+		int nextRow =[[articleList selectedRowIndexes] firstIndex];
 		int articlesCount = [[articleController allArticles] count];
 
 		currentSelectedRow = -1;
@@ -474,7 +463,7 @@
  */
 -(WebView *)webView
 {
-	ArticleCellView * cellView = (ArticleCellView *)[[articleList visibleCells] objectAtIndex:0];
+	ArticleCellView * cellView = (ArticleCellView *)[articleList viewAtColumn:0 row:0 makeIfNecessary:YES];
 	return [cellView articleView];
 }
 
@@ -618,7 +607,7 @@
 	}
 	else
 	{
-		[articleList setSelectedRow:rowIndex];
+		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
 		if (currentSelectedRow == -1 || blockSelectionHandler)
 		{
 			currentSelectedRow = rowIndex;
@@ -785,8 +774,8 @@
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;
-	if ([articleList visibleRange].location < [allArticles count])
-		guid = [[[allArticles objectAtIndex:[articleList visibleRange].location] guid] retain];
+	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
+		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
@@ -796,23 +785,23 @@
 	[articleList reloadData];
 	if (guid != nil)
 	{
-		// To avoid upsetting the current displayed article after a refresh, we check to see if the first visible article is the same
-		// elsewhere we scroll to the previous article
+		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
+		// the same and the GUID of the article at the selection is the same.
 		allArticles = [articleController allArticles];
-		BOOL isUnchanged = [articleList visibleRange].location < [allArticles count]
-			&& [guid isEqualToString:[[allArticles objectAtIndex:[articleList visibleRange].location] guid]];
+		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (int)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
+		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
 			{
 				currentSelectedRow = -1;
-				[articleList deselectRows];
+				[articleList deselectAll:self];
 			}
 		}
 	}
 	else
 		currentSelectedRow = -1;
-	if ((currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
+	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
 		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;
@@ -853,10 +842,11 @@
 }
 
 /* handleRefreshArticle
- * Respond to the notification to refresh the current article pane.
+ * Respond to the notification to refresh the current article
  */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
+    [self refreshArticlePane];
 }
 
 /* refreshArticlePane
@@ -864,6 +854,8 @@
  */
 -(void)refreshArticlePane
 {
+    // ???
+    // [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:currentSelectedRow] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 }
 
 /* markCurrentRead
@@ -881,18 +873,18 @@
 }
 
 #pragma mark -
-#pragma mark PXListViewDelegate
+#pragma mark NSTableViewDelegate
 
-/* numberOfRowsInListView [datasource]
+/* numberOfRowsInTableView [datasource]
  * Datasource for the table view. Return the total number of rows we'll display which
  * is equivalent to the number of articles in the current folder.
  */
--(NSUInteger)numberOfRowsInListView:(PXListView*)aTableView
+-(NSInteger)numberOfRowsInTableView:(NSTableView*)aTableView
 {
 	return [[articleController allArticles] count];
 }
 
-- (CGFloat)listView:(PXListView*)aListView heightOfRow:(NSUInteger)row
+- (CGFloat)tableView:(NSTableView *)aListView heightOfRow:(NSInteger)row
 {
 	CGFloat height;
 	if (row >= [rowHeightArray count])
@@ -914,9 +906,9 @@
 /* cellForRow [datasource]
  * Called by the table view to obtain the object at the specified row.
  */
-- (PXListViewCell*)listView:(PXListView*)aListView cellForRow:(NSUInteger)row
+- (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-	if (![aListView isEqualTo:articleList])
+	if (![tableView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
 
@@ -925,17 +917,19 @@
 	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
 	NSString * feedURL = SafeString([folder feedURL]);
 
-	ArticleCellView *cellView = (ArticleCellView*)[aListView dequeueCellWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER];
+	ArticleCellView *cellView = (ArticleCellView*)[tableView makeViewWithIdentifier:LISTVIEW_CELL_IDENTIFIER owner:self];
 
 	if (cellView == nil)
 	{
-		cellView = [[[ArticleCellView alloc] initWithReusableIdentifier:LISTVIEW_CELL_IDENTIFIER
-						inFrame:NSMakeRect(XPOS_IN_CELL, YPOS_IN_CELL, aListView.bounds.size.width - XPOS_IN_CELL, DEFAULT_CELL_HEIGHT)] autorelease];
+		cellView = [[[ArticleCellView alloc] initWithFrame:NSMakeRect(
+		        XPOS_IN_CELL, YPOS_IN_CELL, tableView.bounds.size.width - XPOS_IN_CELL, DEFAULT_CELL_HEIGHT)] autorelease];
+		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
 	}
 
 	ArticleView * view = [cellView articleView];
 	[cellView setFolderId:articleFolderId];
 	[cellView setArticleRow:row];
+	[cellView setListView:articleList];
 	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 	[cellView setInProgress:YES];
 	[view setHTML:htmlText withBase:feedURL];
@@ -943,10 +937,10 @@
     return cellView;
 }
 
-/* listViewSelectionDidChange [delegate]
+/* tableViewSelectionDidChange [delegate]
  * Handle the selection changing in the table view unless blockSelectionHandler is set.
  */
-- (void)listViewSelectionDidChange:(NSNotification*)aNotification
+-(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
 	if (!blockSelectionHandler)
 	{
@@ -1036,10 +1030,10 @@
 }
 
 /* writeRowsWithIndexes
- * Called to initiate a drag from PXListView. Use the common copy selection code to copy to
+ * Use the common copy selection code to copy to
  * the pasteboard.
  */
--(BOOL)listView:(PXListView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
+-(BOOL)tableView:(NSTableView*)aListView writeRowsWithIndexes:(NSIndexSet*)rowIndexes toPasteboard:(NSPasteboard *)pboard;
 {
 	return [self copyIndexesSelection:rowIndexes toPasteboard:pboard];
 }
@@ -1049,7 +1043,7 @@
  */
 -(IBAction)copy:(id)sender
 {
-	[self copyIndexesSelection:[articleList selectedRows] toPasteboard:[NSPasteboard generalPasteboard]];
+	[self copyIndexesSelection:[articleList selectedRowIndexes] toPasteboard:[NSPasteboard generalPasteboard]];
 }
 
 /* markedArticleRange
@@ -1058,9 +1052,9 @@
 -(NSArray *)markedArticleRange
 {
 	NSMutableArray * articleArray = nil;
-	if ([[articleList selectedRows] count] > 0)
+	if ([[articleList selectedRowIndexes] count] > 0)
 	{
-		NSIndexSet * rowIndexes = [articleList selectedRows];
+		NSIndexSet * rowIndexes = [articleList selectedRowIndexes];
 		NSUInteger  rowIndex = [rowIndexes firstIndex];
 
 		articleArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];

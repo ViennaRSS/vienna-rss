@@ -1,6 +1,5 @@
 //
 //  ArticleCellView.h
-//  PXListView
 //
 //  Adapted from PXListView by Alex Rozanski
 //  Modified by Barijaona Ramaholimihaso
@@ -8,11 +7,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "PXListViewCell.h"
 #import "ArticleView.h"
 
 
-@interface ArticleCellView : PXListViewCell
+@interface ArticleCellView : NSTableCellView
 {
 	AppController * controller;
 	ArticleView *articleView;
@@ -20,13 +18,13 @@
 	BOOL inProgress;
 	int folderId;
 	NSUInteger articleRow;
+	NSTableView *_listView;
 }
 
 @property (assign,readonly)ArticleView *articleView;
 @property BOOL inProgress;
 @property int folderId;
 @property NSUInteger articleRow;
+@property (nonatomic, assign) NSTableView *listView;
 
-// Public functions
--(id)initWithReusableIdentifier: (NSString*)identifier inFrame:(NSRect)frameRect;
 @end
