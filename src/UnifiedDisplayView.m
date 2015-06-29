@@ -30,8 +30,9 @@
 #import "BrowserPane.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
-// 150 seems a reasonable value to avoid calculating too many frames before being able to update display
-#define DEFAULT_CELL_HEIGHT	150
+// 300 seems a reasonable value to avoid calculating too many frames before being able to update display
+// this is big enough to allow the user to start reading while the frame is being rendered
+#define DEFAULT_CELL_HEIGHT	300
 #define XPOS_IN_CELL	6
 #define YPOS_IN_CELL	2
 
@@ -241,10 +242,10 @@
 #pragma mark -
 #pragma mark WebFrameLoadDelegate
 
-/* didCommitLoadForFrame
- * Invoked when content of a frame starts arriving for a webview load
+/* didStartProvisionalLoadForFrame:
+ * Invoked when a frame load is in progress
  */
--(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)webFrame
+-(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)webFrame
 {
     if([webFrame isEqual:[sender mainFrame]])
     {
