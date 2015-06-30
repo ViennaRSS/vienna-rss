@@ -311,7 +311,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		
 	/* Check which is more likely to be what the user wanted: horizontal or vertical swipe?
 	 * Thankfully, that's all the checking we need to do as built-in swipe detection is very solid. */
-	if ( fabsf(deltaY) > fabsf(deltaX) )
+	if ( fabs(deltaY) > fabs(deltaX) )
 	{
 		if (deltaY != 0)
 		{
