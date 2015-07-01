@@ -1047,6 +1047,35 @@
 	[self copyIndexesSelection:[articleList selectedRowIndexes] toPasteboard:[NSPasteboard generalPasteboard]];
 }
 
+/* delete
+ * Handle the Delete action when the article list has focus.
+ */
+-(IBAction)delete:(id)sender
+{
+	[APPCONTROLLER deleteMessage:self];
+}
+
+/* validateMenuItem
+ * This is our override where we handle item validation for the
+ * commands that we own.
+ */
+-(BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if ([menuItem action] == @selector(copy:))
+	{
+		return ([articleList numberOfSelectedRows] > 0);
+	}
+	if ([menuItem action] == @selector(delete:))
+	{
+		return [self canDeleteMessageAtRow:currentSelectedRow];
+	}
+	if ([menuItem action] == @selector(selectAll:))
+	{
+		return YES;
+	}
+	return NO;
+}
+
 /* markedArticleRange
  * Retrieve an array of selected articles.
  */
