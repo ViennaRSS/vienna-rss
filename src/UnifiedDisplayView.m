@@ -1073,7 +1073,7 @@
 
 - (BOOL)acceptsFirstResponder
 {
-	return YES;
+	return NO;
 };
 
 /* keyDown
@@ -1133,6 +1133,27 @@
 {
 	[articleList scrollRowToVisible:0];
 	[[NSApp mainWindow] makeFirstResponder:self];
+}
+/* menuWillAppear
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+	int row = [articleList rowAtPoint:[articleList convertPoint:[theEvent locationInWindow] fromView:nil]];
+	if (row >= 0)
+	{
+		// Select the row under the cursor if it isn't already selected
+		if ([articleList numberOfSelectedRows] <= 1)
+		{
+			blockSelectionHandler = YES;
+			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+			currentSelectedRow = row;
+			blockSelectionHandler = NO;
+		}
+	}
+	[articleList scrollRowToVisible:row];
+	[[NSApp mainWindow] makeFirstResponder:[articleList rowViewAtRow:row makeIfNecessary:NO]];
 }
 
 @end

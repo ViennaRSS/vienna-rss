@@ -84,24 +84,6 @@
 }
 
 #pragma mark -
-#pragma mark Interaction
-
-/* menuForEvent
- * Called when the popup menu is opened on the table.
- * We ensure that the item under the cursor is selected.
- * Handle menu by moving the selection.
- */
--(NSMenu *)menuForEvent:(NSEvent *)theEvent
-{
-	NSUInteger row = [self articleRow];
-	NSTableView *listView = [self listView];
-	NSUInteger currentSelectedRow = [listView selectedRow];
-	if (row != currentSelectedRow)
-		[listView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-	return ([[listView selectedRowIndexes] count] > 0 ? [self menu] : nil);
-}
-
-#pragma mark -
 #pragma mark Drawing
 
 -(void)drawRect:(NSRect)dirtyRect
