@@ -66,24 +66,6 @@
 }
 
 #pragma mark -
-#pragma mark Reusing Cells
-
-- (void)prepareForReuse
-{
-	//calculate the frame
-	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-							   YPOS_IN_CELL,
-							   NSWidth([self frame]) - XPOS_IN_CELL,
-							   DEFAULT_CELL_HEIGHT);
-	//set the new frame to the webview
-	[articleView stopLoading:self];
-	[articleView setFrame:newWebViewRect];
-	[self setInProgress:YES];
-	[articleView clearHTML];
-	[super prepareForReuse];
-}
-
-#pragma mark -
 #pragma mark Drawing
 
 -(void)drawRect:(NSRect)dirtyRect
