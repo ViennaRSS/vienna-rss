@@ -1091,49 +1091,6 @@
 	[self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
 }
 
-- (void)moveDown:(id)sender
-{
-	[articleList moveDown:sender];
-}
-
-- (void)moveUp:(id)sender
-{
-	[articleList moveUp:sender];
-}
-
-- (void)scrollPageDown:(id)sender
-{
-	[articleList pageDown:sender];
-	[[NSApp mainWindow] makeFirstResponder:self];
-}
-
-- (void)scrollPageUp:(id)sender
-{
-	[articleList pageUp:sender];
-	[[NSApp mainWindow] makeFirstResponder:self];
-}
-
-- (void)pageDown:(id)sender
-{
-	[self scrollPageDown:sender];
-}
-
-- (void)pageUp:(id)sender
-{
-	[self scrollPageUp:sender];
-}
-
-- (void)scrollToEndOfDocument:(id)sender
-{
-	[articleList scrollRowToVisible:([[articleController allArticles] count]-1)];
-	[[NSApp mainWindow] makeFirstResponder:self];
-}
-
-- (void)scrollToBeginningOfDocument:(id)sender
-{
-	[articleList scrollRowToVisible:0];
-	[[NSApp mainWindow] makeFirstResponder:self];
-}
 /* menuWillAppear
  * Called when the popup menu is opened on the table. We ensure that the item under the
  * cursor is selected.
