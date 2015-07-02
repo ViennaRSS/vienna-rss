@@ -2754,7 +2754,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 					[self viewSourceHomePage:self];
 				return YES;
 			}
-			else if ([mainWindow firstResponder] == [mainArticleView mainView])
+			else
 			{
 				if (flags & NSAlternateKeyMask)
 					[self viewArticlePagesInAlternateBrowser:self];
