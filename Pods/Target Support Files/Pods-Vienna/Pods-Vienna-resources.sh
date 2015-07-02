@@ -48,13 +48,13 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Development" ]]; then
-  install_resource "MASPreferences/MASPreferencesWindow.xib"
+  install_resource 'MASPreferences/MASPreferencesWindow.xib'
 fi
 if [[ "$CONFIGURATION" == "Deployment" ]]; then
-  install_resource "MASPreferences/MASPreferencesWindow.xib"
+  install_resource 'MASPreferences/MASPreferencesWindow.xib'
 fi
 if [[ "$CONFIGURATION" == "StaticAnalyzer" ]]; then
-  install_resource "MASPreferences/MASPreferencesWindow.xib"
+  install_resource 'MASPreferences/MASPreferencesWindow.xib'
 fi
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

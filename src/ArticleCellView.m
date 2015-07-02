@@ -1,6 +1,5 @@
 //
 //  ArticleCellView.m
-//  PXListView
 //
 //  Adapted from PXListView by Alex Rozanski
 //  Modified by Barijaona Ramaholimihaso
@@ -9,26 +8,25 @@
 #import "ArticleCellView.h"
 #import "AppController.h"
 #import "BrowserView.h"
-#import "PXListView.h"
-#import "PXListView+Private.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
-#define DEFAULT_CELL_HEIGHT	150
+#define DEFAULT_CELL_HEIGHT	300
 #define XPOS_IN_CELL	6
 #define YPOS_IN_CELL	2
 
 @implementation ArticleCellView
 
+@synthesize listView = _listView;
 @synthesize articleView;
 @synthesize inProgress, folderId, articleRow;
 
 #pragma mark -
 #pragma mark Init/Dealloc
 
--(id)initWithReusableIdentifier: (NSString*)identifier inFrame:(NSRect)frameRect
+-(id)initWithFrame:(NSRect)frameRect
 {
-	if((self = [super initWithReusableIdentifier:identifier]))
+	if((self = [super initWithFrame:frameRect]))
 	{
 		controller = APPCONTROLLER;
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
@@ -68,53 +66,18 @@
 }
 
 #pragma mark -
-#pragma mark Reusing Cells
-
-- (void)prepareForReuse
-{
-	//calculate the frame
-	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-							   YPOS_IN_CELL,
-							   NSWidth([self frame]) - XPOS_IN_CELL,
-							   DEFAULT_CELL_HEIGHT);
-	//set the new frame to the webview
-	[articleView stopLoading:self];
-	[articleView setFrame:newWebViewRect];
-	[self setInProgress:YES];
-	[articleView clearHTML];
-	[super prepareForReuse];
-}
-
-#pragma mark -
-#pragma mark Interaction
-
-/* menuForEvent
- * Called when the popup menu is opened on the table.
- * We ensure that the item under the cursor is selected.
- * Handle menu by moving the selection.
- */
--(NSMenu *)menuForEvent:(NSEvent *)theEvent
-{
-	NSUInteger row = [self row];
-	PXListView *listView = [self listView];
-	NSUInteger currentSelectedRow = [listView selectedRow];
-	if (row != currentSelectedRow)
-		[listView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-	return ([[listView selectedRows] count] > 0 ? [self menu] : nil);
-}
-
-#pragma mark -
 #pragma mark Drawing
 
 -(void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-	if([self isSelected]) {
+	if([[[self listView] selectedRowIndexes] containsIndex:articleRow]) {
 		[[NSColor selectedControlColor] set];
 	}
 	else {
 		[[NSColor controlColor] set];
     }
+    [self layoutSubviews];
 
     //Draw the border and background
 	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRect:[self bounds]];
@@ -165,22 +128,12 @@
 							   NSHeight([self frame]) -YPOS_IN_CELL);
 	//set the new frame to the webview
 	[articleView setFrame:newWebViewRect];
-	[super layoutSubviews];
 }
 
 - (BOOL)acceptsFirstResponder
 {
 	return NO;
 };
-
-/* keyDown
- * Here is where we handle special keys when this view
- * has the focus so we can do custom things.
- */
--(void)keyDown:(NSEvent *)theEvent
-{
-	[[[self listView] superview] keyDown:theEvent];
-}
 
 /* canMakeTextSmaller
  */

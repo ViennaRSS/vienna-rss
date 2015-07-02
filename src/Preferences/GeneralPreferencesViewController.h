@@ -38,7 +38,6 @@
     IBOutlet NSButtonCell * markReadAfterDelay;
     IBOutlet NSButton * markUpdatedAsNew;
     NSMutableDictionary * appToPathMap;
-    ICInstance internetConfigHandler;
 }
 
 // Action functions
