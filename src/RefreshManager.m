@@ -97,10 +97,10 @@ static RefreshManager * _refreshManager = nil;
 }
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
 	if (hasStarted)
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 		hasStarted = NO;
 	}
 	LLog(@"Queue empty!!!");
@@ -113,6 +113,12 @@ static RefreshManager * _refreshManager = nil;
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
+	if (!hasStarted)
+	{
+			hasStarted = YES;
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+	}
+
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[APPCONTROLLER setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
 	LLog(@"Added queue: %d", [networkQueue requestsCount]);
@@ -468,12 +474,6 @@ static RefreshManager * _refreshManager = nil;
  */
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force
 {	
-	if (!hasStarted)
-	{
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
-			hasStarted = YES;
-	}
-
 	ASIHTTPRequest *myRequest;
 	
 	if (IsRSSFolder(folder)) {
@@ -1083,8 +1083,7 @@ static RefreshManager * _refreshManager = nil;
 
 -(BOOL)isConnecting
 {
-	LOG_NS(@"Connected : %@", [networkQueue requestsCount] > 0 ? @"yes" : @"no" );
-	return [networkQueue requestsCount] > 0;
+	return hasStarted;
 }
 
 
