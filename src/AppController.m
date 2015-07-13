@@ -1991,18 +1991,16 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
  */
 -(void)updateNewArticlesNotification
 {
-	switch ([[Preferences standardPreferences] newArticlesNotification])
+	if (([[Preferences standardPreferences] newArticlesNotification]
+		& MA_NewArticlesNotification_Badge) == 0)
 	{
-		case MA_NewArticlesNotification_Badge:
-			lastCountOfUnread = -1;	// Force an update
-			[self showUnreadCountOnApplicationIconAndWindowTitle];
-			break;
-			
-		case MA_NewArticlesNotification_None:
-		case MA_NewArticlesNotification_Bounce:
-			// Remove the badge if there was one.
-			[[NSApp dockTile] setBadgeLabel:nil];
-			break;
+		// Remove the badge if there was one.
+		[[NSApp dockTile] setBadgeLabel:nil];
+	}
+	else
+	{
+		lastCountOfUnread = -1;	// Force an update
+		[self showUnreadCountOnApplicationIconAndWindowTitle];
 	}
 }
 
@@ -2031,8 +2029,9 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 	[mainWindow setTitle:[NSString stringWithFormat:@"%@ (%i %@)", [self appName], currentCountOfUnread, NSLocalizedString(@"Unread", nil)]];
 	
 	// Exit now if we're not showing the unread count on the application icon
-	if ([[Preferences standardPreferences] newArticlesNotification] != MA_NewArticlesNotification_Badge)
-		return;
+	if (([[Preferences standardPreferences] newArticlesNotification]
+		& MA_NewArticlesNotification_Badge) ==0)
+			return;
 	
 	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
 	[[NSApp dockTile] setBadgeLabel:countdown];
@@ -2497,7 +2496,7 @@ static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, 
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		int newUnread = [[RefreshManager sharedManager] countOfNewArticles] + [[GoogleReader sharedManager] countOfNewArticles];
-		if (newUnread > 0 && [prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce)
+		if (newUnread > 0 && (([prefs newArticlesNotification] & MA_NewArticlesNotification_Bounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
 		
 		// Growl notification

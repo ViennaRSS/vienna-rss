@@ -95,7 +95,7 @@ extern NSString * MA_PBoardType_url;
 extern NSString * MA_PBoardType_urln;
 
 // New articles notification method
-#define MA_NewArticlesNotification_None		0
+// (managed as an array of binary flags)
 #define MA_NewArticlesNotification_Badge	1
 #define MA_NewArticlesNotification_Bounce	2
 
