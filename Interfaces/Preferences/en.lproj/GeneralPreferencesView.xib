@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
@@ -16,9 +16,8 @@
                 <outlet property="markReadAfterDelay" destination="JDV-ek-xja" id="gj7-ou-SaS"/>
                 <outlet property="markReadAfterNext" destination="2oy-1i-QQP" id="VAp-Mc-iCX"/>
                 <outlet property="markUpdatedAsNew" destination="cWz-UE-9Jd" id="og1-bg-3Er"/>
-                <outlet property="newArticlesNotificationBadgeButton" destination="vPK-r4-Kwp" id="Gxh-iX-E1H"/>
-                <outlet property="newArticlesNotificationBounceButton" destination="4kj-ax-3ec" id="Kd4-X5-L0N"/>
-                <outlet property="newArticlesNotificationNothingButton" destination="ayi-vd-Hro" id="Ng1-UX-hlU"/>
+                <outlet property="newArticlesNotificationBadgeButton" destination="7e3-Hu-RB5" id="gWW-08-Cou"/>
+                <outlet property="newArticlesNotificationBounceButton" destination="gi4-ao-0yS" id="oOe-w5-Bpk"/>
                 <outlet property="openLinksInBackground" destination="IRs-ch-SmE" id="y6W-LQ-RS2"/>
                 <outlet property="openLinksInExternalBrowser" destination="nIa-fG-2el" id="rRD-ze-ERB"/>
                 <outlet property="sendSystemSpecs" destination="Yp8-ZH-Tpp" id="iPd-5G-2aH"/>
@@ -205,49 +204,11 @@
                         </menu>
                     </popUpButtonCell>
                 </popUpButton>
-                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="obL-Jh-Dna">
-                    <rect key="frame" x="32" y="87" width="462" height="58"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    <size key="cellSize" width="462" height="18"/>
-                    <size key="intercellSpacing" width="4" height="2"/>
-                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="QD9-FF-HxG">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <cells>
-                        <column>
-                            <buttonCell type="radio" title="Do nothing" imagePosition="left" alignment="left" state="on" inset="2" id="ayi-vd-Hro">
-                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                                <connections>
-                                    <action selector="changeNewArticlesNotification:" target="-2" id="Z97-Ta-jjG"/>
-                                </connections>
-                            </buttonCell>
-                            <buttonCell type="radio" title="Show the unread count on the application icon" imagePosition="left" alignment="left" tag="1" inset="2" id="vPK-r4-Kwp">
-                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                                <connections>
-                                    <action selector="changeNewArticlesNotification:" target="-2" id="Nv0-1e-gdz"/>
-                                </connections>
-                            </buttonCell>
-                            <buttonCell type="radio" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="4kj-ax-3ec">
-                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                                <connections>
-                                    <action selector="changeNewArticlesNotification:" target="-2" id="Apw-79-2be"/>
-                                </connections>
-                            </buttonCell>
-                        </column>
-                    </cells>
-                </matrix>
                 <textField verticalHuggingPriority="750" id="2OY-6J-jph">
                     <rect key="frame" x="19" y="64" width="410" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="sCl-hz-PFF">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Mark current article read:" id="sCl-hz-PFF">
                         <font key="font" metaFont="system"/>
-                        <string key="title">Mark current article read:
-</string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -312,13 +273,33 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" id="L7n-i6-BJc">
-                    <rect key="frame" x="19" y="153" width="410" height="17"/>
+                <button id="Oan-Su-2SV">
+                    <rect key="frame" x="31" y="107" width="327" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="BbI-0A-zEG">
+                    <buttonCell key="cell" type="check" title="Show the unread count on the application icon" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7e3-Hu-RB5">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
-                        <string key="title">When new unread articles are retrieved:
-</string>
+                        <connections>
+                            <action selector="changeNewArticlesNotificationBadge:" target="-2" id="ZQv-Gf-84P"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <button id="HnQ-mh-GpR">
+                    <rect key="frame" x="31" y="87" width="209" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gi4-ao-0yS">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeNewArticlesNotificationBounce:" target="-2" id="aJw-1z-ttH"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <textField verticalHuggingPriority="750" id="L7n-i6-BJc">
+                    <rect key="frame" x="18" y="131" width="410" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="When new unread articles are retrieved:" id="BbI-0A-zEG">
+                        <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
