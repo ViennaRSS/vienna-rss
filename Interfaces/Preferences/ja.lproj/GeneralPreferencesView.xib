@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
             <connections>
+                <outlet property="alwaysAcceptBetas" destination="xsy-6w-Hzk" id="PAE-PI-9V6"/>
                 <outlet property="checkForUpdates" destination="L14-7c-vWr" id="Rnu-af-rSy"/>
                 <outlet property="checkFrequency" destination="OUV-X4-SZX" id="giT-Ny-Hl9"/>
                 <outlet property="checkOnStartUp" destination="RGz-v2-Eij" id="R9Q-Ig-f1U"/>
@@ -306,6 +307,17 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button id="xsy-6w-Hzk">
+                    <rect key="frame" x="31" y="154" width="237" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="9Ku-d9-KDn">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="changeAlwaysAcceptBetas:" target="-2" id="nNu-Xb-AV6"/>
+                    </connections>
+                </button>
             </subviews>
         </view>
     </objects>
