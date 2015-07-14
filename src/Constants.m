@@ -76,6 +76,7 @@ NSString * MAPref_ConcurrentDownloads = @"ConcurrentDownloads";
 NSString * MAPref_SyncServer = @"SyncServer";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SendSystemProfileInfo = @"SUSendProfileInfo";
+NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;
 const NSInteger MA_Default_RefreshThreads = 20;

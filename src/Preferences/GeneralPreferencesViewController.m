@@ -99,6 +99,9 @@
     // Set sending system specs when checking for updates
     [sendSystemSpecs setState:[prefs sendSystemSpecs] ? NSOnState : NSOffState];
     
+    // Set search for latest Beta versions when checking for updates
+    [alwaysAcceptBetas setState:[prefs alwaysAcceptBetas] ? NSOnState : NSOffState];
+
     // Set check for new articles when starting
     [checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
     
@@ -443,6 +446,14 @@
 -(IBAction)changeSendSystemSpecs:(id)sender
 {
     [[Preferences standardPreferences] setSendSystemSpecs:[sender state] == NSOnState];
+}
+
+/* changeAlwaysAcceptBetas
+ * Set whether Vienna will always check the cutting edge Beta when checking for updates.
+ */
+-(IBAction)changeAlwaysAcceptBetas:(id)sender
+{
+    [[Preferences standardPreferences] setAlwaysAcceptBetas:[sender state] == NSOnState];
 }
 
 /* dealloc

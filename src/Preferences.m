@@ -199,6 +199,7 @@ static Preferences * _standardPreferences = nil;
 		//Sparkle autoupdate
 		checkForNewOnStartup = [[SUUpdater sharedUpdater] automaticallyChecksForUpdates];
         sendSystemSpecs = [[SUUpdater sharedUpdater] sendsSystemProfile];
+        alwaysAcceptBetas = [self boolForKey:MAPref_AlwaysAcceptBetas];
 
 		if (shouldSaveFeedSource)
 		{
@@ -315,6 +316,7 @@ static Preferences * _standardPreferences = nil;
     [defaultValues setObject:[NSNumber numberWithInteger:MA_Default_ConcurrentDownloads] forKey:MAPref_ConcurrentDownloads];
     [defaultValues setObject:boolNo forKey:MAPref_SyncGoogleReader];
     [defaultValues setObject:boolNo forKey:MAPref_GoogleNewSubscription];
+    [defaultValues setObject:boolNo forKey:MAPref_AlwaysAcceptBetas];
 	
 	return defaultValues;
 }
@@ -745,6 +747,36 @@ static Preferences * _standardPreferences = nil;
 	{
 		checkForNewOnStartup = flag;
 		[[SUUpdater sharedUpdater] setAutomaticallyChecksForUpdates:flag];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+	}
+}
+
+/* alwaysAcceptBetas
+ * Returns whether when checking for new versions, we should always search for Betas versions
+ */
+-(BOOL)alwaysAcceptBetas
+{
+	return alwaysAcceptBetas;
+}
+
+/* setAlwaysAcceptBetas
+ * Changes whether or not Vienna always checks for cutting edge Beta binaries.
+ */
+-(void)setAlwaysAcceptBetas:(BOOL)flag
+{
+	if (flag != alwaysAcceptBetas)
+	{
+		alwaysAcceptBetas = flag;
+		[self setBool:flag forKey:MAPref_AlwaysAcceptBetas];
+		if (flag)
+		{
+			[[SUUpdater sharedUpdater] setFeedURL:[NSURL URLWithString:@"http://vienna-rss.org/spstats/changelog_beta.php"]];
+		}
+		else
+		{
+			// restore the default as defined in Info.plist
+			[[SUUpdater sharedUpdater] setFeedURL:nil];
+		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }

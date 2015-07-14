@@ -36,6 +36,7 @@
 	int foldersTreeSortMethod;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
+	BOOL alwaysAcceptBetas;
 	BOOL enableMinimumFontSize;
 	BOOL openLinksInVienna;
 	BOOL openLinksInBackground;
@@ -144,6 +145,10 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // Check for new versions of Vienna on startup
 -(BOOL)checkForNewOnStartup;
 -(void)setCheckForNewOnStartup:(BOOL)flag;
+
+// When checking a newer version, always search for Betas versions
+-(BOOL)alwaysAcceptBetas;
+-(void)setAlwaysAcceptBetas:(BOOL)flag;
 
 // Opening URL links in Vienna
 -(BOOL)openLinksInVienna;
