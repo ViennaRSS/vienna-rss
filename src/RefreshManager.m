@@ -1078,7 +1078,7 @@ static RefreshManager * _refreshManager = nil;
 
 -(BOOL)isConnecting
 {
-	return hasStarted;
+	return [networkQueue requestsCount] > 0;
 }
 
 
