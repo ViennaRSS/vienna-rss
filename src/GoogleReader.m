@@ -47,6 +47,8 @@ NSString * APIBaseURL;
 BOOL hostSupportsLongId;
 BOOL hostRequiresSParameter;
 BOOL hostRequiresLastPathOnly;
+BOOL hostRequiresInoreaderAdditionalHeaders;
+NSDictionary * inoreaderAdditionalHeaders;
 
 // Singleton
 static GoogleReader * _googleReader = nil;
@@ -98,6 +100,7 @@ JSONDecoder * jsonDecoder;
 		username=nil;
 		password=nil;
 		APIBaseURL=nil;
+		inoreaderAdditionalHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:@"1000001359", @"AppID", @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn", @"AppKey", nil];
 	}
     
     return self;
@@ -137,6 +140,12 @@ JSONDecoder * jsonDecoder;
 {
 	if (clientAuthToken != nil)
 		[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
+	if (hostRequiresInoreaderAdditionalHeaders)
+    {
+        NSMutableDictionary * theHeaders = [[[request requestHeaders] mutableCopy] autorelease];
+        [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
+        [request setRequestHeaders:theHeaders];
+    }
 	[request setUseCookiePersistence:NO];
 	[request setTimeOutSeconds:180];
 	[request setDelegate:self];
@@ -570,11 +579,16 @@ JSONDecoder * jsonDecoder;
 	hostSupportsLongId=NO;
 	hostRequiresSParameter=NO;
 	hostRequiresLastPathOnly=NO;
+	hostRequiresInoreaderAdditionalHeaders=NO;
 	if([openReaderHost isEqualToString:@"theoldreader.com"]){
 		hostSupportsLongId=YES;
 		hostRequiresSParameter=YES;
 		hostRequiresLastPathOnly=YES;
 	}
+	if([openReaderHost rangeOfString:@"inoreader.com"].length !=0){
+		hostRequiresInoreaderAdditionalHeaders=YES;
+	}
+
 
 	[password release];
 	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
@@ -878,6 +892,8 @@ JSONDecoder * jsonDecoder;
 	tokenTimer=nil;
 	[authTimer release];
 	authTimer=nil;
+	[inoreaderAdditionalHeaders release];
+	inoreaderAdditionalHeaders=nil;
 	[super dealloc];
 }
 
