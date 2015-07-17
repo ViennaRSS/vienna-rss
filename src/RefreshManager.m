@@ -52,6 +52,7 @@ static RefreshManager * _refreshManager = nil;
 -(void)folderIconRefreshCompleted:(ASIHTTPRequest *)connector;
 -(NSString *)getRedirectURL:(NSData *)data;
 - (void)syncFinishedForFolder:(Folder *)folder; 
+@property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
 @end
 
 @implementation RefreshManager
@@ -624,13 +625,53 @@ static RefreshManager * _refreshManager = nil;
 		Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
 		ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
 
-        [[Database sharedManager] setFeedURL:newURL.absoluteString
-                                   forFolder:folder.itemId];
-        
-		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
+        if ([self canTrust301Redirects:connector])
+        {
+			[[Database sharedManager] setFeedURL:newURL.absoluteString
+									   forFolder:folder.itemId];
+		
+			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
+		}
+		else
+			[connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety reasons", nil)];
 	}
 
 	[connector redirectToURL:newURL];
+}
+
+-(BOOL)canTrust301Redirects:(ASIHTTPRequest *)connector
+{
+    if (unsafe301RedirectionTimer == nil || ![unsafe301RedirectionTimer isValid])
+    {
+    	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", [[connector originalURL] scheme]]];
+    	ASIHTTPRequest * testRequest = [ASIHTTPRequest requestWithURL:testURL];
+		[testRequest setUseCookiePersistence:NO];
+		[testRequest setTimeOutSeconds:180];
+		[testRequest startSynchronous];
+
+		if ([testRequest responseStatusCode] == 301 || [testRequest error])
+		{
+    		// there is no valid reason for www.example.com to be permanently redirected
+    		// (cf RFC 6761 http://www.iana.org/go/rfc6761)
+    		// so we probably have a misconfigured router / proxy
+    		// and we will not consider 301 redirections as permanent for 24 hours
+    		unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
+    		return NO;
+    	}
+    	else
+    	{
+    		return YES;
+    	}
+    }
+    else
+    	// we detected a risky situation less than 24 hours ago
+    	// so play it safe
+    	return NO;
+}
+
+- (void)resetUnsafe301Timer:(NSTimer *)timer
+{
+	[timer invalidate];
 }
 
 /* folderRefreshCompleted
