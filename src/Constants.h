@@ -77,6 +77,7 @@ extern NSString * MAPref_ConcurrentDownloads;
 extern NSString * MAPref_SyncServer;
 extern NSString * MAPref_SyncingUser;
 extern NSString * MAPref_SendSystemProfileInfo;
+extern NSString * MAPref_AlwaysAcceptBetas;
 
 extern NSInteger MA_Default_BackTrackQueueSize;
 extern NSInteger MA_Default_RefreshThreads;
@@ -95,7 +96,7 @@ extern NSString * MA_PBoardType_url;
 extern NSString * MA_PBoardType_urln;
 
 // New articles notification method
-#define MA_NewArticlesNotification_None		0
+// (managed as an array of binary flags)
 #define MA_NewArticlesNotification_Badge	1
 #define MA_NewArticlesNotification_Bounce	2
 

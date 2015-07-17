@@ -99,6 +99,9 @@
     // Set sending system specs when checking for updates
     [sendSystemSpecs setState:[prefs sendSystemSpecs] ? NSOnState : NSOffState];
     
+    // Set search for latest Beta versions when checking for updates
+    [alwaysAcceptBetas setState:[prefs alwaysAcceptBetas] ? NSOnState : NSOffState];
+
     // Set check for new articles when starting
     [checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
     
@@ -130,10 +133,9 @@
     [markReadAfterNext setState:[prefs markReadInterval] == 0 ? NSOnState : NSOffState];
     [markReadAfterDelay setState:[prefs markReadInterval] != 0 ? NSOnState : NSOffState];
     
-    // Show new articles notification option
-    [newArticlesNotificationNothingButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_None) ? NSOnState : NSOffState];
-    [newArticlesNotificationBadgeButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Badge) ? NSOnState : NSOffState];
-    [newArticlesNotificationBounceButton setState:([prefs newArticlesNotification] == MA_NewArticlesNotification_Bounce) ? NSOnState : NSOffState];
+    // Show new articles notification options
+    [newArticlesNotificationBadgeButton setState:(([prefs newArticlesNotification] & MA_NewArticlesNotification_Badge) !=0) ? NSOnState : NSOffState];
+    [newArticlesNotificationBounceButton setState:(([prefs newArticlesNotification] & MA_NewArticlesNotification_Bounce) !=0) ? NSOnState : NSOffState];
     
     // Set whether updated articles are considered as new
     [markUpdatedAsNew setState:[prefs markUpdatedAsNew] ? NSOnState : NSOffState];
@@ -394,26 +396,37 @@
     [[Preferences standardPreferences] setRefreshFrequency:newFrequency];
 }
 
-/* changeNewArticlesNotification
- * Change the method by which new articles are announced.
+/* changeNewArticlesNotificationBadge
+ * Change if we display badge when new articles are announced.
  */
--(IBAction)changeNewArticlesNotification:(id)sender
+-(IBAction)changeNewArticlesNotificationBadge:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    if ([sender selectedCell] == newArticlesNotificationNothingButton)
+    int currentNotificationValue = [prefs newArticlesNotification];
+    if ([sender state] == NSOnState)
     {
-        [prefs setNewArticlesNotification:MA_NewArticlesNotification_None];
-        return;
+        [prefs setNewArticlesNotification:currentNotificationValue | MA_NewArticlesNotification_Badge];
     }
-    if ([sender selectedCell] == newArticlesNotificationBadgeButton)
+    else
     {
-        [prefs setNewArticlesNotification:MA_NewArticlesNotification_Badge];
-        return;
+        [prefs setNewArticlesNotification:currentNotificationValue & ~MA_NewArticlesNotification_Badge];
     }
-    if ([sender selectedCell] == newArticlesNotificationBounceButton)
+}
+
+/* changeNewArticlesNotificationBounce
+ * Change if we require user attention (by bouncing the Dock icon) when new articles are announced.
+ */
+-(IBAction)changeNewArticlesNotificationBounce:(id)sender
+{
+    Preferences * prefs = [Preferences standardPreferences];
+    int currentNotificationValue = [prefs newArticlesNotification];
+    if ([sender state] == NSOnState)
     {
-        [prefs setNewArticlesNotification:MA_NewArticlesNotification_Bounce];
-        return;
+        [prefs setNewArticlesNotification:currentNotificationValue | MA_NewArticlesNotification_Bounce];
+    }
+    else
+    {
+        [prefs setNewArticlesNotification:currentNotificationValue & ~MA_NewArticlesNotification_Bounce];
     }
 }
 
@@ -433,6 +446,14 @@
 -(IBAction)changeSendSystemSpecs:(id)sender
 {
     [[Preferences standardPreferences] setSendSystemSpecs:[sender state] == NSOnState];
+}
+
+/* changeAlwaysAcceptBetas
+ * Set whether Vienna will always check the cutting edge Beta when checking for updates.
+ */
+-(IBAction)changeAlwaysAcceptBetas:(id)sender
+{
+    [[Preferences standardPreferences] setAlwaysAcceptBetas:[sender state] == NSOnState];
 }
 
 /* dealloc
