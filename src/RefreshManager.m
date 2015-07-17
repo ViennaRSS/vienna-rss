@@ -620,14 +620,17 @@ static RefreshManager * _refreshManager = nil;
 
 	if (responseStatusCode == 301)
 	{
-		// We got a permanent redirect from the feed so change the feed URL to the new location.
-		Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
-		ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
+        if ([[Preferences standardPreferences] ignoreHTTP301Redirect] == false)
+        {
+            // We got a permanent redirect from the feed so update the feed URL
+            Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
+            ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
 
-        [[Database sharedManager] setFeedURL:newURL.absoluteString
-                                   forFolder:folder.itemId];
-        
-		[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
+            [[Database sharedManager] setFeedURL:newURL.absoluteString
+                                       forFolder:folder.itemId];
+            
+            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
+        }
 	}
 
 	[connector redirectToURL:newURL];
