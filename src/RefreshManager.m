@@ -53,6 +53,7 @@ static RefreshManager * _refreshManager = nil;
 -(NSString *)getRedirectURL:(NSData *)data;
 - (void)syncFinishedForFolder:(Folder *)folder; 
 @property (nonatomic, retain) NSTimer * unsafe301RedirectionTimer;
+@property (atomic, copy) NSString *riskyIPAddress;
 @end
 
 @implementation RefreshManager
@@ -86,6 +87,8 @@ static RefreshManager * _refreshManager = nil;
 		[nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
+		// be notified on system wake up after sleep
+		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(handleDidWake:) name:@"NSWorkspaceDidWakeNotification" object:nil];
 		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
 		hasStarted = NO;
 	}
@@ -163,6 +166,19 @@ static RefreshManager * _refreshManager = nil;
 	}
 }
 
+
+-(void)handleDidWake:(NSNotification *)nc
+{
+	NSString * currentAddress = [[NSHost currentHost] address] ;
+	if (![currentAddress isEqualToString:riskyIPAddress])
+	{
+		// we might have moved to a new network
+		// so, at the next occurence we should test if we can safely handle
+		// 301 redirects
+		[unsafe301RedirectionTimer invalidate];
+		unsafe301RedirectionTimer=nil;
+	}
+}
 
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray
 {
@@ -625,7 +641,7 @@ static RefreshManager * _refreshManager = nil;
 		Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
 		ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
 
-        if ([self canTrust301Redirects:connector])
+        if ([[newURL host] isEqualToString:[[connector originalURL] host]] || [self canTrust301Redirects:connector])
         {
 			[[Database sharedManager] setFeedURL:newURL.absoluteString
 									   forFolder:folder.itemId];
@@ -656,6 +672,7 @@ static RefreshManager * _refreshManager = nil;
     		// so we probably have a misconfigured router / proxy
     		// and we will not consider 301 redirections as permanent for 24 hours
     		unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
+    		riskyIPAddress = [[NSHost currentHost] address];
     		return NO;
     	}
     	else
@@ -672,6 +689,7 @@ static RefreshManager * _refreshManager = nil;
 - (void)resetUnsafe301Timer:(NSTimer *)timer
 {
 	[timer invalidate];
+	timer=nil;
 }
 
 /* folderRefreshCompleted
@@ -1135,6 +1153,10 @@ static RefreshManager * _refreshManager = nil;
 	authQueue=nil;
 	[networkQueue release];
 	networkQueue=nil;
+	[unsafe301RedirectionTimer release];
+	unsafe301RedirectionTimer=nil;
+	[riskyIPAddress release];
+	riskyIPAddress=nil;
 	dispatch_release(_queue);
 	[super dealloc];
 }

@@ -36,6 +36,7 @@
 	ASINetworkQueue *networkQueue;
 	dispatch_queue_t _queue;
 	NSTimer * unsafe301RedirectionTimer;
+	NSString * riskyIPAddress;
 }
 
 +(RefreshManager *)sharedManager;
