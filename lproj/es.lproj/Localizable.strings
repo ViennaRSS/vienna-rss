@@ -448,3 +448,6 @@
 "Got HTTP status 304 - No news from last check" = "Recibido estado HTTP 304 - No hay noticias desde la última búsqueda";
 "Error retrieving RSS Icon:" = "Error recuperando icono de la suscripción:";
 "RSS Icon not found!" = "¡Icono de la suscripción no encontrado!";
+
+/*Added in 3.0.5 */
+"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
