@@ -655,7 +655,7 @@ static RefreshManager * _refreshManager = nil;
 			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
 		}
 		else
-			[connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety reasons", nil)];
+			[connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
 	}
 
 	[connector redirectToURL:newURL];

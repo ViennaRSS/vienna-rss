@@ -448,3 +448,5 @@
 "Error retrieving RSS Icon:" = "Error retrieving RSS Icon:";
 "RSS Icon not found!" = "RSS Icon not found!";
 
+/*Added in 3.0.5 */
+"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
