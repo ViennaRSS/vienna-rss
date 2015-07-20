@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
             <connections>
-                <outlet property="alwaysAcceptBetas" destination="ifZ-HN-Qrm" id="gjD-p6-bwQ"/>
+                <outlet property="alwaysAcceptBetas" destination="dX2-Cd-tkI" id="EBz-Nb-u35"/>
                 <outlet property="checkForUpdates" destination="L14-7c-vWr" id="Rnu-af-rSy"/>
                 <outlet property="checkFrequency" destination="OUV-X4-SZX" id="giT-Ny-Hl9"/>
                 <outlet property="checkOnStartUp" destination="RGz-v2-Eij" id="R9Q-Ig-f1U"/>
@@ -17,7 +16,8 @@
                 <outlet property="markReadAfterDelay" destination="JDV-ek-xja" id="gj7-ou-SaS"/>
                 <outlet property="markReadAfterNext" destination="2oy-1i-QQP" id="VAp-Mc-iCX"/>
                 <outlet property="markUpdatedAsNew" destination="cWz-UE-9Jd" id="og1-bg-3Er"/>
-                <outlet property="newArticlesNotificationBadgeButton" destination="pkn-Jh-9Pd" id="eoV-Co-uys"/>
+                <outlet property="newArticlesNotificationBadgeButton" destination="7e3-Hu-RB5" id="gWW-08-Cou"/>
+                <outlet property="newArticlesNotificationBounceButton" destination="gi4-ao-0yS" id="oOe-w5-Bpk"/>
                 <outlet property="openLinksInBackground" destination="IRs-ch-SmE" id="y6W-LQ-RS2"/>
                 <outlet property="openLinksInExternalBrowser" destination="nIa-fG-2el" id="rRD-ze-ERB"/>
                 <outlet property="sendSystemSpecs" destination="Yp8-ZH-Tpp" id="iPd-5G-2aH"/>
@@ -207,8 +207,10 @@
                 <textField verticalHuggingPriority="750" id="2OY-6J-jph">
                     <rect key="frame" x="19" y="64" width="410" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="标记当前文章为已读于:" id="sCl-hz-PFF">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="sCl-hz-PFF">
                         <font key="font" metaFont="system"/>
+                        <string key="title">标记当前文章为已读于:
+</string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -273,25 +275,25 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button id="aVB-5j-T4q">
-                    <rect key="frame" x="31" y="107" width="213" height="18"/>
+                <button id="Oan-Su-2SV">
+                    <rect key="frame" x="31" y="107" width="465" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="在程序图标中显示未读文章数目" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="dRb-ub-iR3">
+                    <buttonCell key="cell" type="check" title="在程序图标中显示未读文章数目" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7e3-Hu-RB5">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
-                            <action selector="changeNewArticlesNotificationBadge:" target="-2" id="fd2-to-Z4O"/>
+                            <action selector="changeNewArticlesNotificationBadge:" target="-2" id="ZQv-Gf-84P"/>
                         </connections>
                     </buttonCell>
                 </button>
-                <button id="S4T-GK-XmO">
-                    <rect key="frame" x="30" y="87" width="111" height="18"/>
+                <button id="HnQ-mh-GpR">
+                    <rect key="frame" x="31" y="87" width="465" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="弹跳程序图标" bezelStyle="regularSquare" imagePosition="left" inset="2" id="pkn-Jh-9Pd">
+                    <buttonCell key="cell" type="check" title="弹跳程序图标" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gi4-ao-0yS">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                         <connections>
-                            <action selector="changeNewArticlesNotificationBadge:" target="-2" id="JZz-qr-Ld5"/>
+                            <action selector="changeNewArticlesNotificationBounce:" target="-2" id="aJw-1z-ttH"/>
                         </connections>
                     </buttonCell>
                 </button>
@@ -306,15 +308,15 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button id="ifZ-HN-Qrm">
-                    <rect key="frame" x="30" y="154" width="237" height="18"/>
+                <button id="dX2-Cd-tkI">
+                    <rect key="frame" x="31" y="154" width="464" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ofV-Kp-vQX">
+                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OID-qF-Pp0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="changeAlwaysAcceptBetas:" target="-2" id="Qmv-De-sbq"/>
+                        <action selector="changeAlwaysAcceptBetas:" target="-2" id="Vh8-mO-mUU"/>
                     </connections>
                 </button>
             </subviews>
