@@ -41,14 +41,11 @@
 /* Class = "NSMenuItem"; title = "Other..."; ObjectID = "FiK-E7-RnG"; */
 "FiK-E7-RnG.title" = "Andet...";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "vPK-r4-Kwp"; */
-"vPK-r4-Kwp.title" = "Vis antallet af ulæste artikler på programikonet";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Vis antallet af ulæste artikler på programikonet";
 
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "4kj-ax-3ec"; */
-"4kj-ax-3ec.title" = "Hop programikonet";
-
-/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "ayi-vd-Hro"; */
-"ayi-vd-Hro.title" = "Gør intet";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Hop programikonet";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
 "2oy-1i-QQP.title" = "Efter \"Næste ulæste\" kommando";
@@ -77,6 +74,10 @@
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "pXX-MI-tJX"; */
 "pXX-MI-tJX.title" = "Tjek for nye artikler ved opstart";
 
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
+
+
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "pjg-Ze-H3l"; */
 "pjg-Ze-H3l.title" = "Åben nye henvisninger i baggrunden";
 
@@ -97,9 +98,6 @@
 
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Show in menu bar";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "QD9-FF-HxG"; */
-"QD9-FF-HxG.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
 "NAE-EF-SsE.title" = "Radio";

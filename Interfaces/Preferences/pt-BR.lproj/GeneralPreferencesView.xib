@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="GeneralPreferencesViewController">
             <connections>
-                <outlet property="alwaysAcceptBetas" destination="LaX-Fe-9HC" id="kvu-0z-M0Q"/>
+                <outlet property="alwaysAcceptBetas" destination="dX2-Cd-tkI" id="EBz-Nb-u35"/>
                 <outlet property="checkForUpdates" destination="L14-7c-vWr" id="Rnu-af-rSy"/>
                 <outlet property="checkFrequency" destination="OUV-X4-SZX" id="giT-Ny-Hl9"/>
                 <outlet property="checkOnStartUp" destination="RGz-v2-Eij" id="R9Q-Ig-f1U"/>
@@ -17,8 +16,8 @@
                 <outlet property="markReadAfterDelay" destination="JDV-ek-xja" id="gj7-ou-SaS"/>
                 <outlet property="markReadAfterNext" destination="2oy-1i-QQP" id="VAp-Mc-iCX"/>
                 <outlet property="markUpdatedAsNew" destination="cWz-UE-9Jd" id="og1-bg-3Er"/>
-                <outlet property="newArticlesNotificationBadgeButton" destination="hBy-sb-Igf" id="gi7-nF-KZr"/>
-                <outlet property="newArticlesNotificationBounceButton" destination="lqW-4L-ZJk" id="52o-s2-wdN"/>
+                <outlet property="newArticlesNotificationBadgeButton" destination="7e3-Hu-RB5" id="gWW-08-Cou"/>
+                <outlet property="newArticlesNotificationBounceButton" destination="gi4-ao-0yS" id="oOe-w5-Bpk"/>
                 <outlet property="openLinksInBackground" destination="IRs-ch-SmE" id="y6W-LQ-RS2"/>
                 <outlet property="openLinksInExternalBrowser" destination="nIa-fG-2el" id="rRD-ze-ERB"/>
                 <outlet property="sendSystemSpecs" destination="Yp8-ZH-Tpp" id="iPd-5G-2aH"/>
@@ -208,8 +207,10 @@
                 <textField verticalHuggingPriority="750" id="2OY-6J-jph">
                     <rect key="frame" x="19" y="64" width="410" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Marcar artigo atual como lido:" id="sCl-hz-PFF">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="sCl-hz-PFF">
                         <font key="font" metaFont="system"/>
+                        <string key="title">Marcar artigo atual como lido:
+</string>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -274,6 +275,28 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button id="Oan-Su-2SV">
+                    <rect key="frame" x="31" y="107" width="465" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Mostrar número de não lidos no ícone do programa" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7e3-Hu-RB5">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeNewArticlesNotificationBadge:" target="-2" id="ZQv-Gf-84P"/>
+                        </connections>
+                    </buttonCell>
+                </button>
+                <button id="HnQ-mh-GpR">
+                    <rect key="frame" x="31" y="87" width="465" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Animar o ícone do programa" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gi4-ao-0yS">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <connections>
+                            <action selector="changeNewArticlesNotificationBounce:" target="-2" id="aJw-1z-ttH"/>
+                        </connections>
+                    </buttonCell>
+                </button>
                 <textField verticalHuggingPriority="750" id="L7n-i6-BJc">
                     <rect key="frame" x="18" y="131" width="410" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -285,37 +308,15 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button id="ZaH-eW-yWI">
-                    <rect key="frame" x="31" y="107" width="350" height="18"/>
+                <button id="dX2-Cd-tkI">
+                    <rect key="frame" x="31" y="154" width="464" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Mostrar número de não lidos no ícone do programa" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="hBy-sb-Igf">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <connections>
-                            <action selector="changeNewArticlesNotificationBadge:" target="-2" id="Ruy-uc-NNu"/>
-                        </connections>
-                    </buttonCell>
-                </button>
-                <button id="YpI-Ss-bRb">
-                    <rect key="frame" x="31" y="87" width="214" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Animar o ícone do programa" bezelStyle="regularSquare" imagePosition="left" inset="2" id="lqW-4L-ZJk">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <connections>
-                            <action selector="changeNewArticlesNotificationBounce:" target="-2" id="iFb-2V-O7K"/>
-                        </connections>
-                    </buttonCell>
-                </button>
-                <button id="LaX-Fe-9HC">
-                    <rect key="frame" x="31" y="154" width="237" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="3pf-xj-ckg">
+                    <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OID-qF-Pp0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="changeAlwaysAcceptBetas:" target="-2" id="PDJ-Tw-BY1"/>
+                        <action selector="changeAlwaysAcceptBetas:" target="-2" id="Vh8-mO-mUU"/>
                     </connections>
                 </button>
             </subviews>

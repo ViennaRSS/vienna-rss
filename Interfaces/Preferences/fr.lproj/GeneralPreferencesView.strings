@@ -41,14 +41,11 @@
 /* Class = "NSMenuItem"; title = "Other..."; ObjectID = "FiK-E7-RnG"; */
 "FiK-E7-RnG.title" = "Autre…";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "vPK-r4-Kwp"; */
-"vPK-r4-Kwp.title" = "Afficher le nombre d'articles non lus sur l'icône de l'application";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Afficher le nombre d'articles non lus sur l'icône de l'application";
 
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "4kj-ax-3ec"; */
-"4kj-ax-3ec.title" = "Faire rebondir l'icône de l'application";
-
-/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "ayi-vd-Hro"; */
-"ayi-vd-Hro.title" = "Ne rien faire";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Faire rebondir l'icône de l'application";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
 "2oy-1i-QQP.title" = "Après la commande \"Suivant non lu\"";
@@ -98,9 +95,6 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Afficher dans la barre de menu";
 
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "QD9-FF-HxG"; */
-"QD9-FF-HxG.title" = "Radio";
-
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
 "NAE-EF-SsE.title" = "Radio";
 
@@ -113,3 +107,5 @@
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
 "qeb-at-hYb.title" = "Mises à jour logicielles :";
 
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Rechercher les dernières versions Beta";

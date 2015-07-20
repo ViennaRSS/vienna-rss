@@ -41,14 +41,11 @@
 /* Class = "NSMenuItem"; title = "Other..."; ObjectID = "FiK-E7-RnG"; */
 "FiK-E7-RnG.title" = "Auswählen...";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "vPK-r4-Kwp"; */
-"vPK-r4-Kwp.title" = "Zeige die Anzahl der ungelesen Artikel im Docksymbol";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Zeige die Anzahl der ungelesen Artikel im Docksymbol";
 
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "4kj-ax-3ec"; */
-"4kj-ax-3ec.title" = "Docksymbol animieren";
-
-/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "ayi-vd-Hro"; */
-"ayi-vd-Hro.title" = "Tue nichts";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Docksymbol animieren";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
 "2oy-1i-QQP.title" = "Nach \"Nächster ungelesener Artikel\" Befehl";
@@ -97,9 +94,6 @@
 
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "In der Menüleiste zeigen";
-
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "QD9-FF-HxG"; */
-"QD9-FF-HxG.title" = "Radio";
 
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
 "NAE-EF-SsE.title" = "Radio";
