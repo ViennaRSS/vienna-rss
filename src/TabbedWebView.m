@@ -23,6 +23,8 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 #import "StringExtensions.h"
+#import "ViennaApp.h"
+#import "Constants.h"
 
 @interface NSObject (TabbedWebViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
@@ -35,6 +37,16 @@
 @end
 
 @implementation TabbedWebView
+
++(NSString *)userAgent
+{
+	NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
+	if (safariVersion)
+		safariVersion = [safariVersion substringFromIndex:2];
+	else
+		safariVersion = @"532.22";
+	return [NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion];
+}
 
 /* initWithFrame
  * The designated instance initialiser.
@@ -80,6 +92,8 @@
 	[defaultWebPrefs setPrivateBrowsingEnabled:NO];
 	[defaultWebPrefs setJavaScriptEnabled:NO];
     [defaultWebPrefs setPlugInsEnabled:NO];
+    // handle UserAgent
+    [self setApplicationNameForUserAgent:[TabbedWebView userAgent]];
 	[self loadMinimumFontSize];
 	[self loadUseJavaScript];
     [self loadUseWebPlugins];

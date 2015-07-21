@@ -21,7 +21,6 @@
 #import "ViennaApp.h"
 #import "BrowserPane.h"
 #import "TabbedWebView.h"
-#import "Constants.h"
 #import "AppController.h"
 #import "Preferences.h"
 #import "HelperFunctions.h"
@@ -124,12 +123,6 @@
 	[webPane initTabbedWebView];
 	[webPane setUIDelegate:self];
 	[webPane setFrameLoadDelegate:self];
-	NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
-	if (safariVersion)
-		safariVersion = [safariVersion substringFromIndex:1];
-	else
-		safariVersion = @"532.22";
-	[webPane setApplicationNameForUserAgent:[NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion]];
 	
 	// Make web preferences 16pt Arial to match Safari
 	[[webPane preferences] setStandardFontFamily:@"Arial"];
