@@ -32,6 +32,7 @@
 }
 
 // Public functions
++(NSString *)userAgent;
 -(void)initTabbedWebView;
 -(void)setController:(AppController *)theController;
 -(void)setOpenLinksInNewBrowser:(BOOL)flag;
