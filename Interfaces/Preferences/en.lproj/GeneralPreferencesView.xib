@@ -275,7 +275,7 @@
                     </textFieldCell>
                 </textField>
                 <button id="Oan-Su-2SV">
-                    <rect key="frame" x="31" y="107" width="327" height="18"/>
+                    <rect key="frame" x="31" y="107" width="465" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Show the unread count on the application icon" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7e3-Hu-RB5">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -286,7 +286,7 @@
                     </buttonCell>
                 </button>
                 <button id="HnQ-mh-GpR">
-                    <rect key="frame" x="31" y="87" width="209" height="18"/>
+                    <rect key="frame" x="31" y="87" width="465" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gi4-ao-0yS">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -306,7 +306,7 @@
                     </textFieldCell>
                 </textField>
                 <button id="dX2-Cd-tkI">
-                    <rect key="frame" x="31" y="154" width="258" height="18"/>
+                    <rect key="frame" x="31" y="154" width="464" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="check" title="Search for latest Beta versions" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OID-qF-Pp0">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

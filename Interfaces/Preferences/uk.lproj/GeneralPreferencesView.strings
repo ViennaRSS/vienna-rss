@@ -41,14 +41,11 @@
 /* Class = "NSMenuItem"; title = "Other..."; ObjectID = "FiK-E7-RnG"; */
 "FiK-E7-RnG.title" = "Інше...";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "vPK-r4-Kwp"; */
-"vPK-r4-Kwp.title" = "Показувати кількість непрочитаних статей на іконці програми";
+/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "7e3-Hu-RB5"; */
+"7e3-Hu-RB5.title" = "Показувати кількість непрочитаних статей на іконці програми";
 
-/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "4kj-ax-3ec"; */
-"4kj-ax-3ec.title" = "Заставити іконку програми стрибати";
-
-/* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "ayi-vd-Hro"; */
-"ayi-vd-Hro.title" = "Нічого не робити";
+/* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "gi4-ao-0yS"; */
+"gi4-ao-0yS.title" = "Заставити іконку програми стрибати";
 
 /* Class = "NSButtonCell"; title = "After \"Next Unread\" command"; ObjectID = "2oy-1i-QQP"; */
 "2oy-1i-QQP.title" = "Післи команди \"Наступне непрочитане\"";
@@ -98,9 +95,6 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "JN6-lj-bQ1"; */
 "JN6-lj-bQ1.title" = "Показувати у меню";
 
-/* Class = "NSButtonCell"; title = "Radio"; ObjectID = "QD9-FF-HxG"; */
-"QD9-FF-HxG.title" = "Radio";
-
 /* Class = "NSButtonCell"; title = "Radio"; ObjectID = "NAE-EF-SsE"; */
 "NAE-EF-SsE.title" = "Radio";
 
@@ -112,3 +106,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Updates:"; ObjectID = "qeb-at-hYb"; */
 "qeb-at-hYb.title" = "Updates:";
+
+/* Class = "NSButtonCell"; title = "Search for latest Beta versions"; ObjectID = "OID-qF-Pp0"; */
+"OID-qF-Pp0.title" = "Search for latest Beta versions";
