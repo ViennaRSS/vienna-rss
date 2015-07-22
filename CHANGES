@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.5
+-----
+- Add identification of the application as required by Inoreader
+- When encountering a 301 HTTP response code, check if the permanent character of the redirection is OK before updating the database
+- Handle Enter or Return keys in Articles tab by opening the current article
+- Add an option in Preferences to follow beta versions of Vienna updates
+
 3.0.4
 -----
 - Add option to enable/disable Webkit plugins (including Flash)
