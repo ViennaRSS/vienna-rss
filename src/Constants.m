@@ -77,6 +77,7 @@ NSString * MAPref_SyncServer = @"SyncServer";
 NSString * MAPref_SyncingUser = @"SyncingUser";
 NSString * MAPref_SendSystemProfileInfo = @"SUSendProfileInfo";
 NSString * MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
+NSString * MAPref_IgnoreHTTP301Redirect = @"IgnoreHTTP301Redirect";
 
 const NSInteger MA_Default_BackTrackQueueSize = 20;
 const NSInteger MA_Default_RefreshThreads = 20;
