@@ -10,7 +10,7 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Installing
 ----------
 
-Admins upload release and test versions at [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
+Admins upload release and test versions at [bintray](https://bintray.com/viennarss/vienna-rss/vienna-rss/) and [Sourceforge](https://sourceforge.net/projects/vienna-rss/files/).  
 Alternatively, you can download releases from the [GitHub Releases page](https://github.com/ViennaRSS/vienna-rss/releases)
 
 **Homebrew**

@@ -16,4 +16,4 @@ GCC_PRECOMPILE_PREFIX_HEADER = YES
 GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
 
 BASE_URL_TYP = https
-BASE_URL_LOC = downloads.sourceforge.net/project/vienna-rss
+BASE_URL_LOC = dl.bintray.com/viennarss/vienna-rss
