@@ -20,20 +20,17 @@ dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 case "${N_VCS_TAG}" in
 	*_beta*)
 		VIENNA_CHANGELOG="changelog_beta.xml"
-		DOWNLOAD_SUB_DIR="TestVersions"
 	;;
 	*_rc*)
 		VIENNA_CHANGELOG="changelog_rc.xml"
-		DOWNLOAD_SUB_DIR="TestVersions"
 	;;
 	*)
 		VIENNA_CHANGELOG="changelog.xml"
-		DOWNLOAD_SUB_DIR="ReleasedVersions"
 	;;
 esac
 
 DOWNLOAD_TAG_DIR="${N_VCS_TAG}"
-DOWNLOAD_BASE_URL="${DOWNLOAD_BASE_URL}/${DOWNLOAD_SUB_DIR}/${DOWNLOAD_TAG_DIR}"
+DOWNLOAD_BASE_URL="${DOWNLOAD_BASE_URL}/${DOWNLOAD_TAG_DIR}"
 
 # codesign setup
 function signd {
