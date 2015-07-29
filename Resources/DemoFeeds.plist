@@ -22,11 +22,6 @@
 		<key>URL</key>
 		<string>http://worldofapple.com/feed</string>
 	</dict>
-	<key>Mac OS X Hints</key>
-	<dict>
-		<key>URL</key>
-		<string>feed://feeds.macosxhints.com/macosxhints/recent</string>
-	</dict>
 	<key>Vienna Developer Blog</key>
 	<dict>
 		<key>URL</key>
