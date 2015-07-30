@@ -8,6 +8,12 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.0.6
+-----
+- Fix a problem with duplicate folders when starting with a fresh database
+- Removed macosxhints.com from the list of default feeds when starting with a fresh database
+- Distribution of Vienna binaries is now done mainly through bintray.com instead of sourceforge.net
+
 3.0.5
 -----
 - Add identification of the application as required by Inoreader
