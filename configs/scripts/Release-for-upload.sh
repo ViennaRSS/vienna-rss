@@ -29,9 +29,6 @@ case "${N_VCS_TAG}" in
 	;;
 esac
 
-DOWNLOAD_TAG_DIR="${N_VCS_TAG}"
-DOWNLOAD_BASE_URL="${DOWNLOAD_BASE_URL}/${DOWNLOAD_TAG_DIR}"
-
 # codesign setup
 function signd {
 	if [[ ! -z "${CODE_SIGN_IDENTITY}" ]] && [[ ! -z ${CODE_SIGN_REQUIREMENTS_PATH} ]]; then
