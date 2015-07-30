@@ -74,7 +74,6 @@
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B41AA670850037471F /* VNADatabaseTests.m */; };
-		03C029CC1AA85B08000DE9C1 /* Vienna.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D15AC370486D014006FF6A4 /* Vienna.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
@@ -744,16 +743,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		03C029CB1AA85AEA000DE9C1 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(SRCROOT)/build";
-			dstSubfolderSpec = 0;
-			files = (
-				03C029CC1AA85B08000DE9C1 /* Vienna.app in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AA65D27F083CF46F00BC387C /* Copy Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2945,7 +2934,6 @@
 				43EE8617165EF9D7000997FB /* Translations */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
 				F5708274131698B4743C1F3B /* Copy Pods Resources */,
-				03C029CB1AA85AEA000DE9C1 /* CopyFiles */,
 			);
 			buildRules = (
 			);
