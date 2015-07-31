@@ -1,7 +1,7 @@
 // Global settings for all configurations
 
 
-ARCHS = x86_64 i386
+ARCHS = x86_64
 SDKROOT = macosx
 GCC_VERSION = com.apple.compilers.llvm.clang.1_0
 MACOSX_DEPLOYMENT_TARGET = 10.7
