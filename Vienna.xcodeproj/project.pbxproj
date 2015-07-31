@@ -7063,7 +7063,6 @@
 					"$(PROJECT_DIR)/3rdparty",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = StaticAnalyzer;
@@ -7128,7 +7127,6 @@
 					"$(PROJECT_DIR)/3rdparty",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = Development;
@@ -7143,7 +7141,6 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				IBC_FLATTEN_NIBS = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = Deployment;
