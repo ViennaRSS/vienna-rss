@@ -4,9 +4,8 @@ platform :osx, '10.7'
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Vienna' do
-	pod 'MASPreferences', :git => "https://github.com/shpakovski/MASPreferences.git", :commit => '11b0166a55e4d8e109b259eb0b4673333d8903f5'
+	pod 'MASPreferences', :git => "https://github.com/shpakovski/MASPreferences.git", :commit => 'df459a75ad5a47ef1ea8141a79ecb952ca7ec746'
 	pod 'ASIHTTPRequest', '~> 1.8'
-	pod 'JSONKit', '1.5pre'
 	pod 'FMDB', '~> 2.4'
 end
 

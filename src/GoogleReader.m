@@ -21,7 +21,6 @@
 #import "GoogleReader.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
-#import "JSONKit.h"
 #import "HelperFunctions.h"
 #import "Folder.h"
 #import "Database.h"
@@ -75,8 +74,6 @@ enum GoogleReaderStatus {
 @synthesize tokenTimer;
 @synthesize authTimer;
 
-JSONDecoder * jsonDecoder;
-
 -(BOOL)isReady
 {
 	return (googleReaderStatus == isAuthenticated && tokenTimer != nil);
@@ -89,7 +86,6 @@ JSONDecoder * jsonDecoder;
     if (self) {
         // Initialization code here.
 		localFeeds = [[NSMutableArray alloc] init];
-		jsonDecoder = [[JSONDecoder decoder] retain];
 		googleReaderStatus = notAuthenticated;
 		countOfNewArticles = 0;
 		clientAuthToken= nil;
@@ -249,18 +245,19 @@ JSONDecoder * jsonDecoder;
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if ([request responseStatusCode] == 200) {
 		NSData *data = [request responseData];
-		NSDictionary * dict;
-		@synchronized(jsonDecoder) {
-			dict = [[NSDictionary alloc] initWithDictionary:[jsonDecoder objectWithData:data]];
-		}
-		NSString *folderLastUpdateString = [[dict objectForKey:@"updated"] stringValue];
+		NSDictionary * subscriptionsDict;
+        NSError *jsonError;
+		subscriptionsDict = [NSJSONSerialization JSONObjectWithData:data
+                                    options:NSJSONReadingMutableContainers
+                                    error:&jsonError];
+		NSString *folderLastUpdateString = [[subscriptionsDict objectForKey:@"updated"] stringValue];
 		if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) {
 			LOG_EXPR([request url]);
-			NSLog(@"Feed name: %@",[dict objectForKey:@"title"]);
+			NSLog(@"Feed name: %@",[subscriptionsDict objectForKey:@"title"]);
 			NSLog(@"Last Check: %@",[[request userInfo] objectForKey:@"lastupdatestring"]);
 			NSLog(@"Last update: %@",folderLastUpdateString);
-			NSLog(@"Found %lu items", (unsigned long)[[dict objectForKey:@"items"] count]);
-			LOG_EXPR(dict);
+			NSLog(@"Found %lu items", (unsigned long)[[subscriptionsDict objectForKey:@"items"] count]);
+			LOG_EXPR(subscriptionsDict);
 			LOG_EXPR([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
 			ALog(@"Error !!! Incoherent data !");
 			//keep the previously recorded one
@@ -270,10 +267,10 @@ JSONDecoder * jsonDecoder;
 		// Log number of bytes we received
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [data length]]];
 					
-		LLog(@"%ld items returned from %@", [[dict objectForKey:@"items"] count], [request url]);
+		LLog(@"%ld items returned from %@", [[subscriptionsDict objectForKey:@"items"] count], [request url]);
 		NSMutableArray * articleArray = [NSMutableArray array];
 		
-		for (NSDictionary *newsItem in (NSArray*)[dict objectForKey:@"items"]) {
+		for (NSDictionary *newsItem in (NSArray*)[subscriptionsDict objectForKey:@"items"]) {
 			
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
 			NSString * articleGuid = [newsItem objectForKey:@"id"];
@@ -359,12 +356,12 @@ JSONDecoder * jsonDecoder;
         [dbManager setLastUpdateString:folderLastUpdateString forFolder:refreshedFolder.itemId];
 		// Set the HTML homepage for this folder.
 		// a legal JSON string can have, as its outer "container", either an array or a dictionary/"object"
-        if ([[dict objectForKey:@"alternate"] isKindOfClass:[NSArray class]]) {
-            [dbManager setHomePage:[[[dict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]
+        if ([[subscriptionsDict objectForKey:@"alternate"] isKindOfClass:[NSArray class]]) {
+            [dbManager setHomePage:[[[subscriptionsDict objectForKey:@"alternate"] objectAtIndex:0] objectForKey:@"href"]
                          forFolder:refreshedFolder.itemId];
         }
         else {
-            [dbManager setHomePage:[[dict objectForKey:@"alternate"] objectForKey:@"href"]
+            [dbManager setHomePage:[[subscriptionsDict objectForKey:@"alternate"] objectForKey:@"href"]
                          forFolder:refreshedFolder.itemId];
         }
 		
@@ -388,8 +385,6 @@ JSONDecoder * jsonDecoder;
 			}
 		});
 		
-		[dict release];
-
 		NSString* feedIdentifier;
 		if( hostRequiresLastPathOnly )
 		{
@@ -450,12 +445,14 @@ JSONDecoder * jsonDecoder;
 	if ([request responseStatusCode] == 200)
 	{
 	@try {
-		NSArray * dict;
-		@synchronized(jsonDecoder) {
-			dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
-		}
-		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
-		for (NSDictionary *itemRef in dict)
+		NSArray * itemRefsArray;
+        NSError *jsonError;
+		itemRefsArray = [[NSJSONSerialization JSONObjectWithData:request.responseData
+                    options:NSJSONReadingMutableContainers
+                    error:&jsonError]
+                objectForKey:@"itemRefs"];
+		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
+		for (NSDictionary *itemRef in itemRefsArray)
 		{
             NSString * guid;
             if( hostSupportsLongId )
@@ -512,12 +509,14 @@ JSONDecoder * jsonDecoder;
 	if ([request responseStatusCode] == 200)
 	{
 	@try {
-		NSArray * dict;
-		@synchronized(jsonDecoder) {
-			dict =  (NSArray *)[[jsonDecoder objectWithData:[request responseData]]  objectForKey:@"itemRefs"];
-		}
-		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:[dict count]];
-		for (NSDictionary *itemRef in dict)
+		NSArray * itemRefsArray;
+        NSError *jsonError;
+		itemRefsArray = [[NSJSONSerialization JSONObjectWithData:request.responseData
+                        options:NSJSONReadingMutableContainers
+                        error:&jsonError]
+                    objectForKey:@"itemRefs"];
+		NSMutableArray * guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
+		for (NSDictionary *itemRef in itemRefsArray)
 		{
             NSString * guid;
             if( hostSupportsLongId )
@@ -685,10 +684,11 @@ JSONDecoder * jsonDecoder;
 -(void)subscriptionsRequestDone:(ASIHTTPRequest *)request
 {
 	LLog(@"Ending subscriptionRequest");
-	NSDictionary * dict;
-	@synchronized(jsonDecoder) {
-		dict = [jsonDecoder objectWithData:[request responseData]];
-	}
+	NSDictionary * subscriptionsDict;
+    NSError *jsonError;
+	subscriptionsDict = [NSJSONSerialization JSONObjectWithData:request.responseData
+                options:NSJSONReadingMutableContainers
+                error:&jsonError];
 	[localFeeds removeAllObjects];
 	NSArray * localFolders = [APPCONTROLLER folders];
 	
@@ -700,7 +700,7 @@ JSONDecoder * jsonDecoder;
 			
 	NSMutableArray * googleFeeds=[[NSMutableArray alloc] init];
 
-	for (NSDictionary * feed in [dict objectForKey:@"subscriptions"]) 
+	for (NSDictionary * feed in [subscriptionsDict objectForKey:@"subscriptions"])
 	{
 		NSString * feedID = [feed objectForKey:@"id"];
 		if (feedID == nil)
@@ -874,8 +874,6 @@ JSONDecoder * jsonDecoder;
 {
 	[localFeeds release];
 	localFeeds=nil;
-	[jsonDecoder release];
-	jsonDecoder=nil;
     [username release];
     username=nil;
 	[openReaderHost release];

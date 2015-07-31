@@ -184,30 +184,6 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 #pragma mark -
 #pragma mark Private methods
 
-- (void)clearResponderChain
-{
-    // Remove view controller from the responder chain
-    NSResponder *chainedController = self.window.nextResponder;
-    if ([self.viewControllers indexOfObject:chainedController] == NSNotFound)
-        return;
-    self.window.nextResponder = chainedController.nextResponder;
-    chainedController.nextResponder = nil;
-}
-
-- (void)patchResponderChain
-{
-    [self clearResponderChain];
-    
-    NSViewController *selectedController = self.selectedViewController;
-    if (!selectedController)
-        return;
-    
-    // Add current controller to the responder chain
-    NSResponder *nextResponder = self.window.nextResponder;
-    self.window.nextResponder = selectedController;
-    selectedController.nextResponder = nextResponder;
-}
-
 - (NSViewController <MASPreferencesViewController> *)viewControllerForIdentifier:(NSString *)identifier
 {
     for (id viewController in self.viewControllers) {
@@ -239,6 +215,7 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
 #else
         [self.window setContentView:[[[NSView alloc] init] autorelease]];
 #endif
+        [_selectedViewController setNextResponder:nil];
         if ([_selectedViewController respondsToSelector:@selector(viewDidDisappear)])
             [_selectedViewController viewDidDisappear];
 
@@ -319,8 +296,11 @@ static NSString *const PreferencesKeyForViewBounds (NSString *identifier)
             [self.window selectKeyViewFollowingView:controllerView];
     }
     
-    // Insert view controller into responder chain
-    [self patchResponderChain];
+    // Insert view controller into responder chain on 10.9 and earlier
+    if (controllerView.nextResponder != controller) {
+      controller.nextResponder = controllerView.nextResponder;
+      controllerView.nextResponder = controller;
+    }
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kMASPreferencesWindowControllerDidChangeViewNotification object:self];
 }
