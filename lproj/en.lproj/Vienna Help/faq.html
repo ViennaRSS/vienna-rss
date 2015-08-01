@@ -1,12 +1,13 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>How Do I?</title>
-	<link rel="stylesheet" href="helpstyle.css" type="text/css">
+	<link rel="stylesheet" href="helpstyle.css" type="text/css"/>
 </head>
 <body>
-<span><img src="images/Small-Vienna-Logo.jpg" alt="">&nbsp;&nbsp;</span><span class="header">How Do I?</span>
+<span><img src="images/Small-Vienna-Logo.jpg" alt=""/>&nbsp;&nbsp;</span><span class="header">How Do I?</span>
 <p>Below are some of the more common questions asked about Vienna while it was being pre-release tested.
 See the <a href="http://www.vienna-rss.org/vienna_faq.html">Official Vienna FAQ Page</a> for these
 and the latest hints and tips for using Vienna.
@@ -94,17 +95,17 @@ method they require.</p>
 
 <p>Requiring a username and a password is the most frequent method. It is also the most
 transparent for the user. On first refresh, Vienna will present you with a dialog box
-where you can enter the username and the password that has been provided to you.<br>
+where you can enter the username and the password that has been provided to you.<br />
 You can check that you have provided these credentials to Vienna (and update them if
 necessary) through the 'Info' window associated to the feed (which you can access through
 the 'Folder → Get Info…' menu or through the contextual menu you get when you right-click
-on the feed in Vienna's left pane).<br>
+on the feed in Vienna's left pane).<br />
 Note that the password is securely stored in Apple's Keychain.</p>
 
 <p>For servers which require a cookie, the username and password must NOT be set in the
-'Info' window. Both fields MUST be left blank.<br>
+'Info' window. Both fields MUST be left blank.<br />
 Instead, you will need to log in to the website through Safari or through a web browser
-tab in Vienna.<br>
+tab in Vienna.<br />
 A problem is that you may need, from time to time, to re-log in again, because cookies can
 expire.
 </p>
@@ -117,18 +118,18 @@ located at ~/Library/Application Support/Vienna. You can move this to
 another folder if you wish. The following steps show how:</p>
 <ol>
 <li>Shut down Vienna.</li>
-<li>Open a console window and enter:<br>
-<br>
+<li>Open a console window and enter:<br />
+<br />
 <font face="Courier New">defaults write uk.co.opencommunity.vienna2 
-&quot;DefaultDatabase&quot; '&lt;path to new messages.db&gt;'</font><br>
+&quot;DefaultDatabase&quot; '&lt;path to new messages.db&gt;'</font><br />
 
-<br>
+<br />
 where &lt;path to new messages.db&gt; is the name of the folder that 
 contains the messages.db file. The path itself should have the 
-messages.db filename at the end. For example:<br>
-<br>
+messages.db filename at the end. For example:<br />
+<br />
 <font face="Courier New">defaults write uk.co.opencommunity.vienna2 
-&quot;DefaultDatabase&quot; '/Users/steve/mydata/messages.db'</font><br>
+&quot;DefaultDatabase&quot; '/Users/steve/mydata/messages.db'</font><br />
 </li>
 
 <li>Restart Vienna.</li>
