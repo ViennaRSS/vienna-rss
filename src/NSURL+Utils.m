@@ -35,6 +35,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+#define SILENCE_DEPRECATION(expr)                                   \
+do {                                                                \
+_Pragma("clang diagnostic push")                                    \
+_Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")   \
+expr;                                                               \
+_Pragma("clang diagnostic pop")                                     \
+} while(0)
+
+#define SILENCE_10_8_DEPRECATION(expr) SILENCE_DEPRECATION(expr)
+
 #import "NSURL+Utils.h"
 
 
@@ -73,6 +83,7 @@
         [plist release];
     }
  
+SILENCE_10_8_DEPRECATION(
     if (ret==nil) { // Fallback for ancient .webloc files : search the resource fork
         FSRef ref;
         if (inFile && FSPathMakeRef((UInt8 *)[inFile fileSystemRepresentation], &ref, NULL) == noErr) {
@@ -99,6 +110,7 @@
         }
 
     }
+);
 
     return ret;
 }
