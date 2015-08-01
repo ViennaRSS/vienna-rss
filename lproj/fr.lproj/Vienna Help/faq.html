@@ -1,218 +1,281 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Comment faire ?</title>
-	<link rel="stylesheet" href="helpstyle.css" type="text/css">
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Mac OS X version 4.9.35" />
+  <meta http-equiv="Content-Type" content=
+  "text/html; charset=utf-8" />
+  <title>Comment faire ?</title>
+  <link rel="stylesheet" href="helpstyle.css" type="text/css" />
 </head>
 <body>
-<span><img src="images/Small-Vienna-Logo.jpg" alt="">&nbsp;&nbsp;</span><span class="header">Comment faire ?</span>
-<p>Ci-dessous vous trouverez les questions les plus courantes à propos de Vienna lors de sa phase de beta-test.
-Reportez-vous à la page <a href="http://www.vienna-rss.org/vienna_faq.html">Official Vienna FAQ</a> (en anglais) pour les dernières astuces pour utiliser Vienna.
-</p>
-<ul>
-<li>
-<a href="#I_found_a_problem_with_Vienna._How_do_I_report_it">J'ai rencontré un problème avec Vienna. Comment faire un rapport ?</a></li>
-<li>
-<a href="#How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
-Comment puis-je voir ce qui se passe quand les abonnements sont rafraîchis ?</a></li>
-<li>
-<a href="#How_do_I_subscribe_to_a_feed_requiring_user_authentication">
-Comment puis je m'abonner à un flux exigeant une authentification de l'utilisateur ?</a></li>
-<li>
-<a href="#How_do_I_move_my_Vienna_database_to_another_folder">Comment 
-déplacer la base de données Vienna dans un autre dossier ?</a></li>
-<li>
-<a href="#One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
-Un de mes abonnements renvoie le message &quot;Erreur de traitement 
-des données XML dans le flux&quot;. Qu'est ce que cela signifie ?</a></li>
-
-<li>
-<a href="#Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
-Quels sont les raccourcis clavier pour passer à l'article suivant, le 
-marquer comme étant lu, etc. ?</a></li>
-<li>
-<a href="#What_do_the_green_dots_mean_in_the_list_of_articles">
-Que signifie le point vert dans la liste des articles ?</a></li>
-<li>
-<a href="#How_do_I_use_Auto_Expire_and_what_does_it_do">Comment utiliser
-Auto Expire, et qu'est que cela fait ?</a></li>
-<li>
-<a href="#How_do_I_create_my_own_styles">Comment créer mes propres styles ?</a></li>
-<li>
-<a href="#How_do_I_create_my_own_scripts">Comment créer mes propres scripts ?</a></li>
-
-<li>
-<a href="#How_do_I_request_an_enhancement_in_Vienna">Comment demander des 
-améliorations dans Vienna ?</a></li>
-<li>
-<a href="#Where_do_I_get_the_Vienna_source_code">Où obtenir le code source de Vienna ?</a></li>
-
-</ul>
-<h2><a name="I_found_a_problem_with_Vienna._How_do_I_report_it">J'ai rencontré un problème 
-avec Vienna. Comment faire un rapport ?</a></h2>
-<p>Postez un message dans le <a href="http://forums.cocoaforge.com/viewforum.php?f=18">forum de support</a>
-ou dans la <a href="https://github.com/ViennaRSS/vienna-rss/issues">liste des problèmes</a>
-et quelqu'un analysera le problème. Fournissez
-autant d'information que vous pouvez sur le problème, dont notamment : la version du logiciel 
-(disponible dans la fenêtre "À propos"), les actions réalisées et ce à quoi vous vous attendiez. Il 
-y a une note dans le forum avec des instructions pour rédiger un bon rapport de problème.</p>
-
-<p>Assurez-vous que vous utilisez la version la plus récente de Vienna. La commande de vérification 
-de mise à jour vous informera si une version plus récente que la votre existe.</p>
-<p>La résolution des boggues est prioritaire sur l'ajout de fonctionnalités, aussi si votre problème 
-est bien un boggue ayant un impact important et pas une simple amélioration, alors une résolution du 
-problème sera mise à disposition dès que possible.</p>
-<h2>
-<a name="How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
-Comment puis-je voir ce qui se passe quand les abonnements sont rafraîchis ?</a></h2>
-<p>Ouvrez la fenêtre d'activité à partir du menu Fenêtre. la fenêtre d'activité montre 
-tous les abonnements et le statut de leur dernière rafraîchissement dans la session. Le bas de
-la fenêtre d'activité montre plus de détails et inclut les entêtes HTTP qui peuvent être utiles
-pour débogguer. (Si le panneau de détails n'est pas visible, découvrez-le en faisant glisser la barre 
-située en bas de la fenêtre).</p>
-
-<h2>
-<a name="How_do_I_subscribe_to_a_feed_requiring_user_authentication">
-Comment puis je m'abonner à un flux exigeant une authentification de l'utilisateur ?</a></h2>
-
-<p>Il est important de comprendre que les services de type Open Reader ne permettent pas
-de s'authentifier auprès d'un service tiers. Vienna devra accéder directement au serveur
-qui exige une identification et une authentification de l'utilisateur.<br>
-Quand vous vous abonnez, assurez vous que la case "S'abonner à travers le serveur Open
-Reader" n'est PAS cochée.</p>
-
-<p>Ensuite, il est utile de savoir qu'il y a deux principales méthodes d'authentification
-des utilisateurs qui demandent un flux, et ce selon les serveurs que l'on rencontre :</p>
-<ul>
-<li>certains serveurs exigent un nom d'utilisateur et le mot de passe associé ;</li>
-<li>d'autres serveurs exigent un cookie spécifique.</li>
-</ul>
-<p>Le problème, c'est que beaucoup de serveurs n'indiquent pas clairement quelle méthode
-ils mettent en oeuvre pour les flux nécessitant une authentification.</p>
-
-<p>La demande d'un nom d'utilisateur et du mot de passe associé est la méthode la plus
-courante. C'est aussi celle qui est la plus explicite vis-à-vis de l'utilisateur.
-Lors du premier rafraîchissement du flux, Vienna vous présentera une boite de dialogue
-où vous pourrez entrer le nom d'utilisateur et le mot de passe.<br>
-Vous pouvez vérifier que vous avez fourni un nom d'utilisateur et un mot de passe – et les
-mettre à jour si nécessaire – à travers la boite de dialogue "Infos" du flux.
-Vous accédez à cette boite de dialogue à travers le menu "Dossier → Obtenir les
-infos…" ou via le menu contextuel (clic droit) dans la liste des flux.<br>
-Le mot de passe est stocké de manière sécurisée dans le Trousseau d'accès.</p>
-
-<p>Par contre, pour les serveurs qui exigent un cookie, le nom d'utilisateur et le mot
-de passe ne doivent PAS apparaître dans la boite de dialogue "Infos" du flux. Les deux
-champs DOIVENT être laissés à blanc.<br>
-Par contre, vous devrez être authentifiés auprès du site en vous connectant via le web
-à travers le navigateur Safari ou à travers un onglet de navigation dans Vienna.<br>
-Comme les cookies peuvent expirer après un certain temps, vous serez peut-être obligés
-de vous reconnecter de temps à autres.
-</p>
-
-<h2><a name="How_do_I_move_my_Vienna_database_to_another_folder">Comment 
-déplacer la base de données Vienna dans un autre dossier ?</a></h2>
-
-<p>Par défaut, votre base de données Vienna est le fichier messages.db placé dans 
- ~/Library/Application Support/Vienna. vous pouvez déplacer ce fichier dans le dossier de votre choix.
- Pour cela, suivez les étapes ci-dessous :</p>
-<ol>
-<li>Quitter Vienna.</li>
-<li>Ouvrir une fenêtre de Terminal et taper :<br>
-<br>
-<font face="Courier New">defaults write uk.co.opencommunity.vienna2 
-&quot;DefaultDatabase&quot; '&lt;chemin_vers_messages.db&gt;'</font><br>
-
-<br>
-où &lt;chemin_vers_messages.db&gt; est le nom complet du fichier messages.db. Le chemin 
-lui-même devrait contenir le nom messages.db à la fin. Par exemple :<br>
-<br>
-<font face="Courier New">defaults write uk.co.opencommunity.vienna2 
-&quot;DefaultDatabase&quot; '/Users/steve/mydata/messages.db'</font><br>
-</li>
-
-<li>Relancer Vienna.</li>
-</ol>
-<h2>
-<a name="One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
-Un de mes abonnements renvoie le message &quot;Erreur de traitement 
-des données XML dans le flux&quot;. Qu'est ce que cela signifie ?</a></h2>
-<p>Cela signifie que Vienna a reçu un retour de l'abonnement qu'il ne sait pas interpréter. 
-Il peut y avoir plusieurs raisons à cela :</p>
-
-<ol>
-<li>L'adresse URL du flux n'indique peut-être pas un flux RSS ou Atom, mais une page Web. Vérifiez 
-attentivement l'URL de l'abonnement en question.</li>
-<li>Le flux lui-même peut contenir un format XML incorrect. Certains abonnements font des erreurs lors 
-de l'assemblage des données XML qui constituent le flux et Vienna ne sait pas interpréter des flux
-XML incorrects. Utilisez la commande de validation des flux à partir du menu Fichier pour identifier un 
-tel cas. Malheureusement, vous ne pourrez rien faire de plus avec Vienna pour recevoir ce flux, si ce
-n'est attendre que le flux soit corrigé par le site émetteur.</li>
-<li>Le flux peut être incomplet. Si le rafraîchissement a été interrompu, alors les données XML seront 
-incomplètes et apparaîtront malformées dans Vienna. Un nouveau rafraîchissement devrait corriger ce 
-problème.</li>
-</ol>
-<p>Si le problème n'est couvert par aucun des cas ci-dessus, alors postez un message sur le forum de support en 
-indiquant l'URL concernée. </p>
-<h2>
-
-<a name="Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
-Quels sont les raccourcis clavier pour passer à l'article suivant, le marquer comme 
-étant lu, etc. ?</a></h2>
-<p>Il existe des raccourcis à une touche pour quelques unes des commandes des menus, par exemple :</p>
-<p>Barre d'espace - affiche l'article suivant non lu. Si l'article actuellement affiché est long de 
-plusieurs pages, cette commande affichera en priorité les pages suivantes. Elle n'affichera l'article 
-suivant que si la fin de l'article en cours est déjà à l'écran. A l'inverse, la commande Cmd+U affichera 
-diretement l'article non lu suivant, même si l'article en cours n'est pas lu entièrement.</p>
-<p>R - Permute l'état lu / non lu pour l'article en cours.</p>
-<p>F - Permute l'état du drapeau affiché / masqué pour l'article en cours.</p>
-
-<p>Lisez la page dédiées aux raccourcis pour une liste complète.</p>
-
-<h2><a name="What_do_the_green_dots_mean_in_the_list_of_articles">Que 
-signifie le point vert dans la liste des articles ?</a></h2>
-<p>Les points bleus signalent les nouveaux articles, et les points verts signalent les articles mis à jour :
-les articles dont le contenu a changé depuis leur dernier téléchargement.</p>
-
-<h2><a name="How_do_I_use_Auto_Expire_and_what_does_it_do">Comment utiliser
-Auto Expire, et qu'est ce que cela fait ?</a></h2>
-<p>Auto-expire déplace les articles plus vieux qu'un certain nombre de jours 
-dans la corbeille. Cela permet d'obtenir des dossiers gérables en 
-conservant uniquement les articles les plus récents. Cette fonction s'exécute 
-à la fois au démarrage de Vienna et après le rafraîchissement des abonnements. 
-Dans les préférences, modifiez le paramètre &quot;Expirer les articles vieux de&quot;
-pour déterminer les articles à expurger.</p>
-<p>Auto-expire n'effacera pas les articles non lus ou marqués d'un drapeau.</p>
-
-<h2><a name="How_do_I_create_my_own_styles">Comment créer mes propres styles ?</a></h2>
-<p>Voir la page <a href="http://www.vienna-rss.org/?page_id=65">Styles personnalisés</a> pour les instructions.</p>
-
-<h2><a name="How_do_I_create_my_own_scripts">Comment créer mes propres scripts ?</a></h2>
-
-<p>Le pilotage de Vienna par des scripts est possible en utilisant AppleScript. Voir la page de 
-<a href="http://developer.apple.com/applescript/">
-ressources Apple</a> pour plus de détails.</p>
-<p>Un moyen de débuter est de télécharger un des scripts existants comme celui du
-<a href="http://www.cortig.net/files/ShareWithPapers.zip">plugin de partage avec Papers</a>
-écrit par Cortig ou le script de partage de
-<a href="https://github.com/reefdog/Vienna-to-Yojimbo-AppleScripts">Vienna vers Yojimbo</a> écrit par reefdog
-et de les visualiser dans l'éditeur d'AppleScript.
-
-<p>Pour soumettre vos propres scripts, envoyez-les dans le forum de support, et après qu'ils sont revus, ils seront diffusés sur la page de
-téléchargement.</p>
-
-<h2><a name="How_do_I_request_an_enhancement_in_Vienna">Comment demander des 
-améliorations dans Vienna ?</a></h2>
-
-<p>Laisser un message sur la
-<a href="https://github.com/ViennaRSS/vienna-rss/issues">liste de problèmes ou demandes</a> (en anglais).</p>
-<h2><a name="Where_do_I_get_the_Vienna_source_code">
-Où obtenir le code source de Vienna ?</a></h2>
-<p>Voir la <a href="https://github.com/ViennaRSS/vienna-rss/">page de développement</a> contenant les instructions 
-pour obtenir le code source de Vienna. Le code source est disponible librement 
-si vous vous intéressez au fonctionnement de Vienna, si vous souhaitez compiler votre propre 
-copie de Vienna sur votre ordinateur ou si vous souhaitez emprunter des portions de codes 
-pour les inclures dans votre propre projet. Le code source est diffusé sous la  
-<a href="http://www.apache.org/licenses/LICENSE-2.0.html">licence Apache 2.0</a>.</p>
+  <span><img src="images/Small-Vienna-Logo.jpg" alt=
+  "" />&nbsp;&nbsp;</span><span class="header">Comment faire
+  ?</span>
+  <p>Ci-dessous vous trouverez les questions les plus courantes à
+  propos de Vienna lors de sa phase de beta-test. Reportez-vous à
+  la page <a href=
+  "http://www.vienna-rss.org/vienna_faq.html">Official Vienna
+  FAQ</a> (en anglais) pour les dernières astuces pour utiliser
+  Vienna.</p>
+  <ul>
+    <li><a href=
+    "#I_found_a_problem_with_Vienna._How_do_I_report_it">J'ai
+    rencontré un problème avec Vienna. Comment faire un rapport
+    ?</a></li>
+    <li><a href=
+    "#How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
+    Comment puis-je voir ce qui se passe quand les abonnements sont
+    rafraîchis ?</a></li>
+    <li><a href=
+    "#How_do_I_subscribe_to_a_feed_requiring_user_authentication">Comment
+    puis je m'abonner à un flux exigeant une authentification de
+    l'utilisateur ?</a></li>
+    <li><a href=
+    "#How_do_I_move_my_Vienna_database_to_another_folder">Comment
+    déplacer la base de données Vienna dans un autre dossier
+    ?</a></li>
+    <li><a href=
+    "#One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
+    Un de mes abonnements renvoie le message "Erreur de traitement
+    des données XML dans le flux". Qu'est ce que cela signifie
+    ?</a></li>
+    <li><a href=
+    "#Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
+    Quels sont les raccourcis clavier pour passer à l'article
+    suivant, le marquer comme étant lu, etc. ?</a></li>
+    <li><a href=
+    "#What_do_the_green_dots_mean_in_the_list_of_articles">Que
+    signifie le point vert dans la liste des articles ?</a></li>
+    <li><a href=
+    "#How_do_I_use_Auto_Expire_and_what_does_it_do">Comment
+    utiliser Auto Expire, et qu'est que cela fait ?</a></li>
+    <li><a href="#How_do_I_create_my_own_styles">Comment créer mes
+    propres styles ?</a></li>
+    <li><a href="#How_do_I_create_my_own_scripts">Comment créer mes
+    propres scripts ?</a></li>
+    <li><a href=
+    "#How_do_I_request_an_enhancement_in_Vienna">Comment demander
+    des améliorations dans Vienna ?</a></li>
+    <li><a href="#Where_do_I_get_the_Vienna_source_code">Où obtenir
+    le code source de Vienna ?</a></li>
+  </ul>
+  <h2><a name="I_found_a_problem_with_Vienna._How_do_I_report_it"
+  id="I_found_a_problem_with_Vienna._How_do_I_report_it">J'ai
+  rencontré un problème avec Vienna. Comment faire un rapport
+  ?</a></h2>
+  <p>Postez un message dans le <a href=
+  "http://forums.cocoaforge.com/viewforum.php?f=18">forum de
+  support</a> ou dans la <a href=
+  "https://github.com/ViennaRSS/vienna-rss/issues">liste des
+  problèmes</a> et quelqu'un analysera le problème. Fournissez
+  autant d'information que vous pouvez sur le problème, dont
+  notamment : la version du logiciel (disponible dans la fenêtre "À
+  propos"), les actions réalisées et ce à quoi vous vous attendiez.
+  Il y a une note dans le forum avec des instructions pour rédiger
+  un bon rapport de problème.</p>
+  <p>Assurez-vous que vous utilisez la version la plus récente de
+  Vienna. La commande de vérification de mise à jour vous informera
+  si une version plus récente que la votre existe.</p>
+  <p>La résolution des boggues est prioritaire sur l'ajout de
+  fonctionnalités, aussi si votre problème est bien un boggue ayant
+  un impact important et pas une simple amélioration, alors une
+  résolution du problème sera mise à disposition dès que
+  possible.</p>
+  <h2><a name=
+  "How_can_I_see_what_happened_when_my_subscriptions_are_refreshed"
+  id=
+  "How_can_I_see_what_happened_when_my_subscriptions_are_refreshed">
+  Comment puis-je voir ce qui se passe quand les abonnements sont
+  rafraîchis ?</a></h2>
+  <p>Ouvrez la fenêtre d'activité à partir du menu Fenêtre. la
+  fenêtre d'activité montre tous les abonnements et le statut de
+  leur dernière rafraîchissement dans la session. Le bas de la
+  fenêtre d'activité montre plus de détails et inclut les entêtes
+  HTTP qui peuvent être utiles pour débogguer. (Si le panneau de
+  détails n'est pas visible, découvrez-le en faisant glisser la
+  barre située en bas de la fenêtre).</p>
+  <h2><a name=
+  "How_do_I_subscribe_to_a_feed_requiring_user_authentication" id=
+  "How_do_I_subscribe_to_a_feed_requiring_user_authentication">Comment
+  puis je m'abonner à un flux exigeant une authentification de
+  l'utilisateur ?</a></h2>
+  <p>Il est important de comprendre que les services de type Open
+  Reader ne permettent pas de s'authentifier auprès d'un service
+  tiers. Vienna devra accéder directement au serveur qui exige une
+  identification et une authentification de l'utilisateur.<br />
+  Quand vous vous abonnez, assurez vous que la case "S'abonner à
+  travers le serveur Open Reader" n'est PAS cochée.</p>
+  <p>Ensuite, il est utile de savoir qu'il y a deux principales
+  méthodes d'authentification des utilisateurs qui demandent un
+  flux, et ce selon les serveurs que l'on rencontre :</p>
+  <ul>
+    <li>certains serveurs exigent un nom d'utilisateur et le mot de
+    passe associé ;</li>
+    <li>d'autres serveurs exigent un cookie spécifique.</li>
+  </ul>
+  <p>Le problème, c'est que beaucoup de serveurs n'indiquent pas
+  clairement quelle méthode ils mettent en oeuvre pour les flux
+  nécessitant une authentification.</p>
+  <p>La demande d'un nom d'utilisateur et du mot de passe associé
+  est la méthode la plus courante. C'est aussi celle qui est la
+  plus explicite vis-à-vis de l'utilisateur. Lors du premier
+  rafraîchissement du flux, Vienna vous présentera une boite de
+  dialogue où vous pourrez entrer le nom d'utilisateur et le mot de
+  passe.<br />
+  Vous pouvez vérifier que vous avez fourni un nom d'utilisateur et
+  un mot de passe – et les mettre à jour si nécessaire – à travers
+  la boite de dialogue "Infos" du flux. Vous accédez à cette boite
+  de dialogue à travers le menu "Dossier → Obtenir les infos…" ou
+  via le menu contextuel (clic droit) dans la liste des flux.<br />
+  Le mot de passe est stocké de manière sécurisée dans le Trousseau
+  d'accès.</p>
+  <p>Par contre, pour les serveurs qui exigent un cookie, le nom
+  d'utilisateur et le mot de passe ne doivent PAS apparaître dans
+  la boite de dialogue "Infos" du flux. Les deux champs DOIVENT
+  être laissés à blanc.<br />
+  Par contre, vous devrez être authentifiés auprès du site en vous
+  connectant via le web à travers le navigateur Safari ou à travers
+  un onglet de navigation dans Vienna.<br />
+  Comme les cookies peuvent expirer après un certain temps, vous
+  serez peut-être obligés de vous reconnecter de temps à
+  autres.</p>
+  <h2><a name="How_do_I_move_my_Vienna_database_to_another_folder"
+  id="How_do_I_move_my_Vienna_database_to_another_folder">Comment
+  déplacer la base de données Vienna dans un autre dossier
+  ?</a></h2>
+  <p>Par défaut, votre base de données Vienna est le fichier
+  messages.db placé dans ~/Library/Application Support/Vienna. vous
+  pouvez déplacer ce fichier dans le dossier de votre choix. Pour
+  cela, suivez les étapes ci-dessous :</p>
+  <ol>
+    <li>Quitter Vienna.</li>
+    <li>Ouvrir une fenêtre de Terminal et taper :<br />
+    <br />
+    <font face="Courier New">defaults write
+    uk.co.opencommunity.vienna2 "DefaultDatabase"
+    '&lt;chemin_vers_messages.db&gt;'</font><br />
+    <br />
+    où &lt;chemin_vers_messages.db&gt; est le nom complet du
+    fichier messages.db. Le chemin lui-même devrait contenir le nom
+    messages.db à la fin. Par exemple :<br />
+    <br />
+    <font face="Courier New">defaults write
+    uk.co.opencommunity.vienna2 "DefaultDatabase"
+    '/Users/steve/mydata/messages.db'</font><br /></li>
+    <li>Relancer Vienna.</li>
+  </ol>
+  <h2><a name=
+  "One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean"
+  id=
+  "One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">
+  Un de mes abonnements renvoie le message "Erreur de traitement
+  des données XML dans le flux". Qu'est ce que cela signifie
+  ?</a></h2>
+  <p>Cela signifie que Vienna a reçu un retour de l'abonnement
+  qu'il ne sait pas interpréter. Il peut y avoir plusieurs raisons
+  à cela :</p>
+  <ol>
+    <li>L'adresse URL du flux n'indique peut-être pas un flux RSS
+    ou Atom, mais une page Web. Vérifiez attentivement l'URL de
+    l'abonnement en question.</li>
+    <li>Le flux lui-même peut contenir un format XML incorrect.
+    Certains abonnements font des erreurs lors de l'assemblage des
+    données XML qui constituent le flux et Vienna ne sait pas
+    interpréter des flux XML incorrects. Utilisez la commande de
+    validation des flux à partir du menu Fichier pour identifier un
+    tel cas. Malheureusement, vous ne pourrez rien faire de plus
+    avec Vienna pour recevoir ce flux, si ce n'est attendre que le
+    flux soit corrigé par le site émetteur.</li>
+    <li>Le flux peut être incomplet. Si le rafraîchissement a été
+    interrompu, alors les données XML seront incomplètes et
+    apparaîtront malformées dans Vienna. Un nouveau
+    rafraîchissement devrait corriger ce problème.</li>
+  </ol>
+  <p>Si le problème n'est couvert par aucun des cas ci-dessus,
+  alors postez un message sur le forum de support en indiquant
+  l'URL concernée.</p>
+  <h2><a name=
+  "Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_"
+  id=
+  "Is_there_a_shortcut_key_for_going_to_the_next_article_marking_read_etc_">
+  Quels sont les raccourcis clavier pour passer à l'article
+  suivant, le marquer comme étant lu, etc. ?</a></h2>
+  <p>Il existe des raccourcis à une touche pour quelques unes des
+  commandes des menus, par exemple :</p>
+  <p>Barre d'espace - affiche l'article suivant non lu. Si
+  l'article actuellement affiché est long de plusieurs pages, cette
+  commande affichera en priorité les pages suivantes. Elle
+  n'affichera l'article suivant que si la fin de l'article en cours
+  est déjà à l'écran. A l'inverse, la commande Cmd+U affichera
+  diretement l'article non lu suivant, même si l'article en cours
+  n'est pas lu entièrement.</p>
+  <p>R - Permute l'état lu / non lu pour l'article en cours.</p>
+  <p>F - Permute l'état du drapeau affiché / masqué pour l'article
+  en cours.</p>
+  <p>Lisez la page dédiées aux raccourcis pour une liste
+  complète.</p>
+  <h2><a name="What_do_the_green_dots_mean_in_the_list_of_articles"
+  id="What_do_the_green_dots_mean_in_the_list_of_articles">Que
+  signifie le point vert dans la liste des articles ?</a></h2>
+  <p>Les points bleus signalent les nouveaux articles, et les
+  points verts signalent les articles mis à jour : les articles
+  dont le contenu a changé depuis leur dernier téléchargement.</p>
+  <h2><a name="How_do_I_use_Auto_Expire_and_what_does_it_do" id=
+  "How_do_I_use_Auto_Expire_and_what_does_it_do">Comment utiliser
+  Auto Expire, et qu'est ce que cela fait ?</a></h2>
+  <p>Auto-expire déplace les articles plus vieux qu'un certain
+  nombre de jours dans la corbeille. Cela permet d'obtenir des
+  dossiers gérables en conservant uniquement les articles les plus
+  récents. Cette fonction s'exécute à la fois au démarrage de
+  Vienna et après le rafraîchissement des abonnements. Dans les
+  préférences, modifiez le paramètre "Expirer les articles vieux
+  de" pour déterminer les articles à expurger.</p>
+  <p>Auto-expire n'effacera pas les articles non lus ou marqués
+  d'un drapeau.</p>
+  <h2><a name="How_do_I_create_my_own_styles" id=
+  "How_do_I_create_my_own_styles">Comment créer mes propres styles
+  ?</a></h2>
+  <p>Voir la page <a href=
+  "http://www.vienna-rss.org/?page_id=65">Styles personnalisés</a>
+  pour les instructions.</p>
+  <h2><a name="How_do_I_create_my_own_scripts" id=
+  "How_do_I_create_my_own_scripts">Comment créer mes propres
+  scripts ?</a></h2>
+  <p>Le pilotage de Vienna par des scripts est possible en
+  utilisant AppleScript. Voir la page de <a href=
+  "http://developer.apple.com/applescript/">ressources Apple</a>
+  pour plus de détails.</p>
+  <p>Un moyen de débuter est de télécharger un des scripts
+  existants comme celui du <a href=
+  "http://www.cortig.net/files/ShareWithPapers.zip">plugin de
+  partage avec Papers</a> écrit par Cortig ou le script de partage
+  de <a href=
+  "https://github.com/reefdog/Vienna-to-Yojimbo-AppleScripts">Vienna
+  vers Yojimbo</a> écrit par reefdog et de les visualiser dans
+  l'éditeur d'AppleScript.</p>
+  <p>Pour soumettre vos propres scripts, envoyez-les dans le forum
+  de support, et après qu'ils sont revus, ils seront diffusés sur
+  la page de téléchargement.</p>
+  <h2><a name="How_do_I_request_an_enhancement_in_Vienna" id=
+  "How_do_I_request_an_enhancement_in_Vienna">Comment demander des
+  améliorations dans Vienna ?</a></h2>
+  <p>Laisser un message sur la <a href=
+  "https://github.com/ViennaRSS/vienna-rss/issues">liste de
+  problèmes ou demandes</a> (en anglais).</p>
+  <h2><a name="Where_do_I_get_the_Vienna_source_code" id=
+  "Where_do_I_get_the_Vienna_source_code">Où obtenir le code source
+  de Vienna ?</a></h2>
+  <p>Voir la <a href=
+  "https://github.com/ViennaRSS/vienna-rss/">page de
+  développement</a> contenant les instructions pour obtenir le code
+  source de Vienna. Le code source est disponible librement si vous
+  vous intéressez au fonctionnement de Vienna, si vous souhaitez
+  compiler votre propre copie de Vienna sur votre ordinateur ou si
+  vous souhaitez emprunter des portions de codes pour les inclures
+  dans votre propre projet. Le code source est diffusé sous la
+  <a href="http://www.apache.org/licenses/LICENSE-2.0.html">licence
+  Apache 2.0</a>.</p>
 </body>
 </html>
