@@ -28,6 +28,7 @@
 #import "PopupButton.h"
 #import "PluginManager.h"
 #import <AppKit/AppKit.h>
+#import "CDEvents.h"
 
 #define APPCONTROLLER (AppController *)[NSApp delegate]
 
@@ -103,6 +104,7 @@
     
     NSWindowController *_preferencesWindowController;
     NewSubscription * _rssFeed;
+    CDEvents * _events;
 }
 
 @property (nonatomic, readonly) NSWindowController *preferencesWindowController;
