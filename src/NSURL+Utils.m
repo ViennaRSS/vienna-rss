@@ -72,7 +72,10 @@
         ret = [NSURL URLWithString:[plist objectForKey:@"URL"]];
         [plist release];
     }
- 
+
+// ignore the deprecation warnings related to FSPathMakeRef, FSOpenResFile, Get1Resource ...
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (ret==nil) { // Fallback for ancient .webloc files : search the resource fork
         FSRef ref;
         if (inFile && FSPathMakeRef((UInt8 *)[inFile fileSystemRepresentation], &ref, NULL) == noErr) {
@@ -99,6 +102,7 @@
         }
 
     }
+#pragma clang diagnostic pop
 
     return ret;
 }
