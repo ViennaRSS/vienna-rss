@@ -7,6 +7,7 @@ target 'Vienna' do
 	pod 'MASPreferences', :git => "https://github.com/shpakovski/MASPreferences.git", :commit => 'df459a75ad5a47ef1ea8141a79ecb952ca7ec746'
 	pod 'ASIHTTPRequest', '~> 1.8'
 	pod 'FMDB', '~> 2.4'
+	pod 'CDEvents'
 end
 
 target 'Vienna Tests' do

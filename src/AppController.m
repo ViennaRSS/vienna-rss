@@ -415,25 +415,18 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
 }
 
-/* MyScriptsFolderWatcherCallBack
- * This is the callback function which is invoked when the file system detects changes in the Scripts
- * folder. We use this to trigger a refresh of the scripts menu.
- */
-static void MyScriptsFolderWatcherCallBack(FNMessage message, OptionBits flags, void * refcon, FNSubscriptionRef subscription)
-{
-	AppController * app = (AppController *)refcon;
-	[app initScriptsMenu];
-}
-
 /* installScriptsFolderWatcher
  * Install a handler to notify of changes in the scripts folder.
+ * The handler is a code block which triggers a refresh of the scripts menu
  */
 -(void)installScriptsFolderWatcher
 {
-	NSString * path = [[Preferences standardPreferences] scriptsFolder];
-	FNSubscriptionRef refCode;
-	
-	FNSubscribeByPath((const UInt8 *)[path UTF8String], MyScriptsFolderWatcherCallBack, self, kNilOptions, &refCode);
+	NSURL * path = [NSURL fileURLWithPath:[[Preferences standardPreferences] scriptsFolder]];
+	_events = [[CDEvents alloc] initWithURLs:[NSArray arrayWithObject:path]
+                                       block:^(CDEvents *watcher, CDEvent *event) {
+										   // triggers a refresh of the scripts.menu
+                                           [self initScriptsMenu];
+                                       }];
 }
 
 /* layoutManager
