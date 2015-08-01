@@ -1,0 +1,2 @@
+PODS_VIENNA_ASIHTTPREQUEST_HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2"
+PODS_VIENNA_ASIHTTPREQUEST_OTHER_LDFLAGS = -l"xml2.2" -l"z.1" -framework "CoreServices" -framework "SystemConfiguration"
