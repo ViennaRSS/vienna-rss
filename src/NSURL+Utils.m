@@ -35,6 +35,16 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+#define SILENCE_DEPRECATION(expr)                                   \
+do {                                                                \
+_Pragma("clang diagnostic push")                                    \
+_Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")   \
+expr;                                                               \
+_Pragma("clang diagnostic pop")                                     \
+} while(0)
+
+#define SILENCE_10_8_DEPRECATION(expr) SILENCE_DEPRECATION(expr)
+
 #import "NSURL+Utils.h"
 
 
@@ -64,42 +74,43 @@
 //
 +(NSURL*)URLFromInetloc:(NSString*)inFile
 {
-    FSRef ref;
     NSURL *ret = nil;
 
-    if (inFile && FSPathMakeRef((UInt8 *)[inFile fileSystemRepresentation], &ref, NULL) == noErr) {
-        ResFileRefNum resRef;
+    // Look for valid plist data.
+    NSDictionary *plist;
+    if ((plist = [[NSDictionary alloc] initWithContentsOfFile:inFile])) {
+        ret = [NSURL URLWithString:[plist objectForKey:@"URL"]];
+        [plist release];
+    }
+ 
+SILENCE_10_8_DEPRECATION(
+    if (ret==nil) { // Fallback for ancient .webloc files : search the resource fork
+        FSRef ref;
+        if (inFile && FSPathMakeRef((UInt8 *)[inFile fileSystemRepresentation], &ref, NULL) == noErr) {
+             ResFileRefNum resRef;
 
-        resRef = FSOpenResFile(&ref, fsRdPerm);
+            resRef = FSOpenResFile(&ref, fsRdPerm);
 
-        if (resRef != -1) { // Has resouce fork.
-            Handle urlResHandle;
+            if (resRef != -1) { // Has resouce fork.
+                Handle urlResHandle;
 
-            if ((urlResHandle = Get1Resource('url ', 256))) { // Has 'url ' resource with ID 256.
-                long size;
+                if ((urlResHandle = Get1Resource('url ', 256))) { // Has 'url ' resource with ID 256.
+                    long size;
 
-                size = GetMaxResourceSize(urlResHandle);
-// Begin Google Modified
-//        ret = [NSURL URLWithString:[NSString stringWithCString:(char *)*urlResHandle length:size]];
-                NSString *urlString = [[[NSString alloc] initWithBytes:(void *)*urlResHandle
-                                                                length:size
-                                                              encoding:NSMacOSRomanStringEncoding]  // best guess here
-                        autorelease];
-                ret = [NSURL URLWithString:urlString];
-// End Google Modified
+                    size = GetMaxResourceSize(urlResHandle);
+                    NSString *urlString = [[[NSString alloc] initWithBytes:(void *)*urlResHandle
+                                                                    length:size
+                                                                  encoding:NSMacOSRomanStringEncoding]  // best guess here
+                            autorelease];
+                    ret = [NSURL URLWithString:urlString];
+                }
             }
 
             CloseResFile(resRef);
         }
 
-        if (!ret) { // Look for valid plist data.
-            NSDictionary *plist;
-            if ((plist = [[NSDictionary alloc] initWithContentsOfFile:inFile])) {
-                ret = [NSURL URLWithString:[plist objectForKey:@"URL"]];
-                [plist release];
-            }
-        }
     }
+);
 
     return ret;
 }
