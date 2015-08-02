@@ -77,7 +77,7 @@
 	[searchPanelWindow orderOut:self];
 }
 
-* dealloc
+/* dealloc;
  * Clean up after ourselves.
  */
 -(void)dealloc
