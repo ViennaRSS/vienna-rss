@@ -24,5 +24,7 @@
 	IBOutlet BrowserPane * browserPane;
 }
 
+@property(retain) NSArray * topObjects;
+
 -(BrowserPane *)mainView;
 @end

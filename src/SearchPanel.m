@@ -38,7 +38,9 @@
 {
 	if (!searchPanelWindow)
 	{
-		[NSBundle loadNibNamed:@"SearchPanel" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchPanel" owner:self topLevelObjects:&objects];
+		[self setTopObjects:objects];
 		[[searchField cell] setSearchMenuTemplate:[APPCONTROLLER searchFieldMenu]];
 	}
 	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
@@ -73,5 +75,15 @@
 	
 	[NSApp endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
+}
+
+/* dealloc;
+ * Clean up after ourselves.
+ */
+-(void)dealloc
+{
+	[_topObjects release];
+	_topObjects=nil;
+	[super dealloc];
 }
 @end

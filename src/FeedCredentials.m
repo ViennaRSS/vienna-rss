@@ -48,7 +48,9 @@
 	if (credentialsWindow == nil)
 	{
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:userName];
-		[NSBundle loadNibNamed:@"FeedCredentials" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"FeedCredentials" owner:self topLevelObjects:&objects];
+		[self setTopObjects:objects];
 	}
 
 	// Retain the folder as we need it to update the
@@ -129,6 +131,8 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[folder release];
 	folder=nil;
+	[_topObjects release];
+	_topObjects=nil;
 	[super dealloc];
 }
 @end

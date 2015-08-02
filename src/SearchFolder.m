@@ -163,7 +163,9 @@
 	// Initialize UI
 	if (!searchWindow)
 	{
-		[NSBundle loadNibNamed:@"SearchFolder" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchFolder" owner:self topLevelObjects:&objects];
+		[self setTopObjects:objects];
 
 		// Register our notifications
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:smartFolderName];
@@ -629,6 +631,8 @@
 	nameToFieldMap=nil;
 	[db release];
 	db=nil;
+	[_topObjects release];
+	_topObjects=nil;
 	[super dealloc];
 }
 @end

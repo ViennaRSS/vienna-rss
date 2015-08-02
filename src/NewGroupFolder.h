@@ -29,6 +29,8 @@
 	int parentId;
 }
 
+@property(retain) NSArray * topObjects;
+
 // Action handlers
 -(IBAction)doSave:(id)sender;
 -(IBAction)doCancel:(id)sender;
