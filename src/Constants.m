@@ -19,7 +19,7 @@
 //
 
 NSString * MA_DefaultUserAgentString = @"Mozilla/5.0 Vienna/%@";
-NSString * MA_BrowserUserAgentString = @"Vienna/%@ Safari/%@";
+NSString * MA_BrowserUserAgentString = @"Vienna/%@ Version/%@ Safari/%@";
 
 NSString * MAPref_ArticleListFont = @"MessageListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
