@@ -36,16 +36,25 @@
 	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
 @end
 
+static NSString * _userAgent ;
+
 @implementation TabbedWebView
 
 +(NSString *)userAgent
 {
-	NSString * safariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleVersion"];
-	if (safariVersion)
-		safariVersion = [safariVersion substringFromIndex:2];
-	else
-		safariVersion = @"532.22";
-	return [NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], safariVersion];
+	if(!_userAgent)
+	{
+        NSString * webkitVersion = [[[NSBundle bundleWithIdentifier:@"com.apple.WebKit"] infoDictionary] objectForKey:@"CFBundleVersion"];
+        if (webkitVersion)
+            webkitVersion = [webkitVersion substringFromIndex:2];
+        else
+            webkitVersion = @"536.30";
+        NSString * shortSafariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        if (!shortSafariVersion)
+            shortSafariVersion = @"6.0";
+        _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], shortSafariVersion, webkitVersion];
+	}
+	return _userAgent;
 }
 
 /* initWithFrame
