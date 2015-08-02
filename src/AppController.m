@@ -1147,7 +1147,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     NSString *urlStr = [[event paramDescriptorForKeyword:keyDirectObject]
                         stringValue];
     if(urlStr)
-        [rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:urlStr];
+        [self.rssFeed newSubscription:mainWindow underParent:[foldersTree groupParentSelection] initialURL:urlStr];
 }
 
 #pragma mark Dock Menu
