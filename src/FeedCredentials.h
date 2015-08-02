@@ -32,6 +32,8 @@
 	Folder * folder;
 }
 
+@property(retain) NSArray * topObjects;
+
 // Public functions
 -(void)credentialsForFolder:(NSWindow *)window folder:(Folder *)folder;
 -(IBAction)doCancelButton:(id)sender;

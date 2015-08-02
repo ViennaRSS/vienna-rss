@@ -36,7 +36,9 @@
 {
 	if (!newGroupFolderWindow)
 	{
-		[NSBundle loadNibNamed:@"GroupFolder" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"GroupFolder" owner:self topLevelObjects:&objects];
+		[self setTopObjects:objects];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:folderName];
 	}
 

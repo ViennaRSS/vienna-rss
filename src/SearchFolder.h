@@ -48,6 +48,8 @@
 	BOOL firstRun;
 }
 
+@property(retain) NSArray * topObjects;
+
 // Action routines
 -(IBAction)doSave:(id)sender;
 -(IBAction)doCancel:(id)sender;

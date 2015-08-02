@@ -24,7 +24,11 @@
 -(id)init
 {
 	if ((self = [super init]) != nil)
-		[NSBundle loadNibNamed:@"BrowserPane" owner:self];
+	{
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"BrowserPane" owner:self topLevelObjects:&objects];
+		[self setTopObjects:objects];
+	}
 	return self;
 }
 

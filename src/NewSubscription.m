@@ -168,7 +168,9 @@
 {
 	if (!editRSSFeedWindow || !newRSSFeedWindow)
 	{
-		[NSBundle loadNibNamed:@"RSSFeed" owner:self];
+		NSArray * objects;
+		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"RSSFeed" owner:self topLevelObjects:&objects];
+		[self setTopObjects:objects];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:feedURL];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange2:) name:NSControlTextDidChangeNotification object:editFeedURL];
 	}
