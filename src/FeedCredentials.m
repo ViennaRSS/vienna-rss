@@ -131,6 +131,8 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[folder release];
 	folder=nil;
+	[_topObjects release];
+	_topObjects=nil;
 	[super dealloc];
 }
 @end

@@ -631,6 +631,8 @@
 	nameToFieldMap=nil;
 	[db release];
 	db=nil;
+	[_topObjects release];
+	_topObjects=nil;
 	[super dealloc];
 }
 @end

@@ -41,6 +41,8 @@
 {
 	[browserPane release];
 	browserPane=nil;
+	[_topObjects release];
+	_topObjects=nil;
 	[super dealloc];
 }
 
