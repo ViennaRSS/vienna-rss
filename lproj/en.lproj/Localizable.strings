@@ -149,6 +149,9 @@
 "Recents" = "Recents";
 "Clear" = "Clear Recent Searches";
 "Search web page" = "Search web page";
+"Recent Filters" = "Recent Filters";
+"No Recent Filters" = "No Recent Filters";
+"Clear Recent Filters" = "Clear Recent Filters";
 "Loading..." = "Loading...";
 "Open Image in New Tab" = "Open Image in New Tab";
 "Open Link in New Tab" = "Open Link in New Tab";
