@@ -842,14 +842,14 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSMenu *)searchFieldMenu
 {
-	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
+	NSMenu * cellMenu = [[NSMenu alloc] init];
 	
 	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
 	[cellMenu insertItem:item atIndex:0];
 	[item release];
 	
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
+	item = [[NSMenuItem alloc] init];
 	[item setTag:NSSearchFieldRecentsMenuItemTag];
 	[cellMenu insertItem:item atIndex:1];
 	[item release];
