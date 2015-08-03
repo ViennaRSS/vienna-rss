@@ -854,9 +854,11 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[cellMenu insertItem:item atIndex:1];
 	[item release];
 	
+	[cellMenu insertItem:[NSMenuItem separatorItem] atIndex:2];
+
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
-	[cellMenu insertItem:item atIndex:2];
+	[cellMenu insertItem:item atIndex:3];
 	[item release];
 	
 	SearchMethod * searchMethod;
