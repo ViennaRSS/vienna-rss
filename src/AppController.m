@@ -1576,7 +1576,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             [panel orderOut:self];
             
             NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-            int countExported = [self exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+            int countExported = [Export exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
             
             if (countExported < 0)
             {
