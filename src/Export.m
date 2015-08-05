@@ -20,17 +20,21 @@
 
 #import "Export.h"
 #import "FoldersTree.h"
-#import "XMLParser.h"
 #import "StringExtensions.h"
 #import "BJRWindowWithToolbar.h"
 #import "Database.h"
+
+@interface Export()
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported;
+@end
 
 @implementation Export
 
 /* exportSubscriptionGroup
  * Export one group of folders.
  */
-+(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray withGroups:(BOOL)groupFlag
++(int)exportSubscriptionGroup:(NSXMLElement *)parentElement fromArray:(NSArray *)feedArray
+                   withGroups:(BOOL)groupFlag
 {
 	int countExported = 0;
     Database *db = [Database sharedManager];
@@ -42,13 +46,16 @@
 		{
 			NSArray * subFolders = [db arrayOfFolders:[folder itemId]];
 			
-			if (!groupFlag)
-				countExported += [self exportSubscriptionGroup:xmlTree fromArray:subFolders withGroups:groupFlag];
+            if (!groupFlag) {
+				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders withGroups:groupFlag];
+            }
 			else
 			{
 				[itemDict setObject:[NSString stringByInsertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
-				XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
-				countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders withGroups:groupFlag];
+                NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
+                [outlineElement setAttributesWithDictionary:itemDict];
+                [parentElement addChild:outlineElement];
+				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders withGroups:groupFlag];
 			}
 		}
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
@@ -62,7 +69,9 @@
             [itemDict setObject:[NSString stringByInsertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
 			[itemDict setObject:[NSString stringByInsertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
 			[itemDict setObject:[NSString stringByInsertingHTMLEntities:description] forKey:@"description"];
-			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
+            NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
+            [outlineElement setAttributesWithDictionary:itemDict];
+            [parentElement addChild:outlineElement];
 			++countExported;
 		}
 		[itemDict autorelease];
@@ -77,41 +86,60 @@
  */
 +(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
 {
-	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
-	XMLParser * opmlTree = [newTree addTree:@"opml" withAttributes:[NSDictionary dictionaryWithObject:@"1.0" forKey:@"version"]];
-
-	// Create the header section
-	XMLParser * headTree = [opmlTree addTree:@"head"];
-	if (headTree != nil)
-	{
-		[headTree addTree:@"title" withElement:@"Vienna Subscriptions"];
-		[headTree addTree:@"dateCreated" withElement:[[NSCalendarDate date] description]];
-	}
-	
-	// Create the body section
-	XMLParser * bodyTree = [opmlTree addTree:@"body"];
-	int countExported = [self exportSubscriptionGroup:bodyTree fromArray:foldersArray withGroups:groupFlag];
-
-	// Now write the complete XML to the file
+    int countExported = 0;
+    NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:foldersArray withGroups:groupFlag exportCount:&countExported];
+    	// Now write the complete XML to the file
+    
 	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
-		[newTree release];
 		return -1; // Indicate an error condition (impossible number of exports)
 	}
 
-	// Put some newlines in for readability
-	NSMutableString * xmlString = [[NSMutableString alloc] initWithString:[newTree xmlForTree]];
-	[xmlString replaceString:@"><" withString:@">\n<"];
-	[xmlString appendString:@"\n"];
-
-    NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding]; // [xmlString writeToFile:atomically:] will write xmlString in other encoding than UTF-8
-	[xmlString release];
+    NSData *xmlData = [opmlDocument XMLDataWithOptions:NSXMLNodePrettyPrint | NSXMLNodeCompactEmptyElement];
     [xmlData writeToFile:fqFilename atomically:YES];
+    
 	
 	// Clean up at the end
-	[newTree release];
+	[opmlDocument release];
 	return countExported;
+}
+
+/**
+ *  Creates an OPML NSXMLDocument from an array of feeds
+ *
+ *  @param folders       An array of Folders (feeds) to export
+ *  @param groupFlag     Keep groups in tact or flatten during export
+ *  @param countExported An integer pointer to hold the number of exported feeds
+ *
+ *  @return NSXMLDocument with OPML containing the exported folders
+ */
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported {
+    *countExported = 0;
+    NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithKind:NSXMLDocumentKind options:NSXMLNodePreserveEmptyElements];
+    [opmlDocument setCharacterEncoding:@"UTF-8"];
+    [opmlDocument setVersion:@"1.0"];
+    [opmlDocument setStandalone:YES];
+    
+    NSXMLElement *opmlElement = [NSXMLElement elementWithName:@"opml"];
+    [opmlElement setAttributesAsDictionary:@{@"version":@"1.0"}];
+    
+    NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
+    NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];
+    NSXMLElement *dateCreated = [NSXMLElement elementWithName:@"dateCreated"
+                                                  stringValue:[[NSCalendarDate date] description]];
+    [headElement addChild:title];
+    [headElement addChild:dateCreated];
+    [opmlElement addChild:headElement];
+    
+    NSXMLElement *bodyElement = [NSXMLElement elementWithName:@"body"];
+    *countExported = [Export exportSubscriptionGroup:bodyElement fromArray:folders withGroups:groupFlag];
+    
+    
+    [opmlElement addChild:bodyElement];
+    
+    [opmlDocument addChild:opmlElement];
+    return opmlDocument;
 }
 
 @end

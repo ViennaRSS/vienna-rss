@@ -9,9 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
 #import "Export.h"
+#import "Database.h"
 
 @interface Export(Testable)
-+ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag;
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported;
 @end
 
 @interface ExportTests : XCTestCase
@@ -32,12 +33,28 @@
 
 - (void)testExportWithoutGroups {
     // Test exporting feeds to opml file without groups
-    NSArray *folders = nil;
+    NSArray *folders = [self foldersArray];
+    NSURL *tmpUrl = [NSURL URLWithString:@"/tmp/vienna-test-nogroups.opml"];
     
-    NSXMLDocument *opmlDocument = [NSXMLDocument document];
-    //opmlDocument = [Export opmlDocumentFromFolders:folders withGroups:NO];
+    int countExported = [Export exportToFile:tmpUrl.absoluteString from:folders withGroups:NO];
+    XCTAssertGreaterThan(countExported, 0, @"Pass");
+}
+
+- (void)testExportWithGroups {
+    // Test exporting feeds to opml file without groups
+    NSArray *folders = [self foldersArray];
+    NSURL *tmpUrl = [NSURL URLWithString:@"/tmp/vienna-test-groups.opml"];
     
-    XCTAssert(YES, @"Pass");
+    int countExported = [Export exportToFile:tmpUrl.absoluteString from:folders withGroups:YES];
+    XCTAssertGreaterThan(countExported, 0, @"Pass");
+}
+
+
+// Test helper method to return an array of folders for export
+- (NSArray *)foldersArray {
+    Database *db = [Database sharedManager];
+    NSArray *foldersArray = [db arrayOfFolders:MA_Root_Folder];
+    return foldersArray;
 }
 
 
