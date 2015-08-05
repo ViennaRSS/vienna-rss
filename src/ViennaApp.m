@@ -190,7 +190,7 @@
 
 	int countExported = 0;
 	if (argArray != nil)
-		countExported = [(AppController*)[self delegate] exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
+		countExported = [Export exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
 	return [NSNumber numberWithInt:countExported];
 }
 

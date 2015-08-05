@@ -19,10 +19,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Database.h"
-#import "AppController.h"
 
-@interface AppController (Export)
-	-(IBAction)exportSubscriptions:(id)sender;
-	-(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag;
+@interface Export : NSObject
+	
++(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray
+        withGroups:(BOOL)groupFlag;
+
 @end

@@ -23,69 +23,17 @@
 #import "XMLParser.h"
 #import "StringExtensions.h"
 #import "BJRWindowWithToolbar.h"
+#import "Database.h"
 
-@implementation AppController (Export)
-
-/* exportSubscriptions
- * Export the list of RSS subscriptions as an OPML file.
- */
--(IBAction)exportSubscriptions:(id)sender
-{
-	NSSavePanel * panel = [NSSavePanel savePanel];
-
-	// If multiple selections in the folder list, default to selected folders
-	// for simplicity.
-	if ([foldersTree countOfSelectedFolders] > 1)
-	{
-		[exportSelected setState:NSOnState];
-		[exportAll setState:NSOffState];
-	}
-	else
-	{
-		[exportSelected setState:NSOffState];
-		[exportAll setState:NSOnState];
-	}
-
-	// Localise the strings
-	[exportAll setTitle:NSLocalizedString(@"Export all subscriptions", nil)];
-	[exportSelected setTitle:NSLocalizedString(@"Export selected subscriptions", nil)];
-	[exportWithGroups setTitle:NSLocalizedString(@"Preserve group folders in exported file", nil)];
-
-	[panel setAccessoryView:exportSaveAccessory];
-	[panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
-	[panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
-		if (returnCode == NSOKButton)
-		{
-			[panel orderOut:self];
-
-			NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-			int countExported = [self exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
-		
-			if (countExported < 0)
-			{
-				NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
-										  NSLocalizedString(@"OK", nil),
-										  nil,
-										  nil, [NSApp mainWindow], self,
-										  nil, nil, nil,
-										  NSLocalizedString(@"Cannot open export file message text", nil));
-			}
-			else
-			{
-				// Announce how many we successfully imported
-				NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
-			}
-		}
-	}];
-}
+@implementation Export
 
 /* exportSubscriptionGroup
  * Export one group of folders.
  */
--(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray withGroups:(BOOL)groupFlag
++(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray withGroups:(BOOL)groupFlag
 {
 	int countExported = 0;
-
+    Database *db = [Database sharedManager];
 	for (Folder * folder in feedArray)
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
@@ -127,7 +75,7 @@
  * folders selected in the folders tree are exported. Otherwise all RSS folders are exported.
  * Returns the number of subscriptions exported, or -1 on error.
  */
--(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
++(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
 {
 	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
 	XMLParser * opmlTree = [newTree addTree:@"opml" withAttributes:[NSDictionary dictionaryWithObject:@"1.0" forKey:@"version"]];
@@ -165,4 +113,5 @@
 	[newTree release];
 	return countExported;
 }
+
 @end

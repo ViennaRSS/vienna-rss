@@ -186,6 +186,7 @@
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
+-(IBAction)exportSubscriptions:(id)sender;
 
 
 // Public functions

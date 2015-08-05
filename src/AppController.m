@@ -1542,6 +1542,60 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[[Preferences standardPreferences] setFoldersTreeSortMethod:[sender tag]];
 }
 
+
+/* exportSubscriptions
+ * Export the list of RSS subscriptions as an OPML file.
+ */
+-(IBAction)exportSubscriptions:(id)sender
+{
+    NSSavePanel * panel = [NSSavePanel savePanel];
+    
+    // If multiple selections in the folder list, default to selected folders
+    // for simplicity.
+    if ([foldersTree countOfSelectedFolders] > 1)
+    {
+        [exportSelected setState:NSOnState];
+        [exportAll setState:NSOffState];
+    }
+    else
+    {
+        [exportSelected setState:NSOffState];
+        [exportAll setState:NSOnState];
+    }
+    
+    // Localise the strings
+    [exportAll setTitle:NSLocalizedString(@"Export all subscriptions", nil)];
+    [exportSelected setTitle:NSLocalizedString(@"Export selected subscriptions", nil)];
+    [exportWithGroups setTitle:NSLocalizedString(@"Preserve group folders in exported file", nil)];
+    
+    [panel setAccessoryView:exportSaveAccessory];
+    [panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
+    [panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
+        if (returnCode == NSOKButton)
+        {
+            [panel orderOut:self];
+            
+            NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
+            int countExported = [self exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+            
+            if (countExported < 0)
+            {
+                NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
+                                          NSLocalizedString(@"OK", nil),
+                                          nil,
+                                          nil, [NSApp mainWindow], self,
+                                          nil, nil, nil,
+                                          NSLocalizedString(@"Cannot open export file message text", nil));
+            }
+            else
+            {
+                // Announce how many we successfully imported
+                NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
+            }
+        }
+    }];
+}
+
 /* runAppleScript
  * Run an AppleScript script given a fully qualified path to the script.
  */
@@ -4856,4 +4910,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 
     [super dealloc];
 }
+
+
 @end
