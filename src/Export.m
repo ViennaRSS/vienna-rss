@@ -98,7 +98,7 @@
 				countExported += [self exportSubscriptionGroup:xmlTree fromArray:subFolders withGroups:groupFlag];
 			else
 			{
-				[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
+				[itemDict setObject:[NSString stringByInsertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
 				XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
 				countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders withGroups:groupFlag];
 			}
@@ -110,10 +110,10 @@
 			NSString * url = [folder feedURL];
 
 			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
-			[itemDict setObject:[XMLParser quoteAttributes:(link ? link : @"")] forKey:@"htmlUrl"];
-			[itemDict setObject:[XMLParser quoteAttributes:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:[XMLParser quoteAttributes:description] forKey:@"description"];
+			[itemDict setObject:[NSString stringByInsertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+            [itemDict setObject:[NSString stringByInsertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
+			[itemDict setObject:[NSString stringByInsertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
+			[itemDict setObject:[NSString stringByInsertingHTMLEntities:description] forKey:@"description"];
 			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
 			++countExported;
 		}

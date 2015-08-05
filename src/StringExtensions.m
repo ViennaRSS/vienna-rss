@@ -740,4 +740,20 @@ static NSMutableDictionary * entityMap = nil;
 {
 	return [self compare:aString options:NSCaseInsensitiveSearch|NSNumericSearch];
 }
+
+
+/* convertHTMLEntities
+ * Scan the specified string and convert HTML literal characters to their entity equivalents.
+ */
++(NSString *)stringByInsertingHTMLEntities:(NSString *)stringToProcess
+{
+    NSMutableString * newString = [NSMutableString stringWithString:stringToProcess];
+    [newString replaceString:@"&" withString:@"&amp;"];
+    [newString replaceString:@"<" withString:@"&lt;"];
+    [newString replaceString:@">" withString:@"&gt;"];
+    [newString replaceString:@"\"" withString:@"&quot;"];
+    [newString replaceString:@"'" withString:@"&apos;"];
+    return newString;
+}
+
 @end

@@ -409,21 +409,6 @@
 	return valueString;
 }
 
-/* quoteAttributes
- * Scan the specified string and convert HTML literal characters to their entity equivalents.
- */
-+(NSString *)quoteAttributes:(NSString *)stringToProcess
-{
-	NSMutableString * newString = [NSMutableString stringWithString:stringToProcess];
-	[newString replaceString:@"&" withString:@"&amp;"];
-	[newString replaceString:@"<" withString:@"&lt;"];
-	[newString replaceString:@">" withString:@"&gt;"];
-	[newString replaceString:@"\"" withString:@"&quot;"];
-	[newString replaceString:@"'" withString:@"&apos;"];
-	return newString;
-}
-
-
 
 /* parseXMLDate
  * Parse a date in an XML header into an NSCalendarDate. This is horribly expensive and needs
