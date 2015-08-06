@@ -20,26 +20,6 @@
 #import <Cocoa/Cocoa.h>
 #import "XMLParser.h"
 
-@interface FeedItem : NSObject {
-	NSString * title;
-	NSString * author;
-	NSString * link;
-	NSString * guid;
-	NSDate * date;
-	NSString * description;
-	NSString * enclosure;
-}
-
-// Accessor functions
--(NSString *)title;
--(NSString *)description;
--(NSString *)author;
--(NSString *)guid;
--(NSDate *)date;
--(NSString *)link;
--(NSString *)enclosure;
-@end
-
 @interface RichXMLParser : XMLParser {
 	NSString * title;
 	NSString * link;

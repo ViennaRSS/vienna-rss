@@ -76,6 +76,7 @@
 		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B41AA670850037471F /* VNADatabaseTests.m */; };
+		03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
 		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
@@ -874,6 +875,8 @@
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
 		03A131B41AA670850037471F /* VNADatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNADatabaseTests.m; sourceTree = "<group>"; };
+		03B752281B741AFD00FD3FDB /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedItem.h; path = src/models/FeedItem.h; sourceTree = "<group>"; };
+		03B752291B741AFD00FD3FDB /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedItem.m; path = src/models/FeedItem.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
@@ -1661,6 +1664,8 @@
 				AA26F4CB0604927300FE7994 /* Folder.m */,
 				030C388E1AABF12D00AE1EB8 /* FolderImageCache.h */,
 				030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */,
+				03B752281B741AFD00FD3FDB /* FeedItem.h */,
+				03B752291B741AFD00FD3FDB /* FeedItem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2724,7 +2729,6 @@
 		AA8C76C006420CA800649BA2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				0322802E1A33BCC1007DE933 /* Models */,
 				435026E5165DD8BE0018EDB7 /* ArticleRef.m */,
 				AA7AB45708CA742A000D34F9 /* ArticleRef.h */,
 				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
@@ -2760,6 +2764,7 @@
 				660AA30914072BFD0082CCF0 /* OpenReader Sync */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AA4F657B062B873100D4837C /* Extensions */,
+				0322802E1A33BCC1007DE933 /* Models */,
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				AAC5063D082A7AE00089FF70 /* Support Classes */,
@@ -3806,6 +3811,7 @@
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
+				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */,

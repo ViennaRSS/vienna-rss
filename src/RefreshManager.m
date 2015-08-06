@@ -33,6 +33,7 @@
 #import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
+#import "FeedItem.h"
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
