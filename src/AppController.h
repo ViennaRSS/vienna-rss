@@ -187,6 +187,7 @@
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
 -(IBAction)exportSubscriptions:(id)sender;
+-(IBAction)importSubscriptions:(id)sender;
 
 
 // Public functions

@@ -175,7 +175,7 @@
 -(id)handleImportSubscriptions:(NSScriptCommand *)cmd
 {
 	NSDictionary * args = [cmd evaluatedArguments];
-	[(AppController*)[self delegate] importFromFile:[args objectForKey:@"FileName"]];
+	[Import importFromFile:[args objectForKey:@"FileName"]];
 	return nil;
 }
 

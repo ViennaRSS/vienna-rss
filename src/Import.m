@@ -21,32 +21,16 @@
 #import "Import.h"
 #import "XMLParser.h"
 #import "StringExtensions.h"
-#import "ViennaApp.h"
 #import "BJRWindowWithToolbar.h"
+#import "Database.h"
 
-@implementation AppController (Import)
 
-/* importSubscriptions
- * Import an OPML file which lists RSS feeds.
- */
--(IBAction)importSubscriptions:(id)sender
-{
-	NSOpenPanel * panel = [NSOpenPanel openPanel];
-	[panel beginSheetModalForWindow:mainWindow
-			completionHandler: ^(NSInteger returnCode) {
-		if (returnCode == NSOKButton)
-		{
-			[panel orderOut:self];
-			[self importFromFile:[[panel URL] path]];
-		}
-	}];
-	panel = nil;
-}
+@implementation Import
 
 /* importSubscriptionGroup
  * Import one group of an OPML subscription tree.
  */
--(int)importSubscriptionGroup:(XMLParser *)tree underParent:(int)parentId
++ (int)importSubscriptionGroup:(XMLParser *)tree underParent:(int)parentId
 {
 	int countImported = 0;
 	int count = [tree countOfChildren];
@@ -112,7 +96,7 @@
 /* importFromFile
  * Import a list of RSS subscriptions.
  */
--(void)importFromFile:(NSString *)importFileName
++ (void)importFromFile:(NSString *)importFileName
 {
 	NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
 	BOOL hasError = NO;

@@ -791,7 +791,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		BOOL returnCode = NSRunAlertPanel(NSLocalizedString(@"Import subscriptions from OPML file?", nil), NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil), NSLocalizedString(@"Import", nil), NSLocalizedString(@"Cancel", nil), nil);
 		if (returnCode == NSAlertAlternateReturn)
 			return NO;
-		[self importFromFile:filename];
+		[Import importFromFile:filename];
 		return YES;
 	}
     if ([[filename pathExtension] isEqualToString:@"webloc"])
@@ -1595,6 +1595,25 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
     }];
 }
+
+
+/* importSubscriptions
+ * Import an OPML file which lists RSS feeds.
+ */
+-(IBAction)importSubscriptions:(id)sender
+{
+    NSOpenPanel * panel = [NSOpenPanel openPanel];
+    [panel beginSheetModalForWindow:mainWindow
+                  completionHandler: ^(NSInteger returnCode) {
+                      if (returnCode == NSOKButton)
+                      {
+                          [panel orderOut:self];
+                          [Import importFromFile:[[panel URL] path]];
+                      }
+                  }];
+    panel = nil;
+}
+
 
 /* runAppleScript
  * Run an AppleScript script given a fully qualified path to the script.
