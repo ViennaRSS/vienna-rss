@@ -50,7 +50,6 @@
         }
         else
         {
-            //XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
             NSArray *outlines = [opmlDocument nodesForXPath:@"opml/body/outline" error:nil];
             
             countImported = [self importSubscriptionGroup:outlines underParent:MA_Root_Folder];
