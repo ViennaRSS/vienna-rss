@@ -27,12 +27,12 @@
 	-(void)reset;
 	-(NSData *)preFlightValidation:(NSData *)xmlData;
 	-(NSStringEncoding)parseEncodingType:(NSData *)xmlData;
-	-(BOOL)initRSSFeed:(XMLParser *)feedTree isRDF:(BOOL)isRDF;
-	-(XMLParser *)channelTree:(XMLParser *)feedTree;
-	-(BOOL)initRSSFeedHeader:(XMLParser *)feedTree;
-	-(BOOL)initRSSFeedItems:(XMLParser *)feedTree;
+	-(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF;
+    -(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement;
+	-(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement;
+	-(BOOL)initRSSFeedItems:(NSXMLElement *)startElement;
 	-(BOOL)initAtomFeed:(XMLParser *)feedTree;
-	-(void)parseSequence:(XMLParser *)seqTree;
+	-(void)parseSequence:(NSXMLElement *)seqElement;
 	-(void)setTitle:(NSString *)newTitle;
 	-(void)setLink:(NSString *)newLink;
 	-(void)setDescription:(NSString *)newDescription;
@@ -85,28 +85,25 @@
 -(BOOL)parseRichXML:(NSData *)xmlData
 {
 	BOOL success = NO;
-	@try {
-	NSData * parsedXmlData = [self preFlightValidation:xmlData];
-	if (parsedXmlData && [self setData:parsedXmlData])
-	{
-		XMLParser * subtree;
-		
-		// If this RSS?
-		if ((subtree = [self treeByName:@"rss"]) != nil)
-			success = [self initRSSFeed:subtree isRDF:NO];
-
-		// If this RSS:RDF?
-		else if ((subtree = [self treeByName:@"rdf:RDF"]) != nil)
-			success = [self initRSSFeed:subtree isRDF:YES];
-
-		// Atom?
-		else if ((subtree = [self treeByName:@"feed"]) != nil)
-			success = [self initAtomFeed:subtree];
-	}
-	}
-	@catch (NSException *error) {
-		success = NO;
-	}
+	//NSData * parsedXmlData = [self preFlightValidation:xmlData];
+    NSError *error = nil;
+    NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
+                                                                 options:NSXMLNodeOptionsNone
+                                                                       error:&error];
+    if (!error) {
+        if([[xmlDocument.rootElement name] isEqualToString:@"rss"]) {
+            success = [self initRSSFeed:xmlDocument.rootElement isRDF:NO];
+        }
+        else if ([[xmlDocument.rootElement name] isEqualToString:@"rdf:RDF"]) {
+            success = [self initRSSFeed:xmlDocument.rootElement isRDF:YES];
+        }
+        else if ([[xmlDocument.rootElement name] isEqualToString:@"feed"]) {
+            // initAtomFeed
+        }
+    }
+    [xmlDocument release];
+    xmlDocument = nil;
+    
 	return success;
 }
 
@@ -343,79 +340,101 @@
 /* initRSSFeed
  * Prime the feed with header and items from an RSS feed
  */
--(BOOL)initRSSFeed:(XMLParser *)feedTree isRDF:(BOOL)isRDF
+-(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF
 {
-	BOOL success = [self initRSSFeedHeader:[self channelTree:feedTree]];
-	if (success)
-	{
-		if (isRDF)
-			success = [self initRSSFeedItems:feedTree];
-		else
-			success = [self initRSSFeedItems:[self channelTree:feedTree]];
-	}
-	return success;
+    BOOL success = NO;
+    NSXMLElement *channelElement = [self channelElementFromRSSElement:rssElement];
+    success = [self initRSSFeedHeaderWithElement:channelElement];
+    if (success) {
+        if (isRDF) {
+            success = [self initRSSFeedItems:rssElement];
+        } else {
+            success = [self initRSSFeedItems:channelElement];
+        }
+    }
+//	BOOL success = [self initRSSFeedHeader:[self channelTree:feedTree]];
+//	if (success)
+//	{
+//		if (isRDF)
+//			success = [self initRSSFeedItems:feedTree];
+//		else
+//			success = [self initRSSFeedItems:[self channelTree:feedTree]];
+//	}
+//	return success;
+    [channelElement release];
+    channelElement = nil;
+    return success;
 }
 
-/* channelTree
- * Return the root of the RSS feed's channel.
+/**
+ *  Get the root of the RSS feed's channel.
+ *
+ *  @param rssElement The rss element of the feed
+ *
+ *  @return the channel element
  */
--(XMLParser *)channelTree:(XMLParser *)feedTree
+-(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement
 {
-	XMLParser * channelTree = [feedTree treeByName:@"channel"];
-	if (channelTree == nil)
-		channelTree = [feedTree treeByName:@"rss:channel"];
-	return channelTree;
+	NSXMLElement *channelElement = [rssElement elementsForName:@"channel"].firstObject;
+    if (channelElement == nil) {
+        channelElement = [rssElement elementsForName:@"rss:channel"].firstObject;
+    }
+    return channelElement;
 }
 
-/* initRSSFeedHeader
- * Parse an RSS feed header items.
+
+/**
+ *  Parse an RSS feed's header items
+ *
+ *  @param channelElement the element containing header items.
+ *  This is typically a channel element for RSS feeds
+ *
+ *  @return YES on success
  */
--(BOOL)initRSSFeedHeader:(XMLParser *)feedTree
+-(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement
 {
-	BOOL success = YES;
+	BOOL success = NO;
 	
 	// Iterate through the channel items
-	CFIndex count = [feedTree countOfChildren];
-	CFIndex index;
-	
-	for (index = 0; index < count; ++index)
+	for (NSXMLElement *element in channelElement.children)
 	{
-		XMLParser * subTree = [feedTree treeByIndex:index];
-		NSString * nodeName = [subTree nodeName];
-
 		// Parse title
-		if ([nodeName isEqualToString:@"title"] || [nodeName isEqualToString:@"rss:title"])
+		if ([element.name isEqualToString:@"title"] || [element.name isEqualToString:@"rss:title"])
 		{
-			[self setTitle:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
+			[self setTitle:[element.stringValue stringByUnescapingExtendedCharacters]];
 			continue;
 		}
-
 		// Parse items group which dictates the sequence of the articles.
-		if ([nodeName isEqualToString:@"items"] || [nodeName isEqualToString:@"rss:items"])
+		if ([element.name isEqualToString:@"items"] || [element.name isEqualToString:@"rss:items"])
 		{
-			XMLParser * seqTree = [subTree treeByName:@"rdf:Seq"];
-			if (seqTree != nil)
-				[self parseSequence:seqTree];
+            NSXMLElement *seqElement = [element elementsForName:@"rdf:Seq"].firstObject;
+
+            if (seqElement != nil) {
+				[self parseSequence:seqElement];
+            }
 		}
 
 		// Parse description
-		if ([nodeName isEqualToString:@"description"] || [nodeName isEqualToString:@"rss:description"])
+		if ([element.name isEqualToString:@"description"] ||
+            [element.name isEqualToString:@"rss:description"])
 		{
-			[self setDescription:[subTree valueOfElement]];
+			[self setDescription:element.stringValue];
 			continue;
 		}			
 		
 		// Parse link
-		if ([nodeName isEqualToString:@"link"] || [nodeName isEqualToString:@"rss:link"])
+		if ([element.name isEqualToString:@"link"] || [element.name isEqualToString:@"rss:link"])
 		{
-			[self setLink:[[subTree valueOfElement] stringByUnescapingExtendedCharacters]];
+			[self setLink:[element.stringValue stringByUnescapingExtendedCharacters]];
 			continue;
 		}			
 		
 		// Parse the date when this feed was last updated
-		if ([nodeName isEqualToString:@"lastBuildDate"] || [nodeName isEqualToString:@"pubDate"] || [nodeName isEqualToString:@"dc:date"])
+		if ([element.name isEqualToString:@"lastBuildDate"] ||
+            [element.name isEqualToString:@"pubDate"] ||
+            [element.name isEqualToString:@"dc:date"])
 		{
-			NSString * dateString = [subTree valueOfElement];
+			NSString * dateString = element.stringValue;
 			[self setLastModified:[XMLParser parseXMLDate:dateString]];
 			continue;
 		}
@@ -423,145 +442,148 @@
 	return success;
 }
 
-/* parseSequence
- * Parses an RDF sequence and initialises orderArray with the appropriate sequence.
- * The RSS parser will then use this to order the actual items appropriately.
- */
--(void)parseSequence:(XMLParser *)seqTree
-{
-	CFIndex count = [seqTree countOfChildren];
-	CFIndex index;
 
+/**
+ *  Parses an RDF sequence and initialises orderArray with the appropriate sequence.
+ *  The RSS parser will then use this to order the actual items appropriately.
+ *
+ *  @param seqElement the sequence element
+ */
+-(void)parseSequence:(NSXMLElement *)seqElement
+{
 	[orderArray release];
-	orderArray = [[NSMutableArray alloc] initWithCapacity:count];
-	for (index = 0; index < count; ++index)
+	orderArray = [NSMutableArray array];
+    for (NSXMLElement *element in seqElement.children)
 	{
-		XMLParser * subTree = [seqTree treeByIndex:index];
-		if ([[subTree nodeName] isEqualToString:@"rdf:li"])
-		{
-			NSString * resourceString = [subTree valueOfAttribute:@"rdf:resource"];
-			if (resourceString == nil)
-				resourceString = [subTree valueOfAttribute:@"resource"];
-			if (resourceString != nil)
-				[orderArray addObject:resourceString];
-		}
+        if ([element.name isEqualToString:@"rdf:li"]) {
+            NSString *resourceString = [[element attributeForName:@"rdf:resource"] stringValue];
+            if (resourceString == nil) {
+                resourceString = [[element attributeForName:@"resource"] stringValue];
+            }
+            if (resourceString != nil) {
+                [orderArray addObject:resourceString];
+            }
+            
+        }
 	}
 }
 
 /* initRSSFeedItems
  * Parse the items from an RSS feed
  */
--(BOOL)initRSSFeedItems:(XMLParser *)feedTree
+-(BOOL)initRSSFeedItems:(NSXMLElement *)startElement
 {
-	BOOL success = YES;
-
-	// Iterate through the channel items
-	CFIndex count = [feedTree countOfChildren];
-	CFIndex index;
+	BOOL success = NO;
 
 	// Allocate an items array
 	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
-	items = [[NSMutableArray alloc] initWithCapacity:count];
-
-	for (index = 0; index < count; ++index)
+	items = [NSMutableArray array];
+    
+    for (NSXMLElement *element in startElement.children)
 	{
-		XMLParser * subTree = [feedTree treeByIndex:index];
-		NSString * nodeName = [subTree nodeName];
-		
 		// Parse a single item to construct a FeedItem object which is appended to
 		// the items array we maintain.
-		if ([nodeName isEqualToString:@"item"] || [nodeName isEqualToString:@"rss:item"])
+		if ([element.name isEqualToString:@"item"] || [element.name isEqualToString:@"rss:item"])
 		{
-			FeedItem * newItem = [[FeedItem new] autorelease];
-			CFIndex itemCount = [subTree countOfChildren];
+			FeedItem * newFeedItem = [[FeedItem new] autorelease];
 			NSMutableString * articleBody = nil;
 			BOOL hasDetailedContent = NO;
 			BOOL hasLink = NO;
-			CFIndex itemIndex;
 
 			// Check for rdf:about so we can identify this item in the orderArray.
-			NSString * itemIdentifier = [subTree valueOfAttribute:@"rdf:about"];
+            NSString *itemIdentifier = [[element attributeForName:@"rdf:about"] stringValue];
 
-			for (itemIndex = 0; itemIndex < itemCount; ++itemIndex)
+			for (NSXMLElement *itemChildElement in element.children)
 			{
-				XMLParser * subItemTree = [subTree treeByIndex:itemIndex];
-				NSString * itemNodeName = [subItemTree nodeName];
-
 				// Parse item title
-				if ([itemNodeName isEqualToString:@"title"] || [itemNodeName isEqualToString:@"rss:title"])
+				if ([itemChildElement.name isEqualToString:@"title"] ||
+                    [itemChildElement.name isEqualToString:@"rss:title"])
 				{
-					[newItem setTitle:[[subItemTree valueOfElement] summaryTextFromHTML]];
+                    [newFeedItem setTitle:[itemChildElement.stringValue summaryTextFromHTML]];
 					continue;
 				}
 				
 				// Parse item description
-				if (([itemNodeName isEqualToString:@"description"] || [itemNodeName isEqualToString:@"rss:description"]) && !hasDetailedContent)
+				if (([itemChildElement.name isEqualToString:@"description"] ||
+                     [itemChildElement.name isEqualToString:@"rss:description"]) &&
+                    !hasDetailedContent)
 				{
-					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
+                    articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					continue;
 				}
 				
 				// Parse GUID. The GUID may optionally have a permaLink attribute
 				// in which case this is also the article link unless overridden by
 				// an explicit link tag.
-				if ([itemNodeName isEqualToString:@"guid"] || [itemNodeName isEqualToString:@"rss:guid"])
+				if ([itemChildElement.name isEqualToString:@"guid"] ||
+                    [itemChildElement.name isEqualToString:@"rss:guid"])
 				{
-					NSString * permaLink = [subItemTree valueOfAttribute:@"isPermaLink"];
-					if (permaLink && [permaLink isEqualToString:@"true"] && !hasLink)
-						[newItem setLink:[subItemTree valueOfElement]];
-					[newItem setGuid:[subItemTree valueOfElement]];
+                    NSString * permaLink = [itemChildElement
+                                            attributeForName:@"isPermaLink"].stringValue;
+
+                    if (permaLink && [permaLink isEqualToString:@"true"] && !hasLink) {
+                        [newFeedItem setLink:itemChildElement.stringValue];
+                    }
+					[newFeedItem setGuid:itemChildElement.stringValue];
 					continue;
 				}
 				
 				// Parse detailed item description. This overrides the existing
 				// description for this item.
-				if ([itemNodeName isEqualToString:@"content:encoded"])
+				if ([itemChildElement.name isEqualToString:@"content:encoded"])
 				{
-					articleBody = [[[NSMutableString alloc] initWithString:[subItemTree valueOfElement]] autorelease];
+                    articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					hasDetailedContent = YES;
 					continue;
 				}
 				
                 // Parse item author
-				if ([itemNodeName isEqualToString:@"author"] || [itemNodeName isEqualToString:@"dc:creator"] || [itemNodeName isEqualToString:@"rss:author"])
+				if ([itemChildElement.name isEqualToString:@"author"] ||
+                    [itemChildElement.name isEqualToString:@"dc:creator"] ||
+                    [itemChildElement.name isEqualToString:@"rss:author"])
 				{
-					NSString *authorName = [subItemTree valueOfElement];
+					NSString *authorName = itemChildElement.stringValue;
                     
                     // the author is in the feed's entry
                     if (authorName != nil) {
                         // if we currently have a string set as the author then append the new author name
-                        if ([[newItem author] length] > 0) {
-                            [newItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newItem author], authorName]];
+                        if ([[newFeedItem author] length] > 0) {
+                            [newFeedItem setAuthor:[NSString stringWithFormat:
+                            NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newFeedItem author], authorName]];
                         }
                         // else we currently don't have an author set, so set it to the first author
                         else {
-                            [newItem setAuthor:authorName];
+                            [newFeedItem setAuthor:authorName];
                         }
                     }
                     continue;
 				}
 				
 				// Parse item date
-				if ([itemNodeName isEqualToString:@"dc:date"] || [itemNodeName isEqualToString:@"pubDate"])
+				if ([itemChildElement.name isEqualToString:@"dc:date"] ||
+                    [itemChildElement.name isEqualToString:@"pubDate"])
 				{
-					NSString * dateString = [subItemTree valueOfElement];
-					[newItem setDate:[XMLParser parseXMLDate:dateString]];
+					NSString * dateString = itemChildElement.stringValue;
+                    //TODO: replace setDate
+					[newFeedItem setDate:[XMLParser parseXMLDate:dateString]];
 					continue;
 				}
 				
 				// Parse item link
-				if ([itemNodeName isEqualToString:@"link"] || [itemNodeName isEqualToString:@"rss:link"])
+				if ([itemChildElement.name isEqualToString:@"link"] ||
+                    [itemChildElement.name isEqualToString:@"rss:link"])
 				{
-					[newItem setLink:[[subItemTree valueOfElement] stringByUnescapingExtendedCharacters]];
+					[newFeedItem setLink:[itemChildElement.stringValue stringByUnescapingExtendedCharacters]];
 					hasLink = YES;
 					continue;
 				}
 				
 				// Parse associated enclosure
-				if ([itemNodeName isEqualToString:@"enclosure"])
+				if ([itemChildElement.name isEqualToString:@"enclosure"])
 				{
-					if ([subItemTree valueOfAttribute:@"url"])
-						[newItem setEnclosure:[subItemTree valueOfAttribute:@"url"]];
+                    if ([itemChildElement attributeForName:@"url"].stringValue) {
+                        [newFeedItem setEnclosure:[itemChildElement attributeForName:@"url"].stringValue];
+                    }
 					continue;
 				}
 
@@ -569,23 +591,25 @@
 			
 			// If no link, set it to the feed link if there is one
 			if (!hasLink && [self link])
-				[newItem setLink:[self link]];
+				[newFeedItem setLink:[self link]];
 
 			// Do relative IMG, IFRAME and A tags fixup
 			[articleBody fixupRelativeImgTags:[self link]];
 			[articleBody fixupRelativeIframeTags:[self link]];
 			[articleBody fixupRelativeAnchorTags:[self link]];
-			[newItem setDescription:SafeString(articleBody)];
+			[newFeedItem setDescription:SafeString(articleBody)];
 
 			// Derive any missing title
-			[self ensureTitle:newItem];
+			[self ensureTitle:newFeedItem];
 			
 			// Add this item in the proper location in the array
 			NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
-			if (indexOfItem == NSNotFound || indexOfItem >= [items count])
-				[items addObject:newItem];
-			else
-				[items insertObject:newItem atIndex:indexOfItem];
+            if (indexOfItem == NSNotFound || indexOfItem >= [items count]) {
+				[items addObject:newFeedItem];
+            }
+            else {
+				[items insertObject:newFeedItem atIndex:indexOfItem];
+            }
 		}
 	}
 

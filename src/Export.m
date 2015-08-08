@@ -51,7 +51,7 @@
             }
 			else
 			{
-				[itemDict setObject:[NSString stringByInsertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+				[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
                 NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
                 [outlineElement setAttributesWithDictionary:itemDict];
                 [parentElement addChild:outlineElement];
@@ -65,10 +65,10 @@
 			NSString * url = [folder feedURL];
 
 			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:[NSString stringByInsertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
-            [itemDict setObject:[NSString stringByInsertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
-			[itemDict setObject:[NSString stringByInsertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:[NSString stringByInsertingHTMLEntities:description] forKey:@"description"];
+			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+            [itemDict setObject:[NSString stringByConvertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
+			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
+			[itemDict setObject:[NSString stringByConvertingHTMLEntities:description] forKey:@"description"];
             NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
             [outlineElement setAttributesWithDictionary:itemDict];
             [parentElement addChild:outlineElement];

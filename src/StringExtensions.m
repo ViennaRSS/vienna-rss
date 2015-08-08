@@ -745,7 +745,7 @@ static NSMutableDictionary * entityMap = nil;
 /* convertHTMLEntities
  * Scan the specified string and convert HTML literal characters to their entity equivalents.
  */
-+(NSString *)stringByInsertingHTMLEntities:(NSString *)stringToProcess
++(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess
 {
     NSMutableString * newString = [NSMutableString stringWithString:stringToProcess];
     [newString replaceString:@"&" withString:@"&amp;"];
