@@ -18,9 +18,8 @@
 //  limitations under the License.
 
 #import <Cocoa/Cocoa.h>
-#import "XMLParser.h"
 
-@interface RichXMLParser : XMLParser {
+@interface RichXMLParser : NSObject {
 	NSString * title;
 	NSString * link;
 	NSString * description;

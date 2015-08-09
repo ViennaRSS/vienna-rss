@@ -22,6 +22,7 @@
 #import "ArrayExtensions.h"
 #import "XMLTag.h"
 #import "FeedItem.h"
+#import "NSDate+Vienna.h"
 
 @interface RichXMLParser (Private)
 	-(void)reset;
@@ -352,17 +353,6 @@
             success = [self initRSSFeedItems:channelElement];
         }
     }
-//	BOOL success = [self initRSSFeedHeader:[self channelTree:feedTree]];
-//	if (success)
-//	{
-//		if (isRDF)
-//			success = [self initRSSFeedItems:feedTree];
-//		else
-//			success = [self initRSSFeedItems:[self channelTree:feedTree]];
-//	}
-//	return success;
-    [channelElement release];
-    channelElement = nil;
     return success;
 }
 
@@ -436,7 +426,7 @@
             [element.name isEqualToString:@"dc:date"])
 		{
 			NSString * dateString = element.stringValue;
-			[self setLastModified:[XMLParser parseXMLDate:dateString]];
+			[self setLastModified:[NSDate parseXMLDate:dateString]];
 			continue;
 		}
 	}
@@ -565,8 +555,7 @@
                     [itemChildElement.name isEqualToString:@"pubDate"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
-                    //TODO: replace setDate
-					[newFeedItem setDate:[XMLParser parseXMLDate:dateString]];
+					[newFeedItem setDate:[NSDate parseXMLDate:dateString]];
 					continue;
 				}
 				
@@ -702,8 +691,7 @@
 		if ([atomChildElement.name isEqualToString:@"updated"])
 		{
 			NSString * dateString = atomChildElement.stringValue;
-            //TODO: replace parseXMLDate
-			[self setLastModified:[XMLParser parseXMLDate:dateString]];
+			[self setLastModified:[NSDate parseXMLDate:dateString]];
 			continue;
 		}
 		
@@ -711,8 +699,7 @@
 		if ([atomChildElement.name isEqualToString:@"modified"])
 		{
 			NSString * dateString = atomChildElement.stringValue;
-            //TODO: replace parseXMLDate
-			[self setLastModified:[XMLParser parseXMLDate:dateString]];
+			[self setLastModified:[NSDate parseXMLDate:dateString]];
 			continue;
 		}
 		
@@ -831,8 +818,7 @@
 				if ([itemChildElement.name isEqualToString:@"modified"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
-                    //TODO: replace parseXMLDate
-					NSDate * newDate = [XMLParser parseXMLDate:dateString];
+					NSDate * newDate = [NSDate parseXMLDate:dateString];
 					if ([newFeedItem date] == nil || [newDate isGreaterThan:[newFeedItem date]])
 						[newFeedItem setDate:newDate];
 					continue;
@@ -842,8 +828,7 @@
 				if ([itemChildElement.name isEqualToString:@"created"])
 				{
                     NSString * dateString = itemChildElement.stringValue;
-                    //TODO: replace parseXMLDate
-                    NSDate * newDate = [XMLParser parseXMLDate:dateString];
+                    NSDate * newDate = [NSDate parseXMLDate:dateString];
                     if ([newFeedItem date] == nil || [newDate isGreaterThan:[newFeedItem date]])
                         [newFeedItem setDate:newDate];
                     continue;
@@ -853,8 +838,7 @@
 				if ([itemChildElement.name isEqualToString:@"updated"])
 				{
                     NSString * dateString = itemChildElement.stringValue;
-                    //TODO: replace parseXMLDate
-                    NSDate * newDate = [XMLParser parseXMLDate:dateString];
+                    NSDate * newDate = [NSDate parseXMLDate:dateString];
                     if ([newFeedItem date] == nil || [newDate isGreaterThan:[newFeedItem date]])
                         [newFeedItem setDate:newDate];
                     continue;

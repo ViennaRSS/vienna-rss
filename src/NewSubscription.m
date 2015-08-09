@@ -21,7 +21,6 @@
 #import "NewSubscription.h"
 #import "AppController.h"
 #import "StringExtensions.h"
-#import "RichXMLParser.h"
 #import "Preferences.h"
 #import "GoogleReader.h"
 #import "SubscriptionModel.h"
