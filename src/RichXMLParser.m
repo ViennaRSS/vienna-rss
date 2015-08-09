@@ -464,7 +464,7 @@
  */
 -(BOOL)initRSSFeedItems:(NSXMLElement *)startElement
 {
-	BOOL success = NO;
+	BOOL success = YES;
 
 	// Allocate an items array
 	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
@@ -596,11 +596,9 @@
 			NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
             if (indexOfItem == NSNotFound || indexOfItem >= [items count]) {
 				[items addObject:newFeedItem];
-                success = YES;
             }
             else {
 				[items insertObject:newFeedItem atIndex:indexOfItem];
-                success = YES;
             }
 		}
 	}
@@ -635,6 +633,7 @@
 		if ([atomChildElement.name isEqualToString:@"title"])
 		{
 			[self setTitle:[[atomChildElement.stringValue stringByUnescapingExtendedCharacters] summaryTextFromHTML]];
+            success = YES;
 			continue;
 		}
 		
