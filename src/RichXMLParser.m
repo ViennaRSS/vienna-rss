@@ -443,7 +443,7 @@
 -(void)parseSequence:(NSXMLElement *)seqElement
 {
 	[orderArray release];
-	orderArray = [NSMutableArray array];
+	orderArray = [[NSMutableArray alloc] init];
     for (NSXMLElement *element in seqElement.children)
 	{
         if ([element.name isEqualToString:@"rdf:li"]) {
@@ -468,7 +468,7 @@
 
 	// Allocate an items array
 	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
-	items = [NSMutableArray array];
+	items = [[NSMutableArray alloc] init];
     
     for (NSXMLElement *element in startElement.children)
 	{
@@ -617,7 +617,7 @@
 	
 	// Allocate an items array
 	NSAssert(items == nil, @"initAtomFeed called more than once per initialisation");
-    items = [NSMutableArray array];
+    items = [[NSMutableArray alloc] init];
 	
 	// Look for feed attributes we need to process
 	NSString * linkBase = [[atomElement attributeForName:@"xml:base"].stringValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
