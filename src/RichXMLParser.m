@@ -99,7 +99,7 @@
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:YES];
         }
         else if ([[xmlDocument.rootElement name] isEqualToString:@"feed"]) {
-            // initAtomFeed
+            success = [self initAtomFeed:xmlDocument.rootElement];
         }
     }
     [xmlDocument release];
