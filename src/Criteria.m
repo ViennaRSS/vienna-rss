@@ -317,20 +317,20 @@
     [criteriaDoc setVersion:@"1.0"];
     
     NSDictionary * conditionDict = [NSDictionary dictionaryWithObject:[CriteriaTree conditionToString:condition] forKey:@"condition"];
-    NSXMLElement *criteriaGroup = [[NSXMLElement alloc] initWithName:@"criteriagroup"];
+    NSXMLElement *criteriaGroup = [[[NSXMLElement alloc] initWithName:@"criteriagroup"] autorelease];
     [criteriaGroup setAttributesWithDictionary:conditionDict];
     
     for (Criteria *criteria in criteriaTree) {
         NSDictionary * criteriaDict = [NSDictionary dictionaryWithObject:[criteria field] forKey:@"field"];
-        NSXMLElement *criteriaElement = [[NSXMLElement alloc] initWithName:@"criteria"];
+        NSXMLElement *criteriaElement = [[[NSXMLElement alloc] initWithName:@"criteria"] autorelease];
         [criteriaElement setAttributesWithDictionary:criteriaDict];
-        NSXMLElement *operatorElement = [[NSXMLElement alloc]
+        NSXMLElement *operatorElement = [[[NSXMLElement alloc]
                                         initWithName:@"operator"
                                         stringValue:[NSString stringWithFormat:
-                                                     @"%d", criteria.operator]];
-        NSXMLElement *valueElement = [[NSXMLElement alloc]
+                                                     @"%d", criteria.operator]] autorelease];
+        NSXMLElement *valueElement = [[[NSXMLElement alloc]
                                         initWithName:@"value"
-                                        stringValue:criteria.value];
+                                        stringValue:criteria.value] autorelease];
         
         [criteriaGroup addChild:criteriaElement];
         [criteriaElement addChild:operatorElement];
