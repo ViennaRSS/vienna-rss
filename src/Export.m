@@ -100,8 +100,6 @@
     [xmlData writeToFile:fqFilename atomically:YES];
     
 	
-	// Clean up at the end
-	[opmlDocument release];
 	return countExported;
 }
 
@@ -139,7 +137,7 @@
     [opmlElement addChild:bodyElement];
     
     [opmlDocument addChild:opmlElement];
-    return opmlDocument;
+    return [opmlDocument autorelease];
 }
 
 @end

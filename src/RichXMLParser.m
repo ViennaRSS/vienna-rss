@@ -99,7 +99,7 @@
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:YES];
         }
         else if ([[xmlDocument.rootElement name] isEqualToString:@"feed"]) {
-            // initAtomFeed
+            success = [self initAtomFeed:xmlDocument.rootElement];
         }
     }
     [xmlDocument release];
@@ -443,7 +443,7 @@
 -(void)parseSequence:(NSXMLElement *)seqElement
 {
 	[orderArray release];
-	orderArray = [NSMutableArray array];
+	orderArray = [[NSMutableArray alloc] init];
     for (NSXMLElement *element in seqElement.children)
 	{
         if ([element.name isEqualToString:@"rdf:li"]) {
@@ -464,11 +464,11 @@
  */
 -(BOOL)initRSSFeedItems:(NSXMLElement *)startElement
 {
-	BOOL success = NO;
+	BOOL success = YES;
 
 	// Allocate an items array
 	NSAssert(items == nil, @"initRSSFeedItems called more than once per initialisation");
-	items = [NSMutableArray array];
+	items = [[NSMutableArray alloc] init];
     
     for (NSXMLElement *element in startElement.children)
 	{
@@ -596,11 +596,9 @@
 			NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
             if (indexOfItem == NSNotFound || indexOfItem >= [items count]) {
 				[items addObject:newFeedItem];
-                success = YES;
             }
             else {
 				[items insertObject:newFeedItem atIndex:indexOfItem];
-                success = YES;
             }
 		}
 	}
@@ -617,7 +615,7 @@
 	
 	// Allocate an items array
 	NSAssert(items == nil, @"initAtomFeed called more than once per initialisation");
-    items = [NSMutableArray array];
+    items = [[NSMutableArray alloc] init];
 	
 	// Look for feed attributes we need to process
 	NSString * linkBase = [[atomElement attributeForName:@"xml:base"].stringValue stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -635,6 +633,7 @@
 		if ([atomChildElement.name isEqualToString:@"title"])
 		{
 			[self setTitle:[[atomChildElement.stringValue stringByUnescapingExtendedCharacters] summaryTextFromHTML]];
+            success = YES;
 			continue;
 		}
 		
