@@ -726,28 +726,28 @@
 			for (NSXMLElement *itemChildElement in atomChildElement.children)
 			{
 				// Parse item title
-				if ([itemChildElement.stringValue isEqualToString:@"title"])
+				if ([itemChildElement.name isEqualToString:@"title"])
 				{
 					[newFeedItem setTitle:[itemChildElement.stringValue summaryTextFromHTML]];
 					continue;
 				}
 
 				// Parse item description
-				if ([itemChildElement.stringValue isEqualToString:@"content"])
+				if ([itemChildElement.name isEqualToString:@"content"])
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
 					continue;
 				}
 				
 				// Parse item description
-				if ([itemChildElement.stringValue isEqualToString:@"summary"])
+				if ([itemChildElement.name isEqualToString:@"summary"])
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
 					continue;
 				}
 				
 				// Parse item author
-				if ([itemChildElement.stringValue isEqualToString:@"author"])
+				if ([itemChildElement.name isEqualToString:@"author"])
 				{
 					NSString * authorName = [[itemChildElement elementsForName:@"name"].firstObject stringValue];
 					if (authorName == nil) {
@@ -768,7 +768,7 @@
 				}
 				
 				// Parse item link
-				if ([itemChildElement.stringValue isEqualToString:@"link"])
+				if ([itemChildElement.name isEqualToString:@"link"])
 				{
 					if ([[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"enclosure"] ||
                         [[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"http://opds-spec.org/acquisition"])
