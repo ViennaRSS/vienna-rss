@@ -623,7 +623,7 @@
 	for (NSXMLElement *atomChildElement in atomElement.children)
 	{
 		// Parse title
-		if ([atomChildElement.name isEqualToString:@"title"])
+		if ([atomChildElement.localName isEqualToString:@"title"])
 		{
 			[self setTitle:[[atomChildElement.stringValue stringByUnescapingExtendedCharacters] summaryTextFromHTML]];
             success = YES;
@@ -631,21 +631,21 @@
 		}
 		
 		// Parse description]
-		if ([atomChildElement.name isEqualToString:@"subtitle"])
+		if ([atomChildElement.localName isEqualToString:@"subtitle"])
 		{
 			[self setDescription:atomChildElement.stringValue];
 			continue;
 		}			
 		
 		// Parse description
-		if ([atomChildElement.name isEqualToString:@"tagline"])
+		if ([atomChildElement.localName isEqualToString:@"tagline"])
 		{
 			[self setDescription:atomChildElement.stringValue];
 			continue;
 		}			
 
 		// Parse link
-		if ([atomChildElement.name isEqualToString:@"link"])
+		if ([atomChildElement.localName isEqualToString:@"link"])
 		{
 			if ([atomChildElement attributeForName:@"rel"].stringValue == nil ||
                  [[atomChildElement attributeForName:@"rel"].stringValue isEqualToString:@"alternate"])
@@ -671,7 +671,7 @@
 		
 		// Parse author at the feed level. This is the default for any entry
 		// that doesn't have an explicit author.
-		if ([atomChildElement.name isEqualToString:@"author"])
+		if ([atomChildElement.localName isEqualToString:@"author"])
 		{
             NSXMLElement *nameElement = [atomChildElement elementsForName:@"name"].firstObject;
 			if (nameElement != nil)
@@ -680,7 +680,7 @@
 		}
 		
 		// Parse the date when this feed was last updated
-		if ([atomChildElement.name isEqualToString:@"updated"])
+		if ([atomChildElement.localName isEqualToString:@"updated"])
 		{
 			NSString * dateString = atomChildElement.stringValue;
 			[self setLastModified:[NSDate parseXMLDate:dateString]];
@@ -688,7 +688,7 @@
 		}
 		
 		// Parse the date when this feed was last updated
-		if ([atomChildElement.name isEqualToString:@"modified"])
+		if ([atomChildElement.localName isEqualToString:@"modified"])
 		{
 			NSString * dateString = atomChildElement.stringValue;
 			[self setLastModified:[NSDate parseXMLDate:dateString]];
@@ -697,7 +697,7 @@
 		
 		// Parse a single item to construct a FeedItem object which is appended to
 		// the items array we maintain.
-		if ([atomChildElement.name isEqualToString:@"entry"])
+		if ([atomChildElement.localName isEqualToString:@"entry"])
 		{
 			FeedItem * newFeedItem = [[FeedItem new] autorelease];
 			NSMutableString * articleBody = nil;
@@ -719,28 +719,28 @@
 			for (NSXMLElement *itemChildElement in atomChildElement.children)
 			{
 				// Parse item title
-				if ([itemChildElement.name isEqualToString:@"title"])
+				if ([itemChildElement.localName isEqualToString:@"title"])
 				{
 					[newFeedItem setTitle:[itemChildElement.stringValue summaryTextFromHTML]];
 					continue;
 				}
 
 				// Parse item description
-				if ([itemChildElement.name isEqualToString:@"content"])
+				if ([itemChildElement.localName isEqualToString:@"content"])
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
 					continue;
 				}
 				
 				// Parse item description
-				if ([itemChildElement.name isEqualToString:@"summary"])
+				if ([itemChildElement.localName isEqualToString:@"summary"])
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
 					continue;
 				}
 				
 				// Parse item author
-				if ([itemChildElement.name isEqualToString:@"author"])
+				if ([itemChildElement.localName isEqualToString:@"author"])
 				{
 					NSString * authorName = [[itemChildElement elementsForName:@"name"].firstObject stringValue];
 					if (authorName == nil) {
@@ -761,7 +761,7 @@
 				}
 				
 				// Parse item link
-				if ([itemChildElement.name isEqualToString:@"link"])
+				if ([itemChildElement.localName isEqualToString:@"link"])
 				{
 					if ([[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"enclosure"] ||
                         [[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"http://opds-spec.org/acquisition"])
@@ -800,14 +800,14 @@
 				}
 				
 				// Parse item id
-				if ([itemChildElement.name isEqualToString:@"id"])
+				if ([itemChildElement.localName isEqualToString:@"id"])
 				{
 					[newFeedItem setGuid:itemChildElement.stringValue];
 					continue;
 				}
 
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"modified"])
+				if ([itemChildElement.localName isEqualToString:@"modified"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
 					NSDate * newDate = [NSDate parseXMLDate:dateString];
@@ -817,7 +817,7 @@
 				}
 
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"created"])
+				if ([itemChildElement.localName isEqualToString:@"created"])
 				{
                     NSString * dateString = itemChildElement.stringValue;
                     NSDate * newDate = [NSDate parseXMLDate:dateString];
@@ -827,7 +827,7 @@
 				}
 				
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"updated"])
+				if ([itemChildElement.localName isEqualToString:@"updated"])
 				{
                     NSString * dateString = itemChildElement.stringValue;
                     NSDate * newDate = [NSDate parseXMLDate:dateString];
