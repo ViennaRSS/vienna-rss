@@ -389,14 +389,14 @@
 	for (NSXMLElement *element in channelElement.children)
 	{
 		// Parse title
-		if ([element.name isEqualToString:@"title"] || [element.name isEqualToString:@"rss:title"])
+		if ([element.localName isEqualToString:@"title"])
 		{
 			[self setTitle:[element.stringValue stringByUnescapingExtendedCharacters]];
             success = YES;
 			continue;
 		}
 		// Parse items group which dictates the sequence of the articles.
-		if ([element.name isEqualToString:@"items"] || [element.name isEqualToString:@"rss:items"])
+		if ([element.localName isEqualToString:@"items"])
 		{
             NSXMLElement *seqElement = [element elementsForName:@"rdf:Seq"].firstObject;
 
@@ -406,24 +406,23 @@
 		}
 
 		// Parse description
-		if ([element.name isEqualToString:@"description"] ||
-            [element.name isEqualToString:@"rss:description"])
+		if ([element.localName isEqualToString:@"description"])
 		{
 			[self setDescription:element.stringValue];
 			continue;
 		}			
 		
 		// Parse link
-		if ([element.name isEqualToString:@"link"] || [element.name isEqualToString:@"rss:link"])
+		if ([element.localName isEqualToString:@"link"])
 		{
 			[self setLink:[element.stringValue stringByUnescapingExtendedCharacters]];
 			continue;
 		}			
 		
 		// Parse the date when this feed was last updated
-		if ([element.name isEqualToString:@"lastBuildDate"] ||
-            [element.name isEqualToString:@"pubDate"] ||
-            [element.name isEqualToString:@"dc:date"])
+		if ([element.localName isEqualToString:@"lastBuildDate"] ||
+            [element.localName isEqualToString:@"pubDate"] ||
+            [element.localName isEqualToString:@"date"])
 		{
 			NSString * dateString = element.stringValue;
 			[self setLastModified:[NSDate parseXMLDate:dateString]];
@@ -446,7 +445,7 @@
 	orderArray = [[NSMutableArray alloc] init];
     for (NSXMLElement *element in seqElement.children)
 	{
-        if ([element.name isEqualToString:@"rdf:li"]) {
+        if ([element.localName isEqualToString:@"li"]) {
             NSString *resourceString = [[element attributeForName:@"rdf:resource"] stringValue];
             if (resourceString == nil) {
                 resourceString = [[element attributeForName:@"resource"] stringValue];
@@ -474,7 +473,7 @@
 	{
 		// Parse a single item to construct a FeedItem object which is appended to
 		// the items array we maintain.
-		if ([element.name isEqualToString:@"item"] || [element.name isEqualToString:@"rss:item"])
+		if ([element.localName isEqualToString:@"item"])
 		{
 			FeedItem * newFeedItem = [[FeedItem new] autorelease];
 			NSMutableString * articleBody = nil;
@@ -487,16 +486,14 @@
 			for (NSXMLElement *itemChildElement in element.children)
 			{
 				// Parse item title
-				if ([itemChildElement.name isEqualToString:@"title"] ||
-                    [itemChildElement.name isEqualToString:@"rss:title"])
+				if ([itemChildElement.localName isEqualToString:@"title"])
 				{
                     [newFeedItem setTitle:[itemChildElement.stringValue summaryTextFromHTML]];
 					continue;
 				}
 				
 				// Parse item description
-				if (([itemChildElement.name isEqualToString:@"description"] ||
-                     [itemChildElement.name isEqualToString:@"rss:description"]) &&
+				if (([itemChildElement.localName isEqualToString:@"description"]) &&
                     !hasDetailedContent)
 				{
                     articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
@@ -506,8 +503,7 @@
 				// Parse GUID. The GUID may optionally have a permaLink attribute
 				// in which case this is also the article link unless overridden by
 				// an explicit link tag.
-				if ([itemChildElement.name isEqualToString:@"guid"] ||
-                    [itemChildElement.name isEqualToString:@"rss:guid"])
+				if ([itemChildElement.localName isEqualToString:@"guid"])
 				{
                     NSString * permaLink = [itemChildElement
                                             attributeForName:@"isPermaLink"].stringValue;
@@ -521,7 +517,7 @@
 				
 				// Parse detailed item description. This overrides the existing
 				// description for this item.
-				if ([itemChildElement.name isEqualToString:@"content:encoded"])
+				if ([itemChildElement.localName isEqualToString:@"encoded"])
 				{
                     articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					hasDetailedContent = YES;
@@ -529,9 +525,7 @@
 				}
 				
                 // Parse item author
-				if ([itemChildElement.name isEqualToString:@"author"] ||
-                    [itemChildElement.name isEqualToString:@"dc:creator"] ||
-                    [itemChildElement.name isEqualToString:@"rss:author"])
+				if ([itemChildElement.localName isEqualToString:@"author"])
 				{
 					NSString *authorName = itemChildElement.stringValue;
                     
@@ -551,8 +545,8 @@
 				}
 				
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"dc:date"] ||
-                    [itemChildElement.name isEqualToString:@"pubDate"])
+				if ([itemChildElement.localName isEqualToString:@"date"] ||
+                    [itemChildElement.localName isEqualToString:@"pubDate"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
 					[newFeedItem setDate:[NSDate parseXMLDate:dateString]];
@@ -560,8 +554,7 @@
 				}
 				
 				// Parse item link
-				if ([itemChildElement.name isEqualToString:@"link"] ||
-                    [itemChildElement.name isEqualToString:@"rss:link"])
+				if ([itemChildElement.localName isEqualToString:@"link"])
 				{
 					[newFeedItem setLink:[itemChildElement.stringValue stringByUnescapingExtendedCharacters]];
 					hasLink = YES;
@@ -569,7 +562,7 @@
 				}
 				
 				// Parse associated enclosure
-				if ([itemChildElement.name isEqualToString:@"enclosure"])
+				if ([itemChildElement.localName isEqualToString:@"enclosure"])
 				{
                     if ([itemChildElement attributeForName:@"url"].stringValue) {
                         [newFeedItem setEnclosure:[itemChildElement attributeForName:@"url"].stringValue];
