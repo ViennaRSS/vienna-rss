@@ -25,9 +25,6 @@
 #import "NSDate+Vienna.h"
 
 @interface RichXMLParser (Private)
-	-(void)reset;
-	-(NSData *)preFlightValidation:(NSData *)xmlData;
-	-(NSStringEncoding)parseEncodingType:(NSData *)xmlData;
 	-(BOOL)initRSSFeed:(NSXMLElement *)rssElement isRDF:(BOOL)isRDF;
     -(NSXMLElement *)channelElementFromRSSElement:(NSXMLElement *)rssElement;
 	-(BOOL)initRSSFeedHeaderWithElement:(NSXMLElement *)channelElement;
@@ -45,40 +42,6 @@
 
 @implementation RichXMLParser
 
-/* init
- * Creates a RichXMLParser instance.
- */
--(id)init
-{
-	if ((self = [super init]) != nil)
-	{
-		[self setTitle:@""];
-		[self setDescription:@""];
-		lastModified = nil;
-		link = nil;
-		items = nil;
-		orderArray = nil;
-	}
-	return self;
-}
-
-/* reset
- * Reset to remove existing feed info.
- */
--(void)reset
-{
-	[title release];
-	[description release];
-	[lastModified release];
-	[link release];
-	[items release];
-	title = nil;
-	description = nil;
-	lastModified = nil;
-	link = nil;
-	items = nil;
-}
-
 /* parseRichXML
  * Given an XML feed in xmlData, parses the feed as either an RSS or an Atom feed.
  * The actual parsed items can subsequently be accessed through the interface.
@@ -86,7 +49,6 @@
 -(BOOL)parseRichXML:(NSData *)xmlData
 {
 	BOOL success = NO;
-	//NSData * parsedXmlData = [self preFlightValidation:xmlData];
     NSError *error = nil;
     NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                                  options:NSXMLNodeOptionsNone
@@ -162,182 +124,6 @@
 	return success;
 }
 
-/* preFlightValidation
- * Try and sanitise the XML data before the XML parser gets a chance to reject it. This
- * should address the most common bad-feed errors until we can change the parser to one
- * that provides us more control.
- */
--(NSData *)preFlightValidation:(NSData *)xmlData
-{
-	NSUInteger count = [xmlData length];
-	const unsigned char * srcPtr = [xmlData bytes];
-	const unsigned char * srcEndPtr = srcPtr + count;
-
-	// We'll create another data stream with the converted characters
-	NSMutableData * newXmlData = [NSMutableData dataWithLength:count];
-	char * destPtr = [newXmlData mutableBytes];
-	NSUInteger destCapacity = count;
-	NSUInteger destSize = count;
-	NSUInteger destIndex = 0;
-
-	// Determine XML encoding and BOM
-	NSStringEncoding encodedType;
-
-	if ( (count > 2 && srcPtr[0] == 0xFE && srcPtr[1] == 0xFF) ||
-		  (count > 2 && srcPtr[0] == 0xFF && srcPtr[1] == 0xFE) )
-	{
-		// Copy Unicode UTF-16 big/little-endian BOM.
-		destPtr[destIndex++] = srcPtr[0];
-		destPtr[destIndex++] = srcPtr[1];
-		srcPtr += 2;
-
-		char* encodingNameStr = "UTF-16";
-		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
-		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
-		CFRelease(encodingName);
-	}
-
-	else if (count > 3 && srcPtr[0] == 0xEF && srcPtr[1] == 0xBB && srcPtr[2] == 0xBF)
-	{
-		// Copy Unicode UTF-8 little-endian BOM.
-		destPtr[destIndex++] = srcPtr[0];
-		destPtr[destIndex++] = srcPtr[1];
-		destPtr[destIndex++] = srcPtr[2];
-		srcPtr += 3;
-
-		char* encodingNameStr = "UTF-8";
-		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
-		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
-		CFRelease(encodingName);
-	}
-
-	else
-	{
-		// Lets see if we have any better luck parsing the XML
-		encodedType = [self parseEncodingType:xmlData];
-	}
-	
-	while (srcPtr < srcEndPtr)
-	{
-		unsigned char ch = *srcPtr++;
-		if (ch >= 0xC0 && ch <= 0xFD && srcPtr < srcEndPtr && *srcPtr >= 0x80 && *srcPtr <= 0xBF)
-		{
-			// Copy UTF-8 lead bytes unchanged. The parser can cope with
-			// these fine.
-			destPtr[destIndex++] = ch;
-			while (srcPtr < srcEndPtr && (*srcPtr & 0x80))
-				destPtr[destIndex++] = *srcPtr++;
-		}
-		else if (ch > 0x7F && encodedType == NSUTF8StringEncoding)
-		{
-			// Other characters with their high bits set are not valid UTF-8.
-			// But regardless of the encoding scheme, their entity equivalents
-			// are. So convert them into a hex entity character code.
-			if (destSize + 5 > destCapacity)
-			{
-				[newXmlData setLength:destCapacity += 256];
-				destPtr = [newXmlData mutableBytes];
-			}
-			destPtr[destIndex++] = '&';
-			destPtr[destIndex++] = '#';
-			destPtr[destIndex++] = 'x';
-			destPtr[destIndex++] = "0123456789ABCDEF"[(ch / 16)];
-			destPtr[destIndex++] = "0123456789ABCDEF"[(ch % 16)];
-			destPtr[destIndex++] = ';';
-			destSize += 5;
-		}
-		else if (ch == '&' && srcPtr < srcEndPtr && *srcPtr != '#')
-		{
-			// Some feeds use a '&' outside of its intended use as an entity
-			// delimiter. So if '&' is followed by a non-alphanumeric, make it
-			// into its entity equivalent.
-			const unsigned char * srcTmpPtr = srcPtr;
-			while (srcTmpPtr < srcEndPtr && isalpha(*srcTmpPtr))
-				++srcTmpPtr;
-			if (srcTmpPtr < srcEndPtr && *srcTmpPtr == ';')
-				destPtr[destIndex++] = '&';
-			else
-			{
-				if (destSize + 4 > destCapacity)
-				{
-					[newXmlData setLength:destCapacity += 256];
-					destPtr = [newXmlData mutableBytes];
-				}
-				destPtr[destIndex++] = '&';
-				destPtr[destIndex++] = 'a';
-				destPtr[destIndex++] = 'm';
-				destPtr[destIndex++] = 'p';
-				destPtr[destIndex++] = ';';
-				destSize += 4;
-			}
-		}
-		else
-			destPtr[destIndex++] = ch;
-	}
-	NSAssert(destIndex == destSize, @"Did not copy all data bytes to destination buffer");
-	[newXmlData setLength:destIndex];
-	
-	// Make sure that the last valid character of the feed is '>' otherwise it was truncated. The
-	// CFXML parser annoyingly crashes if it is given a truncated feed.
-	while (--destIndex > 0 && (destPtr[destIndex] == '\0' || isspace(destPtr[destIndex])));
-	return (destPtr[destIndex] == '>') ? newXmlData : nil;
-}
-
-/* parseEncodingType
- * Parse off the encoding field.
- */
--(NSStringEncoding)parseEncodingType:(NSData *)xmlData
-{
-	NSStringEncoding encodingType = NSUTF8StringEncoding;
-	const char * textPtr = [xmlData bytes];
-	const char * textEndPtr = textPtr + [xmlData length];
-
-	while (textPtr < textEndPtr && *textPtr != '<')
-		++textPtr;
-
-	// Scan for the encoding attribute name up until the closing tag
-	const char * encodingAttribute = "encoding=";
-	const char * encodingAttributePtr = encodingAttribute;
-	while (textPtr < textEndPtr && *encodingAttributePtr != '\0' && *textPtr != '>')
-	{
-		if (*textPtr == *encodingAttributePtr)
-			++encodingAttributePtr;
-		else
-			encodingAttributePtr = encodingAttribute;
-		++textPtr;
-	}
-
-	// If we found it, parse off the encoding type name
-	if (*encodingAttributePtr == '\0')
-	{
-		if (textPtr < textEndPtr && *textPtr == '"')
-			++textPtr;
-
-		// We need to special case UTF-8 as CFStringConvertIANACharSetNameToEncoding
-		// doesn't recognise it.
-		const char * encodingNamePtr = textPtr;
-		const char * utf8EncodingName = "UTF-8";
-		const char * utf8EncodingNamePtr = utf8EncodingName;
-		while (textPtr < textEndPtr && *textPtr != '"')
-		{
-			if (toupper(*textPtr) == *utf8EncodingNamePtr)
-				++utf8EncodingNamePtr;
-			else
-				utf8EncodingNamePtr = utf8EncodingName;
-			++textPtr;
-		}
-
-		// Now extract the encoding name if it wasn't UTF-8
-		if (*utf8EncodingNamePtr != '\0')
-		{
-			CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNamePtr, textPtr - encodingNamePtr, kCFStringEncodingISOLatin1, false);
-			encodingType = CFStringConvertIANACharSetNameToEncoding(encodingName);
-			CFRelease(encodingName);
-		}
-	}
-	return encodingType;
-}
-
 /* initRSSFeed
  * Prime the feed with header and items from an RSS feed
  */
@@ -388,15 +174,17 @@
 	// Iterate through the channel items
 	for (NSXMLElement *element in channelElement.children)
 	{
+		NSString * channelItemTag = element.localName;
+
 		// Parse title
-		if ([element.name isEqualToString:@"title"] || [element.name isEqualToString:@"rss:title"])
+		if ([channelItemTag isEqualToString:@"title"])
 		{
 			[self setTitle:[element.stringValue stringByUnescapingExtendedCharacters]];
             success = YES;
 			continue;
 		}
 		// Parse items group which dictates the sequence of the articles.
-		if ([element.name isEqualToString:@"items"] || [element.name isEqualToString:@"rss:items"])
+		if ([channelItemTag isEqualToString:@"items"])
 		{
             NSXMLElement *seqElement = [element elementsForName:@"rdf:Seq"].firstObject;
 
@@ -406,24 +194,23 @@
 		}
 
 		// Parse description
-		if ([element.name isEqualToString:@"description"] ||
-            [element.name isEqualToString:@"rss:description"])
+		if ([channelItemTag isEqualToString:@"description"])
 		{
 			[self setDescription:element.stringValue];
 			continue;
 		}			
 		
 		// Parse link
-		if ([element.name isEqualToString:@"link"] || [element.name isEqualToString:@"rss:link"])
+		if ([channelItemTag isEqualToString:@"link"])
 		{
 			[self setLink:[element.stringValue stringByUnescapingExtendedCharacters]];
 			continue;
 		}			
 		
 		// Parse the date when this feed was last updated
-		if ([element.name isEqualToString:@"lastBuildDate"] ||
-            [element.name isEqualToString:@"pubDate"] ||
-            [element.name isEqualToString:@"dc:date"])
+		if ([channelItemTag isEqualToString:@"lastBuildDate"] ||
+            [channelItemTag isEqualToString:@"pubDate"] ||
+            [channelItemTag isEqualToString:@"date"])
 		{
 			NSString * dateString = element.stringValue;
 			[self setLastModified:[NSDate parseXMLDate:dateString]];
@@ -446,7 +233,7 @@
 	orderArray = [[NSMutableArray alloc] init];
     for (NSXMLElement *element in seqElement.children)
 	{
-        if ([element.name isEqualToString:@"rdf:li"]) {
+        if ([element.localName isEqualToString:@"li"]) {
             NSString *resourceString = [[element attributeForName:@"rdf:resource"] stringValue];
             if (resourceString == nil) {
                 resourceString = [[element attributeForName:@"resource"] stringValue];
@@ -474,7 +261,7 @@
 	{
 		// Parse a single item to construct a FeedItem object which is appended to
 		// the items array we maintain.
-		if ([element.name isEqualToString:@"item"] || [element.name isEqualToString:@"rss:item"])
+		if ([element.localName isEqualToString:@"item"])
 		{
 			FeedItem * newFeedItem = [[FeedItem new] autorelease];
 			NSMutableString * articleBody = nil;
@@ -486,17 +273,17 @@
 
 			for (NSXMLElement *itemChildElement in element.children)
 			{
+			    NSString * articleItemTag = itemChildElement.localName;
+
 				// Parse item title
-				if ([itemChildElement.name isEqualToString:@"title"] ||
-                    [itemChildElement.name isEqualToString:@"rss:title"])
+				if ([articleItemTag isEqualToString:@"title"])
 				{
                     [newFeedItem setTitle:[itemChildElement.stringValue summaryTextFromHTML]];
 					continue;
 				}
 				
 				// Parse item description
-				if (([itemChildElement.name isEqualToString:@"description"] ||
-                     [itemChildElement.name isEqualToString:@"rss:description"]) &&
+				if (([articleItemTag isEqualToString:@"description"]) &&
                     !hasDetailedContent)
 				{
                     articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
@@ -506,8 +293,7 @@
 				// Parse GUID. The GUID may optionally have a permaLink attribute
 				// in which case this is also the article link unless overridden by
 				// an explicit link tag.
-				if ([itemChildElement.name isEqualToString:@"guid"] ||
-                    [itemChildElement.name isEqualToString:@"rss:guid"])
+				if ([articleItemTag isEqualToString:@"guid"])
 				{
                     NSString * permaLink = [itemChildElement
                                             attributeForName:@"isPermaLink"].stringValue;
@@ -521,7 +307,7 @@
 				
 				// Parse detailed item description. This overrides the existing
 				// description for this item.
-				if ([itemChildElement.name isEqualToString:@"content:encoded"])
+				if ([articleItemTag isEqualToString:@"encoded"])
 				{
                     articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					hasDetailedContent = YES;
@@ -529,9 +315,7 @@
 				}
 				
                 // Parse item author
-				if ([itemChildElement.name isEqualToString:@"author"] ||
-                    [itemChildElement.name isEqualToString:@"dc:creator"] ||
-                    [itemChildElement.name isEqualToString:@"rss:author"])
+				if ([articleItemTag isEqualToString:@"author"])
 				{
 					NSString *authorName = itemChildElement.stringValue;
                     
@@ -551,8 +335,8 @@
 				}
 				
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"dc:date"] ||
-                    [itemChildElement.name isEqualToString:@"pubDate"])
+				if ([articleItemTag isEqualToString:@"date"] ||
+                    [articleItemTag isEqualToString:@"pubDate"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
 					[newFeedItem setDate:[NSDate parseXMLDate:dateString]];
@@ -560,8 +344,7 @@
 				}
 				
 				// Parse item link
-				if ([itemChildElement.name isEqualToString:@"link"] ||
-                    [itemChildElement.name isEqualToString:@"rss:link"])
+				if ([articleItemTag isEqualToString:@"link"])
 				{
 					[newFeedItem setLink:[itemChildElement.stringValue stringByUnescapingExtendedCharacters]];
 					hasLink = YES;
@@ -569,7 +352,7 @@
 				}
 				
 				// Parse associated enclosure
-				if ([itemChildElement.name isEqualToString:@"enclosure"])
+				if ([articleItemTag isEqualToString:@"enclosure"])
 				{
                     if ([itemChildElement attributeForName:@"url"].stringValue) {
                         [newFeedItem setEnclosure:[itemChildElement attributeForName:@"url"].stringValue];
@@ -630,7 +413,7 @@
 	for (NSXMLElement *atomChildElement in atomElement.children)
 	{
 		// Parse title
-		if ([atomChildElement.name isEqualToString:@"title"])
+		if ([atomChildElement.localName isEqualToString:@"title"])
 		{
 			[self setTitle:[[atomChildElement.stringValue stringByUnescapingExtendedCharacters] summaryTextFromHTML]];
             success = YES;
@@ -638,21 +421,21 @@
 		}
 		
 		// Parse description]
-		if ([atomChildElement.name isEqualToString:@"subtitle"])
+		if ([atomChildElement.localName isEqualToString:@"subtitle"])
 		{
 			[self setDescription:atomChildElement.stringValue];
 			continue;
 		}			
 		
 		// Parse description
-		if ([atomChildElement.name isEqualToString:@"tagline"])
+		if ([atomChildElement.localName isEqualToString:@"tagline"])
 		{
 			[self setDescription:atomChildElement.stringValue];
 			continue;
 		}			
 
 		// Parse link
-		if ([atomChildElement.name isEqualToString:@"link"])
+		if ([atomChildElement.localName isEqualToString:@"link"])
 		{
 			if ([atomChildElement attributeForName:@"rel"].stringValue == nil ||
                  [[atomChildElement attributeForName:@"rel"].stringValue isEqualToString:@"alternate"])
@@ -678,7 +461,7 @@
 		
 		// Parse author at the feed level. This is the default for any entry
 		// that doesn't have an explicit author.
-		if ([atomChildElement.name isEqualToString:@"author"])
+		if ([atomChildElement.localName isEqualToString:@"author"])
 		{
             NSXMLElement *nameElement = [atomChildElement elementsForName:@"name"].firstObject;
 			if (nameElement != nil)
@@ -687,7 +470,7 @@
 		}
 		
 		// Parse the date when this feed was last updated
-		if ([atomChildElement.name isEqualToString:@"updated"])
+		if ([atomChildElement.localName isEqualToString:@"updated"])
 		{
 			NSString * dateString = atomChildElement.stringValue;
 			[self setLastModified:[NSDate parseXMLDate:dateString]];
@@ -695,7 +478,7 @@
 		}
 		
 		// Parse the date when this feed was last updated
-		if ([atomChildElement.name isEqualToString:@"modified"])
+		if ([atomChildElement.localName isEqualToString:@"modified"])
 		{
 			NSString * dateString = atomChildElement.stringValue;
 			[self setLastModified:[NSDate parseXMLDate:dateString]];
@@ -704,7 +487,7 @@
 		
 		// Parse a single item to construct a FeedItem object which is appended to
 		// the items array we maintain.
-		if ([atomChildElement.name isEqualToString:@"entry"])
+		if ([atomChildElement.localName isEqualToString:@"entry"])
 		{
 			FeedItem * newFeedItem = [[FeedItem new] autorelease];
 			NSMutableString * articleBody = nil;
@@ -725,29 +508,31 @@
 
 			for (NSXMLElement *itemChildElement in atomChildElement.children)
 			{
+				NSString * articleItemTag = itemChildElement.localName;
+
 				// Parse item title
-				if ([itemChildElement.name isEqualToString:@"title"])
+				if ([articleItemTag isEqualToString:@"title"])
 				{
 					[newFeedItem setTitle:[itemChildElement.stringValue summaryTextFromHTML]];
 					continue;
 				}
 
 				// Parse item description
-				if ([itemChildElement.name isEqualToString:@"content"])
+				if ([articleItemTag isEqualToString:@"content"])
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
 					continue;
 				}
 				
 				// Parse item description
-				if ([itemChildElement.name isEqualToString:@"summary"])
+				if ([articleItemTag isEqualToString:@"summary"])
 				{
 					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
 					continue;
 				}
 				
 				// Parse item author
-				if ([itemChildElement.name isEqualToString:@"author"])
+				if ([articleItemTag isEqualToString:@"author"])
 				{
 					NSString * authorName = [[itemChildElement elementsForName:@"name"].firstObject stringValue];
 					if (authorName == nil) {
@@ -768,7 +553,7 @@
 				}
 				
 				// Parse item link
-				if ([itemChildElement.name isEqualToString:@"link"])
+				if ([articleItemTag isEqualToString:@"link"])
 				{
 					if ([[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"enclosure"] ||
                         [[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"http://opds-spec.org/acquisition"])
@@ -807,14 +592,14 @@
 				}
 				
 				// Parse item id
-				if ([itemChildElement.name isEqualToString:@"id"])
+				if ([articleItemTag isEqualToString:@"id"])
 				{
 					[newFeedItem setGuid:itemChildElement.stringValue];
 					continue;
 				}
 
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"modified"])
+				if ([articleItemTag isEqualToString:@"modified"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
 					NSDate * newDate = [NSDate parseXMLDate:dateString];
@@ -824,7 +609,7 @@
 				}
 
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"created"])
+				if ([articleItemTag isEqualToString:@"created"])
 				{
                     NSString * dateString = itemChildElement.stringValue;
                     NSDate * newDate = [NSDate parseXMLDate:dateString];
@@ -834,7 +619,7 @@
 				}
 				
 				// Parse item date
-				if ([itemChildElement.name isEqualToString:@"updated"])
+				if ([articleItemTag isEqualToString:@"updated"])
 				{
                     NSString * dateString = itemChildElement.stringValue;
                     NSDate * newDate = [NSDate parseXMLDate:dateString];
