@@ -1081,6 +1081,12 @@
 	return YES;
 };
 
+-(BOOL)becomeFirstResponder
+{
+    [self ensureSelectedArticle:NO];
+    return YES;
+}
+
 /* keyDown
  * Here is where we handle special keys when this view
  * has the focus so we can do custom things.

@@ -859,6 +859,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? articleList : [foldersTree mainView]];
 }
 
+- (BOOL)acceptsFirstResponder
+{
+	return YES;
+};
+
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
