@@ -271,8 +271,13 @@
 			// Check for rdf:about so we can identify this item in the orderArray.
             NSString *itemIdentifier = [[element attributeForName:@"rdf:about"] stringValue];
 
+			NSString * articleTagPrefix = [element prefix];
+
 			for (NSXMLElement *itemChildElement in element.children)
 			{
+			    if(![[itemChildElement prefix] isEqualToString:articleTagPrefix])
+			        continue;
+
 			    NSString * articleItemTag = itemChildElement.localName;
 
 				// Parse item title
@@ -506,8 +511,13 @@
 					entryBase = [entryBaseURL absoluteString];
 			}
 
+			NSString * articleTagPrefix = [atomChildElement prefix];
+
 			for (NSXMLElement *itemChildElement in atomChildElement.children)
 			{
+			    if(![[itemChildElement prefix] isEqualToString:articleTagPrefix])
+			        continue;
+
 				NSString * articleItemTag = itemChildElement.localName;
 
 				// Parse item title
