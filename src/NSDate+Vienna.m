@@ -89,6 +89,8 @@ static NSLocale * enUSLocale;
         modifiedDateString = dateString;
     }
 
+	// NSDateFormatter is thread safe on OS X 10.9 and later only
+	// so we manage the issue with this lock
 	[dateFormatters_lock lock];
 	// test with the date formatters we are aware of
 	// exit as soon as we find a match
