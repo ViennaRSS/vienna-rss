@@ -275,7 +275,9 @@
 
 			for (NSXMLElement *itemChildElement in element.children)
 			{
-			    if(![[itemChildElement prefix] isEqualToString:articleTagPrefix])
+			    if(![[itemChildElement prefix] isEqualToString:articleTagPrefix]
+			      && ![itemChildElement.name isEqualToString:@"content:encoded"]
+			      && ![itemChildElement.name isEqualToString:@"dc:date"])
 			        continue;
 
 			    NSString * articleItemTag = itemChildElement.localName;
@@ -312,7 +314,7 @@
 				
 				// Parse detailed item description. This overrides the existing
 				// description for this item.
-				if ([articleItemTag isEqualToString:@"encoded"])
+				if ([itemChildElement.name isEqualToString:@"content:encoded"])
 				{
                     articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					hasDetailedContent = YES;
@@ -340,8 +342,8 @@
 				}
 				
 				// Parse item date
-				if ([articleItemTag isEqualToString:@"date"] ||
-                    [articleItemTag isEqualToString:@"pubDate"])
+				if ([articleItemTag isEqualToString:@"pubDate"]
+				  ||[itemChildElement.name isEqualToString:@"dc:date"])
 				{
 					NSString * dateString = itemChildElement.stringValue;
 					[newFeedItem setDate:[NSDate parseXMLDate:dateString]];
