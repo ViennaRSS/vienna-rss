@@ -7,118 +7,106 @@
 //
 
 #import "NSDate+Vienna.h"
-#import "AppController.h"
+
+/* C array of NSDateFormatter format strings. This array is used only once to populate dateFormatterArray.
+*
+* Note: for every four-digit year entry, we need an earlier two-digit year entry
+* so that NSDateFormatter parses two-digit years considering the two-digit-year start date.
+*
+* For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
+* IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20 (first char is #0)
+*
+*/
+static NSString * kDateFormats[] = {
+	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
+	@"yy-MM-dd'T'HH:mm:ssZZZ",     @"yyyy-MM-dd'T'HH:mm:ssZZZ",
+	// 2010-09-28T15:31:25.815+02:00
+	@"yy-MM-dd'T'HH:mm:ss.SSSZZZ", @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZ",
+	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
+	@"EEE, dd MMM yy HH:mmss zzz", @"EEE, dd MMM yyyy HH:mmss zzz",
+	@"EEE, dd MMM yy HH:mmss ZZZ", @"EEE, dd MMM yyyy HH:mmss ZZZ",
+	@"EEE, dd MMM yy HH:mmss",     @"EEE, dd MMM yyyy HH:mmss",
+	// Required by compatibility with older OS X versions
+	@"yy-MM-dd'T'HH:mm:ss'Z'",     @"yyyy-MM-dd'T'HH:mm:ss'Z'",
+	@"yy-MM-dd'T'HH:mm:ss.SSS'Z'", @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+	// Other exotic and non standard date formats
+	@"yy-MM-dd HH:mm:ss ZZZ",      @"yyyy-MM-dd HH:mm:ss ZZZ",
+	@"yy-MM-dd HH:mm:ss zzz",      @"yyyy-MM-dd HH:mm:ss zzz",
+	@"EEE dd MMM yy HH:mmss zzz",  @"EEE dd MMM yyyy HH:mmss zzz",
+	@"EEE dd MMM yy HH:mmss ZZZ",  @"EEE dd MMM yyyy HH:mmss ZZZ",
+	@"EEE dd MMM yy HH:mmss",      @"EEE dd MMM yyyy HH:mmss",
+	@"EEEE dd MMMM yy",            @"EEEE dd MMMM yyyy",
+};
+static const size_t kNumberOfDateFormatters = sizeof(kDateFormats) / sizeof(kDateFormats[0]);
+
+// C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
+//  those we need early in the program launch and keep them in memory.
+static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
+
+static NSLock * dateFormatters_lock;
+static NSLocale * enUSLocale;
 
 @implementation NSDate (Vienna)
 
 
++ (void) initialize
+{
+    // Initializes our multi-thread lock
+    dateFormatters_lock = [[NSLock alloc] init];
+
+	// Initializes the date formatters
+	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+
+	for (int i=0; i<kNumberOfDateFormatters; i++)
+	{
+		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
+		[dateFormatterArray[i] setLocale:enUSLocale];
+		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        [dateFormatterArray[i] setDateFormat:kDateFormats[i]];
+	}
+
+	// end of initialization of date formatters
+}
+
 /* parseXMLDate
- * Parse a date in an XML header into an NSCalendarDate. This is horribly expensive and needs
- * to be replaced with a parser that can handle these formats:
+ * Parse a date in an XML header into an NSCalendarDate.
  *
- *   2005-10-23T10:12:22-4:00
- *   2005-10-23T10:12:22
- *   2005-10-23T10:12:22Z
- *   Mon, 10 Oct 2005 10:12:22 -4:00
- *   10 Oct 2005 10:12:22 -4:00
- *
- * These are the formats that I've discovered so far.
  */
 + (NSDate *)parseXMLDate:(NSString *)dateString
 {
-    int yearValue = 0;
-    int monthValue = 1;
-    int dayValue = 0;
-    int hourValue = 0;
-    int minuteValue = 0;
-    int secondValue = 0;
-    int tzOffset = 0;
-    
-    //We handle garbage there! (At least 1/1/00, so four digit)
-    if ([[dateString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]] length] < 4) return nil;
-    
-    NSDate *curlDate = [AppController getDateFromString:dateString];
-    
-    if (curlDate != nil)
-        return curlDate;
-    
-    // Otherwise do it ourselves.
-    // Expect the string to be loosely like a ISO 8601 subset
-    NSScanner * scanner = [NSScanner scannerWithString:dateString];
-    
-    [scanner setScanLocation:0u];
-    if (![scanner scanInt:&yearValue])
-        return nil;
-    if (yearValue < 100)
-        yearValue += 2000;
-    if ([scanner scanString:@"-" intoString:nil])
-    {
-        if (![scanner scanInt:&monthValue])
-            return nil;
-        if (monthValue < 1 || monthValue > 12)
-            return nil;
-        if ([scanner scanString:@"-" intoString:nil])
-        {
-            if (![scanner scanInt:&dayValue])
-                return nil;
-            if (dayValue < 1 || dayValue > 31)
-                return nil;
-        }
-    }
-    
-    // Parse the time portion.
-    // (I discovered that GMail sometimes returns a timestamp with 24 as the hour
-    // portion although this is clearly contrary to the RFC spec. So be
-    // prepared for things like this.)
-    if ([scanner scanString:@"T" intoString:nil])
-    {
-        if (![scanner scanInt:&hourValue])
-            return nil;
-        hourValue %= 24;
-        if ([scanner scanString:@":" intoString:nil])
-        {
-            if (![scanner scanInt:&minuteValue])
-                return nil;
-            if (minuteValue < 0 || minuteValue > 59)
-                return nil;
-            if ([scanner scanString:@":" intoString:nil] || [scanner scanString:@"." intoString:nil])
-            {
-                if (![scanner scanInt:&secondValue])
-                    return nil;
-                if (secondValue < 0 || secondValue > 59)
-                    return nil;
-                // Drop any fractional seconds
-                if ([scanner scanString:@"." intoString:nil])
-                {
-                    if (![scanner scanInt:nil])
-                        return nil;
-                }
-            }
-        }
+	NSDate *date ;
+    NSString *modifiedDateString ;
+	// Hack : remove colon in timezone as NSDateFormatter doesn't recognize them
+	if (dateString.length > 20)
+	{
+        modifiedDateString = [dateString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    	modifiedDateString = [modifiedDateString
+                            stringByReplacingOccurrencesOfString:@":" withString:@""
+                            options:0 range:NSMakeRange(20,modifiedDateString.length-20)];
     }
     else
     {
-        // If no time is specified, set the time to 11:59pm,
-        // so new articles within the last 24 hours are detected.
-        hourValue = 23;
-        minuteValue = 59;
+        modifiedDateString = dateString;
     }
+
+	[dateFormatters_lock lock];
+	// test with the date formatters we are aware of
+	// exit as soon as we find a match
+	for (int i=0; i<kNumberOfDateFormatters; i++)
+	{
+		date = [dateFormatterArray[i] dateFromString:modifiedDateString];
+		if (date != nil)
+		{
+			[dateFormatters_lock unlock];
+			return date;
+		}
+	}
+	[dateFormatters_lock unlock];
+
+	// expensive last resort attempt
+	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
+	return date;
     
-    // At this point we're at any potential timezone
-    // tzOffset needs to be the number of seconds since GMT
-    if ([scanner scanString:@"Z" intoString:nil])
-        tzOffset = 0;
-    else if (![scanner isAtEnd])
-    {
-        if (![scanner scanInt:&tzOffset])
-            return nil;
-        if (tzOffset > 12)
-            return nil;
-    }
-    
-    // Now combine the whole thing into a date we know about.
-    NSTimeZone * tzValue = [NSTimeZone timeZoneForSecondsFromGMT:tzOffset * 60 * 60];
-    return [NSCalendarDate dateWithYear:yearValue month:monthValue day:dayValue hour:hourValue minute:minuteValue second:secondValue timeZone:tzValue];
 }
 
 @end
