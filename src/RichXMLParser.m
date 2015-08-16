@@ -638,27 +638,27 @@
 							}
 							else
 								[newFeedItem setEnclosure:theLink];
-					}
-				}
-				else
-				{
-					if ([itemChildElement attributeForName:@"rel"].stringValue == nil ||
-                        [[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"alternate"])
-					{
-						NSString * theLink = [[itemChildElement attributeForName:@"href"].stringValue stringByUnescapingExtendedCharacters];
-						if (theLink != nil)
-						{
-							if ((entryBaseURL != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
-							{
-								NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:entryBaseURL];
-								[newFeedItem setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
-							}
-							else
-								[newFeedItem setLink:theLink];
-						}
-					}
-					continue;
-				}
+                        }
+                    }
+                    else
+                    {
+                        if ([itemChildElement attributeForName:@"rel"].stringValue == nil ||
+                            [[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"alternate"])
+                        {
+                            NSString * theLink = [[itemChildElement attributeForName:@"href"].stringValue stringByUnescapingExtendedCharacters];
+                            if (theLink != nil)
+                            {
+                                if ((entryBaseURL != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
+                                {
+                                    NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:entryBaseURL];
+                                    [newFeedItem setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+                                }
+                                else
+                                    [newFeedItem setLink:theLink];
+                            }
+                        }
+                        continue;
+                    }
 				}
 				
 				// Parse item id
