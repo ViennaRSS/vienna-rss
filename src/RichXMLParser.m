@@ -196,6 +196,16 @@
 	contentPrefix = [element resolvePrefixForNamespaceURI:@"http://purl.org/rss/1.0/modules/content/"];
 	if (!contentPrefix)
 	    contentPrefix = @"content";
+
+	// default : 'media'
+	mediaPrefix = [element resolvePrefixForNamespaceURI:@"http://search.yahoo.com/mrss/"];
+	if (!mediaPrefix)
+	    mediaPrefix = @"media";
+
+	// default : 'enc'
+	encPrefix = [element resolvePrefixForNamespaceURI:@"http://purl.oclc.org/net/rss_2.0/enc#"];
+	if (!encPrefix)
+	    encPrefix = @"enc";
 }
 
 /**
@@ -394,10 +404,22 @@
 				}
 				
 				// Parse associated enclosure
-				if ([articleItemTag isEqualToString:@"enclosure"])
+				if ( (isRSSElement && [articleItemTag isEqualToString:@"enclosure"])
+				  || ([itemChildElement.prefix isEqualToString:mediaPrefix] && [articleItemTag isEqualToString:@"content"]) )
 				{
                     if ([itemChildElement attributeForName:@"url"].stringValue) {
                         [newFeedItem setEnclosure:[itemChildElement attributeForName:@"url"].stringValue];
+                    }
+					continue;
+				}
+				if ([itemChildElement.prefix isEqualToString:encPrefix] && [articleItemTag isEqualToString:@"enclosure"])
+				{
+                    if ([itemChildElement attributeForName:@"url"].stringValue) {
+                        [newFeedItem setEnclosure:[itemChildElement attributeForName:@"url"].stringValue];
+                    }
+                    NSString * resourceString = [NSString stringWithFormat:@"%@:resource", rdfPrefix];
+                    if ([itemChildElement attributeForName:resourceString].stringValue) {
+                        [newFeedItem setEnclosure:[itemChildElement attributeForName:resourceString].stringValue];
                     }
 					continue;
 				}

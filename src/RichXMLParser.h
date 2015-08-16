@@ -33,6 +33,8 @@
 	NSString * atomPrefix;
 	NSString * dcPrefix;
 	NSString * contentPrefix;
+	NSString * mediaPrefix;
+	NSString * encPrefix;
 }
 
 // General functions
