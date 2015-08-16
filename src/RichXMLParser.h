@@ -26,6 +26,13 @@
 	NSDate * lastModified;
 	NSMutableArray * items;
 	NSMutableArray * orderArray;
+	@private
+	//prefixes for XML namespaces
+	NSString * rssPrefix;
+	NSString * rdfPrefix;
+	NSString * atomPrefix;
+	NSString * dcPrefix;
+	NSString * contentPrefix;
 }
 
 // General functions
