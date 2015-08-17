@@ -1107,7 +1107,11 @@
 
 -(BOOL)becomeFirstResponder
 {
-    [self ensureSelectedArticle:NO];
+    if ([articleList selectedRow] == -1 && [[articleController allArticles] count] != 0u)
+    {
+		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+		currentSelectedRow = 0;
+    }
     return YES;
 }
 
