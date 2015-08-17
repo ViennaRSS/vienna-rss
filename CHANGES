@@ -14,7 +14,11 @@ Thanks!
 - Use view based NSTableView for unified layout (instead of PXListView)
 - Replace JSONKit with NSJSONSerialization
 - Replace XMLParser with NSXMLDocument/NSXMLNode
-- Replace other deprecated functions
+- Replace other deprecated functions / Miscellaneous refactoring
+
+3.0.8
+-----
+- Fix unwanted scrolls in Unified layout
 
 3.0.7
 -----
