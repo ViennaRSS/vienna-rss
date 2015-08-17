@@ -19,74 +19,102 @@
 //
 
 #import "Import.h"
-#import "XMLParser.h"
 #import "StringExtensions.h"
-#import "ViennaApp.h"
 #import "BJRWindowWithToolbar.h"
+#import "Database.h"
 
-@implementation AppController (Import)
 
-/* importSubscriptions
- * Import an OPML file which lists RSS feeds.
+@implementation Import
+
+/* importFromFile
+ * Import a list of RSS subscriptions.
  */
--(IBAction)importSubscriptions:(id)sender
++ (void)importFromFile:(NSString *)importFileName
 {
-	NSOpenPanel * panel = [NSOpenPanel openPanel];
-	[panel beginSheetModalForWindow:mainWindow
-			completionHandler: ^(NSInteger returnCode) {
-		if (returnCode == NSOKButton)
-		{
-			[panel orderOut:self];
-			[self importFromFile:[[panel URL] path]];
-		}
-	}];
-	panel = nil;
+    NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
+    BOOL hasError = NO;
+    int countImported = 0;
+    
+    if (data != nil)
+    {
+        NSError *error = nil;
+        NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithData:data
+                                                                  options:NSXMLNodeOptionsNone
+                                                                    error:&error];
+        if (error)
+        {
+            NSRunAlertPanel(NSLocalizedString(@"Error importing subscriptions title", nil),
+                            NSLocalizedString(@"Error importing subscriptions body", nil),
+                            NSLocalizedString(@"OK", nil), nil, nil);
+            hasError = YES;
+        }
+        else
+        {
+            NSArray *outlines = [opmlDocument nodesForXPath:@"opml/body/outline" error:nil];
+            
+            countImported = [self importSubscriptionGroup:outlines underParent:MA_Root_Folder];
+        }
+        [opmlDocument release];
+    }
+    
+    // Announce how many we successfully imported
+    if (!hasError)
+    {
+        NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), NSLocalizedString(@"%d subscriptions successfully imported", nil), NSLocalizedString(@"OK", nil), nil, nil, countImported);
+    }
 }
+
 
 /* importSubscriptionGroup
  * Import one group of an OPML subscription tree.
  */
--(int)importSubscriptionGroup:(XMLParser *)tree underParent:(int)parentId
++ (int)importSubscriptionGroup:(NSArray *)outlines underParent:(int)parentId
 {
 	int countImported = 0;
-	int count = [tree countOfChildren];
-	int index;
 	
-	for (index = 0; index < count; ++index)
+	for (NSXMLElement *outlineElement in outlines)
 	{
-		XMLParser * outlineItem = [tree treeByIndex:index];
-		NSDictionary * entry = [outlineItem attributesForTree];
-		NSString * feedTitle = [[entry objectForKey:@"title"] stringByUnescapingExtendedCharacters];
-		NSString * feedDescription = [[entry objectForKey:@"description"] stringByUnescapingExtendedCharacters];
-		NSString * feedURL = [[entry objectForKey:@"xmlurl"] stringByUnescapingExtendedCharacters];
-		NSString * feedHomePage = [[entry objectForKey:@"htmlurl"] stringByUnescapingExtendedCharacters];
+        NSString *feedText = [[[outlineElement attributeForName:@"text"]
+                                stringValue] stringByEscapingExtendedCharacters];
+        NSString *feedDescription = [[[outlineElement attributeForName:@"description"]
+                                stringValue] stringByEscapingExtendedCharacters];
+        NSString *feedURL = [[[outlineElement attributeForName:@"xmlUrl"]
+                              stringValue] stringByEscapingExtendedCharacters];
+        NSString *feedHomePage = [[[outlineElement attributeForName:@"htmlUrl"]
+                              stringValue] stringByEscapingExtendedCharacters];
+        
         Database * dbManager = [Database sharedManager];
 
-		// Some OPML exports use 'text' instead of 'title'.
-		if (feedTitle == nil || [feedTitle length] == 0u)
+		// Some OPML exports use 'title' instead of 'text'.
+		if (feedText == nil || [feedText length] == 0u)
 		{
-			NSString * feedText = [[entry objectForKey:@"text"] stringByUnescapingExtendedCharacters];
-			if (feedText != nil)
-				feedTitle = feedText;
+            NSString * feedTitle = [[[outlineElement attributeForName:@"title"]
+                                     stringValue] stringByEscapingExtendedCharacters];
+            if (feedTitle != nil) {
+				feedText = feedTitle;
+            }
 		}
 
 		// Do double-decoding of the title to get around a bug in some commercial newsreaders
 		// where they double-encode characters
-		feedTitle = [feedTitle stringByUnescapingExtendedCharacters];
+		feedText = [feedText stringByUnescapingExtendedCharacters];
 		
 		if (feedURL == nil)
 		{
 			// This is a new group so try to create it. If there's an error then default to adding
 			// the sub-group items under the parent.
-			if (feedTitle != nil)
+			if (feedText != nil)
 			{
-				int folderId = [dbManager addFolder:parentId afterChild:-1 folderName:feedTitle type:MA_Group_Folder canAppendIndex:NO];
-				if (folderId == -1)
+				int folderId = [dbManager addFolder:parentId afterChild:-1
+                                         folderName:feedText type:MA_Group_Folder
+                                     canAppendIndex:NO];
+                if (folderId == -1) {
 					folderId = MA_Root_Folder;
-				countImported += [self importSubscriptionGroup:outlineItem underParent:folderId];
+                }
+				countImported += [self importSubscriptionGroup:outlineElement.children underParent:folderId];
 			}
 		}
-		else if (feedTitle != nil)
+		else if (feedText != nil)
 		{
 			Folder * folder;
 			int folderId;
@@ -95,7 +123,7 @@
 				folderId = [folder itemId];
 			else
 			{
-				folderId = [dbManager addRSSFolder:feedTitle underParent:parentId afterChild:-1 subscriptionURL:feedURL];
+				folderId = [dbManager addRSSFolder:feedText underParent:parentId afterChild:-1 subscriptionURL:feedURL];
 				++countImported;
 			}
             if (feedDescription != nil) {
@@ -107,39 +135,5 @@
 		}
 	}
 	return countImported;
-}
-
-/* importFromFile
- * Import a list of RSS subscriptions.
- */
--(void)importFromFile:(NSString *)importFileName
-{
-	NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
-	BOOL hasError = NO;
-	int countImported = 0;
-
-	if (data != nil)
-	{
-		XMLParser * tree = [[XMLParser alloc] init];
-		if (![tree setData:data])
-		{
-			NSRunAlertPanel(NSLocalizedString(@"Error importing subscriptions title", nil),
-							NSLocalizedString(@"Error importing subscriptions body", nil),
-							NSLocalizedString(@"OK", nil), nil, nil);
-			hasError = YES;
-		}
-		else
-		{
-			XMLParser * bodyTree = [tree treeByPath:@"opml/body"];
-			countImported = [self importSubscriptionGroup:bodyTree underParent:MA_Root_Folder];
-		}
-		[tree release];
-	}
-
-	// Announce how many we successfully imported
-	if (!hasError)
-	{
-		NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Import Title", nil), NSLocalizedString(@"%d subscriptions successfully imported", nil), NSLocalizedString(@"OK", nil), nil, nil, countImported);
-	}
 }
 @end

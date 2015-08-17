@@ -186,6 +186,8 @@
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
+-(IBAction)exportSubscriptions:(id)sender;
+-(IBAction)importSubscriptions:(id)sender;
 
 
 // Public functions
@@ -225,5 +227,4 @@
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
-+(NSDate *)getDateFromString:(NSString *)dateString;
 @end

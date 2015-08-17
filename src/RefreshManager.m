@@ -33,6 +33,7 @@
 #import "ASIHTTPRequest.h"
 #import "NSNotificationAdditions.h"
 #import "VTPG_Common.h"
+#import "FeedItem.h"
 
 // Singleton
 static RefreshManager * _refreshManager = nil;
@@ -857,6 +858,15 @@ static RefreshManager * _refreshManager = nil;
 			// Log number of bytes we received
 			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
 			
+			if([[newFeed items] count] == 0)
+			{
+				// Mark the feed as empty
+				[self setFolderErrorFlag:folder flag:YES];
+				[connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+				[newFeed release];
+				return;
+			}
+
 			// Extract the latest title and description
 			NSString * feedTitle = [newFeed title];
 			NSString * feedDescription = [newFeed description];

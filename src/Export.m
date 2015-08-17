@@ -20,72 +20,24 @@
 
 #import "Export.h"
 #import "FoldersTree.h"
-#import "XMLParser.h"
 #import "StringExtensions.h"
 #import "BJRWindowWithToolbar.h"
+#import "Database.h"
 
-@implementation AppController (Export)
+@interface Export()
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported;
+@end
 
-/* exportSubscriptions
- * Export the list of RSS subscriptions as an OPML file.
- */
--(IBAction)exportSubscriptions:(id)sender
-{
-	NSSavePanel * panel = [NSSavePanel savePanel];
-
-	// If multiple selections in the folder list, default to selected folders
-	// for simplicity.
-	if ([foldersTree countOfSelectedFolders] > 1)
-	{
-		[exportSelected setState:NSOnState];
-		[exportAll setState:NSOffState];
-	}
-	else
-	{
-		[exportSelected setState:NSOffState];
-		[exportAll setState:NSOnState];
-	}
-
-	// Localise the strings
-	[exportAll setTitle:NSLocalizedString(@"Export all subscriptions", nil)];
-	[exportSelected setTitle:NSLocalizedString(@"Export selected subscriptions", nil)];
-	[exportWithGroups setTitle:NSLocalizedString(@"Preserve group folders in exported file", nil)];
-
-	[panel setAccessoryView:exportSaveAccessory];
-	[panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
-	[panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
-		if (returnCode == NSOKButton)
-		{
-			[panel orderOut:self];
-
-			NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-			int countExported = [self exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
-		
-			if (countExported < 0)
-			{
-				NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
-										  NSLocalizedString(@"OK", nil),
-										  nil,
-										  nil, [NSApp mainWindow], self,
-										  nil, nil, nil,
-										  NSLocalizedString(@"Cannot open export file message text", nil));
-			}
-			else
-			{
-				// Announce how many we successfully imported
-				NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
-			}
-		}
-	}];
-}
+@implementation Export
 
 /* exportSubscriptionGroup
  * Export one group of folders.
  */
--(int)exportSubscriptionGroup:(XMLParser *)xmlTree fromArray:(NSArray *)feedArray withGroups:(BOOL)groupFlag
++(int)exportSubscriptionGroup:(NSXMLElement *)parentElement fromArray:(NSArray *)feedArray
+                   withGroups:(BOOL)groupFlag
 {
 	int countExported = 0;
-
+    Database *db = [Database sharedManager];
 	for (Folder * folder in feedArray)
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
@@ -94,13 +46,16 @@
 		{
 			NSArray * subFolders = [db arrayOfFolders:[folder itemId]];
 			
-			if (!groupFlag)
-				countExported += [self exportSubscriptionGroup:xmlTree fromArray:subFolders withGroups:groupFlag];
+            if (!groupFlag) {
+				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders withGroups:groupFlag];
+            }
 			else
 			{
-				[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
-				XMLParser * subTree = [xmlTree addTree:@"outline" withAttributes:itemDict];
-				countExported += [self exportSubscriptionGroup:subTree fromArray:subFolders withGroups:groupFlag];
+				[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+                NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
+                [outlineElement setAttributesWithDictionary:itemDict];
+                [parentElement addChild:outlineElement];
+				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders withGroups:groupFlag];
 			}
 		}
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
@@ -110,11 +65,13 @@
 			NSString * url = [folder feedURL];
 
 			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:[XMLParser quoteAttributes:(name ? name : @"")] forKey:@"text"];
-			[itemDict setObject:[XMLParser quoteAttributes:(link ? link : @"")] forKey:@"htmlUrl"];
-			[itemDict setObject:[XMLParser quoteAttributes:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:[XMLParser quoteAttributes:description] forKey:@"description"];
-			[xmlTree addClosedTree:@"outline" withAttributes:itemDict];
+			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+            [itemDict setObject:[NSString stringByConvertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
+			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
+			[itemDict setObject:[NSString stringByConvertingHTMLEntities:description] forKey:@"description"];
+            NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
+            [outlineElement setAttributesWithDictionary:itemDict];
+            [parentElement addChild:outlineElement];
 			++countExported;
 		}
 		[itemDict autorelease];
@@ -127,42 +84,60 @@
  * folders selected in the folders tree are exported. Otherwise all RSS folders are exported.
  * Returns the number of subscriptions exported, or -1 on error.
  */
--(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
++(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
 {
-	XMLParser * newTree = [[XMLParser alloc] initWithEmptyTree];
-	XMLParser * opmlTree = [newTree addTree:@"opml" withAttributes:[NSDictionary dictionaryWithObject:@"1.0" forKey:@"version"]];
-
-	// Create the header section
-	XMLParser * headTree = [opmlTree addTree:@"head"];
-	if (headTree != nil)
-	{
-		[headTree addTree:@"title" withElement:@"Vienna Subscriptions"];
-		[headTree addTree:@"dateCreated" withElement:[[NSCalendarDate date] description]];
-	}
-	
-	// Create the body section
-	XMLParser * bodyTree = [opmlTree addTree:@"body"];
-	int countExported = [self exportSubscriptionGroup:bodyTree fromArray:foldersArray withGroups:groupFlag];
-
-	// Now write the complete XML to the file
+    int countExported = 0;
+    NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:foldersArray withGroups:groupFlag exportCount:&countExported];
+    	// Now write the complete XML to the file
+    
 	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
-		[newTree release];
 		return -1; // Indicate an error condition (impossible number of exports)
 	}
 
-	// Put some newlines in for readability
-	NSMutableString * xmlString = [[NSMutableString alloc] initWithString:[newTree xmlForTree]];
-	[xmlString replaceString:@"><" withString:@">\n<"];
-	[xmlString appendString:@"\n"];
-
-    NSData *xmlData = [xmlString dataUsingEncoding:NSUTF8StringEncoding]; // [xmlString writeToFile:atomically:] will write xmlString in other encoding than UTF-8
-	[xmlString release];
+    NSData *xmlData = [opmlDocument XMLDataWithOptions:NSXMLNodePrettyPrint | NSXMLNodeCompactEmptyElement];
     [xmlData writeToFile:fqFilename atomically:YES];
+    
 	
-	// Clean up at the end
-	[newTree release];
 	return countExported;
 }
+
+/**
+ *  Creates an OPML NSXMLDocument from an array of feeds
+ *
+ *  @param folders       An array of Folders (feeds) to export
+ *  @param groupFlag     Keep groups in tact or flatten during export
+ *  @param countExported An integer pointer to hold the number of exported feeds
+ *
+ *  @return NSXMLDocument with OPML containing the exported folders
+ */
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported {
+    *countExported = 0;
+    NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithKind:NSXMLDocumentKind options:NSXMLNodePreserveEmptyElements];
+    [opmlDocument setCharacterEncoding:@"UTF-8"];
+    [opmlDocument setVersion:@"1.0"];
+    [opmlDocument setStandalone:YES];
+    
+    NSXMLElement *opmlElement = [NSXMLElement elementWithName:@"opml"];
+    [opmlElement setAttributesAsDictionary:@{@"version":@"1.0"}];
+    
+    NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
+    NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];
+    NSXMLElement *dateCreated = [NSXMLElement elementWithName:@"dateCreated"
+                                                  stringValue:[[NSCalendarDate date] description]];
+    [headElement addChild:title];
+    [headElement addChild:dateCreated];
+    [opmlElement addChild:headElement];
+    
+    NSXMLElement *bodyElement = [NSXMLElement elementWithName:@"body"];
+    *countExported = [Export exportSubscriptionGroup:bodyElement fromArray:folders withGroups:groupFlag];
+    
+    
+    [opmlElement addChild:bodyElement];
+    
+    [opmlDocument addChild:opmlElement];
+    return [opmlDocument autorelease];
+}
+
 @end

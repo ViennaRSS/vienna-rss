@@ -22,7 +22,6 @@
 #import "Article.h"
 #import "Database.h"
 #import "StringExtensions.h"
-#import "XMLParser.h"
 #import "CalendarExtensions.h"
 
 // The names here are internal field names, not for localisation.
@@ -323,7 +322,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
     NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([self title])];
     [articleTitle replaceString:@"$Article" withString:@"$_%$%_Article"];
     [articleTitle replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    return [XMLParser quoteAttributes:articleTitle];
+    return [NSString stringByConvertingHTMLEntities:articleTitle];
 }
 
 /* tagArticleBody
@@ -378,7 +377,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)tagFeedTitle
 {
     Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
-    return [XMLParser quoteAttributes:SafeString([folder name])];
+    return [NSString stringByConvertingHTMLEntities:SafeString([folder name])];
 }
 
 /* tagFeedLink

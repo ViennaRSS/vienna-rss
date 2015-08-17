@@ -19,7 +19,6 @@
 //
 
 #import "BitlyAPIHelper.h"
-#import "XMLParser.h"
 #import "HelperFunctions.h"
 
 // bit.ly defaults to delivering results via JSON, but we want to use XML here, that's why whe use &format=xml
@@ -60,17 +59,31 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 	if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
 	{
 		//TODO: Robust error-handling.
-		XMLParser * responseParser = [[XMLParser alloc] init];
-		[responseParser setData:data];
-		
-		XMLParser * subtree;
-		if ((subtree = [responseParser treeByPath:@"bitly/results/nodeKeyVal/shortUrl"]) != nil)
-		{
-			[responseParser release];
+        NSError *error = nil;
+        NSXMLDocument *bitlyResponse = [[NSXMLDocument alloc] initWithData:data options:NSXMLNodeOptionsNone error:&error];
+        if (error) {
+            // TODO: Present error-message to the user?
+            NSLog(@"URL shortening with bit.ly failed: %@", error);
             [request release];
-			return [subtree valueOfElement];
-		}
-		[responseParser release];
+            [bitlyResponse release];
+            return nil;
+        }
+        
+        error = nil;
+        NSXMLNode *shortUrlNode = [bitlyResponse nodesForXPath:@".//bitly/results/nodeKeyVal/shortUrl" error:&error].firstObject;
+        
+        if (error) {
+            // TODO: Present error-message to the user?
+            NSLog(@"Processing xml xpath from bit.ly failed: %@", error);
+            [request release];
+            [bitlyResponse release];
+            return nil;
+        } else {
+            [request release];
+            [bitlyResponse release];
+            return [shortUrlNode stringValue];
+        }
+        
 	}
     [request release];
 	// TODO: Present error-message to the user?

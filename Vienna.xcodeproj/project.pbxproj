@@ -72,8 +72,14 @@
 		03721E6E1A218D4B009C020C /* AppearancePreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03721E701A218D4B009C020C /* AppearancePreferencesView.xib */; };
 		0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */; };
 		0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */; };
+		0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */; };
+		0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0383DC541B71B44700A11950 /* CriteriaTests.m */; };
 		03A131B31AA54EAC0037471F /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B41AA670850037471F /* VNADatabaseTests.m */; };
+		03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */; };
+		03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
+		03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752411B74814B00FD3FDB /* RichXMLParserTests.m */; };
+		03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFD56F1B720AB0007EF284 /* ExportTests.m */; };
 		34363ACA0C11C297002A1238 /* ClickableProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34363AC80C11C297002A1238 /* ClickableProgressIndicator.m */; };
 		344D9C030C3D4B2200498CA1 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 344D9C020C3D4B2200498CA1 /* MainMenu.nib */; };
 		37C650801816EBAD3C0D9DBF /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */; };
@@ -655,7 +661,6 @@
 		B27656081067BA4F00A43AB2 /* browserRSSButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B27656071067BA4F00A43AB2 /* browserRSSButton.tiff */; };
 		B27CD00C1100E728001F3C83 /* Plugins in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = B27CCFFD1100E728001F3C83 /* Plugins */; };
 		B27CD04F1100F408001F3C83 /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
-		B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA328864084700B700A7AD5A /* XMLParser.m */; };
 		B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
 		B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
 		B28C94780C3A896B008A09E5 /* mailLinkButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B28C94770C3A896B008A09E5 /* mailLinkButton.tiff */; };
@@ -866,9 +871,17 @@
 		0379E2371A2082E600D58BFE /* AppearancePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppearancePreferencesViewController.m; path = src/Preferences/AppearancePreferencesViewController.m; sourceTree = "<group>"; };
 		0379E2391A20831600D58BFE /* SyncingPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncingPreferencesViewController.h; path = src/Preferences/SyncingPreferencesViewController.h; sourceTree = "<group>"; };
 		0379E23A1A20831600D58BFE /* SyncingPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncingPreferencesViewController.m; path = src/Preferences/SyncingPreferencesViewController.m; sourceTree = "<group>"; };
+		0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyAPIHelperTests.m; sourceTree = "<group>"; };
+		0383DC541B71B44700A11950 /* CriteriaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CriteriaTests.m; sourceTree = "<group>"; };
 		03A131B11AA54EAC0037471F /* VNADatabaseMigration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VNADatabaseMigration.h; path = src/VNADatabaseMigration.h; sourceTree = "<group>"; };
 		03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseMigration.m; path = src/VNADatabaseMigration.m; sourceTree = "<group>"; };
 		03A131B41AA670850037471F /* VNADatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VNADatabaseTests.m; sourceTree = "<group>"; };
+		03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Vienna.h"; path = "src/NSDate+Vienna.h"; sourceTree = "<group>"; };
+		03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Vienna.m"; path = "src/NSDate+Vienna.m"; sourceTree = "<group>"; };
+		03B752281B741AFD00FD3FDB /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedItem.h; path = src/models/FeedItem.h; sourceTree = "<group>"; };
+		03B752291B741AFD00FD3FDB /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedItem.m; path = src/models/FeedItem.m; sourceTree = "<group>"; };
+		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
+		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -1457,8 +1470,6 @@
 		AA31192C08FE5E8E0069ECD2 /* highlightedCloseButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = highlightedCloseButton.tiff; path = Resources/highlightedCloseButton.tiff; sourceTree = SOURCE_ROOT; };
 		AA3281A3084161EB00A7AD5A /* RichXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RichXMLParser.h; path = src/RichXMLParser.h; sourceTree = SOURCE_ROOT; };
 		AA3281A4084161EB00A7AD5A /* RichXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RichXMLParser.m; path = src/RichXMLParser.m; sourceTree = SOURCE_ROOT; };
-		AA328863084700B700A7AD5A /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = src/XMLParser.h; sourceTree = SOURCE_ROOT; };
-		AA328864084700B700A7AD5A /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = src/XMLParser.m; sourceTree = SOURCE_ROOT; };
 		AA32E2A30940A9970034D9CC /* folderError.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = folderError.tiff; path = Resources/folderError.tiff; sourceTree = SOURCE_ROOT; };
 		AA36CD7906100692001E33A4 /* Field.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Field.h; path = src/Field.h; sourceTree = SOURCE_ROOT; };
 		AA36CD7A06100692001E33A4 /* Field.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Field.m; path = src/Field.m; sourceTree = SOURCE_ROOT; };
@@ -1655,6 +1666,8 @@
 				AA26F4CB0604927300FE7994 /* Folder.m */,
 				030C388E1AABF12D00AE1EB8 /* FolderImageCache.h */,
 				030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */,
+				03B752281B741AFD00FD3FDB /* FeedItem.h */,
+				03B752291B741AFD00FD3FDB /* FeedItem.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1677,6 +1690,10 @@
 				035B703719E0E4AE00197334 /* Supporting Files */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
 				03A131B41AA670850037471F /* VNADatabaseTests.m */,
+				0383DC521B71A0B500A11950 /* BitlyAPIHelperTests.m */,
+				0383DC541B71B44700A11950 /* CriteriaTests.m */,
+				03EFD56F1B720AB0007EF284 /* ExportTests.m */,
+				03B752411B74814B00FD3FDB /* RichXMLParserTests.m */,
 			);
 			path = "Vienna Tests";
 			sourceTree = "<group>";
@@ -2697,6 +2714,8 @@
 				AA1A27540C09B27E005968DC /* ViewExtensions.m */,
 				37C65C3C01B0F8EE0C0E5A52 /* NSURL+Utils.m */,
 				37C652B4C918F312BA9F1AB1 /* NSURL+Utils.h */,
+				03B35B821B75E9E0001DB06D /* NSDate+Vienna.h */,
+				03B35B831B75E9E0001DB06D /* NSDate+Vienna.m */,
 			);
 			name = Extensions;
 			sourceTree = SOURCE_ROOT;
@@ -2715,7 +2734,6 @@
 		AA8C76C006420CA800649BA2 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				0322802E1A33BCC1007DE933 /* Models */,
 				435026E5165DD8BE0018EDB7 /* ArticleRef.m */,
 				AA7AB45708CA742A000D34F9 /* ArticleRef.h */,
 				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
@@ -2737,8 +2755,6 @@
 			children = (
 				AA3281A3084161EB00A7AD5A /* RichXMLParser.h */,
 				AA3281A4084161EB00A7AD5A /* RichXMLParser.m */,
-				AA328863084700B700A7AD5A /* XMLParser.h */,
-				AA328864084700B700A7AD5A /* XMLParser.m */,
 				AA4C8DEC0B9B2A8B00E0C9B8 /* XMLTag.h */,
 				AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */,
 			);
@@ -2751,6 +2767,7 @@
 				660AA30914072BFD0082CCF0 /* OpenReader Sync */,
 				AAA5687609EE72BE00C87343 /* NewsParser */,
 				AA4F657B062B873100D4837C /* Extensions */,
+				0322802E1A33BCC1007DE933 /* Models */,
 				AA8C76C006420CA800649BA2 /* Database */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				AAC5063D082A7AE00089FF70 /* Support Classes */,
@@ -3709,8 +3726,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
+				03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */,
+				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
+				0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
 				03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */,
+				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3727,7 +3748,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B283D5A310986CE600A5CD72 /* XMLParser.m in Sources */,
 				B283D5A410986CE600A5CD72 /* RichXMLParser.m in Sources */,
 				B283D5A510986CE600A5CD72 /* XMLTag.m in Sources */,
 				8D15AC320486D014006FF6A4 /* main.m in Sources */,
@@ -3740,6 +3760,7 @@
 				AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
+				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,
@@ -3794,6 +3815,7 @@
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
+				03B7522A1B741AFD00FD3FDB /* FeedItem.m in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */,

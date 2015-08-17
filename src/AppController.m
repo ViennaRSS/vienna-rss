@@ -132,41 +132,7 @@ static const int MA_StatusBarHeight = 23;
 static io_connect_t root_port;
 static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, void * messageArgument);
 
-@implementation AppController {
-}
-
-// C array of NSDateFormatter format strings. This is array is used only once to populate dateFormatterArray.
-// Note: for every four-digit year entry, we need an earlier two-digit year entry so that NSDateFormatter parses
-//       two-digit years considering the two-digit-year start date.
-static NSString * kDateFormats[] = {
-	//For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
-	//IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20 (first char is #0)
-	// 2010-09-28T15:31:25Z and 2010-09-28T17:31:25+02:00
-	@"yy-MM-dd'T'HH:mm:ssZZZ",     @"yyyy-MM-dd'T'HH:mm:ssZZZ",
-	// 2010-09-28T15:31:25.815+02:00
-	@"yy-MM-dd'T'HH:mm:ss.SSSZZZ", @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZ",
-	// "Sat, 13 Dec 2008 18:45:15 EAT" and "Fri, 12 Dec 2008 18:45:15 -08:00"
-	@"EEE, dd MMM yy HH:mmss zzz", @"EEE, dd MMM yyyy HH:mmss zzz",
-	@"EEE, dd MMM yy HH:mmss ZZZ", @"EEE, dd MMM yyyy HH:mmss ZZZ",
-	@"EEE, dd MMM yy HH:mmss",     @"EEE, dd MMM yyyy HH:mmss",
-	// Required by compatibility with older OS X versions
-	@"yy-MM-dd'T'HH:mm:ss'Z'",     @"yyyy-MM-dd'T'HH:mm:ss'Z'",
-	@"yy-MM-dd'T'HH:mm:ss.SSS'Z'", @"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-	// Other exotic and non standard date formats
-	@"yy-MM-dd HH:mm:ss ZZZ",      @"yyyy-MM-dd HH:mm:ss ZZZ",
-	@"yy-MM-dd HH:mm:ss zzz",      @"yyyy-MM-dd HH:mm:ss zzz",
-	@"EEE dd MMM yy HH:mmss zzz",  @"EEE dd MMM yyyy HH:mmss zzz",
-	@"EEE dd MMM yy HH:mmss ZZZ",  @"EEE dd MMM yyyy HH:mmss ZZZ",
-	@"EEE dd MMM yy HH:mmss",      @"EEE dd MMM yyyy HH:mmss",
-	@"EEEE dd MMMM yy",            @"EEEE dd MMMM yyyy",
-};
-static const size_t kNumberOfDateFormatters = sizeof(kDateFormats) / sizeof(kDateFormats[0]);
-// C array of NSDateFormatter's : creating a NSDateFormatter is very expensive, so we create
-//  those we need early in the program launch and keep them in memory.
-static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
-
-static NSLock * dateFormatters_lock;
-static NSLocale * enUSLocale;
+@implementation AppController
 
 @synthesize rssFeed = _rssFeed;
 
@@ -791,7 +757,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		BOOL returnCode = NSRunAlertPanel(NSLocalizedString(@"Import subscriptions from OPML file?", nil), NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil), NSLocalizedString(@"Import", nil), NSLocalizedString(@"Cancel", nil), nil);
 		if (returnCode == NSAlertAlternateReturn)
 			return NO;
-		[self importFromFile:filename];
+		[Import importFromFile:filename];
 		return YES;
 	}
     if ([[filename pathExtension] isEqualToString:@"webloc"])
@@ -1084,59 +1050,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	[[foldersTree mainView] setNextKeyView:[[browserView primaryTabItemView] mainView]];
 }
 
-+ (void) initialize
-{
-    // Initializes our multi-thread lock
-    dateFormatters_lock = [[NSLock alloc] init];
-
-	// Initializes the date formatters
-	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-
-	for (int i=0; i<kNumberOfDateFormatters; i++)
-	{
-		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
-		[dateFormatterArray[i] setLocale:enUSLocale];
-		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-        [dateFormatterArray[i] setDateFormat:kDateFormats[i]];
-	}
-
-	// end of initialization of date formatters
-}
-
-+(NSDate *)getDateFromString:(NSString *)dateString
-{
-
-	NSDate *date ;
-    NSString *modifiedDateString ;
-	// Hack : remove colon in timezone as NSDateFormatter doesn't recognize them
-	if (dateString.length > 20)
-	{
-        modifiedDateString = [dateString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    	modifiedDateString = [modifiedDateString
-                            stringByReplacingOccurrencesOfString:@":" withString:@""
-                            options:0 range:NSMakeRange(20,modifiedDateString.length-20)];
-    }
-    else
-    {
-        modifiedDateString = dateString;
-    }
-
-	[dateFormatters_lock lock];
-	for (int i=0; i<kNumberOfDateFormatters; i++)
-	{
-		date = [dateFormatterArray[i] dateFromString:modifiedDateString];
-		if (date != nil)
-		{
-			[dateFormatters_lock unlock];
-			return date;
-		}
-	}
-	[dateFormatters_lock unlock];
-
-	// expensive last resort attempt
-	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
-	return date;
-}
 
 /* getUrl
  * Handle http https URL Scheme passed to applicaton
@@ -1541,6 +1454,79 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[[Preferences standardPreferences] setFoldersTreeSortMethod:[sender tag]];
 }
+
+
+/* exportSubscriptions
+ * Export the list of RSS subscriptions as an OPML file.
+ */
+-(IBAction)exportSubscriptions:(id)sender
+{
+    NSSavePanel * panel = [NSSavePanel savePanel];
+    
+    // If multiple selections in the folder list, default to selected folders
+    // for simplicity.
+    if ([foldersTree countOfSelectedFolders] > 1)
+    {
+        [exportSelected setState:NSOnState];
+        [exportAll setState:NSOffState];
+    }
+    else
+    {
+        [exportSelected setState:NSOffState];
+        [exportAll setState:NSOnState];
+    }
+    
+    // Localise the strings
+    [exportAll setTitle:NSLocalizedString(@"Export all subscriptions", nil)];
+    [exportSelected setTitle:NSLocalizedString(@"Export selected subscriptions", nil)];
+    [exportWithGroups setTitle:NSLocalizedString(@"Preserve group folders in exported file", nil)];
+    
+    [panel setAccessoryView:exportSaveAccessory];
+    [panel setAllowedFileTypes:[NSArray arrayWithObject:@"opml"]];
+    [panel beginSheetModalForWindow:mainWindow completionHandler:^(NSInteger returnCode) {
+        if (returnCode == NSOKButton)
+        {
+            [panel orderOut:self];
+            
+            NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
+            int countExported = [Export exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+            
+            if (countExported < 0)
+            {
+                NSBeginCriticalAlertSheet(NSLocalizedString(@"Cannot open export file message", nil),
+                                          NSLocalizedString(@"OK", nil),
+                                          nil,
+                                          nil, [NSApp mainWindow], self,
+                                          nil, nil, nil,
+                                          NSLocalizedString(@"Cannot open export file message text", nil));
+            }
+            else
+            {
+                // Announce how many we successfully imported
+                NSRunAlertPanel(NSLocalizedString(@"RSS Subscription Export Title", nil), NSLocalizedString(@"%d subscriptions successfully exported", nil), NSLocalizedString(@"OK", nil), nil, nil, countExported);
+            }
+        }
+    }];
+}
+
+
+/* importSubscriptions
+ * Import an OPML file which lists RSS feeds.
+ */
+-(IBAction)importSubscriptions:(id)sender
+{
+    NSOpenPanel * panel = [NSOpenPanel openPanel];
+    [panel beginSheetModalForWindow:mainWindow
+                  completionHandler: ^(NSInteger returnCode) {
+                      if (returnCode == NSOKButton)
+                      {
+                          [panel orderOut:self];
+                          [Import importFromFile:[[panel URL] path]];
+                      }
+                  }];
+    panel = nil;
+}
+
 
 /* runAppleScript
  * Run an AppleScript script given a fully qualified path to the script.
@@ -4856,4 +4842,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 
     [super dealloc];
 }
+
+
 @end
