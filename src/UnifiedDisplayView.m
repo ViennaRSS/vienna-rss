@@ -1083,7 +1083,11 @@
 
 -(BOOL)becomeFirstResponder
 {
-    [self ensureSelectedArticle:NO];
+    if ([articleList selectedRow] == -1 && [[articleController allArticles] count] != 0u)
+    {
+		[articleList setSelectedRow:0];
+		currentSelectedRow = 0;
+    }
     return YES;
 }
 
