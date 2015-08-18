@@ -15,6 +15,8 @@
 *
 * For the different date formats, see <http://unicode.org/reports/tr35/#Date_Format_Patterns>
 * IMPORTANT hack : remove in these strings any colon [:] beginning from character # 20 (first char is #0)
+* We do so because some servers incorrectly return strings with a colon (:) in timezone indication
+* which NSDateFormatter refuses to handle
 *
 */
 static NSString * kDateFormats[] = {
@@ -45,15 +47,13 @@ static NSDateFormatter * dateFormatterArray[kNumberOfDateFormatters];
 
 static NSLock * dateFormatters_lock;
 static NSLocale * enUSLocale;
+static BOOL threadSafe;
 
 @implementation NSDate (Vienna)
 
 
 + (void) initialize
 {
-    // Initializes our multi-thread lock
-    dateFormatters_lock = [[NSLock alloc] init];
-
 	// Initializes the date formatters
 	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
 
@@ -66,6 +66,15 @@ static NSLocale * enUSLocale;
 	}
 
 	// end of initialization of date formatters
+
+	if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_9)
+        threadSafe=YES;
+    else
+	{
+        // Initializes our multi-thread lock
+        dateFormatters_lock = [[NSLock alloc] init];
+        threadSafe=NO;
+    }
 }
 
 /* parseXMLDate
@@ -89,21 +98,35 @@ static NSLocale * enUSLocale;
         modifiedDateString = dateString;
     }
 
-	// NSDateFormatter is thread safe on OS X 10.9 and later only
-	// so we manage the issue with this lock
-	[dateFormatters_lock lock];
-	// test with the date formatters we are aware of
-	// exit as soon as we find a match
-	for (int i=0; i<kNumberOfDateFormatters; i++)
+	if (threadSafe)
 	{
-		date = [dateFormatterArray[i] dateFromString:modifiedDateString];
-		if (date != nil)
-		{
-			[dateFormatters_lock unlock];
-			return date;
-		}
+        // test with the date formatters we are aware of
+        // exit as soon as we find a match
+        for (int i=0; i<kNumberOfDateFormatters; i++)
+        {
+            date = [dateFormatterArray[i] dateFromString:modifiedDateString];
+            if (date != nil)
+            {
+                return date;
+            }
+        }
 	}
-	[dateFormatters_lock unlock];
+	else
+	{
+        // NSDateFormatter is thread safe on OS X 10.9 and later only
+        // so we manage the issue with this lock
+        [dateFormatters_lock lock];
+        for (int i=0; i<kNumberOfDateFormatters; i++)
+        {
+            date = [dateFormatterArray[i] dateFromString:modifiedDateString];
+            if (date != nil)
+            {
+                [dateFormatters_lock unlock];
+                return date;
+            }
+        }
+        [dateFormatters_lock unlock];
+	}
 
 	// expensive last resort attempt
 	date = [NSDate dateWithNaturalLanguageString:dateString locale:enUSLocale];
