@@ -645,8 +645,6 @@
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
 		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
-		B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; };
-		B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B23A794310FF50B10085C85B /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
 		B25E53E31067B54600BBF14C /* browserRefreshButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */; };
@@ -757,7 +755,6 @@
 				3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */,
 				43BA97E01664767C00B95F35 /* DisclosableView.framework in Copy Frameworks */,
 				43501F8F165DC5BC0018EDB7 /* PSMTabBarControl.framework in Copy Frameworks */,
-				B23A794D10FF50BE0085C85B /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1566,7 +1563,6 @@
 		AAFAF3FC088056D800DAFF04 /* KeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = KeyChain.m; path = src/KeyChain.m; sourceTree = SOURCE_ROOT; };
 		AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = smartFolder.tiff; path = Resources/smartFolder.tiff; sourceTree = SOURCE_ROOT; };
 		B2108659109F8196001D4E7C /* XMLSource.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = XMLSource.nib; path = Interfaces/XMLSource.nib; sourceTree = SOURCE_ROOT; };
-		B23A794310FF50B10085C85B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = 3rdparty/Sparkle.framework; sourceTree = SOURCE_ROOT; };
 		B2554730106913760065E9C3 /* errorpagelogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = errorpagelogo.png; path = Resources/errorpagelogo.png; sourceTree = SOURCE_ROOT; };
 		B25E53DB1067B54600BBF14C /* browserNextButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserNextButton.tiff; path = Resources/browserNextButton.tiff; sourceTree = SOURCE_ROOT; };
 		B25E53DD1067B54600BBF14C /* browserRefreshButton.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = browserRefreshButton.tiff; path = Resources/browserRefreshButton.tiff; sourceTree = SOURCE_ROOT; };
@@ -1627,7 +1623,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0E01EF817C885A900E20329 /* libsqlite3.dylib in Frameworks */,
-				B23A794410FF50B10085C85B /* Sparkle.framework in Frameworks */,
 				EACE4C90147FA2B000A17997 /* PSMTabBarControl.framework in Frameworks */,
 				435021CE165DCB980018EDB7 /* Carbon.framework in Frameworks */,
 				3A9903951993638900EA69B2 /* Growl.framework in Frameworks */,
@@ -1884,7 +1879,6 @@
 			children = (
 				3A9903941993638900EA69B2 /* Growl.framework */,
 				EACE4C8E147FA2B000A17997 /* PSMTabBarControl.framework */,
-				B23A794310FF50B10085C85B /* Sparkle.framework */,
 			);
 			name = "External frameworks";
 			sourceTree = SOURCE_ROOT;
