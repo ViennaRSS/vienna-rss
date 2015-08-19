@@ -8,6 +8,7 @@ target 'Vienna' do
 	pod 'ASIHTTPRequest', '~> 1.8'
 	pod 'FMDB', '~> 2.4'
 	pod 'CDEvents'
+	pod 'Sparkle'
 end
 
 target 'Vienna Tests' do

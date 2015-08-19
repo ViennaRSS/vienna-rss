@@ -1,5 +1,6 @@
+FRAMEWORK_SEARCH_PATHS = "${PODS_ROOT}/Sparkle" "${PODS_ROOT}/Sparkle" "$(PODS_ROOT)/Sparkle"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2" $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" "${PODS_ROOT}/Headers/Public/CDEvents" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/MASPreferences" "$(SDKROOT)/usr/include/libxml2"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" -isystem "${PODS_ROOT}/Headers/Public/CDEvents" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/MASPreferences"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"ASIHTTPRequest" -l"CDEvents" -l"FMDB" -l"MASPreferences" -l"sqlite3" -l"xml2.2" -l"z.1" -framework "CoreServices" -framework "SystemConfiguration"
+HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2" $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" "${PODS_ROOT}/Headers/Public/CDEvents" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/MASPreferences" "${PODS_ROOT}/Headers/Public/Sparkle" "${PODS_ROOT}/Headers/Public/Sparkle/Sparkle" "$(SDKROOT)/usr/include/libxml2"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" -isystem "${PODS_ROOT}/Headers/Public/CDEvents" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/MASPreferences" -isystem "${PODS_ROOT}/Headers/Public/Sparkle" -isystem "${PODS_ROOT}/Headers/Public/Sparkle/Sparkle"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"ASIHTTPRequest" -l"CDEvents" -l"FMDB" -l"MASPreferences" -l"sqlite3" -l"xml2.2" -l"z.1" -framework "CoreServices" -framework "Sparkle" -framework "SystemConfiguration"
 PODS_ROOT = ${SRCROOT}/Pods
