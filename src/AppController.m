@@ -74,6 +74,7 @@
 
 @interface AppController (Private)
 	-(NSMenu *)searchFieldMenu;
+	-(NSMenu *)filterFieldMenu;
 	-(void)installSleepHandler;
 	-(void)installScriptsFolderWatcher;
 	-(void)handleTabChange:(NSNotification *)nc;
@@ -512,7 +513,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
 	// item is localised though.	
 	[[searchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
-	[[filterSearchField cell] setSearchMenuTemplate:[self searchFieldMenu]];
+	[[filterSearchField cell] setSearchMenuTemplate:[self filterFieldMenu]];
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [[Preferences standardPreferences] searchMethod];
@@ -807,21 +808,23 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSMenu *)searchFieldMenu
 {
-	NSMenu * cellMenu = [[NSMenu alloc] initWithTitle:@"Search Menu"];
+	NSMenu * cellMenu = [[NSMenu alloc] init];
 	
 	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
 	[cellMenu insertItem:item atIndex:0];
 	[item release];
 	
-	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
+	item = [[NSMenuItem alloc] init];
 	[item setTag:NSSearchFieldRecentsMenuItemTag];
 	[cellMenu insertItem:item atIndex:1];
 	[item release];
 	
+	[cellMenu insertItem:[NSMenuItem separatorItem] atIndex:2];
+
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
-	[cellMenu insertItem:item atIndex:2];
+	[cellMenu insertItem:item atIndex:3];
 	[item release];
 	
 	SearchMethod * searchMethod;
@@ -865,6 +868,32 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	} 
 	[cellMenu setDelegate:self];
 	return [cellMenu autorelease];
+}
+
+-(NSMenu *)filterFieldMenu
+{
+	NSMenu * menu = [[[NSMenu alloc] init] autorelease];
+	[menu setAutoenablesItems:YES];
+
+	NSMenuItem * recentsTitleItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Filters", nil) action:nil keyEquivalent:@""] autorelease];
+	[recentsTitleItem setTag:NSSearchFieldRecentsTitleMenuItemTag];
+	[menu addItem:recentsTitleItem];
+
+	NSMenuItem * noRecentsItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"No Recent Filters", nil) action:nil keyEquivalent:@""] autorelease];
+	[noRecentsItem setTag:NSSearchFieldNoRecentsMenuItemTag];
+	[menu addItem:noRecentsItem];
+
+	NSMenuItem * recentsItem = [[[NSMenuItem alloc] init] autorelease];
+	[recentsItem setTag:NSSearchFieldRecentsMenuItemTag];
+	[menu addItem:recentsItem];
+
+	[menu addItem:[NSMenuItem separatorItem]];
+
+	NSMenuItem * clearItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear Recent Filters", nil) action:nil keyEquivalent:@""] autorelease];
+	[clearItem setTag:NSSearchFieldClearRecentsMenuItemTag];
+	[menu addItem:clearItem];
+
+	return menu;
 }
 
 /* setSearchMethod 

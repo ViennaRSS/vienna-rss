@@ -146,9 +146,11 @@
 "Cannot rename folder" = "Cannot rename folder";
 "A folder with that name already exists" = "A folder with that name already exists";
 "Recent Searches" = "Recent Searches";
-"Recents" = "Recents";
 "Clear" = "Clear Recent Searches";
 "Search web page" = "Search web page";
+"Recent Filters" = "Recent Filters";
+"No Recent Filters" = "No Recent Filters";
+"Clear Recent Filters" = "Clear Recent Filters";
 "Loading..." = "Loading...";
 "Open Image in New Tab" = "Open Image in New Tab";
 "Open Link in New Tab" = "Open Link in New Tab";
