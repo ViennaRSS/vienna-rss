@@ -337,7 +337,11 @@
 				if (isRSSElement && [articleItemTag isEqualToString:@"description"] &&
                     !hasDetailedContent)
 				{
-                    articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
+                    NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
+                    if ([type isEqualToString:@"xhtml"])
+                        articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
+                    else
+                        articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					continue;
 				}
 				
@@ -590,14 +594,22 @@
 				// Parse item description
 				if (isArticleElementAtomType && [articleItemTag isEqualToString:@"content"])
 				{
-					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
+                    NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
+                    if ([type isEqualToString:@"xhtml"])
+                        articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
+                    else
+                        articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					continue;
 				}
 				
 				// Parse item description
 				if (isArticleElementAtomType && [articleItemTag isEqualToString:@"summary"])
 				{
-					articleBody = [[[NSMutableString alloc] initWithString:itemChildElement.stringValue] autorelease];
+                    NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
+                    if ([type isEqualToString:@"xhtml"])
+                        articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
+                    else
+                        articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
 					continue;
 				}
 				
