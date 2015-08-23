@@ -127,7 +127,7 @@
  */
 - (void)didEndSubscriptionEdit:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
-	NSNumber * folderNumber = (NSNumber *)contextInfo;
+	NSNumber * folderNumber = (__bridge NSNumber *)contextInfo;
 	
 	// Notify any open windows.
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:folderNumber];
@@ -156,7 +156,7 @@
 		NSNumber * folderContext = [[NSNumber numberWithInt:folderId] retain];
 		
 		// Open the edit sheet.
-		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSubscriptionEdit:returnCode:contextInfo:) contextInfo:folderContext];
+		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSubscriptionEdit:returnCode:contextInfo:) contextInfo:(__bridge void *)(folderContext)];
 	}
 }
 

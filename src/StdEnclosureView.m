@@ -96,7 +96,7 @@
 	else
 	{
 		isITunes = NO;
-		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
+		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (__bridge CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
 		{
 			LSItemInfoRecord outItemInfo;
 			

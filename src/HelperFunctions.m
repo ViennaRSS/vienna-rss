@@ -52,8 +52,8 @@ NSString * getDefaultBrowser(void)
 	NSString * registeredAppURL = nil;
 	CFURLRef appURL = nil;
 
-	if (LSGetApplicationForURL((CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-		registeredAppURL = [(NSURL *)appURL path];
+	if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
+		registeredAppURL = [(__bridge NSURL *)appURL path];
 	if (appURL != nil)
 		CFRelease(appURL);
 	return [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];

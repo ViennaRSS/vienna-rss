@@ -79,7 +79,6 @@
 	IBOutlet NSButton * filterIconInStatusBarButton;
 
 	ActivityViewer * activityViewer;
-	NewPreferencesController * preferenceController;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;

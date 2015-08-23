@@ -2088,18 +2088,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	GotoHelpPage((CFStringRef)@"keyboard.html", NULL);
 }
 
-/* showPreferencePanel
- * Display the Preference Panel.
- */
-/*
--(IBAction)showPreferencePanel:(id)sender
-{
-	if (!preferenceController)
-		preferenceController = [[NewPreferencesController alloc] init];
-	[NSApp activateIgnoringOtherApps:YES];
-	[preferenceController showWindow:self];
-} */
-
 /* printDocument
  * Print the selected articles in the article window.
  */
@@ -3037,7 +3025,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)sourceWindowWillClose:(NSNotification *)notification
 {
 	XMLSourceWindow * sourceWindow = [notification object];
-	[[sourceWindow retain] autorelease]; // Don't deallocate the object immediately
 	[sourceWindows removeObject:sourceWindow];
 }
 
@@ -4831,7 +4818,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 	[scriptPathMappings release];
 	[smartFolder release];
 	[groupFolder release];
-	[preferenceController release];
 	[activityViewer release];
 	[checkTimer release];
 	[appDockMenu release];

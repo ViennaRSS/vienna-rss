@@ -165,7 +165,7 @@ enum GoogleReaderStatus {
 		LOG_EXPR([request error]);
 		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request requestHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR(requestResponse);
 		//[self clearAuthentication];
@@ -255,7 +255,7 @@ enum GoogleReaderStatus {
 			NSLog(@"Last update: %@",folderLastUpdateString);
 			NSLog(@"Found %lu items", (unsigned long)[[subscriptionsDict objectForKey:@"items"] count]);
 			LOG_EXPR(subscriptionsDict);
-			LOG_EXPR([[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+			LOG_EXPR([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 			ALog(@"Error !!! Incoherent data !");
 			//keep the previously recorded one
 			folderLastUpdateString = [[request userInfo] objectForKey:@"lastupdatestring"];
@@ -424,9 +424,9 @@ enum GoogleReaderStatus {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request requestHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
 		LOG_EXPR([request responseHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
@@ -567,9 +567,7 @@ enum GoogleReaderStatus {
 	}
 	
     // restore from Preferences and from keychain
-    [username release];
 	username = [[prefs syncingUser] retain];
-	[openReaderHost release];
 	openReaderHost = [[prefs syncServer] retain];
 	// set server-specific particularities
 	hostSupportsLongId=NO;
@@ -586,9 +584,7 @@ enum GoogleReaderStatus {
 	}
 
 
-	[password release];
 	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
-	[APIBaseURL release];
 	APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
 
 	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
@@ -636,9 +632,9 @@ enum GoogleReaderStatus {
     {
 		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request requestHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
 		LOG_EXPR([request responseHeaders]);
-		LOG_EXPR([[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease]);
+		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
 		[self setToken:nil];
 		[request clearDelegatesAndCancel];
 		return;
@@ -871,13 +867,9 @@ enum GoogleReaderStatus {
 {
 	[localFeeds release];
 	localFeeds=nil;
-    [username release];
     username=nil;
-	[openReaderHost release];
 	openReaderHost=nil;
-	[password release];
 	password=nil;
-	[APIBaseURL release];
 	APIBaseURL=nil;
 	[clientAuthToken release];
 	clientAuthToken=nil;
@@ -887,7 +879,6 @@ enum GoogleReaderStatus {
 	tokenTimer=nil;
 	[authTimer release];
 	authTimer=nil;
-	[inoreaderAdditionalHeaders release];
 	inoreaderAdditionalHeaders=nil;
 	[super dealloc];
 }

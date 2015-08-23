@@ -22,6 +22,7 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import <PSMTabBarControl/PSMTabBarControl.h>
+#import <PSMTabBarControl/PSMRolloverButton.h>
 #import "AppController.h"
 
 @interface NSTabView (BrowserViewAdditions)
@@ -68,7 +69,7 @@
  */
 -(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
 {
-	return [[tabView tabViewItemWithIdentifier:(NSView *)userData] label];
+	return [[tabView tabViewItemWithIdentifier:(__bridge NSView *)userData] label];
 }
 
 /* setPrimaryTabItemView

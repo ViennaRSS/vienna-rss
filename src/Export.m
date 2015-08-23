@@ -74,7 +74,6 @@
             [parentElement addChild:outlineElement];
 			++countExported;
 		}
-		[itemDict autorelease];
 	}
 	return countExported;
 }
