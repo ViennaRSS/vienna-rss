@@ -49,9 +49,6 @@ BOOL hostRequiresLastPathOnly;
 BOOL hostRequiresInoreaderAdditionalHeaders;
 NSDictionary * inoreaderAdditionalHeaders;
 
-// Singleton
-static GoogleReader * _googleReader = nil;
-
 enum GoogleReaderStatus {
 	notAuthenticated = 0,
 	isAuthenticating,
@@ -900,8 +897,12 @@ enum GoogleReaderStatus {
  */
 +(GoogleReader *)sharedManager
 {
-	if (!_googleReader)
+	// Singleton
+	static GoogleReader * _googleReader = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		_googleReader = [[GoogleReader alloc] init];
+	});
 	return _googleReader;
 }
 

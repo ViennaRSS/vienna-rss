@@ -35,9 +35,6 @@
 #import "VTPG_Common.h"
 #import "FeedItem.h"
 
-// Singleton
-static RefreshManager * _refreshManager = nil;
-
 // Private functions
 @interface RefreshManager (Private)
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
@@ -135,8 +132,12 @@ static RefreshManager * _refreshManager = nil;
  */
 +(RefreshManager *)sharedManager
 {
-	if (!_refreshManager)
+	// Singleton
+	static RefreshManager * _refreshManager = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		_refreshManager = [[RefreshManager alloc] init];
+	});
 	return _refreshManager;
 }
 

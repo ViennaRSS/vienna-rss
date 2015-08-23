@@ -21,8 +21,6 @@
 #import "ActivityLog.h"
 #import "Database.h"
 
-static ActivityLog * defaultActivityLog = nil;		// Singleton object
-
 @implementation ActivityItem
 
 /* init
@@ -143,8 +141,12 @@ static ActivityLog * defaultActivityLog = nil;		// Singleton object
  */
 +(ActivityLog *)defaultLog
 {
-	if (defaultActivityLog == nil)
+	// Singleton
+	static ActivityLog * defaultActivityLog = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		defaultActivityLog = [[ActivityLog alloc] init];
+	});
 	return defaultActivityLog;
 }
 

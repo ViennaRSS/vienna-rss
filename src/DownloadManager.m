@@ -23,10 +23,6 @@
 #import "Constants.h"
 #import "Preferences.h"
 
-// There's just one database and we manage access to it through a
-// singleton object.
-static DownloadManager * _sharedDownloadManager = nil;
-
 // Private functions
 @interface DownloadManager (Private)
 	-(void)archiveDownloadsList;
@@ -228,11 +224,13 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 +(DownloadManager *)sharedInstance
 {
-	if (_sharedDownloadManager == nil)
-	{
+	// Singleton
+	static DownloadManager * _sharedDownloadManager = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		_sharedDownloadManager = [[DownloadManager alloc] init];
 		[_sharedDownloadManager unarchiveDownloadsList];
-	}
+	});
 	return _sharedDownloadManager;
 }
 
