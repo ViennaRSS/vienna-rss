@@ -53,34 +53,28 @@ typedef enum PSMTabBarCellTrackingAreaType : NSUInteger
 @property (assign) BOOL hasIcon;
 @property (assign) BOOL hasLargeImage;
 @property (assign) NSInteger count;
-@property (retain) NSColor *countColor;
+@property (strong) NSColor *countColor;
 @property (assign) BOOL isPlaceholder;
 @property (assign) BOOL isEdited;
 @property (assign) BOOL closeButtonPressed;
 
 #pragma mark Creation/Destruction
-- (id)init;
-- (id)initPlaceholderWithFrame:(NSRect) frame expanded:(BOOL) value inTabBarControl:(PSMTabBarControl *)tabBarControl;
+- (instancetype)init;
+- (instancetype)initPlaceholderWithFrame:(NSRect) frame expanded:(BOOL) value inTabBarControl:(PSMTabBarControl *)tabBarControl;
 - (void)dealloc;
 
 #pragma mark Accessors
-//- (PSMTabBarControl *)controlView;
-//- (void)setControlView:(PSMTabBarControl *)newControl;
-- (CGFloat)width;
-- (NSRect)frame;
-- (void)setFrame:(NSRect)rect;
-- (NSSize)attributedStringSize;
-- (NSAttributedString *)attributedStringValue;
-- (NSAttributedString *)attributedObjectCountStringValue;
-- (NSProgressIndicator *)indicator;
-- (BOOL)isInOverflowMenu;
-- (void)setIsInOverflowMenu:(BOOL)value;
-- (BOOL)closeButtonOver;
-- (void)setCloseButtonOver:(BOOL)value;
-- (void)setCloseButtonSuppressed:(BOOL)suppress;
-- (BOOL)isCloseButtonSuppressed;
-- (NSInteger)currentStep;
-- (void)setCurrentStep:(NSInteger)value;
+@property (NS_NONATOMIC_IOSONLY, strong) PSMTabBarControl *controlView;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat width;
+@property (NS_NONATOMIC_IOSONLY) NSRect frame;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSSize attributedStringSize;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSAttributedString *attributedStringValue;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSAttributedString *attributedObjectCountStringValue;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) NSProgressIndicator *indicator;
+@property (NS_NONATOMIC_IOSONLY) BOOL isInOverflowMenu;
+@property (NS_NONATOMIC_IOSONLY) BOOL closeButtonOver;
+@property (NS_NONATOMIC_IOSONLY, getter=isCloseButtonSuppressed) BOOL closeButtonSuppressed;
+@property (NS_NONATOMIC_IOSONLY) NSInteger currentStep;
 
 #pragma mark Providing Images
 - (NSImage *)closeButtonImageOfType:(PSMCloseButtonImageType)type;
@@ -91,19 +85,19 @@ typedef enum PSMTabBarCellTrackingAreaType : NSUInteger
 - (NSRect)iconRectForBounds:(NSRect)theRect;
 - (NSRect)largeImageRectForBounds:(NSRect)theRect;
 - (NSRect)indicatorRectForBounds:(NSRect)theRect;
-- (NSSize)objectCounterSize;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSSize objectCounterSize;
 - (NSRect)objectCounterRectForBounds:(NSRect)theRect;
 - (NSRect)closeButtonRectForBounds:(NSRect)theRect;
 
-- (CGFloat)minimumWidthOfCell;
-- (CGFloat)desiredWidthOfCell;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat minimumWidthOfCell;
+@property (NS_NONATOMIC_IOSONLY, readonly) CGFloat desiredWidthOfCell;
 
 #pragma mark Image Scaling
 - (NSSize)scaleImageWithSize:(NSSize)imageSize toFitInSize:(NSSize)canvasSize scalingType:(NSImageScaling)scalingType;
 
 #pragma mark Drawing
-- (BOOL)shouldDrawCloseButton;
-- (BOOL)shouldDrawObjectCounter;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL shouldDrawCloseButton;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL shouldDrawObjectCounter;
 - (void)drawWithFrame:(NSRect) cellFrame inTabBarControl:(PSMTabBarControl *)tabBarControl;
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inTabBarControl:(PSMTabBarControl *)tabBarControl;
 - (void)drawLargeImageWithFrame:(NSRect)frame inTabBarControl:(PSMTabBarControl *)tabBarControl;
@@ -119,24 +113,24 @@ typedef enum PSMTabBarCellTrackingAreaType : NSUInteger
 - (void)mouseExited:(NSEvent *)theEvent;
 
 #pragma mark Drag Support
-- (NSRect)draggingRect;
-- (NSImage *)dragImage;
+@property (NS_NONATOMIC_IOSONLY, readonly) NSRect draggingRect;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSImage *dragImage;
 
 #pragma mark Archiving
 - (void)encodeWithCoder:(NSCoder *)aCoder;
-- (id)initWithCoder:(NSCoder *)aDecoder;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder;
 
 @end
 
 @interface PSMTabBarControl (CellAccessors)
 
-- (id<PSMTabStyle>)style;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) id<PSMTabStyle> style;
 
 @end
 
 @interface NSObject (IdentifierAccesors)
 
-- (NSImage *)largeImage;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSImage *largeImage;
 
 @end
 
