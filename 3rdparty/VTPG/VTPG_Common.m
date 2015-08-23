@@ -5,8 +5,11 @@
 //based off http://www.dribin.org/dave/blog/archives/2008/09/22/convert_to_nsstring/
 //
 static BOOL TypeCodeIsCharArray(const char *typeCode){
-	int lastCharOffset = strlen(typeCode) - 1;
-	int secondToLastCharOffset = lastCharOffset - 1 ;
+    size_t len = strlen(typeCode);
+    if(len <= 2)
+        return NO;
+	size_t lastCharOffset = len - 1;
+	size_t secondToLastCharOffset = lastCharOffset - 1 ;
 	
 	BOOL isCharArray = typeCode[0] == '[' &&
 						typeCode[secondToLastCharOffset] == 'c' && typeCode[lastCharOffset] == ']';
@@ -70,7 +73,11 @@ NSString * VTPG_DDToStringFromTypeAndValue(const char * typeCode, void * value) 
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(unsigned long long,@"%llu");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(float,@"%f");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(double,@"%f");
-	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(id,@"%@");
+#if __has_feature(objc_arc)
+	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(__unsafe_unretained id,@"%@");
+#else /* not __has_feature(objc_arc) */
+    IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(id,@"%@");
+#endif
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(short,@"%hi");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(unsigned short,@"%hu");
 	IF_TYPE_MATCHES_INTERPRET_WITH_FORMAT(int,@"%i");
