@@ -214,7 +214,6 @@
         
         NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[appBundle bundlePath]];
         [appToPathMap setValue:fileURL forKey:ourAppName];
-        [fileURL release];
     }
     
     // Add a Select command so the user can manually pick a registered
@@ -461,10 +460,8 @@
  */
 -(void)dealloc
 {
-    [appToPathMap release];
     appToPathMap=nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
 }
 
 @end

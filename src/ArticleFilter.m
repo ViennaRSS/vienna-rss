@@ -133,7 +133,7 @@ static NSMutableArray * _filterList = nil;
 {
 	if ((self = [super init]) != nil)
 	{
-		name = [theName retain];
+		name = theName;
 		tag = theTag;
 		comparator = theComparator;
 	}
@@ -169,7 +169,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(void)createFilter:(NSString *)name tag:(NSInteger)tag comparator:(SEL)comparator
 {
-	ArticleFilter * newFilter = [[[ArticleFilter alloc] initWithName:name tag:tag comparator:comparator] autorelease];
+	ArticleFilter * newFilter = [[ArticleFilter alloc] initWithName:name tag:tag comparator:comparator];
 	if (_filterList == nil)
 		_filterList = [[NSMutableArray alloc] init];
 	[_filterList addObject:newFilter];
@@ -180,8 +180,6 @@ static NSMutableArray * _filterList = nil;
  */
 -(void)dealloc
 {
-	[name release];
 	name=nil;
-	[super dealloc];
 }
 @end

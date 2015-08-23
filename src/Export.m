@@ -136,7 +136,7 @@
     [opmlElement addChild:bodyElement];
     
     [opmlDocument addChild:opmlElement];
-    return [opmlDocument autorelease];
+    return opmlDocument;
 }
 
 @end

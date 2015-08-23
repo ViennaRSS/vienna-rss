@@ -96,7 +96,7 @@
 	[method setFriendlyName:@"Search all articles"];
 	[method setHandler:@selector(performAllArticlesSearch)];
 	
-	return [method autorelease]; 
+	return method; 
 }
 
 /* searchCurrentWebPageMethod
@@ -109,7 +109,7 @@
 	[method setFriendlyName:@"Search current web page"];
 	[method setHandler:@selector(performWebPageSearch)];
 	
-	return [method autorelease]; 
+	return method; 
 }	
 
 # pragma mark Instance Methods
@@ -132,8 +132,7 @@
  */
 -(void)setFriendlyName:(NSString *) newName 
 { 
-	[friendlyName release]; 
-	friendlyName = [newName retain]; 
+	friendlyName = newName; 
 }
 
 /* friendlyName
@@ -149,8 +148,7 @@
  */
 -(void)setSearchQueryString:(NSString *) newQueryString 
 { 
-	[searchQueryString release]; 
-	searchQueryString = [newQueryString retain]; 
+	searchQueryString = newQueryString; 
 }
 
 /* searchQueryString
@@ -181,11 +179,8 @@
 
 -(void)dealloc 
 { 
-	[friendlyName release]; 
 	friendlyName=nil;
-	[searchQueryString release]; 
 	searchQueryString=nil;
-	[super dealloc]; 
 }
 
 @end

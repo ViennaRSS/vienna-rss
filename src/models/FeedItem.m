@@ -33,8 +33,6 @@
  */
 -(void)setEnclosure:(NSString *)newEnclosure
 {
-    [newEnclosure retain];
-    [enclosure release];
     enclosure = newEnclosure;
 }
 
@@ -43,8 +41,6 @@
  */
 -(void)setTitle:(NSString *)newTitle
 {
-    [newTitle retain];
-    [title release];
     title = newTitle;
 }
 
@@ -53,8 +49,6 @@
  */
 -(void)setDescription:(NSString *)newDescription
 {
-    [newDescription retain];
-    [description release];
     description = newDescription;
 }
 
@@ -63,8 +57,6 @@
  */
 -(void)setAuthor:(NSString *)newAuthor
 {
-    [newAuthor retain];
-    [author release];
     author = newAuthor;
 }
 
@@ -73,8 +65,6 @@
  */
 -(void)setDate:(NSDate *)newDate
 {
-    [newDate retain];
-    [date release];
     date = newDate;
 }
 
@@ -83,8 +73,6 @@
  */
 -(void)setGuid:(NSString *)newGuid
 {
-    [newGuid retain];
-    [guid release];
     guid = newGuid;
 }
 
@@ -93,8 +81,6 @@
  */
 -(void)setLink:(NSString *)newLink
 {
-    [newLink retain];
-    [link release];
     link = newLink;
 }
 
@@ -159,20 +145,12 @@
  */
 -(void)dealloc
 {
-    [guid release];
     guid=nil;
-    [title release];
     title=nil;
-    [description release];
     description=nil;
-    [author release];
     author=nil;
-    [date release];
     date=nil;
-    [link release];
     link=nil;
-    [enclosure release];
     enclosure=nil;
-    [super dealloc];
 }
 @end

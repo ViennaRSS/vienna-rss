@@ -86,7 +86,7 @@ static BOOL _credentialsChanged;
         NSString * pathToPList = [thisBundle pathForResource:@"KnownSyncServers" ofType:@"plist"];
         if (pathToPList != nil)
         {
-            sourcesDict = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
+            sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
             [openReaderSource removeAllItems];
             if (sourcesDict)
             {
@@ -256,7 +256,7 @@ static BOOL _credentialsChanged;
 {    
     if ([self.view.window isVisible])
     {
-        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
         [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
@@ -268,11 +268,8 @@ static BOOL _credentialsChanged;
 
 -(void)dealloc
 {
-    [syncButton release];
     syncButton=nil;
-    [sourcesDict release];
     sourcesDict=nil;
-    [super dealloc];
     
 }
 

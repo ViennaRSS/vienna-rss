@@ -59,8 +59,6 @@
  */
 -(void)setTheMenu:(NSMenu *)menu
 {
-	[menu retain];
-	[theMenu release];
 	theMenu = menu;
 }
 
@@ -69,7 +67,7 @@
  */
 -(NSMenu *)theMenu
 {
-	return [[theMenu retain] autorelease];
+	return theMenu;
 }
 
 /* mouseDown
@@ -112,8 +110,6 @@
  */
 -(void)dealloc
 {
-	[theMenu release];
 	theMenu=nil;
-	[super dealloc];
 }
 @end

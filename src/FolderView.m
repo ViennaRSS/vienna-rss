@@ -396,7 +396,6 @@
  */
 -(void)textDidEndEditing:(NSNotification *)notification;
 {
-	[backupString release];
 	backupString=nil;
 
 	// This is ugly, but just about the only way to do it. NSTableView is determined to select and edit something else, even the
@@ -438,12 +437,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[backupString release];
 	backupString=nil;
-	[grayGradient release];
 	grayGradient=nil;
-	[blueGradient release];
 	blueGradient=nil;
-	[super dealloc];
 }
 @end

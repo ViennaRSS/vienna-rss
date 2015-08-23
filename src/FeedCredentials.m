@@ -55,8 +55,6 @@
 
 	// Retain the folder as we need it to update the
 	// username and/or password.
-	[aFolder retain];
-	[folder release];
 	folder = aFolder;
 
 	// Show the feed URL in the prompt so the user knows which site credentials are being
@@ -129,10 +127,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[folder release];
 	folder=nil;
-	[_topObjects release];
-	_topObjects=nil;
-	[super dealloc];
 }
 @end

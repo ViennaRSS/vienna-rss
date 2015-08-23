@@ -72,7 +72,7 @@
     bundle = [NSBundle bundleForClass:[self class]];
     imagePath = [bundle pathForImageResource:imageName];
     if (imagePath) {        
-        image = [[[NSImage alloc] initByReferencingFile:imagePath] autorelease];
+        image = [[NSImage alloc] initByReferencingFile:imagePath];
         if (!image)
             NSLog(@"SNDisclosureButton: couldn't read image: %@", imagePath);
     } else {

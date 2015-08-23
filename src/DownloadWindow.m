@@ -54,7 +54,7 @@
 	// Set the cell for each row
 	ImageAndTextCell * imageAndTextCell;
 	NSTableColumn * tableColumn = [table tableColumnWithIdentifier:@"listColumn"];
-	imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]];
 	[imageAndTextCell setTextColor:[NSColor darkGrayColor]];
 	[tableColumn setDataCell:imageAndTextCell];	
@@ -72,7 +72,6 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
 	[table setMenu:downloadMenu];
-	[downloadMenu release];
 	
 	// Set Clear button caption
 	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
@@ -307,6 +306,5 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[downloadWindow setDelegate:nil];
 	[table setDelegate:nil];
-	[super dealloc];
 }
 @end

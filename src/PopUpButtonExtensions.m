@@ -33,7 +33,6 @@
 	[image setSize:NSMakeSize(16, 16)];
 	[newItem setImage:image];
 	[[self menu] addItem:newItem];
-	[newItem release];
 }
 
 /* addItemWithTarget
@@ -43,7 +42,6 @@
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:target keyEquivalent:@""];
 	[[self menu] addItem:newItem];
-	[newItem release];
 }
 
 /* addItemWithTag
@@ -54,7 +52,6 @@
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
 	[newItem setTag:tag];
 	[[self menu] addItem:newItem];
-	[newItem release];
 }
 
 /* addItemWithRepresentedObject
@@ -65,7 +62,6 @@
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
 	[newItem setRepresentedObject:object];
 	[[self menu] addItem:newItem];
-	[newItem release];
 }
 
 /* insertItemWithTag
@@ -77,7 +73,6 @@
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
 	[newItem setTag:tag];
 	[[self menu] insertItem:newItem atIndex:index];
-	[newItem release];
 }
 
 /* representedObjectForSelection

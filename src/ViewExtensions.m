@@ -46,7 +46,7 @@
 -(void)MA_setTag:(int)newTag
 {
 	[[self MA_tagDict] setObject:[NSNumber numberWithInt:newTag]
-					   forKey:[NSValue valueWithPointer:self]];
+					   forKey:[NSValue valueWithPointer:(__bridge const void *)(self)]];
 }
 
 /* MA_tag
@@ -55,7 +55,7 @@
 -(int)MA_tag
 {
 	NSMutableDictionary *tagDict = [self MA_tagDict];
-	NSValue *key = [NSValue valueWithPointer:self];
+	NSValue *key = [NSValue valueWithPointer:(__bridge const void *)(self)];
 	int tag = [[tagDict objectForKey:key] intValue];
 	[tagDict removeObjectForKey:key];
 	return tag;
@@ -91,7 +91,6 @@
 	NSWindow * viewWindow = [self window];
 	int viewTag = [animation MA_tag];
 
-	[animation release];
 	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
 		[(id)[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
 }

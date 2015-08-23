@@ -70,7 +70,6 @@
     NSDictionary *plist;
     if ((plist = [[NSDictionary alloc] initWithContentsOfFile:inFile])) {
         ret = [NSURL URLWithString:[plist objectForKey:@"URL"]];
-        [plist release];
     }
 
 // ignore the deprecation warnings related to FSPathMakeRef, FSOpenResFile, Get1Resource ...
@@ -90,10 +89,9 @@
                     long size;
 
                     size = GetMaxResourceSize(urlResHandle);
-                    NSString *urlString = [[[NSString alloc] initWithBytes:(void *)*urlResHandle
+                    NSString *urlString = [[NSString alloc] initWithBytes:(void *)*urlResHandle
                                                                     length:size
-                                                                  encoding:NSMacOSRomanStringEncoding]  // best guess here
-                            autorelease];
+                                                                    encoding:NSMacOSRomanStringEncoding];  // best guess here
                     ret = [NSURL URLWithString:urlString];
                 }
             }

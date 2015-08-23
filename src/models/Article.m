@@ -298,10 +298,10 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
     if (index != NSNotFound)
     {
         NSScriptObjectSpecifier * containerRef = [folder objectSpecifier];
-        return [[[NSIndexSpecifier allocWithZone:[self zone]] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
+        return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
                                                                              containerSpecifier:containerRef
                                                                                             key:@"articles"
-                                                                                          index:index] autorelease];
+                                                                                          index:index];
     }
     return nil;
 }
@@ -445,11 +445,8 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)dealloc
 {
-    [commentsArray release];
     commentsArray=nil;
-    [articleData release];
     articleData=nil;
-    [super dealloc];
 }
 
 @end

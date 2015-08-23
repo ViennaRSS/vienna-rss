@@ -125,15 +125,12 @@ static NSMutableDictionary * stylePathMappings = nil;
 		// format is a problem but we'll worry about that later. There's only so much rope we can give.
 		if (templateString != nil && [templateString length] > 0u)
 		{
-			[htmlTemplate release];
-			[cssStylesheet release];
-			[jsScript release];
 			
-			htmlTemplate = [templateString retain];
-			cssStylesheet = [[@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]] retain];
+			htmlTemplate = templateString;
+			cssStylesheet = [@"file://localhost" stringByAppendingString:[path stringByAppendingPathComponent:@"stylesheet.css"]];
 			NSString * javaScriptPath = [path stringByAppendingPathComponent:@"script.js"];
 			if ([[NSFileManager defaultManager] fileExistsAtPath:javaScriptPath])
-				jsScript = [[@"file://localhost" stringByAppendingString:javaScriptPath] retain];
+				jsScript = [@"file://localhost" stringByAppendingString:javaScriptPath];
 			else
 				jsScript = nil;
 			
@@ -234,10 +231,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 		if (index > 0)
 			[htmlText appendString:@"<hr><br />"];
 		[htmlText appendString:htmlArticle];
-		[htmlArticle release];
 	}
 	[htmlText appendString:@"</body></html>"];
-	return [htmlText autorelease];
+	return htmlText;
 }
 
 /* clearHTML
@@ -246,8 +242,6 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(void)clearHTML
 {
 	// Reset current html string.
-	if (currentHTML != nil)
-		[currentHTML release];
 	currentHTML = [[NSString alloc] initWithString: @""];
 	
 	// Load a blank HTML page.
@@ -268,8 +262,6 @@ static NSMutableDictionary * stylePathMappings = nil;
 		return;
 	
 	// Remember the current html string.
-	if (currentHTML != nil)
-		[currentHTML release];
 	currentHTML = [[NSString alloc] initWithString: htmlText];
 	
 	// Replace feed:// with http:// if necessary
@@ -398,14 +390,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[cssStylesheet release];
 	cssStylesheet=nil;
-	[htmlTemplate release];
 	htmlTemplate=nil;
-	[currentHTML release];
 	currentHTML=nil;
-	[jsScript release];
 	jsScript=nil;
-	[super dealloc];
 }
 @end

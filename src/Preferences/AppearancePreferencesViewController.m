@@ -211,6 +211,5 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
 }
 @end

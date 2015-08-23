@@ -40,7 +40,7 @@
 		{
 			[parent addChild:self atIndex:insertIndex];
 		}
-		children = [[NSMutableArray array] retain];
+		children = [NSMutableArray array];
 		progressIndicator = nil;
 	}
 	return self;
@@ -251,8 +251,6 @@
  */
 -(void)setFolder:(Folder *)newFolder
 {
-	[newFolder retain];
-	[folder release];
 	folder = newFolder;
 }
 
@@ -348,7 +346,6 @@
 		[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 		
 		// Release the progress indicator.
-		[progressIndicator release];
 		progressIndicator = nil;
 	}
 
@@ -372,8 +369,7 @@
 {
 	if (progressIndicator != inProgressIndicator)
 	{
-		[progressIndicator release];
-		progressIndicator = [inProgressIndicator retain];
+		progressIndicator = inProgressIndicator;
 	}
 }
 
@@ -382,12 +378,8 @@
  */
 -(void)dealloc
 {
-	[children release];
 	children=nil;
-	[folder release];
 	folder=nil;
-	[progressIndicator release];
 	progressIndicator=nil;
-	[super dealloc];
 }
 @end

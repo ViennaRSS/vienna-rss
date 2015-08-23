@@ -27,10 +27,10 @@
     IBOutlet NSTextField * openReaderHost;
     IBOutlet NSTextField * username;
     IBOutlet NSSecureTextField * password;
-    IBOutlet NSButton *syncButton;
+    IBOutlet NSButton *__weak syncButton;
 }
 
-@property (assign) IBOutlet NSButton *syncButton;
+@property (weak) IBOutlet NSButton *syncButton;
 
 -(IBAction)changeSyncOpenReader:(id)sender;
 -(IBAction)changeSource:(id)sender;

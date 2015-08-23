@@ -79,7 +79,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 /* handleFolderDeleted
@@ -124,7 +123,7 @@
 	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
 	InfoWindow * infoWindow;
 
-	infoWindow = [[controllerList objectForKey:folderNumber] retain];
+	infoWindow = [controllerList objectForKey:folderNumber];
 	if (infoWindow == nil)
 	{
 		infoWindow = [[InfoWindow alloc] initWithFolder:folderId];
@@ -132,7 +131,6 @@
 	}
 	[infoWindow showWindow:[NSApp mainWindow]];
 
-	[infoWindow release];
 }
 @end
 
@@ -154,7 +152,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 /* awakeFromNib

@@ -48,7 +48,7 @@
 	BOOL firstRun;
 }
 
-@property(retain) NSArray * topObjects;
+@property(strong) NSArray * topObjects;
 
 // Action routines
 -(IBAction)doSave:(id)sender;

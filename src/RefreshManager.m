@@ -599,7 +599,6 @@
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
 		}
-		[iconImage release];
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 	}
@@ -852,7 +851,6 @@
 				// Mark the feed as failed
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
-				[newFeed release];
 				return;
 			}
             
@@ -864,7 +862,6 @@
 				// Mark the feed as empty
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
-				[newFeed release];
 				return;
 			}
 
@@ -930,7 +927,7 @@
 					itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
 				}
 				
-				Article * article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
+				Article * article = [[Article alloc] initWithGuid:articleGuid];
 				[article setFolderId:folderId];
 				[article setAuthor:[newsItem author]];
 				[article setBody:[newsItem description]];
@@ -1016,7 +1013,6 @@
 		}
 		
 		// Done with this connection
-		[newFeed release];
         
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -1099,7 +1095,7 @@
 								++urlEnd;
 							if (urlEnd == scanPtrEnd)
 								return nil;
-							return [[[NSString alloc] initWithBytes:urlStart length:(urlEnd - urlStart) encoding:NSASCIIStringEncoding] autorelease];
+							return [[NSString alloc] initWithBytes:urlStart length:(urlEnd - urlStart) encoding:NSASCIIStringEncoding];
 						}
 						++scanPtr;
 					}
@@ -1158,17 +1154,10 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[pumpTimer release];
 	pumpTimer=nil;
-	[authQueue release];
 	authQueue=nil;
-	[networkQueue release];
 	networkQueue=nil;
-	[unsafe301RedirectionTimer release];
 	unsafe301RedirectionTimer=nil;
-	[riskyIPAddress release];
 	riskyIPAddress=nil;
-	dispatch_release(_queue);
-	[super dealloc];
 }
 @end

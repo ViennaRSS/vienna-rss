@@ -18,13 +18,13 @@
 	BOOL inProgress;
 	int folderId;
 	NSUInteger articleRow;
-	NSTableView *_listView;
+	NSTableView *__weak _listView;
 }
 
-@property (assign,readonly)ArticleView *articleView;
+@property (readonly)ArticleView *articleView;
 @property BOOL inProgress;
 @property int folderId;
 @property NSUInteger articleRow;
-@property (nonatomic, assign) NSTableView *listView;
+@property (nonatomic, weak) NSTableView *listView;
 
 @end

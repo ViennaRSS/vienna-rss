@@ -45,7 +45,7 @@
 }
 
 @property BOOL googleOptionButton;
-@property(retain) NSArray * topObjects;
+@property(strong) NSArray * topObjects;
 
 // Action handlers
 -(IBAction)doSubscribe:(id)sender;

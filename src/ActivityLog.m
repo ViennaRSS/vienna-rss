@@ -58,8 +58,6 @@
  */
 -(void)setName:(NSString *)aName
 {
-	[aName retain];
-	[name release];
 	name = aName;
 }
 
@@ -68,8 +66,6 @@
  */
 -(void)setStatus:(NSString *)aStatus
 {
-	[aStatus retain];
-	[status release];
 	status = aStatus;
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:self];
 }
@@ -124,13 +120,9 @@
  */
 -(void)dealloc
 {
-	[details release];
 	details=nil;
-	[status release];
 	status=nil;
-	[name release];
 	name=nil;
-	[super dealloc];
 }
 @end
 
@@ -208,7 +200,6 @@
 		item = [[ActivityItem alloc] init];
 		[item setName:theName];
 		[log insertObject:item atIndex:insertionIndex];
-		[item release];
 		
 		item = [log objectAtIndex:insertionIndex];
 	}
@@ -237,8 +228,6 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[log release];
 	log=nil;
-	[super dealloc];
 }
 @end

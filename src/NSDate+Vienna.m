@@ -59,7 +59,7 @@ static BOOL threadSafe;
 
 	for (int i=0; i<kNumberOfDateFormatters; i++)
 	{
-		dateFormatterArray[i] = [[[NSDateFormatter alloc] init] retain];
+		dateFormatterArray[i] = [[NSDateFormatter alloc] init];
 		[dateFormatterArray[i] setLocale:enUSLocale];
 		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         [dateFormatterArray[i] setDateFormat:kDateFormats[i]];

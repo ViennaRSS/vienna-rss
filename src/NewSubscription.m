@@ -68,13 +68,13 @@
 		NSString * pathToPList = [thisBundle pathForResource:@"RSSSources" ofType:@"plist"];
 		if ([[NSFileManager defaultManager] fileExistsAtPath:pathToPList])
 		{
-			sourcesDict = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
+			sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
 			[feedSource removeAllItems];
 			if (sourcesDict.count > 0)
 			{
                 for (NSString *feedSourceType in sourcesDict.allKeys) {
 					//[feedSource addItemWithTitle:NSLocalizedString(feedSourceType, nil)];
-                    NSMenuItem *feedMenuItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(feedSourceType, nil) action:NULL keyEquivalent:@""] autorelease];
+                    NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(feedSourceType, nil) action:NULL keyEquivalent:@""];
                     feedMenuItem.representedObject = feedSourceType;
                     [feedSource.menu addItem:feedMenuItem];
                 }
@@ -99,7 +99,7 @@
 		[feedURL setStringValue:@""];
 		if (pboardData != nil)
 		{
-			NSString * pasteString = [[[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding] autorelease];
+			NSString * pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding];
 			NSString * lowerCasePasteString = [pasteString lowercaseString];
 			if (lowerCasePasteString != nil && ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] || [lowerCasePasteString hasPrefix:@"feed://"]))
 			{
@@ -133,7 +133,6 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated" object:folderNumber];
 	
 	// Now release the folder number.
-	[folderNumber release];
 }
 
 /* editSubscription
@@ -153,7 +152,7 @@
 		// Create a context object which contains the folder ID for the sheet to pass to
 		// selector which it will call when done. Retain it so it is still around for the
 		// selector.
-		NSNumber * folderContext = [[NSNumber numberWithInt:folderId] retain];
+		NSNumber * folderContext = [NSNumber numberWithInt:folderId];
 		
 		// Open the edit sheet.
 		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSubscriptionEdit:returnCode:contextInfo:) contextInfo:(__bridge void *)(folderContext)];
@@ -181,7 +180,7 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSString * feedURLString = [[feedURL stringValue] trim];
-    NSURL * rssFeedURL = [[[NSURL alloc] init] autorelease];
+    NSURL * rssFeedURL = [[NSURL alloc] init];
 
 	// Format the URL based on the selected feed source.
 	if (sourcesDict != nil)
@@ -199,7 +198,7 @@
 
 	// Replace feed:// with http:// if necessary
     if ([rssFeedURL.scheme isEqualToString:@"feed"]) {
-        rssFeedURL = [[[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path] autorelease];
+        rssFeedURL = [[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path];
     }
     
 	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
@@ -332,7 +331,6 @@
 			NSString * siteHomePageURL = [itemDict valueForKey:@"SiteHomePage"];
 			NSURL * url = [[NSURL alloc] initWithString:siteHomePageURL];
 			[[NSWorkspace sharedWorkspace] openURL:url];
-			[url release];
 		}
 	}
 }
@@ -363,14 +361,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[sourcesDict release];
     sourcesDict=nil;
-    [subscriptionModel release];
     subscriptionModel=nil;
-	[db release];
 	db=nil;
-	[_topObjects release];
-	_topObjects=nil;
-	[super dealloc];
 }
 @end

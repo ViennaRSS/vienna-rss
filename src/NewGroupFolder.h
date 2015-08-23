@@ -29,7 +29,7 @@
 	int parentId;
 }
 
-@property(retain) NSArray * topObjects;
+@property(strong) NSArray * topObjects;
 
 // Action handlers
 -(IBAction)doSave:(id)sender;

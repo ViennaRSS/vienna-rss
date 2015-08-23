@@ -59,8 +59,8 @@ enum GoogleReaderStatus {
 @property (nonatomic, copy) NSMutableArray * localFeeds;
 @property (atomic, copy) NSString *token;
 @property (atomic, copy) NSString *clientAuthToken;
-@property (nonatomic, retain) NSTimer * tokenTimer;
-@property (nonatomic, retain) NSTimer * authTimer;
+@property (nonatomic, strong) NSTimer * tokenTimer;
+@property (nonatomic, strong) NSTimer * authTimer;
 @end
 
 @implementation GoogleReader
@@ -135,7 +135,7 @@ enum GoogleReaderStatus {
 		[request addRequestHeader:@"Authorization" value:[NSString stringWithFormat:@"GoogleLogin auth=%@", clientAuthToken]];
 	if (hostRequiresInoreaderAdditionalHeaders)
     {
-        NSMutableDictionary * theHeaders = [[[request requestHeaders] mutableCopy] autorelease];
+        NSMutableDictionary * theHeaders = [[request requestHeaders] mutableCopy];
         [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
         [request setRequestHeaders:theHeaders];
     }
@@ -159,7 +159,7 @@ enum GoogleReaderStatus {
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
 	LLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request originalURL] absoluteString]);
-	NSString *requestResponse = [[[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding] autorelease];
+	NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
 	if (![requestResponse isEqualToString:@"OK"]) {
 		LLog(@"Error on request");
 		LOG_EXPR([request error]);
@@ -271,7 +271,7 @@ enum GoogleReaderStatus {
 			
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[[newsItem objectForKey:@"published"] doubleValue]];
 			NSString * articleGuid = [newsItem objectForKey:@"id"];
-			Article *article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
+			Article *article = [[Article alloc] initWithGuid:articleGuid];
 			[article setFolderId:[refreshedFolder itemId]];
 		
 			if ([newsItem objectForKey:@"author"] != nil) {
@@ -567,8 +567,8 @@ enum GoogleReaderStatus {
 	}
 	
     // restore from Preferences and from keychain
-	username = [[prefs syncingUser] retain];
-	openReaderHost = [[prefs syncServer] retain];
+	username = [prefs syncingUser];
+	openReaderHost = [prefs syncServer];
 	// set server-specific particularities
 	hostSupportsLongId=NO;
 	hostRequiresSParameter=NO;
@@ -584,8 +584,8 @@ enum GoogleReaderStatus {
 	}
 
 
-	password = [[KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"] retain];
-	APIBaseURL = [[NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost] retain];
+	password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
+	APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
 
 	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
 	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
@@ -714,7 +714,7 @@ enum GoogleReaderStatus {
 				folderName = [folderNames lastObject];
 				// NNW nested folder char: — 
 				
-				NSMutableArray * params = [NSMutableArray arrayWithObjects:[[folderNames mutableCopy] autorelease], [NSNumber numberWithInt:MA_Root_Folder], nil];
+				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInt:MA_Root_Folder], nil];
 				[self createFolders:params];
 				break; //In case of multiple labels, we retain only the first one
 			} 
@@ -760,7 +760,6 @@ enum GoogleReaderStatus {
 	// Unread count may have changed
 	[controller setStatusMessage:nil persist:NO];
 	
-	[googleFeeds release];
 	
 }
 
@@ -865,22 +864,11 @@ enum GoogleReaderStatus {
 
 -(void)dealloc 
 {
-	[localFeeds release];
-	localFeeds=nil;
     username=nil;
 	openReaderHost=nil;
 	password=nil;
 	APIBaseURL=nil;
-	[clientAuthToken release];
-	clientAuthToken=nil;
-	[token release];
-	token=nil;
-	[tokenTimer release];
-	tokenTimer=nil;
-	[authTimer release];
-	authTimer=nil;
 	inoreaderAdditionalHeaders=nil;
-	[super dealloc];
 }
 
 /* sharedManager

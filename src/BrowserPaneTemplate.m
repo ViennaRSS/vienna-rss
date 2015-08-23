@@ -40,9 +40,6 @@
 -(void)dealloc
 {
 	browserPane=nil;
-	[_topObjects release];
-	_topObjects=nil;
-	[super dealloc];
 }
 
 @end

@@ -128,8 +128,6 @@
  */
 -(void)setDownload:(NSURLDownload *)theDownload
 {
-	[theDownload retain];
-	[download release];
 	download = theDownload;
 }
 
@@ -147,12 +145,9 @@
  */
 -(void)setFilename:(NSString *)theFilename
 {
-	[filename release];
-	[theFilename retain];
 	filename = theFilename;
 
 	// Force the image to be recached.
-	[image release];
 	image = nil;
 }
 
@@ -176,7 +171,6 @@
 			image = nil;
 		else
 		{
-			[image retain];
 			[image setSize:NSMakeSize(32, 32)];
 		}
 	}
@@ -188,8 +182,6 @@
  */
 -(void)setStartTime:(NSDate *)newStartTime
 {
-	[newStartTime retain];
-	[startTime release];
 	startTime = newStartTime;
 }
 
@@ -206,13 +198,9 @@
  */
 -(void)dealloc
 {
-	[filename release];
 	filename=nil;
-	[download release];
 	download=nil;
-	[image release];
 	image=nil;
-	[super dealloc];
 }
 @end
 
@@ -290,7 +278,6 @@
 		[listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
 
 	[[Preferences standardPreferences] setArray:listArray forKey:MAPref_DownloadsList];
-	[listArray release];
 }
 
 /* unarchiveDownloadsList
@@ -338,7 +325,7 @@
 	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
 	if (theDownload)
 	{
-		DownloadItem * newItem = [[DownloadItem new] autorelease];
+		DownloadItem * newItem = [DownloadItem new];
 		[newItem setState:DOWNLOAD_INIT];
 		[newItem setDownload:theDownload];
 		[newItem setFilename:filename];
@@ -347,7 +334,6 @@
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
 		[theDownload setDestination:filename allowOverwrite:YES];
 		
-		[theDownload release];
 	}
 }
 
@@ -434,7 +420,7 @@
 	DownloadItem * theItem = [self itemForDownload:download];
 	if (theItem == nil)
 	{
-		theItem = [[[DownloadItem alloc] init] autorelease];
+		theItem = [[DownloadItem alloc] init];
 		[theItem setDownload:download];
 		[downloadsList addObject:theItem];
 	}
@@ -586,8 +572,6 @@
  */
 -(void)dealloc
 {
-	[downloadsList release];
 	downloadsList=nil;
-	[super dealloc];
 }
 @end

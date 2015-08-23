@@ -54,7 +54,6 @@
             
             countImported = [self importSubscriptionGroup:outlines underParent:MA_Root_Folder];
         }
-        [opmlDocument release];
     }
     
     // Announce how many we successfully imported

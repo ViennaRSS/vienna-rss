@@ -95,7 +95,7 @@ static NSString * _userAgent ;
                name:kMA_Notify_UseWebPluginsChange object:nil];
 	
 	// Handle minimum font size, use of JavaScript, and use of plugins
-	defaultWebPrefs = [[self preferences] retain];
+	defaultWebPrefs = [self preferences];
 	[defaultWebPrefs setStandardFontFamily:@"Arial"];
 	[defaultWebPrefs setDefaultFontSize:12];
 	[defaultWebPrefs setPrivateBrowsingEnabled:NO];
@@ -113,8 +113,6 @@ static NSString * _userAgent ;
  */
 -(void)setController:(AppController *)theController
 {
-	[theController retain];
-	[controller release];
 	controller = theController;
 	[self setPolicyDelegate:self];
 }
@@ -445,10 +443,7 @@ static NSString * _userAgent ;
 	[self setPolicyDelegate:nil];
 	[self setDownloadDelegate:nil];
 	[self removeFromSuperviewWithoutNeedingDisplay];
-	[controller release];
 	controller=nil;
-	[defaultWebPrefs release];
 	defaultWebPrefs=nil;
-	[super dealloc];
 }
 @end

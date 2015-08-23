@@ -132,7 +132,6 @@
 			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 			
 			// Release the progress indicator.
-			[progressIndicator release];
 			progressIndicator = nil;
 		}
 	}

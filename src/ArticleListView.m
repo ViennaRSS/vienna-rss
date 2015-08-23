@@ -152,7 +152,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor blueColor], NSForegroundColorAttributeName, nil];
 	bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor grayColor], NSForegroundColorAttributeName, nil];
 	
-	[style release];
 	
 	// Set the reading pane orientation
 	[self setOrientation:[prefs layout]];
@@ -340,11 +339,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		// If we still have some menu items then use that for the new default menu, otherwise
 		// set the default items to nil as we may have removed all the items.
 		if ([newDefaultMenu count] > 0)
-			defaultMenuItems = [newDefaultMenu autorelease];
+			defaultMenuItems = newDefaultMenu;
 		else
         {
 			defaultMenuItems = nil;
-            [newDefaultMenu release];
         }
     }
 
@@ -417,7 +415,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];
 	[articleList setMenu:articleListMenu];
-	[articleListMenu release];
 
 	// Set the target for double-click actions
 	[articleList setDoubleAction:@selector(doubleClickRow:)];
@@ -607,14 +604,14 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			{
 				ProgressTextCell * progressCell;
 				
-				progressCell = [[[ProgressTextCell alloc] init] autorelease];
+				progressCell = [[ProgressTextCell alloc] init];
 				[column setDataCell:progressCell];
 			}
 			else
 			{
 				BJRVerticallyCenteredTextFieldCell * cell;
 
-				cell = [[[BJRVerticallyCenteredTextFieldCell alloc] init] autorelease];
+				cell = [[BJRVerticallyCenteredTextFieldCell alloc] init];
 				[column setDataCell:cell];
 			}
 
@@ -633,7 +630,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			[column setMaxWidth:2000];
 			[column setWidth:[field width]];
 			[articleList addTableColumn:column];
-			[column release];
 		}
 	}
 	
@@ -689,7 +685,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[self saveSplitSettingsForLayout];
 
 	// We're done
-	[dataArray release];
 }
 
 /* setTableViewFont
@@ -698,13 +693,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)setTableViewFont
 {
-	[articleListFont release];
-	[articleListUnreadFont release];
 
 	Preferences * prefs = [Preferences standardPreferences];
-	articleListFont = [[NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]] retain];
+	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
 	articleListUnreadFont = [prefs boolForKey:MAPref_ShowUnreadArticlesInBold] ? [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont] : articleListFont;
-	[articleListUnreadFont retain];
 
 	[reportCellDict setObject:articleListFont forKey:NSFontAttributeName];
 	[unreadReportCellDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
@@ -893,8 +885,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)setError:(NSError *)newError
 {
-	[newError retain];
-	[lastError release];
 	lastError = newError;
 }
 
@@ -1168,8 +1158,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		// so that after handleFolderSelection has been invoked, it will select the
 		// requisite article on our behalf.
 		currentSelectedRow = -1;
-		[guidOfArticleToSelect release];
-		guidOfArticleToSelect = [guid retain];
+		guidOfArticleToSelect = guid;
 		[foldersTree selectFolder:folderId];
 	}
 }
@@ -1234,13 +1223,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSString * guid = nil;
 
 	[markReadTimer invalidate];
-	[markReadTimer release];
 	markReadTimer = nil;
 	
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
 	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
-		guid = [[[allArticles objectAtIndex:currentSelectedRow] guid] retain];
+		guid = [[allArticles objectAtIndex:currentSelectedRow] guid];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
@@ -1276,7 +1264,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
-	[guid release];
 }
 
 /* selectArticleAfterReload
@@ -1291,7 +1278,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		[self selectFirstUnreadInFolder];
 	else
 		[self scrollToArticle:guidOfArticleToSelect];
-	[guidOfArticleToSelect release];
 	guidOfArticleToSelect = nil;
 }
 
@@ -1345,16 +1331,15 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		if (![theArticle isRead] && !blockMarkRead)
 		{
 			[markReadTimer invalidate];
-			[markReadTimer release];
 			markReadTimer = nil;
 
 			float interval = [[Preferences standardPreferences] markReadInterval];
 			if (interval > 0 && !isAppInitialising)
-				markReadTimer = [[NSTimer scheduledTimerWithTimeInterval:(double)interval
+				markReadTimer = [NSTimer scheduledTimerWithTimeInterval:(double)interval
 																  target:self
 																selector:@selector(markCurrentRead:)
 																userInfo:nil
-																 repeats:NO] retain];
+																 repeats:NO];
 		}
 	}
 }
@@ -1399,7 +1384,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// If we already have an URL release it.
 	if (currentURL)
 	{
-		[currentURL release];
 		currentURL = nil;
 	}
 }
@@ -1594,7 +1578,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			NSString * topString = [NSString stringWithFormat:@"%@", [theArticle title]];
 			NSMutableAttributedString * topAttributedString = [[NSMutableAttributedString alloc] initWithString:topString attributes:topLineDictPtr];
 			[topAttributedString fixFontAttributeInRange:NSMakeRange(0u, [topAttributedString length])];
-			[theAttributedString appendAttributedString:[topAttributedString autorelease]];
+			[theAttributedString appendAttributedString:topAttributedString];
 		}
 
 		// Add the summary line that appears below the title.
@@ -1606,7 +1590,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
 			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
 			[middleAttributedString fixFontAttributeInRange:NSMakeRange(0u, [middleAttributedString length])];
-			[theAttributedString appendAttributedString:[middleAttributedString autorelease]];
+			[theAttributedString appendAttributedString:middleAttributedString];
 		}
 		
 		// Add the link line that appears below the summary and title.
@@ -1620,12 +1604,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 				NSURL * articleURL = [NSURL URLWithString:articleLink];
 				if (articleURL != nil)
 				{
-					linkLineDictPtr = [[linkLineDictPtr mutableCopy] autorelease];
+					linkLineDictPtr = [linkLineDictPtr mutableCopy];
 					[linkLineDictPtr setObject:articleURL forKey:NSLinkAttributeName];
 				}
 				NSMutableAttributedString * linkAttributedString = [[NSMutableAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr];
 				[linkAttributedString fixFontAttributeInRange:NSMakeRange(0u, [linkAttributedString length])];
-				[theAttributedString appendAttributedString:[linkAttributedString autorelease]];
+				[theAttributedString appendAttributedString:linkAttributedString];
 			}
 		}
 		
@@ -1656,8 +1640,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 		NSMutableAttributedString * summaryAttributedString = [[NSMutableAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
 		[summaryAttributedString fixFontAttributeInRange:NSMakeRange(0u, [summaryAttributedString length])];
-		[theAttributedString appendAttributedString:[summaryAttributedString autorelease]];
-		return [theAttributedString autorelease];
+		[theAttributedString appendAttributedString:summaryAttributedString];
+		return theAttributedString;
 	}
 	
 	NSString * cellString;
@@ -1700,7 +1684,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	theAttributedString = [[NSMutableAttributedString alloc] initWithString:cellString attributes:([theArticle isRead] ? reportCellDict : unreadReportCellDict)];
 	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, [theAttributedString length])];
-    return [theAttributedString autorelease];
+    return theAttributedString;
 }
 
 /* tableViewSelectionDidChange [delegate]
@@ -1855,11 +1839,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[pboard setString:fullPlainText forType:NSStringPboardType];
 	[pboard setString:[fullHTMLText stringByEscapingExtendedCharacters] forType:NSHTMLPboardType];
 
-	[arrayOfArticles release];
-	[arrayOfURLs release];
-	[arrayOfTitles release];
-	[fullHTMLText release];
-	[fullPlainText release];
 	return YES;
 }
 
@@ -1986,36 +1965,20 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[articleText setFrameLoadDelegate:nil];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
-	[markReadTimer release];
 	markReadTimer=nil;
-	[articleListFont release];
 	articleListFont=nil;
-	[articleListUnreadFont release];
 	articleListUnreadFont=nil;
-	[reportCellDict release];
 	reportCellDict=nil;
-	[unreadReportCellDict release];
 	unreadReportCellDict=nil;
-	[guidOfArticleToSelect release];
 	guidOfArticleToSelect=nil;
-	[unreadTopLineSelectionDict release];
 	unreadTopLineSelectionDict=nil;
-	[selectionDict release];
 	selectionDict=nil;
-	[unreadTopLineDict release];
 	unreadTopLineDict=nil;
-	[topLineDict release];
 	topLineDict=nil;
-	[middleLineDict release];
 	middleLineDict=nil;
-	[linkLineDict release];
 	linkLineDict=nil;
-	[bottomLineDict release];
 	bottomLineDict=nil;
-	[lastError release];
 	lastError=nil;
-	[currentURL release];
 	currentURL=nil;
-	[super dealloc];
 }
 @end

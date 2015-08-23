@@ -126,7 +126,6 @@
 	
 	NSImageCell * imageCell = [[NSImageCell alloc] init];
 	[tableColumn setDataCell:imageCell];
-	[imageCell release];
 }
 @end  
 

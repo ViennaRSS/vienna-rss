@@ -79,13 +79,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[clickedURL release];
-	[URLStorage release];
-	
-	[super dealloc];
-}
 
 /* Enforces that the text field be non-editable and
 	non-selectable. Probably not needed, but I always
@@ -106,7 +99,7 @@
 
 - (void)setStringValue:(NSString *)aStr
 {
-	NSAttributedString *attrString = [[[NSAttributedString alloc] initWithString:aStr attributes:nil] autorelease];
+	NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:aStr attributes:nil];
 	[self setAttributedStringValue:attrString];
 }
 
@@ -132,8 +125,8 @@
 	if ( URLStorage == nil ) {
 		BOOL cellWraps = ![[self cell] isScrollable];
 		NSSize containerSize = NSMakeSize( cellWraps ? cellBounds.size.width : MAXFLOAT, cellWraps ? MAXFLOAT : cellBounds.size.height );
-		URLContainer = [[[NSTextContainer alloc] initWithContainerSize:containerSize] autorelease];
-		URLManager = [[[NSLayoutManager alloc] init] autorelease];
+		URLContainer = [[NSTextContainer alloc] initWithContainerSize:containerSize];
+		URLManager = [[NSLayoutManager alloc] init];
 		URLStorage = [[NSTextStorage alloc] init];
 		
 		[URLStorage addLayoutManager:URLManager];
@@ -226,8 +219,8 @@
 	NSURL *anURL = [self urlAtMouse:aEvent];
 	
 	if ( anURL != nil ) {
-		NSMenu *aMenu = [[[NSMenu alloc] initWithTitle:@"Copy URL"] autorelease];
-		NSMenuItem *anItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy URL", @"Copy URL") action:@selector(copyURL:) keyEquivalent:@""] autorelease];
+		NSMenu *aMenu = [[NSMenu alloc] initWithTitle:@"Copy URL"];
+		NSMenuItem *anItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy URL", @"Copy URL") action:@selector(copyURL:) keyEquivalent:@""];
 		[anItem setTarget:self];
 		[anItem setRepresentedObject:anURL];
 		[aMenu addItem:anItem];
@@ -256,8 +249,7 @@
 	/* Remember which URL was clicked originally, so we don't end up opening
 		the wrong URL accidentally.
 	*/
-	[clickedURL release];
-	clickedURL = [[self urlAtMouse:mouseEvent] retain];
+	clickedURL = [self urlAtMouse:mouseEvent];
 }
 
 - (void)mouseUp:(NSEvent *)mouseEvent
@@ -268,7 +260,6 @@
 		if ( ([self delegate] == nil)  || ![[self delegate] respondsToSelector:@selector(textField:openURL:)] || ![(id)[self delegate] textField:self openURL:urlAtMouse] )
 			[[NSWorkspace sharedWorkspace] openURL:urlAtMouse];
 	}
-	[clickedURL release];
 	clickedURL = nil;
 	[super mouseUp:mouseEvent];
 }

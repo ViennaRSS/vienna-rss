@@ -55,12 +55,6 @@ const float kDefaultHiddenHeight = 0.0;
     return self;
 }
 
-- (void)dealloc;
-{
-    [hiddenSubviews release];
-    
-    [super dealloc];
-}
 
 - (void)awakeFromNib;
 {
@@ -221,7 +215,6 @@ const float kDefaultHiddenHeight = 0.0;
     while (subviewIndex--)
         [self addSubview:[hiddenSubviews objectAtIndex:subviewIndex]];
 
-    [hiddenSubviews release];
     hiddenSubviews = nil;
 }
 

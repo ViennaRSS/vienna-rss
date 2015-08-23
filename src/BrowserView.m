@@ -78,7 +78,6 @@
  */
 -(void)setPrimaryTabItemView:(NSView<BaseView> *)newPrimaryTabItemView
 {
-	[newPrimaryTabItemView retain];
 	
 	NSTabViewItem * item;
 	if (primaryTabItemView == nil)
@@ -94,7 +93,6 @@
 	[item setIdentifier:newPrimaryTabItemView];
 	[item setView:newPrimaryTabItemView];
 	
-	[primaryTabItemView release];
 	primaryTabItemView = newPrimaryTabItemView;
 	
 	[primaryTabItemView setNeedsDisplay:YES];
@@ -134,7 +132,6 @@
 	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
 	[tabViewItem setView:newTabView];
 	[tabView addTabViewItem:tabViewItem];
-	[tabViewItem release];
 
 	if (keyIt) [self showTabItemView:newTabView];
 }
@@ -329,12 +326,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[tabBarControl release];
 	tabBarControl=nil;
-	[primaryTabItemView release];
 	primaryTabItemView=nil;
-	[tabView release];
 	tabView=nil;
-	[super dealloc];
 }
 @end
