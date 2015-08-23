@@ -4698,15 +4698,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [NSArray arrayByExpandingAllArrayObjects:
+	return [[[NSArray arrayWithObjects:
 			 @"Subscribe",
 			 @"SkipFolder",
 			 @"Action",
 			 @"Refresh",
-			 [pluginManager defaultToolbarItems],
+			 nil]
+			 arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]]
+			 arrayByAddingObjectsFromArray:[NSArray arrayWithObjects:
 			 NSToolbarFlexibleSpaceItemIdentifier,
 			 @"SearchItem",
-			 nil];
+			 nil]
+			 ];
 }
 
 /* toolbarAllowedItemIdentifiers
@@ -4715,7 +4718,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [NSArray arrayByExpandingAllArrayObjects:
+	return [[NSArray arrayWithObjects:
 			 NSToolbarSeparatorItemIdentifier,
 			 NSToolbarSpaceItemIdentifier,
 			 NSToolbarFlexibleSpaceItemIdentifier,
@@ -4731,8 +4734,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			 @"Styles",
 			 @"PreviousButton",
 			 @"NextButton",
-			 [pluginManager toolbarItems],
-			 nil];
+			 nil]
+			 arrayByAddingObjectsFromArray:[pluginManager toolbarItems]
+			 ];
 }
 
 /*! showSystemProfileInfoAlert
