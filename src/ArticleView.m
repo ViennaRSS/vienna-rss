@@ -242,7 +242,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(void)clearHTML
 {
 	// Reset current html string.
-	currentHTML = [[NSString alloc] initWithString: @""];
+	currentHTML = @"";
 	
 	// Load a blank HTML page.
 	NSString * htmlText = @"";

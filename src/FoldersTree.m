@@ -785,7 +785,7 @@
 		}
 	}
 	
-	TreeNode * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
+	TreeNode __unused * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
 	[self reloadFolderItem:node reloadChildren:YES];
 }
 

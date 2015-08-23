@@ -4767,8 +4767,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 	[mainWindow setDelegate:nil];
 	[splitView1 setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.rssFeed;
-
 }
 
 
