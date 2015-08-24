@@ -86,7 +86,7 @@
 
 	// Our folders have images next to them.
 	tableColumn = [outlineView tableColumnWithIdentifier:@"folderColumns"];
-	imageAndTextCell = [[[ImageAndTextCell alloc] init] autorelease];
+	imageAndTextCell = [[ImageAndTextCell alloc] init];
 	[imageAndTextCell setEditable:YES];
 	[tableColumn setDataCell:imageAndTextCell];
 
@@ -183,12 +183,10 @@
 {
 	int height;
 
-	[cellFont release];
-	[boldCellFont release];
 
 	Preferences * prefs = [Preferences standardPreferences];
-	cellFont = [[NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]] retain];
-	boldCellFont = [[[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont] retain];
+	cellFont = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
+	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
 
 	height = [[APPCONTROLLER layoutManager] defaultLineHeightForFont:boldCellFont];
 	[outlineView setRowHeight:height + 5];
@@ -296,7 +294,6 @@
 			if (count)
 				[self loadTree:listOfSubFolders rootNode:subNode];
 
-			[subNode release];
 		}
 	}
 	else
@@ -322,11 +319,9 @@
 			{
 				if (![self loadTree:listOfSubFolders rootNode:subNode])
 				{
-					[subNode release];
 					return NO;
 				}
 			}
-			[subNode release];
 			nextChildId = [folder nextSiblingId];
 			++index;
 		}
@@ -790,9 +785,8 @@
 		}
 	}
 	
-	TreeNode * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
+	TreeNode __unused * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
 	[self reloadFolderItem:node reloadChildren:YES];
-	[newNode release];
 }
 
 /* reloadFolderItem
@@ -888,7 +882,6 @@
 		NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		[style setLineBreakMode:NSLineBreakByTruncatingMiddle];
 		info = [[NSDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
-		[style release];
 	}
 
 	Folder * folder = [node folder];
@@ -905,7 +898,7 @@
 	else
 		[myInfo setObject:cellFont forKey:NSFontAttributeName];
 	
-	return [[[NSAttributedString alloc] initWithString:[node nodeName] attributes:myInfo] autorelease];
+	return [[NSAttributedString alloc] initWithString:[node nodeName] attributes:myInfo];
 }
 
 /* willDisplayCell
@@ -1284,10 +1277,8 @@
 			}
 		}
 		
-		[node retain];
 		[oldParent removeChild:node andChildren:NO];
 		[newParent addChild:node atIndex:newChildIndex];
-		[node release];
 		
 		// Put at beginning of undoArray in order to undo moves in reverse order.
 		[undoArray insertObject:[NSNumber numberWithInt:folderId] atIndex:0u];
@@ -1317,7 +1308,6 @@
 	// If undo array is empty, then nothing has been moved.
 	if ([undoArray count] == 0u)
 	{
-		[undoArray release];
 		return NO;
 	}
 	
@@ -1325,7 +1315,6 @@
 	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
 	[undoManager registerUndoWithTarget:self selector:@selector(moveFoldersUndo:) object:undoArray];
 	[undoManager setActionName:NSLocalizedString(@"Move Folders", nil)];
-	[undoArray release];
 	
 	// Make the outline control reload its data
 	[outlineView reloadData];
@@ -1355,7 +1344,6 @@
 	}
 	[outlineView scrollRowToVisible:selRowIndex];
 	[outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
-	[selIndexSet release];
 	return YES;
 }
 
@@ -1411,7 +1399,6 @@
 
 		// Do the move
 		BOOL result = [self moveFolders:array withGoogleSync:YES];
-		[array release];
 		return result;
 	}
 	if ([type isEqualToString:MA_PBoardType_RSSSource])
@@ -1508,16 +1495,10 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[cellFont release];
 	cellFont=nil;
-	[boldCellFont release];
 	boldCellFont=nil;
-	[folderErrorImage release];
 	folderErrorImage=nil;
-	[refreshProgressImage release];
 	refreshProgressImage=nil;
-	[rootNode release];
 	rootNode=nil;
-	[super dealloc];
 }
 @end

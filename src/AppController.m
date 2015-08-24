@@ -192,11 +192,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	pluginManager = [[PluginManager alloc] init];
 	[pluginManager resetPlugins];
 	
-	// Retain views which might be removed from the toolbar and therefore released;
-	// we will need them if they are added back later.
-	[spinner retain];
-	[searchField retain];
-    
     // We need to register the handlers early to catch events fired on launch.
     NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
     [em setEventHandler:self
@@ -387,7 +382,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	IONotificationPortRef notify;
 	io_object_t anIterator;
 	
-	root_port = IORegisterForSystemPower(self, &notify, MySleepCallBack, &anIterator);
+	root_port = IORegisterForSystemPower((__bridge void *)(self), &notify, MySleepCallBack, &anIterator);
 	if (root_port != 0)
 		CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notify), kCFRunLoopCommonModes);
 }
@@ -456,7 +451,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	}
 	
 	// Create the toolbar.
-	NSToolbar * toolbar = [[[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"] autorelease];
+	NSToolbar * toolbar = [[NSToolbar alloc] initWithIdentifier:@"MA_Toolbar"];
 	
 	// Set the appropriate toolbar options. We are the delegate, customization is allowed,
 	// changes made by the user are automatically saved and we start in icon mode.
@@ -475,7 +470,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	// Preload dictionary of standard URLs
 	NSString * pathToPList = [[NSBundle mainBundle] pathForResource:@"StandardURLs.plist" ofType:@""];
 	if (pathToPList != nil)
-		standardURLs = [[NSDictionary dictionaryWithContentsOfFile:pathToPList] retain];
+		standardURLs = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
 	
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
@@ -643,7 +638,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 				{
 					[db purgeDeletedArticles];
 				}
-				[emptyTrashWarning release];
 				emptyTrashWarning = nil;
 			}
 			break;
@@ -812,17 +806,14 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recent Searches", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldRecentsTitleMenuItemTag];
 	[cellMenu insertItem:item atIndex:0];
-	[item release];
 	
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Recents", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldRecentsMenuItemTag];
 	[cellMenu insertItem:item atIndex:1];
-	[item release];
 	
 	item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Clear", nil) action:NULL keyEquivalent:@""];
 	[item setTag:NSSearchFieldClearRecentsMenuItemTag];
 	[cellMenu insertItem:item atIndex:2];
-	[item release];
 	
 	SearchMethod * searchMethod;
 	NSString * friendlyName;
@@ -841,7 +832,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 			[item setState:NSOnState];
 		
 		[cellMenu addItem:item];
-		[item release];
 	}
 	
 	// Add all available plugged-in search methods to the menu.
@@ -860,11 +850,10 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 			if ( [[searchMethod friendlyName] isEqualToString: [[[Preferences standardPreferences] searchMethod] friendlyName]] )
 				[item setState:NSOnState];
 			[cellMenu addItem:item];
-			[item release];
 		}
 	} 
 	[cellMenu setDelegate:self];
-	return [cellMenu autorelease];
+	return cellMenu;
 }
 
 /* setSearchMethod 
@@ -943,7 +932,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSMenu *)folderMenu
 {
-	NSMenu * folderMenu = [[[NSMenu alloc] init] autorelease];
+	NSMenu * folderMenu = [[NSMenu alloc] init];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(refreshSelectedSubscriptions:))];
 	[folderMenu addItem:[NSMenuItem separatorItem]];
 	[folderMenu addItem:copyOfMenuItemWithAction(@selector(editFolder:))];
@@ -1071,7 +1060,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSMenu *)applicationDockMenu:(NSApplication *)sender
 {
-	[appDockMenu release];
 	appDockMenu = [[NSMenu alloc] initWithTitle:@"DockMenu"];
 	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(refreshAllSubscriptions:))];
 	[appDockMenu addItem:copyOfMenuItemWithAction(@selector(markAllSubscriptionsRead:))];
@@ -1109,7 +1097,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 					[menuItem setAction:@selector(openWebElementInNewTab:)];
 					[menuItem setRepresentedObject:imageURL];
 					[menuItem setTag:WebMenuItemTagOther];
-					newMenuItem = [[NSMenuItem new] autorelease];
+					newMenuItem = [NSMenuItem new];
 					if (newMenuItem != nil)
 					{
 						[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Image in %@", nil), defaultBrowser]];
@@ -1142,7 +1130,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 					[newMenuItem setTag:WebMenuItemTagOther];
 					[newDefaultMenu insertObject:newMenuItem atIndex:index + 1];
 				}
-				[newMenuItem release];
 				break;
 				
 			case WebMenuItemTagCopyLinkToClipboard:
@@ -1157,7 +1144,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[newDefaultMenu addObject:[NSMenuItem separatorItem]];
 		
 		// Add command to open the current page in the external browser
-		newMenuItem = [[NSMenuItem new] autorelease];
+		newMenuItem = [NSMenuItem new];
 		if (newMenuItem != nil)
 		{
 			[newMenuItem setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open Page in %@", nil), defaultBrowser]];
@@ -1168,7 +1155,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		
 		// Add command to copy the URL of the current page to the clipboard
-		newMenuItem = [[NSMenuItem new] autorelease];
+		newMenuItem = [NSMenuItem new];
 		if (newMenuItem != nil)
 		{
 			[newMenuItem setTitle:NSLocalizedString(@"Copy Page Link to Clipboard", nil)];
@@ -1179,7 +1166,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 	}
 	
-	return [newDefaultMenu autorelease];
+	return newDefaultMenu;
 }
 
 /** openURLsInDefaultBrowser
@@ -1424,7 +1411,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		else
 			[browserView setTabItemViewTitle:newBrowserPane title:NSLocalizedString(@"New Tab", nil)];
 		
-		[newBrowserTemplate release];
 	}
 	if (didCompleteInitialisation)
 			[browserView performSelector:@selector(saveOpenTabs) withObject:nil afterDelay:3];
@@ -1546,7 +1532,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	else
 	{
 		NSAppleEventDescriptor * resultEvent = [appleScript executeAndReturnError:&errorDictionary];
-		[appleScript release];
 		if (resultEvent == nil)
 		{
 			NSString * baseScriptName = [[scriptName lastPathComponent] stringByDeletingPathExtension];
@@ -1569,7 +1554,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {
     if ([mainWindow isKeyWindow]) {
-	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
     [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
     [alert setInformativeText:NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.",nil)];
@@ -1758,7 +1743,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 							 notificationsWithDescriptions,	GROWL_NOTIFICATIONS_HUMAN_READABLE_NAMES,
 							 nil];
 
-	[defNotesArray release];
 
 	return regDict;
 }
@@ -1768,7 +1752,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)initSortMenu
 {
-	NSMenu * sortSubmenu = [[[NSMenu alloc] initWithTitle:@"Sort By"] autorelease];
+	NSMenu * sortSubmenu = [[NSMenu alloc] initWithTitle:@"Sort By"];
 	
 	// Add the fields which are sortable to the menu.
 	for (Field * field in [db arrayOfFields])
@@ -1789,7 +1773,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doSortColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
 			[sortSubmenu addItem:menuItem];
-			[menuItem release];
 		}
 	}
 	
@@ -1800,11 +1783,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Ascending", nil) action:@selector(doSortDirection:) keyEquivalent:@""];
 	[menuItem setRepresentedObject:[NSNumber numberWithBool:YES]];
 	[sortSubmenu addItem:menuItem];
-	[menuItem release];
 	menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Descending", nil) action:@selector(doSortDirection:) keyEquivalent:@""];
 	[menuItem setRepresentedObject:[NSNumber numberWithBool:NO]];
 	[sortSubmenu addItem:menuItem];
-	[menuItem release];
 	
 	// Set the submenu
 	[sortByMenu setSubmenu:sortSubmenu];
@@ -1815,7 +1796,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)initColumnsMenu
 {
-	NSMenu * columnsSubMenu = [[[NSMenu alloc] initWithTitle:@"Columns"] autorelease];
+	NSMenu * columnsSubMenu = [[NSMenu alloc] initWithTitle:@"Columns"];
 	
 	for (Field * field in [db arrayOfFields])
 	{
@@ -1832,7 +1813,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[field displayName] action:@selector(doViewColumn:) keyEquivalent:@""];
 			[menuItem setRepresentedObject:field];
 			[columnsSubMenu addItem:menuItem];
-			[menuItem release];
 		}
 	}
 	[columnsMenu setSubmenu:columnsSubMenu];
@@ -1880,7 +1860,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 															   action:@selector(doSelectScript:)
 														keyEquivalent:@""];
 			[scriptsMenu addItem:menuItem];
-			[menuItem release];
 		}
 		
 		[scriptsMenu addItem:[NSMenuItem separatorItem]];
@@ -1888,18 +1867,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Scripts Folder", nil) action:@selector(doOpenScriptsFolder:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
-		[menuItem release];
 		
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Scripts...", nil) action:@selector(moreScripts:) keyEquivalent:@""];
 		[scriptsMenu addItem:menuItem];
-		[menuItem release];
 		
 		// If this is the first call to initScriptsMenu, create the scripts menu. Otherwise we just
 		// update the one we have.
 		if (scriptsMenuItem != nil)
 		{
 			[[NSApp mainMenu] removeItem:scriptsMenuItem];
-			[scriptsMenuItem release];
 		}
 		
 		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
@@ -1909,7 +1885,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[[NSApp mainMenu] insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		[scriptsMenuItem setSubmenu:scriptsMenu];
 		
-		[scriptsMenu release];
 	}
 }
 
@@ -1920,7 +1895,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSMenu *)getStylesMenu
 {
-	NSMenu * stylesSubMenu = [[[NSMenu alloc] initWithTitle:@"Style"] autorelease];
+	NSMenu * stylesSubMenu = [[NSMenu alloc] initWithTitle:@"Style"];
 	
 	// Reinitialise the styles map
 	NSDictionary * stylesMap = [ArticleView loadStylesMap];
@@ -1934,14 +1909,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index] action:@selector(doSelectStyle:) keyEquivalent:@""];
 		[stylesSubMenu addItem:menuItem];
-		[menuItem release];
 	}
 	
 	// Append a link to More Styles...
 	[stylesSubMenu addItem:[NSMenuItem separatorItem]];
 	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"More Styles...", nil) action:@selector(moreStyles:) keyEquivalent:@""];
 	[stylesSubMenu addItem:menuItem];
-	[menuItem release];
 	return stylesSubMenu;
 }
 
@@ -1952,8 +1925,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)initFiltersMenu
 {
-	NSMenu * filterSubMenu = [[[NSMenu alloc] initWithTitle:@"Filter By"] autorelease];
-	NSMenu * filterPopupMenu = [[[NSMenu alloc] initWithTitle:@""] autorelease];
+	NSMenu * filterSubMenu = [[NSMenu alloc] initWithTitle:@"Filter By"];
+	NSMenu * filterPopupMenu = [[NSMenu alloc] initWithTitle:@""];
 	
 	NSArray * filtersArray = [ArticleFilter arrayOfFilters];
 	int count = [filtersArray count];
@@ -1966,12 +1939,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
 		[menuItem setTag:[filter tag]];
 		[filterSubMenu addItem:menuItem];
-		[menuItem release];
 		
 		menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString([filter name], nil) action:@selector(changeFiltering:) keyEquivalent:@""];
 		[menuItem setTag:[filter tag]];
 		[filterPopupMenu addItem:menuItem];
-		[menuItem release];
 	}
 	
 	// Add it to the Filters menu
@@ -2088,18 +2059,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	GotoHelpPage((CFStringRef)@"keyboard.html", NULL);
 }
 
-/* showPreferencePanel
- * Display the Preference Panel.
- */
-/*
--(IBAction)showPreferencePanel:(id)sender
-{
-	if (!preferenceController)
-		preferenceController = [[NewPreferencesController alloc] init];
-	[NSApp activateIgnoringOtherApps:YES];
-	[preferenceController showWindow:self];
-} */
-
 /* printDocument
  * Print the selected articles in the article window.
  */
@@ -2181,7 +2140,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Preferences * prefs = [Preferences standardPreferences];
 	if ([prefs showAppInStatusBar] && appStatusItem == nil)
 	{
-		appStatusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
+		appStatusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 		[self setAppStatusBarIcon];
 		[appStatusItem setHighlightMode:YES];
 		
@@ -2196,12 +2155,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItem:copyOfMenuItemWithAction(@selector(exitVienna:))];
 		[appStatusItem setMenu:statusBarMenu];
-		[statusBarMenu release];
 	}
 	else if (![prefs showAppInStatusBar] && appStatusItem != nil)
 	{
 		[[NSStatusBar systemStatusBar] removeStatusItem:appStatusItem];
-		[appStatusItem release];
 		appStatusItem = nil;
 	}
 }
@@ -2334,15 +2291,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	int newFrequency = [[Preferences standardPreferences] refreshFrequency];
 	
 	[checkTimer invalidate];
-	[checkTimer release];
 	checkTimer = nil;
 	if (newFrequency > 0)
 	{
-		checkTimer = [[NSTimer scheduledTimerWithTimeInterval:newFrequency
+		checkTimer = [NSTimer scheduledTimerWithTimeInterval:newFrequency
 													   target:self
 													 selector:@selector(refreshOnTimer:)
 													 userInfo:nil
-													  repeats:NO] retain];
+													  repeats:NO];
 	}
 }
 
@@ -3037,7 +2993,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)sourceWindowWillClose:(NSNotification *)notification
 {
 	XMLSourceWindow * sourceWindow = [notification object];
-	[[sourceWindow retain] autorelease]; // Don't deallocate the object immediately
 	[sourceWindows removeObject:sourceWindow];
 }
 
@@ -3052,7 +3007,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		if ([folder isRSSFolder])
 		{
-			XMLSourceWindow * sourceWindow = [[[XMLSourceWindow alloc] initWithFolder:folder] autorelease];
+			XMLSourceWindow * sourceWindow = [[XMLSourceWindow alloc] initWithFolder:folder];
 			
 			if (sourceWindow != nil)
 			{
@@ -3656,8 +3611,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	[newSearchString retain];
-	[searchString release];
 	searchString = newSearchString;
 }
 
@@ -3666,7 +3619,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSString *)searchString
 {
-	return [[searchString retain] autorelease];
+	return searchString;
 }
 
 
@@ -3701,7 +3654,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self setSearchString:[searchField stringValue]];
 	SearchMethod * currentSearchMethod = [[Preferences standardPreferences] searchMethod];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 	[self performSelector:[currentSearchMethod handler] withObject: currentSearchMethod];
+#pragma clang diagnostic pop
 }
 
 /* performAllArticlesSearch
@@ -4106,8 +4062,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	@synchronized(persistedStatusText){
 		if (persistenceFlag)
 		{
-			[newStatusText retain];
-			[persistedStatusText release];
 			persistedStatusText = newStatusText;
 		}
 		if (newStatusText == nil || [newStatusText isBlank])
@@ -4665,7 +4619,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[customizationPaletteSpinner setStyle:[spinner style]];
 			
 			[item setView:customizationPaletteSpinner];
-			[customizationPaletteSpinner release];
 		}
 		
 		[item setMinSize:NSMakeSize(NSWidth([spinner frame]), NSHeight([spinner frame]))];
@@ -4689,7 +4642,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		[pluginManager toolbarItem:item withIdentifier:itemIdentifier];
 	}
-	return [item autorelease];
+	return item;
 }
 
 /* toolbarDefaultItemIdentifiers
@@ -4698,15 +4651,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [NSArray arrayByExpandingAllArrayObjects:
+	return [[[NSArray arrayWithObjects:
 			 @"Subscribe",
 			 @"SkipFolder",
 			 @"Action",
 			 @"Refresh",
-			 [pluginManager defaultToolbarItems],
+			 nil]
+			 arrayByAddingObjectsFromArray:[pluginManager defaultToolbarItems]]
+			 arrayByAddingObjectsFromArray:[NSArray arrayWithObjects:
 			 NSToolbarFlexibleSpaceItemIdentifier,
 			 @"SearchItem",
-			 nil];
+			 nil]
+			 ];
 }
 
 /* toolbarAllowedItemIdentifiers
@@ -4715,7 +4671,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar
 {
-	return [NSArray arrayByExpandingAllArrayObjects:
+	return [[NSArray arrayWithObjects:
 			 NSToolbarSeparatorItemIdentifier,
 			 NSToolbarSpaceItemIdentifier,
 			 NSToolbarFlexibleSpaceItemIdentifier,
@@ -4731,8 +4687,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			 @"Styles",
 			 @"PreviousButton",
 			 @"NextButton",
-			 [pluginManager toolbarItems],
-			 nil];
+			 nil]
+			 arrayByAddingObjectsFromArray:[pluginManager toolbarItems]
+			 ];
 }
 
 /*! showSystemProfileInfoAlert
@@ -4761,7 +4718,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         default:
             break;
     }
-    [alert release];
 }
 
 
@@ -4780,14 +4736,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         // To add a flexible space between General and Advanced preference panes insert [NSNull null]:
         //     NSArray *controllers = [[NSArray alloc] initWithObjects:generalViewController, [NSNull null], advancedViewController, nil];
         
-        [generalViewController release];
-        [appearanceViewController release];
-        [syncingViewController release];
-        [advancedViewController release];
         
         NSString *title = NSLocalizedString(@"Preferences", @"Common title for Preferences window");
         _preferencesWindowController = [[MASPreferencesWindowController alloc] initWithViewControllers:controllers title:title];
-        [controllers release];
     }
     return _preferencesWindowController;
 }
@@ -4819,28 +4770,6 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 	[mainWindow setDelegate:nil];
 	[splitView1 setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[pluginManager release];
-	[scriptsMenuItem release];
-	[standardURLs release];
-	[downloadWindow release];
-	[persistedStatusText release];
-	[scriptPathMappings release];
-	[smartFolder release];
-	[groupFolder release];
-	[preferenceController release];
-	[activityViewer release];
-	[checkTimer release];
-	[appDockMenu release];
-	[appStatusItem release];
-	[db release];
-	[spinner release];
-	[searchField release];
-	[sourceWindows release];
-	[searchString release];
-    [_preferencesWindowController release];
-    [self.rssFeed release];
-
-    [super dealloc];
 }
 
 

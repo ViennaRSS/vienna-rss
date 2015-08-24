@@ -56,8 +56,8 @@ static NSArray * iconArray = nil;
 		nonPersistedFlags = 0;
 		isCached = NO;
 		hasPassword = NO;
-		cachedArticles = [[NSMutableDictionary dictionary] retain];
-		attributes = [[NSMutableDictionary dictionary] retain];
+		cachedArticles = [NSMutableDictionary dictionary];
+		attributes = [NSMutableDictionary dictionary];
 		[self setName:newName];
 		[self setLastUpdate:[NSDate distantPast]];
 		[self setLastUpdateString:@""];
@@ -72,7 +72,7 @@ static NSArray * iconArray = nil;
 +(NSArray *)_iconArray
 {
 	if (iconArray == nil)
-		iconArray = [[NSArray arrayWithObjects:
+		iconArray = [NSArray arrayWithObjects:
 						[NSImage imageNamed:@"smallFolder.tiff"],
 						[NSImage imageNamed:@"smartFolder.tiff"],
 						[NSImage imageNamed:@"rssFolder.tiff"],
@@ -80,7 +80,7 @@ static NSArray * iconArray = nil;
 						[NSImage imageNamed:@"trashFolder.tiff"],
 						[NSImage imageNamed:@"searchFolder.tiff"],
 						[NSImage imageNamed:@"googleFeed.tiff"],
-						nil] retain];
+						nil];
 	return iconArray;
 }
 
@@ -325,8 +325,6 @@ static NSArray * iconArray = nil;
  */
 -(void)setLastUpdate:(NSDate *)newLastUpdate
 {
-	[newLastUpdate retain];
-	[lastUpdate release];
 	lastUpdate = newLastUpdate;
 }
 
@@ -638,7 +636,7 @@ static NSArray * iconArray = nil;
 	if (index != NSNotFound)
 	{
 		NSScriptObjectSpecifier *containerRef = [APPCONTROLLER objectSpecifier];
-		return [[[NSIndexSpecifier allocWithZone:[self zone]] initWithContainerClassDescription:(NSScriptClassDescription *)[NSApp classDescription] containerSpecifier:containerRef key:@"folders" index:index] autorelease];
+		return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[NSApp classDescription] containerSpecifier:containerRef key:@"folders" index:index];
 	}
 	return nil;
 }
@@ -656,12 +654,8 @@ static NSArray * iconArray = nil;
  */
 -(void)dealloc
 {
-	[lastUpdate release];
 	lastUpdate=nil;
-	[attributes release];
 	attributes=nil;
-	[cachedArticles release];
 	cachedArticles=nil;
-	[super dealloc];
 }
 @end

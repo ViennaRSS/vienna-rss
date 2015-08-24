@@ -28,7 +28,7 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		guid = [aGuid retain];
+		guid = aGuid;
 		folderId = aFolderId;
 	}
 	return self;
@@ -39,7 +39,7 @@
  */
 +(ArticleReference *)makeReference:(Article *)anArticle
 {
-	return [[[ArticleReference alloc] initWithReference:[anArticle guid] inFolder:[anArticle folderId]] autorelease];
+	return [[ArticleReference alloc] initWithReference:[anArticle guid] inFolder:[anArticle folderId]];
 }
 
 /* makeReferenceFromGUID
@@ -47,7 +47,7 @@
  */
 +(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(int)folderId
 {
-	return [[[ArticleReference alloc] initWithReference:aGuid inFolder:folderId] autorelease];
+	return [[ArticleReference alloc] initWithReference:aGuid inFolder:folderId];
 }
 
 /* guid
@@ -79,8 +79,6 @@
  */
 -(void)dealloc
 {
-	[guid release];
 	guid=nil;
-	[super dealloc];
 }
 @end

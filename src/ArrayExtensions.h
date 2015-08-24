@@ -22,5 +22,4 @@
 
 @interface NSArray (ArrayExtensions)
 	-(NSUInteger)indexOfStringInArray:(NSString *)theString;
-	+(NSArray *)arrayByExpandingAllArrayObjects:(id)id1, ...;
 @end

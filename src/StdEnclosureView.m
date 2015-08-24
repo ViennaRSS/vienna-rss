@@ -75,8 +75,6 @@
 	FSRef appRef;
 
 	// Keep this for the download/open
-	[newFilename retain];
-	[enclosureFilename release];
 	enclosureFilename = newFilename;
 
 	NSString * basename = [enclosureFilename lastPathComponent];
@@ -96,7 +94,7 @@
 	else
 	{
 		isITunes = NO;
-		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
+		if (LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, (__bridge CFStringRef)ext, kLSRolesAll, &appRef, &appURL) != kLSApplicationNotFoundErr)
 		{
 			LSItemInfoRecord outItemInfo;
 			
@@ -131,7 +129,7 @@
 															[NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f], NSForegroundColorAttributeName,
 															[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName,
 															nil];
-	NSAttributedString * link = [[[NSAttributedString alloc] initWithString:encodedname attributes:linkAttributes] autorelease];
+	NSAttributedString * link = [[NSAttributedString alloc] initWithString:encodedname attributes:linkAttributes];
 	[filenameField setAttributedStringValue:link];
 }
 
@@ -171,8 +169,6 @@
  */
 -(void)dealloc
 {
-	[enclosureFilename release];
 	enclosureFilename=nil;
-	[super dealloc];
 }
 @end

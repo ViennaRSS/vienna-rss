@@ -22,9 +22,6 @@
 #import <Carbon/Carbon.h>
 #import "Folder.h"
 
-// This is needed for iTunes-like buttons with different option-key personalities.
-OSStatus keyPressed(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData);
-
 @interface ViennaApp : NSApplication
 
 // Refresh commands

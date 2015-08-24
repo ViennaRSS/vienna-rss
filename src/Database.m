@@ -81,13 +81,13 @@ const NSInteger MA_Current_DB_Version = 18;
         smartfoldersDict = [[NSMutableDictionary alloc] init];
         foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
-        databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:dbPath] retain];
+        databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
         // If we did not succeed getting read/write+create status,
         // then we need to prompt the user for a different location.
         if (databaseQueue == nil) {
         	dbPath = [self relocateLockedDatabase:dbPath];
         	if (dbPath != nil)
-        		databaseQueue = [[FMDatabaseQueue databaseQueueWithPath:dbPath] retain];
+        		databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
         }
         [self initialiseDatabase];
     }
@@ -130,7 +130,6 @@ const NSInteger MA_Current_DB_Version = 18;
         [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", nil)];
         [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", nil)];
         NSInteger modalReturn = [alert runModal];
-        [alert release];
         if (modalReturn == NSAlertSecondButtonReturn)
         {
             return NO;
@@ -250,17 +249,14 @@ const NSInteger MA_Current_DB_Version = 18;
     // Create a criteria to find all marked articles
     Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
     [self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
-    [markedCriteria release];
     
     // Create a criteria to show all unread articles
     Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
     [self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
-    [unreadCriteria release];
     
     // Create a criteria to show all articles received today
     Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
     [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
-    [todayCriteria release];
     
 	[databaseQueue inDatabase:^(FMDatabase *db) {
 		// Create the trash folder
@@ -405,7 +401,6 @@ const NSInteger MA_Current_DB_Version = 18;
 							NSLocalizedString(@"Cannot open database text", nil),
 							NSLocalizedString(@"Close", nil), @"", @"",
 							newPath);
-            [sqlDatabase release];
             sqlDatabase = nil;
 			return nil;
 		}
@@ -432,11 +427,10 @@ const NSInteger MA_Current_DB_Version = 18;
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
 		[criteriaTree addCriteria:criteria];
 		
-		__block NSString * preparedCriteriaString = [criteriaTree string];
+		__weak NSString * preparedCriteriaString = [criteriaTree string];
         [databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"insert into smart_folders (folder_id, search_string) values (?, ?)", @([db lastInsertRowId]), preparedCriteriaString];
         }];
-		[criteriaTree release];
 	}
 }
 
@@ -474,7 +468,7 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width
 {
-	Field * field = [[Field new] autorelease];
+	Field * field = [Field new];
 	if (field != nil)
 	{
 		[field setName:name];
@@ -855,7 +849,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		// Add this new folder to our internal cache. If this is an RSS or Open Reader
 		// folder, mark it so that somewhere down the line we'll request the
 		// image for the folder.
-		folder = [[[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type] autorelease];
+		folder = [[Folder alloc] initWithId:newItemId parentId:parentId name:name type:type];
 		if ((type == MA_RSS_Folder)||(type == MA_GoogleReader_Folder))
 			[folder setFlag:MA_FFlag_CheckForImage];
 		[foldersDict setObject:folder forKey:[NSNumber numberWithInt:newItemId]];
@@ -1748,7 +1742,6 @@ const NSInteger MA_Current_DB_Version = 18;
 				
 				CriteriaTree * criteriaTree = [[CriteriaTree alloc] initWithString:search_string];
 				[smartfoldersDict setObject:criteriaTree forKey:[NSNumber numberWithInt:folderId]];
-				[criteriaTree release];
 			}
 			[results close];
 		}];
@@ -1856,7 +1849,7 @@ const NSInteger MA_Current_DB_Version = 18;
                 NSInteger nextSibling = [[results stringForColumnIndex:7] intValue];
                 NSInteger firstChild = [[results stringForColumnIndex:8] intValue];
                 
-                Folder * folder = [[[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type] autorelease];
+                Folder * folder = [[Folder alloc] initWithId:newItemId parentId:newParentId name:name type:type];
                 [folder setNextSiblingId:nextSibling];
                 [folder setFirstChildId:firstChild];
                 if (!IsRSSFolder(folder) && !IsGoogleReaderFolder(folder))
@@ -2013,7 +2006,7 @@ const NSInteger MA_Current_DB_Version = 18;
 				if (!read_flag)
 					++unread_count;
 				
-				Article * article = [[[Article alloc] initWithGuid:guid] autorelease];
+				Article * article = [[Article alloc] initWithGuid:guid];
 				[article markRead:read_flag];
 				[article markFlagged:marked_flag];
 				[article markRevised:revised_flag];
@@ -2047,8 +2040,6 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)setSearchString:(NSString *)newSearchString
 {
-	[newSearchString retain];
-	[searchString release];
 	searchString = newSearchString;
 }
 
@@ -2102,7 +2093,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	}
 	if (count > 1)
 		[sqlString appendString:@")"];
-	return [sqlString autorelease];
+	return sqlString;
 }
 
 /* criteriaToSQL
@@ -2239,7 +2230,7 @@ const NSInteger MA_Current_DB_Version = 18;
 			[sqlString appendFormat:operatorString, valueString];
 		}
 	}
-	return [sqlString autorelease];
+	return sqlString;
 }
 
 /* criteriaForFolder
@@ -2259,8 +2250,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
 		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted withOperator:MA_CritOper_Is withValue:@"Yes"];
 		[tree addCriteria:clause];
-		[clause release];
-		return [tree autorelease];
+		return tree;
 	}
 
 	if (IsSmartFolder(folder))
@@ -2272,8 +2262,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
 	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder withOperator:MA_CritOper_Under withValue:[folder name]];
 	[tree addCriteria:clause];
-	[clause release];
-	return [tree autorelease];
+	return tree;
 }
 
 /* arrayOfUnreadArticlesRefs
@@ -2330,7 +2319,7 @@ const NSInteger MA_Current_DB_Version = 18;
 {
 	NSMutableArray * newArray = [NSMutableArray array];
 	NSString * filterClause = @"";
-	__block NSString * queryString;
+	__weak NSString * queryString;
 	Folder * folder = nil;
 	__block NSInteger unread_count = 0;
 
@@ -2366,7 +2355,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		FMResultSet * results = [db executeQuery:queryString];
 		while ([results next])
 		{
-			Article * article = [[[Article alloc] initWithGuid:[results stringForColumnIndex:0]] autorelease];
+			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
 			[article setFolderId:[[results stringForColumnIndex:1] intValue]];
 			[article setParentId:[[results stringForColumnIndex:2] intValue]];
 			[article markRead:[[results stringForColumnIndex:3] intValue]];
@@ -2694,7 +2683,6 @@ const NSInteger MA_Current_DB_Version = 18;
                             [NSString stringWithFormat:NSLocalizedString(@"Cannot create database folder text: %@", nil), error],
                             NSLocalizedString(@"Close", nil), @"", @"",
                             databaseFolder);
-            [error release];
             return NO;
         }
     }
@@ -2712,8 +2700,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[foldersDict removeAllObjects];
 	[smartfoldersDict removeAllObjects];
-	[fieldsOrdered release];
-	[fieldsByName release];
 	[self setTrashFolder:nil];
 	[self setSearchFolder:nil];
 	initializedfoldersDict = NO;
@@ -2728,18 +2714,8 @@ const NSInteger MA_Current_DB_Version = 18;
 -(void)dealloc
 {
 	[self close];
-    [trashFolder release];
-	trashFolder=nil;
-	[searchFolder release];
-	searchFolder=nil;
-	[searchString release];
 	searchString=nil;
-	[foldersDict release];
 	foldersDict=nil;
-	[smartfoldersDict release];
 	smartfoldersDict=nil;
-    [databaseQueue release];
-    databaseQueue=nil;
-	[super dealloc];
 }
 @end

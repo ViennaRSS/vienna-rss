@@ -466,7 +466,6 @@
 
 		Criteria * newCriteria = [[Criteria alloc] initWithField:[field name] withOperator:operator withValue:valueString];
 		[criteriaTree addCriteria:newCriteria];
-		[newCriteria release];
 	}
 
 	// Set the criteria condition
@@ -483,7 +482,6 @@
 		[[Database sharedManager] updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
     }
 
-	[criteriaTree release];
 	
 	[NSApp endSheet:searchWindow];
 	[searchWindow orderOut:self];
@@ -583,7 +581,7 @@
 	NSRect bounds = [searchCriteriaSuperview bounds];
 	NSView * row = (NSView *)[NSUnarchiver unarchiveObjectWithData:archRow];
 	[row setFrameOrigin:NSMakePoint(bounds.origin.x, bounds.origin.y + (((totalCriteria - 1) - index) * rowHeight))];
-	[searchCriteriaSuperview addSubview:[row retain]];
+	[searchCriteriaSuperview addSubview:row];
 	[arrayOfViews insertObject:row atIndex:index];
 
 	// Link the previous row to the next one so that the Tab key behaves
@@ -596,7 +594,6 @@
 		[row setNextKeyView:lastKeyView];
 	}
 	[searchCriteriaSuperview display];
-	[row release];
 }
 
 /* resizeSearchWindow
@@ -625,14 +622,8 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[arrayOfViews release];
 	arrayOfViews=nil;
-	[nameToFieldMap release];
 	nameToFieldMap=nil;
-	[db release];
 	db=nil;
-	[_topObjects release];
-	_topObjects=nil;
-	[super dealloc];
 }
 @end

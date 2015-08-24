@@ -13,7 +13,7 @@
 	NSImage	*_usualImage;
 }
 
-@property (retain) NSImage *usualImage;
-@property (retain) NSImage *rolloverImage;
+@property (strong) NSImage *usualImage;
+@property (strong) NSImage *rolloverImage;
 
 @end

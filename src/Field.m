@@ -64,8 +64,6 @@
  */
 -(void)setName:(NSString *)newName
 {
-	[newName retain];
-	[name release];
 	name = newName;
 }
 
@@ -75,8 +73,6 @@
  */
 -(void)setDisplayName:(NSString *)newDisplayName
 {
-	[newDisplayName retain];
-	[displayName release];
 	displayName = newDisplayName;
 }
 
@@ -87,8 +83,6 @@
  */
 -(void)setSqlField:(NSString *)newSqlField
 {
-	[newSqlField retain];
-	[sqlField release];
 	sqlField = newSqlField;
 }
 
@@ -210,12 +204,8 @@
  */
 -(void)dealloc
 {
-	[sqlField release];
 	sqlField=nil;
-	[displayName release];
 	displayName=nil;
-	[name release];
 	name=nil;
-	[super dealloc];
 }
 @end

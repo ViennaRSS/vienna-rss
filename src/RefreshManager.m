@@ -35,9 +35,6 @@
 #import "VTPG_Common.h"
 #import "FeedItem.h"
 
-// Singleton
-static RefreshManager * _refreshManager = nil;
-
 // Private functions
 @interface RefreshManager (Private)
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type;
@@ -135,8 +132,12 @@ static RefreshManager * _refreshManager = nil;
  */
 +(RefreshManager *)sharedManager
 {
-	if (!_refreshManager)
+	// Singleton
+	static RefreshManager * _refreshManager = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		_refreshManager = [[RefreshManager alloc] init];
+	});
 	return _refreshManager;
 }
 
@@ -598,7 +599,6 @@ static RefreshManager * _refreshManager = nil;
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
 		}
-		[iconImage release];
 	} else {
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
 	}
@@ -851,7 +851,6 @@ static RefreshManager * _refreshManager = nil;
 				// Mark the feed as failed
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
-				[newFeed release];
 				return;
 			}
             
@@ -863,7 +862,6 @@ static RefreshManager * _refreshManager = nil;
 				// Mark the feed as empty
 				[self setFolderErrorFlag:folder flag:YES];
 				[connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
-				[newFeed release];
 				return;
 			}
 
@@ -929,7 +927,7 @@ static RefreshManager * _refreshManager = nil;
 					itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
 				}
 				
-				Article * article = [[[Article alloc] initWithGuid:articleGuid] autorelease];
+				Article * article = [[Article alloc] initWithGuid:articleGuid];
 				[article setFolderId:folderId];
 				[article setAuthor:[newsItem author]];
 				[article setBody:[newsItem description]];
@@ -1015,7 +1013,6 @@ static RefreshManager * _refreshManager = nil;
 		}
 		
 		// Done with this connection
-		[newFeed release];
         
 		// Add to count of new articles so far
 		countOfNewArticles += newArticlesFromFeed;
@@ -1098,7 +1095,7 @@ static RefreshManager * _refreshManager = nil;
 								++urlEnd;
 							if (urlEnd == scanPtrEnd)
 								return nil;
-							return [[[NSString alloc] initWithBytes:urlStart length:(urlEnd - urlStart) encoding:NSASCIIStringEncoding] autorelease];
+							return [[NSString alloc] initWithBytes:urlStart length:(urlEnd - urlStart) encoding:NSASCIIStringEncoding];
 						}
 						++scanPtr;
 					}
@@ -1157,17 +1154,10 @@ static RefreshManager * _refreshManager = nil;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[pumpTimer release];
 	pumpTimer=nil;
-	[authQueue release];
 	authQueue=nil;
-	[networkQueue release];
 	networkQueue=nil;
-	[unsafe301RedirectionTimer release];
 	unsafe301RedirectionTimer=nil;
-	[riskyIPAddress release];
 	riskyIPAddress=nil;
-	dispatch_release(_queue);
-	[super dealloc];
 }
 @end

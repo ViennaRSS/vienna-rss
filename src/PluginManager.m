@@ -75,7 +75,6 @@
 		[self loadPlugin:pluginPath];
 	}
 
-	[pluginPaths release];
 }
 
 /* loadPlugin
@@ -203,7 +202,6 @@
 			[menuItem setKeyEquivalentModifierMask:keyMod];
 			[menuItem setRepresentedObject:onePlugin];
 			[parentMenu addItem:menuItem];
-			[menuItem release];
 			
 			didInstall = YES;
 		}
@@ -227,7 +225,7 @@
 	{
 		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"])
 		{
-			SearchMethod * method = [[[SearchMethod alloc] initWithDictionary:plugin] autorelease];
+			SearchMethod * method = [[SearchMethod alloc] initWithDictionary:plugin];
 			[searchMethods addObject:method];
 		}
 	}
@@ -350,7 +348,6 @@
 					NSString * shortURL = [bitlyHelper shortenURL:[theView viewLink]];
 					
 					[urlString replaceString:@"$ArticleLink$" withString:shortURL];
-					[bitlyHelper release];
 				}
 				else 
 				{
@@ -374,7 +371,6 @@
 					
 					// If URL shortening fails, we fall back to the long URL.
 					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [[[currentMessage link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding])];
-					[bitlyHelper release];
 				}
 				else 
 				{
@@ -422,8 +418,6 @@
  */
 -(void)dealloc
 {
-	[allPlugins release];
 	allPlugins=nil;
-	[super dealloc];
 }
 @end

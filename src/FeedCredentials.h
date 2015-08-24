@@ -32,7 +32,7 @@
 	Folder * folder;
 }
 
-@property(retain) NSArray * topObjects;
+@property(strong) NSArray * topObjects;
 
 // Public functions
 -(void)credentialsForFolder:(NSWindow *)window folder:(Folder *)folder;

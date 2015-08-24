@@ -76,14 +76,4 @@
 	[NSApp endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
 }
-
-/* dealloc;
- * Clean up after ourselves.
- */
--(void)dealloc
-{
-	[_topObjects release];
-	_topObjects=nil;
-	[super dealloc];
-}
 @end

@@ -27,7 +27,7 @@
 	IBOutlet NSTextField * searchLabel;
 }
 
-@property(retain) NSArray * topObjects;
+@property(strong) NSArray * topObjects;
 
 // Public functions
 -(IBAction)searchStringChanged:(id)sender;

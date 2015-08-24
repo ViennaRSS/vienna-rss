@@ -16,7 +16,7 @@
 
     /* if your values can be attributed strings, make them white when selected */
     if (self.isHighlighted && self.backgroundStyle==NSBackgroundStyleDark) {
-        NSMutableAttributedString *whiteString = [attrString.mutableCopy autorelease];
+        NSMutableAttributedString *whiteString = attrString.mutableCopy;
         [whiteString addAttribute: NSForegroundColorAttributeName
                             value: [NSColor whiteColor]
                             range: NSMakeRange(0, whiteString.length) ];

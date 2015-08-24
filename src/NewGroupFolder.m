@@ -105,8 +105,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_topObjects release];
-	_topObjects=nil;
-	[super dealloc];
 }
 @end

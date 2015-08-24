@@ -79,7 +79,6 @@
 	IBOutlet NSButton * filterIconInStatusBarButton;
 
 	ActivityViewer * activityViewer;
-	NewPreferencesController * preferenceController;
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;
@@ -107,8 +106,8 @@
     CDEvents * _events;
 }
 
-@property (nonatomic, readonly) NSWindowController *preferencesWindowController;
-@property(nonatomic, retain) NewSubscription *rssFeed;
+@property (weak, nonatomic, readonly) NSWindowController *preferencesWindowController;
+@property(nonatomic, strong) NewSubscription *rssFeed;
 
 // Menu action items
 -(IBAction)handleAbout:(id)sender;

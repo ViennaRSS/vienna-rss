@@ -51,13 +51,13 @@
 -copyWithZone:(NSZone *)zone\
 {
 	ImageAndTextCell *cell = (ImageAndTextCell *)[super copyWithZone:zone];
-	cell->image = [image retain];
-	cell->auxiliaryImage = [auxiliaryImage retain];
+	cell->image = image;
+	cell->auxiliaryImage = auxiliaryImage;
 	cell->offset = offset;
 	cell->hasCount = hasCount;
 	cell->count = count;
 	cell->inProgress = inProgress;
-	cell->countBackgroundColour = [countBackgroundColour retain];
+	cell->countBackgroundColour = countBackgroundColour;
 	cell->item = item;	
 
 	return cell;
@@ -84,8 +84,6 @@
  */
 -(void)setImage:(NSImage *)anImage
 {
-	[anImage retain];
-	[image release];
 	image = anImage;
 }
 
@@ -94,7 +92,7 @@
  */
 -(NSImage *)image
 {
-	return [[image retain] autorelease];
+	return image;
 }
 
 /* setAuxiliaryImage
@@ -103,8 +101,6 @@
  */
 -(void)setAuxiliaryImage:(NSImage *)newAuxiliaryImage
 {
-	[newAuxiliaryImage retain];
-	[auxiliaryImage release];
 	auxiliaryImage = newAuxiliaryImage;
 }
 
@@ -113,7 +109,7 @@
  */
 -(NSImage *)auxiliaryImage
 {
-	return [[auxiliaryImage retain] autorelease];;
+	return auxiliaryImage;;
 }
 
 /* setCount
@@ -138,8 +134,6 @@
  */
 -(void)setCountBackgroundColour:(NSColor *)newColour
 {
-	[newColour retain];
-	[countBackgroundColour release];
 	countBackgroundColour = newColour;
 }
 
@@ -283,7 +277,6 @@
 		// Draw the count in the rounded rectangle we just created.
 		NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f );
 		[number drawAtPoint:point withAttributes:attributes];
-		[attributes release];
 	}
 
 	// Draw the text
@@ -315,7 +308,7 @@
     if (!attributes)
     {
         NSSet * set = [NSSet setWithArray:[super accessibilityAttributeNames]];
-        attributes = [[[set setByAddingObject:NSAccessibilityDescriptionAttribute] allObjects] retain];
+        attributes = [[set setByAddingObject:NSAccessibilityDescriptionAttribute] allObjects];
     }
     return attributes;
 }
@@ -342,13 +335,9 @@
  */
 -(void)dealloc
 {
-	[countBackgroundColour release];
 	countBackgroundColour=nil;
-	[auxiliaryImage release];
 	auxiliaryImage=nil;
-	[image release];
 	image=nil;
-	[super dealloc];
 }
 
 @end

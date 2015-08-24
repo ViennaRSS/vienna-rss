@@ -52,8 +52,8 @@ NSString * getDefaultBrowser(void)
 	NSString * registeredAppURL = nil;
 	CFURLRef appURL = nil;
 
-	if (LSGetApplicationForURL((CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-		registeredAppURL = [(NSURL *)appURL path];
+	if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
+		registeredAppURL = [(__bridge NSURL *)appURL path];
 	if (appURL != nil)
 		CFRelease(appURL);
 	return [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
@@ -148,7 +148,7 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
 {
 	NSMenuItem * item = menuItemWithAction(theSelector);
-	return (item) ? [[[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] autorelease] : nil;
+	return (item) ? [[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] : nil;
 }
 
 /* menuWithTitleAndAction
@@ -156,7 +156,7 @@ NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
  */
 NSMenuItem * menuItemWithTitleAndAction(NSString * theTitle, SEL theSelector)
 {
-	return [[[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""] autorelease];
+	return [[NSMenuItem alloc] initWithTitle:theTitle action:theSelector keyEquivalent:@""];
 }
 
 /* loadMapFromPath
@@ -226,7 +226,6 @@ void runOKAlertPanel(NSString * titleString, NSString * bodyText, ...)
 	fullBodyText = [[NSString alloc] initWithFormat:bodyText arguments:arguments];
 	// Security: arguments may contain formatting characters, so don't use fullBodyText as format string.
 	NSRunAlertPanel(titleString, @"%@", NSLocalizedString(@"OK", nil), nil, nil, fullBodyText);
-	[fullBodyText release];
 	va_end(arguments);
 }
 
@@ -251,7 +250,6 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 					  nil, nil,
 					  @"%@",
 					  fullBodyText);
-	[fullBodyText release];
 	va_end(arguments);
 }
 

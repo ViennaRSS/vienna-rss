@@ -31,7 +31,6 @@
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
 	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Text withOperator:MA_CritOper_Contains withValue:searchString];
 	[tree addCriteria:clause];
-	[clause release];
-	return [tree autorelease];
+	return tree;
 }
 @end

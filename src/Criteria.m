@@ -118,8 +118,6 @@
  */
 -(void)setField:(NSString *)newField
 {
-	[newField retain];
-	[field release];
 	field = newField;
 }
 
@@ -142,8 +140,6 @@
  */
 -(void)setValue:(NSString *)newValue
 {
-	[newValue retain];
-	[value release];
 	value = newValue;
 }
 
@@ -176,11 +172,8 @@
  */
 -(void)dealloc
 {
-	[value release];
 	value=nil;
-	[field release];
 	field=nil;
-	[super dealloc];
 }
 @end
 
@@ -232,11 +225,9 @@
                                          withOperator:operator.integerValue
                                          withValue:value];
                 [self addCriteria:newCriteria];
-                [newCriteria release];
                 
             }
         }
-		[criteriaTreeDoc release];
 	}
 	return self;
 }
@@ -317,20 +308,20 @@
     [criteriaDoc setVersion:@"1.0"];
     
     NSDictionary * conditionDict = [NSDictionary dictionaryWithObject:[CriteriaTree conditionToString:condition] forKey:@"condition"];
-    NSXMLElement *criteriaGroup = [[[NSXMLElement alloc] initWithName:@"criteriagroup"] autorelease];
+    NSXMLElement *criteriaGroup = [[NSXMLElement alloc] initWithName:@"criteriagroup"];
     [criteriaGroup setAttributesWithDictionary:conditionDict];
     
     for (Criteria *criteria in criteriaTree) {
         NSDictionary * criteriaDict = [NSDictionary dictionaryWithObject:[criteria field] forKey:@"field"];
-        NSXMLElement *criteriaElement = [[[NSXMLElement alloc] initWithName:@"criteria"] autorelease];
+        NSXMLElement *criteriaElement = [[NSXMLElement alloc] initWithName:@"criteria"];
         [criteriaElement setAttributesWithDictionary:criteriaDict];
-        NSXMLElement *operatorElement = [[[NSXMLElement alloc]
+        NSXMLElement *operatorElement = [[NSXMLElement alloc]
                                         initWithName:@"operator"
                                         stringValue:[NSString stringWithFormat:
-                                                     @"%d", criteria.operator]] autorelease];
-        NSXMLElement *valueElement = [[[NSXMLElement alloc]
+                                                     @"%d", criteria.operator]];
+        NSXMLElement *valueElement = [[NSXMLElement alloc]
                                         initWithName:@"value"
-                                        stringValue:criteria.value] autorelease];
+                                        stringValue:criteria.value];
         
         [criteriaGroup addChild:criteriaElement];
         [criteriaElement addChild:operatorElement];
@@ -347,8 +338,6 @@
  */
 -(void)dealloc
 {
-	[criteriaTree release];
 	criteriaTree=nil;
-	[super dealloc];
 }
 @end

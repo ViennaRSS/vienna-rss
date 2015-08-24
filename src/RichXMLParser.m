@@ -65,7 +65,6 @@
             success = [self initAtomFeed:xmlDocument.rootElement];
         }
     }
-    [xmlDocument release];
     xmlDocument = nil;
     
 	return success;
@@ -279,7 +278,6 @@
  */
 -(void)parseSequence:(NSXMLElement *)seqElement
 {
-	[orderArray release];
 	orderArray = [[NSMutableArray alloc] init];
     for (NSXMLElement *element in seqElement.children)
 	{
@@ -313,7 +311,7 @@
 		// the items array we maintain.
 		if ([element.prefix isEqualToString:rssPrefix] && [element.localName isEqualToString:@"item"])
 		{
-			FeedItem * newFeedItem = [[FeedItem new] autorelease];
+			FeedItem * newFeedItem = [FeedItem new];
 			NSMutableString * articleBody = nil;
 			BOOL hasDetailedContent = NO;
 			BOOL hasLink = NO;
@@ -561,7 +559,7 @@
 		// the items array we maintain.
 		if (isAtomElement && [elementTag isEqualToString:@"entry"])
 		{
-			FeedItem * newFeedItem = [[FeedItem new] autorelease];
+			FeedItem * newFeedItem = [FeedItem new];
 			NSMutableString * articleBody = nil;
 
 			// Look for the xml:base attribute, and use absolute url or stack relative url
@@ -758,8 +756,6 @@
  */
 -(void)setTitle:(NSString *)newTitle
 {
-	[newTitle retain];
-	[title release];
 	title = newTitle;
 }
 
@@ -768,8 +764,6 @@
  */
 -(void)setDescription:(NSString *)newDescription
 {
-	[newDescription retain];
-	[description release];
 	description = newDescription;
 }
 
@@ -778,8 +772,6 @@
  */
 -(void)setLink:(NSString *)newLink
 {
-	[newLink retain];
-	[link release];
 	link = newLink;
 }
 
@@ -788,8 +780,6 @@
  */
 -(void)setLastModified:(NSDate *)newDate
 {
-	[newDate retain];
-	[lastModified release];
 	lastModified = newDate;
 }
 
@@ -852,18 +842,11 @@
  */
 -(void)dealloc
 {
-	[orderArray release];
 	orderArray=nil;
-	[title release];
 	title=nil;
-	[description release];
 	description=nil;
-	[lastModified release];
 	lastModified=nil;
-	[link release];
 	link=nil;
-	[items release];
 	items=nil;
-	[super dealloc];
 }
 @end

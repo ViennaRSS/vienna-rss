@@ -88,8 +88,7 @@
 	}
 	else
 	{
-		[smallUserImage release];
-		smallUserImage = [userImage retain];
+		smallUserImage = userImage;
 		smallUserImageSize = NSMakeSize(12.0, 12.0);
 		smallUserImageRect = userImageRect;
 	}
@@ -123,12 +122,6 @@
 		 smallNormalImage:smallNormalImage
 		smallPressedImage:smallPressedImage];
 	
-	[buttonImage release];
-	[pressedImage release];
-	[smallNormalImage release];
-	[smallPressedImage release];
-	[smallUserImage release];
-	[userImage release];
 }
 
 /* setButtonImage
@@ -170,7 +163,6 @@
 	[self setTarget:currentTarget];
 	[self setAction:currentAction];
 
-	[button release];
 }
 
 /* setPopup
@@ -195,13 +187,12 @@
 	
 	[self setView:button];
 	
-	NSMenuItem * menuItem = [[[NSMenuItem alloc] init] autorelease];
+	NSMenuItem * menuItem = [[NSMenuItem alloc] init];
 	[button setTheMenu:theMenu];
 	[button setPopupBelow:YES];
 	[menuItem setSubmenu:[button theMenu]];
 	[menuItem setTitle:[self label]];
 	[self setMenuFormRepresentation:menuItem];
 	
-	[button release];
 }
 @end

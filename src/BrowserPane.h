@@ -55,7 +55,7 @@
 	NSString * viewTitle;
 }
 
-@property (nonatomic, retain) IBOutlet TabbedWebView * webPane;
+@property (nonatomic, strong) IBOutlet TabbedWebView * webPane;
 
 // Action functions
 -(IBAction)handleGoForward:(id)sender;

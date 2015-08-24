@@ -4,6 +4,82 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/ActiveWindow_ActiveTabClose.tiff</key>
+		<data>
+		mgLbsbnw38C4LQ8RDPs6aiubJ1s=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabClosePressed.tiff</key>
+		<data>
+		HWlFIi1vA611a/WWXGLuiK8TrVo=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabCloseRollover.tiff</key>
+		<data>
+		XhH6lPBfQzAVkaz0RguDF51jK9I=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabFill.tiff</key>
+		<data>
+		Xg10zlVSO5Q7etGQZ/51nGb1Kgw=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabLeftCap.tiff</key>
+		<data>
+		VVRFgl1oJFk7R447PIjdsycvBPQ=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabRightCap.tiff</key>
+		<data>
+		qSOASuVAMGx2BDch0sHpjZPFOKQ=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButton.tiff</key>
+		<data>
+		Q/BADN0ZSVuSJv/JH8h5vGBjhPI=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButtonPushed.tiff</key>
+		<data>
+		1ujk25sVmWEU1Q6Cit/KfReSa6g=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButtonRollover.tiff</key>
+		<data>
+		xnPILYljSq0L2QjkvzbSk05KSAs=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButtonRollover_Pressed.tiff</key>
+		<data>
+		DJlzcMpEltHFGLLY9DFEif4V4CY=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabBG.tiff</key>
+		<data>
+		iRhRXx5j+2EQ7RM3GX3xOH2qqwc=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabClose.tiff</key>
+		<data>
+		zwpkGzin3vwVYz8mGfb98i+g65w=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabClosePressed.tiff</key>
+		<data>
+		L/wy106Z6JY1M9K8Uv4R2Xi4FN8=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabCloseRollover.tiff</key>
+		<data>
+		b0qfTeK6237YoSV1Jay3JhgDN8s=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabLeftCap.tiff</key>
+		<data>
+		QNJHEhD4RdrUuo2krqHREeLm7j8=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabRightCap.tiff</key>
+		<data>
+		fsdm5by/FrDQraKG8O2egYIneFQ=
+		</data>
+		<key>Resources/ActiveWindow_Pulled_ActiveTabCenterFill.tiff</key>
+		<data>
+		qhtPEn42oKZ2qLKpQ/Ym2+M+1BE=
+		</data>
+		<key>Resources/ActiveWindow_Pulled_ActiveTabLeftCap.tiff</key>
+		<data>
+		Iky6hYeE8ManZgJAm+JFePoPVBc=
+		</data>
+		<key>Resources/ActiveWindow_Pulled_ActiveTabRightCap.tiff</key>
+		<data>
+		Wng5DYlXe4mT0BTk97vKejBHYxg=
+		</data>
 		<key>Resources/AdiumGradient.png</key>
 		<data>
 		pUGdMseoiA31TVjrgOM/5bZRUXY=
@@ -22,27 +98,27 @@
 		</data>
 		<key>Resources/AquaTabClose_Front.tiff</key>
 		<data>
-		pV4HZY4wy6yimmSnjuJtkLbL9nQ=
+		BornexboGdaD9jCSGkdIYa759qk=
 		</data>
 		<key>Resources/AquaTabClose_Front_Pressed.tiff</key>
 		<data>
-		3BLGaFfwcyUXeybltEVqwG0pwvw=
+		QTJ9/tl6HveMf1bEvrXT+Szcqw8=
 		</data>
 		<key>Resources/AquaTabClose_Front_Rollover.tiff</key>
 		<data>
-		R1Sz/63pL33ZQfpM3znOAUd6ddc=
+		XoIs4Y/RGclvp2PuJ4BTBgox5+Q=
 		</data>
 		<key>Resources/AquaTabNew.tiff</key>
 		<data>
-		MSbb4qtahZcUNM6mqmBa90/910A=
+		+ZvIjbEkXBBdXpY+Ynn9FNuJMl4=
 		</data>
 		<key>Resources/AquaTabNewPressed.tiff</key>
 		<data>
-		WMH+dKcr94reUC9p4wo1NDmyWaM=
+		af5TzUVpx94q5TAHXWPA0FGpENA=
 		</data>
 		<key>Resources/AquaTabNewRollover.tiff</key>
 		<data>
-		MclsWCWNc/IKnjX0Ld0la4oosOY=
+		hZryPfBz6UFsn2PAg82nNBItPOc=
 		</data>
 		<key>Resources/AquaTabsBackground.png</key>
 		<data>
@@ -68,33 +144,109 @@
 		<data>
 		XNRM9R8anBn3LUQMVaf4GdwJzQM=
 		</data>
+		<key>Resources/InactiveWindow_ActiveTabClose.tiff</key>
+		<data>
+		xfNBHYq4dfB48P2JXeiaATf2lx8=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabClosePressed.tiff</key>
+		<data>
+		nWT0TkRVXX0uGOz/uwcjDPXiyhU=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabCloseRollover.tiff</key>
+		<data>
+		YQ4q6yqrrND5iGGHoqLBk4HGPig=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabFill.tiff</key>
+		<data>
+		/GWFN1J5jVMMmIv6zbGiI7pg+fs=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabLeftCap.tiff</key>
+		<data>
+		nLZ2/PzZna9V0PN0DwOIYKSn+/M=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabRightCap.tiff</key>
+		<data>
+		DmJ7v8gD4zAbboO1Vx/Y/FOzUPM=
+		</data>
+		<key>Resources/InactiveWindow_AddTabButton.tiff</key>
+		<data>
+		Gzpp/m0DqvsVGWaU0EVQR94gHj8=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabBG.tiff</key>
+		<data>
+		uwk/xmr+K2jwDAc9KI2eOyGnJ6c=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabClose.tiff</key>
+		<data>
+		/63gZNRLlHitBzTCUa14XA42JT0=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabClosePressed.tiff</key>
+		<data>
+		fg1xAdub+8vMmKvq/6AlhujEQx0=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabCloseRollover.tiff</key>
+		<data>
+		8hLTflXXVvo6LFfBr1O/ujYV8pM=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabLeftCap.tiff</key>
+		<data>
+		GpAaKypVK3VWNmNhMHmYeffuPrk=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabRightCap.tiff</key>
+		<data>
+		qHpGIDEMr6k267LEzaCYHAvocOQ=
+		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		Nn8GuQCaT8wJze7RSjJT3GPsz5c=
+		YFepEAp5R8lR21IRKGRiSAGklaM=
 		</data>
 		<key>Resources/TabClose_Dirty.tiff</key>
 		<data>
-		H17jtiPs3gQgzhvQ4RRv6qfDlUI=
+		nYzOZiK+8rGoSlJIZBUsCfZcEvI=
 		</data>
 		<key>Resources/TabClose_Dirty_Pressed.tiff</key>
 		<data>
-		EM5/8RIsnN7pLj+9iWFKTsGAWk0=
+		EMQkaDP2nhftv/7JrZoKYRuaIHc=
+		</data>
+		<key>Resources/TabClose_Dirty_Pressed_Textured.tiff</key>
+		<data>
+		IgIxz2LdWThhnVUOx1SiLOrEdWo=
 		</data>
 		<key>Resources/TabClose_Dirty_Rollover.tiff</key>
 		<data>
-		Nlx7crhp1hq/LeKPH3d/sDXcEcQ=
+		GmetDVxgoHbeSd3StJxq7+gQz6A=
+		</data>
+		<key>Resources/TabClose_Dirty_Rollover_Textured.tiff</key>
+		<data>
+		kLVo9VO2WuBmjFiI/0ZgfsQDHEc=
+		</data>
+		<key>Resources/TabClose_Dirty_Textured.tiff</key>
+		<data>
+		4Gp3k9UrA74gr2JU+fu1IOoEkwc=
 		</data>
 		<key>Resources/TabClose_Front.tiff</key>
 		<data>
-		C0/Z60E1cx7zX7NLrWi/VVHYGcY=
+		dXgSElA/n9mPDoaeid0ES/Sz0MQ=
 		</data>
 		<key>Resources/TabClose_Front_Pressed.tiff</key>
 		<data>
-		V0TT1wIgLTwcJABUKga2u3BYE2g=
+		zY7vJhRXaLhwk0jotkdwjepZQ10=
+		</data>
+		<key>Resources/TabClose_Front_Pressed_Textured.tiff</key>
+		<data>
+		IGBCPBpVkjQKfASCIKnfaCsfQts=
 		</data>
 		<key>Resources/TabClose_Front_Rollover.tiff</key>
 		<data>
-		lrJN2LbqGL4rpzH3nTNpadHFrPc=
+		OhyfYu/bgjiRdP4KAVc64NU3ENY=
+		</data>
+		<key>Resources/TabClose_Front_Rollover_Textured.tiff</key>
+		<data>
+		ylcJs3/myBKfwfE8+ENNKFqvNxo=
+		</data>
+		<key>Resources/TabClose_Front_Textured.tiff</key>
+		<data>
+		r2aVlM2MVXUc/hgFRtaefoVYZnw=
 		</data>
 		<key>Resources/TabNewMetal.png</key>
 		<data>
@@ -104,17 +256,29 @@
 		<data>
 		Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
 		</data>
+		<key>Resources/TabNewMetalPressed_Textured.png</key>
+		<data>
+		Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
+		</data>
 		<key>Resources/TabNewMetalRollover.png</key>
 		<data>
 		A52pLQscBe2Z0igvKBBlWtc4AGs=
 		</data>
+		<key>Resources/TabNewMetalRollover_Textured.png</key>
+		<data>
+		ydveK2t2Z/eh3WfZpdkW85U4dj8=
+		</data>
+		<key>Resources/TabNewMetal_Textured.png</key>
+		<data>
+		Wvi4d3JJ+/hsAP7FKZnyHlEVWqQ=
+		</data>
 		<key>Resources/overflowImage.tiff</key>
 		<data>
-		e3DByDQFXGW6ugJLEaGKoTPY5ZQ=
+		74y4QUxnoQ6oxCAsdvrr3qkzGqc=
 		</data>
 		<key>Resources/overflowImagePressed.tiff</key>
 		<data>
-		b1uovP8GFaBxSRWjHJEGGv9qx1g=
+		zNN2u+tNZcL+SGl7UsLZWp1Ligk=
 		</data>
 		<key>Resources/pi.png</key>
 		<data>
@@ -129,11 +293,11 @@
 		</data>
 		<key>Headers/PSMAdiumTabStyle.h</key>
 		<data>
-		Is43FAwp/MSlAiq1MvS78DuayLc=
+		YvJEb/dOS1CsUhM0MbEO7fMfjaY=
 		</data>
 		<key>Headers/PSMAquaTabStyle.h</key>
 		<data>
-		H3rOCJAKCAxUyWqXmcNO5OVB9kQ=
+		7EQKZpSDJRu/l2a6yhZ8TNjuVYU=
 		</data>
 		<key>Headers/PSMCardTabStyle.h</key>
 		<data>
@@ -145,11 +309,11 @@
 		</data>
 		<key>Headers/PSMMetalTabStyle.h</key>
 		<data>
-		foZA+2KBsi2rW1HWYuHBdk5TIZo=
+		JrQiaq6tsKpkAFLS2HjlECCqrfA=
 		</data>
 		<key>Headers/PSMOverflowPopUpButton.h</key>
 		<data>
-		spW/EUALwzm9p8MCr0KieD620d0=
+		tA8na9zJIb4QOighAoF4OoaY8g4=
 		</data>
 		<key>Headers/PSMProgressIndicator.h</key>
 		<data>
@@ -157,43 +321,123 @@
 		</data>
 		<key>Headers/PSMRolloverButton.h</key>
 		<data>
-		mJE41QoTaTCg6KD03YraNMOZ6BY=
+		jofC4m3aHY/tBSzvrI8hMzyyZsE=
 		</data>
 		<key>Headers/PSMTabBarCell.h</key>
 		<data>
-		D5r6C0Kk5FUSFKFnu2XidzsyKYg=
+		pqcEeIJ6Jdv5yLeAA2GmJe2+BmQ=
 		</data>
 		<key>Headers/PSMTabBarControl.h</key>
 		<data>
-		bKPwidlLIrt/0dU3J1+CLiCw6Pw=
+		yVDbIVvn/8m5ne3bwv9RiH6lsXc=
 		</data>
 		<key>Headers/PSMTabBarController.h</key>
 		<data>
-		TnmMZg4lDu2oA0QwfEHTRkILZnA=
+		fG7cq3jCW7NnPlXzaQ8q85l8h7I=
 		</data>
 		<key>Headers/PSMTabDragAssistant.h</key>
 		<data>
-		OfSEGvBym/ZaJbEleRYsuatvAys=
+		iWDdv78UW7n9zGE+ZuK4lJwEj5s=
 		</data>
 		<key>Headers/PSMTabDragView.h</key>
 		<data>
-		vCpS2s0s/dSnVmRt3Ea2zazT6Zg=
+		fqEjab3FgSH/Q8Z0nGPhR0YMnys=
 		</data>
 		<key>Headers/PSMTabDragWindow.h</key>
 		<data>
-		SYeaJlIEt32BgMrYf/Y42m5W+YM=
+		wy16zCF90U7v7we4UDJUUlT6+Ho=
 		</data>
 		<key>Headers/PSMTabDragWindowController.h</key>
 		<data>
-		HBNAibOLNXAxpXqTsz+FyjkTlZU=
+		CxlaOgMOM+5jh6gusJjxwswV0Bs=
 		</data>
 		<key>Headers/PSMTabStyle.h</key>
 		<data>
-		22xYyn8F/19Zm2idoKq3P7DkLHg=
+		qrJkXTWK04cYk7n6OQc9ercym9E=
+		</data>
+		<key>Headers/PSMTexturedMetalTabStyle.h</key>
+		<data>
+		toBapp02SWnb0m9II8HBJcpk2Ig=
 		</data>
 		<key>Headers/PSMUnifiedTabStyle.h</key>
 		<data>
 		t96fB1PXbcNe3bkFmvJhAsQZPvM=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabClose.tiff</key>
+		<data>
+		mgLbsbnw38C4LQ8RDPs6aiubJ1s=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabClosePressed.tiff</key>
+		<data>
+		HWlFIi1vA611a/WWXGLuiK8TrVo=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabCloseRollover.tiff</key>
+		<data>
+		XhH6lPBfQzAVkaz0RguDF51jK9I=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabFill.tiff</key>
+		<data>
+		Xg10zlVSO5Q7etGQZ/51nGb1Kgw=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabLeftCap.tiff</key>
+		<data>
+		VVRFgl1oJFk7R447PIjdsycvBPQ=
+		</data>
+		<key>Resources/ActiveWindow_ActiveTabRightCap.tiff</key>
+		<data>
+		qSOASuVAMGx2BDch0sHpjZPFOKQ=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButton.tiff</key>
+		<data>
+		Q/BADN0ZSVuSJv/JH8h5vGBjhPI=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButtonPushed.tiff</key>
+		<data>
+		1ujk25sVmWEU1Q6Cit/KfReSa6g=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButtonRollover.tiff</key>
+		<data>
+		xnPILYljSq0L2QjkvzbSk05KSAs=
+		</data>
+		<key>Resources/ActiveWindow_AddTabButtonRollover_Pressed.tiff</key>
+		<data>
+		DJlzcMpEltHFGLLY9DFEif4V4CY=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabBG.tiff</key>
+		<data>
+		iRhRXx5j+2EQ7RM3GX3xOH2qqwc=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabClose.tiff</key>
+		<data>
+		zwpkGzin3vwVYz8mGfb98i+g65w=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabClosePressed.tiff</key>
+		<data>
+		L/wy106Z6JY1M9K8Uv4R2Xi4FN8=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabCloseRollover.tiff</key>
+		<data>
+		b0qfTeK6237YoSV1Jay3JhgDN8s=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabLeftCap.tiff</key>
+		<data>
+		QNJHEhD4RdrUuo2krqHREeLm7j8=
+		</data>
+		<key>Resources/ActiveWindow_InactiveTabRightCap.tiff</key>
+		<data>
+		fsdm5by/FrDQraKG8O2egYIneFQ=
+		</data>
+		<key>Resources/ActiveWindow_Pulled_ActiveTabCenterFill.tiff</key>
+		<data>
+		qhtPEn42oKZ2qLKpQ/Ym2+M+1BE=
+		</data>
+		<key>Resources/ActiveWindow_Pulled_ActiveTabLeftCap.tiff</key>
+		<data>
+		Iky6hYeE8ManZgJAm+JFePoPVBc=
+		</data>
+		<key>Resources/ActiveWindow_Pulled_ActiveTabRightCap.tiff</key>
+		<data>
+		Wng5DYlXe4mT0BTk97vKejBHYxg=
 		</data>
 		<key>Resources/AdiumGradient.png</key>
 		<data>
@@ -213,27 +457,27 @@
 		</data>
 		<key>Resources/AquaTabClose_Front.tiff</key>
 		<data>
-		pV4HZY4wy6yimmSnjuJtkLbL9nQ=
+		BornexboGdaD9jCSGkdIYa759qk=
 		</data>
 		<key>Resources/AquaTabClose_Front_Pressed.tiff</key>
 		<data>
-		3BLGaFfwcyUXeybltEVqwG0pwvw=
+		QTJ9/tl6HveMf1bEvrXT+Szcqw8=
 		</data>
 		<key>Resources/AquaTabClose_Front_Rollover.tiff</key>
 		<data>
-		R1Sz/63pL33ZQfpM3znOAUd6ddc=
+		XoIs4Y/RGclvp2PuJ4BTBgox5+Q=
 		</data>
 		<key>Resources/AquaTabNew.tiff</key>
 		<data>
-		MSbb4qtahZcUNM6mqmBa90/910A=
+		+ZvIjbEkXBBdXpY+Ynn9FNuJMl4=
 		</data>
 		<key>Resources/AquaTabNewPressed.tiff</key>
 		<data>
-		WMH+dKcr94reUC9p4wo1NDmyWaM=
+		af5TzUVpx94q5TAHXWPA0FGpENA=
 		</data>
 		<key>Resources/AquaTabNewRollover.tiff</key>
 		<data>
-		MclsWCWNc/IKnjX0Ld0la4oosOY=
+		hZryPfBz6UFsn2PAg82nNBItPOc=
 		</data>
 		<key>Resources/AquaTabsBackground.png</key>
 		<data>
@@ -259,33 +503,109 @@
 		<data>
 		XNRM9R8anBn3LUQMVaf4GdwJzQM=
 		</data>
+		<key>Resources/InactiveWindow_ActiveTabClose.tiff</key>
+		<data>
+		xfNBHYq4dfB48P2JXeiaATf2lx8=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabClosePressed.tiff</key>
+		<data>
+		nWT0TkRVXX0uGOz/uwcjDPXiyhU=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabCloseRollover.tiff</key>
+		<data>
+		YQ4q6yqrrND5iGGHoqLBk4HGPig=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabFill.tiff</key>
+		<data>
+		/GWFN1J5jVMMmIv6zbGiI7pg+fs=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabLeftCap.tiff</key>
+		<data>
+		nLZ2/PzZna9V0PN0DwOIYKSn+/M=
+		</data>
+		<key>Resources/InactiveWindow_ActiveTabRightCap.tiff</key>
+		<data>
+		DmJ7v8gD4zAbboO1Vx/Y/FOzUPM=
+		</data>
+		<key>Resources/InactiveWindow_AddTabButton.tiff</key>
+		<data>
+		Gzpp/m0DqvsVGWaU0EVQR94gHj8=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabBG.tiff</key>
+		<data>
+		uwk/xmr+K2jwDAc9KI2eOyGnJ6c=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabClose.tiff</key>
+		<data>
+		/63gZNRLlHitBzTCUa14XA42JT0=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabClosePressed.tiff</key>
+		<data>
+		fg1xAdub+8vMmKvq/6AlhujEQx0=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabCloseRollover.tiff</key>
+		<data>
+		8hLTflXXVvo6LFfBr1O/ujYV8pM=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabLeftCap.tiff</key>
+		<data>
+		GpAaKypVK3VWNmNhMHmYeffuPrk=
+		</data>
+		<key>Resources/InactiveWindow_InactiveTabRightCap.tiff</key>
+		<data>
+		qHpGIDEMr6k267LEzaCYHAvocOQ=
+		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		Nn8GuQCaT8wJze7RSjJT3GPsz5c=
+		YFepEAp5R8lR21IRKGRiSAGklaM=
 		</data>
 		<key>Resources/TabClose_Dirty.tiff</key>
 		<data>
-		H17jtiPs3gQgzhvQ4RRv6qfDlUI=
+		nYzOZiK+8rGoSlJIZBUsCfZcEvI=
 		</data>
 		<key>Resources/TabClose_Dirty_Pressed.tiff</key>
 		<data>
-		EM5/8RIsnN7pLj+9iWFKTsGAWk0=
+		EMQkaDP2nhftv/7JrZoKYRuaIHc=
+		</data>
+		<key>Resources/TabClose_Dirty_Pressed_Textured.tiff</key>
+		<data>
+		IgIxz2LdWThhnVUOx1SiLOrEdWo=
 		</data>
 		<key>Resources/TabClose_Dirty_Rollover.tiff</key>
 		<data>
-		Nlx7crhp1hq/LeKPH3d/sDXcEcQ=
+		GmetDVxgoHbeSd3StJxq7+gQz6A=
+		</data>
+		<key>Resources/TabClose_Dirty_Rollover_Textured.tiff</key>
+		<data>
+		kLVo9VO2WuBmjFiI/0ZgfsQDHEc=
+		</data>
+		<key>Resources/TabClose_Dirty_Textured.tiff</key>
+		<data>
+		4Gp3k9UrA74gr2JU+fu1IOoEkwc=
 		</data>
 		<key>Resources/TabClose_Front.tiff</key>
 		<data>
-		C0/Z60E1cx7zX7NLrWi/VVHYGcY=
+		dXgSElA/n9mPDoaeid0ES/Sz0MQ=
 		</data>
 		<key>Resources/TabClose_Front_Pressed.tiff</key>
 		<data>
-		V0TT1wIgLTwcJABUKga2u3BYE2g=
+		zY7vJhRXaLhwk0jotkdwjepZQ10=
+		</data>
+		<key>Resources/TabClose_Front_Pressed_Textured.tiff</key>
+		<data>
+		IGBCPBpVkjQKfASCIKnfaCsfQts=
 		</data>
 		<key>Resources/TabClose_Front_Rollover.tiff</key>
 		<data>
-		lrJN2LbqGL4rpzH3nTNpadHFrPc=
+		OhyfYu/bgjiRdP4KAVc64NU3ENY=
+		</data>
+		<key>Resources/TabClose_Front_Rollover_Textured.tiff</key>
+		<data>
+		ylcJs3/myBKfwfE8+ENNKFqvNxo=
+		</data>
+		<key>Resources/TabClose_Front_Textured.tiff</key>
+		<data>
+		r2aVlM2MVXUc/hgFRtaefoVYZnw=
 		</data>
 		<key>Resources/TabNewMetal.png</key>
 		<data>
@@ -295,17 +615,29 @@
 		<data>
 		Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
 		</data>
+		<key>Resources/TabNewMetalPressed_Textured.png</key>
+		<data>
+		Dws9oYWvi8Rvj0EtIWWm9iTlqdM=
+		</data>
 		<key>Resources/TabNewMetalRollover.png</key>
 		<data>
 		A52pLQscBe2Z0igvKBBlWtc4AGs=
 		</data>
+		<key>Resources/TabNewMetalRollover_Textured.png</key>
+		<data>
+		ydveK2t2Z/eh3WfZpdkW85U4dj8=
+		</data>
+		<key>Resources/TabNewMetal_Textured.png</key>
+		<data>
+		Wvi4d3JJ+/hsAP7FKZnyHlEVWqQ=
+		</data>
 		<key>Resources/overflowImage.tiff</key>
 		<data>
-		e3DByDQFXGW6ugJLEaGKoTPY5ZQ=
+		74y4QUxnoQ6oxCAsdvrr3qkzGqc=
 		</data>
 		<key>Resources/overflowImagePressed.tiff</key>
 		<data>
-		b1uovP8GFaBxSRWjHJEGGv9qx1g=
+		zNN2u+tNZcL+SGl7UsLZWp1Ligk=
 		</data>
 		<key>Resources/pi.png</key>
 		<data>

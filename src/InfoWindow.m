@@ -25,9 +25,6 @@
 #import "AppController.h"
 #import "Folder.h"
 
-// Singleton controller for all info windows
-static InfoWindowManager * _infoWindowManager = nil;
-
 @interface InfoWindow (private)
 	-(id)initWithFolder:(int)folderId;
 	-(void)enableValidateButton;
@@ -41,25 +38,13 @@ static InfoWindowManager * _infoWindowManager = nil;
  */
 +(InfoWindowManager *)infoWindowManager
 {
-	@synchronized(self)
-	{
-		if (_infoWindowManager == nil)
+	// Singleton controller for all info windows
+	static InfoWindowManager * _infoWindowManager = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 			_infoWindowManager = [[InfoWindowManager alloc] init];
-	}
+	});
 	return _infoWindowManager;
-}
-
-/* allocWithZone
- * Override to ensure that only one instance can be initialised.
- */
-+(id)allocWithZone:(NSZone *)zone
-{
-	@synchronized(self)
-	{
-        if (_infoWindowManager == nil)
-            return [super allocWithZone:zone];
-    }
-    return _infoWindowManager;
 }
 
 /* copyWithZone
@@ -70,43 +55,12 @@ static InfoWindowManager * _infoWindowManager = nil;
     return self;
 }
 
-/* retain
- * Override to return ourself.
- */
--(id)retain
-{
-    return self;
-}
-
-/* retainCount
- * Return NSUIntegerMax to denote an object that cannot be released.
- */
--(NSUInteger)retainCount
-{
-    return NSUIntegerMax;
-}
-
-/* release
- * Override to do nothing.
- */
--(oneway void)release
-{
-}
-
-/* autorelease
- * Override to return ourself
- */
--(id)autorelease
-{
-    return self;
-}
 
 /* init
  * Inits the single instance of the info window manager.
  */
 -(id)init
 {
-	NSAssert(_infoWindowManager == nil, @"");
 	if ((self = [super init]) != nil)
 	{
 		controllerList = [[NSMutableDictionary alloc] initWithCapacity:10];
@@ -125,7 +79,6 @@ static InfoWindowManager * _infoWindowManager = nil;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 /* handleFolderDeleted
@@ -170,7 +123,7 @@ static InfoWindowManager * _infoWindowManager = nil;
 	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
 	InfoWindow * infoWindow;
 
-	infoWindow = [[controllerList objectForKey:folderNumber] retain];
+	infoWindow = [controllerList objectForKey:folderNumber];
 	if (infoWindow == nil)
 	{
 		infoWindow = [[InfoWindow alloc] initWithFolder:folderId];
@@ -178,7 +131,6 @@ static InfoWindowManager * _infoWindowManager = nil;
 	}
 	[infoWindow showWindow:[NSApp mainWindow]];
 
-	[infoWindow release];
 }
 @end
 
@@ -200,7 +152,6 @@ static InfoWindowManager * _infoWindowManager = nil;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 
 /* awakeFromNib

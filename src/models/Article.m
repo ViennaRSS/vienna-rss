@@ -298,10 +298,10 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
     if (index != NSNotFound)
     {
         NSScriptObjectSpecifier * containerRef = [folder objectSpecifier];
-        return [[[NSIndexSpecifier allocWithZone:[self zone]] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
+        return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
                                                                              containerSpecifier:containerRef
                                                                                             key:@"articles"
-                                                                                          index:index] autorelease];
+                                                                                          index:index];
     }
     return nil;
 }
@@ -422,8 +422,14 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
         // value. If no function exists then we just delete the tag name from the source string.
         NSString * tagSelName = [@"tag" stringByAppendingString:tagName];
         const char * cTagSelName = [tagSelName cStringUsingEncoding:NSASCIIStringEncoding];
-        replacementString = [self performSelector:sel_registerName(cTagSelName)];
-        
+		SEL selector = sel_registerName(cTagSelName);
+		// this is equivalent with replacementString = [self performSelector:selector];
+		// http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+		// see also : http://stackoverflow.com/questions/7043999/im-writing-a-button-class-in-objective-c-with-arc-how-do-i-prevent-clangs-m
+		IMP imp = [self methodForSelector:selector];
+		NSString * (*func)(id, SEL) = (void *)imp;
+		replacementString = func(self, selector);
+
         if (replacementString == nil)
             [newString deleteCharactersInRange:NSMakeRange(tagStartIndex, tagLength)];
         else
@@ -445,11 +451,8 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)dealloc
 {
-    [commentsArray release];
     commentsArray=nil;
-    [articleData release];
     articleData=nil;
-    [super dealloc];
 }
 
 @end

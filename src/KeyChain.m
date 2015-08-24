@@ -64,7 +64,7 @@
 			thePassword = @"";
 		else
 		{
-			thePassword = [[[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
+			thePassword = [[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding];
 			SecKeychainItemFreeContent(NULL, passwordPtr);
 		}
 	}
@@ -162,7 +162,7 @@
 			thePassword = @"";
 		else
 		{
-			thePassword = [[[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
+			thePassword = [[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding];
 			SecKeychainItemFreeContent(NULL, passwordPtr);
 		}
 	}
@@ -198,7 +198,7 @@
 			thePassword = @"";
 		else
 		{
-			thePassword = [[[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding] autorelease];
+			thePassword = [[NSString alloc] initWithBytes:passwordPtr length:passwordLength encoding:NSUTF8StringEncoding];
 			SecKeychainItemFreeContent(NULL, passwordPtr);
 		}
 	}

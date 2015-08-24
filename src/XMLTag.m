@@ -40,8 +40,6 @@
  */
 -(void)setName:(NSString *)newName
 {
-	[newName retain];
-	[name release];
 	name = newName;
 }
 
@@ -59,8 +57,6 @@
  */
 -(void)setAttributes:(NSDictionary *)newAttributes
 {
-	[newAttributes retain];
-	[attributes release];
 	attributes = newAttributes;
 }
 
@@ -120,7 +116,7 @@
 			// tag name so collect and save it.
 			if (*tagStartPtr != '!')
 			{
-				XMLTag * tag = [[XMLTag new] autorelease];
+				XMLTag * tag = [XMLTag new];
 				NSMutableDictionary * tagDict = [[NSMutableDictionary alloc] init];
 				const char * tagEndPtr = tagStartPtr;
 
@@ -128,7 +124,7 @@
 					++tagEndPtr;
 				while (isalpha(*tagEndPtr))
 					++tagEndPtr;
-				NSString * tagName = [[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] autorelease];
+				NSString * tagName = [[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding];
 				[tag setName:[tagName lowercaseString]];
 				
 				while (isspace(*tagEndPtr))
@@ -148,7 +144,7 @@
 					tagStartPtr = tagEndPtr;
 					while (isalpha(*tagEndPtr))
 						++tagEndPtr;
-					NSString * attrName = [[[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] autorelease] lowercaseString];
+					NSString * attrName = [[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] lowercaseString];
 
 					// Skip the '=' and any whitespaces between the name and the value
 					while (isspace(*tagEndPtr))
@@ -170,7 +166,7 @@
 							inQuote = !inQuote;
 						++tagEndPtr;
 					}
-					NSString * attrValue = [[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] autorelease];
+					NSString * attrValue = [[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding];
 					attrValue = [attrValue stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\""]];
 					if (attrValue != nil && attrName != nil )
 					{
@@ -183,7 +179,6 @@
 
 				[tag setAttributes:tagDict];
 				[tagArray addObject:tag];
-				[tagDict release];
 			}
 			inTag = NO;
 			inQuote = NO;
@@ -200,10 +195,7 @@
  */
 -(void)dealloc
 {
-	[name release];
 	name=nil;
-	[attributes release];
 	attributes=nil;
-	[super dealloc];
 }
 @end

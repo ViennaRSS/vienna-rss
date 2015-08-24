@@ -48,12 +48,12 @@
 	Article * articleToPreserve;
 }
 
-@property (nonatomic, retain) IBOutlet FoldersTree * foldersTree;
-@property (nonatomic, retain) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
+@property (nonatomic, strong) NSView<ArticleBaseView, BaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
-@property (nonatomic, assign) NSDictionary * articleSortSpecifiers;
-@property (nonatomic, assign) BackTrackArray * backtrackArray;
+@property (nonatomic) NSDictionary * articleSortSpecifiers;
+@property (nonatomic) BackTrackArray * backtrackArray;
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;

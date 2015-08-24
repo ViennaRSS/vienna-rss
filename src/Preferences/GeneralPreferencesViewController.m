@@ -161,8 +161,8 @@
     
     // Add the current registered link handler to the start of the list as Safari does. If
     // there's no current registered handler, default to ourself.
-    if (LSGetApplicationForURL((CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-        registeredAppURL = [(NSURL *)appURL path];
+    if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
+        registeredAppURL = [(__bridge NSURL *)appURL path];
     else
     {
         registeredAppURL = [appBundle executablePath];
@@ -183,7 +183,7 @@
     
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
-    CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((CFURLRef)testURL, kLSRolesAll);
+    CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
     if (cfArrayOfApps != nil)
     {
         CFIndex count = CFArrayGetCount(cfArrayOfApps);
@@ -214,7 +214,6 @@
         
         NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[appBundle bundlePath]];
         [appToPathMap setValue:fileURL forKey:ourAppName];
-        [fileURL release];
     }
     
     // Add a Select command so the user can manually pick a registered
@@ -461,10 +460,8 @@
  */
 -(void)dealloc
 {
-    [appToPathMap release];
     appToPathMap=nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
 }
 
 @end

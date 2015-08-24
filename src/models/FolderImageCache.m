@@ -112,7 +112,6 @@ static FolderImageCache * _folderImageCache = nil;
         if (!isDir)
         {
             NSLog(@"The file at %@ is not a directory. Will not cache folder images in this session.", imagesCacheFolder);
-            [imagesCacheFolder release];
             imagesCacheFolder = nil;
             initializedFolderImagesArray = YES;
             return;
@@ -138,7 +137,6 @@ static FolderImageCache * _folderImageCache = nil;
                         NSString * homePageSiteRoot = [[[fullPath lastPathComponent] stringByDeletingPathExtension] convertStringToValidPath];
                         [folderImagesArray setObject:iconImage forKey:homePageSiteRoot];
                     }
-                    [iconImage release];
                 }
             }
         }
@@ -151,9 +149,7 @@ static FolderImageCache * _folderImageCache = nil;
  */
 -(void)dealloc
 {
-    [folderImagesArray release];
     folderImagesArray=nil;
-    [super dealloc];
 }
 
 @end

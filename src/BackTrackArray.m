@@ -119,8 +119,6 @@
  */
 -(void)dealloc
 {
-	[array release];
 	array=nil;
-	[super dealloc];
 }
 @end

@@ -60,8 +60,6 @@
  */
 -(void)setSmallImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[smallImage release];
 	smallImage = newImage;
 	if (smallImage != nil)
 		smallImageSize = [smallImage size];
@@ -72,8 +70,6 @@
  */
 -(void)setSmallAlternateImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[smallAlternateImage release];
 	smallAlternateImage = newImage;
 }
 
@@ -84,8 +80,6 @@
  */
 -(void)setImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[image release];
 	image = newImage;
 
 	[super setImage:image];
@@ -102,8 +96,6 @@
  */
 -(void)setAlternateImage:(NSImage *)newImage
 {
-	[newImage retain];
-	[alternateImage release];
 	alternateImage = newImage;
 	
 	[super setAlternateImage:alternateImage];
@@ -147,7 +139,6 @@
 			// generally 24x24.
 			[scaledDownImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
 			[self setSmallImage:scaledDownImage];
-			[scaledDownImage release];
 		}
 		if (smallAlternateImage == nil)
 		{
@@ -156,7 +147,6 @@
 			// generally 24x24.
 			[scaledDownAlternateImage setSize:NSMakeSize(imageSize.width * 0.80, imageSize.height * 0.80)];
 			[self setSmallAlternateImage:scaledDownAlternateImage];
-			[scaledDownAlternateImage release];
 		}
 		[super setImage:smallImage];
 		[super setAlternateImage:smallAlternateImage];
@@ -172,14 +162,9 @@
  */
 -(void)dealloc
 {
-	[image release];
 	image=nil;
-	[alternateImage release];
 	alternateImage=nil;
-	[smallImage release];
 	smallImage=nil;
-	[smallAlternateImage release];
 	smallAlternateImage=nil;
-	[super dealloc];
 }
 @end

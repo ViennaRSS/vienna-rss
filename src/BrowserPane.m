@@ -130,7 +130,7 @@
 	
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
-	AddressBarCell * cell = [[[AddressBarCell alloc] init] autorelease];
+	AddressBarCell * cell = [[AddressBarCell alloc] init];
 	[cell setEditable:YES];
 	[cell setDrawsBackground:YES];
 	[cell setBordered:YES];
@@ -193,8 +193,6 @@
  */
 -(void)setError:(NSError *)newError
 {
-	[newError retain];
-	[lastError release];
 	lastError = newError;
 }
 
@@ -222,8 +220,6 @@
 
 -(void)setViewTitle:(NSString *) newTitle
 {
-	[newTitle retain];
-	[viewTitle release];
 	viewTitle = newTitle;
 }
 
@@ -244,11 +240,9 @@
 	openURLInBackground = openInBackgroundFlag;
 	isLocalFile = [url isFileURL];
 
-	[pageFilename release];
-	pageFilename = [[[[url path] lastPathComponent] stringByDeletingPathExtension] retain];
+	pageFilename = [[[url path] lastPathComponent] stringByDeletingPathExtension];
 	
 	[addressField setStringValue:[url absoluteString]];
-	[self retain];
 	if ([self.webPane isLoading])
 	{
 		[self willChangeValueForKey:@"isLoading"];
@@ -256,7 +250,6 @@
 		[self didChangeValueForKey:@"isLoading"];
 	}
 	[[self.webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
-	[self release];
 }
 
 /* setStatusText
@@ -290,7 +283,6 @@
 		[self showRssPageButton:NO];
 		[self setError:nil];
 		[self setViewTitle:@""];
-		[self retain];
 	}
 
 }
@@ -389,7 +381,6 @@
 	[self didChangeValueForKey:@"isLoading"];
 	
 	openURLInBackground = NO;
-	[self release];
 }
 
 /* didFailLoadWithError
@@ -438,11 +429,9 @@
 		
 		if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
 		{
-			[rssPageURL release];
 			rssPageURL = [arrayOfLinks objectAtIndex:0];
 			if (![rssPageURL hasPrefix:@"http:"] && ![rssPageURL hasPrefix:@"https:"])
 				rssPageURL = [[NSURL URLWithString:rssPageURL relativeToURL:[self url]] absoluteString];
-			[rssPageURL retain];
 			[self showRssPageButton:YES];
 		}
 		[self endFrameLoad];
@@ -782,20 +771,13 @@
  */
 -(void)dealloc
 {
-	[viewTitle release];
 	viewTitle=nil;
-	[rssPageURL release];
 	rssPageURL=nil;
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane close];
-	[lastError release];
 	lastError=nil;
-	[pageFilename release];
 	pageFilename=nil;
-	[webPane release];
-	webPane = nil;
-	[super dealloc];
 }
 @end

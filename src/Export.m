@@ -74,7 +74,6 @@
             [parentElement addChild:outlineElement];
 			++countExported;
 		}
-		[itemDict autorelease];
 	}
 	return countExported;
 }
@@ -137,7 +136,7 @@
     [opmlElement addChild:bodyElement];
     
     [opmlDocument addChild:opmlElement];
-    return [opmlDocument autorelease];
+    return opmlDocument;
 }
 
 @end

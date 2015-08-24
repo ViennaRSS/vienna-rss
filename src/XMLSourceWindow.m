@@ -156,11 +156,8 @@
 
 -(void)dealloc
 {
-	[feedSourceFilePath release];
 	feedSourceFilePath=nil;
-	[sourceWindowTitle release];
 	sourceWindowTitle=nil;
-	[super dealloc];
 }
 
 @end

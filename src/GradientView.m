@@ -45,7 +45,5 @@
  */
 -(void)dealloc
 {
-	[backgroundBrush release];
 	backgroundBrush=nil;
-	[super dealloc];
 }@end

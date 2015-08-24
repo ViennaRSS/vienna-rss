@@ -59,10 +59,9 @@
 	[articleView setUIDelegate:nil];
 	[articleView setFrameLoadDelegate:nil];
 	[articleView stopLoading:self];
-	[articleView release], articleView=nil;
-	[progressIndicator release], progressIndicator=nil;
+	articleView=nil;
+	progressIndicator=nil;
 
-	[super dealloc];
 }
 
 #pragma mark -
@@ -113,7 +112,6 @@
 		[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 
 		// Release the progress indicator.
-		[progressIndicator release];
 		progressIndicator = nil;
 	}
 

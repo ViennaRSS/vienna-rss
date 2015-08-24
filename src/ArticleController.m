@@ -108,7 +108,7 @@
 		NSArray * sortDescriptors = [prefs articleSortDescriptors];
 		if ([sortDescriptors count] == 0)
 		{
-			NSSortDescriptor * descriptor = [[[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:YES] autorelease];
+			NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:YES];
 			[prefs setArticleSortDescriptors:[NSArray arrayWithObject:descriptor]];
 			[prefs setObject:MA_Field_Date forKey:MAPref_SortColumn];
 		}
@@ -211,8 +211,6 @@
  */
 -(void)setSortColumnIdentifier:(NSString *)str
 {
-	[str retain];
-	[sortColumnIdentifier release];
 	sortColumnIdentifier = str;
 }
 
@@ -238,11 +236,10 @@
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		else
 		{
-			sortDescriptor = [[descriptors objectAtIndex:index] retain];
+			sortDescriptor = [descriptors objectAtIndex:index];
 			[descriptors removeObjectAtIndex:index];
 		}
 		[descriptors insertObject:sortDescriptor atIndex:0];
-		[sortDescriptor release];
 	}
 	[prefs setArticleSortDescriptors:descriptors];
 	[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
@@ -913,8 +910,6 @@
  */
 -(void)setArticleToPreserve:(Article *)article
 {
-	[article retain];
-	[articleToPreserve release];
 	articleToPreserve = article;
 }
 
@@ -924,21 +919,9 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[mainArticleView release];
-	mainArticleView=nil;
-	[backtrackArray release];
 	backtrackArray=nil;
-	[sortColumnIdentifier release];
 	sortColumnIdentifier=nil;
-	[folderArrayOfArticles release];
-	folderArrayOfArticles=nil;
-	[currentArrayOfArticles release];
-	currentArrayOfArticles=nil;
-	[articleSortSpecifiers release];
 	articleSortSpecifiers=nil;
-	[articleToPreserve release];
 	articleToPreserve=nil;
-	[foldersTree release];
-	[super dealloc];
 }
 @end

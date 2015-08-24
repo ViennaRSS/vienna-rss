@@ -41,31 +41,4 @@
 	return NSNotFound;
 }
 
-/* arrayByExpandingAllArrayObjects
- * Creates and returns an array containing all the objects in the list but also expanding
- * any NSArray objects. Note that the expansion is NOT recursive - any arrays in the
- * nested NSArray will not be expanded. Instead this function should be called on the
- * nested arrays to expand those if desired.
- */
-+(NSArray *)arrayByExpandingAllArrayObjects:(id)id1, ...
-{
-	NSMutableArray * newArray = [NSMutableArray arrayWithObject:id1];
-	va_list arguments;
-	id obj;
-	
-	va_start(arguments, id1);
-	while ((obj = (id)va_arg(arguments, NSUInteger)) != 0)
-	{
-		if ([obj isKindOfClass:[NSArray class]])
-		{
-			id innerObj;
-			
-			for (innerObj in obj)
-				[newArray addObject:innerObj];
-			continue;
-		}
-		[newArray addObject:obj];
-	}
-	return newArray;
-}
 @end

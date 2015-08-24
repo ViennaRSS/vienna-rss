@@ -23,10 +23,6 @@
 #import "Constants.h"
 #import "Preferences.h"
 
-// There's just one database and we manage access to it through a
-// singleton object.
-static DownloadManager * _sharedDownloadManager = nil;
-
 // Private functions
 @interface DownloadManager (Private)
 	-(void)archiveDownloadsList;
@@ -132,8 +128,6 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)setDownload:(NSURLDownload *)theDownload
 {
-	[theDownload retain];
-	[download release];
 	download = theDownload;
 }
 
@@ -151,12 +145,9 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)setFilename:(NSString *)theFilename
 {
-	[filename release];
-	[theFilename retain];
 	filename = theFilename;
 
 	// Force the image to be recached.
-	[image release];
 	image = nil;
 }
 
@@ -180,7 +171,6 @@ static DownloadManager * _sharedDownloadManager = nil;
 			image = nil;
 		else
 		{
-			[image retain];
 			[image setSize:NSMakeSize(32, 32)];
 		}
 	}
@@ -192,8 +182,6 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)setStartTime:(NSDate *)newStartTime
 {
-	[newStartTime retain];
-	[startTime release];
 	startTime = newStartTime;
 }
 
@@ -210,13 +198,9 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)dealloc
 {
-	[filename release];
 	filename=nil;
-	[download release];
 	download=nil;
-	[image release];
 	image=nil;
-	[super dealloc];
 }
 @end
 
@@ -228,11 +212,13 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 +(DownloadManager *)sharedInstance
 {
-	if (_sharedDownloadManager == nil)
-	{
+	// Singleton
+	static DownloadManager * _sharedDownloadManager = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		_sharedDownloadManager = [[DownloadManager alloc] init];
 		[_sharedDownloadManager unarchiveDownloadsList];
-	}
+	});
 	return _sharedDownloadManager;
 }
 
@@ -292,7 +278,6 @@ static DownloadManager * _sharedDownloadManager = nil;
 		[listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
 
 	[[Preferences standardPreferences] setArray:listArray forKey:MAPref_DownloadsList];
-	[listArray release];
 }
 
 /* unarchiveDownloadsList
@@ -340,7 +325,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
 	if (theDownload)
 	{
-		DownloadItem * newItem = [[DownloadItem new] autorelease];
+		DownloadItem * newItem = [DownloadItem new];
 		[newItem setState:DOWNLOAD_INIT];
 		[newItem setDownload:theDownload];
 		[newItem setFilename:filename];
@@ -349,7 +334,6 @@ static DownloadManager * _sharedDownloadManager = nil;
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
 		[theDownload setDestination:filename allowOverwrite:YES];
 		
-		[theDownload release];
 	}
 }
 
@@ -436,7 +420,7 @@ static DownloadManager * _sharedDownloadManager = nil;
 	DownloadItem * theItem = [self itemForDownload:download];
 	if (theItem == nil)
 	{
-		theItem = [[[DownloadItem alloc] init] autorelease];
+		theItem = [[DownloadItem alloc] init];
 		[theItem setDownload:download];
 		[downloadsList addObject:theItem];
 	}
@@ -484,7 +468,6 @@ static DownloadManager * _sharedDownloadManager = nil;
 	// Post a notification when the download completes.
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_DownloadCompleted" object:filename];
 
-	[contextDict autorelease];
 }
 
 /* didFailWithError
@@ -512,7 +495,6 @@ static DownloadManager * _sharedDownloadManager = nil;
 					  description:[NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", nil), filename]
 				 notificationName:NSLocalizedString(@"Growl download failed", nil)];
 
-	[contextDict autorelease];
 }
 
 /* didReceiveDataOfLength
@@ -590,8 +572,6 @@ static DownloadManager * _sharedDownloadManager = nil;
  */
 -(void)dealloc
 {
-	[downloadsList release];
 	downloadsList=nil;
-	[super dealloc];
 }
 @end

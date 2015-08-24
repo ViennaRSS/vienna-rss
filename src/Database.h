@@ -40,9 +40,9 @@
     FMDatabaseQueue *databaseQueue;
 }
 
-@property(nonatomic, retain) Folder * trashFolder;
-@property(nonatomic, retain) Folder * searchFolder;
-@property(nonatomic, retain) FMDatabaseQueue * databaseQueue;
+@property(nonatomic, strong) Folder * trashFolder;
+@property(nonatomic, strong) Folder * searchFolder;
+@property(nonatomic, strong) FMDatabaseQueue * databaseQueue;
 
 // General database functions
 - (instancetype)initWithDatabaseAtPath:(NSString *)dbPath;
