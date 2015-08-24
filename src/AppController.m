@@ -3654,7 +3654,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self setSearchString:[searchField stringValue]];
 	SearchMethod * currentSearchMethod = [[Preferences standardPreferences] searchMethod];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 	[self performSelector:[currentSearchMethod handler] withObject: currentSearchMethod];
+#pragma clang diagnostic pop
 }
 
 /* performAllArticlesSearch
