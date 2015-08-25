@@ -64,7 +64,8 @@ typedef enum PSMTabBarCellTrackingAreaType : NSUInteger
 - (void)dealloc;
 
 #pragma mark Accessors
-@property (NS_NONATOMIC_IOSONLY, strong) PSMTabBarControl *controlView;
+- (PSMTabBarControl *)controlView;
+- (void)setControlView:(PSMTabBarControl *)newControl;
 @property (NS_NONATOMIC_IOSONLY, readonly) CGFloat width;
 @property (NS_NONATOMIC_IOSONLY) NSRect frame;
 @property (NS_NONATOMIC_IOSONLY, readonly) NSSize attributedStringSize;
