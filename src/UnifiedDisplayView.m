@@ -294,72 +294,61 @@
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
 			NSUInteger row= [articleList rowForView:objView];
-			// get the height of the rendered frame.
-			// I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
-			// and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
-			// way to get the height with WebKit
-			// Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
-			//
-			// this temporary enable Javascript if it is not enabled, then reset to preference
-			[[sender preferences] setJavaScriptEnabled:YES];
-			NSString* outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
-			NSString* bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
-			NSString* clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
-			[[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
-			CGFloat fittingHeight = [outputHeight floatValue];
-
-			//get the rect of the current webview frame
-			NSRect webViewRect = [sender frame];
-			//calculate the new frame
-			NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
-									   YPOS_IN_CELL,
-									   NSWidth(webViewRect),
-									   fittingHeight);
-			//set the new frame to the webview
-			[sender setFrame:newWebViewRect];
 			if (row == [cell articleRow] && row < [[articleController allArticles] count]
 			  && [cell folderId] == [[[articleController allArticles] objectAtIndex:row] folderId])
 			{	//relevant cell
-				if ([bodyHeight isEqualToString:outputHeight] && [bodyHeight isEqualToString:clientHeight]) {
-					if (row < [rowHeightArray count])
-						[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
-					else
-					{	NSInteger toAdd = row - [rowHeightArray count] ;
-						for (NSInteger i = 0 ; i < toAdd ; i++) {
-							[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
-						}
-						[rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
-					}
-					[cell setInProgress:NO];
-					[articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
-				}
-				else
-				{
-					// something in the dimensions went wrong : force a reload
-					[self resubmitWebView:sender];
-				}
-			}
-			else {	//non relevant cell
-				[cell setInProgress:NO];
-				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-			}
+                NSString* outputHeight;
+                NSString* bodyHeight;
+                NSString* clientHeight;
+                CGFloat fittingHeight;
+                do // loop until dimensions are OK
+                {
+                    // get the height of the rendered frame.
+                    // I have tested many NSHeight([[ ... ] frame]) tricks, but they were unreliable
+                    // and using DOM to get documentElement scrollHeight and/or offsetHeight was the simplest
+                    // way to get the height with WebKit
+                    // Ref : http://james.padolsey.com/javascript/get-document-height-cross-browser/
+                    //
+                    // this temporary enable Javascript if it is not enabled, then reset to preference
+                    [[sender preferences] setJavaScriptEnabled:YES];
+                    outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
+                    bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
+                    clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
+                    [[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
+                    fittingHeight = [outputHeight floatValue];
+                    //get the rect of the current webview frame
+                    NSRect webViewRect = [sender frame];
+                    //calculate the new frame
+                    NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
+                                               YPOS_IN_CELL,
+                                               NSWidth(webViewRect),
+                                               fittingHeight);
+                    //set the new frame to the webview
+                    [sender setFrame:newWebViewRect];
+				} while (![bodyHeight isEqualToString:outputHeight] || ![bodyHeight isEqualToString:clientHeight]);
+
+                if (row < [rowHeightArray count])
+                    [rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
+                else
+                {	NSInteger toAdd = row - [rowHeightArray count] ;
+                    for (NSInteger i = 0 ; i < toAdd ; i++)
+                    {
+                        [rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+                    }
+                    [rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
+                }
+                [cell setInProgress:NO];
+                [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+            }
+            else {	//non relevant cell
+                [cell setInProgress:NO];
+                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+            }
 		} else {
 			// not an ArticleCellView anymore
 			// ???
 		}
 	}
-}
-
--(void)resubmitWebView:(WebView *)sender
-{
-	ArticleCellView * cell = (ArticleCellView *)[sender superview];
-	NSUInteger row = [articleList rowForView:cell];
-	if (cell != nil)
-	{
-		[self webViewLoadFinished:[NSNotification notificationWithName:WebViewProgressFinishedNotification object:sender]];
-	}
-	else
-		[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
 }
 
 /* updateAlternateMenuTitle
