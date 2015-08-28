@@ -901,12 +901,6 @@
 {
 	if (![tableView isEqualTo:articleList])
 		return nil;
-	NSArray * allArticles = [articleController allArticles];
-
-	Article * theArticle = [allArticles objectAtIndex:row];
-	NSInteger articleFolderId = [theArticle folderId];
-	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
-	NSString * feedURL = SafeString([folder feedURL]);
 
 	ArticleCellView *cellView = (ArticleCellView*)[tableView makeViewWithIdentifier:LISTVIEW_CELL_IDENTIFIER owner:self];
 
@@ -917,12 +911,17 @@
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
 	}
 
-	ArticleView * view = [cellView articleView];
+	NSArray * allArticles = [articleController allArticles];
+	Article * theArticle = [allArticles objectAtIndex:row];
+	NSInteger articleFolderId = [theArticle folderId];
+	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
+	NSString * feedURL = SafeString([folder feedURL]);
+
 	[cellView setFolderId:articleFolderId];
 	[cellView setArticleRow:row];
 	[cellView setListView:articleList];
+	ArticleView * view = [cellView articleView];
 	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
-	[cellView setInProgress:YES];
 	[view setHTML:htmlText withBase:feedURL];
 	[cellView addSubview:view];
     return cellView;
