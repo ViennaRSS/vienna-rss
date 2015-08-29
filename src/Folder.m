@@ -492,7 +492,8 @@ static NSArray * iconArray = nil;
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-	NSAssert(isCached, @"Folder's cache of articles should be initialized before articleFromGuid can be used");
+	if (!isCached)
+		[[Database sharedManager] arrayOfArticles:itemId filterString:nil];
 	return [cachedArticles objectForKey:guid];
 }
 
