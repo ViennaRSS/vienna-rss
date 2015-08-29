@@ -164,7 +164,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)feedDescription
 {
-	return SafeString([attributes valueForKey:@"FeedDescription"]);
+	return [attributes valueForKey:@"FeedDescription"];
 }
 
 /* homePage
@@ -172,7 +172,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)homePage
 {
-	return SafeString([attributes valueForKey:@"HomePage"]);
+	return [attributes valueForKey:@"HomePage"];
 }
 
 /* image
@@ -260,7 +260,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedDescription:(NSString *)newFeedDescription
 {
-	[attributes setValue:newFeedDescription forKey:@"FeedDescription"];
+	[attributes setValue:SafeString(newFeedDescription) forKey:@"FeedDescription"];
 }
 
 /* setHomePage
@@ -268,7 +268,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setHomePage:(NSString *)newHomePage
 {
-	[attributes setValue:newHomePage forKey:@"HomePage"];
+	[attributes setValue:SafeString(newHomePage) forKey:@"HomePage"];
 }
 
 /* username
