@@ -133,8 +133,7 @@
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(unsigned)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
- -(void)ensureCache;
--(void)addArticleToCache:(Article *)newArticle;
+-(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(void)removeArticleFromCache:(NSString *)guid;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;

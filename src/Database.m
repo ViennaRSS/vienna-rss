@@ -40,7 +40,6 @@
 - (BOOL)setupInitialDatabase;
 - (void)initaliseFields;
 -(NSString *)relocateLockedDatabase:(NSString *)path;
--(void)initArticleArray:(Folder *)folder;
 -(CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
 -(NSArray *)arrayOfSubFolders:(Folder *)folder;
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
@@ -166,69 +165,6 @@ const NSInteger MA_Current_DB_Version = 18;
     
     return NO;
 }
-
-/* initDatabase
- * Initalizes the database. The database is first checked to ensure it exists
- * and, if not, it is created with all the tables.
- */
-//-(BOOL)initDatabase {
-//    
-//    NSString *qualifiedDatabaseFileName = [Database databasePath];
-//	
-//	// Open the database at the well known location
-//	FMDatabase *sqlDatabase = [[FMDatabase alloc] initWithPath:[Database databasePath]];
-//	if (!sqlDatabase || ![sqlDatabase open])
-//	{
-//		NSRunAlertPanel(NSLocalizedString(@"Cannot open database", nil),
-//						NSLocalizedString(@"Cannot open database text", nil),
-//						NSLocalizedString(@"Close", nil), @"", @"",
-//						qualifiedDatabaseFileName);
-//		[sqlDatabase release];
-//		return NO;
-//	}
-//
-//
-//
-//	
-//	// Create the tables when the database is empty.
-//
-//	else if (databaseVersion < MA_Current_DB_Version)
-//	{
-//
-//	}
-//		
-//	
-//
-//	// Read the folders tree sort method from the database.
-//	// Make sure that the folders tree is not yet registered to receive notifications at this point.
-//	__block NSInteger newFoldersTreeSortMethod = MA_FolderSort_ByName;
-//    [databaseQueue inDatabase:^(FMDatabase *db) {
-//        FMResultSet * sortResults = [sqlDatabase executeQuery:@"select folder_sort from info"];
-//        if ([sortResults next])
-//        {
-//            newFoldersTreeSortMethod = [sortResults intForColumn:@"folder_sort"];
-//        }
-//        [sortResults close];
-//    }];
-//
-//	[[Preferences standardPreferences] setFoldersTreeSortMethod:newFoldersTreeSortMethod];
-//	
-//	// Register for notifications of change in folders tree sort method.
-//	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
-//	
-//	// Initial check if the database is read-only
-//	[self syncLastUpdate];
-//    
-//    [sqlDatabase close];
-//    [sqlDatabase release];
-//    
-//    
-//    databaseQueue = [FMDatabaseQueue databaseQueueWithPath:[Database databasePath]];
-//    if(!databaseQueue) {
-//        NSLog(@"error creating database queue");
-//    }
-//	return YES;
-//}
 
 /*!
  *  sets up an inital Vienna database at the given path
@@ -1441,210 +1377,189 @@ const NSInteger MA_Current_DB_Version = 18;
     }
 }
 
-/* createArticle
- * Adds or updates an article in the specified folder. Returns YES if the
- * article was added or updated or NO if we couldn't add the article for
+/* addArticle
+ * Adds an article in the specified folder. Returns YES if the
+ * article was added or NO if we couldn't add the article for
  * some reason.
  */
--(BOOL)createArticle:(NSInteger)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory
+-(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID
 {
     FMDatabaseQueue *queue = databaseQueue;
-    
+
     // Exit now if we're read-only
 	if (readOnly)
 		return NO;
-	
-	// Make sure the folder ID is valid. We need it to decipher
-	// some info before we add the article.
-	Folder * folder = [self folderFromID:folderID];
-	if (folder != nil)
-	{
-		// Prime the article cache
-		[self initArticleArray:folder];
-		
-		// Extract the article data from the dictionary.
-		NSString * articleBody = [article body];
-		NSString * articleTitle = [article title]; 
-		NSDate * articleDate = [article date];
-		NSString * articleLink = [[article link] trim];
-		NSString * userName = [[article author] trim];
-		NSString * articleEnclosure = [[article enclosure] trim];
-		NSString * articleGuid = [article guid];
-		NSInteger parentId = [article parentId];
-		BOOL marked_flag = [article isFlagged];
-		BOOL read_flag = [article isRead];
-		BOOL revised_flag = [article isRevised];
-		BOOL deleted_flag = [article isDeleted];
-		BOOL hasenclosure_flag = [article hasEnclosure];
-		
-		// We always set the created date ourselves
-		[article setCreatedDate:[NSDate date]];
-		
-		// Set some defaults
-		if (articleDate == nil)
-			articleDate = [NSDate date];
-		if (userName == nil)
-			userName = @"";
-		
-		// Parse off the title
-		if (articleTitle == nil || [articleTitle isBlank])
-			articleTitle = [[NSString stringByRemovingHTML:articleBody] firstNonBlankLine];
-		
-		// Save date as time intervals
-		NSTimeInterval interval = [articleDate timeIntervalSince1970];
-		NSTimeInterval createdInterval = [[article createdDate] timeIntervalSince1970];
-		
-		// Does this article already exist?
-		Article * existingArticle = [folder articleFromGuid:articleGuid];
-		// We're going to ignore the problem of feeds re-using guids, which is very naughty! Bad feed!
-		
-		// Unread count adjustment factor
-		NSInteger adjustment = 0;
-		
-		if (existingArticle == nil && [guidHistory containsObject:articleGuid])
-		{
-			return NO; // Article has been deleted and removed from database, so ignore
-		}
-		else if (existingArticle == nil)
-		{
-			__block int lastErrorCode = 0;
-			[queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
-                [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
-                 @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                 articleGuid,
-                 @(parentId),
-                 @(folderID),
-                 userName,
-                 articleLink,
-                 @(interval),
-                 @(createdInterval),
-                 @(read_flag),
-                 @(marked_flag),
-                 @(deleted_flag),
-                 articleTitle,
-                 articleBody,
-                 @(revised_flag),
-                 articleEnclosure,
-                 @(hasenclosure_flag)];
-                lastErrorCode = [db lastErrorCode];
-                if (lastErrorCode != SQLITE_OK) {
-                    *rollback = YES;
-					return;
-                 }
-                [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
-                lastErrorCode = [db lastErrorCode];
-                if (lastErrorCode != SQLITE_OK) {
-                    *rollback = YES;
-					return;
-                 }
-                
+
+    // Extract the article data from the dictionary.
+    NSString * articleBody = [article body];
+    NSString * articleTitle = [article title];
+    NSDate * articleDate = [article date];
+    NSString * articleLink = [[article link] trim];
+    NSString * userName = [[article author] trim];
+    NSString * articleEnclosure = [[article enclosure] trim];
+    NSString * articleGuid = [article guid];
+    NSInteger parentId = [article parentId];
+    BOOL marked_flag = [article isFlagged];
+    BOOL read_flag = [article isRead];
+    BOOL revised_flag = [article isRevised];
+    BOOL deleted_flag = [article isDeleted];
+    BOOL hasenclosure_flag = [article hasEnclosure];
+
+    // We always set the created date ourselves
+    [article setCreatedDate:[NSDate date]];
+
+    // Set some defaults
+    if (articleDate == nil)
+        articleDate = [NSDate date];
+    if (userName == nil)
+        userName = @"";
+
+    // Parse off the title
+    if (articleTitle == nil || [articleTitle isBlank])
+        articleTitle = [[NSString stringByRemovingHTML:articleBody] firstNonBlankLine];
+
+    // Dates are stored as time intervals
+    NSTimeInterval interval = [articleDate timeIntervalSince1970];
+    NSTimeInterval createdInterval = [[article createdDate] timeIntervalSince1970];
+    
+    __block int lastErrorCode = 0;
+    [queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
+        [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+         @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+         articleGuid,
+         @(parentId),
+         @(folderID),
+         userName,
+         articleLink,
+         @(interval),
+         @(createdInterval),
+         @(read_flag),
+         @(marked_flag),
+         @(deleted_flag),
+         articleTitle,
+         articleBody,
+         @(revised_flag),
+         articleEnclosure,
+         @(hasenclosure_flag)];
+        lastErrorCode = [db lastErrorCode];
+        if (lastErrorCode != SQLITE_OK) {
+            *rollback = YES;
+            return;
+         }
+        [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
+        lastErrorCode = [db lastErrorCode];
+        if (lastErrorCode != SQLITE_OK) {
+            *rollback = YES;
+            return;
+         }
+
+    }];
+	return (lastErrorCode == SQLITE_OK);
+}
+
+/* updateArticle
+ * Updates an article in the specified folder. Returns YES if the
+ * article was updated or NO if we couldn't update the article for
+ * some reason.
+ */
+-(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article
+{
+    // Exit now if we're read-only
+	if (readOnly)
+		return NO;
+
+	FMDatabaseQueue *queue = databaseQueue;
+
+    // Extract the data from the new state of article
+    NSString * articleBody = [article body];
+    NSString * articleTitle = [article title];
+    NSDate * articleDate = [article date];
+    NSString * articleLink = [[article link] trim];
+    NSString * userName = [[article author] trim];
+    NSString * articleGuid = [article guid];
+    NSInteger parentId = [article parentId];
+    BOOL revised_flag = [article isRevised];
+
+    // Set some defaults
+    if (articleDate == nil)
+        articleDate = [existingArticle date];
+    if (userName == nil)
+        userName = @"";
+
+    // Parse off the title
+    if (articleTitle == nil || [articleTitle isBlank])
+        articleTitle = [[NSString stringByRemovingHTML:articleBody] firstNonBlankLine];
+
+    // Dates are stored as time intervals
+    NSTimeInterval interval = [articleDate timeIntervalSince1970];
+
+    // The article is revised if either the title or the body has changed.
+
+    NSString * existingTitle = [existingArticle title];
+    BOOL isArticleRevised = ![existingTitle isEqualToString:articleTitle];
+    if (!isArticleRevised)
+    {
+        __block NSString * existingBody = [existingArticle body];
+        // the article text may not have been loaded yet, for instance if the folder is not displayed
+        if (existingBody == nil)
+        {
+            [queue inDatabase:^(FMDatabase *db) {
+                FMResultSet * results = [db executeQuery:@"select text from messages where folder_id=? and message_id=?",
+                                         @(folderID), articleGuid];
+                if ([results next]) {
+                        existingBody = [results stringForColumn:@"text"];
+                } else {
+                        existingBody = @"";
+                }
+                [results close];
             }];
-			if (lastErrorCode != SQLITE_OK)
-				return NO;
-			// Add the article to the folder cache
-			[article setStatus:ArticleStatusNew];
-			[folder addArticleToCache:article];
-
-            // Update folder unread count
-            if (!read_flag)
-                    adjustment = 1;
         }
-		else if ([existingArticle isDeleted])
-		{
-			return NO;
-		}
-		else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles])
-		{
-			return NO;
-		}
-		else
-		{
-			// The article is revised if either the title or the body has changed.
-			
-			NSString * existingTitle = [existingArticle title];
-			BOOL isArticleRevised = ![existingTitle isEqualToString:articleTitle];
-			
-			if (!isArticleRevised)
-			{
-				__block NSString * existingBody = [existingArticle body];
-				// If the folder is not displayed, then the article text has not been loaded yet.
-				if (existingBody == nil)
-				{
-					[queue inDatabase:^(FMDatabase *db) {
-						FMResultSet * results = [db executeQuery:@"select text from messages where folder_id=? and message_id=?",
-                                                 @(folderID), articleGuid];
-                    if ([results next]) {
-							existingBody = [results stringForColumn:@"text"];
-                    } else {
-							existingBody = @"";
-                    }
-                        
-						[results close];
-					}];
-				}
-				
-				isArticleRevised = ![existingBody isEqualToString:articleBody];
-			}
-			
-			if (isArticleRevised)
-			{
-				// Only pre-existing articles should be marked as revised.
-				// New articles created during the current refresh should not be marked as revised,
-				// even if there are multiple versions of the new article in the feed.
-				revised_flag = [existingArticle isRevised];
-                if (!revised_flag && ([existingArticle status] == ArticleStatusEmpty)) {
-					revised_flag = YES;
-                }
-				
-                __block int lastErrorCode = 0;
-                [queue inDatabase:^(FMDatabase *db) {
-                    [db executeUpdate:@"update messages set parent_id=?, sender=?, link=?, date=?, "
-                     @"read_flag=0, title=?, text=?, revised_flag=? where folder_id=? and message_id=?",
-                     @(parentId),
-                     userName,
-                     articleLink,
-                     @(interval),
-                     articleTitle,
-                     articleBody,
-                     @(revised_flag),
-                     @(folderID),
-                     articleGuid];
-                    
-                    lastErrorCode = [db lastErrorCode];
-                }];
+        isArticleRevised = ![existingBody isEqualToString:articleBody];
+    }
 
-				if (lastErrorCode != SQLITE_OK) return NO;
-				
-				[existingArticle setTitle:articleTitle];
-				[existingArticle setBody:articleBody];
-				[existingArticle markRevised:revised_flag];
-				
-				// Update folder unread count if necessary
-				if ([existingArticle isRead])
-				{
-					adjustment = 1;
-					[article setStatus:ArticleStatusNew];
-					[existingArticle markRead:NO];
-				}
-                else {
-					[article setStatus:ArticleStatusUpdated];
-                }
-			}
-			else
-			{
-				return NO;
-			}
-		}
-		
-		// Fix unread count on parent folders
-		if (adjustment != 0)
-		{
-			countOfUnread += adjustment;
-			[self setFolderUnreadCount:folder adjustment:adjustment];
-		}
-		return YES;
-	}
-	return NO;
+    if (isArticleRevised)
+    {
+        // Articles preexisting in database should be marked as revised.
+        // New articles created during the current refresh should not be marked as revised,
+        // even if there are multiple versions of the new article in the feed.
+        if ([existingArticle isRevised] || ([existingArticle status] == ArticleStatusEmpty))
+            revised_flag = YES;
+
+        __block int lastErrorCode = 0;
+        [queue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"update messages set parent_id=?, sender=?, link=?, date=?, "
+             @"read_flag=0, title=?, text=?, revised_flag=? where folder_id=? and message_id=?",
+             @(parentId),
+             userName,
+             articleLink,
+             @(interval),
+             articleTitle,
+             articleBody,
+             @(revised_flag),
+             @(folderID),
+             articleGuid];
+
+            lastErrorCode = [db lastErrorCode];
+        }];
+        
+        if (lastErrorCode != SQLITE_OK)
+            return NO;
+        else
+        {
+            // update the existing article in memory
+            [existingArticle setTitle:articleTitle];
+            [existingArticle setBody:articleBody];
+            [existingArticle markRevised:revised_flag];
+            [existingArticle setParentId:parentId];
+            [existingArticle setAuthor:userName];
+            [existingArticle setLink:articleLink];
+            return YES;
+        }
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 /* purgeArticlesOlderThanDays
@@ -1709,7 +1624,6 @@ const NSInteger MA_Current_DB_Version = 18;
 				if (![article isRead])
 				{
 					[self setFolderUnreadCount:folder adjustment:-1];
-					--countOfUnread;
 				}
 				[folder removeArticleFromCache:guid];
 				return YES;
@@ -1966,16 +1880,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	return [foldersDict allValues];
 }
 
-/* initArticleArray
- * Ensures that the specified folder has a minimal cache of article information.
- */
--(void)initArticleArray:(Folder *)folder
-{
-	// Prime the folder cache
-	[self initFolderArray];
-    [folder ensureCache];
-}
-
 /* cacheForFolder
  * Returns a minimal cache of article information for the specified folder.
  */
@@ -2031,7 +1935,6 @@ const NSInteger MA_Current_DB_Version = 18;
         NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], (long)[folder unreadCount], (long)unread_count);
         NSInteger diff = (unread_count - [folder unreadCount]);
         [self setFolderUnreadCount:folder adjustment:diff];
-        countOfUnread += diff;
     }
 
 	return newDict;
@@ -2394,7 +2297,6 @@ const NSInteger MA_Current_DB_Version = 18;
             NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], (long)[folder unreadCount], (long)unread_count);
             NSInteger diff = (unread_count - [folder unreadCount]);
             [self setFolderUnreadCount:folder adjustment:diff];
-            countOfUnread += diff;
         }
     }
 
@@ -2444,7 +2346,6 @@ const NSInteger MA_Current_DB_Version = 18;
 					}
                 }
 			}
-			countOfUnread -= count;
 			[self setFolderUnreadCount:folder adjustment:-count];
 			result = YES;
 		}
@@ -2475,7 +2376,6 @@ const NSInteger MA_Current_DB_Version = 18;
 				NSInteger adjustment = (isRead ? -1 : 1);
 
 				[article markRead:isRead];
-				countOfUnread += adjustment;
 				[self setFolderUnreadCount:folder adjustment:adjustment];
 			}
 		}
@@ -2506,7 +2406,6 @@ const NSInteger MA_Current_DB_Version = 18;
         }];
 	}
 	NSInteger adjustment = [guidArray count]-[folder unreadCount];
-	countOfUnread += adjustment;
 	[self setFolderUnreadCount:folder adjustment:adjustment];
 }
 
@@ -2541,6 +2440,7 @@ const NSInteger MA_Current_DB_Version = 18;
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
+	countOfUnread += adjustment;
 	NSInteger newCount = [folder unreadCount] + adjustment;
 	[folder setUnreadCount:newCount];
     FMDatabaseQueue *queue = databaseQueue;

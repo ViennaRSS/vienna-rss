@@ -109,7 +109,8 @@
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
--(BOOL)createArticle:(NSInteger)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory;
+-(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;
+-(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article;
 -(BOOL)deleteArticleFromFolder:(NSInteger)folderId guid:(NSString *)guid;
 -(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
 -(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;

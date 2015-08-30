@@ -496,6 +496,85 @@ static NSArray * iconArray = nil;
 	return [cachedArticles objectForKey:guid];
 }
 
+/* createArticle
+ * Adds or updates an article in the folder.
+ * Returns YES if the article was added or updated
+ * or NO if we couldn't add the article for some reason.
+ * On success, status information is updated in the article to mark
+ * if it is new or updated (from the point of view of the user).
+ */
+-(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
+{
+    // Prime the article cache
+    [self ensureCache];
+
+    // Unread count adjustment factor
+    NSInteger adjustment = 0;
+
+    NSString * articleGuid = [article guid];
+    // Does this article already exist?
+    // We're going to ignore here the problem of feeds re-using guids, which is very naughty! Bad feed!
+    Article * existingArticle = [cachedArticles objectForKey:articleGuid];
+
+    if (existingArticle == nil)
+    {
+        if ([guidHistory containsObject:articleGuid])
+            return NO; // Article has been deleted and removed from database, so ignore
+        else
+        {
+            // add the article as new
+            BOOL success = [[Database sharedManager] addArticle:article toFolder:itemId];
+            if(success)
+            {
+                [article setStatus:ArticleStatusNew];
+                // add to the cache
+	            [cachedArticles setObject:article forKey:articleGuid];
+                if(![article isRead])
+                    adjustment = 1;
+            }
+            else
+                return NO;
+        }
+    }
+    else if ([existingArticle isDeleted])
+    {
+        return NO;
+    }
+    else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles])
+    {
+        return NO;
+    }
+    else
+    {
+        BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:itemId withArticle:article];
+        if (success)
+        {
+            // Update folder unread count if necessary
+            if ([existingArticle isRead])
+            {
+                adjustment = 1;
+                [article setStatus:ArticleStatusNew];
+                [existingArticle markRead:NO];
+            }
+            else
+            {
+                [article setStatus:ArticleStatusUpdated];
+            }
+        }
+        else
+        {
+            return NO;
+        }
+    }
+
+    // Fix unread count on parent folders and Database manager
+    if (adjustment != 0)
+    {
+		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
+    }
+    return YES;
+}
+
 /* setUnreadCount
  */
 -(void)setUnreadCount:(NSInteger)count
@@ -529,14 +608,6 @@ static NSArray * iconArray = nil;
 	}
 }
 
-/* addArticleToCache
- * Add the specified article to our cache, replacing any existing instance.
- */
--(void)addArticleToCache:(Article *)newArticle
-{
-	[cachedArticles setObject:newArticle forKey:[newArticle guid]];
-}
-
 /* removeArticleFromCache
  * Remove the article identified by the specified GUID from the cache.
  */
@@ -565,6 +636,7 @@ static NSArray * iconArray = nil;
     if (!isCached)
         cachedArticles = [[Database sharedManager] cacheForFolder:self];
     isCached = YES;
+    // Note that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
 }
 
 /* articles

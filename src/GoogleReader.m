@@ -334,7 +334,7 @@ enum GoogleReaderStatus {
 
 			for (Article * article in articleArray)
 			{
-                if ([dbManager createArticle:[refreshedFolder itemId] article:article guidHistory:guidHistory] &&
+                if ([refreshedFolder createArticle:article guidHistory:guidHistory] &&
                     ([article status] == ArticleStatusNew)) {
 					newArticlesFromFeed++;
                 }
