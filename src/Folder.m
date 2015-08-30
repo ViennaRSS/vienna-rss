@@ -492,8 +492,7 @@ static NSArray * iconArray = nil;
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-	if (!isCached)
-		[[Database sharedManager] arrayOfArticles:itemId filterString:nil];
+    [self ensureCache];
 	return [cachedArticles objectForKey:guid];
 }
 
@@ -536,7 +535,6 @@ static NSArray * iconArray = nil;
 -(void)addArticleToCache:(Article *)newArticle
 {
 	[cachedArticles setObject:newArticle forKey:[newArticle guid]];
-	isCached = YES;
 }
 
 /* removeArticleFromCache
@@ -546,14 +544,6 @@ static NSArray * iconArray = nil;
 {
 	NSAssert(isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
 	[cachedArticles removeObjectForKey:guid];
-}
-
-/* markFolderEmpty
- * Mark this folder as empty on the service
- */
--(void)markFolderEmpty
-{
-	isCached = YES;
 }
 
 /* countOfCachedArticles
@@ -567,13 +557,22 @@ static NSArray * iconArray = nil;
 	return isCached ? (NSInteger)[cachedArticles count] : -1;
 }
 
+/* ensureCache
+ * Prepare the cache if it is not yet ready
+ */
+ -(void)ensureCache
+ {
+    if (!isCached)
+        cachedArticles = [[Database sharedManager] cacheForFolder:self];
+    isCached = YES;
+}
+
 /* articles
  * Return an array of all articles in the specified folder.
  */
 -(NSArray *)articles
 {
-	if (!isCached)
-		[[Database sharedManager] arrayOfArticles:itemId filterString:nil];
+    [self ensureCache];
 	return [cachedArticles allValues];
 }
 

@@ -40,7 +40,7 @@
 - (BOOL)setupInitialDatabase;
 - (void)initaliseFields;
 -(NSString *)relocateLockedDatabase:(NSString *)path;
--(BOOL)initArticleArray:(Folder *)folder;
+-(void)initArticleArray:(Folder *)folder;
 -(CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
 -(NSArray *)arrayOfSubFolders:(Folder *)folder;
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
@@ -1694,9 +1694,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-		// Prime the article cache
-		[self initArticleArray:folder];
-
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil)
 		{
@@ -1972,67 +1969,72 @@ const NSInteger MA_Current_DB_Version = 18;
 /* initArticleArray
  * Ensures that the specified folder has a minimal cache of article information.
  */
--(BOOL)initArticleArray:(Folder *)folder
+-(void)initArticleArray:(Folder *)folder
+{
+	// Prime the folder cache
+	[self initFolderArray];
+    [folder ensureCache];
+}
+
+/* cacheForFolder
+ * Returns a minimal cache of article information for the specified folder.
+ */
+-(NSMutableDictionary *)cacheForFolder:(Folder *)folder
 {
 	// Prime the folder cache
 	[self initFolderArray];
 
-	// Exit now if we're already initialized
-	if ([folder countOfCachedArticles] == -1)
-	{
-		NSInteger folderId = [folder itemId];
+    NSInteger folderId = [folder itemId];
+    NSMutableDictionary * newDict = [NSMutableDictionary new];
 
-		// Initialize to indicate that the folder array is valid.
-		[folder markFolderEmpty];
-		
-        __block NSInteger unread_count = 0;
-        
-        FMDatabaseQueue *queue = databaseQueue;
-        [queue inDatabase:^(FMDatabase *db) {
-			FMResultSet * results = [db executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
-			while([results next])
-			{
-				NSString * guid = [results stringForColumnIndex:0];
-				BOOL read_flag = [[results stringForColumnIndex:1] intValue];
-				BOOL marked_flag = [[results stringForColumnIndex:2] intValue];
-				BOOL deleted_flag = [[results stringForColumnIndex:3] intValue];
-				NSString * title = [results stringForColumnIndex:4];
-				NSString * link = [results stringForColumnIndex:5];
-				BOOL revised_flag = [[results stringForColumnIndex:6] intValue];
-				BOOL hasenclosure_flag = [[results stringForColumnIndex:7] intValue];
-				NSString * enclosure = [results stringForColumnIndex:8];
-
-				// Keep our own track of unread articles
-				if (!read_flag)
-					++unread_count;
-				
-				Article * article = [[Article alloc] initWithGuid:guid];
-				[article markRead:read_flag];
-				[article markFlagged:marked_flag];
-				[article markRevised:revised_flag];
-				[article markDeleted:deleted_flag];
-				[article setFolderId:folderId];
-				[article setTitle:title];
-				[article setLink:link];
-				[article setEnclosure:enclosure];
-				[article setHasEnclosure:hasenclosure_flag];
-				[folder addArticleToCache:article];
-			}
-			[results close];
-        }];
-        
-        // This is a good time to do a quick check to ensure that our
-        // own count of unread is in sync with the folders count and fix
-        // them if not.
-        if (unread_count != [folder unreadCount])
+    __block NSInteger unread_count = 0;
+    
+    FMDatabaseQueue *queue = databaseQueue;
+    [queue inDatabase:^(FMDatabase *db) {
+        FMResultSet * results = [db executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
+        while([results next])
         {
-            NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], (long)[folder unreadCount], (long)unread_count);
-            NSInteger diff = (unread_count - [folder unreadCount]);
-            [self setFolderUnreadCount:folder adjustment:diff];
-            countOfUnread += diff;
+            NSString * guid = [results stringForColumnIndex:0];
+            BOOL read_flag = [[results stringForColumnIndex:1] intValue];
+            BOOL marked_flag = [[results stringForColumnIndex:2] intValue];
+            BOOL deleted_flag = [[results stringForColumnIndex:3] intValue];
+            NSString * title = [results stringForColumnIndex:4];
+            NSString * link = [results stringForColumnIndex:5];
+            BOOL revised_flag = [[results stringForColumnIndex:6] intValue];
+            BOOL hasenclosure_flag = [[results stringForColumnIndex:7] intValue];
+            NSString * enclosure = [results stringForColumnIndex:8];
+
+            // Keep our own track of unread articles
+            if (!read_flag)
+                ++unread_count;
+            
+            Article * article = [[Article alloc] initWithGuid:guid];
+            [article markRead:read_flag];
+            [article markFlagged:marked_flag];
+            [article markRevised:revised_flag];
+            [article markDeleted:deleted_flag];
+            [article setFolderId:folderId];
+            [article setTitle:title];
+            [article setLink:link];
+            [article setEnclosure:enclosure];
+            [article setHasEnclosure:hasenclosure_flag];
+            [newDict setObject:article forKey:guid];
         }
-	}
-	return YES;
+        [results close];
+    }];
+    
+    // This is a good time to do a quick check to ensure that our
+    // own count of unread is in sync with the folders count and fix
+    // them if not.
+    if (unread_count != [folder unreadCount])
+    {
+        NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], (long)[folder unreadCount], (long)unread_count);
+        NSInteger diff = (unread_count - [folder unreadCount]);
+        [self setFolderUnreadCount:folder adjustment:diff];
+        countOfUnread += diff;
+    }
+
+	return newDict;
 }
 
 /* setSearchString
@@ -2350,7 +2352,6 @@ const NSInteger MA_Current_DB_Version = 18;
 
 	// Time to run the query
     FMDatabaseQueue *queue = databaseQueue;
-    [folder clearCache];
     [queue inDatabase:^(FMDatabase *db) {
 		FMResultSet * results = [db executeQuery:queryString];
 		while ([results next])
@@ -2374,7 +2375,6 @@ const NSInteger MA_Current_DB_Version = 18;
 		
 			if (folder == nil || ![article isDeleted] || IsTrashFolder(folder))
 				[newArray addObject:article];
-			[folder addArticleToCache:article];
 			
 			// Keep our own track of unread articles
 			if (![article isRead])
@@ -2460,9 +2460,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-		// Prime the article cache
-		[self initArticleArray:folder];
-
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isRead != [article isRead])
 		{
@@ -2569,9 +2566,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-		// Prime the article cache
-		[self initArticleArray:folder];
-
 		Article * article = [folder articleFromGuid:guid];
 		if (article != nil && isFlagged != [article isFlagged])
 		{
@@ -2600,8 +2594,6 @@ const NSInteger MA_Current_DB_Version = 18;
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder !=nil) {
-		// Prime the article cache
-		[self initArticleArray:folder];
 		Article * article = [folder articleFromGuid:guid];
 		if (isDeleted && ![article isRead])
 			[self markArticleRead:folderId guid:guid isRead:YES];

@@ -133,9 +133,9 @@
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(unsigned)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
+ -(void)ensureCache;
 -(void)addArticleToCache:(Article *)newArticle;
 -(void)removeArticleFromCache:(NSString *)guid;
--(void)markFolderEmpty;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 -(NSString *)feedSourceFilePath;
