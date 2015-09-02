@@ -55,6 +55,7 @@ static NSArray * iconArray = nil;
 		flags = 0;
 		nonPersistedFlags = 0;
 		isCached = NO;
+		containsBodies = NO;
 		hasPassword = NO;
 		cachedArticles = [NSMutableDictionary dictionary];
 		attributes = [NSMutableDictionary dictionary];
@@ -605,6 +606,7 @@ static NSArray * iconArray = nil;
 @autoreleasepool {
 		[cachedArticles removeAllObjects];
 		isCached = NO;
+		containsBodies = NO;
 	}
 }
 
@@ -653,7 +655,27 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articlesWithFilter:(NSString *)fstring
 {
-	return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
+	if ([fstring isEqualToString:@""])
+	{
+        if (isCached && containsBodies)
+            return [self articles];
+        else
+        {
+            NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
+            isCached = NO;
+            [cachedArticles removeAllObjects];
+            for (id object in articles)
+            {
+                NSString * guid = [(Article *)object guid];
+                [cachedArticles setObject:object forKey:guid];
+            }
+            isCached = YES;
+            containsBodies = YES;
+            return articles;
+        }
+	}
+	else
+	    return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
 }
 
 /* folderNameCompare

@@ -76,6 +76,7 @@
 	NSUInteger nonPersistedFlags;
 	BOOL isCached;
 	BOOL hasPassword;
+	BOOL containsBodies;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
 	NSMutableDictionary * cachedArticles;
