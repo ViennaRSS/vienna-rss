@@ -25,6 +25,7 @@
 #import "FolderImageCache.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
+#import "ArticleRef.h"
 
 // Private internal functions
 @interface Folder (Private)
@@ -58,6 +59,7 @@ static NSArray * iconArray = nil;
 		containsBodies = NO;
 		hasPassword = NO;
 		cachedArticles = [NSMutableDictionary dictionary];
+		cachedGuids = [NSMutableOrderedSet orderedSet];
 		attributes = [NSMutableDictionary dictionary];
 		[self setName:newName];
 		[self setLastUpdate:[NSDate distantPast]];
@@ -484,9 +486,8 @@ static NSArray * iconArray = nil;
  */
 -(unsigned)indexOfArticle:(Article *)article
 {
-	NSArray * cacheArray = [self articles];
-	Article * realArticle = [cachedArticles objectForKey:[article guid]];
-	return [cacheArray indexOfObjectIdenticalTo:realArticle];
+    [self ensureCache];
+	return [cachedGuids indexOfObject:[article guid]];
 }
 
 /* articleFromGuid
@@ -529,6 +530,7 @@ static NSArray * iconArray = nil;
             {
                 [article setStatus:ArticleStatusNew];
                 // add to the cache
+	            [cachedGuids addObject:articleGuid];
 	            [cachedArticles setObject:article forKey:articleGuid];
                 if(![article isRead])
                     adjustment = 1;
@@ -605,6 +607,7 @@ static NSArray * iconArray = nil;
 {
 @autoreleasepool {
 		[cachedArticles removeAllObjects];
+		[cachedGuids removeAllObjects];
 		isCached = NO;
 		containsBodies = NO;
 	}
@@ -617,6 +620,7 @@ static NSArray * iconArray = nil;
 {
 	NSAssert(isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
 	[cachedArticles removeObjectForKey:guid];
+	[cachedGuids removeObject:guid];
 }
 
 /* countOfCachedArticles
@@ -627,7 +631,7 @@ static NSArray * iconArray = nil;
  */
 -(NSInteger)countOfCachedArticles
 {
-	return isCached ? (NSInteger)[cachedArticles count] : -1;
+	return isCached ? (NSInteger)[cachedGuids count] : -1;
 }
 
 /* ensureCache
@@ -636,18 +640,58 @@ static NSArray * iconArray = nil;
  -(void)ensureCache
  {
     if (!isCached)
-        cachedArticles = [[Database sharedManager] cacheForFolder:self];
+        [[Database sharedManager] prepareCache:cachedArticles forFolder:itemId saveGuidsIn:cachedGuids];
     isCached = YES;
     // Note that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
 }
 
-/* articles
- * Return an array of all articles in the specified folder.
+/* markArticlesInCacheRead
+ * iterate through the cache and mark the articles as read
  */
--(NSArray *)articles
+-(void)markArticlesInCacheRead
 {
-    [self ensureCache];
-	return [cachedArticles allValues];
+    NSInteger count = unreadCount;
+    // Note the use of reverseObjectEnumerator
+    // since the unread articles are likely to be clustered
+    // with the most recent articles at the end of the array
+    // so it makes the code slightly faster.
+    for (id obj in cachedGuids.reverseObjectEnumerator.allObjects)
+    {
+        Article * article = [cachedArticles objectForKey:(NSString *)obj];
+        if (![article isRead])
+        {
+            [article markRead:YES];
+            count--;
+            if (count == 0)
+                break;
+        }
+    }
+}
+
+/* arrayOfUnreadArticlesRefs
+ * Return an array of ArticleReference of all unread articles
+ */
+-(NSArray *)arrayOfUnreadArticlesRefs
+{
+    if (isCached)
+    {
+        NSInteger count = unreadCount;
+        NSMutableArray * result = [NSMutableArray arrayWithCapacity:unreadCount];
+        for (id obj in cachedGuids.reverseObjectEnumerator.allObjects)
+        {
+            Article * article = [cachedArticles objectForKey:(NSString *)obj];
+            if (![article isRead])
+            {
+                [result addObject:[ArticleReference makeReference:article]];
+                count--;
+                if (count == 0)
+                    break;
+            }
+        }
+        return result;
+    }
+    else
+        return [[Database sharedManager] arrayOfUnreadArticlesRefs:itemId];
 }
 
 /* articlesWithFilter
@@ -658,15 +702,24 @@ static NSArray * iconArray = nil;
 	if ([fstring isEqualToString:@""])
 	{
         if (isCached && containsBodies)
-            return [self articles];
+		{
+			NSMutableArray * articles = [NSMutableArray arrayWithCapacity:[cachedGuids count]];
+			for (id object in cachedGuids)
+			{
+				[articles addObject:[cachedArticles objectForKey:object]];
+			}
+			return articles;
+		}
         else
         {
             NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
             isCached = NO;
             [cachedArticles removeAllObjects];
+            [cachedGuids removeAllObjects];
             for (id object in articles)
             {
                 NSString * guid = [(Article *)object guid];
+                [cachedGuids addObject:guid];
                 [cachedArticles setObject:object forKey:guid];
             }
             isCached = YES;
@@ -751,5 +804,6 @@ static NSArray * iconArray = nil;
 	lastUpdate=nil;
 	attributes=nil;
 	cachedArticles=nil;
+	cachedGuids=nil;
 }
 @end

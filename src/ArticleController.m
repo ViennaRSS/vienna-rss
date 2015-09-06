@@ -700,7 +700,7 @@
 		else if (IsRSSFolder(folder))
 		{
             if (undoFlag) {
-				[refArray addObjectsFromArray:[[Database sharedManager] arrayOfUnreadArticlesRefs:folderId]];
+				[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
             }
 			if ([[Database sharedManager] markFolderRead:folderId])
 			{
@@ -710,7 +710,7 @@
 		}
 		else if (IsGoogleReaderFolder(folder))
 		{
-			NSArray * articleArray = [[Database sharedManager] arrayOfUnreadArticlesRefs:folderId];
+			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
             if (undoFlag) {
 				[refArray addObjectsFromArray:articleArray];
             }

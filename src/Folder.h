@@ -80,6 +80,7 @@
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
 	NSMutableDictionary * cachedArticles;
+	NSMutableOrderedSet * cachedGuids;
 }
 
 // Initialisation functions
@@ -93,7 +94,6 @@
 -(NSString *)username;
 -(NSString *)password;
 -(NSDictionary *)attributes;
--(NSArray *)articles;
 -(NSArray *)articlesWithFilter:(NSString *)fstring;
 -(NSInteger)parentId;
 -(NSInteger)itemId;
@@ -136,6 +136,8 @@
 -(Article *)articleFromGuid:(NSString *)guid;
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(void)removeArticleFromCache:(NSString *)guid;
+-(void)markArticlesInCacheRead;
+-(NSArray *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 -(NSString *)feedSourceFilePath;

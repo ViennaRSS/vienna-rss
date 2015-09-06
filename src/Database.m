@@ -1880,16 +1880,15 @@ const NSInteger MA_Current_DB_Version = 18;
 	return [foldersDict allValues];
 }
 
-/* cacheForFolder
+/* prepareCache
  * Returns a minimal cache of article information for the specified folder.
  */
--(NSMutableDictionary *)cacheForFolder:(Folder *)folder
+-(void)prepareCache:(NSMutableDictionary *)dict forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableOrderedSet *)cachedGuids
 {
 	// Prime the folder cache
 	[self initFolderArray];
 
-    NSInteger folderId = [folder itemId];
-    NSMutableDictionary * newDict = [NSMutableDictionary new];
+    [cachedGuids removeAllObjects];
 
     __block NSInteger unread_count = 0;
     
@@ -1922,7 +1921,8 @@ const NSInteger MA_Current_DB_Version = 18;
             [article setLink:link];
             [article setEnclosure:enclosure];
             [article setHasEnclosure:hasenclosure_flag];
-            [newDict setObject:article forKey:guid];
+            [cachedGuids addObject:guid];
+            [dict setObject:article forKey:guid];
         }
         [results close];
     }];
@@ -1930,14 +1930,13 @@ const NSInteger MA_Current_DB_Version = 18;
     // This is a good time to do a quick check to ensure that our
     // own count of unread is in sync with the folders count and fix
     // them if not.
+    Folder * folder = [self folderFromID:folderId];
     if (unread_count != [folder unreadCount])
     {
         NSLog(@"Fixing unread count for %@ (%ld on folder versus %ld in articles)", [folder name], (long)[folder unreadCount], (long)unread_count);
         NSInteger diff = (unread_count - [folder unreadCount]);
         [self setFolderUnreadCount:folder adjustment:diff];
     }
-
-	return newDict;
 }
 
 /* setSearchString
@@ -2173,49 +2172,32 @@ const NSInteger MA_Current_DB_Version = 18;
 /* arrayOfUnreadArticlesRefs
  * Retrieves an array of ArticleReference objects that represent all unread
  * articles in the specified folder.
+ * Note : when possible, you should use the interface provided by the Folder class instead of this
  */
 -(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId
 {
 	Folder * folder = [self folderFromID:folderId];
-	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[folder unreadCount]];
 	if (folder != nil)
 	{
-		if ([folder countOfCachedArticles] > 0)
-		{
-			// Messages already cached in this folder so use those. Note the use of
-			// reverseObjectEnumerator since the odds are that the unread articles are
-			// likely to be clustered with the most recent articles at the end of the
-			// array so it makes the code slightly faster.
-			NSInteger unreadCount = [folder unreadCount];
-			NSEnumerator * enumerator = [[folder articles] reverseObjectEnumerator];
-			Article * theRecord;
-
-			while (unreadCount > 0 && (theRecord = [enumerator nextObject]) != nil)
-				if (![theRecord isRead])
-				{
-					[newArray addObject:[ArticleReference makeReference:theRecord]];
-					--unreadCount;
-				}
-		}
-		else
-		{
-            FMDatabaseQueue *queue = databaseQueue;
-            [queue inDatabase:^(FMDatabase *db) {
-				FMResultSet * results = [db executeQuery:@"select message_id from messages where folder_id=? and read_flag=0", @(folderId)];
-				while ([results next])
-				{
-					NSString * guid = [results stringForColumn:@"message_id"];
-					[newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
-				}
-				[results close];
-			}];
-		}
+        NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[folder unreadCount]];
+        FMDatabaseQueue *queue = databaseQueue;
+        [queue inDatabase:^(FMDatabase *db) {
+            FMResultSet * results = [db executeQuery:@"select message_id from messages where folder_id=? and read_flag=0", @(folderId)];
+            while ([results next])
+            {
+                NSString * guid = [results stringForColumnIndex:0];
+                [newArray addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
+            }
+            [results close];
+        }];
+        return newArray;
 	}
-	return newArray;
+	else
+	    return nil;
 }
 
 /* arrayOfArticles
- * Retrieves an array containing all articles (except for text) for the
+ * Retrieves an array containing all articles (including text) for the
  * specified folder. If folderId is zero, all folders are searched. The
  * filterString option constrains the array to all those articles that
  * contain the specified filter.
@@ -2331,22 +2313,13 @@ const NSInteger MA_Current_DB_Version = 18;
 
 		if (success)
 		{
-			NSInteger count = [folder unreadCount];
 			if ([folder countOfCachedArticles] > 0)
 			{
-				NSEnumerator * enumerator = [[folder articles] objectEnumerator];
-				NSInteger remainingUnread = count;
-				Article * article;
-
-                while (remainingUnread > 0 && (article = [enumerator nextObject]) != nil) {
-					if (![article isRead])
-					{
-						[article markRead:YES];
-						--remainingUnread;
-					}
-                }
+			    // update the existing cache of articles and update the unread count
+			    [folder markArticlesInCacheRead];
 			}
-			[self setFolderUnreadCount:folder adjustment:-count];
+            // set the unread count to 0
+            [self setFolderUnreadCount:folder adjustment:-[folder unreadCount]];
 			result = YES;
 		}
 	}
