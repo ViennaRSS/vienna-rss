@@ -64,7 +64,7 @@
 #define IsUpdating(f)			([(f) nonPersistedFlags] & MA_FFlag_Updating)
 #define IsError(f)				([(f) nonPersistedFlags] & MA_FFlag_Error)
 
-@interface Folder : NSObject {
+@interface Folder : NSObject <NSCacheDelegate> {
 	NSInteger itemId;
 	NSInteger parentId;
 	NSInteger nextSiblingId;
@@ -79,7 +79,7 @@
 	BOOL containsBodies;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
-	NSMutableDictionary * cachedArticles;
+	NSCache * cachedArticles;
 	NSMutableOrderedSet * cachedGuids;
 }
 

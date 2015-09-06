@@ -88,7 +88,7 @@
 -(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId;
 -(BOOL)setFirstChild:(NSInteger)childId forFolder:(NSInteger)folderId;
 -(BOOL)setNextSibling:(NSUInteger)nextSiblingId forFolder:(NSInteger)folderId;
--(void)prepareCache:(NSMutableDictionary *)dict forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableOrderedSet *)cachedGuids;
+-(void)prepareCache:(NSCache *)cache forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableOrderedSet *)cachedGuids;
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification;
 
 // RSS folder functions

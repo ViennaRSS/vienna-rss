@@ -58,7 +58,8 @@ static NSArray * iconArray = nil;
 		isCached = NO;
 		containsBodies = NO;
 		hasPassword = NO;
-		cachedArticles = [NSMutableDictionary dictionary];
+		cachedArticles = [NSCache new];
+		[cachedArticles setDelegate:self];
 		cachedGuids = [NSMutableOrderedSet orderedSet];
 		attributes = [NSMutableDictionary dictionary];
 		[self setName:newName];
@@ -486,16 +487,22 @@ static NSArray * iconArray = nil;
  */
 -(unsigned)indexOfArticle:(Article *)article
 {
-    [self ensureCache];
-	return [cachedGuids indexOfObject:[article guid]];
+    @synchronized(self)
+    {
+        [self ensureCache];
+        return [cachedGuids indexOfObject:[article guid]];
+    }
 }
 
 /* articleFromGuid
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-    [self ensureCache];
-	return [cachedArticles objectForKey:guid];
+    @synchronized(self)
+    {
+        [self ensureCache];
+	    return [cachedArticles objectForKey:guid];
+	}
 }
 
 /* createArticle
@@ -507,6 +514,8 @@ static NSArray * iconArray = nil;
  */
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
 {
+@synchronized(self)
+  {
     // Prime the article cache
     [self ensureCache];
 
@@ -576,6 +585,7 @@ static NSArray * iconArray = nil;
 		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
     }
     return YES;
+  } // synchronized
 }
 
 /* setUnreadCount
@@ -605,7 +615,8 @@ static NSArray * iconArray = nil;
  */
 -(void)clearCache
 {
-@autoreleasepool {
+    @synchronized(self)
+    {
 		[cachedArticles removeAllObjects];
 		[cachedGuids removeAllObjects];
 		isCached = NO;
@@ -618,9 +629,12 @@ static NSArray * iconArray = nil;
  */
 -(void)removeArticleFromCache:(NSString *)guid
 {
-	NSAssert(isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
-	[cachedArticles removeObjectForKey:guid];
-	[cachedGuids removeObject:guid];
+    @synchronized(self)
+    {
+        NSAssert(isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
+        [cachedArticles removeObjectForKey:guid];
+        [cachedGuids removeObject:guid];
+    }
 }
 
 /* countOfCachedArticles
@@ -650,6 +664,8 @@ static NSArray * iconArray = nil;
  */
 -(void)markArticlesInCacheRead
 {
+@synchronized(self)
+  {
     NSInteger count = unreadCount;
     // Note the use of reverseObjectEnumerator
     // since the unread articles are likely to be clustered
@@ -666,6 +682,7 @@ static NSArray * iconArray = nil;
                 break;
         }
     }
+  } // synchronized
 }
 
 /* arrayOfUnreadArticlesRefs
@@ -673,6 +690,8 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)arrayOfUnreadArticlesRefs
 {
+@synchronized(self)
+  {
     if (isCached)
     {
         NSInteger count = unreadCount;
@@ -692,6 +711,7 @@ static NSArray * iconArray = nil;
     }
     else
         return [[Database sharedManager] arrayOfUnreadArticlesRefs:itemId];
+  } // synchronized
 }
 
 /* articlesWithFilter
@@ -699,6 +719,8 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)articlesWithFilter:(NSString *)fstring
 {
+@synchronized(self)
+  {
 	if ([fstring isEqualToString:@""])
 	{
         if (isCached && containsBodies)
@@ -706,7 +728,16 @@ static NSArray * iconArray = nil;
 			NSMutableArray * articles = [NSMutableArray arrayWithCapacity:[cachedGuids count]];
 			for (id object in cachedGuids)
 			{
-				[articles addObject:[cachedArticles objectForKey:object]];
+				Article * theArticle = [cachedArticles objectForKey:object];
+				if (theArticle != nil)
+				    [articles addObject:theArticle];
+				else
+				{   // some problem
+				    NSLog(@"Bug retrieving from cache in folder %ld : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)[articles count],(unsigned long)[cachedGuids count],object);
+				    isCached = NO;
+				    containsBodies = NO;
+				    break;
+				}
 			}
 			return articles;
 		}
@@ -729,6 +760,7 @@ static NSArray * iconArray = nil;
 	}
 	else
 	    return [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
+  } //synchronized
 }
 
 /* folderNameCompare
@@ -805,5 +837,16 @@ static NSArray * iconArray = nil;
 	attributes=nil;
 	cachedArticles=nil;
 	cachedGuids=nil;
+}
+
+#pragma mark NSCacheDelegate
+-(void)cache:(NSCache *)cache willEvictObject:(id)obj
+{
+    @synchronized(self)
+    {
+        isCached = NO;
+        containsBodies = NO;
+        [cachedGuids removeAllObjects];
+    }
 }
 @end

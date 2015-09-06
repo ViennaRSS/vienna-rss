@@ -1883,7 +1883,7 @@ const NSInteger MA_Current_DB_Version = 18;
 /* prepareCache
  * Returns a minimal cache of article information for the specified folder.
  */
--(void)prepareCache:(NSMutableDictionary *)dict forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableOrderedSet *)cachedGuids
+-(void)prepareCache:(NSCache *)cache forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableOrderedSet *)cachedGuids
 {
 	// Prime the folder cache
 	[self initFolderArray];
@@ -1922,7 +1922,7 @@ const NSInteger MA_Current_DB_Version = 18;
             [article setEnclosure:enclosure];
             [article setHasEnclosure:hasenclosure_flag];
             [cachedGuids addObject:guid];
-            [dict setObject:article forKey:guid];
+            [cache setObject:article forKey:guid];
         }
         [results close];
     }];
