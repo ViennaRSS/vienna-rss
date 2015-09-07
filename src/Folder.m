@@ -744,17 +744,22 @@ static NSArray * iconArray = nil;
         else
         {
             NSArray * articles = [[Database sharedManager] arrayOfArticles:itemId filterString:fstring];
-            isCached = NO;
-            [cachedArticles removeAllObjects];
-            [cachedGuids removeAllObjects];
-            for (id object in articles)
+            // Only feeds folders can be cached, as they are the only ones to guarantee
+            // bijection : one article <-> one guid
+            if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
             {
-                NSString * guid = [(Article *)object guid];
-                [cachedGuids addObject:guid];
-                [cachedArticles setObject:object forKey:guid];
+                isCached = NO;
+                [cachedArticles removeAllObjects];
+                [cachedGuids removeAllObjects];
+                for (id object in articles)
+                {
+                    NSString * guid = [(Article *)object guid];
+                    [cachedGuids addObject:guid];
+                    [cachedArticles setObject:object forKey:guid];
+                }
+                isCached = YES;
+                containsBodies = YES;
             }
-            isCached = YES;
-            containsBodies = YES;
             return articles;
         }
 	}
