@@ -1888,8 +1888,6 @@ const NSInteger MA_Current_DB_Version = 18;
 	// Prime the folder cache
 	[self initFolderArray];
 
-    [cachedGuids removeAllObjects];
-
     __block NSInteger unread_count = 0;
     
     FMDatabaseQueue *queue = databaseQueue;

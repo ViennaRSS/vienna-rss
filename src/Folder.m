@@ -654,7 +654,11 @@ static NSArray * iconArray = nil;
  -(void)ensureCache
  {
     if (!isCached)
+    {
+        [cachedGuids removeAllObjects];
+        [cachedArticles removeAllObjects];
         [[Database sharedManager] prepareCache:cachedArticles forFolder:itemId saveGuidsIn:cachedGuids];
+    }
     isCached = YES;
     // Note that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
 }
