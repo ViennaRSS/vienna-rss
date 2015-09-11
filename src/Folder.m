@@ -60,7 +60,7 @@ static NSArray * iconArray = nil;
 		hasPassword = NO;
 		cachedArticles = [NSCache new];
 		[cachedArticles setDelegate:self];
-		cachedGuids = [NSMutableOrderedSet orderedSet];
+		cachedGuids = [NSMutableArray array];
 		attributes = [NSMutableDictionary dictionary];
 		[self setName:newName];
 		[self setLastUpdate:[NSDate distantPast]];
@@ -540,7 +540,7 @@ static NSArray * iconArray = nil;
                 [article setStatus:ArticleStatusNew];
                 // add to the cache
 	            [cachedGuids addObject:articleGuid];
-	            [cachedArticles setObject:article forKey:articleGuid];
+	            [cachedArticles setObject:article forKey:[NSString stringWithString:articleGuid]];
                 if(![article isRead])
                     adjustment = 1;
             }
@@ -759,7 +759,7 @@ static NSArray * iconArray = nil;
                 {
                     NSString * guid = [(Article *)object guid];
                     [cachedGuids addObject:guid];
-                    [cachedArticles setObject:object forKey:guid];
+                    [cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
                 }
                 isCached = YES;
                 containsBodies = YES;

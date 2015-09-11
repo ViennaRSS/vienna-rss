@@ -80,7 +80,7 @@
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
 	NSCache * cachedArticles;
-	NSMutableOrderedSet * cachedGuids;
+	NSMutableArray * cachedGuids;
 }
 
 // Initialisation functions
