@@ -121,5 +121,10 @@
 	<string>VCS_FULL_HASH</string>
 	<key>VCSShortHash</key>
 	<string>VCS_SHORT_HASH</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
