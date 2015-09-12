@@ -27,12 +27,12 @@
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>vienna3plugin.icns</string>
-			<key>LSHandlerRank</key>
-			<string>Default</string>
 			<key>CFBundleTypeName</key>
 			<string>Vienna Plugin Package</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<string>YES</string>
 		</dict>
@@ -62,7 +62,7 @@
 	<key>CFBundleIconFile</key>
 	<string>vienna-3.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>uk.co.opencommunity.vienna2</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -101,6 +101,11 @@
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHumanReadableCopyright</key>
@@ -121,10 +126,5 @@
 	<string>VCS_FULL_HASH</string>
 	<key>VCSShortHash</key>
 	<string>VCS_SHORT_HASH</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 </dict>
 </plist>
