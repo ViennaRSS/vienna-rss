@@ -4595,7 +4595,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if ([itemIdentifier isEqualToString: @"Spinner"])
 	{
-		[item setLabel:nil];
+		[item setLabel:@""];
 		[item setPaletteLabel:NSLocalizedString(@"Progress", nil)];
 		//Only have the spinner hide when stopped for the real window, not for the customization pane
 		if (willBeInserted)
