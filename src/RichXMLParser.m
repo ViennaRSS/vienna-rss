@@ -37,6 +37,7 @@
 	-(void)setLastModified:(NSDate *)newDate;
 	-(void)ensureTitle:(FeedItem *)item;
 	-(void)identifyNamespacesPrefixes:(NSXMLElement *)element;
+    -(NSData *)preFlightValidation:(NSData *)xmlData;
 @end
 
 
@@ -51,9 +52,17 @@
 {
 	BOOL success = NO;
     NSError *error = nil;
-    NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
+    NSData * sanitizedData = [self preFlightValidation:xmlData];
+    NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:sanitizedData
                                                                  options:NSXMLNodeOptionsNone
                                                                        error:&error];
+
+	if (error) {
+		xmlDocument = [[NSXMLDocument alloc] initWithData:sanitizedData
+												  options: NSXMLDocumentTidyXML
+													error:&error];
+	}
+
     if (!error) {
         if([[xmlDocument.rootElement name] isEqualToString:@"rss"]) {
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:NO];
@@ -68,6 +77,38 @@
     xmlDocument = nil;
     
 	return success;
+}
+
+/* preFlightValidation
+ * Try and sanitise the XML data before the XML parser gets a chance to reject it.
+ */
+-(NSData *)preFlightValidation:(NSData *)xmlData
+{
+	NSUInteger count = [xmlData length];
+	const unsigned char * srcPtr = [xmlData bytes];
+	const unsigned char * srcEndPtr = srcPtr + count;
+
+	// We'll create another data stream with the converted characters
+	NSMutableData * newXmlData = [NSMutableData dataWithLength:count];
+	char * destPtr = [newXmlData mutableBytes];
+	NSUInteger destSize = count;
+	NSUInteger destIndex = 0;
+
+	while (srcPtr < srcEndPtr)
+	{
+		unsigned char ch = *srcPtr++;
+		// most C0 control characters are illegal in XML 1.0 (and highly discouraged in XML 1.1)
+		if ( (ch >= 0x01 && ch <= 0x08) || (ch == 0x0B || ch == 0x0C) || (ch >= 0x0E && ch <= 0x1F) )
+		{
+		    destPtr[destIndex++] = ' ';
+		}
+		else
+			destPtr[destIndex++] = ch;
+	}
+	NSAssert(destIndex == destSize, @"Did not copy all data bytes to destination buffer");
+	[newXmlData setLength:destIndex];
+
+	return newXmlData;
 }
 
 /* extractFeeds
