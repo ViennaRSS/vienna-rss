@@ -267,7 +267,6 @@ static Preferences * _standardPreferences = nil;
 	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_Check_Frequency] forKey:MAPref_CheckFrequency];
 	[defaultValues setObject:[NSNumber numberWithFloat:MA_Default_Read_Interval] forKey:MAPref_MarkReadInterval];
 	[defaultValues setObject:[NSNumber numberWithInt:MA_Default_RefreshThreads] forKey:MAPref_RefreshThreads];
-	[defaultValues setObject:[NSArray arrayWithObjects:nil] forKey:MAPref_ArticleListColumns];
 	[defaultValues setObject:MA_DefaultStyleName forKey:MAPref_ActiveStyleName];
 	[defaultValues setObject:[NSNumber numberWithFloat:1.0] forKey:MAPref_ActiveTextSizeMultiplier];
 	[defaultValues setObject:[NSNumber numberWithInteger:MA_Default_BackTrackQueueSize] forKey:MAPref_BacktrackQueueSize];

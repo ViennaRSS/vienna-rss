@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <development version="6300" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -25,6 +26,7 @@
                     <textField verticalHuggingPriority="750" id="917">
                         <rect key="frame" x="108" y="4" width="727" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" id="1367">
                             <font key="font" metaFont="smallSystem"/>
                             <string key="title" base64-UTF8="YES">
@@ -37,6 +39,7 @@ Cg
                     <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="918" customClass="ClickableProgressIndicator">
                         <rect key="frame" x="772" y="2" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                        <animations/>
                     </progressIndicator>
                     <splitView vertical="YES" id="993" customClass="ThinSplitView">
                         <rect key="frame" x="-1" y="22" width="944" height="603"/>
@@ -55,7 +58,9 @@ Cg
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="284" height="601"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <animations/>
                                             </view>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -69,6 +74,7 @@ Cg
                                                     <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" autosaveName="outViewer" rowHeight="16" indentationPerLevel="16" autoresizesOutlineColumn="YES" outlineTableColumn="722" id="728" customClass="FolderView">
                                                         <rect key="frame" x="0.0" y="0.0" width="288" height="18"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <animations/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -93,26 +99,33 @@ Cg
                                                         </connections>
                                                     </outlineView>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </clipView>
+                                            <animations/>
                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1383">
                                                 <rect key="frame" x="-100" y="-100" width="178" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
+                                                <animations/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="1382">
                                                 <rect key="frame" x="-30" y="0.0" width="15" height="590"/>
                                                 <autoresizingMask key="autoresizingMask"/>
+                                                <animations/>
                                             </scroller>
                                         </scrollView>
                                         <box wantsLayer="YES" verticalHuggingPriority="750" alphaValue="0.54225349426269531" title="Box" boxType="separator" titlePosition="noTitle" id="1398">
                                             <rect key="frame" x="0.0" y="600" width="286" height="5"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <font key="titleFont" metaFont="system"/>
                                         </box>
                                     </subviews>
+                                    <animations/>
                                 </view>
+                                <animations/>
                                 <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                 <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <font key="titleFont" size="11" name="LucidaGrande"/>
@@ -124,6 +137,7 @@ Cg
                                     <customView id="1238" customClass="PSMTabBarControl">
                                         <rect key="frame" x="-1" y="581" width="649" height="22"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <connections>
                                             <outlet property="delegate" destination="1227" id="1242"/>
                                             <outlet property="nextKeyView" destination="1218" id="1247"/>
@@ -134,12 +148,14 @@ Cg
                                     <tabView type="noTabsNoBorder" id="1218">
                                         <rect key="frame" x="-1" y="0.0" width="650" height="582"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Tab" identifier="1" id="1221">
                                                 <view key="view" id="1222">
                                                     <rect key="frame" x="0.0" y="0.0" width="650" height="582"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <animations/>
                                                 </view>
                                             </tabViewItem>
                                         </tabViewItems>
@@ -148,8 +164,10 @@ Cg
                                         </connections>
                                     </tabView>
                                 </subviews>
+                                <animations/>
                             </customView>
                         </subviews>
+                        <animations/>
                         <holdingPriorities>
                             <real value="250"/>
                             <real value="250"/>
@@ -171,6 +189,7 @@ Cg
                                 </configuration>
                             </ciFilter>
                         </contentFilters>
+                        <animations/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
@@ -178,6 +197,7 @@ Cg
                     <button focusRingType="none" id="1400">
                         <rect key="frame" x="906" y="0.0" width="22" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="filter-icon" imagePosition="overlaps" alignment="center" focusRingType="none" inset="2" id="1401">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -189,6 +209,7 @@ Cg
                     <textField verticalHuggingPriority="750" id="1403">
                         <rect key="frame" x="793" y="0.0" width="114" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="Current Filter" id="1404">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -196,6 +217,7 @@ Cg
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <animations/>
             </view>
         </window>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
@@ -912,6 +934,7 @@ CA
         <customView id="738" userLabel="FoldersTree" customClass="FoldersTree">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
+            <animations/>
             <connections>
                 <outlet property="controller" destination="233" id="1171"/>
                 <outlet property="folderSplitView" destination="993" id="1281"/>
@@ -925,6 +948,7 @@ CA
                 <button id="1052">
                     <rect key="frame" x="18" y="15" width="363" height="18"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <animations/>
                     <buttonCell key="cell" type="check" title="Preserve group folders in exported file" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="1368">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -933,6 +957,7 @@ CA
                 <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" id="861">
                     <rect key="frame" x="18" y="37" width="363" height="38"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <animations/>
                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     <size key="cellSize" width="363" height="18"/>
                     <size key="intercellSpacing" width="4" height="2"/>
@@ -954,6 +979,7 @@ CA
                     </cells>
                 </matrix>
             </subviews>
+            <animations/>
         </customView>
         <customView id="971" userLabel="ArticleDisplayView" customClass="ArticleListView">
             <rect key="frame" x="0.0" y="0.0" width="700" height="609"/>
@@ -980,6 +1006,7 @@ CA
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" autosaveColumns="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <animations/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -988,23 +1015,30 @@ CA
                                                     </connections>
                                                 </tableView>
                                             </subviews>
+                                            <animations/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
+                                        <animations/>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1385">
                                             <rect key="frame" x="0.0" y="-30" width="683" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="1384">
                                             <rect key="frame" x="-30" y="17" width="15" height="248"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </scroller>
                                         <tableHeaderView key="headerView" id="1386">
                                             <rect key="frame" x="0.0" y="0.0" width="698" height="17"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </tableHeaderView>
                                     </scrollView>
                                 </subviews>
+                                <animations/>
                             </view>
+                            <animations/>
                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <font key="titleFont" size="11" name="LucidaGrande"/>
@@ -1019,20 +1053,25 @@ CA
                                     <customView id="1059" customClass="ArticleView">
                                         <rect key="frame" x="0.0" y="0.0" width="698" height="300"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </customView>
                                 </subviews>
+                                <animations/>
                             </view>
+                            <animations/>
                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <font key="titleFont" size="11" name="LucidaGrande"/>
                         </box>
                     </subviews>
+                    <animations/>
                     <holdingPriorities>
                         <real value="250"/>
                         <real value="250"/>
                     </holdingPriorities>
                 </splitView>
             </subviews>
+            <animations/>
             <connections>
                 <outlet property="articleController" destination="1164" id="1167"/>
                 <outlet property="articleList" destination="977" id="996"/>
@@ -1047,16 +1086,17 @@ CA
             <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="lQ8-bu-Pg4">
+                <scrollView canDrawConcurrently="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="lQ8-bu-Pg4">
                     <rect key="frame" x="0.0" y="0.0" width="701" height="607"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="emU-La-Fur">
                         <rect key="frame" x="1" y="1" width="699" height="605"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="1027" height="605"/>
+                            <tableView canDrawConcurrently="YES" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="NgO-hM-mCz" customClass="ExtendedTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="1027" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -1077,18 +1117,23 @@ CA
                                 </tableColumns>
                             </tableView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
+                    <animations/>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="S05-md-m5A">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
+                    <scroller key="verticalScroller" hidden="YES" canDrawConcurrently="YES" verticalHuggingPriority="750" horizontal="NO" id="fza-gl-TLT">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </scroller>
                 </scrollView>
             </subviews>
+            <animations/>
             <connections>
                 <outlet property="articleController" destination="1164" id="1168"/>
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
@@ -1109,6 +1154,7 @@ CA
         <customView id="1227" userLabel="BrowserView" customClass="BrowserView">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
+            <animations/>
             <connections>
                 <outlet property="tabBarControl" destination="1238" id="1243"/>
                 <outlet property="tabView" destination="1218" id="1230"/>
@@ -1121,6 +1167,7 @@ CA
                 <searchField verticalHuggingPriority="750" id="1252">
                     <rect key="frame" x="0.0" y="0.0" width="239" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <animations/>
                     <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="searchStrings" id="1370">
                         <font key="font" metaFont="cellTitle"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1132,6 +1179,7 @@ CA
                     </connections>
                 </searchField>
             </subviews>
+            <animations/>
         </customView>
         <customView id="1267" userLabel="ActionButton">
             <rect key="frame" x="0.0" y="0.0" width="40" height="28"/>
@@ -1140,12 +1188,14 @@ CA
                 <button id="1274" customClass="PopupButton">
                     <rect key="frame" x="0.0" y="0.0" width="40" height="25"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <animations/>
                     <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="popupMenuButton.tiff" imagePosition="only" alignment="center" inset="2" id="1371">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
             </subviews>
+            <animations/>
         </customView>
         <customView id="1288" userLabel="StdEnclosureView" customClass="StdEnclosureView">
             <rect key="frame" x="0.0" y="0.0" width="491" height="49"/>
@@ -1154,6 +1204,7 @@ CA
                 <textField verticalHuggingPriority="750" id="1292" customClass="DSClickableURLTextField">
                     <rect key="frame" x="64" y="8" width="311" height="14"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                    <animations/>
                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="(filename)" id="1375">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1163,6 +1214,7 @@ CA
                 <button verticalHuggingPriority="750" id="1291">
                     <rect key="frame" x="374" y="6" width="103" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                    <animations/>
                     <buttonCell key="cell" type="push" title="(button)" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -1174,6 +1226,7 @@ CA
                 <textField verticalHuggingPriority="750" id="1290">
                     <rect key="frame" x="64" y="25" width="311" height="15"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                    <animations/>
                     <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="(label)" id="1373">
                         <font key="font" metaFont="smallSystemBold"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1183,16 +1236,19 @@ CA
                 <imageView id="1289">
                     <rect key="frame" x="10" y="8" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <animations/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
                 </imageView>
                 <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" title="Box" boxType="separator" titlePosition="noTitle" id="1392">
                     <rect key="frame" x="0.0" y="46" width="491" height="5"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <animations/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
             </subviews>
+            <animations/>
             <connections>
                 <outlet property="downloadButton" destination="1291" id="1297"/>
                 <outlet property="fileImage" destination="1289" id="1294"/>
@@ -1207,6 +1263,7 @@ CA
                 <button id="1313">
                     <rect key="frame" x="576" y="6" width="17" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                    <animations/>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="smallCloseButton" imagePosition="only" alignment="center" alternateImage="pressedCloseButton" inset="2" id="1379">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -1218,6 +1275,7 @@ CA
                 <popUpButton verticalHuggingPriority="750" id="1306">
                     <rect key="frame" x="398" y="2" width="150" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                    <animations/>
                     <popUpButtonCell key="cell" type="push" title="Item3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1308" id="1378">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -1231,6 +1289,7 @@ CA
                 <textField verticalHuggingPriority="750" id="1305">
                     <rect key="frame" x="304" y="7" width="94" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
+                    <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="1377">
                         <font key="font" metaFont="smallSystem"/>
                         <string key="title">Filter by:
@@ -1242,6 +1301,7 @@ CA
                 <searchField verticalHuggingPriority="750" id="1304">
                     <rect key="frame" x="6" y="5" width="286" height="19"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <animations/>
                     <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" bezelStyle="round" sendsWholeSearchString="YES" recentsAutosaveName="filterStrings" id="1376">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1255,11 +1315,13 @@ CA
                 <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="1391">
                     <rect key="frame" x="0.0" y="26" width="599" height="5"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <animations/>
                     <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                     <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <font key="titleFont" metaFont="system"/>
                 </box>
             </subviews>
+            <animations/>
             <connections>
                 <outlet property="filterByLabel" destination="1305" id="1320"/>
                 <outlet property="filterCloseButton" destination="1313" id="1324"/>
