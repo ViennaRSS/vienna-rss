@@ -98,7 +98,7 @@
 	{
 		unsigned char ch = *srcPtr++;
 		// most C0 control characters are illegal in XML 1.0 (and highly discouraged in XML 1.1)
-		if ( (ch >= 0x01 && ch <= 0x08) || (ch == 0x0B || ch == 0x0C) || (ch >= 0x0E && ch <= 0x1F) )
+		if (ch < 0x20 && ch != 0x09 && ch != 0x0A && ch != 0x0D)
 		{
 		    destPtr[destIndex++] = ' ';
 		}
