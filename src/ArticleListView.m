@@ -140,7 +140,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Create report and condensed view attribute dictionaries
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	[style setLineBreakMode:NSLineBreakByTruncatingTail];
+	[style setLineBreakMode:NSLineBreakByClipping];
 	
 	reportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
 	unreadReportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
