@@ -314,7 +314,6 @@
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
-		[[[Database sharedManager] folderFromID:currentFolderId] clearCache];
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 		[self sortArticles];
@@ -374,8 +373,6 @@
 		Folder * folder = [[Database sharedManager] folderFromID:folderIdOfArticleToPreserve];
 		if (folder != nil)
 		{
-			[folder clearCache];
-			[folder articles];
 			articleToAdd = [folder articleFromGuid:guidOfArticleToPreserve];
 		}
 		if (articleToAdd == nil)
@@ -703,7 +700,7 @@
 		else if (IsRSSFolder(folder))
 		{
             if (undoFlag) {
-				[refArray addObjectsFromArray:[[Database sharedManager] arrayOfUnreadArticlesRefs:folderId]];
+				[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
             }
 			if ([[Database sharedManager] markFolderRead:folderId])
 			{
@@ -713,7 +710,7 @@
 		}
 		else if (IsGoogleReaderFolder(folder))
 		{
-			NSArray * articleArray = [[Database sharedManager] arrayOfUnreadArticlesRefs:folderId];
+			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
             if (undoFlag) {
 				[refArray addObjectsFromArray:articleArray];
             }
@@ -731,25 +728,6 @@
 		}
 	}
 	return refArray;
-}
-
-/* currentCacheContainsFolder
- * Scans the current article cache to determine if any article is a member of the specified
- * folder and returns YES if so.
- */
--(BOOL)currentCacheContainsFolder:(int)folderId
-{
-	int count = [currentArrayOfArticles count];
-	int index = 0;
-	
-	while (index < count)
-	{
-		Article * anArticle = [currentArrayOfArticles objectAtIndex:index];
-		if ([anArticle folderId] == folderId)
-			return YES;
-		++index;
-	}
-	return NO;
 }
 
 /* markAllReadByReferencesArray

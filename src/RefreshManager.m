@@ -968,8 +968,7 @@
 				NSArray * guidHistory = [dbManager guidHistoryForFolderId:folderId];
 				for (Article * article in articleArray)
 				{
-					if ([dbManager createArticle:folderId
-                                         article:article
+					if ([folder createArticle:article
                                      guidHistory:guidHistory] && ([article status] == ArticleStatusNew)) {
 						++newArticlesFromFeed;
                     }

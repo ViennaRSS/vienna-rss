@@ -64,7 +64,7 @@
 #define IsUpdating(f)			([(f) nonPersistedFlags] & MA_FFlag_Updating)
 #define IsError(f)				([(f) nonPersistedFlags] & MA_FFlag_Error)
 
-@interface Folder : NSObject {
+@interface Folder : NSObject <NSCacheDelegate> {
 	NSInteger itemId;
 	NSInteger parentId;
 	NSInteger nextSiblingId;
@@ -76,9 +76,11 @@
 	NSUInteger nonPersistedFlags;
 	BOOL isCached;
 	BOOL hasPassword;
+	BOOL containsBodies;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
-	NSMutableDictionary * cachedArticles;
+	NSCache * cachedArticles;
+	NSMutableArray * cachedGuids;
 }
 
 // Initialisation functions
@@ -92,7 +94,6 @@
 -(NSString *)username;
 -(NSString *)password;
 -(NSDictionary *)attributes;
--(NSArray *)articles;
 -(NSArray *)articlesWithFilter:(NSString *)fstring;
 -(NSInteger)parentId;
 -(NSInteger)itemId;
@@ -133,9 +134,10 @@
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
 -(unsigned)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
--(void)addArticleToCache:(Article *)newArticle;
+-(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(void)removeArticleFromCache:(NSString *)guid;
--(void)markFolderEmpty;
+-(void)markArticlesInCacheRead;
+-(NSArray *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 -(NSString *)feedSourceFilePath;

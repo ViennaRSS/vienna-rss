@@ -88,6 +88,7 @@
 -(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId;
 -(BOOL)setFirstChild:(NSInteger)childId forFolder:(NSInteger)folderId;
 -(BOOL)setNextSibling:(NSUInteger)nextSiblingId forFolder:(NSInteger)folderId;
+-(void)prepareCache:(NSCache *)cache forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableArray *)cachedGuids;
 -(void)handleAutoSortFoldersTreeChange:(NSNotification *)notification;
 
 // RSS folder functions
@@ -108,7 +109,8 @@
 -(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
--(BOOL)createArticle:(NSInteger)folderID article:(Article *)article guidHistory:(NSArray *)guidHistory;
+-(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;
+-(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article;
 -(BOOL)deleteArticleFromFolder:(NSInteger)folderId guid:(NSString *)guid;
 -(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
 -(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
