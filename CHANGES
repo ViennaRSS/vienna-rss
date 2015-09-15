@@ -8,6 +8,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.0 Beta 3
+------------
+- Improved handling of feeds having duplicate GUIDs
+- Fixed rendering of feeds having XHTML bodies
+- Handle feeds having illegal characters
+- Allow concurrent drawings in unified layout
+- Converted code to use Automatic Reference Count
+- Improved cache mechanism for articles (using NSCache)
+- Compiled with XCode 7 GM under OS X El Capitan GM
+
 3.1.0 Beta 2
 ------------
 - Fix unwanted scrolls in Unified layout
