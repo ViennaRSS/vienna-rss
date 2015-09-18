@@ -847,7 +847,10 @@
 */
 -(void)handleFilterChange:(NSNotification *)nc
 {
-	[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+    @synchronized(mainArticleView)
+    {
+	    [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+	}
 }
 
 /* handleFolderNameChange
@@ -856,9 +859,12 @@
 */
 -(void)handleFolderNameChange:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == currentFolderId)
-		[mainArticleView refreshArticlePane];
+    @synchronized(mainArticleView)
+    {
+        int folderId = [(NSNumber *)[nc object] intValue];
+        if (folderId == currentFolderId)
+            [mainArticleView refreshArticlePane];
+    }
 }
 
 /* handleRefreshArticle
@@ -866,7 +872,10 @@
 */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-	[mainArticleView handleRefreshArticle:nc];
+    @synchronized(mainArticleView)
+    {
+        [mainArticleView handleRefreshArticle:nc];
+    }
 }
 
 /* handleFolderUpdate
@@ -874,13 +883,16 @@
 */
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId != currentFolderId)
-		return;
-	
-	Folder * folder = [[Database sharedManager] folderFromID:folderId];
-	if (IsSmartFolder(folder) || IsTrashFolder(folder))
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    @synchronized(mainArticleView)
+    {
+        int folderId = [(NSNumber *)[nc object] intValue];
+        if (folderId != currentFolderId)
+            return;
+
+        Folder * folder = [[Database sharedManager] folderFromID:folderId];
+        if (IsSmartFolder(folder) || IsTrashFolder(folder))
+            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    }
 }
 
 /* setArticleToPreserve
