@@ -135,6 +135,8 @@
  */
 -(void)setLayout:(int)newLayout
 {
+	Article * currentSelectedArticle = [self selectedArticle];
+
 	switch (newLayout)
 	{
 		case MA_Layout_Report:
@@ -148,6 +150,12 @@
 	}
 
 	[[Preferences standardPreferences] setLayout:newLayout];
+	if (currentSelectedArticle != nil)
+	{
+	    [mainArticleView selectFolderAndArticle:currentFolderId guid:[currentSelectedArticle guid]];
+	    [self ensureSelectedArticle:NO];
+	}
+
 }
 
 /* refreshCurrentFolder
