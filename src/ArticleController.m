@@ -124,6 +124,7 @@
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
         
     }
@@ -946,6 +947,19 @@
         Folder * folder = [[Database sharedManager] folderFromID:folderId];
         if (IsSmartFolder(folder) || IsTrashFolder(folder))
             [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    }
+}
+
+/* handleFolderAdded
+* Called if a folder was added.
+*/
+-(void)handleFolderAdded:(NSNotification *)nc
+{
+    @synchronized(mainArticleView)
+    {
+        Folder * folder = (Folder *)[nc object];
+        currentFolderId = [folder itemId];
+        [mainArticleView selectFolderAndArticle:currentFolderId guid:nil];
     }
 }
 
