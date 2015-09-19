@@ -27,8 +27,6 @@
 #import "AdvancedPreferencesViewController.h"
 
 #import "FoldersTree.h"
-#import "ArticleListView.h"
-#import "UnifiedDisplayView.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
@@ -239,8 +237,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[ASIHTTPRequest setDefaultUserAgentString:[NSString stringWithFormat:MA_DefaultUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord]]];
         
 		[foldersTree initialiseFoldersTree];
-		[mainArticleView initialiseArticleView];
-		[unifiedListView initTableView];
 		
 		// If the statusbar is hidden, also hide the highlight line on its top and the filter button.
 		if (![self isStatusBarVisible])
@@ -1007,32 +1003,10 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		[self setPersistedFilterBarState:NO withAnimation:NO];
 		}
 	
-	switch (newLayout)
-	{
-		case MA_Layout_Report:
-			[browserView setPrimaryTabItemView:mainArticleView];
-			if (refreshFlag)
-				[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-			[articleController setMainArticleView:mainArticleView];
-			break;
-			
-		case MA_Layout_Condensed:
-			[browserView setPrimaryTabItemView:mainArticleView];
-			if (refreshFlag)
-				[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-			[articleController setMainArticleView:mainArticleView];
-			break;
-			
-		case MA_Layout_Unified:
-			[browserView setPrimaryTabItemView:unifiedListView];
-			if (refreshFlag)
-				[unifiedListView refreshFolder:MA_Refresh_RedrawList];
-			[mainWindow display];
-			[articleController setMainArticleView:unifiedListView];
-			break;
-	}
-	
-	[[Preferences standardPreferences] setLayout:newLayout];
+	[articleController setLayout:newLayout];
+    if (refreshFlag)
+        [[articleController mainArticleView] refreshFolder:MA_Refresh_RedrawList];
+	[browserView setPrimaryTabItemView:[articleController mainArticleView]];
 	//restore filter bar state if necessary
 	if (visibleFilterBar)
 		[self setPersistedFilterBarState:YES withAnimation:NO];
@@ -2271,7 +2245,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	[self updateAlternateMenuTitle];
 	[foldersTree updateAlternateMenuTitle];
-	[mainArticleView updateAlternateMenuTitle];
+	[articleController updateAlternateMenuTitle];
 	[self updateNewArticlesNotification];
 }
 
@@ -2320,8 +2294,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Field * field = [menuItem representedObject];
 	
 	[field setVisible:![field visible]];
-	[mainArticleView updateVisibleColumns];
-	[mainArticleView saveTableSettings];
+	[articleController updateVisibleColumns];
+	[articleController saveTableSettings];
 }
 
 /* doSortColumn
@@ -2639,7 +2613,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				[self deleteFolder:self];
 				return YES;
 			}
-			else if ([mainWindow firstResponder] == [mainArticleView mainView])
+			else if ([mainWindow firstResponder] == [[articleController mainArticleView] mainView])
 			{
 				[self deleteMessage:self];
 				return YES;
@@ -3703,7 +3677,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if ([foldersTree actualSelection] != [db searchFolderId])
 			[foldersTree selectFolder:[db searchFolderId]];
 		else
-			[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+			[[articleController mainArticleView] refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 }
 
@@ -4202,7 +4176,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	SEL	theAction = [menuItem action];
 	BOOL isMainWindowVisible = [mainWindow isVisible];
 	BOOL isAnyArticleView = [browserView activeTabItemView] == [browserView primaryTabItemView];
-	BOOL isArticleView = [browserView activeTabItemView] == mainArticleView;
+	BOOL isArticleView = [browserView activeTabItemView] == [articleController mainArticleView];
 	BOOL flag;
 	
 	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag])

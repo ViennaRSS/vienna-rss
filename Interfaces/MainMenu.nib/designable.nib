@@ -919,7 +919,6 @@ CA
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
                 <outlet property="foldersTree" destination="738" id="739"/>
-                <outlet property="mainArticleView" destination="971" id="989"/>
                 <outlet property="mainWindow" destination="21" id="239"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="searchView" destination="1251" id="1254"/>
@@ -928,7 +927,6 @@ CA
                 <outlet property="splitView1" destination="993" id="994"/>
                 <outlet property="statusText" destination="917" id="919"/>
                 <outlet property="stylesMenu" destination="826" id="1051"/>
-                <outlet property="unifiedListView" destination="1148" id="1159"/>
             </connections>
         </customObject>
         <customView id="738" userLabel="FoldersTree" customClass="FoldersTree">
@@ -1143,7 +1141,9 @@ CA
         </customView>
         <customObject id="1164" userLabel="ArticleController" customClass="ArticleController">
             <connections>
+                <outlet property="articleListView" destination="971" id="CtF-Wy-tWn"/>
                 <outlet property="foldersTree" destination="738" id="1166"/>
+                <outlet property="unifiedListView" destination="1148" id="BZB-bx-zs0"/>
             </connections>
         </customObject>
         <customObject id="1175" userLabel="SUUpdater" customClass="SUUpdater">

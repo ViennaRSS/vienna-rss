@@ -28,6 +28,8 @@
 #import "StringExtensions.h"
 #import "GoogleReader.h"
 #import "RefreshManager.h"
+#import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -128,6 +130,26 @@
     return self;
 }
 
+/* setLayout
+ * Changes the layout of the panes.
+ */
+-(void)setLayout:(int)newLayout
+{
+	switch (newLayout)
+	{
+		case MA_Layout_Report:
+		case MA_Layout_Condensed:
+			mainArticleView = articleListView;
+			break;
+
+		case MA_Layout_Unified:
+			mainArticleView = unifiedListView;
+			break;
+	}
+
+	[[Preferences standardPreferences] setLayout:newLayout];
+}
+
 /* refreshCurrentFolder
  */
 -(void)refreshCurrentFolder
@@ -159,6 +181,30 @@
 -(void)saveTableSettings
 {
 	[mainArticleView saveTableSettings];
+}
+
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ */
+ -(void)updateAlternateMenuTitle
+{
+	if (mainArticleView ==  articleListView)
+	{
+		[articleListView updateAlternateMenuTitle];
+	}
+	else
+	{
+		[unifiedListView updateAlternateMenuTitle];
+	}
+}
+
+/* updateVisibleColumns
+ * For relevant layouts, adapt table settings
+ */
+-(void)updateVisibleColumns
+{
+    if (mainArticleView ==  articleListView)
+        [articleListView updateVisibleColumns];
 }
 
 /* selectedArticle

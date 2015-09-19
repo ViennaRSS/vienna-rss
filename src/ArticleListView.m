@@ -123,6 +123,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[[articleText preferences] setUsesPageCache:NO];
 	[articleText setMaintainsBackForwardList:NO];
 	[[articleText backForwardList] setPageCacheSize:0];
+
+    [self initialiseArticleView];
 }
 
 /* initialiseArticleView

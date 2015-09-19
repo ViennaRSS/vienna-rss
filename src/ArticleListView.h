@@ -70,7 +70,6 @@
 }
 
 // Public functions
--(void)initialiseArticleView;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
