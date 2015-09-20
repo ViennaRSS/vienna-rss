@@ -29,24 +29,41 @@ Tags should be in one of the following formats:
  2.	Make sure that the "CHANGES" file is up to date.
  3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
  4.	Commit anything unstaged
- 5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead). Push the tag to ViennaRSS' master at Github (`git push --tags ViennaRSS master`).
+ 5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
  6.	Run `make clean`.
- 7.	Run `make release`.
- 8.	Upload the contents of `Deployment/Uploads` (found in the build directory) using the following steps.
-  (Note: I'm using Vienna 3.0.0_beta2, 3.0.0_rc1 and 3.0.0 as examples here.)
+ 7.	Run `make release`. Check the last displayed messages to ensure yourself that the application is correctly signed.
+ 8.	Push the tag to ViennaRSS' master at Github (`git push --tags ViennaRSS master`).
+ 9.	Upload the contents of `Deployment/Uploads` (found in the build directory) using the following steps.
+  (Note: I'm using Vienna 3.1.0_beta4, 3.1.0_rc1 and 3.1.0 as examples here.)
 
-	1. Login to SourceForge's file system with your admin account.  `sftp <username>@frs.sourceforge.net` where `<username>` is your SourceForge user name, then `cd /home/frs/project/vienna-rss/`.
-	2. Create a new folder : for beta releases, it will be something of the form `TestVersions/3.0.0_beta2/` ; for release candidate releases, it will be like `TestVersions/3.0.0_rc1/` ; and for stable releases, something like `ReleasedVersions/3.0.0/`. _Ensure that any directories you have created are set to be group writable_.
-	4. Upload the two .tgz files file from the build/Deployment/Uploads folder to the newly created folder (filenames should look like "Vienna3.0.0_beta1.tgz" and "Vienna3.0.0_beta1.5b272a6-dSYM.tgz")
-	4. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
-	5. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.0.0.tgz" and set it as default download for Mac OS X. Don't do this for beta releases!
-	6. Login to the Vienna web site. `sftp <username>@web.sourceforge.net` where `<username>` is your SourceForge user name.
-	7. Upload `changelog.xml` (or `changelog_beta.xml` or `changelog_rc` accordingly) and the noteson3.0.0_beta1.html file via sftp to `/home/project-web/vienna-rss/htdocs`.
-	8. If you upload a release candidate, change changelog_beta.xml to be a symlink to the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a symlink to the new changelog.xml
-	9. Ensure also that these files are set to be group writable.
-	10. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
-	11. Post an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
-  9. If you haven't yet, push the new tag to Github (`git push --tags ViennaRSS master`)
+### On Github:
+
+   1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
+   2. Choose "Draft a new release", type the tag name (`v/3.1.0_beta4`), a description ("Vienna 3.1.0 Beta 4"). Upload the `Vienna3.1.0_beta4.tgz` file.
+   3. For beta and release candidates, check the "This is a prerelease" box.
+   4. Click the "Publish" button.
+
+### On Bintray.com:
+	
+   5. Go to <https://bintray.com/viennarss/vienna-rss>
+   6. Choose "New version".
+   7. Fill the name ("Vienna 3.1.0 Beta 4"), the description from the version notes, the VCS tag (`v/3.1.0_beta4`) and validate.
+   8. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta4/view>), go to the upload page <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta4/upload> and upload the two .tgz files (whose name should be like `Vienna3.1.0_beta1.tgz` and `Vienna3.1.0_beta4.5b272a6-dSYM.tgz`).
+   9. Save your changes, and click "Publish".
+   10. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta3/#files>), select the binary ("Vienna3.1.0_beta1.tgz") and choose "Show in download list" in the contextual menu.
+
+### On Sourceforge.net:
+
+   11. Check your email and verify that you have a message from Sourceforge stating "GitHub Downloads Import Complete".
+   12. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
+   13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.1.0.tgz" and set it as default download for Mac OS X. Don't do this for beta releases!
+   14. Login to the Vienna web site directory with your admin account. `sftp <username>@web.sourceforge.net` where `<username>` is your SourceForge user name.
+   15. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.1.0_beta4.html` file via sftp to `/home/project-web/vienna-rss/htdocs`.
+   16. If you upload a release candidate, change changelog_beta.xml to be a copy of the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a copy of the new changelog.xml
+   17. Ensure that these files are set to be group writable.
+   18. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
+
+Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
 
 
  
