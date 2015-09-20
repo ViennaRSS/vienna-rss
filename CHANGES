@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.0 Beta 4
+------------
+- Fix a crash
+- Ensure current article remains visible when changing layout
+- Display articles of any newly added folder
+- Some code refactoring
+
 3.1.0 Beta 3
 ------------
 - Improved handling of feeds having duplicate GUIDs
