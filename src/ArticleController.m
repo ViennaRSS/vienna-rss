@@ -28,6 +28,8 @@
 #import "StringExtensions.h"
 #import "GoogleReader.h"
 #import "RefreshManager.h"
+#import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
 
 // Private functions
 @interface ArticleController (Private)
@@ -122,10 +124,39 @@
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
         
     }
     return self;
+}
+
+/* setLayout
+ * Changes the layout of the panes.
+ */
+-(void)setLayout:(int)newLayout
+{
+	Article * currentSelectedArticle = [self selectedArticle];
+
+	switch (newLayout)
+	{
+		case MA_Layout_Report:
+		case MA_Layout_Condensed:
+			mainArticleView = articleListView;
+			break;
+
+		case MA_Layout_Unified:
+			mainArticleView = unifiedListView;
+			break;
+	}
+
+	[[Preferences standardPreferences] setLayout:newLayout];
+	if (currentSelectedArticle != nil)
+	{
+	    [mainArticleView selectFolderAndArticle:currentFolderId guid:[currentSelectedArticle guid]];
+	    [self ensureSelectedArticle:NO];
+	}
+
 }
 
 /* refreshCurrentFolder
@@ -159,6 +190,30 @@
 -(void)saveTableSettings
 {
 	[mainArticleView saveTableSettings];
+}
+
+/* updateAlternateMenuTitle
+ * Sets the approprate title for the alternate item in the contextual menu
+ */
+ -(void)updateAlternateMenuTitle
+{
+	if (mainArticleView ==  articleListView)
+	{
+		[articleListView updateAlternateMenuTitle];
+	}
+	else
+	{
+		[unifiedListView updateAlternateMenuTitle];
+	}
+}
+
+/* updateVisibleColumns
+ * For relevant layouts, adapt table settings
+ */
+-(void)updateVisibleColumns
+{
+    if (mainArticleView ==  articleListView)
+        [articleListView updateVisibleColumns];
 }
 
 /* selectedArticle
@@ -847,7 +902,10 @@
 */
 -(void)handleFilterChange:(NSNotification *)nc
 {
-	[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+    @synchronized(mainArticleView)
+    {
+	    [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
+	}
 }
 
 /* handleFolderNameChange
@@ -856,9 +914,12 @@
 */
 -(void)handleFolderNameChange:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId == currentFolderId)
-		[mainArticleView refreshArticlePane];
+    @synchronized(mainArticleView)
+    {
+        int folderId = [(NSNumber *)[nc object] intValue];
+        if (folderId == currentFolderId)
+            [mainArticleView refreshArticlePane];
+    }
 }
 
 /* handleRefreshArticle
@@ -866,7 +927,10 @@
 */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-	[mainArticleView handleRefreshArticle:nc];
+    @synchronized(mainArticleView)
+    {
+        [mainArticleView handleRefreshArticle:nc];
+    }
 }
 
 /* handleFolderUpdate
@@ -874,13 +938,29 @@
 */
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
-	if (folderId != currentFolderId)
-		return;
-	
-	Folder * folder = [[Database sharedManager] folderFromID:folderId];
-	if (IsSmartFolder(folder) || IsTrashFolder(folder))
-		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    @synchronized(mainArticleView)
+    {
+        int folderId = [(NSNumber *)[nc object] intValue];
+        if (folderId != currentFolderId)
+            return;
+
+        Folder * folder = [[Database sharedManager] folderFromID:folderId];
+        if (IsSmartFolder(folder) || IsTrashFolder(folder))
+            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    }
+}
+
+/* handleFolderAdded
+* Called if a folder was added.
+*/
+-(void)handleFolderAdded:(NSNotification *)nc
+{
+    @synchronized(mainArticleView)
+    {
+        Folder * folder = (Folder *)[nc object];
+        currentFolderId = [folder itemId];
+        [mainArticleView selectFolderAndArticle:currentFolderId guid:nil];
+    }
 }
 
 /* setArticleToPreserve

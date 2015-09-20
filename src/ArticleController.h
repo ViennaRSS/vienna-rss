@@ -24,6 +24,8 @@
 #import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleView.h"
+#import "ArticleListView.h"
+#import "UnifiedDisplayView.h"
 
 /* ArticleController
  * The ArticleController contains the controlling logic for the article view that is
@@ -37,6 +39,8 @@
 {
 	FoldersTree * foldersTree;
 
+	IBOutlet ArticleListView * articleListView;
+	IBOutlet UnifiedDisplayView * unifiedListView;
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
 	NSArray * folderArrayOfArticles;
@@ -57,10 +61,12 @@
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
--(void)setMainArticleView:(NSView<ArticleBaseView, BaseView> *)newView;
+-(void)setLayout:(int)newLayout;
 -(int)currentFolderId;
 -(Article *)selectedArticle;
 -(NSArray *)markedArticleRange;
+-(void)updateAlternateMenuTitle;
+-(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
 -(NSArray *)allArticles;

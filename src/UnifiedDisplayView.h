@@ -46,8 +46,8 @@
 }
 
 // Public functions
--(void)initTableView;
 -(void)updateAlternateMenuTitle;
+-(void)saveTableSettings;
 -(NSArray *)markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(int)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;

@@ -39,8 +39,6 @@
 @class NewGroupFolder;
 @class WebPreferences;
 @class BrowserView;
-@class ArticleListView;
-@class UnifiedDisplayView;
 @class EmptyTrashWarning;
 @class ClickableProgressIndicator;
 @class SearchPanel;
@@ -56,8 +54,6 @@
 	IBOutlet NSView * searchView;
 	IBOutlet NSSearchField * filterSearchField;
 	IBOutlet NSPopUpButton * filterViewPopUp;
-	IBOutlet ArticleListView * mainArticleView;
-	IBOutlet UnifiedDisplayView * unifiedListView;
 	IBOutlet NSView * articleFrame;
 	IBOutlet BrowserView * browserView;
 	IBOutlet NSButtonCell * exportAll;
