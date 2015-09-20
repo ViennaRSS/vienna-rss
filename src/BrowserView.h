@@ -20,12 +20,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BaseView.h"
+#import <WebKit/WebKit.h>
 
 @class PSMTabBarControl;
 
 @interface BrowserView : NSView
 {
-	NSView<BaseView> * primaryTabItemView;
+	NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> * primaryTabItemView;
 	IBOutlet NSTabView * tabView;
 	IBOutlet PSMTabBarControl * tabBarControl;
 }
@@ -35,7 +36,7 @@
 -(void)setTabItemViewTitle:(NSView *)tabView title:(NSString *)newTitle;
 -(NSString *)tabItemViewTitle:(NSView *)tabView;
 -(NSView<BaseView> *)activeTabItemView;
--(NSView<BaseView> *)primaryTabItemView;
+-(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)primaryTabItemView;
 -(void)setActiveTabToPrimaryTab;
 -(void)closeTabItemView:(NSView *)theTab;
 -(void)closeAllTabs;

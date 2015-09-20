@@ -19,6 +19,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 
 // Download states
 #define DOWNLOAD_INIT			0
@@ -53,7 +54,7 @@
 -(NSDate *)startTime;
 @end
 
-@interface DownloadManager : NSObject {
+@interface DownloadManager : NSObject <WebDownloadDelegate> {
 	NSMutableArray * downloadsList;
 	int activeDownloads;
 }
