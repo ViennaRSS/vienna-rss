@@ -45,11 +45,11 @@ Tags should be in one of the following formats:
 
 ### On Bintray.com:
 	
-   5. Go to <https://bintray.com/viennarss/vienna-rss>
+   5. Log in and go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/view>
    6. Choose "New version".
-   7. Fill the name ("Vienna 3.1.0 Beta 4"), the description from the version notes, the VCS tag (`v/3.1.0_beta4`) and validate.
-   8. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta4/view>), go to the upload page <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta4/upload> and upload the two .tgz files (whose name should be like `Vienna3.1.0_beta1.tgz` and `Vienna3.1.0_beta4.5b272a6-dSYM.tgz`).
-   9. Save your changes, and click "Publish".
+   7. Fill the name ("3.1.0 Beta 4"), the description from the version notes, then click "Create version". Add the VCS tag (`v/3.1.0_beta4`) and update.
+   8. Check the version (at <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta4/view>), click "Upload Files" to go to <https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta4/upload> and upload the two .tgz files (whose name should be like `Vienna3.1.0_beta1.tgz` and `Vienna3.1.0_beta4.5b272a6-dSYM.tgz`).
+   9. Click "Save the changes", then click "Publish".
    10. Go back to the files list (<https://bintray.com/viennarss/vienna-rss/vienna-rss/3.1.0Beta3/#files>), select the binary ("Vienna3.1.0_beta1.tgz") and choose "Show in download list" in the contextual menu.
 
 ### On Sourceforge.net:
