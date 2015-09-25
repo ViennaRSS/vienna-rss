@@ -76,7 +76,7 @@
  * Sets the primary tab view. This is the view that is always displayed and
  * occupies the first tab position.
  */
--(void)setPrimaryTabItemView:(NSView<BaseView> *)newPrimaryTabItemView
+-(void)setPrimaryTabItemView:(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)newPrimaryTabItemView
 {
 	
 	NSTabViewItem * item;

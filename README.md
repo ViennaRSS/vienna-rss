@@ -75,6 +75,8 @@ You can write plugins by referring to [this document](http://www.vienna-rss.org/
 
 ### Writing code
 
+The current version of Vienna requires Xcode 7.
+
 Vienna uses [cocoapods](http://cocoapods.org) for managing dependencies. When building, make sure to always open the Xcode workspace `Viennna.xcworkspace` instead of a project file.
 
 You should have a basic knowledge of Git and read these [advices on workflow](https://github.com/ViennaRSS/vienna-rss/wiki/Good-manners-with-Git).
