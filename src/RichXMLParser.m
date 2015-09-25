@@ -63,7 +63,7 @@
 													error:&error];
 	}
 
-    if (!error) {
+    if (xmlDocument != nil) {
         if([[xmlDocument.rootElement name] isEqualToString:@"rss"]) {
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:NO];
         }
