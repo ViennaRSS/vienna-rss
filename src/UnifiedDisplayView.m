@@ -343,7 +343,10 @@
             }
             else {	//non relevant cell
                 [cell setInProgress:NO];
-                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                if (row < [[articleController allArticles] count])
+                {
+                    [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                }
             }
 		} else {
 			// not an ArticleCellView anymore
