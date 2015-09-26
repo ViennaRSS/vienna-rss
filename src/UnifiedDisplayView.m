@@ -270,6 +270,7 @@
 			if (row < (NSInteger)[allArticles count])
 			{
 				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+				[articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
 			}
 		}
 		else
@@ -346,6 +347,7 @@
                 if (row < [[articleController allArticles] count])
                 {
                     [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                    [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
                 }
             }
 		} else {
