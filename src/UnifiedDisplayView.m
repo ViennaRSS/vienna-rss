@@ -270,6 +270,7 @@
 			if (row < (NSInteger)[allArticles count])
 			{
 				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+				[articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
 			}
 		}
 		else
@@ -343,7 +344,11 @@
             }
             else {	//non relevant cell
                 [cell setInProgress:NO];
-                [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                if (row < [[articleController allArticles] count])
+                {
+                    [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+                    [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
+                }
             }
 		} else {
 			// not an ArticleCellView anymore

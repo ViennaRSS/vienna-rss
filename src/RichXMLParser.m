@@ -37,7 +37,6 @@
 	-(void)setLastModified:(NSDate *)newDate;
 	-(void)ensureTitle:(FeedItem *)item;
 	-(void)identifyNamespacesPrefixes:(NSXMLElement *)element;
-    -(NSData *)preFlightValidation:(NSData *)xmlData;
 @end
 
 
@@ -52,18 +51,17 @@
 {
 	BOOL success = NO;
     NSError *error = nil;
-    NSData * sanitizedData = [self preFlightValidation:xmlData];
-    NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:sanitizedData
+    NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                                  options:NSXMLNodeOptionsNone
                                                                        error:&error];
 
 	if (error) {
-		xmlDocument = [[NSXMLDocument alloc] initWithData:sanitizedData
+		xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
 												  options: NSXMLDocumentTidyXML
 													error:&error];
 	}
 
-    if (!error) {
+    if (xmlDocument != nil) {
         if([[xmlDocument.rootElement name] isEqualToString:@"rss"]) {
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:NO];
         }
@@ -77,127 +75,6 @@
     xmlDocument = nil;
     
 	return success;
-}
-
-/* preFlightValidation
- * Try and sanitise the XML data before the XML parser gets a chance to reject it.
- */
--(NSData *)preFlightValidation:(NSData *)xmlData
-{
-	NSUInteger count = [xmlData length];
-	const unsigned char * srcPtr = [xmlData bytes];
-	const unsigned char * srcEndPtr = srcPtr + count;
-
-	// We'll create another data stream with the converted characters
-	NSMutableData * newXmlData = [NSMutableData dataWithLength:count];
-	char * destPtr = [newXmlData mutableBytes];
-	NSUInteger destCapacity = count;
-	NSUInteger destSize = count;
-	NSUInteger destIndex = 0;
-
-	// Determine XML encoding and BOM from the start sequence
-	NSStringEncoding encodedType;
-
-	if ( (count > 2 && srcPtr[0] == 0xFE && srcPtr[1] == 0xFF) ||
-		  (count > 2 && srcPtr[0] == 0xFF && srcPtr[1] == 0xFE) )
-	{
-		// Copy Unicode UTF-16 big/little-endian BOM.
-		destPtr[destIndex++] = srcPtr[0];
-		destPtr[destIndex++] = srcPtr[1];
-		srcPtr += 2;
-
-		char* encodingNameStr = "UTF-16";
-		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
-		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
-		CFRelease(encodingName);
-	}
-
-	else if (count > 3 && srcPtr[0] == 0xEF && srcPtr[1] == 0xBB && srcPtr[2] == 0xBF)
-	{
-		// Copy Unicode UTF-8 little-endian BOM.
-		destPtr[destIndex++] = srcPtr[0];
-		destPtr[destIndex++] = srcPtr[1];
-		destPtr[destIndex++] = srcPtr[2];
-		srcPtr += 3;
-
-		char* encodingNameStr = "UTF-8";
-		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
-		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
-		CFRelease(encodingName);
-	}
-	// we suppose that any other start sequence can be supposed to be compatible with UTF-8 or be reasonably ignored
-	else
-	{
-		char* encodingNameStr = "UTF-8";
-		CFStringRef encodingName = CFStringCreateWithBytes(kCFAllocatorDefault, (unsigned char *)encodingNameStr, strlen(encodingNameStr), kCFStringEncodingISOLatin1, false);
-		encodedType = CFStringConvertIANACharSetNameToEncoding(encodingName);
-		CFRelease(encodingName);
-	}
-
-	while (srcPtr < srcEndPtr)
-	{
-		unsigned char ch = *srcPtr++;
-		if (ch >= 0xC0 && ch <= 0xFD && srcPtr < srcEndPtr && *srcPtr >= 0x80 && *srcPtr <= 0xBF)
-		{
-			// Copy UTF-8 lead bytes unchanged.
-			destPtr[destIndex++] = ch;
-			while (srcPtr < srcEndPtr && (*srcPtr & 0x80))
-				destPtr[destIndex++] = *srcPtr++;
-		}
-		else if (ch > 0x7F && encodedType == NSUTF8StringEncoding)
-		{
-			// Other characters with their high bits set are not valid UTF-8.
-			// But regardless of the encoding scheme, their entity equivalents
-			// are. So convert them into a hex entity character code.
-			if (destSize + 5 > destCapacity)
-			{
-				[newXmlData setLength:destCapacity += 256];
-				destPtr = [newXmlData mutableBytes];
-			}
-			destPtr[destIndex++] = '&';
-			destPtr[destIndex++] = '#';
-			destPtr[destIndex++] = 'x';
-			destPtr[destIndex++] = "0123456789ABCDEF"[(ch / 16)];
-			destPtr[destIndex++] = "0123456789ABCDEF"[(ch % 16)];
-			destPtr[destIndex++] = ';';
-			destSize += 5;
-		}
-		else if (ch == '&' && srcPtr < srcEndPtr && *srcPtr != '#')
-		{
-			// Some feeds use a '&' outside of its intended use as an entity
-			// delimiter. So if '&' is followed by a non-alphanumeric, make it
-			// into its entity equivalent.
-			const unsigned char * srcTmpPtr = srcPtr;
-			while (srcTmpPtr < srcEndPtr && isalpha(*srcTmpPtr))
-				++srcTmpPtr;
-			if (srcTmpPtr < srcEndPtr && *srcTmpPtr == ';')
-				destPtr[destIndex++] = '&';
-			else
-			{
-				if (destSize + 4 > destCapacity)
-				{
-					[newXmlData setLength:destCapacity += 256];
-					destPtr = [newXmlData mutableBytes];
-				}
-				destPtr[destIndex++] = '&';
-				destPtr[destIndex++] = 'a';
-				destPtr[destIndex++] = 'm';
-				destPtr[destIndex++] = 'p';
-				destPtr[destIndex++] = ';';
-				destSize += 4;
-			}
-		}
-		else if (ch < 0x20 && ch != 0x09 && ch != 0x0A && ch != 0x0D)
-		{ // errand C0 control characters are illegal
-		    destPtr[destIndex++] = ' ';
-		}
-		else
-			destPtr[destIndex++] = ch;
-	}
-	NSAssert(destIndex == destSize, @"Did not copy all data bytes to destination buffer");
-	[newXmlData setLength:destIndex];
-
-	return newXmlData;
 }
 
 /* extractFeeds
