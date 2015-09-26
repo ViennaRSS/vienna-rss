@@ -21,7 +21,6 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
 #import "ArticleBaseView.h"
-#import "TableViewExtensions.h"
 
 @class AppController;
 @class ArticleController;
@@ -32,7 +31,7 @@
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
-    IBOutlet ExtendedTableView *articleList;
+    IBOutlet NSTableView *articleList;
 	IBOutlet FoldersTree * foldersTree;
 
 	int currentSelectedRow;
