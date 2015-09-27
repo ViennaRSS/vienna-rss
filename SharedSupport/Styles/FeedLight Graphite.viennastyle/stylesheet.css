@@ -164,6 +164,7 @@ img[src*="feeds.feedburner.com"],
 img[src*="feedster"],
 img[src*="rss.slashdot.org"],
 a:link[href*="/imageads."] img,
+a:link[href*="/adv/"] img,
 a:link[href*="googleadservices"],
 a:link[href*="ads_by_google"],
 a img[src*="pheedo"],
@@ -182,3 +183,19 @@ body > .header h1 a 		{ background: #4e6681 url("graphite.gif") top repeat-x; te
 body > .header h1 a:hover,
 body > .header h1 a:focus 	{ background: #597492 url("graphite-hover.gif") top repeat-x; }
 body > .header h1 a:active 	{ background: #4e6681 url("graphite.gif") top repeat-x; }
+
+/* fix a 100% max size to potentially problematic elements */
+img, table,
+td, blockquote,
+code, pre,
+textarea, input,
+iframe, object,
+embed, video {
+  max-width: 100%;
+}
+
+/* keep images ratio and avoid box overflow due to border or padding */
+img {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
