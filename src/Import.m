@@ -20,7 +20,6 @@
 
 #import "Import.h"
 #import "StringExtensions.h"
-#import "BJRWindowWithToolbar.h"
 #import "Database.h"
 
 
