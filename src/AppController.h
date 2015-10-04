@@ -42,11 +42,10 @@
 @class EmptyTrashWarning;
 @class ClickableProgressIndicator;
 @class SearchPanel;
-@class BJRWindowWithToolbar;
 
 @interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
 {
-	IBOutlet BJRWindowWithToolbar * mainWindow;
+	IBOutlet NSWindow * mainWindow;
 	IBOutlet ArticleController * articleController;
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSSplitView * splitView1;

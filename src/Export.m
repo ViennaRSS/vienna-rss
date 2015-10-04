@@ -21,7 +21,6 @@
 #import "Export.h"
 #import "FoldersTree.h"
 #import "StringExtensions.h"
-#import "BJRWindowWithToolbar.h"
 #import "Database.h"
 
 @interface Export()
