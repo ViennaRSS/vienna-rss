@@ -1841,7 +1841,7 @@ const NSInteger MA_Current_DB_Version = 18;
 				[newArray addObject:folder];
 		}
 	}
-	return [newArray sortedArrayUsingSelector:@selector(folderNameCompare:)];
+	return newArray;
 }
 
 /* arrayOfSubFolders

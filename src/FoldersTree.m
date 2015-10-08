@@ -286,7 +286,7 @@
 		for (folder in listOfFolders)
 		{
 			int itemId = [folder itemId];
-			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:itemId];
+			NSArray * listOfSubFolders = [[[Database sharedManager] arrayOfFolders:itemId] sortedArrayUsingSelector:@selector(folderNameCompare:)];
 			int count = [listOfSubFolders count];
 			TreeNode * subNode;
 
