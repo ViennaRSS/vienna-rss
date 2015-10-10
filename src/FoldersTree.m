@@ -358,6 +358,28 @@
 	return array;
 }
 
+/* children
+ * Returns an array that contains the children folders in the database
+ * ordered by the order in which they appear in the folders list view.
+ */
+-(NSArray *)children:(int)folderId
+{
+	NSMutableArray * array = [NSMutableArray array];
+	TreeNode * node;
+
+	if (!folderId)
+		node = rootNode;
+	else
+		node = [rootNode nodeFromID:folderId];
+	node = [node firstChild];
+	while (node != nil)
+	{
+		[array addObject:[node folder]];
+		node = [node nextSibling];
+	}
+	return array;
+}
+
 /* updateAlternateMenuTitle
  * Sets the appropriate title for the alternate item in the contextual menu
  * when user changes preferences for opening pages in external browser

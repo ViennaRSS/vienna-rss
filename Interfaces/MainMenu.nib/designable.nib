@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1070" identifier="macosx"/>
         <development version="6300" identifier="xcode"/>
@@ -918,7 +918,7 @@ CA
                 <outlet property="filterView" destination="1300" id="1301"/>
                 <outlet property="filterViewPopUp" destination="1306" id="1319"/>
                 <outlet property="filtersMenu" destination="1117" id="1135"/>
-                <outlet property="foldersTree" destination="738" id="739"/>
+                <outlet property="foldersTree" destination="738" id="9T7-fT-Mab"/>
                 <outlet property="mainWindow" destination="21" id="239"/>
                 <outlet property="searchField" destination="1252" id="1253"/>
                 <outlet property="searchView" destination="1251" id="1254"/>

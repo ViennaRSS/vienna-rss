@@ -133,6 +133,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 @implementation AppController
 
 @synthesize rssFeed = _rssFeed;
+@synthesize foldersTree;
 
 /* init
  * Class instance initialisation.
@@ -1449,8 +1450,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         {
             [panel orderOut:self];
             
-            NSArray * foldersArray = ([exportSelected state] == NSOnState) ? [foldersTree selectedFolders] : [db arrayOfFolders:MA_Root_Folder];
-            int countExported = [Export exportToFile:[[panel URL] path] from:foldersArray withGroups:([exportWithGroups state] == NSOnState)];
+            int countExported = [Export exportToFile:[[panel URL] path] fromFoldersTree:foldersTree selection:([exportSelected state] == NSOnState) withGroups:([exportWithGroups state] == NSOnState)];
             
             if (countExported < 0)
             {

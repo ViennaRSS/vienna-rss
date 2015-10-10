@@ -19,10 +19,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class FoldersTree;
 
 @interface Export : NSObject
 	
 +(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray
-        withGroups:(BOOL)groupFlag;
+        inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag;
++(int)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree
+        selection:(BOOL)selectionFlag withGroups:(BOOL)groupFlag;
 
 @end

@@ -20,16 +20,12 @@
 
 #import "ViennaApp.h"
 #import "AppController.h"
-#import "ArticleListView.h"
 #import "Preferences.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
 #import "Constants.h"
-#import "FoldersTree.h"
 #import "BrowserPane.h"
-#import "UnifiedDisplayView.h"
-#import <WebKit/WebKit.h>
 
 @implementation ViennaApp
 
@@ -189,7 +185,7 @@
 
 	int countExported = 0;
 	if (argArray != nil)
-		countExported = [Export exportToFile:[args objectForKey:@"FileName"] from:argArray withGroups:YES];
+		countExported = [Export exportToFile:[args objectForKey:@"FileName"] from:argArray inFoldersTree:[(AppController*)[self delegate] foldersTree] withGroups:YES];
 	return [NSNumber numberWithInt:countExported];
 }
 
