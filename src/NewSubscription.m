@@ -199,21 +199,20 @@
         }
 	}
 
-	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
+	// Validate the subscription, possibly replacing the feedURLString with a real one if
+	// it originally pointed to a web page.
+	rssFeedURL = [subscriptionModel verifiedFeedURLFromURL:rssFeedURL];
+
+ 	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
 	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
 	{
 		NSRunAlertPanel(NSLocalizedString(@"Already subscribed title", @"Already subscribed title"),
 						NSLocalizedString(@"Already subscribed body", @"Already subscribed body"),
 						NSLocalizedString(@"OK", nil), nil, nil);
-		return;
 	}
 
-	// Validate the subscription, possibly replacing the feedURLString with a real one if
-	// it originally pointed to a web page.
-	rssFeedURL = [subscriptionModel verifiedFeedURLFromURL:rssFeedURL];
-
-	// We've now confirmed the URL isn't already subscribed to and verified it.
-    // call the controller to create the new subscription.
+    // call the controller to create the new subscription
+    // or select the existing one if it already exists
 	[APPCONTROLLER createNewSubscription:rssFeedURL.absoluteString underFolder:parentId afterChild:-1];
     
 	// Close the window
