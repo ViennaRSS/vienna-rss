@@ -22,10 +22,9 @@
 #import "FoldersTree.h"
 #import "StringExtensions.h"
 #import "BJRWindowWithToolbar.h"
-#import "Database.h"
 
 @interface Export()
-+ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported;
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(int *)countExported;
 @end
 
 @implementation Export
@@ -34,20 +33,19 @@
  * Export one group of folders.
  */
 +(int)exportSubscriptionGroup:(NSXMLElement *)parentElement fromArray:(NSArray *)feedArray
-                   withGroups:(BOOL)groupFlag
+                   inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag
 {
 	int countExported = 0;
-    Database *db = [Database sharedManager];
 	for (Folder * folder in feedArray)
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
 		NSString * name = [folder name];
 		if (IsGroupFolder(folder))
 		{
-			NSArray * subFolders = [db arrayOfFolders:[folder itemId]];
+			NSArray * subFolders = [foldersTree children:[folder itemId]];
 			
             if (!groupFlag) {
-				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders withGroups:groupFlag];
+				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
             }
 			else
 			{
@@ -55,7 +53,7 @@
                 NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
                 [outlineElement setAttributesWithDictionary:itemDict];
                 [parentElement addChild:outlineElement];
-				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders withGroups:groupFlag];
+				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
 			}
 		}
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
@@ -79,14 +77,42 @@
 }
 
 /* exportToFile
- * Export a list of RSS subscriptions to the specified file. If onlySelected is set then only those
+ * Export a list of RSS subscriptions to the specified file.
+ * Returns the number of subscriptions exported, or -1 on error.
+ */
++(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag
+{
+    int countExported = 0;
+    NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:foldersArray inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
+    	// Now write the complete XML to the file
+    
+	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
+	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
+	{
+		return -1; // Indicate an error condition (impossible number of exports)
+	}
+
+    NSData *xmlData = [opmlDocument XMLDataWithOptions:NSXMLNodePrettyPrint | NSXMLNodeCompactEmptyElement];
+    [xmlData writeToFile:fqFilename atomically:YES];
+    
+	
+	return countExported;
+}
+
+/* exportToFile
+ * Export a list of RSS subscriptions to the specified file. If selectionFlag is set then only those
  * folders selected in the folders tree are exported. Otherwise all RSS folders are exported.
  * Returns the number of subscriptions exported, or -1 on error.
  */
-+(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray withGroups:(BOOL)groupFlag
++(int)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree selection:(BOOL)selectionFlag withGroups:(BOOL)groupFlag
 {
     int countExported = 0;
-    NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:foldersArray withGroups:groupFlag exportCount:&countExported];
+    NSArray * folders;
+	if (selectionFlag)
+	    folders = [foldersTree selectedFolders];
+	else
+	    folders = [foldersTree children:0];
+    NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:folders inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
     	// Now write the complete XML to the file
     
 	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
@@ -111,7 +137,7 @@
  *
  *  @return NSXMLDocument with OPML containing the exported folders
  */
-+ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders withGroups:(BOOL)groupFlag exportCount:(int *)countExported {
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(int *)countExported {
     *countExported = 0;
     NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithKind:NSXMLDocumentKind options:NSXMLNodePreserveEmptyElements];
     [opmlDocument setCharacterEncoding:@"UTF-8"];
@@ -130,7 +156,7 @@
     [opmlElement addChild:headElement];
     
     NSXMLElement *bodyElement = [NSXMLElement elementWithName:@"body"];
-    *countExported = [Export exportSubscriptionGroup:bodyElement fromArray:folders withGroups:groupFlag];
+    *countExported = [Export exportSubscriptionGroup:bodyElement fromArray:folders inFoldersTree:foldersTree withGroups:groupFlag];
     
     
     [opmlElement addChild:bodyElement];

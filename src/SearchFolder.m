@@ -242,7 +242,7 @@
  */
 -(void)initFolderValueField:(int)fromId atIndent:(int)indentation
 {
-	for (Folder * folder in [db arrayOfFolders:fromId])
+	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
 		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
 		{

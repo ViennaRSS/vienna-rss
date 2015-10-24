@@ -48,7 +48,6 @@
 {
 	IBOutlet BJRWindowWithToolbar * mainWindow;
 	IBOutlet ArticleController * articleController;
-	IBOutlet FoldersTree * foldersTree;
 	IBOutlet NSSplitView * splitView1;
 	IBOutlet NSView * exportSaveAccessory;
 	IBOutlet NSView * searchView;
@@ -104,6 +103,7 @@
 
 @property (weak, nonatomic, readonly) NSWindowController *preferencesWindowController;
 @property(nonatomic, strong) NewSubscription *rssFeed;
+@property(nonatomic, strong) IBOutlet FoldersTree * foldersTree;
 
 // Menu action items
 -(IBAction)handleAbout:(id)sender;

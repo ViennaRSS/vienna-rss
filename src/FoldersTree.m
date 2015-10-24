@@ -286,7 +286,7 @@
 		for (folder in listOfFolders)
 		{
 			int itemId = [folder itemId];
-			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:itemId];
+			NSArray * listOfSubFolders = [[[Database sharedManager] arrayOfFolders:itemId] sortedArrayUsingSelector:@selector(folderNameCompare:)];
 			int count = [listOfSubFolders count];
 			TreeNode * subNode;
 
@@ -353,6 +353,28 @@
 	while (node != nil)
 	{
 		[array addObjectsFromArray:[self folders:[node nodeId]]];
+		node = [node nextSibling];
+	}
+	return array;
+}
+
+/* children
+ * Returns an array that contains the children folders in the database
+ * ordered by the order in which they appear in the folders list view.
+ */
+-(NSArray *)children:(int)folderId
+{
+	NSMutableArray * array = [NSMutableArray array];
+	TreeNode * node;
+
+	if (!folderId)
+		node = rootNode;
+	else
+		node = [rootNode nodeFromID:folderId];
+	node = [node firstChild];
+	while (node != nil)
+	{
+		[array addObject:[node folder]];
 		node = [node nextSibling];
 	}
 	return array;
