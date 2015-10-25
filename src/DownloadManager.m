@@ -319,8 +319,10 @@
 /* downloadFile
  * Downloads a file from the specified URL.
  */
--(void)downloadFile:(NSString *)filename fromURL:(NSString *)url
+-(void)downloadFileFromURL:(NSString *)url
 {
+	NSString * filename = [[NSURL URLWithString:url] lastPathComponent];
+	NSString * destPath = [DownloadManager fullDownloadPath:filename];
 	NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
 	if (theDownload)
@@ -332,7 +334,7 @@
 		[downloadsList addObject:newItem];
 
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
-		[theDownload setDestination:filename allowOverwrite:YES];
+		[theDownload setDestination:destPath allowOverwrite:YES];
 		
 	}
 }

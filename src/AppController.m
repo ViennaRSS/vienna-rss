@@ -1363,9 +1363,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		if ([currentArticle hasEnclosure])
 		{
-			NSString * filename = [[currentArticle enclosure] lastPathComponent];
-			NSString * destPath = [DownloadManager fullDownloadPath:filename];
-			[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[currentArticle enclosure]];
+			[[DownloadManager sharedInstance] downloadFileFromURL:[currentArticle enclosure]];
 		}
 	}
 }
