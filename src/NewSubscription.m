@@ -179,8 +179,11 @@
  */
 -(IBAction)doSubscribe:(id)sender
 {
+	NSURL * rssFeedURL;
 	NSString * feedURLString = [[feedURL stringValue] trim];
-    NSURL * rssFeedURL = [[[NSURL alloc] init] autorelease];
+	// Replace feed:// with http:// if necessary
+	if ([feedURLString hasPrefix:@"feed://"])
+		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
 
 	// Format the URL based on the selected feed source.
 	if (sourcesDict != nil)
@@ -196,11 +199,6 @@
         }
 	}
 
-	// Replace feed:// with http:// if necessary
-    if ([rssFeedURL.scheme isEqualToString:@"feed"]) {
-        rssFeedURL = [[[NSURL alloc] initWithScheme:@"http" host:rssFeedURL.host path:rssFeedURL.path] autorelease];
-    }
-    
 	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
 	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
 	{
