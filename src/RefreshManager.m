@@ -903,15 +903,28 @@ static RefreshManager * _refreshManager = nil;
 					articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", folderId, [newsItem link], [newsItem title]];
 				
 				// This is a horrible hack for horrible feeds that contain more than one item with the same guid.
-				// Bad feeds! I'm talking to you, Orange Madagascar.
+				// Bad feeds! I'm talking to you, kerbalstuff.com
 				NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
 				if (articleIndex != NSNotFound)
 				{
-					// rebuild a complex guid which should eliminate most duplicates
-					if (articleDate == nil)
-						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", folderId, [newsItem link], [newsItem title]];
-					else
-						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
+					// We rebuild complex guids which should eliminate most duplicates
+					Article * firstFoundArticle = [articleArray objectAtIndex:articleIndex];
+                    if (articleDate == nil) {
+						// first, hack the initial article (which is probably the first loaded / most recent one)
+						NSString * firstFoundArticleNewGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, [firstFoundArticle link], [firstFoundArticle title]];
+						[firstFoundArticle setGuid:firstFoundArticleNewGuid];
+						[articleGuidArray replaceObjectAtIndex:articleIndex withObject:firstFoundArticleNewGuid];
+						// then hack the guid for the item being processed
+						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, [newsItem link], [newsItem title]];
+                    }
+                    else {
+						// first, hack the initial article (which is probably the first loaded / most recent one)
+						NSString * firstFoundArticleNewGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId, [NSString stringWithFormat:@"%1.3f", [[firstFoundArticle date] timeIntervalSince1970]], [firstFoundArticle link], [firstFoundArticle title]];
+						[firstFoundArticle setGuid:firstFoundArticleNewGuid];
+						[articleGuidArray replaceObjectAtIndex:articleIndex withObject:firstFoundArticleNewGuid];
+						// then hack the guid for the item being processed
+						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
+                    }
 				}
 				[articleGuidArray addObject:articleGuid];
 				
