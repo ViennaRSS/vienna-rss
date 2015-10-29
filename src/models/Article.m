@@ -312,7 +312,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleLink
 {
-    return SafeString([self link]);
+    return [NSString stringByCleaningURLString:[self link]];
 }
 
 /* tagArticleTitle
@@ -361,7 +361,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureLink
 {
-    return SafeString([self enclosure]);
+    return [NSString stringByCleaningURLString:[self enclosure]];
 }
 
 /* tagArticleEnclosureFilename
@@ -387,7 +387,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)tagFeedLink
 {
     Folder * folder = [[Database sharedDatabase] folderFromID:[self folderId]];
-    return SafeString([folder homePage]);
+    return [NSString stringByCleaningURLString:[folder homePage]];
 }
 
 /* tagFeedDescription

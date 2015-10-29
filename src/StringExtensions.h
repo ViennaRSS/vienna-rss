@@ -32,6 +32,7 @@
 @interface NSString (StringExtensions)
 	+(NSString *)stringByRemovingHTML:(NSString *)theString;
 	+(NSString *)mapEntityToString:(NSString *)entityString;
+    +(NSString * )stringByCleaningURLString:(NSString *) urlString;
 	-(NSString *)firstNonBlankLine;
 	-(NSString *)summaryTextFromHTML;
 	-(NSString *)titleTextFromHTML;
