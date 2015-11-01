@@ -36,7 +36,7 @@
     NSArray *folders = [self foldersArray];
     NSURL *tmpUrl = [NSURL URLWithString:@"/tmp/vienna-test-nogroups.opml"];
     
-    int countExported = [Export exportToFile:tmpUrl.absoluteString from:folders withGroups:NO];
+    int countExported = [Export exportToFile:tmpUrl.absoluteString from:folders inFoldersTree:nil withGroups:NO];
     XCTAssertGreaterThan(countExported, 0, @"Pass");
 }
 
@@ -45,7 +45,7 @@
     NSArray *folders = [self foldersArray];
     NSURL *tmpUrl = [NSURL URLWithString:@"/tmp/vienna-test-groups.opml"];
     
-    int countExported = [Export exportToFile:tmpUrl.absoluteString from:folders withGroups:YES];
+    int countExported = [Export exportToFile:tmpUrl.absoluteString from:folders inFoldersTree:nil withGroups:YES];
     XCTAssertGreaterThan(countExported, 0, @"Pass");
 }
 
