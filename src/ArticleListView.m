@@ -1549,7 +1549,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSArray * allArticles = [articleController allArticles];
 	Article * theArticle;
 	
-	NSParameterAssert(rowIndex >= 0 && rowIndex < (NSInteger)[allArticles count]);
+	if(rowIndex < 0 || rowIndex >= [allArticles count])
+	    return nil;
 	theArticle = [allArticles objectAtIndex:rowIndex];
 	NSString * identifier = [aTableColumn identifier];
 	if ([identifier isEqualToString:MA_Field_Read])

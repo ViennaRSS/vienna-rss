@@ -919,6 +919,8 @@
 	if (![aListView isEqualTo:articleList])
 		return nil;
 	NSArray * allArticles = [articleController allArticles];
+	if (row >= [allArticles count])
+	    return nil;
 
 	Article * theArticle = [allArticles objectAtIndex:row];
 	NSInteger articleFolderId = [theArticle folderId];
