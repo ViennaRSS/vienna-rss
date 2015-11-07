@@ -172,6 +172,9 @@ static NSString * _userAgent ;
 			[newURLExtension isEqualToString:@"sitx"] ||
 			[newURLExtension isEqualToString:@"zip"] ||
 			[newURLExtension isEqualToString:@"gz"] ||
+			[newURLExtension isEqualToString:@"tgz"] ||
+			[newURLExtension isEqualToString:@"7z"] ||
+			[newURLExtension isEqualToString:@"rar"] ||
 			[newURLExtension isEqualToString:@"tar"]);
 }
 

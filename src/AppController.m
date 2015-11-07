@@ -1293,8 +1293,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSURL * theURL = [NSURL URLWithString:urlString];
 	if (theURL == nil)
 	{
-		NSString * escapedText = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		theURL = [NSURL URLWithString:escapedText];
+		theURL = cleanedUpAndEscapedUrlFromString(urlString);
 	}
 	[self openURL:theURL inPreferredBrowser:openInPreferredBrowserFlag];
 }
@@ -1363,9 +1362,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		if ([currentArticle hasEnclosure])
 		{
-			NSString * filename = [[currentArticle enclosure] lastPathComponent];
-			NSString * destPath = [DownloadManager fullDownloadPath:filename];
-			[[DownloadManager sharedInstance] downloadFile:destPath fromURL:[currentArticle enclosure]];
+			[[DownloadManager sharedInstance] downloadFileFromURL:[currentArticle enclosure]];
 		}
 	}
 }
@@ -2487,8 +2484,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                 NSURL * theURL = [NSURL URLWithString:[currentArticle link]];
                 if (theURL == nil)
                 {
-                	NSString * escapedText = [[currentArticle link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                	theURL = [NSURL URLWithString:escapedText];
+					theURL = cleanedUpAndEscapedUrlFromString([currentArticle link]);
                 }
                 [urls addObject:theURL];
             }

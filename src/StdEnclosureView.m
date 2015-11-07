@@ -77,7 +77,7 @@
 	// Keep this for the download/open
 	enclosureFilename = newFilename;
 
-	NSString * basename = [enclosureFilename lastPathComponent];
+	NSString * basename = [[NSURL URLWithString:enclosureFilename] lastPathComponent];
     NSString * encodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString * ext = [encodedname pathExtension];
 
@@ -138,10 +138,7 @@
  */
 -(IBAction)downloadFile:(id)sender
 {
-	NSString * theFilename = [enclosureFilename lastPathComponent];
-	NSString * destPath = [DownloadManager fullDownloadPath:theFilename];
-	
-	[[DownloadManager sharedInstance] downloadFile:destPath fromURL:enclosureFilename];
+	[[DownloadManager sharedInstance] downloadFileFromURL:enclosureFilename];
 }
 
 /* openFile

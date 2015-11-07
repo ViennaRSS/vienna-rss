@@ -33,6 +33,7 @@
 	+(NSString *)stringByRemovingHTML:(NSString *)theString;
 	+(NSString *)mapEntityToString:(NSString *)entityString;
     +(NSString *)stringByConvertingHTMLEntities:(NSString *)stringToProcess;
+    +(NSString * )stringByCleaningURLString:(NSString *) urlString;
 	-(NSString *)firstNonBlankLine;
 	-(NSString *)summaryTextFromHTML;
 	-(NSString *)titleTextFromHTML;
