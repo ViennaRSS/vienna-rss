@@ -8,13 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
-3.1.0 Beta 1
-------------
-- Replace our "in house" database queue with FMDatabaseQueue and reorganize access
-- Use view based NSTableView for unified layout (instead of PXListView)
-- Replace JSONKit with NSJSONSerialization
-- Replace XMLParser with NSXMLDocument/NSXMLNode
-- Replace other deprecated functions / Miscellaneous refactoring
+3.0.9
+-----
+- Fix problem w/ subscribing to some feeds
+- Improve handling of feeds having duplicate GUIDs
+- Fix some styles to limit maximum image size
+- Improve the ad blocking feature of the Feedlight styles
+- Display articles of any newly added folder
+- If adding existing feed, focus it
+- Better handling of legal/illegal characters in URL strings
+- Fix enclosure download when the URL string contains a query
+- Recognize a few more file extensions to be directly downloaded
+- Fix some crashes
 
 3.0.8
 -----
