@@ -905,6 +905,9 @@
 	}
 
 	NSArray * allArticles = [articleController allArticles];
+	if (row < 0 || row >= [allArticles count])
+	    return nil;
+
 	Article * theArticle = [allArticles objectAtIndex:row];
 	NSInteger articleFolderId = [theArticle folderId];
 	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
