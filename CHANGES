@@ -8,6 +8,18 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.0 Beta 5
+------------
+- Fix problem w/ subscribing to some feeds
+- Better handling of legal/illegal characters in URL strings
+- Fix enclosure download when the URL string contains a query
+- If adding existing feed, focus it
+- Keep order of folders and groups on OPML export
+- Fix some styles to limit maximum image size
+- Improve the ad blocking feature of the Feedlight styles
+- Recognize a few more file extensions to be directly downloaded
+- Fix some crashes
+
 3.1.0 Beta 4
 ------------
 - Fix a crash
