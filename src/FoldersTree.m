@@ -1511,6 +1511,27 @@
 	return NO; 
 }
 
+/* setSearch
+ * Set string to filter nodes by name, description, url
+ */
+-(void)setSearch:(NSString *)f {
+    NSString* tf = [f stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    if (tf.length == 0) {
+        outlineView.filterPredicate = nil;
+        return;
+    }
+
+    NSString *match = [NSString stringWithFormat:@"*%@*", tf];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"folder.name like[cd] %@ OR folder.feedDescription like[cd] %@ OR folder.feedURL like[cd] %@", match, match, match];
+
+    if ([outlineView.filterPredicate.predicateFormat isEqualToString:predicate.predicateFormat]) {
+        return;
+    }
+
+    outlineView.filterPredicate = predicate;
+}
+
 /* dealloc
  * Clean up and release resources.
  */

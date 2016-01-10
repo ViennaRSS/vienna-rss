@@ -22,6 +22,7 @@
 #import "ImageAndTextCell.h"
 #import "TreeNode.h"
 #import "AppController.h"
+#import "FoldersFilterable.h"
 
 @interface NSObject (FolderViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
@@ -31,7 +32,12 @@
 	-(void)outlineViewWillBecomeFirstResponder;
 @end
 
-@implementation FolderView
+@implementation FolderView {
+    NSPredicate*            _filterPredicate;
+    FoldersFilterableDataSourceImpl* _filterDataSource;
+    NSDictionary*           _prefilterState;
+    id _directDataSource;
+}
 
 /* init
  * Our initialisation.
@@ -158,7 +164,9 @@
  */
 -(void)setDataSource:(id)aSource
 {
-	[super setDataSource:aSource];
+    _directDataSource = aSource;
+    _filterDataSource = [[FoldersFilterableDataSourceImpl alloc] initWithDataSource:aSource];
+   	[super setDataSource:aSource];
 	[self buildTooltips];
 }
 
@@ -168,9 +176,45 @@
  */
 -(void)reloadData
 {
+    if (_filterDataSource && _filterPredicate)
+        [_filterDataSource reloadData:self];
 	[super reloadData];
 	[self buildTooltips];
 }
+
+- (NSPredicate*)filterPredicate {
+    return _filterPredicate;
+}
+
+- (void)setFilterPredicate:(NSPredicate *)filterPredicate {
+    if (_filterPredicate == filterPredicate)
+        return;
+
+    if (_filterPredicate == nil) {
+        _prefilterState = self.state;
+    }
+
+    _filterPredicate = filterPredicate;
+    if (_filterDataSource && _filterPredicate){
+        [_filterDataSource setFilterPredicate:_filterPredicate outlineView:self];
+        [super setDataSource:_filterDataSource];
+    }
+    else{
+        [super setDataSource:_directDataSource];
+    }
+
+    [super reloadData];
+
+    if (_filterPredicate) {
+        [self expandItem:nil expandChildren:YES];
+        self.selectionState = _prefilterState[@"Selection"];
+    }
+    else if (_prefilterState) {
+        self.state = _prefilterState;
+        _prefilterState = nil;
+    }
+}
+
 
 /* noteNumberOfRowsChanged
  * Called by the user to tell the view to re-request data. Again, this could mean the

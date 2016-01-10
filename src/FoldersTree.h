@@ -27,7 +27,7 @@
 @class AppController;
 @class Database;
 
-@interface FoldersTree : NSView
+@interface FoldersTree : NSView <NSOutlineViewDataSource>
 {
 	IBOutlet AppController * controller;
 	IBOutlet FolderView * outlineView;
@@ -62,4 +62,5 @@
 -(NSArray *)children:(int)folderId;
 -(NSView *)mainView;
 -(void)outlineViewWillBecomeFirstResponder;
+-(void)setSearch:(NSString *)string;
 @end
