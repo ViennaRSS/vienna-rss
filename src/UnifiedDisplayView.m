@@ -223,7 +223,7 @@
 	// If we still have some useful menu items (other than Webkit's Web Inspector)
 	// then use them for the new default menu
 	if ([newDefaultMenu count] > 0 && ![[newDefaultMenu objectAtIndex:0] isSeparatorItem])
-		defaultMenuItems = newDefaultMenu;
+		defaultMenuItems = [newDefaultMenu copy];
 	// otherwise set the default items to nil as we may have removed all the items.
 	else
 	{
@@ -1074,7 +1074,7 @@
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
-	return articleArray;
+	return [articleArray copy];
 }
 
 #pragma mark -

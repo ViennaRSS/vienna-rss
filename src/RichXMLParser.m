@@ -819,7 +819,7 @@
  */
 -(NSArray *)items
 {
-	return items;
+	return [items copy];
 }
 
 /* lastModified

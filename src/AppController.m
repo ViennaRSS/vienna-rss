@@ -1142,7 +1142,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 	}
 	
-	return newDefaultMenu;
+	return [newDefaultMenu copy];
 }
 
 /** openURLsInDefaultBrowser

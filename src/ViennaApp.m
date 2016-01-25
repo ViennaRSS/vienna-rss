@@ -101,7 +101,7 @@
 		}
 	}
 	if (!hasError)
-		return newArgArray;
+		return [newArgArray copy];
 
 	// At least one of the arguments didn't evaluate to a Folder object
 	[cmd setScriptErrorNumber:errASIllegalFormalParameter];

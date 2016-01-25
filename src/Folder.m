@@ -160,7 +160,7 @@ static NSArray * iconArray = nil;
  */
 -(NSDictionary *)attributes
 {
-	return attributes;
+	return [attributes copy];
 }
 
 /* feedDescription
@@ -711,7 +711,7 @@ static NSArray * iconArray = nil;
                     break;
             }
         }
-        return result;
+        return [result copy];
     }
     else
         return [[Database sharedManager] arrayOfUnreadArticlesRefs:itemId];
@@ -743,7 +743,7 @@ static NSArray * iconArray = nil;
 				    break;
 				}
 			}
-			return articles;
+			return [articles copy];
 		}
         else
         {

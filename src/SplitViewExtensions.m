@@ -43,7 +43,7 @@
 			frame = [view frame];
 		[viewRects addObject:NSStringFromRect(frame)];
 	}
-	return viewRects;
+	return [viewRects copy];
 }
 
 /* setLayout

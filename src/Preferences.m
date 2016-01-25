@@ -300,7 +300,7 @@ static Preferences * _standardPreferences = nil;
     [defaultValues setObject:boolNo forKey:MAPref_GoogleNewSubscription];
     [defaultValues setObject:boolNo forKey:MAPref_AlwaysAcceptBetas];
 	
-	return defaultValues;
+	return [defaultValues copy];
 }
 
 /* savePreferences

@@ -437,7 +437,7 @@
 	}
 	[self setArticleToPreserve:nil];
 	
-	return filteredArray;
+	return [filteredArray copy];
 }
 
 /* markDeletedUndo
@@ -783,7 +783,7 @@
 			}
 		}
 	}
-	return refArray;
+	return [refArray copy];
 }
 
 /* markAllReadByReferencesArray
