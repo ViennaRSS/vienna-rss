@@ -2212,8 +2212,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleFolderSelection:(NSNotification *)nc
 {
-	TreeNode * node = (TreeNode *)[nc object];
-	int newFolderId = [node nodeId];
+	int newFolderId = [(TreeNode *)[nc object] nodeId];
 	
 	// We don't filter when we switch folders.
 	[self setFilterString:@""];
