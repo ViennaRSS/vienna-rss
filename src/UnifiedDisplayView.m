@@ -134,6 +134,7 @@
 	[articleList setDelegate:nil];
 	markReadTimer=nil;
 	guidOfArticleToSelect=nil;
+	[rowHeightArray removeAllObjects];
 	rowHeightArray=nil;
 }
 
@@ -870,7 +871,6 @@
 
 - (CGFloat)tableView:(NSTableView *)aListView heightOfRow:(NSInteger)row
 {
-	CGFloat height;
 	if (row >= [rowHeightArray count])
 	{
 		NSInteger toAdd = row - [rowHeightArray count] + 1 ;
@@ -882,7 +882,7 @@
 	else
 	{
 		id object= [rowHeightArray objectAtIndex:row];
-        height = [object floatValue];
+        CGFloat height = [object floatValue];
 		return  (height) ;
 	}
 }
@@ -917,6 +917,7 @@
 	[cellView setArticleRow:row];
 	[cellView setListView:articleList];
 	ArticleView * view = [cellView articleView];
+	[view removeFromSuperviewWithoutNeedingDisplay];
 	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 	[view setHTML:htmlText withBase:feedURL];
 	[cellView addSubview:view];
