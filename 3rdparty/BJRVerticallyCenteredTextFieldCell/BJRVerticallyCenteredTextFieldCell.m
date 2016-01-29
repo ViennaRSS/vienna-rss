@@ -12,18 +12,17 @@
 
 // Deal ourselves with drawing the text inside the cell
 -(void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    NSAttributedString *attrString = self.attributedStringValue;
-
     /* if your values can be attributed strings, make them white when selected */
     if (self.isHighlighted && self.backgroundStyle==NSBackgroundStyleDark) {
-        NSMutableAttributedString *whiteString = attrString.mutableCopy;
+        NSMutableAttributedString *whiteString = self.attributedStringValue.mutableCopy;
         [whiteString addAttribute: NSForegroundColorAttributeName
                             value: [NSColor whiteColor]
                             range: NSMakeRange(0, whiteString.length) ];
-        attrString = whiteString;
+        [self setAttributedStringValue:whiteString];
     }
 
-    [attrString drawWithRect: [self titleRectForBounds:cellFrame]
+    // Do the actual drawing
+    [self.attributedStringValue drawWithRect: [self titleRectForBounds:cellFrame]
                      options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
 }
 
@@ -32,8 +31,7 @@
     NSRect titleFrame = [super titleRectForBounds:theRect];
 
     /* find out how big the rendered text will be */
-    NSAttributedString *attrString = self.attributedStringValue;
-    NSRect textRect = [attrString boundingRectWithSize: titleFrame.size
+    NSRect textRect = [self.attributedStringValue boundingRectWithSize: titleFrame.size
                                                options: NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingDisableScreenFontSubstitution];
 
     CGFloat tHeight = textRect.size.height;
