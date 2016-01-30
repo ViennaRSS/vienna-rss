@@ -1706,7 +1706,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		nil];
 
 	NSArray *allNotesArray = [notificationsWithDescriptions allKeys];
-	NSMutableArray *defNotesArray = [allNotesArray mutableCopy];
+	NSArray *defNotesArray = [allNotesArray copy];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
 							 [self appName], GROWL_APP_NAME, 
@@ -3256,10 +3256,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), [folder name]];
 			[self setStatusMessage:deleteStatusMsg persist:NO];
 			
-            // Fetch folders for unsubscribe
-            NSMutableArray * rssFolders = [NSMutableArray array];
-            [self addFoldersIn:folder toArray:rssFolders];
-            
 			// Now call the database to delete the folder.
 			[db deleteFolder:[folder itemId]];
             
@@ -3290,7 +3286,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)unsubscribeFeed:(id)sender
 {
-	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
+	NSArray * selectedFolders = [NSArray arrayWithArray:[foldersTree selectedFolders]];
 	int count = [selectedFolders count];
 	int index;
 	
