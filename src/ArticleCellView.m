@@ -19,6 +19,7 @@
 
 @synthesize listView = _listView;
 @synthesize articleView;
+@synthesize progressIndicator;
 @synthesize inProgress, folderId, articleRow;
 
 #pragma mark -
