@@ -815,15 +815,13 @@
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	@autoreleasepool {
-		currentSelectedRow = -1;
-		[rowHeightArray removeAllObjects];
-		[articleList reloadData];
-		if (guidOfArticleToSelect == nil)
-			[articleList scrollRowToVisible:0];
-		else
-			[self selectArticleAfterReload];
-	}
+    currentSelectedRow = -1;
+    [rowHeightArray removeAllObjects];
+    [articleList reloadData];
+    if (guidOfArticleToSelect == nil)
+        [articleList scrollRowToVisible:0];
+    else
+        [self selectArticleAfterReload];
 }
 
 /* handleRefreshArticle
