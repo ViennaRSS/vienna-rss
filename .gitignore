@@ -34,7 +34,7 @@
 #    For the main ones I use (e.g. Eclipse), it should be excluded 
 #    from source-control, but YMMV
 
-*.lock
+# *.lock
 
 #
 # profile - REMOVED temporarily (on double-checking, this seems incorrect; I can't find it in OS X docs?)
