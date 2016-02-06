@@ -243,7 +243,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 -(NSDate *)createdDate			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
 -(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }
--(NSString *)enclosure			{ return [articleData objectForKey:MA_Field_Enclosure]; }
+-(NSString *)enclosure			{ return [NSString stringByCleaningURLString:[articleData objectForKey:MA_Field_Enclosure]]; }
 
 /* containingFolder
  */
@@ -360,7 +360,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureLink
 {
-    return [NSString stringByCleaningURLString:[self enclosure]];
+    return [self enclosure];
 }
 
 /* tagArticleEnclosureFilename
@@ -368,7 +368,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureFilename
 {
-    return SafeString([[[self enclosure] lastPathComponent] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]);
+    return [[[self enclosure] lastPathComponent] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 /* tagFeedTitle
