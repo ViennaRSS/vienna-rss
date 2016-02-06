@@ -40,8 +40,8 @@
     backgroundBrush = [[NSImage alloc] initWithContentsOfFile: backgroundBrushURL ];
 
     // Set some useful tooltips.
-    [filterSearchField setToolTip:NSLocalizedString(@"Filter subscriptions", nil)];
-    [[filterSearchField cell] setPlaceholderString:NSLocalizedString(@"Filter subscriptions", nil)];
+    [filterSearchField setToolTip:NSLocalizedString(@"Filter folders", nil)];
+    [[filterSearchField cell] setPlaceholderString:NSLocalizedString(@"Filter folders", nil)];
 }
 
 /* drawRect
