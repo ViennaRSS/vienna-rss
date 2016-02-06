@@ -1,0 +1,49 @@
+PODS:
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
+  - CDEvents (1.2.2)
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - MASPreferences (1.1.2)
+  - Sparkle (1.10.0)
+
+DEPENDENCIES:
+  - ASIHTTPRequest (~> 1.8)
+  - CDEvents
+  - FMDB (~> 2.4)
+  - MASPreferences (from `https://github.com/shpakovski/MASPreferences.git`, commit
+    `df459a75ad5a47ef1ea8141a79ecb952ca7ec746`)
+  - Sparkle (~> 1.10)
+
+EXTERNAL SOURCES:
+  MASPreferences:
+    :commit: df459a75ad5a47ef1ea8141a79ecb952ca7ec746
+    :git: https://github.com/shpakovski/MASPreferences.git
+
+CHECKOUT OPTIONS:
+  MASPreferences:
+    :commit: df459a75ad5a47ef1ea8141a79ecb952ca7ec746
+    :git: https://github.com/shpakovski/MASPreferences.git
+
+SPEC CHECKSUMS:
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
+  CDEvents: f311f23de13414f4b3625f1a663b2e1d9a85d982
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  MASPreferences: 32d8a2c5ef1d60b63240f5676b011ff72e194cb1
+  Sparkle: c859bf5283b9f12aa45bceccf8e25ebb4c008eb2
+
+COCOAPODS: 0.38.2
