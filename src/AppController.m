@@ -328,33 +328,36 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	if (messageType == kIOMessageSystemHasPoweredOn)
 	{
 		AppController * app = APPCONTROLLER;
-		Preferences * prefs = [Preferences standardPreferences];
-		int frequency = [prefs refreshFrequency];
-		if (frequency > 0)
+		if (app != nil)
 		{
-			NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
-			if ((lastRefresh == nil) || ([app checkTimer] == nil))
-				[app handleCheckFrequencyChange:nil];
-			else
-			{
-				// Wait at least 15 seconds after waking to avoid refresh errors.
-				NSTimeInterval interval = -[lastRefresh timeIntervalSinceNow];
-				if (interval > frequency)
-				{
-					if ([[Preferences standardPreferences] syncGoogleReader])
-						[[GoogleReader sharedManager] getToken];
-					[NSTimer scheduledTimerWithTimeInterval:15.0
-													 target:app
-												   selector:@selector(refreshOnTimer:)
-												   userInfo:nil
-													repeats:NO];
-					[app handleCheckFrequencyChange:nil];
-				}
-				else
-				{
-					[[app checkTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval]];
-				}
-			}
+            Preferences * prefs = [Preferences standardPreferences];
+            int frequency = [prefs refreshFrequency];
+            if (frequency > 0)
+            {
+                NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
+                if ((lastRefresh == nil) || ([app checkTimer] == nil))
+                    [app handleCheckFrequencyChange:nil];
+                else
+                {
+                    // Wait at least 15 seconds after waking to avoid refresh errors.
+                    NSTimeInterval interval = -[lastRefresh timeIntervalSinceNow];
+                    if (interval > frequency)
+                    {
+                        if ([[Preferences standardPreferences] syncGoogleReader])
+                            [[GoogleReader sharedManager] getToken];
+                        [NSTimer scheduledTimerWithTimeInterval:15.0
+                                                         target:app
+                                                       selector:@selector(refreshOnTimer:)
+                                                       userInfo:nil
+                                                        repeats:NO];
+                        [app handleCheckFrequencyChange:nil];
+                    }
+                    else
+                    {
+                        [[app checkTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval]];
+                    }
+                }
+            }
 		}
 	}
 	else if (messageType == kIOMessageCanSystemSleep)
