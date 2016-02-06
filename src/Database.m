@@ -1442,19 +1442,19 @@ const NSInteger MA_Current_DB_Version = 18;
          articleEnclosure,
          @(hasenclosure_flag)];
         lastErrorCode = [db lastErrorCode];
-        if (lastErrorCode != SQLITE_OK) {
+        if (lastErrorCode != 0) {
             *rollback = YES;
             return;
          }
         [db executeUpdate:@"insert into rss_guids (message_id, folder_id) values (?, ?)", articleGuid, @(folderID)];
         lastErrorCode = [db lastErrorCode];
-        if (lastErrorCode != SQLITE_OK) {
+        if (lastErrorCode != 0) {
             *rollback = YES;
             return;
          }
 
     }];
-	return (lastErrorCode == SQLITE_OK);
+	return (lastErrorCode == 0);
 }
 
 /* updateArticle
@@ -1542,7 +1542,7 @@ const NSInteger MA_Current_DB_Version = 18;
             lastErrorCode = [db lastErrorCode];
         }];
         
-        if (lastErrorCode != SQLITE_OK)
+        if (lastErrorCode != 0)
             return NO;
         else
         {
