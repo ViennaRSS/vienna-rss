@@ -2901,6 +2901,7 @@
 				035B703219E0E4AE00197334 /* Frameworks */,
 				035B703319E0E4AE00197334 /* Resources */,
 				0442907207792DF3B4559F33 /* Copy Pods Resources */,
+				D090277EBA2A6CE8A1011C5D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2945,6 +2946,7 @@
 				43EE8617165EF9D7000997FB /* Translations */,
 				AA65D27F083CF46F00BC387C /* Copy Frameworks */,
 				F5708274131698B4743C1F3B /* Copy Pods Resources */,
+				38802F2DBA5E0959099B96CA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3565,6 +3567,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		38802F2DBA5E0959099B96CA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna/Pods-Vienna-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3A5482F6168F5C1700887F91 /* Sparkle autoupdate setup */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3681,6 +3698,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D090277EBA2A6CE8A1011C5D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Tests/Pods-Vienna Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EAAF336614BEF4DF002A8837 /* Release for upload */ = {
