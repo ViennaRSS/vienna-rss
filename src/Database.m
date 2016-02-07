@@ -1422,9 +1422,9 @@ const NSInteger MA_Current_DB_Version = 18;
     NSTimeInterval interval = [articleDate timeIntervalSince1970];
     NSTimeInterval createdInterval = [[article createdDate] timeIntervalSince1970];
     
-    __block int lastErrorCode = 0;
+    __block BOOL success;
     [queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
-        BOOL success = [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+        success = [db executeUpdate:@"insert into messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
          @"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
          articleGuid,
          @(parentId),
@@ -1455,7 +1455,7 @@ const NSInteger MA_Current_DB_Version = 18;
         }
 
     }];
-	return (lastErrorCode == 0);
+	return (success);
 }
 
 /* updateArticle
