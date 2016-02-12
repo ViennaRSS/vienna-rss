@@ -43,6 +43,7 @@
 @class ClickableProgressIndicator;
 @class SearchPanel;
 @class BJRWindowWithToolbar;
+@class TreeFilterView;
 
 @interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
 {
@@ -69,6 +70,8 @@
 	IBOutlet NSMenuItem * stylesMenu;
 	IBOutlet NSMenuItem * filtersMenu;
 	IBOutlet FilterView * filterView;
+	IBOutlet TreeFilterView *treeFilterView;
+	IBOutlet TreeFilterView *treeFilterSearchField;
 	IBOutlet NSView * cosmeticStatusBarHighlightLine;
 	IBOutlet NSTextField * currentFilterTextField;
 	IBOutlet NSButton * filterIconInStatusBarButton;

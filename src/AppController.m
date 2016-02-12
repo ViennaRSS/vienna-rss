@@ -3618,6 +3618,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[[browserView activeTabItemView] performFindPanelAction:NSFindPanelActionNext];
 }
 
+- (IBAction)searchUsingTreeFilter:(NSSearchField* )field
+{
+    NSString* f = field.stringValue;
+    [foldersTree setSearch:f];
+}
+
 /* searchUsingToolbarTextField
  * Executes a search using the search field on the toolbar.
  */
