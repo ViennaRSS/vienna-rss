@@ -24,6 +24,7 @@
 #import "BrowserView.h"
 #import "PopupButton.h"
 #import "StdEnclosureView.h"
+#import <WebKit/WebKit.h>
 
 @class AppController;
 @class ArticleController;
@@ -31,7 +32,7 @@
 @class ArticleView;
 @class FoldersTree;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;

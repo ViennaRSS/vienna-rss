@@ -21,6 +21,7 @@
 #import <Cocoa/Cocoa.h>
 #import "BrowserView.h"
 #import "SSTextField.h"
+#import <WebKit/WebKit.h>
 
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
@@ -34,7 +35,7 @@
 @interface BrowserPaneButton : NSButton {}
 @end
 
-@interface BrowserPane : NSView<BaseView> {
+@interface BrowserPane : NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> {
 	IBOutlet NSBox * boxFrame;
 	TabbedWebView * webPane;
 	IBOutlet NSButton * backButton;

@@ -23,7 +23,7 @@
 
 @class AppController;
 
-@interface TabbedWebView : WebView {
+@interface TabbedWebView : WebView <WebPolicyDelegate> {
 	AppController * controller;
 	WebPreferences * defaultWebPrefs;
 	BOOL openLinksInNewBrowser;
