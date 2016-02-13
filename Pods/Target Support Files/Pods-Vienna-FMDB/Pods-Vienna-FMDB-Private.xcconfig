@@ -1,5 +1,0 @@
-#include "Pods-Vienna-FMDB.xcconfig"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/FMDB" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/JSONKit" "${PODS_ROOT}/Headers/Public/MASPreferences" "${PODS_ROOT}/Headers/Public/PXListView"
-OTHER_LDFLAGS = ${PODS_VIENNA_FMDB_OTHER_LDFLAGS} -ObjC
-PODS_ROOT = ${SRCROOT}
