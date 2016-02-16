@@ -14,10 +14,7 @@ release:
 		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
 
 development:
-	xcodebuild -workspace $(WORKSPACE) -scheme "Pods-Vienna" -configuration Development\
-		CONFIGURATION_BUILD_DIR="../build" LIBRARY_SEARCH_PATHS="../build"
-	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development\
-		CONFIGURATION_BUILD_DIR=build LIBRARY_SEARCH_PATHS="build"
+	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development
 
 clean:
 	xcodebuild -workspace $(WORKSPACE) -scheme $(SCHEME) -configuration Development clean CONFIGURATION_BUILD_DIR=build
