@@ -23,19 +23,8 @@ DEPENDENCIES:
   - ASIHTTPRequest (~> 1.8)
   - CDEvents
   - FMDB (~> 2.4)
-  - MASPreferences (from `https://github.com/shpakovski/MASPreferences.git`, commit
-    `df459a75ad5a47ef1ea8141a79ecb952ca7ec746`)
+  - MASPreferences (~> 1.1)
   - Sparkle
-
-EXTERNAL SOURCES:
-  MASPreferences:
-    :commit: df459a75ad5a47ef1ea8141a79ecb952ca7ec746
-    :git: https://github.com/shpakovski/MASPreferences.git
-
-CHECKOUT OPTIONS:
-  MASPreferences:
-    :commit: df459a75ad5a47ef1ea8141a79ecb952ca7ec746
-    :git: https://github.com/shpakovski/MASPreferences.git
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
@@ -44,4 +33,6 @@ SPEC CHECKSUMS:
   MASPreferences: 32d8a2c5ef1d60b63240f5676b011ff72e194cb1
   Sparkle: 2fbd47b869621d1e679c7554e3e19dda02104818
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 33364cfe052e288f61cdc6396fdb9a07ea9e910a
+
+COCOAPODS: 1.0.0.beta.3
