@@ -1841,7 +1841,7 @@ const NSInteger MA_Current_DB_Version = 18;
 				[newArray addObject:folder];
 		}
 	}
-	return newArray;
+	return [newArray copy];
 }
 
 /* arrayOfSubFolders
@@ -2188,7 +2188,7 @@ const NSInteger MA_Current_DB_Version = 18;
             }
             [results close];
         }];
-        return newArray;
+        return [newArray copy];
 	}
 	else
 	    return nil;
@@ -2280,7 +2280,7 @@ const NSInteger MA_Current_DB_Version = 18;
         }
     }
 
-	return newArray;
+	return [newArray copy];
 }
 
 /* markFolderRead
@@ -2519,7 +2519,7 @@ const NSInteger MA_Current_DB_Version = 18;
 		[results close];
 	}];
 	
-	return articleGuids;
+	return [articleGuids copy];
 }
 
 /*!

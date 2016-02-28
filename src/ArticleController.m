@@ -142,11 +142,11 @@
 	{
 		case MA_Layout_Report:
 		case MA_Layout_Condensed:
-			mainArticleView = articleListView;
+			[self setMainArticleView:articleListView];
 			break;
 
 		case MA_Layout_Unified:
-			mainArticleView = unifiedListView;
+			[self setMainArticleView:unifiedListView];
 			break;
 	}
 
@@ -432,11 +432,12 @@
 		}
 		if (articleToAdd == nil)
 			articleToAdd = articleToPreserve;
-		[filteredArray addObject:articleToAdd];
+		if (articleToAdd != nil)
+            [filteredArray addObject:articleToAdd];
 	}
 	[self setArticleToPreserve:nil];
 	
-	return filteredArray;
+	return [filteredArray copy];
 }
 
 /* markDeletedUndo
@@ -782,7 +783,7 @@
 			}
 		}
 	}
-	return refArray;
+	return [refArray copy];
 }
 
 /* markAllReadByReferencesArray

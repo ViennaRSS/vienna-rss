@@ -13,15 +13,14 @@
 @interface ArticleCellView : NSTableCellView
 {
 	AppController * controller;
-	ArticleView *articleView;
-	NSProgressIndicator * progressIndicator;
 	BOOL inProgress;
 	int folderId;
 	NSUInteger articleRow;
 	NSTableView *__weak _listView;
 }
 
-@property (readonly)ArticleView *articleView;
+@property (readonly, strong)ArticleView *articleView;
+@property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
 @property int folderId;
 @property NSUInteger articleRow;

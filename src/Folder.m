@@ -160,7 +160,7 @@ static NSArray * iconArray = nil;
  */
 -(NSDictionary *)attributes
 {
-	return attributes;
+	return [attributes copy];
 }
 
 /* feedDescription
@@ -653,6 +653,7 @@ static NSArray * iconArray = nil;
  */
  -(void)ensureCache
  {
+    [cachedArticles setEvictsObjectsWithDiscardedContent:NO];
     if (!isCached)
     {
         [cachedGuids removeAllObjects];
@@ -661,6 +662,7 @@ static NSArray * iconArray = nil;
     }
     isCached = YES;
     // Note that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
+    [cachedArticles setEvictsObjectsWithDiscardedContent:YES];
 }
 
 /* markArticlesInCacheRead
@@ -711,7 +713,7 @@ static NSArray * iconArray = nil;
                     break;
             }
         }
-        return result;
+        return [result copy];
     }
     else
         return [[Database sharedManager] arrayOfUnreadArticlesRefs:itemId];
@@ -743,7 +745,7 @@ static NSArray * iconArray = nil;
 				    break;
 				}
 			}
-			return articles;
+			return [articles copy];
 		}
         else
         {

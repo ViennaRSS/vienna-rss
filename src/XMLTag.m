@@ -186,7 +186,7 @@
 		}
 		++textPtr;
 	}
-	return tagArray;
+	return [tagArray copy];
 }
 
 

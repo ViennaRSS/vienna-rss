@@ -328,33 +328,36 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	if (messageType == kIOMessageSystemHasPoweredOn)
 	{
 		AppController * app = APPCONTROLLER;
-		Preferences * prefs = [Preferences standardPreferences];
-		int frequency = [prefs refreshFrequency];
-		if (frequency > 0)
+		if (app != nil)
 		{
-			NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
-			if ((lastRefresh == nil) || ([app checkTimer] == nil))
-				[app handleCheckFrequencyChange:nil];
-			else
-			{
-				// Wait at least 15 seconds after waking to avoid refresh errors.
-				NSTimeInterval interval = -[lastRefresh timeIntervalSinceNow];
-				if (interval > frequency)
-				{
-					if ([[Preferences standardPreferences] syncGoogleReader])
-						[[GoogleReader sharedManager] getToken];
-					[NSTimer scheduledTimerWithTimeInterval:15.0
-													 target:app
-												   selector:@selector(refreshOnTimer:)
-												   userInfo:nil
-													repeats:NO];
-					[app handleCheckFrequencyChange:nil];
-				}
-				else
-				{
-					[[app checkTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval]];
-				}
-			}
+            Preferences * prefs = [Preferences standardPreferences];
+            int frequency = [prefs refreshFrequency];
+            if (frequency > 0)
+            {
+                NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
+                if ((lastRefresh == nil) || ([app checkTimer] == nil))
+                    [app handleCheckFrequencyChange:nil];
+                else
+                {
+                    // Wait at least 15 seconds after waking to avoid refresh errors.
+                    NSTimeInterval interval = -[lastRefresh timeIntervalSinceNow];
+                    if (interval > frequency)
+                    {
+                        if ([[Preferences standardPreferences] syncGoogleReader])
+                            [[GoogleReader sharedManager] getToken];
+                        [NSTimer scheduledTimerWithTimeInterval:15.0
+                                                         target:app
+                                                       selector:@selector(refreshOnTimer:)
+                                                       userInfo:nil
+                                                        repeats:NO];
+                        [app handleCheckFrequencyChange:nil];
+                    }
+                    else
+                    {
+                        [[app checkTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:15.0 + frequency - interval]];
+                    }
+                }
+            }
 		}
 	}
 	else if (messageType == kIOMessageCanSystemSleep)
@@ -1142,7 +1145,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 	}
 	
-	return newDefaultMenu;
+	return [newDefaultMenu copy];
 }
 
 /** openURLsInDefaultBrowser
@@ -1706,7 +1709,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		nil];
 
 	NSArray *allNotesArray = [notificationsWithDescriptions allKeys];
-	NSMutableArray *defNotesArray = [allNotesArray mutableCopy];
+	NSArray *defNotesArray = [allNotesArray copy];
 	
 	NSDictionary *regDict = [NSDictionary dictionaryWithObjectsAndKeys:
 							 [self appName], GROWL_APP_NAME, 
@@ -2212,8 +2215,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleFolderSelection:(NSNotification *)nc
 {
-	TreeNode * node = (TreeNode *)[nc object];
-	int newFolderId = [node nodeId];
+	int newFolderId = [(TreeNode *)[nc object] nodeId];
 	
 	// We don't filter when we switch folders.
 	[self setFilterString:@""];
@@ -3257,10 +3259,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Delete folder status", nil), [folder name]];
 			[self setStatusMessage:deleteStatusMsg persist:NO];
 			
-            // Fetch folders for unsubscribe
-            NSMutableArray * rssFolders = [NSMutableArray array];
-            [self addFoldersIn:folder toArray:rssFolders];
-            
 			// Now call the database to delete the folder.
 			[db deleteFolder:[folder itemId]];
             
@@ -3291,7 +3289,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)unsubscribeFeed:(id)sender
 {
-	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
+	NSArray * selectedFolders = [NSArray arrayWithArray:[foldersTree selectedFolders]];
 	int count = [selectedFolders count];
 	int index;
 	

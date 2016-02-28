@@ -48,7 +48,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 	NSString * parameters = [NSString stringWithFormat:@"longUrl=%@", longURL];
 	requestURLString = [requestURLString stringByAppendingString:parameters];	
 	NSURL *finishedRequestURL = [NSURL URLWithString:requestURLString];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:finishedRequestURL];
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:finishedRequestURL];
 	
 	// ... which is then finally sent to bit.ly's servers.
 	NSHTTPURLResponse* urlResponse = nil;  	

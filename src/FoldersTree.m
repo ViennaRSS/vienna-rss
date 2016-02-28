@@ -242,7 +242,7 @@
 			[archiveArray addObject:newDict];
 		}
 	}
-	return archiveArray;
+	return [archiveArray copy];
 }
 
 /* unarchiveState
@@ -355,7 +355,7 @@
 		[array addObjectsFromArray:[self folders:[node nodeId]]];
 		node = [node nextSibling];
 	}
-	return array;
+	return [array copy];
 }
 
 /* children
@@ -377,7 +377,7 @@
 		[array addObject:[node folder]];
 		node = [node nextSibling];
 	}
-	return array;
+	return [array copy];
 }
 
 /* updateAlternateMenuTitle
@@ -601,7 +601,7 @@
 		}
 	}
 	
-	return arrayOfSelectedFolders;
+	return [arrayOfSelectedFolders copy];
 }
 
 /* setManualSortOrderForNode

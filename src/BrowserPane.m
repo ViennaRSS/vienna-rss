@@ -71,12 +71,10 @@
 
 + (void)load
 {
-    @autoreleasepool {
-        if (self == [BrowserPane class]) {
-            //These are synonyms
-            [self exposeBinding:@"isLoading"];
-            [self exposeBinding:@"isProcessing"];
-        }
+    if (self == [BrowserPane class]) {
+        //These are synonyms
+        [self exposeBinding:@"isLoading"];
+        [self exposeBinding:@"isProcessing"];
     }
 }
 

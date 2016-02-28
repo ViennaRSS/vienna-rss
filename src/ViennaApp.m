@@ -37,8 +37,7 @@
 	NSEvent * anEvent = event;
 	if(([anEvent type] == NSFlagsChanged) && ( ([anEvent keyCode] == 61) || ([anEvent keyCode] == 58)))
 	{
-		AppController * controller = APPCONTROLLER;
-		[controller toggleOptionKeyButtonStates]; 
+		[(AppController*)[self delegate] toggleOptionKeyButtonStates];
 	}
 	[super sendEvent:anEvent];
 }
@@ -101,7 +100,7 @@
 		}
 	}
 	if (!hasError)
-		return newArgArray;
+		return [newArgArray copy];
 
 	// At least one of the arguments didn't evaluate to a Folder object
 	[cmd setScriptErrorNumber:errASIllegalFormalParameter];

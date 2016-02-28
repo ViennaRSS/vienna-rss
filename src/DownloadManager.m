@@ -240,7 +240,7 @@
  */
 -(NSArray *)downloadsList
 {
-	return downloadsList;
+	return [downloadsList copy];
 }
 
 /* activeDownloads

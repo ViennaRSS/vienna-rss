@@ -134,6 +134,7 @@
 	[articleList setDelegate:nil];
 	markReadTimer=nil;
 	guidOfArticleToSelect=nil;
+	[rowHeightArray removeAllObjects];
 	rowHeightArray=nil;
 }
 
@@ -223,7 +224,7 @@
 	// If we still have some useful menu items (other than Webkit's Web Inspector)
 	// then use them for the new default menu
 	if ([newDefaultMenu count] > 0 && ![[newDefaultMenu objectAtIndex:0] isSeparatorItem])
-		defaultMenuItems = newDefaultMenu;
+		defaultMenuItems = [newDefaultMenu copy];
 	// otherwise set the default items to nil as we may have removed all the items.
 	else
 	{
@@ -814,15 +815,13 @@
  */
 -(void)selectFolderWithFilter:(int)newFolderId
 {
-	@autoreleasepool {
-		currentSelectedRow = -1;
-		[rowHeightArray removeAllObjects];
-		[articleList reloadData];
-		if (guidOfArticleToSelect == nil)
-			[articleList scrollRowToVisible:0];
-		else
-			[self selectArticleAfterReload];
-	}
+    currentSelectedRow = -1;
+    [rowHeightArray removeAllObjects];
+    [articleList reloadData];
+    if (guidOfArticleToSelect == nil)
+        [articleList scrollRowToVisible:0];
+    else
+        [self selectArticleAfterReload];
 }
 
 /* handleRefreshArticle
@@ -870,7 +869,6 @@
 
 - (CGFloat)tableView:(NSTableView *)aListView heightOfRow:(NSInteger)row
 {
-	CGFloat height;
 	if (row >= [rowHeightArray count])
 	{
 		NSInteger toAdd = row - [rowHeightArray count] + 1 ;
@@ -882,7 +880,7 @@
 	else
 	{
 		id object= [rowHeightArray objectAtIndex:row];
-        height = [object floatValue];
+        CGFloat height = [object floatValue];
 		return  (height) ;
 	}
 }
@@ -917,6 +915,7 @@
 	[cellView setArticleRow:row];
 	[cellView setListView:articleList];
 	ArticleView * view = [cellView articleView];
+	[view removeFromSuperviewWithoutNeedingDisplay];
 	NSString * htmlText = [view articleTextFromArray:[NSArray arrayWithObject:theArticle]];
 	[view setHTML:htmlText withBase:feedURL];
 	[cellView addSubview:view];
@@ -1074,7 +1073,7 @@
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
-	return articleArray;
+	return [articleArray copy];
 }
 
 #pragma mark -
