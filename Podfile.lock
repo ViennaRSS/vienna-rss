@@ -1,0 +1,52 @@
+PODS:
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - JSONKit-NoWarning (1.2)
+  - MASPreferences (1.1.2)
+  - PXListView (0.0.1)
+
+DEPENDENCIES:
+  - ASIHTTPRequest (~> 1.8)
+  - FMDB (= 2.5)
+  - JSONKit-NoWarning
+  - MASPreferences (from `https://github.com/shpakovski/MASPreferences.git`, commit `11b0166a55e4d8e109b259eb0b4673333d8903f5`)
+  - PXListView (from `./PXListView.podspec`)
+
+EXTERNAL SOURCES:
+  MASPreferences:
+    :commit: 11b0166a55e4d8e109b259eb0b4673333d8903f5
+    :git: https://github.com/shpakovski/MASPreferences.git
+  PXListView:
+    :podspec: "./PXListView.podspec"
+
+CHECKOUT OPTIONS:
+  MASPreferences:
+    :commit: 11b0166a55e4d8e109b259eb0b4673333d8903f5
+    :git: https://github.com/shpakovski/MASPreferences.git
+
+SPEC CHECKSUMS:
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
+  MASPreferences: 32d8a2c5ef1d60b63240f5676b011ff72e194cb1
+  PXListView: 4e6d5ca4dc93f3d9d7cd9370201b9729e8a4307d
+
+PODFILE CHECKSUM: 2a52123430828cd338f66448f0029e523f71e62f
+
+COCOAPODS: 1.0.0.beta.3
