@@ -608,7 +608,7 @@
 				}
 				
 				// Parse item description
-				if (isArticleElementAtomType && [articleItemTag isEqualToString:@"summary"])
+				if (isArticleElementAtomType && [articleItemTag isEqualToString:@"summary"] && articleBody == nil)
 				{
                     NSString * type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"])

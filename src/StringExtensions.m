@@ -767,10 +767,10 @@ static NSMutableDictionary * entityMap = nil;
 +(NSString * )stringByCleaningURLString:(NSString *) urlString
 {
 	NSString *newString;
-	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-	[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
 	@try
 	{
+		NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+		[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
 		if ([pasteboard setString:urlString forType:NSStringPboardType])
 			newString = [[WebView URLFromPasteboard:pasteboard] absoluteString];
 		else

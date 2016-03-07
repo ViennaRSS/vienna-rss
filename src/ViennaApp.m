@@ -32,14 +32,15 @@
 /* sendEvent
  * We override sendEvent in order to catch the status of the option key. 
  */
--(void)sendEvent:(NSEvent *)event
+-(void)sendEvent:(NSEvent *)anEvent
 {
-	NSEvent * anEvent = event;
 	if(([anEvent type] == NSFlagsChanged) && ( ([anEvent keyCode] == 61) || ([anEvent keyCode] == 58)))
 	{
 		[(AppController*)[self delegate] toggleOptionKeyButtonStates];
 	}
-	[super sendEvent:anEvent];
+    else
+    // Only handle the events we actually need.
+        [super sendEvent:anEvent];
 }
 
 /* handleRefreshAllSubscriptions
