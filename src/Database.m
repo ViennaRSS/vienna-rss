@@ -2475,6 +2475,14 @@ const NSInteger MA_Current_DB_Version = 18;
              @(folderId),
              guid];
         }];
+        if (isDeleted && ![article isDeleted]) {
+            [folder removeArticleFromCache:guid];
+        }
+        else if (!isDeleted) {
+            // force the original folder to rebuild cache when selected
+            // in order to get the restored article
+            [folder clearCache];
+        }
 	}
 }
 
