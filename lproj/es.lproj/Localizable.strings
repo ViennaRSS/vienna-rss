@@ -450,7 +450,7 @@
 "RSS Icon not found!" = "¡Icono de la suscripción no encontrado!";
 
 /*Added in 3.0.5 */
-"Redirection attempt treated as temporary for safety concern" = "Redirection attempt treated as temporary for safety concern";
+"Redirection attempt treated as temporary for safety concern" = "Intento de redirección tratado como temporal por problemas de seguridad";
 
 /*Added in 3.0.7 */
-"No articles in feed" = "No articles in feed";
+"No articles in feed" = "No hay artículos en la fuente";
