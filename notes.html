@@ -1,7 +1,12 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
+<html>
 
 <head>
+
 <meta charset="utf-8">
+
+
+
 <style type="text/css">
 *{margin:0;padding:0;}
 body {
@@ -94,23 +99,41 @@ sup {
 	}
 }
 </style>
+
+
 </head>
+
 <body>
+
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.1.0 Beta 5</h2>
+<h2 id="toc_1">3.1.0</h2>
+
+<h3 id="toc_2">Requires OS X 10.8 or better!</h3>
+
+<h3 id="toc_3">Changes since 3.0.9</h3>
 
 <ul>
-<li>Fix problem w/ subscribing to some feeds</li>
-<li>Better handling of legal/illegal characters in URL strings</li>
-<li>Fix enclosure download when the URL string contains a query</li>
-<li>If adding existing feed, focus it</li>
-<li>Keep order of folders and groups on OPML export</li>
-<li>Fix some styles to limit maximum image size</li>
-<li>Improve the ad blocking feature of the Feedlight styles</li>
-<li>Recognize a few more file extensions to be directly downloaded</li>
-<li>Fix some crashes</li>
+<li>Add search field in subscriptions tree</li>
+<li>Modern memory management (ARC)</li>
+<li>Modern frameworks for database queue management, JSON file parsing, XML parsing…</li>
+<li>Some code refactoring</li>
+<li>New handling of articles cache</li>
+<li>Security : update Sparkle autoupdate framework with latest version and use a secure URL</li>
+<li>Ensure current article remains visible when changing layout</li>
 </ul>
+
+<h3 id="toc_4">Changes since 3.1.0 Beta 5</h3>
+
+<ul>
+<li>Fix articles reappearing in a feed after being marked for deletion</li>
+<li>In Atom feeds, prefer the ‘content’ item over the ’summary’ one</li>
+<li>Improved memory management</li>
+<li>Fix various crashes</li>
+<li>Fix broken features in Download window</li>
+</ul>
+
+
 
 
 </body>

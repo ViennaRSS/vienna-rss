@@ -8,6 +8,17 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.0
+-----
+- Add search field in subscriptions tree
+- In Atom feeds, prefer the ‘content’ item over the ’summary’ one
+- Fix articles reappearing in a feed after being marked for deletion
+- Improved memory management
+- Fix broken Download window features
+- Security : update Sparkle autoupdate framework with latest version and use a secure URL
+- Fix some crashes
+
+
 3.1.0 Beta 5
 ------------
 - Fix problem w/ subscribing to some feeds
