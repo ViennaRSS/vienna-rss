@@ -124,20 +124,20 @@ extern NSString * MA_PBoardType_urln;
 #define MA_ViewTag_Filterbar			1
 #define MA_ViewTag_Statusbar			2
 
-const AEKeyword EditDataItemAppleEventClass;
-const AEKeyword EditDataItemAppleEventID;
-const AEKeyword DataItemTitle;
-const AEKeyword DataItemDescription;
-const AEKeyword DataItemSummary;
-const AEKeyword DataItemLink;
-const AEKeyword DataItemPermalink;
-const AEKeyword DataItemSubject;
-const AEKeyword DataItemCreator;
-const AEKeyword DataItemCommentsURL;
-const AEKeyword DataItemGUID;
-const AEKeyword DataItemSourceName;
-const AEKeyword DataItemSourceHomeURL;
-const AEKeyword DataItemSourceFeedURL;
+extern AEKeyword EditDataItemAppleEventClass;
+extern AEKeyword EditDataItemAppleEventID;
+extern AEKeyword DataItemTitle;
+extern AEKeyword DataItemDescription;
+extern AEKeyword DataItemSummary;
+extern AEKeyword DataItemLink;
+extern AEKeyword DataItemPermalink;
+extern AEKeyword DataItemSubject;
+extern AEKeyword DataItemCreator;
+extern AEKeyword DataItemCommentsURL;
+extern AEKeyword DataItemGUID;
+extern AEKeyword DataItemSourceName;
+extern AEKeyword DataItemSourceHomeURL;
+extern AEKeyword DataItemSourceFeedURL;
 
 // Layout styles
 #define MA_Layout_Report				1
