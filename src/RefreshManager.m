@@ -762,7 +762,7 @@
 	{
 				
 		NSData * receivedData = [connector responseData];
-		NSString * lastModifiedString = [connector.responseHeaders valueForKey:@"Last-Modified"];
+		NSString * lastModifiedString = [connector.responseHeaders valueForKey:@"Last-Modified"] ?: @"";
 		
 		[self finalizeFolderRefresh:@{
 									  @"folder": folder,
@@ -999,7 +999,7 @@
             }
 
 			// Remember the last modified date
-            if (lastModifiedString != nil) {
+            if (lastModifiedString != nil && lastModifiedString.length > 0) {
                 [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
             }
 			// Set the last update date for this folder.
