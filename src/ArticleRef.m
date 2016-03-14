@@ -24,7 +24,7 @@
 
 /* initWithReference
  */
--(id)initWithReference:(NSString *)aGuid inFolder:(int)aFolderId
+-(id)initWithReference:(NSString *)aGuid inFolder:(NSInteger)aFolderId
 {
 	if ((self = [super init]) != nil)
 	{
@@ -45,7 +45,7 @@
 /* makeReferenceFromGUID
  * Create a new ArticleReference using the information in the specified article.
  */
-+(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(int)folderId
++(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(NSInteger)folderId
 {
 	return [[ArticleReference alloc] initWithReference:aGuid inFolder:folderId];
 }
@@ -61,7 +61,7 @@
 /* folderId
  * Return the reference folder ID.
  */
--(int)folderId
+-(NSInteger)folderId
 {
 	return folderId;
 }
@@ -71,7 +71,7 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ in folder %d", guid, folderId];
+	return [NSString stringWithFormat:@"%@ in folder %ld", guid, (long)folderId];
 }
 
 /* dealloc

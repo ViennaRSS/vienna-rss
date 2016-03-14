@@ -28,7 +28,7 @@
 	BOOL initializedfoldersDict;
 	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
-	int countOfUnread;
+	NSInteger countOfUnread;
 	NSString * searchString;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;

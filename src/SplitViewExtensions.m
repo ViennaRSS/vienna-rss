@@ -52,7 +52,7 @@
 -(void)setLayout:(NSArray *)viewRects
 {
 	NSArray * views = [self subviews];
-	int i, count;
+	NSInteger i, count;
 	NSRect frame;
 
 	count = MIN([viewRects count], [views count]);

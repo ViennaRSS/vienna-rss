@@ -203,13 +203,13 @@ static NSMutableDictionary * entityMap = nil;
 @implementation NSString (StringExtensions)
 
 /* hexValue
- * A counterpart to intValue, but parses a hexadecimal number.
+ * A counterpart to integerValue, but parses a hexadecimal number.
  */
--(int)hexValue
+-(NSInteger)hexValue
 {
-	int count = [self length];
-	int intValue = 0;
-	int index = 0;
+	NSInteger count = [self length];
+	NSInteger intValue = 0;
+	NSInteger index = 0;
 
 	while (index < count)
 	{
@@ -263,11 +263,11 @@ static NSMutableDictionary * entityMap = nil;
 +(NSString *)stringByRemovingHTML:(NSString *)theString
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
-	int maxChrs = [theString length];
-	int cutOff = 600;
-	int indexOfChr = 0;
-	int tagLength = 0;
-	int tagStartIndex = 0;
+	NSInteger maxChrs = [theString length];
+	NSInteger cutOff = 600;
+	NSInteger indexOfChr = 0;
+	NSInteger tagLength = 0;
+	NSInteger tagStartIndex = 0;
 	BOOL isInQuote = NO;
 	BOOL isInTag = NO;
 
@@ -296,13 +296,13 @@ static NSMutableDictionary * entityMap = nil;
 			{
 				NSRange tagRange = NSMakeRange(tagStartIndex, tagLength);
 				NSString * tag = [[aString substringWithRange:tagRange] lowercaseString];
-				int indexOfTagName = 1;
+				NSInteger indexOfTagName = 1;
 
 				// Extract the tag name
 				if ([tag characterAtIndex:indexOfTagName] == '/')
 					++indexOfTagName;
 				
-				int chIndex = indexOfTagName;
+				NSInteger chIndex = indexOfTagName;
 				unichar ch = [tag characterAtIndex:chIndex];
 				while (chIndex < tagLength && [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:ch])
 					ch = [tag characterAtIndex:++chIndex];
@@ -339,8 +339,8 @@ static NSMutableDictionary * entityMap = nil;
 {
 	NSMutableString * string = [NSMutableString stringWithString:self];
 	BOOL isInWhitespace = YES;
-	int length = [string length];
-	int index = 0;
+	NSInteger length = [string length];
+	NSInteger index = 0;
 	
 	while (index < length)
 	{
@@ -408,8 +408,8 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)stringByDeletingLastURLComponent
 {
-	int index = [self length] - 1;
-	int beginning = 0;
+	NSInteger index = [self length] - 1;
+	NSInteger beginning = 0;
 
 	if ([self hasPrefix:@"http://"])
 		beginning = 6;
@@ -429,7 +429,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)lastURLComponent
 {
-	int index = [self length] - 1;
+	NSInteger index = [self length] - 1;
 
 	while (index >= 0 && [self characterAtIndex:index] != '/')
 		--index;
@@ -445,8 +445,8 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)stringByAppendingURLComponent:(NSString *)newComponent
 {
 	NSMutableString * newString = [NSMutableString stringWithString:self];
-	int index = [newString length] - 1;
-	int newIndex = 0;
+	NSInteger index = [newString length] - 1;
+	NSInteger newIndex = 0;
 
 	if (index >= 0 && [newString characterAtIndex:index] != '/')
 		[newString appendString:@"/"];
@@ -463,8 +463,8 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)stringByEscapingExtendedCharacters
 {
 	NSMutableString * escapedString = [NSMutableString stringWithString:self];
-	int length = [escapedString length];
-	int index = 0;
+	NSInteger length = [escapedString length];
+	NSInteger index = 0;
 
 	while (index < length)
 	{
@@ -631,11 +631,11 @@ static NSMutableDictionary * entityMap = nil;
 	// Parse off numeric codes of the format #xxx
 	if ([entityString length] > 1 && [entityString characterAtIndex:0] == '#')
 	{
-		int intValue;
+		NSInteger intValue;
 		if ([entityString characterAtIndex:1] == 'x')
 			intValue = [[entityString substringFromIndex:2] hexValue];
 		else
-			intValue = [[entityString substringFromIndex:1] intValue];
+			intValue = [[entityString substringFromIndex:1] integerValue];
 		return [NSString stringWithFormat:@"%C", (unsigned short)MAX(intValue, ' ')];
 	}
 	

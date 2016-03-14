@@ -54,7 +54,7 @@
 /* newSubscription
  * Display the sheet to create a new RSS subscription.
  */
--(void)newSubscription:(NSWindow *)window underParent:(int)itemId initialURL:(NSString *)initialURL
+-(void)newSubscription:(NSWindow *)window underParent:(NSInteger)itemId initialURL:(NSString *)initialURL
 {
 	[self loadRSSFeedBundle];
 
@@ -125,7 +125,7 @@
 /* didEndSubscriptionEdit
  * Notification that the editing is done.
  */
-- (void)didEndSubscriptionEdit:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+- (void)didEndSubscriptionEdit:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	NSNumber * folderNumber = (__bridge NSNumber *)contextInfo;
 	
@@ -138,7 +138,7 @@
 /* editSubscription
  * Edit an existing RSS subscription.
  */
--(void)editSubscription:(NSWindow *)window folderId:(int)folderId
+-(void)editSubscription:(NSWindow *)window folderId:(NSInteger)folderId
 {
 	[self loadRSSFeedBundle];
 
@@ -152,7 +152,7 @@
 		// Create a context object which contains the folder ID for the sheet to pass to
 		// selector which it will call when done. Retain it so it is still around for the
 		// selector.
-		NSNumber * folderContext = [NSNumber numberWithInt:folderId];
+		NSNumber * folderContext = [NSNumber numberWithInteger:folderId];
 		
 		// Open the edit sheet.
 		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSubscriptionEdit:returnCode:contextInfo:) contextInfo:(__bridge void *)(folderContext)];

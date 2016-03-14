@@ -77,7 +77,7 @@
 /* setState
  * Sets the download state.
  */
--(void)setState:(int)newState
+-(void)setState:(NSInteger)newState
 {
 	state = newState;
 }
@@ -85,7 +85,7 @@
 /* state
  * Returns the download state.
  */
--(int)state
+-(NSInteger)state
 {
 	return state;
 }
@@ -246,7 +246,7 @@
 /* activeDownloads
  * Return the number of downloads in progress.
  */
--(int)activeDownloads
+-(NSInteger)activeDownloads
 {
 	return activeDownloads;
 }
@@ -256,7 +256,7 @@
  */
 -(void)clearList
 {
-	int index = [downloadsList count] - 1;
+	NSInteger index = [downloadsList count] - 1;
 	while (index >= 0)
 	{
 		DownloadItem * item = [downloadsList objectAtIndex:index--];
@@ -346,7 +346,7 @@
  */
 -(DownloadItem *)itemForDownload:(NSURLDownload *)download
 {
-	int index = [downloadsList count] - 1;
+	NSInteger index = [downloadsList count] - 1;
 	while (index >= 0)
 	{
 		DownloadItem * item = [downloadsList objectAtIndex:index--];
@@ -382,8 +382,8 @@
 {
     NSString * decodedFilename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	DownloadManager * downloadManager = [DownloadManager sharedInstance];
-	int count = [[downloadManager downloadsList] count];
-	int index;
+	NSInteger count = [[downloadManager downloadsList] count];
+	NSInteger index;
 
 	NSString * firstFile = [decodedFilename stringByStandardizingPath];
 
@@ -459,7 +459,7 @@
 		filename = [theItem filename];
 
 	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
+	[contextDict setValue:[NSNumber numberWithInteger:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
 	[APPCONTROLLER growlNotify:contextDict
@@ -489,7 +489,7 @@
 		filename = [theItem filename];
 
 	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
+	[contextDict setValue:[NSNumber numberWithInteger:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
 	[APPCONTROLLER growlNotify:contextDict

@@ -25,18 +25,18 @@
 
 // List of available font sizes. I picked the ones that matched
 // Mail but you easily could add or remove from the list as needed.
-int availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64 };
+NSInteger availableFontSizes[] = { 6, 8, 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 48, 64 };
 #define countOfAvailableFontSizes  (sizeof(availableFontSizes)/sizeof(availableFontSizes[0]))
 
 // List of minimum font sizes. I picked the ones that matched the same option in
 // Safari but you easily could add or remove from the list as needed.
-int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
+NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 #define countOfAvailableMinimumFontSizes  (sizeof(availableMinimumFontSizes)/sizeof(availableMinimumFontSizes[0]))
 
 
 @interface AppearancePreferencesViewController ()
 -(void)initializePreferences;
--(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSTextField *)control;
+-(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control;
 
 @end
 
@@ -112,8 +112,8 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     NSUInteger i;
     [minimumFontSizes removeAllItems];
     for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
-        [minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInt:availableMinimumFontSizes[i]]];
-    [minimumFontSizes setFloatValue:[prefs minimumFontSize]];
+        [minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInteger:availableMinimumFontSizes[i]]];
+    [minimumFontSizes setDoubleValue:[prefs minimumFontSize]];
 }
 
 /* changeShowFolderImages
@@ -140,17 +140,17 @@ int availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)selectMinimumFontSize:(id)sender
 {
-    float newMinimumFontSize = [minimumFontSizes floatValue];
+    CGFloat newMinimumFontSize = [minimumFontSizes doubleValue];
     [[Preferences standardPreferences] setMinimumFontSize:newMinimumFontSize];
 }
 
 /* selectUserDefaultFont
  * Display sample text in the specified font and size.
  */
--(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSTextField *)control
+-(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control
 {
     [control setFont:[NSFont fontWithName:name size:size]];
-    [control setStringValue:[NSString stringWithFormat:@"%@ %i", name, size]];
+    [control setStringValue:[NSString stringWithFormat:@"%@ %li", name, (long)size]];
 }
 
 /* selectArticleFont

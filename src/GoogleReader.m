@@ -208,7 +208,7 @@ enum GoogleReaderStatus {
 	ASIHTTPRequest *request = [self requestFromURL:refreshFeedUrl];
 	[request setDidFinishSelector:@selector(feedRequestDone:)];
 	[request setDidFailSelector:@selector(feedRequestFailed:)];
-	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdateString,@"lastupdatestring", [NSNumber numberWithInt:MA_Refresh_GoogleFeed], @"type", nil]];
+	[request setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:thisFolder, @"folder",aItem, @"log",folderLastUpdateString,@"lastupdatestring", [NSNumber numberWithInteger:MA_Refresh_GoogleFeed], @"type", nil]];
 	
 	return request;
 }
@@ -475,7 +475,7 @@ enum GoogleReaderStatus {
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[refreshedFolder itemId]]];
 		return;
 	}  // try/catch
 
@@ -549,7 +549,7 @@ enum GoogleReaderStatus {
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
 
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[refreshedFolder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[refreshedFolder itemId]]];
 }
 
 -(void)authenticate 
@@ -714,7 +714,7 @@ enum GoogleReaderStatus {
 				folderName = [folderNames lastObject];
 				// NNW nested folder char: — 
 				
-				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInt:MA_Root_Folder], nil];
+				NSMutableArray * params = [NSMutableArray arrayWithObjects:[folderNames mutableCopy], [NSNumber numberWithInteger:MA_Root_Folder], nil];
 				[self createFolders:params];
 				break; //In case of multiple labels, we retain only the first one
 			} 
@@ -926,7 +926,7 @@ enum GoogleReaderStatus {
     if (!folder)
     {
 		NSInteger newFolderId;
-        newFolderId = [dbManager addFolder:[parentNumber intValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
+        newFolderId = [dbManager addFolder:[parentNumber integerValue] afterChild:-1 folderName:folderName type:MA_Group_Folder canAppendIndex:NO];
  
         parentNumber = @(newFolderId);
     }

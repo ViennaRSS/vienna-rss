@@ -85,7 +85,7 @@
  */
 -(IBAction)handleDoubleClick:(id)sender
 {
-	int selectedRow = [activityTable selectedRow];
+	NSInteger selectedRow = [activityTable selectedRow];
 	if (selectedRow >= 0)
 	{
 		ActivityItem * selectedItem = [allItems objectAtIndex:selectedRow];
@@ -110,7 +110,7 @@
 {
 	ActivityItem * selectedItem = nil;
 
-	int selectedRow = [activityTable selectedRow];
+	NSInteger selectedRow = [activityTable selectedRow];
 	if (selectedRow >= 0 && selectedRow < [allItems count])
 		selectedItem = [allItems objectAtIndex:selectedRow];
 
@@ -149,7 +149,7 @@
 -(void)handleDetailChange:(NSNotification *)nc
 {
 	ActivityItem * item = (ActivityItem *)[nc object];
-	int selectedRow = [activityTable selectedRow];
+	NSInteger selectedRow = [activityTable selectedRow];
 
 	if (selectedRow >= 0 && (item == [allItems objectAtIndex:selectedRow]))
 		[activityDetail setString:[item details]];		
@@ -170,7 +170,7 @@
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	int selectedRow = [activityTable selectedRow];
+	NSInteger selectedRow = [activityTable selectedRow];
 	if (selectedRow >= 0 && selectedRow < [allItems count])
 	{
 		ActivityItem * item = [allItems objectAtIndex:selectedRow];

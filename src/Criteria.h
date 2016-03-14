@@ -22,7 +22,7 @@
 
 /* Enum of valid criteria operators
  */
-typedef enum {
+typedef NS_ENUM(NSUInteger, CriteriaOperator) {
 	MA_CritOper_Is = 1,
 	MA_CritOper_IsNot,
 	MA_CritOper_IsLessThan,
@@ -37,13 +37,13 @@ typedef enum {
 	MA_CritOper_IsOnOrAfter,
 	MA_CritOper_Under,
 	MA_CritOper_NotUnder
-} CriteriaOperator;
+} ;
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 	MA_CritCondition_All = 0,
 	MA_CritCondition_Any,
 	MA_CritCondition_Invalid
-} CriteriaCondition;
+};
 
 @interface Criteria : NSObject {
 	NSString * field;

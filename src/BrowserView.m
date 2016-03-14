@@ -157,8 +157,8 @@
  */
 -(void)closeAllTabs
 {
-	int count = [tabView numberOfTabViewItems];
-	int i;
+	NSInteger count = [tabView numberOfTabViewItems];
+	NSInteger i;
 	for ((i = (count - 1)); i >= 0; i--) {
 		NSTabViewItem * item = [tabView tabViewItemAtIndex:i];
 		if ([item identifier] != primaryTabItemView)
@@ -176,7 +176,7 @@
 {
 	if (tabItemView != primaryTabItemView) {
 		NSTabViewItem *tabViewItem = [tabView tabViewItemWithIdentifier:tabItemView];
-		int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
+		NSInteger oldIndex = [tabView indexOfTabViewItem:tabViewItem];
 
 		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
 			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
@@ -194,7 +194,7 @@
 	}
 	else
 	{
-		int oldIndex = [tabView indexOfTabViewItem:tabViewItem];
+		NSInteger oldIndex = [tabView indexOfTabViewItem:tabViewItem];
 		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
 			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
 		}
@@ -206,7 +206,7 @@
 /* countOfTabs
  * Returns the total number of tabs.
  */
--(int)countOfTabs
+-(NSInteger)countOfTabs
 {
 	return [tabView numberOfTabViewItems];
 }

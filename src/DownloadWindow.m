@@ -94,7 +94,7 @@
  */
 -(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
 {
-	int row = [table rowAtPoint:[table convertPoint:[theEvent locationInWindow] fromView:nil]];
+	NSInteger row = [table rowAtPoint:[table convertPoint:[theEvent locationInWindow] fromView:nil]];
 	if (row >= 0)
 	{
 		// Select the row under the cursor if it isn't already selected
@@ -110,7 +110,7 @@
 -(void)handleDoubleClick:(id)sender
 {
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSInteger index = [table selectedRow];
 	if (index != -1)
 	{
 		DownloadItem * item = [list objectAtIndex:index];
@@ -128,7 +128,7 @@
 -(void)showInFinder:(id)sender
 {
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSInteger index = [table selectedRow];
 	if (index != -1)
 	{
 		DownloadItem * item = [list objectAtIndex:index];
@@ -146,7 +146,7 @@
 -(void)removeFromList:(id)sender
 {
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSInteger index = [table selectedRow];
 	if (index != -1)
 	{
 		DownloadItem * item = [list objectAtIndex:index];
@@ -161,7 +161,7 @@
 -(void)cancelDownload:(id)sender
 {
 	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSInteger index = [table selectedRow];
 	if (index != -1)
 	{
 		DownloadItem * item = [list objectAtIndex:index];

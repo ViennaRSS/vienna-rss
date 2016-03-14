@@ -51,14 +51,14 @@
  */
 -(BOOL)isAtEndOfQueue
 {
-	return queueIndex >= (int)[array count] - 1;
+	return queueIndex >= (NSInteger)[array count] - 1;
 }
 
 /* previousItemAtQueue
  * Removes an item from the tail of the queue as long as the queue is not
  * empty and returns the backtrack data.
  */
--(BOOL)previousItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPointer
+-(BOOL)previousItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPointer
 {
 	if (queueIndex > 0)
 	{
@@ -74,9 +74,9 @@
  * Removes an item from the tail of the queue as long as the queue is not
  * empty and returns the backtrack data.
  */
--(BOOL)nextItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPointer
+-(BOOL)nextItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPointer
 {
-	if (queueIndex < (int)[array count] - 1)
+	if (queueIndex < (NSInteger)[array count] - 1)
 	{
 		ArticleReference * item = [array objectAtIndex:++queueIndex];
 		*folderId = [item folderId];
@@ -95,9 +95,9 @@
  * new 'head' position. This produces the expected results when tracking
  * from the new item inserted back to the most recent item.
  */
--(void)addToQueue:(int)folderId guid:(NSString *)guid
+-(void)addToQueue:(NSInteger)folderId guid:(NSString *)guid
 {
-	while (queueIndex + 1 < (int)[array count])
+	while (queueIndex + 1 < (NSInteger)[array count])
 		[array removeObjectAtIndex:queueIndex + 1];
 	if ([array count] == maxItems)
 	{

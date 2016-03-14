@@ -72,7 +72,7 @@ extern NSString * MA_Field_HasEnclosure;
     BOOL deletedFlag;
     BOOL enclosureDownloadedFlag;
     BOOL hasEnclosureFlag;
-    int status;
+    NSInteger status;
 }
 
 typedef enum {
@@ -83,7 +83,7 @@ typedef enum {
 
 // Accessor functions
 -(id)initWithGuid:(NSString *)theGuid;
--(int)parentId;
+-(NSInteger)parentId;
 -(NSString *)guid;
 -(NSString *)author;
 -(NSString *)body;
@@ -94,7 +94,7 @@ typedef enum {
 -(NSDate *)date;
 -(NSDate *)createdDate;
 -(Folder *)containingFolder;
--(int)folderId;
+-(NSInteger)folderId;
 -(BOOL)isRead;
 -(BOOL)isRevised;
 -(BOOL)isFlagged;
@@ -102,18 +102,18 @@ typedef enum {
 -(BOOL)hasComments;
 -(BOOL)hasEnclosure;
 -(BOOL)enclosureDownloaded;
--(int)status;
+-(NSInteger)status;
 -(void)setGuid:(NSString *)newGuid;
--(void)setParentId:(int)newParentId;
+-(void)setParentId:(NSInteger)newParentId;
 -(void)setTitle:(NSString *)newTitle;
 -(void)setLink:(NSString *)newLink;
 -(void)setAuthor:(NSString *)newAuthor;
--(void)setFolderId:(int)newFolderId;
+-(void)setFolderId:(NSInteger)newFolderId;
 -(void)setDate:(NSDate *)newDate;
 -(void)setCreatedDate:(NSDate *)newCreatedDate;
 -(void)setBody:(NSString *)newText;
 -(void)setEnclosure:(NSString *)newEnclosure;
--(void)setStatus:(int)newStatus;
+-(void)setStatus:(NSInteger)newStatus;
 -(void)setHasEnclosure:(BOOL)flag;
 -(void)markRead:(BOOL)flag;
 -(void)markRevised:(BOOL)flag;

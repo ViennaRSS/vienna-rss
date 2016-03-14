@@ -21,8 +21,8 @@
 #import "ViewExtensions.h"
 
 @interface NSAnimation (ViennaAnimationWithTags)
--(void)MA_setTag:(int)newTag;
--(int)MA_tag;
+-(void)MA_setTag:(NSInteger)newTag;
+-(NSInteger)MA_tag;
 @end
 
 @implementation NSAnimation (ViennaAnimationWithTags)
@@ -43,20 +43,20 @@
 /* MA_setTag
  * Assigns the specified tag value to the animation object.
  */
--(void)MA_setTag:(int)newTag
+-(void)MA_setTag:(NSInteger)newTag
 {
-	[[self MA_tagDict] setObject:[NSNumber numberWithInt:newTag]
+	[[self MA_tagDict] setObject:[NSNumber numberWithInteger:newTag]
 					   forKey:[NSValue valueWithPointer:(__bridge const void *)(self)]];
 }
 
 /* MA_tag
  * Returns the associated tag.
  */
--(int)MA_tag
+-(NSInteger)MA_tag
 {
 	NSMutableDictionary *tagDict = [self MA_tagDict];
 	NSValue *key = [NSValue valueWithPointer:(__bridge const void *)(self)];
-	int tag = [[tagDict objectForKey:key] intValue];
+	NSInteger tag = [[tagDict objectForKey:key] integerValue];
 	[tagDict removeObjectForKey:key];
 	return tag;
 }
@@ -67,7 +67,7 @@
 /* resizeViewWithAnimation
  * Resizes the specified view with animation.
  */
--(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag
+-(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(NSInteger)viewTag
 {
 	NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
 						   [NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
@@ -89,7 +89,7 @@
 -(void)animationDidEnd:(NSAnimation *)animation
 {
 	NSWindow * viewWindow = [self window];
-	int viewTag = [animation MA_tag];
+	NSInteger viewTag = [animation MA_tag];
 
 	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
 		[(id)[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];

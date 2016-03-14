@@ -32,7 +32,7 @@
 /* newGroupFolder
  * Display the sheet to create a new group folder.
  */
--(void)newGroupFolder:(NSWindow *)window underParent:(int)itemId
+-(void)newGroupFolder:(NSWindow *)window underParent:(NSInteger)itemId
 {
 	if (!newGroupFolderWindow)
 	{
@@ -57,11 +57,11 @@
 	NSString * folderNameString = [[folderName stringValue] trim];
 	
 	// Create the new folder in the database
-    int newFolderId = [[Database sharedManager] addFolder:parentId
-                                               afterChild:-1
-                                               folderName:folderNameString
-                                                     type:MA_Group_Folder
-                                           canAppendIndex:NO];
+	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId
+													 afterChild:-1
+													 folderName:folderNameString
+														   type:MA_Group_Folder
+												 canAppendIndex:NO];
 
 	// Close the window
 	[NSApp endSheet:newGroupFolderWindow];

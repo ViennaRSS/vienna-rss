@@ -142,7 +142,7 @@
 	NSNumber * navigationTypeObject = [actionInformation objectForKey:WebActionNavigationTypeKey];
 	if (navigationTypeObject != nil)
 	{
-		int navigationType = [navigationTypeObject intValue];
+		NSInteger navigationType = [navigationTypeObject integerValue];
 		if (navigationType == WebNavigationTypeLinkClicked)
 		{
 			[listener ignore];

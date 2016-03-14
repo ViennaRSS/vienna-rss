@@ -32,9 +32,9 @@
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
 // 300 seems a reasonable value to avoid calculating too many frames before being able to update display
 // this is big enough to allow the user to start reading while the frame is being rendered
-#define DEFAULT_CELL_HEIGHT	300
-#define XPOS_IN_CELL	6
-#define YPOS_IN_CELL	2
+#define DEFAULT_CELL_HEIGHT	300.0
+#define XPOS_IN_CELL	6.0
+#define YPOS_IN_CELL	2.0
 
 // Private functions
 @interface UnifiedDisplayView (Private)
@@ -44,9 +44,9 @@
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)selectFirstUnreadInFolder;
-	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
+	-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
-	-(void)makeRowSelectedAndVisible:(int)rowIndex;
+	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
 	-(void)printDocument;
 @end
 
@@ -209,8 +209,8 @@
 		return [controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 
 	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
-	int count = [defaultMenuItems count];
-	int index;
+	NSInteger count = [defaultMenuItems count];
+	NSInteger index;
 
 	// Copy over everything but the reload menu item, which we can't handle if
 	// this is not a full HTML page since we don't have an URL.
@@ -317,7 +317,7 @@
                     bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
                     clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
                     [[sender preferences] setJavaScriptEnabled:[[Preferences standardPreferences] useJavaScript]];
-                    fittingHeight = [outputHeight floatValue];
+                    fittingHeight = [outputHeight doubleValue];
                     //get the rect of the current webview frame
                     NSRect webViewRect = [sender frame];
                     //calculate the new frame
@@ -330,14 +330,14 @@
 				} while (![bodyHeight isEqualToString:outputHeight] || ![bodyHeight isEqualToString:clientHeight]);
 
                 if (row < [rowHeightArray count])
-                    [rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithFloat:fittingHeight]];
+					[rowHeightArray replaceObjectAtIndex:row withObject:[NSNumber numberWithDouble:fittingHeight]];
                 else
                 {	NSInteger toAdd = row - [rowHeightArray count] ;
                     for (NSInteger i = 0 ; i < toAdd ; i++)
                     {
-                        [rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+                        [rowHeightArray addObject:[NSNumber numberWithDouble:DEFAULT_CELL_HEIGHT]];
                     }
-                    [rowHeightArray addObject:[NSNumber numberWithFloat:fittingHeight]];
+                    [rowHeightArray addObject:[NSNumber numberWithDouble:fittingHeight]];
                 }
                 [cell setInProgress:NO];
                 [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
@@ -364,7 +364,7 @@
 {
 	NSMenuItem * mainMenuItem;
 	NSMenuItem * contextualMenuItem;
-	int index;
+	NSInteger index;
 	NSMenu * articleListMenu = [articleList menu];
 	if (articleListMenu == nil)
 		return;
@@ -397,11 +397,11 @@
 {
 	if (singleSelection)
 	{
-		int nextRow =[[articleList selectedRowIndexes] firstIndex];
-		int articlesCount = [[articleController allArticles] count];
+		NSUInteger nextRow =[[articleList selectedRowIndexes] firstIndex];
+		NSUInteger articlesCount = [[articleController allArticles] count];
 
 		currentSelectedRow = -1;
-		if (nextRow < 0 || nextRow >= articlesCount)
+		if (nextRow >= articlesCount)
 			nextRow = articlesCount - 1;
 		[self makeRowSelectedAndVisible:nextRow];
 	}
@@ -420,7 +420,7 @@
  */
 -(BOOL)scrollToArticle:(NSString *)guid
 {
-	int rowIndex = 0;
+	NSInteger rowIndex = 0;
 	BOOL found = NO;
 
 	for (Article * thisArticle in [articleController allArticles])
@@ -459,7 +459,7 @@
 /* performFindPanelAction
  * Implement the search action.
  */
--(void)performFindPanelAction:(int)actionTag
+-(void)performFindPanelAction:(NSInteger)actionTag
 {
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 
@@ -533,7 +533,7 @@
 /* canDeleteMessageAtRow
  * Returns YES if the message at the specified row can be deleted, otherwise NO.
  */
--(BOOL)canDeleteMessageAtRow:(int)row
+-(BOOL)canDeleteMessageAtRow:(NSInteger)row
 {
 	if ((row >= 0) && (row < [[articleController allArticles] count]))
 	{
@@ -588,7 +588,7 @@
  * Selects the specified row in the table and makes it visible by
  * scrolling to it.
  */
--(void)makeRowSelectedAndVisible:(int)rowIndex
+-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
 	if ([[articleController allArticles] count] == 0u)
 	{
@@ -620,7 +620,7 @@
 		guidOfArticleToSelect = nil;
 
 		// Get the first folder with unread articles.
-		int firstFolderWithUnread = [foldersTree firstFolderWithUnread];
+		NSInteger firstFolderWithUnread = [foldersTree firstFolderWithUnread];
 
 		// Select the folder in the tree view.
 		[foldersTree selectFolder:firstFolderWithUnread];
@@ -636,7 +636,7 @@
 -(void)displayNextUnread
 {
 	// Save the value of currentSelectedRow.
-	int currentRow = currentSelectedRow;
+	NSInteger currentRow = currentSelectedRow;
 
 	// Mark the current article read.
 	[self markCurrentRead:nil];
@@ -645,7 +645,7 @@
 	// other folders until we come back to ourselves.
 	if (([[Database sharedManager] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
 	{
-		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
+		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
 		if (nextFolderWithUnread != -1)
 		{
 			if (nextFolderWithUnread == [articleController currentFolderId])
@@ -665,13 +665,13 @@
 /* viewNextUnreadInCurrentFolder
  * Select the next unread article in the current folder after currentRow.
  */
--(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow
+-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow
 {
 	if (currentRow < 0)
 		currentRow = 0;
 
 	NSArray * allArticles = [articleController allArticles];
-	int totalRows = [allArticles count];
+	NSInteger totalRows = [allArticles count];
 	Article * theArticle;
 	while (currentRow < totalRows)
 	{
@@ -694,7 +694,7 @@
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
 	{
-		int count = [[articleController allArticles] count];
+		NSInteger count = [[articleController allArticles] count];
 		if (count > 0)
 			[self makeRowSelectedAndVisible:[[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending] ? 0 : count - 1];
 	}
@@ -703,7 +703,7 @@
 /* selectFolderAndArticle
  * Select a folder and select a specified article within the folder.
  */
--(void)selectFolderAndArticle:(int)folderId guid:(NSString *)guid
+-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, easy enough.
 	if (folderId == [articleController currentFolderId])
@@ -736,7 +736,7 @@
 	// Preserve the article that the user might currently be reading.
 	Preferences * prefs = [Preferences standardPreferences];
 	if (([prefs refreshFrequency] > 0) &&
-		(currentSelectedRow >= 0 && currentSelectedRow < (int)[[articleController allArticles] count]))
+		(currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)[[articleController allArticles] count]))
 	{
 		Article * currentArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
 		if (![currentArticle isDeleted])
@@ -751,7 +751,7 @@
  * logic and redrawing the article list. The selected article is preserved
  * and restored on completion of the refresh.
  */
--(void)refreshFolder:(int)refreshFlag
+-(void)refreshFolder:(NSInteger)refreshFlag
 {
 	NSArray * allArticles = [articleController allArticles];
 	NSString * guid = nil;
@@ -775,7 +775,7 @@
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
 		// the same and the GUID of the article at the selection is the same.
 		allArticles = [articleController allArticles];
-		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (int)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
+		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
 		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
 		if (!isUnchanged)
 		{
@@ -813,7 +813,7 @@
  * Switches to the specified folder and displays articles filtered by whatever is in
  * the search field.
  */
--(void)selectFolderWithFilter:(int)newFolderId
+-(void)selectFolderWithFilter:(NSInteger)newFolderId
 {
     currentSelectedRow = -1;
     [rowHeightArray removeAllObjects];
@@ -847,7 +847,7 @@
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	NSArray * allArticles = [articleController allArticles];
-	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedManager] readOnly])
+	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)[allArticles count] && ![[Database sharedManager] readOnly])
 	{
 		Article * theArticle = [allArticles objectAtIndex:currentSelectedRow];
 		if (![theArticle isRead])
@@ -873,14 +873,14 @@
 	{
 		NSInteger toAdd = row - [rowHeightArray count] + 1 ;
 		for (NSInteger i = 0 ; i < toAdd ; i++) {
-			[rowHeightArray addObject:[NSNumber numberWithFloat:DEFAULT_CELL_HEIGHT]];
+			[rowHeightArray addObject:[NSNumber numberWithDouble:DEFAULT_CELL_HEIGHT]];
 		}
 		return (CGFloat)DEFAULT_CELL_HEIGHT;
 	}
 	else
 	{
 		id object= [rowHeightArray objectAtIndex:row];
-        CGFloat height = [object floatValue];
+        CGFloat height = [object doubleValue];
 		return  (height) ;
 	}
 }
@@ -946,7 +946,7 @@
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
 	Database * db = [Database sharedManager];
-	int count = [rowIndexes count];
+	NSInteger count = [rowIndexes count];
 
 	// Set up the pasteboard
 	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSStringPboardType, NSHTMLPboardType, nil] owner:self];
@@ -1115,7 +1115,7 @@
  */
 -(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
 {
-	int row = [articleList rowAtPoint:[articleList convertPoint:[theEvent locationInWindow] fromView:nil]];
+	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:[theEvent locationInWindow] fromView:nil]];
 	if (row >= 0)
 	{
 		// Select the row under the cursor if it isn't already selected

@@ -21,7 +21,7 @@
 @class WebView;
 @protocol BaseView
 @required
-	-(void)performFindPanelAction:(int)tag;
+	-(void)performFindPanelAction:(NSInteger)tag;
 	-(void)printDocument:(id)sender;
 	-(IBAction)handleGoForward:(id)sender;
 	-(IBAction)handleGoBack:(id)sender;

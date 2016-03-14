@@ -44,7 +44,7 @@
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
 	NSArray * folderArrayOfArticles;
-	int currentFolderId;
+	NSInteger currentFolderId;
 	NSDictionary * articleSortSpecifiers;
 	NSString * sortColumnIdentifier;
 	BackTrackArray * backtrackArray;
@@ -61,8 +61,8 @@
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
--(void)setLayout:(int)newLayout;
--(int)currentFolderId;
+-(void)setLayout:(NSInteger)newLayout;
+-(NSInteger)currentFolderId;
 -(Article *)selectedArticle;
 -(NSArray *)markedArticleRange;
 -(void)updateAlternateMenuTitle;
@@ -75,7 +75,7 @@
 -(NSString *)searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)refreshCurrentFolder;
--(void)displayFolder:(int)newFolderId;
+-(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
 -(NSString *)sortColumnIdentifier;
 -(BOOL)sortIsAscending;

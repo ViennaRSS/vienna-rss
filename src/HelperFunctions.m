@@ -33,7 +33,7 @@ BOOL hasOSScriptsMenu(void)
 	NSString * pathToUIServerPlist = [@"~/Library/Preferences/com.apple.systemuiserver.plist" stringByExpandingTildeInPath];
 	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
 	NSArray * menuExtras = [properties objectForKey:@"menuExtras"];
-	int index;
+	NSInteger index;
 
 	for (index = 0; index < [menuExtras count]; ++index)
 	{
@@ -66,13 +66,13 @@ NSString * getDefaultBrowser(void)
 NSMenuItem * menuItemWithAction(SEL theSelector)
 {
 	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
-	int count = [arrayOfMenus count];
-	int index;
+	NSInteger count = [arrayOfMenus count];
+	NSInteger index;
 
 	for (index = 0; index < count; ++index)
 	{
 		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		NSInteger itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
 		if (itemIndex >= 0)
 			return [subMenu itemAtIndex:itemIndex];
 	}
@@ -86,13 +86,13 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
 NSMenuItem * menuItemOfMenuWithAction(NSMenu * menu, SEL theSelector)
 {
 	NSArray * arrayOfMenus = [menu itemArray];
-	int count = [arrayOfMenus count];
-	int index;
+	NSInteger count = [arrayOfMenus count];
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
 		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		NSInteger itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
 		if (itemIndex >= 0)
 			return [subMenu itemAtIndex:itemIndex];
 	}

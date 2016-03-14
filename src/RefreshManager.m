@@ -156,7 +156,7 @@
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] intValue]];
+	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] integerValue]];
 	if (folder != nil)
 	{
         for (ASIHTTPRequest *theRequest in [networkQueue operations]) {
@@ -322,7 +322,7 @@
 {
     for (ASIHTTPRequest *theRequest in [networkQueue operations])
     {
-		if (([[theRequest userInfo] objectForKey:@"folder"] == folder) && ([[[theRequest userInfo] valueForKey:@"type"] intValue] == [[NSNumber numberWithInt:type] intValue]))
+		if (([[theRequest userInfo] objectForKey:@"folder"] == folder) && ([[[theRequest userInfo] valueForKey:@"type"] integerValue] == [[NSNumber numberWithInteger:type] integerValue]))
             return YES;
 
 	}
@@ -422,7 +422,7 @@
 		[folder setNonPersistedFlag:MA_FFlag_Error];
 	else
 		[folder clearNonPersistedFlag:MA_FFlag_Error];
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[folder itemId]]];
 }
 
 /* setFolderUpdatingFlag
@@ -435,7 +435,7 @@
 		[folder setNonPersistedFlag:MA_FFlag_Updating];
 	else
 		[folder clearNonPersistedFlag:MA_FFlag_Updating];
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[folder itemId]]];
 }
 
 /* pumpSubscriptionRefresh
@@ -505,7 +505,7 @@
         {
             [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
         }
-		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_Feed], @"type", nil]];
+		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInteger:MA_Refresh_Feed], @"type", nil]];
 		if (![[folder username] isEqualToString:@""])
 		{
 			[myRequest setUsername:[folder username]];
@@ -571,7 +571,7 @@
 	[myRequest setDelegate:self];
 	[myRequest setDidFinishSelector:@selector(iconRequestDone:)];
 	[myRequest setDidFailSelector:@selector(iconRequestFailed:)];
-	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInt:MA_Refresh_FavIcon], @"type", nil]];
+	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInteger:MA_Refresh_FavIcon], @"type", nil]];
 	[self addConnection:myRequest];
 
 }
@@ -593,7 +593,7 @@
 			[folder setImage:iconImage];
 			
 			// Broadcast a notification since the folder image has now changed
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInt:[folder itemId]]];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[folder itemId]]];
 			
 			// Log additional details about this.
 			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
@@ -634,7 +634,7 @@
 {
 
 	NSURL *newURL = [NSURL URLWithString:[[connector responseHeaders] valueForKey:@"Location"] relativeToURL:[connector url]];
-	int responseStatusCode = [connector responseStatusCode];
+	NSInteger responseStatusCode = [connector responseStatusCode];
 
 	if (responseStatusCode == 301)
 	{
@@ -702,7 +702,7 @@
 		
 	Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
 	ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
-	int responseStatusCode = [connector responseStatusCode];
+	NSInteger responseStatusCode = [connector responseStatusCode];
 	NSURL *url = [connector url];
 	BOOL isCancelled = [connector isCancelled];
 	NSInteger folderId = [folder itemId];
@@ -986,7 +986,7 @@
 				NSUInteger index = 1;
                 
 				while (([dbManager folderFromName:newFeedTitle]) != nil)
-					newFeedTitle = [NSString stringWithFormat:@"%@ (%li)", oldFeedTitle, (unsigned long)index++];
+					newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
                 
 				[connectorItem setName:newFeedTitle];
                 [dbManager setName:newFeedTitle forFolder:folderId];

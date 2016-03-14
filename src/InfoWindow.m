@@ -26,7 +26,7 @@
 #import "Folder.h"
 
 @interface InfoWindow (private)
-	-(id)initWithFolder:(int)folderId;
+	-(id)initWithFolder:(NSInteger)folderId;
 	-(void)enableValidateButton;
 	-(void)updateFolder;
 @end
@@ -87,8 +87,8 @@
  */
 -(void)handleFolderDeleted:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
-	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
+	NSInteger folderId = [(NSNumber *)[nc object] integerValue];
+	NSNumber * folderNumber = [NSNumber numberWithInteger:folderId];
 	InfoWindow * infoWindow;
 	
 	infoWindow = [controllerList objectForKey:folderNumber];
@@ -105,8 +105,8 @@
  */
 -(void)handleFolderChange:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
-	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
+	NSInteger folderId = [(NSNumber *)[nc object] integerValue];
+	NSNumber * folderNumber = [NSNumber numberWithInteger:folderId];
 	InfoWindow * infoWindow;
 	
 	infoWindow = [controllerList objectForKey:folderNumber];
@@ -118,9 +118,9 @@
  * If there's an active info window for the specified folder then it is activated
  * and brought to the front. Otherwise a new window is created for the folder.
  */
--(void)showInfoWindowForFolder:(int)folderId
+-(void)showInfoWindowForFolder:(NSInteger)folderId
 {
-	NSNumber * folderNumber = [NSNumber numberWithInt:folderId];
+	NSNumber * folderNumber = [NSNumber numberWithInteger:folderId];
 	InfoWindow * infoWindow;
 
 	infoWindow = [controllerList objectForKey:folderNumber];
@@ -139,7 +139,7 @@
 /* init
  * Just init the Info window.
  */
--(id)initWithFolder:(int)folderId
+-(id)initWithFolder:(NSInteger)folderId
 {
 	if ((self = [super initWithWindowNibName:@"InfoWindow"]) != nil)
 		infoFolderId = folderId;

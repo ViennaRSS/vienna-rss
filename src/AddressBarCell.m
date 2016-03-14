@@ -57,7 +57,7 @@
  */
 -(NSRect)drawingRectForBounds:(NSRect)theRect
 {
-	const float imageSpace = 19.0;
+	const CGFloat imageSpace = 19.0;
 
 	theRect.origin.x += imageSpace;
 	theRect.size.width -= imageSpace;

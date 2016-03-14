@@ -89,10 +89,10 @@
 	NSMutableDictionary * scriptPathMappings;
 	NSMenu * appDockMenu;
 	NSStatusItem * appStatusItem;
-	int progressCount;
+	NSInteger progressCount;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
-	int lastCountOfUnread;
+	NSInteger lastCountOfUnread;
 	BOOL isStatusBarVisible;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
@@ -198,7 +198,7 @@
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
--(void)selectFolder:(int)folderId;
+-(void)selectFolder:(NSInteger)folderId;
 -(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
 -(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
@@ -209,7 +209,7 @@
 -(NSString *)searchString;
 -(void)setSearchString:(NSString *)newSearchString;
 -(Article *)selectedArticle;
--(int)currentFolderId;
+-(NSInteger)currentFolderId;
 -(BOOL)isConnecting;
 -(void)runAppleScript:(NSString *)scriptName;
 -(NSDictionary *)standardURLs;
@@ -220,7 +220,7 @@
 -(NSMenu *)folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
 -(NSLayoutManager *)layoutManager;
--(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag;
+-(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag;
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;

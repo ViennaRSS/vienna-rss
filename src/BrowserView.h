@@ -40,7 +40,7 @@
 -(void)setActiveTabToPrimaryTab;
 -(void)closeTabItemView:(NSView *)theTab;
 -(void)closeAllTabs;
--(int)countOfTabs;
+-(NSInteger)countOfTabs;
 -(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt;
 -(void)showTabItemView:(NSView *)theTabView;
 -(void)showPreviousTab;

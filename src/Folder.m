@@ -485,7 +485,7 @@ static NSArray * iconArray = nil;
 /* indexOfArticle
  * Returns the index of the article that matches the specified article based on guid.
  */
--(unsigned)indexOfArticle:(Article *)article
+-(NSUInteger)indexOfArticle:(Article *)article
 {
     @synchronized(self)
     {
@@ -739,7 +739,7 @@ static NSArray * iconArray = nil;
 				    [articles addObject:theArticle];
 				else
 				{   // some problem
-				    NSLog(@"Bug retrieving from cache in folder %ld : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)[articles count],(unsigned long)[cachedGuids count],object);
+				    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)[articles count],(unsigned long)[cachedGuids count],object);
 				    isCached = NO;
 				    containsBodies = NO;
 				    break;
@@ -836,7 +836,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %ld (%@)", (long)itemId, [self name]];
+	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)itemId, [self name]];
 }
 
 /* dealloc

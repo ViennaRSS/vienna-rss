@@ -187,7 +187,7 @@
     if (cfArrayOfApps != nil)
     {
         CFIndex count = CFArrayGetCount(cfArrayOfApps);
-        int index;
+        NSInteger index;
         
         for (index = 0; index < count; ++index)
         {
@@ -391,7 +391,7 @@
  */
 -(IBAction)changeCheckFrequency:(id)sender
 {
-    int newFrequency = [[checkFrequency selectedItem] tag];
+    NSInteger newFrequency = [[checkFrequency selectedItem] tag];
     [[Preferences standardPreferences] setRefreshFrequency:newFrequency];
 }
 
@@ -401,7 +401,7 @@
 -(IBAction)changeNewArticlesNotificationBadge:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    int currentNotificationValue = [prefs newArticlesNotification];
+    NSInteger currentNotificationValue = [prefs newArticlesNotification];
     if ([sender state] == NSOnState)
     {
         [prefs setNewArticlesNotification:currentNotificationValue | MA_NewArticlesNotification_Badge];
@@ -418,7 +418,7 @@
 -(IBAction)changeNewArticlesNotificationBounce:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    int currentNotificationValue = [prefs newArticlesNotification];
+    NSInteger currentNotificationValue = [prefs newArticlesNotification];
     if ([sender state] == NSOnState)
     {
         [prefs setNewArticlesNotification:currentNotificationValue | MA_NewArticlesNotification_Bounce];

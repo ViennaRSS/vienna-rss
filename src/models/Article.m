@@ -221,12 +221,12 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(BOOL)hasComments				{ return [commentsArray count] > 0; }
 -(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
 -(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
--(int)status					{ return status; }
--(int)folderId					{ return [[articleData objectForKey:MA_Field_Folder] intValue]; }
+-(NSInteger)status				{ return status; }
+-(NSInteger)folderId			{ return [[articleData objectForKey:MA_Field_Folder] integerValue]; }
 -(NSString *)author				{ return [articleData objectForKey:MA_Field_Author]; }
 -(NSString *)link				{ return [articleData objectForKey:MA_Field_Link]; }
 -(NSString *)guid				{ return [articleData objectForKey:MA_Field_GUID]; }
--(int)parentId					{ return [[articleData objectForKey:MA_Field_Parent] intValue]; }
+-(NSInteger)parentId			{ return [[articleData objectForKey:MA_Field_Parent] integerValue]; }
 -(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
 -(NSString *)summary
 {
@@ -254,9 +254,9 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* setFolderId
  */
--(void)setFolderId:(int)newFolderId
+-(void)setFolderId:(NSInteger)newFolderId
 {
-    [articleData setObject:[NSNumber numberWithInt:newFolderId] forKey:MA_Field_Folder];
+    [articleData setObject:[NSNumber numberWithInteger:newFolderId] forKey:MA_Field_Folder];
 }
 
 /* setGuid
@@ -268,14 +268,14 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* setParentId
  */
--(void)setParentId:(int)newParentId
+-(void)setParentId:(NSInteger)newParentId
 {
-    [articleData setObject:[NSNumber numberWithInt:newParentId] forKey:MA_Field_Parent];
+    [articleData setObject:[NSNumber numberWithInteger:newParentId] forKey:MA_Field_Parent];
 }
 
 /* setStatus
  */
--(void)setStatus:(int)newStatus
+-(void)setStatus:(NSInteger)newStatus
 {
     status = newStatus;
 }

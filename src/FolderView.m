@@ -27,7 +27,7 @@
 @interface NSObject (FolderViewDelegate)
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)canDeleteFolderAtRow:(int)row;
+	-(BOOL)canDeleteFolderAtRow:(NSInteger)row;
 	-(IBAction)deleteFolder:(id)sender;
 	-(void)outlineViewWillBecomeFirstResponder;
 @end
@@ -144,7 +144,7 @@
  */
 -(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)data
 {
-	int row;
+	NSInteger row;
 
 	row = [self rowAtPoint:point];
 	return [_dataSource outlineView:self tooltipForItem:[self itemAtRow:row]];
@@ -385,7 +385,7 @@
 		[blueGradient drawInRect:editRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 		
 		// Put back any cell image
-		int editColumnIndex = [self editedColumn];
+		NSInteger editColumnIndex = [self editedColumn];
 		if (editColumnIndex != -1)
 		{
 			NSTableColumn * editColumn = [[self tableColumns] objectAtIndex:editColumnIndex];
@@ -444,13 +444,13 @@
 
 	// This is ugly, but just about the only way to do it. NSTableView is determined to select and edit something else, even the
 	// text field that it just finished editing, unless we mislead it about what key was pressed to end editing.
-	if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
+	if ([[[notification userInfo] objectForKey:@"NSTextMovement"] integerValue] == NSReturnTextMovement)
 	{
 		NSMutableDictionary *newUserInfo;
 		NSNotification *newNotification;
 		
 		newUserInfo = [NSMutableDictionary dictionaryWithDictionary:[notification userInfo]];
-		[newUserInfo setObject:[NSNumber numberWithInt:NSIllegalTextMovement] forKey:@"NSTextMovement"];
+		[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
 		newNotification = [NSNotification notificationWithName:[notification name] object:[notification object] userInfo:newUserInfo];
 		[super textDidEndEditing:newNotification];
 		

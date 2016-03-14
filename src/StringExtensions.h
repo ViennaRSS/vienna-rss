@@ -51,6 +51,6 @@
 	-(NSString *)baseURL;
 	-(NSString *)host;
 	-(NSString *)trim;
-	-(int)hexValue;
+	-(NSInteger)hexValue;
 	-(BOOL)isBlank;
 @end

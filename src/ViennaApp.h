@@ -52,7 +52,7 @@
 -(NSString *)applicationVersion;
 -(NSArray *)folders;
 -(BOOL)isRefreshing;
--(int)totalUnreadCount;
+-(NSInteger)totalUnreadCount;
 -(NSString *)currentTextSelection;
 -(NSString *)documentHTMLSource;
 -(NSString *)documentTabURL;
@@ -65,40 +65,40 @@
 -(Article *)currentArticle;
 
 // Preference getters
--(int)autoExpireDuration;
+-(NSInteger)autoExpireDuration;
 -(float)markReadInterval;
 -(BOOL)readingPaneOnRight;
 -(BOOL)refreshOnStartup;
 -(BOOL)checkForNewOnStartup;
 -(BOOL)openLinksInVienna;
 -(BOOL)openLinksInBackground;
--(int)minimumFontSize;
+-(NSInteger)minimumFontSize;
 -(BOOL)enableMinimumFontSize;
--(int)refreshFrequency;
+-(NSInteger)refreshFrequency;
 -(NSString *)displayStyle;
 -(NSString *)folderListFont;
--(int)folderListFontSize;
+-(NSInteger)folderListFontSize;
 -(NSString *)articleListFont;
--(int)articleListFontSize;
+-(NSInteger)articleListFontSize;
 -(BOOL)statusBarVisible;
 -(BOOL)filterBarVisible;
 
 // Preference setters
--(void)setAutoExpireDuration:(int)newDuration;
+-(void)setAutoExpireDuration:(NSInteger)newDuration;
 -(void)setMarkReadInterval:(float)newInterval;
 -(void)setReadingPaneOnRight:(BOOL)flag;
 -(void)setRefreshOnStartup:(BOOL)flag;
 -(void)setCheckForNewOnStartup:(BOOL)flag;
 -(void)setOpenLinksInVienna:(BOOL)flag;
 -(void)setOpenLinksInBackground:(BOOL)flag;
--(void)setMinimumFontSize:(int)newSize;
+-(void)setMinimumFontSize:(NSInteger)newSize;
 -(void)setEnableMinimumFontSize:(BOOL)flag;
--(void)setRefreshFrequency:(int)newFrequency;
+-(void)setRefreshFrequency:(NSInteger)newFrequency;
 -(void)setDisplayStyle:(NSString *)newStyle;
 -(void)setFolderListFont:(NSString *)newFontName;
--(void)setFolderListFontSize:(int)newFontSize;
+-(void)setFolderListFontSize:(NSInteger)newFontSize;
 -(void)setArticleListFont:(NSString *)newFontName;
--(void)setArticleListFontSize:(int)newFontSize;
+-(void)setArticleListFontSize:(NSInteger)newFontSize;
 -(void)setStatusBarVisible:(BOOL)flag;
 -(void)setFilterBarVisible:(BOOL)flag;
 @end

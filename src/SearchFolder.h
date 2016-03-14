@@ -42,9 +42,9 @@
 	NSMutableArray * arrayOfViews;
 	Database * db;
 	NSRect searchWindowFrame;
-	int smartFolderId;
-	int totalCriteria;
-	int parentId;
+	NSInteger smartFolderId;
+	NSInteger totalCriteria;
+	NSInteger parentId;
 	BOOL firstRun;
 }
 
@@ -58,8 +58,8 @@
 -(IBAction)fieldChanged:(id)sender;
 
 // Public functions
--(void)newCriteria:(NSWindow *)window underParent:(int)itemId;
--(void)loadCriteria:(NSWindow *)window folderId:(int)folderId;
+-(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId;
+-(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId;
 
 // General functions
 -(id)initWithDatabase:(Database *)newDb;

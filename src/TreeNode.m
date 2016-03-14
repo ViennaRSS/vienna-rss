@@ -31,7 +31,7 @@
 {
 	if ((self = [super init]) != nil)
  	{
-		int folderId = (theFolder ? [theFolder itemId] : MA_Root_Folder);
+		NSInteger folderId = (theFolder ? [theFolder itemId] : MA_Root_Folder);
 		[self setFolder:theFolder];
 		[self setParentNode:parent];
 		[self setCanHaveChildren:childflag];

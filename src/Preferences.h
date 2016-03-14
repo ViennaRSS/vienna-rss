@@ -27,13 +27,13 @@
 	NSString * profilePath;
 	NSString * preferencesPath;
 	float markReadInterval;
-	int minimumFontSize;
-	int refreshFrequency;
-	int autoExpireDuration;
-	int filterMode;
-	int layout;
-	int newArticlesNotification;
-	int foldersTreeSortMethod;
+	NSInteger minimumFontSize;
+	NSInteger refreshFrequency;
+	NSInteger autoExpireDuration;
+	NSInteger filterMode;
+	NSInteger layout;
+	NSInteger newArticlesNotification;
+	NSInteger foldersTreeSortMethod;
 	BOOL refreshOnStartup;
 	BOOL checkForNewOnStartup;
 	BOOL alwaysAcceptBetas;
@@ -54,7 +54,7 @@
     BOOL sendSystemSpecs;
 	NSString * downloadFolder;
 	NSString * displayStyle;
-	float textSizeMultiplier;
+	CGFloat textSizeMultiplier;
 	NSString * defaultDatabase;
 	NSString * imagesFolder;
 	NSString * scriptsFolder;
@@ -108,31 +108,31 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 -(NSString *)pluginsFolder;
 
 // Read-only internal settings
--(int)backTrackQueueSize;
+-(NSInteger)backTrackQueueSize;
 
 // Auto-expire values
--(int)autoExpireDuration;
--(void)setAutoExpireDuration:(int)newDuration;
+-(NSInteger)autoExpireDuration;
+-(void)setAutoExpireDuration:(NSInteger)newDuration;
 
 // Download folder
 -(NSString *)downloadFolder;
 -(void)setDownloadFolder:(NSString *)newFolder;
 
 // New articles notification method
--(int)newArticlesNotification;
--(void)setNewArticlesNotification:(int)newMethod;
+-(NSInteger)newArticlesNotification;
+-(void)setNewArticlesNotification:(NSInteger)newMethod;
 
 // Mark read interval
 -(float)markReadInterval;
 -(void)setMarkReadInterval:(float)newInterval;
 
 // Layout style
--(int)layout;
--(void)setLayout:(int)newLayout;
+-(NSInteger)layout;
+-(void)setLayout:(NSInteger)newLayout;
 
 // Controls how articles are filtered in the view
--(int)filterMode;
--(void)setFilterMode:(int)newMode;
+-(NSInteger)filterMode;
+-(void)setFilterMode:(NSInteger)newMode;
 
 // Whether or not we show folder images
 -(BOOL)showFolderImages;
@@ -159,9 +159,9 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 -(void)setOpenLinksInBackground:(BOOL)flag;
 
 // Minimum font size settings
--(int)minimumFontSize;
+-(NSInteger)minimumFontSize;
 -(BOOL)enableMinimumFontSize;
--(void)setMinimumFontSize:(int)newSize;
+-(void)setMinimumFontSize:(NSInteger)newSize;
 -(void)setEnableMinimumFontSize:(BOOL)flag;
 
 // JavaScript settings
@@ -173,35 +173,35 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 -(void)setUseWebPlugins:(BOOL)flag;
 
 // Refresh frequency
--(void)setRefreshFrequency:(int)newFrequency;
--(int)refreshFrequency;
+-(void)setRefreshFrequency:(NSInteger)newFrequency;
+-(NSInteger)refreshFrequency;
 
 // Current display style
 -(NSString *)displayStyle;
 -(void)setDisplayStyle:(NSString *)newStyle;
 -(void)setDisplayStyle:(NSString *)newStyle withNotification:(BOOL)flag;
--(float)textSizeMultiplier;
--(void)setTextSizeMultiplier:(float)newValue;
+-(CGFloat)textSizeMultiplier;
+-(void)setTextSizeMultiplier:(CGFloat)newValue;
 
 // Folder list font
 -(NSString *)folderListFont;
--(int)folderListFontSize;
+-(NSInteger)folderListFontSize;
 -(void)setFolderListFont:(NSString *)newFontName;
--(void)setFolderListFontSize:(int)newFontSize;
+-(void)setFolderListFontSize:(NSInteger)newFontSize;
 
 // Article list font
 -(NSString *)articleListFont;
--(int)articleListFontSize;
+-(NSInteger)articleListFontSize;
 -(void)setArticleListFont:(NSString *)newFontName;
--(void)setArticleListFontSize:(int)newFontSize;
+-(void)setArticleListFontSize:(NSInteger)newFontSize;
 
 // Article list sort descriptors
 -(NSArray *)articleSortDescriptors;
 -(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors;
 
 // Automatically sort folders tree
--(int)foldersTreeSortMethod;
--(void)setFoldersTreeSortMethod:(int)newMethod;
+-(NSInteger)foldersTreeSortMethod;
+-(void)setFoldersTreeSortMethod:(NSInteger)newMethod;
 
 // Do we show an icon in the status bar?
 -(BOOL)showAppInStatusBar;

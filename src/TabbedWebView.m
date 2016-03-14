@@ -225,7 +225,7 @@ static NSString * _userAgent ;
  */
 -(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
 {
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
+	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if (navType == WebNavigationTypeLinkClicked)
 	{
 		NSDictionary * webElementKey = [actionInformation valueForKey:@"WebActionElementKey"];
@@ -242,7 +242,7 @@ static NSString * _userAgent ;
 		}
 
 		// For anything else, we open in a new tab or in the external browser.
-		NSUInteger  modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
+		NSUInteger  modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
 		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
 		[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
@@ -258,8 +258,8 @@ static NSString * _userAgent ;
  */
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
-	NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntValue];
+	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
+	NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
 	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 	
 	NSString * scheme = [[[request URL] scheme] lowercaseString];
@@ -333,8 +333,8 @@ static NSString * _userAgent ;
 		[defaultWebPrefs setMinimumFontSize:1];
 	else
 	{
-		int size = [prefs minimumFontSize];
-		[defaultWebPrefs setMinimumFontSize:size];
+		NSInteger size = [prefs minimumFontSize];
+		[defaultWebPrefs setMinimumFontSize:(int)size];
 	}
 }
 
@@ -418,10 +418,10 @@ static NSString * _userAgent ;
 	NSPrintInfo * printInfo = [NSPrintInfo sharedPrintInfo];
 	
 	NSMutableDictionary * dict = [printInfo dictionary];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintLeftMargin];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintRightMargin];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintTopMargin];
-	[dict setObject:[NSNumber numberWithFloat:36.0f] forKey:NSPrintBottomMargin];
+	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintLeftMargin];
+	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintRightMargin];
+	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintTopMargin];
+	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintBottomMargin];
 	
 	[printInfo setVerticallyCentered:NO];
 	[printView print:self];

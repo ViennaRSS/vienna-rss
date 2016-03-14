@@ -86,7 +86,7 @@
 	const char * textPtr = [data bytes];
 	const char * endPtr = textPtr + [data length];
 	const char * tagStartPtr = nil;
-	int cntrlCharCount = 0;
+	NSInteger cntrlCharCount = 0;
 	BOOL inTag = NO;
 	BOOL inQuote = NO;
 

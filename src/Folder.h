@@ -132,7 +132,7 @@
 -(void)setPassword:(NSString *)newPassword;
 -(void)setLastUpdate:(NSDate *)newLastUpdate;
 -(void)setLastUpdateString:(NSString *)newLastUpdateString;
--(unsigned)indexOfArticle:(Article *)article;
+-(NSUInteger)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(void)removeArticleFromCache:(NSString *)guid;

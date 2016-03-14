@@ -85,8 +85,8 @@ extern float MA_Default_Read_Interval;
 extern NSInteger MA_Default_MinimumFontSize;
 extern NSInteger MA_Default_AutoExpireDuration;
 extern NSInteger MA_Default_Check_Frequency;
-extern float MA_Default_Main_Window_Min_Width;
-extern float MA_Default_Main_Window_Min_Height;
+extern CGFloat MA_Default_Main_Window_Min_Width;
+extern CGFloat MA_Default_Main_Window_Min_Height;
 extern NSInteger MA_Default_ConcurrentDownloads;
 
 extern NSString * MA_PBoardType_RSSItem;

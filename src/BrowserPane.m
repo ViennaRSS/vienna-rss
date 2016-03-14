@@ -587,7 +587,7 @@
  * Implement the search action. Search the web page for the specified
  * text.
  */
--(void)performFindPanelAction:(int)actionTag
+-(void)performFindPanelAction:(NSInteger)actionTag
 {
 	switch (actionTag)
 	{
@@ -728,8 +728,8 @@
 	if (rssPageURL != nil)
 	{
 		Folder * currentFolder = [NSApp currentFolder];
-		int currentFolderId = [currentFolder itemId];
-		int parentFolderId = [currentFolder parentId];
+		NSInteger currentFolderId = [currentFolder itemId];
+		NSInteger parentFolderId = [currentFolder parentId];
 		if ([currentFolder firstChildId] > 0)
 		{
 			parentFolderId = currentFolderId;

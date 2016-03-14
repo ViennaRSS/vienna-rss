@@ -100,12 +100,12 @@
 	-(void)setStatusBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 	-(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 	-(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
-	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
-	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+	-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+	-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 	-(void)runAppleScript:(NSString *)scriptName;
 	-(NSString *)appName;
 	-(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
-	-(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag;
+	-(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag;
 	-(void)updateAlternateMenuTitle;
 	-(void)updateSearchPlaceholderAndSearchMethod;
 	-(void)toggleOptionKeyButtonStates;
@@ -122,9 +122,9 @@
 @end
 
 // Static constant strings that are typically never tweaked
-static const int MA_Minimum_Folder_Pane_Width = 80;
-static const int MA_Minimum_BrowserView_Pane_Width = 200;
-static const int MA_StatusBarHeight = 23;
+static const CGFloat MA_Minimum_Folder_Pane_Width = 80.0;
+static const CGFloat MA_Minimum_BrowserView_Pane_Width = 200.0;
+static const CGFloat MA_StatusBarHeight = 23.0;
 
 // Awake from sleep
 static io_connect_t root_port;
@@ -257,7 +257,7 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		[mainWindow makeFirstResponder:[[browserView primaryTabItemView] mainView]];		
 		
 		// Select the folder and article from the last session
-		int previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
+		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
 		if ([previousArticleGuid isBlank])
 			previousArticleGuid = nil;
@@ -287,10 +287,9 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
  */
 -(void)localiseMenus:(NSArray *)arrayOfMenus
 {
-	int count = [arrayOfMenus count];
-	int index;
+	NSUInteger count = [arrayOfMenus count];
 	
-	for (index = 0; index < count; ++index)
+	for (NSUInteger index = 0; index < count; ++index)
 	{
 		NSMenuItem * menuItem = [arrayOfMenus objectAtIndex:index];
 		if (menuItem != nil && ![menuItem isSeparatorItem])
@@ -331,7 +330,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		if (app != nil)
 		{
             Preferences * prefs = [Preferences standardPreferences];
-            int frequency = [prefs refreshFrequency];
+            NSInteger frequency = [prefs refreshFrequency];
             if (frequency > 0)
             {
                 NSDate * lastRefresh = [prefs objectForKey:MAPref_LastRefreshDate];
@@ -601,7 +600,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
  */
 -(NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
-	int returnCode;
+	NSInteger returnCode;
 	
 	if ([[DownloadManager sharedInstance] activeDownloads] > 0)
 	{
@@ -997,7 +996,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 /* setLayout
  * Changes the layout of the panes.
  */
--(void)setLayout:(int)newLayout withRefresh:(BOOL)refreshFlag
+-(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag
 {
 	BOOL visibleFilterBar = NO;
 	// Turn off the filter bar when switching layouts. This is simpler than
@@ -1057,8 +1056,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if (defaultBrowser == nil)
 		defaultBrowser = NSLocalizedString(@"External Browser", nil);
 	NSMenuItem * newMenuItem;
-	int count = [newDefaultMenu count];
-	int index;
+	NSInteger count = [newDefaultMenu count];
+	NSInteger index;
 	
 	// Note: this is only safe to do if we're going from [count..0] when iterating
 	// over newDefaultMenu. If we switch to the other direction, this will break.
@@ -1450,7 +1449,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         {
             [panel orderOut:self];
             
-            int countExported = [Export exportToFile:[[panel URL] path] fromFoldersTree:foldersTree selection:([exportSelected state] == NSOnState) withGroups:([exportWithGroups state] == NSOnState)];
+            NSInteger countExported = [Export exportToFile:[[panel URL] path] fromFoldersTree:foldersTree selection:([exportSelected state] == NSOnState) withGroups:([exportWithGroups state] == NSOnState)];
             
             if (countExported < 0)
             {
@@ -1675,7 +1674,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)growlNotificationWasClicked:(id)clickContext
 {
 	NSDictionary * contextDict = (NSDictionary *)clickContext;
-	int contextValue = [[contextDict valueForKey:@"ContextType"] intValue];
+	NSInteger contextValue = [[contextDict valueForKey:@"ContextType"] integerValue];
 	
 	if (contextValue == MA_GrowlContext_RefreshCompleted)
 	{
@@ -1820,7 +1819,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Add the contents of the scriptsPathMappings dictionary keys to the menu sorted
 	// by key name.
 	NSArray * sortedMenuItems = [[scriptPathMappings allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	int count = [sortedMenuItems count];
+	NSInteger count = [sortedMenuItems count];
 	
 	// Insert the Scripts menu to the left of the Help menu only if
 	// we actually have any scripts.
@@ -1828,7 +1827,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		NSMenu * scriptsMenu = [[NSMenu allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts"];
 		
-		int index;
+		NSInteger index;
 		for (index = 0; index < count; ++index)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:[sortedMenuItems objectAtIndex:index]
@@ -1856,7 +1855,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		scriptsMenuItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Scripts" action:NULL keyEquivalent:@""];
 		[scriptsMenuItem setImage:[NSImage imageNamed:@"scriptMenu.tiff"]];
 		
-		int helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
+		NSInteger helpMenuIndex = [[NSApp mainMenu] numberOfItems] - 1;
 		[[NSApp mainMenu] insertItem:scriptsMenuItem atIndex:helpMenuIndex];
 		[scriptsMenuItem setSubmenu:scriptsMenu];
 		
@@ -1877,8 +1876,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Add the contents of the stylesPathMappings dictionary keys to the menu sorted by key name.
 	NSArray * sortedMenuItems = [[stylesMap allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	int count = [sortedMenuItems count];
-	int index;
+	NSInteger count = [sortedMenuItems count];
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
@@ -1904,8 +1903,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenu * filterPopupMenu = [[NSMenu alloc] initWithTitle:@""];
 	
 	NSArray * filtersArray = [ArticleFilter arrayOfFilters];
-	int count = [filtersArray count];
-	int index;
+	NSInteger count = [filtersArray count];
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
@@ -1925,7 +1924,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[filterViewPopUp setMenu:filterPopupMenu];
 	
 	// Sync the popup selection with user preferences
-	int indexOfDefaultItem = [filterViewPopUp indexOfItemWithTag:[[Preferences standardPreferences] filterMode]];
+	NSInteger indexOfDefaultItem = [filterViewPopUp indexOfItemWithTag:[[Preferences standardPreferences] filterMode]];
 	if (indexOfDefaultItem != -1)
 	{
 		[filterViewPopUp selectItemAtIndex:indexOfDefaultItem];
@@ -1957,7 +1956,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)showUnreadCountOnApplicationIconAndWindowTitle
 {
 	@synchronized([NSApp dockTile]) {
-	int currentCountOfUnread = [db countOfUnread];
+	NSInteger currentCountOfUnread = [db countOfUnread];
 	if (currentCountOfUnread == lastCountOfUnread)
 		return;
 	lastCountOfUnread = currentCountOfUnread;
@@ -1973,14 +1972,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return;	
 	}	
 	
-	[mainWindow setTitle:[NSString stringWithFormat:@"%@ (%i %@)", [self appName], currentCountOfUnread, NSLocalizedString(@"Unread", nil)]];
+	[mainWindow setTitle:[NSString stringWithFormat:@"%@ (%li %@)", [self appName], (long)currentCountOfUnread, NSLocalizedString(@"Unread", nil)]];
 	
 	// Exit now if we're not showing the unread count on the application icon
 	if (([[Preferences standardPreferences] newArticlesNotification]
 		& MA_NewArticlesNotification_Badge) ==0)
 			return;
 	
-	NSString * countdown = [NSString stringWithFormat:@"%i", currentCountOfUnread];
+	NSString * countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
 	[[NSApp dockTile] setBadgeLabel:countdown];
 
 	} // @synchronized
@@ -2017,7 +2016,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * This function is called after the user has dismissed
  * the confirmation sheet.
  */
--(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+-(void)doConfirmedEmptyTrash:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSAlertDefaultReturn)
 	{
@@ -2070,7 +2069,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * Return the ID of the currently selected folder whose articles are shown in
  * the article window.
  */
--(int)currentFolderId
+-(NSInteger)currentFolderId
 {
 	return [articleController currentFolderId];
 }
@@ -2078,7 +2077,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* selectFolder
  * Select the specified folder.
  */
--(void)selectFolder:(int)folderId
+-(void)selectFolder:(NSInteger)folderId
 {
 	[foldersTree selectFolder:folderId];
 }
@@ -2158,7 +2157,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread.png"];
             [statusBarImage setTemplate:YES];
             [appStatusItem setImage:statusBarImage];
-			[appStatusItem setTitle:[NSString stringWithFormat:@"%u", lastCountOfUnread]];
+			[appStatusItem setTitle:[NSString stringWithFormat:@"%ld", (long)lastCountOfUnread]];
 			// Yosemite hack : need to insist for displaying correctly icon and text
             [appStatusItem setImage:statusBarImage];
 		}
@@ -2215,7 +2214,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleFolderSelection:(NSNotification *)nc
 {
-	int newFolderId = [(TreeNode *)[nc object] nodeId];
+	NSInteger newFolderId = [(TreeNode *)[nc object] nodeId];
 	
 	// We don't filter when we switch folders.
 	[self setFilterString:@""];
@@ -2262,7 +2261,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleCheckFrequencyChange:(NSNotification *)nc
 {
-	int newFrequency = [[Preferences standardPreferences] refreshFrequency];
+	NSInteger newFrequency = [[Preferences standardPreferences] refreshFrequency];
 	
 	[checkTimer invalidate];
 	checkTimer = nil;
@@ -2386,7 +2385,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleFolderNameChange:(NSNotification *)nc
 {
-	int folderId = [(NSNumber *)[nc object] intValue];
+	NSInteger folderId = [(NSNumber *)[nc object] integerValue];
 	if (folderId == [articleController currentFolderId])
 		[self updateSearchPlaceholderAndSearchMethod];
 }
@@ -2426,7 +2425,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
-		int newUnread = [[RefreshManager sharedManager] countOfNewArticles] + [[GoogleReader sharedManager] countOfNewArticles];
+		NSInteger newUnread = [[RefreshManager sharedManager] countOfNewArticles] + [[GoogleReader sharedManager] countOfNewArticles];
 		if (newUnread > 0 && (([prefs newArticlesNotification] & MA_NewArticlesNotification_Bounce) != 0))
 			[NSApp requestUserAttention:NSInformationalRequest];
 		
@@ -2434,7 +2433,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		if (newUnread > 0)
 		{
 			NSMutableDictionary * contextDict = [NSMutableDictionary dictionary];
-			[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_RefreshCompleted] forKey:@"ContextType"];
+			[contextDict setValue:[NSNumber numberWithInteger:MA_GrowlContext_RefreshCompleted] forKey:@"ContextType"];
 			
 			[self growlNotify:contextDict
 						title:NSLocalizedString(@"New articles retrieved", nil)
@@ -2569,7 +2568,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (keyChar >= '0' && keyChar <= '9' && (flags & NSControlKeyMask))
 	{
-		int layoutStyle = MA_Layout_Report + (keyChar - '0');
+		NSInteger layoutStyle = MA_Layout_Report + (keyChar - '0');
 		[self setLayout:layoutStyle withRefresh:YES];
 		return YES;
 	}
@@ -2946,7 +2945,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * This function is called after the user has dismissed
  * the confirmation sheet.
  */
--(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
+-(void)doConfirmedDelete:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSAlertDefaultReturn)
 	{
@@ -3279,7 +3278,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)getInfo:(id)sender
 {
-	int folderId = [foldersTree actualSelection];
+	NSInteger folderId = [foldersTree actualSelection];
 	if (folderId > 0)
 		[[InfoWindowManager infoWindowManager] showInfoWindowForFolder:folderId];
 }
@@ -3290,8 +3289,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)unsubscribeFeed:(id)sender
 {
 	NSArray * selectedFolders = [NSArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
+	NSInteger count = [selectedFolders count];
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
@@ -3317,13 +3316,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)setLoadFullHTMLFlag:(BOOL)loadFullHTMLPages
 {
 	NSMutableArray * selectedFolders = [NSMutableArray arrayWithArray:[foldersTree selectedFolders]];
-	int count = [selectedFolders count];
-	int index;
+	NSInteger count = [selectedFolders count];
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
 		Folder * folder = [selectedFolders objectAtIndex:index];
-		int folderID = [folder itemId];
+		NSInteger folderID = [folder itemId];
 		
 		if (loadFullHTMLPages)
 		{
@@ -3335,7 +3334,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[folder clearFlag:MA_FFlag_LoadFullHTML];
             [[Database sharedManager] clearFlag:MA_FFlag_LoadFullHTML forFolder:folderID];
 		}
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInt:folderID]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:[NSNumber numberWithInteger:folderID]];
 	}
 }
 
@@ -3698,7 +3697,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-	static int waitNumber = 20;
+	static NSInteger waitNumber = 20;
 	// Check the Open Reader status
 	if ([[Preferences standardPreferences] syncGoogleReader] && ![[GoogleReader sharedManager] isReady]) {
 		LLog(@"Waiting until Google Auth is done...");
@@ -3925,7 +3924,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Send our Apple Event.
 	OSStatus err = AESendMessage([event aeDesc], NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
 	if (err != noErr) 
-		NSLog(@"Error sending Apple Event: %i", (int)err );
+		NSLog(@"Error sending Apple Event: %li", (long)err );
 }
 
 #pragma mark Progress Indicator 
@@ -4048,7 +4047,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* viewAnimationCompleted
  * Called when animation of the specified view completes.
  */
--(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag
+-(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag
 {
 	if (viewTag == MA_ViewTag_Statusbar && [self isStatusBarVisible])
 	{
@@ -4677,8 +4676,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [alert setMessageText:NSLocalizedString(@"Include anonymous system profile when checking for updates?", @"Include anonymous system profile when checking for updates?")];
     [alert setInformativeText:NSLocalizedString(@"Include anonymous system profile when checking for updates text", @"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.")];
     [alert setAlertStyle:NSInformationalAlertStyle];
-    int buttonClicked = alert.runModal;
-    NSLog(@"buttonClicked: %d", buttonClicked);
+    NSModalResponse buttonClicked = alert.runModal;
+    NSLog(@"buttonClicked: %ld", (long)buttonClicked);
     switch (buttonClicked) {
         case NSAlertFirstButtonReturn:
             /* Agreed to send system profile. Uses preferences to set value otherwise 

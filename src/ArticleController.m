@@ -134,7 +134,7 @@
 /* setLayout
  * Changes the layout of the panes.
  */
--(void)setLayout:(int)newLayout
+-(void)setLayout:(NSInteger)newLayout
 {
 	Article * currentSelectedArticle = [self selectedArticle];
 
@@ -169,7 +169,7 @@
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */
--(int)currentFolderId
+-(NSInteger)currentFolderId
 {
 	return currentFolderId;
 }
@@ -365,7 +365,7 @@
  * Call the current article view to display the specified folder if it
  * is different from the current one.
  */
--(void)displayFolder:(int)newFolderId
+-(void)displayFolder:(NSInteger)newFolderId
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
@@ -406,12 +406,12 @@
 	NSMutableArray * filteredArray = [NSMutableArray arrayWithArray:unfilteredArray];
 	
 	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? [articleToPreserve guid] : @"";
-	int folderIdOfArticleToPreserve = [articleToPreserve folderId];
+	NSInteger folderIdOfArticleToPreserve = [articleToPreserve folderId];
 	
 	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
 	SEL comparator = [filter comparator];
-	int count = [filteredArray count];
-	int index;
+	NSInteger count = [filteredArray count];
+	NSInteger index;
 	
 	for (index = count - 1; index >= 0; --index)
 	{
@@ -748,7 +748,7 @@
 	
 	for (Folder * folder in folderArray)
 	{
-		int folderId = [folder itemId];
+		NSInteger folderId = [folder itemId];
 		if (IsGroupFolder(folder) && undoFlag)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[[Database sharedManager] arrayOfFolders:folderId] withUndo:undoFlag]];
@@ -792,7 +792,7 @@
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	Database * dbManager = [Database sharedManager];
-	__block int lastFolderId = -1;
+	__block NSInteger lastFolderId = -1;
 	__block BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
@@ -803,7 +803,7 @@
 	
 	for (ArticleReference *ref in refArray)
 	{
-		int folderId = [ref folderId];
+		NSInteger folderId = [ref folderId];
 		NSString * theGuid = [ref guid];
         if (IsGoogleReaderFolder([dbManager folderFromID:folderId])) {
 			[[GoogleReader sharedManager] markRead:theGuid readFlag:readFlag];
@@ -855,7 +855,7 @@
  */
 -(void)goForward
 {
-	int folderId;
+	NSInteger folderId;
 	NSString * guid;
 	
 	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
@@ -871,7 +871,7 @@
  */
 -(void)goBack
 {
-	int folderId;
+	NSInteger folderId;
 	NSString * guid;
 	
 	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
@@ -917,7 +917,7 @@
 {
     @synchronized(mainArticleView)
     {
-        int folderId = [(NSNumber *)[nc object] intValue];
+        NSInteger folderId = [(NSNumber *)[nc object] integerValue];
         if (folderId == currentFolderId)
             [mainArticleView refreshArticlePane];
     }
@@ -941,7 +941,7 @@
 {
     @synchronized(mainArticleView)
     {
-        int folderId = [(NSNumber *)[nc object] intValue];
+        NSInteger folderId = [(NSNumber *)[nc object] integerValue];
         if (folderId != currentFolderId)
             return;
 

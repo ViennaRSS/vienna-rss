@@ -66,7 +66,7 @@
 /* setOffset
  * Sets the new offset at which the cell contents will be drawn.
  */
--(void)setOffset:(int)newOffset
+-(void)setOffset:(NSInteger)newOffset
 {
 	offset = newOffset;
 }
@@ -74,7 +74,7 @@
 /* offset
  * Returns the current cell offset in effect.
  */
--(int)offset
+-(NSInteger)offset
 {
 	return offset;
 }
@@ -115,7 +115,7 @@
 /* setCount
  * Sets the value to be displayed in the count button.
  */
--(void)setCount:(int)newCount
+-(void)setCount:(NSInteger)newCount
 {
 	count = newCount;
 	hasCount = YES;
@@ -244,10 +244,10 @@
 	// button on the right of the cell.
 	if (hasCount)
 	{
-		NSString * number = [NSString stringWithFormat:@"%i", count];
+		NSString * number = [NSString stringWithFormat:@"%li", (long)count];
 
 		// Use the current font point size as a guide for the count font size
-		float pointSize = [[self font] pointSize];
+		CGFloat pointSize = [[self font] pointSize];
 
 		// Create attributes for drawing the count.
 		NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:pointSize],
@@ -258,7 +258,7 @@
 		NSSize numSize = [number sizeWithAttributes:attributes];
 
 		// Compute the dimensions of the count rectangle.
-		int cellWidth = MAX(numSize.width + 6, numSize.height + 1) + 1;
+		CGFloat cellWidth = MAX(numSize.width + 6.0, numSize.height + 1.0) + 1.0;
 
 		NSRect countFrame;
 		NSDivideRect(cellFrame, &countFrame, &cellFrame, cellWidth, NSMaxXEdge);

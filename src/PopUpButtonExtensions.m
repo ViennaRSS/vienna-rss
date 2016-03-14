@@ -47,7 +47,7 @@
 /* addItemWithTag
  * Add an item to the popup button menu with the specified tag.
  */
--(void)addItemWithTag:(NSString *)title tag:(int)tag
+-(void)addItemWithTag:(NSString *)title tag:(NSInteger)tag
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
 	[newItem setTag:tag];
@@ -68,7 +68,7 @@
  * Inserts the specified menu item into the popup menu at the given index and assigns it
  * an initial tag value.
  */
--(void)insertItemWithTag:(NSString *)title tag:(int)tag atIndex:(int)index
+-(void)insertItemWithTag:(NSString *)title tag:(NSInteger)tag atIndex:(NSInteger)index
 {
 	NSMenuItem * newItem = [[NSMenuItem alloc] initWithTitle:title action:nil keyEquivalent:@""];
 	[newItem setTag:tag];
@@ -87,7 +87,7 @@
 /* tagForSelection
  * Returns the tag associated with the selected item.
  */
--(int)tagForSelection
+-(NSInteger)tagForSelection
 {
 	NSMenuItem * theItem = [self selectedItem];
 	return [theItem tag];

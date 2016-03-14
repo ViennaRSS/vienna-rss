@@ -37,14 +37,14 @@
 #define MA_SFEdit_FolderValueTag	1008
 
 @interface SmartFolder (Private)
-	-(void)initFolderValueField:(int)parentId atIndent:(int)indentation;
+	-(void)initFolderValueField:(NSInteger)parentId atIndent:(NSInteger)indentation;
 	-(void)initSearchSheet:(NSString *)folderName;
 	-(void)displaySearchSheet:(NSWindow *)window;
 	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
 	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
 	-(void)addCriteria:(NSUInteger )index;
-	-(void)addDefaultCriteria:(int)index;
-	-(void)removeCriteria:(int)index;
+	-(void)addDefaultCriteria:(NSInteger)index;
+	-(void)removeCriteria:(NSInteger)index;
 	-(void)removeAllCriteria;
 	-(void)resizeSearchWindow;
 @end
@@ -72,7 +72,7 @@
  * Initialises the smart folder panel with a single empty criteria to get
  * started.
  */
--(void)newCriteria:(NSWindow *)window underParent:(int)itemId
+-(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId
 {
 	[self initSearchSheet:@""];
 	smartFolderId = -1;
@@ -87,12 +87,12 @@
 /* loadCriteria
  * Loads the criteria for the specified folder.
  */
--(void)loadCriteria:(NSWindow *)window folderId:(int)folderId
+-(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId
 {
 	Folder * folder = [db folderFromID:folderId];
 	if (folder != nil)
 	{
-		int index = 0;
+		NSInteger index = 0;
 
 		[self initSearchSheet:[folder name]];
 		smartFolderId = folderId;
@@ -240,7 +240,7 @@
  * is used to indent the items in the menu when they are part of a group. I've used
  * an increment of 2 which looks clearer than 1 in the UI.
  */
--(void)initFolderValueField:(int)fromId atIndent:(int)indentation
+-(void)initFolderValueField:(NSInteger)fromId atIndent:(NSInteger)indentation
 {
 	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
 	{
@@ -280,7 +280,7 @@
  */
 -(IBAction)removeCurrentCriteria:(id)sender
 {
-	int index = [arrayOfViews indexOfObject:[sender superview]];
+	NSInteger index = [arrayOfViews indexOfObject:[sender superview]];
 	NSAssert(index >= 0 && index < totalCriteria, @"Got an out of bounds index of view in superview");
 	[self removeCriteria:index];
 	[self resizeSearchWindow];
@@ -291,7 +291,7 @@
  */
 -(IBAction)addNewCriteria:(id)sender
 {
-	int index = [arrayOfViews indexOfObject:[sender superview]];
+	NSInteger index = [arrayOfViews indexOfObject:[sender superview]];
 	NSAssert(index >= 0 && index < totalCriteria, @"Got an out of bounds index of view in superview");
 	[self addDefaultCriteria:index + 1];
 	[self resizeSearchWindow];
@@ -301,7 +301,7 @@
  * Add a new default criteria row. For this we use the static defaultField declared at
  * the start of this source and the default operator for that field, and an empty value.
  */
--(void)addDefaultCriteria:(int)index
+-(void)addDefaultCriteria:(NSInteger)index
 {
 	Field * defaultField = [db fieldByName:MA_Field_Read];
 
@@ -401,7 +401,7 @@
 	va_start(arguments, popUpButton);
 	CriteriaOperator operator;
 
-	while ((operator = va_arg(arguments, int)) != 0)
+	while ((operator = va_arg(arguments, NSInteger)) != 0)
 	{
 		NSString * operatorString = NSLocalizedString([Criteria stringFromOperator:operator], nil);
 		[popUpButton addItemWithTag:operatorString tag:operator];
@@ -510,7 +510,7 @@
  */
 -(void)removeAllCriteria
 {
-	int c;
+	NSInteger c;
 
 	NSArray * subviews = [searchCriteriaSuperview subviews];
 	for (c = [subviews count] - 1; c >= 0; --c)
@@ -525,10 +525,10 @@
 /* removeCriteria
  * Remove the criteria at the specified index.
  */
--(void)removeCriteria:(int)index
+-(void)removeCriteria:(NSInteger)index
 {
-	int rowHeight = [searchCriteriaView frame].size.height;
-	int c;
+	NSInteger rowHeight = [searchCriteriaView frame].size.height;
+	NSInteger c;
 
 	// Do nothing if there's just one criteria
 	if (totalCriteria <= 1)
@@ -557,7 +557,7 @@
 {
 	NSData * archRow;
 	NSView * previousRow = nil;
-	int rowHeight = [searchCriteriaView frame].size.height;
+	NSInteger rowHeight = [searchCriteriaView frame].size.height;
 	NSUInteger  c;
 
 	// Bump up the criteria count
@@ -606,8 +606,8 @@
 	newFrame = searchWindowFrame;
 	if (totalCriteria > 0)
 	{
-		int rowHeight = [searchCriteriaView frame].size.height;
-		int newHeight = newFrame.size.height + rowHeight * (totalCriteria - 1);
+		NSInteger rowHeight = [searchCriteriaView frame].size.height;
+		NSInteger newHeight = newFrame.size.height + rowHeight * (totalCriteria - 1);
 		newFrame.origin.y += newFrame.size.height;
 		newFrame.origin.y -= newHeight;
 		newFrame.size.height = newHeight;

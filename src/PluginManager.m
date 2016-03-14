@@ -146,7 +146,7 @@
 	
 	NSArray * menuArray = [[NSApp mainMenu] itemArray];
 	BOOL didInstall = NO;
-	int c;
+	NSInteger c;
 	
 	for (c = 0; !didInstall && c < [menuArray count]; ++c)
 	{
@@ -189,7 +189,7 @@
 			// Keep the menus tidy. If the last menu item is not currently a plugin invocator then
 			// add a separator.
 			NSMenu * parentMenu = [topMenu submenu];
-			int lastItem = [parentMenu numberOfItems] - 1;
+			NSInteger lastItem = [parentMenu numberOfItems] - 1;
 			
 			if (lastItem >= 0 && [[parentMenu itemAtIndex:lastItem] action] != @selector(pluginInvocator:))
 				[parentMenu addItem:[NSMenuItem separatorItem]];
@@ -261,7 +261,7 @@
 	for (pluginName in allPlugins)
 	{
 		NSDictionary * onePlugin = [allPlugins objectForKey:pluginName];
-		if ([[onePlugin objectForKey:@"Default"] intValue])
+		if ([[onePlugin objectForKey:@"Default"] integerValue])
 			[newArray addObject:pluginName];
 	}
 	return newArray;

@@ -33,7 +33,7 @@
 {
     NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
     BOOL hasError = NO;
-    int countImported = 0;
+    NSInteger countImported = 0;
     
     if (data != nil)
     {
@@ -67,9 +67,9 @@
 /* importSubscriptionGroup
  * Import one group of an OPML subscription tree.
  */
-+ (int)importSubscriptionGroup:(NSArray *)outlines underParent:(int)parentId
++ (NSInteger)importSubscriptionGroup:(NSArray *)outlines underParent:(NSInteger)parentId
 {
-	int countImported = 0;
+	NSInteger countImported = 0;
 	
 	for (NSXMLElement *outlineElement in outlines)
 	{
@@ -104,7 +104,7 @@
 			// the sub-group items under the parent.
 			if (feedText != nil)
 			{
-				int folderId = [dbManager addFolder:parentId afterChild:-1
+				NSInteger folderId = [dbManager addFolder:parentId afterChild:-1
                                          folderName:feedText type:MA_Group_Folder
                                      canAppendIndex:NO];
                 if (folderId == -1) {
@@ -116,7 +116,7 @@
 		else if (feedText != nil)
 		{
 			Folder * folder;
-			int folderId;
+			NSInteger folderId;
 
 			if ((folder = [dbManager folderFromFeedURL:feedURL]) != nil)
 				folderId = [folder itemId];

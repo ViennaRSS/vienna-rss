@@ -83,7 +83,7 @@
 	
 	for (index = 0; index < [operatorArray count]; ++index)
 	{
-		CriteriaOperator op = [[operatorArray objectAtIndex:index] intValue];
+		CriteriaOperator op = [[operatorArray objectAtIndex:index] integerValue];
 		if ([string isEqualToString:[Criteria stringFromOperator:op]])
 			return op;
 	}
@@ -96,20 +96,20 @@
 +(NSArray *)arrayOfOperators
 {
 	return [NSArray arrayWithObjects:
-		[NSNumber numberWithInt:MA_CritOper_Is],
-		[NSNumber numberWithInt:MA_CritOper_IsNot],
-		[NSNumber numberWithInt:MA_CritOper_IsAfter],
-		[NSNumber numberWithInt:MA_CritOper_IsBefore],
-		[NSNumber numberWithInt:MA_CritOper_IsOnOrAfter],
-		[NSNumber numberWithInt:MA_CritOper_IsOnOrBefore],
-		[NSNumber numberWithInt:MA_CritOper_Contains],
-		[NSNumber numberWithInt:MA_CritOper_NotContains],
-		[NSNumber numberWithInt:MA_CritOper_IsLessThan],
-		[NSNumber numberWithInt:MA_CritOper_IsLessThanOrEqual],
-		[NSNumber numberWithInt:MA_CritOper_IsGreaterThan],
-		[NSNumber numberWithInt:MA_CritOper_IsGreaterThanOrEqual],
-		[NSNumber numberWithInt:MA_CritOper_Under],
-		[NSNumber numberWithInt:MA_CritOper_NotUnder],
+		[NSNumber numberWithInteger:MA_CritOper_Is],
+		[NSNumber numberWithInteger:MA_CritOper_IsNot],
+		[NSNumber numberWithInteger:MA_CritOper_IsAfter],
+		[NSNumber numberWithInteger:MA_CritOper_IsBefore],
+		[NSNumber numberWithInteger:MA_CritOper_IsOnOrAfter],
+		[NSNumber numberWithInteger:MA_CritOper_IsOnOrBefore],
+		[NSNumber numberWithInteger:MA_CritOper_Contains],
+		[NSNumber numberWithInteger:MA_CritOper_NotContains],
+		[NSNumber numberWithInteger:MA_CritOper_IsLessThan],
+		[NSNumber numberWithInteger:MA_CritOper_IsLessThanOrEqual],
+		[NSNumber numberWithInteger:MA_CritOper_IsGreaterThan],
+		[NSNumber numberWithInteger:MA_CritOper_IsGreaterThanOrEqual],
+		[NSNumber numberWithInteger:MA_CritOper_Under],
+		[NSNumber numberWithInteger:MA_CritOper_NotUnder],
 		nil];
 }
 
@@ -318,7 +318,7 @@
         NSXMLElement *operatorElement = [[NSXMLElement alloc]
                                         initWithName:@"operator"
                                         stringValue:[NSString stringWithFormat:
-                                                     @"%d", criteria.operator]];
+                                                     @"%lu", (unsigned long)criteria.operator]];
         NSXMLElement *valueElement = [[NSXMLElement alloc]
                                         initWithName:@"value"
                                         stringValue:criteria.value];

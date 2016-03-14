@@ -353,7 +353,7 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
 {
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
+	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
 		[[NSApp mainWindow] makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
 	
@@ -377,7 +377,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		}
 	}
 	
-	int navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] intValue];
+	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
 		[[NSApp mainWindow] makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
 	

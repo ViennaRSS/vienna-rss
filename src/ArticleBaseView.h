@@ -22,9 +22,9 @@
 @class Article;
 
 @protocol ArticleBaseView
-	-(void)selectFolderWithFilter:(int)newFolderId;
-	-(void)selectFolderAndArticle:(int)folderId guid:(NSString *)guid;
-	-(void)refreshFolder:(int)refreshFlag;
+	-(void)selectFolderWithFilter:(NSInteger)newFolderId;
+	-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
+	-(void)refreshFolder:(NSInteger)refreshFlag;
 	-(Article *)selectedArticle;
 	-(NSArray *)markedArticleRange;
 	-(void)saveTableSettings;

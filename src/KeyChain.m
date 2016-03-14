@@ -32,7 +32,7 @@
 	NSURL * secureUrl = [NSURL URLWithString:url];
 	const char * cServiceName = [[secureUrl host] UTF8String];
 	const char * cUsername = [username UTF8String];
-	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	NSInteger portNumber = [secureUrl port] ? [[secureUrl port] integerValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
 	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	NSString * thePassword;
 
@@ -46,13 +46,13 @@
 		OSStatus status;
 
 		status = SecKeychainFindInternetPassword(NULL,
-												 strlen(cServiceName),
+												 (UInt32)strlen(cServiceName),
 												 cServiceName,
 												 0,
 												 NULL,
-												 strlen(cUsername),
+												 (UInt32)strlen(cUsername),
 												 cUsername,
-												 strlen(cPath),
+												 (UInt32)strlen(cPath),
 												 cPath,
 												 portNumber,
 												 protocolType,
@@ -80,7 +80,7 @@
 	const char * cServiceName = [[secureUrl host] UTF8String];
 	const char * cUsername = [username UTF8String];
 	const char * cPath = "";
-	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	NSInteger portNumber = [secureUrl port] ? [[secureUrl port] integerValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
 	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	const char * cPassword = [password UTF8String];
 	SecKeychainItemRef itemRef;
@@ -89,13 +89,13 @@
 	if (!cServiceName || !cUsername || !cPassword)
 		return;
 	status = SecKeychainFindInternetPassword(NULL,
-											 strlen(cServiceName),
+											 (UInt32)strlen(cServiceName),
 											 cServiceName,
 											 0,
 											 NULL,
-											 strlen(cUsername),
+											 (UInt32)strlen(cUsername),
 											 cUsername,
-											 strlen(cPath),
+											 (UInt32)strlen(cPath),
 											 cPath,
 											 portNumber,
 											 protocolType,
@@ -106,18 +106,18 @@
 	if (status == noErr)
 		SecKeychainItemDelete(itemRef);
 	SecKeychainAddInternetPassword(NULL,
-								   strlen(cServiceName),
+								   (UInt32)strlen(cServiceName),
 								   cServiceName,
 								   0,
 								   NULL,
-								   strlen(cUsername),
+								   (UInt32)strlen(cUsername),
 								   cUsername,
-								   strlen(cPath),
+								   (UInt32)strlen(cPath),
 								   cPath,
 								   portNumber,
 								   protocolType,
 								   kSecAuthenticationTypeDefault,
-								   strlen(cPassword),
+								   (UInt32)strlen(cPassword),
 								   cPassword,
 								   NULL);
 }
@@ -130,7 +130,7 @@
 	NSURL * secureUrl = [NSURL URLWithString:url];
 	const char * cServiceName = [[secureUrl host] UTF8String];
 	const char * cUsername = [username UTF8String];
-	int portNumber = 0;
+	NSInteger portNumber = 0;
 	SecProtocolType protocolType = kSecProtocolTypeHTTPS ;
 	NSString * thePassword;
 
@@ -144,13 +144,13 @@
 		OSStatus status;
 
 		status = SecKeychainFindInternetPassword(NULL,
-												 strlen(cServiceName),
+												 (UInt32)strlen(cServiceName),
 												 cServiceName,
 												 0,
 												 NULL,
-												 strlen(cUsername),
+												 (UInt32)strlen(cUsername),
 												 cUsername,
-												 strlen(cPath),
+												 (UInt32)strlen(cPath),
 												 cPath,
 												 portNumber,
 												 protocolType,
@@ -187,9 +187,9 @@
 		OSStatus status;
 
 		status = SecKeychainFindGenericPassword(NULL,
-											 strlen(cServiceName),
+											 (UInt32)strlen(cServiceName),
 											 cServiceName,
-											 strlen(cUsername),
+											 (UInt32)strlen(cUsername),
 											 cUsername,
 											 &passwordLength,
 											 &passwordPtr,
@@ -218,9 +218,9 @@
 	if (!cServiceName || !cUsername)
 		return;
 	status = SecKeychainFindGenericPassword(NULL,
-											 strlen(cServiceName),
+											 (UInt32)strlen(cServiceName),
 											 cServiceName,
-											 strlen(cUsername),
+											 (UInt32)strlen(cUsername),
 											 cUsername,
 											 NULL,
 											 NULL,
@@ -243,11 +243,11 @@
 
 	[self deleteGenericPasswordInKeychain:username service:service];
 	SecKeychainAddGenericPassword(NULL,
-								   strlen(cServiceName),
+								   (UInt32)strlen(cServiceName),
 								   cServiceName,
-								   strlen(cUsername),
+								   (UInt32)strlen(cUsername),
 								   cUsername,
-								   strlen(cPassword),
+								   (UInt32)strlen(cPassword),
 								   cPassword,
 								   NULL);
 }

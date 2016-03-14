@@ -31,7 +31,7 @@
 @interface DownloadItem : NSObject<NSCoding> {
 	long long expectedSize;
 	long long fileSize;
-	int state;
+	NSInteger state;
 	NSImage * image;
 	NSString * filename;
 	NSURLDownload * download;
@@ -39,13 +39,13 @@
 }
 
 // Public functions
--(void)setState:(int)newState;
+-(void)setState:(NSInteger)newState;
 -(void)setSize:(long long)newSize;
 -(void)setExpectedSize:(long long)newExpectedSize;
 -(void)setDownload:(NSURLDownload *)theDownload;
 -(void)setFilename:(NSString *)theFilename;
 -(void)setStartTime:(NSDate *)newStartTime;
--(int)state;
+-(NSInteger)state;
 -(long long)expectedSize;
 -(long long)size;
 -(NSURLDownload *)download;
@@ -56,7 +56,7 @@
 
 @interface DownloadManager : NSObject <WebDownloadDelegate> {
 	NSMutableArray * downloadsList;
-	int activeDownloads;
+	NSInteger activeDownloads;
 }
 
 // Public functions
@@ -64,7 +64,7 @@
 +(BOOL)isFileDownloaded:(NSString *)filename;
 +(NSString *)fullDownloadPath:(NSString *)filename;
 -(NSArray *)downloadsList;
--(int)activeDownloads;
+-(NSInteger)activeDownloads;
 -(void)clearList;
 -(void)cancelItem:(DownloadItem *)item;
 -(void)removeItem:(DownloadItem *)item;

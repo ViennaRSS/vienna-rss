@@ -160,7 +160,7 @@
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] intValue]];
+	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] integerValue]];
 	ActivityItem * item = [self itemByName:[folder name]];
 	[log removeObject:item];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
@@ -171,9 +171,9 @@
  * return, indexPointer is the index of the item or the index of the item just
  * where the status item should be if it was found.
  */
--(ActivityItem *)getStatus:(NSString *)name index:(int *)indexPointer
+-(ActivityItem *)getStatus:(NSString *)name index:(NSInteger *)indexPointer
 {
-	int indexOfItem = 0;
+	NSInteger indexOfItem = 0;
 	ActivityItem * item;
 
 	for (item in log)
@@ -193,7 +193,7 @@
 -(ActivityItem *)itemByName:(NSString *)theName
 {
 	ActivityItem * item;
-	int insertionIndex;
+	NSInteger insertionIndex;
 
 	if ((item = [self getStatus:theName index:&insertionIndex]) == nil)
 	{
