@@ -42,7 +42,7 @@
 	-(void)displaySearchSheet:(NSWindow *)window;
 	-(void)initForField:(NSString *)fieldName inRow:(NSView *)row;
 	-(void)setOperatorsPopup:(NSPopUpButton *)popUpButton, ...;
-	-(void)addCriteria:(NSUInteger )index;
+	-(void)addCriteria:(NSUInteger)index;
 	-(void)addDefaultCriteria:(NSInteger)index;
 	-(void)removeCriteria:(NSInteger)index;
 	-(void)removeAllCriteria;
@@ -553,7 +553,7 @@
  * Add a new criteria clause. Before calling this function, initialise the
  * searchView with the settings to be added.
  */
--(void)addCriteria:(NSUInteger )index
+-(void)addCriteria:(NSUInteger)index
 {
 	NSData * archRow;
 	NSView * previousRow = nil;

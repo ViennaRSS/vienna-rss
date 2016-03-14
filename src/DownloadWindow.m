@@ -99,7 +99,7 @@
 	{
 		// Select the row under the cursor if it isn't already selected
 		if (table.numberOfSelectedRows <= 1)
-			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger )row] byExtendingSelection:NO];
+			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
 	}
 }
 

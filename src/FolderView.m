@@ -25,7 +25,7 @@
 #import "FoldersFilterable.h"
 
 @interface NSObject (FolderViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 	-(BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteFolderAtRow:(NSInteger)row;
 	-(IBAction)deleteFolder:(id)sender;

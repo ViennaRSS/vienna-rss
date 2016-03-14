@@ -22,7 +22,7 @@
 #import "AppController.h"
 
 @interface NSObject(MessageListViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 	-(BOOL)copyTableSelection:(NSArray *)rows toPasteboard:(NSPasteboard *)pboard;
 	-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 	-(IBAction)deleteMessage:(id)sender;

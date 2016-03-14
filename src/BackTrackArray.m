@@ -27,7 +27,7 @@
  * Initialises a new BackTrackArray with the specified maximum number of
  * items.
  */
--(instancetype)initWithMaximum:(NSUInteger )theMax
+-(instancetype)initWithMaximum:(NSUInteger)theMax
 {
 	if ((self = [super init]) != nil)
 	{

@@ -30,7 +30,7 @@
 	@property (nonatomic, readonly, copy) NSString *viewLink;
 	@property (nonatomic, readonly, strong) NSView *mainView;
 	@property (nonatomic, readonly, strong) WebView *webView;
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional
 	@property (nonatomic, readonly, copy) NSString *viewTitle;
 @end
