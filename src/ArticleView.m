@@ -264,9 +264,11 @@ static NSMutableDictionary * stylePathMappings = nil;
 	// Remember the current html string.
 	currentHTML = [[NSString alloc] initWithString: htmlText];
 	
+#if 0
 	// Replace feed:// with http:// if necessary
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
+#endif
 	
 	[self.mainFrame loadHTMLString:htmlText
 							  baseURL:[NSURL URLWithString:@"/"]];
