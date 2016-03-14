@@ -96,163 +96,126 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 -(void)setDefaultDatabase:(NSString *)newDatabase;
 
 // Path to scripts folder
--(NSString *)scriptsFolder;
+@property (nonatomic, readonly, copy) NSString *scriptsFolder;
 
 // Path to images folder
--(NSString *)imagesFolder;
+@property (nonatomic, readonly, copy) NSString *imagesFolder;
 
 // Path to styles folder
--(NSString *)stylesFolder;
+@property (nonatomic, readonly, copy) NSString *stylesFolder;
 
 // Path to the external plugins folder
--(NSString *)pluginsFolder;
+@property (nonatomic, readonly, copy) NSString *pluginsFolder;
 
 // Read-only internal settings
--(NSInteger)backTrackQueueSize;
+@property (nonatomic, readonly) NSInteger backTrackQueueSize;
 
 // Auto-expire values
--(NSInteger)autoExpireDuration;
--(void)setAutoExpireDuration:(NSInteger)newDuration;
+@property (nonatomic) NSInteger autoExpireDuration;
 
 // Download folder
--(NSString *)downloadFolder;
--(void)setDownloadFolder:(NSString *)newFolder;
+@property (nonatomic, copy) NSString *downloadFolder;
 
 // New articles notification method
--(NSInteger)newArticlesNotification;
--(void)setNewArticlesNotification:(NSInteger)newMethod;
+@property (nonatomic) NSInteger newArticlesNotification;
 
 // Mark read interval
--(float)markReadInterval;
--(void)setMarkReadInterval:(float)newInterval;
+@property (nonatomic) float markReadInterval;
 
 // Layout style
--(NSInteger)layout;
--(void)setLayout:(NSInteger)newLayout;
+@property (nonatomic) NSInteger layout;
 
 // Controls how articles are filtered in the view
--(NSInteger)filterMode;
--(void)setFilterMode:(NSInteger)newMode;
+@property (nonatomic) NSInteger filterMode;
 
 // Whether or not we show folder images
--(BOOL)showFolderImages;
--(void)setShowFolderImages:(BOOL)showImages;
+@property (nonatomic) BOOL showFolderImages;
 
 // Refresh all subscriptions on startup
--(BOOL)refreshOnStartup;
--(void)setRefreshOnStartup:(BOOL)flag;
+@property (nonatomic) BOOL refreshOnStartup;
 
 // Check for new versions of Vienna on startup
--(BOOL)checkForNewOnStartup;
--(void)setCheckForNewOnStartup:(BOOL)flag;
+@property (nonatomic) BOOL checkForNewOnStartup;
 
 // When checking a newer version, always search for Betas versions
--(BOOL)alwaysAcceptBetas;
--(void)setAlwaysAcceptBetas:(BOOL)flag;
+@property (nonatomic) BOOL alwaysAcceptBetas;
 
 // Opening URL links in Vienna
--(BOOL)openLinksInVienna;
--(void)setOpenLinksInVienna:(BOOL)flag;
+@property (nonatomic) BOOL openLinksInVienna;
 
 // Opening URL links in background
--(BOOL)openLinksInBackground;
--(void)setOpenLinksInBackground:(BOOL)flag;
+@property (nonatomic) BOOL openLinksInBackground;
 
 // Minimum font size settings
--(NSInteger)minimumFontSize;
--(BOOL)enableMinimumFontSize;
--(void)setMinimumFontSize:(NSInteger)newSize;
--(void)setEnableMinimumFontSize:(BOOL)flag;
+@property (nonatomic) NSInteger minimumFontSize;
+@property (nonatomic) BOOL enableMinimumFontSize;
 
 // JavaScript settings
--(BOOL)useJavaScript;
--(void)setUseJavaScript:(BOOL)flag;
+@property (nonatomic) BOOL useJavaScript;
 
 // Web Plugins settings
--(BOOL)useWebPlugins;
--(void)setUseWebPlugins:(BOOL)flag;
+@property (nonatomic) BOOL useWebPlugins;
 
 // Refresh frequency
--(void)setRefreshFrequency:(NSInteger)newFrequency;
--(NSInteger)refreshFrequency;
+@property (nonatomic) NSInteger refreshFrequency;
 
 // Current display style
--(NSString *)displayStyle;
--(void)setDisplayStyle:(NSString *)newStyle;
+@property (nonatomic, copy) NSString *displayStyle;
 -(void)setDisplayStyle:(NSString *)newStyle withNotification:(BOOL)flag;
--(CGFloat)textSizeMultiplier;
--(void)setTextSizeMultiplier:(CGFloat)newValue;
+@property (nonatomic) CGFloat textSizeMultiplier;
 
 // Folder list font
--(NSString *)folderListFont;
--(NSInteger)folderListFontSize;
--(void)setFolderListFont:(NSString *)newFontName;
--(void)setFolderListFontSize:(NSInteger)newFontSize;
+@property (nonatomic, copy) NSString *folderListFont;
+@property (nonatomic) NSInteger folderListFontSize;
 
 // Article list font
--(NSString *)articleListFont;
--(NSInteger)articleListFontSize;
--(void)setArticleListFont:(NSString *)newFontName;
--(void)setArticleListFontSize:(NSInteger)newFontSize;
+@property (nonatomic, copy) NSString *articleListFont;
+@property (nonatomic) NSInteger articleListFontSize;
 
 // Article list sort descriptors
--(NSArray *)articleSortDescriptors;
--(void)setArticleSortDescriptors:(NSArray *)newSortDescriptors;
+@property (nonatomic, copy) NSArray *articleSortDescriptors;
 
 // Automatically sort folders tree
--(NSInteger)foldersTreeSortMethod;
--(void)setFoldersTreeSortMethod:(NSInteger)newMethod;
+@property (nonatomic) NSInteger foldersTreeSortMethod;
 
 // Do we show an icon in the status bar?
--(BOOL)showAppInStatusBar;
--(void)setShowAppInStatusBar:(BOOL)show;
+@property (nonatomic) BOOL showAppInStatusBar;
 
 // Handle update via Sparkle
 -(void)handleUpdateRestart;
 
 // Show or hide the status bar
--(BOOL)showStatusBar;
--(void)setShowStatusBar:(BOOL)show;
+@property (nonatomic) BOOL showStatusBar;
 
 // Show or hide the filter bar
--(BOOL)showFilterBar;
--(void)setShowFilterBar:(BOOL)show;
+@property (nonatomic) BOOL showFilterBar;
 
 // Should we save the raw feed source XML?
--(NSString *)feedSourcesFolder;
--(BOOL)shouldSaveFeedSource;
--(void)setShouldSaveFeedSource:(BOOL)shouldSave;
+@property (nonatomic, readonly, copy) NSString *feedSourcesFolder;
+@property (nonatomic) BOOL shouldSaveFeedSource;
 
 // Current search method
--(SearchMethod *)searchMethod;
--(void)setSearchMethod:(SearchMethod *)newMethod;
+@property (nonatomic, strong) SearchMethod *searchMethod;
 
 // Concurrent download settings
--(NSUInteger)concurrentDownloads;
--(void)setConcurrentDownloads:(NSUInteger)downloads;
+@property (nonatomic) NSUInteger concurrentDownloads;
 
 // Do we show updated articles as new ?
--(BOOL)markUpdatedAsNew;
--(void)setMarkUpdatedAsNew:(BOOL)flag;
+@property (nonatomic) BOOL markUpdatedAsNew;
 
 // Do we send system specs when checking for updates?
--(BOOL)sendSystemSpecs;
--(void)setSendSystemSpecs:(BOOL)flag;
+@property (nonatomic) BOOL sendSystemSpecs;
 
 #pragma mark -
 #pragma mark Open Reader syncing
 
--(BOOL)syncGoogleReader;
--(void)setSyncGoogleReader:(BOOL)flag;
+@property (nonatomic) BOOL syncGoogleReader;
 
--(BOOL)prefersGoogleNewSubscription;
--(void)setPrefersGoogleNewSubscription:(BOOL)flag;
+@property (nonatomic) BOOL prefersGoogleNewSubscription;
 
 // server used for syncing
--(NSString *)syncServer;
--(void)setSyncServer:(NSString *)newServer;
+@property (nonatomic, copy) NSString *syncServer;
 
 // username used for syncing
--(NSString *)syncingUser;
--(void)setSyncingUser:(NSString *)newUser;
+@property (nonatomic, copy) NSString *syncingUser;
 @end

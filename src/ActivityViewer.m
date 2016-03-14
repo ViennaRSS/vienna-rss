@@ -29,7 +29,7 @@
 /* init
  * Just init the activity window.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super initWithWindowNibName:@"ActivityViewer"]) != nil)
 	{
@@ -45,15 +45,15 @@
 {
 	// Work around a Cocoa bug where the window positions aren't saved
 	[self setShouldCascadeWindows:NO];
-	[self setWindowFrameAutosaveName:@"activityViewer"];
-	[activityWindow setDelegate:self];
+	self.windowFrameAutosaveName = @"activityViewer";
+	activityWindow.delegate = self;
 
 	// Default font for the details view
 	NSFont * detailsFont = [NSFont fontWithName:@"Monaco" size:11.0];
-	[activityDetail setFont:detailsFont];
+	activityDetail.font = detailsFont;
 
 	// Handle double-click on an item
-	[activityTable setDoubleAction:@selector(handleDoubleClick:)];
+	activityTable.doubleAction = @selector(handleDoubleClick:);
 
 	// Set window title
 	[activityWindow setTitle:NSLocalizedString(@"Activity Window", nil)];
@@ -85,10 +85,10 @@
  */
 -(IBAction)handleDoubleClick:(id)sender
 {
-	NSInteger selectedRow = [activityTable selectedRow];
+	NSInteger selectedRow = activityTable.selectedRow;
 	if (selectedRow >= 0)
 	{
-		ActivityItem * selectedItem = [allItems objectAtIndex:selectedRow];
+		ActivityItem * selectedItem = allItems[selectedRow];
 
 		// Name might be a URL if the feed has always been invalid.
 		Database * db = [Database sharedManager];
@@ -110,15 +110,15 @@
 {
 	ActivityItem * selectedItem = nil;
 
-	NSInteger selectedRow = [activityTable selectedRow];
-	if (selectedRow >= 0 && selectedRow < [allItems count])
-		selectedItem = [allItems objectAtIndex:selectedRow];
+	NSInteger selectedRow = activityTable.selectedRow;
+	if (selectedRow >= 0 && selectedRow < allItems.count)
+		selectedItem = allItems[selectedRow];
 
-	[[ActivityLog defaultLog] sortUsingDescriptors:[activityTable sortDescriptors]];
+	[[ActivityLog defaultLog] sortUsingDescriptors:activityTable.sortDescriptors];
 	[activityTable reloadData];
 
 	if (selectedItem == nil)
-		[activityDetail setString:@""];
+		activityDetail.string = @"";
 	else
 	{
 		NSUInteger rowToSelect = [allItems indexOfObject:selectedItem];
@@ -148,11 +148,11 @@
  */
 -(void)handleDetailChange:(NSNotification *)nc
 {
-	ActivityItem * item = (ActivityItem *)[nc object];
-	NSInteger selectedRow = [activityTable selectedRow];
+	ActivityItem * item = (ActivityItem *)nc.object;
+	NSInteger selectedRow = activityTable.selectedRow;
 
-	if (selectedRow >= 0 && (item == [allItems objectAtIndex:selectedRow]))
-		[activityDetail setString:[item details]];		
+	if (selectedRow >= 0 && (item == allItems[selectedRow]))
+		activityDetail.string = [item details];		
 }
 
 /* numberOfRowsInTableView [datasource]
@@ -161,7 +161,7 @@
  */
 -(NSUInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [allItems count];
+	return allItems.count;
 }
 
 /* tableViewSelectionDidChange [delegate]
@@ -170,11 +170,11 @@
  */
 -(void)tableViewSelectionDidChange:(NSNotification *)aNotification
 {
-	NSInteger selectedRow = [activityTable selectedRow];
-	if (selectedRow >= 0 && selectedRow < [allItems count])
+	NSInteger selectedRow = activityTable.selectedRow;
+	if (selectedRow >= 0 && selectedRow < allItems.count)
 	{
-		ActivityItem * item = [allItems objectAtIndex:selectedRow];
-		[activityDetail setString:[item details]];
+		ActivityItem * item = allItems[selectedRow];
+		activityDetail.string = [item details];
 	}
 }
 
@@ -191,8 +191,8 @@
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSUInteger)rowIndex
 {
-	ActivityItem * item = [allItems objectAtIndex:rowIndex];
-	return ([aTableColumn identifier]) ? [item valueForKey:[aTableColumn identifier]] : @"";
+	ActivityItem * item = allItems[rowIndex];
+	return (aTableColumn.identifier) ? [item valueForKey:aTableColumn.identifier] : @"";
 }
 
 /* dealloc

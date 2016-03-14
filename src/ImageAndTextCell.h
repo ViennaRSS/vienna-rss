@@ -37,15 +37,12 @@
 }
 
 // Accessor functions
--(void)setOffset:(NSInteger)offset;
--(void)setImage:(NSImage *)anImage;
--(void)setAuxiliaryImage:(NSImage *)anAuxiliaryImage;
 -(void)setCount:(NSInteger)newCount;
 -(void)clearCount;
 -(void)setCountBackgroundColour:(NSColor *)newColour;
--(NSImage *)image;
--(NSImage *)auxiliaryImage;
--(NSInteger)offset;
+@property (strong) NSImage *image;
+@property (nonatomic, strong) NSImage *auxiliaryImage;
+@property (nonatomic) NSInteger offset;
 -(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView;
 - (void)setInProgress:(BOOL)newInProgress;
 - (void)setItem:(TreeNode *)newItem;

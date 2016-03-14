@@ -27,9 +27,9 @@
 }
 
 // Accessor functions
--(id)initWithMaximum:(NSUInteger )theMax;
--(BOOL)isAtStartOfQueue;
--(BOOL)isAtEndOfQueue;
+-(instancetype)initWithMaximum:(NSUInteger )theMax /*NS_DESIGNATED_INITIALIZER*/;
+@property (nonatomic, getter=isAtStartOfQueue, readonly) BOOL atStartOfQueue;
+@property (nonatomic, getter=isAtEndOfQueue, readonly) BOOL atEndOfQueue;
 -(void)addToQueue:(NSInteger)folderId guid:(NSString *)guid;
 -(BOOL)nextItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPtr;
 -(BOOL)previousItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPtr;

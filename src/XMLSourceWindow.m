@@ -39,7 +39,7 @@
 /* initWithFolder:
  * Just init the "View Source" window.
  */
--(id)initWithFolder:(Folder *)folder
+-(instancetype)initWithFolder:(Folder *)folder
 {
 	NSParameterAssert( folder != nil );
 	
@@ -86,7 +86,7 @@
 					syntaxHighlighter = [syntaxHighlighter stringByReplacingOccurrencesOfString:@"$XMLSourceData" withString:xmlSource];
 				}
 				else
-					errorDescription = [error localizedDescription];
+					errorDescription = error.localizedDescription;
 			}
 			
 			if (errorDescription != nil)
@@ -94,7 +94,7 @@
 				syntaxHighlighter = [NSString stringWithFormat:@"<html><body><br><br><br><center>%@</center><body></html>", errorDescription];
 			}
 				
-			[[sourceWebView mainFrame] loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
+			[sourceWebView.mainFrame loadHTMLString:syntaxHighlighter baseURL:[NSURL fileURLWithPath:pathToSyntaxHighlighter isDirectory:NO]];
 		}
 	}	
 }
@@ -121,15 +121,15 @@
 		[sJavaScriptPreferences setUsesPageCache:NO];
 	}
 	
-	[[self window] setTitle:sourceWindowTitle];
-	[sourceWebView setPreferencesIdentifier:@"ViennaJavaScriptEnabled"];
+	self.window.title = sourceWindowTitle;
+	sourceWebView.preferencesIdentifier = @"ViennaJavaScriptEnabled";
 	[self displayXmlSource];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
 {
 	// Post this for interested observers (namely, the AppController)
-	[[NSNotificationCenter defaultCenter] postNotificationName:[notification name] object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:notification.name object:self];
 }
 
 /*
@@ -139,14 +139,14 @@
  */
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener
 {
-	NSNumber * navigationTypeObject = [actionInformation objectForKey:WebActionNavigationTypeKey];
+	NSNumber * navigationTypeObject = actionInformation[WebActionNavigationTypeKey];
 	if (navigationTypeObject != nil)
 	{
-		NSInteger navigationType = [navigationTypeObject integerValue];
+		NSInteger navigationType = navigationTypeObject.integerValue;
 		if (navigationType == WebNavigationTypeLinkClicked)
 		{
 			[listener ignore];
-			[APPCONTROLLER openURL:[request URL] inPreferredBrowser:YES];
+			[APPCONTROLLER openURL:request.URL inPreferredBrowser:YES];
 			return;
 		}
 	}

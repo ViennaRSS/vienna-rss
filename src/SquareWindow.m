@@ -25,7 +25,7 @@
  * Subclass the designated initialiser for NSWindow to set the square bottom edge style using the
  * undocumented setBottomCornerRounded function.
  */
--(id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(NSBackingStoreType)backingType defer:(BOOL)flag
+-(instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)styleMask backing:(NSBackingStoreType)backingType defer:(BOOL)flag
 {
 	if ((self = [super initWithContentRect:contentRect styleMask:styleMask backing:backingType defer:flag]) != nil)
 	{

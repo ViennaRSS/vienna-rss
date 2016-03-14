@@ -24,7 +24,7 @@
 
 /* initWithReference
  */
--(id)initWithReference:(NSString *)aGuid inFolder:(NSInteger)aFolderId
+-(instancetype)initWithReference:(NSString *)aGuid inFolder:(NSInteger)aFolderId
 {
 	if ((self = [super init]) != nil)
 	{

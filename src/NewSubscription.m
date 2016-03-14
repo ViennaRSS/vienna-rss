@@ -38,7 +38,7 @@
 /* initWithDatabase
  * Just init the RSS feed class.
  */
--(id)initWithDatabase:(Database *)newDb
+-(instancetype)initWithDatabase:(Database *)newDb
 {
 	if ((self = [super init]) != nil)
 	{
@@ -90,20 +90,20 @@
 	// URL field with it. A handy shortcut.
 	if (initialURL != nil)
 	{
-		[feedURL setStringValue:initialURL];
+		feedURL.stringValue = initialURL;
 		[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 	}
 	else
 	{
 		NSData * pboardData = [[NSPasteboard generalPasteboard] dataForType:NSStringPboardType];
-		[feedURL setStringValue:@""];
+		feedURL.stringValue = @"";
 		if (pboardData != nil)
 		{
 			NSString * pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding];
-			NSString * lowerCasePasteString = [pasteString lowercaseString];
+			NSString * lowerCasePasteString = pasteString.lowercaseString;
 			if (lowerCasePasteString != nil && ([lowerCasePasteString hasPrefix:@"http://"] || [lowerCasePasteString hasPrefix:@"https://"] || [lowerCasePasteString hasPrefix:@"feed://"]))
 			{
-				[feedURL setStringValue:pasteString];
+				feedURL.stringValue = pasteString;
 				[feedURL selectText:self];
 				[feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 			}
@@ -145,14 +145,14 @@
 	Folder * folder = [db folderFromID:folderId];
 	if (folder != nil)
 	{
-		[editFeedURL setStringValue:[folder feedURL]];
+		editFeedURL.stringValue = [folder feedURL];
 		[self enableSaveButton];
 		editFolderId = folderId;
 		
 		// Create a context object which contains the folder ID for the sheet to pass to
 		// selector which it will call when done. Retain it so it is still around for the
 		// selector.
-		NSNumber * folderContext = [NSNumber numberWithInteger:folderId];
+		NSNumber * folderContext = @(folderId);
 		
 		// Open the edit sheet.
 		[NSApp	beginSheet:editRSSFeedWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(didEndSubscriptionEdit:returnCode:contextInfo:) contextInfo:(__bridge void *)(folderContext)];
@@ -168,7 +168,7 @@
 	{
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"RSSFeed" owner:self topLevelObjects:&objects];
-		[self setTopObjects:objects];
+		self.topObjects = objects;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:feedURL];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange2:) name:NSControlTextDidChangeNotification object:editFeedURL];
 	}
@@ -180,7 +180,7 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSURL * rssFeedURL;
-	NSString * feedURLString = [[feedURL stringValue] trim];
+	NSString * feedURLString = [feedURL.stringValue trim];
 	// Replace feed:// with http:// if necessary
 	if ([feedURLString hasPrefix:@"feed://"])
 		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
@@ -188,7 +188,7 @@
 	// Format the URL based on the selected feed source.
 	if (sourcesDict != nil)
 	{
-		NSString * selectedSource = (NSString *)[[feedSource selectedItem] representedObject];
+		NSString * selectedSource = (NSString *)feedSource.selectedItem.representedObject;
 		NSDictionary * feedSourceType = [sourcesDict valueForKey:selectedSource];
 		NSString * linkTemplate = [feedSourceType valueForKey:@"LinkTemplate"];
         if ([selectedSource.lowercaseString isEqualToString:@"local file"]) {
@@ -225,7 +225,7 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * feedURLString = [[editFeedURL stringValue] trim];
+	NSString * feedURLString = [editFeedURL.stringValue trim];
 
 	// Save the new information to the database
     [[Database sharedManager] setFeedURL:feedURLString forFolder:editFolderId];
@@ -297,12 +297,12 @@
  */
 -(void)setLinkTitle
 {
-	NSMenuItem * feedSourceItem = [feedSource selectedItem];
+	NSMenuItem * feedSourceItem = feedSource.selectedItem;
 	NSString * linkTitleString = nil;
 	BOOL showButton = NO;
 	if (feedSourceItem != nil)
 	{
-		NSDictionary * itemDict = [sourcesDict valueForKey:[feedSourceItem title]];
+		NSDictionary * itemDict = [sourcesDict valueForKey:feedSourceItem.title];
 		if (itemDict != nil)
 		{
 			linkTitleString = [itemDict valueForKey:@"LinkName"];
@@ -311,18 +311,18 @@
 	}
 	if (linkTitleString == nil)
 		linkTitleString = @"Link";
-	[linkTitle setStringValue:[NSString stringWithFormat:@"%@:", NSLocalizedString(linkTitleString, nil)]];
-	[siteHomePageButton setHidden:!showButton];
+	linkTitle.stringValue = [NSString stringWithFormat:@"%@:", NSLocalizedString(linkTitleString, nil)];
+	siteHomePageButton.hidden = !showButton;
 }
 
 /* doShowSiteHomePage
  */
 -(void)doShowSiteHomePage:(id)sender
 {
-	NSMenuItem * feedSourceItem = [feedSource selectedItem];
+	NSMenuItem * feedSourceItem = feedSource.selectedItem;
 	if (feedSourceItem != nil)
 	{
-		NSDictionary * itemDict = [sourcesDict valueForKey:[feedSourceItem title]];
+		NSDictionary * itemDict = [sourcesDict valueForKey:feedSourceItem.title];
 		if (itemDict != nil)
 		{
 			NSString * siteHomePageURL = [itemDict valueForKey:@"SiteHomePage"];
@@ -338,8 +338,8 @@
  */
 -(void)enableSubscribeButton
 {
-	NSString * feedURLString = [feedURL stringValue];
-	[subscribeButton setEnabled:![feedURLString isBlank]];
+	NSString * feedURLString = feedURL.stringValue;
+	subscribeButton.enabled = ![feedURLString isBlank];
 }
 
 /* enableSaveButton
@@ -348,8 +348,8 @@
  */
 -(void)enableSaveButton
 {
-	NSString * feedURLString = [editFeedURL stringValue];
-	[saveButton setEnabled:![feedURLString isBlank]];
+	NSString * feedURLString = editFeedURL.stringValue;
+	saveButton.enabled = ![feedURLString isBlank];
 }
 
 /* dealloc

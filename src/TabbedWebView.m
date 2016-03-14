@@ -44,12 +44,12 @@ static NSString * _userAgent ;
 {
 	if(!_userAgent)
 	{
-        NSString * webkitVersion = [[[NSBundle bundleWithIdentifier:@"com.apple.WebKit"] infoDictionary] objectForKey:@"CFBundleVersion"];
+        NSString * webkitVersion = [NSBundle bundleWithIdentifier:@"com.apple.WebKit"].infoDictionary[@"CFBundleVersion"];
         if (webkitVersion)
             webkitVersion = [webkitVersion substringFromIndex:2];
         else
             webkitVersion = @"536.30";
-        NSString * shortSafariVersion = [[[NSBundle bundleWithPath:@"/Applications/Safari.app"] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        NSString * shortSafariVersion = [NSBundle bundleWithPath:@"/Applications/Safari.app"].infoDictionary[@"CFBundleShortVersionString"];
         if (!shortSafariVersion)
             shortSafariVersion = @"6.0";
         _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], shortSafariVersion, webkitVersion];
@@ -60,7 +60,7 @@ static NSString * _userAgent ;
 /* initWithFrame
  * The designated instance initialiser.
  */
--(id)initWithFrame:(NSRect)frameRect frameName:(NSString *)frameName groupName:(NSString *)groupName
+-(instancetype)initWithFrame:(NSRect)frameRect frameName:(NSString *)frameName groupName:(NSString *)groupName
 {
 	if ((self = [super initWithFrame:frameRect frameName:frameName groupName:groupName]) != nil)
 		[self initTabbedWebView];
@@ -79,11 +79,11 @@ static NSString * _userAgent ;
 	isDownload = NO;
 		
 	// Set a host window so that plugins can keep active while not in the front-most tab.
-	[self setHostWindow:[NSApp mainWindow]];
+	self.hostWindow = NSApp.mainWindow;
 	
 	// We'll be the webview policy handler.
-	[self setPolicyDelegate:self];
-	[self setDownloadDelegate:[DownloadManager sharedInstance]];
+	self.policyDelegate = self;
+	self.downloadDelegate = [DownloadManager sharedInstance];
 	
 	// Set up to be notified of changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -95,14 +95,14 @@ static NSString * _userAgent ;
                name:kMA_Notify_UseWebPluginsChange object:nil];
 	
 	// Handle minimum font size, use of JavaScript, and use of plugins
-	defaultWebPrefs = [self preferences];
-	[defaultWebPrefs setStandardFontFamily:@"Arial"];
-	[defaultWebPrefs setDefaultFontSize:12];
+	defaultWebPrefs = self.preferences;
+	defaultWebPrefs.standardFontFamily = @"Arial";
+	defaultWebPrefs.defaultFontSize = 12;
 	[defaultWebPrefs setPrivateBrowsingEnabled:NO];
 	[defaultWebPrefs setJavaScriptEnabled:NO];
     [defaultWebPrefs setPlugInsEnabled:NO];
     // handle UserAgent
-    [self setApplicationNameForUserAgent:[TabbedWebView userAgent]];
+    self.applicationNameForUserAgent = [TabbedWebView userAgent];
 	[self loadMinimumFontSize];
 	[self loadUseJavaScript];
     [self loadUseWebPlugins];
@@ -114,7 +114,7 @@ static NSString * _userAgent ;
 -(void)setController:(AppController *)theController
 {
 	controller = theController;
-	[self setPolicyDelegate:self];
+	self.policyDelegate = self;
 }
 
 /* setOpenLinksInNewBrowser
@@ -163,7 +163,7 @@ static NSString * _userAgent ;
  */
 -(BOOL)isDownloadFileType:(NSURL *)url
 {
-	NSString * newURLExtension = [[url path] pathExtension];
+	NSString * newURLExtension = url.path.pathExtension;
 	return ([newURLExtension isEqualToString:@"dmg"] ||
 			[newURLExtension isEqualToString:@"sit"] ||
 			[newURLExtension isEqualToString:@"bin"] ||
@@ -189,7 +189,7 @@ static NSString * _userAgent ;
 		// Convert the link to a feed:// link so that the system will redirect it to the
 		// appropriate handler. (We can't assume that we're the registered handler and it is
 		// too much work for us to figure it out when the system can do it easily enough).
-		NSScanner * scanner = [NSScanner scannerWithString:[[request URL] absoluteString]];
+		NSScanner * scanner = [NSScanner scannerWithString:request.URL.absoluteString];
 		[scanner scanString:@"http://" intoString:nil];
 		[scanner scanString:@"https://" intoString:nil];
 		[scanner scanString:@"feed://" intoString:nil];
@@ -245,7 +245,7 @@ static NSString * _userAgent ;
 		NSUInteger  modifierFlag = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
 		BOOL useAlternateBrowser = (modifierFlag & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		[listener ignore];
-		[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
+		[controller openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
 		return;
 	}
 	[listener use];
@@ -262,10 +262,10 @@ static NSString * _userAgent ;
 	NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
 	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 	
-	NSString * scheme = [[[request URL] scheme] lowercaseString];
+	NSString * scheme = request.URL.scheme.lowercaseString;
 	if (navType == WebNavigationTypeLinkClicked)
 	{
-		if ([scheme isEqualToString:@"file"] && [[[request URL] resourceSpecifier] hasPrefix:@"/#"])
+		if ([scheme isEqualToString:@"file"] && [request.URL.resourceSpecifier hasPrefix:@"/#"])
 		// clicked a link to an anchor in the same webview
 		{
 			[listener use];
@@ -274,7 +274,7 @@ static NSString * _userAgent ;
 		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
 		{
 			[listener ignore];
-			[controller openURL:[request URL] inPreferredBrowser:!useAlternateBrowser];
+			[controller openURL:request.URL inPreferredBrowser:!useAlternateBrowser];
 			return;
 		}
 		else
@@ -283,7 +283,7 @@ static NSString * _userAgent ;
 			if ([prefs openLinksInVienna] == useAlternateBrowser)
 			{
 				[listener ignore];
-				[controller openURLInDefaultBrowser:[request URL]];
+				[controller openURLInDefaultBrowser:request.URL];
 				return;
 			}
 		}
@@ -295,7 +295,7 @@ static NSString * _userAgent ;
 	else
 	{
 		[listener ignore];
-		[[NSWorkspace sharedWorkspace] openURL:[request URL]];
+		[[NSWorkspace sharedWorkspace] openURL:request.URL];
 	}
 }
 
@@ -330,11 +330,11 @@ static NSString * _userAgent ;
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	if (![prefs enableMinimumFontSize])
-		[defaultWebPrefs setMinimumFontSize:1];
+		defaultWebPrefs.minimumFontSize = 1;
 	else
 	{
 		NSInteger size = [prefs minimumFontSize];
-		[defaultWebPrefs setMinimumFontSize:(int)size];
+		defaultWebPrefs.minimumFontSize = (int)size;
 	}
 }
 
@@ -346,17 +346,17 @@ static NSString * _userAgent ;
     NSPoint newScrollOrigin;
 	NSScrollView * myScrollView;
 	
-	myScrollView = [[[[self mainFrame] frameView] documentView] enclosingScrollView];
+	myScrollView = self.mainFrame.frameView.documentView.enclosingScrollView;
 	
-    if ([[myScrollView documentView] isFlipped]) 
-		newScrollOrigin = NSMakePoint(0.0,NSMaxY([[myScrollView documentView] frame])-NSHeight([[myScrollView contentView] bounds]));
+    if ([myScrollView.documentView isFlipped]) 
+		newScrollOrigin = NSMakePoint(0.0,NSMaxY([myScrollView.documentView frame])-NSHeight(myScrollView.contentView.bounds));
 	else 
 		newScrollOrigin = NSMakePoint(0.0,0.0);
 	
-    [[myScrollView documentView] scrollPoint: newScrollOrigin];	
+    [myScrollView.documentView scrollPoint: newScrollOrigin];	
 
-    if ([[myScrollView verticalScroller] knobProportion] < 0.05)
-    	[[myScrollView verticalScroller] setKnobProportion:0.05];
+    if (myScrollView.verticalScroller.knobProportion < 0.05)
+    	myScrollView.verticalScroller.knobProportion = 0.05;
 }
 
 /* scrollToTop
@@ -374,7 +374,7 @@ static NSString * _userAgent ;
 -(void)loadUseJavaScript
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	[defaultWebPrefs setJavaScriptEnabled:[prefs useJavaScript]];
+	defaultWebPrefs.javaScriptEnabled = [prefs useJavaScript];
 }
 
 /* loadUseWebPlugins
@@ -383,7 +383,7 @@ static NSString * _userAgent ;
 -(void)loadUseWebPlugins
 {
     Preferences * prefs = [Preferences standardPreferences];
-    [defaultWebPrefs setPlugInsEnabled:[prefs useWebPlugins]];
+    defaultWebPrefs.plugInsEnabled = [prefs useWebPlugins];
 }
 
 /* keyDown
@@ -392,15 +392,15 @@ static NSString * _userAgent ;
  */
 -(void)keyDown:(NSEvent *)theEvent
 {
-	if ([[theEvent characters] length] == 1)
+	if (theEvent.characters.length == 1)
 	{
-		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ((keyChar == NSLeftArrowFunctionKey) && ([theEvent modifierFlags] & NSCommandKeyMask))
+		unichar keyChar = [theEvent.characters characterAtIndex:0];
+		if ((keyChar == NSLeftArrowFunctionKey) && (theEvent.modifierFlags & NSCommandKeyMask))
 		{
 			[self goBack:self];
 			return;
 		}
-		else if ((keyChar == NSRightArrowFunctionKey) && ([theEvent modifierFlags] & NSCommandKeyMask))
+		else if ((keyChar == NSRightArrowFunctionKey) && (theEvent.modifierFlags & NSCommandKeyMask))
 		{
 			[self goForward:self];
 			return;
@@ -414,14 +414,14 @@ static NSString * _userAgent ;
  */
 -(void)printDocument:(id)sender
 {
-	NSView * printView = [[[self mainFrame] frameView] documentView];
+	NSView * printView = self.mainFrame.frameView.documentView;
 	NSPrintInfo * printInfo = [NSPrintInfo sharedPrintInfo];
 	
 	NSMutableDictionary * dict = [printInfo dictionary];
-	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintLeftMargin];
-	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintRightMargin];
-	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintTopMargin];
-	[dict setObject:[NSNumber numberWithDouble:36.0f] forKey:NSPrintBottomMargin];
+	dict[NSPrintLeftMargin] = @36.0;
+	dict[NSPrintRightMargin] = @36.0;
+	dict[NSPrintTopMargin] = @36.0;
+	dict[NSPrintBottomMargin] = @36.0;
 	
 	[printInfo setVerticallyCentered:NO];
 	[printView print:self];

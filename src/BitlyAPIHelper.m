@@ -44,7 +44,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 {
 	// The next few lines incrementally build the request...
 	NSString * requestURLString = [NSString stringWithFormat:BitlyApiBaseUrl, @"shorten", login, apiKey];
-	longURL = [cleanedUpAndEscapedUrlFromString(longURL) absoluteString];
+	longURL = cleanedUpAndEscapedUrlFromString(longURL).absoluteString;
 	NSString * parameters = [NSString stringWithFormat:@"longUrl=%@", longURL];
 	requestURLString = [requestURLString stringByAppendingString:parameters];	
 	NSURL *finishedRequestURL = [NSURL URLWithString:requestURLString];
@@ -56,7 +56,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
 	NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];	
 	
 	// If the response is OK, use Vienna's XML parser stuff to get the data we need.
-	if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
+	if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300)
 	{
 		//TODO: Robust error-handling.
         NSError *error = nil;
@@ -75,7 +75,7 @@ static NSString * BitlyApiBaseUrl = @"http://api.bit.ly/%@?version=2.0.1&login=%
             NSLog(@"Processing xml xpath from bit.ly failed: %@", error);
             return nil;
         } else {
-            return [shortUrlNode stringValue];
+            return shortUrlNode.stringValue;
         }
         
 	}

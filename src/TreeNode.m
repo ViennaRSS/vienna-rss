@@ -27,7 +27,7 @@
 /* init
  * Initialises a treenode.
  */
--(id)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
+-(instancetype)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
 {
 	if ((self = [super init]) != nil)
  	{
@@ -60,7 +60,7 @@
 -(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
-	NSUInteger count = [children count];
+	NSUInteger count = children.count;
 	NSInteger sortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
 
 	if (sortMethod != MA_FolderSort_Manual)
@@ -69,7 +69,7 @@
 
 		while (insertIndex < count)
 		{
-			TreeNode * theChild = [children objectAtIndex:insertIndex];
+			TreeNode * theChild = children[insertIndex];
 			if (sortMethod == MA_FolderSort_ByName)
 			{
 				if ([child folderNameCompare:theChild] == NSOrderedAscending)
@@ -182,7 +182,7 @@
  */
 -(TreeNode *)childByIndex:(NSInteger)index
 {
-	return [children objectAtIndex:index];
+	return children[index];
 }
 
 /* indexOfChild
@@ -225,9 +225,9 @@
  */
 -(TreeNode *)firstChild
 {
-	if ([children count] == 0)
+	if (children.count == 0)
 		return nil;
-	return [children objectAtIndex:0];
+	return children[0];
 }
 
 /* setNodeId
@@ -284,7 +284,7 @@
  */
 -(NSUInteger)countOfChildren
 {
-	return [children count];
+	return children.count;
 }
 
 /* setCanHaveChildren
@@ -312,7 +312,7 @@
 -(NSString *)description
 {
 	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)",
-            [folder name], parentNode, (unsigned long)[children count]];
+            [folder name], parentNode, (unsigned long)children.count];
 }
 
 /* allocAndStartProgressIndicator:
@@ -323,8 +323,8 @@
 	// Allocate and initialize the spinning progress indicator.
 	NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
 	progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-	[progressIndicator setControlSize:NSSmallControlSize];
-	[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+	progressIndicator.controlSize = NSSmallControlSize;
+	progressIndicator.style = NSProgressIndicatorSpinningStyle;
 	[progressIndicator setUsesThreadedAnimation:YES];
 	
 	// Start the animation.

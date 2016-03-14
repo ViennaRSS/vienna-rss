@@ -48,7 +48,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* initWithGuid
  */
--(id)initWithGuid:(NSString *)theGuid
+-(instancetype)initWithGuid:(NSString *)theGuid
 {
     if ((self = [super init]) != nil)
     {
@@ -72,21 +72,21 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setTitle:(NSString *)newTitle
 {
-    [articleData setObject:newTitle forKey:MA_Field_Subject];
+    articleData[MA_Field_Subject] = newTitle;
 }
 
 /* setAuthor
  */
 -(void)setAuthor:(NSString *)newAuthor
 {
-    [articleData setObject:newAuthor forKey:MA_Field_Author];
+    articleData[MA_Field_Author] = newAuthor;
 }
 
 /* setLink
  */
 -(void)setLink:(NSString *)newLink
 {
-    [articleData setObject:newLink forKey:MA_Field_Link];
+    articleData[MA_Field_Link] = newLink;
 }
 
 /* setDate
@@ -94,7 +94,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setDate:(NSDate *)newDate
 {
-    [articleData setObject:newDate forKey:MA_Field_Date];
+    articleData[MA_Field_Date] = newDate;
 }
 
 /* setCreatedDate
@@ -102,14 +102,14 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setCreatedDate:(NSDate *)newCreatedDate
 {
-    [articleData setObject:newCreatedDate forKey:MA_Field_CreatedDate];
+    articleData[MA_Field_CreatedDate] = newCreatedDate;
 }
 
 /* setBody
  */
 -(void)setBody:(NSString *)newText
 {
-    [articleData setObject:newText forKey:MA_Field_Text];
+    articleData[MA_Field_Text] = newText;
     [articleData removeObjectForKey:MA_Field_Summary];
 }
 
@@ -118,7 +118,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(void)setEnclosure:(NSString *)newEnclosure
 {
     if (newEnclosure)
-        [articleData setObject:newEnclosure forKey:MA_Field_Enclosure];
+        articleData[MA_Field_Enclosure] = newEnclosure;
     else
         [articleData removeObjectForKey:MA_Field_Enclosure];
 }
@@ -180,7 +180,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 {
     if ([keyPath hasPrefix:@"articleData."])
     {
-        NSString * key = [keyPath substringFromIndex:[@"articleData." length]];
+        NSString * key = [keyPath substringFromIndex:(@"articleData.").length];
         if ([key isEqualToString:MA_Field_Date])
         {
             return [self date];
@@ -218,32 +218,32 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(BOOL)isRevised				{ return revisedFlag; }
 -(BOOL)isFlagged				{ return markedFlag; }
 -(BOOL)isDeleted				{ return deletedFlag; }
--(BOOL)hasComments				{ return [commentsArray count] > 0; }
+-(BOOL)hasComments				{ return commentsArray.count > 0; }
 -(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
 -(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
 -(NSInteger)status				{ return status; }
--(NSInteger)folderId			{ return [[articleData objectForKey:MA_Field_Folder] integerValue]; }
--(NSString *)author				{ return [articleData objectForKey:MA_Field_Author]; }
--(NSString *)link				{ return [articleData objectForKey:MA_Field_Link]; }
--(NSString *)guid				{ return [articleData objectForKey:MA_Field_GUID]; }
--(NSInteger)parentId			{ return [[articleData objectForKey:MA_Field_Parent] integerValue]; }
--(NSString *)title				{ return [articleData objectForKey:MA_Field_Subject]; }
+-(NSInteger)folderId			{ return [articleData[MA_Field_Folder] integerValue]; }
+-(NSString *)author				{ return articleData[MA_Field_Author]; }
+-(NSString *)link				{ return articleData[MA_Field_Link]; }
+-(NSString *)guid				{ return articleData[MA_Field_GUID]; }
+-(NSInteger)parentId			{ return [articleData[MA_Field_Parent] integerValue]; }
+-(NSString *)title				{ return articleData[MA_Field_Subject]; }
 -(NSString *)summary
 {
-    NSString * summary = [articleData objectForKey:MA_Field_Summary];
+    NSString * summary = articleData[MA_Field_Summary];
     if (summary == nil)
     {
-        summary = [[articleData objectForKey:MA_Field_Text] summaryTextFromHTML];
+        summary = [articleData[MA_Field_Text] summaryTextFromHTML];
         if (summary == nil)
             summary = @"";
-        [articleData setObject:summary forKey:MA_Field_Summary];
+        articleData[MA_Field_Summary] = summary;
     }
     return summary;
 }
--(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
--(NSDate *)createdDate			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
--(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }
--(NSString *)enclosure			{ return [NSString stringByCleaningURLString:[articleData objectForKey:MA_Field_Enclosure]]; }
+-(NSDate *)date					{ return articleData[MA_Field_Date]; }
+-(NSDate *)createdDate			{ return articleData[MA_Field_CreatedDate]; }
+-(NSString *)body				{ return articleData[MA_Field_Text]; }
+-(NSString *)enclosure			{ return [NSString stringByCleaningURLString:articleData[MA_Field_Enclosure]]; }
 
 /* containingFolder
  */
@@ -256,21 +256,21 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(void)setFolderId:(NSInteger)newFolderId
 {
-    [articleData setObject:[NSNumber numberWithInteger:newFolderId] forKey:MA_Field_Folder];
+    articleData[MA_Field_Folder] = @(newFolderId);
 }
 
 /* setGuid
  */
 -(void)setGuid:(NSString *)newGuid
 {
-    [articleData setObject:newGuid forKey:MA_Field_GUID];
+    articleData[MA_Field_GUID] = newGuid;
 }
 
 /* setParentId
  */
 -(void)setParentId:(NSInteger)newParentId
 {
-    [articleData setObject:[NSNumber numberWithInteger:newParentId] forKey:MA_Field_Parent];
+    articleData[MA_Field_Parent] = @(newParentId);
 }
 
 /* setStatus
@@ -297,7 +297,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
     NSUInteger index = [folder indexOfArticle:self];
     if (index != NSNotFound)
     {
-        NSScriptObjectSpecifier * containerRef = [folder objectSpecifier];
+        NSScriptObjectSpecifier * containerRef = folder.objectSpecifier;
         return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
                                                                              containerSpecifier:containerRef
                                                                                             key:@"articles"
@@ -368,7 +368,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureFilename
 {
-    return [[[self enclosure] lastPathComponent] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [[self enclosure].lastPathComponent stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 /* tagFeedTitle
@@ -440,7 +440,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
             if (![replacementString isBlank])
                 cond = NO;
             
-            tagStartIndex += [replacementString length];
+            tagStartIndex += replacementString.length;
         }
     }
     return (cond && hasOneTag) ? @"" : newString;

@@ -286,11 +286,11 @@
 }
 
 - (NSDictionary*)scrollState {
-    NSClipView* clipView = (NSClipView*)[self superview];
+    NSClipView* clipView = (NSClipView*)self.superview;
     if (![clipView isKindOfClass:[NSClipView class]])
         return @{};
 
-    NSScrollView* scrollView = (NSScrollView*)[clipView superview];
+    NSScrollView* scrollView = (NSScrollView*)clipView.superview;
     if (![scrollView isKindOfClass:[NSScrollView class]])
         return @{};
 
@@ -304,7 +304,7 @@
     if (!rectValue)
         return;
 
-    [self scrollPoint:[rectValue rectValue].origin];
+    [self scrollPoint:rectValue.rectValue.origin];
 }
 
 - (NSSet*)selectionState {

@@ -25,28 +25,28 @@
 #pragma mark -
 #pragma mark Init/Dealloc
 
--(id)initWithFrame:(NSRect)frameRect
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
 	if((self = [super initWithFrame:frameRect]))
 	{
 		controller = APPCONTROLLER;
 		articleView= [[ArticleView alloc] initWithFrame:frameRect];
 		// Make the list view the frame load and UI delegate for the web view
-		[articleView setUIDelegate:[[controller browserView] primaryTabItemView]];
-		[articleView setFrameLoadDelegate:[[controller browserView] primaryTabItemView]];
+		articleView.UIDelegate = [[controller browserView] primaryTabItemView];
+		articleView.frameLoadDelegate = [[controller browserView] primaryTabItemView];
 		// Notify the list view when the article view has finished loading
 		SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
 		[[NSNotificationCenter defaultCenter] addObserver:[[controller browserView] primaryTabItemView] selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
 		[articleView setOpenLinksInNewBrowser:YES];
 		[articleView setController:controller];
-		[[[articleView mainFrame] frameView] setAllowsScrolling:NO];
+		[articleView.mainFrame.frameView setAllowsScrolling:NO];
 
 		// Make web preferences 16pt Arial to match Safari
-		[[articleView preferences] setStandardFontFamily:@"Arial"];
-		[[articleView preferences] setDefaultFontSize:16];
+		articleView.preferences.standardFontFamily = @"Arial";
+		articleView.preferences.defaultFontSize = 16;
 
 		// Enable caching
-		[[articleView preferences] setUsesPageCache:YES];
+		[articleView.preferences setUsesPageCache:YES];
 		[articleView setMaintainsBackForwardList:NO];
 		[self setInProgress:NO];
 		progressIndicator = nil;
@@ -71,7 +71,7 @@
 -(void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-	if([[[self listView] selectedRowIndexes] containsIndex:articleRow]) {
+	if([self.listView.selectedRowIndexes containsIndex:articleRow]) {
 		[[NSColor selectedControlColor] set];
 	}
 	else {
@@ -80,26 +80,26 @@
     [self layoutSubviews];
 
     //Draw the border and background
-	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRect:[self bounds]];
+	NSBezierPath *roundedRect = [NSBezierPath bezierPathWithRect:self.bounds];
 	[roundedRect fill];
 
 	//Progress indicator
-	if ([self inProgress])
+	if (self.inProgress)
 	{
 		if (!progressIndicator)
 		{
 			// Allocate and initialize the spinning progress indicator.
-			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight([self bounds]) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
+			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight(self.bounds) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
 												PROGRESS_INDICATOR_DIMENSION_REGULAR, PROGRESS_INDICATOR_DIMENSION_REGULAR);
 			progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-			[progressIndicator setControlSize:NSRegularControlSize];
-			[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+			progressIndicator.controlSize = NSRegularControlSize;
+			progressIndicator.style = NSProgressIndicatorSpinningStyle;
 			[progressIndicator setDisplayedWhenStopped:NO];
 		}
 
 		// Add the progress indicator as a subview of the cell if
 		// it is not already one.
-		if ([progressIndicator superview] != self)
+		if (progressIndicator.superview != self)
 			[self addSubview:progressIndicator];
 
 		// Start the animation.
@@ -109,7 +109,7 @@
 	{
 		// Stop the animation and remove from the superview.
 		[progressIndicator stopAnimation:self];
-		[[progressIndicator superview] setNeedsDisplayInRect:[progressIndicator frame]];
+		[progressIndicator.superview setNeedsDisplayInRect:progressIndicator.frame];
 		[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 
 		// Release the progress indicator.
@@ -123,10 +123,10 @@
 	//calculate the new frame
 	NSRect newWebViewRect = NSMakeRect(XPOS_IN_CELL,
 							   YPOS_IN_CELL,
-							   NSWidth([self frame]) - XPOS_IN_CELL,
-							   NSHeight([self frame]) -YPOS_IN_CELL);
+							   NSWidth(self.frame) - XPOS_IN_CELL,
+							   NSHeight(self.frame) -YPOS_IN_CELL);
 	//set the new frame to the webview
-	[articleView setFrame:newWebViewRect];
+	articleView.frame = newWebViewRect;
 }
 
 - (BOOL)acceptsFirstResponder
@@ -138,14 +138,14 @@
  */
 -(IBAction)canMakeTextSmaller
 {
-	[articleView canMakeTextSmaller];
+	articleView.canMakeTextSmaller;
 }
 
 /* canMakeTextLarger
  */
 -(IBAction)canMakeTextLarger
 {
-	[articleView canMakeTextLarger];
+	articleView.canMakeTextLarger;
 }
 
 /* makeTextSmaller

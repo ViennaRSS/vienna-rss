@@ -75,46 +75,34 @@ extern NSString * MA_Field_HasEnclosure;
     NSInteger status;
 }
 
-typedef enum {
+typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
     ArticleStatusNew,
     ArticleStatusUpdated
-} ArticleStatus;
+};
 
 // Accessor functions
--(id)initWithGuid:(NSString *)theGuid;
--(NSInteger)parentId;
--(NSString *)guid;
--(NSString *)author;
--(NSString *)body;
--(NSString *)title;
--(NSString *)link;
--(NSString *)summary;
--(NSString *)enclosure;
--(NSDate *)date;
--(NSDate *)createdDate;
--(Folder *)containingFolder;
--(NSInteger)folderId;
--(BOOL)isRead;
--(BOOL)isRevised;
--(BOOL)isFlagged;
--(BOOL)isDeleted;
--(BOOL)hasComments;
--(BOOL)hasEnclosure;
--(BOOL)enclosureDownloaded;
--(NSInteger)status;
--(void)setGuid:(NSString *)newGuid;
--(void)setParentId:(NSInteger)newParentId;
--(void)setTitle:(NSString *)newTitle;
--(void)setLink:(NSString *)newLink;
--(void)setAuthor:(NSString *)newAuthor;
--(void)setFolderId:(NSInteger)newFolderId;
--(void)setDate:(NSDate *)newDate;
--(void)setCreatedDate:(NSDate *)newCreatedDate;
--(void)setBody:(NSString *)newText;
--(void)setEnclosure:(NSString *)newEnclosure;
--(void)setStatus:(NSInteger)newStatus;
--(void)setHasEnclosure:(BOOL)flag;
+-(instancetype)initWithGuid:(NSString *)theGuid /*NS_DESIGNATED_INITIALIZER*/;
+@property (nonatomic) NSInteger parentId;
+@property (nonatomic, copy) NSString *guid;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *body;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, readonly, copy) NSString *summary;
+@property (nonatomic, copy) NSString *enclosure;
+@property (nonatomic, copy) NSDate *date;
+@property (nonatomic, copy) NSDate *createdDate;
+@property (nonatomic, readonly, strong) Folder *containingFolder;
+@property (nonatomic) NSInteger folderId;
+@property (nonatomic, getter=isRead, readonly) BOOL read;
+@property (nonatomic, getter=isRevised, readonly) BOOL revised;
+@property (nonatomic, getter=isFlagged, readonly) BOOL flagged;
+@property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
+@property (nonatomic, readonly) BOOL hasComments;
+@property (nonatomic) BOOL hasEnclosure;
+@property (nonatomic, readonly) BOOL enclosureDownloaded;
+@property (nonatomic) NSInteger status;
 -(void)markRead:(BOOL)flag;
 -(void)markRevised:(BOOL)flag;
 -(void)markFlagged:(BOOL)flag;

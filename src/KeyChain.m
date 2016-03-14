@@ -30,10 +30,10 @@
 +(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] UTF8String];
-	const char * cUsername = [username UTF8String];
-	NSInteger portNumber = [secureUrl port] ? [[secureUrl port] integerValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
-	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
+	const char * cServiceName = secureUrl.host.UTF8String;
+	const char * cUsername = username.UTF8String;
+	NSInteger portNumber = secureUrl.port ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	NSString * thePassword;
 
 	if (!cServiceName || !cUsername)
@@ -77,12 +77,12 @@
 +(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = secureUrl.host.UTF8String;
+	const char * cUsername = username.UTF8String;
 	const char * cPath = "";
-	NSInteger portNumber = [secureUrl port] ? [[secureUrl port] integerValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
-	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
-	const char * cPassword = [password UTF8String];
+	NSInteger portNumber = secureUrl.port ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
+	const char * cPassword = password.UTF8String;
 	SecKeychainItemRef itemRef;
 	OSStatus status;
 	
@@ -128,8 +128,8 @@
 +(NSString *)getWebPasswordFromKeychain:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = secureUrl.host.UTF8String;
+	const char * cUsername = username.UTF8String;
 	NSInteger portNumber = 0;
 	SecProtocolType protocolType = kSecProtocolTypeHTTPS ;
 	NSString * thePassword;
@@ -174,8 +174,8 @@
  */
 +(NSString *)getGenericPasswordFromKeychain:(NSString *)username serviceName:(NSString *)service
 {
-	const char * cServiceName = [service UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = service.UTF8String;
+	const char * cUsername = username.UTF8String;
 	NSString * thePassword;
 
 	if (!cServiceName || !cUsername)
@@ -210,8 +210,8 @@
  */
 +(void)deleteGenericPasswordInKeychain:(NSString *)username service:(NSString *)service
 {
-	const char * cServiceName = [service UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = service.UTF8String;
+	const char * cUsername = username.UTF8String;
 	SecKeychainItemRef itemRef;
 	OSStatus status;
 
@@ -234,9 +234,9 @@
  */
 +(void)setGenericPasswordInKeychain:(NSString *)password username:(NSString *)username service:(NSString *)service
 {
-	const char * cServiceName = [service UTF8String];
-	const char * cUsername = [username UTF8String];
-	const char * cPassword = [password UTF8String];
+	const char * cServiceName = service.UTF8String;
+	const char * cUsername = username.UTF8String;
+	const char * cPassword = password.UTF8String;
 
 	if (!cServiceName || !cUsername || !cPassword)
 		return;

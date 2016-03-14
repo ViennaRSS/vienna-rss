@@ -50,19 +50,19 @@
 -(void)refreshSubscriptionsAfterMerge:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus;
 -(void)forceRefreshSubscriptionForFolders:(NSArray*)foldersArray;
 -(void)cancelAll;
--(BOOL)isConnecting;
--(NSUInteger)countOfNewArticles;
--(NSString *)statusMessageDuringRefresh;
+@property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
+@property (nonatomic, readonly) NSUInteger countOfNewArticles;
+@property (nonatomic, readonly, copy) NSString *statusMessageDuringRefresh;
 -(void)refreshFavIconForFolder:(Folder *)folder;
 -(void)addConnection:(ASIHTTPRequest *)conn;
--(dispatch_queue_t)asyncQueue;
+@property (nonatomic, readonly, strong) dispatch_queue_t asyncQueue;
 @end
 
 // Refresh types
-typedef enum {
+typedef NS_ENUM(int, RefreshTypes) {
 	MA_Refresh_NilType = -1,
 	MA_Refresh_Feed,
 	MA_Refresh_FavIcon,
 	MA_Refresh_GoogleFeed,
 	MA_ForceRefresh_Google_Feed
-} RefreshTypes;
+};

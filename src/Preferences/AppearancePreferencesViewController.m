@@ -103,17 +103,17 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     [self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
     
     // Show folder images option
-    [showFolderImagesButton setState:[prefs showFolderImages] ? NSOnState : NSOffState];
+    showFolderImagesButton.state = [prefs showFolderImages] ? NSOnState : NSOffState;
     
     // Set minimum font size option
-    [enableMinimumFontSize setState:[prefs enableMinimumFontSize] ? NSOnState : NSOffState];
-    [minimumFontSizes setEnabled:[prefs enableMinimumFontSize]];
+    enableMinimumFontSize.state = [prefs enableMinimumFontSize] ? NSOnState : NSOffState;
+    minimumFontSizes.enabled = [prefs enableMinimumFontSize];
     
     NSUInteger i;
     [minimumFontSizes removeAllItems];
     for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
-        [minimumFontSizes addItemWithObjectValue:[NSNumber numberWithInteger:availableMinimumFontSizes[i]]];
-    [minimumFontSizes setDoubleValue:[prefs minimumFontSize]];
+        [minimumFontSizes addItemWithObjectValue:@(availableMinimumFontSizes[i])];
+    minimumFontSizes.doubleValue = [prefs minimumFontSize];
 }
 
 /* changeShowFolderImages
@@ -132,7 +132,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
 {
     BOOL useMinimumFontSize = [sender state] == NSOnState;
     [[Preferences standardPreferences] setEnableMinimumFontSize:useMinimumFontSize];
-    [minimumFontSizes setEnabled:useMinimumFontSize];
+    minimumFontSizes.enabled = useMinimumFontSize;
 }
 
 /* selectMinimumFontSize
@@ -140,7 +140,7 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(IBAction)selectMinimumFontSize:(id)sender
 {
-    CGFloat newMinimumFontSize = [minimumFontSizes doubleValue];
+    CGFloat newMinimumFontSize = minimumFontSizes.doubleValue;
     [[Preferences standardPreferences] setMinimumFontSize:newMinimumFontSize];
 }
 
@@ -149,8 +149,8 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
  */
 -(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control
 {
-    [control setFont:[NSFont fontWithName:name size:size]];
-    [control setStringValue:[NSString stringWithFormat:@"%@ %li", name, (long)size]];
+    control.font = [NSFont fontWithName:name size:size];
+    control.stringValue = [NSString stringWithFormat:@"%@ %li", name, (long)size];
 }
 
 /* selectArticleFont
@@ -161,8 +161,8 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     Preferences * prefs = [Preferences standardPreferences];
     NSFontManager * manager = [NSFontManager sharedFontManager];
     [manager setSelectedFont:[NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]] isMultiple:NO];
-    [manager setAction:@selector(changeArticleFont:)];
-    [manager setDelegate:self];
+    manager.action = @selector(changeArticleFont:);
+    manager.delegate = self;
     [manager orderFrontFontPanel:self];
 }
 
@@ -174,8 +174,8 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     Preferences * prefs = [Preferences standardPreferences];
     NSFontManager * manager = [NSFontManager sharedFontManager];
     [manager setSelectedFont:[NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]] isMultiple:NO];
-    [manager setAction:@selector(changeFolderFont:)];
-    [manager setDelegate:self];
+    manager.action = @selector(changeFolderFont:);
+    manager.delegate = self;
     [manager orderFrontFontPanel:self];
 }
 
@@ -187,8 +187,8 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     Preferences * prefs = [Preferences standardPreferences];
     NSFont * font = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
     font = [sender convertFont:font];
-    [prefs setArticleListFont:[font fontName]];
-    [prefs setArticleListFontSize:[font pointSize]];
+    [prefs setArticleListFont:font.fontName];
+    [prefs setArticleListFontSize:font.pointSize];
     [self selectUserDefaultFont:[prefs articleListFont] size:[prefs articleListFontSize] control:articleFontSample];
 }
 
@@ -200,8 +200,8 @@ NSInteger availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24 };
     Preferences * prefs = [Preferences standardPreferences];
     NSFont * font = [NSFont fontWithName:[prefs folderListFont] size:[prefs folderListFontSize]];
     font = [sender convertFont:font];
-    [prefs setFolderListFont:[font fontName]];
-    [prefs setFolderListFontSize:[font pointSize]];
+    [prefs setFolderListFont:font.fontName];
+    [prefs setFolderListFontSize:font.pointSize];
     [self selectUserDefaultFont:[prefs folderListFont] size:[prefs folderListFontSize] control:folderFontSample];
 }
 

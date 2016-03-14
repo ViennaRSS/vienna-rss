@@ -49,7 +49,7 @@
             }
 			else
 			{
-				[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+				itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
                 NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
                 [outlineElement setAttributesWithDictionary:itemDict];
                 [parentElement addChild:outlineElement];
@@ -62,11 +62,11 @@
 			NSString * description = [folder feedDescription];
 			NSString * url = [folder feedURL];
 
-			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
-            [itemDict setObject:[NSString stringByConvertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
-			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:[NSString stringByConvertingHTMLEntities:description] forKey:@"description"];
+			itemDict[@"type"] = @"rss";
+			itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
+            itemDict[@"htmlUrl"] = [NSString stringByConvertingHTMLEntities:(link ? link : @"")];
+			itemDict[@"xmlUrl"] = [NSString stringByConvertingHTMLEntities:(url ? url : @"")];
+			itemDict[@"description"] = [NSString stringByConvertingHTMLEntities:description];
             NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
             [outlineElement setAttributesWithDictionary:itemDict];
             [parentElement addChild:outlineElement];
@@ -86,7 +86,7 @@
     NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:foldersArray inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
     	// Now write the complete XML to the file
     
-	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
+	NSString * fqFilename = exportFileName.stringByExpandingTildeInPath;
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
 		return -1; // Indicate an error condition (impossible number of exports)
@@ -115,7 +115,7 @@
     NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:folders inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
     	// Now write the complete XML to the file
     
-	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
+	NSString * fqFilename = exportFileName.stringByExpandingTildeInPath;
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
 		return -1; // Indicate an error condition (impossible number of exports)
@@ -140,8 +140,8 @@
 + (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(NSInteger *)countExported {
     *countExported = 0;
     NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithKind:NSXMLDocumentKind options:NSXMLNodePreserveEmptyElements];
-    [opmlDocument setCharacterEncoding:@"UTF-8"];
-    [opmlDocument setVersion:@"1.0"];
+    opmlDocument.characterEncoding = @"UTF-8";
+    opmlDocument.version = @"1.0";
     [opmlDocument setStandalone:YES];
     
     NSXMLElement *opmlElement = [NSXMLElement elementWithName:@"opml"];
@@ -150,7 +150,7 @@
     NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
     NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];
     NSXMLElement *dateCreated = [NSXMLElement elementWithName:@"dateCreated"
-                                                  stringValue:[[NSCalendarDate date] description]];
+                                                  stringValue:[NSCalendarDate date].description];
     [headElement addChild:title];
     [headElement addChild:dateCreated];
     [opmlElement addChild:headElement];

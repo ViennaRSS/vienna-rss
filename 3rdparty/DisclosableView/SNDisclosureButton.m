@@ -23,7 +23,7 @@
 
 @implementation SNDisclosureButton
 
-- (id)initWithFrame:(NSRect)frame
+- (instancetype)initWithFrame:(NSRect)frame
 {
     if (!(self = [super initWithFrame:frame]))
         return nil;
@@ -51,16 +51,16 @@
     // Something is wrong with the linker and constant NSStrings can cause a crash to happen later on.
     char* imageName = "SNDisclosureArrowDown";
     char* altImageName = "SNDisclosureArrowRight";
-    NSString* imageNameStr = [NSString stringWithUTF8String:imageName];
-    NSString* altImageNameStr = [NSString stringWithUTF8String:altImageName];
+    NSString* imageNameStr = @(imageName);
+    NSString* altImageNameStr = @(altImageName);
 
     if ((image = [self imageNamed:imageNameStr]))
-        [self setImage:image];
+        self.image = image;
 
     if ((image = [self imageNamed:altImageNameStr]))
-        [self setAlternateImage:image];
+        self.alternateImage = image;
 
-    [[self cell] setHighlightsBy:NSPushInCellMask];    
+    self.cell.highlightsBy = NSPushInCellMask;    
 }
 
 - (NSImage *)imageNamed:(NSString *)imageName

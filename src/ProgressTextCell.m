@@ -37,7 +37,7 @@
 /* init
  * Initialise a default instance of our cell.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -93,8 +93,8 @@
 				// Allocate and initialize the spinning progress indicator. 
 				NSRect progressRect = NSMakeRect(0, 0, PROGRESS_INDICATOR_DIMENSION, PROGRESS_INDICATOR_DIMENSION);
 				progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressRect];
-				[progressIndicator setControlSize:NSSmallControlSize];
-				[progressIndicator setStyle:NSProgressIndicatorSpinningStyle];
+				progressIndicator.controlSize = NSSmallControlSize;
+				progressIndicator.style = NSProgressIndicatorSpinningStyle;
 				[progressIndicator setDisplayedWhenStopped:YES];
 				[progressIndicator setUsesThreadedAnimation:YES];
 			}
@@ -116,19 +116,19 @@
 
 			// Add the progress indicator as a subview of the controlView if 
 			// it is not already one.
-			if ([progressIndicator superview] != controlView)
+			if (progressIndicator.superview != controlView)
 				[controlView addSubview:progressIndicator];
 
 			// Set the progress indicator frame.
-			if (!NSEqualRects([progressIndicator frame], progressIndicatorFrame))
-				[progressIndicator setFrame:progressIndicatorFrame];
+			if (!NSEqualRects(progressIndicator.frame, progressIndicatorFrame))
+				progressIndicator.frame = progressIndicatorFrame;
 		}
 		else
 		{
 			// Stop the animation and remove from the superview.
 			[progressIndicator setDisplayedWhenStopped:NO];
 			[progressIndicator stopAnimation:self];
-			[[progressIndicator superview] setNeedsDisplayInRect:[progressIndicator frame]];
+			[progressIndicator.superview setNeedsDisplayInRect:progressIndicator.frame];
 			[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
 			
 			// Release the progress indicator.

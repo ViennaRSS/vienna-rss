@@ -25,7 +25,7 @@
 /* initTextCell
  * Initialise a new TextFieldCell subclass.
  */
--(id)initTextCell:(NSString *)inStr
+-(instancetype)initTextCell:(NSString *)inStr
 {
 	if ((self = [super initTextCell:inStr]) != nil)
 	{
@@ -40,7 +40,7 @@
 -(void)setHasSecureImage:(BOOL)flag
 {
 	hasSecureImage = flag;
-	[(NSControl*)[self controlView] calcSize];
+	[(NSControl*)self.controlView calcSize];
 }
 
 /* hasSecureImage

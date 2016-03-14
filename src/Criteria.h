@@ -52,16 +52,13 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 }
 
 // Public functions
--(id)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue;
+-(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue NS_DESIGNATED_INITIALIZER;
 +(NSString *)stringFromOperator:(CriteriaOperator)operator;
 +(CriteriaOperator)operatorFromString:(NSString *)string;
 +(NSArray *)arrayOfOperators;
--(void)setField:(NSString *)newField;
--(void)setOperator:(CriteriaOperator)newOperator;
--(void)setValue:(NSString *)newValue;
--(NSString *)field;
--(NSString *)value;
--(CriteriaOperator)operator;
+@property (nonatomic, copy) NSString *field;
+@property (nonatomic, copy) NSString *value;
+@property (nonatomic) CriteriaOperator operator;
 @end
 
 @interface CriteriaTree : NSObject {
@@ -70,12 +67,11 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 }
 
 // Public functions
--(id)initWithString:(NSString *)string;
--(NSEnumerator *)criteriaEnumerator;
+-(instancetype)initWithString:(NSString *)string NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, strong) NSEnumerator *criteriaEnumerator;
 -(void)addCriteria:(Criteria *)newCriteria;
--(NSString *)string;
--(CriteriaCondition)condition;
--(void)setCondition:(CriteriaCondition)newCondition;
+@property (nonatomic, readonly, copy) NSString *string;
+@property (nonatomic) CriteriaCondition condition;
 +(CriteriaCondition)conditionFromString:(NSString *)string;
 +(NSString *)conditionToString:(CriteriaCondition)condition;
 @end

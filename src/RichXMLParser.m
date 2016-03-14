@@ -62,13 +62,13 @@
 	}
 
     if (xmlDocument != nil) {
-        if([[xmlDocument.rootElement name] isEqualToString:@"rss"]) {
+        if([(xmlDocument.rootElement).name isEqualToString:@"rss"]) {
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:NO];
         }
-        else if ([[xmlDocument.rootElement name] isEqualToString:@"rdf:RDF"]) {
+        else if ([(xmlDocument.rootElement).name isEqualToString:@"rdf:RDF"]) {
             success = [self initRSSFeed:xmlDocument.rootElement isRDF:YES];
         }
-        else if ([[xmlDocument.rootElement name] isEqualToString:@"feed"]) {
+        else if ([(xmlDocument.rootElement).name isEqualToString:@"feed"]) {
             success = [self initAtomFeed:xmlDocument.rootElement];
         }
     }
@@ -101,27 +101,27 @@
 			if ([tagName isEqualToString:@"link"])
 			{
 				NSDictionary * tagAttributes = [tag attributes];
-				NSString * linkType = [tagAttributes objectForKey:@"type"];
+				NSString * linkType = tagAttributes[@"type"];
 
 				// We're looking for the link tag. Specifically we're looking for the one which
 				// has application/rss+xml or atom+xml type. There may be more than one which is why we're
 				// going to be returning an array.
 				if ([linkType isEqualToString:@"application/rss+xml"])
 				{
-					NSString * href = [tagAttributes objectForKey:@"href"];
+					NSString * href = tagAttributes[@"href"];
 					if (href != nil)
 						[linkArray addObject:href];
 				}
 				else if ([linkType isEqualToString:@"application/atom+xml"])
 				{
-					NSString * href = [tagAttributes objectForKey:@"href"];
+					NSString * href = tagAttributes[@"href"];
 					if (href != nil)
 						[linkArray addObject:href];
 				}
 			}
 			if ([tagName isEqualToString:@"/head"])
 				break;
-			success = [linkArray count] > 0;
+			success = linkArray.count > 0;
 		}
 	}
 	}
@@ -289,9 +289,9 @@
     for (NSXMLElement *element in seqElement.children)
 	{
         if ([element.name isEqualToString:[NSString stringWithFormat:@"%@:li", rdfPrefix]]) {
-            NSString *resourceString = [[element attributeForName:[NSString stringWithFormat:@"%@:resource", rdfPrefix]] stringValue];
+            NSString *resourceString = [element attributeForName:[NSString stringWithFormat:@"%@:resource", rdfPrefix]].stringValue;
             if (resourceString == nil) {
-                resourceString = [[element attributeForName:@"resource"] stringValue];
+                resourceString = [element attributeForName:@"resource"].stringValue;
             }
             if (resourceString != nil) {
                 [orderArray addObject:resourceString];
@@ -324,7 +324,7 @@
 			BOOL hasLink = NO;
 
 			// Check for rdf:about so we can identify this item in the orderArray.
-            NSString *itemIdentifier = [[element attributeForName:[NSString stringWithFormat:@"%@:about", rdfPrefix]] stringValue];
+            NSString *itemIdentifier = [element attributeForName:[NSString stringWithFormat:@"%@:about", rdfPrefix]].stringValue;
 
 			for (NSXMLElement *itemChildElement in element.children)
 			{
@@ -383,7 +383,7 @@
                     // the author is in the feed's entry
                     if (authorName != nil) {
                         // if we currently have a string set as the author then append the new author name
-                        if ([[newFeedItem author] length] > 0) {
+                        if ([newFeedItem author].length > 0) {
                             [newFeedItem setAuthor:[NSString stringWithFormat:
                             NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newFeedItem author], authorName]];
                         }
@@ -450,7 +450,7 @@
 			
 			// Add this item in the proper location in the array
 			NSUInteger indexOfItem = (orderArray && itemIdentifier) ? [orderArray indexOfStringInArray:itemIdentifier] : NSNotFound;
-            if (indexOfItem == NSNotFound || indexOfItem >= [items count]) {
+            if (indexOfItem == NSNotFound || indexOfItem >= items.count) {
 				[items addObject:newFeedItem];
             }
             else {
@@ -523,7 +523,7 @@
 					if ((linkBaseURL != nil) && ![theLink hasPrefix:@"http://"] && ![theLink hasPrefix:@"https://"])
 					{
 						NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:linkBaseURL];
-						[self setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+						[self setLink:(theLinkURL != nil) ? theLinkURL.absoluteString : theLink];
 					}
 					else
 						[self setLink:theLink];
@@ -576,16 +576,16 @@
             }
             
 			NSURL * entryBaseURL = (entryBase != nil) ? [NSURL URLWithString:entryBase] : nil;
-			if ((entryBaseURL != nil) && (linkBaseURL != nil) && ([entryBaseURL scheme] == nil))
+			if ((entryBaseURL != nil) && (linkBaseURL != nil) && (entryBaseURL.scheme == nil))
 			{
 				entryBaseURL = [NSURL URLWithString:entryBase relativeToURL:linkBaseURL];
 				if (entryBaseURL != nil)
-					entryBase = [entryBaseURL absoluteString];
+					entryBase = entryBaseURL.absoluteString;
 			}
 
 			for (NSXMLElement *itemChildElement in atomChildElement.children)
 			{
-			    BOOL isArticleElementAtomType = [[itemChildElement prefix] isEqualToString:atomPrefix];
+			    BOOL isArticleElementAtomType = [itemChildElement.prefix isEqualToString:atomPrefix];
 
 				NSString * articleItemTag = itemChildElement.localName;
 
@@ -621,14 +621,14 @@
 				// Parse item author
 				if (isArticleElementAtomType && [articleItemTag isEqualToString:@"author"])
 				{
-					NSString * authorName = [[itemChildElement elementsForName:@"name"].firstObject stringValue];
+					NSString * authorName = ([itemChildElement elementsForName:@"name"].firstObject).stringValue;
 					if (authorName == nil) {
-						authorName = [[itemChildElement elementsForName:@"email"].firstObject stringValue];
+						authorName = ([itemChildElement elementsForName:@"email"].firstObject).stringValue;
                     }
                     // the author is in the feed's entry
 					if (authorName != nil) {
 						// if we currently have a string set as the author then append the new author name
-                        if ([[newFeedItem author] length] > 0) {
+                        if ([newFeedItem author].length > 0) {
                             [newFeedItem setAuthor:[NSString stringWithFormat:NSLocalizedString(@"%@, %@", @"{existing authors},{new author name}"), [newFeedItem author], authorName]];
                         }
                         // else we currently don't have an author set, so set it to the first author
@@ -648,10 +648,10 @@
 						NSString * theLink = [[itemChildElement attributeForName:@"href"].stringValue stringByUnescapingExtendedCharacters];
 						if (theLink != nil)
 						{
-							if ((entryBaseURL != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
+							if ((entryBaseURL != nil) && ([NSURL URLWithString:theLink].scheme == nil))
 							{
 								NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:entryBaseURL];
-								[newFeedItem setEnclosure:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+								[newFeedItem setEnclosure:(theLinkURL != nil) ? theLinkURL.absoluteString : theLink];
 							}
 							else
 								[newFeedItem setEnclosure:theLink];
@@ -665,10 +665,10 @@
                             NSString * theLink = [[itemChildElement attributeForName:@"href"].stringValue stringByUnescapingExtendedCharacters];
                             if (theLink != nil)
                             {
-                                if ((entryBaseURL != nil) && ([[NSURL URLWithString:theLink] scheme] == nil))
+                                if ((entryBaseURL != nil) && ([NSURL URLWithString:theLink].scheme == nil))
                                 {
                                     NSURL * theLinkURL = [NSURL URLWithString:theLink relativeToURL:entryBaseURL];
-                                    [newFeedItem setLink:(theLinkURL != nil) ? [theLinkURL absoluteString] : theLink];
+                                    [newFeedItem setLink:(theLinkURL != nil) ? theLinkURL.absoluteString : theLink];
                                 }
                                 else
                                     [newFeedItem setLink:theLink];

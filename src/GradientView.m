@@ -36,7 +36,7 @@
  */
 -(void)drawRect:(NSRect)rect 
 {
-	NSRect iRect = NSMakeRect(0, 0, 1, [backgroundBrush size].height - 1);					
+	NSRect iRect = NSMakeRect(0, 0, 1, backgroundBrush.size.height - 1);					
 	[backgroundBrush drawInRect:rect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 }
 

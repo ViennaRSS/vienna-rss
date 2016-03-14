@@ -40,7 +40,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 /* initWithFrame
  * The designated instance initialiser.
  */
--(id)initWithFrame:(NSRect)frameRect
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
@@ -59,7 +59,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		Preferences * prefs = [Preferences standardPreferences];
 		[self initForStyle:[prefs displayStyle]];
 		// enlarge / reduce the text size according to user's setting
-		[self setTextSizeMultiplier:[prefs textSizeMultiplier]];
+		self.textSizeMultiplier = [prefs textSizeMultiplier];
 	}
 	return self;
 }
@@ -71,7 +71,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	[self initForStyle:[prefs displayStyle]];
-	[self setTextSizeMultiplier:[prefs textSizeMultiplier]];
+	self.textSizeMultiplier = [prefs textSizeMultiplier];
 }
 
 /* performDragOperation
@@ -98,7 +98,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	if (stylePathMappings == nil)
 		stylePathMappings = [[NSMutableDictionary alloc] init];
 	
-	NSString * path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Styles"];
+	NSString * path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Styles"];
 	loadMapFromPath(path, stylePathMappings, YES, nil);
 	
 	path = [[Preferences standardPreferences] stylesFolder];
@@ -116,14 +116,14 @@ static NSMutableDictionary * stylePathMappings = nil;
 	if (stylePathMappings == nil)
 		[ArticleView loadStylesMap];
 
-	NSString * path = [stylePathMappings objectForKey:styleName];
+	NSString * path = stylePathMappings[styleName];
 	if (path != nil)
 	{
 		NSString * filePath = [path stringByAppendingPathComponent:@"template.html"];
 		NSString * templateString = [NSString stringWithContentsOfFile:filePath usedEncoding:NULL error:NULL];
 		// Sanity check the file. Obviously anything bigger than 0 bytes but smaller than a valid template
 		// format is a problem but we'll worry about that later. There's only so much rope we can give.
-		if (templateString != nil && [templateString length] > 0u)
+		if (templateString != nil && templateString.length > 0u)
 		{
 			
 			htmlTemplate = templateString;
@@ -135,7 +135,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 				jsScript = nil;
 			
 			// Make sure the template is valid
-			NSString * firstLine = [[htmlTemplate firstNonBlankLine] lowercaseString];
+			NSString * firstLine = [htmlTemplate firstNonBlankLine].lowercaseString;
 			if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
@@ -182,9 +182,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 	}
 	[htmlText appendString:@"<meta http-equiv=\"Pragma\" content=\"no-cache\">"];
 	[htmlText appendString:@"</head><body>"];
-	for (index = 0; index < [msgArray count]; ++index)
+	for (index = 0; index < msgArray.count; ++index)
 	{
-		Article * theArticle = [msgArray objectAtIndex:index];
+		Article * theArticle = msgArray[index];
 		
 		// Load the selected HTML template for the current view style and plug in the current
 		// article values and style sheet setting.
@@ -206,7 +206,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 
 			// Handle conditional tag expansion. Sections in <!-- cond:noblank--> and <!--end-->
 			// are stripped out if all the tags inside are blank.
-			while(![scanner isAtEnd])
+			while(!scanner.atEnd)
 			{
 				if ([scanner scanUpToString:@"<!--" intoString:&theString])
 					[htmlArticle appendString:[theArticle expandTags:theString withConditional:stripIfEmpty]];
@@ -246,7 +246,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	
 	// Load a blank HTML page.
 	NSString * htmlText = @"";
-	[[self mainFrame] loadHTMLString:htmlText
+	[self.mainFrame loadHTMLString:htmlText
 					   baseURL:[NSURL URLWithString:@""]];
 }
 
@@ -268,7 +268,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	if ([urlString hasPrefix:@"feed://"])
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
 	
-	[[self mainFrame] loadHTMLString:htmlText
+	[self.mainFrame loadHTMLString:htmlText
 							  baseURL:[NSURL URLWithString:@"/"]];
 }
 
@@ -278,14 +278,14 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)keyDown:(NSEvent *)theEvent
 {
-	if ([[theEvent characters] length] == 1)
+	if (theEvent.characters.length == 1)
 	{
-		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+		unichar keyChar = [theEvent.characters characterAtIndex:0];
+		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
 			return;
 		
 		//Don't go back or forward in article view.
-		if (([theEvent modifierFlags] & NSCommandKeyMask) &&
+		if ((theEvent.modifierFlags & NSCommandKeyMask) &&
 			((keyChar == NSLeftArrowFunctionKey) || (keyChar == NSRightArrowFunctionKey)))
 			return;
 	}
@@ -298,8 +298,8 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)swipeWithEvent:(NSEvent *)event 
 {	
-	CGFloat deltaX = [event deltaX];
-	CGFloat deltaY = [event deltaY];
+	CGFloat deltaX = event.deltaX;
+	CGFloat deltaY = event.deltaY;
 		
 	/* Check which is more likely to be what the user wanted: horizontal or vertical swipe?
 	 * Thankfully, that's all the checking we need to do as built-in swipe detection is very solid. */
@@ -333,7 +333,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(IBAction)makeTextSmaller:(id)sender
 {
 	[super makeTextSmaller:sender];
-	[[Preferences standardPreferences] setTextSizeMultiplier:[self textSizeMultiplier]];
+	[[Preferences standardPreferences] setTextSizeMultiplier:self.textSizeMultiplier];
 }
 
 /* makeTextLarger
@@ -341,7 +341,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(IBAction)makeTextLarger:(id)sender
 {
 	[super makeTextLarger:sender];
-	[[Preferences standardPreferences] setTextSizeMultiplier:[self textSizeMultiplier]];
+	[[Preferences standardPreferences] setTextSizeMultiplier:self.textSizeMultiplier];
 }
 
 #pragma mark -
@@ -355,7 +355,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 {
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
-		[[NSApp mainWindow] makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
+		[NSApp.mainWindow makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
 	
 	[super webView:sender decidePolicyForNewWindowAction:actionInformation request:request newFrameName:frameName decisionListener:listener];
 }
@@ -367,10 +367,10 @@ static NSMutableDictionary * stylePathMappings = nil;
  */
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
-	if ([[request URL] fragment] != nil)
+	if (request.URL.fragment != nil)
 	{
-		NSURL * feedURL = [[[[self mainFrame] dataSource] initialRequest] URL];
-		if ((feedURL != nil) && [[feedURL scheme] isEqualToString:[[request URL] scheme]] && [[feedURL host] isEqualToString:[[request URL] host]] && [[feedURL path] isEqualToString:[[request URL] path]])
+		NSURL * feedURL = self.mainFrame.dataSource.initialRequest.URL;
+		if ((feedURL != nil) && [feedURL.scheme isEqualToString:request.URL.scheme] && [feedURL.host isEqualToString:request.URL.host] && [feedURL.path isEqualToString:request.URL.path])
 		{
 			[listener use];
 			return;
@@ -379,7 +379,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
 	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
-		[[NSApp mainWindow] makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
+		[NSApp.mainWindow makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
 	
 	[super webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
 }	

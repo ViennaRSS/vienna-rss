@@ -25,7 +25,7 @@
 /* init
  * Initialise an empty Criteria.
  */
--(id)init
+-(instancetype)init
 {
 	return [self initWithField:@"" withOperator:0 withValue:@""];
 }
@@ -33,7 +33,7 @@
 /* initWithField
  * Initalises a new Criteria with the specified values.
  */
--(id)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue
+-(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue
 {
 	if ((self = [super init]) != nil)
 	{
@@ -81,9 +81,9 @@
 	NSArray * operatorArray = [Criteria arrayOfOperators];
 	NSUInteger  index;
 	
-	for (index = 0; index < [operatorArray count]; ++index)
+	for (index = 0; index < operatorArray.count; ++index)
 	{
-		CriteriaOperator op = [[operatorArray objectAtIndex:index] integerValue];
+		CriteriaOperator op = [operatorArray[index] integerValue];
 		if ([string isEqualToString:[Criteria stringFromOperator:op]])
 			return op;
 	}
@@ -95,22 +95,22 @@
  */
 +(NSArray *)arrayOfOperators
 {
-	return [NSArray arrayWithObjects:
-		[NSNumber numberWithInteger:MA_CritOper_Is],
-		[NSNumber numberWithInteger:MA_CritOper_IsNot],
-		[NSNumber numberWithInteger:MA_CritOper_IsAfter],
-		[NSNumber numberWithInteger:MA_CritOper_IsBefore],
-		[NSNumber numberWithInteger:MA_CritOper_IsOnOrAfter],
-		[NSNumber numberWithInteger:MA_CritOper_IsOnOrBefore],
-		[NSNumber numberWithInteger:MA_CritOper_Contains],
-		[NSNumber numberWithInteger:MA_CritOper_NotContains],
-		[NSNumber numberWithInteger:MA_CritOper_IsLessThan],
-		[NSNumber numberWithInteger:MA_CritOper_IsLessThanOrEqual],
-		[NSNumber numberWithInteger:MA_CritOper_IsGreaterThan],
-		[NSNumber numberWithInteger:MA_CritOper_IsGreaterThanOrEqual],
-		[NSNumber numberWithInteger:MA_CritOper_Under],
-		[NSNumber numberWithInteger:MA_CritOper_NotUnder],
-		nil];
+	return @[
+			 @(MA_CritOper_Is),
+			 @(MA_CritOper_IsNot),
+			 @(MA_CritOper_IsAfter),
+			 @(MA_CritOper_IsBefore),
+			 @(MA_CritOper_IsOnOrAfter),
+			 @(MA_CritOper_IsOnOrBefore),
+			 @(MA_CritOper_Contains),
+			 @(MA_CritOper_NotContains),
+			 @(MA_CritOper_IsLessThan),
+			 @(MA_CritOper_IsLessThanOrEqual),
+			 @(MA_CritOper_IsGreaterThan),
+			 @(MA_CritOper_IsGreaterThanOrEqual),
+			 @(MA_CritOper_Under),
+			 @(MA_CritOper_NotUnder)
+			 ];
 }
 
 /* setField
@@ -182,7 +182,7 @@
 /* init
  * Initialise an empty CriteriaTree
  */
--(id)init
+-(instancetype)init
 {
 	return [self initWithString:@""];
 }
@@ -191,7 +191,7 @@
  * Initialises an criteria tree object with the specified string. The caller is responsible for
  * releasing the tree.
  */
--(id)initWithString:(NSString *)string
+-(instancetype)initWithString:(NSString *)string
 {
 	if ((self = [super init]) != nil)
 	{
@@ -206,7 +206,7 @@
 		if (!error)
 		{
             NSArray *criteriaArray = [criteriaTreeDoc.rootElement elementsForName:@"criteria"];
-            condition = [CriteriaTree conditionFromString:[[criteriaTreeDoc.rootElement attributeForName:@"condition"] stringValue]];
+            condition = [CriteriaTree conditionFromString:[criteriaTreeDoc.rootElement attributeForName:@"condition"].stringValue];
             if (condition == MA_CritCondition_Invalid) {
                 // For backward compatibility, the absence of the condition attribute
                 // assumes that we're matching ALL conditions.
@@ -214,11 +214,9 @@
             }
             
             for (NSXMLElement *criteriaElement in criteriaArray) {
-                NSString *fieldname = [[criteriaElement attributeForName:@"field"] stringValue];
-                NSString *operator = [[[criteriaElement elementsForName:@"operator"]
-                                       firstObject] stringValue];
-                NSString *value = [[[criteriaElement elementsForName:@"value"]
-                                    firstObject] stringValue];
+                NSString *fieldname = [criteriaElement attributeForName:@"field"].stringValue;
+                NSString *operator = [criteriaElement elementsForName:@"operator"].firstObject.stringValue;
+                NSString *value = [criteriaElement elementsForName:@"value"].firstObject.stringValue;
                 
                 Criteria *newCriteria = [[Criteria alloc]
                                          initWithField:fieldname
@@ -241,9 +239,9 @@
 {
 	if (string != nil)
 	{
-		if ([[string lowercaseString] isEqualToString:@"any"])
+		if ([string.lowercaseString isEqualToString:@"any"])
 			return MA_CritCondition_Any;
-		if ([[string lowercaseString] isEqualToString:@"all"])
+		if ([string.lowercaseString isEqualToString:@"all"])
 			return MA_CritCondition_All;
 	}
 	return MA_CritCondition_Invalid;
@@ -304,15 +302,15 @@
 {
     NSXMLDocument *criteriaDoc = [NSXMLDocument document];
     [criteriaDoc setStandalone:YES];
-    [criteriaDoc setCharacterEncoding:@"UTF-8"];
-    [criteriaDoc setVersion:@"1.0"];
+    criteriaDoc.characterEncoding = @"UTF-8";
+    criteriaDoc.version = @"1.0";
     
-    NSDictionary * conditionDict = [NSDictionary dictionaryWithObject:[CriteriaTree conditionToString:condition] forKey:@"condition"];
+    NSDictionary * conditionDict = @{@"condition": [CriteriaTree conditionToString:condition]};
     NSXMLElement *criteriaGroup = [[NSXMLElement alloc] initWithName:@"criteriagroup"];
     [criteriaGroup setAttributesWithDictionary:conditionDict];
     
     for (Criteria *criteria in criteriaTree) {
-        NSDictionary * criteriaDict = [NSDictionary dictionaryWithObject:[criteria field] forKey:@"field"];
+        NSDictionary * criteriaDict = @{@"field": [criteria field]};
         NSXMLElement *criteriaElement = [[NSXMLElement alloc] initWithName:@"criteria"];
         [criteriaElement setAttributesWithDictionary:criteriaDict];
         NSXMLElement *operatorElement = [[NSXMLElement alloc]

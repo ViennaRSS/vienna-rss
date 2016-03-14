@@ -40,19 +40,12 @@ typedef NS_ENUM(NSUInteger, FieldType) {
 	BOOL visible;
 }
 
-// Accessor functions
--(void)setName:(NSString *)newName;
--(void)setDisplayName:(NSString *)newDisplayName;
--(void)setSqlField:(NSString *)newSqlField;
--(void)setType:(FieldType)newType;
--(void)setTag:(NSInteger)newTag;
--(void)setVisible:(BOOL)flag;
--(void)setWidth:(NSInteger)newWidth;
--(NSString *)name;
--(NSString *)displayName;
--(NSString *)sqlField;
--(NSInteger)tag;
--(FieldType)type;
--(NSInteger)width;
--(BOOL)visible;
+// Accessors
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *displayName;
+@property (nonatomic, copy) NSString *sqlField;
+@property (nonatomic) NSInteger tag;
+@property (nonatomic) FieldType type;
+@property (nonatomic) NSInteger width;
+@property (nonatomic) BOOL visible;
 @end

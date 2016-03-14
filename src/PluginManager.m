@@ -37,7 +37,7 @@
 /* init
  * Initialises the plugin manager.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -63,7 +63,7 @@
 	
 	pluginPaths = [[NSMutableDictionary alloc] init];
 	
-	path = [[[NSBundle mainBundle] sharedSupportPath] stringByAppendingPathComponent:@"Plugins"];
+	path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Plugins"];
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
 	path = [[Preferences standardPreferences] pluginsFolder];
@@ -71,7 +71,7 @@
 
 	for (pluginName in pluginPaths)
 	{
-		NSString * pluginPath = [pluginPaths objectForKey:pluginName];
+		NSString * pluginPath = pluginPaths[pluginName];
 		[self loadPlugin:pluginPath];
 	}
 
@@ -83,7 +83,7 @@
 -(void)loadPlugin:(NSString *)pluginPath
 {
 	NSString * listFile = [pluginPath stringByAppendingPathComponent:@"info.plist"];
-	NSString * pluginName = [pluginPath lastPathComponent];
+	NSString * pluginName = pluginPath.lastPathComponent;
 	NSMutableDictionary * pluginInfo = [NSMutableDictionary dictionaryWithContentsOfFile:listFile];
 	
 	// If the info.plist is missing or corrupted, warn but then just move on and the user
@@ -94,8 +94,8 @@
 	{
 		// We need to save the path to the plugin in the plugin object for later access to other
 		// resources in the plugin folder.
-		[pluginInfo setObject:pluginPath forKey:@"Path"];
-		[allPlugins setObject:pluginInfo forKey:pluginName];
+		pluginInfo[@"Path"] = pluginPath;
+		allPlugins[pluginName] = pluginInfo;
 		
 		// Pop it on the menu if needed
 		[self installPlugin:pluginInfo];
@@ -109,16 +109,16 @@
 {
 	// If it's a blog editor plugin, don't show it in the menu 
 	// if the app in question is not present on the system.
-	if ([[onePlugin objectForKey:@"Type"] isEqualToString:@"BlogEditor"])
+	if ([onePlugin[@"Type"] isEqualToString:@"BlogEditor"])
 	{
-		NSString * bundleIdentifier = [onePlugin objectForKey:@"BundleIdentifier"];
+		NSString * bundleIdentifier = onePlugin[@"BundleIdentifier"];
 		
 		if (![[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier: bundleIdentifier])
 			return;
 	}
 						
-	NSString * pluginName = [onePlugin objectForKey:@"Name"];
-	NSString * menuPath = [onePlugin objectForKey:@"MenuPath"];
+	NSString * pluginName = onePlugin[@"Name"];
+	NSString * menuPath = onePlugin[@"MenuPath"];
 	if (menuPath == nil)
 		return;
 	
@@ -132,7 +132,7 @@
 	NSString * menuTitle = nil;
 	
 	[scanner scanUpToString:@"/" intoString:&topLevelMenu];
-	if ([scanner isAtEnd] || topLevelMenu == nil)
+	if (scanner.atEnd || topLevelMenu == nil)
 	{
 		topLevelMenu = @"Article";
 		menuTitle = menuPath;
@@ -144,21 +144,21 @@
 	}
 		topLevelMenu = NSLocalizedString(topLevelMenu, nil);
 	
-	NSArray * menuArray = [[NSApp mainMenu] itemArray];
+	NSArray * menuArray = NSApp.mainMenu.itemArray;
 	BOOL didInstall = NO;
 	NSInteger c;
 	
-	for (c = 0; !didInstall && c < [menuArray count]; ++c)
+	for (c = 0; !didInstall && c < menuArray.count; ++c)
 	{
-		NSMenuItem * topMenu = [menuArray objectAtIndex:c];
-		if ([[topMenu title] isEqualToString:topLevelMenu])
+		NSMenuItem * topMenu = menuArray[c];
+		if ([topMenu.title isEqualToString:topLevelMenu])
 		{
 			// Parse off the shortcut key, if there is one. The format is a series of
 			// control key specifiers: Cmd, Shift, Alt or Ctrl - specified in any
 			// order and separated by '+', plus a single key character. If more than
 			// one key character is given, the last one is used but generally that is
 			// a bug in the MenuKey.
-			NSString * menuKey = [onePlugin objectForKey:@"MenuKey"];
+			NSString * menuKey = onePlugin[@"MenuKey"];
 			NSUInteger keyMod = 0;
 			NSString * keyChar = @"";
 			
@@ -188,19 +188,19 @@
 
 			// Keep the menus tidy. If the last menu item is not currently a plugin invocator then
 			// add a separator.
-			NSMenu * parentMenu = [topMenu submenu];
-			NSInteger lastItem = [parentMenu numberOfItems] - 1;
+			NSMenu * parentMenu = topMenu.submenu;
+			NSInteger lastItem = parentMenu.numberOfItems - 1;
 			
-			if (lastItem >= 0 && [[parentMenu itemAtIndex:lastItem] action] != @selector(pluginInvocator:))
+			if (lastItem >= 0 && [parentMenu itemAtIndex:lastItem].action != @selector(pluginInvocator:))
 				[parentMenu addItem:[NSMenuItem separatorItem]];
 
 			// Finally add the plugin to the end of the selected menu complete with
 			// key equivalent and save the plugin object in the NSMenuItem so that we
 			// can associate it in pluginInvocator.
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(pluginInvocator:) keyEquivalent:keyChar];
-			[menuItem setTarget:self];
-			[menuItem setKeyEquivalentModifierMask:keyMod];
-			[menuItem setRepresentedObject:onePlugin];
+			menuItem.target = self;
+			menuItem.keyEquivalentModifierMask = keyMod;
+			menuItem.representedObject = onePlugin;
 			[parentMenu addItem:menuItem];
 			
 			didInstall = YES;
@@ -220,8 +220,8 @@
  */
 -(NSArray *)searchMethods
 {
-	NSMutableArray * searchMethods = [NSMutableArray arrayWithCapacity:[allPlugins count]];
-	for (NSDictionary * plugin in [allPlugins allValues])
+	NSMutableArray * searchMethods = [NSMutableArray arrayWithCapacity:allPlugins.count];
+	for (NSDictionary * plugin in allPlugins.allValues)
 	{
 		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"])
 		{
@@ -237,13 +237,13 @@
  */
 -(NSArray *)toolbarItems
 {
-	NSMutableArray * toolbarKeys = [NSMutableArray arrayWithCapacity:[allPlugins count]];
+	NSMutableArray * toolbarKeys = [NSMutableArray arrayWithCapacity:allPlugins.count];
 	NSString * pluginName;
 	NSString * pluginType;	
 	for (pluginName in allPlugins)
 	{
-		NSDictionary * onePlugin = [allPlugins objectForKey:pluginName];
-		pluginType = [onePlugin objectForKey:@"Type"];
+		NSDictionary * onePlugin = allPlugins[pluginName];
+		pluginType = onePlugin[@"Type"];
 		if (![pluginType isEqualToString:@"SearchEngine"])
 			[toolbarKeys addObject:pluginName];
 	}
@@ -255,13 +255,13 @@
  */
 -(NSArray *)defaultToolbarItems
 {
-	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:[allPlugins count]];
+	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:allPlugins.count];
 	NSString * pluginName;
 
 	for (pluginName in allPlugins)
 	{
-		NSDictionary * onePlugin = [allPlugins objectForKey:pluginName];
-		if ([[onePlugin objectForKey:@"Default"] integerValue])
+		NSDictionary * onePlugin = allPlugins[pluginName];
+		if ([onePlugin[@"Default"] integerValue])
 			[newArray addObject:pluginName];
 	}
 	return newArray;
@@ -272,23 +272,23 @@
  */
 -(void)toolbarItem:(ToolbarItem *)item withIdentifier:(NSString *)itemIdentifier
 {
-	NSDictionary * pluginItem = [allPlugins objectForKey:itemIdentifier];
+	NSDictionary * pluginItem = allPlugins[itemIdentifier];
 	if (pluginItem != nil)
 	{
-		NSString * friendlyName = [pluginItem objectForKey:@"FriendlyName"];
-		NSString * tooltip = [pluginItem objectForKey:@"Tooltip"];
+		NSString * friendlyName = pluginItem[@"FriendlyName"];
+		NSString * tooltip = pluginItem[@"Tooltip"];
 
 		if (friendlyName == nil)
 			friendlyName = itemIdentifier;
 		if (tooltip == nil)
 			tooltip = friendlyName;
 		
-		[item setLabel:friendlyName];
-		[item setPaletteLabel:[item label]];
-		[item compositeButtonImage:[pluginItem objectForKey:@"ButtonImage"] fromPath:[pluginItem objectForKey:@"Path"]];
-		[item setTarget:self];
-		[item setAction:@selector(pluginInvocator:)];
-		[item setToolTip:tooltip];
+		item.label = friendlyName;
+		item.paletteLabel = item.label;
+		[item compositeButtonImage:pluginItem[@"ButtonImage"] fromPath:pluginItem[@"Path"]];
+		item.target = self;
+		item.action = @selector(pluginInvocator:);
+		item.toolTip = tooltip;
 	}
 }
 
@@ -301,9 +301,9 @@
 	Article * thisArticle = [APPCONTROLLER selectedArticle];
 	
 	if ([theView isKindOfClass:[BrowserPane class]])
-		return (([theView viewLink] != nil) && [NSApp isActive]);
+		return (([theView viewLink] != nil) && NSApp.active);
 	else
-		return (thisArticle != nil && [NSApp isActive]);
+		return (thisArticle != nil && NSApp.active);
 }
 
 /* pluginInvocator
@@ -314,11 +314,11 @@
 	NSDictionary * pluginItem;
 
 	if ([sender isKindOfClass:[ToolbarButton class]])
-		pluginItem = [allPlugins objectForKey:[sender itemIdentifier]];
+		pluginItem = allPlugins[[sender itemIdentifier]];
 	else
 	{
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
-		pluginItem = [menuItem representedObject];
+		pluginItem = menuItem.representedObject;
 	}
 	
 	if (pluginItem != nil)
@@ -326,10 +326,10 @@
 		// This is a link plugin. There should be a URL field which we invoke and possibly
 		// placeholders to be filled from the current article or website.
 
-		NSString * itemType = [pluginItem objectForKey:@"Type"];
+		NSString * itemType = pluginItem[@"Type"];
 		if ([itemType isEqualToString:@"Link"])
 		{
-			NSMutableString * urlString  = [NSMutableString stringWithString:[pluginItem objectForKey:@"URL"]];
+			NSMutableString * urlString  = [NSMutableString stringWithString:pluginItem[@"URL"]];
 			if (urlString == nil)
 				return;
 			
@@ -342,7 +342,7 @@
 				[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
 				
 				// If ShortenURLs is true in the plugin's info.plist, we attempt to shorten it via the bit.ly service.
-				if ([[pluginItem objectForKey:@"ShortenURLs"] boolValue])
+				if ([pluginItem[@"ShortenURLs"] boolValue])
 				{
 					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
 					NSString * shortURL = [bitlyHelper shortenURL:[theView viewLink]];
@@ -364,7 +364,7 @@
 				[urlString replaceString:@"$ArticleTitle$" withString: [currentMessage title]];
 				
 				// URL shortening again, as above...
-				if ([[pluginItem objectForKey:@"ShortenURLs"] boolValue])
+				if ([pluginItem[@"ShortenURLs"] boolValue])
 				{
 					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
 					NSString * shortURL = [bitlyHelper shortenURL:[currentMessage link]];
@@ -396,8 +396,8 @@
 		{
 			// This is a script plugin. There should be a Script field which specifies the
 			// filename of the script file in the same folder.
-			NSString * pluginPath = [pluginItem objectForKey:@"Path"];
-			NSString * scriptFile = [pluginPath stringByAppendingPathComponent:[pluginItem objectForKey:@"Script"]];
+			NSString * pluginPath = pluginItem[@"Path"];
+			NSString * scriptFile = [pluginPath stringByAppendingPathComponent:pluginItem[@"Script"]];
 			if (scriptFile == nil)
 				return;
 
@@ -408,7 +408,7 @@
 		else if ([itemType isEqualToString:@"BlogEditor"])
 		{
 			// This is a blog-editor plugin. Simply send the info to the application.
-			[APPCONTROLLER blogWithExternalEditor:[pluginItem objectForKey:@"BundleIdentifier"]];
+			[APPCONTROLLER blogWithExternalEditor:pluginItem[@"BundleIdentifier"]];
 		}
 	}
 }

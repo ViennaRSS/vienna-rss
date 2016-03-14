@@ -49,57 +49,37 @@
 -(id)resetFolderSort:(NSScriptCommand *)cmd;
 
 // General read-only properties.
--(NSString *)applicationVersion;
--(NSArray *)folders;
--(BOOL)isRefreshing;
--(NSInteger)totalUnreadCount;
--(NSString *)currentTextSelection;
--(NSString *)documentHTMLSource;
--(NSString *)documentTabURL;
+@property (nonatomic, readonly, copy) NSString *applicationVersion;
+@property (nonatomic, readonly, copy) NSArray *folders;
+@property (nonatomic, getter=isRefreshing, readonly) BOOL refreshing;
+@property (nonatomic, readonly) NSInteger totalUnreadCount;
+@property (nonatomic, readonly, copy) NSString *currentTextSelection;
+@property (nonatomic, readonly, copy) NSString *documentHTMLSource;
+@property (nonatomic, readonly, copy) NSString *documentTabURL;
 
 // Change folder selection
--(Folder *)currentFolder;
--(void)setCurrentFolder:(Folder *)newCurrentFolder;
+@property (nonatomic, strong) Folder *currentFolder;
 
 // Current article
--(Article *)currentArticle;
+@property (nonatomic, readonly, strong) Article *currentArticle;
 
-// Preference getters
--(NSInteger)autoExpireDuration;
--(float)markReadInterval;
--(BOOL)readingPaneOnRight;
--(BOOL)refreshOnStartup;
--(BOOL)checkForNewOnStartup;
--(BOOL)openLinksInVienna;
--(BOOL)openLinksInBackground;
--(NSInteger)minimumFontSize;
--(BOOL)enableMinimumFontSize;
--(NSInteger)refreshFrequency;
--(NSString *)displayStyle;
--(NSString *)folderListFont;
--(NSInteger)folderListFontSize;
--(NSString *)articleListFont;
--(NSInteger)articleListFontSize;
--(BOOL)statusBarVisible;
--(BOOL)filterBarVisible;
-
-// Preference setters
--(void)setAutoExpireDuration:(NSInteger)newDuration;
--(void)setMarkReadInterval:(float)newInterval;
--(void)setReadingPaneOnRight:(BOOL)flag;
--(void)setRefreshOnStartup:(BOOL)flag;
--(void)setCheckForNewOnStartup:(BOOL)flag;
--(void)setOpenLinksInVienna:(BOOL)flag;
--(void)setOpenLinksInBackground:(BOOL)flag;
--(void)setMinimumFontSize:(NSInteger)newSize;
--(void)setEnableMinimumFontSize:(BOOL)flag;
--(void)setRefreshFrequency:(NSInteger)newFrequency;
--(void)setDisplayStyle:(NSString *)newStyle;
--(void)setFolderListFont:(NSString *)newFontName;
--(void)setFolderListFontSize:(NSInteger)newFontSize;
--(void)setArticleListFont:(NSString *)newFontName;
--(void)setArticleListFontSize:(NSInteger)newFontSize;
--(void)setStatusBarVisible:(BOOL)flag;
--(void)setFilterBarVisible:(BOOL)flag;
+// Preference properties
+@property (nonatomic) NSInteger autoExpireDuration;
+@property (nonatomic) float markReadInterval;
+@property (nonatomic) BOOL readingPaneOnRight;
+@property (nonatomic) BOOL refreshOnStartup;
+@property (nonatomic) BOOL checkForNewOnStartup;
+@property (nonatomic) BOOL openLinksInVienna;
+@property (nonatomic) BOOL openLinksInBackground;
+@property (nonatomic) NSInteger minimumFontSize;
+@property (nonatomic) BOOL enableMinimumFontSize;
+@property (nonatomic) NSInteger refreshFrequency;
+@property (nonatomic, copy) NSString *displayStyle;
+@property (nonatomic, copy) NSString *folderListFont;
+@property (nonatomic) NSInteger folderListFontSize;
+@property (nonatomic, copy) NSString *articleListFont;
+@property (nonatomic) NSInteger articleListFontSize;
+@property (nonatomic) BOOL statusBarVisible;
+@property (nonatomic) BOOL filterBarVisible;
 @end
 

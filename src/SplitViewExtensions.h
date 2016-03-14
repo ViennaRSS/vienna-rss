@@ -21,6 +21,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSSplitView (SplitViewExtensions)
-	-(NSArray *)layout;
-	-(void)setLayout:(NSArray *)newLayout;
+	@property (nonatomic, copy) NSArray *layout;
 @end

@@ -19,5 +19,5 @@
 //
 
 @interface Database (SearchString)
-	-(CriteriaTree *)searchStringToTree;
+	@property (nonatomic, readonly, strong) CriteriaTree *searchStringToTree;
 @end

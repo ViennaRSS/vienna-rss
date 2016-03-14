@@ -39,19 +39,13 @@
 }
 
 // Public functions
--(void)setState:(NSInteger)newState;
--(void)setSize:(long long)newSize;
--(void)setExpectedSize:(long long)newExpectedSize;
--(void)setDownload:(NSURLDownload *)theDownload;
--(void)setFilename:(NSString *)theFilename;
--(void)setStartTime:(NSDate *)newStartTime;
--(NSInteger)state;
--(long long)expectedSize;
--(long long)size;
--(NSURLDownload *)download;
--(NSString *)filename;
--(NSImage *)image;
--(NSDate *)startTime;
+@property (nonatomic) NSInteger state;
+@property (nonatomic) long long expectedSize;
+@property (nonatomic) long long size;
+@property (nonatomic, strong) NSURLDownload *download;
+@property (nonatomic, copy) NSString *filename;
+@property (nonatomic, readonly, copy) NSImage *image;
+@property (nonatomic, copy) NSDate *startTime;
 @end
 
 @interface DownloadManager : NSObject <WebDownloadDelegate> {
@@ -63,8 +57,8 @@
 +(DownloadManager *)sharedInstance;
 +(BOOL)isFileDownloaded:(NSString *)filename;
 +(NSString *)fullDownloadPath:(NSString *)filename;
--(NSArray *)downloadsList;
--(NSInteger)activeDownloads;
+@property (nonatomic, readonly, copy) NSArray *downloadsList;
+@property (nonatomic, readonly) NSInteger activeDownloads;
 -(void)clearList;
 -(void)cancelItem:(DownloadItem *)item;
 -(void)removeItem:(DownloadItem *)item;

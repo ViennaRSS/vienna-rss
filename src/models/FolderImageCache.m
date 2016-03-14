@@ -35,7 +35,7 @@ static FolderImageCache * _folderImageCache = nil;
 /* init
  * Init an instance of the folder image cache.
  */
--(id)init
+-(instancetype)init
 {
     if ((self = [super init]) != nil)
     {
@@ -53,7 +53,7 @@ static FolderImageCache * _folderImageCache = nil;
 {
     // Add in memory
     [self initFolderImagesArray];
-    [folderImagesArray setObject:image forKey:baseURL];
+    folderImagesArray[baseURL] = image;
     
     // Save icon to disk here.
     if (imagesCacheFolder != nil)
@@ -61,7 +61,7 @@ static FolderImageCache * _folderImageCache = nil;
         NSString * fullFilePath = [[imagesCacheFolder stringByAppendingPathComponent:baseURL] stringByAppendingPathExtension:@"tiff"];
         NSData *imageData = nil;
         @try {
-            imageData = [image TIFFRepresentation];
+            imageData = image.TIFFRepresentation;
         }
         @catch (NSException *error) {
             imageData = nil;
@@ -78,7 +78,7 @@ static FolderImageCache * _folderImageCache = nil;
 -(NSImage *)retrieveImage:(NSString *)baseURL
 {
     [self initFolderImagesArray];
-    return [folderImagesArray objectForKey:baseURL];
+    return folderImagesArray[baseURL];
 }
 
 /* initFolderImagesArray
@@ -126,16 +126,16 @@ static FolderImageCache * _folderImageCache = nil;
             
             for (fileName in listOfFiles)
             {
-                if ([[fileName pathExtension] isEqualToString:@"tiff"])
+                if ([fileName.pathExtension isEqualToString:@"tiff"])
                 {
                     NSString * fullPath = [imagesCacheFolder stringByAppendingPathComponent:fileName];
                     NSData * imageData = [fileManager contentsAtPath:fullPath];
                     NSImage * iconImage = [[NSImage alloc] initWithData:imageData];
-                    if ([iconImage isValid])
+                    if (iconImage.valid)
                     {
-                        [iconImage setSize:NSMakeSize(16, 16)];
-                        NSString * homePageSiteRoot = [[[fullPath lastPathComponent] stringByDeletingPathExtension] convertStringToValidPath];
-                        [folderImagesArray setObject:iconImage forKey:homePageSiteRoot];
+                        iconImage.size = NSMakeSize(16, 16);
+                        NSString * homePageSiteRoot = [fullPath.lastPathComponent.stringByDeletingPathExtension convertStringToValidPath];
+                        folderImagesArray[homePageSiteRoot] = iconImage;
                     }
                 }
             }

@@ -28,7 +28,7 @@
 /* init
  * Create an "empty" search method that will not do anything on its own.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -44,7 +44,7 @@
  * of doing different things with searches according to the plugin definition. 
  * At the moment, however, we only ever do a normal web-search.*/
 
--(id)initWithDictionary:(NSDictionary *)dict 
+-(instancetype)initWithDictionary:(NSDictionary *)dict 
 {
 	if ((self = [super init]) != nil)
 	{
@@ -64,7 +64,7 @@
 	[coder encodeValueOfObjCType:@encode(SEL) at:&handler];
 }
 
-- (id)initWithCoder:(NSCoder *)coder;
+- (instancetype)initWithCoder:(NSCoder *)coder;
 {
 	if ((self = [super init]) != nil)
     {
@@ -84,7 +84,7 @@
  */
 +(NSArray *)builtInSearchMethods
 {
-	return [NSArray arrayWithObjects: [SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod], nil];
+	return @[[SearchMethod searchAllArticlesMethod], [SearchMethod searchCurrentWebPageMethod]];
 }
 
 /* searchAllArticlesMethod

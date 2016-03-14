@@ -22,7 +22,7 @@
 
 @implementation FilterView
 
--(id)initWithFrame:(NSRect)frameRect
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
@@ -40,7 +40,7 @@
 	backgroundBrush = [[NSImage alloc] initWithContentsOfFile: backgroundBrushURL ];
 
 	// Give the label the typical embossed look
-	[[filterByLabel cell] setBackgroundStyle:NSBackgroundStyleRaised];
+	filterByLabel.cell.backgroundStyle = NSBackgroundStyleRaised;
 	// Make sure we localise the label
 	[filterByLabel setStringValue:NSLocalizedString(@"Filter by:", nil)];
 
@@ -49,7 +49,7 @@
 	[filterViewPopUp setToolTip:NSLocalizedString(@"Filter articles", nil)];
     [filterViewPopUp.cell accessibilitySetOverrideValue:filterByLabel.cell forAttribute:NSAccessibilityTitleUIElementAttribute];
 	[filterCloseButton setToolTip:NSLocalizedString(@"Close the filter bar", nil)];
-	[[filterCloseButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Close the filter bar", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[filterCloseButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Close the filter bar", nil) forAttribute:NSAccessibilityTitleAttribute];
 }
 
 /* drawRect
@@ -57,7 +57,7 @@
  */
 -(void)drawRect:(NSRect)rect
 {
-	NSRect iRect = NSMakeRect(0, 0, 1, [backgroundBrush size].height - 1);					
+	NSRect iRect = NSMakeRect(0, 0, 1, backgroundBrush.size.height - 1);					
 	[backgroundBrush drawInRect:rect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 }
 

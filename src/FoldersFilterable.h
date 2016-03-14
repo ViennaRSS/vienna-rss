@@ -13,7 +13,7 @@
 __unsafe_unretained id <NSOutlineViewDataSource> _dataSource;
 }
 
-- (instancetype)initWithDataSource:(id<NSOutlineViewDataSource>)dataSource;
+- (instancetype)initWithDataSource:(id<NSOutlineViewDataSource>)dataSource NS_DESIGNATED_INITIALIZER;
 
 @end
 

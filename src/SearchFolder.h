@@ -62,5 +62,5 @@
 -(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId;
 
 // General functions
--(id)initWithDatabase:(Database *)newDb;
+-(instancetype)initWithDatabase:(Database *)newDb /*NS_DESIGNATED_INITIALIZER*/;
 @end

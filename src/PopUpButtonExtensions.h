@@ -26,7 +26,7 @@
 	-(void)addItemWithTag:(NSString *)title tag:(NSInteger)tag;
 	-(void)addItemWithRepresentedObject:(NSString *)title object:(id)object;
 	-(void)insertItemWithTag:(NSString *)title tag:(NSInteger)tag atIndex:(NSInteger)index;
-	-(id)representedObjectForSelection;
-	-(NSInteger)tagForSelection;
+	@property (nonatomic, readonly, strong) id representedObjectForSelection;
+	@property (nonatomic, readonly) NSInteger tagForSelection;
 	-(void)addSeparator;
 @end

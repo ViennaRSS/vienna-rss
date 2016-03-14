@@ -154,7 +154,7 @@ const AEKeyword DataItemSourceFeedURL;
 #define MA_EmptyTrash_WithWarning		2
 
 // Sync types
-typedef enum {
+typedef NS_ENUM(unsigned int, SyncTypes) {
     MA_Sync_Subscribe,
     MA_Sync_Unsubscribe,
     MA_Sync_Delete,
@@ -166,6 +166,6 @@ typedef enum {
     MA_Sync_Mark_Unread,
     MA_Sync_Mark_Flagged,
     MA_Sync_Mark_Unflagged
-} SyncTypes;
+};
 
 //extern NSString * MA_Sync_FolderSeparator;

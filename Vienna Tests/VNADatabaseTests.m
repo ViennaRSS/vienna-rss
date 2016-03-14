@@ -21,7 +21,7 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    queue = [[Database sharedManager] databaseQueue];
+    queue = [Database sharedManager].databaseQueue;
 }
 
 - (void)tearDown {

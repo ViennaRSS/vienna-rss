@@ -42,7 +42,7 @@
 /* init
  * Our initialisation.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 		useTooltips = NO;
@@ -60,7 +60,7 @@
 	NSString * grayGradientURL = [[NSBundle mainBundle] pathForResource:@"selGray" ofType:@"tiff"];
 	grayGradient = [[NSImage alloc] initWithContentsOfFile: grayGradientURL ];
 
-	iRect = NSMakeRect(0,0,1,[blueGradient size].height-1);					
+	iRect = NSMakeRect(0,0,1,blueGradient.size.height-1);					
 	
 	// Add the notifications for collapse and expand.
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -102,10 +102,10 @@
  */
 -(void)keyDown:(NSEvent *)theEvent
 {
-	if ([[theEvent characters] length] == 1)
+	if (theEvent.characters.length == 1)
 	{
-		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+		unichar keyChar = [theEvent.characters characterAtIndex:0];
+		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
 			return;
 	}
 	[super keyDown:theEvent];
@@ -126,7 +126,7 @@
 	if (!useTooltips || ![_dataSource respondsToSelector:@selector(outlineView:tooltipForItem:)])
 		return;
 
-	range = [self rowsInRect:[self visibleRect]];
+	range = [self rowsInRect:self.visibleRect];
 	for (index = range.location; index < NSMaxRange(range); index++)
 	{
 		NSString *tooltip;
@@ -248,7 +248,7 @@
 		[self buildTooltips];
 	
 	// Have the collapsed item remove any progress indicators.
-	TreeNode * collapsedItem = [[notification userInfo] objectForKey:@"NSObject"];
+	TreeNode * collapsedItem = notification.userInfo[@"NSObject"];
 	[collapsedItem stopAndReleaseProgressIndicator];
 	
 }
@@ -260,7 +260,7 @@
 {
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(outlineView:menuWillAppear:)])
 		[(id)[self delegate] outlineView:self menuWillAppear:theEvent];
-	return [self menu];
+	return self.menu;
 }
 
 /* copy
@@ -268,11 +268,11 @@
  */
 -(IBAction)copy:(id)sender
 {
-	if ([self selectedRow] >= 0)
+	if (self.selectedRow >= 0)
 	{
-		NSMutableArray * array = [NSMutableArray arrayWithCapacity:[self numberOfSelectedRows]];
-		NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
-		NSUInteger  item = [selectedRowIndexes firstIndex];
+		NSMutableArray * array = [NSMutableArray arrayWithCapacity:self.numberOfSelectedRows];
+		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
+		NSUInteger  item = selectedRowIndexes.firstIndex;
 		
 		while (item != NSNotFound)
 		{
@@ -298,15 +298,15 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	if ([menuItem action] == @selector(copy:))
+	if (menuItem.action == @selector(copy:))
 	{
-		return ([self selectedRow] >= 0);
+		return (self.selectedRow >= 0);
 	}
-	if ([menuItem action] == @selector(delete:))
+	if (menuItem.action == @selector(delete:))
 	{
-		return [(id)[self delegate] canDeleteFolderAtRow:[self selectedRow]];
+		return [(id)[self delegate] canDeleteFolderAtRow:self.selectedRow];
 	}
-	if ([menuItem action] == @selector(selectAll:))
+	if (menuItem.action == @selector(selectAll:))
 	{
 		return YES;
 	}
@@ -327,8 +327,8 @@
  */
 -(void)highlightSelectionInClipRect:(NSRect)rect
 {
-	NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
-	NSUInteger rowIndex = [selectedRowIndexes firstIndex];
+	NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
+	NSUInteger rowIndex = selectedRowIndexes.firstIndex;
 
 	while (rowIndex != NSNotFound)
 	{
@@ -337,12 +337,12 @@
 		{
 			[blueGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 
-			if ([self editedRow] == -1)
+			if (self.editedRow == -1)
 			{
-				if ([[self window] firstResponder] != self || ![[self window] isKeyWindow])
+				if (self.window.firstResponder != self || !self.window.keyWindow)
 					[grayGradient drawInRect:selectedRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 			}
-			if ([self editedRow] != -1)
+			if (self.editedRow != -1)
 				[self performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
 		}
 		rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
@@ -356,27 +356,27 @@
  */
 -(void)prvtResizeTheFieldEditor
 {
-	id editor = [[self window] fieldEditor:YES forObject:self];
-	NSRect editRect = NSIntersectionRect([self rectOfColumn:[self editedColumn]], [self rectOfRow:[self editedRow]]);
-	NSRect frame = [[editor superview] frame];
+	id editor = [self.window fieldEditor:YES forObject:self];
+	NSRect editRect = NSIntersectionRect([self rectOfColumn:self.editedColumn], [self rectOfRow:self.editedRow]);
+	NSRect frame = [editor superview].frame;
 	NSLayoutManager * layoutManager = [editor layoutManager];
 	
-	[layoutManager boundingRectForGlyphRange:NSMakeRange(0, [layoutManager numberOfGlyphs]) inTextContainer:[editor textContainer]];
+	[layoutManager boundingRectForGlyphRange:NSMakeRange(0, layoutManager.numberOfGlyphs) inTextContainer:[editor textContainer]];
 	frame.size.width = [layoutManager usedRectForTextContainer:[editor textContainer]].size.width;
 	
 	if (editRect.size.width > frame.size.width)
-		[[editor superview] setFrame:frame];
+		[editor superview].frame = frame;
 	else
 	{
 		frame.size.width = editRect.size.width-4;
-		[[editor superview] setFrame:frame];
+		[editor superview].frame = frame;
 	}
 	
 	[editor setNeedsDisplay:YES];
 	
 	if ([self lockFocusIfCanDraw])
 	{
-		id clipView = [[[self window] fieldEditor:YES forObject:self] superview];
+		id clipView = [self.window fieldEditor:YES forObject:self].superview;
 		NSRect borderRect = [clipView frame];
 
 		// Get rid of the white border, leftover from resizing the fieldEditor..
@@ -385,17 +385,17 @@
 		[blueGradient drawInRect:editRect fromRect:iRect operation:NSCompositeSourceOver fraction:1 respectFlipped:YES hints:nil];
 		
 		// Put back any cell image
-		NSInteger editColumnIndex = [self editedColumn];
+		NSInteger editColumnIndex = self.editedColumn;
 		if (editColumnIndex != -1)
 		{
-			NSTableColumn * editColumn = [[self tableColumns] objectAtIndex:editColumnIndex];
-			ImageAndTextCell * fieldCell = [editColumn dataCell];
+			NSTableColumn * editColumn = self.tableColumns[editColumnIndex];
+			ImageAndTextCell * fieldCell = editColumn.dataCell;
 			if ([fieldCell respondsToSelector:@selector(drawCellImage:inView:)])
 			{
 				// The fieldCell needs to be primed with the image for the cell.
-				[[self delegate] outlineView:self willDisplayCell:fieldCell forTableColumn:editColumn item:[self itemAtRow:[self editedRow]]];
+				[[self delegate] outlineView:self willDisplayCell:fieldCell forTableColumn:editColumn item:[self itemAtRow:self.editedRow]];
 
-				NSRect cellRect = [self frameOfCellAtColumn:editColumnIndex row:[self editedRow]];
+				NSRect cellRect = [self frameOfCellAtColumn:editColumnIndex row:self.editedRow];
 				[fieldCell drawCellImage:&cellRect inView:clipView];
 			}
 		}
@@ -429,8 +429,8 @@
  */
 - (void)textDidBeginEditing:(NSNotification *)aNotification
 {
-	NSText * editor = [[self window] fieldEditor:YES forObject:self];
-	backupString = [[editor string] copy];
+	NSText * editor = [self.window fieldEditor:YES forObject:self];
+	backupString = [editor.string copy];
 	[super textDidBeginEditing:aNotification];
 }
 
@@ -444,18 +444,18 @@
 
 	// This is ugly, but just about the only way to do it. NSTableView is determined to select and edit something else, even the
 	// text field that it just finished editing, unless we mislead it about what key was pressed to end editing.
-	if ([[[notification userInfo] objectForKey:@"NSTextMovement"] integerValue] == NSReturnTextMovement)
+	if ([notification.userInfo[@"NSTextMovement"] integerValue] == NSReturnTextMovement)
 	{
 		NSMutableDictionary *newUserInfo;
 		NSNotification *newNotification;
 		
-		newUserInfo = [NSMutableDictionary dictionaryWithDictionary:[notification userInfo]];
-		[newUserInfo setObject:[NSNumber numberWithInteger:NSIllegalTextMovement] forKey:@"NSTextMovement"];
-		newNotification = [NSNotification notificationWithName:[notification name] object:[notification object] userInfo:newUserInfo];
+		newUserInfo = [NSMutableDictionary dictionaryWithDictionary:notification.userInfo];
+		newUserInfo[@"NSTextMovement"] = @(NSIllegalTextMovement);
+		newNotification = [NSNotification notificationWithName:notification.name object:notification.object userInfo:newUserInfo];
 		[super textDidEndEditing:newNotification];
 		
 		// For some reason we lose firstResponder status when when we do the above.
-		[[self window] makeFirstResponder:self];
+		[self.window makeFirstResponder:self];
 	}
 	else
 		[super textDidEndEditing:notification];
@@ -469,8 +469,8 @@
 {
 	if (backupString !=nil)
 	{
-		NSText * editor = [[self window] fieldEditor:YES forObject:self];
-		[editor setString:backupString];
+		NSText * editor = [self.window fieldEditor:YES forObject:self];
+		editor.string = backupString;
 	}
 	[self reloadData];
 }

@@ -42,8 +42,8 @@
 
 + (NSURL*)decodeLocalFileURL:(NSURL*)url
 {
-    NSString* urlPathString = [url path];
-    NSString* ext = [[urlPathString pathExtension] lowercaseString];
+    NSString* urlPathString = url.path;
+    NSString* ext = urlPathString.pathExtension.lowercaseString;
     OSType fileType = NSHFSTypeCodeFromFileType(NSHFSTypeOfFile(urlPathString));
 
     if ([ext isEqualToString:@"url"] || fileType == 'LINK') {
@@ -69,7 +69,7 @@
     // Look for valid plist data.
     NSDictionary *plist;
     if ((plist = [[NSDictionary alloc] initWithContentsOfFile:inFile])) {
-        ret = [NSURL URLWithString:[plist objectForKey:@"URL"]];
+        ret = [NSURL URLWithString:plist[@"URL"]];
     }
 
 // ignore the deprecation warnings related to FSPathMakeRef, FSOpenResFile, Get1Resource ...
@@ -77,7 +77,7 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if (ret==nil) { // Fallback for ancient .webloc files : search the resource fork
         FSRef ref;
-        if (inFile && FSPathMakeRef((UInt8 *)[inFile fileSystemRepresentation], &ref, NULL) == noErr) {
+        if (inFile && FSPathMakeRef((UInt8 *)inFile.fileSystemRepresentation, &ref, NULL) == noErr) {
              ResFileRefNum resRef;
 
             resRef = FSOpenResFile(&ref, fsRdPerm);

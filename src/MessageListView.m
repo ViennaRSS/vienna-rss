@@ -36,10 +36,10 @@
  */
 -(void)keyDown:(NSEvent *)theEvent
 {
-	if ([[theEvent characters] length] == 1)
+	if (theEvent.characters.length == 1)
 	{
-		unichar keyChar = [[theEvent characters] characterAtIndex:0];
-		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:[theEvent modifierFlags]])
+		unichar keyChar = [theEvent.characters characterAtIndex:0];
+		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
 			return;
 	}
 	[super keyDown:theEvent];
@@ -50,14 +50,14 @@
  */
 -(IBAction)copy:(id)sender
 {
-	if ([self selectedRow] >= 0)
+	if (self.selectedRow >= 0)
 	{
-		NSIndexSet * selectedRowIndexes = [self selectedRowIndexes];
-		NSMutableArray *rows = [NSMutableArray arrayWithCapacity:[selectedRowIndexes count]];
-		NSUInteger  rowIndex = [selectedRowIndexes firstIndex];
+		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
+		NSMutableArray *rows = [NSMutableArray arrayWithCapacity:selectedRowIndexes.count];
+		NSUInteger  rowIndex = selectedRowIndexes.firstIndex;
 		while (rowIndex != NSNotFound)
 		{
-			[rows addObject:[NSNumber numberWithUnsignedInteger:rowIndex]];
+			[rows addObject:@(rowIndex)];
 			rowIndex = [selectedRowIndexes indexGreaterThanIndex:rowIndex];
 		}
 		[(id)[self delegate] copyTableSelection:rows toPasteboard:[NSPasteboard generalPasteboard]];
@@ -78,15 +78,15 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	if ([menuItem action] == @selector(copy:))
+	if (menuItem.action == @selector(copy:))
 	{
-		return ([self selectedRow] >= 0);
+		return (self.selectedRow >= 0);
 	}
-	if ([menuItem action] == @selector(delete:))
+	if (menuItem.action == @selector(delete:))
 	{
-		return [(id)[self delegate] canDeleteMessageAtRow:[self selectedRow]];
+		return [(id)[self delegate] canDeleteMessageAtRow:self.selectedRow];
 	}
-	if ([menuItem action] == @selector(selectAll:))
+	if (menuItem.action == @selector(selectAll:))
 	{
 		return YES;
 	}

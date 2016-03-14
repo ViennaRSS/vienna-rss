@@ -35,12 +35,12 @@
 -(void)setPrimaryTabItemView:(NSView *)newPrimaryTabItemView;
 -(void)setTabItemViewTitle:(NSView *)tabView title:(NSString *)newTitle;
 -(NSString *)tabItemViewTitle:(NSView *)tabView;
--(NSView<BaseView> *)activeTabItemView;
+@property (nonatomic, readonly, strong) NSView<BaseView> *activeTabItemView;
 -(NSView<BaseView, WebUIDelegate, WebFrameLoadDelegate> *)primaryTabItemView;
 -(void)setActiveTabToPrimaryTab;
 -(void)closeTabItemView:(NSView *)theTab;
 -(void)closeAllTabs;
--(NSInteger)countOfTabs;
+@property (nonatomic, readonly) NSInteger countOfTabs;
 -(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt;
 -(void)showTabItemView:(NSView *)theTabView;
 -(void)showPreviousTab;

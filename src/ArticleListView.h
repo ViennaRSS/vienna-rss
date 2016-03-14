@@ -74,10 +74,10 @@
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
--(NSInteger)tableLayout;
--(NSArray *)markedArticleRange;
+@property (nonatomic, readonly) NSInteger tableLayout;
+@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
--(NSURL *)url;
+@property (nonatomic, readonly, copy) NSURL *url;
 -(void)webViewLoadFinished:(NSNotification *)notification;
 @end

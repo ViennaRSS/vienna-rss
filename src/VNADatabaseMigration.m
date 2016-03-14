@@ -27,7 +27,7 @@
             // Create an index on the message_id column.
 
             [db executeUpdate:@"alter table messages add column createddate"];
-            [db executeUpdate:@"update messages set createddate=?", @([[NSDate distantPast] timeIntervalSince1970])];
+            [db executeUpdate:@"update messages set createddate=?", @([NSDate distantPast].timeIntervalSince1970)];
             [db executeUpdate:@"create index messages_message_idx on messages (message_id)"];
             [db setUserVersion:(uint32_t)13];
 

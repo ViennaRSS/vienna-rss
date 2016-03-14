@@ -117,9 +117,9 @@ static NSMutableArray * _filterList = nil;
 +(ArticleFilter *)filterByTag:(NSInteger)theTag
 {
 	NSInteger index;
-	for (index = 0; index < [_filterList count]; ++index)
+	for (index = 0; index < _filterList.count; ++index)
 	{
-		ArticleFilter * filter = [_filterList objectAtIndex:index];
+		ArticleFilter * filter = _filterList[index];
 		if ([filter tag] == theTag)
 			return filter;
 	}
@@ -129,7 +129,7 @@ static NSMutableArray * _filterList = nil;
 /* initWithName
  * This is the designated initialiser for a new ArticleFilter object.
  */
--(id)initWithName:(NSString *)theName tag:(NSInteger)theTag comparator:(SEL)theComparator
+-(instancetype)initWithName:(NSString *)theName tag:(NSInteger)theTag comparator:(SEL)theComparator
 {
 	if ((self = [super init]) != nil)
 	{

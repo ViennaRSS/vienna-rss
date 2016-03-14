@@ -94,16 +94,16 @@
     [checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:[prefs refreshFrequency]]];
     
     // Set check for updates when starting
-    [checkForUpdates setState:[prefs checkForNewOnStartup] ? NSOnState : NSOffState];
+    checkForUpdates.state = [prefs checkForNewOnStartup] ? NSOnState : NSOffState;
     
     // Set sending system specs when checking for updates
-    [sendSystemSpecs setState:[prefs sendSystemSpecs] ? NSOnState : NSOffState];
+    sendSystemSpecs.state = [prefs sendSystemSpecs] ? NSOnState : NSOffState;
     
     // Set search for latest Beta versions when checking for updates
-    [alwaysAcceptBetas setState:[prefs alwaysAcceptBetas] ? NSOnState : NSOffState];
+    alwaysAcceptBetas.state = [prefs alwaysAcceptBetas] ? NSOnState : NSOffState;
 
     // Set check for new articles when starting
-    [checkOnStartUp setState:[prefs refreshOnStartup] ? NSOnState : NSOffState];
+    checkOnStartUp.state = [prefs refreshOnStartup] ? NSOnState : NSOffState;
     
     // Set range of auto-expire values
     [expireDuration removeAllItems];
@@ -121,24 +121,24 @@
     [self updateDownloadsPopUp:[prefs downloadFolder]];
     
     // Set whether the application is shown in the menu bar
-    [showAppInMenuBar setState:[prefs showAppInStatusBar] ? NSOnState : NSOffState];
+    showAppInMenuBar.state = [prefs showAppInStatusBar] ? NSOnState : NSOffState;
     
     // Set whether links are opened in the background
-    [openLinksInBackground setState:[prefs openLinksInBackground] ? NSOnState : NSOffState];
+    openLinksInBackground.state = [prefs openLinksInBackground] ? NSOnState : NSOffState;
     
     // Set whether links are opened in the external browser
-    [openLinksInExternalBrowser setState:[prefs openLinksInVienna] ? NSOffState : NSOnState];
+    openLinksInExternalBrowser.state = [prefs openLinksInVienna] ? NSOffState : NSOnState;
     
     // Set mark read behaviour
-    [markReadAfterNext setState:[prefs markReadInterval] == 0 ? NSOnState : NSOffState];
-    [markReadAfterDelay setState:[prefs markReadInterval] != 0 ? NSOnState : NSOffState];
+    markReadAfterNext.state = [prefs markReadInterval] == 0 ? NSOnState : NSOffState;
+    markReadAfterDelay.state = [prefs markReadInterval] != 0 ? NSOnState : NSOffState;
     
     // Show new articles notification options
-    [newArticlesNotificationBadgeButton setState:(([prefs newArticlesNotification] & MA_NewArticlesNotification_Badge) !=0) ? NSOnState : NSOffState];
-    [newArticlesNotificationBounceButton setState:(([prefs newArticlesNotification] & MA_NewArticlesNotification_Bounce) !=0) ? NSOnState : NSOffState];
+    newArticlesNotificationBadgeButton.state = (([prefs newArticlesNotification] & MA_NewArticlesNotification_Badge) !=0) ? NSOnState : NSOffState;
+    newArticlesNotificationBounceButton.state = (([prefs newArticlesNotification] & MA_NewArticlesNotification_Bounce) !=0) ? NSOnState : NSOffState;
     
     // Set whether updated articles are considered as new
-    [markUpdatedAsNew setState:[prefs markUpdatedAsNew] ? NSOnState : NSOffState];
+    markUpdatedAsNew.state = [prefs markUpdatedAsNew] ? NSOnState : NSOffState;
     
     [self refreshLinkHandler];
 }
@@ -150,7 +150,7 @@
 -(void)refreshLinkHandler
 {
     NSBundle * appBundle = [NSBundle mainBundle];
-    NSString * ourAppName = [[[appBundle executablePath] lastPathComponent] stringByDeletingPathExtension];
+    NSString * ourAppName = appBundle.executablePath.lastPathComponent.stringByDeletingPathExtension;
     BOOL onTheList = NO;
     NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
     NSString * registeredAppURL = nil;
@@ -162,14 +162,14 @@
     // Add the current registered link handler to the start of the list as Safari does. If
     // there's no current registered handler, default to ourself.
     if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-        registeredAppURL = [(__bridge NSURL *)appURL path];
+        registeredAppURL = ((__bridge NSURL *)appURL).path;
     else
     {
-        registeredAppURL = [appBundle executablePath];
+        registeredAppURL = appBundle.executablePath;
         onTheList = YES;
     }
     
-    NSString * regAppName = [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
+    NSString * regAppName = registeredAppURL.lastPathComponent.stringByDeletingPathExtension;
     [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
     [linksHandler addSeparator];
     
@@ -192,13 +192,13 @@
         for (index = 0; index < count; ++index)
         {
             NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
-            if ([appURL isFileURL] && [[appURL path] hasPrefix:@"/Applications/"])
+            if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"])
             {
-                NSString * appName = [[[appURL path] lastPathComponent] stringByDeletingPathExtension];
+                NSString * appName = appURL.path.lastPathComponent.stringByDeletingPathExtension;
                 if ([appName isEqualToString:ourAppName])
                     onTheList = YES;
                 if (![appName isEqualToString:regAppName])
-                    [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:[appURL path]]];
+                    [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:appURL.path]];
                 
                 [appToPathMap setValue:appURL forKey:appName];
             }
@@ -210,9 +210,9 @@
     // complete with our icon.
     if (!onTheList)
     {
-        [linksHandler addItemWithTitle:ourAppName image:[[NSWorkspace sharedWorkspace] iconForFile:[appBundle bundlePath]]];
+        [linksHandler addItemWithTitle:ourAppName image:[[NSWorkspace sharedWorkspace] iconForFile:appBundle.bundlePath]];
         
-        NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:[appBundle bundlePath]];
+        NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:appBundle.bundlePath];
         [appToPathMap setValue:fileURL forKey:ourAppName];
     }
     
@@ -230,9 +230,9 @@
  */
 -(IBAction)changeExpireDuration:(id)sender
 {
-    NSMenuItem * selectedItem = [expireDuration selectedItem];
+    NSMenuItem * selectedItem = expireDuration.selectedItem;
     if (selectedItem != nil)
-        [[Preferences standardPreferences] setAutoExpireDuration:[selectedItem tag]];
+        [[Preferences standardPreferences] setAutoExpireDuration:selectedItem.tag];
 }
 
 /* changeOpenLinksInBackground
@@ -276,12 +276,12 @@
 -(IBAction)changeDownloadFolder:(id)sender
 {
     NSOpenPanel * openPanel = [NSOpenPanel openPanel];
-    NSWindow * prefPaneWindow = [downloadFolder window];
+    NSWindow * prefPaneWindow = downloadFolder.window;
     
     [openPanel setCanChooseDirectories:YES];
     [openPanel setCanCreateDirectories:YES];
     [openPanel setCanChooseFiles:NO];
-    [openPanel setDirectoryURL:[[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil]];
+    openPanel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
     [openPanel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         // Force the focus back to the main preferences pane
         [openPanel orderOut:self];
@@ -289,7 +289,7 @@
         
         if (returnCode == NSOKButton)
         {
-            NSString * downloadFolderPath = [[openPanel directoryURL] path];
+            NSString * downloadFolderPath = openPanel.directoryURL.path;
             [[Preferences standardPreferences] setDownloadFolder:downloadFolderPath];
             [self updateDownloadsPopUp:downloadFolderPath];
         }
@@ -307,11 +307,11 @@
     NSMenuItem * downloadPathItem = [downloadFolder itemAtIndex:0];
     NSImage * pathImage = [[NSWorkspace sharedWorkspace] iconForFile:downloadFolderPath];
     
-    [pathImage setSize:NSMakeSize(16, 16)];
+    pathImage.size = NSMakeSize(16, 16);
     
-    [downloadPathItem setTitle:[downloadFolderPath lastPathComponent]];
-    [downloadPathItem setImage:pathImage];
-    [downloadPathItem setState:NSOffState];
+    downloadPathItem.title = downloadFolderPath.lastPathComponent;
+    downloadPathItem.image = pathImage;
+    downloadPathItem.state = NSOffState;
     
     [downloadFolder selectItemAtIndex:0];
 }
@@ -337,16 +337,16 @@
  */
 -(IBAction)selectDefaultLinksHandler:(id)sender
 {
-    NSMenuItem * selectedItem = [linksHandler selectedItem];
+    NSMenuItem * selectedItem = linksHandler.selectedItem;
     if (selectedItem != nil)
     {
-        if ([selectedItem tag] == -1)
+        if (selectedItem.tag == -1)
         {
             [self handleLinkSelector:self];
             return;
         }
     }
-    [self setDefaultLinksHandler:[appToPathMap valueForKey:[selectedItem title]]];
+    [self setDefaultLinksHandler:[appToPathMap valueForKey:selectedItem.title]];
     [self refreshLinkHandler];
 }
 
@@ -358,17 +358,17 @@
 -(IBAction)handleLinkSelector:(id)sender
 {
     NSOpenPanel * panel = [NSOpenPanel openPanel];
-    NSWindow * prefPaneWindow = [linksHandler window];
+    NSWindow * prefPaneWindow = linksHandler.window;
     
-    [panel setDirectoryURL:[[NSFileManager defaultManager] URLForDirectory:NSApplicationDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:NO error:nil]];
-    [panel setAllowedFileTypes:[NSArray arrayWithObjects:NSFileTypeForHFSTypeCode('APPL'), nil]];
+    panel.directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSApplicationDirectory inDomain:NSLocalDomainMask appropriateForURL:nil create:NO error:nil];
+    panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
-        NSWindow * prefPaneWindow = [linksHandler window];
+        NSWindow * prefPaneWindow = linksHandler.window;
         [prefPaneWindow makeKeyAndOrderFront:self];
         
         if (returnCode == NSOKButton)
-            [self setDefaultLinksHandler:[panel URL]];
+            [self setDefaultLinksHandler:panel.URL];
         [self refreshLinkHandler];
     }];
 }
@@ -379,8 +379,8 @@
 -(void)setDefaultLinksHandler:(NSURL *)fileURLToNewHandler
 {
     NSBundle * appBundle = [NSBundle bundleWithURL:fileURLToNewHandler];
-    NSDictionary * fileAttributes = [appBundle infoDictionary];
-    CFStringRef bundleIdentifier = (__bridge CFStringRef)[fileAttributes objectForKey:@"CFBundleIdentifier"];
+    NSDictionary * fileAttributes = appBundle.infoDictionary;
+    CFStringRef bundleIdentifier = (__bridge CFStringRef)fileAttributes[@"CFBundleIdentifier"];
     CFStringRef scheme = (__bridge CFStringRef)@"feed";
     LSSetDefaultHandlerForURLScheme(scheme, bundleIdentifier);
 }
@@ -391,7 +391,7 @@
  */
 -(IBAction)changeCheckFrequency:(id)sender
 {
-    NSInteger newFrequency = [[checkFrequency selectedItem] tag];
+    NSInteger newFrequency = checkFrequency.selectedItem.tag;
     [[Preferences standardPreferences] setRefreshFrequency:newFrequency];
 }
 

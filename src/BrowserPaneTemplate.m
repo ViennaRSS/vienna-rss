@@ -21,13 +21,13 @@
 
 @implementation BrowserPaneTemplate
 
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"BrowserPane" owner:self topLevelObjects:&objects];
-		[self setTopObjects:objects];
+		self.topObjects = objects;
 	}
 	return self;
 }

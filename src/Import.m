@@ -31,7 +31,7 @@
  */
 + (void)importFromFile:(NSString *)importFileName
 {
-    NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
+    NSData * data = [NSData dataWithContentsOfFile:importFileName.stringByExpandingTildeInPath];
     BOOL hasError = NO;
     NSInteger countImported = 0;
     
@@ -73,22 +73,17 @@
 	
 	for (NSXMLElement *outlineElement in outlines)
 	{
-        NSString *feedText = [[[outlineElement attributeForName:@"text"]
-                                stringValue] stringByEscapingExtendedCharacters];
-        NSString *feedDescription = [[[outlineElement attributeForName:@"description"]
-                                stringValue] stringByEscapingExtendedCharacters];
-        NSString *feedURL = [[[outlineElement attributeForName:@"xmlUrl"]
-                              stringValue] stringByEscapingExtendedCharacters];
-        NSString *feedHomePage = [[[outlineElement attributeForName:@"htmlUrl"]
-                              stringValue] stringByEscapingExtendedCharacters];
+        NSString *feedText = [[outlineElement attributeForName:@"text"].stringValue stringByEscapingExtendedCharacters];
+        NSString *feedDescription = [[outlineElement attributeForName:@"description"].stringValue stringByEscapingExtendedCharacters];
+        NSString *feedURL = [[outlineElement attributeForName:@"xmlUrl"].stringValue stringByEscapingExtendedCharacters];
+        NSString *feedHomePage = [[outlineElement attributeForName:@"htmlUrl"].stringValue stringByEscapingExtendedCharacters];
         
         Database * dbManager = [Database sharedManager];
 
 		// Some OPML exports use 'title' instead of 'text'.
-		if (feedText == nil || [feedText length] == 0u)
+		if (feedText == nil || feedText.length == 0u)
 		{
-            NSString * feedTitle = [[[outlineElement attributeForName:@"title"]
-                                     stringValue] stringByEscapingExtendedCharacters];
+            NSString * feedTitle = [[outlineElement attributeForName:@"title"].stringValue stringByEscapingExtendedCharacters];
             if (feedTitle != nil) {
 				feedText = feedTitle;
             }

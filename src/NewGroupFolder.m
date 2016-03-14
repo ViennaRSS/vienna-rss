@@ -38,13 +38,13 @@
 	{
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"GroupFolder" owner:self topLevelObjects:&objects];
-		[self setTopObjects:objects];
+		self.topObjects = objects;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:folderName];
 	}
 
 	// Reset from the last time we used this sheet.
 	parentId = itemId;
-	[folderName setStringValue:@""];
+	folderName.stringValue = @"";
 	[self enableSaveButton];
 	[NSApp beginSheet:newGroupFolderWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
@@ -54,7 +54,7 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderNameString = [[folderName stringValue] trim];
+	NSString * folderNameString = [folderName.stringValue trim];
 	
 	// Create the new folder in the database
 	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId
@@ -95,8 +95,8 @@
  */
 -(void)enableSaveButton
 {
-	NSString * folderNameString = [folderName stringValue];
-	[saveButton setEnabled:![folderNameString isBlank]];
+	NSString * folderNameString = folderName.stringValue;
+	saveButton.enabled = ![folderNameString isBlank];
 }
 
 /* dealloc

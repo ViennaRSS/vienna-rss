@@ -26,7 +26,7 @@
 /* init
  * Initialise a new ActivityItem object
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -145,7 +145,7 @@
 /* init
  * Initialise a new log instance.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -160,7 +160,7 @@
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] integerValue]];
+	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
 	ActivityItem * item = [self itemByName:[folder name]];
 	[log removeObject:item];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
@@ -201,7 +201,7 @@
 		[item setName:theName];
 		[log insertObject:item atIndex:insertionIndex];
 		
-		item = [log objectAtIndex:insertionIndex];
+		item = log[insertionIndex];
 	}
 	return item;
 }

@@ -22,6 +22,6 @@
 
 @interface NSCalendarDate (CalendarExtensions)
 	+(NSCalendarDate *)today;
-	-(NSString *)friendlyDescription;
+	@property (nonatomic, readonly, copy) NSString *friendlyDescription;
 @end
 

@@ -25,7 +25,7 @@
 /* init
  * Init an empty Field object.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -43,7 +43,7 @@
 /* initWithCoder
  * Initalises a decoded object
  */
--(id)initWithCoder:(NSCoder *)coder
+-(instancetype)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil)
 	{

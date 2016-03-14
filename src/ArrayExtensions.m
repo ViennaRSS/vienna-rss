@@ -30,9 +30,9 @@
 -(NSUInteger)indexOfStringInArray:(NSString *)theString
 {
 	NSUInteger index = 0;
-	while (index < [self count])
+	while (index < self.count)
 	{
-		NSString * aString = [self objectAtIndex:index];
+		NSString * aString = self[index];
 		NSAssert([aString isKindOfClass:[NSString class]], @"Not an NSString object in the array!");
 		if ([aString isEqualToString:theString])
 			return index;

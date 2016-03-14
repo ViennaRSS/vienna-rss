@@ -54,12 +54,12 @@
 	[tabBarControl setUseOverflowMenu:YES];
 	[tabBarControl setAllowsBackgroundTabClosing:YES];
 	[tabBarControl setAutomaticallyAnimates:NO];
-	[tabBarControl setCellMinWidth:60];
-	[tabBarControl setCellMaxWidth:350];
+	tabBarControl.cellMinWidth = 60.0;
+	tabBarControl.cellMaxWidth = 350.0;
 
 	[tabBarControl setShowAddTabButton:YES];
-	[[tabBarControl addTabButton] setTarget:[NSApp delegate]];
-	[[tabBarControl addTabButton] setAction:@selector(newTab:)];
+	tabBarControl.addTabButton.target = NSApp.delegate;
+	tabBarControl.addTabButton.action = @selector(newTab:);
 }
 
 /* stringForToolTip
@@ -69,7 +69,7 @@
  */
 -(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
 {
-	return [[tabView tabViewItemWithIdentifier:(__bridge NSView *)userData] label];
+	return [tabView tabViewItemWithIdentifier:(__bridge NSView *)userData].label;
 }
 
 /* setPrimaryTabItemView
@@ -90,8 +90,8 @@
 		item = [tabView tabViewItemWithIdentifier:primaryTabItemView];
 	}
 	
-	[item setIdentifier:newPrimaryTabItemView];
-	[item setView:newPrimaryTabItemView];
+	item.identifier = newPrimaryTabItemView;
+	item.view = newPrimaryTabItemView;
 	
 	primaryTabItemView = newPrimaryTabItemView;
 	
@@ -104,7 +104,7 @@
  */
 -(NSView<BaseView> *)activeTabItemView
 {
-	return [[tabView selectedTabViewItem] identifier];
+	return tabView.selectedTabViewItem.identifier;
 }
 
 /* setActiveTabToPrimaryTab
@@ -130,7 +130,7 @@
 -(void)createNewTabWithView:(NSView<BaseView> *)newTabView makeKey:(BOOL)keyIt
 {
 	NSTabViewItem *tabViewItem = [[NSTabViewItem alloc] initWithIdentifier:newTabView];
-	[tabViewItem setView:newTabView];
+	tabViewItem.view = newTabView;
 	[tabView addTabViewItem:tabViewItem];
 
 	if (keyIt) [self showTabItemView:newTabView];
@@ -141,7 +141,7 @@
  */
 -(void)setTabItemViewTitle:(NSView *)inTabView title:(NSString *)newTitle
 {
-	[[tabView tabViewItemWithIdentifier:inTabView] setLabel:newTitle];
+	[tabView tabViewItemWithIdentifier:inTabView].label = newTitle;
 }
 
 /* tabTitle
@@ -149,7 +149,7 @@
  */
 -(NSString *)tabItemViewTitle:(NSView *)tabItemView
 {
-	return [[tabView tabViewItemWithIdentifier:tabItemView] label];
+	return [tabView tabViewItemWithIdentifier:tabItemView].label;
 }
 
 /* closeAllTabs
@@ -157,11 +157,11 @@
  */
 -(void)closeAllTabs
 {
-	NSInteger count = [tabView numberOfTabViewItems];
+	NSInteger count = tabView.numberOfTabViewItems;
 	NSInteger i;
 	for ((i = (count - 1)); i >= 0; i--) {
 		NSTabViewItem * item = [tabView tabViewItemAtIndex:i];
-		if ([item identifier] != primaryTabItemView)
+		if (item.identifier != primaryTabItemView)
 		{
 			[tabView removeTabViewItem:item];
 		}
@@ -178,7 +178,7 @@
 		NSTabViewItem *tabViewItem = [tabView tabViewItemWithIdentifier:tabItemView];
 		NSInteger oldIndex = [tabView indexOfTabViewItem:tabViewItem];
 
-		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
+		if (tabView.numberOfTabViewItems > (oldIndex + 1)) {
 			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
 		}
 		
@@ -188,14 +188,14 @@
 
 - (BOOL)tabView:(NSTabView *)inTabView shouldCloseTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	if ([tabViewItem identifier] == primaryTabItemView)
+	if (tabViewItem.identifier == primaryTabItemView)
 	{
 		return NO;
 	}
 	else
 	{
 		NSInteger oldIndex = [tabView indexOfTabViewItem:tabViewItem];
-		if ([tabView numberOfTabViewItems] > (oldIndex + 1)) {
+		if (tabView.numberOfTabViewItems > (oldIndex + 1)) {
 			[tabView selectTabViewItemAtIndex:(oldIndex + 1)];
 		}
 		
@@ -208,7 +208,7 @@
  */
 -(NSInteger)countOfTabs
 {
-	return [tabView numberOfTabViewItems];
+	return tabView.numberOfTabViewItems;
 }
 
 /* showTabVew
@@ -227,7 +227,7 @@
  */
 -(void)showPreviousTab
 {
-	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 0)
+	if ([tabView indexOfTabViewItem:tabView.selectedTabViewItem] == 0)
 		[tabView selectLastTabViewItem:self];
 	else
 		[tabView selectPreviousTabViewItem:self];
@@ -239,7 +239,7 @@
  */
 -(void)showNextTab
 {
-	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == ([tabView numberOfTabViewItems] - 1))
+	if ([tabView indexOfTabViewItem:tabView.selectedTabViewItem] == (tabView.numberOfTabViewItems - 1))
 		[tabView selectFirstTabViewItem:self];
 	else
 		[tabView selectNextTabViewItem:self];
@@ -250,7 +250,7 @@
  */
 -(void)tabView:(NSTabView *)inTabView didSelectTabViewItem:(NSTabViewItem *)inTabViewItem
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:[inTabViewItem identifier]];	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_TabChanged" object:inTabViewItem.identifier];	
 }
 
 - (void)tabViewDidChangeNumberOfTabViewItems:(NSTabView *)tabView
@@ -264,7 +264,7 @@
  */
 -(BOOL)tabView:(NSTabView *)aTabView disableTabCloseForTabViewItem:(NSTabViewItem *)tabViewItem
 {
-	return ([tabViewItem identifier] == primaryTabItemView);
+	return (tabViewItem.identifier == primaryTabItemView);
 }
 
 /* tabView:shouldDragTabViewItem:fromTabBar:
@@ -307,9 +307,9 @@
 {
 	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:[self countOfTabs]];
 	
-	for (NSTabViewItem * tabViewItem in [tabView tabViewItems])
+	for (NSTabViewItem * tabViewItem in tabView.tabViewItems)
 	{
-		NSView<BaseView> * theView = [tabViewItem identifier];
+		NSView<BaseView> * theView = tabViewItem.identifier;
 		NSString * tabLink = [theView viewLink];
 		if (tabLink != nil)
 			[tabLinks addObject:tabLink];			

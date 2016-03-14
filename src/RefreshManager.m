@@ -64,7 +64,7 @@
 /* init
  * Initialise the class.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -75,10 +75,10 @@
 		networkQueue = [[ASINetworkQueue alloc] init];
 		[networkQueue setShouldCancelAllRequestsOnFailure:NO];
 		networkQueue.delegate = self;
-		[networkQueue setRequestDidFinishSelector:@selector(nqRequestFinished:)];
-		[networkQueue setRequestDidStartSelector:@selector(nqRequestStarted:)];
-		[networkQueue setQueueDidFinishSelector:@selector(nqQueueDidFinishSelector:)];
-		[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
+		networkQueue.requestDidFinishSelector = @selector(nqRequestFinished:);
+		networkQueue.requestDidStartSelector = @selector(nqRequestStarted:);
+		networkQueue.queueDidFinishSelector = @selector(nqQueueDidFinishSelector:);
+		networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
 
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
@@ -86,7 +86,7 @@
 		[nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:@"MA_Notify_WillDeleteFolder" object:nil];
 		[nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
 		// be notified on system wake up after sleep
-		[[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(handleDidWake:) name:@"NSWorkspaceDidWakeNotification" object:nil];
+		[[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:) name:@"NSWorkspaceDidWakeNotification" object:nil];
 		_queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
 		hasStarted = NO;
 	}
@@ -108,7 +108,7 @@
 }
 
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[APPCONTROLLER setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
 	LLog(@"Removed queue: %d", [networkQueue requestsCount]);
 }
@@ -120,7 +120,7 @@
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
 	}
 
-	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),[networkQueue requestsCount],NSLocalizedString(@"Refreshing subscriptions...", nil)];
+	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[APPCONTROLLER setStatusMessage:[self statusMessageDuringRefresh] persist:YES];
 	LLog(@"Added queue: %d", [networkQueue requestsCount]);
 
@@ -144,7 +144,7 @@
 -(void)handleChangeConcurrentDownloads:(NSNotification *)nc
 {
 	NSLog(@"Handling new downloads count");
-	[networkQueue setMaxConcurrentOperationCount:[[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads]];
+	networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
 }
 
 /* handleWillDeleteFolder
@@ -156,11 +156,11 @@
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] integerValue]];
+	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
 	if (folder != nil)
 	{
-        for (ASIHTTPRequest *theRequest in [networkQueue operations]) {
-			if ([[theRequest userInfo] objectForKey:@"folder"] == folder) {
+        for (ASIHTTPRequest *theRequest in networkQueue.operations) {
+			if (theRequest.userInfo[@"folder"] == folder) {
 				[self removeConnection:theRequest];
 				break;
 			}
@@ -171,7 +171,7 @@
 
 -(void)handleDidWake:(NSNotification *)nc
 {
-	NSString * currentAddress = [[NSHost currentHost] address] ;
+	NSString * currentAddress = [NSHost currentHost].address ;
 	if (![currentAddress isEqualToString:riskyIPAddress])
 	{
 		// we might have moved to a new network
@@ -320,9 +320,9 @@
  */
 -(BOOL)isRefreshingFolder:(Folder *)folder ofType:(RefreshTypes)type
 {
-    for (ASIHTTPRequest *theRequest in [networkQueue operations])
+    for (ASIHTTPRequest *theRequest in networkQueue.operations)
     {
-		if (([[theRequest userInfo] objectForKey:@"folder"] == folder) && ([[[theRequest userInfo] valueForKey:@"type"] integerValue] == [[NSNumber numberWithInteger:type] integerValue]))
+		if ((theRequest.userInfo[@"folder"] == folder) && ([[theRequest.userInfo valueForKey:@"type"] integerValue] == @(type).integerValue))
             return YES;
 
 	}
@@ -364,10 +364,10 @@
 	// Pull next folder out of the queue. The UI will post a
 	// notification when it is done and we can move on to the
 	// next one.
-	if ([authQueue count] > 0 && ![[credentialsController window] isVisible])
+	if (authQueue.count > 0 && !credentialsController.window.visible)
 	{
-		Folder * folder = [authQueue objectAtIndex:0];
-		[credentialsController credentialsForFolder:[NSApp mainWindow] folder:folder];
+		Folder * folder = authQueue[0];
+		[credentialsController credentialsForFolder:NSApp.mainWindow folder:folder];
 	}
 }
 
@@ -377,7 +377,7 @@
  */
 -(void)handleRequireAuthenticationForFolder:(NSNotification *)nc
 {
-	Folder * folder = (Folder *)[nc object];
+	Folder * folder = (Folder *)nc.object;
 	if (![authQueue containsObject:folder])
 		[authQueue addObject:folder];
 	[self getCredentialsForFolder];
@@ -389,7 +389,7 @@
  */
 -(void)handleCancelAuthenticationForFolder:(NSNotification *)nc
 {
-	Folder * folder = (Folder *)[nc object];
+	Folder * folder = (Folder *)nc.object;
 	[authQueue removeObject:folder];
     
 	// Get the next one in the queue, if any
@@ -403,10 +403,10 @@
  */
 -(void)handleGotAuthenticationForFolder:(NSNotification *)nc
 {
-	Folder * folder = (Folder *)[nc object];
+	Folder * folder = (Folder *)nc.object;
     [[Database sharedManager] clearFlag:MA_FFlag_NeedCredentials forFolder:folder.itemId];
 	[authQueue removeObject:folder];
-	[self refreshSubscriptions:[NSArray arrayWithObject:folder] ignoringSubscriptionStatus:YES];
+	[self refreshSubscriptions:@[folder] ignoringSubscriptionStatus:YES];
 	
 	// Get the next one in the queue, if any
 	[self getCredentialsForFolder];
@@ -422,7 +422,7 @@
 		[folder setNonPersistedFlag:MA_FFlag_Error];
 	else
 		[folder clearNonPersistedFlag:MA_FFlag_Error];
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[folder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@([folder itemId])];
 }
 
 /* setFolderUpdatingFlag
@@ -435,7 +435,7 @@
 		[folder setNonPersistedFlag:MA_FFlag_Updating];
 	else
 		[folder clearNonPersistedFlag:MA_FFlag_Updating];
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[folder itemId]]];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@([folder itemId])];
 }
 
 /* pumpSubscriptionRefresh
@@ -463,7 +463,7 @@
 	NSURL * url = nil;
 	
 	if ([urlString hasPrefix:@"file://"])
-		url = [NSURL fileURLWithPath:[[urlString substringFromIndex:7] stringByExpandingTildeInPath]];
+		url = [NSURL fileURLWithPath:[urlString substringFromIndex:7].stringByExpandingTildeInPath];
 	else if ([urlString hasPrefix:@"feed://"])
 		url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]]];
 	else
@@ -505,24 +505,24 @@
         {
             [myRequest addRequestHeader:@"If-Modified-Since" value:theLastUpdateString];
         }
-		[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInteger:MA_Refresh_Feed], @"type", nil]];
+		myRequest.userInfo = @{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed)};
 		if (![[folder username] isEqualToString:@""])
 		{
-			[myRequest setUsername:[folder username]];
-			[myRequest setPassword:[folder password]];
+			myRequest.username = [folder username];
+			myRequest.password = [folder password];
 			[myRequest setUseCookiePersistence:NO];
 		}
-		[myRequest setDelegate:self];
-		[myRequest setDidFinishSelector:@selector(folderRefreshCompleted:)];
-		[myRequest setDidFailSelector:@selector(folderRefreshFailed:)];
-		[myRequest setWillRedirectSelector:@selector(folderRefreshRedirect:)];
+		myRequest.delegate = self;
+		myRequest.didFinishSelector = @selector(folderRefreshCompleted:);
+		myRequest.didFailSelector = @selector(folderRefreshFailed:);
+		myRequest.willRedirectSelector = @selector(folderRefreshRedirect:);
 		[myRequest addRequestHeader:@"Accept" value:@"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"];
 	} else { // Open Reader feed
 		myRequest = [[GoogleReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
 	}
-	[myRequest setTimeOutSeconds:180];
+	myRequest.timeOutSeconds = 180;
 	// hack for handling file:// URLs
-	if ([url isFileURL]) {
+	if (url.fileURL) {
 		[self folderRefreshCompleted:myRequest];
 	} else {
 		[self addConnection:myRequest];
@@ -534,16 +534,16 @@
 - (void)folderRefreshFailed:(ASIHTTPRequest *)request
 
 {	LOG_EXPR([request error]);
-	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
-	if ([[request error] code] == ASIAuthenticationErrorType) //Error caused by lack of authentication
+	Folder * folder = (Folder *)request.userInfo[@"folder"];
+	if (request.error.code == ASIAuthenticationErrorType) //Error caused by lack of authentication
 	{
 		if (![authQueue containsObject:folder])
 			[authQueue addObject:folder];
 		[self getCredentialsForFolder];
 	}
-    ActivityItem * aItem = (ActivityItem *)[[request userInfo] objectForKey:@"log"];
+    ActivityItem * aItem = (ActivityItem *)request.userInfo[@"log"];
 	[self setFolderErrorFlag:folder flag:YES];
-	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),[[request error] localizedDescription ]]];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS feed:", nil),request.error.localizedDescription ]];
 	[aItem setStatus:NSLocalizedString(@"Error",nil)];
 	[self syncFinishedForFolder:folder];
 }
@@ -568,10 +568,10 @@
 	} 
 
 	ASIHTTPRequest *myRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:favIconPath]];
-	[myRequest setDelegate:self];
-	[myRequest setDidFinishSelector:@selector(iconRequestDone:)];
-	[myRequest setDidFailSelector:@selector(iconRequestFailed:)];
-	[myRequest setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:folder, @"folder", aItem, @"log", [NSNumber numberWithInteger:MA_Refresh_FavIcon], @"type", nil]];
+	myRequest.delegate = self;
+	myRequest.didFinishSelector = @selector(iconRequestDone:);
+	myRequest.didFailSelector = @selector(iconRequestFailed:);
+	myRequest.userInfo = @{@"folder": folder, @"log": aItem, @"type": @(MA_Refresh_FavIcon)};
 	[self addConnection:myRequest];
 
 }
@@ -579,28 +579,28 @@
 // success callback
 - (void)iconRequestDone:(ASIHTTPRequest *)request
 {
-	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];	
+	Folder * folder = (Folder *)request.userInfo[@"folder"];	
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
 	[self setFolderUpdatingFlag:folder flag:NO];
-	if ([request responseStatusCode] == 404) {
+	if (request.responseStatusCode == 404) {
 		[aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
-	} else if ([request responseStatusCode] == 200) {
+	} else if (request.responseStatusCode == 200) {
 		
 		NSImage * iconImage = [[NSImage alloc] initWithData:[request responseData]];
-		if (iconImage != nil && [iconImage isValid])
+		if (iconImage != nil && iconImage.valid)
 		{
-			[iconImage setSize:NSMakeSize(16, 16)];
+			iconImage.size = NSMakeSize(16, 16);
 			[folder setImage:iconImage];
 			
 			// Broadcast a notification since the folder image has now changed
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:[NSNumber numberWithInteger:[folder itemId]]];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@([folder itemId])];
 			
 			// Log additional details about this.
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), [request url]]];
-			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [[request responseData] length]]];
+			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Folder image retrieved from %@", nil), request.url]];
+			[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [request responseData].length]];
 		}
 	} else {
-		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), [request responseStatusCode]]];
+		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
 	}
 
     [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
@@ -610,9 +610,9 @@
 // failure callback
 - (void)iconRequestFailed:(ASIHTTPRequest *)request
 {
-	Folder * folder = (Folder *)[[request userInfo] objectForKey:@"folder"];
+	Folder * folder = (Folder *)request.userInfo[@"folder"];
 	ActivityItem * aItem = [[ActivityLog defaultLog] itemByName:[folder name]];
-	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),[[request error] localizedDescription ]]];
+	[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error retrieving RSS Icon:", nil),request.error.localizedDescription ]];
     [[Database sharedManager] clearFlag:MA_FFlag_CheckForImage forFolder:folder.itemId];
 }
 
@@ -633,21 +633,21 @@
 -(void)folderRefreshRedirect:(ASIHTTPRequest *)connector
 {
 
-	NSURL *newURL = [NSURL URLWithString:[[connector responseHeaders] valueForKey:@"Location"] relativeToURL:[connector url]];
-	NSInteger responseStatusCode = [connector responseStatusCode];
+	NSURL *newURL = [NSURL URLWithString:[connector.responseHeaders valueForKey:@"Location"] relativeToURL:connector.url];
+	NSInteger responseStatusCode = connector.responseStatusCode;
 
 	if (responseStatusCode == 301)
 	{
 		// We got a permanent redirect from the feed so change the feed URL to the new location.
-		Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
-		ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
+		Folder * folder = (Folder *)connector.userInfo[@"folder"];
+		ActivityItem *connectorItem = connector.userInfo[@"log"];
 
-        if ([[newURL host] isEqualToString:[[connector originalURL] host]] || [self canTrust301Redirects:connector])
+        if ([newURL.host isEqualToString:connector.originalURL.host] || [self canTrust301Redirects:connector])
         {
 			[[Database sharedManager] setFeedURL:newURL.absoluteString
 									   forFolder:folder.itemId];
 		
-			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), [newURL absoluteString]]];
+			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Feed URL updated to %@", nil), newURL.absoluteString]];
 		}
 		else
 			[connectorItem appendDetail:NSLocalizedString(@"Redirection attempt treated as temporary for safety concern", nil)];
@@ -658,22 +658,22 @@
 
 -(BOOL)canTrust301Redirects:(ASIHTTPRequest *)connector
 {
-    if (unsafe301RedirectionTimer == nil || ![unsafe301RedirectionTimer isValid])
+    if (unsafe301RedirectionTimer == nil || !unsafe301RedirectionTimer.valid)
     {
-    	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", [[connector originalURL] scheme]]];
+    	NSURL * testURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://www.example.com", connector.originalURL.scheme]];
     	ASIHTTPRequest * testRequest = [ASIHTTPRequest requestWithURL:testURL];
 		[testRequest setUseCookiePersistence:NO];
-		[testRequest setTimeOutSeconds:180];
+		testRequest.timeOutSeconds = 180;
 		[testRequest startSynchronous];
 
-		if ([testRequest responseStatusCode] == 301 || [testRequest error])
+		if (testRequest.responseStatusCode == 301 || testRequest.error)
 		{
     		// there is no valid reason for www.example.com to be permanently redirected
     		// (cf RFC 6761 http://www.iana.org/go/rfc6761)
     		// so we probably have a misconfigured router / proxy
     		// and we will not consider 301 redirections as permanent for 24 hours
     		unsafe301RedirectionTimer = [NSTimer scheduledTimerWithTimeInterval:24*3600 target:self selector:@selector(resetUnsafe301Timer:) userInfo:nil repeats:NO];
-    		riskyIPAddress = [[NSHost currentHost] address];
+    		riskyIPAddress = [NSHost currentHost].address;
     		return NO;
     	}
     	else
@@ -700,27 +700,27 @@
 {
 	dispatch_async(_queue, ^() {
 		
-	Folder * folder = (Folder *)[[connector userInfo] objectForKey:@"folder"];
-	ActivityItem *connectorItem = [[connector userInfo] objectForKey:@"log"];
-	NSInteger responseStatusCode = [connector responseStatusCode];
-	NSURL *url = [connector url];
-	BOOL isCancelled = [connector isCancelled];
+	Folder * folder = (Folder *)connector.userInfo[@"folder"];
+	ActivityItem *connectorItem = connector.userInfo[@"log"];
+	NSInteger responseStatusCode = connector.responseStatusCode;
+	NSURL *url = connector.url;
+	BOOL isCancelled = connector.cancelled;
 	NSInteger folderId = [folder itemId];
 	Database * dbManager = [Database sharedManager];
 	
      // hack for handling file:// URLs
-	if ([url isFileURL])
+	if (url.fileURL)
 	{
 		NSFileManager *fileManager = [NSFileManager defaultManager];
-		NSString *filePath = [[url path] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSString *filePath = [url.path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		BOOL isDirectory = NO;
 		if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory] && !isDirectory)
 		{
         	responseStatusCode = 200;
 			NSData * receivedData = [NSData dataWithContentsOfFile:filePath];
-			[connector setRawResponseData:[NSMutableData dataWithContentsOfFile:filePath]];
-			[connector setContentLength:[receivedData length]];
-			[connector setTotalBytesRead:[receivedData length]];
+			connector.rawResponseData = [NSMutableData dataWithContentsOfFile:filePath];
+			connector.contentLength = receivedData.length;
+			connector.totalBytesRead = receivedData.length;
 		} else {
 			responseStatusCode = 404;
 		}
@@ -762,15 +762,15 @@
 	{
 				
 		NSData * receivedData = [connector responseData];
-		NSString * lastModifiedString = [[connector responseHeaders] valueForKey:@"Last-Modified"];
-				
-		[self finalizeFolderRefresh:[NSDictionary dictionaryWithObjectsAndKeys:
-																					folder, @"folder", 
-																					connectorItem, @"log", 
-																					url, @"url",
-																					receivedData, @"data",
-																					lastModifiedString, @"lastModifiedString",
-																					nil]];
+		NSString * lastModifiedString = [connector.responseHeaders valueForKey:@"Last-Modified"];
+		
+		[self finalizeFolderRefresh:@{
+									  @"folder": folder,
+									  @"log": connectorItem,
+									  @"url": url,
+									  @"data": receivedData,
+									  @"lastModifiedString": lastModifiedString,
+		 }];
 	}
 	else	//other HTTP response codes like 404, 403...
 	{
@@ -788,13 +788,13 @@
 {	
 	
 	ZAssert(parameters!=NULL, @"Null");
-	Folder * folder = (Folder *)[parameters objectForKey:@"folder"];
+	Folder * folder = (Folder *)parameters[@"folder"];
 	NSInteger folderId = [folder itemId];
 	Database * dbManager = [Database sharedManager];
-	ActivityItem *connectorItem = [parameters objectForKey:@"log"];
-	NSURL *url = [parameters objectForKey:@"url"];
-	NSData * receivedData = [parameters objectForKey:@"data"];
-	NSString * lastModifiedString = [parameters objectForKey:@"lastModifiedString"];
+	ActivityItem *connectorItem = parameters[@"log"];
+	NSURL *url = parameters[@"url"];
+	NSData * receivedData = parameters[@"data"];
+	NSString * lastModifiedString = parameters[@"lastModifiedString"];
     
 	// Check whether this is an HTML redirect. If so, create a new connection using
 	// the redirect.
@@ -804,10 +804,10 @@
 
 		if (redirectURL != nil)
 		{
-			if ([redirectURL isEqualToString:[url absoluteString]])
+			if ([redirectURL isEqualToString:url.absoluteString])
 			{
 				// To prevent an infinite loop, don't redirect to the same URL.
-				[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), [url absoluteString]]];
+				[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"Improper infinitely looping URL redirect to %@", nil), url.absoluteString]];
 			}
 			else
 			{
@@ -820,7 +820,7 @@
 		// Empty data feed is OK if we got HTTP 200
 		__block NSUInteger newArticlesFromFeed = 0;
 		RichXMLParser * newFeed = [[RichXMLParser alloc] init];
-		if ([receivedData length] > 0)
+		if (receivedData.length > 0)
 		{
 			Preferences * standardPreferences = [Preferences standardPreferences];
 			if ([standardPreferences shouldSaveFeedSource])
@@ -855,9 +855,9 @@
 			}
             
 			// Log number of bytes we received
-			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), [receivedData length]]];
+			[connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%ld bytes received", nil), receivedData.length]];
 			
-			if([[newFeed items] count] == 0)
+			if([newFeed items].count == 0)
 			{
 				// Mark the feed as empty
 				[self setFolderErrorFlag:folder flag:YES];
@@ -874,7 +874,7 @@
 			if (feedLink == nil || [feedLink isBlank])
 				feedLink = [[folder feedURL] baseURL];
 			if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"])
-				feedLink = [[NSURL URLWithString:feedLink relativeToURL:url] absoluteString];
+				feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
 
 			
 			// We'll be collecting articles into this array
@@ -909,22 +909,22 @@
 				if (articleIndex != NSNotFound)
 				{
 					// We rebuild complex guids which should eliminate most duplicates
-					Article * firstFoundArticle = [articleArray objectAtIndex:articleIndex];
+					Article * firstFoundArticle = articleArray[articleIndex];
                     if (articleDate == nil) {
 						// first, hack the initial article (which is probably the first loaded / most recent one)
 						NSString * firstFoundArticleNewGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, [firstFoundArticle link], [firstFoundArticle title]];
 						[firstFoundArticle setGuid:firstFoundArticleNewGuid];
-						[articleGuidArray replaceObjectAtIndex:articleIndex withObject:firstFoundArticleNewGuid];
+						articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
 						// then hack the guid for the item being processed
 						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, [newsItem link], [newsItem title]];
                     }
                     else {
 						// first, hack the initial article (which is probably the first loaded / most recent one)
-						NSString * firstFoundArticleNewGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId, [NSString stringWithFormat:@"%1.3f", [[firstFoundArticle date] timeIntervalSince1970]], [firstFoundArticle link], [firstFoundArticle title]];
+						NSString * firstFoundArticleNewGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId, [NSString stringWithFormat:@"%1.3f", [firstFoundArticle date].timeIntervalSince1970], [firstFoundArticle link], [firstFoundArticle title]];
 						[firstFoundArticle setGuid:firstFoundArticleNewGuid];
-						[articleGuidArray replaceObjectAtIndex:articleIndex withObject:firstFoundArticleNewGuid];
+						articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
 						// then hack the guid for the item being processed
-						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId, [NSString stringWithFormat:@"%1.3f", [articleDate timeIntervalSince1970]], [newsItem link], [newsItem title]];
+						articleGuid = [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId, [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], [newsItem link], [newsItem title]];
                     }
 				}
 				[articleGuidArray addObject:articleGuid];
@@ -945,14 +945,14 @@
 				[article setTitle:[newsItem title]];
 				NSString * articleLink = [newsItem link];
 				if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"])
-					articleLink = [[NSURL URLWithString:articleLink relativeToURL:url] absoluteString];
+					articleLink = [NSURL URLWithString:articleLink relativeToURL:url].absoluteString;
 				if (articleLink == nil)
 					articleLink = feedLink;
 				[article setLink:articleLink];
 				[article setDate:articleDate];
 				NSString * enclosureLink = [newsItem enclosure];
 				if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"])
-					enclosureLink = [[NSURL URLWithString:enclosureLink relativeToURL:url] absoluteString];
+					enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;
 				[article setEnclosure:enclosureLink];
 				if ([enclosureLink isNotEqualTo:@""])
 				{
@@ -963,7 +963,7 @@
 			
 			
 			// Here's where we add the articles to the database
-			if ([articleArray count] > 0u)
+			if (articleArray.count > 0u)
 			{
 				NSArray * guidHistory = [dbManager guidHistoryForFolderId:folderId];
 				for (Article * article in articleArray)
@@ -1042,8 +1042,8 @@
  */
 -(NSString *)getRedirectURL:(NSData *)data
 {
-	const char * scanPtr = [data bytes];
-	const char * scanPtrEnd = scanPtr + [data length];
+	const char * scanPtr = data.bytes;
+	const char * scanPtrEnd = scanPtr + data.length;
 	
 	// Make sure this is HTML otherwise this is likely just valid
 	// XML and we can ignore everything else.
@@ -1127,9 +1127,9 @@
  */
 -(void)addConnection:(ASIHTTPRequest *)conn
 {
-	if (![[networkQueue operations] containsObject:conn]) {
+	if (![networkQueue.operations containsObject:conn]) {
 		[networkQueue addOperation:conn];
-		if ([networkQueue requestsCount] == 1) // networkQueue is NOT YET started
+		if (networkQueue.requestsCount == 1) // networkQueue is NOT YET started
 		{
 			countOfNewArticles = 0;
 			[networkQueue go];
@@ -1144,7 +1144,7 @@
 -(void)removeConnection:(ASIHTTPRequest *)conn
 {
 	NSAssert([networkQueue requestsCount] > 0, @"Calling removeConnection with zero active connection count");
-	if ([[networkQueue operations] containsObject:conn])
+	if ([networkQueue.operations containsObject:conn])
 	{
 		// Close the connection before we release as otherwise it leaks
 		[conn clearDelegatesAndCancel];
@@ -1154,7 +1154,7 @@
 
 -(BOOL)isConnecting
 {
-	return [networkQueue requestsCount] > 0;
+	return networkQueue.requestsCount > 0;
 }
 
 

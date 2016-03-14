@@ -57,7 +57,7 @@
 -(IBAction)doGoogleOption:(id)sender;
 
 // General functions
--(id)initWithDatabase:(Database *)newDb;
+-(instancetype)initWithDatabase:(Database *)newDb /*NS_DESIGNATED_INITIALIZER*/;
 -(void)newSubscription:(NSWindow *)window underParent:(NSInteger)itemId initialURL:(NSString *)initialURL;
 -(void)editSubscription:(NSWindow *)window folderId:(NSInteger)folderId;
 

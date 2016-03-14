@@ -25,8 +25,8 @@
 	-(void)selectFolderWithFilter:(NSInteger)newFolderId;
 	-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 	-(void)refreshFolder:(NSInteger)refreshFlag;
-	-(Article *)selectedArticle;
-	-(NSArray *)markedArticleRange;
+	@property (nonatomic, readonly, strong) Article *selectedArticle;
+	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
 	-(void)displayFirstUnread;

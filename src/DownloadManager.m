@@ -35,7 +35,7 @@
 /* init
  * Initialise a new DownloadItem object
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -54,7 +54,7 @@
  * Initalises a decoded object. All decoded objects are assumed to be
  * completed downloads.
  */
--(id)initWithCoder:(NSCoder *)coder
+-(instancetype)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil)
 	{
@@ -166,12 +166,12 @@
 {
 	if (image == nil)
 	{
-		image = [[NSWorkspace sharedWorkspace] iconForFileType:[[self filename] pathExtension]];
-		if (![image isValid])
+		image = [[NSWorkspace sharedWorkspace] iconForFileType:[self filename].pathExtension];
+		if (!image.valid)
 			image = nil;
 		else
 		{
-			[image setSize:NSMakeSize(32, 32)];
+			image.size = NSMakeSize(32, 32);
 		}
 	}
 	return image;
@@ -225,7 +225,7 @@
 /* init
  * Initialise the DownloadManager object.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -256,10 +256,10 @@
  */
 -(void)clearList
 {
-	NSInteger index = [downloadsList count] - 1;
+	NSInteger index = downloadsList.count - 1;
 	while (index >= 0)
 	{
-		DownloadItem * item = [downloadsList objectAtIndex:index--];
+		DownloadItem * item = downloadsList[index--];
 		if ([item state] != DOWNLOAD_STARTED)
 			[downloadsList removeObject:item];
 	}
@@ -272,7 +272,7 @@
  */
 -(void)archiveDownloadsList
 {
-	NSMutableArray * listArray = [[NSMutableArray alloc] initWithCapacity:[downloadsList count]];
+	NSMutableArray * listArray = [[NSMutableArray alloc] initWithCapacity:downloadsList.count];
 
 	for (DownloadItem * item in downloadsList)
 		[listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
@@ -321,7 +321,7 @@
  */
 -(void)downloadFileFromURL:(NSString *)url
 {
-	NSString * filename = [[NSURL URLWithString:url] lastPathComponent];
+	NSString * filename = [NSURL URLWithString:url].lastPathComponent;
 	NSString * destPath = [DownloadManager fullDownloadPath:filename];
 	NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
@@ -346,10 +346,10 @@
  */
 -(DownloadItem *)itemForDownload:(NSURLDownload *)download
 {
-	NSInteger index = [downloadsList count] - 1;
+	NSInteger index = downloadsList.count - 1;
 	while (index >= 0)
 	{
-		DownloadItem * item = [downloadsList objectAtIndex:index--];
+		DownloadItem * item = downloadsList[index--];
 		if ([item download] == download)
 			return item;
 	}
@@ -371,7 +371,7 @@
 	if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir)
 		downloadPath = @"~/Desktop";
 	
-	return [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:decodedFilename];
+	return [downloadPath.stringByExpandingTildeInPath stringByAppendingPathComponent:decodedFilename];
 }
 
 /* isFileDownloaded
@@ -382,15 +382,15 @@
 {
     NSString * decodedFilename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	DownloadManager * downloadManager = [DownloadManager sharedInstance];
-	NSInteger count = [[downloadManager downloadsList] count];
+	NSInteger count = [downloadManager downloadsList].count;
 	NSInteger index;
 
-	NSString * firstFile = [decodedFilename stringByStandardizingPath];
+	NSString * firstFile = decodedFilename.stringByStandardizingPath;
 
 	for (index = 0; index < count; ++index)
 	{
-		DownloadItem * item = [[downloadManager downloadsList] objectAtIndex:index];
-		NSString * secondFile = [decodedFilename stringByStandardizingPath];
+		DownloadItem * item = [downloadManager downloadsList][index];
+		NSString * secondFile = decodedFilename.stringByStandardizingPath;
 		
 		if ([firstFile compare:secondFile options:NSCaseInsensitiveSearch] == NSOrderedSame)
 		{
@@ -428,7 +428,7 @@
 	}
 	[theItem setState:DOWNLOAD_STARTED];
 	if ([theItem filename] == nil)
-		[theItem setFilename:[[[download request] URL] path]];
+		[theItem setFilename:download.request.URL.path];
 
 	// Keep count of active downloads
 	++activeDownloads;
@@ -454,12 +454,12 @@
 	[self notifyDownloadItemChange:theItem];
 	[self archiveDownloadsList];
 
-	NSString * filename = [[theItem filename] lastPathComponent];
+	NSString * filename = [theItem filename].lastPathComponent;
 	if (filename == nil)
 		filename = [theItem filename];
 
 	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:[NSNumber numberWithInteger:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
+	[contextDict setValue:@MA_GrowlContext_DownloadCompleted forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
 	[APPCONTROLLER growlNotify:contextDict
@@ -484,12 +484,12 @@
 	[self notifyDownloadItemChange:theItem];
 	[self archiveDownloadsList];
 
-	NSString * filename = [[theItem filename] lastPathComponent];
+	NSString * filename = [theItem filename].lastPathComponent;
 	if (filename == nil)
 		filename = [theItem filename];
 
 	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:[NSNumber numberWithInteger:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
+	[contextDict setValue:@MA_GrowlContext_DownloadFailed forKey:@"ContextType"];
 	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
 	
 	[APPCONTROLLER growlNotify:contextDict
@@ -521,7 +521,7 @@
 -(void)download:(NSURLDownload *)download didReceiveResponse:(NSURLResponse *)response
 {
 	DownloadItem * theItem = [self itemForDownload:download];
-	[theItem setExpectedSize:[response expectedContentLength]];
+	[theItem setExpectedSize:response.expectedContentLength];
 	[self notifyDownloadItemChange:theItem];
 }
 
@@ -561,8 +561,8 @@
 	// Hack for certain compression types that are converted to .txt extension when
 	// downloaded. SITX is the only one I know about.
 	DownloadItem * theItem = [self itemForDownload:download];
-	if ([[[theItem filename] pathExtension] isEqualToString:@"sitx"] && [[filename pathExtension] isEqualToString:@"txt"])
-		destPath = [destPath stringByDeletingPathExtension];
+	if ([[theItem filename].pathExtension isEqualToString:@"sitx"] && [filename.pathExtension isEqualToString:@"txt"])
+		destPath = destPath.stringByDeletingPathExtension;
 
 	// Save the filename
 	[download setDestination:destPath allowOverwrite:NO];
