@@ -117,6 +117,7 @@
 
 @end
 
+
 @implementation ActivityLog
 
 /* defaultLog
