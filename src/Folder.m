@@ -821,11 +821,11 @@ static NSArray * iconArray = nil;
  */
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
-	NSArray * folders = (APPCONTROLLER).folders;
+	NSArray * folders = APPCONTROLLER.folders;
 	NSUInteger index = [folders indexOfObjectIdenticalTo:self];
 	if (index != NSNotFound)
 	{
-		NSScriptObjectSpecifier *containerRef = (APPCONTROLLER).objectSpecifier;
+		NSScriptObjectSpecifier *containerRef = APPCONTROLLER.objectSpecifier;
 		return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)NSApp.classDescription containerSpecifier:containerRef key:@"folders" index:index];
 	}
 	return nil;

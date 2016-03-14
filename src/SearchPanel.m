@@ -41,7 +41,7 @@
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchPanel" owner:self topLevelObjects:&objects];
 		self.topObjects = objects;
-		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = (APPCONTROLLER).searchFieldMenu;
+		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
 	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
 	[NSApp beginSheet:searchPanelWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
@@ -62,9 +62,9 @@
  */
 -(IBAction)searchStringChanged:(id)sender;
 {
-	(APPCONTROLLER).searchString = searchField.stringValue;
+	APPCONTROLLER.searchString = searchField.stringValue;
 	
-	NSView<BaseView> * theView = (APPCONTROLLER).browserView.activeTabItemView;
+	NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
 		[theView performFindPanelAction:NSFindPanelActionSetFindString];

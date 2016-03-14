@@ -684,7 +684,7 @@ enum GoogleReaderStatus {
                 options:NSJSONReadingMutableContainers
                 error:&jsonError];
 	[localFeeds removeAllObjects];
-	NSArray * localFolders = (APPCONTROLLER).folders;
+	NSArray * localFolders = APPCONTROLLER.folders;
 	
 	for (Folder * f in localFolders) {
 		if (f.feedURL) {
@@ -749,7 +749,7 @@ enum GoogleReaderStatus {
 	}
 	
 	//check if we have a folder which is not registered as a Open Reader feed
-	for (Folder * f in (APPCONTROLLER).folders) {
+	for (Folder * f in APPCONTROLLER.folders) {
 		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:f.feedURL])
 		{
 			[[Database sharedManager] deleteFolder:f.itemId];

@@ -722,7 +722,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(void)updateArticleListRowHeight
 {
 	Database * db = [Database sharedManager];
-	CGFloat height = [(APPCONTROLLER).layoutManager defaultLineHeightForFont:articleListFont];
+	CGFloat height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:articleListFont];
 	NSInteger numberOfRowsInCell;
 
 	if (tableLayout == MA_Layout_Report)

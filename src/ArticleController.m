@@ -384,7 +384,7 @@
 {
 	
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	self.folderArrayOfArticles = [folder articlesWithFilter:(APPCONTROLLER).filterString];
+	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
 	
 	[self refilterArrayOfArticles];
 }

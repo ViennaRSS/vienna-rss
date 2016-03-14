@@ -297,8 +297,8 @@
  */
 -(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
 {	
-	NSView<BaseView> * theView = (APPCONTROLLER).browserView.activeTabItemView;
-	Article * thisArticle = (APPCONTROLLER).selectedArticle;
+	NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
+	Article * thisArticle = APPCONTROLLER.selectedArticle;
 	
 	if ([theView isKindOfClass:[BrowserPane class]])
 		return ((theView.viewLink != nil) && NSApp.active);
@@ -334,7 +334,7 @@
 				return;
 			
 			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = (APPCONTROLLER).browserView.activeTabItemView;
+			NSView<BaseView> * theView = APPCONTROLLER.browserView.activeTabItemView;
 			
 			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
@@ -360,7 +360,7 @@
 			else
 			{
 				// We can only work on one article, so ignore selection range.
-				Article * currentMessage = (APPCONTROLLER).selectedArticle;
+				Article * currentMessage = APPCONTROLLER.selectedArticle;
 				[urlString replaceString:@"$ArticleTitle$" withString: currentMessage.title];
 				
 				// URL shortening again, as above...

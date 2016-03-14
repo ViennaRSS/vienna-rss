@@ -188,7 +188,7 @@
 	cellFont = [NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize];
 	boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:cellFont];
 
-	height = [(APPCONTROLLER).layoutManager defaultLineHeightForFont:boldCellFont];
+	height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:boldCellFont];
 	outlineView.rowHeight = height + 5;
 	outlineView.intercellSpacing = NSMakeSize(10, 2);
 }
