@@ -167,14 +167,6 @@
 	return value;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	value=nil;
-	field=nil;
-}
 @end
 
 @implementation CriteriaTree
@@ -331,11 +323,4 @@
 	return criteriaDoc.XMLString;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	criteriaTree=nil;
-}
 @end

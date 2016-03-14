@@ -622,8 +622,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	arrayOfViews=nil;
-	nameToFieldMap=nil;
-	db=nil;
 }
 @end

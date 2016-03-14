@@ -2585,8 +2585,5 @@ const NSInteger MA_Current_DB_Version = 18;
 -(void)dealloc
 {
 	[self close];
-	searchString=nil;
-	foldersDict=nil;
-	smartfoldersDict=nil;
 }
 @end

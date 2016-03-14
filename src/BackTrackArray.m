@@ -114,11 +114,4 @@
 	++queueIndex;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	array=nil;
-}
 @end

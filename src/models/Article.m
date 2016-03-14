@@ -446,13 +446,4 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
     return (cond && hasOneTag) ? @"" : newString;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-    commentsArray=nil;
-    articleData=nil;
-}
-
 @end

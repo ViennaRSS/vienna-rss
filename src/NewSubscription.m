@@ -358,8 +358,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    sourcesDict=nil;
-    subscriptionModel=nil;
-	db=nil;
 }
 @end

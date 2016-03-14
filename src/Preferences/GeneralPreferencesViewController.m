@@ -460,7 +460,6 @@
  */
 -(void)dealloc
 {
-    appToPathMap=nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

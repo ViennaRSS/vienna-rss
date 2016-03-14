@@ -373,13 +373,4 @@
 	}
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	children=nil;
-	folder=nil;
-	progressIndicator=nil;
-}
 @end

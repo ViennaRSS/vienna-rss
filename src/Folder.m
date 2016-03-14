@@ -839,17 +839,6 @@ static NSArray * iconArray = nil;
 	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)itemId, self.name];
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	lastUpdate=nil;
-	attributes=nil;
-	cachedArticles=nil;
-	cachedGuids=nil;
-}
-
 #pragma mark NSCacheDelegate
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj
 {
