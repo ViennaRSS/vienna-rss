@@ -109,15 +109,15 @@
  */
 -(void)handleDoubleClick:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && [item state] == DOWNLOAD_COMPLETED)
+		if (item && item.state == DOWNLOAD_COMPLETED)
 		{
-			if ([[NSWorkspace sharedWorkspace] openFile:[DownloadManager fullDownloadPath:[item filename]]] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), [item filename].lastPathComponent);
+			if ([[NSWorkspace sharedWorkspace] openFile:[DownloadManager fullDownloadPath:item.filename]] == NO)
+				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
 		}
 	}
 }
@@ -127,15 +127,15 @@
  */
 -(void)showInFinder:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
 		DownloadItem * item = list[index];
-		if (item && [item state] == DOWNLOAD_COMPLETED)
+		if (item && item.state == DOWNLOAD_COMPLETED)
 		{
-			if ([[NSWorkspace sharedWorkspace] selectFile:[DownloadManager fullDownloadPath:[item filename]] inFileViewerRootedAtPath:@""] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), [item filename].lastPathComponent);
+			if ([[NSWorkspace sharedWorkspace] selectFile:[DownloadManager fullDownloadPath:item.filename] inFileViewerRootedAtPath:@""] == NO)
+				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
 		}
 	}
 }
@@ -145,7 +145,7 @@
  */
 -(void)removeFromList:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
@@ -160,7 +160,7 @@
  */
 -(void)cancelDownload:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
@@ -176,7 +176,7 @@
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	NSInteger itemCount = [[DownloadManager sharedInstance] downloadsList].count;
+	NSInteger itemCount = [DownloadManager sharedInstance].downloadsList.count;
 	clearButton.enabled = itemCount > 0;
 	return itemCount;
 }
@@ -188,11 +188,11 @@
 {
 	if ([aCell isKindOfClass:[ImageAndTextCell class]])
 	{
-		NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+		NSArray * list = [DownloadManager sharedInstance].downloadsList;
 		DownloadItem * item = list[rowIndex];
 
-		if ([item image] != nil)
-			[aCell setImage:[item image]];
+		if (item.image != nil)
+			[aCell setImage:item.image];
 		[aCell setTextColor:(rowIndex == aTableView.selectedRow) ? [NSColor whiteColor] : [NSColor darkGrayColor]];
 	}
 }
@@ -202,20 +202,20 @@
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSAssert(rowIndex >= 0 && rowIndex < [list count], @"objectValueForTableColumn sent an out-of-range rowIndex");
 	DownloadItem * item = list[rowIndex];
 
 	// TODO: return item when we have a cell that can parse it. Until then, construct our
 	// own data.
-	NSString * rawfilename = [item filename].lastPathComponent;
+	NSString * rawfilename = item.filename.lastPathComponent;
     NSString * filename = [rawfilename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	if (filename == nil)
 		filename = @"";
 
 	// Different layout depending on the state
 	NSString * objectString = filename;
-	switch ([item state])
+	switch (item.state)
 	{
 		case DOWNLOAD_INIT:
 			break;
@@ -223,7 +223,7 @@
 		case DOWNLOAD_COMPLETED: {
 			// Filename on top
 			// Final size of file at bottom.
-			double size = [item size];
+			double size = item.size;
 			NSString * sizeString = @"";
 
 			if (size > 1024 * 1024)
@@ -241,8 +241,8 @@
 			// Progress gauge in middle
 			// Size gathered so far at bottom
 			NSString * progressString = @"";
-			double expectedSize = [item expectedSize];
-			double sizeSoFar = [item size];
+			double expectedSize = item.expectedSize;
+			double sizeSoFar = item.size;
 
 			if (expectedSize == -1)
 			{
@@ -279,7 +279,7 @@
 -(void)handleDownloadsChange:(NSNotification *)notification
 {
 	DownloadItem * item = (DownloadItem *)notification.object;
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSUInteger  rowIndex = [list indexOfObject:item];
 	if (list.count != lastCount)
 	{

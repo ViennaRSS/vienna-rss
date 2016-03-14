@@ -30,8 +30,8 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setName:@""];
-		[self setStatus:@""];
+		self.name = @"";
+		self.status = @"";
 		details = nil;
 	}
 	return self;
@@ -161,7 +161,7 @@
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
 	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
-	ActivityItem * item = [self itemByName:[folder name]];
+	ActivityItem * item = [self itemByName:folder.name];
 	[log removeObject:item];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
 }
@@ -178,7 +178,7 @@
 
 	for (item in log)
 	{
-		if ([[item name] caseInsensitiveCompare:name] == NSOrderedSame)
+		if ([item.name caseInsensitiveCompare:name] == NSOrderedSame)
 			break;
 		++indexOfItem;
 	}
@@ -198,7 +198,7 @@
 	if ((item = [self getStatus:theName index:&insertionIndex]) == nil)
 	{
 		item = [[ActivityItem alloc] init];
-		[item setName:theName];
+		item.name = theName;
 		[log insertObject:item atIndex:insertionIndex];
 		
 		item = log[insertionIndex];

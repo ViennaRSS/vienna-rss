@@ -184,7 +184,7 @@
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	if ([[controller browserView] activeTabItemView] == self)
+	if (controller.browserView.activeTabItemView == self)
 		[controller setStatusMessage:text persist:NO];
 }
 
@@ -267,7 +267,7 @@
 			ArticleCellView * cell = (ArticleCellView *)obj;
 			[cell setInProgress:NO];
 			NSUInteger row= cell.articleRow;
-			NSArray * allArticles = [articleController allArticles];
+			NSArray * allArticles = articleController.allArticles;
 			if (row < (NSInteger)allArticles.count)
 			{
 				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
@@ -296,8 +296,8 @@
 		{
 			ArticleCellView * cell = (ArticleCellView *)objView;
 			NSUInteger row= [articleList rowForView:objView];
-			if (row == cell.articleRow && row < [articleController allArticles].count
-			  && cell.folderId == [[articleController allArticles][row] folderId])
+			if (row == cell.articleRow && row < articleController.allArticles.count
+			  && cell.folderId == [articleController.allArticles[row] folderId])
 			{	//relevant cell
                 NSString* outputHeight;
                 NSString* bodyHeight;
@@ -316,7 +316,7 @@
                     outputHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.scrollHeight"];
                     bodyHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"];
                     clientHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.clientHeight"];
-                    sender.preferences.javaScriptEnabled = [[Preferences standardPreferences] useJavaScript];
+                    sender.preferences.javaScriptEnabled = [Preferences standardPreferences].useJavaScript;
                     fittingHeight = outputHeight.doubleValue;
                     //get the rect of the current webview frame
                     NSRect webViewRect = sender.frame;
@@ -344,7 +344,7 @@
             }
             else {	//non relevant cell
                 [cell setInProgress:NO];
-                if (row < [articleController allArticles].count)
+                if (row < articleController.allArticles.count)
                 {
                     [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
                 }
@@ -398,7 +398,7 @@
 	if (singleSelection)
 	{
 		NSUInteger nextRow =articleList.selectedRowIndexes.firstIndex;
-		NSUInteger articlesCount = [articleController allArticles].count;
+		NSUInteger articlesCount = articleController.allArticles.count;
 
 		currentSelectedRow = -1;
 		if (nextRow >= articlesCount)
@@ -423,9 +423,9 @@
 	NSInteger rowIndex = 0;
 	BOOL found = NO;
 
-	for (Article * thisArticle in [articleController allArticles])
+	for (Article * thisArticle in articleController.allArticles)
 	{
-		if ([[thisArticle guid] isEqualToString:guid])
+		if ([thisArticle.guid isEqualToString:guid])
 		{
 			[self makeRowSelectedAndVisible:rowIndex];
 			found = YES;
@@ -464,13 +464,13 @@
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if (currentSelectedRow < 0 && [articleController allArticles].count > 0 )
+	if (currentSelectedRow < 0 && articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
-		if ([[Preferences standardPreferences] markReadInterval] > 0.0f)
+		if ([Preferences standardPreferences].markReadInterval > 0.0f)
 		{
-			Article * article = [articleController allArticles][0u];
-			if (![article isRead])
+			Article * article = articleController.allArticles[0u];
+			if (!article.read)
 				shouldSelectArticle = NO;
 		}
 		if (shouldSelectArticle)
@@ -516,8 +516,8 @@
 	Preferences * prefs = [Preferences standardPreferences];
 
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < [articleController allArticles].count) ? [[articleController allArticles][currentSelectedRow] guid] : @"";
-	[prefs setInteger:[articleController currentFolderId] forKey:MAPref_CachedFolderID];
+	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < articleController.allArticles.count) ? [articleController.allArticles[currentSelectedRow] guid] : @"";
+	[prefs setInteger:articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 }
 
@@ -535,10 +535,10 @@
  */
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row
 {
-	if ((row >= 0) && (row < [articleController allArticles].count))
+	if ((row >= 0) && (row < articleController.allArticles.count))
 	{
-		Article * article = [articleController allArticles][row];
-		return (article != nil) && ![[Database sharedManager] readOnly] && articleList.window.visible;
+		Article * article = articleController.allArticles[row];
+		return (article != nil) && ![Database sharedManager].readOnly && articleList.window.visible;
 	}
 	return NO;
 }
@@ -548,7 +548,7 @@
  */
 -(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0 && currentSelectedRow < [articleController allArticles].count) ? [articleController allArticles][currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < articleController.allArticles.count) ? articleController.allArticles[currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -563,8 +563,8 @@
 {
 	if (self == articleController.mainArticleView)
 	{
-		NSInteger folderId = [(Folder *)note.object itemId];
-		NSInteger controllerFolderId = [controller currentFolderId];
+		NSInteger folderId = ((Folder *)note.object).itemId;
+		NSInteger controllerFolderId = controller.currentFolderId;
 		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
 		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
 		{
@@ -590,7 +590,7 @@
  */
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
-	if ([articleController allArticles].count == 0u)
+	if (articleController.allArticles.count == 0u)
 	{
 		currentSelectedRow = -1;
 	}
@@ -615,12 +615,12 @@
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
-	if ([[Database sharedManager] countOfUnread] > 0)
+	if ([Database sharedManager].countOfUnread > 0)
 	{
 		guidOfArticleToSelect = nil;
 
 		// Get the first folder with unread articles.
-		NSInteger firstFolderWithUnread = [foldersTree firstFolderWithUnread];
+		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
 
 		// Select the folder in the tree view.
 		[foldersTree selectFolder:firstFolderWithUnread];
@@ -643,12 +643,12 @@
 
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
-	if (([[Database sharedManager] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
+	if (([Database sharedManager].countOfUnread > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
 	{
-		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
+		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:articleController.currentFolderId];
 		if (nextFolderWithUnread != -1)
 		{
-			if (nextFolderWithUnread == [articleController currentFolderId])
+			if (nextFolderWithUnread == articleController.currentFolderId)
 			{
 				[self viewNextUnreadInCurrentFolder:-1];
 			}
@@ -670,13 +670,13 @@
 	if (currentRow < 0)
 		currentRow = 0;
 
-	NSArray * allArticles = [articleController allArticles];
+	NSArray * allArticles = articleController.allArticles;
 	NSInteger totalRows = allArticles.count;
 	Article * theArticle;
 	while (currentRow < totalRows)
 	{
 		theArticle = allArticles[currentRow];
-		if (![theArticle isRead])
+		if (!theArticle.read)
 		{
 			[self makeRowSelectedAndVisible:currentRow];
 			return YES;
@@ -694,9 +694,9 @@
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
 	{
-		NSInteger count = [articleController allArticles].count;
+		NSInteger count = articleController.allArticles.count;
 		if (count > 0)
-			[self makeRowSelectedAndVisible:[[[Preferences standardPreferences] articleSortDescriptors][0] ascending] ? 0 : count - 1];
+			[self makeRowSelectedAndVisible:[[Preferences standardPreferences].articleSortDescriptors[0] ascending] ? 0 : count - 1];
 	}
 }
 
@@ -706,7 +706,7 @@
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, easy enough.
-	if (folderId == [articleController currentFolderId])
+	if (folderId == articleController.currentFolderId)
 		[self scrollToArticle:guid];
 	else
 	{
@@ -735,11 +735,11 @@
 {
 	// Preserve the article that the user might currently be reading.
 	Preferences * prefs = [Preferences standardPreferences];
-	if (([prefs refreshFrequency] > 0) &&
-		(currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)[articleController allArticles].count))
+	if ((prefs.refreshFrequency > 0) &&
+		(currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)articleController.allArticles.count))
 	{
-		Article * currentArticle = [articleController allArticles][currentSelectedRow];
-		if (![currentArticle isDeleted])
+		Article * currentArticle = articleController.allArticles[currentSelectedRow];
+		if (!currentArticle.deleted)
 			[articleController setArticleToPreserve:currentArticle];
 	}
 
@@ -753,7 +753,7 @@
  */
 -(void)refreshFolder:(NSInteger)refreshFlag
 {
-	NSArray * allArticles = [articleController allArticles];
+	NSArray * allArticles = articleController.allArticles;
 	NSString * guid = nil;
 
 	[markReadTimer invalidate];
@@ -774,9 +774,9 @@
 	{
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
 		// the same and the GUID of the article at the selection is the same.
-		allArticles = [articleController allArticles];
+		allArticles = articleController.allArticles;
 		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)allArticles.count) ? allArticles[currentSelectedRow] : nil;
-		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
+		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:currentArticle.guid];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
@@ -789,7 +789,7 @@
 	else
 		currentSelectedRow = -1;
 	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && (NSApp.mainWindow.firstResponder == articleList))
-		[NSApp.mainWindow makeFirstResponder:[foldersTree mainView]];
+		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;
 }
@@ -846,11 +846,11 @@
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	NSArray * allArticles = [articleController allArticles];
-	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)allArticles.count && ![[Database sharedManager] readOnly])
+	NSArray * allArticles = articleController.allArticles;
+	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)allArticles.count && ![Database sharedManager].readOnly)
 	{
 		Article * theArticle = allArticles[currentSelectedRow];
-		if (![theArticle isRead])
+		if (!theArticle.read)
 			[articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
@@ -864,7 +864,7 @@
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView*)aTableView
 {
-	return [articleController allArticles].count;
+	return articleController.allArticles.count;
 }
 
 - (CGFloat)tableView:(NSTableView *)aListView heightOfRow:(NSInteger)row
@@ -902,12 +902,12 @@
 		cellView.identifier = LISTVIEW_CELL_IDENTIFIER;
 	}
 
-	NSArray * allArticles = [articleController allArticles];
+	NSArray * allArticles = articleController.allArticles;
 	if (row < 0 || row >= allArticles.count)
 	    return nil;
 
 	Article * theArticle = allArticles[row];
-	NSInteger articleFolderId = [theArticle folderId];
+	NSInteger articleFolderId = theArticle.folderId;
 	Folder * folder = [[Database sharedManager] folderFromID:articleFolderId];
 	NSString * feedURL = SafeString([folder feedURL]);
 
@@ -960,11 +960,11 @@
 	NSUInteger msgIndex = rowIndexes.firstIndex;
 	while (msgIndex != NSNotFound)
 	{
-		Article * thisArticle = [articleController allArticles][msgIndex];
-		Folder * folder = [db folderFromID:[thisArticle folderId]];
-		NSString * msgText = [thisArticle body];
-		NSString * msgTitle = [thisArticle title];
-		NSString * msgLink = [thisArticle link];
+		Article * thisArticle = articleController.allArticles[msgIndex];
+		Folder * folder = [db folderFromID:thisArticle.folderId];
+		NSString * msgText = thisArticle.body;
+		NSString * msgTitle = thisArticle.title;
+		NSString * msgLink = thisArticle.link;
 
 		[arrayOfURLs addObject:msgLink];
 		[arrayOfTitles addObject:msgTitle];
@@ -973,9 +973,9 @@
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
 		[articleDict setValue:msgLink forKey:@"rssItemLink"];
 		[articleDict setValue:msgText forKey:@"rssItemDescription"];
-		[articleDict setValue:[folder name] forKey:@"sourceName"];
-		[articleDict setValue:[folder homePage] forKey:@"sourceHomeURL"];
-		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
+		[articleDict setValue:folder.name forKey:@"sourceName"];
+		[articleDict setValue:folder.homePage forKey:@"sourceHomeURL"];
+		[articleDict setValue:folder.feedURL forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
 
 		// Plain text
@@ -1004,7 +1004,7 @@
 	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
 	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"];
 	[pboard setString:fullPlainText forType:NSStringPboardType];
-	[pboard setString:[fullHTMLText stringByEscapingExtendedCharacters] forType:NSHTMLPboardType];
+	[pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSHTMLPboardType];
 
 	return YES;
 }
@@ -1069,7 +1069,7 @@
 		articleArray = [NSMutableArray arrayWithCapacity:rowIndexes.count];
 		while (rowIndex != NSNotFound)
 		{
-			[articleArray addObject:[articleController allArticles][rowIndex]];
+			[articleArray addObject:articleController.allArticles[rowIndex]];
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
@@ -1086,7 +1086,7 @@
 
 -(BOOL)becomeFirstResponder
 {
-    if (articleList.selectedRow == -1 && [articleController allArticles].count != 0u)
+    if (articleList.selectedRow == -1 && articleController.allArticles.count != 0u)
     {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 		currentSelectedRow = 0;

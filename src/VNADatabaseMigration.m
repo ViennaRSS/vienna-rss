@@ -70,7 +70,7 @@
             // Do not disturb the manual sort order, if it exists.
             
             [db executeUpdate:@"alter table info add column folder_sort"];
-            NSInteger oldFoldersTreeSortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
+            NSInteger oldFoldersTreeSortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
             [db executeUpdate:@"update info set folder_sort=?", @(oldFoldersTreeSortMethod)];
             [db setUserVersion:(uint32_t)15];
             

@@ -198,7 +198,7 @@
 	NSDictionary * args = cmd.evaluatedArguments;
 	Folder * folder = args[@"UnderFolder"];
 
-	NSInteger parentId = folder ? ((IsGroupFolder(folder)) ? [folder itemId] :[folder parentId]) : MA_Root_Folder;
+	NSInteger parentId = folder ? ((IsGroupFolder(folder)) ? folder.itemId : folder.parentId) : MA_Root_Folder;
 
 	[(AppController*)self.delegate createNewSubscription:args[@"URL"] underFolder:parentId afterChild:-1];
 	return nil;
@@ -230,7 +230,7 @@
  */
 -(NSArray *)folders
 {
-	return [(AppController*)self.delegate folders];
+	return ((AppController*)self.delegate).folders;
 }
 
 /* isRefreshing
@@ -238,7 +238,7 @@
  */
 -(BOOL)isRefreshing
 {
-	return [(AppController*)self.delegate isConnecting];
+	return ((AppController*)self.delegate).connecting;
 }
 
 /* totalUnreadCount
@@ -246,7 +246,7 @@
  */
 -(NSInteger)totalUnreadCount
 {
-	return [[Database sharedManager] countOfUnread];
+	return [Database sharedManager].countOfUnread;
 }
 
 /* currentSelection
@@ -255,17 +255,17 @@
  */
 -(NSString *)currentTextSelection
 {
-	NSView<BaseView> * theView = [[(AppController*)self.delegate browserView] activeTabItemView];
+	NSView<BaseView> * theView = ((AppController*)self.delegate).browserView.activeTabItemView;
 	WebView * webPane = nil;
 
 	if ([theView isKindOfClass:[BrowserPane class]])
-		webPane = (WebView *)[(BrowserPane *)theView mainView];
+		webPane = (WebView *)((BrowserPane *)theView).mainView;
 
 	if ([theView isKindOfClass:[ArticleListView class]])
-		webPane = (WebView *)[(ArticleListView *)theView webView];
+		webPane = (WebView *)((ArticleListView *)theView).webView;
 	
 	if ([theView isKindOfClass:[UnifiedDisplayView class]])
-		webPane = (WebView *)[(UnifiedDisplayView *)theView webView];
+		webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
 	
 	if (webPane != nil)
 	{
@@ -279,8 +279,8 @@
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = [[(AppController*)self.delegate browserView] activeTabItemView];
-	WebView * webPane = [theView webView];
+	NSView<BaseView> * theView = ((AppController*)self.delegate).browserView.activeTabItemView;
+	WebView * webPane = theView.webView;
 	
 	if (webPane != nil)
 	{
@@ -297,10 +297,10 @@
 
 -(NSString *)documentTabURL
 {
-	NSView<BaseView> * theView = [[(AppController*)self.delegate browserView] activeTabItemView];
+	NSView<BaseView> * theView = ((AppController*)self.delegate).browserView.activeTabItemView;
 	if ([theView isKindOfClass:[BrowserPane class]])
 	{
-		return [(BrowserPane *)theView url].absoluteString;
+		return ((BrowserPane *)theView).url.absoluteString;
 	}
 	else
 		return @"";
@@ -311,7 +311,7 @@
  */
 -(Article *)currentArticle;
 {
-	return [(AppController*)self.delegate selectedArticle];
+	return ((AppController*)self.delegate).selectedArticle;
 }
 
 /* currentFolder
@@ -319,7 +319,7 @@
  */
 -(Folder *)currentFolder
 {
-	return [[Database sharedManager] folderFromID:[(AppController*)self.delegate currentFolderId]];
+	return [[Database sharedManager] folderFromID:((AppController*)self.delegate).currentFolderId];
 }
 
 /* setCurrentFolder
@@ -328,51 +328,51 @@
 -(void)setCurrentFolder:(Folder *)newCurrentFolder
 {
 	AppController * controller = APPCONTROLLER;
-	NSInteger folderId = [newCurrentFolder itemId];
+	NSInteger folderId = newCurrentFolder.itemId;
 	[controller selectFolder:folderId];
 }
 
 /* Accessor getters
  * These thunk through the standard preferences.
  */
--(NSInteger)autoExpireDuration			{ return [[Preferences standardPreferences] autoExpireDuration]; }
--(float)markReadInterval			{ return [[Preferences standardPreferences] markReadInterval]; }
--(BOOL)readingPaneOnRight			{ return [[Preferences standardPreferences] layout] == MA_Layout_Condensed; }
--(NSInteger)filterMode					{ return [[Preferences standardPreferences] filterMode]; }
--(BOOL)refreshOnStartup				{ return [[Preferences standardPreferences] refreshOnStartup]; }
--(BOOL)checkForNewOnStartup			{ return [[Preferences standardPreferences] checkForNewOnStartup]; }
--(BOOL)openLinksInVienna			{ return [[Preferences standardPreferences] openLinksInVienna]; }
--(BOOL)openLinksInBackground		{ return [[Preferences standardPreferences] openLinksInBackground]; }
--(NSInteger)minimumFontSize				{ return [[Preferences standardPreferences] minimumFontSize]; }
--(BOOL)enableMinimumFontSize		{ return [[Preferences standardPreferences] enableMinimumFontSize]; }
--(NSInteger)refreshFrequency				{ return [[Preferences standardPreferences] refreshFrequency]; }
--(NSString *)displayStyle			{ return [[Preferences standardPreferences] displayStyle]; }
--(NSString *)folderListFont			{ return [[Preferences standardPreferences] folderListFont]; }
--(NSInteger)folderListFontSize			{ return [[Preferences standardPreferences] folderListFontSize]; }
--(NSString *)articleListFont		{ return [[Preferences standardPreferences] articleListFont]; }
--(NSInteger)articleListFontSize			{ return [[Preferences standardPreferences] articleListFontSize]; }
--(BOOL)statusBarVisible				{ return [[Preferences standardPreferences] showStatusBar]; }
--(BOOL)filterBarVisible				{ return [[Preferences standardPreferences] showFilterBar]; }
+-(NSInteger)autoExpireDuration			{ return [Preferences standardPreferences].autoExpireDuration; }
+-(float)markReadInterval			{ return [Preferences standardPreferences].markReadInterval; }
+-(BOOL)readingPaneOnRight			{ return [Preferences standardPreferences].layout == MA_Layout_Condensed; }
+-(NSInteger)filterMode					{ return [Preferences standardPreferences].filterMode; }
+-(BOOL)refreshOnStartup				{ return [Preferences standardPreferences].refreshOnStartup; }
+-(BOOL)checkForNewOnStartup			{ return [Preferences standardPreferences].checkForNewOnStartup; }
+-(BOOL)openLinksInVienna			{ return [Preferences standardPreferences].openLinksInVienna; }
+-(BOOL)openLinksInBackground		{ return [Preferences standardPreferences].openLinksInBackground; }
+-(NSInteger)minimumFontSize				{ return [Preferences standardPreferences].minimumFontSize; }
+-(BOOL)enableMinimumFontSize		{ return [Preferences standardPreferences].enableMinimumFontSize; }
+-(NSInteger)refreshFrequency				{ return [Preferences standardPreferences].refreshFrequency; }
+-(NSString *)displayStyle			{ return [Preferences standardPreferences].displayStyle; }
+-(NSString *)folderListFont			{ return [Preferences standardPreferences].folderListFont; }
+-(NSInteger)folderListFontSize			{ return [Preferences standardPreferences].folderListFontSize; }
+-(NSString *)articleListFont		{ return [Preferences standardPreferences].articleListFont; }
+-(NSInteger)articleListFontSize			{ return [Preferences standardPreferences].articleListFontSize; }
+-(BOOL)statusBarVisible				{ return [Preferences standardPreferences].showStatusBar; }
+-(BOOL)filterBarVisible				{ return [Preferences standardPreferences].showFilterBar; }
 
 /* Accessor setters
  * These thunk through the standard preferences.
  */
--(void)setAutoExpireDuration:(NSInteger)newDuration		{ [[Preferences standardPreferences] setAutoExpireDuration:newDuration]; }
--(void)setMarkReadInterval:(float)newInterval		{ [[Preferences standardPreferences] setMarkReadInterval:newInterval]; }
+-(void)setAutoExpireDuration:(NSInteger)newDuration		{ [Preferences standardPreferences].autoExpireDuration = newDuration; }
+-(void)setMarkReadInterval:(float)newInterval		{ [Preferences standardPreferences].markReadInterval = newInterval; }
 -(void)setReadingPaneOnRight:(BOOL)flag				{ ; }
--(void)setRefreshOnStartup:(BOOL)flag				{ [[Preferences standardPreferences] setRefreshOnStartup:flag]; }
--(void)setFilterMode:(NSInteger)newMode					{ [[Preferences standardPreferences] setFilterMode:newMode]; }
--(void)setCheckForNewOnStartup:(BOOL)flag			{ [[Preferences standardPreferences] setCheckForNewOnStartup:flag]; }
--(void)setOpenLinksInVienna:(BOOL)flag				{ [[Preferences standardPreferences] setOpenLinksInVienna:flag]; }
--(void)setOpenLinksInBackground:(BOOL)flag			{ [[Preferences standardPreferences] setOpenLinksInBackground:flag]; }
--(void)setMinimumFontSize:(NSInteger)newSize				{ [[Preferences standardPreferences] setMinimumFontSize:newSize]; }
--(void)setEnableMinimumFontSize:(BOOL)flag			{ [[Preferences standardPreferences] setEnableMinimumFontSize:flag]; }
--(void)setRefreshFrequency:(NSInteger)newFrequency		{ [[Preferences standardPreferences] setRefreshFrequency:newFrequency]; }
--(void)setDisplayStyle:(NSString *)newStyle			{ [[Preferences standardPreferences] setDisplayStyle:newStyle]; }
--(void)setFolderListFont:(NSString *)newFontName	{ [[Preferences standardPreferences] setFolderListFont:newFontName]; }
--(void)setFolderListFontSize:(NSInteger)newFontSize		{ [[Preferences standardPreferences] setFolderListFontSize:newFontSize]; }
--(void)setArticleListFont:(NSString *)newFontName	{ [[Preferences standardPreferences] setArticleListFont:newFontName]; }
--(void)setArticleListFontSize:(NSInteger)newFontSize		{ [[Preferences standardPreferences] setArticleListFontSize:newFontSize]; }
--(void)setStatusBarVisible:(BOOL)flag				{ [[Preferences standardPreferences] setShowStatusBar:flag]; }
--(void)setFilterBarVisible:(BOOL)flag				{ [[Preferences standardPreferences] setShowFilterBar:flag]; }
+-(void)setRefreshOnStartup:(BOOL)flag				{ [Preferences standardPreferences].refreshOnStartup = flag; }
+-(void)setFilterMode:(NSInteger)newMode					{ [Preferences standardPreferences].filterMode = newMode; }
+-(void)setCheckForNewOnStartup:(BOOL)flag			{ [Preferences standardPreferences].checkForNewOnStartup = flag; }
+-(void)setOpenLinksInVienna:(BOOL)flag				{ [Preferences standardPreferences].openLinksInVienna = flag; }
+-(void)setOpenLinksInBackground:(BOOL)flag			{ [Preferences standardPreferences].openLinksInBackground = flag; }
+-(void)setMinimumFontSize:(NSInteger)newSize				{ [Preferences standardPreferences].minimumFontSize = newSize; }
+-(void)setEnableMinimumFontSize:(BOOL)flag			{ [Preferences standardPreferences].enableMinimumFontSize = flag; }
+-(void)setRefreshFrequency:(NSInteger)newFrequency		{ [Preferences standardPreferences].refreshFrequency = newFrequency; }
+-(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = newStyle; }
+-(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = newFontName; }
+-(void)setFolderListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].folderListFontSize = newFontSize; }
+-(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = newFontName; }
+-(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
+-(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
+-(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }
 @end

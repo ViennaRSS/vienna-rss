@@ -96,7 +96,7 @@
 -(void)enableSaveButton
 {
 	NSString * folderNameString = folderName.stringValue;
-	saveButton.enabled = ![folderNameString isBlank];
+	saveButton.enabled = !folderNameString.blank;
 }
 
 /* dealloc

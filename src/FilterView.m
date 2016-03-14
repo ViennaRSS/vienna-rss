@@ -61,11 +61,4 @@
 	[backgroundBrush drawInRect:rect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 }
 
-/* dealloc
- * Release resources at the end.
- */
--(void)dealloc
-{
-	backgroundBrush=nil;
-}
 @end

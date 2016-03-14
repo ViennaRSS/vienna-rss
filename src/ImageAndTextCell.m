@@ -189,9 +189,9 @@
 	// and then reduce cellFrame to keep from overlapping it
 	if (inProgress)
 	{
-		NSProgressIndicator *progressIndicator = [item progressIndicator];
+		NSProgressIndicator *progressIndicator = item.progressIndicator;
 		if (!progressIndicator)
-			progressIndicator = [item allocAndStartProgressIndicator];
+			progressIndicator = item.allocAndStartProgressIndicator;
 
 		NSRect progressIndicatorFrame;
 
@@ -325,16 +325,6 @@
             return [bits componentsJoinedByString:@", "];
     }
     return [super accessibilityAttributeValue:attribute];
-}
-
-/* dealloc
- * Delete our resources.
- */
--(void)dealloc
-{
-	countBackgroundColour=nil;
-	auxiliaryImage=nil;
-	image=nil;
 }
 
 @end

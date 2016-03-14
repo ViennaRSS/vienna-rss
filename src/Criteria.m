@@ -37,9 +37,9 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setField:newField];
-		[self setOperator:newOperator];
-		[self setValue:newValue];
+		self.field = newField;
+		self.operator = newOperator;
+		self.value = newValue;
 	}
 	return self;
 }
@@ -310,7 +310,7 @@
     [criteriaGroup setAttributesWithDictionary:conditionDict];
     
     for (Criteria *criteria in criteriaTree) {
-        NSDictionary * criteriaDict = @{@"field": [criteria field]};
+        NSDictionary * criteriaDict = @{@"field": criteria.field};
         NSXMLElement *criteriaElement = [[NSXMLElement alloc] initWithName:@"criteria"];
         [criteriaElement setAttributesWithDictionary:criteriaDict];
         NSXMLElement *operatorElement = [[NSXMLElement alloc]

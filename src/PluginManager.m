@@ -66,7 +66,7 @@
 	path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Plugins"];
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
-	path = [[Preferences standardPreferences] pluginsFolder];
+	path = [Preferences standardPreferences].pluginsFolder;
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
 	for (pluginName in pluginPaths)
@@ -179,7 +179,7 @@
 						keyMod |= NSControlKeyMask;
 					else
 					{
-						if (![keyChar isBlank])
+						if (!keyChar.blank)
 							NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
 						keyChar = oneKey;
 					}
@@ -297,11 +297,11 @@
  */
 -(BOOL)validateToolbarItem:(ToolbarItem *)toolbarItem
 {	
-	NSView<BaseView> * theView = [[APPCONTROLLER browserView] activeTabItemView];
-	Article * thisArticle = [APPCONTROLLER selectedArticle];
+	NSView<BaseView> * theView = (APPCONTROLLER).browserView.activeTabItemView;
+	Article * thisArticle = (APPCONTROLLER).selectedArticle;
 	
 	if ([theView isKindOfClass:[BrowserPane class]])
-		return (([theView viewLink] != nil) && NSApp.active);
+		return ((theView.viewLink != nil) && NSApp.active);
 	else
 		return (thisArticle != nil && NSApp.active);
 }
@@ -334,24 +334,24 @@
 				return;
 			
 			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = [[APPCONTROLLER browserView] activeTabItemView];
+			NSView<BaseView> * theView = (APPCONTROLLER).browserView.activeTabItemView;
 			
 			// ...and do the following in case the user is currently looking at a website.
 			if ([theView isKindOfClass:[BrowserPane class]])
 			{	
-				[urlString replaceString:@"$ArticleTitle$" withString:[theView viewTitle]];
+				[urlString replaceString:@"$ArticleTitle$" withString:theView.viewTitle];
 				
 				// If ShortenURLs is true in the plugin's info.plist, we attempt to shorten it via the bit.ly service.
 				if ([pluginItem[@"ShortenURLs"] boolValue])
 				{
 					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
-					NSString * shortURL = [bitlyHelper shortenURL:[theView viewLink]];
+					NSString * shortURL = [bitlyHelper shortenURL:theView.viewLink];
 					
 					[urlString replaceString:@"$ArticleLink$" withString:shortURL];
 				}
 				else 
 				{
-					[urlString replaceString:@"$ArticleLink$" withString:[[theView viewLink] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+					[urlString replaceString:@"$ArticleLink$" withString:[theView.viewLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 				}
 
 			}
@@ -360,21 +360,21 @@
 			else
 			{
 				// We can only work on one article, so ignore selection range.
-				Article * currentMessage = [APPCONTROLLER selectedArticle];
-				[urlString replaceString:@"$ArticleTitle$" withString: [currentMessage title]];
+				Article * currentMessage = (APPCONTROLLER).selectedArticle;
+				[urlString replaceString:@"$ArticleTitle$" withString: currentMessage.title];
 				
 				// URL shortening again, as above...
 				if ([pluginItem[@"ShortenURLs"] boolValue])
 				{
 					BitlyAPIHelper * bitlyHelper = [[BitlyAPIHelper alloc] initWithLogin:@"viennarss" andAPIKey:@"R_852929122e82d2af45fe9e238f1012d3"];
-					NSString * shortURL = [bitlyHelper shortenURL:[currentMessage link]];
+					NSString * shortURL = [bitlyHelper shortenURL:currentMessage.link];
 					
 					// If URL shortening fails, we fall back to the long URL.
-					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [[[currentMessage link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding])];
+					[urlString replaceString:@"$ArticleLink$" withString:(shortURL ? shortURL : [[currentMessage.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding])];
 				}
 				else 
 				{
-					[urlString replaceString:@"$ArticleLink$" withString: [[[currentMessage link] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+					[urlString replaceString:@"$ArticleLink$" withString: [[currentMessage.link stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 				}
 			}
 						

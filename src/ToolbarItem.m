@@ -188,9 +188,9 @@
 	[self setView:button];
 	
 	NSMenuItem * menuItem = [[NSMenuItem alloc] init];
-	[button setTheMenu:theMenu];
+	button.theMenu = theMenu;
 	[button setPopupBelow:YES];
-	menuItem.submenu = [button theMenu];
+	menuItem.submenu = button.theMenu;
 	menuItem.title = self.label;
 	self.menuFormRepresentation = menuItem;
 	

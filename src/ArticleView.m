@@ -57,9 +57,9 @@ static NSMutableDictionary * stylePathMappings = nil;
 		// Select the user's current style or revert back to the
 		// default style otherwise.
 		Preferences * prefs = [Preferences standardPreferences];
-		[self initForStyle:[prefs displayStyle]];
+		[self initForStyle:prefs.displayStyle];
 		// enlarge / reduce the text size according to user's setting
-		self.textSizeMultiplier = [prefs textSizeMultiplier];
+		self.textSizeMultiplier = prefs.textSizeMultiplier;
 	}
 	return self;
 }
@@ -70,8 +70,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(void)handleStyleChange:(NSNotificationCenter *)nc
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	[self initForStyle:[prefs displayStyle]];
-	self.textSizeMultiplier = [prefs textSizeMultiplier];
+	[self initForStyle:prefs.displayStyle];
+	self.textSizeMultiplier = prefs.textSizeMultiplier;
 }
 
 /* performDragOperation
@@ -101,7 +101,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 	NSString * path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Styles"];
 	loadMapFromPath(path, stylePathMappings, YES, nil);
 	
-	path = [[Preferences standardPreferences] stylesFolder];
+	path = [Preferences standardPreferences].stylesFolder;
 	loadMapFromPath(path, stylePathMappings, YES, nil);
 
 	return stylePathMappings;
@@ -135,7 +135,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 				jsScript = nil;
 			
 			// Make sure the template is valid
-			NSString * firstLine = [htmlTemplate firstNonBlankLine].lowercaseString;
+			NSString * firstLine = htmlTemplate.firstNonBlankLine.lowercaseString;
 			if (![firstLine hasPrefix:@"<html>"] && ![firstLine hasPrefix:@"<!doctype"])
 			{
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
@@ -191,7 +191,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		NSMutableString * htmlArticle;
 		if (htmlTemplate == nil)
 		{
-			NSMutableString * articleBody = [NSMutableString stringWithString:[theArticle body]];
+			NSMutableString * articleBody = [NSMutableString stringWithString:theArticle.body];
 			[articleBody fixupRelativeImgTags:SafeString([theArticle link])];
 			[articleBody fixupRelativeIframeTags:SafeString([theArticle link])];
 			[articleBody fixupRelativeAnchorTags:SafeString([theArticle link])];
@@ -216,7 +216,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 
 					if ([scanner scanUpToString:@"-->" intoString:&commentTag] && commentTag != nil)
 					{
-						commentTag = [commentTag trim];
+						commentTag = commentTag.trim;
 						if ([commentTag isEqualToString:@"cond:noblank"])
 							stripIfEmpty = YES;
 						if ([commentTag isEqualToString:@"end"])
@@ -333,7 +333,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(IBAction)makeTextSmaller:(id)sender
 {
 	[super makeTextSmaller:sender];
-	[[Preferences standardPreferences] setTextSizeMultiplier:self.textSizeMultiplier];
+	[Preferences standardPreferences].textSizeMultiplier = self.textSizeMultiplier;
 }
 
 /* makeTextLarger
@@ -341,7 +341,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(IBAction)makeTextLarger:(id)sender
 {
 	[super makeTextLarger:sender];
-	[[Preferences standardPreferences] setTextSizeMultiplier:self.textSizeMultiplier];
+	[Preferences standardPreferences].textSizeMultiplier = self.textSizeMultiplier;
 }
 
 #pragma mark -
@@ -354,8 +354,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 -(void)webView:(WebView *)sender decidePolicyForNewWindowAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request newFrameName:(NSString *)frameName decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
-	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
-		[NSApp.mainWindow makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
+	if ((navType == WebNavigationTypeLinkClicked) && ([Preferences standardPreferences].openLinksInBackground || ![Preferences standardPreferences].openLinksInVienna))
+		[NSApp.mainWindow makeFirstResponder:[APPCONTROLLER.browserView primaryTabItemView].mainView];
 	
 	[super webView:sender decidePolicyForNewWindowAction:actionInformation request:request newFrameName:frameName decisionListener:listener];
 }
@@ -378,8 +378,8 @@ static NSMutableDictionary * stylePathMappings = nil;
 	}
 	
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
-	if ((navType == WebNavigationTypeLinkClicked) && ([[Preferences standardPreferences] openLinksInBackground] || ![[Preferences standardPreferences] openLinksInVienna]))
-		[NSApp.mainWindow makeFirstResponder:[[[APPCONTROLLER browserView] primaryTabItemView] mainView]];
+	if ((navType == WebNavigationTypeLinkClicked) && ([Preferences standardPreferences].openLinksInBackground || ![Preferences standardPreferences].openLinksInVienna))
+		[NSApp.mainWindow makeFirstResponder:[APPCONTROLLER.browserView primaryTabItemView].mainView];
 	
 	[super webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:frame decisionListener:listener];
 }	

@@ -94,7 +94,7 @@
 	{
 		NSInteger index = 0;
 
-		[self initSearchSheet:[folder name]];
+		[self initSearchSheet:folder.name];
 		smartFolderId = folderId;
 		[smartFolderName setEnabled:YES];
 
@@ -102,17 +102,17 @@
 		CriteriaTree * criteriaTree = [db searchStringForSmartFolder:folderId];
 
 		// Set the criteria condition
-		[criteriaConditionPopup selectItemWithTag:[criteriaTree condition]];
+		[criteriaConditionPopup selectItemWithTag:criteriaTree.condition];
 
-		for (Criteria * criteria in [criteriaTree criteriaEnumerator])
+		for (Criteria * criteria in criteriaTree.criteriaEnumerator)
 		{
-			[self initForField:[criteria field] inRow:searchCriteriaView];
+			[self initForField:criteria.field inRow:searchCriteriaView];
 
 			[fieldNamePopup selectItemWithTitle:NSLocalizedString([criteria field], nil)];
 			[operatorPopup selectItemWithTitle:NSLocalizedString([Criteria stringFromOperator:[criteria operator]], nil)];
 
-			Field * field = [nameToFieldMap valueForKey:[criteria field]];
-			switch ([field type])
+			Field * field = [nameToFieldMap valueForKey:criteria.field];
+			switch (field.type)
 			{
 				case MA_FieldType_Flag: {
 					[flagValueField selectItemWithTitle:NSLocalizedString([criteria value], nil)];
@@ -120,24 +120,24 @@
 				}
 
 				case MA_FieldType_Folder: {
-					Folder * folder = [db folderFromName:[criteria value]];
+					Folder * folder = [db folderFromName:criteria.value];
 					if (folder != nil)
-						[folderValueField selectItemWithTitle:[folder name]];
+						[folderValueField selectItemWithTitle:folder.name];
 					break;
 				}
 
 				case MA_FieldType_String: {
-					valueField.stringValue = [criteria value];
+					valueField.stringValue = criteria.value;
 					break;
 				}
 
 				case MA_FieldType_Integer: {
-					numberValueField.stringValue = [criteria value];
+					numberValueField.stringValue = criteria.value;
 					break;
 				}
 
 				case MA_FieldType_Date: {
-					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:[criteria value]]];
+					[dateValueField selectItemAtIndex:[dateValueField indexOfItemWithRepresentedObject:criteria.value]];
 					break;
 				}
 			}
@@ -179,17 +179,17 @@
 		[fieldNamePopup removeAllItems];
 		for (Field * field in [db arrayOfFields])
 		{
-			if ([field tag] != MA_FieldID_Headlines &&
-				[field tag] != MA_FieldID_GUID &&
-				[field tag] != MA_FieldID_Link &&
-				[field tag] != MA_FieldID_Comments &&
-				[field tag] != MA_FieldID_Summary &&
-				[field tag] != MA_FieldID_Parent &&
-				[field tag] != MA_FieldID_Enclosure &&
-				[field tag] != MA_FieldID_EnclosureDownloaded)
+			if (field.tag != MA_FieldID_Headlines &&
+				field.tag != MA_FieldID_GUID &&
+				field.tag != MA_FieldID_Link &&
+				field.tag != MA_FieldID_Comments &&
+				field.tag != MA_FieldID_Summary &&
+				field.tag != MA_FieldID_Parent &&
+				field.tag != MA_FieldID_Enclosure &&
+				field.tag != MA_FieldID_EnclosureDownloaded)
 			{
-				[fieldNamePopup addItemWithRepresentedObject:[field displayName] object:field];
-				[nameToFieldMap setValue:field forKey:[field name]];
+				[fieldNamePopup addItemWithRepresentedObject:field.displayName object:field];
+				[nameToFieldMap setValue:field forKey:field.name];
 			}
 		}
 		
@@ -231,7 +231,7 @@
 	
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;
-	saveButton.enabled = ![folderName isBlank];
+	saveButton.enabled = !folderName.blank;
 }
 
 /* initFolderValueField
@@ -246,12 +246,12 @@
 	{
 		if (IsRSSFolder(folder)||IsGoogleReaderFolder(folder)||IsGroupFolder(folder))
 		{
-			[folderValueField addItemWithTitle:[folder name]];
-			NSMenuItem * menuItem = [folderValueField itemWithTitle:[folder name]];
-			menuItem.image = [folder image];
+			[folderValueField addItemWithTitle:folder.name];
+			NSMenuItem * menuItem = [folderValueField itemWithTitle:folder.name];
+			menuItem.image = folder.image;
 			menuItem.indentationLevel = indentation;
 			if (IsGroupFolder(folder))
-				[self initFolderValueField:[folder itemId] atIndent:indentation + 2];
+				[self initFolderValueField:folder.itemId atIndent:indentation + 2];
 		}
 	}
 }
@@ -305,8 +305,8 @@
 {
 	Field * defaultField = [db fieldByName:MA_Field_Read];
 
-	[self initForField:[defaultField name] inRow:searchCriteriaView];
-	[fieldNamePopup selectItemWithTitle:[defaultField displayName]];
+	[self initForField:defaultField.name inRow:searchCriteriaView];
+	[fieldNamePopup selectItemWithTitle:defaultField.displayName];
 	valueField.stringValue = @"";
 	[self addCriteria:index];
 }
@@ -318,7 +318,7 @@
 -(IBAction)fieldChanged:(id)sender
 {
 	Field * field = [sender representedObjectForSelection];
-	[self initForField:[field name] inRow:[sender superview]];
+	[self initForField:field.name inRow:[sender superview]];
 }
 
 /* initForField
@@ -332,7 +332,7 @@
 	// Need to flip on the operator popup for the field that changed
 	NSPopUpButton * theOperatorPopup = [row viewWithTag:MA_SFEdit_OperatorTag];
 	[theOperatorPopup removeAllItems];	
-	switch ([field type])
+	switch (field.type)
 	{
 		case MA_FieldType_Flag:
 			[self setOperatorsPopup:theOperatorPopup,
@@ -385,11 +385,11 @@
 	NSView * theDateValueField = [row viewWithTag:MA_SFEdit_DateValueTag];
 	NSView * theFolderValueField = [row viewWithTag:MA_SFEdit_FolderValueTag];
 
-	theFlagValueField.hidden = [field type] != MA_FieldType_Flag;
-	theValueField.hidden = [field type] != MA_FieldType_String;
-	theDateValueField.hidden = [field type] != MA_FieldType_Date;
-	theNumberValueField.hidden = [field type] != MA_FieldType_Integer;
-	theFolderValueField.hidden = [field type] != MA_FieldType_Folder;
+	theFlagValueField.hidden = field.type != MA_FieldType_Flag;
+	theValueField.hidden = field.type != MA_FieldType_String;
+	theDateValueField.hidden = field.type != MA_FieldType_Date;
+	theNumberValueField.hidden = field.type != MA_FieldType_Integer;
+	theFolderValueField.hidden = field.type != MA_FieldType_Folder;
 }
 
 /* setOperatorsPopup
@@ -414,13 +414,13 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderName = [smartFolderName.stringValue trim];
+	NSString * folderName = (smartFolderName.stringValue).trim;
 	NSAssert(![folderName isBlank], @"doSave called with empty folder name");
 	NSUInteger  c;
 
 	// Check whether there is another folder with the same name.
 	Folder * folder = [db folderFromName:folderName];
-	if (folder != nil && [folder itemId] != smartFolderId)
+	if (folder != nil && folder.itemId != smartFolderId)
 	{
 		runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
 		return;
@@ -434,26 +434,26 @@
 		NSPopUpButton * theField = [row viewWithTag:MA_SFEdit_FieldTag];
 		NSPopUpButton * theOperator = [row viewWithTag:MA_SFEdit_OperatorTag];
 
-		Field * field = [theField representedObjectForSelection];
-		CriteriaOperator operator = [theOperator tagForSelection];
+		Field * field = theField.representedObjectForSelection;
+		CriteriaOperator operator = theOperator.tagForSelection;
 		NSString * valueString;
 
-		if ([field type] == MA_FieldType_Flag)
+		if (field.type == MA_FieldType_Flag)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FlagValueTag];
-			valueString = [theValue representedObjectForSelection];
+			valueString = theValue.representedObjectForSelection;
 		}
-		else if ([field type] == MA_FieldType_Date)
+		else if (field.type == MA_FieldType_Date)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_DateValueTag];
-			valueString = [theValue representedObjectForSelection];
+			valueString = theValue.representedObjectForSelection;
 		}
-		else if ([field type] == MA_FieldType_Folder)
+		else if (field.type == MA_FieldType_Folder)
 		{
 			NSPopUpButton * theValue = [row viewWithTag:MA_SFEdit_FolderValueTag];
 			valueString = theValue.titleOfSelectedItem;
 		}
-		else if ([field type] == MA_FieldType_Integer)
+		else if (field.type == MA_FieldType_Integer)
 		{
 			NSTextField * theValue = [row viewWithTag:MA_SFEdit_NumberValueTag];
 			valueString = theValue.stringValue;
@@ -464,12 +464,12 @@
 			valueString = theValue.stringValue;
 		}
 
-		Criteria * newCriteria = [[Criteria alloc] initWithField:[field name] withOperator:operator withValue:valueString];
+		Criteria * newCriteria = [[Criteria alloc] initWithField:field.name withOperator:operator withValue:valueString];
 		[criteriaTree addCriteria:newCriteria];
 	}
 
 	// Set the criteria condition
-	[criteriaTree setCondition:criteriaConditionPopup.selectedTag];
+	criteriaTree.condition = criteriaConditionPopup.selectedTag;
 	
 	if (smartFolderId == -1)
 	{
@@ -502,7 +502,7 @@
 -(void)handleTextDidChange:(NSNotification *)aNotification
 {
 	NSString * folderName = smartFolderName.stringValue;
-	saveButton.enabled = ![folderName isBlank];
+	saveButton.enabled = !folderName.blank;
 }
 
 /* removeAllCriteria

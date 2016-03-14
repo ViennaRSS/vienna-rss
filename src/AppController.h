@@ -30,7 +30,8 @@
 #import <AppKit/AppKit.h>
 #import "CDEvents.h"
 
-#define APPCONTROLLER (AppController *)[NSApp delegate]
+#define APPCONTROLLER ((AppController *)[NSApp delegate])
+#define APP ((ViennaApp *)NSApp)
 
 @class NewPreferencesController;
 @class FoldersTree;

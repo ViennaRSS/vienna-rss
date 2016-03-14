@@ -125,7 +125,7 @@ enum GoogleReaderStatus {
 - (ASIFormDataRequest *)authentifiedFormRequestFromURL:(NSURL *)url
 {
 	ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:url];
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
 	[request setPostValue:token forKey:@"T"];
     [self commonRequestPrepare:request];
@@ -179,7 +179,7 @@ enum GoogleReaderStatus {
 {				
 	
 	//This is a workaround throw a BAD folderupdate value on DB
-	NSString *folderLastUpdateString = ignoreLimit ? @"0" : [thisFolder lastUpdateString];
+	NSString *folderLastUpdateString = ignoreLimit ? @"0" : thisFolder.lastUpdateString;
 	if ([folderLastUpdateString isEqualToString:@""] || [folderLastUpdateString isEqualToString:@"(null)"]) folderLastUpdateString=@"0";
 	
 	NSString *itemsLimitation;
@@ -192,17 +192,17 @@ enum GoogleReaderStatus {
 		//In fact, Vienna used successfully "r=n" with Google Reader.
 		itemsLimitation = [NSString stringWithFormat:@"&ot=%@&n=500",folderLastUpdateString];
 
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
 
     NSString* feedIdentifier;
     if( hostRequiresLastPathOnly )
     {
-        feedIdentifier = [thisFolder feedURL].lastPathComponent;
+        feedIdentifier = thisFolder.feedURL.lastPathComponent;
     }
     else
     {
-    	feedIdentifier =  [thisFolder feedURL];
+    	feedIdentifier =  thisFolder.feedURL;
     }
 		
 	NSURL *refreshFeedUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@stream/contents/feed/%@?client=%@&comments=false&likes=false%@&ck=%@&output=json",APIBaseURL,
@@ -231,7 +231,7 @@ enum GoogleReaderStatus {
 // callback
 - (void)feedRequestDone:(ASIHTTPRequest *)request
 {
-	dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
+	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
 	dispatch_async(queue, ^() {
 		
 	ActivityItem *aItem = request.userInfo[@"log"];
@@ -275,20 +275,20 @@ enum GoogleReaderStatus {
 			NSDate * articleDate = [NSDate dateWithTimeIntervalSince1970:[newsItem[@"published"] doubleValue]];
 			NSString * articleGuid = newsItem[@"id"];
 			Article *article = [[Article alloc] initWithGuid:articleGuid];
-			[article setFolderId:[refreshedFolder itemId]];
+			article.folderId = refreshedFolder.itemId;
 		
 			if (newsItem[@"author"] != nil) {
-				[article setAuthor:newsItem[@"author"]];
+				article.author = newsItem[@"author"];
 			} else {
-				[article setAuthor:@""];
+				article.author = @"";
 			}
 		
 			if (newsItem[@"content"] != nil ) {
-				[article setBody:newsItem[@"content"][@"content"]];
+				article.body = newsItem[@"content"][@"content"];
 			} else if (newsItem[@"summary"] != nil ) {
-				[article setBody:newsItem[@"summary"][@"content"]];
+				article.body = newsItem[@"summary"][@"content"];
 			} else {
-				[article setBody:@"Not available..."];
+				article.body = @"Not available...";
 			}
 			
 			for (NSString * category in (NSArray*)newsItem[@"categories"])
@@ -299,27 +299,27 @@ enum GoogleReaderStatus {
 			}
 				
 			if (newsItem[@"title"]!=nil) {
-				[article setTitle:[newsItem[@"title"] summaryTextFromHTML]];
+				article.title = [newsItem[@"title"] summaryTextFromHTML];
                 
 			} else {
-				[article setTitle:@""];
+				article.title = @"";
 			}
 			
 			if ([newsItem[@"alternate"] count] != 0) {
-				[article setLink:newsItem[@"alternate"][0][@"href"]];
+				article.link = newsItem[@"alternate"][0][@"href"];
 			} else {
-				[article setLink:[refreshedFolder feedURL]];
+				article.link = refreshedFolder.feedURL;
 			}
 		
-			[article setDate:articleDate];
+			article.date = articleDate;
 
 			if ([newsItem[@"enclosure"] count] != 0) {
-				[article setEnclosure:newsItem[@"enclosure"][0][@"href"]];
+				article.enclosure = newsItem[@"enclosure"][0][@"href"];
 			} else {
-				[article setEnclosure:@""];
+				article.enclosure = @"";
 			}
 		
-			if ([[article enclosure] isNotEqualTo:@""])
+			if ([article.enclosure isNotEqualTo:@""])
 				{
 					[article setHasEnclosure:YES];
 				}
@@ -333,12 +333,12 @@ enum GoogleReaderStatus {
 		// Here's where we add the articles to the database
 		if (articleArray.count > 0)
 		{
-			NSArray * guidHistory = [dbManager guidHistoryForFolderId:[refreshedFolder itemId]];
+			NSArray * guidHistory = [dbManager guidHistoryForFolderId:refreshedFolder.itemId];
 
 			for (Article * article in articleArray)
 			{
                 if ([refreshedFolder createArticle:article guidHistory:guidHistory] &&
-                    ([article status] == ArticleStatusNew)) {
+                    (article.status == ArticleStatusNew)) {
 					newArticlesFromFeed++;
                 }
 			}
@@ -380,7 +380,7 @@ enum GoogleReaderStatus {
 				[aItem setStatus:NSLocalizedString(@"No new articles available", nil)];
 			else
 			{
-				[aItem setStatus:[NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed]];
+				aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:refreshedFolder];
 			}
 		});
@@ -388,11 +388,11 @@ enum GoogleReaderStatus {
 		NSString* feedIdentifier;
 		if( hostRequiresLastPathOnly )
 		{
-			feedIdentifier = [refreshedFolder feedURL].lastPathComponent;
+			feedIdentifier = refreshedFolder.feedURL.lastPathComponent;
 		}
 		else
 		{
-			feedIdentifier =  [refreshedFolder feedURL];
+			feedIdentifier =  refreshedFolder.feedURL;
 		}
 
 		// Request id's of unread items
@@ -477,14 +477,14 @@ enum GoogleReaderStatus {
 		[aItem setStatus:NSLocalizedString(@"Error", nil)];
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@([refreshedFolder itemId])];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
 		return;
 	}  // try/catch
 
 
 		// If this folder also requires an image refresh, add that
-		dispatch_queue_t queue = [[RefreshManager sharedManager] asyncQueue];
-		if ([refreshedFolder flags] & MA_FFlag_CheckForImage)
+		dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
+		if (refreshedFolder.flags & MA_FFlag_CheckForImage)
 			dispatch_async(queue, ^() {
 				[[RefreshManager sharedManager] refreshFavIconForFolder:refreshedFolder];
 			});
@@ -550,13 +550,13 @@ enum GoogleReaderStatus {
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
 
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@([refreshedFolder itemId])];
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
 }
 
 -(void)authenticate 
 {    	
     Preferences * prefs = [Preferences standardPreferences];
-	if (![prefs syncGoogleReader])
+	if (!prefs.syncGoogleReader)
 		return;
 	if (googleReaderStatus != notAuthenticated) {
 		LLog(@"Another instance is authenticating...");
@@ -568,8 +568,8 @@ enum GoogleReaderStatus {
 	}
 	
     // restore from Preferences and from keychain
-	username = [prefs syncingUser];
-	openReaderHost = [prefs syncServer];
+	username = prefs.syncingUser;
+	openReaderHost = prefs.syncServer;
 	// set server-specific particularities
 	hostSupportsLongId=NO;
 	hostRequiresSParameter=NO;
@@ -684,11 +684,11 @@ enum GoogleReaderStatus {
                 options:NSJSONReadingMutableContainers
                 error:&jsonError];
 	[localFeeds removeAllObjects];
-	NSArray * localFolders = [APPCONTROLLER folders];
+	NSArray * localFolders = (APPCONTROLLER).folders;
 	
 	for (Folder * f in localFolders) {
-		if ([f feedURL]) {
-			[localFeeds addObject:[f feedURL]];
+		if (f.feedURL) {
+			[localFeeds addObject:f.feedURL];
 		}
 	}
 			
@@ -737,7 +737,7 @@ enum GoogleReaderStatus {
 			NSString* homePageURL = feed[@"htmlUrl"];
 			if (homePageURL) {
 				for (Folder * f in localFolders) {
-					if (IsGoogleReaderFolder(f) && [[f feedURL] isEqualToString:feedURL]) {
+					if (IsGoogleReaderFolder(f) && [f.feedURL isEqualToString:feedURL]) {
                         [[Database sharedManager] setHomePage:homePageURL forFolder:f.itemId];
 						break;
 					}
@@ -749,10 +749,10 @@ enum GoogleReaderStatus {
 	}
 	
 	//check if we have a folder which is not registered as a Open Reader feed
-	for (Folder * f in [APPCONTROLLER folders]) {
-		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:[f feedURL]])
+	for (Folder * f in (APPCONTROLLER).folders) {
+		if (IsGoogleReaderFolder(f) && ![googleFeeds containsObject:f.feedURL])
 		{
-			[[Database sharedManager] deleteFolder:[f itemId]];
+			[[Database sharedManager] deleteFolder:f.itemId];
 		}
 	}
 
@@ -773,7 +773,7 @@ enum GoogleReaderStatus {
 	} else {
 		LLog(@"Firing directly");
 
-		if ([self isReady]) {
+		if (self.ready) {
 			LLog(@"Token available, finish subscription");
 			[self submitLoadSubscriptions];
 		} else {
@@ -786,7 +786,7 @@ enum GoogleReaderStatus {
 
 -(void)subscribeToFeed:(NSString *)feedURL 
 {
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/quickadd?client=%@",APIBaseURL,ClientName]];
     
@@ -800,7 +800,7 @@ enum GoogleReaderStatus {
 
 -(void)unsubscribeFromFeed:(NSString *)feedURL 
 {
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
 	NSURL *unsubscribeURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:unsubscribeURL];
@@ -815,7 +815,7 @@ enum GoogleReaderStatus {
  */
 -(void)setFolderName:(NSString *)folderName forFeed:(NSString *)feedURL set:(BOOL)flag
 {
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
     NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/edit?client=%@",APIBaseURL,ClientName]];
     
@@ -830,7 +830,7 @@ enum GoogleReaderStatus {
 
 -(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
 {
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:markReadURL];
@@ -846,7 +846,7 @@ enum GoogleReaderStatus {
 
 -(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
 {
-	if (![self isReady])
+	if (!self.ready)
 		[self authenticate];
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:markStarredURL];
@@ -862,15 +862,6 @@ enum GoogleReaderStatus {
 	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
-
--(void)dealloc 
-{
-    username=nil;
-	openReaderHost=nil;
-	password=nil;
-	APIBaseURL=nil;
-	inoreaderAdditionalHeaders=nil;
-}
 
 /* sharedManager
  * Returns the single instance of the Open Reader.
@@ -899,7 +890,7 @@ enum GoogleReaderStatus {
 			NSString * folderName = params[2];
 			Database * db = [Database sharedManager];
 			Folder * folder = [db folderFromName:folderName];
-			underFolder = [folder itemId];
+			underFolder = folder.itemId;
 		}
 		rssTitle = params[1];
     }

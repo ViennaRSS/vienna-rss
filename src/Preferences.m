@@ -103,7 +103,7 @@ static Preferences * _standardPreferences = nil;
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:MAPref_Profile_Path];
 		
 		// Merge in the user preferences from the defaults.
-		NSDictionary * defaults = [self allocFactoryDefaults];
+		NSDictionary * defaults = self.allocFactoryDefaults;
 		if (profilePath == nil)
 		{
 			preferencesPath = nil;
@@ -227,19 +227,6 @@ static Preferences * _standardPreferences = nil;
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	defaultDatabase=nil;
-	imagesFolder=nil;
-	downloadFolder=nil;
-	folderFont=nil;
-	articleFont=nil;
-	displayStyle=nil;
-	preferencesPath=nil;
-	articleSortDescriptors=nil;
-	profilePath=nil;
-	feedSourcesFolder=nil;
-	searchMethod=nil;
-	syncServer=nil;
-	syncingUser=nil;
 }
 
 /* allocFactoryDefaults
@@ -941,7 +928,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setFolderListFont:(NSString *)newFontName
 {
-	folderFont = [NSFont fontWithName:newFontName size:[self folderListFontSize]];
+	folderFont = [NSFont fontWithName:newFontName size:self.folderListFontSize];
 	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
@@ -951,7 +938,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setFolderListFontSize:(NSInteger)newFontSize
 {
-	folderFont = [NSFont fontWithName:[self folderListFont] size:newFontSize];
+	folderFont = [NSFont fontWithName:self.folderListFont size:newFontSize];
 	[self setObject:[NSArchiver archivedDataWithRootObject:folderFont] forKey:MAPref_FolderFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderFontChange" object:folderFont];
 }
@@ -977,7 +964,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setArticleListFont:(NSString *)newFontName
 {
-	articleFont = [NSFont fontWithName:newFontName size:[self articleListFontSize]];
+	articleFont = [NSFont fontWithName:newFontName size:self.articleListFontSize];
 	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }
@@ -987,7 +974,7 @@ static Preferences * _standardPreferences = nil;
  */
 -(void)setArticleListFontSize:(NSInteger)newFontSize
 {
-	articleFont = [NSFont fontWithName:[self articleListFont] size:newFontSize];
+	articleFont = [NSFont fontWithName:self.articleListFont size:newFontSize];
 	[self setObject:[NSArchiver archivedDataWithRootObject:articleFont] forKey:MAPref_ArticleListFont];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
 }

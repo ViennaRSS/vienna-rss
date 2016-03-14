@@ -33,7 +33,7 @@
 {
 	if ((self = [super initWithWindowNibName:@"ActivityViewer"]) != nil)
 	{
-		allItems = [[ActivityLog defaultLog] allItems];
+		allItems = [ActivityLog defaultLog].allItems;
 	}
 	return self;
 }
@@ -62,7 +62,7 @@
 	[activityTable localiseHeaderStrings];
 
 	// Restore the split position
-	[splitView setLayout:[[Preferences standardPreferences] objectForKey:@"SplitView3Positions"]];	
+	splitView.layout = [[Preferences standardPreferences] objectForKey:@"SplitView3Positions"];	
 
 	// Set up to receive notifications when the activity log changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -76,7 +76,7 @@
  */
 -(BOOL)windowShouldClose:(NSNotification *)notification
 {
-	[[Preferences standardPreferences] setObject:[splitView layout] forKey:@"SplitView3Positions"];
+	[[Preferences standardPreferences] setObject:splitView.layout forKey:@"SplitView3Positions"];
 	return YES;
 }
 
@@ -92,13 +92,13 @@
 
 		// Name might be a URL if the feed has always been invalid.
 		Database * db = [Database sharedManager];
-		Folder * folder = [db folderFromName:[selectedItem name]];
+		Folder * folder = [db folderFromName:selectedItem.name];
 		if (folder == nil)
-			folder = [db folderFromFeedURL:[selectedItem name]];
+			folder = [db folderFromFeedURL:selectedItem.name];
 		if (folder != nil)
 		{
 			AppController * controller = APPCONTROLLER;
-			[controller selectFolder:[folder itemId]];
+			[controller selectFolder:folder.itemId];
 		}
 	}
 }
@@ -152,7 +152,7 @@
 	NSInteger selectedRow = activityTable.selectedRow;
 
 	if (selectedRow >= 0 && (item == allItems[selectedRow]))
-		activityDetail.string = [item details];		
+		activityDetail.string = item.details;		
 }
 
 /* numberOfRowsInTableView [datasource]
@@ -174,7 +174,7 @@
 	if (selectedRow >= 0 && selectedRow < allItems.count)
 	{
 		ActivityItem * item = allItems[selectedRow];
-		activityDetail.string = [item details];
+		activityDetail.string = item.details;
 	}
 }
 

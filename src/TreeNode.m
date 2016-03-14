@@ -31,11 +31,11 @@
 {
 	if ((self = [super init]) != nil)
  	{
-		NSInteger folderId = (theFolder ? [theFolder itemId] : MA_Root_Folder);
-		[self setFolder:theFolder];
-		[self setParentNode:parent];
-		[self setCanHaveChildren:childflag];
-		[self setNodeId:folderId];
+		NSInteger folderId = (theFolder ? theFolder.itemId : MA_Root_Folder);
+		folder = theFolder;
+		parentNode = parent;
+		canHaveChildren = childflag;
+		nodeId = folderId;
 		if (parent != nil)
 		{
 			[parent addChild:self atIndex:insertIndex];
@@ -61,7 +61,7 @@
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
 	NSUInteger count = children.count;
-	NSInteger sortMethod = [[Preferences standardPreferences] foldersTreeSortMethod];
+	NSInteger sortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
 
 	if (sortMethod != MA_FolderSort_Manual)
 	{
@@ -85,7 +85,7 @@
 	else if ((insertIndex < 0) || (insertIndex > count))
 		insertIndex = count;
 	
-	[child setParentNode:self];
+	child.parentNode = self;
 	[children insertObject:child atIndex:insertIndex];
 }
 
@@ -126,14 +126,14 @@
  */
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject
 {
-	Folder * thisFolder = [self folder];
-	Folder * otherFolder = [otherObject folder];
+	Folder * thisFolder = self.folder;
+	Folder * otherFolder = otherObject.folder;
 
 	if (FolderType(thisFolder) < FolderType(otherFolder))
 		return NSOrderedAscending;
 	if (FolderType(thisFolder) > FolderType(otherFolder))
 		return NSOrderedDescending;
-	return [[thisFolder name] caseInsensitiveCompare:[otherFolder name]];
+	return [thisFolder.name caseInsensitiveCompare:otherFolder.name];
 }
 
 /* removeChildren
@@ -150,7 +150,7 @@
  */
 -(TreeNode *)nodeFromID:(NSInteger)n
 {
-	if ([self nodeId] == n)
+	if (self.nodeId == n)
 		return self;
 	
 	TreeNode * theNode;
@@ -170,7 +170,7 @@
 {
 	for (TreeNode * node in children)
 	{
-		if ([childName isEqual:[node nodeName]])
+		if ([childName isEqual:node.nodeName])
 			return node;
 	}
 	return nil;
@@ -215,7 +215,7 @@
 -(TreeNode *)nextSibling
 {
 	NSInteger childIndex = [parentNode indexOfChild:self];
-	if (childIndex == NSNotFound || ++childIndex >= [parentNode countOfChildren])
+	if (childIndex == NSNotFound || ++childIndex >= parentNode.countOfChildren)
 		return nil;
 	return [parentNode childByIndex:childIndex];
 }
@@ -271,9 +271,9 @@
 {
 	if (folder != nil) {
 		if (IsGoogleReaderFolder(folder)) {
-			return [NSString stringWithFormat:@"☁️ %@",[folder name]];
+			return [NSString stringWithFormat:@"☁️ %@",folder.name];
 		} else {
-			return [folder name];
+			return folder.name;
 		}
 	} 
 	return @"";
@@ -312,7 +312,7 @@
 -(NSString *)description
 {
 	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)",
-            [folder name], parentNode, (unsigned long)children.count];
+            folder.name, parentNode, (unsigned long)children.count];
 }
 
 /* allocAndStartProgressIndicator:

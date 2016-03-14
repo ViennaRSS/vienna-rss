@@ -88,7 +88,7 @@
 -(void)animationDidEnd:(NSAnimation *)animation
 {
 	NSWindow * viewWindow = self.window;
-	NSInteger viewTag = [animation MA_tag];
+	NSInteger viewTag = animation.MA_tag;
 
 	if ([viewWindow.delegate respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
 		[(id)viewWindow.delegate viewAnimationCompleted:self withTag:viewTag];

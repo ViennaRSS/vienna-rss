@@ -109,7 +109,7 @@ const float kDefaultHiddenHeight = 0.0;
 
 - (IBAction)toggleDisclosure:(id)sender;
 {
-    [self setShown:!isShown];
+    self.shown = !isShown;
 }
 
 - (IBAction)hide:(id)sender;
@@ -307,7 +307,7 @@ const float kDefaultHiddenHeight = 0.0;
     ourSubviewMasks = [NSMutableArray array];
     for (NSView* ourSubview in ourSubviews) {
         NSAutoresizingMaskOptions mask = ourSubview.autoresizingMask;
-        [ourSubviewMasks addObject:[NSNumber numberWithUnsignedInt:mask]];
+        [ourSubviewMasks addObject:[NSNumber numberWithUnsignedInt:(NSUInteger)mask]];
 
         // Don't change height, and stick to the top of the view.
         mask &= ~NSViewHeightSizable;

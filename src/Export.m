@@ -39,10 +39,10 @@
 	for (Folder * folder in feedArray)
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
-		NSString * name = [folder name];
+		NSString * name = folder.name;
 		if (IsGroupFolder(folder))
 		{
-			NSArray * subFolders = [foldersTree children:[folder itemId]];
+			NSArray * subFolders = [foldersTree children:folder.itemId];
 			
             if (!groupFlag) {
 				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
@@ -58,9 +58,9 @@
 		}
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			NSString * link = [folder homePage];
-			NSString * description = [folder feedDescription];
-			NSString * url = [folder feedURL];
+			NSString * link = folder.homePage;
+			NSString * description = folder.feedDescription;
+			NSString * url = folder.feedURL;
 
 			itemDict[@"type"] = @"rss";
 			itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
@@ -109,7 +109,7 @@
     NSInteger countExported = 0;
     NSArray * folders;
 	if (selectionFlag)
-	    folders = [foldersTree selectedFolders];
+	    folders = foldersTree.selectedFolders;
 	else
 	    folders = [foldersTree children:0];
     NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:folders inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];

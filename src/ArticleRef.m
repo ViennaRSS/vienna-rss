@@ -39,7 +39,7 @@
  */
 +(ArticleReference *)makeReference:(Article *)anArticle
 {
-	return [[ArticleReference alloc] initWithReference:[anArticle guid] inFolder:[anArticle folderId]];
+	return [[ArticleReference alloc] initWithReference:anArticle.guid inFolder:anArticle.folderId];
 }
 
 /* makeReferenceFromGUID

@@ -68,8 +68,8 @@
 {
 	if ((self = [super init]) != nil)
     {
-		[self setFriendlyName:[coder decodeObjectForKey:@"friendlyName"]];
-		[self setSearchQueryString:[coder decodeObjectForKey:@"searchQueryString"]];
+		self.friendlyName = [coder decodeObjectForKey:@"friendlyName"];
+		self.searchQueryString = [coder decodeObjectForKey:@"searchQueryString"];
 		[coder decodeValueOfObjCType:@encode(SEL) at:&handler];
     }   
     return self;
@@ -93,8 +93,8 @@
 +(SearchMethod *)searchAllArticlesMethod
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
-	[method setFriendlyName:@"Search all articles"];
-	[method setHandler:@selector(performAllArticlesSearch)];
+	method.friendlyName = @"Search all articles";
+	method.handler = @selector(performAllArticlesSearch);
 	
 	return method; 
 }
@@ -106,8 +106,8 @@
 +(SearchMethod *)searchCurrentWebPageMethod
 {
 	SearchMethod * method = [[SearchMethod alloc] init];
-	[method setFriendlyName:@"Search current web page"];
-	[method setHandler:@selector(performWebPageSearch)];
+	method.friendlyName = @"Search current web page";
+	method.handler = @selector(performWebPageSearch);
 	
 	return method; 
 }	
@@ -120,7 +120,7 @@
 - (NSURL *)queryURLforSearchString:(NSString *)searchString;
 {
 	NSURL * queryURL;
-	NSString * temp = [[self searchQueryString] stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];
+	NSString * temp = [self.searchQueryString stringByReplacingOccurrencesOfString:@"$SearchTerm$" withString:searchString];
 	queryURL = cleanedUpAndEscapedUrlFromString(temp);
     return queryURL;
 }
@@ -175,12 +175,6 @@
 -(SEL)handler 
 { 
 	return handler; 
-}
-
--(void)dealloc 
-{ 
-	friendlyName=nil;
-	searchQueryString=nil;
 }
 
 @end

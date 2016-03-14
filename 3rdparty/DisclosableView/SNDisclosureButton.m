@@ -60,7 +60,7 @@
     if ((image = [self imageNamed:altImageNameStr]))
         self.alternateImage = image;
 
-    self.cell.highlightsBy = NSPushInCellMask;    
+    ((NSButtonCell *)self.cell).highlightsBy = NSPushInCellMask;
 }
 
 - (NSImage *)imageNamed:(NSString *)imageName

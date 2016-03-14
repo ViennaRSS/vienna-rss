@@ -97,7 +97,7 @@ static FolderImageCache * _folderImageCache = nil;
         // Get and cache the path to the folder. This is the best time to make sure it
         // exists. The penalty for it not existing AND us being unable to create it is that
         // we don't cache folder icons in this session.
-        imagesCacheFolder = [[Preferences standardPreferences] imagesFolder];
+        imagesCacheFolder = [Preferences standardPreferences].imagesFolder;
         if (![fileManager fileExistsAtPath:imagesCacheFolder isDirectory:&isDir])
         {
             if (![fileManager createDirectoryAtPath:imagesCacheFolder withIntermediateDirectories:YES attributes:nil error:nil])
@@ -134,7 +134,7 @@ static FolderImageCache * _folderImageCache = nil;
                     if (iconImage.valid)
                     {
                         iconImage.size = NSMakeSize(16, 16);
-                        NSString * homePageSiteRoot = [fullPath.lastPathComponent.stringByDeletingPathExtension convertStringToValidPath];
+                        NSString * homePageSiteRoot = (fullPath.lastPathComponent.stringByDeletingPathExtension).convertStringToValidPath;
                         folderImagesArray[homePageSiteRoot] = iconImage;
                     }
                 }

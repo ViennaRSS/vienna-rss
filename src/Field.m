@@ -47,9 +47,9 @@
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setDisplayName:[coder decodeObject]];
-		[self setName:[coder decodeObject]];
-		[self setSqlField:[coder decodeObject]];
+		displayName = [coder decodeObject];
+		name = [coder decodeObject];
+		sqlField = [coder decodeObject];
 		[coder decodeValueOfObjCType:@encode(bool) at:&visible];
 		[coder decodeValueOfObjCType:@encode(NSInteger) at:&width];
 		[coder decodeValueOfObjCType:@encode(NSInteger) at:&tag];
@@ -199,13 +199,4 @@
 	[coder encodeValueOfObjCType:@encode(NSInteger) at:&type];
 }
 
-/* dealloc
- * Release our resources.
- */
--(void)dealloc
-{
-	sqlField=nil;
-	displayName=nil;
-	name=nil;
-}
 @end

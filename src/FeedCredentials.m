@@ -59,16 +59,16 @@
 
 	// Show the feed URL in the prompt so the user knows which site credentials are being
 	// requested. (We don't use [folder name] here as that is likely to be "Untitled Folder" mostly).
-	NSURL * secureURL = [NSURL URLWithString:[folder feedURL]];
+	NSURL * secureURL = [NSURL URLWithString:folder.feedURL];
 	NSString * prompt = [NSString stringWithFormat:NSLocalizedString(@"Credentials Prompt", nil), secureURL.host];
 	promptString.stringValue = prompt;
 
 	// Fill out any existing values.
-	userName.stringValue = [folder username];
-	password.stringValue = [folder password];
+	userName.stringValue = folder.username;
+	password.stringValue = folder.password;
 	
 	// Set the focus
-	[credentialsWindow makeFirstResponder:([[folder username] isBlank]) ? userName : password];
+	[credentialsWindow makeFirstResponder:(folder.username.blank) ? userName : password];
 
 	[self enableOKButton];
 	[NSApp beginSheet:credentialsWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
@@ -90,12 +90,12 @@
  */
 -(IBAction)doOKButton:(id)sender
 {
-	NSString * usernameString = [userName.stringValue trim];
+	NSString * usernameString = (userName.stringValue).trim;
 	NSString * passwordString = password.stringValue;
 
 	Database * db = [Database sharedManager];
-	[db setFolderUsername:[folder itemId] newUsername:usernameString];
-	[folder setPassword:passwordString];
+	[db setFolderUsername:folder.itemId newUsername:usernameString];
+	folder.password = passwordString;
 	
 	[NSApp endSheet:credentialsWindow];
 	[credentialsWindow orderOut:self];
@@ -118,7 +118,7 @@
  */
 -(void)enableOKButton
 {
-	okButton.enabled = ![userName.stringValue isBlank];
+	okButton.enabled = !(userName.stringValue).blank;
 }
 
 /* dealloc

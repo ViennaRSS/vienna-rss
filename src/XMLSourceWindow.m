@@ -45,8 +45,8 @@
 	
 	if ((self = [super initWithWindowNibName:@"XMLSource"]) != nil)
 	{
-		sourceWindowTitle = [[NSString alloc] initWithFormat:@"%@ %li: %@", NSLocalizedString(@"Source of folder", nil), (long)[folder itemId], [folder name]];
-		feedSourceFilePath = [[folder feedSourceFilePath] copy];
+		sourceWindowTitle = [[NSString alloc] initWithFormat:@"%@ %li: %@", NSLocalizedString(@"Source of folder", nil), (long)folder.itemId, folder.name];
+		feedSourceFilePath = [folder.feedSourceFilePath copy];
 	}
 	return self;
 }

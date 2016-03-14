@@ -117,8 +117,8 @@
 	parentId = itemId;
 	[newRSSFeedWindow makeFirstResponder:feedURL];
 	//restore from preferences, if it can be done ; otherwise, uncheck this option
-	self.googleOptionButton=[[Preferences standardPreferences] syncGoogleReader]
-		&&[[Preferences standardPreferences] prefersGoogleNewSubscription];
+	self.googleOptionButton=[Preferences standardPreferences].syncGoogleReader
+		&&[Preferences standardPreferences].prefersGoogleNewSubscription;
 	[NSApp beginSheet:newRSSFeedWindow modalForWindow:window modalDelegate:nil didEndSelector:nil contextInfo:nil];
 }
 
@@ -145,7 +145,7 @@
 	Folder * folder = [db folderFromID:folderId];
 	if (folder != nil)
 	{
-		editFeedURL.stringValue = [folder feedURL];
+		editFeedURL.stringValue = folder.feedURL;
 		[self enableSaveButton];
 		editFolderId = folderId;
 		
@@ -180,7 +180,7 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSURL * rssFeedURL;
-	NSString * feedURLString = [feedURL.stringValue trim];
+	NSString * feedURLString = (feedURL.stringValue).trim;
 	// Replace feed:// with http:// if necessary
 	if ([feedURLString hasPrefix:@"feed://"])
 		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
@@ -270,7 +270,7 @@
 */
 -(IBAction)doGoogleOption:(id)sender
 {
- 	[[Preferences standardPreferences] setPrefersGoogleNewSubscription:([sender state] == NSOnState)];
+ 	[Preferences standardPreferences].prefersGoogleNewSubscription = ([sender state] == NSOnState);
 }
 
 /* handleTextDidChange [delegate]
@@ -339,7 +339,7 @@
 -(void)enableSubscribeButton
 {
 	NSString * feedURLString = feedURL.stringValue;
-	subscribeButton.enabled = ![feedURLString isBlank];
+	subscribeButton.enabled = !feedURLString.blank;
 }
 
 /* enableSaveButton
@@ -349,7 +349,7 @@
 -(void)enableSaveButton
 {
 	NSString * feedURLString = editFeedURL.stringValue;
-	saveButton.enabled = ![feedURLString isBlank];
+	saveButton.enabled = !feedURLString.blank;
 }
 
 /* dealloc

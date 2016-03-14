@@ -17,13 +17,13 @@
 {
     if ((self = [super init]) != nil)
     {
-        [self setTitle:@""];
-        [self setDescription:@""];
-        [self setAuthor:@""];
-        [self setGuid:@""];
-        [self setDate:nil];
-        [self setLink:@""];
-        [self setEnclosure:@""];
+        title = @"";
+        description = @"";
+        author = @"";
+        guid = @"";
+        date = nil;
+        link = @"";
+        enclosure = @"";
     }
     return self;
 }
@@ -140,17 +140,4 @@
     return enclosure;
 }
 
-/* dealloc
- * Clean up when we're released.
- */
--(void)dealloc
-{
-    guid=nil;
-    title=nil;
-    description=nil;
-    author=nil;
-    date=nil;
-    link=nil;
-    enclosure=nil;
-}
 @end

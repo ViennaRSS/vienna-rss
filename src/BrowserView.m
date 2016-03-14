@@ -305,12 +305,12 @@
  */
 -(void)saveOpenTabs
 {
-	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:[self countOfTabs]];
+	NSMutableArray *tabLinks = [NSMutableArray arrayWithCapacity:self.countOfTabs];
 	
 	for (NSTabViewItem * tabViewItem in tabView.tabViewItems)
 	{
 		NSView<BaseView> * theView = tabViewItem.identifier;
-		NSString * tabLink = [theView viewLink];
+		NSString * tabLink = theView.viewLink;
 		if (tabLink != nil)
 			[tabLinks addObject:tabLink];			
 	}

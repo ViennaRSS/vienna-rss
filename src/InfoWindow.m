@@ -178,21 +178,21 @@
 	Folder * folder = [[Database sharedManager] folderFromID:infoFolderId];
 	
 	// Set the window caption
-	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", nil), [folder name]];
+	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", nil), folder.name];
 	self.window.title = caption;
 
 	// Set the header details
-	folderName.stringValue = [folder name];
-	folderImage.image = [folder image]; 
-	if ([[folder lastUpdate] isEqualToDate:[NSDate distantPast]])
+	folderName.stringValue = folder.name;
+	folderImage.image = folder.image; 
+	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]])
 		[lastRefreshDate setStringValue:NSLocalizedString(@"Never", nil)];
 	else
-		lastRefreshDate.stringValue = [[[folder lastUpdate] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
+		lastRefreshDate.stringValue = [folder.lastUpdate dateWithCalendarFormat:nil timeZone:nil].friendlyDescription;
 	
 	// Fill out the panels
-	urlField.stringValue = [folder feedURL];
-	username.stringValue = [folder username];
-	password.stringValue = [folder password];
+	urlField.stringValue = folder.feedURL;
+	username.stringValue = folder.username;
+	password.stringValue = folder.password;
 	// for Google feeds, URL may not be changed and no authentication is supported
 	if (IsGoogleReaderFolder(folder)) {
 		//[urlField setSelectable:NO];
@@ -203,11 +203,11 @@
 		[password setEditable:NO];
 		password.textColor = [NSColor disabledControlTextColor];
 	}
-	folderDescription.stringValue = [folder feedDescription];
+	folderDescription.stringValue = folder.feedDescription;
 	folderSize.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u articles", nil), MAX(0, [folder countOfCachedArticles])];
-	folderUnread.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), [folder unreadCount]];
-	isSubscribed.state = ([folder flags] & MA_FFlag_Unsubscribed) ? NSOffState : NSOnState;
-	loadFullHTML.state = ([folder flags] & MA_FFlag_LoadFullHTML) ? NSOnState : NSOffState;
+	folderUnread.stringValue = [NSString stringWithFormat:NSLocalizedString(@"%u unread", nil), folder.unreadCount];
+	isSubscribed.state = (folder.flags & MA_FFlag_Unsubscribed) ? NSOffState : NSOnState;
+	loadFullHTML.state = (folder.flags & MA_FFlag_LoadFullHTML) ? NSOnState : NSOffState;
 }
 
 /* urlFieldChanged
@@ -215,7 +215,7 @@
  */
 -(IBAction)urlFieldChanged:(id)sender
 {
-	NSString * newUrl = [urlField.stringValue trim];
+	NSString * newUrl = (urlField.stringValue).trim;
     [[Database sharedManager] setFeedURL:newUrl forFolder:infoFolderId];
 }
 
@@ -272,7 +272,7 @@
  */
 -(void)enableValidateButton
 {
-	validateButton.enabled = ![urlField.stringValue isBlank];
+	validateButton.enabled = !(urlField.stringValue).blank;
 }
 
 /* validateURL
@@ -283,7 +283,7 @@
 	NSString * validatorPage = [[APPCONTROLLER standardURLs] valueForKey:@"FeedValidatorTemplate"];
 	if (validatorPage != nil)
 	{
-		NSString * url = [urlField.stringValue trim];
+		NSString * url = (urlField.stringValue).trim;
 		
 		// Escape any special query characters in the URL, because the URL itself will be in a query.
 		NSString * query = [NSURL URLWithString:url].query;
@@ -309,13 +309,13 @@
  */
 -(IBAction)authenticationChanged:(id)sender
 {
-	NSString * usernameString = [username.stringValue trim];
+	NSString * usernameString = (username.stringValue).trim;
 	NSString * passwordString = password.stringValue;
 	
 	Database * db = [Database sharedManager];
 	Folder * folder = [db folderFromID:infoFolderId];
-	[db setFolderUsername:[folder itemId] newUsername:usernameString];
-	[folder setPassword:passwordString];
+	[db setFolderUsername:folder.itemId newUsername:usernameString];
+	folder.password = passwordString;
 }
 
 /* windowShouldClose

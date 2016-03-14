@@ -60,7 +60,7 @@
     NSString *criteriaTreeString = @"<?xml version=\"1.0\" encoding=\"utf-8\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>";
     
     CriteriaTree *testCriteriaTree = [[CriteriaTree alloc] initWithString:criteriaTreeString];
-    NSArray *allCriteria = [testCriteriaTree criteriaEnumerator].allObjects;
+    NSArray *allCriteria = testCriteriaTree.criteriaEnumerator.allObjects;
     XCTAssertTrue([allCriteria.firstObject isKindOfClass:Criteria.class], @"Pass");
 
 }
@@ -72,7 +72,7 @@
     NSString *criteriaTreeString = @"<?xml version=\"1.0\" encoding=\"utf-8\"?><criteriagroup condition=\"all\"><criteria field=\"Flagged\"><operator>1</operator><value>Yes</value></criteria><criteria field=\"Date\"><operator>1</operator><value>today</value></criteria></criteriagroup>";
     
     CriteriaTree *testCriteriaTree = [[CriteriaTree alloc] initWithString:criteriaTreeString];
-    NSArray *allCriteria = [testCriteriaTree criteriaEnumerator].allObjects;
+    NSArray *allCriteria = testCriteriaTree.criteriaEnumerator.allObjects;
     XCTAssertGreaterThan(allCriteria.count, 1, @"Pass");
 }
 

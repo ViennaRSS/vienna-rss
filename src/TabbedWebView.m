@@ -52,7 +52,7 @@ static NSString * _userAgent ;
         NSString * shortSafariVersion = [NSBundle bundleWithPath:@"/Applications/Safari.app"].infoDictionary[@"CFBundleShortVersionString"];
         if (!shortSafariVersion)
             shortSafariVersion = @"6.0";
-        _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, [[((ViennaApp *)NSApp) applicationVersion] firstWord], shortSafariVersion, webkitVersion];
+        _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord, shortSafariVersion, webkitVersion];
 	}
 	return _userAgent;
 }
@@ -280,7 +280,7 @@ static NSString * _userAgent ;
 		else
 		{
 			Preferences * prefs = [Preferences standardPreferences];
-			if ([prefs openLinksInVienna] == useAlternateBrowser)
+			if (prefs.openLinksInVienna == useAlternateBrowser)
 			{
 				[listener ignore];
 				[controller openURLInDefaultBrowser:request.URL];
@@ -329,11 +329,11 @@ static NSString * _userAgent ;
 -(void)loadMinimumFontSize
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	if (![prefs enableMinimumFontSize])
+	if (!prefs.enableMinimumFontSize)
 		defaultWebPrefs.minimumFontSize = 1;
 	else
 	{
-		NSInteger size = [prefs minimumFontSize];
+		NSInteger size = prefs.minimumFontSize;
 		defaultWebPrefs.minimumFontSize = (int)size;
 	}
 }
@@ -374,7 +374,7 @@ static NSString * _userAgent ;
 -(void)loadUseJavaScript
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	defaultWebPrefs.javaScriptEnabled = [prefs useJavaScript];
+	defaultWebPrefs.javaScriptEnabled = prefs.useJavaScript;
 }
 
 /* loadUseWebPlugins
@@ -383,7 +383,7 @@ static NSString * _userAgent ;
 -(void)loadUseWebPlugins
 {
     Preferences * prefs = [Preferences standardPreferences];
-    defaultWebPrefs.plugInsEnabled = [prefs useWebPlugins];
+    defaultWebPrefs.plugInsEnabled = prefs.useWebPlugins;
 }
 
 /* keyDown
@@ -446,7 +446,5 @@ static NSString * _userAgent ;
 	[self setPolicyDelegate:nil];
 	[self setDownloadDelegate:nil];
 	[self removeFromSuperviewWithoutNeedingDisplay];
-	controller=nil;
-	defaultWebPrefs=nil;
 }
 @end

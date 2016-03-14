@@ -174,7 +174,7 @@
 {
 	if ((self.webPane).mainFrame.dataSource.unreachableURL)
 		return (self.webPane).mainFrame.dataSource.unreachableURL.absoluteString;
-	return [self url].absoluteString;
+	return self.url.absoluteString;
 }
 
 /* showRssPageButton
@@ -234,7 +234,7 @@
  */
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	[self setViewTitle:@""];
+	self.viewTitle = @"";
 	openURLInBackground = openInBackgroundFlag;
 	isLocalFile = url.fileURL;
 
@@ -256,7 +256,7 @@
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	if ([[controller browserView] activeTabItemView] == self)
+	if (controller.browserView.activeTabItemView == self)
 		[controller setStatusMessage:text persist:NO];
 }
 
@@ -277,10 +277,10 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
+		[controller.browserView setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
 		[self showRssPageButton:NO];
 		[self setError:nil];
-		[self setViewTitle:@""];
+		self.viewTitle = @"";
 	}
 
 }
@@ -335,7 +335,7 @@
 	if (frame == (self.webPane).mainFrame)
 	{
 		// Was this a feed redirect? If so, this isn't an error:
-		if (![self.webPane isFeedRedirect] && ![self.webPane isDownload])
+		if (!(self.webPane).feedRedirect && !(self.webPane).download)
 		{
 			[self setError:error];
 			
@@ -371,7 +371,7 @@
 	if ([viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
-			[[controller browserView] setTabItemViewTitle:self title:pageFilename];
+			[controller.browserView setTabItemViewTitle:self title:pageFilename];
 	}
 	
 	[self willChangeValueForKey:@"isLoading"];
@@ -429,7 +429,7 @@
 		{
 			rssPageURL = arrayOfLinks[0];
 			if (![rssPageURL hasPrefix:@"http:"] && ![rssPageURL hasPrefix:@"https:"])
-				rssPageURL = [NSURL URLWithString:rssPageURL relativeToURL:[self url]].absoluteString;
+				rssPageURL = [NSURL URLWithString:rssPageURL relativeToURL:self.url].absoluteString;
 			[self showRssPageButton:YES];
 		}
 		[self endFrameLoad];
@@ -443,8 +443,8 @@
 {
 	if (frame == (self.webPane).mainFrame)
 	{
-		[[controller browserView] setTabItemViewTitle:self title:title];
-		[self setViewTitle:title];
+		[controller.browserView setTabItemViewTitle:self title:title];
+		self.viewTitle = title;
 	}
 }
 
@@ -478,7 +478,7 @@
 	// open a new tab and return its main webview
 	{
 		[controller newTab:nil];
-		NSView<BaseView> * theView = [[controller browserView] activeTabItemView];
+		NSView<BaseView> * theView = controller.browserView.activeTabItemView;
 		BrowserPane * browserPane = (BrowserPane *)theView;
 		return browserPane.webPane;
 	}
@@ -540,7 +540,7 @@
 -(void)webViewClose:(WebView *)sender
 {
 	[self handleStopLoading:self];
-	[[controller browserView] closeTabItemView:self];
+	[controller.browserView closeTabItemView:self];
 }
 
 /* contextMenuItemsForElement
@@ -593,16 +593,16 @@
 	{
 		case NSFindPanelActionSetFindString:
 		{			
-			[self.webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:controller.searchString direction:YES caseSensitive:NO wrap:YES];
 			break;
 		}
 			
 		case NSFindPanelActionNext:
-			[self.webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:controller.searchString direction:YES caseSensitive:NO wrap:YES];
 			break;
 			
 		case NSFindPanelActionPrevious:
-			[self.webPane searchFor:[controller searchString] direction:NO caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:controller.searchString direction:NO caseSensitive:NO wrap:YES];
 			break;
 	}
 }
@@ -727,10 +727,10 @@
 {
 	if (rssPageURL != nil)
 	{
-		Folder * currentFolder = [NSApp currentFolder];
-		NSInteger currentFolderId = [currentFolder itemId];
-		NSInteger parentFolderId = [currentFolder parentId];
-		if ([currentFolder firstChildId] > 0)
+		Folder * currentFolder = APP.currentFolder;
+		NSInteger currentFolderId = currentFolder.itemId;
+		NSInteger parentFolderId = currentFolder.parentId;
+		if (currentFolder.firstChildId > 0)
 		{
 			parentFolderId = currentFolderId;
 			currentFolderId = 0;
@@ -752,7 +752,7 @@
  */
 -(BOOL)isProcessing
 {
-	return [self isLoading];
+	return self.loading;
 }
 
 /* handleKeyDown [delegate]

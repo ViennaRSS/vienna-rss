@@ -61,9 +61,9 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
         hasEnclosureFlag = NO;
         enclosureDownloadedFlag = NO;
         status = ArticleStatusEmpty;
-        [self setFolderId:-1];
-        [self setGuid:theGuid];
-        [self setParentId:0];
+        self.folderId = -1;
+        self.guid = theGuid;
+        self.parentId = 0;
     }
     return self;
 }
@@ -183,23 +183,23 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
         NSString * key = [keyPath substringFromIndex:(@"articleData.").length];
         if ([key isEqualToString:MA_Field_Date])
         {
-            return [self date];
+            return self.date;
         }
         else if ([key isEqualToString:MA_Field_Author])
         {
-            return [self author];
+            return self.author;
         }
         else if ([key isEqualToString:MA_Field_Subject])
         {
-            return [self title];
+            return self.title;
         }
         else if ([key isEqualToString:MA_Field_Link])
         {
-            return [self link];
+            return self.link;
         }
         else if ([key isEqualToString:MA_Field_Summary])
         {
-            return [self summary];
+            return self.summary;
         }
         else
         {
@@ -249,7 +249,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(Folder *)containingFolder
 {
-    return [[Database sharedManager] folderFromID:[self folderId]];
+    return [[Database sharedManager] folderFromID:self.folderId];
 }
 
 /* setFolderId
@@ -285,7 +285,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"{GUID=%@ title=\"%@\"", [self guid], [self title]];
+    return [NSString stringWithFormat:@"{GUID=%@ title=\"%@\"", self.guid, self.title];
 }
 
 /* objectSpecifier
@@ -293,7 +293,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
-    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
+    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
     NSUInteger index = [folder indexOfArticle:self];
     if (index != NSNotFound)
     {
@@ -311,7 +311,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleLink
 {
-    return [NSString stringByCleaningURLString:[self link]];
+    return [NSString stringByCleaningURLString:self.link];
 }
 
 /* tagArticleTitle
@@ -330,12 +330,12 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleBody
 {
-    NSMutableString * articleBody = [NSMutableString stringWithString:[self body]];
+    NSMutableString * articleBody = [NSMutableString stringWithString:self.body];
     [articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
     [articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    [articleBody fixupRelativeImgTags:[self link]];
-    [articleBody fixupRelativeIframeTags:[self link]];
-    [articleBody fixupRelativeAnchorTags:[self link]];
+    [articleBody fixupRelativeImgTags:self.link];
+    [articleBody fixupRelativeIframeTags:self.link];
+    [articleBody fixupRelativeAnchorTags:self.link];
     return articleBody;
 }
 
@@ -352,7 +352,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleDate
 {
-    return [[[self date] dateWithCalendarFormat:nil timeZone:nil] friendlyDescription];
+    return [self.date dateWithCalendarFormat:nil timeZone:nil].friendlyDescription;
 }
 
 /* tagArticleEnclosureLink
@@ -360,7 +360,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureLink
 {
-    return [self enclosure];
+    return self.enclosure;
 }
 
 /* tagArticleEnclosureFilename
@@ -368,7 +368,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureFilename
 {
-    return [[self enclosure].lastPathComponent stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [self.enclosure.lastPathComponent stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 /* tagFeedTitle
@@ -376,7 +376,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagFeedTitle
 {
-    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
+    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
     return [NSString stringByConvertingHTMLEntities:SafeString([folder name])];
 }
 
@@ -385,8 +385,8 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagFeedLink
 {
-    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
-    return [NSString stringByCleaningURLString:[folder homePage]];
+    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
+    return [NSString stringByCleaningURLString:folder.homePage];
 }
 
 /* tagFeedDescription
@@ -394,8 +394,8 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagFeedDescription
 {
-    Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
-    return [folder feedDescription];
+    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
+    return folder.feedDescription;
 }
 
 /* expandTags
@@ -437,7 +437,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
             [newString replaceCharactersInRange:NSMakeRange(tagStartIndex, tagLength) withString:replacementString];
             hasOneTag = YES;
             
-            if (![replacementString isBlank])
+            if (!replacementString.blank)
                 cond = NO;
             
             tagStartIndex += replacementString.length;

@@ -91,19 +91,19 @@
     Preferences * prefs = [Preferences standardPreferences];
     
     // Set the check frequency
-    [checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:[prefs refreshFrequency]]];
+    [checkFrequency selectItemAtIndex:[checkFrequency indexOfItemWithTag:prefs.refreshFrequency]];
     
     // Set check for updates when starting
-    checkForUpdates.state = [prefs checkForNewOnStartup] ? NSOnState : NSOffState;
+    checkForUpdates.state = prefs.checkForNewOnStartup ? NSOnState : NSOffState;
     
     // Set sending system specs when checking for updates
-    sendSystemSpecs.state = [prefs sendSystemSpecs] ? NSOnState : NSOffState;
+    sendSystemSpecs.state = prefs.sendSystemSpecs ? NSOnState : NSOffState;
     
     // Set search for latest Beta versions when checking for updates
-    alwaysAcceptBetas.state = [prefs alwaysAcceptBetas] ? NSOnState : NSOffState;
+    alwaysAcceptBetas.state = prefs.alwaysAcceptBetas ? NSOnState : NSOffState;
 
     // Set check for new articles when starting
-    checkOnStartUp.state = [prefs refreshOnStartup] ? NSOnState : NSOffState;
+    checkOnStartUp.state = prefs.refreshOnStartup ? NSOnState : NSOffState;
     
     // Set range of auto-expire values
     [expireDuration removeAllItems];
@@ -115,30 +115,30 @@
     [expireDuration insertItemWithTag:NSLocalizedString(@"After a Month", nil) tag:1000 atIndex:5];
     
     // Set auto-expire duration
-    [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:[prefs autoExpireDuration]]];
+    [expireDuration selectItemAtIndex:[expireDuration indexOfItemWithTag:prefs.autoExpireDuration]];
     
     // Set download folder
-    [self updateDownloadsPopUp:[prefs downloadFolder]];
+    [self updateDownloadsPopUp:prefs.downloadFolder];
     
     // Set whether the application is shown in the menu bar
-    showAppInMenuBar.state = [prefs showAppInStatusBar] ? NSOnState : NSOffState;
+    showAppInMenuBar.state = prefs.showAppInStatusBar ? NSOnState : NSOffState;
     
     // Set whether links are opened in the background
-    openLinksInBackground.state = [prefs openLinksInBackground] ? NSOnState : NSOffState;
+    openLinksInBackground.state = prefs.openLinksInBackground ? NSOnState : NSOffState;
     
     // Set whether links are opened in the external browser
-    openLinksInExternalBrowser.state = [prefs openLinksInVienna] ? NSOffState : NSOnState;
+    openLinksInExternalBrowser.state = prefs.openLinksInVienna ? NSOffState : NSOnState;
     
     // Set mark read behaviour
-    markReadAfterNext.state = [prefs markReadInterval] == 0 ? NSOnState : NSOffState;
-    markReadAfterDelay.state = [prefs markReadInterval] != 0 ? NSOnState : NSOffState;
+    markReadAfterNext.state = prefs.markReadInterval == 0 ? NSOnState : NSOffState;
+    markReadAfterDelay.state = prefs.markReadInterval != 0 ? NSOnState : NSOffState;
     
     // Show new articles notification options
-    newArticlesNotificationBadgeButton.state = (([prefs newArticlesNotification] & MA_NewArticlesNotification_Badge) !=0) ? NSOnState : NSOffState;
-    newArticlesNotificationBounceButton.state = (([prefs newArticlesNotification] & MA_NewArticlesNotification_Bounce) !=0) ? NSOnState : NSOffState;
+    newArticlesNotificationBadgeButton.state = ((prefs.newArticlesNotification & MA_NewArticlesNotification_Badge) !=0) ? NSOnState : NSOffState;
+    newArticlesNotificationBounceButton.state = ((prefs.newArticlesNotification & MA_NewArticlesNotification_Bounce) !=0) ? NSOnState : NSOffState;
     
     // Set whether updated articles are considered as new
-    markUpdatedAsNew.state = [prefs markUpdatedAsNew] ? NSOnState : NSOffState;
+    markUpdatedAsNew.state = prefs.markUpdatedAsNew ? NSOnState : NSOffState;
     
     [self refreshLinkHandler];
 }
@@ -232,7 +232,7 @@
 {
     NSMenuItem * selectedItem = expireDuration.selectedItem;
     if (selectedItem != nil)
-        [[Preferences standardPreferences] setAutoExpireDuration:selectedItem.tag];
+        [Preferences standardPreferences].autoExpireDuration = selectedItem.tag;
 }
 
 /* changeOpenLinksInBackground
@@ -241,7 +241,7 @@
  */
 -(IBAction)changeOpenLinksInBackground:(id)sender
 {
-    [[Preferences standardPreferences] setOpenLinksInBackground:[sender state] == NSOnState];
+    [Preferences standardPreferences].openLinksInBackground = [sender state] == NSOnState;
 }
 
 /* changeShowAppInMenuBar
@@ -249,7 +249,7 @@
  */
 -(IBAction)changeShowAppInMenuBar:(id)sender
 {
-    [[Preferences standardPreferences] setShowAppInStatusBar:[sender state] == NSOnState];
+    [Preferences standardPreferences].showAppInStatusBar = [sender state] == NSOnState;
 }
 
 /* changeMarkUpdatedAsNew
@@ -258,7 +258,7 @@
  */
 -(IBAction)changeMarkUpdatedAsNew:(id)sender
 {
-    [[Preferences standardPreferences] setMarkUpdatedAsNew:[sender state] == NSOnState];
+    [Preferences standardPreferences].markUpdatedAsNew = [sender state] == NSOnState;
 }
 
 /* changeOpenLinksInExternalBrowser
@@ -267,7 +267,7 @@
  */
 -(IBAction)changeOpenLinksInExternalBrowser:(id)sender
 {
-    [[Preferences standardPreferences] setOpenLinksInVienna:[sender state] == NSOffState];
+    [Preferences standardPreferences].openLinksInVienna = [sender state] == NSOffState;
 }
 
 /* changeDownloadFolder
@@ -290,7 +290,7 @@
         if (returnCode == NSOKButton)
         {
             NSString * downloadFolderPath = openPanel.directoryURL.path;
-            [[Preferences standardPreferences] setDownloadFolder:downloadFolderPath];
+            [Preferences standardPreferences].downloadFolder = downloadFolderPath;
             [self updateDownloadsPopUp:downloadFolderPath];
         }
         
@@ -321,7 +321,7 @@
  */
 -(IBAction)changeCheckForUpdates:(id)sender
 {
-    [[Preferences standardPreferences] setCheckForNewOnStartup:[sender state] == NSOnState];
+    [Preferences standardPreferences].checkForNewOnStartup = [sender state] == NSOnState;
 }
 
 /* changeCheckOnStartUp
@@ -329,7 +329,7 @@
  */
 -(IBAction)changeCheckOnStartUp:(id)sender
 {
-    [[Preferences standardPreferences] setRefreshOnStartup:[sender state] == NSOnState];
+    [Preferences standardPreferences].refreshOnStartup = [sender state] == NSOnState;
 }
 
 /* selectDefaultLinksHandler
@@ -392,7 +392,7 @@
 -(IBAction)changeCheckFrequency:(id)sender
 {
     NSInteger newFrequency = checkFrequency.selectedItem.tag;
-    [[Preferences standardPreferences] setRefreshFrequency:newFrequency];
+    [Preferences standardPreferences].refreshFrequency = newFrequency;
 }
 
 /* changeNewArticlesNotificationBadge
@@ -401,14 +401,14 @@
 -(IBAction)changeNewArticlesNotificationBadge:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSInteger currentNotificationValue = [prefs newArticlesNotification];
+    NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSOnState)
     {
-        [prefs setNewArticlesNotification:currentNotificationValue | MA_NewArticlesNotification_Badge];
+        prefs.newArticlesNotification = currentNotificationValue | MA_NewArticlesNotification_Badge;
     }
     else
     {
-        [prefs setNewArticlesNotification:currentNotificationValue & ~MA_NewArticlesNotification_Badge];
+        prefs.newArticlesNotification = currentNotificationValue & ~MA_NewArticlesNotification_Badge;
     }
 }
 
@@ -418,14 +418,14 @@
 -(IBAction)changeNewArticlesNotificationBounce:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSInteger currentNotificationValue = [prefs newArticlesNotification];
+    NSInteger currentNotificationValue = prefs.newArticlesNotification;
     if ([sender state] == NSOnState)
     {
-        [prefs setNewArticlesNotification:currentNotificationValue | MA_NewArticlesNotification_Bounce];
+        prefs.newArticlesNotification = currentNotificationValue | MA_NewArticlesNotification_Bounce;
     }
     else
     {
-        [prefs setNewArticlesNotification:currentNotificationValue & ~MA_NewArticlesNotification_Bounce];
+        prefs.newArticlesNotification = currentNotificationValue & ~MA_NewArticlesNotification_Bounce;
     }
 }
 
@@ -435,7 +435,7 @@
 -(IBAction)changeMarkReadBehaviour:(id)sender
 {
     float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
-    [[Preferences standardPreferences] setMarkReadInterval:newReadInterval];
+    [Preferences standardPreferences].markReadInterval = newReadInterval;
 }
 
 
@@ -444,7 +444,7 @@
  */
 -(IBAction)changeSendSystemSpecs:(id)sender
 {
-    [[Preferences standardPreferences] setSendSystemSpecs:[sender state] == NSOnState];
+    [Preferences standardPreferences].sendSystemSpecs = [sender state] == NSOnState;
 }
 
 /* changeAlwaysAcceptBetas
@@ -452,7 +452,7 @@
  */
 -(IBAction)changeAlwaysAcceptBetas:(id)sender
 {
-    [[Preferences standardPreferences] setAlwaysAcceptBetas:[sender state] == NSOnState];
+    [Preferences standardPreferences].alwaysAcceptBetas = [sender state] == NSOnState;
 }
 
 /* dealloc

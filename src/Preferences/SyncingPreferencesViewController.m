@@ -53,11 +53,11 @@ static BOOL _credentialsChanged;
     
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
-    syncButton.state = [prefs syncGoogleReader] ? NSOnState : NSOffState;
-    NSString * theUsername = [prefs syncingUser];
+    syncButton.state = prefs.syncGoogleReader ? NSOnState : NSOffState;
+    NSString * theUsername = prefs.syncingUser;
     if (!theUsername)
         theUsername=@"";
-    NSString * theHost = [prefs syncServer];
+    NSString * theHost = prefs.syncServer;
     if (!theHost)
         theHost=@"";
     NSString * thePassword = [KeyChain getGenericPasswordFromKeychain:theUsername serviceName:@"Vienna sync"];
@@ -67,7 +67,7 @@ static BOOL _credentialsChanged;
     openReaderHost.stringValue = theHost;
     password.stringValue = thePassword;
     
-    if(![prefs syncGoogleReader])
+    if(!prefs.syncGoogleReader)
     {
         [openReaderSource setEnabled:NO];
         [openReaderHost setEnabled:NO];
@@ -153,7 +153,7 @@ static BOOL _credentialsChanged;
     // enable/disable syncing
     BOOL sync = [sender state] == NSOnState;
     Preferences *prefs = [Preferences standardPreferences];
-    [prefs setSyncGoogleReader:sync];
+    prefs.syncGoogleReader = sync;
     [prefs savePreferences];
     if (sync) {
         [openReaderSource setEnabled:YES];
@@ -203,17 +203,17 @@ static BOOL _credentialsChanged;
 {
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
-    if ( !([openReaderHost.stringValue isBlank] || [username.stringValue isBlank]) )
+    if ( !((openReaderHost.stringValue).blank || (username.stringValue).blank) )
     {
         // can we get password via keychain ?
         NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
-        if (![thePass isBlank])
+        if (!thePass.blank)
         {
             password.stringValue = thePass;
             [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
-    [prefs setSyncServer:openReaderHost.stringValue];
+    prefs.syncServer = openReaderHost.stringValue;
     [prefs savePreferences];
 }
 
@@ -226,18 +226,18 @@ static BOOL _credentialsChanged;
 {
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
-    [KeyChain deleteGenericPasswordInKeychain:[prefs syncingUser] service:@"Vienna sync"];
-    if ( !([openReaderHost.stringValue isBlank] || [username.stringValue isBlank]) )
+    [KeyChain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
+    if ( !((openReaderHost.stringValue).blank || (username.stringValue).blank) )
     {
         // can we get password via keychain ?
         NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
-        if (![thePass isBlank])
+        if (!thePass.blank)
         {
             password.stringValue = thePass;
             [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
-    [prefs setSyncingUser:username.stringValue];
+    prefs.syncingUser = username.stringValue;
     [prefs savePreferences];
 }
 

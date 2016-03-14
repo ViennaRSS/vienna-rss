@@ -234,7 +234,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)summaryTextFromHTML
 {
-	return [[NSString stringByRemovingHTML:self] normalised];
+	return [NSString stringByRemovingHTML:self].normalised;
 }
 
 /* titleTextFromHTML
@@ -244,7 +244,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)titleTextFromHTML
 {
-	return [[NSString stringByRemovingHTML:self] firstNonBlankLine];
+	return [NSString stringByRemovingHTML:self].firstNonBlankLine;
 }
 
 /* firstWord
@@ -328,7 +328,7 @@ static NSMutableDictionary * entityMap = nil;
 	if (maxChrs > cutOff)
 		[aString deleteCharactersInRange:NSMakeRange(cutOff, maxChrs - cutOff)];
 	
-	return [aString stringByUnescapingExtendedCharacters];
+	return aString.stringByUnescapingExtendedCharacters;
 }
 
 /* normalised
@@ -506,7 +506,7 @@ static NSMutableDictionary * entityMap = nil;
 		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
 	}
 	
-	NSString * returnString = [processedString trim];
+	NSString * returnString = processedString.trim;
 	return returnString;
 }
 
@@ -633,7 +633,7 @@ static NSMutableDictionary * entityMap = nil;
 	{
 		NSInteger intValue;
 		if ([entityString characterAtIndex:1] == 'x')
-			intValue = [[entityString substringFromIndex:2] hexValue];
+			intValue = [entityString substringFromIndex:2].hexValue;
 		else
 			intValue = [entityString substringFromIndex:1].integerValue;
 		return [NSString stringWithFormat:@"%C", (unsigned short)MAX(intValue, ' ')];
@@ -683,7 +683,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(BOOL)isBlank
 {
-	return [self trim].length == 0;
+	return self.trim.length == 0;
 }
 
 /* convertStringToValidPath

@@ -63,8 +63,8 @@
 	if (queueIndex > 0)
 	{
 		ArticleReference * item = array[--queueIndex];
-		*folderId = [item folderId];
-		*guidPointer = [item guid];
+		*folderId = item.folderId;
+		*guidPointer = item.guid;
 		return YES;
 	}
 	return NO;
@@ -79,8 +79,8 @@
 	if (queueIndex < (NSInteger)array.count - 1)
 	{
 		ArticleReference * item = array[++queueIndex];
-		*folderId = [item folderId];
-		*guidPointer = [item guid];
+		*folderId = item.folderId;
+		*guidPointer = item.guid;
 		return YES;
 	}
 	return NO;
@@ -107,7 +107,7 @@
 	if (array.count > 0)
 	{
 		ArticleReference * item = array[array.count - 1];
-		if ([[item guid] isEqualToString:guid] && [item folderId] == folderId)
+		if ([item.guid isEqualToString:guid] && item.folderId == folderId)
 			return;
 	}
 	[array addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];

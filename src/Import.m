@@ -73,17 +73,17 @@
 	
 	for (NSXMLElement *outlineElement in outlines)
 	{
-        NSString *feedText = [[outlineElement attributeForName:@"text"].stringValue stringByEscapingExtendedCharacters];
-        NSString *feedDescription = [[outlineElement attributeForName:@"description"].stringValue stringByEscapingExtendedCharacters];
-        NSString *feedURL = [[outlineElement attributeForName:@"xmlUrl"].stringValue stringByEscapingExtendedCharacters];
-        NSString *feedHomePage = [[outlineElement attributeForName:@"htmlUrl"].stringValue stringByEscapingExtendedCharacters];
+        NSString *feedText = ([outlineElement attributeForName:@"text"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedDescription = ([outlineElement attributeForName:@"description"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedURL = ([outlineElement attributeForName:@"xmlUrl"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedHomePage = ([outlineElement attributeForName:@"htmlUrl"].stringValue).stringByEscapingExtendedCharacters;
         
         Database * dbManager = [Database sharedManager];
 
 		// Some OPML exports use 'title' instead of 'text'.
 		if (feedText == nil || feedText.length == 0u)
 		{
-            NSString * feedTitle = [[outlineElement attributeForName:@"title"].stringValue stringByEscapingExtendedCharacters];
+            NSString * feedTitle = ([outlineElement attributeForName:@"title"].stringValue).stringByEscapingExtendedCharacters;
             if (feedTitle != nil) {
 				feedText = feedTitle;
             }
@@ -91,7 +91,7 @@
 
 		// Do double-decoding of the title to get around a bug in some commercial newsreaders
 		// where they double-encode characters
-		feedText = [feedText stringByUnescapingExtendedCharacters];
+		feedText = feedText.stringByUnescapingExtendedCharacters;
 		
 		if (feedURL == nil)
 		{
@@ -114,7 +114,7 @@
 			NSInteger folderId;
 
 			if ((folder = [dbManager folderFromFeedURL:feedURL]) != nil)
-				folderId = [folder itemId];
+				folderId = folder.itemId;
 			else
 			{
 				folderId = [dbManager addRSSFolder:feedText underParent:parentId afterChild:-1 subscriptionURL:feedURL];
