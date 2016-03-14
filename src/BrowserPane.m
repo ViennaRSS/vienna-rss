@@ -769,13 +769,9 @@
  */
 -(void)dealloc
 {
-	viewTitle=nil;
-	rssPageURL=nil;
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane close];
-	lastError=nil;
-	pageFilename=nil;
 }
 @end

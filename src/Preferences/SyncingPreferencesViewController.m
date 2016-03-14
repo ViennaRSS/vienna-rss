@@ -266,11 +266,4 @@ static BOOL _credentialsChanged;
     }
 }
 
--(void)dealloc
-{
-    syncButton=nil;
-    sourcesDict=nil;
-    
-}
-
 @end

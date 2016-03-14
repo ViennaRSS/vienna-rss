@@ -132,10 +132,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
-	markReadTimer=nil;
-	guidOfArticleToSelect=nil;
 	[rowHeightArray removeAllObjects];
-	rowHeightArray=nil;
 }
 
 #pragma mark -

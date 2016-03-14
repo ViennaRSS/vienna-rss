@@ -157,14 +157,4 @@
 	item.maxSize = s;
 }
 
-/* dealloc
- * Clean up afterwards.
- */
--(void)dealloc
-{
-	image=nil;
-	alternateImage=nil;
-	smallImage=nil;
-	smallAlternateImage=nil;
-}
 @end

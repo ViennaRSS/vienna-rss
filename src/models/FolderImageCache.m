@@ -144,12 +144,4 @@ static FolderImageCache * _folderImageCache = nil;
     }
 }
 
-/* dealloc
- * Clean up.
- */
--(void)dealloc
-{
-    folderImagesArray=nil;
-}
-
 @end

@@ -37,9 +37,4 @@
 	return browserPane;
 }
 
--(void)dealloc
-{
-	browserPane=nil;
-}
-
 @end

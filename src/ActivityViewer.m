@@ -202,6 +202,5 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[activityWindow setDelegate:nil];
-	allItems=nil;
 }
 @end

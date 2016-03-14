@@ -161,11 +161,4 @@
 	NSRectFill(rect);
 }
 
-/* dealloc
- * Clean up when we exit.
- */
--(void)dealloc
-{
-	enclosureFilename=nil;
-}
 @end

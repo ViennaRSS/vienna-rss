@@ -978,9 +978,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	backtrackArray=nil;
-	sortColumnIdentifier=nil;
-	articleSortSpecifiers=nil;
-	articleToPreserve=nil;
 }
 @end

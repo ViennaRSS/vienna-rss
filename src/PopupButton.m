@@ -105,11 +105,4 @@
 		[self highlight:NO];
 }
 
-/* dealloc
- * Clean up behind ourself.
- */
--(void)dealloc
-{
-	theMenu=nil;
-}
 @end

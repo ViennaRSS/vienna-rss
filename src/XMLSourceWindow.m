@@ -154,10 +154,4 @@
 	[listener use];
 }
 
--(void)dealloc
-{
-	feedSourceFilePath=nil;
-	sourceWindowTitle=nil;
-}
-
 @end

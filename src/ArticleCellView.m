@@ -60,8 +60,6 @@
 	[articleView setUIDelegate:nil];
 	[articleView setFrameLoadDelegate:nil];
 	[articleView stopLoading:self];
-	articleView=nil;
-	progressIndicator=nil;
 
 }
 

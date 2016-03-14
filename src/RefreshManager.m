@@ -1164,10 +1164,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	pumpTimer=nil;
-	authQueue=nil;
-	networkQueue=nil;
-	unsafe301RedirectionTimer=nil;
-	riskyIPAddress=nil;
 }
 @end

@@ -481,8 +481,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	backupString=nil;
-	grayGradient=nil;
-	blueGradient=nil;
 }
 @end

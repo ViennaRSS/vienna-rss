@@ -115,15 +115,6 @@
 	return [NSString stringWithFormat:@"{'%@', '%@'}", name, status];
 }
 
-/* dealloc
- * Clean up before we expire.
- */
--(void)dealloc
-{
-	details=nil;
-	status=nil;
-	name=nil;
-}
 @end
 
 @implementation ActivityLog
@@ -228,6 +219,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	log=nil;
 }
 @end

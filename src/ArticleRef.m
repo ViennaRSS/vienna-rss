@@ -74,11 +74,4 @@
 	return [NSString stringWithFormat:@"%@ in folder %ld", guid, (long)folderId];
 }
 
-/* dealloc
- * Clean up behind ourselves.
- */
--(void)dealloc
-{
-	guid=nil;
-}
 @end

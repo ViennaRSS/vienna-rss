@@ -326,8 +326,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	tabBarControl=nil;
-	primaryTabItemView=nil;
-	tabView=nil;
 }
 @end

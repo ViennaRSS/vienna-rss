@@ -189,13 +189,4 @@
 	return [tagArray copy];
 }
 
-
-/* dealloc
- * Clean up afterwards.
- */
--(void)dealloc
-{
-	name=nil;
-	attributes=nil;
-}
 @end

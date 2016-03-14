@@ -1968,20 +1968,5 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[articleText setFrameLoadDelegate:nil];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
-	markReadTimer=nil;
-	articleListFont=nil;
-	articleListUnreadFont=nil;
-	reportCellDict=nil;
-	unreadReportCellDict=nil;
-	guidOfArticleToSelect=nil;
-	unreadTopLineSelectionDict=nil;
-	selectionDict=nil;
-	unreadTopLineDict=nil;
-	topLineDict=nil;
-	middleLineDict=nil;
-	linkLineDict=nil;
-	bottomLineDict=nil;
-	lastError=nil;
-	currentURL=nil;
 }
 @end

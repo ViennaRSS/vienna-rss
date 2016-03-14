@@ -175,11 +175,4 @@ static NSMutableArray * _filterList = nil;
 	[_filterList addObject:newFilter];
 }
 
-/* dealloc
- * Clean up behind us.
- */
--(void)dealloc
-{
-	name=nil;
-}
 @end

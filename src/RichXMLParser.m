@@ -844,16 +844,4 @@
 	}
 }
 
-/* dealloc
- * Clean up afterwards.
- */
--(void)dealloc
-{
-	orderArray=nil;
-	title=nil;
-	description=nil;
-	lastModified=nil;
-	link=nil;
-	items=nil;
-}
 @end

@@ -413,11 +413,4 @@
 	}
 }
 
-/* dealloc
- * Clean up after ourselves.
- */
--(void)dealloc
-{
-	allPlugins=nil;
-}
 @end

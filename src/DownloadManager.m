@@ -193,15 +193,6 @@
 	return startTime;
 }
 
-/* dealloc
- * Clean up behind ourself.
- */
--(void)dealloc
-{
-	filename=nil;
-	download=nil;
-	image=nil;
-}
 @end
 
 @implementation DownloadManager
@@ -569,11 +560,4 @@
 	theItem.filename = destPath;
 }
 
-/* dealloc
- * Clean up at the end.
- */
--(void)dealloc
-{
-	downloadsList=nil;
-}
 @end
