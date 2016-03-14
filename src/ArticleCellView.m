@@ -134,20 +134,6 @@
 	return NO;
 };
 
-/* canMakeTextSmaller
- */
--(IBAction)canMakeTextSmaller
-{
-	articleView.canMakeTextSmaller;
-}
-
-/* canMakeTextLarger
- */
--(IBAction)canMakeTextLarger
-{
-	articleView.canMakeTextLarger;
-}
-
 /* makeTextSmaller
  * Make webview text size smaller
  */
