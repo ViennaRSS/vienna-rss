@@ -517,17 +517,17 @@ static NSMutableDictionary * entityMap = nil;
 {
 	if (entityMap == nil)
 	{
-		entityMap = [[NSDictionary dictionaryWithObjectsAndKeys:
-			@"<",	@"lt",
-			@">",	@"gt",
-			@"\"",	@"quot",
-			@"&",	@"amp",
-			@"'",	@"rsquo",
-			@"'",	@"lsquo",
-			@"'",	@"apos",
-			@"...", @"hellip",
-			@" ",	@"nbsp",
-			nil,	nil] mutableCopy];
+		entityMap = [@{
+					   @"lt":		@"<",
+					   @"gt":		@">",
+					   @"quot":		@"\"",
+					   @"amp":		@"&",
+					   @"rsquo":	@"'",
+					   @"lsquo":	@"'",
+					   @"apos":		@"'",
+					   @"hellip":	@"...",
+					   @"nbsp":		@" ",
+					   } mutableCopy];
 		
 		// Add entities that map to non-ASCII characters
 		[entityMap setValue:[NSString stringWithFormat:@"%C", (unsigned short)0xA1] forKey:@"iexcl"];
