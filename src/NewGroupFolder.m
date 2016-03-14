@@ -54,7 +54,7 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderNameString = [folderName.stringValue trim];
+	NSString * folderNameString = folderName.stringValue.trim;
 	
 	// Create the new folder in the database
 	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId

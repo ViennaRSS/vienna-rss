@@ -252,7 +252,7 @@ static Preferences * _standardPreferences = nil;
 	defaultValues[MAPref_CachedFolderID] = @1;
 	defaultValues[MAPref_SortColumn] = MA_Field_Date;
 	defaultValues[MAPref_CheckFrequency] = @(MA_Default_Check_Frequency);
-	defaultValues[MAPref_MarkReadInterval] = [NSNumber numberWithDouble:MA_Default_Read_Interval];
+	defaultValues[MAPref_MarkReadInterval] = @((float)MA_Default_Read_Interval);
 	defaultValues[MAPref_RefreshThreads] = @(MA_Default_RefreshThreads);
 	defaultValues[MAPref_ActiveStyleName] = MA_DefaultStyleName;
 	defaultValues[MAPref_ActiveTextSizeMultiplier] = @1.0;
@@ -763,7 +763,7 @@ static Preferences * _standardPreferences = nil;
 	if (newInterval != markReadInterval)
 	{
 		markReadInterval = newInterval;
-		[self setObject:[NSNumber numberWithDouble:newInterval] forKey:MAPref_MarkReadInterval];
+		[self setObject:@((float)newInterval) forKey:MAPref_MarkReadInterval];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }

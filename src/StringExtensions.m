@@ -252,7 +252,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)firstWord
 {
-	NSString * trimmedSelf = [self trim];
+	NSString * trimmedSelf = self.trim;
 	NSInteger wordLength = [trimmedSelf indexOfCharacterInString:' ' afterIndex:0];
 	return (wordLength == NSNotFound) ? trimmedSelf : [trimmedSelf substringToIndex:wordLength];
 }

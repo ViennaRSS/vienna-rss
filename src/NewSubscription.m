@@ -225,7 +225,7 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * feedURLString = [editFeedURL.stringValue trim];
+	NSString * feedURLString = editFeedURL.stringValue.trim;
 
 	// Save the new information to the database
     [[Database sharedManager] setFeedURL:feedURLString forFolder:editFolderId];
