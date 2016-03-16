@@ -1,8 +1,8 @@
 // Vienna settings for Development configuration
 
+#include "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"
 #include "Vienna-All.xcconfig"
 #include "General-Dev.xcconfig"
-#include "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"
 
 GCC_DYNAMIC_NO_PIC = NO
 OTHER_CFLAGS = $(inherited) -DDEBUG=1
