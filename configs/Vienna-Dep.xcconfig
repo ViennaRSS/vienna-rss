@@ -5,3 +5,4 @@
 #include "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.deployment.xcconfig"
 
 OTHER_CFLAGS = $(inherited) -DNO_LOG_MACROS
+IBC_FLATTEN_NIBS = NO
