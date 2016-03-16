@@ -1,6 +1,37 @@
 			autorevision history
 
-1.9 @ 2014-5-23
+1.14 @ 2016-02-22:
+  Fix PHP output.
+  Use constants array in PHP output.
+  Make sure that the cache file gets outputted where expected.
+  Add an example for use with waf.
+
+1.13 @ 2015-07-31:
+  Make the man page more reproducible.
+  Make sure VCS_WS_MODIFIED is not empty for svn.
+  Remove sql output until such time as it can be completed.
+  Add some missing example files.
+
+1.12 @ 2015-03-16
+  Use --xml for svn when we care about the output.
+  New site: https://autorevision.github.io/
+  Handle older svn detection more gracefully.
+
+1.11 @ 2015-02-20
+  Added scheme, clojure, rpm, and sql outputs.
+  Added hpp, matlab, and octave outputs.
+  Reorder types in help and asciidoc to be more alphabetical.
+  Try using md5sum when md5 is not available when making tarballs.
+  Fix a typo in the svn driver.
+
+1.10a @ 2014-10-24
+  Emergency bug fix.
+
+1.10 @ 2014-10-23
+  Cover the case of split repository heads.
+  Add initial Swift output support.
+
+1.9 @ 2014-05-23
   Add a logo.
   Only update the cache file when there are changes.
   New dependency `cmp`.

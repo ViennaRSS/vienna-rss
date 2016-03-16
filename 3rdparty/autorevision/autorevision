@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (c) 2012 - 2014 dak180 and contributors. See
+# Copyright (c) 2012 - 2016 dak180 and contributors. See
 # http://opensource.org/licenses/mit-license.php or the included
 # COPYING.md for licence terms.
 #
@@ -10,7 +10,7 @@
 # Usage message.
 arUsage() {
 	cat > "/dev/stderr" << EOF
-usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
+usage: autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	Options include:
 	-t output-type		= specify output type
 	-s symbol		= specify symbol output
@@ -20,21 +20,29 @@ usage: ./autorevision {-t output-type | -s symbol} [-o cache-file [-f] ] [-V]
 	-V			= emit version and exit
 	-?			= help message
 
-The folowing are valid output types:
+The following are valid output types:
+	clojure			= clojure file
 	h			= Header for use with c/c++
-	xcode			= Header useful for populating info.plist files
-	sh			= Bash sytax
-	py			= Python file
-	pl			= Perl file
-	lua			= Lua file
-	php			= PHP file
+	hpp			= Alternate C++ header strings with namespace
 	ini			= INI file
-	js			= javascript file
-	json			= JSON file
 	java			= Java file
 	javaprop		= Java properties file
-	tex			= (La)TeX file
+	js			= javascript file
+	json			= JSON file
+	lua			= Lua file
 	m4			= m4 file
+	matlab			= matlab file
+	octave			= octave file
+	php			= PHP file
+	pl			= Perl file
+	py			= Python file
+	rpm			= rpm file
+	scheme			= scheme file
+	sh			= Bash sytax
+	swift			= Swift file
+	tex			= (La)TeX file
+	xcode			= Header useful for populating info.plist files
+
 
 The following are valid symbols:
 	VCS_TYPE
@@ -54,7 +62,7 @@ EOF
 }
 
 # Config
-ARVERSION="1.9"
+ARVERSION="1.14"
 TARGETFILE="/dev/stdout"
 while getopts ":t:o:s:VfU" OPTION; do
 	case "${OPTION}" in
@@ -94,6 +102,10 @@ elif [ -z "${VAROUT}" ] && [ -z "${AFILETYPE}" ]; then
 elif [ -z "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	# If -f is specified without -o:
 	arUsage
+elif [ ! -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
+	# If we are forced to use the cache but it does not exist.
+	echo "error: Cache forced but no cache found." 1>&2
+	exit 1
 fi
 
 # Make sure that the path we are given is one we can source
@@ -105,7 +117,10 @@ fi
 
 # Functions to extract data from different repo types.
 # For git repos
+# shellcheck disable=SC2155
 gitRepo() {
+	local oldPath="${PWD}"
+
 	cd "$(git rev-parse --show-toplevel)"
 
 	VCS_TYPE="git"
@@ -117,7 +132,7 @@ gitRepo() {
 		VCS_UUID="$(git rev-list --topo-order HEAD | tail -n 1)"
 	fi
 
-	 # Is the working copy clean?
+	# Is the working copy clean?
 	test -z "$(git status --untracked-files=normal --porcelain)"
 	VCS_WC_MODIFIED="${?}"
 
@@ -129,8 +144,7 @@ gitRepo() {
 	fi
 
 	# This may be a git-svn remote.  If so, report the Subversion revision.
-	if [ -z "$(git config svn-remote.svn.url 2>/dev/null)" ]
-	then
+	if [ -z "$(git config svn-remote.svn.url 2>/dev/null)" ]; then
 		# The full revision hash
 		VCS_FULL_HASH="$(git rev-parse HEAD)"
 
@@ -149,7 +163,7 @@ gitRepo() {
 	local DESCRIPTION="$(git describe --long --tags 2>/dev/null)"
 
 	# Current or last tag ancestor (empty if no tags)
-	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" | sed -e 's:-[0-9]*$::')"
+	VCS_TAG="$(echo "${DESCRIPTION}" | sed -e "s:-g${VCS_SHORT_HASH}\$::" -e 's:-[0-9]*$::')"
 
 	# Distance to last tag or an alias of VCS_NUM if there is no tag
 	if [ ! -z "${DESCRIPTION}" ]; then
@@ -159,11 +173,15 @@ gitRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(git log -1 --pretty=format:%ci | sed -e 's: :T:' -e 's: ::')"
+
+	cd "${oldPath}"
 }
 
 # For hg repos
 hgRepo() {
+	local oldPath="${PWD}"
+
 	cd "$(hg root)"
 
 	VCS_TYPE="hg"
@@ -204,11 +222,15 @@ hgRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(hg log -r "${VCS_NUM}" -l 1 --template '{date|isodatesec}\n' 2>/dev/null | sed -e 's: :T:' -e 's: ::')"
+
+	cd "${oldPath}"
 }
 
 # For bzr repos
 bzrRepo() {
+	local oldPath="${PWD}"
+
 	cd "$(bzr root)"
 
 	VCS_TYPE="bzr"
@@ -245,11 +267,16 @@ bzrRepo() {
 	fi
 
 	# Date of the current commit
-	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(bzr version-info --custom --template='{date}\n' | sed -e 's: :T:' -e 's: ::')"
+
+	cd "${oldPath}"
 }
 
 # For svn repos
+# shellcheck disable=SC2155
 svnRepo() {
+	local oldPath="${PWD}"
+
 	VCS_TYPE="svn"
 
 	case "${PWD}" in
@@ -258,7 +285,7 @@ svnRepo() {
 		while [ "$(basename "${fn}")" != 'trunk' ] && [ "$(basename "${fn}")" != 'branches' ] && [ "$(basename "${fn}")" != 'tags' ] && [ "$(basename "${fn}")" != '/' ]; do
 			local fn="$(dirname "${fn}")"
 		done
-		fn="$(dirname "${fn}")"
+		local fn="$(dirname "${fn}")"
 		if [ "${fn}" = '/' ]; then
 			VCS_BASENAME="$(basename "${PWD}")"
 		else
@@ -268,7 +295,7 @@ svnRepo() {
 	*) VCS_BASENAME="$(basename "${PWD}")" ;;
 	esac
 
-	VCS_UUID="$(svn info | sed -n -e 's:Repository UUID\: ::p')"
+	VCS_UUID="$(svn info --xml | sed -n -e 's:<uuid>::' -e 's:</uuid>::p')"
 
 	# Cache svnversion output
 	local SVNVERSION="$(svnversion)"
@@ -287,6 +314,8 @@ svnRepo() {
 				else
 					VCS_WC_MODIFIED="1"
 				fi
+			else
+				VCS_WC_MODIFIED="0"
 			fi
 		;;
 	esac
@@ -304,7 +333,7 @@ svnRepo() {
 	case "${PWD}" in
 	/*trunk*|/*branches*|/*tags*)
 		local lastbase=""
-		loacl fn="${PWD}"
+		local fn="${PWD}"
 		while :
 		do
 			base="$(basename "${fn}")"
@@ -325,14 +354,16 @@ svnRepo() {
 	*) VCS_BRANCH="" ;;
 	esac
 
-	# Current or last tag ancestor (empty if no tags). But "current tag"
-	# can't be extracted reliably because Subversion doesn't have tags the
-	# way other VCSes do.
+	# Current or last tag ancestor (empty if no tags). But "current
+	# tag" can't be extracted reliably because Subversion doesn't
+	# have tags the way other VCSes do.
 	VCS_TAG=""
 	VCS_TICK=""
 
 	# Date of the current commit
-	VCS_DATE="$(svn info | sed -n -e 's:Last Changed Date\: ::p' | sed 's: (.*)::' | sed -e 's: :T:' | sed -e 's: ::')"
+	VCS_DATE="$(svn info --xml | sed -n -e 's:<date>::' -e 's:</date>::' -e 's:Z:-0000:p')"
+
+	cd "${oldPath}"
 }
 
 
@@ -393,6 +424,52 @@ xcodeOutput() {
 EOF
 }
 
+# For Swift output
+swiftOutput() {
+	case "${VCS_WC_MODIFIED}" in
+		0) VCS_WC_MODIFIED="false" ;;
+		1) VCS_WC_MODIFIED="true" ;;
+	esac
+	# For values that may not exist depending on the type of repo we
+	# have read from, set them to `nil` when they are empty.
+	if [ -z "${VCS_UUID}" ]; then
+		VCS_UUID="nil"
+	else
+		VCS_UUID="\"${VCS_UUID}\""
+	fi
+	if [ -z "${VCS_TAG}" ]; then
+		VCS_TAG="nil"
+	else
+		VCS_TAG="\"${VCS_TAG}\""
+	fi
+	: "${VCS_TICK:="nil"}"
+	if [ -z "${VCS_EXTRA}" ]; then
+		VCS_EXTRA="nil"
+	else
+		VCS_EXTRA="\"${VCS_EXTRA}\""
+	fi
+	cat > "${TARGETFILE}" << EOF
+/* Generated by autorevision - do not hand-hack! */
+
+let VCS_TYPE			= "${VCS_TYPE}"
+let VCS_BASENAME		= "${VCS_BASENAME}"
+let VCS_UUID:	String?	= ${VCS_UUID}
+let VCS_NUM:	Int		= ${VCS_NUM}
+let VCS_DATE			= "${VCS_DATE}"
+let VCS_BRANCH:	String	= "${VCS_BRANCH}"
+let VCS_TAG:	String?	= ${VCS_TAG}
+let VCS_TICK:	Int?	= ${VCS_TICK}
+let VCS_EXTRA:	String?	= ${VCS_EXTRA}
+
+let VCS_FULL_HASH:		String	= "${VCS_FULL_HASH}"
+let VCS_SHORT_HASH:		String	= "${VCS_SHORT_HASH}"
+
+let VCS_WC_MODIFIED:	Bool	= ${VCS_WC_MODIFIED}
+
+/* end */
+EOF
+}
+
 # For bash output
 shOutput() {
 	cat > "${TARGETFILE}" << EOF
@@ -401,17 +478,17 @@ shOutput() {
 VCS_TYPE="${VCS_TYPE}"
 VCS_BASENAME="${VCS_BASENAME}"
 VCS_UUID="${VCS_UUID}"
-VCS_NUM=${VCS_NUM}
+VCS_NUM="${VCS_NUM}"
 VCS_DATE="${VCS_DATE}"
 VCS_BRANCH="${VCS_BRANCH}"
 VCS_TAG="${VCS_TAG}"
-VCS_TICK=${VCS_TICK}
+VCS_TICK="${VCS_TICK}"
 VCS_EXTRA="${VCS_EXTRA}"
 
 VCS_FULL_HASH="${VCS_FULL_HASH}"
 VCS_SHORT_HASH="${VCS_SHORT_HASH}"
 
-VCS_WC_MODIFIED=${VCS_WC_MODIFIED}
+VCS_WC_MODIFIED="${VCS_WC_MODIFIED}"
 
 # end
 EOF
@@ -507,20 +584,20 @@ phpOutput() {
 <?php
 # Generated by autorevision - do not hand-hack!
 
-$GLOBALS["VCS_TYPE"] = "${VCS_TYPE}";
-$GLOBALS["VCS_BASENAME"] = "${VCS_BASENAME}";
-$GLOBALS["VCS_UUID"] = "${VCS_UUID}";
-$GLOBALS["VCS_NUM"] = ${VCS_NUM};
-$GLOBALS["VCS_DATE"] = "${VCS_DATE}";
-$GLOBALS["VCS_BRANCH"] = "${VCS_BRANCH}";
-$GLOBALS["VCS_TAG"] = "${VCS_TAG}";
-$GLOBALS["VCS_TICK"] = ${VCS_TICK};
-$GLOBALS["VCS_EXTRA"] = "${VCS_EXTRA}";
-
-$GLOBALS["VCS_FULL_HASH"] = "${VCS_FULL_HASH}";
-$GLOBALS["VCS_SHORT_HASH"] = "${VCS_SHORT_HASH}";
-
-$GLOBALS["VCS_WC_MODIFIED"] = ${VCS_WC_MODIFIED};
+return array(
+	"VCS_TYPE" => "${VCS_TYPE}",
+	"VCS_BASENAME" => "${VCS_BASENAME}",
+	"VCS_UUID" => "${VCS_UUID}",
+	"VCS_NUM" => ${VCS_NUM},
+	"VCS_DATE" => "${VCS_DATE}",
+	"VCS_BRANCH" => "${VCS_BRANCH}",
+	"VCS_TAG" => "${VCS_TAG}",
+	"VCS_TICK" => ${VCS_TICK},
+	"VCS_EXTRA" => "${VCS_EXTRA}",
+	"VCS_FULL_HASH" => "${VCS_FULL_HASH}",
+	"VCS_SHORT_HASH" => "${VCS_SHORT_HASH}",
+	"VCS_WC_MODIFIED" => ${VCS_WC_MODIFIED}
+);
 
 # end
 ?>
@@ -709,6 +786,162 @@ texOutput() {
 EOF
 }
 
+# For scheme output
+schemeOutput() {
+	case "${VCS_WC_MODIFIED}" in
+		0) VCS_WC_MODIFIED="#f" ;;
+		1) VCS_WC_MODIFIED="#t" ;;
+	esac
+	cat > "${TARGETFILE}" << EOF
+;; Generated by autorevision - do not hand-hack!
+(define VCS_TYPE        "${VCS_TYPE}")
+(define VCS_BASENAME    "${VCS_BASENAME}")
+(define VCS_UUID        "${VCS_UUID}")
+(define VCS_NUM         ${VCS_NUM})
+(define VCS_DATE        "${VCS_DATE}")
+(define VCS_BRANCH      "${VCS_BRANCH}")
+(define VCS_TAG         "${VCS_TAG}")
+(define VCS_TICK        ${VCS_TICK})
+(define VCS_EXTRA       "${VCS_EXTRA}")
+
+(define VCS_FULL_HASH   "${VCS_FULL_HASH}")
+(define VCS_SHORT_HASH  "${VCS_SHORT_HASH}")
+
+(define VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
+;; end
+EOF
+}
+
+# For clojure output
+clojureOutput() {
+	case "${VCS_WC_MODIFIED}" in
+		0) VCS_WC_MODIFIED="false" ;;
+		1) VCS_WC_MODIFIED="true" ;;
+	esac
+	cat > "${TARGETFILE}" << EOF
+;; Generated by autorevision - do not hand-hack!
+(def VCS_TYPE        "${VCS_TYPE}")
+(def VCS_BASENAME    "${VCS_BASENAME}")
+(def VCS_UUID        "${VCS_UUID}")
+(def VCS_NUM         ${VCS_NUM})
+(def VCS_DATE        "${VCS_DATE}")
+(def VCS_BRANCH      "${VCS_BRANCH}")
+(def VCS_TAG         "${VCS_TAG}")
+(def VCS_TICK        ${VCS_TICK})
+(def VCS_EXTRA       "${VCS_EXTRA}")
+
+(def VCS_FULL_HASH   "${VCS_FULL_HASH}")
+(def VCS_SHORT_HASH  "${VCS_SHORT_HASH}")
+
+(def VCS_WC_MODIFIED ${VCS_WC_MODIFIED})
+;; end
+EOF
+}
+
+# For rpm spec file output
+rpmOutput() {
+	cat > "${TARGETFILE}" << EOF
+# Generated by autorevision - do not hand-hack!
+$([ "${VCS_TYPE}" ] && echo "%define vcs_type		${VCS_TYPE}")
+$([ "${VCS_BASENAME}" ] && echo "%define vcs_basename		${VCS_BASENAME}")
+$([ "${VCS_UUID}" ] && echo "%define vcs_uuid		${VCS_UUID}")
+$([ "${VCS_NUM}" ] && echo "%define vcs_num			${VCS_NUM}")
+$([ "${VCS_DATE}" ] && echo "%define vcs_date		${VCS_DATE}")
+$([ "${VCS_BRANCH}" ] && echo "%define vcs_branch		${VCS_BRANCH}")
+$([ "${VCS_TAG}" ] && echo "%define vcs_tag			${VCS_TAG}")
+$([ "${VCS_TICK}" ] && echo "%define vcs_tick		${VCS_TICK}")
+$([ "${VCS_EXTRA}" ] && echo "%define vcs_extra		${VCS_EXTRA}")
+
+$([ "${VCS_FULL_HASH}" ] && echo "%define vcs_full_hash		${VCS_FULL_HASH}")
+$([ "${VCS_SHORT_HASH}" ] && echo "%define vcs_short_hash		${VCS_SHORT_HASH}")
+
+$([ "${VCS_WC_MODIFIED}" ] && echo "%define vcs_wc_modified		${VCS_WC_MODIFIED}")
+# end
+EOF
+}
+
+# shellcheck disable=SC2155
+hppOutput() {
+	local NAMESPACE="$(echo "${VCS_BASENAME}" | sed -e 's:_::g' | tr '[:lower:]' '[:upper:]')"
+	cat > "${TARGETFILE}" << EOF
+/* Generated by autorevision - do not hand-hack! */
+
+#ifndef ${NAMESPACE}_AUTOREVISION_H
+#define ${NAMESPACE}_AUTOREVISION_H
+
+namespace $(echo "${NAMESPACE}" | tr '[:upper:]' '[:lower:]')
+{
+	const std::string VCS_TYPE		= "${VCS_TYPE}";
+	const std::string VCS_BASENAME	= "${VCS_BASENAME}";
+	const std::string VCS_UUID		= "${VCS_UUID}";
+	const int VCS_NUM				= ${VCS_NUM};
+	const std::string VCS_DATE		= "${VCS_DATE}";
+	const std::string VCS_BRANCH	= "${VCS_BRANCH}";
+	const std::string VCS_TAG		= "${VCS_TAG}";
+	const int VCS_TICK				= ${VCS_TICK};
+	const std::string VCS_EXTRA		= "${VCS_EXTRA}";
+
+	const std::string VCS_FULL_HASH		= "${VCS_FULL_HASH}";
+	const std::string VCS_SHORT_HASH	= "${VCS_SHORT_HASH}";
+
+	const int VCS_WC_MODIFIED			= ${VCS_WC_MODIFIED};
+}
+
+#endif
+
+/* end */
+EOF
+}
+
+matlabOutput() {
+	case "${VCS_WC_MODIFIED}" in
+		0) VCS_WC_MODIFIED="FALSE" ;;
+		1) VCS_WC_MODIFIED="TRUE" ;;
+	esac
+	cat > "${TARGETFILE}" << EOF
+% Generated by autorevision - do not hand-hack!
+
+VCS_TYPE = '${VCS_TYPE}';
+VCS_BASENAME = '${VCS_BASENAME}';
+VCS_UUID = '${VCS_UUID}';
+VCS_NUM = ${VCS_NUM};
+VCS_DATE = '${VCS_DATE}';
+VCS_BRANCH = '${VCS_BRANCH}';
+VCS_TAG = '${VCS_TAG}';
+VCS_TICK = ${VCS_TICK};
+VCS_EXTRA = '${VCS_EXTRA}';
+
+VCS_FULL_HASH = '${VCS_FULL_HASH}';
+VCS_SHORT_HASH = '${VCS_SHORT_HASH}';
+
+VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
+
+% end
+EOF
+}
+
+octaveOutput() {
+	cat > "${TARGETFILE}" << EOF
+% Generated by autorevision - do not hand-hack!
+
+VCS_TYPE = '${VCS_TYPE}';
+VCS_BASENAME = '${VCS_BASENAME}';
+VCS_UUID = '${VCS_UUID}';
+VCS_NUM = ${VCS_NUM};
+VCS_DATE = '${VCS_DATE}';
+VCS_BRANCH = '${VCS_BRANCH}';
+VCS_TAG = '${VCS_TAG}';
+VCS_TICK = ${VCS_TICK};
+VCS_EXTRA = '${VCS_EXTRA}';
+
+VCS_FULL_HASH = '${VCS_FULL_HASH}';
+VCS_SHORT_HASH = '${VCS_SHORT_HASH}';
+
+VCS_WC_MODIFIED = ${VCS_WC_MODIFIED};
+
+% end
+EOF
+}
 
 
 # Helper functions
@@ -739,6 +972,7 @@ multiCompare() {
 	echo "${larger}"
 }
 
+# shellcheck disable=SC2155
 # Test for repositories
 repoTest() {
 	REPONUM="0"
@@ -764,9 +998,16 @@ repoTest() {
 		local bzrDepth="0"
 	fi
 	if [ ! -z "$(svn info 2>/dev/null)" ]; then
-		local stringz="Working Copy Root Path: "
-		local svnPath="$(svn info | grep "${stringz}" | tr -d "${stringz}")"
-		local svnDepth="$(pathSegment "${svnPath}")"
+		local stringz="<wcroot-abspath>"
+		local stringx="</wcroot-abspath>"
+		local svnPath="$(svn info --xml | sed -n -e "s:${stringz}::" -e "s:${stringx}::p")"
+		# An old enough svn will not be able give us a path; default
+		# to 1 for that case.
+		if [ -z  "${svnPath}" ]; then
+			local svnDepth="1"
+		else
+			local svnDepth="$(pathSegment "${svnPath}")"
+		fi
 		REPONUM="$((REPONUM+1))"
 	else
 		local svnDepth="0"
@@ -798,9 +1039,7 @@ if [ -f "${CACHEFILE}" ] && [ "${CACHEFORCE}" = "1" ]; then
 	. "${CACHEFILE}"
 else
 	# If a value is not set through the environment set VCS_EXTRA to nothing.
-	if [ -z "${VCS_EXTRA}" ]; then
-		VCS_EXTRA=""
-	fi
+	: "${VCS_EXTRA:=""}"
 	repoTest
 
 	if [ -f "${CACHEFILE}" ] && [ "${REPONUM}" = "0" ]; then
@@ -850,6 +1089,8 @@ if [ ! -z "${AFILETYPE}" ]; then
 		hOutput
 	elif [ "${AFILETYPE}" = "xcode" ]; then
 		xcodeOutput
+	elif [ "${AFILETYPE}" = "swift" ]; then
+		swiftOutput
 	elif [ "${AFILETYPE}" = "sh" ]; then
 		shOutput
 	elif [ "${AFILETYPE}" = "py" ] || [ "${AFILETYPE}" = "python" ]; then
@@ -874,6 +1115,18 @@ if [ ! -z "${AFILETYPE}" ]; then
 		texOutput
 	elif [ "${AFILETYPE}" = "m4" ]; then
 		m4Output
+	elif [ "${AFILETYPE}" = "scheme" ]; then
+		schemeOutput
+	elif [ "${AFILETYPE}" = "clojure" ]; then
+		clojureOutput
+	elif [ "${AFILETYPE}" = "rpm" ]; then
+		rpmOutput
+	elif [ "${AFILETYPE}" = "hpp" ]; then
+		hppOutput
+	elif [ "${AFILETYPE}" = "matlab" ]; then
+		matlabOutput
+	elif [ "${AFILETYPE}" = "octave" ]; then
+		octaveOutput
 	else
 		echo "error: Not a valid output type." 1>&2
 		exit 1

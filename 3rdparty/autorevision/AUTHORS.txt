@@ -1,7 +1,11 @@
 dak180 <dak180@users.sourceforge.net>
 Eric S. Raymond <esr@thyrsus.com>
-Dmitry Marakasov <amdmi3@amdmi3.ru>
 Mike Swanson <mikeonthecomputer@gmail.com>
+Dmitry Marakasov <amdmi3@amdmi3.ru>
+Dennis Biringer <github@biringer.org>
+allevo <tomallevi@gmail.com>
 Paul Wise <pabs3@bonedaddy.net>
 Joel C. Salomon <joelcsalomon@gmail.com>
 yuanchuan <yuanchuan23@gmail.com>
+Robert Wenner <robert@port25.com>
+Hironori Ichimiya <hiron@hironytic.com>
