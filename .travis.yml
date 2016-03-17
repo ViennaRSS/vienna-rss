@@ -1,11 +1,12 @@
 language: objective-c
 osx_image: xcode7.2
-before_install:
-# - brew update
-# - brew install xctool
 xcode_workspace: Vienna.xcworkspace
 xcode_scheme: Vienna
-script: xctool -workspace Vienna.xcworkspace -scheme Vienna -configuration Development
+script: xctool -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "$TRAVIS_XCODE_SCHEME"
 notifications:
   slack:
     secure: KaYeG8xgiCCROn0yBrDj0xMI5f1LECVgqJalp+2APy2AdQzHmYQdysiy6c1xNL1//kW3TPAakopgpBwpQ6YTVBfI9F/n9SCvMEwHKKZVT1kwqYJDNwGKXy1tXJKQfhI2x6bs2+HJOgOTLhU+otrDlYyZWEel56q/NzNVx0dwHFs=
+
+# for container-based infrastructure
+sudo: false
+cache: cocoapods
