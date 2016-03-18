@@ -1665,7 +1665,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else if ([identifier isEqualToString:MA_Field_Link])
 	{
-		cellString = [theArticle link];
+		cellString = SafeString([theArticle link]);
 	}
 	else if ([identifier isEqualToString:MA_Field_Subject])
 	{
@@ -1677,7 +1677,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else if ([identifier isEqualToString:MA_Field_Enclosure])
 	{
-		cellString = [theArticle enclosure];
+		cellString = SafeString([theArticle enclosure]);
 	}
 	else
 	{
