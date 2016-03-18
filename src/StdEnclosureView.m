@@ -166,6 +166,7 @@
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	enclosureFilename=nil;
 }
 @end

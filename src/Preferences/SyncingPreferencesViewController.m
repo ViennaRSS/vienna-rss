@@ -35,7 +35,16 @@ static BOOL _credentialsChanged;
 
 
 - (instancetype)init {
-    return [super initWithNibName:@"SyncingPreferencesView" bundle:nil];
+	if ((self = [super initWithNibName:@"SyncingPreferencesView" bundle:nil]) != nil)
+	{
+        // Set up to be notified if preferences change outside this window
+        NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
+        [nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:openReaderHost];
+        [nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
+        [nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidEndEditingNotification object:password];
+	}
+	return self;
 }
 
 - (void)viewWillAppear {
@@ -44,12 +53,6 @@ static BOOL _credentialsChanged;
     }
     // Do view setup here.
     sourcesDict = nil;
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
-    [nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:openReaderHost];
-    [nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
-    [nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidEndEditingNotification object:password];
     
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
@@ -268,6 +271,7 @@ static BOOL _credentialsChanged;
 
 -(void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     syncButton=nil;
     sourcesDict=nil;
     
