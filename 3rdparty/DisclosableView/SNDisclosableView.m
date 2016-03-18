@@ -307,7 +307,7 @@ const float kDefaultHiddenHeight = 0.0;
     ourSubviewMasks = [NSMutableArray array];
     for (NSView* ourSubview in ourSubviews) {
         NSAutoresizingMaskOptions mask = ourSubview.autoresizingMask;
-        [ourSubviewMasks addObject:[NSNumber numberWithUnsignedInt:(NSUInteger)mask]];
+        [ourSubviewMasks addObject:@((NSUInteger)mask)];
 
         // Don't change height, and stick to the top of the view.
         mask &= ~NSViewHeightSizable;
