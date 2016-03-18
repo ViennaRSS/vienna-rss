@@ -22,6 +22,7 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
+#import "HelperFunctions.h"
 
 // Private functions
 @interface StdEnclosureView (Private)
@@ -75,7 +76,7 @@
 	FSRef appRef;
 
 	// Keep this for the download/open
-	enclosureFilename = newFilename;
+	enclosureFilename = [cleanedUpAndEscapedUrlFromString(newFilename) absoluteString];
 
 	NSString * basename = [[NSURL URLWithString:enclosureFilename] lastPathComponent];
     NSString * encodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
