@@ -23,6 +23,7 @@
 #import "Database.h"
 #import "StringExtensions.h"
 #import "CalendarExtensions.h"
+#import "HelperFunctions.h"
 
 // The names here are internal field names, not for localisation.
 NSString * MA_Field_GUID = @"GUID";
@@ -243,7 +244,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSDate *)date					{ return [articleData objectForKey:MA_Field_Date]; }
 -(NSDate *)createdDate			{ return [articleData objectForKey:MA_Field_CreatedDate]; }
 -(NSString *)body				{ return [articleData objectForKey:MA_Field_Text]; }
--(NSString *)enclosure			{ return [NSString stringByCleaningURLString:[articleData objectForKey:MA_Field_Enclosure]]; }
+-(NSString *)enclosure			{ return [articleData objectForKey:MA_Field_Enclosure]; }
 
 /* containingFolder
  */
@@ -311,7 +312,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleLink
 {
-    return [NSString stringByCleaningURLString:[self link]];
+    return [cleanedUpAndEscapedUrlFromString([self link]) absoluteString];
 }
 
 /* tagArticleTitle
@@ -360,7 +361,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleEnclosureLink
 {
-    return [self enclosure];
+    return [cleanedUpAndEscapedUrlFromString([self enclosure]) absoluteString];
 }
 
 /* tagArticleEnclosureFilename
@@ -386,7 +387,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)tagFeedLink
 {
     Folder * folder = [[Database sharedManager] folderFromID:[self folderId]];
-    return [NSString stringByCleaningURLString:[folder homePage]];
+    return [cleanedUpAndEscapedUrlFromString([folder homePage]) absoluteString];
 }
 
 /* tagFeedDescription
