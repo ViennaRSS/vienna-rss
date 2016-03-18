@@ -52,7 +52,7 @@ static BOOL threadSafe;
 @implementation NSDate (Vienna)
 
 
-+ (void) initialize
++ (void)load
 {
 	// Initializes the date formatters
 	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
@@ -76,6 +76,8 @@ static BOOL threadSafe;
         threadSafe=NO;
     }
 }
+
+
 
 /* parseXMLDate
  * Parse a date in an XML header into an NSCalendarDate.
