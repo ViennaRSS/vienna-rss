@@ -28,7 +28,7 @@
 /* init
  * Just init the download window.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super initWithWindowNibName:@"Downloads"]) != nil)
 	{
@@ -44,8 +44,8 @@
 {
 	// Work around a Cocoa bug where the window positions aren't saved
 	[self setShouldCascadeWindows:NO];
-	[self setWindowFrameAutosaveName:@"downloadWindow"];
-	[downloadWindow setDelegate:self];
+	self.windowFrameAutosaveName = @"downloadWindow";
+	downloadWindow.delegate = self;
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -55,15 +55,15 @@
 	ImageAndTextCell * imageAndTextCell;
 	NSTableColumn * tableColumn = [table tableColumnWithIdentifier:@"listColumn"];
 	imageAndTextCell = [[ImageAndTextCell alloc] init];
-	[imageAndTextCell setFont:[NSFont systemFontOfSize:[NSFont smallSystemFontSize]]];
-	[imageAndTextCell setTextColor:[NSColor darkGrayColor]];
-	[tableColumn setDataCell:imageAndTextCell];	
+	imageAndTextCell.font = [NSFont systemFontOfSize:[NSFont smallSystemFontSize]];
+	imageAndTextCell.textColor = [NSColor darkGrayColor];
+	tableColumn.dataCell = imageAndTextCell;	
 
 	// We are the delegate and the datasource
 	[table setDelegate:self];
 	[table setDataSource:self];
-	[table setDoubleAction:@selector(handleDoubleClick:)];
-	[table setTarget:self];
+	table.doubleAction = @selector(handleDoubleClick:);
+	table.target = self;
 
 	// Create the popup menu
 	NSMenu * downloadMenu = [[NSMenu alloc] init];
@@ -71,7 +71,7 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", nil) action:@selector(showInFinder:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", nil) action:@selector(removeFromList:) keyEquivalent:@""];
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", nil) action:@selector(cancelDownload:) keyEquivalent:@""];
-	[table setMenu:downloadMenu];
+	table.menu = downloadMenu;
 	
 	// Set Clear button caption
 	[clearButton setTitle:NSLocalizedString(@"ClearButton", nil)];
@@ -94,12 +94,12 @@
  */
 -(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
 {
-	int row = [table rowAtPoint:[table convertPoint:[theEvent locationInWindow] fromView:nil]];
+	NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
 	if (row >= 0)
 	{
 		// Select the row under the cursor if it isn't already selected
-		if ([table numberOfSelectedRows] <= 1)
-			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger )row] byExtendingSelection:NO];
+		if (table.numberOfSelectedRows <= 1)
+			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
 	}
 }
 
@@ -109,15 +109,15 @@
  */
 -(void)handleDoubleClick:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
+	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
-		DownloadItem * item = [list objectAtIndex:index];
-		if (item && [item state] == DOWNLOAD_COMPLETED)
+		DownloadItem * item = list[index];
+		if (item && item.state == DOWNLOAD_COMPLETED)
 		{
-			if ([[NSWorkspace sharedWorkspace] openFile:[DownloadManager fullDownloadPath:[item filename]]] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), [[item filename] lastPathComponent]);
+			if ([[NSWorkspace sharedWorkspace] openFile:[DownloadManager fullDownloadPath:item.filename]] == NO)
+				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
 		}
 	}
 }
@@ -127,15 +127,15 @@
  */
 -(void)showInFinder:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
+	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
-		DownloadItem * item = [list objectAtIndex:index];
-		if (item && [item state] == DOWNLOAD_COMPLETED)
+		DownloadItem * item = list[index];
+		if (item && item.state == DOWNLOAD_COMPLETED)
 		{
-			if ([[NSWorkspace sharedWorkspace] selectFile:[DownloadManager fullDownloadPath:[item filename]] inFileViewerRootedAtPath:@""] == NO)
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), [[item filename] lastPathComponent]);
+			if ([[NSWorkspace sharedWorkspace] selectFile:[DownloadManager fullDownloadPath:item.filename] inFileViewerRootedAtPath:@""] == NO)
+				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
 		}
 	}
 }
@@ -145,11 +145,11 @@
  */
 -(void)removeFromList:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
+	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
-		DownloadItem * item = [list objectAtIndex:index];
+		DownloadItem * item = list[index];
 		[[DownloadManager sharedInstance] removeItem:item];
 		[table reloadData];
 	}
@@ -160,11 +160,11 @@
  */
 -(void)cancelDownload:(id)sender
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-	int index = [table selectedRow];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
+	NSInteger index = table.selectedRow;
 	if (index != -1)
 	{
-		DownloadItem * item = [list objectAtIndex:index];
+		DownloadItem * item = list[index];
 		[[DownloadManager sharedInstance] cancelItem:item];
 		[table reloadData];
 	}
@@ -176,8 +176,8 @@
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	NSInteger itemCount = [[[DownloadManager sharedInstance] downloadsList] count];
-	[clearButton setEnabled:itemCount > 0];
+	NSInteger itemCount = [DownloadManager sharedInstance].downloadsList.count;
+	clearButton.enabled = itemCount > 0;
 	return itemCount;
 }
 
@@ -188,12 +188,12 @@
 {
 	if ([aCell isKindOfClass:[ImageAndTextCell class]])
 	{
-		NSArray * list = [[DownloadManager sharedInstance] downloadsList];
-		DownloadItem * item = [list objectAtIndex:rowIndex];
+		NSArray * list = [DownloadManager sharedInstance].downloadsList;
+		DownloadItem * item = list[rowIndex];
 
-		if ([item image] != nil)
-			[aCell setImage:[item image]];
-		[aCell setTextColor:(rowIndex == [aTableView selectedRow]) ? [NSColor whiteColor] : [NSColor darkGrayColor]];
+		if (item.image != nil)
+			[aCell setImage:item.image];
+		[aCell setTextColor:(rowIndex == aTableView.selectedRow) ? [NSColor whiteColor] : [NSColor darkGrayColor]];
 	}
 }
 
@@ -202,20 +202,20 @@
  */
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSAssert(rowIndex >= 0 && rowIndex < [list count], @"objectValueForTableColumn sent an out-of-range rowIndex");
-	DownloadItem * item = [list objectAtIndex:rowIndex];
+	DownloadItem * item = list[rowIndex];
 
 	// TODO: return item when we have a cell that can parse it. Until then, construct our
 	// own data.
-	NSString * rawfilename = [[item filename] lastPathComponent];
+	NSString * rawfilename = item.filename.lastPathComponent;
     NSString * filename = [rawfilename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	if (filename == nil)
 		filename = @"";
 
 	// Different layout depending on the state
 	NSString * objectString = filename;
-	switch ([item state])
+	switch (item.state)
 	{
 		case DOWNLOAD_INIT:
 			break;
@@ -223,7 +223,7 @@
 		case DOWNLOAD_COMPLETED: {
 			// Filename on top
 			// Final size of file at bottom.
-			double size = [item size];
+			double size = item.size;
 			NSString * sizeString = @"";
 
 			if (size > 1024 * 1024)
@@ -241,8 +241,8 @@
 			// Progress gauge in middle
 			// Size gathered so far at bottom
 			NSString * progressString = @"";
-			double expectedSize = [item expectedSize];
-			double sizeSoFar = [item size];
+			double expectedSize = item.expectedSize;
+			double sizeSoFar = item.size;
 
 			if (expectedSize == -1)
 			{
@@ -278,10 +278,10 @@
  */
 -(void)handleDownloadsChange:(NSNotification *)notification
 {
-	DownloadItem * item = (DownloadItem *)[notification object];
-	NSArray * list = [[DownloadManager sharedInstance] downloadsList];
+	DownloadItem * item = (DownloadItem *)notification.object;
+	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSUInteger  rowIndex = [list indexOfObject:item];
-	if ([list count] != lastCount)
+	if (list.count != lastCount)
 	{
 		[table reloadData];
 		if (rowIndex != NSNotFound)
@@ -290,7 +290,7 @@
 			[table selectRowIndexes:indexes byExtendingSelection:NO];
 			[table scrollRowToVisible:rowIndex];
 		}
-		lastCount = [list count];
+		lastCount = list.count;
 	}
 	else
 	{

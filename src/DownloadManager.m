@@ -35,7 +35,7 @@
 /* init
  * Initialise a new DownloadItem object
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -54,11 +54,11 @@
  * Initalises a decoded object. All decoded objects are assumed to be
  * completed downloads.
  */
--(id)initWithCoder:(NSCoder *)coder
+-(instancetype)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setFilename:[coder decodeObject]];
+		self.filename = [coder decodeObject];
 		[coder decodeValueOfObjCType:@encode(long long) at:&fileSize];
 		state = DOWNLOAD_COMPLETED;
 	}
@@ -77,7 +77,7 @@
 /* setState
  * Sets the download state.
  */
--(void)setState:(int)newState
+-(void)setState:(NSInteger)newState
 {
 	state = newState;
 }
@@ -85,7 +85,7 @@
 /* state
  * Returns the download state.
  */
--(int)state
+-(NSInteger)state
 {
 	return state;
 }
@@ -166,12 +166,12 @@
 {
 	if (image == nil)
 	{
-		image = [[NSWorkspace sharedWorkspace] iconForFileType:[[self filename] pathExtension]];
-		if (![image isValid])
+		image = [[NSWorkspace sharedWorkspace] iconForFileType:self.filename.pathExtension];
+		if (!image.valid)
 			image = nil;
 		else
 		{
-			[image setSize:NSMakeSize(32, 32)];
+			image.size = NSMakeSize(32, 32);
 		}
 	}
 	return image;
@@ -193,15 +193,6 @@
 	return startTime;
 }
 
-/* dealloc
- * Clean up behind ourself.
- */
--(void)dealloc
-{
-	filename=nil;
-	download=nil;
-	image=nil;
-}
 @end
 
 @implementation DownloadManager
@@ -225,7 +216,7 @@
 /* init
  * Initialise the DownloadManager object.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -246,7 +237,7 @@
 /* activeDownloads
  * Return the number of downloads in progress.
  */
--(int)activeDownloads
+-(NSInteger)activeDownloads
 {
 	return activeDownloads;
 }
@@ -256,11 +247,11 @@
  */
 -(void)clearList
 {
-	int index = [downloadsList count] - 1;
+	NSInteger index = downloadsList.count - 1;
 	while (index >= 0)
 	{
-		DownloadItem * item = [downloadsList objectAtIndex:index--];
-		if ([item state] != DOWNLOAD_STARTED)
+		DownloadItem * item = downloadsList[index--];
+		if (item.state != DOWNLOAD_STARTED)
 			[downloadsList removeObject:item];
 	}
 	[self notifyDownloadItemChange:nil];
@@ -272,7 +263,7 @@
  */
 -(void)archiveDownloadsList
 {
-	NSMutableArray * listArray = [[NSMutableArray alloc] initWithCapacity:[downloadsList count]];
+	NSMutableArray * listArray = [[NSMutableArray alloc] initWithCapacity:downloadsList.count];
 
 	for (DownloadItem * item in downloadsList)
 		[listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
@@ -307,7 +298,7 @@
  */
 -(void)cancelItem:(DownloadItem *)item
 {	
-	[[item download] cancel];
+	[item.download cancel];
 	[item setState:DOWNLOAD_CANCELLED];
 	NSAssert(activeDownloads > 0, @"cancelItem called with zero activeDownloads count!");
 	--activeDownloads;
@@ -321,7 +312,7 @@
  */
 -(void)downloadFileFromURL:(NSString *)url
 {
-	NSString * filename = [[NSURL URLWithString:url] lastPathComponent];
+	NSString * filename = [NSURL URLWithString:url].lastPathComponent;
 	NSString * destPath = [DownloadManager fullDownloadPath:filename];
 	NSURLRequest * theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	NSURLDownload * theDownload = [[NSURLDownload alloc] initWithRequest:theRequest delegate:(id)self];
@@ -329,8 +320,8 @@
 	{
 		DownloadItem * newItem = [DownloadItem new];
 		[newItem setState:DOWNLOAD_INIT];
-		[newItem setDownload:theDownload];
-		[newItem setFilename:filename];
+		newItem.download = theDownload;
+		newItem.filename = filename;
 		[downloadsList addObject:newItem];
 
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
@@ -346,11 +337,11 @@
  */
 -(DownloadItem *)itemForDownload:(NSURLDownload *)download
 {
-	int index = [downloadsList count] - 1;
+	NSInteger index = downloadsList.count - 1;
 	while (index >= 0)
 	{
-		DownloadItem * item = [downloadsList objectAtIndex:index--];
-		if ([item download] == download)
+		DownloadItem * item = downloadsList[index--];
+		if (item.download == download)
 			return item;
 	}
 	return nil;
@@ -363,7 +354,7 @@
  */
 +(NSString *)fullDownloadPath:(NSString *)filename
 {
-	NSString * downloadPath = [[Preferences standardPreferences] downloadFolder];
+	NSString * downloadPath = [Preferences standardPreferences].downloadFolder;
     NSString * decodedFilename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	BOOL isDir = YES;
@@ -371,7 +362,7 @@
 	if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir)
 		downloadPath = @"~/Desktop";
 	
-	return [[downloadPath stringByExpandingTildeInPath] stringByAppendingPathComponent:decodedFilename];
+	return [downloadPath.stringByExpandingTildeInPath stringByAppendingPathComponent:decodedFilename];
 }
 
 /* isFileDownloaded
@@ -382,19 +373,19 @@
 {
     NSString * decodedFilename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	DownloadManager * downloadManager = [DownloadManager sharedInstance];
-	int count = [[downloadManager downloadsList] count];
-	int index;
+	NSInteger count = downloadManager.downloadsList.count;
+	NSInteger index;
 
-	NSString * firstFile = [decodedFilename stringByStandardizingPath];
+	NSString * firstFile = decodedFilename.stringByStandardizingPath;
 
 	for (index = 0; index < count; ++index)
 	{
-		DownloadItem * item = [[downloadManager downloadsList] objectAtIndex:index];
-		NSString * secondFile = [decodedFilename stringByStandardizingPath];
+		DownloadItem * item = downloadManager.downloadsList[index];
+		NSString * secondFile = decodedFilename.stringByStandardizingPath;
 		
 		if ([firstFile compare:secondFile options:NSCaseInsensitiveSearch] == NSOrderedSame)
 		{
-			if ([item state] != DOWNLOAD_COMPLETED)
+			if (item.state != DOWNLOAD_COMPLETED)
 				return NO;
 			
 			// File completed download but possibly moved or deleted after download
@@ -423,19 +414,19 @@
 	if (theItem == nil)
 	{
 		theItem = [[DownloadItem alloc] init];
-		[theItem setDownload:download];
+		theItem.download = download;
 		[downloadsList addObject:theItem];
 	}
 	[theItem setState:DOWNLOAD_STARTED];
-	if ([theItem filename] == nil)
-		[theItem setFilename:[[[download request] URL] path]];
+	if (theItem.filename == nil)
+		theItem.filename = download.request.URL.path;
 
 	// Keep count of active downloads
 	++activeDownloads;
 	
 	// Record the time we started. We'll need this to work out the remaining
 	// time and the number of KBytes/second we're getting
-	[theItem setStartTime:[NSDate date]];
+	theItem.startTime = [NSDate date];
 	[self notifyDownloadItemChange:theItem];
 
 	// If there's no download window visible, display one now.
@@ -454,13 +445,13 @@
 	[self notifyDownloadItemChange:theItem];
 	[self archiveDownloadsList];
 
-	NSString * filename = [[theItem filename] lastPathComponent];
+	NSString * filename = theItem.filename.lastPathComponent;
 	if (filename == nil)
-		filename = [theItem filename];
+		filename = theItem.filename;
 
 	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadCompleted] forKey:@"ContextType"];
-	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
+	[contextDict setValue:@MA_GrowlContext_DownloadCompleted forKey:@"ContextType"];
+	[contextDict setValue:theItem.filename forKey:@"ContextData"];
 	
 	[APPCONTROLLER growlNotify:contextDict
 							title:NSLocalizedString(@"Download completed", nil)
@@ -484,13 +475,13 @@
 	[self notifyDownloadItemChange:theItem];
 	[self archiveDownloadsList];
 
-	NSString * filename = [[theItem filename] lastPathComponent];
+	NSString * filename = theItem.filename.lastPathComponent;
 	if (filename == nil)
-		filename = [theItem filename];
+		filename = theItem.filename;
 
 	NSMutableDictionary * contextDict = [[NSMutableDictionary alloc] init];
-	[contextDict setValue:[NSNumber numberWithInt:MA_GrowlContext_DownloadFailed] forKey:@"ContextType"];
-	[contextDict setValue:[theItem filename] forKey:@"ContextData"];
+	[contextDict setValue:@MA_GrowlContext_DownloadFailed forKey:@"ContextType"];
+	[contextDict setValue:theItem.filename forKey:@"ContextData"];
 	
 	[APPCONTROLLER growlNotify:contextDict
 							title:NSLocalizedString(@"Download failed", nil)
@@ -505,7 +496,7 @@
 -(void)download:(NSURLDownload *)download didReceiveDataOfLength:(NSUInteger)length
 {
 	DownloadItem * theItem = [self itemForDownload:download];
-	[theItem setSize:[theItem size] + length];
+	theItem.size = theItem.size + length;
 
 	// TODO: How many bytes are we getting each second?
 	
@@ -521,7 +512,7 @@
 -(void)download:(NSURLDownload *)download didReceiveResponse:(NSURLResponse *)response
 {
 	DownloadItem * theItem = [self itemForDownload:download];
-	[theItem setExpectedSize:[response expectedContentLength]];
+	theItem.expectedSize = response.expectedContentLength;
 	[self notifyDownloadItemChange:theItem];
 }
 
@@ -531,7 +522,7 @@
 -(void)download:(NSURLDownload *)download willResumeWithResponse:(NSURLResponse *)response fromByte:(long long)startingByte
 {
 	DownloadItem * theItem = [self itemForDownload:download];
-	[theItem setSize:startingByte];
+	theItem.size = startingByte;
 	[self notifyDownloadItemChange:theItem];
 }
 
@@ -561,19 +552,12 @@
 	// Hack for certain compression types that are converted to .txt extension when
 	// downloaded. SITX is the only one I know about.
 	DownloadItem * theItem = [self itemForDownload:download];
-	if ([[[theItem filename] pathExtension] isEqualToString:@"sitx"] && [[filename pathExtension] isEqualToString:@"txt"])
-		destPath = [destPath stringByDeletingPathExtension];
+	if ([theItem.filename.pathExtension isEqualToString:@"sitx"] && [filename.pathExtension isEqualToString:@"txt"])
+		destPath = destPath.stringByDeletingPathExtension;
 
 	// Save the filename
 	[download setDestination:destPath allowOverwrite:NO];
-	[theItem setFilename:destPath];
+	theItem.filename = destPath;
 }
 
-/* dealloc
- * Clean up at the end.
- */
--(void)dealloc
-{
-	downloadsList=nil;
-}
 @end

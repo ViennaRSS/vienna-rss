@@ -53,21 +53,21 @@ static BOOL _credentialsChanged;
     
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
-    [syncButton setState:[prefs syncGoogleReader] ? NSOnState : NSOffState];
-    NSString * theUsername = [prefs syncingUser];
+    syncButton.state = prefs.syncGoogleReader ? NSOnState : NSOffState;
+    NSString * theUsername = prefs.syncingUser;
     if (!theUsername)
         theUsername=@"";
-    NSString * theHost = [prefs syncServer];
+    NSString * theHost = prefs.syncServer;
     if (!theHost)
         theHost=@"";
     NSString * thePassword = [KeyChain getGenericPasswordFromKeychain:theUsername serviceName:@"Vienna sync"];
     if (!thePassword)
         thePassword=@"";
-    [username setStringValue:theUsername];
-    [openReaderHost setStringValue:theHost];
-    [password setStringValue:thePassword];
+    username.stringValue = theUsername;
+    openReaderHost.stringValue = theHost;
+    password.stringValue = thePassword;
     
-    if(![prefs syncGoogleReader])
+    if(!prefs.syncGoogleReader)
     {
         [openReaderSource setEnabled:NO];
         [openReaderHost setEnabled:NO];
@@ -106,7 +106,7 @@ static BOOL _credentialsChanged;
                 if (!match)
                 {
                     [openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
-                    [openReaderHost setStringValue:theHost];
+                    openReaderHost.stringValue = theHost;
                 }
             }
         }
@@ -140,7 +140,7 @@ static BOOL _credentialsChanged;
 -(void)windowWillClose:(NSNotification *)notification
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if([syncButton state] == NSOnState && _credentialsChanged)
+    if(syncButton.state == NSOnState && _credentialsChanged)
     {
         [[GoogleReader sharedManager] resetAuthentication];
         [[GoogleReader sharedManager] loadSubscriptions:nil];
@@ -153,7 +153,7 @@ static BOOL _credentialsChanged;
     // enable/disable syncing
     BOOL sync = [sender state] == NSOnState;
     Preferences *prefs = [Preferences standardPreferences];
-    [prefs setSyncGoogleReader:sync];
+    prefs.syncGoogleReader = sync;
     [prefs savePreferences];
     if (sync) {
         [openReaderSource setEnabled:YES];
@@ -173,8 +173,8 @@ static BOOL _credentialsChanged;
 
 -(IBAction)changeSource:(id)sender;
 {
-    NSMenuItem * readerItem = [openReaderSource selectedItem];
-    NSString * key = [readerItem title];
+    NSMenuItem * readerItem = openReaderSource.selectedItem;
+    NSString * key = readerItem.title;
     NSDictionary * itemDict = [sourcesDict valueForKey:key];
     NSString* hostName = [itemDict valueForKey:@"Address"];
     if (!hostName)
@@ -182,15 +182,15 @@ static BOOL _credentialsChanged;
     NSString* hint = [itemDict valueForKey:@"Hint"];
     if (!hint)
         hint=@"";
-    [openReaderHost setStringValue:hostName];
-    [credentialsInfoText setStringValue:hint];
+    openReaderHost.stringValue = hostName;
+    credentialsInfoText.stringValue = hint;
     if (sender != nil)	//user action
         [self handleServerTextDidChange:nil];
 }
 
 - (IBAction)visitWebsite:(id)sender
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/", [openReaderHost stringValue]]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"https://%@/", openReaderHost.stringValue]];
     [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
@@ -203,17 +203,17 @@ static BOOL _credentialsChanged;
 {
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
-    if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
+    if ( !((openReaderHost.stringValue).blank || (username.stringValue).blank) )
     {
         // can we get password via keychain ?
-        NSString * thePass = [KeyChain getWebPasswordFromKeychain:[username stringValue] url:[NSString stringWithFormat:@"https://%@", [openReaderHost stringValue]]];
-        if (![thePass isBlank])
+        NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
+        if (!thePass.blank)
         {
-            [password setStringValue:thePass];
-            [KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
+            password.stringValue = thePass;
+            [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
-    [prefs setSyncServer:[openReaderHost stringValue]];
+    prefs.syncServer = openReaderHost.stringValue;
     [prefs savePreferences];
 }
 
@@ -226,18 +226,18 @@ static BOOL _credentialsChanged;
 {
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
-    [KeyChain deleteGenericPasswordInKeychain:[prefs syncingUser] service:@"Vienna sync"];
-    if ( !([[openReaderHost stringValue] isBlank] || [[username stringValue] isBlank]) )
+    [KeyChain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
+    if ( !((openReaderHost.stringValue).blank || (username.stringValue).blank) )
     {
         // can we get password via keychain ?
-        NSString * thePass = [KeyChain getWebPasswordFromKeychain:[username stringValue] url:[NSString stringWithFormat:@"https://%@", [openReaderHost stringValue]]];
-        if (![thePass isBlank])
+        NSString * thePass = [KeyChain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"https://%@", openReaderHost.stringValue]];
+        if (!thePass.blank)
         {
-            [password setStringValue:thePass];
-            [KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
+            password.stringValue = thePass;
+            [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
     }
-    [prefs setSyncingUser:[username stringValue]];
+    prefs.syncingUser = username.stringValue;
     [prefs savePreferences];
 }
 
@@ -249,28 +249,21 @@ static BOOL _credentialsChanged;
 -(void)handlePasswordTextDidChange:(NSNotification *)aNotification
 {
     _credentialsChanged = YES;
-    [KeyChain setGenericPasswordInKeychain:[password stringValue] username:[username stringValue] service:@"Vienna sync"];
+    [KeyChain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
 }
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {    
-    if ([self.view.window isVisible])
+    if ((self.view.window).visible)
     {
         NSAlert *alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle:@"OK"];
         [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
         [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
-        [alert setAlertStyle:NSWarningAlertStyle];
+        alert.alertStyle = NSWarningAlertStyle;
         [alert beginSheetModalForWindow:self.view.window modalDelegate:self didEndSelector:nil contextInfo:nil];
         [[GoogleReader sharedManager] clearAuthentication];
     }
-}
-
--(void)dealloc
-{
-    syncButton=nil;
-    sourcesDict=nil;
-    
 }
 
 @end

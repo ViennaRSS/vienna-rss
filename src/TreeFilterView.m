@@ -22,7 +22,7 @@
 
 @implementation TreeFilterView
 
--(id)initWithFrame:(NSRect)frameRect
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
     if ((self = [super initWithFrame:frameRect]) != nil)
     {
@@ -41,7 +41,7 @@
 
     // Set some useful tooltips.
     [filterSearchField setToolTip:NSLocalizedString(@"Filter folders", nil)];
-    [[filterSearchField cell] setPlaceholderString:NSLocalizedString(@"Filter folders", nil)];
+    [filterSearchField.cell setPlaceholderString:NSLocalizedString(@"Filter folders", nil)];
 }
 
 /* drawRect
@@ -49,15 +49,8 @@
  */
 -(void)drawRect:(NSRect)rect
 {
-    NSRect iRect = NSMakeRect(0, 0, 1, [backgroundBrush size].height - 1);
+    NSRect iRect = NSMakeRect(0, 0, 1, backgroundBrush.size.height - 1);
     [backgroundBrush drawInRect:rect fromRect:iRect operation:NSCompositeSourceOver fraction:1];
 }
 
-/* dealloc
- * Release resources at the end.
- */
--(void)dealloc
-{
-    backgroundBrush=nil;
-}
 @end

@@ -27,7 +27,7 @@
  * Initialises a new BackTrackArray with the specified maximum number of
  * items.
  */
--(id)initWithMaximum:(NSUInteger )theMax
+-(instancetype)initWithMaximum:(NSUInteger)theMax
 {
 	if ((self = [super init]) != nil)
 	{
@@ -51,20 +51,20 @@
  */
 -(BOOL)isAtEndOfQueue
 {
-	return queueIndex >= (int)[array count] - 1;
+	return queueIndex >= (NSInteger)array.count - 1;
 }
 
 /* previousItemAtQueue
  * Removes an item from the tail of the queue as long as the queue is not
  * empty and returns the backtrack data.
  */
--(BOOL)previousItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPointer
+-(BOOL)previousItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPointer
 {
 	if (queueIndex > 0)
 	{
-		ArticleReference * item = [array objectAtIndex:--queueIndex];
-		*folderId = [item folderId];
-		*guidPointer = [item guid];
+		ArticleReference * item = array[--queueIndex];
+		*folderId = item.folderId;
+		*guidPointer = item.guid;
 		return YES;
 	}
 	return NO;
@@ -74,13 +74,13 @@
  * Removes an item from the tail of the queue as long as the queue is not
  * empty and returns the backtrack data.
  */
--(BOOL)nextItemAtQueue:(int *)folderId guidPointer:(NSString **)guidPointer
+-(BOOL)nextItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPointer
 {
-	if (queueIndex < (int)[array count] - 1)
+	if (queueIndex < (NSInteger)array.count - 1)
 	{
-		ArticleReference * item = [array objectAtIndex:++queueIndex];
-		*folderId = [item folderId];
-		*guidPointer = [item guid];
+		ArticleReference * item = array[++queueIndex];
+		*folderId = item.folderId;
+		*guidPointer = item.guid;
 		return YES;
 	}
 	return NO;
@@ -95,30 +95,23 @@
  * new 'head' position. This produces the expected results when tracking
  * from the new item inserted back to the most recent item.
  */
--(void)addToQueue:(int)folderId guid:(NSString *)guid
+-(void)addToQueue:(NSInteger)folderId guid:(NSString *)guid
 {
-	while (queueIndex + 1 < (int)[array count])
+	while (queueIndex + 1 < (NSInteger)array.count)
 		[array removeObjectAtIndex:queueIndex + 1];
-	if ([array count] == maxItems)
+	if (array.count == maxItems)
 	{
 		[array removeObjectAtIndex:0];
 		--queueIndex;
 	}
-	if ([array count] > 0)
+	if (array.count > 0)
 	{
-		ArticleReference * item = [array objectAtIndex:[array count] - 1];
-		if ([[item guid] isEqualToString:guid] && [item folderId] == folderId)
+		ArticleReference * item = array[array.count - 1];
+		if ([item.guid isEqualToString:guid] && item.folderId == folderId)
 			return;
 	}
 	[array addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 	++queueIndex;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	array=nil;
-}
 @end

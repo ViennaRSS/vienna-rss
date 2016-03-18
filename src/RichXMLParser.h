@@ -40,9 +40,9 @@
 // General functions
 -(BOOL)parseRichXML:(NSData *)xmlData;
 +(BOOL)extractFeeds:(NSData *)xmlData toArray:(NSMutableArray *)linkArray;
--(NSString *)title;
--(NSString *)description;
--(NSString *)link;
--(NSDate *)lastModified;
--(NSArray *)items;
+@property (nonatomic, readonly, copy) NSString *title;
+@property (nonatomic, readonly, copy) NSString *description;
+@property (nonatomic, readonly, copy) NSString *link;
+@property (nonatomic, readonly, copy) NSDate *lastModified;
+@property (nonatomic, readonly, copy) NSArray *items;
 @end

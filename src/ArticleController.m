@@ -45,7 +45,7 @@
 /* init
  * Initialise.
  */
--(id)init
+-(instancetype)init
 {
     if ((self = [super init]) != nil)
 	{
@@ -54,70 +54,70 @@
 		articleToPreserve = nil;
 
 		// Set default values to generate article sort descriptors
-		articleSortSpecifiers = [[NSDictionary alloc] initWithObjectsAndKeys:
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"containingFolder.name", @"key",
-				@"compare:", @"selector",
-				nil], MA_Field_Folder,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"isRead", @"key",
-				@"compare:", @"selector",
-				nil], MA_Field_Read,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"isFlagged", @"key",
-				@"compare:", @"selector",
-				nil], MA_Field_Flagged,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"hasComments", @"key",
-				@"compare:", @"selector",
-				nil], MA_Field_Comments,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				[@"articleData." stringByAppendingString:MA_Field_Date], @"key",
-				@"compare:", @"selector",
-				nil], MA_Field_Date,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				[@"articleData." stringByAppendingString:MA_Field_Author], @"key",
-				@"caseInsensitiveCompare:", @"selector",
-				nil], MA_Field_Author,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				[@"articleData." stringByAppendingString:MA_Field_Subject], @"key",
-				@"numericCompare:", @"selector",
-				nil], MA_Field_Headlines,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				[@"articleData." stringByAppendingString:MA_Field_Subject], @"key",
-				@"numericCompare:", @"selector",
-				nil], MA_Field_Subject,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				[@"articleData." stringByAppendingString:MA_Field_Link], @"key",
-				@"caseInsensitiveCompare:", @"selector",
-				nil], MA_Field_Link,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				[@"articleData." stringByAppendingString:MA_Field_Summary], @"key",
-				@"caseInsensitiveCompare:", @"selector",
-				nil], MA_Field_Summary,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"hasEnclosure", @"key",
-				@"compare:", @"selector",
-				nil], MA_Field_HasEnclosure,
-			[NSDictionary dictionaryWithObjectsAndKeys:
-				@"enclosure", @"key",
-				@"caseInsensitiveCompare:", @"selector",
-				nil], MA_Field_Enclosure,
-			nil];
+		articleSortSpecifiers = @{
+								  MA_Field_Folder: @{
+										  @"key": @"containingFolder.name",
+										  @"selector": @"compare:"
+										  },
+								  MA_Field_Read: @{
+										  @"key": @"isRead",
+										  @"selector": @"compare:"
+										  },
+								  MA_Field_Flagged: @{
+										  @"key": @"isFlagged",
+										  @"selector": @"compare:"
+										  },
+								  MA_Field_Comments: @{
+										  @"key": @"hasComments",
+										  @"selector": @"compare:"
+										  },
+								  MA_Field_Date: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
+										  @"selector": @"compare:"
+										  },
+								  MA_Field_Author: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_Author],
+										  @"selector": @"caseInsensitiveCompare:"
+										  },
+								  MA_Field_Headlines: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
+										  @"selector": @"numericCompare:"
+										  },
+								  MA_Field_Subject: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_Subject],
+										  @"selector": @"numericCompare:"
+										  },
+								  MA_Field_Link: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_Link],
+										  @"selector": @"caseInsensitiveCompare:"
+										  },
+								  MA_Field_Summary: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_Summary],
+										  @"selector": @"caseInsensitiveCompare:"
+										  },
+								  MA_Field_HasEnclosure: @{
+										  @"key": @"hasEnclosure",
+										  @"selector": @"compare:"
+										  },
+								  MA_Field_Enclosure: @{
+										  @"key": @"enclosure",
+										  @"selector": @"caseInsensitiveCompare:"
+										  },
+								  };
 
 		// Pre-set sort to what was saved in the preferences
 		Preferences * prefs = [Preferences standardPreferences];
-		NSArray * sortDescriptors = [prefs articleSortDescriptors];
-		if ([sortDescriptors count] == 0)
+		NSArray * sortDescriptors = prefs.articleSortDescriptors;
+		if (sortDescriptors.count == 0)
 		{
 			NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date] ascending:YES];
-			[prefs setArticleSortDescriptors:[NSArray arrayWithObject:descriptor]];
+			prefs.articleSortDescriptors = @[descriptor];
 			[prefs setObject:MA_Field_Date forKey:MAPref_SortColumn];
 		}
 		[self setSortColumnIdentifier:[prefs stringForKey:MAPref_SortColumn]];
 		
 		// Create a backtrack array
-		backtrackArray = [[BackTrackArray alloc] initWithMaximum:[prefs backTrackQueueSize]];
+		backtrackArray = [[BackTrackArray alloc] initWithMaximum:prefs.backTrackQueueSize];
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -134,26 +134,26 @@
 /* setLayout
  * Changes the layout of the panes.
  */
--(void)setLayout:(int)newLayout
+-(void)setLayout:(NSInteger)newLayout
 {
-	Article * currentSelectedArticle = [self selectedArticle];
+	Article * currentSelectedArticle = self.selectedArticle;
 
 	switch (newLayout)
 	{
 		case MA_Layout_Report:
 		case MA_Layout_Condensed:
-			[self setMainArticleView:articleListView];
+			self.mainArticleView = articleListView;
 			break;
 
 		case MA_Layout_Unified:
-			[self setMainArticleView:unifiedListView];
+			self.mainArticleView = unifiedListView;
 			break;
 	}
 
-	[[Preferences standardPreferences] setLayout:newLayout];
+	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
-	    [mainArticleView selectFolderAndArticle:currentFolderId guid:[currentSelectedArticle guid]];
+	    [mainArticleView selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 	    [self ensureSelectedArticle:NO];
 	}
 
@@ -169,7 +169,7 @@
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */
--(int)currentFolderId
+-(NSInteger)currentFolderId
 {
 	return currentFolderId;
 }
@@ -180,7 +180,7 @@
  */
 -(NSArray *)markedArticleRange
 {
-	return [mainArticleView markedArticleRange];
+	return mainArticleView.markedArticleRange;
 }
 
 /* saveTableSettings
@@ -221,7 +221,7 @@
  */
 -(Article *)selectedArticle
 {
-	return [mainArticleView selectedArticle];
+	return mainArticleView.selectedArticle;
 }
 
 /* allArticles
@@ -250,7 +250,7 @@
 		return @"";
 
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), [folder name]];
+	return [NSString stringWithFormat:NSLocalizedString(@"Search in %@", nil), folder.name];
 }
 
 /* sortColumnIdentifier
@@ -275,10 +275,10 @@
 -(void)sortByIdentifier:(NSString *)columnName
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:prefs.articleSortDescriptors];
 	
 	if ([sortColumnIdentifier isEqualToString:columnName])
-		[descriptors replaceObjectAtIndex:0 withObject:[[descriptors objectAtIndex:0] reversedSortDescriptor]];
+		descriptors[0] = [descriptors[0] reversedSortDescriptor];
 	else
 	{
 		[self setSortColumnIdentifier:columnName];
@@ -291,12 +291,12 @@
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		else
 		{
-			sortDescriptor = [descriptors objectAtIndex:index];
+			sortDescriptor = descriptors[index];
 			[descriptors removeObjectAtIndex:index];
 		}
 		[descriptors insertObject:sortDescriptor atIndex:0];
 	}
-	[prefs setArticleSortDescriptors:descriptors];
+	prefs.articleSortDescriptors = descriptors;
 	[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
 }
 
@@ -306,9 +306,9 @@
 -(BOOL)sortIsAscending
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
-	NSSortDescriptor * sortDescriptor = [descriptors objectAtIndex:0];
-	BOOL ascending = [sortDescriptor ascending];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:prefs.articleSortDescriptors];
+	NSSortDescriptor * sortDescriptor = descriptors[0];
+	BOOL ascending = sortDescriptor.ascending;
 	
 	return ascending;
 }
@@ -319,14 +319,14 @@
 -(void)sortAscending:(BOOL)newAscending
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:[prefs articleSortDescriptors]];
-	NSSortDescriptor * sortDescriptor = [descriptors objectAtIndex:0];
+	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:prefs.articleSortDescriptors];
+	NSSortDescriptor * sortDescriptor = descriptors[0];
 	
-	BOOL existingAscending = [sortDescriptor ascending];
+	BOOL existingAscending = sortDescriptor.ascending;
 	if ( newAscending != existingAscending )
 	{
-		[descriptors replaceObjectAtIndex:0 withObject:[sortDescriptor reversedSortDescriptor]];
-		[prefs setArticleSortDescriptors:descriptors];
+		descriptors[0] = sortDescriptor.reversedSortDescriptor;
+		prefs.articleSortDescriptors = descriptors;
 		[mainArticleView refreshFolder:MA_Refresh_SortAndRedraw];
 	}
 }
@@ -338,9 +338,9 @@
 {
 	NSArray * sortedArrayOfArticles;
 
-	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[[Preferences standardPreferences] articleSortDescriptors]];
+	sortedArrayOfArticles = [currentArrayOfArticles sortedArrayUsingDescriptors:[Preferences standardPreferences].articleSortDescriptors];
 	NSAssert([sortedArrayOfArticles count] == [currentArrayOfArticles count], @"Lost articles from currentArrayOfArticles during sort");
-	[self setCurrentArrayOfArticles:sortedArrayOfArticles];
+	self.currentArrayOfArticles = sortedArrayOfArticles;
 }
 
 /* displayFirstUnread
@@ -365,7 +365,7 @@
  * Call the current article view to display the specified folder if it
  * is different from the current one.
  */
--(void)displayFolder:(int)newFolderId
+-(void)displayFolder:(NSInteger)newFolderId
 {
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
@@ -384,7 +384,7 @@
 {
 	
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	[self setFolderArrayOfArticles:[folder articlesWithFilter:[APPCONTROLLER filterString]]];
+	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
 	
 	[self refilterArrayOfArticles];
 }
@@ -394,7 +394,7 @@
  */
 -(void)refilterArrayOfArticles
 {
-	[self setCurrentArrayOfArticles:[self applyFilter:folderArrayOfArticles]];
+	self.currentArrayOfArticles = [self applyFilter:folderArrayOfArticles];
 }
 
 /* applyFilter
@@ -405,18 +405,18 @@
 {
 	NSMutableArray * filteredArray = [NSMutableArray arrayWithArray:unfilteredArray];
 	
-	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? [articleToPreserve guid] : @"";
-	int folderIdOfArticleToPreserve = [articleToPreserve folderId];
+	NSString * guidOfArticleToPreserve = (articleToPreserve != nil) ? articleToPreserve.guid : @"";
+	NSInteger folderIdOfArticleToPreserve = articleToPreserve.folderId;
 	
-	ArticleFilter * filter = [ArticleFilter filterByTag:[[Preferences standardPreferences] filterMode]];
-	SEL comparator = [filter comparator];
-	int count = [filteredArray count];
-	int index;
+	ArticleFilter * filter = [ArticleFilter filterByTag:[Preferences standardPreferences].filterMode];
+	SEL comparator = filter.comparator;
+	NSInteger count = filteredArray.count;
+	NSInteger index;
 	
 	for (index = count - 1; index >= 0; --index)
 	{
-		Article * article = [filteredArray objectAtIndex:index];
-		if (([article folderId] == folderIdOfArticleToPreserve) && [[article guid] isEqualToString:guidOfArticleToPreserve])
+		Article * article = filteredArray[index];
+		if ((article.folderId == folderIdOfArticleToPreserve) && [article.guid isEqualToString:guidOfArticleToPreserve])
 			guidOfArticleToPreserve = @"";
 		else if ((comparator != nil) && !((BOOL)(NSInteger)[ArticleFilter performSelector:comparator withObject:article]))
 			[filteredArray removeObjectAtIndex:index];
@@ -463,7 +463,7 @@
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag
 {	
 	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
 	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
@@ -478,22 +478,22 @@
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray)
 	{
-		NSInteger folderId = [theArticle folderId];
-		if (![theArticle isRead]) {
+		NSInteger folderId = theArticle.folderId;
+		if (!theArticle.read) {
 			needFolderRedraw = YES;
 			if (deleteFlag && IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+				[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:YES];
 			}
 		}
-		[[Database sharedManager] markArticleDeleted:folderId guid:[theArticle guid] isDeleted:deleteFlag];
+		[[Database sharedManager] markArticleDeleted:folderId guid:theArticle.guid isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
-		else if (deleteFlag && (currentFolderId != [[Database sharedManager] trashFolderId]))
+		else if (deleteFlag && (currentFolderId != [Database sharedManager].trashFolderId))
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
 		}
-		else if (!deleteFlag && (currentFolderId == [[Database sharedManager] trashFolderId]))
+		else if (!deleteFlag && (currentFolderId == [Database sharedManager].trashFolderId))
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
@@ -502,17 +502,17 @@
 			needReload = YES;
 	}
 
-	[self setCurrentArrayOfArticles:currentArrayCopy];
-	[self setFolderArrayOfArticles:folderArrayCopy];
+	self.currentArrayOfArticles = currentArrayCopy;
+	self.folderArrayOfArticles = folderArrayCopy;
 	if (needReload)
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 	else
 	{
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
-		if ([currentArrayOfArticles count] > 0u)
+		if (currentArrayOfArticles.count > 0u)
 			[mainArticleView ensureSelectedArticle:YES];
 		else
-			[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+			[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
 	}
 
 	// If any of the articles we deleted were unread then the
@@ -538,21 +538,21 @@
 	// the database.
 	for (Article * theArticle in articleArray)	
 	{
-		NSInteger folderId = [theArticle folderId];
-		if (![theArticle isRead]) {
+		NSInteger folderId = theArticle.folderId;
+		if (!theArticle.read) {
 			needFolderRedraw = YES;
 			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:YES];
+				[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:YES];
 			}
 		}
-		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:[theArticle guid]])
+		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:theArticle.guid])
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
 		}
 	}
-	[self setCurrentArrayOfArticles:currentArrayCopy];
-	[self setFolderArrayOfArticles:folderArrayCopy];
+	self.currentArrayOfArticles = currentArrayCopy;
+	self.folderArrayOfArticles = folderArrayCopy;
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
 	// If any of the articles we deleted were unread then the
@@ -561,10 +561,10 @@
 		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
     }
 	// Ensure there's a valid selection
-    if ([currentArrayOfArticles count] > 0u) {
+    if (currentArrayOfArticles.count > 0u) {
 		[mainArticleView ensureSelectedArticle:YES];
     } else {
-		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
     }
 	// Read and/or unread count may have changed
     if (needFolderRedraw) {
@@ -594,19 +594,19 @@
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {	
 	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	SEL markFlagUndoAction = flagged ? @selector(markUnflagUndo:) : @selector(markFlagUndo:);
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
 	for (Article * theArticle in articleArray)
 	{
-		Folder *myFolder = [[Database sharedManager] folderFromID:[theArticle folderId]];
+		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
 		if (IsGoogleReaderFolder(myFolder)) {
-			[[GoogleReader sharedManager] markStarred:[theArticle guid] starredFlag:flagged];
+			[[GoogleReader sharedManager] markStarred:theArticle.guid starredFlag:flagged];
 		}
-		[[Database sharedManager] markArticleFlagged:[theArticle folderId]
-                                                guid:[theArticle guid]
+		[[Database sharedManager] markArticleFlagged:theArticle.folderId
+                                                guid:theArticle.guid
                                            isFlagged:flagged];
         [theArticle markFlagged:flagged];
 	}
@@ -636,7 +636,7 @@
 -(void)markReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	// Set up to undo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];	
+	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;	
 	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
 	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
@@ -659,12 +659,12 @@
 	
 	for (Article * theArticle in articleArray)
 	{
-		NSInteger folderId = [theArticle folderId];
-		if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId]) && ([theArticle isRead] != readFlag)) {
-			[[GoogleReader sharedManager] markRead:[theArticle guid] readFlag:readFlag];
+		NSInteger folderId = theArticle.folderId;
+		if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId]) && (theArticle.read != readFlag)) {
+			[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:readFlag];
 		}
 		//FIX: article status should be "settato" from httprequest success block
-		[[Database sharedManager] markArticleRead:folderId guid:[theArticle guid] isRead:readFlag];
+		[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 		[theArticle markRead:readFlag];
 		if (folderId != lastFolderId && lastFolderId != -1)
 			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -684,12 +684,12 @@
 
 	for (ArticleReference * articleRef in articleArray)
 	{
-		NSInteger folderId = [articleRef folderId];
+		NSInteger folderId = articleRef.folderId;
 		if (IsGoogleReaderFolder([db folderFromID:folderId])){
-			[[GoogleReader sharedManager] markRead:[articleRef guid] readFlag:readFlag];
+			[[GoogleReader sharedManager] markRead:articleRef.guid readFlag:readFlag];
 		}
 		//FIX: article status should be "settato" from httprequest success block
-		[db markArticleRead:folderId guid:[articleRef guid] isRead:readFlag];
+		[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
 		if (folderId != lastFolderId && lastFolderId != -1)
 			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
 		lastFolderId = folderId;
@@ -721,9 +721,9 @@
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag
 {
 	NSArray * refArray = [self wrappedMarkAllReadInArray:folderArray withUndo:undoFlag];
-	if (refArray != nil && [refArray count] > 0)
+	if (refArray != nil && refArray.count > 0)
 	{
-		NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+		NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
@@ -748,7 +748,7 @@
 	
 	for (Folder * folder in folderArray)
 	{
-		int folderId = [folder itemId];
+		NSInteger folderId = folder.itemId;
 		if (IsGroupFolder(folder) && undoFlag)
 		{
 			[refArray addObjectsFromArray:[self wrappedMarkAllReadInArray:[[Database sharedManager] arrayOfFolders:folderId] withUndo:undoFlag]];
@@ -792,19 +792,19 @@
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	Database * dbManager = [Database sharedManager];
-	__block int lastFolderId = -1;
+	__block NSInteger lastFolderId = -1;
 	__block BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
-	NSUndoManager * undoManager = [[NSApp mainWindow] undoManager];
+	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	SEL markAllReadUndoAction = readFlag ? @selector(markAllReadUndo:) : @selector(markAllReadRedo:);
 	[undoManager registerUndoWithTarget:self selector:markAllReadUndoAction object:refArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	
 	for (ArticleReference *ref in refArray)
 	{
-		int folderId = [ref folderId];
-		NSString * theGuid = [ref guid];
+		NSInteger folderId = ref.folderId;
+		NSString * theGuid = ref.guid;
         if (IsGoogleReaderFolder([dbManager folderFromID:folderId])) {
 			[[GoogleReader sharedManager] markRead:theGuid readFlag:readFlag];
         }
@@ -855,7 +855,7 @@
  */
 -(void)goForward
 {
-	int folderId;
+	NSInteger folderId;
 	NSString * guid;
 	
 	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
@@ -871,7 +871,7 @@
  */
 -(void)goBack
 {
-	int folderId;
+	NSInteger folderId;
 	NSString * guid;
 	
 	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
@@ -887,7 +887,7 @@
  */
 -(BOOL)canGoForward
 {
-	return ![backtrackArray isAtEndOfQueue];
+	return !backtrackArray.atEndOfQueue;
 }
 
 /* canGoBack
@@ -895,7 +895,7 @@
  */
 -(BOOL)canGoBack
 {
-	return ![backtrackArray isAtStartOfQueue];
+	return !backtrackArray.atStartOfQueue;
 }
 
 /* handleFilterChange
@@ -917,7 +917,7 @@
 {
     @synchronized(mainArticleView)
     {
-        int folderId = [(NSNumber *)[nc object] intValue];
+        NSInteger folderId = ((NSNumber *)nc.object).integerValue;
         if (folderId == currentFolderId)
             [mainArticleView refreshArticlePane];
     }
@@ -941,7 +941,7 @@
 {
     @synchronized(mainArticleView)
     {
-        int folderId = [(NSNumber *)[nc object] intValue];
+        NSInteger folderId = ((NSNumber *)nc.object).integerValue;
         if (folderId != currentFolderId)
             return;
 
@@ -958,8 +958,8 @@
 {
     @synchronized(mainArticleView)
     {
-        Folder * folder = (Folder *)[nc object];
-        currentFolderId = [folder itemId];
+        Folder * folder = (Folder *)nc.object;
+        currentFolderId = folder.itemId;
         [mainArticleView selectFolderAndArticle:currentFolderId guid:nil];
     }
 }
@@ -978,9 +978,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	backtrackArray=nil;
-	sortColumnIdentifier=nil;
-	articleSortSpecifiers=nil;
-	articleToPreserve=nil;
 }
 @end

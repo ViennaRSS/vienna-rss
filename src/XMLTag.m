@@ -83,10 +83,10 @@
 +(NSArray *)parserFromData:(NSData *)data
 {
 	NSMutableArray * tagArray = [NSMutableArray arrayWithCapacity:10];
-	const char * textPtr = [data bytes];
-	const char * endPtr = textPtr + [data length];
+	const char * textPtr = data.bytes;
+	const char * endPtr = textPtr + data.length;
 	const char * tagStartPtr = nil;
-	int cntrlCharCount = 0;
+	NSInteger cntrlCharCount = 0;
 	BOOL inTag = NO;
 	BOOL inQuote = NO;
 
@@ -125,7 +125,7 @@
 				while (isalpha(*tagEndPtr))
 					++tagEndPtr;
 				NSString * tagName = [[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding];
-				[tag setName:[tagName lowercaseString]];
+				[tag setName:tagName.lowercaseString];
 				
 				while (isspace(*tagEndPtr))
 					++tagEndPtr;
@@ -144,7 +144,7 @@
 					tagStartPtr = tagEndPtr;
 					while (isalpha(*tagEndPtr))
 						++tagEndPtr;
-					NSString * attrName = [[[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding] lowercaseString];
+					NSString * attrName = [[NSString alloc] initWithBytes:tagStartPtr length:(tagEndPtr - tagStartPtr) encoding:NSASCIIStringEncoding].lowercaseString;
 
 					// Skip the '=' and any whitespaces between the name and the value
 					while (isspace(*tagEndPtr))
@@ -189,13 +189,4 @@
 	return [tagArray copy];
 }
 
-
-/* dealloc
- * Clean up afterwards.
- */
--(void)dealloc
-{
-	name=nil;
-	attributes=nil;
-}
 @end

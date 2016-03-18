@@ -55,8 +55,8 @@
 	// Note: NSUserDefaults provide built-in localized names for today, yesterday
 	// and tomorrow. We don't use them because the initial letter isn't capitalized
 	// and it's tough to make assumptions about how to capitalize a localized string.
-	int todayNum = [[NSCalendarDate calendarDate] dayOfCommonEra];
-	int myNum = [self dayOfCommonEra];
+	NSInteger todayNum = [[NSCalendarDate calendarDate] dayOfCommonEra];
+	NSInteger myNum = [self dayOfCommonEra];
 
 	if (myNum == todayNum)
 	{

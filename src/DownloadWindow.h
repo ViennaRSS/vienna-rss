@@ -26,7 +26,7 @@
 	IBOutlet SquareWindow * downloadWindow;
 	IBOutlet ExtendedTableView * table;
 	IBOutlet NSButton * clearButton;
-	int lastCount;
+	NSInteger lastCount;
 }
 
 // Public functions

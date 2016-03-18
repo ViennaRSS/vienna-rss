@@ -93,7 +93,7 @@
 /* initWithFrame
  * Initialise our view.
  */
--(id)initWithFrame:(NSRect)frame
+-(instancetype)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -119,12 +119,12 @@
 {
 	// Create our webview
 	[webPane initTabbedWebView];
-	[webPane setUIDelegate:self];
-	[webPane setFrameLoadDelegate:self];
+	webPane.UIDelegate = self;
+	webPane.frameLoadDelegate = self;
 	
 	// Make web preferences 16pt Arial to match Safari
-	[[webPane preferences] setStandardFontFamily:@"Arial"];
-	[[webPane preferences] setDefaultFontSize:16];
+	webPane.preferences.standardFontFamily = @"Arial";
+	webPane.preferences.defaultFontSize = 16;
 	
 	// Use an AddressBarCell for the address field which allows space for the
 	// web page image and an optional lock icon for secure pages.
@@ -134,28 +134,28 @@
 	[cell setBordered:YES];
 	[cell setBezeled:YES];
 	[cell setScrollable:YES];
-	[cell setTarget:self];
-	[cell setAction:@selector(handleAddress:)];
-	[cell setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]]];
-	[addressField setCell:cell];
+	cell.target = self;
+	cell.action = @selector(handleAddress:);
+	cell.font = [NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]];
+	addressField.cell = cell;
 
 	// Initialise address field
-	[addressField setStringValue:@""];
+	addressField.stringValue = @"";
 
 	// The RSS page button is hidden by default
 	[self showRssPageButton:NO];
 
 	// Set tooltips
 	[addressField setToolTip:NSLocalizedString(@"Enter the URL here", nil)];
-	[[addressField cell] accessibilitySetOverrideValue:NSLocalizedString(@"Enter the URL here", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[addressField.cell accessibilitySetOverrideValue:NSLocalizedString(@"Enter the URL here", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[refreshButton setToolTip:NSLocalizedString(@"Refresh the current page", nil)];
-	[[refreshButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Refresh the current page", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[refreshButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Refresh the current page", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[backButton setToolTip:NSLocalizedString(@"Return to the previous page", nil)];
-	[[backButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Return to the previous page", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[backButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Return to the previous page", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[forwardButton setToolTip:NSLocalizedString(@"Go forward to the next page", nil)];
-	[[forwardButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[forwardButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Go forward to the next page", nil) forAttribute:NSAccessibilityTitleAttribute];
 	[rssPageButton setToolTip:NSLocalizedString(@"Subscribe to the feed for this page", nil)];
-	[[rssPageButton cell] accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
+	[rssPageButton.cell accessibilitySetOverrideValue:NSLocalizedString(@"Subscribe to the feed for this page", nil) forAttribute:NSAccessibilityTitleAttribute];
 }
 
 /* setController
@@ -172,9 +172,9 @@
  */
 -(NSString *)viewLink
 {
-	if ([[[self.webPane mainFrame] dataSource] unreachableURL])
-		return [[[[self.webPane mainFrame] dataSource] unreachableURL] absoluteString];
-	return [[self url] absoluteString];
+	if ((self.webPane).mainFrame.dataSource.unreachableURL)
+		return (self.webPane).mainFrame.dataSource.unreachableURL.absoluteString;
+	return self.url.absoluteString;
 }
 
 /* showRssPageButton
@@ -183,7 +183,7 @@
  // TODO : associate a menu when there are multiple feeds
 -(void)showRssPageButton:(BOOL)showButton
 {
-	[rssPageButton setEnabled:showButton];
+	rssPageButton.enabled = showButton;
 }
 
 /* setError
@@ -199,7 +199,7 @@
  */
 -(IBAction)handleAddress:(id)sender
 {
-	NSString * theURL = [addressField stringValue];
+	NSString * theURL = addressField.stringValue;
 	// If no '.' appears in the string, wrap it with 'www' and 'com'
 	if (![theURL hasCharacter:'.']) 
 		theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
@@ -226,7 +226,7 @@
  */
 -(void)activateAddressBar
 {
-	[[NSApp mainWindow] makeFirstResponder:addressField];
+	[NSApp.mainWindow makeFirstResponder:addressField];
 }
 
 /* loadURL
@@ -234,20 +234,20 @@
  */
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag
 {
-	[self setViewTitle:@""];
+	self.viewTitle = @"";
 	openURLInBackground = openInBackgroundFlag;
-	isLocalFile = [url isFileURL];
+	isLocalFile = url.fileURL;
 
-	pageFilename = [[[url path] lastPathComponent] stringByDeletingPathExtension];
+	pageFilename = url.path.lastPathComponent.stringByDeletingPathExtension;
 	
-	[addressField setStringValue:[url absoluteString]];
-	if ([self.webPane isLoading])
+	addressField.stringValue = url.absoluteString;
+	if ((self.webPane).loading)
 	{
 		[self willChangeValueForKey:@"isLoading"];
 		[self.webPane stopLoading:self];
 		[self didChangeValueForKey:@"isLoading"];
 	}
-	[[self.webPane mainFrame] loadRequest:[NSURLRequest requestWithURL:url]];
+	[(self.webPane).mainFrame loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 /* setStatusText
@@ -256,7 +256,7 @@
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	if ([[controller browserView] activeTabItemView] == self)
+	if (controller.browserView.activeTabItemView == self)
 		[controller setStatusMessage:text persist:NO];
 }
 
@@ -264,10 +264,10 @@
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger )modifierFlags
+-(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
 {
 	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? [url absoluteString] : @"") persist:NO];
+	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
 }
 
 /* didStartProvisionalLoadForFrame
@@ -275,12 +275,12 @@
  */
 -(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
-		[[controller browserView] setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
+		[controller.browserView setTabItemViewTitle:self title:NSLocalizedString(@"Loading...", nil)];
 		[self showRssPageButton:NO];
 		[self setError:nil];
-		[self setViewTitle:@""];
+		self.viewTitle = @"";
 	}
 
 }
@@ -290,7 +290,7 @@
  */
 -(void)webView:(WebView *)sender didCommitLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
 		if (!isLoading)
 		{
@@ -300,29 +300,29 @@
 		}
 		
 		if (!openURLInBackground)
-			[[sender window] makeFirstResponder:sender];
+			[sender.window makeFirstResponder:sender];
 
 		// Show or hide the lock icon depending on whether this is a secure
 		// web page. Also shade the address bar a nice light yellow colour as
 		// Camino does.
-		NSURL * theURL = [[[frame dataSource] request] URL];
-		if ([[theURL scheme] isEqualToString:@"https"])
+		NSURL * theURL = frame.dataSource.request.URL;
+		if ([theURL.scheme isEqualToString:@"https"])
 		{
-			[[addressField cell] setHasSecureImage:YES];
-			[addressField setBackgroundColor:[NSColor colorWithDeviceRed:1.0 green:1.0 blue:0.777 alpha:1.0]];
+			[addressField.cell setHasSecureImage:YES];
+			addressField.backgroundColor = [NSColor colorWithDeviceRed:1.0 green:1.0 blue:0.777 alpha:1.0];
 			[lockIconImage setHidden:NO];
 		}
 		else
 		{
-			[[addressField cell] setHasSecureImage:NO];
-			[addressField setBackgroundColor:[NSColor whiteColor]];
+			[addressField.cell setHasSecureImage:NO];
+			addressField.backgroundColor = [NSColor whiteColor];
 			[lockIconImage setHidden:YES];
 		}
 		
-		if (![[frame dataSource] unreachableURL])
-			[addressField setStringValue:[theURL absoluteString]];
+		if (!frame.dataSource.unreachableURL)
+			addressField.stringValue = theURL.absoluteString;
 		else 
-			[addressField setStringValue:[[[frame dataSource] unreachableURL] absoluteString]];
+			addressField.stringValue = frame.dataSource.unreachableURL.absoluteString;
 
 	}
 }
@@ -332,29 +332,29 @@
  */
 -(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
 		// Was this a feed redirect? If so, this isn't an error:
-		if (![self.webPane isFeedRedirect] && ![self.webPane isDownload])
+		if (!(self.webPane).feedRedirect && !(self.webPane).download)
 		{
 			[self setError:error];
 			
 			// Use a warning sign as favicon
-			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
+			iconImage.image = [NSImage imageNamed:@"folderError.tiff"];
 			
 			// Load the localized verion of the error page
 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
 			if (pathToErrorPage != nil)
 			{
 				NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-				errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: [error localizedDescription]];
+				errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: error.localizedDescription];
 				if (errorMessage != nil)
 				{
-					[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame provisionalDataSource] request] URL]];
+					[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:frame.provisionalDataSource.request.URL];
 				}
-				NSString *unreachableURL = [[[frame provisionalDataSource] unreachableURL] absoluteString];
+				NSString *unreachableURL = frame.provisionalDataSource.unreachableURL.absoluteString;
 				if (unreachableURL != nil)
-					[addressField setStringValue: [[[frame provisionalDataSource] unreachableURL] absoluteString]];
+					addressField.stringValue = frame.provisionalDataSource.unreachableURL.absoluteString;
 			}	
 		}
 		[self endFrameLoad];
@@ -371,7 +371,7 @@
 	if ([viewTitle isEqualToString:@""])
 	{
 		if (lastError == nil)
-			[[controller browserView] setTabItemViewTitle:self title:pageFilename];
+			[controller.browserView setTabItemViewTitle:self title:pageFilename];
 	}
 	
 	[self willChangeValueForKey:@"isLoading"];
@@ -386,26 +386,26 @@
  */
 -(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
 		// Not really an error. A plugin is grabbing the URL and will handle it
 		// by itself.
-		if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
+		if (!([error.domain isEqualToString:WebKitErrorDomain] && error.code == WebKitErrorPlugInWillHandleLoad))
 		{
 			[self setError:error];
 			
 			// Use a warning sign as favicon
-			[iconImage setImage:[NSImage imageNamed:@"folderError.tiff"]];
+			iconImage.image = [NSImage imageNamed:@"folderError.tiff"];
 			
 			// Load the localized verion of the error page
 			NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
 			if (pathToErrorPage != nil)
 			{
 				NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-				errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: [error localizedDescription]];
+				errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: error.localizedDescription];
 				if (errorMessage != nil)
 				{
-					[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[[frame dataSource] request] URL]];
+					[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:frame.dataSource.request.URL];
 				}
 			}		
 		}
@@ -418,18 +418,18 @@
  */
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
 		// Once the frame is loaded, trawl the source for possible links to RSS
 		// pages.
-		NSData * webSrc = [[frame dataSource] data];
+		NSData * webSrc = frame.dataSource.data;
 		NSMutableArray * arrayOfLinks = [NSMutableArray array];
 		
 		if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
 		{
-			rssPageURL = [arrayOfLinks objectAtIndex:0];
+			rssPageURL = arrayOfLinks[0];
 			if (![rssPageURL hasPrefix:@"http:"] && ![rssPageURL hasPrefix:@"https:"])
-				rssPageURL = [[NSURL URLWithString:rssPageURL relativeToURL:[self url]] absoluteString];
+				rssPageURL = [NSURL URLWithString:rssPageURL relativeToURL:self.url].absoluteString;
 			[self showRssPageButton:YES];
 		}
 		[self endFrameLoad];
@@ -441,10 +441,10 @@
  */
 -(void)webView:(WebView *)sender didReceiveTitle:(NSString *)title forFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
-		[[controller browserView] setTabItemViewTitle:self title:title];
-		[self setViewTitle:title];
+		[controller.browserView setTabItemViewTitle:self title:title];
+		self.viewTitle = title;
 	}
 }
 
@@ -453,10 +453,10 @@
  */
 -(void)webView:(WebView *)sender didReceiveIcon:(NSImage *)image forFrame:(WebFrame *)frame
 {
-	if (frame == [self.webPane mainFrame])
+	if (frame == (self.webPane).mainFrame)
 	{
-		[image setSize:NSMakeSize(14, 14)];
-		[iconImage setImage:image];
+		image.size = NSMakeSize(14, 14);
+		iconImage.image = image;
 	}
 }
 
@@ -470,7 +470,7 @@
 	// Change this to handle modifier key?
 	// Is this covered by the webView policy?
 	{
-		[controller openURL:[request URL] inPreferredBrowser:YES];
+		[controller openURL:request.URL inPreferredBrowser:YES];
 		return nil;
 	}
 	else
@@ -478,9 +478,9 @@
 	// open a new tab and return its main webview
 	{
 		[controller newTab:nil];
-		NSView<BaseView> * theView = [[controller browserView] activeTabItemView];
+		NSView<BaseView> * theView = controller.browserView.activeTabItemView;
 		BrowserPane * browserPane = (BrowserPane *)theView;
-		return [browserPane webPane];
+		return browserPane.webPane;
 	}
 }
 
@@ -522,7 +522,7 @@
 
 	if ( [openDlg runModal] == NSOKButton )
 	{
-		NSArray* files = [[openDlg URLs]valueForKey:@"relativePath"];
+		NSArray* files = [openDlg.URLs valueForKey:@"relativePath"];
 		[resultListener chooseFilenames:files];
 	}
 }
@@ -540,7 +540,7 @@
 -(void)webViewClose:(WebView *)sender
 {
 	[self handleStopLoading:self];
-	[[controller browserView] closeTabItemView:self];
+	[controller.browserView closeTabItemView:self];
 }
 
 /* contextMenuItemsForElement
@@ -587,22 +587,22 @@
  * Implement the search action. Search the web page for the specified
  * text.
  */
--(void)performFindPanelAction:(int)actionTag
+-(void)performFindPanelAction:(NSInteger)actionTag
 {
 	switch (actionTag)
 	{
 		case NSFindPanelActionSetFindString:
 		{			
-			[self.webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:controller.searchString direction:YES caseSensitive:NO wrap:YES];
 			break;
 		}
 			
 		case NSFindPanelActionNext:
-			[self.webPane searchFor:[controller searchString] direction:YES caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:controller.searchString direction:YES caseSensitive:NO wrap:YES];
 			break;
 			
 		case NSFindPanelActionPrevious:
-			[self.webPane searchFor:[controller searchString] direction:NO caseSensitive:NO wrap:YES];
+			[self.webPane searchFor:controller.searchString direction:NO caseSensitive:NO wrap:YES];
 			break;
 	}
 }
@@ -613,14 +613,14 @@
 -(NSURL *)url
 {
 	NSURL * theURL = nil;
-	WebDataSource * dataSource = [[self.webPane mainFrame] dataSource];
+	WebDataSource * dataSource = (self.webPane).mainFrame.dataSource;
 	if (dataSource != nil)
 	{
-		theURL = [[dataSource request] URL];
+		theURL = dataSource.request.URL;
 	}
 	else
 	{
-		NSString * urlString = [addressField stringValue];
+		NSString * urlString = addressField.stringValue;
 		if (urlString != nil)
 			theURL = [NSURL URLWithString:urlString];
 	}
@@ -637,7 +637,7 @@
  */
 -(BOOL)canGoForward
 {
-	return [self.webPane canGoForward];
+	return (self.webPane).canGoForward;
 }
 
 /* canGoBack
@@ -645,7 +645,7 @@
  */
 -(BOOL)canGoBack
 {
-	return [self.webPane canGoBack];
+	return (self.webPane).canGoBack;
 }
 
 /* handleGoForward
@@ -669,8 +669,8 @@
  */
 -(void)swipeWithEvent:(NSEvent *)event 
 {	
-	CGFloat deltaX = [event deltaX];
-	CGFloat deltaY = [event deltaY];
+	CGFloat deltaX = event.deltaX;
+	CGFloat deltaY = event.deltaY;
 
 	// If the horizontal component of the swipe is larger, the user wants to go back or forward...
 	if (fabs(deltaX) > fabs(deltaY))
@@ -701,7 +701,7 @@
  */
 -(IBAction)handleReload:(id)sender
 {
-	if ([[self.webPane mainFrame] dataSource] != nil)
+	if ((self.webPane).mainFrame.dataSource != nil)
 		[self.webPane reload:self];
 	else
 		[self handleAddress:self];
@@ -717,7 +717,7 @@
 	[self.webPane setUIDelegate:nil];
 	[self.webPane stopLoading:self];
 	[self didChangeValueForKey:@"isLoading"];
-	[[self.webPane mainFrame] loadHTMLString:@"" baseURL:nil];
+	[(self.webPane).mainFrame loadHTMLString:@"" baseURL:nil];
 }
 
 /* handleRSSPage
@@ -727,10 +727,10 @@
 {
 	if (rssPageURL != nil)
 	{
-		Folder * currentFolder = [NSApp currentFolder];
-		int currentFolderId = [currentFolder itemId];
-		int parentFolderId = [currentFolder parentId];
-		if ([currentFolder firstChildId] > 0)
+		Folder * currentFolder = APP.currentFolder;
+		NSInteger currentFolderId = currentFolder.itemId;
+		NSInteger parentFolderId = currentFolder.parentId;
+		if (currentFolder.firstChildId > 0)
 		{
 			parentFolderId = currentFolderId;
 			currentFolderId = 0;
@@ -752,14 +752,14 @@
  */
 -(BOOL)isProcessing
 {
-	return [self isLoading];
+	return self.loading;
 }
 
 /* handleKeyDown [delegate]
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
  */
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags
+-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
 	return NO;
 }
@@ -769,13 +769,9 @@
  */
 -(void)dealloc
 {
-	viewTitle=nil;
-	rssPageURL=nil;
 	[self handleStopLoading:nil];
 	[webPane setFrameLoadDelegate:nil];
 	[webPane setUIDelegate:nil];
 	[webPane close];
-	lastError=nil;
-	pageFilename=nil;
 }
 @end

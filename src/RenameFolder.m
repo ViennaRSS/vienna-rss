@@ -32,7 +32,7 @@
 /* renameFolder
  * Display the sheet to rename the specified folder.
  */
--(void)renameFolder:(NSWindow *)window folderId:(int)itemId
+-(void)renameFolder:(NSWindow *)window folderId:(NSInteger)itemId
 {
 	if (!renameFolderWindow)
 	{
@@ -110,6 +110,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];
 }
 @end

@@ -21,8 +21,8 @@
 #import "ViewExtensions.h"
 
 @interface NSAnimation (ViennaAnimationWithTags)
--(void)MA_setTag:(int)newTag;
--(int)MA_tag;
+-(void)MA_setTag:(NSInteger)newTag;
+@property (nonatomic, readonly) NSInteger MA_tag;
 @end
 
 @implementation NSAnimation (ViennaAnimationWithTags)
@@ -43,20 +43,19 @@
 /* MA_setTag
  * Assigns the specified tag value to the animation object.
  */
--(void)MA_setTag:(int)newTag
+-(void)MA_setTag:(NSInteger)newTag
 {
-	[[self MA_tagDict] setObject:[NSNumber numberWithInt:newTag]
-					   forKey:[NSValue valueWithPointer:(__bridge const void *)(self)]];
+	[self MA_tagDict][[NSValue valueWithPointer:(__bridge const void *)(self)]] = @(newTag);
 }
 
 /* MA_tag
  * Returns the associated tag.
  */
--(int)MA_tag
+-(NSInteger)MA_tag
 {
 	NSMutableDictionary *tagDict = [self MA_tagDict];
 	NSValue *key = [NSValue valueWithPointer:(__bridge const void *)(self)];
-	int tag = [[tagDict objectForKey:key] intValue];
+	NSInteger tag = [tagDict[key] integerValue];
 	[tagDict removeObjectForKey:key];
 	return tag;
 }
@@ -67,18 +66,18 @@
 /* resizeViewWithAnimation
  * Resizes the specified view with animation.
  */
--(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag
+-(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(NSInteger)viewTag
 {
-	NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:
-						   [NSValue valueWithRect:newFrame], NSViewAnimationEndFrameKey,
-						   self, NSViewAnimationTargetKey,
-						   nil];
+	NSDictionary * dict = @{
+							NSViewAnimationEndFrameKey: [NSValue valueWithRect:newFrame],
+							NSViewAnimationTargetKey: self,
+							};
 	
-	NSViewAnimation * animation = [[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:dict]];
-	[animation setAnimationBlockingMode:NSAnimationNonblocking];
-	[animation setDuration:0.1];
-	[animation setAnimationCurve:NSAnimationEaseInOut];
-	[animation setDelegate:(id<NSAnimationDelegate>)self];
+	NSViewAnimation * animation = [[NSViewAnimation alloc] initWithViewAnimations:@[dict]];
+	animation.animationBlockingMode = NSAnimationNonblocking;
+	animation.duration = 0.1;
+	animation.animationCurve = NSAnimationEaseInOut;
+	animation.delegate = (id<NSAnimationDelegate>)self;
 	[animation MA_setTag:viewTag];
 	[animation startAnimation];
 }
@@ -88,11 +87,11 @@
  */
 -(void)animationDidEnd:(NSAnimation *)animation
 {
-	NSWindow * viewWindow = [self window];
-	int viewTag = [animation MA_tag];
+	NSWindow * viewWindow = self.window;
+	NSInteger viewTag = animation.MA_tag;
 
-	if ([[viewWindow delegate] respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
-		[(id)[viewWindow delegate] viewAnimationCompleted:self withTag:viewTag];
+	if ([viewWindow.delegate respondsToSelector:@selector(viewAnimationCompleted:withTag:)])
+		[(id)viewWindow.delegate viewAnimationCompleted:self withTag:viewTag];
 }
 
 @end

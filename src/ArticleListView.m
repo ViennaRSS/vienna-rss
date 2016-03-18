@@ -51,14 +51,14 @@
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)selectFirstUnreadInFolder;
-	-(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow;
+	-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 	-(void)loadMinimumFontSize;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)refreshImmediatelyArticleAtCurrentRow;
 	-(void)refreshArticleAtCurrentRow;
-	-(void)makeRowSelectedAndVisible:(int)rowIndex;
+	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
 	-(void)updateArticleListRowHeight;
-	-(void)setOrientation:(int)newLayout;
+	-(void)setOrientation:(NSInteger)newLayout;
 	-(void)loadSplitSettingsForLayout;
 	-(void)saveSplitSettingsForLayout;
 	-(void)showEnclosureView;
@@ -78,7 +78,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 /* initWithFrame
  * Initialise our view.
  */
--(id)initWithFrame:(NSRect)frame
+-(instancetype)initWithFrame:(NSRect)frame
 {
     self= [super initWithFrame:frame];
     if (self)
@@ -110,19 +110,19 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
-	[articleText setUIDelegate:self];
-	[articleText setFrameLoadDelegate:self];
+	articleText.UIDelegate = self;
+	articleText.frameLoadDelegate = self;
 	[articleText setOpenLinksInNewBrowser:YES];
 	[articleText setController:controller];
 	
 	// Make web preferences 16pt Arial to match Safari
-	[[articleText preferences] setStandardFontFamily:@"Arial"];
-	[[articleText preferences] setDefaultFontSize:16];
+	articleText.preferences.standardFontFamily = @"Arial";
+	articleText.preferences.defaultFontSize = 16;
 	
 	// Disable caching
-	[[articleText preferences] setUsesPageCache:NO];
+	[articleText.preferences setUsesPageCache:NO];
 	[articleText setMaintainsBackForwardList:NO];
-	[[articleText backForwardList] setPageCacheSize:0];
+	[articleText.backForwardList setPageCacheSize:0];
 
     [self initialiseArticleView];
 }
@@ -141,7 +141,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Create report and condensed view attribute dictionaries
 	NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	[style setLineBreakMode:NSLineBreakByClipping];
+	style.lineBreakMode = NSLineBreakByClipping;
 	
 	reportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
 	unreadReportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, nil];
@@ -156,14 +156,14 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	
 	// Set the reading pane orientation
-	[self setOrientation:[prefs layout]];
-	[splitView2 setDelegate:self];
+	[self setOrientation:prefs.layout];
+	splitView2.delegate = self;
 	
 	// Initialise the article list view
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
-	[articleList setNextKeyView:articleText];
+	articleList.nextKeyView = articleText;
 	
 	// Done initialising
 	isAppInitialising = NO;
@@ -177,7 +177,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (sender == splitView2)
 	{
-		BOOL isVertical = [sender isVertical];
+		BOOL isVertical = sender.vertical;
 		if (isVertical)
 			return (offset == 0) ? proposedMin + MA_Minimum_ArticleList_Pane_Width : proposedMin + MA_Minimum_Article_Pane_Dimension ;
 		else
@@ -195,7 +195,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (sender == splitView2)
 	{
-		BOOL isVertical = [sender isVertical];
+		BOOL isVertical = sender.vertical;
 		if (isVertical)
 			return (offset == 0) ? proposedMax - MA_Minimum_Article_Pane_Dimension : proposedMax - MA_Minimum_ArticleList_Pane_Width;
 		else
@@ -209,13 +209,13 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
-	CGFloat dividerThickness = [sender dividerThickness];
-	BOOL isVertical = [sender isVertical];
-	id sv1 = [[sender subviews] objectAtIndex:0];
-	id sv2 = [[sender subviews] objectAtIndex:1];
+	CGFloat dividerThickness = sender.dividerThickness;
+	BOOL isVertical = sender.vertical;
+	id sv1 = sender.subviews[0];
+	id sv2 = sender.subviews[1];
 	NSRect leftFrame = [sv1 frame];
 	NSRect rightFrame = [sv2 frame];
-	NSRect newFrame = [sender frame];
+	NSRect newFrame = sender.frame;
 	
 	if (sender == splitView2)
 	{
@@ -253,7 +253,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
 {
-	[controller openURL:[request URL] inPreferredBrowser:YES];
+	[controller openURL:request.URL inPreferredBrowser:YES];
 	// Change this to handle modifier key?
 	// Is this covered by the webView policy?
 	return nil;
@@ -290,7 +290,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)webView:(WebView *)sender setStatusText:(NSString *)text
 {
-	if ([[controller browserView] activeTabItemView] == self)
+	if (controller.browserView.activeTabItemView == self)
 		[controller setStatusMessage:text persist:NO];
 }
 
@@ -298,10 +298,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  * Called from the webview when the user positions the mouse over an element. If it's a link
  * then echo the URL to the status bar like Safari does.
  */
--(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger )modifierFlags
+-(void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation modifierFlags:(NSUInteger)modifierFlags
 {
 	NSURL * url = [elementInformation valueForKey:@"WebElementLinkURL"];
-	[controller setStatusMessage:(url ? [url absoluteString] : @"") persist:NO];
+	[controller setStatusMessage:(url ? url.absoluteString : @"") persist:NO];
 }
 
 /* contextMenuItemsForElement
@@ -326,21 +326,21 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if (!isCurrentPageFullHTML)
 	{
 		NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
-		int count = [defaultMenuItems count];
-		int index;
+		NSInteger count = defaultMenuItems.count;
+		NSInteger index;
 		
 		// Copy over everything but the reload menu item, which we can't handle if
 		// this is not a full HTML page since we don't have an URL.
 		for (index = 0; index < count; index++)
 		{
-			NSMenuItem * menuItem = [defaultMenuItems objectAtIndex:index];
-			if ([menuItem tag] != WebMenuItemTagReload)
+			NSMenuItem * menuItem = defaultMenuItems[index];
+			if (menuItem.tag != WebMenuItemTagReload)
 				[newDefaultMenu addObject:menuItem];
 		}
 		
 		// If we still have some menu items then use that for the new default menu, otherwise
 		// set the default items to nil as we may have removed all the items.
-		if ([newDefaultMenu count] > 0)
+		if (newDefaultMenu.count > 0)
 			defaultMenuItems = newDefaultMenu;
 		else
         {
@@ -370,21 +370,21 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	Field * field;
 	NSUInteger  index;
 	
-	for (index = 0; index < [dataArray count];)
+	for (index = 0; index < dataArray.count;)
 	{
 		NSString * name;
-		int width = 100;
+		NSInteger width = 100;
 		BOOL visible = NO;
 		
-		name = [dataArray objectAtIndex:index++];
-		if (index < [dataArray count])
-			visible = [[dataArray objectAtIndex:index++] intValue] == YES;
-		if (index < [dataArray count])
-			width = [[dataArray objectAtIndex:index++] intValue];
+		name = dataArray[index++];
+		if (index < dataArray.count)
+			visible = [dataArray[index++] integerValue] == YES;
+		if (index < dataArray.count)
+			width = [dataArray[index++] integerValue];
 		
 		field = [db fieldByName:name];
-		[field setVisible:visible];
-		[field setWidth:width];
+		field.visible = visible;
+		field.width = width;
 	}
 	
 	// Set the default fonts
@@ -394,7 +394,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[self updateVisibleColumns];
 	
 	// In condensed mode, the summary field takes up the whole space.
-	[articleList setColumnAutoresizingStyle:NSTableViewUniformColumnAutoresizingStyle];
+	articleList.columnAutoresizingStyle = NSTableViewUniformColumnAutoresizingStyle;
 
 	// Dynamically create the popup menu. This is one less thing to
 	// explicitly localise in the NIB file.
@@ -408,22 +408,22 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[articleListMenu addItem:[NSMenuItem separatorItem]];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewSourceHomePage:))];
 	NSMenuItem * alternateItem = copyOfMenuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
+	alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];
 	[articleListMenu addItem:copyOfMenuItemWithAction(@selector(viewArticlePages:))];
 	alternateItem = copyOfMenuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	[alternateItem setKeyEquivalentModifierMask:NSAlternateKeyMask];
+	alternateItem.keyEquivalentModifierMask = NSAlternateKeyMask;
 	[alternateItem setAlternate:YES];
 	[articleListMenu addItem:alternateItem];
-	[articleList setMenu:articleListMenu];
+	articleList.menu = articleListMenu;
 
 	// Set the target for double-click actions
-	[articleList setDoubleAction:@selector(doubleClickRow:)];
-	[articleList setAction:@selector(singleClickRow:)];
+	articleList.doubleAction = @selector(doubleClickRow:);
+	articleList.action = @selector(singleClickRow:);
 	[articleList setDelegate:self];
 	[articleList setDataSource:self];
-	[articleList setTarget:self];
+	articleList.target = self;
     [articleList accessibilitySetOverrideValue:NSLocalizedString(@"Articles", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
@@ -435,25 +435,25 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(IBAction)singleClickRow:(id)sender
 {
-	int row = [articleList clickedRow];
-	int column = [articleList clickedColumn];
-	NSArray * allArticles = [articleController allArticles];
+	NSInteger row = articleList.clickedRow;
+	NSInteger column = articleList.clickedColumn;
+	NSArray * allArticles = articleController.allArticles;
 	
-	if (row >= 0 && row < (int)[allArticles count])
+	if (row >= 0 && row < (NSInteger)allArticles.count)
 	{
-		NSArray * columns = [articleList tableColumns];
-		if (column >= 0 && column < (int)[columns count])
+		NSArray * columns = articleList.tableColumns;
+		if (column >= 0 && column < (NSInteger)columns.count)
 		{
-			Article * theArticle = [allArticles objectAtIndex:row];
-			NSString * columnName = [(NSTableColumn *)[columns objectAtIndex:column] identifier];
+			Article * theArticle = allArticles[row];
+			NSString * columnName = ((NSTableColumn *)columns[column]).identifier;
 			if ([columnName isEqualToString:MA_Field_Read])
 			{
-				[articleController markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:![theArticle isRead]];
+				[articleController markReadByArray:@[theArticle] readFlag:!theArticle.read];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_Flagged])
 			{
-				[articleController markFlaggedByArray:[NSArray arrayWithObject:theArticle] flagged:![theArticle isFlagged]];
+				[articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.flagged];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_HasEnclosure])
@@ -471,10 +471,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(IBAction)doubleClickRow:(id)sender
 {
-	if (currentSelectedRow != -1 && [articleList clickedRow] != -1)
+	if (currentSelectedRow != -1 && articleList.clickedRow != -1)
 	{
-		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
-		[controller openURLFromString:[theArticle link] inPreferredBrowser:YES];
+		Article * theArticle = articleController.allArticles[currentSelectedRow];
+		[controller openURLFromString:theArticle.link inPreferredBrowser:YES];
 	}
 }
 
@@ -486,8 +486,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	NSMenuItem * mainMenuItem;
 	NSMenuItem * contextualMenuItem;
-	int index;
-	NSMenu * articleListMenu = [articleList menu];
+	NSInteger index;
+	NSMenu * articleListMenu = articleList.menu;
 	if (articleListMenu == nil)
 		return;
 	mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
@@ -497,7 +497,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		if (index >= 0)
 		{
 			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			[contextualMenuItem setTitle:[mainMenuItem title]];
+			contextualMenuItem.title = mainMenuItem.title;
 		}
 	}
 	mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
@@ -507,7 +507,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		if (index >= 0)
 		{
 			contextualMenuItem = [articleListMenu itemAtIndex:index];
-			[contextualMenuItem setTitle:[mainMenuItem title]];
+			contextualMenuItem.title = mainMenuItem.title;
 		}
 	}
 }
@@ -519,20 +519,20 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (singleSelection)
 	{
-		int nextRow = [[articleList selectedRowIndexes] firstIndex];
-		int articlesCount = [[articleController allArticles] count];
+		NSUInteger nextRow = articleList.selectedRowIndexes.firstIndex;
+		NSUInteger articlesCount = articleController.allArticles.count;
 
 		currentSelectedRow = -1;
-		if (nextRow < 0 || nextRow >= articlesCount)
+		if (nextRow >= articlesCount)
 			nextRow = articlesCount - 1;
 		[self makeRowSelectedAndVisible:nextRow];
 	}
 	else
 	{
-		if ([articleList selectedRow] == -1)
+		if (articleList.selectedRow == -1)
 			[self makeRowSelectedAndVisible:0];
 		else
-			[articleList scrollRowToVisible:[articleList selectedRow]];
+			[articleList scrollRowToVisible:articleList.selectedRow];
 	}
 }
 
@@ -543,11 +543,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(void)updateVisibleColumns
 {
 	NSArray * fields = [[Database sharedManager] arrayOfFields];
-	int count = [fields count];
-	int index;
+	NSInteger count = fields.count;
+	NSInteger index;
 
 	// Save current selection
-	NSIndexSet * selArray = [articleList selectedRowIndexes];
+	NSIndexSet * selArray = articleList.selectedRowIndexes;
 	
 	// Mark we're doing an update of the tableview
 	isInTableInit = YES;
@@ -558,20 +558,20 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Create the new columns
 	for (index = 0; index < count; ++index)
 	{
-		Field * field = [fields objectAtIndex:index];
-		NSString * identifier = [field name];
-		int tag = [field tag];
+		Field * field = fields[index];
+		NSString * identifier = field.name;
+		NSInteger tag = field.tag;
 		BOOL showField;
 		
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the table (horizontal) layout
 		if (tableLayout == MA_Layout_Report)
-			showField = [field visible] && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
+			showField = field.visible && tag != MA_FieldID_Headlines && tag != MA_FieldID_Comments;
 		else
 		{
 			showField = NO;
 			if (tag == MA_FieldID_Read || tag == MA_FieldID_Flagged || tag == MA_FieldID_HasEnclosure)
-				showField = [field visible];
+				showField = field.visible;
 			if (tag == MA_FieldID_Headlines)
 				showField = YES;
 		}
@@ -579,12 +579,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		// hide old columns which shouldn't be visible anymore
 		if ([articleList columnWithIdentifier:identifier]!=-1)
 		{
-			NSArray *columns = [articleList tableColumns];
+			NSArray *columns = articleList.tableColumns;
 
-    		if(columns && [columns count] > 0)
+    		if(columns && columns.count > 0)
     		{
-        		NSTableColumn *col = [columns objectAtIndex:[articleList columnWithIdentifier:identifier]];
-              	[col setHidden:!showField];
+        		NSTableColumn *col = columns[[articleList columnWithIdentifier:identifier]];
+              	col.hidden = !showField;
         	}
     	}
 		// Add to the end only those columns that are visible
@@ -597,9 +597,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			// in willDisplayCell:forTableColumn:row: where it sets the inProgress flag.
 			// We need to use a different column for condensed layout vs. table layout.
 			BOOL isProgressColumn = NO;
-			if (tableLayout == MA_Layout_Report && [[column identifier] isEqualToString:MA_Field_Subject])
+			if (tableLayout == MA_Layout_Report && [column.identifier isEqualToString:MA_Field_Subject])
 				isProgressColumn = YES;
-			if (tableLayout == MA_Layout_Condensed && [[column identifier] isEqualToString:MA_Field_Headlines])
+			if (tableLayout == MA_Layout_Condensed && [column.identifier isEqualToString:MA_Field_Headlines])
 				isProgressColumn = YES;
 			
 			if (isProgressColumn)
@@ -607,30 +607,30 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 				ProgressTextCell * progressCell;
 				
 				progressCell = [[ProgressTextCell alloc] init];
-				[column setDataCell:progressCell];
+				column.dataCell = progressCell;
 			}
 			else
 			{
 				BJRVerticallyCenteredTextFieldCell * cell;
 
 				cell = [[BJRVerticallyCenteredTextFieldCell alloc] init];
-				[column setDataCell:cell];
+				column.dataCell = cell;
 			}
 
 			BOOL isResizable = (tag != MA_FieldID_Read && tag != MA_FieldID_Flagged && tag != MA_FieldID_Comments && tag != MA_FieldID_HasEnclosure);
-			[column setResizingMask:(isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing)];
+			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
-			[column setResizingMask:[column resizingMask] | ([[column identifier] isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0)];
+			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);
 
 			// Set the header attributes.
-			NSTableHeaderCell * headerCell = [column headerCell];
-			[headerCell setTitle:[field displayName]];
+			NSTableHeaderCell * headerCell = column.headerCell;
+			headerCell.title = field.displayName;
 			
 			// Set the other column atributes.
 			[column setEditable:NO];
-			[column setMinWidth:10];
-			[column setMaxWidth:2000];
-			[column setWidth:[field width]];
+			column.minWidth = 10;
+			column.maxWidth = 2000;
+			column.width = field.width;
 			[articleList addTableColumn:column];
 		}
 	}
@@ -647,9 +647,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
 	if (tableLayout == MA_Layout_Report)
-		[articleList setAutosaveName:@"Vienna3ReportLayoutColumns"];
+		articleList.autosaveName = @"Vienna3ReportLayoutColumns";
 	else
-		[articleList setAutosaveName:@"Vienna3CondensedLayoutColumns"];
+		articleList.autosaveName = @"Vienna3CondensedLayoutColumns";
 	[articleList setAutosaveTableColumns:YES];
 
 	// Done
@@ -664,8 +664,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// Remember the current folder and article
-	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]) ? [[[articleController allArticles] objectAtIndex:currentSelectedRow] guid] : @"";
-	[prefs setInteger:[articleController currentFolderId] forKey:MAPref_CachedFolderID];
+	NSString * guid = (currentSelectedRow >= 0 && currentSelectedRow < articleController.allArticles.count) ? [articleController.allArticles[currentSelectedRow] guid] : @"";
+	[prefs setInteger:articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:guid forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
@@ -675,9 +675,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	for (Field * field in  [[Database sharedManager] arrayOfFields])
 	{
-		[dataArray addObject:[field name]];
-		[dataArray addObject:[NSNumber numberWithBool:[field visible]]];
-		[dataArray addObject:[NSNumber numberWithInt:[field width]]];
+		[dataArray addObject:field.name];
+		[dataArray addObject:@(field.visible)];
+		[dataArray addObject:@(field.width)];
 	}
 	
 	// Save these to the preferences
@@ -697,19 +697,19 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 
 	Preferences * prefs = [Preferences standardPreferences];
-	articleListFont = [NSFont fontWithName:[prefs articleListFont] size:[prefs articleListFontSize]];
+	articleListFont = [NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize];
 	articleListUnreadFont = [prefs boolForKey:MAPref_ShowUnreadArticlesInBold] ? [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont] : articleListFont;
 
-	[reportCellDict setObject:articleListFont forKey:NSFontAttributeName];
-	[unreadReportCellDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
+	reportCellDict[NSFontAttributeName] = articleListFont;
+	unreadReportCellDict[NSFontAttributeName] = articleListUnreadFont;
 
-	[topLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[unreadTopLineDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
-	[middleLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[linkLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[bottomLineDict setObject:articleListFont forKey:NSFontAttributeName];
-	[selectionDict setObject:articleListFont forKey:NSFontAttributeName];
-	[unreadTopLineSelectionDict setObject:articleListUnreadFont forKey:NSFontAttributeName];
+	topLineDict[NSFontAttributeName] = articleListFont;
+	unreadTopLineDict[NSFontAttributeName] = articleListUnreadFont;
+	middleLineDict[NSFontAttributeName] = articleListFont;
+	linkLineDict[NSFontAttributeName] = articleListFont;
+	bottomLineDict[NSFontAttributeName] = articleListFont;
+	selectionDict[NSFontAttributeName] = articleListFont;
+	unreadTopLineSelectionDict[NSFontAttributeName] = articleListUnreadFont;
 	
 	[self updateArticleListRowHeight];
 }
@@ -722,26 +722,26 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(void)updateArticleListRowHeight
 {
 	Database * db = [Database sharedManager];
-	float height = [[APPCONTROLLER layoutManager] defaultLineHeightForFont:articleListFont];
-	int numberOfRowsInCell;
+	CGFloat height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:articleListFont];
+	NSInteger numberOfRowsInCell;
 
 	if (tableLayout == MA_Layout_Report)
 		numberOfRowsInCell = 1;
 	else
 	{
 		numberOfRowsInCell = 0;
-		if ([[db fieldByName:MA_Field_Subject] visible])
+		if ([db fieldByName:MA_Field_Subject].visible)
 			++numberOfRowsInCell;
-		if ([[db fieldByName:MA_Field_Folder] visible] || [[db fieldByName:MA_Field_Date] visible] || [[db fieldByName:MA_Field_Author] visible])
+		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_Date].visible || [db fieldByName:MA_Field_Author].visible)
 			++numberOfRowsInCell;
-		if ([[db fieldByName:MA_Field_Link] visible])
+		if ([db fieldByName:MA_Field_Link].visible)
 			++numberOfRowsInCell;
-		if ([[db fieldByName:MA_Field_Summary] visible])
+		if ([db fieldByName:MA_Field_Summary].visible)
 			++numberOfRowsInCell;
 		if (numberOfRowsInCell == 0)
 			++numberOfRowsInCell;
 	}
-	[articleList setRowHeight:(height + 2.0f) * (float)numberOfRowsInCell];
+	articleList.rowHeight = (height + 2.0f) * (CGFloat)numberOfRowsInCell;
 }
 
 /* showSortDirection
@@ -749,14 +749,14 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)showSortDirection
 {
-	NSString * sortColumnIdentifier = [articleController sortColumnIdentifier];
+	NSString * sortColumnIdentifier = articleController.sortColumnIdentifier;
 	
-	for (NSTableColumn * column in [articleList tableColumns])
+	for (NSTableColumn * column in articleList.tableColumns)
 	{
-		if ([[column identifier] isEqualToString:sortColumnIdentifier])
+		if ([column.identifier isEqualToString:sortColumnIdentifier])
 		{
-			NSString * imageName = ([[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
-			[articleList setHighlightedTableColumn:column];
+			NSString * imageName = ([[Preferences standardPreferences].articleSortDescriptors[0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
+			articleList.highlightedTableColumn = column;
 			[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:column];
 		}
 		else
@@ -773,12 +773,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(BOOL)scrollToArticle:(NSString *)guid
 {
-	int rowIndex = 0;
+	NSInteger rowIndex = 0;
 	BOOL found = NO;
 	
-	for (Article * thisArticle in [articleController allArticles])
+	for (Article * thisArticle in articleController.allArticles)
 	{
-		if ([[thisArticle guid] isEqualToString:guid])
+		if ([thisArticle.guid isEqualToString:guid])
 		{
 			[self makeRowSelectedAndVisible:rowIndex];
 			found = YES;
@@ -808,12 +808,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 /* canDeleteMessageAtRow
  * Returns YES if the message at the specified row can be deleted, otherwise NO.
  */
--(BOOL)canDeleteMessageAtRow:(int)row
+-(BOOL)canDeleteMessageAtRow:(NSInteger)row
 {
-	if ((row >= 0) && (row < [[articleController allArticles] count]))
+	if ((row >= 0) && (row < articleController.allArticles.count))
 	{
-		Article * article = [[articleController allArticles] objectAtIndex:row];
-		return (article != nil) && ![[Database sharedManager] readOnly] && [[articleList window] isVisible];
+		Article * article = articleController.allArticles[row];
+		return (article != nil) && ![Database sharedManager].readOnly && articleList.window.visible;
 	}
 	return NO;
 }
@@ -823,7 +823,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(BOOL)canGoForward
 {
-	return [articleController canGoForward];
+	return articleController.canGoForward;
 }
 
 /* canGoBack
@@ -831,7 +831,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(BOOL)canGoBack
 {
-	return [articleController canGoBack];
+	return articleController.canGoBack;
 }
 
 /* handleGoForward
@@ -840,7 +840,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(IBAction)handleGoForward:(id)sender
 {
 	[articleController goForward];
-	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? articleList : [foldersTree mainView]];
+	[NSApp.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? articleList : foldersTree.mainView];
 }
 
 /* handleGoBack
@@ -849,7 +849,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(IBAction)handleGoBack:(id)sender
 {
 	[articleController goBack];
-	[[NSApp mainWindow] makeFirstResponder:([self selectedArticle] != nil) ? articleList : [foldersTree mainView]];
+	[NSApp.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? articleList : foldersTree.mainView];
 }
 
 - (BOOL)acceptsFirstResponder
@@ -861,7 +861,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
  */
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags
+-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
 	return [controller handleKeyDown:keyChar withFlags:flags];
 }
@@ -871,7 +871,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(Article *)selectedArticle
 {
-	return (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count]) ? [[articleController allArticles] objectAtIndex:currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < articleController.allArticles.count) ? articleController.allArticles[currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -896,7 +896,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
-	if (self == [articleController mainArticleView])
+	if (self == articleController.mainArticleView)
 	{
 		[articleList reloadData];
 	}
@@ -904,7 +904,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 -(void)handleArticleListStateChange:(NSNotification *)note
 {
-	if (self == [articleController mainArticleView])
+	if (self == articleController.mainArticleView)
 	{
 		[self refreshCurrentFolder];
 	}
@@ -915,7 +915,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)handleLoadFullHTMLChange:(NSNotification *)note
 {
-	if (self == [articleController mainArticleView])
+	if (self == articleController.mainArticleView)
 		[self refreshArticlePane];
 }
 
@@ -924,10 +924,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
-	if (self == [articleController mainArticleView])
+	if (self == articleController.mainArticleView)
 	{
 		[self saveSplitSettingsForLayout];
-		[self setOrientation:[[Preferences standardPreferences] layout]];
+		[self setOrientation:[Preferences standardPreferences].layout];
 		[self updateVisibleColumns];
 		[articleList reloadData];
 	}
@@ -941,7 +941,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
 		@"SplitView2ReportLayout"
 		: @"SplitView2CondensedLayout";
-	[splitView2 setLayout:[[Preferences standardPreferences] objectForKey:splitPrefsName]];
+	splitView2.layout = [[Preferences standardPreferences] objectForKey:splitPrefsName];
 }
 
 /* saveSplitSettingsForLayout
@@ -952,18 +952,18 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSString * splitPrefsName = (tableLayout == MA_Layout_Report) ?
 		@"SplitView2ReportLayout"
 		: @"SplitView2CondensedLayout";
-	[[Preferences standardPreferences] setObject:[splitView2 layout] forKey:splitPrefsName];
+	[[Preferences standardPreferences] setObject:splitView2.layout forKey:splitPrefsName];
 }
 
 /* setOrientation
  * Adjusts the article view orientation and updates the article list row
  * height to accommodate the summary view
  */
--(void)setOrientation:(int)newLayout
+-(void)setOrientation:(NSInteger)newLayout
 {
 	isChangingOrientation = YES;
 	tableLayout = newLayout;
-	[splitView2 setVertical:(newLayout == MA_Layout_Condensed)];
+	splitView2.vertical = (newLayout == MA_Layout_Condensed);
 	[self loadSplitSettingsForLayout];
 	[splitView2 display];
 	isChangingOrientation = NO;
@@ -972,7 +972,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 /* tableLayout
  * Returns the active table layout.
  */
--(int)tableLayout
+-(NSInteger)tableLayout
 {
 	return tableLayout;
 }
@@ -981,9 +981,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  * Selects the specified row in the table and makes it visible by
  * scrolling it to the center of the table.
  */
--(void)makeRowSelectedAndVisible:(int)rowIndex
+-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
-	if ([[articleController allArticles] count] == 0u)
+	if (articleController.allArticles.count == 0u)
 	{
 		currentSelectedRow = -1;
 		[articleList deselectAll:self];
@@ -999,9 +999,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			[self refreshImmediatelyArticleAtCurrentRow];
 		}
 
-		int pageSize = [articleList rowsInRect:[articleList visibleRect]].length;
-		int lastRow = [articleList numberOfRows] - 1;
-		int visibleRow = currentSelectedRow + (pageSize / 2);
+		NSInteger pageSize = [articleList rowsInRect:articleList.visibleRect].length;
+		NSInteger lastRow = articleList.numberOfRows - 1;
+		NSInteger visibleRow = currentSelectedRow + (pageSize / 2);
 
 		if (visibleRow > lastRow)
 			visibleRow = lastRow;
@@ -1020,12 +1020,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
-	if ([[Database sharedManager] countOfUnread] > 0)
+	if ([Database sharedManager].countOfUnread > 0)
 	{
 		guidOfArticleToSelect = nil;
 		
 		// Get the first folder with unread articles.
-		int firstFolderWithUnread = [foldersTree firstFolderWithUnread];
+		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
 		
 		// Select the folder in the tree view.
 		[foldersTree selectFolder:firstFolderWithUnread];
@@ -1041,19 +1041,19 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(void)displayNextUnread
 {
 	// Save the value of currentSelectedRow.
-	int currentRow = currentSelectedRow;
+	NSInteger currentRow = currentSelectedRow;
 
 	// Mark the current article read.
 	[self markCurrentRead:nil];
 
 	// Scan the current folder from the selection forward. If nothing found, try
 	// other folders until we come back to ourselves.
-	if (([[Database sharedManager] countOfUnread] > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
+	if (([Database sharedManager].countOfUnread > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
 	{
-		int nextFolderWithUnread = [foldersTree nextFolderWithUnread:[articleController currentFolderId]];
+		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:articleController.currentFolderId];
 		if (nextFolderWithUnread != -1)
 		{
-			if (nextFolderWithUnread == [articleController currentFolderId])
+			if (nextFolderWithUnread == articleController.currentFolderId)
 			{
 				[self viewNextUnreadInCurrentFolder:-1];
 			}
@@ -1070,18 +1070,18 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 /* viewNextUnreadInCurrentFolder
  * Select the next unread article in the current folder after currentRow.
  */
--(BOOL)viewNextUnreadInCurrentFolder:(int)currentRow
+-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow
 {
 	if (currentRow < 0)
 		currentRow = 0;
 	
-	NSArray * allArticles = [articleController allArticles];
-	int totalRows = [allArticles count];
+	NSArray * allArticles = articleController.allArticles;
+	NSInteger totalRows = allArticles.count;
 	Article * theArticle;
 	while (currentRow < totalRows)
 	{
-		theArticle = [allArticles objectAtIndex:currentRow];
-		if (![theArticle isRead])
+		theArticle = allArticles[currentRow];
+		if (!theArticle.read)
 		{
 			[self makeRowSelectedAndVisible:currentRow];
 			return YES;
@@ -1096,20 +1096,20 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)showEnclosureView
 {
-	if ([stdEnclosureView superview] == nil)
+	if (stdEnclosureView.superview == nil)
 	{
 		NSRect enclosureRect;
 		NSRect mainRect;
 
-		mainRect = [articleText bounds];
-		enclosureRect = [stdEnclosureView bounds];
+		mainRect = articleText.bounds;
+		enclosureRect = stdEnclosureView.bounds;
 		enclosureRect.size.width = mainRect.size.width;
 		mainRect.size.height -= enclosureRect.size.height;
 		mainRect.origin.y += enclosureRect.size.height;
 
-		[[articleText superview] addSubview:stdEnclosureView];
-		[articleText setFrame:mainRect];
-		[stdEnclosureView setFrame:enclosureRect];
+		[articleText.superview addSubview:stdEnclosureView];
+		articleText.frame = mainRect;
+		stdEnclosureView.frame = enclosureRect;
 	}
 }
 
@@ -1118,17 +1118,17 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)hideEnclosureView
 {
-	if ([stdEnclosureView superview] != nil)
+	if (stdEnclosureView.superview != nil)
 	{
 		NSRect enclosureRect;
 		NSRect mainRect;
 		
-		mainRect = [articleText bounds];
-		enclosureRect = [stdEnclosureView bounds];
+		mainRect = articleText.bounds;
+		enclosureRect = stdEnclosureView.bounds;
 		mainRect.size.height += enclosureRect.size.height;
 		
 		[stdEnclosureView removeFromSuperview];
-		[articleText setFrame:mainRect];
+		articleText.frame = mainRect;
 	}
 }
 
@@ -1140,19 +1140,19 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (![self viewNextUnreadInCurrentFolder:-1])
 	{
-		int count = [[articleController allArticles] count];
+		NSInteger count = articleController.allArticles.count;
 		if (count > 0)
-			[self makeRowSelectedAndVisible:[[[[Preferences standardPreferences] articleSortDescriptors] objectAtIndex:0] ascending] ? 0 : count - 1];
+			[self makeRowSelectedAndVisible:[[Preferences standardPreferences].articleSortDescriptors[0] ascending] ? 0 : count - 1];
 	}
 }
 
 /* selectFolderAndArticle
  * Select a folder and select a specified article within the folder.
  */
--(void)selectFolderAndArticle:(int)folderId guid:(NSString *)guid
+-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, easy enough.
-	if (folderId == [articleController currentFolderId])
+	if (folderId == articleController.currentFolderId)
 		[self scrollToArticle:guid];
 	else
 	{
@@ -1177,18 +1177,18 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 /* performFindPanelAction
  * Implement the search action.
  */
--(void)performFindPanelAction:(int)actionTag
+-(void)performFindPanelAction:(NSInteger)actionTag
 {
 	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-	if (currentSelectedRow < 0 && [[articleController allArticles] count] > 0 )
+	if (currentSelectedRow < 0 && articleController.allArticles.count > 0 )
 	{
 		BOOL shouldSelectArticle = YES;
-		if ([[Preferences standardPreferences] markReadInterval] > 0.0f)
+		if ([Preferences standardPreferences].markReadInterval > 0.0f)
 		{
-			Article * article = [[articleController allArticles] objectAtIndex:0u];
-			if (![article isRead])
+			Article * article = articleController.allArticles[0u];
+			if (!article.read)
 				shouldSelectArticle = NO;
 		}
 		if (shouldSelectArticle)
@@ -1203,11 +1203,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	// Preserve the article that the user might currently be reading.
 	Preferences * prefs = [Preferences standardPreferences];
-	if (([prefs refreshFrequency] > 0) &&
-		(currentSelectedRow >= 0 && currentSelectedRow < (int)[[articleController allArticles] count]))
+	if ((prefs.refreshFrequency > 0) &&
+		(currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)articleController.allArticles.count))
 	{
-		Article * currentArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
-		if (![currentArticle isDeleted])
+		Article * currentArticle = articleController.allArticles[currentSelectedRow];
+		if (!currentArticle.deleted)
 			[articleController setArticleToPreserve:currentArticle];
 	}
 	
@@ -1219,9 +1219,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  * logic and redrawing the article list. The selected article is preserved
  * and restored on completion of the refresh.
  */
--(void)refreshFolder:(int)refreshFlag
+-(void)refreshFolder:(NSInteger)refreshFlag
 {
-	NSArray * allArticles = [articleController allArticles];
+	NSArray * allArticles = articleController.allArticles;
 	NSString * guid = nil;
 
 	[markReadTimer invalidate];
@@ -1229,8 +1229,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
-	if (currentSelectedRow >= 0 && currentSelectedRow < [allArticles count])
-		guid = [[allArticles objectAtIndex:currentSelectedRow] guid];
+	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
+		guid = [allArticles[currentSelectedRow] guid];
 	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
 		[articleController reloadArrayOfArticles];
 	else if (refreshFlag == MA_Refresh_ReapplyFilter)
@@ -1243,9 +1243,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	{
 		// To avoid upsetting the current displayed article after a refresh, we check to see if the selection has stayed
 		// the same and the GUID of the article at the selection is the same.
-		allArticles = [articleController allArticles];
-		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (int)[allArticles count]) ? [allArticles objectAtIndex:currentSelectedRow] : nil;
-		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:[currentArticle guid]];
+		allArticles = articleController.allArticles;
+		Article * currentArticle = (currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)allArticles.count) ? allArticles[currentSelectedRow] : nil;
+		BOOL isUnchanged = (currentArticle != nil) && [guid isEqualToString:currentArticle.guid];
 		if (!isUnchanged)
 		{
 			if (![self scrollToArticle:guid])
@@ -1257,13 +1257,13 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		}
 		else if (refreshFlag == MA_Refresh_ReloadFromDatabase && 
 				 [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles] && 
-				 [currentArticle isRevised] && ![currentArticle isRead]) // The article may have been updated, so refresh the article pane.
+				 currentArticle.revised && !currentArticle.read) // The article may have been updated, so refresh the article pane.
 			[self refreshArticlePane];
 	}
 	else
 		currentSelectedRow = -1;
-	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && ([[NSApp mainWindow] firstResponder] == articleList))
-		[[NSApp mainWindow] makeFirstResponder:[foldersTree mainView]];
+	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && (NSApp.mainWindow.firstResponder == articleList))
+		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
 	else if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
 }
@@ -1289,11 +1289,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
 {
-	int row = [articleList rowAtPoint:[articleList convertPoint:[theEvent locationInWindow] fromView:nil]];
+	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
 	if (row >= 0)
 	{
 		// Select the row under the cursor if it isn't already selected
-		if ([articleList numberOfSelectedRows] <= 1)
+		if (articleList.numberOfSelectedRows <= 1)
 		{
 			blockSelectionHandler = YES;
 			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
@@ -1308,7 +1308,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  * Switches to the specified folder and displays articles filtered by whatever is in
  * the search field.
  */
--(void)selectFolderWithFilter:(int)newFolderId
+-(void)selectFolderWithFilter:(NSInteger)newFolderId
 {
 	[articleList deselectAll:self];
 	currentSelectedRow = -1;
@@ -1327,15 +1327,15 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[self refreshArticlePane];
 	
 	// If we mark read after an interval, start the timer here.
-	if (currentSelectedRow >= 0 && currentSelectedRow < [[articleController allArticles] count])
+	if (currentSelectedRow >= 0 && currentSelectedRow < articleController.allArticles.count)
 	{
-		Article * theArticle = [[articleController allArticles] objectAtIndex:currentSelectedRow];
-		if (![theArticle isRead] && !blockMarkRead)
+		Article * theArticle = articleController.allArticles[currentSelectedRow];
+		if (!theArticle.read && !blockMarkRead)
 		{
 			[markReadTimer invalidate];
 			markReadTimer = nil;
 
-			float interval = [[Preferences standardPreferences] markReadInterval];
+			CGFloat interval = [Preferences standardPreferences].markReadInterval;
 			if (interval > 0 && !isAppInitialising)
 				markReadTimer = [NSTimer scheduledTimerWithTimeInterval:(double)interval
 																  target:self
@@ -1358,13 +1358,13 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else
 	{
-		NSArray * allArticles = [articleController allArticles];
-		NSAssert(currentSelectedRow < (int)[allArticles count], @"Out of range row index received");
+		NSArray * allArticles = articleController.allArticles;
+		NSAssert(currentSelectedRow < (NSInteger)[allArticles count], @"Out of range row index received");
 		
 		[self refreshImmediatelyArticleAtCurrentRow];
 		
 		// Add this to the backtrack list
-		NSString * guid = [[allArticles objectAtIndex:currentSelectedRow] guid];
+		NSString * guid = [allArticles[currentSelectedRow] guid];
 		[articleController addBacktrack:guid];
 	}
 }
@@ -1403,7 +1403,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	isLoadingHTMLArticle = YES;
 	
 	// Load the actual link.
-	[articleText setMainFrameURL:articleLink];
+	articleText.mainFrameURL = articleLink;
 	
 	// Clear the current URL.
 	[self clearCurrentURL];
@@ -1431,9 +1431,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)refreshArticlePane
 {
-	NSArray * msgArray = [self markedArticleRange];
+	NSArray * msgArray = self.markedArticleRange;
 	
-	if ([msgArray count] == 0)
+	if (msgArray.count == 0)
 	{
 		// Clear the current URL.
 		[self clearCurrentURL];
@@ -1446,9 +1446,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else
 	{
-		Article * firstArticle = [msgArray objectAtIndex:0];
-		Folder * folder = [[Database sharedManager] folderFromID:[firstArticle folderId]];
-		if ([folder loadsFullHTML] && [msgArray count] == 1)
+		Article * firstArticle = msgArray[0];
+		Folder * folder = [[Database sharedManager] folderFromID:firstArticle.folderId];
+		if (folder.loadsFullHTML && msgArray.count == 1)
 		{
 			// Remember we have a full HTML page so we can setup the context menus
 			// appropriately.
@@ -1462,7 +1462,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			// performSelector:withObject:afterDelay: here so that this link load gets
 			// queued up into the event loop, otherwise the WebView class won't draw the
 			// clearing of the HTML before this new link gets loaded.
-			[self performSelector: @selector(loadArticleLink:) withObject:[firstArticle link] afterDelay:0.0];
+			[self performSelector: @selector(loadArticleLink:) withObject:firstArticle.link afterDelay:0.0];
 		}
 		else
 		{
@@ -1486,17 +1486,17 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	
 	// Show the enclosure view if just one article is selected and it has an
 	// enclosure.
-	if ([msgArray count] != 1)
+	if (msgArray.count != 1)
 		[self hideEnclosureView];
 	else
 	{
-		Article * oneArticle = [msgArray objectAtIndex:0];
-		if (![oneArticle hasEnclosure])
+		Article * oneArticle = msgArray[0];
+		if (!oneArticle.hasEnclosure)
 			[self hideEnclosureView];
 		else
 		{
 			[self showEnclosureView];
-			[stdEnclosureView setEnclosureFile:[oneArticle enclosure]];
+			[stdEnclosureView setEnclosureFile:oneArticle.enclosure];
 		}
 	}
 }
@@ -1506,12 +1506,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
-	NSArray * allArticles = [articleController allArticles];
-	if (currentSelectedRow >=0 && currentSelectedRow < (int)[allArticles count] && ![[Database sharedManager] readOnly])
+	NSArray * allArticles = articleController.allArticles;
+	if (currentSelectedRow >=0 && currentSelectedRow < (NSInteger)allArticles.count && ![Database sharedManager].readOnly)
 	{
-		Article * theArticle = [allArticles objectAtIndex:currentSelectedRow];
-		if (![theArticle isRead])
-			[articleController markReadByArray:[NSArray arrayWithObject:theArticle] readFlag:YES];
+		Article * theArticle = allArticles[currentSelectedRow];
+		if (!theArticle.read)
+			[articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
 
@@ -1521,7 +1521,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [[articleController allArticles] count];
+	return articleController.allArticles.count;
 }
 
 /* objectValueForTableColumn [datasource]
@@ -1531,35 +1531,35 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	Database * db = [Database sharedManager];
-	NSArray * allArticles = [articleController allArticles];
+	NSArray * allArticles = articleController.allArticles;
 	Article * theArticle;
 	
-	if(rowIndex < 0 || rowIndex >= [allArticles count])
+	if(rowIndex < 0 || rowIndex >= allArticles.count)
 	    return nil;
-	theArticle = [allArticles objectAtIndex:rowIndex];
-	NSString * identifier = [aTableColumn identifier];
+	theArticle = allArticles[rowIndex];
+	NSString * identifier = aTableColumn.identifier;
 	if ([identifier isEqualToString:MA_Field_Read])
 	{
-		if (![theArticle isRead])
-			return ([theArticle isRevised]) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
+		if (!theArticle.read)
+			return (theArticle.revised) ? [NSImage imageNamed:@"revised.tiff"] : [NSImage imageNamed:@"unread.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged])
 	{
-		if ([theArticle isFlagged])
+		if (theArticle.flagged)
 			return [NSImage imageNamed:@"flagged.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	if ([identifier isEqualToString:MA_Field_Comments])
 	{
-		if ([theArticle hasComments])
+		if (theArticle.hasComments)
 			return [NSImage imageNamed:@"comments.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
 	
 	if ([identifier isEqualToString:MA_Field_HasEnclosure])
 	{
-		if ([theArticle hasEnclosure])
+		if (theArticle.hasEnclosure)
 			return [NSImage imageNamed:@"enclosure.tiff"];
 		return [NSImage imageNamed:@"alphaPixel.tiff"];
 	}
@@ -1568,38 +1568,38 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if ([identifier isEqualToString:MA_Field_Headlines])
 	{
 		theAttributedString = [[NSMutableAttributedString alloc] init];
-		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && ([[NSApp mainWindow] firstResponder] == aTableView);
+		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && (NSApp.mainWindow.firstResponder == aTableView);
 
-		if ([[db fieldByName:MA_Field_Subject] visible])
+		if ([db fieldByName:MA_Field_Subject].visible)
 		{
 			NSDictionary * topLineDictPtr;
 
-			if ([theArticle isRead])
+			if (theArticle.read)
 				topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
 			else
 				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
-			NSString * topString = [NSString stringWithFormat:@"%@", [theArticle title]];
+			NSString * topString = [NSString stringWithFormat:@"%@", theArticle.title];
 			NSMutableAttributedString * topAttributedString = [[NSMutableAttributedString alloc] initWithString:topString attributes:topLineDictPtr];
-			[topAttributedString fixFontAttributeInRange:NSMakeRange(0u, [topAttributedString length])];
+			[topAttributedString fixFontAttributeInRange:NSMakeRange(0u, topAttributedString.length)];
 			[theAttributedString appendAttributedString:topAttributedString];
 		}
 
 		// Add the summary line that appears below the title.
-		if ([[db fieldByName:MA_Field_Summary] visible])
+		if ([db fieldByName:MA_Field_Summary].visible)
 		{
-			NSString * summaryString = [theArticle summary];
-			int maxSummaryLength = MIN([summaryString length], 150);
+			NSString * summaryString = theArticle.summary;
+			NSInteger maxSummaryLength = MIN([summaryString length], 150);
 			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
 			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
 			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
-			[middleAttributedString fixFontAttributeInRange:NSMakeRange(0u, [middleAttributedString length])];
+			[middleAttributedString fixFontAttributeInRange:NSMakeRange(0u, middleAttributedString.length)];
 			[theAttributedString appendAttributedString:middleAttributedString];
 		}
 		
 		// Add the link line that appears below the summary and title.
-		if ([[db fieldByName:MA_Field_Link] visible])
+		if ([db fieldByName:MA_Field_Link].visible)
 		{
-			NSString * articleLink = [theArticle link];
+			NSString * articleLink = theArticle.link;
 			if (articleLink != nil)
 			{
 				NSString * linkString = [NSString stringWithFormat:@"\n%@", articleLink];
@@ -1608,10 +1608,10 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 				if (articleURL != nil)
 				{
 					linkLineDictPtr = [linkLineDictPtr mutableCopy];
-					[linkLineDictPtr setObject:articleURL forKey:NSLinkAttributeName];
+					linkLineDictPtr[NSLinkAttributeName] = articleURL;
 				}
 				NSMutableAttributedString * linkAttributedString = [[NSMutableAttributedString alloc] initWithString:linkString attributes:linkLineDictPtr];
-				[linkAttributedString fixFontAttributeInRange:NSMakeRange(0u, [linkAttributedString length])];
+				[linkAttributedString fixFontAttributeInRange:NSMakeRange(0u, linkAttributedString.length)];
 				[theAttributedString appendAttributedString:linkAttributedString];
 			}
 		}
@@ -1621,28 +1621,28 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		NSMutableString * summaryString = [NSMutableString stringWithString:@""];
 		NSString * delimiter = @"";
 
-		if ([[db fieldByName:MA_Field_Folder] visible])
+		if ([db fieldByName:MA_Field_Folder].visible)
 		{
-			Folder * folder = [db folderFromID:[theArticle folderId]];
-			[summaryString appendString:[folder name]];
+			Folder * folder = [db folderFromID:theArticle.folderId];
+			[summaryString appendString:folder.name];
 			delimiter = @" - ";
 		}
-		if ([[db fieldByName:MA_Field_Date] visible])
+		if ([db fieldByName:MA_Field_Date].visible)
 		{
-			NSCalendarDate * anDate = [[theArticle date] dateWithCalendarFormat:nil timeZone:nil];
-			[summaryString appendFormat:@"%@%@", delimiter,[anDate friendlyDescription]];
+			NSCalendarDate * anDate = [theArticle.date dateWithCalendarFormat:nil timeZone:nil];
+			[summaryString appendFormat:@"%@%@", delimiter,anDate.friendlyDescription];
 			delimiter = @" - ";
 		}
-		if ([[db fieldByName:MA_Field_Author] visible])
+		if ([db fieldByName:MA_Field_Author].visible)
 		{
-			if (![[theArticle author] isBlank])
-				[summaryString appendFormat:@"%@%@", delimiter, [theArticle author]];
+			if (!theArticle.author.blank)
+				[summaryString appendFormat:@"%@%@", delimiter, theArticle.author];
 		}
 		if (![summaryString isEqualToString:@""])
 			summaryString = [NSMutableString stringWithFormat:@"\n%@", summaryString];
 
 		NSMutableAttributedString * summaryAttributedString = [[NSMutableAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
-		[summaryAttributedString fixFontAttributeInRange:NSMakeRange(0u, [summaryAttributedString length])];
+		[summaryAttributedString fixFontAttributeInRange:NSMakeRange(0u, summaryAttributedString.length)];
 		[theAttributedString appendAttributedString:summaryAttributedString];
 		return theAttributedString;
 	}
@@ -1650,34 +1650,34 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSString * cellString;
 	if ([identifier isEqualToString:MA_Field_Date])
 	{
-		NSDate * date = [theArticle date];
+		NSDate * date = theArticle.date;
 		NSCalendarDate * calDate = [date dateWithCalendarFormat:nil timeZone:nil];
-		cellString = [calDate friendlyDescription];
+		cellString = calDate.friendlyDescription;
 	}
 	else if ([identifier isEqualToString:MA_Field_Folder])
 	{
-		Folder * folder = [db folderFromID:[theArticle folderId]];
-		cellString = [folder name];
+		Folder * folder = [db folderFromID:theArticle.folderId];
+		cellString = folder.name;
 	}
 	else if ([identifier isEqualToString:MA_Field_Author])
 	{
-		cellString = [theArticle author];
+		cellString = theArticle.author;
 	}
 	else if ([identifier isEqualToString:MA_Field_Link])
 	{
-		cellString = [theArticle link];
+		cellString = theArticle.link;
 	}
 	else if ([identifier isEqualToString:MA_Field_Subject])
 	{
-		cellString = [theArticle title];
+		cellString = theArticle.title;
 	}
 	else if ([identifier isEqualToString:MA_Field_Summary])
 	{
-		cellString = [theArticle summary];
+		cellString = theArticle.summary;
 	}
 	else if ([identifier isEqualToString:MA_Field_Enclosure])
 	{
-		cellString = [theArticle enclosure];
+		cellString = theArticle.enclosure;
 	}
 	else
 	{
@@ -1685,8 +1685,8 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
 	
-	theAttributedString = [[NSMutableAttributedString alloc] initWithString:cellString attributes:([theArticle isRead] ? reportCellDict : unreadReportCellDict)];
-	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, [theAttributedString length])];
+	theAttributedString = [[NSMutableAttributedString alloc] initWithString:cellString attributes:(theArticle.read ? reportCellDict : unreadReportCellDict)];
+	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, theAttributedString.length)];
     return theAttributedString;
 }
 
@@ -1697,7 +1697,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (!blockSelectionHandler)
 	{
-		currentSelectedRow = [articleList selectedRow];
+		currentSelectedRow = articleList.selectedRow;
 		[self refreshArticleAtCurrentRow];
 	}
 }
@@ -1707,7 +1707,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
-	NSString * columnName = [tableColumn identifier];
+	NSString * columnName = tableColumn.identifier;
 	[articleController sortByIdentifier:columnName];
 }
 
@@ -1719,13 +1719,13 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (!isInTableInit && !isAppInitialising && !isChangingOrientation)
 	{
-		NSTableColumn * tableColumn = [[notification userInfo] objectForKey:@"NSTableColumn"];
-		Field * field = [[Database sharedManager] fieldByName:[tableColumn identifier]];
-		int oldWidth = [[[notification userInfo] objectForKey:@"NSOldWidth"] intValue];
+		NSTableColumn * tableColumn = notification.userInfo[@"NSTableColumn"];
+		Field * field = [[Database sharedManager] fieldByName:tableColumn.identifier];
+		NSInteger oldWidth = [notification.userInfo[@"NSOldWidth"] integerValue];
 		
-		if (oldWidth != [tableColumn width])
+		if (oldWidth != tableColumn.width)
 		{
-			[field setWidth:[tableColumn width]];
+			field.width = tableColumn.width;
 			[self saveTableSettings];
 		}
 	}
@@ -1746,7 +1746,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)tableView:(NSTableView *)tv willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex 
 {
-	NSString * columnIdentifer = [tableColumn identifier];	
+	NSString * columnIdentifer = tableColumn.identifier;	
 	BOOL isProgressColumn = NO;
 
 	// We need to use a different column for condensed layout vs. table layout.
@@ -1784,13 +1784,13 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSMutableString * fullHTMLText = [[NSMutableString alloc] init];
 	NSMutableString * fullPlainText = [[NSMutableString alloc] init];
 	Database * db = [Database sharedManager];
-	int count = [rows count];
-	int index;
+	NSInteger count = rows.count;
+	NSInteger index;
 	
 	// Set up the pasteboard
-	[pboard declareTypes:[NSArray arrayWithObjects:MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSStringPboardType, NSHTMLPboardType, nil] owner:self];
+	[pboard declareTypes:@[MA_PBoardType_RSSItem, @"WebURLsWithTitlesPboardType", NSStringPboardType, NSHTMLPboardType] owner:self];
 	if (count == 1)
-		[pboard addTypes:[NSArray arrayWithObjects:MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType, nil] owner:self];
+		[pboard addTypes:@[MA_PBoardType_url, MA_PBoardType_urln, NSURLPboardType] owner:self];
 	
 	// Open the HTML string
 	[fullHTMLText appendString:@"<html><body>"];
@@ -1798,12 +1798,12 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	// Get all the articles that are being dragged
 	for (index = 0; index < count; ++index)
 	{
-		int msgIndex = [[rows objectAtIndex:index] intValue];
-		Article * thisArticle = [[articleController allArticles] objectAtIndex:msgIndex];
-		Folder * folder = [db folderFromID:[thisArticle folderId]];
-		NSString * msgText = [thisArticle body];
-		NSString * msgTitle = [thisArticle title];
-		NSString * msgLink = [thisArticle link];
+		NSInteger msgIndex = [rows[index] integerValue];
+		Article * thisArticle = articleController.allArticles[msgIndex];
+		Folder * folder = [db folderFromID:thisArticle.folderId];
+		NSString * msgText = thisArticle.body;
+		NSString * msgTitle = thisArticle.title;
+		NSString * msgLink = thisArticle.link;
 		
 		[arrayOfURLs addObject:msgLink];
 		[arrayOfTitles addObject:msgTitle];
@@ -1812,9 +1812,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		[articleDict setValue:msgTitle forKey:@"rssItemTitle"];
 		[articleDict setValue:msgLink forKey:@"rssItemLink"];
 		[articleDict setValue:msgText forKey:@"rssItemDescription"];
-		[articleDict setValue:[folder name] forKey:@"sourceName"];
-		[articleDict setValue:[folder homePage] forKey:@"sourceHomeURL"];
-		[articleDict setValue:[folder feedURL] forKey:@"sourceRSSURL"];
+		[articleDict setValue:folder.name forKey:@"sourceName"];
+		[articleDict setValue:folder.homePage forKey:@"sourceHomeURL"];
+		[articleDict setValue:folder.feedURL forKey:@"sourceRSSURL"];
 		[arrayOfArticles addObject:articleDict];
 
 		// Plain text
@@ -1838,9 +1838,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 	// Put string on the pasteboard for external drops.
 	[pboard setPropertyList:arrayOfArticles forType:MA_PBoardType_RSSItem];
-	[pboard setPropertyList:[NSArray arrayWithObjects:arrayOfURLs, arrayOfTitles, nil] forType:@"WebURLsWithTitlesPboardType"];
+	[pboard setPropertyList:@[arrayOfURLs, arrayOfTitles] forType:@"WebURLsWithTitlesPboardType"];
 	[pboard setString:fullPlainText forType:NSStringPboardType];
-	[pboard setString:[fullHTMLText stringByEscapingExtendedCharacters] forType:NSHTMLPboardType];
+	[pboard setString:fullHTMLText.stringByEscapingExtendedCharacters forType:NSHTMLPboardType];
 
 	return YES;
 }
@@ -1851,15 +1851,15 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 -(NSArray *)markedArticleRange
 {
 	NSMutableArray * articleArray = nil;
-	if ([articleList numberOfSelectedRows] > 0)
+	if (articleList.numberOfSelectedRows > 0)
 	{
-		NSIndexSet * rowIndexes = [articleList selectedRowIndexes];
-		NSUInteger  rowIndex = [rowIndexes firstIndex];
+		NSIndexSet * rowIndexes = articleList.selectedRowIndexes;
+		NSUInteger  rowIndex = rowIndexes.firstIndex;
 
-		articleArray = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
+		articleArray = [NSMutableArray arrayWithCapacity:rowIndexes.count];
 		while (rowIndex != NSNotFound)
 		{
-			[articleArray addObject:[[articleController allArticles] objectAtIndex:rowIndex]];
+			[articleArray addObject:articleController.allArticles[rowIndex]];
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
@@ -1871,7 +1871,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)webView:(WebView *)sender didStartProvisionalLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [articleText mainFrame])
+	if (frame == articleText.mainFrame)
 	{
 		[self setError:nil];
 		[controller setStatusMessage:NSLocalizedString( isLoadingHTMLArticle ? @"Loading HTML article..." : @"", nil) persist:YES];
@@ -1892,9 +1892,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)webView:(WebView *)sender didFailProvisionalLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == [articleText mainFrame])
+	if (frame == articleText.mainFrame)
 	{
-		[self handleError:error withDataSource: [frame provisionalDataSource]];
+		[self handleError:error withDataSource: frame.provisionalDataSource];
 		[self endMainFrameLoad];
 	}
 }
@@ -1904,11 +1904,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)frame
 {
-	if (frame == [articleText mainFrame])
+	if (frame == articleText.mainFrame)
 	{
 		// Not really an error. A plugin is grabbing the URL and will handle it by itself.
-		if (!([[error domain] isEqualToString:WebKitErrorDomain] && [error code] == WebKitErrorPlugInWillHandleLoad))
-			[self handleError:error withDataSource:[frame dataSource]];
+		if (!([error.domain isEqualToString:WebKitErrorDomain] && error.code == WebKitErrorPlugInWillHandleLoad))
+			[self handleError:error withDataSource:frame.dataSource];
 		[self endMainFrameLoad];
 	}
 }
@@ -1919,14 +1919,14 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[self setError:error];
 	
 	// Load the localized verion of the error page
-	WebFrame * frame = [articleText mainFrame];
+	WebFrame * frame = articleText.mainFrame;
 	NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];
 	if (pathToErrorPage != nil)
 	{
 		NSString *errorMessage = [NSString stringWithContentsOfFile:pathToErrorPage encoding:NSUTF8StringEncoding error:NULL];
-		errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: [error localizedDescription]];
+		errorMessage = [errorMessage stringByReplacingOccurrencesOfString: @"$ErrorInformation" withString: error.localizedDescription];
 		if (errorMessage != nil)
-			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:[[dataSource request] URL]];
+			[frame loadAlternateHTMLString:errorMessage baseURL:[NSURL fileURLWithPath:pathToErrorPage isDirectory:NO] forUnreachableURL:dataSource.request.URL];
 	}		
 }
 
@@ -1950,7 +1950,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
  */
 -(void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)frame
 {
-	if (frame == [articleText mainFrame])
+	if (frame == articleText.mainFrame)
 		[self endMainFrameLoad];
 }
 
@@ -1968,20 +1968,5 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[articleText setFrameLoadDelegate:nil];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
-	markReadTimer=nil;
-	articleListFont=nil;
-	articleListUnreadFont=nil;
-	reportCellDict=nil;
-	unreadReportCellDict=nil;
-	guidOfArticleToSelect=nil;
-	unreadTopLineSelectionDict=nil;
-	selectionDict=nil;
-	unreadTopLineDict=nil;
-	topLineDict=nil;
-	middleLineDict=nil;
-	linkLineDict=nil;
-	bottomLineDict=nil;
-	lastError=nil;
-	currentURL=nil;
 }
 @end

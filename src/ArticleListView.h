@@ -42,8 +42,8 @@
 	IBOutlet FoldersTree * foldersTree;
 	IBOutlet StdEnclosureView * stdEnclosureView;
 
-	int currentSelectedRow;
-	int tableLayout;
+	NSInteger currentSelectedRow;
+	NSInteger tableLayout;
 	BOOL isAppInitialising;
 	BOOL isChangingOrientation;
 	BOOL isInTableInit;
@@ -74,10 +74,10 @@
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
--(int)tableLayout;
--(NSArray *)markedArticleRange;
--(BOOL)canDeleteMessageAtRow:(int)row;
+@property (nonatomic, readonly) NSInteger tableLayout;
+@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
+-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
--(NSURL *)url;
+@property (nonatomic, readonly, copy) NSURL *url;
 -(void)webViewLoadFinished:(NSNotification *)notification;
 @end
