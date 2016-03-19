@@ -611,11 +611,15 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 									 NSLocalizedString(@"Cancel", nil),
 									 nil);
 		if (returnCode == NSAlertAlternateReturn)
+		{
+            [[NSNotificationCenter defaultCenter]  removeObserver:self];
 			return NSTerminateCancel;
+		}
 	}
 	
 	if (!didCompleteInitialisation)
 	{
+        [[NSNotificationCenter defaultCenter]  removeObserver:self];
 		return NSTerminateNow;
 	}
 	
@@ -646,6 +650,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		default: break;
 	}
 	
+    [[NSNotificationCenter defaultCenter]  removeObserver:self];
 	return NSTerminateNow;
 }
 

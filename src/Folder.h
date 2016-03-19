@@ -93,7 +93,6 @@
 -(NSString *)lastUpdateString;
 -(NSString *)username;
 -(NSString *)password;
--(NSDictionary *)attributes;
 -(NSArray *)articlesWithFilter:(NSString *)fstring;
 -(NSInteger)parentId;
 -(NSInteger)itemId;

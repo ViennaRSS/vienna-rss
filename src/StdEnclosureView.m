@@ -22,6 +22,7 @@
 #import "Preferences.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
+#import "HelperFunctions.h"
 
 // Private functions
 @interface StdEnclosureView (Private)
@@ -75,11 +76,16 @@
 	FSRef appRef;
 
 	// Keep this for the download/open
-	enclosureFilename = newFilename;
+	enclosureFilename = [cleanedUpAndEscapedUrlFromString(newFilename) absoluteString];
 
 	NSString * basename = [[NSURL URLWithString:enclosureFilename] lastPathComponent];
     NSString * encodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString * ext = [encodedname pathExtension];
+
+	if (basename==nil)
+	{
+		return;
+	}
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
@@ -166,6 +172,7 @@
  */
 -(void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	enclosureFilename=nil;
 }
 @end

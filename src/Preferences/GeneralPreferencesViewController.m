@@ -39,7 +39,14 @@
 
 
 - (instancetype)init {
-    return [super initWithNibName:@"GeneralPreferencesView" bundle:nil];
+	if ((self = [super initWithNibName:@"GeneralPreferencesView" bundle:nil]) != nil)
+	{
+        // Set up to be notified if preferences change outside this window
+        NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
+        [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+	}
+	return self;
 }
 
 
@@ -50,10 +57,6 @@
     
     [self initializePreferences];
     
-    // Set up to be notified if preferences change outside this window
-    NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
 }
 
 

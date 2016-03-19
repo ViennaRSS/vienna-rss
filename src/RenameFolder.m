@@ -61,6 +61,7 @@
 	if ([[folder name] isEqualToString:newName])
 	{
 		[renameFolderWindow orderOut:sender];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
 		[NSApp endSheet:renameFolderWindow returnCode:0];
 	}
 	else
@@ -71,6 +72,7 @@
 		{
 			[db setFolderName:folderId newName:newName];
 			[renameFolderWindow orderOut:sender];
+            [[NSNotificationCenter defaultCenter] removeObserver:self];
 			[NSApp endSheet:renameFolderWindow returnCode:1];
 		}
 	}
@@ -81,6 +83,7 @@
  */
 -(IBAction)doCancel:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[NSApp endSheet:renameFolderWindow];
 	[renameFolderWindow orderOut:self];
 }

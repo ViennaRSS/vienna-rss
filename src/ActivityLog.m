@@ -219,7 +219,7 @@
  */
 -(NSArray *)allItems
 {
-	return [log copy];
+	return log;
 }
 
 /* dealloc

@@ -155,14 +155,6 @@ static NSArray * iconArray = nil;
 	return childUnreadCount;
 }
 
-/* attributes
- * Return the folder attributes.
- */
--(NSDictionary *)attributes
-{
-	return [attributes copy];
-}
-
 /* feedDescription
  * Returns the feed's description.
  */
