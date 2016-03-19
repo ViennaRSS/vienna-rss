@@ -83,7 +83,9 @@
     NSString * ext = [encodedname pathExtension];
 
 	if (basename==nil)
+	{
 		return;
+	}
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
