@@ -30,14 +30,14 @@ static OSStatus RegisterMyHelpBook(void);
  */
 BOOL hasOSScriptsMenu(void)
 {
-	NSString * pathToUIServerPlist = [@"~/Library/Preferences/com.apple.systemuiserver.plist" stringByExpandingTildeInPath];
+	NSString * pathToUIServerPlist = (@"~/Library/Preferences/com.apple.systemuiserver.plist").stringByExpandingTildeInPath;
 	NSDictionary * properties = [NSDictionary dictionaryWithContentsOfFile:pathToUIServerPlist];
-	NSArray * menuExtras = [properties objectForKey:@"menuExtras"];
-	int index;
+	NSArray * menuExtras = properties[@"menuExtras"];
+	NSInteger index;
 
-	for (index = 0; index < [menuExtras count]; ++index)
+	for (index = 0; index < menuExtras.count; ++index)
 	{
-		if ([[menuExtras objectAtIndex:index] hasSuffix:@"Script Menu.menu"])
+		if ([menuExtras[index] hasSuffix:@"Script Menu.menu"])
 			return YES;
 	}
 	return NO;
@@ -53,10 +53,10 @@ NSString * getDefaultBrowser(void)
 	CFURLRef appURL = nil;
 
 	if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-		registeredAppURL = [(__bridge NSURL *)appURL path];
+		registeredAppURL = ((__bridge NSURL *)appURL).path;
 	if (appURL != nil)
 		CFRelease(appURL);
-	return [[registeredAppURL lastPathComponent] stringByDeletingPathExtension];
+	return registeredAppURL.lastPathComponent.stringByDeletingPathExtension;
 }
 
 /* menuWithAction
@@ -65,14 +65,14 @@ NSString * getDefaultBrowser(void)
  */
 NSMenuItem * menuItemWithAction(SEL theSelector)
 {
-	NSArray * arrayOfMenus = [[NSApp mainMenu] itemArray];
-	int count = [arrayOfMenus count];
-	int index;
+	NSArray * arrayOfMenus = NSApp.mainMenu.itemArray;
+	NSInteger count = arrayOfMenus.count;
+	NSInteger index;
 
 	for (index = 0; index < count; ++index)
 	{
-		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		NSMenu * subMenu = [arrayOfMenus[index] submenu];
+		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
 		if (itemIndex >= 0)
 			return [subMenu itemAtIndex:itemIndex];
 	}
@@ -85,14 +85,14 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
  */
 NSMenuItem * menuItemOfMenuWithAction(NSMenu * menu, SEL theSelector)
 {
-	NSArray * arrayOfMenus = [menu itemArray];
-	int count = [arrayOfMenus count];
-	int index;
+	NSArray * arrayOfMenus = menu.itemArray;
+	NSInteger count = arrayOfMenus.count;
+	NSInteger index;
 	
 	for (index = 0; index < count; ++index)
 	{
-		NSMenu * subMenu = [[arrayOfMenus objectAtIndex:index] submenu];
-		int itemIndex = [subMenu indexOfItemWithTarget:[NSApp delegate] andAction:theSelector];
+		NSMenu * subMenu = [arrayOfMenus[index] submenu];
+		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
 		if (itemIndex >= 0)
 			return [subMenu itemAtIndex:itemIndex];
 	}
@@ -122,7 +122,7 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 {
 	NSURL *urlToLoad = nil;
 	NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
-	[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+	[pasteboard declareTypes:@[NSStringPboardType] owner:nil];
 	@try
 	{
 		if ([pasteboard setString:theUrl forType:NSStringPboardType])
@@ -148,7 +148,7 @@ NSURL * cleanedUpAndEscapedUrlFromString(NSString * theUrl)
 NSMenuItem * copyOfMenuItemWithAction(SEL theSelector)
 {
 	NSMenuItem * item = menuItemWithAction(theSelector);
-	return (item) ? [[NSMenuItem alloc] initWithTitle:[item title] action:theSelector keyEquivalent:@""] : nil;
+	return (item) ? [[NSMenuItem alloc] initWithTitle:item.title action:theSelector keyEquivalent:@""] : nil;
 }
 
 /* menuWithTitleAndAction
@@ -183,7 +183,7 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 				if ([fileName isEqualToString:@".DS_Store"])
 					continue;
 
-				[pathMappings setValue:fullPath forKey:[fileName stringByDeletingPathExtension]];
+				[pathMappings setValue:fullPath forKey:fileName.stringByDeletingPathExtension];
 			}
 		}
 	}
@@ -200,7 +200,7 @@ BOOL isAccessible(NSString * urlString)
 	
 	NSURL * url = [NSURL URLWithString:urlString];
 
-	target = SCNetworkReachabilityCreateWithName(NULL, [[url host] UTF8String]);
+	target = SCNetworkReachabilityCreateWithName(NULL, url.host.UTF8String);
     if (target!= nil)
     {
         ok = SCNetworkReachabilityGetFlags(target, &flags);
@@ -244,7 +244,7 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
 					  NSLocalizedString(@"OK", nil),
 					  nil,
 					  nil,
-					  [NSApp mainWindow],
+					  NSApp.mainWindow,
 					  nil,
 					  nil,
 					  nil, nil,

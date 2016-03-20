@@ -18,22 +18,12 @@
     NSString * enclosure;
 }
 
-// Getters
--(NSString *)title;
--(NSString *)description;
--(NSString *)author;
--(NSString *)guid;
--(NSDate *)date;
--(NSString *)link;
--(NSString *)enclosure;
-
-// Setters
--(void)setTitle:(NSString *)newTitle;
--(void)setDescription:(NSString *)newDescription;
--(void)setAuthor:(NSString *)newAuthor;
--(void)setDate:(NSDate *)newDate;
--(void)setGuid:(NSString *)newGuid;
--(void)setLink:(NSString *)newLink;
--(void)setEnclosure:(NSString *)newEnclosure;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *author;
+@property (nonatomic, copy) NSString *guid;
+@property (nonatomic, copy) NSDate *date;
+@property (nonatomic, copy) NSString *link;
+@property (nonatomic, copy) NSString *enclosure;
 
 @end

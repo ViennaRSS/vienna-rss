@@ -25,7 +25,7 @@
 /* initTextCell
  * Initialise a new TextFieldCell subclass.
  */
--(id)initTextCell:(NSString *)inStr
+-(instancetype)initTextCell:(NSString *)inStr
 {
 	if ((self = [super initTextCell:inStr]) != nil)
 	{
@@ -40,7 +40,7 @@
 -(void)setHasSecureImage:(BOOL)flag
 {
 	hasSecureImage = flag;
-	[(NSControl*)[self controlView] calcSize];
+	[(NSControl*)self.controlView calcSize];
 }
 
 /* hasSecureImage
@@ -57,7 +57,7 @@
  */
 -(NSRect)drawingRectForBounds:(NSRect)theRect
 {
-	const float imageSpace = 19.0;
+	const CGFloat imageSpace = 19.0;
 
 	theRect.origin.x += imageSpace;
 	theRect.size.width -= imageSpace;

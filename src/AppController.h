@@ -30,7 +30,8 @@
 #import <AppKit/AppKit.h>
 #import "CDEvents.h"
 
-#define APPCONTROLLER (AppController *)[NSApp delegate]
+#define APPCONTROLLER ((AppController *)[NSApp delegate])
+#define APP ((ViennaApp *)NSApp)
 
 @class NewPreferencesController;
 @class FoldersTree;
@@ -89,10 +90,10 @@
 	NSMutableDictionary * scriptPathMappings;
 	NSMenu * appDockMenu;
 	NSStatusItem * appStatusItem;
-	int progressCount;
+	NSInteger progressCount;
 	NSDictionary * standardURLs;
 	NSTimer * checkTimer;
-	int lastCountOfUnread;
+	NSInteger lastCountOfUnread;
 	BOOL isStatusBarVisible;
 	NSString * persistedStatusText;
 	NSMenuItem * scriptsMenuItem;
@@ -198,29 +199,27 @@
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
--(void)selectFolder:(int)folderId;
+-(void)selectFolder:(NSInteger)folderId;
 -(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
 -(void)createNewGoogleReaderSubscription:(NSString *)url underFolder:(NSInteger)parentId withTitle:(NSString*)title afterChild:(NSInteger)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
--(NSString *)filterString;
--(void)setFilterString:(NSString *)newFilterString;
--(NSString *)searchString;
--(void)setSearchString:(NSString *)newSearchString;
--(Article *)selectedArticle;
--(int)currentFolderId;
--(BOOL)isConnecting;
+@property (nonatomic, copy) NSString *filterString;
+@property (nonatomic, copy) NSString *searchString;
+@property (nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly) NSInteger currentFolderId;
+@property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
 -(NSDictionary *)standardURLs;
--(BrowserView *)browserView;
--(NSArray *)folders;
+@property (nonatomic, readonly, strong) BrowserView *browserView;
+@property (nonatomic, readonly, copy) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)toggleOptionKeyButtonStates;
--(NSMenu *)folderMenu;
+@property (nonatomic, readonly, copy) NSMenu *folderMenu;
 -(void)updateStatusBarFilterButtonVisibility;
--(NSLayoutManager *)layoutManager;
--(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag;
+@property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
+-(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag;
 -(void)growlNotify:(id)notifyContext title:(NSString *)title description:(NSString *)description notificationName:(NSString *)notificationName;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;

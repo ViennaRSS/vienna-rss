@@ -34,7 +34,7 @@
 /* initWithFrame
  * Initialise the standard enclosure view.
  */
--(id)initWithFrame:(NSRect)frameRect
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil)
 	{
@@ -78,9 +78,9 @@
 	// Keep this for the download/open
 	enclosureFilename = [cleanedUpAndEscapedUrlFromString(newFilename) absoluteString];
 
-	NSString * basename = [[NSURL URLWithString:enclosureFilename] lastPathComponent];
+	NSString * basename = [NSURL URLWithString:enclosureFilename].lastPathComponent;
     NSString * encodedname = [basename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString * ext = [encodedname pathExtension];
+    NSString * ext = encodedname.pathExtension;
 
 	if (basename==nil)
 	{
@@ -94,7 +94,7 @@
 	{
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
 		[downloadButton sizeToFit];
-		[downloadButton setAction:@selector(downloadFile:)];
+		downloadButton.action = @selector(downloadFile:);
 		[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
 	}
 	else
@@ -116,27 +116,27 @@
 		{
 			[downloadButton setTitle:NSLocalizedString(@"Play", nil)];
 			[downloadButton sizeToFit];
-			[downloadButton setAction:@selector(openFile:)];
+			downloadButton.action = @selector(openFile:);
 			[filenameLabel setStringValue:NSLocalizedString(@"Click the Play button to play this enclosure in iTunes.", nil)];
 		}
 		else
 		{
 			[downloadButton setTitle:NSLocalizedString(@"Open", nil)];
 			[downloadButton sizeToFit];
-			[downloadButton setAction:@selector(openFile:)];
+			downloadButton.action = @selector(openFile:);
 			[filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
 		}
 	}
 	
 	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:ext];
-	[fileImage setImage:iconImage];
-	NSDictionary *linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-															enclosureFilename, NSLinkAttributeName,
-															[NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f], NSForegroundColorAttributeName,
-															[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName,
-															nil];
+	fileImage.image = iconImage;
+	NSDictionary *linkAttributes = @{
+									 NSLinkAttributeName: enclosureFilename,
+									 NSForegroundColorAttributeName: [NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f],
+									 NSUnderlineStyleAttributeName: @YES,
+									 };
 	NSAttributedString * link = [[NSAttributedString alloc] initWithString:encodedname attributes:linkAttributes];
-	[filenameField setAttributedStringValue:link];
+	filenameField.attributedStringValue = link;
 }
 
 /* downloadFile
@@ -152,7 +152,7 @@
  */
 -(IBAction)openFile:(id)sender
 {
-	NSString * theFilename = [enclosureFilename lastPathComponent];
+	NSString * theFilename = enclosureFilename.lastPathComponent;
 	NSString * destPath = [DownloadManager fullDownloadPath:theFilename];
 
 	[[NSWorkspace sharedWorkspace] openFile:destPath];

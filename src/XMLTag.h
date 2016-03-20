@@ -27,6 +27,6 @@
 
 // Public functions
 +(NSArray *)parserFromData:(NSData *)xmlData;
--(NSString *)name;
--(NSDictionary *)attributes;
+@property (nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly, copy) NSDictionary *attributes;
 @end

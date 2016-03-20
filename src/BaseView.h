@@ -21,17 +21,17 @@
 @class WebView;
 @protocol BaseView
 @required
-	-(void)performFindPanelAction:(int)tag;
+	-(void)performFindPanelAction:(NSInteger)tag;
 	-(void)printDocument:(id)sender;
 	-(IBAction)handleGoForward:(id)sender;
 	-(IBAction)handleGoBack:(id)sender;
-	-(BOOL)canGoForward;
-	-(BOOL)canGoBack;
-	-(NSString *)viewLink;
-	-(NSView *)mainView;
-	-(WebView *)webView;
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger )flags;
+	@property (nonatomic, readonly) BOOL canGoForward;
+	@property (nonatomic, readonly) BOOL canGoBack;
+	@property (nonatomic, readonly, copy) NSString *viewLink;
+	@property (nonatomic, readonly, strong) NSView *mainView;
+	@property (nonatomic, readonly, strong) WebView *webView;
+	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional
-	-(NSString *)viewTitle;
+	@property (nonatomic, readonly, copy) NSString *viewTitle;
 @end
 

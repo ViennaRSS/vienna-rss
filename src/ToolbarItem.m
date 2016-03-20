@@ -32,11 +32,11 @@
  */
 -(void)validate
 {
-	if (![NSApp isActive])
+	if (!NSApp.active)
 		[self setEnabled:NO];
 	else 
 		[self setEnabled:YES];
-	id target = [self target];
+	id target = self.target;
 	if ([target respondsToSelector:@selector(validateToolbarItem:)])
 		[self setEnabled:[target validateToolbarItem:self]];
 }
@@ -47,8 +47,8 @@
  */
 -(void)setEnabled:(BOOL)enabled
 {
-	[super setEnabled:enabled];
-	[[self menuFormRepresentation] setEnabled:enabled];
+	super.enabled = enabled;
+	self.menuFormRepresentation.enabled = enabled;
 }
 
 /* setView
@@ -56,10 +56,10 @@
  */
 -(void)setView:(NSView *)theView
 {
-	NSRect fRect = [theView frame];
-	[super setView:theView];
-	[self setMinSize:fRect.size];
-	[self setMaxSize:fRect.size];
+	NSRect fRect = theView.frame;
+	super.view = theView;
+	self.minSize = fRect.size;
+	self.maxSize = fRect.size;
 }
 
 /* compositeButtonImage
@@ -71,9 +71,9 @@
 {
 	NSString * theImage = [NSString stringWithFormat:@"%@.tiff", imageName];
 	NSString * theSmallImage = [NSString stringWithFormat:@"small%@.tiff", imageName];
-	NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+	NSString * resourcePath = [NSBundle mainBundle].resourcePath;
 	NSImage * userImage = [[NSImage alloc] initWithContentsOfFile:[path stringByAppendingPathComponent:theImage]];
-	NSSize userImageSize = [userImage size];
+	NSSize userImageSize = userImage.size;
 	NSRect userImageRect = NSMakeRect(0.0, 0.0, userImageSize.width, userImageSize.height);
 
 	// May not necessarily be a small image in which case we'd need to synthesize one from the large one
@@ -83,7 +83,7 @@
 
 	if (smallUserImage != nil)
 	{
-		smallUserImageSize = [smallUserImage size];
+		smallUserImageSize = smallUserImage.size;
 		smallUserImageRect = NSMakeRect(0.0, 0.0, smallUserImageSize.width, smallUserImageSize.height);
 	}
 	else
@@ -94,25 +94,25 @@
 	}
 
 	NSImage * buttonImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButton.tiff"]];
-	NSSize buttonSize = [buttonImage size];
+	NSSize buttonSize = buttonImage.size;
 	[buttonImage lockFocus];
 	[userImage drawInRect:CenterRect(buttonSize, userImageSize) fromRect:userImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[buttonImage unlockFocus];
 
 	NSImage * pressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankButtonPressedBurned.tiff"]];
-	buttonSize = [pressedImage size];
+	buttonSize = pressedImage.size;
 	[pressedImage lockFocus];
 	[userImage drawInRect:CenterRect(buttonSize, userImageSize) fromRect:userImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[pressedImage unlockFocus];
 	
 	NSImage * smallNormalImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButton.tiff"]];
-	buttonSize = [smallNormalImage size];
+	buttonSize = smallNormalImage.size;
 	[smallNormalImage lockFocus];
 	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[smallNormalImage unlockFocus];
 
 	NSImage * smallPressedImage = [[NSImage alloc] initWithContentsOfFile:[resourcePath stringByAppendingPathComponent:@"blankSmallButtonPressed.tiff"]];
-	buttonSize = [smallPressedImage size];
+	buttonSize = smallPressedImage.size;
 	[smallPressedImage lockFocus];
 	[smallUserImage drawInRect:CenterRect(buttonSize, smallUserImageSize) fromRect:smallUserImageRect operation:NSCompositeSourceOver fraction:1.0];
 	[smallPressedImage unlockFocus];
@@ -147,21 +147,21 @@
  */
 -(void)setButtonImages:(NSImage *)buttonImage pressedImage:(NSImage *)pressedImage smallNormalImage:(NSImage *)smallNormalImage smallPressedImage:(NSImage *)smallPressedImage
 {
-	NSSize buttonSize = [buttonImage size];
+	NSSize buttonSize = buttonImage.size;
 	ToolbarButton * button = [[ToolbarButton alloc] initWithFrame:NSMakeRect(0, 0, buttonSize.width, buttonSize.height) withItem:self];
 
-	[button setImage:buttonImage];
-	[button setAlternateImage:pressedImage];
+	button.image = buttonImage;
+	button.alternateImage = pressedImage;
 	[button setSmallImage:smallNormalImage];
 	[button setSmallAlternateImage:smallPressedImage];
 	
 	// Save the current target and action and reapply them afterward because assigning a view
 	// causes them to be deleted.
-	id currentTarget = [self target];
-	SEL currentAction = [self action];
+	id currentTarget = self.target;
+	SEL currentAction = self.action;
 	[self setView:button];
-	[self setTarget:currentTarget];
-	[self setAction:currentAction];
+	self.target = currentTarget;
+	self.action = currentAction;
 
 }
 
@@ -177,22 +177,22 @@
 	NSString * smallPressedImage = [NSString stringWithFormat:@"%@SmallPressed.tiff", imageName];
 	
 	NSImage * buttonImage = [NSImage imageNamed:normalImage];
-	NSSize buttonSize = [buttonImage size];
+	NSSize buttonSize = buttonImage.size;
 	PopupButton * button = [[PopupButton alloc] initWithFrame:NSMakeRect(0, 0, buttonSize.width, buttonSize.height) withItem:self];
 	
-	[button setImage:buttonImage];
-	[button setAlternateImage:[NSImage imageNamed:pressedImage]];
+	button.image = buttonImage;
+	button.alternateImage = [NSImage imageNamed:pressedImage];
 	[button setSmallImage:[NSImage imageNamed:smallNormalImage]];
 	[button setSmallAlternateImage:[NSImage imageNamed:smallPressedImage]];
 	
 	[self setView:button];
 	
 	NSMenuItem * menuItem = [[NSMenuItem alloc] init];
-	[button setTheMenu:theMenu];
+	button.theMenu = theMenu;
 	[button setPopupBelow:YES];
-	[menuItem setSubmenu:[button theMenu]];
-	[menuItem setTitle:[self label]];
-	[self setMenuFormRepresentation:menuItem];
+	menuItem.submenu = button.theMenu;
+	menuItem.title = self.label;
+	self.menuFormRepresentation = menuItem;
 	
 }
 @end

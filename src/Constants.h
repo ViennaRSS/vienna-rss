@@ -85,8 +85,8 @@ extern float MA_Default_Read_Interval;
 extern NSInteger MA_Default_MinimumFontSize;
 extern NSInteger MA_Default_AutoExpireDuration;
 extern NSInteger MA_Default_Check_Frequency;
-extern float MA_Default_Main_Window_Min_Width;
-extern float MA_Default_Main_Window_Min_Height;
+extern CGFloat MA_Default_Main_Window_Min_Width;
+extern CGFloat MA_Default_Main_Window_Min_Height;
 extern NSInteger MA_Default_ConcurrentDownloads;
 
 extern NSString * MA_PBoardType_RSSItem;
@@ -124,20 +124,20 @@ extern NSString * MA_PBoardType_urln;
 #define MA_ViewTag_Filterbar			1
 #define MA_ViewTag_Statusbar			2
 
-const AEKeyword EditDataItemAppleEventClass;
-const AEKeyword EditDataItemAppleEventID;
-const AEKeyword DataItemTitle;
-const AEKeyword DataItemDescription;
-const AEKeyword DataItemSummary;
-const AEKeyword DataItemLink;
-const AEKeyword DataItemPermalink;
-const AEKeyword DataItemSubject;
-const AEKeyword DataItemCreator;
-const AEKeyword DataItemCommentsURL;
-const AEKeyword DataItemGUID;
-const AEKeyword DataItemSourceName;
-const AEKeyword DataItemSourceHomeURL;
-const AEKeyword DataItemSourceFeedURL;
+extern AEKeyword EditDataItemAppleEventClass;
+extern AEKeyword EditDataItemAppleEventID;
+extern AEKeyword DataItemTitle;
+extern AEKeyword DataItemDescription;
+extern AEKeyword DataItemSummary;
+extern AEKeyword DataItemLink;
+extern AEKeyword DataItemPermalink;
+extern AEKeyword DataItemSubject;
+extern AEKeyword DataItemCreator;
+extern AEKeyword DataItemCommentsURL;
+extern AEKeyword DataItemGUID;
+extern AEKeyword DataItemSourceName;
+extern AEKeyword DataItemSourceHomeURL;
+extern AEKeyword DataItemSourceFeedURL;
 
 // Layout styles
 #define MA_Layout_Report				1
@@ -154,7 +154,7 @@ const AEKeyword DataItemSourceFeedURL;
 #define MA_EmptyTrash_WithWarning		2
 
 // Sync types
-typedef enum {
+typedef NS_ENUM(unsigned int, SyncTypes) {
     MA_Sync_Subscribe,
     MA_Sync_Unsubscribe,
     MA_Sync_Delete,
@@ -166,6 +166,6 @@ typedef enum {
     MA_Sync_Mark_Unread,
     MA_Sync_Mark_Flagged,
     MA_Sync_Mark_Unflagged
-} SyncTypes;
+};
 
 //extern NSString * MA_Sync_FolderSeparator;

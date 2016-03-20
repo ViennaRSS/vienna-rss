@@ -26,12 +26,12 @@
 /* init
  * Initialise a new ActivityItem object
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setName:@""];
-		[self setStatus:@""];
+		self.name = @"";
+		self.status = @"";
 		details = nil;
 	}
 	return self;
@@ -115,16 +115,8 @@
 	return [NSString stringWithFormat:@"{'%@', '%@'}", name, status];
 }
 
-/* dealloc
- * Clean up before we expire.
- */
--(void)dealloc
-{
-	details=nil;
-	status=nil;
-	name=nil;
-}
 @end
+
 
 @implementation ActivityLog
 
@@ -145,7 +137,7 @@
 /* init
  * Initialise a new log instance.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -160,8 +152,8 @@
  */
 -(void)handleWillDeleteFolder:(NSNotification *)nc
 {
-	Folder * folder = [[Database sharedManager] folderFromID:[[nc object] intValue]];
-	ActivityItem * item = [self itemByName:[folder name]];
+	Folder * folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
+	ActivityItem * item = [self itemByName:folder.name];
 	[log removeObject:item];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ActivityLogChange" object:nil];
 }
@@ -171,14 +163,14 @@
  * return, indexPointer is the index of the item or the index of the item just
  * where the status item should be if it was found.
  */
--(ActivityItem *)getStatus:(NSString *)name index:(int *)indexPointer
+-(ActivityItem *)getStatus:(NSString *)name index:(NSInteger *)indexPointer
 {
-	int indexOfItem = 0;
+	NSInteger indexOfItem = 0;
 	ActivityItem * item;
 
 	for (item in log)
 	{
-		if ([[item name] caseInsensitiveCompare:name] == NSOrderedSame)
+		if ([item.name caseInsensitiveCompare:name] == NSOrderedSame)
 			break;
 		++indexOfItem;
 	}
@@ -193,15 +185,15 @@
 -(ActivityItem *)itemByName:(NSString *)theName
 {
 	ActivityItem * item;
-	int insertionIndex;
+	NSInteger insertionIndex;
 
 	if ((item = [self getStatus:theName index:&insertionIndex]) == nil)
 	{
 		item = [[ActivityItem alloc] init];
-		[item setName:theName];
+		item.name = theName;
 		[log insertObject:item atIndex:insertionIndex];
 		
-		item = [log objectAtIndex:insertionIndex];
+		item = log[insertionIndex];
 	}
 	return item;
 }
@@ -228,6 +220,5 @@
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	log=nil;
 }
 @end

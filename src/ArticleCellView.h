@@ -14,7 +14,7 @@
 {
 	AppController * controller;
 	BOOL inProgress;
-	int folderId;
+	NSInteger folderId;
 	NSUInteger articleRow;
 	NSTableView *__weak _listView;
 }
@@ -22,7 +22,7 @@
 @property (readonly, strong)ArticleView *articleView;
 @property (readonly, strong)NSProgressIndicator * progressIndicator;
 @property BOOL inProgress;
-@property int folderId;
+@property NSInteger folderId;
 @property NSUInteger articleRow;
 @property (nonatomic, weak) NSTableView *listView;
 

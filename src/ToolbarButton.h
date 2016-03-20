@@ -30,8 +30,8 @@
 }
 
 // Public functions
--(NSString *)itemIdentifier;
--(id)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)tbItem;
+@property (nonatomic, readonly, copy) NSString *itemIdentifier;
+-(instancetype)initWithFrame:(NSRect)frameRect withItem:(NSToolbarItem *)tbItem /*NS_DESIGNATED_INITIALIZER*/;
 -(void)setSmallImage:(NSImage *)image;
 -(void)setSmallAlternateImage:(NSImage *)image;
 @end

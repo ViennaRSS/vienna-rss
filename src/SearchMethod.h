@@ -28,13 +28,10 @@
 +(SearchMethod *)searchCurrentWebPageMethod;
 +(NSArray *)builtInSearchMethods;
 
--(id)initWithDictionary:(NSDictionary *)dict; // Designated initializer.
+-(instancetype)initWithDictionary:(NSDictionary *)dict /*NS_DESIGNATED_INITIALIZER*/;
 -(NSURL *)queryURLforSearchString:(NSString *)searchString;
--(NSString *)searchQueryString;
--(void)setSearchQueryString:(NSString *)newQueryString;
--(NSString *)friendlyName;
--(void)setFriendlyName:(NSString *)newName;
--(void)setHandler:(SEL)theHandler;
--(SEL)handler;
+@property (nonatomic, copy) NSString *searchQueryString;
+@property (nonatomic, copy) NSString *friendlyName;
+@property (nonatomic) SEL handler;
 
 @end

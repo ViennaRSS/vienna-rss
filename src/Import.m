@@ -31,9 +31,9 @@
  */
 + (void)importFromFile:(NSString *)importFileName
 {
-    NSData * data = [NSData dataWithContentsOfFile:[importFileName stringByExpandingTildeInPath]];
+    NSData * data = [NSData dataWithContentsOfFile:importFileName.stringByExpandingTildeInPath];
     BOOL hasError = NO;
-    int countImported = 0;
+    NSInteger countImported = 0;
     
     if (data != nil)
     {
@@ -67,28 +67,23 @@
 /* importSubscriptionGroup
  * Import one group of an OPML subscription tree.
  */
-+ (int)importSubscriptionGroup:(NSArray *)outlines underParent:(int)parentId
++ (NSInteger)importSubscriptionGroup:(NSArray *)outlines underParent:(NSInteger)parentId
 {
-	int countImported = 0;
+	NSInteger countImported = 0;
 	
 	for (NSXMLElement *outlineElement in outlines)
 	{
-        NSString *feedText = [[[outlineElement attributeForName:@"text"]
-                                stringValue] stringByEscapingExtendedCharacters];
-        NSString *feedDescription = [[[outlineElement attributeForName:@"description"]
-                                stringValue] stringByEscapingExtendedCharacters];
-        NSString *feedURL = [[[outlineElement attributeForName:@"xmlUrl"]
-                              stringValue] stringByEscapingExtendedCharacters];
-        NSString *feedHomePage = [[[outlineElement attributeForName:@"htmlUrl"]
-                              stringValue] stringByEscapingExtendedCharacters];
+        NSString *feedText = ([outlineElement attributeForName:@"text"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedDescription = ([outlineElement attributeForName:@"description"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedURL = ([outlineElement attributeForName:@"xmlUrl"].stringValue).stringByEscapingExtendedCharacters;
+        NSString *feedHomePage = ([outlineElement attributeForName:@"htmlUrl"].stringValue).stringByEscapingExtendedCharacters;
         
         Database * dbManager = [Database sharedManager];
 
 		// Some OPML exports use 'title' instead of 'text'.
-		if (feedText == nil || [feedText length] == 0u)
+		if (feedText == nil || feedText.length == 0u)
 		{
-            NSString * feedTitle = [[[outlineElement attributeForName:@"title"]
-                                     stringValue] stringByEscapingExtendedCharacters];
+            NSString * feedTitle = ([outlineElement attributeForName:@"title"].stringValue).stringByEscapingExtendedCharacters;
             if (feedTitle != nil) {
 				feedText = feedTitle;
             }
@@ -96,7 +91,7 @@
 
 		// Do double-decoding of the title to get around a bug in some commercial newsreaders
 		// where they double-encode characters
-		feedText = [feedText stringByUnescapingExtendedCharacters];
+		feedText = feedText.stringByUnescapingExtendedCharacters;
 		
 		if (feedURL == nil)
 		{
@@ -104,7 +99,7 @@
 			// the sub-group items under the parent.
 			if (feedText != nil)
 			{
-				int folderId = [dbManager addFolder:parentId afterChild:-1
+				NSInteger folderId = [dbManager addFolder:parentId afterChild:-1
                                          folderName:feedText type:MA_Group_Folder
                                      canAppendIndex:NO];
                 if (folderId == -1) {
@@ -116,10 +111,10 @@
 		else if (feedText != nil)
 		{
 			Folder * folder;
-			int folderId;
+			NSInteger folderId;
 
 			if ((folder = [dbManager folderFromFeedURL:feedURL]) != nil)
-				folderId = [folder itemId];
+				folderId = folder.itemId;
 			else
 			{
 				folderId = [dbManager addRSSFolder:feedText underParent:parentId afterChild:-1 subscriptionURL:feedURL];
