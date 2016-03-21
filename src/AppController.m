@@ -650,7 +650,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		default: break;
 	}
 	
-    [[NSNotificationCenter defaultCenter]  removeObserver:self];
 	return NSTerminateNow;
 }
 
@@ -692,6 +691,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 		// Finally save preferences
 		[prefs savePreferences];
 		
+        [[NSNotificationCenter defaultCenter]  removeObserver:self];
 	}
 	[db close];
 }
