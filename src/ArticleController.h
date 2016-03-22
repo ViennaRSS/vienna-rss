@@ -44,7 +44,7 @@
 	NSView<ArticleBaseView, BaseView> * mainArticleView;
 	NSArray * currentArrayOfArticles;
 	NSArray * folderArrayOfArticles;
-	int currentFolderId;
+	NSInteger currentFolderId;
 	NSDictionary * articleSortSpecifiers;
 	NSString * sortColumnIdentifier;
 	BackTrackArray * backtrackArray;
@@ -61,24 +61,24 @@
 
 // Public functions
 -(NSView<ArticleBaseView, BaseView> *)mainArticleView;
--(void)setLayout:(int)newLayout;
--(int)currentFolderId;
--(Article *)selectedArticle;
--(NSArray *)markedArticleRange;
+-(void)setLayout:(NSInteger)newLayout;
+@property (nonatomic, readonly) NSInteger currentFolderId;
+@property (nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 -(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
--(NSArray *)allArticles;
+@property (nonatomic, readonly, copy) NSArray *allArticles;
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
--(NSString *)searchPlaceholderString;
+@property (nonatomic, readonly, copy) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)refreshCurrentFolder;
--(void)displayFolder:(int)newFolderId;
+-(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
--(NSString *)sortColumnIdentifier;
--(BOOL)sortIsAscending;
+@property (nonatomic, readonly, copy) NSString *sortColumnIdentifier;
+@property (nonatomic, readonly) BOOL sortIsAscending;
 -(void)ensureSelectedArticle:(BOOL)singleSelection;
 -(void)sortByIdentifier:(NSString *)columnName;
 -(void)sortAscending:(BOOL)newAscending;
@@ -91,7 +91,7 @@
 -(void)addBacktrack:(NSString *)guid;
 -(void)goForward;
 -(void)goBack;
--(BOOL)canGoForward;
--(BOOL)canGoBack;
+@property (nonatomic, readonly) BOOL canGoForward;
+@property (nonatomic, readonly) BOOL canGoBack;
 -(void)setArticleToPreserve:(Article *)article;
 @end

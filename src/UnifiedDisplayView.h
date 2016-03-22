@@ -34,7 +34,7 @@
     IBOutlet NSTableView *articleList;
 	IBOutlet FoldersTree * foldersTree;
 
-	int currentSelectedRow;
+	NSInteger currentSelectedRow;
 	BOOL blockSelectionHandler;
 	BOOL blockMarkRead;
 
@@ -47,7 +47,7 @@
 // Public functions
 -(void)updateAlternateMenuTitle;
 -(void)saveTableSettings;
--(NSArray *)markedArticleRange;
--(BOOL)canDeleteMessageAtRow:(int)row;
+@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
+-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 - (void)webViewLoadFinished:(NSNotification *)notification;
 @end

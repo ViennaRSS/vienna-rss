@@ -68,12 +68,11 @@
 // Accessor functions
 -(void)setController:(AppController *)theController;
 -(void)loadURL:(NSURL *)url inBackground:(BOOL)openInBackgroundFlag;
--(NSURL *)url;
--(void)setViewTitle:(NSString *)newTitle;
--(NSString *)viewTitle;
--(BOOL)isLoading;
--(BOOL)canGoBack;
--(BOOL)canGoForward;
+@property (nonatomic, readonly, copy) NSURL *url;
+@property (nonatomic, copy) NSString *viewTitle;
+@property (nonatomic, getter=isLoading, readonly) BOOL loading;
+@property (nonatomic, readonly) BOOL canGoBack;
+@property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
 @end

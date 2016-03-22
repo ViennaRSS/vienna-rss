@@ -25,7 +25,7 @@
 /* init
  * Init an empty Field object.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -43,17 +43,17 @@
 /* initWithCoder
  * Initalises a decoded object
  */
--(id)initWithCoder:(NSCoder *)coder
+-(instancetype)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil)
 	{
-		[self setDisplayName:[coder decodeObject]];
-		[self setName:[coder decodeObject]];
-		[self setSqlField:[coder decodeObject]];
+		displayName = [coder decodeObject];
+		name = [coder decodeObject];
+		sqlField = [coder decodeObject];
 		[coder decodeValueOfObjCType:@encode(bool) at:&visible];
-		[coder decodeValueOfObjCType:@encode(int) at:&width];
-		[coder decodeValueOfObjCType:@encode(int) at:&tag];
-		[coder decodeValueOfObjCType:@encode(int) at:&type];
+		[coder decodeValueOfObjCType:@encode(NSInteger) at:&width];
+		[coder decodeValueOfObjCType:@encode(NSInteger) at:&tag];
+		[coder decodeValueOfObjCType:@encode(NSInteger) at:&type];
 	}
 	return self;
 }
@@ -116,7 +116,7 @@
 /* setWidth
  * Sets the default width of the field in the article list view.
  */
--(void)setWidth:(int)newWidth
+-(void)setWidth:(NSInteger)newWidth
 {
 	width = newWidth;
 }
@@ -164,7 +164,7 @@
 /* width
  * Returns the default width of the field in the article list view.
  */
--(int)width
+-(NSInteger)width
 {
 	return width;
 }
@@ -182,7 +182,7 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@', tag=%ld, width=%d, visible=%d)", name, displayName, sqlField, (long)tag, width, visible];
+	return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@', tag=%ld, width=%ld, visible=%d)", name, displayName, sqlField, (long)tag, (long)width, visible];
 }
 
 /* encodeWithCoder
@@ -194,18 +194,9 @@
 	[coder encodeObject:name];
 	[coder encodeObject:sqlField];
 	[coder encodeValueOfObjCType:@encode(bool) at:&visible];
-	[coder encodeValueOfObjCType:@encode(int) at:&width];
-	[coder encodeValueOfObjCType:@encode(int) at:&tag];
-	[coder encodeValueOfObjCType:@encode(int) at:&type];
+	[coder encodeValueOfObjCType:@encode(NSInteger) at:&width];
+	[coder encodeValueOfObjCType:@encode(NSInteger) at:&tag];
+	[coder encodeValueOfObjCType:@encode(NSInteger) at:&type];
 }
 
-/* dealloc
- * Release our resources.
- */
--(void)dealloc
-{
-	sqlField=nil;
-	displayName=nil;
-	name=nil;
-}
 @end

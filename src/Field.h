@@ -21,13 +21,14 @@
 #import <Cocoa/Cocoa.h>
 
 // Enum of valid field types.
-typedef enum {
+
+typedef NS_ENUM(NSUInteger, FieldType) {
 	MA_FieldType_Integer = 1,
 	MA_FieldType_Date,
 	MA_FieldType_String,
 	MA_FieldType_Flag,
 	MA_FieldType_Folder
-} FieldType;
+};
 
 @interface Field : NSObject <NSCoding> {
 	NSString * name;
@@ -35,23 +36,16 @@ typedef enum {
 	NSString * sqlField;
 	FieldType type;
 	NSInteger tag;
-	int width;
+	NSInteger width;
 	BOOL visible;
 }
 
-// Accessor functions
--(void)setName:(NSString *)newName;
--(void)setDisplayName:(NSString *)newDisplayName;
--(void)setSqlField:(NSString *)newSqlField;
--(void)setType:(FieldType)newType;
--(void)setTag:(NSInteger)newTag;
--(void)setVisible:(BOOL)flag;
--(void)setWidth:(int)newWidth;
--(NSString *)name;
--(NSString *)displayName;
--(NSString *)sqlField;
--(NSInteger)tag;
--(FieldType)type;
--(int)width;
--(BOOL)visible;
+// Accessors
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *displayName;
+@property (nonatomic, copy) NSString *sqlField;
+@property (nonatomic) NSInteger tag;
+@property (nonatomic) FieldType type;
+@property (nonatomic) NSInteger width;
+@property (nonatomic) BOOL visible;
 @end

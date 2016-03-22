@@ -24,14 +24,14 @@
 @interface ArticleReference : NSObject
 {
 	NSString * guid;
-	int folderId;
+	NSInteger folderId;
 }
 
 // Public functions
 +(ArticleReference *)makeReference:(Article *)anArticle;
-+(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(int)folderId;
++(ArticleReference *)makeReferenceFromGUID:(NSString *)aGuid inFolder:(NSInteger)folderId;
 
 // Accessors
--(NSString *)guid;
--(int)folderId;
+@property (nonatomic, readonly, copy) NSString *guid;
+@property (nonatomic, readonly) NSInteger folderId;
 @end

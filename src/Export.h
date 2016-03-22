@@ -23,9 +23,9 @@
 
 @interface Export : NSObject
 	
-+(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray
++(NSInteger)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray
         inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag;
-+(int)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree
++(NSInteger)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree
         selection:(BOOL)selectionFlag withGroups:(BOOL)groupFlag;
 
 @end

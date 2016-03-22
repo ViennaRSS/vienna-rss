@@ -34,7 +34,7 @@
 /* init
  * Initialise a default instance of our cell.
  */
--(id)init
+-(instancetype)init
 {
 	if ((self = [super init]) != nil)
 	{
@@ -66,7 +66,7 @@
 /* setOffset
  * Sets the new offset at which the cell contents will be drawn.
  */
--(void)setOffset:(int)newOffset
+-(void)setOffset:(NSInteger)newOffset
 {
 	offset = newOffset;
 }
@@ -74,7 +74,7 @@
 /* offset
  * Returns the current cell offset in effect.
  */
--(int)offset
+-(NSInteger)offset
 {
 	return offset;
 }
@@ -115,7 +115,7 @@
 /* setCount
  * Sets the value to be displayed in the count button.
  */
--(void)setCount:(int)newCount
+-(void)setCount:(NSInteger)newCount
 {
 	count = newCount;
 	hasCount = YES;
@@ -163,11 +163,11 @@
 		NSSize imageSize;
 		NSRect imageFrame;
 		
-		imageSize = [image size];
+		imageSize = image.size;
 		NSDivideRect(*cellFrame, &imageFrame, cellFrame, 3 + imageSize.width, NSMinXEdge);
-		if ([self drawsBackground])
+		if (self.drawsBackground)
 		{
-			[[self backgroundColor] set];
+			[self.backgroundColor set];
 			NSRectFill(imageFrame);
 		}
 		imageFrame.origin.x += 3;
@@ -189,9 +189,9 @@
 	// and then reduce cellFrame to keep from overlapping it
 	if (inProgress)
 	{
-		NSProgressIndicator *progressIndicator = [item progressIndicator];
+		NSProgressIndicator *progressIndicator = item.progressIndicator;
 		if (!progressIndicator)
-			progressIndicator = [item allocAndStartProgressIndicator];
+			progressIndicator = item.allocAndStartProgressIndicator;
 
 		NSRect progressIndicatorFrame;
 
@@ -201,10 +201,10 @@
 		progressIndicatorFrame.origin.x += PROGRESS_INDICATOR_LEFT_MARGIN;
 		progressIndicatorFrame.origin.y += (cellFrame.size.height - PROGRESS_INDICATOR_DIMENSION) / 2.0;
 
-		if (!NSEqualRects([progressIndicator frame], progressIndicatorFrame)) {
-			[progressIndicator setFrame:progressIndicatorFrame];
+		if (!NSEqualRects(progressIndicator.frame, progressIndicatorFrame)) {
+			progressIndicator.frame = progressIndicatorFrame;
 
-		if ([progressIndicator superview] != controlView)
+		if (progressIndicator.superview != controlView)
 			[controlView addSubview:progressIndicator];
 		}
 	}
@@ -225,11 +225,11 @@
 		NSSize imageSize;
 		NSRect imageFrame;
 		
-		imageSize = [auxiliaryImage size];
+		imageSize = auxiliaryImage.size;
 		NSDivideRect(cellFrame, &imageFrame, &cellFrame, 3 + imageSize.width, NSMaxXEdge);
-		if ([self drawsBackground])
+		if (self.drawsBackground)
 		{
-			[[self backgroundColor] set];
+			[self.backgroundColor set];
 			NSRectFill(imageFrame);
 		}
 		imageFrame.size = imageSize;
@@ -244,27 +244,24 @@
 	// button on the right of the cell.
 	if (hasCount)
 	{
-		NSString * number = [NSString stringWithFormat:@"%i", count];
+		NSString * number = [NSString stringWithFormat:@"%li", (long)count];
 
 		// Use the current font point size as a guide for the count font size
-		float pointSize = [[self font] pointSize];
+		CGFloat pointSize = self.font.pointSize;
 
 		// Create attributes for drawing the count.
-		NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSFont fontWithName:@"Helvetica-Bold" size:pointSize],
-			NSFontAttributeName,
-			[NSColor whiteColor],
-			NSForegroundColorAttributeName,
-			nil];
+		NSDictionary * attributes = @{NSFontAttributeName: [NSFont fontWithName:@"Helvetica-Bold" size:pointSize],
+			NSForegroundColorAttributeName: [NSColor whiteColor]};
 		NSSize numSize = [number sizeWithAttributes:attributes];
 
 		// Compute the dimensions of the count rectangle.
-		int cellWidth = MAX(numSize.width + 6, numSize.height + 1) + 1;
+		CGFloat cellWidth = MAX(numSize.width + 6.0, numSize.height + 1.0) + 1.0;
 
 		NSRect countFrame;
 		NSDivideRect(cellFrame, &countFrame, &cellFrame, cellWidth, NSMaxXEdge);
-		if ([self drawsBackground])
+		if (self.drawsBackground)
 		{
-			[[self backgroundColor] set];
+			[self.backgroundColor set];
 			NSRectFill(countFrame);
 		}
 
@@ -295,7 +292,7 @@
 	if ([controlView isKindOfClass:[FolderView class]])
 	{
 		if (image != nil)
-			aRect.origin.x += [image size].width + 3;
+			aRect.origin.x += image.size.width + 3;
 		++aRect.origin.y;
 		[controlView performSelector:@selector(prvtResizeTheFieldEditor) withObject:nil afterDelay:0.001];
 	}
@@ -308,7 +305,7 @@
     if (!attributes)
     {
         NSSet * set = [NSSet setWithArray:[super accessibilityAttributeNames]];
-        attributes = [[set setByAddingObject:NSAccessibilityDescriptionAttribute] allObjects];
+        attributes = [set setByAddingObject:NSAccessibilityDescriptionAttribute].allObjects;
     }
     return attributes;
 }
@@ -328,16 +325,6 @@
             return [bits componentsJoinedByString:@", "];
     }
     return [super accessibilityAttributeValue:attribute];
-}
-
-/* dealloc
- * Delete our resources.
- */
--(void)dealloc
-{
-	countBackgroundColour=nil;
-	auxiliaryImage=nil;
-	image=nil;
 }
 
 @end

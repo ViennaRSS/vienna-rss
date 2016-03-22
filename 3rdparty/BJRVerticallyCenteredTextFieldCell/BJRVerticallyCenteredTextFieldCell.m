@@ -18,7 +18,7 @@
         [whiteString addAttribute: NSForegroundColorAttributeName
                             value: [NSColor whiteColor]
                             range: NSMakeRange(0, whiteString.length) ];
-        [self setAttributedStringValue:whiteString];
+        self.attributedStringValue = whiteString;
     }
 
     // Do the actual drawing

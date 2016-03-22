@@ -21,10 +21,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSView (ViewExtensions)
-	-(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(int)viewTag;
+	-(void)resizeViewWithAnimation:(NSRect)newFrame withTag:(NSInteger)viewTag;
 @end
 
 @interface NSObject(ViewExtensionsDelegate)
--(void)viewAnimationCompleted:(NSView *)theView withTag:(int)viewTag;
+-(void)viewAnimationCompleted:(NSView *)theView withTag:(NSInteger)viewTag;
 @end
 

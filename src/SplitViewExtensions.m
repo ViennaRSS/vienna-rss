@@ -35,12 +35,12 @@
 	NSMutableArray * viewRects = [NSMutableArray array];
 	NSRect frame;
 	
-	for (NSView * view in [self subviews])
+	for (NSView * view in self.subviews)
 	{
 		if ([self isSubviewCollapsed:view])
 			frame = NSZeroRect;
 		else
-			frame = [view frame];
+			frame = view.frame;
 		[viewRects addObject:NSStringFromRect(frame)];
 	}
 	return [viewRects copy];
@@ -51,23 +51,23 @@
  */
 -(void)setLayout:(NSArray *)viewRects
 {
-	NSArray * views = [self subviews];
-	int i, count;
+	NSArray * views = self.subviews;
+	NSInteger i, count;
 	NSRect frame;
 
 	count = MIN([viewRects count], [views count]);
 	for (i = 0; i < count; i++)
 	{
-		frame = NSRectFromString([viewRects objectAtIndex: i]);
+		frame = NSRectFromString(viewRects[i]);
 		if (NSIsEmptyRect(frame))
 		{
-			frame = [[views objectAtIndex:i] frame];
-			if( [self isVertical] )
+			frame = [views[i] frame];
+			if( self.vertical )
 				frame.size.width = 0;
 			else
 				frame.size.height = 0;
 		}
-		[[views objectAtIndex:i] setFrame:frame];
+		[views[i] setFrame:frame];
 	}
 }
 @end

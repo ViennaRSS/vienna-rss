@@ -26,7 +26,7 @@
 
 // Public functions
 +(InfoWindowManager *)infoWindowManager;
--(void)showInfoWindowForFolder:(int)folderId;
+-(void)showInfoWindowForFolder:(NSInteger)folderId;
 @end
 
 @interface InfoWindow : NSWindowController <NSWindowDelegate> {
@@ -42,7 +42,7 @@
 	IBOutlet NSButton * loadFullHTML;
 	IBOutlet NSTextField * folderDescription;
 	IBOutlet NSButton * validateButton;
-	int infoFolderId;
+	NSInteger infoFolderId;
 }
 
 // Action handlers

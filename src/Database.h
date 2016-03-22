@@ -28,7 +28,7 @@
 	BOOL initializedfoldersDict;
 	BOOL initializedSmartfoldersDict;
 	BOOL readOnly;
-	int countOfUnread;
+	NSInteger countOfUnread;
 	NSString * searchString;
 	NSMutableArray * fieldsOrdered;
 	NSMutableDictionary * fieldsByName;
@@ -45,14 +45,14 @@
 @property(nonatomic, strong) FMDatabaseQueue * databaseQueue;
 
 // General database functions
-- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath;
+- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;
 +(instancetype)sharedManager;
 -(void)syncLastUpdate;
 -(void)compactDatabase;
 -(void)reindexDatabase;
--(NSInteger)countOfUnread;
--(NSInteger)databaseVersion;
--(BOOL)readOnly;
+@property (nonatomic, readonly) NSInteger countOfUnread;
+@property (nonatomic, readonly) NSInteger databaseVersion;
+@property (nonatomic, readonly) BOOL readOnly;
 -(void)close;
 
 // Fields functions
@@ -62,9 +62,9 @@
 
 // Folder functions
 -(void)initFolderArray;
--(NSInteger)firstFolderId;
--(NSInteger)trashFolderId;
--(NSInteger)searchFolderId;
+@property (nonatomic, readonly) NSInteger firstFolderId;
+@property (nonatomic, readonly) NSInteger trashFolderId;
+@property (nonatomic, readonly) NSInteger searchFolderId;
 -(NSArray *)arrayOfAllFolders;
 -(NSArray *)arrayOfFolders:(NSInteger)parentId;
 -(Folder *)folderFromID:(NSInteger)wantedId;
@@ -119,6 +119,6 @@
 -(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 -(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
--(BOOL)isTrashEmpty;
+@property (nonatomic, getter=isTrashEmpty, readonly) BOOL trashEmpty;
 -(NSArray *)guidHistoryForFolderId:(NSInteger)folderId;
 @end

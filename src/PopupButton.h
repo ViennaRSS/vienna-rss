@@ -28,8 +28,7 @@
 }
 
 // Public functions
--(NSMenu *)theMenu;
+@property (nonatomic, copy) NSMenu *theMenu;
 -(void)setSmallMenu:(BOOL)useSmallMenu;
 -(void)setPopupBelow:(BOOL)flag;
--(void)setTheMenu:(NSMenu *)menu;
 @end

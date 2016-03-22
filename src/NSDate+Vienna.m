@@ -57,12 +57,12 @@ static BOOL threadSafe;
 	// Initializes the date formatters
 	enUSLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
 
-	for (int i=0; i<kNumberOfDateFormatters; i++)
+	for (NSInteger i=0; i<kNumberOfDateFormatters; i++)
 	{
 		dateFormatterArray[i] = [[NSDateFormatter alloc] init];
-		[dateFormatterArray[i] setLocale:enUSLocale];
-		[dateFormatterArray[i] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-        [dateFormatterArray[i] setDateFormat:kDateFormats[i]];
+		dateFormatterArray[i].locale = enUSLocale;
+		dateFormatterArray[i].timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+        dateFormatterArray[i].dateFormat = kDateFormats[i];
 	}
 
 	// end of initialization of date formatters
@@ -104,7 +104,7 @@ static BOOL threadSafe;
 	{
         // test with the date formatters we are aware of
         // exit as soon as we find a match
-        for (int i=0; i<kNumberOfDateFormatters; i++)
+        for (NSInteger i=0; i<kNumberOfDateFormatters; i++)
         {
             date = [dateFormatterArray[i] dateFromString:modifiedDateString];
             if (date != nil)
@@ -118,7 +118,7 @@ static BOOL threadSafe;
         // NSDateFormatter is thread safe on OS X 10.9 and later only
         // so we manage the issue with this lock
         [dateFormatters_lock lock];
-        for (int i=0; i<kNumberOfDateFormatters; i++)
+        for (NSInteger i=0; i<kNumberOfDateFormatters; i++)
         {
             date = [dateFormatterArray[i] dateFromString:modifiedDateString];
             if (date != nil)

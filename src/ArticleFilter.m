@@ -38,7 +38,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)unreadArticleFilterComparator:(Article *)theArticle
 {
-	return ![theArticle isRead];
+	return !theArticle.read;
 }
 
 /* flaggedArticleFilterComparator
@@ -46,7 +46,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)flaggedArticleFilterComparator:(Article *)theArticle
 {
-	return [theArticle isFlagged];
+	return theArticle.flagged;
 }
 
 /* todayFilterComparator
@@ -54,7 +54,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)todayFilterComparator:(Article *)theArticle
 {
-	return ([[theArticle date] compare:[NSCalendarDate today]] != NSOrderedAscending);
+	return ([theArticle.date compare:[NSCalendarDate today]] != NSOrderedAscending);
 }
 
 /* lastRefreshFilterComparator
@@ -62,7 +62,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)lastRefreshFilterComparator:(Article *)theArticle
 {
-	return ([[theArticle createdDate] compare:[[Preferences standardPreferences] objectForKey:MAPref_LastRefreshDate]] != NSOrderedAscending);
+	return ([theArticle.createdDate compare:[[Preferences standardPreferences] objectForKey:MAPref_LastRefreshDate]] != NSOrderedAscending);
 }
 
 /* twoDaysFilterComparator
@@ -70,7 +70,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)twoDaysFilterComparator:(Article *)theArticle
 {
-	return ([[theArticle date] compare:[[NSCalendarDate date] dateByAddingTimeInterval:-172800]] != NSOrderedAscending);
+	return ([theArticle.date compare:[[NSCalendarDate date] dateByAddingTimeInterval:-172800]] != NSOrderedAscending);
 }
 
 /* unreadOrFlaggedArticleFilterComparator
@@ -78,7 +78,7 @@ static NSMutableArray * _filterList = nil;
  */
 +(BOOL)unreadOrFlaggedArticleFilterComparator:(Article *)theArticle
 {
-	return ( ![theArticle isRead] || [theArticle isFlagged] );
+	return ( !theArticle.read || theArticle.flagged );
 }
 
 /* initalize
@@ -117,10 +117,10 @@ static NSMutableArray * _filterList = nil;
 +(ArticleFilter *)filterByTag:(NSInteger)theTag
 {
 	NSInteger index;
-	for (index = 0; index < [_filterList count]; ++index)
+	for (index = 0; index < _filterList.count; ++index)
 	{
-		ArticleFilter * filter = [_filterList objectAtIndex:index];
-		if ([filter tag] == theTag)
+		ArticleFilter * filter = _filterList[index];
+		if (filter.tag == theTag)
 			return filter;
 	}
 	return nil;
@@ -129,7 +129,7 @@ static NSMutableArray * _filterList = nil;
 /* initWithName
  * This is the designated initialiser for a new ArticleFilter object.
  */
--(id)initWithName:(NSString *)theName tag:(NSInteger)theTag comparator:(SEL)theComparator
+-(instancetype)initWithName:(NSString *)theName tag:(NSInteger)theTag comparator:(SEL)theComparator
 {
 	if ((self = [super init]) != nil)
 	{
@@ -175,11 +175,4 @@ static NSMutableArray * _filterList = nil;
 	[_filterList addObject:newFilter];
 }
 
-/* dealloc
- * Clean up behind us.
- */
--(void)dealloc
-{
-	name=nil;
-}
 @end

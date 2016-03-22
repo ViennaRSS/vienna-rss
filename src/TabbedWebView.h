@@ -38,8 +38,8 @@
 -(void)setOpenLinksInNewBrowser:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
--(BOOL)isFeedRedirect;
--(BOOL)isDownload;
+@property (nonatomic, getter=isFeedRedirect, readonly) BOOL feedRedirect;
+@property (nonatomic, getter=isDownload, readonly) BOOL download;
 -(void)scrollToTop;
 -(void)scrollToBottom;
 

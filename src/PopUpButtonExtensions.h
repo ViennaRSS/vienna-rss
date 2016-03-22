@@ -23,10 +23,10 @@
 @interface NSPopUpButton (PopUpButtonExtensions)
 	-(void)addItemWithTitle:(NSString *)title image:(NSImage *)image;
 	-(void)addItemWithTarget:(NSString *)title target:(SEL)target;
-	-(void)addItemWithTag:(NSString *)title tag:(int)tag;
+	-(void)addItemWithTag:(NSString *)title tag:(NSInteger)tag;
 	-(void)addItemWithRepresentedObject:(NSString *)title object:(id)object;
-	-(void)insertItemWithTag:(NSString *)title tag:(int)tag atIndex:(int)index;
-	-(id)representedObjectForSelection;
-	-(int)tagForSelection;
+	-(void)insertItemWithTag:(NSString *)title tag:(NSInteger)tag atIndex:(NSInteger)index;
+	@property (nonatomic, readonly, strong) id representedObjectForSelection;
+	@property (nonatomic, readonly) NSInteger tagForSelection;
 	-(void)addSeparator;
 @end

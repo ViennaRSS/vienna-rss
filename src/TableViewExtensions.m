@@ -61,13 +61,13 @@
 	[self removeAllToolTips];
 	if (delegateImplementsShouldDisplayToolTips && [(id)[self delegate] tableViewShouldDisplayCellToolTips:self])
 	{
-		NSRect visibleRect = [self visibleRect];
+		NSRect visibleRect = self.visibleRect;
 		NSIndexSet *columnIndexes = [self columnIndexesInRect:visibleRect];
 		NSRange rowRange = [self rowsInRect:visibleRect];
 		NSRect frameOfCell;
 		NSInteger col, row;
 		
-		col = [columnIndexes firstIndex];
+		col = columnIndexes.firstIndex;
 		while (col != NSNotFound)
 		{
 			for (row = rowRange.location; row < rowRange.location + rowRange.length; row++)
@@ -87,7 +87,7 @@
 {
 	NSInteger rowIndex = [self rowAtPoint:point];
 	NSInteger columnIndex = [self columnAtPoint:point];
-	NSTableColumn *tableColumn = (columnIndex != -1) ? [[self tableColumns] objectAtIndex:columnIndex] : nil;
+	NSTableColumn *tableColumn = (columnIndex != -1) ? self.tableColumns[columnIndex] : nil;
 	return (columnIndex != -1) ? [(id)[self delegate] tableView:self toolTipForTableColumn:tableColumn row:rowIndex] : @"";
 }
 
@@ -98,9 +98,9 @@
  */
 -(void)localiseHeaderStrings
 {
-	for (NSTableColumn * aColumn in [self tableColumns])
+	for (NSTableColumn * aColumn in self.tableColumns)
 	{
-		id headerCell = [aColumn headerCell];
+		id headerCell = aColumn.headerCell;
 		[headerCell setStringValue:NSLocalizedString([headerCell stringValue], nil)];
 	}
 }
@@ -112,7 +112,7 @@
 {
 	if ([self delegate] && [[self delegate] respondsToSelector:@selector(tableView:menuWillAppear:)])
 		[(id)[self delegate] tableView:self menuWillAppear:theEvent];
-	return [self selectedRow] >= 0 ? [self menu] : nil;
+	return self.selectedRow >= 0 ? self.menu : nil;
 }
 
 /* setHeaderImage
@@ -121,11 +121,11 @@
 -(void)setHeaderImage:(NSString *)identifier imageName:(NSString *)name
 {
 	NSTableColumn * tableColumn = [self tableColumnWithIdentifier:identifier];
-	NSTableHeaderCell * headerCell = [tableColumn headerCell];
-	[headerCell setImage:[NSImage imageNamed:name]];
+	NSTableHeaderCell * headerCell = tableColumn.headerCell;
+	headerCell.image = [NSImage imageNamed:name];
 	
 	NSImageCell * imageCell = [[NSImageCell alloc] init];
-	[tableColumn setDataCell:imageCell];
+	tableColumn.dataCell = imageCell;
 }
 @end  
 

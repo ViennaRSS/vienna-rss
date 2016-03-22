@@ -30,10 +30,10 @@
 +(NSString *)getPasswordFromKeychain:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] UTF8String];
-	const char * cUsername = [username UTF8String];
-	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
-	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
+	const char * cServiceName = secureUrl.host.UTF8String;
+	const char * cUsername = username.UTF8String;
+	NSInteger portNumber = secureUrl.port ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
 	NSString * thePassword;
 
 	if (!cServiceName || !cUsername)
@@ -46,13 +46,13 @@
 		OSStatus status;
 
 		status = SecKeychainFindInternetPassword(NULL,
-												 strlen(cServiceName),
+												 (UInt32)strlen(cServiceName),
 												 cServiceName,
 												 0,
 												 NULL,
-												 strlen(cUsername),
+												 (UInt32)strlen(cUsername),
 												 cUsername,
-												 strlen(cPath),
+												 (UInt32)strlen(cPath),
 												 cPath,
 												 portNumber,
 												 protocolType,
@@ -77,25 +77,25 @@
 +(void)setPasswordInKeychain:(NSString *)password username:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = secureUrl.host.UTF8String;
+	const char * cUsername = username.UTF8String;
 	const char * cPath = "";
-	int portNumber = [secureUrl port] ? [[secureUrl port] intValue] : ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
-	SecProtocolType protocolType = ([[secureUrl scheme] caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
-	const char * cPassword = [password UTF8String];
+	NSInteger portNumber = secureUrl.port ? secureUrl.port.integerValue : ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame ? 443 : 80);
+	SecProtocolType protocolType = ([secureUrl.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) ? kSecProtocolTypeHTTPS : kSecProtocolTypeHTTP;
+	const char * cPassword = password.UTF8String;
 	SecKeychainItemRef itemRef;
 	OSStatus status;
 	
 	if (!cServiceName || !cUsername || !cPassword)
 		return;
 	status = SecKeychainFindInternetPassword(NULL,
-											 strlen(cServiceName),
+											 (UInt32)strlen(cServiceName),
 											 cServiceName,
 											 0,
 											 NULL,
-											 strlen(cUsername),
+											 (UInt32)strlen(cUsername),
 											 cUsername,
-											 strlen(cPath),
+											 (UInt32)strlen(cPath),
 											 cPath,
 											 portNumber,
 											 protocolType,
@@ -106,18 +106,18 @@
 	if (status == noErr)
 		SecKeychainItemDelete(itemRef);
 	SecKeychainAddInternetPassword(NULL,
-								   strlen(cServiceName),
+								   (UInt32)strlen(cServiceName),
 								   cServiceName,
 								   0,
 								   NULL,
-								   strlen(cUsername),
+								   (UInt32)strlen(cUsername),
 								   cUsername,
-								   strlen(cPath),
+								   (UInt32)strlen(cPath),
 								   cPath,
 								   portNumber,
 								   protocolType,
 								   kSecAuthenticationTypeDefault,
-								   strlen(cPassword),
+								   (UInt32)strlen(cPassword),
 								   cPassword,
 								   NULL);
 }
@@ -128,9 +128,9 @@
 +(NSString *)getWebPasswordFromKeychain:(NSString *)username url:(NSString *)url
 {
 	NSURL * secureUrl = [NSURL URLWithString:url];
-	const char * cServiceName = [[secureUrl host] UTF8String];
-	const char * cUsername = [username UTF8String];
-	int portNumber = 0;
+	const char * cServiceName = secureUrl.host.UTF8String;
+	const char * cUsername = username.UTF8String;
+	NSInteger portNumber = 0;
 	SecProtocolType protocolType = kSecProtocolTypeHTTPS ;
 	NSString * thePassword;
 
@@ -144,13 +144,13 @@
 		OSStatus status;
 
 		status = SecKeychainFindInternetPassword(NULL,
-												 strlen(cServiceName),
+												 (UInt32)strlen(cServiceName),
 												 cServiceName,
 												 0,
 												 NULL,
-												 strlen(cUsername),
+												 (UInt32)strlen(cUsername),
 												 cUsername,
-												 strlen(cPath),
+												 (UInt32)strlen(cPath),
 												 cPath,
 												 portNumber,
 												 protocolType,
@@ -174,8 +174,8 @@
  */
 +(NSString *)getGenericPasswordFromKeychain:(NSString *)username serviceName:(NSString *)service
 {
-	const char * cServiceName = [service UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = service.UTF8String;
+	const char * cUsername = username.UTF8String;
 	NSString * thePassword;
 
 	if (!cServiceName || !cUsername)
@@ -187,9 +187,9 @@
 		OSStatus status;
 
 		status = SecKeychainFindGenericPassword(NULL,
-											 strlen(cServiceName),
+											 (UInt32)strlen(cServiceName),
 											 cServiceName,
-											 strlen(cUsername),
+											 (UInt32)strlen(cUsername),
 											 cUsername,
 											 &passwordLength,
 											 &passwordPtr,
@@ -210,17 +210,17 @@
  */
 +(void)deleteGenericPasswordInKeychain:(NSString *)username service:(NSString *)service
 {
-	const char * cServiceName = [service UTF8String];
-	const char * cUsername = [username UTF8String];
+	const char * cServiceName = service.UTF8String;
+	const char * cUsername = username.UTF8String;
 	SecKeychainItemRef itemRef;
 	OSStatus status;
 
 	if (!cServiceName || !cUsername)
 		return;
 	status = SecKeychainFindGenericPassword(NULL,
-											 strlen(cServiceName),
+											 (UInt32)strlen(cServiceName),
 											 cServiceName,
-											 strlen(cUsername),
+											 (UInt32)strlen(cUsername),
 											 cUsername,
 											 NULL,
 											 NULL,
@@ -234,20 +234,20 @@
  */
 +(void)setGenericPasswordInKeychain:(NSString *)password username:(NSString *)username service:(NSString *)service
 {
-	const char * cServiceName = [service UTF8String];
-	const char * cUsername = [username UTF8String];
-	const char * cPassword = [password UTF8String];
+	const char * cServiceName = service.UTF8String;
+	const char * cUsername = username.UTF8String;
+	const char * cPassword = password.UTF8String;
 
 	if (!cServiceName || !cUsername || !cPassword)
 		return;
 
 	[self deleteGenericPasswordInKeychain:username service:service];
 	SecKeychainAddGenericPassword(NULL,
-								   strlen(cServiceName),
+								   (UInt32)strlen(cServiceName),
 								   cServiceName,
-								   strlen(cUsername),
+								   (UInt32)strlen(cUsername),
 								   cUsername,
-								   strlen(cPassword),
+								   (UInt32)strlen(cPassword),
 								   cPassword,
 								   NULL);
 }

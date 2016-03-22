@@ -29,7 +29,7 @@
 // Public functions
 +(NSArray *)arrayOfFilters;
 +(ArticleFilter *)filterByTag:(NSInteger)theTag;
--(NSString *)name;
--(NSInteger)tag;
--(SEL)comparator;
+@property (nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly) NSInteger tag;
+@property (nonatomic, readonly) SEL comparator;
 @end

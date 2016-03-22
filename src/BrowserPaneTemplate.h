@@ -26,5 +26,5 @@
 
 @property(strong) NSArray * topObjects;
 
--(BrowserPane *)mainView;
+@property (nonatomic, readonly, strong) BrowserPane *mainView;
 @end

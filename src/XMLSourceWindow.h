@@ -32,6 +32,6 @@
 	NSString * sourceWindowTitle;
 }
 
--(id)initWithFolder:(Folder *)folder; // Designated initializer
+-(instancetype)initWithFolder:(Folder *)folder /*NS_DESIGNATED_INITIALIZER*/;
 
 @end

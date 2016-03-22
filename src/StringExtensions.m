@@ -31,7 +31,7 @@
  */
 -(void)replaceString:(NSString *)source withString:(NSString *)dest
 {
-	[self replaceOccurrencesOfString:source withString:dest options:NSLiteralSearch range:NSMakeRange(0, [self length])];
+	[self replaceOccurrencesOfString:source withString:dest options:NSLiteralSearch range:NSMakeRange(0, self.length)];
 }
 
 /* fixupRelativeImgTags
@@ -45,7 +45,7 @@
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
 	
-	NSUInteger textLength = [self length];
+	NSUInteger textLength = self.length;
 	NSRange srchRange;
 	
 	srchRange.location = 0;
@@ -73,14 +73,14 @@
                 NSURL * imgURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
                 if (imgURL != nil)
                 {
-                    srcPath = [imgURL absoluteString];
+                    srcPath = imgURL.absoluteString;
                     [self replaceCharactersInRange:srcRange withString:srcPath];
-                    textLength = [self length];
+                    textLength = self.length;
                 }
 			}
 			
 			// Start searching again from beyond the URL
-			srchRange.location = srcRange.location + [srcPath length];
+			srchRange.location = srcRange.location + srcPath.length;
 		}
 		else
 			++srchRange.location;
@@ -99,7 +99,7 @@
 		return;
 	NSURL * anchorBaseURL = [NSURL URLWithString:baseURL];
 
-	NSUInteger textLength = [self length];
+	NSUInteger textLength = self.length;
 	NSRange srchRange;
 
 	srchRange.location = 0;
@@ -127,14 +127,14 @@
                 NSURL * anchorURL = [NSURL URLWithString:srcPath relativeToURL:anchorBaseURL];
                 if (anchorURL != nil)
                 {
-                    srcPath = [anchorURL absoluteString];
+                    srcPath = anchorURL.absoluteString;
                     [self replaceCharactersInRange:srcRange withString:srcPath];
-                    textLength = [self length];
+                    textLength = self.length;
                 }
 			}
 
 			// Start searching again from beyond the URL
-			srchRange.location = srcRange.location + [srcPath length];
+			srchRange.location = srcRange.location + srcPath.length;
 		}
 		else
 			++srchRange.location;
@@ -153,7 +153,7 @@
 		return;
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
 
-	NSUInteger textLength = [self length];
+	NSUInteger textLength = self.length;
 	NSRange srchRange;
 
 	srchRange.location = 0;
@@ -181,14 +181,14 @@
                 NSURL * iframeURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
                 if (iframeURL != nil)
                 {
-                    srcPath = [iframeURL absoluteString];
+                    srcPath = iframeURL.absoluteString;
                     [self replaceCharactersInRange:srcRange withString:srcPath];
-                    textLength = [self length];
+                    textLength = self.length;
                 }
 			}
 
 			// Start searching again from beyond the URL
-			srchRange.location = srcRange.location + [srcPath length];
+			srchRange.location = srcRange.location + srcPath.length;
 		}
 		else
 			++srchRange.location;
@@ -203,13 +203,13 @@ static NSMutableDictionary * entityMap = nil;
 @implementation NSString (StringExtensions)
 
 /* hexValue
- * A counterpart to intValue, but parses a hexadecimal number.
+ * A counterpart to integerValue, but parses a hexadecimal number.
  */
--(int)hexValue
+-(NSInteger)hexValue
 {
-	int count = [self length];
-	int intValue = 0;
-	int index = 0;
+	NSInteger count = self.length;
+	NSInteger intValue = 0;
+	NSInteger index = 0;
 
 	while (index < count)
 	{
@@ -234,7 +234,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)summaryTextFromHTML
 {
-	return [[NSString stringByRemovingHTML:self] normalised];
+	return [NSString stringByRemovingHTML:self].normalised;
 }
 
 /* titleTextFromHTML
@@ -244,7 +244,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)titleTextFromHTML
 {
-	return [[NSString stringByRemovingHTML:self] firstNonBlankLine];
+	return [NSString stringByRemovingHTML:self].firstNonBlankLine;
 }
 
 /* firstWord
@@ -252,7 +252,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)firstWord
 {
-	NSString * trimmedSelf = [self trim];
+	NSString * trimmedSelf = self.trim;
 	NSInteger wordLength = [trimmedSelf indexOfCharacterInString:' ' afterIndex:0];
 	return (wordLength == NSNotFound) ? trimmedSelf : [trimmedSelf substringToIndex:wordLength];
 }
@@ -263,11 +263,11 @@ static NSMutableDictionary * entityMap = nil;
 +(NSString *)stringByRemovingHTML:(NSString *)theString
 {
 	NSMutableString * aString = [NSMutableString stringWithString:theString];
-	int maxChrs = [theString length];
-	int cutOff = 600;
-	int indexOfChr = 0;
-	int tagLength = 0;
-	int tagStartIndex = 0;
+	NSInteger maxChrs = theString.length;
+	NSInteger cutOff = 600;
+	NSInteger indexOfChr = 0;
+	NSInteger tagLength = 0;
+	NSInteger tagStartIndex = 0;
 	BOOL isInQuote = NO;
 	BOOL isInTag = NO;
 
@@ -295,14 +295,14 @@ static NSMutableDictionary * entityMap = nil;
 			if (++tagLength > 2)
 			{
 				NSRange tagRange = NSMakeRange(tagStartIndex, tagLength);
-				NSString * tag = [[aString substringWithRange:tagRange] lowercaseString];
-				int indexOfTagName = 1;
+				NSString * tag = [aString substringWithRange:tagRange].lowercaseString;
+				NSInteger indexOfTagName = 1;
 
 				// Extract the tag name
 				if ([tag characterAtIndex:indexOfTagName] == '/')
 					++indexOfTagName;
 				
-				int chIndex = indexOfTagName;
+				NSInteger chIndex = indexOfTagName;
 				unichar ch = [tag characterAtIndex:chIndex];
 				while (chIndex < tagLength && [[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:ch])
 					ch = [tag characterAtIndex:++chIndex];
@@ -317,7 +317,7 @@ static NSMutableDictionary * entityMap = nil;
 				// Reset scan to the point where the tag started minus one because
 				// we bump up indexOfChr at the end of the loop.
 				indexOfChr = tagStartIndex - 1;
-				maxChrs = [aString length];
+				maxChrs = aString.length;
 				isInTag = NO;
 				isInQuote = NO;	// Fix problem with Tribe.net feeds that have bogus quotes in HTML tags
 			}
@@ -328,7 +328,7 @@ static NSMutableDictionary * entityMap = nil;
 	if (maxChrs > cutOff)
 		[aString deleteCharactersInRange:NSMakeRange(cutOff, maxChrs - cutOff)];
 	
-	return [aString stringByUnescapingExtendedCharacters];
+	return aString.stringByUnescapingExtendedCharacters;
 }
 
 /* normalised
@@ -339,8 +339,8 @@ static NSMutableDictionary * entityMap = nil;
 {
 	NSMutableString * string = [NSMutableString stringWithString:self];
 	BOOL isInWhitespace = YES;
-	int length = [string length];
-	int index = 0;
+	NSInteger length = string.length;
+	NSInteger index = 0;
 	
 	while (index < length)
 	{
@@ -374,7 +374,7 @@ static NSMutableDictionary * entityMap = nil;
 	NSUInteger indexOfLastChr = 0;
 	
 	NSUInteger indexOfChr = 0;
-	NSUInteger length = [self length];
+	NSUInteger length = self.length;
 	while (indexOfChr < length)
 	{
 		unichar ch = [self characterAtIndex:indexOfChr];
@@ -408,8 +408,8 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)stringByDeletingLastURLComponent
 {
-	int index = [self length] - 1;
-	int beginning = 0;
+	NSInteger index = self.length - 1;
+	NSInteger beginning = 0;
 
 	if ([self hasPrefix:@"http://"])
 		beginning = 6;
@@ -429,13 +429,13 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSString *)lastURLComponent
 {
-	int index = [self length] - 1;
+	NSInteger index = self.length - 1;
 
 	while (index >= 0 && [self characterAtIndex:index] != '/')
 		--index;
 	if (index <= 0)
 		return self;
-	return [self substringWithRange:NSMakeRange(index+1, [self length] -1-index)];
+	return [self substringWithRange:NSMakeRange(index+1, self.length -1-index)];
 }
 
 /* stringByAppendingURLComponent
@@ -445,12 +445,12 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)stringByAppendingURLComponent:(NSString *)newComponent
 {
 	NSMutableString * newString = [NSMutableString stringWithString:self];
-	int index = [newString length] - 1;
-	int newIndex = 0;
+	NSInteger index = newString.length - 1;
+	NSInteger newIndex = 0;
 
 	if (index >= 0 && [newString characterAtIndex:index] != '/')
 		[newString appendString:@"/"];
-	if ([newComponent length] > 0 && [newComponent characterAtIndex:0] == '/')
+	if (newComponent.length > 0 && [newComponent characterAtIndex:0] == '/')
 		++newIndex;
 	[newString appendString:[newComponent substringFromIndex:newIndex]];
 	return newString;
@@ -463,8 +463,8 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)stringByEscapingExtendedCharacters
 {
 	NSMutableString * escapedString = [NSMutableString stringWithString:self];
-	int length = [escapedString length];
-	int index = 0;
+	NSInteger length = escapedString.length;
+	NSInteger index = 0;
 
 	while (index < length)
 	{
@@ -475,8 +475,8 @@ static NSMutableDictionary * entityMap = nil;
 		{
 			NSString * escapedCharacter = [NSString stringWithFormat:@"&#%d;", ch];
 			[escapedString replaceCharactersInRange:NSMakeRange(index, 1) withString:escapedCharacter];
-			index += [escapedCharacter length];
-			length = [escapedString length];
+			index += escapedCharacter.length;
+			length = escapedString.length;
 		}
 	}
 	return escapedString;
@@ -506,7 +506,7 @@ static NSMutableDictionary * entityMap = nil;
 		entityStart = [processedString indexOfCharacterInString:'&' afterIndex:entityStart + 1];
 	}
 	
-	NSString * returnString = [processedString trim];
+	NSString * returnString = processedString.trim;
 	return returnString;
 }
 
@@ -517,17 +517,17 @@ static NSMutableDictionary * entityMap = nil;
 {
 	if (entityMap == nil)
 	{
-		entityMap = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-			@"<",	@"lt",
-			@">",	@"gt",
-			@"\"",	@"quot",
-			@"&",	@"amp",
-			@"'",	@"rsquo",
-			@"'",	@"lsquo",
-			@"'",	@"apos",
-			@"...", @"hellip",
-			@" ",	@"nbsp",
-			nil,	nil];
+		entityMap = [@{
+					   @"lt":		@"<",
+					   @"gt":		@">",
+					   @"quot":		@"\"",
+					   @"amp":		@"&",
+					   @"rsquo":	@"'",
+					   @"lsquo":	@"'",
+					   @"apos":		@"'",
+					   @"hellip":	@"...",
+					   @"nbsp":		@" ",
+					   } mutableCopy];
 		
 		// Add entities that map to non-ASCII characters
 		[entityMap setValue:[NSString stringWithFormat:@"%C", (unsigned short)0xA1] forKey:@"iexcl"];
@@ -629,17 +629,17 @@ static NSMutableDictionary * entityMap = nil;
 	}
 	
 	// Parse off numeric codes of the format #xxx
-	if ([entityString length] > 1 && [entityString characterAtIndex:0] == '#')
+	if (entityString.length > 1 && [entityString characterAtIndex:0] == '#')
 	{
-		int intValue;
+		NSInteger intValue;
 		if ([entityString characterAtIndex:1] == 'x')
-			intValue = [[entityString substringFromIndex:2] hexValue];
+			intValue = [entityString substringFromIndex:2].hexValue;
 		else
-			intValue = [[entityString substringFromIndex:1] intValue];
+			intValue = [entityString substringFromIndex:1].integerValue;
 		return [NSString stringWithFormat:@"%C", (unsigned short)MAX(intValue, ' ')];
 	}
 	
-	NSString * mappedString = [entityMap objectForKey:entityString];
+	NSString * mappedString = entityMap[entityString];
 	return mappedString ? mappedString : [NSString stringWithFormat:@"&%@;", entityString];
 }
 
@@ -649,7 +649,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(NSUInteger)indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex
 {
-	NSUInteger length = [self length];
+	NSUInteger length = self.length;
 	NSUInteger index;
 
 	if (startIndex < length - 1)
@@ -683,7 +683,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 -(BOOL)isBlank
 {
-	return [[self trim] length] == 0;
+	return self.trim.length == 0;
 }
 
 /* convertStringToValidPath
@@ -693,11 +693,11 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)convertStringToValidPath
 {
 	NSMutableString * baseURLString = [NSMutableString stringWithString:self];
-    [baseURLString replaceOccurrencesOfString:@":" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
-	[baseURLString replaceOccurrencesOfString:@"." withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
-	[baseURLString replaceOccurrencesOfString:@"/" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
-	[baseURLString replaceOccurrencesOfString:@"?" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
-	[baseURLString replaceOccurrencesOfString:@"*" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, [baseURLString length])];
+    [baseURLString replaceOccurrencesOfString:@":" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, baseURLString.length)];
+	[baseURLString replaceOccurrencesOfString:@"." withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, baseURLString.length)];
+	[baseURLString replaceOccurrencesOfString:@"/" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, baseURLString.length)];
+	[baseURLString replaceOccurrencesOfString:@"?" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, baseURLString.length)];
+	[baseURLString replaceOccurrencesOfString:@"*" withString:@"_" options:NSLiteralSearch range:NSMakeRange(0, baseURLString.length)];
 	return baseURLString;
 }
 
@@ -714,7 +714,7 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)baseURL
 {
 	NSURL * url = [NSURL URLWithString:self];
-	return (url && [url host]) ? [NSString stringWithFormat:@"%@://%@", [url scheme], [url host]] : self;
+	return (url && url.host) ? [NSString stringWithFormat:@"%@://%@", url.scheme, url.host] : self;
 }
 
 /* host
@@ -730,7 +730,7 @@ static NSMutableDictionary * entityMap = nil;
 -(NSString *)host
 {
 	NSURL * url = [NSURL URLWithString:self];
-	return (url && [url host]) ? [url host] : self;
+	return (url && url.host) ? url.host : self;
 }
 
 /* numericCompare
@@ -754,6 +754,42 @@ static NSMutableDictionary * entityMap = nil;
     [newString replaceString:@"\"" withString:@"&quot;"];
     [newString replaceString:@"'" withString:@"&apos;"];
     return newString;
+}
+
+/* stringByCleaningURLString
+ * Percent escape invalid and reserved URL characters and return a legal URL string.
+ *   Better alternative to -stringByAddingPercentEscapesUsingEncoding:
+ *   Will handle unescaped or partially escaped URL strings where sequences are unpredictable,
+ *   for instance will preserve # announcing fragment from being escaped.
+ *   Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
+ *   IDNA related stuff in the domain, or God knows what in filenames and arguments.
+ */
++(NSString * )stringByCleaningURLString:(NSString *) urlString
+{
+	NSString *newString;
+	@try
+	{
+		NSPasteboard * pasteboard = [NSPasteboard pasteboardWithName:@"ViennaIDNURLPasteboard"];
+		[pasteboard declareTypes:@[NSStringPboardType] owner:nil];
+		if ([pasteboard setString:urlString forType:NSStringPboardType])
+			newString = [WebView URLFromPasteboard:pasteboard].absoluteString;
+		else
+		{
+            newString = @"";
+            // TODO: present error message to user?
+            NSBeep();
+            NSLog(@"Can't create URL from string '%@'.", urlString);
+        }
+	}
+	@catch (NSException * exception)
+	{
+		newString = @"";
+        // TODO: present error message to user?
+        NSBeep();
+        NSLog(@"Can't create URL from string '%@'.", urlString);
+	}
+
+	return newString;
 }
 
 @end

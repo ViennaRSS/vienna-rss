@@ -25,7 +25,7 @@
 	IBOutlet NSButton * doNotShowWarningAgain;
 }
 
--(BOOL)shouldEmptyTrash;
+@property (nonatomic, readonly) BOOL shouldEmptyTrash;
 -(IBAction)doNotEmptyTrash:(id)sender;
 -(IBAction)emptyTrash:(id)sender;
 @end

@@ -24,7 +24,7 @@
 #import "BJRWindowWithToolbar.h"
 
 @interface Export()
-+ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(int *)countExported;
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(NSInteger *)countExported;
 @end
 
 @implementation Export
@@ -32,24 +32,24 @@
 /* exportSubscriptionGroup
  * Export one group of folders.
  */
-+(int)exportSubscriptionGroup:(NSXMLElement *)parentElement fromArray:(NSArray *)feedArray
++(NSInteger)exportSubscriptionGroup:(NSXMLElement *)parentElement fromArray:(NSArray *)feedArray
                    inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag
 {
-	int countExported = 0;
+	NSInteger countExported = 0;
 	for (Folder * folder in feedArray)
 	{
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
-		NSString * name = [folder name];
+		NSString * name = folder.name;
 		if (IsGroupFolder(folder))
 		{
-			NSArray * subFolders = [foldersTree children:[folder itemId]];
+			NSArray * subFolders = [foldersTree children:folder.itemId];
 			
             if (!groupFlag) {
 				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
             }
 			else
 			{
-				[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
+				itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
                 NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
                 [outlineElement setAttributesWithDictionary:itemDict];
                 [parentElement addChild:outlineElement];
@@ -58,15 +58,15 @@
 		}
 		else if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder))
 		{
-			NSString * link = [folder homePage];
-			NSString * description = [folder feedDescription];
-			NSString * url = [folder feedURL];
+			NSString * link = folder.homePage;
+			NSString * description = folder.feedDescription;
+			NSString * url = folder.feedURL;
 
-			[itemDict setObject:@"rss" forKey:@"type"];
-			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(name ? name : @"")] forKey:@"text"];
-            [itemDict setObject:[NSString stringByConvertingHTMLEntities:(link ? link : @"")] forKey:@"htmlUrl"];
-			[itemDict setObject:[NSString stringByConvertingHTMLEntities:(url ? url : @"")] forKey:@"xmlUrl"];
-			[itemDict setObject:[NSString stringByConvertingHTMLEntities:description] forKey:@"description"];
+			itemDict[@"type"] = @"rss";
+			itemDict[@"text"] = [NSString stringByConvertingHTMLEntities:(name ? name : @"")];
+            itemDict[@"htmlUrl"] = [NSString stringByConvertingHTMLEntities:(link ? link : @"")];
+			itemDict[@"xmlUrl"] = [NSString stringByConvertingHTMLEntities:(url ? url : @"")];
+			itemDict[@"description"] = [NSString stringByConvertingHTMLEntities:description];
             NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
             [outlineElement setAttributesWithDictionary:itemDict];
             [parentElement addChild:outlineElement];
@@ -80,13 +80,13 @@
  * Export a list of RSS subscriptions to the specified file.
  * Returns the number of subscriptions exported, or -1 on error.
  */
-+(int)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag
++(NSInteger)exportToFile:(NSString *)exportFileName from:(NSArray *)foldersArray inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag
 {
-    int countExported = 0;
+    NSInteger countExported = 0;
     NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:foldersArray inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
     	// Now write the complete XML to the file
     
-	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
+	NSString * fqFilename = exportFileName.stringByExpandingTildeInPath;
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
 		return -1; // Indicate an error condition (impossible number of exports)
@@ -104,18 +104,18 @@
  * folders selected in the folders tree are exported. Otherwise all RSS folders are exported.
  * Returns the number of subscriptions exported, or -1 on error.
  */
-+(int)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree selection:(BOOL)selectionFlag withGroups:(BOOL)groupFlag
++(NSInteger)exportToFile:(NSString *)exportFileName fromFoldersTree:(FoldersTree *)foldersTree selection:(BOOL)selectionFlag withGroups:(BOOL)groupFlag
 {
-    int countExported = 0;
+    NSInteger countExported = 0;
     NSArray * folders;
 	if (selectionFlag)
-	    folders = [foldersTree selectedFolders];
+	    folders = foldersTree.selectedFolders;
 	else
 	    folders = [foldersTree children:0];
     NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:folders inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
     	// Now write the complete XML to the file
     
-	NSString * fqFilename = [exportFileName stringByExpandingTildeInPath];
+	NSString * fqFilename = exportFileName.stringByExpandingTildeInPath;
 	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
 	{
 		return -1; // Indicate an error condition (impossible number of exports)
@@ -137,11 +137,11 @@
  *
  *  @return NSXMLDocument with OPML containing the exported folders
  */
-+ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(int *)countExported {
++ (NSXMLDocument *)opmlDocumentFromFolders:(NSArray *)folders inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag exportCount:(NSInteger *)countExported {
     *countExported = 0;
     NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithKind:NSXMLDocumentKind options:NSXMLNodePreserveEmptyElements];
-    [opmlDocument setCharacterEncoding:@"UTF-8"];
-    [opmlDocument setVersion:@"1.0"];
+    opmlDocument.characterEncoding = @"UTF-8";
+    opmlDocument.version = @"1.0";
     [opmlDocument setStandalone:YES];
     
     NSXMLElement *opmlElement = [NSXMLElement elementWithName:@"opml"];
@@ -150,7 +150,7 @@
     NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
     NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];
     NSXMLElement *dateCreated = [NSXMLElement elementWithName:@"dateCreated"
-                                                  stringValue:[[NSCalendarDate date] description]];
+                                                  stringValue:[NSCalendarDate date].description];
     [headElement addChild:title];
     [headElement addChild:dateCreated];
     [opmlElement addChild:headElement];

@@ -42,7 +42,7 @@ static NSArray * iconArray = nil;
 /* initWithId
  * Initialise a new folder object instance.
  */
--(id)initWithId:(NSInteger)newId parentId:(NSInteger)newIdParent name:(NSString *)newName type:(NSInteger)newType
+-(instancetype)initWithId:(NSInteger)newId parentId:(NSInteger)newIdParent name:(NSString *)newName type:(NSInteger)newType
 {
 	if ((self = [super init]) != nil)
 	{
@@ -59,13 +59,13 @@ static NSArray * iconArray = nil;
 		containsBodies = NO;
 		hasPassword = NO;
 		cachedArticles = [NSCache new];
-		[cachedArticles setDelegate:self];
+		cachedArticles.delegate = self;
 		cachedGuids = [NSMutableArray array];
 		attributes = [NSMutableDictionary dictionary];
-		[self setName:newName];
-		[self setLastUpdate:[NSDate distantPast]];
-		[self setLastUpdateString:@""];
-		[self setUsername:@""];
+		self.name = newName;
+		self.lastUpdateString = @"";
+		self.username = @"";
+		lastUpdate = [NSDate distantPast];
 	}
 	return self;
 }
@@ -76,15 +76,15 @@ static NSArray * iconArray = nil;
 +(NSArray *)_iconArray
 {
 	if (iconArray == nil)
-		iconArray = [NSArray arrayWithObjects:
-						[NSImage imageNamed:@"smallFolder.tiff"],
-						[NSImage imageNamed:@"smartFolder.tiff"],
-						[NSImage imageNamed:@"rssFolder.tiff"],
-						[NSImage imageNamed:@"rssFeedNew.tiff"],
-						[NSImage imageNamed:@"trashFolder.tiff"],
-						[NSImage imageNamed:@"searchFolder.tiff"],
-						[NSImage imageNamed:@"googleFeed.tiff"],
-						nil];
+		iconArray = @[
+					  [NSImage imageNamed:@"smallFolder.tiff"],
+					  [NSImage imageNamed:@"smartFolder.tiff"],
+					  [NSImage imageNamed:@"rssFolder.tiff"],
+					  [NSImage imageNamed:@"rssFeedNew.tiff"],
+					  [NSImage imageNamed:@"trashFolder.tiff"],
+					  [NSImage imageNamed:@"searchFolder.tiff"],
+					  [NSImage imageNamed:@"googleFeed.tiff"],
+					  ];
 	return iconArray;
 }
 
@@ -177,36 +177,36 @@ static NSArray * iconArray = nil;
 -(NSImage *)image
 {
 	if (IsGroupFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_RSSFolderIcon];
+		return [Folder _iconArray][MA_RSSFolderIcon];
 	if (IsSmartFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_SmartFolderIcon];
+		return [Folder _iconArray][MA_SmartFolderIcon];
 	if (IsTrashFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_TrashFolderIcon];
+		return [Folder _iconArray][MA_TrashFolderIcon];
 	if (IsSearchFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_SearchFolderIcon];
+		return [Folder _iconArray][MA_SearchFolderIcon];
 	//	if (IsGoogleReaderFolder(self))
 	//	return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
 	if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
 	{
 		// Try the folder icon cache.
 		NSImage * imagePtr = nil;
-		if ([self feedURL])
+		if (self.feedURL)
 		{	
 			NSString * homePageSiteRoot;
-			homePageSiteRoot = [[[self homePage] host] convertStringToValidPath];
+			homePageSiteRoot = self.homePage.host.convertStringToValidPath;
 			imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 		}
 		NSImage *altIcon;
 		if (IsRSSFolder(self)) {
-			altIcon = [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
+			altIcon = [Folder _iconArray][MA_RSSFeedIcon];
 		} else {
-			altIcon = [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
+			altIcon = [Folder _iconArray][MA_GoogleReaderFolderIcon];
 		}
 		return (imagePtr) ? imagePtr : altIcon;
 	}
 	
 	// Use the generic folder icon for anything else
-	return [[Folder _iconArray] objectAtIndex:MA_FolderIcon];
+	return [Folder _iconArray][MA_FolderIcon];
 }
 
 /* hasCachedImage
@@ -217,9 +217,9 @@ static NSArray * iconArray = nil;
 	if (!IsRSSFolder(self) && !IsGoogleReaderFolder(self))
 		return NO;
 	NSImage * imagePtr = nil;
-	if ([self feedURL])
+	if (self.feedURL)
 	{
-		NSString * homePageSiteRoot = [[[self homePage] host] convertStringToValidPath];
+		NSString * homePageSiteRoot = self.homePage.host.convertStringToValidPath;
 		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 	}
 	return (imagePtr != nil);
@@ -231,10 +231,10 @@ static NSArray * iconArray = nil;
 -(NSImage *)standardImage
 {
 	if (IsRSSFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_RSSFeedIcon];
+		return [Folder _iconArray][MA_RSSFeedIcon];
 	if (IsGoogleReaderFolder(self))
-		return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
-	return [self image];
+		return [Folder _iconArray][MA_GoogleReaderFolderIcon];
+	return self.image;
 }
 
 /* setImage
@@ -243,10 +243,10 @@ static NSArray * iconArray = nil;
  */
 -(void)setImage:(NSImage *)iconImage
 {
-	if ([self feedURL] != nil && iconImage != nil)
+	if (self.feedURL != nil && iconImage != nil)
 	{
 		NSString * homePageSiteRoot;
-		homePageSiteRoot = [[[self homePage] host] convertStringToValidPath];
+		homePageSiteRoot = self.homePage.host.convertStringToValidPath;
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
 	}
 }
@@ -290,8 +290,8 @@ static NSArray * iconArray = nil;
 {
 	if (!hasPassword)
 	{
-		if ([self username] != nil && [self feedURL] != nil)
-			[attributes setValue:[KeyChain getPasswordFromKeychain:[self username] url:[self feedURL]] forKey:@"Password"];
+		if (self.username != nil && self.feedURL != nil)
+			[attributes setValue:[KeyChain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
 		hasPassword = YES;
 	}
 	return [attributes valueForKey:@"Password"];
@@ -302,8 +302,8 @@ static NSArray * iconArray = nil;
  */
 -(void)setPassword:(NSString *)newPassword
 {
-	if ([self username] != nil && [self feedURL] != nil)
-		[KeyChain setPasswordInKeychain:newPassword username:[self username] url:[self feedURL]];
+	if (self.username != nil && self.feedURL != nil)
+		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
 	[attributes setValue:newPassword forKey:@"Password"];
 	hasPassword = YES;
 }
@@ -477,12 +477,12 @@ static NSArray * iconArray = nil;
 /* indexOfArticle
  * Returns the index of the article that matches the specified article based on guid.
  */
--(unsigned)indexOfArticle:(Article *)article
+-(NSUInteger)indexOfArticle:(Article *)article
 {
     @synchronized(self)
     {
         [self ensureCache];
-        return [cachedGuids indexOfObject:[article guid]];
+        return [cachedGuids indexOfObject:article.guid];
     }
 }
 
@@ -514,7 +514,7 @@ static NSArray * iconArray = nil;
     // Unread count adjustment factor
     NSInteger adjustment = 0;
 
-    NSString * articleGuid = [article guid];
+    NSString * articleGuid = article.guid;
     // Does this article already exist?
     // We're going to ignore here the problem of feeds re-using guids, which is very naughty! Bad feed!
     Article * existingArticle = [cachedArticles objectForKey:articleGuid];
@@ -529,18 +529,18 @@ static NSArray * iconArray = nil;
             BOOL success = [[Database sharedManager] addArticle:article toFolder:itemId];
             if(success)
             {
-                [article setStatus:ArticleStatusNew];
+                article.status = ArticleStatusNew;
                 // add to the cache
 	            [cachedGuids addObject:articleGuid];
 	            [cachedArticles setObject:article forKey:[NSString stringWithString:articleGuid]];
-                if(![article isRead])
+                if(!article.read)
                     adjustment = 1;
             }
             else
                 return NO;
         }
     }
-    else if ([existingArticle isDeleted])
+    else if (existingArticle.deleted)
     {
         return NO;
     }
@@ -554,15 +554,15 @@ static NSArray * iconArray = nil;
         if (success)
         {
             // Update folder unread count if necessary
-            if ([existingArticle isRead])
+            if (existingArticle.read)
             {
                 adjustment = 1;
-                [article setStatus:ArticleStatusNew];
+                article.status = ArticleStatusNew;
                 [existingArticle markRead:NO];
             }
             else
             {
-                [article setStatus:ArticleStatusUpdated];
+                article.status = ArticleStatusUpdated;
             }
         }
         else
@@ -637,7 +637,7 @@ static NSArray * iconArray = nil;
  */
 -(NSInteger)countOfCachedArticles
 {
-	return isCached ? (NSInteger)[cachedGuids count] : -1;
+	return isCached ? (NSInteger)cachedGuids.count : -1;
 }
 
 /* ensureCache
@@ -672,7 +672,7 @@ static NSArray * iconArray = nil;
     for (id obj in cachedGuids.reverseObjectEnumerator.allObjects)
     {
         Article * article = [cachedArticles objectForKey:(NSString *)obj];
-        if (![article isRead])
+        if (!article.read)
         {
             [article markRead:YES];
             count--;
@@ -697,7 +697,7 @@ static NSArray * iconArray = nil;
         for (id obj in cachedGuids.reverseObjectEnumerator.allObjects)
         {
             Article * article = [cachedArticles objectForKey:(NSString *)obj];
-            if (![article isRead])
+            if (!article.read)
             {
                 [result addObject:[ArticleReference makeReference:article]];
                 count--;
@@ -723,7 +723,7 @@ static NSArray * iconArray = nil;
 	{
         if (isCached && containsBodies)
 		{
-			NSMutableArray * articles = [NSMutableArray arrayWithCapacity:[cachedGuids count]];
+			NSMutableArray * articles = [NSMutableArray arrayWithCapacity:cachedGuids.count];
 			for (id object in cachedGuids)
 			{
 				Article * theArticle = [cachedArticles objectForKey:object];
@@ -731,7 +731,7 @@ static NSArray * iconArray = nil;
 				    [articles addObject:theArticle];
 				else
 				{   // some problem
-				    NSLog(@"Bug retrieving from cache in folder %ld : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)[articles count],(unsigned long)[cachedGuids count],object);
+				    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)itemId, (unsigned long)articles.count,(unsigned long)cachedGuids.count,object);
 				    isCached = NO;
 				    containsBodies = NO;
 				    break;
@@ -751,7 +751,7 @@ static NSArray * iconArray = nil;
                 [cachedGuids removeAllObjects];
                 for (id object in articles)
                 {
-                    NSString * guid = [(Article *)object guid];
+                    NSString * guid = ((Article *)object).guid;
                     [cachedGuids addObject:guid];
                     [cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
                 }
@@ -771,7 +771,7 @@ static NSArray * iconArray = nil;
  */
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject
 {
-	return [[self name] caseInsensitiveCompare:[otherObject name]];
+	return [self.name caseInsensitiveCompare:otherObject.name];
 }
 
 /* folderIDCompare
@@ -779,8 +779,8 @@ static NSArray * iconArray = nil;
  */
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject
 {
-	if ([self itemId] > [otherObject itemId]) return NSOrderedAscending;
-	if ([self itemId] < [otherObject itemId]) return NSOrderedDescending;
+	if (self.itemId > otherObject.itemId) return NSOrderedAscending;
+	if (self.itemId < otherObject.itemId) return NSOrderedDescending;
 	return NSOrderedSame;
 }
 
@@ -790,10 +790,10 @@ static NSArray * iconArray = nil;
 -(NSString *)feedSourceFilePath
 {
 	NSString * feedSourceFilePath = nil;
-	if ([self isRSSFolder])
+	if (self.RSSFolder)
 	{
-		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)[self itemId]];
-		feedSourceFilePath = [[[Preferences standardPreferences] feedSourcesFolder] stringByAppendingPathComponent:feedSourceFileName];
+		NSString * feedSourceFileName = [NSString stringWithFormat:@"folder%li.xml", (long)self.itemId];
+		feedSourceFilePath = [[Preferences standardPreferences].feedSourcesFolder stringByAppendingPathComponent:feedSourceFileName];
 	}
 	return feedSourceFilePath;
 }
@@ -803,7 +803,7 @@ static NSArray * iconArray = nil;
  */
 -(BOOL)hasFeedSource
 {
-	NSString * feedSourceFilePath = [self feedSourceFilePath];
+	NSString * feedSourceFilePath = self.feedSourceFilePath;
 	BOOL isDirectory = YES;
 	return feedSourceFilePath != nil && [[NSFileManager defaultManager] fileExistsAtPath:feedSourceFilePath isDirectory:&isDirectory] && !isDirectory;
 }
@@ -813,12 +813,12 @@ static NSArray * iconArray = nil;
  */
 -(NSScriptObjectSpecifier *)objectSpecifier
 {
-	NSArray * folders = [APPCONTROLLER folders];
+	NSArray * folders = APPCONTROLLER.folders;
 	NSUInteger index = [folders indexOfObjectIdenticalTo:self];
 	if (index != NSNotFound)
 	{
-		NSScriptObjectSpecifier *containerRef = [APPCONTROLLER objectSpecifier];
-		return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[NSApp classDescription] containerSpecifier:containerRef key:@"folders" index:index];
+		NSScriptObjectSpecifier *containerRef = APPCONTROLLER.objectSpecifier;
+		return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)NSApp.classDescription containerSpecifier:containerRef key:@"folders" index:index];
 	}
 	return nil;
 }
@@ -828,18 +828,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"Folder id %ld (%@)", (long)itemId, [self name]];
-}
-
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	lastUpdate=nil;
-	attributes=nil;
-	cachedArticles=nil;
-	cachedGuids=nil;
+	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)itemId, self.name];
 }
 
 #pragma mark NSCacheDelegate
