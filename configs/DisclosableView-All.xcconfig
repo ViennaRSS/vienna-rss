@@ -3,6 +3,7 @@
 #include "Base-Framework.xcconfig"
 
 
+PRODUCT_BUNDLE_IDENTIFIER = com.snoize.DisclosableView
 PRODUCT_NAME = DisclosableView
 USER_HEADER_SEARCH_PATHS =  $(inherited) "$(SRCROOT)/3rdparty/DisclosableView"
 INFOPLIST_FILE = 3rdparty/DisclosableView/Info-DisclosableView.plist
@@ -10,3 +11,4 @@ GCC_PREFIX_HEADER = src/Vienna_Prefix.pch
 
 
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
+CLANG_ENABLE_OBJC_ARC = YES
