@@ -764,13 +764,16 @@
 		NSData * receivedData = [connector responseData];
 		NSString * lastModifiedString = SafeString([connector.responseHeaders valueForKey:@"Last-Modified"]);
 		
-		[self finalizeFolderRefresh:@{
+		if (receivedData != nil)
+		{
+            [self finalizeFolderRefresh:@{
 									  @"folder": folder,
 									  @"log": connectorItem,
 									  @"url": url,
 									  @"data": receivedData,
 									  @"lastModifiedString": lastModifiedString,
-		 }];
+             }];
+		 }
 	}
 	else	//other HTTP response codes like 404, 403...
 	{

@@ -331,7 +331,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleBody
 {
-    NSMutableString * articleBody = [NSMutableString stringWithString:self.body];
+    NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(self.body)];
     [articleBody replaceString:@"$Article" withString:@"$_%$%_Article"];
     [articleBody replaceString:@"$Feed" withString:@"$_%$%_Feed"];
     [articleBody fixupRelativeImgTags:self.link];
@@ -405,7 +405,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)expandTags:(NSString *)theString withConditional:(BOOL)cond
 {
-    NSMutableString * newString = [NSMutableString stringWithString:theString];
+    NSMutableString * newString = [NSMutableString stringWithString:SafeString(theString)];
     BOOL hasOneTag = NO;
     NSUInteger tagStartIndex = 0;
     
