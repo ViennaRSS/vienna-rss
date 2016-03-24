@@ -762,7 +762,7 @@
 	{
 				
 		NSData * receivedData = [connector responseData];
-		NSString * lastModifiedString = [connector.responseHeaders valueForKey:@"Last-Modified"] ?: @"";
+		NSString * lastModifiedString = SafeString([connector.responseHeaders valueForKey:@"Last-Modified"]);
 		
 		[self finalizeFolderRefresh:@{
 									  @"folder": folder,
