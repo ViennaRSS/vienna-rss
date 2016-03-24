@@ -20,7 +20,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define SafeString(s)   ((s) ? (s) : @"")
+#define SafeString(s)   ((s) ?: @"")
 
 @interface NSMutableString (MutableStringExtensions)
 	-(void)replaceString:(NSString *)source withString:(NSString *)dest;
