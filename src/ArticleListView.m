@@ -1567,7 +1567,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSMutableAttributedString * theAttributedString;
 	if ([identifier isEqualToString:MA_Field_Headlines])
 	{
-		theAttributedString = [[NSMutableAttributedString alloc] init];
+		theAttributedString = [[NSMutableAttributedString alloc] initWithString:@""];
 		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && (NSApp.mainWindow.firstResponder == aTableView);
 
 		if ([db fieldByName:MA_Field_Subject].visible)
@@ -1681,7 +1681,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else
 	{
-		cellString = nil;
+		cellString = @"";
 		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
 	
