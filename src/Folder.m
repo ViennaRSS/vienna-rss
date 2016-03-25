@@ -657,6 +657,14 @@ static NSArray * iconArray = nil;
     [cachedArticles setEvictsObjectsWithDiscardedContent:YES];
 }
 
+/* articles
+ * Return an array of all articles in the specified folder.
+ */
+-(NSArray *)articles
+{
+    return [self articlesWithFilter:@""];
+}
+
 /* markArticlesInCacheRead
  * iterate through the cache and mark the articles as read
  */

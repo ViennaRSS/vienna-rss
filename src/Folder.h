@@ -93,6 +93,7 @@
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
+-(NSArray *)articles;
 -(NSArray *)articlesWithFilter:(NSString *)fstring;
 @property (nonatomic, readonly) NSInteger parentId;
 @property (nonatomic, readonly) NSInteger itemId;
