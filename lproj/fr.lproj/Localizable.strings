@@ -453,3 +453,6 @@
 
 /*Added in 3.0.7 */
 "No articles in feed" = "Aucun article dans le flux";
+
+/*Added in 3.1.2 */
+"Filter folders" = "Rechercher dans les dossiers";

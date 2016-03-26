@@ -454,3 +454,6 @@
 
 /*Added in 3.0.7 */
 "No articles in feed" = "No hay artículos en la fuente";
+
+/*Added in 3.1.2 */
+"Filter folders" = "Filtrar carpetas";
