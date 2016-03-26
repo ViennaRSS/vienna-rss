@@ -191,7 +191,7 @@ static NSMutableDictionary * stylePathMappings = nil;
 		NSMutableString * htmlArticle;
 		if (htmlTemplate == nil)
 		{
-			NSMutableString * articleBody = [NSMutableString stringWithString:theArticle.body];
+			NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(theArticle.body)];
 			[articleBody fixupRelativeImgTags:SafeString([theArticle link])];
 			[articleBody fixupRelativeIframeTags:SafeString([theArticle link])];
 			[articleBody fixupRelativeAnchorTags:SafeString([theArticle link])];
