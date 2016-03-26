@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.2
+-----
+- More crash fixes
+- Fix Vienna forgetting current folder/feed after termination and relaunch
+- Restore mechanism required by some plugins, especially "Add to Safari reading list" 
+- Conversion to modern Ojective-C
+
 3.1.1
 -----
 - Fix some crashes

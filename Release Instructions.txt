@@ -57,11 +57,12 @@ Tags should be in one of the following formats:
    11. Check your email and verify that you have a message from Sourceforge stating "GitHub Downloads Import Complete".
    12. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
    13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.1.0.tgz" and set it as default download for Mac OS X. Don't do this for beta releases!
-   14. Login to the Vienna web site directory with your admin account. `sftp <username>@web.sourceforge.net` where `<username>` is your SourceForge user name.
-   15. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.1.0_beta4.html` file via sftp to `/home/project-web/vienna-rss/htdocs`.
-   16. If you upload a release candidate, change changelog_beta.xml to be a copy of the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a copy of the new changelog.xml
-   17. Ensure that these files are set to be group writable.
-   18. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
+
+## On viennarss.github.io
+
+   14. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.1.0_beta4.html` file in the sparkle_files directory
+   15. If you upload a release candidate, change changelog_beta.xml to be a copy of the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a copy of the new changelog.xml
+   16. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
 
