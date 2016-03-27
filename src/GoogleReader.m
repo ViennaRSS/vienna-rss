@@ -213,6 +213,36 @@ enum GoogleReaderStatus {
 	request.didFailSelector = @selector(feedRequestFailed:);
 	request.userInfo = @{@"folder": thisFolder,@"log": aItem,@"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_GoogleFeed)};
 	
+    // Request id's of unread items
+    NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
+                       percentEscape(feedIdentifier)];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
+    ASIHTTPRequest *request2 = [self requestFromURL:url];
+    request2.userInfo = @{@"folder": thisFolder, @"log": aItem};
+    request2.didFinishSelector = @selector(readRequestDone:);
+    [request2 addDependency:request];
+    [[RefreshManager sharedManager] addConnection:request2];
+
+    // Request id's of starred items
+    // Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
+    NSString* starredSelector;
+    if (hostRequiresSParameter)
+    {
+        starredSelector=@"s=user/-/state/com.google/starred";
+    }
+    else
+    {
+        starredSelector=@"it=user/-/state/com.google/starred";
+    }
+
+    NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
+    NSURL * url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
+    ASIHTTPRequest *request3 = [self requestFromURL:url3];
+    request3.userInfo = @{@"folder": thisFolder, @"log": aItem};
+    request3.didFinishSelector = @selector(starredRequestDone:);
+    [request3 addDependency:request];
+    [[RefreshManager sharedManager] addConnection:request3];
+
 	return request;
 }
 
@@ -385,44 +415,6 @@ enum GoogleReaderStatus {
 			}
 		});
 		
-		NSString* feedIdentifier;
-		if( hostRequiresLastPathOnly )
-		{
-			feedIdentifier = refreshedFolder.feedURL.lastPathComponent;
-		}
-		else
-		{
-			feedIdentifier =  refreshedFolder.feedURL;
-		}
-
-		// Request id's of unread items
-		NSString * args = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&xt=user/-/state/com.google/read&n=1000&output=json", TIMESTAMP, ClientName,
-                           percentEscape(feedIdentifier)];
-		NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args]];
-		ASIHTTPRequest *request2 = [self requestFromURL:url];
-		request2.userInfo = @{@"folder": refreshedFolder, @"log": aItem};
-		request2.didFinishSelector = @selector(readRequestDone:);
-		[[RefreshManager sharedManager] addConnection:request2];
-
-		// Request id's of starred items
-		// Note: Inoreader requires syntax "it=user/-/state/...", while TheOldReader ignores it and requires "s=user/-/state/..."
-		NSString* starredSelector;
-		if (hostRequiresSParameter)
-		{
-			starredSelector=@"s=user/-/state/com.google/starred";
-		}
-		else
-		{
-			starredSelector=@"it=user/-/state/com.google/starred";
-		}
-
-		NSString * args3 = [NSString stringWithFormat:@"?ck=%@&client=%@&s=feed/%@&%@&n=1000&output=json", TIMESTAMP, ClientName, percentEscape(feedIdentifier), starredSelector];
-		NSURL * url3 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", APIBaseURL, @"stream/items/ids", args3]];
-		ASIHTTPRequest *request3 = [self requestFromURL:url3];
-		request3.userInfo = @{@"folder": refreshedFolder, @"log": aItem};
-		request3.didFinishSelector = @selector(starredRequestDone:);
-		[[RefreshManager sharedManager] addConnection:request3];
-
 	} else { //other HTTP status response...
 		[aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil), request.responseStatusCode]];
 		LOG_EXPR([request originalURL]);
@@ -440,6 +432,9 @@ enum GoogleReaderStatus {
 // callback
 - (void)readRequestDone:(ASIHTTPRequest *)request
 {
+	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
+	dispatch_async(queue, ^() {
+
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 	ActivityItem *aItem = request.userInfo[@"log"];
 	if (request.responseStatusCode == 200)
@@ -497,12 +492,16 @@ enum GoogleReaderStatus {
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	}
+	}); //block for dispatch_async
 
 }
 
 // callback
 - (void)starredRequestDone:(ASIHTTPRequest *)request
 {
+	dispatch_queue_t queue = [RefreshManager sharedManager].asyncQueue;
+	dispatch_async(queue, ^() {
+
 	Folder *refreshedFolder = request.userInfo[@"folder"];
 	ActivityItem *aItem = request.userInfo[@"log"];
 	if (request.responseStatusCode == 200)
@@ -551,6 +550,7 @@ enum GoogleReaderStatus {
 	}
 
 	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(refreshedFolder.itemId)];
+	}); //block for dispatch_async
 }
 
 -(void)authenticate 
