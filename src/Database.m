@@ -1323,7 +1323,7 @@ const NSInteger MA_Current_DB_Version = 18;
 }
 
 /* folderFromID
- * Retrieve a Folder given it's ID.
+ * Retrieve a Folder given its ID.
  */
 -(Folder *)folderFromID:(NSInteger)wantedId
 {
@@ -1331,7 +1331,7 @@ const NSInteger MA_Current_DB_Version = 18;
 }
 
 /* folderFromName
- * Retrieve a Folder given it's name.
+ * Retrieve a Folder given its name.
  */
 -(Folder *)folderFromName:(NSString *)wantedName
 {	
