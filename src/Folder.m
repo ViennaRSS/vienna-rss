@@ -160,7 +160,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)feedDescription
 {
-	return [attributes valueForKey:@"FeedDescription"];
+	return SafeString(attributes[@"FeedDescription"]);
 }
 
 /* homePage
@@ -168,7 +168,7 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)homePage
 {
-	return [attributes valueForKey:@"HomePage"];
+	return SafeString(attributes[@"HomePage"]);
 }
 
 /* image
