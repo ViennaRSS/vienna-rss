@@ -3697,37 +3697,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-	static NSInteger waitNumber = 20;
-	// Check the Open Reader status
-	if ([Preferences standardPreferences].syncGoogleReader && ![GoogleReader sharedManager].ready) {
-		LLog(@"Waiting until Google Auth is done...");
-		waitNumber-- ;
-		if (![sender isKindOfClass:[NSTimer class]]) {
-			LLog(@"Create a timer...");
-			[[GoogleReader sharedManager] authenticate];
-			[NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshAllSubscriptions:) userInfo:nil repeats:YES];
-		}
-		// if we have tried for 1 minute, there is probably a serious problem with logging in...
-		// don't insist any further for now regarding Open Reader
-		if (waitNumber<=0) {
-			[[GoogleReader sharedManager] clearAuthentication];
-			if ([sender isKindOfClass:[NSTimer class]]) {
-				[(NSTimer*)sender invalidate];
-				sender = nil;
-				waitNumber = 20;
-			}
-		}
-		else
-			return;
-	} else {
-		[self setStatusMessage:nil persist:NO];
-		if ([sender isKindOfClass:[NSTimer class]]) {
-			[(NSTimer*)sender invalidate];
-			sender = nil;
-			waitNumber = 20;
-		}
-	}
-	
 	// Reset the refresh timer
 	[self handleCheckFrequencyChange:nil];
 	

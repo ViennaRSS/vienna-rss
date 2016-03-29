@@ -29,7 +29,6 @@
 @property (nonatomic, getter=isReady, readonly) BOOL ready;
 
 -(void)loadSubscriptions:(NSNotification*)nc;
--(void)authenticate;
 -(void)getToken;
 -(void)clearAuthentication;
 -(void)resetAuthentication;
