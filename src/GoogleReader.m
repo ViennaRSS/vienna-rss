@@ -72,11 +72,7 @@ enum GoogleReaderStatus {
 @synthesize tokenTimer;
 @synthesize authTimer;
 
--(BOOL)isReady
-{
-	return (googleReaderStatus == isAuthenticated && tokenTimer != nil);
-}
-
+# pragma mark initialization
 
 - (instancetype)init
 {
@@ -103,14 +99,28 @@ enum GoogleReaderStatus {
     return self;
 }
 
-/* countOfNewArticles
+/* sharedManager
+ * Returns the single instance of the Open Reader.
  */
--(NSUInteger)countOfNewArticles
++(GoogleReader *)sharedManager
 {
-	NSUInteger count = countOfNewArticles;
-	countOfNewArticles = 0;
-	return count;
+	// Singleton
+	static GoogleReader * _googleReader = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		_googleReader = [[GoogleReader alloc] init];
+		Preferences * prefs = [Preferences standardPreferences];
+		if (prefs.syncGoogleReader)
+		{
+			openReaderHost = prefs.syncServer;
+			APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
+		}
+
+	});
+	return _googleReader;
 }
+
+# pragma mark user authentication and requests preparation
 
 /* prepare an ASIHTTPRequest from an NSURL
 */
@@ -155,6 +165,138 @@ enum GoogleReaderStatus {
 	request.delegate = self;
 }
 
+-(void)authenticate
+{
+    if (googleReaderStatus == isAuthenticated || googleReaderStatus == isMissingToken)
+    	return; //we are already connected
+    Preferences * prefs = [Preferences standardPreferences];
+	if (!prefs.syncGoogleReader)
+		return;
+	if (googleReaderStatus != notAuthenticated) {
+		LLog(@"Another instance is authenticating...");
+		return;
+	} else {
+		LLog(@"Start first authentication...");
+		googleReaderStatus = isAuthenticating;
+		[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
+	}
+
+    // restore from Preferences and from keychain
+	username = prefs.syncingUser;
+	openReaderHost = prefs.syncServer;
+	// set server-specific particularities
+	hostSupportsLongId=NO;
+	hostRequiresSParameter=NO;
+	hostRequiresLastPathOnly=NO;
+	hostRequiresInoreaderAdditionalHeaders=NO;
+	if([openReaderHost isEqualToString:@"theoldreader.com"]){
+		hostSupportsLongId=YES;
+		hostRequiresSParameter=YES;
+		hostRequiresLastPathOnly=YES;
+	}
+	if([openReaderHost rangeOfString:@"inoreader.com"].length !=0){
+		hostRequiresInoreaderAdditionalHeaders=YES;
+	}
+
+
+	password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
+	APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
+
+	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
+	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
+	if (hostRequiresInoreaderAdditionalHeaders)
+    {
+        NSMutableDictionary * theHeaders = [myRequest.requestHeaders mutableCopy];
+        [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
+        myRequest.requestHeaders = theHeaders;
+    }
+	[myRequest setUseCookiePersistence:NO];
+	myRequest.timeOutSeconds = 180;
+	[myRequest setPostValue:username forKey:@"Email"];
+	[myRequest setPostValue:password forKey:@"Passwd"];
+	myRequest.delegate = nil;
+	[myRequest startSynchronous];
+
+	NSString * response = [myRequest responseString];
+	if (!response || myRequest.responseStatusCode != 200)
+	{
+		LOG_EXPR([myRequest responseStatusCode]);
+		LOG_EXPR([myRequest responseHeaders]);
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
+		[APPCONTROLLER setStatusMessage:nil persist:NO];
+		googleReaderStatus = notAuthenticated;
+		[myRequest clearDelegatesAndCancel];
+		return;
+	}
+
+	NSArray * components = [response componentsSeparatedByString:@"\n"];
+	[myRequest clearDelegatesAndCancel];
+
+	//NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
+	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
+	self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
+
+	googleReaderStatus = isMissingToken;
+	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"GRSync_Autheticated" object:nil];
+
+    if (authTimer == nil || !authTimer.valid)
+    	//new request every 6 days
+    	authTimer = [NSTimer scheduledTimerWithTimeInterval:6*24*3600 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
+}
+
+-(void)getToken
+{
+	if(token != nil)
+		return; //We already have a transaction token
+	LLog(@"Start Token Request!");
+    ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
+    [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
+    googleReaderStatus = isAuthenticating;
+
+    request.delegate = nil;
+    [request startSynchronous];
+    if (request.error)
+    {
+		LOG_EXPR([request originalURL]);
+		LOG_EXPR([request requestHeaders]);
+		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
+		LOG_EXPR([request responseHeaders]);
+		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
+		[self setToken:nil];
+		[request clearDelegatesAndCancel];
+		return;
+	}
+    // Save token
+    self.token = [request responseString];
+    [request clearDelegatesAndCancel];
+	googleReaderStatus = isAuthenticated;
+
+    if (tokenTimer == nil || !tokenTimer.valid)
+    	//tokens expire after 30 minutes : renew them every 25 minutes
+    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:25*60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
+}
+
+-(void)renewToken
+{
+	token = nil;
+	[self getToken];
+}
+
+-(void)clearAuthentication
+{
+	googleReaderStatus = notAuthenticated;
+	[self setClientAuthToken:nil];
+	[self setToken:nil];
+}
+
+-(void)resetAuthentication
+{
+	[self clearAuthentication];
+	[self authenticate];
+}
+
+# pragma mark default handlers
+
 // default handler for didFailSelector
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
@@ -182,6 +324,24 @@ enum GoogleReaderStatus {
 		//[self clearAuthentication];
 	}
 }
+
+# pragma mark status accessors
+
+-(BOOL)isReady
+{
+	return (googleReaderStatus == isAuthenticated && tokenTimer != nil);
+}
+
+/* countOfNewArticles
+ */
+-(NSUInteger)countOfNewArticles
+{
+	NSUInteger count = countOfNewArticles;
+	countOfNewArticles = 0;
+	return count;
+}
+
+# pragma mark operations
 
 -(ASIHTTPRequest*)refreshFeed:(Folder*)thisFolder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:(BOOL)ignoreLimit
 {				
@@ -558,136 +718,6 @@ enum GoogleReaderStatus {
 	}); //block for dispatch_async
 }
 
--(void)authenticate 
-{    	
-    if (googleReaderStatus == isAuthenticated || googleReaderStatus == isMissingToken)
-    	return; //we are already connected
-    Preferences * prefs = [Preferences standardPreferences];
-	if (!prefs.syncGoogleReader)
-		return;
-	if (googleReaderStatus != notAuthenticated) {
-		LLog(@"Another instance is authenticating...");
-		return;
-	} else {
-		LLog(@"Start first authentication...");
-		googleReaderStatus = isAuthenticating;
-		[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Authenticating on Open Reader", nil) persist:NO];
-	}
-	
-    // restore from Preferences and from keychain
-	username = prefs.syncingUser;
-	openReaderHost = prefs.syncServer;
-	// set server-specific particularities
-	hostSupportsLongId=NO;
-	hostRequiresSParameter=NO;
-	hostRequiresLastPathOnly=NO;
-	hostRequiresInoreaderAdditionalHeaders=NO;
-	if([openReaderHost isEqualToString:@"theoldreader.com"]){
-		hostSupportsLongId=YES;
-		hostRequiresSParameter=YES;
-		hostRequiresLastPathOnly=YES;
-	}
-	if([openReaderHost rangeOfString:@"inoreader.com"].length !=0){
-		hostRequiresInoreaderAdditionalHeaders=YES;
-	}
-
-
-	password = [KeyChain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
-	APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
-
-	NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderHost]];
-	ASIFormDataRequest *myRequest = [ASIFormDataRequest requestWithURL:url];
-	if (hostRequiresInoreaderAdditionalHeaders)
-    {
-        NSMutableDictionary * theHeaders = [myRequest.requestHeaders mutableCopy];
-        [theHeaders addEntriesFromDictionary:inoreaderAdditionalHeaders];
-        myRequest.requestHeaders = theHeaders;
-    }
-	[myRequest setUseCookiePersistence:NO];
-	myRequest.timeOutSeconds = 180;
-	[myRequest setPostValue:username forKey:@"Email"];
-	[myRequest setPostValue:password forKey:@"Passwd"];
-	myRequest.delegate = nil;
-	[myRequest startSynchronous];
-
-	NSString * response = [myRequest responseString];
-	if (!response || myRequest.responseStatusCode != 200)
-	{
-		LOG_EXPR([myRequest responseStatusCode]);
-		LOG_EXPR([myRequest responseHeaders]);
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
-		[APPCONTROLLER setStatusMessage:nil persist:NO];
-		googleReaderStatus = notAuthenticated;
-		[myRequest clearDelegatesAndCancel];
-		return;
-	}
-
-	NSArray * components = [response componentsSeparatedByString:@"\n"];
-	[myRequest clearDelegatesAndCancel];
-
-	//NSString * sid = [[components objectAtIndex:0] substringFromIndex:4];		//unused
-	//NSString * lsid = [[components objectAtIndex:1] substringFromIndex:5];	//unused
-	self.clientAuthToken = [NSString stringWithString:[components[2] substringFromIndex:5]];
-
-	googleReaderStatus = isMissingToken;
-	[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"GRSync_Autheticated" object:nil];
-
-    if (authTimer == nil || !authTimer.valid)
-    	//new request every 6 days
-    	authTimer = [NSTimer scheduledTimerWithTimeInterval:6*24*3600 target:self selector:@selector(resetAuthentication) userInfo:nil repeats:YES];
-}
-
--(void)getToken
-{
-	if(token != nil)
-		return; //We already have a transaction token
-	LLog(@"Start Token Request!");
-    ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
-    [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
-    googleReaderStatus = isAuthenticating;
-
-    request.delegate = nil;
-    [request startSynchronous];
-    if (request.error)
-    {
-		LOG_EXPR([request originalURL]);
-		LOG_EXPR([request requestHeaders]);
-		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
-		LOG_EXPR([request responseHeaders]);
-		LOG_EXPR([[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding]);
-		[self setToken:nil];
-		[request clearDelegatesAndCancel];
-		return;
-	}
-    // Save token
-    self.token = [request responseString];
-    [request clearDelegatesAndCancel];
-	googleReaderStatus = isAuthenticated;
-
-    if (tokenTimer == nil || !tokenTimer.valid)
-    	//tokens expire after 30 minutes : renew them every 25 minutes
-    	tokenTimer = [NSTimer scheduledTimerWithTimeInterval:25*60 target:self selector:@selector(renewToken) userInfo:nil repeats:YES];
-}
-
--(void)renewToken
-{
-	token = nil;
-	[self getToken];
-}
-
--(void)clearAuthentication
-{
-	googleReaderStatus = notAuthenticated;
-	[self setClientAuthToken:nil];
-	[self setToken:nil];
-}
-
--(void)resetAuthentication
-{
-	[self clearAuthentication];
-	[self authenticate];
-}
-
 -(void)submitLoadSubscriptions {
 	
 	[APPCONTROLLER setStatusMessage:NSLocalizedString(@"Fetching Open Reader Subscriptions...", nil) persist:NO];
@@ -875,28 +905,6 @@ enum GoogleReaderStatus {
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:itemGuid forKey:@"i"];
 	[[RefreshManager sharedManager] addConnection:myRequest];
-}
-
-
-/* sharedManager
- * Returns the single instance of the Open Reader.
- */
-+(GoogleReader *)sharedManager
-{
-	// Singleton
-	static GoogleReader * _googleReader = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_googleReader = [[GoogleReader alloc] init];
-		Preferences * prefs = [Preferences standardPreferences];
-		if (prefs.syncGoogleReader)
-		{
-			openReaderHost = prefs.syncServer;
-			APIBaseURL = [NSString stringWithFormat:@"https://%@/reader/api/0/", openReaderHost];
-		}
-
-	});
-	return _googleReader;
 }
 
 -(void)createNewSubscription:(NSArray *)params
