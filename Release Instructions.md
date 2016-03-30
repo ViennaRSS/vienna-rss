@@ -58,7 +58,7 @@ Tags should be in one of the following formats:
    12. Verify the downloads. Load the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/>, download new zip files, uncompress them, and run the apps.
    13. For stable releases only : from the Sourceforge site, edit the "Properties" of "Vienna3.1.0.tgz" and set it as default download for Mac OS X. Don't do this for beta releases!
 
-## On viennarss.github.io
+### On viennarss.github.io
 
    14. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.1.0_beta4.html` file in the sparkle_files directory
    15. If you upload a release candidate, change changelog_beta.xml to be a copy of the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a copy of the new changelog.xml
@@ -66,5 +66,22 @@ Tags should be in one of the following formats:
 
 Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
 
+### On Brew Cask
+
+17. Follow the steps on the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask) which are summarised below:
+
+>Notice an application that's out-of-date in Homebrew-Cask? In most cases, it's very simple to update it. We have a [script](https://github.com/vitorgalvao/tiny-scripts/blob/master/cask-repair) that will ask for the new version number, and take care of updating the Cask file and submitting a pull request to us:
+
+```bash
+# install and setup script - only needed once
+brew install vitorgalvao/tiny-scripts/cask-repair
+cask-repair --help
+
+# use to update <outdated_cask>
+outdated_cask='vienna'
+github_user='josh64x2'
+cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
+cask-repair --pull origin --push $github_user $outdated_cask
+```
 
  
