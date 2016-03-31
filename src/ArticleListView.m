@@ -1665,7 +1665,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else if ([identifier isEqualToString:MA_Field_Link])
 	{
-		cellString = SafeString(theArticle.link);
+		cellString = theArticle.link;
 	}
 	else if ([identifier isEqualToString:MA_Field_Subject])
 	{
@@ -1677,7 +1677,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 	else if ([identifier isEqualToString:MA_Field_Enclosure])
 	{
-		cellString = SafeString(theArticle.enclosure);
+		cellString = theArticle.enclosure;
 	}
 	else
 	{
@@ -1685,7 +1685,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
 	
-	theAttributedString = [[NSMutableAttributedString alloc] initWithString:cellString attributes:(theArticle.read ? reportCellDict : unreadReportCellDict)];
+	theAttributedString = [[NSMutableAttributedString alloc] initWithString:SafeString(cellString) attributes:(theArticle.read ? reportCellDict : unreadReportCellDict)];
 	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, theAttributedString.length)];
     return theAttributedString;
 }
