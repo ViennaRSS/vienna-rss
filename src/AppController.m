@@ -1155,15 +1155,21 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * Open an array of URLs in whatever the user has registered as their
  * default system browser.
  */
-- (void)openURLsInDefaultBrowser:(NSArray *)urlArray {
+- (void)openURLsInDefaultBrowser:(NSArray<NSURL *> *)urlArray {
 	Preferences * prefs = [Preferences standardPreferences];
-	
+    BOOL openLinksInBackground = prefs.openLinksInBackground;
+    
+    if ([urlArray.firstObject.scheme isEqualToString:@"mailto"]) {
+        openLinksInBackground = NO;
+    }
+
 	// This line is a workaround for OS X bug rdar://4450641
-	if (prefs.openLinksInBackground)
+    if (openLinksInBackground) {
 		[mainWindow orderFront:self];
+    }
 	
 	// Launch in the foreground or background as needed
-	NSWorkspaceLaunchOptions lOptions = prefs.openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : (NSWorkspaceLaunchDefault | NSWorkspaceLaunchDefault);
+	NSWorkspaceLaunchOptions lOptions = openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : (NSWorkspaceLaunchDefault | NSWorkspaceLaunchDefault);
 	[[NSWorkspace sharedWorkspace] openURLs:urlArray
 					withAppBundleIdentifier:NULL
 									options:lOptions
