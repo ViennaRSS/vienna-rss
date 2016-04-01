@@ -79,8 +79,6 @@
 	BOOL containsBodies;
 	NSDate * lastUpdate;
 	NSMutableDictionary * attributes;
-	NSCache * cachedArticles;
-	NSMutableArray * cachedGuids;
 }
 
 // Initialisation functions
@@ -128,4 +126,6 @@
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 @property (nonatomic, readonly, copy) NSString *feedSourceFilePath;
 @property (nonatomic, readonly) BOOL hasFeedSource;
+@property (nonatomic, copy) NSCache * cachedArticles;
+@property (nonatomic, copy) NSMutableArray * cachedGuids;
 @end
