@@ -58,9 +58,9 @@ static NSArray * iconArray = nil;
 		isCached = NO;
 		containsBodies = NO;
 		hasPassword = NO;
-		_cachedArticles = [NSCache new];
+		self.cachedArticles = [NSCache new];
 		self.cachedArticles.delegate = self;
-		_cachedGuids = [NSMutableArray array];
+		self.cachedGuids = [NSMutableArray array];
 		attributes = [NSMutableDictionary dictionary];
 		self.name = newName;
 		self.lastUpdateString = @"";
@@ -184,8 +184,6 @@ static NSArray * iconArray = nil;
 		return [Folder _iconArray][MA_TrashFolderIcon];
 	if (IsSearchFolder(self))
 		return [Folder _iconArray][MA_SearchFolderIcon];
-	//	if (IsGoogleReaderFolder(self))
-	//	return [[Folder _iconArray] objectAtIndex:MA_GoogleReaderFolderIcon];
 	if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
 	{
 		// Try the folder icon cache.
