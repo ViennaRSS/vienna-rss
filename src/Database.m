@@ -1920,7 +1920,7 @@ const NSInteger MA_Current_DB_Version = 18;
             article.enclosure = enclosure;
             article.hasEnclosure = hasenclosure_flag;
             [cachedGuids addObject:guid];
-            [cache setObject:article forKey:[NSString stringWithString:guid]];
+            [cache setObject:article forKey:guid];
         }
         [results close];
     }];
