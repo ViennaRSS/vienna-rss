@@ -649,12 +649,11 @@ static NSArray * iconArray = nil;
     [self.cachedArticles setEvictsObjectsWithDiscardedContent:NO];
     if (!isCached)
     {
-        [self.cachedGuids removeAllObjects];
-        [self.cachedArticles removeAllObjects];
         [[Database sharedManager] prepareCache:self.cachedArticles forFolder:itemId saveGuidsIn:self.cachedGuids];
     }
     isCached = YES;
-    // Note that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
+    // Note that Database's prepareCache only builds the minimal cache, so we cannot set the containsBodies flag
+    // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
     [self.cachedArticles setEvictsObjectsWithDiscardedContent:YES];
 }
 
@@ -756,8 +755,7 @@ static NSArray * iconArray = nil;
             if (IsRSSFolder(self) || IsGoogleReaderFolder(self))
             {
                 isCached = NO;
-                [self.cachedArticles removeAllObjects];
-                [self.cachedGuids removeAllObjects];
+                containsBodies = NO;
                 for (id object in articles)
                 {
                     NSString * guid = ((Article *)object).guid;
