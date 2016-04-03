@@ -186,7 +186,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 	mainWindow.title = self.appName;
 	[NSApplication sharedApplication].delegate = self;
 	mainWindow.minSize = NSMakeSize(MA_Default_Main_Window_Min_Width, MA_Default_Main_Window_Min_Height);
-    [mainWindow setAllowsConcurrentViewDrawing:YES];
 	
 	// Initialise the plugin manager now that the UI is ready
 	pluginManager = [[PluginManager alloc] init];
