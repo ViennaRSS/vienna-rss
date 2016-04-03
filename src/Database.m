@@ -1880,16 +1880,19 @@ const NSInteger MA_Current_DB_Version = 18;
 	return foldersDict.allValues;
 }
 
-/* prepareCache
- * Returns a minimal cache of article information for the specified folder.
+/* minimalCacheForFolder
+ * Returns a minimal cache of article information for the specified folder,
+ * which is enough for tasks like feed refreshes, but is not complete enough
+ * for displaying articles : it lacks articles' descriptions and dates.
  */
--(void)prepareCache:(NSCache *)cache forFolder:(NSInteger)folderId saveGuidsIn:(NSMutableArray *)cachedGuids
+-(NSArray *)minimalCacheForFolder:(NSInteger)folderId
 {
 	// Prime the folder cache
 	[self initFolderArray];
 
     __block NSInteger unread_count = 0;
-    
+	NSMutableArray * myCache = [NSMutableArray array];
+
     FMDatabaseQueue *queue = databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         FMResultSet * results = [db executeQueryWithFormat:@"select message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure from messages where folder_id=%ld", (long)folderId];
@@ -1919,8 +1922,7 @@ const NSInteger MA_Current_DB_Version = 18;
             article.link = link;
             article.enclosure = enclosure;
             article.hasEnclosure = hasenclosure_flag;
-            [cachedGuids addObject:guid];
-            [cache setObject:article forKey:[NSString stringWithString:guid]];
+            [myCache addObject:article];
         }
         [results close];
     }];
@@ -1935,6 +1937,8 @@ const NSInteger MA_Current_DB_Version = 18;
         NSInteger diff = (unread_count - folder.unreadCount);
         [self setFolderUnreadCount:folder adjustment:diff];
     }
+
+    return [myCache copy];
 }
 
 /* setSearchString
