@@ -647,10 +647,16 @@ static NSArray * iconArray = nil;
     [self.cachedArticles setEvictsObjectsWithDiscardedContent:NO];
     if (!isCached)
     {
-        [[Database sharedManager] prepareCache:self.cachedArticles forFolder:itemId saveGuidsIn:self.cachedGuids];
+        NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:itemId];
+        for (Article * myArticle in myArray)
+        {
+            NSString * guid = myArticle.guid;
+            [self.cachedGuids addObject:guid];
+            [self.cachedArticles setObject:myArticle forKey:guid];
+        }
     }
     isCached = YES;
-    // Note that Database's prepareCache only builds the minimal cache, so we cannot set the containsBodies flag
+    // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
     // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
     [self.cachedArticles setEvictsObjectsWithDiscardedContent:YES];
 }
