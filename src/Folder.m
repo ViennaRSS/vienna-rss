@@ -32,6 +32,10 @@
 	+(NSArray *)_iconArray;
 @end
 
+@interface Folder ()
+	@property (nonatomic, strong) NSCache * cachedArticles;
+	@property (nonatomic, strong) NSMutableArray * cachedGuids;
+@end
 
 // Static pointers
 static NSArray * iconArray = nil;
