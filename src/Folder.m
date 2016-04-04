@@ -530,8 +530,8 @@ static NSArray * iconArray = nil;
                 article.status = ArticleStatusNew;
                 // add to the cache
                 NSString * guid = article.guid;
+	            [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
 	            [self.cachedGuids addObject:guid];
-	            [self.cachedArticles setObject:article forKey:guid];
                 if(!article.read)
                     adjustment = 1;
             }
@@ -651,8 +651,8 @@ static NSArray * iconArray = nil;
         for (Article * myArticle in myArray)
         {
             NSString * guid = myArticle.guid;
+            [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
             [self.cachedGuids addObject:guid];
-            [self.cachedArticles setObject:myArticle forKey:guid];
         }
     }
     isCached = YES;
@@ -763,8 +763,8 @@ static NSArray * iconArray = nil;
                 for (id object in articles)
                 {
                     NSString * guid = ((Article *)object).guid;
+                    [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
                     [self.cachedGuids addObject:guid];
-                    [self.cachedArticles setObject:object forKey:guid];
                 }
                 isCached = YES;
                 containsBodies = YES;
