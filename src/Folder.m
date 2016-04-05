@@ -764,6 +764,8 @@ static NSArray * iconArray = nil;
             {
                 isCached = NO;
                 containsBodies = NO;
+                [self.cachedArticles removeAllObjects];
+                [self.cachedGuids removeAllObjects];
                 for (id object in articles)
                 {
                     NSString * guid = ((Article *)object).guid;
