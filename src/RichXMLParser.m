@@ -51,15 +51,21 @@
 {
 	BOOL success = NO;
     NSError *error = nil;
-    NSXMLDocument *xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
-                                                                 options:NSXMLNodeOptionsNone
-                                                                       error:&error];
+	NSXMLDocument *xmlDocument;
 
-	if (error) {
-		xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
-												  options: NSXMLDocumentTidyXML
-													error:&error];
-	}
+    @try {
+        xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
+                                                        options:NSXMLNodeOptionsNone
+                                                        error:&error];
+        if (error) {
+            if (error.code == 73) return NO;
+            xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
+                                                  options: NSXMLDocumentTidyXML
+                                                  error:&error];
+        }
+    } @catch (NSException * exception) {
+        xmlDocument = nil;
+    }
 
     if (xmlDocument != nil) {
         if([(xmlDocument.rootElement).name isEqualToString:@"rss"]) {
