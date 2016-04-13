@@ -57,7 +57,7 @@
         xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                         options:NSXMLNodeOptionsNone
                                                         error:&error];
-        if (error) {
+        if (xmlDocument == nil && error != nil) {
             if (error.code == 73) return NO;
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                   options: NSXMLDocumentTidyXML
