@@ -2496,9 +2496,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             }
 		}
 		[self openURLs:urls inPreferredBrowser:usePreferredBrowser];
-		
-		if (!db.readOnly)
-            [articleController markReadByArray:articlesWithLinks readFlag:YES];
 	}
 }
 
