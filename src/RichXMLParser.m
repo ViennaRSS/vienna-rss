@@ -58,7 +58,14 @@
                                                         options:NSXMLNodeOptionsNone
                                                         error:&error];
         if (xmlDocument == nil && error != nil) {
-            if (error.code == 73) return NO;
+			if ([error.domain isEqualToString:NSXMLParserErrorDomain]) {
+				if (error.code == NSXMLParserGTRequiredError)
+					return NO;
+				if (error.code == NSXMLParserPrematureDocumentEndError)
+					return NO;
+			}
+			// Do we even want to try this?
+			// We get assertion failures with the above 2 cases, so we'll probably get them with other cases too.
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                   options: NSXMLDocumentTidyXML
                                                   error:&error];
