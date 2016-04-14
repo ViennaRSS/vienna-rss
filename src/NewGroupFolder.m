@@ -64,7 +64,6 @@
 												 canAppendIndex:NO];
 
 	// Close the window
-	[[NSNotificationCenter defaultCenter]  removeObserver:self];
 	[NSApp endSheet:newGroupFolderWindow];
 	[newGroupFolderWindow orderOut:self];
 	
@@ -77,7 +76,6 @@
  */
 -(IBAction)doCancel:(id)sender
 {
-	[[NSNotificationCenter defaultCenter]  removeObserver:self];
 	[NSApp endSheet:newGroupFolderWindow];
 	[newGroupFolderWindow orderOut:self];
 }
