@@ -57,8 +57,18 @@
         xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                         options:NSXMLNodeOptionsNone
                                                         error:&error];
-        if (error) {
-            if (error.code == 73) return NO;
+        if (xmlDocument == nil && error != nil) {
+			if ([error.domain isEqualToString:NSXMLParserErrorDomain]) {
+			    // handle here cases identified to cause
+			    // application crashes caused by
+			    // NSXMLDocument's -initWithData:options:error
+			    // when option NSXMLDocumentTidyXML is enabled
+				switch (error.code) {
+				case NSXMLParserGTRequiredError:
+					return NO;
+				}
+			}
+			// recover some cases like text encoding errors, non standard tags...
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                   options: NSXMLDocumentTidyXML
                                                   error:&error];
