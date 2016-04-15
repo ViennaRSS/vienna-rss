@@ -59,13 +59,16 @@
                                                         error:&error];
         if (xmlDocument == nil && error != nil) {
 			if ([error.domain isEqualToString:NSXMLParserErrorDomain]) {
-				if (error.code == NSXMLParserGTRequiredError)
+			    // handle here cases identified to cause
+			    // application crashes caused by
+			    // NSXMLDocument's -initWithData:options:error
+			    // when option NSXMLDocumentTidyXML is enabled
+				switch (error.code) {
+				case NSXMLParserGTRequiredError:
 					return NO;
-				if (error.code == NSXMLParserPrematureDocumentEndError)
-					return NO;
+				}
 			}
-			// Do we even want to try this?
-			// We get assertion failures with the above 2 cases, so we'll probably get them with other cases too.
+			// recover some cases like text encoding errors, non standard tags...
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
                                                   options: NSXMLDocumentTidyXML
                                                   error:&error];

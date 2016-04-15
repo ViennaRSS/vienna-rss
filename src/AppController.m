@@ -2496,6 +2496,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             }
 		}
 		[self openURLs:urls inPreferredBrowser:usePreferredBrowser];
+
+        if (([Preferences standardPreferences].markReadInterval > 0.0f) && !db.readOnly) {
+            [articleController markReadByArray:articlesWithLinks readFlag:YES];
+        }
 	}
 }
 
