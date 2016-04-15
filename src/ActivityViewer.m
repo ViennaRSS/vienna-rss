@@ -77,7 +77,6 @@
 -(BOOL)windowShouldClose:(NSNotification *)notification
 {
 	[[Preferences standardPreferences] setObject:splitView.layout forKey:@"SplitView3Positions"];
-	[[NSNotificationCenter defaultCenter]  removeObserver:self];
 	return YES;
 }
 
