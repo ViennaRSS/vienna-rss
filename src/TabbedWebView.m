@@ -288,7 +288,7 @@ static NSString * _userAgent ;
 			}
 		}
 	}
-	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"about"])
+	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"about"] || [scheme isEqualToString:@"data"])
 	{
 		[listener use];
 	}
