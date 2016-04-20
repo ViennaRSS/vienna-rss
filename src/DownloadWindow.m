@@ -116,7 +116,7 @@
 		DownloadItem * item = list[index];
 		if (item && item.state == DOWNLOAD_COMPLETED)
 		{
-			if ([[NSWorkspace sharedWorkspace] openFile:[DownloadManager fullDownloadPath:item.filename]] == NO)
+			if ([[NSWorkspace sharedWorkspace] openFile:item.filename] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file title", nil), NSLocalizedString(@"Vienna cannot open the file body", nil), item.filename.lastPathComponent);
 		}
 	}
@@ -134,7 +134,7 @@
 		DownloadItem * item = list[index];
 		if (item && item.state == DOWNLOAD_COMPLETED)
 		{
-			if ([[NSWorkspace sharedWorkspace] selectFile:[DownloadManager fullDownloadPath:item.filename] inFileViewerRootedAtPath:@""] == NO)
+			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file title", nil), NSLocalizedString(@"Vienna cannot show the file body", nil), item.filename.lastPathComponent);
 		}
 	}
