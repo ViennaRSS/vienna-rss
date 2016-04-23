@@ -1014,11 +1014,15 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     if (refreshFlag)
         [articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[browserView setPrimaryTabItemView:articleController.mainArticleView];
+	foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
+    if (self.selectedArticle == nil)
+        [mainWindow makeFirstResponder:foldersTree.mainView];
+    else
+        [mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
 	//restore filter bar state if necessary
 	if (visibleFilterBar)
 		[self setPersistedFilterBarState:YES withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
-	foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
 }
 
 
