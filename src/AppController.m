@@ -586,6 +586,25 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
 }
 
+/* feedURLStringForUpdater:
+ * This is a delegate for Sparkle.framework
+ */
+-(NSString *)feedURLStringForUpdater:(SUUpdater *)updater
+{
+	// the default as it is defined in Info.plist
+	NSString * URLstring = [NSBundle mainBundle].infoDictionary[@"SUFeedURL"];
+	if ([[Preferences standardPreferences] alwaysAcceptBetas])
+	{
+		NSURL * referenceURL = [NSURL URLWithString:URLstring];
+		NSString * extension = [referenceURL pathExtension];
+		NSURL * pathURL = [referenceURL URLByDeletingLastPathComponent];
+		// same extension and path, except name is "changelog_beta"
+		NSURL * newURL = [[pathURL URLByAppendingPathComponent:@"changelog_beta"] URLByAppendingPathExtension:extension];
+		URLstring = [newURL absoluteString];
+	}
+	return URLstring;
+}
+
 /* applicationShouldTerminate
  * This function is called when the user wants to close Vienna. First we check to see
  * if a connection or import is running and that all articles are saved.

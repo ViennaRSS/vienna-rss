@@ -732,15 +732,9 @@ static Preferences * _standardPreferences = nil;
 	{
 		alwaysAcceptBetas = flag;
 		[self setBool:flag forKey:MAPref_AlwaysAcceptBetas];
-		if (flag)
-		{
-			[SUUpdater sharedUpdater].feedURL = [NSURL URLWithString:@"http://vienna-rss.org/spstats/changelog_beta.php"];
-		}
-		else
-		{
-			// restore the default as defined in Info.plist
-			[[SUUpdater sharedUpdater] setFeedURL:nil];
-		}
+		// we suppress what might be in user prefs for the SUFeedURL key :
+		// feed URL is now handled by -feedURLStringForUpdater: and Info.plist
+		[[SUUpdater sharedUpdater] setFeedURL:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
 	}
 }
