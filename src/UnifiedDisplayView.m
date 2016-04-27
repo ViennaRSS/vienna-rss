@@ -560,7 +560,7 @@
 {
 	if (self == articleController.mainArticleView)
 	{
-		NSInteger folderId = ((Folder *)note.object).itemId;
+		NSInteger folderId = ((NSNumber *)note.object).integerValue;
 		NSInteger controllerFolderId = controller.currentFolderId;
 		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
 		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))

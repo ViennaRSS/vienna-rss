@@ -576,7 +576,7 @@ enum GoogleReaderStatus {
 			else
 			{
 				aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:refreshedFolder];
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
 			}
 		});
 		

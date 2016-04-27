@@ -1022,7 +1022,7 @@
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
 			connectorItem.status = logText;
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:folder];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(folder.itemId)];
 		}
 		
 		// Done with this connection
