@@ -887,7 +887,23 @@ enum GoogleReaderStatus {
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
 	[myRequest setPostValue:article.guid forKey:@"i"];
+	myRequest.userInfo = @{@"article": article,@"readFlag": @(flag)};
+	myRequest.didFinishSelector = @selector(markReadDone:);
 	[[RefreshManager sharedManager] addConnection:myRequest];
+}
+
+// callback : we check if the server did confirm the read status change
+- (void)markReadDone:(ASIHTTPRequest *)request
+{
+	NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
+	if ([requestResponse isEqualToString:@"OK"]) {
+		Article * article = request.userInfo[@"article"];
+		BOOL readFlag = [[request.userInfo valueForKey:@"readFlag"] boolValue];
+		[[Database sharedManager] markArticleRead:article.folderId guid:article.guid isRead:readFlag];
+		[article markRead:readFlag];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(article.folderId)];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListUpdate" object:@(article.folderId)];
+	}
 }
 
 -(void)markStarred:(Article *)article starredFlag:(BOOL)flag

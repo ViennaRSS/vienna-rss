@@ -81,6 +81,7 @@
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
 
     [self initTableView];
 }
@@ -561,11 +562,25 @@
 	if (self == articleController.mainArticleView)
 	{
 		NSInteger folderId = ((NSNumber *)note.object).integerValue;
-		NSInteger controllerFolderId = controller.currentFolderId;
+		NSInteger controllerFolderId = articleController.currentFolderId;
 		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
 		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
 		{
 			[self refreshCurrentFolder];
+		}
+	}
+}
+
+-(void)handleArticleListUpdate:(NSNotification *)note
+{
+	if (self == articleController.mainArticleView)
+	{
+		NSInteger folderId = ((NSNumber *)note.object).integerValue;
+		NSInteger controllerFolderId = articleController.currentFolderId;
+		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
+		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
+		{
+			[self refreshFolder:MA_Refresh_RedrawList];
 		}
 	}
 }

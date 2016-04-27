@@ -471,20 +471,15 @@
 	// We will make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected articles removed.
 	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
-	__block BOOL needFolderRedraw = NO;
 	__block BOOL needReload = NO;
 	
+	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray)
 	{
 		NSInteger folderId = theArticle.folderId;
-		if (!theArticle.read) {
-			needFolderRedraw = YES;
-			if (deleteFlag && IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle readFlag:YES];
-			}
-		}
 		[[Database sharedManager] markArticleDeleted:folderId guid:theArticle.guid isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
@@ -517,11 +512,7 @@
 
 	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
-	if (needFolderRedraw)
-	{
-		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-		[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
-	}
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* deleteArticlesByArray
@@ -532,19 +523,14 @@
 	// Make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected article removed.
 	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
-	__block BOOL needFolderRedraw = NO;
 	
+	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+
 	// Iterate over every selected article in the table and remove it from
 	// the database.
 	for (Article * theArticle in articleArray)	
 	{
 		NSInteger folderId = theArticle.folderId;
-		if (!theArticle.read) {
-			needFolderRedraw = YES;
-			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle readFlag:YES];
-			}
-		}
 		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:theArticle.guid])
 		{
 			[currentArrayCopy removeObject:theArticle];
@@ -555,11 +541,6 @@
 	self.folderArrayOfArticles = folderArrayCopy;
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
-	// If any of the articles we deleted were unread then the
-	// folder's unread count just changed.
-    if (needFolderRedraw) {
-		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-    }
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
 		[mainArticleView ensureSelectedArticle:YES];
@@ -567,9 +548,7 @@
 		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
     }
 	// Read and/or unread count may have changed
-    if (needFolderRedraw) {
-		[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
-    }
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* markUnflagUndo
@@ -660,15 +639,18 @@
 	for (Article * theArticle in articleArray)
 	{
 		NSInteger folderId = theArticle.folderId;
-		if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId]) && (theArticle.read != readFlag)) {
-			[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
+		if (theArticle.read != readFlag)
+		{
+			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
+				[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
+			} else {
+				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
+				[theArticle markRead:readFlag];
+				if (folderId != lastFolderId && lastFolderId != -1)
+					[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+				lastFolderId = folderId;
+			}
 		}
-		//FIX: article status should be "settato" from httprequest success block
-		[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
-		[theArticle markRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		lastFolderId = folderId;
 	}
 	if (lastFolderId != -1)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -689,12 +671,12 @@
 		if (IsGoogleReaderFolder(folder)){
 			Article * article = [folder articleFromGuid:articleRef.guid];
 			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+		} else {
+			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
+			if (folderId != lastFolderId && lastFolderId != -1)
+				[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			lastFolderId = folderId;
 		}
-		//FIX: article status should be "settato" from httprequest success block
-		[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		lastFolderId = folderId;
 	}
 	if (lastFolderId != -1)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -811,32 +793,30 @@
         if (IsGoogleReaderFolder(folder)) {
         	Article * article = [folder articleFromGuid:theGuid];
 			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
-        }
-
-		[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-		{
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-            if (lastFolderId == currentFolderId) {
-				needRefilter = YES;
-            }
+        } else {
+			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
+			if (folderId != lastFolderId && lastFolderId != -1)
+			{
+				[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			}
+			lastFolderId = folderId;
 		}
-		lastFolderId = folderId;
+
+		if (folderId == currentFolderId) {
+			needRefilter = YES;
+		}
 	}
 	
 	if (lastFolderId != -1)
 	{
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-        if (lastFolderId == currentFolderId) {
-			needRefilter = YES;
-        }
-        if (!IsRSSFolder([dbManager folderFromID:currentFolderId]) &&
-            !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
-            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
-        }
-        else if (needRefilter) {
-            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-        }
+	}
+	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
+		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
+		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	}
+	else if (needRefilter) {
+		[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 	}
 	
 	// The info bar has a count of unread articles so we need to

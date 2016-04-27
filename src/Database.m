@@ -2463,7 +2463,7 @@ const NSInteger MA_Current_DB_Version = 18;
 }
 
 /* markArticleDeleted
- * Marks a article as deleted. Deleted articles always get marked read first.
+ * Marks an article as deleted. Deleted articles should have been marked read first.
  */
 -(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
 {
@@ -2471,7 +2471,7 @@ const NSInteger MA_Current_DB_Version = 18;
 	if (folder !=nil) {
 		Article * article = [folder articleFromGuid:guid];
 		if (isDeleted && !article.read)
-			[self markArticleRead:folderId guid:guid isRead:YES];
+			return;
         FMDatabaseQueue *queue = databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"update messages set deleted_flag=? where folder_id=? and message_id=?",

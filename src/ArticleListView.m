@@ -108,6 +108,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
 	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	articleText.UIDelegate = self;
@@ -906,7 +907,27 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	if (self == articleController.mainArticleView)
 	{
-		[self refreshCurrentFolder];
+		NSInteger folderId = ((NSNumber *)note.object).integerValue;
+		NSInteger controllerFolderId = articleController.currentFolderId;
+		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
+		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
+		{
+			[self refreshCurrentFolder];
+		}
+	}
+}
+
+-(void)handleArticleListUpdate:(NSNotification *)note
+{
+	if (self == articleController.mainArticleView)
+	{
+		NSInteger folderId = ((NSNumber *)note.object).integerValue;
+		NSInteger controllerFolderId = articleController.currentFolderId;
+		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
+		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
+		{
+			[self refreshFolder:MA_Refresh_RedrawList];
+		}
 	}
 }
 
