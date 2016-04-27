@@ -299,8 +299,7 @@ enum GoogleReaderStatus {
 // default handler for didFailSelector
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-	LLog(@"Failed on request");
-	LOG_EXPR([request originalURL]);
+	LLog(@"Failed on request %@", [request originalURL]);
 	LOG_EXPR([request error]);
 	LOG_EXPR([request responseHeaders]);
 	if (request.error.code == ASIAuthenticationErrorType) //Error caused by lack of authentication
@@ -310,17 +309,14 @@ enum GoogleReaderStatus {
 // default handler for didFinishSelector
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-	LLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request originalURL] absoluteString]);
 	NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
 	if (![requestResponse isEqualToString:@"OK"]) {
-		LLog(@"Error on request");
+		LLog(@"Error (response status code %d) on request %@", [request responseStatusCode], [request originalURL]);
 		LOG_EXPR([request error]);
-		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request requestHeaders]);
 		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR(requestResponse);
-		//[self clearAuthentication];
 	}
 }
 
@@ -948,8 +944,6 @@ enum GoogleReaderStatus {
 
 - (void)createFolders:(NSMutableArray *)params
 {
-	LLog(@"createFolder - START");
-	
     NSMutableArray * folderNames = params[0];
     NSNumber * parentNumber = params[1];
     
@@ -978,9 +972,6 @@ enum GoogleReaderStatus {
         [params addObject:parentNumber];
         [self createFolders:params];
     }
-	
-	LLog(@"createFolder - END");
-
 }
 
 @end
