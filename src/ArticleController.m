@@ -712,10 +712,6 @@
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
 
-    for (Article * theArticle in folderArrayOfArticles) {
-		[theArticle markRead:YES];
-    }
-
     if (refreshFlag) {
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
     }

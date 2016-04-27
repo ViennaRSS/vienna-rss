@@ -21,7 +21,6 @@
 #import "RefreshManager.h"
 #import "FeedCredentials.h"
 #import "ActivityLog.h"
-#import "FoldersTree.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
@@ -98,7 +97,6 @@
 }
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
 	if (hasStarted)
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
