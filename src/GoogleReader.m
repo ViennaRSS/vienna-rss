@@ -25,7 +25,6 @@
 #import "Folder.h"
 #import "Database.h"
 #import <Foundation/Foundation.h>
-#import "Article.h"
 #import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
@@ -877,7 +876,7 @@ enum GoogleReaderStatus {
     [request clearDelegatesAndCancel];
 }
 
--(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
+-(void)markRead:(Article *)article readFlag:(BOOL)flag
 {
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:markReadURL];
@@ -887,11 +886,11 @@ enum GoogleReaderStatus {
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"r"];
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
-	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:article.guid forKey:@"i"];
 	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
--(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
+-(void)markStarred:(Article *)article starredFlag:(BOOL)flag
 {
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:markStarredURL];
@@ -903,7 +902,7 @@ enum GoogleReaderStatus {
 			
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
-	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:article.guid forKey:@"i"];
 	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 

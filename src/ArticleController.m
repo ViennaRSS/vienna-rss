@@ -482,7 +482,7 @@
 		if (!theArticle.read) {
 			needFolderRedraw = YES;
 			if (deleteFlag && IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:YES];
+				[[GoogleReader sharedManager] markRead:theArticle readFlag:YES];
 			}
 		}
 		[[Database sharedManager] markArticleDeleted:folderId guid:theArticle.guid isDeleted:deleteFlag];
@@ -542,7 +542,7 @@
 		if (!theArticle.read) {
 			needFolderRedraw = YES;
 			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:YES];
+				[[GoogleReader sharedManager] markRead:theArticle readFlag:YES];
 			}
 		}
 		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:theArticle.guid])
@@ -603,7 +603,7 @@
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
 		if (IsGoogleReaderFolder(myFolder)) {
-			[[GoogleReader sharedManager] markStarred:theArticle.guid starredFlag:flagged];
+			[[GoogleReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
@@ -661,7 +661,7 @@
 	{
 		NSInteger folderId = theArticle.folderId;
 		if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId]) && (theArticle.read != readFlag)) {
-			[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:readFlag];
+			[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
 		}
 		//FIX: article status should be "settato" from httprequest success block
 		[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
@@ -685,8 +685,10 @@
 	for (ArticleReference * articleRef in articleArray)
 	{
 		NSInteger folderId = articleRef.folderId;
-		if (IsGoogleReaderFolder([db folderFromID:folderId])){
-			[[GoogleReader sharedManager] markRead:articleRef.guid readFlag:readFlag];
+		Folder * folder = [db folderFromID:folderId];
+		if (IsGoogleReaderFolder(folder)){
+			Article * article = [folder articleFromGuid:articleRef.guid];
+			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
 		}
 		//FIX: article status should be "settato" from httprequest success block
 		[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
@@ -805,8 +807,10 @@
 	{
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
-        if (IsGoogleReaderFolder([dbManager folderFromID:folderId])) {
-			[[GoogleReader sharedManager] markRead:theGuid readFlag:readFlag];
+		Folder * folder = [dbManager folderFromID:folderId];
+        if (IsGoogleReaderFolder(folder)) {
+        	Article * article = [folder articleFromGuid:theGuid];
+			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
         }
 
 		[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
