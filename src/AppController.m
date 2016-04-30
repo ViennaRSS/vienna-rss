@@ -172,12 +172,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     //Enable FullScreen Support if we are on Lion 10.7.x
     mainWindow.collectionBehavior = NSWindowCollectionBehaviorFullScreenPrimary;
   	
-
-	Preferences * prefs = [Preferences standardPreferences];
-	
-	// Restore the most recent layout
-	[self setLayout:prefs.layout withRefresh:NO];
-	
 	// Localise the menus
 	[self localiseMenus:NSApp.mainMenu.itemArray];
 	
@@ -249,11 +243,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		}
 		
 		Preferences * prefs = [Preferences standardPreferences];
+		// Restore the most recent layout
+		[self setLayout:prefs.layout withRefresh:NO];
 		// Set the initial filter bar state
 		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
-				
-		// Make article list the first responder
-		[mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];		
 		
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
@@ -1014,11 +1007,15 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
     if (refreshFlag)
         [articleController.mainArticleView refreshFolder:MA_Refresh_RedrawList];
 	[browserView setPrimaryTabItemView:articleController.mainArticleView];
+	foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
+    if (self.selectedArticle == nil)
+        [mainWindow makeFirstResponder:foldersTree.mainView];
+    else
+        [mainWindow makeFirstResponder:[browserView primaryTabItemView].mainView];
 	//restore filter bar state if necessary
 	if (visibleFilterBar)
 		[self setPersistedFilterBarState:YES withAnimation:NO];
 	[self updateSearchPlaceholderAndSearchMethod];
-	foldersTree.mainView.nextKeyView = [browserView primaryTabItemView].mainView;
 }
 
 
