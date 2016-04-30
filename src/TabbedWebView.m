@@ -31,6 +31,8 @@
 @end
 
 @interface TabbedWebView (Private)
+	+(NSArray *)acceptedSchemes;
+	+(NSArray *)downloadableExtensions;
 	-(BOOL)isDownloadFileType:(NSURL *)filename;
 	-(void)loadMinimumFontSize;
 	-(void)handleMinimumFontSizeChange:(NSNotification *)nc;
@@ -55,6 +57,22 @@ static NSString * _userAgent ;
         _userAgent = [NSString stringWithFormat:MA_BrowserUserAgentString, ((ViennaApp *)NSApp).applicationVersion.firstWord, shortSafariVersion, webkitVersion];
 	}
 	return _userAgent;
+}
+
+/* acceptedSchemes
+ * schemes listener objects are able to handle directly
+ */
++(NSArray *)acceptedSchemes
+{
+    return @[@"http", @"https", @"feed", @"file", @"data", @"applewebdata", @"about"];
+}
+
+/* downloadableExtensions
+ * file extensions which are deemed to be downloaded
+ */
++(NSArray *)downloadableExtensions
+{
+    return @[@"dmg",  @"zip", @"gz", @"tgz", @"7z", @"rar", @"tar", @"bin", @"bz2", @"exe", @"sit", @"sitx"];
 }
 
 /* initWithFrame
@@ -164,18 +182,7 @@ static NSString * _userAgent ;
 -(BOOL)isDownloadFileType:(NSURL *)url
 {
 	NSString * newURLExtension = url.path.pathExtension;
-	return ([newURLExtension isEqualToString:@"dmg"] ||
-			[newURLExtension isEqualToString:@"sit"] ||
-			[newURLExtension isEqualToString:@"bin"] ||
-			[newURLExtension isEqualToString:@"bz2"] ||
-			[newURLExtension isEqualToString:@"exe"] ||
-			[newURLExtension isEqualToString:@"sitx"] ||
-			[newURLExtension isEqualToString:@"zip"] ||
-			[newURLExtension isEqualToString:@"gz"] ||
-			[newURLExtension isEqualToString:@"tgz"] ||
-			[newURLExtension isEqualToString:@"7z"] ||
-			[newURLExtension isEqualToString:@"rar"] ||
-			[newURLExtension isEqualToString:@"tar"]);
+	return ([[TabbedWebView downloadableExtensions] containsObject:newURLExtension]);
 }
 
 /* decidePolicyForMIMEType
@@ -259,9 +266,6 @@ static NSString * _userAgent ;
 -(void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
 	NSInteger navType = [[actionInformation valueForKey:WebActionNavigationTypeKey] integerValue];
-	NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
-	BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
-	
 	NSString * scheme = request.URL.scheme.lowercaseString;
 	if (navType == WebNavigationTypeLinkClicked)
 	{
@@ -271,6 +275,8 @@ static NSString * _userAgent ;
 			[listener use];
 			return;
 		}
+	    NSUInteger modifierFlags = [[actionInformation valueForKey:WebActionModifierFlagsKey] unsignedIntegerValue];
+	    BOOL useAlternateBrowser = (modifierFlags & NSAlternateKeyMask) ? YES : NO; // This is to avoid problems in casting the value into BOOL
 		if (openLinksInNewBrowser || (modifierFlags & NSCommandKeyMask))
 		{
 			[listener ignore];
@@ -288,7 +294,7 @@ static NSString * _userAgent ;
 			}
 		}
 	}
-	if (scheme == nil || [scheme isEqualToString:@""] || [scheme isEqualToString:@"http"] || [scheme isEqualToString:@"https"] || [scheme isEqualToString:@"feed"] || [scheme isEqualToString:@"file"] || [scheme isEqualToString:@"applewebdata"] || [scheme isEqualToString:@"about"])
+	if (scheme == nil || [[TabbedWebView acceptedSchemes] containsObject:scheme])
 	{
 		[listener use];
 	}

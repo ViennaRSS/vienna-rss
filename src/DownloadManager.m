@@ -321,7 +321,7 @@
 		DownloadItem * newItem = [DownloadItem new];
 		[newItem setState:DOWNLOAD_INIT];
 		newItem.download = theDownload;
-		newItem.filename = filename;
+		newItem.filename = destPath;
 		[downloadsList addObject:newItem];
 
 		// The following line will stop us getting decideDestinationWithSuggestedFilename.
