@@ -50,6 +50,7 @@
 	BackTrackArray * backtrackArray;
 	BOOL isBacktracking;
 	Article * articleToPreserve;
+	NSString * guidOfArticleToSelect;
 }
 
 @property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
@@ -88,6 +89,7 @@
 -(void)markAllReadByArray:(NSArray *)folderArray withUndo:(BOOL)undoFlag withRefresh:(BOOL)refreshFlag;
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
+-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 -(void)addBacktrack:(NSString *)guid;
 -(void)goForward;
 -(void)goBack;

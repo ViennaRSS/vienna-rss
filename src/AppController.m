@@ -253,7 +253,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
 		if (previousArticleGuid.blank)
 			previousArticleGuid = nil;
-		[articleController.mainArticleView selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
+		// Hack for provoking first display : force a data load...
+		[articleController displayFolder:previousFolderId];
+		// ... then select to cause a notification
+		[articleController selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
 		if (prefs.refreshOnStartup)
 			[self refreshAllSubscriptions:self];

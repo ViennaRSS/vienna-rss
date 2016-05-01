@@ -52,6 +52,7 @@
 		isBacktracking = NO;
 		currentFolderId = -1;
 		articleToPreserve = nil;
+		guidOfArticleToSelect = nil;
 
 		// Set default values to generate article sort descriptors
 		articleSortSpecifiers = @{
@@ -153,7 +154,7 @@
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
-	    [mainArticleView selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
+	    [self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 	    [self ensureSelectedArticle:NO];
 	}
 
@@ -349,7 +350,34 @@
  */
 -(void)displayFirstUnread
 {
-	[mainArticleView displayFirstUnread];
+	// remember current article
+	Article * currentArticle = self.selectedArticle;
+
+	// If there are any unread articles then select the first one in the
+	// first folder.
+	if ([Database sharedManager].countOfUnread > 0)
+	{
+		// Get the first folder with unread articles.
+		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
+		if (firstFolderWithUnread == currentFolderId)
+		{
+			[self displayNextUnread];
+		}
+		else
+		{
+			// Select the folder in the tree view.
+			[foldersTree selectFolder:firstFolderWithUnread];
+			// Seed in order to select the first unread article.
+			guidOfArticleToSelect = nil;
+		}
+	}
+
+	// mark read previously selected article
+	if (!currentArticle.read)
+	{
+		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
+
 }
 
 /* displayNextUnread
@@ -358,10 +386,33 @@
  */
 -(void)displayNextUnread
 {
-	[mainArticleView displayNextUnread];
+	// remember current article
+	Article * currentArticle = self.selectedArticle;
+
+	// Scan the current folder
+	BOOL inSameFolder = [mainArticleView viewNextUnreadInFolder];
+
+	// If nothing found, try other folders until we come back to ourselves.
+	if (!inSameFolder)
+	{
+		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+		if (nextFolderWithUnread != -1)
+		{
+			[foldersTree selectFolder:nextFolderWithUnread];
+			// Seed in order to select the first unread article.
+			guidOfArticleToSelect = nil;
+		}
+	}
+
+	// mark read previously selected article
+	if (!currentArticle.read)
+	{
+		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
 }
 
 /* displayFolder
+ * This is called after notification of folder selection change
  * Call the current article view to display the specified folder if it
  * is different from the current one.
  */
@@ -372,7 +423,47 @@
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 		[self sortArticles];
-		[mainArticleView selectFolderWithFilter:newFolderId];		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(newFolderId)];
+	}
+
+	if (guidOfArticleToSelect == nil)
+	{
+		[mainArticleView selectFirstUnreadInFolder];
+	}
+	else
+	{
+		[mainArticleView scrollToArticle:guidOfArticleToSelect];
+		guidOfArticleToSelect = nil;
+	}
+
+	if (currentArrayOfArticles.count > 0u)
+		[mainArticleView ensureSelectedArticle:YES];
+	else
+		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
+}
+
+/* selectFolderAndArticle
+ * Select a folder and select a specified article within the folder.
+ */
+-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
+{
+	// If we're in the right folder, select the article
+	if (folderId == currentFolderId)
+	{
+		if (guid == nil) {
+			[mainArticleView selectFirstUnreadInFolder];
+		} else {
+			[mainArticleView scrollToArticle:guid];
+		}
+	}
+	else
+	{
+		currentFolderId = folderId;
+		[foldersTree selectFolder:folderId];
+		// We seed guidOfArticleToSelect so that
+		// after notification of folder selection change has been processed,
+		// it will select the requisite article on our behalf.
+		guidOfArticleToSelect = guid;
 	}
 }
 
@@ -841,7 +932,7 @@
 	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
 	{
 		isBacktracking = YES;
-		[mainArticleView selectFolderAndArticle:folderId guid:guid];
+		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -857,7 +948,7 @@
 	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
 	{
 		isBacktracking = YES;
-		[mainArticleView selectFolderAndArticle:folderId guid:guid];
+		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -940,7 +1031,7 @@
     {
         Folder * folder = (Folder *)nc.object;
         currentFolderId = folder.itemId;
-        [mainArticleView selectFolderAndArticle:currentFolderId guid:nil];
+        [self selectFolderAndArticle:currentFolderId guid:nil];
     }
 }
 
