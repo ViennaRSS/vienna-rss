@@ -126,6 +126,8 @@
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
     }
     return self;
@@ -158,14 +160,6 @@
 	}
 
 }
-
-/* refreshCurrentFolder
- */
--(void)refreshCurrentFolder
-{
-	[mainArticleView refreshCurrentFolder];
-}
-
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */
@@ -471,11 +465,8 @@
  */
 -(void)reloadArrayOfArticles
 {
-	
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
 	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
-	
-	[self refilterArrayOfArticles];
 }
 
 /* refilterArrayOfArticles
@@ -524,7 +515,7 @@
 		if (articleToAdd != nil)
             [filteredArray addObject:articleToAdd];
 	}
-	[self setArticleToPreserve:nil];
+	articleToPreserve=nil;
 	
 	return [filteredArray copy];
 }
@@ -1019,12 +1010,65 @@
     }
 }
 
-/* setArticleToPreserve
- * Sets the article to preserve when reloading the array of articles.
+/* handleArticleListUpdate
+ * called when the article list has been updated,
+ * but without addition or removal of article in feeds
  */
--(void)setArticleToPreserve:(Article *)article
+-(void)handleArticleListUpdate:(NSNotification *)note
 {
-	articleToPreserve = article;
+	// Note the article that the user might currently be reading
+	// to be preserved when reloading the array of articles.
+    if (self.selectedArticle.deleted)
+    {
+        articleToPreserve = nil;
+    }
+    else
+    {
+        articleToPreserve = self.selectedArticle;
+    }
+    NSInteger folderId = ((NSNumber *)note.object).integerValue;
+    // we check if we only need to redraw the current list, or a reload is required
+    if (folderId == currentFolderId)
+    {
+        // we are in the folder of a feed :
+        // no article has been added or removed
+        [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+    }
+    else
+    {
+        Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+        if ( !IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) )
+        {
+            // if we are in a group folder or a smart folder, number of articles might
+            // have changed
+            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+        }
+	}
+}
+
+/* handleArticleListStateChange
+ * called after a refresh
+ * or any other event which may have added a removed an article
+ * to the current folder
+ */
+-(void)handleArticleListStateChange:(NSNotification *)note
+{
+	// Note the article that the user might currently be reading
+	// to be preserved when reloading the array of articles.
+    if (self.selectedArticle.deleted)
+    {
+        articleToPreserve = nil;
+    }
+    else
+    {
+        articleToPreserve = self.selectedArticle;
+    }
+    NSInteger folderId = ((NSNumber *)note.object).integerValue;
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) )
+    {
+        [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    }
 }
 
 /* dealloc

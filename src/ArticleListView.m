@@ -103,8 +103,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
-	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
-	[nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
 
 	// Make us the frame load and UI delegate for the web view
 	articleText.UIDelegate = self;
@@ -892,34 +890,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 }
 
--(void)handleArticleListStateChange:(NSNotification *)note
-{
-	if (self == articleController.mainArticleView)
-	{
-		NSInteger folderId = ((NSNumber *)note.object).integerValue;
-		NSInteger controllerFolderId = articleController.currentFolderId;
-		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
-		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
-		{
-			[self refreshCurrentFolder];
-		}
-	}
-}
-
--(void)handleArticleListUpdate:(NSNotification *)note
-{
-	if (self == articleController.mainArticleView)
-	{
-		NSInteger folderId = ((NSNumber *)note.object).integerValue;
-		NSInteger controllerFolderId = articleController.currentFolderId;
-		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
-		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
-		{
-			[self refreshFolder:MA_Refresh_RedrawList];
-		}
-	}
-}
-
 /* handleLoadFullHTMLChange
  * Called when the user changes the folder setting to load the article in full HTML.
  */
@@ -1142,24 +1112,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	}
 }
 
-/* refreshCurrentFolder
- * Reload the current folder after a refresh.
- */
--(void)refreshCurrentFolder
-{
-	// Preserve the article that the user might currently be reading.
-	Preferences * prefs = [Preferences standardPreferences];
-	if ((prefs.refreshFrequency > 0) &&
-		(currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)articleController.allArticles.count))
-	{
-		Article * currentArticle = articleController.allArticles[currentSelectedRow];
-		if (!currentArticle.deleted)
-			[articleController setArticleToPreserve:currentArticle];
-	}
-	
-	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-}
-
 /* refreshFolder
  * Refreshes the current folder by applying the current sort or thread
  * logic and redrawing the article list. The selected article is preserved
@@ -1177,13 +1129,25 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		blockSelectionHandler = blockMarkRead = YES;		
 	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
 		guid = [allArticles[currentSelectedRow] guid];
-	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
-		[articleController reloadArrayOfArticles];
-	else if (refreshFlag == MA_Refresh_ReapplyFilter)
-		[articleController refilterArrayOfArticles];
-	if (refreshFlag != MA_Refresh_RedrawList)
-		[articleController sortArticles];
-	[self showSortDirection];
+
+    switch (refreshFlag)
+    {
+        case MA_Refresh_ReloadFromDatabase:
+            [articleController reloadArrayOfArticles];
+            [articleController refilterArrayOfArticles];
+            [articleController sortArticles];
+            break;
+        case MA_Refresh_RedrawList:
+            break;
+        case MA_Refresh_ReapplyFilter:
+            [articleController refilterArrayOfArticles];
+            [articleController sortArticles];
+            break;
+        case MA_Refresh_SortAndRedraw:
+            [articleController sortArticles];
+            break;
+    }
+
 	[articleList reloadData];
 	if (guid != nil)
 	{

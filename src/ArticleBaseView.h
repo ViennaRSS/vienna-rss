@@ -30,6 +30,5 @@
 	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
-	-(void)refreshCurrentFolder;
 	-(void)handleRefreshArticle:(NSNotification *)nc;
 @end

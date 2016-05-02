@@ -75,7 +75,6 @@
 -(void)displayNextUnread;
 @property (nonatomic, readonly, copy) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
--(void)refreshCurrentFolder;
 -(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
 @property (nonatomic, readonly, copy) NSString *sortColumnIdentifier;
@@ -95,5 +94,4 @@
 -(void)goBack;
 @property (nonatomic, readonly) BOOL canGoForward;
 @property (nonatomic, readonly) BOOL canGoBack;
--(void)setArticleToPreserve:(Article *)article;
 @end

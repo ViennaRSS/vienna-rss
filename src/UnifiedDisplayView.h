@@ -34,7 +34,6 @@
 
 	NSInteger currentSelectedRow;
 	BOOL blockSelectionHandler;
-	BOOL blockMarkRead;
 
 	NSTimer * markReadTimer;
 
