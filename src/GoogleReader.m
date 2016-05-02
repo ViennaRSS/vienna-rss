@@ -25,7 +25,6 @@
 #import "Folder.h"
 #import "Database.h"
 #import <Foundation/Foundation.h>
-#import "Article.h"
 #import "AppController.h"
 #import "RefreshManager.h"
 #import "Preferences.h"
@@ -300,8 +299,7 @@ enum GoogleReaderStatus {
 // default handler for didFailSelector
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-	LLog(@"Failed on request");
-	LOG_EXPR([request originalURL]);
+	LLog(@"Failed on request %@", [request originalURL]);
 	LOG_EXPR([request error]);
 	LOG_EXPR([request responseHeaders]);
 	if (request.error.code == ASIAuthenticationErrorType) //Error caused by lack of authentication
@@ -311,17 +309,14 @@ enum GoogleReaderStatus {
 // default handler for didFinishSelector
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-	LLog(@"HTTP response status code: %d -- URL: %@", [request responseStatusCode], [[request originalURL] absoluteString]);
 	NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
 	if (![requestResponse isEqualToString:@"OK"]) {
-		LLog(@"Error on request");
+		LLog(@"Error (response status code %d) on request %@", [request responseStatusCode], [request originalURL]);
 		LOG_EXPR([request error]);
-		LOG_EXPR([request originalURL]);
 		LOG_EXPR([request requestHeaders]);
 		LOG_EXPR([[NSString alloc] initWithData:[request postBody] encoding:NSUTF8StringEncoding]);
 		LOG_EXPR([request responseHeaders]);
 		LOG_EXPR(requestResponse);
-		//[self clearAuthentication];
 	}
 }
 
@@ -576,7 +571,7 @@ enum GoogleReaderStatus {
 			else
 			{
 				aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:refreshedFolder];
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
 			}
 		});
 		
@@ -878,7 +873,7 @@ enum GoogleReaderStatus {
     [request clearDelegatesAndCancel];
 }
 
--(void)markRead:(NSString *)itemGuid readFlag:(BOOL)flag
+-(void)markRead:(Article *)article readFlag:(BOOL)flag
 {
 	NSURL *markReadURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:markReadURL];
@@ -888,11 +883,27 @@ enum GoogleReaderStatus {
 		[myRequest setPostValue:@"user/-/state/com.google/read" forKey:@"r"];
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
-	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:article.guid forKey:@"i"];
+	myRequest.userInfo = @{@"article": article,@"readFlag": @(flag)};
+	myRequest.didFinishSelector = @selector(markReadDone:);
 	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
--(void)markStarred:(NSString *)itemGuid starredFlag:(BOOL)flag
+// callback : we check if the server did confirm the read status change
+- (void)markReadDone:(ASIHTTPRequest *)request
+{
+	NSString *requestResponse = [[NSString alloc] initWithData:[request responseData] encoding:NSUTF8StringEncoding];
+	if ([requestResponse isEqualToString:@"OK"]) {
+		Article * article = request.userInfo[@"article"];
+		BOOL readFlag = [[request.userInfo valueForKey:@"readFlag"] boolValue];
+		[[Database sharedManager] markArticleRead:article.folderId guid:article.guid isRead:readFlag];
+		[article markRead:readFlag];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(article.folderId)];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListUpdate" object:@(article.folderId)];
+	}
+}
+
+-(void)markStarred:(Article *)article starredFlag:(BOOL)flag
 {
 	NSURL *markStarredURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@edit-tag",APIBaseURL]];
 	ASIFormDataRequest * myRequest = [self authentifiedFormRequestFromURL:markStarredURL];
@@ -904,7 +915,7 @@ enum GoogleReaderStatus {
 			
 	}
 	[myRequest setPostValue:@"true" forKey:@"async"];
-	[myRequest setPostValue:itemGuid forKey:@"i"];
+	[myRequest setPostValue:article.guid forKey:@"i"];
 	[[RefreshManager sharedManager] addConnection:myRequest];
 }
 
@@ -934,8 +945,6 @@ enum GoogleReaderStatus {
 
 - (void)createFolders:(NSMutableArray *)params
 {
-	LLog(@"createFolder - START");
-	
     NSMutableArray * folderNames = params[0];
     NSNumber * parentNumber = params[1];
     
@@ -964,9 +973,6 @@ enum GoogleReaderStatus {
         [params addObject:parentNumber];
         [self createFolders:params];
     }
-	
-	LLog(@"createFolder - END");
-
 }
 
 @end

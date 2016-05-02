@@ -30,7 +30,6 @@
 @class ArticleController;
 @class MessageListView;
 @class ArticleView;
-@class FoldersTree;
 
 @interface ArticleListView : NSView<BaseView, ArticleBaseView, NSSplitViewDelegate, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
 {
@@ -39,7 +38,6 @@
 	IBOutlet MessageListView * articleList;
 	IBOutlet ArticleView * articleText;
 	IBOutlet NSSplitView * splitView2;
-	IBOutlet FoldersTree * foldersTree;
 	IBOutlet StdEnclosureView * stdEnclosureView;
 
 	NSInteger currentSelectedRow;
@@ -51,7 +49,6 @@
 	BOOL blockMarkRead;
 
 	NSTimer * markReadTimer;
-	NSString * guidOfArticleToSelect;
 	NSFont * articleListFont;
 	NSFont * articleListUnreadFont;
 	NSMutableDictionary * reportCellDict;

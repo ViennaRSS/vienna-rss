@@ -25,21 +25,18 @@
 @class AppController;
 @class ArticleController;
 @class ArticleView;
-@class FoldersTree;
 
 @interface UnifiedDisplayView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource>
 {
 	IBOutlet AppController * controller;
 	IBOutlet ArticleController * articleController;
     IBOutlet NSTableView *articleList;
-	IBOutlet FoldersTree * foldersTree;
 
 	NSInteger currentSelectedRow;
 	BOOL blockSelectionHandler;
 	BOOL blockMarkRead;
 
 	NSTimer * markReadTimer;
-	NSString * guidOfArticleToSelect;
 
 	NSMutableArray * rowHeightArray;
 }

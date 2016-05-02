@@ -21,7 +21,6 @@
 #import "RefreshManager.h"
 #import "FeedCredentials.h"
 #import "ActivityLog.h"
-#import "FoldersTree.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
@@ -98,7 +97,6 @@
 }
 
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:nil];
 	if (hasStarted)
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
@@ -110,7 +108,6 @@
 - (void)nqRequestFinished:(ASIHTTPRequest *)request {
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
-	LLog(@"Removed queue: %d", [networkQueue requestsCount]);
 }
 
 - (void)nqRequestStarted:(ASIHTTPRequest *)request {
@@ -122,8 +119,6 @@
 
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
 	[APPCONTROLLER setStatusMessage:self.statusMessageDuringRefresh persist:YES];
-	LLog(@"Added queue: %d", [networkQueue requestsCount]);
-
 }
 
 
@@ -1022,7 +1017,7 @@
 		{
 			NSString * logText = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
 			connectorItem.status = logText;
-			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:folder];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(folder.itemId)];
 		}
 		
 		// Done with this connection

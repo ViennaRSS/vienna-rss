@@ -52,6 +52,7 @@
 		isBacktracking = NO;
 		currentFolderId = -1;
 		articleToPreserve = nil;
+		guidOfArticleToSelect = nil;
 
 		// Set default values to generate article sort descriptors
 		articleSortSpecifiers = @{
@@ -153,7 +154,7 @@
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil)
 	{
-	    [mainArticleView selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
+	    [self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 	    [self ensureSelectedArticle:NO];
 	}
 
@@ -349,7 +350,34 @@
  */
 -(void)displayFirstUnread
 {
-	[mainArticleView displayFirstUnread];
+	// remember current article
+	Article * currentArticle = self.selectedArticle;
+
+	// If there are any unread articles then select the first one in the
+	// first folder.
+	if ([Database sharedManager].countOfUnread > 0)
+	{
+		// Get the first folder with unread articles.
+		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
+		if (firstFolderWithUnread == currentFolderId)
+		{
+			[self displayNextUnread];
+		}
+		else
+		{
+			// Select the folder in the tree view.
+			[foldersTree selectFolder:firstFolderWithUnread];
+			// Seed in order to select the first unread article.
+			guidOfArticleToSelect = nil;
+		}
+	}
+
+	// mark read previously selected article
+	if (!currentArticle.read)
+	{
+		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
+
 }
 
 /* displayNextUnread
@@ -358,10 +386,33 @@
  */
 -(void)displayNextUnread
 {
-	[mainArticleView displayNextUnread];
+	// remember current article
+	Article * currentArticle = self.selectedArticle;
+
+	// Scan the current folder
+	BOOL inSameFolder = [mainArticleView viewNextUnreadInFolder];
+
+	// If nothing found, try other folders until we come back to ourselves.
+	if (!inSameFolder)
+	{
+		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+		if (nextFolderWithUnread != -1)
+		{
+			[foldersTree selectFolder:nextFolderWithUnread];
+			// Seed in order to select the first unread article.
+			guidOfArticleToSelect = nil;
+		}
+	}
+
+	// mark read previously selected article
+	if (!currentArticle.read)
+	{
+		[self markReadByArray:@[currentArticle] readFlag:YES];
+	}
 }
 
 /* displayFolder
+ * This is called after notification of folder selection change
  * Call the current article view to display the specified folder if it
  * is different from the current one.
  */
@@ -372,7 +423,47 @@
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 		[self sortArticles];
-		[mainArticleView selectFolderWithFilter:newFolderId];		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(newFolderId)];
+	}
+
+	if (guidOfArticleToSelect == nil)
+	{
+		[mainArticleView selectFirstUnreadInFolder];
+	}
+	else
+	{
+		[mainArticleView scrollToArticle:guidOfArticleToSelect];
+		guidOfArticleToSelect = nil;
+	}
+
+	if (currentArrayOfArticles.count > 0u)
+		[mainArticleView ensureSelectedArticle:YES];
+	else
+		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
+}
+
+/* selectFolderAndArticle
+ * Select a folder and select a specified article within the folder.
+ */
+-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
+{
+	// If we're in the right folder, select the article
+	if (folderId == currentFolderId)
+	{
+		if (guid == nil) {
+			[mainArticleView selectFirstUnreadInFolder];
+		} else {
+			[mainArticleView scrollToArticle:guid];
+		}
+	}
+	else
+	{
+		currentFolderId = folderId;
+		[foldersTree selectFolder:folderId];
+		// We seed guidOfArticleToSelect so that
+		// after notification of folder selection change has been processed,
+		// it will select the requisite article on our behalf.
+		guidOfArticleToSelect = guid;
 	}
 }
 
@@ -471,20 +562,15 @@
 	// We will make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected articles removed.
 	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
-	__block BOOL needFolderRedraw = NO;
 	__block BOOL needReload = NO;
 	
+	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray)
 	{
 		NSInteger folderId = theArticle.folderId;
-		if (!theArticle.read) {
-			needFolderRedraw = YES;
-			if (deleteFlag && IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:YES];
-			}
-		}
 		[[Database sharedManager] markArticleDeleted:folderId guid:theArticle.guid isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
@@ -517,11 +603,7 @@
 
 	// If any of the articles we deleted were unread then the
 	// folder's unread count just changed.
-	if (needFolderRedraw)
-	{
-		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-		[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
-	}
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* deleteArticlesByArray
@@ -532,19 +614,14 @@
 	// Make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected article removed.
 	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
-	__block BOOL needFolderRedraw = NO;
 	
+	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+
 	// Iterate over every selected article in the table and remove it from
 	// the database.
 	for (Article * theArticle in articleArray)	
 	{
 		NSInteger folderId = theArticle.folderId;
-		if (!theArticle.read) {
-			needFolderRedraw = YES;
-			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
-				[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:YES];
-			}
-		}
 		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:theArticle.guid])
 		{
 			[currentArrayCopy removeObject:theArticle];
@@ -555,11 +632,6 @@
 	self.folderArrayOfArticles = folderArrayCopy;
 	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 
-	// If any of the articles we deleted were unread then the
-	// folder's unread count just changed.
-    if (needFolderRedraw) {
-		[foldersTree updateFolder:currentFolderId recurseToParents:YES];
-    }
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
 		[mainArticleView ensureSelectedArticle:YES];
@@ -567,9 +639,7 @@
 		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
     }
 	// Read and/or unread count may have changed
-    if (needFolderRedraw) {
-		[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
-    }
+	[APPCONTROLLER showUnreadCountOnApplicationIconAndWindowTitle];
 }
 
 /* markUnflagUndo
@@ -603,7 +673,7 @@
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
 		if (IsGoogleReaderFolder(myFolder)) {
-			[[GoogleReader sharedManager] markStarred:theArticle.guid starredFlag:flagged];
+			[[GoogleReader sharedManager] markStarred:theArticle starredFlag:flagged];
 		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
@@ -660,15 +730,18 @@
 	for (Article * theArticle in articleArray)
 	{
 		NSInteger folderId = theArticle.folderId;
-		if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId]) && (theArticle.read != readFlag)) {
-			[[GoogleReader sharedManager] markRead:theArticle.guid readFlag:readFlag];
+		if (theArticle.read != readFlag)
+		{
+			if (IsGoogleReaderFolder([[Database sharedManager] folderFromID:folderId])) {
+				[[GoogleReader sharedManager] markRead:theArticle readFlag:readFlag];
+			} else {
+				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
+				[theArticle markRead:readFlag];
+				if (folderId != lastFolderId && lastFolderId != -1)
+					[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+				lastFolderId = folderId;
+			}
 		}
-		//FIX: article status should be "settato" from httprequest success block
-		[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
-		[theArticle markRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		lastFolderId = folderId;
 	}
 	if (lastFolderId != -1)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -685,14 +758,16 @@
 	for (ArticleReference * articleRef in articleArray)
 	{
 		NSInteger folderId = articleRef.folderId;
-		if (IsGoogleReaderFolder([db folderFromID:folderId])){
-			[[GoogleReader sharedManager] markRead:articleRef.guid readFlag:readFlag];
+		Folder * folder = [db folderFromID:folderId];
+		if (IsGoogleReaderFolder(folder)){
+			Article * article = [folder articleFromGuid:articleRef.guid];
+			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+		} else {
+			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
+			if (folderId != lastFolderId && lastFolderId != -1)
+				[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			lastFolderId = folderId;
 		}
-		//FIX: article status should be "settato" from httprequest success block
-		[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-		lastFolderId = folderId;
 	}
 	if (lastFolderId != -1)
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
@@ -727,10 +802,6 @@
 		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
 		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	}
-
-    for (Article * theArticle in folderArrayOfArticles) {
-		[theArticle markRead:YES];
-    }
 
     if (refreshFlag) {
 		[mainArticleView refreshFolder:MA_Refresh_RedrawList];
@@ -805,34 +876,34 @@
 	{
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
-        if (IsGoogleReaderFolder([dbManager folderFromID:folderId])) {
-			[[GoogleReader sharedManager] markRead:theGuid readFlag:readFlag];
-        }
-
-		[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-		if (folderId != lastFolderId && lastFolderId != -1)
-		{
-			[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-            if (lastFolderId == currentFolderId) {
-				needRefilter = YES;
-            }
+		Folder * folder = [dbManager folderFromID:folderId];
+        if (IsGoogleReaderFolder(folder)) {
+        	Article * article = [folder articleFromGuid:theGuid];
+			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+        } else {
+			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
+			if (folderId != lastFolderId && lastFolderId != -1)
+			{
+				[foldersTree updateFolder:lastFolderId recurseToParents:YES];
+			}
+			lastFolderId = folderId;
 		}
-		lastFolderId = folderId;
+
+		if (folderId == currentFolderId) {
+			needRefilter = YES;
+		}
 	}
 	
 	if (lastFolderId != -1)
 	{
 		[foldersTree updateFolder:lastFolderId recurseToParents:YES];
-        if (lastFolderId == currentFolderId) {
-			needRefilter = YES;
-        }
-        if (!IsRSSFolder([dbManager folderFromID:currentFolderId]) &&
-            !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
-            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
-        }
-        else if (needRefilter) {
-            [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
-        }
+	}
+	if (lastFolderId != -1 && !IsRSSFolder([dbManager folderFromID:currentFolderId])
+		&& !IsGoogleReaderFolder([dbManager folderFromID:currentFolderId])) {
+		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+	}
+	else if (needRefilter) {
+		[mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 	}
 	
 	// The info bar has a count of unread articles so we need to
@@ -861,7 +932,7 @@
 	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
 	{
 		isBacktracking = YES;
-		[mainArticleView selectFolderAndArticle:folderId guid:guid];
+		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -877,7 +948,7 @@
 	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
 	{
 		isBacktracking = YES;
-		[mainArticleView selectFolderAndArticle:folderId guid:guid];
+		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
 	}
 }
@@ -960,7 +1031,7 @@
     {
         Folder * folder = (Folder *)nc.object;
         currentFolderId = folder.itemId;
-        [mainArticleView selectFolderAndArticle:currentFolderId guid:nil];
+        [self selectFolderAndArticle:currentFolderId guid:nil];
     }
 }
 

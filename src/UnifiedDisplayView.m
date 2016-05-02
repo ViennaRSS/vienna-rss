@@ -43,7 +43,6 @@
 	-(void)selectArticleAfterReload;
 	-(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
 	-(BOOL)scrollToArticle:(NSString *)guid;
-	-(void)selectFirstUnreadInFolder;
 	-(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 	-(void)markCurrentRead:(NSTimer *)aTimer;
 	-(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
@@ -65,7 +64,6 @@
 	{
 		blockSelectionHandler = NO;
 		blockMarkRead = NO;
-		guidOfArticleToSelect = nil;
 		markReadTimer = nil;
 		rowHeightArray = [[NSMutableArray alloc] init];
     }
@@ -81,6 +79,7 @@
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
 	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
 
     [self initTableView];
 }
@@ -532,12 +531,7 @@
  */
 -(BOOL)canDeleteMessageAtRow:(NSInteger)row
 {
-	if ((row >= 0) && (row < articleController.allArticles.count))
-	{
-		Article * article = articleController.allArticles[row];
-		return (article != nil) && ![Database sharedManager].readOnly && articleList.window.visible;
-	}
-	return NO;
+	return articleList.window.visible && (self.selectedArticle != nil) && ![Database sharedManager].readOnly;
 }
 
 /* selectedArticle
@@ -560,12 +554,26 @@
 {
 	if (self == articleController.mainArticleView)
 	{
-		NSInteger folderId = ((Folder *)note.object).itemId;
-		NSInteger controllerFolderId = controller.currentFolderId;
+		NSInteger folderId = ((NSNumber *)note.object).integerValue;
+		NSInteger controllerFolderId = articleController.currentFolderId;
 		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
 		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
 		{
 			[self refreshCurrentFolder];
+		}
+	}
+}
+
+-(void)handleArticleListUpdate:(NSNotification *)note
+{
+	if (self == articleController.mainArticleView)
+	{
+		NSInteger folderId = ((NSNumber *)note.object).integerValue;
+		NSInteger controllerFolderId = articleController.currentFolderId;
+		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
+		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
+		{
+			[self refreshFolder:MA_Refresh_RedrawList];
 		}
 	}
 }
@@ -602,61 +610,14 @@
 	}
 }
 
-/* displayFirstUnread
- * Locate the first unread article.
+/*
+ * viewNextUnreadInFolder
+ * Search the following unread article in the current folder
+ * and select it if found
  */
--(void)displayFirstUnread
+-(BOOL)viewNextUnreadInFolder
 {
-	// Mark the current article read.
-	[self markCurrentRead:nil];
-
-	// If there are any unread articles then select the first one in the
-	// first folder.
-	if ([Database sharedManager].countOfUnread > 0)
-	{
-		guidOfArticleToSelect = nil;
-
-		// Get the first folder with unread articles.
-		NSInteger firstFolderWithUnread = foldersTree.firstFolderWithUnread;
-
-		// Select the folder in the tree view.
-		[foldersTree selectFolder:firstFolderWithUnread];
-
-		// Now select the first unread article.
-		[self selectFirstUnreadInFolder];
-	}
-}
-
-/* displayNextUnread
- * Locate the next unread article from the current article onward.
- */
--(void)displayNextUnread
-{
-	// Save the value of currentSelectedRow.
-	NSInteger currentRow = currentSelectedRow;
-
-	// Mark the current article read.
-	[self markCurrentRead:nil];
-
-	// Scan the current folder from the selection forward. If nothing found, try
-	// other folders until we come back to ourselves.
-	if (([Database sharedManager].countOfUnread > 0) && (![self viewNextUnreadInCurrentFolder:currentRow]))
-	{
-		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:articleController.currentFolderId];
-		if (nextFolderWithUnread != -1)
-		{
-			if (nextFolderWithUnread == articleController.currentFolderId)
-			{
-				[self viewNextUnreadInCurrentFolder:-1];
-			}
-			else
-			{
-				guidOfArticleToSelect = nil;
-				[foldersTree selectFolder:nextFolderWithUnread];
-				[self selectFirstUnreadInFolder];
-			}
-		}
-	}
+	return [self viewNextUnreadInCurrentFolder:(currentSelectedRow +1)];
 }
 
 /* viewNextUnreadInCurrentFolder
@@ -687,33 +648,16 @@
  * Moves the selection to the first unread article in the current article list or the
  * last article if the folder has no unread articles.
  */
--(void)selectFirstUnreadInFolder
+-(BOOL)selectFirstUnreadInFolder
 {
-	if (![self viewNextUnreadInCurrentFolder:-1])
+	BOOL result = [self viewNextUnreadInCurrentFolder:-1];
+	if (!result)
 	{
 		NSInteger count = articleController.allArticles.count;
 		if (count > 0)
-			[self makeRowSelectedAndVisible:[[Preferences standardPreferences].articleSortDescriptors[0] ascending] ? 0 : count - 1];
+			[self makeRowSelectedAndVisible:count - 1];
 	}
-}
-
-/* selectFolderAndArticle
- * Select a folder and select a specified article within the folder.
- */
--(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
-{
-	// If we're in the right folder, easy enough.
-	if (folderId == articleController.currentFolderId)
-		[self scrollToArticle:guid];
-	else
-	{
-		// Otherwise we force the folder to be selected and seed guidOfArticleToSelect
-		// so that after handleFolderSelection has been invoked, it will select the
-		// requisite article on our behalf.
-		currentSelectedRow = -1;
-		guidOfArticleToSelect = guid;
-		[foldersTree selectFolder:folderId];
-	}
+	return result;
 }
 
 /* viewLink
@@ -785,40 +729,8 @@
 	}
 	else
 		currentSelectedRow = -1;
-	if ((refreshFlag == MA_Refresh_ReapplyFilter || refreshFlag == MA_Refresh_ReloadFromDatabase) && (currentSelectedRow == -1) && (NSApp.mainWindow.firstResponder == articleList))
-		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
-	else if (refreshFlag == MA_Refresh_SortAndRedraw)
+	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;
-}
-
-/* selectArticleAfterReload
- * Sets the selection in the article list after the list is reloaded. The value of guidOfArticleToSelect
- * is either MA_Select_None, meaning no selection, MA_Select_Unread meaning select the first unread
- * article from the beginning (after sorting is applied) or it is the ID of a specific article to be
- * selected.
- */
--(void)selectArticleAfterReload
-{
-	if (guidOfArticleToSelect == nil)
-		[self selectFirstUnreadInFolder];
-	else
-		[self scrollToArticle:guidOfArticleToSelect];
-	guidOfArticleToSelect = nil;
-}
-
-/* selectFolderWithFilter
- * Switches to the specified folder and displays articles filtered by whatever is in
- * the search field.
- */
--(void)selectFolderWithFilter:(NSInteger)newFolderId
-{
-    currentSelectedRow = -1;
-    [rowHeightArray removeAllObjects];
-    [articleList reloadData];
-    if (guidOfArticleToSelect == nil)
-        [articleList scrollRowToVisible:0];
-    else
-        [self selectArticleAfterReload];
 }
 
 /* handleRefreshArticle

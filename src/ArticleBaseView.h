@@ -22,15 +22,14 @@
 @class Article;
 
 @protocol ArticleBaseView
-	-(void)selectFolderWithFilter:(NSInteger)newFolderId;
-	-(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
+	-(BOOL)selectFirstUnreadInFolder;
+	-(BOOL)viewNextUnreadInFolder;
+	-(BOOL)scrollToArticle:(NSString *)guid;
 	-(void)refreshFolder:(NSInteger)refreshFlag;
 	@property (nonatomic, readonly, strong) Article *selectedArticle;
 	@property (nonatomic, readonly, copy) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
-	-(void)displayFirstUnread;
-	-(void)displayNextUnread;
 	-(void)refreshCurrentFolder;
 	-(void)handleRefreshArticle:(NSNotification *)nc;
 	-(void)refreshArticlePane;
