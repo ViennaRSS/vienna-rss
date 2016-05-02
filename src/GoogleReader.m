@@ -776,11 +776,12 @@ enum GoogleReaderStatus {
 		
 		if (![localFeeds containsObject:feedURL])
 		{
-			NSString *rssTitle = nil;
+			NSString *rssTitle = @"";
 			if (feed[@"title"]) {
 				rssTitle = feed[@"title"];
 			}
-			NSArray * params = @[feedURL, rssTitle, folderName];
+			// folderName could be nil
+			NSArray * params = folderName ? @[feedURL, rssTitle, folderName] : @[feedURL, rssTitle];
 			[self createNewSubscription:params];
 		}
 		else
