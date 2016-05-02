@@ -418,12 +418,11 @@
  */
 -(void)displayFolder:(NSInteger)newFolderId
 {
+	articleToPreserve = nil;
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
 		currentFolderId = newFolderId;
-		[self reloadArrayOfArticles];
-		[self sortArticles];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(newFolderId)];
+		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 
 	if (guidOfArticleToSelect == nil)
