@@ -123,7 +123,6 @@
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
@@ -977,20 +976,6 @@
     {
 	    [mainArticleView refreshFolder:MA_Refresh_ReapplyFilter];
 	}
-}
-
-/* handleFolderNameChange
-* Some folder metadata changed. Update the article list header and the
-* current article with a possible name change.
-*/
--(void)handleFolderNameChange:(NSNotification *)nc
-{
-    @synchronized(mainArticleView)
-    {
-        NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-        if (folderId == currentFolderId)
-            [mainArticleView refreshArticlePane];
-    }
 }
 
 /* handleRefreshArticle

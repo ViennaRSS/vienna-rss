@@ -32,5 +32,4 @@
 	-(void)ensureSelectedArticle:(BOOL)singleSelection;
 	-(void)refreshCurrentFolder;
 	-(void)handleRefreshArticle:(NSNotification *)nc;
-	-(void)refreshArticlePane;
 @end
