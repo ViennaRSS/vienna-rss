@@ -181,7 +181,7 @@ extern NSString * const kMA_Notify_UseWebPluginsChange;
 // Do we show an icon in the status bar?
 @property (nonatomic) BOOL showAppInStatusBar;
 
-// Handle update via Sparkle
+// Handle update via Sparkle / ViennaSparkleDelegate
 -(void)handleUpdateRestart;
 
 // Show or hide the status bar

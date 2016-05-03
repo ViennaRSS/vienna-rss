@@ -109,6 +109,7 @@
 		3A9903951993638900EA69B2 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; };
 		3A990396199363BE00EA69B2 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9903941993638900EA69B2 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		3AEE7DE91695FC570018A17D /* vienna_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = 3AEE7DE81695FC570018A17D /* vienna_public_key.pem */; };
+		3AF896C71CD8FDB800A9FA22 /* ViennaSparkleDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */; };
 		3AFF601819A07F5A0036DBA4 /* BJRWindowWithToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */; };
 		430C4ADE166175A00079C9FC /* blankPopupMenuButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADC166175A00079C9FC /* blankPopupMenuButton.tiff */; };
 		430C4ADF166175A00079C9FC /* blankPopupMenuButtonPressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 430C4ADD166175A00079C9FC /* blankPopupMenuButtonPressed.tiff */; };
@@ -916,6 +917,8 @@
 		3A9903941993638900EA69B2 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Growl.framework; path = 3rdparty/Growl.framework; sourceTree = "<group>"; };
 		3ABA673414C7536D00251925 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = vienna_public_key.pem; path = signing/vienna_public_key.pem; sourceTree = "<group>"; };
+		3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViennaSparkleDelegate.h; path = src/ViennaSparkleDelegate.h; sourceTree = "<group>"; };
+		3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViennaSparkleDelegate.m; path = src/ViennaSparkleDelegate.m; sourceTree = "<group>"; };
 		3AFC9FEF152B7AF2004B0537 /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		3AFF601619A07F5A0036DBA4 /* BJRWindowWithToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BJRWindowWithToolbar.m; path = src/BJRWindowWithToolbar.m; sourceTree = "<group>"; };
 		3AFF601719A07F5A0036DBA4 /* BJRWindowWithToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BJRWindowWithToolbar.h; path = src/BJRWindowWithToolbar.h; sourceTree = "<group>"; };
@@ -1836,6 +1839,8 @@
 				43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */,
 				43502891165DE9DF0018EDB7 /* ViennaApp.h */,
 				43502892165DE9DF0018EDB7 /* ViennaApp.m */,
+				3AF896C51CD8FDB800A9FA22 /* ViennaSparkleDelegate.h */,
+				3AF896C61CD8FDB800A9FA22 /* ViennaSparkleDelegate.m */,
 				43502893165DE9DF0018EDB7 /* XMLSourceWindow.h */,
 				43502894165DE9DF0018EDB7 /* XMLSourceWindow.m */,
 				43502845165DE9560018EDB7 /* RenameFolder.h */,
@@ -3798,6 +3803,7 @@
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
 				793C95301C3F07FC00984D4E /* TreeFilterView.m in Sources */,
 				03B35B841B75E9E0001DB06D /* NSDate+Vienna.m in Sources */,
+				3AF896C71CD8FDB800A9FA22 /* ViennaSparkleDelegate.m in Sources */,
 				AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */,
 				AAE7A902086BB5C4009A487E /* PopupButton.m in Sources */,
 				AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */,

@@ -56,7 +56,7 @@
 #import "ClickableProgressIndicator.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
-#import <Sparkle/Sparkle.h>
+#import "ViennaSparkleDelegate.h"
 #import <WebKit/WebKit.h>
 #include <mach/mach_port.h>
 #include <mach/mach_interface.h>
@@ -195,6 +195,10 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
             andSelector:@selector(getUrl:withReplyEvent:)
           forEventClass:'WWW!'    // A particularly ancient AppleEvent that dates
              andEventID:'OURL'];  // back to the Spyglass days.
+
+    // Initialise delegate for Sparkle
+    _sparkleDelegate = [[ViennaSparkleDelegate alloc] init];
+    [[SUUpdater sharedUpdater] setDelegate:_sparkleDelegate];
 }
 
 /* applicationDidResignActive
@@ -552,7 +556,7 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	
     // Check if we have previously asked the user to send anonymous system profile
     if([[NSUserDefaults standardUserDefaults] objectForKey:MAPref_SendSystemProfileInfo] == nil) {
-        [self showSystemProfileInfoAlert];
+        [_sparkleDelegate showSystemProfileInfoAlert];
     }
 
 	// Do safe initialisation.
@@ -575,34 +579,6 @@ static void MySleepCallBack(void * refCon, io_service_t service, natural_t messa
 	if (emptyTrashWarning != nil)
 		[emptyTrashWarning showWindow:self];
 	return YES;
-}
-
-/* updaterWillRelaunchApplication
- * This is a delegate for Sparkle.framwork
- */
-- (void)updaterWillRelaunchApplication:(SUUpdater *)updater 
-{
-	[[Preferences standardPreferences] handleUpdateRestart];
-	
-}
-
-/* feedURLStringForUpdater:
- * This is a delegate for Sparkle.framework
- */
--(NSString *)feedURLStringForUpdater:(SUUpdater *)updater
-{
-	// the default as it is defined in Info.plist
-	NSString * URLstring = [NSBundle mainBundle].infoDictionary[@"SUFeedURL"];
-	if ([[Preferences standardPreferences] alwaysAcceptBetas])
-	{
-		NSURL * referenceURL = [NSURL URLWithString:URLstring];
-		NSString * extension = [referenceURL pathExtension];
-		NSURL * pathURL = [referenceURL URLByDeletingLastPathComponent];
-		// same extension and path, except name is "changelog_beta"
-		NSURL * newURL = [[pathURL URLByAppendingPathComponent:@"changelog_beta"] URLByAppendingPathExtension:extension];
-		URLstring = [newURL absoluteString];
-	}
-	return URLstring;
 }
 
 /* applicationShouldTerminate
@@ -4651,35 +4627,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			 ];
 }
 
-/*! showSystemProfileInfoAlert
- * displays an alert asking the user to opt-in to sending anonymous system profile throug Sparkle
- */
--(void)showSystemProfileInfoAlert {
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"OK")];
-    [alert addButtonWithTitle:NSLocalizedString(@"No thanks", @"No thanks")];
-    [alert setMessageText:NSLocalizedString(@"Include anonymous system profile when checking for updates?", @"Include anonymous system profile when checking for updates?")];
-    [alert setInformativeText:NSLocalizedString(@"Include anonymous system profile when checking for updates text", @"This helps Vienna development by letting us know what versions of Mac OS X are most popular amongst our users.")];
-    alert.alertStyle = NSInformationalAlertStyle;
-    NSModalResponse buttonClicked = alert.runModal;
-    NSLog(@"buttonClicked: %ld", (long)buttonClicked);
-    switch (buttonClicked) {
-        case NSAlertFirstButtonReturn:
-            /* Agreed to send system profile. Uses preferences to set value otherwise 
-             the preference control is out of sync */
-            [[Preferences standardPreferences] setSendSystemSpecs:YES];
-            break;
-        case NSAlertSecondButtonReturn:
-            /* Declined to send system profile. Uses SUUpdater to set the value
-             otherwise it stays nil instead of being set to 0 */
-            [[SUUpdater sharedUpdater] setSendsSystemProfile:NO];
-            break;
-        default:
-            break;
-    }
-}
-
-
 #pragma mark - MASPreferences
 
 - (NSWindowController *)preferencesWindowController
@@ -4728,6 +4675,7 @@ NSString *const kFocusedAdvancedControlIndex = @"FocusedAdvancedControlIndex";
 {
 	[mainWindow setDelegate:nil];
 	[splitView1 setDelegate:nil];
+	[[SUUpdater sharedUpdater] setDelegate:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
