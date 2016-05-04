@@ -1853,6 +1853,7 @@
 		2A37F4B8FDCFA73011CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				43EE7551165EA910000997FB /* lproj */,
 				43EE7547165E8109000997FB /* Applescript */,
 				B262610010A033D700E76A37 /* SyntaxHighlighter */,
 				B262610E10A033F700E76A37 /* ErrorPage */,
@@ -1862,7 +1863,6 @@
 				43EE754C165E82F9000997FB /* Icons */,
 				43EE754D165E832C000997FB /* Default Lists */,
 				43EE754E165E83D6000997FB /* UI Images */,
-				43EE7551165EA910000997FB /* lproj */,
 				434D6B8516937615008CBE8C /* codesignrequirement.rqset */,
 				430C4AE0166175C20079C9FC /* Vienna-Info.plist */,
 			);

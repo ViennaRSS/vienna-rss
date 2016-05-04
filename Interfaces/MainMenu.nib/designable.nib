@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment version="1070" identifier="macosx"/>
-        <development version="6300" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <deployment version="1080" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -46,14 +46,14 @@ Cg
                             <box title="Title" boxType="oldStyle" borderType="none" titlePosition="noTitle" id="881">
                                 <rect key="frame" x="0.0" y="0.0" width="286" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <view key="contentView">
+                                <view key="contentView" id="ybF-E1-OjN">
                                     <rect key="frame" x="0.0" y="0.0" width="286" height="603"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <box title="Box" boxType="oldStyle" borderType="line" titlePosition="noTitle" id="1279">
                                             <rect key="frame" x="0.0" y="0.0" width="286" height="574"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <view key="contentView">
+                                            <view key="contentView" id="J35-yS-yRW">
                                                 <rect key="frame" x="1" y="1" width="284" height="572"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
@@ -988,7 +988,7 @@ CA
                         <box title="Title" boxType="oldStyle" borderType="line" titlePosition="noTitle" id="973">
                             <rect key="frame" x="0.0" y="0.0" width="700" height="298"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <view key="contentView">
+                            <view key="contentView" id="scf-1q-Ljq">
                                 <rect key="frame" x="1" y="1" width="698" height="296"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -1034,7 +1034,7 @@ CA
                         <box title="Title" boxType="oldStyle" borderType="line" titlePosition="noTitle" id="978">
                             <rect key="frame" x="0.0" y="307" width="700" height="302"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <view key="contentView">
+                            <view key="contentView" id="j1O-Fj-VJu">
                                 <rect key="frame" x="1" y="1" width="698" height="300"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -1060,7 +1060,6 @@ CA
                 <outlet property="articleList" destination="977" id="996"/>
                 <outlet property="articleText" destination="1059" id="1060"/>
                 <outlet property="controller" destination="233" id="1169"/>
-                <outlet property="foldersTree" destination="738" id="1000"/>
                 <outlet property="splitView2" destination="972" id="998"/>
                 <outlet property="stdEnclosureView" destination="1288" id="1296"/>
             </connections>
@@ -1115,7 +1114,6 @@ CA
                 <outlet property="articleController" destination="1164" id="1168"/>
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
                 <outlet property="controller" destination="233" id="1170"/>
-                <outlet property="foldersTree" destination="738" id="1172"/>
             </connections>
         </customView>
         <customObject id="1164" userLabel="ArticleController" customClass="ArticleController">
