@@ -400,7 +400,7 @@ enum GoogleReaderStatus {
     ASIHTTPRequest *request3 = [self requestFromURL:url3];
     request3.userInfo = @{@"folder": thisFolder, @"log": aItem};
     request3.didFinishSelector = @selector(starredRequestDone:);
-    [request3 addDependency:request];
+    [request3 addDependency:request2];
     [[RefreshManager sharedManager] addConnection:request3];
 
 	return request;
@@ -434,6 +434,8 @@ enum GoogleReaderStatus {
 		[refreshedFolder clearNonPersistedFlag:MA_FFlag_Updating];
 		[refreshedFolder setNonPersistedFlag:MA_FFlag_Error];
 	} else if (request.responseStatusCode == 200) {
+	    // reset unread statuses in cache : we will receive in -ReadRequestDone: the updated list of unreads
+	    [refreshedFolder markArticlesInCacheRead];
 		NSData *data = [request responseData];
 		NSDictionary * subscriptionsDict;
         NSError *jsonError;
@@ -571,7 +573,6 @@ enum GoogleReaderStatus {
 			else
 			{
 				aItem.status = [NSString stringWithFormat:NSLocalizedString(@"%d new articles retrieved", nil), newArticlesFromFeed];
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
 			}
 		});
 		
@@ -622,10 +623,18 @@ enum GoogleReaderStatus {
             }
 
             [guidArray addObject:guid];
+            // now, mark relevant articles unread
+            [[refreshedFolder articleFromGuid:guid] markRead:NO];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
+	    // reset starred statuses in cache : we will receive in -StarredRequestDone: the updated list
+	    for (Article * article in [refreshedFolder articles])
+	    {
+	        [article markFlagged:NO];
+	    }
 
 	} @catch (NSException *exception) {
 		[aItem appendDetail:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Error", nil),exception]];
@@ -688,8 +697,10 @@ enum GoogleReaderStatus {
                 guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%016qx",(long long)shortId];
             }
 			[guidArray addObject:guid];
+			[[refreshedFolder articleFromGuid:guid] markFlagged:YES];
 		}
 		LLog(@"%ld starred items for %@", [guidArray count], [request url]);
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 
