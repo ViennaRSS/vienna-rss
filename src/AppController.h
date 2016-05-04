@@ -45,6 +45,7 @@
 @class SearchPanel;
 @class BJRWindowWithToolbar;
 @class TreeFilterView;
+@class ViennaSparkleDelegate;
 
 @interface AppController : NSObject <NSApplicationDelegate, GrowlApplicationBridgeDelegate,NSWindowDelegate,NSToolbarDelegate,NSSplitViewDelegate,NSMenuDelegate>
 {
@@ -103,6 +104,7 @@
     NSWindowController *_preferencesWindowController;
     NewSubscription * _rssFeed;
     CDEvents * _events;
+    ViennaSparkleDelegate * _sparkleDelegate;
 }
 
 @property (weak, nonatomic, readonly) NSWindowController *preferencesWindowController;

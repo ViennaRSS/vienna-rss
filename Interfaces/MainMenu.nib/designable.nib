@@ -1125,11 +1125,7 @@ CA
                 <outlet property="unifiedListView" destination="1148" id="BZB-bx-zs0"/>
             </connections>
         </customObject>
-        <customObject id="1175" userLabel="SUUpdater" customClass="SUUpdater">
-            <connections>
-                <outlet property="delegate" destination="233" id="1397"/>
-            </connections>
-        </customObject>
+        <customObject id="1175" userLabel="SUUpdater" customClass="SUUpdater"/>
         <customView id="1227" userLabel="BrowserView" customClass="BrowserView">
             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
