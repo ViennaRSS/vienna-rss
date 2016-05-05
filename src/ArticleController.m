@@ -382,19 +382,21 @@
 	// remember current article
 	Article * currentArticle = self.selectedArticle;
 
-	// Scan the current folder
-	BOOL inSameFolder = [mainArticleView viewNextUnreadInFolder];
-
-	// If nothing found, try other folders until we come back to ourselves.
-	if (!inSameFolder)
+	// Search other articles in the same folder, starting from current position
+	if (![mainArticleView viewNextUnreadInFolder])
 	{
-		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
-		if (nextFolderWithUnread != -1)
-		{
-			[foldersTree selectFolder:nextFolderWithUnread];
-			// Seed in order to select the first unread article.
-			guidOfArticleToSelect = nil;
-		}
+        // If nothing found, search if we have fresher articles from same folder
+        if ([[Database sharedManager] countOfUnread] > 1 && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle))
+        {
+            // If nothing unread found in current folder, try other folders
+            NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+            if (nextFolderWithUnread != -1)
+            {
+                [foldersTree selectFolder:nextFolderWithUnread];
+                // Seed in order to select the first unread article.
+                guidOfArticleToSelect = nil;
+            }
+        }
 	}
 
 	// mark read previously selected article
