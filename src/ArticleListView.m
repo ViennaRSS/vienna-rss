@@ -1502,7 +1502,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		if ([db fieldByName:MA_Field_Folder].visible)
 		{
 			Folder * folder = [db folderFromID:theArticle.folderId];
-			[summaryString appendString:folder.name];
+			[summaryString appendFormat:@"%@", folder.name];
 			delimiter = @" - ";
 		}
 		if ([db fieldByName:MA_Field_Date].visible)
