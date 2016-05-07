@@ -985,7 +985,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 		if (visibleRow > lastRow)
 			visibleRow = lastRow;
-		[articleList scrollRowToVisible:currentSelectedRow];
 		[articleList scrollRowToVisible:visibleRow];
 	}
 }
