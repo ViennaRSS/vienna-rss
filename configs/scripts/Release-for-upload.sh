@@ -14,7 +14,7 @@ V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')"
 VIENNA_UPLOADS_DIR="${BUILT_PRODUCTS_DIR}/Uploads"
 DOWNLOAD_BASE_URL="${BASE_URL_TYP}://${BASE_URL_LOC}"
 
-TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
+TGZ_FILENAME="Vienna${N_VCS_TAG}.tar.gz"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 
 case "${N_VCS_TAG}" in
@@ -113,7 +113,7 @@ cd "${BUILT_PRODUCTS_DIR}"
 mkdir -p "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cp -a ./*.dSYM "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 cd "${VIENNA_UPLOADS_DIR}"
-tar -czf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' "${dSYM_FILENAME}"
+tar -czf "${dSYM_FILENAME}.tar.gz" --exclude '.DS_Store' "${dSYM_FILENAME}"
 rm -rf "${VIENNA_UPLOADS_DIR}/${dSYM_FILENAME}"
 
 
