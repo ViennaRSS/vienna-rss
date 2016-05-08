@@ -100,8 +100,7 @@
 	{
 		for (NSString * aString in details)
 		{
-			[detailString appendString:aString];
-			[detailString appendString:@"\n"];
+			[detailString appendFormat:@"%@\n", aString];
 		}
 	}
 	return detailString;

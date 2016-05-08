@@ -1177,8 +1177,7 @@
 			[dict setValue:folder.homePage forKey:@"sourceHomeURL"];
 			[externalDragData addObject:dict];
 
-			[stringDragData appendString:feedURL];
-			[stringDragData appendString:@"\n"];
+			[stringDragData appendFormat:@"%@\n", feedURL];
 			
 			NSURL * safariURL = [NSURL URLWithString:feedURL];
 			if (safariURL != nil && !safariURL.fileURL)

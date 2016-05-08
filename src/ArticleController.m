@@ -123,10 +123,11 @@
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
-		[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
     }
     return self;
@@ -159,14 +160,6 @@
 	}
 
 }
-
-/* refreshCurrentFolder
- */
--(void)refreshCurrentFolder
-{
-	[mainArticleView refreshCurrentFolder];
-}
-
 /* currentFolderId
  * Returns the ID of the current folder being displayed by the view.
  */
@@ -389,19 +382,21 @@
 	// remember current article
 	Article * currentArticle = self.selectedArticle;
 
-	// Scan the current folder
-	BOOL inSameFolder = [mainArticleView viewNextUnreadInFolder];
-
-	// If nothing found, try other folders until we come back to ourselves.
-	if (!inSameFolder)
+	// Search other articles in the same folder, starting from current position
+	if (![mainArticleView viewNextUnreadInFolder])
 	{
-		NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
-		if (nextFolderWithUnread != -1)
-		{
-			[foldersTree selectFolder:nextFolderWithUnread];
-			// Seed in order to select the first unread article.
-			guidOfArticleToSelect = nil;
-		}
+        // If nothing found, search if we have fresher articles from same folder
+        if ([[Database sharedManager] countOfUnread] > 1 && (![mainArticleView selectFirstUnreadInFolder] || self.selectedArticle == currentArticle))
+        {
+            // If nothing unread found in current folder, try other folders
+            NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
+            if (nextFolderWithUnread != -1)
+            {
+                [foldersTree selectFolder:nextFolderWithUnread];
+                // Seed in order to select the first unread article.
+                guidOfArticleToSelect = nil;
+            }
+        }
 	}
 
 	// mark read previously selected article
@@ -418,12 +413,11 @@
  */
 -(void)displayFolder:(NSInteger)newFolderId
 {
+	articleToPreserve = nil;
 	if (currentFolderId != newFolderId && newFolderId != 0)
 	{
 		currentFolderId = newFolderId;
-		[self reloadArrayOfArticles];
-		[self sortArticles];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(newFolderId)];
+		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 
 	if (guidOfArticleToSelect == nil)
@@ -473,11 +467,8 @@
  */
 -(void)reloadArrayOfArticles
 {
-	
 	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
 	self.folderArrayOfArticles = [folder articlesWithFilter:APPCONTROLLER.filterString];
-	
-	[self refilterArrayOfArticles];
 }
 
 /* refilterArrayOfArticles
@@ -526,7 +517,7 @@
 		if (articleToAdd != nil)
             [filteredArray addObject:articleToAdd];
 	}
-	[self setArticleToPreserve:nil];
+	articleToPreserve=nil;
 	
 	return [filteredArray copy];
 }
@@ -980,20 +971,6 @@
 	}
 }
 
-/* handleFolderNameChange
-* Some folder metadata changed. Update the article list header and the
-* current article with a possible name change.
-*/
--(void)handleFolderNameChange:(NSNotification *)nc
-{
-    @synchronized(mainArticleView)
-    {
-        NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-        if (folderId == currentFolderId)
-            [mainArticleView refreshArticlePane];
-    }
-}
-
 /* handleRefreshArticle
 * Respond to the notification to refresh the current article pane.
 */
@@ -1035,12 +1012,65 @@
     }
 }
 
-/* setArticleToPreserve
- * Sets the article to preserve when reloading the array of articles.
+/* handleArticleListUpdate
+ * called when the article list has been updated,
+ * but without addition or removal of article in feeds
  */
--(void)setArticleToPreserve:(Article *)article
+-(void)handleArticleListUpdate:(NSNotification *)note
 {
-	articleToPreserve = article;
+	// Note the article that the user might currently be reading
+	// to be preserved when reloading the array of articles.
+    if (self.selectedArticle.deleted)
+    {
+        articleToPreserve = nil;
+    }
+    else
+    {
+        articleToPreserve = self.selectedArticle;
+    }
+    NSInteger folderId = ((NSNumber *)note.object).integerValue;
+    // we check if we only need to redraw the current list, or a reload is required
+    if (folderId == currentFolderId)
+    {
+        // we are in the folder of a feed :
+        // no article has been added or removed
+        [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+    }
+    else
+    {
+        Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+        if ( !IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) )
+        {
+            // if we are in a group folder or a smart folder, number of articles might
+            // have changed
+            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+        }
+	}
+}
+
+/* handleArticleListStateChange
+ * called after a refresh
+ * or any other event which may have added a removed an article
+ * to the current folder
+ */
+-(void)handleArticleListStateChange:(NSNotification *)note
+{
+	// Note the article that the user might currently be reading
+	// to be preserved when reloading the array of articles.
+    if (self.selectedArticle.deleted)
+    {
+        articleToPreserve = nil;
+    }
+    else
+    {
+        articleToPreserve = self.selectedArticle;
+    }
+    NSInteger folderId = ((NSNumber *)note.object).integerValue;
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if ( (folderId == currentFolderId) || (!IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder)) )
+    {
+        [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
+    }
 }
 
 /* dealloc

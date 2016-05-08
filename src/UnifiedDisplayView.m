@@ -63,7 +63,6 @@
     if (self)
 	{
 		blockSelectionHandler = NO;
-		blockMarkRead = NO;
 		markReadTimer = nil;
 		rowHeightArray = [[NSMutableArray alloc] init];
     }
@@ -78,8 +77,6 @@
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
-	[nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
-	[nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
 
     [self initTableView];
 }
@@ -550,34 +547,6 @@
 	//TODO
 }
 
--(void)handleArticleListStateChange:(NSNotification *)note
-{
-	if (self == articleController.mainArticleView)
-	{
-		NSInteger folderId = ((NSNumber *)note.object).integerValue;
-		NSInteger controllerFolderId = articleController.currentFolderId;
-		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
-		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
-		{
-			[self refreshCurrentFolder];
-		}
-	}
-}
-
--(void)handleArticleListUpdate:(NSNotification *)note
-{
-	if (self == articleController.mainArticleView)
-	{
-		NSInteger folderId = ((NSNumber *)note.object).integerValue;
-		NSInteger controllerFolderId = articleController.currentFolderId;
-		Folder * controllerFolder = [[Database sharedManager] folderFromID:controllerFolderId];
-		if (folderId == controllerFolderId || ( !IsRSSFolder(controllerFolder) && !IsGoogleReaderFolder(controllerFolder) ))
-		{
-			[self refreshFolder:MA_Refresh_RedrawList];
-		}
-	}
-}
-
 /* handleReadingPaneChange
  * Respond to the change to the reading pane orientation.
  */
@@ -669,24 +638,6 @@
 	return nil;
 }
 
-/* refreshCurrentFolder
- * Reload the current folder after a refresh.
- */
--(void)refreshCurrentFolder
-{
-	// Preserve the article that the user might currently be reading.
-	Preferences * prefs = [Preferences standardPreferences];
-	if ((prefs.refreshFrequency > 0) &&
-		(currentSelectedRow >= 0 && currentSelectedRow < (NSInteger)articleController.allArticles.count))
-	{
-		Article * currentArticle = articleController.allArticles[currentSelectedRow];
-		if (!currentArticle.deleted)
-			[articleController setArticleToPreserve:currentArticle];
-	}
-
-	[self refreshFolder:MA_Refresh_ReloadFromDatabase];
-}
-
 /* refreshFolder
  * Refreshes the current folder by applying the current sort or thread
  * logic and redrawing the article list. The selected article is preserved
@@ -701,15 +652,28 @@
 	markReadTimer = nil;
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
-		blockSelectionHandler = blockMarkRead = YES;
+		blockSelectionHandler = YES;
 	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
 		guid = [allArticles[currentSelectedRow] guid];
-	if (refreshFlag == MA_Refresh_ReloadFromDatabase)
-		[articleController reloadArrayOfArticles];
-	else if (refreshFlag == MA_Refresh_ReapplyFilter)
-		[articleController refilterArrayOfArticles];
-	if (refreshFlag != MA_Refresh_RedrawList)
-		[articleController sortArticles];
+
+    switch (refreshFlag)
+    {
+        case MA_Refresh_ReloadFromDatabase:
+            [articleController reloadArrayOfArticles];
+            [articleController refilterArrayOfArticles];
+            [articleController sortArticles];
+            break;
+        case MA_Refresh_RedrawList:
+            break;
+        case MA_Refresh_ReapplyFilter:
+            [articleController refilterArrayOfArticles];
+            [articleController sortArticles];
+            break;
+        case MA_Refresh_SortAndRedraw:
+            [articleController sortArticles];
+            break;
+    }
+
 	[articleList reloadData];
 	if (guid != nil)
 	{
@@ -730,7 +694,7 @@
 	else
 		currentSelectedRow = -1;
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
-		blockSelectionHandler = blockMarkRead = NO;
+		blockSelectionHandler = NO;
 }
 
 /* handleRefreshArticle
