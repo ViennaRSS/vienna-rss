@@ -1064,7 +1064,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 /* selectFirstUnreadInFolder
  * Moves the selection to the first unread article in the current article list or the
- * last article if the folder has no unread articles.
+ * first article if the folder has no unread articles.
  */
 -(BOOL)selectFirstUnreadInFolder
 {
@@ -1073,7 +1073,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	{
 		NSInteger count = articleController.allArticles.count;
 		if (count > 0)
-			[self makeRowSelectedAndVisible:count - 1];
+			[self makeRowSelectedAndVisible:0];
 	}
 	return result;
 }
