@@ -968,9 +968,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		currentSelectedRow = -1;
 		[articleList deselectAll:self];
 	}
-	else if (rowIndex == currentSelectedRow)
-		[self refreshArticleAtCurrentRow];
-	else
+	else if (rowIndex != currentSelectedRow)
 	{
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
 		if (currentSelectedRow == -1 || blockSelectionHandler)
@@ -1187,7 +1185,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			blockSelectionHandler = YES;
 			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 			currentSelectedRow = row;
-			[self refreshArticleAtCurrentRow];
 			blockSelectionHandler = NO;
 		}
 	}
