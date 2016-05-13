@@ -1121,9 +1121,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSArray * allArticles = articleController.allArticles;
 	NSString * guid = nil;
 
-	[markReadTimer invalidate];
-	markReadTimer = nil;
-	
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
 	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
