@@ -28,6 +28,7 @@
 #import "AddressBarCell.h"
 #import <WebKit/WebKit.h>
 #import "RichXMLParser.h"
+#import "SubscriptionModel.h"
 
 @implementation BrowserPaneButtonCell
 
@@ -107,7 +108,7 @@
 		openURLInBackground = NO;
 		pageFilename = nil;
 		lastError = nil;
-		rssPageURL = nil;
+		hasRSSlink = NO;
     }
     return self;
 }
@@ -427,9 +428,7 @@
 		
 		if ([RichXMLParser extractFeeds:webSrc toArray:arrayOfLinks])
 		{
-			rssPageURL = arrayOfLinks[0];
-			if (![rssPageURL hasPrefix:@"http:"] && ![rssPageURL hasPrefix:@"https:"])
-				rssPageURL = [NSURL URLWithString:rssPageURL relativeToURL:self.url].absoluteString;
+			hasRSSlink = YES;
 			[self showRssPageButton:YES];
 		}
 		[self endFrameLoad];
@@ -725,7 +724,7 @@
  */
 -(IBAction)handleRSSPage:(id)sender
 {
-	if (rssPageURL != nil)
+	if (hasRSSlink)
 	{
 		Folder * currentFolder = APP.currentFolder;
 		NSInteger currentFolderId = currentFolder.itemId;
@@ -735,7 +734,9 @@
 			parentFolderId = currentFolderId;
 			currentFolderId = 0;
 		}
-		[APPCONTROLLER createNewSubscription:rssPageURL underFolder:parentFolderId afterChild:currentFolderId];
+		SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
+		NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:self.url].absoluteString;
+		[APPCONTROLLER createNewSubscription:verifiedURLString underFolder:parentFolderId afterChild:currentFolderId];
 	}
 }
 
