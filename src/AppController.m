@@ -3163,14 +3163,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[foldersTree renameFolder:foldersTree.actualSelection];
 }
 
-- (void)addFoldersIn:(Folder *)folder toArray:(NSMutableArray *)array 
-{
-    [array addObject:folder];
-    if (IsGroupFolder(folder))
-        for (Folder * f in [db arrayOfFolders:folder.itemId])
-            [self addFoldersIn:f toArray:array];
-}
-
 /* deleteFolder
  * Delete the current folder.
  */
