@@ -1766,7 +1766,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if (frame == articleText.mainFrame)
 	{
 		[self handleError:error withDataSource: frame.provisionalDataSource];
-		[self endMainFrameLoad];
 	}
 }
 
