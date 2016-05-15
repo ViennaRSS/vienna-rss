@@ -53,6 +53,7 @@
 		currentFolderId = -1;
 		articleToPreserve = nil;
 		guidOfArticleToSelect = nil;
+		firstUnreadArticleRequired = NO;
 
 		// Set default values to generate article sort descriptors
 		articleSortSpecifiers = @{
@@ -358,15 +359,15 @@
 		}
 		else
 		{
+			// Seed in order to select the first unread article.
+			firstUnreadArticleRequired = YES;
 			// Select the folder in the tree view.
 			[foldersTree selectFolder:firstFolderWithUnread];
-			// Seed in order to select the first unread article.
-			guidOfArticleToSelect = nil;
 		}
 	}
 
 	// mark read previously selected article
-	if (!currentArticle.read)
+	if (currentArticle != nil && !currentArticle.read)
 	{
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
@@ -392,15 +393,16 @@
             NSInteger nextFolderWithUnread = [foldersTree nextFolderWithUnread:currentFolderId];
             if (nextFolderWithUnread != -1)
             {
-                [foldersTree selectFolder:nextFolderWithUnread];
                 // Seed in order to select the first unread article.
-                guidOfArticleToSelect = nil;
+                firstUnreadArticleRequired = YES;
+                // Select the folder
+                [foldersTree selectFolder:nextFolderWithUnread];
             }
         }
 	}
 
 	// mark read previously selected article
-	if (!currentArticle.read)
+	if (currentArticle != nil && !currentArticle.read)
 	{
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
@@ -420,20 +422,17 @@
 		[mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
 	}
 
-	if (guidOfArticleToSelect == nil)
+	if (firstUnreadArticleRequired)
 	{
 		[mainArticleView selectFirstUnreadInFolder];
 	}
-	else
+	else if (guidOfArticleToSelect != nil)
 	{
 		[mainArticleView scrollToArticle:guidOfArticleToSelect];
-		guidOfArticleToSelect = nil;
 	}
+	guidOfArticleToSelect = nil;
+	firstUnreadArticleRequired = NO;
 
-	if (currentArrayOfArticles.count > 0u)
-		[mainArticleView ensureSelectedArticle:YES];
-	else
-		[NSApp.mainWindow makeFirstResponder:foldersTree.mainView];
 }
 
 /* selectFolderAndArticle
