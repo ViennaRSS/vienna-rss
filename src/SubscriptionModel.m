@@ -57,19 +57,23 @@
 	// That would require modifying extractFeeds to provide URL strings and titles
 	// as feeds' links are often advertised in the HTML head
 	// as <link rel="alternate" type="application/rss+xml" title="..." href="...">
-	NSURL * myURL;
     if ([RichXMLParser extractFeeds:urlContent toArray:linkArray])
     {
         NSString * feedPart = linkArray.firstObject;
-		myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
+		NSURL * myURL = [NSURL URLWithString:feedPart relativeToURL:rssFeedURL];
 		if (myURL ==nil)
 		{
 			// try cleaning up the string : unescape then re-add escapes
 			NSString * urlString = [[feedPart stringByUnescapingExtendedCharacters] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 			myURL = [NSURL URLWithString:urlString relativeToURL:rssFeedURL];
 		}
+		return myURL;
     }
-    return myURL;
+    else
+    {
+        // no link found, return the original URL
+        return rssFeedURL;
+    }
 }
 
 
