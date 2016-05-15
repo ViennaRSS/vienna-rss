@@ -615,7 +615,7 @@
 
 /* selectFirstUnreadInFolder
  * Moves the selection to the first unread article in the current article list or the
- * last article if the folder has no unread articles.
+ * first article if the folder has no unread articles.
  */
 -(BOOL)selectFirstUnreadInFolder
 {
@@ -624,7 +624,7 @@
 	{
 		NSInteger count = articleController.allArticles.count;
 		if (count > 0)
-			[self makeRowSelectedAndVisible:count - 1];
+			[self makeRowSelectedAndVisible:0];
 	}
 	return result;
 }
@@ -647,9 +647,6 @@
 {
 	NSArray * allArticles = articleController.allArticles;
 	NSString * guid = nil;
-
-	[markReadTimer invalidate];
-	markReadTimer = nil;
 
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = YES;

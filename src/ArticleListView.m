@@ -968,9 +968,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 		currentSelectedRow = -1;
 		[articleList deselectAll:self];
 	}
-	else if (rowIndex == currentSelectedRow)
-		[self refreshArticleAtCurrentRow];
-	else
+	else if (rowIndex != currentSelectedRow)
 	{
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
 		if (currentSelectedRow == -1 || blockSelectionHandler)
@@ -1066,7 +1064,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 
 /* selectFirstUnreadInFolder
  * Moves the selection to the first unread article in the current article list or the
- * last article if the folder has no unread articles.
+ * first article if the folder has no unread articles.
  */
 -(BOOL)selectFirstUnreadInFolder
 {
@@ -1075,7 +1073,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	{
 		NSInteger count = articleController.allArticles.count;
 		if (count > 0)
-			[self makeRowSelectedAndVisible:count - 1];
+			[self makeRowSelectedAndVisible:0];
 	}
 	return result;
 }
@@ -1121,9 +1119,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	NSArray * allArticles = articleController.allArticles;
 	NSString * guid = nil;
 
-	[markReadTimer invalidate];
-	markReadTimer = nil;
-	
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = YES;		
 	if (currentSelectedRow >= 0 && currentSelectedRow < allArticles.count)
@@ -1190,7 +1185,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			blockSelectionHandler = YES;
 			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
 			currentSelectedRow = row;
-			[self refreshArticleAtCurrentRow];
 			blockSelectionHandler = NO;
 		}
 	}
@@ -1772,7 +1766,6 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 	if (frame == articleText.mainFrame)
 	{
 		[self handleError:error withDataSource: frame.provisionalDataSource];
-		[self endMainFrameLoad];
 	}
 }
 

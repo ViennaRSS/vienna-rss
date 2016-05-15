@@ -52,6 +52,7 @@ enum GoogleReaderStatus {
 	notAuthenticated = 0,
 	isAuthenticating,
 	isMissingToken,
+	isGettingToken,
 	isAuthenticated
 } googleReaderStatus;
 
@@ -167,7 +168,10 @@ enum GoogleReaderStatus {
 -(void)authenticate
 {
     if (googleReaderStatus == isAuthenticated || googleReaderStatus == isMissingToken)
+    {
     	return; //we are already connected
+    }
+    self.clientAuthToken = nil;
     Preferences * prefs = [Preferences standardPreferences];
 	if (!prefs.syncGoogleReader)
 		return;
@@ -248,9 +252,13 @@ enum GoogleReaderStatus {
 	if(token != nil)
 		return; //We already have a transaction token
 	LLog(@"Start Token Request!");
+	if (clientAuthToken == nil) {
+		LLog(@"Failed authenticate...");
+		return;
+	}
     ASIHTTPRequest * request = [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@token", APIBaseURL]]];
     [request addRequestHeader:@"Content-Type" value:@"application/x-www-form-urlencoded"];
-    googleReaderStatus = isAuthenticating;
+    googleReaderStatus = isGettingToken;
 
     request.delegate = nil;
     [request startSynchronous];

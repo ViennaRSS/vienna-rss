@@ -52,7 +52,7 @@
 	BOOL isLocalFile;
 	BOOL isLoading;
 	BOOL openURLInBackground;
-	NSString * rssPageURL;
+	BOOL hasRSSlink;
 	NSString * viewTitle;
 }
 

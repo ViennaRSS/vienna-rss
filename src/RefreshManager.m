@@ -243,17 +243,6 @@
     [self refreshSubscriptions:foldersArray ignoringSubscriptionStatus:ignoreSubStatus];
 }
 
-- (void)addRSSFoldersIn:(Folder *)folder toArray:(NSMutableArray *)array 
-{
-    if (IsRSSFolder(folder) || IsGoogleReaderFolder(folder)) [array addObject:folder];
-    else
-    {
-        Database * db = [Database sharedManager];
-        for (Folder * f in [db arrayOfFolders:folder.itemId])
-            [self addRSSFoldersIn:f toArray:array];
-    }
-}
-
 -(void)refreshSubscriptionsAfterRefreshAll:(NSArray *)foldersArray ignoringSubscriptionStatus:(BOOL)ignoreSubStatus 
 {   
     syncType = MA_Sync_Refresh_All;

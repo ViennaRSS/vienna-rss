@@ -202,6 +202,7 @@
 	// Validate the subscription, possibly replacing the feedURLString with a real one if
 	// it originally pointed to a web page.
 	rssFeedURL = [subscriptionModel verifiedFeedURLFromURL:rssFeedURL];
+	NSAssert(rssFeedURL != nil, @"No valid URL verified to attempt subscription !");
 
  	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
 	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
