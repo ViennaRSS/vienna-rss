@@ -51,6 +51,7 @@
 	BOOL isBacktracking;
 	Article * articleToPreserve;
 	NSString * guidOfArticleToSelect;
+	BOOL firstUnreadArticleRequired;
 }
 
 @property (nonatomic, strong) IBOutlet FoldersTree * foldersTree;
