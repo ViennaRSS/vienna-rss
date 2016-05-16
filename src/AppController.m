@@ -1535,7 +1535,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSAlert *alert = [[NSAlert alloc] init];
     [alert addButtonWithTitle:@"OK"];
     [alert setMessageText:NSLocalizedString(@"Open Reader Authentication Failed",nil)];
-    [alert setInformativeText:NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences.\nAlso check your network access.",nil)];
+    [alert setInformativeText:NSLocalizedString(@"Open Reader Authentication Failed text",nil)];
     alert.alertStyle = NSWarningAlertStyle;
     [alert beginSheetModalForWindow:mainWindow modalDelegate:self didEndSelector:nil contextInfo:nil];
     }
