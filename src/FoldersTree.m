@@ -809,6 +809,7 @@
 	
 	TreeNode __unused * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
 	[self reloadFolderItem:node reloadChildren:YES];
+	[self selectFolder:newFolder.itemId];
 }
 
 /* reloadFolderItem

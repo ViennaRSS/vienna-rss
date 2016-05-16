@@ -2841,7 +2841,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return;
 	}
 	
-	// Create then select the new folder.
+	// Create the new folder.
 	if ([Preferences standardPreferences].syncGoogleReader && [Preferences standardPreferences].prefersGoogleNewSubscription)
 	{	//creates in Google
 		GoogleReader * myGoogle = [GoogleReader sharedManager];
@@ -2861,12 +2861,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 		if (folderId != -1)
 		{
-			[foldersTree selectFolder:folderId];
-            if (isAccessible(urlString))
-			{
-				Folder * folder = [db folderFromID:folderId];
-				[[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:@[folder] ignoringSubscriptionStatus:NO];
-            } else if ([urlString hasPrefix:@"file"]) {
+            if (isAccessible(urlString) || [urlString hasPrefix:@"file"])
+            {
                 Folder * folder = [db folderFromID:folderId];
                 [[RefreshManager sharedManager] refreshSubscriptionsAfterSubscribe:@[folder] ignoringSubscriptionStatus:NO];
             }
