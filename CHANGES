@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.4 Release Candidate 2
+-------------------------
+- Improved detection of feeds URL
+- Align selection behavior on selecting or skipping folders with 3.0.9's
+- Fix handling of some addresses in internal browser's address field
+- Improved German translation
+
 3.1.4 Release Candidate 1
 -------------------------
 - Refactored code
