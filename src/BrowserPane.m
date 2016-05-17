@@ -201,13 +201,15 @@
 -(IBAction)handleAddress:(id)sender
 {
 	NSString * theURL = addressField.stringValue;
-	// If no '.' appears in the string, wrap it with 'www' and 'com'
-	if (![theURL hasCharacter:'.']) 
-		theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
-
-	// If no schema, prefix http://
-	if ([theURL rangeOfString:@"://"].location == NSNotFound)
+	if ([NSURL URLWithString:theURL].scheme == nil)
+	{
+	    // If no '.' appears in the string, wrap it with 'www' and 'com'
+	    if (![theURL hasCharacter:'.'])
+	    {
+		    theURL = [NSString stringWithFormat:@"www.%@.com", theURL];
+        }
 		theURL = [NSString stringWithFormat:@"http://%@", theURL];
+	}
 
 	// cleanUpUrl is a hack to handle Internationalized Domain Names. WebKit handles them automatically, so we tap into that.
 	NSURL *urlToLoad = cleanedUpAndEscapedUrlFromString(theURL);
