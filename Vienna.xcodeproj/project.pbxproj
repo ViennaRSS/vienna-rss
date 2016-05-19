@@ -475,6 +475,26 @@
 		43EE8403165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8002165EAA6E000997FB /* RSSSources.plist */; };
 		43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8004165EAA6E000997FB /* SearchFolder.nib */; };
 		43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8006165EAA6E000997FB /* SearchFolder.strings */; };
+		4D13D90A1CEE2DEF0098011E /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
+		4D13D90B1CEE2DF70098011E /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
+		4D13D90C1CEE2DFF0098011E /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
+		4D13D90D1CEE2E080098011E /* Export.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502866165DE9DF0018EDB7 /* Export.m */; };
+		4D13D90E1CEE2E0E0098011E /* RichXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3281A4084161EB00A7AD5A /* RichXMLParser.m */; };
+		4D13D90F1CEE2E160098011E /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 031E082F19DFA3A900194F9F /* SubscriptionModel.m */; };
+		4D13D9101CEE2E300098011E /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 032280301A33BCD8007DE933 /* Article.m */; };
+		4D13D9111CEE2E370098011E /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
+		4D13D9121CEE2E3F0098011E /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B752291B741AFD00FD3FDB /* FeedItem.m */; };
+		4D13D9131CEE2E470098011E /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
+		4D13D9141CEE2E4C0098011E /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CB0604927300FE7994 /* Folder.m */; };
+		4D13D9151CEE2E550098011E /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
+		4D13D9161CEE2E640098011E /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
+		4D13D9171CEE2E6A0098011E /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
+		4DA182A21CEE489500D44EB3 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		4DA182A31CEE48A700D44EB3 /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502882165DE9DF0018EDB7 /* SearchMethod.m */; };
+		4DA182A41CEE48B000D44EB3 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
+		4DA182A51CEE48CF00D44EB3 /* FolderImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */; };
+		4DA182A61CEE48F000D44EB3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
+		4DA182A71CEE4D3800D44EB3 /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		5740946816F5112B0087870F /* stylesMenuButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */; };
 		5740946A16F5112B0087870F /* skipFolderButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945616F5112B0087870F /* skipFolderButtonSmall@2x.tiff */; };
 		5740946C16F5112B0087870F /* refreshButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945816F5112B0087870F /* refreshButtonSmall@2x.tiff */; };
@@ -3765,11 +3785,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D13D90F1CEE2E160098011E /* SubscriptionModel.m in Sources */,
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
+				4D13D9101CEE2E300098011E /* Article.m in Sources */,
+				4D13D90A1CEE2DEF0098011E /* BitlyAPIHelper.m in Sources */,
+				4D13D9131CEE2E470098011E /* Field.m in Sources */,
+				4D13D9151CEE2E550098011E /* Preferences.m in Sources */,
+				4D13D90E1CEE2E0E0098011E /* RichXMLParser.m in Sources */,
+				4DA182A61CEE48F000D44EB3 /* Constants.m in Sources */,
 				03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */,
+				4D13D9141CEE2E4C0098011E /* Folder.m in Sources */,
+				4D13D9161CEE2E640098011E /* VNADatabaseMigration.m in Sources */,
+				4DA182A51CEE48CF00D44EB3 /* FolderImageCache.m in Sources */,
+				4DA182A31CEE48A700D44EB3 /* SearchMethod.m in Sources */,
 				0383DC551B71B44700A11950 /* CriteriaTests.m in Sources */,
+				4D13D9171CEE2E6A0098011E /* XMLTag.m in Sources */,
 				0383DC531B71A0B500A11950 /* BitlyAPIHelperTests.m in Sources */,
+				4D13D9121CEE2E3F0098011E /* FeedItem.m in Sources */,
 				035B703A19E0E4AE00197334 /* Vienna_Tests.m in Sources */,
+				4DA182A21CEE489500D44EB3 /* KeyChain.m in Sources */,
+				4D13D90C1CEE2DFF0098011E /* Database.m in Sources */,
+				4D13D90B1CEE2DF70098011E /* Criteria.m in Sources */,
+				4DA182A71CEE4D3800D44EB3 /* StringExtensions.m in Sources */,
+				4D13D90D1CEE2E080098011E /* Export.m in Sources */,
+				4D13D9111CEE2E370098011E /* ArticleRef.m in Sources */,
+				4DA182A41CEE48B000D44EB3 /* HelperFunctions.m in Sources */,
 				03A131B51AA670850037471F /* VNADatabaseTests.m in Sources */,
 				03EFD5701B720AB0007EF284 /* ExportTests.m in Sources */,
 			);
@@ -6935,8 +6975,11 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6960,6 +7003,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/3rdparty\" \"$(SRCROOT)/src\"";
 			};
 			name = Development;
 		};
@@ -6987,8 +7031,11 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7004,6 +7051,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/3rdparty\" \"$(SRCROOT)/src\"";
 			};
 			name = Deployment;
 		};
@@ -7031,8 +7079,11 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7048,6 +7099,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/3rdparty\" \"$(SRCROOT)/src\"";
 			};
 			name = StaticAnalyzer;
 		};

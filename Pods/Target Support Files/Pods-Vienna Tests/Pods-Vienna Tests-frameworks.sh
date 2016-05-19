@@ -82,3 +82,13 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Development" ]]; then
+  install_framework "${PODS_ROOT}/Sparkle/Sparkle.framework"
+fi
+if [[ "$CONFIGURATION" == "Deployment" ]]; then
+  install_framework "${PODS_ROOT}/Sparkle/Sparkle.framework"
+fi
+if [[ "$CONFIGURATION" == "StaticAnalyzer" ]]; then
+  install_framework "${PODS_ROOT}/Sparkle/Sparkle.framework"
+fi
