@@ -496,6 +496,7 @@
 		4DA182A61CEE48F000D44EB3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
 		4DA182A71CEE4D3800D44EB3 /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
 		4DA182AF1CEF75D200D44EB3 /* Vienna_Performance_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */; };
+		4DA182B61CEF7EE900D44EB3 /* VNADatabaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA182B51CEF7EE900D44EB3 /* VNADatabaseTests.m */; };
 		5740946816F5112B0087870F /* stylesMenuButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */; };
 		5740946A16F5112B0087870F /* skipFolderButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945616F5112B0087870F /* skipFolderButtonSmall@2x.tiff */; };
 		5740946C16F5112B0087870F /* refreshButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945816F5112B0087870F /* refreshButtonSmall@2x.tiff */; };
@@ -1368,6 +1369,7 @@
 		4DA182AC1CEF75D200D44EB3 /* Vienna Performance Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Performance Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Performance_Tests.m; sourceTree = "<group>"; };
 		4DA182B01CEF75D200D44EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DA182B51CEF7EE900D44EB3 /* VNADatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseTests.m; path = "Vienna Performance Tests/VNADatabaseTests.m"; sourceTree = SOURCE_ROOT; };
 		5740945316F5112B0087870F /* stylesMenuButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = stylesMenuButtonSmall.tiff; path = Resources/stylesMenuButtonSmall.tiff; sourceTree = "<group>"; };
 		5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "stylesMenuButtonSmall@2x.tiff"; path = "Resources/stylesMenuButtonSmall@2x.tiff"; sourceTree = "<group>"; };
 		5740945516F5112B0087870F /* skipFolderButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = skipFolderButtonSmall.tiff; path = Resources/skipFolderButtonSmall.tiff; sourceTree = "<group>"; };
@@ -2605,6 +2607,7 @@
 		4DA182AD1CEF75D200D44EB3 /* Vienna Performance Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4DA182B51CEF7EE900D44EB3 /* VNADatabaseTests.m */,
 				4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */,
 				4DA182B01CEF75D200D44EB3 /* Info.plist */,
 			);
@@ -3878,6 +3881,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DA182B61CEF7EE900D44EB3 /* VNADatabaseTests.m in Sources */,
 				4DA182AF1CEF75D200D44EB3 /* Vienna_Performance_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
