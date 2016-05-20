@@ -495,6 +495,7 @@
 		4DA182A51CEE48CF00D44EB3 /* FolderImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */; };
 		4DA182A61CEE48F000D44EB3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
 		4DA182A71CEE4D3800D44EB3 /* StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAF3B14106095E7B0025CC7F /* StringExtensions.m */; };
+		4DA182AF1CEF75D200D44EB3 /* Vienna_Performance_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */; };
 		5740946816F5112B0087870F /* stylesMenuButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */; };
 		5740946A16F5112B0087870F /* skipFolderButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945616F5112B0087870F /* skipFolderButtonSmall@2x.tiff */; };
 		5740946C16F5112B0087870F /* refreshButtonSmall@2x.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5740945816F5112B0087870F /* refreshButtonSmall@2x.tiff */; };
@@ -1364,6 +1365,9 @@
 		43EE8378165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = zh_TW; path = RSSSources.plist; sourceTree = "<group>"; };
 		43EE837A165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = SearchFolder.nib; sourceTree = "<group>"; };
 		43EE837C165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_TW; path = SearchFolder.strings; sourceTree = "<group>"; };
+		4DA182AC1CEF75D200D44EB3 /* Vienna Performance Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vienna Performance Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Performance_Tests.m; sourceTree = "<group>"; };
+		4DA182B01CEF75D200D44EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5740945316F5112B0087870F /* stylesMenuButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = stylesMenuButtonSmall.tiff; path = Resources/stylesMenuButtonSmall.tiff; sourceTree = "<group>"; };
 		5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "stylesMenuButtonSmall@2x.tiff"; path = "Resources/stylesMenuButtonSmall@2x.tiff"; sourceTree = "<group>"; };
 		5740945516F5112B0087870F /* skipFolderButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = skipFolderButtonSmall.tiff; path = Resources/skipFolderButtonSmall.tiff; sourceTree = "<group>"; };
@@ -1647,6 +1651,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4DA182A91CEF75D200D44EB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D15AC330486D014006FF6A4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1754,6 +1765,7 @@
 				8D15AC370486D014006FF6A4 /* Vienna.app */,
 				43BA97321663EE7C00B95F35 /* DisclosableView.framework */,
 				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
+				4DA182AC1CEF75D200D44EB3 /* Vienna Performance Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = SOURCE_ROOT;
@@ -1769,6 +1781,7 @@
 				43501F70165DB92B0018EDB7 /* External frameworks */,
 				1058C7A6FEA54F5311CA2CBB /* System frameworks */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
+				4DA182AD1CEF75D200D44EB3 /* Vienna Performance Tests */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				946A341AA82976C365B67A76 /* Pods */,
 				7F60B6D7AEFB47009A82F8BA /* Frameworks */,
@@ -2589,6 +2602,15 @@
 			path = lproj/zh_TW.lproj;
 			sourceTree = SOURCE_ROOT;
 		};
+		4DA182AD1CEF75D200D44EB3 /* Vienna Performance Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */,
+				4DA182B01CEF75D200D44EB3 /* Info.plist */,
+			);
+			path = "Vienna Performance Tests";
+			sourceTree = "<group>";
+		};
 		660AA30914072BFD0082CCF0 /* OpenReader Sync */ = {
 			isa = PBXGroup;
 			children = (
@@ -2967,6 +2989,23 @@
 			productReference = 43BA97321663EE7C00B95F35 /* DisclosableView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		4DA182AB1CEF75D200D44EB3 /* Vienna Performance Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DA182B11CEF75D200D44EB3 /* Build configuration list for PBXNativeTarget "Vienna Performance Tests" */;
+			buildPhases = (
+				4DA182A81CEF75D200D44EB3 /* Sources */,
+				4DA182A91CEF75D200D44EB3 /* Frameworks */,
+				4DA182AA1CEF75D200D44EB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Vienna Performance Tests";
+			productName = "Vienna Performance Tests";
+			productReference = 4DA182AC1CEF75D200D44EB3 /* Vienna Performance Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8D15AC270486D014006FF6A4 /* Vienna */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA4F9AB20855422400C18279 /* Build configuration list for PBXNativeTarget "Vienna" */;
@@ -3007,6 +3046,9 @@
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
 						CreatedOnToolsVersion = 6.1;
+					};
+					4DA182AB1CEF75D200D44EB3 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -3058,6 +3100,7 @@
 				430C4AF71661F07C0079C9FC /* Code Sign ID */,
 				EAAF335414BDE402002A8837 /* Archive and Prep for Upload */,
 				035B703419E0E4AE00197334 /* Vienna Tests */,
+				4DA182AB1CEF75D200D44EB3 /* Vienna Performance Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -3076,6 +3119,13 @@
 			files = (
 				43BA976416642B8800B95F35 /* SNDisclosureArrowDown.tiff in Resources */,
 				43BA976516642B8900B95F35 /* SNDisclosureArrowRight.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DA182AA1CEF75D200D44EB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3821,6 +3871,14 @@
 			files = (
 				43BA976316642B8600B95F35 /* SNDisclosableView.m in Sources */,
 				43BA976716642B8C00B95F35 /* SNDisclosureButton.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DA182A81CEF75D200D44EB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DA182AF1CEF75D200D44EB3 /* Vienna_Performance_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7198,6 +7256,139 @@
 			};
 			name = StaticAnalyzer;
 		};
+		4DA182B21CEF75D200D44EB3 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Vienna Performance Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.Vienna-Performance-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		4DA182B31CEF75D200D44EB3 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Vienna Performance Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.Vienna-Performance-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		4DA182B41CEF75D200D44EB3 /* StaticAnalyzer */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Vienna Performance Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.Vienna-Performance-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = StaticAnalyzer;
+		};
 		52BA64020DE9E2FF0008B3E1 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -7298,6 +7489,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
+		};
+		4DA182B11CEF75D200D44EB3 /* Build configuration list for PBXNativeTarget "Vienna Performance Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DA182B21CEF75D200D44EB3 /* Development */,
+				4DA182B31CEF75D200D44EB3 /* Deployment */,
+				4DA182B41CEF75D200D44EB3 /* StaticAnalyzer */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Version Notes" */ = {
 			isa = XCConfigurationList;
