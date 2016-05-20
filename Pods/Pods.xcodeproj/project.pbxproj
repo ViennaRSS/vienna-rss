@@ -17,6 +17,53 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>01EC5F96BCC586FC58D7F9BCDB51C725</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests.staticanalyzer.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>022D437CB848757426448E2CF6BE660F</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>FC7A07C6B234471F59868E5057A4E2C6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>EXECUTABLE_PREFIX</key>
+				<string>lib</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.8</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
 		<key>04AA5F5B7A4A251DBCB638EAA2D4DDEB</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -57,6 +104,26 @@
 			<string>ASIS3BucketObject.m</string>
 			<key>path</key>
 			<string>Classes/S3/ASIS3BucketObject.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0750A53ACB03B2E2D00AA0B03989677E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EA127304934F5A974881334E6C519CC4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>076407553A7817322FF35D90F61807DB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna.development.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -101,6 +168,21 @@
 			<string>src/fmdb/FMDatabaseAdditions.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0D33B43041F6DAE1FF05CC2F01907406</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods-Vienna Performance Tests.a</string>
+			<key>path</key>
+			<string>libPods-Vienna Performance Tests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>0E00C6CAB37A75FB3B4742327583BE4F</key>
 		<dict>
@@ -160,6 +242,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>156EED670EE64791BF173779E0E3EA35</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DB342F2A4C06E2E1F546802FF59A1C3D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
 		<key>164C3DCAD3A7FD2D109BF2A546ED47F4</key>
 		<dict>
@@ -269,6 +364,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>19BC7BEB6016D6DF3CBF433D1FF1136F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>19C1EE8A43CB4DA9BBB133B157DDDBD3</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -304,6 +412,21 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Deployment</string>
+		</dict>
+		<key>1BFC2B2423462141979DA0AB8208236C</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods-Vienna Tests.a</string>
+			<key>path</key>
+			<string>libPods-Vienna Tests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>1C5098040CFCB2727EC67C42A1563B08</key>
 		<dict>
@@ -508,7 +631,7 @@
 		<key>2254085237CF3611B9BB410696A1D4F3</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>F1ED24FE5A75C8F4314CED5CB56D38A6</string>
+			<string>E5717D5BA38A4B8E1D46B0CB836AB7D0</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -672,18 +795,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>2AE50CA8A38617DFDA440E09A5A9A390</key>
+		<key>2AC17A776E54F70F613D721739ABA63A</key>
 		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
 			<key>includeInIndex</key>
-			<string>1</string>
+			<string>0</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
+			<key>name</key>
+			<string>libCDEvents.a</string>
 			<key>path</key>
-			<string>Pods-Vienna-acknowledgements.markdown</string>
+			<string>libCDEvents.a</string>
 			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>2BACA418D14102B1934ECE1D86187E11</key>
 		<dict>
@@ -775,7 +900,7 @@
 		<key>2E2A6E63575BEA5F10302491E4610531</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>330AD62B11E8D526BC2B04D60EEE26C9</string>
+			<string>9FECB527BDB8A03DB23C4181EA5A7256</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -806,19 +931,6 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>2E38F5FAF04200B5236EE150C8DC59CE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>2FACEB5C957CAB2A290C726A6F649E26</key>
 		<dict>
 			<key>containerPortal</key>
@@ -835,7 +947,7 @@
 		<key>302434B7AD5F1709FAEC2581CB2DA833</key>
 		<dict>
 			<key>fileRef</key>
-			<string>38F3458A007C8ABC53CD22EEA6109115</string>
+			<string>EEF90AFB85D2E559669FEE0AC5BA13BD</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -891,19 +1003,6 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
-		<key>330AD62B11E8D526BC2B04D60EEE26C9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>34704D220B83A5A40EED914FAF2D9951</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -955,6 +1054,51 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>35867804109DC331B636CE98EA22185C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>607AF08FF2E191FF426016B59EE486E0</string>
+				<string>2AC17A776E54F70F613D721739ABA63A</string>
+				<string>78BEB057A9B70D476984C9E427210104</string>
+				<string>3DFFB1DED2C466ACB6B480A9D1732205</string>
+				<string>F0BC686A76DE2EC29E92C31FC30F8F14</string>
+				<string>0D33B43041F6DAE1FF05CC2F01907406</string>
+				<string>1BFC2B2423462141979DA0AB8208236C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>367B6D1956FB6E303EC9802FCCAF1FA1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Vienna-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>36DBBDC31681F98EE70EA52810EFCAED</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests.deployment.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>37613B2417ADDF118CA875FBA7539945</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -982,19 +1126,6 @@
 			<string>ASIS3ObjectRequest.h</string>
 			<key>path</key>
 			<string>Classes/S3/ASIS3ObjectRequest.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>38F3458A007C8ABC53CD22EEA6109115</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1033,9 +1164,22 @@
 			<key>productName</key>
 			<string>Pods-Vienna Tests</string>
 			<key>productReference</key>
-			<string>9AB226C3BF4B1E54B851A49A8F2D270F</string>
+			<string>1BFC2B2423462141979DA0AB8208236C</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>39B268D2E9AAD245BAFC1C61113AD85C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>39DB94509F29AA30E91FCFCE90C0EC9D</key>
 		<dict>
@@ -1058,7 +1202,7 @@
 			<key>productName</key>
 			<string>CDEvents</string>
 			<key>productReference</key>
-			<string>F0A8B6E5D6FBEB681DE7CA06F93F7B19</string>
+			<string>2AC17A776E54F70F613D721739ABA63A</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
@@ -1175,6 +1319,34 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>3D63D756D2B2CE8A9A326B5C8116A0BB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3DFFB1DED2C466ACB6B480A9D1732205</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libMASPreferences.a</string>
+			<key>path</key>
+			<string>libMASPreferences.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>3F804ABE86B954BEE67A9C04A88F36E1</key>
 		<dict>
 			<key>fileRef</key>
@@ -1205,7 +1377,7 @@
 		<key>40538C52708029FE006E80F2CB9A4297</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>B5982287D53CC7EE840D1D1068182D6D</string>
+			<string>63ED61F4A7384939840F6F542F583BF5</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -1238,23 +1410,10 @@
 			<key>name</key>
 			<string>StaticAnalyzer</string>
 		</dict>
-		<key>40671BCD724AC196562C487FF26423EE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>40B0841D692455974D766B03A029CDAC</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>F81AE75D375F03ECE7B5BCF947E8AEF8</string>
+			<string>076407553A7817322FF35D90F61807DB</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -1286,6 +1445,19 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Development</string>
+		</dict>
+		<key>41660766CB747FC14DEAA96510141A63</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>41EF1AA5F94ED087738E017E255D0C41</key>
 		<dict>
@@ -1343,21 +1515,6 @@
 				<string>-fno-objc-arc</string>
 			</dict>
 		</dict>
-		<key>448857C4371CD99660C63674F8F8002C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libASIHTTPRequest.a</string>
-			<key>path</key>
-			<string>libASIHTTPRequest.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
 		<key>45270E0E4FB7D9FBFC5660E7AC7E091D</key>
 		<dict>
 			<key>fileRef</key>
@@ -1389,25 +1546,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>47E9C27DF22C4CD51529BCA56293F043</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libMASPreferences.a</string>
-			<key>path</key>
-			<string>libMASPreferences.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
 		<key>4963D271969985B58BED750ECB56E353</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>AFE6980D7EDC2CD807F4FC6CDFE4E538</string>
+			<string>DF50DEC46CF91B790FD3D20383175AA7</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
@@ -1477,19 +1619,6 @@
 				<string>-fno-objc-arc</string>
 			</dict>
 		</dict>
-		<key>4D04B06FBCE94F4874B008C93F8A4DC9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-Vienna-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>4D9D6933A3EF07E87D4B6A9305E3B892</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1540,7 +1669,7 @@
 			<key>productName</key>
 			<string>FMDB</string>
 			<key>productReference</key>
-			<string>87D5E9B044A95247AF1154EB4A95726B</string>
+			<string>78BEB057A9B70D476984C9E427210104</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
@@ -1629,19 +1758,6 @@
 			<string>PBXFrameworksBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>51D008B5DDC67EBFCB393CB43428FDE3</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests-frameworks.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>51FC9AB2EA10982C028E26CF0D3B1D92</key>
 		<dict>
@@ -1769,6 +1885,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>5B9BDE96D8FBC8C093D69132A89F5AAD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests.development.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>5BA3575BF3527529F348CB38A7830B41</key>
 		<dict>
 			<key>fileRef</key>
@@ -1793,7 +1922,7 @@
 		<key>5EB6BA6986E99355AC67B954E71999FC</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>C0B31D82A52E73B195E1CC24B0EA816A</string>
+			<string>B1B3A16BCE3700CEC855D1F4A0B73E12</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -1879,6 +2008,34 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>5FC712450288E67B7ECE54131A20AC6E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests.deployment.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>607AF08FF2E191FF426016B59EE486E0</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libASIHTTPRequest.a</string>
+			<key>path</key>
+			<string>libASIHTTPRequest.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
 		<key>6139A15C62779DBD2FE5ECA5D4A3D2B4</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -1955,16 +2112,16 @@
 				<string>-fno-objc-arc</string>
 			</dict>
 		</dict>
-		<key>6218FB26F520C8F39D94E54CC80A5B55</key>
+		<key>61A4C14E5428B33B3A8F355B6C67A7BA</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
+			<string>text.script.sh</string>
 			<key>path</key>
-			<string>Pods-Vienna Tests-acknowledgements.plist</string>
+			<string>Pods-Vienna Performance Tests-frameworks.sh</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2002,16 +2159,16 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>63B9A39F5E0365BF35B2FD6A040B84E6</key>
+		<key>63ED61F4A7384939840F6F542F583BF5</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>text.xcconfig</string>
 			<key>path</key>
-			<string>Pods-Vienna-dummy.m</string>
+			<string>Pods-Vienna.staticanalyzer.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2089,6 +2246,34 @@
 			<string>4E0AC643A20050F210A8BDD6BC25BC22</string>
 			<key>remoteInfo</key>
 			<string>FMDB</string>
+		</dict>
+		<key>6AEB0AB3EB8BC0785B6EF47A0ACA7096</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F29DD3B0443F71248EDEA49B138877C5</string>
+				<string>BF0BB693BB1E259DA0DDCB0A3F658E50</string>
+				<string>E6A59880D8E9BA10153667F97404919D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6B50B7843D637A36269EA4C76E2FB208</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>6BE36F6247002F359B49F69B1FB5E8C2</key>
 		<dict>
@@ -2251,6 +2436,19 @@
 			<key>name</key>
 			<string>Deployment</string>
 		</dict>
+		<key>755FF6A0A510FA9DEEB31C514908961E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>75D51CDCD9DE3D23A89F7E84F6DABCE8</key>
 		<dict>
 			<key>fileRef</key>
@@ -2278,6 +2476,21 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>78BEB057A9B70D476984C9E427210104</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libFMDB.a</string>
+			<key>path</key>
+			<string>libFMDB.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>79B8CE75F44775D1C9E0109E379DA886</key>
 		<dict>
@@ -2330,19 +2543,6 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>79EF3713FF059C6F3CBF4891317AF426</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests.development.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>79F3F6E621190074BA450B46CA44D7FC</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2374,19 +2574,6 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>7B5F0AC7EA1F179551FF8A714F7C0FBD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-Vienna-frameworks.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>7BA42B60CED01C33A86F971A68EEEFE9</key>
 		<dict>
 			<key>isa</key>
@@ -2398,41 +2585,16 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7BD67056B4F2406F3599056207515DDC</key>
+		<key>7D8F35FA9D00F44A5D932524F7A86578</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>7C1D677F3E8DC9260B7146C9B7A5A0DD</string>
-				<string>C6AA63966931E21732F1D2E2C5375BF8</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7C1D677F3E8DC9260B7146C9B7A5A0DD</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>2AE50CA8A38617DFDA440E09A5A9A390</string>
-				<string>B8D98ABCC385A24A5C6993D39981F9DD</string>
-				<string>63B9A39F5E0365BF35B2FD6A040B84E6</string>
-				<string>7B5F0AC7EA1F179551FF8A714F7C0FBD</string>
-				<string>4D04B06FBCE94F4874B008C93F8A4DC9</string>
-				<string>330AD62B11E8D526BC2B04D60EEE26C9</string>
-				<string>C0B31D82A52E73B195E1CC24B0EA816A</string>
-				<string>F81AE75D375F03ECE7B5BCF947E8AEF8</string>
-				<string>40671BCD724AC196562C487FF26423EE</string>
-				<string>B5982287D53CC7EE840D1D1068182D6D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-Vienna</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
 			<key>path</key>
-			<string>Target Support Files/Pods-Vienna</string>
+			<string>Pods-Vienna Performance Tests-resources.sh</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2443,8 +2605,8 @@
 				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
 				<string>96D996393384F21972E2DD81788EE22C</string>
 				<string>CF1D9746A58ABCC0AE28DF08B21E48F8</string>
-				<string>A1EA2B967B91E73835591B316DF6D8E1</string>
-				<string>7BD67056B4F2406F3599056207515DDC</string>
+				<string>35867804109DC331B636CE98EA22185C</string>
+				<string>6AEB0AB3EB8BC0785B6EF47A0ACA7096</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -2454,7 +2616,7 @@
 		<key>7E7018ADE3595C5E53D855898DE22F8F</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>79EF3713FF059C6F3CBF4891317AF426</string>
+			<string>5B9BDE96D8FBC8C093D69132A89F5AAD</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -2537,18 +2699,41 @@
 				</array>
 			</dict>
 		</dict>
-		<key>7F962DBEBF42062B727CFC24310295DC</key>
+		<key>80D506535C3CE04AE2B03504A9ECCF70</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>baseConfigurationReference</key>
+			<string>01EC5F96BCC586FC58D7F9BCDB51C725</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>EXECUTABLE_PREFIX</key>
+				<string>lib</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.8</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>StaticAnalyzer</string>
 		</dict>
 		<key>813B7B7EF759350E96DE2A5BD987F324</key>
 		<dict>
@@ -2634,21 +2819,6 @@
 			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
-		</dict>
-		<key>87D5E9B044A95247AF1154EB4A95726B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libFMDB.a</string>
-			<key>path</key>
-			<string>libFMDB.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>883B80AF72E756D0CBF6A8DF15C77A27</key>
 		<dict>
@@ -2833,6 +3003,32 @@
 				</array>
 			</dict>
 		</dict>
+		<key>8E70B40A9105802BD2312DC3757CC9C2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8F23EE21F37D8D737B5BA45147CE902A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests.development.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>8F638269ED48F6B933889E79336B574F</key>
 		<dict>
 			<key>buildConfigurations</key>
@@ -2964,6 +3160,19 @@
 			<key>name</key>
 			<string>StaticAnalyzer</string>
 		</dict>
+		<key>989B553136549D1F845D2AC65BF1A7A6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Vienna-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>99F79B2816437043CCDAF6B0F54AED5F</key>
 		<dict>
 			<key>buildSettings</key>
@@ -3029,21 +3238,6 @@
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
 			<string>Development</string>
-		</dict>
-		<key>9AB226C3BF4B1E54B851A49A8F2D270F</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods-Vienna Tests.a</string>
-			<key>path</key>
-			<string>libPods-Vienna Tests.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>9AF2255EEF1FD41A4B1E21527C3F9A35</key>
 		<dict>
@@ -3124,7 +3318,7 @@
 		<key>9F67BB0A2D258BFD3EE85A8C02D1AB85</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>40671BCD724AC196562C487FF26423EE</string>
+			<string>755FF6A0A510FA9DEEB31C514908961E</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -3157,6 +3351,19 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>9FECB527BDB8A03DB23C4181EA5A7256</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A06BCB1C1ED5CABE81C807DC7942B8A9</key>
 		<dict>
 			<key>children</key>
@@ -3179,7 +3386,7 @@
 		<key>A0BCEF07DE254AEEFDA5108716AE6071</key>
 		<dict>
 			<key>fileRef</key>
-			<string>63B9A39F5E0365BF35B2FD6A040B84E6</string>
+			<string>D677AA82B7FE98065D5C857C66F02F68</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -3198,23 +3405,18 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>A1EA2B967B91E73835591B316DF6D8E1</key>
+		<key>A2B6038DD45C5F667ACC84C7B51569F8</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>448857C4371CD99660C63674F8F8002C</string>
-				<string>F0A8B6E5D6FBEB681DE7CA06F93F7B19</string>
-				<string>87D5E9B044A95247AF1154EB4A95726B</string>
-				<string>47E9C27DF22C4CD51529BCA56293F043</string>
-				<string>B9487269605DA8AB44C3B4A953335A88</string>
-				<string>9AB226C3BF4B1E54B851A49A8F2D270F</string>
-			</array>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>4E0AC643A20050F210A8BDD6BC25BC22</string>
+			<key>remoteInfo</key>
+			<string>FMDB</string>
 		</dict>
 		<key>A37E05A6A40EC3BF1B506FB084EA36CE</key>
 		<dict>
@@ -3319,6 +3521,19 @@
 				</array>
 			</dict>
 		</dict>
+		<key>A918DAF306A06AA18FF6E3B3D1ECB729</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Vienna-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A957FF9D5D561176CA860D15BAFC6EC3</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3399,6 +3614,23 @@
 				</array>
 			</dict>
 		</dict>
+		<key>ACFB8BF475094DB0FFE8C92BA9E3147E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>022D437CB848757426448E2CF6BE660F</string>
+				<string>EFEF2269C8F603708E998EED1ADB310C</string>
+				<string>C9F27A606FF90C43D89802596ACE6BE1</string>
+				<string>FB589B4AAC016F922B9663D4F9ED8879</string>
+				<string>80D506535C3CE04AE2B03504A9ECCF70</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
 		<key>AD108C7EA6B4C95F8FE8EE15B4C7B6E3</key>
 		<dict>
 			<key>fileRef</key>
@@ -3419,32 +3651,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AEB2CAD751C953245733DF235869E6BC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AFE6980D7EDC2CD807F4FC6CDFE4E538</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>B0E339DE1FEAE8B5109C2F7C5C1D6029</key>
 		<dict>
 			<key>fileRef</key>
@@ -3457,6 +3663,19 @@
 				<string>-DOS_OBJECT_USE_OBJC=0</string>
 			</dict>
 		</dict>
+		<key>B1B3A16BCE3700CEC855D1F4A0B73E12</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna.deployment.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>B28579E289B3420940D3266A4176BDD2</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3467,19 +3686,6 @@
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
 			<string>CDEvents.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B5982287D53CC7EE840D1D1068182D6D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna.staticanalyzer.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3495,19 +3701,6 @@
 			<string>Sparkle</string>
 			<key>path</key>
 			<string>Sparkle</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B8D98ABCC385A24A5C6993D39981F9DD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-Vienna-acknowledgements.plist</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -3531,21 +3724,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>B9487269605DA8AB44C3B4A953335A88</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>libPods-Vienna.a</string>
-			<key>path</key>
-			<string>libPods-Vienna.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
 		<dict>
@@ -3598,6 +3776,19 @@
 			<key>targetProxy</key>
 			<string>4021AAB0ED59C3B187804A33E0979C34</string>
 		</dict>
+		<key>BB4E3FC2490AC44B32B562694A86D7C9</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>0750A53ACB03B2E2D00AA0B03989677E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>BBD7B57F1E2891D6105926B2B0C9A07E</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -3633,6 +3824,43 @@
 			<string>8200C60AB6D49DD6363CF44BF7539A78</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>BE32A0161E0995EA832AA80C8E1C2B81</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Vienna-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BF0BB693BB1E259DA0DDCB0A3F658E50</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>41660766CB747FC14DEAA96510141A63</string>
+				<string>39B268D2E9AAD245BAFC1C61113AD85C</string>
+				<string>EA127304934F5A974881334E6C519CC4</string>
+				<string>61A4C14E5428B33B3A8F355B6C67A7BA</string>
+				<string>7D8F35FA9D00F44A5D932524F7A86578</string>
+				<string>FC7A07C6B234471F59868E5057A4E2C6</string>
+				<string>36DBBDC31681F98EE70EA52810EFCAED</string>
+				<string>8F23EE21F37D8D737B5BA45147CE902A</string>
+				<string>8E70B40A9105802BD2312DC3757CC9C2</string>
+				<string>01EC5F96BCC586FC58D7F9BCDB51C725</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-Vienna Performance Tests</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-Vienna Performance Tests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C01FBE3D14F9DE5C577B2E99C9575ECC</key>
 		<dict>
@@ -3671,19 +3899,6 @@
 			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>C0B31D82A52E73B195E1CC24B0EA816A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna.deployment.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C13E2C9A00953B0E6709F1D6B2473BCE</key>
 		<dict>
@@ -3780,30 +3995,6 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>C6AA63966931E21732F1D2E2C5375BF8</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>AEB2CAD751C953245733DF235869E6BC</string>
-				<string>6218FB26F520C8F39D94E54CC80A5B55</string>
-				<string>38F3458A007C8ABC53CD22EEA6109115</string>
-				<string>51D008B5DDC67EBFCB393CB43428FDE3</string>
-				<string>7F962DBEBF42062B727CFC24310295DC</string>
-				<string>AFE6980D7EDC2CD807F4FC6CDFE4E538</string>
-				<string>FD492D4E80C965E5BCE29A9D69CF977B</string>
-				<string>79EF3713FF059C6F3CBF4891317AF426</string>
-				<string>2E38F5FAF04200B5236EE150C8DC59CE</string>
-				<string>F1ED24FE5A75C8F4314CED5CB56D38A6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-Vienna Tests</string>
-			<key>path</key>
-			<string>Target Support Files/Pods-Vienna Tests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>C71222D39586AC470A0729FCDBE2D207</key>
 		<dict>
 			<key>isa</key>
@@ -3828,6 +4019,42 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-fno-objc-arc</string>
 			</dict>
+		</dict>
+		<key>C9F27A606FF90C43D89802596ACE6BE1</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8F23EE21F37D8D737B5BA45147CE902A</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>EXECUTABLE_PREFIX</key>
+				<string>lib</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.8</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Development</string>
 		</dict>
 		<key>CA02A2CE37D24B990DF773178246C955</key>
 		<dict>
@@ -3920,7 +4147,7 @@
 		<key>CDE1A277949F2A2524824D60ACAE4106</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>2E38F5FAF04200B5236EE150C8DC59CE</string>
+			<string>6B50B7843D637A36269EA4C76E2FB208</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -3983,7 +4210,7 @@
 		<key>CE86E694582788F22DC7EEDE2AAFFDF7</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>FD492D4E80C965E5BCE29A9D69CF977B</string>
+			<string>5FC712450288E67B7ECE54131A20AC6E</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>DEBUG_INFORMATION_FORMAT</key>
@@ -4184,7 +4411,7 @@
 			<key>mainGroup</key>
 			<string>7DB346D0F39D3F0E887471402A8071AB</string>
 			<key>productRefGroup</key>
-			<string>A1EA2B967B91E73835591B316DF6D8E1</string>
+			<string>35867804109DC331B636CE98EA22185C</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -4198,6 +4425,7 @@
 				<string>4E0AC643A20050F210A8BDD6BC25BC22</string>
 				<string>DDD44EFF1525B8691E61F07FF473BDF3</string>
 				<string>E7C2966DB8E6D8BFDB6ED6A3B23F5E5F</string>
+				<string>ED2BA64A95629859E209AE4227445142</string>
 				<string>39954999955F8009B9AC46A9CC8856AD</string>
 			</array>
 		</dict>
@@ -4226,6 +4454,19 @@
 			<string>ASIDownloadCache.m</string>
 			<key>path</key>
 			<string>Classes/ASIDownloadCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D677AA82B7FE98065D5C857C66F02F68</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-Vienna-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4298,6 +4539,13 @@
 				</array>
 			</dict>
 		</dict>
+		<key>DB342F2A4C06E2E1F546802FF59A1C3D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BB19A672F22342DA8D0BDBEAB741691</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
 		<key>DB4EE9641B6D34DD4188961C6639BFD5</key>
 		<dict>
 			<key>fileRef</key>
@@ -4368,7 +4616,7 @@
 			<key>productName</key>
 			<string>MASPreferences</string>
 			<key>productReference</key>
-			<string>47E9C27DF22C4CD51529BCA56293F043</string>
+			<string>3DFFB1DED2C466ACB6B480A9D1732205</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
@@ -4385,6 +4633,19 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>DF50DEC46CF91B790FD3D20383175AA7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>DF53D37E0351B759DFC6615583C79807</key>
 		<dict>
@@ -4497,6 +4758,19 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>E5717D5BA38A4B8E1D46B0CB836AB7D0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests.staticanalyzer.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>E57621F221256AE3D0D4B68B9E6F42B7</key>
 		<dict>
 			<key>fileRef</key>
@@ -4508,6 +4782,17 @@
 				<key>COMPILER_FLAGS</key>
 				<string>-fno-objc-arc</string>
 			</dict>
+		</dict>
+		<key>E5A8D0B7D119C54D9A7442043EE06ADB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>FMDB</string>
+			<key>target</key>
+			<string>4E0AC643A20050F210A8BDD6BC25BC22</string>
+			<key>targetProxy</key>
+			<string>A2B6038DD45C5F667ACC84C7B51569F8</string>
 		</dict>
 		<key>E645AED894DC5B98D6A9CC145058670E</key>
 		<dict>
@@ -4534,6 +4819,30 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>MASPreferences-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E6A59880D8E9BA10153667F97404919D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FEEB2596CA87CA05E78981554DB167B9</string>
+				<string>3D63D756D2B2CE8A9A326B5C8116A0BB</string>
+				<string>EEF90AFB85D2E559669FEE0AC5BA13BD</string>
+				<string>FEDC0E5D1F8866BAF91FC08400ADFE16</string>
+				<string>19BC7BEB6016D6DF3CBF433D1FF1136F</string>
+				<string>DF50DEC46CF91B790FD3D20383175AA7</string>
+				<string>5FC712450288E67B7ECE54131A20AC6E</string>
+				<string>5B9BDE96D8FBC8C093D69132A89F5AAD</string>
+				<string>6B50B7843D637A36269EA4C76E2FB208</string>
+				<string>E5717D5BA38A4B8E1D46B0CB836AB7D0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-Vienna Tests</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-Vienna Tests</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4577,7 +4886,7 @@
 			<key>productName</key>
 			<string>Pods-Vienna</string>
 			<key>productReference</key>
-			<string>B9487269605DA8AB44C3B4A953335A88</string>
+			<string>F0BC686A76DE2EC29E92C31FC30F8F14</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
@@ -4631,6 +4940,19 @@
 			<key>name</key>
 			<string>Development</string>
 		</dict>
+		<key>EA127304934F5A974881334E6C519CC4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>EA2EEF0B94660EE54E2F9AB956647171</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4673,6 +4995,32 @@
 				</array>
 			</dict>
 		</dict>
+		<key>ED2BA64A95629859E209AE4227445142</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>ACFB8BF475094DB0FFE8C92BA9E3147E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>BB4E3FC2490AC44B32B562694A86D7C9</string>
+				<string>156EED670EE64791BF173779E0E3EA35</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>E5A8D0B7D119C54D9A7442043EE06ADB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-Vienna Performance Tests</string>
+			<key>productName</key>
+			<string>Pods-Vienna Performance Tests</string>
+			<key>productReference</key>
+			<string>0D33B43041F6DAE1FF05CC2F01907406</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
 		<key>EEB980C9A0C875DE0591DB29EF760145</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4685,6 +5033,19 @@
 			<string>ASINSXMLParserCompat.h</string>
 			<key>path</key>
 			<string>Classes/S3/ASINSXMLParserCompat.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EEF90AFB85D2E559669FEE0AC5BA13BD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4714,6 +5075,42 @@
 				</array>
 			</dict>
 		</dict>
+		<key>EFEF2269C8F603708E998EED1ADB310C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>36DBBDC31681F98EE70EA52810EFCAED</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>EXECUTABLE_PREFIX</key>
+				<string>lib</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.8</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Deployment</string>
+		</dict>
 		<key>F01BC4A57148F9021F68AF8B0E07D5B7</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -4741,7 +5138,7 @@
 				<string>-fno-objc-arc</string>
 			</dict>
 		</dict>
-		<key>F0A8B6E5D6FBEB681DE7CA06F93F7B19</key>
+		<key>F0BC686A76DE2EC29E92C31FC30F8F14</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>archive.ar</string>
@@ -4750,24 +5147,11 @@
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>name</key>
-			<string>libCDEvents.a</string>
+			<string>libPods-Vienna.a</string>
 			<key>path</key>
-			<string>libCDEvents.a</string>
+			<string>libPods-Vienna.a</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>F1ED24FE5A75C8F4314CED5CB56D38A6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests.staticanalyzer.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F21C2AAB6D47D0F4D5E43BF51EEE8238</key>
 		<dict>
@@ -4781,6 +5165,30 @@
 			<string>ASIHTTPRequestDelegate.h</string>
 			<key>path</key>
 			<string>Classes/ASIHTTPRequestDelegate.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F29DD3B0443F71248EDEA49B138877C5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A918DAF306A06AA18FF6E3B3D1ECB729</string>
+				<string>BE32A0161E0995EA832AA80C8E1C2B81</string>
+				<string>D677AA82B7FE98065D5C857C66F02F68</string>
+				<string>989B553136549D1F845D2AC65BF1A7A6</string>
+				<string>367B6D1956FB6E303EC9802FCCAF1FA1</string>
+				<string>9FECB527BDB8A03DB23C4181EA5A7256</string>
+				<string>B1B3A16BCE3700CEC855D1F4A0B73E12</string>
+				<string>076407553A7817322FF35D90F61807DB</string>
+				<string>755FF6A0A510FA9DEEB31C514908961E</string>
+				<string>63ED61F4A7384939840F6F542F583BF5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-Vienna</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-Vienna</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -4805,7 +5213,7 @@
 			<key>productName</key>
 			<string>ASIHTTPRequest</string>
 			<key>productReference</key>
-			<string>448857C4371CD99660C63674F8F8002C</string>
+			<string>607AF08FF2E191FF426016B59EE486E0</string>
 			<key>productType</key>
 			<string>com.apple.product-type.library.static</string>
 		</dict>
@@ -4925,19 +5333,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>F81AE75D375F03ECE7B5BCF947E8AEF8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna.development.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>F872A28CD0C6A5808757A278C46C733F</key>
 		<dict>
 			<key>children</key>
@@ -5037,6 +5432,55 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>FB589B4AAC016F922B9663D4F9ED8879</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8E70B40A9105802BD2312DC3757CC9C2</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>EXECUTABLE_PREFIX</key>
+				<string>lib</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MACOSX_DEPLOYMENT_TARGET</key>
+				<string>10.8</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>macosx</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>FC7A07C6B234471F59868E5057A4E2C6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vienna Performance Tests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>FD27D394F2248D01815B7512B04C8C53</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -5073,19 +5517,6 @@
 			<key>name</key>
 			<string>Development</string>
 		</dict>
-		<key>FD492D4E80C965E5BCE29A9D69CF977B</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-Vienna Tests.deployment.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
 		<key>FDD6B13C608C207B7CC4C24E4972BA77</key>
 		<dict>
 			<key>children</key>
@@ -5107,6 +5538,32 @@
 			<string>PBXGroup</string>
 			<key>name</key>
 			<string>S3</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FEDC0E5D1F8866BAF91FC08400ADFE16</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FEEB2596CA87CA05E78981554DB167B9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Vienna Tests-acknowledgements.markdown</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>

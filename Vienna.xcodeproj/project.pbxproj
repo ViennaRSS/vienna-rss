@@ -489,6 +489,19 @@
 		4D13D9151CEE2E550098011E /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
 		4D13D9161CEE2E640098011E /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
 		4D13D9171CEE2E6A0098011E /* XMLTag.m in Sources */ = {isa = PBXBuildFile; fileRef = AA4C8DD80B9B2A1700E0C9B8 /* XMLTag.m */; };
+		4D9CCAE01CEF814400EF3CDA /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
+		4D9CCAE11CEF815700EF3CDA /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
+		4D9CCAE21CEF815F00EF3CDA /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
+		4D9CCAE31CEF816600EF3CDA /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4CB0604927300FE7994 /* Folder.m */; };
+		4D9CCAE41CEF816B00EF3CDA /* Field.m in Sources */ = {isa = PBXBuildFile; fileRef = AA36CD7A06100692001E33A4 /* Field.m */; };
+		4D9CCAE51CEF817700EF3CDA /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
+		4D9CCAE61CEF821B00EF3CDA /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
+		4D9CCAE71CEF822300EF3CDA /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502882165DE9DF0018EDB7 /* SearchMethod.m */; };
+		4D9CCAE81CEF822E00EF3CDA /* VNADatabaseMigration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* VNADatabaseMigration.m */; };
+		4D9CCAE91CEF824400EF3CDA /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 032280301A33BCD8007DE933 /* Article.m */; };
+		4D9CCAEA1CEF824B00EF3CDA /* FolderImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 030C388F1AABF12D00AE1EB8 /* FolderImageCache.m */; };
+		4D9CCAEB1CEF825500EF3CDA /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
+		4D9CCAEC1CEF826800EF3CDA /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
 		4DA182A21CEE489500D44EB3 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		4DA182A31CEE48A700D44EB3 /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502882165DE9DF0018EDB7 /* SearchMethod.m */; };
 		4DA182A41CEE48B000D44EB3 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
@@ -669,6 +682,7 @@
 		AAFA8CAA062A0BE200C530A6 /* CalendarExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA8CA8062A0BE200C530A6 /* CalendarExtensions.m */; };
 		AAFAF3FE088056D800DAFF04 /* KeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFAF3FC088056D800DAFF04 /* KeyChain.m */; };
 		AAFDB7AF0C0B1516000D1643 /* smartFolder.tiff in Resources */ = {isa = PBXBuildFile; fileRef = AAFDB7AE0C0B1516000D1643 /* smartFolder.tiff */; };
+		B0D6570F0EA589D01ED776A6 /* libPods-Vienna Performance Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F4748712606B933B188F6D /* libPods-Vienna Performance Tests.a */; };
 		B210865A109F8196001D4E7C /* XMLSource.nib in Resources */ = {isa = PBXBuildFile; fileRef = B2108659109F8196001D4E7C /* XMLSource.nib */; };
 		B2554731106913760065E9C3 /* errorpagelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B2554730106913760065E9C3 /* errorpagelogo.png */; };
 		B25E53E11067B54600BBF14C /* browserNextButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = B25E53DB1067B54600BBF14C /* browserNextButton.tiff */; };
@@ -904,6 +918,7 @@
 		03B752291B741AFD00FD3FDB /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedItem.m; path = src/models/FeedItem.m; sourceTree = "<group>"; };
 		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
+		0D0D52E4397DE9FDCE832E36 /* Pods-Vienna Performance Tests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Performance Tests.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Performance Tests/Pods-Vienna Performance Tests.development.xcconfig"; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = src/main.m; sourceTree = SOURCE_ROOT; };
 		32DBCF750370BD2300C91783 /* Vienna_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Vienna_Prefix.pch; path = src/Vienna_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ClickableProgressIndicator.h; path = src/ClickableProgressIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -1370,6 +1385,7 @@
 		4DA182AE1CEF75D200D44EB3 /* Vienna_Performance_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vienna_Performance_Tests.m; sourceTree = "<group>"; };
 		4DA182B01CEF75D200D44EB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DA182B51CEF7EE900D44EB3 /* VNADatabaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VNADatabaseTests.m; path = "Vienna Performance Tests/VNADatabaseTests.m"; sourceTree = SOURCE_ROOT; };
+		53F4748712606B933B188F6D /* libPods-Vienna Performance Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna Performance Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5740945316F5112B0087870F /* stylesMenuButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = stylesMenuButtonSmall.tiff; path = Resources/stylesMenuButtonSmall.tiff; sourceTree = "<group>"; };
 		5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "stylesMenuButtonSmall@2x.tiff"; path = "Resources/stylesMenuButtonSmall@2x.tiff"; sourceTree = "<group>"; };
 		5740945516F5112B0087870F /* skipFolderButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = skipFolderButtonSmall.tiff; path = Resources/skipFolderButtonSmall.tiff; sourceTree = "<group>"; };
@@ -1429,12 +1445,14 @@
 		6624683A13C5F81F00C85417 /* sync.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = sync.tiff; path = Resources/sync.tiff; sourceTree = SOURCE_ROOT; };
 		664F87C513C62DFE00E266DE /* GoogleReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleReader.h; path = src/GoogleReader.h; sourceTree = SOURCE_ROOT; };
 		664F87C613C62DFE00E266DE /* GoogleReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GoogleReader.m; path = src/GoogleReader.m; sourceTree = SOURCE_ROOT; };
+		6A9265714E45C425BB8AD6B7 /* Pods-Vienna Performance Tests.staticanalyzer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Performance Tests.staticanalyzer.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Performance Tests/Pods-Vienna Performance Tests.staticanalyzer.xcconfig"; sourceTree = "<group>"; };
 		793C952E1C3F07FC00984D4E /* TreeFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeFilterView.h; path = src/TreeFilterView.h; sourceTree = "<group>"; };
 		793C952F1C3F07FC00984D4E /* TreeFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeFilterView.m; path = src/TreeFilterView.m; sourceTree = "<group>"; };
 		793C95311C42A0DD00984D4E /* FoldersFilterable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoldersFilterable.h; path = src/FoldersFilterable.h; sourceTree = "<group>"; };
 		793C95321C42A0DD00984D4E /* FoldersFilterable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoldersFilterable.m; path = src/FoldersFilterable.m; sourceTree = "<group>"; };
 		7A3781B9326123EE56347D35 /* libPods-Vienna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vienna.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D15AC370486D014006FF6A4 /* Vienna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vienna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8034BEC159DB96EF1BBA2D2 /* Pods-Vienna Performance Tests.deployment.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna Performance Tests.deployment.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna Performance Tests/Pods-Vienna Performance Tests.deployment.xcconfig"; sourceTree = "<group>"; };
 		AA04ED6A096226D30060E851 /* rssFeedNew.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = rssFeedNew.tiff; path = Resources/rssFeedNew.tiff; sourceTree = SOURCE_ROOT; };
 		AA077A7D0C84484B00D71D26 /* cancelRefreshButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = cancelRefreshButtonSmall.tiff; path = Resources/cancelRefreshButtonSmall.tiff; sourceTree = SOURCE_ROOT; };
 		AA077A7E0C84484B00D71D26 /* cancelRefreshButtonSmallPressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = cancelRefreshButtonSmallPressed.tiff; path = Resources/cancelRefreshButtonSmallPressed.tiff; sourceTree = SOURCE_ROOT; };
@@ -1657,6 +1675,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D6570F0EA589D01ED776A6 /* libPods-Vienna Performance Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2628,6 +2647,7 @@
 			children = (
 				7A3781B9326123EE56347D35 /* libPods-Vienna.a */,
 				645F6DAE70D60381ADAE0FCF /* libPods-Vienna Tests.a */,
+				53F4748712606B933B188F6D /* libPods-Vienna Performance Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2638,6 +2658,9 @@
 				F1ECA9ED54D2517E7BEDCBB7 /* Pods-Vienna Tests.development.xcconfig */,
 				CD11EE0EE1E72989D4E43515 /* Pods-Vienna Tests.deployment.xcconfig */,
 				ED69423919E1DC034EA80E25 /* Pods-Vienna Tests.staticanalyzer.xcconfig */,
+				0D0D52E4397DE9FDCE832E36 /* Pods-Vienna Performance Tests.development.xcconfig */,
+				A8034BEC159DB96EF1BBA2D2 /* Pods-Vienna Performance Tests.deployment.xcconfig */,
+				6A9265714E45C425BB8AD6B7 /* Pods-Vienna Performance Tests.staticanalyzer.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2996,9 +3019,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DA182B11CEF75D200D44EB3 /* Build configuration list for PBXNativeTarget "Vienna Performance Tests" */;
 			buildPhases = (
+				69CBE6651737589160E8927C /* Check Pods Manifest.lock */,
 				4DA182A81CEF75D200D44EB3 /* Sources */,
 				4DA182A91CEF75D200D44EB3 /* Frameworks */,
 				4DA182AA1CEF75D200D44EB3 /* Resources */,
+				3B1D1251D379DBC3C074866C /* Embed Pods Frameworks */,
+				F39BF7D56596FAC949628228 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3653,6 +3679,21 @@
 			shellPath = /bin/sh;
 			shellScript = ". configs/scripts/Sparkle-setup.sh";
 		};
+		3B1D1251D379DBC3C074866C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Performance Tests/Pods-Vienna Performance Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		430C4ACE166172BD0079C9FC /* Run Autorevision */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3726,6 +3767,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = ". configs/scripts/Acknowledgements.sh";
+		};
+		69CBE6651737589160E8927C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		748E656D897F801A815D8AFA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3831,6 +3887,21 @@
 			shellPath = /bin/bash;
 			shellScript = ". configs/scripts/Release-for-upload.sh";
 		};
+		F39BF7D56596FAC949628228 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vienna Performance Tests/Pods-Vienna Performance Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -3881,7 +3952,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D9CCAE71CEF822300EF3CDA /* SearchMethod.m in Sources */,
+				4D9CCAE41CEF816B00EF3CDA /* Field.m in Sources */,
+				4D9CCAE11CEF815700EF3CDA /* Criteria.m in Sources */,
+				4D9CCAE51CEF817700EF3CDA /* Preferences.m in Sources */,
+				4D9CCAE61CEF821B00EF3CDA /* KeyChain.m in Sources */,
+				4D9CCAEC1CEF826800EF3CDA /* Constants.m in Sources */,
+				4D9CCAE81CEF822E00EF3CDA /* VNADatabaseMigration.m in Sources */,
+				4D9CCAE31CEF816600EF3CDA /* Folder.m in Sources */,
+				4D9CCAEB1CEF825500EF3CDA /* HelperFunctions.m in Sources */,
 				4DA182B61CEF7EE900D44EB3 /* VNADatabaseTests.m in Sources */,
+				4D9CCAE91CEF824400EF3CDA /* Article.m in Sources */,
+				4D9CCAE21CEF815F00EF3CDA /* ArticleRef.m in Sources */,
+				4D9CCAEA1CEF824B00EF3CDA /* FolderImageCache.m in Sources */,
+				4D9CCAE01CEF814400EF3CDA /* Database.m in Sources */,
 				4DA182AF1CEF75D200D44EB3 /* Vienna_Performance_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7262,6 +7346,7 @@
 		};
 		4DA182B21CEF75D200D44EB3 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D0D52E4397DE9FDCE832E36 /* Pods-Vienna Performance Tests.development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7284,6 +7369,13 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -7306,11 +7398,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.Vienna-Performance-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/3rdparty\" \"$(SRCROOT)/src\"";
 			};
 			name = Development;
 		};
 		4DA182B31CEF75D200D44EB3 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8034BEC159DB96EF1BBA2D2 /* Pods-Vienna Performance Tests.deployment.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7333,6 +7427,13 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7348,11 +7449,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.Vienna-Performance-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/3rdparty\" \"$(SRCROOT)/src\"";
 			};
 			name = Deployment;
 		};
 		4DA182B41CEF75D200D44EB3 /* StaticAnalyzer */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A9265714E45C425BB8AD6B7 /* Pods-Vienna Performance Tests.staticanalyzer.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -7375,6 +7478,13 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/3rdparty\"",
+					"\"$(SRCROOT)/3rdparty\"",
+					"\"$(BUILT_PRODUCTS_DIR)\"",
+					"\"${PODS_ROOT}/Sparkle\"",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -7390,6 +7500,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.opencommunity.Vienna-Performance-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/3rdparty\" \"$(SRCROOT)/src\"";
 			};
 			name = StaticAnalyzer;
 		};
@@ -7502,6 +7613,7 @@
 				4DA182B41CEF75D200D44EB3 /* StaticAnalyzer */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Deployment;
 		};
 		52BA64010DE9E2FF0008B3E1 /* Build configuration list for PBXAggregateTarget "Version Notes" */ = {
 			isa = XCConfigurationList;
