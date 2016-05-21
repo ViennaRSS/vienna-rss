@@ -557,8 +557,7 @@
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray)
 	{
-		NSInteger folderId = theArticle.folderId;
-		[[Database sharedManager] markArticleDeleted:folderId guid:theArticle.guid isDeleted:deleteFlag];
+		[[Database sharedManager] markArticleDeleted:theArticle isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
 		else if (deleteFlag && (currentFolderId != [Database sharedManager].trashFolderId))
@@ -608,8 +607,7 @@
 	// the database.
 	for (Article * theArticle in articleArray)	
 	{
-		NSInteger folderId = theArticle.folderId;
-		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:theArticle.guid])
+		if ([[Database sharedManager] deleteArticle:theArticle])
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];

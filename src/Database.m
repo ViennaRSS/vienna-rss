@@ -1604,31 +1604,29 @@ const NSInteger MA_Current_DB_Version = 18;
 /* deleteArticle
  * Permanently deletes a article from the specified folder
  */
--(BOOL)deleteArticleFromFolder:(NSInteger)folderId guid:(NSString *)guid
+-(BOOL)deleteArticle:(Article *)article
 {
+	NSInteger folderId = article.folderId;
+	NSString * guid = article.guid;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil)
 	{
-		Article * article = [folder articleFromGuid:guid];
-		if (article != nil)
-		{
-            FMDatabaseQueue *queue = databaseQueue;
-            __block BOOL success;
-            [queue inDatabase:^(FMDatabase *db) {
-                success = [db executeUpdate:@"delete from messages where folder_id=? and message_id=?",
-                           @(folderId), guid];
-            }];
+        FMDatabaseQueue *queue = databaseQueue;
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"delete from messages where folder_id=? and message_id=?",
+                       @(folderId), guid];
+        }];
 
-			if (success)
-			{
-				if (!article.read)
-				{
-					[self setFolderUnreadCount:folder adjustment:-1];
-				}
-				[folder removeArticleFromCache:guid];
-				return YES;
-			}
-		}
+        if (success)
+        {
+            if (!article.read)
+            {
+                [self setFolderUnreadCount:folder adjustment:-1];
+            }
+            [folder removeArticleFromCache:guid];
+            return YES;
+        }
 	}
 	return NO;
 }
@@ -2465,11 +2463,12 @@ const NSInteger MA_Current_DB_Version = 18;
 /* markArticleDeleted
  * Marks an article as deleted. Deleted articles should have been marked read first.
  */
--(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
+-(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted
 {
+	NSInteger folderId = article.folderId;
+	NSString * guid = article.guid;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder !=nil) {
-		Article * article = [folder articleFromGuid:guid];
 		if (isDeleted && !article.read)
 			return;
         FMDatabaseQueue *queue = databaseQueue;
@@ -2480,12 +2479,14 @@ const NSInteger MA_Current_DB_Version = 18;
              guid];
         }];
         if (isDeleted && !article.deleted) {
+            [article markDeleted:YES];
             [folder removeArticleFromCache:guid];
         }
         else if (!isDeleted) {
-            // force the original folder to rebuild cache when selected
-            // in order to get the restored article
-            [folder clearCache];
+            // if we undelete, allow the RSS or OpenReader folder
+            // to get the restored article 
+            [folder restoreArticleToCache:article];
+            [article markDeleted:NO];
         }
 	}
 }

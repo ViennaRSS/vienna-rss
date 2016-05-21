@@ -111,12 +111,12 @@
 // Article functions
 -(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;
 -(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article;
--(BOOL)deleteArticleFromFolder:(NSInteger)folderId guid:(NSString *)guid;
+-(BOOL)deleteArticle:(Article *)article;
 -(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
 -(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
 -(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
--(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
+-(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted;
 -(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 @property (nonatomic, getter=isTrashEmpty, readonly) BOOL trashEmpty;

@@ -632,6 +632,24 @@ static NSArray * iconArray = nil;
     }
 }
 
+/* restoreArticleToCache
+ * Remove the article identified by the specified GUID from the cache.
+ */
+-(void)restoreArticleToCache:(Article *)article
+{
+    @synchronized(self)
+    {
+        NSString * guid = article.guid;
+        [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
+        [self.cachedGuids addObject:guid];
+        // note if article has incomplete data
+        if (article.createdDate == nil)
+        {
+            containsBodies = NO;
+        }
+    }
+}
+
 /* countOfCachedArticles
  * Return the number of articles in our cache, or -1 if the cache is empty.
  * (Note: empty is not the same as a folder with zero articles. The semantics are
@@ -853,9 +871,13 @@ static NSArray * iconArray = nil;
 {
     @synchronized(self)
     {
-        isCached = NO;
-        containsBodies = NO;
-        NSString * guid = ((Article *)obj).guid;
+        Article * theArticle = ((Article *)obj);
+        NSString * guid = theArticle.guid;
+        if (isCached && !theArticle.isDeleted)
+        {
+            isCached = NO;
+            containsBodies = NO;
+        }
         [self.cachedGuids removeObject:guid];
     }
 }
