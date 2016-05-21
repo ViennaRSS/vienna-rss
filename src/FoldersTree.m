@@ -492,7 +492,7 @@
 	    node = startingNode.parentNode.nextSibling;
 	};
 	
-	if ((node.folder.unreadCount) && ![outlineView isItemExpanded:node])
+	if ( ((node.folder.childUnreadCount > 0) && ![outlineView isItemExpanded:node]) || (node.folder.unreadCount > 0) )
 	{
 		return node.nodeId;
 	}
