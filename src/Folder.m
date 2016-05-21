@@ -666,7 +666,6 @@ static NSArray * iconArray = nil;
  */
  -(void)ensureCache
  {
-    [self.cachedArticles setEvictsObjectsWithDiscardedContent:NO];
     if (!isCached)
     {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:itemId];
@@ -676,11 +675,10 @@ static NSArray * iconArray = nil;
             [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
             [self.cachedGuids addObject:guid];
         }
+        isCached = YES;
+        // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
+        // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
     }
-    isCached = YES;
-    // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
-    // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
-    [self.cachedArticles setEvictsObjectsWithDiscardedContent:YES];
 }
 
 /* articles
