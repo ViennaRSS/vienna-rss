@@ -918,7 +918,6 @@ enum GoogleReaderStatus {
 		[[Database sharedManager] markArticleRead:article.folderId guid:article.guid isRead:readFlag];
 		[article markRead:readFlag];
 		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(article.folderId)];
-		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListUpdate" object:@(article.folderId)];
 	}
 }
 
