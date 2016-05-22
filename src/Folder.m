@@ -633,7 +633,7 @@ static NSArray * iconArray = nil;
 }
 
 /* restoreArticleToCache
- * Remove the article identified by the specified GUID from the cache.
+ * Re-add an article to the cache (useful for unmarking article as deleted).
  */
 -(void)restoreArticleToCache:(Article *)article
 {
