@@ -126,7 +126,6 @@
 		[nc addObserver:self selector:@selector(handleFilterChange:) name:@"MA_Notify_FilteringChange" object:nil];
 		[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
 		[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
-        [nc addObserver:self selector:@selector(handleArticleListUpdate:) name:@"MA_Notify_ArticleListUpdate" object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
         
     }
@@ -557,8 +556,7 @@
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray)
 	{
-		NSInteger folderId = theArticle.folderId;
-		[[Database sharedManager] markArticleDeleted:folderId guid:theArticle.guid isDeleted:deleteFlag];
+		[[Database sharedManager] markArticleDeleted:theArticle isDeleted:deleteFlag];
 		if (![currentArrayOfArticles containsObject:theArticle])
 			needReload = YES;
 		else if (deleteFlag && (currentFolderId != [Database sharedManager].trashFolderId))
@@ -608,8 +606,7 @@
 	// the database.
 	for (Article * theArticle in articleArray)	
 	{
-		NSInteger folderId = theArticle.folderId;
-		if ([[Database sharedManager] deleteArticleFromFolder:folderId guid:theArticle.guid])
+		if ([[Database sharedManager] deleteArticle:theArticle])
 		{
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
@@ -987,48 +984,25 @@
     {
         NSInteger folderId = ((NSNumber *)nc.object).integerValue;
         if (folderId != currentFolderId)
+        {
+            Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+            if ( !IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) )
+            {
+                [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+            }
             return;
+        }
 
         Folder * folder = [[Database sharedManager] folderFromID:folderId];
         if (IsSmartFolder(folder) || IsTrashFolder(folder))
-            [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
-    }
-}
-
-/* handleArticleListUpdate
- * called when the article list has been updated,
- * but without addition or removal of article in feeds
- */
--(void)handleArticleListUpdate:(NSNotification *)note
-{
-	// Note the article that the user might currently be reading
-	// to be preserved when reloading the array of articles.
-    if (self.selectedArticle.deleted)
-    {
-        articleToPreserve = nil;
-    }
-    else
-    {
-        articleToPreserve = self.selectedArticle;
-    }
-    NSInteger folderId = ((NSNumber *)note.object).integerValue;
-    // we check if we only need to redraw the current list, or a reload is required
-    if (folderId == currentFolderId)
-    {
-        // we are in the folder of a feed :
-        // no article has been added or removed
-        [mainArticleView refreshFolder:MA_Refresh_RedrawList];
-    }
-    else
-    {
-        Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-        if ( !IsRSSFolder(currentFolder) && !IsGoogleReaderFolder(currentFolder) )
         {
-            // if we are in a group folder or a smart folder, number of articles might
-            // have changed
             [mainArticleView refreshFolder:MA_Refresh_ReloadFromDatabase];
         }
-	}
+        else
+        {
+            [mainArticleView refreshFolder:MA_Refresh_RedrawList];
+        }
+    }
 }
 
 /* handleArticleListStateChange

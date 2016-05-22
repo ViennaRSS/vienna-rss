@@ -632,6 +632,24 @@ static NSArray * iconArray = nil;
     }
 }
 
+/* restoreArticleToCache
+ * Remove the article identified by the specified GUID from the cache.
+ */
+-(void)restoreArticleToCache:(Article *)article
+{
+    @synchronized(self)
+    {
+        NSString * guid = article.guid;
+        [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
+        [self.cachedGuids addObject:guid];
+        // note if article has incomplete data
+        if (article.createdDate == nil)
+        {
+            containsBodies = NO;
+        }
+    }
+}
+
 /* countOfCachedArticles
  * Return the number of articles in our cache, or -1 if the cache is empty.
  * (Note: empty is not the same as a folder with zero articles. The semantics are
@@ -648,7 +666,6 @@ static NSArray * iconArray = nil;
  */
  -(void)ensureCache
  {
-    [self.cachedArticles setEvictsObjectsWithDiscardedContent:NO];
     if (!isCached)
     {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:itemId];
@@ -658,11 +675,10 @@ static NSArray * iconArray = nil;
             [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
             [self.cachedGuids addObject:guid];
         }
+        isCached = YES;
+        // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
+        // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
     }
-    isCached = YES;
-    // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
-    // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
-    [self.cachedArticles setEvictsObjectsWithDiscardedContent:YES];
 }
 
 /* articles
@@ -853,9 +869,13 @@ static NSArray * iconArray = nil;
 {
     @synchronized(self)
     {
-        isCached = NO;
-        containsBodies = NO;
-        NSString * guid = ((Article *)obj).guid;
+        Article * theArticle = ((Article *)obj);
+        NSString * guid = theArticle.guid;
+        if (isCached && !theArticle.isDeleted)
+        {
+            isCached = NO;
+            containsBodies = NO;
+        }
         [self.cachedGuids removeObject:guid];
     }
 }

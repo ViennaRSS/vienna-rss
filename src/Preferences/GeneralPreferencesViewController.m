@@ -45,6 +45,7 @@
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
         [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+        appToPathMap = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -153,26 +154,29 @@
 -(void)refreshLinkHandler
 {
     NSBundle * appBundle = [NSBundle mainBundle];
-    NSString * ourAppName = appBundle.executablePath.lastPathComponent.stringByDeletingPathExtension;
+    NSString * ourAppName = [[NSFileManager defaultManager] displayNameAtPath:appBundle.bundlePath];
     BOOL onTheList = NO;
     NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
     NSString * registeredAppURL = nil;
-    CFURLRef appURL = nil;
     
     // Clear all existing items
     [linksHandler removeAllItems];
     
     // Add the current registered link handler to the start of the list as Safari does. If
     // there's no current registered handler, default to ourself.
-    if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-        registeredAppURL = ((__bridge NSURL *)appURL).path;
+    CFStringRef defaultBundleIdentifier = LSCopyDefaultHandlerForURLScheme((__bridge CFStringRef)@"feed");
+    if (defaultBundleIdentifier != NULL)
+    {
+        registeredAppURL = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:(__bridge NSString *)defaultBundleIdentifier].path;
+        CFRelease(defaultBundleIdentifier);
+    }
     else
     {
         registeredAppURL = appBundle.executablePath;
         onTheList = YES;
     }
     
-    NSString * regAppName = registeredAppURL.lastPathComponent.stringByDeletingPathExtension;
+    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL];
     [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
     [linksHandler addSeparator];
     
@@ -180,9 +184,6 @@
     // the user changes selection and we later need the file URL to register
     // the new selection.
     [appToPathMap setValue:registeredAppURL forKey:regAppName];
-    
-    if (appURL != nil)
-        CFRelease(appURL);
     
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
@@ -197,7 +198,7 @@
             NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
             if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"])
             {
-                NSString * appName = appURL.path.lastPathComponent.stringByDeletingPathExtension;
+                NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
                 if ([appName isEqualToString:ourAppName])
                     onTheList = YES;
                 if (![appName isEqualToString:regAppName])
@@ -312,7 +313,7 @@
     
     pathImage.size = NSMakeSize(16, 16);
     
-    downloadPathItem.title = downloadFolderPath.lastPathComponent;
+    downloadPathItem.title = [[NSFileManager defaultManager] displayNameAtPath:downloadFolderPath];
     downloadPathItem.image = pathImage;
     downloadPathItem.state = NSOffState;
     

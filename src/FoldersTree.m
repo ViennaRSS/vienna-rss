@@ -486,7 +486,16 @@
  */
 -(NSInteger)nextFolderWithUnreadAfterNode:(TreeNode *)startingNode
 {
-	TreeNode * node = startingNode;
+	TreeNode * node = startingNode.nextSibling;
+	if (node == nil)
+	{
+	    node = startingNode.parentNode.nextSibling;
+	};
+	
+	if ( ((node.folder.childUnreadCount > 0) && ![outlineView isItemExpanded:node]) || (node.folder.unreadCount > 0) )
+	{
+		return node.nodeId;
+	}
 
 	while (node != nil)
 	{
