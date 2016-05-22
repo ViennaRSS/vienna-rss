@@ -475,6 +475,7 @@
 		43EE8403165EAA70000997FB /* RSSSources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8002165EAA6E000997FB /* RSSSources.plist */; };
 		43EE8404165EAA70000997FB /* SearchFolder.nib in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8004165EAA6E000997FB /* SearchFolder.nib */; };
 		43EE8405165EAA70000997FB /* SearchFolder.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43EE8006165EAA6E000997FB /* SearchFolder.strings */; };
+		4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* ArticleTests.m */; };
 		4D3EF49F1D3429B90056B90D /* BitlyAPIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B27CD04E1100F408001F3C83 /* BitlyAPIHelper.m */; };
 		4D3EF4A01D3429C30056B90D /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		4D3EF4A11D3429D50056B90D /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = AA26F4D50604927300FE7994 /* Database.m */; };
@@ -1363,6 +1364,7 @@
 		43EE8378165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = zh_TW; path = RSSSources.plist; sourceTree = "<group>"; };
 		43EE837A165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = zh_TW; path = SearchFolder.nib; sourceTree = "<group>"; };
 		43EE837C165EAA70000997FB /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = zh_TW; path = SearchFolder.strings; sourceTree = "<group>"; };
+		4D36B44A1D37F91E009736C1 /* ArticleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleTests.m; sourceTree = "<group>"; };
 		5740945316F5112B0087870F /* stylesMenuButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = stylesMenuButtonSmall.tiff; path = Resources/stylesMenuButtonSmall.tiff; sourceTree = "<group>"; };
 		5740945416F5112B0087870F /* stylesMenuButtonSmall@2x.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "stylesMenuButtonSmall@2x.tiff"; path = "Resources/stylesMenuButtonSmall@2x.tiff"; sourceTree = "<group>"; };
 		5740945516F5112B0087870F /* skipFolderButtonSmall.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = skipFolderButtonSmall.tiff; path = Resources/skipFolderButtonSmall.tiff; sourceTree = "<group>"; };
@@ -1710,6 +1712,7 @@
 		035B703619E0E4AE00197334 /* Vienna Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4D36B4491D37F902009736C1 /* models */,
 				035B703919E0E4AE00197334 /* Vienna_Tests.m */,
 				035B703719E0E4AE00197334 /* Supporting Files */,
 				035B704119E0E4DC00197334 /* SubscriptionModelTests.m */,
@@ -2588,6 +2591,14 @@
 			name = zh_TW.lproj;
 			path = lproj/zh_TW.lproj;
 			sourceTree = SOURCE_ROOT;
+		};
+		4D36B4491D37F902009736C1 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				4D36B44A1D37F91E009736C1 /* ArticleTests.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
 		};
 		660AA30914072BFD0082CCF0 /* OpenReader Sync */ = {
 			isa = PBXGroup;
@@ -3792,6 +3803,7 @@
 				4D3EF4A31D3429E90056B90D /* SubscriptionModel.m in Sources */,
 				035B704219E0E4DC00197334 /* SubscriptionModelTests.m in Sources */,
 				4D3EF4B01D342BD40056B90D /* Constants.m in Sources */,
+				4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */,
 				4D3EF49F1D3429B90056B90D /* BitlyAPIHelper.m in Sources */,
 				03B752421B74814B00FD3FDB /* RichXMLParserTests.m in Sources */,
 				4D3EF4B11D342BE60056B90D /* SearchMethod.m in Sources */,
