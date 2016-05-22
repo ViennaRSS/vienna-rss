@@ -45,6 +45,7 @@
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
         [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+        appToPathMap = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
@@ -157,15 +158,18 @@
     BOOL onTheList = NO;
     NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
     NSString * registeredAppURL = nil;
-    CFURLRef appURL = nil;
     
     // Clear all existing items
     [linksHandler removeAllItems];
     
     // Add the current registered link handler to the start of the list as Safari does. If
     // there's no current registered handler, default to ourself.
-    if (LSGetApplicationForURL((__bridge CFURLRef)testURL, kLSRolesAll, NULL, &appURL) != kLSApplicationNotFoundErr)
-        registeredAppURL = ((__bridge NSURL *)appURL).path;
+    CFStringRef defaultBundleIdentifier = LSCopyDefaultHandlerForURLScheme((__bridge CFStringRef)@"feed");
+    if (defaultBundleIdentifier != NULL)
+    {
+        registeredAppURL = [[NSWorkspace sharedWorkspace] URLForApplicationWithBundleIdentifier:(__bridge NSString *)defaultBundleIdentifier].path;
+        CFRelease(defaultBundleIdentifier);
+    }
     else
     {
         registeredAppURL = appBundle.executablePath;
@@ -180,9 +184,6 @@
     // the user changes selection and we later need the file URL to register
     // the new selection.
     [appToPathMap setValue:registeredAppURL forKey:regAppName];
-    
-    if (appURL != nil)
-        CFRelease(appURL);
     
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
