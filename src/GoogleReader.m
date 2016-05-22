@@ -225,7 +225,7 @@ enum GoogleReaderStatus {
 	{
 		LOG_EXPR([myRequest responseStatusCode]);
 		LOG_EXPR([myRequest responseHeaders]);
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleAuthFailed" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_GoogleAuthFailed" object:nil];
 		[APPCONTROLLER setStatusMessage:nil persist:NO];
 		googleReaderStatus = notAuthenticated;
 		[myRequest clearDelegatesAndCancel];
@@ -635,7 +635,7 @@ enum GoogleReaderStatus {
             [[refreshedFolder articleFromGuid:guid] markRead:NO];
 		}
 		LLog(@"%ld unread items for %@", [guidArray count], [request url]);
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListStateChange" object:@(refreshedFolder.itemId)];
 
         [[Database sharedManager] markUnreadArticlesFromFolder:refreshedFolder guidArray:guidArray];
 	    // reset starred statuses in cache : we will receive in -StarredRequestDone: the updated list
