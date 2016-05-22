@@ -154,7 +154,7 @@
 -(void)refreshLinkHandler
 {
     NSBundle * appBundle = [NSBundle mainBundle];
-    NSString * ourAppName = appBundle.executablePath.lastPathComponent.stringByDeletingPathExtension;
+    NSString * ourAppName = [[NSFileManager defaultManager] displayNameAtPath:appBundle.bundlePath];
     BOOL onTheList = NO;
     NSURL * testURL = [NSURL URLWithString:@"feed://www.test.com"];
     NSString * registeredAppURL = nil;
@@ -176,7 +176,7 @@
         onTheList = YES;
     }
     
-    NSString * regAppName = registeredAppURL.lastPathComponent.stringByDeletingPathExtension;
+    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL];
     [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
     [linksHandler addSeparator];
     
@@ -198,7 +198,7 @@
             NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
             if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"])
             {
-                NSString * appName = appURL.path.lastPathComponent.stringByDeletingPathExtension;
+                NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
                 if ([appName isEqualToString:ourAppName])
                     onTheList = YES;
                 if (![appName isEqualToString:regAppName])
@@ -313,7 +313,7 @@
     
     pathImage.size = NSMakeSize(16, 16);
     
-    downloadPathItem.title = downloadFolderPath.lastPathComponent;
+    downloadPathItem.title = [[NSFileManager defaultManager] displayNameAtPath:downloadFolderPath];
     downloadPathItem.image = pathImage;
     downloadPathItem.state = NSOffState;
     
