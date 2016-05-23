@@ -99,7 +99,7 @@
 - (void)nqQueueDidFinishSelector:(ASIHTTPRequest *)request {
 	if (hasStarted)
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 		hasStarted = NO;
 	}
 	LLog(@"Queue empty!!!");
@@ -114,7 +114,7 @@
 	if (!hasStarted)
 	{
 			hasStarted = YES;
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationOnMainThreadWithName:@"MA_Notify_RefreshStatus" object:nil];
 	}
 
 	statusMessageDuringRefresh = [NSString stringWithFormat:@"%@: (%i) - %@",NSLocalizedString(@"Queue",nil),networkQueue.requestsCount,NSLocalizedString(@"Refreshing subscriptions...", nil)];
