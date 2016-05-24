@@ -172,6 +172,12 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
     //Enable FullScreen Support if we are on Lion 10.7.x
     mainWindow.collectionBehavior = NSWindowCollectionBehaviorFullScreenPrimary;
   	
+
+	Preferences * prefs = [Preferences standardPreferences];
+
+	// Restore the most recent layout
+	[self setLayout:prefs.layout withRefresh:NO];
+
 	// Localise the menus
 	[self localiseMenus:NSApp.mainMenu.itemArray];
 	
@@ -247,8 +253,6 @@ static void MySleepCallBack(void * x, io_service_t y, natural_t messageType, voi
 		}
 		
 		Preferences * prefs = [Preferences standardPreferences];
-		// Restore the most recent layout
-		[self setLayout:prefs.layout withRefresh:NO];
 		// Set the initial filter bar state
 		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
 		
