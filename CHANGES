@@ -8,6 +8,14 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.4
+-----
+- Fix extreme slowness on marking a series of articles deleted
+- Improve selection of next unread article and article list update
+- Fix selection of default RSS reader application in preferences window
+- In General preferences, use localized names for download folder and RSS readers' app names
+- Fixed a problem preventing window from appearing at launch in certain settings
+
 3.1.4 Release Candidate 2
 -------------------------
 - Improved detection of feeds URL
