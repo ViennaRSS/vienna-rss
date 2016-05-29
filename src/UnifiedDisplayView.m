@@ -689,7 +689,11 @@
 		}
 	}
 	else
+	{
 		currentSelectedRow = -1;
+		[articleList scrollRowToVisible:0];
+	}
+
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = NO;
 }

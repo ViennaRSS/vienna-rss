@@ -1165,7 +1165,11 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			[self refreshArticlePane];
 	}
 	else
+	{
 		currentSelectedRow = -1;
+		[articleList scrollRowToVisible:0];
+	}
+
 	if (refreshFlag == MA_Refresh_SortAndRedraw)
 		blockSelectionHandler = blockMarkRead = NO;		
 }
