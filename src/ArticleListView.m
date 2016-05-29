@@ -977,6 +977,9 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 			[self refreshImmediatelyArticleAtCurrentRow];
 		}
 
+		// make sure our current selection is visible
+		[articleList scrollRowToVisible:currentSelectedRow];
+		// then try to center it in the list
 		NSInteger pageSize = [articleList rowsInRect:articleList.visibleRect].length;
 		NSInteger lastRow = articleList.numberOfRows - 1;
 		NSInteger visibleRow = currentSelectedRow + (pageSize / 2);
