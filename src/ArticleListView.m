@@ -1587,6 +1587,7 @@ static const CGFloat MA_Minimum_Article_Pane_Dimension = 80;
 {
 	NSString * columnName = tableColumn.identifier;
 	[articleController sortByIdentifier:columnName];
+	[self showSortDirection];
 }
 
 /* tableViewColumnDidResize
