@@ -447,12 +447,11 @@
 	}
 	else
 	{
-		currentFolderId = folderId;
-		[foldersTree selectFolder:folderId];
 		// We seed guidOfArticleToSelect so that
 		// after notification of folder selection change has been processed,
 		// it will select the requisite article on our behalf.
 		guidOfArticleToSelect = guid;
+		[foldersTree selectFolder:folderId];
 	}
 }
 
