@@ -64,11 +64,9 @@ Tags should be in one of the following formats:
    15. If you upload a release candidate, change changelog_beta.xml to be a copy of the new changelog_rc.xml ; and if you upload a release, change changelog_rc.xml to be a copy of the new changelog.xml
    16. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
 
-Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
-
 ### On Brew Cask
 
-17. Follow the steps on the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask) which are summarised below:
+17. __For stable releases only :__ follow the steps on the [Brew Cask Wiki](https://github.com/caskroom/homebrew-cask/blob/master/CONTRIBUTING.md#updating-a-cask) which are summarised below:
 
 >Notice an application that's out-of-date in Homebrew-Cask? In most cases, it's very simple to update it. We have a [script](https://github.com/vitorgalvao/tiny-scripts/blob/master/cask-repair) that will ask for the new version number, and take care of updating the Cask file and submitting a pull request to us:
 
@@ -84,4 +82,5 @@ cd "$(brew --repository)/Library/Taps/caskroom/homebrew-cask/Casks"
 cask-repair --pull origin --push $github_user $outdated_cask
 ```
 
- 
+Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.org>.
+
