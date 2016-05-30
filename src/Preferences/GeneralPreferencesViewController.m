@@ -177,8 +177,10 @@
     }
     
     NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL];
-    [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
-    [linksHandler addSeparator];
+    if (regAppName != nil) {
+        [linksHandler addItemWithTitle:regAppName image:[[NSWorkspace sharedWorkspace] iconForFile:registeredAppURL]];
+        [linksHandler addSeparator];
+    }
     
     // Maintain a table to map from the short name to the file URL for when
     // the user changes selection and we later need the file URL to register
