@@ -549,7 +549,11 @@
 	NSMutableArray * folderArrayCopy = [NSMutableArray arrayWithArray:folderArrayOfArticles];
 	__block BOOL needReload = NO;
 	
-	[self innerMarkReadByRefsArray:articleArray readFlag:YES];
+    // if we mark deleted, mark also read and unflagged
+	if (deleteFlag) {
+	    [self innerMarkReadByRefsArray:articleArray readFlag:YES];
+        [self innerMarkReadByArray:articleArray flagged:NO];
+	}
 
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
@@ -652,6 +656,15 @@
 	[undoManager registerUndoWithTarget:self selector:markFlagUndoAction object:articleArray];
 	[undoManager setActionName:NSLocalizedString(@"Flag", nil)];
 
+    [self innerMarkReadByArray:articleArray flagged:flagged];
+	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
+}
+
+/* innerMarkFlaggedByArray
+ * Marks all articles in the specified array flagged or unflagged.
+ */
+-(void)innerMarkReadByArray:(NSArray *)articleArray flagged:(BOOL)flagged
+{
 	for (Article * theArticle in articleArray)
 	{
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
@@ -663,8 +676,6 @@
                                            isFlagged:flagged];
         [theArticle markFlagged:flagged];
 	}
-
-	[mainArticleView refreshFolder:MA_Refresh_RedrawList];
 }
 
 /* markUnreadUndo
