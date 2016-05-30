@@ -744,7 +744,9 @@
 		Folder * folder = [db folderFromID:folderId];
 		if (IsGoogleReaderFolder(folder)){
 			Article * article = [folder articleFromGuid:articleRef.guid];
-			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			if (article != nil) {
+                [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
 			if (folderId != lastFolderId && lastFolderId != -1)
@@ -862,7 +864,9 @@
 		Folder * folder = [dbManager folderFromID:folderId];
         if (IsGoogleReaderFolder(folder)) {
         	Article * article = [folder articleFromGuid:theGuid];
-			[[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+        	if (article != nil) {
+			    [[GoogleReader sharedManager] markRead:article readFlag:readFlag];
+			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
 			if (folderId != lastFolderId && lastFolderId != -1)
