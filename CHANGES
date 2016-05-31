@@ -8,6 +8,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.1.5 Release Candidate 1
+-------------------------
+- Fix visual issue on marking read all articles in a group folder
+- Fix deleting articles from a group folder
+- Fix restoring Open Reader article from Trash
+- Fix back and forward in Horizontal and Vertical layouts (invoked by < and > keys)
+- Fix sort indicator in Horizontal and Vertical layouts
+- Scrolls to top of list when selecting a folder
+- Fix a rare occurence of crash in Preferences folder
+
 3.1.4
 -----
 - Fix extreme slowness on marking a series of articles deleted
